@@ -1,6 +1,5 @@
 import { Resources } from '@o2s/framework/modules';
 
-const dateToday = new Date();
 const dateYesterday = new Date();
 dateYesterday.setDate(dateYesterday.getDate() - 1);
 

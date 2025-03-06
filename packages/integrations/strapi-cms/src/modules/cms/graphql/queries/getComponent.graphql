@@ -29,7 +29,7 @@ query getComponent($id: ID!, $locale: I18NLocaleCode!) {
             }
         }
     }
-    configurableTexts {
+    configurableTexts(locale: $locale) {
         dates {
             today
             yesterday

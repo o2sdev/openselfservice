@@ -1,4 +1,4 @@
-import { CMS } from '@o2s/framework/modules';
+import { CMS, Models } from '@o2s/framework/modules';
 
 import {
     Faq,
@@ -26,7 +26,16 @@ export class Page {
 }
 
 export class SEO {
-    noIndex!: boolean;
+    title?: string;
+    description?: string;
+    image?: Models.Media.Media | null;
+    keywords?: string[];
+    noIndex?: boolean;
+    noFollow?: boolean;
+    parent!: {
+        slug: string;
+    };
+    locales!: string[];
 }
 
 export class PageCommon {
@@ -39,6 +48,7 @@ export class PageData {
         [key: string]: string;
     };
     template!: CMS.Model.Page.PageTemplate;
+    hasOwnTitle!: boolean;
 }
 
 export type Components =

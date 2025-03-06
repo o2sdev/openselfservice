@@ -1,9 +1,22 @@
+import { Models } from '@o2s/framework/modules';
+
 export class Page {
     id!: string;
     slug!: string;
     template!: PageTemplate;
     updatedAt!: string;
-    noIndex!: boolean;
+    seo?: {
+        title: string;
+        noIndex: boolean;
+        noFollow: boolean;
+        description: string;
+        keywords: string[] | [];
+        image: Models.Media.Media | undefined;
+    };
+    hasOwnTitle!: boolean;
+    parent!: {
+        slug: string;
+    };
 }
 
 export abstract class Template {

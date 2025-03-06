@@ -14,7 +14,20 @@ export const mapPage = (data: PageFragment): CMS.Model.Page.Page => {
         template: template,
         updatedAt: data.updatedAt,
         id: data.documentId,
-        noIndex: data.SEO?.noIndex ?? false,
+        seo: data.SEO
+            ? {
+                  title: data.SEO.title,
+                  noIndex: data.SEO.noIndex,
+                  noFollow: data.SEO.noFollow,
+                  description: data.SEO.description,
+                  keywords: data.SEO.keywords?.map((keyword) => keyword.keyword) || [],
+                  image: data.SEO.image,
+              }
+            : undefined,
+        hasOwnTitle: data.hasOwnTitle,
+        parent: {
+            slug: data.parent?.slug ?? '',
+        },
     };
 };
 

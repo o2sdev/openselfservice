@@ -13,13 +13,22 @@ export const mapPage = (
         [mainLocale]: page.slug,
     };
 
+    const locales = [...alternatePages.map(({ locale }) => locale), mainLocale];
+
     alternatePages.forEach(({ page: alternatePage, locale }) => {
         alternativeUrls[locale] = alternatePage.slug;
     });
 
     return {
         seo: {
-            noIndex: page.noIndex,
+            title: page.seo?.title,
+            description: page.seo?.description,
+            keywords: page.seo?.keywords,
+            image: page.seo?.image,
+            noIndex: page.seo?.noIndex,
+            noFollow: page.seo?.noFollow,
+            parent: page.parent,
+            locales,
         },
         common: {
             header,
@@ -28,6 +37,7 @@ export const mapPage = (
         data: {
             alternativeUrls,
             template: page.template,
+            hasOwnTitle: page.hasOwnTitle,
         },
     };
 };
