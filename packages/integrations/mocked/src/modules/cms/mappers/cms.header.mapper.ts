@@ -89,6 +89,11 @@ const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
                     label: 'Fälle',
                     url: '/faelle',
                 },
+                {
+                    __typename: 'NavigationItem',
+                    label: 'Rechnungen',
+                    url: '/rechnungen',
+                },
             ],
         },
         {
@@ -97,13 +102,8 @@ const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
             items: [
                 {
                     __typename: 'NavigationItem',
-                    label: 'Benachrichtigungen',
-                    url: '/benachrichtigungen',
-                },
-                {
-                    __typename: 'NavigationItem',
-                    label: 'Rechnungen',
-                    url: '/rechnungen',
+                    label: 'O2S Dokumentation',
+                    url: 'https://www.openselfservice.com/',
                 },
             ],
         },
@@ -148,6 +148,11 @@ const MOCK_HEADER_LOGON_PL: CMS.Model.Header.Header = {
                     label: 'Zgłoszenia',
                     url: '/zgloszenia',
                 },
+                {
+                    __typename: 'NavigationItem',
+                    label: 'Rachunki',
+                    url: '/rachunki',
+                },
             ],
         },
         {
@@ -156,13 +161,8 @@ const MOCK_HEADER_LOGON_PL: CMS.Model.Header.Header = {
             items: [
                 {
                     __typename: 'NavigationItem',
-                    label: 'Powiadomienia',
-                    url: '/powiadomienia',
-                },
-                {
-                    __typename: 'NavigationItem',
-                    label: 'Rachunki',
-                    url: '/rachunki',
+                    label: 'Dokumentacja O2S',
+                    url: 'https://www.openselfservice.com/',
                 },
             ],
         },
