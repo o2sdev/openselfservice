@@ -30,6 +30,11 @@ const MOCK_HEADER_LOGON_EN: CMS.Model.Header.Header = {
                     label: 'Cases',
                     url: '/cases',
                 },
+                {
+                    __typename: 'NavigationItem',
+                    label: 'Invoices',
+                    url: '/invoices',
+                },
             ],
         },
         {
@@ -38,13 +43,8 @@ const MOCK_HEADER_LOGON_EN: CMS.Model.Header.Header = {
             items: [
                 {
                     __typename: 'NavigationItem',
-                    label: 'Notifications',
-                    url: '/notifications',
-                },
-                {
-                    __typename: 'NavigationItem',
-                    label: 'Invoices',
-                    url: '/invoices',
+                    label: 'O2S Documentation',
+                    url: 'https://www.openselfservice.com/',
                 },
             ],
         },
@@ -93,7 +93,7 @@ const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
         },
         {
             __typename: 'NavigationGroup',
-            title: 'Help & Support',
+            title: 'Hilfe & Support',
             items: [
                 {
                     __typename: 'NavigationItem',
@@ -109,8 +109,8 @@ const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
         },
     ],
     notification: {
-        url: '/notifications',
-        label: 'Notifications',
+        url: '/benachrichtigungen',
+        label: 'Benachrichtigungen',
     },
     contextSwitcher: {
         label: 'Firma',
@@ -152,7 +152,7 @@ const MOCK_HEADER_LOGON_PL: CMS.Model.Header.Header = {
         },
         {
             __typename: 'NavigationGroup',
-            title: 'Help & Support',
+            title: 'Pomoc & Wsparcie',
             items: [
                 {
                     __typename: 'NavigationItem',
@@ -168,7 +168,7 @@ const MOCK_HEADER_LOGON_PL: CMS.Model.Header.Header = {
         },
     ],
     notification: {
-        url: '/notifications',
+        url: '/powiadomienia',
         label: 'Powiadomienia',
     },
     contextSwitcher: {
@@ -192,12 +192,12 @@ const MOCK_HEADER_LOGOUT_EN: CMS.Model.Header.Header = {
     items: [
         {
             __typename: 'NavigationItem',
-            label: 'Selfservice test',
+            label: 'Selfservice',
             url: '/',
         },
         {
             __typename: 'NavigationItem',
-            label: 'Help & Support test',
+            label: 'Help & Support',
             url: '/cases',
         },
     ],
@@ -221,8 +221,8 @@ const MOCK_HEADER_LOGOUT_DE: CMS.Model.Header.Header = {
         },
         {
             __typename: 'NavigationItem',
-            label: 'Help & Support',
-            url: '/cases',
+            label: 'Hilfe & Unterstützung',
+            url: '/faelle',
         },
     ],
 };
@@ -245,7 +245,7 @@ const MOCK_HEADER_LOGOUT_PL: CMS.Model.Header.Header = {
         },
         {
             __typename: 'NavigationItem',
-            label: 'Help & Support',
+            label: 'Pomoc & Wsparcie',
             url: '/zgloszenia',
         },
     ],
@@ -262,7 +262,7 @@ export const mapHeader = (id: string, locale: string): CMS.Model.Header.Header =
     ];
 
     const header = headerList
-        .filter((header) => header.title?.includes(locale.toUpperCase()))
+        .filter((header) => header.title?.endsWith(locale.toUpperCase()))
         .find((header) => header.id === id);
 
     if (!header) {

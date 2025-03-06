@@ -26,6 +26,7 @@ export class TicketListService {
                         ...query,
                         limit: query.limit || cms.pagination?.limit || 1,
                         offset: query.offset || 0,
+                        locale: headers['x-locale'],
                     })
                     .pipe(map((tickets) => mapTicketList(tickets, cms, headers['x-locale'])));
             }),

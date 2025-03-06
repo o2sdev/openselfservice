@@ -56,10 +56,9 @@ const MOCK_RESOURCE_LIST_COMPONENT: CMS.Model.ResourceListComponent.ResourceList
                 label: 'Product Category',
                 allowMultiple: true,
                 options: [
-                    { label: 'Internet', value: 'INTERNET' },
-                    { label: 'Phone', value: 'PHONE' },
-                    { label: 'TV', value: 'TV' },
-                    { label: 'Mobile', value: 'MOBILE' },
+                    { label: 'Software', value: 'SOFTWARE' },
+                    { label: 'Tools', value: 'TOOLS' },
+                    { label: 'Hardware', value: 'HARDWARE' },
                 ],
             },
         ],

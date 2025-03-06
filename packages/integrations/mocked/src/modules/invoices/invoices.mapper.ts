@@ -1,53 +1,53 @@
 import { Invoices, Models } from '@o2s/framework/modules';
 
-const dateToday = new Date();
+const _dateToday = new Date();
 const dateYesterday = new Date();
 dateYesterday.setDate(dateYesterday.getDate() - 1);
 
 const MOCK_INVOICE_1: Invoices.Model.Invoice = {
-    id: 'INV-001',
-    externalId: 'EXT-001',
-    billingAccountId: 'BA-001',
-    billingPeriod: '2024-03',
-    paymentMethodId: 'PM-001',
+    id: 'INV-HIL-056782',
+    externalId: 'EXT-HIL-24-056782',
+    billingAccountId: 'HIL-ACC-10045',
+    billingPeriod: '2024-06',
+    paymentMethodId: 'PM-CC-4567',
     type: 'STANDARD',
     paymentStatus: 'PAYMENT_DUE',
-    issuedDate: dateToday.toISOString(),
-    paymentDueDate: '2024-09-31',
-    currency: 'PLN',
+    issuedDate: new Date(2024, 5, 15).toISOString(),
+    paymentDueDate: '2024-07-15',
+    currency: 'EUR',
     totalAmountDue: {
-        value: 100,
+        value: 1250.5,
     },
     totalNetAmountDue: {
-        value: 81.3,
+        value: 1016.67,
     },
     totalAmountPaid: {
         value: 0,
     },
     totalToBePaid: {
-        value: 100,
+        value: 1250.5,
     },
 };
 
 const MOCK_INVOICE_2: Invoices.Model.Invoice = {
-    id: 'INV-002',
-    externalId: 'EXT-002',
-    billingAccountId: 'BA-001',
-    billingPeriod: '2024-02',
-    paymentMethodId: 'PM-001',
+    id: 'INV-HIL-056890',
+    externalId: 'EXT-HIL-24-056890',
+    billingAccountId: 'HIL-ACC-10045',
+    billingPeriod: '2024-05',
+    paymentMethodId: 'PM-CC-4567',
     type: 'STANDARD',
     paymentStatus: 'PAYMENT_COMPLETE',
-    issuedDate: dateYesterday.toISOString(),
-    paymentDueDate: '2024-10-29',
-    currency: 'PLN',
+    issuedDate: new Date(2024, 4, 10).toISOString(),
+    paymentDueDate: '2024-06-10',
+    currency: 'EUR',
     totalAmountDue: {
-        value: 150,
+        value: 3450.75,
     },
     totalNetAmountDue: {
-        value: 121.95,
+        value: 2805.49,
     },
     totalAmountPaid: {
-        value: 150,
+        value: 3450.75,
     },
     totalToBePaid: {
         value: 0,
@@ -55,27 +55,77 @@ const MOCK_INVOICE_2: Invoices.Model.Invoice = {
 };
 
 const MOCK_INVOICE_3: Invoices.Model.Invoice = {
-    id: 'INV-003',
-    externalId: 'EXT-003',
-    billingAccountId: 'BA-002',
-    billingPeriod: '2024-03',
-    paymentMethodId: 'PM-002',
+    id: 'INV-HIL-057123',
+    externalId: 'EXT-HIL-24-057123',
+    billingAccountId: 'HIL-ACC-22876',
+    billingPeriod: '2024-06',
+    paymentMethodId: 'PM-TRF-7890',
     type: 'PROFORMA',
-    paymentStatus: 'PAYMENT_PAST_DUE',
-    issuedDate: '2024-03-01',
-    paymentDueDate: '2024-12-15',
+    paymentStatus: 'PAYMENT_DUE',
+    issuedDate: new Date(2024, 5, 5).toISOString(),
+    paymentDueDate: '2024-07-05',
     currency: 'EUR',
     totalAmountDue: {
-        value: 200,
+        value: 780.25,
     },
     totalNetAmountDue: {
-        value: 162.6,
+        value: 634.35,
     },
     totalAmountPaid: {
         value: 0,
     },
     totalToBePaid: {
-        value: 200,
+        value: 780.25,
+    },
+};
+
+const MOCK_INVOICE_4: Invoices.Model.Invoice = {
+    id: 'INV-HIL-057456',
+    externalId: 'EXT-HIL-24-057456',
+    billingAccountId: 'HIL-ACC-10045',
+    billingPeriod: '2024-04',
+    paymentMethodId: 'PM-CC-4567',
+    type: 'CREDIT_NOTE',
+    paymentStatus: 'PAYMENT_COMPLETE',
+    issuedDate: new Date(2024, 3, 20).toISOString(),
+    paymentDueDate: '2024-05-20',
+    currency: 'EUR',
+    totalAmountDue: {
+        value: -450.0,
+    },
+    totalNetAmountDue: {
+        value: -365.85,
+    },
+    totalAmountPaid: {
+        value: -450.0,
+    },
+    totalToBePaid: {
+        value: 0,
+    },
+};
+
+const MOCK_INVOICE_5: Invoices.Model.Invoice = {
+    id: 'INV-HIL-058234',
+    externalId: 'EXT-HIL-24-058234',
+    billingAccountId: 'HIL-ACC-35901',
+    billingPeriod: '2024-06',
+    paymentMethodId: 'PM-TRF-9012',
+    type: 'STANDARD',
+    paymentStatus: 'PAYMENT_PAST_DUE',
+    issuedDate: new Date(2024, 5, 1).toISOString(),
+    paymentDueDate: '2024-06-15',
+    currency: 'EUR',
+    totalAmountDue: {
+        value: 5670.3,
+    },
+    totalNetAmountDue: {
+        value: 4610.0,
+    },
+    totalAmountPaid: {
+        value: 0,
+    },
+    totalToBePaid: {
+        value: 5670.3,
     },
 };
 
@@ -96,8 +146,8 @@ const RANDOM_MOCK_INVOICES: Invoices.Model.Invoice[] = Array.from({ length: 100 
     const randomDate = new Date(year, randomMonth, Math.floor(Math.random() * 28) + 1);
 
     const invoice = {
-        id: `INV-RAND-${index + 1}`,
-        externalId: `EXT-RAND-${index + 1}`,
+        id: `INV-HIL-${index + 1}`,
+        externalId: `EXT-HIL-${index + 1}`,
         billingAccountId: `BA-RAND-${Math.floor(Math.random() * 10) + 1}`,
         billingPeriod: `2024-${String(Math.floor(Math.random() * 12) + 1).padStart(2, '0')}`,
         paymentMethodId: `PM-RAND-${Math.floor(Math.random() * 5) + 1}`,
@@ -126,7 +176,14 @@ const RANDOM_MOCK_INVOICES: Invoices.Model.Invoice[] = Array.from({ length: 100 
     return invoice;
 });
 
-const MOCK_INVOICES = [MOCK_INVOICE_1, MOCK_INVOICE_2, MOCK_INVOICE_3, ...RANDOM_MOCK_INVOICES];
+const MOCK_INVOICES = [
+    MOCK_INVOICE_1,
+    MOCK_INVOICE_2,
+    MOCK_INVOICE_3,
+    MOCK_INVOICE_4,
+    MOCK_INVOICE_5,
+    ...RANDOM_MOCK_INVOICES,
+];
 
 export const mapInvoice = (id: string): Invoices.Model.Invoice => {
     const invoice = MOCK_INVOICES.find((invoice) => invoice.id === id);
@@ -171,8 +228,6 @@ export const mapInvoices = (query: Invoices.Request.GetInvoiceListQuery): Invoic
             }
             return 0;
         });
-    } else {
-        shuffleArray(filteredInvoices);
     }
 
     return {
@@ -180,10 +235,3 @@ export const mapInvoices = (query: Invoices.Request.GetInvoiceListQuery): Invoic
         total: filteredInvoices.length,
     };
 };
-
-function shuffleArray(array: Invoices.Model.Invoice[]) {
-    for (let i = array.length - 1; i >= 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j] as Invoices.Model.Invoice, array[i] as Invoices.Model.Invoice];
-    }
-}

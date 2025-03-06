@@ -9,7 +9,7 @@ import { responseDelay } from '@/utils/delay';
 @Injectable()
 export class TicketService implements Tickets.Service {
     getTicket(options: Tickets.Request.GetTicketParams) {
-        return of(mapTicket(options.id)).pipe(responseDelay());
+        return of(mapTicket(options.id, options.locale)).pipe(responseDelay());
     }
 
     getTicketList(options: Tickets.Request.GetTicketListQuery) {

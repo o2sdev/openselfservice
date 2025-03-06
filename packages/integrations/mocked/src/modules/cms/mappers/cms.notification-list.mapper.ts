@@ -1,6 +1,6 @@
 import { CMS } from '@o2s/framework/modules';
 
-const MOCK_NOTIFICATION_LIST_COMPONENT: CMS.Model.NotificationListComponent.NotificationListComponent = {
+const MOCK_NOTIFICATION_LIST_COMPONENT_EN: CMS.Model.NotificationListComponent.NotificationListComponent = {
     id: 'notification-list-1',
     title: 'Notifications',
     subtitle: 'List of your notifications',
@@ -19,10 +19,10 @@ const MOCK_NOTIFICATION_LIST_COMPONENT: CMS.Model.NotificationListComponent.Noti
     },
     fieldMapping: {
         type: {
+            GENERAL_NOTIFICATION: 'General',
+            TICKET_UPDATE: 'Ticket update',
             TYPE_1: 'Special offer',
-            TYPE_2: 'Gamification',
-            TYPE_3: 'Important news',
-            TYPE_4: 'Appointment',
+            TYPE_2: 'Important news',
         },
         status: {
             UNVIEWED: 'Not viewed',
@@ -73,10 +73,11 @@ const MOCK_NOTIFICATION_LIST_COMPONENT: CMS.Model.NotificationListComponent.Noti
                 label: 'Type',
                 allowMultiple: true,
                 options: [
+                    { label: 'General notification', value: 'GENERAL_NOTIFICATION' },
+                    { label: 'Ticket update', value: 'TICKET_UPDATE' },
                     { label: 'Special offer', value: 'TYPE_1' },
-                    { label: 'Gamification', value: 'TYPE_2' },
+                    { label: 'Changes', value: 'TYPE_2' },
                     { label: 'Important news', value: 'TYPE_3' },
-                    { label: 'Appointment', value: 'TYPE_4' },
                 ],
             },
             {
@@ -126,24 +127,269 @@ const MOCK_NOTIFICATION_LIST_COMPONENT: CMS.Model.NotificationListComponent.Noti
     detailsUrl: '/notifications/:id',
 };
 
+const MOCK_NOTIFICATION_LIST_COMPONENT_DE: CMS.Model.NotificationListComponent.NotificationListComponent = {
+    id: 'notification-list-1',
+    title: 'Benachrichtigungen',
+    subtitle: 'Liste Ihrer Benachrichtigungen',
+    table: {
+        columns: [
+            { id: 'status', title: 'Status' },
+            { id: 'title', title: 'Titel' },
+            { id: 'type', title: 'Typ' },
+            { id: 'priority', title: 'Priorität' },
+            { id: 'createdAt', title: 'Datum' },
+        ],
+        actions: {
+            title: 'Aktionen',
+            label: 'Details anzeigen',
+        },
+    },
+    fieldMapping: {
+        type: {
+            GENERAL_NOTIFICATION: 'Allgemein',
+            TICKET_UPDATE: 'Ticket-Aktualisierung',
+            TYPE_1: 'Sonderangebot',
+            TYPE_2: 'Wichtige Neuigkeiten',
+        },
+        status: {
+            UNVIEWED: 'Nicht angesehen',
+            VIEWED: 'Angesehen',
+            READ: 'Gelesen',
+        },
+        priority: {
+            LOW: 'Niedrig',
+            MEDIUM: 'Mittel',
+            HIGH: 'Hoch',
+            CRITICAL: 'Kritisch',
+        },
+    },
+    pagination: {
+        limit: 5,
+        legend: 'von {total}',
+        prev: 'Zurück',
+        next: 'Weiter',
+        selectPage: 'Seite auswählen',
+    },
+    filters: {
+        label: 'Filtern & Sortieren',
+        title: 'Benachrichtigungen filtern & sortieren',
+        description: 'Verwenden Sie Filter, um bestimmte Benachrichtigungen zu finden',
+        submit: 'Anwenden',
+        reset: 'Zurücksetzen',
+        removeFilters: 'Filter entfernen ({active})',
+        items: [
+            {
+                __typename: 'FilterSelect',
+                id: 'sort',
+                label: 'Sortieren',
+                allowMultiple: false,
+                options: [
+                    { label: 'Typ (aufsteigend)', value: 'type_ASC' },
+                    { label: 'Typ (absteigend)', value: 'type_DESC' },
+                    { label: 'Status (aufsteigend)', value: 'status_ASC' },
+                    { label: 'Status (absteigend)', value: 'status_DESC' },
+                    { label: 'Priorität (aufsteigend)', value: 'priority_ASC' },
+                    { label: 'Priorität (absteigend)', value: 'priority_DESC' },
+                    { label: 'Datum (aufsteigend)', value: 'createdAt_ASC' },
+                    { label: 'Datum (absteigend)', value: 'createdAt_DESC' },
+                ],
+            },
+            {
+                __typename: 'FilterSelect',
+                id: 'type',
+                label: 'Typ',
+                allowMultiple: true,
+                options: [
+                    { label: 'Allgemeine Benachrichtigung', value: 'GENERAL_NOTIFICATION' },
+                    { label: 'Ticket-Aktualisierung', value: 'TICKET_UPDATE' },
+                    { label: 'Sonderangebot', value: 'TYPE_1' },
+                    { label: 'Änderungen', value: 'TYPE_2' },
+                    { label: 'Wichtige Neuigkeiten', value: 'TYPE_3' },
+                ],
+            },
+            {
+                __typename: 'FilterSelect',
+                id: 'status',
+                label: 'Status',
+                allowMultiple: true,
+                options: [
+                    { label: 'Nicht angesehen', value: 'UNVIEWED' },
+                    { label: 'Angesehen', value: 'VIEWED' },
+                    { label: 'Gelesen', value: 'READ' },
+                ],
+            },
+            {
+                __typename: 'FilterSelect',
+                id: 'priority',
+                label: 'Priorität',
+                allowMultiple: true,
+                options: [
+                    { label: 'Niedrige Priorität', value: 'low' },
+                    { label: 'Mittlere Priorität', value: 'medium' },
+                    { label: 'Hohe Priorität', value: 'high' },
+                    { label: 'Kritische Priorität', value: 'critical' },
+                ],
+            },
+            {
+                __typename: 'FilterDateRange',
+                id: 'createdAt',
+                label: 'Datum',
+                from: {
+                    label: 'Von',
+                },
+                to: {
+                    label: 'Bis',
+                },
+            },
+        ],
+    },
+    noResults: {
+        title: 'Keine Benachrichtigungen gefunden',
+        description: 'Es gibt keine Benachrichtigungen, die Ihren Kriterien entsprechen',
+    },
+    labels: {
+        today: 'Heute',
+        yesterday: 'Gestern',
+    },
+    detailsUrl: '/benachrichtigungen/:id',
+};
+
+const MOCK_NOTIFICATION_LIST_COMPONENT_PL: CMS.Model.NotificationListComponent.NotificationListComponent = {
+    id: 'notification-list-1',
+    title: 'Powiadomienia',
+    subtitle: 'Lista twoich powiadomień',
+    table: {
+        columns: [
+            { id: 'status', title: 'Status' },
+            { id: 'title', title: 'Tytuł' },
+            { id: 'type', title: 'Typ' },
+            { id: 'priority', title: 'Priorytet' },
+            { id: 'createdAt', title: 'Data' },
+        ],
+        actions: {
+            title: 'Akcje',
+            label: 'Zobacz szczegóły',
+        },
+    },
+    fieldMapping: {
+        type: {
+            GENERAL_NOTIFICATION: 'Ogólne',
+            TICKET_UPDATE: 'Aktualizacja zgłoszenia',
+            TYPE_1: 'Oferta specjalna',
+            TYPE_2: 'Ważne wiadomości',
+        },
+        status: {
+            UNVIEWED: 'Nieprzeczytane',
+            VIEWED: 'Wyświetlone',
+            READ: 'Przeczytane',
+        },
+        priority: {
+            LOW: 'Niski',
+            MEDIUM: 'Średni',
+            HIGH: 'Wysoki',
+            CRITICAL: 'Krytyczny',
+        },
+    },
+    pagination: {
+        limit: 5,
+        legend: 'z {total}',
+        prev: 'Poprzednia',
+        next: 'Następna',
+        selectPage: 'Wybierz stronę',
+    },
+    filters: {
+        label: 'Filtruj i sortuj',
+        title: 'Filtruj i sortuj powiadomienia',
+        description: 'Użyj filtrów, aby znaleźć konkretne powiadomienia',
+        submit: 'Zastosuj',
+        reset: 'Wyczyść',
+        removeFilters: 'Usuń filtry ({active})',
+        items: [
+            {
+                __typename: 'FilterSelect',
+                id: 'sort',
+                label: 'Sortuj',
+                allowMultiple: false,
+                options: [
+                    { label: 'Typ (rosnąco)', value: 'type_ASC' },
+                    { label: 'Typ (malejąco)', value: 'type_DESC' },
+                    { label: 'Status (rosnąco)', value: 'status_ASC' },
+                    { label: 'Status (malejąco)', value: 'status_DESC' },
+                    { label: 'Priorytet (rosnąco)', value: 'priority_ASC' },
+                    { label: 'Priorytet (malejąco)', value: 'priority_DESC' },
+                    { label: 'Data (rosnąco)', value: 'createdAt_ASC' },
+                    { label: 'Data (malejąco)', value: 'createdAt_DESC' },
+                ],
+            },
+            {
+                __typename: 'FilterSelect',
+                id: 'type',
+                label: 'Typ',
+                allowMultiple: true,
+                options: [
+                    { label: 'Powiadomienie ogólne', value: 'GENERAL_NOTIFICATION' },
+                    { label: 'Aktualizacja zgłoszenia', value: 'TICKET_UPDATE' },
+                    { label: 'Oferta specjalna', value: 'TYPE_1' },
+                    { label: 'Zmiany', value: 'TYPE_2' },
+                    { label: 'Ważne wiadomości', value: 'TYPE_3' },
+                ],
+            },
+            {
+                __typename: 'FilterSelect',
+                id: 'status',
+                label: 'Status',
+                allowMultiple: true,
+                options: [
+                    { label: 'Nieprzeczytane', value: 'UNVIEWED' },
+                    { label: 'Wyświetlone', value: 'VIEWED' },
+                    { label: 'Przeczytane', value: 'READ' },
+                ],
+            },
+            {
+                __typename: 'FilterSelect',
+                id: 'priority',
+                label: 'Priorytet',
+                allowMultiple: true,
+                options: [
+                    { label: 'Niski priorytet', value: 'low' },
+                    { label: 'Średni priorytet', value: 'medium' },
+                    { label: 'Wysoki priorytet', value: 'high' },
+                    { label: 'Krytyczny priorytet', value: 'critical' },
+                ],
+            },
+            {
+                __typename: 'FilterDateRange',
+                id: 'createdAt',
+                label: 'Data',
+                from: {
+                    label: 'Od',
+                },
+                to: {
+                    label: 'Do',
+                },
+            },
+        ],
+    },
+    noResults: {
+        title: 'Nie znaleziono powiadomień',
+        description: 'Nie ma powiadomień spełniających Twoje kryteria',
+    },
+    labels: {
+        today: 'Dzisiaj',
+        yesterday: 'Wczoraj',
+    },
+    detailsUrl: '/powiadomienia/:id',
+};
+
 export const mapNotificationListComponent = (
     locale: string,
 ): CMS.Model.NotificationListComponent.NotificationListComponent => {
-    const getDetailsUrl = () => {
-        switch (locale) {
-            case 'en':
-                return `/notifications/{id}`;
-            case 'de':
-                return `/benachrichtigungen/{id}`;
-            case 'pl':
-                return `/powiadomienia/{id}`;
-        }
-
-        return '';
-    };
-
-    return {
-        ...MOCK_NOTIFICATION_LIST_COMPONENT,
-        detailsUrl: getDetailsUrl(),
-    };
+    switch (locale) {
+        case 'de':
+            return { ...MOCK_NOTIFICATION_LIST_COMPONENT_DE, detailsUrl: '/benachrichtigungen/{id}' };
+        case 'pl':
+            return { ...MOCK_NOTIFICATION_LIST_COMPONENT_PL, detailsUrl: '/powiadomienia/{id}' };
+        default:
+            return { ...MOCK_NOTIFICATION_LIST_COMPONENT_EN, detailsUrl: '/notifications/{id}' };
+    }
 };

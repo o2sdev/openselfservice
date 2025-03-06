@@ -12,7 +12,7 @@ export class NotificationsService implements Notifications.Service {
     getNotification(
         params: Notifications.Request.GetNotificationParams,
     ): Observable<CustomNotifications.Notification | undefined> {
-        return of(mapNotification(params.id)).pipe(responseDelay());
+        return of(mapNotification(params.id, params.locale)).pipe(responseDelay());
     }
 
     getNotificationList(

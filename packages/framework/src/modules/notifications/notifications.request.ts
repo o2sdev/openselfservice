@@ -3,6 +3,7 @@ import { PaginationQuery } from '@/utils/models/pagination';
 
 export class GetNotificationParams {
     id!: string;
+    locale?: string;
 }
 
 export class GetNotificationListQuery extends PaginationQuery {
@@ -12,6 +13,7 @@ export class GetNotificationListQuery extends PaginationQuery {
     dateFrom?: Date;
     dateTo?: Date;
     sort?: string;
+    locale?: string;
 }
 
 export class MarkNotificationAsRequest {

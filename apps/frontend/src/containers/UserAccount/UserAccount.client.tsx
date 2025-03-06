@@ -37,13 +37,7 @@ export const UserAccountPure: React.FC<UserAccountPureProps> = (component) => {
                                     {basicInformationDescription}
                                 </Typography>
                             </div>
-                            <Button
-                                variant="outline"
-                                className="w-full md:w-fit"
-                                onClick={() => {
-                                    console.log('edit');
-                                }}
-                            >
+                            <Button variant="outline" className="w-full md:w-fit" onClick={() => {}}>
                                 {labels.edit}
                             </Button>
                         </div>
