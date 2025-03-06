@@ -24,7 +24,6 @@ To set up a new O2S project, use the `create-o2s-app` starter and follow the ins
 ```sh
 npx create-o2s-app my-project
 cd my-project
-npm install
 npm run dev
 ```
 
@@ -35,8 +34,6 @@ To start all services in **development mode**, use:
 ```sh
 npm run dev
 ```
-
-TODO: change names
 
 To run individual components:
 
@@ -50,8 +47,6 @@ For more details, check the **[Running the project](https://www.openselfservice.
 ## 🏗️ Project Structure
 
 O2S follows a **monorepo structure** using **Turborepo** for managing apps and internal packages.
-
-TODO: change names
 
 ```sh
 /apps
