@@ -1,5 +1,11 @@
 # @o2s/integrations.mocked
 
+## 0.10.2
+
+### Patch Changes
+
+- af1efd4: fixed differences between navigation items between locales
+
 ## 0.10.1
 
 ### Patch Changes
