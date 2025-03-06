@@ -1,5 +1,11 @@
 # @o2s/integrations.mocked
 
+## 0.9.2
+
+### Patch Changes
+
+- bd35a35: removed hardcoded logo URL and switched it with a URL to raw file hosted on GitHub
+
 ## 0.9.1
 
 ### Patch Changes
