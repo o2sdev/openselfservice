@@ -26,7 +26,7 @@ export class NotificationDetailsService {
         headers: AppHeaders,
     ): Observable<NotificationDetailsComponent> {
         const cms = this.cmsService.getNotificationDetailsComponent({ ...query, locale: headers['x-locale'] });
-        const notification = this.notificationService.getNotification(params);
+        const notification = this.notificationService.getNotification({ ...params, locale: headers['x-locale'] });
 
         return forkJoin([notification, cms]).pipe(
             map(([notification, cms]) => {

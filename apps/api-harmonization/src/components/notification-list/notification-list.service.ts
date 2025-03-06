@@ -29,6 +29,7 @@ export class NotificationListService {
                         ...query,
                         limit: query.limit || cms.pagination?.limit || 1,
                         offset: query.offset || 0,
+                        locale: headers['x-locale'],
                     })
                     .pipe(map((notifications) => mapNotificationList(notifications, cms, headers['x-locale'])));
             }),

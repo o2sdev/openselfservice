@@ -22,7 +22,7 @@ export class TicketDetailsService {
         headers: AppHeaders,
     ): Observable<TicketDetailsComponent> {
         const cms = this.cmsService.getTicketDetailsComponent({ ...query, locale: headers['x-locale'] });
-        const ticket = this.ticketService.getTicket(params);
+        const ticket = this.ticketService.getTicket({ ...params, locale: headers['x-locale'] });
 
         return forkJoin([ticket, cms]).pipe(
             map(([ticket, cms]) => {

@@ -3,6 +3,7 @@ import { PaginationQuery } from '@/utils/models/pagination';
 
 export class GetTicketParams {
     id!: string;
+    locale?: string;
 }
 
 export class PostTicketBody {
@@ -17,4 +18,5 @@ export class GetTicketListQuery extends PaginationQuery {
     dateFrom?: Date;
     dateTo?: Date;
     sort?: string;
+    locale?: string;
 }

@@ -1,6 +1,6 @@
 import { CMS } from '@o2s/framework/modules';
 
-const MOCK_INVOICE_LIST_COMPONENT: CMS.Model.InvoiceListComponent.InvoiceListComponent = {
+const MOCK_INVOICE_LIST_COMPONENT_EN: CMS.Model.InvoiceListComponent.InvoiceListComponent = {
     id: 'invoice-list-1',
     title: 'Invoices',
     fieldMapping: {
@@ -114,8 +114,241 @@ const MOCK_INVOICE_LIST_COMPONENT: CMS.Model.InvoiceListComponent.InvoiceListCom
     downloadButtonAriaDescription: 'Download invoice {id}',
 };
 
-export const mapInvoiceListComponent = (_locale: string): CMS.Model.InvoiceListComponent.InvoiceListComponent => {
-    return {
-        ...MOCK_INVOICE_LIST_COMPONENT,
-    };
+const MOCK_INVOICE_LIST_COMPONENT_DE: CMS.Model.InvoiceListComponent.InvoiceListComponent = {
+    id: 'invoice-list-1',
+    title: 'Rechnungen',
+    fieldMapping: {
+        type: {
+            STANDARD: 'Standard',
+            PROFORMA: 'Proforma',
+            CREDIT_NOTE: 'Gutschrift',
+            DEBIT_NOTE: 'Lastschrift',
+        },
+        paymentStatus: {
+            PAYMENT_COMPLETE: 'Bezahlt',
+            PAYMENT_DECLINED: 'Abgelehnt',
+            PAYMENT_DUE: 'Fällig',
+            PAYMENT_PAST_DUE: 'Überfällig',
+        },
+    },
+    tableTitle: 'Liste Ihrer Rechnungen',
+    table: {
+        columns: [
+            { id: 'type', title: 'Rechnungstyp' },
+            { id: 'id', title: 'Rechnungsnummer' },
+            { id: 'paymentDueDate', title: 'Fälligkeitsdatum' },
+            { id: 'paymentStatus', title: 'Zahlungsstatus' },
+            { id: 'totalAmountDue', title: 'Gesamtbetrag' },
+            { id: 'amountToPay', title: 'Zu zahlen' },
+        ],
+        actions: {
+            title: 'Aktionen',
+            label: 'Herunterladen',
+        },
+    },
+    pagination: {
+        limit: 5,
+        legend: 'Seite von {total} Rechnungen',
+        prev: 'Zurück',
+        next: 'Weiter',
+        selectPage: 'Seite auswählen',
+    },
+    filters: {
+        label: 'Filtern & Sortieren',
+        title: 'Rechnungen filtern',
+        description: 'Verwenden Sie Filter, um bestimmte Rechnungen zu finden',
+        submit: 'Filter anwenden',
+        reset: 'Filter zurücksetzen',
+        removeFilters: 'Filter entfernen ({active})',
+        items: [
+            {
+                __typename: 'FilterSelect',
+                id: 'sort',
+                label: 'Sortieren',
+                allowMultiple: false,
+                options: [
+                    { label: 'Dokumenttyp (aufsteigend)', value: 'type_ASC' },
+                    { label: 'Dokumenttyp (absteigend)', value: 'type_DESC' },
+                    { label: 'Zahlungsstatus (aufsteigend)', value: 'paymentStatus_ASC' },
+                    { label: 'Zahlungsstatus (absteigend)', value: 'paymentStatus_DESC' },
+                    { label: 'Fälligkeitsdatum (aufsteigend)', value: 'paymentDueDate_ASC' },
+                    { label: 'Fälligkeitsdatum (absteigend)', value: 'paymentDueDate_DESC' },
+                    { label: 'Gesamtbetrag (aufsteigend)', value: 'totalAmountDue_ASC' },
+                    { label: 'Gesamtbetrag (absteigend)', value: 'totalAmountDue_DESC' },
+                    { label: 'Zu zahlender Betrag (aufsteigend)', value: 'amountToPay_ASC' },
+                    { label: 'Zu zahlender Betrag (absteigend)', value: 'amountToPay_DESC' },
+                ],
+            },
+            {
+                __typename: 'FilterSelect',
+                id: 'type',
+                label: 'Rechnungstyp',
+                allowMultiple: true,
+                options: [
+                    { label: 'Standardrechnung', value: 'STANDARD' },
+                    { label: 'Proformarechnung', value: 'PROFORMA' },
+                    { label: 'Gutschrift', value: 'CREDIT_NOTE' },
+                    { label: 'Lastschrift', value: 'DEBIT_NOTE' },
+                ],
+            },
+            {
+                __typename: 'FilterSelect',
+                id: 'paymentStatus',
+                label: 'Zahlungsstatus',
+                allowMultiple: true,
+                options: [
+                    { label: 'Bezahlt', value: 'PAYMENT_COMPLETE' },
+                    { label: 'Abgelehnt', value: 'PAYMENT_DECLINED' },
+                    { label: 'Fällig', value: 'PAYMENT_DUE' },
+                    { label: 'Überfällig', value: 'PAYMENT_PAST_DUE' },
+                ],
+            },
+            {
+                __typename: 'FilterDateRange',
+                id: 'issuedDate',
+                label: 'Ausstellungsdatum',
+                from: {
+                    label: 'Von',
+                },
+                to: {
+                    label: 'Bis',
+                },
+            },
+        ],
+    },
+    noResults: {
+        title: 'Keine Rechnungen gefunden',
+        description: 'Es wurden keine Rechnungen gefunden, die Ihren Kriterien entsprechen',
+    },
+    labels: {
+        today: 'Heute',
+        yesterday: 'Gestern',
+    },
+    downloadFileName: 'rechnung-{id}.pdf',
+    downloadButtonAriaDescription: 'Rechnung {id} herunterladen',
+};
+
+const MOCK_INVOICE_LIST_COMPONENT_PL: CMS.Model.InvoiceListComponent.InvoiceListComponent = {
+    id: 'invoice-list-1',
+    title: 'Faktury',
+    fieldMapping: {
+        type: {
+            STANDARD: 'Standardowa',
+            PROFORMA: 'Proforma',
+            CREDIT_NOTE: 'Nota kredytowa',
+            DEBIT_NOTE: 'Nota debetowa',
+        },
+        paymentStatus: {
+            PAYMENT_COMPLETE: 'Opłacona',
+            PAYMENT_DECLINED: 'Odrzucona',
+            PAYMENT_DUE: 'Do zapłaty',
+            PAYMENT_PAST_DUE: 'Zaległa',
+        },
+    },
+    tableTitle: 'Lista Twoich faktur',
+    table: {
+        columns: [
+            { id: 'type', title: 'Typ faktury' },
+            { id: 'id', title: 'Numer faktury' },
+            { id: 'paymentDueDate', title: 'Termin płatności' },
+            { id: 'paymentStatus', title: 'Status płatności' },
+            { id: 'totalAmountDue', title: 'Kwota do zapłaty' },
+            { id: 'amountToPay', title: 'Do zapłacenia' },
+        ],
+        actions: {
+            title: 'Akcje',
+            label: 'Pobierz',
+        },
+    },
+    pagination: {
+        limit: 5,
+        legend: 'strona z {total} faktur',
+        prev: 'Poprzednia',
+        next: 'Następna',
+        selectPage: 'Wybierz stronę',
+    },
+    filters: {
+        label: 'Filtruj i sortuj',
+        title: 'Filtruj faktury',
+        description: 'Użyj filtrów, aby znaleźć konkretne faktury',
+        submit: 'Zastosuj filtry',
+        reset: 'Resetuj filtry',
+        removeFilters: 'Usuń filtry ({active})',
+        items: [
+            {
+                __typename: 'FilterSelect',
+                id: 'sort',
+                label: 'Sortuj',
+                allowMultiple: false,
+                options: [
+                    { label: 'Typ dokumentu (rosnąco)', value: 'type_ASC' },
+                    { label: 'Typ dokumentu (malejąco)', value: 'type_DESC' },
+                    { label: 'Status płatności (rosnąco)', value: 'paymentStatus_ASC' },
+                    { label: 'Status płatności (malejąco)', value: 'paymentStatus_DESC' },
+                    { label: 'Termin płatności (rosnąco)', value: 'paymentDueDate_ASC' },
+                    { label: 'Termin płatności (malejąco)', value: 'paymentDueDate_DESC' },
+                    { label: 'Kwota do zapłaty (rosnąco)', value: 'totalAmountDue_ASC' },
+                    { label: 'Kwota do zapłaty (malejąco)', value: 'totalAmountDue_DESC' },
+                    { label: 'Kwota do zapłacenia (rosnąco)', value: 'amountToPay_ASC' },
+                    { label: 'Kwota do zapłacenia (malejąco)', value: 'amountToPay_DESC' },
+                ],
+            },
+            {
+                __typename: 'FilterSelect',
+                id: 'type',
+                label: 'Typ faktury',
+                allowMultiple: true,
+                options: [
+                    { label: 'Faktura standardowa', value: 'STANDARD' },
+                    { label: 'Faktura proforma', value: 'PROFORMA' },
+                    { label: 'Nota kredytowa', value: 'CREDIT_NOTE' },
+                    { label: 'Nota debetowa', value: 'DEBIT_NOTE' },
+                ],
+            },
+            {
+                __typename: 'FilterSelect',
+                id: 'paymentStatus',
+                label: 'Status płatności',
+                allowMultiple: true,
+                options: [
+                    { label: 'Opłacona', value: 'PAYMENT_COMPLETE' },
+                    { label: 'Odrzucona', value: 'PAYMENT_DECLINED' },
+                    { label: 'Do zapłaty', value: 'PAYMENT_DUE' },
+                    { label: 'Zaległa', value: 'PAYMENT_PAST_DUE' },
+                ],
+            },
+            {
+                __typename: 'FilterDateRange',
+                id: 'issuedDate',
+                label: 'Data wystawienia',
+                from: {
+                    label: 'Od',
+                },
+                to: {
+                    label: 'Do',
+                },
+            },
+        ],
+    },
+    noResults: {
+        title: 'Nie znaleziono faktur',
+        description: 'Nie znaleziono faktur spełniających podane kryteria',
+    },
+    labels: {
+        today: 'Dzisiaj',
+        yesterday: 'Wczoraj',
+    },
+    downloadFileName: 'faktura-{id}.pdf',
+    downloadButtonAriaDescription: 'Pobierz fakturę {id}',
+};
+
+export const mapInvoiceListComponent = (locale: string): CMS.Model.InvoiceListComponent.InvoiceListComponent => {
+    switch (locale) {
+        case 'de':
+            return MOCK_INVOICE_LIST_COMPONENT_DE;
+        case 'pl':
+            return MOCK_INVOICE_LIST_COMPONENT_PL;
+        default:
+            return MOCK_INVOICE_LIST_COMPONENT_EN;
+    }
 };

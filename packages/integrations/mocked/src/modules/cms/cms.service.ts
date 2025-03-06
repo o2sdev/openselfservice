@@ -59,7 +59,7 @@ export class CmsService implements CMS.Service {
     }
 
     getFaqComponent(_options: CMS.Request.GetCmsEntryParams) {
-        return of(mapFaqComponent()).pipe(responseDelay());
+        return of(mapFaqComponent(_options.locale)).pipe(responseDelay());
     }
 
     getTicketListComponent(options: CMS.Request.GetCmsEntryParams) {
@@ -67,7 +67,7 @@ export class CmsService implements CMS.Service {
     }
 
     getTicketDetailsComponent(_options: CMS.Request.GetCmsEntryParams) {
-        return of(mapTicketDetailsComponent()).pipe(responseDelay());
+        return of(mapTicketDetailsComponent(_options.locale)).pipe(responseDelay());
     }
 
     getNotificationListComponent(options: CMS.Request.GetCmsEntryParams) {
@@ -75,7 +75,7 @@ export class CmsService implements CMS.Service {
     }
 
     getNotificationDetailsComponent(_options: CMS.Request.GetCmsEntryParams) {
-        return of(mapNotificationDetailsComponent()).pipe(responseDelay());
+        return of(mapNotificationDetailsComponent(_options.locale)).pipe(responseDelay());
     }
 
     getArticleListComponent(options: CMS.Request.GetCmsEntryParams) {
@@ -111,6 +111,6 @@ export class CmsService implements CMS.Service {
     }
 
     getUserAccountComponent(_options: CMS.Request.GetCmsEntryParams) {
-        return of(mapUserAccountComponent()).pipe(responseDelay());
+        return of(mapUserAccountComponent(_options.locale)).pipe(responseDelay());
     }
 }
