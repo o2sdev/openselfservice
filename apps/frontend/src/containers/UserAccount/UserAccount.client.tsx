@@ -14,7 +14,6 @@ import { UserAccountPureProps } from './UserAccount.types';
 
 export const UserAccountPure: React.FC<UserAccountPureProps> = (component) => {
     const { fields, labels, basicInformationTitle, basicInformationDescription, user, title } = component;
-    console.log(component);
 
     return (
         <div className="w-full">
