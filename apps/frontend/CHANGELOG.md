@@ -1,5 +1,18 @@
 # @o2s/frontend
 
+## 0.10.0
+
+### Minor Changes
+
+- e0ce5cb: Removed console.log
+
+### Patch Changes
+
+- Updated dependencies [e0ce5cb]
+- Updated dependencies [e0ce5cb]
+    - @o2s/ui@0.10.0
+    - @o2s/api-harmonization@0.11.0
+
 ## 0.9.1
 
 ### Patch Changes
