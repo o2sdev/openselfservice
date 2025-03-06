@@ -1,6 +1,6 @@
 import { Invoices, Models } from '@o2s/framework/modules';
 
-const dateToday = new Date();
+const _dateToday = new Date();
 const dateYesterday = new Date();
 dateYesterday.setDate(dateYesterday.getDate() - 1);
 
@@ -14,7 +14,7 @@ const MOCK_INVOICE_1: Invoices.Model.Invoice = {
     paymentStatus: 'PAYMENT_DUE',
     issuedDate: new Date(2024, 5, 15).toISOString(),
     paymentDueDate: '2024-07-15',
-    currency: 'PLN',
+    currency: 'EUR',
     totalAmountDue: {
         value: 1250.5,
     },
@@ -39,7 +39,7 @@ const MOCK_INVOICE_2: Invoices.Model.Invoice = {
     paymentStatus: 'PAYMENT_COMPLETE',
     issuedDate: new Date(2024, 4, 10).toISOString(),
     paymentDueDate: '2024-06-10',
-    currency: 'PLN',
+    currency: 'EUR',
     totalAmountDue: {
         value: 3450.75,
     },
@@ -89,7 +89,7 @@ const MOCK_INVOICE_4: Invoices.Model.Invoice = {
     paymentStatus: 'PAYMENT_COMPLETE',
     issuedDate: new Date(2024, 3, 20).toISOString(),
     paymentDueDate: '2024-05-20',
-    currency: 'PLN',
+    currency: 'EUR',
     totalAmountDue: {
         value: -450.0,
     },
@@ -114,7 +114,7 @@ const MOCK_INVOICE_5: Invoices.Model.Invoice = {
     paymentStatus: 'PAYMENT_PAST_DUE',
     issuedDate: new Date(2024, 5, 1).toISOString(),
     paymentDueDate: '2024-06-15',
-    currency: 'PLN',
+    currency: 'EUR',
     totalAmountDue: {
         value: 5670.3,
     },

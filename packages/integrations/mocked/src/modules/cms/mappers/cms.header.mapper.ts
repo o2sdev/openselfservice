@@ -30,6 +30,11 @@ const MOCK_HEADER_LOGON_EN: CMS.Model.Header.Header = {
                     label: 'Cases',
                     url: '/cases',
                 },
+                {
+                    __typename: 'NavigationItem',
+                    label: 'Invoices',
+                    url: '/invoices',
+                },
             ],
         },
         {
@@ -38,13 +43,8 @@ const MOCK_HEADER_LOGON_EN: CMS.Model.Header.Header = {
             items: [
                 {
                     __typename: 'NavigationItem',
-                    label: 'Notifications',
-                    url: '/notifications',
-                },
-                {
-                    __typename: 'NavigationItem',
-                    label: 'Invoices',
-                    url: '/invoices',
+                    label: 'O2S Documentation',
+                    url: 'https://www.openselfservice.com/',
                 },
             ],
         },
