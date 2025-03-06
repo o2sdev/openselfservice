@@ -63,7 +63,7 @@ const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
     id: 'fqj6nnyk4irqq5b7rnc4ogsj',
     title: 'MOCK_HEADER_LOGON_DE',
     logo: {
-        url: 'https://strapi-oss.dev.hycom.pl/uploads/logo_o2s_4a5e53164c.svg',
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/logo.svg',
         alternativeText: 'Logo',
         width: 92,
         height: 24,
@@ -206,7 +206,7 @@ const MOCK_HEADER_LOGOUT_DE: CMS.Model.Header.Header = {
     id: 'lwvbmnaayn6w7xy5soicv1k2',
     title: 'MOCK_HEADER_LOGOUT_DE',
     logo: {
-        url: 'https://strapi-oss.dev.hycom.pl/uploads/logo_o2s_4a5e53164c.svg',
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/logo.svg',
         alternativeText: 'Logo',
         width: 92,
         height: 24,

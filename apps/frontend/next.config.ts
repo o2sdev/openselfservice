@@ -22,14 +22,6 @@ const nextConfig: NextConfig = {
                 protocol: 'https',
                 hostname: 'avatars.githubusercontent.com',
             },
-            {
-                protocol: 'https',
-                hostname: 'www.w3schools.com',
-            },
-            {
-                protocol: 'https',
-                hostname: 'strapi-oss.dev.hycom.pl',
-            },
         ],
     },
     sassOptions: {
