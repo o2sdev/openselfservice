@@ -1,0 +1,13 @@
+{
+    "extends": "@o2s/typescript-config/ui.json",
+    "compilerOptions": {
+        "outDir": "dist",
+        "baseUrl": "./",
+        "paths": {
+            "@o2s/ui/*": ["./src/*"],
+            "@o2s/ui/components/ui*": ["./src/components/ui/*"]
+        }
+    },
+    "include": ["src"],
+    "exclude": ["node_modules", "dist"]
+}

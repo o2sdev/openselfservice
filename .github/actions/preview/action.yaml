@@ -1,0 +1,48 @@
+name: Build preview
+
+inputs:
+    vercel-token:
+        description: 'Token to access the vercel'
+        required: true
+    github-token:
+        description: 'Token to access the github'
+        required: true
+    vercel-org-id:
+        description: 'Vercel org id'
+        required: true
+    vercel-project-id:
+        description: 'Vercel project id to deploy'
+        required: true
+    vercel-project-name:
+        description: 'Vercel project name to deploy'
+        required: true
+
+runs:
+    using: "composite"
+    steps:
+        - name: Install Vercel CLI
+          shell: bash
+          run: npm i --global vercel
+
+        - name: Get Env
+          shell: bash
+          run: vercel pull --environment=preview --token=${{ inputs.vercel-token }}
+
+        - name: Vercel build local
+          shell: bash
+          run: vercel build
+
+#        - name: Deploy
+#          uses: amondnet/vercel-action@v25
+#          with:
+#              vercel-token: ${{ inputs.vercel-token}} # Required
+#              github-token: ${{ inputs.github-token }} #Optional
+#              vercel-args: "--prebuilt"
+#              vercel-org-id: ${{ inputs.vercel-org-id}} #Required
+#              vercel-project-id: ${{ inputs.vercel-project-id }} #Required
+#              vercel-project-name: ${{ inputs.vercel-project-name }}
+#              vercel-version: 30.2.0
+
+        - name: Deploy Prebuilt to Vercel
+          shell: bash
+          run: vercel deploy --prebuilt --token=${{ inputs.vercel-token }}

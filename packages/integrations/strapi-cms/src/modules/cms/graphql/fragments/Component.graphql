@@ -1,0 +1,7 @@
+fragment Component on Component {
+    __typename
+    documentId
+    content {
+        __typename
+    }
+}

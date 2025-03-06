@@ -1,0 +1,11 @@
+query getHeader($locale: I18NLocaleCode!, $id: ID!) {
+    header(locale: $locale, documentId: $id) {
+        ...Header
+    }
+    configurableTexts {
+        actions {
+            clear
+            apply
+        }
+    }
+}

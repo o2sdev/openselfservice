@@ -1,0 +1,27 @@
+{
+    "extends": "@o2s/typescript-config/frontend.json",
+    "compilerOptions": {
+        "baseUrl": "./",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "paths": {
+            "@/api/*": ["./src/api/*"],
+            "@/app/*": ["./src/app/*"],
+            "@/providers/*": ["./src/providers/*"],
+            "@/templates/*": ["./src/templates/*"],
+            "@/containers/*": ["./src/containers/*"],
+            "@/components/*": ["./src/components/*"],
+            "@/hooks/*": ["./src/hooks/*"],
+            "@/utils/*": ["./src/utils/*"],
+            "@/lib/*": ["./src/hooks/*"],
+            "@/auth": ["./src/auth"],
+            "@/i18n": ["./src/i18n"],
+            "@/i18n/*": ["./src/i18n/*"],
+            "@/machines/*": ["./src/machines/*"],
+            "@/assets/*": ["./src/assets/*"],
+            "@/sdk/*": ["./src/sdk/*"],
+            "@/styles/*": ["./src/styles/*"]
+        }
+    },
+    "include": ["next-env.d.ts", "next.config.mjs", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"]
+}

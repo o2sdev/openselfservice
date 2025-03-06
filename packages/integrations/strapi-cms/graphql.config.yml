@@ -1,0 +1,8 @@
+schema: ./graphql.schema.json
+extensions:
+    endpoints:
+        Default GraphQL Endpoint:
+            url: ${CMS_STRAPI_BASE_URL}/graphql
+            headers:
+                user-agent: JS GraphQL
+            introspect: false

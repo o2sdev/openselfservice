@@ -1,0 +1,14 @@
+fragment TwoColumnTemplate on ComponentTemplatesTwoColumn {
+    topSlot {
+        ...Component
+    }
+    leftSlot {
+        ...Component
+    }
+    rightSlot {
+        ...Component
+    }
+    bottomSlot {
+        ...Component
+    }
+}

@@ -1,0 +1,49 @@
+query getComponent($id: ID!, $locale: I18NLocaleCode!) {
+    component(documentId: $id, locale: $locale) {
+        name
+        content {
+            __typename
+            ... on ComponentComponentsFaq {
+                ...FaqComponent
+            }
+            ... on ComponentComponentsTicketList {
+                ...TicketListComponent
+            }
+            ... on ComponentComponentsTicketDetails {
+                ...TicketDetailsComponent
+            }
+            ... on ComponentComponentsNotificationList {
+                ...NotificationListComponent
+            }
+            ... on ComponentComponentsInvoiceList {
+                ...InvoiceListComponent
+            }
+            ... on ComponentComponentsPaymentsSummary {
+                ...PaymentsSummaryComponent
+            }
+            ... on ComponentComponentsPaymentsHistory {
+                ...PaymentsHistoryComponent
+            }
+            ... on ComponentComponentsUserAccount {
+                ...UserAccountComponent
+            }
+        }
+    }
+    configurableTexts {
+        dates {
+            today
+            yesterday
+        }
+        actions {
+            showMore
+            showLess
+            show
+            hide
+            edit
+            save
+            cancel
+            delete
+            logOut
+        }
+    }
+}

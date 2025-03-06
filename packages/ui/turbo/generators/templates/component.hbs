@@ -1,0 +1,13 @@
+import { VariantProps, cva } from 'class-variance-authority';
+import React from 'react';
+
+export const {{ camelCase name }}Variants = cva('', {
+    variants: {},
+    defaultVariants: {},
+});
+
+interface {{ pascalCase name }}Props extends VariantProps<typeof {{ camelCase name }}Variants> {}
+
+export const {{ pascalCase name }}: React.FC<Readonly<{{ pascalCase name }}Props>> = ({ ...props }) => {
+    return <div>{{ pascalCase name }}</div>;
+}

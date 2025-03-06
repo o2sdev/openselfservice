@@ -1,0 +1,29 @@
+{
+    "extends": ["//"],
+    "tasks": {
+        "dev": {
+            "dependsOn": ["build"]
+        },
+        "start": {
+            "env": [
+                "NODE_ENV",
+                "PORT",
+                "API_PREFIX",
+                "LOG_LEVEL",
+                "LOG_COLORS_ENABLED",
+                "LOG_FORMAT",
+                "DEFAULT_LOCALE",
+                "DEFAULT_CURRENCY",
+                "SUPPORTED_CURRENCIES",
+                "SUPPORTED_LOCALES",
+                "FRONT_BASE_URL",
+                "CMS_STRAPI_BASE_URL",
+                "CACHE_ENABLED",
+                "CACHE_TTL",
+                "CACHE_CACHE_REDIS_HOST",
+                "CACHE_REDIS_PORT",
+                "CACHE_REDIS_PASS"
+            ]
+        }
+    }
+}

@@ -1,0 +1,10 @@
+fragment FormFieldComponent on ComponentContentFormField {
+    __typename
+    id
+    name
+    label
+    placeholder
+    errorMessages {
+        ...ErrorMessageComponent
+    }
+}

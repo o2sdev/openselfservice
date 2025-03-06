@@ -1,0 +1,11 @@
+query getPage($slug: String!, $locale: I18NLocaleCode!) {
+    pages(filters: { slug: { endsWith: $slug } }, pagination: { limit: 1 }, locale: $locale) {
+        ...Page
+    }
+}
+
+query getPages($locale: I18NLocaleCode!) {
+    pages(locale: $locale) {
+        ...Page
+    }
+}

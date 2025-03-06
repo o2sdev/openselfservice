@@ -1,0 +1,41 @@
+{
+    "name": "@o2s/framework",
+    "version": "0.10.0",
+    "private": false,
+    "license": "MIT",
+    "exports": {
+        "./modules": "./dist/src/index.js",
+        "./sdk": "./dist/src/sdk.js"
+    },
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "dev": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")",
+        "build": "tsc && tsc-alias",
+        "lint": "tsc --noEmit && eslint . --ignore-pattern .eslintrc.js --max-warnings 0",
+        "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\"",
+        "generate:component": "turbo gen core-component"
+    },
+    "dependencies": {
+        "@nestjs/axios": "^3.1.2",
+        "@nestjs/common": "^10.0.0",
+        "rxjs": "^7.8.1",
+        "axios": "^1.7.8",
+        "qs": "^6.13.1",
+        "winston": "^3.17.0",
+        "redis": "^4.6.13"
+    },
+    "devDependencies": {
+        "@o2s/eslint-config": "*",
+        "@o2s/prettier-config": "*",
+        "@o2s/typescript-config": "*",
+        "@types/qs": "^6.9.17",
+        "@turbo/gen": "^1.12.4",
+        "concurrently": "^9.1.0",
+        "eslint": "^8.57.0",
+        "prettier": "^3.4.1",
+        "tsc-alias": "^1.8.10",
+        "typescript": "^5.7.2"
+    }
+}

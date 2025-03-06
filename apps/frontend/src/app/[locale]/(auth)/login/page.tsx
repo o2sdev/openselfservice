@@ -1,0 +1,81 @@
+import { AuthError } from 'next-auth';
+import Image from 'next/image';
+import { notFound, redirect } from 'next/navigation';
+import React from 'react';
+import { providerMap } from 'src/auth.providers';
+
+import { sdk } from '@/api/sdk';
+
+import { signIn } from '@/auth';
+
+import { AuthLayout } from '@/components/Auth/AuthLayout/AuthLayout';
+import { FormValues, SignInForm } from '@/components/Auth/SignInForm';
+
+interface Props {
+    params: Promise<{
+        locale: string;
+        slug: string[];
+        callbackUrl: string;
+    }>;
+}
+
+export default async function LoginPage({ params }: Readonly<Props>) {
+    const { locale, callbackUrl } = await params;
+
+    const { data } = await sdk.modules.getLoginPage({ 'x-locale': locale });
+
+    if (!data) {
+        return notFound();
+    }
+
+    const handleSignIn = async (providerId: string, credentials?: FormValues) => {
+        'use server';
+
+        try {
+            await signIn(providerId, {
+                ...credentials,
+                redirectTo: callbackUrl ?? '/',
+            });
+        } catch (error) {
+            if (error instanceof AuthError) {
+                return redirect(`/error?error=${error.type}`);
+            }
+            throw error;
+        }
+    };
+
+    return (
+        <AuthLayout>
+            <SignInForm
+                providers={providerMap}
+                labels={{
+                    title: data.title,
+                    subtitle: data.subtitle,
+                    password: {
+                        label: data.password.label,
+                        placeholder: data.password.placeholder,
+                        hide: data.labels?.hide,
+                        show: data.labels?.show,
+                        errorMessages: data.password?.errorMessages,
+                    },
+                    username: {
+                        label: data.username.label,
+                        placeholder: data.username.placeholder,
+                        errorMessages: data.username?.errorMessages,
+                    },
+                    signIn: data.signIn,
+                    providers: data.providers,
+                }}
+                onSignIn={handleSignIn}
+            />
+            {data.image?.url && (
+                <Image
+                    src={data.image?.url}
+                    alt={data.image?.alternativeText ?? ''}
+                    fill={true}
+                    className="object-cover"
+                />
+            )}
+        </AuthLayout>
+    );
+}

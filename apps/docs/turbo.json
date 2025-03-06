@@ -1,0 +1,15 @@
+{
+    "extends": ["//"],
+    "tasks": {
+        "build": {
+            "env": [
+                "HIDE_DOCS"
+            ]
+        },
+        "serve": {
+            "env": [
+                "HIDE_DOCS"
+            ]
+        }
+    }
+}

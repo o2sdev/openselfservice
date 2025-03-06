@@ -1,0 +1,7 @@
+fragment ErrorMessageComponent on ComponentContentErrorMessage {
+    __typename
+    id
+    description
+    name
+    type
+}

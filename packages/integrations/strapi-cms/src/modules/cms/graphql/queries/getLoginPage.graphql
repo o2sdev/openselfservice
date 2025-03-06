@@ -1,0 +1,11 @@
+query getLoginPage($locale: I18NLocaleCode!) {
+    loginPage(locale: $locale) {
+        ...LoginPage
+    }
+    configurableTexts {
+        actions {
+            show
+            hide
+        }
+    }
+}

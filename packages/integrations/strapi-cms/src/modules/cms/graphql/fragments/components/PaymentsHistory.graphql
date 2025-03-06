@@ -1,0 +1,10 @@
+fragment PaymentsHistoryComponent on ComponentComponentsPaymentsHistory {
+    __typename
+    id
+    title
+    topSegment
+    middleSegment
+    bottomSegment
+    total
+    monthsToShow
+}

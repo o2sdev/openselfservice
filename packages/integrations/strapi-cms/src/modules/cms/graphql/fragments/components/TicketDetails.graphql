@@ -1,0 +1,14 @@
+fragment TicketDetailsComponent on ComponentComponentsTicketDetails {
+    __typename
+    id
+    title
+    fields {
+        ...FieldMapping
+    }
+    commentsTitle
+    attachmentsTitle
+    properties {
+        key
+        value
+    }
+}

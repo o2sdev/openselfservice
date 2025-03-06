@@ -1,0 +1,20 @@
+export * as Page from './models/page.model';
+export * as LoginPage from './models/login-page.model';
+export * as Header from './models/header.model';
+export * as Footer from './models/footer.model';
+export * as AppConfig from './models/app-config.model';
+
+export * as FaqComponent from './models/components/faq.model';
+export * as TicketListComponent from './models/components/ticket-list.model';
+export * as TicketDetailsComponent from './models/components/ticket-details.model';
+export * as NotificationListComponent from './models/components/notification-list.model';
+export * as NotificationDetailsComponent from './models/components/notification-details.model';
+export * as ArticleListComponent from './models/components/article-list.model';
+export * as ArticleDetailsComponent from './models/components/article-details.model';
+export * as InvoiceListComponent from './models/components/invoice-list.model';
+export * as InvoiceDetailsComponent from './models/components/invoice-details.model';
+export * as ResourceDetailsComponent from './models/components/resource-details.model';
+export * as ResourceListComponent from './models/components/resource-list.model';
+export * as PaymentsSummaryComponent from './models/components/payments-summary.model';
+export * as PaymentsHistoryComponent from './models/components/payments-history.model';
+export * as UserAccountComponent from './models/components/user-account.model';

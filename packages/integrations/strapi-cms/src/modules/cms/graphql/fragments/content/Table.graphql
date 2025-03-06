@@ -1,0 +1,8 @@
+fragment Table on ComponentContentTable {
+    columns {
+        title
+        field
+    }
+    actionsTitle
+    actionsLabel
+}

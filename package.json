@@ -1,0 +1,45 @@
+{
+    "name": "o2s",
+    "private": true,
+    "scripts": {
+        "prepare": "husky",
+        "dev": "turbo dev",
+        "build": "turbo build",
+        "start": "turbo start",
+        "format": "turbo format",
+        "lint": "turbo lint",
+        "test": "turbo test",
+        "generate": "turbo gen",
+        "docs": "turbo start --filter=@o2s/docs",
+        "changeset": "changeset",
+        "version-packages": "changeset version",
+        "prerelease": "turbo run build",
+        "release": "changeset publish"
+    },
+    "devDependencies": {
+        "husky": "^9.1.7",
+        "lint-staged": "^15.2.10",
+        "prettier": "^3.2.5",
+        "turbo": "^2.4.4",
+        "typescript": "5.5.4"
+    },
+    "engines": {
+        "node": ">=18"
+    },
+    "packageManager": "npm@10.2.4",
+    "workspaces": [
+        "apps/*",
+        "packages/*",
+        "packages/configs/*",
+        "packages/integrations/*",
+        "packages/utils/*"
+    ],
+    "dependencies": {
+        "@changesets/cli": "^2.27.10",
+        "@nestjs/cache-manager": "^3.0.0",
+        "cache-manager": "^6.4.0",
+        "docusaurus-plugin-image-zoom": "^3.0.1",
+        "ioredis": "^5.4.2",
+        "xmlbuilder2": "^3.1.1"
+    }
+}

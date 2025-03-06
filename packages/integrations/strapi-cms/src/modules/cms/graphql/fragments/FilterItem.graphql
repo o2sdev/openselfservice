@@ -1,0 +1,23 @@
+fragment FilterItem on FilterItem {
+    field {
+        __typename
+        ... on ComponentContentFilterSelect {
+            id
+            field
+            label
+            multiple
+            items {
+                id
+                key
+                value
+            }
+        }
+        ... on ComponentContentFilterDateRange {
+            id
+            field
+            label
+            from
+            to
+        }
+    }
+}

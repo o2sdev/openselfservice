@@ -1,0 +1,155 @@
+name: Release
+permissions:
+    actions: write
+    contents: write
+    packages: write
+    checks: read
+    pull-requests: write
+    deployments: write
+
+env:
+    VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+on:
+    push:
+        tags:
+            - 'docs-v*.*.*'
+            - 'v*.*.*'
+jobs:
+    check-app:
+        runs-on: ubuntu-latest
+        outputs:
+            app: ${{ steps.project-info.outputs.app }}
+            branch: ${{ steps.project-info.outputs.branch }}
+            pull_args: ${{ steps.project-info.outputs.pull_args }}
+        steps:
+            - name: Extract Tag Info
+              id: tag-info-raw
+              uses: actions/github-script@v6
+              with:
+                  script: |
+                      const tag = "${{ github.ref }}";
+                      const tripTag = tag.replace('refs/tags/', '');
+                      const regex = /^([a-z]+-)?v(\d+\.\d+(\.\d+)?)(-([a-z]+)(\.(\d+))?)?$/;
+
+                       const match = tripTag.match(regex);
+
+                       if (match) {
+                         const prefix = match[1] ? match[1].slice(0, -1) : null;
+                         const version = match[2];
+                         const suffix = match[5] ? match[5] : null;
+                         const revision = match[7] ? match[7] : null;
+
+                         console.log(`Prefix: ${prefix}`);
+                         console.log(`Version: ${version}`);
+                         console.log(`Suffix: ${suffix}`);
+                         console.log(`Revision: ${revision}`);
+                         return {
+                           app: prefix,
+                           version: version,
+                           branch: suffix,
+                           revision: revision
+                         }
+                       } else {
+                         console.log('Input string does not match expected format');
+                         return {
+                           app: null,
+                           version: null,
+                           branch: null,
+                           revision: null
+                         };
+                       }
+
+            - name: Extract tag to project info
+              id: project-info
+              run: |
+                  VERCEL_PULL_ARGS=""
+
+                  APP=$(echo ${{ fromJson(steps.tag-info-raw.outputs.result).app }})
+                  BRANCH=$(echo ${{ fromJson(steps.tag-info-raw.outputs.result).branch }})
+                  ENV=""
+
+                  if [[ $BRANCH == "beta" ]]; then
+                    BRANCH="staging"
+                    VERCEL_PULL_ARGS="--environment=preview --git-branch=staging"
+                  elif [[ $BRANCH == "alpha" ]]; then
+                    BRANCH="testing"
+                    VERCEL_PULL_ARGS="--environment=preview --git-branch=testing"
+                  else
+                    BRANCH="main"
+                    VERCEL_PULL_ARGS="--environment=production"
+                  fi
+
+                  if [[ -z "$APP" ]]; then
+                    echo "App name is empty"
+                  fi
+
+                  echo "app=$APP" >> $GITHUB_OUTPUT
+                  echo "pull_args=$VERCEL_PULL_ARGS" >> $GITHUB_OUTPUT
+                  echo "branch=$BRANCH" >> $GITHUB_OUTPUT
+
+    create_release_single_app:
+        runs-on: ubuntu-latest
+        needs: [check-app]
+        if: ${{ needs.check-app.outputs.app != null && needs.check-app.outputs.branch != null }}
+        steps:
+            - name: Setup Vercel Project Id
+              run: |
+                  APP=$(echo ${{ needs.check-app.outputs.app }})
+                  if [[ $APP == "docs" ]]; then
+                    echo "Setting docs project id"
+                    echo "VERCEL_PROJECT_ID=${{ secrets.VERCEL_DOCS_PROJECT_ID }}" >> $GITHUB_ENV
+                  else
+                    echo "App name is not valid"
+                    # Exit to prevent further execution
+                    exit 1
+                  fi
+            - name: Checkout code
+              uses: actions/checkout@v3
+              with:
+                  fetch-depth: 2
+                  ref: ${{ needs.check-app.outputs.branch }}
+            - name: Prepare Environment
+              uses: ./.github/actions/setup-env
+              timeout-minutes: 10
+              with:
+                  repo-token: ${{ secrets.GITHUB_TOKEN }}
+            - name: Deploy Project to Vercel
+              uses: ./.github/actions/build
+              timeout-minutes: 10
+              with:
+                  vercel-token: ${{ secrets.VERCEL_ACCESS_TOKEN }}
+                  pull-env-args: ${{ needs.check-app.outputs.pull_args }}
+                  build-env-args: ${{ needs.check-app.outputs.branch == 'main' && '--prod' || '' }}
+
+    create_release_all_apps:
+        runs-on: ubuntu-latest
+        needs: [check-app]
+        if: ${{ needs.check-app.outputs.app == null && needs.check-app.outputs.branch != null }}
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+              with:
+                  fetch-depth: 2
+                  ref: ${{ needs.check-app.outputs.branch }}
+            - name: Prepare Environment
+              uses: ./.github/actions/setup-env
+              timeout-minutes: 10
+              with:
+                  repo-token: ${{ secrets.GITHUB_TOKEN }}
+            - name: Get Packages
+              id: app-packages
+              run: |
+                  echo 'result<<CHANGESET_DELIMITER' >> $GITHUB_OUTPUT
+                  echo "$(npx -y turbo build --dry-run=json --global-deps=.github/*)" >> $GITHUB_OUTPUT
+                  echo 'CHANGESET_DELIMITER' >> $GITHUB_OUTPUT
+
+            - name: Deploy docs to Vercel
+              if: contains(toJson(fromJson(steps.app-packages.outputs.result).packages), 'docs') && always()
+              env:
+                  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_DOCS_PROJECT_ID }}
+              uses: ./.github/actions/build
+              timeout-minutes: 10
+              with:
+                  vercel-token: ${{ secrets.VERCEL_ACCESS_TOKEN }}
+                  pull-env-args: ${{ needs.check-app.outputs.pull_args }}
+                  build-env-args: ${{ needs.check-app.outputs.branch == 'main' && '--prod' || '' }}

@@ -1,0 +1,112 @@
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+.gradientWrapper {
+    position: relative;
+    max-width: var(--ifm-container-width-xl);
+    margin: 0 auto;
+}
+
+.mainContentWrapper {
+    position: relative;
+    z-index: 1;
+}
+
+.gradientCircleGreen {
+    content: '';
+    position: absolute;
+    top: -725px;
+    right: -50%;
+    width: 1206px;
+    height: 1445px;
+    background: radial-gradient(50% 50% at 50% 50%, #34d399 0%, rgba(52, 211, 153, 0) 100%);
+    /* Animation */
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+    animation-name: radialGradientAnimation;
+}
+
+@media screen and (max-width: 767px) {
+    .gradientCircleGreen {
+        width: 100vw;
+    }
+}
+
+.gradientCircleBlue {
+    content: '';
+    position: absolute;
+    top: -720px;
+    left: -40%;
+    width: 1398px;
+    height: 1653px;
+    /*background: radial-gradient(50% 50% at 50% 50%, #2563EB 0%, rgba(37, 99, 235, 0.00) 100%);*/
+    background: radial-gradient(50% 50% at 50% 50%, rgba(37, 99, 235, 0.7) 0%, rgba(37, 99, 235, 0) 100%);
+    /* Animation */
+    animation-duration: 15s;
+    animation-iteration-count: infinite;
+    animation-name: radialGradientAnimation;
+}
+
+@media screen and (max-width: 767px) {
+    .gradientCircleGreen,
+    .gradientCircleBlue {
+        animation: none;
+    }
+
+    .gradientCircleGreen {
+        width: 100vw;
+    }
+}
+
+@keyframes radialGradientAnimation {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.linearGradient {
+    background-image: linear-gradient(
+        153deg,
+        var(--page-linear-gradient-color-1) 0%,
+        var(--page-linear-gradient-color-2) 65.1%
+    );
+    background-size: 600%;
+    background-position: 0 0;
+    /* Animation */
+    animation: linearGradientAnimation 15s ease infinite;
+}
+
+@media screen and (max-width: 767px) {
+    .www {
+        animation: none;
+    }
+}
+
+@keyframes linearGradientAnimation {
+    0% {
+        background-position: 0 0;
+    }
+    25% {
+        background-position: 50% 0;
+    }
+    50% {
+        background-position: 90% 0;
+    }
+    60% {
+        background-position: 60%;
+    }
+    75% {
+        background-position: 40%;
+    }
+    100% {
+        background-position: 0 0;
+    }
+}

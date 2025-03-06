@@ -1,0 +1,11 @@
+fragment Filters on ComponentContentFilters {
+    buttonLabel
+    title
+    description
+    submitLabel
+    removeFiltersLabel
+    clearLabel
+    items {
+        ...FilterItem
+    }
+}

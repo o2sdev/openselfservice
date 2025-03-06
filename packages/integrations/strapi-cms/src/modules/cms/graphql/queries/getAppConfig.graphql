@@ -1,0 +1,5 @@
+query getAppConfig($locale: I18NLocaleCode!) {
+    appConfig(locale: $locale) {
+        ...AppConfig
+    }
+}

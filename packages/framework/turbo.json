@@ -1,0 +1,11 @@
+{
+    "extends": ["//"],
+    "tasks": {
+        "dev": {
+            "dependsOn": ["@o2s/utils.logger#build"]
+        },
+        "build": {
+            "dependsOn": ["@o2s/utils.logger#build"]
+        }
+    }
+}

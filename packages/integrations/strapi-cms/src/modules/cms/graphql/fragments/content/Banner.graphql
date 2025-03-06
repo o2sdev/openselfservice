@@ -1,0 +1,10 @@
+fragment Banner on ComponentContentBanner {
+    title
+    description
+    altDescription
+    buttons {
+        label
+        ariaLabel
+        url
+    }
+}

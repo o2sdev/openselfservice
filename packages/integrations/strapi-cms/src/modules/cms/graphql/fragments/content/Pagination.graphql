@@ -1,0 +1,7 @@
+fragment Pagination on ComponentContentPagination {
+    description
+    previousLabel
+    nextLabel
+    perPage
+    selectPageLabel
+}

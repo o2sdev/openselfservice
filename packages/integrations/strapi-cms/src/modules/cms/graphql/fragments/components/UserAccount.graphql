@@ -1,0 +1,10 @@
+fragment UserAccountComponent on ComponentComponentsUserAccount {
+    __typename
+    id
+    title
+    basicInformationTitle
+    basicInformationDescription
+    inputs {
+        ...FormFieldComponent
+    }
+}

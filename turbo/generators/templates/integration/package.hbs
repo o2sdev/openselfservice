@@ -1,0 +1,38 @@
+{
+    "name": "@o2s/integrations.{{kebabCase name}}",
+    "version": "0.2.1",
+    "private": false,
+    "license": "MIT",
+    "exports": {
+        "./integration": "./dist/integration.js",
+        "./sdk": "./dist/sdk/index.js"
+    },
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "dev": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")",
+        "build": "tsc && tsc-alias",
+        "lint": "tsc --noEmit && eslint . --max-warnings 0",
+        "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
+    },
+    "dependencies": {
+        "@nestjs/axios": "^3.1.2",
+        "@nestjs/common": "^10.0.0",
+        "@nestjs/config": "^3.3.0",
+        "@nestjs/core": "^10.0.0",
+        "@o2s/framework": "*",
+        "@o2s/utils.logger": "*",
+        "rxjs": "^7.8.1"
+    },
+    "devDependencies": {
+        "@o2s/eslint-config": "*",
+        "@o2s/prettier-config": "*",
+        "@o2s/typescript-config": "*",
+        "concurrently": "^9.1.0",
+        "eslint": "^8.57.0",
+        "prettier": "^3.4.1",
+        "tsc-alias": "^1.8.10",
+        "typescript": "^5.7.2"
+    }
+}

@@ -1,0 +1,9 @@
+fragment NavigationGroup on ComponentContentNavigationGroup {
+    __typename
+    title
+    items {
+        ... on ComponentContentNavigationItem {
+            ...NavigationItem
+        }
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "label": "Guides",
+    "position": 400,
+    "link": {
+        "type": "doc",
+        "id": "overview"
+    }
+}

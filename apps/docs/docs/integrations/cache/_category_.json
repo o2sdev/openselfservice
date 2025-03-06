@@ -1,0 +1,7 @@
+{
+    "label": "Cache",
+    "position": 300,
+    "link": {
+        "type": "generated-index"
+    }
+}

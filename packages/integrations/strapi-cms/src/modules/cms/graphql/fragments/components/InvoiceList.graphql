@@ -1,0 +1,24 @@
+fragment InvoiceListComponent on ComponentComponentsInvoiceList {
+    __typename
+    id
+    title
+    fields {
+        ...FieldMapping
+    }
+    table {
+        ...Table
+    }
+    pagination {
+        ...Pagination
+    }
+    filters {
+        ...Filters
+    }
+    noResults {
+        title
+        description
+    }
+    tableTitle
+    downloadFileName
+    downloadButtonAriaDescription
+}

@@ -1,0 +1,28 @@
+import { HttpModule } from '@nestjs/axios';
+import { DynamicModule, Module } from '@nestjs/common';
+import { Type } from '@nestjs/common/interfaces/type.interface';
+
+import { {{pascalCase name}}Controller } from './{{kebabCase name}}.controller';
+import { {{pascalCase name}}Service } from './{{kebabCase name}}.service';
+import { ApiConfig } from '@/api-config';
+
+@Module({})
+export class {{pascalCase name}}Module {
+    static register(config: ApiConfig): DynamicModule {
+        const service = config.integrations.{{camelCase name}}.service;
+        const controller = config.integrations.{{camelCase name}}.controller || {{pascalCase name}}Controller;
+
+        return {
+            module: {{pascalCase name}}Module,
+            providers: [
+                {
+                    provide: {{pascalCase name}}Service,
+                    useClass: service as Type,
+                },
+            ],
+            imports: [HttpModule],
+            controllers: [controller],
+            exports: [{{pascalCase name}}Service],
+        };
+    }
+} 

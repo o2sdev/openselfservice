@@ -1,0 +1,18 @@
+{
+    "extends": "@o2s/typescript-config/api.json",
+    "compilerOptions": {
+        "outDir": "./dist",
+        "baseUrl": "./",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "paths": {
+            "@o2s/api-harmonization/models/*": ["./src/models/*"],
+            "@o2s/api-harmonization/components": ["./src/components"],
+            "@o2s/api-harmonization/components/*": ["./src/components/*"],
+            "@o2s/api-harmonization/config/*": ["./src/config/*"],
+            "@o2s/api-harmonization/utils": ["./src/utils"],
+            "@o2s/api-harmonization/utils/*": ["./src/utils/*"],
+            "@o2s/api-harmonization/lib/*": ["./src/hooks/*"]
+        }
+    }
+}

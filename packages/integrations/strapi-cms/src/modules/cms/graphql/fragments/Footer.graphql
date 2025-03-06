@@ -1,0 +1,16 @@
+fragment Footer on Footer {
+    documentId
+    title
+    logo {
+        ...Media
+    }
+    items {
+        ... on ComponentContentNavigationGroup {
+            ...NavigationGroup
+        }
+        ... on ComponentContentNavigationItem {
+            ...NavigationItem
+        }
+    }
+    copyright
+}

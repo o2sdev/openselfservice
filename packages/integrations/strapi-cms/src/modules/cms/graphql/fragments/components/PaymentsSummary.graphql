@@ -1,0 +1,16 @@
+fragment PaymentsSummaryComponent on ComponentComponentsPaymentsSummary {
+    __typename
+    id
+    overdue {
+        title
+        message
+        noPaymentsMessage
+        buttonLabel
+    }
+    toBePaid {
+        title
+        message
+        noPaymentsMessage
+        buttonLabel
+    }
+}

@@ -1,0 +1,20 @@
+name: Prepare environment
+
+inputs:
+    repo-token:
+        description: 'Token to access the repo'
+        required: true
+
+runs:
+    using: 'composite'
+    steps:
+        - uses: actions/setup-node@v3
+          with:
+              node-version: 20
+              cache: 'npm'
+
+        - name: Install Packages
+          shell: bash
+          run: npm ci
+          env:
+              CI: true

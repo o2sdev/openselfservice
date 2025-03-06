@@ -1,0 +1,17 @@
+{
+    "extends": ["//"],
+    "tasks": {
+        "start": {
+            "env": [
+                "ANALYZE",
+                "NEXT_PUBLIC_LOG_LEVEL",
+                "NEXT_PUBLIC_LOG_COLORS_ENABLED",
+                "NEXT_PUBLIC_LOG_FORMAT",
+                "NEXT_PUBLIC_API_URL",
+                "AUTH_SECRET",
+                "AUTH_TRUST_HOST",
+                "AUTH_GOOGLE_ID"
+            ]
+        }
+    }
+}

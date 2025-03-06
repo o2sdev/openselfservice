@@ -1,0 +1,7 @@
+fragment Media on UploadFile {
+    url
+    alternativeText
+    width
+    height
+    name
+}

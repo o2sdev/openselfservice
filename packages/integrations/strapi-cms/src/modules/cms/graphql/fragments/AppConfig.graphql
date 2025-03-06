@@ -1,0 +1,15 @@
+fragment AppConfig on AppConfig {
+    documentId
+    signedOutHeader {
+        documentId
+    }
+    signedInHeader {
+        documentId
+    }
+    signedOutFooter {
+        documentId
+    }
+    signedInFooter {
+        documentId
+    }
+}

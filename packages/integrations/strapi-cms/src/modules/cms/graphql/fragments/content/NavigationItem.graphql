@@ -1,0 +1,12 @@
+fragment NavigationItem on ComponentContentNavigationItem {
+    __typename
+    id
+    url
+    label
+    description
+    page {
+        ... on Page {
+            slug
+        }
+    }
+}

@@ -1,0 +1,11 @@
+fragment NotificationDetailsComponent on ComponentComponentsNotificationDetails {
+    __typename
+    id
+    fields {
+        ...FieldMapping
+    }
+    properties {
+        key
+        value
+    }
+}

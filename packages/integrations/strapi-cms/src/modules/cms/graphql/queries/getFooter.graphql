@@ -1,0 +1,5 @@
+query getFooter($locale: I18NLocaleCode!, $id: ID!) {
+    footer(locale: $locale, documentId: $id) {
+        ...Footer
+    }
+}

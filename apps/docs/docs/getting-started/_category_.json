@@ -1,0 +1,8 @@
+{
+    "label": "Getting started",
+    "position": 200,
+    "link": {
+        "type": "doc",
+        "id": "overview"
+    }
+}

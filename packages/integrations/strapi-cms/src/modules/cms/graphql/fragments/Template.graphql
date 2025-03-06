@@ -1,0 +1,9 @@
+fragment Template on PageTemplateDynamicZone {
+    __typename
+    ... on ComponentTemplatesOneColumn {
+        ...OneColumnTemplate
+    }
+    ... on ComponentTemplatesTwoColumn {
+        ...TwoColumnTemplate
+    }
+}

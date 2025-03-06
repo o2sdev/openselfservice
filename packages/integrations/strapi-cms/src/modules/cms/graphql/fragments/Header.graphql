@@ -1,0 +1,29 @@
+fragment Header on Header {
+    documentId
+    title
+    logo {
+        ...Media
+    }
+    items {
+        ... on ComponentContentNavigationGroup {
+            ...NavigationGroup
+        }
+        ... on ComponentContentNavigationItem {
+            ...NavigationItem
+        }
+    }
+    notification {
+        slug
+        SEO {
+            title
+        }
+    }
+    contextLabel
+    languageSwitcherLabel
+    userInfo {
+        slug
+        SEO {
+            title
+        }
+    }
+}

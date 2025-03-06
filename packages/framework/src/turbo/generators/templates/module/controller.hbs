@@ -1,0 +1,11 @@
+import { Controller, UseInterceptors } from '@nestjs/common';
+
+import { LoggerService } from '@o2s/utils.logger';
+
+import { {{pascalCase name}}Service } from './{{kebabCase name}}.service';
+
+@Controller('/{{kebabCase name}}')
+@UseInterceptors(LoggerService)
+export abstract class {{pascalCase name}}Controller {
+    constructor(protected readonly service: {{pascalCase name}}Service) {}
+}

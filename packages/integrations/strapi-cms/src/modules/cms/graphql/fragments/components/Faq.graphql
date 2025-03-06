@@ -1,0 +1,15 @@
+fragment FaqComponent on ComponentComponentsFaq {
+    __typename
+    id
+    title
+    subtitle
+    items {
+        title
+        description
+    }
+    banner {
+        ... on ComponentContentBanner {
+            ...Banner
+        }
+    }
+}

@@ -1,0 +1,31 @@
+name: Build package
+
+inputs:
+    vercel-token:
+        description: 'Token to access the vercel'
+        required: true
+    pull-env-args:
+        description: 'Arguments to pull env from vercel'
+        required: true
+    build-env-args:
+        description: 'Arguments to build env'
+        required: true
+
+runs:
+    using: "composite"
+    steps:
+        - name: Install Vercel CLI
+          shell: bash
+          run: npm i --global vercel
+
+        - name: Get Env
+          shell: bash
+          run: vercel pull ${{ inputs.pull-env-args }} --token=${{ inputs.vercel-token }}
+
+        - name: Vercel build local
+          shell: bash
+          run: vercel build ${{ inputs.build-env-args }}
+
+        - name: Deploy Prebuilt to Vercel
+          shell: bash
+          run: vercel deploy --prebuilt ${{ inputs.build-env-args }} --token=${{ inputs.vercel-token }}

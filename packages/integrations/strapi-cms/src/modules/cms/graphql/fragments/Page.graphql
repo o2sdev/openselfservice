@@ -1,0 +1,21 @@
+fragment Page on Page {
+    slug
+    locale
+    createdAt
+    updatedAt
+    publishedAt
+    documentId
+    SEO {
+        title
+        noIndex
+    }
+    template {
+        __typename
+        ... on ComponentTemplatesOneColumn {
+            ...OneColumnTemplate
+        }
+        ... on ComponentTemplatesTwoColumn {
+            ...TwoColumnTemplate
+        }
+    }
+}
