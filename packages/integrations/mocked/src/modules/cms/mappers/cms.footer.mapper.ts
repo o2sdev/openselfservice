@@ -4,7 +4,7 @@ const MOCK_FOOTER: CMS.Model.Footer.Footer = {
     id: 'laee0xa1zmm9uraev3hpruho',
     title: 'Legal and privacy',
     logo: {
-        url: 'https://strapi-oss.dev.hycom.pl/uploads/logo_34207ab71f.svg',
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/logo.svg',
         alternativeText: 'Logo',
         width: 92,
         height: 24,
