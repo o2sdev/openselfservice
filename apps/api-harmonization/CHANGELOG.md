@@ -1,5 +1,17 @@
 # @o2s/api-harmonization
 
+## 0.11.0
+
+### Minor Changes
+
+- e0ce5cb: Added localized mocks
+
+### Patch Changes
+
+- Updated dependencies [e0ce5cb]
+    - @o2s/integrations.mocked@0.10.0
+    - @o2s/framework@0.11.0
+
 ## 0.10.1
 
 ### Patch Changes
