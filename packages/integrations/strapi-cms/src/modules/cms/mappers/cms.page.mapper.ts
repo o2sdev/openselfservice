@@ -30,6 +30,32 @@ export const mapPage = (data: PageFragment): CMS.Model.Page.Page => {
     };
 };
 
+export const mapAlternativePages = (data: PageFragment): CMS.Model.Page.Page => {
+    const template = mapTemplate(data.template[0]);
+
+    if (!template) throw new NotFoundException();
+
+    return {
+        id: data.documentId,
+        slug: data.slug,
+        locale: data.locale!,
+        template: template,
+        updatedAt: data.updatedAt,
+        seo: {
+            title: data.SEO!.title,
+            noIndex: data.SEO!.noIndex,
+            noFollow: data.SEO!.noFollow,
+            description: data.SEO!.description,
+            keywords: data.SEO!.keywords?.map((keyword) => keyword.keyword) || [],
+            image: data.SEO!.image,
+        },
+        hasOwnTitle: data.hasOwnTitle,
+        parent: {
+            slug: data.parent?.slug ?? '',
+        },
+    };
+};
+
 const mapTemplate = (template?: TemplateFragment): CMS.Model.Page.PageTemplate => {
     if (!template) throw new NotFoundException();
 

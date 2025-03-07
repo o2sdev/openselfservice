@@ -35,8 +35,6 @@ export default async function RootLayout({ children, params }: Props) {
         return notFound();
     }
 
-    console.log(data.alternativeUrls);
-
     return (
         <div className="flex flex-col min-h-dvh">
             <Header headerData={common.header} alternativeUrls={data?.alternativeUrls} user={session.user} />
