@@ -21,7 +21,7 @@ export const TicketRecentRenderer: React.FC<TicketRecentRendererProps> = ({ id, 
                 <>
                     <Loading bars={1} />
                     <Container variant="narrow">
-                        <Loading bars={8} />
+                        <Loading bars={4} />
                     </Container>
                 </>
             }

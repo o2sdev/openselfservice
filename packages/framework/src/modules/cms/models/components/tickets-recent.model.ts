@@ -9,5 +9,6 @@ export class TicketRecentComponent extends Component.Component {
         yesterday: string;
         details: string;
     };
+    limit!: number;
     detailsUrl!: string;
 }

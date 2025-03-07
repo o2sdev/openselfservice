@@ -28,16 +28,17 @@ export const TicketRecentPure: React.FC<TicketRecentPureProps> = ({ ...component
                     <Typography variant="subtitle">{title}</Typography>
                 </CardHeader>
                 <CardContent>
-                    {(tickets?.data?.length ?? 0) > 0 ? (
-                        <div className="flex flex-col">
-                            {tickets?.data?.map((ticket) => (
-                                <div key={ticket.id.value} className="p-2 border-t">
-                                    {ticket?.comments?.items?.length > 0 && (
-                                        <div className="flex flex-col gap-6">
-                                            <div className="">
-                                                {ticket.comments.items.slice(0, 1).map((comment, index) => (
-                                                    <div key={index} className="flex flex-row gap-6 items-center">
-                                                        {/*<Separator />*/}
+                    {tickets?.data.length ? (
+                        <ul className="flex flex-col">
+                            {tickets.data.map((ticket) => {
+                                const comment = ticket.comments?.items?.[0];
+
+                                return (
+                                    <li key={ticket.id.value} className="p-2 border-t">
+                                        {!!ticket.comments?.items?.length && (
+                                            <div className="flex flex-col gap-6">
+                                                {comment && (
+                                                    <div className="flex flex-row gap-6 items-center">
                                                         <div className="basis-1/3">
                                                             <div className="flex items-center gap-2">
                                                                 <Avatar>
@@ -76,13 +77,13 @@ export const TicketRecentPure: React.FC<TicketRecentPureProps> = ({ ...component
                                                             </Link>
                                                         </div>
                                                     </div>
-                                                ))}
+                                                )}
                                             </div>
-                                        </div>
-                                    )}
-                                </div>
-                            ))}
-                        </div>
+                                        )}
+                                    </li>
+                                );
+                            })}
+                        </ul>
                     ) : (
                         <Typography variant="highlightedSmall">{noResults}</Typography>
                     )}

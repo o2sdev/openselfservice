@@ -9,6 +9,7 @@ const MOCK_TICKET_RECENT_COMPONENT_EN: CMS.Model.TicketRecentComponent.TicketRec
         yesterday: 'Yesterday',
         details: 'Details',
     },
+    limit: 3,
     detailsUrl: '/cases/{id}',
 };
 
@@ -21,6 +22,7 @@ const MOCK_TICKET_RECENT_COMPONENT_DE: CMS.Model.TicketRecentComponent.TicketRec
         yesterday: 'Gestern',
         details: 'Einzelheiten',
     },
+    limit: 3,
     detailsUrl: '/faelle/{id}',
 };
 
@@ -33,6 +35,7 @@ const MOCK_TICKET_RECENT_COMPONENT_PL: CMS.Model.TicketRecentComponent.TicketRec
         yesterday: 'Wczoraj',
         details: 'Szczegóły',
     },
+    limit: 3,
     detailsUrl: '/zgloszenia/{id}',
 };
 
