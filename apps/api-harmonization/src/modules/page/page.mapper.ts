@@ -7,7 +7,7 @@ export const mapPage = (
     footer: CMS.Model.Footer.Footer,
     page: CMS.Model.Page.Page,
     mainLocale: string,
-    alternatePages: { page: CMS.Model.Page.Page; locale: string }[] = [],
+    alternatePages: CMS.Model.Page.Page[] = [],
 ): Page => {
     const alternativeUrls: { [key: string]: string } = {
         [mainLocale]: page.slug,
@@ -15,8 +15,8 @@ export const mapPage = (
 
     const locales = [...alternatePages.map(({ locale }) => locale), mainLocale];
 
-    alternatePages.forEach(({ page: alternatePage, locale }) => {
-        alternativeUrls[locale] = alternatePage.slug;
+    alternatePages.forEach((p) => {
+        alternativeUrls[p.locale] = p.slug;
     });
 
     return {

@@ -145,6 +145,22 @@ export class CmsService implements CMS.Service {
         );
     }
 
+    getAlternativePages(options: CMS.Request.GetCmsAlternativePagesParams) {
+        // TODO: implement
+        const pages = this.graphqlService.getPages({
+            locale: options.locale,
+        });
+
+        return forkJoin([pages]).pipe(
+            map(([pages]) => {
+                if (!pages?.data?.pages?.length) {
+                    throw new NotFoundException();
+                }
+                return pages.data.pages.map((page) => mapPage(page));
+            }),
+        );
+    }
+
     getLoginPage(options: CMS.Request.GetCmsLoginPageParams) {
         const key = `login-page-${options.locale}`;
         return this.getCachedComponent(key, () => {

@@ -10,10 +10,11 @@ export const mapPage = (data: PageFragment): CMS.Model.Page.Page => {
     if (!template) throw new NotFoundException();
 
     return {
+        id: data.documentId,
         slug: data.slug,
+        locale: data.locale!,
         template: template,
         updatedAt: data.updatedAt,
-        id: data.documentId,
         seo: {
             title: data.SEO!.title,
             noIndex: data.SEO!.noIndex,
