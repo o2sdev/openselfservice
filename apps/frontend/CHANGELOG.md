@@ -1,5 +1,21 @@
 # @o2s/frontend
 
+## 0.11.0
+
+### Minor Changes
+
+- b4cddfb: add seo, add headers
+
+### Patch Changes
+
+- f2a6781: fixed an issue with alternative URLs for pages - on pages with dynamic URLs (e.g. /cases/(.+)) switching to another locale caused route to change to /cases/(.+) instead of /cases/12345
+- eea2896: added recent tickets component
+- 54c9fb5: added an alert about the upcoming feature
+- Updated dependencies [f2a6781]
+- Updated dependencies [eea2896]
+- Updated dependencies [b4cddfb]
+    - @o2s/api-harmonization@0.12.0
+
 ## 0.10.1
 
 ### Patch Changes
