@@ -5,9 +5,9 @@ const MOCK_FAQ_LIST_COMPONENT_EN: CMS.Model.FaqComponent.FaqComponent = {
     title: 'FAQ',
     items: [
         {
-            title: 'How do I manage my HyPro devices?',
+            title: 'How do I manage my PowerPro devices?',
             content:
-                'You can view and manage all your HyPro devices through our online self-service portal. Navigate to "Device Management" where you will find your devices categorized as purchased devices or fleet service devices. From there, you can request repairs, track repair status, or report lost devices.',
+                'You can view and manage all your PowerPro devices through our online self-service portal. Navigate to "Device Management" where you will find your devices categorized as purchased devices or fleet service devices. From there, you can request repairs, track repair status, or report lost devices.',
         },
         {
             title: 'How do I report a stolen or lost tool?',
@@ -15,7 +15,7 @@ const MOCK_FAQ_LIST_COMPONENT_EN: CMS.Model.FaqComponent.FaqComponent = {
 ### Reporting Stolen or Lost Fleet Devices
 
 If your fleet device has been stolen or lost, follow these steps:
-1. Log in to your HyPro account
+1. Log in to your PowerPro account
 2. Navigate to "Device Management"
 3. Select "Report theft/loss"
 4. Complete the form with all relevant information
@@ -29,9 +29,9 @@ Our team will process your report and contact you with further instructions with
             content: `
 ## Device Repair Process
 
-To request a repair for your HyPro device:
+To request a repair for your PowerPro device:
 
-1. Log in to your HyPro account
+1. Log in to your PowerPro account
 2. Go to "Device Management" > "Request Repair"
 3. Select the device that needs repair
 4. Describe the issue with the device
@@ -43,9 +43,9 @@ You can track the status of your repair by visiting "Track Repairs" in the Devic
 `,
         },
         {
-            title: 'What mobile applications does HyPro offer?',
+            title: 'What mobile applications does PowerPro offer?',
             content:
-                'HyPro offers several mobile applications to help manage your tools and projects more efficiently. These include the HyPro Service for tool information and service requests, the HyPro Manager for asset management, and various technical applications for specific construction tasks like anchor design and firestop documentation. All applications can be downloaded from the App Store or Google Play Store.',
+                'PowerPro offers several mobile applications to help manage your tools and projects more efficiently. These include the PowerPro Service for tool information and service requests, the PowerPro Manager for asset management, and various technical applications for specific construction tasks like anchor design and firestop documentation. All applications can be downloaded from the App Store or Google Play Store.',
         },
         {
             title: 'How do I change my fleet service billing location?',
@@ -70,9 +70,9 @@ const MOCK_FAQ_LIST_COMPONENT_DE: CMS.Model.FaqComponent.FaqComponent = {
     title: 'FAQ',
     items: [
         {
-            title: 'Wie verwalte ich meine HyPro-Geräte?',
+            title: 'Wie verwalte ich meine PowerPro-Geräte?',
             content:
-                'Sie können alle Ihre HyPro-Geräte über unser Online-Selbstbedienungsportal einsehen und verwalten. Navigieren Sie zu "Geräteverwaltung", wo Sie Ihre Geräte kategorisiert als gekaufte Geräte oder Flottendienstgeräte finden. Von dort aus können Sie Reparaturen anfordern, den Reparaturstatus verfolgen oder verlorene Geräte melden.',
+                'Sie können alle Ihre PowerPro-Geräte über unser Online-Selbstbedienungsportal einsehen und verwalten. Navigieren Sie zu "Geräteverwaltung", wo Sie Ihre Geräte kategorisiert als gekaufte Geräte oder Flottendienstgeräte finden. Von dort aus können Sie Reparaturen anfordern, den Reparaturstatus verfolgen oder verlorene Geräte melden.',
         },
         {
             title: 'Wie melde ich ein gestohlenes oder verlorenes Werkzeug?',
@@ -80,7 +80,7 @@ const MOCK_FAQ_LIST_COMPONENT_DE: CMS.Model.FaqComponent.FaqComponent = {
 ### Meldung gestohlener oder verlorener Flottengeräte
 
 Wenn Ihr Flottengerät gestohlen wurde oder verloren gegangen ist, folgen Sie diesen Schritten:
-1. Melden Sie sich bei Ihrem HyPro-Konto an
+1. Melden Sie sich bei Ihrem PowerPro-Konto an
 2. Navigieren Sie zu "Geräteverwaltung"
 3. Wählen Sie "Diebstahl/Verlust melden"
 4. Füllen Sie das Formular mit allen relevanten Informationen aus
@@ -94,9 +94,9 @@ Unser Team wird Ihren Bericht bearbeiten und Sie innerhalb von 1-2 Werktagen mit
             content: `
 ## Gerätereparaturprozess
 
-Um eine Reparatur für Ihr HyPro-Gerät anzufordern:
+Um eine Reparatur für Ihr PowerPro-Gerät anzufordern:
 
-1. Melden Sie sich bei Ihrem HyPro-Konto an
+1. Melden Sie sich bei Ihrem PowerPro-Konto an
 2. Gehen Sie zu "Geräteverwaltung" > "Reparatur anfordern"
 3. Wählen Sie das Gerät aus, das repariert werden muss
 4. Beschreiben Sie das Problem mit dem Gerät
@@ -108,9 +108,9 @@ Sie können den Status Ihrer Reparatur verfolgen, indem Sie "Reparaturen verfolg
 `,
         },
         {
-            title: 'Welche mobilen Anwendungen bietet HyPro an?',
+            title: 'Welche mobilen Anwendungen bietet PowerPro an?',
             content:
-                'HyPro bietet mehrere mobile Anwendungen, um Ihre Werkzeuge und Projekte effizienter zu verwalten. Dazu gehören der HyPro Service für Werkzeuginformationen und Serviceanfragen, der HyPro Manager für die Anlagenverwaltung und verschiedene technische Anwendungen für spezifische Bauaufgaben wie Ankerdesign und Brandschutzdokumentation. Alle Anwendungen können aus dem App Store oder Google Play Store heruntergeladen werden.',
+                'PowerPro bietet mehrere mobile Anwendungen, um Ihre Werkzeuge und Projekte effizienter zu verwalten. Dazu gehören der PowerPro Service für Werkzeuginformationen und Serviceanfragen, der PowerPro Manager für die Anlagenverwaltung und verschiedene technische Anwendungen für spezifische Bauaufgaben wie Ankerdesign und Brandschutzdokumentation. Alle Anwendungen können aus dem App Store oder Google Play Store heruntergeladen werden.',
         },
         {
             title: 'Wie ändere ich meinen Flottendienst-Abrechnungsstandort?',
@@ -136,9 +136,9 @@ const MOCK_FAQ_LIST_COMPONENT_PL: CMS.Model.FaqComponent.FaqComponent = {
     title: 'FAQ',
     items: [
         {
-            title: 'Jak zarządzać moimi urządzeniami HyPro?',
+            title: 'Jak zarządzać moimi urządzeniami PowerPro?',
             content:
-                'Możesz przeglądać i zarządzać wszystkimi swoimi urządzeniami HyPro za pośrednictwem naszego portalu samoobsługowego online. Przejdź do "Zarządzania urządzeniami", gdzie znajdziesz swoje urządzenia skategoryzowane jako zakupione urządzenia lub urządzenia flotowe. Stamtąd możesz zlecić naprawy, śledzić status naprawy lub zgłosić zgubione urządzenia.',
+                'Możesz przeglądać i zarządzać wszystkimi swoimi urządzeniami PowerPro za pośrednictwem naszego portalu samoobsługowego online. Przejdź do "Zarządzania urządzeniami", gdzie znajdziesz swoje urządzenia skategoryzowane jako zakupione urządzenia lub urządzenia flotowe. Stamtąd możesz zlecić naprawy, śledzić status naprawy lub zgłosić zgubione urządzenia.',
         },
         {
             title: 'Jak zgłosić kradzież lub zgubienie narzędzia?',
@@ -146,7 +146,7 @@ const MOCK_FAQ_LIST_COMPONENT_PL: CMS.Model.FaqComponent.FaqComponent = {
 ### Zgłaszanie skradzionych lub zgubionych urządzeń flotowych
 
 Jeśli Twoje urządzenie flotowe zostało skradzione lub zgubione, wykonaj następujące kroki:
-1. Zaloguj się na swoje konto HyPro
+1. Zaloguj się na swoje konto PowerPro
 2. Przejdź do "Zarządzania urządzeniami"
 3. Wybierz "Zgłoś kradzież/zgubienie"
 4. Wypełnij formularz ze wszystkimi istotnymi informacjami
@@ -160,9 +160,9 @@ Nasz zespół przetworzy Twoje zgłoszenie i skontaktuje się z Tobą z dalszymi
             content: `
 ## Proces naprawy urządzenia
 
-Aby zlecić naprawę swojego urządzenia HyPro:
+Aby zlecić naprawę swojego urządzenia PowerPro:
 
-1. Zaloguj się na swoje konto HyPro
+1. Zaloguj się na swoje konto PowerPro
 2. Przejdź do "Zarządzanie urządzeniami" > "Zlecenie naprawy"
 3. Wybierz urządzenie wymagające naprawy
 4. Opisz problem z urządzeniem
@@ -174,9 +174,9 @@ Możesz śledzić status swojej naprawy, odwiedzając "Śledź naprawy" w sekcji
 `,
         },
         {
-            title: 'Jakie aplikacje mobilne oferuje HyPro?',
+            title: 'Jakie aplikacje mobilne oferuje PowerPro?',
             content:
-                'HyPro oferuje kilka aplikacji mobilnych, które pomagają efektywniej zarządzać narzędziami i projektami. Obejmują one HyPro Service do informacji o narzędziach i zgłoszeń serwisowych, HyPro Manager do zarządzania zasobami oraz różne aplikacje techniczne do konkretnych zadań budowlanych, takich jak projektowanie kotew i dokumentacja przeciwpożarowa. Wszystkie aplikacje można pobrać z App Store lub Google Play Store.',
+                'PowerPro oferuje kilka aplikacji mobilnych, które pomagają efektywniej zarządzać narzędziami i projektami. Obejmują one PowerPro Service do informacji o narzędziach i zgłoszeń serwisowych, PowerPro Manager do zarządzania zasobami oraz różne aplikacje techniczne do konkretnych zadań budowlanych, takich jak projektowanie kotew i dokumentacja przeciwpożarowa. Wszystkie aplikacje można pobrać z App Store lub Google Play Store.',
         },
         {
             title: 'Jak zmienić lokalizację rozliczeniową usługi flotowej?',

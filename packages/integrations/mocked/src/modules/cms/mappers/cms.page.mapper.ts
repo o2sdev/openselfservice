@@ -73,24 +73,20 @@ const PAGE_DASHBOARD_EN: CMS.Model.Page.Page = {
     template: {
         __typename: 'TwoColumnTemplate',
         slots: {
-            top: [
-                {
-                    __typename: 'TicketListComponent',
-                    id: 'ticket-list-1',
-                },
-            ],
+            top: [],
             left: [
                 {
-                    __typename: 'TicketListComponent',
-                    id: 'ticket-list-1',
+                    __typename: 'PaymentsSummaryComponent',
+                    id: 'payments-summary-1',
                 },
             ],
             right: [
                 {
-                    __typename: 'NotificationListComponent',
-                    id: 'notification-list-1',
+                    __typename: 'TicketRecentComponent',
+                    id: 'ticket-recent-1',
                 },
             ],
+
             bottom: [
                 {
                     __typename: 'FaqComponent',
@@ -126,24 +122,20 @@ const PAGE_DASHBOARD_DE: CMS.Model.Page.Page = {
     template: {
         __typename: 'TwoColumnTemplate',
         slots: {
-            top: [
-                {
-                    __typename: 'TicketListComponent',
-                    id: 'ticket-list-1',
-                },
-            ],
+            top: [],
             left: [
                 {
-                    __typename: 'TicketListComponent',
-                    id: 'ticket-list-1',
+                    __typename: 'PaymentsSummaryComponent',
+                    id: 'payments-summary-1',
                 },
             ],
             right: [
                 {
-                    __typename: 'NotificationListComponent',
-                    id: 'notification-list-1',
+                    __typename: 'TicketRecentComponent',
+                    id: 'ticket-recent-1',
                 },
             ],
+
             bottom: [
                 {
                     __typename: 'FaqComponent',
