@@ -16,4 +16,7 @@ fragment LoginPage on LoginPage {
     image {
         ...Media
     }
+    SEO {
+        ...Seo
+    }
 }

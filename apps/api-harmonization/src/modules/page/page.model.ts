@@ -26,12 +26,12 @@ export class Page {
 }
 
 export class SEO {
-    title?: string;
-    description?: string;
-    image?: Models.Media.Media | null;
-    keywords?: string[];
-    noIndex?: boolean;
-    noFollow?: boolean;
+    title!: string;
+    description!: string;
+    image?: Models.Media.Media;
+    keywords!: string[];
+    noIndex!: boolean;
+    noFollow!: boolean;
     parent!: {
         slug: string;
     };

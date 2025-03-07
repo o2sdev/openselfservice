@@ -38,29 +38,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     setRequestLocale(locale);
 
-    if (!data) {
-        let title = 'Page not found';
-        switch (locale) {
-            case 'de':
-                title = 'Seite nicht gefunden';
-                break;
-            case 'pl':
-                title = 'Strona nie znaleziona';
-                break;
-        }
-
-        return generateSeo({
-            slug: slugPrepared,
-            locale,
-            title,
-            noIndex: true,
-            noFollow: true,
-        });
-    }
-
     return generateSeo({
         slug: slugPrepared,
         locale,
+        keywords: seo.keywords,
         title: seo.title,
         description: seo.description
             ?.replace(/(<([^>]+)>)/gi, '')
@@ -70,7 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         noIndex: seo.noIndex,
         noFollow: seo.noFollow,
         translations: seo.locales,
-        alternates: data.alternativeUrls,
+        alternates: data?.alternativeUrls,
     });
 }
 

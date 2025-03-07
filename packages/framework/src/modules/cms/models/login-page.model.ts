@@ -20,4 +20,5 @@ export class LoginPage {
         hide: string;
     };
     image?: Media.Media;
+    seo!: Models.Seo.Seo;
 }

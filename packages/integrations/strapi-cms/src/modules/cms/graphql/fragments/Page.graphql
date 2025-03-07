@@ -10,16 +10,7 @@ fragment Page on Page {
         slug
     }
     SEO {
-        title
-        noIndex
-        noFollow
-        description
-        keywords {
-            keyword
-        }
-        image {
-            ...Media
-        }
+        ...Seo
     }
     template {
         __typename

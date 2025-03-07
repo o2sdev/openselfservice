@@ -21,12 +21,12 @@ export const mapPage = (
 
     return {
         seo: {
-            title: page.seo?.title,
-            description: page.seo?.description,
-            keywords: page.seo?.keywords,
-            image: page.seo?.image,
-            noIndex: page.seo?.noIndex,
-            noFollow: page.seo?.noFollow,
+            title: page.seo.title,
+            description: page.seo.description,
+            keywords: page.seo.keywords,
+            image: page.seo.image,
+            noIndex: page.seo.noIndex,
+            noFollow: page.seo.noFollow,
             parent: page.parent,
             locales,
         },

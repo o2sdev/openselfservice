@@ -1166,6 +1166,7 @@ export type JsonFilterInput = {
 };
 
 export type LoginPage = {
+    SEO: ComponentSeoSeo;
     createdAt?: Maybe<Scalars['DateTime']['output']>;
     documentId: Scalars['ID']['output'];
     image?: Maybe<UploadFile>;
@@ -1184,6 +1185,7 @@ export type LoginPage = {
 };
 
 export type LoginPageInput = {
+    SEO?: InputMaybe<ComponentSeoSeoInput>;
     image?: InputMaybe<Scalars['ID']['input']>;
     password?: InputMaybe<ComponentContentFormFieldInput>;
     providersLabel?: InputMaybe<Scalars['String']['input']>;
@@ -1468,7 +1470,7 @@ export type MutationUpdateUsersPermissionsUserArgs = {
 };
 
 export type Page = {
-    SEO?: Maybe<ComponentSeoSeo>;
+    SEO: ComponentSeoSeo;
     child?: Maybe<Page>;
     createdAt?: Maybe<Scalars['DateTime']['output']>;
     documentId: Scalars['ID']['output'];
@@ -2398,13 +2400,14 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
               userInfo?: Maybe<_RefType['Page']>;
           })
         | I18NLocale
-        | (Omit<LoginPage, 'image' | 'localizations' | 'localizations_connection'> & {
+        | (Omit<LoginPage, 'SEO' | 'image' | 'localizations' | 'localizations_connection'> & {
+              SEO: _RefType['ComponentSeoSeo'];
               image?: Maybe<_RefType['UploadFile']>;
               localizations: Array<Maybe<_RefType['LoginPage']>>;
               localizations_connection?: Maybe<_RefType['LoginPageRelationResponseCollection']>;
           })
         | (Omit<Page, 'SEO' | 'child' | 'localizations' | 'localizations_connection' | 'parent' | 'template'> & {
-              SEO?: Maybe<_RefType['ComponentSeoSeo']>;
+              SEO: _RefType['ComponentSeoSeo'];
               child?: Maybe<_RefType['Page']>;
               localizations: Array<Maybe<_RefType['Page']>>;
               localizations_connection?: Maybe<_RefType['PageRelationResponseCollection']>;
@@ -2675,7 +2678,8 @@ export type ResolversTypes = {
     JSON: ResolverTypeWrapper<Scalars['JSON']['output']>;
     JSONFilterInput: JsonFilterInput;
     LoginPage: ResolverTypeWrapper<
-        Omit<LoginPage, 'image' | 'localizations' | 'localizations_connection'> & {
+        Omit<LoginPage, 'SEO' | 'image' | 'localizations' | 'localizations_connection'> & {
+            SEO: ResolversTypes['ComponentSeoSeo'];
             image?: Maybe<ResolversTypes['UploadFile']>;
             localizations: Array<Maybe<ResolversTypes['LoginPage']>>;
             localizations_connection?: Maybe<ResolversTypes['LoginPageRelationResponseCollection']>;
@@ -2688,7 +2692,7 @@ export type ResolversTypes = {
     Mutation: ResolverTypeWrapper<{}>;
     Page: ResolverTypeWrapper<
         Omit<Page, 'SEO' | 'child' | 'localizations' | 'localizations_connection' | 'parent' | 'template'> & {
-            SEO?: Maybe<ResolversTypes['ComponentSeoSeo']>;
+            SEO: ResolversTypes['ComponentSeoSeo'];
             child?: Maybe<ResolversTypes['Page']>;
             localizations: Array<Maybe<ResolversTypes['Page']>>;
             localizations_connection?: Maybe<ResolversTypes['PageRelationResponseCollection']>;
@@ -2951,7 +2955,8 @@ export type ResolversParentTypes = {
     IntFilterInput: IntFilterInput;
     JSON: Scalars['JSON']['output'];
     JSONFilterInput: JsonFilterInput;
-    LoginPage: Omit<LoginPage, 'image' | 'localizations' | 'localizations_connection'> & {
+    LoginPage: Omit<LoginPage, 'SEO' | 'image' | 'localizations' | 'localizations_connection'> & {
+        SEO: ResolversParentTypes['ComponentSeoSeo'];
         image?: Maybe<ResolversParentTypes['UploadFile']>;
         localizations: Array<Maybe<ResolversParentTypes['LoginPage']>>;
         localizations_connection?: Maybe<ResolversParentTypes['LoginPageRelationResponseCollection']>;
@@ -2962,7 +2967,7 @@ export type ResolversParentTypes = {
     };
     Mutation: {};
     Page: Omit<Page, 'SEO' | 'child' | 'localizations' | 'localizations_connection' | 'parent' | 'template'> & {
-        SEO?: Maybe<ResolversParentTypes['ComponentSeoSeo']>;
+        SEO: ResolversParentTypes['ComponentSeoSeo'];
         child?: Maybe<ResolversParentTypes['Page']>;
         localizations: Array<Maybe<ResolversParentTypes['Page']>>;
         localizations_connection?: Maybe<ResolversParentTypes['PageRelationResponseCollection']>;
@@ -4045,6 +4050,7 @@ export type LoginPageResolvers<
     ContextType = any,
     ParentType extends ResolversParentTypes['LoginPage'] = ResolversParentTypes['LoginPage'],
 > = {
+    SEO?: Resolver<ResolversTypes['ComponentSeoSeo'], ParentType, ContextType>;
     createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
     documentId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     image?: Resolver<Maybe<ResolversTypes['UploadFile']>, ParentType, ContextType>;
@@ -4332,7 +4338,7 @@ export type PageResolvers<
     ContextType = any,
     ParentType extends ResolversParentTypes['Page'] = ResolversParentTypes['Page'],
 > = {
-    SEO?: Resolver<Maybe<ResolversTypes['ComponentSeoSeo']>, ParentType, ContextType>;
+    SEO?: Resolver<ResolversTypes['ComponentSeoSeo'], ParentType, ContextType>;
     child?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType>;
     createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
     documentId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -5130,8 +5136,8 @@ export type HeaderFragment = {
           }
         | {}
     >;
-    notification?: { slug: string; SEO?: { title: string } };
-    userInfo?: { slug: string; SEO?: { title: string } };
+    notification?: { slug: string; SEO: { title: string } };
+    userInfo?: { slug: string; SEO: { title: string } };
 };
 
 export type LoginPageFragment = {
@@ -5172,6 +5178,14 @@ export type LoginPageFragment = {
         }>;
     };
     image?: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
+    SEO: {
+        title: string;
+        noIndex: boolean;
+        noFollow: boolean;
+        description: string;
+        keywords?: Array<{ keyword: string }>;
+        image?: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
+    };
 };
 
 export type PageFragment = {
@@ -5183,7 +5197,7 @@ export type PageFragment = {
     documentId: string;
     hasOwnTitle: boolean;
     parent?: { slug: string };
-    SEO?: {
+    SEO: {
         title: string;
         noIndex: boolean;
         noFollow: boolean;
@@ -5684,6 +5698,15 @@ export type PaginationFragment = {
     selectPageLabel: string;
 };
 
+export type SeoFragment = {
+    title: string;
+    noIndex: boolean;
+    noFollow: boolean;
+    description: string;
+    keywords?: Array<{ keyword: string }>;
+    image?: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
+};
+
 export type TableFragment = {
     actionsTitle?: string;
     actionsLabel?: string;
@@ -6101,8 +6124,8 @@ export type GetHeaderQuery = {
               }
             | {}
         >;
-        notification?: { slug: string; SEO?: { title: string } };
-        userInfo?: { slug: string; SEO?: { title: string } };
+        notification?: { slug: string; SEO: { title: string } };
+        userInfo?: { slug: string; SEO: { title: string } };
     };
     configurableTexts?: { actions: { clear: string; apply: string } };
 };
@@ -6150,6 +6173,14 @@ export type GetLoginPageQuery = {
             }>;
         };
         image?: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
+        SEO: {
+            title: string;
+            noIndex: boolean;
+            noFollow: boolean;
+            description: string;
+            keywords?: Array<{ keyword: string }>;
+            image?: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
+        };
     };
     configurableTexts?: { actions: { show: string; hide: string } };
 };
@@ -6169,7 +6200,7 @@ export type GetPageQuery = {
         documentId: string;
         hasOwnTitle: boolean;
         parent?: { slug: string };
-        SEO?: {
+        SEO: {
             title: string;
             noIndex: boolean;
             noFollow: boolean;
@@ -6283,7 +6314,7 @@ export type GetPagesQuery = {
         documentId: string;
         hasOwnTitle: boolean;
         parent?: { slug: string };
-        SEO?: {
+        SEO: {
             title: string;
             noIndex: boolean;
             noFollow: boolean;
@@ -6512,6 +6543,21 @@ export const FormFieldComponentFragmentDoc = gql`
     }
     ${ErrorMessageComponentFragmentDoc}
 `;
+export const SeoFragmentDoc = gql`
+    fragment Seo on ComponentSeoSeo {
+        title
+        noIndex
+        noFollow
+        description
+        keywords {
+            keyword
+        }
+        image {
+            ...Media
+        }
+    }
+    ${MediaFragmentDoc}
+`;
 export const LoginPageFragmentDoc = gql`
     fragment LoginPage on LoginPage {
         createdAt
@@ -6531,9 +6577,13 @@ export const LoginPageFragmentDoc = gql`
         image {
             ...Media
         }
+        SEO {
+            ...Seo
+        }
     }
     ${FormFieldComponentFragmentDoc}
     ${MediaFragmentDoc}
+    ${SeoFragmentDoc}
 `;
 export const ComponentFragmentDoc = gql`
     fragment Component on Component {
@@ -6582,16 +6632,7 @@ export const PageFragmentDoc = gql`
             slug
         }
         SEO {
-            title
-            noIndex
-            noFollow
-            description
-            keywords {
-                keyword
-            }
-            image {
-                ...Media
-            }
+            ...Seo
         }
         template {
             __typename
@@ -6603,7 +6644,7 @@ export const PageFragmentDoc = gql`
             }
         }
     }
-    ${MediaFragmentDoc}
+    ${SeoFragmentDoc}
     ${OneColumnTemplateFragmentDoc}
     ${TwoColumnTemplateFragmentDoc}
 `;

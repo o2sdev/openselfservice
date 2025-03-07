@@ -5,18 +5,11 @@ export class Page {
     slug!: string;
     template!: PageTemplate;
     updatedAt!: string;
-    seo?: {
-        title: string;
-        noIndex: boolean;
-        noFollow: boolean;
-        description: string;
-        keywords: string[] | [];
-        image: Models.Media.Media | undefined;
-    };
     hasOwnTitle!: boolean;
     parent!: {
         slug: string;
     };
+    seo!: Models.Seo.Seo;
 }
 
 export abstract class Template {
