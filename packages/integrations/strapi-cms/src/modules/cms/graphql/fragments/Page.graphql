@@ -5,9 +5,12 @@ fragment Page on Page {
     updatedAt
     publishedAt
     documentId
+    hasOwnTitle
+    parent {
+        slug
+    }
     SEO {
-        title
-        noIndex
+        ...Seo
     }
     template {
         __typename

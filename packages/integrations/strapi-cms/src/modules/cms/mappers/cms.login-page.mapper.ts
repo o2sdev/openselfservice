@@ -53,5 +53,13 @@ export const mapLoginPage = (data: GetLoginPageQuery, baseURL?: string): CMS.Mod
             width: loginPage.image?.width,
             height: loginPage.image?.height,
         },
+        seo: {
+            title: loginPage.SEO.title,
+            description: loginPage.SEO.description,
+            keywords: loginPage.SEO.keywords?.map((keyword) => keyword.keyword) || [],
+            image: loginPage.SEO.image,
+            noIndex: loginPage.SEO.noIndex,
+            noFollow: loginPage.SEO.noFollow,
+        },
     };
 };

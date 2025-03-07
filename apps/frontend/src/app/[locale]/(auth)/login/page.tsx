@@ -1,4 +1,6 @@
+import { Metadata } from 'next';
 import { AuthError } from 'next-auth';
+import { setRequestLocale } from 'next-intl/server';
 import Image from 'next/image';
 import { notFound, redirect } from 'next/navigation';
 import React from 'react';
@@ -6,7 +8,11 @@ import { providerMap } from 'src/auth.providers';
 
 import { sdk } from '@/api/sdk';
 
+import { generateSeo } from '@/utils/seo';
+
 import { signIn } from '@/auth';
+
+import { routing } from '@/i18n/routing';
 
 import { AuthLayout } from '@/components/Auth/AuthLayout/AuthLayout';
 import { FormValues, SignInForm } from '@/components/Auth/SignInForm';
@@ -17,6 +23,31 @@ interface Props {
         slug: string[];
         callbackUrl: string;
     }>;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { locale } = await params;
+    const slug = routing.pathnames['/login']?.[locale] || '/';
+
+    const { seo } = await sdk.modules.getLoginPage({ 'x-locale': locale });
+
+    setRequestLocale(locale);
+
+    return generateSeo({
+        slug,
+        locale,
+        keywords: seo.keywords,
+        title: seo.title,
+        description: seo.description
+            ?.replace(/(<([^>]+)>)/gi, '')
+            .replace(/&nbsp;/gi, ' ')
+            .replace(/&amp;/gi, '&'),
+        image: seo.image || undefined,
+        noIndex: seo.noIndex,
+        noFollow: seo.noFollow,
+        translations: routing.locales,
+        alternates: routing.pathnames['/login'],
+    });
 }
 
 export default async function LoginPage({ params }: Readonly<Props>) {
