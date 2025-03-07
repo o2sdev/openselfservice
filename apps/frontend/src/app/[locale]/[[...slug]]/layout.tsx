@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation';
 import React from 'react';
 
 import { sdk } from '@/api/sdk';
@@ -29,6 +30,10 @@ export default async function RootLayout({ children, params }: Props) {
         { 'x-locale': locale },
         session.accessToken,
     );
+
+    if (!data) {
+        return notFound();
+    }
 
     return (
         <div className="flex flex-col min-h-dvh">

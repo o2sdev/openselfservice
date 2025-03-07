@@ -14,7 +14,7 @@ import { mapInvoiceListComponent } from './mappers/cms.invoice-list.mapper';
 import { mapLoginPage } from './mappers/cms.login-page.mapper';
 import { mapNotificationDetailsComponent } from './mappers/cms.notification-details.mapper';
 import { mapNotificationListComponent } from './mappers/cms.notification-list.mapper';
-import { getAllPages, mapPage } from './mappers/cms.page.mapper';
+import { getAllPages, getAlternativePages, mapPage } from './mappers/cms.page.mapper';
 import { mapPaymentsHistoryComponent } from './mappers/cms.payments-history.mapper';
 import { mapPaymentsSummaryComponent } from './mappers/cms.payments-summary.mapper';
 import { mapResourceDetailsComponent } from './mappers/cms.resource-details.mapper';
@@ -45,6 +45,10 @@ export class CmsService implements CMS.Service {
 
     getPages(options: CMS.Request.GetCmsPagesParams) {
         return of(getAllPages(options.locale));
+    }
+
+    getAlternativePages(options: CMS.Request.GetCmsAlternativePagesParams) {
+        return of(getAlternativePages(options.id, options.slug, options.locale));
     }
 
     getLoginPage(options: CMS.Request.GetCmsLoginPageParams) {
