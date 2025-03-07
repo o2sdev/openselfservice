@@ -1,10 +1,10 @@
-import { Media } from './media';
+import { Models } from '@o2s/framework/modules';
 
-export class Seo {
+export class Page {
     title!: string;
     noIndex!: boolean;
     noFollow!: boolean;
     description!: string;
-    keywords!: string[] | [];
-    image?: Media;
+    keywords!: string[];
+    image?: Models.Media.Media;
 }

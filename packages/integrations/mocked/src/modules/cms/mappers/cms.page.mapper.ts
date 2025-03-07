@@ -10,7 +10,7 @@ const PAGE_DASHBOARD_PL: CMS.Model.Page.Page = {
         description: 'Strona główna',
         keywords: [],
         image: {
-            url: 'https://via.placeholder.com/150',
+            url: 'https://picsum.photos/150',
             width: 150,
             height: 150,
             alternativeText: 'Placeholder',
@@ -62,7 +62,7 @@ const PAGE_DASHBOARD_EN: CMS.Model.Page.Page = {
         description: 'Dashboard',
         keywords: [],
         image: {
-            url: 'https://via.placeholder.com/150',
+            url: 'https://picsum.photos/150',
             width: 150,
             height: 150,
             alternativeText: 'Placeholder',
@@ -114,7 +114,7 @@ const PAGE_DASHBOARD_DE: CMS.Model.Page.Page = {
         description: 'Startseite',
         keywords: [],
         image: {
-            url: 'https://via.placeholder.com/150',
+            url: 'https://picsum.photos/150',
             width: 150,
             height: 150,
             alternativeText: 'Placeholder',
@@ -166,7 +166,7 @@ const PAGE_TICKET_LIST_EN: CMS.Model.Page.Page = {
         description: 'Cases',
         keywords: ['cases', 'case', 'casescase'],
         image: {
-            url: 'https://via.placeholder.com/150',
+            url: 'https://picsum.photos/150',
             width: 150,
             height: 150,
             alternativeText: 'Placeholder',
@@ -204,7 +204,7 @@ const PAGE_TICKET_LIST_DE: CMS.Model.Page.Page = {
         description: 'Fälle',
         keywords: ['kassen', 'kassenfall', 'kassenfallfall'],
         image: {
-            url: 'https://via.placeholder.com/150',
+            url: 'https://picsum.photos/150',
             width: 150,
             height: 150,
             alternativeText: 'Placeholder',
@@ -242,7 +242,7 @@ const PAGE_TICKET_LIST_PL: CMS.Model.Page.Page = {
         description: 'Zgłoszenia',
         keywords: ['zgloszenia', 'zgloszenie', 'zgloszeniazgloszenia'],
         image: {
-            url: 'https://via.placeholder.com/150',
+            url: 'https://picsum.photos/150',
             width: 150,
             height: 150,
             alternativeText: 'Placeholder',
@@ -280,7 +280,7 @@ const PAGE_TICKET_DETAILS_EN: CMS.Model.Page.Page = {
         description: 'Ticket Details',
         keywords: [],
         image: {
-            url: 'https://via.placeholder.com/150',
+            url: 'https://picsum.photos/150',
             width: 150,
             height: 150,
             alternativeText: 'Placeholder',
@@ -318,7 +318,7 @@ const PAGE_TICKET_DETAILS_DE: CMS.Model.Page.Page = {
         description: 'Fälle',
         keywords: [],
         image: {
-            url: 'https://via.placeholder.com/150',
+            url: 'https://picsum.photos/150',
             width: 150,
             height: 150,
             alternativeText: 'Placeholder',
@@ -356,7 +356,7 @@ const PAGE_TICKET_DETAILS_PL: CMS.Model.Page.Page = {
         description: 'Zgłoszenia',
         keywords: [],
         image: {
-            url: 'https://via.placeholder.com/150',
+            url: 'https://picsum.photos/150',
             width: 150,
             height: 150,
             alternativeText: 'Placeholder',
@@ -394,7 +394,7 @@ const PAGE_NOTIFICATION_LIST_EN: CMS.Model.Page.Page = {
         description: 'Notifications',
         keywords: [],
         image: {
-            url: 'https://via.placeholder.com/150',
+            url: 'https://picsum.photos/150',
             width: 150,
             height: 150,
             alternativeText: 'Placeholder',
@@ -432,7 +432,7 @@ const PAGE_NOTIFICATION_LIST_DE: CMS.Model.Page.Page = {
         description: 'Benachrichtigungen',
         keywords: [],
         image: {
-            url: 'https://via.placeholder.com/150',
+            url: 'https://picsum.photos/150',
             width: 150,
             height: 150,
             alternativeText: 'Placeholder',
@@ -470,7 +470,7 @@ const PAGE_NOTIFICATION_LIST_PL: CMS.Model.Page.Page = {
         description: 'Powiadomienia',
         keywords: [],
         image: {
-            url: 'https://via.placeholder.com/150',
+            url: 'https://picsum.photos/150',
             width: 150,
             height: 150,
             alternativeText: 'Placeholder',
@@ -508,7 +508,7 @@ const PAGE_INVOICE_LIST_EN: CMS.Model.Page.Page = {
         description: 'Invoices',
         keywords: [],
         image: {
-            url: 'https://via.placeholder.com/150',
+            url: 'https://picsum.photos/150',
             width: 150,
             height: 150,
             alternativeText: 'Placeholder',
@@ -559,7 +559,7 @@ const PAGE_INVOICE_LIST_DE: CMS.Model.Page.Page = {
         description: 'Rechnungen',
         keywords: [],
         image: {
-            url: 'https://via.placeholder.com/150',
+            url: 'https://picsum.photos/150',
             width: 150,
             height: 150,
             alternativeText: 'Placeholder',
@@ -610,7 +610,7 @@ const PAGE_INVOICE_LIST_PL: CMS.Model.Page.Page = {
         description: 'Rachunki',
         keywords: [],
         image: {
-            url: 'https://via.placeholder.com/150',
+            url: 'https://picsum.photos/150',
             width: 150,
             height: 150,
             alternativeText: 'Placeholder',
@@ -661,7 +661,7 @@ const PAGE_NOTIFICATION_DETAILS_EN: CMS.Model.Page.Page = {
         description: 'Notification Details',
         keywords: [],
         image: {
-            url: 'https://via.placeholder.com/150',
+            url: 'https://picsum.photos/150',
             width: 150,
             height: 150,
             alternativeText: 'Placeholder',
@@ -699,7 +699,7 @@ const PAGE_NOTIFICATION_DETAILS_DE: CMS.Model.Page.Page = {
         description: 'Benachrichtigung Details',
         keywords: [],
         image: {
-            url: 'https://via.placeholder.com/150',
+            url: 'https://picsum.photos/150',
             width: 150,
             height: 150,
             alternativeText: 'Placeholder',
@@ -737,7 +737,7 @@ const PAGE_NOTIFICATION_DETAILS_PL: CMS.Model.Page.Page = {
         description: 'Powiadomienia',
         keywords: [],
         image: {
-            url: 'https://via.placeholder.com/150',
+            url: 'https://picsum.photos/150',
             width: 150,
             height: 150,
             alternativeText: 'Placeholder',
@@ -775,7 +775,7 @@ const PAGE_USER_ACCOUNT_EN: CMS.Model.Page.Page = {
         description: 'User Account',
         keywords: [],
         image: {
-            url: 'https://via.placeholder.com/150',
+            url: 'https://picsum.photos/150',
             width: 150,
             height: 150,
             alternativeText: 'Placeholder',
@@ -809,7 +809,7 @@ const PAGE_USER_ACCOUNT_DE: CMS.Model.Page.Page = {
         description: 'Benutzerkonto',
         keywords: [],
         image: {
-            url: 'https://via.placeholder.com/150',
+            url: 'https://picsum.photos/150',
             width: 150,
             height: 150,
             alternativeText: 'Placeholder',
@@ -843,7 +843,7 @@ const PAGE_USER_ACCOUNT_PL: CMS.Model.Page.Page = {
         description: 'Konto użytkownika',
         keywords: [],
         image: {
-            url: 'https://via.placeholder.com/150',
+            url: 'https://picsum.photos/150',
             width: 150,
             height: 150,
             alternativeText: 'Placeholder',

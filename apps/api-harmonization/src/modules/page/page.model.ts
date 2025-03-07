@@ -22,16 +22,11 @@ export class Init {
 export class Page {
     common!: PageCommon;
     data?: PageData;
-    seo!: SEO;
+    meta!: Metadata;
 }
 
-export class SEO {
-    title!: string;
-    description!: string;
-    image?: Models.Media.Media;
-    keywords!: string[];
-    noIndex!: boolean;
-    noFollow!: boolean;
+export class Metadata {
+    seo!: Models.SEO.Page;
     parent!: {
         slug: string;
     };

@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     if (!session?.user) return signIn();
     const slugPrepared = slug ? `/${slug.join('/')}` : '/';
 
-    const { data, seo } = await sdk.modules.getPage(
+    const { data, meta } = await sdk.modules.getPage(
         {
             slug: slugPrepared,
         },
@@ -41,16 +41,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return generateSeo({
         slug: slugPrepared,
         locale,
-        keywords: seo.keywords,
-        title: seo.title,
-        description: seo.description
+        keywords: meta.seo.keywords,
+        title: meta.seo.title,
+        description: meta.seo.description
             ?.replace(/(<([^>]+)>)/gi, '')
             .replace(/&nbsp;/gi, ' ')
             .replace(/&amp;/gi, '&'),
-        image: seo.image || undefined,
-        noIndex: seo.noIndex,
-        noFollow: seo.noFollow,
-        translations: seo.locales,
+        image: meta.seo.image || undefined,
+        noIndex: meta.seo.noIndex,
+        noFollow: meta.seo.noFollow,
+        translations: meta.locales,
         alternates: data?.alternativeUrls,
     });
 }
@@ -62,7 +62,7 @@ export default async function Page({ params }: Props) {
 
     const { locale, slug } = await params;
 
-    const { data, seo } = await sdk.modules.getPage(
+    const { data, meta } = await sdk.modules.getPage(
         {
             slug: slug ? `/${slug.join('/')}` : '/',
         },
@@ -79,7 +79,7 @@ export default async function Page({ params }: Props) {
             {!data.hasOwnTitle && (
                 <div className="flex flex-col gap-6 w-full">
                     <Typography variant="h1" asChild>
-                        <h1>{seo.title}</h1>
+                        <h1>{meta.seo.title}</h1>
                     </Typography>
                     <Separator />
                 </div>
