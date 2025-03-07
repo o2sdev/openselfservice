@@ -76,4 +76,8 @@ export abstract class CmsService {
     abstract getUserAccountComponent(
         options: CMS.Request.GetCmsEntryParams,
     ): Observable<CMS.Model.UserAccountComponent.UserAccountComponent>;
+
+    abstract getTicketRecentComponent(
+        options: CMS.Request.GetCmsEntryParams,
+    ): Observable<CMS.Model.TicketRecentComponent.TicketRecentComponent>;
 }

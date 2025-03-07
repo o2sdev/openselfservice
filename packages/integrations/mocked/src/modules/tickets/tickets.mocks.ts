@@ -88,14 +88,7 @@ const MOCK_TICKET_2_EN: Tickets.Model.Ticket = {
                 email: 'fleet@support.com',
             },
             date: dateToday.toISOString(),
-            content: `
-<p>
-Fleet exchange has been completed successfully. All 5 tools have been replaced with newer models as per the contract agreement.
-</p>
-<p>
-<a href="/invoices">View invoice</a>
-</p>
-`,
+            content: `<p>Fleet exchange has been completed successfully. All 5 tools have been replaced with newer models as per the contract agreement.</p><p><a href="/invoices">View invoice</a></p>`,
         },
         {
             author: {

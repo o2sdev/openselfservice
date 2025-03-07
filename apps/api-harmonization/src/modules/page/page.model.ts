@@ -9,6 +9,7 @@ import {
     PaymentsSummary,
     TicketDetails,
     TicketList,
+    TicketRecent,
     UserAccount,
 } from '@o2s/api-harmonization/components';
 
@@ -55,4 +56,5 @@ export type Components =
     | InvoiceList.Model.InvoiceListComponent['__typename']
     | PaymentsSummary.Model.PaymentsSummaryComponent['__typename']
     | PaymentsHistory.Model.PaymentsHistoryComponent['__typename']
-    | UserAccount.Model.UserAccountComponent['__typename'];
+    | UserAccount.Model.UserAccountComponent['__typename']
+    | TicketRecent.Model.TicketRecentComponent['__typename'];
