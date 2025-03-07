@@ -68,6 +68,20 @@ const LOGIN_PAGE_PL: CMS.Model.LoginPage.LoginPage = {
         height: 656,
         name: 'Sign in image',
     },
+    seo: {
+        title: 'Zaloguj się',
+        description: 'Wprowadź swój email i hasło, aby uzyskać dostęp do konta',
+        keywords: ['zaloguj się', 'hasło', 'email'],
+        image: {
+            url: 'https://ui.shadcn.com/placeholder.svg',
+            alternativeText: 'Sign in image',
+            width: 640,
+            height: 656,
+            name: 'Sign in image',
+        },
+        noIndex: false,
+        noFollow: false,
+    },
 };
 
 const LOGIN_PAGE_EN: CMS.Model.LoginPage.LoginPage = {
@@ -138,6 +152,20 @@ const LOGIN_PAGE_EN: CMS.Model.LoginPage.LoginPage = {
         height: 656,
         name: 'Sign in image',
     },
+    seo: {
+        title: 'Sign in',
+        description: 'Please enter your email and password below to access your account.',
+        keywords: ['sign in', 'password', 'email'],
+        image: {
+            url: 'https://ui.shadcn.com/placeholder.svg',
+            alternativeText: 'Sign in image',
+            width: 640,
+            height: 656,
+            name: 'Sign in image',
+        },
+        noIndex: false,
+        noFollow: false,
+    },
 };
 
 const LOGIN_PAGE_DE: CMS.Model.LoginPage.LoginPage = {
@@ -201,6 +229,20 @@ const LOGIN_PAGE_DE: CMS.Model.LoginPage.LoginPage = {
         width: 640,
         height: 656,
         name: 'Sign in image',
+    },
+    seo: {
+        title: 'Einloggen',
+        description: 'Geben Sie Ihre E-Mail und Ihr Passwort ein, um auf Ihr Konto zuzugreifen',
+        keywords: ['einloggen', 'passwort', 'email'],
+        image: {
+            url: 'https://ui.shadcn.com/placeholder.svg',
+            alternativeText: 'Sign in image',
+            width: 640,
+            height: 656,
+            name: 'Sign in image',
+        },
+        noIndex: false,
+        noFollow: false,
     },
 };
 

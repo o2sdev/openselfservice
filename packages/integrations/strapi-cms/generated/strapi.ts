@@ -743,6 +743,9 @@ export type ConfigurableTexts = {
     createdAt?: Maybe<Scalars['DateTime']['output']>;
     dates: ComponentLabelsDates;
     documentId: Scalars['ID']['output'];
+    locale?: Maybe<Scalars['String']['output']>;
+    localizations: Array<Maybe<ConfigurableTexts>>;
+    localizations_connection?: Maybe<ConfigurableTextsRelationResponseCollection>;
     publishedAt?: Maybe<Scalars['DateTime']['output']>;
     updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -751,6 +754,10 @@ export type ConfigurableTextsInput = {
     actions?: InputMaybe<ComponentLabelsActionsInput>;
     dates?: InputMaybe<ComponentLabelsDatesInput>;
     publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type ConfigurableTextsRelationResponseCollection = {
+    nodes: Array<ConfigurableTexts>;
 };
 
 export type DateTimeFilterInput = {
@@ -1159,6 +1166,7 @@ export type JsonFilterInput = {
 };
 
 export type LoginPage = {
+    SEO: ComponentSeoSeo;
     createdAt?: Maybe<Scalars['DateTime']['output']>;
     documentId: Scalars['ID']['output'];
     image?: Maybe<UploadFile>;
@@ -1177,6 +1185,7 @@ export type LoginPage = {
 };
 
 export type LoginPageInput = {
+    SEO?: InputMaybe<ComponentSeoSeoInput>;
     image?: InputMaybe<Scalars['ID']['input']>;
     password?: InputMaybe<ComponentContentFormFieldInput>;
     providersLabel?: InputMaybe<Scalars['String']['input']>;
@@ -1310,6 +1319,10 @@ export type MutationDeleteComponentArgs = {
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
 };
 
+export type MutationDeleteConfigurableTextsArgs = {
+    locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+};
+
 export type MutationDeleteFilterItemArgs = {
     documentId: Scalars['ID']['input'];
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
@@ -1391,6 +1404,7 @@ export type MutationUpdateComponentArgs = {
 
 export type MutationUpdateConfigurableTextsArgs = {
     data: ConfigurableTextsInput;
+    locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
     status?: InputMaybe<PublicationStatus>;
 };
 
@@ -1456,11 +1470,12 @@ export type MutationUpdateUsersPermissionsUserArgs = {
 };
 
 export type Page = {
-    SEO?: Maybe<ComponentSeoSeo>;
+    SEO: ComponentSeoSeo;
     child?: Maybe<Page>;
     createdAt?: Maybe<Scalars['DateTime']['output']>;
     documentId: Scalars['ID']['output'];
     dynamicSlug: Scalars['Boolean']['output'];
+    hasOwnTitle: Scalars['Boolean']['output'];
     locale?: Maybe<Scalars['String']['output']>;
     localizations: Array<Maybe<Page>>;
     localizations_connection?: Maybe<PageRelationResponseCollection>;
@@ -1495,6 +1510,7 @@ export type PageFiltersInput = {
     createdAt?: InputMaybe<DateTimeFilterInput>;
     documentId?: InputMaybe<IdFilterInput>;
     dynamicSlug?: InputMaybe<BooleanFilterInput>;
+    hasOwnTitle?: InputMaybe<BooleanFilterInput>;
     locale?: InputMaybe<StringFilterInput>;
     localizations?: InputMaybe<PageFiltersInput>;
     not?: InputMaybe<PageFiltersInput>;
@@ -1509,6 +1525,7 @@ export type PageInput = {
     SEO?: InputMaybe<ComponentSeoSeoInput>;
     child?: InputMaybe<Scalars['ID']['input']>;
     dynamicSlug?: InputMaybe<Scalars['Boolean']['input']>;
+    hasOwnTitle?: InputMaybe<Scalars['Boolean']['input']>;
     parent?: InputMaybe<Scalars['ID']['input']>;
     publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
     slug?: InputMaybe<Scalars['String']['input']>;
@@ -1608,6 +1625,7 @@ export type QueryComponents_ConnectionArgs = {
 };
 
 export type QueryConfigurableTextsArgs = {
+    locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
     status?: InputMaybe<PublicationStatus>;
 };
 
@@ -2382,13 +2400,14 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
               userInfo?: Maybe<_RefType['Page']>;
           })
         | I18NLocale
-        | (Omit<LoginPage, 'image' | 'localizations' | 'localizations_connection'> & {
+        | (Omit<LoginPage, 'SEO' | 'image' | 'localizations' | 'localizations_connection'> & {
+              SEO: _RefType['ComponentSeoSeo'];
               image?: Maybe<_RefType['UploadFile']>;
               localizations: Array<Maybe<_RefType['LoginPage']>>;
               localizations_connection?: Maybe<_RefType['LoginPageRelationResponseCollection']>;
           })
         | (Omit<Page, 'SEO' | 'child' | 'localizations' | 'localizations_connection' | 'parent' | 'template'> & {
-              SEO?: Maybe<_RefType['ComponentSeoSeo']>;
+              SEO: _RefType['ComponentSeoSeo'];
               child?: Maybe<_RefType['Page']>;
               localizations: Array<Maybe<_RefType['Page']>>;
               localizations_connection?: Maybe<_RefType['PageRelationResponseCollection']>;
@@ -2583,6 +2602,7 @@ export type ResolversTypes = {
     >;
     ConfigurableTexts: ResolverTypeWrapper<ConfigurableTexts>;
     ConfigurableTextsInput: ConfigurableTextsInput;
+    ConfigurableTextsRelationResponseCollection: ResolverTypeWrapper<ConfigurableTextsRelationResponseCollection>;
     DateTime: ResolverTypeWrapper<Scalars['DateTime']['output']>;
     DateTimeFilterInput: DateTimeFilterInput;
     DeleteMutationResponse: ResolverTypeWrapper<DeleteMutationResponse>;
@@ -2658,7 +2678,8 @@ export type ResolversTypes = {
     JSON: ResolverTypeWrapper<Scalars['JSON']['output']>;
     JSONFilterInput: JsonFilterInput;
     LoginPage: ResolverTypeWrapper<
-        Omit<LoginPage, 'image' | 'localizations' | 'localizations_connection'> & {
+        Omit<LoginPage, 'SEO' | 'image' | 'localizations' | 'localizations_connection'> & {
+            SEO: ResolversTypes['ComponentSeoSeo'];
             image?: Maybe<ResolversTypes['UploadFile']>;
             localizations: Array<Maybe<ResolversTypes['LoginPage']>>;
             localizations_connection?: Maybe<ResolversTypes['LoginPageRelationResponseCollection']>;
@@ -2671,7 +2692,7 @@ export type ResolversTypes = {
     Mutation: ResolverTypeWrapper<{}>;
     Page: ResolverTypeWrapper<
         Omit<Page, 'SEO' | 'child' | 'localizations' | 'localizations_connection' | 'parent' | 'template'> & {
-            SEO?: Maybe<ResolversTypes['ComponentSeoSeo']>;
+            SEO: ResolversTypes['ComponentSeoSeo'];
             child?: Maybe<ResolversTypes['Page']>;
             localizations: Array<Maybe<ResolversTypes['Page']>>;
             localizations_connection?: Maybe<ResolversTypes['PageRelationResponseCollection']>;
@@ -2863,6 +2884,7 @@ export type ResolversParentTypes = {
     };
     ConfigurableTexts: ConfigurableTexts;
     ConfigurableTextsInput: ConfigurableTextsInput;
+    ConfigurableTextsRelationResponseCollection: ConfigurableTextsRelationResponseCollection;
     DateTime: Scalars['DateTime']['output'];
     DateTimeFilterInput: DateTimeFilterInput;
     DeleteMutationResponse: DeleteMutationResponse;
@@ -2933,7 +2955,8 @@ export type ResolversParentTypes = {
     IntFilterInput: IntFilterInput;
     JSON: Scalars['JSON']['output'];
     JSONFilterInput: JsonFilterInput;
-    LoginPage: Omit<LoginPage, 'image' | 'localizations' | 'localizations_connection'> & {
+    LoginPage: Omit<LoginPage, 'SEO' | 'image' | 'localizations' | 'localizations_connection'> & {
+        SEO: ResolversParentTypes['ComponentSeoSeo'];
         image?: Maybe<ResolversParentTypes['UploadFile']>;
         localizations: Array<Maybe<ResolversParentTypes['LoginPage']>>;
         localizations_connection?: Maybe<ResolversParentTypes['LoginPageRelationResponseCollection']>;
@@ -2944,7 +2967,7 @@ export type ResolversParentTypes = {
     };
     Mutation: {};
     Page: Omit<Page, 'SEO' | 'child' | 'localizations' | 'localizations_connection' | 'parent' | 'template'> & {
-        SEO?: Maybe<ResolversParentTypes['ComponentSeoSeo']>;
+        SEO: ResolversParentTypes['ComponentSeoSeo'];
         child?: Maybe<ResolversParentTypes['Page']>;
         localizations: Array<Maybe<ResolversParentTypes['Page']>>;
         localizations_connection?: Maybe<ResolversParentTypes['PageRelationResponseCollection']>;
@@ -3700,8 +3723,24 @@ export type ConfigurableTextsResolvers<
     createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
     dates?: Resolver<ResolversTypes['ComponentLabelsDates'], ParentType, ContextType>;
     documentId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    locale?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    localizations?: Resolver<Array<Maybe<ResolversTypes['ConfigurableTexts']>>, ParentType, ContextType>;
+    localizations_connection?: Resolver<
+        Maybe<ResolversTypes['ConfigurableTextsRelationResponseCollection']>,
+        ParentType,
+        ContextType
+    >;
     publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
     updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ConfigurableTextsRelationResponseCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ConfigurableTextsRelationResponseCollection'] = ResolversParentTypes['ConfigurableTextsRelationResponseCollection'],
+> = {
+    nodes?: Resolver<Array<ResolversTypes['ConfigurableTexts']>, ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -4011,6 +4050,7 @@ export type LoginPageResolvers<
     ContextType = any,
     ParentType extends ResolversParentTypes['LoginPage'] = ResolversParentTypes['LoginPage'],
 > = {
+    SEO?: Resolver<ResolversTypes['ComponentSeoSeo'], ParentType, ContextType>;
     createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
     documentId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     image?: Resolver<Maybe<ResolversTypes['UploadFile']>, ParentType, ContextType>;
@@ -4118,7 +4158,12 @@ export type MutationResolvers<
         ContextType,
         RequireFields<MutationDeleteComponentArgs, 'documentId'>
     >;
-    deleteConfigurableTexts?: Resolver<Maybe<ResolversTypes['DeleteMutationResponse']>, ParentType, ContextType>;
+    deleteConfigurableTexts?: Resolver<
+        Maybe<ResolversTypes['DeleteMutationResponse']>,
+        ParentType,
+        ContextType,
+        Partial<MutationDeleteConfigurableTextsArgs>
+    >;
     deleteFilterItem?: Resolver<
         Maybe<ResolversTypes['DeleteMutationResponse']>,
         ParentType,
@@ -4293,11 +4338,12 @@ export type PageResolvers<
     ContextType = any,
     ParentType extends ResolversParentTypes['Page'] = ResolversParentTypes['Page'],
 > = {
-    SEO?: Resolver<Maybe<ResolversTypes['ComponentSeoSeo']>, ParentType, ContextType>;
+    SEO?: Resolver<ResolversTypes['ComponentSeoSeo'], ParentType, ContextType>;
     child?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType>;
     createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
     documentId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     dynamicSlug?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+    hasOwnTitle?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
     locale?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     localizations?: Resolver<
         Array<Maybe<ResolversTypes['Page']>>,
@@ -4926,6 +4972,7 @@ export type Resolvers<ContextType = any> = {
     ComponentTemplatesOneColumn?: ComponentTemplatesOneColumnResolvers<ContextType>;
     ComponentTemplatesTwoColumn?: ComponentTemplatesTwoColumnResolvers<ContextType>;
     ConfigurableTexts?: ConfigurableTextsResolvers<ContextType>;
+    ConfigurableTextsRelationResponseCollection?: ConfigurableTextsRelationResponseCollectionResolvers<ContextType>;
     DateTime?: GraphQLScalarType;
     DeleteMutationResponse?: DeleteMutationResponseResolvers<ContextType>;
     Error?: ErrorResolvers<ContextType>;
@@ -5089,8 +5136,8 @@ export type HeaderFragment = {
           }
         | {}
     >;
-    notification?: { slug: string; SEO?: { title: string } };
-    userInfo?: { slug: string; SEO?: { title: string } };
+    notification?: { slug: string; SEO: { title: string } };
+    userInfo?: { slug: string; SEO: { title: string } };
 };
 
 export type LoginPageFragment = {
@@ -5131,6 +5178,14 @@ export type LoginPageFragment = {
         }>;
     };
     image?: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
+    SEO: {
+        title: string;
+        noIndex: boolean;
+        noFollow: boolean;
+        description: string;
+        keywords?: Array<{ keyword: string }>;
+        image?: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
+    };
 };
 
 export type PageFragment = {
@@ -5140,7 +5195,16 @@ export type PageFragment = {
     updatedAt?: any;
     publishedAt?: any;
     documentId: string;
-    SEO?: { title: string; noIndex: boolean };
+    hasOwnTitle: boolean;
+    parent?: { slug: string };
+    SEO: {
+        title: string;
+        noIndex: boolean;
+        noFollow: boolean;
+        description: string;
+        keywords?: Array<{ keyword: string }>;
+        image?: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
+    };
     template: Array<
         | {
               __typename: 'ComponentTemplatesOneColumn';
@@ -5634,6 +5698,15 @@ export type PaginationFragment = {
     selectPageLabel: string;
 };
 
+export type SeoFragment = {
+    title: string;
+    noIndex: boolean;
+    noFollow: boolean;
+    description: string;
+    keywords?: Array<{ keyword: string }>;
+    image?: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
+};
+
 export type TableFragment = {
     actionsTitle?: string;
     actionsLabel?: string;
@@ -6051,8 +6124,8 @@ export type GetHeaderQuery = {
               }
             | {}
         >;
-        notification?: { slug: string; SEO?: { title: string } };
-        userInfo?: { slug: string; SEO?: { title: string } };
+        notification?: { slug: string; SEO: { title: string } };
+        userInfo?: { slug: string; SEO: { title: string } };
     };
     configurableTexts?: { actions: { clear: string; apply: string } };
 };
@@ -6100,6 +6173,14 @@ export type GetLoginPageQuery = {
             }>;
         };
         image?: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
+        SEO: {
+            title: string;
+            noIndex: boolean;
+            noFollow: boolean;
+            description: string;
+            keywords?: Array<{ keyword: string }>;
+            image?: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
+        };
     };
     configurableTexts?: { actions: { show: string; hide: string } };
 };
@@ -6117,7 +6198,16 @@ export type GetPageQuery = {
         updatedAt?: any;
         publishedAt?: any;
         documentId: string;
-        SEO?: { title: string; noIndex: boolean };
+        hasOwnTitle: boolean;
+        parent?: { slug: string };
+        SEO: {
+            title: string;
+            noIndex: boolean;
+            noFollow: boolean;
+            description: string;
+            keywords?: Array<{ keyword: string }>;
+            image?: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
+        };
         template: Array<
             | {
                   __typename: 'ComponentTemplatesOneColumn';
@@ -6222,7 +6312,16 @@ export type GetPagesQuery = {
         updatedAt?: any;
         publishedAt?: any;
         documentId: string;
-        SEO?: { title: string; noIndex: boolean };
+        hasOwnTitle: boolean;
+        parent?: { slug: string };
+        SEO: {
+            title: string;
+            noIndex: boolean;
+            noFollow: boolean;
+            description: string;
+            keywords?: Array<{ keyword: string }>;
+            image?: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
+        };
         template: Array<
             | {
                   __typename: 'ComponentTemplatesOneColumn';
@@ -6444,6 +6543,21 @@ export const FormFieldComponentFragmentDoc = gql`
     }
     ${ErrorMessageComponentFragmentDoc}
 `;
+export const SeoFragmentDoc = gql`
+    fragment Seo on ComponentSeoSeo {
+        title
+        noIndex
+        noFollow
+        description
+        keywords {
+            keyword
+        }
+        image {
+            ...Media
+        }
+    }
+    ${MediaFragmentDoc}
+`;
 export const LoginPageFragmentDoc = gql`
     fragment LoginPage on LoginPage {
         createdAt
@@ -6463,9 +6577,13 @@ export const LoginPageFragmentDoc = gql`
         image {
             ...Media
         }
+        SEO {
+            ...Seo
+        }
     }
     ${FormFieldComponentFragmentDoc}
     ${MediaFragmentDoc}
+    ${SeoFragmentDoc}
 `;
 export const ComponentFragmentDoc = gql`
     fragment Component on Component {
@@ -6509,9 +6627,12 @@ export const PageFragmentDoc = gql`
         updatedAt
         publishedAt
         documentId
+        hasOwnTitle
+        parent {
+            slug
+        }
         SEO {
-            title
-            noIndex
+            ...Seo
         }
         template {
             __typename
@@ -6523,6 +6644,7 @@ export const PageFragmentDoc = gql`
             }
         }
     }
+    ${SeoFragmentDoc}
     ${OneColumnTemplateFragmentDoc}
     ${TwoColumnTemplateFragmentDoc}
 `;
@@ -6838,7 +6960,7 @@ export const GetComponentDocument = gql`
                 }
             }
         }
-        configurableTexts {
+        configurableTexts(locale: $locale) {
             dates {
                 today
                 yesterday

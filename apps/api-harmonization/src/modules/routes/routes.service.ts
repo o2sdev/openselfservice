@@ -27,10 +27,10 @@ export class SitemapService {
 
                 Object.entries(pagesMap).forEach(([_documentId, pages]) => {
                     const mainPage = pages.find((p) => p.locale === this.defaultLocale);
-                    if (!mainPage || mainPage.page.noIndex) return;
+                    if (!mainPage || mainPage.page.seo.noIndex) return;
 
                     const alternates: AlternateUrl[] = pages
-                        .filter((p) => p.locale !== this.defaultLocale && !p.page.noIndex)
+                        .filter((p) => p.locale !== this.defaultLocale && !p.page.seo.noIndex)
                         .map((p) => ({
                             href: this.buildUrl(p.page.slug),
                             hreflang: p.locale,

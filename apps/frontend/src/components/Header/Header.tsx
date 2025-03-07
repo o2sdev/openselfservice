@@ -49,7 +49,7 @@ export const Header = ({ headerData, alternativeUrls, children, user }: HeaderPr
         headerData.contextSwitcher && <ContextSwitcher context={headerData.contextSwitcher} />;
 
     return (
-        <header className="flex flex-col gap-4 mb-6">
+        <header className="flex flex-col gap-4">
             <>
                 <div className="md:block hidden">
                     <DesktopNavigation

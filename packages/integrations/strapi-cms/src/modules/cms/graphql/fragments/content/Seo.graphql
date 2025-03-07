@@ -1,0 +1,12 @@
+fragment Seo on ComponentSeoSeo {
+    title
+    noIndex
+    noFollow
+    description
+    keywords {
+        keyword
+    }
+    image {
+        ...Media
+    }
+}

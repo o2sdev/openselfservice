@@ -1,6 +1,7 @@
-import { CMS } from '@o2s/framework/modules';
+import { CMS, Models } from '@o2s/framework/modules';
 
 export class LoginPage {
     header!: CMS.Model.Header.Header;
-    data!: CMS.Model.LoginPage.LoginPage;
+    data!: Omit<CMS.Model.LoginPage.LoginPage, 'seo'>;
+    seo!: Models.SEO.Page;
 }

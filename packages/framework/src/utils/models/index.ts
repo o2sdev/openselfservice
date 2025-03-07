@@ -12,3 +12,4 @@ export * as FormField from './form-field';
 export * as Link from './link';
 export * as Media from './media';
 export * as Navigation from './navigation';
+export * as SEO from './seo';

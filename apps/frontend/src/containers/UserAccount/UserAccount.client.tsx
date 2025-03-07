@@ -13,17 +13,22 @@ import { signOutAction } from './Actions/Actions';
 import { UserAccountPureProps } from './UserAccount.types';
 
 export const UserAccountPure: React.FC<UserAccountPureProps> = (component) => {
-    const { fields, labels, basicInformationTitle, basicInformationDescription, user } = component;
+    const { fields, labels, basicInformationTitle, basicInformationDescription, user, title } = component;
 
     return (
         <div className="w-full">
             <div className="flex flex-col gap-6">
-                <div className="flex flex-col gap-4">
-                    <form action={signOutAction}>
-                        <div className="flex flex-col items-end">
-                            <Button className="w-full md:w-fit">{labels.logOut}</Button>
-                        </div>
-                    </form>
+                <div className="flex flex-col">
+                    <div className="flex flex-row gap-4 justify-between">
+                        <Typography variant="h1" asChild>
+                            <h1>{title}</h1>
+                        </Typography>
+                        <form action={signOutAction}>
+                            <div className="flex flex-col items-end">
+                                <Button className="w-full md:w-fit">{labels.logOut}</Button>
+                            </div>
+                        </form>
+                    </div>
 
                     <Separator className="my-6" />
 

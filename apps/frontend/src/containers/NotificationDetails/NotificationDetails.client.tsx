@@ -37,7 +37,7 @@ export const NotificationDetailsPure: React.FC<NotificationDetailsPureProps> = (
 
     return (
         <div className="w-full">
-            <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-6">
                 <div className="flex flex-col gap-2">
                     <div className="flex flex-col gap-2 sm:flex-row sm:gap-6 flex-wrap">
                         <Typography variant="h1" asChild>
@@ -57,7 +57,7 @@ export const NotificationDetailsPure: React.FC<NotificationDetailsPureProps> = (
 
                 <Separator />
 
-                <div className="flex flex-col gap-8">
+                <div className="flex flex-col gap-6">
                     <Container variant="narrow">
                         <RichText content={notification.content.value} />
                     </Container>

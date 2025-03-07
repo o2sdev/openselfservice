@@ -40,11 +40,11 @@ export class CmsService implements CMS.Service {
     }
 
     getPage(options: CMS.Request.GetCmsPageParams) {
-        return of(mapPage(options.slug));
+        return of(mapPage(options.slug, options.locale));
     }
 
-    getPages(_options: CMS.Request.GetCmsPagesParams) {
-        return of(getAllPages());
+    getPages(options: CMS.Request.GetCmsPagesParams) {
+        return of(getAllPages(options.locale));
     }
 
     getLoginPage(options: CMS.Request.GetCmsLoginPageParams) {
