@@ -11,6 +11,7 @@ import { PaymentsHistoryRenderer } from '@/containers/PaymentsHistory/PaymentsHi
 import { PaymentsSummaryRenderer } from '@/containers/PaymentsSummary/PaymentsSummary.renderer';
 import { TicketDetailsRenderer } from '@/containers/TicketDetails/TicketDetails.renderer';
 import { TicketListRenderer } from '@/containers/TicketList/TicketList.renderer';
+import { TicketRecentRenderer } from '@/containers/TicketRecent/TicketRecent.renderer';
 import { UserAccountRenderer } from '@/containers/UserAccount/UserAccount.renderer';
 
 export const renderComponents = (components: CMS.Model.Page.SlotComponent[], slug: string[], accessToken: string) => {
@@ -18,6 +19,8 @@ export const renderComponents = (components: CMS.Model.Page.SlotComponent[], slu
         switch (component.__typename as Modules.Page.Model.Components) {
             case 'TicketListComponent':
                 return <TicketListRenderer key={component.id} id={component.id} accessToken={accessToken} />;
+            case 'TicketRecentComponent':
+                return <TicketRecentRenderer key={component.id} id={component.id} accessToken={accessToken} />;
             case 'TicketDetailsComponent':
                 return (
                     <TicketDetailsRenderer slug={slug} key={component.id} id={component.id} accessToken={accessToken} />

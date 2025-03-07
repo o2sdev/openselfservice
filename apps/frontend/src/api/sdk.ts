@@ -13,6 +13,7 @@ import { paymentsHistory } from '@/api/components/payments-history';
 import { paymentsSummary } from '@/api/components/payments-summary';
 import { ticketDetails } from '@/api/components/ticket-details';
 import { ticketList } from '@/api/components/ticket-list';
+import { ticketRecent } from '@/api/components/ticket-recent';
 import { userAccount } from '@/api/components/user-account';
 import { loginPage } from '@/api/modules/login-page';
 import { page } from '@/api/modules/page';
@@ -34,6 +35,7 @@ export const sdk = extendSdk(internalSdk, {
     },
     components: {
         getTicketList: ticketList(internalSdk).components.getTicketList,
+        getTicketRecent: ticketRecent(internalSdk).components.getTicketRecent,
         getTicketDetails: ticketDetails(internalSdk).components.getTicketDetails,
         getNotificationList: notificationList(internalSdk).components.getNotificationList,
         getNotificationDetails: notificationDetails(internalSdk).components.getNotificationDetails,

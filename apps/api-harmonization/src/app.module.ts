@@ -31,6 +31,7 @@ import { PaymentsHistoryComponentModule } from '@o2s/api-harmonization/component
 import { PaymentsSummaryComponentModule } from '@o2s/api-harmonization/components/payments-summary/payments-summary.module';
 import { TicketDetailsComponentModule } from '@o2s/api-harmonization/components/ticket-details/ticket-details.module';
 import { TicketListComponentModule } from '@o2s/api-harmonization/components/ticket-list/ticket-list.module';
+import { TicketRecentComponentModule } from '@o2s/api-harmonization/components/ticket-recent/ticket-recent.module';
 import { UserAccountComponentModule } from '@o2s/api-harmonization/components/user-account/user-account.module';
 
 import { AppConfig } from './app.config';
@@ -76,6 +77,7 @@ import { RoutesModule } from './modules/routes/routes.module';
         PaymentsSummaryComponentModule.register(AppConfig),
         PaymentsHistoryComponentModule.register(AppConfig),
         UserAccountComponentModule.register(AppConfig),
+        TicketRecentComponentModule.register(AppConfig),
         // COMPONENT REGISTER
     ],
     providers: [
