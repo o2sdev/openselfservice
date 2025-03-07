@@ -36,7 +36,7 @@ const MOCK_FOOTER_EN: CMS.Model.Footer.Footer = {
             ],
         },
     ],
-    copyright: '© HyPro GmbH 2025',
+    copyright: '© Open Self Service 2025',
 };
 
 const MOCK_FOOTER_PL: CMS.Model.Footer.Footer = {
@@ -75,7 +75,7 @@ const MOCK_FOOTER_PL: CMS.Model.Footer.Footer = {
             ],
         },
     ],
-    copyright: '© HyPro GmbH 2025',
+    copyright: '© Open Self Service 2025',
 };
 
 const MOCK_FOOTER_DE: CMS.Model.Footer.Footer = {
@@ -114,7 +114,7 @@ const MOCK_FOOTER_DE: CMS.Model.Footer.Footer = {
             ],
         },
     ],
-    copyright: '© HyPro GmbH 2025',
+    copyright: '© Open Self Service 2025',
 };
 
 export const mapFooter = (locale: string): CMS.Model.Footer.Footer => {

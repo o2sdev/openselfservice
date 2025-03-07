@@ -18,7 +18,7 @@ const MOCK_HEADER_LOGON_EN: CMS.Model.Header.Header = {
     items: [
         {
             __typename: 'NavigationGroup',
-            title: 'Selfservice',
+            title: 'Customer Portal',
             items: [
                 {
                     __typename: 'NavigationItem',
@@ -34,6 +34,11 @@ const MOCK_HEADER_LOGON_EN: CMS.Model.Header.Header = {
                     __typename: 'NavigationItem',
                     label: 'Invoices',
                     url: '/invoices',
+                },
+                {
+                    __typename: 'NavigationItem',
+                    label: 'Notifications',
+                    url: '/notifications',
                 },
             ],
         },
@@ -54,7 +59,7 @@ const MOCK_HEADER_LOGON_EN: CMS.Model.Header.Header = {
         label: 'Notifications',
     },
     contextSwitcher: {
-        label: 'Company',
+        label: 'Power Construction AG',
         clear: 'Clear',
         apply: 'Apply',
     },
@@ -77,7 +82,7 @@ const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
     items: [
         {
             __typename: 'NavigationGroup',
-            title: 'Selfservice',
+            title: 'Kunden Portal',
             items: [
                 {
                     __typename: 'NavigationItem',
@@ -93,6 +98,11 @@ const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
                     __typename: 'NavigationItem',
                     label: 'Rechnungen',
                     url: '/rechnungen',
+                },
+                {
+                    __typename: 'NavigationItem',
+                    label: 'Benachrichtigungen',
+                    url: '/benachrichtigungen',
                 },
             ],
         },
@@ -113,7 +123,7 @@ const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
         label: 'Benachrichtigungen',
     },
     contextSwitcher: {
-        label: 'Firma',
+        label: 'Power Construction AG',
         clear: 'Löschen',
         apply: 'Anwenden',
     },
@@ -136,7 +146,7 @@ const MOCK_HEADER_LOGON_PL: CMS.Model.Header.Header = {
     items: [
         {
             __typename: 'NavigationGroup',
-            title: 'Selfservice',
+            title: 'Portal klienta',
             items: [
                 {
                     __typename: 'NavigationItem',
@@ -152,6 +162,11 @@ const MOCK_HEADER_LOGON_PL: CMS.Model.Header.Header = {
                     __typename: 'NavigationItem',
                     label: 'Rachunki',
                     url: '/rachunki',
+                },
+                {
+                    __typename: 'NavigationItem',
+                    label: 'Powiadomienia',
+                    url: '/powiadomienia',
                 },
             ],
         },
@@ -172,7 +187,7 @@ const MOCK_HEADER_LOGON_PL: CMS.Model.Header.Header = {
         label: 'Powiadomienia',
     },
     contextSwitcher: {
-        label: 'Firma',
+        label: 'Power Construction AG',
         clear: 'Wyczyść',
         apply: 'Zastosuj',
     },
@@ -192,7 +207,7 @@ const MOCK_HEADER_LOGOUT_EN: CMS.Model.Header.Header = {
     items: [
         {
             __typename: 'NavigationItem',
-            label: 'Selfservice',
+            label: 'Customer Portal',
             url: '/',
         },
         {
@@ -216,7 +231,7 @@ const MOCK_HEADER_LOGOUT_DE: CMS.Model.Header.Header = {
     items: [
         {
             __typename: 'NavigationItem',
-            label: 'Selfservice',
+            label: 'Kunden Portal',
             url: '/',
         },
         {
@@ -240,7 +255,7 @@ const MOCK_HEADER_LOGOUT_PL: CMS.Model.Header.Header = {
     items: [
         {
             __typename: 'NavigationItem',
-            label: 'Selfservice',
+            label: 'Portal Klienta',
             url: '/',
         },
         {
