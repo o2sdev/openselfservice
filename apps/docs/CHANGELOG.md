@@ -1,5 +1,11 @@
 # @o2s/docs
 
+## 0.9.3
+
+### Patch Changes
+
+- 3f98ef5: new diagrams added
+
 ## 0.9.2
 
 ### Patch Changes
