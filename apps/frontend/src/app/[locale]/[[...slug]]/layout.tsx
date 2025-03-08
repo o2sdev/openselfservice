@@ -31,7 +31,7 @@ export default async function RootLayout({ children, params }: Props) {
         session.accessToken,
     );
 
-    if (!data) {
+    if (!data || !common) {
         return notFound();
     }
 

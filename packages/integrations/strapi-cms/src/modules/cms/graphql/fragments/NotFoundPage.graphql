@@ -1,0 +1,10 @@
+fragment NotFoundPage on NotFoundPage {
+    title
+    description
+    url
+    urlLabel
+    page {
+        slug
+    }
+}
+

@@ -29,6 +29,10 @@ export class GetCmsLoginPageParams {
     locale!: string;
 }
 
+export class GetCmsNotFoundPageParams {
+    locale!: string;
+}
+
 export class GetCmsHeaderParams {
     id!: string;
     locale!: string;

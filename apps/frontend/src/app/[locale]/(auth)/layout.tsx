@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation';
 import React from 'react';
 
 import { sdk } from '@/api/sdk';
@@ -16,6 +17,10 @@ export default async function RootLayout({ children, params }: Props) {
     const { locale } = await params;
 
     const { header } = await sdk.modules.getLoginPage({ 'x-locale': locale });
+
+    if (!header) {
+        return notFound();
+    }
 
     return (
         <div className="flex flex-col min-h-dvh">

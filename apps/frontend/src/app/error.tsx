@@ -1,7 +1,7 @@
+'use client';
+
 import { Inter } from 'next/font/google';
 import React from 'react';
-
-import { sdk } from '@/api/sdk';
 
 import { ErrorPage } from '@/components/ErrorPage/ErrorPage';
 
@@ -12,15 +12,21 @@ const inter = Inter({
     display: 'swap',
 });
 
-export default async function NotFound() {
-    const data = await sdk.modules.getNotFoundPage({
-        'x-locale': 'en',
-    });
-
+// hardcoded data from CMS as there seems to be no way to fetch this content at build time
+// this should be researched later
+export default function Error() {
+    const errorData = {
+        title: 'Something went wrong!',
+        description: '<p>The server was unable to complete your request. Please try again later.</p>',
+        link: {
+            url: '/',
+            label: 'Return to Homepage',
+        },
+    };
     return (
         <html lang="en" className={inter.className}>
             <head>
-                <title>{data?.title || 'Page not found'} | Open Self Service</title>
+                <title>{errorData.title} | Open Self Service</title>
                 <meta name="robots" content="noindex, nofollow" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
                 <link rel="preconnect" href="https://images.ctfassets.net" />
@@ -28,13 +34,10 @@ export default async function NotFound() {
             <body>
                 <main>
                     <ErrorPage
-                        errorType="404"
-                        title={data?.title || 'Page not found'}
-                        description={data?.description || 'The page you are looking for does not exist.'}
-                        link={{
-                            url: data?.url || '/',
-                            label: data?.urlLabel || 'Home',
-                        }}
+                        errorType="500"
+                        title={errorData.title}
+                        description={errorData.description}
+                        link={errorData.link}
                     />
                 </main>
             </body>
