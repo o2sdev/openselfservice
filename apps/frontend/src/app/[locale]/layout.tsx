@@ -30,7 +30,7 @@ export default async function RootLayout({ children, params }: Props) {
     const { locale } = await params;
 
     if (!routing.locales.includes(locale)) {
-        notFound();
+        return notFound();
     }
 
     const data = await sdk.modules.getInit(

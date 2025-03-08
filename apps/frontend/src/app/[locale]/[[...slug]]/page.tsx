@@ -36,6 +36,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         session?.accessToken,
     );
 
+    if (!data || !meta) {
+        return notFound();
+    }
+
     setRequestLocale(locale);
 
     return generateSeo({
@@ -70,7 +74,7 @@ export default async function Page({ params }: Props) {
         session.accessToken,
     );
 
-    if (!data) {
+    if (!data || !meta) {
         return notFound();
     }
 

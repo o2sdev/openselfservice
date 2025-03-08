@@ -19,6 +19,10 @@ export abstract class CmsService {
 
     abstract getLoginPage(options: CMS.Request.GetCmsLoginPageParams): Observable<CMS.Model.LoginPage.LoginPage>;
 
+    abstract getNotFoundPage(
+        options: CMS.Request.GetCmsNotFoundPageParams,
+    ): Observable<CMS.Model.NotFoundPage.NotFoundPage>;
+
     abstract getHeader(options: CMS.Request.GetCmsHeaderParams): Observable<CMS.Model.Header.Header>;
 
     abstract getFooter(options: CMS.Request.GetCmsEntryParams): Observable<CMS.Model.Footer.Footer>;

@@ -3,6 +3,7 @@ export * as LoginPage from './models/login-page.model';
 export * as Header from './models/header.model';
 export * as Footer from './models/footer.model';
 export * as AppConfig from './models/app-config.model';
+export * as NotFoundPage from './models/not-found-page.model';
 
 export * as FaqComponent from './models/components/faq.model';
 export * as TicketListComponent from './models/components/ticket-list.model';
