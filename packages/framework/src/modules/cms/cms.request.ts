@@ -19,6 +19,11 @@ export class GetCmsPageParams {
 export class GetCmsPagesParams {
     locale!: string;
 }
+export class GetCmsAlternativePagesParams {
+    id!: string;
+    slug!: string;
+    locale!: string;
+}
 
 export class GetCmsLoginPageParams {
     locale!: string;

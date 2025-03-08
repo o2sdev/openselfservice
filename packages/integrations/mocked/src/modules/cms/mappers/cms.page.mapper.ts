@@ -3,6 +3,7 @@ import { CMS } from '@o2s/framework/modules';
 const PAGE_DASHBOARD_PL: CMS.Model.Page.Page = {
     slug: '/',
     id: '1',
+    locale: 'pl',
     seo: {
         noIndex: false,
         noFollow: false,
@@ -23,24 +24,20 @@ const PAGE_DASHBOARD_PL: CMS.Model.Page.Page = {
     template: {
         __typename: 'TwoColumnTemplate',
         slots: {
-            top: [
-                {
-                    __typename: 'TicketListComponent',
-                    id: 'ticket-list-1',
-                },
-            ],
+            top: [],
             left: [
                 {
-                    __typename: 'TicketListComponent',
-                    id: 'ticket-list-1',
+                    __typename: 'PaymentsSummaryComponent',
+                    id: 'payments-summary-1',
                 },
             ],
             right: [
                 {
-                    __typename: 'NotificationListComponent',
-                    id: 'notification-list-1',
+                    __typename: 'TicketRecentComponent',
+                    id: 'ticket-recent-1',
                 },
             ],
+
             bottom: [
                 {
                     __typename: 'FaqComponent',
@@ -55,6 +52,7 @@ const PAGE_DASHBOARD_PL: CMS.Model.Page.Page = {
 const PAGE_DASHBOARD_EN: CMS.Model.Page.Page = {
     slug: '/',
     id: '1',
+    locale: 'en',
     seo: {
         noIndex: false,
         noFollow: false,
@@ -75,24 +73,20 @@ const PAGE_DASHBOARD_EN: CMS.Model.Page.Page = {
     template: {
         __typename: 'TwoColumnTemplate',
         slots: {
-            top: [
-                {
-                    __typename: 'TicketListComponent',
-                    id: 'ticket-list-1',
-                },
-            ],
+            top: [],
             left: [
                 {
-                    __typename: 'TicketListComponent',
-                    id: 'ticket-list-1',
+                    __typename: 'PaymentsSummaryComponent',
+                    id: 'payments-summary-1',
                 },
             ],
             right: [
                 {
-                    __typename: 'NotificationListComponent',
-                    id: 'notification-list-1',
+                    __typename: 'TicketRecentComponent',
+                    id: 'ticket-recent-1',
                 },
             ],
+
             bottom: [
                 {
                     __typename: 'FaqComponent',
@@ -107,6 +101,7 @@ const PAGE_DASHBOARD_EN: CMS.Model.Page.Page = {
 const PAGE_DASHBOARD_DE: CMS.Model.Page.Page = {
     slug: '/',
     id: '1',
+    locale: 'de',
     seo: {
         noIndex: false,
         noFollow: false,
@@ -127,24 +122,20 @@ const PAGE_DASHBOARD_DE: CMS.Model.Page.Page = {
     template: {
         __typename: 'TwoColumnTemplate',
         slots: {
-            top: [
-                {
-                    __typename: 'TicketListComponent',
-                    id: 'ticket-list-1',
-                },
-            ],
+            top: [],
             left: [
                 {
-                    __typename: 'TicketListComponent',
-                    id: 'ticket-list-1',
+                    __typename: 'PaymentsSummaryComponent',
+                    id: 'payments-summary-1',
                 },
             ],
             right: [
                 {
-                    __typename: 'NotificationListComponent',
-                    id: 'notification-list-1',
+                    __typename: 'TicketRecentComponent',
+                    id: 'ticket-recent-1',
                 },
             ],
+
             bottom: [
                 {
                     __typename: 'FaqComponent',
@@ -159,6 +150,7 @@ const PAGE_DASHBOARD_DE: CMS.Model.Page.Page = {
 const PAGE_TICKET_LIST_EN: CMS.Model.Page.Page = {
     id: '2',
     slug: '/cases',
+    locale: 'en',
     seo: {
         noIndex: false,
         noFollow: false,
@@ -197,6 +189,7 @@ const PAGE_TICKET_LIST_EN: CMS.Model.Page.Page = {
 const PAGE_TICKET_LIST_DE: CMS.Model.Page.Page = {
     id: '2',
     slug: '/faelle',
+    locale: 'de',
     seo: {
         noIndex: false,
         noFollow: false,
@@ -235,6 +228,7 @@ const PAGE_TICKET_LIST_DE: CMS.Model.Page.Page = {
 const PAGE_TICKET_LIST_PL: CMS.Model.Page.Page = {
     id: '2',
     slug: '/zgloszenia',
+    locale: 'pl',
     seo: {
         noIndex: false,
         noFollow: false,
@@ -273,6 +267,7 @@ const PAGE_TICKET_LIST_PL: CMS.Model.Page.Page = {
 const PAGE_TICKET_DETAILS_EN: CMS.Model.Page.Page = {
     id: '3',
     slug: '/cases/(.+)',
+    locale: 'en',
     seo: {
         noIndex: false,
         noFollow: false,
@@ -311,6 +306,7 @@ const PAGE_TICKET_DETAILS_EN: CMS.Model.Page.Page = {
 const PAGE_TICKET_DETAILS_DE: CMS.Model.Page.Page = {
     id: '3',
     slug: '/faelle/(.+)',
+    locale: 'de',
     seo: {
         noIndex: false,
         noFollow: false,
@@ -349,6 +345,7 @@ const PAGE_TICKET_DETAILS_DE: CMS.Model.Page.Page = {
 const PAGE_TICKET_DETAILS_PL: CMS.Model.Page.Page = {
     id: '3',
     slug: '/zgloszenia/(.+)',
+    locale: 'pl',
     seo: {
         noIndex: false,
         noFollow: false,
@@ -387,6 +384,7 @@ const PAGE_TICKET_DETAILS_PL: CMS.Model.Page.Page = {
 const PAGE_NOTIFICATION_LIST_EN: CMS.Model.Page.Page = {
     id: '4',
     slug: '/notifications',
+    locale: 'en',
     seo: {
         noIndex: false,
         noFollow: false,
@@ -425,6 +423,7 @@ const PAGE_NOTIFICATION_LIST_EN: CMS.Model.Page.Page = {
 const PAGE_NOTIFICATION_LIST_DE: CMS.Model.Page.Page = {
     id: '4',
     slug: '/benachrichtigungen',
+    locale: 'de',
     seo: {
         noIndex: false,
         noFollow: false,
@@ -463,6 +462,7 @@ const PAGE_NOTIFICATION_LIST_DE: CMS.Model.Page.Page = {
 const PAGE_NOTIFICATION_LIST_PL: CMS.Model.Page.Page = {
     id: '4',
     slug: '/powiadomienia',
+    locale: 'pl',
     seo: {
         noIndex: false,
         noFollow: false,
@@ -501,6 +501,7 @@ const PAGE_NOTIFICATION_LIST_PL: CMS.Model.Page.Page = {
 const PAGE_INVOICE_LIST_EN: CMS.Model.Page.Page = {
     id: '5',
     slug: '/invoices',
+    locale: 'en',
     seo: {
         noIndex: false,
         noFollow: false,
@@ -552,6 +553,7 @@ const PAGE_INVOICE_LIST_EN: CMS.Model.Page.Page = {
 const PAGE_INVOICE_LIST_DE: CMS.Model.Page.Page = {
     id: '5',
     slug: '/rechnungen',
+    locale: 'de',
     seo: {
         noIndex: false,
         noFollow: false,
@@ -603,6 +605,7 @@ const PAGE_INVOICE_LIST_DE: CMS.Model.Page.Page = {
 const PAGE_INVOICE_LIST_PL: CMS.Model.Page.Page = {
     id: '5',
     slug: '/rachunki',
+    locale: 'pl',
     seo: {
         noIndex: false,
         noFollow: false,
@@ -654,6 +657,7 @@ const PAGE_INVOICE_LIST_PL: CMS.Model.Page.Page = {
 const PAGE_NOTIFICATION_DETAILS_EN: CMS.Model.Page.Page = {
     id: '6',
     slug: '/notifications/(.+)',
+    locale: 'en',
     seo: {
         noIndex: false,
         noFollow: false,
@@ -692,6 +696,7 @@ const PAGE_NOTIFICATION_DETAILS_EN: CMS.Model.Page.Page = {
 const PAGE_NOTIFICATION_DETAILS_DE: CMS.Model.Page.Page = {
     id: '6',
     slug: '/benachrichtigungen/(.+)',
+    locale: 'de',
     seo: {
         noIndex: false,
         noFollow: false,
@@ -730,6 +735,7 @@ const PAGE_NOTIFICATION_DETAILS_DE: CMS.Model.Page.Page = {
 const PAGE_NOTIFICATION_DETAILS_PL: CMS.Model.Page.Page = {
     id: '6',
     slug: '/powiadomienia/(.+)',
+    locale: 'pl',
     seo: {
         noIndex: false,
         noFollow: false,
@@ -768,6 +774,7 @@ const PAGE_NOTIFICATION_DETAILS_PL: CMS.Model.Page.Page = {
 const PAGE_USER_ACCOUNT_EN: CMS.Model.Page.Page = {
     id: '7',
     slug: '/user-account',
+    locale: 'en',
     seo: {
         noIndex: false,
         noFollow: false,
@@ -802,6 +809,7 @@ const PAGE_USER_ACCOUNT_EN: CMS.Model.Page.Page = {
 const PAGE_USER_ACCOUNT_DE: CMS.Model.Page.Page = {
     id: '7',
     slug: '/benutzerkonto',
+    locale: 'de',
     seo: {
         noIndex: false,
         noFollow: false,
@@ -836,6 +844,7 @@ const PAGE_USER_ACCOUNT_DE: CMS.Model.Page.Page = {
 const PAGE_USER_ACCOUNT_PL: CMS.Model.Page.Page = {
     id: '7',
     slug: '/konto-uzytkownika',
+    locale: 'pl',
     seo: {
         noIndex: false,
         noFollow: false,
@@ -884,19 +893,19 @@ export const mapPage = (slug: string, locale: string): CMS.Model.Page.Page | und
         case slug.match(/\/cases\/.+/)?.[0]:
             return {
                 ...PAGE_TICKET_DETAILS_EN,
-                slug: `/\/cases/${slug.match(/(.+)\/(.+)/)?.[2]}`,
+                slug: `/cases/${slug.match(/(.+)\/(.+)/)?.[2]}`,
                 updatedAt: '2025-01-01',
             };
         case slug.match(/\/faelle\/.+/)?.[0]:
             return {
                 ...PAGE_TICKET_DETAILS_DE,
-                slug: `/\/faelle/${slug.match(/(.+)\/(.+)/)?.[2]}`,
+                slug: `/faelle/${slug.match(/(.+)\/(.+)/)?.[2]}`,
                 updatedAt: '2025-01-01',
             };
         case slug.match(/\/zgloszenia\/.+/)?.[0]:
             return {
                 ...PAGE_TICKET_DETAILS_PL,
-                slug: `/\/zgloszenia/${slug.match(/(.+)\/(.+)/)?.[2]}`,
+                slug: `/zgloszenia/${slug.match(/(.+)\/(.+)/)?.[2]}`,
                 updatedAt: '2025-01-01',
             };
 
@@ -910,20 +919,20 @@ export const mapPage = (slug: string, locale: string): CMS.Model.Page.Page | und
         case slug.match(/\/notifications\/.+/)?.[0]:
             return {
                 ...PAGE_NOTIFICATION_DETAILS_EN,
-                slug: `/\/notifications/${slug.match(/(.+)\/(.+)/)?.[2]}`,
+                slug: `/notifications/${slug.match(/(.+)\/(.+)/)?.[2]}`,
                 updatedAt: '2025-01-01',
             };
 
         case slug.match(/\/benachrichtigungen\/.+/)?.[0]:
             return {
                 ...PAGE_NOTIFICATION_DETAILS_DE,
-                slug: `/\/benachrichtigungen/${slug.match(/(.+)\/(.+)/)?.[2]}`,
+                slug: `/benachrichtigungen/${slug.match(/(.+)\/(.+)/)?.[2]}`,
                 updatedAt: '2025-01-01',
             };
         case slug.match(/\/powiadomienia\/.+/)?.[0]:
             return {
                 ...PAGE_NOTIFICATION_DETAILS_PL,
-                slug: `/\/powiadomienia/${slug.match(/(.+)\/(.+)/)?.[2]}`,
+                slug: `/powiadomienia/${slug.match(/(.+)\/(.+)/)?.[2]}`,
                 updatedAt: '2025-01-01',
             };
 
@@ -945,6 +954,7 @@ export const mapPage = (slug: string, locale: string): CMS.Model.Page.Page | und
             return undefined;
     }
 };
+
 export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
     switch (locale) {
         case 'pl':
@@ -980,4 +990,38 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
         default:
             return [];
     }
+};
+
+export const getAlternativePages = (id: string, slug: string, locale: string): CMS.Model.Page.Page[] => {
+    return [
+        PAGE_DASHBOARD_PL,
+        PAGE_TICKET_LIST_PL,
+        PAGE_TICKET_DETAILS_PL,
+        PAGE_NOTIFICATION_LIST_PL,
+        PAGE_NOTIFICATION_DETAILS_PL,
+        PAGE_INVOICE_LIST_PL,
+        PAGE_USER_ACCOUNT_PL,
+        PAGE_DASHBOARD_DE,
+        PAGE_TICKET_LIST_DE,
+        PAGE_TICKET_DETAILS_DE,
+        PAGE_NOTIFICATION_LIST_DE,
+        PAGE_NOTIFICATION_DETAILS_DE,
+        PAGE_INVOICE_LIST_DE,
+        PAGE_USER_ACCOUNT_DE,
+        PAGE_DASHBOARD_EN,
+        PAGE_TICKET_LIST_EN,
+        PAGE_TICKET_DETAILS_EN,
+        PAGE_NOTIFICATION_LIST_EN,
+        PAGE_NOTIFICATION_DETAILS_EN,
+        PAGE_INVOICE_LIST_EN,
+        PAGE_USER_ACCOUNT_EN,
+    ]
+        .filter((page) => page.id === id)
+        .map((page) => mapPage(page.slug, locale)!)
+        .map((page) => {
+            return {
+                ...page,
+                slug: page.slug.replace('(.+)', slug.match(/(.+)\/(.+)/)?.[2] || ''),
+            };
+        });
 };

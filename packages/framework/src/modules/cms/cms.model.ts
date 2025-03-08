@@ -16,6 +16,7 @@ export * as InvoiceListComponent from './models/components/invoice-list.model';
 export * as InvoiceDetailsComponent from './models/components/invoice-details.model';
 export * as ResourceDetailsComponent from './models/components/resource-details.model';
 export * as ResourceListComponent from './models/components/resource-list.model';
+export * as TicketRecentComponent from './models/components/tickets-recent.model';
 export * as PaymentsSummaryComponent from './models/components/payments-summary.model';
 export * as PaymentsHistoryComponent from './models/components/payments-history.model';
 export * as UserAccountComponent from './models/components/user-account.model';

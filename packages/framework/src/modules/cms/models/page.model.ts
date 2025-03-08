@@ -3,6 +3,7 @@ import { Models } from '@o2s/framework/modules';
 export class Page {
     id!: string;
     slug!: string;
+    locale!: string;
     template!: PageTemplate;
     updatedAt!: string;
     seo!: Models.SEO.Page;

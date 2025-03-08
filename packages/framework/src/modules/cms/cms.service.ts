@@ -17,6 +17,8 @@ export abstract class CmsService {
 
     abstract getPages(options: CMS.Request.GetCmsPagesParams): Observable<CMS.Model.Page.Page[]>;
 
+    abstract getAlternativePages(options: CMS.Request.GetCmsEntryParams): Observable<CMS.Model.Page.Page[]>;
+
     abstract getLoginPage(options: CMS.Request.GetCmsLoginPageParams): Observable<CMS.Model.LoginPage.LoginPage>;
 
     abstract getNotFoundPage(
@@ -80,4 +82,8 @@ export abstract class CmsService {
     abstract getUserAccountComponent(
         options: CMS.Request.GetCmsEntryParams,
     ): Observable<CMS.Model.UserAccountComponent.UserAccountComponent>;
+
+    abstract getTicketRecentComponent(
+        options: CMS.Request.GetCmsEntryParams,
+    ): Observable<CMS.Model.TicketRecentComponent.TicketRecentComponent>;
 }

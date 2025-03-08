@@ -15,13 +15,14 @@ import { mapLoginPage } from './mappers/cms.login-page.mapper';
 import { mapNotFoundPage } from './mappers/cms.not-found-page.mapper';
 import { mapNotificationDetailsComponent } from './mappers/cms.notification-details.mapper';
 import { mapNotificationListComponent } from './mappers/cms.notification-list.mapper';
-import { getAllPages, mapPage } from './mappers/cms.page.mapper';
+import { getAllPages, getAlternativePages, mapPage } from './mappers/cms.page.mapper';
 import { mapPaymentsHistoryComponent } from './mappers/cms.payments-history.mapper';
 import { mapPaymentsSummaryComponent } from './mappers/cms.payments-summary.mapper';
 import { mapResourceDetailsComponent } from './mappers/cms.resource-details.mapper';
 import { mapResourceListComponent } from './mappers/cms.resource-list.mapper';
 import { mapTicketDetailsComponent } from './mappers/cms.ticket-details.mapper';
 import { mapTicketListComponent } from './mappers/cms.ticket-list.mapper';
+import { mapTicketRecentComponent } from './mappers/cms.ticket-recent.mapper';
 import { mapUserAccountComponent } from './mappers/cms.user-account.mapper';
 import { responseDelay } from '@/utils/delay';
 
@@ -45,6 +46,10 @@ export class CmsService implements CMS.Service {
 
     getPages(options: CMS.Request.GetCmsPagesParams) {
         return of(getAllPages(options.locale));
+    }
+
+    getAlternativePages(options: CMS.Request.GetCmsAlternativePagesParams) {
+        return of(getAlternativePages(options.id, options.slug, options.locale));
     }
 
     getLoginPage(options: CMS.Request.GetCmsLoginPageParams) {
@@ -117,5 +122,9 @@ export class CmsService implements CMS.Service {
 
     getUserAccountComponent(_options: CMS.Request.GetCmsEntryParams) {
         return of(mapUserAccountComponent(_options.locale)).pipe(responseDelay());
+    }
+
+    getTicketRecentComponent(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapTicketRecentComponent(options.locale)).pipe(responseDelay());
     }
 }

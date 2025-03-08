@@ -81,29 +81,20 @@ export class PageService {
                         if (!page) {
                             throw new NotFoundException();
                         }
-                        const otherLocalesRequests = this.SUPPORTED_LOCALES.filter(
-                            (loc) => loc !== headers['x-locale'],
-                        ).map((loc) =>
-                            this.cmsService.getPages({ locale: loc }).pipe(
-                                map((pages) => {
-                                    const alternatePage = pages.find((p) => p.id === page.id);
-                                    return alternatePage ? { page: alternatePage, locale: loc } : undefined;
-                                }),
-                            ),
-                        );
+
+                        const alternatePages = this.cmsService
+                            .getAlternativePages({ id: page.id, slug: query.slug, locale: headers['x-locale'] })
+                            .pipe(map((pages) => pages.filter((p) => p.id === page.id)));
 
                         return forkJoin([
                             of(header),
                             of(footer),
                             of({ page, locale: headers['x-locale'] }),
-                            ...otherLocalesRequests,
+                            alternatePages,
                         ]).pipe(
-                            map(([header, footer, mainPage, ...otherPages]) => {
-                                const alternatePages = otherPages.filter(
-                                    (p): p is { page: CMS.Model.Page.Page; locale: string } =>
-                                        p !== undefined && p.page.id === page.id,
-                                );
-                                return mapPage(header, footer, mainPage.page, mainPage.locale, alternatePages);
+                            map(([header, footer, mainPage, alternatePages]) => {
+                                const alternates = alternatePages?.filter((p) => p?.id === page.id);
+                                return mapPage(header, footer, mainPage.page, mainPage.locale, alternates);
                             }),
                         );
                     }),

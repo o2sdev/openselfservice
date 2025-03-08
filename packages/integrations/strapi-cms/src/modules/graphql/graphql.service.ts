@@ -30,8 +30,16 @@ export class GraphqlService {
         return this.sdk.getAppConfig(params);
     }
 
+    public getLocales() {
+        return this.sdk.getLocales();
+    }
+
     public getPage(params: GetPageQueryVariables) {
         return this.sdk.getPage(params);
+    }
+
+    public getPages(params: GetPagesQueryVariables) {
+        return this.sdk.getPages(params);
     }
 
     public getLoginPage(params: GetLoginPageQueryVariables) {
@@ -48,10 +56,6 @@ export class GraphqlService {
 
     public getFooter(params: GetFooterQueryVariables) {
         return this.sdk.getFooter(params);
-    }
-
-    public getPages(params: GetPagesQueryVariables) {
-        return this.sdk.getPages(params);
     }
 
     public getComponent(params: GetComponentQueryVariables) {

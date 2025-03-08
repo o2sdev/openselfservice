@@ -17,6 +17,7 @@
                 "SUPPORTED_CURRENCIES",
                 "SUPPORTED_LOCALES",
                 "FRONT_BASE_URL",
+                "MOCKED_INTEGRATION_DELAYS_ENABLED",
                 "CMS_STRAPI_BASE_URL",
                 "CACHE_ENABLED",
                 "CACHE_TTL",

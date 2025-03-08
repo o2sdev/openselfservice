@@ -1,11 +1,12 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, NotImplementedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore module type mismatch
 import { parse, stringify } from 'flatted';
-import { Observable, forkJoin, from, map, mergeMap, of } from 'rxjs';
+import { Observable, concatMap, forkJoin, from, map, mergeMap, of } from 'rxjs';
 
-import { CMS, Cache } from '@o2s/framework/modules';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { CMS, Cache, Models } from '@o2s/framework/modules';
 
 import { mapAppConfig } from './mappers/cms.app-config.mapper';
 import { mapFooter } from './mappers/cms.footer.mapper';
@@ -27,6 +28,7 @@ import { mapResourceListComponent } from './mappers/components/cms.resource-list
 import { mapTicketDetailsComponent } from './mappers/components/cms.ticket-details.mapper';
 import { mapTicketListComponent } from './mappers/components/cms.ticket-list.mapper';
 import { mapUserAccountComponent } from './mappers/components/cms.user-account.mapper';
+import { PageFragment } from '@/generated/strapi';
 import { Service as GraphqlService } from '@/modules/graphql';
 
 @Injectable()
@@ -142,6 +144,42 @@ export class CmsService implements CMS.Service {
                     throw new NotFoundException();
                 }
                 return pages.data.pages.map((page) => mapPage(page));
+            }),
+        );
+    }
+
+    getAlternativePages(options: CMS.Request.GetCmsAlternativePagesParams) {
+        const locales = this.graphqlService.getLocales();
+
+        return forkJoin([locales]).pipe(
+            concatMap(([locales]) => {
+                return forkJoin(
+                    locales.data.i18NLocales.map((locale) =>
+                        this.graphqlService.getPages({
+                            locale: locale.code,
+                        }),
+                    ),
+                ).pipe(
+                    map((pages) => {
+                        if (!pages?.length) {
+                            throw new NotFoundException();
+                        }
+
+                        const allPages = pages.reduce<PageFragment[]>((prev, current) => {
+                            return [...prev, ...current.data.pages];
+                        }, []);
+
+                        return allPages
+                            .filter((page) => page.documentId === options.id)
+                            .map((page) => mapPage(page))
+                            .map((page) => {
+                                return {
+                                    ...page,
+                                    slug: page.slug.replace('(.+)', options.slug.match(/(.+)\/(.+)/)?.[2] || ''),
+                                };
+                            });
+                    }),
+                );
             }),
         );
     }
@@ -292,5 +330,11 @@ export class CmsService implements CMS.Service {
     getUserAccountComponent(options: CMS.Request.GetCmsEntryParams) {
         const key = `user-account-component-${options.id}-${options.locale}`;
         return this.getCachedComponent(key, () => this.getComponent(options).pipe(map(mapUserAccountComponent)));
+    }
+
+    getTicketRecentComponent(
+        _options: CMS.Request.GetCmsEntryParams,
+    ): Observable<CMS.Model.TicketRecentComponent.TicketRecentComponent> {
+        throw new NotImplementedException();
     }
 }

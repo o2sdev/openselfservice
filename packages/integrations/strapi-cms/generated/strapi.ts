@@ -6263,6 +6263,10 @@ export type GetHeaderQuery = {
     configurableTexts?: { actions: { clear: string; apply: string } };
 };
 
+export type GetLocalesQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetLocalesQuery = { i18NLocales: Array<{ code?: string }> };
+
 export type GetLoginPageQueryVariables = Exact<{
     locale: Scalars['I18NLocaleCode']['input'];
 }>;
@@ -7161,6 +7165,13 @@ export const GetHeaderDocument = gql`
     }
     ${HeaderFragmentDoc}
 `;
+export const GetLocalesDocument = gql`
+    query getLocales {
+        i18NLocales {
+            code
+        }
+    }
+`;
 export const GetLoginPageDocument = gql`
     query getLoginPage($locale: I18NLocaleCode!) {
         loginPage(locale: $locale) {
@@ -7212,6 +7223,7 @@ const GetAppConfigDocumentString = print(GetAppConfigDocument);
 const GetComponentDocumentString = print(GetComponentDocument);
 const GetFooterDocumentString = print(GetFooterDocument);
 const GetHeaderDocumentString = print(GetHeaderDocument);
+const GetLocalesDocumentString = print(GetLocalesDocument);
 const GetLoginPageDocumentString = print(GetLoginPageDocument);
 const GetNotFoundPageDocumentString = print(GetNotFoundPageDocument);
 const GetPageDocumentString = print(GetPageDocument);
@@ -7298,6 +7310,27 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
                         ...wrappedRequestHeaders,
                     }),
                 'getHeader',
+                'query',
+                variables,
+            );
+        },
+        getLocales(
+            variables?: GetLocalesQueryVariables,
+            requestHeaders?: GraphQLClientRequestHeaders,
+        ): Promise<{
+            data: GetLocalesQuery;
+            errors?: GraphQLError[];
+            extensions?: any;
+            headers: Headers;
+            status: number;
+        }> {
+            return withWrapper(
+                (wrappedRequestHeaders) =>
+                    client.rawRequest<GetLocalesQuery>(GetLocalesDocumentString, variables, {
+                        ...requestHeaders,
+                        ...wrappedRequestHeaders,
+                    }),
+                'getLocales',
                 'query',
                 variables,
             );

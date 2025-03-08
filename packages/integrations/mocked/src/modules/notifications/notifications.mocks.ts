@@ -75,11 +75,11 @@ const enNotificationTypes = [
     {
         title: `Fleet Recycling Report for Q${Math.floor(Math.random() * 4) + 1}`,
         content:
-            'Your fleet recycling report is now available. See how you and HyPro are contributing to environmental sustainability.',
+            'Your fleet recycling report is now available. See how you and PowerPro are contributing to environmental sustainability.',
     },
     {
         title: 'New Fleet Labels Available',
-        content: 'Your ordered additional fleet labels are now available for pickup at your HyPro Store.',
+        content: 'Your ordered additional fleet labels are now available for pickup at your PowerPro Store.',
     },
     {
         title: 'Software Update Available',
@@ -175,11 +175,11 @@ const plNotificationTypes = [
     {
         title: `Raport recyklingu floty za Q${Math.floor(Math.random() * 4) + 1}`,
         content:
-            'Twój raport recyklingu floty jest już dostępny. Zobacz, jak Ty i HyPro przyczyniacie się do zrównoważonego rozwoju środowiska.',
+            'Twój raport recyklingu floty jest już dostępny. Zobacz, jak Ty i PowerPro przyczyniacie się do zrównoważonego rozwoju środowiska.',
     },
     {
         title: 'Nowe etykiety floty dostępne',
-        content: 'Zamówione dodatkowe etykiety floty są teraz dostępne do odbioru w Twoim sklepie HyPro.',
+        content: 'Zamówione dodatkowe etykiety floty są teraz dostępne do odbioru w Twoim sklepie PowerPro.',
     },
     {
         title: 'Dostępna aktualizacja oprogramowania',
@@ -275,11 +275,12 @@ const deNotificationTypes = [
     {
         title: `Flottenrecycling-Bericht für Q${Math.floor(Math.random() * 4) + 1}`,
         content:
-            'Ihr Flottenrecycling-Bericht ist jetzt verfügbar. Sehen Sie, wie Sie und HyPro zur Umweltnachhaltigkeit beitragen.',
+            'Ihr Flottenrecycling-Bericht ist jetzt verfügbar. Sehen Sie, wie Sie und PowerPro zur Umweltnachhaltigkeit beitragen.',
     },
     {
         title: 'Neue Flottenetiketten verfügbar',
-        content: 'Ihre bestellten zusätzlichen Flottenetiketten sind jetzt zur Abholung in Ihrem HyPro-Shop verfügbar.',
+        content:
+            'Ihre bestellten zusätzlichen Flottenetiketten sind jetzt zur Abholung in Ihrem PowerPro-Shop verfügbar.',
     },
     {
         title: 'Software-Update verfügbar',

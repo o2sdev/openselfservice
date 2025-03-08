@@ -18,7 +18,7 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ layout = 'main-side', to
     const side = <div className="relative w-full max-w-[50%] md:block hidden">{children[1]}</div>;
 
     return (
-        <div className="flex grow w-full ml-auto mr-auto mb-6 max-w-7xl">
+        <div className="flex grow w-full ml-auto mr-auto max-w-7xl">
             {layout === 'main-side' ? (
                 <>
                     {main}
