@@ -42,7 +42,7 @@ cd apps/api-harmonization && npm run dev  # Start API Harmonization Server
 cd apps/frontend && npm run dev  # Start Next.js Frontend
 ```
 
-For more details, check the **[Running the project](https://www.openselfservice.com/docs/running-the-project)** guide.
+For more details, check the **[Running the project](https://www.openselfservice.com/docs/getting-started/running-locally)** guide.
 
 ## 🏗️ Project Structure
 
@@ -57,26 +57,26 @@ O2S follows a **monorepo structure** using **Turborepo** for managing apps and i
   /ui    # UI component library (shadcn/ui, Tailwind)
 ```
 
-For a detailed breakdown, visit **[Project structure](https://www.openselfservice.com/docs/project-structure)**.
+For a detailed breakdown, visit **[Project structure](https://www.openselfservice.com/docs/getting-started/project-structure)**.
 
 ## 🔌 Available Integrations
 
 O2S includes pre-built integrations and allows you to extend functionality as needed.
 
-| Integration                | Status         |
-| -------------------------- | -------------- |
-| **StrapiCMS**              | ✅ Available   |
-| **NextAuth**               | ✅ Available   |
-| **Redis cache**            | ✅ Available   |
-| **Search (Elasticsearch)** | 🔄 In progress |
-| **CRM (TBD)**              | 🔄 Planned     |
-| **ERP / Commerce (TBD)**   | 🔄 Planned     |
+| Integration              | Status         |
+|--------------------------| -------------- |
+| **StrapiCMS**            | ✅ Available   |
+| **NextAuth**             | ✅ Available   |
+| **Redis cache**          | ✅ Available   |
+| **Search (Algolia)**     | 🔄 In progress |
+| **CRM (TBD)**            | 🔄 Planned     |
+| **ERP / Commerce (TBD)** | 🔄 Planned     |
 
 ## 🔥 Why Open Self Service?
 
-- **Fully composable** – Build customer portals without backend constraints.
+- **Fully composable** – Integrate multiple backend services and build your solution by combining their capabilities.
 - **Headless & API-first** – Integrate multiple services seamlessly.
-- **Future-proof** – Swap backends without breaking the frontend.
+- **Future-proof** – Build backend-agnostic customer portals. Swap backends without breaking the frontend.
 - **Modern stack** – Built with **Next.js, shadcn/ui, TypeScript, NestJS**.
 
 ## 🤝 Contributing

@@ -84,9 +84,6 @@ Then, go to **[GitHub](https://github.com/o2sdev/openselfservice)** and open a *
 
 ---
 
-
-TODO: confirm if we're doing this but maybe this would be encouraging?
-
 ## 🏆 Recognizing Contributions
 
 We will use the **[All Contributors](https://allcontributors.org/)** specification to recognize contributions of all kinds.
@@ -98,6 +95,6 @@ Once your PR is merged, we will add your name to the **Contributors list** in th
 
 For general questions, feel free to:
 - Open a **[GitHub Discussion](https://github.com/o2sdev/openselfservice/discussions)**.
-- Reach out on **[Twitter/X](https://twitter.com/openselfservice)**.
+- Reach out on **[Twitter/X](https://twitter.com/openselfservice)** or **[contact@openselfservice.com](mailto:contact@openselfservice.com)**.
 
 Thank you for contributing to Open Self Service!
