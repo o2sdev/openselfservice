@@ -1,5 +1,11 @@
 # @o2s/framework
 
+## 0.13.0
+
+### Minor Changes
+
+- 7959037: improved error handling across the app
+
 ## 0.12.0
 
 ### Minor Changes
