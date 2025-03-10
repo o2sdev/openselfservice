@@ -1,5 +1,11 @@
 # @o2s/integrations.strapi-cms
 
+## 0.12.0
+
+### Minor Changes
+
+- 0e3fe6c: improved error handling across the app
+
 ## 0.11.0
 
 ### Minor Changes

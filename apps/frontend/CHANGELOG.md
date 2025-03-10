@@ -1,5 +1,16 @@
 # @o2s/frontend
 
+## 0.12.0
+
+### Minor Changes
+
+- 0e3fe6c: improved error handling across the app
+
+### Patch Changes
+
+- Updated dependencies [0e3fe6c]
+    - @o2s/api-harmonization@0.13.0
+
 ## 0.11.0
 
 ### Minor Changes

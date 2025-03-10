@@ -1,5 +1,11 @@
 # @o2s/docs
 
+## 0.9.5
+
+### Patch Changes
+
+- 72492c9: fix: data flow diagram fixed
+
 ## 0.9.4
 
 ### Patch Changes
