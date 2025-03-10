@@ -2,7 +2,7 @@ import React, { type ReactNode, useState } from 'react';
 
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
-import WaitlistForm from '@site/src/components/WaitlistForm';
+import GetStartedButtons from '@site/src/components/GetStartedButtons';
 
 import { Body, H1 } from '../Typography';
 
@@ -11,15 +11,18 @@ export function HomepageBannerSection() {
     return (
         <div className="relative min-h-[calc(100vh-64px)] flex items-center">
             <div className="container grid md:grid-cols-2 items-center">
-                <div>
+                <div className="lg:w-[560px]">
                     <H1 className="mt-12 md:mt-0">
-                        <br /> {siteConfig.customFields.heading2 as ReactNode}
-                        <span className="text-highlighted">{siteConfig.customFields.brandName as ReactNode}</span>
+                        <br /> The Open Source
+                        <span className="text-highlighted"> Composable Frontend </span>for Customer Portals
                     </H1>
-                    <Body>{siteConfig.tagline}</Body>
+                    <Body>
+                        <b>{siteConfig.customFields.heading as ReactNode}</b>
+                        {siteConfig.tagline}
+                    </Body>
                     {/*<Body className="text-2xl font-semibold leading-150 mb-10">{siteConfig.tagline}</Body>*/}
                     <div className="mt-16">
-                        <WaitlistForm inputId="waitlistBannerFormInput" />
+                        <GetStartedButtons />
                     </div>
                 </div>
 

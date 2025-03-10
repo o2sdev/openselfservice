@@ -88,7 +88,7 @@ If you’d like to contribute, please check the **[Contribution Guide](CONTRIBUT
 
 - Website: [openselfservice.com](https://www.openselfservice.com)
 - Twitter/X: [@openselfservice](https://twitter.com/openselfservice)
-- GitHub Discussions: [Join the conversation](https://github.com/orgs/o2sdev/discussions)
+- GitHub Discussions: [Join the conversation](https://github.com/o2sdev/openselfservice/discussions)
 
 ## 📜 License
 

@@ -7,17 +7,17 @@ import tailwindPlugin from './plugins/tailwind-config';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
-let hideDocs = process.env.HIDE_DOCS === 'true';
+let hideDocs = false;
 
 const config: Config = {
     title: 'Open Self Service',
     tagline:
-        'An open-source framework for modern self-service applications. Connect APIs, unify data, and deliver scalable, high-performance frontends with Next.js, TypeScript, and NestJS.',
+        ' is an open-source framework that lets you easily integrate APIs, unify data, and build scalable, high-performance customer support portals with Next.js, TypeScript, and NestJS.',
     favicon: '/img/favicons/favicon.ico',
     customFields: {
         brandName: 'Open Self Service',
         heading: 'Open Self Service',
-        heading2: 'Build Composable Customer Portals with ',
+        heading2: 'The Open-Source Composable Frontend for Customer Support',
         fullPageTitle: 'Build Composable Customer Portals with Ease',
         description: 'An open source development kit for building composable Customer Portals.',
     },
@@ -28,13 +28,6 @@ const config: Config = {
             attributes: {
                 name: 'robots',
                 content: 'index, follow',
-            },
-        },
-        {
-            tagName: 'link',
-            attributes: {
-                rel: 'canonical',
-                href: 'https://www.openselfservice.com',
             },
         },
 
@@ -310,7 +303,7 @@ const config: Config = {
             {
                 name: 'keywords',
                 content:
-                    'Open Self Service, open source self service, headless customer portal, composable frontend, fullstack framework, composable architecture, MACH, Next.js, TypeScript, NestJS, headless integration, customer portal framework, headless CMS, headless self service, CRM headless frontend, e-commerce API, self-service platform, open-source frontend, CX',
+                    'Open Self Service, open source customer portal, headless customer portal, composable frontend, fullstack framework, composable architecture, MACH, Next.js, TypeScript, NestJS, headless integration, customer portal framework, headless CMS, headless self service, CRM headless frontend, e-commerce API, self-service platform, open-source frontend, composable CX',
             },
             { name: 'robots', content: 'index, follow' },
         ],

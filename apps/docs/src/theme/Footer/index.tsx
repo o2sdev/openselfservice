@@ -12,9 +12,9 @@ function Footer(): ReactNode {
     const { footer } = useThemeConfig();
     const location = useLocation();
 
-    if (!footer || location.pathname === '/') {
-        return null;
-    }
+    // if (!footer || location.pathname === '/') {
+    //     return null;
+    // }
 
     const { copyright, links, logo, style } = footer;
 
