@@ -1,5 +1,11 @@
 # @o2s/frontend
 
+## 0.12.1
+
+### Patch Changes
+
+- 6e5870c: removed `loading.tsx` in favor of component-specific loaders
+
 ## 0.12.0
 
 ### Minor Changes
