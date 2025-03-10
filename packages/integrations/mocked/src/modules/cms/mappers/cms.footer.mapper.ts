@@ -15,24 +15,40 @@ const MOCK_FOOTER_EN: CMS.Model.Footer.Footer = {
             __typename: 'NavigationGroup',
             title: 'Privacy Policy',
             items: [
-                { label: 'Privacy Policy 1', url: '/notifications', __typename: 'NavigationItem' },
-                { label: 'Privacy Policy 2', url: '/invoices', __typename: 'NavigationItem' },
+                {
+                    label: 'Privacy Policy 1',
+                    url: 'https://hycom.digital/privacy-policy',
+                    __typename: 'NavigationItem',
+                },
+                {
+                    label: 'Privacy Policy 2',
+                    url: 'https://hycom.digital/privacy-policy',
+                    __typename: 'NavigationItem',
+                },
             ],
         },
         {
             __typename: 'NavigationGroup',
             title: 'Terms of Service',
             items: [
-                { label: 'Terms of Service 1', url: '/notifications', __typename: 'NavigationItem' },
-                { label: 'Terms of Service 2', url: '/invoices', __typename: 'NavigationItem' },
+                {
+                    label: 'Terms of Service 1',
+                    url: 'https://hycom.digital/terms-and-conditions',
+                    __typename: 'NavigationItem',
+                },
+                {
+                    label: 'Terms of Service 2',
+                    url: 'https://hycom.digital/terms-and-conditions',
+                    __typename: 'NavigationItem',
+                },
             ],
         },
         {
             __typename: 'NavigationGroup',
             title: 'Cookies Settings',
             items: [
-                { label: 'Cookies Settings 1', url: '/notifications', __typename: 'NavigationItem' },
-                { label: 'Cookies Settings 2', url: '/invoices', __typename: 'NavigationItem' },
+                { label: 'Cookies Settings 1', url: '/', __typename: 'NavigationItem' },
+                { label: 'Cookies Settings 2', url: '/', __typename: 'NavigationItem' },
             ],
         },
     ],

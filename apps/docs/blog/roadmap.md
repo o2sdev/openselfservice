@@ -37,8 +37,8 @@ Case/ticket submission workflows, ensuring a better self-service experience.
 
 ## Integrations
 
-### Search (Elasticsearch)
-Adding support for Elasticsearch to improve search functionality across self-service portal / knowledge base.
+### Search (Algolia)
+Adding integration to Algolia to improve search functionality across self-service portal / knowledge base.
 
 ### Other integrations
 We're currently exploring other potential integrations. We will hopefully reveal a more clear plan soon.

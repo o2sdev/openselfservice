@@ -52,6 +52,7 @@ feat: add new authentication flow
 fix: resolve dashboard layout bug
 docs: update API reference
 ```
+If commits are related to specific apps you can structure the massage like so: `fix(frontend): fixing styles for Y component`
 
 ### 5. Push and Open a Pull Request (PR)
 

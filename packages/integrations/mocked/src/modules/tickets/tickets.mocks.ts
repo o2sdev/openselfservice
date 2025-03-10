@@ -132,7 +132,7 @@ Calibration request for PD-S laser measurement device. Annual calibration requir
 </p>
 <p>
 Device details: PD-S, Serial Number: 234567
-<a href="/calibration/requirements">View calibration requirements</a>
+<a href="/cases">View calibration requirements</a>
 </p>
             `,
         },
@@ -158,7 +158,7 @@ Calibration in progress. Initial testing shows device is measuring with 2mm devi
 </p>
 <p>
 Estimated completion: December 16th, 2024.
-<a href="/calibration/standards">View calibration standards</a>
+<a href="/cases">View calibration standards</a>
 </p>
 `,
         },
@@ -196,7 +196,7 @@ Theft report for SFC 22-A Cordless Drill Driver. Tool was stolen from secured jo
 </p>
 <p>
 Tool Details: SFC 22-A, Serial Number: 678901, Fleet Management Contract: FM-2023-4567
-<a href="/insurance/claims">View insurance claim process</a>
+<a href="/cases">View insurance claim process</a>
 </p>
             `,
         },
@@ -410,7 +410,7 @@ Prośba o kalibrację urządzenia pomiarowego PD-S. Wymagana roczna kalibracja d
 </p>
 <p>
 Szczegóły urządzenia: PD-S, Numer seryjny: 234567
-<a href="/calibration/requirements">Zobacz wymagania kalibracji</a>
+<a href="/cases">Zobacz wymagania kalibracji</a>
 </p>
             `,
         },
@@ -436,7 +436,7 @@ Kalibracja w toku. Wstępne testy wykazują, że urządzenie mierzy z odchylenie
 </p>
 <p>
 Szacowana data ukończenia: 16 grudnia 2024.
-<a href="/calibration/standards">Zobacz standardy kalibracji</a>
+<a href="/cases">Zobacz standardy kalibracji</a>
 </p>
 `,
         },
@@ -474,7 +474,7 @@ Zgłoszenie kradzieży wiertarko-wkrętarki SFC 22-A. Narzędzie zostało skradz
 </p>
 <p>
 Szczegóły narzędzia: SFC 22-A, Numer seryjny: 678901, Umowa Fleet Management: FM-2023-4567
-<a href="/insurance/claims">Zobacz proces zgłaszania ubezpieczenia</a>
+<a href="/cases">Zobacz proces zgłaszania ubezpieczenia</a>
 </p>
             `,
         },
@@ -688,7 +688,7 @@ Kalibrierungsanfrage für PD-S Laser-Messgerät. Jährliche Kalibrierung erforde
 </p>
 <p>
 Gerätedetails: PD-S, Seriennummer: 234567
-<a href="/calibration/requirements">Kalibrierungsanforderungen ansehen</a>
+<a href="/cases">Kalibrierungsanforderungen ansehen</a>
 </p>
             `,
         },
@@ -714,7 +714,7 @@ Kalibrierung im Gange. Erste Tests zeigen, dass das Gerät mit einer Abweichung 
 </p>
 <p>
 Voraussichtlicher Abschluss: 16. Dezember 2024.
-<a href="/calibration/standards">Kalibrierungsstandards ansehen</a>
+<a href="/cases">Kalibrierungsstandards ansehen</a>
 </p>
 `,
         },
@@ -752,7 +752,7 @@ Diebstahlmeldung für SFC 22-A Akku-Bohrschrauber. Das Werkzeug wurde am 9. Deze
 </p>
 <p>
 Werkzeugdetails: SFC 22-A, Seriennummer: 678901, Fleet Management Vertrag: FM-2023-4567
-<a href="/insurance/claims">Versicherungsanspruchsprozess ansehen</a>
+<a href="/cases">Versicherungsanspruchsprozess ansehen</a>
 </p>
             `,
         },

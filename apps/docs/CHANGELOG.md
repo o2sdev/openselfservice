@@ -1,5 +1,11 @@
 # @o2s/docs
 
+## 0.9.4
+
+### Patch Changes
+
+- aeaa8b9: fix: content tweaks
+
 ## 0.9.3
 
 ### Patch Changes

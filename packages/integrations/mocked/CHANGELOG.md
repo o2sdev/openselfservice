@@ -1,5 +1,11 @@
 # @o2s/integrations.mocked
 
+## 0.11.2
+
+### Patch Changes
+
+- aeaa8b9: fix: minor content tweaks
+
 ## 0.11.1
 
 ### Patch Changes

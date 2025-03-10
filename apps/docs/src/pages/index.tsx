@@ -33,8 +33,6 @@ export default function Home(): ReactNode {
                     <HomepageAboutSection />
                     <HomepageBenefitsSection />
                 </div>
-
-                <HomepageJoinTheWaitlistSection />
             </Layout>
         </div>
     );
