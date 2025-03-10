@@ -4,6 +4,7 @@ export class Filters<T> {
     description?: string;
     submit!: string;
     reset?: string;
+    close!: string;
     removeFilters?: string;
     items!: FilterItem<T & { sort: string }>[];
 }

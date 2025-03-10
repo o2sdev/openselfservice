@@ -53,7 +53,7 @@ export const Filters = <T, S extends FormikValues>({
                 </Button>
             </div>
             <Sheet open={filtersOpen} onOpenChange={setFiltersOpen}>
-                <SheetContent>
+                <SheetContent closeLabel={filters.close}>
                     <SheetHeader>
                         <SheetTitle>{title}</SheetTitle>
                         {description && <SheetDescription>{description}</SheetDescription>}

@@ -40,11 +40,18 @@ export const mapHeader = (data: GetHeaderQuery, baseURL?: string): CMS.Model.Hea
                   }
                 : undefined,
         languageSwitcherLabel: component.languageSwitcherLabel,
+        // TODO: get labels from CMS
+        mobileMenuLabel: {
+            open: 'Open menu',
+            close: 'Close Menu',
+        },
         contextSwitcher: component.contextLabel
             ? {
                   label: component.contextLabel,
                   clear: configurableTexts.actions.clear,
                   apply: configurableTexts.actions.apply,
+                  // TODO: fetch label from cms
+                  close: 'configurableTexts.actions.close',
               }
             : undefined,
     };

@@ -45,6 +45,7 @@ const MOCK_INVOICE_LIST_COMPONENT_EN: CMS.Model.InvoiceListComponent.InvoiceList
         description: 'Use filters to find specific invoices',
         submit: 'Apply Filters',
         reset: 'Reset Filters',
+        close: 'Close filters',
         removeFilters: 'Remove filters ({active})',
         items: [
             {
@@ -159,6 +160,7 @@ const MOCK_INVOICE_LIST_COMPONENT_DE: CMS.Model.InvoiceListComponent.InvoiceList
         description: 'Verwenden Sie Filter, um bestimmte Rechnungen zu finden',
         submit: 'Filter anwenden',
         reset: 'Filter zurücksetzen',
+        close: 'Filter schließen',
         removeFilters: 'Filter entfernen ({active})',
         items: [
             {
@@ -273,6 +275,7 @@ const MOCK_INVOICE_LIST_COMPONENT_PL: CMS.Model.InvoiceListComponent.InvoiceList
         description: 'Użyj filtrów, aby znaleźć konkretne faktury',
         submit: 'Zastosuj filtry',
         reset: 'Resetuj filtry',
+        close: 'Zamknij filtry',
         removeFilters: 'Usuń filtry ({active})',
         items: [
             {

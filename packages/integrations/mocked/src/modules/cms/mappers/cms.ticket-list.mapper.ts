@@ -50,6 +50,7 @@ const MOCK_TICKET_LIST_COMPONENT_EN: CMS.Model.TicketListComponent.TicketListCom
         description: 'Filter your cases by topic, type, or date range to find what you need quickly.',
         submit: 'Apply',
         reset: 'Clear',
+        close: 'Close filters',
         removeFilters: 'Remove filters ({active})',
         items: [
             {
@@ -168,6 +169,7 @@ const MOCK_TICKET_LIST_COMPONENT_DE: CMS.Model.TicketListComponent.TicketListCom
         description: 'Filtern Sie Ihre Fälle nach verschiedenen Kriterien oder ändern Sie die Sortierreihenfolge.',
         submit: 'Anwenden',
         reset: 'Zurücksetzen',
+        close: 'Filter schließen',
         removeFilters: 'Filter entfernen ({active})',
         items: [
             {
@@ -287,6 +289,7 @@ const MOCK_TICKET_LIST_COMPONENT_PL: CMS.Model.TicketListComponent.TicketListCom
             'Filtruj swoje zgłoszenia według tematu, typu lub zakresu dat, aby szybko znaleźć to, czego potrzebujesz.',
         submit: 'Zastosuj',
         reset: 'Wyczyść',
+        close: 'Zamknij filtry',
         removeFilters: 'Usuń filtry ({active})',
         items: [
             {

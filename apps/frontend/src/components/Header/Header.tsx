@@ -82,6 +82,7 @@ export const Header: React.FC<HeaderProps> = ({ headerData, alternativeUrls, chi
                         userSlot={<UserSlot />}
                         items={headerData.items}
                         title={headerData.title}
+                        mobileMenuLabel={headerData.mobileMenuLabel}
                     />
                 </div>
             </>

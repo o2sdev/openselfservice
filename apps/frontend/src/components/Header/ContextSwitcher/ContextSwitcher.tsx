@@ -33,7 +33,7 @@ export const ContextSwitcher = ({ context }: ContextSwitcherProps) => {
                 </Button>
             </SheetTrigger>
 
-            <SheetContent>
+            <SheetContent closeLabel={context.close}>
                 <div className="flex flex-col gap-6">
                     <SheetHeader>
                         <SheetTitle asChild>

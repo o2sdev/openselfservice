@@ -49,6 +49,7 @@ const MOCK_NOTIFICATION_LIST_COMPONENT_EN: CMS.Model.NotificationListComponent.N
         description: 'Use filters to find specific notifications',
         submit: 'Apply',
         reset: 'Clear',
+        close: 'Close filters',
         removeFilters: 'Remove filters ({active})',
         items: [
             {
@@ -176,6 +177,7 @@ const MOCK_NOTIFICATION_LIST_COMPONENT_DE: CMS.Model.NotificationListComponent.N
         description: 'Verwenden Sie Filter, um bestimmte Benachrichtigungen zu finden',
         submit: 'Anwenden',
         reset: 'Zurücksetzen',
+        close: 'Filter schließen',
         removeFilters: 'Filter entfernen ({active})',
         items: [
             {
@@ -303,6 +305,7 @@ const MOCK_NOTIFICATION_LIST_COMPONENT_PL: CMS.Model.NotificationListComponent.N
         description: 'Użyj filtrów, aby znaleźć konkretne powiadomienia',
         submit: 'Zastosuj',
         reset: 'Wyczyść',
+        close: 'Zamknij filtry',
         removeFilters: 'Usuń filtry ({active})',
         items: [
             {

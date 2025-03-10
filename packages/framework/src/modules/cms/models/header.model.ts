@@ -10,6 +10,10 @@ export class Header {
         label: string;
     };
     languageSwitcherLabel!: string;
+    mobileMenuLabel!: {
+        open: string;
+        close: string;
+    };
     contextSwitcher?: ContextSwitcher;
     items!: (NavigationGroup | NavigationItem)[];
     userInfo?: {
@@ -22,4 +26,5 @@ export class ContextSwitcher {
     label!: string;
     clear!: string;
     apply!: string;
+    close!: string;
 }

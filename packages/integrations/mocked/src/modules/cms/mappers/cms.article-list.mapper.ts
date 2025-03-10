@@ -28,7 +28,8 @@ const MOCK_ARTICLE_LIST_COMPONENT: CMS.Model.ArticleListComponent.ArticleListCom
         title: 'Filter articles',
         description: 'Use filters to find specific articles',
         submit: 'Apply filters',
-        reset: 'Reset filters',
+        reset: 'Reset Filters',
+        close: 'Close filters',
         items: [
             {
                 __typename: 'FilterDateRange',

@@ -27,6 +27,7 @@ export function MobileNavigation({
     userSlot,
     items,
     title,
+    mobileMenuLabel,
 }: MobileNavigationProps) {
     const locale = useLocale();
 
@@ -119,11 +120,15 @@ export function MobileNavigation({
                                 size="icon"
                                 className="h-10 w-10"
                                 onClick={() => setIsMenuOpen((prev) => !prev)}
+                                aria-label={mobileMenuLabel.open}
                             >
                                 {isMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
                             </Button>
                         </SheetTrigger>
-                        <SheetContent className="max-w-full w-full md:max-w-sm sm:max-w-full">
+                        <SheetContent
+                            className="max-w-full w-full md:max-w-sm sm:max-w-full"
+                            closeLabel={mobileMenuLabel.close}
+                        >
                             <SheetHeader className="mt-2">
                                 <SheetTitle className="text-center sr-only" asChild>
                                     <Typography variant="h2" asChild>

@@ -11,6 +11,8 @@ export const mapFilters = <T>(component?: FiltersFragment): Models.Filters.Filte
         description: component.description,
         submit: component.submitLabel,
         reset: component.clearLabel,
+        // TODO: fetch label from cms
+        close: 'Close filters',
         removeFilters: component.removeFiltersLabel,
         items: mapFiltersItems(component.items),
     };

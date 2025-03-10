@@ -11,6 +11,10 @@ const MOCK_HEADER_LOGON_EN: CMS.Model.Header.Header = {
         name: 'Logo',
     },
     languageSwitcherLabel: 'Language',
+    mobileMenuLabel: {
+        open: 'Open menu',
+        close: 'Close Menu',
+    },
     userInfo: {
         url: '/user-account',
         label: 'User Profile',
@@ -62,6 +66,7 @@ const MOCK_HEADER_LOGON_EN: CMS.Model.Header.Header = {
         label: 'Power Construction AG',
         clear: 'Clear',
         apply: 'Apply',
+        close: 'Close',
     },
 };
 const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
@@ -75,9 +80,9 @@ const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
         name: 'Logo',
     },
     languageSwitcherLabel: 'Sprache',
-    userInfo: {
-        url: '/benutzerkonto',
-        label: 'Benutzerprofil',
+    mobileMenuLabel: {
+        open: 'Menü öffnen',
+        close: 'Menü schließen',
     },
     items: [
         {
@@ -126,6 +131,7 @@ const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
         label: 'Power Construction AG',
         clear: 'Löschen',
         apply: 'Anwenden',
+        close: 'Schließen',
     },
 };
 const MOCK_HEADER_LOGON_PL: CMS.Model.Header.Header = {
@@ -139,6 +145,10 @@ const MOCK_HEADER_LOGON_PL: CMS.Model.Header.Header = {
         name: 'Logo',
     },
     languageSwitcherLabel: 'Język',
+    mobileMenuLabel: {
+        open: 'Otwórz menu',
+        close: 'Zamknij menu',
+    },
     userInfo: {
         url: '/konto-uzytkownika',
         label: 'Profil użytkownika',
@@ -190,6 +200,7 @@ const MOCK_HEADER_LOGON_PL: CMS.Model.Header.Header = {
         label: 'Power Construction AG',
         clear: 'Wyczyść',
         apply: 'Zastosuj',
+        close: 'Zamknij',
     },
 };
 
@@ -204,6 +215,10 @@ const MOCK_HEADER_LOGOUT_EN: CMS.Model.Header.Header = {
         name: 'Logo',
     },
     languageSwitcherLabel: 'Language',
+    mobileMenuLabel: {
+        open: 'Open menu',
+        close: 'Close Menu',
+    },
     items: [
         {
             __typename: 'NavigationItem',
@@ -228,6 +243,10 @@ const MOCK_HEADER_LOGOUT_DE: CMS.Model.Header.Header = {
         name: 'Logo',
     },
     languageSwitcherLabel: 'Sprache',
+    mobileMenuLabel: {
+        open: 'Menü öffnen',
+        close: 'Menü schließen',
+    },
     items: [
         {
             __typename: 'NavigationItem',
@@ -252,6 +271,10 @@ const MOCK_HEADER_LOGOUT_PL: CMS.Model.Header.Header = {
         name: 'Logo',
     },
     languageSwitcherLabel: 'Język',
+    mobileMenuLabel: {
+        open: 'Otwórz menu',
+        close: 'Zamknij menu',
+    },
     items: [
         {
             __typename: 'NavigationItem',

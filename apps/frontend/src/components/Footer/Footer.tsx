@@ -2,6 +2,7 @@
 
 import { useLocale } from 'next-intl';
 import Image from 'next/image';
+import { JSX } from 'react';
 
 import { Models } from '@o2s/framework/modules';
 
@@ -92,14 +93,18 @@ export const Footer: React.FC<FooterProps> = ({ data }) => {
 
     const AccordionItemTemplate = ({
         item,
+        tag,
         children,
     }: {
         item: Models.Navigation.NavigationGroup;
+        tag: keyof JSX.IntrinsicElements;
         children: React.ReactNode;
     }) => {
         return (
             <AccordionItem value={item.title} className="border-none">
-                <AccordionTrigger className={mobileNavigationItemClass}>{item.title}</AccordionTrigger>
+                <AccordionTrigger className={mobileNavigationItemClass} tag={tag}>
+                    {item.title}
+                </AccordionTrigger>
                 <AccordionContent className="p-0">{children}</AccordionContent>
             </AccordionItem>
         );
@@ -119,7 +124,7 @@ export const Footer: React.FC<FooterProps> = ({ data }) => {
 
     const NavigationGroup = ({ item }: { item: Models.Navigation.NavigationGroup }) => {
         return (
-            <AccordionItemTemplate item={item}>
+            <AccordionItemTemplate item={item} tag="h3">
                 <ul className="flex flex-col items-start gap-2 w-full pt-2 pl-3">
                     {item.items.map((item) => {
                         switch (item.__typename) {
@@ -129,7 +134,7 @@ export const Footer: React.FC<FooterProps> = ({ data }) => {
                                 return (
                                     <li key={item.title} className="w-full list-none">
                                         <Accordion type="multiple" className="flex flex-col gap-2">
-                                            <AccordionItemTemplate item={item}>
+                                            <AccordionItemTemplate item={item} tag="h4">
                                                 <ul className="flex flex-col items-start gap-2 w-full pt-2 pl-3">
                                                     {item.items.map((item) => {
                                                         if (item.__typename !== 'NavigationItem') {
@@ -194,7 +199,7 @@ export const Footer: React.FC<FooterProps> = ({ data }) => {
             <Separator />
             <div className="w-full m-auto max-w-7xl flex flex-col md:hidden">
                 <Accordion type="multiple" className="flex flex-col gap-2 p-2">
-                    <AccordionItemTemplate item={data as unknown as Models.Navigation.NavigationGroup}>
+                    <AccordionItemTemplate item={data as unknown as Models.Navigation.NavigationGroup} tag="h2">
                         <Accordion type="multiple" className="flex flex-col gap-2 pt-2 pl-3">
                             {data.items.map((item) => {
                                 switch (item.__typename) {

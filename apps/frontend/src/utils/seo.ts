@@ -36,7 +36,7 @@ export const generateSeo = ({
     alternates,
 }: SEOProps): Metadata => {
     const pageSlug = slug;
-    const url = `${SITE_URL}${locale === DEFAULT_LOCALE ? '' : `/${locale}`}${slug}`;
+    const url = `${SITE_URL}/${locale}${slug}`;
     const id = pageSlug.split('/')[2] || '';
 
     return {

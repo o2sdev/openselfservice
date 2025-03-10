@@ -29,6 +29,7 @@ const MOCK_RESOURCE_LIST_COMPONENT: CMS.Model.ResourceListComponent.ResourceList
         description: 'Use filters to find specific resources',
         submit: 'Apply Filters',
         reset: 'Reset Filters',
+        close: 'Close filters',
         items: [
             {
                 __typename: 'FilterSelect',
