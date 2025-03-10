@@ -37,16 +37,17 @@ export function DesktopNavigation({
     const pathname = usePathname();
     const locale = useLocale();
 
-    const activeNavigationGroup =
-        items.find((item) => {
-            if (item.__typename === 'NavigationGroup') {
-                return item.items
-                    .filter((item) => item.__typename === 'NavigationItem')
-                    .some((item) => item.url === pathname);
-            }
+    const activeNavigationGroup = isSignedIn
+        ? items.find((item) => {
+              if (item.__typename === 'NavigationGroup') {
+                  return item.items
+                      .filter((item) => item.__typename === 'NavigationItem')
+                      .some((item) => item.url === pathname);
+              }
 
-            return item.url === pathname;
-        }) || (isSignedIn ? items[0] : undefined);
+              return item.url === pathname;
+          }) || items[0]
+        : undefined;
 
     const navigationItemClass = cn(
         navigationMenuTriggerStyle(),
