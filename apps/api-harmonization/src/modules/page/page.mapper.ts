@@ -1,10 +1,8 @@
 import { CMS } from '../../models';
 
-import { Page } from './page.model';
+import { Init, Page } from './page.model';
 
 export const mapPage = (
-    header: CMS.Model.Header.Header,
-    footer: CMS.Model.Footer.Footer,
     page: CMS.Model.Page.Page,
     mainLocale: string,
     alternatePages: CMS.Model.Page.Page[] = [],
@@ -32,14 +30,27 @@ export const mapPage = (
             parent: page.parent,
             locales,
         },
-        common: {
-            header,
-            footer,
-        },
         data: {
             alternativeUrls,
             template: page.template,
             hasOwnTitle: page.hasOwnTitle,
+        },
+    };
+};
+
+export const mapInit = (
+    locales: {
+        value: string;
+        label: string;
+    }[],
+    header: CMS.Model.Header.Header,
+    footer: CMS.Model.Footer.Footer,
+): Init => {
+    return {
+        locales,
+        common: {
+            header,
+            footer,
         },
     };
 };

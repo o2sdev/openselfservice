@@ -12,13 +12,22 @@ export const mapAppConfig = (data: GetAppConfigQuery): CMS.Model.AppConfig.AppCo
     }
 
     return {
-        signedOut: {
-            header: component.signedOutHeader?.documentId,
-            footer: component.signedOutFooter?.documentId,
-        },
-        signedIn: {
-            header: component.signedInHeader?.documentId,
-            footer: component.signedInFooter?.documentId,
-        },
+        // TODO: fetch locales
+        locales: [
+            {
+                value: 'en',
+                label: 'EN',
+            },
+            {
+                value: 'de',
+                label: 'DE',
+            },
+            {
+                value: 'pl',
+                label: 'PL',
+            },
+        ],
+        header: component.header?.documentId,
+        footer: component.header?.documentId,
     };
 };

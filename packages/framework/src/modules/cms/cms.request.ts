@@ -43,5 +43,6 @@ export class GetCmsFooterParams {
 }
 
 export class GetCmsAppConfigParams {
+    referrer!: string;
     locale!: string;
 }

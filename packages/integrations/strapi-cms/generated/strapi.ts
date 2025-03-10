@@ -5157,10 +5157,8 @@ export type Resolvers<ContextType = any> = {
 
 export type AppConfigFragment = {
     documentId: string;
-    signedOutHeader?: { documentId: string };
-    signedInHeader?: { documentId: string };
-    signedOutFooter?: { documentId: string };
-    signedInFooter?: { documentId: string };
+    header?: { documentId: string };
+    footer?: { documentId: string };
 };
 
 export type ComponentFragment = {
@@ -5937,13 +5935,7 @@ export type GetAppConfigQueryVariables = Exact<{
 }>;
 
 export type GetAppConfigQuery = {
-    appConfig?: {
-        documentId: string;
-        signedOutHeader?: { documentId: string };
-        signedInHeader?: { documentId: string };
-        signedOutFooter?: { documentId: string };
-        signedInFooter?: { documentId: string };
-    };
+    appConfig?: { documentId: string; header?: { documentId: string }; footer?: { documentId: string } };
 };
 
 export type GetComponentQueryVariables = Exact<{
@@ -6562,16 +6554,10 @@ export type GetPagesQuery = {
 export const AppConfigFragmentDoc = gql`
     fragment AppConfig on AppConfig {
         documentId
-        signedOutHeader {
+        header: signedInHeader {
             documentId
         }
-        signedInHeader {
-            documentId
-        }
-        signedOutFooter {
-            documentId
-        }
-        signedInFooter {
+        footer: signedInFooter {
             documentId
         }
     }

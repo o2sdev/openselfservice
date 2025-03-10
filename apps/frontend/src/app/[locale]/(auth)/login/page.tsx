@@ -53,60 +53,64 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function LoginPage({ params }: Readonly<Props>) {
     const { locale, callbackUrl } = await params;
 
-    const { data } = await sdk.modules.getLoginPage({ 'x-locale': locale });
+    try {
+        const { data } = await sdk.modules.getLoginPage({ 'x-locale': locale });
 
-    if (!data) {
-        return notFound();
-    }
-
-    const handleSignIn = async (providerId: string, credentials?: FormValues) => {
-        'use server';
-
-        try {
-            await signIn(providerId, {
-                ...credentials,
-                redirectTo: callbackUrl ?? '/',
-            });
-        } catch (error) {
-            if (error instanceof AuthError) {
-                return redirect(`/error?error=${error.type}`);
-            }
-            throw error;
+        if (!data) {
+            notFound();
         }
-    };
 
-    return (
-        <AuthLayout>
-            <SignInForm
-                providers={providerMap}
-                labels={{
-                    title: data.title,
-                    subtitle: data.subtitle,
-                    password: {
-                        label: data.password.label,
-                        placeholder: data.password.placeholder,
-                        hide: data.labels?.hide,
-                        show: data.labels?.show,
-                        errorMessages: data.password?.errorMessages,
-                    },
-                    username: {
-                        label: data.username.label,
-                        placeholder: data.username.placeholder,
-                        errorMessages: data.username?.errorMessages,
-                    },
-                    signIn: data.signIn,
-                    providers: data.providers,
-                }}
-                onSignIn={handleSignIn}
-            />
-            {data.image?.url && (
-                <Image
-                    src={data.image?.url}
-                    alt={data.image?.alternativeText ?? ''}
-                    fill={true}
-                    className="object-cover"
+        const handleSignIn = async (providerId: string, credentials?: FormValues) => {
+            'use server';
+
+            try {
+                await signIn(providerId, {
+                    ...credentials,
+                    redirectTo: callbackUrl ?? '/',
+                });
+            } catch (error) {
+                if (error instanceof AuthError) {
+                    return redirect(`/error?error=${error.type}`);
+                }
+                throw error;
+            }
+        };
+
+        return (
+            <AuthLayout>
+                <SignInForm
+                    providers={providerMap}
+                    labels={{
+                        title: data.title,
+                        subtitle: data.subtitle,
+                        password: {
+                            label: data.password.label,
+                            placeholder: data.password.placeholder,
+                            hide: data.labels?.hide,
+                            show: data.labels?.show,
+                            errorMessages: data.password?.errorMessages,
+                        },
+                        username: {
+                            label: data.username.label,
+                            placeholder: data.username.placeholder,
+                            errorMessages: data.username?.errorMessages,
+                        },
+                        signIn: data.signIn,
+                        providers: data.providers,
+                    }}
+                    onSignIn={handleSignIn}
                 />
-            )}
-        </AuthLayout>
-    );
+                {data.image?.url && (
+                    <Image
+                        src={data.image?.url}
+                        alt={data.image?.alternativeText ?? ''}
+                        fill={true}
+                        className="object-cover"
+                    />
+                )}
+            </AuthLayout>
+        );
+    } catch (error) {
+        notFound();
+    }
 }

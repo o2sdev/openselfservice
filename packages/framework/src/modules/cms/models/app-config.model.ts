@@ -1,10 +1,8 @@
 export class AppConfig {
-    signedOut!: {
-        header?: string;
-        footer?: string;
-    };
-    signedIn!: {
-        header?: string;
-        footer?: string;
-    };
+    locales!: {
+        value: string;
+        label: string;
+    }[];
+    header?: string;
+    footer?: string;
 }

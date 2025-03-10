@@ -1,5 +1,6 @@
 'use client';
 
+import { useSession } from 'next-auth/react';
 import { useLocale } from 'next-intl';
 
 import { Models } from '@o2s/framework/modules';
@@ -30,6 +31,9 @@ export function DesktopNavigation({
     userSlot,
     items,
 }: DesktopNavigationProps) {
+    const session = useSession();
+    const isSignedIn = session?.status === 'authenticated';
+
     const pathname = usePathname();
     const locale = useLocale();
 
@@ -42,7 +46,7 @@ export function DesktopNavigation({
             }
 
             return item.url === pathname;
-        }) || items[0];
+        }) || (isSignedIn ? items[0] : undefined);
 
     const navigationItemClass = cn(
         navigationMenuTriggerStyle(),

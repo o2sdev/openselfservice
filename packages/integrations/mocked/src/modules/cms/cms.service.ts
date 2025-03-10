@@ -37,7 +37,7 @@ export class CmsService implements CMS.Service {
     }
 
     getAppConfig(options: CMS.Request.GetCmsAppConfigParams) {
-        return of(mapAppConfig(options.locale));
+        return of(mapAppConfig(options.referrer, options.locale));
     }
 
     getPage(options: CMS.Request.GetCmsPageParams) {
