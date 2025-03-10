@@ -1,5 +1,13 @@
 # @o2s/frontend
 
+## 0.12.2
+
+### Patch Changes
+
+- 8c8bcf4: SEO and accessibility improvements
+- Updated dependencies [8c8bcf4]
+    - @o2s/ui@0.10.1
+
 ## 0.12.1
 
 ### Patch Changes

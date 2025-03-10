@@ -1,5 +1,13 @@
 # @o2s/integrations.mocked
 
+## 0.12.1
+
+### Patch Changes
+
+- 8c8bcf4: SEO and accessibility improvements
+- Updated dependencies [8c8bcf4]
+    - @o2s/framework@0.13.1
+
 ## 0.12.0
 
 ### Minor Changes
