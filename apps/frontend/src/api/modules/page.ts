@@ -7,7 +7,7 @@ const API_URL = Modules.Page.URL;
 export const page = (sdk: Sdk) => ({
     modules: {
         getInit: (
-            params: Modules.Page.Request.GetPageParams,
+            params: Modules.Page.Request.GetInitQuery,
             headers: Headers.AppHeaders,
             authorization?: string,
         ): Promise<Modules.Page.Model.Init> =>
@@ -25,7 +25,7 @@ export const page = (sdk: Sdk) => ({
                 params: params,
             }),
         getPage: (
-            params: Modules.Page.Request.GetPageParams,
+            params: Modules.Page.Request.GetPageQuery,
             headers: Headers.AppHeaders,
             authorization: string,
         ): Promise<Modules.Page.Model.Page> =>

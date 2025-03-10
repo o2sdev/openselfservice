@@ -34,6 +34,11 @@ export class CmsController {
         return this.cms.getLoginPage(params);
     }
 
+    @Get('/not-found-page')
+    getNotFoundPage(@Query() params: Request.GetCmsNotFoundPageParams) {
+        return this.cms.getNotFoundPage(params);
+    }
+
     @Get('/header')
     getHeader(@Query() params: Request.GetCmsHeaderParams) {
         return this.cms.getHeader(params);

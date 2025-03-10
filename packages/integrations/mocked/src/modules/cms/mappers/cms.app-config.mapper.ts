@@ -1,39 +1,63 @@
 import { CMS } from '@o2s/framework/modules';
 
 const APP_CONFIG_EN: CMS.Model.AppConfig.AppConfig = {
-    signedOut: {
-        header: 'lwvbmnaayn6w7xy5soicv1k2',
-        footer: 'footer-1',
-    },
-    signedIn: {
-        header: 'fqj6nnyk4irqq5b7rnc4ogsj',
-        footer: 'footer-2',
-    },
+    locales: [
+        {
+            value: 'en',
+            label: 'EN',
+        },
+        {
+            value: 'de',
+            label: 'DE',
+        },
+        {
+            value: 'pl',
+            label: 'PL',
+        },
+    ],
+    header: 'fqj6nnyk4irqq5b7rnc4ogsj',
+    footer: 'footer-1',
 };
 
 const APP_CONFIG_DE: CMS.Model.AppConfig.AppConfig = {
-    signedOut: {
-        header: 'lwvbmnaayn6w7xy5soicv1k2',
-        footer: 'footer-1',
-    },
-    signedIn: {
-        header: 'fqj6nnyk4irqq5b7rnc4ogsj',
-        footer: 'footer-2',
-    },
+    locales: [
+        {
+            value: 'en',
+            label: 'EN',
+        },
+        {
+            value: 'de',
+            label: 'DE',
+        },
+        {
+            value: 'pl',
+            label: 'PL',
+        },
+    ],
+    header: 'fqj6nnyk4irqq5b7rnc4ogsj',
+    footer: 'footer-1',
 };
 
 const APP_CONFIG_PL: CMS.Model.AppConfig.AppConfig = {
-    signedOut: {
-        header: 'lwvbmnaayn6w7xy5soicv1k2',
-        footer: 'footer-1',
-    },
-    signedIn: {
-        header: 'fqj6nnyk4irqq5b7rnc4ogsj',
-        footer: 'footer-2',
-    },
+    locales: [
+        {
+            value: 'en',
+            label: 'EN',
+        },
+        {
+            value: 'de',
+            label: 'DE',
+        },
+        {
+            value: 'pl',
+            label: 'PL',
+        },
+    ],
+    header: 'fqj6nnyk4irqq5b7rnc4ogsj',
+    footer: 'footer-1',
 };
 
-export const mapAppConfig = (locale: string): CMS.Model.AppConfig.AppConfig => {
+export const mapAppConfig = (_referrer: string, locale: string): CMS.Model.AppConfig.AppConfig => {
     switch (locale) {
         case 'en':
             return APP_CONFIG_EN;

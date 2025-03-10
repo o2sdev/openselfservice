@@ -18,17 +18,21 @@ export class Init {
         value: string;
         label: string;
     }[];
+    common!: PageCommon;
 }
 
 export class Page {
-    common!: PageCommon;
     data?: PageData;
     meta!: Metadata;
 }
 
+export class NotFound {
+    common!: PageCommon;
+}
+
 export class Metadata {
     seo!: Models.SEO.Page;
-    parent!: {
+    parent?: {
         slug: string;
     };
     locales!: string[];

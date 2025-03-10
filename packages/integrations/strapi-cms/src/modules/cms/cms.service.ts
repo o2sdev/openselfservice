@@ -12,6 +12,7 @@ import { mapAppConfig } from './mappers/cms.app-config.mapper';
 import { mapFooter } from './mappers/cms.footer.mapper';
 import { mapHeader } from './mappers/cms.header.mapper';
 import { mapLoginPage } from './mappers/cms.login-page.mapper';
+import { mapNotFoundPage } from './mappers/cms.not-found-page.mapper';
 import { mapPage } from './mappers/cms.page.mapper';
 import { mapArticleDetailsComponent } from './mappers/components/cms.article-details.mapper';
 import { mapArticleListComponent } from './mappers/components/cms.article-list.mapper';
@@ -197,6 +198,25 @@ export class CmsService implements CMS.Service {
                     }
 
                     return mapLoginPage(loginPage.data, this.config.get('CMS_STRAPI_BASE_URL'));
+                }),
+            );
+        });
+    }
+
+    getNotFoundPage(options: CMS.Request.GetCmsNotFoundPageParams) {
+        const key = `not-found-page-${options.locale}`;
+        return this.getCachedComponent(key, () => {
+            const notFoundPage = this.graphqlService.getNotFoundPage({
+                locale: options.locale,
+            });
+
+            return forkJoin([notFoundPage]).pipe(
+                map(([notFoundPage]) => {
+                    if (!notFoundPage?.data.notFoundPage) {
+                        throw new NotFoundException();
+                    }
+
+                    return mapNotFoundPage(notFoundPage.data);
                 }),
             );
         });

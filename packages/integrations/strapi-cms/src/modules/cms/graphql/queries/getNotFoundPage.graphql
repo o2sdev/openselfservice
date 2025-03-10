@@ -1,0 +1,5 @@
+query getNotFoundPage($locale: I18NLocaleCode!) {
+    notFoundPage(locale: $locale) {
+        ...NotFoundPage
+    }
+}

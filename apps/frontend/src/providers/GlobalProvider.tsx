@@ -7,8 +7,8 @@ import { PriceService, usePriceService } from '@/hooks/usePriceService';
 
 interface GlobalProviderProps {
     config: Modules.Page.Model.Init;
-    children: ReactNode;
     locale: string;
+    children: ReactNode;
 }
 
 export interface GlobalContextType {

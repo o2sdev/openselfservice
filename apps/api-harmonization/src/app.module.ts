@@ -38,6 +38,7 @@ import { AppConfig } from './app.config';
 import { AppService } from './app.service';
 import { ContextHeadersMiddleware } from './middleware/context-headers.middleware';
 import { LoginPageModule } from './modules/login-page/login-page.module';
+import { NotFoundPageModule } from './modules/not-found-page/not-found-page.module';
 import { PageModule } from './modules/page/page.module';
 import { RoutesModule } from './modules/routes/routes.module';
 
@@ -62,6 +63,7 @@ import { RoutesModule } from './modules/routes/routes.module';
         PageModule.register(AppConfig),
         RoutesModule.register(AppConfig),
         LoginPageModule.register(AppConfig),
+        NotFoundPageModule.register(AppConfig),
 
         TicketListComponentModule.register(AppConfig),
         TicketDetailsComponentModule.register(AppConfig),

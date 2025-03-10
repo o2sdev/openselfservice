@@ -22,7 +22,7 @@ import { Link as NextLink } from '@/i18n';
 
 import { FooterProps } from './Footer.types';
 
-export const Footer = ({ data }: FooterProps) => {
+export const Footer: React.FC<FooterProps> = ({ data }) => {
     const locale = useLocale();
 
     const navigationItemClass = cn(
@@ -150,7 +150,7 @@ export const Footer = ({ data }: FooterProps) => {
     };
 
     return (
-        <footer className="flex flex-col mt-6">
+        <footer className="flex flex-col">
             <Separator />
             <div className="w-full m-auto max-w-7xl flex flex-row justify-between px-4 md:px-6 py-4 md:py-6">
                 <div className="flex gap-8 items-center justify-between w-full md:justify-start">

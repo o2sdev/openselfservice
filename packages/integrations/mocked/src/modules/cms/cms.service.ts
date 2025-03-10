@@ -12,6 +12,7 @@ import { mapHeader } from './mappers/cms.header.mapper';
 import { mapInvoiceDetailsComponent } from './mappers/cms.invoice-details.mapper';
 import { mapInvoiceListComponent } from './mappers/cms.invoice-list.mapper';
 import { mapLoginPage } from './mappers/cms.login-page.mapper';
+import { mapNotFoundPage } from './mappers/cms.not-found-page.mapper';
 import { mapNotificationDetailsComponent } from './mappers/cms.notification-details.mapper';
 import { mapNotificationListComponent } from './mappers/cms.notification-list.mapper';
 import { getAllPages, getAlternativePages, mapPage } from './mappers/cms.page.mapper';
@@ -36,7 +37,7 @@ export class CmsService implements CMS.Service {
     }
 
     getAppConfig(options: CMS.Request.GetCmsAppConfigParams) {
-        return of(mapAppConfig(options.locale));
+        return of(mapAppConfig(options.referrer, options.locale));
     }
 
     getPage(options: CMS.Request.GetCmsPageParams) {
@@ -53,6 +54,10 @@ export class CmsService implements CMS.Service {
 
     getLoginPage(options: CMS.Request.GetCmsLoginPageParams) {
         return of(mapLoginPage(options.locale));
+    }
+
+    getNotFoundPage(options: CMS.Request.GetCmsNotFoundPageParams) {
+        return of(mapNotFoundPage(options.locale));
     }
 
     getHeader(options: CMS.Request.GetCmsHeaderParams) {

@@ -28,31 +28,39 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     if (!session?.user) return signIn();
     const slugPrepared = slug ? `/${slug.join('/')}` : '/';
 
-    const { data, meta } = await sdk.modules.getPage(
-        {
+    try {
+        const { data, meta } = await sdk.modules.getPage(
+            {
+                slug: slugPrepared,
+            },
+            { 'x-locale': locale },
+            session?.accessToken,
+        );
+
+        if (!data || !meta) {
+            notFound();
+        }
+
+        setRequestLocale(locale);
+
+        return generateSeo({
             slug: slugPrepared,
-        },
-        { 'x-locale': locale },
-        session?.accessToken,
-    );
-
-    setRequestLocale(locale);
-
-    return generateSeo({
-        slug: slugPrepared,
-        locale,
-        keywords: meta.seo.keywords,
-        title: meta.seo.title,
-        description: meta.seo.description
-            ?.replace(/(<([^>]+)>)/gi, '')
-            .replace(/&nbsp;/gi, ' ')
-            .replace(/&amp;/gi, '&'),
-        image: meta.seo.image || undefined,
-        noIndex: meta.seo.noIndex,
-        noFollow: meta.seo.noFollow,
-        translations: meta.locales,
-        alternates: data?.alternativeUrls,
-    });
+            locale,
+            keywords: meta.seo.keywords,
+            title: meta.seo.title,
+            description: meta.seo.description
+                ?.replace(/(<([^>]+)>)/gi, '')
+                .replace(/&nbsp;/gi, ' ')
+                .replace(/&amp;/gi, '&'),
+            image: meta.seo.image || undefined,
+            noIndex: meta.seo.noIndex,
+            noFollow: meta.seo.noFollow,
+            translations: meta.locales,
+            alternates: data?.alternativeUrls,
+        });
+    } catch (error) {
+        notFound();
+    }
 }
 
 export default async function Page({ params }: Props) {
@@ -62,30 +70,34 @@ export default async function Page({ params }: Props) {
 
     const { locale, slug } = await params;
 
-    const { data, meta } = await sdk.modules.getPage(
-        {
-            slug: slug ? `/${slug.join('/')}` : '/',
-        },
-        { 'x-locale': locale },
-        session.accessToken,
-    );
+    try {
+        const { data, meta } = await sdk.modules.getPage(
+            {
+                slug: slug ? `/${slug.join('/')}` : '/',
+            },
+            { 'x-locale': locale },
+            session.accessToken,
+        );
 
-    if (!data) {
-        return notFound();
+        if (!data || !meta) {
+            notFound();
+        }
+
+        return (
+            <main className="flex flex-col gap-6 row-start-2 items-center sm:items-start">
+                {!data.hasOwnTitle && (
+                    <div className="flex flex-col gap-6 w-full">
+                        <Typography variant="h1" asChild>
+                            <h1>{meta.seo.title}</h1>
+                        </Typography>
+                        <Separator />
+                    </div>
+                )}
+
+                <PageTemplate slug={slug} data={data} session={session} />
+            </main>
+        );
+    } catch (error) {
+        notFound();
     }
-
-    return (
-        <main className="flex flex-col gap-6 row-start-2 items-center sm:items-start mt-6">
-            {!data.hasOwnTitle && (
-                <div className="flex flex-col gap-6 w-full">
-                    <Typography variant="h1" asChild>
-                        <h1>{meta.seo.title}</h1>
-                    </Typography>
-                    <Separator />
-                </div>
-            )}
-
-            <PageTemplate slug={slug} data={data} session={session} />
-        </main>
-    );
 }

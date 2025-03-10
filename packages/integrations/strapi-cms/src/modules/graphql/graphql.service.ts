@@ -8,6 +8,7 @@ import {
     GetFooterQueryVariables,
     GetHeaderQueryVariables,
     GetLoginPageQueryVariables,
+    GetNotFoundPageQueryVariables,
     GetPageQueryVariables,
     GetPagesQueryVariables,
     Sdk,
@@ -43,6 +44,10 @@ export class GraphqlService {
 
     public getLoginPage(params: GetLoginPageQueryVariables) {
         return this.sdk.getLoginPage(params);
+    }
+
+    public getNotFoundPage(params: GetNotFoundPageQueryVariables) {
+        return this.sdk.getNotFoundPage(params);
     }
 
     public getHeader(params: GetHeaderQueryVariables) {

@@ -6,9 +6,9 @@ import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
 
 import { CMS } from '../../models';
 
-import { mapPage } from './page.mapper';
-import { Init, Page } from './page.model';
-import { GetPageParams } from './page.request';
+import { mapInit, mapPage } from './page.mapper';
+import { Init, NotFound, Page } from './page.model';
+import { GetInitQuery, GetPageQuery } from './page.request';
 
 @Injectable()
 export class PageService {
@@ -43,60 +43,45 @@ export class PageService {
         );
     }
 
-    // TODO: remove mocked data and add real implementation
-    getInit(_query: GetPageParams, _headers: AppHeaders): Observable<Init> {
-        return of({
-            locales: [
-                {
-                    value: 'en',
-                    label: 'EN',
-                },
-                {
-                    value: 'de',
-                    label: 'DE',
-                },
-                {
-                    value: 'pl',
-                    label: 'PL',
-                },
-            ],
-        });
-    }
-
-    getPage(query: GetPageParams, headers: AppHeaders): Observable<Page> {
-        return this.cmsService.getAppConfig({ locale: headers['x-locale'] }).pipe(
+    getInit(query: GetInitQuery, headers: AppHeaders): Observable<Init> {
+        return this.cmsService.getAppConfig({ referrer: query.referrer, locale: headers['x-locale'] }).pipe(
             switchMap((appConfig) => {
                 const header = this.cmsService.getHeader({
-                    id: appConfig.signedIn.header || '',
+                    id: appConfig.header || '',
                     locale: headers['x-locale'],
                 });
+
                 const footer = this.cmsService.getFooter({
-                    id: appConfig.signedIn.footer || '',
+                    id: appConfig.footer || '',
                     locale: headers['x-locale'],
                 });
-                const page = this.cmsService.getPage({ slug: query.slug, locale: headers['x-locale'] });
 
-                return forkJoin([header, footer, page]).pipe(
-                    switchMap(([header, footer, page]) => {
-                        if (!page) {
-                            throw new NotFoundException();
-                        }
+                return forkJoin([header, footer]).pipe(
+                    map(([header, footer]) => {
+                        return mapInit(appConfig.locales, header, footer);
+                    }),
+                );
+            }),
+        );
+    }
 
-                        const alternatePages = this.cmsService
-                            .getAlternativePages({ id: page.id, slug: query.slug, locale: headers['x-locale'] })
-                            .pipe(map((pages) => pages.filter((p) => p.id === page.id)));
+    getPage(query: GetPageQuery, headers: AppHeaders): Observable<Page | NotFound> {
+        const page = this.cmsService.getPage({ slug: query.slug, locale: headers['x-locale'] });
 
-                        return forkJoin([
-                            of(header),
-                            of(footer),
-                            of({ page, locale: headers['x-locale'] }),
-                            alternatePages,
-                        ]).pipe(
-                            map(([header, footer, mainPage, alternatePages]) => {
-                                const alternates = alternatePages?.filter((p) => p?.id === page.id);
-                                return mapPage(header, footer, mainPage.page, mainPage.locale, alternates);
-                            }),
-                        );
+        return forkJoin([page]).pipe(
+            switchMap(([page]) => {
+                if (!page) {
+                    throw new NotFoundException();
+                }
+
+                const alternatePages = this.cmsService
+                    .getAlternativePages({ id: page.id, slug: query.slug, locale: headers['x-locale'] })
+                    .pipe(map((pages) => pages.filter((p) => p.id === page.id)));
+
+                return forkJoin([of(page), alternatePages]).pipe(
+                    map(([page, alternatePages]) => {
+                        const alternates = alternatePages?.filter((p) => p?.id === page.id);
+                        return mapPage(page, headers['x-locale'], alternates);
                     }),
                 );
             }),

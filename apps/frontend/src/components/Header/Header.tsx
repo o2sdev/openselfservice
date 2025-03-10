@@ -1,5 +1,6 @@
 'use client';
 
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 
 import { Link } from '@o2s/ui/components/link';
@@ -15,7 +16,10 @@ import { MobileNavigation } from './MobileNavigation/MobileNavigation';
 import { NotificationInfo } from './NotificationInfo/NotificationInfo';
 import { UserInfo } from './UserInfo/UserInfo';
 
-export const Header = ({ headerData, alternativeUrls, children, user }: HeaderProps) => {
+export const Header: React.FC<HeaderProps> = ({ headerData, alternativeUrls, children }) => {
+    const session = useSession();
+    const isSignedIn = session?.status === 'authenticated';
+
     const LogoSlot = (
         <Link asChild>
             <NextLink href="/" aria-label={headerData.logo?.name}>
@@ -31,22 +35,30 @@ export const Header = ({ headerData, alternativeUrls, children, user }: HeaderPr
         </Link>
     );
 
-    const UserSlot = () => headerData.userInfo && <UserInfo user={user} userInfo={headerData.userInfo} />;
+    const UserSlot = () => {
+        if (!isSignedIn || !headerData.userInfo) {
+            return undefined;
+        }
+
+        return <UserInfo user={session?.data?.user} userInfo={headerData.userInfo} />;
+    };
 
     const NotificationSlot = () => {
-        if (!headerData.notification?.url || !headerData.notification?.label) {
+        if (!isSignedIn || !headerData.notification?.url || !headerData.notification?.label) {
             return null;
         }
 
         return <NotificationInfo data={{ url: headerData.notification.url, label: headerData.notification.label }} />;
     };
 
-    const LocaleSlot = () => (
-        <LocaleSwitcher alternativeUrls={alternativeUrls} label={headerData.languageSwitcherLabel ?? 'Language'} />
-    );
+    const LocaleSlot = () => {
+        return (
+            <LocaleSwitcher alternativeUrls={alternativeUrls} label={headerData.languageSwitcherLabel ?? 'Language'} />
+        );
+    };
 
     const ContextSwitchSlot = () =>
-        headerData.contextSwitcher && <ContextSwitcher context={headerData.contextSwitcher} />;
+        isSignedIn && headerData.contextSwitcher && <ContextSwitcher context={headerData.contextSwitcher} />;
 
     return (
         <header className="flex flex-col gap-4">

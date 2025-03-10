@@ -1,15 +1,9 @@
 fragment AppConfig on AppConfig {
     documentId
-    signedOutHeader {
+    header: signedInHeader {
         documentId
     }
-    signedInHeader {
-        documentId
-    }
-    signedOutFooter {
-        documentId
-    }
-    signedInFooter {
+    footer: signedInFooter {
         documentId
     }
 }

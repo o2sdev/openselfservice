@@ -29,6 +29,10 @@ export class GetCmsLoginPageParams {
     locale!: string;
 }
 
+export class GetCmsNotFoundPageParams {
+    locale!: string;
+}
+
 export class GetCmsHeaderParams {
     id!: string;
     locale!: string;
@@ -39,5 +43,6 @@ export class GetCmsFooterParams {
 }
 
 export class GetCmsAppConfigParams {
+    referrer!: string;
     locale!: string;
 }
