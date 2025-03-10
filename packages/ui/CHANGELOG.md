@@ -1,5 +1,11 @@
 # @o2s/ui
 
+## 0.10.1
+
+### Patch Changes
+
+- 8c8bcf4: SEO and accessibility improvements
+
 ## 0.10.0
 
 ### Minor Changes

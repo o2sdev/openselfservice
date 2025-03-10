@@ -1,5 +1,11 @@
 # @o2s/docs
 
+## 0.9.6
+
+### Patch Changes
+
+- 28fc9c2: fix: social media preview image updated
+
 ## 0.9.5
 
 ### Patch Changes

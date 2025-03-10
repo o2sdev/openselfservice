@@ -1,5 +1,11 @@
 # @o2s/framework
 
+## 0.13.1
+
+### Patch Changes
+
+- 8c8bcf4: SEO and accessibility improvements
+
 ## 0.13.0
 
 ### Minor Changes
