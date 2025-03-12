@@ -14,30 +14,30 @@ import { TicketListRenderer } from '@/blocks/TicketList/TicketList.renderer';
 import { TicketRecentRenderer } from '@/blocks/TicketRecent/TicketRecent.renderer';
 import { UserAccountRenderer } from '@/blocks/UserAccount/UserAccount.renderer';
 
-export const renderBlocks = (blocks: CMS.Model.Page.SlotComponent[], slug: string[], accessToken: string) => {
+export const renderBlocks = (blocks: CMS.Model.Page.SlotBlock[], slug: string[], accessToken: string) => {
     return blocks.map((block) => {
         switch (block.__typename as Modules.Page.Model.Blocks) {
-            case 'TicketListComponent':
+            case 'TicketListBlock':
                 return <TicketListRenderer key={block.id} id={block.id} accessToken={accessToken} />;
-            case 'TicketRecentComponent':
+            case 'TicketRecentBlock':
                 return <TicketRecentRenderer key={block.id} id={block.id} accessToken={accessToken} />;
-            case 'TicketDetailsComponent':
+            case 'TicketDetailsBlock':
                 return <TicketDetailsRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
-            case 'NotificationListComponent':
+            case 'NotificationListBlock':
                 return <NotificationListRenderer key={block.id} id={block.id} accessToken={accessToken} />;
-            case 'NotificationDetailsComponent':
+            case 'NotificationDetailsBlock':
                 return (
                     <NotificationDetailsRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />
                 );
-            case 'FaqComponent':
+            case 'FaqBlock':
                 return <FaqRenderer key={block.id} id={block.id} accessToken={accessToken} />;
-            case 'InvoiceListComponent':
+            case 'InvoiceListBlock':
                 return <InvoiceListRenderer key={block.id} id={block.id} accessToken={accessToken} />;
-            case 'PaymentsSummaryComponent':
+            case 'PaymentsSummaryBlock':
                 return <PaymentsSummaryRenderer key={block.id} id={block.id} accessToken={accessToken} />;
-            case 'PaymentsHistoryComponent':
+            case 'PaymentsHistoryBlock':
                 return <PaymentsHistoryRenderer key={block.id} id={block.id} accessToken={accessToken} />;
-            case 'UserAccountComponent':
+            case 'UserAccountBlock':
                 return <UserAccountRenderer key={block.id} id={block.id} accessToken={accessToken} />;
         }
     });

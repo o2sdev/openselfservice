@@ -1,6 +1,6 @@
 import { CMS } from '@o2s/framework/modules';
 
-const MOCK_FAQ_LIST_COMPONENT_EN: CMS.Model.FaqComponent.FaqComponent = {
+const MOCK_FAQ_LIST_BLOCK_EN: CMS.Model.FaqBlock.FaqBlock = {
     id: 'faq-1',
     title: 'FAQ',
     items: [
@@ -65,7 +65,7 @@ You can track the status of your repair by visiting "Track Repairs" in the Devic
     },
 };
 
-const MOCK_FAQ_LIST_COMPONENT_DE: CMS.Model.FaqComponent.FaqComponent = {
+const MOCK_FAQ_LIST_BLOCK_DE: CMS.Model.FaqBlock.FaqBlock = {
     id: 'faq-1',
     title: 'FAQ',
     items: [
@@ -131,7 +131,7 @@ Sie können den Status Ihrer Reparatur verfolgen, indem Sie "Reparaturen verfolg
     },
 };
 
-const MOCK_FAQ_LIST_COMPONENT_PL: CMS.Model.FaqComponent.FaqComponent = {
+const MOCK_FAQ_LIST_BLOCK_PL: CMS.Model.FaqBlock.FaqBlock = {
     id: 'faq-1',
     title: 'FAQ',
     items: [
@@ -197,13 +197,13 @@ Możesz śledzić status swojej naprawy, odwiedzając "Śledź naprawy" w sekcji
     },
 };
 
-export const mapFaqComponent = (locale: string): CMS.Model.FaqComponent.FaqComponent => {
+export const mapFaqBlock = (locale: string): CMS.Model.FaqBlock.FaqBlock => {
     switch (locale) {
         case 'de':
-            return MOCK_FAQ_LIST_COMPONENT_DE;
+            return MOCK_FAQ_LIST_BLOCK_DE;
         case 'pl':
-            return MOCK_FAQ_LIST_COMPONENT_PL;
+            return MOCK_FAQ_LIST_BLOCK_PL;
         default:
-            return MOCK_FAQ_LIST_COMPONENT_EN;
+            return MOCK_FAQ_LIST_BLOCK_EN;
     }
 };

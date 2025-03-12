@@ -1,16 +1,16 @@
 import { CMS, Invoices } from '../../models';
 
-import { BarData, PaymentsHistoryComponent } from './payments-history.model';
+import { BarData, PaymentsHistoryBlock } from './payments-history.model';
 
 export const mapPaymentsHistory = (
-    cms: CMS.Model.PaymentsHistoryComponent.PaymentsHistoryComponent,
+    cms: CMS.Model.PaymentsHistoryBlock.PaymentsHistoryBlock,
     invoices: Invoices.Model.Invoices,
     locale: string,
-): PaymentsHistoryComponent => {
+): PaymentsHistoryBlock => {
     const currency = invoices.data[0]?.currency || '';
 
     return {
-        __typename: 'PaymentsHistoryComponent',
+        __typename: 'PaymentsHistoryBlock',
         id: cms.id,
         title: cms.title,
         labels: {

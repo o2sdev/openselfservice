@@ -8,10 +8,10 @@ import { PaymentsSummaryController } from './payments-summary.controller';
 import { PaymentsSummaryService } from './payments-summary.service';
 
 @Module({})
-export class PaymentsSummaryComponentModule {
+export class PaymentsSummaryBlockModule {
     static register(_config: ApiConfig): DynamicModule {
         return {
-            module: PaymentsSummaryComponentModule,
+            module: PaymentsSummaryBlockModule,
             providers: [PaymentsSummaryService, CMS.Service, Invoices.Service],
             controllers: [PaymentsSummaryController],
             exports: [PaymentsSummaryService],

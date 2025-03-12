@@ -1,8 +1,8 @@
 import { Tickets } from '../../models';
-import { Component } from '../../utils';
+import { Block } from '../../utils';
 
-export class TicketDetailsComponent extends Component.Component {
-    __typename!: 'TicketDetailsComponent';
+export class TicketDetailsBlock extends Block.Block {
+    __typename!: 'TicketDetailsBlock';
     data!: Ticket;
 }
 

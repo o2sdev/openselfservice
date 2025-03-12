@@ -5,16 +5,16 @@ import { Notifications } from '@o2s/integrations.mocked/sdk';
 
 import { extendSdk, getSdk } from '@o2s/framework/sdk';
 
-import { faq } from '@/api/components/faq';
-import { invoiceList } from '@/api/components/invoice-list';
-import { notificationDetails } from '@/api/components/notification-details';
-import { notificationList } from '@/api/components/notification-list';
-import { paymentsHistory } from '@/api/components/payments-history';
-import { paymentsSummary } from '@/api/components/payments-summary';
-import { ticketDetails } from '@/api/components/ticket-details';
-import { ticketList } from '@/api/components/ticket-list';
-import { ticketRecent } from '@/api/components/ticket-recent';
-import { userAccount } from '@/api/components/user-account';
+import { faq } from '@/api/blocks/faq';
+import { invoiceList } from '@/api/blocks/invoice-list';
+import { notificationDetails } from '@/api/blocks/notification-details';
+import { notificationList } from '@/api/blocks/notification-list';
+import { paymentsHistory } from '@/api/blocks/payments-history';
+import { paymentsSummary } from '@/api/blocks/payments-summary';
+import { ticketDetails } from '@/api/blocks/ticket-details';
+import { ticketList } from '@/api/blocks/ticket-list';
+import { ticketRecent } from '@/api/blocks/ticket-recent';
+import { userAccount } from '@/api/blocks/user-account';
 import { loginPage } from '@/api/modules/login-page';
 import { notFoundPage } from '@/api/modules/not-found-page';
 import { page } from '@/api/modules/page';

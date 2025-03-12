@@ -7,13 +7,13 @@ import { ArticleListController } from './article-list.controller';
 import { ArticleListService } from './article-list.service';
 
 @Module({})
-export class ArticleListComponentModule {
+export class ArticleListBlockModule {
     static register(config: ApiConfig): DynamicModule {
         const cmsService = config.integrations.cms.service;
         const articleService = config.integrations.articles.service;
 
         return {
-            module: ArticleListComponentModule,
+            module: ArticleListBlockModule,
             providers: [
                 ArticleListService,
                 {

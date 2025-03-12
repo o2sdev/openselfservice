@@ -4,7 +4,7 @@ import { Auth } from '@o2s/framework/modules';
 import { LoggerService } from '@o2s/utils.logger';
 
 import { URL } from './';
-import { Get{{ pascalCase name }}ComponentQuery } from './{{ kebabCase name }}.request';
+import { Get{{ pascalCase name }}BlockQuery } from './{{ kebabCase name }}.request';
 import { {{ pascalCase name }}Service } from './{{ kebabCase name }}.service';
 
 @Controller(URL)
@@ -14,7 +14,7 @@ export class {{ pascalCase name }}Controller {
 
     @Get()
     @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
-    get{{ pascalCase name }}Component(@Query() query: Get{{ pascalCase name }}ComponentQuery) {
-        return this.service.get{{ pascalCase name }}Component(query);
+    get{{ pascalCase name }}Block(@Query() query: Get{{ pascalCase name }}BlockQuery) {
+        return this.service.get{{ pascalCase name }}Block(query);
     }
 }

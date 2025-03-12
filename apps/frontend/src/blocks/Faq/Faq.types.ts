@@ -6,4 +6,4 @@ export interface FaqProps {
     locale: string;
 }
 
-export type FaqPureProps = FaqProps & Blocks.Faq.Model.FaqComponent;
+export type FaqPureProps = FaqProps & Blocks.Faq.Model.FaqBlock;

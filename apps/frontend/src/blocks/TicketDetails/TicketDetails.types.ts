@@ -7,4 +7,4 @@ export interface TicketDetailsProps {
     locale: string;
 }
 
-export type TicketDetailsPureProps = TicketDetailsProps & Blocks.TicketDetails.Model.TicketDetailsComponent;
+export type TicketDetailsPureProps = TicketDetailsProps & Blocks.TicketDetails.Model.TicketDetailsBlock;

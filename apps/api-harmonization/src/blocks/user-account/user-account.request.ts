@@ -1,5 +1,5 @@
 import { CMS } from '@o2s/framework/modules';
 
-export class GetUserAccountComponentQuery implements Omit<CMS.Request.GetCmsEntryParams, 'locale'> {
+export class GetUserAccountBlockQuery implements Omit<CMS.Request.GetCmsEntryParams, 'locale'> {
     id!: string;
 }

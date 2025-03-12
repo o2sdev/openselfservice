@@ -1,6 +1,6 @@
 import { CMS } from '@o2s/framework/modules';
 
-const MOCK_PAYMENTS_SUMMARY_COMPONENT_EN: CMS.Model.PaymentsSummaryComponent.PaymentsSummaryComponent = {
+const MOCK_PAYMENTS_SUMMARY_BLOCK_EN: CMS.Model.PaymentsSummaryBlock.PaymentsSummaryBlock = {
     id: 'payments-summary-1',
     overdue: {
         title: 'Overdue',
@@ -16,7 +16,7 @@ const MOCK_PAYMENTS_SUMMARY_COMPONENT_EN: CMS.Model.PaymentsSummaryComponent.Pay
     },
 };
 
-const MOCK_PAYMENTS_SUMMARY_COMPONENT_PL: CMS.Model.PaymentsSummaryComponent.PaymentsSummaryComponent = {
+const MOCK_PAYMENTS_SUMMARY_BLOCK_PL: CMS.Model.PaymentsSummaryBlock.PaymentsSummaryBlock = {
     id: 'payments-summary-1',
     overdue: {
         title: 'Zaległe',
@@ -32,7 +32,7 @@ const MOCK_PAYMENTS_SUMMARY_COMPONENT_PL: CMS.Model.PaymentsSummaryComponent.Pay
     },
 };
 
-const MOCK_PAYMENTS_SUMMARY_COMPONENT_DE: CMS.Model.PaymentsSummaryComponent.PaymentsSummaryComponent = {
+const MOCK_PAYMENTS_SUMMARY_BLOCK_DE: CMS.Model.PaymentsSummaryBlock.PaymentsSummaryBlock = {
     id: 'payments-summary-1',
     overdue: {
         title: 'Überfällig',
@@ -48,15 +48,13 @@ const MOCK_PAYMENTS_SUMMARY_COMPONENT_DE: CMS.Model.PaymentsSummaryComponent.Pay
     },
 };
 
-export const mapPaymentsSummaryComponent = (
-    locale: string,
-): CMS.Model.PaymentsSummaryComponent.PaymentsSummaryComponent => {
+export const mapPaymentsSummaryBlock = (locale: string): CMS.Model.PaymentsSummaryBlock.PaymentsSummaryBlock => {
     switch (locale) {
         case 'pl':
-            return MOCK_PAYMENTS_SUMMARY_COMPONENT_PL;
+            return MOCK_PAYMENTS_SUMMARY_BLOCK_PL;
         case 'de':
-            return MOCK_PAYMENTS_SUMMARY_COMPONENT_DE;
+            return MOCK_PAYMENTS_SUMMARY_BLOCK_DE;
         default:
-            return MOCK_PAYMENTS_SUMMARY_COMPONENT_EN;
+            return MOCK_PAYMENTS_SUMMARY_BLOCK_EN;
     }
 };

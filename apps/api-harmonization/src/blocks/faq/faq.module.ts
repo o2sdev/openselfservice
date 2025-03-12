@@ -8,10 +8,10 @@ import { FaqController } from './faq.controller';
 import { FaqService } from './faq.service';
 
 @Module({})
-export class FaqComponentModule {
+export class FaqBlockModule {
     static register(_config: ApiConfig): DynamicModule {
         return {
-            module: FaqComponentModule,
+            module: FaqBlockModule,
             providers: [FaqService, CMS.Service],
             controllers: [FaqController],
             exports: [FaqService],

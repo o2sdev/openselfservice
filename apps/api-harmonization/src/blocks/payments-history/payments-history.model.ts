@@ -1,7 +1,7 @@
-import { Component } from '../../utils';
+import { Block } from '../../utils';
 
-export class PaymentsHistoryComponent extends Component.Component {
-    __typename!: 'PaymentsHistoryComponent';
+export class PaymentsHistoryBlock extends Block.Block {
+    __typename!: 'PaymentsHistoryBlock';
     title?: string;
     labels!: {
         topSegment?: string;

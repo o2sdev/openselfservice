@@ -49,20 +49,20 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
             {
                 type: 'modify',
                 path: 'src/app.module.ts',
-                pattern: /(\/\/ COMPONENT IMPORT)/g,
-                template: `import { {{ pascalCase name }}ComponentModule } from '@o2s/api/blocks/{{kebabCase name}}/{{kebabCase name}}.module';\n// COMPONENT IMPORT`,
+                pattern: /(\/\/ BLOCK IMPORT)/g,
+                template: `import { {{ pascalCase name }}BlockModule } from '@o2s/api/blocks/{{kebabCase name}}/{{kebabCase name}}.module';\n// BLOCK IMPORT`,
             },
             {
                 type: 'modify',
                 path: 'src/app.module.ts',
-                pattern: /(\/\/ COMPONENT REGISTER)/g,
-                template: `{{ pascalCase name }}ComponentModule.register(AppConfig),\n        // COMPONENT REGISTER`,
+                pattern: /(\/\/ BLOCK REGISTER)/g,
+                template: `{{ pascalCase name }}BlockModule.register(AppConfig),\n        // BLOCK REGISTER`,
             },
             {
                 type: 'modify',
                 path: 'src/blocks/index.ts',
-                pattern: /(\/\/ COMPONENT EXPORT)/g,
-                template: `export * as {{ pascalCase name }} from './{{kebabCase name}}';\n// COMPONENT EXPORT`,
+                pattern: /(\/\/ BLOCK EXPORT)/g,
+                template: `export * as {{ pascalCase name }} from './{{kebabCase name}}';\n// BLOCK EXPORT`,
             },
         ],
     });

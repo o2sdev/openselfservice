@@ -6,15 +6,15 @@ import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
 import { CMS } from '../../models';
 
 import { mapFaq } from './faq.mapper';
-import { FaqComponent } from './faq.model';
-import { GetFaqComponentQuery } from './faq.request';
+import { FaqBlock } from './faq.model';
+import { GetFaqBlockQuery } from './faq.request';
 
 @Injectable()
 export class FaqService {
     constructor(private readonly cmsService: CMS.Service) {}
 
-    getFaqComponent(query: GetFaqComponentQuery, headers: AppHeaders): Observable<FaqComponent> {
-        const cms = this.cmsService.getFaqComponent({ ...query, locale: headers['x-locale'] });
+    getFaqBlock(query: GetFaqBlockQuery, headers: AppHeaders): Observable<FaqBlock> {
+        const cms = this.cmsService.getFaqBlock({ ...query, locale: headers['x-locale'] });
 
         return forkJoin([cms]).pipe(map(([cms]) => mapFaq(cms)));
     }

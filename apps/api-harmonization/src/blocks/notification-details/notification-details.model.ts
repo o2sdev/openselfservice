@@ -1,8 +1,8 @@
 import { Notifications } from '../../models';
-import { Component } from '../../utils';
+import { Block } from '../../utils';
 
-export class NotificationDetailsComponent extends Component.Component {
-    __typename!: 'NotificationDetailsComponent';
+export class NotificationDetailsBlock extends Block.Block {
+    __typename!: 'NotificationDetailsBlock';
     data!: Notification;
 }
 

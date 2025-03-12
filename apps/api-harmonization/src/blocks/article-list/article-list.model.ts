@@ -1,9 +1,9 @@
 import { Articles, Models } from '@o2s/framework/modules';
 
-import { Component } from '../../utils';
+import { Block } from '../../utils';
 
-export class ArticleListComponent extends Component.Component {
-    __typename!: 'ArticleListComponent';
+export class ArticleListBlock extends Block.Block {
+    __typename!: 'ArticleListBlock';
     title!: string;
     subtitle?: string;
     table!: Models.DataTable.DataTable<Articles.Model.Article>;

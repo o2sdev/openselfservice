@@ -1,6 +1,6 @@
 import { CMS } from '@o2s/framework/modules';
 
-const MOCK_TICKET_LIST_COMPONENT_EN: CMS.Model.TicketListComponent.TicketListComponent = {
+const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
     id: 'ticket-list-1',
     title: 'Cases overview',
     subtitle: 'Your recent cases',
@@ -119,7 +119,7 @@ const MOCK_TICKET_LIST_COMPONENT_EN: CMS.Model.TicketListComponent.TicketListCom
     detailsUrl: '/cases/{id}',
 };
 
-const MOCK_TICKET_LIST_COMPONENT_DE: CMS.Model.TicketListComponent.TicketListComponent = {
+const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
     id: 'ticket-list-1',
     title: 'Fallübersicht',
     subtitle: 'Ihre neuesten Fälle',
@@ -238,7 +238,7 @@ const MOCK_TICKET_LIST_COMPONENT_DE: CMS.Model.TicketListComponent.TicketListCom
     detailsUrl: '/faelle/{id}',
 };
 
-const MOCK_TICKET_LIST_COMPONENT_PL: CMS.Model.TicketListComponent.TicketListComponent = {
+const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
     id: 'ticket-list-1',
     title: 'Przegląd zgłoszeń',
     subtitle: 'Twoje ostatnie zgłoszenia',
@@ -358,13 +358,13 @@ const MOCK_TICKET_LIST_COMPONENT_PL: CMS.Model.TicketListComponent.TicketListCom
     detailsUrl: '/zgloszenia/{id}',
 };
 
-export const mapTicketListComponent = (locale: string): CMS.Model.TicketListComponent.TicketListComponent => {
+export const mapTicketListBlock = (locale: string): CMS.Model.TicketListBlock.TicketListBlock => {
     switch (locale) {
         case 'de':
-            return { ...MOCK_TICKET_LIST_COMPONENT_DE, detailsUrl: '/faelle/{id}' };
+            return { ...MOCK_TICKET_LIST_BLOCK_DE, detailsUrl: '/faelle/{id}' };
         case 'pl':
-            return { ...MOCK_TICKET_LIST_COMPONENT_PL, detailsUrl: '/zgloszenia/{id}' };
+            return { ...MOCK_TICKET_LIST_BLOCK_PL, detailsUrl: '/zgloszenia/{id}' };
         default:
-            return { ...MOCK_TICKET_LIST_COMPONENT_EN, detailsUrl: '/cases/{id}' };
+            return { ...MOCK_TICKET_LIST_BLOCK_EN, detailsUrl: '/cases/{id}' };
     }
 };

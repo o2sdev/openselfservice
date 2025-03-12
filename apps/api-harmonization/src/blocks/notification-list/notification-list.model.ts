@@ -1,10 +1,10 @@
 import { Models } from '@o2s/framework/modules';
 
 import { Notifications } from '../../models';
-import { Component } from '../../utils';
+import { Block } from '../../utils';
 
-export class NotificationListComponent extends Component.Component {
-    __typename!: 'NotificationListComponent';
+export class NotificationListBlock extends Block.Block {
+    __typename!: 'NotificationListBlock';
     title?: string;
     subtitle?: string;
     table!: Models.DataTable.DataTable<Notifications.Model.Notification>;

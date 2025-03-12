@@ -28,19 +28,19 @@ import { Pagination } from '@/components/Pagination/Pagination';
 import { InvoiceListPureProps } from './InvoiceList.types';
 
 export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, accessToken, ...component }) => {
-    const initialFilters: Blocks.InvoiceList.Request.GetInvoiceListComponentQuery = {
+    const initialFilters: Blocks.InvoiceList.Request.GetInvoiceListBlockQuery = {
         id: component.id,
         offset: 0,
         limit: component.pagination?.limit || 5,
     };
 
     const initialData = component.invoices.data;
-    const [data, setData] = useState<Blocks.InvoiceList.Model.InvoiceListComponent>(component);
+    const [data, setData] = useState<Blocks.InvoiceList.Model.InvoiceListBlock>(component);
     const [filters, setFilters] = useState(initialFilters);
     const [isPending, startTransition] = useTransition();
     const { priceService } = useGlobalContext();
 
-    const handleFilter = (data: Partial<Blocks.InvoiceList.Request.GetInvoiceListComponentQuery>) => {
+    const handleFilter = (data: Partial<Blocks.InvoiceList.Request.GetInvoiceListBlockQuery>) => {
         startTransition(async () => {
             const newFilters = { ...filters, ...data };
             const newData = await sdk.blocks.getInvoiceList(newFilters, { 'x-locale': locale }, accessToken);

@@ -6,4 +6,4 @@ export interface TicketListProps {
     locale: string;
 }
 
-export type TicketListPureProps = TicketListProps & Blocks.TicketList.Model.TicketListComponent;
+export type TicketListPureProps = TicketListProps & Blocks.TicketList.Model.TicketListBlock;

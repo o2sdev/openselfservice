@@ -1,14 +1,14 @@
 import { CMS, Users } from '../../models';
 
-import { UserAccountComponent } from './user-account.model';
+import { UserAccountBlock } from './user-account.model';
 
 export const mapUserAccount = (
-    cms: CMS.Model.UserAccountComponent.UserAccountComponent,
+    cms: CMS.Model.UserAccountBlock.UserAccountBlock,
     _locale: string,
     user?: Users.Model.User,
-): UserAccountComponent => {
+): UserAccountBlock => {
     return {
-        __typename: 'UserAccountComponent',
+        __typename: 'UserAccountBlock',
         id: cms.id,
         title: cms.title,
         basicInformationTitle: cms.basicInformationTitle,

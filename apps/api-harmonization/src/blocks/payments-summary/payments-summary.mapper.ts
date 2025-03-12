@@ -2,13 +2,13 @@ import { checkNegativeValue } from '@o2s/api-harmonization/utils/price';
 
 import { CMS, Invoices } from '../../models';
 
-import { PaymentsSummaryComponent } from './payments-summary.model';
+import { PaymentsSummaryBlock } from './payments-summary.model';
 
 export const mapPaymentsSummary = (
-    cms: CMS.Model.PaymentsSummaryComponent.PaymentsSummaryComponent,
+    cms: CMS.Model.PaymentsSummaryBlock.PaymentsSummaryBlock,
     invoices: Invoices.Model.Invoices,
     _locale: string,
-): PaymentsSummaryComponent => {
+): PaymentsSummaryBlock => {
     // TODO: get currency from header when it's implemented
     const currency = invoices.data[0]?.currency || 'PLN';
     const overdueInvoices = invoices.data.filter((invoice) => invoice.paymentStatus === 'PAYMENT_PAST_DUE');
@@ -29,7 +29,7 @@ export const mapPaymentsSummary = (
         }, 0);
 
     return {
-        __typename: 'PaymentsSummaryComponent',
+        __typename: 'PaymentsSummaryBlock',
         id: cms.id,
         currency: currency,
         overdue: {

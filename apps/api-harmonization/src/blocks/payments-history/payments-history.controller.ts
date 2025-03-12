@@ -4,7 +4,7 @@ import { LoggerService } from '@o2s/utils.logger';
 import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
 
 import { URL } from './';
-import { GetPaymentsHistoryComponentQuery } from './payments-history.request';
+import { GetPaymentsHistoryBlockQuery } from './payments-history.request';
 import { PaymentsHistoryService } from './payments-history.service';
 
 @Controller(URL)
@@ -13,7 +13,7 @@ export class PaymentsHistoryController {
     constructor(protected readonly service: PaymentsHistoryService) {}
 
     @Get()
-    getPaymentsHistoryComponent(@Headers() headers: AppHeaders, @Query() query: GetPaymentsHistoryComponentQuery) {
-        return this.service.getPaymentsHistoryComponent(query, headers);
+    getPaymentsHistoryBlock(@Headers() headers: AppHeaders, @Query() query: GetPaymentsHistoryBlockQuery) {
+        return this.service.getPaymentsHistoryBlock(query, headers);
     }
 }

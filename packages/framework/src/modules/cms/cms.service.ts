@@ -29,61 +29,61 @@ export abstract class CmsService {
 
     abstract getFooter(options: CMS.Request.GetCmsEntryParams): Observable<CMS.Model.Footer.Footer>;
 
-    abstract getFaqComponent(options: CMS.Request.GetCmsEntryParams): Observable<CMS.Model.FaqComponent.FaqComponent>;
+    abstract getFaqBlock(options: CMS.Request.GetCmsEntryParams): Observable<CMS.Model.FaqBlock.FaqBlock>;
 
-    abstract getTicketListComponent(
+    abstract getTicketListBlock(
         options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.TicketListComponent.TicketListComponent>;
+    ): Observable<CMS.Model.TicketListBlock.TicketListBlock>;
 
-    abstract getTicketDetailsComponent(
+    abstract getTicketDetailsBlock(
         options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.TicketDetailsComponent.TicketDetailsComponent>;
+    ): Observable<CMS.Model.TicketDetailsBlock.TicketDetailsBlock>;
 
-    abstract getNotificationListComponent(
+    abstract getNotificationListBlock(
         options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.NotificationListComponent.NotificationListComponent>;
+    ): Observable<CMS.Model.NotificationListBlock.NotificationListBlock>;
 
-    abstract getNotificationDetailsComponent(
+    abstract getNotificationDetailsBlock(
         options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.NotificationDetailsComponent.NotificationDetailsComponent>;
+    ): Observable<CMS.Model.NotificationDetailsBlock.NotificationDetailsBlock>;
 
-    abstract getArticleListComponent(
+    abstract getArticleListBlock(
         options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.ArticleListComponent.ArticleListComponent>;
+    ): Observable<CMS.Model.ArticleListBlock.ArticleListBlock>;
 
-    abstract getArticleDetailsComponent(
+    abstract getArticleDetailsBlock(
         options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.ArticleDetailsComponent.ArticleDetailsComponent>;
+    ): Observable<CMS.Model.ArticleDetailsBlock.ArticleDetailsBlock>;
 
-    abstract getInvoiceListComponent(
+    abstract getInvoiceListBlock(
         options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.InvoiceListComponent.InvoiceListComponent>;
+    ): Observable<CMS.Model.InvoiceListBlock.InvoiceListBlock>;
 
-    abstract getInvoiceDetailsComponent(
+    abstract getInvoiceDetailsBlock(
         options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.InvoiceDetailsComponent.InvoiceDetailsComponent>;
+    ): Observable<CMS.Model.InvoiceDetailsBlock.InvoiceDetailsBlock>;
 
-    abstract getResourceListComponent(
+    abstract getResourceListBlock(
         options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.ResourceListComponent.ResourceListComponent>;
+    ): Observable<CMS.Model.ResourceListBlock.ResourceListBlock>;
 
-    abstract getResourceDetailsComponent(
+    abstract getResourceDetailsBlock(
         options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.ResourceDetailsComponent.ResourceDetailsComponent>;
+    ): Observable<CMS.Model.ResourceDetailsBlock.ResourceDetailsBlock>;
 
-    abstract getPaymentsSummaryComponent(
+    abstract getPaymentsSummaryBlock(
         options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.PaymentsSummaryComponent.PaymentsSummaryComponent>;
+    ): Observable<CMS.Model.PaymentsSummaryBlock.PaymentsSummaryBlock>;
 
-    abstract getPaymentsHistoryComponent(
+    abstract getPaymentsHistoryBlock(
         options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.PaymentsHistoryComponent.PaymentsHistoryComponent>;
+    ): Observable<CMS.Model.PaymentsHistoryBlock.PaymentsHistoryBlock>;
 
-    abstract getUserAccountComponent(
+    abstract getUserAccountBlock(
         options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.UserAccountComponent.UserAccountComponent>;
+    ): Observable<CMS.Model.UserAccountBlock.UserAccountBlock>;
 
-    abstract getTicketRecentComponent(
+    abstract getTicketRecentBlock(
         options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.TicketRecentComponent.TicketRecentComponent>;
+    ): Observable<CMS.Model.TicketRecentBlock.TicketRecentBlock>;
 }

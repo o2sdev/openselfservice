@@ -27,18 +27,18 @@ import { Pagination } from '@/components/Pagination/Pagination';
 import { NotificationListPureProps } from './NotificationList.types';
 
 export const NotificationListPure: React.FC<NotificationListPureProps> = ({ locale, accessToken, ...component }) => {
-    const initialFilters: Blocks.NotificationList.Request.GetNotificationListComponentQuery = {
+    const initialFilters: Blocks.NotificationList.Request.GetNotificationListBlockQuery = {
         id: component.id,
         offset: 0,
         limit: component.pagination?.limit || 5,
     };
 
     const initialData = component.notifications.data;
-    const [data, setData] = useState<Blocks.NotificationList.Model.NotificationListComponent>(component);
+    const [data, setData] = useState<Blocks.NotificationList.Model.NotificationListBlock>(component);
     const [filters, setFilters] = useState(initialFilters);
     const [isPending, startTransition] = useTransition();
 
-    const handleFilter = (data: Partial<Blocks.NotificationList.Request.GetNotificationListComponentQuery>) => {
+    const handleFilter = (data: Partial<Blocks.NotificationList.Request.GetNotificationListBlockQuery>) => {
         startTransition(async () => {
             const newFilters = { ...filters, ...data };
             const newData = await sdk.blocks.getNotificationList(newFilters, { 'x-locale': locale }, accessToken);

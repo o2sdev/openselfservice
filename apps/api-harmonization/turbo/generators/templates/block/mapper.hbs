@@ -1,13 +1,13 @@
 import { CMS } from '../../models';
 
-import { {{ pascalCase name }}Component } from './{{ kebabCase name }}.model';
+import { {{ pascalCase name }}Block } from './{{ kebabCase name }}.model';
 
 export const map{{ pascalCase name }} = (
-    cms: CMS.Model.{{ pascalCase name }}Component.{{ pascalCase name }}Component,
+    cms: CMS.Model.{{ pascalCase name }}Block.{{ pascalCase name }}Block,
     locale: string,
-): {{ pascalCase name }}Component => {
+): {{ pascalCase name }}Block => {
     return {
-        __typename: '{{ pascalCase name }}Component',
+        __typename: '{{ pascalCase name }}Block',
         id: cms.id,
     };
 };

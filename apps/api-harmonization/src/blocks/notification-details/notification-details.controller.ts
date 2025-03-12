@@ -5,9 +5,9 @@ import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
 
 import { URL } from './';
 import {
-    GetNotificationDetailsComponentParams,
-    GetNotificationDetailsComponentQuery,
-    MarkNotificationAsComponentBody,
+    GetNotificationDetailsBlockParams,
+    GetNotificationDetailsBlockQuery,
+    MarkNotificationAsBlockBody,
 } from './notification-details.request';
 import { NotificationDetailsService } from './notification-details.service';
 
@@ -17,16 +17,16 @@ export class NotificationDetailsController {
     constructor(protected readonly service: NotificationDetailsService) {}
 
     @Get(':id')
-    getNotificationDetailsComponent(
+    getNotificationDetailsBlock(
         @Headers() headers: AppHeaders,
-        @Query() query: GetNotificationDetailsComponentQuery,
-        @Param() params: GetNotificationDetailsComponentParams,
+        @Query() query: GetNotificationDetailsBlockQuery,
+        @Param() params: GetNotificationDetailsBlockParams,
     ) {
-        return this.service.getNotificationDetailsComponent(params, query, headers);
+        return this.service.getNotificationDetailsBlock(params, query, headers);
     }
 
     @Post()
-    markNotificationAs(@Body() body: MarkNotificationAsComponentBody) {
+    markNotificationAs(@Body() body: MarkNotificationAsBlockBody) {
         return this.service.markNotificationAs(body);
     }
 }

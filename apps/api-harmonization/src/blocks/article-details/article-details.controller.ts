@@ -4,7 +4,7 @@ import { LoggerService } from '@o2s/utils.logger';
 import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
 
 import { URL } from './';
-import { GetArticleDetailsComponentParams, GetArticleDetailsComponentQuery } from './article-details.request';
+import { GetArticleDetailsBlockParams, GetArticleDetailsBlockQuery } from './article-details.request';
 import { ArticleDetailsService } from './article-details.service';
 
 @Controller(URL)
@@ -13,11 +13,11 @@ export class ArticleDetailsController {
     constructor(protected readonly service: ArticleDetailsService) {}
 
     @Get(':id')
-    getArticleDetailsComponent(
+    getArticleDetailsBlock(
         @Headers() headers: AppHeaders,
-        @Query() query: GetArticleDetailsComponentQuery,
-        @Param() params: GetArticleDetailsComponentParams,
+        @Query() query: GetArticleDetailsBlockQuery,
+        @Param() params: GetArticleDetailsBlockParams,
     ) {
-        return this.service.getArticleDetailsComponent(query, params, headers);
+        return this.service.getArticleDetailsBlock(query, params, headers);
     }
 }

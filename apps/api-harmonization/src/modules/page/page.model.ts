@@ -52,13 +52,13 @@ export class PageData {
 }
 
 export type Blocks =
-    | TicketList.Model.TicketListComponent['__typename']
-    | TicketDetails.Model.TicketDetailsComponent['__typename']
-    | NotificationList.Model.NotificationListComponent['__typename']
-    | NotificationDetails.Model.NotificationDetailsComponent['__typename']
-    | Faq.Model.FaqComponent['__typename']
-    | InvoiceList.Model.InvoiceListComponent['__typename']
-    | PaymentsSummary.Model.PaymentsSummaryComponent['__typename']
-    | PaymentsHistory.Model.PaymentsHistoryComponent['__typename']
-    | UserAccount.Model.UserAccountComponent['__typename']
-    | TicketRecent.Model.TicketRecentComponent['__typename'];
+    | TicketList.Model.TicketListBlock['__typename']
+    | TicketDetails.Model.TicketDetailsBlock['__typename']
+    | NotificationList.Model.NotificationListBlock['__typename']
+    | NotificationDetails.Model.NotificationDetailsBlock['__typename']
+    | Faq.Model.FaqBlock['__typename']
+    | InvoiceList.Model.InvoiceListBlock['__typename']
+    | PaymentsSummary.Model.PaymentsSummaryBlock['__typename']
+    | PaymentsHistory.Model.PaymentsHistoryBlock['__typename']
+    | UserAccount.Model.UserAccountBlock['__typename']
+    | TicketRecent.Model.TicketRecentBlock['__typename'];

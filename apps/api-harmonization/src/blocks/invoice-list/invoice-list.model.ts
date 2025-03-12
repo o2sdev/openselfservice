@@ -1,10 +1,10 @@
 import { Models } from '@o2s/framework/modules';
 
 import { Invoices } from '../../models';
-import { Component } from '../../utils';
+import { Block } from '../../utils';
 
-export class InvoiceListComponent extends Component.Component {
-    __typename!: 'InvoiceListComponent';
+export class InvoiceListBlock extends Block.Block {
+    __typename!: 'InvoiceListBlock';
     title?: string;
     pagination?: Models.Pagination.Pagination;
     filters?: Models.Filters.Filters<Invoices.Model.Invoice>;

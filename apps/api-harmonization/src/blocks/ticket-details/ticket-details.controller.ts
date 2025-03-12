@@ -4,7 +4,7 @@ import { LoggerService } from '@o2s/utils.logger';
 import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
 
 import { URL } from './';
-import { GetTicketDetailsComponentParams, GetTicketDetailsComponentQuery } from './ticket-details.request';
+import { GetTicketDetailsBlockParams, GetTicketDetailsBlockQuery } from './ticket-details.request';
 import { TicketDetailsService } from './ticket-details.service';
 
 @Controller(URL)
@@ -13,11 +13,11 @@ export class TicketDetailsController {
     constructor(protected readonly service: TicketDetailsService) {}
 
     @Get(':id')
-    getTicketDetailsComponent(
+    getTicketDetailsBlock(
         @Headers() headers: AppHeaders,
-        @Query() query: GetTicketDetailsComponentQuery,
-        @Param() params: GetTicketDetailsComponentParams,
+        @Query() query: GetTicketDetailsBlockQuery,
+        @Param() params: GetTicketDetailsBlockParams,
     ) {
-        return this.service.getTicketDetailsComponent(params, query, headers);
+        return this.service.getTicketDetailsBlock(params, query, headers);
     }
 }

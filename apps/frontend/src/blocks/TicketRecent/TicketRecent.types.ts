@@ -6,4 +6,4 @@ export interface TicketRecentProps {
     locale: string;
 }
 
-export type TicketRecentPureProps = TicketRecentProps & Blocks.TicketRecent.Model.TicketRecentComponent;
+export type TicketRecentPureProps = TicketRecentProps & Blocks.TicketRecent.Model.TicketRecentBlock;

@@ -6,7 +6,7 @@ import { Observable, map } from 'rxjs';
 import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
 
 import { URL } from './';
-import { GetInvoiceListComponentQuery } from './invoice-list.request';
+import { GetInvoiceListBlockQuery } from './invoice-list.request';
 import { InvoiceListService } from './invoice-list.service';
 
 @Controller(URL)
@@ -15,8 +15,8 @@ export class InvoiceListController {
     constructor(protected readonly service: InvoiceListService) {}
 
     @Get()
-    getInvoiceListComponent(@Headers() headers: AppHeaders, @Query() query: GetInvoiceListComponentQuery) {
-        return this.service.getInvoiceListComponent(query, headers);
+    getInvoiceListBlock(@Headers() headers: AppHeaders, @Query() query: GetInvoiceListBlockQuery) {
+        return this.service.getInvoiceListBlock(query, headers);
     }
 
     @Get(':id/pdf')

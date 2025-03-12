@@ -6,8 +6,8 @@ import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
 import { CMS, Invoices } from '../../models';
 
 import { mapInvoiceList } from './invoice-list.mapper';
-import { InvoiceListComponent } from './invoice-list.model';
-import { GetInvoiceListComponentQuery } from './invoice-list.request';
+import { InvoiceListBlock } from './invoice-list.model';
+import { GetInvoiceListBlockQuery } from './invoice-list.request';
 
 @Injectable()
 export class InvoiceListService {
@@ -16,11 +16,8 @@ export class InvoiceListService {
         private readonly invoiceService: Invoices.Service,
     ) {}
 
-    getInvoiceListComponent(
-        query: GetInvoiceListComponentQuery,
-        headers: AppHeaders,
-    ): Observable<InvoiceListComponent> {
-        const cms = this.cmsService.getInvoiceListComponent({ ...query, locale: headers['x-locale'] });
+    getInvoiceListBlock(query: GetInvoiceListBlockQuery, headers: AppHeaders): Observable<InvoiceListBlock> {
+        const cms = this.cmsService.getInvoiceListBlock({ ...query, locale: headers['x-locale'] });
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {

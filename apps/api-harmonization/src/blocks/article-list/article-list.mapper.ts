@@ -2,15 +2,15 @@ import { Articles, CMS } from '@o2s/framework/modules';
 
 import { formatDateRelative } from '@o2s/api-harmonization/utils/date';
 
-import { Article, ArticleListComponent } from './article-list.model';
+import { Article, ArticleListBlock } from './article-list.model';
 
 export const mapArticleList = (
     articles: Articles.Model.Articles,
-    cms: CMS.Model.ArticleListComponent.ArticleListComponent,
+    cms: CMS.Model.ArticleListBlock.ArticleListBlock,
     locale: string,
-): ArticleListComponent => {
+): ArticleListBlock => {
     return {
-        __typename: 'ArticleListComponent',
+        __typename: 'ArticleListBlock',
         id: cms.id,
         title: cms.title,
         subtitle: cms.subtitle,
@@ -27,7 +27,7 @@ export const mapArticleList = (
 
 const mapArticle = (
     article: Articles.Model.Article,
-    cms: CMS.Model.ArticleListComponent.ArticleListComponent,
+    cms: CMS.Model.ArticleListBlock.ArticleListBlock,
     locale: string,
 ): Article => {
     return {

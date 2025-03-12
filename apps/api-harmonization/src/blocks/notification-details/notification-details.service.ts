@@ -6,11 +6,11 @@ import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
 import { CMS, Notifications } from '../../models';
 
 import { mapNotificationDetails } from './notification-details.mapper';
-import { NotificationDetailsComponent } from './notification-details.model';
+import { NotificationDetailsBlock } from './notification-details.model';
 import {
-    GetNotificationDetailsComponentParams,
-    GetNotificationDetailsComponentQuery,
-    MarkNotificationAsComponentBody,
+    GetNotificationDetailsBlockParams,
+    GetNotificationDetailsBlockQuery,
+    MarkNotificationAsBlockBody,
 } from './notification-details.request';
 
 @Injectable()
@@ -20,12 +20,12 @@ export class NotificationDetailsService {
         private readonly notificationService: Notifications.Service,
     ) {}
 
-    getNotificationDetailsComponent(
-        params: GetNotificationDetailsComponentParams,
-        query: GetNotificationDetailsComponentQuery,
+    getNotificationDetailsBlock(
+        params: GetNotificationDetailsBlockParams,
+        query: GetNotificationDetailsBlockQuery,
         headers: AppHeaders,
-    ): Observable<NotificationDetailsComponent> {
-        const cms = this.cmsService.getNotificationDetailsComponent({ ...query, locale: headers['x-locale'] });
+    ): Observable<NotificationDetailsBlock> {
+        const cms = this.cmsService.getNotificationDetailsBlock({ ...query, locale: headers['x-locale'] });
         const notification = this.notificationService.getNotification({ ...params, locale: headers['x-locale'] });
 
         return forkJoin([notification, cms]).pipe(
@@ -39,7 +39,7 @@ export class NotificationDetailsService {
         );
     }
 
-    markNotificationAs(body: MarkNotificationAsComponentBody): Observable<void> {
+    markNotificationAs(body: MarkNotificationAsBlockBody): Observable<void> {
         return this.notificationService.markAs(body);
     }
 }

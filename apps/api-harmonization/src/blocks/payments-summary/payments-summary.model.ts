@@ -1,8 +1,8 @@
 import { Invoices } from '../../models';
-import { Component } from '../../utils';
+import { Block } from '../../utils';
 
-export class PaymentsSummaryComponent extends Component.Component {
-    __typename!: 'PaymentsSummaryComponent';
+export class PaymentsSummaryBlock extends Block.Block {
+    __typename!: 'PaymentsSummaryBlock';
     currency!: Invoices.Model.Invoice['currency'];
     overdue!: {
         title?: string;

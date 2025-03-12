@@ -8,10 +8,10 @@ import { PaymentsHistoryController } from './payments-history.controller';
 import { PaymentsHistoryService } from './payments-history.service';
 
 @Module({})
-export class PaymentsHistoryComponentModule {
+export class PaymentsHistoryBlockModule {
     static register(_config: ApiConfig): DynamicModule {
         return {
-            module: PaymentsHistoryComponentModule,
+            module: PaymentsHistoryBlockModule,
             providers: [PaymentsHistoryService, CMS.Service, Invoices.Service],
             controllers: [PaymentsHistoryController],
             exports: [PaymentsHistoryService],

@@ -6,7 +6,7 @@ import { Auth } from '@o2s/framework/modules';
 import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
 
 import { URL } from './';
-import { GetTicketListComponentQuery } from './ticket-list.request';
+import { GetTicketListBlockQuery } from './ticket-list.request';
 import { TicketListService } from './ticket-list.service';
 
 @Controller(URL)
@@ -16,7 +16,7 @@ export class TicketListController {
 
     @Get()
     @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
-    getTicketListComponent(@Headers() headers: AppHeaders, @Query() query: GetTicketListComponentQuery) {
-        return this.service.getTicketListComponent(query, headers);
+    getTicketListBlock(@Headers() headers: AppHeaders, @Query() query: GetTicketListBlockQuery) {
+        return this.service.getTicketListBlock(query, headers);
     }
 }

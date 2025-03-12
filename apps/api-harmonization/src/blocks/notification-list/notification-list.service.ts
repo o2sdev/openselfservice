@@ -6,8 +6,8 @@ import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
 import { CMS, Notifications } from '../../models';
 
 import { mapNotificationList } from './notification-list.mapper';
-import { NotificationListComponent } from './notification-list.model';
-import { GetNotificationListComponentQuery } from './notification-list.request';
+import { NotificationListBlock } from './notification-list.model';
+import { GetNotificationListBlockQuery } from './notification-list.request';
 
 @Injectable()
 export class NotificationListService {
@@ -16,11 +16,11 @@ export class NotificationListService {
         private readonly notificationService: Notifications.Service,
     ) {}
 
-    getNotificationListComponent(
-        query: GetNotificationListComponentQuery,
+    getNotificationListBlock(
+        query: GetNotificationListBlockQuery,
         headers: AppHeaders,
-    ): Observable<NotificationListComponent> {
-        const cms = this.cmsService.getNotificationListComponent({ ...query, locale: headers['x-locale'] });
+    ): Observable<NotificationListBlock> {
+        const cms = this.cmsService.getNotificationListBlock({ ...query, locale: headers['x-locale'] });
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {

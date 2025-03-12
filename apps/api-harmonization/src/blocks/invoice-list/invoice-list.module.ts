@@ -8,10 +8,10 @@ import { InvoiceListController } from './invoice-list.controller';
 import { InvoiceListService } from './invoice-list.service';
 
 @Module({})
-export class InvoiceListComponentModule {
+export class InvoiceListBlockModule {
     static register(_config: ApiConfig): DynamicModule {
         return {
-            module: InvoiceListComponentModule,
+            module: InvoiceListBlockModule,
             providers: [InvoiceListService, CMS.Service, Invoices.Service],
             controllers: [InvoiceListController],
             exports: [InvoiceListService],

@@ -6,8 +6,8 @@ import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
 import { CMS, Invoices } from '../../models';
 
 import { mapPaymentsSummary } from './payments-summary.mapper';
-import { PaymentsSummaryComponent } from './payments-summary.model';
-import { GetPaymentsSummaryComponentQuery } from './payments-summary.request';
+import { PaymentsSummaryBlock } from './payments-summary.model';
+import { GetPaymentsSummaryBlockQuery } from './payments-summary.request';
 
 @Injectable()
 export class PaymentsSummaryService {
@@ -16,11 +16,11 @@ export class PaymentsSummaryService {
         private readonly invoiceService: Invoices.Service,
     ) {}
 
-    getPaymentsSummaryComponent(
-        query: GetPaymentsSummaryComponentQuery,
+    getPaymentsSummaryBlock(
+        query: GetPaymentsSummaryBlockQuery,
         headers: AppHeaders,
-    ): Observable<PaymentsSummaryComponent> {
-        const cms = this.cmsService.getPaymentsSummaryComponent({ ...query, locale: headers['x-locale'] });
+    ): Observable<PaymentsSummaryBlock> {
+        const cms = this.cmsService.getPaymentsSummaryBlock({ ...query, locale: headers['x-locale'] });
         const invoices = this.invoiceService.getInvoiceList(query);
 
         return forkJoin([invoices, cms]).pipe(

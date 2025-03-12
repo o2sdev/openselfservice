@@ -1,6 +1,6 @@
 import { CMS } from '@o2s/framework/modules';
 
-const MOCK_PAYMENTS_HISTORY_COMPONENT_EN: CMS.Model.PaymentsHistoryComponent.PaymentsHistoryComponent = {
+const MOCK_PAYMENTS_HISTORY_BLOCK_EN: CMS.Model.PaymentsHistoryBlock.PaymentsHistoryBlock = {
     id: 'payments-history-1',
     title: '6-months history',
     topSegment: 'Overdue',
@@ -10,7 +10,7 @@ const MOCK_PAYMENTS_HISTORY_COMPONENT_EN: CMS.Model.PaymentsHistoryComponent.Pay
     monthsToShow: 6,
 };
 
-const MOCK_PAYMENTS_HISTORY_COMPONENT_DE: CMS.Model.PaymentsHistoryComponent.PaymentsHistoryComponent = {
+const MOCK_PAYMENTS_HISTORY_BLOCK_DE: CMS.Model.PaymentsHistoryBlock.PaymentsHistoryBlock = {
     id: 'payments-history-1',
     title: '6-Monats-Historie',
     topSegment: 'Überfällig',
@@ -20,7 +20,7 @@ const MOCK_PAYMENTS_HISTORY_COMPONENT_DE: CMS.Model.PaymentsHistoryComponent.Pay
     monthsToShow: 6,
 };
 
-const MOCK_PAYMENTS_HISTORY_COMPONENT_PL: CMS.Model.PaymentsHistoryComponent.PaymentsHistoryComponent = {
+const MOCK_PAYMENTS_HISTORY_BLOCK_PL: CMS.Model.PaymentsHistoryBlock.PaymentsHistoryBlock = {
     id: 'payments-history-1',
     title: 'Historia 6-miesięczna',
     topSegment: 'Zaległe',
@@ -30,15 +30,13 @@ const MOCK_PAYMENTS_HISTORY_COMPONENT_PL: CMS.Model.PaymentsHistoryComponent.Pay
     monthsToShow: 6,
 };
 
-export const mapPaymentsHistoryComponent = (
-    locale: string,
-): CMS.Model.PaymentsHistoryComponent.PaymentsHistoryComponent => {
+export const mapPaymentsHistoryBlock = (locale: string): CMS.Model.PaymentsHistoryBlock.PaymentsHistoryBlock => {
     switch (locale) {
         case 'de':
-            return MOCK_PAYMENTS_HISTORY_COMPONENT_DE;
+            return MOCK_PAYMENTS_HISTORY_BLOCK_DE;
         case 'pl':
-            return MOCK_PAYMENTS_HISTORY_COMPONENT_PL;
+            return MOCK_PAYMENTS_HISTORY_BLOCK_PL;
         default:
-            return MOCK_PAYMENTS_HISTORY_COMPONENT_EN;
+            return MOCK_PAYMENTS_HISTORY_BLOCK_EN;
     }
 };

@@ -6,8 +6,8 @@ import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
 import { CMS, Invoices } from '../../models';
 
 import { mapPaymentsHistory } from './payments-history.mapper';
-import { PaymentsHistoryComponent } from './payments-history.model';
-import { GetPaymentsHistoryComponentQuery } from './payments-history.request';
+import { PaymentsHistoryBlock } from './payments-history.model';
+import { GetPaymentsHistoryBlockQuery } from './payments-history.request';
 
 @Injectable()
 export class PaymentsHistoryService {
@@ -16,11 +16,11 @@ export class PaymentsHistoryService {
         private readonly invoiceService: Invoices.Service,
     ) {}
 
-    getPaymentsHistoryComponent(
-        query: GetPaymentsHistoryComponentQuery,
+    getPaymentsHistoryBlock(
+        query: GetPaymentsHistoryBlockQuery,
         headers: AppHeaders,
-    ): Observable<PaymentsHistoryComponent> {
-        const cms = this.cmsService.getPaymentsHistoryComponent({ ...query, locale: headers['x-locale'] });
+    ): Observable<PaymentsHistoryBlock> {
+        const cms = this.cmsService.getPaymentsHistoryBlock({ ...query, locale: headers['x-locale'] });
         const invoices = this.invoiceService.getInvoiceList(query);
 
         return forkJoin([cms, invoices]).pipe(

@@ -6,4 +6,4 @@ export interface InvoiceListProps {
     locale: string;
 }
 
-export type InvoiceListPureProps = InvoiceListProps & Blocks.InvoiceList.Model.InvoiceListComponent;
+export type InvoiceListPureProps = InvoiceListProps & Blocks.InvoiceList.Model.InvoiceListBlock;

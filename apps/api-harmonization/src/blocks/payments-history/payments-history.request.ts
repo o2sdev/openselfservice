@@ -1,6 +1,6 @@
 import { CMS } from '@o2s/framework/modules';
 
-export class GetPaymentsHistoryComponentQuery implements Omit<CMS.Request.GetCmsEntryParams, 'locale'> {
+export class GetPaymentsHistoryBlockQuery implements Omit<CMS.Request.GetCmsEntryParams, 'locale'> {
     id!: string;
     limit!: number;
     offset!: number;

@@ -1,10 +1,10 @@
 import { Models } from '@o2s/framework/modules';
 
 import { Users } from '../../models';
-import { Component } from '../../utils';
+import { Block } from '../../utils';
 
-export class UserAccountComponent extends Component.Component {
-    __typename!: 'UserAccountComponent';
+export class UserAccountBlock extends Block.Block {
+    __typename!: 'UserAccountBlock';
     title?: string;
     basicInformationTitle!: string;
     basicInformationDescription!: string;

@@ -1,9 +1,9 @@
 import { Articles } from '@o2s/framework/modules';
 
-import { Component } from '../../utils';
+import { Block } from '../../utils';
 
-export class ArticleDetailsComponent extends Component.Component {
-    __typename!: 'ArticleDetailsComponent';
+export class ArticleDetailsBlock extends Block.Block {
+    __typename!: 'ArticleDetailsBlock';
     data!: Article;
 }
 

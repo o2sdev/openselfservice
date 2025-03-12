@@ -8,10 +8,10 @@ import { UserAccountController } from './user-account.controller';
 import { UserAccountService } from './user-account.service';
 
 @Module({})
-export class UserAccountComponentModule {
+export class UserAccountBlockModule {
     static register(_config: ApiConfig): DynamicModule {
         return {
-            module: UserAccountComponentModule,
+            module: UserAccountBlockModule,
             providers: [UserAccountService, CMS.Service, Users.Service],
             controllers: [UserAccountController],
             exports: [UserAccountService],

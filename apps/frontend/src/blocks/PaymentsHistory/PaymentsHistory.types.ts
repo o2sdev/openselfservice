@@ -6,4 +6,4 @@ export interface PaymentsHistoryProps {
     locale: string;
 }
 
-export type PaymentsHistoryPureProps = PaymentsHistoryProps & Blocks.PaymentsHistory.Model.PaymentsHistoryComponent;
+export type PaymentsHistoryPureProps = PaymentsHistoryProps & Blocks.PaymentsHistory.Model.PaymentsHistoryBlock;

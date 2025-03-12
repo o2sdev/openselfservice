@@ -6,8 +6,8 @@ import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
 import { CMS, Users } from '../../models';
 
 import { mapUserAccount } from './user-account.mapper';
-import { UserAccountComponent } from './user-account.model';
-import { GetUserAccountComponentQuery } from './user-account.request';
+import { UserAccountBlock } from './user-account.model';
+import { GetUserAccountBlockQuery } from './user-account.request';
 
 @Injectable()
 export class UserAccountService {
@@ -16,11 +16,8 @@ export class UserAccountService {
         private readonly usersService: Users.Service,
     ) {}
 
-    getUserAccountComponent(
-        query: GetUserAccountComponentQuery,
-        headers: AppHeaders,
-    ): Observable<UserAccountComponent> {
-        const cms = this.cmsService.getUserAccountComponent({ ...query, locale: headers['x-locale'] });
+    getUserAccountBlock(query: GetUserAccountBlockQuery, headers: AppHeaders): Observable<UserAccountBlock> {
+        const cms = this.cmsService.getUserAccountBlock({ ...query, locale: headers['x-locale'] });
         const user = this.usersService.getCurrentUser();
         return forkJoin([cms, user]).pipe(map(([cms, user]) => mapUserAccount(cms, headers['x-locale'], user)));
     }

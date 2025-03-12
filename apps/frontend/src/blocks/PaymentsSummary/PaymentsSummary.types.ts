@@ -6,4 +6,4 @@ export interface PaymentsSummaryProps {
     locale: string;
 }
 
-export type PaymentsSummaryPureProps = PaymentsSummaryProps & Blocks.PaymentsSummary.Model.PaymentsSummaryComponent;
+export type PaymentsSummaryPureProps = PaymentsSummaryProps & Blocks.PaymentsSummary.Model.PaymentsSummaryBlock;

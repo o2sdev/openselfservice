@@ -1,6 +1,6 @@
 import { CMS } from '@o2s/framework/modules';
 
-const MOCK_ARTICLE_LIST_COMPONENT: CMS.Model.ArticleListComponent.ArticleListComponent = {
+const MOCK_ARTICLE_LIST_BLOCK: CMS.Model.ArticleListBlock.ArticleListBlock = {
     id: 'article-list-1',
     title: 'Articles Overview',
     subtitle: 'Your recent articles',
@@ -55,7 +55,7 @@ const MOCK_ARTICLE_LIST_COMPONENT: CMS.Model.ArticleListComponent.ArticleListCom
     detailsUrl: '/articles/:id',
 };
 
-export const mapArticleListComponent = (locale: string): CMS.Model.ArticleListComponent.ArticleListComponent => {
+export const mapArticleListBlock = (locale: string): CMS.Model.ArticleListBlock.ArticleListBlock => {
     const getDetailsUrl = () => {
         switch (locale) {
             case 'en':
@@ -70,7 +70,7 @@ export const mapArticleListComponent = (locale: string): CMS.Model.ArticleListCo
     };
 
     return {
-        ...MOCK_ARTICLE_LIST_COMPONENT,
+        ...MOCK_ARTICLE_LIST_BLOCK,
         detailsUrl: getDetailsUrl(),
     };
 };

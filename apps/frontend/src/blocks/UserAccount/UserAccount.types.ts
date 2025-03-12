@@ -6,4 +6,4 @@ export interface UserAccountProps {
     locale: string;
 }
 
-export type UserAccountPureProps = UserAccountProps & Blocks.UserAccount.Model.UserAccountComponent;
+export type UserAccountPureProps = UserAccountProps & Blocks.UserAccount.Model.UserAccountBlock;

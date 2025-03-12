@@ -8,10 +8,10 @@ import { NotificationDetailsController } from './notification-details.controller
 import { NotificationDetailsService } from './notification-details.service';
 
 @Module({})
-export class NotificationDetailsComponentModule {
+export class NotificationDetailsBlockModule {
     static register(_config: ApiConfig): DynamicModule {
         return {
-            module: NotificationDetailsComponentModule,
+            module: NotificationDetailsBlockModule,
             providers: [NotificationDetailsService, CMS.Service, Notifications.Service],
             controllers: [NotificationDetailsController],
             exports: [NotificationDetailsService],

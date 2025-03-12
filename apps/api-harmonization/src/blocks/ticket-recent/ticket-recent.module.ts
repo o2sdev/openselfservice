@@ -8,10 +8,10 @@ import { TicketRecentController } from './ticket-recent.controller';
 import { TicketRecentService } from './ticket-recent.service';
 
 @Module({})
-export class TicketRecentComponentModule {
+export class TicketRecentBlockModule {
     static register(_config: ApiConfig): DynamicModule {
         return {
-            module: TicketRecentComponentModule,
+            module: TicketRecentBlockModule,
             providers: [TicketRecentService, CMS.Service, Tickets.Service],
             controllers: [TicketRecentController],
             exports: [TicketRecentService],

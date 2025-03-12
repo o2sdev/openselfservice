@@ -1,9 +1,9 @@
 import { Tickets } from '../../models';
 // TODO: this has to be a relative import so it could be resolved properly in `frontend` app; try to find a better way
-import { Component } from '../../utils';
+import { Block } from '../../utils';
 
-export class TicketRecentComponent extends Component.Component {
-    __typename!: 'TicketRecentComponent';
+export class TicketRecentBlock extends Block.Block {
+    __typename!: 'TicketRecentBlock';
     title?: string;
     noResults?: string;
     details?: string;

@@ -8,10 +8,10 @@ import { {{ pascalCase name }}Controller } from './{{ kebabCase name }}.controll
 import { {{ pascalCase name }}Service } from './{{ kebabCase name }}.service';
 
 @Module({})
-export class {{ pascalCase name }}ComponentModule {
+export class {{ pascalCase name }}BlockModule {
     static register(_config: ApiConfig): DynamicModule {
         return {
-            module: {{ pascalCase name }}ComponentModule,
+            module: {{ pascalCase name }}BlockModule,
             providers: [
                 {{ pascalCase name }}Service,
                 CMS.Service,

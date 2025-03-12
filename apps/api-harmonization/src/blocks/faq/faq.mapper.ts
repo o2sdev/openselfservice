@@ -1,10 +1,10 @@
 import { CMS } from '../../models';
 
-import { FaqComponent } from './faq.model';
+import { FaqBlock } from './faq.model';
 
-export const mapFaq = (cms: CMS.Model.FaqComponent.FaqComponent): FaqComponent => {
+export const mapFaq = (cms: CMS.Model.FaqBlock.FaqBlock): FaqBlock => {
     return {
-        __typename: 'FaqComponent',
+        __typename: 'FaqBlock',
         id: cms.id,
         title: cms.title,
         subtitle: cms.subtitle,

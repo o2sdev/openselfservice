@@ -1,10 +1,10 @@
 import { Models } from '@o2s/framework/modules';
 
 import { Tickets } from '../../models';
-import { Component } from '../../utils';
+import { Block } from '../../utils';
 
-export class TicketListComponent extends Component.Component {
-    __typename!: 'TicketListComponent';
+export class TicketListBlock extends Block.Block {
+    __typename!: 'TicketListBlock';
     title?: string;
     subtitle?: string;
     table!: Models.DataTable.DataTable<Tickets.Model.Ticket>;

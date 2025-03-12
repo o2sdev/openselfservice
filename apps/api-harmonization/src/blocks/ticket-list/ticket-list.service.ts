@@ -6,8 +6,8 @@ import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
 import { CMS, Tickets } from '../../models';
 
 import { mapTicketList } from './ticket-list.mapper';
-import { TicketListComponent } from './ticket-list.model';
-import { GetTicketListComponentQuery } from './ticket-list.request';
+import { TicketListBlock } from './ticket-list.model';
+import { GetTicketListBlockQuery } from './ticket-list.request';
 
 @Injectable()
 export class TicketListService {
@@ -16,8 +16,8 @@ export class TicketListService {
         private readonly ticketService: Tickets.Service,
     ) {}
 
-    getTicketListComponent(query: GetTicketListComponentQuery, headers: AppHeaders): Observable<TicketListComponent> {
-        const cms = this.cmsService.getTicketListComponent({ ...query, locale: headers['x-locale'] });
+    getTicketListBlock(query: GetTicketListBlockQuery, headers: AppHeaders): Observable<TicketListBlock> {
+        const cms = this.cmsService.getTicketListBlock({ ...query, locale: headers['x-locale'] });
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {

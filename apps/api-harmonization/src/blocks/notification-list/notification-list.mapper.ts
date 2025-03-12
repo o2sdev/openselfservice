@@ -4,15 +4,15 @@ import { formatDateRelative } from '@o2s/api-harmonization/utils/date';
 
 import { CMS, Notifications } from '../../models';
 
-import { Notification, NotificationListComponent } from './notification-list.model';
+import { Notification, NotificationListBlock } from './notification-list.model';
 
 export const mapNotificationList = (
     notifications: Notifications.Model.Notifications,
-    cms: CMS.Model.NotificationListComponent.NotificationListComponent,
+    cms: CMS.Model.NotificationListBlock.NotificationListBlock,
     locale: string,
-): NotificationListComponent => {
+): NotificationListBlock => {
     return {
-        __typename: 'NotificationListComponent',
+        __typename: 'NotificationListBlock',
         id: cms.id,
         title: cms.title,
         subtitle: cms.subtitle,
@@ -29,7 +29,7 @@ export const mapNotificationList = (
 
 export const mapNotification = (
     notification: Notifications.Model.Notification,
-    cms: CMS.Model.NotificationListComponent.NotificationListComponent,
+    cms: CMS.Model.NotificationListBlock.NotificationListBlock,
     locale: string,
 ): Notification => {
     return {

@@ -8,4 +8,4 @@ export interface NotificationDetailsProps {
 }
 
 export type NotificationDetailsPureProps = NotificationDetailsProps &
-    Blocks.NotificationDetails.Model.NotificationDetailsComponent;
+    Blocks.NotificationDetails.Model.NotificationDetailsBlock;

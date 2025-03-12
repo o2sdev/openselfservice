@@ -4,15 +4,15 @@ import { formatDateRelative } from '@o2s/api-harmonization/utils/date';
 
 import { CMS, Tickets } from '../../models';
 
-import { Ticket, TicketListComponent } from './ticket-list.model';
+import { Ticket, TicketListBlock } from './ticket-list.model';
 
 export const mapTicketList = (
     tickets: Tickets.Model.Tickets,
-    cms: CMS.Model.TicketListComponent.TicketListComponent,
+    cms: CMS.Model.TicketListBlock.TicketListBlock,
     locale: string,
-): TicketListComponent => {
+): TicketListBlock => {
     return {
-        __typename: 'TicketListComponent',
+        __typename: 'TicketListBlock',
         id: cms.id,
         title: cms.title,
         subtitle: cms.subtitle,
@@ -29,7 +29,7 @@ export const mapTicketList = (
 
 export const mapTicket = (
     ticket: Tickets.Model.Ticket,
-    cms: CMS.Model.TicketListComponent.TicketListComponent,
+    cms: CMS.Model.TicketListBlock.TicketListBlock,
     locale: string,
 ): Ticket => {
     return {

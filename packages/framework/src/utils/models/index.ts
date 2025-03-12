@@ -1,4 +1,4 @@
-export * as Component from './component';
+export * as Block from './block';
 export * as RichText from './rich-text';
 export * as Pagination from './pagination';
 export * as Filters from './filters';

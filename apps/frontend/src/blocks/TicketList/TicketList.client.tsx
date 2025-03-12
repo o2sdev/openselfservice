@@ -25,18 +25,18 @@ import { Pagination } from '@/components/Pagination/Pagination';
 import { TicketListPureProps } from './TicketList.types';
 
 export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessToken, ...component }) => {
-    const initialFilters: Blocks.TicketList.Request.GetTicketListComponentQuery = {
+    const initialFilters: Blocks.TicketList.Request.GetTicketListBlockQuery = {
         id: component.id,
         offset: 0,
         limit: component.pagination?.limit || 5,
     };
 
     const initialData = component.tickets.data;
-    const [data, setData] = useState<Blocks.TicketList.Model.TicketListComponent>(component);
+    const [data, setData] = useState<Blocks.TicketList.Model.TicketListBlock>(component);
     const [filters, setFilters] = useState(initialFilters);
     const [isPending, startTransition] = useTransition();
 
-    const handleFilter = (data: Partial<Blocks.TicketList.Request.GetTicketListComponentQuery>) => {
+    const handleFilter = (data: Partial<Blocks.TicketList.Request.GetTicketListBlockQuery>) => {
         startTransition(async () => {
             const newFilters = { ...filters, ...data };
             const newData = await sdk.blocks.getTicketList(newFilters, { 'x-locale': locale }, accessToken);

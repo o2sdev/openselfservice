@@ -1,10 +1,10 @@
 import { CMS } from '../../models';
-import { Component } from '../../utils';
+import { Block } from '../../utils';
 
-export class FaqComponent extends Component.Component {
-    __typename!: 'FaqComponent';
-    title!: CMS.Model.FaqComponent.FaqComponent['title'];
-    subtitle!: CMS.Model.FaqComponent.FaqComponent['subtitle'];
-    items!: CMS.Model.FaqComponent.FaqComponent['items'];
-    banner?: CMS.Model.FaqComponent.FaqBoxWithButtons;
+export class FaqBlock extends Block.Block {
+    __typename!: 'FaqBlock';
+    title!: CMS.Model.FaqBlock.FaqBlock['title'];
+    subtitle!: CMS.Model.FaqBlock.FaqBlock['subtitle'];
+    items!: CMS.Model.FaqBlock.FaqBlock['items'];
+    banner?: CMS.Model.FaqBlock.FaqBoxWithButtons;
 }

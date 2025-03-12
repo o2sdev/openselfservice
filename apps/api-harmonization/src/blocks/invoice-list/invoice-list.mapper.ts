@@ -3,15 +3,15 @@ import { checkNegativeValue } from '@o2s/api-harmonization/utils/price';
 
 import { CMS, Invoices } from '../../models';
 
-import { Invoice, InvoiceListComponent } from './invoice-list.model';
+import { Invoice, InvoiceListBlock } from './invoice-list.model';
 
 export const mapInvoiceList = (
     invoices: Invoices.Model.Invoices,
-    cms: CMS.Model.InvoiceListComponent.InvoiceListComponent,
+    cms: CMS.Model.InvoiceListBlock.InvoiceListBlock,
     locale: string,
-): InvoiceListComponent => {
+): InvoiceListBlock => {
     return {
-        __typename: 'InvoiceListComponent',
+        __typename: 'InvoiceListBlock',
         id: cms.id,
         title: cms.title,
         pagination: cms.pagination,
@@ -32,7 +32,7 @@ export const mapInvoiceList = (
 
 export const mapInvoice = (
     invoice: Invoices.Model.Invoice,
-    cms: CMS.Model.InvoiceListComponent.InvoiceListComponent,
+    cms: CMS.Model.InvoiceListBlock.InvoiceListBlock,
     locale: string,
 ): Invoice => {
     return {

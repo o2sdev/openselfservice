@@ -18,21 +18,21 @@ import {
     Users,
 } from '@o2s/framework/modules';
 
-// COMPONENT IMPORT
+// BLOCK IMPORT
 import { configuration } from '@o2s/api-harmonization/config/configuration';
 
-import { ArticleDetailsComponentModule } from '@o2s/api-harmonization/blocks/article-details/article-details.module';
-import { ArticleListComponentModule } from '@o2s/api-harmonization/blocks/article-list/article-list.module';
-import { FaqComponentModule } from '@o2s/api-harmonization/blocks/faq/faq.module';
-import { InvoiceListComponentModule } from '@o2s/api-harmonization/blocks/invoice-list/invoice-list.module';
-import { NotificationDetailsComponentModule } from '@o2s/api-harmonization/blocks/notification-details/notification-details.module';
-import { NotificationListComponentModule } from '@o2s/api-harmonization/blocks/notification-list/notification-list.module';
-import { PaymentsHistoryComponentModule } from '@o2s/api-harmonization/blocks/payments-history/payments-history.module';
-import { PaymentsSummaryComponentModule } from '@o2s/api-harmonization/blocks/payments-summary/payments-summary.module';
-import { TicketDetailsComponentModule } from '@o2s/api-harmonization/blocks/ticket-details/ticket-details.module';
-import { TicketListComponentModule } from '@o2s/api-harmonization/blocks/ticket-list/ticket-list.module';
-import { TicketRecentComponentModule } from '@o2s/api-harmonization/blocks/ticket-recent/ticket-recent.module';
-import { UserAccountComponentModule } from '@o2s/api-harmonization/blocks/user-account/user-account.module';
+import { ArticleDetailsBlockModule } from '@o2s/api-harmonization/blocks/article-details/article-details.module';
+import { ArticleListBlockModule } from '@o2s/api-harmonization/blocks/article-list/article-list.module';
+import { FaqBlockModule } from '@o2s/api-harmonization/blocks/faq/faq.module';
+import { InvoiceListBlockModule } from '@o2s/api-harmonization/blocks/invoice-list/invoice-list.module';
+import { NotificationDetailsBlockModule } from '@o2s/api-harmonization/blocks/notification-details/notification-details.module';
+import { NotificationListBlockModule } from '@o2s/api-harmonization/blocks/notification-list/notification-list.module';
+import { PaymentsHistoryBlockModule } from '@o2s/api-harmonization/blocks/payments-history/payments-history.module';
+import { PaymentsSummaryBlockModule } from '@o2s/api-harmonization/blocks/payments-summary/payments-summary.module';
+import { TicketDetailsBlockModule } from '@o2s/api-harmonization/blocks/ticket-details/ticket-details.module';
+import { TicketListBlockModule } from '@o2s/api-harmonization/blocks/ticket-list/ticket-list.module';
+import { TicketRecentBlockModule } from '@o2s/api-harmonization/blocks/ticket-recent/ticket-recent.module';
+import { UserAccountBlockModule } from '@o2s/api-harmonization/blocks/user-account/user-account.module';
 
 import { AppConfig } from './app.config';
 import { AppService } from './app.service';
@@ -65,21 +65,21 @@ import { RoutesModule } from './modules/routes/routes.module';
         LoginPageModule.register(AppConfig),
         NotFoundPageModule.register(AppConfig),
 
-        TicketListComponentModule.register(AppConfig),
-        TicketDetailsComponentModule.register(AppConfig),
-        NotificationListComponentModule.register(AppConfig),
-        NotificationDetailsComponentModule.register(AppConfig),
-        FaqComponentModule.register(AppConfig),
+        TicketListBlockModule.register(AppConfig),
+        TicketDetailsBlockModule.register(AppConfig),
+        NotificationListBlockModule.register(AppConfig),
+        NotificationDetailsBlockModule.register(AppConfig),
+        FaqBlockModule.register(AppConfig),
         Articles.Module.register(AppConfig),
-        ArticleDetailsComponentModule.register(AppConfig),
-        ArticleListComponentModule.register(AppConfig),
+        ArticleDetailsBlockModule.register(AppConfig),
+        ArticleListBlockModule.register(AppConfig),
         Resources.Module.register(AppConfig),
         Invoices.Module.register(AppConfig),
-        InvoiceListComponentModule.register(AppConfig),
-        PaymentsSummaryComponentModule.register(AppConfig),
-        PaymentsHistoryComponentModule.register(AppConfig),
-        UserAccountComponentModule.register(AppConfig),
-        TicketRecentComponentModule.register(AppConfig),
+        InvoiceListBlockModule.register(AppConfig),
+        PaymentsSummaryBlockModule.register(AppConfig),
+        PaymentsHistoryBlockModule.register(AppConfig),
+        UserAccountBlockModule.register(AppConfig),
+        TicketRecentBlockModule.register(AppConfig),
         // COMPONENT REGISTER
     ],
     providers: [

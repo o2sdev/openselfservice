@@ -6,4 +6,4 @@ export interface NotificationListProps {
     locale: string;
 }
 
-export type NotificationListPureProps = NotificationListProps & Blocks.NotificationList.Model.NotificationListComponent;
+export type NotificationListPureProps = NotificationListProps & Blocks.NotificationList.Model.NotificationListBlock;
