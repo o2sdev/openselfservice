@@ -32,7 +32,7 @@ export import Model = Integration.CMS.Model;
 These files export four things:
 
 1. Integration config, that is then propagated to the framework modules to let them know what implementation to actually use. This is done via the `apps/api-harmonization/app.config.ts` file that does not have to be modified at all when switching integrations.
-2. A service, that is used in other components and modules:
+2. A service, that is used in other blocks and modules:
 
     ```typescript title="usage of CMS.Service within ticket-list.service.ts"
     import { CMS, Tickets } from '../../models';
@@ -55,9 +55,9 @@ These files export four things:
 
     export const mapTicketList = (
         tickets: Tickets.Model.Tickets,
-        cms: CMS.Model.TicketListComponent.TicketListComponent,
+        cms: CMS.Model.TicketListBlock.TicketListBlock,
         locale: string,
-    ): TicketListComponent => {
+    ): TicketListBlock => {
         ...
     };
     ```

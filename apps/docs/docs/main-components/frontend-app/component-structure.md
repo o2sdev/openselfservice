@@ -16,11 +16,18 @@ apps/frontend/src
 │
 └───containers
 │   │
-│   └───Container
-│       ├───Container.client.tsx
-│       ├───Container.renderer.tsx
-│       ├───Container.server.tsx
+│   └───Containers
+│       ├───Container.tsx
 │       └───Container.types.tsx
+│
+└───blocks
+│   │
+│   └───Block
+│       ├───Block.client.tsx
+│       ├───Block.dynamic.tsx
+│       ├───Block.renderer.tsx
+│       ├───Block.server.tsx
+│       └───Block.types.tsx
 │
 └───templates
     │
@@ -43,15 +50,24 @@ Components that fall under this category include blocks that repeat on many diff
 
 ## Containers
 
-Containers, on the other hand, are more logic-heavy components. They often need framework-specific methods, and can directly access global data. We think of them as "standalone" components that can be put anywhere in the app, and they will:
+Containers are more complex that regular components, and generally not as reusable (all not reusable at all). We don't impose many restrictions here - containers can in some instances fetch/post data or define callbacks without having to delegate this do their parents.
+
+Some examples of containers include:
+
+- header and footer
+- sign-in and sign-up forms.
+
+## Blocks
+
+Blocks, on the other hand, are more logic-heavy components. They often need framework-specific methods, and can directly access global data. We think of them as "standalone" components that can be put anywhere in the app, and they will:
 
 - fit into the layout,
 - fetch their necessary data,
 - manage their own internal state,
-- communicate with other containers.
+- communicate with other blocks.
 
 :::info
-One of the main difference between containers and components is that containers can (and usually should) fetch their own data from API.
+One of the main difference between blocks and components is that blocks can (and usually should) fetch their own data from API.
 :::
 
 ### Server component
@@ -62,7 +78,7 @@ The server part handles fetching the initial data for the component. This is mos
 export const Faq: React.FC<FaqProps> = async ({ id, accessToken, locale }) => {
     const data = await sdk.components.getFaq(...);
 
-    return <FaqPure {...data} />;
+    return <FaqDynamic {...data} />;
 };
 ```
 
@@ -145,6 +161,20 @@ export const FaqPure: React.FC<FaqPureProps> = ({ ...component }) => {
 };
 ```
 
+### Dynamic component
+
+For now, an additional component between a server and a client is needed for appropriate code splitting by Next.js. This component is very simple, and only exports the client component that is [lazy loaded](https://nextjs.org/docs/pages/building-your-application/optimizing/lazy-loading).
+
+This is only a temporary solution for an [already reported issue](https://github.com/vercel/next.js/issues/61066), and hopefully can be get rid of as soon as it is fixed.
+
+```typescript jsx
+'use client';
+
+import dynamic from 'next/dynamic';
+
+export const FaqDynamic = dynamic(() => import('./Faq.client').then((module) => module.FaqPure));
+```
+
 ### Renderer
 
 Renderer is responsible for integration with the surrounding framework - in our case, mainly with Next.js. It can be used to customize the loading state that is rendered [while the component is streaming](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming#streaming-with-suspense).
@@ -172,7 +202,7 @@ The slot system is quite simple - each template can define any number of them, a
 ```typescript jsx
 export const TwoColumnTemplate = async ({ data, session }) => {
     return (
-        <div className="container">
+        <div className="block">
             <div className="top">
                 {renderComponents(data.slots.top, session.accessToken)}
             </div>

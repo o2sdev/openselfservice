@@ -1,6 +1,6 @@
 import { CMS } from '@o2s/framework/modules';
 
-const MOCK_INVOICE_LIST_COMPONENT_EN: CMS.Model.InvoiceListComponent.InvoiceListComponent = {
+const MOCK_INVOICE_LIST_BLOCK_EN: CMS.Model.InvoiceListBlock.InvoiceListBlock = {
     id: 'invoice-list-1',
     title: 'Invoices',
     fieldMapping: {
@@ -115,7 +115,7 @@ const MOCK_INVOICE_LIST_COMPONENT_EN: CMS.Model.InvoiceListComponent.InvoiceList
     downloadButtonAriaDescription: 'Download invoice {id}',
 };
 
-const MOCK_INVOICE_LIST_COMPONENT_DE: CMS.Model.InvoiceListComponent.InvoiceListComponent = {
+const MOCK_INVOICE_LIST_BLOCK_DE: CMS.Model.InvoiceListBlock.InvoiceListBlock = {
     id: 'invoice-list-1',
     title: 'Rechnungen',
     fieldMapping: {
@@ -230,7 +230,7 @@ const MOCK_INVOICE_LIST_COMPONENT_DE: CMS.Model.InvoiceListComponent.InvoiceList
     downloadButtonAriaDescription: 'Rechnung {id} herunterladen',
 };
 
-const MOCK_INVOICE_LIST_COMPONENT_PL: CMS.Model.InvoiceListComponent.InvoiceListComponent = {
+const MOCK_INVOICE_LIST_BLOCK_PL: CMS.Model.InvoiceListBlock.InvoiceListBlock = {
     id: 'invoice-list-1',
     title: 'Faktury',
     fieldMapping: {
@@ -345,13 +345,13 @@ const MOCK_INVOICE_LIST_COMPONENT_PL: CMS.Model.InvoiceListComponent.InvoiceList
     downloadButtonAriaDescription: 'Pobierz fakturę {id}',
 };
 
-export const mapInvoiceListComponent = (locale: string): CMS.Model.InvoiceListComponent.InvoiceListComponent => {
+export const mapInvoiceListBlock = (locale: string): CMS.Model.InvoiceListBlock.InvoiceListBlock => {
     switch (locale) {
         case 'de':
-            return MOCK_INVOICE_LIST_COMPONENT_DE;
+            return MOCK_INVOICE_LIST_BLOCK_DE;
         case 'pl':
-            return MOCK_INVOICE_LIST_COMPONENT_PL;
+            return MOCK_INVOICE_LIST_BLOCK_PL;
         default:
-            return MOCK_INVOICE_LIST_COMPONENT_EN;
+            return MOCK_INVOICE_LIST_BLOCK_EN;
     }
 };

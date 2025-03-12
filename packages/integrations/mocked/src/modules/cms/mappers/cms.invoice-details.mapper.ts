@@ -1,6 +1,6 @@
 import { CMS } from '@o2s/framework/modules';
 
-const MOCK_INVOICE_DETAILS_COMPONENT: CMS.Model.InvoiceDetailsComponent.InvoiceDetailsComponent = {
+const MOCK_INVOICE_DETAILS_BLOCK: CMS.Model.InvoiceDetailsBlock.InvoiceDetailsBlock = {
     id: 'invoice-details-1',
     fieldMapping: {
         type: {
@@ -43,8 +43,8 @@ const MOCK_INVOICE_DETAILS_COMPONENT: CMS.Model.InvoiceDetailsComponent.InvoiceD
     },
 };
 
-export const mapInvoiceDetailsComponent = (): CMS.Model.InvoiceDetailsComponent.InvoiceDetailsComponent => {
+export const mapInvoiceDetailsBlock = (): CMS.Model.InvoiceDetailsBlock.InvoiceDetailsBlock => {
     return {
-        ...MOCK_INVOICE_DETAILS_COMPONENT,
+        ...MOCK_INVOICE_DETAILS_BLOCK,
     };
 };

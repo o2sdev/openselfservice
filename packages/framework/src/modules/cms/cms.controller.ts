@@ -54,58 +54,63 @@ export class CmsController {
         return this.cms.getAppConfig(params);
     }
 
-    @Get('/components/faq')
-    getFaqComponent(@Query() params: Request.GetCmsEntryParams) {
-        return this.cms.getFaqComponent(params);
+    @Get('/blocks/faq')
+    getFaqBlock(@Query() params: Request.GetCmsEntryParams) {
+        return this.cms.getFaqBlock(params);
     }
 
-    @Get('/components/ticket-list')
-    getTicketListComponent(@Query() params: Request.GetCmsEntryParams) {
-        return this.cms.getTicketListComponent(params);
+    @Get('/blocks/ticket-list')
+    getTicketListBlock(@Query() params: Request.GetCmsEntryParams) {
+        return this.cms.getTicketListBlock(params);
     }
 
-    @Get('/components/ticket-details')
-    getTicketDetailsComponent(@Query() params: Request.GetCmsEntryParams) {
-        return this.cms.getTicketDetailsComponent(params);
+    @Get('/blocks/ticket-details')
+    getTicketDetailsBlock(@Query() params: Request.GetCmsEntryParams) {
+        return this.cms.getTicketDetailsBlock(params);
     }
 
-    @Get('/components/notification-list')
-    getNotificationListComponent(@Query() params: Request.GetCmsEntryParams) {
-        return this.cms.getNotificationListComponent(params);
+    @Get('/blocks/notification-list')
+    getNotificationListBlock(@Query() params: Request.GetCmsEntryParams) {
+        return this.cms.getNotificationListBlock(params);
     }
 
-    @Get('/components/notification-details')
-    getNotificationDetailsComponent(@Query() params: Request.GetCmsEntryParams) {
-        return this.cms.getNotificationDetailsComponent(params);
+    @Get('/blocks/notification-details')
+    getNotificationDetailsBlock(@Query() params: Request.GetCmsEntryParams) {
+        return this.cms.getNotificationDetailsBlock(params);
     }
 
-    @Get('/components/article-list')
-    getArticleListComponent(@Query() params: Request.GetCmsEntryParams) {
-        return this.cms.getArticleListComponent(params);
+    @Get('/blocks/article-list')
+    getArticleListBlock(@Query() params: Request.GetCmsEntryParams) {
+        return this.cms.getArticleListBlock(params);
     }
 
-    @Get('/components/article-details')
-    getArticleDetailsComponent(@Query() params: Request.GetCmsEntryParams) {
-        return this.cms.getArticleDetailsComponent(params);
+    @Get('/blocks/article-details')
+    getArticleDetailsBlock(@Query() params: Request.GetCmsEntryParams) {
+        return this.cms.getArticleDetailsBlock(params);
     }
 
-    @Get('/components/invoice-list')
-    getInvoiceListComponent(@Query() params: Request.GetCmsEntryParams) {
-        return this.cms.getInvoiceListComponent(params);
+    @Get('/blocks/invoice-list')
+    getInvoiceListBlock(@Query() params: Request.GetCmsEntryParams) {
+        return this.cms.getInvoiceListBlock(params);
     }
 
-    @Get('/components/invoice-details')
-    getInvoiceDetailsComponent(@Query() params: Request.GetCmsEntryParams) {
-        return this.cms.getInvoiceDetailsComponent(params);
+    @Get('/blocks/invoice-details')
+    getInvoiceDetailsBlock(@Query() params: Request.GetCmsEntryParams) {
+        return this.cms.getInvoiceDetailsBlock(params);
     }
 
-    @Get('/components/resource-list')
-    getResourceListComponent(@Query() params: Request.GetCmsEntryParams) {
-        return this.cms.getResourceListComponent(params);
+    @Get('/blocks/resource-list')
+    getResourceListBlock(@Query() params: Request.GetCmsEntryParams) {
+        return this.cms.getResourceListBlock(params);
     }
 
-    @Get('/components/resource-details')
-    getResourceDetailsComponent(@Query() params: Request.GetCmsEntryParams) {
-        return this.cms.getResourceDetailsComponent(params);
+    @Get('/blocks/resource-details')
+    getResourceDetailsBlock(@Query() params: Request.GetCmsEntryParams) {
+        return this.cms.getResourceDetailsBlock(params);
+    }
+
+    @Get('/blocks/user-account')
+    getUserAccountBlock(@Query() params: Request.GetCmsEntryParams) {
+        return this.cms.getUserAccountBlock(params);
     }
 }

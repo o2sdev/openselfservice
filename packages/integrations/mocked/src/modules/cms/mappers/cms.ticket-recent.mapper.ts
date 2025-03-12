@@ -1,6 +1,6 @@
 import { CMS } from '@o2s/framework/modules';
 
-const MOCK_TICKET_RECENT_COMPONENT_EN: CMS.Model.TicketRecentComponent.TicketRecentComponent = {
+const MOCK_TICKET_RECENT_BLOCK_EN: CMS.Model.TicketRecentBlock.TicketRecentBlock = {
     id: 'ticket-recent-1',
     title: 'Recent activity in cases',
     commentsTitle: 'Comments',
@@ -13,7 +13,7 @@ const MOCK_TICKET_RECENT_COMPONENT_EN: CMS.Model.TicketRecentComponent.TicketRec
     detailsUrl: '/cases/{id}',
 };
 
-const MOCK_TICKET_RECENT_COMPONENT_DE: CMS.Model.TicketRecentComponent.TicketRecentComponent = {
+const MOCK_TICKET_RECENT_BLOCK_DE: CMS.Model.TicketRecentBlock.TicketRecentBlock = {
     id: 'ticket-recent-1',
     title: 'Letzte Aktivität in Fällen',
     commentsTitle: 'Kommentare',
@@ -26,7 +26,7 @@ const MOCK_TICKET_RECENT_COMPONENT_DE: CMS.Model.TicketRecentComponent.TicketRec
     detailsUrl: '/faelle/{id}',
 };
 
-const MOCK_TICKET_RECENT_COMPONENT_PL: CMS.Model.TicketRecentComponent.TicketRecentComponent = {
+const MOCK_TICKET_RECENT_BLOCK_PL: CMS.Model.TicketRecentBlock.TicketRecentBlock = {
     id: 'ticket-recent-1',
     title: 'Ostatnia aktywność w zgłoszeniach',
     commentsTitle: 'Komentarze',
@@ -39,13 +39,13 @@ const MOCK_TICKET_RECENT_COMPONENT_PL: CMS.Model.TicketRecentComponent.TicketRec
     detailsUrl: '/zgloszenia/{id}',
 };
 
-export const mapTicketRecentComponent = (locale: string): CMS.Model.TicketRecentComponent.TicketRecentComponent => {
+export const mapTicketRecentBlock = (locale: string): CMS.Model.TicketRecentBlock.TicketRecentBlock => {
     switch (locale) {
         case 'pl':
-            return MOCK_TICKET_RECENT_COMPONENT_PL;
+            return MOCK_TICKET_RECENT_BLOCK_PL;
         case 'de':
-            return MOCK_TICKET_RECENT_COMPONENT_DE;
+            return MOCK_TICKET_RECENT_BLOCK_DE;
         default:
-            return MOCK_TICKET_RECENT_COMPONENT_EN;
+            return MOCK_TICKET_RECENT_BLOCK_EN;
     }
 };

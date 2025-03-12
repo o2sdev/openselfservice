@@ -14,8 +14,8 @@ import { signIn } from '@/auth';
 
 import { routing } from '@/i18n/routing';
 
-import { AuthLayout } from '@/components/Auth/AuthLayout/AuthLayout';
-import { FormValues, SignInForm } from '@/components/Auth/SignInForm';
+import { AuthLayout } from '@/containers/Auth/AuthLayout/AuthLayout';
+import { FormValues, SignInForm } from '@/containers/Auth/SignInForm';
 
 interface Props {
     params: Promise<{

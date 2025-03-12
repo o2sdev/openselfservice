@@ -1,6 +1,6 @@
 import { CMS } from '@o2s/framework/modules';
 
-const MOCK_USER_ACCOUNT_COMPONENT_EN: CMS.Model.UserAccountComponent.UserAccountComponent = {
+const MOCK_USER_ACCOUNT_BLOCK_EN: CMS.Model.UserAccountBlock.UserAccountBlock = {
     id: 'user-account-1',
     title: 'User Account',
     basicInformationTitle: 'Basic Information',
@@ -70,7 +70,7 @@ const MOCK_USER_ACCOUNT_COMPONENT_EN: CMS.Model.UserAccountComponent.UserAccount
     },
 };
 
-const MOCK_USER_ACCOUNT_COMPONENT_PL: CMS.Model.UserAccountComponent.UserAccountComponent = {
+const MOCK_USER_ACCOUNT_BLOCK_PL: CMS.Model.UserAccountBlock.UserAccountBlock = {
     id: 'user-account-1',
     title: 'Konto Użytkownika',
     basicInformationTitle: 'Podstawowe Informacje',
@@ -141,7 +141,7 @@ const MOCK_USER_ACCOUNT_COMPONENT_PL: CMS.Model.UserAccountComponent.UserAccount
     },
 };
 
-const MOCK_USER_ACCOUNT_COMPONENT_DE: CMS.Model.UserAccountComponent.UserAccountComponent = {
+const MOCK_USER_ACCOUNT_BLOCK_DE: CMS.Model.UserAccountBlock.UserAccountBlock = {
     id: 'user-account-1',
     title: 'Benutzerkonto',
     basicInformationTitle: 'Grundinformationen',
@@ -212,13 +212,13 @@ const MOCK_USER_ACCOUNT_COMPONENT_DE: CMS.Model.UserAccountComponent.UserAccount
     },
 };
 
-export const mapUserAccountComponent = (locale: string): CMS.Model.UserAccountComponent.UserAccountComponent => {
+export const mapUserAccountBlock = (locale: string): CMS.Model.UserAccountBlock.UserAccountBlock => {
     switch (locale) {
         case 'pl':
-            return MOCK_USER_ACCOUNT_COMPONENT_PL;
+            return MOCK_USER_ACCOUNT_BLOCK_PL;
         case 'de':
-            return MOCK_USER_ACCOUNT_COMPONENT_DE;
+            return MOCK_USER_ACCOUNT_BLOCK_DE;
         default:
-            return MOCK_USER_ACCOUNT_COMPONENT_EN;
+            return MOCK_USER_ACCOUNT_BLOCK_EN;
     }
 };

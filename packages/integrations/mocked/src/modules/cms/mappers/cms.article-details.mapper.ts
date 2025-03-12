@@ -1,6 +1,6 @@
 import { CMS } from '@o2s/framework/modules';
 
-const MOCK_ARTICLE_DETAILS_COMPONENT: CMS.Model.ArticleDetailsComponent.ArticleDetailsComponent = {
+const MOCK_ARTICLE_DETAILS_BLOCK: CMS.Model.ArticleDetailsBlock.ArticleDetailsBlock = {
     id: 'article-details-1',
     properties: {
         id: 'ID',
@@ -18,8 +18,8 @@ const MOCK_ARTICLE_DETAILS_COMPONENT: CMS.Model.ArticleDetailsComponent.ArticleD
     },
 };
 
-export const mapArticleDetailsComponent = (): CMS.Model.ArticleDetailsComponent.ArticleDetailsComponent => {
+export const mapArticleDetailsBlock = (): CMS.Model.ArticleDetailsBlock.ArticleDetailsBlock => {
     return {
-        ...MOCK_ARTICLE_DETAILS_COMPONENT,
+        ...MOCK_ARTICLE_DETAILS_BLOCK,
     };
 };

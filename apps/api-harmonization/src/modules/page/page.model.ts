@@ -11,7 +11,7 @@ import {
     TicketList,
     TicketRecent,
     UserAccount,
-} from '@o2s/api-harmonization/components';
+} from '@o2s/api-harmonization/blocks';
 
 export class Init {
     locales!: {
@@ -51,14 +51,14 @@ export class PageData {
     hasOwnTitle!: boolean;
 }
 
-export type Components =
-    | TicketList.Model.TicketListComponent['__typename']
-    | TicketDetails.Model.TicketDetailsComponent['__typename']
-    | NotificationList.Model.NotificationListComponent['__typename']
-    | NotificationDetails.Model.NotificationDetailsComponent['__typename']
-    | Faq.Model.FaqComponent['__typename']
-    | InvoiceList.Model.InvoiceListComponent['__typename']
-    | PaymentsSummary.Model.PaymentsSummaryComponent['__typename']
-    | PaymentsHistory.Model.PaymentsHistoryComponent['__typename']
-    | UserAccount.Model.UserAccountComponent['__typename']
-    | TicketRecent.Model.TicketRecentComponent['__typename'];
+export type Blocks =
+    | TicketList.Model.TicketListBlock['__typename']
+    | TicketDetails.Model.TicketDetailsBlock['__typename']
+    | NotificationList.Model.NotificationListBlock['__typename']
+    | NotificationDetails.Model.NotificationDetailsBlock['__typename']
+    | Faq.Model.FaqBlock['__typename']
+    | InvoiceList.Model.InvoiceListBlock['__typename']
+    | PaymentsSummary.Model.PaymentsSummaryBlock['__typename']
+    | PaymentsHistory.Model.PaymentsHistoryBlock['__typename']
+    | UserAccount.Model.UserAccountBlock['__typename']
+    | TicketRecent.Model.TicketRecentBlock['__typename'];

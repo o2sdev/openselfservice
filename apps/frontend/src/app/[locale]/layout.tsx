@@ -13,8 +13,8 @@ import { routing } from '@/i18n';
 
 import { GlobalProvider } from '@/providers/GlobalProvider';
 
-import { Footer } from '@/components/Footer/Footer';
-import { Header } from '@/components/Header/Header';
+import { Footer } from '@/containers/Footer/Footer';
+import { Header } from '@/containers/Header/Header';
 
 import '@/styles/global.scss';
 

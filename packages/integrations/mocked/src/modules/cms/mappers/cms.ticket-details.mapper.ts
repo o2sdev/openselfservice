@@ -1,6 +1,6 @@
 import { CMS } from '@o2s/framework/modules';
 
-const MOCK_TICKET_DETAILS_COMPONENT_EN: CMS.Model.TicketDetailsComponent.TicketDetailsComponent = {
+const MOCK_TICKET_DETAILS_BLOCK_EN: CMS.Model.TicketDetailsBlock.TicketDetailsBlock = {
     id: 'ticket-list-1',
     title: 'Case details',
     commentsTitle: 'Comments',
@@ -43,7 +43,7 @@ const MOCK_TICKET_DETAILS_COMPONENT_EN: CMS.Model.TicketDetailsComponent.TicketD
     },
 };
 
-const MOCK_TICKET_DETAILS_COMPONENT_PL: CMS.Model.TicketDetailsComponent.TicketDetailsComponent = {
+const MOCK_TICKET_DETAILS_BLOCK_PL: CMS.Model.TicketDetailsBlock.TicketDetailsBlock = {
     id: 'ticket-list-1',
     title: 'Szczegóły sprawy',
     commentsTitle: 'Komentarze',
@@ -86,7 +86,7 @@ const MOCK_TICKET_DETAILS_COMPONENT_PL: CMS.Model.TicketDetailsComponent.TicketD
     },
 };
 
-const MOCK_TICKET_DETAILS_COMPONENT_DE: CMS.Model.TicketDetailsComponent.TicketDetailsComponent = {
+const MOCK_TICKET_DETAILS_BLOCK_DE: CMS.Model.TicketDetailsBlock.TicketDetailsBlock = {
     id: 'ticket-list-1',
     title: 'Falldetails',
     commentsTitle: 'Kommentare',
@@ -129,13 +129,13 @@ const MOCK_TICKET_DETAILS_COMPONENT_DE: CMS.Model.TicketDetailsComponent.TicketD
     },
 };
 
-export const mapTicketDetailsComponent = (_locale: string): CMS.Model.TicketDetailsComponent.TicketDetailsComponent => {
+export const mapTicketDetailsBlock = (_locale: string): CMS.Model.TicketDetailsBlock.TicketDetailsBlock => {
     switch (_locale) {
         case 'pl':
-            return MOCK_TICKET_DETAILS_COMPONENT_PL;
+            return MOCK_TICKET_DETAILS_BLOCK_PL;
         case 'de':
-            return MOCK_TICKET_DETAILS_COMPONENT_DE;
+            return MOCK_TICKET_DETAILS_BLOCK_DE;
         default:
-            return MOCK_TICKET_DETAILS_COMPONENT_EN;
+            return MOCK_TICKET_DETAILS_BLOCK_EN;
     }
 };

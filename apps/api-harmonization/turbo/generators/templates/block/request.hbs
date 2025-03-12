@@ -1,0 +1,5 @@
+import { CMS } from '@o2s/framework/modules';
+
+export class Get{{ pascalCase name }}BlockQuery implements Omit<CMS.Request.GetCmsEntryParams, 'locale'> {
+    id!: string;
+}

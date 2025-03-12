@@ -1,6 +1,6 @@
 import { CMS } from '@o2s/framework/modules';
 
-const MOCK_NOTIFICATION_DETAILS_COMPONENT_EN: CMS.Model.NotificationDetailsComponent.NotificationDetailsComponent = {
+const MOCK_NOTIFICATION_DETAILS_BLOCK_EN: CMS.Model.NotificationDetailsBlock.NotificationDetailsBlock = {
     id: 'notification-list-1',
     fieldMapping: {
         type: {
@@ -38,7 +38,7 @@ const MOCK_NOTIFICATION_DETAILS_COMPONENT_EN: CMS.Model.NotificationDetailsCompo
     },
 };
 
-const MOCK_NOTIFICATION_DETAILS_COMPONENT_DE: CMS.Model.NotificationDetailsComponent.NotificationDetailsComponent = {
+const MOCK_NOTIFICATION_DETAILS_BLOCK_DE: CMS.Model.NotificationDetailsBlock.NotificationDetailsBlock = {
     id: 'notification-list-1',
     fieldMapping: {
         type: {
@@ -76,7 +76,7 @@ const MOCK_NOTIFICATION_DETAILS_COMPONENT_DE: CMS.Model.NotificationDetailsCompo
     },
 };
 
-const MOCK_NOTIFICATION_DETAILS_COMPONENT_PL: CMS.Model.NotificationDetailsComponent.NotificationDetailsComponent = {
+const MOCK_NOTIFICATION_DETAILS_BLOCK_PL: CMS.Model.NotificationDetailsBlock.NotificationDetailsBlock = {
     id: 'notification-list-1',
     fieldMapping: {
         type: {
@@ -114,15 +114,15 @@ const MOCK_NOTIFICATION_DETAILS_COMPONENT_PL: CMS.Model.NotificationDetailsCompo
     },
 };
 
-export const mapNotificationDetailsComponent = (
+export const mapNotificationDetailsBlock = (
     locale: string,
-): CMS.Model.NotificationDetailsComponent.NotificationDetailsComponent => {
+): CMS.Model.NotificationDetailsBlock.NotificationDetailsBlock => {
     switch (locale) {
         case 'de':
-            return MOCK_NOTIFICATION_DETAILS_COMPONENT_DE;
+            return MOCK_NOTIFICATION_DETAILS_BLOCK_DE;
         case 'pl':
-            return MOCK_NOTIFICATION_DETAILS_COMPONENT_PL;
+            return MOCK_NOTIFICATION_DETAILS_BLOCK_PL;
         default:
-            return MOCK_NOTIFICATION_DETAILS_COMPONENT_EN;
+            return MOCK_NOTIFICATION_DETAILS_BLOCK_EN;
     }
 };

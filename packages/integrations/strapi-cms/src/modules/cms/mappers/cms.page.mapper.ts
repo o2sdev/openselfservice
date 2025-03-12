@@ -82,7 +82,7 @@ const mapTemplate = (template?: TemplateFragment): CMS.Model.Page.PageTemplate =
     throw new NotFoundException();
 };
 
-const mapSlot = (slot: ComponentFragment[]): CMS.Model.Page.SlotComponent[] => {
+const mapSlot = (slot: ComponentFragment[]): CMS.Model.Page.SlotBlock[] => {
     return slot.reduce((acc, component) => {
         const __typename = mapComponent(component);
 
@@ -95,7 +95,7 @@ const mapSlot = (slot: ComponentFragment[]): CMS.Model.Page.SlotComponent[] => {
                 id: component.documentId,
             },
         ];
-    }, [] as CMS.Model.Page.SlotComponent[]);
+    }, [] as CMS.Model.Page.SlotBlock[]);
 };
 
 // TODO: check where component names should be defined, currently they are placed in the api-harmonization so we cannot access them here
