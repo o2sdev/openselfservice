@@ -2,6 +2,7 @@
 
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
+import React from 'react';
 
 import { Link } from '@o2s/ui/components/link';
 
@@ -16,7 +17,7 @@ import { MobileNavigation } from './MobileNavigation/MobileNavigation';
 import { NotificationInfo } from './NotificationInfo/NotificationInfo';
 import { UserInfo } from './UserInfo/UserInfo';
 
-export const Header: React.FC<HeaderProps> = ({ headerData, alternativeUrls, children }) => {
+export const Header: React.FC<HeaderProps> = ({ headerData, children }) => {
     const session = useSession();
     const isSignedIn = session?.status === 'authenticated';
 
@@ -52,9 +53,7 @@ export const Header: React.FC<HeaderProps> = ({ headerData, alternativeUrls, chi
     };
 
     const LocaleSlot = () => {
-        return (
-            <LocaleSwitcher alternativeUrls={alternativeUrls} label={headerData.languageSwitcherLabel ?? 'Language'} />
-        );
+        return <LocaleSwitcher label={headerData.languageSwitcherLabel ?? 'Language'} />;
     };
 
     const ContextSwitchSlot = () =>
