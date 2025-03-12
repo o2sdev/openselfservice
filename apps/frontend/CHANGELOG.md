@@ -1,5 +1,12 @@
 # @o2s/frontend
 
+## 0.12.3
+
+### Patch Changes
+
+- 5c0aa1d: fixed alternative urls for pages not working when changing locale
+- a847eb9: fixed incorrect props in the `Header` component
+
 ## 0.12.2
 
 ### Patch Changes
