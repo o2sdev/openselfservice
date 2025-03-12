@@ -13,17 +13,17 @@ import { useGlobalContext } from '@/providers/GlobalProvider';
 
 import { ToolbarProps } from './Toolbar.types';
 
-export const LocaleSwitcher: React.FC<ToolbarProps> = ({ alternativeUrls, label = 'Language' }) => {
+export const LocaleSwitcher: React.FC<ToolbarProps> = ({ label = 'Language' }) => {
     const pathname = usePathname();
     const searchParams = useSearchParams();
     const router = useRouter();
 
-    const { config } = useGlobalContext();
+    const { config, alternativeUrls } = useGlobalContext();
 
     const currentLocale = useLocale();
 
     const handleLocaleChange = (locale: string) => {
-        const alternative = alternativeUrls?.[locale];
+        const alternative = alternativeUrls.values?.[locale];
         const url = alternative || pathname;
 
         router.push(
