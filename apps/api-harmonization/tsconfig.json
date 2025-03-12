@@ -7,6 +7,8 @@
         "emitDecoratorMetadata": true,
         "paths": {
             "@o2s/api-harmonization/models/*": ["./src/models/*"],
+            "@o2s/api-harmonization/blocks": ["./src/blocks"],
+            "@o2s/api-harmonization/blocks/*": ["./src/blocks/*"],
             "@o2s/api-harmonization/components": ["./src/components"],
             "@o2s/api-harmonization/components/*": ["./src/components/*"],
             "@o2s/api-harmonization/config/*": ["./src/config/*"],

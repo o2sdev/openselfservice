@@ -1,17 +1,17 @@
-import { Components, Headers } from '@o2s/api-harmonization';
+import { Blocks, Headers } from '@o2s/api-harmonization';
 
 import { Sdk } from '@o2s/framework/sdk';
 
-const API_URL = Components.TicketDetails.URL;
+const API_URL = Blocks.TicketDetails.URL;
 
 export const ticketDetails = (sdk: Sdk) => ({
-    components: {
+    blocks: {
         getTicketDetails: (
-            params: Components.TicketDetails.Request.GetTicketDetailsComponentParams,
-            query: Components.TicketDetails.Request.GetTicketDetailsComponentQuery,
+            params: Blocks.TicketDetails.Request.GetTicketDetailsComponentParams,
+            query: Blocks.TicketDetails.Request.GetTicketDetailsComponentQuery,
             headers: Headers.AppHeaders,
             authorization: string,
-        ): Promise<Components.TicketDetails.Model.TicketDetailsComponent> =>
+        ): Promise<Blocks.TicketDetails.Model.TicketDetailsComponent> =>
             sdk.makeRequest({
                 method: 'get',
                 url: `${API_URL}/${params.id}`,

@@ -11,7 +11,7 @@ import {
     TicketList,
     TicketRecent,
     UserAccount,
-} from '@o2s/api-harmonization/components';
+} from '@o2s/api-harmonization/blocks';
 
 export class Init {
     locales!: {
@@ -51,7 +51,7 @@ export class PageData {
     hasOwnTitle!: boolean;
 }
 
-export type Components =
+export type Blocks =
     | TicketList.Model.TicketListComponent['__typename']
     | TicketDetails.Model.TicketDetailsComponent['__typename']
     | NotificationList.Model.NotificationListComponent['__typename']

@@ -1,16 +1,16 @@
-import { Components, Headers } from '@o2s/api-harmonization';
+import { Blocks, Headers } from '@o2s/api-harmonization';
 
 import { Sdk } from '@o2s/framework/sdk';
 
-const API_URL = Components.InvoiceList.URL;
+const API_URL = Blocks.InvoiceList.URL;
 
 export const invoiceList = (sdk: Sdk) => ({
-    components: {
+    blocks: {
         getInvoiceList: (
-            query: Components.InvoiceList.Request.GetInvoiceListComponentQuery,
+            query: Blocks.InvoiceList.Request.GetInvoiceListComponentQuery,
             headers: Headers.AppHeaders,
             authorization: string,
-        ): Promise<Components.InvoiceList.Model.InvoiceListComponent> =>
+        ): Promise<Blocks.InvoiceList.Model.InvoiceListComponent> =>
             sdk.makeRequest({
                 method: 'get',
                 url: `${API_URL}`,

@@ -12,8 +12,9 @@ import { generateSeo } from '@/utils/seo';
 
 import { auth, signIn } from '@/auth';
 
+import { PageTemplate } from '@/templates/PageTemplate/PageTemplate';
+
 import { Client } from '@/components/Client';
-import { PageTemplate } from '@/components/PageTemplate/PageTemplate';
 
 interface Props {
     params: Promise<{

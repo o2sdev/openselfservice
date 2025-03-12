@@ -1,16 +1,16 @@
-import { Components, Headers } from '@o2s/api-harmonization';
+import { Blocks, Headers } from '@o2s/api-harmonization';
 
 import { Sdk } from '@o2s/framework/sdk';
 
-const API_URL = Components.PaymentsSummary.URL;
+const API_URL = Blocks.PaymentsSummary.URL;
 
 export const paymentsSummary = (sdk: Sdk) => ({
-    components: {
+    blocks: {
         getPaymentsSummary: (
-            query: Components.PaymentsSummary.Request.GetPaymentsSummaryComponentQuery,
+            query: Blocks.PaymentsSummary.Request.GetPaymentsSummaryComponentQuery,
             headers: Headers.AppHeaders,
             authorization: string,
-        ): Promise<Components.PaymentsSummary.Model.PaymentsSummaryComponent> =>
+        ): Promise<Blocks.PaymentsSummary.Model.PaymentsSummaryComponent> =>
             sdk.makeRequest({
                 method: 'get',
                 url: `${API_URL}`,

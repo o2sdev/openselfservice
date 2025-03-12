@@ -1,17 +1,17 @@
-import { Components, Headers } from '@o2s/api-harmonization';
+import { Blocks, Headers } from '@o2s/api-harmonization';
 
 import { Sdk } from '@o2s/framework/sdk';
 
-const API_URL = Components.NotificationDetails.URL;
+const API_URL = Blocks.NotificationDetails.URL;
 
 export const notificationDetails = (sdk: Sdk) => ({
-    components: {
+    blocks: {
         getNotificationDetails: (
-            params: Components.NotificationDetails.Request.GetNotificationDetailsComponentParams,
-            query: Components.NotificationDetails.Request.GetNotificationDetailsComponentQuery,
+            params: Blocks.NotificationDetails.Request.GetNotificationDetailsComponentParams,
+            query: Blocks.NotificationDetails.Request.GetNotificationDetailsComponentQuery,
             headers: Headers.AppHeaders,
             authorization: string,
-        ): Promise<Components.NotificationDetails.Model.NotificationDetailsComponent> =>
+        ): Promise<Blocks.NotificationDetails.Model.NotificationDetailsComponent> =>
             sdk.makeRequest({
                 method: 'get',
                 url: `${API_URL}/${params.id}`,
@@ -23,7 +23,7 @@ export const notificationDetails = (sdk: Sdk) => ({
             }),
 
         markNotificationAs: (
-            body: Components.NotificationDetails.Request.MarkNotificationAsComponentBody,
+            body: Blocks.NotificationDetails.Request.MarkNotificationAsComponentBody,
             headers: Headers.AppHeaders,
             authorization: string,
         ): Promise<void> =>
