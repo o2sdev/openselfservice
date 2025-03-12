@@ -54,7 +54,7 @@ export default async function RootLayout({ children, params }: Props) {
         <html lang={locale} className={inter.className}>
             <body>
                 {/*@see https://github.com/nextauthjs/next-auth/issues/9504#issuecomment-2516665386*/}
-                <SessionProvider key={session?.user?.id} session={session}>
+                <SessionProvider key={session?.user?.id} session={session} refetchOnWindowFocus={false}>
                     <GlobalProvider config={init} locale={locale}>
                         <div className="flex flex-col min-h-dvh">
                             <Header headerData={init.common.header} />

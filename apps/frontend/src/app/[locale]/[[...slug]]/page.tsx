@@ -12,6 +12,7 @@ import { generateSeo } from '@/utils/seo';
 
 import { auth, signIn } from '@/auth';
 
+import { Client } from '@/components/Client';
 import { PageTemplate } from '@/components/PageTemplate/PageTemplate';
 
 interface Props {
@@ -85,6 +86,8 @@ export default async function Page({ params }: Props) {
 
         return (
             <main className="flex flex-col gap-6 row-start-2 items-center sm:items-start">
+                <Client page={data} />
+
                 {!data.hasOwnTitle && (
                     <div className="flex flex-col gap-6 w-full">
                         <Typography variant="h1" asChild>
