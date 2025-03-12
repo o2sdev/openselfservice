@@ -1,4 +1,4 @@
-import { Components } from '@o2s/api-harmonization';
+import { Blocks } from '@o2s/api-harmonization';
 
 export interface {{ pascalCase name }}Props {
     id: string;
@@ -6,4 +6,4 @@ export interface {{ pascalCase name }}Props {
     locale: string;
 }
 
-export type {{ pascalCase name }}PureProps = {{ pascalCase name }}Props & Components.{{ pascalCase name }}.Model.{{ pascalCase name }}Component;
+export type {{ pascalCase name }}PureProps = {{ pascalCase name }}Props & Blocks.{{ pascalCase name }}.Model.{{ pascalCase name }}Block;

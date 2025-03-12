@@ -2,11 +2,11 @@ import React from 'react';
 
 import { sdk } from '@/api/sdk';
 
+import {  {{ pascalCase name }}Dynamic } from './{{ pascalCase name }}.dynamic';
 import {  {{ pascalCase name }}Props } from './{{ pascalCase name }}.types';
-import {  {{ pascalCase name }}Pure } from './{{ pascalCase name }}.client';
 
 export const {{ pascalCase name }}: React.FC<{{ pascalCase name }}Props> = async ({ id, accessToken, locale }) => {
-    const data = await sdk.components.get{{ pascalCase name }}(
+    const data = await sdk.blocks.get{{ pascalCase name }}(
         {
             id,
         },
@@ -14,5 +14,5 @@ export const {{ pascalCase name }}: React.FC<{{ pascalCase name }}Props> = async
         accessToken,
     );
 
-    return <{{ pascalCase name }}Pure {...data} id={id} accessToken={accessToken} locale={locale} />;
+    return <{{ pascalCase name }}Dynamic {...data} id={id} accessToken={accessToken} locale={locale} />;
 };
