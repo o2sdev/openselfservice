@@ -8,4 +8,4 @@
 '@o2s/docs': minor
 ---
 
-unified naming of the related objects in the api-harmonization and frontend apps - from now on, they are called `blocks` (instead od `components` in api-harmonization and `containers` in frontend)
+unified naming of the related objects in the api-harmonization and frontend apps - from now on, they are called `blocks` (instead of `components` in api-harmonization and `containers` in frontend)
