@@ -1,9 +1,13 @@
+import dynamic from 'next/dynamic';
 import React from 'react';
 
 import { sdk } from '@/api/sdk';
 
-import { PaymentsHistoryDynamic } from './PaymentsHistory.dynamic';
 import { PaymentsHistoryProps } from './PaymentsHistory.types';
+
+export const PaymentsHistoryDynamic = dynamic(() =>
+    import('./PaymentsHistory.client').then((module) => module.PaymentsHistoryPure),
+);
 
 export const PaymentsHistory: React.FC<PaymentsHistoryProps> = async ({ id, accessToken, locale }) => {
     const data = await sdk.blocks.getPaymentsHistory(

@@ -24,7 +24,6 @@ apps/frontend/src
 │   │
 │   └───Block
 │       ├───Block.client.tsx
-│       ├───Block.dynamic.tsx
 │       ├───Block.renderer.tsx
 │       ├───Block.server.tsx
 │       └───Block.types.tsx
@@ -78,7 +77,7 @@ The server part handles fetching the initial data for the component. This is mos
 export const Faq: React.FC<FaqProps> = async ({ id, accessToken, locale }) => {
     const data = await sdk.components.getFaq(...);
 
-    return <FaqDynamic {...data} />;
+    return <FaqPure {...data} />;
 };
 ```
 
@@ -166,14 +165,6 @@ export const FaqPure: React.FC<FaqPureProps> = ({ ...component }) => {
 For now, an additional component between a server and a client is needed for appropriate code splitting by Next.js. This component is very simple, and only exports the client component that is [lazy loaded](https://nextjs.org/docs/pages/building-your-application/optimizing/lazy-loading).
 
 This is only a temporary solution for an [already reported issue](https://github.com/vercel/next.js/issues/61066), and hopefully can be get rid of as soon as it is fixed.
-
-```typescript jsx
-'use client';
-
-import dynamic from 'next/dynamic';
-
-export const FaqDynamic = dynamic(() => import('./Faq.client').then((module) => module.FaqPure));
-```
 
 ### Renderer
 

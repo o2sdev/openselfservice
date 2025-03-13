@@ -1,9 +1,13 @@
+import dynamic from 'next/dynamic';
 import React from 'react';
 
 import { sdk } from '@/api/sdk';
 
-import { InvoiceListDynamic } from './InvoiceList.dynamic';
 import { InvoiceListProps } from './InvoiceList.types';
+
+export const InvoiceListDynamic = dynamic(() =>
+    import('./InvoiceList.client').then((module) => module.InvoiceListPure),
+);
 
 export const InvoiceList: React.FC<InvoiceListProps> = async ({ id, accessToken, locale }) => {
     const data = await sdk.blocks.getInvoiceList(

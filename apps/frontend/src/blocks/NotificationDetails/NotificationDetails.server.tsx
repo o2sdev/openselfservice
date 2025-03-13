@@ -1,9 +1,13 @@
+import dynamic from 'next/dynamic';
 import React from 'react';
 
 import { sdk } from '@/api/sdk';
 
-import { NotificationDetailsDynamic } from './NotificationDetails.dynamic';
 import { NotificationDetailsProps } from './NotificationDetails.types';
+
+export const NotificationDetailsDynamic = dynamic(() =>
+    import('./NotificationDetails.client').then((module) => module.NotificationDetailsPure),
+);
 
 export const NotificationDetails: React.FC<NotificationDetailsProps> = async ({
     id,

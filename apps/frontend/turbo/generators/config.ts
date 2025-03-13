@@ -23,11 +23,6 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
             },
             {
                 type: 'add',
-                path: 'src/blocks/{{pascalCase name}}/{{pascalCase name}}.dynamic.tsx',
-                templateFile: 'templates/block/dynamic.hbs',
-            },
-            {
-                type: 'add',
                 path: 'src/blocks/{{pascalCase name}}/{{pascalCase name}}.client.tsx',
                 templateFile: 'templates/block/client.hbs',
             },

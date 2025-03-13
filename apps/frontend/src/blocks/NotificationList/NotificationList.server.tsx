@@ -1,9 +1,13 @@
+import dynamic from 'next/dynamic';
 import React from 'react';
 
 import { sdk } from '@/api/sdk';
 
-import { NotificationListDynamic } from './NotificationList.dynamic';
 import { NotificationListProps } from './NotificationList.types';
+
+export const NotificationListDynamic = dynamic(() =>
+    import('./NotificationList.client').then((module) => module.NotificationListPure),
+);
 
 export const NotificationListServer: React.FC<NotificationListProps> = async ({ id, accessToken, locale }) => {
     const data = await sdk.blocks.getNotificationList(

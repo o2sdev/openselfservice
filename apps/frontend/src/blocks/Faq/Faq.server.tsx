@@ -1,9 +1,11 @@
+import dynamic from 'next/dynamic';
 import React from 'react';
 
 import { sdk } from '@/api/sdk';
 
-import { FaqDynamic } from './Faq.dynamic';
 import { FaqProps } from './Faq.types';
+
+export const FaqDynamic = dynamic(() => import('./Faq.client').then((module) => module.FaqPure));
 
 export const Faq: React.FC<FaqProps> = async ({ id, accessToken, locale }) => {
     const data = await sdk.blocks.getFaq(
