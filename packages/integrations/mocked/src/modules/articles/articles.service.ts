@@ -8,19 +8,21 @@ import { SearchEngineArticleModel } from './articles.search.model';
 import { responseDelay } from '@/utils/delay';
 
 @Injectable()
-export class ArticleService implements Articles.Service {
+export class ArticlesService implements Articles.Service {
     constructor(private readonly searchService: Search.Service) {}
 
     getArticle(params: Articles.Request.GetArticleParams): Observable<Articles.Model.Article> {
-        const locale = params.locale || 'en';
+        const locale = params.locale;
+
         return of(mapArticle(locale, params.id)).pipe(responseDelay());
     }
 
     getArticleList(
         options: Articles.Request.GetArticleListQuery,
-        body: Articles.Request.GetArticleListComponentBody,
+        body: Articles.Request.GetArticleListBody,
     ): Observable<Articles.Model.Articles> {
-        const locale = options.locale || 'en';
+        const locale = options.locale;
+
         const searchPayload: Search.Model.SearchPayload = {
             query: body?.query,
             exact: body?.category
@@ -32,6 +34,7 @@ export class ArticleService implements Articles.Service {
             page: options.offset,
             sort: body?.sort ? [body.sort] : undefined,
         };
+
         return this.searchService.search<SearchEngineArticleModel>(`articles_${locale}`, searchPayload).pipe(
             map((result) => {
                 return mapArticlesFromSearch(result.hits);

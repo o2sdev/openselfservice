@@ -4,6 +4,6 @@ export class GetArticleDetailsComponentQuery implements Omit<CMS.Request.GetCmsE
     id!: string;
 }
 
-export class GetArticleDetailsComponentParams implements Articles.Request.GetArticleParams {
+export class GetArticleDetailsComponentParams implements Omit<Articles.Request.GetArticleParams, 'locale'> {
     id!: string;
 }

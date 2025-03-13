@@ -1,6 +1,6 @@
-import { ApiConfig } from '@o2s/framework/modules';
+import { ApiConfig, Search } from '@o2s/framework/modules';
 
-import { Service as ArticleService } from './modules/articles';
+import { Service as ArticlesService } from './modules/articles';
 import { Service as BillingAccountsService } from './modules/billing-accounts';
 import { Service as CacheService } from './modules/cache';
 import { Service as CmsService } from './modules/cms';
@@ -25,7 +25,8 @@ export const Config: Partial<ApiConfig['integrations']> = {
         service: NotificationsService,
     },
     articles: {
-        service: ArticleService,
+        service: ArticlesService,
+        imports: [Search.Module],
     },
     resources: {
         service: ResourceService,

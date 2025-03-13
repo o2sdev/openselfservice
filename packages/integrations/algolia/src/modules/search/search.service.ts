@@ -1,12 +1,13 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Search } from '@o2s/framework/modules';
 import { LoggerService } from '@o2s/utils.logger';
 import { Algoliasearch, SearchMethodParams, SearchParamsObject, algoliasearch } from 'algoliasearch';
 import { Observable, from } from 'rxjs';
 
+import { Search } from '@o2s/framework/modules';
+
 @Injectable()
-export class AlgoliaService extends Search.Service {
+export class SearchService extends Search.Service {
     private readonly searchClient: Algoliasearch;
 
     constructor(

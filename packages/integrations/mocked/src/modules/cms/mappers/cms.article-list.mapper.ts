@@ -95,6 +95,7 @@ const MOCK_ARTICLE_LIST_COMPONENT_DE: CMS.Model.ArticleListComponent.ArticleList
         description: 'Verwenden Sie Filter, um bestimmte Artikel zu finden',
         submit: 'Filter anwenden',
         reset: 'Filter zurücksetzen',
+        close: 'Filter schließen',
         items: [
             {
                 __typename: 'FilterDateRange',
@@ -160,6 +161,7 @@ const MOCK_ARTICLE_LIST_COMPONENT_PL: CMS.Model.ArticleListComponent.ArticleList
         description: 'Użyj filtrów, aby znaleźć konkretne artykuły',
         submit: 'Zastosuj filtry',
         reset: 'Resetuj filtry',
+        close: 'Zamknij filtry',
         items: [
             {
                 __typename: 'FilterDateRange',

@@ -2,17 +2,17 @@ import { PaginationQuery } from '@/utils/models/pagination';
 
 export class GetArticleParams {
     id!: string;
-    locale?: string;
+    locale!: string;
 }
 
 export class GetArticleListQuery extends PaginationQuery {
     title?: string;
     dateFrom?: Date;
     dateTo?: Date;
-    locale?: string;
+    locale!: string;
 }
 
-export class GetArticleListComponentBody {
+export class GetArticleListBody {
     query?: string;
     category?: string;
     sort?: {

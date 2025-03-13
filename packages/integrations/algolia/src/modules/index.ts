@@ -1,1 +1,1 @@
-export * as Search from './algolia';
+export * as Search from './search';
