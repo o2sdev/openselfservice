@@ -1,5 +1,5 @@
 import { Request } from '.';
-import { Controller, Get, Param, Query, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, Param, Query, UseInterceptors } from '@nestjs/common';
 import { LoggerService } from '@o2s/utils.logger';
 
 import { ArticleService } from './articles.service';
@@ -15,7 +15,7 @@ export class ArticleController {
     }
 
     @Get()
-    getArticleList(@Query() query: Request.GetArticleListQuery) {
-        return this.articleService.getArticleList(query);
+    getArticleList(@Query() query: Request.GetArticleListQuery, @Body() body: Request.GetArticleListComponentBody) {
+        return this.articleService.getArticleList(query, body);
     }
 }

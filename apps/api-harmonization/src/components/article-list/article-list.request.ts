@@ -5,3 +5,12 @@ export class GetArticleListComponentQuery implements Omit<CMS.Request.GetCmsEntr
     offset!: number;
     limit!: number;
 }
+
+export class GetArticleListComponentBody {
+    query?: string;
+    category?: string;
+    sort?: {
+        field: string;
+        order: 'asc' | 'desc';
+    };
+}

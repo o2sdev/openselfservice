@@ -14,6 +14,7 @@ import {
     Notifications,
     Organizations,
     Resources,
+    Search,
     Tickets,
     Users,
 } from '@o2s/framework/modules';
@@ -59,6 +60,7 @@ import { RoutesModule } from './modules/routes/routes.module';
         Organizations.Module.register(AppConfig),
         Cache.Module.register(AppConfig),
         BillingAccounts.Module.register(AppConfig),
+        Search.Module.register(AppConfig),
 
         PageModule.register(AppConfig),
         RoutesModule.register(AppConfig),
