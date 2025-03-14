@@ -1,4 +1,4 @@
-![o2s-gh-cover.png](apps/docs/static/img/o2s-gh-cover.png)
+[![Open Self Service - open-source development kit for composable Customer Portals](apps/docs/static/img/o2s-gh-cover.png)](https://www.openselfservice.com)
 
 # Open Self Service (O2S)
 
