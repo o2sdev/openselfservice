@@ -1,5 +1,11 @@
 # @o2s/docs
 
+## 0.9.7
+
+### Patch Changes
+
+- 1360863: fix(docs): Improve README with some screenshots #21
+
 ## 0.9.6
 
 ### Patch Changes
