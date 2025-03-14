@@ -35,5 +35,9 @@ const mapArticle = (
         title: article.title,
         createdAt: formatDateRelative(article.createdAt, locale, cms.labels.today, cms.labels.yesterday),
         updatedAt: formatDateRelative(article.updatedAt, locale, cms.labels.today, cms.labels.yesterday),
+        category: {
+            label: cms.fieldMapping.category?.[article.category] || article.category,
+            value: article.category,
+        },
     };
 };

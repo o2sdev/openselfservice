@@ -8,6 +8,7 @@ import { InvoicesIntegrationConfig } from '@o2s/api-harmonization/models/invoice
 import { NotificationsIntegrationConfig } from '@o2s/api-harmonization/models/notifications';
 import { OrganizationsIntegrationConfig } from '@o2s/api-harmonization/models/organizations';
 import { ResourcesIntegrationConfig } from '@o2s/api-harmonization/models/resources';
+import { SearchIntegrationConfig } from '@o2s/api-harmonization/models/search';
 import { TicketsIntegrationConfig } from '@o2s/api-harmonization/models/tickets';
 import { UsersIntegrationConfig } from '@o2s/api-harmonization/models/users';
 
@@ -23,5 +24,6 @@ export const AppConfig: ApiConfig = {
         cms: CmsIntegrationConfig,
         cache: CacheIntegrationConfig,
         billingAccounts: BillingAccountsIntegrationConfig,
+        search: SearchIntegrationConfig,
     },
 };

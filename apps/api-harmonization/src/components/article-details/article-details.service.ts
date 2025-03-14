@@ -22,7 +22,7 @@ export class ArticleDetailsService {
         headers: AppHeaders,
     ): Observable<ArticleDetailsComponent> {
         const cms = this.cmsService.getArticleDetailsComponent({ ...query, locale: headers['x-locale'] });
-        const article = this.articleService.getArticle(params);
+        const article = this.articleService.getArticle({ ...params, locale: headers['x-locale'] });
 
         return forkJoin([article, cms]).pipe(
             map(([article, cms]) => {

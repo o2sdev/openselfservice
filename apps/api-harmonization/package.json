@@ -24,6 +24,7 @@
         "@o2s/integrations.mocked": "*",
         "@o2s/integrations.redis": "*",
         "@o2s/integrations.strapi-cms": "*",
+        "@o2s/integrations.algolia": "*",
         "@o2s/utils.logger": "*",
         "@nestjs/axios": "^3.1.2",
         "@nestjs/common": "^10.0.0",

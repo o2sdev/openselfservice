@@ -8,3 +8,4 @@ export * as Invoices from './invoices';
 export * as Resources from './resources';
 export * as Cache from './cache';
 export * as BillingAccounts from './billing-accounts';
+export * as Search from './search';

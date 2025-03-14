@@ -23,7 +23,9 @@
                 "CACHE_TTL",
                 "CACHE_CACHE_REDIS_HOST",
                 "CACHE_REDIS_PORT",
-                "CACHE_REDIS_PASS"
+                "CACHE_REDIS_PASS",
+                "ALGOLIA_APP_ID",
+                "ALGOLIA_API_KEY"
             ]
         }
     }
