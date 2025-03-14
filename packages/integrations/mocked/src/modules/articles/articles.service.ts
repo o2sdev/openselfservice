@@ -3,8 +3,7 @@ import { Observable, map, of } from 'rxjs';
 
 import { Articles, Search } from '@o2s/framework/modules';
 
-import { mapArticle, mapArticlesFromSearch } from './articles.mapper';
-import { SearchEngineArticleModel } from './articles.search.model';
+import { mapArticle } from './articles.mapper';
 import { responseDelay } from '@/utils/delay';
 
 @Injectable()
@@ -35,9 +34,9 @@ export class ArticlesService implements Articles.Service {
             sort: body?.sort ? [body.sort] : undefined,
         };
 
-        return this.searchService.search<SearchEngineArticleModel>(`articles_${locale}`, searchPayload).pipe(
+        return this.searchService.searchArticles(locale, searchPayload).pipe(
             map((result) => {
-                return mapArticlesFromSearch(result.hits);
+                return result;
             }),
             responseDelay(),
         );

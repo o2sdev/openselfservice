@@ -18,6 +18,7 @@ export class SearchPayload {
         order: 'asc' | 'desc';
     }>;
     [key: string]: unknown;
+    locale?: string;
 }
 
 export class SearchResult<T> {

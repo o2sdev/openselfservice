@@ -2,8 +2,6 @@ import { NotFoundException } from '@nestjs/common';
 
 import { Articles } from '@o2s/framework/modules';
 
-import { SearchEngineArticleModel } from './articles.search.model';
-
 export const MOCK_ARTICLES_EN: Articles.Model.Article[] = [
     {
         id: 'art-001',
@@ -548,24 +546,5 @@ export const mapArticles = (locale: string, options: Articles.Request.GetArticle
     return {
         data: filteredArticles.slice(offset, offset + limit),
         total: filteredArticles.length,
-    };
-};
-
-export const mapArticlesFromSearch = (hits: SearchEngineArticleModel[]): Articles.Model.Articles => {
-    const articles = hits.map((hit) => ({
-        id: hit.objectID,
-        title: hit.title,
-        lead: hit.lead,
-        createdAt: hit.createdAt,
-        updatedAt: hit.updatedAt,
-        image: hit.image,
-        thumbnail: hit.thumbnail,
-        category: hit.category,
-        sections: hit.sections,
-    }));
-
-    return {
-        data: articles,
-        total: articles.length,
     };
 };

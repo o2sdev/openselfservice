@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { Observable, of } from 'rxjs';
 
-import { Search } from '@o2s/framework/modules';
+import { Articles, Search } from '@o2s/framework/modules';
 
-import { getArticles } from './articles.mocks';
+import { mapArticles } from './mappers/articles.mapper';
 
 @Injectable()
 export class SearchService extends Search.Service {
@@ -12,14 +12,11 @@ export class SearchService extends Search.Service {
     }
 
     search<T>(indexName: string, payload: Search.Model.SearchPayload): Observable<Search.Model.SearchResult<T>> {
-        if (indexName.includes('articles')) {
-            const articlesResult = getArticles(payload);
-            return of({
-                hits: articlesResult.hits as unknown as T[],
-                total: articlesResult.total,
-            });
-        }
         throw new Error(`Mock index ${indexName} not implemented`);
+    }
+
+    searchArticles(indexName: string, payload: Search.Model.SearchPayload): Observable<Articles.Model.Articles> {
+        return of(mapArticles(payload));
     }
 
     protected buildQuery() {
