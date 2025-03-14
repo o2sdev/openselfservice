@@ -1,3 +1,5 @@
+![o2s-gh-cover.png](apps/docs/static/img/o2s-gh-cover.png)
+
 # Open Self Service (O2S)
 
 **Framework for building composable customer self-service portals.**
@@ -7,7 +9,8 @@ Its flexibility allows for many customizations and lets you build various types 
 
 ## 🚀 Key Features
 
-- **Composable Frontend** – Robust Next.js-based frontend including basic customer portal pages.
+- **Composable** – In short: **API-agnostic**. Compose customer experience by combining multiple "backend capabilities" into seamless, fully decoupled frontend.
+- **Next.js Frontend Starter** – Robust Next.js-based frontend including basic customer portal pages and content management capabilities.
 - **API Harmonization Server** – **Integration layer** for data aggregation, orchestration and normalization. Provides vendor lock-in safeness and better maintainability.
 - **TypeScript SDK** – Easily interact with the Harmonization Server in the frontend app or any web, mobile, other TS-based apps.
 - **Pre-built Integrations** – Ready integrations so that you can set up your solution faster.
@@ -59,6 +62,9 @@ O2S follows a **monorepo structure** using **Turborepo** for managing apps and i
 
 For a detailed breakdown, visit **[Project structure](https://www.openselfservice.com/docs/getting-started/project-structure)**.
 
+## 🖥️ Demo app
+[![O2S Demo](apps/docs/static/img/o2s-gh-demo.png)](https://demo.openselfservice.com)
+
 ## 🔌 Available Integrations
 
 O2S includes pre-built integrations and allows you to extend functionality as needed.
@@ -87,6 +93,7 @@ If you’d like to contribute, please check the **[Contribution Guide](CONTRIBUT
 ## 📩 Stay Updated
 
 - Website: [openselfservice.com](https://www.openselfservice.com)
+- LinkedIn: [/company/open-self-service/](https://www.linkedin.com/company/open-self-service/)
 - Twitter/X: [@openselfservice](https://twitter.com/openselfservice)
 - GitHub Discussions: [Join the conversation](https://github.com/o2sdev/openselfservice/discussions)
 
