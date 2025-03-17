@@ -1,5 +1,11 @@
 # @o2s/utils.logger
 
+## 0.9.3
+
+### Patch Changes
+
+- 40fc169: updated dependencies
+
 ## 0.9.2
 
 ### Patch Changes
