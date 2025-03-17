@@ -1,5 +1,5 @@
 import { Article } from '@/modules/articles/articles.model';
-import { Block, DataTable, Filters, Pagination } from '@/utils/models';
+import { Block, DataTable, Filters, Mapping, Pagination } from '@/utils/models';
 
 export class ArticleListBlock extends Block.Block {
     title!: string;
@@ -7,6 +7,7 @@ export class ArticleListBlock extends Block.Block {
     table!: DataTable.DataTable<Article>;
     pagination!: Pagination.Pagination;
     filters?: Filters.Filters<Article>;
+    fieldMapping!: Mapping.Mapping<Article>;
     noResults!: {
         title: string;
         description: string;

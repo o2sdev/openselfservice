@@ -7,3 +7,12 @@ export class GetPaymentsHistoryBlockQuery implements Omit<CMS.Request.GetCmsEntr
     dateFrom?: Date;
     dateTo?: Date;
 }
+
+export class GetArticleListComponentBody {
+    query?: string;
+    category?: string;
+    sort?: {
+        field: string;
+        order: 'asc' | 'desc';
+    };
+}

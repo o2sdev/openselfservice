@@ -14,6 +14,7 @@ import {
     Notifications,
     Organizations,
     Resources,
+    Search,
     Tickets,
     Users,
 } from '@o2s/framework/modules';
@@ -52,6 +53,7 @@ import { RoutesModule } from './modules/routes/routes.module';
             ignoreEnvFile: process.env.NODE_ENV !== 'development',
             envFilePath: `.env.local`,
         }),
+
         CMS.Module.register(AppConfig),
         Tickets.Module.register(AppConfig),
         Notifications.Module.register(AppConfig),
@@ -59,6 +61,10 @@ import { RoutesModule } from './modules/routes/routes.module';
         Organizations.Module.register(AppConfig),
         Cache.Module.register(AppConfig),
         BillingAccounts.Module.register(AppConfig),
+        Resources.Module.register(AppConfig),
+        Invoices.Module.register(AppConfig),
+        Articles.Module.register(AppConfig),
+        Search.Module.register(AppConfig),
 
         PageModule.register(AppConfig),
         RoutesModule.register(AppConfig),

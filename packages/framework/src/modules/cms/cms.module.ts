@@ -1,11 +1,12 @@
 import { HttpModule } from '@nestjs/axios';
-import { DynamicModule, Module } from '@nestjs/common';
+import { DynamicModule, Global, Module } from '@nestjs/common';
 import { Type } from '@nestjs/common/interfaces/type.interface';
 
 import { CmsController } from './cms.controller';
 import { CmsService } from './cms.service';
 import { ApiConfig } from '@/api-config';
 
+@Global()
 @Module({})
 export class CmsModule {
     static register(config: ApiConfig): DynamicModule {

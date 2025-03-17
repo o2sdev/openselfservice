@@ -24,4 +24,8 @@ export class Article {
     title!: Articles.Model.Article['title'];
     createdAt!: Articles.Model.Article['createdAt'];
     updatedAt!: Articles.Model.Article['updatedAt'];
+    category!: {
+        value: Articles.Model.Article['category'];
+        label: string;
+    };
 }

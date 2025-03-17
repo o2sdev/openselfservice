@@ -2,7 +2,7 @@
 
 import { Menu, X } from 'lucide-react';
 import { useLocale } from 'next-intl';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Models } from '@o2s/framework/modules';
 
@@ -15,7 +15,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@o2s
 import { Typography } from '@o2s/ui/components/typography';
 import { cn } from '@o2s/ui/lib/utils';
 
-import { Link as NextLink } from '@/i18n';
+import { Link as NextLink, usePathname } from '@/i18n';
 
 import { MobileNavigationProps } from './MobileNavigation.types';
 
@@ -29,9 +29,14 @@ export function MobileNavigation({
     title,
     mobileMenuLabel,
 }: MobileNavigationProps) {
+    const pathname = usePathname();
     const locale = useLocale();
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    useEffect(() => {
+        setIsMenuOpen(false);
+    }, [pathname]);
 
     const navigationItemClass = cn(
         navigationMenuTriggerStyle(),

@@ -5,3 +5,12 @@ export class GetArticleListBlockQuery implements Omit<CMS.Request.GetCmsEntryPar
     offset!: number;
     limit!: number;
 }
+
+export class GetArticleListBlockBody {
+    query?: string;
+    category?: string;
+    sort?: {
+        field: string;
+        order: 'asc' | 'desc';
+    };
+}

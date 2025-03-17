@@ -4,6 +4,6 @@ export class GetArticleDetailsBlockQuery implements Omit<CMS.Request.GetCmsEntry
     id!: string;
 }
 
-export class GetArticleDetailsBlockParams implements Articles.Request.GetArticleParams {
+export class GetArticleDetailsBlockParams implements Omit<Articles.Request.GetArticleParams, 'locale'> {
     id!: string;
 }
