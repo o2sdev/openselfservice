@@ -73,4 +73,4 @@ jobs:
                 with:
                     message: 'feat(create-o2s-app): update dependencies'
                     new_branch: create-o2s-app/base
-                    pull: '--rebase'
+                    pull: '--rebase --autostash'
