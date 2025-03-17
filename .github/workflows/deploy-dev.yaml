@@ -63,14 +63,26 @@ jobs:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-            -   name: Update api-harmonization dependencies
-                if: steps.changesets.outputs.published == 'true'
-                run: npm install @o2s/framework@latest @o2s/utils.logger@latest @o2s/integrations.mocked --workspace=@o2s/api-harmonization
+            - name: Checkout code
+              if: steps.changesets.outputs.published == 'true'
+              uses: actions/checkout@v3
+              with:
+                  fetch-depth: 2
+                  ref: 'create-o2s-app/base'
 
-            -   name: Commit changes
-                if: steps.changesets.outputs.published == 'true'
-                uses: EndBug/add-and-commit@v9
-                with:
-                    message: 'feat(create-o2s-app): update dependencies'
-                    new_branch: create-o2s-app/base
-                    pull: '--rebase --autostash'
+            - name: Prepare Environment
+              if: steps.changesets.outputs.published == 'true'
+              uses: ./.github/actions/setup-env
+              timeout-minutes: 10
+              with:
+                  repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Update api-harmonization dependencies
+              if: steps.changesets.outputs.published == 'true'
+              run: npm install @o2s/framework@latest @o2s/utils.logger@latest @o2s/integrations.mocked --workspace=@o2s/api-harmonization
+
+            - name: Commit changes
+              if: steps.changesets.outputs.published == 'true'
+              uses: EndBug/add-and-commit@v9
+              with:
+                  message: 'feat(create-o2s-app): update dependencies'
