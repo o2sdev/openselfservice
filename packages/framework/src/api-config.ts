@@ -9,6 +9,7 @@ import {
     Notifications,
     Organizations,
     Resources,
+    Search,
     Tickets,
     Users,
 } from './';
@@ -62,6 +63,11 @@ export interface ApiConfig {
         billingAccounts: {
             service: typeof BillingAccounts.Service;
             controller?: typeof BillingAccounts.Controller;
+            imports?: Type[];
+        };
+        search: {
+            service?: typeof Search.Service;
+            controller?: typeof Search.Controller;
             imports?: Type[];
         };
     };

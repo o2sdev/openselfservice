@@ -1,5 +1,5 @@
 import { Article } from '@/modules/articles/articles.model';
-import { Component, DataTable, Filters, Pagination } from '@/utils/models';
+import { Component, DataTable, Filters, Mapping, Pagination } from '@/utils/models';
 
 export class ArticleListComponent extends Component.Component {
     title!: string;
@@ -7,6 +7,7 @@ export class ArticleListComponent extends Component.Component {
     table!: DataTable.DataTable<Article>;
     pagination!: Pagination.Pagination;
     filters?: Filters.Filters<Article>;
+    fieldMapping!: Mapping.Mapping<Article>;
     noResults!: {
         title: string;
         description: string;

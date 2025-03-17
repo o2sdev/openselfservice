@@ -9,6 +9,7 @@ export class Article {
     image?: string;
     thumbnail?: string;
     sections!: ArticleSection[];
+    category!: string;
 }
 
 export type ArticleSection = ArticleSectionText | ArticleSectionImage;
