@@ -1,5 +1,16 @@
 # @o2s/frontend
 
+## 0.13.0
+
+### Minor Changes
+
+- db32d1c: unified naming of the related objects in the api-harmonization and frontend apps - from now on, they are called `blocks` (instead of `components` in api-harmonization and `containers` in frontend)
+
+### Patch Changes
+
+- Updated dependencies [db32d1c]
+    - @o2s/api-harmonization@0.15.0
+
 ## 0.12.3
 
 ### Patch Changes
