@@ -1,0 +1,67 @@
+name: Release packages
+permissions:
+    actions: write
+    contents: write
+    packages: write
+    checks: read
+    pull-requests: write
+    deployments: write
+
+env:
+    TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+    TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+on:
+    pull_request:
+        types:
+            - closed
+        branches:
+            - 'changeset-release/main'
+jobs:
+    pre_job:
+        runs-on: ubuntu-latest
+        outputs:
+            should_skip: ${{ steps.skip_check.outputs.should_skip }}
+        steps:
+            - id: skip_check
+              uses: fkirc/skip-duplicate-actions@v5
+              with:
+                  # All of these options are optional, so you can remove them if you are happy with the defaults
+                  concurrent_skipping: 'outdated_runs'
+                  # paths_ignore: '["**/README.md", ".github/**"]'
+                  cancel_others: 'true'
+
+    prepare-o2s-app:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+              with:
+                  fetch-depth: 2
+                  ref: ${{ needs.check-app.outputs.branch }}
+
+            - name: Prepare Environment
+              uses: ./.github/actions/setup-env
+              timeout-minutes: 10
+              with:
+                  repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Create Pull Request
+              uses: peter-evans/create-pull-request@v7
+              with:
+                  title: Update create-o2s-app script
+                  commit-message: 'feat(create-o2s-app): update dependencies'
+                  branch: create-o2s-app/patch
+                  delete-branch: true
+                  base: create-o2s-app/base
+
+            -   uses: actions/checkout@v4
+                with:
+                    ref: create-o2s-app/patch
+
+            -   name: Update api-harmonization dependencies
+                run: npm install @o2s/framework@latest @o2s/utils.logger@latest @o2s/integrations.mocked --workspace=@o2s/api-harmonization
+
+            -   name: Commit changes
+                uses: EndBug/add-and-commit@v9
+                with:
+                    message: 'feat(create-o2s-app): update dependencies'
