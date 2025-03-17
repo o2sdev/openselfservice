@@ -13,7 +13,7 @@ env:
 on:
     push:
         branches:
-            - main
+            - changeset-release/main
 jobs:
     pre_job:
         runs-on: ubuntu-latest
@@ -43,12 +43,12 @@ jobs:
               with:
                   repo-token: ${{ secrets.GITHUB_TOKEN }}
 
-            - name: Creating .npmrc
-              run: |
-                  cat << EOF > "$HOME/.npmrc"
-                    @o2s:registry=https://registry.npmjs.org
-                    //registry.npmjs.org/:_authToken=$NPM_TOKEN
-                  EOF
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+            -   name: Update api-harmonization dependencies
+                if: steps.changesets.outputs.published == 'true'
+                run: npm install @o2s/framework@latest @o2s/utils.logger@latest @o2s/integrations.mocked --workspace=@o2s/api-harmonization
+
+            - name: Commit changes
+              if: steps.changesets.outputs.published == 'true'
+              uses: EndBug/add-and-commit@v9
+              with:
+                  message: 'feat(create-o2s-app): update dependencies'

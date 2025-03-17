@@ -92,23 +92,6 @@ program
             }
 
             console.log();
-            console.log(`Locking O2S packages to the latest stable release...`);
-
-            try {
-                execSync(
-                    'npm install @o2s/framework@latest @o2s/utils.logger@latest @o2s/integrations.mocked --workspace=@o2s/api-harmonization',
-                    {
-                        cwd: targetDirectory,
-                        stdio: 'inherit',
-                    },
-                );
-                console.log(`Dependencies installed successfully.`);
-            } catch (error) {
-                console.error('Error while installing dependencies:', error);
-                return;
-            }
-
-            console.log();
             console.log('Project successfully created! 🎉');
             console.log(`Location: ${targetDirectory}`);
         } catch (error) {
