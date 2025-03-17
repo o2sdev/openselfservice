@@ -1,6 +1,6 @@
 {
     "name": "@o2s/docs",
-    "version": "0.10.1",
+    "version": "0.10.2",
     "private": true,
     "scripts": {
         "docusaurus": "docusaurus",
