@@ -1,5 +1,14 @@
 # @o2s/frontend
 
+## 0.13.1
+
+### Patch Changes
+
+- 5b48057: updated dependencies
+- Updated dependencies [5b48057]
+    - @o2s/api-harmonization@0.15.1
+    - @o2s/ui@0.10.2
+
 ## 0.13.0
 
 ### Minor Changes

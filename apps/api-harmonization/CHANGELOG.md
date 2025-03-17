@@ -1,5 +1,18 @@
 # @o2s/api-harmonization
 
+## 0.15.1
+
+### Patch Changes
+
+- 5b48057: updated dependencies
+- Updated dependencies [5b48057]
+    - @o2s/integrations.strapi-cms@0.14.1
+    - @o2s/integrations.algolia@0.2.1
+    - @o2s/integrations.mocked@0.14.1
+    - @o2s/integrations.redis@0.9.2
+    - @o2s/utils.logger@0.9.2
+    - @o2s/framework@0.15.1
+
 ## 0.15.0
 
 ### Minor Changes
