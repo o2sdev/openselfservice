@@ -11,9 +11,9 @@ env:
     TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
     TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 on:
-    branches:
-        - changeset-release/main
     pull_request:
+        branches:
+            - changeset-release/main
         types:
             - opened
             - edited
