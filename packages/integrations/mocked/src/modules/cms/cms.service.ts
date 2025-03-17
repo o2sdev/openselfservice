@@ -20,6 +20,7 @@ import { mapPaymentsHistoryComponent } from './mappers/cms.payments-history.mapp
 import { mapPaymentsSummaryComponent } from './mappers/cms.payments-summary.mapper';
 import { mapResourceDetailsComponent } from './mappers/cms.resource-details.mapper';
 import { mapResourceListComponent } from './mappers/cms.resource-list.mapper';
+import { mapSurveyComponent } from './mappers/cms.survey.mapper';
 import { mapTicketDetailsComponent } from './mappers/cms.ticket-details.mapper';
 import { mapTicketListComponent } from './mappers/cms.ticket-list.mapper';
 import { mapTicketRecentComponent } from './mappers/cms.ticket-recent.mapper';
@@ -126,5 +127,9 @@ export class CmsService implements CMS.Service {
 
     getTicketRecentComponent(options: CMS.Request.GetCmsEntryParams) {
         return of(mapTicketRecentComponent(options.locale)).pipe(responseDelay());
+    }
+
+    getSurvey(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapSurveyComponent(options.id)).pipe(responseDelay());
     }
 }

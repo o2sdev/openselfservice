@@ -20,3 +20,4 @@ export * as TicketRecentComponent from './models/components/tickets-recent.model
 export * as PaymentsSummaryComponent from './models/components/payments-summary.model';
 export * as PaymentsHistoryComponent from './models/components/payments-history.model';
 export * as UserAccountComponent from './models/components/user-account.model';
+export * as SurveyComponent from './models/components/survey.model';

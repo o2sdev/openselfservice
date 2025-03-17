@@ -28,6 +28,7 @@ import { mapResourceListComponent } from './mappers/components/cms.resource-list
 import { mapTicketDetailsComponent } from './mappers/components/cms.ticket-details.mapper';
 import { mapTicketListComponent } from './mappers/components/cms.ticket-list.mapper';
 import { mapUserAccountComponent } from './mappers/components/cms.user-account.mapper';
+import { mapSurveyComponent } from './mappers/components/survey.mapper';
 import { PageFragment } from '@/generated/strapi';
 import { Service as GraphqlService } from '@/modules/graphql';
 
@@ -336,5 +337,19 @@ export class CmsService implements CMS.Service {
         _options: CMS.Request.GetCmsEntryParams,
     ): Observable<CMS.Model.TicketRecentComponent.TicketRecentComponent> {
         throw new NotImplementedException();
+    }
+
+    getSurvey(options: CMS.Request.GetCmsEntryParams) {
+        const key = `survey-${options.id}`;
+        return this.getCachedComponent(key, () => {
+            const survey = this.graphqlService.getSurvey({
+                code: options.id,
+            });
+            return forkJoin([survey]).pipe(
+                map(([survey]) => {
+                    return mapSurveyComponent(survey.data);
+                }),
+            );
+        });
     }
 }

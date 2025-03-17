@@ -86,4 +86,6 @@ export abstract class CmsService {
     abstract getTicketRecentComponent(
         options: CMS.Request.GetCmsEntryParams,
     ): Observable<CMS.Model.TicketRecentComponent.TicketRecentComponent>;
+
+    abstract getSurvey(options: CMS.Request.GetCmsSurveyParams): Observable<CMS.Model.SurveyComponent.SurveyComponent>;
 }

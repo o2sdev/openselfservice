@@ -796,6 +796,15 @@ export enum Enum_Componentcontenterrormessage_Type {
     Required = 'required',
 }
 
+export enum Enum_Surveyjsform_Requiredroles {
+    SelfserviceAdmin = 'selfservice_admin',
+    SelfserviceUser = 'selfservice_user',
+}
+
+export enum Enum_Surveyjsform_Submitdestination {
+    Surveyjs = 'surveyjs',
+}
+
 export type Error = {
     code: Scalars['String']['output'];
     message?: Maybe<Scalars['String']['output']>;
@@ -992,6 +1001,7 @@ export type GenericMorph =
     | Page
     | ReviewWorkflowsWorkflow
     | ReviewWorkflowsWorkflowStage
+    | SurveyJsForm
     | UploadFile
     | UsersPermissionsPermission
     | UsersPermissionsRole
@@ -1212,6 +1222,7 @@ export type Mutation = {
     createPage?: Maybe<Page>;
     createReviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
     createReviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
+    createSurveyJsForm?: Maybe<SurveyJsForm>;
     /** Create a new role */
     createUsersPermissionsRole?: Maybe<UsersPermissionsCreateRolePayload>;
     /** Create a new user */
@@ -1227,6 +1238,7 @@ export type Mutation = {
     deletePage?: Maybe<DeleteMutationResponse>;
     deleteReviewWorkflowsWorkflow?: Maybe<DeleteMutationResponse>;
     deleteReviewWorkflowsWorkflowStage?: Maybe<DeleteMutationResponse>;
+    deleteSurveyJsForm?: Maybe<DeleteMutationResponse>;
     deleteUploadFile?: Maybe<UploadFile>;
     /** Delete an existing role */
     deleteUsersPermissionsRole?: Maybe<UsersPermissionsDeleteRolePayload>;
@@ -1252,6 +1264,7 @@ export type Mutation = {
     updatePage?: Maybe<Page>;
     updateReviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
     updateReviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
+    updateSurveyJsForm?: Maybe<SurveyJsForm>;
     updateUploadFile: UploadFile;
     /** Update an existing role */
     updateUsersPermissionsRole?: Maybe<UsersPermissionsUpdateRolePayload>;
@@ -1302,6 +1315,11 @@ export type MutationCreateReviewWorkflowsWorkflowArgs = {
 
 export type MutationCreateReviewWorkflowsWorkflowStageArgs = {
     data: ReviewWorkflowsWorkflowStageInput;
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type MutationCreateSurveyJsFormArgs = {
+    data: SurveyJsFormInput;
     status?: InputMaybe<PublicationStatus>;
 };
 
@@ -1359,6 +1377,10 @@ export type MutationDeleteReviewWorkflowsWorkflowArgs = {
 };
 
 export type MutationDeleteReviewWorkflowsWorkflowStageArgs = {
+    documentId: Scalars['ID']['input'];
+};
+
+export type MutationDeleteSurveyJsFormArgs = {
     documentId: Scalars['ID']['input'];
 };
 
@@ -1463,6 +1485,12 @@ export type MutationUpdateReviewWorkflowsWorkflowArgs = {
 
 export type MutationUpdateReviewWorkflowsWorkflowStageArgs = {
     data: ReviewWorkflowsWorkflowStageInput;
+    documentId: Scalars['ID']['input'];
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type MutationUpdateSurveyJsFormArgs = {
+    data: SurveyJsFormInput;
     documentId: Scalars['ID']['input'];
     status?: InputMaybe<PublicationStatus>;
 };
@@ -1628,6 +1656,9 @@ export type Query = {
     reviewWorkflowsWorkflowStages_connection?: Maybe<ReviewWorkflowsWorkflowStageEntityResponseCollection>;
     reviewWorkflowsWorkflows: Array<Maybe<ReviewWorkflowsWorkflow>>;
     reviewWorkflowsWorkflows_connection?: Maybe<ReviewWorkflowsWorkflowEntityResponseCollection>;
+    surveyJsForm?: Maybe<SurveyJsForm>;
+    surveyJsForms: Array<Maybe<SurveyJsForm>>;
+    surveyJsForms_connection?: Maybe<SurveyJsFormEntityResponseCollection>;
     uploadFile?: Maybe<UploadFile>;
     uploadFiles: Array<Maybe<UploadFile>>;
     uploadFiles_connection?: Maybe<UploadFileEntityResponseCollection>;
@@ -1826,6 +1857,25 @@ export type QueryReviewWorkflowsWorkflows_ConnectionArgs = {
     status?: InputMaybe<PublicationStatus>;
 };
 
+export type QuerySurveyJsFormArgs = {
+    documentId: Scalars['ID']['input'];
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type QuerySurveyJsFormsArgs = {
+    filters?: InputMaybe<SurveyJsFormFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type QuerySurveyJsForms_ConnectionArgs = {
+    filters?: InputMaybe<SurveyJsFormFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    status?: InputMaybe<PublicationStatus>;
+};
+
 export type QueryUploadFileArgs = {
     documentId: Scalars['ID']['input'];
     status?: InputMaybe<PublicationStatus>;
@@ -1996,6 +2046,50 @@ export type StringFilterInput = {
     null?: InputMaybe<Scalars['Boolean']['input']>;
     or?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     startsWith?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SurveyJsForm = {
+    code: Scalars['String']['output'];
+    createdAt?: Maybe<Scalars['DateTime']['output']>;
+    documentId: Scalars['ID']['output'];
+    postId: Scalars['String']['output'];
+    publishedAt?: Maybe<Scalars['DateTime']['output']>;
+    requiredRoles: Enum_Surveyjsform_Requiredroles;
+    submitDestination?: Maybe<Enum_Surveyjsform_Submitdestination>;
+    surveyId: Scalars['String']['output'];
+    surveyType: Scalars['String']['output'];
+    updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type SurveyJsFormEntityResponseCollection = {
+    nodes: Array<SurveyJsForm>;
+    pageInfo: Pagination;
+};
+
+export type SurveyJsFormFiltersInput = {
+    and?: InputMaybe<Array<InputMaybe<SurveyJsFormFiltersInput>>>;
+    code?: InputMaybe<StringFilterInput>;
+    createdAt?: InputMaybe<DateTimeFilterInput>;
+    documentId?: InputMaybe<IdFilterInput>;
+    not?: InputMaybe<SurveyJsFormFiltersInput>;
+    or?: InputMaybe<Array<InputMaybe<SurveyJsFormFiltersInput>>>;
+    postId?: InputMaybe<StringFilterInput>;
+    publishedAt?: InputMaybe<DateTimeFilterInput>;
+    requiredRoles?: InputMaybe<StringFilterInput>;
+    submitDestination?: InputMaybe<StringFilterInput>;
+    surveyId?: InputMaybe<StringFilterInput>;
+    surveyType?: InputMaybe<StringFilterInput>;
+    updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type SurveyJsFormInput = {
+    code?: InputMaybe<Scalars['String']['input']>;
+    postId?: InputMaybe<Scalars['String']['input']>;
+    publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+    requiredRoles?: InputMaybe<Enum_Surveyjsform_Requiredroles>;
+    submitDestination?: InputMaybe<Enum_Surveyjsform_Submitdestination>;
+    surveyId?: InputMaybe<Scalars['String']['input']>;
+    surveyType?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UploadFile = {
@@ -2468,6 +2562,7 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
           })
         | ReviewWorkflowsWorkflow
         | ReviewWorkflowsWorkflowStage
+        | SurveyJsForm
         | (Omit<UploadFile, 'related'> & { related?: Maybe<Array<Maybe<_RefType['GenericMorph']>>> })
         | UsersPermissionsPermission
         | UsersPermissionsRole
@@ -2659,6 +2754,8 @@ export type ResolversTypes = {
     DateTimeFilterInput: DateTimeFilterInput;
     DeleteMutationResponse: ResolverTypeWrapper<DeleteMutationResponse>;
     ENUM_COMPONENTCONTENTERRORMESSAGE_TYPE: Enum_Componentcontenterrormessage_Type;
+    ENUM_SURVEYJSFORM_REQUIREDROLES: Enum_Surveyjsform_Requiredroles;
+    ENUM_SURVEYJSFORM_SUBMITDESTINATION: Enum_Surveyjsform_Submitdestination;
     Error: ResolverTypeWrapper<Error>;
     FileInfoInput: FileInfoInput;
     FilterItem: ResolverTypeWrapper<
@@ -2788,6 +2885,10 @@ export type ResolversTypes = {
     ReviewWorkflowsWorkflowStageRelationResponseCollection: ResolverTypeWrapper<ReviewWorkflowsWorkflowStageRelationResponseCollection>;
     String: ResolverTypeWrapper<Scalars['String']['output']>;
     StringFilterInput: StringFilterInput;
+    SurveyJsForm: ResolverTypeWrapper<SurveyJsForm>;
+    SurveyJsFormEntityResponseCollection: ResolverTypeWrapper<SurveyJsFormEntityResponseCollection>;
+    SurveyJsFormFiltersInput: SurveyJsFormFiltersInput;
+    SurveyJsFormInput: SurveyJsFormInput;
     UploadFile: ResolverTypeWrapper<
         Omit<UploadFile, 'related'> & { related?: Maybe<Array<Maybe<ResolversTypes['GenericMorph']>>> }
     >;
@@ -3070,6 +3171,10 @@ export type ResolversParentTypes = {
     ReviewWorkflowsWorkflowStageRelationResponseCollection: ReviewWorkflowsWorkflowStageRelationResponseCollection;
     String: Scalars['String']['output'];
     StringFilterInput: StringFilterInput;
+    SurveyJsForm: SurveyJsForm;
+    SurveyJsFormEntityResponseCollection: SurveyJsFormEntityResponseCollection;
+    SurveyJsFormFiltersInput: SurveyJsFormFiltersInput;
+    SurveyJsFormInput: SurveyJsFormInput;
     UploadFile: Omit<UploadFile, 'related'> & { related?: Maybe<Array<Maybe<ResolversParentTypes['GenericMorph']>>> };
     UploadFileEntityResponseCollection: Omit<UploadFileEntityResponseCollection, 'nodes'> & {
         nodes: Array<ResolversParentTypes['UploadFile']>;
@@ -4013,6 +4118,7 @@ export type GenericMorphResolvers<
         | 'Page'
         | 'ReviewWorkflowsWorkflow'
         | 'ReviewWorkflowsWorkflowStage'
+        | 'SurveyJsForm'
         | 'UploadFile'
         | 'UsersPermissionsPermission'
         | 'UsersPermissionsRole'
@@ -4207,6 +4313,12 @@ export type MutationResolvers<
         ContextType,
         RequireFields<MutationCreateReviewWorkflowsWorkflowStageArgs, 'data' | 'status'>
     >;
+    createSurveyJsForm?: Resolver<
+        Maybe<ResolversTypes['SurveyJsForm']>,
+        ParentType,
+        ContextType,
+        RequireFields<MutationCreateSurveyJsFormArgs, 'data' | 'status'>
+    >;
     createUsersPermissionsRole?: Resolver<
         Maybe<ResolversTypes['UsersPermissionsCreateRolePayload']>,
         ParentType,
@@ -4284,6 +4396,12 @@ export type MutationResolvers<
         ParentType,
         ContextType,
         RequireFields<MutationDeleteReviewWorkflowsWorkflowStageArgs, 'documentId'>
+    >;
+    deleteSurveyJsForm?: Resolver<
+        Maybe<ResolversTypes['DeleteMutationResponse']>,
+        ParentType,
+        ContextType,
+        RequireFields<MutationDeleteSurveyJsFormArgs, 'documentId'>
     >;
     deleteUploadFile?: Resolver<
         Maybe<ResolversTypes['UploadFile']>,
@@ -4398,6 +4516,12 @@ export type MutationResolvers<
         ParentType,
         ContextType,
         RequireFields<MutationUpdateReviewWorkflowsWorkflowStageArgs, 'data' | 'documentId' | 'status'>
+    >;
+    updateSurveyJsForm?: Resolver<
+        Maybe<ResolversTypes['SurveyJsForm']>,
+        ParentType,
+        ContextType,
+        RequireFields<MutationUpdateSurveyJsFormArgs, 'data' | 'documentId' | 'status'>
     >;
     updateUploadFile?: Resolver<
         ResolversTypes['UploadFile'],
@@ -4702,6 +4826,24 @@ export type QueryResolvers<
         ContextType,
         RequireFields<QueryReviewWorkflowsWorkflows_ConnectionArgs, 'pagination' | 'sort' | 'status'>
     >;
+    surveyJsForm?: Resolver<
+        Maybe<ResolversTypes['SurveyJsForm']>,
+        ParentType,
+        ContextType,
+        RequireFields<QuerySurveyJsFormArgs, 'documentId' | 'status'>
+    >;
+    surveyJsForms?: Resolver<
+        Array<Maybe<ResolversTypes['SurveyJsForm']>>,
+        ParentType,
+        ContextType,
+        RequireFields<QuerySurveyJsFormsArgs, 'pagination' | 'sort' | 'status'>
+    >;
+    surveyJsForms_connection?: Resolver<
+        Maybe<ResolversTypes['SurveyJsFormEntityResponseCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<QuerySurveyJsForms_ConnectionArgs, 'pagination' | 'sort' | 'status'>
+    >;
     uploadFile?: Resolver<
         Maybe<ResolversTypes['UploadFile']>,
         ParentType,
@@ -4826,6 +4968,33 @@ export type ReviewWorkflowsWorkflowStageRelationResponseCollectionResolvers<
         ResolversParentTypes['ReviewWorkflowsWorkflowStageRelationResponseCollection'] = ResolversParentTypes['ReviewWorkflowsWorkflowStageRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['ReviewWorkflowsWorkflowStage']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type SurveyJsFormResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['SurveyJsForm'] = ResolversParentTypes['SurveyJsForm'],
+> = {
+    code?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    documentId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    postId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    requiredRoles?: Resolver<ResolversTypes['ENUM_SURVEYJSFORM_REQUIREDROLES'], ParentType, ContextType>;
+    submitDestination?: Resolver<Maybe<ResolversTypes['ENUM_SURVEYJSFORM_SUBMITDESTINATION']>, ParentType, ContextType>;
+    surveyId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    surveyType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type SurveyJsFormEntityResponseCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['SurveyJsFormEntityResponseCollection'] = ResolversParentTypes['SurveyJsFormEntityResponseCollection'],
+> = {
+    nodes?: Resolver<Array<ResolversTypes['SurveyJsForm']>, ParentType, ContextType>;
+    pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -5136,6 +5305,8 @@ export type Resolvers<ContextType = any> = {
     ReviewWorkflowsWorkflowStage?: ReviewWorkflowsWorkflowStageResolvers<ContextType>;
     ReviewWorkflowsWorkflowStageEntityResponseCollection?: ReviewWorkflowsWorkflowStageEntityResponseCollectionResolvers<ContextType>;
     ReviewWorkflowsWorkflowStageRelationResponseCollection?: ReviewWorkflowsWorkflowStageRelationResponseCollectionResolvers<ContextType>;
+    SurveyJsForm?: SurveyJsFormResolvers<ContextType>;
+    SurveyJsFormEntityResponseCollection?: SurveyJsFormEntityResponseCollectionResolvers<ContextType>;
     UploadFile?: UploadFileResolvers<ContextType>;
     UploadFileEntityResponseCollection?: UploadFileEntityResponseCollectionResolvers<ContextType>;
     UsersPermissionsCreateRolePayload?: UsersPermissionsCreateRolePayloadResolvers<ContextType>;
@@ -6551,6 +6722,21 @@ export type GetPagesQuery = {
     }>;
 };
 
+export type GetSurveyQueryVariables = Exact<{
+    code?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+export type GetSurveyQuery = {
+    surveyJsForms: Array<{
+        code: string;
+        surveyId: string;
+        postId: string;
+        surveyType: string;
+        requiredRoles: Enum_Surveyjsform_Requiredroles;
+        submitDestination?: Enum_Surveyjsform_Submitdestination;
+    }>;
+};
+
 export const AppConfigFragmentDoc = gql`
     fragment AppConfig on AppConfig {
         documentId
@@ -7196,6 +7382,18 @@ export const GetPagesDocument = gql`
     }
     ${PageFragmentDoc}
 `;
+export const GetSurveyDocument = gql`
+    query getSurvey($code: String) {
+        surveyJsForms(filters: { code: { eq: $code } }) {
+            code
+            surveyId
+            postId
+            surveyType
+            requiredRoles
+            submitDestination
+        }
+    }
+`;
 
 export type SdkFunctionWrapper = <T>(
     action: (requestHeaders?: Record<string, string>) => Promise<T>,
@@ -7214,6 +7412,7 @@ const GetLoginPageDocumentString = print(GetLoginPageDocument);
 const GetNotFoundPageDocumentString = print(GetNotFoundPageDocument);
 const GetPageDocumentString = print(GetPageDocument);
 const GetPagesDocumentString = print(GetPagesDocument);
+const GetSurveyDocumentString = print(GetSurveyDocument);
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
     return {
         getAppConfig(
@@ -7401,6 +7600,27 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
                         ...wrappedRequestHeaders,
                     }),
                 'getPages',
+                'query',
+                variables,
+            );
+        },
+        getSurvey(
+            variables?: GetSurveyQueryVariables,
+            requestHeaders?: GraphQLClientRequestHeaders,
+        ): Promise<{
+            data: GetSurveyQuery;
+            errors?: GraphQLError[];
+            extensions?: any;
+            headers: Headers;
+            status: number;
+        }> {
+            return withWrapper(
+                (wrappedRequestHeaders) =>
+                    client.rawRequest<GetSurveyQuery>(GetSurveyDocumentString, variables, {
+                        ...requestHeaders,
+                        ...wrappedRequestHeaders,
+                    }),
+                'getSurvey',
                 'query',
                 variables,
             );
