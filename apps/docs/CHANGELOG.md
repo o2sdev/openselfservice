@@ -1,5 +1,11 @@
 # @o2s/docs
 
+## 0.10.1
+
+### Patch Changes
+
+- 5b48057: updated dependencies
+
 ## 0.10.0
 
 ### Minor Changes

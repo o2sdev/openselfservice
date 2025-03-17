@@ -1,5 +1,11 @@
 # @o2s/framework
 
+## 0.15.1
+
+### Patch Changes
+
+- 5b48057: updated dependencies
+
 ## 0.15.0
 
 ### Minor Changes
