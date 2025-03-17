@@ -1,5 +1,16 @@
 # @o2s/integrations.mocked
 
+## 0.13.0
+
+### Minor Changes
+
+- 80b678a: Added search integration with Algolia
+
+### Patch Changes
+
+- Updated dependencies [80b678a]
+    - @o2s/framework@0.14.0
+
 ## 0.12.1
 
 ### Patch Changes

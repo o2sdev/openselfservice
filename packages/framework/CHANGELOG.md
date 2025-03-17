@@ -1,5 +1,11 @@
 # @o2s/framework
 
+## 0.14.0
+
+### Minor Changes
+
+- 80b678a: Added search integration with Algolia
+
 ## 0.13.1
 
 ### Patch Changes
