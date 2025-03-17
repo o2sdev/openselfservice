@@ -1,5 +1,17 @@
 # @o2s/docs
 
+## 0.10.2
+
+### Patch Changes
+
+- 72eee97: fix(docs): adding security policy and a missing diagram
+
+## 0.10.1
+
+### Patch Changes
+
+- 5b48057: updated dependencies
+
 ## 0.10.0
 
 ### Minor Changes
