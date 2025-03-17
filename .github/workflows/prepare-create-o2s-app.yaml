@@ -11,9 +11,13 @@ env:
     TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
     TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 on:
-    push:
-        branches:
-            - changeset-release/main
+    branches:
+        - changeset-release/main
+    pull_request:
+        types:
+            - opened
+            - edited
+            - closed
 jobs:
     pre_job:
         runs-on: ubuntu-latest
