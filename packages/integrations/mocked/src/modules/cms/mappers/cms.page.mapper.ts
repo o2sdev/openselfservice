@@ -27,20 +27,20 @@ const PAGE_DASHBOARD_PL: CMS.Model.Page.Page = {
             top: [],
             left: [
                 {
-                    __typename: 'PaymentsSummaryComponent',
+                    __typename: 'PaymentsSummaryBlock',
                     id: 'payments-summary-1',
                 },
             ],
             right: [
                 {
-                    __typename: 'TicketRecentComponent',
+                    __typename: 'TicketRecentBlock',
                     id: 'ticket-recent-1',
                 },
             ],
 
             bottom: [
                 {
-                    __typename: 'FaqComponent',
+                    __typename: 'FaqBlock',
                     id: 'faq-1',
                 },
             ],
@@ -76,20 +76,20 @@ const PAGE_DASHBOARD_EN: CMS.Model.Page.Page = {
             top: [],
             left: [
                 {
-                    __typename: 'PaymentsSummaryComponent',
+                    __typename: 'PaymentsSummaryBlock',
                     id: 'payments-summary-1',
                 },
             ],
             right: [
                 {
-                    __typename: 'TicketRecentComponent',
+                    __typename: 'TicketRecentBlock',
                     id: 'ticket-recent-1',
                 },
             ],
 
             bottom: [
                 {
-                    __typename: 'FaqComponent',
+                    __typename: 'FaqBlock',
                     id: 'faq-1',
                 },
             ],
@@ -125,20 +125,20 @@ const PAGE_DASHBOARD_DE: CMS.Model.Page.Page = {
             top: [],
             left: [
                 {
-                    __typename: 'PaymentsSummaryComponent',
+                    __typename: 'PaymentsSummaryBlock',
                     id: 'payments-summary-1',
                 },
             ],
             right: [
                 {
-                    __typename: 'TicketRecentComponent',
+                    __typename: 'TicketRecentBlock',
                     id: 'ticket-recent-1',
                 },
             ],
 
             bottom: [
                 {
-                    __typename: 'FaqComponent',
+                    __typename: 'FaqBlock',
                     id: 'faq-1',
                 },
             ],
@@ -173,11 +173,11 @@ const PAGE_TICKET_LIST_EN: CMS.Model.Page.Page = {
         slots: {
             main: [
                 {
-                    __typename: 'TicketListComponent',
+                    __typename: 'TicketListBlock',
                     id: 'ticket-list-1',
                 },
                 {
-                    __typename: 'FaqComponent',
+                    __typename: 'FaqBlock',
                     id: 'faq-1',
                 },
             ],
@@ -212,11 +212,11 @@ const PAGE_TICKET_LIST_DE: CMS.Model.Page.Page = {
         slots: {
             main: [
                 {
-                    __typename: 'TicketListComponent',
+                    __typename: 'TicketListBlock',
                     id: 'ticket-list-1',
                 },
                 {
-                    __typename: 'FaqComponent',
+                    __typename: 'FaqBlock',
                     id: 'faq-1',
                 },
             ],
@@ -251,11 +251,11 @@ const PAGE_TICKET_LIST_PL: CMS.Model.Page.Page = {
         slots: {
             main: [
                 {
-                    __typename: 'TicketListComponent',
+                    __typename: 'TicketListBlock',
                     id: 'ticket-list-1',
                 },
                 {
-                    __typename: 'FaqComponent',
+                    __typename: 'FaqBlock',
                     id: 'faq-1',
                 },
             ],
@@ -290,11 +290,11 @@ const PAGE_TICKET_DETAILS_EN: CMS.Model.Page.Page = {
         slots: {
             main: [
                 {
-                    __typename: 'TicketDetailsComponent',
+                    __typename: 'TicketDetailsBlock',
                     id: 'ticket-details-1',
                 },
                 {
-                    __typename: 'FaqComponent',
+                    __typename: 'FaqBlock',
                     id: 'faq-1',
                 },
             ],
@@ -329,11 +329,11 @@ const PAGE_TICKET_DETAILS_DE: CMS.Model.Page.Page = {
         slots: {
             main: [
                 {
-                    __typename: 'TicketDetailsComponent',
+                    __typename: 'TicketDetailsBlock',
                     id: 'ticket-details-1',
                 },
                 {
-                    __typename: 'FaqComponent',
+                    __typename: 'FaqBlock',
                     id: 'faq-1',
                 },
             ],
@@ -368,11 +368,11 @@ const PAGE_TICKET_DETAILS_PL: CMS.Model.Page.Page = {
         slots: {
             main: [
                 {
-                    __typename: 'TicketDetailsComponent',
+                    __typename: 'TicketDetailsBlock',
                     id: 'ticket-details-1',
                 },
                 {
-                    __typename: 'FaqComponent',
+                    __typename: 'FaqBlock',
                     id: 'faq-1',
                 },
             ],
@@ -407,11 +407,11 @@ const PAGE_NOTIFICATION_LIST_EN: CMS.Model.Page.Page = {
         slots: {
             main: [
                 {
-                    __typename: 'NotificationListComponent',
+                    __typename: 'NotificationListBlock',
                     id: 'notification-list-1',
                 },
                 {
-                    __typename: 'FaqComponent',
+                    __typename: 'FaqBlock',
                     id: 'faq-1',
                 },
             ],
@@ -446,11 +446,11 @@ const PAGE_NOTIFICATION_LIST_DE: CMS.Model.Page.Page = {
         slots: {
             main: [
                 {
-                    __typename: 'NotificationListComponent',
+                    __typename: 'NotificationListBlock',
                     id: 'notification-list-1',
                 },
                 {
-                    __typename: 'FaqComponent',
+                    __typename: 'FaqBlock',
                     id: 'faq-1',
                 },
             ],
@@ -485,11 +485,11 @@ const PAGE_NOTIFICATION_LIST_PL: CMS.Model.Page.Page = {
         slots: {
             main: [
                 {
-                    __typename: 'NotificationListComponent',
+                    __typename: 'NotificationListBlock',
                     id: 'notification-list-1',
                 },
                 {
-                    __typename: 'FaqComponent',
+                    __typename: 'FaqBlock',
                     id: 'faq-1',
                 },
             ],
@@ -525,23 +525,23 @@ const PAGE_INVOICE_LIST_EN: CMS.Model.Page.Page = {
             top: [],
             left: [
                 {
-                    __typename: 'PaymentsSummaryComponent',
+                    __typename: 'PaymentsSummaryBlock',
                     id: 'payments-summary-1',
                 },
             ],
             right: [
                 {
-                    __typename: 'PaymentsHistoryComponent',
+                    __typename: 'PaymentsHistoryBlock',
                     id: 'payments-history-1',
                 },
             ],
             bottom: [
                 {
-                    __typename: 'InvoiceListComponent',
+                    __typename: 'InvoiceListBlock',
                     id: 'invoice-list-1',
                 },
                 {
-                    __typename: 'FaqComponent',
+                    __typename: 'FaqBlock',
                     id: 'faq-1',
                 },
             ],
@@ -577,23 +577,23 @@ const PAGE_INVOICE_LIST_DE: CMS.Model.Page.Page = {
             top: [],
             left: [
                 {
-                    __typename: 'PaymentsSummaryComponent',
+                    __typename: 'PaymentsSummaryBlock',
                     id: 'payments-summary-1',
                 },
             ],
             right: [
                 {
-                    __typename: 'PaymentsHistoryComponent',
+                    __typename: 'PaymentsHistoryBlock',
                     id: 'payments-history-1',
                 },
             ],
             bottom: [
                 {
-                    __typename: 'InvoiceListComponent',
+                    __typename: 'InvoiceListBlock',
                     id: 'invoice-list-1',
                 },
                 {
-                    __typename: 'FaqComponent',
+                    __typename: 'FaqBlock',
                     id: 'faq-1',
                 },
             ],
@@ -629,23 +629,23 @@ const PAGE_INVOICE_LIST_PL: CMS.Model.Page.Page = {
             top: [],
             left: [
                 {
-                    __typename: 'PaymentsSummaryComponent',
+                    __typename: 'PaymentsSummaryBlock',
                     id: 'payments-summary-1',
                 },
             ],
             right: [
                 {
-                    __typename: 'PaymentsHistoryComponent',
+                    __typename: 'PaymentsHistoryBlock',
                     id: 'payments-history-1',
                 },
             ],
             bottom: [
                 {
-                    __typename: 'InvoiceListComponent',
+                    __typename: 'InvoiceListBlock',
                     id: 'invoice-list-1',
                 },
                 {
-                    __typename: 'FaqComponent',
+                    __typename: 'FaqBlock',
                     id: 'faq-1',
                 },
             ],
@@ -680,11 +680,11 @@ const PAGE_NOTIFICATION_DETAILS_EN: CMS.Model.Page.Page = {
         slots: {
             main: [
                 {
-                    __typename: 'NotificationDetailsComponent',
+                    __typename: 'NotificationDetailsBlock',
                     id: 'notification-details-1',
                 },
                 {
-                    __typename: 'FaqComponent',
+                    __typename: 'FaqBlock',
                     id: 'faq-1',
                 },
             ],
@@ -719,11 +719,11 @@ const PAGE_NOTIFICATION_DETAILS_DE: CMS.Model.Page.Page = {
         slots: {
             main: [
                 {
-                    __typename: 'NotificationDetailsComponent',
+                    __typename: 'NotificationDetailsBlock',
                     id: 'notification-details-1',
                 },
                 {
-                    __typename: 'FaqComponent',
+                    __typename: 'FaqBlock',
                     id: 'faq-1',
                 },
             ],
@@ -758,11 +758,11 @@ const PAGE_NOTIFICATION_DETAILS_PL: CMS.Model.Page.Page = {
         slots: {
             main: [
                 {
-                    __typename: 'NotificationDetailsComponent',
+                    __typename: 'NotificationDetailsBlock',
                     id: 'notification-details-1',
                 },
                 {
-                    __typename: 'FaqComponent',
+                    __typename: 'FaqBlock',
                     id: 'faq-1',
                 },
             ],
@@ -797,7 +797,7 @@ const PAGE_USER_ACCOUNT_EN: CMS.Model.Page.Page = {
         slots: {
             main: [
                 {
-                    __typename: 'UserAccountComponent',
+                    __typename: 'UserAccountBlock',
                     id: 'user-account-1',
                 },
             ],
@@ -832,7 +832,7 @@ const PAGE_USER_ACCOUNT_DE: CMS.Model.Page.Page = {
         slots: {
             main: [
                 {
-                    __typename: 'UserAccountComponent',
+                    __typename: 'UserAccountBlock',
                     id: 'user-account-1',
                 },
             ],
@@ -867,7 +867,7 @@ const PAGE_USER_ACCOUNT_PL: CMS.Model.Page.Page = {
         slots: {
             main: [
                 {
-                    __typename: 'UserAccountComponent',
+                    __typename: 'UserAccountBlock',
                     id: 'user-account-1',
                 },
             ],

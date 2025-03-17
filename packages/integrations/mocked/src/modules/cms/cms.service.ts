@@ -4,26 +4,26 @@ import { of } from 'rxjs';
 import { CMS } from '@o2s/framework/modules';
 
 import { mapAppConfig } from './mappers/cms.app-config.mapper';
-import { mapArticleDetailsComponent } from './mappers/cms.article-details.mapper';
-import { mapArticleListComponent } from './mappers/cms.article-list.mapper';
-import { mapFaqComponent } from './mappers/cms.faq.mapper';
+import { mapArticleDetailsBlock } from './mappers/cms.article-details.mapper';
+import { mapArticleListBlock } from './mappers/cms.article-list.mapper';
+import { mapFaqBlock } from './mappers/cms.faq.mapper';
 import { mapFooter } from './mappers/cms.footer.mapper';
 import { mapHeader } from './mappers/cms.header.mapper';
-import { mapInvoiceDetailsComponent } from './mappers/cms.invoice-details.mapper';
-import { mapInvoiceListComponent } from './mappers/cms.invoice-list.mapper';
+import { mapInvoiceDetailsBlock } from './mappers/cms.invoice-details.mapper';
+import { mapInvoiceListBlock } from './mappers/cms.invoice-list.mapper';
 import { mapLoginPage } from './mappers/cms.login-page.mapper';
 import { mapNotFoundPage } from './mappers/cms.not-found-page.mapper';
-import { mapNotificationDetailsComponent } from './mappers/cms.notification-details.mapper';
-import { mapNotificationListComponent } from './mappers/cms.notification-list.mapper';
+import { mapNotificationDetailsBlock } from './mappers/cms.notification-details.mapper';
+import { mapNotificationListBlock } from './mappers/cms.notification-list.mapper';
 import { getAllPages, getAlternativePages, mapPage } from './mappers/cms.page.mapper';
-import { mapPaymentsHistoryComponent } from './mappers/cms.payments-history.mapper';
-import { mapPaymentsSummaryComponent } from './mappers/cms.payments-summary.mapper';
-import { mapResourceDetailsComponent } from './mappers/cms.resource-details.mapper';
-import { mapResourceListComponent } from './mappers/cms.resource-list.mapper';
-import { mapTicketDetailsComponent } from './mappers/cms.ticket-details.mapper';
-import { mapTicketListComponent } from './mappers/cms.ticket-list.mapper';
-import { mapTicketRecentComponent } from './mappers/cms.ticket-recent.mapper';
-import { mapUserAccountComponent } from './mappers/cms.user-account.mapper';
+import { mapPaymentsHistoryBlock } from './mappers/cms.payments-history.mapper';
+import { mapPaymentsSummaryBlock } from './mappers/cms.payments-summary.mapper';
+import { mapResourceDetailsBlock } from './mappers/cms.resource-details.mapper';
+import { mapResourceListBlock } from './mappers/cms.resource-list.mapper';
+import { mapTicketDetailsBlock } from './mappers/cms.ticket-details.mapper';
+import { mapTicketListBlock } from './mappers/cms.ticket-list.mapper';
+import { mapTicketRecentBlock } from './mappers/cms.ticket-recent.mapper';
+import { mapUserAccountBlock } from './mappers/cms.user-account.mapper';
 import { responseDelay } from '@/utils/delay';
 
 @Injectable()
@@ -68,63 +68,63 @@ export class CmsService implements CMS.Service {
         return of(mapFooter(options.locale));
     }
 
-    getFaqComponent(_options: CMS.Request.GetCmsEntryParams) {
-        return of(mapFaqComponent(_options.locale)).pipe(responseDelay());
+    getFaqBlock(_options: CMS.Request.GetCmsEntryParams) {
+        return of(mapFaqBlock(_options.locale)).pipe(responseDelay());
     }
 
-    getTicketListComponent(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapTicketListComponent(options.locale)).pipe(responseDelay());
+    getTicketListBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapTicketListBlock(options.locale)).pipe(responseDelay());
     }
 
-    getTicketDetailsComponent(_options: CMS.Request.GetCmsEntryParams) {
-        return of(mapTicketDetailsComponent(_options.locale)).pipe(responseDelay());
+    getTicketDetailsBlock(_options: CMS.Request.GetCmsEntryParams) {
+        return of(mapTicketDetailsBlock(_options.locale)).pipe(responseDelay());
     }
 
-    getNotificationListComponent(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapNotificationListComponent(options.locale)).pipe(responseDelay());
+    getNotificationListBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapNotificationListBlock(options.locale)).pipe(responseDelay());
     }
 
-    getNotificationDetailsComponent(_options: CMS.Request.GetCmsEntryParams) {
-        return of(mapNotificationDetailsComponent(_options.locale)).pipe(responseDelay());
+    getNotificationDetailsBlock(_options: CMS.Request.GetCmsEntryParams) {
+        return of(mapNotificationDetailsBlock(_options.locale)).pipe(responseDelay());
     }
 
-    getArticleListComponent(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapArticleListComponent(options.locale)).pipe(responseDelay());
+    getArticleListBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapArticleListBlock(options.locale)).pipe(responseDelay());
     }
 
-    getArticleDetailsComponent(_options: CMS.Request.GetCmsEntryParams) {
-        return of(mapArticleDetailsComponent()).pipe(responseDelay());
+    getArticleDetailsBlock(_options: CMS.Request.GetCmsEntryParams) {
+        return of(mapArticleDetailsBlock()).pipe(responseDelay());
     }
 
-    getInvoiceListComponent(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapInvoiceListComponent(options.locale)).pipe(responseDelay());
+    getInvoiceListBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapInvoiceListBlock(options.locale)).pipe(responseDelay());
     }
 
-    getInvoiceDetailsComponent(_options: CMS.Request.GetCmsEntryParams) {
-        return of(mapInvoiceDetailsComponent()).pipe(responseDelay());
+    getInvoiceDetailsBlock(_options: CMS.Request.GetCmsEntryParams) {
+        return of(mapInvoiceDetailsBlock()).pipe(responseDelay());
     }
 
-    getResourceListComponent(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapResourceListComponent(options.locale)).pipe(responseDelay());
+    getResourceListBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapResourceListBlock(options.locale)).pipe(responseDelay());
     }
 
-    getResourceDetailsComponent(_options: CMS.Request.GetCmsEntryParams) {
-        return of(mapResourceDetailsComponent()).pipe(responseDelay());
+    getResourceDetailsBlock(_options: CMS.Request.GetCmsEntryParams) {
+        return of(mapResourceDetailsBlock()).pipe(responseDelay());
     }
 
-    getPaymentsSummaryComponent(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapPaymentsSummaryComponent(options.locale)).pipe(responseDelay());
+    getPaymentsSummaryBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapPaymentsSummaryBlock(options.locale)).pipe(responseDelay());
     }
 
-    getPaymentsHistoryComponent(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapPaymentsHistoryComponent(options.locale)).pipe(responseDelay());
+    getPaymentsHistoryBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapPaymentsHistoryBlock(options.locale)).pipe(responseDelay());
     }
 
-    getUserAccountComponent(_options: CMS.Request.GetCmsEntryParams) {
-        return of(mapUserAccountComponent(_options.locale)).pipe(responseDelay());
+    getUserAccountBlock(_options: CMS.Request.GetCmsEntryParams) {
+        return of(mapUserAccountBlock(_options.locale)).pipe(responseDelay());
     }
 
-    getTicketRecentComponent(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapTicketRecentComponent(options.locale)).pipe(responseDelay());
+    getTicketRecentBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapTicketRecentBlock(options.locale)).pipe(responseDelay());
     }
 }

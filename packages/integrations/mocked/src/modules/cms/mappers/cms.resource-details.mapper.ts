@@ -1,6 +1,6 @@
 import { CMS } from '@o2s/framework/modules';
 
-const MOCK_RESOURCE_DETAILS_COMPONENT: CMS.Model.ResourceDetailsComponent.ResourceDetailsComponent = {
+const MOCK_RESOURCE_DETAILS_BLOCK: CMS.Model.ResourceDetailsBlock.ResourceDetailsBlock = {
     id: 'resource-details-1',
     fieldMapping: {
         'asset.status': {
@@ -40,8 +40,8 @@ const MOCK_RESOURCE_DETAILS_COMPONENT: CMS.Model.ResourceDetailsComponent.Resour
     },
 };
 
-export const mapResourceDetailsComponent = (): CMS.Model.ResourceDetailsComponent.ResourceDetailsComponent => {
+export const mapResourceDetailsBlock = (): CMS.Model.ResourceDetailsBlock.ResourceDetailsBlock => {
     return {
-        ...MOCK_RESOURCE_DETAILS_COMPONENT,
+        ...MOCK_RESOURCE_DETAILS_BLOCK,
     };
 };

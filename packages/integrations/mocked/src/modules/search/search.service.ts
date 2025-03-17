@@ -11,11 +11,11 @@ export class SearchService extends Search.Service {
         super();
     }
 
-    search<T>(indexName: string, payload: Search.Model.SearchPayload): Observable<Search.Model.SearchResult<T>> {
+    search<T>(indexName: string, _payload: Search.Model.SearchPayload): Observable<Search.Model.SearchResult<T>> {
         throw new Error(`Mock index ${indexName} not implemented`);
     }
 
-    searchArticles(indexName: string, payload: Search.Model.SearchPayload): Observable<Articles.Model.Articles> {
+    searchArticles(_indexName: string, payload: Search.Model.SearchPayload): Observable<Articles.Model.Articles> {
         return of(mapArticles(payload));
     }
 

@@ -1,0 +1,20 @@
+import { Controller, Get, Query, UseInterceptors } from '@nestjs/common';
+
+import { Auth } from '@o2s/framework/modules';
+import { LoggerService } from '@o2s/utils.logger';
+
+import { URL } from './';
+import { Get{{ pascalCase name }}BlockQuery } from './{{ kebabCase name }}.request';
+import { {{ pascalCase name }}Service } from './{{ kebabCase name }}.service';
+
+@Controller(URL)
+@UseInterceptors(LoggerService)
+export class {{ pascalCase name }}Controller {
+    constructor(protected readonly service: {{ pascalCase name }}Service) {}
+
+    @Get()
+    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
+    get{{ pascalCase name }}Block(@Query() query: Get{{ pascalCase name }}BlockQuery) {
+        return this.service.get{{ pascalCase name }}Block(query);
+    }
+}

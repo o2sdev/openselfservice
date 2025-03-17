@@ -1,6 +1,6 @@
 import { CMS } from '@o2s/framework/modules';
 
-const MOCK_NOTIFICATION_LIST_COMPONENT_EN: CMS.Model.NotificationListComponent.NotificationListComponent = {
+const MOCK_NOTIFICATION_LIST_BLOCK_EN: CMS.Model.NotificationListBlock.NotificationListBlock = {
     id: 'notification-list-1',
     title: 'Notifications',
     subtitle: 'List of your notifications',
@@ -128,7 +128,7 @@ const MOCK_NOTIFICATION_LIST_COMPONENT_EN: CMS.Model.NotificationListComponent.N
     detailsUrl: '/notifications/:id',
 };
 
-const MOCK_NOTIFICATION_LIST_COMPONENT_DE: CMS.Model.NotificationListComponent.NotificationListComponent = {
+const MOCK_NOTIFICATION_LIST_BLOCK_DE: CMS.Model.NotificationListBlock.NotificationListBlock = {
     id: 'notification-list-1',
     title: 'Benachrichtigungen',
     subtitle: 'Liste Ihrer Benachrichtigungen',
@@ -256,7 +256,7 @@ const MOCK_NOTIFICATION_LIST_COMPONENT_DE: CMS.Model.NotificationListComponent.N
     detailsUrl: '/benachrichtigungen/:id',
 };
 
-const MOCK_NOTIFICATION_LIST_COMPONENT_PL: CMS.Model.NotificationListComponent.NotificationListComponent = {
+const MOCK_NOTIFICATION_LIST_BLOCK_PL: CMS.Model.NotificationListBlock.NotificationListBlock = {
     id: 'notification-list-1',
     title: 'Powiadomienia',
     subtitle: 'Lista twoich powiadomień',
@@ -384,15 +384,13 @@ const MOCK_NOTIFICATION_LIST_COMPONENT_PL: CMS.Model.NotificationListComponent.N
     detailsUrl: '/powiadomienia/:id',
 };
 
-export const mapNotificationListComponent = (
-    locale: string,
-): CMS.Model.NotificationListComponent.NotificationListComponent => {
+export const mapNotificationListBlock = (locale: string): CMS.Model.NotificationListBlock.NotificationListBlock => {
     switch (locale) {
         case 'de':
-            return { ...MOCK_NOTIFICATION_LIST_COMPONENT_DE, detailsUrl: '/benachrichtigungen/{id}' };
+            return { ...MOCK_NOTIFICATION_LIST_BLOCK_DE, detailsUrl: '/benachrichtigungen/{id}' };
         case 'pl':
-            return { ...MOCK_NOTIFICATION_LIST_COMPONENT_PL, detailsUrl: '/powiadomienia/{id}' };
+            return { ...MOCK_NOTIFICATION_LIST_BLOCK_PL, detailsUrl: '/powiadomienia/{id}' };
         default:
-            return { ...MOCK_NOTIFICATION_LIST_COMPONENT_EN, detailsUrl: '/notifications/{id}' };
+            return { ...MOCK_NOTIFICATION_LIST_BLOCK_EN, detailsUrl: '/notifications/{id}' };
     }
 };

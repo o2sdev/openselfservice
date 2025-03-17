@@ -1,6 +1,6 @@
 import { CMS } from '@o2s/framework/modules';
 
-const MOCK_ARTICLE_LIST_COMPONENT_EN: CMS.Model.ArticleListComponent.ArticleListComponent = {
+const MOCK_ARTICLE_LIST_BLOCK_EN: CMS.Model.ArticleListBlock.ArticleListBlock = {
     id: 'article-list-1',
     title: 'Articles Overview',
     subtitle: 'Your recent articles',
@@ -66,7 +66,7 @@ const MOCK_ARTICLE_LIST_COMPONENT_EN: CMS.Model.ArticleListComponent.ArticleList
     },
 };
 
-const MOCK_ARTICLE_LIST_COMPONENT_DE: CMS.Model.ArticleListComponent.ArticleListComponent = {
+const MOCK_ARTICLE_LIST_BLOCK_DE: CMS.Model.ArticleListBlock.ArticleListBlock = {
     id: 'article-list-1',
     title: 'Artikelübersicht',
     subtitle: 'Ihre neuesten Artikel',
@@ -132,7 +132,7 @@ const MOCK_ARTICLE_LIST_COMPONENT_DE: CMS.Model.ArticleListComponent.ArticleList
     },
 };
 
-const MOCK_ARTICLE_LIST_COMPONENT_PL: CMS.Model.ArticleListComponent.ArticleListComponent = {
+const MOCK_ARTICLE_LIST_BLOCK_PL: CMS.Model.ArticleListBlock.ArticleListBlock = {
     id: 'article-list-1',
     title: 'Przegląd artykułów',
     subtitle: 'Twoje ostatnie artykuły',
@@ -198,7 +198,7 @@ const MOCK_ARTICLE_LIST_COMPONENT_PL: CMS.Model.ArticleListComponent.ArticleList
     },
 };
 
-export const mapArticleListComponent = (locale: string): CMS.Model.ArticleListComponent.ArticleListComponent => {
+export const mapArticleListBlock = (locale: string): CMS.Model.ArticleListBlock.ArticleListBlock => {
     const getDetailsUrl = () => {
         switch (locale) {
             case 'en':
@@ -215,18 +215,18 @@ export const mapArticleListComponent = (locale: string): CMS.Model.ArticleListCo
     switch (locale) {
         case 'de':
             return {
-                ...MOCK_ARTICLE_LIST_COMPONENT_DE,
+                ...MOCK_ARTICLE_LIST_BLOCK_DE,
                 detailsUrl: getDetailsUrl(),
             };
         case 'pl':
             return {
-                ...MOCK_ARTICLE_LIST_COMPONENT_PL,
+                ...MOCK_ARTICLE_LIST_BLOCK_PL,
                 detailsUrl: getDetailsUrl(),
             };
         case 'en':
         default:
             return {
-                ...MOCK_ARTICLE_LIST_COMPONENT_EN,
+                ...MOCK_ARTICLE_LIST_BLOCK_EN,
                 detailsUrl: getDetailsUrl(),
             };
     }

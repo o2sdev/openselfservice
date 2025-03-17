@@ -10,6 +10,7 @@
             "@/providers/*": ["./src/providers/*"],
             "@/templates/*": ["./src/templates/*"],
             "@/containers/*": ["./src/containers/*"],
+            "@/blocks/*": ["./src/blocks/*"],
             "@/components/*": ["./src/components/*"],
             "@/hooks/*": ["./src/hooks/*"],
             "@/utils/*": ["./src/utils/*"],

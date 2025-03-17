@@ -19,6 +19,7 @@ const config = {
         '@/providers',
         '@/templates',
         '@/containers',
+        '@/blocks',
         '@/components',
         '@/assets',
         '@/styles',
