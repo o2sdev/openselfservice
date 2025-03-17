@@ -46,3 +46,7 @@ export class GetCmsAppConfigParams {
     referrer!: string;
     locale!: string;
 }
+
+export class GetCmsSurveyParams {
+    id!: string;
+}

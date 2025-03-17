@@ -11,6 +11,7 @@ import {
     GetNotFoundPageQueryVariables,
     GetPageQueryVariables,
     GetPagesQueryVariables,
+    GetSurveyQueryVariables,
     Sdk,
     getSdk,
 } from '@/generated/strapi';
@@ -60,5 +61,9 @@ export class GraphqlService {
 
     public getComponent(params: GetComponentQueryVariables) {
         return this.sdk.getComponent(params);
+    }
+
+    public getSurvey(params: GetSurveyQueryVariables) {
+        return this.sdk.getSurvey(params);
     }
 }
