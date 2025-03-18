@@ -67,8 +67,13 @@ jobs:
               if: steps.changesets.outputs.published == 'true'
               run: npm install @o2s/framework@latest @o2s/utils.logger@latest @o2s/integrations.mocked --workspace=@o2s/api-harmonization
 
-            - name: Commit changes
+            - name: Create create-o2s-app Pull Request
+              id: cpr
+              uses: peter-evans/create-pull-request@v7
               if: steps.changesets.outputs.published == 'true'
-              uses: EndBug/add-and-commit@v9
               with:
-                  message: 'feat(create-o2s-app): update dependencies'
+                  commit-message: Update dependencies
+                  base: create-o2s-app/base
+                  branch: create-o2s-app/patch
+                  delete-branch: true
+                  title: 'feat(create-o2s-app): update dependencies'
