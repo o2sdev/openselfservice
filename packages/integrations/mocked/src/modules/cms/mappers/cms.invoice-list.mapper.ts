@@ -62,8 +62,8 @@ const MOCK_INVOICE_LIST_BLOCK_EN: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
                     { label: 'Payment Due Date (descending)', value: 'paymentDueDate_DESC' },
                     { label: 'Total Amount Due (ascending)', value: 'totalAmountDue_ASC' },
                     { label: 'Total Amount Due (descending)', value: 'totalAmountDue_DESC' },
-                    { label: 'Amount to Pay (ascending)', value: 'amountToPay_ASC' },
-                    { label: 'Amount to Pay (descending)', value: 'amountToPay_DESC' },
+                    { label: 'To Be Paid (ascending)', value: 'totalToBePaid_ASC' },
+                    { label: 'To Be Paid (descending)', value: 'totalToBePaid_DESC' },
                 ],
             },
             {
