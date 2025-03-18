@@ -1,5 +1,11 @@
 # create-o2s-app
 
+## 0.10.2
+
+### Patch Changes
+
+- 20aa578: changed source branch to a dedicated one for the script to eliminate dependencies versions mismatch
+
 ## 0.10.1
 
 ### Patch Changes
