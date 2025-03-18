@@ -28,7 +28,7 @@ program
         const targetDirectory = projectName || options.directory;
 
         const githubRepo = 'https://github.com/o2sdev/openselfservice';
-        const githubBranch = 'main';
+        const githubBranch = 'create-o2s-app/base';
 
         if (existsSync(targetDirectory)) {
             console.error(
