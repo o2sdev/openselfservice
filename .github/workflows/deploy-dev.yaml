@@ -63,6 +63,18 @@ jobs:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+            - name: Checkout code
+              if: steps.changesets.outputs.published == 'true'
+              uses: actions/checkout@v3
+              with:
+                  ref: create-o2s-app/base
+
+            - name: Reset branch
+              if: steps.changesets.outputs.published == 'true'
+              run: |
+                  git fetch origin main:main
+                  git reset --hard main
+
             - name: Update api-harmonization dependencies
               if: steps.changesets.outputs.published == 'true'
               run: npm install @o2s/framework@latest @o2s/utils.logger@latest @o2s/integrations.mocked --workspace=@o2s/api-harmonization
@@ -73,7 +85,6 @@ jobs:
               if: steps.changesets.outputs.published == 'true'
               with:
                   commit-message: Update dependencies
-                  base: create-o2s-app/base
                   branch: create-o2s-app/patch
                   delete-branch: true
                   title: 'feat(create-o2s-app): update dependencies'
