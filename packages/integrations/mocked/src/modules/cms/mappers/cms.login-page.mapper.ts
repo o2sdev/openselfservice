@@ -82,6 +82,7 @@ const LOGIN_PAGE_PL: CMS.Model.LoginPage.LoginPage = {
         noIndex: false,
         noFollow: false,
     },
+    invalidCredentials: 'Nieprawidłowe dane logowania',
 };
 
 const LOGIN_PAGE_EN: CMS.Model.LoginPage.LoginPage = {
@@ -187,6 +188,7 @@ const LOGIN_PAGE_EN: CMS.Model.LoginPage.LoginPage = {
         noIndex: false,
         noFollow: false,
     },
+    invalidCredentials: 'Invalid credentials',
 };
 
 const LOGIN_PAGE_DE: CMS.Model.LoginPage.LoginPage = {
@@ -265,6 +267,7 @@ const LOGIN_PAGE_DE: CMS.Model.LoginPage.LoginPage = {
         noIndex: false,
         noFollow: false,
     },
+    invalidCredentials: 'Ungültige Anmeldeinformationen',
 };
 
 export const mapLoginPage = (locale: string): CMS.Model.LoginPage.LoginPage => {

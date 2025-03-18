@@ -28,6 +28,6 @@ export const mapAppConfig = (data: GetAppConfigQuery): CMS.Model.AppConfig.AppCo
             },
         ],
         header: component.header?.documentId,
-        footer: component.header?.documentId,
+        footer: component.footer?.documentId,
     };
 };

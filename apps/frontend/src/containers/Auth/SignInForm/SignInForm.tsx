@@ -1,7 +1,8 @@
 'use client';
 
-import { Field, FieldProps, Form, Formik } from 'formik';
+import { ErrorMessage, Field, FieldProps, Form, Formik } from 'formik';
 import { CircleAlert, Eye, EyeOff } from 'lucide-react';
+import { AuthError } from 'next-auth';
 import React, { useState } from 'react';
 import { object as YupObject, string as YupString } from 'yup';
 
@@ -24,6 +25,7 @@ const MAX_PASSWORD_CHARS = 64;
 export const SignInForm: React.FC<SignInFormProps> = ({ providers, labels, onSignIn }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [passwordVisible, setPasswordVisible] = useState(false);
+    const [error, setError] = useState<AuthError | null>(null);
 
     const validationSchema = YupObject().shape({
         username: YupString()
@@ -57,15 +59,27 @@ export const SignInForm: React.FC<SignInFormProps> = ({ providers, labels, onSig
                     </Typography>
                 )}
             </div>
-
+            {error && (
+                <div className="flex flex-row gap-2 items-center">
+                    <CircleAlert className="w-4 h-4 shrink-0 text-destructive" />
+                    <Typography variant="small" className="text-destructive">
+                        {labels.invalidCredentials}
+                    </Typography>
+                </div>
+            )}
             <Formik<FormValues>
                 initialValues={{
                     username: '',
                     password: '',
                 }}
                 onSubmit={async (values) => {
+                    setError(null);
                     setIsSubmitting(true);
-                    setTimeout(async () => await onSignIn('credentials', values), 1);
+                    const error = await onSignIn('credentials', values);
+                    if (error) {
+                        setIsSubmitting(false);
+                        setError(error);
+                    }
                 }}
                 validateOnBlur={true}
                 validateOnMount={false}
@@ -90,18 +104,20 @@ export const SignInForm: React.FC<SignInFormProps> = ({ providers, labels, onSig
                                             onChange={field.onChange}
                                             onBlur={field.onBlur}
                                         />
-
-                                        {touched.username && errors.username ? (
-                                            <div className="flex flex-row gap-2 items-center">
-                                                <CircleAlert className="w-4 h-4 shrink-0 text-destructive" />
-                                                <Typography variant="small" className="text-destructive">
-                                                    {errors.username}
-                                                </Typography>
-                                            </div>
-                                        ) : null}
+                                        <ErrorMessage name="username">
+                                            {(msg) => (
+                                                <div className="flex flex-row gap-2 items-center">
+                                                    <CircleAlert className="w-4 h-4 shrink-0 text-destructive" />
+                                                    <Typography variant="small" className="text-destructive">
+                                                        {msg}
+                                                    </Typography>
+                                                </div>
+                                            )}
+                                        </ErrorMessage>
                                     </div>
                                 )}
                             </Field>
+
                             <Field name="password">
                                 {({ field, form: { touched, errors } }: FieldProps<string, FormValues>) => (
                                     <div className="flex flex-col gap-2">
@@ -133,14 +149,16 @@ export const SignInForm: React.FC<SignInFormProps> = ({ providers, labels, onSig
                                             }
                                             adornmentProps={{ behavior: 'append' }}
                                         />
-                                        {touched.password && errors.password ? (
-                                            <div className="flex flex-row gap-2 items-center">
-                                                <CircleAlert className="w-4 h-4 shrink-0 text-destructive" />
-                                                <Typography variant="small" className="text-destructive">
-                                                    {errors.password}
-                                                </Typography>
-                                            </div>
-                                        ) : null}
+                                        <ErrorMessage name="password">
+                                            {(msg) => (
+                                                <div className="flex flex-row gap-2 items-center">
+                                                    <CircleAlert className="w-4 h-4 shrink-0 text-destructive" />
+                                                    <Typography variant="small" className="text-destructive">
+                                                        {msg}
+                                                    </Typography>
+                                                </div>
+                                            )}
+                                        </ErrorMessage>
                                     </div>
                                 )}
                             </Field>
