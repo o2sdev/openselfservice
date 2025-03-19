@@ -1,5 +1,13 @@
 # @o2s/api-harmonization
 
+## 0.15.3
+
+### Patch Changes
+
+- Updated dependencies [477ca3e]
+    - @o2s/integrations.mocked@0.16.0
+    - @o2s/framework@0.17.0
+
 ## 0.15.2
 
 ### Patch Changes
