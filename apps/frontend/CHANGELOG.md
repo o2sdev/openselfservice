@@ -1,5 +1,18 @@
 # @o2s/frontend
 
+## 0.14.0
+
+### Minor Changes
+
+- c4ec3cb: fix validation messages on login page
+- db41474: naming fix, added error message when invalid credentials
+- 78a3c92: fix filters Context
+- db41474: use alert component to display error message
+
+### Patch Changes
+
+- @o2s/api-harmonization@0.15.2
+
 ## 0.13.1
 
 ### Patch Changes

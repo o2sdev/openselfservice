@@ -1,5 +1,11 @@
 # @o2s/framework
 
+## 0.16.0
+
+### Minor Changes
+
+- db41474: naming fix, added error message when invalid credentials
+
 ## 0.15.1
 
 ### Patch Changes
