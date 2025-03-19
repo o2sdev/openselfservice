@@ -1,5 +1,16 @@
 # @o2s/integrations.strapi-cms
 
+## 0.15.0
+
+### Minor Changes
+
+- db41474: naming fix, added error message when invalid credentials
+
+### Patch Changes
+
+- Updated dependencies [db41474]
+    - @o2s/framework@0.16.0
+
 ## 0.14.1
 
 ### Patch Changes
