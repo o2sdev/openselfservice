@@ -102,22 +102,22 @@ const mapSlot = (slot: ComponentFragment[]): CMS.Model.Page.SlotBlock[] => {
 const mapComponent = (component: ComponentFragment) => {
     switch (component.content[0]?.__typename) {
         case 'ComponentComponentsFaq':
-            return 'FaqComponent';
+            return 'FaqBlock';
         case 'ComponentComponentsTicketList':
-            return 'TicketListComponent';
+            return 'TicketListBlock';
         case 'ComponentComponentsTicketDetails':
-            return 'TicketDetailsComponent';
+            return 'TicketDetailsBlock';
         case 'ComponentComponentsNotificationList':
-            return 'NotificationListComponent';
+            return 'NotificationListBlock';
         case 'ComponentComponentsNotificationDetails':
-            return 'NotificationDetailsComponent';
+            return 'NotificationDetailsBlock';
         case 'ComponentComponentsInvoiceList':
-            return 'InvoiceListComponent';
+            return 'InvoiceListBlock';
         case 'ComponentComponentsPaymentsSummary':
-            return 'PaymentsSummaryComponent';
+            return 'PaymentsSummaryBlock';
         case 'ComponentComponentsPaymentsHistory':
-            return 'PaymentsHistoryComponent';
+            return 'PaymentsHistoryBlock';
         case 'ComponentComponentsUserAccount':
-            return 'UserAccountComponent';
+            return 'UserAccountBlock';
     }
 };

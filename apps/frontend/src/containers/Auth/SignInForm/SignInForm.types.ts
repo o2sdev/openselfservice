@@ -1,3 +1,4 @@
+import { AuthError } from 'next-auth';
 import { Providers } from 'src/auth.providers';
 
 import { Models } from '@o2s/framework/modules';
@@ -29,6 +30,7 @@ export interface SignInFormProps {
             title: string;
             label: string;
         };
+        invalidCredentials: string;
     };
-    onSignIn: (providerId: string, credentials?: FormValues) => Promise<void>;
+    onSignIn: (providerId: string, credentials?: FormValues) => Promise<AuthError | void>;
 }
