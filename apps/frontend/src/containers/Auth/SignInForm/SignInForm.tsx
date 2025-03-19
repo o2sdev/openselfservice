@@ -27,18 +27,18 @@ export const SignInForm: React.FC<SignInFormProps> = ({ providers, labels, onSig
 
     const validationSchema = YupObject().shape({
         username: YupString()
+            .required(labels.username.errorMessages?.find((error) => error.type === 'required')?.description)
             .min(MIN_USERNAME_CHARS, labels.username.errorMessages?.find((error) => error.type === 'min')?.description)
             .max(MAX_USERNAME_CHARS, labels.username.errorMessages?.find((error) => error.type === 'max')?.description)
-            .required(labels.username.errorMessages?.find((error) => error.type === 'required')?.description)
             .matches(
                 /^[a-zA-Z0-9._@-]+$/,
                 labels.username.errorMessages?.find((error) => error.type === 'matches')?.description,
             ),
 
         password: YupString()
+            .required(labels.password.errorMessages?.find((error) => error.type === 'required')?.description)
             .min(MIN_PASSWORD_CHARS, labels.password.errorMessages?.find((error) => error.type === 'min')?.description)
             .max(MAX_PASSWORD_CHARS, labels.password.errorMessages?.find((error) => error.type === 'max')?.description)
-            .required(labels.password.errorMessages?.find((error) => error.type === 'required')?.description)
             .matches(
                 /^[a-zA-Z0-9!#$%'*+-/=?^_`{|}~\s]+$/gm,
                 labels.password.errorMessages?.find((error) => error.type === 'matches')?.description,
