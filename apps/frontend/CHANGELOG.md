@@ -1,5 +1,15 @@
 # @o2s/frontend
 
+## 0.15.0
+
+### Minor Changes
+
+- 477ca3e: bug-43 - pagination component shows wrong number of total pages - fix
+
+### Patch Changes
+
+- @o2s/api-harmonization@0.15.3
+
 ## 0.14.0
 
 ### Minor Changes

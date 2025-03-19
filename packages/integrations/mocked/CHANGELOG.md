@@ -1,5 +1,16 @@
 # @o2s/integrations.mocked
 
+## 0.16.0
+
+### Minor Changes
+
+- 477ca3e: bug-43 - pagination component shows wrong number of total pages - fix
+
+### Patch Changes
+
+- Updated dependencies [477ca3e]
+    - @o2s/framework@0.17.0
+
 ## 0.15.0
 
 ### Minor Changes
