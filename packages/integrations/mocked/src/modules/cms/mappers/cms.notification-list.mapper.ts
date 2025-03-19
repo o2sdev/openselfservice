@@ -38,7 +38,7 @@ const MOCK_NOTIFICATION_LIST_BLOCK_EN: CMS.Model.NotificationListBlock.Notificat
     },
     pagination: {
         limit: 5,
-        legend: 'of {total}',
+        legend: 'of {totalPages} pages',
         prev: 'Previous',
         next: 'Next',
         selectPage: 'Select page',
@@ -166,7 +166,7 @@ const MOCK_NOTIFICATION_LIST_BLOCK_DE: CMS.Model.NotificationListBlock.Notificat
     },
     pagination: {
         limit: 5,
-        legend: 'von {total}',
+        legend: 'von {totalPages} Seiten',
         prev: 'Zurück',
         next: 'Weiter',
         selectPage: 'Seite auswählen',
@@ -294,7 +294,7 @@ const MOCK_NOTIFICATION_LIST_BLOCK_PL: CMS.Model.NotificationListBlock.Notificat
     },
     pagination: {
         limit: 5,
-        legend: 'z {total}',
+        legend: 'z {totalPages} stron',
         prev: 'Poprzednia',
         next: 'Następna',
         selectPage: 'Wybierz stronę',

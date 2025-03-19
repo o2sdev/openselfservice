@@ -34,7 +34,7 @@ const MOCK_INVOICE_LIST_BLOCK_EN: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
     },
     pagination: {
         limit: 5,
-        legend: 'page of {total} invoices',
+        legend: 'of {totalPages} pages',
         prev: 'Previous',
         next: 'Next',
         selectPage: 'Select page',
@@ -149,7 +149,7 @@ const MOCK_INVOICE_LIST_BLOCK_DE: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
     },
     pagination: {
         limit: 5,
-        legend: 'Seite von {total} Rechnungen',
+        legend: 'von {totalPages} Seiten',
         prev: 'Zurück',
         next: 'Weiter',
         selectPage: 'Seite auswählen',
@@ -264,7 +264,7 @@ const MOCK_INVOICE_LIST_BLOCK_PL: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
     },
     pagination: {
         limit: 5,
-        legend: 'strona z {total} faktur',
+        legend: 'z {totalPages} stron',
         prev: 'Poprzednia',
         next: 'Następna',
         selectPage: 'Wybierz stronę',
