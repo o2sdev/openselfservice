@@ -1,11 +1,12 @@
 'use client';
 
 import { ErrorMessage, Field, FieldProps, Form, Formik } from 'formik';
-import { CircleAlert, Eye, EyeOff } from 'lucide-react';
+import { AlertCircle, CircleAlert, Eye, EyeOff } from 'lucide-react';
 import { AuthError } from 'next-auth';
 import React, { useState } from 'react';
 import { object as YupObject, string as YupString } from 'yup';
 
+import { Alert, AlertDescription } from '@o2s/ui/components/alert';
 import { Button } from '@o2s/ui/components/button';
 import { Input } from '@o2s/ui/components/input';
 import { Label } from '@o2s/ui/components/label';
@@ -60,12 +61,14 @@ export const SignInForm: React.FC<SignInFormProps> = ({ providers, labels, onSig
                 )}
             </div>
             {error && (
-                <div className="flex flex-row gap-2 items-center">
-                    <CircleAlert className="w-4 h-4 shrink-0 text-destructive" />
-                    <Typography variant="small" className="text-destructive">
-                        {labels.invalidCredentials}
-                    </Typography>
-                </div>
+                <Alert variant="destructive">
+                    <AlertCircle className="h-4 w-4 mt-1" />
+                    <AlertDescription>
+                        <Typography variant="small" className="mt-1">
+                            {labels.invalidCredentials}
+                        </Typography>
+                    </AlertDescription>
+                </Alert>
             )}
             <Formik<FormValues>
                 initialValues={{
@@ -106,12 +109,14 @@ export const SignInForm: React.FC<SignInFormProps> = ({ providers, labels, onSig
                                         />
                                         <ErrorMessage name="username">
                                             {(msg) => (
-                                                <div className="flex flex-row gap-2 items-center">
-                                                    <CircleAlert className="w-4 h-4 shrink-0 text-destructive" />
-                                                    <Typography variant="small" className="text-destructive">
-                                                        {msg}
-                                                    </Typography>
-                                                </div>
+                                                <Alert variant="destructive">
+                                                    <CircleAlert className="h-4 w-4 mt-1" />
+                                                    <AlertDescription>
+                                                        <Typography variant="small" className="mt-1">
+                                                            {msg}
+                                                        </Typography>
+                                                    </AlertDescription>
+                                                </Alert>
                                             )}
                                         </ErrorMessage>
                                     </div>
@@ -151,12 +156,14 @@ export const SignInForm: React.FC<SignInFormProps> = ({ providers, labels, onSig
                                         />
                                         <ErrorMessage name="password">
                                             {(msg) => (
-                                                <div className="flex flex-row gap-2 items-center">
-                                                    <CircleAlert className="w-4 h-4 shrink-0 text-destructive" />
-                                                    <Typography variant="small" className="text-destructive">
-                                                        {msg}
-                                                    </Typography>
-                                                </div>
+                                                <Alert variant="destructive">
+                                                    <AlertCircle className="h-4 w-4 mt-1" />
+                                                    <AlertDescription>
+                                                        <Typography variant="small" className="mt-1">
+                                                            {msg}
+                                                        </Typography>
+                                                    </AlertDescription>
+                                                </Alert>
                                             )}
                                         </ErrorMessage>
                                     </div>
