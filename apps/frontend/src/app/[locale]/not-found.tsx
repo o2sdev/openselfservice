@@ -25,8 +25,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         'x-locale': locale,
     });
 
-    console.log(data);
-
     return generateSeo({
         slug: slugPrepared,
         locale,

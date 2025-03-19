@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { AuthError } from 'next-auth';
 import { setRequestLocale } from 'next-intl/server';
 import Image from 'next/image';
-import { notFound, redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import React from 'react';
 import { providerMap } from 'src/auth.providers';
 
@@ -70,7 +70,7 @@ export default async function LoginPage({ params }: Readonly<Props>) {
                 });
             } catch (error) {
                 if (error instanceof AuthError) {
-                    return redirect(`/error?error=${error.type}`);
+                    return error;
                 }
                 throw error;
             }
@@ -97,6 +97,7 @@ export default async function LoginPage({ params }: Readonly<Props>) {
                         },
                         signIn: data.signIn,
                         providers: data.providers,
+                        invalidCredentials: data.invalidCredentials,
                     }}
                     onSignIn={handleSignIn}
                 />

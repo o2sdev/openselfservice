@@ -1,5 +1,19 @@
 # @o2s/integrations.mocked
 
+## 0.15.0
+
+### Minor Changes
+
+- 30d3544: fix invoices sorting
+- c4ec3cb: fix validation messages on login page
+- db41474: naming fix, added error message when invalid credentials
+- 30d3544: fix naming
+
+### Patch Changes
+
+- Updated dependencies [db41474]
+    - @o2s/framework@0.16.0
+
 ## 0.14.1
 
 ### Patch Changes

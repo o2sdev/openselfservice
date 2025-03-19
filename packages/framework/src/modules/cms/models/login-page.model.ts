@@ -21,4 +21,5 @@ export class LoginPage {
     };
     image?: Media.Media;
     seo!: Models.SEO.Page;
+    invalidCredentials!: string;
 }

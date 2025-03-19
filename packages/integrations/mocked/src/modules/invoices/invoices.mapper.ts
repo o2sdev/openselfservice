@@ -1,6 +1,5 @@
 import { Invoices, Models } from '@o2s/framework/modules';
 
-const _dateToday = new Date();
 const dateYesterday = new Date();
 dateYesterday.setDate(dateYesterday.getDate() - 1);
 
@@ -219,12 +218,21 @@ export const mapInvoices = (query: Invoices.Request.GetInvoiceListQuery): Invoic
             const aValue = a[field as keyof Invoices.Model.Invoice];
             const bValue = b[field as keyof Invoices.Model.Invoice];
 
-            if (typeof aValue === 'string' && typeof bValue === 'string') {
-                return isAscending ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+            if (
+                field === 'totalAmountDue' ||
+                field === 'totalNetAmountDue' ||
+                field === 'totalAmountPaid' ||
+                field === 'totalToBePaid'
+            ) {
+                const aValueNumber = (aValue as Invoices.Model.Money).value;
+                const bValueNumber = (bValue as Invoices.Model.Money).value;
+                return isAscending ? aValueNumber - bValueNumber : bValueNumber - aValueNumber;
             } else if (field === 'issuedDate' || field === 'paymentDueDate') {
                 const aDate = new Date(aValue as string);
                 const bDate = new Date(bValue as string);
                 return isAscending ? aDate.getTime() - bDate.getTime() : bDate.getTime() - aDate.getTime();
+            } else if (typeof aValue === 'string' && typeof bValue === 'string') {
+                return isAscending ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
             }
             return 0;
         });
