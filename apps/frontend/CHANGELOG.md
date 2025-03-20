@@ -1,5 +1,26 @@
 # @o2s/frontend
 
+## 0.16.0
+
+### Minor Changes
+
+- 92f2be2: Fix inconsistent data in User Profile
+
+### Patch Changes
+
+- Updated dependencies [92f2be2]
+    - @o2s/api-harmonization@0.16.0
+
+## 0.15.0
+
+### Minor Changes
+
+- 477ca3e: bug-43 - pagination component shows wrong number of total pages - fix
+
+### Patch Changes
+
+- @o2s/api-harmonization@0.15.3
+
 ## 0.14.0
 
 ### Minor Changes

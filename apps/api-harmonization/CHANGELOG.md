@@ -1,5 +1,26 @@
 # @o2s/api-harmonization
 
+## 0.16.0
+
+### Minor Changes
+
+- 92f2be2: Fix inconsistent data in User Profile
+
+### Patch Changes
+
+- Updated dependencies [3a1ff43]
+- Updated dependencies [92f2be2]
+    - @o2s/framework@0.18.0
+    - @o2s/integrations.mocked@0.17.0
+
+## 0.15.3
+
+### Patch Changes
+
+- Updated dependencies [477ca3e]
+    - @o2s/integrations.mocked@0.16.0
+    - @o2s/framework@0.17.0
+
 ## 0.15.2
 
 ### Patch Changes

@@ -18,7 +18,7 @@ const MOCK_RESOURCE_LIST_BLOCK: CMS.Model.ResourceListBlock.ResourceListBlock = 
     },
     pagination: {
         limit: 5,
-        legend: 'Showing {from}-{to} of {total} resources',
+        legend: 'of {totalPages} pages',
         prev: 'Previous',
         next: 'Next',
         selectPage: 'Select page',

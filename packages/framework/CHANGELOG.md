@@ -1,5 +1,17 @@
 # @o2s/framework
 
+## 0.18.0
+
+### Minor Changes
+
+- 3a1ff43: replace axios with ofetch
+
+## 0.17.0
+
+### Minor Changes
+
+- 477ca3e: bug-43 - pagination component shows wrong number of total pages - fix
+
 ## 0.16.0
 
 ### Minor Changes
