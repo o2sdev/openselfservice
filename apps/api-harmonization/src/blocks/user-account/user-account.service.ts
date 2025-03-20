@@ -17,8 +17,8 @@ export class UserAccountService {
     ) {}
 
     getUserAccountBlock(query: GetUserAccountBlockQuery, headers: AppHeaders): Observable<UserAccountBlock> {
-        const cms = this.cmsService.getUserAccountBlock({ ...query, locale: headers['x-locale'] });
-        const user = this.usersService.getCurrentUser();
+        const cms = this.cmsService.getUserAccountBlock({ id: query.id, locale: headers['x-locale'] });
+        const user = this.usersService.getUser({ id: query.userId });
         return forkJoin([cms, user]).pipe(map(([cms, user]) => mapUserAccount(cms, headers['x-locale'], user)));
     }
 }
