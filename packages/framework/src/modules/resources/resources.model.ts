@@ -1,21 +1,10 @@
 import { Pagination } from '@/utils/models';
 
-export enum ProductType {
-    PHYSICAL,
-    VIRTUAL,
-}
+export type ProductType = 'PHYSICAL' | 'VIRTUAL';
 
-export enum AssetStatus {
-    ACTIVE,
-    INACTIVE,
-    RETIRED,
-}
+export type AssetStatus = 'ACTIVE' | 'INACTIVE' | 'RETIRED';
 
-export enum ContractStatus {
-    ACTIVE,
-    EXPIRED,
-    INACTIVE,
-}
+export type ContractStatus = 'ACTIVE' | 'EXPIRED' | 'INACTIVE';
 
 export class Product {
     id!: string;
@@ -36,7 +25,7 @@ export class Contract {
 
 export class Resource {
     id!: string;
-    product!: Product;
+    product?: Product;
     billingAccountId!: string;
 }
 
@@ -55,3 +44,5 @@ export class Asset extends Resource {
 }
 
 export type Resources = Pagination.Paginated<Resource>;
+export type Services = Pagination.Paginated<Service>;
+export type Assets = Pagination.Paginated<Asset>;

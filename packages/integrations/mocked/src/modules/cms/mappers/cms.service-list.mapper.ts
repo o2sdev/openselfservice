@@ -1,24 +1,24 @@
 import { CMS } from '@o2s/framework/modules';
 
-const MOCK_RESOURCE_LIST_COMPONENT: CMS.Model.ResourceListBlock.ResourceListBlock = {
-    id: 'resource-list-1',
-    title: 'Resources',
-    subtitle: 'List of your resources',
-    table: {
-        columns: [
-            { id: 'id', title: 'Resource ID' },
-            { id: 'product.type', title: 'Product Type' },
-            { id: 'product.name', title: 'Product Name' },
-            { id: 'product.category', title: 'Product Category' },
-        ],
-        actions: {
-            title: 'Actions',
-            label: 'View Details',
-        },
-    },
+const MOCK_SERVICE_LIST_BLOCK: CMS.Model.ServiceListBlock.ServiceListBlock = {
+    id: 'service-list-1',
+    title: 'Services',
+    subtitle: 'List of your services',
+    // table: {
+    //     columns: [
+    //         { id: 'id', title: 'Resource ID' },
+    //         { id: 'product.type', title: 'Product Type' },
+    //         { id: 'product.name', title: 'Product Name' },
+    //         { id: 'product.category', title: 'Product Category' },
+    //     ],
+    //     actions: {
+    //         title: 'Actions',
+    //         label: 'View Details',
+    //     },
+    // },
     pagination: {
         limit: 5,
-        legend: 'Showing {from}-{to} of {total} resources',
+        legend: 'of {totalPages} pages',
         prev: 'Previous',
         next: 'Next',
         selectPage: 'Select page',
@@ -33,7 +33,7 @@ const MOCK_RESOURCE_LIST_COMPONENT: CMS.Model.ResourceListBlock.ResourceListBloc
     //     items: [
     //         {
     //             __typename: 'FilterSelect',
-    //             id: '__typename',
+    //             id: 'product.type',
     //             label: 'Resource Type',
     //             allowMultiple: true,
     //             options: [
@@ -57,10 +57,9 @@ const MOCK_RESOURCE_LIST_COMPONENT: CMS.Model.ResourceListBlock.ResourceListBloc
     //             label: 'Product Category',
     //             allowMultiple: true,
     //             options: [
-    //                 { label: 'Internet', value: 'INTERNET' },
-    //                 { label: 'Phone', value: 'PHONE' },
-    //                 { label: 'TV', value: 'TV' },
-    //                 { label: 'Mobile', value: 'MOBILE' },
+    //                 { label: 'Software', value: 'SOFTWARE' },
+    //                 { label: 'Tools', value: 'TOOLS' },
+    //                 { label: 'Hardware', value: 'HARDWARE' },
     //             ],
     //         },
     //     ],
@@ -75,25 +74,25 @@ const MOCK_RESOURCE_LIST_COMPONENT: CMS.Model.ResourceListBlock.ResourceListBloc
         status: 'Status',
         type: 'Type',
     },
-    detailsUrl: '/resources/:id',
+    detailsUrl: '/services/:id',
 };
 
-export const mapResourceListBlock = (locale: string): CMS.Model.ResourceListBlock.ResourceListBlock => {
+export const mapServiceListBlock = (locale: string): CMS.Model.ServiceListBlock.ServiceListBlock => {
     const getDetailsUrl = () => {
         switch (locale) {
             case 'en':
-                return `/resources/{id}`;
+                return `/services/{id}`;
             case 'de':
-                return `/ressourcen/{id}`;
+                return `/services/{id}`;
             case 'pl':
-                return `/zasoby/{id}`;
+                return `/usługi/{id}`;
         }
 
         return '';
     };
 
     return {
-        ...MOCK_RESOURCE_LIST_COMPONENT,
+        ...MOCK_SERVICE_LIST_BLOCK,
         detailsUrl: getDetailsUrl(),
     };
 };
