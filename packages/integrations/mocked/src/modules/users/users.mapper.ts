@@ -6,10 +6,10 @@ const dateYesterday = new Date();
 dateYesterday.setDate(dateYesterday.getDate() - 1);
 
 const MOCK_USER_1: Users.Model.User = {
-    id: '3325325',
-    email: 'john.doe@example.com',
+    id: 'user-100',
+    email: 'john@example.com',
     firstName: 'John',
-    lastName: 'Doe',
+    lastName: 'Adams',
     roles: [
         {
             customer: {
@@ -32,10 +32,10 @@ const MOCK_USER_1: Users.Model.User = {
 };
 
 const MOCK_USER_2: Users.Model.User = {
-    id: '4436436',
-    email: 'jane.smith@example.com',
+    id: 'admin-1',
+    email: 'jane@example.com',
     firstName: 'Jane',
-    lastName: 'Smith',
+    lastName: 'Doe',
     roles: [
         {
             customer: {
@@ -58,7 +58,7 @@ const MOCK_USER_2: Users.Model.User = {
 };
 
 const MOCK_USER_3: Users.Model.User = {
-    id: '5547547',
+    id: 'user-102',
     email: 'bob.wilson@example.com',
     firstName: 'Bob',
     lastName: 'Wilson',
@@ -66,8 +66,17 @@ const MOCK_USER_3: Users.Model.User = {
     customers: [],
 };
 
+const MOCK_USER_4: Users.Model.User = {
+    id: 'user-101',
+    email: 'lyon@example.com',
+    firstName: 'Lyon',
+    lastName: 'Gaultier',
+    roles: [],
+    customers: [],
+};
+
 export const mapUser = (id?: string): Users.Model.User | undefined => {
-    const users = [MOCK_USER_1, MOCK_USER_2, MOCK_USER_3];
+    const users = [MOCK_USER_1, MOCK_USER_2, MOCK_USER_3, MOCK_USER_4];
     if (id) {
         return users.find((user) => user.id === id);
     }
