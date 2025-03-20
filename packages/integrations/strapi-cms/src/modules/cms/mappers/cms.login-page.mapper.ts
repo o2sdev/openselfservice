@@ -49,7 +49,7 @@ export const mapLoginPage = (data: GetLoginPageQuery, baseURL?: string): CMS.Mod
         labels: labels.actions,
         image: {
             url: `${baseURL}${loginPage.image?.url}`,
-            alternativeText: loginPage.image?.alternativeText,
+            alt: loginPage.image?.alternativeText,
             width: loginPage.image?.width,
             height: loginPage.image?.height,
         },

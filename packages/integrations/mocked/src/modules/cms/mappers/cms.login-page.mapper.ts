@@ -63,7 +63,7 @@ const LOGIN_PAGE_PL: CMS.Model.LoginPage.LoginPage = {
     },
     image: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
-        alternativeText: 'Sign in image',
+        alt: 'Sign in image',
         width: 640,
         height: 656,
         name: 'Sign in image',
@@ -74,7 +74,7 @@ const LOGIN_PAGE_PL: CMS.Model.LoginPage.LoginPage = {
         keywords: ['zaloguj się', 'hasło', 'email'],
         image: {
             url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
-            alternativeText: 'Sign in image',
+            alt: 'Sign in image',
             width: 640,
             height: 656,
             name: 'Sign in image',
@@ -147,7 +147,7 @@ const LOGIN_PAGE_EN: CMS.Model.LoginPage.LoginPage = {
     },
     image: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
-        alternativeText: 'Sign in image',
+        alt: 'Sign in image',
         width: 640,
         height: 656,
         name: 'Sign in image',
@@ -179,7 +179,7 @@ const LOGIN_PAGE_EN: CMS.Model.LoginPage.LoginPage = {
         ],
         image: {
             url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/o2s-social-card-1.jpg',
-            alternativeText: 'Open Self Service - The Open Source Composable Frontend for Customer Portals',
+            alt: 'Open Self Service - The Open Source Composable Frontend for Customer Portals',
             width: 640,
             height: 656,
             name: 'Sign in image',
@@ -246,7 +246,7 @@ const LOGIN_PAGE_DE: CMS.Model.LoginPage.LoginPage = {
     },
     image: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
-        alternativeText: 'Sign in image',
+        alt: 'Sign in image',
         width: 640,
         height: 656,
         name: 'Sign in image',
@@ -257,7 +257,7 @@ const LOGIN_PAGE_DE: CMS.Model.LoginPage.LoginPage = {
         keywords: ['einloggen', 'passwort', 'email'],
         image: {
             url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
-            alternativeText: 'Sign in image',
+            alt: 'Sign in image',
             width: 640,
             height: 656,
             name: 'Sign in image',

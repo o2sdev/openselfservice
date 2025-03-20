@@ -1,4 +1,4 @@
-import { Pagination } from '@/utils/models';
+import { Media, Pagination } from '@/utils/models';
 
 export class Article {
     id!: string;
@@ -6,10 +6,13 @@ export class Article {
     updatedAt!: string;
     title!: string;
     lead!: string;
-    image?: string;
-    thumbnail?: string;
+    image?: Media.Media;
+    thumbnail?: Media.Media;
     sections!: ArticleSection[];
-    category!: string;
+    category!: {
+        id: string;
+        title: string;
+    };
 }
 
 export type ArticleSection = ArticleSectionText | ArticleSectionImage;

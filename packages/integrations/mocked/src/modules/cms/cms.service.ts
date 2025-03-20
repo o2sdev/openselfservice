@@ -4,8 +4,9 @@ import { of } from 'rxjs';
 import { CMS } from '@o2s/framework/modules';
 
 import { mapAppConfig } from './mappers/cms.app-config.mapper';
-import { mapArticleDetailsBlock } from './mappers/cms.article-details.mapper';
 import { mapArticleListBlock } from './mappers/cms.article-list.mapper';
+import { mapCategoryListBlock } from './mappers/cms.category-list.mapper';
+import { mapCategoryBlock } from './mappers/cms.category.mapper';
 import { mapFaqBlock } from './mappers/cms.faq.mapper';
 import { mapFooter } from './mappers/cms.footer.mapper';
 import { mapHeader } from './mappers/cms.header.mapper';
@@ -18,6 +19,7 @@ import { mapNotificationListBlock } from './mappers/cms.notification-list.mapper
 import { getAllPages, getAlternativePages, mapPage } from './mappers/cms.page.mapper';
 import { mapPaymentsHistoryBlock } from './mappers/cms.payments-history.mapper';
 import { mapPaymentsSummaryBlock } from './mappers/cms.payments-summary.mapper';
+import { mapQuickLinksBlock } from './mappers/cms.quick-linkts.mapper';
 import { mapResourceDetailsBlock } from './mappers/cms.resource-details.mapper';
 import { mapResourceListBlock } from './mappers/cms.resource-list.mapper';
 import { mapTicketDetailsBlock } from './mappers/cms.ticket-details.mapper';
@@ -88,14 +90,6 @@ export class CmsService implements CMS.Service {
         return of(mapNotificationDetailsBlock(_options.locale)).pipe(responseDelay());
     }
 
-    getArticleListBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapArticleListBlock(options.locale)).pipe(responseDelay());
-    }
-
-    getArticleDetailsBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of(mapArticleDetailsBlock()).pipe(responseDelay());
-    }
-
     getInvoiceListBlock(options: CMS.Request.GetCmsEntryParams) {
         return of(mapInvoiceListBlock(options.locale)).pipe(responseDelay());
     }
@@ -126,5 +120,21 @@ export class CmsService implements CMS.Service {
 
     getTicketRecentBlock(options: CMS.Request.GetCmsEntryParams) {
         return of(mapTicketRecentBlock(options.locale)).pipe(responseDelay());
+    }
+
+    getQuickLinksBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapQuickLinksBlock(options.locale)).pipe(responseDelay());
+    }
+
+    getArticleListBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapArticleListBlock(options.locale)).pipe(responseDelay());
+    }
+
+    getCategoryBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapCategoryBlock(options.locale)).pipe(responseDelay());
+    }
+
+    getCategoryListBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapCategoryListBlock(options.locale)).pipe(responseDelay());
     }
 }
