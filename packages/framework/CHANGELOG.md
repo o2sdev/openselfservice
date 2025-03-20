@@ -1,5 +1,11 @@
 # @o2s/framework
 
+## 0.18.0
+
+### Minor Changes
+
+- 3a1ff43: replace axios with ofetch
+
 ## 0.17.0
 
 ### Minor Changes

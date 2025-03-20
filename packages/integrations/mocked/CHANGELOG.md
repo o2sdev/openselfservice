@@ -1,5 +1,16 @@
 # @o2s/integrations.mocked
 
+## 0.17.0
+
+### Minor Changes
+
+- 92f2be2: Fix inconsistent data in User Profile
+
+### Patch Changes
+
+- Updated dependencies [3a1ff43]
+    - @o2s/framework@0.18.0
+
 ## 0.16.0
 
 ### Minor Changes
