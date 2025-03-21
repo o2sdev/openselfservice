@@ -28,6 +28,7 @@ export class GetAssetListQuery extends PaginationQuery {
 
 export class GetResourceParams {
     id!: string;
+    locale?: string;
 }
 
 export class GetServiceParams extends GetResourceParams {}

@@ -12,14 +12,7 @@ const MOCK_ASSET_1: Resources.Model.Asset = {
     serialNo: 'HLT3456789',
     description: 'Hammer drill with Active Torque Control and Active Vibration Reduction',
     status: 'ACTIVE',
-    product: {
-        id: 'PRD-004',
-        name: 'Rotary Hammer',
-        description: 'Professional heavy-duty hammer drill for concrete and masonry',
-        url: 'https://example.com/products/te-70-atc-avr',
-        type: 'PHYSICAL',
-        category: 'TOOLS',
-    },
+    productId: 'PRD-004',
 };
 
 const MOCK_ASSET_2: Resources.Model.Asset = {
@@ -31,14 +24,7 @@ const MOCK_ASSET_2: Resources.Model.Asset = {
     serialNo: 'HLT567890',
     description: 'Cordless angle grinder with 22V battery platform',
     status: 'ACTIVE',
-    product: {
-        id: 'PRD-005',
-        name: 'Angle Grinder',
-        description: 'Battery-powered grinder for cutting and grinding applications',
-        url: 'https://example.com/products/ag-125-a22',
-        type: 'PHYSICAL',
-        category: 'TOOLS',
-    },
+    productId: 'PRD-005',
 };
 
 const MOCK_ASSET_3: Resources.Model.Asset = {
@@ -50,14 +36,7 @@ const MOCK_ASSET_3: Resources.Model.Asset = {
     serialNo: 'HLT234567',
     description: 'Laser measurement device for distance measurements',
     status: 'ACTIVE',
-    product: {
-        id: 'PRD-006',
-        name: 'Laser Measurement',
-        description: 'Precision measurement tool for construction applications',
-        url: 'https://example.com/products/pd-s',
-        type: 'PHYSICAL',
-        category: 'MEASUREMENT',
-    },
+    productId: 'PRD-006',
 };
 
 const MOCK_ASSET_4: Resources.Model.Asset = {
@@ -69,14 +48,7 @@ const MOCK_ASSET_4: Resources.Model.Asset = {
     serialNo: 'HLT678901',
     description: 'Cordless drill driver with 22V battery platform',
     status: 'INACTIVE',
-    product: {
-        id: 'PRD-007',
-        name: 'Cordless Drill Driver',
-        description: 'Compact and lightweight driver for drilling and fastening',
-        url: 'https://example.com/products/sfc-22-a',
-        type: 'PHYSICAL',
-        category: 'TOOLS',
-    },
+    productId: 'PRD-007',
 };
 
 const MOCK_ASSET_5: Resources.Model.Asset = {
@@ -88,14 +60,7 @@ const MOCK_ASSET_5: Resources.Model.Asset = {
     serialNo: 'PRO-SUB-789012',
     description: 'Engineering software for designing anchoring and installation systems',
     status: 'ACTIVE',
-    product: {
-        id: 'PRD-008',
-        name: 'Engineering Software',
-        description: 'Advanced software for construction engineering calculations',
-        url: 'https://example.com/products/profis-engineering',
-        type: 'VIRTUAL',
-        category: 'SOFTWARE',
-    },
+    productId: 'PRD-008',
 };
 
 const MOCK_SERVICE_1: Resources.Model.Service = {
@@ -108,15 +73,9 @@ const MOCK_SERVICE_1: Resources.Model.Service = {
         status: 'ACTIVE',
         startDate: '2024-01-01',
         endDate: '2024-12-31',
+        paymentPeriod: 'MONTHLY',
     },
-    product: {
-        id: 'PRD-009',
-        name: 'Premium Support',
-        description: '24/7 Technical Support Service',
-        url: 'https://example.com/services/premium-support',
-        type: 'VIRTUAL',
-        category: 'SUPPORT',
-    },
+    productId: 'PRD-009',
 };
 
 const MOCK_SERVICE_2: Resources.Model.Service = {
@@ -129,15 +88,9 @@ const MOCK_SERVICE_2: Resources.Model.Service = {
         status: 'ACTIVE',
         startDate: '2024-01-01',
         endDate: '2024-12-31',
+        paymentPeriod: 'MONTHLY',
     },
-    product: {
-        id: 'PRD-010',
-        name: 'Professional Training',
-        description: 'Comprehensive Tool Usage Training',
-        url: 'https://example.com/services/training',
-        type: 'VIRTUAL',
-        category: 'TRAINING',
-    },
+    productId: 'PRD-010',
 };
 
 const MOCK_SERVICE_3: Resources.Model.Service = {
@@ -150,15 +103,9 @@ const MOCK_SERVICE_3: Resources.Model.Service = {
         status: 'ACTIVE',
         startDate: '2024-01-01',
         endDate: '2024-12-31',
+        paymentPeriod: 'MONTHLY',
     },
-    product: {
-        id: 'PRD-011',
-        name: 'Regular Maintenance',
-        description: 'Scheduled Tool Maintenance Service',
-        url: 'https://example.com/services/maintenance',
-        type: 'VIRTUAL',
-        category: 'MAINTENANCE',
-    },
+    productId: 'PRD-011',
 };
 
 const MOCK_SERVICE_4: Resources.Model.Service = {
@@ -171,15 +118,9 @@ const MOCK_SERVICE_4: Resources.Model.Service = {
         status: 'ACTIVE',
         startDate: '2024-01-01',
         endDate: '2026-12-31',
+        paymentPeriod: 'MONTHLY',
     },
-    product: {
-        id: 'PRD-012',
-        name: 'Extended Warranty',
-        description: 'Additional 2 Years Warranty Coverage',
-        url: 'https://example.com/services/warranty',
-        type: 'VIRTUAL',
-        category: 'WARRANTY',
-    },
+    productId: 'PRD-012',
 };
 
 const MOCK_SERVICE_5: Resources.Model.Service = {
@@ -192,15 +133,9 @@ const MOCK_SERVICE_5: Resources.Model.Service = {
         status: 'ACTIVE',
         startDate: '2024-01-01',
         endDate: '2024-12-31',
+        paymentPeriod: 'MONTHLY',
     },
-    product: {
-        id: 'PRD-013',
-        name: 'Cloud Storage',
-        description: 'Project Data Cloud Storage Service',
-        url: 'https://example.com/services/cloud-storage',
-        type: 'VIRTUAL',
-        category: 'CLOUD',
-    },
+    productId: 'PRD-013',
 };
 
 const MOCK_ASSETS = [MOCK_ASSET_1, MOCK_ASSET_2, MOCK_ASSET_3, MOCK_ASSET_4, MOCK_ASSET_5];
@@ -216,9 +151,6 @@ export const mapAsset = (id: string): Resources.Model.Asset => {
 
 export const mapAssets = (query: Resources.Request.GetAssetListQuery): Resources.Model.Assets => {
     const filteredAssets = MOCK_ASSETS.filter((asset) => {
-        if (query.type && asset.product?.type !== query.type) {
-            return false;
-        }
         if (query.status && asset.status !== query.status) {
             return false;
         }
@@ -244,10 +176,6 @@ export const mapService = (id: string): Resources.Model.Service => {
 
 export const mapServices = (query: Resources.Request.GetServiceListQuery): Resources.Model.Services => {
     const filteredServices = MOCK_SERVICES.filter((service) => {
-        if (query.type && service.product?.type !== query.type) {
-            return false;
-        }
-
         if (query.status && service.contract?.status !== query.status.toUpperCase()) {
             return false;
         }

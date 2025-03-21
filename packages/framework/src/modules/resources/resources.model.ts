@@ -1,4 +1,4 @@
-import { Pagination } from '@/utils/models';
+import { Currency, Pagination } from '@/utils/models';
 
 export type ProductType = 'PHYSICAL' | 'VIRTUAL';
 
@@ -6,14 +6,12 @@ export type AssetStatus = 'ACTIVE' | 'INACTIVE' | 'RETIRED';
 
 export type ContractStatus = 'ACTIVE' | 'EXPIRED' | 'INACTIVE';
 
-export class Product {
-    id!: string;
-    name!: string;
-    description!: string;
-    url!: string;
-    type!: ProductType;
-    category!: string;
-}
+export type PaymentPeriod = 'ONE_TIME' | 'MONTHLY' | 'YEARLY';
+
+export type Money = {
+    value: number;
+    currency: Currency.Currency;
+};
 
 export class Contract {
     id!: string;
@@ -21,11 +19,12 @@ export class Contract {
     status!: ContractStatus;
     startDate!: string;
     endDate!: string;
+    paymentPeriod!: PaymentPeriod;
 }
 
 export class Resource {
     id!: string;
-    product?: Product;
+    productId!: string;
     billingAccountId!: string;
 }
 

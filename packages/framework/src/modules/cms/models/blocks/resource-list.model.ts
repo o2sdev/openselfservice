@@ -1,7 +1,7 @@
-import { Product, Resource } from '@/modules/resources/resources.model';
+import { Resource } from '@/modules/resources/resources.model';
 import { Block, DataTable, Filters, Pagination } from '@/utils/models';
 
-type ResourceKeys = keyof Resource | `product.${keyof Product & string}` | '__typename';
+type ResourceKeys = keyof Resource | string | '__typename';
 
 type ResourceTableColumn = Omit<DataTable.DataTableColumn<Resource>, 'id'> & {
     id: ResourceKeys;

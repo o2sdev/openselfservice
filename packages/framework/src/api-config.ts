@@ -8,6 +8,7 @@ import {
     Invoices,
     Notifications,
     Organizations,
+    Products,
     Resources,
     Search,
     Tickets,
@@ -68,6 +69,11 @@ export interface ApiConfig {
         search: {
             service?: typeof Search.Service;
             controller?: typeof Search.Controller;
+            imports?: Type[];
+        };
+        products: {
+            service: typeof Products.Service;
+            controller?: typeof Products.Controller;
             imports?: Type[];
         };
     };

@@ -23,48 +23,48 @@ const MOCK_RESOURCE_LIST_COMPONENT: CMS.Model.ResourceListBlock.ResourceListBloc
         next: 'Next',
         selectPage: 'Select page',
     },
-    // filters: {
-    //     label: 'Filter',
-    //     title: 'Filter Resources',
-    //     description: 'Use filters to find specific resources',
-    //     submit: 'Apply Filters',
-    //     reset: 'Reset Filters',
-    //     close: 'Close filters',
-    //     items: [
-    //         {
-    //             __typename: 'FilterSelect',
-    //             id: '__typename',
-    //             label: 'Resource Type',
-    //             allowMultiple: true,
-    //             options: [
-    //                 { label: 'Asset', value: 'Asset' },
-    //                 { label: 'Service', value: 'Service' },
-    //             ],
-    //         },
-    //         {
-    //             __typename: 'FilterSelect',
-    //             id: 'product.type',
-    //             label: 'Product Type',
-    //             allowMultiple: true,
-    //             options: [
-    //                 { label: 'Physical', value: 'PHYSICAL' },
-    //                 { label: 'Virtual', value: 'VIRTUAL' },
-    //             ],
-    //         },
-    //         {
-    //             __typename: 'FilterSelect',
-    //             id: 'product.category',
-    //             label: 'Product Category',
-    //             allowMultiple: true,
-    //             options: [
-    //                 { label: 'Internet', value: 'INTERNET' },
-    //                 { label: 'Phone', value: 'PHONE' },
-    //                 { label: 'TV', value: 'TV' },
-    //                 { label: 'Mobile', value: 'MOBILE' },
-    //             ],
-    //         },
-    //     ],
-    // },
+    filters: {
+        label: 'Filter',
+        title: 'Filter Resources',
+        description: 'Use filters to find specific resources',
+        submit: 'Apply Filters',
+        reset: 'Reset Filters',
+        close: 'Close filters',
+        items: [
+            {
+                __typename: 'FilterSelect',
+                id: '__typename',
+                label: 'Resource Type',
+                allowMultiple: true,
+                options: [
+                    { label: 'Asset', value: 'Asset' },
+                    { label: 'Service', value: 'Service' },
+                ],
+            },
+            {
+                __typename: 'FilterSelect',
+                id: 'product.type',
+                label: 'Product Type',
+                allowMultiple: true,
+                options: [
+                    { label: 'Physical', value: 'PHYSICAL' },
+                    { label: 'Virtual', value: 'VIRTUAL' },
+                ],
+            },
+            {
+                __typename: 'FilterSelect',
+                id: 'product.category',
+                label: 'Product Category',
+                allowMultiple: true,
+                options: [
+                    { label: 'Internet', value: 'INTERNET' },
+                    { label: 'Phone', value: 'PHONE' },
+                    { label: 'TV', value: 'TV' },
+                    { label: 'Mobile', value: 'MOBILE' },
+                ],
+            },
+        ],
+    },
     noResults: {
         title: 'No Resources Found',
         description: 'There are no resources matching your criteria',
