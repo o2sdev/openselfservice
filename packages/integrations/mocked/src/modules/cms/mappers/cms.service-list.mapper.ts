@@ -5,7 +5,7 @@ const MOCK_SERVICE_LIST_BLOCK: CMS.Model.ServiceListBlock.ServiceListBlock = {
     title: 'Services',
     subtitle: 'List of your services',
     detailsLabel: 'Details',
-    fieldMapping: {
+    fields: {
         type: {
             PHYSICAL: 'Physical',
             VIRTUAL: 'Virtual',
@@ -24,7 +24,6 @@ const MOCK_SERVICE_LIST_BLOCK: CMS.Model.ServiceListBlock.ServiceListBlock = {
         paymentPeriod: {
             MONTHLY: 'Monthly',
             YEARLY: 'Yearly',
-            ONE_TIME: 'One Time',
         },
     },
     pagination: {

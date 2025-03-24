@@ -19,7 +19,7 @@ export class Contract {
     status!: ContractStatus;
     startDate!: string;
     endDate!: string;
-    paymentPeriod!: PaymentPeriod;
+    paymentPeriod?: PaymentPeriod;
 }
 
 export class Resource {

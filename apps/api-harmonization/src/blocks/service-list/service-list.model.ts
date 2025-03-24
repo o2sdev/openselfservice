@@ -5,15 +5,15 @@ import { Block } from '../../utils';
 
 export class ServiceListBlock extends Block.Block {
     __typename!: 'ServiceListBlock';
-    title!: string;
+    title?: string;
     subtitle?: string;
-    detailsLabel!: string;
+    detailsLabel?: string;
     filters?: Models.Filters.Filters<Resources.Model.Contract & Products.Model.Product>;
-    pagination!: Models.Pagination.Pagination;
+    pagination?: Models.Pagination.Pagination;
     services!: Services;
     noResults!: {
         title: string;
-        description: string;
+        description?: string;
     };
 }
 
@@ -57,7 +57,7 @@ export class Service {
         price: {
             value: Products.Model.Money['value'];
             currency: Models.Currency.Currency;
-            period: string;
+            period?: string;
         };
         link: string;
     };

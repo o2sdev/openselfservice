@@ -6,7 +6,7 @@ const MOCK_PRODUCT_1: Products.Model.Product = {
     description: 'Professional heavy-duty hammer drill for concrete and masonry',
     shortDescription: 'Professional heavy-duty hammer drill for concrete and masonry',
     image: {
-        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
         width: 640,
         height: 656,
         name: 'Rotary Hammer',
@@ -27,7 +27,7 @@ const MOCK_PRODUCT_2: Products.Model.Product = {
     description: 'Cordless angle grinder with 22V battery platform',
     shortDescription: 'Cordless angle grinder with 22V battery platform',
     image: {
-        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
         width: 640,
         height: 656,
         name: 'Cordless Angle Grinder',
@@ -48,7 +48,7 @@ const MOCK_PRODUCT_3: Products.Model.Product = {
     description: 'Laser measurement device for distance measurements',
     shortDescription: 'Laser measurement device for distance measurements',
     image: {
-        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
         width: 640,
         height: 656,
         name: 'Laser Measurement',
@@ -69,7 +69,7 @@ const MOCK_PRODUCT_4: Products.Model.Product = {
     description: 'Cordless drill driver with 22V battery platform',
     shortDescription: 'Cordless drill driver with 22V battery platform',
     image: {
-        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
         width: 640,
         height: 656,
         name: 'Cordless Drill Driver',
@@ -90,7 +90,7 @@ const MOCK_PRODUCT_5: Products.Model.Product = {
     description: 'Advanced software for construction engineering calculations',
     shortDescription: 'Advanced software for construction engineering calculations',
     image: {
-        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
         width: 640,
         height: 656,
         name: 'Engineering Software',
@@ -111,7 +111,7 @@ const MOCK_PRODUCT_6: Products.Model.Product = {
     description: '24/7 Technical Support Service',
     shortDescription: '24/7 Technical Support Service',
     image: {
-        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
         width: 640,
         height: 656,
         name: 'Premium Support',
@@ -132,7 +132,7 @@ const MOCK_PRODUCT_7: Products.Model.Product = {
     description: 'Comprehensive Tool Usage Training',
     shortDescription: 'Comprehensive Tool Usage Training',
     image: {
-        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
         width: 640,
         height: 656,
         name: 'Professional Training',
@@ -153,7 +153,7 @@ const MOCK_PRODUCT_8: Products.Model.Product = {
     description: 'Scheduled Tool Maintenance Service',
     shortDescription: 'Scheduled Tool Maintenance Service',
     image: {
-        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
         width: 640,
         height: 656,
         name: 'Regular Maintenance',
@@ -165,7 +165,7 @@ const MOCK_PRODUCT_8: Products.Model.Product = {
     },
     link: 'https://example.com/services/maintenance',
     type: 'VIRTUAL',
-    category: 'TRAINING',
+    category: 'MAINTENANCE',
 };
 
 const MOCK_PRODUCT_9: Products.Model.Product = {
@@ -174,7 +174,7 @@ const MOCK_PRODUCT_9: Products.Model.Product = {
     description: 'Additional 2 Years Warranty Coverage',
     shortDescription: 'Additional 2 Years Warranty Coverage',
     image: {
-        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
         width: 640,
         height: 656,
         name: 'Extended Warranty',
@@ -195,7 +195,7 @@ const MOCK_PRODUCT_10: Products.Model.Product = {
     description: 'Project Data Cloud Storage Service',
     shortDescription: 'Project Data Cloud Storage Service',
     image: {
-        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
         width: 640,
         height: 656,
         name: 'Cloud Storage',
@@ -206,7 +206,7 @@ const MOCK_PRODUCT_10: Products.Model.Product = {
         currency: 'USD',
     },
     link: 'https://example.com/services/cloud-storage',
-    type: 'PHYSICAL',
+    type: 'VIRTUAL',
     category: 'CLOUD',
 };
 

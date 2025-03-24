@@ -73,7 +73,7 @@ const MOCK_SERVICE_1: Resources.Model.Service = {
         status: 'ACTIVE',
         startDate: '2024-01-01',
         endDate: '2024-12-31',
-        paymentPeriod: 'MONTHLY',
+        paymentPeriod: 'YEARLY',
     },
     productId: 'PRD-009',
 };
@@ -88,7 +88,6 @@ const MOCK_SERVICE_2: Resources.Model.Service = {
         status: 'ACTIVE',
         startDate: '2024-01-01',
         endDate: '2024-12-31',
-        paymentPeriod: 'MONTHLY',
     },
     productId: 'PRD-010',
 };

@@ -119,5 +119,7 @@ const mapComponent = (component: ComponentFragment) => {
             return 'PaymentsHistoryBlock';
         case 'ComponentComponentsUserAccount':
             return 'UserAccountBlock';
+        case 'ComponentComponentsServiceList':
+            return 'ServiceListBlock';
     }
 };

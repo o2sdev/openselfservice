@@ -50,7 +50,7 @@ export const Card: React.FC<CardProps> = ({
                             </Badge>
                         ))}
 
-                        {description && <RichText content={description} />}
+                        {description && <RichText content={description} className="text-muted-foreground" />}
                     </div>
                 </div>
 
@@ -59,7 +59,7 @@ export const Card: React.FC<CardProps> = ({
                 {/* Footer section */}
                 <div className="flex items-start sm:items-center justify-between gap-4 sm:flex-row flex-col w-full">
                     <Typography variant="highlightedSmall" className="w-full">
-                        {`${price?.value} ${price?.period && `/ ${price?.period}`}`}
+                        {price?.period ? `${price?.value} / ${price?.period}` : price?.value}
                     </Typography>
 
                     <div className="flex sm:items-center gap-4 sm:flex-row flex-col w-full justify-end">
@@ -69,9 +69,11 @@ export const Card: React.FC<CardProps> = ({
                             </Badge>
                         )}
 
-                        <Button variant="default" onClick={onButtonClick} className="w-full sm:w-none">
-                            {buttonLabel}
-                        </Button>
+                        {buttonLabel && (
+                            <Button variant="default" onClick={onButtonClick} className="w-full sm:w-none">
+                                {buttonLabel}
+                            </Button>
+                        )}
                     </div>
                 </div>
             </div>

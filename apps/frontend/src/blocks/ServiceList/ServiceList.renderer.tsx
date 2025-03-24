@@ -1,7 +1,6 @@
 import { useLocale } from 'next-intl';
 import React, { Suspense } from 'react';
 
-import { Container } from '@/components/Container/Container';
 import { Loading } from '@/components/Loading/Loading';
 
 import { ServiceList } from './ServiceList.server';
@@ -19,10 +18,7 @@ export const ServiceListRenderer: React.FC<ServiceListRendererProps> = ({ id, ac
             key={id}
             fallback={
                 <>
-                    <Loading bars={1} />
-                    <Container variant="narrow">
-                        <Loading bars={8} />
-                    </Container>
+                    <Loading bars={32} />
                 </>
             }
         >

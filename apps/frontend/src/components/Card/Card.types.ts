@@ -5,11 +5,11 @@ export interface CardProps {
     description?: string;
     price?: {
         value: string;
-        period: string;
+        period?: string;
     };
     tags?: Badge[];
     status?: Badge;
-    buttonLabel: string;
+    buttonLabel?: string;
     image: Models.Media.Media;
     onButtonClick?: () => void;
 }

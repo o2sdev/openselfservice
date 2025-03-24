@@ -3,15 +3,15 @@ import { Contract } from '@/modules/resources/resources.model';
 import { Block, Filters, Mapping, Pagination } from '@/utils/models';
 
 export class ServiceListBlock extends Block.Block {
-    title!: string;
+    title?: string;
     subtitle?: string;
-    pagination!: Pagination.Pagination;
-    fieldMapping!: Mapping.Mapping<Contract & Product>;
+    pagination?: Pagination.Pagination;
+    fields!: Mapping.Mapping<Contract & Product>;
     filters?: Filters.Filters<Contract & Product & { sort?: string }>;
     noResults!: {
         title: string;
-        description: string;
+        description?: string;
     };
-    detailsLabel!: string;
+    detailsLabel?: string;
     detailsUrl!: string;
 }

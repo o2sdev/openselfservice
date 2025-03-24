@@ -27,7 +27,7 @@ export const mapServiceList = (
 
 const mapService = (service: ServiceWithProduct, cms: CMS.Model.ServiceListBlock.ServiceListBlock): Service => {
     const { contract, product } = service;
-    const { type, category, status, paymentPeriod } = cms.fieldMapping;
+    const { type, category, status, paymentPeriod } = cms.fields;
 
     return {
         __typename: 'Service',
@@ -66,7 +66,9 @@ const mapService = (service: ServiceWithProduct, cms: CMS.Model.ServiceListBlock
             price: {
                 value: product.price.value,
                 currency: product.price.currency,
-                period: paymentPeriod?.[contract.paymentPeriod] || contract.paymentPeriod,
+                period: contract.paymentPeriod
+                    ? paymentPeriod?.[contract.paymentPeriod] || contract.paymentPeriod
+                    : undefined,
             },
             link: product.link,
         },

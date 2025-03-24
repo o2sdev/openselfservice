@@ -34,6 +34,7 @@ export const ServiceListPure: React.FC<ServiceListPureProps> = ({ locale, access
     const [filters, setFilters] = useState(initialFilters);
     const [isPending, startTransition] = useTransition();
     const { priceService } = useGlobalContext();
+
     const handleFilter = (data: Partial<Blocks.ServiceList.Request.GetServiceListBlockQuery>) => {
         startTransition(async () => {
             const newFilters = { ...filters, ...data };
@@ -59,14 +60,16 @@ export const ServiceListPure: React.FC<ServiceListPureProps> = ({ locale, access
                         <Typography variant="h2" asChild>
                             <h2>{data.subtitle}</h2>
                         </Typography>
-                        <FiltersContextProvider initialFilters={initialFilters as unknown as InitialFilters}>
-                            <Filters
-                                filters={data.filters}
-                                initialValues={filters}
-                                onSubmit={handleFilter}
-                                onReset={handleReset}
-                            />
-                        </FiltersContextProvider>
+                        {data.filters && data.filters.items.length > 0 && (
+                            <FiltersContextProvider initialFilters={initialFilters as unknown as InitialFilters}>
+                                <Filters
+                                    filters={data.filters}
+                                    initialValues={filters}
+                                    onSubmit={handleFilter}
+                                    onReset={handleReset}
+                                />
+                            </FiltersContextProvider>
+                        )}
                     </div>
 
                     <LoadingOverlay isActive={isPending}>
