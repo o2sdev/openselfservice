@@ -1,4 +1,5 @@
 import { Currency, Pagination } from '@/utils/models';
+import { Media } from '@/utils/models';
 
 export type ProductType = 'PHYSICAL' | 'VIRTUAL';
 
@@ -12,7 +13,7 @@ export class Product {
     name!: string;
     description!: string;
     shortDescription!: string;
-    image!: string;
+    image!: Media.Media;
     price!: Money;
     link!: string;
     type!: ProductType;

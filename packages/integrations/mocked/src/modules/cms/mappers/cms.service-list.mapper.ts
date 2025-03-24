@@ -21,6 +21,11 @@ const MOCK_SERVICE_LIST_BLOCK: CMS.Model.ServiceListBlock.ServiceListBlock = {
             INACTIVE: 'Inactive',
             EXPIRED: 'Expired',
         },
+        paymentPeriod: {
+            MONTHLY: 'Monthly',
+            YEARLY: 'Yearly',
+            ONE_TIME: 'One Time',
+        },
     },
     pagination: {
         limit: 5,
@@ -35,6 +40,7 @@ const MOCK_SERVICE_LIST_BLOCK: CMS.Model.ServiceListBlock.ServiceListBlock = {
         description: 'Use filters to find specific services',
         submit: 'Apply Filters',
         reset: 'Reset Filters',
+        removeFilters: 'Remove filters ({active})',
         close: 'Close filters',
         items: [
             {
@@ -56,6 +62,13 @@ const MOCK_SERVICE_LIST_BLOCK: CMS.Model.ServiceListBlock.ServiceListBlock = {
                     { label: 'Software', value: 'SOFTWARE' },
                     { label: 'Tools', value: 'TOOLS' },
                     { label: 'Hardware', value: 'HARDWARE' },
+                    { label: 'Measurement', value: 'MEASUREMENT' },
+                    { label: 'Cloud', value: 'CLOUD' },
+                    { label: 'Support', value: 'SUPPORT' },
+                    { label: 'Subscription', value: 'SUBSCRIPTION' },
+                    { label: 'Warranty', value: 'WARRANTY' },
+                    { label: 'Maintenance', value: 'MAINTENANCE' },
+                    { label: 'Training', value: 'TRAINING' },
                 ],
             },
         ],

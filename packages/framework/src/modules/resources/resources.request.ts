@@ -1,4 +1,4 @@
-import { ProductType } from './resources.model';
+import { ContractStatus, ProductType } from './resources.model';
 import { PaginationQuery } from '@/utils/models/pagination';
 
 export class GetResourceListQuery extends PaginationQuery {
@@ -11,8 +11,7 @@ export class GetResourceListQuery extends PaginationQuery {
 }
 
 export class GetServiceListQuery extends PaginationQuery {
-    type?: ProductType;
-    status?: string;
+    status?: ContractStatus;
     billingAccountId?: string;
     dateFrom?: string;
     dateTo?: string;

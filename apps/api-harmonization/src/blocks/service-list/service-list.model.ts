@@ -8,10 +8,13 @@ export class ServiceListBlock extends Block.Block {
     title!: string;
     subtitle?: string;
     detailsLabel!: string;
-    detailsUrl!: string;
     filters?: Models.Filters.Filters<Resources.Model.Contract & Products.Model.Product>;
     pagination!: Models.Pagination.Pagination;
     services!: Services;
+    noResults!: {
+        title: string;
+        description: string;
+    };
 }
 
 export type Services = {
@@ -23,6 +26,7 @@ export class Service {
     id!: string;
     __typename!: 'Service';
     billingAccountId!: string;
+    detailsUrl!: string;
     contract!: {
         id: string;
         type: {
@@ -49,10 +53,11 @@ export class Service {
         };
         description: string;
         shortDescription: string;
-        image: string;
+        image: Models.Media.Media;
         price: {
             value: Products.Model.Money['value'];
             currency: Models.Currency.Currency;
+            period: string;
         };
         link: string;
     };

@@ -21,12 +21,13 @@ export class ServiceListService {
 
     getServiceListBlock(query: GetServiceListBlockQuery, headers: AppHeaders): Observable<ServiceListBlock> {
         const cms = this.cmsService.getServiceListBlock({ ...query, locale: headers['x-locale'] });
+        const { type, category, status } = query;
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {
                 return this.resourceService
                     .getServiceList({
-                        ...query,
+                        status: status as Resources.Model.ContractStatus,
                         limit: cms.pagination?.limit || query.limit,
                     })
                     .pipe(
@@ -48,9 +49,18 @@ export class ServiceListService {
                             });
                             return forkJoin(serviceList).pipe(
                                 map((servicesList) => {
+                                    const filteredServices = servicesList.filter((service) => {
+                                        if (type) {
+                                            return service.product.type === type;
+                                        }
+                                        if (category) {
+                                            return service.product.category === category;
+                                        }
+                                        return true;
+                                    });
                                     return {
-                                        total: services.total,
-                                        data: servicesList,
+                                        total: filteredServices.length,
+                                        data: filteredServices,
                                     };
                                 }),
                                 map((services) => {

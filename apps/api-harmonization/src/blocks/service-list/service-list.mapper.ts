@@ -1,3 +1,5 @@
+import format from 'string-template';
+
 import { CMS } from '../../models';
 
 import { Service, ServiceListBlock, ServiceWithProduct, ServicesList } from './service-list.model';
@@ -14,8 +16,8 @@ export const mapServiceList = (
         subtitle: cms.subtitle,
         detailsLabel: cms.detailsLabel,
         pagination: cms.pagination,
-        detailsUrl: cms.detailsUrl,
         filters: cms.filters,
+        noResults: cms.noResults,
         services: {
             total: services.total,
             data: services.data.map((service) => mapService(service, cms)),
@@ -25,20 +27,24 @@ export const mapServiceList = (
 
 const mapService = (service: ServiceWithProduct, cms: CMS.Model.ServiceListBlock.ServiceListBlock): Service => {
     const { contract, product } = service;
+    const { type, category, status, paymentPeriod } = cms.fieldMapping;
 
     return {
         __typename: 'Service',
         id: service.id,
         billingAccountId: service.billingAccountId,
+        detailsUrl: format(cms.detailsUrl, {
+            id: service.id,
+        }),
         contract: {
             id: contract.id,
             type: {
                 value: contract.type,
-                label: cms.fieldMapping.type?.[contract.type] || contract.type,
+                label: type?.[contract.type] || contract.type,
             },
             status: {
                 value: contract.status,
-                label: cms.fieldMapping.status?.[contract.status] || contract.status,
+                label: status?.[contract.status] || contract.status,
             },
             startDate: contract.startDate,
             endDate: contract.endDate,
@@ -48,11 +54,11 @@ const mapService = (service: ServiceWithProduct, cms: CMS.Model.ServiceListBlock
             name: product.name,
             type: {
                 value: product.type,
-                label: cms.fieldMapping.type?.[product.type] || product.type,
+                label: type?.[product.type] || product.type,
             },
             category: {
                 value: product.category,
-                label: cms.fieldMapping.category?.[product.category] || product.category,
+                label: category?.[product.category] || product.category,
             },
             description: product.description,
             shortDescription: product.shortDescription,
@@ -60,6 +66,7 @@ const mapService = (service: ServiceWithProduct, cms: CMS.Model.ServiceListBlock
             price: {
                 value: product.price.value,
                 currency: product.price.currency,
+                period: paymentPeriod?.[contract.paymentPeriod] || contract.paymentPeriod,
             },
             link: product.link,
         },
