@@ -12,6 +12,6 @@ export class ServiceListBlock extends Block.Block {
         title: string;
         description?: string;
     };
-    detailsLabel?: string;
+    detailsLabel!: string;
     detailsUrl!: string;
 }

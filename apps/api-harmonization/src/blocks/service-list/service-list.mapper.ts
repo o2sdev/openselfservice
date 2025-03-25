@@ -71,6 +71,7 @@ const mapService = (service: ServiceWithProduct, cms: CMS.Model.ServiceListBlock
                     : undefined,
             },
             link: product.link,
+            tags: product.tags,
         },
     };
 };

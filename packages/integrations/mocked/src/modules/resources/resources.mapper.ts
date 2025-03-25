@@ -129,7 +129,7 @@ const MOCK_SERVICE_5: Resources.Model.Service = {
     contract: {
         id: 'CNT-005',
         type: 'CLOUD',
-        status: 'ACTIVE',
+        status: 'INACTIVE',
         startDate: '2024-01-01',
         endDate: '2024-12-31',
         paymentPeriod: 'MONTHLY',
@@ -137,8 +137,23 @@ const MOCK_SERVICE_5: Resources.Model.Service = {
     productId: 'PRD-013',
 };
 
+const MOCK_SERVICE_6: Resources.Model.Service = {
+    id: 'SRV-006',
+    __typename: 'Service',
+    billingAccountId: 'BA-005',
+    contract: {
+        id: 'CNT-006',
+        type: 'RENTAL',
+        status: 'EXPIRED',
+        startDate: '2024-01-01',
+        endDate: '2024-12-31',
+        paymentPeriod: 'YEARLY',
+    },
+    productId: 'PRD-014',
+};
+
 const MOCK_ASSETS = [MOCK_ASSET_1, MOCK_ASSET_2, MOCK_ASSET_3, MOCK_ASSET_4, MOCK_ASSET_5];
-const MOCK_SERVICES = [MOCK_SERVICE_1, MOCK_SERVICE_2, MOCK_SERVICE_3, MOCK_SERVICE_4, MOCK_SERVICE_5];
+const MOCK_SERVICES = [MOCK_SERVICE_1, MOCK_SERVICE_2, MOCK_SERVICE_3, MOCK_SERVICE_4, MOCK_SERVICE_5, MOCK_SERVICE_6];
 
 export const mapAsset = (id: string): Resources.Model.Asset => {
     const asset = MOCK_ASSETS.find((asset) => asset.id === id);

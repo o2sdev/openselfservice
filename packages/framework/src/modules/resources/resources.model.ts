@@ -1,4 +1,4 @@
-import { Currency, Pagination } from '@/utils/models';
+import { Pagination } from '@/utils/models';
 
 export type ProductType = 'PHYSICAL' | 'VIRTUAL';
 
@@ -7,11 +7,6 @@ export type AssetStatus = 'ACTIVE' | 'INACTIVE' | 'RETIRED';
 export type ContractStatus = 'ACTIVE' | 'EXPIRED' | 'INACTIVE';
 
 export type PaymentPeriod = 'ONE_TIME' | 'MONTHLY' | 'YEARLY';
-
-export type Money = {
-    value: number;
-    currency: Currency.Currency;
-};
 
 export class Contract {
     id!: string;

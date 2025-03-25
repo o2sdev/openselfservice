@@ -28,7 +28,7 @@ export const mapServiceListBlock = (data: GetComponentQuery): CMS.Model.ServiceL
                     title: component.noResults.title,
                     description: component.noResults.description,
                 },
-                detailsLabel: component.detailsLabel,
+                detailsLabel: component.detailsLabel as string,
                 detailsUrl: component.detailsURL as string,
             };
     }

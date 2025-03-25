@@ -1,20 +1,23 @@
+import { VariantProps } from 'class-variance-authority';
+
 import { Models } from '@o2s/framework/modules';
+
+import { badgeVariants } from '@o2s/ui/components/badge';
 
 export interface CardProps {
     title: string;
-    description?: string;
-    price?: {
-        value: string;
-        period?: string;
-    };
+    description?: Models.RichText.RichText;
+    price?: Models.Price.Price;
     tags?: Badge[];
     status?: Badge;
-    buttonLabel?: string;
+    link?: {
+        label: string;
+        url: string;
+    };
     image: Models.Media.Media;
-    onButtonClick?: () => void;
 }
 
 export interface Badge {
     label: string;
-    variant: 'default' | 'secondary' | 'destructive' | 'outline' | null | undefined;
+    variant: VariantProps<typeof badgeVariants>['variant'];
 }

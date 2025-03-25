@@ -1,12 +1,7 @@
-import { Currency, Pagination } from '@/utils/models';
+import { Pagination, Price } from '@/utils/models';
 import { Media } from '@/utils/models';
 
 export type ProductType = 'PHYSICAL' | 'VIRTUAL';
-
-export type Money = {
-    value: number;
-    currency: Currency.Currency;
-};
 
 export class Product {
     id!: string;
@@ -14,10 +9,14 @@ export class Product {
     description!: string;
     shortDescription!: string;
     image!: Media.Media;
-    price!: Money;
+    price!: Price.Price;
     link!: string;
     type!: ProductType;
     category!: string;
+    tags!: {
+        label: string;
+        variant: string;
+    }[];
 }
 
 export type Products = Pagination.Paginated<Product>;

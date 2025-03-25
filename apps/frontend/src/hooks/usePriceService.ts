@@ -1,6 +1,4 @@
-type Price = {
-    value: number;
-};
+import { Models } from '@o2s/framework/modules';
 
 export type NumberFormat = {
     value: number;
@@ -9,12 +7,11 @@ export type NumberFormat = {
     unitDisplay: 'start' | 'end';
 };
 
-export type Currency = 'PLN' | 'GBP' | 'EUR' | 'USD';
 type UnitReturnType = Pick<NumberFormat, 'unit' | 'unitDisplay'>;
 
 const FALLBACK_CURRENCY = 'PLN';
 
-const currencyUnitMap: Record<Currency, UnitReturnType> = {
+const currencyUnitMap: Record<Models.Price.Currency, UnitReturnType> = {
     PLN: {
         unit: 'zł',
         unitDisplay: 'end',
@@ -34,7 +31,7 @@ const currencyUnitMap: Record<Currency, UnitReturnType> = {
 };
 
 export interface PriceService {
-    formatPrice: (price: Price, currency: Currency) => NumberFormat;
+    formatPrice: (price: Models.Price.Price) => NumberFormat;
 }
 
 export const usePriceService = (locale: string): PriceService => {
@@ -45,11 +42,11 @@ export const usePriceService = (locale: string): PriceService => {
         useGrouping: true,
     });
 
-    const getUnit = (currency: Currency): UnitReturnType => {
+    const getUnit = (currency: Models.Price.Currency): UnitReturnType => {
         return currencyUnitMap[currency] || currencyUnitMap[FALLBACK_CURRENCY];
     };
 
-    const formatPrice = ({ value }: Price, currency: Currency): NumberFormat => {
+    const formatPrice = ({ value, currency }: Models.Price.Price): NumberFormat => {
         const format = formatter.format(value);
         const { unit, unitDisplay } = getUnit(currency);
 

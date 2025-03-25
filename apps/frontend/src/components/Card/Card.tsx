@@ -1,31 +1,21 @@
 import Image from 'next/image';
 
 import { Badge } from '@o2s/ui/components/badge';
-import { Button } from '@o2s/ui/components/button';
+import { Link } from '@o2s/ui/components/link';
 import { Separator } from '@o2s/ui/components/separator';
 import { Typography } from '@o2s/ui/components/typography';
 import { cn } from '@o2s/ui/lib/utils';
 
+import { Link as NextLink } from '@/i18n';
+
+import { Price } from '../Price/Price';
 import { RichText } from '../RichText/RichText';
 
 import { CardProps } from './Card.types';
 
-export const Card: React.FC<CardProps> = ({
-    title,
-    description,
-    price,
-    image,
-    tags,
-    status,
-    buttonLabel,
-    onButtonClick,
-}) => {
+export const Card: React.FC<CardProps> = ({ title, description, price, image, tags, status, link }) => {
     return (
-        <div
-            className={cn(
-                'flex flex-col bg-card rounded-lg border border-border shadow-sm relative max-w-[500px] w-full',
-            )}
-        >
+        <div className={cn('flex flex-col bg-card rounded-lg border border-border shadow-sm relative w-full')}>
             {/* Image section */}
             <div className="relative overflow-hidden h-[180px] rounded-t-lg">
                 {image.url && image.alternativeText && (
@@ -34,7 +24,7 @@ export const Card: React.FC<CardProps> = ({
                         alt={image.alternativeText}
                         fill
                         className="object-cover object-center"
-                        priority
+                        priority={image.priority}
                     />
                 )}
             </div>
@@ -42,24 +32,30 @@ export const Card: React.FC<CardProps> = ({
                 {/* Content section */}
                 <div className="flex flex-col">
                     <div className="flex flex-col gap-4">
-                        <Typography variant="highlightedSmall">{title}</Typography>
+                        <Typography variant="highlightedSmall" className="line-clamp-2">
+                            {title}
+                        </Typography>
 
-                        {tags?.map((tag) => (
-                            <Badge key={tag.label} variant={tag.variant} className="absolute top-[168px] left-6">
-                                {tag.label}
-                            </Badge>
-                        ))}
+                        {tags && tags.length > 0 && (
+                            <ul className="flex flex-wrap gap-2 absolute top-[166px] left-6">
+                                {tags.map((tag) => (
+                                    <li key={tag.label}>
+                                        <Badge variant={tag.variant}>{tag.label}</Badge>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
 
-                        {description && <RichText content={description} className="text-muted-foreground" />}
+                        <RichText content={description} className="text-muted-foreground" />
                     </div>
                 </div>
 
-                <Separator className="w-full" />
+                <Separator />
 
                 {/* Footer section */}
                 <div className="flex items-start sm:items-center justify-between gap-4 sm:flex-row flex-col w-full">
                     <Typography variant="highlightedSmall" className="w-full">
-                        {price?.period ? `${price?.value} / ${price?.period}` : price?.value}
+                        <Price price={price} />
                     </Typography>
 
                     <div className="flex sm:items-center gap-4 sm:flex-row flex-col w-full justify-end">
@@ -69,10 +65,10 @@ export const Card: React.FC<CardProps> = ({
                             </Badge>
                         )}
 
-                        {buttonLabel && (
-                            <Button variant="default" onClick={onButtonClick} className="w-full sm:w-none">
-                                {buttonLabel}
-                            </Button>
+                        {link && (
+                            <Link asChild variant="primaryButton">
+                                <NextLink href={link.url}>{link.label}</NextLink>
+                            </Link>
                         )}
                     </div>
                 </div>

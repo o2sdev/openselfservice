@@ -7,7 +7,7 @@ export class ServiceListBlock extends Block.Block {
     __typename!: 'ServiceListBlock';
     title?: string;
     subtitle?: string;
-    detailsLabel?: string;
+    detailsLabel!: string;
     filters?: Models.Filters.Filters<Resources.Model.Contract & Products.Model.Product>;
     pagination?: Models.Pagination.Pagination;
     services!: Services;
@@ -54,12 +54,9 @@ export class Service {
         description: string;
         shortDescription: string;
         image: Models.Media.Media;
-        price: {
-            value: Products.Model.Money['value'];
-            currency: Models.Currency.Currency;
-            period?: string;
-        };
+        price: Models.Price.Price;
         link: string;
+        tags: Products.Model.Product['tags'];
     };
 }
 

@@ -19,6 +19,12 @@ const MOCK_PRODUCT_1: Products.Model.Product = {
     link: 'https://example.com/products/te-70-atc-avr',
     type: 'PHYSICAL',
     category: 'TOOLS',
+    tags: [
+        {
+            label: 'New',
+            variant: 'default',
+        },
+    ],
 };
 
 const MOCK_PRODUCT_2: Products.Model.Product = {
@@ -40,6 +46,16 @@ const MOCK_PRODUCT_2: Products.Model.Product = {
     link: 'https://example.com/products/ag-125-a22',
     type: 'PHYSICAL',
     category: 'TOOLS',
+    tags: [
+        {
+            label: 'New',
+            variant: 'default',
+        },
+        {
+            label: 'Promo',
+            variant: 'destructive',
+        },
+    ],
 };
 
 const MOCK_PRODUCT_3: Products.Model.Product = {
@@ -61,6 +77,12 @@ const MOCK_PRODUCT_3: Products.Model.Product = {
     link: 'https://example.com/products/pd-s',
     type: 'PHYSICAL',
     category: 'MEASUREMENT',
+    tags: [
+        {
+            label: 'New',
+            variant: 'default',
+        },
+    ],
 };
 
 const MOCK_PRODUCT_4: Products.Model.Product = {
@@ -82,6 +104,12 @@ const MOCK_PRODUCT_4: Products.Model.Product = {
     link: 'https://example.com/products/sfc-22-a',
     type: 'PHYSICAL',
     category: 'TOOLS',
+    tags: [
+        {
+            label: 'New',
+            variant: 'default',
+        },
+    ],
 };
 
 const MOCK_PRODUCT_5: Products.Model.Product = {
@@ -103,40 +131,56 @@ const MOCK_PRODUCT_5: Products.Model.Product = {
     link: 'https://example.com/products/profis-engineering',
     type: 'VIRTUAL',
     category: 'SOFTWARE',
+    tags: [
+        {
+            label: 'New',
+            variant: 'default',
+        },
+    ],
 };
 
 const MOCK_PRODUCT_6: Products.Model.Product = {
     id: 'PRD-009',
-    name: 'Premium Support',
-    description: '24/7 Technical Support Service',
-    shortDescription: '24/7 Technical Support Service',
+    name: 'RentPro Industrial™ – Flexible Equipment Rental Solutions',
+    description:
+        '<ul><li>Short & Long-Term Rentals</li><li>Wide Equipment Selection</li><li>Maintenance & Support Included</li></ul>',
+    shortDescription:
+        '<ul><li>Short & Long-Term Rentals</li><li>Wide Equipment Selection</li><li>Maintenance & Support Included</li></ul>',
     image: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
         width: 640,
         height: 656,
-        name: 'Premium Support',
-        alternativeText: 'Premium Support',
+        name: 'RentPro Industrial™ – Flexible Equipment Rental Solutions',
+        alternativeText: 'RentPro Industrial™ – Flexible Equipment Rental Solutions',
     },
     price: {
-        value: 39.99,
+        value: 79.83,
         currency: 'USD',
     },
-    link: 'https://example.com/services/premium-support',
+    link: 'https://example.com/services/rentpro-industrial',
     type: 'VIRTUAL',
-    category: 'SUPPORT',
+    category: 'RENTAL',
+    tags: [
+        {
+            label: 'New',
+            variant: 'default',
+        },
+    ],
 };
 
 const MOCK_PRODUCT_7: Products.Model.Product = {
     id: 'PRD-010',
-    name: 'Professional Training',
-    description: 'Comprehensive Tool Usage Training',
-    shortDescription: 'Comprehensive Tool Usage Training',
+    name: 'PrecisionPro Calibration™ – Ensuring Accuracy for Industrial Equipment',
+    description:
+        '<ul><li>ISO-Certified Calibration</li><li>On-Site & Remote Services</li><li>Detailed Reports</li></ul>',
+    shortDescription:
+        '<ul><li>ISO-Certified Calibration</li><li>On-Site & Remote Services</li><li>Detailed Reports</li></ul>',
     image: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
         width: 640,
         height: 656,
-        name: 'Professional Training',
-        alternativeText: 'Professional Training',
+        name: 'PrecisionPro Calibration™ – Ensuring Accuracy for Industrial Equipment',
+        alternativeText: 'PrecisionPro Calibration™ – Ensuring Accuracy for Industrial Equipment',
     },
     price: {
         value: 19.99,
@@ -145,69 +189,133 @@ const MOCK_PRODUCT_7: Products.Model.Product = {
     link: 'https://example.com/services/training',
     type: 'VIRTUAL',
     category: 'TRAINING',
+    tags: [
+        {
+            label: 'Promo',
+            variant: 'destructive',
+        },
+        {
+            label: 'New',
+            variant: 'default',
+        },
+    ],
 };
 
 const MOCK_PRODUCT_8: Products.Model.Product = {
     id: 'PRD-011',
-    name: 'Regular Maintenance',
-    description: 'Scheduled Tool Maintenance Service',
-    shortDescription: 'Scheduled Tool Maintenance Service',
+    name: 'PowerCharge Solutions™ – Battery & Charger Management for Manufacturing',
+    description: '<ul><li>Smart Diagnostics</li><li>Sustainable Recycling</li><li>On-Demand Replacements</li></ul>',
+    shortDescription:
+        '<ul><li>Smart Diagnostics</li><li>Sustainable Recycling</li><li>On-Demand Replacements</li></ul>',
     image: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
         width: 640,
         height: 656,
-        name: 'Regular Maintenance',
-        alternativeText: 'Regular Maintenance',
+        name: 'PowerCharge Solutions™ – Battery & Charger Management for Manufacturing',
+        alternativeText: 'PowerCharge Solutions™ – Battery & Charger Management for Manufacturing',
+    },
+    price: {
+        value: 79.83,
+        currency: 'EUR',
+    },
+    link: 'https://example.com/services/powercharge-solutions',
+    type: 'VIRTUAL',
+    category: 'MAINTENANCE',
+    tags: [
+        {
+            label: 'Promo',
+            variant: 'destructive',
+        },
+        {
+            label: 'New',
+            variant: 'default',
+        },
+    ],
+};
+
+const MOCK_PRODUCT_9: Products.Model.Product = {
+    id: 'PRD-012',
+    name: 'WeldGuard Safety™ – Protective Solutions for Welding Environments',
+    description:
+        '<ul><li>Advanced Fume Extraction</li><li>Heat-Resistant PPE</li><li>Safety Compliance Checks</li></ul>',
+    shortDescription:
+        '<ul><li>Advanced Fume Extraction</li><li>Heat-Resistant PPE</li><li>Safety Compliance Checks</li></ul>',
+    image: {
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
+        width: 640,
+        height: 656,
+        name: 'WeldGuard Safety™ – Protective Solutions for Welding Environments',
+        alternativeText: 'WeldGuard Safety™ – Protective Solutions for Welding Environments',
+    },
+    price: {
+        value: 10,
+        currency: 'USD',
+    },
+    link: 'https://example.com/services/weldguard-safety',
+    type: 'VIRTUAL',
+    category: 'SAFETY',
+    tags: [
+        {
+            label: 'New',
+            variant: 'default',
+        },
+    ],
+};
+
+const MOCK_PRODUCT_10: Products.Model.Product = {
+    id: 'PRD-013',
+    name: 'MaxFlow Air Systems™ – Industrial Pneumatics Maintenance & Optimization',
+    description:
+        '<ul><li>Energy Efficiency Audits</li><li>Custom Airflow Solutions</li><li>Preventative Maintenance</li></ul>',
+    shortDescription:
+        '<ul><li>Energy Efficiency Audits</li><li>Custom Airflow Solutions</li><li>Preventative Maintenance</li></ul>',
+    image: {
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
+        width: 640,
+        height: 656,
+        name: 'MaxFlow Air Systems™ – Industrial Pneumatics Maintenance & Optimization',
+        alternativeText: 'MaxFlow Air Systems™ – Industrial Pneumatics Maintenance & Optimization',
     },
     price: {
         value: 19.99,
         currency: 'USD',
     },
-    link: 'https://example.com/services/maintenance',
+    link: 'https://example.com/services/maxflow-air-systems',
     type: 'VIRTUAL',
     category: 'MAINTENANCE',
+    tags: [
+        {
+            label: 'New',
+            variant: 'default',
+        },
+    ],
 };
 
-const MOCK_PRODUCT_9: Products.Model.Product = {
-    id: 'PRD-012',
-    name: 'Extended Warranty',
-    description: 'Additional 2 Years Warranty Coverage',
-    shortDescription: 'Additional 2 Years Warranty Coverage',
+const MOCK_PRODUCT_11: Products.Model.Product = {
+    id: 'PRD-014',
+    name: 'RapidFix Repair™ – Fast & Reliable Industrial Tool Repairs',
+    description: '<ul><li>Express Repairs</li><li>Genuine Parts</li><li>Warranty Protection</li></ul>',
+    shortDescription: '<ul><li>Express Repairs</li><li>Genuine Parts</li><li>Warranty Protection</li></ul>',
     image: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
         width: 640,
         height: 656,
-        name: 'Extended Warranty',
-        alternativeText: 'Extended Warranty',
+        name: 'RapidFix Repair™ – Fast & Reliable Industrial Tool Repairs',
+        alternativeText: 'RapidFix Repair™ – Fast & Reliable Industrial Tool Repairs',
     },
     price: {
-        value: 10,
-        currency: 'USD',
+        value: 19.99,
+        currency: 'EUR',
     },
-    link: 'https://example.com/services/warranty',
+    link: 'https://example.com/services/rapidfix-repair',
     type: 'VIRTUAL',
-    category: 'WARRANTY',
-};
-
-const MOCK_PRODUCT_10: Products.Model.Product = {
-    id: 'PRD-013',
-    name: 'Cloud Storage',
-    description: 'Project Data Cloud Storage Service',
-    shortDescription: 'Project Data Cloud Storage Service',
-    image: {
-        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
-        width: 640,
-        height: 656,
-        name: 'Cloud Storage',
-        alternativeText: 'Cloud Storage',
-    },
-    price: {
-        value: 10,
-        currency: 'USD',
-    },
-    link: 'https://example.com/services/cloud-storage',
-    type: 'VIRTUAL',
-    category: 'CLOUD',
+    category: 'MAINTENANCE',
+    tags: [
+        {
+            label: 'New',
+            variant: 'default',
+        },
+    ],
 };
 
 const MOCK_PRODUCTS = [
@@ -221,6 +329,7 @@ const MOCK_PRODUCTS = [
     MOCK_PRODUCT_8,
     MOCK_PRODUCT_9,
     MOCK_PRODUCT_10,
+    MOCK_PRODUCT_11,
 ];
 
 export const mapProduct = (id: string): Products.Model.Product => {

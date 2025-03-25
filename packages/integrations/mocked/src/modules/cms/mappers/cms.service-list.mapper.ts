@@ -22,12 +22,12 @@ const MOCK_SERVICE_LIST_BLOCK: CMS.Model.ServiceListBlock.ServiceListBlock = {
             EXPIRED: 'Expired',
         },
         paymentPeriod: {
-            MONTHLY: 'Monthly',
-            YEARLY: 'Yearly',
+            MONTHLY: 'mo',
+            YEARLY: 'ye',
         },
     },
     pagination: {
-        limit: 5,
+        limit: 6,
         legend: 'of {totalPages} pages',
         prev: 'Previous',
         next: 'Next',

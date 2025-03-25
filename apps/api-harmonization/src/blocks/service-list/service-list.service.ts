@@ -49,15 +49,11 @@ export class ServiceListService {
                             });
                             return forkJoin(serviceList).pipe(
                                 map((servicesList) => {
-                                    const filteredServices = servicesList.filter((service) => {
-                                        if (type) {
-                                            return service.product.type === type;
-                                        }
-                                        if (category) {
-                                            return service.product.category === category;
-                                        }
-                                        return true;
-                                    });
+                                    const filteredServices = servicesList.filter(
+                                        (item) =>
+                                            (!type || item.product.type === type) &&
+                                            (!category || item.product.category === category),
+                                    );
                                     return {
                                         total: filteredServices.length,
                                         data: filteredServices,

@@ -9,11 +9,10 @@ import { Typography } from '@o2s/ui/components/typography';
 
 import { sdk } from '@/api/sdk';
 
-import { useRouter } from '@/i18n';
-
-import { useGlobalContext } from '@/providers/GlobalProvider';
+import { statusBadgeVariants } from '@/utils/mappings/services-badge';
 
 import { Card } from '@/components/Card/Card';
+import { Badge } from '@/components/Card/Card.types';
 import { Filters } from '@/components/Filters/Filters';
 import FiltersContextProvider, { InitialFilters } from '@/components/Filters/FiltersContext';
 import { NoResults } from '@/components/NoResults/NoResults';
@@ -25,15 +24,13 @@ export const ServiceListPure: React.FC<ServiceListPureProps> = ({ locale, access
     const initialFilters: Blocks.ServiceList.Request.GetServiceListBlockQuery = {
         id: component.id,
         offset: 0,
-        limit: component.pagination?.limit || 5,
+        limit: component.pagination?.limit || 6,
     };
 
     const initialData = component.services.data;
-    const router = useRouter();
     const [data, setData] = useState<Blocks.ServiceList.Model.ServiceListBlock>(component);
     const [filters, setFilters] = useState(initialFilters);
     const [isPending, startTransition] = useTransition();
-    const { priceService } = useGlobalContext();
 
     const handleFilter = (data: Partial<Blocks.ServiceList.Request.GetServiceListBlockQuery>) => {
         startTransition(async () => {
@@ -75,56 +72,46 @@ export const ServiceListPure: React.FC<ServiceListPureProps> = ({ locale, access
                     <LoadingOverlay isActive={isPending}>
                         {data.services.data.length ? (
                             <div className="flex flex-col gap-6">
-                                <div className="grid gap-6 w-full justify-items-center [grid-template-columns:repeat(auto-fill,minmax(350px,1fr))]">
+                                <ul className="grid gap-6 w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                                     {data.services.data.map((service) => (
-                                        <Card
-                                            key={service.id}
-                                            title={service.product.name}
-                                            tags={[
-                                                {
-                                                    label: 'New',
-                                                    variant: 'secondary',
-                                                },
-                                            ]}
-                                            description={service.product.shortDescription}
-                                            image={service.product.image}
-                                            price={{
-                                                value: priceService.formatPrice(
-                                                    service.product.price,
-                                                    service.product.price.currency,
-                                                ).format,
-                                                period: service.product.price.period,
-                                            }}
-                                            buttonLabel={data.detailsLabel}
-                                            status={{
-                                                label: service.contract.status.label,
-                                                variant: 'default',
-                                            }}
-                                            onButtonClick={() => router.push(service.detailsUrl)}
-                                        />
+                                        <li key={service.id}>
+                                            <Card
+                                                key={service.id}
+                                                title={service.product.name}
+                                                tags={service.product.tags as Badge[]}
+                                                description={service.product.shortDescription}
+                                                image={service.product.image}
+                                                price={service.product.price}
+                                                link={{
+                                                    label: data.detailsLabel,
+                                                    url: service.detailsUrl,
+                                                }}
+                                                status={{
+                                                    label: service.contract.status.label,
+                                                    variant: statusBadgeVariants[service.contract.status.value],
+                                                }}
+                                            />
+                                        </li>
                                     ))}
-                                </div>
+                                </ul>
 
                                 {data.pagination && (
-                                    <div className="flex flex-col gap-6">
-                                        <Pagination
-                                            disabled={isPending}
-                                            total={data.services.total}
-                                            offset={filters.offset || 0}
-                                            limit={data.pagination.limit}
-                                            legend={data.pagination.legend}
-                                            prev={data.pagination.prev}
-                                            next={data.pagination.next}
-                                            selectPage={data.pagination.selectPage}
-                                            onChange={(page) => {
-                                                handleFilter({
-                                                    ...filters,
-                                                    offset: data.pagination!.limit * (page - 1),
-                                                });
-                                            }}
-                                        />
-                                        <Separator />
-                                    </div>
+                                    <Pagination
+                                        disabled={isPending}
+                                        total={data.services.total}
+                                        offset={filters.offset || 0}
+                                        limit={data.pagination.limit}
+                                        legend={data.pagination.legend}
+                                        prev={data.pagination.prev}
+                                        next={data.pagination.next}
+                                        selectPage={data.pagination.selectPage}
+                                        onChange={(page) => {
+                                            handleFilter({
+                                                ...filters,
+                                                offset: data.pagination!.limit * (page - 1),
+                                            });
+                                        }}
+                                    />
                                 )}
                             </div>
                         ) : (
