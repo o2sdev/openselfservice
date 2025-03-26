@@ -1,4 +1,4 @@
-import { Currency, Pagination } from '@/utils/models';
+import { Pagination, Price } from '@/utils/models';
 
 export type PaymentStatusType = 'PAYMENT_COMPLETE' | 'PAYMENT_DECLINED' | 'PAYMENT_DUE' | 'PAYMENT_PAST_DUE';
 
@@ -13,16 +13,12 @@ export class Invoice {
     type!: InvoiceType;
     paymentStatus!: PaymentStatusType;
     issuedDate!: string;
+    currency!: Price.Currency;
     paymentDueDate!: string;
-    currency!: Currency.Currency;
-    totalAmountDue!: Money;
-    totalNetAmountDue!: Money;
-    totalAmountPaid!: Money;
-    totalToBePaid!: Money;
+    totalAmountDue!: Price.Price;
+    totalNetAmountDue!: Price.Price;
+    totalAmountPaid!: Price.Price;
+    totalToBePaid!: Price.Price;
 }
-
-export type Money = {
-    value: number;
-};
 
 export type Invoices = Pagination.Paginated<Invoice>;

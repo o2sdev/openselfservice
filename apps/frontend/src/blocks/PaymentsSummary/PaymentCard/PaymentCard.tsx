@@ -1,20 +1,19 @@
 import { ArrowUpRight, CircleAlert, CreditCard } from 'lucide-react';
 import reactStringReplace from 'react-string-replace';
 
+import { Models } from '@o2s/framework/modules';
+
 import { Button } from '@o2s/ui/components/button';
 import { Card } from '@o2s/ui/components/card';
 import { Typography } from '@o2s/ui/components/typography';
 import { cn } from '@o2s/ui/lib/utils';
 
-import { useGlobalContext } from '@/providers/GlobalProvider';
+import { Price } from '@/components/Price/Price';
 
 import { PaymentCardProps } from './PaymentCard.types';
-import { Currency } from '@/hooks/usePriceService';
 
 export const PaymentCard: React.FC<PaymentCardProps> = ({ data, variant = 'default' }) => {
     const { title, amount, message, noPaymentsMessage, buttonLabel, overdueDays, currency } = data;
-
-    const { priceService } = useGlobalContext();
 
     const activeState = amount.value > 0;
 
@@ -41,7 +40,7 @@ export const PaymentCard: React.FC<PaymentCardProps> = ({ data, variant = 'defau
                             variant="highlightedBig"
                             className={cn(activeState ? className : 'text-muted-foreground')}
                         >
-                            {priceService.formatPrice(amount, currency as Currency).format}
+                            <Price price={{ value: amount.value, currency: currency as Models.Price.Currency }} />
                         </Typography>
                         {activeState ? (
                             <Typography

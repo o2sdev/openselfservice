@@ -876,6 +876,123 @@ const PAGE_USER_ACCOUNT_PL: CMS.Model.Page.Page = {
     updatedAt: '2025-01-01',
 };
 
+const PAGE_SERVICE_LIST_EN: CMS.Model.Page.Page = {
+    id: '8',
+    slug: '/services',
+    locale: 'en',
+    seo: {
+        noIndex: false,
+        noFollow: false,
+        title: 'Services',
+        description: 'Services',
+        keywords: [],
+        image: {
+            url: 'https://picsum.photos/150',
+            width: 150,
+            height: 150,
+            alternativeText: 'Placeholder',
+        },
+    },
+    hasOwnTitle: false,
+    parent: {
+        slug: '/',
+    },
+    template: {
+        __typename: 'OneColumnTemplate',
+        slots: {
+            main: [
+                {
+                    __typename: 'ServiceListBlock',
+                    id: 'service-list-1',
+                },
+                {
+                    __typename: 'FaqBlock',
+                    id: 'faq-1',
+                },
+            ],
+        },
+    },
+    updatedAt: '2025-01-01',
+};
+
+const PAGE_SERVICE_LIST_DE: CMS.Model.Page.Page = {
+    id: '8',
+    slug: '/dienste',
+    locale: 'de',
+    seo: {
+        noIndex: false,
+        noFollow: false,
+        title: 'Dienste',
+        description: 'Dienste',
+        keywords: [],
+        image: {
+            url: 'https://picsum.photos/150',
+            width: 150,
+            height: 150,
+            alternativeText: 'Placeholder',
+        },
+    },
+    hasOwnTitle: false,
+    parent: {
+        slug: '/',
+    },
+    template: {
+        __typename: 'OneColumnTemplate',
+        slots: {
+            main: [
+                {
+                    __typename: 'ServiceListBlock',
+                    id: 'service-list-1',
+                },
+                {
+                    __typename: 'FaqBlock',
+                    id: 'faq-1',
+                },
+            ],
+        },
+    },
+    updatedAt: '2025-01-01',
+};
+
+const PAGE_SERVICE_LIST_PL: CMS.Model.Page.Page = {
+    id: '8',
+    slug: '/uslugi',
+    locale: 'pl',
+    seo: {
+        noIndex: false,
+        noFollow: false,
+        title: 'Usługi',
+        description: 'Usługi',
+        keywords: [],
+        image: {
+            url: 'https://picsum.photos/150',
+            width: 150,
+            height: 150,
+            alternativeText: 'Placeholder',
+        },
+    },
+    hasOwnTitle: false,
+    parent: {
+        slug: '/',
+    },
+    template: {
+        __typename: 'OneColumnTemplate',
+        slots: {
+            main: [
+                {
+                    __typename: 'ServiceListBlock',
+                    id: 'service-list-1',
+                },
+                {
+                    __typename: 'FaqBlock',
+                    id: 'faq-1',
+                },
+            ],
+        },
+    },
+    updatedAt: '2025-01-01',
+};
+
 export const mapPage = (slug: string, locale: string): CMS.Model.Page.Page | undefined => {
     switch (slug) {
         case '/':
@@ -950,6 +1067,12 @@ export const mapPage = (slug: string, locale: string): CMS.Model.Page.Page | und
         case '/konto-uzytkownika':
             return PAGE_USER_ACCOUNT_PL;
 
+        case '/services':
+            return PAGE_SERVICE_LIST_EN;
+        case '/dienste':
+            return PAGE_SERVICE_LIST_DE;
+        case '/uslugi':
+            return PAGE_SERVICE_LIST_PL;
         default:
             return undefined;
     }
@@ -966,6 +1089,7 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_NOTIFICATION_DETAILS_PL,
                 PAGE_INVOICE_LIST_PL,
                 PAGE_USER_ACCOUNT_PL,
+                PAGE_SERVICE_LIST_PL,
             ];
         case 'de':
             return [
@@ -976,6 +1100,7 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_NOTIFICATION_DETAILS_DE,
                 PAGE_INVOICE_LIST_DE,
                 PAGE_USER_ACCOUNT_DE,
+                PAGE_SERVICE_LIST_DE,
             ];
         case 'en':
             return [
@@ -986,6 +1111,7 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_NOTIFICATION_DETAILS_EN,
                 PAGE_INVOICE_LIST_EN,
                 PAGE_USER_ACCOUNT_EN,
+                PAGE_SERVICE_LIST_EN,
             ];
         default:
             return [];
@@ -1015,6 +1141,7 @@ export const getAlternativePages = (id: string, slug: string, locale: string): C
         PAGE_NOTIFICATION_DETAILS_EN,
         PAGE_INVOICE_LIST_EN,
         PAGE_USER_ACCOUNT_EN,
+        PAGE_SERVICE_LIST_EN,
     ]
         .filter((page) => page.id === id)
         .map((page) => mapPage(page.slug, locale)!)

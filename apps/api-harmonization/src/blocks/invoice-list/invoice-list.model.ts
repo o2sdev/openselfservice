@@ -26,7 +26,7 @@ export class InvoiceListBlock extends Block.Block {
 
 export class Invoice {
     id!: Invoices.Model.Invoice['id'];
-    currency!: Invoices.Model.Invoice['currency'];
+    currency!: Models.Price.Currency;
     type!: {
         value: Invoices.Model.Invoice['type'];
         displayValue: string;

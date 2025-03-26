@@ -78,7 +78,7 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({ loca
                     <LoadingOverlay isActive={isPending}>
                         {data.notifications.data.length ? (
                             <div className="flex flex-col gap-6">
-                                <Table className="border-b">
+                                <Table>
                                     <TableHeader>
                                         <TableRow>
                                             {data.table.columns.map((column) => (
@@ -186,25 +186,22 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({ loca
                                 </Table>
 
                                 {data.pagination && (
-                                    <div className="flex flex-col gap-6">
-                                        <Pagination
-                                            disabled={isPending}
-                                            total={data.notifications.total}
-                                            offset={filters.offset || 0}
-                                            limit={data.pagination.limit}
-                                            legend={data.pagination.legend}
-                                            prev={data.pagination.prev}
-                                            next={data.pagination.next}
-                                            selectPage={data.pagination.selectPage}
-                                            onChange={(page) => {
-                                                handleFilter({
-                                                    ...filters,
-                                                    offset: data.pagination!.limit * (page - 1),
-                                                });
-                                            }}
-                                        />
-                                        <Separator />
-                                    </div>
+                                    <Pagination
+                                        disabled={isPending}
+                                        total={data.notifications.total}
+                                        offset={filters.offset || 0}
+                                        limit={data.pagination.limit}
+                                        legend={data.pagination.legend}
+                                        prev={data.pagination.prev}
+                                        next={data.pagination.next}
+                                        selectPage={data.pagination.selectPage}
+                                        onChange={(page) => {
+                                            handleFilter({
+                                                ...filters,
+                                                offset: data.pagination!.limit * (page - 1),
+                                            });
+                                        }}
+                                    />
                                 )}
                             </div>
                         ) : (

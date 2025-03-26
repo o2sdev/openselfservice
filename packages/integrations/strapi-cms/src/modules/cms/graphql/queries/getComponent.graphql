@@ -27,6 +27,9 @@ query getComponent($id: ID!, $locale: I18NLocaleCode!) {
             ... on ComponentComponentsUserAccount {
                 ...UserAccountComponent
             }
+            ... on ComponentComponentsServiceList {
+                ...ServiceListComponent
+            }
         }
     }
     configurableTexts(locale: $locale) {

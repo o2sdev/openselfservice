@@ -14,3 +14,4 @@ export * as Auth from './modules/auth';
 export * as Cache from './modules/cache';
 export * as BillingAccounts from './modules/billing-accounts';
 export * as Search from './modules/search';
+export * as Products from './modules/products';

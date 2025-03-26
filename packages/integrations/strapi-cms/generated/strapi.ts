@@ -277,10 +277,62 @@ export type ComponentLocalizations_ConnectionArgs = {
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-export type ComponentComponentsArticleSection = {
-    content: Scalars['String']['output'];
+export type ComponentComponentsArticleList = {
+    articles_to_show?: Maybe<Scalars['Int']['output']>;
+    category?: Maybe<Category>;
+    description?: Maybe<Scalars['String']['output']>;
+    id: Scalars['ID']['output'];
+    pages: Array<Maybe<Page>>;
+    pages_connection?: Maybe<PageRelationResponseCollection>;
+    title?: Maybe<Scalars['String']['output']>;
+};
+
+export type ComponentComponentsArticleListPagesArgs = {
+    filters?: InputMaybe<PageFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ComponentComponentsArticleListPages_ConnectionArgs = {
+    filters?: InputMaybe<PageFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ComponentComponentsArticleSections = {
+    id: Scalars['ID']['output'];
+    sections: Array<Maybe<ComponentContentArticleSection>>;
+};
+
+export type ComponentComponentsArticleSectionsSectionsArgs = {
+    filters?: InputMaybe<ComponentContentArticleSectionFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ComponentComponentsCategory = {
+    category?: Maybe<Category>;
+    id: Scalars['ID']['output'];
+};
+
+export type ComponentComponentsCategoryList = {
+    categories: Array<Maybe<Category>>;
+    categories_connection?: Maybe<CategoryRelationResponseCollection>;
+    description?: Maybe<Scalars['String']['output']>;
     id: Scalars['ID']['output'];
     title?: Maybe<Scalars['String']['output']>;
+};
+
+export type ComponentComponentsCategoryListCategoriesArgs = {
+    filters?: InputMaybe<CategoryFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ComponentComponentsCategoryListCategories_ConnectionArgs = {
+    filters?: InputMaybe<CategoryFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type ComponentComponentsFaq = {
@@ -304,7 +356,7 @@ export type ComponentComponentsInvoiceList = {
     filters?: Maybe<ComponentContentFilters>;
     id: Scalars['ID']['output'];
     noResults: ComponentContentBanner;
-    pagination: ComponentContentPagination;
+    pagination?: Maybe<ComponentContentPagination>;
     table: ComponentContentTable;
     tableTitle?: Maybe<Scalars['String']['output']>;
     title?: Maybe<Scalars['String']['output']>;
@@ -340,7 +392,7 @@ export type ComponentComponentsNotificationList = {
     filters?: Maybe<ComponentContentFilters>;
     id: Scalars['ID']['output'];
     noResults: ComponentContentBanner;
-    pagination: ComponentContentPagination;
+    pagination?: Maybe<ComponentContentPagination>;
     subtitle?: Maybe<Scalars['String']['output']>;
     table: ComponentContentTable;
     title?: Maybe<Scalars['String']['output']>;
@@ -366,6 +418,44 @@ export type ComponentComponentsPaymentsSummary = {
     id: Scalars['ID']['output'];
     overdue?: Maybe<ComponentContentInformationCard>;
     toBePaid?: Maybe<ComponentContentInformationCard>;
+};
+
+export type ComponentComponentsQuickLinks = {
+    description?: Maybe<Scalars['String']['output']>;
+    id: Scalars['ID']['output'];
+    pages: Array<Maybe<Page>>;
+    pages_connection?: Maybe<PageRelationResponseCollection>;
+    title?: Maybe<Scalars['String']['output']>;
+};
+
+export type ComponentComponentsQuickLinksPagesArgs = {
+    filters?: InputMaybe<PageFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ComponentComponentsQuickLinksPages_ConnectionArgs = {
+    filters?: InputMaybe<PageFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ComponentComponentsServiceList = {
+    detailsLabel?: Maybe<Scalars['String']['output']>;
+    detailsURL?: Maybe<Scalars['String']['output']>;
+    fields: Array<Maybe<ComponentContentFieldMapping>>;
+    filters?: Maybe<ComponentContentFilters>;
+    id: Scalars['ID']['output'];
+    noResults: ComponentContentBanner;
+    pagination?: Maybe<ComponentContentPagination>;
+    subtitle?: Maybe<Scalars['String']['output']>;
+    title?: Maybe<Scalars['String']['output']>;
+};
+
+export type ComponentComponentsServiceListFieldsArgs = {
+    filters?: InputMaybe<ComponentContentFieldMappingFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type ComponentComponentsTicketDetails = {
@@ -395,7 +485,7 @@ export type ComponentComponentsTicketList = {
     filters?: Maybe<ComponentContentFilters>;
     id: Scalars['ID']['output'];
     noResults: ComponentContentBanner;
-    pagination: ComponentContentPagination;
+    pagination?: Maybe<ComponentContentPagination>;
     subtitle?: Maybe<Scalars['String']['output']>;
     table: ComponentContentTable;
     title?: Maybe<Scalars['String']['output']>;
@@ -421,6 +511,20 @@ export type ComponentComponentsUserAccountInputsArgs = {
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
+export type ComponentContentArticleSection = {
+    content: Scalars['String']['output'];
+    id: Scalars['ID']['output'];
+    title?: Maybe<Scalars['String']['output']>;
+};
+
+export type ComponentContentArticleSectionFiltersInput = {
+    and?: InputMaybe<Array<InputMaybe<ComponentContentArticleSectionFiltersInput>>>;
+    content?: InputMaybe<StringFilterInput>;
+    not?: InputMaybe<ComponentContentArticleSectionFiltersInput>;
+    or?: InputMaybe<Array<InputMaybe<ComponentContentArticleSectionFiltersInput>>>;
+    title?: InputMaybe<StringFilterInput>;
+};
+
 export type ComponentContentBanner = {
     altDescription?: Maybe<Scalars['String']['output']>;
     buttons?: Maybe<Array<Maybe<ComponentContentLink>>>;
@@ -437,13 +541,18 @@ export type ComponentContentBannerButtonsArgs = {
 };
 
 export type ComponentContentDynamicZone =
-    | ComponentComponentsArticleSection
+    | ComponentComponentsArticleList
+    | ComponentComponentsArticleSections
+    | ComponentComponentsCategory
+    | ComponentComponentsCategoryList
     | ComponentComponentsFaq
     | ComponentComponentsInvoiceList
     | ComponentComponentsNotificationDetails
     | ComponentComponentsNotificationList
     | ComponentComponentsPaymentsHistory
     | ComponentComponentsPaymentsSummary
+    | ComponentComponentsQuickLinks
+    | ComponentComponentsServiceList
     | ComponentComponentsTicketDetails
     | ComponentComponentsTicketList
     | ComponentComponentsUserAccount
@@ -1144,16 +1253,22 @@ export type GenericMorph =
     | Author
     | Category
     | Component
-    | ComponentComponentsArticleSection
+    | ComponentComponentsArticleList
+    | ComponentComponentsArticleSections
+    | ComponentComponentsCategory
+    | ComponentComponentsCategoryList
     | ComponentComponentsFaq
     | ComponentComponentsInvoiceList
     | ComponentComponentsNotificationDetails
     | ComponentComponentsNotificationList
     | ComponentComponentsPaymentsHistory
     | ComponentComponentsPaymentsSummary
+    | ComponentComponentsQuickLinks
+    | ComponentComponentsServiceList
     | ComponentComponentsTicketDetails
     | ComponentComponentsTicketList
     | ComponentComponentsUserAccount
+    | ComponentContentArticleSection
     | ComponentContentBanner
     | ComponentContentErrorMessage
     | ComponentContentFieldMapping
@@ -2711,7 +2826,17 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping of union types */
 export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
     ComponentContentDynamicZone:
-        | ComponentComponentsArticleSection
+        | (Omit<ComponentComponentsArticleList, 'category' | 'pages' | 'pages_connection'> & {
+              category?: Maybe<_RefType['Category']>;
+              pages: Array<Maybe<_RefType['Page']>>;
+              pages_connection?: Maybe<_RefType['PageRelationResponseCollection']>;
+          })
+        | ComponentComponentsArticleSections
+        | (Omit<ComponentComponentsCategory, 'category'> & { category?: Maybe<_RefType['Category']> })
+        | (Omit<ComponentComponentsCategoryList, 'categories' | 'categories_connection'> & {
+              categories: Array<Maybe<_RefType['Category']>>;
+              categories_connection?: Maybe<_RefType['CategoryRelationResponseCollection']>;
+          })
         | ComponentComponentsFaq
         | (Omit<ComponentComponentsInvoiceList, 'filters'> & { filters?: Maybe<_RefType['ComponentContentFilters']> })
         | ComponentComponentsNotificationDetails
@@ -2720,6 +2845,11 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
           })
         | ComponentComponentsPaymentsHistory
         | ComponentComponentsPaymentsSummary
+        | (Omit<ComponentComponentsQuickLinks, 'pages' | 'pages_connection'> & {
+              pages: Array<Maybe<_RefType['Page']>>;
+              pages_connection?: Maybe<_RefType['PageRelationResponseCollection']>;
+          })
+        | (Omit<ComponentComponentsServiceList, 'filters'> & { filters?: Maybe<_RefType['ComponentContentFilters']> })
         | ComponentComponentsTicketDetails
         | (Omit<ComponentComponentsTicketList, 'filters'> & { filters?: Maybe<_RefType['ComponentContentFilters']> })
         | ComponentComponentsUserAccount
@@ -2779,7 +2909,17 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
               localizations: Array<Maybe<_RefType['Component']>>;
               localizations_connection?: Maybe<_RefType['ComponentRelationResponseCollection']>;
           })
-        | ComponentComponentsArticleSection
+        | (Omit<ComponentComponentsArticleList, 'category' | 'pages' | 'pages_connection'> & {
+              category?: Maybe<_RefType['Category']>;
+              pages: Array<Maybe<_RefType['Page']>>;
+              pages_connection?: Maybe<_RefType['PageRelationResponseCollection']>;
+          })
+        | ComponentComponentsArticleSections
+        | (Omit<ComponentComponentsCategory, 'category'> & { category?: Maybe<_RefType['Category']> })
+        | (Omit<ComponentComponentsCategoryList, 'categories' | 'categories_connection'> & {
+              categories: Array<Maybe<_RefType['Category']>>;
+              categories_connection?: Maybe<_RefType['CategoryRelationResponseCollection']>;
+          })
         | ComponentComponentsFaq
         | (Omit<ComponentComponentsInvoiceList, 'filters'> & { filters?: Maybe<_RefType['ComponentContentFilters']> })
         | ComponentComponentsNotificationDetails
@@ -2788,9 +2928,15 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
           })
         | ComponentComponentsPaymentsHistory
         | ComponentComponentsPaymentsSummary
+        | (Omit<ComponentComponentsQuickLinks, 'pages' | 'pages_connection'> & {
+              pages: Array<Maybe<_RefType['Page']>>;
+              pages_connection?: Maybe<_RefType['PageRelationResponseCollection']>;
+          })
+        | (Omit<ComponentComponentsServiceList, 'filters'> & { filters?: Maybe<_RefType['ComponentContentFilters']> })
         | ComponentComponentsTicketDetails
         | (Omit<ComponentComponentsTicketList, 'filters'> & { filters?: Maybe<_RefType['ComponentContentFilters']> })
         | ComponentComponentsUserAccount
+        | ComponentContentArticleSection
         | ComponentContentBanner
         | ComponentContentErrorMessage
         | ComponentContentFieldMapping
@@ -3021,7 +3167,23 @@ export type ResolversTypes = {
             localizations_connection?: Maybe<ResolversTypes['ComponentRelationResponseCollection']>;
         }
     >;
-    ComponentComponentsArticleSection: ResolverTypeWrapper<ComponentComponentsArticleSection>;
+    ComponentComponentsArticleList: ResolverTypeWrapper<
+        Omit<ComponentComponentsArticleList, 'category' | 'pages' | 'pages_connection'> & {
+            category?: Maybe<ResolversTypes['Category']>;
+            pages: Array<Maybe<ResolversTypes['Page']>>;
+            pages_connection?: Maybe<ResolversTypes['PageRelationResponseCollection']>;
+        }
+    >;
+    ComponentComponentsArticleSections: ResolverTypeWrapper<ComponentComponentsArticleSections>;
+    ComponentComponentsCategory: ResolverTypeWrapper<
+        Omit<ComponentComponentsCategory, 'category'> & { category?: Maybe<ResolversTypes['Category']> }
+    >;
+    ComponentComponentsCategoryList: ResolverTypeWrapper<
+        Omit<ComponentComponentsCategoryList, 'categories' | 'categories_connection'> & {
+            categories: Array<Maybe<ResolversTypes['Category']>>;
+            categories_connection?: Maybe<ResolversTypes['CategoryRelationResponseCollection']>;
+        }
+    >;
     ComponentComponentsFaq: ResolverTypeWrapper<ComponentComponentsFaq>;
     ComponentComponentsInvoiceList: ResolverTypeWrapper<
         Omit<ComponentComponentsInvoiceList, 'filters'> & { filters?: Maybe<ResolversTypes['ComponentContentFilters']> }
@@ -3034,11 +3196,22 @@ export type ResolversTypes = {
     >;
     ComponentComponentsPaymentsHistory: ResolverTypeWrapper<ComponentComponentsPaymentsHistory>;
     ComponentComponentsPaymentsSummary: ResolverTypeWrapper<ComponentComponentsPaymentsSummary>;
+    ComponentComponentsQuickLinks: ResolverTypeWrapper<
+        Omit<ComponentComponentsQuickLinks, 'pages' | 'pages_connection'> & {
+            pages: Array<Maybe<ResolversTypes['Page']>>;
+            pages_connection?: Maybe<ResolversTypes['PageRelationResponseCollection']>;
+        }
+    >;
+    ComponentComponentsServiceList: ResolverTypeWrapper<
+        Omit<ComponentComponentsServiceList, 'filters'> & { filters?: Maybe<ResolversTypes['ComponentContentFilters']> }
+    >;
     ComponentComponentsTicketDetails: ResolverTypeWrapper<ComponentComponentsTicketDetails>;
     ComponentComponentsTicketList: ResolverTypeWrapper<
         Omit<ComponentComponentsTicketList, 'filters'> & { filters?: Maybe<ResolversTypes['ComponentContentFilters']> }
     >;
     ComponentComponentsUserAccount: ResolverTypeWrapper<ComponentComponentsUserAccount>;
+    ComponentContentArticleSection: ResolverTypeWrapper<ComponentContentArticleSection>;
+    ComponentContentArticleSectionFiltersInput: ComponentContentArticleSectionFiltersInput;
     ComponentContentBanner: ResolverTypeWrapper<ComponentContentBanner>;
     ComponentContentDynamicZone: ResolverTypeWrapper<
         ResolversUnionTypes<ResolversTypes>['ComponentContentDynamicZone']
@@ -3395,7 +3568,19 @@ export type ResolversParentTypes = {
         localizations: Array<Maybe<ResolversParentTypes['Component']>>;
         localizations_connection?: Maybe<ResolversParentTypes['ComponentRelationResponseCollection']>;
     };
-    ComponentComponentsArticleSection: ComponentComponentsArticleSection;
+    ComponentComponentsArticleList: Omit<ComponentComponentsArticleList, 'category' | 'pages' | 'pages_connection'> & {
+        category?: Maybe<ResolversParentTypes['Category']>;
+        pages: Array<Maybe<ResolversParentTypes['Page']>>;
+        pages_connection?: Maybe<ResolversParentTypes['PageRelationResponseCollection']>;
+    };
+    ComponentComponentsArticleSections: ComponentComponentsArticleSections;
+    ComponentComponentsCategory: Omit<ComponentComponentsCategory, 'category'> & {
+        category?: Maybe<ResolversParentTypes['Category']>;
+    };
+    ComponentComponentsCategoryList: Omit<ComponentComponentsCategoryList, 'categories' | 'categories_connection'> & {
+        categories: Array<Maybe<ResolversParentTypes['Category']>>;
+        categories_connection?: Maybe<ResolversParentTypes['CategoryRelationResponseCollection']>;
+    };
     ComponentComponentsFaq: ComponentComponentsFaq;
     ComponentComponentsInvoiceList: Omit<ComponentComponentsInvoiceList, 'filters'> & {
         filters?: Maybe<ResolversParentTypes['ComponentContentFilters']>;
@@ -3406,11 +3591,20 @@ export type ResolversParentTypes = {
     };
     ComponentComponentsPaymentsHistory: ComponentComponentsPaymentsHistory;
     ComponentComponentsPaymentsSummary: ComponentComponentsPaymentsSummary;
+    ComponentComponentsQuickLinks: Omit<ComponentComponentsQuickLinks, 'pages' | 'pages_connection'> & {
+        pages: Array<Maybe<ResolversParentTypes['Page']>>;
+        pages_connection?: Maybe<ResolversParentTypes['PageRelationResponseCollection']>;
+    };
+    ComponentComponentsServiceList: Omit<ComponentComponentsServiceList, 'filters'> & {
+        filters?: Maybe<ResolversParentTypes['ComponentContentFilters']>;
+    };
     ComponentComponentsTicketDetails: ComponentComponentsTicketDetails;
     ComponentComponentsTicketList: Omit<ComponentComponentsTicketList, 'filters'> & {
         filters?: Maybe<ResolversParentTypes['ComponentContentFilters']>;
     };
     ComponentComponentsUserAccount: ComponentComponentsUserAccount;
+    ComponentContentArticleSection: ComponentContentArticleSection;
+    ComponentContentArticleSectionFiltersInput: ComponentContentArticleSectionFiltersInput;
     ComponentContentBanner: ComponentContentBanner;
     ComponentContentDynamicZone: ResolversUnionTypes<ResolversParentTypes>['ComponentContentDynamicZone'];
     ComponentContentDynamicZoneInput: Scalars['ComponentContentDynamicZoneInput']['output'];
@@ -3863,12 +4057,74 @@ export type ComponentResolvers<
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type ComponentComponentsArticleSectionResolvers<
+export type ComponentComponentsArticleListResolvers<
     ContextType = any,
     ParentType extends
-        ResolversParentTypes['ComponentComponentsArticleSection'] = ResolversParentTypes['ComponentComponentsArticleSection'],
+        ResolversParentTypes['ComponentComponentsArticleList'] = ResolversParentTypes['ComponentComponentsArticleList'],
 > = {
-    content?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    articles_to_show?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+    category?: Resolver<Maybe<ResolversTypes['Category']>, ParentType, ContextType>;
+    description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    pages?: Resolver<
+        Array<Maybe<ResolversTypes['Page']>>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentComponentsArticleListPagesArgs, 'pagination' | 'sort'>
+    >;
+    pages_connection?: Resolver<
+        Maybe<ResolversTypes['PageRelationResponseCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentComponentsArticleListPages_ConnectionArgs, 'pagination' | 'sort'>
+    >;
+    title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentComponentsArticleSectionsResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentComponentsArticleSections'] = ResolversParentTypes['ComponentComponentsArticleSections'],
+> = {
+    id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    sections?: Resolver<
+        Array<Maybe<ResolversTypes['ComponentContentArticleSection']>>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentComponentsArticleSectionsSectionsArgs, 'pagination' | 'sort'>
+    >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentComponentsCategoryResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentComponentsCategory'] = ResolversParentTypes['ComponentComponentsCategory'],
+> = {
+    category?: Resolver<Maybe<ResolversTypes['Category']>, ParentType, ContextType>;
+    id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentComponentsCategoryListResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentComponentsCategoryList'] = ResolversParentTypes['ComponentComponentsCategoryList'],
+> = {
+    categories?: Resolver<
+        Array<Maybe<ResolversTypes['Category']>>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentComponentsCategoryListCategoriesArgs, 'pagination' | 'sort'>
+    >;
+    categories_connection?: Resolver<
+        Maybe<ResolversTypes['CategoryRelationResponseCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentComponentsCategoryListCategories_ConnectionArgs, 'pagination' | 'sort'>
+    >;
+    description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -3907,7 +4163,7 @@ export type ComponentComponentsInvoiceListResolvers<
     filters?: Resolver<Maybe<ResolversTypes['ComponentContentFilters']>, ParentType, ContextType>;
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     noResults?: Resolver<ResolversTypes['ComponentContentBanner'], ParentType, ContextType>;
-    pagination?: Resolver<ResolversTypes['ComponentContentPagination'], ParentType, ContextType>;
+    pagination?: Resolver<Maybe<ResolversTypes['ComponentContentPagination']>, ParentType, ContextType>;
     table?: Resolver<ResolversTypes['ComponentContentTable'], ParentType, ContextType>;
     tableTitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -3950,7 +4206,7 @@ export type ComponentComponentsNotificationListResolvers<
     filters?: Resolver<Maybe<ResolversTypes['ComponentContentFilters']>, ParentType, ContextType>;
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     noResults?: Resolver<ResolversTypes['ComponentContentBanner'], ParentType, ContextType>;
-    pagination?: Resolver<ResolversTypes['ComponentContentPagination'], ParentType, ContextType>;
+    pagination?: Resolver<Maybe<ResolversTypes['ComponentContentPagination']>, ParentType, ContextType>;
     subtitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     table?: Resolver<ResolversTypes['ComponentContentTable'], ParentType, ContextType>;
     title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -3980,6 +4236,51 @@ export type ComponentComponentsPaymentsSummaryResolvers<
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     overdue?: Resolver<Maybe<ResolversTypes['ComponentContentInformationCard']>, ParentType, ContextType>;
     toBePaid?: Resolver<Maybe<ResolversTypes['ComponentContentInformationCard']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentComponentsQuickLinksResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentComponentsQuickLinks'] = ResolversParentTypes['ComponentComponentsQuickLinks'],
+> = {
+    description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    pages?: Resolver<
+        Array<Maybe<ResolversTypes['Page']>>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentComponentsQuickLinksPagesArgs, 'pagination' | 'sort'>
+    >;
+    pages_connection?: Resolver<
+        Maybe<ResolversTypes['PageRelationResponseCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentComponentsQuickLinksPages_ConnectionArgs, 'pagination' | 'sort'>
+    >;
+    title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentComponentsServiceListResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentComponentsServiceList'] = ResolversParentTypes['ComponentComponentsServiceList'],
+> = {
+    detailsLabel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    detailsURL?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    fields?: Resolver<
+        Array<Maybe<ResolversTypes['ComponentContentFieldMapping']>>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentComponentsServiceListFieldsArgs, 'pagination' | 'sort'>
+    >;
+    filters?: Resolver<Maybe<ResolversTypes['ComponentContentFilters']>, ParentType, ContextType>;
+    id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    noResults?: Resolver<ResolversTypes['ComponentContentBanner'], ParentType, ContextType>;
+    pagination?: Resolver<Maybe<ResolversTypes['ComponentContentPagination']>, ParentType, ContextType>;
+    subtitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -4022,7 +4323,7 @@ export type ComponentComponentsTicketListResolvers<
     filters?: Resolver<Maybe<ResolversTypes['ComponentContentFilters']>, ParentType, ContextType>;
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     noResults?: Resolver<ResolversTypes['ComponentContentBanner'], ParentType, ContextType>;
-    pagination?: Resolver<ResolversTypes['ComponentContentPagination'], ParentType, ContextType>;
+    pagination?: Resolver<Maybe<ResolversTypes['ComponentContentPagination']>, ParentType, ContextType>;
     subtitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     table?: Resolver<ResolversTypes['ComponentContentTable'], ParentType, ContextType>;
     title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -4043,6 +4344,17 @@ export type ComponentComponentsUserAccountResolvers<
         ContextType,
         RequireFields<ComponentComponentsUserAccountInputsArgs, 'pagination' | 'sort'>
     >;
+    title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentContentArticleSectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentContentArticleSection'] = ResolversParentTypes['ComponentContentArticleSection'],
+> = {
+    content?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -4071,13 +4383,18 @@ export type ComponentContentDynamicZoneResolvers<
         ResolversParentTypes['ComponentContentDynamicZone'] = ResolversParentTypes['ComponentContentDynamicZone'],
 > = {
     __resolveType: TypeResolveFn<
-        | 'ComponentComponentsArticleSection'
+        | 'ComponentComponentsArticleList'
+        | 'ComponentComponentsArticleSections'
+        | 'ComponentComponentsCategory'
+        | 'ComponentComponentsCategoryList'
         | 'ComponentComponentsFaq'
         | 'ComponentComponentsInvoiceList'
         | 'ComponentComponentsNotificationDetails'
         | 'ComponentComponentsNotificationList'
         | 'ComponentComponentsPaymentsHistory'
         | 'ComponentComponentsPaymentsSummary'
+        | 'ComponentComponentsQuickLinks'
+        | 'ComponentComponentsServiceList'
         | 'ComponentComponentsTicketDetails'
         | 'ComponentComponentsTicketList'
         | 'ComponentComponentsUserAccount'
@@ -4701,16 +5018,22 @@ export type GenericMorphResolvers<
         | 'Author'
         | 'Category'
         | 'Component'
-        | 'ComponentComponentsArticleSection'
+        | 'ComponentComponentsArticleList'
+        | 'ComponentComponentsArticleSections'
+        | 'ComponentComponentsCategory'
+        | 'ComponentComponentsCategoryList'
         | 'ComponentComponentsFaq'
         | 'ComponentComponentsInvoiceList'
         | 'ComponentComponentsNotificationDetails'
         | 'ComponentComponentsNotificationList'
         | 'ComponentComponentsPaymentsHistory'
         | 'ComponentComponentsPaymentsSummary'
+        | 'ComponentComponentsQuickLinks'
+        | 'ComponentComponentsServiceList'
         | 'ComponentComponentsTicketDetails'
         | 'ComponentComponentsTicketList'
         | 'ComponentComponentsUserAccount'
+        | 'ComponentContentArticleSection'
         | 'ComponentContentBanner'
         | 'ComponentContentErrorMessage'
         | 'ComponentContentFieldMapping'
@@ -5953,16 +6276,22 @@ export type Resolvers<ContextType = any> = {
     CategoryEntityResponseCollection?: CategoryEntityResponseCollectionResolvers<ContextType>;
     CategoryRelationResponseCollection?: CategoryRelationResponseCollectionResolvers<ContextType>;
     Component?: ComponentResolvers<ContextType>;
-    ComponentComponentsArticleSection?: ComponentComponentsArticleSectionResolvers<ContextType>;
+    ComponentComponentsArticleList?: ComponentComponentsArticleListResolvers<ContextType>;
+    ComponentComponentsArticleSections?: ComponentComponentsArticleSectionsResolvers<ContextType>;
+    ComponentComponentsCategory?: ComponentComponentsCategoryResolvers<ContextType>;
+    ComponentComponentsCategoryList?: ComponentComponentsCategoryListResolvers<ContextType>;
     ComponentComponentsFaq?: ComponentComponentsFaqResolvers<ContextType>;
     ComponentComponentsInvoiceList?: ComponentComponentsInvoiceListResolvers<ContextType>;
     ComponentComponentsNotificationDetails?: ComponentComponentsNotificationDetailsResolvers<ContextType>;
     ComponentComponentsNotificationList?: ComponentComponentsNotificationListResolvers<ContextType>;
     ComponentComponentsPaymentsHistory?: ComponentComponentsPaymentsHistoryResolvers<ContextType>;
     ComponentComponentsPaymentsSummary?: ComponentComponentsPaymentsSummaryResolvers<ContextType>;
+    ComponentComponentsQuickLinks?: ComponentComponentsQuickLinksResolvers<ContextType>;
+    ComponentComponentsServiceList?: ComponentComponentsServiceListResolvers<ContextType>;
     ComponentComponentsTicketDetails?: ComponentComponentsTicketDetailsResolvers<ContextType>;
     ComponentComponentsTicketList?: ComponentComponentsTicketListResolvers<ContextType>;
     ComponentComponentsUserAccount?: ComponentComponentsUserAccountResolvers<ContextType>;
+    ComponentContentArticleSection?: ComponentContentArticleSectionResolvers<ContextType>;
     ComponentContentBanner?: ComponentContentBannerResolvers<ContextType>;
     ComponentContentDynamicZone?: ComponentContentDynamicZoneResolvers<ContextType>;
     ComponentContentDynamicZoneInput?: GraphQLScalarType;
@@ -6067,13 +6396,18 @@ export type ComponentFragment = {
     __typename: 'Component';
     documentId: string;
     content: Array<
-        | { __typename: 'ComponentComponentsArticleSection' }
+        | { __typename: 'ComponentComponentsArticleList' }
+        | { __typename: 'ComponentComponentsArticleSections' }
+        | { __typename: 'ComponentComponentsCategory' }
+        | { __typename: 'ComponentComponentsCategoryList' }
         | { __typename: 'ComponentComponentsFaq' }
         | { __typename: 'ComponentComponentsInvoiceList' }
         | { __typename: 'ComponentComponentsNotificationDetails' }
         | { __typename: 'ComponentComponentsNotificationList' }
         | { __typename: 'ComponentComponentsPaymentsHistory' }
         | { __typename: 'ComponentComponentsPaymentsSummary' }
+        | { __typename: 'ComponentComponentsQuickLinks' }
+        | { __typename: 'ComponentComponentsServiceList' }
         | { __typename: 'ComponentComponentsTicketDetails' }
         | { __typename: 'ComponentComponentsTicketList' }
         | { __typename: 'ComponentComponentsUserAccount' }
@@ -6247,13 +6581,18 @@ export type PageFragment = {
                   __typename: 'Component';
                   documentId: string;
                   content: Array<
-                      | { __typename: 'ComponentComponentsArticleSection' }
+                      | { __typename: 'ComponentComponentsArticleList' }
+                      | { __typename: 'ComponentComponentsArticleSections' }
+                      | { __typename: 'ComponentComponentsCategory' }
+                      | { __typename: 'ComponentComponentsCategoryList' }
                       | { __typename: 'ComponentComponentsFaq' }
                       | { __typename: 'ComponentComponentsInvoiceList' }
                       | { __typename: 'ComponentComponentsNotificationDetails' }
                       | { __typename: 'ComponentComponentsNotificationList' }
                       | { __typename: 'ComponentComponentsPaymentsHistory' }
                       | { __typename: 'ComponentComponentsPaymentsSummary' }
+                      | { __typename: 'ComponentComponentsQuickLinks' }
+                      | { __typename: 'ComponentComponentsServiceList' }
                       | { __typename: 'ComponentComponentsTicketDetails' }
                       | { __typename: 'ComponentComponentsTicketList' }
                       | { __typename: 'ComponentComponentsUserAccount' }
@@ -6267,13 +6606,18 @@ export type PageFragment = {
                   __typename: 'Component';
                   documentId: string;
                   content: Array<
-                      | { __typename: 'ComponentComponentsArticleSection' }
+                      | { __typename: 'ComponentComponentsArticleList' }
+                      | { __typename: 'ComponentComponentsArticleSections' }
+                      | { __typename: 'ComponentComponentsCategory' }
+                      | { __typename: 'ComponentComponentsCategoryList' }
                       | { __typename: 'ComponentComponentsFaq' }
                       | { __typename: 'ComponentComponentsInvoiceList' }
                       | { __typename: 'ComponentComponentsNotificationDetails' }
                       | { __typename: 'ComponentComponentsNotificationList' }
                       | { __typename: 'ComponentComponentsPaymentsHistory' }
                       | { __typename: 'ComponentComponentsPaymentsSummary' }
+                      | { __typename: 'ComponentComponentsQuickLinks' }
+                      | { __typename: 'ComponentComponentsServiceList' }
                       | { __typename: 'ComponentComponentsTicketDetails' }
                       | { __typename: 'ComponentComponentsTicketList' }
                       | { __typename: 'ComponentComponentsUserAccount' }
@@ -6284,13 +6628,18 @@ export type PageFragment = {
                   __typename: 'Component';
                   documentId: string;
                   content: Array<
-                      | { __typename: 'ComponentComponentsArticleSection' }
+                      | { __typename: 'ComponentComponentsArticleList' }
+                      | { __typename: 'ComponentComponentsArticleSections' }
+                      | { __typename: 'ComponentComponentsCategory' }
+                      | { __typename: 'ComponentComponentsCategoryList' }
                       | { __typename: 'ComponentComponentsFaq' }
                       | { __typename: 'ComponentComponentsInvoiceList' }
                       | { __typename: 'ComponentComponentsNotificationDetails' }
                       | { __typename: 'ComponentComponentsNotificationList' }
                       | { __typename: 'ComponentComponentsPaymentsHistory' }
                       | { __typename: 'ComponentComponentsPaymentsSummary' }
+                      | { __typename: 'ComponentComponentsQuickLinks' }
+                      | { __typename: 'ComponentComponentsServiceList' }
                       | { __typename: 'ComponentComponentsTicketDetails' }
                       | { __typename: 'ComponentComponentsTicketList' }
                       | { __typename: 'ComponentComponentsUserAccount' }
@@ -6301,13 +6650,18 @@ export type PageFragment = {
                   __typename: 'Component';
                   documentId: string;
                   content: Array<
-                      | { __typename: 'ComponentComponentsArticleSection' }
+                      | { __typename: 'ComponentComponentsArticleList' }
+                      | { __typename: 'ComponentComponentsArticleSections' }
+                      | { __typename: 'ComponentComponentsCategory' }
+                      | { __typename: 'ComponentComponentsCategoryList' }
                       | { __typename: 'ComponentComponentsFaq' }
                       | { __typename: 'ComponentComponentsInvoiceList' }
                       | { __typename: 'ComponentComponentsNotificationDetails' }
                       | { __typename: 'ComponentComponentsNotificationList' }
                       | { __typename: 'ComponentComponentsPaymentsHistory' }
                       | { __typename: 'ComponentComponentsPaymentsSummary' }
+                      | { __typename: 'ComponentComponentsQuickLinks' }
+                      | { __typename: 'ComponentComponentsServiceList' }
                       | { __typename: 'ComponentComponentsTicketDetails' }
                       | { __typename: 'ComponentComponentsTicketList' }
                       | { __typename: 'ComponentComponentsUserAccount' }
@@ -6318,13 +6672,18 @@ export type PageFragment = {
                   __typename: 'Component';
                   documentId: string;
                   content: Array<
-                      | { __typename: 'ComponentComponentsArticleSection' }
+                      | { __typename: 'ComponentComponentsArticleList' }
+                      | { __typename: 'ComponentComponentsArticleSections' }
+                      | { __typename: 'ComponentComponentsCategory' }
+                      | { __typename: 'ComponentComponentsCategoryList' }
                       | { __typename: 'ComponentComponentsFaq' }
                       | { __typename: 'ComponentComponentsInvoiceList' }
                       | { __typename: 'ComponentComponentsNotificationDetails' }
                       | { __typename: 'ComponentComponentsNotificationList' }
                       | { __typename: 'ComponentComponentsPaymentsHistory' }
                       | { __typename: 'ComponentComponentsPaymentsSummary' }
+                      | { __typename: 'ComponentComponentsQuickLinks' }
+                      | { __typename: 'ComponentComponentsServiceList' }
                       | { __typename: 'ComponentComponentsTicketDetails' }
                       | { __typename: 'ComponentComponentsTicketList' }
                       | { __typename: 'ComponentComponentsUserAccount' }
@@ -6342,13 +6701,18 @@ type Template_ComponentTemplatesOneColumn_Fragment = {
         __typename: 'Component';
         documentId: string;
         content: Array<
-            | { __typename: 'ComponentComponentsArticleSection' }
+            | { __typename: 'ComponentComponentsArticleList' }
+            | { __typename: 'ComponentComponentsArticleSections' }
+            | { __typename: 'ComponentComponentsCategory' }
+            | { __typename: 'ComponentComponentsCategoryList' }
             | { __typename: 'ComponentComponentsFaq' }
             | { __typename: 'ComponentComponentsInvoiceList' }
             | { __typename: 'ComponentComponentsNotificationDetails' }
             | { __typename: 'ComponentComponentsNotificationList' }
             | { __typename: 'ComponentComponentsPaymentsHistory' }
             | { __typename: 'ComponentComponentsPaymentsSummary' }
+            | { __typename: 'ComponentComponentsQuickLinks' }
+            | { __typename: 'ComponentComponentsServiceList' }
             | { __typename: 'ComponentComponentsTicketDetails' }
             | { __typename: 'ComponentComponentsTicketList' }
             | { __typename: 'ComponentComponentsUserAccount' }
@@ -6363,13 +6727,18 @@ type Template_ComponentTemplatesTwoColumn_Fragment = {
         __typename: 'Component';
         documentId: string;
         content: Array<
-            | { __typename: 'ComponentComponentsArticleSection' }
+            | { __typename: 'ComponentComponentsArticleList' }
+            | { __typename: 'ComponentComponentsArticleSections' }
+            | { __typename: 'ComponentComponentsCategory' }
+            | { __typename: 'ComponentComponentsCategoryList' }
             | { __typename: 'ComponentComponentsFaq' }
             | { __typename: 'ComponentComponentsInvoiceList' }
             | { __typename: 'ComponentComponentsNotificationDetails' }
             | { __typename: 'ComponentComponentsNotificationList' }
             | { __typename: 'ComponentComponentsPaymentsHistory' }
             | { __typename: 'ComponentComponentsPaymentsSummary' }
+            | { __typename: 'ComponentComponentsQuickLinks' }
+            | { __typename: 'ComponentComponentsServiceList' }
             | { __typename: 'ComponentComponentsTicketDetails' }
             | { __typename: 'ComponentComponentsTicketList' }
             | { __typename: 'ComponentComponentsUserAccount' }
@@ -6380,13 +6749,18 @@ type Template_ComponentTemplatesTwoColumn_Fragment = {
         __typename: 'Component';
         documentId: string;
         content: Array<
-            | { __typename: 'ComponentComponentsArticleSection' }
+            | { __typename: 'ComponentComponentsArticleList' }
+            | { __typename: 'ComponentComponentsArticleSections' }
+            | { __typename: 'ComponentComponentsCategory' }
+            | { __typename: 'ComponentComponentsCategoryList' }
             | { __typename: 'ComponentComponentsFaq' }
             | { __typename: 'ComponentComponentsInvoiceList' }
             | { __typename: 'ComponentComponentsNotificationDetails' }
             | { __typename: 'ComponentComponentsNotificationList' }
             | { __typename: 'ComponentComponentsPaymentsHistory' }
             | { __typename: 'ComponentComponentsPaymentsSummary' }
+            | { __typename: 'ComponentComponentsQuickLinks' }
+            | { __typename: 'ComponentComponentsServiceList' }
             | { __typename: 'ComponentComponentsTicketDetails' }
             | { __typename: 'ComponentComponentsTicketList' }
             | { __typename: 'ComponentComponentsUserAccount' }
@@ -6397,13 +6771,18 @@ type Template_ComponentTemplatesTwoColumn_Fragment = {
         __typename: 'Component';
         documentId: string;
         content: Array<
-            | { __typename: 'ComponentComponentsArticleSection' }
+            | { __typename: 'ComponentComponentsArticleList' }
+            | { __typename: 'ComponentComponentsArticleSections' }
+            | { __typename: 'ComponentComponentsCategory' }
+            | { __typename: 'ComponentComponentsCategoryList' }
             | { __typename: 'ComponentComponentsFaq' }
             | { __typename: 'ComponentComponentsInvoiceList' }
             | { __typename: 'ComponentComponentsNotificationDetails' }
             | { __typename: 'ComponentComponentsNotificationList' }
             | { __typename: 'ComponentComponentsPaymentsHistory' }
             | { __typename: 'ComponentComponentsPaymentsSummary' }
+            | { __typename: 'ComponentComponentsQuickLinks' }
+            | { __typename: 'ComponentComponentsServiceList' }
             | { __typename: 'ComponentComponentsTicketDetails' }
             | { __typename: 'ComponentComponentsTicketList' }
             | { __typename: 'ComponentComponentsUserAccount' }
@@ -6414,13 +6793,18 @@ type Template_ComponentTemplatesTwoColumn_Fragment = {
         __typename: 'Component';
         documentId: string;
         content: Array<
-            | { __typename: 'ComponentComponentsArticleSection' }
+            | { __typename: 'ComponentComponentsArticleList' }
+            | { __typename: 'ComponentComponentsArticleSections' }
+            | { __typename: 'ComponentComponentsCategory' }
+            | { __typename: 'ComponentComponentsCategoryList' }
             | { __typename: 'ComponentComponentsFaq' }
             | { __typename: 'ComponentComponentsInvoiceList' }
             | { __typename: 'ComponentComponentsNotificationDetails' }
             | { __typename: 'ComponentComponentsNotificationList' }
             | { __typename: 'ComponentComponentsPaymentsHistory' }
             | { __typename: 'ComponentComponentsPaymentsSummary' }
+            | { __typename: 'ComponentComponentsQuickLinks' }
+            | { __typename: 'ComponentComponentsServiceList' }
             | { __typename: 'ComponentComponentsTicketDetails' }
             | { __typename: 'ComponentComponentsTicketList' }
             | { __typename: 'ComponentComponentsUserAccount' }
@@ -6459,7 +6843,7 @@ export type InvoiceListComponentFragment = {
     downloadButtonAriaDescription?: string;
     fields: Array<{ name: string; values: Array<{ key: string; value: string }> }>;
     table: { actionsTitle?: string; actionsLabel?: string; columns: Array<{ title: string; field: string }> };
-    pagination: {
+    pagination?: {
         description: string;
         previousLabel: string;
         nextLabel: string;
@@ -6513,7 +6897,7 @@ export type NotificationListComponentFragment = {
     detailsURL?: string;
     fields: Array<{ name: string; values: Array<{ key: string; value: string }> }>;
     table: { actionsTitle?: string; actionsLabel?: string; columns: Array<{ title: string; field: string }> };
-    pagination: {
+    pagination?: {
         description: string;
         previousLabel: string;
         nextLabel: string;
@@ -6570,6 +6954,53 @@ export type PaymentsSummaryComponentFragment = {
     toBePaid?: { title?: string; message?: string; noPaymentsMessage?: string; buttonLabel?: string };
 };
 
+export type ServiceListComponentFragment = {
+    __typename: 'ComponentComponentsServiceList';
+    id: string;
+    title?: string;
+    subtitle?: string;
+    detailsURL?: string;
+    detailsLabel?: string;
+    fields: Array<{ name: string; values: Array<{ key: string; value: string }> }>;
+    pagination?: {
+        description: string;
+        previousLabel: string;
+        nextLabel: string;
+        perPage: number;
+        selectPageLabel: string;
+    };
+    filters?: {
+        buttonLabel: string;
+        title: string;
+        description?: string;
+        submitLabel: string;
+        removeFiltersLabel?: string;
+        clearLabel?: string;
+        items: Array<{
+            field: Array<
+                | {
+                      __typename: 'ComponentContentFilterDateRange';
+                      id: string;
+                      field: string;
+                      label: string;
+                      from: string;
+                      to: string;
+                  }
+                | {
+                      __typename: 'ComponentContentFilterSelect';
+                      id: string;
+                      field: string;
+                      label: string;
+                      multiple: boolean;
+                      items: Array<{ id: string; key: string; value: string }>;
+                  }
+                | { __typename: 'Error' }
+            >;
+        }>;
+    };
+    noResults: { title: string; description?: string };
+};
+
 export type TicketDetailsComponentFragment = {
     __typename: 'ComponentComponentsTicketDetails';
     id: string;
@@ -6588,7 +7019,7 @@ export type TicketListComponentFragment = {
     detailsURL?: string;
     fields: Array<{ name: string; values: Array<{ key: string; value: string }> }>;
     table: { actionsTitle?: string; actionsLabel?: string; columns: Array<{ title: string; field: string }> };
-    pagination: {
+    pagination?: {
         description: string;
         previousLabel: string;
         nextLabel: string;
@@ -6763,13 +7194,18 @@ export type OneColumnTemplateFragment = {
         __typename: 'Component';
         documentId: string;
         content: Array<
-            | { __typename: 'ComponentComponentsArticleSection' }
+            | { __typename: 'ComponentComponentsArticleList' }
+            | { __typename: 'ComponentComponentsArticleSections' }
+            | { __typename: 'ComponentComponentsCategory' }
+            | { __typename: 'ComponentComponentsCategoryList' }
             | { __typename: 'ComponentComponentsFaq' }
             | { __typename: 'ComponentComponentsInvoiceList' }
             | { __typename: 'ComponentComponentsNotificationDetails' }
             | { __typename: 'ComponentComponentsNotificationList' }
             | { __typename: 'ComponentComponentsPaymentsHistory' }
             | { __typename: 'ComponentComponentsPaymentsSummary' }
+            | { __typename: 'ComponentComponentsQuickLinks' }
+            | { __typename: 'ComponentComponentsServiceList' }
             | { __typename: 'ComponentComponentsTicketDetails' }
             | { __typename: 'ComponentComponentsTicketList' }
             | { __typename: 'ComponentComponentsUserAccount' }
@@ -6783,13 +7219,18 @@ export type TwoColumnTemplateFragment = {
         __typename: 'Component';
         documentId: string;
         content: Array<
-            | { __typename: 'ComponentComponentsArticleSection' }
+            | { __typename: 'ComponentComponentsArticleList' }
+            | { __typename: 'ComponentComponentsArticleSections' }
+            | { __typename: 'ComponentComponentsCategory' }
+            | { __typename: 'ComponentComponentsCategoryList' }
             | { __typename: 'ComponentComponentsFaq' }
             | { __typename: 'ComponentComponentsInvoiceList' }
             | { __typename: 'ComponentComponentsNotificationDetails' }
             | { __typename: 'ComponentComponentsNotificationList' }
             | { __typename: 'ComponentComponentsPaymentsHistory' }
             | { __typename: 'ComponentComponentsPaymentsSummary' }
+            | { __typename: 'ComponentComponentsQuickLinks' }
+            | { __typename: 'ComponentComponentsServiceList' }
             | { __typename: 'ComponentComponentsTicketDetails' }
             | { __typename: 'ComponentComponentsTicketList' }
             | { __typename: 'ComponentComponentsUserAccount' }
@@ -6800,13 +7241,18 @@ export type TwoColumnTemplateFragment = {
         __typename: 'Component';
         documentId: string;
         content: Array<
-            | { __typename: 'ComponentComponentsArticleSection' }
+            | { __typename: 'ComponentComponentsArticleList' }
+            | { __typename: 'ComponentComponentsArticleSections' }
+            | { __typename: 'ComponentComponentsCategory' }
+            | { __typename: 'ComponentComponentsCategoryList' }
             | { __typename: 'ComponentComponentsFaq' }
             | { __typename: 'ComponentComponentsInvoiceList' }
             | { __typename: 'ComponentComponentsNotificationDetails' }
             | { __typename: 'ComponentComponentsNotificationList' }
             | { __typename: 'ComponentComponentsPaymentsHistory' }
             | { __typename: 'ComponentComponentsPaymentsSummary' }
+            | { __typename: 'ComponentComponentsQuickLinks' }
+            | { __typename: 'ComponentComponentsServiceList' }
             | { __typename: 'ComponentComponentsTicketDetails' }
             | { __typename: 'ComponentComponentsTicketList' }
             | { __typename: 'ComponentComponentsUserAccount' }
@@ -6817,13 +7263,18 @@ export type TwoColumnTemplateFragment = {
         __typename: 'Component';
         documentId: string;
         content: Array<
-            | { __typename: 'ComponentComponentsArticleSection' }
+            | { __typename: 'ComponentComponentsArticleList' }
+            | { __typename: 'ComponentComponentsArticleSections' }
+            | { __typename: 'ComponentComponentsCategory' }
+            | { __typename: 'ComponentComponentsCategoryList' }
             | { __typename: 'ComponentComponentsFaq' }
             | { __typename: 'ComponentComponentsInvoiceList' }
             | { __typename: 'ComponentComponentsNotificationDetails' }
             | { __typename: 'ComponentComponentsNotificationList' }
             | { __typename: 'ComponentComponentsPaymentsHistory' }
             | { __typename: 'ComponentComponentsPaymentsSummary' }
+            | { __typename: 'ComponentComponentsQuickLinks' }
+            | { __typename: 'ComponentComponentsServiceList' }
             | { __typename: 'ComponentComponentsTicketDetails' }
             | { __typename: 'ComponentComponentsTicketList' }
             | { __typename: 'ComponentComponentsUserAccount' }
@@ -6834,13 +7285,18 @@ export type TwoColumnTemplateFragment = {
         __typename: 'Component';
         documentId: string;
         content: Array<
-            | { __typename: 'ComponentComponentsArticleSection' }
+            | { __typename: 'ComponentComponentsArticleList' }
+            | { __typename: 'ComponentComponentsArticleSections' }
+            | { __typename: 'ComponentComponentsCategory' }
+            | { __typename: 'ComponentComponentsCategoryList' }
             | { __typename: 'ComponentComponentsFaq' }
             | { __typename: 'ComponentComponentsInvoiceList' }
             | { __typename: 'ComponentComponentsNotificationDetails' }
             | { __typename: 'ComponentComponentsNotificationList' }
             | { __typename: 'ComponentComponentsPaymentsHistory' }
             | { __typename: 'ComponentComponentsPaymentsSummary' }
+            | { __typename: 'ComponentComponentsQuickLinks' }
+            | { __typename: 'ComponentComponentsServiceList' }
             | { __typename: 'ComponentComponentsTicketDetails' }
             | { __typename: 'ComponentComponentsTicketList' }
             | { __typename: 'ComponentComponentsUserAccount' }
@@ -6866,7 +7322,10 @@ export type GetComponentQuery = {
     component?: {
         name: string;
         content: Array<
-            | { __typename: 'ComponentComponentsArticleSection' }
+            | { __typename: 'ComponentComponentsArticleList' }
+            | { __typename: 'ComponentComponentsArticleSections' }
+            | { __typename: 'ComponentComponentsCategory' }
+            | { __typename: 'ComponentComponentsCategoryList' }
             | {
                   __typename: 'ComponentComponentsFaq';
                   id: string;
@@ -6893,7 +7352,7 @@ export type GetComponentQuery = {
                       actionsLabel?: string;
                       columns: Array<{ title: string; field: string }>;
                   };
-                  pagination: {
+                  pagination?: {
                       description: string;
                       previousLabel: string;
                       nextLabel: string;
@@ -6944,7 +7403,7 @@ export type GetComponentQuery = {
                       actionsLabel?: string;
                       columns: Array<{ title: string; field: string }>;
                   };
-                  pagination: {
+                  pagination?: {
                       description: string;
                       previousLabel: string;
                       nextLabel: string;
@@ -6998,6 +7457,53 @@ export type GetComponentQuery = {
                   overdue?: { title?: string; message?: string; noPaymentsMessage?: string; buttonLabel?: string };
                   toBePaid?: { title?: string; message?: string; noPaymentsMessage?: string; buttonLabel?: string };
               }
+            | { __typename: 'ComponentComponentsQuickLinks' }
+            | {
+                  __typename: 'ComponentComponentsServiceList';
+                  id: string;
+                  title?: string;
+                  subtitle?: string;
+                  detailsURL?: string;
+                  detailsLabel?: string;
+                  fields: Array<{ name: string; values: Array<{ key: string; value: string }> }>;
+                  pagination?: {
+                      description: string;
+                      previousLabel: string;
+                      nextLabel: string;
+                      perPage: number;
+                      selectPageLabel: string;
+                  };
+                  filters?: {
+                      buttonLabel: string;
+                      title: string;
+                      description?: string;
+                      submitLabel: string;
+                      removeFiltersLabel?: string;
+                      clearLabel?: string;
+                      items: Array<{
+                          field: Array<
+                              | {
+                                    __typename: 'ComponentContentFilterDateRange';
+                                    id: string;
+                                    field: string;
+                                    label: string;
+                                    from: string;
+                                    to: string;
+                                }
+                              | {
+                                    __typename: 'ComponentContentFilterSelect';
+                                    id: string;
+                                    field: string;
+                                    label: string;
+                                    multiple: boolean;
+                                    items: Array<{ id: string; key: string; value: string }>;
+                                }
+                              | { __typename: 'Error' }
+                          >;
+                      }>;
+                  };
+                  noResults: { title: string; description?: string };
+              }
             | {
                   __typename: 'ComponentComponentsTicketDetails';
                   id: string;
@@ -7019,7 +7525,7 @@ export type GetComponentQuery = {
                       actionsLabel?: string;
                       columns: Array<{ title: string; field: string }>;
                   };
-                  pagination: {
+                  pagination?: {
                       description: string;
                       previousLabel: string;
                       nextLabel: string;
@@ -7273,13 +7779,18 @@ export type GetPageQuery = {
                       __typename: 'Component';
                       documentId: string;
                       content: Array<
-                          | { __typename: 'ComponentComponentsArticleSection' }
+                          | { __typename: 'ComponentComponentsArticleList' }
+                          | { __typename: 'ComponentComponentsArticleSections' }
+                          | { __typename: 'ComponentComponentsCategory' }
+                          | { __typename: 'ComponentComponentsCategoryList' }
                           | { __typename: 'ComponentComponentsFaq' }
                           | { __typename: 'ComponentComponentsInvoiceList' }
                           | { __typename: 'ComponentComponentsNotificationDetails' }
                           | { __typename: 'ComponentComponentsNotificationList' }
                           | { __typename: 'ComponentComponentsPaymentsHistory' }
                           | { __typename: 'ComponentComponentsPaymentsSummary' }
+                          | { __typename: 'ComponentComponentsQuickLinks' }
+                          | { __typename: 'ComponentComponentsServiceList' }
                           | { __typename: 'ComponentComponentsTicketDetails' }
                           | { __typename: 'ComponentComponentsTicketList' }
                           | { __typename: 'ComponentComponentsUserAccount' }
@@ -7293,13 +7804,18 @@ export type GetPageQuery = {
                       __typename: 'Component';
                       documentId: string;
                       content: Array<
-                          | { __typename: 'ComponentComponentsArticleSection' }
+                          | { __typename: 'ComponentComponentsArticleList' }
+                          | { __typename: 'ComponentComponentsArticleSections' }
+                          | { __typename: 'ComponentComponentsCategory' }
+                          | { __typename: 'ComponentComponentsCategoryList' }
                           | { __typename: 'ComponentComponentsFaq' }
                           | { __typename: 'ComponentComponentsInvoiceList' }
                           | { __typename: 'ComponentComponentsNotificationDetails' }
                           | { __typename: 'ComponentComponentsNotificationList' }
                           | { __typename: 'ComponentComponentsPaymentsHistory' }
                           | { __typename: 'ComponentComponentsPaymentsSummary' }
+                          | { __typename: 'ComponentComponentsQuickLinks' }
+                          | { __typename: 'ComponentComponentsServiceList' }
                           | { __typename: 'ComponentComponentsTicketDetails' }
                           | { __typename: 'ComponentComponentsTicketList' }
                           | { __typename: 'ComponentComponentsUserAccount' }
@@ -7310,13 +7826,18 @@ export type GetPageQuery = {
                       __typename: 'Component';
                       documentId: string;
                       content: Array<
-                          | { __typename: 'ComponentComponentsArticleSection' }
+                          | { __typename: 'ComponentComponentsArticleList' }
+                          | { __typename: 'ComponentComponentsArticleSections' }
+                          | { __typename: 'ComponentComponentsCategory' }
+                          | { __typename: 'ComponentComponentsCategoryList' }
                           | { __typename: 'ComponentComponentsFaq' }
                           | { __typename: 'ComponentComponentsInvoiceList' }
                           | { __typename: 'ComponentComponentsNotificationDetails' }
                           | { __typename: 'ComponentComponentsNotificationList' }
                           | { __typename: 'ComponentComponentsPaymentsHistory' }
                           | { __typename: 'ComponentComponentsPaymentsSummary' }
+                          | { __typename: 'ComponentComponentsQuickLinks' }
+                          | { __typename: 'ComponentComponentsServiceList' }
                           | { __typename: 'ComponentComponentsTicketDetails' }
                           | { __typename: 'ComponentComponentsTicketList' }
                           | { __typename: 'ComponentComponentsUserAccount' }
@@ -7327,13 +7848,18 @@ export type GetPageQuery = {
                       __typename: 'Component';
                       documentId: string;
                       content: Array<
-                          | { __typename: 'ComponentComponentsArticleSection' }
+                          | { __typename: 'ComponentComponentsArticleList' }
+                          | { __typename: 'ComponentComponentsArticleSections' }
+                          | { __typename: 'ComponentComponentsCategory' }
+                          | { __typename: 'ComponentComponentsCategoryList' }
                           | { __typename: 'ComponentComponentsFaq' }
                           | { __typename: 'ComponentComponentsInvoiceList' }
                           | { __typename: 'ComponentComponentsNotificationDetails' }
                           | { __typename: 'ComponentComponentsNotificationList' }
                           | { __typename: 'ComponentComponentsPaymentsHistory' }
                           | { __typename: 'ComponentComponentsPaymentsSummary' }
+                          | { __typename: 'ComponentComponentsQuickLinks' }
+                          | { __typename: 'ComponentComponentsServiceList' }
                           | { __typename: 'ComponentComponentsTicketDetails' }
                           | { __typename: 'ComponentComponentsTicketList' }
                           | { __typename: 'ComponentComponentsUserAccount' }
@@ -7344,13 +7870,18 @@ export type GetPageQuery = {
                       __typename: 'Component';
                       documentId: string;
                       content: Array<
-                          | { __typename: 'ComponentComponentsArticleSection' }
+                          | { __typename: 'ComponentComponentsArticleList' }
+                          | { __typename: 'ComponentComponentsArticleSections' }
+                          | { __typename: 'ComponentComponentsCategory' }
+                          | { __typename: 'ComponentComponentsCategoryList' }
                           | { __typename: 'ComponentComponentsFaq' }
                           | { __typename: 'ComponentComponentsInvoiceList' }
                           | { __typename: 'ComponentComponentsNotificationDetails' }
                           | { __typename: 'ComponentComponentsNotificationList' }
                           | { __typename: 'ComponentComponentsPaymentsHistory' }
                           | { __typename: 'ComponentComponentsPaymentsSummary' }
+                          | { __typename: 'ComponentComponentsQuickLinks' }
+                          | { __typename: 'ComponentComponentsServiceList' }
                           | { __typename: 'ComponentComponentsTicketDetails' }
                           | { __typename: 'ComponentComponentsTicketList' }
                           | { __typename: 'ComponentComponentsUserAccount' }
@@ -7392,13 +7923,18 @@ export type GetPagesQuery = {
                       __typename: 'Component';
                       documentId: string;
                       content: Array<
-                          | { __typename: 'ComponentComponentsArticleSection' }
+                          | { __typename: 'ComponentComponentsArticleList' }
+                          | { __typename: 'ComponentComponentsArticleSections' }
+                          | { __typename: 'ComponentComponentsCategory' }
+                          | { __typename: 'ComponentComponentsCategoryList' }
                           | { __typename: 'ComponentComponentsFaq' }
                           | { __typename: 'ComponentComponentsInvoiceList' }
                           | { __typename: 'ComponentComponentsNotificationDetails' }
                           | { __typename: 'ComponentComponentsNotificationList' }
                           | { __typename: 'ComponentComponentsPaymentsHistory' }
                           | { __typename: 'ComponentComponentsPaymentsSummary' }
+                          | { __typename: 'ComponentComponentsQuickLinks' }
+                          | { __typename: 'ComponentComponentsServiceList' }
                           | { __typename: 'ComponentComponentsTicketDetails' }
                           | { __typename: 'ComponentComponentsTicketList' }
                           | { __typename: 'ComponentComponentsUserAccount' }
@@ -7412,13 +7948,18 @@ export type GetPagesQuery = {
                       __typename: 'Component';
                       documentId: string;
                       content: Array<
-                          | { __typename: 'ComponentComponentsArticleSection' }
+                          | { __typename: 'ComponentComponentsArticleList' }
+                          | { __typename: 'ComponentComponentsArticleSections' }
+                          | { __typename: 'ComponentComponentsCategory' }
+                          | { __typename: 'ComponentComponentsCategoryList' }
                           | { __typename: 'ComponentComponentsFaq' }
                           | { __typename: 'ComponentComponentsInvoiceList' }
                           | { __typename: 'ComponentComponentsNotificationDetails' }
                           | { __typename: 'ComponentComponentsNotificationList' }
                           | { __typename: 'ComponentComponentsPaymentsHistory' }
                           | { __typename: 'ComponentComponentsPaymentsSummary' }
+                          | { __typename: 'ComponentComponentsQuickLinks' }
+                          | { __typename: 'ComponentComponentsServiceList' }
                           | { __typename: 'ComponentComponentsTicketDetails' }
                           | { __typename: 'ComponentComponentsTicketList' }
                           | { __typename: 'ComponentComponentsUserAccount' }
@@ -7429,13 +7970,18 @@ export type GetPagesQuery = {
                       __typename: 'Component';
                       documentId: string;
                       content: Array<
-                          | { __typename: 'ComponentComponentsArticleSection' }
+                          | { __typename: 'ComponentComponentsArticleList' }
+                          | { __typename: 'ComponentComponentsArticleSections' }
+                          | { __typename: 'ComponentComponentsCategory' }
+                          | { __typename: 'ComponentComponentsCategoryList' }
                           | { __typename: 'ComponentComponentsFaq' }
                           | { __typename: 'ComponentComponentsInvoiceList' }
                           | { __typename: 'ComponentComponentsNotificationDetails' }
                           | { __typename: 'ComponentComponentsNotificationList' }
                           | { __typename: 'ComponentComponentsPaymentsHistory' }
                           | { __typename: 'ComponentComponentsPaymentsSummary' }
+                          | { __typename: 'ComponentComponentsQuickLinks' }
+                          | { __typename: 'ComponentComponentsServiceList' }
                           | { __typename: 'ComponentComponentsTicketDetails' }
                           | { __typename: 'ComponentComponentsTicketList' }
                           | { __typename: 'ComponentComponentsUserAccount' }
@@ -7446,13 +7992,18 @@ export type GetPagesQuery = {
                       __typename: 'Component';
                       documentId: string;
                       content: Array<
-                          | { __typename: 'ComponentComponentsArticleSection' }
+                          | { __typename: 'ComponentComponentsArticleList' }
+                          | { __typename: 'ComponentComponentsArticleSections' }
+                          | { __typename: 'ComponentComponentsCategory' }
+                          | { __typename: 'ComponentComponentsCategoryList' }
                           | { __typename: 'ComponentComponentsFaq' }
                           | { __typename: 'ComponentComponentsInvoiceList' }
                           | { __typename: 'ComponentComponentsNotificationDetails' }
                           | { __typename: 'ComponentComponentsNotificationList' }
                           | { __typename: 'ComponentComponentsPaymentsHistory' }
                           | { __typename: 'ComponentComponentsPaymentsSummary' }
+                          | { __typename: 'ComponentComponentsQuickLinks' }
+                          | { __typename: 'ComponentComponentsServiceList' }
                           | { __typename: 'ComponentComponentsTicketDetails' }
                           | { __typename: 'ComponentComponentsTicketList' }
                           | { __typename: 'ComponentComponentsUserAccount' }
@@ -7463,13 +8014,18 @@ export type GetPagesQuery = {
                       __typename: 'Component';
                       documentId: string;
                       content: Array<
-                          | { __typename: 'ComponentComponentsArticleSection' }
+                          | { __typename: 'ComponentComponentsArticleList' }
+                          | { __typename: 'ComponentComponentsArticleSections' }
+                          | { __typename: 'ComponentComponentsCategory' }
+                          | { __typename: 'ComponentComponentsCategoryList' }
                           | { __typename: 'ComponentComponentsFaq' }
                           | { __typename: 'ComponentComponentsInvoiceList' }
                           | { __typename: 'ComponentComponentsNotificationDetails' }
                           | { __typename: 'ComponentComponentsNotificationList' }
                           | { __typename: 'ComponentComponentsPaymentsHistory' }
                           | { __typename: 'ComponentComponentsPaymentsSummary' }
+                          | { __typename: 'ComponentComponentsQuickLinks' }
+                          | { __typename: 'ComponentComponentsServiceList' }
                           | { __typename: 'ComponentComponentsTicketDetails' }
                           | { __typename: 'ComponentComponentsTicketList' }
                           | { __typename: 'ComponentComponentsUserAccount' }
@@ -7935,6 +8491,32 @@ export const PaymentsSummaryComponentFragmentDoc = gql`
         }
     }
 `;
+export const ServiceListComponentFragmentDoc = gql`
+    fragment ServiceListComponent on ComponentComponentsServiceList {
+        __typename
+        id
+        title
+        subtitle
+        fields {
+            ...FieldMapping
+        }
+        pagination {
+            ...Pagination
+        }
+        filters {
+            ...Filters
+        }
+        noResults {
+            title
+            description
+        }
+        detailsURL
+        detailsLabel
+    }
+    ${FieldMappingFragmentDoc}
+    ${PaginationFragmentDoc}
+    ${FiltersFragmentDoc}
+`;
 export const TicketDetailsComponentFragmentDoc = gql`
     fragment TicketDetailsComponent on ComponentComponentsTicketDetails {
         __typename
@@ -8032,6 +8614,9 @@ export const GetComponentDocument = gql`
                 ... on ComponentComponentsUserAccount {
                     ...UserAccountComponent
                 }
+                ... on ComponentComponentsServiceList {
+                    ...ServiceListComponent
+                }
             }
         }
         configurableTexts(locale: $locale) {
@@ -8060,6 +8645,7 @@ export const GetComponentDocument = gql`
     ${PaymentsSummaryComponentFragmentDoc}
     ${PaymentsHistoryComponentFragmentDoc}
     ${UserAccountComponentFragmentDoc}
+    ${ServiceListComponentFragmentDoc}
 `;
 export const GetFooterDocument = gql`
     query getFooter($locale: I18NLocaleCode!, $id: ID!) {

@@ -11,6 +11,7 @@ import { notificationDetails } from '@/api/blocks/notification-details';
 import { notificationList } from '@/api/blocks/notification-list';
 import { paymentsHistory } from '@/api/blocks/payments-history';
 import { paymentsSummary } from '@/api/blocks/payments-summary';
+import { serviceList } from '@/api/blocks/services-list';
 import { ticketDetails } from '@/api/blocks/ticket-details';
 import { ticketList } from '@/api/blocks/ticket-list';
 import { ticketRecent } from '@/api/blocks/ticket-recent';
@@ -45,6 +46,7 @@ export const sdk = extendSdk(internalSdk, {
         getInvoicePdf: invoiceList(internalSdk).blocks.getInvoicePdf,
         getPaymentsSummary: paymentsSummary(internalSdk).blocks.getPaymentsSummary,
         getPaymentsHistory: paymentsHistory(internalSdk).blocks.getPaymentsHistory,
+        getServiceList: serviceList(internalSdk).blocks.getServiceList,
         getFaq: faq(internalSdk).blocks.getFaq,
         getUserAccount: userAccount(internalSdk).blocks.getUserAccount,
     },

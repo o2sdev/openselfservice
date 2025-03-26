@@ -13,6 +13,7 @@ import {
     Invoices,
     Notifications,
     Organizations,
+    Products,
     Resources,
     Search,
     Tickets,
@@ -30,6 +31,7 @@ import { NotificationDetailsBlockModule } from '@o2s/api-harmonization/blocks/no
 import { NotificationListBlockModule } from '@o2s/api-harmonization/blocks/notification-list/notification-list.module';
 import { PaymentsHistoryBlockModule } from '@o2s/api-harmonization/blocks/payments-history/payments-history.module';
 import { PaymentsSummaryBlockModule } from '@o2s/api-harmonization/blocks/payments-summary/payments-summary.module';
+import { ServiceListBlockModule } from '@o2s/api-harmonization/blocks/service-list/service-list.module';
 import { TicketDetailsBlockModule } from '@o2s/api-harmonization/blocks/ticket-details/ticket-details.module';
 import { TicketListBlockModule } from '@o2s/api-harmonization/blocks/ticket-list/ticket-list.module';
 import { TicketRecentBlockModule } from '@o2s/api-harmonization/blocks/ticket-recent/ticket-recent.module';
@@ -65,6 +67,7 @@ import { RoutesModule } from './modules/routes/routes.module';
         Invoices.Module.register(AppConfig),
         Articles.Module.register(AppConfig),
         Search.Module.register(AppConfig),
+        Products.Module.register(AppConfig),
 
         PageModule.register(AppConfig),
         RoutesModule.register(AppConfig),
@@ -76,16 +79,14 @@ import { RoutesModule } from './modules/routes/routes.module';
         NotificationListBlockModule.register(AppConfig),
         NotificationDetailsBlockModule.register(AppConfig),
         FaqBlockModule.register(AppConfig),
-        Articles.Module.register(AppConfig),
         ArticleDetailsBlockModule.register(AppConfig),
         ArticleListBlockModule.register(AppConfig),
-        Resources.Module.register(AppConfig),
-        Invoices.Module.register(AppConfig),
         InvoiceListBlockModule.register(AppConfig),
         PaymentsSummaryBlockModule.register(AppConfig),
         PaymentsHistoryBlockModule.register(AppConfig),
         UserAccountBlockModule.register(AppConfig),
         TicketRecentBlockModule.register(AppConfig),
+        ServiceListBlockModule.register(AppConfig),
         // COMPONENT REGISTER
     ],
     providers: [

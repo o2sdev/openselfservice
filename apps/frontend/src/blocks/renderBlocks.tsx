@@ -14,6 +14,8 @@ import { TicketListRenderer } from '@/blocks/TicketList/TicketList.renderer';
 import { TicketRecentRenderer } from '@/blocks/TicketRecent/TicketRecent.renderer';
 import { UserAccountRenderer } from '@/blocks/UserAccount/UserAccount.renderer';
 
+import { ServiceListRenderer } from './ServiceList/ServiceList.renderer';
+
 export const renderBlocks = (blocks: CMS.Model.Page.SlotBlock[], slug: string[], accessToken: string) => {
     return blocks.map((block) => {
         switch (block.__typename as Modules.Page.Model.Blocks) {
@@ -39,6 +41,8 @@ export const renderBlocks = (blocks: CMS.Model.Page.SlotBlock[], slug: string[],
                 return <PaymentsHistoryRenderer key={block.id} id={block.id} accessToken={accessToken} />;
             case 'UserAccountBlock':
                 return <UserAccountRenderer key={block.id} id={block.id} accessToken={accessToken} />;
+            case 'ServiceListBlock':
+                return <ServiceListRenderer key={block.id} id={block.id} accessToken={accessToken} />;
         }
     });
 };

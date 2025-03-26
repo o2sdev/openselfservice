@@ -19,6 +19,7 @@ import { mapPaymentsHistoryBlock } from './mappers/blocks/cms.payments-history.m
 import { mapPaymentsSummaryBlock } from './mappers/blocks/cms.payments-summary.mapper';
 import { mapResourceDetailsBlock } from './mappers/blocks/cms.resource-details.mapper';
 import { mapResourceListBlock } from './mappers/blocks/cms.resource-list.mapper';
+import { mapServiceListBlock } from './mappers/blocks/cms.service-list.mapper';
 import { mapTicketDetailsBlock } from './mappers/blocks/cms.ticket-details.mapper';
 import { mapTicketListBlock } from './mappers/blocks/cms.ticket-list.mapper';
 import { mapUserAccountBlock } from './mappers/blocks/cms.user-account.mapper';
@@ -336,5 +337,10 @@ export class CmsService implements CMS.Service {
         _options: CMS.Request.GetCmsEntryParams,
     ): Observable<CMS.Model.TicketRecentBlock.TicketRecentBlock> {
         throw new NotImplementedException();
+    }
+
+    getServiceListBlock(options: CMS.Request.GetCmsEntryParams) {
+        const key = `service-list-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapServiceListBlock)));
     }
 }

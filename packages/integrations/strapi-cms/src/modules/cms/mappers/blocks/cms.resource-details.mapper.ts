@@ -13,10 +13,10 @@ const MOCK_RESOURCE_DETAILS_COMPONENT: CMS.Model.ResourceDetailsBlock.ResourceDe
             EXPIRED: 'Expired',
             INACTIVE: 'Inactive',
         },
-        'product.type': {
-            PHYSICAL: 'Physical',
-            VIRTUAL: 'Virtual',
-        },
+        // 'product.type': {
+        //     PHYSICAL: 'Physical',
+        //     VIRTUAL: 'Virtual',
+        // },
     },
     properties: {
         id: 'Resource ID',
