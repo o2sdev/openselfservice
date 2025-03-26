@@ -31,6 +31,7 @@ import { NotificationDetailsBlockModule } from '@o2s/api-harmonization/blocks/no
 import { NotificationListBlockModule } from '@o2s/api-harmonization/blocks/notification-list/notification-list.module';
 import { PaymentsHistoryBlockModule } from '@o2s/api-harmonization/blocks/payments-history/payments-history.module';
 import { PaymentsSummaryBlockModule } from '@o2s/api-harmonization/blocks/payments-summary/payments-summary.module';
+import { ServiceDetailsBlockModule } from '@o2s/api-harmonization/blocks/service-details/service-details.module';
 import { ServiceListBlockModule } from '@o2s/api-harmonization/blocks/service-list/service-list.module';
 import { TicketDetailsBlockModule } from '@o2s/api-harmonization/blocks/ticket-details/ticket-details.module';
 import { TicketListBlockModule } from '@o2s/api-harmonization/blocks/ticket-list/ticket-list.module';
@@ -87,6 +88,7 @@ import { RoutesModule } from './modules/routes/routes.module';
         UserAccountBlockModule.register(AppConfig),
         TicketRecentBlockModule.register(AppConfig),
         ServiceListBlockModule.register(AppConfig),
+        ServiceDetailsBlockModule.register(AppConfig),
         // COMPONENT REGISTER
     ],
     providers: [

@@ -116,8 +116,8 @@ const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
                 },
                 {
                     __typename: 'NavigationItem',
-                    label: 'Dienste',
-                    url: '/dienste',
+                    label: 'Dienstleistungen',
+                    url: '/dienstleistungen',
                 },
             ],
         },
@@ -190,7 +190,7 @@ const MOCK_HEADER_LOGON_PL: CMS.Model.Header.Header = {
                 },
                 {
                     __typename: 'NavigationItem',
-                    label: 'Uslugi',
+                    label: 'Usługi',
                     url: '/uslugi',
                 },
             ],

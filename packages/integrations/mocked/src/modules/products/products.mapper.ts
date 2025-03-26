@@ -294,7 +294,8 @@ const MOCK_PRODUCT_10: Products.Model.Product = {
 const MOCK_PRODUCT_11: Products.Model.Product = {
     id: 'PRD-014',
     name: 'RapidFix Repair™ – Fast & Reliable Industrial Tool Repairs',
-    description: '<ul><li>Express Repairs</li><li>Genuine Parts</li><li>Warranty Protection</li></ul>',
+    description:
+        '<h2>RapidFix Repair™ – Fast & Reliable Industrial Tool Repairs</h2><ul><li>Express Repairs</li><li>Genuine Parts</li><li>Warranty Protection</li></ul>',
     shortDescription: '<ul><li>Express Repairs</li><li>Genuine Parts</li><li>Warranty Protection</li></ul>',
     image: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
