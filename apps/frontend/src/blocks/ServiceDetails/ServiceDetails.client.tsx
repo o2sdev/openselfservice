@@ -8,8 +8,7 @@ import { Badge } from '@o2s/ui/components/badge';
 import { Button } from '@o2s/ui/components/button';
 import { Separator } from '@o2s/ui/components/separator';
 import { TextItem } from '@o2s/ui/components/text-item';
-import { Tooltip, TooltipContent } from '@o2s/ui/components/tooltip';
-import { TooltipTrigger } from '@o2s/ui/components/tooltip';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@o2s/ui/components/tooltip';
 import { Typography } from '@o2s/ui/components/typography';
 
 import { statusBadgeVariants } from '@/utils/mappings/services-badge';
@@ -31,7 +30,7 @@ export const ServiceDetailsPure: React.FC<ServiceDetailsPureProps> = ({ ...compo
         <div className="w-full">
             <div className="flex flex-col gap-6">
                 <div className="flex gap-4 sm:gap-16 flex-col sm:flex-row flex-wrap sm:flex-nowrap justify-between">
-                    <div className="flex flex-col sm:flex-row gap-4 sm:items-center">
+                    <div className="flex flex-col sm:flex-row gap-4 sm:items-start">
                         <Typography variant="h1" asChild>
                             <h1>{service.name}</h1>
                         </Typography>
