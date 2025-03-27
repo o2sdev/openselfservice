@@ -167,6 +167,9 @@ const PAGE_TICKET_LIST_EN: CMS.Model.Page.Page = {
     hasOwnTitle: false,
     parent: {
         slug: '/',
+        seo: {
+            title: 'Dashboard',
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -206,6 +209,9 @@ const PAGE_TICKET_LIST_DE: CMS.Model.Page.Page = {
     hasOwnTitle: false,
     parent: {
         slug: '/',
+        seo: {
+            title: 'Startseite',
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -245,6 +251,9 @@ const PAGE_TICKET_LIST_PL: CMS.Model.Page.Page = {
     hasOwnTitle: false,
     parent: {
         slug: '/',
+        seo: {
+            title: 'Strona główna',
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -284,6 +293,15 @@ const PAGE_TICKET_DETAILS_EN: CMS.Model.Page.Page = {
     hasOwnTitle: true,
     parent: {
         slug: '/cases',
+        seo: {
+            title: 'Cases',
+        },
+        parent: {
+            slug: '/',
+            seo: {
+                title: 'Dashboard',
+            },
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -323,6 +341,15 @@ const PAGE_TICKET_DETAILS_DE: CMS.Model.Page.Page = {
     hasOwnTitle: true,
     parent: {
         slug: '/faelle',
+        seo: {
+            title: 'Fälle',
+        },
+        parent: {
+            slug: '/',
+            seo: {
+                title: 'Startseite',
+            },
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -362,6 +389,15 @@ const PAGE_TICKET_DETAILS_PL: CMS.Model.Page.Page = {
     hasOwnTitle: true,
     parent: {
         slug: '/zgloszenia',
+        seo: {
+            title: 'Zgłoszenia',
+        },
+        parent: {
+            slug: '/',
+            seo: {
+                title: 'Strona główna',
+            },
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -401,6 +437,9 @@ const PAGE_NOTIFICATION_LIST_EN: CMS.Model.Page.Page = {
     hasOwnTitle: false,
     parent: {
         slug: '/',
+        seo: {
+            title: 'Dashboard',
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -440,6 +479,9 @@ const PAGE_NOTIFICATION_LIST_DE: CMS.Model.Page.Page = {
     hasOwnTitle: false,
     parent: {
         slug: '/',
+        seo: {
+            title: 'Dashboard',
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -479,6 +521,9 @@ const PAGE_NOTIFICATION_LIST_PL: CMS.Model.Page.Page = {
     hasOwnTitle: false,
     parent: {
         slug: '/',
+        seo: {
+            title: 'Dashboard',
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -518,6 +563,9 @@ const PAGE_INVOICE_LIST_EN: CMS.Model.Page.Page = {
     hasOwnTitle: false,
     parent: {
         slug: '/',
+        seo: {
+            title: 'Dashboard',
+        },
     },
     template: {
         __typename: 'TwoColumnTemplate',
@@ -570,6 +618,9 @@ const PAGE_INVOICE_LIST_DE: CMS.Model.Page.Page = {
     hasOwnTitle: false,
     parent: {
         slug: '/',
+        seo: {
+            title: 'Startseite',
+        },
     },
     template: {
         __typename: 'TwoColumnTemplate',
@@ -622,6 +673,9 @@ const PAGE_INVOICE_LIST_PL: CMS.Model.Page.Page = {
     hasOwnTitle: false,
     parent: {
         slug: '/',
+        seo: {
+            title: 'Strona główna',
+        },
     },
     template: {
         __typename: 'TwoColumnTemplate',
@@ -674,6 +728,15 @@ const PAGE_NOTIFICATION_DETAILS_EN: CMS.Model.Page.Page = {
     hasOwnTitle: true,
     parent: {
         slug: '/notifications',
+        seo: {
+            title: 'Notifications',
+        },
+        parent: {
+            slug: '/',
+            seo: {
+                title: 'Dashboard',
+            },
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -713,6 +776,15 @@ const PAGE_NOTIFICATION_DETAILS_DE: CMS.Model.Page.Page = {
     hasOwnTitle: true,
     parent: {
         slug: '/benachrichtigungen',
+        seo: {
+            title: 'Benachrichtigungen',
+        },
+        parent: {
+            slug: '/',
+            seo: {
+                title: 'Startseite',
+            },
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -752,6 +824,15 @@ const PAGE_NOTIFICATION_DETAILS_PL: CMS.Model.Page.Page = {
     hasOwnTitle: true,
     parent: {
         slug: '/powiadomienia',
+        seo: {
+            title: 'Powiadomienia',
+        },
+        parent: {
+            slug: '/',
+            seo: {
+                title: 'Strona główna',
+            },
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -791,6 +872,9 @@ const PAGE_USER_ACCOUNT_EN: CMS.Model.Page.Page = {
     hasOwnTitle: true,
     parent: {
         slug: '/',
+        seo: {
+            title: 'Dashboard',
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -826,6 +910,9 @@ const PAGE_USER_ACCOUNT_DE: CMS.Model.Page.Page = {
     hasOwnTitle: true,
     parent: {
         slug: '/',
+        seo: {
+            title: 'Startseite',
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -861,6 +948,9 @@ const PAGE_USER_ACCOUNT_PL: CMS.Model.Page.Page = {
     hasOwnTitle: true,
     parent: {
         slug: '/',
+        seo: {
+            title: 'Strona główna',
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -896,6 +986,9 @@ const PAGE_SERVICE_LIST_EN: CMS.Model.Page.Page = {
     hasOwnTitle: false,
     parent: {
         slug: '/',
+        seo: {
+            title: 'Dashboard',
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -935,6 +1028,9 @@ const PAGE_SERVICE_LIST_DE: CMS.Model.Page.Page = {
     hasOwnTitle: false,
     parent: {
         slug: '/',
+        seo: {
+            title: 'Startseite',
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -974,6 +1070,9 @@ const PAGE_SERVICE_LIST_PL: CMS.Model.Page.Page = {
     hasOwnTitle: false,
     parent: {
         slug: '/',
+        seo: {
+            title: 'Strona główna',
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -1013,6 +1112,15 @@ const PAGE_SERVICE_DETAILS_EN: CMS.Model.Page.Page = {
     hasOwnTitle: true,
     parent: {
         slug: '/services',
+        seo: {
+            title: 'Services',
+        },
+        parent: {
+            slug: '/',
+            seo: {
+                title: 'Dashboard',
+            },
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -1052,6 +1160,15 @@ const PAGE_SERVICE_DETAILS_DE: CMS.Model.Page.Page = {
     hasOwnTitle: true,
     parent: {
         slug: '/dienstleistungen',
+        seo: {
+            title: 'Dienstleistungen',
+        },
+        parent: {
+            slug: '/',
+            seo: {
+                title: 'Startseite',
+            },
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -1091,6 +1208,15 @@ const PAGE_SERVICE_DETAILS_PL: CMS.Model.Page.Page = {
     hasOwnTitle: true,
     parent: {
         slug: '/uslugi',
+        seo: {
+            title: 'Usługi',
+        },
+        parent: {
+            slug: '/',
+            seo: {
+                title: 'Strona główna',
+            },
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
