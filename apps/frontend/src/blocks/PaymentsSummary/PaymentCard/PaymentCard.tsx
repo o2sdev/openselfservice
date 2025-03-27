@@ -1,10 +1,15 @@
 import { ArrowUpRight, CircleAlert, CreditCard } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
 import reactStringReplace from 'react-string-replace';
 
 import { Models } from '@o2s/framework/modules';
 
 import { Button } from '@o2s/ui/components/button';
 import { Card } from '@o2s/ui/components/card';
+import { Tooltip } from '@o2s/ui/components/tooltip';
+import { TooltipContent } from '@o2s/ui/components/tooltip';
+import { TooltipTrigger } from '@o2s/ui/components/tooltip';
 import { Typography } from '@o2s/ui/components/typography';
 import { cn } from '@o2s/ui/lib/utils';
 
@@ -14,6 +19,9 @@ import { PaymentCardProps } from './PaymentCard.types';
 
 export const PaymentCard: React.FC<PaymentCardProps> = ({ data, variant = 'default' }) => {
     const { title, amount, message, noPaymentsMessage, buttonLabel, overdueDays, currency } = data;
+
+    const t = useTranslations();
+    const [isTooltipOpen, setIsTooltipOpen] = useState(false);
 
     const activeState = amount.value > 0;
 
@@ -61,15 +69,22 @@ export const PaymentCard: React.FC<PaymentCardProps> = ({ data, variant = 'defau
                         )}
                     </div>
                     {activeState && buttonLabel && (
-                        <Button
-                            variant={variant === 'destructive' ? 'destructive' : 'secondary'}
-                            size="sm"
-                            onClick={() => console.log('clicked')}
-                            className="flex items-center gap-2"
-                        >
-                            <ArrowUpRight className="h-4 w-4" />
-                            {buttonLabel}
-                        </Button>
+                        <Tooltip open={isTooltipOpen} onOpenChange={setIsTooltipOpen}>
+                            <TooltipTrigger asChild>
+                                <Button
+                                    variant={variant === 'destructive' ? 'destructive' : 'secondary'}
+                                    size="sm"
+                                    onClick={() => setIsTooltipOpen(true)}
+                                    className="flex items-center gap-2"
+                                >
+                                    <ArrowUpRight className="h-4 w-4" />
+                                    {buttonLabel}
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <p>{t('general.comingSoon')}</p>
+                            </TooltipContent>
+                        </Tooltip>
                     )}
                 </div>
             </div>

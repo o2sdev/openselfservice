@@ -1,0 +1,12 @@
+fragment ServiceDetailsComponent on ComponentComponentsServiceDetails {
+    __typename
+    id
+    title
+    fields {
+        ...FieldMapping
+    }
+    properties {
+        key
+        value
+    }
+}

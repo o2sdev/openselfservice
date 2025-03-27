@@ -15,9 +15,9 @@ import { CardProps } from './Card.types';
 
 export const Card: React.FC<CardProps> = ({ title, description, price, image, tags, status, link }) => {
     return (
-        <div className={cn('flex flex-col bg-card rounded-lg border border-border shadow-sm relative w-full')}>
+        <div className={cn('flex flex-col bg-card rounded-lg border border-border shadow-sm relative w-full h-full')}>
             {/* Image section */}
-            <div className="relative overflow-hidden h-[180px] rounded-t-lg">
+            <div className="relative overflow-hidden h-[180px] flex-shrink-0 rounded-t-lg">
                 {image.url && image.alternativeText && (
                     <Image
                         src={image.url}
@@ -28,16 +28,16 @@ export const Card: React.FC<CardProps> = ({ title, description, price, image, ta
                     />
                 )}
             </div>
-            <div className="p-6 flex flex-col gap-6">
+            <div className="p-6 flex flex-col gap-6 h-full">
                 {/* Content section */}
-                <div className="flex flex-col">
+                <div className="flex flex-col h-full">
                     <div className="flex flex-col gap-4">
                         <Typography variant="highlightedSmall" className="line-clamp-2">
                             {title}
                         </Typography>
 
                         {tags && tags.length > 0 && (
-                            <ul className="flex flex-wrap gap-2 absolute top-[166px] left-6">
+                            <ul className="flex flex-wrap gap-2 absolute top-[165px] left-6">
                                 {tags.map((tag) => (
                                     <li key={tag.label}>
                                         <Badge variant={tag.variant}>{tag.label}</Badge>

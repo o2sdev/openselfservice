@@ -52,7 +52,7 @@ export const RichText: FC<RichTextProps> = ({ content, baseFontSize = 'body', cl
             props: {
                 variant: 'h2',
                 tag: 'h2',
-                className: 'mt-10 pb-2 border-b border-gray-200',
+                className: 'mt-10 pb-2 border-b border-border',
             },
         },
         h3: {

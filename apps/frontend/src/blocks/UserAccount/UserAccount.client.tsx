@@ -1,10 +1,12 @@
 'use client';
 
-import React from 'react';
+import { useTranslations } from 'next-intl';
+import React, { useState } from 'react';
 
 import { Button } from '@o2s/ui/components/button';
 import { Separator } from '@o2s/ui/components/separator';
 import { TextItem } from '@o2s/ui/components/text-item';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@o2s/ui/components/tooltip';
 import { Typography } from '@o2s/ui/components/typography';
 
 import { Container } from '@/components/Container/Container';
@@ -14,6 +16,9 @@ import { UserAccountPureProps } from './UserAccount.types';
 
 export const UserAccountPure: React.FC<UserAccountPureProps> = (component) => {
     const { fields, labels, basicInformationTitle, basicInformationDescription, user, title } = component;
+
+    const t = useTranslations();
+    const [isTooltipOpen, setIsTooltipOpen] = useState(false);
 
     return (
         <div className="w-full">
@@ -42,9 +47,20 @@ export const UserAccountPure: React.FC<UserAccountPureProps> = (component) => {
                                     {basicInformationDescription}
                                 </Typography>
                             </div>
-                            <Button variant="outline" className="w-full md:w-fit" onClick={() => {}}>
-                                {labels.edit}
-                            </Button>
+                            <Tooltip open={isTooltipOpen} onOpenChange={setIsTooltipOpen}>
+                                <TooltipTrigger asChild>
+                                    <Button
+                                        variant="outline"
+                                        className="w-full md:w-fit"
+                                        onClick={() => setIsTooltipOpen(true)}
+                                    >
+                                        {labels.edit}
+                                    </Button>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    <p>{t('general.comingSoon')}</p>
+                                </TooltipContent>
+                            </Tooltip>
                         </div>
 
                         <Separator className="mt-6" />

@@ -440,6 +440,25 @@ export type ComponentComponentsQuickLinksPages_ConnectionArgs = {
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
+export type ComponentComponentsServiceDetails = {
+    fields: Array<Maybe<ComponentContentFieldMapping>>;
+    id: Scalars['ID']['output'];
+    properties: Array<Maybe<ComponentContentKeyValue>>;
+    title?: Maybe<Scalars['String']['output']>;
+};
+
+export type ComponentComponentsServiceDetailsFieldsArgs = {
+    filters?: InputMaybe<ComponentContentFieldMappingFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ComponentComponentsServiceDetailsPropertiesArgs = {
+    filters?: InputMaybe<ComponentContentKeyValueFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
 export type ComponentComponentsServiceList = {
     detailsLabel?: Maybe<Scalars['String']['output']>;
     detailsURL?: Maybe<Scalars['String']['output']>;
@@ -527,17 +546,10 @@ export type ComponentContentArticleSectionFiltersInput = {
 
 export type ComponentContentBanner = {
     altDescription?: Maybe<Scalars['String']['output']>;
-    buttons?: Maybe<Array<Maybe<ComponentContentLink>>>;
+    button?: Maybe<ComponentContentLink>;
     description?: Maybe<Scalars['String']['output']>;
     id: Scalars['ID']['output'];
-    overdue?: Maybe<ComponentContentInformationCard>;
     title: Scalars['String']['output'];
-};
-
-export type ComponentContentBannerButtonsArgs = {
-    filters?: InputMaybe<ComponentContentLinkFiltersInput>;
-    pagination?: InputMaybe<PaginationArg>;
-    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type ComponentContentDynamicZone =
@@ -552,6 +564,7 @@ export type ComponentContentDynamicZone =
     | ComponentComponentsPaymentsHistory
     | ComponentComponentsPaymentsSummary
     | ComponentComponentsQuickLinks
+    | ComponentComponentsServiceDetails
     | ComponentComponentsServiceList
     | ComponentComponentsTicketDetails
     | ComponentComponentsTicketList
@@ -725,15 +738,6 @@ export type ComponentContentLink = {
     url: Scalars['String']['output'];
 };
 
-export type ComponentContentLinkFiltersInput = {
-    and?: InputMaybe<Array<InputMaybe<ComponentContentLinkFiltersInput>>>;
-    ariaLabel?: InputMaybe<StringFilterInput>;
-    label?: InputMaybe<StringFilterInput>;
-    not?: InputMaybe<ComponentContentLinkFiltersInput>;
-    or?: InputMaybe<Array<InputMaybe<ComponentContentLinkFiltersInput>>>;
-    url?: InputMaybe<StringFilterInput>;
-};
-
 export type ComponentContentMessage = {
     description: Scalars['String']['output'];
     id: Scalars['ID']['output'];
@@ -872,7 +876,9 @@ export type ComponentLabelsActions = {
     id: Scalars['ID']['output'];
     logIn: Scalars['String']['output'];
     logOut: Scalars['String']['output'];
+    renew: Scalars['String']['output'];
     save: Scalars['String']['output'];
+    settings: Scalars['String']['output'];
     show: Scalars['String']['output'];
     showLess: Scalars['String']['output'];
     showMore: Scalars['String']['output'];
@@ -888,7 +894,9 @@ export type ComponentLabelsActionsInput = {
     id?: InputMaybe<Scalars['ID']['input']>;
     logIn?: InputMaybe<Scalars['String']['input']>;
     logOut?: InputMaybe<Scalars['String']['input']>;
+    renew?: InputMaybe<Scalars['String']['input']>;
     save?: InputMaybe<Scalars['String']['input']>;
+    settings?: InputMaybe<Scalars['String']['input']>;
     show?: InputMaybe<Scalars['String']['input']>;
     showLess?: InputMaybe<Scalars['String']['input']>;
     showMore?: InputMaybe<Scalars['String']['input']>;
@@ -1264,6 +1272,7 @@ export type GenericMorph =
     | ComponentComponentsPaymentsHistory
     | ComponentComponentsPaymentsSummary
     | ComponentComponentsQuickLinks
+    | ComponentComponentsServiceDetails
     | ComponentComponentsServiceList
     | ComponentComponentsTicketDetails
     | ComponentComponentsTicketList
@@ -2849,6 +2858,7 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
               pages: Array<Maybe<_RefType['Page']>>;
               pages_connection?: Maybe<_RefType['PageRelationResponseCollection']>;
           })
+        | ComponentComponentsServiceDetails
         | (Omit<ComponentComponentsServiceList, 'filters'> & { filters?: Maybe<_RefType['ComponentContentFilters']> })
         | ComponentComponentsTicketDetails
         | (Omit<ComponentComponentsTicketList, 'filters'> & { filters?: Maybe<_RefType['ComponentContentFilters']> })
@@ -2932,6 +2942,7 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
               pages: Array<Maybe<_RefType['Page']>>;
               pages_connection?: Maybe<_RefType['PageRelationResponseCollection']>;
           })
+        | ComponentComponentsServiceDetails
         | (Omit<ComponentComponentsServiceList, 'filters'> & { filters?: Maybe<_RefType['ComponentContentFilters']> })
         | ComponentComponentsTicketDetails
         | (Omit<ComponentComponentsTicketList, 'filters'> & { filters?: Maybe<_RefType['ComponentContentFilters']> })
@@ -3202,6 +3213,7 @@ export type ResolversTypes = {
             pages_connection?: Maybe<ResolversTypes['PageRelationResponseCollection']>;
         }
     >;
+    ComponentComponentsServiceDetails: ResolverTypeWrapper<ComponentComponentsServiceDetails>;
     ComponentComponentsServiceList: ResolverTypeWrapper<
         Omit<ComponentComponentsServiceList, 'filters'> & { filters?: Maybe<ResolversTypes['ComponentContentFilters']> }
     >;
@@ -3240,7 +3252,6 @@ export type ResolversTypes = {
     ComponentContentKeywordFiltersInput: ComponentContentKeywordFiltersInput;
     ComponentContentKeywordInput: ComponentContentKeywordInput;
     ComponentContentLink: ResolverTypeWrapper<ComponentContentLink>;
-    ComponentContentLinkFiltersInput: ComponentContentLinkFiltersInput;
     ComponentContentMessage: ResolverTypeWrapper<ComponentContentMessage>;
     ComponentContentMessageFiltersInput: ComponentContentMessageFiltersInput;
     ComponentContentMessageSimple: ResolverTypeWrapper<ComponentContentMessageSimple>;
@@ -3595,6 +3606,7 @@ export type ResolversParentTypes = {
         pages: Array<Maybe<ResolversParentTypes['Page']>>;
         pages_connection?: Maybe<ResolversParentTypes['PageRelationResponseCollection']>;
     };
+    ComponentComponentsServiceDetails: ComponentComponentsServiceDetails;
     ComponentComponentsServiceList: Omit<ComponentComponentsServiceList, 'filters'> & {
         filters?: Maybe<ResolversParentTypes['ComponentContentFilters']>;
     };
@@ -3629,7 +3641,6 @@ export type ResolversParentTypes = {
     ComponentContentKeywordFiltersInput: ComponentContentKeywordFiltersInput;
     ComponentContentKeywordInput: ComponentContentKeywordInput;
     ComponentContentLink: ComponentContentLink;
-    ComponentContentLinkFiltersInput: ComponentContentLinkFiltersInput;
     ComponentContentMessage: ComponentContentMessage;
     ComponentContentMessageFiltersInput: ComponentContentMessageFiltersInput;
     ComponentContentMessageSimple: ComponentContentMessageSimple;
@@ -4262,6 +4273,28 @@ export type ComponentComponentsQuickLinksResolvers<
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type ComponentComponentsServiceDetailsResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentComponentsServiceDetails'] = ResolversParentTypes['ComponentComponentsServiceDetails'],
+> = {
+    fields?: Resolver<
+        Array<Maybe<ResolversTypes['ComponentContentFieldMapping']>>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentComponentsServiceDetailsFieldsArgs, 'pagination' | 'sort'>
+    >;
+    id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    properties?: Resolver<
+        Array<Maybe<ResolversTypes['ComponentContentKeyValue']>>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentComponentsServiceDetailsPropertiesArgs, 'pagination' | 'sort'>
+    >;
+    title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type ComponentComponentsServiceListResolvers<
     ContextType = any,
     ParentType extends
@@ -4364,15 +4397,9 @@ export type ComponentContentBannerResolvers<
     ParentType extends ResolversParentTypes['ComponentContentBanner'] = ResolversParentTypes['ComponentContentBanner'],
 > = {
     altDescription?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-    buttons?: Resolver<
-        Maybe<Array<Maybe<ResolversTypes['ComponentContentLink']>>>,
-        ParentType,
-        ContextType,
-        RequireFields<ComponentContentBannerButtonsArgs, 'pagination' | 'sort'>
-    >;
+    button?: Resolver<Maybe<ResolversTypes['ComponentContentLink']>, ParentType, ContextType>;
     description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-    overdue?: Resolver<Maybe<ResolversTypes['ComponentContentInformationCard']>, ParentType, ContextType>;
     title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -4394,6 +4421,7 @@ export type ComponentContentDynamicZoneResolvers<
         | 'ComponentComponentsPaymentsHistory'
         | 'ComponentComponentsPaymentsSummary'
         | 'ComponentComponentsQuickLinks'
+        | 'ComponentComponentsServiceDetails'
         | 'ComponentComponentsServiceList'
         | 'ComponentComponentsTicketDetails'
         | 'ComponentComponentsTicketList'
@@ -4700,7 +4728,9 @@ export type ComponentLabelsActionsResolvers<
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     logIn?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     logOut?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    renew?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     save?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    settings?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     show?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     showLess?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     showMore?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -5029,6 +5059,7 @@ export type GenericMorphResolvers<
         | 'ComponentComponentsPaymentsHistory'
         | 'ComponentComponentsPaymentsSummary'
         | 'ComponentComponentsQuickLinks'
+        | 'ComponentComponentsServiceDetails'
         | 'ComponentComponentsServiceList'
         | 'ComponentComponentsTicketDetails'
         | 'ComponentComponentsTicketList'
@@ -6287,6 +6318,7 @@ export type Resolvers<ContextType = any> = {
     ComponentComponentsPaymentsHistory?: ComponentComponentsPaymentsHistoryResolvers<ContextType>;
     ComponentComponentsPaymentsSummary?: ComponentComponentsPaymentsSummaryResolvers<ContextType>;
     ComponentComponentsQuickLinks?: ComponentComponentsQuickLinksResolvers<ContextType>;
+    ComponentComponentsServiceDetails?: ComponentComponentsServiceDetailsResolvers<ContextType>;
     ComponentComponentsServiceList?: ComponentComponentsServiceListResolvers<ContextType>;
     ComponentComponentsTicketDetails?: ComponentComponentsTicketDetailsResolvers<ContextType>;
     ComponentComponentsTicketList?: ComponentComponentsTicketListResolvers<ContextType>;
@@ -6407,6 +6439,7 @@ export type ComponentFragment = {
         | { __typename: 'ComponentComponentsPaymentsHistory' }
         | { __typename: 'ComponentComponentsPaymentsSummary' }
         | { __typename: 'ComponentComponentsQuickLinks' }
+        | { __typename: 'ComponentComponentsServiceDetails' }
         | { __typename: 'ComponentComponentsServiceList' }
         | { __typename: 'ComponentComponentsTicketDetails' }
         | { __typename: 'ComponentComponentsTicketList' }
@@ -6592,6 +6625,7 @@ export type PageFragment = {
                       | { __typename: 'ComponentComponentsPaymentsHistory' }
                       | { __typename: 'ComponentComponentsPaymentsSummary' }
                       | { __typename: 'ComponentComponentsQuickLinks' }
+                      | { __typename: 'ComponentComponentsServiceDetails' }
                       | { __typename: 'ComponentComponentsServiceList' }
                       | { __typename: 'ComponentComponentsTicketDetails' }
                       | { __typename: 'ComponentComponentsTicketList' }
@@ -6617,6 +6651,7 @@ export type PageFragment = {
                       | { __typename: 'ComponentComponentsPaymentsHistory' }
                       | { __typename: 'ComponentComponentsPaymentsSummary' }
                       | { __typename: 'ComponentComponentsQuickLinks' }
+                      | { __typename: 'ComponentComponentsServiceDetails' }
                       | { __typename: 'ComponentComponentsServiceList' }
                       | { __typename: 'ComponentComponentsTicketDetails' }
                       | { __typename: 'ComponentComponentsTicketList' }
@@ -6639,6 +6674,7 @@ export type PageFragment = {
                       | { __typename: 'ComponentComponentsPaymentsHistory' }
                       | { __typename: 'ComponentComponentsPaymentsSummary' }
                       | { __typename: 'ComponentComponentsQuickLinks' }
+                      | { __typename: 'ComponentComponentsServiceDetails' }
                       | { __typename: 'ComponentComponentsServiceList' }
                       | { __typename: 'ComponentComponentsTicketDetails' }
                       | { __typename: 'ComponentComponentsTicketList' }
@@ -6661,6 +6697,7 @@ export type PageFragment = {
                       | { __typename: 'ComponentComponentsPaymentsHistory' }
                       | { __typename: 'ComponentComponentsPaymentsSummary' }
                       | { __typename: 'ComponentComponentsQuickLinks' }
+                      | { __typename: 'ComponentComponentsServiceDetails' }
                       | { __typename: 'ComponentComponentsServiceList' }
                       | { __typename: 'ComponentComponentsTicketDetails' }
                       | { __typename: 'ComponentComponentsTicketList' }
@@ -6683,6 +6720,7 @@ export type PageFragment = {
                       | { __typename: 'ComponentComponentsPaymentsHistory' }
                       | { __typename: 'ComponentComponentsPaymentsSummary' }
                       | { __typename: 'ComponentComponentsQuickLinks' }
+                      | { __typename: 'ComponentComponentsServiceDetails' }
                       | { __typename: 'ComponentComponentsServiceList' }
                       | { __typename: 'ComponentComponentsTicketDetails' }
                       | { __typename: 'ComponentComponentsTicketList' }
@@ -6712,6 +6750,7 @@ type Template_ComponentTemplatesOneColumn_Fragment = {
             | { __typename: 'ComponentComponentsPaymentsHistory' }
             | { __typename: 'ComponentComponentsPaymentsSummary' }
             | { __typename: 'ComponentComponentsQuickLinks' }
+            | { __typename: 'ComponentComponentsServiceDetails' }
             | { __typename: 'ComponentComponentsServiceList' }
             | { __typename: 'ComponentComponentsTicketDetails' }
             | { __typename: 'ComponentComponentsTicketList' }
@@ -6738,6 +6777,7 @@ type Template_ComponentTemplatesTwoColumn_Fragment = {
             | { __typename: 'ComponentComponentsPaymentsHistory' }
             | { __typename: 'ComponentComponentsPaymentsSummary' }
             | { __typename: 'ComponentComponentsQuickLinks' }
+            | { __typename: 'ComponentComponentsServiceDetails' }
             | { __typename: 'ComponentComponentsServiceList' }
             | { __typename: 'ComponentComponentsTicketDetails' }
             | { __typename: 'ComponentComponentsTicketList' }
@@ -6760,6 +6800,7 @@ type Template_ComponentTemplatesTwoColumn_Fragment = {
             | { __typename: 'ComponentComponentsPaymentsHistory' }
             | { __typename: 'ComponentComponentsPaymentsSummary' }
             | { __typename: 'ComponentComponentsQuickLinks' }
+            | { __typename: 'ComponentComponentsServiceDetails' }
             | { __typename: 'ComponentComponentsServiceList' }
             | { __typename: 'ComponentComponentsTicketDetails' }
             | { __typename: 'ComponentComponentsTicketList' }
@@ -6782,6 +6823,7 @@ type Template_ComponentTemplatesTwoColumn_Fragment = {
             | { __typename: 'ComponentComponentsPaymentsHistory' }
             | { __typename: 'ComponentComponentsPaymentsSummary' }
             | { __typename: 'ComponentComponentsQuickLinks' }
+            | { __typename: 'ComponentComponentsServiceDetails' }
             | { __typename: 'ComponentComponentsServiceList' }
             | { __typename: 'ComponentComponentsTicketDetails' }
             | { __typename: 'ComponentComponentsTicketList' }
@@ -6804,6 +6846,7 @@ type Template_ComponentTemplatesTwoColumn_Fragment = {
             | { __typename: 'ComponentComponentsPaymentsHistory' }
             | { __typename: 'ComponentComponentsPaymentsSummary' }
             | { __typename: 'ComponentComponentsQuickLinks' }
+            | { __typename: 'ComponentComponentsServiceDetails' }
             | { __typename: 'ComponentComponentsServiceList' }
             | { __typename: 'ComponentComponentsTicketDetails' }
             | { __typename: 'ComponentComponentsTicketList' }
@@ -6830,7 +6873,7 @@ export type FaqComponentFragment = {
         title: string;
         description?: string;
         altDescription?: string;
-        buttons?: Array<{ label: string; ariaLabel?: string; url: string }>;
+        button?: { label: string; ariaLabel?: string; url: string };
     };
 };
 
@@ -6952,6 +6995,14 @@ export type PaymentsSummaryComponentFragment = {
     id: string;
     overdue?: { title?: string; message?: string; noPaymentsMessage?: string; buttonLabel?: string };
     toBePaid?: { title?: string; message?: string; noPaymentsMessage?: string; buttonLabel?: string };
+};
+
+export type ServiceDetailsComponentFragment = {
+    __typename: 'ComponentComponentsServiceDetails';
+    id: string;
+    title?: string;
+    fields: Array<{ name: string; values: Array<{ key: string; value: string }> }>;
+    properties: Array<{ key: string; value: string }>;
 };
 
 export type ServiceListComponentFragment = {
@@ -7084,7 +7135,7 @@ export type BannerFragment = {
     title: string;
     description?: string;
     altDescription?: string;
-    buttons?: Array<{ label: string; ariaLabel?: string; url: string }>;
+    button?: { label: string; ariaLabel?: string; url: string };
 };
 
 export type ErrorMessageComponentFragment = {
@@ -7205,6 +7256,7 @@ export type OneColumnTemplateFragment = {
             | { __typename: 'ComponentComponentsPaymentsHistory' }
             | { __typename: 'ComponentComponentsPaymentsSummary' }
             | { __typename: 'ComponentComponentsQuickLinks' }
+            | { __typename: 'ComponentComponentsServiceDetails' }
             | { __typename: 'ComponentComponentsServiceList' }
             | { __typename: 'ComponentComponentsTicketDetails' }
             | { __typename: 'ComponentComponentsTicketList' }
@@ -7230,6 +7282,7 @@ export type TwoColumnTemplateFragment = {
             | { __typename: 'ComponentComponentsPaymentsHistory' }
             | { __typename: 'ComponentComponentsPaymentsSummary' }
             | { __typename: 'ComponentComponentsQuickLinks' }
+            | { __typename: 'ComponentComponentsServiceDetails' }
             | { __typename: 'ComponentComponentsServiceList' }
             | { __typename: 'ComponentComponentsTicketDetails' }
             | { __typename: 'ComponentComponentsTicketList' }
@@ -7252,6 +7305,7 @@ export type TwoColumnTemplateFragment = {
             | { __typename: 'ComponentComponentsPaymentsHistory' }
             | { __typename: 'ComponentComponentsPaymentsSummary' }
             | { __typename: 'ComponentComponentsQuickLinks' }
+            | { __typename: 'ComponentComponentsServiceDetails' }
             | { __typename: 'ComponentComponentsServiceList' }
             | { __typename: 'ComponentComponentsTicketDetails' }
             | { __typename: 'ComponentComponentsTicketList' }
@@ -7274,6 +7328,7 @@ export type TwoColumnTemplateFragment = {
             | { __typename: 'ComponentComponentsPaymentsHistory' }
             | { __typename: 'ComponentComponentsPaymentsSummary' }
             | { __typename: 'ComponentComponentsQuickLinks' }
+            | { __typename: 'ComponentComponentsServiceDetails' }
             | { __typename: 'ComponentComponentsServiceList' }
             | { __typename: 'ComponentComponentsTicketDetails' }
             | { __typename: 'ComponentComponentsTicketList' }
@@ -7296,6 +7351,7 @@ export type TwoColumnTemplateFragment = {
             | { __typename: 'ComponentComponentsPaymentsHistory' }
             | { __typename: 'ComponentComponentsPaymentsSummary' }
             | { __typename: 'ComponentComponentsQuickLinks' }
+            | { __typename: 'ComponentComponentsServiceDetails' }
             | { __typename: 'ComponentComponentsServiceList' }
             | { __typename: 'ComponentComponentsTicketDetails' }
             | { __typename: 'ComponentComponentsTicketList' }
@@ -7336,7 +7392,7 @@ export type GetComponentQuery = {
                       title: string;
                       description?: string;
                       altDescription?: string;
-                      buttons?: Array<{ label: string; ariaLabel?: string; url: string }>;
+                      button?: { label: string; ariaLabel?: string; url: string };
                   };
               }
             | {
@@ -7458,6 +7514,13 @@ export type GetComponentQuery = {
                   toBePaid?: { title?: string; message?: string; noPaymentsMessage?: string; buttonLabel?: string };
               }
             | { __typename: 'ComponentComponentsQuickLinks' }
+            | {
+                  __typename: 'ComponentComponentsServiceDetails';
+                  id: string;
+                  title?: string;
+                  fields: Array<{ name: string; values: Array<{ key: string; value: string }> }>;
+                  properties: Array<{ key: string; value: string }>;
+              }
             | {
                   __typename: 'ComponentComponentsServiceList';
                   id: string;
@@ -7599,6 +7662,8 @@ export type GetComponentQuery = {
             cancel: string;
             delete: string;
             logOut: string;
+            settings: string;
+            renew: string;
         };
     };
 };
@@ -7790,6 +7855,7 @@ export type GetPageQuery = {
                           | { __typename: 'ComponentComponentsPaymentsHistory' }
                           | { __typename: 'ComponentComponentsPaymentsSummary' }
                           | { __typename: 'ComponentComponentsQuickLinks' }
+                          | { __typename: 'ComponentComponentsServiceDetails' }
                           | { __typename: 'ComponentComponentsServiceList' }
                           | { __typename: 'ComponentComponentsTicketDetails' }
                           | { __typename: 'ComponentComponentsTicketList' }
@@ -7815,6 +7881,7 @@ export type GetPageQuery = {
                           | { __typename: 'ComponentComponentsPaymentsHistory' }
                           | { __typename: 'ComponentComponentsPaymentsSummary' }
                           | { __typename: 'ComponentComponentsQuickLinks' }
+                          | { __typename: 'ComponentComponentsServiceDetails' }
                           | { __typename: 'ComponentComponentsServiceList' }
                           | { __typename: 'ComponentComponentsTicketDetails' }
                           | { __typename: 'ComponentComponentsTicketList' }
@@ -7837,6 +7904,7 @@ export type GetPageQuery = {
                           | { __typename: 'ComponentComponentsPaymentsHistory' }
                           | { __typename: 'ComponentComponentsPaymentsSummary' }
                           | { __typename: 'ComponentComponentsQuickLinks' }
+                          | { __typename: 'ComponentComponentsServiceDetails' }
                           | { __typename: 'ComponentComponentsServiceList' }
                           | { __typename: 'ComponentComponentsTicketDetails' }
                           | { __typename: 'ComponentComponentsTicketList' }
@@ -7859,6 +7927,7 @@ export type GetPageQuery = {
                           | { __typename: 'ComponentComponentsPaymentsHistory' }
                           | { __typename: 'ComponentComponentsPaymentsSummary' }
                           | { __typename: 'ComponentComponentsQuickLinks' }
+                          | { __typename: 'ComponentComponentsServiceDetails' }
                           | { __typename: 'ComponentComponentsServiceList' }
                           | { __typename: 'ComponentComponentsTicketDetails' }
                           | { __typename: 'ComponentComponentsTicketList' }
@@ -7881,6 +7950,7 @@ export type GetPageQuery = {
                           | { __typename: 'ComponentComponentsPaymentsHistory' }
                           | { __typename: 'ComponentComponentsPaymentsSummary' }
                           | { __typename: 'ComponentComponentsQuickLinks' }
+                          | { __typename: 'ComponentComponentsServiceDetails' }
                           | { __typename: 'ComponentComponentsServiceList' }
                           | { __typename: 'ComponentComponentsTicketDetails' }
                           | { __typename: 'ComponentComponentsTicketList' }
@@ -7934,6 +8004,7 @@ export type GetPagesQuery = {
                           | { __typename: 'ComponentComponentsPaymentsHistory' }
                           | { __typename: 'ComponentComponentsPaymentsSummary' }
                           | { __typename: 'ComponentComponentsQuickLinks' }
+                          | { __typename: 'ComponentComponentsServiceDetails' }
                           | { __typename: 'ComponentComponentsServiceList' }
                           | { __typename: 'ComponentComponentsTicketDetails' }
                           | { __typename: 'ComponentComponentsTicketList' }
@@ -7959,6 +8030,7 @@ export type GetPagesQuery = {
                           | { __typename: 'ComponentComponentsPaymentsHistory' }
                           | { __typename: 'ComponentComponentsPaymentsSummary' }
                           | { __typename: 'ComponentComponentsQuickLinks' }
+                          | { __typename: 'ComponentComponentsServiceDetails' }
                           | { __typename: 'ComponentComponentsServiceList' }
                           | { __typename: 'ComponentComponentsTicketDetails' }
                           | { __typename: 'ComponentComponentsTicketList' }
@@ -7981,6 +8053,7 @@ export type GetPagesQuery = {
                           | { __typename: 'ComponentComponentsPaymentsHistory' }
                           | { __typename: 'ComponentComponentsPaymentsSummary' }
                           | { __typename: 'ComponentComponentsQuickLinks' }
+                          | { __typename: 'ComponentComponentsServiceDetails' }
                           | { __typename: 'ComponentComponentsServiceList' }
                           | { __typename: 'ComponentComponentsTicketDetails' }
                           | { __typename: 'ComponentComponentsTicketList' }
@@ -8003,6 +8076,7 @@ export type GetPagesQuery = {
                           | { __typename: 'ComponentComponentsPaymentsHistory' }
                           | { __typename: 'ComponentComponentsPaymentsSummary' }
                           | { __typename: 'ComponentComponentsQuickLinks' }
+                          | { __typename: 'ComponentComponentsServiceDetails' }
                           | { __typename: 'ComponentComponentsServiceList' }
                           | { __typename: 'ComponentComponentsTicketDetails' }
                           | { __typename: 'ComponentComponentsTicketList' }
@@ -8025,6 +8099,7 @@ export type GetPagesQuery = {
                           | { __typename: 'ComponentComponentsPaymentsHistory' }
                           | { __typename: 'ComponentComponentsPaymentsSummary' }
                           | { __typename: 'ComponentComponentsQuickLinks' }
+                          | { __typename: 'ComponentComponentsServiceDetails' }
                           | { __typename: 'ComponentComponentsServiceList' }
                           | { __typename: 'ComponentComponentsTicketDetails' }
                           | { __typename: 'ComponentComponentsTicketList' }
@@ -8296,7 +8371,7 @@ export const BannerFragmentDoc = gql`
         title
         description
         altDescription
-        buttons {
+        button {
             label
             ariaLabel
             url
@@ -8491,6 +8566,21 @@ export const PaymentsSummaryComponentFragmentDoc = gql`
         }
     }
 `;
+export const ServiceDetailsComponentFragmentDoc = gql`
+    fragment ServiceDetailsComponent on ComponentComponentsServiceDetails {
+        __typename
+        id
+        title
+        fields {
+            ...FieldMapping
+        }
+        properties {
+            key
+            value
+        }
+    }
+    ${FieldMappingFragmentDoc}
+`;
 export const ServiceListComponentFragmentDoc = gql`
     fragment ServiceListComponent on ComponentComponentsServiceList {
         __typename
@@ -8617,6 +8707,9 @@ export const GetComponentDocument = gql`
                 ... on ComponentComponentsServiceList {
                     ...ServiceListComponent
                 }
+                ... on ComponentComponentsServiceDetails {
+                    ...ServiceDetailsComponent
+                }
             }
         }
         configurableTexts(locale: $locale) {
@@ -8634,6 +8727,8 @@ export const GetComponentDocument = gql`
                 cancel
                 delete
                 logOut
+                settings
+                renew
             }
         }
     }
@@ -8646,6 +8741,7 @@ export const GetComponentDocument = gql`
     ${PaymentsHistoryComponentFragmentDoc}
     ${UserAccountComponentFragmentDoc}
     ${ServiceListComponentFragmentDoc}
+    ${ServiceDetailsComponentFragmentDoc}
 `;
 export const GetFooterDocument = gql`
     query getFooter($locale: I18NLocaleCode!, $id: ID!) {

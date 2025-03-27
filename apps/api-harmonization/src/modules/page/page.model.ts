@@ -7,6 +7,7 @@ import {
     NotificationList,
     PaymentsHistory,
     PaymentsSummary,
+    ServiceDetails,
     ServiceList,
     TicketDetails,
     TicketList,
@@ -63,4 +64,5 @@ export type Blocks =
     | PaymentsHistory.Model.PaymentsHistoryBlock['__typename']
     | UserAccount.Model.UserAccountBlock['__typename']
     | TicketRecent.Model.TicketRecentBlock['__typename']
-    | ServiceList.Model.ServiceListBlock['__typename'];
+    | ServiceList.Model.ServiceListBlock['__typename']
+    | ServiceDetails.Model.ServiceDetailsBlock['__typename'];

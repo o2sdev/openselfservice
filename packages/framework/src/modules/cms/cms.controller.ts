@@ -113,4 +113,14 @@ export class CmsController {
     getUserAccountBlock(@Query() params: Request.GetCmsEntryParams) {
         return this.cms.getUserAccountBlock(params);
     }
+
+    @Get('/blocks/service-list')
+    getServiceListBlock(@Query() params: Request.GetCmsEntryParams) {
+        return this.cms.getServiceListBlock(params);
+    }
+
+    @Get('/blocks/service-details')
+    getServiceDetailsBlock(@Query() params: Request.GetCmsEntryParams) {
+        return this.cms.getServiceDetailsBlock(params);
+    }
 }
