@@ -12,7 +12,7 @@
         --popover-foreground: 240 10% 4%;
         --primary: 228 66% 50%;
         --primary-foreground: 0 0% 100%;
-        --secondary: 228 100% 19%;
+        --secondary: 231 6% 45%;
         --secondary-foreground: 0 0% 100%;
         --muted: 232 12% 87%;
         --muted-foreground: 220 9% 46%;
@@ -53,9 +53,13 @@
         --footer-muted: 230 5% 48%;
         --footer-border: 230 6% 81%;
         --navbar-sub-muted: 228 78% 35%;
-        --navbar-action-background: 0 0% 100%;
-        --navbar-action-foregound: 228 100% 19%;
-        --navbar-action-border: 230 6% 81%;
+        --tertiary: 0 0% 100%;
+        --tertiary-foreground: 228 100% 19%;
+        --tertiary-border: 230 6% 81%;
+        --badge-default-background: 186 100% 28%;
+        --badge-secondary-background: 31 97% 72%;
+        --badge-default-foreground: 0 0% 100%;
+        --badge-secondary-foreground: 0 0% 0%;
     }
 
     .dark {
@@ -108,9 +112,13 @@
         --footer-muted: 230 5% 48%;
         --footer-border: 230 6% 81%;
         --navbar-sub-muted: 228 78% 35%;
-        --navbar-action-background: 0 0% 100%;
-        --navbar-action-foregound: 228 100% 19%;
-        --navbar-action-border: 230 6% 81%;
+        --badge-default-background: 186 100% 28%;
+        --badge-secondary-background: 31 97% 72%;
+        --badge-default-foreground: 0 0% 100%;
+        --badge-secondary-foreground: 0 0% 0%;
+        --tertiary: 228 32% 15%;
+        --tertiary-foreground: 228 71% 91%;
+        --tertiary-border: 234 25% 92%;
     }
 }
 

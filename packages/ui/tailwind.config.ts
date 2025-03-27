@@ -3,10 +3,7 @@ import tailwindcssAnimate from 'tailwindcss-animate';
 
 const config = {
     darkMode: ['class'],
-    content: [
-        "./src/**/*.{js,ts,jsx,tsx,mdx}",
-        '../../packages/ui/src/components/**/*.{ts,tsx}',
-    ],
+    content: ['./src/**/*.{js,ts,jsx,tsx,mdx}', '../../packages/ui/src/components/**/*.{ts,tsx}'],
     theme: {
         fontFamily: {
             sans: ['Inter', 'sans-serif'],
@@ -15,10 +12,10 @@ const config = {
             center: true,
             padding: '2rem',
             screens: {
-                'sm': '640px',
-                'md': '768px',
-                'lg': '1024px',
-                'xl': '1280px',
+                sm: '640px',
+                md: '768px',
+                lg: '1024px',
+                xl: '1280px',
                 '2xl': '1536px',
             },
         },
@@ -36,6 +33,11 @@ const config = {
                 secondary: {
                     DEFAULT: 'hsl(var(--secondary))',
                     foreground: 'hsl(var(--secondary-foreground))',
+                },
+                tertiary: {
+                    DEFAULT: 'hsl(var(--tertiary))',
+                    foreground: 'hsl(var(--tertiary-foreground))',
+                    border: 'hsl(var(--tertiary-border))',
                 },
                 destructive: {
                     DEFAULT: 'hsl(var(--destructive))',

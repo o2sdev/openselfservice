@@ -19,7 +19,7 @@ export const ContextSwitcher = ({ context }: ContextSwitcherProps) => {
         <Sheet open={isCompanyMenuOpen} onOpenChange={setIsCompanyMenuOpen}>
             <SheetTrigger asChild>
                 <Button
-                    variant="secondary"
+                    variant="tertiary"
                     className="max-w-full md:max-w-[130px] lg:max-w-[330px] justify-between"
                     onClick={() => setIsCompanyMenuOpen((prev) => !prev)}
                 >
