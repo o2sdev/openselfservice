@@ -6598,7 +6598,6 @@ export type PageFragment = {
     publishedAt?: any;
     documentId: string;
     hasOwnTitle: boolean;
-    parent?: { slug: string };
     SEO: {
         title: string;
         noIndex: boolean;
@@ -6606,6 +6605,11 @@ export type PageFragment = {
         description: string;
         keywords?: Array<{ keyword: string }>;
         image?: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
+    };
+    parent?: {
+        slug: string;
+        SEO: { title: string };
+        parent?: { slug: string; SEO: { title: string }; parent?: { slug: string; SEO: { title: string } } };
     };
     template: Array<
         | {
@@ -7828,7 +7832,6 @@ export type GetPageQuery = {
         publishedAt?: any;
         documentId: string;
         hasOwnTitle: boolean;
-        parent?: { slug: string };
         SEO: {
             title: string;
             noIndex: boolean;
@@ -7836,6 +7839,11 @@ export type GetPageQuery = {
             description: string;
             keywords?: Array<{ keyword: string }>;
             image?: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
+        };
+        parent?: {
+            slug: string;
+            SEO: { title: string };
+            parent?: { slug: string; SEO: { title: string }; parent?: { slug: string; SEO: { title: string } } };
         };
         template: Array<
             | {
@@ -7977,7 +7985,6 @@ export type GetPagesQuery = {
         publishedAt?: any;
         documentId: string;
         hasOwnTitle: boolean;
-        parent?: { slug: string };
         SEO: {
             title: string;
             noIndex: boolean;
@@ -7985,6 +7992,11 @@ export type GetPagesQuery = {
             description: string;
             keywords?: Array<{ keyword: string }>;
             image?: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
+        };
+        parent?: {
+            slug: string;
+            SEO: { title: string };
+            parent?: { slug: string; SEO: { title: string }; parent?: { slug: string; SEO: { title: string } } };
         };
         template: Array<
             | {
@@ -8333,11 +8345,26 @@ export const PageFragmentDoc = gql`
         publishedAt
         documentId
         hasOwnTitle
-        parent {
-            slug
-        }
         SEO {
             ...Seo
+        }
+        parent {
+            slug
+            SEO {
+                title
+            }
+            parent {
+                slug
+                SEO {
+                    title
+                }
+                parent {
+                    slug
+                    SEO {
+                        title
+                    }
+                }
+            }
         }
         template {
             __typename

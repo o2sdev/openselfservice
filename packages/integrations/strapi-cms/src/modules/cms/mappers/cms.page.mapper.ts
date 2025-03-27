@@ -26,6 +26,21 @@ export const mapPage = (data: PageFragment): CMS.Model.Page.Page => {
         hasOwnTitle: data.hasOwnTitle,
         parent: {
             slug: data.parent?.slug ?? '',
+            seo: {
+                title: data.parent?.SEO!.title ?? '',
+            },
+            parent: {
+                slug: data.parent?.parent?.slug ?? '',
+                seo: {
+                    title: data.parent?.parent?.SEO!.title ?? '',
+                },
+                parent: {
+                    slug: data.parent?.parent?.parent?.slug ?? '',
+                    seo: {
+                        title: data.parent?.parent?.parent?.SEO!.title ?? '',
+                    },
+                },
+            },
         },
     };
 };
@@ -52,6 +67,21 @@ export const mapAlternativePages = (data: PageFragment): CMS.Model.Page.Page => 
         hasOwnTitle: data.hasOwnTitle,
         parent: {
             slug: data.parent?.slug ?? '',
+            seo: {
+                title: data.parent?.SEO!.title ?? '',
+            },
+            parent: {
+                slug: data.parent?.parent?.slug ?? '',
+                seo: {
+                    title: data.parent?.parent?.SEO!.title ?? '',
+                },
+                parent: {
+                    slug: data.parent?.parent?.parent?.slug ?? '',
+                    seo: {
+                        title: data.parent?.parent?.parent?.SEO!.title ?? '',
+                    },
+                },
+            },
         },
     };
 };

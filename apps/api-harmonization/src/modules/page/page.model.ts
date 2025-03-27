@@ -34,10 +34,12 @@ export class NotFound {
 
 export class Metadata {
     seo!: Models.SEO.Page;
-    parent?: {
-        slug: string;
-    };
     locales!: string[];
+}
+
+export class Breadcrumb {
+    slug!: string;
+    label!: string;
 }
 
 export class PageCommon {
@@ -51,6 +53,7 @@ export class PageData {
     };
     template!: CMS.Model.Page.PageTemplate;
     hasOwnTitle!: boolean;
+    breadcrumbs!: Breadcrumb[];
 }
 
 export type Blocks =

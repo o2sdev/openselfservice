@@ -10,6 +10,15 @@ export class Page {
     hasOwnTitle!: boolean;
     parent!: {
         slug: string;
+        seo?: Pick<Models.SEO.Page, 'title'>;
+        parent?: {
+            slug: string;
+            seo?: Pick<Models.SEO.Page, 'title'>;
+            parent?: {
+                slug: string;
+                seo?: Pick<Models.SEO.Page, 'title'>;
+            };
+        };
     };
 }
 

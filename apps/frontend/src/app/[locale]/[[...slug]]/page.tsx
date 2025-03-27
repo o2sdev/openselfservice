@@ -14,6 +14,7 @@ import { auth, signIn } from '@/auth';
 
 import { PageTemplate } from '@/templates/PageTemplate/PageTemplate';
 
+import { Breadcrumbs } from '@/components/Breadcrumbs/Breadcrumbs';
 import { Client } from '@/components/Client';
 
 interface Props {
@@ -89,14 +90,17 @@ export default async function Page({ params }: Props) {
             <main className="flex flex-col gap-6 row-start-2 items-center sm:items-start">
                 <Client page={data} />
 
-                {!data.hasOwnTitle && (
-                    <div className="flex flex-col gap-6 w-full">
-                        <Typography variant="h1" asChild>
-                            <h1>{meta.seo.title}</h1>
-                        </Typography>
-                        <Separator />
-                    </div>
-                )}
+                <div className="flex flex-col gap-6 w-full">
+                    <Breadcrumbs breadcrumbs={data.breadcrumbs} />
+                    {!data.hasOwnTitle && (
+                        <>
+                            <Typography variant="h1" asChild>
+                                <h1>{meta.seo.title}</h1>
+                            </Typography>
+                            <Separator />
+                        </>
+                    )}
+                </div>
 
                 <PageTemplate slug={slug} data={data} session={session} />
             </main>
