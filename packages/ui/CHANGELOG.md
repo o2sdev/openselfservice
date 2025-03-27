@@ -1,5 +1,12 @@
 # @o2s/ui
 
+## 0.11.0
+
+### Minor Changes
+
+- 92be116: added Price model, services page implemented
+- 52b3e0a: add tooltips to mocked buttons
+
 ## 0.10.2
 
 ### Patch Changes

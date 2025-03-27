@@ -1,5 +1,12 @@
 # @o2s/docs
 
+## 0.10.3
+
+### Patch Changes
+
+- 3da4e3e: fix(docs): blog - css and content fixes
+- 3da4e3e: blog redesign and new posts
+
 ## 0.10.2
 
 ### Patch Changes
