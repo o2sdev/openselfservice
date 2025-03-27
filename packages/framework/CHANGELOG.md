@@ -1,5 +1,15 @@
 # @o2s/framework
 
+## 0.19.0
+
+### Minor Changes
+
+- 35eeac7: implement service details page
+- 92be116: added Price model, services page implemented
+- 92be116: implement services page
+- 35eeac7: implement service details page
+- 52b3e0a: add tooltips to mocked buttons
+
 ## 0.18.0
 
 ### Minor Changes
