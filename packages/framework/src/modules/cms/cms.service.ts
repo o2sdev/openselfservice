@@ -86,4 +86,12 @@ export abstract class CmsService {
     abstract getTicketRecentBlock(
         options: CMS.Request.GetCmsEntryParams,
     ): Observable<CMS.Model.TicketRecentBlock.TicketRecentBlock>;
+
+    abstract getServiceListBlock(
+        options: CMS.Request.GetCmsEntryParams,
+    ): Observable<CMS.Model.ServiceListBlock.ServiceListBlock>;
+
+    abstract getServiceDetailsBlock(
+        options: CMS.Request.GetCmsEntryParams,
+    ): Observable<CMS.Model.ServiceDetailsBlock.ServiceDetailsBlock>;
 }

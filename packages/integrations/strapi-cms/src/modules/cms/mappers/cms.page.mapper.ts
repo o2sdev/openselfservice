@@ -121,5 +121,7 @@ const mapComponent = (component: ComponentFragment) => {
             return 'UserAccountBlock';
         case 'ComponentComponentsServiceList':
             return 'ServiceListBlock';
+        case 'ComponentComponentsServiceDetails':
+            return 'ServiceDetailsBlock';
     }
 };

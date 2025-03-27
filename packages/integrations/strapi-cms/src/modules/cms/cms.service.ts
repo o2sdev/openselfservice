@@ -19,6 +19,7 @@ import { mapPaymentsHistoryBlock } from './mappers/blocks/cms.payments-history.m
 import { mapPaymentsSummaryBlock } from './mappers/blocks/cms.payments-summary.mapper';
 import { mapResourceDetailsBlock } from './mappers/blocks/cms.resource-details.mapper';
 import { mapResourceListBlock } from './mappers/blocks/cms.resource-list.mapper';
+import { mapServiceDetailsBlock } from './mappers/blocks/cms.service-details.mapper';
 import { mapServiceListBlock } from './mappers/blocks/cms.service-list.mapper';
 import { mapTicketDetailsBlock } from './mappers/blocks/cms.ticket-details.mapper';
 import { mapTicketListBlock } from './mappers/blocks/cms.ticket-list.mapper';
@@ -342,5 +343,10 @@ export class CmsService implements CMS.Service {
     getServiceListBlock(options: CMS.Request.GetCmsEntryParams) {
         const key = `service-list-component-${options.id}-${options.locale}`;
         return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapServiceListBlock)));
+    }
+
+    getServiceDetailsBlock(options: CMS.Request.GetCmsEntryParams) {
+        const key = `service-details-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapServiceDetailsBlock)));
     }
 }
