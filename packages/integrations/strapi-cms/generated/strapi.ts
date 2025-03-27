@@ -546,17 +546,10 @@ export type ComponentContentArticleSectionFiltersInput = {
 
 export type ComponentContentBanner = {
     altDescription?: Maybe<Scalars['String']['output']>;
-    buttons?: Maybe<Array<Maybe<ComponentContentLink>>>;
+    button?: Maybe<ComponentContentLink>;
     description?: Maybe<Scalars['String']['output']>;
     id: Scalars['ID']['output'];
-    overdue?: Maybe<ComponentContentInformationCard>;
     title: Scalars['String']['output'];
-};
-
-export type ComponentContentBannerButtonsArgs = {
-    filters?: InputMaybe<ComponentContentLinkFiltersInput>;
-    pagination?: InputMaybe<PaginationArg>;
-    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type ComponentContentDynamicZone =
@@ -743,15 +736,6 @@ export type ComponentContentLink = {
     id: Scalars['ID']['output'];
     label: Scalars['String']['output'];
     url: Scalars['String']['output'];
-};
-
-export type ComponentContentLinkFiltersInput = {
-    and?: InputMaybe<Array<InputMaybe<ComponentContentLinkFiltersInput>>>;
-    ariaLabel?: InputMaybe<StringFilterInput>;
-    label?: InputMaybe<StringFilterInput>;
-    not?: InputMaybe<ComponentContentLinkFiltersInput>;
-    or?: InputMaybe<Array<InputMaybe<ComponentContentLinkFiltersInput>>>;
-    url?: InputMaybe<StringFilterInput>;
 };
 
 export type ComponentContentMessage = {
@@ -3268,7 +3252,6 @@ export type ResolversTypes = {
     ComponentContentKeywordFiltersInput: ComponentContentKeywordFiltersInput;
     ComponentContentKeywordInput: ComponentContentKeywordInput;
     ComponentContentLink: ResolverTypeWrapper<ComponentContentLink>;
-    ComponentContentLinkFiltersInput: ComponentContentLinkFiltersInput;
     ComponentContentMessage: ResolverTypeWrapper<ComponentContentMessage>;
     ComponentContentMessageFiltersInput: ComponentContentMessageFiltersInput;
     ComponentContentMessageSimple: ResolverTypeWrapper<ComponentContentMessageSimple>;
@@ -3658,7 +3641,6 @@ export type ResolversParentTypes = {
     ComponentContentKeywordFiltersInput: ComponentContentKeywordFiltersInput;
     ComponentContentKeywordInput: ComponentContentKeywordInput;
     ComponentContentLink: ComponentContentLink;
-    ComponentContentLinkFiltersInput: ComponentContentLinkFiltersInput;
     ComponentContentMessage: ComponentContentMessage;
     ComponentContentMessageFiltersInput: ComponentContentMessageFiltersInput;
     ComponentContentMessageSimple: ComponentContentMessageSimple;
@@ -4415,15 +4397,9 @@ export type ComponentContentBannerResolvers<
     ParentType extends ResolversParentTypes['ComponentContentBanner'] = ResolversParentTypes['ComponentContentBanner'],
 > = {
     altDescription?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-    buttons?: Resolver<
-        Maybe<Array<Maybe<ResolversTypes['ComponentContentLink']>>>,
-        ParentType,
-        ContextType,
-        RequireFields<ComponentContentBannerButtonsArgs, 'pagination' | 'sort'>
-    >;
+    button?: Resolver<Maybe<ResolversTypes['ComponentContentLink']>, ParentType, ContextType>;
     description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-    overdue?: Resolver<Maybe<ResolversTypes['ComponentContentInformationCard']>, ParentType, ContextType>;
     title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -6897,7 +6873,7 @@ export type FaqComponentFragment = {
         title: string;
         description?: string;
         altDescription?: string;
-        buttons?: Array<{ label: string; ariaLabel?: string; url: string }>;
+        button?: { label: string; ariaLabel?: string; url: string };
     };
 };
 
@@ -7159,7 +7135,7 @@ export type BannerFragment = {
     title: string;
     description?: string;
     altDescription?: string;
-    buttons?: Array<{ label: string; ariaLabel?: string; url: string }>;
+    button?: { label: string; ariaLabel?: string; url: string };
 };
 
 export type ErrorMessageComponentFragment = {
@@ -7416,7 +7392,7 @@ export type GetComponentQuery = {
                       title: string;
                       description?: string;
                       altDescription?: string;
-                      buttons?: Array<{ label: string; ariaLabel?: string; url: string }>;
+                      button?: { label: string; ariaLabel?: string; url: string };
                   };
               }
             | {
@@ -8395,7 +8371,7 @@ export const BannerFragmentDoc = gql`
         title
         description
         altDescription
-        buttons {
+        button {
             label
             ariaLabel
             url

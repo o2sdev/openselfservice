@@ -1,12 +1,15 @@
 'use client';
 
 import { Repeat2, Settings } from 'lucide-react';
-import React from 'react';
+import { useTranslations } from 'next-intl';
+import React, { useState } from 'react';
 
 import { Badge } from '@o2s/ui/components/badge';
 import { Button } from '@o2s/ui/components/button';
 import { Separator } from '@o2s/ui/components/separator';
 import { TextItem } from '@o2s/ui/components/text-item';
+import { Tooltip, TooltipContent } from '@o2s/ui/components/tooltip';
+import { TooltipTrigger } from '@o2s/ui/components/tooltip';
 import { Typography } from '@o2s/ui/components/typography';
 
 import { statusBadgeVariants } from '@/utils/mappings/services-badge';
@@ -19,6 +22,10 @@ import { ServiceDetailsPureProps } from './ServiceDetails.types';
 
 export const ServiceDetailsPure: React.FC<ServiceDetailsPureProps> = ({ ...component }) => {
     const { data: service } = component;
+
+    const t = useTranslations();
+    const [isSettingsTooltipOpen, setIsSettingsTooltipOpen] = useState(false);
+    const [isRenewTooltipOpen, setIsRenewTooltipOpen] = useState(false);
 
     return (
         <div className="w-full">
@@ -39,17 +46,31 @@ export const ServiceDetailsPure: React.FC<ServiceDetailsPureProps> = ({ ...compo
                                 <Price price={service.price.value} />
                             </Typography>
 
-                            <Button onClick={() => console.log('settings')}>
-                                <Settings className="w-4 h-4" />
-                                {service.labels.settings}
-                            </Button>
+                            <Tooltip open={isSettingsTooltipOpen} onOpenChange={setIsSettingsTooltipOpen}>
+                                <TooltipTrigger asChild>
+                                    <Button onClick={() => setIsSettingsTooltipOpen(true)}>
+                                        <Settings className="w-4 h-4" />
+                                        {service.labels.settings}
+                                    </Button>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    <p>{t('general.comingSoon')}</p>
+                                </TooltipContent>
+                            </Tooltip>
 
                             {service.status.value === 'INACTIVE' ||
                                 (service.status.value === 'EXPIRED' && (
-                                    <Button variant="destructive" onClick={() => console.log('renew')}>
-                                        <Repeat2 className="w-4 h-4" />
-                                        {service.labels.renew}
-                                    </Button>
+                                    <Tooltip open={isRenewTooltipOpen} onOpenChange={setIsRenewTooltipOpen}>
+                                        <TooltipTrigger asChild>
+                                            <Button variant="destructive" onClick={() => setIsRenewTooltipOpen(true)}>
+                                                <Repeat2 className="w-4 h-4" />
+                                                {service.labels.renew}
+                                            </Button>
+                                        </TooltipTrigger>
+                                        <TooltipContent>
+                                            <p>{t('general.comingSoon')}</p>
+                                        </TooltipContent>
+                                    </Tooltip>
                                 ))}
                         </div>
                     </div>

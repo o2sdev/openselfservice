@@ -26,12 +26,8 @@ export const mapFaqBlock = (data: GetComponentQuery): CMS.Model.FaqBlock.FaqBloc
                 banner: {
                     title: component.banner?.title,
                     description: component.banner?.description,
-                    buttons: component.banner?.buttons?.map((button) => ({
-                        label: button.label,
-                        ariaLabel: button.ariaLabel,
-                        url: button.url,
-                    })),
-                } as CMS.Model.FaqBlock.FaqBoxWithButtons,
+                    button: component.banner?.button,
+                } as CMS.Model.FaqBlock.FaqBoxWithButton,
             };
     }
 
