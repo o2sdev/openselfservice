@@ -3,6 +3,7 @@ slug: open-self-service-release
 title: First release of Open Self Service
 tags: [releases]
 authors: [jan.jagoda]
+toc_max_heading_level: 2
 ---
 
 # First release of Open Self Service
