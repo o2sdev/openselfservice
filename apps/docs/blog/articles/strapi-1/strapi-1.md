@@ -66,8 +66,8 @@ This page defines that:
 
 The application is based on two main components:
 
-- `frontend` - the **frontend app**, which is an application that provides the interactive UIs to the customers, composed of reusable components,
-- `api-harmonization` - the **API Harmonization server**, where we fetch and aggregate the data from multiple API integrations to fully separate the presentation layer from backend services.
+- `frontend` - the **frontend app**, which is an application that provides the interactive UIs to the customers, composed of reusable components and built with [Next.js](https://nextjs.org/),
+- `api-harmonization` - the **API Harmonization server**, where we fetch and aggregate the data from multiple API integrations to fully separate the presentation layer from backend services, built with [Nest.js](https://nestjs.com/).
 
 ![high-level-architecture.svg](../../../docs/overview/high-level-architecture.svg)
 
