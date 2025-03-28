@@ -7,14 +7,15 @@ import { CMS, Tickets } from '../../models';
 import { TicketDetailsController } from './ticket-details.controller';
 import { TicketDetailsService } from './ticket-details.service';
 
-@Module({})
+@Module({
+    providers: [TicketDetailsService, CMS.Service, Tickets.Service],
+    controllers: [TicketDetailsController],
+    exports: [TicketDetailsService],
+})
 export class TicketDetailsBlockModule {
     static register(_config: ApiConfig): DynamicModule {
         return {
             module: TicketDetailsBlockModule,
-            providers: [TicketDetailsService, CMS.Service, Tickets.Service],
-            controllers: [TicketDetailsController],
-            exports: [TicketDetailsService],
         };
     }
 }

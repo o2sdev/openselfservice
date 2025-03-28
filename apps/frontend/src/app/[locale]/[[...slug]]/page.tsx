@@ -92,6 +92,7 @@ export default async function Page({ params }: Props) {
 
                 <div className="flex flex-col gap-6 w-full">
                     <Breadcrumbs breadcrumbs={data.breadcrumbs} />
+
                     {!data.hasOwnTitle && (
                         <>
                             <Typography variant="h1" asChild>

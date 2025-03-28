@@ -4,6 +4,9 @@ import { Observable, forkJoin, map, of, switchMap } from 'rxjs';
 
 import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
 
+import { TicketDetailsBlock } from '@o2s/api-harmonization/blocks/ticket-details/ticket-details.model';
+import { TicketDetailsService } from '@o2s/api-harmonization/blocks/ticket-details/ticket-details.service';
+
 import { CMS } from '../../models';
 
 import { mapInit, mapPage } from './page.mapper';
@@ -17,6 +20,7 @@ export class PageService {
     constructor(
         private readonly config: ConfigService,
         private readonly cmsService: CMS.Service,
+        private readonly ticketDetailsService: TicketDetailsService,
     ) {
         this.SUPPORTED_LOCALES = this.config.get('SUPPORTED_LOCALES').split(',') as string[];
     }
@@ -78,10 +82,37 @@ export class PageService {
                     .getAlternativePages({ id: page.id, slug: query.slug, locale: headers['x-locale'] })
                     .pipe(map((pages) => pages.filter((p) => p.id === page.id)));
 
-                return forkJoin([of(page), alternatePages]).pipe(
-                    map(([page, alternatePages]) => {
+                const blocks = Object.entries(page.template.slots).reduce<CMS.Model.Page.SlotBlock[]>(
+                    (prev, [, current]) => {
+                        return [...prev, ...current];
+                    },
+                    [],
+                );
+
+                // replace condition with a dedicated `isMainBlock` property on a slot
+                const mainBlockComponent = blocks.find((b) => b.__typename === 'TicketDetailsBlock');
+
+                let mainBlock: Observable<TicketDetailsBlock | undefined>;
+
+                switch (mainBlockComponent?.__typename) {
+                    case 'TicketDetailsBlock': {
+                        const id = query.slug.split('/');
+                        mainBlock = this.ticketDetailsService.getTicketDetailsBlock(
+                            { id: id[id.length - 1]! },
+                            { id: mainBlockComponent.id },
+                            headers,
+                        );
+                        break;
+                    }
+                    default:
+                        mainBlock = of(undefined);
+                        break;
+                }
+
+                return forkJoin([of(page), alternatePages, mainBlock]).pipe(
+                    map(([page, alternatePages, mainBlock]) => {
                         const alternates = alternatePages?.filter((p) => p?.id === page.id);
-                        return mapPage(page, headers['x-locale'], alternates);
+                        return mapPage(page, mainBlock, headers['x-locale'], alternates);
                     }),
                 );
             }),

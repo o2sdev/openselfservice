@@ -280,8 +280,8 @@ const PAGE_TICKET_DETAILS_EN: CMS.Model.Page.Page = {
     seo: {
         noIndex: false,
         noFollow: false,
-        title: 'Ticket Details',
-        description: 'Ticket Details',
+        title: 'Case - {topic}',
+        description: 'Case - {topic}',
         keywords: [],
         image: {
             url: 'https://picsum.photos/150',
@@ -328,8 +328,8 @@ const PAGE_TICKET_DETAILS_DE: CMS.Model.Page.Page = {
     seo: {
         noIndex: false,
         noFollow: false,
-        title: 'Fälle',
-        description: 'Fälle',
+        title: 'Fall - {topic}',
+        description: 'Fall - {topic}',
         keywords: [],
         image: {
             url: 'https://picsum.photos/150',
@@ -376,8 +376,8 @@ const PAGE_TICKET_DETAILS_PL: CMS.Model.Page.Page = {
     seo: {
         noIndex: false,
         noFollow: false,
-        title: 'Zgłoszenia',
-        description: 'Zgłoszenia',
+        title: 'Zgłoszenie - {topic}',
+        description: 'Zgłoszenie - {topic}',
         keywords: [],
         image: {
             url: 'https://picsum.photos/150',

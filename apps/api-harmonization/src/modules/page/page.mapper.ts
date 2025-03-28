@@ -1,9 +1,14 @@
+import format from 'string-template';
+
+import { TicketDetailsBlock } from '@o2s/api-harmonization/blocks/ticket-details/ticket-details.model';
+
 import { CMS } from '../../models';
 
 import { Breadcrumb, Init, Page } from './page.model';
 
 export const mapPage = (
     page: CMS.Model.Page.Page,
+    mainBlock: TicketDetailsBlock | undefined,
     mainLocale: string,
     alternatePages: CMS.Model.Page.Page[] = [],
 ): Page => {
@@ -17,11 +22,24 @@ export const mapPage = (
         alternativeUrls[p.locale] = p.slug;
     });
 
+    let title = page.seo.title;
+    let description = page.seo.description;
+
+    switch (mainBlock?.__typename) {
+        case 'TicketDetailsBlock':
+            title = format(title, {
+                topic: mainBlock?.data.topic.label,
+            });
+            description = format(description, {
+                topic: mainBlock?.data.topic.label,
+            });
+    }
+
     return {
         meta: {
             seo: {
-                title: page.seo.title,
-                description: page.seo.description,
+                title: title,
+                description: description,
                 keywords: page.seo.keywords,
                 image: page.seo.image,
                 noIndex: page.seo.noIndex,
@@ -33,12 +51,12 @@ export const mapPage = (
             alternativeUrls,
             template: page.template,
             hasOwnTitle: page.hasOwnTitle,
-            breadcrumbs: mapBreadcrumbs(page),
+            breadcrumbs: mapBreadcrumbs(page, title),
         },
     };
 };
 
-const mapBreadcrumbs = (page: CMS.Model.Page.Page): Breadcrumb[] => {
+const mapBreadcrumbs = (page: CMS.Model.Page.Page, title: string): Breadcrumb[] => {
     const breadcrumbs: Breadcrumb[] = [];
 
     function extractFromParent(parent: CMS.Model.Page.Page['parent'] | undefined): void {
@@ -58,7 +76,7 @@ const mapBreadcrumbs = (page: CMS.Model.Page.Page): Breadcrumb[] => {
 
     breadcrumbs.push({
         slug: page.slug,
-        label: page.seo?.title || page.slug,
+        label: title,
     });
 
     return breadcrumbs.filter((breadcrumb) => breadcrumb.slug);
