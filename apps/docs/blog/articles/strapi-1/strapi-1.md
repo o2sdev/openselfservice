@@ -42,8 +42,6 @@ In this article, we’ll show how we modeled the content, how it fits into our f
 
 ## Web content management
 
-Pokazanie, jak zmiany w CMS-ie wpływają na aplikację frontendową (może krótkie video?)
-
 Let's look at one of the pages in our application – the invoices list. It displays to the user their invoices, together with a quick summary of payment balance and history:
 
 ![example-web-page.png](example-web-page.png)
