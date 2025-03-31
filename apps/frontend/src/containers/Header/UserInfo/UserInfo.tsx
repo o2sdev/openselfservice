@@ -16,7 +16,7 @@ export const UserInfo = ({ user, userInfo }: UserInfoProps) => {
             <NextLink href={userInfo.url} className="no-underline hover:no-underline" aria-label={userInfo.label}>
                 <Avatar>
                     <AvatarImage src={user.image || ''} />
-                    <AvatarFallback className="bg-[hsl(var(--navbar-accent-background))] hover:bg-[hsl(var(--navbar-accent-background))]/90 text-[hsl(var(--navbar-primary))]">
+                    <AvatarFallback variant="secondary">
                         <Typography variant="small">
                             {user.name
                                 ?.split(' ')

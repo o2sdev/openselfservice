@@ -41,7 +41,7 @@ export const LocaleSwitcher: React.FC<ToolbarProps> = ({ label = 'Language' }) =
                 {label}
             </Label>
             <Select value={currentLocale} onValueChange={handleLocaleChange}>
-                <SelectTrigger className="md:w-[80px] w-full" id="language-switch">
+                <SelectTrigger variant="secondary" className="md:w-[80px] w-full" id="language-switch">
                     <SelectValue placeholder={currentLocale} />
                 </SelectTrigger>
                 <SelectContent>

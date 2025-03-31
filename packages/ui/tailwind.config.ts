@@ -3,10 +3,7 @@ import tailwindcssAnimate from 'tailwindcss-animate';
 
 const config = {
     darkMode: ['class'],
-    content: [
-        "./src/**/*.{js,ts,jsx,tsx,mdx}",
-        '../../packages/ui/src/components/**/*.{ts,tsx}',
-    ],
+    content: ['./src/**/*.{js,ts,jsx,tsx,mdx}', '../../packages/ui/src/components/**/*.{ts,tsx}'],
     theme: {
         fontFamily: {
             sans: ['Inter', 'sans-serif'],
@@ -15,10 +12,10 @@ const config = {
             center: true,
             padding: '2rem',
             screens: {
-                'sm': '640px',
-                'md': '768px',
-                'lg': '1024px',
-                'xl': '1280px',
+                sm: '640px',
+                md: '768px',
+                lg: '1024px',
+                xl: '1280px',
                 '2xl': '1536px',
             },
         },
@@ -36,6 +33,12 @@ const config = {
                 secondary: {
                     DEFAULT: 'hsl(var(--secondary))',
                     foreground: 'hsl(var(--secondary-foreground))',
+                },
+                tertiary: {
+                    DEFAULT: 'hsl(var(--tertiary))',
+                    foreground: 'hsl(var(--tertiary-foreground))',
+                    border: 'hsl(var(--tertiary-border))',
+                    hover: 'hsl(var(--tertiary-hover))',
                 },
                 destructive: {
                     DEFAULT: 'hsl(var(--destructive))',
@@ -74,6 +77,42 @@ const config = {
                 card: {
                     DEFAULT: 'hsl(var(--card))',
                     foreground: 'hsl(var(--card-foreground))',
+                },
+                navbar: {
+                    foreground: 'hsl(var(--navbar-foreground))',
+                    background: 'hsl(var(--navbar-background))',
+                    muted: 'hsl(var(--navbar-muted))',
+                    border: 'hsl(var(--navbar-border))',
+                    primary: {
+                        DEFAULT: 'hsl(var(--navbar-primary))',
+                        foreground: 'hsl(var(--navbar-primary-foreground))',
+                    },
+                    accent: {
+                        background: 'hsl(var(--navbar-accent-background))',
+                        foreground: 'hsl(var(--navbar-accent-foreground))',
+                    },
+                    sub: {
+                        background: 'hsl(var(--navbar-sub-background))',
+                        foreground: 'hsl(var(--navbar-sub-foreground))',
+                        accent: 'hsl(var(--navbar-sub-accent))',
+                        muted: 'hsl(var(--navbar-sub-muted))',
+                    },
+                },
+                footer: {
+                    background: 'hsl(var(--footer-background))',
+                    foreground: 'hsl(var(--footer-foreground))',
+                    muted: 'hsl(var(--footer-muted))',
+                    border: 'hsl(var(--footer-border))',
+                },
+                badge: {
+                    default: {
+                        background: 'hsl(var(--badge-default-background))',
+                        foreground: 'hsl(var(--badge-default-foreground))',
+                    },
+                    secondary: {
+                        background: 'hsl(var(--badge-secondary-background))',
+                        foreground: 'hsl(var(--badge-secondary-foreground))',
+                    },
                 },
             },
             borderRadius: {
