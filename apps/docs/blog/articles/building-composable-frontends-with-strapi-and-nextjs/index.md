@@ -47,12 +47,12 @@ Let's look at one of the pages in our application – the invoices list. It disp
 
 ![example-web-page.png](example-web-page.png)
 
-While we could hardcode these components on the frontend, it's of course not the most flexible solution (though it would be simple and quick). What we'd like is to give the people responsible for the content the possibility to:
+While we could hardcode these components on the frontend, it's of course not the most flexible solution (though it would be simple and quick). What we'd like is to give the people responsible for the content the ability to:
 
 1. Decide which components to add to any given page.
 2. Decide how those components should be arranged in the layout.
 
-The first requirement can be solved by modeling frontend components as content types inside Strapi, and enabling inserting them into a page. The second can be achieved by modeling templates as well, with some limited control over the page layout.
+The first requirement can be solved by modeling frontend components as content types inside Strapi and enabling their insertion into pages. The second can be achieved by modeling templates as well, with some limited control over the page layout.
 
 Our final result allowed us to configure each page within the app as content inside Strapi, each with a configurable template (like one- or two-column layouts, or some more complex or specific ones, like a dashboard layout). Within each template, we inserted slots for components, giving us the following result:
 
@@ -84,7 +84,7 @@ A model for the page is the most important one, as it defines:
 
 ### Templates
 
-The content type for the templates is quite basic – it is based on a simple system of slots that define some predefined location within the frontend app. The available templates are highly configurable and depend on the UI needs. For simpler pages, a basic two-column layout can be sufficient, consisting of:
+The content type for the templates is quite basic – it is based on a simple system of slots that define some predefined location within the frontend app. The available templates are highly configurable and tailored to UI needs. For simpler pages, a basic two-column layout can be sufficient, consisting of:
 
 - a top slot (that can store e.g. some promotional banners or messages),
 - left and right slots for the main content,
@@ -170,7 +170,7 @@ Since our application is based on composable architecture, the part responsible 
 
 ### Getting Strapi content types
 
-The very first thing we wanted was to limit as much as possible the risk of discrepancies between the content model in Strapi and the model in the codebase. the most obvious solution for that was to always rely on Typescript model that would be automatically generated from GraphQL schema.
+Our first priority was to limit as much as possible the risk of discrepancies between the content model in Strapi and the model in the codebase. the most obvious solution for that was to always rely on Typescript model that would be automatically generated from GraphQL schema.
 
 We achieved this using the [graphql-codegen](https://the-guild.dev/graphql/codegen/docs/getting-started). After installing the
 main packages:
@@ -252,7 +252,7 @@ which relies on:
     });
     ```
 
-Actual requests are kept in sepearate `.graphql` files, which allows us to easily utilze all GraphQL features like [fragments](https://graphql.org/learn/queries/#fragments), for example:
+Actual requests are kept in separate `.graphql` files, allowing us to easily leverage all GraphQL features like [fragments](https://graphql.org/learn/queries/#fragments), for example:
 
 ```graphql title="Page.graphql"
 fragment Page on Page {
@@ -302,7 +302,7 @@ Now, running the command `graphql-codegen` will cause a few things to happen:
             ...
         }
         ```
-    - ad SDK with methods that reflect each query that was found, like:
+    - and the SDK with methods that reflect each query that was found, like:
         ```
         getPage(
             variables: GetPageQueryVariables,
@@ -566,7 +566,7 @@ export const InvoiceList: React.FC<InvoiceListProps> = async ({ id, accessToken,
 
 This approach has several advantages:
 
-- makes blocks more independent and decouples them from the Page model,
+- it makes blocks more independent and decouples them from the Page model,
 - utilizes server-side capabilities of Next.js for server components, with HTML streaming and loading states using Suspense,
 - makes it possible, in the future, to extract those blocks out of the frontend app itself, and transform them into standalone micro-frontend applications.
 
@@ -574,7 +574,7 @@ The biggest drawback, however, is that each block produces its own HTTP request 
 
 Thankfully, this can be mitigated by using cache on two levels:
 
-1. Leveraging [request memoization](https://nextjs.org/docs/app/building-your-application/caching#request-memoization) provided by Next.js, which makes sure that the same fetching function is called only once during rendering - that prevents multiple calls to Nest.js for the same data.
+1. Leveraging [request memoization](https://nextjs.org/docs/app/building-your-application/caching#request-memoization) provided by Next.js, which ensures that the same fetching function is called only once during rendering, preventing multiple calls to Nest.js for the same data.
 2. Introducing cache to the Nest.js application (e.g. via [Redis](https://redis.io/)) for:
     - user data, which should be cached only for a very short time (to cover a single page render) as in most cases it can be very dynamic,
     - CMS content, which can be cached for longer as usually it does not change that often.
