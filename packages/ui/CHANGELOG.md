@@ -1,5 +1,13 @@
 # @o2s/ui
 
+## 0.12.0
+
+### Minor Changes
+
+- 77f9dc4: added nwe variants to `button`, `avatar` and `select` components
+- 77f9dc4: updated CSS variables with the new UI theme
+- 77f9dc4: UI theme update
+
 ## 0.11.0
 
 ### Minor Changes

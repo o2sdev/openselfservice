@@ -1,5 +1,11 @@
 # @o2s/framework
 
+## 0.20.0
+
+### Minor Changes
+
+- 98b2b61: implemented breadcrumbs
+
 ## 0.19.0
 
 ### Minor Changes

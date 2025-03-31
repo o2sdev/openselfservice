@@ -1,5 +1,21 @@
 # @o2s/frontend
 
+## 0.18.0
+
+### Minor Changes
+
+- 98b2b61: implemented breadcrumbs
+- 77f9dc4: UI theme update
+
+### Patch Changes
+
+- Updated dependencies [77f9dc4]
+- Updated dependencies [98b2b61]
+- Updated dependencies [77f9dc4]
+- Updated dependencies [77f9dc4]
+    - @o2s/ui@0.12.0
+    - @o2s/api-harmonization@0.18.0
+
 ## 0.17.0
 
 ### Minor Changes
