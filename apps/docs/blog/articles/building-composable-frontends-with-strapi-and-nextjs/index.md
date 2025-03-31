@@ -60,13 +60,14 @@ Our final result allowed us to configure each page within the app as content ins
 
 This page defines that:
 
+- it will be available under the `/invoices` URL within the app,
 - the top slot is currently empty - but it can be filled with e.g. some promotional banner if there is a business need for it,
 - left and right slots contain payment summary and history components, but can be easily disabled, switched places, or completely replaced with other components,
-- and finally, in the bottom slot we placed the list of user invoices.
+- and finally, in the bottom slot we placed the list of user invoices and some common FAQs.
 
 ## Strapi content model
 
-In order ti make this kind of content management possible, we modeled our content based on three types:
+In order to make this kind of content management possible, we modeled our content based on three types:
 
 - **Page** that represents any route within the frontend app; we do not model specific pages within the CMS, and instead allow editors to compose the pages they need out of generic types,
 - **Template** that defines the layout of the page and can include simple one- or two-column layouts or more complex ones, and allows the editors to decide where each component should be rendered,
