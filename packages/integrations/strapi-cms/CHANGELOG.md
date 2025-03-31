@@ -1,5 +1,16 @@
 # @o2s/integrations.strapi-cms
 
+## 0.18.0
+
+### Minor Changes
+
+- 98b2b61: implemented breadcrumbs
+
+### Patch Changes
+
+- Updated dependencies [98b2b61]
+    - @o2s/framework@0.20.0
+
 ## 0.17.0
 
 ### Minor Changes
