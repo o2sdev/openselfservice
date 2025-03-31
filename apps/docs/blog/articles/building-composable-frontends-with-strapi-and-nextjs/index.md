@@ -158,7 +158,7 @@ It's also important to understand the overall data flow between each part of the
 In a bit more details, this flow can be described like this:
 
 1. When the user enters a page, a call to the API Harmonization server occurs.
-2. Firstly, a dedicated Nest.js module handles the request, and other internal services are called to different APIs, which can range from simple parallel requests to more complex orchestration.
+2. Firstly, a dedicated Nest.js module handles the request, and other internal services call different APIs, which can range from simple parallel requests to more complex orchestration.
 3. Received data is normalized and then aggregated into a single response, which usually combines static data from a CMS with dynamic data from different APIs.
 4. Based on this response, shared parts of the UI are rendered (like navigation or footer), but **no other components** are rendered yet.
 5. The page response includes the template that should be used to render the page, together with the IDs of components that should be fetched.
