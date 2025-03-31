@@ -10,7 +10,7 @@ const avatarVariants = cva('flex h-full w-full items-center justify-center round
     variants: {
         variant: {
             default: 'text-foreground bg-background border-muted',
-            secondary: 'text-tertiary-foreground bg-tertiary border-tertiary-border',
+            secondary: 'text-tertiary-foreground bg-tertiary border-tertiary-border hover:bg-tertiary-hover',
         },
     },
     defaultVariants: {

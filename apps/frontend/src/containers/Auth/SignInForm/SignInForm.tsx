@@ -200,7 +200,7 @@ export const SignInForm: React.FC<SignInFormProps> = ({ providers, labels, onSig
                             }}
                             className="flex flex-col gap-4"
                         >
-                            <Button type="submit" variant="secondary" disabled={isSubmitting}>
+                            <Button type="submit" variant="outline" disabled={isSubmitting}>
                                 <LogoGithub />
                                 {labels.providers?.label} {provider.name}
                             </Button>

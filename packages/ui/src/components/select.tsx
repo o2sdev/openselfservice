@@ -4,7 +4,6 @@ import * as SelectPrimitive from '@radix-ui/react-select';
 import { VariantProps, cva } from 'class-variance-authority';
 import { Check, ChevronDown, ChevronUp } from 'lucide-react';
 import * as React from 'react';
-import { JSX } from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
@@ -14,7 +13,7 @@ const selectVariants = cva(
         variants: {
             variant: {
                 default: 'border-input bg-background',
-                secondary: 'border-tertiary-border bg-background text-tertiary-foreground',
+                secondary: 'border-tertiary-border bg-background text-tertiary-foreground hover:bg-tertiary-hover',
             },
         },
         defaultVariants: {
