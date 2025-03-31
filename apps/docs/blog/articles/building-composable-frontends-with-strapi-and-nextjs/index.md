@@ -10,64 +10,44 @@ hide_table_of_contents: false
 
 # Composable frontends with Strapi and Next.js - modeling complex frontend apps in a headless CMS
 
-The article explores how we use Strapi CMS inside Open Self Service to model not just content, but also page structure, layout templates, and reusable UI blocks.
-It’s a deep dive into how a modern CMS can support composable frontend apps and power more than just static content.
+We’re building a frontend-first framework for composable customer portals – Open Self Service.
+To support dynamic content, reusable UI blocks, and flexible layouts, we needed a CMS that gives developers control over structure while staying accessible to business users.
 
+That’s where Strapi comes in. In O2S, we use it not just for managing page content, but also for defining layout templates, page structures, and component configurations. This approach helps us find the right balance between flexibility for editors and consistency in the frontend.
 <!--truncate-->
 
-## tl;dr – why we chose Strapi and how it works with O2S
+In this article, we’ll show how Strapi powers the content architecture behind our composable frontend, and how it integrates with Next.js to deliver dynamic pages, structured layouts, and scalable UI patterns.
 
-We’re building a flexible, frontend-first framework for composable customer portals - Open Self Service (O2S).
-To manage dynamic content and layout, we needed a CMS that gives full control over structure, integrates well with APIs, and is developer-friendly.
 
-We picked Strapi, and here’s why:
+## Web content management in modern front-end apps
 
-- It lets us model dynamic layouts and reusable components.
-- Editors can create content blocks and configure page structure - no need to code or deploy changes.
-- It integrates smoothly into our API Harmonization layer, delivering both static and dynamic content in a unified response.
-- The content model is clean, extensible, and easy to evolve.
+One of the challenges that often comes with large-scale frontend applications is managing the content in a way that on one hand gives the content editors
+a large degree of flexibility, and on the other still keeps the app within the bounds of UI/UX rules, standards and branding.
 
-In this article, we walk through in details how we set up Strapi, modeled page templates and created reusable components.
+The solution we are describing in this article follows these principles - it allows composing the pages out of a set of reusable components and templates, while at the same time
+keeping it under control, without giving complete freedom (which could potentially go against the though-out UX).
 
-If you want a scalable way to manage your app’s content (not just for blogs or landing pages) - this might be for you.
+Of course, our approach may not fully align with the latest trends around visual editors and giving total design freedom, but in our experience, it’s a solid compromise that works well for many real-world use cases.
 
-## Introduction
-
-Building modern frontend applications is no longer just about UI – it's about integrating APIs, delivering dynamic content, and providing a great user experience. Especially in customer-facing portals, flexibility and control over content are key to long-term maintainability and scalability. Yet in many frontend projects, layout and page structure are still hardcoded or stored in configs, limiting flexibility for business teams and creating unnecessary dependencies on developers.
-
-With **Open Self Service (O2S)**, we’re aiming to help developers ship composable frontend solutions faster. But shipping frontend code is only part of the puzzle — content also needs to be manageable by business teams. That’s why we integrated **Strapi** into our architecture. It acts as a headless CMS not only for traditional content but also for more advanced use cases like managing layout templates, components, and reusable data blocks.
-
-In this article, we’ll show how we modeled the content, how it fits into our frontend app, and why Strapi has become a key part of our stack.
-
-## Web content management
-
-One of the challenges that often comes with large-scale frontend applications is managing the content in a way that on one hand gives the content editors a large degree of flexibility, and on the other still keeps the app within the bounds of UI/UX rules, standards and branding. The solution we are introducing allows composing the pages out of a set of reusable components and templates, while at the same time keeping it under control, without giving a complete freedom (which could potentially go against the thought-out UX).
-
-Let's look at one of the pages in our application – the invoices list. It displays to the user their invoices, together with a quick summary of payment balance and history:
+To illustrate our approach, throughout the article we will use an exemplary page from our application  - the list of invoices. It displays user's invoices, together with a quick summary of payment balance and history:
 
 ![example-web-page.png](example-web-page.png)
 
-While we could hardcode these components on the frontend, it's of course not the most flexible solution (though it would be simple and quick). What we'd like is to give the people responsible for the content the ability to:
+For this page and its components we wanted to give content editors the ability to:
 
-1. Decide which components to add to any given page.
+1. Decide which components to add to the page.
 2. Decide how those components should be arranged in the layout.
+3. And additionally, as our app is constructed of many pages, we also needed to give possibility of managing all pages within the app
 
-The first requirement can be solved by modeling frontend components as content types inside Strapi and enabling their insertion into pages. The second can be achieved by modeling templates as well, with some limited control over the page layout.
+Addressing the requirements needed to be handled in two steps: content modeling and implementation.
 
-Our final result allowed us to configure each page within the app as content inside Strapi, each with a configurable template (like one- or two-column layouts, or some more complex or specific ones, like a dashboard layout). Within each template, we inserted slots for components, giving us the following result:
+We first focused on appropriate content modeling in Strapi as it seemed to be crucial to further, implementation related, steps.
 
-![example-content-page.png](example-content-page.png)
+If everything was implemented according to the plan, in the CMS we should have control over: page creation, page configuration using templates (like one- or two-column layouts, or some even more complex ones) and page composition using components.
 
-This page defines that:
+## Step 1: Content modeling in Strapi
 
-- it will be available under the `/invoices` URL within the app,
-- the top slot is currently empty - but it can be filled with e.g. some promotional banner if there is a business need for it,
-- left and right slots contain payment summary and history components, but can be easily disabled, switched places, or completely replaced with other components,
-- and finally, in the bottom slot we placed the list of user invoices and some common FAQs.
-
-## Strapi content model
-
-In order to make this kind of content management possible, we modeled our content based on three types:
+In order to make this kind of content management possible, we tried to reflect the initial ideas and modeled our content based on three types:
 
 - **Page** that represents any route within the frontend app; we do not model specific pages within the CMS, and instead allow editors to compose the pages they need out of generic types,
 - **Template** that defines the layout of the page and can include simple one- or two-column layouts or more complex ones, and allows the editors to decide where each component should be rendered,
@@ -98,9 +78,10 @@ Each slot is a relation field to a Component content type, where multiple instan
 
 ### Blocks
 
-Before we started modeling the content, we established a few requirements that would allow the content editors to work efficiently.
+Before we started modeling the content, we established a few additional requirements that would allow the content editors to work efficiently.
 
-One of those was to have the possibility to reuse the same components on different pages, without having to maintain duplicates. Having to keep track of, for example, the same generic FAQ for the app that appears on most pages, without having a single instance of it, would be a nightmare – especially as the app grows and expands.
+One of those was to have the possibility to reuse the same components on different pages, without having to maintain duplicates. Having to keep track of, for example, the same generic FAQ for the app that appears on most pages,
+without having a single instance of it, would be a nightmare – especially as the app grows and expands.
 
 To solve this issue, we’ve introduced a Block type that represents a single instance of some piece of content. It consists of:
 
@@ -113,7 +94,8 @@ For example, the FAQ component (that uses Strapi’s component type) consists of
 
 ![content-model-faq.png](content-model-faq.png)
 
-While the FAQ component is quite simple and on the frontend renders only the static content from the CMS, it doesn’t mean that only such components can be defined within Strapi. Another component example is the Invoice List, which on the frontend renders a table with the user’s invoices:
+While the FAQ component is quite simple and on the frontend renders only the static content from the CMS, it doesn’t mean that only such components can be defined within Strapi.
+Another component example is the Invoice List, which on the frontend renders a table with the user’s invoices:
 
 ![content-model-invoice-list.png](content-model-invoice-list.png)
 
@@ -138,20 +120,27 @@ This one is a bit more complex - aside from the title, it also handles:
 
     ![content-model-table.png](content-model-table.png)
 
+
 ## App architecture
 
-Of course, modeling the content is only part of the solution. We also needed an app architecture that allows the type of content management we assumed in Strapi, while at the same time being flexible enough to allow other uses in the future. We did not want to couple all the parts too strongly together, as it would make it hard to e.g. use only data fetching area with a different frontend (like a mobile app or AI chatbot). This steered us into the composable architecture approach, where the different parts can work in a detached way, in a some sort of plug-and-play mode.
+Of course, modeling the content is only part of the solution. We also needed to design the frontend architecture appropriately so that it would allow this type of content management in Strapi,
+while at the same time being flexible enough.
+
+We wanted to achieve a fully modular, flexible and highly maintainable solution, so that e.g. the data fetching capability
+could be used in different frontends/apps or each backend component could be replaced with only small effort.
+
+This steered us into the composable architecture approach, where different parts can work in a detached way, in a some sort of plug-and-play mode.
 
 To implement that, we have divided the application into two main components:
 
-- `frontend` - the **frontend app**, which is an application that provides the interactive UIs to the customers, composed of reusable components and built with [Next.js](https://nextjs.org/),
+- `frontend` - the **frontend app**, which is an application that provides the interactive UIs to the customers, composed of reusable UI components and built with [Next.js](https://nextjs.org/),
 - `api-harmonization` - the **API Harmonization server**, which acts as a backend-for-frontend, where we fetch and aggregate the data from multiple API integrations to fully separate the presentation layer from backend services, built with [Nest.js](https://nestjs.com/).
 
 ![high-level-architecture.svg](../../../docs/overview/high-level-architecture.svg)
 
-Each of these applications is semi-independent, therefore they are also built and deployed separately. This also means that the API Harmonization server can even be used without the provided frontend app – using our SDK you can leverage the normalized data model in your own applications, whether they are web- or mobile-based, or even in other backend integrations like AI assistants or chatbots.
+Each of these applications is semi-independent, therefore they are also built and deployed separately. This also means that the API Harmonization server can even be used without the provided frontend app – using our SDK you can leverage the normalized data model in your own applications.
 
-It's also important to understand the overall data flow between each part of the application. On the high level, the frontend app always queries the API harmonization server for content (both for shared UI and for each block), which in turn fetches data from other external sources:
+It's also important to understand the overall data flow between each part of the application. On the high level, the frontend app always queries the API harmonization server for content, which in turn fetches data from other external sources:
 
 ![data-flow.md](../../../docs/overview/data-flow.svg)
 
@@ -164,9 +153,12 @@ In a bit more details, this flow can be described like this:
 5. The page response includes the template that should be used to render the page, together with the IDs of components that should be fetched.
 6. During rendering, each component queries the API Harmonization server for its own data. This mechanism leverages the [streaming of server components](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming#what-is-streaming) to make component loading asynchronous while still keeping API requests server-side.
 
-## Implementation
+## Step 2: Implementation
 
-Since our application is based on composable architecture, the part responsible for the CMS is built in a way that it can be easily replaced with some other integration (with another headless CMS, like Contentful, Storyblok or any other API-based source). Each integration is prepared in the form of npm package, which can be easily swapped with another. In this article we will describe only our integration with Strapi, but basically a similar approach could be used when connecting to a different GraphQL-based backend.
+Since our application is based on composable architecture, the part responsible for the CMS is built in a way that it can be easily replaced with some other integration
+(with another headless CMS, like Contentful, Storyblok or any other API-based source). Each integration is prepared in the form of npm package, which can be easily swapped with another.
+
+In this article we will describe only our integration with Strapi, but basically a similar approach could be used when connecting to a different GraphQL-based backend.
 
 ### Getting Strapi content types
 
@@ -546,7 +538,7 @@ export const renderBlocks = (blocks: CMS.Model.Page.SlotBlock[], slug: string[],
 };
 ```
 
-Finally, the actual rendering of blocks happen using the React Server Components. Each block fetches its own data:
+Finally, the actual rendering of blocks happens using the React Server Components. Each block fetches its own data:
 
 ```typescript jsx
 export const InvoiceList: React.FC<InvoiceListProps> = async ({ id, accessToken, locale }) => {
@@ -617,7 +609,9 @@ export const InvoiceListClient: React.FC<InvoiceListClientProps> = ({ ...compone
 
 ## Result
 
-While it may seem complex, this kind of approach successfully integrates Strapi with frontend to power dynamic, API-driven applications. This enables a seamless collaboration between developers and content editors by providing flexibility and empowering non-technical users to manage data without having to modify the source code each time there is a need to create or modify a page composed of UI blocks.
+While it may seem complex, this kind of approach successfully integrates Strapi with frontend to power dynamic, API-driven applications.
+This enables an effective collaboration platform between developers and content editors by providing flexibility and empowering non-technical users to manage data
+without having to change the source code each time there is a need to create or modify a page composed of UI blocks.
 
 Our solution includes:
 
@@ -626,20 +620,22 @@ Our solution includes:
 - A scalable approach to data fetching by encapsulating fetch logic within individual components, making them independent and reusable.
 - Frontend request memoization paired with backend Redis caching to optimize API calls, reduce overfetching, and improve overall performance.
 
-This architecture not only supports content-driven apps but also API-powered self-service portals. It combines ease of maintenance with scalability and extensibility, ensuring both developers and content editors can work effectively.
+This architecture not only supports content-driven apps but also other heavily API-powered frontend solutions.
+It combines ease of maintenance with scalability and extensibility, ensuring both developers and content editors can work effectively.
 
 ## Conclusion
 
-The integration of Strapi with Open Self Service shows that content management doesn't have to stop at landing pages or blog posts. With the right structure, it can support complex, API-driven applications - giving both developers and content editors the tools they need to collaborate effectively.
+The integration of Strapi with Open Self Service shows that content management with a headless CMS doesn't have to stop at landing pages or blog posts.
+With the right content model structure and implementation in the frontend app, it can support complex cases.
 
-We’ve used Strapi to:
+In our case Strapi was used to:
 
 - Model page templates and components
 - Manage dynamic data presentation
 - Reuse content blocks across the app
 - Empower non-technical users to make changes without code
 
-Combined with the composable architecture of O2S, this gives us a powerful foundation to build modern self-service portals that are scalable, flexible, and easy to maintain.
+Combined with the composable architecture of O2S, this gives us a powerful foundation to build modern customer-facing portals that are scalable, flexible, and easy to maintain.
 
 Want to see it in action?
 
