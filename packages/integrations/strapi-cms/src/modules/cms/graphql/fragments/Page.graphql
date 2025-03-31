@@ -6,11 +6,26 @@ fragment Page on Page {
     publishedAt
     documentId
     hasOwnTitle
-    parent {
-        slug
-    }
     SEO {
         ...Seo
+    }
+    parent {
+        slug
+        SEO {
+            title
+        }
+        parent {
+            slug
+            SEO {
+                title
+            }
+            parent {
+                slug
+                SEO {
+                    title
+                }
+            }
+        }
     }
     template {
         __typename

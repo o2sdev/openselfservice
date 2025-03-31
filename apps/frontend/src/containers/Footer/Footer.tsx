@@ -27,13 +27,10 @@ export const Footer: React.FC<FooterProps> = ({ data }) => {
     const locale = useLocale();
 
     const navigationItemClass = cn(
-        'text-base !text-[hsl(var(--muted-foreground))] hover:!text-[hsl(var(--accent-foreground))] focus-visible:outline-[hsl(var(--ring))]',
+        'no-underline hover:no-underline w-full !justify-between h-10 p-2 !text-base !text-navbar-primary hover:!text-navbar-sub-foreground hover:!bg-navbar-sub-accent',
     );
 
-    const mobileNavigationItemClass = cn(
-        navigationMenuTriggerStyle(),
-        'no-underline hover:no-underline w-full !justify-between h-10 p-2 !text-base !text-[hsl(var(--navbar-primary))] hover:!text-[hsl(var(--accent-foreground))] focus-visible:outline-[hsl(var(--ring))]',
-    );
+    const mobileNavigationItemClass = cn(navigationMenuTriggerStyle(), navigationItemClass);
 
     const getUrl = (item: Models.Navigation.NavigationGroup) => {
         const lvl1Item = item.items?.[0];
@@ -155,7 +152,7 @@ export const Footer: React.FC<FooterProps> = ({ data }) => {
     };
 
     return (
-        <footer className="flex flex-col">
+        <footer className="flex flex-col bg-footer-background">
             <Separator />
             <div className="w-full m-auto max-w-7xl flex flex-row justify-between px-4 md:px-6 py-4 md:py-6">
                 <div className="flex gap-8 items-center justify-between w-full md:justify-start">
@@ -169,7 +166,9 @@ export const Footer: React.FC<FooterProps> = ({ data }) => {
                             />
                         )}
                     </Link>
-                    <Typography variant="body">{data.copyright}</Typography>
+                    <Typography variant="body" className="text-footer-muted">
+                        {data.copyright}
+                    </Typography>
                 </div>
                 <div className="hidden md:block">
                     <NavigationMenu>
