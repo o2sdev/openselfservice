@@ -41,7 +41,7 @@ In this article, we’ll show how we modeled the content, how it fits into our f
 
 ## Web content management
 
-One of the challenges that often comes with large-scale frontend applications is managing the content in a way that on one hand gives the content editors a large degree of flexibility, and on the other still keeps the app within the bounds of UI/UX rules, standards and branding. The solution we are introducing allows composing the pages out of a set of reusable components and templates, while at the same time keeping it under control, without giving a complete freedom (which could potentially go against the though-out UX).
+One of the challenges that often comes with large-scale frontend applications is managing the content in a way that on one hand gives the content editors a large degree of flexibility, and on the other still keeps the app within the bounds of UI/UX rules, standards and branding. The solution we are introducing allows composing the pages out of a set of reusable components and templates, while at the same time keeping it under control, without giving a complete freedom (which could potentially go against the thought-out UX).
 
 Let's look at one of the pages in our application – the invoices list. It displays to the user their invoices, together with a quick summary of payment balance and history:
 
