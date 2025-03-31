@@ -4,7 +4,7 @@ export class FaqBlock extends Block.Block {
     title?: string;
     subtitle?: string;
     items?: FaqItem[];
-    banner?: FaqBoxWithButtons;
+    banner?: FaqBoxWithButton;
 }
 
 export class FaqItem {
@@ -12,8 +12,8 @@ export class FaqItem {
     content!: RichText.RichText;
 }
 
-export class FaqBoxWithButtons {
+export class FaqBoxWithButton {
     title?: string;
     description?: RichText.RichText;
-    buttons?: Link.Link[];
+    button?: Link.Link;
 }

@@ -6,3 +6,12 @@ marcin.krasowski:
   page: true
   socials:
     github: marcinkrasowski
+
+jan.jagoda:
+    name: Jan Jagoda
+    title: Technical Product Owner @ O2S
+    url: https://github.com/jan-jagoda
+    image_url: https://avatars.githubusercontent.com/u/32363100?v=4
+    page: true
+    socials:
+        github: jan-jagoda

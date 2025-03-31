@@ -10,19 +10,15 @@ import { Card } from '@o2s/ui/components/card';
 import { ChartConfig, ChartContainer, ChartTooltip } from '@o2s/ui/components/chart';
 import { Typography } from '@o2s/ui/components/typography';
 
-import { useGlobalContext } from '@/providers/GlobalProvider';
-
 import { ChartRoundedBar } from '@/components/Chart/ChartRoundedBar/ChartRoundedBar';
 import { BarData } from '@/components/Chart/ChartRoundedBar/ChartRoundedBar.types';
 import { ChartTooltip as CustomTooltip } from '@/components/Chart/ChartTooltip/ChartTooltip';
+import { Price } from '@/components/Price/Price';
 
 import { PaymentsHistoryPureProps } from './PaymentsHistory.types';
-import { Currency } from '@/hooks/usePriceService';
 
 export const PaymentsHistoryPure: React.FC<PaymentsHistoryPureProps> = ({ ...component }) => {
     const { chartData, labels, title, currency } = component;
-
-    const { priceService } = useGlobalContext();
 
     const chartConfig = {
         topSegment: {
@@ -119,7 +115,7 @@ export const PaymentsHistoryPure: React.FC<PaymentsHistoryPureProps> = ({ ...com
                                                 textAnchor="middle"
                                                 dy={-8}
                                             >
-                                                {priceService.formatPrice({ value }, currency as Currency).format}
+                                                <Price price={{ value, currency }} />
                                             </text>
                                         );
                                     }}

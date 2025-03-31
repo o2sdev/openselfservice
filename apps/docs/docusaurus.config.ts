@@ -334,7 +334,7 @@ const config: Config = {
                           label: 'Docs',
                           className: 'navbar__item--docs',
                       },
-                      { to: '/blog/roadmap', label: 'Roadmap', position: 'right', className: 'navbar__item--guides' },
+                      { to: '/blog', label: 'Blog', position: 'right', className: 'navbar__item--guides' },
                       {
                           to: 'https://github.com/o2sdev/openselfservice',
                           label: 'GitHub',

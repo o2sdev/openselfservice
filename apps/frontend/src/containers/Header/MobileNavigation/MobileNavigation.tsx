@@ -38,16 +38,16 @@ export function MobileNavigation({
         setIsMenuOpen(false);
     }, [pathname]);
 
-    const navigationItemClass = cn(
+    const navigationMobileItemClass = cn(
         navigationMenuTriggerStyle(),
-        'no-underline hover:no-underline w-full !justify-between h-10 p-2 !text-base !text-[hsl(var(--navbar-primary))] hover:!text-[hsl(var(--accent-foreground))] focus-visible:outline-[hsl(var(--ring))]',
+        'w-full !justify-between h-10 p-2 !text-navbar-primary hover:!text-navbar-primary hover:!bg-navbar-accent-background',
     );
 
     const NavigationItem = ({ item }: { item: Models.Navigation.NavigationItem }) => {
         return (
             <li key={item.label} className="w-full">
                 <Link asChild>
-                    <NextLink href={item.url || '/'} locale={locale} className={navigationItemClass}>
+                    <NextLink href={item.url || '/'} locale={locale} className={navigationMobileItemClass}>
                         {item.label}
                     </NextLink>
                 </Link>
@@ -96,7 +96,7 @@ export function MobileNavigation({
     }) => {
         return (
             <AccordionItem value={item.title} className="border-none">
-                <AccordionTrigger className={navigationItemClass}>{item.title}</AccordionTrigger>
+                <AccordionTrigger className={navigationMobileItemClass}>{item.title}</AccordionTrigger>
                 <AccordionContent className="p-0">{children}</AccordionContent>
             </AccordionItem>
         );
@@ -131,7 +131,7 @@ export function MobileNavigation({
                             </Button>
                         </SheetTrigger>
                         <SheetContent
-                            className="max-w-full w-full md:max-w-sm sm:max-w-full"
+                            className="max-w-full w-full md:max-w-sm sm:max-w-full bg-navbar-background"
                             closeLabel={mobileMenuLabel.close}
                         >
                             <SheetHeader className="mt-2">

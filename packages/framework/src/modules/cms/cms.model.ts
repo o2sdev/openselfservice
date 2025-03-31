@@ -16,6 +16,8 @@ export * as InvoiceListBlock from './models/blocks/invoice-list.model';
 export * as InvoiceDetailsBlock from './models/blocks/invoice-details.model';
 export * as ResourceDetailsBlock from './models/blocks/resource-details.model';
 export * as ResourceListBlock from './models/blocks/resource-list.model';
+export * as ServiceListBlock from './models/blocks/service-list.model';
+export * as ServiceDetailsBlock from './models/blocks/service-details.model';
 export * as TicketRecentBlock from './models/blocks/tickets-recent.model';
 export * as PaymentsSummaryBlock from './models/blocks/payments-summary.model';
 export * as PaymentsHistoryBlock from './models/blocks/payments-history.model';

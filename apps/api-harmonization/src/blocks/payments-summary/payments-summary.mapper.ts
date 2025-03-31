@@ -37,7 +37,7 @@ export const mapPaymentsSummary = (
             message: cms.overdue.message,
             noPaymentsMessage: cms.overdue.noPaymentsMessage,
             buttonLabel: cms.overdue.buttonLabel,
-            amount: checkNegativeValue({ value: overdueAmount }),
+            amount: checkNegativeValue({ value: overdueAmount, currency: currency }),
             overdueDays: overdueDays,
         },
         toBePaid: {
@@ -45,7 +45,7 @@ export const mapPaymentsSummary = (
             message: cms.toBePaid.message,
             noPaymentsMessage: cms.toBePaid.noPaymentsMessage,
             buttonLabel: cms.toBePaid.buttonLabel,
-            amount: checkNegativeValue({ value: toBePaidAmount }),
+            amount: checkNegativeValue({ value: toBePaidAmount, currency: currency }),
         },
     };
 };

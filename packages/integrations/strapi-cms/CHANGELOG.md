@@ -1,5 +1,35 @@
 # @o2s/integrations.strapi-cms
 
+## 0.18.0
+
+### Minor Changes
+
+- 98b2b61: implemented breadcrumbs
+
+### Patch Changes
+
+- Updated dependencies [98b2b61]
+    - @o2s/framework@0.20.0
+
+## 0.17.0
+
+### Minor Changes
+
+- 35eeac7: implement service details page
+- 92be116: added Price model, services page implemented
+- 92be116: implement services page
+- 35eeac7: implement service details page
+- 52b3e0a: add tooltips to mocked buttons
+
+### Patch Changes
+
+- Updated dependencies [35eeac7]
+- Updated dependencies [92be116]
+- Updated dependencies [92be116]
+- Updated dependencies [35eeac7]
+- Updated dependencies [52b3e0a]
+    - @o2s/framework@0.19.0
+
 ## 0.16.0
 
 ### Minor Changes

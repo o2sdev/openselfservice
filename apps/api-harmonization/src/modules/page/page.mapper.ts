@@ -1,6 +1,6 @@
 import { CMS } from '../../models';
 
-import { Init, Page } from './page.model';
+import { Breadcrumb, Init, Page } from './page.model';
 
 export const mapPage = (
     page: CMS.Model.Page.Page,
@@ -27,15 +27,41 @@ export const mapPage = (
                 noIndex: page.seo.noIndex,
                 noFollow: page.seo.noFollow,
             },
-            parent: page.parent,
             locales,
         },
         data: {
             alternativeUrls,
             template: page.template,
             hasOwnTitle: page.hasOwnTitle,
+            breadcrumbs: mapBreadcrumbs(page),
         },
     };
+};
+
+const mapBreadcrumbs = (page: CMS.Model.Page.Page): Breadcrumb[] => {
+    const breadcrumbs: Breadcrumb[] = [];
+
+    function extractFromParent(parent: CMS.Model.Page.Page['parent'] | undefined): void {
+        if (!parent) return;
+
+        if (parent.parent) {
+            extractFromParent(parent.parent);
+        }
+
+        breadcrumbs.push({
+            slug: parent.slug,
+            label: parent.seo?.title || parent.slug,
+        });
+    }
+
+    extractFromParent(page.parent);
+
+    breadcrumbs.push({
+        slug: page.slug,
+        label: page.seo?.title || page.slug,
+    });
+
+    return breadcrumbs.filter((breadcrumb) => breadcrumb.slug);
 };
 
 export const mapInit = (

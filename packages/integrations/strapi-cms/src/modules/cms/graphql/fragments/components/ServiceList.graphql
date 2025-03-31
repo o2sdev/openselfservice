@@ -1,0 +1,21 @@
+fragment ServiceListComponent on ComponentComponentsServiceList {
+    __typename
+    id
+    title
+    subtitle
+    fields {
+        ...FieldMapping
+    }
+    pagination {
+        ...Pagination
+    }
+    filters {
+        ...Filters
+    }
+    noResults {
+        title
+        description
+    }
+    detailsURL
+    detailsLabel
+}

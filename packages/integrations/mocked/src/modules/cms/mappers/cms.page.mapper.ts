@@ -167,6 +167,9 @@ const PAGE_TICKET_LIST_EN: CMS.Model.Page.Page = {
     hasOwnTitle: false,
     parent: {
         slug: '/',
+        seo: {
+            title: 'Dashboard',
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -206,6 +209,9 @@ const PAGE_TICKET_LIST_DE: CMS.Model.Page.Page = {
     hasOwnTitle: false,
     parent: {
         slug: '/',
+        seo: {
+            title: 'Startseite',
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -245,6 +251,9 @@ const PAGE_TICKET_LIST_PL: CMS.Model.Page.Page = {
     hasOwnTitle: false,
     parent: {
         slug: '/',
+        seo: {
+            title: 'Strona główna',
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -284,6 +293,15 @@ const PAGE_TICKET_DETAILS_EN: CMS.Model.Page.Page = {
     hasOwnTitle: true,
     parent: {
         slug: '/cases',
+        seo: {
+            title: 'Cases',
+        },
+        parent: {
+            slug: '/',
+            seo: {
+                title: 'Dashboard',
+            },
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -323,6 +341,15 @@ const PAGE_TICKET_DETAILS_DE: CMS.Model.Page.Page = {
     hasOwnTitle: true,
     parent: {
         slug: '/faelle',
+        seo: {
+            title: 'Fälle',
+        },
+        parent: {
+            slug: '/',
+            seo: {
+                title: 'Startseite',
+            },
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -362,6 +389,15 @@ const PAGE_TICKET_DETAILS_PL: CMS.Model.Page.Page = {
     hasOwnTitle: true,
     parent: {
         slug: '/zgloszenia',
+        seo: {
+            title: 'Zgłoszenia',
+        },
+        parent: {
+            slug: '/',
+            seo: {
+                title: 'Strona główna',
+            },
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -401,6 +437,9 @@ const PAGE_NOTIFICATION_LIST_EN: CMS.Model.Page.Page = {
     hasOwnTitle: false,
     parent: {
         slug: '/',
+        seo: {
+            title: 'Dashboard',
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -440,6 +479,9 @@ const PAGE_NOTIFICATION_LIST_DE: CMS.Model.Page.Page = {
     hasOwnTitle: false,
     parent: {
         slug: '/',
+        seo: {
+            title: 'Dashboard',
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -479,6 +521,9 @@ const PAGE_NOTIFICATION_LIST_PL: CMS.Model.Page.Page = {
     hasOwnTitle: false,
     parent: {
         slug: '/',
+        seo: {
+            title: 'Dashboard',
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -518,6 +563,9 @@ const PAGE_INVOICE_LIST_EN: CMS.Model.Page.Page = {
     hasOwnTitle: false,
     parent: {
         slug: '/',
+        seo: {
+            title: 'Dashboard',
+        },
     },
     template: {
         __typename: 'TwoColumnTemplate',
@@ -570,6 +618,9 @@ const PAGE_INVOICE_LIST_DE: CMS.Model.Page.Page = {
     hasOwnTitle: false,
     parent: {
         slug: '/',
+        seo: {
+            title: 'Startseite',
+        },
     },
     template: {
         __typename: 'TwoColumnTemplate',
@@ -622,6 +673,9 @@ const PAGE_INVOICE_LIST_PL: CMS.Model.Page.Page = {
     hasOwnTitle: false,
     parent: {
         slug: '/',
+        seo: {
+            title: 'Strona główna',
+        },
     },
     template: {
         __typename: 'TwoColumnTemplate',
@@ -674,6 +728,15 @@ const PAGE_NOTIFICATION_DETAILS_EN: CMS.Model.Page.Page = {
     hasOwnTitle: true,
     parent: {
         slug: '/notifications',
+        seo: {
+            title: 'Notifications',
+        },
+        parent: {
+            slug: '/',
+            seo: {
+                title: 'Dashboard',
+            },
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -713,6 +776,15 @@ const PAGE_NOTIFICATION_DETAILS_DE: CMS.Model.Page.Page = {
     hasOwnTitle: true,
     parent: {
         slug: '/benachrichtigungen',
+        seo: {
+            title: 'Benachrichtigungen',
+        },
+        parent: {
+            slug: '/',
+            seo: {
+                title: 'Startseite',
+            },
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -752,6 +824,15 @@ const PAGE_NOTIFICATION_DETAILS_PL: CMS.Model.Page.Page = {
     hasOwnTitle: true,
     parent: {
         slug: '/powiadomienia',
+        seo: {
+            title: 'Powiadomienia',
+        },
+        parent: {
+            slug: '/',
+            seo: {
+                title: 'Strona główna',
+            },
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -791,6 +872,9 @@ const PAGE_USER_ACCOUNT_EN: CMS.Model.Page.Page = {
     hasOwnTitle: true,
     parent: {
         slug: '/',
+        seo: {
+            title: 'Dashboard',
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -826,6 +910,9 @@ const PAGE_USER_ACCOUNT_DE: CMS.Model.Page.Page = {
     hasOwnTitle: true,
     parent: {
         slug: '/',
+        seo: {
+            title: 'Startseite',
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -861,6 +948,9 @@ const PAGE_USER_ACCOUNT_PL: CMS.Model.Page.Page = {
     hasOwnTitle: true,
     parent: {
         slug: '/',
+        seo: {
+            title: 'Strona główna',
+        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -869,6 +959,276 @@ const PAGE_USER_ACCOUNT_PL: CMS.Model.Page.Page = {
                 {
                     __typename: 'UserAccountBlock',
                     id: 'user-account-1',
+                },
+            ],
+        },
+    },
+    updatedAt: '2025-01-01',
+};
+
+const PAGE_SERVICE_LIST_EN: CMS.Model.Page.Page = {
+    id: '8',
+    slug: '/services',
+    locale: 'en',
+    seo: {
+        noIndex: false,
+        noFollow: false,
+        title: 'Services',
+        description: 'Services',
+        keywords: [],
+        image: {
+            url: 'https://picsum.photos/150',
+            width: 150,
+            height: 150,
+            alternativeText: 'Placeholder',
+        },
+    },
+    hasOwnTitle: false,
+    parent: {
+        slug: '/',
+        seo: {
+            title: 'Dashboard',
+        },
+    },
+    template: {
+        __typename: 'OneColumnTemplate',
+        slots: {
+            main: [
+                {
+                    __typename: 'ServiceListBlock',
+                    id: 'service-list-1',
+                },
+                {
+                    __typename: 'FaqBlock',
+                    id: 'faq-1',
+                },
+            ],
+        },
+    },
+    updatedAt: '2025-01-01',
+};
+
+const PAGE_SERVICE_LIST_DE: CMS.Model.Page.Page = {
+    id: '8',
+    slug: '/dienstleistungen',
+    locale: 'de',
+    seo: {
+        noIndex: false,
+        noFollow: false,
+        title: 'Dienstleistungen',
+        description: 'Dienstleistungen',
+        keywords: [],
+        image: {
+            url: 'https://picsum.photos/150',
+            width: 150,
+            height: 150,
+            alternativeText: 'Placeholder',
+        },
+    },
+    hasOwnTitle: false,
+    parent: {
+        slug: '/',
+        seo: {
+            title: 'Startseite',
+        },
+    },
+    template: {
+        __typename: 'OneColumnTemplate',
+        slots: {
+            main: [
+                {
+                    __typename: 'ServiceListBlock',
+                    id: 'service-list-1',
+                },
+                {
+                    __typename: 'FaqBlock',
+                    id: 'faq-1',
+                },
+            ],
+        },
+    },
+    updatedAt: '2025-01-01',
+};
+
+const PAGE_SERVICE_LIST_PL: CMS.Model.Page.Page = {
+    id: '8',
+    slug: '/uslugi',
+    locale: 'pl',
+    seo: {
+        noIndex: false,
+        noFollow: false,
+        title: 'Usługi',
+        description: 'Usługi',
+        keywords: [],
+        image: {
+            url: 'https://picsum.photos/150',
+            width: 150,
+            height: 150,
+            alternativeText: 'Placeholder',
+        },
+    },
+    hasOwnTitle: false,
+    parent: {
+        slug: '/',
+        seo: {
+            title: 'Strona główna',
+        },
+    },
+    template: {
+        __typename: 'OneColumnTemplate',
+        slots: {
+            main: [
+                {
+                    __typename: 'ServiceListBlock',
+                    id: 'service-list-1',
+                },
+                {
+                    __typename: 'FaqBlock',
+                    id: 'faq-1',
+                },
+            ],
+        },
+    },
+    updatedAt: '2025-01-01',
+};
+
+const PAGE_SERVICE_DETAILS_EN: CMS.Model.Page.Page = {
+    id: '3',
+    slug: '/services/(.+)',
+    locale: 'en',
+    seo: {
+        noIndex: false,
+        noFollow: false,
+        title: 'Service Details',
+        description: 'Service Details',
+        keywords: [],
+        image: {
+            url: 'https://picsum.photos/150',
+            width: 150,
+            height: 150,
+            alternativeText: 'Placeholder',
+        },
+    },
+    hasOwnTitle: true,
+    parent: {
+        slug: '/services',
+        seo: {
+            title: 'Services',
+        },
+        parent: {
+            slug: '/',
+            seo: {
+                title: 'Dashboard',
+            },
+        },
+    },
+    template: {
+        __typename: 'OneColumnTemplate',
+        slots: {
+            main: [
+                {
+                    __typename: 'ServiceDetailsBlock',
+                    id: 'service-details-1',
+                },
+                {
+                    __typename: 'FaqBlock',
+                    id: 'faq-1',
+                },
+            ],
+        },
+    },
+    updatedAt: '2025-01-01',
+};
+
+const PAGE_SERVICE_DETAILS_DE: CMS.Model.Page.Page = {
+    id: '3',
+    slug: '/dienstleistungen/(.+)',
+    locale: 'de',
+    seo: {
+        noIndex: false,
+        noFollow: false,
+        title: 'Dienstleistungen',
+        description: 'Dienstleistungen',
+        keywords: [],
+        image: {
+            url: 'https://picsum.photos/150',
+            width: 150,
+            height: 150,
+            alternativeText: 'Placeholder',
+        },
+    },
+    hasOwnTitle: true,
+    parent: {
+        slug: '/dienstleistungen',
+        seo: {
+            title: 'Dienstleistungen',
+        },
+        parent: {
+            slug: '/',
+            seo: {
+                title: 'Startseite',
+            },
+        },
+    },
+    template: {
+        __typename: 'OneColumnTemplate',
+        slots: {
+            main: [
+                {
+                    __typename: 'ServiceDetailsBlock',
+                    id: 'service-details-1',
+                },
+                {
+                    __typename: 'FaqBlock',
+                    id: 'faq-1',
+                },
+            ],
+        },
+    },
+    updatedAt: '2025-01-01',
+};
+
+const PAGE_SERVICE_DETAILS_PL: CMS.Model.Page.Page = {
+    id: '3',
+    slug: '/uslugi/(.+)',
+    locale: 'pl',
+    seo: {
+        noIndex: false,
+        noFollow: false,
+        title: 'Usługi',
+        description: 'Usługi',
+        keywords: [],
+        image: {
+            url: 'https://picsum.photos/150',
+            width: 150,
+            height: 150,
+            alternativeText: 'Placeholder',
+        },
+    },
+    hasOwnTitle: true,
+    parent: {
+        slug: '/uslugi',
+        seo: {
+            title: 'Usługi',
+        },
+        parent: {
+            slug: '/',
+            seo: {
+                title: 'Strona główna',
+            },
+        },
+    },
+    template: {
+        __typename: 'OneColumnTemplate',
+        slots: {
+            main: [
+                {
+                    __typename: 'ServiceDetailsBlock',
+                    id: 'service-details-1',
+                },
+                {
+                    __typename: 'FaqBlock',
+                    id: 'faq-1',
                 },
             ],
         },
@@ -950,6 +1310,31 @@ export const mapPage = (slug: string, locale: string): CMS.Model.Page.Page | und
         case '/konto-uzytkownika':
             return PAGE_USER_ACCOUNT_PL;
 
+        case '/services':
+            return PAGE_SERVICE_LIST_EN;
+        case '/dienstleistungen':
+            return PAGE_SERVICE_LIST_DE;
+        case '/uslugi':
+            return PAGE_SERVICE_LIST_PL;
+
+        case slug.match(/\/services\/.+/)?.[0]:
+            return {
+                ...PAGE_SERVICE_DETAILS_EN,
+                slug: `/services/${slug.match(/(.+)\/(.+)/)?.[2]}`,
+                updatedAt: '2025-01-01',
+            };
+        case slug.match(/\/dienstleistungen\/.+/)?.[0]:
+            return {
+                ...PAGE_SERVICE_DETAILS_DE,
+                slug: `/dienstleistungen/${slug.match(/(.+)\/(.+)/)?.[2]}`,
+                updatedAt: '2025-01-01',
+            };
+        case slug.match(/\/uslugi\/.+/)?.[0]:
+            return {
+                ...PAGE_SERVICE_DETAILS_PL,
+                slug: `/uslugi/${slug.match(/(.+)\/(.+)/)?.[2]}`,
+                updatedAt: '2025-01-01',
+            };
         default:
             return undefined;
     }
@@ -966,6 +1351,8 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_NOTIFICATION_DETAILS_PL,
                 PAGE_INVOICE_LIST_PL,
                 PAGE_USER_ACCOUNT_PL,
+                PAGE_SERVICE_LIST_PL,
+                PAGE_SERVICE_DETAILS_PL,
             ];
         case 'de':
             return [
@@ -976,6 +1363,8 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_NOTIFICATION_DETAILS_DE,
                 PAGE_INVOICE_LIST_DE,
                 PAGE_USER_ACCOUNT_DE,
+                PAGE_SERVICE_LIST_DE,
+                PAGE_SERVICE_DETAILS_DE,
             ];
         case 'en':
             return [
@@ -986,6 +1375,8 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_NOTIFICATION_DETAILS_EN,
                 PAGE_INVOICE_LIST_EN,
                 PAGE_USER_ACCOUNT_EN,
+                PAGE_SERVICE_LIST_EN,
+                PAGE_SERVICE_DETAILS_EN,
             ];
         default:
             return [];
@@ -1001,6 +1392,7 @@ export const getAlternativePages = (id: string, slug: string, locale: string): C
         PAGE_NOTIFICATION_DETAILS_PL,
         PAGE_INVOICE_LIST_PL,
         PAGE_USER_ACCOUNT_PL,
+        PAGE_SERVICE_LIST_PL,
         PAGE_DASHBOARD_DE,
         PAGE_TICKET_LIST_DE,
         PAGE_TICKET_DETAILS_DE,
@@ -1008,6 +1400,7 @@ export const getAlternativePages = (id: string, slug: string, locale: string): C
         PAGE_NOTIFICATION_DETAILS_DE,
         PAGE_INVOICE_LIST_DE,
         PAGE_USER_ACCOUNT_DE,
+        PAGE_SERVICE_LIST_DE,
         PAGE_DASHBOARD_EN,
         PAGE_TICKET_LIST_EN,
         PAGE_TICKET_DETAILS_EN,
@@ -1015,6 +1408,10 @@ export const getAlternativePages = (id: string, slug: string, locale: string): C
         PAGE_NOTIFICATION_DETAILS_EN,
         PAGE_INVOICE_LIST_EN,
         PAGE_USER_ACCOUNT_EN,
+        PAGE_SERVICE_LIST_EN,
+        PAGE_SERVICE_DETAILS_EN,
+        PAGE_SERVICE_DETAILS_DE,
+        PAGE_SERVICE_DETAILS_PL,
     ]
         .filter((page) => page.id === id)
         .map((page) => mapPage(page.slug, locale)!)
