@@ -1,5 +1,5 @@
 ---
-slug: strapi-integration
+slug: building-composable-frontends-with-strapi-and-nextjs
 title: 'Building composable frontends with Strapi and Next.js'
 date: 2025-03-28
 tags: [tech, integrations]
