@@ -25,7 +25,7 @@ One of the challenges that often comes with large-scale frontend applications is
 a large degree of flexibility, and on the other still keeps the app within the bounds of UI/UX rules, standards and branding.
 
 The solution we are describing in this article follows these principles - it allows composing the pages out of a set of reusable components and templates, while at the same time
-keeping it under control, without giving complete freedom (which could potentially go against the though-out UX).
+keeping it under control, without giving complete freedom (which could potentially go against the thought-out UX).
 
 Of course, our approach may not fully align with the latest trends around visual editors and giving total design freedom, but in our experience, it’s a solid compromise that works well for many real-world use cases.
 
@@ -162,7 +162,7 @@ In this article we will describe only our integration with Strapi, but basically
 
 ### Getting Strapi content types
 
-Our first priority was to limit as much as possible the risk of discrepancies between the content model in Strapi and the model in the codebase. the most obvious solution for that was to always rely on Typescript model that would be automatically generated from GraphQL schema.
+Our first priority was to limit as much as possible the risk of discrepancies between the content model in Strapi and the model in the codebase. The most obvious solution was to always rely on an automatically generated (from GraphQL schema) TypeScript model, that would be then used directly in our code for type safety.
 
 We achieved this using the [graphql-codegen](https://the-guild.dev/graphql/codegen/docs/getting-started). After installing the
 main packages:
@@ -312,7 +312,7 @@ Now, running the command `graphql-codegen` will cause a few things to happen:
 
 ### Creating GraphQL queries
 
-For each of the content types mentioned earlier we have prepared appropriate GraphQL queries - divided into fragments (blocks, templates and other models) and queries (for fetching pages and other non-block items like header or footer):
+For each of the content types mentioned earlier we have prepared appropriate GraphQL code - divided into fragments (blocks, templates and other models) and queries (for fetching pages and other non-block items like header or footer):
 
 ![queries-files.png](queries-files.png)
 
@@ -320,7 +320,7 @@ The requests themselves are quite straightforward, and simply focus on getting t
 
 ![queries-examples.png](queries-examples.png)
 
-There's too many queries to list here, but you can always take a look at [our open-source repository](https://github.com/o2sdev/openselfservice/tree/main/packages/integrations/strapi-cms/src/modules/cms/graphql) for more examples.
+There are too many queries to list here, but you can always take a look at [our open-source repository](https://github.com/o2sdev/openselfservice/tree/main/packages/integrations/strapi-cms/src/modules/cms/graphql) for more examples.
 
 Data fetching happens through NestJS, where we've introduced a dedicated service for CMS content that exposes methods for each CMS block:
 
@@ -562,7 +562,7 @@ This approach has several advantages:
 - utilizes server-side capabilities of Next.js for server components, with HTML streaming and loading states using Suspense,
 - makes it possible, in the future, to extract those blocks out of the frontend app itself, and transform them into standalone micro-frontend applications.
 
-The biggest drawback, however, is that each block produces its own HTTP request for its data. Although this happens server-side, so we are not limited by the browser (and their limits on simultaneous requests) this can still potentially cause overfetching in some cases - if there would be several blocks on one page that fetch exactly the same data from some backend API, this also results in several API calls, even if they are exactly the same.
+The biggest drawback, however, is that each block produces its own HTTP request for its data. Although this happens server-side, so we are not limited by the browsers (and their limits on simultaneous requests) this can still potentially cause overfetching in some cases - if there would be several blocks on one page that fetch exactly the same data from some backend API, this also results in several API calls, even if they are exactly the same.
 
 Thankfully, this can be mitigated by using cache on two levels:
 
