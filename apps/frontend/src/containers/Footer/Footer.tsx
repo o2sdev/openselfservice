@@ -27,7 +27,7 @@ export const Footer: React.FC<FooterProps> = ({ data }) => {
     const locale = useLocale();
 
     const navigationItemClass = cn(
-        'no-underline hover:no-underline w-full !justify-between h-10 p-2 !text-base !text-navbar-primary hover:!text-navbar-sub-foreground hover:!bg-navbar-sub-accent',
+        'no-underline hover:no-underline w-full !justify-between h-10 p-2 !text-base !text-navbar-primary hover:!text-navbar-sub-muted hover:!bg-navbar-accent-background',
     );
 
     const mobileNavigationItemClass = cn(navigationMenuTriggerStyle(), navigationItemClass);

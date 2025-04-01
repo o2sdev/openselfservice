@@ -46,7 +46,7 @@
         --navbar-accent-background: 214 95% 93%;
         --navbar-accent-foreground: 224 64% 33%;
         --navbar-sub-background: 228 32% 15%;
-        --navbar-sub-foreground: 230 50% 98%;
+        --navbar-sub-foreground: 0 0% 100%;
         --navbar-sub-accent: 228 96% 29%;
         --footer-background: 234 25% 92%;
         --footer-foreground: 228 100% 19%;
@@ -106,7 +106,7 @@
         --navbar-accent-background: 226 71% 40%;
         --navbar-accent-foreground: 214 95% 93%;
         --navbar-sub-background: 228 32% 15%;
-        --navbar-sub-foreground: 230 50% 98%;
+        --navbar-sub-foreground: 0 0% 100%;
         --navbar-sub-accent: 228 96% 29%;
         --footer-background: 234 25% 92%;
         --footer-foreground: 228 100% 19%;
