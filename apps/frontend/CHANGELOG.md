@@ -1,5 +1,19 @@
 # @o2s/frontend
 
+## 0.19.0
+
+### Minor Changes
+
+- fa2f2c5: fix: incorrect layout on the PaymentCard
+- dadad64: fix: service-list - wrong tag color"
+- b9090bc: incorrect colors on hover in the Navbar and the Footer
+
+### Patch Changes
+
+- Updated dependencies [b9090bc]
+    - @o2s/ui@0.13.0
+    - @o2s/api-harmonization@0.18.1
+
 ## 0.18.0
 
 ### Minor Changes
