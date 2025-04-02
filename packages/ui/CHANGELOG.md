@@ -1,5 +1,11 @@
 # @o2s/ui
 
+## 0.13.0
+
+### Minor Changes
+
+- b9090bc: incorrect colors on hover in the Navbar and the Footer
+
 ## 0.12.0
 
 ### Minor Changes
