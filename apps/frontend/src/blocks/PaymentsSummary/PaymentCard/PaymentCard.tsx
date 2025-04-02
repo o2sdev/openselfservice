@@ -42,8 +42,8 @@ export const PaymentCard: React.FC<PaymentCardProps> = ({ data, variant = 'defau
                     {variant === 'destructive' ? destructiveIconMap : defaultIconMap}
                 </div>
 
-                <div className="flex justify-between items-end gap-4">
-                    <div className="flex flex-col gap-2">
+                <div className="flex justify-between sm:items-end  gap-4 sm:flex-row flex-col">
+                    <div className="flex flex-col gap-2 ">
                         <Typography
                             variant="highlightedBig"
                             className={cn(activeState ? className : 'text-muted-foreground')}

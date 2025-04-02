@@ -42,5 +42,5 @@ npm install
 ```
 
 :::info
-Cloning the repository is a more advanced way of starting with O2S, and is suggested only mostly you need to modify the core functionalities of the framework.
+Cloning the repository is a more advanced way of starting with O2S, and is suggested only when you need to modify the core functionalities of the framework.
 :::

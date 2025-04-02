@@ -1,5 +1,11 @@
 # @o2s/docs
 
+## 0.10.4
+
+### Patch Changes
+
+- e0d68dc: blog entry - `Composable frontends with Strapi and Next.js`
+
 ## 0.10.3
 
 ### Patch Changes

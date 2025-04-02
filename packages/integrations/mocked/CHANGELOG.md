@@ -1,5 +1,11 @@
 # @o2s/integrations.mocked
 
+## 0.20.0
+
+### Minor Changes
+
+- dadad64: fix: service-list - wrong tag color"
+
 ## 0.19.0
 
 ### Minor Changes

@@ -152,14 +152,7 @@ export function DesktopNavigation({
                                 {items.map((item) => {
                                     switch (item.__typename) {
                                         case 'NavigationItem':
-                                            return (
-                                                <NavigationItem
-                                                    item={item}
-                                                    key={item.label}
-                                                    active={false}
-                                                    className={'!text-navbar-sub-muted'}
-                                                />
-                                            );
+                                            return <NavigationItem item={item} key={item.label} active={false} />;
                                         case 'NavigationGroup':
                                             return (
                                                 <NavigationItem
@@ -170,7 +163,6 @@ export function DesktopNavigation({
                                                     }}
                                                     key={item.title}
                                                     active={false}
-                                                    className={'!text-navbar-sub-muted'}
                                                 />
                                             );
                                     }
@@ -212,7 +204,7 @@ export function DesktopNavigation({
                                                     item={item}
                                                     key={item.label}
                                                     active={pathname === item.url}
-                                                    className="!text-base"
+                                                    className="!text-base !text-navbar-sub-foreground hover:!text-navbar-sub-foreground hover:!bg-navbar-sub-accent"
                                                 />
                                             );
                                         case 'NavigationGroup':

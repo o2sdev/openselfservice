@@ -1,5 +1,12 @@
 # @o2s/api-harmonization
 
+## 0.18.1
+
+### Patch Changes
+
+- Updated dependencies [dadad64]
+    - @o2s/integrations.mocked@0.20.0
+
 ## 0.18.0
 
 ### Minor Changes
