@@ -1,20 +1,14 @@
 import { Building2, ChevronDown } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 import { Alert } from '@o2s/ui/components/alert';
 import { Button } from '@o2s/ui/components/button';
-import { Sheet, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@o2s/ui/components/sheet';
-import { TooltipContent } from '@o2s/ui/components/tooltip';
-import { TooltipTrigger } from '@o2s/ui/components/tooltip';
-import { Tooltip } from '@o2s/ui/components/tooltip';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@o2s/ui/components/sheet';
 import { Typography } from '@o2s/ui/components/typography';
 
 import { ContextSwitcherProps } from './ContextSwitcher.types';
 
 export const ContextSwitcher = ({ context }: ContextSwitcherProps) => {
-    const t = useTranslations();
-    const [isTooltipOpen, setIsTooltipOpen] = useState(false);
     const [isCompanyMenuOpen, setIsCompanyMenuOpen] = useState(false);
 
     if (!context) {
@@ -51,18 +45,11 @@ export const ContextSwitcher = ({ context }: ContextSwitcherProps) => {
 
                     <Alert>Option to switch user organizations is coming soon!</Alert>
 
-                    <SheetFooter>
-                        <Tooltip open={isTooltipOpen} onOpenChange={setIsTooltipOpen} defaultOpen={false}>
-                            <TooltipTrigger asChild>
-                                <Button variant="default" onClick={() => setIsTooltipOpen(true)}>
-                                    {context.apply}
-                                </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                                <p>{t('general.comingSoon')}</p>
-                            </TooltipContent>
-                        </Tooltip>
-                    </SheetFooter>
+                    {/* <SheetFooter>                  
+                        <Button variant="default">
+                            {context.apply}
+                        </Button>
+                    </SheetFooter> */}
                 </div>
             </SheetContent>
         </Sheet>
