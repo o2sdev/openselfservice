@@ -1,8 +1,12 @@
 {
-    "extends": ["//"],
+    "extends": [
+        "//"
+    ],
     "tasks": {
         "dev": {
-            "dependsOn": ["build"]
+            "dependsOn": [
+                "build"
+            ]
         },
         "start": {
             "env": [
@@ -25,7 +29,10 @@
                 "CACHE_REDIS_PORT",
                 "CACHE_REDIS_PASS",
                 "ALGOLIA_APP_ID",
-                "ALGOLIA_API_KEY"
+                "ALGOLIA_API_KEY",
+                "CF_TOKEN",
+                "CF_SPACE_ID",
+                "CF_ENV"
             ]
         }
     }
