@@ -22,7 +22,7 @@ const MOCK_PRODUCT_1: Products.Model.Product = {
     tags: [
         {
             label: 'New',
-            variant: 'default',
+            variant: 'secondary',
         },
     ],
 };
@@ -49,7 +49,7 @@ const MOCK_PRODUCT_2: Products.Model.Product = {
     tags: [
         {
             label: 'New',
-            variant: 'default',
+            variant: 'secondary',
         },
         {
             label: 'Promo',
@@ -80,7 +80,7 @@ const MOCK_PRODUCT_3: Products.Model.Product = {
     tags: [
         {
             label: 'New',
-            variant: 'default',
+            variant: 'secondary',
         },
     ],
 };
@@ -107,7 +107,7 @@ const MOCK_PRODUCT_4: Products.Model.Product = {
     tags: [
         {
             label: 'New',
-            variant: 'default',
+            variant: 'secondary',
         },
     ],
 };
@@ -134,7 +134,7 @@ const MOCK_PRODUCT_5: Products.Model.Product = {
     tags: [
         {
             label: 'New',
-            variant: 'default',
+            variant: 'secondary',
         },
     ],
 };
@@ -163,7 +163,7 @@ const MOCK_PRODUCT_6: Products.Model.Product = {
     tags: [
         {
             label: 'New',
-            variant: 'default',
+            variant: 'secondary',
         },
     ],
 };
@@ -196,7 +196,7 @@ const MOCK_PRODUCT_7: Products.Model.Product = {
         },
         {
             label: 'New',
-            variant: 'default',
+            variant: 'secondary',
         },
     ],
 };
@@ -228,7 +228,7 @@ const MOCK_PRODUCT_8: Products.Model.Product = {
         },
         {
             label: 'New',
-            variant: 'default',
+            variant: 'secondary',
         },
     ],
 };
@@ -257,7 +257,7 @@ const MOCK_PRODUCT_9: Products.Model.Product = {
     tags: [
         {
             label: 'New',
-            variant: 'default',
+            variant: 'secondary',
         },
     ],
 };
@@ -286,7 +286,7 @@ const MOCK_PRODUCT_10: Products.Model.Product = {
     tags: [
         {
             label: 'New',
-            variant: 'default',
+            variant: 'secondary',
         },
     ],
 };
@@ -314,7 +314,7 @@ const MOCK_PRODUCT_11: Products.Model.Product = {
     tags: [
         {
             label: 'New',
-            variant: 'default',
+            variant: 'secondary',
         },
     ],
 };
