@@ -32,7 +32,8 @@
                 "ALGOLIA_API_KEY",
                 "CF_TOKEN",
                 "CF_SPACE_ID",
-                "CF_ENV"
+                "CF_ENV",
+                "CF_MANAGEMENT_TOKEN"
             ]
         }
     }

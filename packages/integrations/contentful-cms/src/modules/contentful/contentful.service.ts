@@ -1,30 +1,22 @@
 import { Global, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import {
-    Asset,
-    ContentfulClientApi,
-    Entry,
-    EntryCollection,
-    EntryQueries,
-    EntrySkeletonType,
-    LocaleCollection,
-    createClient,
-} from 'contentful';
+import { Asset, ContentfulClientApi, Entry, EntryCollection, LocaleCollection, createClient } from 'contentful';
+import { Observable, from } from 'rxjs';
 
 export interface ContentfulServiceProps {
-    getClient: ContentfulClientApi<undefined>;
+    getClient: ContentfulClientApi;
 }
 
 @Global()
 @Injectable()
 export class ContentfulService implements ContentfulServiceProps {
-    client: ContentfulClientApi<undefined>;
+    client: ContentfulClientApi;
 
     constructor(private readonly config: ConfigService) {
         this.client = createClient({
-            accessToken: this.config.get('CF_TOKEN') ?? '',
-            space: this.config.get('CF_SPACE_ID') ?? '',
-            environment: this.config.get('CF_ENV') ?? '',
+            accessToken: this.config.get('CF_TOKEN') || '',
+            space: this.config.get('CF_SPACE_ID') || '',
+            environment: this.config.get('CF_ENV') || '',
         });
     }
 
@@ -32,19 +24,19 @@ export class ContentfulService implements ContentfulServiceProps {
         return this.client;
     }
 
-    public async getEntry(id: string, query?: EntryQueries<undefined>): Promise<Entry> {
-        return await this.client.getEntry(id, query);
+    public getEntry<T>(id: string, query?: unknown): Observable<Entry<T>> {
+        return from(this.client.getEntry<T>(id, query));
     }
 
-    public async findEntries(query: EntryQueries<undefined>): Promise<EntryCollection<EntrySkeletonType>> {
-        return await this.client.getEntries<EntrySkeletonType, string>(query);
+    public findEntries<T>(query: unknown): Observable<EntryCollection<T>> {
+        return from(this.client.getEntries<T>(query));
     }
 
-    public async getAsset(id: string, query?: EntryQueries<undefined>): Promise<Asset> {
-        return await this.client.getAsset(id, query);
+    public getAsset(id: string, query?: unknown): Observable<Asset> {
+        return from(this.client.getAsset(id, query));
     }
 
-    public async getLocales(): Promise<LocaleCollection> {
-        return await this.client.getLocales();
+    public getLocales(): Observable<LocaleCollection> {
+        return from(this.client.getLocales());
     }
 }

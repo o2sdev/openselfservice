@@ -1,34 +1,103 @@
-import { Injectable } from '@nestjs/common';
-import { of } from 'rxjs';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { Entry } from 'contentful';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore module type mismatch
+import { parse, stringify } from 'flatted';
+import { Observable, forkJoin, from, map, mergeMap, of } from 'rxjs';
 
-import { CMS } from '@o2s/framework/modules';
+import { CMS, Cache } from '@o2s/framework/modules';
 
+import { ContentfulService } from '../contentful/contentful.service';
+
+import { mapArticleDetailsBlock } from './mappers/blocks/cms.article-details.mapper';
+import { mapArticleListBlock } from './mappers/blocks/cms.article-list.mapper';
+import { mapFaqBlock } from './mappers/blocks/cms.faq.mapper';
+import { mapInvoiceDetailsBlock } from './mappers/blocks/cms.invoice-details.mapper';
+import { mapInvoiceListBlock } from './mappers/blocks/cms.invoice-list.mapper';
+import { mapNotificationDetailsBlock } from './mappers/blocks/cms.notification-details.mapper';
+import { mapNotificationListBlock } from './mappers/blocks/cms.notification-list.mapper';
+import { mapPaymentsHistoryBlock } from './mappers/blocks/cms.payments-history.mapper';
+import { mapPaymentsSummaryBlock } from './mappers/blocks/cms.payments-summary.mapper';
+import { mapResourceDetailsBlock } from './mappers/blocks/cms.resource-details.mapper';
+import { mapResourceListBlock } from './mappers/blocks/cms.resource-list.mapper';
+import { mapServiceDetailsBlock } from './mappers/blocks/cms.service-details.mapper';
+import { mapServiceListBlock } from './mappers/blocks/cms.service-list.mapper';
+import { mapTicketDetailsBlock } from './mappers/blocks/cms.ticket-details.mapper';
+import { mapTicketListBlock } from './mappers/blocks/cms.ticket-list.mapper';
+import { mapTicketRecentBlock } from './mappers/blocks/cms.ticket-recent.mapper';
+import { mapUserAccountBlock } from './mappers/blocks/cms.user-account.mapper';
 import { mapAppConfig } from './mappers/cms.app-config.mapper';
-import { mapArticleDetailsBlock } from './mappers/cms.article-details.mapper';
-import { mapArticleListBlock } from './mappers/cms.article-list.mapper';
-import { mapFaqBlock } from './mappers/cms.faq.mapper';
 import { mapFooter } from './mappers/cms.footer.mapper';
 import { mapHeader } from './mappers/cms.header.mapper';
-import { mapInvoiceDetailsBlock } from './mappers/cms.invoice-details.mapper';
-import { mapInvoiceListBlock } from './mappers/cms.invoice-list.mapper';
 import { mapLoginPage } from './mappers/cms.login-page.mapper';
 import { mapNotFoundPage } from './mappers/cms.not-found-page.mapper';
-import { mapNotificationDetailsBlock } from './mappers/cms.notification-details.mapper';
-import { mapNotificationListBlock } from './mappers/cms.notification-list.mapper';
 import { getAllPages, getAlternativePages, mapPage } from './mappers/cms.page.mapper';
-import { mapPaymentsHistoryBlock } from './mappers/cms.payments-history.mapper';
-import { mapPaymentsSummaryBlock } from './mappers/cms.payments-summary.mapper';
-import { mapResourceDetailsBlock } from './mappers/cms.resource-details.mapper';
-import { mapResourceListBlock } from './mappers/cms.resource-list.mapper';
-import { mapServiceDetailsBlock } from './mappers/cms.service-details.mapper';
-import { mapServiceListBlock } from './mappers/cms.service-list.mapper';
-import { mapTicketDetailsBlock } from './mappers/cms.ticket-details.mapper';
-import { mapTicketListBlock } from './mappers/cms.ticket-list.mapper';
-import { mapTicketRecentBlock } from './mappers/cms.ticket-recent.mapper';
-import { mapUserAccountBlock } from './mappers/cms.user-account.mapper';
+import { IDataConfigurableTextsFields, IEntry } from '@/generated/contentful';
+
+export type CmsEntry<T> = Entry<T> & { configurableTexts: IDataConfigurableTextsFields };
 
 @Injectable()
 export class CmsService implements CMS.Service {
+    constructor(
+        private readonly cms: ContentfulService,
+        private readonly cacheService: Cache.Service,
+    ) {}
+
+    private getBlock = (options: CMS.Request.GetCmsEntryParams) => {
+        const key = `component-${options.id}-${options.locale}`;
+
+        return from(this.cacheService.get(key)).pipe(
+            mergeMap((cachedBlock) => {
+                if (cachedBlock) {
+                    return of(parse(cachedBlock));
+                }
+
+                const component = this.cms.getEntry<IEntry>(options.id, {
+                    locale: options.locale,
+                    include: 5,
+                });
+
+                const configurableTexts = this.cms.findEntries<IDataConfigurableTextsFields>({
+                    content_type: 'dataConfigurableTexts',
+                    locale: options.locale,
+                    include: 5,
+                });
+
+                return forkJoin([component, configurableTexts]).pipe(
+                    map(([component, configurableTexts]) => {
+                        if (!(component?.fields && configurableTexts?.items[0]?.fields)) {
+                            throw new NotFoundException();
+                        }
+
+                        const data: CmsEntry<IEntry> = {
+                            ...component,
+                            configurableTexts: configurableTexts.items[0].fields,
+                        };
+                        this.cacheService.set(key, stringify(data));
+                        return data;
+                    }),
+                );
+            }),
+        );
+    };
+
+    private getCachedBlock<T>(key: string, getData: () => Observable<T>): Observable<T> {
+        return from(this.cacheService.get(key)).pipe(
+            mergeMap((cachedData) => {
+                if (cachedData) {
+                    console.log('cachedData', cachedData);
+                    return of(parse(cachedData));
+                }
+                return getData().pipe(
+                    map((data) => {
+                        this.cacheService.set(key, stringify(data));
+                        return data;
+                    }),
+                );
+            }),
+        );
+    }
+
     getEntry<T>(_options: CMS.Request.GetCmsEntryParams) {
         return of<T>({} as T);
     }
@@ -69,12 +138,14 @@ export class CmsService implements CMS.Service {
         return of(mapFooter(options.locale));
     }
 
-    getFaqBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of(mapFaqBlock(_options.locale));
+    getFaqBlock(options: CMS.Request.GetCmsEntryParams) {
+        const key = `faq-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapFaqBlock)));
     }
 
     getTicketListBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapTicketListBlock(options.locale));
+        const key = `ticket-list-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapTicketListBlock)));
     }
 
     getTicketDetailsBlock(_options: CMS.Request.GetCmsEntryParams) {

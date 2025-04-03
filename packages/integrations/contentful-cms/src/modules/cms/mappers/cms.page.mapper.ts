@@ -41,7 +41,7 @@ const PAGE_DASHBOARD_PL: CMS.Model.Page.Page = {
             bottom: [
                 {
                     __typename: 'FaqBlock',
-                    id: 'faq-1',
+                    id: '1buaEvtriqqz7diUjOUP4x',
                 },
             ],
         },
@@ -90,7 +90,7 @@ const PAGE_DASHBOARD_EN: CMS.Model.Page.Page = {
             bottom: [
                 {
                     __typename: 'FaqBlock',
-                    id: 'faq-1',
+                    id: '1buaEvtriqqz7diUjOUP4x',
                 },
             ],
         },
@@ -139,7 +139,7 @@ const PAGE_DASHBOARD_DE: CMS.Model.Page.Page = {
             bottom: [
                 {
                     __typename: 'FaqBlock',
-                    id: 'faq-1',
+                    id: '1buaEvtriqqz7diUjOUP4x',
                 },
             ],
         },
@@ -177,11 +177,11 @@ const PAGE_TICKET_LIST_EN: CMS.Model.Page.Page = {
             main: [
                 {
                     __typename: 'TicketListBlock',
-                    id: 'ticket-list-1',
+                    id: '2OKt2CbF5fmZZs3HLcTfk8',
                 },
                 {
                     __typename: 'FaqBlock',
-                    id: 'faq-1',
+                    id: '1buaEvtriqqz7diUjOUP4x',
                 },
             ],
         },
@@ -223,7 +223,7 @@ const PAGE_TICKET_LIST_DE: CMS.Model.Page.Page = {
                 },
                 {
                     __typename: 'FaqBlock',
-                    id: 'faq-1',
+                    id: '1buaEvtriqqz7diUjOUP4x',
                 },
             ],
         },
@@ -265,7 +265,7 @@ const PAGE_TICKET_LIST_PL: CMS.Model.Page.Page = {
                 },
                 {
                     __typename: 'FaqBlock',
-                    id: 'faq-1',
+                    id: '1buaEvtriqqz7diUjOUP4x',
                 },
             ],
         },
@@ -313,7 +313,7 @@ const PAGE_TICKET_DETAILS_EN: CMS.Model.Page.Page = {
                 },
                 {
                     __typename: 'FaqBlock',
-                    id: 'faq-1',
+                    id: '1buaEvtriqqz7diUjOUP4x',
                 },
             ],
         },
@@ -361,7 +361,7 @@ const PAGE_TICKET_DETAILS_DE: CMS.Model.Page.Page = {
                 },
                 {
                     __typename: 'FaqBlock',
-                    id: 'faq-1',
+                    id: '1buaEvtriqqz7diUjOUP4x',
                 },
             ],
         },
@@ -409,7 +409,7 @@ const PAGE_TICKET_DETAILS_PL: CMS.Model.Page.Page = {
                 },
                 {
                     __typename: 'FaqBlock',
-                    id: 'faq-1',
+                    id: '1buaEvtriqqz7diUjOUP4x',
                 },
             ],
         },
@@ -451,7 +451,7 @@ const PAGE_NOTIFICATION_LIST_EN: CMS.Model.Page.Page = {
                 },
                 {
                     __typename: 'FaqBlock',
-                    id: 'faq-1',
+                    id: '1buaEvtriqqz7diUjOUP4x',
                 },
             ],
         },
@@ -493,7 +493,7 @@ const PAGE_NOTIFICATION_LIST_DE: CMS.Model.Page.Page = {
                 },
                 {
                     __typename: 'FaqBlock',
-                    id: 'faq-1',
+                    id: '1buaEvtriqqz7diUjOUP4x',
                 },
             ],
         },
@@ -535,7 +535,7 @@ const PAGE_NOTIFICATION_LIST_PL: CMS.Model.Page.Page = {
                 },
                 {
                     __typename: 'FaqBlock',
-                    id: 'faq-1',
+                    id: '1buaEvtriqqz7diUjOUP4x',
                 },
             ],
         },
@@ -590,7 +590,7 @@ const PAGE_INVOICE_LIST_EN: CMS.Model.Page.Page = {
                 },
                 {
                     __typename: 'FaqBlock',
-                    id: 'faq-1',
+                    id: '1buaEvtriqqz7diUjOUP4x',
                 },
             ],
         },
@@ -645,7 +645,7 @@ const PAGE_INVOICE_LIST_DE: CMS.Model.Page.Page = {
                 },
                 {
                     __typename: 'FaqBlock',
-                    id: 'faq-1',
+                    id: '1buaEvtriqqz7diUjOUP4x',
                 },
             ],
         },
@@ -700,7 +700,7 @@ const PAGE_INVOICE_LIST_PL: CMS.Model.Page.Page = {
                 },
                 {
                     __typename: 'FaqBlock',
-                    id: 'faq-1',
+                    id: '1buaEvtriqqz7diUjOUP4x',
                 },
             ],
         },
@@ -748,7 +748,7 @@ const PAGE_NOTIFICATION_DETAILS_EN: CMS.Model.Page.Page = {
                 },
                 {
                     __typename: 'FaqBlock',
-                    id: 'faq-1',
+                    id: '1buaEvtriqqz7diUjOUP4x',
                 },
             ],
         },
@@ -796,7 +796,7 @@ const PAGE_NOTIFICATION_DETAILS_DE: CMS.Model.Page.Page = {
                 },
                 {
                     __typename: 'FaqBlock',
-                    id: 'faq-1',
+                    id: '1buaEvtriqqz7diUjOUP4x',
                 },
             ],
         },
@@ -844,7 +844,7 @@ const PAGE_NOTIFICATION_DETAILS_PL: CMS.Model.Page.Page = {
                 },
                 {
                     __typename: 'FaqBlock',
-                    id: 'faq-1',
+                    id: '1buaEvtriqqz7diUjOUP4x',
                 },
             ],
         },
@@ -1000,7 +1000,7 @@ const PAGE_SERVICE_LIST_EN: CMS.Model.Page.Page = {
                 },
                 {
                     __typename: 'FaqBlock',
-                    id: 'faq-1',
+                    id: '1buaEvtriqqz7diUjOUP4x',
                 },
             ],
         },
@@ -1042,7 +1042,7 @@ const PAGE_SERVICE_LIST_DE: CMS.Model.Page.Page = {
                 },
                 {
                     __typename: 'FaqBlock',
-                    id: 'faq-1',
+                    id: '1buaEvtriqqz7diUjOUP4x',
                 },
             ],
         },
@@ -1084,7 +1084,7 @@ const PAGE_SERVICE_LIST_PL: CMS.Model.Page.Page = {
                 },
                 {
                     __typename: 'FaqBlock',
-                    id: 'faq-1',
+                    id: '1buaEvtriqqz7diUjOUP4x',
                 },
             ],
         },
@@ -1132,7 +1132,7 @@ const PAGE_SERVICE_DETAILS_EN: CMS.Model.Page.Page = {
                 },
                 {
                     __typename: 'FaqBlock',
-                    id: 'faq-1',
+                    id: '1buaEvtriqqz7diUjOUP4x',
                 },
             ],
         },
@@ -1180,7 +1180,7 @@ const PAGE_SERVICE_DETAILS_DE: CMS.Model.Page.Page = {
                 },
                 {
                     __typename: 'FaqBlock',
-                    id: 'faq-1',
+                    id: '1buaEvtriqqz7diUjOUP4x',
                 },
             ],
         },
@@ -1228,7 +1228,7 @@ const PAGE_SERVICE_DETAILS_PL: CMS.Model.Page.Page = {
                 },
                 {
                     __typename: 'FaqBlock',
-                    id: 'faq-1',
+                    id: '1buaEvtriqqz7diUjOUP4x',
                 },
             ],
         },
