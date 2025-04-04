@@ -13,7 +13,16 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
             {
                 type: 'checkbox',
                 name: 'modules',
-                choices: ['articles', 'cms', 'notifications', 'organizations', 'resources', 'tickets', 'users', 'cache'],
+                choices: [
+                    'articles',
+                    'cms',
+                    'notifications',
+                    'organizations',
+                    'resources',
+                    'tickets',
+                    'users',
+                    'cache',
+                ],
                 message: 'Choose which modules you want to be included in the integration.',
                 validate: (input: string[]) => !!input.length,
             },
@@ -22,47 +31,47 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
             const actions: PlopTypes.ActionType[] = [
                 {
                     type: 'add',
-                    path: 'packages/api/integrations/{{kebabCase name}}/package.json',
+                    path: 'packages/integrations/{{kebabCase name}}/package.json',
                     templateFile: 'templates/integration/package.hbs',
                 },
                 {
                     type: 'add',
-                    path: 'packages/api/integrations/{{kebabCase name}}/tsconfig.json',
+                    path: 'packages/integrations/{{kebabCase name}}/tsconfig.json',
                     templateFile: 'templates/integration/tsconfig.hbs',
                 },
                 {
                     type: 'add',
-                    path: 'packages/api/integrations/{{kebabCase name}}/tsconfig.lint.json',
+                    path: 'packages/integrations/{{kebabCase name}}/tsconfig.lint.json',
                     templateFile: 'templates/integration/tsconfig.lint.hbs',
                 },
                 {
                     type: 'add',
-                    path: 'packages/api/integrations/{{kebabCase name}}/turbo.json',
+                    path: 'packages/integrations/{{kebabCase name}}/turbo.json',
                     templateFile: 'templates/integration/turbo.hbs',
                 },
                 {
                     type: 'add',
-                    path: 'packages/api/integrations/{{kebabCase name}}/.eslintrc.js',
+                    path: 'packages/integrations/{{kebabCase name}}/.eslintrc.js',
                     templateFile: 'templates/integration/eslintrc.hbs',
                 },
                 {
                     type: 'add',
-                    path: 'packages/api/integrations/{{kebabCase name}}/.gitignore',
+                    path: 'packages/integrations/{{kebabCase name}}/.gitignore',
                     templateFile: 'templates/integration/gitignore.hbs',
                 },
                 {
                     type: 'add',
-                    path: 'packages/api/integrations/{{kebabCase name}}/.prettierrc.mjs',
+                    path: 'packages/integrations/{{kebabCase name}}/.prettierrc.mjs',
                     templateFile: 'templates/integration/prettierrc.hbs',
                 },
                 {
                     type: 'add',
-                    path: 'packages/api/integrations/{{kebabCase name}}/src/integration.ts',
+                    path: 'packages/integrations/{{kebabCase name}}/src/integration.ts',
                     templateFile: 'templates/integration/integration.hbs',
                 },
                 {
                     type: 'add',
-                    path: 'packages/api/integrations/{{kebabCase name}}/src/modules/index.ts',
+                    path: 'packages/integrations/{{kebabCase name}}/src/modules/index.ts',
                     template: '// MODULE_EXPORTS',
                 },
             ];
@@ -77,38 +86,38 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                 actions.push(
                     {
                         type: 'add',
-                        path: `packages/api/integrations/{{kebabCase name}}/src/modules/{{kebabCase module}}/index.ts`,
+                        path: `packages/integrations/{{kebabCase name}}/src/modules/{{kebabCase module}}/index.ts`,
                         templateFile: 'templates/integration/module-index.hbs',
                         data: { module },
                     },
                     {
                         type: 'add',
-                        path: `packages/api/integrations/{{kebabCase name}}/src/modules/{{kebabCase module}}/{{kebabCase module}}.service.ts`,
+                        path: `packages/integrations/{{kebabCase name}}/src/modules/{{kebabCase module}}/{{kebabCase module}}.service.ts`,
                         templateFile: 'templates/integration/service.hbs',
                         data: { module },
                     },
                     {
                         type: 'add',
-                        path: `packages/api/integrations/{{kebabCase name}}/src/modules/{{kebabCase module}}/{{kebabCase module}}.controller.ts`,
+                        path: `packages/integrations/{{kebabCase name}}/src/modules/{{kebabCase module}}/{{kebabCase module}}.controller.ts`,
                         templateFile: 'templates/integration/controller.hbs',
                         data: { module },
                     },
                     {
                         type: 'add',
-                        path: `packages/api/integrations/{{kebabCase name}}/src/modules/{{kebabCase module}}/mappers/index.ts`,
+                        path: `packages/integrations/{{kebabCase name}}/src/modules/{{kebabCase module}}/mappers/index.ts`,
                         templateFile: 'templates/integration/mappers-index.hbs',
                         data: { module },
                     },
                     {
                         type: 'modify',
-                        path: 'packages/api/integrations/{{kebabCase name}}/src/modules/index.ts',
+                        path: 'packages/integrations/{{kebabCase name}}/src/modules/index.ts',
                         pattern: /(\/\/ MODULE_EXPORTS)/g,
                         templateFile: 'templates/integration/modules-index.hbs',
                         data: { module },
                     },
                     {
                         type: 'modify',
-                        path: 'packages/api/integrations/{{kebabCase name}}/src/integration.ts',
+                        path: 'packages/integrations/{{kebabCase name}}/src/integration.ts',
                         pattern: /(\/\/ MODULE_IMPORTS)/g,
                         template:
                             "import { Service as {{ pascalCase module }}Service } from './modules/{{kebabCase module}}';\n// MODULE_IMPORTS",
@@ -116,7 +125,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                     },
                     {
                         type: 'modify',
-                        path: 'packages/api/integrations/{{kebabCase name}}/src/integration.ts',
+                        path: 'packages/integrations/{{kebabCase name}}/src/integration.ts',
                         pattern: /(\/\/ MODULE_EXPORTS)/g,
                         template:
                             '    {{ camelCase module }}: {\n' +

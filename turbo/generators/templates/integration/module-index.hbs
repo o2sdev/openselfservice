@@ -1,2 +1,6 @@
+import { {{pascalCase module}} } from '@o2s/framework/modules';
+
 export { {{pascalCase module}}Service as Service } from './{{kebabCase module}}.service';
-export { {{pascalCase module}}Controller as Controller } from './{{kebabCase module}}.controller'; 
+
+export import Request = {{pascalCase module}}.Request;
+export import Model = {{pascalCase module}}.Model;
