@@ -33,7 +33,7 @@ export const mapTicketListBlock = (data: GetComponentQuery): CMS.Model.TicketLis
                 },
                 labels: {
                     today: configurableTexts.dates.today,
-                    yesterday: configurableTexts.dates.today,
+                    yesterday: configurableTexts.dates.yesterday,
                 },
                 detailsUrl: component.detailsURL as string,
             };
