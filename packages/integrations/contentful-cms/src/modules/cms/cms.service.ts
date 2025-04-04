@@ -1,5 +1,4 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Entry } from 'contentful';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore module type mismatch
 import { parse, stringify } from 'flatted';
@@ -32,9 +31,7 @@ import { mapHeader } from './mappers/cms.header.mapper';
 import { mapLoginPage } from './mappers/cms.login-page.mapper';
 import { mapNotFoundPage } from './mappers/cms.not-found-page.mapper';
 import { getAllPages, getAlternativePages, mapPage } from './mappers/cms.page.mapper';
-import { IDataConfigurableTextsFields, IEntry } from '@/generated/contentful';
-
-export type CmsEntry<T> = Entry<T> & { configurableTexts: IDataConfigurableTextsFields };
+import { IEntry } from '@/generated/contentful';
 
 @Injectable()
 export class CmsService implements CMS.Service {
@@ -57,22 +54,13 @@ export class CmsService implements CMS.Service {
                     include: 5,
                 });
 
-                const configurableTexts = this.cms.findEntries<IDataConfigurableTextsFields>({
-                    content_type: 'dataConfigurableTexts',
-                    locale: options.locale,
-                    include: 5,
-                });
-
-                return forkJoin([component, configurableTexts]).pipe(
-                    map(([component, configurableTexts]) => {
-                        if (!(component?.fields && configurableTexts?.items[0]?.fields)) {
+                return forkJoin([component]).pipe(
+                    map(([component]) => {
+                        if (!component?.fields) {
                             throw new NotFoundException();
                         }
 
-                        const data: CmsEntry<IEntry> = {
-                            ...component,
-                            configurableTexts: configurableTexts.items[0].fields,
-                        };
+                        const data = component;
                         this.cacheService.set(key, stringify(data));
                         return data;
                     }),

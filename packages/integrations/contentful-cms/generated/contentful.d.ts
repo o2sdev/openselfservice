@@ -53,6 +53,9 @@ export interface IBlockTicketListFields {
 
     /** fields */
     fields: IComponentFieldMapping[];
+
+    /** labels */
+    labels: IDataConfigurableTexts;
 }
 
 export interface IBlockTicketList extends Entry<IBlockTicketListFields> {

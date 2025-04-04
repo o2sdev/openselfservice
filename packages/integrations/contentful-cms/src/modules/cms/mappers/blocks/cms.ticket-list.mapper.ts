@@ -1,17 +1,15 @@
 import { NotFoundException } from '@nestjs/common';
+import { Entry } from 'contentful';
 
 import { CMS } from '@o2s/framework/modules';
 
-import { CmsEntry } from '../../cms.service';
 import { mapFields } from '../cms.fieldMapping.mapper';
 import { mapPagination } from '../cms.pagination.mapper';
 import { mapTable } from '../cms.table.mapper';
 
 import { IBlockTicketListFields } from '@/generated/contentful';
 
-export const mapTicketListBlock = (
-    data: CmsEntry<IBlockTicketListFields>,
-): CMS.Model.TicketListBlock.TicketListBlock => {
+export const mapTicketListBlock = (data: Entry<IBlockTicketListFields>): CMS.Model.TicketListBlock.TicketListBlock => {
     if (!data) {
         throw new NotFoundException();
     }
@@ -31,8 +29,8 @@ export const mapTicketListBlock = (
                 // filters: mapFilters(component.filters),
                 noResults: fields.noResults.fields,
                 labels: {
-                    today: data.configurableTexts.today,
-                    yesterday: data.configurableTexts.yesterday,
+                    today: fields.labels.fields.today,
+                    yesterday: fields.labels.fields.yesterday,
                 },
                 detailsUrl: fields.detailsUrl,
             };
