@@ -1,5 +1,11 @@
 # @o2s/docs
 
+## 0.10.5
+
+### Patch Changes
+
+- 6391233: Mapper labels fixes
+
 ## 0.10.4
 
 ### Patch Changes

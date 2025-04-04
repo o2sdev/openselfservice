@@ -1,5 +1,11 @@
 # @o2s/integrations.strapi-cms
 
+## 1.0.0
+
+### Major Changes
+
+- 6391233: Mapper labels fixes
+
 ## 0.18.0
 
 ### Minor Changes

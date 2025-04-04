@@ -1,5 +1,11 @@
 # @o2s/api-harmonization
 
+## 0.19.0
+
+### Minor Changes
+
+- 51a6121: fix: update generators
+
 ## 0.18.1
 
 ### Patch Changes

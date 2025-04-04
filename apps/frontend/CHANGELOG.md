@@ -1,5 +1,16 @@
 # @o2s/frontend
 
+## 0.20.0
+
+### Minor Changes
+
+- 51a6121: fix: update generators
+
+### Patch Changes
+
+- Updated dependencies [51a6121]
+    - @o2s/api-harmonization@0.19.0
+
 ## 0.19.0
 
 ### Minor Changes
