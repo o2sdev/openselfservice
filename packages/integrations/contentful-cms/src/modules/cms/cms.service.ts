@@ -30,8 +30,8 @@ import { mapFooter } from './mappers/cms.footer.mapper';
 import { mapHeader } from './mappers/cms.header.mapper';
 import { mapLoginPage } from './mappers/cms.login-page.mapper';
 import { mapNotFoundPage } from './mappers/cms.not-found-page.mapper';
-import { getAllPages, getAlternativePages, mapPage } from './mappers/cms.page.mapper';
-import { IEntry } from '@/generated/contentful';
+import { getAllPages, getAlternativePages, mapMockPage, mapPage } from './mappers/cms.page.mapper';
+import { IEntry, IPageFields } from '@/generated/contentful';
 
 @Injectable()
 export class CmsService implements CMS.Service {
@@ -99,7 +99,39 @@ export class CmsService implements CMS.Service {
     }
 
     getPage(options: CMS.Request.GetCmsPageParams) {
-        return of(mapPage(options.slug, options.locale));
+        const key = `page-${options.slug}-${options.locale}`;
+
+        // TODO: remove this once we have a full implementation of the page mapper
+        if (options.slug !== '/cases') {
+            return of(mapMockPage(options.slug, options.locale));
+        }
+
+        return this.getCachedBlock(key, () => {
+            const pages = this.cms.findEntries<IPageFields>({
+                locale: options.locale,
+                content_type: 'page',
+                include: 5,
+            });
+
+            return forkJoin([pages]).pipe(
+                map(([pages]) => {
+                    if (!pages?.items?.length) {
+                        throw new NotFoundException();
+                    }
+
+                    const page = pages.items.find((page) => {
+                        const pattern = new RegExp(`^${page.fields.slug}$`, 'i');
+                        return pattern.test(options.slug);
+                    });
+
+                    if (!page) {
+                        throw new NotFoundException();
+                    }
+
+                    return mapPage(page);
+                }),
+            );
+        });
     }
 
     getPages(options: CMS.Request.GetCmsPagesParams) {

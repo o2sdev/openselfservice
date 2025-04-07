@@ -1,4 +1,12 @@
+import { NotFoundException } from '@nestjs/common';
+import { Entry } from 'contentful';
+
 import { CMS } from '@o2s/framework/modules';
+import { Models } from '@o2s/framework/modules';
+
+import { IBlockFaq, IBlockTicketList, IPageFields, IPageOneColumnTemplate, IPageSeo } from '@/generated/contentful';
+
+export type IBlocks = IBlockTicketList | IBlockFaq;
 
 const PAGE_DASHBOARD_PL: CMS.Model.Page.Page = {
     slug: '/',
@@ -1236,7 +1244,7 @@ const PAGE_SERVICE_DETAILS_PL: CMS.Model.Page.Page = {
     updatedAt: '2025-01-01',
 };
 
-export const mapPage = (slug: string, locale: string): CMS.Model.Page.Page | undefined => {
+export const mapMockPage = (slug: string, locale: string): CMS.Model.Page.Page | undefined => {
     switch (slug) {
         case '/':
             return locale === 'pl' ? PAGE_DASHBOARD_PL : locale === 'de' ? PAGE_DASHBOARD_DE : PAGE_DASHBOARD_EN;
@@ -1414,11 +1422,114 @@ export const getAlternativePages = (id: string, slug: string, locale: string): C
         PAGE_SERVICE_DETAILS_PL,
     ]
         .filter((page) => page.id === id)
-        .map((page) => mapPage(page.slug, locale)!)
+        .map((page) => mapMockPage(page.slug, locale)!)
         .map((page) => {
             return {
                 ...page,
                 slug: page.slug.replace('(.+)', slug.match(/(.+)\/(.+)/)?.[2] || ''),
             };
         });
+};
+
+export const mapPage = (entryPage: Entry<IPageFields>): CMS.Model.Page.Page => {
+    const template = mapTemplate(entryPage.fields.template);
+
+    if (!template) throw new NotFoundException();
+
+    const seo = mapSeo(entryPage.fields.seo);
+
+    return {
+        id: entryPage.sys.id,
+        slug: entryPage.fields.slug,
+        locale: entryPage.sys.locale,
+        template: template,
+        updatedAt: entryPage.sys.updatedAt,
+        seo: seo,
+        hasOwnTitle: entryPage.fields.hasOwnTitle,
+        parent: {
+            slug: entryPage.fields.parent?.fields.slug ?? '',
+            seo: entryPage.fields.parent?.fields.seo ? mapSeo(entryPage.fields.parent?.fields.seo) : undefined,
+            parent: entryPage.fields.parent?.fields.parent
+                ? {
+                      slug: entryPage.fields.parent?.fields.parent?.fields.slug ?? '',
+                      seo: entryPage.fields.parent?.fields.parent?.fields.seo
+                          ? mapSeo(entryPage.fields.parent?.fields.parent?.fields.seo)
+                          : undefined,
+                      parent: entryPage.fields.parent?.fields.parent?.fields.parent
+                          ? {
+                                slug: entryPage.fields.parent?.fields.parent?.fields.parent?.fields.slug ?? '',
+                                seo: entryPage.fields.parent?.fields.parent?.fields.parent?.fields.seo
+                                    ? mapSeo(entryPage.fields.parent?.fields.parent?.fields.parent?.fields.seo)
+                                    : undefined,
+                            }
+                          : undefined,
+                  }
+                : undefined,
+        },
+    };
+};
+
+const mapSeo = (seo?: IPageSeo | undefined): Models.SEO.Page => {
+    if (!seo) throw new NotFoundException();
+
+    return {
+        title: seo.fields.title ?? '',
+        noIndex: seo.fields.noIndex ?? false,
+        noFollow: seo.fields.noFollow ?? false,
+        description: seo.fields.description ?? '',
+        keywords: seo.fields.keywords || [],
+        // TODO: implement image
+        // image: seo?.fields.image,
+    };
+};
+
+const mapTemplate = (template?: IPageOneColumnTemplate): CMS.Model.Page.PageTemplate => {
+    if (!template) throw new NotFoundException();
+
+    switch (template.sys.contentType.sys.id) {
+        case 'pageOneColumnTemplate':
+            return {
+                __typename: 'OneColumnTemplate',
+                slots: {
+                    main: mapSlot(template.fields.mainSlot),
+                },
+            };
+        // TODO: add two column template
+        // case 'pageTwoColumnTemplate':
+        //     return {
+        //         __typename: 'TwoColumnTemplate',
+        //         slots: {
+        //             top: mapSlot(template.fields.topSlot),
+        //             left: mapSlot(template.fields.leftSlot),
+        //             right: mapSlot(template.fields.rightSlot),
+        //             bottom: mapSlot(template.fields.bottomSlot),
+        //         },
+        //     };
+    }
+};
+
+const mapSlot = (slot: IBlocks[]): CMS.Model.Page.SlotBlock[] => {
+    return slot.reduce((acc, component) => {
+        const __typename = mapComponent(component);
+
+        if (!__typename) return acc;
+
+        return [
+            ...acc,
+            {
+                __typename,
+                id: component.sys.id,
+            },
+        ];
+    }, [] as CMS.Model.Page.SlotBlock[]);
+};
+
+// TODO: check where component names should be defined, currently they are placed in the api-harmonization so we cannot access them here
+const mapComponent = (component: IBlocks) => {
+    switch (component.sys.contentType.sys.id) {
+        case 'blockFaq':
+            return 'FaqBlock';
+        case 'blockTicketList':
+            return 'TicketListBlock';
+    }
 };
