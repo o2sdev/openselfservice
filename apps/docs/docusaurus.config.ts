@@ -336,6 +336,12 @@ const config: Config = {
                       },
                       { to: '/blog', label: 'Blog', position: 'right', className: 'navbar__item--guides' },
                       {
+                          to: 'https://discord.com/channels/1346418719689146368/1359073601189314630',
+                          label: 'Discord',
+                          position: 'right',
+                          className: 'navbar__item--discord',
+                      },
+                      {
                           to: 'https://github.com/o2sdev/openselfservice',
                           label: 'GitHub',
                           position: 'right',
