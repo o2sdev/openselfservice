@@ -383,8 +383,12 @@ const config: Config = {
                                   href: 'https://www.linkedin.com/company/open-self-service/',
                               },
                               {
-                                  label: 'O2S on X',
+                                  label: 'Twitter / X',
                                   href: 'https://x.com/openselfservice',
+                              },
+                              {
+                                  label: 'Discord',
+                                  href: 'https://discord.com/channels/1346418719689146368/1359073601189314630',
                               },
                           ],
                       },
