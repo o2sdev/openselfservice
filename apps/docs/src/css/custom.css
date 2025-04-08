@@ -440,6 +440,15 @@ aside:not(.theme-doc-sidebar-container) {
 .navbar__item.navbar__link.navbar__item--github:hover:before {
     background: url('../../src/assets/icons/github-active.svg') no-repeat;
 }
+
+.navbar__item--discord:before {
+    background: url('../../src/assets/icons/discord.svg') no-repeat;
+}
+.navbar__item.navbar__link.navbar__item--discord.navbar__link--active::before,
+.navbar__item.navbar__link.navbar__item--discord:hover:before {
+    background: url('../../src/assets/icons/discord-active.svg') no-repeat;
+}
+
 .markdown hr {
     background-color: transparent;
     border-bottom: 1px solid !important;
