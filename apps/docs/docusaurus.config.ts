@@ -336,7 +336,7 @@ const config: Config = {
                       },
                       { to: '/blog', label: 'Blog', position: 'right', className: 'navbar__item--guides' },
                       {
-                          to: 'https://discord.com/channels/1346418719689146368/1359073601189314630',
+                          to: 'https://discord.gg/4R568nZgsT',
                           label: 'Discord',
                           position: 'right',
                           className: 'navbar__item--discord',
@@ -388,7 +388,7 @@ const config: Config = {
                               },
                               {
                                   label: 'Discord',
-                                  href: 'https://discord.com/channels/1346418719689146368/1359073601189314630',
+                                  href: 'https://discord.gg/4R568nZgsT',
                               },
                           ],
                       },
