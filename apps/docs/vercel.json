@@ -11,6 +11,11 @@
             "source": "/index.html",
             "destination": "/",
             "permanent": true
+        },
+        {
+            "source": "/discord",
+            "destination": "https://discord.com/channels/1346418719689146368/1359073601189314630",
+            "permanent": true
         }
     ]
 }
