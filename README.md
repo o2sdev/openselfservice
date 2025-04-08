@@ -95,7 +95,7 @@ If you’d like to contribute, please check the **[Contribution Guide](CONTRIBUT
 - Website: [openselfservice.com](https://www.openselfservice.com)
 - LinkedIn: [/company/open-self-service/](https://www.linkedin.com/company/open-self-service/)
 - Twitter/X: [@openselfservice](https://twitter.com/openselfservice)
-- Discord: [Join our community](https://discord.com/channels/1346418719689146368/1359073601189314630)
+- Discord: [Join our community](https://discord.gg/4R568nZgsT)
 - GitHub Discussions: [Join the conversation](https://github.com/o2sdev/openselfservice/discussions)
 
 ## 📜 License
