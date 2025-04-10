@@ -86,7 +86,8 @@ export class CmsController {
 
     @Get('/blocks/article-details')
     getArticleDetailsBlock(@Query() params: Request.GetCmsEntryParams) {
-        return this.cms.getArticleDetailsBlock(params);
+        // TODO: fix it
+        return this.cms.getArticleListBlock(params);
     }
 
     @Get('/blocks/invoice-list')

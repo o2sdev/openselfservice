@@ -349,4 +349,18 @@ export class CmsService implements CMS.Service {
         const key = `service-details-component-${options.id}-${options.locale}`;
         return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapServiceDetailsBlock)));
     }
+
+    getCategoryBlock(_options: CMS.Request.GetCmsEntryParams): Observable<CMS.Model.CategoryBlock.CategoryBlock> {
+        throw new NotImplementedException();
+    }
+
+    getCategoryListBlock(
+        _options: CMS.Request.GetCmsEntryParams,
+    ): Observable<CMS.Model.CategoryListBlock.CategoryListBlock> {
+        throw new NotImplementedException();
+    }
+
+    getQuickLinksBlock(_options: CMS.Request.GetCmsEntryParams): Observable<CMS.Model.QuickLinksBlock.QuickLinksBlock> {
+        throw new NotImplementedException();
+    }
 }

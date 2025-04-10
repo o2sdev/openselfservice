@@ -8,7 +8,6 @@ const MOCK_FOOTER_EN: CMS.Model.Footer.Footer = {
         alt: 'Logo',
         width: 92,
         height: 24,
-        name: 'Logo',
     },
     items: [
         {
@@ -63,7 +62,6 @@ const MOCK_FOOTER_PL: CMS.Model.Footer.Footer = {
         alt: 'Logo',
         width: 92,
         height: 24,
-        name: 'Logo',
     },
     items: [
         {
@@ -102,7 +100,6 @@ const MOCK_FOOTER_DE: CMS.Model.Footer.Footer = {
         alt: 'Logo',
         width: 92,
         height: 24,
-        name: 'Logo',
     },
     items: [
         {

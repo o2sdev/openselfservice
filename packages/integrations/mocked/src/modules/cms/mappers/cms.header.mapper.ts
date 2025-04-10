@@ -8,7 +8,6 @@ const MOCK_HEADER_LOGON_EN: CMS.Model.Header.Header = {
         alt: 'Logo',
         width: 92,
         height: 24,
-        name: 'Logo',
     },
     languageSwitcherLabel: 'Language',
     mobileMenuLabel: {
@@ -82,7 +81,6 @@ const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
         alt: 'Logo',
         width: 92,
         height: 24,
-        name: 'Logo',
     },
     languageSwitcherLabel: 'Sprache',
     mobileMenuLabel: {
@@ -152,7 +150,6 @@ const MOCK_HEADER_LOGON_PL: CMS.Model.Header.Header = {
         alt: 'Logo',
         width: 92,
         height: 24,
-        name: 'Logo',
     },
     languageSwitcherLabel: 'Język',
     mobileMenuLabel: {
@@ -227,7 +224,6 @@ const MOCK_HEADER_LOGOUT_EN: CMS.Model.Header.Header = {
         alt: 'Logo',
         width: 92,
         height: 24,
-        name: 'Logo',
     },
     languageSwitcherLabel: 'Language',
     mobileMenuLabel: {
@@ -255,7 +251,6 @@ const MOCK_HEADER_LOGOUT_DE: CMS.Model.Header.Header = {
         alt: 'Logo',
         width: 92,
         height: 24,
-        name: 'Logo',
     },
     languageSwitcherLabel: 'Sprache',
     mobileMenuLabel: {
@@ -283,7 +278,6 @@ const MOCK_HEADER_LOGOUT_PL: CMS.Model.Header.Header = {
         alt: 'Logo',
         width: 92,
         height: 24,
-        name: 'Logo',
     },
     languageSwitcherLabel: 'Język',
     mobileMenuLabel: {

@@ -72,7 +72,6 @@ const LOGIN_PAGE_PL: CMS.Model.LoginPage.LoginPage = {
         alt: 'Sign in image',
         width: 640,
         height: 656,
-        name: 'Sign in image',
     },
     seo: {
         title: 'Zaloguj się',
@@ -83,7 +82,6 @@ const LOGIN_PAGE_PL: CMS.Model.LoginPage.LoginPage = {
             alt: 'Sign in image',
             width: 640,
             height: 656,
-            name: 'Sign in image',
         },
         noIndex: false,
         noFollow: false,
@@ -163,7 +161,6 @@ const LOGIN_PAGE_EN: CMS.Model.LoginPage.LoginPage = {
         alt: 'Sign in image',
         width: 640,
         height: 656,
-        name: 'Sign in image',
     },
     seo: {
         title: 'Sign in | Open Self Service demo application',
@@ -195,7 +192,6 @@ const LOGIN_PAGE_EN: CMS.Model.LoginPage.LoginPage = {
             alt: 'Open Self Service - The Open Source Composable Frontend for Customer Portals',
             width: 640,
             height: 656,
-            name: 'Sign in image',
         },
         noIndex: false,
         noFollow: false,
@@ -275,7 +271,6 @@ const LOGIN_PAGE_DE: CMS.Model.LoginPage.LoginPage = {
         alt: 'Sign in image',
         width: 640,
         height: 656,
-        name: 'Sign in image',
     },
     seo: {
         title: 'Einloggen',
@@ -286,7 +281,6 @@ const LOGIN_PAGE_DE: CMS.Model.LoginPage.LoginPage = {
             alt: 'Sign in image',
             width: 640,
             height: 656,
-            name: 'Sign in image',
         },
         noIndex: false,
         noFollow: false,

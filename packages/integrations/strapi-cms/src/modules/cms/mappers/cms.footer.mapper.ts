@@ -19,7 +19,6 @@ export const mapFooter = (data: GetFooterQuery, baseURL?: string): CMS.Model.Foo
             alt: component.logo.alternativeText,
             width: component.logo.width,
             height: component.logo.height,
-            name: component.logo.name,
         },
         items: component.items
             .filter((item) => Object.keys(item).length !== 0)

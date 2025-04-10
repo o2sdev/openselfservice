@@ -9,8 +9,7 @@ const MOCK_PRODUCT_1: Products.Model.Product = {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
         width: 640,
         height: 656,
-        name: 'Rotary Hammer',
-        alternativeText: 'Rotary Hammer',
+        alt: 'Rotary Hammer',
     },
     price: {
         value: 100,
@@ -36,8 +35,7 @@ const MOCK_PRODUCT_2: Products.Model.Product = {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
         width: 640,
         height: 656,
-        name: 'Cordless Angle Grinder',
-        alternativeText: 'Cordless Angle Grinder',
+        alt: 'Cordless Angle Grinder',
     },
     price: {
         value: 199.99,
@@ -67,8 +65,7 @@ const MOCK_PRODUCT_3: Products.Model.Product = {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
         width: 640,
         height: 656,
-        name: 'Laser Measurement',
-        alternativeText: 'Laser Measurement',
+        alt: 'Laser Measurement',
     },
     price: {
         value: 100,
@@ -94,8 +91,7 @@ const MOCK_PRODUCT_4: Products.Model.Product = {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
         width: 640,
         height: 656,
-        name: 'Cordless Drill Driver',
-        alternativeText: 'Cordless Drill Driver',
+        alt: 'Cordless Drill Driver',
     },
     price: {
         value: 100,
@@ -121,8 +117,7 @@ const MOCK_PRODUCT_5: Products.Model.Product = {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
         width: 640,
         height: 656,
-        name: 'Engineering Software',
-        alternativeText: 'Engineering Software',
+        alt: 'Engineering Software',
     },
     price: {
         value: 39.99,
@@ -150,8 +145,7 @@ const MOCK_PRODUCT_6: Products.Model.Product = {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
         width: 640,
         height: 656,
-        name: 'RentPro Industrial™ – Flexible Equipment Rental Solutions',
-        alternativeText: 'RentPro Industrial™ – Flexible Equipment Rental Solutions',
+        alt: 'RentPro Industrial™ – Flexible Equipment Rental Solutions',
     },
     price: {
         value: 79.83,
@@ -179,8 +173,7 @@ const MOCK_PRODUCT_7: Products.Model.Product = {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
         width: 640,
         height: 656,
-        name: 'PrecisionPro Calibration™ – Ensuring Accuracy for Industrial Equipment',
-        alternativeText: 'PrecisionPro Calibration™ – Ensuring Accuracy for Industrial Equipment',
+        alt: 'PrecisionPro Calibration™ – Ensuring Accuracy for Industrial Equipment',
     },
     price: {
         value: 19.99,
@@ -211,8 +204,7 @@ const MOCK_PRODUCT_8: Products.Model.Product = {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
         width: 640,
         height: 656,
-        name: 'PowerCharge Solutions™ – Battery & Charger Management for Manufacturing',
-        alternativeText: 'PowerCharge Solutions™ – Battery & Charger Management for Manufacturing',
+        alt: 'PowerCharge Solutions™ – Battery & Charger Management for Manufacturing',
     },
     price: {
         value: 79.83,
@@ -244,8 +236,7 @@ const MOCK_PRODUCT_9: Products.Model.Product = {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
         width: 640,
         height: 656,
-        name: 'WeldGuard Safety™ – Protective Solutions for Welding Environments',
-        alternativeText: 'WeldGuard Safety™ – Protective Solutions for Welding Environments',
+        alt: 'WeldGuard Safety™ – Protective Solutions for Welding Environments',
     },
     price: {
         value: 10,
@@ -273,8 +264,7 @@ const MOCK_PRODUCT_10: Products.Model.Product = {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
         width: 640,
         height: 656,
-        name: 'MaxFlow Air Systems™ – Industrial Pneumatics Maintenance & Optimization',
-        alternativeText: 'MaxFlow Air Systems™ – Industrial Pneumatics Maintenance & Optimization',
+        alt: 'MaxFlow Air Systems™ – Industrial Pneumatics Maintenance & Optimization',
     },
     price: {
         value: 19.99,
@@ -301,8 +291,7 @@ const MOCK_PRODUCT_11: Products.Model.Product = {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
         width: 640,
         height: 656,
-        name: 'RapidFix Repair™ – Fast & Reliable Industrial Tool Repairs',
-        alternativeText: 'RapidFix Repair™ – Fast & Reliable Industrial Tool Repairs',
+        alt: 'RapidFix Repair™ – Fast & Reliable Industrial Tool Repairs',
     },
     price: {
         value: 19.99,
