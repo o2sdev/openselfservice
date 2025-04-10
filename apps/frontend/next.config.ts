@@ -3,14 +3,9 @@ import type { NextConfig } from 'next';
 // @ts-expect-error missing types for this library
 import withPlugins from 'next-compose-plugins';
 import createNextIntlPlugin from 'next-intl/plugin';
-import withPwa from 'next-pwa';
 
 const withBundleAnalyzer = createBundleAnalyzer({
     enabled: process.env.ANALYZE === 'true',
-});
-
-const withPWA = withPwa({
-    dest: 'public',
 });
 
 const withNextIntl = createNextIntlPlugin();
@@ -59,4 +54,4 @@ const nextConfig: NextConfig = {
     },
 };
 
-export default withPlugins([withPWA, withBundleAnalyzer, withNextIntl], nextConfig);
+export default withPlugins([withBundleAnalyzer, withNextIntl], nextConfig);
