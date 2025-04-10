@@ -1,6 +1,4 @@
-import { CMS } from '@o2s/framework/modules';
-
-const MOCK_ARTICLE_DETAILS_COMPONENT: CMS.Model.ArticleDetailsBlock.ArticleDetailsBlock = {
+const MOCK_ARTICLE_DETAILS_COMPONENT = {
     id: 'article-details-1',
     properties: {
         id: 'ID',
@@ -18,7 +16,7 @@ const MOCK_ARTICLE_DETAILS_COMPONENT: CMS.Model.ArticleDetailsBlock.ArticleDetai
     },
 };
 
-export const mapArticleDetailsBlock = (): CMS.Model.ArticleDetailsBlock.ArticleDetailsBlock => {
+export const mapArticleDetailsBlock = () => {
     return {
         ...MOCK_ARTICLE_DETAILS_COMPONENT,
     };
