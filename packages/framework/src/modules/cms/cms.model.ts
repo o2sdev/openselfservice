@@ -4,6 +4,7 @@ export * as Header from './models/header.model';
 export * as Footer from './models/footer.model';
 export * as AppConfig from './models/app-config.model';
 export * as NotFoundPage from './models/not-found-page.model';
+export * as OrganizationListBlock from './models/organization-list.model';
 
 export * as FaqBlock from './models/blocks/faq.model';
 export * as TicketListBlock from './models/blocks/ticket-list.model';

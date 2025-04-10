@@ -9,8 +9,8 @@ import { Link } from '@o2s/ui/components/link';
 import { Link as NextLink } from '@/i18n';
 
 import { LocaleSwitcher } from '../Auth/Toolbar/LocaleSwitcher';
+import { ContextSwitcher } from '../ContextSwitcher/ContextSwitcher';
 
-import { ContextSwitcher } from './ContextSwitcher/ContextSwitcher';
 import { DesktopNavigation } from './DesktopNavigation/DesktopNavigation';
 import { HeaderProps } from './Header.types';
 import { MobileNavigation } from './MobileNavigation/MobileNavigation';
@@ -57,7 +57,7 @@ export const Header: React.FC<HeaderProps> = ({ headerData, children }) => {
     };
 
     const ContextSwitchSlot = () =>
-        isSignedIn && headerData.contextSwitcher && <ContextSwitcher context={headerData.contextSwitcher} />;
+        isSignedIn && headerData.contextSwitcher && <ContextSwitcher labels={headerData.contextSwitcher} />;
 
     return (
         <header className="flex flex-col gap-4">

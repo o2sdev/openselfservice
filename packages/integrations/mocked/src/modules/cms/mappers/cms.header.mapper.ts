@@ -68,7 +68,7 @@ const MOCK_HEADER_LOGON_EN: CMS.Model.Header.Header = {
         label: 'Notifications',
     },
     contextSwitcher: {
-        label: 'Power Construction AG',
+        label: 'Change Organization',
         clear: 'Clear',
         apply: 'Apply',
         close: 'Close',
@@ -138,7 +138,7 @@ const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
         label: 'Benachrichtigungen',
     },
     contextSwitcher: {
-        label: 'Power Construction AG',
+        label: 'Change Organization',
         clear: 'Löschen',
         apply: 'Anwenden',
         close: 'Schließen',
@@ -212,7 +212,7 @@ const MOCK_HEADER_LOGON_PL: CMS.Model.Header.Header = {
         label: 'Powiadomienia',
     },
     contextSwitcher: {
-        label: 'Power Construction AG',
+        label: 'Zmiana organizacji',
         clear: 'Wyczyść',
         apply: 'Zastosuj',
         close: 'Zamknij',

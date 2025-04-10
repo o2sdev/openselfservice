@@ -17,7 +17,7 @@ const MOCK_USER_1: Users.Model.User = {
                 name: 'Acme Corporation',
                 clientType: 'B2B',
             },
-            role: 'ADMIN',
+            role: 'selfservice_admin',
         },
         {
             customer: {
@@ -25,7 +25,7 @@ const MOCK_USER_1: Users.Model.User = {
                 name: 'Retail Customer Ltd',
                 clientType: 'B2C',
             },
-            role: 'USER',
+            role: 'selfservice_user',
         },
     ],
     customers: [],
@@ -51,7 +51,7 @@ const MOCK_USER_2: Users.Model.User = {
                 name: 'Digital Services GmbH',
                 clientType: 'B2B',
             },
-            role: 'ADMIN',
+            role: 'selfservice_admin',
         },
     ],
     customers: [],

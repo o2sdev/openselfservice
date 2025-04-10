@@ -19,6 +19,8 @@ import { GlobalProvider } from '@/providers/GlobalProvider';
 import { Footer } from '@/containers/Footer/Footer';
 import { Header } from '@/containers/Header/Header';
 
+import { AppSpinner } from '@/components/AppSpinner/AppSpinner';
+
 import '@/styles/global.scss';
 
 const inter = Inter({
@@ -65,10 +67,9 @@ export default async function RootLayout({ children, params }: Props) {
                             <TooltipProvider>
                                 <div className="flex flex-col min-h-dvh">
                                     <Header headerData={init.common.header} />
-
                                     <div className="flex flex-col grow">{children}</div>
-
                                     <Footer data={init.common.footer} />
+                                    <AppSpinner />
                                 </div>
                             </TooltipProvider>
                         </GlobalProvider>

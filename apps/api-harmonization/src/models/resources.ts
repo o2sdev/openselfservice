@@ -4,6 +4,6 @@ import { ApiConfig } from '@o2s/framework/modules';
 
 export const ResourcesIntegrationConfig: ApiConfig['integrations']['resources'] = Config.resources!;
 
+export import Model = Integration.Resources.Model;
 export import Service = Integration.Resources.Service;
 export import Request = Integration.Resources.Request;
-export import Model = Integration.Resources.Model;

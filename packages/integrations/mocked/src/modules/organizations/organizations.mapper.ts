@@ -3,7 +3,7 @@ import { Models, Organizations } from '@o2s/framework/modules';
 const MOCK_CUSTOMERS: Models.Customer.Customer[] = [
     {
         id: 'cust-001',
-        name: 'John Smith',
+        name: 'Acme Corporationh',
         clientType: 'B2B',
         address: {
             country: 'US',
@@ -18,7 +18,7 @@ const MOCK_CUSTOMERS: Models.Customer.Customer[] = [
     },
     {
         id: 'cust-002',
-        name: 'Sarah Johnson',
+        name: 'Tech Solutions Inc',
         clientType: 'B2B',
         address: {
             country: 'US',
@@ -33,7 +33,7 @@ const MOCK_CUSTOMERS: Models.Customer.Customer[] = [
     },
     {
         id: 'cust-003',
-        name: 'Michael Chen',
+        name: 'Digital Services GmbH',
         clientType: 'B2C',
         address: {
             country: 'US',
@@ -111,7 +111,7 @@ const MOCK_ORGANIZATION_1: Organizations.Model.Organization = {
 const MOCK_ORGANIZATIONS = [MOCK_ORGANIZATION_1];
 
 export const mapOrganizations = (
-    options: Organizations.Request.OrganizationsListQuery,
+    options: Organizations.Request.OrganizationListQuery,
 ): Organizations.Model.Organizations => {
     const { offset = 0, limit = 10 } = options;
     return {
