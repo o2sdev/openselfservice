@@ -61,5 +61,6 @@ export const mapLoginPage = (data: GetLoginPageQuery, baseURL?: string): CMS.Mod
             noIndex: loginPage.SEO.noIndex,
             noFollow: loginPage.SEO.noFollow,
         },
+        invalidCredentials: loginPage.invalidCredentials,
     };
 };

@@ -13,13 +13,13 @@ import {
     Invoices,
     Notifications,
     Organizations,
+    Products,
     Resources,
     Search,
     Tickets,
     Users,
 } from '@o2s/framework/modules';
 
-// BLOCK IMPORT
 import { configuration } from '@o2s/api-harmonization/config/configuration';
 
 import { ArticleDetailsBlockModule } from '@o2s/api-harmonization/blocks/article-details/article-details.module';
@@ -30,11 +30,14 @@ import { NotificationDetailsBlockModule } from '@o2s/api-harmonization/blocks/no
 import { NotificationListBlockModule } from '@o2s/api-harmonization/blocks/notification-list/notification-list.module';
 import { PaymentsHistoryBlockModule } from '@o2s/api-harmonization/blocks/payments-history/payments-history.module';
 import { PaymentsSummaryBlockModule } from '@o2s/api-harmonization/blocks/payments-summary/payments-summary.module';
+import { ServiceDetailsBlockModule } from '@o2s/api-harmonization/blocks/service-details/service-details.module';
+import { ServiceListBlockModule } from '@o2s/api-harmonization/blocks/service-list/service-list.module';
 import { TicketDetailsBlockModule } from '@o2s/api-harmonization/blocks/ticket-details/ticket-details.module';
 import { TicketListBlockModule } from '@o2s/api-harmonization/blocks/ticket-list/ticket-list.module';
 import { TicketRecentBlockModule } from '@o2s/api-harmonization/blocks/ticket-recent/ticket-recent.module';
 import { UserAccountBlockModule } from '@o2s/api-harmonization/blocks/user-account/user-account.module';
 
+// BLOCK IMPORT
 import { AppConfig } from './app.config';
 import { AppService } from './app.service';
 import { ContextHeadersMiddleware } from './middleware/context-headers.middleware';
@@ -65,6 +68,7 @@ import { RoutesModule } from './modules/routes/routes.module';
         Invoices.Module.register(AppConfig),
         Articles.Module.register(AppConfig),
         Search.Module.register(AppConfig),
+        Products.Module.register(AppConfig),
 
         PageModule.register(AppConfig),
         RoutesModule.register(AppConfig),
@@ -76,17 +80,16 @@ import { RoutesModule } from './modules/routes/routes.module';
         NotificationListBlockModule.register(AppConfig),
         NotificationDetailsBlockModule.register(AppConfig),
         FaqBlockModule.register(AppConfig),
-        Articles.Module.register(AppConfig),
         ArticleDetailsBlockModule.register(AppConfig),
         ArticleListBlockModule.register(AppConfig),
-        Resources.Module.register(AppConfig),
-        Invoices.Module.register(AppConfig),
         InvoiceListBlockModule.register(AppConfig),
         PaymentsSummaryBlockModule.register(AppConfig),
         PaymentsHistoryBlockModule.register(AppConfig),
         UserAccountBlockModule.register(AppConfig),
         TicketRecentBlockModule.register(AppConfig),
-        // COMPONENT REGISTER
+        ServiceListBlockModule.register(AppConfig),
+        ServiceDetailsBlockModule.register(AppConfig),
+        // BLOCK REGISTER
     ],
     providers: [
         AppService,

@@ -1,6 +1,5 @@
 import { Invoices, Models } from '@o2s/framework/modules';
 
-const _dateToday = new Date();
 const dateYesterday = new Date();
 dateYesterday.setDate(dateYesterday.getDate() - 1);
 
@@ -17,15 +16,19 @@ const MOCK_INVOICE_1: Invoices.Model.Invoice = {
     currency: 'EUR',
     totalAmountDue: {
         value: 1250.5,
+        currency: 'EUR',
     },
     totalNetAmountDue: {
         value: 1016.67,
+        currency: 'EUR',
     },
     totalAmountPaid: {
         value: 0,
+        currency: 'EUR',
     },
     totalToBePaid: {
         value: 1250.5,
+        currency: 'EUR',
     },
 };
 
@@ -42,15 +45,19 @@ const MOCK_INVOICE_2: Invoices.Model.Invoice = {
     currency: 'EUR',
     totalAmountDue: {
         value: 3450.75,
+        currency: 'EUR',
     },
     totalNetAmountDue: {
         value: 2805.49,
+        currency: 'EUR',
     },
     totalAmountPaid: {
         value: 3450.75,
+        currency: 'EUR',
     },
     totalToBePaid: {
         value: 0,
+        currency: 'EUR',
     },
 };
 
@@ -67,15 +74,19 @@ const MOCK_INVOICE_3: Invoices.Model.Invoice = {
     currency: 'EUR',
     totalAmountDue: {
         value: 780.25,
+        currency: 'EUR',
     },
     totalNetAmountDue: {
         value: 634.35,
+        currency: 'EUR',
     },
     totalAmountPaid: {
         value: 0,
+        currency: 'EUR',
     },
     totalToBePaid: {
         value: 780.25,
+        currency: 'EUR',
     },
 };
 
@@ -92,15 +103,19 @@ const MOCK_INVOICE_4: Invoices.Model.Invoice = {
     currency: 'EUR',
     totalAmountDue: {
         value: -450.0,
+        currency: 'EUR',
     },
     totalNetAmountDue: {
         value: -365.85,
+        currency: 'EUR',
     },
     totalAmountPaid: {
         value: -450.0,
+        currency: 'EUR',
     },
     totalToBePaid: {
         value: 0,
+        currency: 'EUR',
     },
 };
 
@@ -117,15 +132,19 @@ const MOCK_INVOICE_5: Invoices.Model.Invoice = {
     currency: 'EUR',
     totalAmountDue: {
         value: 5670.3,
+        currency: 'EUR',
     },
     totalNetAmountDue: {
         value: 4610.0,
+        currency: 'EUR',
     },
     totalAmountPaid: {
         value: 0,
+        currency: 'EUR',
     },
     totalToBePaid: {
         value: 5670.3,
+        currency: 'EUR',
     },
 };
 
@@ -159,18 +178,22 @@ const RANDOM_MOCK_INVOICES: Invoices.Model.Invoice[] = Array.from({ length: 100 
         ] as Invoices.Model.PaymentStatusType,
         issuedDate: randomDate.toISOString(),
         paymentDueDate: randomDate.toISOString(),
-        currency: currency as Models.Currency.Currency,
+        currency: currency as Models.Price.Currency,
         totalAmountDue: {
             value: amountDue,
+            currency: currency as Models.Price.Currency,
         },
         totalNetAmountDue: {
             value: Math.random() * 800,
+            currency: currency as Models.Price.Currency,
         },
         totalAmountPaid: {
             value: amountPaid,
+            currency: currency as Models.Price.Currency,
         },
         totalToBePaid: {
             value: amountToBePaid,
+            currency: currency as Models.Price.Currency,
         },
     };
     return invoice;
@@ -219,12 +242,21 @@ export const mapInvoices = (query: Invoices.Request.GetInvoiceListQuery): Invoic
             const aValue = a[field as keyof Invoices.Model.Invoice];
             const bValue = b[field as keyof Invoices.Model.Invoice];
 
-            if (typeof aValue === 'string' && typeof bValue === 'string') {
-                return isAscending ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+            if (
+                field === 'totalAmountDue' ||
+                field === 'totalNetAmountDue' ||
+                field === 'totalAmountPaid' ||
+                field === 'totalToBePaid'
+            ) {
+                const aValueNumber = (aValue as Models.Price.Price).value;
+                const bValueNumber = (bValue as Models.Price.Price).value;
+                return isAscending ? aValueNumber - bValueNumber : bValueNumber - aValueNumber;
             } else if (field === 'issuedDate' || field === 'paymentDueDate') {
                 const aDate = new Date(aValue as string);
                 const bDate = new Date(bValue as string);
                 return isAscending ? aDate.getTime() - bDate.getTime() : bDate.getTime() - aDate.getTime();
+            } else if (typeof aValue === 'string' && typeof bValue === 'string') {
+                return isAscending ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
             }
             return 0;
         });

@@ -9,6 +9,8 @@ import { NotificationDetailsRenderer } from '@/blocks/NotificationDetails/Notifi
 import { NotificationListRenderer } from '@/blocks/NotificationList/NotificationList.renderer';
 import { PaymentsHistoryRenderer } from '@/blocks/PaymentsHistory/PaymentsHistory.renderer';
 import { PaymentsSummaryRenderer } from '@/blocks/PaymentsSummary/PaymentsSummary.renderer';
+import { ServiceDetailsRenderer } from '@/blocks/ServiceDetails/ServiceDetails.renderer';
+import { ServiceListRenderer } from '@/blocks/ServiceList/ServiceList.renderer';
 import { TicketDetailsRenderer } from '@/blocks/TicketDetails/TicketDetails.renderer';
 import { TicketListRenderer } from '@/blocks/TicketList/TicketList.renderer';
 import { TicketRecentRenderer } from '@/blocks/TicketRecent/TicketRecent.renderer';
@@ -39,6 +41,10 @@ export const renderBlocks = (blocks: CMS.Model.Page.SlotBlock[], slug: string[],
                 return <PaymentsHistoryRenderer key={block.id} id={block.id} accessToken={accessToken} />;
             case 'UserAccountBlock':
                 return <UserAccountRenderer key={block.id} id={block.id} accessToken={accessToken} />;
+            case 'ServiceListBlock':
+                return <ServiceListRenderer key={block.id} id={block.id} accessToken={accessToken} />;
+            case 'ServiceDetailsBlock':
+                return <ServiceDetailsRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
         }
     });
 };

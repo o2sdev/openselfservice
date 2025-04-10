@@ -3,6 +3,8 @@ import React from 'react';
 
 import { sdk } from '@/api/sdk';
 
+import { auth } from '@/auth';
+
 import { UserAccountProps } from './UserAccount.types';
 
 // an intermediary component is required for the dynamic import to work propertly with server components
@@ -12,9 +14,12 @@ export const UserAccountDynamic = dynamic(() =>
 );
 
 export const UserAccount: React.FC<UserAccountProps> = async ({ id, accessToken, locale }) => {
+    const session = await auth();
+
     const data = await sdk.blocks.getUserAccount(
         {
             id,
+            userId: session?.user?.id || '',
         },
         { 'x-locale': locale },
         accessToken,

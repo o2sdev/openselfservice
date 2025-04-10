@@ -1,5 +1,100 @@
 # @o2s/frontend
 
+## 0.20.0
+
+### Minor Changes
+
+- 51a6121: fix: update generators
+
+### Patch Changes
+
+- Updated dependencies [51a6121]
+    - @o2s/api-harmonization@0.19.0
+
+## 0.19.0
+
+### Minor Changes
+
+- fa2f2c5: fix: incorrect layout on the PaymentCard
+- dadad64: fix: service-list - wrong tag color"
+- b9090bc: incorrect colors on hover in the Navbar and the Footer
+
+### Patch Changes
+
+- Updated dependencies [b9090bc]
+    - @o2s/ui@0.13.0
+    - @o2s/api-harmonization@0.18.1
+
+## 0.18.0
+
+### Minor Changes
+
+- 98b2b61: implemented breadcrumbs
+- 77f9dc4: UI theme update
+
+### Patch Changes
+
+- Updated dependencies [77f9dc4]
+- Updated dependencies [98b2b61]
+- Updated dependencies [77f9dc4]
+- Updated dependencies [77f9dc4]
+    - @o2s/ui@0.12.0
+    - @o2s/api-harmonization@0.18.0
+
+## 0.17.0
+
+### Minor Changes
+
+- 35eeac7: implement service details page
+- 92be116: added Price model, services page implemented
+- 92be116: implement services page
+- 35eeac7: implement service details page
+- 52b3e0a: add tooltips to mocked buttons
+
+### Patch Changes
+
+- Updated dependencies [35eeac7]
+- Updated dependencies [92be116]
+- Updated dependencies [92be116]
+- Updated dependencies [35eeac7]
+- Updated dependencies [52b3e0a]
+    - @o2s/api-harmonization@0.17.0
+    - @o2s/ui@0.11.0
+
+## 0.16.0
+
+### Minor Changes
+
+- 92f2be2: Fix inconsistent data in User Profile
+
+### Patch Changes
+
+- Updated dependencies [92f2be2]
+    - @o2s/api-harmonization@0.16.0
+
+## 0.15.0
+
+### Minor Changes
+
+- 477ca3e: bug-43 - pagination component shows wrong number of total pages - fix
+
+### Patch Changes
+
+- @o2s/api-harmonization@0.15.3
+
+## 0.14.0
+
+### Minor Changes
+
+- c4ec3cb: fix validation messages on login page
+- db41474: naming fix, added error message when invalid credentials
+- 78a3c92: fix filters Context
+- db41474: use alert component to display error message
+
+### Patch Changes
+
+- @o2s/api-harmonization@0.15.2
+
 ## 0.13.1
 
 ### Patch Changes

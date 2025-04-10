@@ -18,12 +18,11 @@ import { sdk } from '@/api/sdk';
 import { downloadFile } from '@/utils/downloadFile';
 import { invoiceBadgePaymentStatusVariants } from '@/utils/mappings/invoice-badge';
 
-import { useGlobalContext } from '@/providers/GlobalProvider';
-
 import { Filters } from '@/components/Filters/Filters';
 import FiltersContextProvider, { InitialFilters } from '@/components/Filters/FiltersContext';
 import { NoResults } from '@/components/NoResults/NoResults';
 import { Pagination } from '@/components/Pagination/Pagination';
+import { Price } from '@/components/Price/Price';
 
 import { InvoiceListPureProps } from './InvoiceList.types';
 
@@ -38,7 +37,6 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
     const [data, setData] = useState<Blocks.InvoiceList.Model.InvoiceListBlock>(component);
     const [filters, setFilters] = useState(initialFilters);
     const [isPending, startTransition] = useTransition();
-    const { priceService } = useGlobalContext();
 
     const handleFilter = (data: Partial<Blocks.InvoiceList.Request.GetInvoiceListBlockQuery>) => {
         startTransition(async () => {
@@ -92,7 +90,7 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
                         <LoadingOverlay isActive={isPending}>
                             {data.invoices.data.length ? (
                                 <div className="flex flex-col gap-6">
-                                    <Table className="border-b">
+                                    <Table>
                                         <TableHeader>
                                             <TableRow>
                                                 {data.table.data.columns.map((column) => (
@@ -171,12 +169,12 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
                                                                             key={column.id}
                                                                             className="whitespace-nowrap text-right truncate"
                                                                         >
-                                                                            {
-                                                                                priceService.formatPrice(
-                                                                                    invoice[column.id],
-                                                                                    invoice.currency,
-                                                                                ).format
-                                                                            }
+                                                                            <Price
+                                                                                price={{
+                                                                                    value: invoice[column.id].value,
+                                                                                    currency: invoice.currency,
+                                                                                }}
+                                                                            />
                                                                         </TableCell>
                                                                     );
                                                                 default:
@@ -208,25 +206,22 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
                                     </Table>
 
                                     {data.pagination && (
-                                        <div className="flex flex-col gap-6">
-                                            <Pagination
-                                                disabled={isPending}
-                                                total={data.invoices.total}
-                                                offset={filters.offset || 0}
-                                                limit={data.pagination.limit}
-                                                legend={data.pagination.legend}
-                                                prev={data.pagination.prev}
-                                                next={data.pagination.next}
-                                                selectPage={data.pagination.selectPage}
-                                                onChange={(page) => {
-                                                    handleFilter({
-                                                        ...filters,
-                                                        offset: data.pagination!.limit * (page - 1),
-                                                    });
-                                                }}
-                                            />
-                                            <Separator />
-                                        </div>
+                                        <Pagination
+                                            disabled={isPending}
+                                            total={data.invoices.total}
+                                            offset={filters.offset || 0}
+                                            limit={data.pagination.limit}
+                                            legend={data.pagination.legend}
+                                            prev={data.pagination.prev}
+                                            next={data.pagination.next}
+                                            selectPage={data.pagination.selectPage}
+                                            onChange={(page) => {
+                                                handleFilter({
+                                                    ...filters,
+                                                    offset: data.pagination!.limit * (page - 1),
+                                                });
+                                            }}
+                                        />
                                     )}
                                 </div>
                             ) : (

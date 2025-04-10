@@ -1,4 +1,3 @@
-import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { TransformableInfo, format as logform } from 'logform';
 import { Logger } from 'winston';
 
@@ -48,6 +47,31 @@ export interface LoggerConfig {
     level?: LogLevel;
     format?: LogFormat;
     colorsEnabled?: boolean;
+}
+
+export interface RequestConfig {
+    url?: string;
+    baseURL?: string;
+    method?: string;
+    headers?: Record<string, string>;
+    params?: Record<string, unknown>;
+    data?: unknown;
+    [key: string]: unknown;
+}
+
+export interface ResponseType {
+    status: number;
+    statusText?: string;
+    headers?: Record<string, string>;
+    data?: unknown;
+    config: RequestConfig;
+}
+
+export interface ErrorType extends Error {
+    response?: ResponseType;
+    config?: RequestConfig;
+    status?: number;
+    statusCode?: number;
 }
 
 export class LoggerService {
@@ -361,7 +385,7 @@ export class LoggerService {
         }
     }
 
-    public cmsRequest(request: AxiosRequestConfig): void {
+    public cmsRequest(request: RequestConfig): void {
         if (this.logLevel === 'verbose') {
             this.logger?.verbose(
                 ...this.serializeMessage(
@@ -404,7 +428,7 @@ export class LoggerService {
         }
     }
 
-    public cmsResponse(request: AxiosResponse): void {
+    public cmsResponse(request: ResponseType): void {
         this.logger?.info(
             ...this.serializeMessage(
                 {},
@@ -417,7 +441,7 @@ export class LoggerService {
         );
     }
 
-    public apiRequest(request: AxiosRequestConfig): void {
+    public apiRequest(request: RequestConfig): void {
         if (this.logLevel === 'verbose') {
             this.logger?.verbose(
                 ...this.serializeMessage(
@@ -463,7 +487,7 @@ export class LoggerService {
         }
     }
 
-    public apiRequestError(error: AxiosError): void {
+    public apiRequestError(error: ErrorType): void {
         this.logger?.error(
             ...this.serializeMessage(
                 {
@@ -478,7 +502,7 @@ export class LoggerService {
         );
     }
 
-    public apiResponse(response: AxiosResponse): void {
+    public apiResponse(response: ResponseType): void {
         if (this.logLevel === 'verbose') {
             this.logger?.verbose(
                 ...this.serializeMessage(
@@ -521,7 +545,7 @@ export class LoggerService {
         }
     }
 
-    public apiResponseError(error: AxiosError): void {
+    public apiResponseError(error: ErrorType): void {
         this.logger?.error(
             ...this.serializeMessage(
                 {

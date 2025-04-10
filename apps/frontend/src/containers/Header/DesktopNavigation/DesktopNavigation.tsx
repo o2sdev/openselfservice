@@ -49,10 +49,7 @@ export function DesktopNavigation({
           }) || items[0]
         : undefined;
 
-    const navigationItemClass = cn(
-        navigationMenuTriggerStyle(),
-        'no-underline hover:no-underline text-base !text-[hsl(var(--navbar-primary))] hover:!text-[hsl(var(--accent-foreground))] focus-visible:outline-[hsl(var(--ring))] hover:bg-accent',
-    );
+    const navigationItemClass = cn(navigationMenuTriggerStyle());
 
     const getUrl = (item: Models.Navigation.NavigationGroup) => {
         if (item.items[0]?.__typename === 'NavigationItem') {
@@ -122,7 +119,7 @@ export function DesktopNavigation({
                                         className="px-4 py-2 h-16 w-full !justify-start"
                                     >
                                         <div className="flex flex-col gap-1">
-                                            <Typography variant="body" className="text-[hsl(var(--navbar-primary))]">
+                                            <Typography variant="body" className="text-navbar-primary">
                                                 {item.label}
                                             </Typography>
                                             {item.description && (
@@ -144,56 +141,50 @@ export function DesktopNavigation({
     return (
         <nav className="w-full">
             {/* Top Navigation Bar */}
-            <div className="w-full m-auto max-w-7xl flex justify-between py-6 px-6">
-                {/* Left Section */}
-                <div className="flex gap-6">
-                    {logoSlot}
+            <div className="w-full bg-navbar-background">
+                <div className="w-full m-auto max-w-7xl flex justify-between py-6 px-6">
+                    {/* Left Section */}
+                    <div className="flex gap-6">
+                        {logoSlot}
 
-                    <NavigationMenu>
-                        <NavigationMenuList className="flex gap-3">
-                            {items.map((item) => {
-                                switch (item.__typename) {
-                                    case 'NavigationItem':
-                                        return (
-                                            <NavigationItem
-                                                item={item}
-                                                key={item.label}
-                                                active={false}
-                                                className={'!text-[hsl(var(--navbar-muted))]'}
-                                            />
-                                        );
-                                    case 'NavigationGroup':
-                                        return (
-                                            <NavigationItem
-                                                item={{
-                                                    label: item.title,
-                                                    url: getUrl(item),
-                                                    __typename: 'NavigationItem',
-                                                }}
-                                                key={item.title}
-                                                active={false}
-                                                className={'!text-[hsl(var(--navbar-muted))]'}
-                                            />
-                                        );
-                                }
-                            })}
-                        </NavigationMenuList>
-                    </NavigationMenu>
-                </div>
+                        <NavigationMenu>
+                            <NavigationMenuList className="flex gap-3">
+                                {items.map((item) => {
+                                    switch (item.__typename) {
+                                        case 'NavigationItem':
+                                            return <NavigationItem item={item} key={item.label} active={false} />;
+                                        case 'NavigationGroup':
+                                            return (
+                                                <NavigationItem
+                                                    item={{
+                                                        label: item.title,
+                                                        url: getUrl(item),
+                                                        __typename: 'NavigationItem',
+                                                    }}
+                                                    key={item.title}
+                                                    active={false}
+                                                />
+                                            );
+                                    }
+                                })}
+                            </NavigationMenuList>
+                        </NavigationMenu>
+                    </div>
 
-                {/* Right Section */}
-                <div className="flex gap-4">
-                    {/* Company Selector */}
-                    {contextSlot}
+                    {/* Right Section */}
+                    <div className="flex gap-4">
+                        {/* Company Selector */}
+                        {contextSlot}
 
-                    {/* Language Selector */}
-                    {localeSlot}
+                        {/* Language Selector */}
+                        {localeSlot}
 
-                    {/* Notification Button */}
-                    {notificationSlot}
+                        {/* Notification Button */}
+                        {notificationSlot}
 
-                    {/* User Avatar */}
-                    {userSlot}
+                        {/* User Avatar */}
+                        {userSlot}
+                    </div>
                 </div>
             </div>
 
@@ -201,7 +192,7 @@ export function DesktopNavigation({
 
             {/* Bottom Navigation Bar */}
             {activeNavigationGroup?.__typename === 'NavigationGroup' && (
-                <>
+                <div className="w-full bg-navbar-sub-background">
                     <div className="w-full m-auto max-w-7xl py-2 px-6">
                         <NavigationMenu className="">
                             <NavigationMenuList className="flex gap-3">
@@ -213,7 +204,7 @@ export function DesktopNavigation({
                                                     item={item}
                                                     key={item.label}
                                                     active={pathname === item.url}
-                                                    className="!text-base"
+                                                    className="!text-base !text-navbar-sub-foreground hover:!text-navbar-sub-foreground hover:!bg-navbar-sub-accent"
                                                 />
                                             );
                                         case 'NavigationGroup':
@@ -224,7 +215,7 @@ export function DesktopNavigation({
                         </NavigationMenu>
                     </div>
                     <Separator />
-                </>
+                </div>
             )}
         </nav>
     );

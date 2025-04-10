@@ -25,6 +25,10 @@ export default function FiltersContextProvider({
         const countActiveFilters = (currentFilters: InitialFilters) => {
             let activeFilterCount = 0;
             for (const key in currentFilters) {
+                if (key === 'offset' || key === 'limit' || key === 'id') {
+                    continue;
+                }
+
                 if (currentFilters[key as keyof InitialFilters] !== initialFilters[key as keyof InitialFilters]) {
                     activeFilterCount++;
                 }

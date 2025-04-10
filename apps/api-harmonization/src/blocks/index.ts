@@ -10,4 +10,6 @@ export * as PaymentsSummary from './payments-summary';
 export * as PaymentsHistory from './payments-history';
 export * as UserAccount from './user-account';
 export * as TicketRecent from './ticket-recent';
+export * as ServiceList from './service-list';
+export * as ServiceDetails from './service-details';
 // BLOCK EXPORT

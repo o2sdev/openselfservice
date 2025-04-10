@@ -150,7 +150,7 @@ When a request from the frontend app (no matter whether for a page or a componen
                     },
                     labels: {
                         today: configurableTexts.dates.today,
-                        yesterday: configurableTexts.dates.today,
+                        yesterday: configurableTexts.dates.yesterday,
                     },
                     detailsUrl: component.detailsURL,
                 };

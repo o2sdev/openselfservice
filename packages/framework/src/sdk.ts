@@ -1,5 +1,4 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import qs from 'qs';
+import { FetchOptions, ofetch } from 'ofetch';
 
 import { getInvoiceList, getInvoicePdf } from './api/invoices';
 import { getNotification, getNotifications, markAs } from './api/notifications';
@@ -7,6 +6,15 @@ import { createTicket, getTicket, getTickets } from './api/tickets';
 import { getCustomerForCurrentUserById, getDefaultCustomerForCurrentUser, getUser } from './api/users';
 import { createInterceptors } from './interceptors';
 import { LoggerConfig } from './utils/logger';
+
+export interface CompatRequestConfig {
+    url?: string;
+    method?: string;
+    headers?: Record<string, string>;
+    params?: unknown;
+    data?: unknown;
+    [key: string]: unknown;
+}
 
 export interface SdkConfig {
     apiUrl: string;
@@ -55,29 +63,34 @@ export type ExtendedSdkMethods = {
     modules: { [key: string]: unknown };
 };
 
-export type RequestMethod = <T>(config: AxiosRequestConfig) => Promise<T>;
+export type RequestMethod = <T>(config: CompatRequestConfig) => Promise<T>;
 
 export const getSdk = ({ apiUrl, logger }: SdkConfig): Sdk => {
-    const axiosInstance: AxiosInstance = axios.create({
-        baseURL: apiUrl,
+    const { onRequest, onRequestError, onResponse, onResponseError } = createInterceptors({
+        logger,
     });
 
-    const { requestInterceptor, requestErrorInterceptor, responseSuccessInterceptor, responseErrorInterceptor } =
-        createInterceptors({
-            logger,
-        });
+    const ofetchInstance = ofetch.create({
+        baseURL: apiUrl,
+        onRequest,
+        onRequestError,
+        onResponse,
+        onResponseError,
+    });
 
-    axiosInstance.interceptors.request.use(requestInterceptor, requestErrorInterceptor);
-    axiosInstance.interceptors.response.use(responseSuccessInterceptor, responseErrorInterceptor);
+    const makeRequest: RequestMethod = <T>(config: CompatRequestConfig): Promise<T> => {
+        const fetchOptions: FetchOptions = {
+            method: config.method,
+            query: config.params as Record<string, unknown>,
+            body: config.data as BodyInit,
+        };
 
-    const makeRequest: RequestMethod = <T>(config: AxiosRequestConfig): Promise<T> => {
-        return axiosInstance.request({
-            withCredentials: true,
-            ...config,
-            paramsSerializer: (params) => {
-                return qs.stringify(params, { arrayFormat: 'repeat' });
-            },
-        });
+        if (config.headers) {
+            fetchOptions.headers = config.headers as FetchOptions['headers'];
+        }
+
+        const url = config.url || '';
+        return ofetchInstance(url, fetchOptions) as Promise<T>;
     };
 
     return {

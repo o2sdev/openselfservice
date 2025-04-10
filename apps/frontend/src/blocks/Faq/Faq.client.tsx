@@ -1,7 +1,12 @@
-import React from 'react';
+'use client';
+
+import { useTranslations } from 'next-intl';
+import React, { useState } from 'react';
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@o2s/ui/components/accordion';
 import { Button } from '@o2s/ui/components/button';
+import { TooltipContent, TooltipTrigger } from '@o2s/ui/components/tooltip';
+import { Tooltip } from '@o2s/ui/components/tooltip';
 import { Typography } from '@o2s/ui/components/typography';
 
 import { Container } from '@/components/Container/Container';
@@ -11,6 +16,9 @@ import { FaqPureProps } from './Faq.types';
 
 export const FaqPure: React.FC<FaqPureProps> = ({ ...component }) => {
     const { title, subtitle, items, banner } = component;
+
+    const t = useTranslations();
+    const [isTooltipOpen, setIsTooltipOpen] = useState(false);
 
     return (
         <Container variant="narrow">
@@ -50,7 +58,18 @@ export const FaqPure: React.FC<FaqPureProps> = ({ ...component }) => {
                             </Typography>
                             <RichText content={banner?.description} className="text-muted-foreground" />
                         </div>
-                        {banner?.buttons?.map((button) => <Button key={button.label}>{button.label}</Button>)}
+                        {banner?.button && (
+                            <Tooltip open={isTooltipOpen} onOpenChange={setIsTooltipOpen}>
+                                <TooltipTrigger asChild>
+                                    <Button key={banner?.button?.label} onClick={() => setIsTooltipOpen(true)}>
+                                        {banner?.button?.label}
+                                    </Button>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    <p>{t('general.comingSoon')}</p>
+                                </TooltipContent>
+                            </Tooltip>
+                        )}
                     </div>
                 )}
             </div>

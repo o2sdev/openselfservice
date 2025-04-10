@@ -28,6 +28,10 @@ export const Pagination: React.FC<PaginationProps> = ({
     const currentPage = offset / limit + 1;
     const totalPages = Math.ceil(total / limit);
 
+    if (totalPages <= 1) {
+        return null;
+    }
+
     return (
         <div className="flex items-center justify-between gap-6">
             <PaginationUI>
@@ -62,6 +66,7 @@ export const Pagination: React.FC<PaginationProps> = ({
                             <Typography variant="small" className="text-muted-foreground">
                                 {reactStringReplace(legend, {
                                     total: <span>{total}</span>,
+                                    totalPages: <span>{totalPages}</span>,
                                 })}
                             </Typography>
                         </div>

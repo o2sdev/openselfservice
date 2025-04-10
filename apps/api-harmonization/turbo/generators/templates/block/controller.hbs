@@ -1,7 +1,9 @@
-import { Controller, Get, Query, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Headers, Query, UseInterceptors } from '@nestjs/common';
+import { LoggerService } from '@o2s/utils.logger';
 
 import { Auth } from '@o2s/framework/modules';
-import { LoggerService } from '@o2s/utils.logger';
+
+import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
 
 import { URL } from './';
 import { Get{{ pascalCase name }}BlockQuery } from './{{ kebabCase name }}.request';
@@ -14,7 +16,7 @@ export class {{ pascalCase name }}Controller {
 
     @Get()
     @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
-    get{{ pascalCase name }}Block(@Query() query: Get{{ pascalCase name }}BlockQuery) {
-        return this.service.get{{ pascalCase name }}Block(query);
+    get{{ pascalCase name }}Block(@Headers() headers: AppHeaders, @Query() query: Get{{ pascalCase name }}BlockQuery) {
+        return this.service.get{{ pascalCase name }}Block(query, headers);
     }
 }

@@ -24,7 +24,7 @@ future-proof self-service solutions.
 
 ---
 
-## **What’s in the Docs?**
+## What’s in the Docs?
 
 This documentation is here to guide you through everything Open Self Service offers. Start with these key sections:
 

@@ -1,4 +1,23 @@
-roadmap:
-  label: Roadmap
-  permalink: /roadmap
-  description: O2S roadmap
+releases:
+    label: 'Product releases'
+    permalink: '/releases'
+    description: 'Content related to O2S releases.'
+
+tech:
+    label: 'Technology'
+    permalink: '/tech-articles'
+    description: 'Content related to technology or development of O2S.'
+
+
+integrations:
+    label: 'Integrations'
+
+frontend:
+    label: 'Frontend'
+
+backend:
+    label: 'Backend'
+
+# An empty tag definition is also valid
+# Other attributes will be inferred from the key
+emptyTag:

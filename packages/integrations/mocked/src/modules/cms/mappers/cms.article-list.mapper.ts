@@ -18,7 +18,7 @@ const MOCK_ARTICLE_LIST_BLOCK_EN: CMS.Model.ArticleListBlock.ArticleListBlock = 
     },
     pagination: {
         limit: 5,
-        legend: 'Showing {from}-{to} of {total} articles',
+        legend: 'of {totalPages} pages',
         prev: 'Previous',
         next: 'Next',
         selectPage: 'Select page',
@@ -84,7 +84,7 @@ const MOCK_ARTICLE_LIST_BLOCK_DE: CMS.Model.ArticleListBlock.ArticleListBlock = 
     },
     pagination: {
         limit: 5,
-        legend: 'Zeige {from}-{to} von {total} Artikeln',
+        legend: 'von {totalPages} Seiten',
         prev: 'Zurück',
         next: 'Weiter',
         selectPage: 'Seite auswählen',
@@ -150,7 +150,7 @@ const MOCK_ARTICLE_LIST_BLOCK_PL: CMS.Model.ArticleListBlock.ArticleListBlock = 
     },
     pagination: {
         limit: 5,
-        legend: 'Wyświetlanie {from}-{to} z {total} artykułów',
+        legend: 'of {totalPages} pages',
         prev: 'Poprzedni',
         next: 'Następny',
         selectPage: 'Wybierz stronę',

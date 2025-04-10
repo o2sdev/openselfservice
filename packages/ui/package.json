@@ -1,6 +1,6 @@
 {
     "name": "@o2s/ui",
-    "version": "0.10.2",
+    "version": "0.13.0",
     "private": true,
     "license": "MIT",
     "exports": {
@@ -45,13 +45,14 @@
         "@radix-ui/react-slot": "^1.1.2",
         "@radix-ui/react-toggle": "^1.1.2",
         "@radix-ui/react-toggle-group": "^1.1.2",
+        "@radix-ui/react-tooltip": "^1.1.8",
         "class-variance-authority": "^0.7.1",
         "classnames": "^2.5.1",
         "clsx": "^2.1.1",
         "date-fns": "^3.6.0",
         "lucide-react": "^0.482.0",
         "react": "^19.0.0",
-        "react-day-picker": "^9.6.2",
+        "react-day-picker": "^9.6.4",
         "react-dom": "^19.0.0",
         "recharts": "^2.15.1",
         "tailwind-merge": "^2.5.5",

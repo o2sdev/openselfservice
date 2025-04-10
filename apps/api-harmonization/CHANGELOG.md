@@ -1,5 +1,82 @@
 # @o2s/api-harmonization
 
+## 0.19.0
+
+### Minor Changes
+
+- 51a6121: fix: update generators
+
+## 0.18.1
+
+### Patch Changes
+
+- Updated dependencies [dadad64]
+    - @o2s/integrations.mocked@0.20.0
+
+## 0.18.0
+
+### Minor Changes
+
+- 98b2b61: implemented breadcrumbs
+
+### Patch Changes
+
+- Updated dependencies [98b2b61]
+    - @o2s/integrations.mocked@0.19.0
+    - @o2s/framework@0.20.0
+
+## 0.17.0
+
+### Minor Changes
+
+- 35eeac7: implement service details page
+- 92be116: added Price model, services page implemented
+- 92be116: implement services page
+- 35eeac7: implement service details page
+- 52b3e0a: add tooltips to mocked buttons
+
+### Patch Changes
+
+- Updated dependencies [35eeac7]
+- Updated dependencies [92be116]
+- Updated dependencies [92be116]
+- Updated dependencies [35eeac7]
+- Updated dependencies [52b3e0a]
+    - @o2s/integrations.mocked@0.18.0
+    - @o2s/framework@0.19.0
+
+## 0.16.0
+
+### Minor Changes
+
+- 92f2be2: Fix inconsistent data in User Profile
+
+### Patch Changes
+
+- Updated dependencies [3a1ff43]
+- Updated dependencies [92f2be2]
+    - @o2s/framework@0.18.0
+    - @o2s/integrations.mocked@0.17.0
+
+## 0.15.3
+
+### Patch Changes
+
+- Updated dependencies [477ca3e]
+    - @o2s/integrations.mocked@0.16.0
+    - @o2s/framework@0.17.0
+
+## 0.15.2
+
+### Patch Changes
+
+- Updated dependencies [30d3544]
+- Updated dependencies [c4ec3cb]
+- Updated dependencies [db41474]
+- Updated dependencies [30d3544]
+    - @o2s/integrations.mocked@0.15.0
+    - @o2s/framework@0.16.0
+
 ## 0.15.1
 
 ### Patch Changes

@@ -7,6 +7,8 @@ import {
     NotificationList,
     PaymentsHistory,
     PaymentsSummary,
+    ServiceDetails,
+    ServiceList,
     TicketDetails,
     TicketList,
     TicketRecent,
@@ -32,10 +34,12 @@ export class NotFound {
 
 export class Metadata {
     seo!: Models.SEO.Page;
-    parent?: {
-        slug: string;
-    };
     locales!: string[];
+}
+
+export class Breadcrumb {
+    slug!: string;
+    label!: string;
 }
 
 export class PageCommon {
@@ -49,6 +53,7 @@ export class PageData {
     };
     template!: CMS.Model.Page.PageTemplate;
     hasOwnTitle!: boolean;
+    breadcrumbs!: Breadcrumb[];
 }
 
 export type Blocks =
@@ -61,4 +66,6 @@ export type Blocks =
     | PaymentsSummary.Model.PaymentsSummaryBlock['__typename']
     | PaymentsHistory.Model.PaymentsHistoryBlock['__typename']
     | UserAccount.Model.UserAccountBlock['__typename']
-    | TicketRecent.Model.TicketRecentBlock['__typename'];
+    | TicketRecent.Model.TicketRecentBlock['__typename']
+    | ServiceList.Model.ServiceListBlock['__typename']
+    | ServiceDetails.Model.ServiceDetailsBlock['__typename'];

@@ -50,7 +50,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                 type: 'modify',
                 path: 'src/app.module.ts',
                 pattern: /(\/\/ BLOCK IMPORT)/g,
-                template: `import { {{ pascalCase name }}BlockModule } from '@o2s/api/blocks/{{kebabCase name}}/{{kebabCase name}}.module';\n// BLOCK IMPORT`,
+                template: `import { {{ pascalCase name }}BlockModule } from '@o2s/api-harmonization/blocks/{{kebabCase name}}/{{kebabCase name}}.module';\n// BLOCK IMPORT`,
             },
             {
                 type: 'modify',

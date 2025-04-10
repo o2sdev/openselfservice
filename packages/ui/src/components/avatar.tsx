@@ -1,9 +1,22 @@
 import * as AvatarPrimitive from '@radix-ui/react-avatar';
+import { VariantProps, cva } from 'class-variance-authority';
 import * as React from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
 import { Typography } from '@o2s/ui/components/typography';
+
+const avatarVariants = cva('flex h-full w-full items-center justify-center rounded-full border', {
+    variants: {
+        variant: {
+            default: 'text-foreground bg-background border-muted',
+            secondary: 'text-tertiary-foreground bg-tertiary border-tertiary-border hover:bg-tertiary-hover',
+        },
+    },
+    defaultVariants: {
+        variant: 'default',
+    },
+});
 
 type AvatarProps = {
     name?: string;
@@ -32,16 +45,15 @@ const AvatarImage = React.forwardRef<
 ));
 AvatarImage.displayName = AvatarPrimitive.Image.displayName;
 
-const AvatarFallback = React.forwardRef<
-    React.ElementRef<typeof AvatarPrimitive.Fallback>,
-    React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>
->(({ className, ...props }, ref) => (
-    <AvatarPrimitive.Fallback
-        ref={ref}
-        className={cn('flex h-full w-full items-center justify-center rounded-full bg-muted', className)}
-        {...props}
-    />
-));
+export interface AvatarFallbackProps
+    extends React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>,
+        VariantProps<typeof avatarVariants> {}
+
+const AvatarFallback = React.forwardRef<React.ElementRef<typeof AvatarPrimitive.Fallback>, AvatarFallbackProps>(
+    ({ variant, className, ...props }, ref) => (
+        <AvatarPrimitive.Fallback ref={ref} className={cn(avatarVariants({ variant, className }))} {...props} />
+    ),
+);
 AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName;
 
 type AvatarUserProps = {

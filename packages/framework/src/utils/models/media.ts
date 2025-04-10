@@ -3,4 +3,5 @@ export class Media {
     alt?: string;
     width?: number;
     height?: number;
+    priority?: boolean;
 }

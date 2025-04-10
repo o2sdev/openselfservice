@@ -2,8 +2,14 @@ import { Controller, Get, Param, Post, Query, UseInterceptors } from '@nestjs/co
 import { LoggerService } from '@o2s/utils.logger';
 import { Observable } from 'rxjs';
 
-import { Resource, Resources } from './resources.model';
-import { GetResourceListQuery, GetResourceParams } from './resources.request';
+import { Asset, Assets, Service, Services } from './resources.model';
+import {
+    GetAssetListQuery,
+    GetAssetParams,
+    GetResourceParams,
+    GetServiceListQuery,
+    GetServiceParams,
+} from './resources.request';
 import { ResourceService } from './resources.service';
 
 @Controller('/resources')
@@ -11,18 +17,28 @@ import { ResourceService } from './resources.service';
 export class ResourceController {
     constructor(protected readonly resourceService: ResourceService) {}
 
-    @Get()
-    getResourceList(@Query() query: GetResourceListQuery): Observable<Resources> {
-        return this.resourceService.getResourceList(query);
-    }
-
-    @Get(':id')
-    getResource(@Param() params: GetResourceParams): Observable<Resource> {
-        return this.resourceService.getResource(params);
-    }
-
     @Post(':id/purchase')
     purchaseResource(@Param() params: GetResourceParams) {
         return this.resourceService.purchaseOrActivateResource(params);
+    }
+
+    @Get('services')
+    getServiceList(@Query() query: GetServiceListQuery): Observable<Services> {
+        return this.resourceService.getServiceList(query);
+    }
+
+    @Get('services/:id')
+    getService(@Param() params: GetServiceParams): Observable<Service> {
+        return this.resourceService.getService(params);
+    }
+
+    @Get('assets')
+    getAssetList(@Query() query: GetAssetListQuery): Observable<Assets> {
+        return this.resourceService.getAssetList(query);
+    }
+
+    @Get('assets/:id')
+    getAsset(@Param() params: GetAssetParams): Observable<Asset> {
+        return this.resourceService.getAsset(params);
     }
 }

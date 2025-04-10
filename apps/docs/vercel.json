@@ -11,6 +11,11 @@
             "source": "/index.html",
             "destination": "/",
             "permanent": true
+        },
+        {
+            "source": "/discord",
+            "destination": "https://discord.gg/4R568nZgsT",
+            "permanent": true
         }
     ]
 }

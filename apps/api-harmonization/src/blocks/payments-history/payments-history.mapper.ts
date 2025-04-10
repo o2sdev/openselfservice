@@ -1,3 +1,5 @@
+import { Models } from '@o2s/framework/modules';
+
 import { CMS, Invoices } from '../../models';
 
 import { BarData, PaymentsHistoryBlock } from './payments-history.model';
@@ -7,7 +9,7 @@ export const mapPaymentsHistory = (
     invoices: Invoices.Model.Invoices,
     locale: string,
 ): PaymentsHistoryBlock => {
-    const currency = invoices.data[0]?.currency || '';
+    const currency = invoices.data[0]?.currency as Models.Price.Currency;
 
     return {
         __typename: 'PaymentsHistoryBlock',
@@ -19,7 +21,7 @@ export const mapPaymentsHistory = (
             bottomSegment: cms.bottomSegment,
             total: cms.total,
         },
-        currency: currency,
+        currency,
         chartData: mapChartData(invoices.data, locale, cms.monthsToShow),
     };
 };
@@ -28,7 +30,6 @@ const mapChartData = (data: Invoices.Model.Invoice[], locale: string, monthsToSh
     const now = new Date();
     const monthsToShowAgo = new Date(now.getFullYear(), now.getMonth() - monthsToShow - 1, 1);
 
-    // Create array of last 6 months
     const months = Array.from({ length: monthsToShow }, (_, i) => {
         const date = new Date(now.getFullYear(), now.getMonth() - i, 1);
         return {

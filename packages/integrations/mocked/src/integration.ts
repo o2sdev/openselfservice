@@ -7,6 +7,7 @@ import { Service as CmsService } from './modules/cms';
 import { Service as InvoicesService } from './modules/invoices';
 import { Service as NotificationsService } from './modules/notifications';
 import { Service as OrganizationService } from './modules/organizations';
+import { Service as ProductsService } from './modules/products';
 import { Service as ResourceService } from './modules/resources';
 import { Service as SearchService } from './modules/search';
 import { Service as TicketsService } from './modules/tickets';
@@ -48,5 +49,8 @@ export const Config: Partial<ApiConfig['integrations']> = {
     },
     search: {
         service: SearchService,
+    },
+    products: {
+        service: ProductsService,
     },
 };

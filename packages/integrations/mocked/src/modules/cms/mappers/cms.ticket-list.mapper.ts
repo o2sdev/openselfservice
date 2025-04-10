@@ -39,7 +39,7 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
     },
     pagination: {
         limit: 5,
-        legend: 'of {total}',
+        legend: 'of {totalPages} pages',
         prev: 'Previous',
         next: 'Next',
         selectPage: 'Select page',
@@ -158,7 +158,7 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
     },
     pagination: {
         limit: 5,
-        legend: 'von {total}',
+        legend: 'von {totalPages} Seiten',
         prev: 'Zurück',
         next: 'Weiter',
         selectPage: 'Seite auswählen',
@@ -277,7 +277,7 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
     },
     pagination: {
         limit: 5,
-        legend: 'z {total}',
+        legend: 'z {totalPages} stron',
         prev: 'Poprzednia',
         next: 'Następna',
         selectPage: 'Wybierz stronę',

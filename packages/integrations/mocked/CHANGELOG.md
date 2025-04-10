@@ -1,5 +1,77 @@
 # @o2s/integrations.mocked
 
+## 0.20.0
+
+### Minor Changes
+
+- dadad64: fix: service-list - wrong tag color"
+
+## 0.19.0
+
+### Minor Changes
+
+- 98b2b61: implemented breadcrumbs
+
+### Patch Changes
+
+- Updated dependencies [98b2b61]
+    - @o2s/framework@0.20.0
+
+## 0.18.0
+
+### Minor Changes
+
+- 35eeac7: implement service details page
+- 92be116: added Price model, services page implemented
+- 92be116: implement services page
+- 35eeac7: implement service details page
+- 52b3e0a: add tooltips to mocked buttons
+
+### Patch Changes
+
+- Updated dependencies [35eeac7]
+- Updated dependencies [92be116]
+- Updated dependencies [92be116]
+- Updated dependencies [35eeac7]
+- Updated dependencies [52b3e0a]
+    - @o2s/framework@0.19.0
+
+## 0.17.0
+
+### Minor Changes
+
+- 92f2be2: Fix inconsistent data in User Profile
+
+### Patch Changes
+
+- Updated dependencies [3a1ff43]
+    - @o2s/framework@0.18.0
+
+## 0.16.0
+
+### Minor Changes
+
+- 477ca3e: bug-43 - pagination component shows wrong number of total pages - fix
+
+### Patch Changes
+
+- Updated dependencies [477ca3e]
+    - @o2s/framework@0.17.0
+
+## 0.15.0
+
+### Minor Changes
+
+- 30d3544: fix invoices sorting
+- c4ec3cb: fix validation messages on login page
+- db41474: naming fix, added error message when invalid credentials
+- 30d3544: fix naming
+
+### Patch Changes
+
+- Updated dependencies [db41474]
+    - @o2s/framework@0.16.0
+
 ## 0.14.1
 
 ### Patch Changes

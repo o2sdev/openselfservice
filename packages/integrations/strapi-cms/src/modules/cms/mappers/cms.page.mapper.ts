@@ -26,6 +26,21 @@ export const mapPage = (data: PageFragment): CMS.Model.Page.Page => {
         hasOwnTitle: data.hasOwnTitle,
         parent: {
             slug: data.parent?.slug ?? '',
+            seo: {
+                title: data.parent?.SEO!.title ?? '',
+            },
+            parent: {
+                slug: data.parent?.parent?.slug ?? '',
+                seo: {
+                    title: data.parent?.parent?.SEO!.title ?? '',
+                },
+                parent: {
+                    slug: data.parent?.parent?.parent?.slug ?? '',
+                    seo: {
+                        title: data.parent?.parent?.parent?.SEO!.title ?? '',
+                    },
+                },
+            },
         },
     };
 };
@@ -52,6 +67,21 @@ export const mapAlternativePages = (data: PageFragment): CMS.Model.Page.Page => 
         hasOwnTitle: data.hasOwnTitle,
         parent: {
             slug: data.parent?.slug ?? '',
+            seo: {
+                title: data.parent?.SEO!.title ?? '',
+            },
+            parent: {
+                slug: data.parent?.parent?.slug ?? '',
+                seo: {
+                    title: data.parent?.parent?.SEO!.title ?? '',
+                },
+                parent: {
+                    slug: data.parent?.parent?.parent?.slug ?? '',
+                    seo: {
+                        title: data.parent?.parent?.parent?.SEO!.title ?? '',
+                    },
+                },
+            },
         },
     };
 };
@@ -102,22 +132,26 @@ const mapSlot = (slot: ComponentFragment[]): CMS.Model.Page.SlotBlock[] => {
 const mapComponent = (component: ComponentFragment) => {
     switch (component.content[0]?.__typename) {
         case 'ComponentComponentsFaq':
-            return 'FaqComponent';
+            return 'FaqBlock';
         case 'ComponentComponentsTicketList':
-            return 'TicketListComponent';
+            return 'TicketListBlock';
         case 'ComponentComponentsTicketDetails':
-            return 'TicketDetailsComponent';
+            return 'TicketDetailsBlock';
         case 'ComponentComponentsNotificationList':
-            return 'NotificationListComponent';
+            return 'NotificationListBlock';
         case 'ComponentComponentsNotificationDetails':
-            return 'NotificationDetailsComponent';
+            return 'NotificationDetailsBlock';
         case 'ComponentComponentsInvoiceList':
-            return 'InvoiceListComponent';
+            return 'InvoiceListBlock';
         case 'ComponentComponentsPaymentsSummary':
-            return 'PaymentsSummaryComponent';
+            return 'PaymentsSummaryBlock';
         case 'ComponentComponentsPaymentsHistory':
-            return 'PaymentsHistoryComponent';
+            return 'PaymentsHistoryBlock';
         case 'ComponentComponentsUserAccount':
-            return 'UserAccountComponent';
+            return 'UserAccountBlock';
+        case 'ComponentComponentsServiceList':
+            return 'ServiceListBlock';
+        case 'ComponentComponentsServiceDetails':
+            return 'ServiceDetailsBlock';
     }
 };

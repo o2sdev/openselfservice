@@ -1,5 +1,63 @@
 # @o2s/integrations.strapi-cms
 
+## 1.0.0
+
+### Major Changes
+
+- 6391233: Mapper labels fixes
+
+## 0.18.0
+
+### Minor Changes
+
+- 98b2b61: implemented breadcrumbs
+
+### Patch Changes
+
+- Updated dependencies [98b2b61]
+    - @o2s/framework@0.20.0
+
+## 0.17.0
+
+### Minor Changes
+
+- 35eeac7: implement service details page
+- 92be116: added Price model, services page implemented
+- 92be116: implement services page
+- 35eeac7: implement service details page
+- 52b3e0a: add tooltips to mocked buttons
+
+### Patch Changes
+
+- Updated dependencies [35eeac7]
+- Updated dependencies [92be116]
+- Updated dependencies [92be116]
+- Updated dependencies [35eeac7]
+- Updated dependencies [52b3e0a]
+    - @o2s/framework@0.19.0
+
+## 0.16.0
+
+### Minor Changes
+
+- 477ca3e: bug-43 - pagination component shows wrong number of total pages - fix
+
+### Patch Changes
+
+- Updated dependencies [477ca3e]
+    - @o2s/framework@0.17.0
+
+## 0.15.0
+
+### Minor Changes
+
+- db41474: naming fix, added error message when invalid credentials
+
+### Patch Changes
+
+- Updated dependencies [db41474]
+    - @o2s/framework@0.16.0
+
 ## 0.14.1
 
 ### Patch Changes

@@ -1,9 +1,12 @@
 import { SessionProvider } from 'next-auth/react';
-import { setRequestLocale } from 'next-intl/server';
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages, setRequestLocale } from 'next-intl/server';
 import { Inter } from 'next/font/google';
 import { headers } from 'next/headers';
 import { notFound } from 'next/navigation';
 import React from 'react';
+
+import { TooltipProvider } from '@o2s/ui/components/tooltip';
 
 import { sdk } from '@/api/sdk';
 
@@ -50,20 +53,26 @@ export default async function RootLayout({ children, params }: Props) {
 
     setRequestLocale(locale);
 
+    const messages = await getMessages();
+
     return (
         <html lang={locale} className={inter.className}>
             <body>
                 {/*@see https://github.com/nextauthjs/next-auth/issues/9504#issuecomment-2516665386*/}
                 <SessionProvider key={session?.user?.id} session={session} refetchOnWindowFocus={false}>
-                    <GlobalProvider config={init} locale={locale}>
-                        <div className="flex flex-col min-h-dvh">
-                            <Header headerData={init.common.header} />
+                    <NextIntlClientProvider messages={messages}>
+                        <GlobalProvider config={init} locale={locale}>
+                            <TooltipProvider>
+                                <div className="flex flex-col min-h-dvh">
+                                    <Header headerData={init.common.header} />
 
-                            <div className="flex flex-col grow">{children}</div>
+                                    <div className="flex flex-col grow">{children}</div>
 
-                            <Footer data={init.common.footer} />
-                        </div>
-                    </GlobalProvider>
+                                    <Footer data={init.common.footer} />
+                                </div>
+                            </TooltipProvider>
+                        </GlobalProvider>
+                    </NextIntlClientProvider>
                 </SessionProvider>
             </body>
         </html>

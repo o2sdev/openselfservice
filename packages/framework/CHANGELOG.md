@@ -1,5 +1,39 @@
 # @o2s/framework
 
+## 0.20.0
+
+### Minor Changes
+
+- 98b2b61: implemented breadcrumbs
+
+## 0.19.0
+
+### Minor Changes
+
+- 35eeac7: implement service details page
+- 92be116: added Price model, services page implemented
+- 92be116: implement services page
+- 35eeac7: implement service details page
+- 52b3e0a: add tooltips to mocked buttons
+
+## 0.18.0
+
+### Minor Changes
+
+- 3a1ff43: replace axios with ofetch
+
+## 0.17.0
+
+### Minor Changes
+
+- 477ca3e: bug-43 - pagination component shows wrong number of total pages - fix
+
+## 0.16.0
+
+### Minor Changes
+
+- db41474: naming fix, added error message when invalid credentials
+
 ## 0.15.1
 
 ### Patch Changes

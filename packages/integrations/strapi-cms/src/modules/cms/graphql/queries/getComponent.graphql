@@ -27,6 +27,12 @@ query getComponent($id: ID!, $locale: I18NLocaleCode!) {
             ... on ComponentComponentsUserAccount {
                 ...UserAccountComponent
             }
+            ... on ComponentComponentsServiceList {
+                ...ServiceListComponent
+            }
+            ... on ComponentComponentsServiceDetails {
+                ...ServiceDetailsComponent
+            }
         }
     }
     configurableTexts(locale: $locale) {
@@ -44,6 +50,8 @@ query getComponent($id: ID!, $locale: I18NLocaleCode!) {
             cancel
             delete
             logOut
+            settings
+            renew
         }
     }
 }

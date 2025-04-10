@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import { Alert } from '@o2s/ui/components/alert';
 import { Button } from '@o2s/ui/components/button';
-import { Sheet, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@o2s/ui/components/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@o2s/ui/components/sheet';
 import { Typography } from '@o2s/ui/components/typography';
 
 import { ContextSwitcherProps } from './ContextSwitcher.types';
@@ -19,7 +19,7 @@ export const ContextSwitcher = ({ context }: ContextSwitcherProps) => {
         <Sheet open={isCompanyMenuOpen} onOpenChange={setIsCompanyMenuOpen}>
             <SheetTrigger asChild>
                 <Button
-                    variant="secondary"
+                    variant="tertiary"
                     className="max-w-full md:max-w-[130px] lg:max-w-[330px] justify-between"
                     onClick={() => setIsCompanyMenuOpen((prev) => !prev)}
                 >
@@ -45,11 +45,11 @@ export const ContextSwitcher = ({ context }: ContextSwitcherProps) => {
 
                     <Alert>Option to switch user organizations is coming soon!</Alert>
 
-                    <SheetFooter>
-                        <Button variant="default" onClick={() => console.log('apply')}>
+                    {/* <SheetFooter>                  
+                        <Button variant="default">
                             {context.apply}
                         </Button>
-                    </SheetFooter>
+                    </SheetFooter> */}
                 </div>
             </SheetContent>
         </Sheet>
