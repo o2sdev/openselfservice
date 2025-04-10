@@ -13,7 +13,7 @@ export const ContextSwitcher = ({ labels, open = false }: ContextSwitcherProps) 
     const session = useSession();
     const [isCompanyMenuOpen, setIsCompanyMenuOpen] = useState(open);
 
-    if (!labels) {
+    if (!(labels && session.data?.user?.customer?.name)) {
         return null;
     }
 
@@ -28,7 +28,7 @@ export const ContextSwitcher = ({ labels, open = false }: ContextSwitcherProps) 
                     <span className="flex items-center gap-2 w-full truncate">
                         <Building2 className="w-4 h-4 shrink-0" />
                         <Typography className="truncate" variant="small">
-                            {session.data?.user?.customer?.name}
+                            {session.data.user.customer.name}
                         </Typography>
                     </span>
                     <ChevronDown className="w-4 h-4 shrink-0" />

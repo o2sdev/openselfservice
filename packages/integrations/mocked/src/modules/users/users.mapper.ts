@@ -13,7 +13,7 @@ const MOCK_USER_1: Users.Model.User = {
     roles: [
         {
             customer: {
-                id: 'CUST-001',
+                id: 'cust-001',
                 name: 'Acme Corporation',
                 clientType: 'B2B',
             },
@@ -21,7 +21,7 @@ const MOCK_USER_1: Users.Model.User = {
         },
         {
             customer: {
-                id: 'CUST-002',
+                id: 'cust-002',
                 name: 'Retail Customer Ltd',
                 clientType: 'B2C',
             },
@@ -39,15 +39,15 @@ const MOCK_USER_2: Users.Model.User = {
     roles: [
         {
             customer: {
-                id: 'CUST-003',
+                id: 'cust-003',
                 name: 'Tech Solutions Inc',
                 clientType: 'B2B',
             },
-            role: 'MANAGER',
+            role: 'selfservice_manager',
         },
         {
             customer: {
-                id: 'CUST-004',
+                id: 'cust-004',
                 name: 'Digital Services GmbH',
                 clientType: 'B2B',
             },

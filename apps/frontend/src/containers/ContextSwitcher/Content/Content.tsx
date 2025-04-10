@@ -36,7 +36,8 @@ export const Content = ({ labels }: ContentProps) => {
     const getCustomers = (organizations: Modules.Organizations.Model.OrganizationList) => {
         return organizations.items
             .map((organization) => organization.customers)
-            .reduce((acc, curr) => [...acc, ...curr], []);
+            .reduce((acc, curr) => [...acc, ...curr], [])
+            .sort((a, b) => a.name.localeCompare(b.name));
     };
 
     useEffect(() => {
