@@ -1,5 +1,11 @@
 # @o2s/frontend
 
+## 0.21.0
+
+### Minor Changes
+
+- 7b15c0d: replaced `next-pwa` with native manifest from next.js and added app icons
+
 ## 0.20.0
 
 ### Minor Changes
