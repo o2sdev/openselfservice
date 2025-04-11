@@ -16,13 +16,6 @@
         "prerelease": "turbo run build",
         "release": "changeset publish"
     },
-    "devDependencies": {
-        "husky": "^9.1.7",
-        "lint-staged": "^15.5.0",
-        "prettier": "^3.5.3",
-        "turbo": "^2.4.4",
-        "typescript": "5.8.2"
-    },
     "engines": {
         "node": ">=18"
     },
@@ -34,7 +27,18 @@
         "packages/integrations/*",
         "packages/utils/*"
     ],
+    "devDependencies": {
+        "husky": "^9.1.7",
+        "lint-staged": "^15.5.0",
+        "prettier": "^3.5.3",
+        "turbo": "^2.4.4",
+        "typescript": "5.8.2",
+        "@types/react": "^19.1.0",
+        "@types/react-dom": "^19.1.2"
+    },
     "dependencies": {
-        "@changesets/cli": "^2.28.1"
+        "@changesets/cli": "^2.28.1",
+        "react": "^19.1.0",
+        "react-dom": "^19.1.0"
     }
 }
