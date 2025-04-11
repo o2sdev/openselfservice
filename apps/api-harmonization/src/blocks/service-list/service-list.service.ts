@@ -26,8 +26,10 @@ export class ServiceListService {
                 return this.resourceService
                     .getServiceList(
                         {
+                            ...query,
+                            limit: query.limit || cms.pagination?.limit || 1,
+                            offset: query.offset || 0,
                             status: status as Resources.Model.ContractStatus,
-                            limit: cms.pagination?.limit || query.limit,
                         },
                         headers['authorization'] || '',
                     )
