@@ -47,7 +47,6 @@
         "@trivago/prettier-plugin-sort-imports": "^4.3.0",
         "@types/bcryptjs": "^2.4.6",
         "@types/jsonwebtoken": "^9.0.9",
-        "@types/next-pwa": "^5.6.9",
         "@types/node": "^20",
         "@types/react": "19.0.0",
         "@types/react-dom": "19.0.0",
