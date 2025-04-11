@@ -18,7 +18,7 @@ export const Faq: React.FC<FaqProps> = async ({ id, accessToken, locale }) => {
         );
 
         return <FaqDynamic {...data} id={id} accessToken={accessToken} locale={locale} />;
-    } catch (error) {
+    } catch (_error) {
         return null;
     }
 };

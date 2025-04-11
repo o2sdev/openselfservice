@@ -10,7 +10,7 @@ const project = resolve(process.cwd(), 'tsconfig.json');
 
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
-    extends: ['eslint:recommended', 'prettier'],
+    extends: ['plugin:@typescript-eslint/recommended', 'eslint:recommended', 'prettier'],
     plugins: ['only-warn'],
     globals: {
         // React: true,
@@ -30,4 +30,18 @@ module.exports = {
         // Force ESLint to detect .tsx files
         { files: ['*.js?(x)', '*.ts?(x)'] },
     ],
+    rules: {
+        '@typescript-eslint/no-unused-vars': [
+            'error',
+            {
+                args: 'all',
+                argsIgnorePattern: '^_',
+                caughtErrors: 'all',
+                caughtErrorsIgnorePattern: '^_',
+                destructuredArrayIgnorePattern: '^_',
+                varsIgnorePattern: '^_',
+                ignoreRestSiblings: true,
+            },
+        ],
+    },
 };

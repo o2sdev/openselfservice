@@ -19,7 +19,7 @@ import { UserInfo } from './UserInfo/UserInfo';
 
 export const Header: React.FC<HeaderProps> = ({ headerData, children }) => {
     const session = useSession();
-    const isSignedIn = session?.status === 'authenticated';
+    const isSignedIn = !!session.data?.user;
 
     const LogoSlot = (
         <Link asChild>
@@ -56,8 +56,7 @@ export const Header: React.FC<HeaderProps> = ({ headerData, children }) => {
         return <LocaleSwitcher label={headerData.languageSwitcherLabel ?? 'Language'} />;
     };
 
-    const ContextSwitchSlot = () =>
-        isSignedIn && headerData.contextSwitcher && <ContextSwitcher labels={headerData.contextSwitcher} />;
+    const ContextSwitchSlot = () => isSignedIn && <ContextSwitcher labels={headerData.contextSwitcher} />;
 
     return (
         <header className="flex flex-col gap-4">

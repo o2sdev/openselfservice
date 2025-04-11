@@ -25,7 +25,7 @@ export const ServiceDetails: React.FC<ServiceDetailsProps> = async ({ id, servic
         return (
             <ServiceDetailsDynamic {...data} serviceId={serviceId} id={id} accessToken={accessToken} locale={locale} />
         );
-    } catch (error) {
+    } catch (_error) {
         return null;
     }
 };

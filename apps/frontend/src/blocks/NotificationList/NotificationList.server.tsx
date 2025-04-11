@@ -20,7 +20,7 @@ export const NotificationListServer: React.FC<NotificationListProps> = async ({ 
         );
 
         return <NotificationListDynamic {...data} id={id} accessToken={accessToken} locale={locale} />;
-    } catch (error) {
+    } catch (_error) {
         return null;
     }
 };

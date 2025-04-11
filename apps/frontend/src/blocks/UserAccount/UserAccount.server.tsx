@@ -27,7 +27,7 @@ export const UserAccount: React.FC<UserAccountProps> = async ({ id, accessToken,
         );
 
         return <UserAccountDynamic {...data} id={id} accessToken={accessToken} locale={locale} />;
-    } catch (error) {
+    } catch (_error) {
         return null;
     }
 };

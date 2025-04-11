@@ -18,7 +18,11 @@ export class OrganizationsService {
 
     getOrganizations(query: GetOrganizationsQuery, headers: AppHeaders): Observable<OrganizationList> {
         const cms = this.cmsService.getOrganizationList({ locale: headers['x-locale'] });
-        const organizations = this.organizationsService.getOrganizationList(query);
+        const organizations = this.organizationsService.getOrganizationList({
+            ...query,
+            limit: query.limit || 1000,
+            offset: query.offset || 0,
+        });
 
         return forkJoin([organizations, cms]).pipe(
             map(([organizations, cms]) => {

@@ -18,7 +18,7 @@ export const TicketListServer: React.FC<TicketListProps> = async ({ id, accessTo
         );
 
         return <TicketListDynamic {...data} id={id} accessToken={accessToken} locale={locale} />;
-    } catch (error) {
+    } catch (_error) {
         return null;
     }
 };

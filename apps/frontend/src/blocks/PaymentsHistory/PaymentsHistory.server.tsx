@@ -22,7 +22,7 @@ export const PaymentsHistory: React.FC<PaymentsHistoryProps> = async ({ id, acce
         );
 
         return <PaymentsHistoryDynamic {...data} id={id} accessToken={accessToken} locale={locale} />;
-    } catch (error) {
+    } catch (_error) {
         return null;
     }
 };

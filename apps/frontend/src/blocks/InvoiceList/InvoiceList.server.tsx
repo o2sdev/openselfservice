@@ -22,7 +22,7 @@ export const InvoiceList: React.FC<InvoiceListProps> = async ({ id, accessToken,
         );
 
         return <InvoiceListDynamic {...data} id={id} accessToken={accessToken} locale={locale} />;
-    } catch (error) {
+    } catch (_error) {
         return null;
     }
 };

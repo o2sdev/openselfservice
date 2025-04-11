@@ -6,6 +6,7 @@ import { headers } from 'next/headers';
 import { notFound } from 'next/navigation';
 import React from 'react';
 
+import { Toaster } from '@o2s/ui/components/toaster';
 import { TooltipProvider } from '@o2s/ui/components/tooltip';
 
 import { sdk } from '@/api/sdk';
@@ -69,6 +70,8 @@ export default async function RootLayout({ children, params }: Props) {
                                     <Header headerData={init.common.header} />
                                     <div className="flex flex-col grow">{children}</div>
                                     <Footer data={init.common.footer} />
+
+                                    <Toaster />
                                     <AppSpinner />
                                 </div>
                             </TooltipProvider>

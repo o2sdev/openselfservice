@@ -21,8 +21,8 @@ export interface GlobalContextType {
         set: (values: { [key: string]: string }) => void;
     };
     spinner: {
-        show: boolean;
-        setShow: (show: boolean) => void;
+        isVisible: boolean;
+        toggle: (show: boolean) => void;
     };
 }
 
@@ -35,7 +35,7 @@ export const GlobalProvider = ({ config, locale, children }: GlobalProviderProps
 
     const priceService = usePriceService(locale);
 
-    const [showSpinner, setShowSpinner] = useState(false);
+    const [isSpinnerVisible, setIsSpinnerVisible] = useState(false);
 
     return (
         <GlobalContext.Provider
@@ -47,8 +47,8 @@ export const GlobalProvider = ({ config, locale, children }: GlobalProviderProps
                     set: setAlternativeUrls,
                 },
                 spinner: {
-                    show: showSpinner,
-                    setShow: setShowSpinner,
+                    isVisible: isSpinnerVisible,
+                    toggle: setIsSpinnerVisible,
                 },
             }}
         >

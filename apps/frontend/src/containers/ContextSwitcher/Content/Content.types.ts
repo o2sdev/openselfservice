@@ -1,9 +1,10 @@
+import { Modules } from '@o2s/api-harmonization';
+
+import { Models } from '@o2s/framework/modules';
+
 export interface ContentProps {
-    labels: {
-        label: string;
-        description?: string;
-        apply: string;
-    };
+    data: Modules.Organizations.Model.OrganizationList;
+    customers: Models.Customer.Customer[];
 }
 
 export interface ContextSwitcherFormValues {

@@ -23,7 +23,7 @@ export const TicketDetails: React.FC<TicketDetailsProps> = async ({ id, ticketId
         );
 
         return <TicketDetailsDynamic {...data} id={id} ticketId={ticketId} accessToken={accessToken} locale={locale} />;
-    } catch (error) {
+    } catch (_error) {
         return null;
     }
 };

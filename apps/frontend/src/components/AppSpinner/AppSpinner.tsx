@@ -9,7 +9,7 @@ import { useGlobalContext } from '@/providers/GlobalProvider';
 export const AppSpinner: React.FC = () => {
     const { spinner } = useGlobalContext();
 
-    if (!spinner.show) {
+    if (!spinner.isVisible) {
         return null;
     }
 

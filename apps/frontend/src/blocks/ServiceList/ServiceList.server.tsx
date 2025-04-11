@@ -19,7 +19,7 @@ export const ServiceList: React.FC<ServiceListProps> = async ({ id, accessToken,
             accessToken,
         );
         return <ServiceListDynamic {...data} id={id} accessToken={accessToken} locale={locale} />;
-    } catch (error) {
+    } catch (_error) {
         return null;
     }
 };

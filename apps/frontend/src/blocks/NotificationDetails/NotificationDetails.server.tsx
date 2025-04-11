@@ -36,7 +36,7 @@ export const NotificationDetails: React.FC<NotificationDetailsProps> = async ({
                 locale={locale}
             />
         );
-    } catch (error) {
+    } catch (_error) {
         return null;
     }
 };

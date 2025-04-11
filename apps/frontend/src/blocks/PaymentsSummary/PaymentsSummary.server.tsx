@@ -22,7 +22,7 @@ export const PaymentsSummary: React.FC<PaymentsSummaryProps> = async ({ id, acce
         );
 
         return <PaymentsSummaryDynamic {...data} id={id} accessToken={accessToken} locale={locale} />;
-    } catch (error) {
+    } catch (_error) {
         return null;
     }
 };

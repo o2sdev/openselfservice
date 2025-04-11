@@ -1,77 +1,40 @@
-import { Modules } from '@o2s/api-harmonization';
-import { FieldProps, Form, Formik } from 'formik';
-import { Field } from 'formik';
+import { Field, FieldProps, Form, Formik } from 'formik';
 import { useSession } from 'next-auth/react';
-import { useLocale } from 'next-intl';
-import { useEffect, useState } from 'react';
 import { object as YupObject, string as YupString } from 'yup';
 
-import { Models } from '@o2s/framework/modules';
-
-import { Alert, AlertDescription, AlertTitle } from '@o2s/ui/components/alert';
 import { Button } from '@o2s/ui/components/button';
 import { Label } from '@o2s/ui/components/label';
 import { RadioGroup, RadioGroupItem } from '@o2s/ui/components/radio-group';
-import { SheetFooter } from '@o2s/ui/components/sheet';
-import { SheetDescription } from '@o2s/ui/components/sheet';
-import { SheetHeader, SheetTitle } from '@o2s/ui/components/sheet';
+import { SheetDescription, SheetFooter, SheetHeader, SheetTitle } from '@o2s/ui/components/sheet';
 import { Typography } from '@o2s/ui/components/typography';
-
-import { sdk } from '@/api/sdk';
 
 import { useGlobalContext } from '@/providers/GlobalProvider';
 
-import { Loading } from '@/components/Loading/Loading';
-
 import { ContentProps, ContextSwitcherFormValues } from './Content.types';
 
-export const Content = ({ labels }: ContentProps) => {
-    const { spinner } = useGlobalContext();
+export const Content = ({ data, customers }: ContentProps) => {
     const session = useSession();
-    const locale = useLocale();
-    const [data, setData] = useState<Modules.Organizations.Model.OrganizationList | null>(null);
-    const [customers, setCustomers] = useState<Models.Customer.Customer[] | null>(null);
-    const [isLoading, setIsLoading] = useState(false);
+
+    const { spinner } = useGlobalContext();
+
     const initialValues = {
         customer: session.data?.user?.customer?.id,
     };
-
-    const getCustomers = (organizations: Modules.Organizations.Model.OrganizationList) => {
-        return organizations.items
-            .map((organization) => organization.customers)
-            .reduce((acc, curr) => [...acc, ...curr], [])
-            .sort((a, b) => a.name.localeCompare(b.name));
-    };
-
-    useEffect(() => {
-        const getOrganizations = async () => {
-            setIsLoading(true);
-            const organizationsData = await sdk.modules.getOrganizations(
-                { limit: 1, offset: 0 },
-                { 'x-locale': locale },
-                session.data?.accessToken || '',
-            );
-            setData(organizationsData);
-            setCustomers(getCustomers(organizationsData));
-            setIsLoading(false);
-        };
-
-        getOrganizations();
-    }, [locale, session.data?.accessToken]);
 
     const validationSchema = YupObject().shape({
         customer: YupString().required(),
     });
 
     const onSubmit = async (values: ContextSwitcherFormValues) => {
-        const customer = customers?.find((item) => item.id === values.customer);
-        if (!customer) {
+        if (!values.customer) {
             return;
         }
-        spinner.setShow(true);
+
+        spinner.toggle(true);
         await session.update({
-            customer,
+            customer: values.customer,
         });
+
         window.location.reload();
     };
 
@@ -80,74 +43,64 @@ export const Content = ({ labels }: ContentProps) => {
             <SheetHeader>
                 <SheetTitle asChild>
                     <Typography variant="h2" asChild>
-                        <h2>{labels.label}</h2>
+                        {/*TODO: add labels to data*/}
+                        <h2>{data.title}</h2>
                     </Typography>
                 </SheetTitle>
-                <SheetDescription>{labels.description}</SheetDescription>
+                {/*TODO: add labels to data*/}
+                <SheetDescription>{'data.description'}</SheetDescription>
             </SheetHeader>
-            {!isLoading ? (
-                customers?.length ? (
-                    <Formik
-                        initialValues={initialValues}
-                        enableReinitialize={true}
-                        onSubmit={(values) => onSubmit(values)}
-                        validationSchema={validationSchema}
-                    >
-                        {({ setFieldValue, isValid }) => (
-                            <Form>
-                                <div className="grid gap-4 pb-6">
-                                    <RadioGroup
-                                        className="flex flex-col gap-4"
-                                        defaultValue={initialValues.customer}
-                                        onValueChange={(value) => {
-                                            setFieldValue('customer', value);
-                                        }}
+
+            <Formik
+                initialValues={initialValues}
+                enableReinitialize={true}
+                onSubmit={(values) => onSubmit(values)}
+                validationSchema={validationSchema}
+            >
+                {({ setFieldValue, isValid }) => (
+                    <Form>
+                        <div className="grid gap-4 pb-6">
+                            <RadioGroup
+                                className="flex flex-col gap-4"
+                                defaultValue={initialValues.customer}
+                                onValueChange={async (value) => {
+                                    await setFieldValue('customer', value);
+                                }}
+                            >
+                                {customers.map((item) => (
+                                    <Field
+                                        name="customer"
+                                        type="radio"
+                                        value={item.id}
+                                        validateOnChange={true}
+                                        key={item.id}
                                     >
-                                        {customers.map((item) => (
-                                            <Field
-                                                name="customer"
-                                                type="radio"
-                                                value={item.id}
-                                                validateOnChange={true}
-                                                key={item.id}
-                                            >
-                                                {({ field }: FieldProps<string, ContextSwitcherFormValues>) => {
-                                                    return (
-                                                        <div className="flex items-center space-x-2">
-                                                            <RadioGroupItem value={field.value} id={item.id} />
-                                                            <Label htmlFor={item.id} className="flex flex-col gap-1">
-                                                                <Typography variant="body">{item.name}</Typography>
-                                                                <Typography
-                                                                    variant="small"
-                                                                    className="text-muted-foreground"
-                                                                >
-                                                                    {`${item.address?.country}, ${item.address?.city}, ${item.address?.district} - (${item.id})`}
-                                                                </Typography>
-                                                            </Label>
-                                                        </div>
-                                                    );
-                                                }}
-                                            </Field>
-                                        ))}
-                                    </RadioGroup>
-                                </div>
-                                <SheetFooter>
-                                    <Button type="submit" disabled={!isValid}>
-                                        {labels.apply}
-                                    </Button>
-                                </SheetFooter>
-                            </Form>
-                        )}
-                    </Formik>
-                ) : (
-                    <Alert>
-                        <AlertTitle>{data?.noResults.title}</AlertTitle>
-                        <AlertDescription>{data?.noResults.description}</AlertDescription>
-                    </Alert>
-                )
-            ) : (
-                <Loading bars={10} />
-            )}
+                                        {({ field }: FieldProps<string, ContextSwitcherFormValues>) => {
+                                            return (
+                                                <div className="flex items-center space-x-2">
+                                                    <RadioGroupItem value={field.value} id={item.id} />
+                                                    <Label htmlFor={item.id} className="flex flex-col gap-1">
+                                                        <Typography variant="body">{item.name}</Typography>
+                                                        <Typography variant="small" className="text-muted-foreground">
+                                                            {`${item.address?.country}, ${item.address?.city}, ${item.address?.district} - (${item.id})`}
+                                                        </Typography>
+                                                    </Label>
+                                                </div>
+                                            );
+                                        }}
+                                    </Field>
+                                ))}
+                            </RadioGroup>
+                        </div>
+                        <SheetFooter>
+                            <Button type="submit" disabled={!isValid}>
+                                {/*TODO: add labels to data*/}
+                                {'labels.apply'}
+                            </Button>
+                        </SheetFooter>
+                    </Form>
+                )}
+            </Formik>
         </div>
     );
 };
