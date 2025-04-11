@@ -1,14 +1,10 @@
-import { Block, Pagination } from '@/utils/models';
+import { Block } from '@/utils/models';
 
-export class OrganizationListBlock extends Block.Block {
+export class OrganizationList extends Block.Block {
     title?: string;
     subtitle?: string;
-    pagination?: Pagination.Pagination;
     noResults!: {
         title: string;
         description?: string;
-    };
-    labels!: {
-        apply: string;
     };
 }

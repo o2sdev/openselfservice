@@ -15,7 +15,7 @@ import { mapLoginPage } from './mappers/cms.login-page.mapper';
 import { mapNotFoundPage } from './mappers/cms.not-found-page.mapper';
 import { mapNotificationDetailsBlock } from './mappers/cms.notification-details.mapper';
 import { mapNotificationListBlock } from './mappers/cms.notification-list.mapper';
-import { mapOrganizationListBlock } from './mappers/cms.organization-list.mapper';
+import { mapOrganizationList } from './mappers/cms.organization-list.mapper';
 import { getAllPages, getAlternativePages, mapPage } from './mappers/cms.page.mapper';
 import { mapPaymentsHistoryBlock } from './mappers/cms.payments-history.mapper';
 import { mapPaymentsSummaryBlock } from './mappers/cms.payments-summary.mapper';
@@ -139,7 +139,7 @@ export class CmsService implements CMS.Service {
         return of(mapTicketRecentBlock(options.locale)).pipe(responseDelay());
     }
 
-    getOrganizationListBlock(options: CMS.Request.GetCmsOrganizationListParams) {
-        return of(mapOrganizationListBlock(options.locale)).pipe(responseDelay());
+    getOrganizationList(options: CMS.Request.GetCmsOrganizationListParams) {
+        return of(mapOrganizationList(options.locale)).pipe(responseDelay());
     }
 }

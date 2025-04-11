@@ -552,6 +552,14 @@ export type ComponentContentBanner = {
     title: Scalars['String']['output'];
 };
 
+export type ComponentContentBannerInput = {
+    altDescription?: InputMaybe<Scalars['String']['input']>;
+    button?: InputMaybe<ComponentContentLinkInput>;
+    description?: InputMaybe<Scalars['String']['input']>;
+    id?: InputMaybe<Scalars['ID']['input']>;
+    title?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type ComponentContentDynamicZone =
     | ComponentComponentsArticleList
     | ComponentComponentsArticleSections
@@ -736,6 +744,13 @@ export type ComponentContentLink = {
     id: Scalars['ID']['output'];
     label: Scalars['String']['output'];
     url: Scalars['String']['output'];
+};
+
+export type ComponentContentLinkInput = {
+    ariaLabel?: InputMaybe<Scalars['String']['input']>;
+    id?: InputMaybe<Scalars['ID']['input']>;
+    label?: InputMaybe<Scalars['String']['input']>;
+    url?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ComponentContentMessage = {
@@ -1311,6 +1326,7 @@ export type GenericMorph =
     | I18NLocale
     | LoginPage
     | NotFoundPage
+    | OrganizationList
     | Page
     | ReviewWorkflowsWorkflow
     | ReviewWorkflowsWorkflowStage
@@ -1554,6 +1570,7 @@ export type Mutation = {
     deleteHeader?: Maybe<DeleteMutationResponse>;
     deleteLoginPage?: Maybe<DeleteMutationResponse>;
     deleteNotFoundPage?: Maybe<DeleteMutationResponse>;
+    deleteOrganizationList?: Maybe<DeleteMutationResponse>;
     deletePage?: Maybe<DeleteMutationResponse>;
     deleteReviewWorkflowsWorkflow?: Maybe<DeleteMutationResponse>;
     deleteReviewWorkflowsWorkflowStage?: Maybe<DeleteMutationResponse>;
@@ -1582,6 +1599,7 @@ export type Mutation = {
     updateHeader?: Maybe<Header>;
     updateLoginPage?: Maybe<LoginPage>;
     updateNotFoundPage?: Maybe<NotFoundPage>;
+    updateOrganizationList?: Maybe<OrganizationList>;
     updatePage?: Maybe<Page>;
     updateReviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
     updateReviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
@@ -1710,6 +1728,10 @@ export type MutationDeleteNotFoundPageArgs = {
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
 };
 
+export type MutationDeleteOrganizationListArgs = {
+    locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+};
+
 export type MutationDeletePageArgs = {
     documentId: Scalars['ID']['input'];
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
@@ -1827,6 +1849,12 @@ export type MutationUpdateNotFoundPageArgs = {
     status?: InputMaybe<PublicationStatus>;
 };
 
+export type MutationUpdateOrganizationListArgs = {
+    data: OrganizationListInput;
+    locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    status?: InputMaybe<PublicationStatus>;
+};
+
 export type MutationUpdatePageArgs = {
     data: PageInput;
     documentId: Scalars['ID']['input'];
@@ -1893,6 +1921,30 @@ export type NotFoundPageInput = {
 
 export type NotFoundPageRelationResponseCollection = {
     nodes: Array<NotFoundPage>;
+};
+
+export type OrganizationList = {
+    createdAt?: Maybe<Scalars['DateTime']['output']>;
+    documentId: Scalars['ID']['output'];
+    locale?: Maybe<Scalars['String']['output']>;
+    localizations: Array<Maybe<OrganizationList>>;
+    localizations_connection?: Maybe<OrganizationListRelationResponseCollection>;
+    noResults: ComponentContentBanner;
+    publishedAt?: Maybe<Scalars['DateTime']['output']>;
+    subtitle?: Maybe<Scalars['String']['output']>;
+    title?: Maybe<Scalars['String']['output']>;
+    updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type OrganizationListInput = {
+    noResults?: InputMaybe<ComponentContentBannerInput>;
+    publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+    subtitle?: InputMaybe<Scalars['String']['input']>;
+    title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type OrganizationListRelationResponseCollection = {
+    nodes: Array<OrganizationList>;
 };
 
 export type Page = {
@@ -2023,6 +2075,7 @@ export type Query = {
     loginPage?: Maybe<LoginPage>;
     me?: Maybe<UsersPermissionsMe>;
     notFoundPage?: Maybe<NotFoundPage>;
+    organizationList?: Maybe<OrganizationList>;
     page?: Maybe<Page>;
     pages: Array<Maybe<Page>>;
     pages_connection?: Maybe<PageEntityResponseCollection>;
@@ -2213,6 +2266,11 @@ export type QueryLoginPageArgs = {
 };
 
 export type QueryNotFoundPageArgs = {
+    locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type QueryOrganizationListArgs = {
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
     status?: InputMaybe<PublicationStatus>;
 };
@@ -3038,6 +3096,7 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
               localizations_connection?: Maybe<_RefType['NotFoundPageRelationResponseCollection']>;
               page?: Maybe<_RefType['Page']>;
           })
+        | OrganizationList
         | (Omit<
               Page,
               | 'SEO'
@@ -3225,6 +3284,7 @@ export type ResolversTypes = {
     ComponentContentArticleSection: ResolverTypeWrapper<ComponentContentArticleSection>;
     ComponentContentArticleSectionFiltersInput: ComponentContentArticleSectionFiltersInput;
     ComponentContentBanner: ResolverTypeWrapper<ComponentContentBanner>;
+    ComponentContentBannerInput: ComponentContentBannerInput;
     ComponentContentDynamicZone: ResolverTypeWrapper<
         ResolversUnionTypes<ResolversTypes>['ComponentContentDynamicZone']
     >;
@@ -3252,6 +3312,7 @@ export type ResolversTypes = {
     ComponentContentKeywordFiltersInput: ComponentContentKeywordFiltersInput;
     ComponentContentKeywordInput: ComponentContentKeywordInput;
     ComponentContentLink: ResolverTypeWrapper<ComponentContentLink>;
+    ComponentContentLinkInput: ComponentContentLinkInput;
     ComponentContentMessage: ResolverTypeWrapper<ComponentContentMessage>;
     ComponentContentMessageFiltersInput: ComponentContentMessageFiltersInput;
     ComponentContentMessageSimple: ResolverTypeWrapper<ComponentContentMessageSimple>;
@@ -3423,6 +3484,9 @@ export type ResolversTypes = {
     NotFoundPageRelationResponseCollection: ResolverTypeWrapper<
         Omit<NotFoundPageRelationResponseCollection, 'nodes'> & { nodes: Array<ResolversTypes['NotFoundPage']> }
     >;
+    OrganizationList: ResolverTypeWrapper<OrganizationList>;
+    OrganizationListInput: OrganizationListInput;
+    OrganizationListRelationResponseCollection: ResolverTypeWrapper<OrganizationListRelationResponseCollection>;
     Page: ResolverTypeWrapper<
         Omit<
             Page,
@@ -3618,6 +3682,7 @@ export type ResolversParentTypes = {
     ComponentContentArticleSection: ComponentContentArticleSection;
     ComponentContentArticleSectionFiltersInput: ComponentContentArticleSectionFiltersInput;
     ComponentContentBanner: ComponentContentBanner;
+    ComponentContentBannerInput: ComponentContentBannerInput;
     ComponentContentDynamicZone: ResolversUnionTypes<ResolversParentTypes>['ComponentContentDynamicZone'];
     ComponentContentDynamicZoneInput: Scalars['ComponentContentDynamicZoneInput']['output'];
     ComponentContentErrorMessage: ComponentContentErrorMessage;
@@ -3641,6 +3706,7 @@ export type ResolversParentTypes = {
     ComponentContentKeywordFiltersInput: ComponentContentKeywordFiltersInput;
     ComponentContentKeywordInput: ComponentContentKeywordInput;
     ComponentContentLink: ComponentContentLink;
+    ComponentContentLinkInput: ComponentContentLinkInput;
     ComponentContentMessage: ComponentContentMessage;
     ComponentContentMessageFiltersInput: ComponentContentMessageFiltersInput;
     ComponentContentMessageSimple: ComponentContentMessageSimple;
@@ -3792,6 +3858,9 @@ export type ResolversParentTypes = {
     NotFoundPageRelationResponseCollection: Omit<NotFoundPageRelationResponseCollection, 'nodes'> & {
         nodes: Array<ResolversParentTypes['NotFoundPage']>;
     };
+    OrganizationList: OrganizationList;
+    OrganizationListInput: OrganizationListInput;
+    OrganizationListRelationResponseCollection: OrganizationListRelationResponseCollection;
     Page: Omit<
         Page,
         | 'SEO'
@@ -5098,6 +5167,7 @@ export type GenericMorphResolvers<
         | 'I18NLocale'
         | 'LoginPage'
         | 'NotFoundPage'
+        | 'OrganizationList'
         | 'Page'
         | 'ReviewWorkflowsWorkflow'
         | 'ReviewWorkflowsWorkflowStage'
@@ -5387,6 +5457,12 @@ export type MutationResolvers<
         ContextType,
         Partial<MutationDeleteNotFoundPageArgs>
     >;
+    deleteOrganizationList?: Resolver<
+        Maybe<ResolversTypes['DeleteMutationResponse']>,
+        ParentType,
+        ContextType,
+        Partial<MutationDeleteOrganizationListArgs>
+    >;
     deletePage?: Resolver<
         Maybe<ResolversTypes['DeleteMutationResponse']>,
         ParentType,
@@ -5519,6 +5595,12 @@ export type MutationResolvers<
         ContextType,
         RequireFields<MutationUpdateNotFoundPageArgs, 'data' | 'status'>
     >;
+    updateOrganizationList?: Resolver<
+        Maybe<ResolversTypes['OrganizationList']>,
+        ParentType,
+        ContextType,
+        RequireFields<MutationUpdateOrganizationListArgs, 'data' | 'status'>
+    >;
     updatePage?: Resolver<
         Maybe<ResolversTypes['Page']>,
         ParentType,
@@ -5592,6 +5674,36 @@ export type NotFoundPageRelationResponseCollectionResolvers<
         ResolversParentTypes['NotFoundPageRelationResponseCollection'] = ResolversParentTypes['NotFoundPageRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['NotFoundPage']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type OrganizationListResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['OrganizationList'] = ResolversParentTypes['OrganizationList'],
+> = {
+    createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    documentId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    locale?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    localizations?: Resolver<Array<Maybe<ResolversTypes['OrganizationList']>>, ParentType, ContextType>;
+    localizations_connection?: Resolver<
+        Maybe<ResolversTypes['OrganizationListRelationResponseCollection']>,
+        ParentType,
+        ContextType
+    >;
+    noResults?: Resolver<ResolversTypes['ComponentContentBanner'], ParentType, ContextType>;
+    publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    subtitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type OrganizationListRelationResponseCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['OrganizationListRelationResponseCollection'] = ResolversParentTypes['OrganizationListRelationResponseCollection'],
+> = {
+    nodes?: Resolver<Array<ResolversTypes['OrganizationList']>, ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -5838,6 +5950,12 @@ export type QueryResolvers<
         ParentType,
         ContextType,
         RequireFields<QueryNotFoundPageArgs, 'status'>
+    >;
+    organizationList?: Resolver<
+        Maybe<ResolversTypes['OrganizationList']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryOrganizationListArgs, 'status'>
     >;
     page?: Resolver<
         Maybe<ResolversTypes['Page']>,
@@ -6384,6 +6502,8 @@ export type Resolvers<ContextType = any> = {
     Mutation?: MutationResolvers<ContextType>;
     NotFoundPage?: NotFoundPageResolvers<ContextType>;
     NotFoundPageRelationResponseCollection?: NotFoundPageRelationResponseCollectionResolvers<ContextType>;
+    OrganizationList?: OrganizationListResolvers<ContextType>;
+    OrganizationListRelationResponseCollection?: OrganizationListRelationResponseCollectionResolvers<ContextType>;
     Page?: PageResolvers<ContextType>;
     PageEntityResponseCollection?: PageEntityResponseCollectionResolvers<ContextType>;
     PageRelationResponseCollection?: PageRelationResponseCollectionResolvers<ContextType>;
@@ -6588,6 +6708,13 @@ export type NotFoundPageFragment = {
     url?: string;
     urlLabel: string;
     page?: { slug: string };
+};
+
+export type OrganizationListFragment = {
+    documentId: string;
+    title?: string;
+    subtitle?: string;
+    noResults: { title: string; description?: string };
 };
 
 export type PageFragment = {
@@ -7818,6 +7945,19 @@ export type GetNotFoundPageQuery = {
     notFoundPage?: { title: string; description: string; url?: string; urlLabel: string; page?: { slug: string } };
 };
 
+export type GetOrganizationListQueryVariables = Exact<{
+    locale: Scalars['I18NLocaleCode']['input'];
+}>;
+
+export type GetOrganizationListQuery = {
+    organizationList?: {
+        documentId: string;
+        title?: string;
+        subtitle?: string;
+        noResults: { title: string; description?: string };
+    };
+};
+
 export type GetPageQueryVariables = Exact<{
     slug: Scalars['String']['input'];
     locale: Scalars['I18NLocaleCode']['input'];
@@ -8299,6 +8439,17 @@ export const NotFoundPageFragmentDoc = gql`
         urlLabel
         page {
             slug
+        }
+    }
+`;
+export const OrganizationListFragmentDoc = gql`
+    fragment OrganizationList on OrganizationList {
+        documentId
+        title
+        subtitle
+        noResults {
+            title
+            description
         }
     }
 `;
@@ -8821,6 +8972,14 @@ export const GetNotFoundPageDocument = gql`
     }
     ${NotFoundPageFragmentDoc}
 `;
+export const GetOrganizationListDocument = gql`
+    query getOrganizationList($locale: I18NLocaleCode!) {
+        organizationList(locale: $locale) {
+            ...OrganizationList
+        }
+    }
+    ${OrganizationListFragmentDoc}
+`;
 export const GetPageDocument = gql`
     query getPage($slug: String!, $locale: I18NLocaleCode!) {
         pages(filters: { slug: { endsWith: $slug } }, pagination: { limit: 1 }, locale: $locale) {
@@ -8853,6 +9012,7 @@ const GetHeaderDocumentString = print(GetHeaderDocument);
 const GetLocalesDocumentString = print(GetLocalesDocument);
 const GetLoginPageDocumentString = print(GetLoginPageDocument);
 const GetNotFoundPageDocumentString = print(GetNotFoundPageDocument);
+const GetOrganizationListDocumentString = print(GetOrganizationListDocument);
 const GetPageDocumentString = print(GetPageDocument);
 const GetPagesDocumentString = print(GetPagesDocument);
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
@@ -9000,6 +9160,27 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
                         ...wrappedRequestHeaders,
                     }),
                 'getNotFoundPage',
+                'query',
+                variables,
+            );
+        },
+        getOrganizationList(
+            variables: GetOrganizationListQueryVariables,
+            requestHeaders?: GraphQLClientRequestHeaders,
+        ): Promise<{
+            data: GetOrganizationListQuery;
+            errors?: GraphQLError[];
+            extensions?: any;
+            headers: Headers;
+            status: number;
+        }> {
+            return withWrapper(
+                (wrappedRequestHeaders) =>
+                    client.rawRequest<GetOrganizationListQuery>(GetOrganizationListDocumentString, variables, {
+                        ...requestHeaders,
+                        ...wrappedRequestHeaders,
+                    }),
+                'getOrganizationList',
                 'query',
                 variables,
             );

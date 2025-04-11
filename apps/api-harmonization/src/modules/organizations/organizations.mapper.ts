@@ -6,16 +6,14 @@ import { OrganizationList } from './organizations.model';
 
 export const mapOrganizationList = (
     organizations: Organizations.Model.Organizations | undefined,
-    cms: CMS.Model.OrganizationListBlock.OrganizationListBlock,
+    cms: CMS.Model.OrganizationList.OrganizationList,
     _locale: string,
 ): OrganizationList => {
     return {
         id: cms.id,
         title: cms.title,
         subtitle: cms.subtitle,
-        pagination: cms.pagination,
         noResults: cms.noResults,
-        labels: cms.labels,
         items: mapOrganizations(organizations?.data || []),
     };
 };

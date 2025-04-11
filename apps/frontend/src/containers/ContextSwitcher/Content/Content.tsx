@@ -8,6 +8,7 @@ import { object as YupObject, string as YupString } from 'yup';
 
 import { Models } from '@o2s/framework/modules';
 
+import { Alert, AlertDescription, AlertTitle } from '@o2s/ui/components/alert';
 import { Button } from '@o2s/ui/components/button';
 import { Label } from '@o2s/ui/components/label';
 import { RadioGroup, RadioGroupItem } from '@o2s/ui/components/radio-group';
@@ -28,7 +29,9 @@ export const Content = ({ labels }: ContentProps) => {
     const { spinner } = useGlobalContext();
     const session = useSession();
     const locale = useLocale();
+    const [data, setData] = useState<Modules.Organizations.Model.OrganizationList | null>(null);
     const [customers, setCustomers] = useState<Models.Customer.Customer[] | null>(null);
+    const [isLoading, setIsLoading] = useState(false);
     const initialValues = {
         customer: session.data?.user?.customer?.id,
     };
@@ -42,12 +45,15 @@ export const Content = ({ labels }: ContentProps) => {
 
     useEffect(() => {
         const getOrganizations = async () => {
-            const organizationList = await sdk.modules.getOrganizations(
+            setIsLoading(true);
+            const organizationsData = await sdk.modules.getOrganizations(
                 { limit: 1, offset: 0 },
                 { 'x-locale': locale },
                 session.data?.accessToken || '',
             );
-            setCustomers(getCustomers(organizationList));
+            setData(organizationsData);
+            setCustomers(getCustomers(organizationsData));
+            setIsLoading(false);
         };
 
         getOrganizations();
@@ -79,59 +85,66 @@ export const Content = ({ labels }: ContentProps) => {
                 </SheetTitle>
                 <SheetDescription>{labels.description}</SheetDescription>
             </SheetHeader>
-            {customers ? (
-                <Formik
-                    initialValues={initialValues}
-                    enableReinitialize={true}
-                    onSubmit={(values) => onSubmit(values)}
-                    validationSchema={validationSchema}
-                >
-                    {({ setFieldValue, isValid }) => (
-                        <Form>
-                            <div className="grid gap-4 pb-6">
-                                <RadioGroup
-                                    className="flex flex-col gap-4"
-                                    defaultValue={initialValues.customer}
-                                    onValueChange={(value) => {
-                                        setFieldValue('customer', value);
-                                    }}
-                                >
-                                    {customers.map((item) => (
-                                        <Field
-                                            name="customer"
-                                            type="radio"
-                                            value={item.id}
-                                            validateOnChange={true}
-                                            key={item.id}
-                                        >
-                                            {({ field }: FieldProps<string, ContextSwitcherFormValues>) => {
-                                                return (
-                                                    <div className="flex items-center space-x-2">
-                                                        <RadioGroupItem value={field.value} id={item.id} />
-                                                        <Label htmlFor={item.id} className="flex flex-col gap-1">
-                                                            <Typography variant="body">{item.name}</Typography>
-                                                            <Typography
-                                                                variant="small"
-                                                                className="text-muted-foreground"
-                                                            >
-                                                                {`${item.address?.country}, ${item.address?.city}, ${item.address?.district} - (${item.id})`}
-                                                            </Typography>
-                                                        </Label>
-                                                    </div>
-                                                );
-                                            }}
-                                        </Field>
-                                    ))}
-                                </RadioGroup>
-                            </div>
-                            <SheetFooter>
-                                <Button type="submit" disabled={!isValid}>
-                                    {labels.apply}
-                                </Button>
-                            </SheetFooter>
-                        </Form>
-                    )}
-                </Formik>
+            {!isLoading ? (
+                customers?.length ? (
+                    <Formik
+                        initialValues={initialValues}
+                        enableReinitialize={true}
+                        onSubmit={(values) => onSubmit(values)}
+                        validationSchema={validationSchema}
+                    >
+                        {({ setFieldValue, isValid }) => (
+                            <Form>
+                                <div className="grid gap-4 pb-6">
+                                    <RadioGroup
+                                        className="flex flex-col gap-4"
+                                        defaultValue={initialValues.customer}
+                                        onValueChange={(value) => {
+                                            setFieldValue('customer', value);
+                                        }}
+                                    >
+                                        {customers.map((item) => (
+                                            <Field
+                                                name="customer"
+                                                type="radio"
+                                                value={item.id}
+                                                validateOnChange={true}
+                                                key={item.id}
+                                            >
+                                                {({ field }: FieldProps<string, ContextSwitcherFormValues>) => {
+                                                    return (
+                                                        <div className="flex items-center space-x-2">
+                                                            <RadioGroupItem value={field.value} id={item.id} />
+                                                            <Label htmlFor={item.id} className="flex flex-col gap-1">
+                                                                <Typography variant="body">{item.name}</Typography>
+                                                                <Typography
+                                                                    variant="small"
+                                                                    className="text-muted-foreground"
+                                                                >
+                                                                    {`${item.address?.country}, ${item.address?.city}, ${item.address?.district} - (${item.id})`}
+                                                                </Typography>
+                                                            </Label>
+                                                        </div>
+                                                    );
+                                                }}
+                                            </Field>
+                                        ))}
+                                    </RadioGroup>
+                                </div>
+                                <SheetFooter>
+                                    <Button type="submit" disabled={!isValid}>
+                                        {labels.apply}
+                                    </Button>
+                                </SheetFooter>
+                            </Form>
+                        )}
+                    </Formik>
+                ) : (
+                    <Alert>
+                        <AlertTitle>{data?.noResults.title}</AlertTitle>
+                        <AlertDescription>{data?.noResults.description}</AlertDescription>
+                    </Alert>
+                )
             ) : (
                 <Loading bars={10} />
             )}

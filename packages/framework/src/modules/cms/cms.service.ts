@@ -95,7 +95,7 @@ export abstract class CmsService {
         options: CMS.Request.GetCmsEntryParams,
     ): Observable<CMS.Model.ServiceDetailsBlock.ServiceDetailsBlock>;
 
-    abstract getOrganizationListBlock(
+    abstract getOrganizationList(
         options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.OrganizationListBlock.OrganizationListBlock>;
+    ): Observable<CMS.Model.OrganizationList.OrganizationList>;
 }
