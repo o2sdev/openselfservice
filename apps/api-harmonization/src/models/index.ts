@@ -5,3 +5,4 @@ export * as Invoices from './invoices';
 export * as Users from './users';
 export * as Resources from './resources';
 export * as Products from './products';
+export * as Organizations from './organizations';

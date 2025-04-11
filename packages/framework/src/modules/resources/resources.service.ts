@@ -14,7 +14,7 @@ export abstract class ResourceService {
 
     abstract purchaseOrActivateResource(params: GetResourceParams): Observable<void>;
 
-    abstract getServiceList(query: GetServiceListQuery): Observable<Services>;
+    abstract getServiceList(query: GetServiceListQuery, authorization: string): Observable<Services>;
     abstract getService(params: GetServiceParams): Observable<Service>;
 
     abstract getAssetList(query: GetAssetListQuery): Observable<Assets>;

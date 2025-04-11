@@ -16,10 +16,10 @@ const MOCK_CUSTOMER_1: Models.Customer.Customer = {
     },
     roles: [
         {
-            role: 'user',
+            role: 'selfservice_user',
         },
         {
-            role: 'admin',
+            role: 'selfservice_admin',
         },
     ],
     parentOrgId: 'org-001',
@@ -41,7 +41,7 @@ const MOCK_CUSTOMER_2: Models.Customer.Customer = {
     },
     roles: [
         {
-            role: 'user',
+            role: 'selfservice_user',
         },
     ],
     parentOrgId: 'org-002',
@@ -63,7 +63,7 @@ const MOCK_CUSTOMER_3: Models.Customer.Customer = {
     },
     roles: [
         {
-            role: 'admin',
+            role: 'selfservice_admin',
         },
     ],
     parentOrgId: 'org-003',

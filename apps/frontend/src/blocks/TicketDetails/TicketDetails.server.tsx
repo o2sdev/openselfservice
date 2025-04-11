@@ -10,16 +10,20 @@ export const TicketDetailsDynamic = dynamic(() =>
 );
 
 export const TicketDetails: React.FC<TicketDetailsProps> = async ({ id, ticketId, accessToken, locale }) => {
-    const data = await sdk.blocks.getTicketDetails(
-        {
-            id: ticketId,
-        },
-        {
-            id,
-        },
-        { 'x-locale': locale },
-        accessToken,
-    );
+    try {
+        const data = await sdk.blocks.getTicketDetails(
+            {
+                id: ticketId,
+            },
+            {
+                id,
+            },
+            { 'x-locale': locale },
+            accessToken,
+        );
 
-    return <TicketDetailsDynamic {...data} id={id} ticketId={ticketId} accessToken={accessToken} locale={locale} />;
+        return <TicketDetailsDynamic {...data} id={id} ticketId={ticketId} accessToken={accessToken} locale={locale} />;
+    } catch (_error) {
+        return null;
+    }
 };

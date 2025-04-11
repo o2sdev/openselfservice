@@ -23,8 +23,8 @@ export class ResourceController {
     }
 
     @Get('services')
-    getServiceList(@Query() query: GetServiceListQuery): Observable<Services> {
-        return this.resourceService.getServiceList(query);
+    getServiceList(@Query() query: GetServiceListQuery, authorization: string): Observable<Services> {
+        return this.resourceService.getServiceList(query, authorization);
     }
 
     @Get('services/:id')

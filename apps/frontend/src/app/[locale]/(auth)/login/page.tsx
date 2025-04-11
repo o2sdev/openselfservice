@@ -111,7 +111,7 @@ export default async function LoginPage({ params }: Readonly<Props>) {
                 )}
             </AuthLayout>
         );
-    } catch (error) {
+    } catch (_error) {
         notFound();
     }
 }

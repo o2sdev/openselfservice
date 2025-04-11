@@ -1,4 +1,4 @@
-import { CMS } from '@o2s/framework/modules';
+import { CMS } from '../../models';
 
 export class GetServiceListBlockQuery implements Omit<CMS.Request.GetCmsEntryParams, 'locale'> {
     id!: string;

@@ -6744,6 +6744,13 @@ export type NotFoundPageFragment = {
     page?: { slug: string };
 };
 
+export type OrganizationListFragment = {
+    documentId: string;
+    title?: string;
+    subtitle?: string;
+    noResults: { title: string; description?: string };
+};
+
 export type PageFragment = {
     slug: string;
     locale?: string;
@@ -8005,6 +8012,19 @@ export type GetNotFoundPageQuery = {
     notFoundPage?: { title: string; description: string; url?: string; urlLabel: string; page?: { slug: string } };
 };
 
+export type GetOrganizationListQueryVariables = Exact<{
+    locale: Scalars['I18NLocaleCode']['input'];
+}>;
+
+export type GetOrganizationListQuery = {
+    organizationList?: {
+        documentId: string;
+        title?: string;
+        subtitle?: string;
+        noResults: { title: string; description?: string };
+    };
+};
+
 export type GetPageQueryVariables = Exact<{
     slug: Scalars['String']['input'];
     locale: Scalars['I18NLocaleCode']['input'];
@@ -8496,6 +8516,17 @@ export const NotFoundPageFragmentDoc = gql`
         urlLabel
         page {
             slug
+        }
+    }
+`;
+export const OrganizationListFragmentDoc = gql`
+    fragment OrganizationList on OrganizationList {
+        documentId
+        title
+        subtitle
+        noResults {
+            title
+            description
         }
     }
 `;
@@ -9033,6 +9064,14 @@ export const GetNotFoundPageDocument = gql`
     }
     ${NotFoundPageFragmentDoc}
 `;
+export const GetOrganizationListDocument = gql`
+    query getOrganizationList($locale: I18NLocaleCode!) {
+        organizationList(locale: $locale) {
+            ...OrganizationList
+        }
+    }
+    ${OrganizationListFragmentDoc}
+`;
 export const GetPageDocument = gql`
     query getPage($slug: String!, $locale: I18NLocaleCode!) {
         pages(filters: { slug: { endsWith: $slug } }, pagination: { limit: 1 }, locale: $locale) {
@@ -9065,6 +9104,7 @@ const GetHeaderDocumentString = print(GetHeaderDocument);
 const GetLocalesDocumentString = print(GetLocalesDocument);
 const GetLoginPageDocumentString = print(GetLoginPageDocument);
 const GetNotFoundPageDocumentString = print(GetNotFoundPageDocument);
+const GetOrganizationListDocumentString = print(GetOrganizationListDocument);
 const GetPageDocumentString = print(GetPageDocument);
 const GetPagesDocumentString = print(GetPagesDocument);
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
@@ -9212,6 +9252,27 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
                         ...wrappedRequestHeaders,
                     }),
                 'getNotFoundPage',
+                'query',
+                variables,
+            );
+        },
+        getOrganizationList(
+            variables: GetOrganizationListQueryVariables,
+            requestHeaders?: GraphQLClientRequestHeaders,
+        ): Promise<{
+            data: GetOrganizationListQuery;
+            errors?: GraphQLError[];
+            extensions?: any;
+            headers: Headers;
+            status: number;
+        }> {
+            return withWrapper(
+                (wrappedRequestHeaders) =>
+                    client.rawRequest<GetOrganizationListQuery>(GetOrganizationListDocumentString, variables, {
+                        ...requestHeaders,
+                        ...wrappedRequestHeaders,
+                    }),
+                'getOrganizationList',
                 'query',
                 variables,
             );

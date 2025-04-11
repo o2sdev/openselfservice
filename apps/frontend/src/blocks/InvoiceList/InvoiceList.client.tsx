@@ -11,6 +11,7 @@ import { LoadingOverlay } from '@o2s/ui/components/loading-overlay';
 import { Separator } from '@o2s/ui/components/separator';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@o2s/ui/components/table';
 import { Typography } from '@o2s/ui/components/typography';
+import { toast } from '@o2s/ui/hooks/use-toast';
 import { cn } from '@o2s/ui/lib/utils';
 
 import { sdk } from '@/api/sdk';
@@ -61,8 +62,13 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
         try {
             const response = await sdk.blocks.getInvoicePdf(id, { 'x-locale': locale }, accessToken);
             downloadFile(response, data.downloadFileName?.replace('{id}', id) || 'invoice.pdf');
-        } catch (error) {
-            console.error('Error downloading invoice:', error);
+        } catch (_error) {
+            toast({
+                variant: 'destructive',
+                // TODO: get labels from configurable texts
+                title: 'Uh oh! Something went wrong.',
+                description: 'There was a problem with your request.',
+            });
         }
     };
 

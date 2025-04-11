@@ -61,7 +61,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             translations: meta.locales,
             alternates: data?.alternativeUrls,
         });
-    } catch (error) {
+    } catch (_error) {
         notFound();
     }
 }
@@ -105,7 +105,7 @@ export default async function Page({ params }: Props) {
                 <PageTemplate slug={slug} data={data} session={session} />
             </main>
         );
-    } catch (error) {
+    } catch (_error) {
         notFound();
     }
 }

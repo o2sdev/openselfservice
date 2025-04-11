@@ -4,7 +4,9 @@ import * as React from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
-const labelVariants = cva('text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70');
+const labelVariants = cva(
+    'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer',
+);
 
 const Label = React.forwardRef<
     React.ElementRef<typeof LabelPrimitive.Root>,

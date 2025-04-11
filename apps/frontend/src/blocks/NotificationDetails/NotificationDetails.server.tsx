@@ -15,24 +15,28 @@ export const NotificationDetails: React.FC<NotificationDetailsProps> = async ({
     accessToken,
     locale,
 }) => {
-    const data = await sdk.blocks.getNotificationDetails(
-        {
-            id: notificationId,
-        },
-        {
-            id,
-        },
-        { 'x-locale': locale },
-        accessToken,
-    );
+    try {
+        const data = await sdk.blocks.getNotificationDetails(
+            {
+                id: notificationId,
+            },
+            {
+                id,
+            },
+            { 'x-locale': locale },
+            accessToken,
+        );
 
-    return (
-        <NotificationDetailsDynamic
-            notificationId={notificationId}
-            {...data}
-            id={id}
-            accessToken={accessToken}
-            locale={locale}
-        />
-    );
+        return (
+            <NotificationDetailsDynamic
+                notificationId={notificationId}
+                {...data}
+                id={id}
+                accessToken={accessToken}
+                locale={locale}
+            />
+        );
+    } catch (_error) {
+        return null;
+    }
 };

@@ -8,7 +8,8 @@
         "./tailwind.config": "./tailwind.config.ts",
         "./postcss.config": "./postcss.config.mjs",
         "./lib/*": "./src/lib/*.ts",
-        "./components/*": "./src/components/*.tsx"
+        "./components/*": "./src/components/*.tsx",
+        "./hooks/*": "./src/hooks/*.ts"
     },
     "scripts": {
         "lint": "tsc --noEmit && eslint . --max-warnings 0",
@@ -43,6 +44,7 @@
         "@radix-ui/react-select": "^2.1.6",
         "@radix-ui/react-separator": "^1.1.2",
         "@radix-ui/react-slot": "^1.1.2",
+        "@radix-ui/react-toast": "^1.2.7",
         "@radix-ui/react-toggle": "^1.1.2",
         "@radix-ui/react-toggle-group": "^1.1.2",
         "@radix-ui/react-tooltip": "^1.1.8",

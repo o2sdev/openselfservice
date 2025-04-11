@@ -16,14 +16,18 @@ export const UserAccountDynamic = dynamic(() =>
 export const UserAccount: React.FC<UserAccountProps> = async ({ id, accessToken, locale }) => {
     const session = await auth();
 
-    const data = await sdk.blocks.getUserAccount(
-        {
-            id,
-            userId: session?.user?.id || '',
-        },
-        { 'x-locale': locale },
-        accessToken,
-    );
+    try {
+        const data = await sdk.blocks.getUserAccount(
+            {
+                id,
+                userId: session?.user?.id || '',
+            },
+            { 'x-locale': locale },
+            accessToken,
+        );
 
-    return <UserAccountDynamic {...data} id={id} accessToken={accessToken} locale={locale} />;
+        return <UserAccountDynamic {...data} id={id} accessToken={accessToken} locale={locale} />;
+    } catch (_error) {
+        return null;
+    }
 };

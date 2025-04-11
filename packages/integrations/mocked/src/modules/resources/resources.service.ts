@@ -12,8 +12,11 @@ export class ResourcesService implements Resources.Service {
         throw new Error('Method not implemented');
     }
 
-    getServiceList(query: Resources.Request.GetServiceListQuery): Observable<Resources.Model.Services> {
-        return of(mapServices(query)).pipe(responseDelay());
+    getServiceList(
+        query: Resources.Request.GetServiceListQuery,
+        authorization: string,
+    ): Observable<Resources.Model.Services> {
+        return of(mapServices(query, authorization)).pipe(responseDelay());
     }
 
     getService(params: Resources.Request.GetServiceParams): Observable<Resources.Model.Service> {

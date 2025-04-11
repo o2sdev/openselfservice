@@ -10,15 +10,19 @@ export const PaymentsSummaryDynamic = dynamic(() =>
 );
 
 export const PaymentsSummary: React.FC<PaymentsSummaryProps> = async ({ id, accessToken, locale }) => {
-    const data = await sdk.blocks.getPaymentsSummary(
-        {
-            id,
-            limit: 1000,
-            offset: 0,
-        },
-        { 'x-locale': locale },
-        accessToken,
-    );
+    try {
+        const data = await sdk.blocks.getPaymentsSummary(
+            {
+                id,
+                limit: 1000,
+                offset: 0,
+            },
+            { 'x-locale': locale },
+            accessToken,
+        );
 
-    return <PaymentsSummaryDynamic {...data} id={id} accessToken={accessToken} locale={locale} />;
+        return <PaymentsSummaryDynamic {...data} id={id} accessToken={accessToken} locale={locale} />;
+    } catch (_error) {
+        return null;
+    }
 };
