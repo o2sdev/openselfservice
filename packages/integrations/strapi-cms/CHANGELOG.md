@@ -1,5 +1,11 @@
 # @o2s/integrations.strapi-cms
 
+## 1.1.0
+
+### Minor Changes
+
+- 35cdf5e: implement TicketRecent component
+
 ## 1.0.0
 
 ### Major Changes
