@@ -26,15 +26,14 @@ export const Content = ({ data }: ContentProps) => {
     });
 
     const onSubmit = async (values: ContextSwitcherFormValues) => {
-        if (!values.customer) {
+        const customer = data.items.find((item) => item.id === values.customer);
+        if (!customer) {
             return;
         }
 
         spinner.toggle(true);
         await session.update({
-            customer: {
-                id: values.customer,
-            },
+            customer,
         });
 
         window.location.reload();
