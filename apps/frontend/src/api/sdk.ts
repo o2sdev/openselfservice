@@ -58,6 +58,6 @@ export const sdk = extendSdk(internalSdk, {
         getPage: page(internalSdk).modules.getPage,
         getLoginPage: loginPage(internalSdk).modules.getLoginPage,
         getNotFoundPage: notFoundPage(internalSdk).modules.getNotFoundPage,
-        getOrganizations: organizations(internalSdk).modules.getOrganizations,
+        getCustomers: organizations(internalSdk).modules.getCustomers,
     },
 });

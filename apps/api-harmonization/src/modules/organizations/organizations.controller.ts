@@ -6,7 +6,7 @@ import { Auth } from '@o2s/framework/modules';
 
 import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
 
-import { GetOrganizationsQuery } from './organizations.request';
+import { GetCustomersQuery } from './organizations.request';
 import { OrganizationsService } from './organizations.service';
 
 @Controller(URL)
@@ -16,7 +16,7 @@ export class OrganizationsController {
 
     @Get()
     @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
-    getOrganizations(@Headers() headers: AppHeaders, @Query() query: GetOrganizationsQuery) {
-        return this.service.getOrganizations(query, headers);
+    getCustomers(@Headers() headers: AppHeaders, @Query() query: GetCustomersQuery) {
+        return this.service.getCustomers(query, headers);
     }
 }

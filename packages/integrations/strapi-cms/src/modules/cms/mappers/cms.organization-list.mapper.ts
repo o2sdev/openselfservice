@@ -4,14 +4,14 @@ import { GetOrganizationListQuery } from '@/generated/strapi';
 
 export const mapOrganizationList = (data: GetOrganizationListQuery): CMS.Model.OrganizationList.OrganizationList => {
     const organizationList = data.organizationList!;
+    const labels = data.configurableTexts!;
 
     return {
         id: organizationList.documentId,
-        subtitle: organizationList.subtitle,
         title: organizationList.title,
-        noResults: {
-            title: organizationList.noResults.title,
-            description: organizationList.noResults.description,
+        description: organizationList.description,
+        labels: {
+            apply: labels.actions.apply,
         },
     };
 };

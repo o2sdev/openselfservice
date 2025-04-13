@@ -6,11 +6,11 @@ const API_URL = Modules.Organizations.URL;
 
 export const organizations = (sdk: Sdk) => ({
     modules: {
-        getOrganizations: (
-            query: Modules.Organizations.Request.GetOrganizationsQuery,
+        getCustomers: (
+            query: Modules.Organizations.Request.GetCustomersQuery,
             headers: Headers.AppHeaders,
             authorization: string,
-        ): Promise<Modules.Organizations.Model.OrganizationList> =>
+        ): Promise<Modules.Organizations.Model.CustomerList> =>
             sdk.makeRequest({
                 method: 'get',
                 url: `${API_URL}`,

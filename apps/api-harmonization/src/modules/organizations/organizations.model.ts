@@ -1,13 +1,12 @@
-import { Organizations } from '@o2s/framework/modules';
+import { Models } from '@o2s/framework/modules';
 
 import { Block } from '../../utils';
 
-export class OrganizationList extends Block.Block {
+export class CustomerList extends Block.Block {
     title?: string;
-    subtitle?: string;
-    noResults!: {
-        title: string;
-        description?: string;
+    description?: string;
+    items!: Models.Customer.Customer[];
+    labels!: {
+        apply: string;
     };
-    items!: Organizations.Model.Organization[];
 }

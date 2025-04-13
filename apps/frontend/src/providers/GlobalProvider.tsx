@@ -6,13 +6,15 @@ import React, { ReactNode, createContext, useContext, useState } from 'react';
 import { PriceService, usePriceService } from '@/hooks/usePriceService';
 
 interface GlobalProviderProps {
-    config: Modules.Page.Model.Init;
+    config: Omit<Modules.Page.Model.Init, 'labels'>;
+    labels: Modules.Page.Model.Init['labels'];
     locale: string;
     children: ReactNode;
 }
 
 export interface GlobalContextType {
-    config: Modules.Page.Model.Init;
+    config: Omit<Modules.Page.Model.Init, 'labels'>;
+    labels: Modules.Page.Model.Init['labels'];
     priceService: PriceService;
     alternativeUrls: {
         values: {
@@ -28,7 +30,7 @@ export interface GlobalContextType {
 
 export const GlobalContext = createContext({} as GlobalContextType);
 
-export const GlobalProvider = ({ config, locale, children }: GlobalProviderProps) => {
+export const GlobalProvider = ({ config, labels, locale, children }: GlobalProviderProps) => {
     const [alternativeUrls, setAlternativeUrls] = useState<{
         [key: string]: string;
     }>({});
@@ -50,6 +52,7 @@ export const GlobalProvider = ({ config, locale, children }: GlobalProviderProps
                     isVisible: isSpinnerVisible,
                     toggle: setIsSpinnerVisible,
                 },
+                labels,
             }}
         >
             {children}

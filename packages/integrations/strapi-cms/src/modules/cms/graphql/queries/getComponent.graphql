@@ -53,5 +53,11 @@ query getComponent($id: ID!, $locale: I18NLocaleCode!) {
             settings
             renew
         }
+        errors {
+            requestError {
+                title
+                content
+            }
+        }
     }
 }

@@ -4,8 +4,6 @@ import { useSession } from 'next-auth/react';
 import { useLocale } from 'next-intl';
 import React, { useState, useTransition } from 'react';
 
-import { Models } from '@o2s/framework/modules';
-
 import { Button } from '@o2s/ui/components/button';
 import { LoadingOverlay } from '@o2s/ui/components/loading-overlay';
 import { Sheet, SheetContent, SheetTrigger } from '@o2s/ui/components/sheet';
@@ -14,64 +12,56 @@ import { useToast } from '@o2s/ui/hooks/use-toast';
 
 import { sdk } from '@/api/sdk';
 
+import { useGlobalContext } from '@/providers/GlobalProvider';
+
 import { Content } from './Content/Content';
 import { ContextSwitcherProps } from './ContextSwitcher.types';
 
-export const ContextSwitcher: React.FC<ContextSwitcherProps> = ({ labels }) => {
+export const ContextSwitcher: React.FC<ContextSwitcherProps> = ({ data }) => {
     const session = useSession();
     const locale = useLocale();
+
+    const { labels } = useGlobalContext();
 
     const { toast } = useToast();
 
     const [isOpen, setIsOpen] = useState(false);
 
-    const [data, setData] = useState<Modules.Organizations.Model.OrganizationList>();
-    const [customers, setCustomers] = useState<Models.Customer.Customer[]>();
+    const [customerData, setCustomerData] = useState<Modules.Organizations.Model.CustomerList>();
 
     const [isPending, startTransition] = useTransition();
 
-    if (!(labels && session.data?.user?.customer?.name)) {
+    if (!data.showContextSwitcher || !session.data?.user?.customer?.name) {
         return null;
     }
 
     const handleOpen = async (shouldOpen: boolean) => {
         if (shouldOpen) {
-            if (data) {
+            if (customerData) {
                 setIsOpen(true);
                 return;
             }
 
             startTransition(async () => {
                 try {
-                    const organizations = await sdk.modules.getOrganizations(
+                    const data = await sdk.modules.getCustomers(
                         {},
                         { 'x-locale': locale },
                         session.data?.accessToken || '',
                     );
 
-                    if (!organizations) {
-                        throw new Error('No organizations found');
-                    }
-
-                    setData(organizations);
-
-                    const customersData = organizations.items
-                        .map((organization) => organization.customers)
-                        .reduce((acc, curr) => [...acc, ...curr], [])
-                        .sort((a, b) => a.name.localeCompare(b.name));
-
-                    if (!customersData.length) {
+                    if (!data) {
                         throw new Error('No customers found');
                     }
 
-                    setCustomers(customersData);
+                    setCustomerData(data);
+
                     setIsOpen(true);
                 } catch (_error) {
                     toast({
                         variant: 'destructive',
-                        // TODO: get labels from configurable texts
-                        title: 'Uh oh! Something went wrong.',
-                        description: 'There was a problem with your request.',
+                        title: labels.errors.requestError.title,
+                        description: labels.errors.requestError.content,
                     });
                 }
             });
@@ -96,9 +86,7 @@ export const ContextSwitcher: React.FC<ContextSwitcherProps> = ({ labels }) => {
                 </SheetTrigger>
             </LoadingOverlay>
 
-            <SheetContent closeLabel={labels.close}>
-                {data && customers && <Content data={data} customers={customers} />}
-            </SheetContent>
+            <SheetContent closeLabel={data.closeLabel}>{customerData && <Content data={customerData} />}</SheetContent>
         </Sheet>
     );
 };

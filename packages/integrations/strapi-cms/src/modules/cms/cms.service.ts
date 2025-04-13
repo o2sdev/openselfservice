@@ -265,8 +265,8 @@ export class CmsService implements CMS.Service {
         });
     }
 
-    getOrganizationList(options: CMS.Request.GetCmsEntryParams) {
-        const key = `organization-list-${options.id}-${options.locale}`;
+    getOrganizationList(options: CMS.Request.GetCmsOrganizationListParams) {
+        const key = `organization-list-${options.locale}`;
         return this.getCachedBlock(key, () => {
             const organizationList = this.graphqlService.getOrganizationList({
                 locale: options.locale,

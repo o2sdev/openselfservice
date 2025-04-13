@@ -2,4 +2,9 @@ query getOrganizationList($locale: I18NLocaleCode!) {
     organizationList(locale: $locale) {
         ...OrganizationList
     }
+    configurableTexts {
+        actions {
+            apply
+        }
+    }
 }

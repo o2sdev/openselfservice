@@ -1,9 +1,5 @@
 fragment OrganizationList on OrganizationList {
     documentId
     title
-    subtitle
-    noResults {
-        title
-        description
-    }
+    description
 }

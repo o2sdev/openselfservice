@@ -56,7 +56,7 @@ export const Header: React.FC<HeaderProps> = ({ headerData, children }) => {
         return <LocaleSwitcher label={headerData.languageSwitcherLabel ?? 'Language'} />;
     };
 
-    const ContextSwitchSlot = () => isSignedIn && <ContextSwitcher labels={headerData.contextSwitcher} />;
+    const ContextSwitchSlot = () => isSignedIn && <ContextSwitcher data={headerData.contextSwitcher} />;
 
     return (
         <header className="flex flex-col gap-4">

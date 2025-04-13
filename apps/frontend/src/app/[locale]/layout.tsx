@@ -54,6 +54,8 @@ export default async function RootLayout({ children, params }: Props) {
         session?.accessToken,
     );
 
+    const { labels, ...config } = init;
+
     setRequestLocale(locale);
 
     const messages = await getMessages();
@@ -64,7 +66,7 @@ export default async function RootLayout({ children, params }: Props) {
                 {/*@see https://github.com/nextauthjs/next-auth/issues/9504#issuecomment-2516665386*/}
                 <SessionProvider key={session?.user?.id} session={session} refetchOnWindowFocus={false}>
                     <NextIntlClientProvider messages={messages}>
-                        <GlobalProvider config={init} locale={locale}>
+                        <GlobalProvider config={config} labels={labels} locale={locale}>
                             <TooltipProvider>
                                 <div className="flex flex-col min-h-dvh">
                                     <Header headerData={init.common.header} />

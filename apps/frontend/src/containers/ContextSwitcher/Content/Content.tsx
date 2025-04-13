@@ -12,7 +12,7 @@ import { useGlobalContext } from '@/providers/GlobalProvider';
 
 import { ContentProps, ContextSwitcherFormValues } from './Content.types';
 
-export const Content = ({ data, customers }: ContentProps) => {
+export const Content = ({ data }: ContentProps) => {
     const session = useSession();
 
     const { spinner } = useGlobalContext();
@@ -32,7 +32,9 @@ export const Content = ({ data, customers }: ContentProps) => {
 
         spinner.toggle(true);
         await session.update({
-            customer: values.customer,
+            customer: {
+                id: values.customer,
+            },
         });
 
         window.location.reload();
@@ -43,12 +45,10 @@ export const Content = ({ data, customers }: ContentProps) => {
             <SheetHeader>
                 <SheetTitle asChild>
                     <Typography variant="h2" asChild>
-                        {/*TODO: add labels to data*/}
                         <h2>{data.title}</h2>
                     </Typography>
                 </SheetTitle>
-                {/*TODO: add labels to data*/}
-                <SheetDescription>{'data.description'}</SheetDescription>
+                <SheetDescription>{data.description}</SheetDescription>
             </SheetHeader>
 
             <Formik
@@ -67,7 +67,7 @@ export const Content = ({ data, customers }: ContentProps) => {
                                     await setFieldValue('customer', value);
                                 }}
                             >
-                                {customers.map((item) => (
+                                {data.items.map((item) => (
                                     <Field
                                         name="customer"
                                         type="radio"
@@ -94,8 +94,7 @@ export const Content = ({ data, customers }: ContentProps) => {
                         </div>
                         <SheetFooter>
                             <Button type="submit" disabled={!isValid}>
-                                {/*TODO: add labels to data*/}
-                                {'labels.apply'}
+                                {data.labels.apply}
                             </Button>
                         </SheetFooter>
                     </Form>

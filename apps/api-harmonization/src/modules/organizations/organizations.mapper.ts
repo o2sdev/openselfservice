@@ -1,30 +1,33 @@
-import { Organizations as OrganizationModule } from '@o2s/framework/modules';
+import { Models, Organizations as OrganizationModule } from '@o2s/framework/modules';
 
 import { CMS, Organizations } from '../../models';
 
-import { OrganizationList } from './organizations.model';
+import { CustomerList } from './organizations.model';
 
-export const mapOrganizationList = (
+export const mapCustomerList = (
     organizations: Organizations.Model.Organizations | undefined,
     cms: CMS.Model.OrganizationList.OrganizationList,
     _locale: string,
-): OrganizationList => {
+): CustomerList => {
     return {
         id: cms.id,
         title: cms.title,
-        subtitle: cms.subtitle,
-        noResults: cms.noResults,
-        items: mapOrganizations(organizations?.data || []),
+        description: cms.description,
+        items: mapCustomers(organizations?.data || []),
+        labels: cms.labels,
     };
 };
 
-const mapOrganizations = (
-    organizations: Organizations.Model.Organization[],
-): OrganizationModule.Model.Organization[] => {
-    return organizations.reduce((acc, organization) => {
+const mapCustomers = (organizations: Organizations.Model.Organization[]): Models.Customer.Customer[] => {
+    const organizationList = organizations.reduce((acc, organization) => {
         if (organization.children.length > 0) {
             acc.push(...organization.children, organization);
         }
         return acc;
     }, [] as OrganizationModule.Model.Organization[]);
+
+    return organizationList
+        .map((organization) => organization.customers)
+        .reduce((acc, curr) => [...acc, ...curr], [])
+        .sort((a, b) => a.name.localeCompare(b.name));
 };
