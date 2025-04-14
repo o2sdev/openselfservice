@@ -17,17 +17,12 @@
         "generate": "graphql-codegen && prettier --write \"generated/**/*.ts\""
     },
     "dependencies": {
-        "@nestjs/axios": "^4.0.0",
-        "@nestjs/common": "^11.0.17",
-        "@nestjs/config": "^4.0.2",
-        "@nestjs/core": "^11.0.17",
         "@o2s/framework": "*",
         "@o2s/utils.logger": "*",
         "flatted": "^3.3.3",
-        "rxjs": "^7.8.1"
+        "graphql": "16.10.0"
     },
     "devDependencies": {
-        "graphql": "16.10.0",
         "@graphql-codegen/add": "^5.0.3",
         "@graphql-codegen/cli": "^5.0.5",
         "@graphql-codegen/introspection": "^4.0.3",
@@ -43,5 +38,12 @@
         "prettier": "^3.5.3",
         "tsc-alias": "^1.8.15",
         "typescript": "^5.8.3"
+    },
+    "peerDependencies": {
+        "@nestjs/axios": "^4",
+        "@nestjs/common": "^11",
+        "@nestjs/config": "^4.0.2",
+        "@nestjs/core": "^11",
+        "rxjs": "^7"
     }
 }

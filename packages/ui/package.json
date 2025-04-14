@@ -24,8 +24,6 @@
         "@turbo/gen": "^2.5.0",
         "@types/eslint": "^8.56.5",
         "@types/node": "^22.14.1",
-        "@types/react": "^19.1.1",
-        "@types/react-dom": "^19.1.2",
         "eslint": "^8.57.0",
         "prettier": "^3.5.3",
         "sass": "^1.86.3",
@@ -51,11 +49,15 @@
         "clsx": "^2.1.1",
         "date-fns": "^4.1.0",
         "lucide-react": "^0.488.0",
-        "react": "^19.1.0",
         "react-day-picker": "^9.6.6",
-        "react-dom": "^19.1.0",
         "recharts": "^2.15.2",
         "tailwind-merge": "^3.2.0",
         "tailwindcss-animate": "^1.0.7"
+    },
+    "peerDependencies": {
+        "@types/react": "^19.1.1",
+        "@types/react-dom": "^19.1.2",
+        "react": "^19.1.0",
+        "react-dom": "^19.1.0"
     }
 }

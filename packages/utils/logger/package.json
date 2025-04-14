@@ -17,12 +17,7 @@
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
-        "@nestjs/axios": "^4.0.0",
-        "@nestjs/common": "^11.0.17",
-        "@nestjs/config": "^4.0.2",
-        "@nestjs/core": "^11.0.17",
         "jwt-decode": "^4.0.0",
-        "rxjs": "^7.8.1",
         "winston": "^3.17.0"
     },
     "devDependencies": {
@@ -34,5 +29,12 @@
         "prettier": "^3.5.3",
         "tsc-alias": "^1.8.15",
         "typescript": "^5.8.3"
+    },
+    "peerDependencies": {
+        "@nestjs/axios": "^4",
+        "@nestjs/common": "^11",
+        "@nestjs/config": "^4.0.2",
+        "@nestjs/core": "^11",
+        "rxjs": "^7"
     }
 }

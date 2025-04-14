@@ -19,8 +19,7 @@
     },
     "dependencies": {
         "@o2s/framework": "*",
-        "@o2s/utils.logger": "*",
-        "rxjs": "^7.8.1"
+        "@o2s/utils.logger": "*"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",
@@ -31,5 +30,12 @@
         "prettier": "^3.5.3",
         "tsc-alias": "^1.8.15",
         "typescript": "^5.8.3"
+    },
+    "peerDependencies": {
+        "@nestjs/axios": "^4",
+        "@nestjs/common": "^11",
+        "@nestjs/config": "^4.0.2",
+        "@nestjs/core": "^11",
+        "rxjs": "^7"
     }
 }
