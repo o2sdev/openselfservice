@@ -36,7 +36,7 @@ export class ServiceDetailsService {
                                 service,
                                 products,
                                 headers['x-locale'],
-                                headers['x-client-timezone'],
+                                headers['x-client-timezone'] || '',
                             ),
                         ),
                     );

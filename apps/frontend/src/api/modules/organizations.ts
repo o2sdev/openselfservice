@@ -2,6 +2,8 @@ import { Headers, Modules } from '@o2s/api-harmonization';
 
 import { Sdk } from '@o2s/framework/sdk';
 
+import { getApiHeaders } from '../../utils/api';
+
 const API_URL = Modules.Organizations.URL;
 
 export const organizations = (sdk: Sdk) => ({
@@ -15,8 +17,8 @@ export const organizations = (sdk: Sdk) => ({
                 method: 'get',
                 url: `${API_URL}`,
                 headers: {
+                    ...getApiHeaders(),
                     ...headers,
-                    'x-client-timezone': Intl.DateTimeFormat().resolvedOptions().timeZone,
                     Authorization: `Bearer ${authorization}`,
                 },
                 params: query,

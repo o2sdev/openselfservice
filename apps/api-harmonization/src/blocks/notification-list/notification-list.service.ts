@@ -33,7 +33,12 @@ export class NotificationListService {
                     })
                     .pipe(
                         map((notifications) =>
-                            mapNotificationList(notifications, cms, headers['x-locale'], headers['x-client-timezone']),
+                            mapNotificationList(
+                                notifications,
+                                cms,
+                                headers['x-locale'],
+                                headers['x-client-timezone'] || '',
+                            ),
                         ),
                     );
             }),

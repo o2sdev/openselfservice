@@ -25,7 +25,7 @@ export class TicketRecentService {
                     .getTicketList({ ...query, limit: cms.limit, locale: headers['x-locale'] })
                     .pipe(
                         map((tickets) =>
-                            mapTicketRecent(cms, tickets, headers['x-locale'], headers['x-client-timezone']),
+                            mapTicketRecent(cms, tickets, headers['x-locale'], headers['x-client-timezone'] || ''),
                         ),
                     );
             }),

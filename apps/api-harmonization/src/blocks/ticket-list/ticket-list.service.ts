@@ -30,7 +30,7 @@ export class TicketListService {
                     })
                     .pipe(
                         map((tickets) =>
-                            mapTicketList(tickets, cms, headers['x-locale'], headers['x-client-timezone']),
+                            mapTicketList(tickets, cms, headers['x-locale'], headers['x-client-timezone'] || ''),
                         ),
                     );
             }),

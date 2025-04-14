@@ -2,6 +2,8 @@ import { Blocks, Headers } from '@o2s/api-harmonization';
 
 import { Sdk } from '@o2s/framework/sdk';
 
+import { getApiHeaders } from '../../utils/api';
+
 const API_URL = Blocks.TicketDetails.URL;
 
 export const ticketDetails = (sdk: Sdk) => ({
@@ -16,8 +18,8 @@ export const ticketDetails = (sdk: Sdk) => ({
                 method: 'get',
                 url: `${API_URL}/${params.id}`,
                 headers: {
+                    ...getApiHeaders(),
                     ...headers,
-                    'x-client-timezone': Intl.DateTimeFormat().resolvedOptions().timeZone,
                     Authorization: `Bearer ${authorization}`,
                 },
                 params: query,

@@ -67,7 +67,7 @@ export class ServiceListService {
                                         services,
                                         cms,
                                         headers['x-locale'],
-                                        headers['x-client-timezone'],
+                                        headers['x-client-timezone'] || '',
                                     );
                                 }),
                             );

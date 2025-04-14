@@ -28,7 +28,7 @@ export class InvoiceListService {
                     })
                     .pipe(
                         map((invoices) =>
-                            mapInvoiceList(invoices, cms, headers['x-locale'], headers['x-client-timezone']),
+                            mapInvoiceList(invoices, cms, headers['x-locale'], headers['x-client-timezone'] || ''),
                         ),
                     );
             }),
