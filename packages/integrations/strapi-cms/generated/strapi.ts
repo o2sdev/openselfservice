@@ -560,14 +560,6 @@ export type ComponentContentBanner = {
     title: Scalars['String']['output'];
 };
 
-export type ComponentContentBannerInput = {
-    altDescription?: InputMaybe<Scalars['String']['input']>;
-    button?: InputMaybe<ComponentContentLinkInput>;
-    description?: InputMaybe<Scalars['String']['input']>;
-    id?: InputMaybe<Scalars['ID']['input']>;
-    title?: InputMaybe<Scalars['String']['input']>;
-};
-
 export type ComponentContentDynamicZone =
     | ComponentComponentsArticleList
     | ComponentComponentsArticleSections
@@ -755,13 +747,6 @@ export type ComponentContentLink = {
     url: Scalars['String']['output'];
 };
 
-export type ComponentContentLinkInput = {
-    ariaLabel?: InputMaybe<Scalars['String']['input']>;
-    id?: InputMaybe<Scalars['ID']['input']>;
-    label?: InputMaybe<Scalars['String']['input']>;
-    url?: InputMaybe<Scalars['String']['input']>;
-};
-
 export type ComponentContentMessage = {
     description: Scalars['String']['output'];
     id: Scalars['ID']['output'];
@@ -780,6 +765,12 @@ export type ComponentContentMessageSimple = {
     content: Scalars['String']['output'];
     id: Scalars['ID']['output'];
     title: Scalars['String']['output'];
+};
+
+export type ComponentContentMessageSimpleInput = {
+    content?: InputMaybe<Scalars['String']['input']>;
+    id?: InputMaybe<Scalars['ID']['input']>;
+    title?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ComponentContentNavigationColumn = {
@@ -894,6 +885,7 @@ export type ComponentLabelsActions = {
     apply: Scalars['String']['output'];
     cancel: Scalars['String']['output'];
     clear: Scalars['String']['output'];
+    close: Scalars['String']['output'];
     delete: Scalars['String']['output'];
     details: Scalars['String']['output'];
     edit: Scalars['String']['output'];
@@ -913,6 +905,7 @@ export type ComponentLabelsActionsInput = {
     apply?: InputMaybe<Scalars['String']['input']>;
     cancel?: InputMaybe<Scalars['String']['input']>;
     clear?: InputMaybe<Scalars['String']['input']>;
+    close?: InputMaybe<Scalars['String']['input']>;
     delete?: InputMaybe<Scalars['String']['input']>;
     details?: InputMaybe<Scalars['String']['input']>;
     edit?: InputMaybe<Scalars['String']['input']>;
@@ -938,6 +931,16 @@ export type ComponentLabelsDatesInput = {
     id?: InputMaybe<Scalars['ID']['input']>;
     today?: InputMaybe<Scalars['String']['input']>;
     yesterday?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ComponentLabelsErrors = {
+    id: Scalars['ID']['output'];
+    requestError: ComponentContentMessageSimple;
+};
+
+export type ComponentLabelsErrorsInput = {
+    id?: InputMaybe<Scalars['ID']['input']>;
+    requestError?: InputMaybe<ComponentContentMessageSimpleInput>;
 };
 
 export type ComponentRelationResponseCollection = {
@@ -1071,6 +1074,7 @@ export type ConfigurableTexts = {
     createdAt?: Maybe<Scalars['DateTime']['output']>;
     dates: ComponentLabelsDates;
     documentId: Scalars['ID']['output'];
+    errors: ComponentLabelsErrors;
     locale?: Maybe<Scalars['String']['output']>;
     localizations: Array<Maybe<ConfigurableTexts>>;
     localizations_connection?: Maybe<ConfigurableTextsRelationResponseCollection>;
@@ -1081,6 +1085,7 @@ export type ConfigurableTexts = {
 export type ConfigurableTextsInput = {
     actions?: InputMaybe<ComponentLabelsActionsInput>;
     dates?: InputMaybe<ComponentLabelsDatesInput>;
+    errors?: InputMaybe<ComponentLabelsErrorsInput>;
     publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
@@ -1327,6 +1332,7 @@ export type GenericMorph =
     | ComponentContentTableColumn
     | ComponentLabelsActions
     | ComponentLabelsDates
+    | ComponentLabelsErrors
     | ComponentSeoMetadata
     | ComponentSeoSeo
     | ComponentTemplatesOneColumn
@@ -1349,7 +1355,7 @@ export type GenericMorph =
     | UsersPermissionsUser;
 
 export type Header = {
-    contextLabel?: Maybe<Scalars['String']['output']>;
+    closeMobileMenuLabel: Scalars['String']['output'];
     createdAt?: Maybe<Scalars['DateTime']['output']>;
     documentId: Scalars['ID']['output'];
     items: Array<Maybe<HeaderItemsDynamicZone>>;
@@ -1359,7 +1365,9 @@ export type Header = {
     localizations_connection?: Maybe<HeaderRelationResponseCollection>;
     logo: UploadFile;
     notification?: Maybe<Page>;
+    openMobileMenuLabel: Scalars['String']['output'];
     publishedAt?: Maybe<Scalars['DateTime']['output']>;
+    showContextSwitcher?: Maybe<Scalars['Boolean']['output']>;
     title: Scalars['String']['output'];
     updatedAt?: Maybe<Scalars['DateTime']['output']>;
     userInfo?: Maybe<Page>;
@@ -1384,7 +1392,7 @@ export type HeaderEntityResponseCollection = {
 
 export type HeaderFiltersInput = {
     and?: InputMaybe<Array<InputMaybe<HeaderFiltersInput>>>;
-    contextLabel?: InputMaybe<StringFilterInput>;
+    closeMobileMenuLabel?: InputMaybe<StringFilterInput>;
     createdAt?: InputMaybe<DateTimeFilterInput>;
     documentId?: InputMaybe<IdFilterInput>;
     languageSwitcherLabel?: InputMaybe<StringFilterInput>;
@@ -1392,20 +1400,24 @@ export type HeaderFiltersInput = {
     localizations?: InputMaybe<HeaderFiltersInput>;
     not?: InputMaybe<HeaderFiltersInput>;
     notification?: InputMaybe<PageFiltersInput>;
+    openMobileMenuLabel?: InputMaybe<StringFilterInput>;
     or?: InputMaybe<Array<InputMaybe<HeaderFiltersInput>>>;
     publishedAt?: InputMaybe<DateTimeFilterInput>;
+    showContextSwitcher?: InputMaybe<BooleanFilterInput>;
     title?: InputMaybe<StringFilterInput>;
     updatedAt?: InputMaybe<DateTimeFilterInput>;
     userInfo?: InputMaybe<PageFiltersInput>;
 };
 
 export type HeaderInput = {
-    contextLabel?: InputMaybe<Scalars['String']['input']>;
+    closeMobileMenuLabel?: InputMaybe<Scalars['String']['input']>;
     items?: InputMaybe<Array<Scalars['HeaderItemsDynamicZoneInput']['input']>>;
     languageSwitcherLabel?: InputMaybe<Scalars['String']['input']>;
     logo?: InputMaybe<Scalars['ID']['input']>;
     notification?: InputMaybe<Scalars['ID']['input']>;
+    openMobileMenuLabel?: InputMaybe<Scalars['String']['input']>;
     publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+    showContextSwitcher?: InputMaybe<Scalars['Boolean']['input']>;
     title?: InputMaybe<Scalars['String']['input']>;
     userInfo?: InputMaybe<Scalars['ID']['input']>;
 };
@@ -1937,21 +1949,19 @@ export type NotFoundPageRelationResponseCollection = {
 
 export type OrganizationList = {
     createdAt?: Maybe<Scalars['DateTime']['output']>;
+    description?: Maybe<Scalars['String']['output']>;
     documentId: Scalars['ID']['output'];
     locale?: Maybe<Scalars['String']['output']>;
     localizations: Array<Maybe<OrganizationList>>;
     localizations_connection?: Maybe<OrganizationListRelationResponseCollection>;
-    noResults: ComponentContentBanner;
     publishedAt?: Maybe<Scalars['DateTime']['output']>;
-    subtitle?: Maybe<Scalars['String']['output']>;
     title?: Maybe<Scalars['String']['output']>;
     updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
 export type OrganizationListInput = {
-    noResults?: InputMaybe<ComponentContentBannerInput>;
+    description?: InputMaybe<Scalars['String']['input']>;
     publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
-    subtitle?: InputMaybe<Scalars['String']['input']>;
     title?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -3049,6 +3059,7 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
         | ComponentContentTableColumn
         | ComponentLabelsActions
         | ComponentLabelsDates
+        | ComponentLabelsErrors
         | ComponentSeoMetadata
         | (Omit<ComponentSeoSeo, 'image'> & { image?: Maybe<_RefType['UploadFile']> })
         | (Omit<ComponentTemplatesOneColumn, 'mainSlot' | 'mainSlot_connection'> & {
@@ -3299,7 +3310,6 @@ export type ResolversTypes = {
     ComponentContentArticleSection: ResolverTypeWrapper<ComponentContentArticleSection>;
     ComponentContentArticleSectionFiltersInput: ComponentContentArticleSectionFiltersInput;
     ComponentContentBanner: ResolverTypeWrapper<ComponentContentBanner>;
-    ComponentContentBannerInput: ComponentContentBannerInput;
     ComponentContentDynamicZone: ResolverTypeWrapper<
         ResolversUnionTypes<ResolversTypes>['ComponentContentDynamicZone']
     >;
@@ -3327,10 +3337,10 @@ export type ResolversTypes = {
     ComponentContentKeywordFiltersInput: ComponentContentKeywordFiltersInput;
     ComponentContentKeywordInput: ComponentContentKeywordInput;
     ComponentContentLink: ResolverTypeWrapper<ComponentContentLink>;
-    ComponentContentLinkInput: ComponentContentLinkInput;
     ComponentContentMessage: ResolverTypeWrapper<ComponentContentMessage>;
     ComponentContentMessageFiltersInput: ComponentContentMessageFiltersInput;
     ComponentContentMessageSimple: ResolverTypeWrapper<ComponentContentMessageSimple>;
+    ComponentContentMessageSimpleInput: ComponentContentMessageSimpleInput;
     ComponentContentNavigationColumn: ResolverTypeWrapper<
         Omit<ComponentContentNavigationColumn, 'items'> & {
             items?: Maybe<Array<Maybe<ResolversTypes['ComponentContentNavigationItem']>>>;
@@ -3359,6 +3369,8 @@ export type ResolversTypes = {
     ComponentLabelsActionsInput: ComponentLabelsActionsInput;
     ComponentLabelsDates: ResolverTypeWrapper<ComponentLabelsDates>;
     ComponentLabelsDatesInput: ComponentLabelsDatesInput;
+    ComponentLabelsErrors: ResolverTypeWrapper<ComponentLabelsErrors>;
+    ComponentLabelsErrorsInput: ComponentLabelsErrorsInput;
     ComponentRelationResponseCollection: ResolverTypeWrapper<
         Omit<ComponentRelationResponseCollection, 'nodes'> & { nodes: Array<ResolversTypes['Component']> }
     >;
@@ -3698,7 +3710,6 @@ export type ResolversParentTypes = {
     ComponentContentArticleSection: ComponentContentArticleSection;
     ComponentContentArticleSectionFiltersInput: ComponentContentArticleSectionFiltersInput;
     ComponentContentBanner: ComponentContentBanner;
-    ComponentContentBannerInput: ComponentContentBannerInput;
     ComponentContentDynamicZone: ResolversUnionTypes<ResolversParentTypes>['ComponentContentDynamicZone'];
     ComponentContentDynamicZoneInput: Scalars['ComponentContentDynamicZoneInput']['output'];
     ComponentContentErrorMessage: ComponentContentErrorMessage;
@@ -3722,10 +3733,10 @@ export type ResolversParentTypes = {
     ComponentContentKeywordFiltersInput: ComponentContentKeywordFiltersInput;
     ComponentContentKeywordInput: ComponentContentKeywordInput;
     ComponentContentLink: ComponentContentLink;
-    ComponentContentLinkInput: ComponentContentLinkInput;
     ComponentContentMessage: ComponentContentMessage;
     ComponentContentMessageFiltersInput: ComponentContentMessageFiltersInput;
     ComponentContentMessageSimple: ComponentContentMessageSimple;
+    ComponentContentMessageSimpleInput: ComponentContentMessageSimpleInput;
     ComponentContentNavigationColumn: Omit<ComponentContentNavigationColumn, 'items'> & {
         items?: Maybe<Array<Maybe<ResolversParentTypes['ComponentContentNavigationItem']>>>;
     };
@@ -3750,6 +3761,8 @@ export type ResolversParentTypes = {
     ComponentLabelsActionsInput: ComponentLabelsActionsInput;
     ComponentLabelsDates: ComponentLabelsDates;
     ComponentLabelsDatesInput: ComponentLabelsDatesInput;
+    ComponentLabelsErrors: ComponentLabelsErrors;
+    ComponentLabelsErrorsInput: ComponentLabelsErrorsInput;
     ComponentRelationResponseCollection: Omit<ComponentRelationResponseCollection, 'nodes'> & {
         nodes: Array<ResolversParentTypes['Component']>;
     };
@@ -4821,6 +4834,7 @@ export type ComponentLabelsActionsResolvers<
     apply?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     cancel?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     clear?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    close?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     delete?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     details?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     edit?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -4844,6 +4858,15 @@ export type ComponentLabelsDatesResolvers<
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     today?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     yesterday?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentLabelsErrorsResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['ComponentLabelsErrors'] = ResolversParentTypes['ComponentLabelsErrors'],
+> = {
+    id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    requestError?: Resolver<ResolversTypes['ComponentContentMessageSimple'], ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -4972,6 +4995,7 @@ export type ConfigurableTextsResolvers<
     createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
     dates?: Resolver<ResolversTypes['ComponentLabelsDates'], ParentType, ContextType>;
     documentId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    errors?: Resolver<ResolversTypes['ComponentLabelsErrors'], ParentType, ContextType>;
     locale?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     localizations?: Resolver<Array<Maybe<ResolversTypes['ConfigurableTexts']>>, ParentType, ContextType>;
     localizations_connection?: Resolver<
@@ -5188,6 +5212,7 @@ export type GenericMorphResolvers<
         | 'ComponentContentTableColumn'
         | 'ComponentLabelsActions'
         | 'ComponentLabelsDates'
+        | 'ComponentLabelsErrors'
         | 'ComponentSeoMetadata'
         | 'ComponentSeoSeo'
         | 'ComponentTemplatesOneColumn'
@@ -5217,7 +5242,7 @@ export type HeaderResolvers<
     ContextType = any,
     ParentType extends ResolversParentTypes['Header'] = ResolversParentTypes['Header'],
 > = {
-    contextLabel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    closeMobileMenuLabel?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
     documentId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     items?: Resolver<Array<Maybe<ResolversTypes['HeaderItemsDynamicZone']>>, ParentType, ContextType>;
@@ -5237,7 +5262,9 @@ export type HeaderResolvers<
     >;
     logo?: Resolver<ResolversTypes['UploadFile'], ParentType, ContextType>;
     notification?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType>;
+    openMobileMenuLabel?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    showContextSwitcher?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
     title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
     userInfo?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType>;
@@ -5714,6 +5741,7 @@ export type OrganizationListResolvers<
     ParentType extends ResolversParentTypes['OrganizationList'] = ResolversParentTypes['OrganizationList'],
 > = {
     createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     documentId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     locale?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     localizations?: Resolver<Array<Maybe<ResolversTypes['OrganizationList']>>, ParentType, ContextType>;
@@ -5722,9 +5750,7 @@ export type OrganizationListResolvers<
         ParentType,
         ContextType
     >;
-    noResults?: Resolver<ResolversTypes['ComponentContentBanner'], ParentType, ContextType>;
     publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-    subtitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -6500,6 +6526,7 @@ export type Resolvers<ContextType = any> = {
     ComponentEntityResponseCollection?: ComponentEntityResponseCollectionResolvers<ContextType>;
     ComponentLabelsActions?: ComponentLabelsActionsResolvers<ContextType>;
     ComponentLabelsDates?: ComponentLabelsDatesResolvers<ContextType>;
+    ComponentLabelsErrors?: ComponentLabelsErrorsResolvers<ContextType>;
     ComponentRelationResponseCollection?: ComponentRelationResponseCollectionResolvers<ContextType>;
     ComponentSeoMetadata?: ComponentSeoMetadataResolvers<ContextType>;
     ComponentSeoSeo?: ComponentSeoSeoResolvers<ContextType>;
@@ -6657,8 +6684,10 @@ export type FooterFragment = {
 export type HeaderFragment = {
     documentId: string;
     title: string;
-    contextLabel?: string;
+    showContextSwitcher?: boolean;
     languageSwitcherLabel: string;
+    openMobileMenuLabel: string;
+    closeMobileMenuLabel: string;
     logo: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
     items: Array<
         | {
@@ -6743,6 +6772,8 @@ export type NotFoundPageFragment = {
     urlLabel: string;
     page?: { slug: string };
 };
+
+export type OrganizationListFragment = { documentId: string; title?: string; description?: string };
 
 export type PageFragment = {
     slug: string;
@@ -7549,6 +7580,8 @@ export type GetAppConfigQueryVariables = Exact<{
 
 export type GetAppConfigQuery = {
     appConfig?: { documentId: string; header?: { documentId: string }; footer?: { documentId: string } };
+    configurableTexts?: { errors: { requestError: { title: string; content: string } } };
+    i18NLocales: Array<{ code?: string }>;
 };
 
 export type GetComponentQueryVariables = Exact<{
@@ -7856,6 +7889,7 @@ export type GetComponentQuery = {
             renew: string;
             details: string;
         };
+        errors: { requestError: { title: string; content: string } };
     };
 };
 
@@ -7905,8 +7939,10 @@ export type GetHeaderQuery = {
     header?: {
         documentId: string;
         title: string;
-        contextLabel?: string;
+        showContextSwitcher?: boolean;
         languageSwitcherLabel: string;
+        openMobileMenuLabel: string;
+        closeMobileMenuLabel: string;
         logo: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
         items: Array<
             | {
@@ -7934,7 +7970,7 @@ export type GetHeaderQuery = {
         notification?: { slug: string; SEO: { title: string } };
         userInfo?: { slug: string; SEO: { title: string } };
     };
-    configurableTexts?: { actions: { clear: string; apply: string } };
+    configurableTexts?: { actions: { close: string } };
 };
 
 export type GetLocalesQueryVariables = Exact<{ [key: string]: never }>;
@@ -8003,6 +8039,15 @@ export type GetNotFoundPageQueryVariables = Exact<{
 
 export type GetNotFoundPageQuery = {
     notFoundPage?: { title: string; description: string; url?: string; urlLabel: string; page?: { slug: string } };
+};
+
+export type GetOrganizationListQueryVariables = Exact<{
+    locale: Scalars['I18NLocaleCode']['input'];
+}>;
+
+export type GetOrganizationListQuery = {
+    organizationList?: { documentId: string; title?: string; description?: string };
+    configurableTexts?: { actions: { apply: string } };
 };
 
 export type GetPageQueryVariables = Exact<{
@@ -8410,7 +8455,7 @@ export const HeaderFragmentDoc = gql`
                 title
             }
         }
-        contextLabel
+        showContextSwitcher
         languageSwitcherLabel
         userInfo {
             slug
@@ -8418,6 +8463,8 @@ export const HeaderFragmentDoc = gql`
                 title
             }
         }
+        openMobileMenuLabel
+        closeMobileMenuLabel
     }
     ${MediaFragmentDoc}
     ${NavigationGroupFragmentDoc}
@@ -8497,6 +8544,13 @@ export const NotFoundPageFragmentDoc = gql`
         page {
             slug
         }
+    }
+`;
+export const OrganizationListFragmentDoc = gql`
+    fragment OrganizationList on OrganizationList {
+        documentId
+        title
+        description
     }
 `;
 export const ComponentFragmentDoc = gql`
@@ -8905,6 +8959,17 @@ export const GetAppConfigDocument = gql`
         appConfig(locale: $locale) {
             ...AppConfig
         }
+        configurableTexts {
+            errors {
+                requestError {
+                    title
+                    content
+                }
+            }
+        }
+        i18NLocales {
+            code
+        }
     }
     ${AppConfigFragmentDoc}
 `;
@@ -8968,6 +9033,12 @@ export const GetComponentDocument = gql`
                 renew
                 details
             }
+            errors {
+                requestError {
+                    title
+                    content
+                }
+            }
         }
     }
     ${FaqComponentFragmentDoc}
@@ -8997,8 +9068,7 @@ export const GetHeaderDocument = gql`
         }
         configurableTexts {
             actions {
-                clear
-                apply
+                close
             }
         }
     }
@@ -9033,6 +9103,19 @@ export const GetNotFoundPageDocument = gql`
     }
     ${NotFoundPageFragmentDoc}
 `;
+export const GetOrganizationListDocument = gql`
+    query getOrganizationList($locale: I18NLocaleCode!) {
+        organizationList(locale: $locale) {
+            ...OrganizationList
+        }
+        configurableTexts {
+            actions {
+                apply
+            }
+        }
+    }
+    ${OrganizationListFragmentDoc}
+`;
 export const GetPageDocument = gql`
     query getPage($slug: String!, $locale: I18NLocaleCode!) {
         pages(filters: { slug: { endsWith: $slug } }, pagination: { limit: 1 }, locale: $locale) {
@@ -9065,6 +9148,7 @@ const GetHeaderDocumentString = print(GetHeaderDocument);
 const GetLocalesDocumentString = print(GetLocalesDocument);
 const GetLoginPageDocumentString = print(GetLoginPageDocument);
 const GetNotFoundPageDocumentString = print(GetNotFoundPageDocument);
+const GetOrganizationListDocumentString = print(GetOrganizationListDocument);
 const GetPageDocumentString = print(GetPageDocument);
 const GetPagesDocumentString = print(GetPagesDocument);
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
@@ -9212,6 +9296,27 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
                         ...wrappedRequestHeaders,
                     }),
                 'getNotFoundPage',
+                'query',
+                variables,
+            );
+        },
+        getOrganizationList(
+            variables: GetOrganizationListQueryVariables,
+            requestHeaders?: GraphQLClientRequestHeaders,
+        ): Promise<{
+            data: GetOrganizationListQuery;
+            errors?: GraphQLError[];
+            extensions?: any;
+            headers: Headers;
+            status: number;
+        }> {
+            return withWrapper(
+                (wrappedRequestHeaders) =>
+                    client.rawRequest<GetOrganizationListQuery>(GetOrganizationListDocumentString, variables, {
+                        ...requestHeaders,
+                        ...wrappedRequestHeaders,
+                    }),
+                'getOrganizationList',
                 'query',
                 variables,
             );

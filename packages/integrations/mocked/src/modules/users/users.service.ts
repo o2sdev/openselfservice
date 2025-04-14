@@ -32,7 +32,7 @@ export class UserService implements Users.Service {
     }
 
     getCurrentUserCustomer(options: Users.Request.GetCustomerParams): Observable<Models.Customer.Customer | undefined> {
-        return of(mapCustomer(options.id === 'default' ? 'cust-002' : options.id)).pipe(responseDelay());
+        return of(mapCustomer(options.id)).pipe(responseDelay());
     }
 
     deleteUser(): Observable<void> {

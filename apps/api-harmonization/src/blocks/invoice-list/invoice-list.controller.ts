@@ -3,6 +3,8 @@ import { LoggerService } from '@o2s/utils.logger';
 import type { Response } from 'express';
 import { Observable, map } from 'rxjs';
 
+import { Auth } from '@o2s/framework/modules';
+
 import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
 
 import { URL } from './';
@@ -15,11 +17,13 @@ export class InvoiceListController {
     constructor(protected readonly service: InvoiceListService) {}
 
     @Get()
+    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
     getInvoiceListBlock(@Headers() headers: AppHeaders, @Query() query: GetInvoiceListBlockQuery) {
         return this.service.getInvoiceListBlock(query, headers);
     }
 
     @Get(':id/pdf')
+    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
     getInvoicePdf(@Param('id') id: string, @Res() res: Response): Observable<void> {
         return this.service.getInvoicePdf(id).pipe(
             map((pdf) => {

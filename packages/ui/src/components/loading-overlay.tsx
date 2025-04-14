@@ -3,7 +3,7 @@ import React from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
-import { Spinner } from '@o2s/ui/components/spinner';
+import { Spinner, loaderVariants } from '@o2s/ui/components/spinner';
 
 const spinnerVariants = cva('absolute w-full h-full top-0 left-0 flex items-center justify-center bg-white/75 z-10', {
     variants: {
@@ -18,15 +18,16 @@ const spinnerVariants = cva('absolute w-full h-full top-0 left-0 flex items-cent
 });
 
 interface SpinnerContentProps extends VariantProps<typeof spinnerVariants> {
+    size?: VariantProps<typeof loaderVariants>['size'];
     className?: string;
     children?: React.ReactNode;
 }
 
-export function LoadingOverlay({ isActive, children, className }: SpinnerContentProps) {
+export function LoadingOverlay({ isActive, size = 'large', children, className }: SpinnerContentProps) {
     return (
         <div className="relative">
             <div className={cn(spinnerVariants({ isActive }), className)}>
-                <Spinner size="large" />
+                <Spinner size={size} />
             </div>
             {children}
         </div>

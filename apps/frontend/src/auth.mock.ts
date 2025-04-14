@@ -30,7 +30,7 @@ export const mockJwtCallback = async ({ token, user, trigger, session }: JwtCall
     // Update means that user wants to change customer. Normally you don't want to do this.
     // Instead, you should call your IAM service to change customer and then refresh access token.
     else if (trigger === 'update') {
-        await updateCustomerToken(token, session?.customerId);
+        await updateCustomerToken(token, session?.customer?.id);
     }
     // Since we don't have any IAM to provide access token, we just sign it with our own token
     token.accessToken = signUserToken(token);
@@ -55,7 +55,7 @@ async function updateCustomerToken(token: JWT, customerId: string | undefined) {
                 name: customer?.name ?? '',
             };
         }
-    } catch (error) {
+    } catch (_error) {
         throw new Error('Error fetching customer data');
     }
 }

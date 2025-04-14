@@ -71,6 +71,7 @@ export const mapInit = (
     }[],
     header: CMS.Model.Header.Header,
     footer: CMS.Model.Footer.Footer,
+    labels: CMS.Model.AppConfig.Labels,
 ): Init => {
     return {
         locales,
@@ -78,5 +79,6 @@ export const mapInit = (
             header,
             footer,
         },
+        labels,
     };
 };
