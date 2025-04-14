@@ -17,7 +17,7 @@ const typographyVariants = cva('mt-0', {
             small: 'text-sm',
             body: 'text-sm md:text-base',
             large: 'text-lg',
-            p: 'text-sm md:text-base [&:not(:first-child)]:mt-6',
+            p: 'text-sm md:text-base not-first:mt-6',
             blockquote: 'text-sm md:text-base mt-6 border-l-2 pl-6 italic',
             inlineCode:
                 'text-sm md:text-base relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold',

@@ -22,7 +22,7 @@ import { Header } from '@/containers/Header/Header';
 
 import { AppSpinner } from '@/components/AppSpinner/AppSpinner';
 
-import '@/styles/global.scss';
+import '@/styles/global.css';
 
 const inter = Inter({
     subsets: ['latin-ext'],

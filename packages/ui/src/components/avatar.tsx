@@ -64,11 +64,11 @@ type AvatarUserProps = {
 const AvatarUser = ({ name, email, className, ...props }: AvatarUserProps) => (
     <p className={cn('flex flex-col gap-0.5', className)} {...props}>
         <Typography variant="small" asChild>
-            <span className="whitespace-nowrap overflow-hidden overflow-ellipsis">{name}</span>
+            <span className="whitespace-nowrap overflow-hidden text-ellipsis">{name}</span>
         </Typography>
         {email && (
             <Typography variant="small" asChild>
-                <span className="whitespace-nowrap overflow-hidden overflow-ellipsis">{email}</span>
+                <span className="whitespace-nowrap overflow-hidden text-ellipsis">{email}</span>
             </Typography>
         )}
     </p>
