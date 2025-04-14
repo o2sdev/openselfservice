@@ -16,6 +16,7 @@ export const invoiceList = (sdk: Sdk) => ({
                 url: `${API_URL}`,
                 headers: {
                     ...headers,
+                    'x-client-timezone': Intl.DateTimeFormat().resolvedOptions().timeZone,
                     Authorization: `Bearer ${authorization}`,
                 },
                 params: query,
@@ -28,6 +29,7 @@ export const invoiceList = (sdk: Sdk) => ({
                 responseType: 'blob',
                 headers: {
                     ...headers,
+                    'x-client-timezone': Intl.DateTimeFormat().resolvedOptions().timeZone,
                     Authorization: `Bearer ${authorization}`,
                     Accept: 'application/pdf',
                 },

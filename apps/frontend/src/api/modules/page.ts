@@ -16,6 +16,7 @@ export const page = (sdk: Sdk) => ({
                 url: `${API_URL}/init`,
                 headers: {
                     ...headers,
+                    'x-client-timezone': Intl.DateTimeFormat().resolvedOptions().timeZone,
                     ...(authorization
                         ? {
                               Authorization: `Bearer ${authorization}`,

@@ -12,6 +12,7 @@ export const loginPage = (sdk: Sdk) => ({
                 url: `${API_URL}`,
                 headers: {
                     ...headers,
+                    'x-client-timezone': Intl.DateTimeFormat().resolvedOptions().timeZone,
                 },
             }),
     },

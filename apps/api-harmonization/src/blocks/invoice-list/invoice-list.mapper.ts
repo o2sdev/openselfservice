@@ -1,4 +1,4 @@
-import { Date } from '@o2s/api-harmonization/utils';
+import { formatDateRelative } from '@o2s/api-harmonization/utils/date';
 import { checkNegativeValue } from '@o2s/api-harmonization/utils/price';
 
 import { CMS, Invoices } from '../../models';
@@ -9,6 +9,7 @@ export const mapInvoiceList = (
     invoices: Invoices.Model.Invoices,
     cms: CMS.Model.InvoiceListBlock.InvoiceListBlock,
     locale: string,
+    timezone: string,
 ): InvoiceListBlock => {
     return {
         __typename: 'InvoiceListBlock',
@@ -19,7 +20,7 @@ export const mapInvoiceList = (
         noResults: cms.noResults,
         invoices: {
             total: invoices.total,
-            data: invoices.data.map((invoice) => mapInvoice(invoice, cms, locale)),
+            data: invoices.data.map((invoice) => mapInvoice(invoice, cms, locale, timezone)),
         },
         table: {
             title: cms.tableTitle,
@@ -34,6 +35,7 @@ export const mapInvoice = (
     invoice: Invoices.Model.Invoice,
     cms: CMS.Model.InvoiceListBlock.InvoiceListBlock,
     locale: string,
+    timezone: string,
 ): Invoice => {
     return {
         id: invoice.id,
@@ -49,11 +51,12 @@ export const mapInvoice = (
         totalAmountDue: checkNegativeValue(invoice.totalAmountDue),
         amountToPay: checkNegativeValue(invoice.totalToBePaid),
         paymentDueDate: {
-            displayValue: Date.formatDateRelative(
+            displayValue: formatDateRelative(
                 invoice.paymentDueDate,
                 locale,
                 cms.labels.today,
                 cms.labels.yesterday,
+                timezone,
             ),
             value: invoice.paymentDueDate,
         },

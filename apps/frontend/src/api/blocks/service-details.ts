@@ -17,6 +17,7 @@ export const serviceDetails = (sdk: Sdk) => ({
                 url: `${API_URL}/${params.id}`,
                 headers: {
                     ...headers,
+                    'x-client-timezone': Intl.DateTimeFormat().resolvedOptions().timeZone,
                     Authorization: `Bearer ${authorization}`,
                 },
                 params: query,

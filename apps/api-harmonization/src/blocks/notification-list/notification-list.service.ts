@@ -31,7 +31,11 @@ export class NotificationListService {
                         offset: query.offset || 0,
                         locale: headers['x-locale'],
                     })
-                    .pipe(map((notifications) => mapNotificationList(notifications, cms, headers['x-locale'])));
+                    .pipe(
+                        map((notifications) =>
+                            mapNotificationList(notifications, cms, headers['x-locale'], headers['x-client-timezone']),
+                        ),
+                    );
             }),
         );
     }

@@ -77,6 +77,10 @@ const MOCK_SERVICE_LIST_BLOCK_EN: CMS.Model.ServiceListBlock.ServiceListBlock = 
         description: 'There are no services matching your criteria',
     },
     detailsUrl: '/services/{id}',
+    labels: {
+        today: 'Today',
+        yesterday: 'Yesterday',
+    },
 };
 
 const MOCK_SERVICE_LIST_BLOCK_DE: CMS.Model.ServiceListBlock.ServiceListBlock = {
@@ -156,6 +160,10 @@ const MOCK_SERVICE_LIST_BLOCK_DE: CMS.Model.ServiceListBlock.ServiceListBlock = 
         description: 'Es gibt keine Dienstleistungen, die Ihren Kriterien entsprechen',
     },
     detailsUrl: '/dienstleistungen/{id}',
+    labels: {
+        today: 'Heute',
+        yesterday: 'Gestern',
+    },
 };
 
 const MOCK_SERVICE_LIST_BLOCK_PL: CMS.Model.ServiceListBlock.ServiceListBlock = {
@@ -235,6 +243,10 @@ const MOCK_SERVICE_LIST_BLOCK_PL: CMS.Model.ServiceListBlock.ServiceListBlock = 
         description: 'Nie znaleziono usług spełniających Twoje kryteria',
     },
     detailsUrl: '/usługi/{id}',
+    labels: {
+        today: 'Dzisiaj',
+        yesterday: 'Wczoraj',
+    },
 };
 
 export const mapServiceListBlock = (locale: string): CMS.Model.ServiceListBlock.ServiceListBlock => {

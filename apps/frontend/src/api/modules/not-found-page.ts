@@ -15,6 +15,7 @@ export const notFoundPage = (sdk: Sdk) => ({
                 url: `${API_URL}`,
                 headers: {
                     ...headers,
+                    'x-client-timezone': Intl.DateTimeFormat().resolvedOptions().timeZone,
                     Authorization: `Bearer ${authorization}`,
                 },
             });
