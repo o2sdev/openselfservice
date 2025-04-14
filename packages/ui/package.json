@@ -20,7 +20,7 @@
         "@o2s/eslint-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
-        "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+        "@trivago/prettier-plugin-sort-imports": "^5.2.2",
         "@turbo/gen": "^2.5.0",
         "@types/eslint": "^8.56.5",
         "@types/node": "^22.14.1",
