@@ -14,4 +14,8 @@ export class ServiceListBlock extends Block.Block {
     };
     detailsLabel!: string;
     detailsUrl!: string;
+    labels!: {
+        today: string;
+        yesterday: string;
+    };
 }

@@ -63,7 +63,12 @@ export class ServiceListService {
                                     };
                                 }),
                                 map((services) => {
-                                    return mapServiceList(services, cms, headers['x-locale']);
+                                    return mapServiceList(
+                                        services,
+                                        cms,
+                                        headers['x-locale'],
+                                        headers['x-client-timezone'] || '',
+                                    );
                                 }),
                             );
                         }),

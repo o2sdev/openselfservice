@@ -10,6 +10,7 @@ import { GetComponentQuery } from '@/generated/strapi';
 
 export const mapServiceListBlock = (data: GetComponentQuery): CMS.Model.ServiceListBlock.ServiceListBlock => {
     const component = data.component!.content[0];
+    const configurableTexts = data.configurableTexts!;
 
     if (!component) {
         throw new NotFoundException();
@@ -30,6 +31,10 @@ export const mapServiceListBlock = (data: GetComponentQuery): CMS.Model.ServiceL
                 },
                 detailsLabel: component.detailsLabel as string,
                 detailsUrl: component.detailsURL as string,
+                labels: {
+                    today: configurableTexts.dates.today,
+                    yesterday: configurableTexts.dates.yesterday,
+                },
             };
     }
 

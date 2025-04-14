@@ -2,6 +2,8 @@ import { Headers, Modules } from '@o2s/api-harmonization';
 
 import { Sdk } from '@o2s/framework/sdk';
 
+import { getApiHeaders } from '../../utils/api';
+
 const API_URL = Modules.Page.URL;
 
 export const page = (sdk: Sdk) => ({
@@ -15,6 +17,7 @@ export const page = (sdk: Sdk) => ({
                 method: 'get',
                 url: `${API_URL}/init`,
                 headers: {
+                    ...getApiHeaders(),
                     ...headers,
                     ...(authorization
                         ? {
@@ -33,6 +36,7 @@ export const page = (sdk: Sdk) => ({
                 method: 'get',
                 url: `${API_URL}`,
                 headers: {
+                    ...getApiHeaders(),
                     ...headers,
                     Authorization: `Bearer ${authorization}`,
                 },
