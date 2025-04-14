@@ -1,5 +1,7 @@
 import format from 'string-template';
 
+import { formatDateRelative } from '@o2s/api-harmonization/utils/date';
+
 import { CMS } from '../../models';
 
 import { Service, ServiceListBlock, ServiceWithProduct, ServicesList } from './service-list.model';
@@ -7,7 +9,8 @@ import { Service, ServiceListBlock, ServiceWithProduct, ServicesList } from './s
 export const mapServiceList = (
     services: ServicesList,
     cms: CMS.Model.ServiceListBlock.ServiceListBlock,
-    _locale: string,
+    locale: string,
+    timezone: string,
 ): ServiceListBlock => {
     return {
         __typename: 'ServiceListBlock',
@@ -20,12 +23,17 @@ export const mapServiceList = (
         noResults: cms.noResults,
         services: {
             total: services.total,
-            data: services.data.map((service) => mapService(service, cms)),
+            data: services.data.map((service) => mapService(service, cms, locale, timezone)),
         },
     };
 };
 
-const mapService = (service: ServiceWithProduct, cms: CMS.Model.ServiceListBlock.ServiceListBlock): Service => {
+const mapService = (
+    service: ServiceWithProduct,
+    cms: CMS.Model.ServiceListBlock.ServiceListBlock,
+    locale: string,
+    timezone: string,
+): Service => {
     const { contract, product } = service;
     const { type, category, status, paymentPeriod } = cms.fields;
 
@@ -46,8 +54,8 @@ const mapService = (service: ServiceWithProduct, cms: CMS.Model.ServiceListBlock
                 value: contract.status,
                 label: status?.[contract.status] || contract.status,
             },
-            startDate: contract.startDate,
-            endDate: contract.endDate,
+            startDate: formatDateRelative(contract.startDate, locale, cms.labels.today, cms.labels.yesterday, timezone),
+            endDate: formatDateRelative(contract.endDate, locale, cms.labels.today, cms.labels.yesterday, timezone),
         },
         product: {
             id: product.id,

@@ -23,7 +23,11 @@ export class TicketRecentService {
             concatMap(([cms]) => {
                 return this.ticketsService
                     .getTicketList({ ...query, limit: cms.limit, locale: headers['x-locale'] })
-                    .pipe(map((tickets) => mapTicketRecent(cms, tickets, headers['x-locale'])));
+                    .pipe(
+                        map((tickets) =>
+                            mapTicketRecent(cms, tickets, headers['x-locale'], headers['x-client-timezone'] || ''),
+                        ),
+                    );
             }),
         );
     }

@@ -32,7 +32,7 @@ export function DesktopNavigation({
     items,
 }: DesktopNavigationProps) {
     const session = useSession();
-    const isSignedIn = session?.status === 'authenticated';
+    const isSignedIn = !!session.data?.user;
 
     const pathname = usePathname();
     const locale = useLocale();

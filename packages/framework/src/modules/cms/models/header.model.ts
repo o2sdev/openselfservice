@@ -14,7 +14,7 @@ export class Header {
         open: string;
         close: string;
     };
-    contextSwitcher?: ContextSwitcher;
+    contextSwitcher!: ContextSwitcher;
     items!: (NavigationGroup | NavigationItem)[];
     userInfo?: {
         url: string;
@@ -23,8 +23,6 @@ export class Header {
 }
 
 export class ContextSwitcher {
-    label!: string;
-    clear!: string;
-    apply!: string;
-    close!: string;
+    closeLabel!: string;
+    showContextSwitcher!: boolean;
 }

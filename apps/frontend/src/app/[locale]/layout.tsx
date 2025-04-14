@@ -6,6 +6,7 @@ import { headers } from 'next/headers';
 import { notFound } from 'next/navigation';
 import React from 'react';
 
+import { Toaster } from '@o2s/ui/components/toaster';
 import { TooltipProvider } from '@o2s/ui/components/tooltip';
 
 import { sdk } from '@/api/sdk';
@@ -18,6 +19,8 @@ import { GlobalProvider } from '@/providers/GlobalProvider';
 
 import { Footer } from '@/containers/Footer/Footer';
 import { Header } from '@/containers/Header/Header';
+
+import { AppSpinner } from '@/components/AppSpinner/AppSpinner';
 
 import '@/styles/global.scss';
 
@@ -51,6 +54,8 @@ export default async function RootLayout({ children, params }: Props) {
         session?.accessToken,
     );
 
+    const { labels, ...config } = init;
+
     setRequestLocale(locale);
 
     const messages = await getMessages();
@@ -68,14 +73,15 @@ export default async function RootLayout({ children, params }: Props) {
                 {/*@see https://github.com/nextauthjs/next-auth/issues/9504#issuecomment-2516665386*/}
                 <SessionProvider key={session?.user?.id} session={session} refetchOnWindowFocus={false}>
                     <NextIntlClientProvider messages={messages}>
-                        <GlobalProvider config={init} locale={locale}>
+                        <GlobalProvider config={config} labels={labels} locale={locale}>
                             <TooltipProvider>
                                 <div className="flex flex-col min-h-dvh">
                                     <Header headerData={init.common.header} />
-
                                     <div className="flex flex-col grow">{children}</div>
-
                                     <Footer data={init.common.footer} />
+
+                                    <Toaster />
+                                    <AppSpinner />
                                 </div>
                             </TooltipProvider>
                         </GlobalProvider>

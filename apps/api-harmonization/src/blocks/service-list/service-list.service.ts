@@ -1,11 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { Observable, concatMap, forkJoin, map, switchMap } from 'rxjs';
 
-import { Products } from '@o2s/framework/modules';
-
 import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
 
-import { CMS, Resources } from '../../models';
+import { CMS, Products, Resources } from '../../models';
 
 import { mapServiceList } from './service-list.mapper';
 import { ServiceListBlock } from './service-list.model';
@@ -26,10 +24,15 @@ export class ServiceListService {
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {
                 return this.resourceService
-                    .getServiceList({
-                        status: status as Resources.Model.ContractStatus,
-                        limit: cms.pagination?.limit || query.limit,
-                    })
+                    .getServiceList(
+                        {
+                            ...query,
+                            limit: query.limit || cms.pagination?.limit || 1,
+                            offset: query.offset || 0,
+                            status: status as Resources.Model.ContractStatus,
+                        },
+                        headers['authorization'] || '',
+                    )
                     .pipe(
                         switchMap((services) => {
                             const serviceList = services.data.map((service) => {
@@ -60,7 +63,12 @@ export class ServiceListService {
                                     };
                                 }),
                                 map((services) => {
-                                    return mapServiceList(services, cms, headers['x-locale']);
+                                    return mapServiceList(
+                                        services,
+                                        cms,
+                                        headers['x-locale'],
+                                        headers['x-client-timezone'] || '',
+                                    );
                                 }),
                             );
                         }),

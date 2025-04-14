@@ -4,8 +4,7 @@ query getHeader($locale: I18NLocaleCode!, $id: ID!) {
     }
     configurableTexts {
         actions {
-            clear
-            apply
+            close
         }
     }
 }

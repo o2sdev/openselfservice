@@ -4,7 +4,8 @@ import { Reflector } from '@nestjs/core';
 import { LoggerService } from '@o2s/utils.logger';
 import jwt from 'jsonwebtoken';
 
-import { RoleDecorator, RoleMatchingMode } from './roles.decorator';
+import { RoleMatchingMode } from './auth.constants';
+import { RoleDecorator } from './roles.decorator';
 
 interface Jwt extends jwt.JwtPayload {
     role: string;

@@ -28,7 +28,11 @@ export class TicketListService {
                         offset: query.offset || 0,
                         locale: headers['x-locale'],
                     })
-                    .pipe(map((tickets) => mapTicketList(tickets, cms, headers['x-locale'])));
+                    .pipe(
+                        map((tickets) =>
+                            mapTicketList(tickets, cms, headers['x-locale'], headers['x-client-timezone'] || ''),
+                        ),
+                    );
             }),
         );
     }

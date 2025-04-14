@@ -25,7 +25,9 @@ export class ArticleListService {
         const articles = this.articleService.getArticleList({ ...query, locale: headers['x-locale'] }, body);
 
         return forkJoin([articles, cms]).pipe(
-            map(([articles, cms]) => mapArticleList(articles, cms, headers['x-locale'])),
+            map(([articles, cms]) =>
+                mapArticleList(articles, cms, headers['x-locale'], headers['x-client-timezone'] || ''),
+            ),
         );
     }
 }

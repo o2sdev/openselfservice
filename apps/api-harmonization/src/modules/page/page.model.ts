@@ -21,8 +21,10 @@ export class Init {
         label: string;
     }[];
     common!: PageCommon;
+    labels!: Labels;
 }
 
+export type Labels = CMS.Model.AppConfig.Labels;
 export class Page {
     data?: PageData;
     meta!: Metadata;

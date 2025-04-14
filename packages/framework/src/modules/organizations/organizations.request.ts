@@ -4,4 +4,4 @@ export class GetOrganizationParams {
     id!: string;
 }
 
-export class OrganizationsListQuery extends PaginationQuery {}
+export class OrganizationListQuery extends PaginationQuery {}

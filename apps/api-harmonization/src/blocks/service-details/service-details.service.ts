@@ -29,7 +29,17 @@ export class ServiceDetailsService {
             concatMap(([cms, service]) => {
                 return this.productService
                     .getProduct({ id: service.productId, locale: headers['x-locale'] })
-                    .pipe(map((products) => mapServiceDetails(cms, service, products, headers['x-locale'])));
+                    .pipe(
+                        map((products) =>
+                            mapServiceDetails(
+                                cms,
+                                service,
+                                products,
+                                headers['x-locale'],
+                                headers['x-client-timezone'] || '',
+                            ),
+                        ),
+                    );
             }),
         );
     }
