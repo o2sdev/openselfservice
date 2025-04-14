@@ -55,8 +55,15 @@ export class RolesGuard implements CanActivate {
 
     private getUserRoles(decodedToken: Jwt): string[] {
         const userRoles: string[] = [];
-        userRoles.push(decodedToken?.role);
-        decodedToken?.customer?.roles !== undefined && userRoles.push(...decodedToken?.customer?.roles);
+
+        if (decodedToken?.role) {
+            userRoles.push(decodedToken.role);
+        }
+
+        if (Array.isArray(decodedToken?.customer?.roles)) {
+            userRoles.push(...decodedToken.customer.roles);
+        }
+
         return userRoles;
     }
 }

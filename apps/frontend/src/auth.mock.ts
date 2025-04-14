@@ -55,7 +55,7 @@ async function updateCustomerToken(token: JWT, customerId: string | undefined) {
                 name: customer?.name ?? '',
             };
         }
-    } catch (error) {
+    } catch (_error) {
         throw new Error('Error fetching customer data');
     }
 }

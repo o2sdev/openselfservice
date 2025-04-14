@@ -22,9 +22,9 @@
         "@o2s/typescript-config": "*",
         "@trivago/prettier-plugin-sort-imports": "^5.2.2",
         "@turbo/gen": "^2.5.0",
-        "@types/eslint": "^8.56.5",
+        "@types/eslint": "^9.6.1",
         "@types/node": "^22.14.1",
-        "eslint": "^8.57.0",
+        "eslint": "^9.24.0",
         "prettier": "^3.5.3",
         "sass": "^1.86.3",
         "typescript": "^5.8.3"

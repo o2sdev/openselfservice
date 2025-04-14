@@ -19,6 +19,7 @@
     "dependencies": {
         "@auth/prisma-adapter": "^2.8.0",
         "@o2s/api-harmonization": "*",
+        "@o2s/framework": "*",
         "@o2s/ui": "*",
         "@prisma/client": "^6.6.0",
         "bcryptjs": "^3.0.2",
@@ -51,7 +52,7 @@
         "@types/react": "^19.1.1",
         "@types/react-dom": "^19.1.2",
         "dotenv": "^16.5.0",
-        "eslint": "^8",
+        "eslint": "^9",
         "eslint-config-next": "^15.3.0",
         "postcss": "^8.5.3",
         "prettier": "^3.5.3",

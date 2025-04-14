@@ -2,7 +2,7 @@
 
 import { useLocale } from 'next-intl';
 import Image from 'next/image';
-import { JSX } from 'react';
+import React, { JSX } from 'react';
 
 import { Models } from '@o2s/framework/modules';
 

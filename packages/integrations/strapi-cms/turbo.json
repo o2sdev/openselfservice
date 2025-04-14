@@ -5,7 +5,10 @@
             "dependsOn": ["@o2s/utils.logger#build", "@o2s/framework#build"]
         },
         "build": {
-            "dependsOn": ["@o2s/utils.logger#build", "@o2s/framework#build"]
+            "dependsOn": ["@o2s/utils.logger#build", "@o2s/framework#build"],
+            "env": [
+                "CMS_STRAPI_BASE_URL"
+            ]
         }
     }
 }

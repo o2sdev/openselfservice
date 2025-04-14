@@ -29,7 +29,7 @@
         "@turbo/gen": "^2.5.0",
         "@types/qs": "^6.9.18",
         "concurrently": "^9.1.2",
-        "eslint": "^8.57.0",
+        "eslint": "^9.24.0",
         "prettier": "^3.5.3",
         "tsc-alias": "^1.8.15",
         "typescript": "^5.8.3"
