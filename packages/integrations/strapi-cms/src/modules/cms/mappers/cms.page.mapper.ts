@@ -153,5 +153,7 @@ const mapComponent = (component: ComponentFragment) => {
             return 'ServiceListBlock';
         case 'ComponentComponentsServiceDetails':
             return 'ServiceDetailsBlock';
+        case 'ComponentComponentsTicketRecent':
+            return 'TicketRecentBlock';
     }
 };

@@ -46,3 +46,5 @@ next-env.d.ts
 
 # generated files
 prisma/dev.db
+
+certificates

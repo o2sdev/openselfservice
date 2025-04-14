@@ -336,6 +336,12 @@ const config: Config = {
                       },
                       { to: '/blog', label: 'Blog', position: 'right', className: 'navbar__item--guides' },
                       {
+                          to: 'https://discord.gg/4R568nZgsT',
+                          label: 'Discord',
+                          position: 'right',
+                          className: 'navbar__item--discord',
+                      },
+                      {
                           to: 'https://github.com/o2sdev/openselfservice',
                           label: 'GitHub',
                           position: 'right',
@@ -377,8 +383,12 @@ const config: Config = {
                                   href: 'https://www.linkedin.com/company/open-self-service/',
                               },
                               {
-                                  label: 'O2S on X',
+                                  label: 'Twitter / X',
                                   href: 'https://x.com/openselfservice',
+                              },
+                              {
+                                  label: 'Discord',
+                                  href: 'https://discord.gg/4R568nZgsT',
                               },
                           ],
                       },

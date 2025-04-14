@@ -5,6 +5,7 @@
     "scripts": {
         "prepare": "npx prisma generate && dotenv -e .env.local -- prisma migrate deploy && dotenv -e .env.local -- prisma db seed",
         "dev": "next dev --turbopack",
+        "dev:https": "next dev --turbopack --experimental-https",
         "build": "dotenv -e .env.local -- prisma migrate deploy && next build",
         "start": "next start",
         "lint": "tsc --noEmit && next lint",
@@ -30,7 +31,6 @@
         "next-auth": "^5.0.0-beta.25",
         "next-compose-plugins": "^2.2.1",
         "next-intl": "^3.26.1",
-        "next-pwa": "^5.6.0",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
         "react-string-replace": "^1.1.1",
@@ -39,15 +39,14 @@
         "zod": "^3.24.2"
     },
     "devDependencies": {
+        "@next/bundle-analyzer": "15.2.4",
         "@o2s/eslint-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
-        "@next/bundle-analyzer": "15.2.4",
         "@svgr/webpack": "^8.1.0",
         "@trivago/prettier-plugin-sort-imports": "^4.3.0",
         "@types/bcryptjs": "^2.4.6",
         "@types/jsonwebtoken": "^9.0.9",
-        "@types/next-pwa": "^5.6.9",
         "@types/node": "^20",
         "@types/react": "19.0.0",
         "@types/react-dom": "19.0.0",

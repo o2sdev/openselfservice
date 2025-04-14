@@ -7308,6 +7308,15 @@ export type TicketListComponentFragment = {
     noResults: { title: string; description?: string };
 };
 
+export type TicketRecentComponentFragment = {
+    __typename: 'ComponentComponentsTicketRecent';
+    id: string;
+    title?: string;
+    commentsTitle?: string;
+    limit: number;
+    detailsUrl: string;
+};
+
 export type UserAccountComponentFragment = {
     __typename: 'ComponentComponentsUserAccount';
     id: string;
@@ -7832,7 +7841,14 @@ export type GetComponentQuery = {
                   };
                   noResults: { title: string; description?: string };
               }
-            | { __typename: 'ComponentComponentsTicketRecent' }
+            | {
+                  __typename: 'ComponentComponentsTicketRecent';
+                  id: string;
+                  title?: string;
+                  commentsTitle?: string;
+                  limit: number;
+                  detailsUrl: string;
+              }
             | {
                   __typename: 'ComponentComponentsUserAccount';
                   id: string;
@@ -7871,6 +7887,7 @@ export type GetComponentQuery = {
             logOut: string;
             settings: string;
             renew: string;
+            details: string;
         };
         errors: { requestError: { title: string; content: string } };
     };
@@ -8914,6 +8931,16 @@ export const TicketListComponentFragmentDoc = gql`
     ${PaginationFragmentDoc}
     ${FiltersFragmentDoc}
 `;
+export const TicketRecentComponentFragmentDoc = gql`
+    fragment TicketRecentComponent on ComponentComponentsTicketRecent {
+        __typename
+        id
+        title
+        commentsTitle
+        limit
+        detailsUrl
+    }
+`;
 export const UserAccountComponentFragmentDoc = gql`
     fragment UserAccountComponent on ComponentComponentsUserAccount {
         __typename
@@ -8982,6 +9009,9 @@ export const GetComponentDocument = gql`
                 ... on ComponentComponentsServiceDetails {
                     ...ServiceDetailsComponent
                 }
+                ... on ComponentComponentsTicketRecent {
+                    ...TicketRecentComponent
+                }
             }
         }
         configurableTexts(locale: $locale) {
@@ -9001,6 +9031,7 @@ export const GetComponentDocument = gql`
                 logOut
                 settings
                 renew
+                details
             }
             errors {
                 requestError {
@@ -9020,6 +9051,7 @@ export const GetComponentDocument = gql`
     ${UserAccountComponentFragmentDoc}
     ${ServiceListComponentFragmentDoc}
     ${ServiceDetailsComponentFragmentDoc}
+    ${TicketRecentComponentFragmentDoc}
 `;
 export const GetFooterDocument = gql`
     query getFooter($locale: I18NLocaleCode!, $id: ID!) {
