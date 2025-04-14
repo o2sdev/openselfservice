@@ -17,11 +17,12 @@
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
-        "@nestjs/axios": "^3.1.2",
-        "@nestjs/common": "^10.0.0",
-        "@nestjs/config": "^3.3.0",
-        "@nestjs/core": "^10.0.0",
+        "@nestjs/axios": "^4.0.0",
+        "@nestjs/common": "^11.0.17",
+        "@nestjs/config": "^4.0.2",
+        "@nestjs/core": "^11.0.17",
         "jwt-decode": "^3.1.2",
+        "rxjs": "^7.8.1",
         "winston": "^3.17.0"
     },
     "devDependencies": {
@@ -31,7 +32,7 @@
         "concurrently": "^9.1.2",
         "eslint": "^8.57.0",
         "prettier": "^3.5.3",
-        "tsc-alias": "^1.8.11",
-        "typescript": "^5.8.2"
+        "tsc-alias": "^1.8.15",
+        "typescript": "^5.8.3"
     }
 }

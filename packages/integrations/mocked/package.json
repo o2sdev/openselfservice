@@ -18,10 +18,6 @@
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
-        "@nestjs/axios": "^3.1.2",
-        "@nestjs/common": "^10.0.0",
-        "@nestjs/config": "^3.3.0",
-        "@nestjs/core": "^10.0.0",
         "@o2s/framework": "*",
         "@o2s/utils.logger": "*",
         "rxjs": "^7.8.1"
@@ -33,7 +29,7 @@
         "concurrently": "^9.1.2",
         "eslint": "^8.57.0",
         "prettier": "^3.5.3",
-        "tsc-alias": "^1.8.13",
-        "typescript": "^5.8.2"
+        "tsc-alias": "^1.8.15",
+        "typescript": "^5.8.3"
     }
 }
