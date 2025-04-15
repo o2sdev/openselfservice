@@ -12,8 +12,8 @@ export const UserInfo = ({ user, userInfo }: UserInfoProps) => {
     }
 
     return (
-        <Link asChild>
-            <NextLink href={userInfo.url} className="no-underline hover:no-underline" aria-label={userInfo.label}>
+        <Link className="no-underline hover:no-underline" aria-label={userInfo.label} asChild>
+            <NextLink href={userInfo.url}>
                 <Avatar>
                     <AvatarImage src={user.image || ''} />
                     <AvatarFallback variant="secondary">

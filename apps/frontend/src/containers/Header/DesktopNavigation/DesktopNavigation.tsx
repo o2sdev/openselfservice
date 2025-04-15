@@ -73,10 +73,8 @@ export function DesktopNavigation({
         active?: boolean;
     }) => {
         return (
-            <NavigationMenuLink asChild active={active}>
-                <NextLink href={href} locale={locale} className={cn(navigationItemClass, className)}>
-                    {children}
-                </NextLink>
+            <NavigationMenuLink asChild active={active} className={cn(navigationItemClass, className)}>
+                <NextLink href={href}>{children}</NextLink>
             </NavigationMenuLink>
         );
     };

@@ -5,6 +5,7 @@
     "license": "MIT",
     "exports": {
         "./globals": "./src/globals.css",
+        "./theme": "./src/theme.css",
         "./postcss.config": "./postcss.config.mjs",
         "./lib/*": "./src/lib/*.ts",
         "./components/*": "./src/components/*.tsx",
@@ -28,6 +29,7 @@
         "eslint": "^9.24.0",
         "prettier": "^3.5.3",
         "sass": "^1.86.3",
+        "tw-animate-css": "^1.2.5",
         "typescript": "^5.8.3"
     },
     "dependencies": {
