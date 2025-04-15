@@ -3,6 +3,25 @@
  */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap');
 
+@layer theme, base, components, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+@import 'tw-animate-css';
+
+@source "./blog/**/*.{ts,tsx}";
+@source "./docs/**/*.{ts,tsx}";
+
+@custom-variant dark (&:is([data-theme="dark"] *));
+
+@theme inline {
+    --font-*: initial;
+    --font-sans: Poppins, sans-serif;
+
+    --color-highlighted: #21d99a;
+    --color-white: #ffffff;
+    --color-violet: #4c5ce5;
+    --color-celadon: #21d99a;
+}
 /*
   Zmienne Infima – nadpisanie domyślnych wartości.
   Zmienne pogrupowane według funkcjonalności.
@@ -440,6 +459,15 @@ aside:not(.theme-doc-sidebar-container) {
 .navbar__item.navbar__link.navbar__item--github:hover:before {
     background: url('../../src/assets/icons/github-active.svg') no-repeat;
 }
+
+.navbar__item--discord:before {
+    background: url('../../src/assets/icons/discord.svg') no-repeat;
+}
+.navbar__item.navbar__link.navbar__item--discord.navbar__link--active::before,
+.navbar__item.navbar__link.navbar__item--discord:hover:before {
+    background: url('../../src/assets/icons/discord-active.svg') no-repeat;
+}
+
 .markdown hr {
     background-color: transparent;
     border-bottom: 1px solid !important;

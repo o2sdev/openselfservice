@@ -1,5 +1,24 @@
 # @o2s/docs
 
+## 0.11.0
+
+### Minor Changes
+
+- de00274: updated dependencies
+- a854c74: upgraded Tailwind to v4
+
+## 0.10.5
+
+### Patch Changes
+
+- 6391233: Mapper labels fixes
+
+## 0.10.4
+
+### Patch Changes
+
+- e0d68dc: blog entry - `Composable frontends with Strapi and Next.js`
+
 ## 0.10.3
 
 ### Patch Changes

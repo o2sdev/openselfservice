@@ -2,7 +2,7 @@ import { CallHandler, ConsoleLogger, ExecutionContext, Global, Injectable } from
 import { ConfigService } from '@nestjs/config';
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Response } from 'express';
-import jwtDecode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import { Observable, tap } from 'rxjs';
 import { Logger, createLogger, format, transports } from 'winston';
 

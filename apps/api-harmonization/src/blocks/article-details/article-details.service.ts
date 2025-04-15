@@ -29,7 +29,7 @@ export class ArticleDetailsService {
                 if (!article) {
                     throw new NotFoundException();
                 }
-                return mapArticleDetails(article, cms, headers['x-locale']);
+                return mapArticleDetails(article, cms, headers['x-locale'], headers['x-client-timezone'] || '');
             }),
         );
     }

@@ -1,5 +1,40 @@
 # @o2s/integrations.strapi-cms
 
+## 1.1.1
+
+### Patch Changes
+
+- 0e8409e: fixed a typo in class name
+- Updated dependencies [0e8409e]
+    - @o2s/framework@0.21.1
+
+## 1.1.0
+
+### Minor Changes
+
+- c0ff0a7: implement context switch
+- de00274: updated dependencies
+- c0ff0a7: implement context change, user roles
+- 35cdf5e: implement TicketRecent component
+- e9dc277: feat: handle user's timezone
+- e9dc277: feat: handle user's timezone
+
+### Patch Changes
+
+- Updated dependencies [c0ff0a7]
+- Updated dependencies [de00274]
+- Updated dependencies [c0ff0a7]
+- Updated dependencies [e9dc277]
+- Updated dependencies [e9dc277]
+    - @o2s/framework@0.21.0
+    - @o2s/utils.logger@0.10.0
+
+## 1.0.0
+
+### Major Changes
+
+- 6391233: Mapper labels fixes
+
 ## 0.18.0
 
 ### Minor Changes

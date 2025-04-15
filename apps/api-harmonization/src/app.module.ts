@@ -20,7 +20,6 @@ import {
     Users,
 } from '@o2s/framework/modules';
 
-// BLOCK IMPORT
 import { configuration } from '@o2s/api-harmonization/config/configuration';
 
 import { ArticleDetailsBlockModule } from '@o2s/api-harmonization/blocks/article-details/article-details.module';
@@ -38,11 +37,13 @@ import { TicketListBlockModule } from '@o2s/api-harmonization/blocks/ticket-list
 import { TicketRecentBlockModule } from '@o2s/api-harmonization/blocks/ticket-recent/ticket-recent.module';
 import { UserAccountBlockModule } from '@o2s/api-harmonization/blocks/user-account/user-account.module';
 
+// BLOCK IMPORT
 import { AppConfig } from './app.config';
 import { AppService } from './app.service';
 import { ContextHeadersMiddleware } from './middleware/context-headers.middleware';
 import { LoginPageModule } from './modules/login-page/login-page.module';
 import { NotFoundPageModule } from './modules/not-found-page/not-found-page.module';
+import { OrganizationsModule } from './modules/organizations/organizations.module';
 import { PageModule } from './modules/page/page.module';
 import { RoutesModule } from './modules/routes/routes.module';
 
@@ -74,6 +75,7 @@ import { RoutesModule } from './modules/routes/routes.module';
         RoutesModule.register(AppConfig),
         LoginPageModule.register(AppConfig),
         NotFoundPageModule.register(AppConfig),
+        OrganizationsModule.register(AppConfig),
 
         TicketListBlockModule.register(AppConfig),
         TicketDetailsBlockModule.register(AppConfig),
@@ -89,7 +91,7 @@ import { RoutesModule } from './modules/routes/routes.module';
         TicketRecentBlockModule.register(AppConfig),
         ServiceListBlockModule.register(AppConfig),
         ServiceDetailsBlockModule.register(AppConfig),
-        // COMPONENT REGISTER
+        // BLOCK REGISTER
     ],
     providers: [
         AppService,

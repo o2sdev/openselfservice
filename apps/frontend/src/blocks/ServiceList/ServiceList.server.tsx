@@ -10,13 +10,16 @@ export const ServiceListDynamic = dynamic(() =>
 );
 
 export const ServiceList: React.FC<ServiceListProps> = async ({ id, accessToken, locale }) => {
-    const data = await sdk.blocks.getServiceList(
-        {
-            id,
-        },
-        { 'x-locale': locale },
-        accessToken,
-    );
-
-    return <ServiceListDynamic {...data} id={id} accessToken={accessToken} locale={locale} />;
+    try {
+        const data = await sdk.blocks.getServiceList(
+            {
+                id,
+            },
+            { 'x-locale': locale },
+            accessToken,
+        );
+        return <ServiceListDynamic {...data} id={id} accessToken={accessToken} locale={locale} />;
+    } catch (_error) {
+        return null;
+    }
 };

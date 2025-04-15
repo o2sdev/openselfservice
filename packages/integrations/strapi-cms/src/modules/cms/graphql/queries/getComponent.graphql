@@ -33,6 +33,9 @@ query getComponent($id: ID!, $locale: I18NLocaleCode!) {
             ... on ComponentComponentsServiceDetails {
                 ...ServiceDetailsComponent
             }
+            ... on ComponentComponentsTicketRecent {
+                ...TicketRecentComponent
+            }
         }
     }
     configurableTexts(locale: $locale) {
@@ -52,6 +55,13 @@ query getComponent($id: ID!, $locale: I18NLocaleCode!) {
             logOut
             settings
             renew
+            details
+        }
+        errors {
+            requestError {
+                title
+                content
+            }
         }
     }
 }

@@ -1,5 +1,39 @@
 # @o2s/api-harmonization
 
+## 0.20.0
+
+### Minor Changes
+
+- c0ff0a7: implement context switch
+- de00274: updated dependencies
+- c0ff0a7: implement context change, user roles
+- e9dc277: feat: handle user's timezone
+- e9dc277: feat: handle user's timezone
+
+### Patch Changes
+
+- Updated dependencies [c0ff0a7]
+- Updated dependencies [de00274]
+- Updated dependencies [c0ff0a7]
+- Updated dependencies [e9dc277]
+- Updated dependencies [e9dc277]
+    - @o2s/integrations.mocked@0.21.0
+    - @o2s/framework@0.21.0
+    - @o2s/utils.logger@0.10.0
+
+## 0.19.0
+
+### Minor Changes
+
+- 51a6121: fix: update generators
+
+## 0.18.1
+
+### Patch Changes
+
+- Updated dependencies [dadad64]
+    - @o2s/integrations.mocked@0.20.0
+
 ## 0.18.0
 
 ### Minor Changes

@@ -336,6 +336,12 @@ const config: Config = {
                       },
                       { to: '/blog', label: 'Blog', position: 'right', className: 'navbar__item--guides' },
                       {
+                          to: 'https://discord.gg/4R568nZgsT',
+                          label: 'Discord',
+                          position: 'right',
+                          className: 'navbar__item--discord',
+                      },
+                      {
                           to: 'https://github.com/o2sdev/openselfservice',
                           label: 'GitHub',
                           position: 'right',
@@ -377,8 +383,12 @@ const config: Config = {
                                   href: 'https://www.linkedin.com/company/open-self-service/',
                               },
                               {
-                                  label: 'O2S on X',
+                                  label: 'Twitter / X',
                                   href: 'https://x.com/openselfservice',
+                              },
+                              {
+                                  label: 'Discord',
+                                  href: 'https://discord.gg/4R568nZgsT',
                               },
                           ],
                       },
@@ -399,7 +409,7 @@ const config: Config = {
                     </div>
 
                     <div class="text-right flex flex-col md:flex-row justify-between items-center gap-4">
-                        <a class="text-white" href="https://hycom.digital/privacy-policy" target="_blank">Privacy Policy</a> Open Self Service © ${new Date().getFullYear()} Hycom S.A.
+                        <a class="text-white!" href="https://hycom.digital/privacy-policy" target="_blank">Privacy Policy</a> Open Self Service © ${new Date().getFullYear()} Hycom S.A.
                     </div>
                 </div>
             `,

@@ -34,7 +34,12 @@ export class NotificationDetailsService {
                     throw new NotFoundException();
                 }
 
-                return mapNotificationDetails(notification, cms, headers['x-locale']);
+                return mapNotificationDetails(
+                    notification,
+                    cms,
+                    headers['x-locale'],
+                    headers['x-client-timezone'] || '',
+                );
             }),
         );
     }

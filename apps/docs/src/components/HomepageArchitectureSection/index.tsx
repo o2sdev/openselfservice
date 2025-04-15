@@ -8,7 +8,7 @@ export function HomepageArchitectureSection() {
     const { siteConfig } = useDocusaurusContext();
     return (
         <div className="container flex flex-col items-center">
-            <div className="grid md:grid-cols-2 gap-14 md:gap-28 items-center">
+            <div className="grid md:grid-cols-2 gap-14 md:gap-28">
                 <div>
                     <H2 className="mb-[0]">
                         Composable architecture <br />

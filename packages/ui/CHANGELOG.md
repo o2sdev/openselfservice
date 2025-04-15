@@ -1,5 +1,20 @@
 # @o2s/ui
 
+## 0.14.0
+
+### Minor Changes
+
+- c0ff0a7: implement context switch
+- de00274: updated dependencies
+- a854c74: upgraded Tailwind to v4
+- c0ff0a7: added `toast` component; added pointers to `radio` and `label` components; added `size` to `loading-overlay` component
+
+## 0.13.0
+
+### Minor Changes
+
+- b9090bc: incorrect colors on hover in the Navbar and the Footer
+
 ## 0.12.0
 
 ### Minor Changes

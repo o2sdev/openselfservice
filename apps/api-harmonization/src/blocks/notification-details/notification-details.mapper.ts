@@ -8,11 +8,12 @@ export const mapNotificationDetails = (
     notification: Notifications.Model.Notification,
     cms: CMS.Model.NotificationDetailsBlock.NotificationDetailsBlock,
     locale: string,
+    timezone: string,
 ): NotificationDetailsBlock => {
     return {
         __typename: 'NotificationDetailsBlock',
         id: cms.id,
-        data: mapNotification(notification, cms, locale),
+        data: mapNotification(notification, cms, locale, timezone),
     };
 };
 
@@ -20,6 +21,7 @@ export const mapNotification = (
     notification: Notifications.Model.Notification,
     cms: CMS.Model.NotificationDetailsBlock.NotificationDetailsBlock,
     locale: string,
+    timezone: string,
 ): Notification => {
     return {
         customField: notification.someNewField,
@@ -53,7 +55,7 @@ export const mapNotification = (
             title: cms.properties['priority'] as string,
             label: cms.fieldMapping.priority?.[notification.priority] || notification.priority,
         },
-        createdAt: formatDateRelative(notification.createdAt, locale, cms.labels.today, cms.labels.yesterday),
-        updatedAt: formatDateRelative(notification.updatedAt, locale, cms.labels.today, cms.labels.yesterday),
+        createdAt: formatDateRelative(notification.createdAt, locale, cms.labels.today, cms.labels.yesterday, timezone),
+        updatedAt: formatDateRelative(notification.updatedAt, locale, cms.labels.today, cms.labels.yesterday, timezone),
     };
 };

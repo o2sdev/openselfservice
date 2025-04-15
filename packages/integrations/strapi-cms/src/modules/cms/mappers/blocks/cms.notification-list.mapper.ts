@@ -35,7 +35,7 @@ export const mapNotificationListBlock = (
                 },
                 labels: {
                     today: configurableTexts.dates.today,
-                    yesterday: configurableTexts.dates.today,
+                    yesterday: configurableTexts.dates.yesterday,
                 },
                 detailsUrl: component.detailsURL as string,
             };

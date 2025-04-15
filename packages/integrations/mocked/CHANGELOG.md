@@ -1,5 +1,31 @@
 # @o2s/integrations.mocked
 
+## 0.21.0
+
+### Minor Changes
+
+- c0ff0a7: implement context switch
+- de00274: updated dependencies
+- c0ff0a7: implement context change, user roles
+- e9dc277: feat: handle user's timezone
+- e9dc277: feat: handle user's timezone
+
+### Patch Changes
+
+- Updated dependencies [c0ff0a7]
+- Updated dependencies [de00274]
+- Updated dependencies [c0ff0a7]
+- Updated dependencies [e9dc277]
+- Updated dependencies [e9dc277]
+    - @o2s/framework@0.21.0
+    - @o2s/utils.logger@0.10.0
+
+## 0.20.0
+
+### Minor Changes
+
+- dadad64: fix: service-list - wrong tag color"
+
 ## 0.19.0
 
 ### Minor Changes
