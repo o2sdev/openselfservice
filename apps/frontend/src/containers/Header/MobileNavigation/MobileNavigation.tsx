@@ -1,7 +1,6 @@
 'use client';
 
 import { Menu, X } from 'lucide-react';
-import { useLocale } from 'next-intl';
 import React, { useEffect, useState } from 'react';
 
 import { Models } from '@o2s/framework/modules';

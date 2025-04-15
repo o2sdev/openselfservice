@@ -1,7 +1,6 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
-import { useLocale } from 'next-intl';
 import React from 'react';
 
 import { Models } from '@o2s/framework/modules';
@@ -35,7 +34,6 @@ export function DesktopNavigation({
     const isSignedIn = !!session.data?.user;
 
     const pathname = usePathname();
-    const locale = useLocale();
 
     const activeNavigationGroup = isSignedIn
         ? items.find((item) => {
