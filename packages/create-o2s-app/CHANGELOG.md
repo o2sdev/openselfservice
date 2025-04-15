@@ -1,5 +1,11 @@
 # create-o2s-app
 
+## 0.11.0
+
+### Minor Changes
+
+- de00274: updated dependencies
+
 ## 0.10.2
 
 ### Patch Changes
