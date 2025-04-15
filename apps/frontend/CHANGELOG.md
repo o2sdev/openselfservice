@@ -1,5 +1,30 @@
 # @o2s/frontend
 
+## 0.21.0
+
+### Minor Changes
+
+- c0ff0a7: implement context switch
+- de00274: updated dependencies
+- c0ff0a7: implement context change, user roles
+- e9dc277: feat: handle user's timezone
+- a854c74: upgraded Tailwind to v4
+- 7b15c0d: replaced `next-pwa` with native manifest from next.js and added app icons
+- e9dc277: feat: handle user's timezone
+
+### Patch Changes
+
+- Updated dependencies [c0ff0a7]
+- Updated dependencies [de00274]
+- Updated dependencies [c0ff0a7]
+- Updated dependencies [e9dc277]
+- Updated dependencies [a854c74]
+- Updated dependencies [c0ff0a7]
+- Updated dependencies [e9dc277]
+    - @o2s/api-harmonization@0.20.0
+    - @o2s/framework@0.21.0
+    - @o2s/ui@0.14.0
+
 ## 0.20.0
 
 ### Minor Changes

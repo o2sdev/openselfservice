@@ -1,5 +1,11 @@
 # @o2s/utils.logger
 
+## 0.10.0
+
+### Minor Changes
+
+- de00274: updated dependencies
+
 ## 0.9.3
 
 ### Patch Changes
