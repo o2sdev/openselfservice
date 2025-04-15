@@ -20,7 +20,7 @@ export function HomepageBannerSection() {
                         <b>{siteConfig.customFields.heading as ReactNode}</b>
                         {siteConfig.tagline}
                     </Body>
-                    {/*<Body className="text-2xl font-semibold leading-150 mb-10">{siteConfig.tagline}</Body>*/}
+                    {/*<Body className="text-2xl font-semibold leading-9 mb-10">{siteConfig.tagline}</Body>*/}
                     <div className="mt-16">
                         <GetStartedButtons />
                     </div>
