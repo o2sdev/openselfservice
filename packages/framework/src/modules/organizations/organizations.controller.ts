@@ -15,7 +15,7 @@ export class OrganizationController {
     }
 
     @Get()
-    getOrganizations(@Query() options: Request.OrganizationListQuery) {
+    getOrganizations(@Query() options: Request.OrganizationsListQuery) {
         return this.organizationService.getOrganizationList(options);
     }
 }

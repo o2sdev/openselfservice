@@ -8041,11 +8041,11 @@ export type GetNotFoundPageQuery = {
     notFoundPage?: { title: string; description: string; url?: string; urlLabel: string; page?: { slug: string } };
 };
 
-export type GetOrganizationListQueryVariables = Exact<{
+export type GetOrganizationsListQueryVariables = Exact<{
     locale: Scalars['I18NLocaleCode']['input'];
 }>;
 
-export type GetOrganizationListQuery = {
+export type GetOrganizationsListQuery = {
     organizationList?: { documentId: string; title?: string; description?: string };
     configurableTexts?: { actions: { apply: string } };
 };
@@ -9301,10 +9301,10 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
             );
         },
         getOrganizationList(
-            variables: GetOrganizationListQueryVariables,
+            variables: GetOrganizationsListQueryVariables,
             requestHeaders?: GraphQLClientRequestHeaders,
         ): Promise<{
-            data: GetOrganizationListQuery;
+            data: GetOrganizationsListQuery;
             errors?: GraphQLError[];
             extensions?: any;
             headers: Headers;
@@ -9312,7 +9312,7 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
         }> {
             return withWrapper(
                 (wrappedRequestHeaders) =>
-                    client.rawRequest<GetOrganizationListQuery>(GetOrganizationListDocumentString, variables, {
+                    client.rawRequest<GetOrganizationsListQuery>(GetOrganizationListDocumentString, variables, {
                         ...requestHeaders,
                         ...wrappedRequestHeaders,
                     }),
