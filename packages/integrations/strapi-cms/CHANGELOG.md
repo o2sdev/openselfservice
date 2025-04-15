@@ -1,5 +1,13 @@
 # @o2s/integrations.strapi-cms
 
+## 1.1.1
+
+### Patch Changes
+
+- 0e8409e: fixed a typo in class name
+- Updated dependencies [0e8409e]
+    - @o2s/framework@0.21.1
+
 ## 1.1.0
 
 ### Minor Changes
