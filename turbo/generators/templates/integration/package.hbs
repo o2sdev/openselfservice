@@ -1,6 +1,6 @@
 {
     "name": "@o2s/integrations.{{kebabCase name}}",
-    "version": "0.2.1",
+    "version": "0.0.1",
     "private": false,
     "license": "MIT",
     "exports": {
@@ -17,22 +17,24 @@
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
-        "@nestjs/axios": "^3.1.2",
-        "@nestjs/common": "^10.0.0",
-        "@nestjs/config": "^3.3.0",
-        "@nestjs/core": "^10.0.0",
         "@o2s/framework": "*",
-        "@o2s/utils.logger": "*",
-        "rxjs": "^7.8.1"
+        "@o2s/utils.logger": "*"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
-        "concurrently": "^9.1.0",
-        "eslint": "^8.57.0",
-        "prettier": "^3.4.1",
-        "tsc-alias": "^1.8.10",
-        "typescript": "^5.7.2"
+        "concurrently": "^9.1.2",
+        "eslint": "^9.24.0",
+        "prettier": "^3.5.3",
+        "tsc-alias": "^1.8.15",
+        "typescript": "^5.8.3"
+    },
+    "peerDependencies": {
+        "@nestjs/axios": "^4",
+        "@nestjs/common": "^11",
+        "@nestjs/config": "^4.0.2",
+        "@nestjs/core": "^11",
+        "rxjs": "^7"
     }
 }
