@@ -57,8 +57,8 @@ jobs:
               id: changesets
               uses: changesets/action@v1
               with:
-                  # This expects you to have a script called release which does a build for your packages and calls changeset publish
                   publish: npm run release
+                  commit: 'feat(changeset): version packages'
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -84,7 +84,7 @@ jobs:
               uses: peter-evans/create-pull-request@v7
               if: steps.changesets.outputs.published == 'true'
               with:
-                  commit-message: Update dependencies
+                  commit-message: 'feat(create-o2s-app): update dependencies'
                   branch: create-o2s-app/patch
                   delete-branch: true
-                  title: 'feat(create-o2s-app): update dependencies'
+                  title: 'Update dependencies'
