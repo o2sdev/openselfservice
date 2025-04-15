@@ -74,7 +74,10 @@ export const ContextSwitcher: React.FC<ContextSwitcherProps> = ({ data }) => {
         <Sheet open={isOpen} onOpenChange={handleOpen}>
             <LoadingOverlay isActive={isPending} size="small">
                 <SheetTrigger asChild>
-                    <Button variant="tertiary" className="max-w-full md:max-w-[130px] lg:max-w-[330px] justify-between">
+                    <Button
+                        variant="tertiary"
+                        className="w-full max-w-full md:max-w-[130px] lg:max-w-[330px] justify-between"
+                    >
                         <span className="flex items-center gap-2 w-full truncate">
                             <Building2 className="w-4 h-4 shrink-0" />
                             <Typography className="truncate" variant="small">

@@ -409,7 +409,7 @@ const config: Config = {
                     </div>
 
                     <div class="text-right flex flex-col md:flex-row justify-between items-center gap-4">
-                        <a class="text-white" href="https://hycom.digital/privacy-policy" target="_blank">Privacy Policy</a> Open Self Service © ${new Date().getFullYear()} Hycom S.A.
+                        <a class="text-white!" href="https://hycom.digital/privacy-policy" target="_blank">Privacy Policy</a> Open Self Service © ${new Date().getFullYear()} Hycom S.A.
                     </div>
                 </div>
             `,

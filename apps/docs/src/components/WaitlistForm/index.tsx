@@ -83,7 +83,7 @@ const WaitlistForm = ({ inputId }) => {
         <div>
             {status.type !== 'success' && (
                 <form onSubmit={handleSubmit}>
-                    <label className="text-2xl mb-6 font-semibold leading-150 block" htmlFor={inputId}>
+                    <label className="text-2xl mb-6 font-semibold! leading-9 block" htmlFor={inputId}>
                         Join the waitlist
                     </label>
                     <div className="flex gap-2 max-w-md">

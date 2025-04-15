@@ -1,7 +1,5 @@
 import type { ReactNode } from 'react';
 
-import '@o2s/ui/globals';
-
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 import { HomepageAboutSection } from '@site/src/components/HomepageAboutSection';

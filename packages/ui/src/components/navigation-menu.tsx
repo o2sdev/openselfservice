@@ -35,7 +35,7 @@ NavigationMenuList.displayName = NavigationMenuPrimitive.List.displayName;
 const NavigationMenuItem = NavigationMenuPrimitive.Item;
 
 const navigationMenuTriggerStyle = cva(
-    'no-underline hover:no-underline group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 !text-base font-medium transition-colors focus-visible:outline-ring !text-navbar-primary hover:!bg-navbar-accent-background hover:!text-navbar-sub-muted disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-navbar-sub-accent',
+    'no-underline hover:no-underline group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-base! font-medium transition-colors focus-visible:outline-ring text-navbar-primary! hover:bg-navbar-accent-background! hover:text-navbar-sub-muted! disabled:pointer-events-none disabled:opacity-50 data-active:bg-navbar-sub-accent',
 );
 
 const NavigationMenuTrigger = React.forwardRef<
@@ -97,7 +97,7 @@ const NavigationMenuIndicator = React.forwardRef<
     <NavigationMenuPrimitive.Indicator
         ref={ref}
         className={cn(
-            'top-full z-[1] flex h-1.5 items-end justify-center overflow-hidden data-[state=visible]:animate-in data-[state=hidden]:animate-out data-[state=hidden]:fade-out data-[state=visible]:fade-in',
+            'top-full z-1 flex h-1.5 items-end justify-center overflow-hidden data-[state=visible]:animate-in data-[state=hidden]:animate-out data-[state=hidden]:fade-out data-[state=visible]:fade-in',
             className,
         )}
         {...props}

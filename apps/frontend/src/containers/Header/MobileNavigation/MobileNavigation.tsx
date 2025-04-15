@@ -30,7 +30,6 @@ export function MobileNavigation({
     mobileMenuLabel,
 }: MobileNavigationProps) {
     const pathname = usePathname();
-    const locale = useLocale();
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -46,10 +45,8 @@ export function MobileNavigation({
     const NavigationItem = ({ item }: { item: Models.Navigation.NavigationItem }) => {
         return (
             <li key={item.label} className="w-full">
-                <Link asChild>
-                    <NextLink href={item.url || '/'} locale={locale} className={navigationMobileItemClass}>
-                        {item.label}
-                    </NextLink>
+                <Link className={navigationMobileItemClass} asChild>
+                    <NextLink href={item.url || '/'}>{item.label}</NextLink>
                 </Link>
             </li>
         );
