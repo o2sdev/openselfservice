@@ -17,7 +17,7 @@
         "release": "changeset publish"
     },
     "engines": {
-        "node": ">=18"
+        "node": ">=22"
     },
     "packageManager": "npm@11.3.0",
     "workspaces": [
