@@ -1,5 +1,13 @@
 # @o2s/frontend
 
+## 0.21.1
+
+### Patch Changes
+
+- 811d13a: removed not used locale
+- Updated dependencies [0e8409e]
+    - @o2s/framework@0.21.1
+
 ## 0.21.0
 
 ### Minor Changes
