@@ -9,11 +9,12 @@ export const mapServiceDetails = (
     service: Resources.Model.Service,
     product: Products.Model.Product,
     locale: string,
+    timezone: string,
 ): ServiceDetailsBlock => {
     return {
         __typename: 'ServiceDetailsBlock',
         id: cms.id,
-        data: mapService(cms, service, product, locale),
+        data: mapService(cms, service, product, locale, timezone),
     };
 };
 
@@ -22,6 +23,7 @@ export const mapService = (
     service: Resources.Model.Service,
     product: Products.Model.Product,
     locale: string,
+    timezone: string,
 ): Service => {
     return {
         price: {
@@ -45,11 +47,23 @@ export const mapService = (
         },
         startDate: {
             title: cms.properties?.startDate as string,
-            value: formatDateRelative(service.contract.startDate, locale, cms.labels.today, cms.labels.yesterday),
+            value: formatDateRelative(
+                service.contract.startDate,
+                locale,
+                cms.labels.today,
+                cms.labels.yesterday,
+                timezone,
+            ),
         },
         endDate: {
             title: cms.properties?.endDate as string,
-            value: formatDateRelative(service.contract.endDate, locale, cms.labels.today, cms.labels.yesterday),
+            value: formatDateRelative(
+                service.contract.endDate,
+                locale,
+                cms.labels.today,
+                cms.labels.yesterday,
+                timezone,
+            ),
         },
         name: product.name,
         details: cms.title,

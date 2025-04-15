@@ -30,7 +30,7 @@ export class TicketDetailsService {
                     throw new NotFoundException();
                 }
 
-                return mapTicketDetails(ticket, cms, headers['x-locale']);
+                return mapTicketDetails(ticket, cms, headers['x-locale'], headers['x-client-timezone'] || '');
             }),
         );
     }

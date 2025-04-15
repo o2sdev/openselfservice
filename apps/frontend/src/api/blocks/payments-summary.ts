@@ -2,6 +2,8 @@ import { Blocks, Headers } from '@o2s/api-harmonization';
 
 import { Sdk } from '@o2s/framework/sdk';
 
+import { getApiHeaders } from '../../utils/api';
+
 const API_URL = Blocks.PaymentsSummary.URL;
 
 export const paymentsSummary = (sdk: Sdk) => ({
@@ -15,6 +17,7 @@ export const paymentsSummary = (sdk: Sdk) => ({
                 method: 'get',
                 url: `${API_URL}`,
                 headers: {
+                    ...getApiHeaders(),
                     ...headers,
                     Authorization: `Bearer ${authorization}`,
                 },
