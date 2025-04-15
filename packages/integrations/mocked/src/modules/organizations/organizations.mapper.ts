@@ -111,7 +111,7 @@ const MOCK_ORGANIZATION_1: Organizations.Model.Organization = {
 const MOCK_ORGANIZATIONS = [MOCK_ORGANIZATION_1];
 
 export const mapOrganizations = (
-    options: Organizations.Request.OrganizationListQuery,
+    options: Organizations.Request.OrganizationsListQuery,
 ): Organizations.Model.Organizations => {
     const { offset = 0, limit = 10 } = options;
     return {

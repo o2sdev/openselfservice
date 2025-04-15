@@ -9,7 +9,7 @@ import { responseDelay } from '@/utils/delay';
 @Injectable()
 export class OrganizationsService implements Organizations.Service {
     getOrganizationList(
-        options: Organizations.Request.OrganizationListQuery,
+        options: Organizations.Request.OrganizationsListQuery,
     ): Observable<Organizations.Model.Organizations | undefined> {
         return of(mapOrganizations(options)).pipe(responseDelay());
     }

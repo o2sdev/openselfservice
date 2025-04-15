@@ -1,15 +1,13 @@
 import { ArrowUpRight, CircleAlert, CreditCard } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import reactStringReplace from 'react-string-replace';
 
 import { Models } from '@o2s/framework/modules';
 
 import { Button } from '@o2s/ui/components/button';
 import { Card } from '@o2s/ui/components/card';
-import { Tooltip } from '@o2s/ui/components/tooltip';
-import { TooltipContent } from '@o2s/ui/components/tooltip';
-import { TooltipTrigger } from '@o2s/ui/components/tooltip';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@o2s/ui/components/tooltip';
 import { Typography } from '@o2s/ui/components/typography';
 import { cn } from '@o2s/ui/lib/utils';
 

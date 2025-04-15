@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import React from 'react';
 
 import { Badge } from '@o2s/ui/components/badge';
 import { Link } from '@o2s/ui/components/link';
