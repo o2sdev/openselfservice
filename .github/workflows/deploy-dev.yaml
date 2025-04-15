@@ -87,4 +87,4 @@ jobs:
                   commit-message: 'feat(create-o2s-app): update dependencies'
                   branch: create-o2s-app/patch
                   delete-branch: true
-                  title: 'Update dependencies'
+                  title: 'Update dependencies in create-o2s-app'
