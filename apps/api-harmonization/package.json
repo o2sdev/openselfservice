@@ -25,7 +25,7 @@
         "@nestjs/config": "^4.0.2",
         "@nestjs/core": "^11.0.17",
         "@nestjs/platform-express": "^11.0.17",
-        "@o2s/framework": "^0.21.0",
+        "@o2s/framework": "^0.21.1",
         "@o2s/integrations.mocked": "^0.21.0",
         "@o2s/utils.logger": "^0.10.0",
         "compression": "^1.8.0",
