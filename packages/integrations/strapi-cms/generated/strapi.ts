@@ -8041,11 +8041,11 @@ export type GetNotFoundPageQuery = {
     notFoundPage?: { title: string; description: string; url?: string; urlLabel: string; page?: { slug: string } };
 };
 
-export type GetOrganizationsListQueryVariables = Exact<{
+export type GetOrganizationListQueryVariables = Exact<{
     locale: Scalars['I18NLocaleCode']['input'];
 }>;
 
-export type GetOrganizationsListQuery = {
+export type GetOrganizationListQuery = {
     organizationList?: { documentId: string; title?: string; description?: string };
     configurableTexts?: { actions: { apply: string } };
 };
@@ -8364,6 +8364,22 @@ export type GetPagesQuery = {
               }
             | { __typename: 'Error' }
         >;
+    }>;
+};
+
+export type GetSurveyQueryVariables = Exact<{
+    code?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+export type GetSurveyQuery = {
+    surveyJsForms: Array<{
+        documentId: string;
+        code: string;
+        surveyId: string;
+        postId: string;
+        surveyType: string;
+        requiredRoles: Enum_Surveyjsform_Requiredroles;
+        submitDestination?: Enum_Surveyjsform_Submitdestination;
     }>;
 };
 
@@ -9132,6 +9148,19 @@ export const GetPagesDocument = gql`
     }
     ${PageFragmentDoc}
 `;
+export const GetSurveyDocument = gql`
+    query getSurvey($code: String) {
+        surveyJsForms(filters: { code: { eq: $code } }) {
+            documentId
+            code
+            surveyId
+            postId
+            surveyType
+            requiredRoles
+            submitDestination
+        }
+    }
+`;
 
 export type SdkFunctionWrapper = <T>(
     action: (requestHeaders?: Record<string, string>) => Promise<T>,
@@ -9151,6 +9180,7 @@ const GetNotFoundPageDocumentString = print(GetNotFoundPageDocument);
 const GetOrganizationListDocumentString = print(GetOrganizationListDocument);
 const GetPageDocumentString = print(GetPageDocument);
 const GetPagesDocumentString = print(GetPagesDocument);
+const GetSurveyDocumentString = print(GetSurveyDocument);
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
     return {
         getAppConfig(
@@ -9301,10 +9331,10 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
             );
         },
         getOrganizationList(
-            variables: GetOrganizationsListQueryVariables,
+            variables: GetOrganizationListQueryVariables,
             requestHeaders?: GraphQLClientRequestHeaders,
         ): Promise<{
-            data: GetOrganizationsListQuery;
+            data: GetOrganizationListQuery;
             errors?: GraphQLError[];
             extensions?: any;
             headers: Headers;
@@ -9312,7 +9342,7 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
         }> {
             return withWrapper(
                 (wrappedRequestHeaders) =>
-                    client.rawRequest<GetOrganizationsListQuery>(GetOrganizationListDocumentString, variables, {
+                    client.rawRequest<GetOrganizationListQuery>(GetOrganizationListDocumentString, variables, {
                         ...requestHeaders,
                         ...wrappedRequestHeaders,
                     }),
@@ -9359,6 +9389,27 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
                         ...wrappedRequestHeaders,
                     }),
                 'getPages',
+                'query',
+                variables,
+            );
+        },
+        getSurvey(
+            variables?: GetSurveyQueryVariables,
+            requestHeaders?: GraphQLClientRequestHeaders,
+        ): Promise<{
+            data: GetSurveyQuery;
+            errors?: GraphQLError[];
+            extensions?: any;
+            headers: Headers;
+            status: number;
+        }> {
+            return withWrapper(
+                (wrappedRequestHeaders) =>
+                    client.rawRequest<GetSurveyQuery>(GetSurveyDocumentString, variables, {
+                        ...requestHeaders,
+                        ...wrappedRequestHeaders,
+                    }),
+                'getSurvey',
                 'query',
                 variables,
             );

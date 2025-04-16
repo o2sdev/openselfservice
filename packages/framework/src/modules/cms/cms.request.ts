@@ -50,3 +50,6 @@ export class GetCmsAppConfigParams {
 export class GetCmsOrganizationListParams {
     locale!: string;
 }
+export class GetCmsSurveyParams {
+    code!: string;
+}

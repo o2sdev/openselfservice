@@ -1,8 +1,8 @@
 import { CMS } from '@o2s/framework/modules';
 
-import { GetOrganizationsListQuery } from '@/generated/strapi';
+import { GetOrganizationListQuery } from '@/generated/strapi';
 
-export const mapOrganizationList = (data: GetOrganizationsListQuery): CMS.Model.OrganizationList.OrganizationList => {
+export const mapOrganizationList = (data: GetOrganizationListQuery): CMS.Model.OrganizationList.OrganizationList => {
     const organizationList = data.organizationList!;
     const labels = data.configurableTexts!;
 
