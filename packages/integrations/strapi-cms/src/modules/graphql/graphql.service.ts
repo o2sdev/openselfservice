@@ -9,9 +9,10 @@ import {
     GetHeaderQueryVariables,
     GetLoginPageQueryVariables,
     GetNotFoundPageQueryVariables,
-    GetOrganizationsListQueryVariables,
+    GetOrganizationListQueryVariables,
     GetPageQueryVariables,
     GetPagesQueryVariables,
+    GetSurveyQueryVariables,
     Sdk,
     getSdk,
 } from '@/generated/strapi';
@@ -63,7 +64,11 @@ export class GraphqlService {
         return this.sdk.getComponent(params);
     }
 
-    public getOrganizationList(params: GetOrganizationsListQueryVariables) {
+    public getOrganizationList(params: GetOrganizationListQueryVariables) {
         return this.sdk.getOrganizationList(params);
+    }
+
+    public getSurvey(params: GetSurveyQueryVariables) {
+        return this.sdk.getSurvey(params);
     }
 }

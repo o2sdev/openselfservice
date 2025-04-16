@@ -21,6 +21,7 @@ export * as TicketRecentBlock from './models/blocks/tickets-recent.model';
 export * as PaymentsSummaryBlock from './models/blocks/payments-summary.model';
 export * as PaymentsHistoryBlock from './models/blocks/payments-history.model';
 export * as UserAccountBlock from './models/blocks/user-account.model';
+export * as SurveyBlock from './models/blocks/survey.model';
 export * as ArticleListBlock from './models/blocks/article-list.model';
 export * as CategoryBlock from './models/blocks/category.model';
 export * as CategoryListBlock from './models/blocks/category-list.model';

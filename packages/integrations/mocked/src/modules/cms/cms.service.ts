@@ -25,6 +25,7 @@ import { mapResourceDetailsBlock } from './mappers/cms.resource-details.mapper';
 import { mapResourceListBlock } from './mappers/cms.resource-list.mapper';
 import { mapServiceDetailsBlock } from './mappers/cms.service-details.mapper';
 import { mapServiceListBlock } from './mappers/cms.service-list.mapper';
+import { mapSurveyBlock } from './mappers/cms.survey.mapper';
 import { mapTicketDetailsBlock } from './mappers/cms.ticket-details.mapper';
 import { mapTicketListBlock } from './mappers/cms.ticket-list.mapper';
 import { mapTicketRecentBlock } from './mappers/cms.ticket-recent.mapper';
@@ -135,6 +136,10 @@ export class CmsService implements CMS.Service {
 
     getOrganizationList(options: CMS.Request.GetCmsOrganizationListParams) {
         return of(mapOrganizationList(options.locale)).pipe(responseDelay());
+    }
+
+    getSurvey(options: CMS.Request.GetCmsSurveyParams) {
+        return of(mapSurveyBlock(options.code)).pipe(responseDelay());
     }
 
     getQuickLinksBlock(options: CMS.Request.GetCmsEntryParams) {
