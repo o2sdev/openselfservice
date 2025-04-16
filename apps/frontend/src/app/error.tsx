@@ -6,7 +6,7 @@ import React from 'react';
 
 import { ErrorPage } from '@/components/ErrorPage/ErrorPage';
 
-import '@/styles/global.scss';
+import '@/styles/global.css';
 
 const inter = Inter({
     subsets: ['latin-ext'],

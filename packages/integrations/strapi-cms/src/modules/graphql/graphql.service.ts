@@ -9,6 +9,7 @@ import {
     GetHeaderQueryVariables,
     GetLoginPageQueryVariables,
     GetNotFoundPageQueryVariables,
+    GetOrganizationsListQueryVariables,
     GetPageQueryVariables,
     GetPagesQueryVariables,
     Sdk,
@@ -60,5 +61,9 @@ export class GraphqlService {
 
     public getComponent(params: GetComponentQueryVariables) {
         return this.sdk.getComponent(params);
+    }
+
+    public getOrganizationList(params: GetOrganizationsListQueryVariables) {
+        return this.sdk.getOrganizationList(params);
     }
 }

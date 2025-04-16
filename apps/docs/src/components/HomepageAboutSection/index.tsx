@@ -91,8 +91,8 @@ const SlideContent = ({ title, description, badges, index, activeIndex }) => {
             transition={{ duration: 0.3 }}
             className={`min-h-[calc(100vh-150px)] flex flex-col justify-top ${index === activeIndex ? 'opacity-100' : 'opacity-50'} ${index === 0 ? 'mt-[calc(-160vh)] lg:mt-[calc(50vh-190px)] lg:mb-[calc(50vh-190px)]' : ''}`}
         >
-            <h3 className="text-xl mb-6 font-normal  leading-120">{title}</h3>
-            <Body className="lg:text-2xl lg:font-semibold lg:leading-150 mb-10">{description}</Body>
+            <h3 className="text-xl! mb-6! font-normal! leading-6">{title}</h3>
+            <Body className="lg:text-2xl lg:font-semibold! lg:leading-9 mb-10! ">{description}</Body>
             <BadgeList badges={badges} />
         </motion.div>
     );
@@ -118,7 +118,7 @@ const MobileItem = ({ title, image, description, badges }) => {
         <div>
             <H3>{title}</H3>
             <img src={image || '/placeholder.svg'} alt="Slide illustration" className="mb-6" />
-            <Body className="lg:text-2xl lg:font-semibold lg:leading-150 mb-10">{description}</Body>
+            <Body className="lg:text-2xl lg:font-semibold! lg:leading-9 mb-10">{description}</Body>
             <BadgeList badges={badges} />
         </div>
     );

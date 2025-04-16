@@ -19,7 +19,6 @@ import { TicketDetailsPureProps } from './TicketDetails.types';
 
 export const TicketDetailsPure: React.FC<TicketDetailsPureProps> = ({ ...component }) => {
     const { data: ticket } = component;
-
     return (
         <div className="w-full">
             <div className="flex flex-col gap-6">

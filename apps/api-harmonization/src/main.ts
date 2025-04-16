@@ -35,6 +35,7 @@ async function bootstrap() {
             'Expires',
             'x-locale',
             'x-currency',
+            'x-client-timezone',
         ],
         methods: ['GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
     });

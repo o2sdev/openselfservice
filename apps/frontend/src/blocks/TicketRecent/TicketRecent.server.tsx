@@ -12,13 +12,17 @@ export const TicketRecentDynamic = dynamic(() =>
 );
 
 export const TicketRecent: React.FC<TicketRecentProps> = async ({ id, accessToken, locale }) => {
-    const data = await sdk.blocks.getTicketRecent(
-        {
-            id,
-        },
-        { 'x-locale': locale },
-        accessToken,
-    );
+    try {
+        const data = await sdk.blocks.getTicketRecent(
+            {
+                id,
+            },
+            { 'x-locale': locale },
+            accessToken,
+        );
 
-    return <TicketRecentDynamic {...data} id={id} accessToken={accessToken} locale={locale} />;
+        return <TicketRecentDynamic {...data} id={id} accessToken={accessToken} locale={locale} />;
+    } catch (_error) {
+        return null;
+    }
 };

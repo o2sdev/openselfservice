@@ -22,15 +22,15 @@ export const PaymentsHistoryPure: React.FC<PaymentsHistoryPureProps> = ({ ...com
 
     const chartConfig = {
         topSegment: {
-            color: 'hsl(var(--destructive))',
+            color: 'var(--destructive)',
             stroke: undefined,
         },
         middleSegment: {
-            color: 'hsl(var(--primary))',
+            color: 'var(--primary)',
             stroke: undefined,
         },
         bottomSegment: {
-            color: 'hsl(var(--secondary))',
+            color: 'var(--secondary)',
             stroke: undefined,
         },
     } satisfies ChartConfig;

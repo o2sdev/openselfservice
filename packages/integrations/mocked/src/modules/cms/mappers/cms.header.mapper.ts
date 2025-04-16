@@ -67,10 +67,8 @@ const MOCK_HEADER_LOGON_EN: CMS.Model.Header.Header = {
         label: 'Notifications',
     },
     contextSwitcher: {
-        label: 'Power Construction AG',
-        clear: 'Clear',
-        apply: 'Apply',
-        close: 'Close',
+        closeLabel: 'Close',
+        showContextSwitcher: true,
     },
 };
 const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
@@ -136,10 +134,8 @@ const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
         label: 'Benachrichtigungen',
     },
     contextSwitcher: {
-        label: 'Power Construction AG',
-        clear: 'Löschen',
-        apply: 'Anwenden',
-        close: 'Schließen',
+        closeLabel: 'Schließen',
+        showContextSwitcher: true,
     },
 };
 const MOCK_HEADER_LOGON_PL: CMS.Model.Header.Header = {
@@ -209,10 +205,8 @@ const MOCK_HEADER_LOGON_PL: CMS.Model.Header.Header = {
         label: 'Powiadomienia',
     },
     contextSwitcher: {
-        label: 'Power Construction AG',
-        clear: 'Wyczyść',
-        apply: 'Zastosuj',
-        close: 'Zamknij',
+        closeLabel: 'Zamknij',
+        showContextSwitcher: true,
     },
 };
 
@@ -242,6 +236,10 @@ const MOCK_HEADER_LOGOUT_EN: CMS.Model.Header.Header = {
             url: '/cases',
         },
     ],
+    contextSwitcher: {
+        closeLabel: 'Close',
+        showContextSwitcher: false,
+    },
 };
 const MOCK_HEADER_LOGOUT_DE: CMS.Model.Header.Header = {
     id: 'lwvbmnaayn6w7xy5soicv1k2',
@@ -269,6 +267,10 @@ const MOCK_HEADER_LOGOUT_DE: CMS.Model.Header.Header = {
             url: '/faelle',
         },
     ],
+    contextSwitcher: {
+        closeLabel: 'Schließen',
+        showContextSwitcher: false,
+    },
 };
 const MOCK_HEADER_LOGOUT_PL: CMS.Model.Header.Header = {
     id: 'lwvbmnaayn6w7xy5soicv1k2',
@@ -296,6 +298,10 @@ const MOCK_HEADER_LOGOUT_PL: CMS.Model.Header.Header = {
             url: '/zgloszenia',
         },
     ],
+    contextSwitcher: {
+        closeLabel: 'Zamknij',
+        showContextSwitcher: false,
+    },
 };
 
 export const mapHeader = (id: string, locale: string): CMS.Model.Header.Header => {

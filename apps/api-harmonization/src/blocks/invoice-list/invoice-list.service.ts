@@ -26,7 +26,11 @@ export class InvoiceListService {
                         ...query,
                         limit: cms.pagination?.limit || query.limit,
                     })
-                    .pipe(map((invoices) => mapInvoiceList(invoices, cms, headers['x-locale'])));
+                    .pipe(
+                        map((invoices) =>
+                            mapInvoiceList(invoices, cms, headers['x-locale'], headers['x-client-timezone'] || ''),
+                        ),
+                    );
             }),
         );
     }

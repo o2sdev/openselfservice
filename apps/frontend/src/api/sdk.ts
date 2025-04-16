@@ -19,6 +19,7 @@ import { ticketRecent } from '@/api/blocks/ticket-recent';
 import { userAccount } from '@/api/blocks/user-account';
 import { loginPage } from '@/api/modules/login-page';
 import { notFoundPage } from '@/api/modules/not-found-page';
+import { organizations } from '@/api/modules/organizations';
 import { page } from '@/api/modules/page';
 
 const internalSdk = getSdk({
@@ -57,5 +58,6 @@ export const sdk = extendSdk(internalSdk, {
         getPage: page(internalSdk).modules.getPage,
         getLoginPage: loginPage(internalSdk).modules.getLoginPage,
         getNotFoundPage: notFoundPage(internalSdk).modules.getNotFoundPage,
+        getCustomers: organizations(internalSdk).modules.getCustomers,
     },
 });

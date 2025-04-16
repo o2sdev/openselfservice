@@ -23,12 +23,14 @@ import { mapServiceDetailsBlock } from './mappers/blocks/cms.service-details.map
 import { mapServiceListBlock } from './mappers/blocks/cms.service-list.mapper';
 import { mapTicketDetailsBlock } from './mappers/blocks/cms.ticket-details.mapper';
 import { mapTicketListBlock } from './mappers/blocks/cms.ticket-list.mapper';
+import { mapTicketRecentBlock } from './mappers/blocks/cms.ticket-recent.mapper';
 import { mapUserAccountBlock } from './mappers/blocks/cms.user-account.mapper';
 import { mapAppConfig } from './mappers/cms.app-config.mapper';
 import { mapFooter } from './mappers/cms.footer.mapper';
 import { mapHeader } from './mappers/cms.header.mapper';
 import { mapLoginPage } from './mappers/cms.login-page.mapper';
 import { mapNotFoundPage } from './mappers/cms.not-found-page.mapper';
+import { mapOrganizationList } from './mappers/cms.organization-list.mapper';
 import { mapPage } from './mappers/cms.page.mapper';
 import { PageFragment } from '@/generated/strapi';
 import { Service as GraphqlService } from '@/modules/graphql';
@@ -264,6 +266,25 @@ export class CmsService implements CMS.Service {
         });
     }
 
+    getOrganizationList(options: CMS.Request.GetCmsOrganizationListParams) {
+        const key = `organization-list-${options.locale}`;
+        return this.getCachedBlock(key, () => {
+            const organizationList = this.graphqlService.getOrganizationList({
+                locale: options.locale,
+            });
+
+            return forkJoin([organizationList]).pipe(
+                map(([organizationList]) => {
+                    if (!organizationList?.data.organizationList) {
+                        throw new NotFoundException();
+                    }
+
+                    return mapOrganizationList(organizationList.data);
+                }),
+            );
+        });
+    }
+
     getFaqBlock(options: CMS.Request.GetCmsEntryParams) {
         const key = `faq-component-${options.id}-${options.locale}`;
         return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapFaqBlock)));
@@ -334,10 +355,9 @@ export class CmsService implements CMS.Service {
         return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapUserAccountBlock)));
     }
 
-    getTicketRecentBlock(
-        _options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.TicketRecentBlock.TicketRecentBlock> {
-        throw new NotImplementedException();
+    getTicketRecentBlock(options: CMS.Request.GetCmsEntryParams) {
+        const key = `ticket-recent-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapTicketRecentBlock)));
     }
 
     getServiceListBlock(options: CMS.Request.GetCmsEntryParams) {

@@ -1,4 +1,4 @@
-import uiConfig from "@o2s/prettier-config/ui.mjs";
+import uiConfig from '@o2s/prettier-config/ui.mjs';
 
 /**
  * @see https://prettier.io/docs/en/configuration.html

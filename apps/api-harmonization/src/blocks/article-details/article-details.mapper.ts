@@ -8,6 +8,7 @@ export const mapArticleDetails = (
     article: Articles.Model.Article,
     cms: CMS.Model.ArticleDetailsBlock.ArticleDetailsBlock,
     locale: string,
+    timezone: string,
 ): ArticleDetailsBlock => {
     return {
         __typename: 'ArticleDetailsBlock',
@@ -15,8 +16,8 @@ export const mapArticleDetails = (
             id: article.id,
             title: article.title,
             lead: article.lead,
-            createdAt: formatDateRelative(article.createdAt, locale, cms.labels.today, cms.labels.yesterday),
-            updatedAt: formatDateRelative(article.updatedAt, locale, cms.labels.today, cms.labels.yesterday),
+            createdAt: formatDateRelative(article.createdAt, locale, cms.labels.today, cms.labels.yesterday, timezone),
+            updatedAt: formatDateRelative(article.updatedAt, locale, cms.labels.today, cms.labels.yesterday, timezone),
             image: article.image,
             thumbnail: article.thumbnail,
             sections: mapSections(article.sections),
@@ -28,13 +29,14 @@ export const mapArticle = (
     article: Articles.Model.Article,
     cms: CMS.Model.ArticleDetailsBlock.ArticleDetailsBlock,
     locale: string,
+    timezone: string,
 ): Article => {
     return {
         id: article.id,
         title: article.title,
         lead: article.lead,
-        createdAt: formatDateRelative(article.createdAt, locale, cms.labels.today, cms.labels.yesterday),
-        updatedAt: formatDateRelative(article.updatedAt, locale, cms.labels.today, cms.labels.yesterday),
+        createdAt: formatDateRelative(article.createdAt, locale, cms.labels.today, cms.labels.yesterday, timezone),
+        updatedAt: formatDateRelative(article.updatedAt, locale, cms.labels.today, cms.labels.yesterday, timezone),
         image: article.image,
         thumbnail: article.thumbnail,
         sections: mapSections(article.sections) || [],

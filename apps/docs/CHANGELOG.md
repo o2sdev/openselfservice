@@ -1,5 +1,12 @@
 # @o2s/docs
 
+## 0.11.0
+
+### Minor Changes
+
+- de00274: updated dependencies
+- a854c74: upgraded Tailwind to v4
+
 ## 0.10.5
 
 ### Patch Changes

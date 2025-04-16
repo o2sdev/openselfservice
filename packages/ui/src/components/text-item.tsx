@@ -17,7 +17,7 @@ export function TextItem({ title, children, tag = 'div', className, ...props }: 
     return (
         <Comp
             className={cn(
-                'flex flex-col gap-2 md:grid md:grid-cols-2 items-baseline pt-4 [&:not(:last-child)]:border-b [&:not(:last-child)]:pb-4',
+                'flex flex-col gap-2 md:grid md:grid-cols-2 items-baseline pt-4 not-last:border-b not-last:pb-4',
                 className,
             )}
             {...props}

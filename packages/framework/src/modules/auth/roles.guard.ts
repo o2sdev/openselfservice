@@ -4,7 +4,8 @@ import { Reflector } from '@nestjs/core';
 import { LoggerService } from '@o2s/utils.logger';
 import jwt from 'jsonwebtoken';
 
-import { RoleDecorator, RoleMatchingMode } from './roles.decorator';
+import { RoleMatchingMode } from './auth.constants';
+import { RoleDecorator } from './roles.decorator';
 
 interface Jwt extends jwt.JwtPayload {
     role: string;
@@ -55,8 +56,15 @@ export class RolesGuard implements CanActivate {
 
     private getUserRoles(decodedToken: Jwt): string[] {
         const userRoles: string[] = [];
-        userRoles.push(decodedToken?.role);
-        decodedToken?.customer?.roles !== undefined && userRoles.push(...decodedToken?.customer?.roles);
+
+        if (decodedToken?.role) {
+            userRoles.push(decodedToken.role);
+        }
+
+        if (Array.isArray(decodedToken?.customer?.roles)) {
+            userRoles.push(...decodedToken.customer.roles);
+        }
+
         return userRoles;
     }
 }

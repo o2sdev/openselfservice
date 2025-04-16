@@ -1,4 +1,14 @@
+import jwt from 'jsonwebtoken';
+
 import { Resources } from '@o2s/framework/modules';
+
+interface Jwt extends jwt.JwtPayload {
+    role: string;
+    customer: {
+        id: string;
+        roles: string[];
+    };
+}
 
 const dateYesterday = new Date();
 dateYesterday.setDate(dateYesterday.getDate() - 1);
@@ -153,7 +163,16 @@ const MOCK_SERVICE_6: Resources.Model.Service = {
 };
 
 const MOCK_ASSETS = [MOCK_ASSET_1, MOCK_ASSET_2, MOCK_ASSET_3, MOCK_ASSET_4, MOCK_ASSET_5];
-const MOCK_SERVICES = [MOCK_SERVICE_1, MOCK_SERVICE_2, MOCK_SERVICE_3, MOCK_SERVICE_4, MOCK_SERVICE_5, MOCK_SERVICE_6];
+const MOCK_SERVICES_DEFAULT = [
+    MOCK_SERVICE_1,
+    MOCK_SERVICE_2,
+    MOCK_SERVICE_3,
+    MOCK_SERVICE_4,
+    MOCK_SERVICE_5,
+    MOCK_SERVICE_6,
+];
+const MOCK_SERVICES_FOR_CUSTOMER_1 = [MOCK_SERVICE_3, MOCK_SERVICE_2, MOCK_SERVICE_1];
+const MOCK_SERVICES_FOR_CUSTOMER_2 = [MOCK_SERVICE_5, MOCK_SERVICE_6];
 
 export const mapAsset = (id: string): Resources.Model.Asset => {
     const asset = MOCK_ASSETS.find((asset) => asset.id === id);
@@ -181,15 +200,30 @@ export const mapAssets = (query: Resources.Request.GetAssetListQuery): Resources
 };
 
 export const mapService = (id: string): Resources.Model.Service => {
-    const service = MOCK_SERVICES.find((service) => service.id === id);
+    const service = MOCK_SERVICES_DEFAULT.find((service) => service.id === id);
     if (!service) {
         throw new Error(`Service with id ${id} not found`);
     }
     return service;
 };
 
-export const mapServices = (query: Resources.Request.GetServiceListQuery): Resources.Model.Services => {
-    const filteredServices = MOCK_SERVICES.filter((service) => {
+export const mapServices = (
+    query: Resources.Request.GetServiceListQuery,
+    _authorization: string,
+): Resources.Model.Services => {
+    const customerId = getCastomerId(_authorization);
+    let services = MOCK_SERVICES_DEFAULT;
+    switch (customerId) {
+        case 'cust-001':
+            services = MOCK_SERVICES_FOR_CUSTOMER_1;
+            break;
+        case 'cust-002':
+            services = MOCK_SERVICES_FOR_CUSTOMER_2;
+            break;
+        default:
+            services = MOCK_SERVICES_DEFAULT;
+    }
+    const filteredServices = services.filter((service) => {
         if (query.status && service.contract?.status !== query.status.toUpperCase()) {
             return false;
         }
@@ -204,4 +238,13 @@ export const mapServices = (query: Resources.Request.GetServiceListQuery): Resou
         data: filteredServices,
         total: filteredServices.length,
     };
+};
+
+const getCastomerId = (authorization: string): string | null => {
+    const decodedToken = jwt.decode(authorization.replace('Bearer ', '')) as Jwt | null;
+
+    if (!decodedToken) {
+        return null;
+    }
+    return decodedToken?.customer?.id;
 };

@@ -1,5 +1,21 @@
 # @o2s/framework
 
+## 0.21.1
+
+### Patch Changes
+
+- 0e8409e: fixed a typo in class name
+
+## 0.21.0
+
+### Minor Changes
+
+- c0ff0a7: implement context switch
+- de00274: updated dependencies
+- c0ff0a7: implement context change, user roles
+- e9dc277: feat: handle user's timezone
+- e9dc277: feat: handle user's timezone
+
 ## 0.20.0
 
 ### Minor Changes

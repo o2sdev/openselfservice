@@ -1,7 +1,6 @@
 'use client';
 
 import { Menu, X } from 'lucide-react';
-import { useLocale } from 'next-intl';
 import React, { useEffect, useState } from 'react';
 
 import { Models } from '@o2s/framework/modules';
@@ -30,7 +29,6 @@ export function MobileNavigation({
     mobileMenuLabel,
 }: MobileNavigationProps) {
     const pathname = usePathname();
-    const locale = useLocale();
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -46,10 +44,8 @@ export function MobileNavigation({
     const NavigationItem = ({ item }: { item: Models.Navigation.NavigationItem }) => {
         return (
             <li key={item.label} className="w-full">
-                <Link asChild>
-                    <NextLink href={item.url || '/'} locale={locale} className={navigationMobileItemClass}>
-                        {item.label}
-                    </NextLink>
+                <Link className={navigationMobileItemClass} asChild>
+                    <NextLink href={item.url || '/'}>{item.label}</NextLink>
                 </Link>
             </li>
         );

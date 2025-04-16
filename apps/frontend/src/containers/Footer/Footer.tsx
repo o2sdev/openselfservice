@@ -2,7 +2,7 @@
 
 import { useLocale } from 'next-intl';
 import Image from 'next/image';
-import { JSX } from 'react';
+import React, { JSX } from 'react';
 
 import { Models } from '@o2s/framework/modules';
 
@@ -26,9 +26,7 @@ import { FooterProps } from './Footer.types';
 export const Footer: React.FC<FooterProps> = ({ data }) => {
     const locale = useLocale();
 
-    const navigationItemClass = cn(
-        'no-underline hover:no-underline w-full !justify-between h-10 p-2 !text-base !text-navbar-primary hover:!text-navbar-sub-muted hover:!bg-navbar-accent-background',
-    );
+    const navigationItemClass = cn(navigationMenuTriggerStyle());
 
     const mobileNavigationItemClass = cn(navigationMenuTriggerStyle(), navigationItemClass);
 
@@ -61,11 +59,9 @@ export const Footer: React.FC<FooterProps> = ({ data }) => {
     }) => {
         return (
             <NavigationMenuLink asChild active={active}>
-                <Link asChild>
-                    <NextLink href={href} locale={locale} className={cn(navigationItemClass, className)}>
-                        {children}
-                    </NextLink>
-                </Link>
+                <NextLink href={href} locale={locale} className={cn(navigationItemClass, className)}>
+                    {children}
+                </NextLink>
             </NavigationMenuLink>
         );
     };
@@ -172,7 +168,7 @@ export const Footer: React.FC<FooterProps> = ({ data }) => {
                 </div>
                 <div className="hidden md:block">
                     <NavigationMenu>
-                        <NavigationMenuList className="flex gap-7">
+                        <NavigationMenuList className="flex gap-3">
                             {data.items.map((item) => {
                                 switch (item.__typename) {
                                     case 'NavigationItem':
