@@ -5,14 +5,8 @@ import { LoggerService } from '@o2s/utils.logger';
 import jwt from 'jsonwebtoken';
 
 import { RoleMatchingMode } from './auth.constants';
+import { Jwt } from './jwt.model';
 import { RoleDecorator } from './roles.decorator';
-
-interface Jwt extends jwt.JwtPayload {
-    role: string;
-    customer: {
-        roles: string[];
-    };
-}
 
 @Injectable()
 export class RolesGuard implements CanActivate {

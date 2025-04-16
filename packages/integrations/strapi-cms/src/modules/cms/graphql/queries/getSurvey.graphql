@@ -1,0 +1,11 @@
+query getSurvey($code: String) {
+    surveyJsForms(filters: { code: { eq: $code } }) {
+        documentId
+        code
+        surveyId
+        postId
+        surveyType
+        requiredRoles
+        submitDestination
+    }
+}

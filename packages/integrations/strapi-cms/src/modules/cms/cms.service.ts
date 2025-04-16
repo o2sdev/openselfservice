@@ -21,6 +21,7 @@ import { mapResourceDetailsBlock } from './mappers/blocks/cms.resource-details.m
 import { mapResourceListBlock } from './mappers/blocks/cms.resource-list.mapper';
 import { mapServiceDetailsBlock } from './mappers/blocks/cms.service-details.mapper';
 import { mapServiceListBlock } from './mappers/blocks/cms.service-list.mapper';
+import { mapSurveyBlock } from './mappers/blocks/cms.survey.mapper';
 import { mapTicketDetailsBlock } from './mappers/blocks/cms.ticket-details.mapper';
 import { mapTicketListBlock } from './mappers/blocks/cms.ticket-list.mapper';
 import { mapTicketRecentBlock } from './mappers/blocks/cms.ticket-recent.mapper';
@@ -368,5 +369,19 @@ export class CmsService implements CMS.Service {
     getServiceDetailsBlock(options: CMS.Request.GetCmsEntryParams) {
         const key = `service-details-component-${options.id}-${options.locale}`;
         return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapServiceDetailsBlock)));
+    }
+
+    getSurvey(options: CMS.Request.GetCmsSurveyParams) {
+        const key = `survey-${options.code}`;
+        return this.getCachedBlock(key, () => {
+            const survey = this.graphqlService.getSurvey({
+                code: options.code,
+            });
+            return forkJoin([survey]).pipe(
+                map(([survey]) => {
+                    return mapSurveyBlock(survey.data);
+                }),
+            );
+        });
     }
 }

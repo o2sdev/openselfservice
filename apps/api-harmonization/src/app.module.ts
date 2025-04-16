@@ -46,6 +46,7 @@ import { NotFoundPageModule } from './modules/not-found-page/not-found-page.modu
 import { OrganizationsModule } from './modules/organizations/organizations.module';
 import { PageModule } from './modules/page/page.module';
 import { RoutesModule } from './modules/routes/routes.module';
+import { SurveyjsModule } from './modules/surveyjs-forms/surveyjs.module';
 
 @Module({
     imports: [
@@ -76,6 +77,7 @@ import { RoutesModule } from './modules/routes/routes.module';
         LoginPageModule.register(AppConfig),
         NotFoundPageModule.register(AppConfig),
         OrganizationsModule.register(AppConfig),
+        SurveyjsModule.register(AppConfig),
 
         TicketListBlockModule.register(AppConfig),
         TicketDetailsBlockModule.register(AppConfig),
