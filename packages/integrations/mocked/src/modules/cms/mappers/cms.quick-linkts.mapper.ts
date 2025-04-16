@@ -11,6 +11,7 @@ const MOCK_QUICK_LINKS_BLOCK_EN: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
             description: 'A short description of the action, limited to two lines.',
             icon: {
                 url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-1.svg',
+                alt: '',
             },
         },
         {
@@ -19,6 +20,7 @@ const MOCK_QUICK_LINKS_BLOCK_EN: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
             description: 'A short description of the action, limited to two lines.',
             icon: {
                 url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+                alt: '',
             },
         },
         {
@@ -27,6 +29,7 @@ const MOCK_QUICK_LINKS_BLOCK_EN: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
             description: 'A short description of the action, limited to two lines.',
             icon: {
                 url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-3.svg',
+                alt: '',
             },
         },
         {
@@ -35,6 +38,7 @@ const MOCK_QUICK_LINKS_BLOCK_EN: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
             description: 'A short description of the action, limited to two lines.',
             icon: {
                 url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-4.svg',
+                alt: '',
             },
         },
     ],
@@ -51,6 +55,7 @@ const MOCK_QUICK_LINKS_BLOCK_DE: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
             description: 'Eine kurze Beschreibung der Aktion, auf zwei Zeilen beschränkt.',
             icon: {
                 url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-1.svg',
+                alt: '',
             },
         },
         {
@@ -59,6 +64,7 @@ const MOCK_QUICK_LINKS_BLOCK_DE: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
             description: 'Eine kurze Beschreibung der Aktion, auf zwei Zeilen beschränkt.',
             icon: {
                 url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+                alt: '',
             },
         },
         {
@@ -67,6 +73,7 @@ const MOCK_QUICK_LINKS_BLOCK_DE: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
             description: 'Eine kurze Beschreibung der Aktion, auf zwei Zeilen beschränkt.',
             icon: {
                 url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-3.svg',
+                alt: '',
             },
         },
         {
@@ -75,6 +82,7 @@ const MOCK_QUICK_LINKS_BLOCK_DE: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
             description: 'Eine kurze Beschreibung der Aktion, auf zwei Zeilen beschränkt.',
             icon: {
                 url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-4.svg',
+                alt: '',
             },
         },
     ],
@@ -91,6 +99,7 @@ const MOCK_QUICK_LINKS_BLOCK_PL: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
             description: 'Krótki opis akcji, ograniczony do dwóch linii.',
             icon: {
                 url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-1.svg',
+                alt: '',
             },
         },
         {
@@ -99,6 +108,7 @@ const MOCK_QUICK_LINKS_BLOCK_PL: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
             description: 'Krótki opis akcji, ograniczony do dwóch linii.',
             icon: {
                 url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+                alt: '',
             },
         },
         {
@@ -107,6 +117,7 @@ const MOCK_QUICK_LINKS_BLOCK_PL: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
             description: 'Krótki opis akcji, ograniczony do dwóch linii.',
             icon: {
                 url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-3.svg',
+                alt: '',
             },
         },
         {
@@ -115,6 +126,7 @@ const MOCK_QUICK_LINKS_BLOCK_PL: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
             description: 'Krótki opis akcji, ograniczony do dwóch linii.',
             icon: {
                 url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-4.svg',
+                alt: '',
             },
         },
     ],

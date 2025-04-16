@@ -47,17 +47,26 @@ export const mapLoginPage = (data: GetLoginPageQuery, baseURL?: string): CMS.Mod
             })),
         },
         labels: labels.actions,
-        image: {
-            url: `${baseURL}${loginPage.image?.url}`,
-            alt: loginPage.image?.alternativeText,
-            width: loginPage.image?.width,
-            height: loginPage.image?.height,
-        },
+        image: loginPage.image
+            ? {
+                  url: `${baseURL}${loginPage.image.url}`,
+                  alt: loginPage.image.alternativeText || '',
+                  width: loginPage.image.width,
+                  height: loginPage.image.height,
+              }
+            : undefined,
         seo: {
             title: loginPage.SEO.title,
             description: loginPage.SEO.description,
             keywords: loginPage.SEO.keywords?.map((keyword) => keyword.keyword) || [],
-            image: loginPage.SEO.image,
+            image: loginPage.SEO.image
+                ? {
+                      url: `${baseURL}${loginPage.SEO.image.url}`,
+                      alt: loginPage.SEO.image.alternativeText || '',
+                      width: loginPage.SEO.image.width,
+                      height: loginPage.SEO.image.height,
+                  }
+                : undefined,
             noIndex: loginPage.SEO.noIndex,
             noFollow: loginPage.SEO.noFollow,
         },

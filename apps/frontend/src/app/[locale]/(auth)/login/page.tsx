@@ -102,12 +102,7 @@ export default async function LoginPage({ params }: Readonly<Props>) {
                     onSignIn={handleSignIn}
                 />
                 {data.image?.url && (
-                    <Image
-                        src={data.image?.url}
-                        alt={data.image?.alternativeText ?? ''}
-                        fill={true}
-                        className="object-cover"
-                    />
+                    <Image src={data.image?.url} alt={data.image?.alt} fill={true} className="object-cover" />
                 )}
             </AuthLayout>
         );

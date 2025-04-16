@@ -152,11 +152,12 @@ export const Footer: React.FC<FooterProps> = ({ data }) => {
             <Separator />
             <div className="w-full m-auto max-w-7xl flex flex-row justify-between px-4 md:px-6 py-4 md:py-6">
                 <div className="flex gap-8 items-center justify-between w-full md:justify-start">
-                    <Link href="/" aria-label={data.logo?.name}>
+                    {/*TODO: get label from API*/}
+                    <Link href="/" aria-label={'go to home'}>
                         {data.logo?.url && (
                             <Image
                                 src={data.logo.url}
-                                alt={data.logo.alternativeText ?? ''}
+                                alt={data.logo.alt}
                                 width={data.logo.width}
                                 height={data.logo.height}
                             />

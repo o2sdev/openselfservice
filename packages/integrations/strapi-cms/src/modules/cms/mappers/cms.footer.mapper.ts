@@ -16,7 +16,7 @@ export const mapFooter = (data: GetFooterQuery, baseURL?: string): CMS.Model.Foo
         title: component.title,
         logo: {
             url: `${baseURL}${component.logo.url}`,
-            alt: component.logo.alternativeText,
+            alt: component.logo.alternativeText || '',
             width: component.logo.width,
             height: component.logo.height,
         },

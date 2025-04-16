@@ -17,10 +17,9 @@ export const mapHeader = (data: GetHeaderQuery, baseURL?: string): CMS.Model.Hea
         title: component.title,
         logo: {
             url: `${baseURL}${component.logo.url}`,
-            alt: component.logo.alternativeText,
+            alt: component.logo.alternativeText || '',
             width: component.logo.width,
             height: component.logo.height,
-            name: component.logo.name,
         },
         userInfo:
             component.userInfo?.slug && component.userInfo?.SEO?.title

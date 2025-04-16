@@ -19,10 +19,10 @@ export const Card: React.FC<CardProps> = ({ title, description, price, image, ta
         <div className={cn('flex flex-col bg-card rounded-lg border border-border shadow-sm relative w-full h-full')}>
             {/* Image section */}
             <div className="relative overflow-hidden h-[180px] flex-shrink-0 rounded-t-lg">
-                {image.url && image.alternativeText && (
+                {image.url && image.alt && (
                     <Image
                         src={image.url}
-                        alt={image.alternativeText}
+                        alt={image.alt}
                         fill
                         className="object-cover object-center"
                         priority={image.priority}

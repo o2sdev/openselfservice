@@ -8,8 +8,6 @@ import { Observable, concatMap, forkJoin, from, map, mergeMap, of } from 'rxjs';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { CMS, Cache, Models } from '@o2s/framework/modules';
 
-import { mapArticleDetailsBlock } from './mappers/blocks/cms.article-details.mapper';
-import { mapArticleListBlock } from './mappers/blocks/cms.article-list.mapper';
 import { mapFaqBlock } from './mappers/blocks/cms.faq.mapper';
 import { mapInvoiceDetailsBlock } from './mappers/blocks/cms.invoice-details.mapper';
 import { mapInvoiceListBlock } from './mappers/blocks/cms.invoice-list.mapper';
@@ -311,16 +309,6 @@ export class CmsService implements CMS.Service {
         return this.getCachedBlock(key, () => of(mapNotificationDetailsBlock()));
     }
 
-    getArticleListBlock(options: CMS.Request.GetCmsEntryParams) {
-        const key = `article-list-component-${options.id}-${options.locale}`;
-        return this.getCachedBlock(key, () => of(mapArticleListBlock(options.locale)));
-    }
-
-    getArticleDetailsBlock(options: CMS.Request.GetCmsEntryParams) {
-        const key = `article-details-component-${options.id}-${options.locale}`;
-        return this.getCachedBlock(key, () => of(mapArticleDetailsBlock()));
-    }
-
     getResourceListBlock(options: CMS.Request.GetCmsEntryParams) {
         const key = `resource-list-component-${options.id}-${options.locale}`;
         return this.getCachedBlock(key, () => of(mapResourceListBlock(options.locale)));
@@ -383,6 +371,10 @@ export class CmsService implements CMS.Service {
                 }),
             );
         });
+    }
+
+    getArticleListBlock(_options: CMS.Request.GetCmsEntryParams): Observable<CMS.Model.CategoryBlock.CategoryBlock> {
+        throw new NotImplementedException();
     }
 
     getCategoryBlock(_options: CMS.Request.GetCmsEntryParams): Observable<CMS.Model.CategoryBlock.CategoryBlock> {

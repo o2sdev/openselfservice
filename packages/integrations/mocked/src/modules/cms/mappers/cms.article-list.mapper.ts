@@ -2,334 +2,270 @@ import { CMS } from '@o2s/framework/modules';
 
 const MOCK_ARTICLE_LIST_BLOCK_EN: CMS.Model.ArticleListBlock.ArticleListBlock = {
     id: 'article-list-1',
-    title: 'Articles Overview',
-    subtitle: 'Your recent articles',
-    table: {
-        columns: [
-            { id: 'title', title: 'Title' },
-            { id: 'lead', title: 'Lead' },
-            { id: 'createdAt', title: 'Date Created' },
-            { id: 'updatedAt', title: 'Date Updated' },
-        ],
-        actions: {
-            title: 'Actions',
-            label: 'View details',
-        },
-    },
-    pagination: {
-        limit: 5,
-        legend: 'of {totalPages} pages',
-        prev: 'Previous',
-        next: 'Next',
-        selectPage: 'Select page',
-    },
-    filters: {
-        label: 'Filter',
-        title: 'Filter articles',
-        description: 'Use filters to find specific articles',
-        submit: 'Apply filters',
-        reset: 'Reset Filters',
-        close: 'Close filters',
-        items: [
-            {
-                __typename: 'FilterDateRange',
-                id: 'createdAt',
-                label: 'Date Created',
-                from: {
-                    label: 'From',
-                },
-                to: {
-                    label: 'To',
-                },
+    title: 'Explore How-To Guides',
+    description: 'A short description of the heading H2',
+    items: [
+        {
+            id: 'article-1',
+            createdAt: '2024-12-12T10:00:00',
+            updatedAt: '2024-12-14T16:00:00',
+            title: 'This is a subtitle that provides more detail and context, enhancing the reader’s understanding',
+            lead: 'A brief yet informative line of text that expands on the main title, providing additional context or clarity to engage the reader.',
+            image: {
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+                alt: '',
             },
-        ],
-    },
-    noResults: {
-        title: 'No articles found',
-        description: 'There are no articles matching your criteria',
-    },
-    labels: {
-        today: 'Today',
-        yesterday: 'Yesterday',
-    },
-    detailsUrl: '/articles/:id',
-    fieldMapping: {
-        category: {
-            SELF_SERVICE: 'Self Service',
-            WARRANTY_REPAIR: 'Warranty Repair',
-            TOOL_MANAGEMENT: 'Tool Management',
-            HOW_TO_GUIDES: 'How To Guides',
-            MAINTENANCE_TIPS: 'Maintenance Tips',
-            GENERAL: 'General',
-            OTHER: 'Other',
+            thumbnail: {
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+                alt: '',
+            },
+            category: {
+                id: 'category-1',
+                title: 'Warranty & Repair',
+            },
         },
-    },
+        {
+            id: 'article-2',
+            createdAt: '2024-12-12T10:00:00',
+            updatedAt: '2024-12-14T16:00:00',
+            title: 'This is a subtitle that provides more detail and context, enhancing the reader’s understanding',
+            lead: 'A brief yet informative line of text that expands on the main title, providing additional context or clarity to engage the reader.',
+            image: {
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+                alt: '',
+            },
+            thumbnail: {
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+                alt: '',
+            },
+            category: {
+                id: 'category-1',
+                title: 'Warranty & Repair',
+            },
+        },
+        {
+            id: 'article-3',
+            createdAt: '2024-12-12T10:00:00',
+            updatedAt: '2024-12-14T16:00:00',
+            title: 'This is a subtitle that provides more detail and context, enhancing the reader’s understanding',
+            lead: 'A brief yet informative line of text that expands on the main title, providing additional context or clarity to engage the reader.',
+            image: {
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+                alt: '',
+            },
+            thumbnail: {
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+                alt: '',
+            },
+            category: {
+                id: 'category-1',
+                title: 'Warranty & Repair',
+            },
+        },
+        {
+            id: 'article-4',
+            createdAt: '2024-12-12T10:00:00',
+            updatedAt: '2024-12-14T16:00:00',
+            title: 'This is a subtitle that provides more detail and context, enhancing the reader’s understanding',
+            lead: 'A brief yet informative line of text that expands on the main title, providing additional context or clarity to engage the reader.',
+            image: {
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+                alt: '',
+            },
+            thumbnail: {
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+                alt: '',
+            },
+            category: {
+                id: 'category-1',
+                title: 'Warranty & Repair',
+            },
+        },
+    ],
 };
 
 const MOCK_ARTICLE_LIST_BLOCK_DE: CMS.Model.ArticleListBlock.ArticleListBlock = {
     id: 'article-list-1',
-    title: 'Artikelübersicht',
-    subtitle: 'Ihre neuesten Artikel',
-    table: {
-        columns: [
-            { id: 'title', title: 'Titel' },
-            { id: 'lead', title: 'Einleitung' },
-            { id: 'createdAt', title: 'Erstellungsdatum' },
-            { id: 'updatedAt', title: 'Aktualisierungsdatum' },
-        ],
-        actions: {
-            title: 'Aktionen',
-            label: 'Details anzeigen',
-        },
-    },
-    pagination: {
-        limit: 5,
-        legend: 'von {totalPages} Seiten',
-        prev: 'Zurück',
-        next: 'Weiter',
-        selectPage: 'Seite auswählen',
-    },
-    filters: {
-        label: 'Filter',
-        title: 'Artikel filtern',
-        description: 'Verwenden Sie Filter, um bestimmte Artikel zu finden',
-        submit: 'Filter anwenden',
-        reset: 'Filter zurücksetzen',
-        close: 'Filter schließen',
-        items: [
-            {
-                __typename: 'FilterDateRange',
-                id: 'createdAt',
-                label: 'Erstellungsdatum',
-                from: {
-                    label: 'Von',
-                },
-                to: {
-                    label: 'Bis',
-                },
+    title: 'Entdecke Anleitungen',
+    description: 'Eine kurze Beschreibung der H2-Überschrift',
+    items: [
+        {
+            id: 'article-1',
+            createdAt: '2024-12-12T10:00:00',
+            updatedAt: '2024-12-14T16:00:00',
+            title: 'Dies ist ein Untertitel, der mehr Details und Kontext bietet und das Verständnis des Lesers verbessert',
+            lead: 'Eine kurze, aber informative Textzeile, die den Haupttitel erweitert, zusätzlichen Kontext oder Klarheit bietet und den Leser einbindet.',
+            image: {
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+                alt: '',
             },
-        ],
-    },
-    noResults: {
-        title: 'Keine Artikel gefunden',
-        description: 'Es gibt keine Artikel, die Ihren Kriterien entsprechen',
-    },
-    labels: {
-        today: 'Heute',
-        yesterday: 'Gestern',
-    },
-    detailsUrl: '/artikel/:id',
-    fieldMapping: {
-        category: {
-            SELF_SERVICE: 'Self Service',
-            WARRANTY_REPAIR: 'Garantiereparatur',
-            TOOL_MANAGEMENT: 'Werkzeugverwaltung',
-            HOW_TO_GUIDES: 'Anleitungen',
-            MAINTENANCE_TIPS: 'Wartungstipps',
-            GENERAL: 'Allgemein',
-            OTHER: 'Sonstiges',
+            thumbnail: {
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+                alt: '',
+            },
+            category: {
+                id: 'category-1',
+                title: 'Garantie & Reparatur',
+            },
         },
-    },
+        {
+            id: 'article-2',
+            createdAt: '2024-12-12T10:00:00',
+            updatedAt: '2024-12-14T16:00:00',
+            title: 'Dies ist ein Untertitel, der mehr Details und Kontext bietet und das Verständnis des Lesers verbessert',
+            lead: 'Eine kurze, aber informative Textzeile, die den Haupttitel erweitert, zusätzlichen Kontext oder Klarheit bietet und den Leser einbindet.',
+            image: {
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+                alt: '',
+            },
+            thumbnail: {
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+                alt: '',
+            },
+            category: {
+                id: 'category-1',
+                title: 'Garantie & Reparatur',
+            },
+        },
+        {
+            id: 'article-3',
+            createdAt: '2024-12-12T10:00:00',
+            updatedAt: '2024-12-14T16:00:00',
+            title: 'Dies ist ein Untertitel, der mehr Details und Kontext bietet und das Verständnis des Lesers verbessert',
+            lead: 'Eine kurze, aber informative Textzeile, die den Haupttitel erweitert, zusätzlichen Kontext oder Klarheit bietet und den Leser einbindet.',
+            image: {
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+                alt: '',
+            },
+            thumbnail: {
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+                alt: '',
+            },
+            category: {
+                id: 'category-1',
+                title: 'Garantie & Reparatur',
+            },
+        },
+        {
+            id: 'article-4',
+            createdAt: '2024-12-12T10:00:00',
+            updatedAt: '2024-12-14T16:00:00',
+            title: 'Dies ist ein Untertitel, der mehr Details und Kontext bietet und das Verständnis des Lesers verbessert',
+            lead: 'Eine kurze, aber informative Textzeile, die den Haupttitel erweitert, zusätzlichen Kontext oder Klarheit bietet und den Leser einbindet.',
+            image: {
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+                alt: '',
+            },
+            thumbnail: {
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+                alt: '',
+            },
+            category: {
+                id: 'category-1',
+                title: 'Garantie & Reparatur',
+            },
+        },
+    ],
 };
 
 const MOCK_ARTICLE_LIST_BLOCK_PL: CMS.Model.ArticleListBlock.ArticleListBlock = {
     id: 'article-list-1',
-    title: 'Przegląd artykułów',
-    subtitle: 'Twoje ostatnie artykuły',
-    table: {
-        columns: [
-            { id: 'title', title: 'Tytuł' },
-            { id: 'lead', title: 'Wstęp' },
-            { id: 'createdAt', title: 'Data utworzenia' },
-            { id: 'updatedAt', title: 'Data aktualizacji' },
-        ],
-        actions: {
-            title: 'Akcje',
-            label: 'Zobacz szczegóły',
-        },
-    },
-    pagination: {
-        limit: 5,
-        legend: 'of {totalPages} pages',
-        prev: 'Poprzedni',
-        next: 'Następny',
-        selectPage: 'Wybierz stronę',
-    },
-    filters: {
-        label: 'Filtr',
-        title: 'Filtruj artykuły',
-        description: 'Użyj filtrów, aby znaleźć konkretne artykuły',
-        submit: 'Zastosuj filtry',
-        reset: 'Resetuj filtry',
-        close: 'Zamknij filtry',
-        items: [
-            {
-                __typename: 'FilterDateRange',
-                id: 'createdAt',
-                label: 'Data utworzenia',
-                from: {
-                    label: 'Od',
-                },
-                to: {
-                    label: 'Do',
-                },
+    title: 'Przeglądaj poradniki',
+    description: 'Krótki opis nagłówka H2',
+    items: [
+        {
+            id: 'article-1',
+            createdAt: '2024-12-12T10:00:00',
+            updatedAt: '2024-12-14T16:00:00',
+            title: 'To jest podtytuł, który dostarcza więcej szczegółów i kontekstu, poprawiając zrozumienie czytelnika',
+            lead: 'Krótka, ale treściwa linijka tekstu, która rozwija główny tytuł, zapewnia dodatkowy kontekst lub jasność, aby zaangażować czytelnika.',
+            image: {
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+                alt: '',
             },
-        ],
-    },
-    noResults: {
-        title: 'Nie znaleziono artykułów',
-        description: 'Nie ma artykułów spełniających Twoje kryteria',
-    },
-    labels: {
-        today: 'Dzisiaj',
-        yesterday: 'Wczoraj',
-    },
-    detailsUrl: '/artykuły/:id',
-    fieldMapping: {
-        category: {
-            SELF_SERVICE: 'Self Service',
-            WARRANTY_REPAIR: 'Naprawa gwarancyjna',
-            TOOL_MANAGEMENT: 'Zarządzanie narzędziami',
-            HOW_TO_GUIDES: 'Przewodniki',
-            MAINTENANCE_TIPS: 'Porady konserwacyjne',
-            GENERAL: 'Ogólne',
-            OTHER: 'Inne',
+            thumbnail: {
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+                alt: '',
+            },
+            category: {
+                id: 'category-1',
+                title: 'Gwarancja i naprawa',
+            },
         },
-    },
+        {
+            id: 'article-2',
+            createdAt: '2024-12-12T10:00:00',
+            updatedAt: '2024-12-14T16:00:00',
+            title: 'To jest podtytuł, który dostarcza więcej szczegółów i kontekstu, poprawiając zrozumienie czytelnika',
+            lead: 'Krótka, ale treściwa linijka tekstu, która rozwija główny tytuł, zapewnia dodatkowy kontekst lub jasność, aby zaangażować czytelnika.',
+            image: {
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+                alt: '',
+            },
+            thumbnail: {
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+                alt: '',
+            },
+            category: {
+                id: 'category-1',
+                title: 'Gwarancja i naprawa',
+            },
+        },
+        {
+            id: 'article-3',
+            createdAt: '2024-12-12T10:00:00',
+            updatedAt: '2024-12-14T16:00:00',
+            title: 'To jest podtytuł, który dostarcza więcej szczegółów i kontekstu, poprawiając zrozumienie czytelnika',
+            lead: 'Krótka, ale treściwa linijka tekstu, która rozwija główny tytuł, zapewnia dodatkowy kontekst lub jasność, aby zaangażować czytelnika.',
+            image: {
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+                alt: '',
+            },
+            thumbnail: {
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+                alt: '',
+            },
+            category: {
+                id: 'category-1',
+                title: 'Gwarancja i naprawa',
+            },
+        },
+        {
+            id: 'article-4',
+            createdAt: '2024-12-12T10:00:00',
+            updatedAt: '2024-12-14T16:00:00',
+            title: 'To jest podtytuł, który dostarcza więcej szczegółów i kontekstu, poprawiając zrozumienie czytelnika',
+            lead: 'Krótka, ale treściwa linijka tekstu, która rozwija główny tytuł, zapewnia dodatkowy kontekst lub jasność, aby zaangażować czytelnika.',
+            image: {
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+                alt: '',
+            },
+            thumbnail: {
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+                alt: '',
+            },
+            category: {
+                id: 'category-1',
+                title: 'Gwarancja i naprawa',
+            },
+        },
+    ],
 };
 
 export const mapArticleListBlock = (locale: string): CMS.Model.ArticleListBlock.ArticleListBlock => {
-    const getDetailsUrl = () => {
-        switch (locale) {
-            case 'en':
-                return `/articles/{id}`;
-            case 'de':
-                return `/artikel/{id}`;
-            case 'pl':
-                return `/artykuły/{id}`;
-        }
-
-        return '';
-    };
-
     switch (locale) {
         case 'de':
             return {
                 ...MOCK_ARTICLE_LIST_BLOCK_DE,
-                detailsUrl: getDetailsUrl(),
             };
         case 'pl':
             return {
                 ...MOCK_ARTICLE_LIST_BLOCK_PL,
-                detailsUrl: getDetailsUrl(),
             };
         case 'en':
         default:
             return {
                 ...MOCK_ARTICLE_LIST_BLOCK_EN,
-                detailsUrl: getDetailsUrl(),
-            };
-    }
-};
-
-export const mapQuickLinksBlock = (locale: string): CMS.Model.QuickLinksBlock.QuickLinksBlock => {
-    const getDetailsUrl = () => {
-        switch (locale) {
-            case 'en':
-                return `/articles/{id}`;
-            case 'de':
-                return `/artikel/{id}`;
-            case 'pl':
-                return `/artykuły/{id}`;
-        }
-
-        return '';
-    };
-
-    switch (locale) {
-        case 'de':
-            return {
-                ...MOCK_ARTICLE_LIST_BLOCK_DE,
-                detailsUrl: getDetailsUrl(),
-            };
-        case 'pl':
-            return {
-                ...MOCK_ARTICLE_LIST_BLOCK_PL,
-                detailsUrl: getDetailsUrl(),
-            };
-        case 'en':
-        default:
-            return {
-                ...MOCK_ARTICLE_LIST_BLOCK_EN,
-                detailsUrl: getDetailsUrl(),
-            };
-    }
-};
-
-export const mapCategoryBlock = (locale: string): CMS.Model.CategoryBlock.CategoryBlock => {
-    const getDetailsUrl = () => {
-        switch (locale) {
-            case 'en':
-                return `/articles/{id}`;
-            case 'de':
-                return `/artikel/{id}`;
-            case 'pl':
-                return `/artykuły/{id}`;
-        }
-
-        return '';
-    };
-
-    switch (locale) {
-        case 'de':
-            return {
-                ...MOCK_ARTICLE_LIST_BLOCK_DE,
-                detailsUrl: getDetailsUrl(),
-            };
-        case 'pl':
-            return {
-                ...MOCK_ARTICLE_LIST_BLOCK_PL,
-                detailsUrl: getDetailsUrl(),
-            };
-        case 'en':
-        default:
-            return {
-                ...MOCK_ARTICLE_LIST_BLOCK_EN,
-                detailsUrl: getDetailsUrl(),
-            };
-    }
-};
-
-export const mapCategoryListBlock = (locale: string): CMS.Model.CategoryListBlock.CategoryListBlock => {
-    const getDetailsUrl = () => {
-        switch (locale) {
-            case 'en':
-                return `/articles/{id}`;
-            case 'de':
-                return `/artikel/{id}`;
-            case 'pl':
-                return `/artykuły/{id}`;
-        }
-
-        return '';
-    };
-
-    switch (locale) {
-        case 'de':
-            return {
-                ...MOCK_ARTICLE_LIST_BLOCK_DE,
-                detailsUrl: getDetailsUrl(),
-            };
-        case 'pl':
-            return {
-                ...MOCK_ARTICLE_LIST_BLOCK_PL,
-                detailsUrl: getDetailsUrl(),
-            };
-        case 'en':
-        default:
-            return {
-                ...MOCK_ARTICLE_LIST_BLOCK_EN,
-                detailsUrl: getDetailsUrl(),
             };
     }
 };

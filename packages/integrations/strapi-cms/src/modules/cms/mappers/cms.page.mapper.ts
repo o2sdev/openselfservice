@@ -21,7 +21,12 @@ export const mapPage = (data: PageFragment): CMS.Model.Page.Page => {
             noFollow: data.SEO!.noFollow,
             description: data.SEO!.description,
             keywords: data.SEO!.keywords?.map((keyword) => keyword.keyword) || [],
-            image: data.SEO!.image,
+            image: data.SEO!.image
+                ? {
+                      ...data.SEO!.image,
+                      alt: data.SEO!.image?.alternativeText || '',
+                  }
+                : undefined,
         },
         hasOwnTitle: data.hasOwnTitle,
         parent: {
@@ -62,7 +67,12 @@ export const mapAlternativePages = (data: PageFragment): CMS.Model.Page.Page => 
             noFollow: data.SEO!.noFollow,
             description: data.SEO!.description,
             keywords: data.SEO!.keywords?.map((keyword) => keyword.keyword) || [],
-            image: data.SEO!.image,
+            image: data.SEO!.image
+                ? {
+                      ...data.SEO!.image,
+                      alt: data.SEO!.image?.alternativeText || '',
+                  }
+                : undefined,
         },
         hasOwnTitle: data.hasOwnTitle,
         parent: {

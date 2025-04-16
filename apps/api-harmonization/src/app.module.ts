@@ -22,8 +22,6 @@ import {
 
 import { configuration } from '@o2s/api-harmonization/config/configuration';
 
-import { ArticleDetailsBlockModule } from '@o2s/api-harmonization/blocks/article-details/article-details.module';
-import { ArticleListBlockModule } from '@o2s/api-harmonization/blocks/article-list/article-list.module';
 import { FaqBlockModule } from '@o2s/api-harmonization/blocks/faq/faq.module';
 import { InvoiceListBlockModule } from '@o2s/api-harmonization/blocks/invoice-list/invoice-list.module';
 import { NotificationDetailsBlockModule } from '@o2s/api-harmonization/blocks/notification-details/notification-details.module';
@@ -84,8 +82,6 @@ import { SurveyjsModule } from './modules/surveyjs-forms/surveyjs.module';
         NotificationListBlockModule.register(AppConfig),
         NotificationDetailsBlockModule.register(AppConfig),
         FaqBlockModule.register(AppConfig),
-        ArticleDetailsBlockModule.register(AppConfig),
-        ArticleListBlockModule.register(AppConfig),
         InvoiceListBlockModule.register(AppConfig),
         PaymentsSummaryBlockModule.register(AppConfig),
         PaymentsHistoryBlockModule.register(AppConfig),

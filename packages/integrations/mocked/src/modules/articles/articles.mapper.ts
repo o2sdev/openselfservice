@@ -9,9 +9,18 @@ export const MOCK_ARTICLES_EN: Articles.Model.Article[] = [
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Managing Your PowerPro Tools Online',
         lead: 'Learn how to efficiently manage your PowerPro tools through our self-service portal available 24/7.',
-        image: 'https://example.com/images/tool-management.jpg',
-        thumbnail: 'https://example.com/images/tool-management-thumb.jpg',
-        category: 'SELF_SERVICE',
+        image: {
+            url: 'https://example.com/images/tool-management.jpg',
+            alt: '',
+        },
+        thumbnail: {
+            url: 'https://example.com/images/tool-management-thumb.jpg',
+            alt: '',
+        },
+        category: {
+            id: 'category-1',
+            title: 'Warranty & Repair',
+        },
         sections: [
             {
                 id: 'sect-001-1',
@@ -40,9 +49,18 @@ export const MOCK_ARTICLES_EN: Articles.Model.Article[] = [
         updatedAt: '2023-03-05T13:20:00Z',
         title: 'Registering Your PowerPro Tool for Warranty',
         lead: 'Protect your investment by properly registering your PowerPro tools for warranty coverage.',
-        image: 'https://example.com/images/warranty-registration.jpg',
-        thumbnail: 'https://example.com/images/warranty-registration-thumb.jpg',
-        category: 'WARRANTY_REPAIR',
+        image: {
+            url: 'https://example.com/images/tool-management.jpg',
+            alt: '',
+        },
+        thumbnail: {
+            url: 'https://example.com/images/tool-management-thumb.jpg',
+            alt: '',
+        },
+        category: {
+            id: 'category-1',
+            title: 'Warranty & Repair',
+        },
         sections: [
             {
                 id: 'sect-002-1',
@@ -71,9 +89,18 @@ export const MOCK_ARTICLES_EN: Articles.Model.Article[] = [
         updatedAt: '2023-03-10T15:30:00Z',
         title: 'Introduction to PowerPro Tool Park Management',
         lead: 'Discover how Tool Park Management can revolutionize how your company tracks and maintains its PowerPro tools.',
-        image: 'https://example.com/images/tool-park-overview.jpg',
-        thumbnail: 'https://example.com/images/tool-park-overview-thumb.jpg',
-        category: 'TOOL_MANAGEMENT',
+        image: {
+            url: 'https://example.com/images/tool-management.jpg',
+            alt: '',
+        },
+        thumbnail: {
+            url: 'https://example.com/images/tool-management-thumb.jpg',
+            alt: '',
+        },
+        category: {
+            id: 'category-1',
+            title: 'Warranty & Repair',
+        },
         sections: [
             {
                 id: 'sect-003-1',
@@ -110,9 +137,18 @@ export const MOCK_ARTICLES_EN: Articles.Model.Article[] = [
         updatedAt: '2023-08-15T16:40:00Z',
         title: 'Understanding Your PowerPro Warranty',
         lead: "Everything you need to know about PowerPro's warranty coverage for your professional tools.",
-        image: 'https://example.com/images/warranty-coverage.jpg',
-        thumbnail: 'https://example.com/images/warranty-coverage-thumb.jpg',
-        category: 'WARRANTY_REPAIR',
+        image: {
+            url: 'https://example.com/images/tool-management.jpg',
+            alt: '',
+        },
+        thumbnail: {
+            url: 'https://example.com/images/tool-management-thumb.jpg',
+            alt: '',
+        },
+        category: {
+            id: 'category-1',
+            title: 'Warranty & Repair',
+        },
         sections: [
             {
                 id: 'sect-004-1',
@@ -149,9 +185,18 @@ export const MOCK_ARTICLES_EN: Articles.Model.Article[] = [
         updatedAt: '2023-05-20T11:35:00Z',
         title: 'Scheduling a PowerPro Tool Service Appointment',
         lead: 'Learn how to easily schedule service for your PowerPro tools through our online portal.',
-        image: 'https://example.com/images/service-scheduling.jpg',
-        thumbnail: 'https://example.com/images/service-scheduling-thumb.jpg',
-        category: 'SELF_SERVICE',
+        image: {
+            url: 'https://example.com/images/tool-management.jpg',
+            alt: '',
+        },
+        thumbnail: {
+            url: 'https://example.com/images/tool-management-thumb.jpg',
+            alt: '',
+        },
+        category: {
+            id: 'category-1',
+            title: 'Warranty & Repair',
+        },
         sections: [
             {
                 id: 'sect-005-1',
@@ -182,9 +227,18 @@ export const MOCK_ARTICLES_PL: Articles.Model.Article[] = [
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Zarządzanie narzędziami PowerPro online',
         lead: 'Dowiedz się, jak efektywnie zarządzać narzędziami PowerPro za pomocą naszego portalu samoobsługowego dostępnego 24/7.',
-        image: 'https://example.com/images/tool-management.jpg',
-        thumbnail: 'https://example.com/images/tool-management-thumb.jpg',
-        category: 'SELF_SERVICE',
+        image: {
+            url: 'https://example.com/images/tool-management.jpg',
+            alt: '',
+        },
+        thumbnail: {
+            url: 'https://example.com/images/tool-management-thumb.jpg',
+            alt: '',
+        },
+        category: {
+            id: 'category-1',
+            title: 'Warranty & Repair',
+        },
         sections: [
             {
                 id: 'sect-001-1',
@@ -213,9 +267,18 @@ export const MOCK_ARTICLES_PL: Articles.Model.Article[] = [
         updatedAt: '2023-03-05T13:20:00Z',
         title: 'Rejestracja narzędzia PowerPro w celu uzyskania gwarancji',
         lead: 'Chroń swoją inwestycję, prawidłowo rejestrując narzędzia PowerPro w celu objęcia ich gwarancją.',
-        image: 'https://example.com/images/warranty-registration.jpg',
-        thumbnail: 'https://example.com/images/warranty-registration-thumb.jpg',
-        category: 'WARRANTY_REPAIR',
+        image: {
+            url: 'https://example.com/images/tool-management.jpg',
+            alt: '',
+        },
+        thumbnail: {
+            url: 'https://example.com/images/tool-management-thumb.jpg',
+            alt: '',
+        },
+        category: {
+            id: 'category-1',
+            title: 'Warranty & Repair',
+        },
         sections: [
             {
                 id: 'sect-002-1',
@@ -244,9 +307,18 @@ export const MOCK_ARTICLES_PL: Articles.Model.Article[] = [
         updatedAt: '2023-03-10T15:30:00Z',
         title: 'Wprowadzenie do zarządzania parkiem narzędzi PowerPro',
         lead: 'Odkryj, jak zarządzanie parkiem narzędzi może zrewolucjonizować sposób, w jaki Twoja firma śledzi i konserwuje narzędzia PowerPro.',
-        image: 'https://example.com/images/tool-park-overview.jpg',
-        thumbnail: 'https://example.com/images/tool-park-overview-thumb.jpg',
-        category: 'TOOL_MANAGEMENT',
+        image: {
+            url: 'https://example.com/images/tool-management.jpg',
+            alt: '',
+        },
+        thumbnail: {
+            url: 'https://example.com/images/tool-management-thumb.jpg',
+            alt: '',
+        },
+        category: {
+            id: 'category-1',
+            title: 'Warranty & Repair',
+        },
         sections: [
             {
                 id: 'sect-003-1',
@@ -283,9 +355,18 @@ export const MOCK_ARTICLES_PL: Articles.Model.Article[] = [
         updatedAt: '2023-08-15T16:40:00Z',
         title: 'Zrozumienie gwarancji PowerPro',
         lead: 'Wszystko, co musisz wiedzieć o ochronie gwarancyjnej PowerPro dla twoich profesjonalnych narzędzi.',
-        image: 'https://example.com/images/warranty-coverage.jpg',
-        thumbnail: 'https://example.com/images/warranty-coverage-thumb.jpg',
-        category: 'WARRANTY_REPAIR',
+        image: {
+            url: 'https://example.com/images/tool-management.jpg',
+            alt: '',
+        },
+        thumbnail: {
+            url: 'https://example.com/images/tool-management-thumb.jpg',
+            alt: '',
+        },
+        category: {
+            id: 'category-1',
+            title: 'Warranty & Repair',
+        },
         sections: [
             {
                 id: 'sect-004-1',
@@ -322,9 +403,18 @@ export const MOCK_ARTICLES_PL: Articles.Model.Article[] = [
         updatedAt: '2023-05-20T11:35:00Z',
         title: 'Planowanie wizyty serwisowej narzędzia PowerPro',
         lead: 'Dowiedz się, jak łatwo zaplanować serwis dla swoich narzędzi PowerPro za pośrednictwem naszego portalu internetowego.',
-        image: 'https://example.com/images/service-scheduling.jpg',
-        thumbnail: 'https://example.com/images/service-scheduling-thumb.jpg',
-        category: 'SELF_SERVICE',
+        image: {
+            url: 'https://example.com/images/tool-management.jpg',
+            alt: '',
+        },
+        thumbnail: {
+            url: 'https://example.com/images/tool-management-thumb.jpg',
+            alt: '',
+        },
+        category: {
+            id: 'category-1',
+            title: 'Warranty & Repair',
+        },
         sections: [
             {
                 id: 'sect-005-1',
@@ -355,9 +445,18 @@ export const MOCK_ARTICLES_DE: Articles.Model.Article[] = [
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Verwalten Ihrer PowerPro-Werkzeuge online',
         lead: 'Erfahren Sie, wie Sie Ihre PowerPro-Werkzeuge effizient über unser rund um die Uhr verfügbares Selbstbedienungsportal verwalten können.',
-        image: 'https://example.com/images/tool-management.jpg',
-        thumbnail: 'https://example.com/images/tool-management-thumb.jpg',
-        category: 'SELF_SERVICE',
+        image: {
+            url: 'https://example.com/images/tool-management.jpg',
+            alt: '',
+        },
+        thumbnail: {
+            url: 'https://example.com/images/tool-management-thumb.jpg',
+            alt: '',
+        },
+        category: {
+            id: 'category-1',
+            title: 'Warranty & Repair',
+        },
         sections: [
             {
                 id: 'sect-001-1',
@@ -386,9 +485,18 @@ export const MOCK_ARTICLES_DE: Articles.Model.Article[] = [
         updatedAt: '2023-03-05T13:20:00Z',
         title: 'Registrieren Ihres PowerPro-Werkzeugs für die Garantie',
         lead: 'Schützen Sie Ihre Investition, indem Sie Ihre PowerPro-Werkzeuge ordnungsgemäß für den Garantieschutz registrieren.',
-        image: 'https://example.com/images/warranty-registration.jpg',
-        thumbnail: 'https://example.com/images/warranty-registration-thumb.jpg',
-        category: 'WARRANTY_REPAIR',
+        image: {
+            url: 'https://example.com/images/tool-management.jpg',
+            alt: '',
+        },
+        thumbnail: {
+            url: 'https://example.com/images/tool-management-thumb.jpg',
+            alt: '',
+        },
+        category: {
+            id: 'category-1',
+            title: 'Warranty & Repair',
+        },
         sections: [
             {
                 id: 'sect-002-1',
@@ -417,9 +525,18 @@ export const MOCK_ARTICLES_DE: Articles.Model.Article[] = [
         updatedAt: '2023-03-10T15:30:00Z',
         title: 'Einführung in die PowerPro-Werkzeugpark-Verwaltung',
         lead: 'Entdecken Sie, wie die Werkzeugpark-Verwaltung revolutionieren kann, wie Ihr Unternehmen seine PowerPro-Werkzeuge verfolgt und wartet.',
-        image: 'https://example.com/images/tool-park-overview.jpg',
-        thumbnail: 'https://example.com/images/tool-park-overview-thumb.jpg',
-        category: 'TOOL_MANAGEMENT',
+        image: {
+            url: 'https://example.com/images/tool-management.jpg',
+            alt: '',
+        },
+        thumbnail: {
+            url: 'https://example.com/images/tool-management-thumb.jpg',
+            alt: '',
+        },
+        category: {
+            id: 'category-1',
+            title: 'Warranty & Repair',
+        },
         sections: [
             {
                 id: 'sect-003-1',
@@ -456,9 +573,18 @@ export const MOCK_ARTICLES_DE: Articles.Model.Article[] = [
         updatedAt: '2023-08-15T16:40:00Z',
         title: 'Verstehen Ihrer PowerPro-Garantie',
         lead: 'Alles, was Sie über den Garantieschutz von PowerPro für Ihre professionellen Werkzeuge wissen müssen.',
-        image: 'https://example.com/images/warranty-coverage.jpg',
-        thumbnail: 'https://example.com/images/warranty-coverage-thumb.jpg',
-        category: 'WARRANTY_REPAIR',
+        image: {
+            url: 'https://example.com/images/tool-management.jpg',
+            alt: '',
+        },
+        thumbnail: {
+            url: 'https://example.com/images/tool-management-thumb.jpg',
+            alt: '',
+        },
+        category: {
+            id: 'category-1',
+            title: 'Warranty & Repair',
+        },
         sections: [
             {
                 id: 'sect-004-1',
@@ -495,9 +621,18 @@ export const MOCK_ARTICLES_DE: Articles.Model.Article[] = [
         updatedAt: '2023-05-20T11:35:00Z',
         title: 'Terminvereinbarung für den PowerPro-Werkzeugservice',
         lead: 'Erfahren Sie, wie Sie einfach einen Service für Ihre PowerPro-Werkzeuge über unser Online-Portal planen können.',
-        image: 'https://example.com/images/service-scheduling.jpg',
-        thumbnail: 'https://example.com/images/service-scheduling-thumb.jpg',
-        category: 'SELF_SERVICE',
+        image: {
+            url: 'https://example.com/images/tool-management.jpg',
+            alt: '',
+        },
+        thumbnail: {
+            url: 'https://example.com/images/tool-management-thumb.jpg',
+            alt: '',
+        },
+        category: {
+            id: 'category-1',
+            title: 'Warranty & Repair',
+        },
         sections: [
             {
                 id: 'sect-005-1',
