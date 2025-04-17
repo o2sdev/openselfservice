@@ -7,6 +7,7 @@ const MOCK_ARTICLE_LIST_BLOCK_EN: CMS.Model.ArticleListBlock.ArticleListBlock = 
     items: [
         {
             id: 'article-1',
+            slug: 'managing-your-powerpro-tools-online',
             createdAt: '2024-12-12T10:00:00',
             updatedAt: '2024-12-14T16:00:00',
             title: 'This is a subtitle that provides more detail and context, enhancing the reader’s understanding',
@@ -26,6 +27,7 @@ const MOCK_ARTICLE_LIST_BLOCK_EN: CMS.Model.ArticleListBlock.ArticleListBlock = 
         },
         {
             id: 'article-2',
+            slug: 'managing-your-powerpro-tools-online',
             createdAt: '2024-12-12T10:00:00',
             updatedAt: '2024-12-14T16:00:00',
             title: 'This is a subtitle that provides more detail and context, enhancing the reader’s understanding',
@@ -45,6 +47,7 @@ const MOCK_ARTICLE_LIST_BLOCK_EN: CMS.Model.ArticleListBlock.ArticleListBlock = 
         },
         {
             id: 'article-3',
+            slug: 'managing-your-powerpro-tools-online',
             createdAt: '2024-12-12T10:00:00',
             updatedAt: '2024-12-14T16:00:00',
             title: 'This is a subtitle that provides more detail and context, enhancing the reader’s understanding',
@@ -64,6 +67,7 @@ const MOCK_ARTICLE_LIST_BLOCK_EN: CMS.Model.ArticleListBlock.ArticleListBlock = 
         },
         {
             id: 'article-4',
+            slug: 'managing-your-powerpro-tools-online',
             createdAt: '2024-12-12T10:00:00',
             updatedAt: '2024-12-14T16:00:00',
             title: 'This is a subtitle that provides more detail and context, enhancing the reader’s understanding',
@@ -91,6 +95,7 @@ const MOCK_ARTICLE_LIST_BLOCK_DE: CMS.Model.ArticleListBlock.ArticleListBlock = 
     items: [
         {
             id: 'article-1',
+            slug: 'verwalten-ihrer-powerpro-werkzeuge-online',
             createdAt: '2024-12-12T10:00:00',
             updatedAt: '2024-12-14T16:00:00',
             title: 'Dies ist ein Untertitel, der mehr Details und Kontext bietet und das Verständnis des Lesers verbessert',
@@ -110,6 +115,7 @@ const MOCK_ARTICLE_LIST_BLOCK_DE: CMS.Model.ArticleListBlock.ArticleListBlock = 
         },
         {
             id: 'article-2',
+            slug: 'verwalten-ihrer-powerpro-werkzeuge-online',
             createdAt: '2024-12-12T10:00:00',
             updatedAt: '2024-12-14T16:00:00',
             title: 'Dies ist ein Untertitel, der mehr Details und Kontext bietet und das Verständnis des Lesers verbessert',
@@ -129,6 +135,7 @@ const MOCK_ARTICLE_LIST_BLOCK_DE: CMS.Model.ArticleListBlock.ArticleListBlock = 
         },
         {
             id: 'article-3',
+            slug: 'verwalten-ihrer-powerpro-werkzeuge-online',
             createdAt: '2024-12-12T10:00:00',
             updatedAt: '2024-12-14T16:00:00',
             title: 'Dies ist ein Untertitel, der mehr Details und Kontext bietet und das Verständnis des Lesers verbessert',
@@ -148,6 +155,7 @@ const MOCK_ARTICLE_LIST_BLOCK_DE: CMS.Model.ArticleListBlock.ArticleListBlock = 
         },
         {
             id: 'article-4',
+            slug: 'verwalten-ihrer-powerpro-werkzeuge-online',
             createdAt: '2024-12-12T10:00:00',
             updatedAt: '2024-12-14T16:00:00',
             title: 'Dies ist ein Untertitel, der mehr Details und Kontext bietet und das Verständnis des Lesers verbessert',
@@ -175,6 +183,7 @@ const MOCK_ARTICLE_LIST_BLOCK_PL: CMS.Model.ArticleListBlock.ArticleListBlock = 
     items: [
         {
             id: 'article-1',
+            slug: 'zarzadzanie-narzedziami-powerpro-online',
             createdAt: '2024-12-12T10:00:00',
             updatedAt: '2024-12-14T16:00:00',
             title: 'To jest podtytuł, który dostarcza więcej szczegółów i kontekstu, poprawiając zrozumienie czytelnika',
@@ -194,6 +203,7 @@ const MOCK_ARTICLE_LIST_BLOCK_PL: CMS.Model.ArticleListBlock.ArticleListBlock = 
         },
         {
             id: 'article-2',
+            slug: 'zarzadzanie-narzedziami-powerpro-online',
             createdAt: '2024-12-12T10:00:00',
             updatedAt: '2024-12-14T16:00:00',
             title: 'To jest podtytuł, który dostarcza więcej szczegółów i kontekstu, poprawiając zrozumienie czytelnika',
@@ -213,6 +223,7 @@ const MOCK_ARTICLE_LIST_BLOCK_PL: CMS.Model.ArticleListBlock.ArticleListBlock = 
         },
         {
             id: 'article-3',
+            slug: 'zarzadzanie-narzedziami-powerpro-online',
             createdAt: '2024-12-12T10:00:00',
             updatedAt: '2024-12-14T16:00:00',
             title: 'To jest podtytuł, który dostarcza więcej szczegółów i kontekstu, poprawiając zrozumienie czytelnika',
@@ -232,6 +243,7 @@ const MOCK_ARTICLE_LIST_BLOCK_PL: CMS.Model.ArticleListBlock.ArticleListBlock = 
         },
         {
             id: 'article-4',
+            slug: 'zarzadzanie-narzedziami-powerpro-online',
             createdAt: '2024-12-12T10:00:00',
             updatedAt: '2024-12-14T16:00:00',
             title: 'To jest podtytuł, który dostarcza więcej szczegółów i kontekstu, poprawiając zrozumienie czytelnika',

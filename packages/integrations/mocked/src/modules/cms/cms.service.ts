@@ -20,7 +20,7 @@ import { mapOrganizationList } from './mappers/cms.organization-list.mapper';
 import { getAllPages, getAlternativePages, mapPage } from './mappers/cms.page.mapper';
 import { mapPaymentsHistoryBlock } from './mappers/cms.payments-history.mapper';
 import { mapPaymentsSummaryBlock } from './mappers/cms.payments-summary.mapper';
-import { mapQuickLinksBlock } from './mappers/cms.quick-linkts.mapper';
+import { mapQuickLinksBlock } from './mappers/cms.quick-links.mapper';
 import { mapResourceDetailsBlock } from './mappers/cms.resource-details.mapper';
 import { mapResourceListBlock } from './mappers/cms.resource-list.mapper';
 import { mapServiceDetailsBlock } from './mappers/cms.service-details.mapper';
