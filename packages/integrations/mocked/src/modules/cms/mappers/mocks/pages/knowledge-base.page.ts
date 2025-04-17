@@ -18,12 +18,6 @@ export const PAGE_HELP_AND_SUPPORT_EN: CMS.Model.Page.Page = {
         },
     },
     hasOwnTitle: false,
-    parent: {
-        slug: '/',
-        seo: {
-            title: 'Dashboard',
-        },
-    },
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
@@ -68,12 +62,6 @@ export const PAGE_HELP_AND_SUPPORT_DE: CMS.Model.Page.Page = {
         },
     },
     hasOwnTitle: false,
-    parent: {
-        slug: '/',
-        seo: {
-            title: 'Startseite',
-        },
-    },
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
@@ -118,12 +106,6 @@ export const PAGE_HELP_AND_SUPPORT_PL: CMS.Model.Page.Page = {
         },
     },
     hasOwnTitle: false,
-    parent: {
-        slug: '/',
-        seo: {
-            title: 'Strona główna',
-        },
-    },
     template: {
         __typename: 'OneColumnTemplate',
         slots: {

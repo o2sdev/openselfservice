@@ -8,7 +8,7 @@ export class Page {
     updatedAt!: string;
     seo!: Models.SEO.Page;
     hasOwnTitle!: boolean;
-    parent!: {
+    parent?: {
         slug: string;
         seo?: Pick<Models.SEO.Page, 'title'>;
         parent?: {

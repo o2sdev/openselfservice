@@ -18,9 +18,6 @@ export const PAGE_DASHBOARD_PL: CMS.Model.Page.Page = {
         },
     },
     hasOwnTitle: false,
-    parent: {
-        slug: '',
-    },
     template: {
         __typename: 'TwoColumnTemplate',
         slots: {
@@ -66,9 +63,6 @@ export const PAGE_DASHBOARD_EN: CMS.Model.Page.Page = {
         },
     },
     hasOwnTitle: false,
-    parent: {
-        slug: '',
-    },
     template: {
         __typename: 'TwoColumnTemplate',
         slots: {
@@ -114,9 +108,6 @@ export const PAGE_DASHBOARD_DE: CMS.Model.Page.Page = {
         },
     },
     hasOwnTitle: false,
-    parent: {
-        slug: '',
-    },
     template: {
         __typename: 'TwoColumnTemplate',
         slots: {

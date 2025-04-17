@@ -41,7 +41,7 @@ export const mapPage = (
 const mapBreadcrumbs = (page: CMS.Model.Page.Page): Breadcrumb[] => {
     const breadcrumbs: Breadcrumb[] = [];
 
-    function extractFromParent(parent: CMS.Model.Page.Page['parent'] | undefined): void {
+    function extractFromParent(parent: CMS.Model.Page.Page['parent']): void {
         if (!parent) return;
 
         if (parent.parent) {
