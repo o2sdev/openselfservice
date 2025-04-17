@@ -2,6 +2,7 @@ import { Media, Pagination } from '@/utils/models';
 
 export class Article {
     id!: string;
+    slug!: string;
     createdAt!: string;
     updatedAt!: string;
     title!: string;

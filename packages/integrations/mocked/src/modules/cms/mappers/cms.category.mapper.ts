@@ -31,7 +31,7 @@ const MOCK_CATEGORY_BLOCK_EN: CMS.Model.CategoryBlock.CategoryBlock = {
                 alt: '',
             },
             category: {
-                id: 'category-1',
+                id: 'warranty-and-repair',
                 title: 'Warranty & Repair',
             },
         },
@@ -50,7 +50,7 @@ const MOCK_CATEGORY_BLOCK_EN: CMS.Model.CategoryBlock.CategoryBlock = {
                 alt: '',
             },
             category: {
-                id: 'category-1',
+                id: 'warranty-and-repair',
                 title: 'Warranty & Repair',
             },
         },
@@ -69,7 +69,7 @@ const MOCK_CATEGORY_BLOCK_EN: CMS.Model.CategoryBlock.CategoryBlock = {
                 alt: '',
             },
             category: {
-                id: 'category-1',
+                id: 'warranty-and-repair',
                 title: 'Warranty & Repair',
             },
         },
@@ -106,7 +106,7 @@ const MOCK_CATEGORY_BLOCK_DE: CMS.Model.CategoryBlock.CategoryBlock = {
                 alt: '',
             },
             category: {
-                id: 'category-1',
+                id: 'warranty-and-repair',
                 title: 'Garantie & Reparatur',
             },
         },
@@ -125,7 +125,7 @@ const MOCK_CATEGORY_BLOCK_DE: CMS.Model.CategoryBlock.CategoryBlock = {
                 alt: '',
             },
             category: {
-                id: 'category-1',
+                id: 'warranty-and-repair',
                 title: 'Garantie & Reparatur',
             },
         },
@@ -144,7 +144,7 @@ const MOCK_CATEGORY_BLOCK_DE: CMS.Model.CategoryBlock.CategoryBlock = {
                 alt: '',
             },
             category: {
-                id: 'category-1',
+                id: 'warranty-and-repair',
                 title: 'Garantie & Reparatur',
             },
         },
@@ -182,7 +182,7 @@ const MOCK_CATEGORY_BLOCK_PL: CMS.Model.CategoryBlock.CategoryBlock = {
                 alt: '',
             },
             category: {
-                id: 'category-1',
+                id: 'warranty-and-repair',
                 title: 'Gwarancja i Naprawa',
             },
         },
@@ -201,7 +201,7 @@ const MOCK_CATEGORY_BLOCK_PL: CMS.Model.CategoryBlock.CategoryBlock = {
                 alt: '',
             },
             category: {
-                id: 'category-1',
+                id: 'warranty-and-repair',
                 title: 'Gwarancja i Naprawa',
             },
         },
@@ -220,7 +220,7 @@ const MOCK_CATEGORY_BLOCK_PL: CMS.Model.CategoryBlock.CategoryBlock = {
                 alt: '',
             },
             category: {
-                id: 'category-1',
+                id: 'warranty-and-repair',
                 title: 'Gwarancja i Naprawa',
             },
         },

@@ -1335,6 +1335,28 @@ export const mapPage = (slug: string, locale: string): CMS.Model.Page.Page | und
                 slug: `/uslugi/${slug.match(/(.+)\/(.+)/)?.[2]}`,
                 updatedAt: '2025-01-01',
             };
+
+        case '/help-and-support':
+            return PAGE_SERVICE_LIST_EN;
+        case '/hilfe-und-support':
+            return PAGE_SERVICE_LIST_DE;
+        case '/pomoc-i-wsparcie':
+            return PAGE_SERVICE_LIST_PL;
+
+        case '/help-and-support/warranty-and-repair':
+            return PAGE_SERVICE_LIST_EN;
+        case '/hilfe-und-support/garantie-und-reparaturt':
+            return PAGE_SERVICE_LIST_DE;
+        case '/pomoc-i-wsparcie/gwarancja-i-naprawa':
+            return PAGE_SERVICE_LIST_PL;
+
+        case '/help-and-support/warranty-and-repair/managing-your-powerpro-tools-online':
+            return PAGE_SERVICE_LIST_EN;
+        case '/hilfe-und-support/garantie-und-reparaturt/verwalten-ihrer-powerpro-werkzeuge-online':
+            return PAGE_SERVICE_LIST_DE;
+        case '/pomoc-i-wsparcie/gwarancja-i-naprawa/zarzadzanie-narzedziami-powerpro-online':
+            return PAGE_SERVICE_LIST_PL;
+
         default:
             return undefined;
     }
