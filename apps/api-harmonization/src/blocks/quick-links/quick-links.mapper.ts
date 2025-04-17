@@ -8,6 +8,6 @@ export const mapQuickLinks = (cms: CMS.Model.QuickLinksBlock.QuickLinksBlock, _l
         id: cms.id,
         title: cms.title,
         description: cms.description,
-        links: cms.links,
+        items: cms.items,
     };
 };

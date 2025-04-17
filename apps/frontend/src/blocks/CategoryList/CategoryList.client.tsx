@@ -9,16 +9,18 @@ import { CategoryListPureProps } from './CategoryList.types';
 export const CategoryListPure: React.FC<CategoryListPureProps> = ({ ...component }) => {
     return (
         <div className="w-full flex flex-col gap-4">
-            CategoryList: {component.id}
-            <ul>
-                {component.items.map((item) => (
-                    <li key={item.id}>
-                        <Link asChild>
-                            <NextLink href={item.slug}>{item.title}</NextLink>
-                        </Link>
-                    </li>
-                ))}
-            </ul>
+            <div className="border p-4">
+                CategoryList: {component.id}
+                <ul>
+                    {component.items.map((item) => (
+                        <li key={item.id}>
+                            <Link asChild>
+                                <NextLink href={item.slug}>{item.title}</NextLink>
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 };
