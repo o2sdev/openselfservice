@@ -7,6 +7,7 @@ export const mapArticlesFromSearch = (
 ): Articles.Model.Articles => {
     const articles = searchResult.hits.map((hit) => ({
         id: hit.objectID,
+        slug: hit.slug,
         title: hit.title,
         lead: hit.lead,
         createdAt: hit.createdAt,
