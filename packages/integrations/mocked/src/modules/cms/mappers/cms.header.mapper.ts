@@ -57,7 +57,7 @@ const MOCK_HEADER_LOGON_EN: CMS.Model.Header.Header = {
                 {
                     __typename: 'NavigationItem',
                     label: 'O2S Documentation',
-                    url: 'https://www.openselfservice.com/',
+                    url: '/help-and-support',
                 },
             ],
         },
@@ -124,7 +124,7 @@ const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
                 {
                     __typename: 'NavigationItem',
                     label: 'O2S Dokumentation',
-                    url: 'https://www.openselfservice.com/',
+                    url: '/help-and-support',
                 },
             ],
         },
@@ -195,7 +195,7 @@ const MOCK_HEADER_LOGON_PL: CMS.Model.Header.Header = {
                 {
                     __typename: 'NavigationItem',
                     label: 'Dokumentacja O2S',
-                    url: 'https://www.openselfservice.com/',
+                    url: '/help-and-support',
                 },
             ],
         },

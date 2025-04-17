@@ -2,6 +2,7 @@ import { CMS, Models } from '@o2s/framework/modules';
 
 import {
     ArticleList,
+    Category,
     // BLOCK IMPORT
     CategoryList,
     Faq,
@@ -64,6 +65,7 @@ export class PageData {
 
 export type Blocks =
     | ArticleList.Model.ArticleListBlock['__typename']
+    | Category.Model.CategoryBlock['__typename']
     // BLOCK REGISTER
     | TicketList.Model.TicketListBlock['__typename']
     | TicketDetails.Model.TicketDetailsBlock['__typename']

@@ -18,7 +18,7 @@ const MOCK_CATEGORY_BLOCK_EN: CMS.Model.CategoryBlock.CategoryBlock = {
     items: [
         {
             id: 'article-1',
-            slug: 'managing-your-powerpro-tools-online',
+            slug: '/help-and-support/warranty-and-repair/managing-your-powerpro-tools-online',
             createdAt: '2024-12-12T10:00:00',
             updatedAt: '2024-12-14T16:00:00',
             title: 'This is a subtitle that provides more detail and context, enhancing the reader’s understanding',
@@ -38,7 +38,7 @@ const MOCK_CATEGORY_BLOCK_EN: CMS.Model.CategoryBlock.CategoryBlock = {
         },
         {
             id: 'article-2',
-            slug: 'managing-your-powerpro-tools-online',
+            slug: '/help-and-support/warranty-and-repair/managing-your-powerpro-tools-online',
             createdAt: '2024-12-12T10:00:00',
             updatedAt: '2024-12-14T16:00:00',
             title: 'This is a subtitle that provides more detail and context, enhancing the reader’s understanding',
@@ -58,7 +58,7 @@ const MOCK_CATEGORY_BLOCK_EN: CMS.Model.CategoryBlock.CategoryBlock = {
         },
         {
             id: 'article-3',
-            slug: 'managing-your-powerpro-tools-online',
+            slug: '/help-and-support/warranty-and-repair/managing-your-powerpro-tools-online',
             createdAt: '2024-12-12T10:00:00',
             updatedAt: '2024-12-14T16:00:00',
             title: 'This is a subtitle that provides more detail and context, enhancing the reader’s understanding',
@@ -96,7 +96,7 @@ const MOCK_CATEGORY_BLOCK_DE: CMS.Model.CategoryBlock.CategoryBlock = {
     items: [
         {
             id: 'article-1',
-            slug: 'verwalten-ihrer-powerpro-werkzeuge-online',
+            slug: '/hilfe-und-support/garantie-und-reparatur/verwalten-ihrer-powerpro-werkzeuge-online',
             createdAt: '2024-12-12T10:00:00',
             updatedAt: '2024-12-14T16:00:00',
             title: 'Dies ist ein Untertitel, der mehr Details und Kontext bietet, um das Verständnis des Lesers zu verbessern',
@@ -116,7 +116,7 @@ const MOCK_CATEGORY_BLOCK_DE: CMS.Model.CategoryBlock.CategoryBlock = {
         },
         {
             id: 'article-2',
-            slug: 'verwalten-ihrer-powerpro-werkzeuge-online',
+            slug: '/hilfe-und-support/garantie-und-reparatur/verwalten-ihrer-powerpro-werkzeuge-online',
             createdAt: '2024-12-12T10:00:00',
             updatedAt: '2024-12-14T16:00:00',
             title: 'Dies ist ein Untertitel, der mehr Details und Kontext bietet, um das Verständnis des Lesers zu verbessern',
@@ -136,7 +136,7 @@ const MOCK_CATEGORY_BLOCK_DE: CMS.Model.CategoryBlock.CategoryBlock = {
         },
         {
             id: 'article-3',
-            slug: 'verwalten-ihrer-powerpro-werkzeuge-online',
+            slug: '/hilfe-und-support/garantie-und-reparatur/verwalten-ihrer-powerpro-werkzeuge-online',
             createdAt: '2024-12-12T10:00:00',
             updatedAt: '2024-12-14T16:00:00',
             title: 'Dies ist ein Untertitel, der mehr Details und Kontext bietet, um das Verständnis des Lesers zu verbessern',
@@ -175,7 +175,7 @@ const MOCK_CATEGORY_BLOCK_PL: CMS.Model.CategoryBlock.CategoryBlock = {
     items: [
         {
             id: 'article-1',
-            slug: 'zarzadzanie-narzedziami-powerpro-online',
+            slug: '/pomoc-i-wsparcie/gwarancja-i-naprawa/zarzadzanie-narzedziami-powerpro-online',
             createdAt: '2024-12-12T10:00:00',
             updatedAt: '2024-12-14T16:00:00',
             title: 'To jest podtytuł, który dostarcza więcej szczegółów i kontekstu, poprawiając zrozumienie czytelnika',
@@ -195,7 +195,7 @@ const MOCK_CATEGORY_BLOCK_PL: CMS.Model.CategoryBlock.CategoryBlock = {
         },
         {
             id: 'article-2',
-            slug: 'zarzadzanie-narzedziami-powerpro-online',
+            slug: '/pomoc-i-wsparcie/gwarancja-i-naprawa/zarzadzanie-narzedziami-powerpro-online',
             createdAt: '2024-12-12T10:00:00',
             updatedAt: '2024-12-14T16:00:00',
             title: 'To jest podtytuł, który dostarcza więcej szczegółów i kontekstu, poprawiając zrozumienie czytelnika',
@@ -215,7 +215,7 @@ const MOCK_CATEGORY_BLOCK_PL: CMS.Model.CategoryBlock.CategoryBlock = {
         },
         {
             id: 'article-3',
-            slug: 'zarzadzanie-narzedziami-powerpro-online',
+            slug: '/pomoc-i-wsparcie/gwarancja-i-naprawa/zarzadzanie-narzedziami-powerpro-online',
             createdAt: '2024-12-12T10:00:00',
             updatedAt: '2024-12-14T16:00:00',
             title: 'To jest podtytuł, który dostarcza więcej szczegółów i kontekstu, poprawiając zrozumienie czytelnika',

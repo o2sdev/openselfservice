@@ -1,15 +1,20 @@
+// 'use client';
 import React from 'react';
 
 import { Link } from '@o2s/ui/components/link';
 
 import { Link as NextLink } from '@/i18n';
 
-import { CategoryListPureProps } from './CategoryList.types';
+import { CategoryPureProps } from './Category.types';
 
-export const CategoryListPure: React.FC<CategoryListPureProps> = ({ ...component }) => {
+const { renderBlocks } = await import('@/blocks/renderBlocks');
+
+export const CategoryPure: React.FC<CategoryPureProps> = ({ slug, accessToken, ...component }) => {
     return (
         <div className="w-full flex flex-col gap-4">
-            CategoryList: {component.id}
+            Category: {component.id}
+            <div>{component.description}</div>
+            <div>{component.components && <div>{renderBlocks(component.components, slug, accessToken)}</div>}</div>
             <ul>
                 {component.items.map((item) => (
                     <li key={item.id}>

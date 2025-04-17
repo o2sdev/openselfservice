@@ -8,6 +8,7 @@ export class CategoryListBlock extends Block.Block {
 
 export class Category {
     id!: string;
+    slug!: string;
     title!: string;
     description!: RichText.RichText;
     icon?: Media.Media;
