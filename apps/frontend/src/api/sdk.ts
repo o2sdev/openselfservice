@@ -5,6 +5,7 @@ import { Notifications } from '@o2s/integrations.mocked/sdk';
 
 import { extendSdk, getSdk } from '@o2s/framework/sdk';
 
+import { articleList } from '@/api/blocks/article-list';
 import { categoryList } from '@/api/blocks/category-list';
 import { faq } from '@/api/blocks/faq';
 import { invoiceList } from '@/api/blocks/invoice-list';
@@ -57,6 +58,7 @@ export const sdk = extendSdk(internalSdk, {
         getUserAccount: userAccount(internalSdk).blocks.getUserAccount,
         getQuickLinks: quickLinks(internalSdk).blocks.getQuickLinks,
         getCategoryList: categoryList(internalSdk).blocks.getCategoryList,
+        getArticleList: articleList(internalSdk).blocks.getArticleList,
         // BLOCK REGISTER
     },
     modules: {

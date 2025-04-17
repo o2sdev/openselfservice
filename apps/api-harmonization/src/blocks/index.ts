@@ -12,4 +12,5 @@ export * as ServiceList from './service-list';
 export * as ServiceDetails from './service-details';
 export * as QuickLinks from './quick-links';
 export * as CategoryList from './category-list';
+export * as ArticleList from './article-list';
 // BLOCK EXPORT

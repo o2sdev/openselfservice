@@ -1,6 +1,8 @@
 import { CMS, Models } from '@o2s/framework/modules';
 
 import {
+    ArticleList,
+    // BLOCK IMPORT
     CategoryList,
     Faq,
     InvoiceList,
@@ -15,7 +17,6 @@ import {
     TicketList,
     TicketRecent,
     UserAccount,
-    // BLOCK IMPORT
 } from '@o2s/api-harmonization/blocks';
 
 export class Init {
@@ -62,6 +63,7 @@ export class PageData {
 }
 
 export type Blocks =
+    | ArticleList.Model.ArticleListBlock['__typename']
     // BLOCK REGISTER
     | TicketList.Model.TicketListBlock['__typename']
     | TicketDetails.Model.TicketDetailsBlock['__typename']
