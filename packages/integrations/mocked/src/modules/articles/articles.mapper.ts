@@ -5,7 +5,7 @@ import { Articles } from '@o2s/framework/modules';
 export const MOCK_ARTICLES_EN: Articles.Model.Article[] = [
     {
         id: 'art-001',
-        slug: 'managing-your-powerpro-tools-online',
+        slug: '/managing-your-powerpro-tools-online',
         createdAt: '2023-05-12T08:30:00Z',
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Managing Your PowerPro Tools Online',
@@ -49,7 +49,7 @@ export const MOCK_ARTICLES_EN: Articles.Model.Article[] = [
 export const MOCK_ARTICLES_DE: Articles.Model.Article[] = [
     {
         id: 'art-001',
-        slug: 'verwalten-ihrer-powerpro-werkzeuge-online',
+        slug: '/verwalten-ihrer-powerpro-werkzeuge-online',
         createdAt: '2023-05-12T08:30:00Z',
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Verwalten Ihrer PowerPro-Werkzeuge online',
@@ -93,7 +93,7 @@ export const MOCK_ARTICLES_DE: Articles.Model.Article[] = [
 export const MOCK_ARTICLES_PL: Articles.Model.Article[] = [
     {
         id: 'art-001',
-        slug: 'zarzadzanie-narzedziami-powerpro-online',
+        slug: '/zarzadzanie-narzedziami-powerpro-online',
         createdAt: '2023-05-12T08:30:00Z',
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Zarządzanie narzędziami PowerPro online',
