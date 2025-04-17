@@ -4,15 +4,15 @@ import React, { Suspense } from 'react';
 import { Container } from '@/components/Container/Container';
 import { Loading } from '@/components/Loading/Loading';
 
-import { {{ pascalCase name }} } from './{{ pascalCase name }}.server';
+import { CategoryList } from './CategoryList.server';
 
-export interface {{ pascalCase name }}RendererProps {
+export interface CategoryListRendererProps {
     slug: string[];
     id: string;
     accessToken: string;
 }
 
-export const {{ pascalCase name }}Renderer: React.FC<{{ pascalCase name }}RendererProps> = ({ id, accessToken }) => {
+export const CategoryListRenderer: React.FC<CategoryListRendererProps> = ({ id, accessToken }) => {
     const locale = useLocale();
 
     return (
@@ -27,7 +27,7 @@ export const {{ pascalCase name }}Renderer: React.FC<{{ pascalCase name }}Render
                 </>
             }
         >
-            <{{ pascalCase name }} id={id} accessToken={accessToken} locale={locale} />
+            <CategoryList id={id} accessToken={accessToken} locale={locale} />
         </Suspense>
     );
 };

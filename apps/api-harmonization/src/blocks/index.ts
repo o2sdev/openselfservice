@@ -10,4 +10,6 @@ export * as UserAccount from './user-account';
 export * as TicketRecent from './ticket-recent';
 export * as ServiceList from './service-list';
 export * as ServiceDetails from './service-details';
+export * as QuickLinks from './quick-links';
+export * as CategoryList from './category-list';
 // BLOCK EXPORT

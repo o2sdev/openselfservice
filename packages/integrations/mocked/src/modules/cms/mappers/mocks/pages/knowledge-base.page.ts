@@ -34,11 +34,11 @@ export const PAGE_HELP_AND_SUPPORT_EN: CMS.Model.Page.Page = {
                 },
                 {
                     __typename: 'CategoryListBlock',
-                    id: 'quick-links-1',
+                    id: 'category-list-1',
                 },
                 {
                     __typename: 'ArticleListBlock',
-                    id: 'quick-links-1',
+                    id: 'article-list-1',
                 },
                 {
                     __typename: 'FaqBlock',
@@ -84,11 +84,11 @@ export const PAGE_HELP_AND_SUPPORT_DE: CMS.Model.Page.Page = {
                 },
                 {
                     __typename: 'CategoryListBlock',
-                    id: 'quick-links-1',
+                    id: 'category-list-1',
                 },
                 {
                     __typename: 'ArticleListBlock',
-                    id: 'quick-links-1',
+                    id: 'article-list-1',
                 },
                 {
                     __typename: 'FaqBlock',
@@ -134,11 +134,11 @@ export const PAGE_HELP_AND_SUPPORT_PL: CMS.Model.Page.Page = {
                 },
                 {
                     __typename: 'CategoryListBlock',
-                    id: 'quick-links-1',
+                    id: 'category-list-1',
                 },
                 {
                     __typename: 'ArticleListBlock',
-                    id: 'quick-links-1',
+                    id: 'article-list-1',
                 },
                 {
                     __typename: 'FaqBlock',

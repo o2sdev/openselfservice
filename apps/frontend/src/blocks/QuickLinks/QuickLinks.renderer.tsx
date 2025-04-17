@@ -4,15 +4,15 @@ import React, { Suspense } from 'react';
 import { Container } from '@/components/Container/Container';
 import { Loading } from '@/components/Loading/Loading';
 
-import { {{ pascalCase name }} } from './{{ pascalCase name }}.server';
+import { QuickLinks } from './QuickLinks.server';
 
-export interface {{ pascalCase name }}RendererProps {
+export interface QuickLinksRendererProps {
     slug: string[];
     id: string;
     accessToken: string;
 }
 
-export const {{ pascalCase name }}Renderer: React.FC<{{ pascalCase name }}RendererProps> = ({ id, accessToken }) => {
+export const QuickLinksRenderer: React.FC<QuickLinksRendererProps> = ({ id, accessToken }) => {
     const locale = useLocale();
 
     return (
@@ -27,7 +27,7 @@ export const {{ pascalCase name }}Renderer: React.FC<{{ pascalCase name }}Render
                 </>
             }
         >
-            <{{ pascalCase name }} id={id} accessToken={accessToken} locale={locale} />
+            <QuickLinks id={id} accessToken={accessToken} locale={locale} />
         </Suspense>
     );
 };

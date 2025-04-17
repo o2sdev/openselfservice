@@ -1,18 +1,21 @@
 import { CMS, Models } from '@o2s/framework/modules';
 
 import {
+    CategoryList,
     Faq,
     InvoiceList,
     NotificationDetails,
     NotificationList,
     PaymentsHistory,
     PaymentsSummary,
+    QuickLinks,
     ServiceDetails,
     ServiceList,
     TicketDetails,
     TicketList,
     TicketRecent,
     UserAccount,
+    // BLOCK IMPORT
 } from '@o2s/api-harmonization/blocks';
 
 export class Init {
@@ -59,6 +62,7 @@ export class PageData {
 }
 
 export type Blocks =
+    // BLOCK REGISTER
     | TicketList.Model.TicketListBlock['__typename']
     | TicketDetails.Model.TicketDetailsBlock['__typename']
     | NotificationList.Model.NotificationListBlock['__typename']
@@ -70,4 +74,6 @@ export type Blocks =
     | UserAccount.Model.UserAccountBlock['__typename']
     | TicketRecent.Model.TicketRecentBlock['__typename']
     | ServiceList.Model.ServiceListBlock['__typename']
-    | ServiceDetails.Model.ServiceDetailsBlock['__typename'];
+    | ServiceDetails.Model.ServiceDetailsBlock['__typename']
+    | QuickLinks.Model.QuickLinksBlock['__typename']
+    | CategoryList.Model.CategoryListBlock['__typename'];

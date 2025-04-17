@@ -5,18 +5,21 @@ import { Notifications } from '@o2s/integrations.mocked/sdk';
 
 import { extendSdk, getSdk } from '@o2s/framework/sdk';
 
+import { categoryList } from '@/api/blocks/category-list';
 import { faq } from '@/api/blocks/faq';
 import { invoiceList } from '@/api/blocks/invoice-list';
 import { notificationDetails } from '@/api/blocks/notification-details';
 import { notificationList } from '@/api/blocks/notification-list';
 import { paymentsHistory } from '@/api/blocks/payments-history';
 import { paymentsSummary } from '@/api/blocks/payments-summary';
+import { quickLinks } from '@/api/blocks/quick-links';
 import { serviceDetails } from '@/api/blocks/service-details';
 import { serviceList } from '@/api/blocks/services-list';
 import { ticketDetails } from '@/api/blocks/ticket-details';
 import { ticketList } from '@/api/blocks/ticket-list';
 import { ticketRecent } from '@/api/blocks/ticket-recent';
 import { userAccount } from '@/api/blocks/user-account';
+// BLOCK IMPORT
 import { loginPage } from '@/api/modules/login-page';
 import { notFoundPage } from '@/api/modules/not-found-page';
 import { organizations } from '@/api/modules/organizations';
@@ -52,6 +55,9 @@ export const sdk = extendSdk(internalSdk, {
         getServiceDetails: serviceDetails(internalSdk).blocks.getServiceDetails,
         getFaq: faq(internalSdk).blocks.getFaq,
         getUserAccount: userAccount(internalSdk).blocks.getUserAccount,
+        getQuickLinks: quickLinks(internalSdk).blocks.getQuickLinks,
+        getCategoryList: categoryList(internalSdk).blocks.getCategoryList,
+        // BLOCK REGISTER
     },
     modules: {
         getInit: page(internalSdk).modules.getInit,

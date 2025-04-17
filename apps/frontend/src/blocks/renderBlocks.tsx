@@ -3,18 +3,22 @@ import React from 'react';
 
 import { CMS } from '@o2s/framework/modules';
 
+import { CategoryListRenderer } from '@/blocks/CategoryList/CategoryList.renderer';
 import { FaqRenderer } from '@/blocks/Faq/Faq.renderer';
 import { InvoiceListRenderer } from '@/blocks/InvoiceList/InvoiceList.renderer';
 import { NotificationDetailsRenderer } from '@/blocks/NotificationDetails/NotificationDetails.renderer';
 import { NotificationListRenderer } from '@/blocks/NotificationList/NotificationList.renderer';
 import { PaymentsHistoryRenderer } from '@/blocks/PaymentsHistory/PaymentsHistory.renderer';
 import { PaymentsSummaryRenderer } from '@/blocks/PaymentsSummary/PaymentsSummary.renderer';
+import { QuickLinksRenderer } from '@/blocks/QuickLinks/QuickLinks.renderer';
 import { ServiceDetailsRenderer } from '@/blocks/ServiceDetails/ServiceDetails.renderer';
 import { ServiceListRenderer } from '@/blocks/ServiceList/ServiceList.renderer';
 import { TicketDetailsRenderer } from '@/blocks/TicketDetails/TicketDetails.renderer';
 import { TicketListRenderer } from '@/blocks/TicketList/TicketList.renderer';
 import { TicketRecentRenderer } from '@/blocks/TicketRecent/TicketRecent.renderer';
 import { UserAccountRenderer } from '@/blocks/UserAccount/UserAccount.renderer';
+
+// BLOCK IMPORT
 
 export const renderBlocks = (blocks: CMS.Model.Page.SlotBlock[], slug: string[], accessToken: string) => {
     return blocks.map((block) => {
@@ -45,6 +49,11 @@ export const renderBlocks = (blocks: CMS.Model.Page.SlotBlock[], slug: string[],
                 return <ServiceListRenderer key={block.id} id={block.id} accessToken={accessToken} />;
             case 'ServiceDetailsBlock':
                 return <ServiceDetailsRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
+            case 'QuickLinksBlock':
+                return <QuickLinksRenderer key={block.id} slug={slug} id={block.id} accessToken={accessToken} />;
+            case 'CategoryListBlock':
+                return <CategoryListRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
+            // BLOCK REGISTER
         }
     });
 };

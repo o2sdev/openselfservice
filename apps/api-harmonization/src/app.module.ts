@@ -22,12 +22,14 @@ import {
 
 import { configuration } from '@o2s/api-harmonization/config/configuration';
 
+import { CategoryListBlockModule } from '@o2s/api-harmonization/blocks/category-list/category-list.module';
 import { FaqBlockModule } from '@o2s/api-harmonization/blocks/faq/faq.module';
 import { InvoiceListBlockModule } from '@o2s/api-harmonization/blocks/invoice-list/invoice-list.module';
 import { NotificationDetailsBlockModule } from '@o2s/api-harmonization/blocks/notification-details/notification-details.module';
 import { NotificationListBlockModule } from '@o2s/api-harmonization/blocks/notification-list/notification-list.module';
 import { PaymentsHistoryBlockModule } from '@o2s/api-harmonization/blocks/payments-history/payments-history.module';
 import { PaymentsSummaryBlockModule } from '@o2s/api-harmonization/blocks/payments-summary/payments-summary.module';
+import { QuickLinksBlockModule } from '@o2s/api-harmonization/blocks/quick-links/quick-links.module';
 import { ServiceDetailsBlockModule } from '@o2s/api-harmonization/blocks/service-details/service-details.module';
 import { ServiceListBlockModule } from '@o2s/api-harmonization/blocks/service-list/service-list.module';
 import { TicketDetailsBlockModule } from '@o2s/api-harmonization/blocks/ticket-details/ticket-details.module';
@@ -89,6 +91,8 @@ import { SurveyjsModule } from './modules/surveyjs-forms/surveyjs.module';
         TicketRecentBlockModule.register(AppConfig),
         ServiceListBlockModule.register(AppConfig),
         ServiceDetailsBlockModule.register(AppConfig),
+        QuickLinksBlockModule.register(AppConfig),
+        CategoryListBlockModule.register(AppConfig),
         // BLOCK REGISTER
     ],
     providers: [
