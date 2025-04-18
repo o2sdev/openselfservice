@@ -1,5 +1,17 @@
 import { Media, Pagination } from '@/utils/models';
 
+export class Category {
+    id!: string;
+    slug!: string;
+    createdAt!: string;
+    updatedAt!: string;
+    title!: string;
+    description!: string;
+    icon?: Media.Media;
+}
+
+export type Categories = Pagination.Paginated<Category>;
+
 export class Article {
     id!: string;
     slug!: string;

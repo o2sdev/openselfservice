@@ -373,7 +373,9 @@ export class CmsService implements CMS.Service {
         });
     }
 
-    getArticleListBlock(_options: CMS.Request.GetCmsEntryParams): Observable<CMS.Model.CategoryBlock.CategoryBlock> {
+    getArticleListBlock(
+        _options: CMS.Request.GetCmsEntryParams,
+    ): Observable<CMS.Model.ArticleListBlock.ArticleListBlock> {
         throw new NotImplementedException();
     }
 

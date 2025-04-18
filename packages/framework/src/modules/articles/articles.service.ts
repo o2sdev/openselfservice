@@ -7,7 +7,10 @@ import * as Articles from './';
 export abstract class ArticlesService {
     protected constructor(..._services: unknown[]) {}
 
-    abstract getArticle(options: Articles.Request.GetArticleParams): Observable<Articles.Model.Article | undefined>;
+    abstract getCategory(options: Articles.Request.GetCategoryParams): Observable<Articles.Model.Category>;
+    abstract getCategoryList(options: Articles.Request.GetCategoryListQuery): Observable<Articles.Model.Categories>;
+
+    abstract getArticle(options: Articles.Request.GetArticleParams): Observable<Articles.Model.Article>;
     abstract getArticleList(
         options: Articles.Request.GetArticleListQuery,
         body: Articles.Request.GetArticleListBody,

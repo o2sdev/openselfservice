@@ -1,11 +1,10 @@
-import { Article } from '@/modules/articles/articles.model';
 import { SlotBlock } from '@/modules/cms/models/page.model';
-import { Block, Media, RichText } from '@/utils/models';
+import { Block } from '@/utils/models';
 
 export class CategoryBlock extends Block.Block {
-    title!: string;
-    description!: RichText.RichText;
-    icon?: Media.Media;
+    categoryId!: string;
     components?: SlotBlock[];
-    items!: Omit<Article, 'sections'>[];
+    parent?: {
+        slug: string;
+    };
 }

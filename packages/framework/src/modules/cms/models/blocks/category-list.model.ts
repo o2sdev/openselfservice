@@ -1,15 +1,10 @@
-import { Block, Media, RichText } from '@/utils/models';
+import { Block, RichText } from '@/utils/models';
 
 export class CategoryListBlock extends Block.Block {
     title!: string;
     description?: RichText.RichText;
-    items!: Category[];
-}
-
-export class Category {
-    id!: string;
-    slug!: string;
-    title!: string;
-    description!: RichText.RichText;
-    icon?: Media.Media;
+    categoryIds?: string[];
+    parent?: {
+        slug: string;
+    };
 }

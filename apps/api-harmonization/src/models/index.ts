@@ -6,3 +6,4 @@ export * as Users from './users';
 export * as Resources from './resources';
 export * as Products from './products';
 export * as Organizations from './organizations';
+export * as Articles from './articles';

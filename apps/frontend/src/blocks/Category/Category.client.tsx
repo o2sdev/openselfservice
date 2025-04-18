@@ -17,7 +17,7 @@ export const CategoryPure: React.FC<CategoryPureProps> = ({ slug, accessToken, .
                 <div>{component.description}</div>
                 <div>{component.components && <div>{renderBlocks(component.components, slug, accessToken)}</div>}</div>
                 <ul>
-                    {component.items.map((item) => (
+                    {component.items.data.map((item) => (
                         <li key={item.id}>
                             <Link asChild>
                                 <NextLink href={item.slug}>{item.title}</NextLink>
