@@ -12,6 +12,7 @@ import {
     Cache,
     Invoices,
     Notifications,
+    Orders,
     Organizations,
     Products,
     Resources,
@@ -71,6 +72,7 @@ import { SurveyjsModule } from './modules/surveyjs-forms/surveyjs.module';
         Articles.Module.register(AppConfig),
         Search.Module.register(AppConfig),
         Products.Module.register(AppConfig),
+        Orders.Module.register(AppConfig),
 
         PageModule.register(AppConfig),
         RoutesModule.register(AppConfig),
