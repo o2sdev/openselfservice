@@ -8,6 +8,7 @@ export const MOCK_ARTICLES_EN: Articles.Model.Article[] = [
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Managing Your PowerPro Tools Online',
         lead: 'Learn how to efficiently manage your PowerPro tools through our self-service portal available 24/7.',
+        tags: ['tag1', 'tag2'],
         image: {
             url: 'https://example.com/images/tool-management.jpg',
             alt: '',
@@ -52,6 +53,7 @@ export const MOCK_ARTICLES_DE: Articles.Model.Article[] = [
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Verwalten Ihrer PowerPro-Werkzeuge online',
         lead: 'Erfahren Sie, wie Sie Ihre PowerPro-Werkzeuge effizient über unser rund um die Uhr verfügbares Selbstbedienungsportal verwalten können.',
+        tags: ['tag1', 'tag2'],
         image: {
             url: 'https://example.com/images/tool-management.jpg',
             alt: '',
@@ -96,6 +98,7 @@ export const MOCK_ARTICLES_PL: Articles.Model.Article[] = [
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Zarządzanie narzędziami PowerPro online',
         lead: 'Dowiedz się, jak efektywnie zarządzać narzędziami PowerPro za pomocą naszego portalu samoobsługowego dostępnego 24/7.',
+        tags: ['tag1', 'tag2'],
         image: {
             url: 'https://example.com/images/tool-management.jpg',
             alt: '',

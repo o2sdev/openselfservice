@@ -10,6 +10,7 @@ export const mapArticlesFromSearch = (
         slug: hit.slug,
         title: hit.title,
         lead: hit.lead,
+        tags: hit.tags,
         createdAt: hit.createdAt,
         updatedAt: hit.updatedAt,
         image: hit.image,

@@ -19,7 +19,7 @@ export class ArticlesService implements Articles.Service {
     }
 
     getArticle(params: Articles.Request.GetArticleParams): Observable<Articles.Model.Article> {
-        return of(mapArticle(params.locale, params.id)).pipe(responseDelay());
+        return of(mapArticle(params.locale, params.slug)).pipe(responseDelay());
     }
 
     getArticleList(

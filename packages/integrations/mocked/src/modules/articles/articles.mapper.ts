@@ -49,11 +49,11 @@ export const mapCategories = (
     };
 };
 
-export const mapArticle = (locale: string, id: string): Articles.Model.Article => {
+export const mapArticle = (locale: string, slug: string): Articles.Model.Article => {
     const articles = locale === 'pl' ? MOCK_ARTICLES_PL : locale === 'de' ? MOCK_ARTICLES_DE : MOCK_ARTICLES_EN;
-    const article = articles.find((article) => article.id === id);
+    const article = articles.find((article) => article.slug === slug);
     if (!article) {
-        throw new NotFoundException(`Article with id ${id} not found`);
+        throw new NotFoundException(`Article with slug ${slug} not found`);
     }
     return article;
 };

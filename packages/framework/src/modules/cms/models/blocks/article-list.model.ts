@@ -4,5 +4,9 @@ import { Block, RichText } from '@/utils/models';
 export class ArticleListBlock extends Block.Block {
     title!: string;
     description!: RichText.RichText;
-    items!: Omit<Article, 'sections'>[];
+    categoryId?: string;
+    articleIds?: string[];
+    parent?: {
+        slug: string;
+    };
 }

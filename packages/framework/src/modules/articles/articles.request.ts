@@ -14,7 +14,7 @@ export class GetCategoryListQuery extends PaginationQuery {
 }
 
 export class GetArticleParams {
-    id!: string;
+    slug!: string;
     locale!: string;
 }
 

@@ -4,264 +4,30 @@ const MOCK_ARTICLE_LIST_BLOCK_EN: CMS.Model.ArticleListBlock.ArticleListBlock = 
     id: 'article-list-1',
     title: 'Explore How-To Guides',
     description: 'A short description of the heading H2',
-    items: [
-        {
-            id: 'article-1',
-            slug: '/help-and-support/warranty-and-repair/managing-your-powerpro-tools-online',
-            createdAt: '2024-12-12T10:00:00',
-            updatedAt: '2024-12-14T16:00:00',
-            title: 'This is a subtitle that provides more detail and context, enhancing the reader’s understanding',
-            lead: 'A brief yet informative line of text that expands on the main title, providing additional context or clarity to engage the reader.',
-            image: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
-                alt: '',
-            },
-            thumbnail: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
-                alt: '',
-            },
-            category: {
-                id: 'warranty-and-repair',
-                title: 'Warranty & Repair',
-            },
-        },
-        {
-            id: 'article-2',
-            slug: '/help-and-support/warranty-and-repair/managing-your-powerpro-tools-online',
-            createdAt: '2024-12-12T10:00:00',
-            updatedAt: '2024-12-14T16:00:00',
-            title: 'This is a subtitle that provides more detail and context, enhancing the reader’s understanding',
-            lead: 'A brief yet informative line of text that expands on the main title, providing additional context or clarity to engage the reader.',
-            image: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
-                alt: '',
-            },
-            thumbnail: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
-                alt: '',
-            },
-            category: {
-                id: 'warranty-and-repair',
-                title: 'Warranty & Repair',
-            },
-        },
-        {
-            id: 'article-3',
-            slug: '/help-and-support/warranty-and-repair/managing-your-powerpro-tools-online',
-            createdAt: '2024-12-12T10:00:00',
-            updatedAt: '2024-12-14T16:00:00',
-            title: 'This is a subtitle that provides more detail and context, enhancing the reader’s understanding',
-            lead: 'A brief yet informative line of text that expands on the main title, providing additional context or clarity to engage the reader.',
-            image: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
-                alt: '',
-            },
-            thumbnail: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
-                alt: '',
-            },
-            category: {
-                id: 'warranty-and-repair',
-                title: 'Warranty & Repair',
-            },
-        },
-        {
-            id: 'article-4',
-            slug: 'managing-your-powerpro-tools-online',
-            createdAt: '2024-12-12T10:00:00',
-            updatedAt: '2024-12-14T16:00:00',
-            title: 'This is a subtitle that provides more detail and context, enhancing the reader’s understanding',
-            lead: 'A brief yet informative line of text that expands on the main title, providing additional context or clarity to engage the reader.',
-            image: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
-                alt: '',
-            },
-            thumbnail: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
-                alt: '',
-            },
-            category: {
-                id: 'warranty-and-repair',
-                title: 'Warranty & Repair',
-            },
-        },
-    ],
+    categoryId: 'warranty-and-repair',
+    parent: {
+        slug: '/help-and-support',
+    },
 };
 
 const MOCK_ARTICLE_LIST_BLOCK_DE: CMS.Model.ArticleListBlock.ArticleListBlock = {
     id: 'article-list-1',
     title: 'Entdecke Anleitungen',
     description: 'Eine kurze Beschreibung der H2-Überschrift',
-    items: [
-        {
-            id: 'article-1',
-            slug: '/hilfe-und-support/garantie-und-reparatur/verwalten-ihrer-powerpro-werkzeuge-online',
-            createdAt: '2024-12-12T10:00:00',
-            updatedAt: '2024-12-14T16:00:00',
-            title: 'Dies ist ein Untertitel, der mehr Details und Kontext bietet und das Verständnis des Lesers verbessert',
-            lead: 'Eine kurze, aber informative Textzeile, die den Haupttitel erweitert, zusätzlichen Kontext oder Klarheit bietet und den Leser einbindet.',
-            image: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
-                alt: '',
-            },
-            thumbnail: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
-                alt: '',
-            },
-            category: {
-                id: 'warranty-and-repair',
-                title: 'Garantie & Reparatur',
-            },
-        },
-        {
-            id: 'article-2',
-            slug: '/hilfe-und-support/garantie-und-reparatur/verwalten-ihrer-powerpro-werkzeuge-online',
-            createdAt: '2024-12-12T10:00:00',
-            updatedAt: '2024-12-14T16:00:00',
-            title: 'Dies ist ein Untertitel, der mehr Details und Kontext bietet und das Verständnis des Lesers verbessert',
-            lead: 'Eine kurze, aber informative Textzeile, die den Haupttitel erweitert, zusätzlichen Kontext oder Klarheit bietet und den Leser einbindet.',
-            image: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
-                alt: '',
-            },
-            thumbnail: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
-                alt: '',
-            },
-            category: {
-                id: 'warranty-and-repair',
-                title: 'Garantie & Reparatur',
-            },
-        },
-        {
-            id: 'article-3',
-            slug: '/hilfe-und-support/garantie-und-reparatur/verwalten-ihrer-powerpro-werkzeuge-online',
-            createdAt: '2024-12-12T10:00:00',
-            updatedAt: '2024-12-14T16:00:00',
-            title: 'Dies ist ein Untertitel, der mehr Details und Kontext bietet und das Verständnis des Lesers verbessert',
-            lead: 'Eine kurze, aber informative Textzeile, die den Haupttitel erweitert, zusätzlichen Kontext oder Klarheit bietet und den Leser einbindet.',
-            image: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
-                alt: '',
-            },
-            thumbnail: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
-                alt: '',
-            },
-            category: {
-                id: 'warranty-and-repair',
-                title: 'Garantie & Reparatur',
-            },
-        },
-        {
-            id: 'article-4',
-            slug: 'verwalten-ihrer-powerpro-werkzeuge-online',
-            createdAt: '2024-12-12T10:00:00',
-            updatedAt: '2024-12-14T16:00:00',
-            title: 'Dies ist ein Untertitel, der mehr Details und Kontext bietet und das Verständnis des Lesers verbessert',
-            lead: 'Eine kurze, aber informative Textzeile, die den Haupttitel erweitert, zusätzlichen Kontext oder Klarheit bietet und den Leser einbindet.',
-            image: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
-                alt: '',
-            },
-            thumbnail: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
-                alt: '',
-            },
-            category: {
-                id: 'warranty-and-repair',
-                title: 'Garantie & Reparatur',
-            },
-        },
-    ],
+    categoryId: 'warranty-and-repair',
+    parent: {
+        slug: '/hilfe-und-support',
+    },
 };
 
 const MOCK_ARTICLE_LIST_BLOCK_PL: CMS.Model.ArticleListBlock.ArticleListBlock = {
     id: 'article-list-1',
     title: 'Przeglądaj poradniki',
     description: 'Krótki opis nagłówka H2',
-    items: [
-        {
-            id: 'article-1',
-            slug: '/pomoc-i-wsparcie/gwarancja-i-naprawa/zarzadzanie-narzedziami-powerpro-online',
-            createdAt: '2024-12-12T10:00:00',
-            updatedAt: '2024-12-14T16:00:00',
-            title: 'To jest podtytuł, który dostarcza więcej szczegółów i kontekstu, poprawiając zrozumienie czytelnika',
-            lead: 'Krótka, ale treściwa linijka tekstu, która rozwija główny tytuł, zapewnia dodatkowy kontekst lub jasność, aby zaangażować czytelnika.',
-            image: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
-                alt: '',
-            },
-            thumbnail: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
-                alt: '',
-            },
-            category: {
-                id: 'warranty-and-repair',
-                title: 'Gwarancja i naprawa',
-            },
-        },
-        {
-            id: 'article-2',
-            slug: '/pomoc-i-wsparcie/gwarancja-i-naprawa/zarzadzanie-narzedziami-powerpro-online',
-            createdAt: '2024-12-12T10:00:00',
-            updatedAt: '2024-12-14T16:00:00',
-            title: 'To jest podtytuł, który dostarcza więcej szczegółów i kontekstu, poprawiając zrozumienie czytelnika',
-            lead: 'Krótka, ale treściwa linijka tekstu, która rozwija główny tytuł, zapewnia dodatkowy kontekst lub jasność, aby zaangażować czytelnika.',
-            image: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
-                alt: '',
-            },
-            thumbnail: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
-                alt: '',
-            },
-            category: {
-                id: 'warranty-and-repair',
-                title: 'Gwarancja i naprawa',
-            },
-        },
-        {
-            id: 'article-3',
-            slug: '/pomoc-i-wsparcie/gwarancja-i-naprawa/zarzadzanie-narzedziami-powerpro-online',
-            createdAt: '2024-12-12T10:00:00',
-            updatedAt: '2024-12-14T16:00:00',
-            title: 'To jest podtytuł, który dostarcza więcej szczegółów i kontekstu, poprawiając zrozumienie czytelnika',
-            lead: 'Krótka, ale treściwa linijka tekstu, która rozwija główny tytuł, zapewnia dodatkowy kontekst lub jasność, aby zaangażować czytelnika.',
-            image: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
-                alt: '',
-            },
-            thumbnail: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
-                alt: '',
-            },
-            category: {
-                id: 'warranty-and-repair',
-                title: 'Gwarancja i naprawa',
-            },
-        },
-        {
-            id: 'article-4',
-            slug: 'zarzadzanie-narzedziami-powerpro-online',
-            createdAt: '2024-12-12T10:00:00',
-            updatedAt: '2024-12-14T16:00:00',
-            title: 'To jest podtytuł, który dostarcza więcej szczegółów i kontekstu, poprawiając zrozumienie czytelnika',
-            lead: 'Krótka, ale treściwa linijka tekstu, która rozwija główny tytuł, zapewnia dodatkowy kontekst lub jasność, aby zaangażować czytelnika.',
-            image: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
-                alt: '',
-            },
-            thumbnail: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
-                alt: '',
-            },
-            category: {
-                id: 'warranty-and-repair',
-                title: 'Gwarancja i naprawa',
-            },
-        },
-    ],
+    categoryId: 'warranty-and-repair',
+    parent: {
+        slug: '/pomoc-i-wsparcie',
+    },
 };
 
 export const mapArticleListBlock = (locale: string): CMS.Model.ArticleListBlock.ArticleListBlock => {

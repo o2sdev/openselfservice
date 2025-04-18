@@ -1,4 +1,4 @@
-import { CMS } from '../../models';
+import { Articles, CMS } from '../../models';
 
 import { Breadcrumb, Init, Page } from './page.model';
 
@@ -34,6 +34,38 @@ export const mapPage = (
             template: page.template,
             hasOwnTitle: page.hasOwnTitle,
             breadcrumbs: mapBreadcrumbs(page),
+        },
+    };
+};
+export const mapArticle = (article: Articles.Model.Article, mainLocale: string): Page => {
+    return {
+        meta: {
+            seo: {
+                title: article.title,
+                description: article.lead,
+                keywords: article.tags,
+                image: article.image,
+                noIndex: false,
+                noFollow: false,
+            },
+            locales: [mainLocale],
+        },
+        data: {
+            alternativeUrls: {},
+            template: {
+                __typename: 'OneColumnTemplate',
+                slots: {
+                    main: [
+                        {
+                            __typename: 'ArticleBlock',
+                            ...article,
+                        },
+                    ],
+                },
+            },
+            hasOwnTitle: false,
+            // TODO: handle breadcrumbs
+            breadcrumbs: [],
         },
     };
 };

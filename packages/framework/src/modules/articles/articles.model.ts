@@ -19,6 +19,7 @@ export class Article {
     updatedAt!: string;
     title!: string;
     lead!: string;
+    tags!: string[];
     image?: Media.Media;
     thumbnail?: Media.Media;
     sections!: ArticleSection[];

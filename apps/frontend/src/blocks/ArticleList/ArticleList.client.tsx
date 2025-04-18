@@ -12,7 +12,7 @@ export const ArticleListPure: React.FC<ArticleListPureProps> = ({ ...component }
             <div className="border p-4">
                 ArticleList: {component.id}
                 <ul>
-                    {component.items.map((item) => (
+                    {component.items.data.map((item) => (
                         <li key={item.id}>
                             <Link asChild>
                                 <NextLink href={item.slug}>{item.title}</NextLink>
