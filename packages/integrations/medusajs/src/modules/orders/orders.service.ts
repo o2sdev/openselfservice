@@ -158,7 +158,6 @@ export class OrdersService extends Orders.Service {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     private handleHttpError(error: any) {
-        console.log(typeof error);
         if (error.status === 404) {
             throw new NotFoundException(`Orders not found`);
         } else if (error.status === 403) {
