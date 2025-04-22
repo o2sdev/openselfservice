@@ -24,6 +24,7 @@ export class OrdersService extends Orders.Service {
     private readonly medusaPublishableApiKey: string;
     private readonly medusaAdminApiKey: string;
     private readonly sdk: Medusa;
+    private readonly defaultCurrency: string;
 
     constructor(
         private readonly config: ConfigService,
@@ -35,6 +36,7 @@ export class OrdersService extends Orders.Service {
         this.medusaPublishableApiKey = this.config.get('MEDUSAJS_PUBLISHABLE_API_KEY') || '';
         this.medusaAdminApiKey = this.config.get('MEDUSAJS_ADMIN_API_KEY') || '';
         this.logLevel = this.config.get('LOG_LEVEL') || '';
+        this.defaultCurrency = this.config.get('DEFAULT_CURRENCY') || '';
 
         if (!this.medusaBaseUrl) {
             throw new Error('MEDUSAJS_BASE_URL is not defined');
@@ -44,6 +46,9 @@ export class OrdersService extends Orders.Service {
         }
         if (!this.medusaAdminApiKey) {
             throw new Error('MEDUSAJS_ADMIN_API_KEY is not defined');
+        }
+        if (!this.defaultCurrency) {
+            throw new Error('DEFAULT_CURRENCY is not defined');
         }
 
         this.sdk = new Medusa({
@@ -67,7 +72,7 @@ export class OrdersService extends Orders.Service {
             this.sdk.admin.order
                 .retrieve(params.id)
                 .then((order) => {
-                    return mapOrder(order.order);
+                    return mapOrder(order.order, this.defaultCurrency);
                 })
                 .catch((error) => {
                     throw error;
@@ -109,7 +114,7 @@ export class OrdersService extends Orders.Service {
             this.sdk.admin.order
                 .list(params)
                 .then((orders) => {
-                    return mapOrders(orders);
+                    return mapOrders(orders, this.defaultCurrency);
                 })
                 .catch((error) => {
                     throw error;
@@ -153,6 +158,7 @@ export class OrdersService extends Orders.Service {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     private handleHttpError(error: any) {
+        console.log(typeof error);
         if (error.status === 404) {
             throw new NotFoundException(`Orders not found`);
         } else if (error.status === 403) {
