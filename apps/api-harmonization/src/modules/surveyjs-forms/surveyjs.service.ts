@@ -13,8 +13,8 @@ import { Auth, CMS } from '@o2s/framework/modules';
 
 import { decodeAuthorizationToken, extractUserRolesFromJwt } from '@o2s/api-harmonization/utils/auth';
 
-import { SurveyJs, SurveyResult } from './models/surveyjs.model';
-import { mapSurveyJsRequest } from './surveyjs.mapper';
+import { mapSurveyJS_Integration, mapSurveyJsRequest } from './surveyjs.mapper';
+import { SurveyJSLibraryJsonSchema, SurveyJs, SurveyResult } from './surveyjs.model';
 import { SurveyJsQuery, SurveyJsSubmitPayload } from './surveyjs.request';
 
 @Injectable()
@@ -42,9 +42,9 @@ export class SurveyjsService {
                     throw new BadRequestException('Survey has no surveyId');
                 }
                 const URL = `${this.surveyjsHost}/Survey/getSurvey?surveyId=${survey.surveyId}`;
-                return this.httpClient.get<SurveyJs>(URL).pipe(
+                return this.httpClient.get<SurveyJSLibraryJsonSchema>(URL).pipe(
                     map(({ data }) => {
-                        return data;
+                        return mapSurveyJS_Integration(data);
                     }),
                 );
             }),

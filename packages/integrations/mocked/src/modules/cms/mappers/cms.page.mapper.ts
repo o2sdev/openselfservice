@@ -89,6 +89,10 @@ const PAGE_DASHBOARD_EN: CMS.Model.Page.Page = {
 
             bottom: [
                 {
+                    __typename: 'SurveyJsBlock',
+                    id: 'survey-1-id',
+                },
+                {
                     __typename: 'FaqBlock',
                     id: 'faq-1',
                 },

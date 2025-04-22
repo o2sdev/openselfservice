@@ -1,6 +1,4 @@
-import { Block } from '@/utils/models';
-
-export class SurveyBlock extends Block.Block {
+export class Survey {
     code!: string;
     surveyId!: string;
     requiredRoles!: string[];

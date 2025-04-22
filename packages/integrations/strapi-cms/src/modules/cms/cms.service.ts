@@ -21,7 +21,7 @@ import { mapResourceDetailsBlock } from './mappers/blocks/cms.resource-details.m
 import { mapResourceListBlock } from './mappers/blocks/cms.resource-list.mapper';
 import { mapServiceDetailsBlock } from './mappers/blocks/cms.service-details.mapper';
 import { mapServiceListBlock } from './mappers/blocks/cms.service-list.mapper';
-import { mapSurveyBlock } from './mappers/blocks/cms.survey.mapper';
+import { mapSurveyJsBlock } from './mappers/blocks/cms.surveyjs-block.mapper';
 import { mapTicketDetailsBlock } from './mappers/blocks/cms.ticket-details.mapper';
 import { mapTicketListBlock } from './mappers/blocks/cms.ticket-list.mapper';
 import { mapTicketRecentBlock } from './mappers/blocks/cms.ticket-recent.mapper';
@@ -33,6 +33,7 @@ import { mapLoginPage } from './mappers/cms.login-page.mapper';
 import { mapNotFoundPage } from './mappers/cms.not-found-page.mapper';
 import { mapOrganizationList } from './mappers/cms.organization-list.mapper';
 import { mapPage } from './mappers/cms.page.mapper';
+import { mapSurvey } from './mappers/cms.survey.mapper';
 import { PageFragment } from '@/generated/strapi';
 import { Service as GraphqlService } from '@/modules/graphql';
 
@@ -286,6 +287,20 @@ export class CmsService implements CMS.Service {
         });
     }
 
+    getSurvey(options: CMS.Request.GetCmsSurveyParams) {
+        const key = `survey-${options.code}`;
+        return this.getCachedBlock(key, () => {
+            const survey = this.graphqlService.getSurvey({
+                code: options.code,
+            });
+            return forkJoin([survey]).pipe(
+                map(([survey]) => {
+                    return mapSurvey(survey.data);
+                }),
+            );
+        });
+    }
+
     getFaqBlock(options: CMS.Request.GetCmsEntryParams) {
         const key = `faq-component-${options.id}-${options.locale}`;
         return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapFaqBlock)));
@@ -371,17 +386,8 @@ export class CmsService implements CMS.Service {
         return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapServiceDetailsBlock)));
     }
 
-    getSurvey(options: CMS.Request.GetCmsSurveyParams) {
-        const key = `survey-${options.code}`;
-        return this.getCachedBlock(key, () => {
-            const survey = this.graphqlService.getSurvey({
-                code: options.code,
-            });
-            return forkJoin([survey]).pipe(
-                map(([survey]) => {
-                    return mapSurveyBlock(survey.data);
-                }),
-            );
-        });
+    getSurveyJsBlock(options: CMS.Request.GetCmsEntryParams) {
+        const key = `survey-js-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapSurveyJsBlock)));
     }
 }

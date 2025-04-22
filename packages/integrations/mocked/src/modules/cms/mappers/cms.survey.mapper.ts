@@ -1,17 +1,15 @@
 import { CMS } from '@o2s/framework/modules';
 
-const MOCK_SURVEY_1: CMS.Model.SurveyBlock.SurveyBlock = {
-    id: 'survey-1',
-    code: 'survey-1',
-    surveyId: '0c4ec859-42a5-4dca-b927-67176964d5d5',
+const MOCK_SURVEY_1: CMS.Model.Survey.Survey = {
+    code: 'complaint',
+    surveyId: 'cb0dd450-ce17-498d-a847-2567ecbf5dd1',
     surveyType: 'survey',
     submitDestination: ['surveyjs'],
     requiredRoles: ['selfservice_user'],
-    postId: '3f239eb4-522f-4366-911a-79a2df649524',
+    postId: '9e10a78e-a3ce-4618-9c4e-484c95d0bd84',
 };
 
-const MOCK_SURVEY_2: CMS.Model.SurveyBlock.SurveyBlock = {
-    id: 'survey-2',
+const MOCK_SURVEY_2: CMS.Model.Survey.Survey = {
     code: 'survey-2',
     surveyId: 'b8498eb4-ddab-4815-9133-130301fdcef3',
     surveyType: 'survey',
@@ -22,6 +20,6 @@ const MOCK_SURVEY_2: CMS.Model.SurveyBlock.SurveyBlock = {
 
 const MOCK_SURVEYS = [MOCK_SURVEY_1, MOCK_SURVEY_2];
 
-export const mapSurveyBlock = (code: string): CMS.Model.SurveyBlock.SurveyBlock => {
+export const mapSurvey = (code: string): CMS.Model.Survey.Survey => {
     return MOCK_SURVEYS.find((survey) => survey.code === code) ?? MOCK_SURVEY_1;
 };
