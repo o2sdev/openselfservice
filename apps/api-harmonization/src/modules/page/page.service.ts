@@ -104,7 +104,7 @@ export class PageService {
         );
     };
 
-    private processArticle = (article: Articles.Model.Article, query: GetPageQuery, headers: AppHeaders) => {
+    private processArticle = (article: Articles.Model.Article, _query: GetPageQuery, headers: AppHeaders) => {
         // TODO: handle alternative pages
         return mapArticle(article, headers['x-locale']);
     };

@@ -3,6 +3,7 @@ import React from 'react';
 
 import { CMS } from '@o2s/framework/modules';
 
+import { ArticleRenderer } from '@/blocks/Article/Article.renderer';
 import { ArticleListRenderer } from '@/blocks/ArticleList/ArticleList.renderer';
 import { CategoryRenderer } from '@/blocks/Category/Category.renderer';
 import { CategoryListRenderer } from '@/blocks/CategoryList/CategoryList.renderer';
@@ -59,6 +60,8 @@ export const renderBlocks = (blocks: CMS.Model.Page.SlotBlock[], slug: string[],
                 return <ArticleListRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
             case 'CategoryBlock':
                 return <CategoryRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
+            case 'ArticleBlock':
+                return <ArticleRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
             // BLOCK REGISTER
         }
     });

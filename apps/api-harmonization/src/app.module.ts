@@ -23,6 +23,7 @@ import {
 import { configuration } from '@o2s/api-harmonization/config/configuration';
 
 import { ArticleListBlockModule } from '@o2s/api-harmonization/blocks/article-list/article-list.module';
+import { ArticleBlockModule } from '@o2s/api-harmonization/blocks/article/article.module';
 import { CategoryListBlockModule } from '@o2s/api-harmonization/blocks/category-list/category-list.module';
 import { CategoryBlockModule } from '@o2s/api-harmonization/blocks/category/category.module';
 import { FaqBlockModule } from '@o2s/api-harmonization/blocks/faq/faq.module';
@@ -97,6 +98,7 @@ import { SurveyjsModule } from './modules/surveyjs-forms/surveyjs.module';
         CategoryListBlockModule.register(AppConfig),
         ArticleListBlockModule.register(AppConfig),
         CategoryBlockModule.register(AppConfig),
+        ArticleBlockModule.register(AppConfig),
         // BLOCK REGISTER
     ],
     providers: [

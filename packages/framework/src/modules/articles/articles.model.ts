@@ -22,11 +22,12 @@ export class Article {
     tags!: string[];
     image?: Media.Media;
     thumbnail?: Media.Media;
-    sections!: ArticleSection[];
     category!: {
         id: string;
         title: string;
     };
+    author?: Author;
+    sections!: ArticleSection[];
 }
 
 export type ArticleSection = ArticleSectionText | ArticleSectionImage;
@@ -45,9 +46,15 @@ export class ArticleSectionText extends ArticleSectionCommon {
 
 export class ArticleSectionImage extends ArticleSectionCommon {
     __typename!: 'ArticleSectionImage';
-    url!: string;
-    alt?: string;
+    image!: Media.Media;
     caption?: string;
 }
 
 export type Articles = Pagination.Paginated<Article>;
+
+export class Author {
+    name!: string;
+    position?: string;
+    email?: string;
+    avatar?: string;
+}

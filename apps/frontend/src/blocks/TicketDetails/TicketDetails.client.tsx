@@ -89,7 +89,7 @@ export const TicketDetailsPure: React.FC<TicketDetailsPureProps> = ({ ...compone
                                             <div className="flex items-center gap-2">
                                                 <Avatar>
                                                     <AvatarImage src={comment.author.avatar} />
-                                                    <AvatarFallback>{comment.author.initials}</AvatarFallback>
+                                                    <AvatarFallback name={comment.author.name}/>
                                                 </Avatar>
 
                                                 <div className="flex flex-col gap-1">
@@ -133,7 +133,7 @@ export const TicketDetailsPure: React.FC<TicketDetailsPureProps> = ({ ...compone
                                                 <div className="flex items-center gap-2">
                                                     <Avatar>
                                                         <AvatarImage src={attachment.author.avatar} />
-                                                        <AvatarFallback>{attachment.author.initials}</AvatarFallback>
+                                                        <AvatarFallback name={attachment.author.name}/>
                                                     </Avatar>
 
                                                     <div className="flex flex-col gap-1">

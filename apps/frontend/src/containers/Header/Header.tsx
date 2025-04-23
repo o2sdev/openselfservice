@@ -1,12 +1,13 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
-import Image from 'next/image';
 import React from 'react';
 
 import { Link } from '@o2s/ui/components/link';
 
 import { Link as NextLink } from '@/i18n';
+
+import { Image } from '@/components/Image/Image';
 
 import { LocaleSwitcher } from '../Auth/Toolbar/LocaleSwitcher';
 import { ContextSwitcher } from '../ContextSwitcher/ContextSwitcher';

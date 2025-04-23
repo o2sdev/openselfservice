@@ -1,7 +1,6 @@
 'use client';
 
 import { useLocale } from 'next-intl';
-import Image from 'next/image';
 import React, { JSX } from 'react';
 
 import { Models } from '@o2s/framework/modules';
@@ -20,6 +19,8 @@ import { Typography } from '@o2s/ui/components/typography';
 import { cn } from '@o2s/ui/lib/utils';
 
 import { Link as NextLink } from '@/i18n';
+
+import { Image } from '@/components/Image/Image';
 
 import { FooterProps } from './Footer.types';
 

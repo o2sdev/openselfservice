@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import { AuthError } from 'next-auth';
 import { setRequestLocale } from 'next-intl/server';
-import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import React from 'react';
 import { providerMap } from 'src/auth.providers';
@@ -16,6 +15,8 @@ import { routing } from '@/i18n/routing';
 
 import { AuthLayout } from '@/containers/Auth/AuthLayout/AuthLayout';
 import { FormValues, SignInForm } from '@/containers/Auth/SignInForm';
+
+import { Image } from '@/components/Image/Image';
 
 interface Props {
     params: Promise<{

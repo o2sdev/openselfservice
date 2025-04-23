@@ -5,6 +5,7 @@ import { Notifications } from '@o2s/integrations.mocked/sdk';
 
 import { extendSdk, getSdk } from '@o2s/framework/sdk';
 
+import { article } from '@/api/blocks/article';
 import { articleList } from '@/api/blocks/article-list';
 import { category } from '@/api/blocks/category';
 import { categoryList } from '@/api/blocks/category-list';
@@ -61,6 +62,7 @@ export const sdk = extendSdk(internalSdk, {
         getCategoryList: categoryList(internalSdk).blocks.getCategoryList,
         getArticleList: articleList(internalSdk).blocks.getArticleList,
         getCategory: category(internalSdk).blocks.getCategory,
+        getArticle: article(internalSdk).blocks.getArticle,
         // BLOCK REGISTER
     },
     modules: {

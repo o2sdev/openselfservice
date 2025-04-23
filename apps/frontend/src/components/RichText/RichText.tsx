@@ -1,11 +1,13 @@
 import Markdown, { MarkdownToJSX } from 'markdown-to-jsx';
-import Image, { ImageProps } from 'next/image';
 import NextLink, { LinkProps } from 'next/link';
 import React, { FC, ReactNode } from 'react';
 
 import { Link } from '@o2s/ui/components/link';
 import { Typography, TypographyProps } from '@o2s/ui/components/typography';
 import { cn } from '@o2s/ui/lib/utils';
+
+import { Image } from '@/components/Image/Image';
+import { ImageProps } from '@/components/Image/Image.types';
 
 import { RichTextProps } from './RichText.types';
 

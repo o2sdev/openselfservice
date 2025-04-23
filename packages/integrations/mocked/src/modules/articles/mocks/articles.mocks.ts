@@ -1,9 +1,11 @@
 import { Articles } from '@o2s/framework/modules';
 
+import { markdownContent } from './articles.content.mocks';
+
 export const MOCK_ARTICLES_EN: Articles.Model.Article[] = [
     {
         id: 'art-001',
-        slug: '/managing-your-powerpro-tools-online',
+        slug: '/help-and-support/warranty-and-repair/managing-your-powerpro-tools-online',
         createdAt: '2023-05-12T08:30:00Z',
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Managing Your PowerPro Tools Online',
@@ -21,6 +23,11 @@ export const MOCK_ARTICLES_EN: Articles.Model.Article[] = [
             id: 'warranty-and-repair',
             title: 'Warranty & Repair',
         },
+        author: {
+            name: 'Lando Norris',
+            position: 'Content Creator',
+            avatar: 'https://example.com/images/user-001.jpg',
+        },
         sections: [
             {
                 id: 'sect-001-1',
@@ -36,8 +43,30 @@ export const MOCK_ARTICLES_EN: Articles.Model.Article[] = [
                 createdAt: '2023-05-12T09:15:00Z',
                 updatedAt: '2023-06-15T14:25:00Z',
                 __typename: 'ArticleSectionImage',
-                url: 'https://example.com/images/dashboard-view.jpg',
-                alt: 'PowerPro dashboard view',
+                image: {
+                    url: 'https://picsum.photos/400/400',
+                    alt: 'PowerPro dashboard view',
+                },
+                caption:
+                    'The PowerPro tool management dashboard provides a comprehensive overview of your registered tools.',
+            },
+            {
+                id: 'sect-001-3',
+                createdAt: '2023-05-12T08:30:00Z',
+                updatedAt: '2023-06-15T14:25:00Z',
+                __typename: 'ArticleSectionText',
+                title: 'Getting Started',
+                content: markdownContent,
+            },
+            {
+                id: 'sect-001-4',
+                createdAt: '2023-05-12T09:15:00Z',
+                updatedAt: '2023-06-15T14:25:00Z',
+                __typename: 'ArticleSectionImage',
+                image: {
+                    url: 'https://picsum.photos/1200/800',
+                    alt: 'PowerPro dashboard view',
+                },
                 caption:
                     'The PowerPro tool management dashboard provides a comprehensive overview of your registered tools.',
             },
@@ -48,7 +77,7 @@ export const MOCK_ARTICLES_EN: Articles.Model.Article[] = [
 export const MOCK_ARTICLES_DE: Articles.Model.Article[] = [
     {
         id: 'art-001',
-        slug: '/verwalten-ihrer-powerpro-werkzeuge-online',
+        slug: '/hilfe-und-support/garantie-und-reparatur/verwalten-ihrer-powerpro-werkzeuge-online',
         createdAt: '2023-05-12T08:30:00Z',
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Verwalten Ihrer PowerPro-Werkzeuge online',
@@ -81,8 +110,10 @@ export const MOCK_ARTICLES_DE: Articles.Model.Article[] = [
                 createdAt: '2023-05-12T09:15:00Z',
                 updatedAt: '2023-06-15T14:25:00Z',
                 __typename: 'ArticleSectionImage',
-                url: 'https://example.com/images/dashboard-view.jpg',
-                alt: 'PowerPro-Dashboard-Ansicht',
+                image: {
+                    url: 'https://picsum.photos/1200/800',
+                    alt: 'PowerPro-Dashboard-Ansicht',
+                },
                 caption:
                     'Das PowerPro-Werkzeugverwaltungs-Dashboard bietet einen umfassenden Überblick über Ihre registrierten Werkzeuge.',
             },
@@ -93,7 +124,7 @@ export const MOCK_ARTICLES_DE: Articles.Model.Article[] = [
 export const MOCK_ARTICLES_PL: Articles.Model.Article[] = [
     {
         id: 'art-001',
-        slug: '/zarzadzanie-narzedziami-powerpro-online',
+        slug: '/pomoc-i-wsparcie/gwarancja-i-naprawa/zarzadzanie-narzedziami-powerpro-online',
         createdAt: '2023-05-12T08:30:00Z',
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Zarządzanie narzędziami PowerPro online',
@@ -126,8 +157,10 @@ export const MOCK_ARTICLES_PL: Articles.Model.Article[] = [
                 createdAt: '2023-05-12T09:15:00Z',
                 updatedAt: '2023-06-15T14:25:00Z',
                 __typename: 'ArticleSectionImage',
-                url: 'https://example.com/images/dashboard-view.jpg',
-                alt: 'Widok panelu PowerPro',
+                image: {
+                    url: 'https://picsum.photos/1200/800',
+                    alt: 'Widok panelu PowerPro',
+                },
                 caption:
                     'Panel zarządzania narzędziami PowerPro zapewnia kompleksowy przegląd zarejestrowanych narzędzi.',
             },

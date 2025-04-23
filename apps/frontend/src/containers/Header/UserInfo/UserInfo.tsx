@@ -16,14 +16,7 @@ export const UserInfo = ({ user, userInfo }: UserInfoProps) => {
             <NextLink href={userInfo.url}>
                 <Avatar>
                     <AvatarImage src={user.image || ''} />
-                    <AvatarFallback variant="secondary">
-                        <Typography variant="small">
-                            {user.name
-                                ?.split(' ')
-                                .map((name) => name.charAt(0).toUpperCase())
-                                .join('')}
-                        </Typography>
-                    </AvatarFallback>
+                    <AvatarFallback name={user.name} variant="secondary"></AvatarFallback>
                 </Avatar>
             </NextLink>
         </Link>
