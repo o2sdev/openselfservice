@@ -26,6 +26,9 @@ export class OrdersService extends Orders.Service {
     private readonly sdk: Medusa;
     private readonly defaultCurrency: string;
 
+    private readonly additionalOrderListFields =
+        '+total,+subtotal,+tax_total,+discount_total,+shipping_total,+shipping_subtotal,+tax_total,+items.product.*';
+    private readonly additionalOrderDetailsFields = 'items.product.*';
     constructor(
         private readonly config: ConfigService,
         protected httpClient: HttpService,
@@ -68,9 +71,13 @@ export class OrdersService extends Orders.Service {
             throw new UnauthorizedException('Unauthorized');
         }
 
+        const query: HttpTypes.SelectParams = {
+            fields: this.additionalOrderDetailsFields,
+        };
+
         return from(
             this.sdk.admin.order
-                .retrieve(params.id)
+                .retrieve(params.id, query)
                 .then((order) => {
                     return mapOrder(order.order, this.defaultCurrency);
                 })
@@ -108,6 +115,7 @@ export class OrdersService extends Orders.Service {
             created_at: this.createMedusaDateFilter(query.dateFrom, query.dateTo),
             customer_id: customerId,
             order: query.sort ? query.sort : undefined,
+            fields: this.additionalOrderListFields,
         };
 
         return from(

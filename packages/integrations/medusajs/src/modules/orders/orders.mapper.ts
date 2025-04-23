@@ -23,7 +23,9 @@ export const mapOrder = (order: HttpTypes.AdminOrder, defaultCurrency: string): 
         customerId: order.customer_id || undefined,
         createdAt: order.created_at.toString(),
         updatedAt: order.updated_at.toString(),
-        items: order?.items ? order.items.map((item) => mapOrderItem(item, order?.currency_code ?? defaultCurrency)) : [],
+        items: order?.items
+            ? order.items.map((item) => mapOrderItem(item, order?.currency_code ?? defaultCurrency))
+            : [],
         shippingAddress: mapAddress(order.shipping_address),
         billingAddress: mapAddress(order.billing_address),
         shippingMethods: order.shipping_methods
@@ -45,7 +47,11 @@ const mapOrderItem = (item: HttpTypes.AdminOrderLineItem, currency: string): Ord
     };
 };
 
-const mapProduct = (item: HttpTypes.AdminProduct | undefined, unitPrice: number, currency: string): Products.Model.Product | undefined => {
+const mapProduct = (
+    item: HttpTypes.AdminProduct | undefined,
+    unitPrice: number,
+    currency: string,
+): Products.Model.Product | undefined => {
     if (!item) return undefined;
     return {
         id: item.id,
