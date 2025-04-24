@@ -7,6 +7,10 @@ export const MOCK_CATEGORIES_EN: Articles.Model.Category[] = [
         createdAt: '2023-05-12T08:30:00Z',
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Warranty & Repair',
+        icon: {
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-1.svg',
+            alt: '',
+        },
         description:
             'The Warranty & Repair category offers FAQs, troubleshooting guides, step-by-step tutorials, and support contacts to help users resolve issues and navigate services efficiently.',
         parent: {
@@ -23,6 +27,10 @@ export const MOCK_CATEGORIES_DE: Articles.Model.Category[] = [
         createdAt: '2023-05-12T08:30:00Z',
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Garantie & Reparatur',
+        icon: {
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-1.svg',
+            alt: '',
+        },
         description:
             'Die Kategorie Garantie & Reparatur bietet FAQs, Fehlerbehebungsanleitungen, Schritt-für-Schritt-Tutorials und Support-Kontakte, um Benutzern zu helfen, Probleme effizient zu lösen und Services zu navigieren.',
         parent: {
@@ -39,6 +47,10 @@ export const MOCK_CATEGORIES_PL: Articles.Model.Category[] = [
         createdAt: '2023-05-12T08:30:00Z',
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Gwarancja i Naprawa',
+        icon: {
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-1.svg',
+            alt: '',
+        },
         description:
             'Kategoria Gwarancja i Naprawa oferuje FAQ, poradniki rozwiązywania problemów, szczegółowe instrukcje oraz dane kontaktowe wsparcia technicznego, aby pomóc użytkownikom efektywnie rozwiązywać problemy i korzystać z usług serwisowych.',
         parent: {
