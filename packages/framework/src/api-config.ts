@@ -7,6 +7,7 @@ import {
     Cache,
     Invoices,
     Notifications,
+    Orders,
     Organizations,
     Products,
     Resources,
@@ -74,6 +75,11 @@ export interface ApiConfig {
         products: {
             service: typeof Products.Service;
             controller?: typeof Products.Controller;
+            imports?: Type[];
+        };
+        orders: {
+            service: typeof Orders.Service;
+            controller?: typeof Orders.Controller;
             imports?: Type[];
         };
     };

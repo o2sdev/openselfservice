@@ -6,6 +6,7 @@ import { Service as CacheService } from './modules/cache';
 import { Service as CmsService } from './modules/cms';
 import { Service as InvoicesService } from './modules/invoices';
 import { Service as NotificationsService } from './modules/notifications';
+import { Service as OrdersService } from './modules/orders';
 import { Service as OrganizationsService } from './modules/organizations';
 import { Service as ProductsService } from './modules/products';
 import { Service as ResourceService } from './modules/resources';
@@ -40,6 +41,9 @@ export const Config: Partial<ApiConfig['integrations']> = {
     },
     invoices: {
         service: InvoicesService,
+    },
+    orders: {
+        service: OrdersService,
     },
     cache: {
         service: CacheService,
