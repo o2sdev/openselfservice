@@ -89,10 +89,6 @@ const PAGE_DASHBOARD_EN: CMS.Model.Page.Page = {
 
             bottom: [
                 {
-                    __typename: 'SurveyJsBlock',
-                    id: 'survey-1-id',
-                },
-                {
                     __typename: 'FaqBlock',
                     id: 'faq-1',
                 },
@@ -1096,8 +1092,236 @@ const PAGE_SERVICE_LIST_PL: CMS.Model.Page.Page = {
     updatedAt: '2025-01-01',
 };
 
+const PAGE_CONTACT_US_EN: CMS.Model.Page.Page = {
+    id: '9',
+    slug: '/contact-us',
+    locale: 'en',
+    seo: {
+        noIndex: false,
+        noFollow: false,
+        title: 'Contact us',
+        description: 'Contact us',
+        keywords: [],
+        image: {
+            url: 'https://picsum.photos/150',
+            width: 150,
+            height: 150,
+            alternativeText: 'Placeholder',
+        },
+    },
+    hasOwnTitle: false,
+    parent: {
+        slug: '/',
+        seo: {
+            title: 'Dashboard',
+        },
+    },
+    template: {
+        __typename: 'OneColumnTemplate',
+        slots: {
+            main: [
+                {
+                    __typename: 'SurveyJsBlock',
+                    id: 'survey-1',
+                },
+            ],
+        },
+    },
+    updatedAt: '2025-01-01',
+};
+
+const PAGE_CONTACT_US_DE: CMS.Model.Page.Page = {
+    id: '9',
+    slug: '/kontaktiere-uns',
+    locale: 'de',
+    seo: {
+        noIndex: false,
+        noFollow: false,
+        title: 'Kontaktiere uns',
+        description: 'Kontaktiere uns',
+        keywords: [],
+        image: {
+            url: 'https://picsum.photos/150',
+            width: 150,
+            height: 150,
+            alternativeText: 'Placeholder',
+        },
+    },
+    hasOwnTitle: false,
+    parent: {
+        slug: '/',
+        seo: {
+            title: 'Startseite',
+        },
+    },
+    template: {
+        __typename: 'OneColumnTemplate',
+        slots: {
+            main: [
+                {
+                    __typename: 'SurveyJsBlock',
+                    id: 'survey-1',
+                },
+            ],
+        },
+    },
+    updatedAt: '2025-01-01',
+};
+
+const PAGE_CONTACT_US_PL: CMS.Model.Page.Page = {
+    id: '9',
+    slug: '/skontaktuj-sie-z-nami',
+    locale: 'pl',
+    seo: {
+        noIndex: false,
+        noFollow: false,
+        title: 'Skontaktuj się z nami',
+        description: 'Skontaktuj się z nami',
+        keywords: [],
+        image: {
+            url: 'https://picsum.photos/150',
+            width: 150,
+            height: 150,
+            alternativeText: 'Placeholder',
+        },
+    },
+    hasOwnTitle: false,
+    parent: {
+        slug: '/',
+        seo: {
+            title: 'Strona główna',
+        },
+    },
+    template: {
+        __typename: 'OneColumnTemplate',
+        slots: {
+            main: [
+                {
+                    __typename: 'SurveyJsBlock',
+                    id: 'survey-1',
+                },
+            ],
+        },
+    },
+    updatedAt: '2025-01-01',
+};
+
+const PAGE_COMPLAINT_FORM_EN: CMS.Model.Page.Page = {
+    id: '10',
+    slug: '/submit-complaint',
+    locale: 'en',
+    seo: {
+        noIndex: false,
+        noFollow: false,
+        title: 'Submit a complaint',
+        description: 'Submit a complaint',
+        keywords: [],
+        image: {
+            url: 'https://picsum.photos/150',
+            width: 150,
+            height: 150,
+            alternativeText: 'Placeholder',
+        },
+    },
+    hasOwnTitle: false,
+    parent: {
+        slug: '/',
+        seo: {
+            title: 'Dashboard',
+        },
+    },
+    template: {
+        __typename: 'OneColumnTemplate',
+        slots: {
+            main: [
+                {
+                    __typename: 'SurveyJsBlock',
+                    id: 'survey-2',
+                },
+            ],
+        },
+    },
+    updatedAt: '2025-01-01',
+};
+
+const PAGE_COMPLAINT_FORM_DE: CMS.Model.Page.Page = {
+    id: '10',
+    slug: '/einreichen-reklamacji',
+    locale: 'de',
+    seo: {
+        noIndex: false,
+        noFollow: false,
+        title: 'Beschwerdeformular einreichen',
+        description: 'Beschwerdeformular einreichen',
+        keywords: [],
+        image: {
+            url: 'https://picsum.photos/150',
+            width: 150,
+            height: 150,
+            alternativeText: 'Placeholder',
+        },
+    },
+    hasOwnTitle: false,
+    parent: {
+        slug: '/',
+        seo: {
+            title: 'Startseite',
+        },
+    },
+    template: {
+        __typename: 'OneColumnTemplate',
+        slots: {
+            main: [
+                {
+                    __typename: 'SurveyJsBlock',
+                    id: 'survey-2',
+                },
+            ],
+        },
+    },
+    updatedAt: '2025-01-01',
+};
+
+const PAGE_COMPLAINT_FORM_PL: CMS.Model.Page.Page = {
+    id: '10',
+    slug: '/wyslij-reklamacje',
+    locale: 'pl',
+    seo: {
+        noIndex: false,
+        noFollow: false,
+        title: 'Wyslij reklamacje',
+        description: 'Wyslij reklamacje',
+        keywords: [],
+        image: {
+            url: 'https://picsum.photos/150',
+            width: 150,
+            height: 150,
+            alternativeText: 'Placeholder',
+        },
+    },
+    hasOwnTitle: false,
+    parent: {
+        slug: '/',
+        seo: {
+            title: 'Strona główna',
+        },
+    },
+    template: {
+        __typename: 'OneColumnTemplate',
+        slots: {
+            main: [
+                {
+                    __typename: 'SurveyJsBlock',
+                    id: 'survey-2',
+                },
+            ],
+        },
+    },
+    updatedAt: '2025-01-01',
+};
+
 const PAGE_SERVICE_DETAILS_EN: CMS.Model.Page.Page = {
-    id: '3',
+    id: '11',
     slug: '/services/(.+)',
     locale: 'en',
     seo: {
@@ -1145,7 +1369,7 @@ const PAGE_SERVICE_DETAILS_EN: CMS.Model.Page.Page = {
 };
 
 const PAGE_SERVICE_DETAILS_DE: CMS.Model.Page.Page = {
-    id: '3',
+    id: '11',
     slug: '/dienstleistungen/(.+)',
     locale: 'de',
     seo: {
@@ -1193,7 +1417,7 @@ const PAGE_SERVICE_DETAILS_DE: CMS.Model.Page.Page = {
 };
 
 const PAGE_SERVICE_DETAILS_PL: CMS.Model.Page.Page = {
-    id: '3',
+    id: '11',
     slug: '/uslugi/(.+)',
     locale: 'pl',
     seo: {
@@ -1339,6 +1563,21 @@ export const mapPage = (slug: string, locale: string): CMS.Model.Page.Page | und
                 slug: `/uslugi/${slug.match(/(.+)\/(.+)/)?.[2]}`,
                 updatedAt: '2025-01-01',
             };
+
+        case '/contact-us':
+            return PAGE_CONTACT_US_EN;
+        case '/kontaktiere-uns':
+            return PAGE_CONTACT_US_DE;
+        case '/skontaktuj-sie-z-nami':
+            return PAGE_CONTACT_US_PL;
+
+        case '/submit-complaint':
+            return PAGE_COMPLAINT_FORM_EN;
+        case '/einreichen-reklamacji':
+            return PAGE_COMPLAINT_FORM_DE;
+        case '/wyslij-reklamacje':
+            return PAGE_COMPLAINT_FORM_PL;
+
         default:
             return undefined;
     }
@@ -1357,6 +1596,8 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_USER_ACCOUNT_PL,
                 PAGE_SERVICE_LIST_PL,
                 PAGE_SERVICE_DETAILS_PL,
+                PAGE_CONTACT_US_PL,
+                PAGE_COMPLAINT_FORM_PL,
             ];
         case 'de':
             return [
@@ -1369,6 +1610,8 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_USER_ACCOUNT_DE,
                 PAGE_SERVICE_LIST_DE,
                 PAGE_SERVICE_DETAILS_DE,
+                PAGE_CONTACT_US_DE,
+                PAGE_COMPLAINT_FORM_DE,
             ];
         case 'en':
             return [
@@ -1381,6 +1624,8 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_USER_ACCOUNT_EN,
                 PAGE_SERVICE_LIST_EN,
                 PAGE_SERVICE_DETAILS_EN,
+                PAGE_CONTACT_US_EN,
+                PAGE_COMPLAINT_FORM_EN,
             ];
         default:
             return [];
@@ -1416,6 +1661,12 @@ export const getAlternativePages = (id: string, slug: string, locale: string): C
         PAGE_SERVICE_DETAILS_EN,
         PAGE_SERVICE_DETAILS_DE,
         PAGE_SERVICE_DETAILS_PL,
+        PAGE_CONTACT_US_EN,
+        PAGE_CONTACT_US_DE,
+        PAGE_CONTACT_US_PL,
+        PAGE_COMPLAINT_FORM_EN,
+        PAGE_COMPLAINT_FORM_DE,
+        PAGE_COMPLAINT_FORM_PL,
     ]
         .filter((page) => page.id === id)
         .map((page) => mapPage(page.slug, locale)!)

@@ -1,10 +1,7 @@
 import React, { JSX } from 'react';
 import { ReactElementFactory, SurveyQuestion } from 'survey-react-ui';
 
-import { Label } from '@o2s/ui/components/label';
-import { Textarea } from '@o2s/ui/components/textarea';
 import { Typography } from '@o2s/ui/components/typography';
-import { cn } from '@o2s/ui/lib/utils';
 
 class CustomSurveyQuestion extends SurveyQuestion {
     renderElement(): JSX.Element {
@@ -32,11 +29,11 @@ class CustomSurveyQuestion extends SurveyQuestion {
                     aria-describedby={question.ariaDescribedBy}
                     aria-expanded={question.ariaExpanded === null ? undefined : question.ariaExpanded === 'true'}
                 >
-                    {errorsAboveQuestion}
                     {headerTop}
+                    {errorsAboveQuestion}
                     {questionContent}
-                    {headerBottom}
                     {errorsBelowQuestion}
+                    {headerBottom}
                 </div>
             </>
         );
@@ -68,26 +65,6 @@ class CustomSurveyQuestion extends SurveyQuestion {
                         {this.renderLocString(error.locText)}
                     </Typography>
                 ))}
-            </div>
-        );
-    }
-
-    renderComment() {
-        return (
-            <div className={'whitespace-normal'}>
-                <div className="grid w-full gap-2">
-                    <Label htmlFor={this.question.commentId}>{this.question.commentText}</Label>
-                    <Textarea
-                        id={this.question.commentId}
-                        name={this.question.commentId}
-                        disabled={this.question.isInputReadOnly}
-                        placeholder={this.question.renderedPlaceholder}
-                        onChange={(value) => {
-                            this.question.comment = value.target.value;
-                        }}
-                        className={cn(this.question.errors?.length && 'border-destructive')}
-                    />
-                </div>
             </div>
         );
     }

@@ -150,6 +150,6 @@ export class CmsService implements CMS.Service {
     }
 
     getSurveyJsBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapSurveyJsBlock(options.locale)).pipe(responseDelay());
+        return of(mapSurveyJsBlock(options.locale, options.id)).pipe(responseDelay());
     }
 }

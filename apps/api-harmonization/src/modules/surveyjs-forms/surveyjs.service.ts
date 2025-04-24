@@ -13,7 +13,7 @@ import { Auth, CMS } from '@o2s/framework/modules';
 
 import { decodeAuthorizationToken, extractUserRolesFromJwt } from '@o2s/api-harmonization/utils/auth';
 
-import { mapSurveyJS_Integration, mapSurveyJsRequest } from './surveyjs.mapper';
+import { mapSurveyJS, mapSurveyJsRequest } from './surveyjs.mapper';
 import { SurveyJSLibraryJsonSchema, SurveyJs, SurveyResult } from './surveyjs.model';
 import { SurveyJsQuery, SurveyJsSubmitPayload } from './surveyjs.request';
 
@@ -44,7 +44,7 @@ export class SurveyjsService {
                 const URL = `${this.surveyjsHost}/Survey/getSurvey?surveyId=${survey.surveyId}`;
                 return this.httpClient.get<SurveyJSLibraryJsonSchema>(URL).pipe(
                     map(({ data }) => {
-                        return mapSurveyJS_Integration(data);
+                        return mapSurveyJS(data);
                     }),
                 );
             }),

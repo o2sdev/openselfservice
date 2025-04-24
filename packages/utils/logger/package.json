@@ -18,7 +18,8 @@
     },
     "dependencies": {
         "jwt-decode": "^4.0.0",
-        "winston": "^3.17.0"
+        "winston": "^3.17.0",
+        "axios": "^1.7.7"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",
@@ -28,7 +29,8 @@
         "eslint": "^9.24.0",
         "prettier": "^3.5.3",
         "tsc-alias": "^1.8.15",
-        "typescript": "^5.8.3"
+        "typescript": "^5.8.3",
+        "eslint-config-prettier": "^10.1.2"
     },
     "peerDependencies": {
         "@nestjs/axios": "^4",

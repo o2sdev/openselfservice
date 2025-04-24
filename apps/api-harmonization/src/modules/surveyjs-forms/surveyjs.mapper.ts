@@ -14,7 +14,7 @@ export const mapSurveyJsRequest = (
     };
 };
 
-export const mapSurveyJS_Integration = (data: SurveyJSLibraryJsonSchema): SurveyJs => {
+export const mapSurveyJS = (data: SurveyJSLibraryJsonSchema): SurveyJs => {
     return {
         schema: {
             ...data,

@@ -8,36 +8,32 @@ import { cn } from '@o2s/ui/lib/utils';
 class CustomSurveyQuestionBoolean extends SurveyQuestionBoolean {
     renderElement() {
         return (
-            <div className={'whitespace-normal'}>
-                <ToggleGroup
-                    type="single"
-                    value={
-                        this.question.booleanValue === null ? undefined : this.question.booleanValue ? 'true' : 'false'
-                    }
-                    size="default"
-                    variant="outline"
-                    disabled={this.isDisplayMode}
-                    onValueChange={(value) => {
-                        this.question.booleanValue = value === 'true';
-                    }}
-                    className={cn(this.question.errors?.length && 'border-destructive', 'justify-start')}
-                    aria-label={this.question.title}
-                    aria-invalid={!!this.question.errors?.length}
+            <ToggleGroup
+                type="single"
+                value={this.question.booleanValue === null ? undefined : this.question.booleanValue ? 'true' : 'false'}
+                size="default"
+                variant="outline"
+                disabled={this.isDisplayMode}
+                onValueChange={(value) => {
+                    this.question.booleanValue = value === 'true';
+                }}
+                className={cn(this.question.errors?.length && 'border-destructive', 'justify-start')}
+                aria-label={this.question.title}
+                aria-invalid={!!this.question.errors?.length}
+            >
+                <ToggleGroupItem
+                    value={this.question.swapOrder ? 'true' : 'false'}
+                    className={cn(this.question.errors?.length && 'border-destructive', 'justify-center min-w-12')}
                 >
-                    <ToggleGroupItem
-                        value={this.question.swapOrder ? 'true' : 'false'}
-                        className={cn(this.question.errors?.length && 'border-destructive', 'justify-center min-w-12')}
-                    >
-                        {this.renderLocString(this.question.locLabelLeft)}
-                    </ToggleGroupItem>
-                    <ToggleGroupItem
-                        value={this.question.swapOrder ? 'false' : 'true'}
-                        className={cn(this.question.errors?.length && 'border-destructive', 'justify-center min-w-12')}
-                    >
-                        {this.renderLocString(this.question.locLabelRight)}
-                    </ToggleGroupItem>
-                </ToggleGroup>
-            </div>
+                    {this.renderLocString(this.question.locLabelLeft)}
+                </ToggleGroupItem>
+                <ToggleGroupItem
+                    value={this.question.swapOrder ? 'false' : 'true'}
+                    className={cn(this.question.errors?.length && 'border-destructive', 'justify-center min-w-12')}
+                >
+                    {this.renderLocString(this.question.locLabelRight)}
+                </ToggleGroupItem>
+            </ToggleGroup>
         );
     }
 }

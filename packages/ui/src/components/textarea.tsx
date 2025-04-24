@@ -2,6 +2,8 @@ import * as React from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
+import { Label } from '@o2s/ui/components/label';
+
 const Textarea = React.forwardRef<HTMLTextAreaElement, React.ComponentProps<'textarea'>>(
     ({ className, ...props }, ref) => {
         return (
@@ -18,4 +20,26 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, React.ComponentProps<'tex
 );
 Textarea.displayName = 'Textarea';
 
-export { Textarea };
+interface TextareaWithLabelProps extends React.ComponentProps<'textarea'> {
+    label: string | React.ReactNode;
+    labelClassName?: string;
+}
+
+const TextareaWithLabel = React.forwardRef<HTMLTextAreaElement, TextareaWithLabelProps>(
+    ({ className, label, labelClassName, id, ...props }, ref) => {
+        const generatedId = React.useId();
+        const textareaId = id || generatedId;
+
+        return (
+            <div className="grid gap-2">
+                <Label htmlFor={textareaId} className={labelClassName}>
+                    {label}
+                </Label>
+                <Textarea id={textareaId} ref={ref} {...props} className={className} />
+            </div>
+        );
+    },
+);
+TextareaWithLabel.displayName = 'TextareaWithLabel';
+
+export { Textarea, TextareaWithLabel };

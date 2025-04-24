@@ -1,21 +1,21 @@
 import { CMS } from '@o2s/framework/modules';
 
 const MOCK_SURVEY_1: CMS.Model.Survey.Survey = {
-    code: 'complaint',
-    surveyId: 'cb0dd450-ce17-498d-a847-2567ecbf5dd1',
-    surveyType: 'survey',
-    submitDestination: ['surveyjs'],
-    requiredRoles: ['selfservice_user'],
-    postId: '9e10a78e-a3ce-4618-9c4e-484c95d0bd84',
-};
-
-const MOCK_SURVEY_2: CMS.Model.Survey.Survey = {
-    code: 'survey-2',
-    surveyId: 'b8498eb4-ddab-4815-9133-130301fdcef3',
+    code: 'contact-us',
+    surveyId: '72c90a02-6bfe-4e83-ba48-01f11752c234',
     surveyType: 'survey',
     submitDestination: ['surveyjs'],
     requiredRoles: [],
-    postId: '8b51c735-9483-48aa-bbe8-48eb9c54f71d',
+    postId: 'a91349b1-0c4c-4b7a-b712-91f04a1e6e99',
+};
+
+const MOCK_SURVEY_2: CMS.Model.Survey.Survey = {
+    code: 'complaint-form',
+    surveyId: '3897de9c-279b-4c50-b359-09f5c73a3c49',
+    surveyType: 'survey',
+    submitDestination: ['surveyjs'],
+    requiredRoles: ['selfservice_user'],
+    postId: 'e0f1b26b-a434-44ab-9608-c49dcd0658ec',
 };
 
 const MOCK_SURVEYS = [MOCK_SURVEY_1, MOCK_SURVEY_2];

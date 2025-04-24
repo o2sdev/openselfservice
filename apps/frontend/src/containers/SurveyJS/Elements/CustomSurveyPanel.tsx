@@ -36,8 +36,8 @@ class CustomSurveyPanel extends SurveyPanel {
 
         const inner = (
             <>
-                {content}
                 {header}
+                {content}
                 {errors}
             </>
         );
@@ -46,7 +46,7 @@ class CustomSurveyPanel extends SurveyPanel {
             <>
                 <div
                     ref={this.rootRef}
-                    className="rounded-lg border bg-card text-card-foreground !shadow-sm !p-4 !m-0"
+                    className="rounded-lg border bg-card text-card-foreground !shadow-xs !p-4 !m-0"
                     onFocus={focusIn}
                     id={this.panelBase.id}
                 >
@@ -72,8 +72,8 @@ class CustomSurveyPanel extends SurveyPanel {
         const bottom: JSX.Element | null = this.renderBottom();
         return (
             <div style={style} className={cn(className, 'p-0')} id={this.panel.contentId}>
-                {rows}
                 {bottom}
+                {rows}
             </div>
         );
     }

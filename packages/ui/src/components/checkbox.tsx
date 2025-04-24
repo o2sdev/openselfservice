@@ -4,6 +4,8 @@ import * as React from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
+import { Label } from '@o2s/ui/components/label';
+
 const Checkbox = React.forwardRef<
     React.ElementRef<typeof CheckboxPrimitive.Root>,
     React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>
@@ -23,4 +25,26 @@ const Checkbox = React.forwardRef<
 ));
 Checkbox.displayName = CheckboxPrimitive.Root.displayName;
 
-export { Checkbox };
+interface CheckboxWithLabelProps extends React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> {
+    label: string | React.ReactNode;
+    labelClassName?: string;
+}
+
+const CheckboxWithLabel = React.forwardRef<React.ElementRef<typeof CheckboxPrimitive.Root>, CheckboxWithLabelProps>(
+    ({ className, label, labelClassName, id, ...props }, ref) => {
+        const generatedId = React.useId();
+        const checkboxId = id || generatedId;
+
+        return (
+            <div className="flex items-start space-x-2">
+                <Checkbox id={checkboxId} ref={ref} {...props} className={className} />
+                <Label htmlFor={checkboxId} className={labelClassName}>
+                    {label}
+                </Label>
+            </div>
+        );
+    },
+);
+CheckboxWithLabel.displayName = 'CheckboxWithLabel';
+
+export { Checkbox, Label, CheckboxWithLabel };
