@@ -17,8 +17,11 @@ export class ArticleService {
     ) {}
 
     getArticleBlock(query: GetArticleBlockQuery, headers: AppHeaders): Observable<ArticleBlock> {
-        const cms = this.articlesService.getArticle({ slug: query.slug, locale: headers['x-locale'] });
+        const cms = this.cmsService.getAppConfig({ locale: headers['x-locale'] });
+        const article = this.articlesService.getArticle({ slug: query.slug, locale: headers['x-locale'] });
 
-        return forkJoin([cms]).pipe(map(([cms]) => mapArticle(cms, headers['x-locale'])));
+        return forkJoin([cms, article]).pipe(
+            map(([cms, article]) => mapArticle(cms, article, headers['x-locale'], headers['x-client-timezone'] || '')),
+        );
     }
 }

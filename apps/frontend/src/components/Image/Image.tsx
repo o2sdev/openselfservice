@@ -5,8 +5,8 @@ import React from 'react';
 
 import { ImageProps } from './Image.types';
 
-const imageLoader: ImageLoader = ({ src }) => {
-    return src;
+const imageLoader: ImageLoader = ({ src, width, quality }) => {
+    return `${src}?w=${width}&q=${quality || 99}&fm=webp`;
 };
 
 export const Image: React.FC<ImageProps> = ({ src, alt, width, height, fill, ...rest }) => {

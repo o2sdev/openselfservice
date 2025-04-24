@@ -477,6 +477,12 @@ export type ComponentComponentsServiceListFieldsArgs = {
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
+export type ComponentComponentsSurveyJsComponent = {
+    id: Scalars['ID']['output'];
+    survey_js_form?: Maybe<SurveyJsForm>;
+    title?: Maybe<Scalars['String']['output']>;
+};
+
 export type ComponentComponentsTicketDetails = {
     attachmentsTitle?: Maybe<Scalars['String']['output']>;
     commentsTitle?: Maybe<Scalars['String']['output']>;
@@ -574,6 +580,7 @@ export type ComponentContentDynamicZone =
     | ComponentComponentsQuickLinks
     | ComponentComponentsServiceDetails
     | ComponentComponentsServiceList
+    | ComponentComponentsSurveyJsComponent
     | ComponentComponentsTicketDetails
     | ComponentComponentsTicketList
     | ComponentComponentsTicketRecent
@@ -1305,6 +1312,7 @@ export type GenericMorph =
     | ComponentComponentsQuickLinks
     | ComponentComponentsServiceDetails
     | ComponentComponentsServiceList
+    | ComponentComponentsSurveyJsComponent
     | ComponentComponentsTicketDetails
     | ComponentComponentsTicketList
     | ComponentComponentsTicketRecent
@@ -2940,6 +2948,7 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
           })
         | ComponentComponentsServiceDetails
         | (Omit<ComponentComponentsServiceList, 'filters'> & { filters?: Maybe<_RefType['ComponentContentFilters']> })
+        | ComponentComponentsSurveyJsComponent
         | ComponentComponentsTicketDetails
         | (Omit<ComponentComponentsTicketList, 'filters'> & { filters?: Maybe<_RefType['ComponentContentFilters']> })
         | ComponentComponentsTicketRecent
@@ -3025,6 +3034,7 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
           })
         | ComponentComponentsServiceDetails
         | (Omit<ComponentComponentsServiceList, 'filters'> & { filters?: Maybe<_RefType['ComponentContentFilters']> })
+        | ComponentComponentsSurveyJsComponent
         | ComponentComponentsTicketDetails
         | (Omit<ComponentComponentsTicketList, 'filters'> & { filters?: Maybe<_RefType['ComponentContentFilters']> })
         | ComponentComponentsTicketRecent
@@ -3301,6 +3311,7 @@ export type ResolversTypes = {
     ComponentComponentsServiceList: ResolverTypeWrapper<
         Omit<ComponentComponentsServiceList, 'filters'> & { filters?: Maybe<ResolversTypes['ComponentContentFilters']> }
     >;
+    ComponentComponentsSurveyJsComponent: ResolverTypeWrapper<ComponentComponentsSurveyJsComponent>;
     ComponentComponentsTicketDetails: ResolverTypeWrapper<ComponentComponentsTicketDetails>;
     ComponentComponentsTicketList: ResolverTypeWrapper<
         Omit<ComponentComponentsTicketList, 'filters'> & { filters?: Maybe<ResolversTypes['ComponentContentFilters']> }
@@ -3701,6 +3712,7 @@ export type ResolversParentTypes = {
     ComponentComponentsServiceList: Omit<ComponentComponentsServiceList, 'filters'> & {
         filters?: Maybe<ResolversParentTypes['ComponentContentFilters']>;
     };
+    ComponentComponentsSurveyJsComponent: ComponentComponentsSurveyJsComponent;
     ComponentComponentsTicketDetails: ComponentComponentsTicketDetails;
     ComponentComponentsTicketList: Omit<ComponentComponentsTicketList, 'filters'> & {
         filters?: Maybe<ResolversParentTypes['ComponentContentFilters']>;
@@ -4415,6 +4427,17 @@ export type ComponentComponentsServiceListResolvers<
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type ComponentComponentsSurveyJsComponentResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentComponentsSurveyJsComponent'] = ResolversParentTypes['ComponentComponentsSurveyJsComponent'],
+> = {
+    id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    survey_js_form?: Resolver<Maybe<ResolversTypes['SurveyJsForm']>, ParentType, ContextType>;
+    title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type ComponentComponentsTicketDetailsResolvers<
     ContextType = any,
     ParentType extends
@@ -4534,6 +4557,7 @@ export type ComponentContentDynamicZoneResolvers<
         | 'ComponentComponentsQuickLinks'
         | 'ComponentComponentsServiceDetails'
         | 'ComponentComponentsServiceList'
+        | 'ComponentComponentsSurveyJsComponent'
         | 'ComponentComponentsTicketDetails'
         | 'ComponentComponentsTicketList'
         | 'ComponentComponentsTicketRecent'
@@ -5185,6 +5209,7 @@ export type GenericMorphResolvers<
         | 'ComponentComponentsQuickLinks'
         | 'ComponentComponentsServiceDetails'
         | 'ComponentComponentsServiceList'
+        | 'ComponentComponentsSurveyJsComponent'
         | 'ComponentComponentsTicketDetails'
         | 'ComponentComponentsTicketList'
         | 'ComponentComponentsTicketRecent'
@@ -6496,6 +6521,7 @@ export type Resolvers<ContextType = any> = {
     ComponentComponentsQuickLinks?: ComponentComponentsQuickLinksResolvers<ContextType>;
     ComponentComponentsServiceDetails?: ComponentComponentsServiceDetailsResolvers<ContextType>;
     ComponentComponentsServiceList?: ComponentComponentsServiceListResolvers<ContextType>;
+    ComponentComponentsSurveyJsComponent?: ComponentComponentsSurveyJsComponentResolvers<ContextType>;
     ComponentComponentsTicketDetails?: ComponentComponentsTicketDetailsResolvers<ContextType>;
     ComponentComponentsTicketList?: ComponentComponentsTicketListResolvers<ContextType>;
     ComponentComponentsTicketRecent?: ComponentComponentsTicketRecentResolvers<ContextType>;
@@ -6621,6 +6647,7 @@ export type ComponentFragment = {
         | { __typename: 'ComponentComponentsQuickLinks' }
         | { __typename: 'ComponentComponentsServiceDetails' }
         | { __typename: 'ComponentComponentsServiceList' }
+        | { __typename: 'ComponentComponentsSurveyJsComponent' }
         | { __typename: 'ComponentComponentsTicketDetails' }
         | { __typename: 'ComponentComponentsTicketList' }
         | { __typename: 'ComponentComponentsTicketRecent' }
@@ -6816,6 +6843,7 @@ export type PageFragment = {
                       | { __typename: 'ComponentComponentsQuickLinks' }
                       | { __typename: 'ComponentComponentsServiceDetails' }
                       | { __typename: 'ComponentComponentsServiceList' }
+                      | { __typename: 'ComponentComponentsSurveyJsComponent' }
                       | { __typename: 'ComponentComponentsTicketDetails' }
                       | { __typename: 'ComponentComponentsTicketList' }
                       | { __typename: 'ComponentComponentsTicketRecent' }
@@ -6843,6 +6871,7 @@ export type PageFragment = {
                       | { __typename: 'ComponentComponentsQuickLinks' }
                       | { __typename: 'ComponentComponentsServiceDetails' }
                       | { __typename: 'ComponentComponentsServiceList' }
+                      | { __typename: 'ComponentComponentsSurveyJsComponent' }
                       | { __typename: 'ComponentComponentsTicketDetails' }
                       | { __typename: 'ComponentComponentsTicketList' }
                       | { __typename: 'ComponentComponentsTicketRecent' }
@@ -6867,6 +6896,7 @@ export type PageFragment = {
                       | { __typename: 'ComponentComponentsQuickLinks' }
                       | { __typename: 'ComponentComponentsServiceDetails' }
                       | { __typename: 'ComponentComponentsServiceList' }
+                      | { __typename: 'ComponentComponentsSurveyJsComponent' }
                       | { __typename: 'ComponentComponentsTicketDetails' }
                       | { __typename: 'ComponentComponentsTicketList' }
                       | { __typename: 'ComponentComponentsTicketRecent' }
@@ -6891,6 +6921,7 @@ export type PageFragment = {
                       | { __typename: 'ComponentComponentsQuickLinks' }
                       | { __typename: 'ComponentComponentsServiceDetails' }
                       | { __typename: 'ComponentComponentsServiceList' }
+                      | { __typename: 'ComponentComponentsSurveyJsComponent' }
                       | { __typename: 'ComponentComponentsTicketDetails' }
                       | { __typename: 'ComponentComponentsTicketList' }
                       | { __typename: 'ComponentComponentsTicketRecent' }
@@ -6915,6 +6946,7 @@ export type PageFragment = {
                       | { __typename: 'ComponentComponentsQuickLinks' }
                       | { __typename: 'ComponentComponentsServiceDetails' }
                       | { __typename: 'ComponentComponentsServiceList' }
+                      | { __typename: 'ComponentComponentsSurveyJsComponent' }
                       | { __typename: 'ComponentComponentsTicketDetails' }
                       | { __typename: 'ComponentComponentsTicketList' }
                       | { __typename: 'ComponentComponentsTicketRecent' }
@@ -6946,6 +6978,7 @@ type Template_ComponentTemplatesOneColumn_Fragment = {
             | { __typename: 'ComponentComponentsQuickLinks' }
             | { __typename: 'ComponentComponentsServiceDetails' }
             | { __typename: 'ComponentComponentsServiceList' }
+            | { __typename: 'ComponentComponentsSurveyJsComponent' }
             | { __typename: 'ComponentComponentsTicketDetails' }
             | { __typename: 'ComponentComponentsTicketList' }
             | { __typename: 'ComponentComponentsTicketRecent' }
@@ -6974,6 +7007,7 @@ type Template_ComponentTemplatesTwoColumn_Fragment = {
             | { __typename: 'ComponentComponentsQuickLinks' }
             | { __typename: 'ComponentComponentsServiceDetails' }
             | { __typename: 'ComponentComponentsServiceList' }
+            | { __typename: 'ComponentComponentsSurveyJsComponent' }
             | { __typename: 'ComponentComponentsTicketDetails' }
             | { __typename: 'ComponentComponentsTicketList' }
             | { __typename: 'ComponentComponentsTicketRecent' }
@@ -6998,6 +7032,7 @@ type Template_ComponentTemplatesTwoColumn_Fragment = {
             | { __typename: 'ComponentComponentsQuickLinks' }
             | { __typename: 'ComponentComponentsServiceDetails' }
             | { __typename: 'ComponentComponentsServiceList' }
+            | { __typename: 'ComponentComponentsSurveyJsComponent' }
             | { __typename: 'ComponentComponentsTicketDetails' }
             | { __typename: 'ComponentComponentsTicketList' }
             | { __typename: 'ComponentComponentsTicketRecent' }
@@ -7022,6 +7057,7 @@ type Template_ComponentTemplatesTwoColumn_Fragment = {
             | { __typename: 'ComponentComponentsQuickLinks' }
             | { __typename: 'ComponentComponentsServiceDetails' }
             | { __typename: 'ComponentComponentsServiceList' }
+            | { __typename: 'ComponentComponentsSurveyJsComponent' }
             | { __typename: 'ComponentComponentsTicketDetails' }
             | { __typename: 'ComponentComponentsTicketList' }
             | { __typename: 'ComponentComponentsTicketRecent' }
@@ -7046,6 +7082,7 @@ type Template_ComponentTemplatesTwoColumn_Fragment = {
             | { __typename: 'ComponentComponentsQuickLinks' }
             | { __typename: 'ComponentComponentsServiceDetails' }
             | { __typename: 'ComponentComponentsServiceList' }
+            | { __typename: 'ComponentComponentsSurveyJsComponent' }
             | { __typename: 'ComponentComponentsTicketDetails' }
             | { __typename: 'ComponentComponentsTicketList' }
             | { __typename: 'ComponentComponentsTicketRecent' }
@@ -7466,6 +7503,7 @@ export type OneColumnTemplateFragment = {
             | { __typename: 'ComponentComponentsQuickLinks' }
             | { __typename: 'ComponentComponentsServiceDetails' }
             | { __typename: 'ComponentComponentsServiceList' }
+            | { __typename: 'ComponentComponentsSurveyJsComponent' }
             | { __typename: 'ComponentComponentsTicketDetails' }
             | { __typename: 'ComponentComponentsTicketList' }
             | { __typename: 'ComponentComponentsTicketRecent' }
@@ -7493,6 +7531,7 @@ export type TwoColumnTemplateFragment = {
             | { __typename: 'ComponentComponentsQuickLinks' }
             | { __typename: 'ComponentComponentsServiceDetails' }
             | { __typename: 'ComponentComponentsServiceList' }
+            | { __typename: 'ComponentComponentsSurveyJsComponent' }
             | { __typename: 'ComponentComponentsTicketDetails' }
             | { __typename: 'ComponentComponentsTicketList' }
             | { __typename: 'ComponentComponentsTicketRecent' }
@@ -7517,6 +7556,7 @@ export type TwoColumnTemplateFragment = {
             | { __typename: 'ComponentComponentsQuickLinks' }
             | { __typename: 'ComponentComponentsServiceDetails' }
             | { __typename: 'ComponentComponentsServiceList' }
+            | { __typename: 'ComponentComponentsSurveyJsComponent' }
             | { __typename: 'ComponentComponentsTicketDetails' }
             | { __typename: 'ComponentComponentsTicketList' }
             | { __typename: 'ComponentComponentsTicketRecent' }
@@ -7541,6 +7581,7 @@ export type TwoColumnTemplateFragment = {
             | { __typename: 'ComponentComponentsQuickLinks' }
             | { __typename: 'ComponentComponentsServiceDetails' }
             | { __typename: 'ComponentComponentsServiceList' }
+            | { __typename: 'ComponentComponentsSurveyJsComponent' }
             | { __typename: 'ComponentComponentsTicketDetails' }
             | { __typename: 'ComponentComponentsTicketList' }
             | { __typename: 'ComponentComponentsTicketRecent' }
@@ -7565,6 +7606,7 @@ export type TwoColumnTemplateFragment = {
             | { __typename: 'ComponentComponentsQuickLinks' }
             | { __typename: 'ComponentComponentsServiceDetails' }
             | { __typename: 'ComponentComponentsServiceList' }
+            | { __typename: 'ComponentComponentsSurveyJsComponent' }
             | { __typename: 'ComponentComponentsTicketDetails' }
             | { __typename: 'ComponentComponentsTicketList' }
             | { __typename: 'ComponentComponentsTicketRecent' }
@@ -7580,7 +7622,24 @@ export type GetAppConfigQueryVariables = Exact<{
 
 export type GetAppConfigQuery = {
     appConfig?: { documentId: string; header?: { documentId: string }; footer?: { documentId: string } };
-    configurableTexts?: { errors: { requestError: { title: string; content: string } } };
+    configurableTexts?: {
+        errors: { requestError: { title: string; content: string } };
+        dates: { today: string; yesterday: string };
+        actions: {
+            showMore: string;
+            showLess: string;
+            show: string;
+            hide: string;
+            edit: string;
+            save: string;
+            cancel: string;
+            delete: string;
+            logOut: string;
+            settings: string;
+            renew: string;
+            details: string;
+        };
+    };
     i18NLocales: Array<{ code?: string }>;
 };
 
@@ -7782,6 +7841,7 @@ export type GetComponentQuery = {
                   };
                   noResults: { title: string; description?: string };
               }
+            | { __typename: 'ComponentComponentsSurveyJsComponent' }
             | {
                   __typename: 'ComponentComponentsTicketDetails';
                   id: string;
@@ -8097,6 +8157,7 @@ export type GetPageQuery = {
                           | { __typename: 'ComponentComponentsQuickLinks' }
                           | { __typename: 'ComponentComponentsServiceDetails' }
                           | { __typename: 'ComponentComponentsServiceList' }
+                          | { __typename: 'ComponentComponentsSurveyJsComponent' }
                           | { __typename: 'ComponentComponentsTicketDetails' }
                           | { __typename: 'ComponentComponentsTicketList' }
                           | { __typename: 'ComponentComponentsTicketRecent' }
@@ -8124,6 +8185,7 @@ export type GetPageQuery = {
                           | { __typename: 'ComponentComponentsQuickLinks' }
                           | { __typename: 'ComponentComponentsServiceDetails' }
                           | { __typename: 'ComponentComponentsServiceList' }
+                          | { __typename: 'ComponentComponentsSurveyJsComponent' }
                           | { __typename: 'ComponentComponentsTicketDetails' }
                           | { __typename: 'ComponentComponentsTicketList' }
                           | { __typename: 'ComponentComponentsTicketRecent' }
@@ -8148,6 +8210,7 @@ export type GetPageQuery = {
                           | { __typename: 'ComponentComponentsQuickLinks' }
                           | { __typename: 'ComponentComponentsServiceDetails' }
                           | { __typename: 'ComponentComponentsServiceList' }
+                          | { __typename: 'ComponentComponentsSurveyJsComponent' }
                           | { __typename: 'ComponentComponentsTicketDetails' }
                           | { __typename: 'ComponentComponentsTicketList' }
                           | { __typename: 'ComponentComponentsTicketRecent' }
@@ -8172,6 +8235,7 @@ export type GetPageQuery = {
                           | { __typename: 'ComponentComponentsQuickLinks' }
                           | { __typename: 'ComponentComponentsServiceDetails' }
                           | { __typename: 'ComponentComponentsServiceList' }
+                          | { __typename: 'ComponentComponentsSurveyJsComponent' }
                           | { __typename: 'ComponentComponentsTicketDetails' }
                           | { __typename: 'ComponentComponentsTicketList' }
                           | { __typename: 'ComponentComponentsTicketRecent' }
@@ -8196,6 +8260,7 @@ export type GetPageQuery = {
                           | { __typename: 'ComponentComponentsQuickLinks' }
                           | { __typename: 'ComponentComponentsServiceDetails' }
                           | { __typename: 'ComponentComponentsServiceList' }
+                          | { __typename: 'ComponentComponentsSurveyJsComponent' }
                           | { __typename: 'ComponentComponentsTicketDetails' }
                           | { __typename: 'ComponentComponentsTicketList' }
                           | { __typename: 'ComponentComponentsTicketRecent' }
@@ -8255,6 +8320,7 @@ export type GetPagesQuery = {
                           | { __typename: 'ComponentComponentsQuickLinks' }
                           | { __typename: 'ComponentComponentsServiceDetails' }
                           | { __typename: 'ComponentComponentsServiceList' }
+                          | { __typename: 'ComponentComponentsSurveyJsComponent' }
                           | { __typename: 'ComponentComponentsTicketDetails' }
                           | { __typename: 'ComponentComponentsTicketList' }
                           | { __typename: 'ComponentComponentsTicketRecent' }
@@ -8282,6 +8348,7 @@ export type GetPagesQuery = {
                           | { __typename: 'ComponentComponentsQuickLinks' }
                           | { __typename: 'ComponentComponentsServiceDetails' }
                           | { __typename: 'ComponentComponentsServiceList' }
+                          | { __typename: 'ComponentComponentsSurveyJsComponent' }
                           | { __typename: 'ComponentComponentsTicketDetails' }
                           | { __typename: 'ComponentComponentsTicketList' }
                           | { __typename: 'ComponentComponentsTicketRecent' }
@@ -8306,6 +8373,7 @@ export type GetPagesQuery = {
                           | { __typename: 'ComponentComponentsQuickLinks' }
                           | { __typename: 'ComponentComponentsServiceDetails' }
                           | { __typename: 'ComponentComponentsServiceList' }
+                          | { __typename: 'ComponentComponentsSurveyJsComponent' }
                           | { __typename: 'ComponentComponentsTicketDetails' }
                           | { __typename: 'ComponentComponentsTicketList' }
                           | { __typename: 'ComponentComponentsTicketRecent' }
@@ -8330,6 +8398,7 @@ export type GetPagesQuery = {
                           | { __typename: 'ComponentComponentsQuickLinks' }
                           | { __typename: 'ComponentComponentsServiceDetails' }
                           | { __typename: 'ComponentComponentsServiceList' }
+                          | { __typename: 'ComponentComponentsSurveyJsComponent' }
                           | { __typename: 'ComponentComponentsTicketDetails' }
                           | { __typename: 'ComponentComponentsTicketList' }
                           | { __typename: 'ComponentComponentsTicketRecent' }
@@ -8354,6 +8423,7 @@ export type GetPagesQuery = {
                           | { __typename: 'ComponentComponentsQuickLinks' }
                           | { __typename: 'ComponentComponentsServiceDetails' }
                           | { __typename: 'ComponentComponentsServiceList' }
+                          | { __typename: 'ComponentComponentsSurveyJsComponent' }
                           | { __typename: 'ComponentComponentsTicketDetails' }
                           | { __typename: 'ComponentComponentsTicketList' }
                           | { __typename: 'ComponentComponentsTicketRecent' }
@@ -8981,6 +9051,24 @@ export const GetAppConfigDocument = gql`
                     title
                     content
                 }
+            }
+            dates {
+                today
+                yesterday
+            }
+            actions {
+                showMore
+                showLess
+                show
+                hide
+                edit
+                save
+                cancel
+                delete
+                logOut
+                settings
+                renew
+                details
             }
         }
         i18NLocales {
