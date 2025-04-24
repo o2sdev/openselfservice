@@ -13,6 +13,8 @@ import { SearchIntegrationConfig } from '@o2s/api-harmonization/models/search';
 import { TicketsIntegrationConfig } from '@o2s/api-harmonization/models/tickets';
 import { UsersIntegrationConfig } from '@o2s/api-harmonization/models/users';
 
+import { OrdersIntegrationConfig } from './models/orders';
+
 export const AppConfig: ApiConfig = {
     integrations: {
         users: UsersIntegrationConfig,
@@ -27,5 +29,6 @@ export const AppConfig: ApiConfig = {
         billingAccounts: BillingAccountsIntegrationConfig,
         search: SearchIntegrationConfig,
         products: ProductsIntegrationConfig,
+        orders: OrdersIntegrationConfig,
     },
 };
