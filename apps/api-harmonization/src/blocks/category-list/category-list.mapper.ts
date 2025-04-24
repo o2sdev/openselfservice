@@ -12,16 +12,6 @@ export const mapCategoryList = (
         id: cms.id,
         title: cms.title,
         description: cms.description,
-        items: categories.map((category) => mapCategory(cms, category)),
-    };
-};
-
-export const mapCategory = (
-    cms: CMS.Model.CategoryListBlock.CategoryListBlock,
-    category: Articles.Model.Category,
-): Articles.Model.Category => {
-    return {
-        ...category,
-        slug: `${cms.parent?.slug || ''}${category.slug}`,
+        items: categories,
     };
 };

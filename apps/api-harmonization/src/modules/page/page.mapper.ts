@@ -33,11 +33,15 @@ export const mapPage = (
             alternativeUrls,
             template: page.template,
             hasOwnTitle: page.hasOwnTitle,
-            breadcrumbs: mapBreadcrumbs(page),
+            breadcrumbs: mapPageBreadcrumbs(page),
         },
     };
 };
-export const mapArticle = (article: Articles.Model.Article, mainLocale: string): Page => {
+export const mapArticle = (
+    article: Articles.Model.Article,
+    category: Articles.Model.Category,
+    mainLocale: string,
+): Page => {
     return {
         meta: {
             seo: {
@@ -64,13 +68,12 @@ export const mapArticle = (article: Articles.Model.Article, mainLocale: string):
                 },
             },
             hasOwnTitle: false,
-            // TODO: handle breadcrumbs
-            breadcrumbs: [],
+            breadcrumbs: mapArticleBreadcrumbs(article, category),
         },
     };
 };
 
-const mapBreadcrumbs = (page: CMS.Model.Page.Page): Breadcrumb[] => {
+const mapPageBreadcrumbs = (page: CMS.Model.Page.Page): Breadcrumb[] => {
     const breadcrumbs: Breadcrumb[] = [];
 
     function extractFromParent(parent: CMS.Model.Page.Page['parent']): void {
@@ -82,7 +85,7 @@ const mapBreadcrumbs = (page: CMS.Model.Page.Page): Breadcrumb[] => {
 
         breadcrumbs.push({
             slug: parent.slug,
-            label: parent.seo?.title || parent.slug,
+            label: parent.seo.title,
         });
     }
 
@@ -90,7 +93,33 @@ const mapBreadcrumbs = (page: CMS.Model.Page.Page): Breadcrumb[] => {
 
     breadcrumbs.push({
         slug: page.slug,
-        label: page.seo?.title || page.slug,
+        label: page.seo?.title,
+    });
+
+    return breadcrumbs.filter((breadcrumb) => breadcrumb.slug);
+};
+
+const mapArticleBreadcrumbs = (article: Articles.Model.Article, category: Articles.Model.Category): Breadcrumb[] => {
+    const breadcrumbs: Breadcrumb[] = [];
+
+    function extractFromParent(parent: Articles.Model.Category['parent']): void {
+        if (!parent) return;
+
+        if (parent.parent) {
+            extractFromParent(parent.parent);
+        }
+
+        breadcrumbs.push({
+            slug: parent.slug,
+            label: parent.title,
+        });
+    }
+
+    extractFromParent(category);
+
+    breadcrumbs.push({
+        slug: article.slug,
+        label: article.title,
     });
 
     return breadcrumbs.filter((breadcrumb) => breadcrumb.slug);

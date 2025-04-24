@@ -80,11 +80,7 @@ export class PageService {
                                 throw new NotFoundException();
                             }),
                         )
-                        .pipe(
-                            map((article) => {
-                                return this.processArticle(article, query, headers);
-                            }),
-                        );
+                        .pipe(concatMap((article) => this.processArticle(article, query, headers)));
                 }
                 return this.processPage(page, query, headers);
             }),
@@ -106,6 +102,9 @@ export class PageService {
 
     private processArticle = (article: Articles.Model.Article, _query: GetPageQuery, headers: AppHeaders) => {
         // TODO: handle alternative pages
-        return mapArticle(article, headers['x-locale']);
+
+        const category = this.articlesService.getCategory({ id: article.category.id, locale: headers['x-locale'] });
+
+        return forkJoin([category]).pipe(map(([category]) => mapArticle(article, category, headers['x-locale'])));
     };
 }

@@ -8,6 +8,18 @@ export class Category {
     title!: string;
     description!: string;
     icon?: Media.Media;
+    parent?: {
+        slug: string;
+        title: string;
+        parent?: {
+            slug: string;
+            title: string;
+            parent?: {
+                slug: string;
+                title: string;
+            };
+        };
+    };
 }
 
 export type Categories = Pagination.Paginated<Category>;

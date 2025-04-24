@@ -32,8 +32,8 @@ export const mapCategories = (
     const sort = options.sort;
     if (sort) {
         sortedCategories.sort((a, b) => {
-            const fieldA = a[sort.field as keyof Omit<Articles.Model.Category, 'icon'>];
-            const fieldB = b[sort.field as keyof Omit<Articles.Model.Category, 'icon'>];
+            const fieldA = a[sort.field as keyof Omit<Articles.Model.Category, 'icon' | 'parent'>];
+            const fieldB = b[sort.field as keyof Omit<Articles.Model.Category, 'icon' | 'parent'>];
 
             if (fieldA && fieldB) {
                 return sort.order === 'asc' ? fieldA.localeCompare(fieldB) : fieldB.localeCompare(fieldA);
