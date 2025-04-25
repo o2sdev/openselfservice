@@ -34,6 +34,7 @@
         "next-intl": "^4.0.2",
         "react": "^19.1.0",
         "react-dom": "^19.1.0",
+        "react-indiana-drag-scroll": "^2.2.1",
         "react-string-replace": "^1.1.1",
         "survey-core": "^1.9.135",
         "survey-react-ui": "^1.9.135",

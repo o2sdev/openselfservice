@@ -13,7 +13,7 @@
     "scripts": {
         "dev": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")",
         "build": "tsc && tsc-alias",
-        "postbuild": "cp -r src/modules/invoices/resources dist/modules/invoices/",
+        "postbuild": "shx cp -r src/modules/invoices/resources dist/modules/invoices/",
         "lint": "tsc --noEmit && eslint . --max-warnings 0",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
@@ -28,6 +28,7 @@
         "concurrently": "^9.1.2",
         "eslint": "^9.24.0",
         "prettier": "^3.5.3",
+        "shx": "^0.4.0",
         "tsc-alias": "^1.8.15",
         "typescript": "^5.8.3"
     },

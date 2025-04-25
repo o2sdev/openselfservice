@@ -59,6 +59,7 @@ const MOCK_TICKET_DETAILS_BLOCK_PL: CMS.Model.TicketDetailsBlock.TicketDetailsBl
     },
     fieldMapping: {
         topic: {
+            ALL: 'Wszystko',
             TOOL_REPAIR: 'Naprawa narzędzia',
             FLEET_EXCHANGE: 'Wymiana floty',
             CALIBRATION: 'Kalibracja',
@@ -102,6 +103,7 @@ const MOCK_TICKET_DETAILS_BLOCK_DE: CMS.Model.TicketDetailsBlock.TicketDetailsBl
     },
     fieldMapping: {
         topic: {
+            ALL: 'Alle',
             TOOL_REPAIR: 'Werkzeugreparatur',
             FLEET_EXCHANGE: 'Flottenaustausch',
             CALIBRATION: 'Kalibrierung',
