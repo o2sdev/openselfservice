@@ -50,7 +50,7 @@ const RadioGroupItemWithLabel = React.forwardRef<
     return (
         <div className="flex items-start space-x-2">
             <RadioGroupItem id={radioId} ref={ref} {...props} className={className} />
-            <Label htmlFor={radioId} className={labelClassName}>
+            <Label htmlFor={radioId} className={cn('mt-[1px]', labelClassName)}>
                 {label}
             </Label>
         </div>

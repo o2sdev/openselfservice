@@ -73,7 +73,7 @@ export class SurveyjsService {
                     this.logger.info('User does not have access to survey');
                     throw new UnauthorizedException('User does not have access to survey');
                 }
-                return this.validateSurvey(survey.surveyId, payload.surveyPayload).pipe(
+                return this.validateSurvey(survey.code, payload.surveyPayload).pipe(
                     concatMap((validationResult) => {
                         if (!validationResult) {
                             this.logger.error('Survey payload is not valid.');
