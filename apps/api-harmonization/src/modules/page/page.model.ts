@@ -9,6 +9,7 @@ import {
     PaymentsSummary,
     ServiceDetails,
     ServiceList,
+    Surveyjs,
     TicketDetails,
     TicketList,
     TicketRecent,
@@ -70,4 +71,5 @@ export type Blocks =
     | UserAccount.Model.UserAccountBlock['__typename']
     | TicketRecent.Model.TicketRecentBlock['__typename']
     | ServiceList.Model.ServiceListBlock['__typename']
-    | ServiceDetails.Model.ServiceDetailsBlock['__typename'];
+    | ServiceDetails.Model.ServiceDetailsBlock['__typename']
+    | Surveyjs.Model.SurveyjsBlock['__typename'];

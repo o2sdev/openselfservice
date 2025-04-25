@@ -4,8 +4,14 @@ import React, { useState } from 'react';
 import reactStringReplace from 'react-string-replace';
 
 import { Button } from '@o2s/ui/components/button';
-import { Label } from '@o2s/ui/components/label';
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@o2s/ui/components/select';
+import {
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+    SelectWithTitle,
+} from '@o2s/ui/components/select';
 import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle } from '@o2s/ui/components/sheet';
 
 import { FiltersProps } from './Filters.types';
@@ -76,12 +82,13 @@ export const Filters = <T, S extends FormikValues>({
                                                     {({ field, form }: FieldProps<string>) => {
                                                         return (
                                                             <>
-                                                                <Label htmlFor={field.name}>{item.label}</Label>
-                                                                <Select
+                                                                <SelectWithTitle
                                                                     value={field.value}
                                                                     onValueChange={async (value) => {
                                                                         await form.setFieldValue(field.name, value);
                                                                     }}
+                                                                    label={item.label}
+                                                                    id={item.id as string}
                                                                 >
                                                                     <SelectTrigger>
                                                                         <SelectValue placeholder={item.label} />
@@ -98,7 +105,7 @@ export const Filters = <T, S extends FormikValues>({
                                                                             ))}
                                                                         </SelectGroup>
                                                                     </SelectContent>
-                                                                </Select>
+                                                                </SelectWithTitle>
                                                             </>
                                                         );
                                                     }}

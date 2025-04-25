@@ -11,6 +11,7 @@ import { PaymentsHistoryRenderer } from '@/blocks/PaymentsHistory/PaymentsHistor
 import { PaymentsSummaryRenderer } from '@/blocks/PaymentsSummary/PaymentsSummary.renderer';
 import { ServiceDetailsRenderer } from '@/blocks/ServiceDetails/ServiceDetails.renderer';
 import { ServiceListRenderer } from '@/blocks/ServiceList/ServiceList.renderer';
+import { SurveyJsRenderer } from '@/blocks/SurveyJs/SurveyJs.renderer';
 import { TicketDetailsRenderer } from '@/blocks/TicketDetails/TicketDetails.renderer';
 import { TicketListRenderer } from '@/blocks/TicketList/TicketList.renderer';
 import { TicketRecentRenderer } from '@/blocks/TicketRecent/TicketRecent.renderer';
@@ -45,6 +46,8 @@ export const renderBlocks = (blocks: CMS.Model.Page.SlotBlock[], slug: string[],
                 return <ServiceListRenderer key={block.id} id={block.id} accessToken={accessToken} />;
             case 'ServiceDetailsBlock':
                 return <ServiceDetailsRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
+            case 'SurveyJsBlock':
+                return <SurveyJsRenderer key={block.id} id={block.id} accessToken={accessToken} />;
         }
     });
 };

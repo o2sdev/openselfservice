@@ -35,6 +35,8 @@
         "react": "^19.1.0",
         "react-dom": "^19.1.0",
         "react-string-replace": "^1.1.1",
+        "survey-core": "^1.9.135",
+        "survey-react-ui": "^1.9.135",
         "string-template": "^1.0.0",
         "yup": "^1.6.1",
         "zod": "^3.24.2"
