@@ -1,6 +1,7 @@
 import React, { JSX } from 'react';
 import { ReactElementFactory, SurveyQuestion } from 'survey-react-ui';
 
+import { Label } from '@o2s/ui/components/label';
 import { Typography } from '@o2s/ui/components/typography';
 
 class CustomSurveyQuestion extends SurveyQuestion {
@@ -40,15 +41,17 @@ class CustomSurveyQuestion extends SurveyQuestion {
     }
 
     renderHeader(): JSX.Element {
-        if (this.question.getType() === 'text' || this.question.getType() === 'comment') {
+        if (
+            this.question.getType() === 'text' ||
+            this.question.getType() === 'comment' ||
+            this.question.getType() === 'dropdown'
+        ) {
             return <></>;
         }
 
         return (
             <div className={'header my-2 first:mt-0'}>
-                <Typography variant="small" className="font-medium">
-                    {this.question.title}
-                </Typography>
+                <Label htmlFor={this.question.id}>{this.question.title}</Label>
             </div>
         );
     }

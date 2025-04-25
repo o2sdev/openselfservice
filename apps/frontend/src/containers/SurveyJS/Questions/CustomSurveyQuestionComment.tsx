@@ -9,8 +9,8 @@ class CustomSurveyQuestionComment extends SurveyQuestionComment {
     renderElement() {
         return (
             <TextareaWithLabel
-                id={this.question.inputId}
-                name={this.question.inputId}
+                id={this.question.name}
+                name={this.question.name}
                 value={this.question.value}
                 placeholder={this.question.renderedPlaceholder}
                 disabled={this.isDisplayMode}
