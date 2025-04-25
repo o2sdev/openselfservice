@@ -3,31 +3,32 @@ import { of } from 'rxjs';
 
 import { CMS } from '@o2s/framework/modules';
 
+import { mapArticleDetailsBlock } from './mappers/blocks/cms.article-details.mapper';
+import { mapArticleListBlock } from './mappers/blocks/cms.article-list.mapper';
+import { mapFaqBlock } from './mappers/blocks/cms.faq.mapper';
+import { mapInvoiceDetailsBlock } from './mappers/blocks/cms.invoice-details.mapper';
+import { mapInvoiceListBlock } from './mappers/blocks/cms.invoice-list.mapper';
+import { mapNotificationDetailsBlock } from './mappers/blocks/cms.notification-details.mapper';
+import { mapNotificationListBlock } from './mappers/blocks/cms.notification-list.mapper';
+import { mapPaymentsHistoryBlock } from './mappers/blocks/cms.payments-history.mapper';
+import { mapPaymentsSummaryBlock } from './mappers/blocks/cms.payments-summary.mapper';
+import { mapResourceDetailsBlock } from './mappers/blocks/cms.resource-details.mapper';
+import { mapResourceListBlock } from './mappers/blocks/cms.resource-list.mapper';
+import { mapServiceDetailsBlock } from './mappers/blocks/cms.service-details.mapper';
+import { mapServiceListBlock } from './mappers/blocks/cms.service-list.mapper';
+import { mapSurveyJsBlock } from './mappers/blocks/cms.surveyjs-block.mapper';
+import { mapTicketDetailsBlock } from './mappers/blocks/cms.ticket-details.mapper';
+import { mapTicketListBlock } from './mappers/blocks/cms.ticket-list.mapper';
+import { mapTicketRecentBlock } from './mappers/blocks/cms.ticket-recent.mapper';
+import { mapUserAccountBlock } from './mappers/blocks/cms.user-account.mapper';
 import { mapAppConfig } from './mappers/cms.app-config.mapper';
-import { mapArticleDetailsBlock } from './mappers/cms.article-details.mapper';
-import { mapArticleListBlock } from './mappers/cms.article-list.mapper';
-import { mapFaqBlock } from './mappers/cms.faq.mapper';
 import { mapFooter } from './mappers/cms.footer.mapper';
 import { mapHeader } from './mappers/cms.header.mapper';
-import { mapInvoiceDetailsBlock } from './mappers/cms.invoice-details.mapper';
-import { mapInvoiceListBlock } from './mappers/cms.invoice-list.mapper';
 import { mapLoginPage } from './mappers/cms.login-page.mapper';
 import { mapNotFoundPage } from './mappers/cms.not-found-page.mapper';
-import { mapNotificationDetailsBlock } from './mappers/cms.notification-details.mapper';
-import { mapNotificationListBlock } from './mappers/cms.notification-list.mapper';
 import { mapOrganizationList } from './mappers/cms.organization-list.mapper';
 import { getAllPages, getAlternativePages, mapPage } from './mappers/cms.page.mapper';
-import { mapPaymentsHistoryBlock } from './mappers/cms.payments-history.mapper';
-import { mapPaymentsSummaryBlock } from './mappers/cms.payments-summary.mapper';
-import { mapResourceDetailsBlock } from './mappers/cms.resource-details.mapper';
-import { mapResourceListBlock } from './mappers/cms.resource-list.mapper';
-import { mapServiceDetailsBlock } from './mappers/cms.service-details.mapper';
-import { mapServiceListBlock } from './mappers/cms.service-list.mapper';
-import { mapSurveyBlock } from './mappers/cms.survey.mapper';
-import { mapTicketDetailsBlock } from './mappers/cms.ticket-details.mapper';
-import { mapTicketListBlock } from './mappers/cms.ticket-list.mapper';
-import { mapTicketRecentBlock } from './mappers/cms.ticket-recent.mapper';
-import { mapUserAccountBlock } from './mappers/cms.user-account.mapper';
+import { mapSurvey } from './mappers/cms.survey.mapper';
 import { responseDelay } from '@/utils/delay';
 
 @Injectable()
@@ -145,6 +146,10 @@ export class CmsService implements CMS.Service {
     }
 
     getSurvey(options: CMS.Request.GetCmsSurveyParams) {
-        return of(mapSurveyBlock(options.code)).pipe(responseDelay());
+        return of(mapSurvey(options.code)).pipe(responseDelay());
+    }
+
+    getSurveyJsBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapSurveyJsBlock(options.locale, options.id)).pipe(responseDelay());
     }
 }

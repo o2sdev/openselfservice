@@ -13,6 +13,7 @@ import { paymentsHistory } from '@/api/blocks/payments-history';
 import { paymentsSummary } from '@/api/blocks/payments-summary';
 import { serviceDetails } from '@/api/blocks/service-details';
 import { serviceList } from '@/api/blocks/services-list';
+import { surveyJSBlock } from '@/api/blocks/surveyjs';
 import { ticketDetails } from '@/api/blocks/ticket-details';
 import { ticketList } from '@/api/blocks/ticket-list';
 import { ticketRecent } from '@/api/blocks/ticket-recent';
@@ -21,6 +22,7 @@ import { loginPage } from '@/api/modules/login-page';
 import { notFoundPage } from '@/api/modules/not-found-page';
 import { organizations } from '@/api/modules/organizations';
 import { page } from '@/api/modules/page';
+import { surveyjs } from '@/api/modules/surveyjs';
 
 const internalSdk = getSdk({
     apiUrl: process.env.NEXT_PUBLIC_API_URL as string,
@@ -52,6 +54,7 @@ export const sdk = extendSdk(internalSdk, {
         getServiceDetails: serviceDetails(internalSdk).blocks.getServiceDetails,
         getFaq: faq(internalSdk).blocks.getFaq,
         getUserAccount: userAccount(internalSdk).blocks.getUserAccount,
+        getSurveyJsBlock: surveyJSBlock(internalSdk).blocks.getSurveyjsBlock,
     },
     modules: {
         getInit: page(internalSdk).modules.getInit,
@@ -59,5 +62,7 @@ export const sdk = extendSdk(internalSdk, {
         getLoginPage: loginPage(internalSdk).modules.getLoginPage,
         getNotFoundPage: notFoundPage(internalSdk).modules.getNotFoundPage,
         getCustomers: organizations(internalSdk).modules.getCustomers,
+        getSurvey: surveyjs(internalSdk).modules.getSurvey,
+        submitSurvey: surveyjs(internalSdk).modules.submitSurvey,
     },
 });

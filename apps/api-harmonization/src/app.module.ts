@@ -33,6 +33,7 @@ import { PaymentsHistoryBlockModule } from '@o2s/api-harmonization/blocks/paymen
 import { PaymentsSummaryBlockModule } from '@o2s/api-harmonization/blocks/payments-summary/payments-summary.module';
 import { ServiceDetailsBlockModule } from '@o2s/api-harmonization/blocks/service-details/service-details.module';
 import { ServiceListBlockModule } from '@o2s/api-harmonization/blocks/service-list/service-list.module';
+import { SurveyjsBlockModule } from '@o2s/api-harmonization/blocks/surveyjs/surveyjs.module';
 import { TicketDetailsBlockModule } from '@o2s/api-harmonization/blocks/ticket-details/ticket-details.module';
 import { TicketListBlockModule } from '@o2s/api-harmonization/blocks/ticket-list/ticket-list.module';
 import { TicketRecentBlockModule } from '@o2s/api-harmonization/blocks/ticket-recent/ticket-recent.module';
@@ -95,6 +96,7 @@ import { SurveyjsModule } from './modules/surveyjs-forms/surveyjs.module';
         TicketRecentBlockModule.register(AppConfig),
         ServiceListBlockModule.register(AppConfig),
         ServiceDetailsBlockModule.register(AppConfig),
+        SurveyjsBlockModule.register(AppConfig),
         // BLOCK REGISTER
     ],
     providers: [

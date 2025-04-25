@@ -36,6 +36,9 @@ query getComponent($id: ID!, $locale: I18NLocaleCode!) {
             ... on ComponentComponentsTicketRecent {
                 ...TicketRecentComponent
             }
+            ... on ComponentComponentsSurveyJsComponent {
+                ...SurveyjsComponent
+            }
         }
     }
     configurableTexts(locale: $locale) {

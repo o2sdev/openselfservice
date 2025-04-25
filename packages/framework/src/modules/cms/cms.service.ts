@@ -99,5 +99,9 @@ export abstract class CmsService {
         options: CMS.Request.GetCmsEntryParams,
     ): Observable<CMS.Model.OrganizationList.OrganizationList>;
 
-    abstract getSurvey(options: CMS.Request.GetCmsSurveyParams): Observable<CMS.Model.SurveyBlock.SurveyBlock>;
+    abstract getSurvey(options: CMS.Request.GetCmsSurveyParams): Observable<CMS.Model.Survey.Survey>;
+
+    abstract getSurveyJsBlock(
+        options: CMS.Request.GetCmsEntryParams,
+    ): Observable<CMS.Model.SurveyJsBlock.SurveyJsBlock>;
 }

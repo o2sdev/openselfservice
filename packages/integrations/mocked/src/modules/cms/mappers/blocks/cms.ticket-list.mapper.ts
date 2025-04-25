@@ -54,6 +54,19 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
         removeFilters: 'Remove filters ({active})',
         items: [
             {
+                __typename: 'FilterToggleGroup',
+                id: 'status',
+                label: 'Status',
+                allowMultiple: true,
+                isLeading: true,
+                options: [
+                    { label: 'All', value: 'ALL' },
+                    { label: 'Under consideration', value: 'OPEN' },
+                    { label: 'Resolved', value: 'CLOSED' },
+                    { label: 'New response', value: 'IN_PROGRESS' },
+                ],
+            },
+            {
                 __typename: 'FilterSelect',
                 id: 'sort',
                 label: 'Sort by',
@@ -73,8 +86,10 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
                 __typename: 'FilterSelect',
                 id: 'topic',
                 label: 'Topic',
-                allowMultiple: true,
+                allowMultiple: false,
+                isLeading: false,
                 options: [
+                    { label: 'All', value: 'ALL' },
                     { label: 'Tool Repair', value: 'TOOL_REPAIR' },
                     { label: 'Fleet Exchange', value: 'FLEET_EXCHANGE' },
                     { label: 'Calibration', value: 'CALIBRATION' },
@@ -137,6 +152,7 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
     },
     fieldMapping: {
         topic: {
+            ALL: 'Alle',
             TOOL_REPAIR: 'Werkzeugreparatur',
             FLEET_EXCHANGE: 'Flottenaustausch',
             CALIBRATION: 'Kalibrierung',
@@ -177,6 +193,7 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
                 id: 'sort',
                 label: 'Sortieren nach',
                 allowMultiple: false,
+                isLeading: true,
                 options: [
                     { label: 'Thema aufsteigend', value: 'topic_ASC' },
                     { label: 'Thema absteigend', value: 'topic_DESC' },
@@ -189,11 +206,26 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
                 ],
             },
             {
+                __typename: 'FilterToggleGroup',
+                id: 'status',
+                label: 'Status',
+                allowMultiple: false,
+                isLeading: false,
+                options: [
+                    { label: 'Alle', value: 'ALL' },
+                    { label: 'In Bearbeitung', value: 'OPEN' },
+                    { label: 'Gelöst', value: 'CLOSED' },
+                    { label: 'Neue Antwort', value: 'IN_PROGRESS' },
+                ],
+            },
+            {
                 __typename: 'FilterSelect',
                 id: 'topic',
                 label: 'Thema',
                 allowMultiple: true,
+                isLeading: false,
                 options: [
+                    { label: 'Alle', value: 'ALL' },
                     { label: 'Werkzeugreparatur', value: 'TOOL_REPAIR' },
                     { label: 'Flottenaustausch', value: 'FLEET_EXCHANGE' },
                     { label: 'Kalibrierung', value: 'CALIBRATION' },
@@ -256,6 +288,7 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
     },
     fieldMapping: {
         topic: {
+            ALL: 'Wszystko',
             TOOL_REPAIR: 'Naprawa narzędzi',
             FLEET_EXCHANGE: 'Wymiana floty',
             CALIBRATION: 'Kalibracja',
@@ -309,11 +342,26 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
                 ],
             },
             {
+                __typename: 'FilterToggleGroup',
+                id: 'status',
+                label: 'Status',
+                allowMultiple: false,
+                isLeading: true,
+                options: [
+                    { label: 'Wszystko', value: 'ALL' },
+                    { label: 'W rozpatrzeniu', value: 'OPEN' },
+                    { label: 'Rozwiązane', value: 'CLOSED' },
+                    { label: 'Nowa odpowiedź', value: 'IN_PROGRESS' },
+                ],
+            },
+            {
                 __typename: 'FilterSelect',
                 id: 'topic',
                 label: 'Temat',
-                allowMultiple: true,
+                allowMultiple: false,
+                isLeading: false,
                 options: [
+                    { label: 'Wszystko', value: 'ALL' },
                     { label: 'Naprawa narzędzi', value: 'TOOL_REPAIR' },
                     { label: 'Wymiana floty', value: 'FLEET_EXCHANGE' },
                     { label: 'Kalibracja', value: 'CALIBRATION' },

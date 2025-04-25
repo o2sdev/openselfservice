@@ -1,27 +1,25 @@
 import { CMS } from '@o2s/framework/modules';
 
-const MOCK_SURVEY_1: CMS.Model.SurveyBlock.SurveyBlock = {
-    id: 'survey-1',
-    code: 'survey-1',
-    surveyId: '0c4ec859-42a5-4dca-b927-67176964d5d5',
-    surveyType: 'survey',
-    submitDestination: ['surveyjs'],
-    requiredRoles: ['selfservice_user'],
-    postId: '3f239eb4-522f-4366-911a-79a2df649524',
-};
-
-const MOCK_SURVEY_2: CMS.Model.SurveyBlock.SurveyBlock = {
-    id: 'survey-2',
-    code: 'survey-2',
-    surveyId: 'b8498eb4-ddab-4815-9133-130301fdcef3',
+const MOCK_SURVEY_1: CMS.Model.Survey.Survey = {
+    code: 'contact-us',
+    surveyId: '72c90a02-6bfe-4e83-ba48-01f11752c234',
     surveyType: 'survey',
     submitDestination: ['surveyjs'],
     requiredRoles: [],
-    postId: '8b51c735-9483-48aa-bbe8-48eb9c54f71d',
+    postId: 'a91349b1-0c4c-4b7a-b712-91f04a1e6e99',
+};
+
+const MOCK_SURVEY_2: CMS.Model.Survey.Survey = {
+    code: 'complaint-form',
+    surveyId: '3897de9c-279b-4c50-b359-09f5c73a3c49',
+    surveyType: 'survey',
+    submitDestination: ['surveyjs'],
+    requiredRoles: ['selfservice_user'],
+    postId: 'e0f1b26b-a434-44ab-9608-c49dcd0658ec',
 };
 
 const MOCK_SURVEYS = [MOCK_SURVEY_1, MOCK_SURVEY_2];
 
-export const mapSurveyBlock = (code: string): CMS.Model.SurveyBlock.SurveyBlock => {
+export const mapSurvey = (code: string): CMS.Model.Survey.Survey => {
     return MOCK_SURVEYS.find((survey) => survey.code === code) ?? MOCK_SURVEY_1;
 };
