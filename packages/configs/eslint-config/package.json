@@ -9,19 +9,25 @@
         "./api": "./api.js",
         "./ui": "./ui.js"
     },
+    "scripts": {
+        "check-deps": "npx npm-check-updates --format group",
+        "update-deps:patch": "npx npm-check-updates --target patch -u",
+        "update-deps:minor": "npx npm-check-updates --target minor -u",
+        "update-deps:latest": "npx npm-check-updates --target latest -u"
+    },
     "devDependencies": {
-        "@eslint/js": "^9.24.0",
-        "@next/eslint-plugin-next": "^15.3.0",
-        "@typescript-eslint/eslint-plugin": "^8.29.1",
-        "@typescript-eslint/parser": "^8.29.1",
+        "@eslint/js": "^9.25.1",
+        "@next/eslint-plugin-next": "^15.3.1",
+        "@typescript-eslint/eslint-plugin": "^8.31.0",
+        "@typescript-eslint/parser": "^8.31.0",
         "eslint-config-prettier": "^10.1.2",
-        "eslint-config-turbo": "^2.5.0",
+        "eslint-config-turbo": "^2.5.2",
         "eslint-plugin-only-warn": "^1.1.0",
         "eslint-plugin-react": "^7.37.5",
         "eslint-plugin-react-hooks": "^5.2.0",
-        "eslint-plugin-turbo": "^2.5.0",
+        "eslint-plugin-turbo": "^2.5.2",
         "globals": "^16.0.0",
         "typescript": "5.8.3",
-        "typescript-eslint": "^8.29.1"
+        "typescript-eslint": "^8.31.0"
     }
 }

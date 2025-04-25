@@ -14,7 +14,11 @@
         "changeset": "changeset",
         "version-packages": "changeset version",
         "prerelease": "turbo run build",
-        "release": "changeset publish"
+        "release": "changeset publish",
+        "check-deps": "turbo run check-deps",
+        "update-deps:patch": "turbo run update-deps:patch && npm install",
+        "update-deps:minor": "turbo run update-deps:minor && npm install",
+        "update-deps:latest": "turbo run update-deps:latest && npm install"
     },
     "engines": {
         "node": ">=22"
