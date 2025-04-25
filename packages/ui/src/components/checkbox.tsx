@@ -38,7 +38,7 @@ const CheckboxWithLabel = React.forwardRef<React.ElementRef<typeof CheckboxPrimi
         return (
             <div className="flex items-start space-x-2">
                 <Checkbox id={checkboxId} ref={ref} {...props} className={className} />
-                <Label htmlFor={checkboxId} className={labelClassName}>
+                <Label htmlFor={checkboxId} className={cn('mt-[1px]', labelClassName)}>
                     {label}
                 </Label>
             </div>
