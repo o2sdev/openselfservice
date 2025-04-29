@@ -60,18 +60,16 @@ export const TicketRecentPure: React.FC<TicketRecentPureProps> = ({ ...component
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div className="basis-2/3">
-                                                            <RichText
-                                                                content={extractFirst(comment.content)}
-                                                                baseFontSize="small"
-                                                            />
-
-                                                            <Link asChild>
-                                                                <NextLink
-                                                                    href={ticket.detailsUrl}
-                                                                    className="flex items-center justify-end gap-2"
-                                                                >
-                                                                    {details}
+                                                        <div className="basis-2/3 flex items-center justify-between gap-4">
+                                                            <Link
+                                                                asChild
+                                                                className="whitespace-normal text-foreground hover:text-primary"
+                                                            >
+                                                                <NextLink href={ticket.detailsUrl} title={details}>
+                                                                    <RichText
+                                                                        content={extractFirst(comment.content)}
+                                                                        baseFontSize="small"
+                                                                    />
                                                                     <ArrowRight className="h-4 w-4" />
                                                                 </NextLink>
                                                             </Link>
