@@ -36,22 +36,43 @@ const MOCK_SURVEYJS_BLOCK_2_DE: CMS.Model.SurveyJsBlock.SurveyJsBlock = {
     code: 'complaint-form',
 };
 
+const MOCK_SURVEYJS_BLOCK_3_EN: CMS.Model.SurveyJsBlock.SurveyJsBlock = {
+    id: 'survey-3',
+    title: 'Request device maintenance',
+    code: 'request-device-maintenance',
+};
+
+const MOCK_SURVEYJS_BLOCK_3_PL: CMS.Model.SurveyJsBlock.SurveyJsBlock = {
+    id: 'survey-3',
+    title: 'Zgłoś naprawę urządzenia',
+    code: 'request-device-maintenance',
+};
+
+const MOCK_SURVEYJS_BLOCK_3_DE: CMS.Model.SurveyJsBlock.SurveyJsBlock = {
+    id: 'survey-3',
+    title: 'Gerätewartungsanfrage',
+    code: 'request-device-maintenance',
+};
+
 export const mapSurveyJsBlock = (locale: string, id: string): CMS.Model.SurveyJsBlock.SurveyJsBlock => {
     switch (locale) {
         case 'en':
             return (
-                [MOCK_SURVEYJS_BLOCK_1_EN, MOCK_SURVEYJS_BLOCK_2_EN].find((block) => block.id === id) ||
-                MOCK_SURVEYJS_BLOCK_1_EN
+                [MOCK_SURVEYJS_BLOCK_1_EN, MOCK_SURVEYJS_BLOCK_2_EN, MOCK_SURVEYJS_BLOCK_3_EN].find(
+                    (block) => block.id === id,
+                ) || MOCK_SURVEYJS_BLOCK_1_EN
             );
         case 'de':
             return (
-                [MOCK_SURVEYJS_BLOCK_1_DE, MOCK_SURVEYJS_BLOCK_2_DE].find((block) => block.id === id) ||
-                MOCK_SURVEYJS_BLOCK_1_DE
+                [MOCK_SURVEYJS_BLOCK_1_DE, MOCK_SURVEYJS_BLOCK_2_DE, MOCK_SURVEYJS_BLOCK_3_DE].find(
+                    (block) => block.id === id,
+                ) || MOCK_SURVEYJS_BLOCK_1_DE
             );
         case 'pl':
             return (
-                [MOCK_SURVEYJS_BLOCK_1_PL, MOCK_SURVEYJS_BLOCK_2_PL].find((block) => block.id === id) ||
-                MOCK_SURVEYJS_BLOCK_1_PL
+                [MOCK_SURVEYJS_BLOCK_1_PL, MOCK_SURVEYJS_BLOCK_2_PL, MOCK_SURVEYJS_BLOCK_3_PL].find(
+                    (block) => block.id === id,
+                ) || MOCK_SURVEYJS_BLOCK_1_PL
             );
         default:
             return MOCK_SURVEYJS_BLOCK_1_EN;

@@ -1,6 +1,14 @@
 import { Ticket } from '@/modules/tickets/tickets.model';
 import { Block, DataTable, Filters, Mapping, Pagination } from '@/utils/models';
 
+export type ActionLink = {
+    id: string;
+    label: string;
+    visible?: boolean;
+    icon?: string;
+    page?: { slug: string };
+};
+
 export class TicketListBlock extends Block.Block {
     title?: string;
     subtitle?: string;
@@ -15,6 +23,8 @@ export class TicketListBlock extends Block.Block {
     labels!: {
         today: string;
         yesterday: string;
+        showMore: string;
     };
     detailsUrl!: string;
+    actionLinks?: ActionLink[];
 }

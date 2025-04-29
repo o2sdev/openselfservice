@@ -12,8 +12,8 @@ class CustomSurveyQuestionComment extends SurveyQuestionComment {
                 id={this.question.name}
                 name={this.question.name}
                 value={this.question.value}
-                placeholder={this.question.renderedPlaceholder}
-                disabled={this.isDisplayMode}
+                placeholder={this.question.placeholder}
+                disabled={this.question.readOnly}
                 onChange={(event) => {
                     this.question.value = event.target.value;
                 }}

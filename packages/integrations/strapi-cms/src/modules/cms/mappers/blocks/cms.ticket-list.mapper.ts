@@ -23,6 +23,7 @@ export const mapTicketListBlock = (data: GetComponentQuery): CMS.Model.TicketLis
                 id: component.id,
                 title: component.title,
                 subtitle: component.subtitle,
+                actionLinks: component.actionLinks,
                 table: mapTable(component.table),
                 fieldMapping: mapFields(component.fields),
                 pagination: mapPagination(component.pagination),
@@ -34,6 +35,7 @@ export const mapTicketListBlock = (data: GetComponentQuery): CMS.Model.TicketLis
                 labels: {
                     today: configurableTexts.dates.today,
                     yesterday: configurableTexts.dates.yesterday,
+                    showMore: configurableTexts.actions.showMore,
                 },
                 detailsUrl: component.detailsURL as string,
             };

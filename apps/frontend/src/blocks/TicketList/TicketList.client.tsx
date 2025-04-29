@@ -9,13 +9,14 @@ import { Button } from '@o2s/ui/components/button';
 import { LoadingOverlay } from '@o2s/ui/components/loading-overlay';
 import { Separator } from '@o2s/ui/components/separator';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@o2s/ui/components/table';
-
+import { Typography } from '@o2s/ui/components/typography';
 import { sdk } from '@/api/sdk';
 
 import { ticketBadgeVariants } from '@/utils/mappings/ticket-badge';
 
 import { Link as NextLink } from '@/i18n';
 
+import { ActionLinks } from '@/components/ActionLinks/ActionLinks';
 import { InitialFilters } from '@/components/Filters/FiltersContext';
 import { FiltersSection } from '@/components/Filters/FiltersSection';
 import { NoResults } from '@/components/NoResults/NoResults';
@@ -31,8 +32,10 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
     };
 
     const initialData = component.tickets.data;
+
     const [data, setData] = useState<Blocks.TicketList.Model.TicketListBlock>(component);
     const [filters, setFilters] = useState(initialFilters);
+
     const [isPending, startTransition] = useTransition();
 
     const handleFilter = (data: Partial<Blocks.TicketList.Request.GetTicketListBlockQuery>) => {
@@ -56,6 +59,18 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
         <div className="w-full">
             {initialData.length > 0 ? (
                 <div className="flex flex-col gap-6">
+                    <div className="w-full flex gap-4 flex-col md:flex-row justify-between">
+                        <Typography variant="h1" asChild>
+                            <h1>{data.title}</h1>
+                        </Typography>
+
+                        {data.actionLinks && (
+                            <ActionLinks actionLinks={data.actionLinks} showMoreLabel={data.labels.showMore} />
+                        )}
+                    </div>
+
+                    <Separator />
+
                     <FiltersSection
                         title={data.subtitle}
                         initialFilters={initialFilters as unknown as InitialFilters}

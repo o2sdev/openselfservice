@@ -164,7 +164,7 @@ const PAGE_TICKET_LIST_EN: CMS.Model.Page.Page = {
             alternativeText: 'Placeholder',
         },
     },
-    hasOwnTitle: false,
+    hasOwnTitle: true,
     parent: {
         slug: '/',
         seo: {
@@ -193,6 +193,7 @@ const PAGE_TICKET_LIST_DE: CMS.Model.Page.Page = {
     id: '2',
     slug: '/faelle',
     locale: 'de',
+    hasOwnTitle: true,
     seo: {
         noIndex: false,
         noFollow: false,
@@ -206,7 +207,6 @@ const PAGE_TICKET_LIST_DE: CMS.Model.Page.Page = {
             alternativeText: 'Placeholder',
         },
     },
-    hasOwnTitle: false,
     parent: {
         slug: '/',
         seo: {
@@ -248,7 +248,7 @@ const PAGE_TICKET_LIST_PL: CMS.Model.Page.Page = {
             alternativeText: 'Placeholder',
         },
     },
-    hasOwnTitle: false,
+    hasOwnTitle: true,
     parent: {
         slug: '/',
         seo: {
@@ -1464,6 +1464,120 @@ const PAGE_SERVICE_DETAILS_PL: CMS.Model.Page.Page = {
     updatedAt: '2025-01-01',
 };
 
+const PAGE_REQUEST_DEVICE_MAINTENANCE_EN: CMS.Model.Page.Page = {
+    id: '12',
+    slug: '/request-device-maintenance',
+    locale: 'en',
+    seo: {
+        noIndex: false,
+        noFollow: false,
+        title: 'Request device maintenance',
+        description: 'Request device maintenance',
+        keywords: [],
+        image: {
+            url: 'https://picsum.photos/150',
+            width: 150,
+            height: 150,
+            alternativeText: 'Placeholder',
+        },
+    },
+    hasOwnTitle: false,
+    parent: {
+        slug: '/',
+        seo: {
+            title: 'Dashboard',
+        },
+    },
+    template: {
+        __typename: 'OneColumnTemplate',
+        slots: {
+            main: [
+                {
+                    __typename: 'SurveyJsBlock',
+                    id: 'survey-3',
+                },
+            ],
+        },
+    },
+    updatedAt: '2025-01-01',
+};
+
+const PAGE_REQUEST_DEVICE_MAINTENANCE_DE: CMS.Model.Page.Page = {
+    id: '12',
+    slug: '/geratewartungsanfrage',
+    locale: 'de',
+    seo: {
+        noIndex: false,
+        noFollow: false,
+        title: 'Gerätewartungsanfrage',
+        description: 'Gerätewartungsanfrage',
+        keywords: [],
+        image: {
+            url: 'https://picsum.photos/150',
+            width: 150,
+            height: 150,
+            alternativeText: 'Placeholder',
+        },
+    },
+    hasOwnTitle: false,
+    parent: {
+        slug: '/',
+        seo: {
+            title: 'Startseite',
+        },
+    },
+    template: {
+        __typename: 'OneColumnTemplate',
+        slots: {
+            main: [
+                {
+                    __typename: 'SurveyJsBlock',
+                    id: 'survey-3',
+                },
+            ],
+        },
+    },
+    updatedAt: '2025-01-01',
+};
+
+const PAGE_REQUEST_DEVICE_MAINTENANCE_PL: CMS.Model.Page.Page = {
+    id: '12',
+    slug: '/zglos-naprawe-urzadzenia',
+    locale: 'pl',
+    seo: {
+        noIndex: false,
+        noFollow: false,
+        title: 'Zgłoś naprawę urządzenia',
+        description: 'Zgłoś naprawę urządzenia',
+        keywords: [],
+        image: {
+            url: 'https://picsum.photos/150',
+            width: 150,
+            height: 150,
+            alternativeText: 'Placeholder',
+        },
+    },
+    hasOwnTitle: false,
+    parent: {
+        slug: '/',
+        seo: {
+            title: 'Strona główna',
+        },
+    },
+    template: {
+        __typename: 'OneColumnTemplate',
+        slots: {
+            main: [
+                {
+                    __typename: 'SurveyJsBlock',
+                    id: 'survey-3',
+                },
+            ],
+        },
+    },
+    updatedAt: '2025-01-01',
+};
+
 export const mapPage = (slug: string, locale: string): CMS.Model.Page.Page | undefined => {
     switch (slug) {
         case '/':
@@ -1578,6 +1692,13 @@ export const mapPage = (slug: string, locale: string): CMS.Model.Page.Page | und
         case '/wyslij-reklamacje':
             return PAGE_COMPLAINT_FORM_PL;
 
+        case '/request-device-maintenance':
+            return PAGE_REQUEST_DEVICE_MAINTENANCE_EN;
+        case '/geratewartungsanfrage':
+            return PAGE_REQUEST_DEVICE_MAINTENANCE_DE;
+        case '/zglos-naprawe-urzadzenia':
+            return PAGE_REQUEST_DEVICE_MAINTENANCE_PL;
+
         default:
             return undefined;
     }
@@ -1598,6 +1719,7 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_SERVICE_DETAILS_PL,
                 PAGE_CONTACT_US_PL,
                 PAGE_COMPLAINT_FORM_PL,
+                PAGE_REQUEST_DEVICE_MAINTENANCE_PL,
             ];
         case 'de':
             return [
@@ -1612,6 +1734,7 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_SERVICE_DETAILS_DE,
                 PAGE_CONTACT_US_DE,
                 PAGE_COMPLAINT_FORM_DE,
+                PAGE_REQUEST_DEVICE_MAINTENANCE_DE,
             ];
         case 'en':
             return [
@@ -1626,6 +1749,7 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_SERVICE_DETAILS_EN,
                 PAGE_CONTACT_US_EN,
                 PAGE_COMPLAINT_FORM_EN,
+                PAGE_REQUEST_DEVICE_MAINTENANCE_EN,
             ];
         default:
             return [];
@@ -1667,6 +1791,9 @@ export const getAlternativePages = (id: string, slug: string, locale: string): C
         PAGE_COMPLAINT_FORM_EN,
         PAGE_COMPLAINT_FORM_DE,
         PAGE_COMPLAINT_FORM_PL,
+        PAGE_REQUEST_DEVICE_MAINTENANCE_EN,
+        PAGE_REQUEST_DEVICE_MAINTENANCE_DE,
+        PAGE_REQUEST_DEVICE_MAINTENANCE_PL,
     ]
         .filter((page) => page.id === id)
         .map((page) => mapPage(page.slug, locale)!)
