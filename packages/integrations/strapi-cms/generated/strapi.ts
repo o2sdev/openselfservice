@@ -505,6 +505,7 @@ export type ComponentComponentsTicketDetailsPropertiesArgs = {
 };
 
 export type ComponentComponentsTicketList = {
+    actionLinks?: Maybe<Array<Maybe<ComponentContentActionLinks>>>;
     detailsURL?: Maybe<Scalars['String']['output']>;
     fields: Array<Maybe<ComponentContentFieldMapping>>;
     filters?: Maybe<ComponentContentFilters>;
@@ -514,6 +515,12 @@ export type ComponentComponentsTicketList = {
     subtitle?: Maybe<Scalars['String']['output']>;
     table: ComponentContentTable;
     title?: Maybe<Scalars['String']['output']>;
+};
+
+export type ComponentComponentsTicketListActionLinksArgs = {
+    filters?: InputMaybe<ComponentContentActionLinksFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type ComponentComponentsTicketListFieldsArgs = {
@@ -542,6 +549,24 @@ export type ComponentComponentsUserAccountInputsArgs = {
     filters?: InputMaybe<ComponentContentFormFieldFiltersInput>;
     pagination?: InputMaybe<PaginationArg>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ComponentContentActionLinks = {
+    icon?: Maybe<Scalars['String']['output']>;
+    id: Scalars['ID']['output'];
+    label: Scalars['String']['output'];
+    page?: Maybe<Page>;
+    visible?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type ComponentContentActionLinksFiltersInput = {
+    and?: InputMaybe<Array<InputMaybe<ComponentContentActionLinksFiltersInput>>>;
+    icon?: InputMaybe<StringFilterInput>;
+    label?: InputMaybe<StringFilterInput>;
+    not?: InputMaybe<ComponentContentActionLinksFiltersInput>;
+    or?: InputMaybe<Array<InputMaybe<ComponentContentActionLinksFiltersInput>>>;
+    page?: InputMaybe<PageFiltersInput>;
+    visible?: InputMaybe<BooleanFilterInput>;
 };
 
 export type ComponentContentArticleSection = {
@@ -1317,6 +1342,7 @@ export type GenericMorph =
     | ComponentComponentsTicketList
     | ComponentComponentsTicketRecent
     | ComponentComponentsUserAccount
+    | ComponentContentActionLinks
     | ComponentContentArticleSection
     | ComponentContentBanner
     | ComponentContentErrorMessage
@@ -2950,7 +2976,10 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
         | (Omit<ComponentComponentsServiceList, 'filters'> & { filters?: Maybe<_RefType['ComponentContentFilters']> })
         | ComponentComponentsSurveyJsComponent
         | ComponentComponentsTicketDetails
-        | (Omit<ComponentComponentsTicketList, 'filters'> & { filters?: Maybe<_RefType['ComponentContentFilters']> })
+        | (Omit<ComponentComponentsTicketList, 'actionLinks' | 'filters'> & {
+              actionLinks?: Maybe<Array<Maybe<_RefType['ComponentContentActionLinks']>>>;
+              filters?: Maybe<_RefType['ComponentContentFilters']>;
+          })
         | ComponentComponentsTicketRecent
         | ComponentComponentsUserAccount
         | Error;
@@ -3036,9 +3065,13 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
         | (Omit<ComponentComponentsServiceList, 'filters'> & { filters?: Maybe<_RefType['ComponentContentFilters']> })
         | ComponentComponentsSurveyJsComponent
         | ComponentComponentsTicketDetails
-        | (Omit<ComponentComponentsTicketList, 'filters'> & { filters?: Maybe<_RefType['ComponentContentFilters']> })
+        | (Omit<ComponentComponentsTicketList, 'actionLinks' | 'filters'> & {
+              actionLinks?: Maybe<Array<Maybe<_RefType['ComponentContentActionLinks']>>>;
+              filters?: Maybe<_RefType['ComponentContentFilters']>;
+          })
         | ComponentComponentsTicketRecent
         | ComponentComponentsUserAccount
+        | (Omit<ComponentContentActionLinks, 'page'> & { page?: Maybe<_RefType['Page']> })
         | ComponentContentArticleSection
         | ComponentContentBanner
         | ComponentContentErrorMessage
@@ -3314,10 +3347,17 @@ export type ResolversTypes = {
     ComponentComponentsSurveyJsComponent: ResolverTypeWrapper<ComponentComponentsSurveyJsComponent>;
     ComponentComponentsTicketDetails: ResolverTypeWrapper<ComponentComponentsTicketDetails>;
     ComponentComponentsTicketList: ResolverTypeWrapper<
-        Omit<ComponentComponentsTicketList, 'filters'> & { filters?: Maybe<ResolversTypes['ComponentContentFilters']> }
+        Omit<ComponentComponentsTicketList, 'actionLinks' | 'filters'> & {
+            actionLinks?: Maybe<Array<Maybe<ResolversTypes['ComponentContentActionLinks']>>>;
+            filters?: Maybe<ResolversTypes['ComponentContentFilters']>;
+        }
     >;
     ComponentComponentsTicketRecent: ResolverTypeWrapper<ComponentComponentsTicketRecent>;
     ComponentComponentsUserAccount: ResolverTypeWrapper<ComponentComponentsUserAccount>;
+    ComponentContentActionLinks: ResolverTypeWrapper<
+        Omit<ComponentContentActionLinks, 'page'> & { page?: Maybe<ResolversTypes['Page']> }
+    >;
+    ComponentContentActionLinksFiltersInput: ComponentContentActionLinksFiltersInput;
     ComponentContentArticleSection: ResolverTypeWrapper<ComponentContentArticleSection>;
     ComponentContentArticleSectionFiltersInput: ComponentContentArticleSectionFiltersInput;
     ComponentContentBanner: ResolverTypeWrapper<ComponentContentBanner>;
@@ -3714,11 +3754,16 @@ export type ResolversParentTypes = {
     };
     ComponentComponentsSurveyJsComponent: ComponentComponentsSurveyJsComponent;
     ComponentComponentsTicketDetails: ComponentComponentsTicketDetails;
-    ComponentComponentsTicketList: Omit<ComponentComponentsTicketList, 'filters'> & {
+    ComponentComponentsTicketList: Omit<ComponentComponentsTicketList, 'actionLinks' | 'filters'> & {
+        actionLinks?: Maybe<Array<Maybe<ResolversParentTypes['ComponentContentActionLinks']>>>;
         filters?: Maybe<ResolversParentTypes['ComponentContentFilters']>;
     };
     ComponentComponentsTicketRecent: ComponentComponentsTicketRecent;
     ComponentComponentsUserAccount: ComponentComponentsUserAccount;
+    ComponentContentActionLinks: Omit<ComponentContentActionLinks, 'page'> & {
+        page?: Maybe<ResolversParentTypes['Page']>;
+    };
+    ComponentContentActionLinksFiltersInput: ComponentContentActionLinksFiltersInput;
     ComponentContentArticleSection: ComponentContentArticleSection;
     ComponentContentArticleSectionFiltersInput: ComponentContentArticleSectionFiltersInput;
     ComponentContentBanner: ComponentContentBanner;
@@ -4467,6 +4512,12 @@ export type ComponentComponentsTicketListResolvers<
     ParentType extends
         ResolversParentTypes['ComponentComponentsTicketList'] = ResolversParentTypes['ComponentComponentsTicketList'],
 > = {
+    actionLinks?: Resolver<
+        Maybe<Array<Maybe<ResolversTypes['ComponentContentActionLinks']>>>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentComponentsTicketListActionLinksArgs, 'pagination' | 'sort'>
+    >;
     detailsURL?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     fields?: Resolver<
         Array<Maybe<ResolversTypes['ComponentContentFieldMapping']>>,
@@ -4512,6 +4563,19 @@ export type ComponentComponentsUserAccountResolvers<
         RequireFields<ComponentComponentsUserAccountInputsArgs, 'pagination' | 'sort'>
     >;
     title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentContentActionLinksResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentContentActionLinks'] = ResolversParentTypes['ComponentContentActionLinks'],
+> = {
+    icon?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    label?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    page?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType>;
+    visible?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -5214,6 +5278,7 @@ export type GenericMorphResolvers<
         | 'ComponentComponentsTicketList'
         | 'ComponentComponentsTicketRecent'
         | 'ComponentComponentsUserAccount'
+        | 'ComponentContentActionLinks'
         | 'ComponentContentArticleSection'
         | 'ComponentContentBanner'
         | 'ComponentContentErrorMessage'
@@ -6526,6 +6591,7 @@ export type Resolvers<ContextType = any> = {
     ComponentComponentsTicketList?: ComponentComponentsTicketListResolvers<ContextType>;
     ComponentComponentsTicketRecent?: ComponentComponentsTicketRecentResolvers<ContextType>;
     ComponentComponentsUserAccount?: ComponentComponentsUserAccountResolvers<ContextType>;
+    ComponentContentActionLinks?: ComponentContentActionLinksResolvers<ContextType>;
     ComponentContentArticleSection?: ComponentContentArticleSectionResolvers<ContextType>;
     ComponentContentBanner?: ComponentContentBannerResolvers<ContextType>;
     ComponentContentDynamicZone?: ComponentContentDynamicZoneResolvers<ContextType>;
@@ -7350,6 +7416,7 @@ export type TicketListComponentFragment = {
         }>;
     };
     noResults: { title: string; description?: string };
+    actionLinks?: Array<{ id: string; label: string; visible?: boolean; icon?: string; page?: { slug: string } }>;
 };
 
 export type TicketRecentComponentFragment = {
@@ -7895,6 +7962,13 @@ export type GetComponentQuery = {
                       }>;
                   };
                   noResults: { title: string; description?: string };
+                  actionLinks?: Array<{
+                      id: string;
+                      label: string;
+                      visible?: boolean;
+                      icon?: string;
+                      page?: { slug: string };
+                  }>;
               }
             | {
                   __typename: 'ComponentComponentsTicketRecent';
@@ -9015,6 +9089,15 @@ export const TicketListComponentFragmentDoc = gql`
             description
         }
         detailsURL
+        actionLinks {
+            id
+            label
+            visible
+            page {
+                slug
+            }
+            icon
+        }
     }
     ${FieldMappingFragmentDoc}
     ${TableFragmentDoc}

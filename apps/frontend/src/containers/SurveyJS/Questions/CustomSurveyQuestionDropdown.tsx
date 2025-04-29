@@ -19,7 +19,7 @@ class CustomSurveyQuestionDropdown extends SurveyQuestionDropdown {
                     onValueChange={(value) => {
                         this.question.value = value;
                     }}
-                    disabled={this.isDisplayMode}
+                    disabled={this.question.readOnly}
                     label={this.question.title}
                     id={this.question.name}
                 >

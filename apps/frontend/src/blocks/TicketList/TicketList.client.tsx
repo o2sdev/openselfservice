@@ -17,6 +17,7 @@ import { ticketBadgeVariants } from '@/utils/mappings/ticket-badge';
 
 import { Link as NextLink } from '@/i18n';
 
+import { ActionLinks } from '@/components/ActionLinks/ActionLinks';
 import { Filters } from '@/components/Filters/Filters';
 import FiltersContextProvider, { InitialFilters } from '@/components/Filters/FiltersContext';
 import { NoResults } from '@/components/NoResults/NoResults';
@@ -32,8 +33,10 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
     };
 
     const initialData = component.tickets.data;
+
     const [data, setData] = useState<Blocks.TicketList.Model.TicketListBlock>(component);
     const [filters, setFilters] = useState(initialFilters);
+
     const [isPending, startTransition] = useTransition();
 
     const handleFilter = (data: Partial<Blocks.TicketList.Request.GetTicketListBlockQuery>) => {
@@ -57,6 +60,18 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
         <div className="w-full">
             {initialData.length > 0 ? (
                 <div className="flex flex-col gap-6">
+                    <div className="w-full flex gap-4 flex-col md:flex-row justify-between">
+                        <Typography variant="h1" asChild>
+                            <h1>{data.title}</h1>
+                        </Typography>
+
+                        {data.actionLinks && (
+                            <ActionLinks actionLinks={data.actionLinks} showMoreLabel={data.labels.showMore} />
+                        )}
+                    </div>
+
+                    <Separator />
+
                     <div className="flex justify-between items-center gap-4 flex-wrap md:flex-nowrap">
                         <Typography variant="h2" asChild>
                             <h2>{data.subtitle}</h2>

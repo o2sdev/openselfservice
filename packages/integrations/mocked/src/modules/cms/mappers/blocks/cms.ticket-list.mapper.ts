@@ -2,8 +2,31 @@ import { CMS } from '@o2s/framework/modules';
 
 const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
     id: 'ticket-list-1',
-    title: 'Cases overview',
+    title: 'Cases',
     subtitle: 'Your recent cases',
+    actionLinks: [
+        {
+            id: 'submit-complaint',
+            label: 'Submit complaint',
+            visible: true,
+            page: { slug: '/submit-complaint' },
+            icon: 'MessageSquareWarning',
+        },
+        {
+            id: 'request-device-maintenance',
+            label: 'Request device maintenance',
+            visible: true,
+            page: { slug: '/request-device-maintenance' },
+            icon: 'Hammer',
+        },
+        {
+            id: 'contact-us',
+            label: 'Contact us',
+            visible: false,
+            icon: 'ClipboardPenLine',
+            page: { slug: '/contact-us' },
+        },
+    ],
     table: {
         columns: [
             { id: 'topic', title: 'Topic' },
@@ -38,7 +61,7 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
         },
     },
     pagination: {
-        limit: 5,
+        limit: 10,
         legend: 'of {totalPages} pages',
         prev: 'Previous',
         next: 'Next',
@@ -115,6 +138,7 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
     labels: {
         today: 'Today',
         yesterday: 'Yesterday',
+        showMore: 'Show more',
     },
     detailsUrl: '/cases/{id}',
 };
@@ -123,6 +147,29 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
     id: 'ticket-list-1',
     title: 'Fallübersicht',
     subtitle: 'Ihre neuesten Fälle',
+    actionLinks: [
+        {
+            id: 'submit-complaint',
+            label: 'Beschwerde einreichen',
+            visible: true,
+            page: { slug: '/submit-complaint' },
+            icon: 'MessageSquareWarning',
+        },
+        {
+            id: 'request-device-maintenance',
+            label: 'Gerätewartung anfordern',
+            visible: true,
+            page: { slug: '/request-device-maintenance' },
+            icon: 'Hammer',
+        },
+        {
+            id: 'contact-us',
+            label: 'Kontakt',
+            visible: false,
+            icon: 'ClipboardPenLine',
+            page: { slug: '/contact-us' },
+        },
+    ],
     table: {
         columns: [
             { id: 'topic', title: 'Thema' },
@@ -157,7 +204,7 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
         },
     },
     pagination: {
-        limit: 5,
+        limit: 10,
         legend: 'von {totalPages} Seiten',
         prev: 'Zurück',
         next: 'Weiter',
@@ -234,14 +281,39 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
     labels: {
         today: 'Heute',
         yesterday: 'Gestern',
+        showMore: 'Mehr anzeigen',
     },
     detailsUrl: '/faelle/{id}',
 };
 
 const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
     id: 'ticket-list-1',
-    title: 'Przegląd zgłoszeń',
+    title: 'Zgłoszenia',
     subtitle: 'Twoje ostatnie zgłoszenia',
+    actionLinks: [
+        {
+            id: 'submit-complaint',
+            label: 'Zgłoś błąd',
+            visible: true,
+            page: { slug: '/submit-complaint' },
+            icon: 'MessageSquareWarning',
+        },
+        {
+            id: 'request-device-maintenance',
+            label: 'Zgłoś wymagane konserwacje',
+            visible: true,
+            page: { slug: '/request-device-maintenance' },
+            icon: 'Hammer',
+        },
+        {
+            id: 'contact-us',
+            label: 'Skontaktuj się z nami',
+            visible: false,
+            icon: 'ClipboardPenLine',
+            page: { slug: '/contact-us' },
+        },
+    ],
+
     table: {
         columns: [
             { id: 'topic', title: 'Temat' },
@@ -276,7 +348,7 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
         },
     },
     pagination: {
-        limit: 5,
+        limit: 10,
         legend: 'z {totalPages} stron',
         prev: 'Poprzednia',
         next: 'Następna',
@@ -354,6 +426,7 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
     labels: {
         today: 'Dzisiaj',
         yesterday: 'Wczoraj',
+        showMore: 'Pokaż więcej',
     },
     detailsUrl: '/zgloszenia/{id}',
 };

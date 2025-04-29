@@ -13,7 +13,7 @@ class CustomSurveyQuestionBoolean extends SurveyQuestionBoolean {
                 value={this.question.booleanValue === null ? undefined : this.question.booleanValue ? 'true' : 'false'}
                 size="default"
                 variant="outline"
-                disabled={this.isDisplayMode}
+                disabled={this.question.readOnly}
                 onValueChange={(value) => {
                     this.question.booleanValue = value === 'true';
                 }}
