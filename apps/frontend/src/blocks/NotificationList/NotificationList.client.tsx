@@ -10,7 +10,6 @@ import { Link } from '@o2s/ui/components/link';
 import { LoadingOverlay } from '@o2s/ui/components/loading-overlay';
 import { Separator } from '@o2s/ui/components/separator';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@o2s/ui/components/table';
-import { Typography } from '@o2s/ui/components/typography';
 import { cn } from '@o2s/ui/lib/utils';
 
 import { sdk } from '@/api/sdk';
@@ -19,8 +18,8 @@ import { notificationBadgePriorityVariants } from '@/utils/mappings/notification
 
 import { Link as NextLink } from '@/i18n';
 
-import { Filters } from '@/components/Filters/Filters';
-import FiltersContextProvider, { InitialFilters } from '@/components/Filters/FiltersContext';
+import { InitialFilters } from '@/components/Filters/FiltersContext';
+import { FiltersSection } from '@/components/Filters/FiltersSection';
 import { NoResults } from '@/components/NoResults/NoResults';
 import { Pagination } from '@/components/Pagination/Pagination';
 
@@ -61,19 +60,14 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({ loca
         <div className="w-full">
             {initialData.length > 0 ? (
                 <div className="flex flex-col gap-6">
-                    <div className="flex justify-between items-center gap-4 flex-wrap md:flex-nowrap">
-                        <Typography variant="h2" asChild>
-                            <h2>{data.subtitle}</h2>
-                        </Typography>
-                        <FiltersContextProvider initialFilters={initialFilters as unknown as InitialFilters}>
-                            <Filters
-                                filters={data.filters}
-                                initialValues={filters}
-                                onSubmit={handleFilter}
-                                onReset={handleReset}
-                            />
-                        </FiltersContextProvider>
-                    </div>
+                    <FiltersSection
+                        title={data.subtitle}
+                        initialFilters={initialFilters as unknown as InitialFilters}
+                        filters={data.filters}
+                        initialValues={filters}
+                        onSubmit={handleFilter}
+                        onReset={handleReset}
+                    />
 
                     <LoadingOverlay isActive={isPending}>
                         {data.notifications.data.length ? (
