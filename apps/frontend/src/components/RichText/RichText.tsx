@@ -9,11 +9,14 @@ import { cn } from '@o2s/ui/lib/utils';
 
 import { RichTextProps } from './RichText.types';
 
-const LinkComp: FC<LinkProps & { children: ReactNode; class?: string }> = ({ children, ...props }) => (
-    <Link asChild>
-        <NextLink {...props}>{children}</NextLink>
-    </Link>
-);
+const LinkComp: FC<LinkProps & { children: ReactNode; className?: string }> = ({ children, ...props }) => {
+    const { className, ...rest } = props;
+    return (
+        <Link className={className} asChild>
+            <NextLink {...rest}>{children}</NextLink>
+        </Link>
+    );
+};
 
 const ImageComp: FC<ImageProps> = ({ ...props }) => <Image {...props} alt={props.alt} />;
 
@@ -37,7 +40,7 @@ export const RichText: FC<RichTextProps> = ({ content, baseFontSize = 'body', cl
         a: {
             component: LinkComp,
             props: {
-                className: baseFontSizeClass,
+                className: `${baseFontSizeClass} text-foreground hover:text-primary underline`,
             },
         },
         h1: {

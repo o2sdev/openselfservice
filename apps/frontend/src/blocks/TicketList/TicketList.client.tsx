@@ -5,7 +5,7 @@ import { ArrowRight } from 'lucide-react';
 import React, { useState, useTransition } from 'react';
 
 import { Badge } from '@o2s/ui/components/badge';
-import { Link } from '@o2s/ui/components/link';
+import { Button } from '@o2s/ui/components/button';
 import { LoadingOverlay } from '@o2s/ui/components/loading-overlay';
 import { Separator } from '@o2s/ui/components/separator';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@o2s/ui/components/table';
@@ -139,15 +139,15 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                                                 })}
                                                 {data.table.actions && (
                                                     <TableCell className="p-4">
-                                                        <Link asChild>
+                                                        <Button asChild variant="link">
                                                             <NextLink
                                                                 href={ticket.detailsUrl}
                                                                 className="flex items-center justify-end gap-2"
                                                             >
-                                                                {data.table.actions.label}
                                                                 <ArrowRight className="h-4 w-4" />
+                                                                {data.table.actions.label}
                                                             </NextLink>
-                                                        </Link>
+                                                        </Button>
                                                     </TableCell>
                                                 )}
                                             </TableRow>
