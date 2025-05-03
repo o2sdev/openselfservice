@@ -9,6 +9,7 @@ import { faq } from '@/api/blocks/faq';
 import { invoiceList } from '@/api/blocks/invoice-list';
 import { notificationDetails } from '@/api/blocks/notification-details';
 import { notificationList } from '@/api/blocks/notification-list';
+import { orderList } from '@/api/blocks/order-list';
 import { paymentsHistory } from '@/api/blocks/payments-history';
 import { paymentsSummary } from '@/api/blocks/payments-summary';
 import { serviceDetails } from '@/api/blocks/service-details';
@@ -55,6 +56,7 @@ export const sdk = extendSdk(internalSdk, {
         getFaq: faq(internalSdk).blocks.getFaq,
         getUserAccount: userAccount(internalSdk).blocks.getUserAccount,
         getSurveyJsBlock: surveyJSBlock(internalSdk).blocks.getSurveyjsBlock,
+        getOrderList: orderList(internalSdk).blocks.getOrderList,
     },
     modules: {
         getInit: page(internalSdk).modules.getInit,

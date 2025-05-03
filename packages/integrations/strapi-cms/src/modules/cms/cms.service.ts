@@ -15,6 +15,7 @@ import { mapInvoiceDetailsBlock } from './mappers/blocks/cms.invoice-details.map
 import { mapInvoiceListBlock } from './mappers/blocks/cms.invoice-list.mapper';
 import { mapNotificationDetailsBlock } from './mappers/blocks/cms.notification-details.mapper';
 import { mapNotificationListBlock } from './mappers/blocks/cms.notification-list.mapper';
+import { mapOrderListBlock } from './mappers/blocks/cms.order-list.mapper';
 import { mapPaymentsHistoryBlock } from './mappers/blocks/cms.payments-history.mapper';
 import { mapPaymentsSummaryBlock } from './mappers/blocks/cms.payments-summary.mapper';
 import { mapResourceDetailsBlock } from './mappers/blocks/cms.resource-details.mapper';
@@ -389,5 +390,10 @@ export class CmsService implements CMS.Service {
     getSurveyJsBlock(options: CMS.Request.GetCmsEntryParams) {
         const key = `survey-js-component-${options.id}-${options.locale}`;
         return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapSurveyJsBlock)));
+    }
+
+    getOrderListBlock(options: CMS.Request.GetCmsEntryParams) {
+        const key = `order-list-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapOrderListBlock)));
     }
 }

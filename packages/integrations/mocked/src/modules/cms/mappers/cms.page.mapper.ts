@@ -1464,6 +1464,264 @@ const PAGE_SERVICE_DETAILS_PL: CMS.Model.Page.Page = {
     updatedAt: '2025-01-01',
 };
 
+const PAGE_ORDER_LIST_EN: CMS.Model.Page.Page = {
+    id: '13',
+    slug: '/orders',
+    locale: 'en',
+    seo: {
+        noIndex: false,
+        noFollow: false,
+        title: 'Orders',
+        description: 'Orders',
+        keywords: [],
+        image: {
+            url: 'https://picsum.photos/150',
+            width: 150,
+            height: 150,
+            alternativeText: 'Placeholder',
+        },
+    },
+    hasOwnTitle: false,
+    parent: {
+        slug: '/',
+        seo: {
+            title: 'Dashboard',
+        },
+    },
+    template: {
+        __typename: 'OneColumnTemplate',
+        slots: {
+            main: [
+                {
+                    __typename: 'OrderListBlock',
+                    id: 'order-list-1',
+                },
+            ],
+        },
+    },
+    updatedAt: '2025-01-01',
+};
+
+const PAGE_ORDER_LIST_DE: CMS.Model.Page.Page = {
+    id: '13',
+    slug: '/bestellungen',
+    locale: 'de',
+    seo: {
+        noIndex: false,
+        noFollow: false,
+        title: 'Bestellungen',
+        description: 'Bestellungen',
+        keywords: [],
+        image: {
+            url: 'https://picsum.photos/150',
+            width: 150,
+            height: 150,
+            alternativeText: 'Placeholder',
+        },
+    },
+    hasOwnTitle: false,
+    parent: {
+        slug: '/',
+        seo: {
+            title: 'Startseite',
+        },
+    },
+    template: {
+        __typename: 'OneColumnTemplate',
+        slots: {
+            main: [
+                {
+                    __typename: 'OrderListBlock',
+                    id: 'order-list-1',
+                },
+            ],
+        },
+    },
+    updatedAt: '2025-01-01',
+};
+
+const PAGE_ORDER_LIST_PL: CMS.Model.Page.Page = {
+    id: '13',
+    slug: '/zamowienia',
+    locale: 'pl',
+    seo: {
+        noIndex: false,
+        noFollow: false,
+        title: 'Zamówienia',
+        description: 'Zamówienia',
+        keywords: [],
+        image: {
+            url: 'https://picsum.photos/150',
+            width: 150,
+            height: 150,
+            alternativeText: 'Placeholder',
+        },
+    },
+    hasOwnTitle: false,
+    parent: {
+        slug: '/',
+        seo: {
+            title: 'Strona główna',
+        },
+    },
+    template: {
+        __typename: 'OneColumnTemplate',
+        slots: {
+            main: [
+                {
+                    __typename: 'OrderListBlock',
+                    id: 'order-list-1',
+                },
+            ],
+        },
+    },
+    updatedAt: '2025-01-01',
+};
+
+const PAGE_ORDER_DETAILS_EN: CMS.Model.Page.Page = {
+    id: '14',
+    slug: '/orders/(.+)',
+    locale: 'en',
+    seo: {
+        noIndex: false,
+        noFollow: false,
+        title: 'Order Details',
+        description: 'Order Details',
+        keywords: [],
+        image: {
+            url: 'https://picsum.photos/150',
+            width: 150,
+            height: 150,
+            alternativeText: 'Placeholder',
+        },
+    },
+    hasOwnTitle: true,
+    parent: {
+        slug: '/orders',
+        seo: {
+            title: 'Orders',
+        },
+        parent: {
+            slug: '/',
+            seo: {
+                title: 'Dashboard',
+            },
+        },
+    },
+    template: {
+        __typename: 'OneColumnTemplate',
+        slots: {
+            main: [
+                {
+                    __typename: 'OrderDetailsBlock',
+                    id: 'order-details-1',
+                },
+                {
+                    __typename: 'FaqBlock',
+                    id: 'faq-1',
+                },
+            ],
+        },
+    },
+    updatedAt: '2025-01-01',
+};
+
+const PAGE_ORDER_DETAILS_DE: CMS.Model.Page.Page = {
+    id: '14',
+    slug: '/bestellungen/(.+)',
+    locale: 'de',
+    seo: {
+        noIndex: false,
+        noFollow: false,
+        title: 'Bestellungen',
+        description: 'Bestellungen',
+        keywords: [],
+        image: {
+            url: 'https://picsum.photos/150',
+            width: 150,
+            height: 150,
+            alternativeText: 'Placeholder',
+        },
+    },
+    hasOwnTitle: true,
+    parent: {
+        slug: '/bestellungen',
+        seo: {
+            title: 'Bestellungen',
+        },
+        parent: {
+            slug: '/',
+            seo: {
+                title: 'Startseite',
+            },
+        },
+    },
+    template: {
+        __typename: 'OneColumnTemplate',
+        slots: {
+            main: [
+                {
+                    __typename: 'OrderDetailsBlock',
+                    id: 'order-details-1',
+                },
+                {
+                    __typename: 'FaqBlock',
+                    id: 'faq-1',
+                },
+            ],
+        },
+    },
+    updatedAt: '2025-01-01',
+};
+
+const PAGE_ORDER_DETAILS_PL: CMS.Model.Page.Page = {
+    id: '14',
+    slug: '/zamowienia/(.+)',
+    locale: 'pl',
+    seo: {
+        noIndex: false,
+        noFollow: false,
+        title: 'Zamówienia',
+        description: 'Zamówienia',
+        keywords: [],
+        image: {
+            url: 'https://picsum.photos/150',
+            width: 150,
+            height: 150,
+            alternativeText: 'Placeholder',
+        },
+    },
+    hasOwnTitle: true,
+    parent: {
+        slug: '/zamowienia',
+        seo: {
+            title: 'Zamówienia',
+        },
+        parent: {
+            slug: '/',
+            seo: {
+                title: 'Strona główna',
+            },
+        },
+    },
+    template: {
+        __typename: 'OneColumnTemplate',
+        slots: {
+            main: [
+                {
+                    __typename: 'OrderDetailsBlock',
+                    id: 'order-details-1',
+                },
+                {
+                    __typename: 'FaqBlock',
+                    id: 'faq-1',
+                },
+            ],
+        },
+    },
+    updatedAt: '2025-01-01',
+};
+
 export const mapPage = (slug: string, locale: string): CMS.Model.Page.Page | undefined => {
     switch (slug) {
         case '/':
@@ -1578,6 +1836,32 @@ export const mapPage = (slug: string, locale: string): CMS.Model.Page.Page | und
         case '/wyslij-reklamacje':
             return PAGE_COMPLAINT_FORM_PL;
 
+        case '/orders':
+            return PAGE_ORDER_LIST_EN;
+        case '/bestellungen':
+            return PAGE_ORDER_LIST_DE;
+        case '/zamowienia':
+            return PAGE_ORDER_LIST_PL;
+
+        case slug.match(/\/orders\/.+/)?.[0]:
+            return {
+                ...PAGE_ORDER_DETAILS_EN,
+                slug: `/orders/${slug.match(/(.+)\/(.+)/)?.[2]}`,
+                updatedAt: '2025-01-01',
+            };
+        case slug.match(/\/bestellungen\/.+/)?.[0]:
+            return {
+                ...PAGE_ORDER_DETAILS_DE,
+                slug: `/bestellungen/${slug.match(/(.+)\/(.+)/)?.[2]}`,
+                updatedAt: '2025-01-01',
+            };
+        case slug.match(/\/zamowienia\/.+/)?.[0]:
+            return {
+                ...PAGE_ORDER_DETAILS_PL,
+                slug: `/zamowienia/${slug.match(/(.+)\/(.+)/)?.[2]}`,
+                updatedAt: '2025-01-01',
+            };
+
         default:
             return undefined;
     }
@@ -1598,6 +1882,8 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_SERVICE_DETAILS_PL,
                 PAGE_CONTACT_US_PL,
                 PAGE_COMPLAINT_FORM_PL,
+                PAGE_ORDER_LIST_PL,
+                PAGE_ORDER_DETAILS_PL,
             ];
         case 'de':
             return [
@@ -1612,6 +1898,8 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_SERVICE_DETAILS_DE,
                 PAGE_CONTACT_US_DE,
                 PAGE_COMPLAINT_FORM_DE,
+                PAGE_ORDER_LIST_DE,
+                PAGE_ORDER_DETAILS_DE,
             ];
         case 'en':
             return [
@@ -1626,6 +1914,8 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_SERVICE_DETAILS_EN,
                 PAGE_CONTACT_US_EN,
                 PAGE_COMPLAINT_FORM_EN,
+                PAGE_ORDER_LIST_EN,
+                PAGE_ORDER_DETAILS_EN,
             ];
         default:
             return [];
@@ -1667,6 +1957,12 @@ export const getAlternativePages = (id: string, slug: string, locale: string): C
         PAGE_COMPLAINT_FORM_EN,
         PAGE_COMPLAINT_FORM_DE,
         PAGE_COMPLAINT_FORM_PL,
+        PAGE_ORDER_LIST_EN,
+        PAGE_ORDER_LIST_DE,
+        PAGE_ORDER_LIST_PL,
+        PAGE_ORDER_DETAILS_EN,
+        PAGE_ORDER_DETAILS_DE,
+        PAGE_ORDER_DETAILS_PL,
     ]
         .filter((page) => page.id === id)
         .map((page) => mapPage(page.slug, locale)!)

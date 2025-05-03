@@ -1,10 +1,10 @@
-import { Orders } from '@o2s/framework/modules';
+import { Models, Orders } from '@o2s/framework/modules';
 
 const MOCK_ORDER_1: Orders.Model.Order = {
     id: 'ORD-001',
     customerId: 'cust-001',
-    createdAt: '2021-01-01',
-    updatedAt: '2021-01-01',
+    createdAt: '2021-01-01T22:00:00',
+    updatedAt: '2021-01-01T22:00:00',
     total: {
         value: 100,
         currency: 'USD',
@@ -106,8 +106,8 @@ const MOCK_ORDER_1: Orders.Model.Order = {
 const MOCK_ORDER_2: Orders.Model.Order = {
     id: 'ORD-002',
     customerId: 'cust-001',
-    createdAt: '2021-02-15',
-    updatedAt: '2021-02-16',
+    createdAt: '2021-02-15T00:00:00',
+    updatedAt: '2021-02-16T00:00:00',
     total: {
         value: 249.99,
         currency: 'USD',
@@ -213,8 +213,8 @@ const MOCK_ORDER_2: Orders.Model.Order = {
 const MOCK_ORDER_3: Orders.Model.Order = {
     id: 'ORD-003',
     customerId: 'cust-002',
-    createdAt: '2021-03-22',
-    updatedAt: '2021-03-23',
+    createdAt: '2021-03-22T00:00:00',
+    updatedAt: '2021-03-23T00:00:00',
     total: {
         value: 75.5,
         currency: 'USD',
@@ -316,8 +316,8 @@ const MOCK_ORDER_3: Orders.Model.Order = {
 const MOCK_ORDER_4: Orders.Model.Order = {
     id: 'ORD-004',
     customerId: 'cust-002',
-    createdAt: '2021-04-10',
-    updatedAt: '2021-04-11',
+    createdAt: '2021-04-10T00:00:00',
+    updatedAt: '2021-04-11T00:00:00',
     total: {
         value: 399.99,
         currency: 'USD',
@@ -422,8 +422,8 @@ const MOCK_ORDER_4: Orders.Model.Order = {
 const MOCK_ORDER_5: Orders.Model.Order = {
     id: 'ORD-005',
     customerId: 'cust-003',
-    createdAt: '2021-05-05',
-    updatedAt: '2021-05-06',
+    createdAt: '2021-05-05T00:00:00',
+    updatedAt: '2021-05-06T00:00:00',
     total: {
         value: 150,
         currency: 'USD',
@@ -530,32 +530,48 @@ export const mapOrder = (id: string): Orders.Model.Order | undefined => {
 };
 
 export const mapOrders = (options: Orders.Request.GetOrderListQuery, customerId: string): Orders.Model.Orders => {
-    const { offset = 0, limit = 10, status, paymentStatus, dateFrom, dateTo } = options;
+    const { offset = 0, limit = 10, status, paymentStatus, dateFrom, dateTo, sort } = options;
 
-    let filteredOrders = MOCKED_ORDERS.filter((order) => order.customerId === customerId).slice(offset, offset + limit);
+    const customerOrders = MOCKED_ORDERS.filter((order) => order.customerId === customerId).slice(
+        offset,
+        offset + limit,
+    );
 
-    if (status) {
-        filteredOrders = filteredOrders.filter((order) => order.status === status);
-    }
+    let filteredOrders = customerOrders.filter(
+        (order) =>
+            (!status || order.status === status) &&
+            (!paymentStatus || order.paymentStatus === paymentStatus) &&
+            (!dateFrom || new Date(order.createdAt) >= new Date(dateFrom)) &&
+            (!dateTo || new Date(order.createdAt) <= new Date(dateTo)) &&
+            (!dateFrom || new Date(order.updatedAt) >= new Date(dateFrom)) &&
+            (!dateTo || new Date(order.updatedAt) <= new Date(dateTo)),
+    );
 
-    if (paymentStatus) {
-        filteredOrders = filteredOrders.filter((order) => order.paymentStatus === paymentStatus);
-    }
+    if (sort) {
+        const [field, order] = sort.split('_');
+        const isAscending = order === 'ASC';
 
-    if (dateFrom) {
-        filteredOrders = filteredOrders.filter(
-            (order) => order?.createdAt && new Date(order.createdAt) >= new Date(dateFrom),
-        );
-    }
+        filteredOrders = filteredOrders.sort((a, b) => {
+            const aValue = a[field as keyof Orders.Model.Order];
+            const bValue = b[field as keyof Orders.Model.Order];
 
-    if (dateTo) {
-        filteredOrders = filteredOrders.filter(
-            (order) => order?.createdAt && new Date(order.createdAt) <= new Date(dateTo),
-        );
+            if (typeof aValue === 'string' && typeof bValue === 'string') {
+                return isAscending ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+            } else if (field === 'createdAt' || field === 'updatedAt') {
+                const aDate = new Date(aValue as string);
+                const bDate = new Date(bValue as string);
+                return isAscending ? aDate.getTime() - bDate.getTime() : bDate.getTime() - aDate.getTime();
+            } else if (field === 'total') {
+                const aTotal = (aValue as Models.Price.Price).value;
+                const bTotal = (bValue as Models.Price.Price).value;
+                return isAscending ? aTotal - bTotal : bTotal - aTotal;
+            }
+            return 0;
+        });
     }
 
     return {
-        data: filteredOrders,
-        total: MOCKED_ORDERS.length,
+        data: filteredOrders.slice(offset, Number(offset) + Number(limit)),
+        total: filteredOrders.length,
     };
 };

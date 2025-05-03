@@ -29,6 +29,7 @@ import { FaqBlockModule } from '@o2s/api-harmonization/blocks/faq/faq.module';
 import { InvoiceListBlockModule } from '@o2s/api-harmonization/blocks/invoice-list/invoice-list.module';
 import { NotificationDetailsBlockModule } from '@o2s/api-harmonization/blocks/notification-details/notification-details.module';
 import { NotificationListBlockModule } from '@o2s/api-harmonization/blocks/notification-list/notification-list.module';
+import { OrderListBlockModule } from '@o2s/api-harmonization/blocks/order-list/order-list.module';
 import { PaymentsHistoryBlockModule } from '@o2s/api-harmonization/blocks/payments-history/payments-history.module';
 import { PaymentsSummaryBlockModule } from '@o2s/api-harmonization/blocks/payments-summary/payments-summary.module';
 import { ServiceDetailsBlockModule } from '@o2s/api-harmonization/blocks/service-details/service-details.module';
@@ -97,6 +98,7 @@ import { SurveyjsModule } from './modules/surveyjs-forms/surveyjs.module';
         ServiceListBlockModule.register(AppConfig),
         ServiceDetailsBlockModule.register(AppConfig),
         SurveyjsBlockModule.register(AppConfig),
+        OrderListBlockModule.register(AppConfig),
         // BLOCK REGISTER
     ],
     providers: [

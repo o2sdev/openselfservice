@@ -104,4 +104,8 @@ export abstract class CmsService {
     abstract getSurveyJsBlock(
         options: CMS.Request.GetCmsEntryParams,
     ): Observable<CMS.Model.SurveyJsBlock.SurveyJsBlock>;
+
+    abstract getOrderListBlock(
+        options: CMS.Request.GetCmsEntryParams,
+    ): Observable<CMS.Model.OrderListBlock.OrderListBlock>;
 }
