@@ -9,14 +9,14 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
             id: 'submit-complaint',
             label: 'Submit complaint',
             visible: true,
-            page: { slug: '/submit-complaint' },
+            slug: '/submit-complaint',
             icon: 'MessageSquareWarning',
         },
         {
             id: 'request-device-maintenance',
             label: 'Request device maintenance',
             visible: true,
-            page: { slug: '/request-device-maintenance' },
+            slug: '/request-device-maintenance',
             icon: 'Hammer',
         },
         {
@@ -24,7 +24,7 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
             label: 'Contact us',
             visible: false,
             icon: 'ClipboardPenLine',
-            page: { slug: '/contact-us' },
+            slug: '/contact-us',
         },
     ],
     table: {
@@ -152,14 +152,14 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
             id: 'submit-complaint',
             label: 'Beschwerde einreichen',
             visible: true,
-            page: { slug: '/submit-complaint' },
+            slug: '/submit-complaint',
             icon: 'MessageSquareWarning',
         },
         {
             id: 'request-device-maintenance',
             label: 'Gerätewartung anfordern',
             visible: true,
-            page: { slug: '/request-device-maintenance' },
+            slug: '/request-device-maintenance',
             icon: 'Hammer',
         },
         {
@@ -167,7 +167,7 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
             label: 'Kontakt',
             visible: false,
             icon: 'ClipboardPenLine',
-            page: { slug: '/contact-us' },
+            slug: '/contact-us',
         },
     ],
     table: {
@@ -295,14 +295,14 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
             id: 'submit-complaint',
             label: 'Zgłoś błąd',
             visible: true,
-            page: { slug: '/submit-complaint' },
+            slug: '/submit-complaint',
             icon: 'MessageSquareWarning',
         },
         {
             id: 'request-device-maintenance',
             label: 'Zgłoś wymagane konserwacje',
             visible: true,
-            page: { slug: '/request-device-maintenance' },
+            slug: '/request-device-maintenance',
             icon: 'Hammer',
         },
         {
@@ -310,7 +310,7 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
             label: 'Skontaktuj się z nami',
             visible: false,
             icon: 'ClipboardPenLine',
-            page: { slug: '/contact-us' },
+            slug: '/contact-us',
         },
     ],
 

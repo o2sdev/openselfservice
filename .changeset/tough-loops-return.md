@@ -8,3 +8,8 @@
 ---
 
 feat: cases submission
+
+- new component DynamicIcon - for loading icons dinamicly,
+- new component ActionLinks - for showing button list with dropdown-menu,
+- new pages: /contact-us, /submit-complaint, /request-device-maintenance,
+- fixed placeholders and disabled state in SurveyJS fields,

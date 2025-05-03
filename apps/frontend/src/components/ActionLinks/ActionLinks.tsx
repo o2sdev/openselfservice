@@ -15,7 +15,7 @@ import { DynamicIcon } from '../DynamicIcon/DynamicIcon';
 
 import { ActionLinksProps } from './ActionLinks.types';
 
-export const ActionLinks: React.FC<ActionLinksProps> = ({ actionLinks, className, showMoreLabel }) => {
+export const ActionLinks: React.FC<Readonly<ActionLinksProps>> = ({ actionLinks, className, showMoreLabel }) => {
     const visibleActions = actionLinks.filter((a) => a.visible);
     const hiddenActions = actionLinks.filter((a) => !a.visible);
 

@@ -7,7 +7,7 @@ import { mapFilters } from '../cms.filters.mapper';
 import { mapPagination } from '../cms.pagination.mapper';
 import { mapTable } from '../cms.table.mapper';
 
-import { GetComponentQuery } from '@/generated/strapi';
+import { ComponentContentActionLinks, GetComponentQuery } from '@/generated/strapi';
 
 export const mapTicketListBlock = (data: GetComponentQuery): CMS.Model.TicketListBlock.TicketListBlock => {
     const component = data.component!.content[0];
@@ -23,7 +23,7 @@ export const mapTicketListBlock = (data: GetComponentQuery): CMS.Model.TicketLis
                 id: component.id,
                 title: component.title,
                 subtitle: component.subtitle,
-                actionLinks: component.actionLinks,
+                actionLinks: mapActionLinks(component.actionLinks as ComponentContentActionLinks[]),
                 table: mapTable(component.table),
                 fieldMapping: mapFields(component.fields),
                 pagination: mapPagination(component.pagination),
@@ -42,4 +42,22 @@ export const mapTicketListBlock = (data: GetComponentQuery): CMS.Model.TicketLis
     }
 
     throw new NotFoundException();
+};
+
+const mapActionLinks = (
+    actionLinks: ComponentContentActionLinks[] | undefined,
+): CMS.Model.TicketListBlock.ActionLink[] | undefined => {
+    if (!actionLinks) {
+        return undefined;
+    }
+
+    return actionLinks
+        .filter((actionLink) => actionLink.page?.slug)
+        .map((actionLink) => ({
+            id: actionLink.id,
+            label: actionLink.label,
+            visible: actionLink.visible ?? false,
+            slug: actionLink.page?.slug as string,
+            icon: actionLink.icon,
+        }));
 };

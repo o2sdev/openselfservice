@@ -6,7 +6,7 @@ export type ActionLink = {
     label: string;
     visible?: boolean;
     icon?: string;
-    page?: { slug: string };
+    slug: string;
 };
 
 export class TicketListBlock extends Block.Block {
