@@ -38,7 +38,7 @@ const mapActionLinks = (actionLinks: CMS.Model.TicketListBlock.ActionLink[] | un
     return actionLinks.map((actionLink) => ({
         label: actionLink.label,
         visible: actionLink.visible ?? false,
-        slug: actionLink.page?.slug ?? '/',
+        slug: actionLink.slug,
         icon: actionLink.icon,
     }));
 };
