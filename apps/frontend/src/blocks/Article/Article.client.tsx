@@ -1,15 +1,15 @@
 import React from 'react';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@o2s/ui/components/avatar';
 import { Typography } from '@o2s/ui/components/typography';
 
+import { Author } from '@/components/Author/Author';
 import { Container } from '@/components/Container/Container';
 import { Image } from '@/components/Image/Image';
 import { RichText } from '@/components/RichText/RichText';
 
 import { ArticlePureProps } from './Article.types';
 
-export const ArticlePure: React.FC<ArticlePureProps> = ({ ...component }) => {
+export const ArticlePure: React.FC<Readonly<ArticlePureProps>> = ({ ...component }) => {
     const {
         data: { author, createdAt, sections },
     } = component;
@@ -19,21 +19,7 @@ export const ArticlePure: React.FC<ArticlePureProps> = ({ ...component }) => {
             {component.__typename}: {component.id}
             <a href="https://markdown-it.github.io/">https://markdown-it.github.io/</a>
             <div className="border p-4">
-                {author && (
-                    // the same avatar as on the ticket detailsp page - let's extract it to a component
-                    <div className="flex items-center gap-2">
-                        <Avatar>
-                            <AvatarImage src={author.avatar} />
-                            <AvatarFallback name={author.name} />
-                        </Avatar>
-                        <div className="flex flex-col gap-1">
-                            <Typography variant="subtitle">{author.name}</Typography>
-                            <Typography variant="small" className="text-muted-foreground">
-                                {author.position}
-                            </Typography>
-                        </div>
-                    </div>
-                )}
+                {author && <Author name={author.name} avatar={author.avatar} position={author.position} />}
 
                 {createdAt}
 

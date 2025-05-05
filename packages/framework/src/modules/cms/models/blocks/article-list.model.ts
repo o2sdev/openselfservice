@@ -8,4 +8,8 @@ export class ArticleListBlock extends Block.Block {
     parent?: {
         slug: string;
     };
+    labels!: {
+        today: string;
+        yesterday: string;
+    };
 }
