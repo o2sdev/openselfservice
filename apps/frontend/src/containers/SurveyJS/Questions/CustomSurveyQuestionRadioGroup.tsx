@@ -15,7 +15,7 @@ class CustomSurveyQuestionRadiogroup extends SurveyQuestionRadiogroup {
         return (
             <RadioGroup
                 id={this.question.questionName}
-                disabled={this.isDisplayMode}
+                disabled={this.question.readOnly}
                 name={this.question.questionName}
                 onValueChange={(value) => {
                     this.question.renderedValue = value;

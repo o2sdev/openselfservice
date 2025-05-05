@@ -5,7 +5,6 @@ import { useSession } from 'next-auth/react';
 import { useLocale } from 'next-intl';
 import React, { startTransition, useActionState, useEffect } from 'react';
 import { Model } from 'survey-core';
-import 'survey-core/defaultV2.min.css';
 import { Survey as SurveySDK } from 'survey-react-ui';
 
 import { LoadingOverlay } from '@o2s/ui/components/loading-overlay';
@@ -45,7 +44,7 @@ const createSurveyModel = (
     survey.loadingHtml = '';
     survey.locale = locale;
     survey.css = {
-        root: 'bg-transparent text-sm md:text-base',
+        root: 'bg-transparent text-sm md:text-base [&>*]:[&>*:last-child]:hidden',
         body: '!m-0 box-border',
         header: 'pb-8',
         title: 'scroll-m-20 text-lg md:text-2xl font-semibold tracking-tight first:mt-0',

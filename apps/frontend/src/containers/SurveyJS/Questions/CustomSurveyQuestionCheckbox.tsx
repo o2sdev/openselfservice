@@ -35,7 +35,7 @@ class CustomSurveyQuestionCheckboxItem extends SurveyQuestionCheckboxItem {
                 id={this.question.getItemId(this.item)}
                 value={this.item.value}
                 checked={this.question.isItemSelected(this.item)}
-                disabled={this.isDisplayMode}
+                disabled={this.question.readOnly}
                 onCheckedChange={(value) => {
                     this.question.clickItemHandler(this.item, value === true);
                 }}

@@ -40,6 +40,7 @@ interface CustomSurveyQuestionTextProps {
         isDisplayMode: boolean;
         errors?: Array<unknown>;
         inputType?: string;
+        readOnly: boolean;
     };
 }
 
@@ -54,7 +55,7 @@ const CustomSurveyQuestionText: React.FC<CustomSurveyQuestionTextProps> = (props
                 <Label htmlFor={question.inputId}>{question.title}</Label>
 
                 <Popover open={open} onOpenChange={setOpen}>
-                    <PopoverTrigger asChild disabled={question.isDisplayMode}>
+                    <PopoverTrigger asChild disabled={question.readOnly}>
                         <Button
                             variant={'outline'}
                             className={cn(
@@ -63,7 +64,7 @@ const CustomSurveyQuestionText: React.FC<CustomSurveyQuestionTextProps> = (props
                                 question.errors?.length && 'border-destructive',
                             )}
                             name={question.inputId}
-                            disabled={question.isDisplayMode}
+                            disabled={question.readOnly}
                         >
                             <CalendarIcon />
                             {question.value ? (
@@ -105,7 +106,7 @@ const CustomSurveyQuestionText: React.FC<CustomSurveyQuestionTextProps> = (props
             id={question.inputId}
             name={question.inputId}
             value={question.value?.toString() || ''}
-            placeholder={question.renderedPlaceholder}
+            placeholder={question.placeholder}
             disabled={question.isDisplayMode}
             onChange={(event) => {
                 question.value = event.target.value;

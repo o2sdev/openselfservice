@@ -7530,6 +7530,7 @@ export type TicketListComponentFragment = {
         }>;
     };
     noResults: { title: string; description?: string };
+    actionLinks?: Array<{ id: string; label: string; visible?: boolean; icon?: string; page?: { slug: string } }>;
 };
 
 export type TicketRecentComponentFragment = {
@@ -8130,6 +8131,13 @@ export type GetComponentQuery = {
                       }>;
                   };
                   noResults: { title: string; description?: string };
+                  actionLinks?: Array<{
+                      id: string;
+                      label: string;
+                      visible?: boolean;
+                      icon?: string;
+                      page?: { slug: string };
+                  }>;
               }
             | {
                   __typename: 'ComponentComponentsTicketRecent';
@@ -9290,6 +9298,15 @@ export const TicketListComponentFragmentDoc = gql`
             description
         }
         detailsURL
+        actionLinks {
+            id
+            label
+            visible
+            page {
+                slug
+            }
+            icon
+        }
     }
     ${FieldMappingFragmentDoc}
     ${TableFragmentDoc}
