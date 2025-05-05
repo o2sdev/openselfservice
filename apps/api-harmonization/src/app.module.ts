@@ -1,8 +1,8 @@
 import { HttpModule } from '@nestjs/axios';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { APP_GUARD } from '@nestjs/core';
-import { LoggerModule } from '@o2s/utils.logger';
+import { APP_GUARD, Reflector } from '@nestjs/core';
+import { LoggerModule, LoggerService } from '@o2s/utils.logger';
 
 import {
     Articles,
@@ -103,7 +103,8 @@ import { SurveyjsModule } from './modules/surveyjs-forms/surveyjs.module';
         AppService,
         {
             provide: APP_GUARD,
-            useClass: Auth.Guards.RolesGuard,
+            useFactory: (reflector: Reflector, logger: LoggerService) => new Auth.Guards.RolesGuard(reflector, logger),
+            inject: [Reflector, LoggerService],
         },
     ],
 })
