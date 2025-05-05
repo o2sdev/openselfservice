@@ -10,6 +10,7 @@ import { LoadingOverlay } from '@o2s/ui/components/loading-overlay';
 import { Separator } from '@o2s/ui/components/separator';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@o2s/ui/components/table';
 import { Typography } from '@o2s/ui/components/typography';
+
 import { sdk } from '@/api/sdk';
 
 import { ticketBadgeVariants } from '@/utils/mappings/ticket-badge';
