@@ -15,10 +15,7 @@
         "version-packages": "changeset version",
         "prerelease": "turbo run build",
         "release": "changeset publish",
-        "check-deps": "turbo run check-deps",
-        "update-deps:patch": "turbo run update-deps:patch && npm install",
-        "update-deps:minor": "turbo run update-deps:minor && npm install",
-        "update-deps:latest": "turbo run update-deps:latest && npm install"
+        "update-deps": "npx npm-check-updates --format group --workspaces --interactive"
     },
     "engines": {
         "node": ">=22"
@@ -37,10 +34,11 @@
         "husky": "^9.1.7",
         "lint-staged": "^15.5.1",
         "prettier": "^3.5.3",
-        "turbo": "^2.5.0",
+        "syncpack": "^14.0.0-alpha.11",
+        "turbo": "^2.5.2",
         "typescript": "5.8.3"
     },
     "dependencies": {
-        "@changesets/cli": "^2.29.0"
+        "@changesets/cli": "^2.29.2"
     }
 }

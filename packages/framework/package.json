@@ -15,11 +15,7 @@
         "build": "tsc && tsc-alias",
         "lint": "tsc --noEmit && eslint . --ignore-pattern .eslintrc.js --max-warnings 0",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\"",
-        "generate:component": "turbo gen core-component",
-        "check-deps": "npx npm-check-updates --format group",
-        "update-deps:patch": "npx npm-check-updates --target patch -u",
-        "update-deps:minor": "npx npm-check-updates --target minor -u",
-        "update-deps:latest": "npx npm-check-updates --target latest -u"
+        "generate:component": "turbo gen core-component"
     },
     "dependencies": {
         "ofetch": "^1.4.1",
@@ -33,7 +29,7 @@
         "@turbo/gen": "^2.5.2",
         "@types/qs": "^6.9.18",
         "concurrently": "^9.1.2",
-        "eslint": "^9.25.1",
+        "eslint": "^9.26.0",
         "prettier": "^3.5.3",
         "tsc-alias": "^1.8.15",
         "typescript": "^5.8.3"

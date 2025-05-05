@@ -11,11 +11,7 @@
         "create-o2s-app": "ts-node ./src/index.ts",
         "build": "tsc && tsc-alias",
         "lint": "tsc --noEmit && eslint . --max-warnings 0",
-        "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\"",
-        "check-deps": "npx npm-check-updates --format group",
-        "update-deps:patch": "npx npm-check-updates --target patch -u",
-        "update-deps:minor": "npx npm-check-updates --target minor -u",
-        "update-deps:latest": "npx npm-check-updates --target latest -u"
+        "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
         "@types/adm-zip": "^0.5.7",
@@ -32,7 +28,7 @@
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "@types/cli-progress": "^3.11.6",
-        "eslint": "^9.25.1",
+        "eslint": "^9.26.0",
         "prettier": "^3.5.3",
         "typescript": "^5.8.3"
     }

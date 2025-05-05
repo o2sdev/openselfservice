@@ -15,25 +15,21 @@
         "lint": "tsc --noEmit && eslint . --max-warnings 0",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\"",
         "generate:component": "turbo gen react-component",
-        "generate:component:shadcn": "npx shadcn@latest add",
-        "check-deps": "npx npm-check-updates --format group",
-        "update-deps:patch": "npx npm-check-updates --target patch -u",
-        "update-deps:minor": "npx npm-check-updates --target minor -u",
-        "update-deps:latest": "npx npm-check-updates --target latest -u"
+        "generate:component:shadcn": "npx shadcn@latest add"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
-        "@tailwindcss/postcss": "^4.1.4",
+        "@tailwindcss/postcss": "^4.1.5",
         "@trivago/prettier-plugin-sort-imports": "^5.2.2",
         "@turbo/gen": "^2.5.2",
         "@types/eslint": "^9.6.1",
-        "@types/node": "^22.15.2",
-        "eslint": "^9.25.1",
+        "@types/node": "^22.15.3",
+        "eslint": "^9.26.0",
         "prettier": "^3.5.3",
         "sass": "^1.87.0",
-        "tw-animate-css": "^1.2.8",
+        "tw-animate-css": "^1.2.9",
         "typescript": "^5.8.3"
     },
     "dependencies": {

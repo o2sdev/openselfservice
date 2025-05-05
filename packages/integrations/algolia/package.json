@@ -13,23 +13,19 @@
         "dev": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")",
         "build": "tsc && tsc-alias",
         "lint": "tsc --noEmit && eslint . --max-warnings 0",
-        "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\"",
-        "check-deps": "npx npm-check-updates --format group",
-        "update-deps:patch": "npx npm-check-updates --target patch -u",
-        "update-deps:minor": "npx npm-check-updates --target minor -u",
-        "update-deps:latest": "npx npm-check-updates --target latest -u"
+        "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
         "@o2s/framework": "*",
         "@o2s/utils.logger": "*",
-        "algoliasearch": "^5.23.4"
+        "algoliasearch": "^5.24.0"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "concurrently": "^9.1.2",
-        "eslint": "^9.25.1",
+        "eslint": "^9.26.0",
         "prettier": "^3.5.3",
         "tsc-alias": "^1.8.15",
         "typescript": "^5.8.3"
