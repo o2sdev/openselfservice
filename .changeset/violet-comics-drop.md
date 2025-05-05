@@ -14,4 +14,4 @@
 '@o2s/ui': minor
 ---
 
-chore: add scripts for update dependencies
+chore: updated dependencies
