@@ -1,29 +1,26 @@
 import React from 'react';
 
-import { Link } from '@o2s/ui/components/link';
-import { Typography } from '@o2s/ui/components/typography';
-
-import { Link as NextLink } from '@/i18n';
+import { ArticlesSection } from '@/components/ArticlesSection/ArticlesSection';
+import { InformativeCard } from '@/components/InformativeCard/InformativeCard';
 
 import { QuickLinksPureProps } from './QuickLinks.types';
 
-export const QuickLinksPure: React.FC<QuickLinksPureProps> = ({ ...component }) => {
+export const QuickLinksPure: React.FC<Readonly<QuickLinksPureProps>> = ({ ...component }) => {
     return (
-        <div className="w-full flex flex-col gap-4">
-            <div className="border p-4">
-                {component.__typename}: {component.id}
-                <Typography>{component.title}</Typography>
-                <Typography>{component.description}</Typography>
-                <ul>
-                    {component.items.map((item, index) => (
-                        <li key={index}>
-                            <Link asChild>
-                                <NextLink href={item.url}>{item.label}</NextLink>
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        </div>
+        <ArticlesSection title={component.title} description={component.description}>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
+                {component.items.map((item) => (
+                    <li key={item.label} className="w-full">
+                        <InformativeCard
+                            title={item.label}
+                            description={item.description}
+                            href={item.url}
+                            iconUrl={item.icon?.url}
+                            iconSize="medium"
+                        />
+                    </li>
+                ))}
+            </ul>
+        </ArticlesSection>
     );
 };
