@@ -7,3 +7,10 @@ export class ArticleListBlock extends Block.Block {
     description!: CMS.Model.ArticleListBlock.ArticleListBlock['description'];
     items!: Articles.Model.Articles;
 }
+
+class ArticleListBlockItems {
+    title?: string;
+    description?: string;
+    total!: number;
+    data!: Articles.Model.Article[];
+}

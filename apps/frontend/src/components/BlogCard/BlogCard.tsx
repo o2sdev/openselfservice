@@ -28,7 +28,8 @@ export const BlogCard: React.FC<Readonly<BlogCardProps>> = ({
                             <Image
                                 src={image?.url}
                                 alt={image?.alt}
-                                fill={true}
+                                width={image?.width}
+                                height={image?.height}
                                 className="object-cover object-center max-h-[164px] max-w-full"
                             />
                         )}

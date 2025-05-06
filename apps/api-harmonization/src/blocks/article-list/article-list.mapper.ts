@@ -7,6 +7,7 @@ import { ArticleListBlock } from './article-list.model';
 export const mapArticleList = (
     cms: CMS.Model.ArticleListBlock.ArticleListBlock,
     articles: Articles.Model.Articles,
+
     locale: string,
 ): ArticleListBlock => {
     return {
@@ -15,8 +16,8 @@ export const mapArticleList = (
         title: cms.title,
         description: cms.description,
         items: {
-            total: articles.total,
-            data: articles.data.map((article) => mapArticle(article, cms, locale)),
+            ...articles,
+            data: articles.data.map((article: Articles.Model.Article) => mapArticle(article, cms, locale)),
         },
     };
 };

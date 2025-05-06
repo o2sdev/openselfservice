@@ -1,4 +1,5 @@
-import { Articles, CMS } from '../../models';
+import { Articles, CMS, Models } from '@o2s/framework/modules';
+
 import { Block } from '../../utils';
 
 export class CategoryBlock extends Block.Block {
@@ -7,5 +8,12 @@ export class CategoryBlock extends Block.Block {
     description!: Articles.Model.Category['description'];
     icon?: Articles.Model.Category['icon'];
     components?: CMS.Model.CategoryBlock.CategoryBlock['components'];
+    articles!: CategoryArticlesListBlock;
+    pagination?: Models.Pagination.Pagination;
+}
+
+class CategoryArticlesListBlock {
+    title!: CMS.Model.CategoryBlock.CategoryBlock['title'];
+    description?: CMS.Model.CategoryBlock.CategoryBlock['description'];
     items!: Articles.Model.Articles;
 }
