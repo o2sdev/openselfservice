@@ -11,6 +11,7 @@ import { mapInvoiceListBlock } from './mappers/blocks/cms.invoice-list.mapper';
 import { mapNotificationDetailsBlock } from './mappers/blocks/cms.notification-details.mapper';
 import { mapNotificationListBlock } from './mappers/blocks/cms.notification-list.mapper';
 import { mapOrderListBlock } from './mappers/blocks/cms.order-list.mapper';
+import { mapOrdersSummaryBlock } from './mappers/blocks/cms.orders-summary.mapper';
 import { mapPaymentsHistoryBlock } from './mappers/blocks/cms.payments-history.mapper';
 import { mapPaymentsSummaryBlock } from './mappers/blocks/cms.payments-summary.mapper';
 import { mapResourceDetailsBlock } from './mappers/blocks/cms.resource-details.mapper';
@@ -156,5 +157,9 @@ export class CmsService implements CMS.Service {
 
     getOrderListBlock(options: CMS.Request.GetCmsEntryParams) {
         return of(mapOrderListBlock(options.locale)).pipe(responseDelay());
+    }
+
+    getOrdersSummaryBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapOrdersSummaryBlock(options.locale)).pipe(responseDelay());
     }
 }

@@ -1,5 +1,4 @@
-import { TooltipProps } from 'recharts';
-import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
+import React from 'react';
 
 import { Models } from '@o2s/framework/modules';
 
@@ -7,9 +6,9 @@ import { Typography } from '@o2s/ui/components/typography';
 
 import { Price } from '@/components/Price/Price';
 
-export const ChartTooltip = (props: TooltipProps<ValueType, NameType>) => {
-    const { active, payload } = props;
+import { ChartTooltipProps } from './ChartTooltip.types';
 
+export const ChartTooltip: React.FC<ChartTooltipProps> = ({ type = 'number', active, payload }) => {
     if (!active || !payload?.length) {
         return null;
     }
@@ -27,9 +26,16 @@ export const ChartTooltip = (props: TooltipProps<ValueType, NameType>) => {
                                 <Typography variant="small">{`${bar?.name} :`}</Typography>
                             </div>
                             <Typography variant="small" className="text-right">
-                                <Price
-                                    price={{ value: Number(bar.value), currency: bar.unit as Models.Price.Currency }}
-                                />
+                                {type === 'price' ? (
+                                    <Price
+                                        price={{
+                                            value: Number(bar.value),
+                                            currency: bar.unit as Models.Price.Currency,
+                                        }}
+                                    />
+                                ) : (
+                                    bar.value
+                                )}
                             </Typography>
                         </div>
                     ))

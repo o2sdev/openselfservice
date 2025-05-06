@@ -1607,6 +1607,10 @@ const PAGE_ORDER_LIST_EN: CMS.Model.Page.Page = {
         slots: {
             main: [
                 {
+                    __typename: 'OrdersSummaryBlock',
+                    id: 'orders-summary-1',
+                },
+                {
                     __typename: 'OrderListBlock',
                     id: 'order-list-1',
                 },
@@ -1645,6 +1649,10 @@ const PAGE_ORDER_LIST_DE: CMS.Model.Page.Page = {
         slots: {
             main: [
                 {
+                    __typename: 'OrdersSummaryBlock',
+                    id: 'orders-summary-1',
+                },
+                {
                     __typename: 'OrderListBlock',
                     id: 'order-list-1',
                 },
@@ -1682,6 +1690,10 @@ const PAGE_ORDER_LIST_PL: CMS.Model.Page.Page = {
         __typename: 'OneColumnTemplate',
         slots: {
             main: [
+                {
+                    __typename: 'OrdersSummaryBlock',
+                    id: 'orders-summary-1',
+                },
                 {
                     __typename: 'OrderListBlock',
                     id: 'order-list-1',

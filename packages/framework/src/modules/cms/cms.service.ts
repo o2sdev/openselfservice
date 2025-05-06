@@ -108,4 +108,8 @@ export abstract class CmsService {
     abstract getOrderListBlock(
         options: CMS.Request.GetCmsEntryParams,
     ): Observable<CMS.Model.OrderListBlock.OrderListBlock>;
+
+    abstract getOrdersSummaryBlock(
+        options: CMS.Request.GetCmsEntryParams,
+    ): Observable<CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock>;
 }

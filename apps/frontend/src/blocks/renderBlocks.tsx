@@ -1,5 +1,6 @@
 import { Modules } from '@o2s/api-harmonization';
 import React from 'react';
+import { OrdersSummaryRenderer } from 'src/blocks/OrdersSummary/OrdersSummary.renderer';
 
 import { CMS } from '@o2s/framework/modules';
 
@@ -51,6 +52,8 @@ export const renderBlocks = (blocks: CMS.Model.Page.SlotBlock[], slug: string[],
                 return <SurveyJsRenderer key={block.id} id={block.id} accessToken={accessToken} />;
             case 'OrderListBlock':
                 return <OrderListRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
+            case 'OrdersSummaryBlock':
+                return <OrdersSummaryRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
         }
     });
 };

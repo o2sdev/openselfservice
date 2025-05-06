@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, NotImplementedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore module type mismatch
@@ -395,5 +395,11 @@ export class CmsService implements CMS.Service {
     getOrderListBlock(options: CMS.Request.GetCmsEntryParams) {
         const key = `order-list-component-${options.id}-${options.locale}`;
         return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapOrderListBlock)));
+    }
+
+    getOrdersSummaryBlock(
+        _options: CMS.Request.GetCmsEntryParams,
+    ): Observable<CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock> {
+        throw new NotImplementedException();
     }
 }
