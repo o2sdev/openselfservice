@@ -20,7 +20,10 @@ export const BlogCard: React.FC<Readonly<BlogCardProps>> = ({
     categoryTitle,
 }) => {
     return (
-        <Link asChild className="group whitespace-normal text-foreground hover:no-underline w-full">
+        <Link
+            asChild
+            className="group whitespace-normal text-foreground hover:no-underline w-full focus-visible:ring-offset-4"
+        >
             <NextLink href={url} aria-label={title}>
                 <div className="flex flex-col gap-6">
                     <div className="relative overflow-hidden max-h-[164px] flex-shrink-0 rounded-xl w-full">

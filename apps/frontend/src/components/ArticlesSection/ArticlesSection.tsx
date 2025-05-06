@@ -14,8 +14,8 @@ export const ArticlesSection: React.FC<Readonly<ArticlesSectionProps>> = ({
     children,
 }) => {
     return (
-        <div className="flex flex-col gap-6">
-            <div className="flex w-full items-end justify-between gap-4">
+        <div className="flex flex-col gap-6 w-full">
+            <div className="flex flex-col sm:flex-row w-full sm:items-end justify-between gap-4">
                 <div className="flex flex-col gap-2">
                     {title && <Typography variant="h2">{title}</Typography>}
                     {description && <Typography variant="body">{description}</Typography>}

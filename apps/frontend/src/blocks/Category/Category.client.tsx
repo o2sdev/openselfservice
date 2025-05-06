@@ -19,7 +19,7 @@ export const CategoryPure: React.FC<CategoryPureProps> = ({ slug, locale, access
     return (
         <div className="w-full flex flex-col gap-6">
             <Container variant="narrow">
-                <div className="flex gap-6 items-start">
+                <div className="flex gap-6 items-start px-4 md:px-0">
                     {component.icon && (
                         <Image
                             src={component.icon.url}
