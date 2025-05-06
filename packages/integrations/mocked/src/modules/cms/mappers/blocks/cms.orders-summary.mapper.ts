@@ -3,7 +3,7 @@ import { CMS } from '@o2s/framework/modules';
 const MOCK_ORDER_LIST_BLOCK_EN: CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock = {
     id: 'orders-summary-1',
     title: 'At a glance',
-    subtitle: 'Compared to the same period last year',
+    subtitle: 'Compared to the same period a year before',
     totalValue: {
         title: 'Total order value',
     },
@@ -20,6 +20,24 @@ const MOCK_ORDER_LIST_BLOCK_EN: CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock 
         title: "So far, there's nothing here",
         description: '',
     },
+    ranges: [
+        {
+            label: '1 Wk',
+            value: 7,
+            type: 'day',
+        },
+        {
+            label: '1 Mo',
+            value: 30,
+            type: 'day',
+        },
+        {
+            label: '6 Mo',
+            value: 6,
+            type: 'month',
+            isDefault: true,
+        },
+    ],
 };
 
 const MOCK_ORDER_LIST_BLOCK_DE: CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock = {
@@ -42,12 +60,30 @@ const MOCK_ORDER_LIST_BLOCK_DE: CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock 
         title: 'Bisher gibt es hier nichts',
         description: '',
     },
+    ranges: [
+        {
+            label: '1 Wo',
+            value: 7,
+            type: 'day',
+        },
+        {
+            label: '1 Mt',
+            value: 30,
+            type: 'day',
+        },
+        {
+            label: '6 Mt',
+            value: 6,
+            type: 'month',
+            isDefault: true,
+        },
+    ],
 };
 
 const MOCK_ORDER_LIST_BLOCK_PL: CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock = {
     id: 'orders-summary-1',
     title: 'W skrócie',
-    subtitle: 'W porównaniu do tego samego okresu w ubiegłym roku',
+    subtitle: 'W porównaniu z tym samym okresem roku poprzedniego',
     totalValue: {
         title: 'Całkowita wartość zamówień',
     },
@@ -64,6 +100,24 @@ const MOCK_ORDER_LIST_BLOCK_PL: CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock 
         title: 'Jak dotąd nie ma tu nic',
         description: '',
     },
+    ranges: [
+        {
+            label: '1 Tydz',
+            value: 7,
+            type: 'day',
+        },
+        {
+            label: '1 Mies',
+            value: 30,
+            type: 'day',
+        },
+        {
+            label: '6 Mies',
+            value: 6,
+            type: 'month',
+            isDefault: true,
+        },
+    ],
 };
 
 export const mapOrdersSummaryBlock = (locale: string): CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock => {

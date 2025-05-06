@@ -16,6 +16,7 @@ export const OrdersSummary: React.FC<OrdersSummaryProps> = async ({ id, accessTo
             id,
             dateFrom: dayjs().subtract(6, 'months').toISOString(),
             dateTo: dayjs().toISOString(),
+            range: 'month',
         },
         { 'x-locale': locale },
         accessToken,

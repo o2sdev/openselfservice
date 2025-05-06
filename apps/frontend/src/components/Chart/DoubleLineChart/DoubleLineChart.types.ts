@@ -12,6 +12,5 @@ export interface DoubleLineChartProps {
         prev: string;
         current: string;
     };
-    maxBarSize?: number;
     tooltipType?: ChartTooltipProps['type'];
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { CartesianGrid, Legend, Line, LineChart, TooltipProps, XAxis } from 'recharts';
+import { CartesianGrid, Legend, Line, LineChart, TooltipProps, XAxis, YAxis } from 'recharts';
 import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
 
 import { ChartConfig, ChartContainer, ChartTooltip } from '@o2s/ui/components/chart';
@@ -8,12 +8,7 @@ import { ChartTooltip as CustomTooltip } from '@/components/Chart/ChartTooltip/C
 
 import { DoubleLineChartProps } from './DoubleLineChart.types';
 
-export const DoubleLineChart: React.FC<DoubleLineChartProps> = ({
-    chartData,
-    legend,
-    maxBarSize = 80,
-    tooltipType,
-}) => {
+export const DoubleLineChart: React.FC<DoubleLineChartProps> = ({ chartData, legend, tooltipType }) => {
     const chartConfig = {
         prev: {
             stroke: 'var(--chart-2)',
@@ -26,12 +21,7 @@ export const DoubleLineChart: React.FC<DoubleLineChartProps> = ({
     return (
         <div className="w-full h-full">
             <ChartContainer config={chartConfig} className="h-[250px] aspect-auto w-full">
-                <LineChart
-                    data={chartData}
-                    margin={{ top: 20, right: 20, bottom: 0, left: 20 }}
-                    maxBarSize={maxBarSize}
-                    accessibilityLayer
-                >
+                <LineChart data={chartData} margin={{ top: 20, right: 20, bottom: 0, left: 20 }} accessibilityLayer>
                     <CartesianGrid vertical={false} />
                     <XAxis
                         dataKey="label"
@@ -39,8 +29,9 @@ export const DoubleLineChart: React.FC<DoubleLineChartProps> = ({
                         tickLine={false}
                         fontSize={12}
                         tickMargin={8}
-                        interval={0}
+                        interval="equidistantPreserveStart"
                     />
+                    <YAxis scale="linear" axisLine={false} tickLine={false} tick={false} tickMargin={0} width={0} />
 
                     <ChartTooltip
                         cursor={false}

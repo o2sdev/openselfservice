@@ -1,7 +1,6 @@
 import { useLocale } from 'next-intl';
 import React, { Suspense } from 'react';
 
-import { Container } from '@/components/Container/Container';
 import { Loading } from '@/components/Loading/Loading';
 
 import { OrdersSummary } from './OrdersSummary.server';
@@ -20,10 +19,20 @@ export const OrdersSummaryRenderer: React.FC<OrdersSummaryRendererProps> = ({ id
             key={id}
             fallback={
                 <>
-                    <Loading bars={1} />
-                    <Container variant="narrow">
-                        <Loading bars={8} />
-                    </Container>
+                    <Loading bars={0} />
+                    <div className="w-full flex gap-6">
+                        <div className="w-full flex flex-col gap-6">
+                            <Loading bars={1} />
+
+                            <div className="w-full flex gap-6">
+                                <Loading bars={1} />
+
+                                <Loading bars={1} />
+                            </div>
+                        </div>
+
+                        <Loading bars={7} />
+                    </div>
                 </>
             }
         >

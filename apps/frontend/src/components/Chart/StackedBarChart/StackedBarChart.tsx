@@ -92,7 +92,7 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
                         <LabelList
                             dataKey="total"
                             position="top"
-                            fill="var(--primary-foreground)"
+                            fill="var(--foreground)"
                             fontSize={12}
                             content={(props: Props) => {
                                 const { x: xString, y: yString, width: widthString, value: valueString, fill } = props;
@@ -102,7 +102,7 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
                                 const value = Number(valueString);
                                 return (
                                     <text x={x + width / 2} y={y} fill={fill} fontSize={12} textAnchor="middle" dy={-8}>
-                                        <Price price={{ value, currency: unit }} />:
+                                        <Price price={{ value, currency: unit }} />
                                     </text>
                                 );
                             }}

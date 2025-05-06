@@ -40,11 +40,13 @@ export class OrdersSummaryService {
             headers['authorization'],
         );
 
-        const range = Math.abs(dayjs(query.dateTo).diff(dayjs(query.dateFrom), 'months'));
+        const diff = Math.abs(
+            dayjs(query.dateTo).diff(dayjs(query.dateFrom), query.range === 'month' ? 'month' : 'day'),
+        );
 
         return forkJoin([cms, ordersCurrent, ordersPrevious]).pipe(
             map(([cms, ordersCurrent, ordersPrevious]) =>
-                mapOrdersSummary(cms, ordersCurrent, ordersPrevious, range, headers['x-locale']),
+                mapOrdersSummary(cms, ordersCurrent, ordersPrevious, query.range, diff, headers['x-locale']),
             ),
         );
     }

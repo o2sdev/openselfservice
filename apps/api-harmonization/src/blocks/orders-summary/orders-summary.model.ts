@@ -1,4 +1,4 @@
-import { Models, Orders } from '@o2s/framework/modules';
+import { Models } from '@o2s/framework/modules';
 
 import { CMS } from '../../models';
 import { Block } from '../../utils';
@@ -30,6 +30,7 @@ export class OrdersSummaryBlock extends Block.Block {
             current: string;
         };
     };
+    ranges!: CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock['ranges'];
     noResults!: CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock['noResults'];
 }
 

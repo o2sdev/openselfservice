@@ -11,6 +11,7 @@ export class OrdersSummaryBlock extends Block.Block {
         title: string;
         description?: string;
     };
+    ranges!: Range[];
 }
 
 export class OrdersInfo {
@@ -19,4 +20,11 @@ export class OrdersInfo {
 
 export class OrdersChart {
     title!: string;
+}
+
+export class Range {
+    label!: string;
+    value!: number;
+    type!: 'month' | 'day';
+    isDefault?: boolean;
 }
