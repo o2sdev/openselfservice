@@ -20,6 +20,12 @@ export class OrdersInfo {
 
 export class OrdersChart {
     title!: string;
+    legend!: ChartLegend;
+}
+
+export class ChartLegend {
+    prev!: string;
+    current!: string;
 }
 
 export class Range {

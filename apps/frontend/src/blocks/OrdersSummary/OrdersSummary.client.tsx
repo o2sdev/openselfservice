@@ -122,7 +122,7 @@ export const OrdersSummaryPure: React.FC<Readonly<OrdersSummaryPureProps>> = ({
         <div className="w-full">
             <LoadingOverlay isActive={isPending}>
                 <div className="w-full flex flex-col gap-8">
-                    <div className="w-full flex gap-4 justify-between">
+                    <div className="w-full flex flex-col md:flex-row gap-4 justify-between">
                         <div className="flex flex-col gap-2">
                             {data.title && <Typography variant="h2">{data.title}</Typography>}
                             {data.subtitle && <Typography>{data.subtitle}</Typography>}
@@ -145,7 +145,7 @@ export const OrdersSummaryPure: React.FC<Readonly<OrdersSummaryPureProps>> = ({
                         )}
                     </div>
 
-                    <div className="w-full flex gap-6">
+                    <div className="w-full flex flex-col lg:flex-row gap-6">
                         <div className="w-full flex flex-col gap-6">
                             <StatCard
                                 title={data.totalValue.title}
@@ -154,7 +154,7 @@ export const OrdersSummaryPure: React.FC<Readonly<OrdersSummaryPureProps>> = ({
                                 icon={<Coins size={24} />}
                             />
 
-                            <div className="w-full flex gap-6">
+                            <div className="w-full flex flex-col sm:flex-row gap-6">
                                 <StatCard
                                     title={data.averageValue.title}
                                     value={data.averageValue.value}

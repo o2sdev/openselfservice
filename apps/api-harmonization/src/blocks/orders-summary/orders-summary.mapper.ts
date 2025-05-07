@@ -58,10 +58,7 @@ export const mapOrdersSummary = (
         chart: {
             title: cms.chart.title,
             data: getChartData(ordersPrevious, ordersCurrent, range, diff, locale),
-            legend: {
-                prev: dayjs(ordersPrevious.data[0]?.createdAt).format('YYYY'),
-                current: dayjs(ordersCurrent.data[0]?.createdAt).format('YYYY'),
-            },
+            legend: cms.chart.legend,
         },
         noResults: cms.noResults,
         ranges: cms.ranges,
