@@ -1,8 +1,9 @@
 import { CircleAlert } from 'lucide-react';
 import React from 'react';
-import { RichText } from 'src/components/RichText/RichText';
 
 import { Typography } from '@o2s/ui/components/typography';
+
+import { RichText } from '@/components/RichText/RichText';
 
 import { NoResultsProps } from './NoResults.types';
 

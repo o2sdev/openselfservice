@@ -22,12 +22,25 @@ import {
     PAGE_NOTIFICATION_LIST_EN,
     PAGE_NOTIFICATION_LIST_PL,
 } from './mocks/pages/notification-list.page';
+import { PAGE_ORDER_DETAILS_DE, PAGE_ORDER_DETAILS_EN, PAGE_ORDER_DETAILS_PL } from './mocks/pages/order-details.page';
+import { PAGE_ORDER_LIST_DE, PAGE_ORDER_LIST_EN, PAGE_ORDER_LIST_PL } from './mocks/pages/order-list.page';
 import {
     PAGE_SERVICE_DETAILS_DE,
     PAGE_SERVICE_DETAILS_EN,
     PAGE_SERVICE_DETAILS_PL,
 } from './mocks/pages/service-details.page';
 import { PAGE_SERVICE_LIST_DE, PAGE_SERVICE_LIST_EN, PAGE_SERVICE_LIST_PL } from './mocks/pages/service-list.page';
+import {
+    PAGE_COMPLAINT_FORM_DE,
+    PAGE_COMPLAINT_FORM_EN,
+    PAGE_COMPLAINT_FORM_PL,
+    PAGE_CONTACT_US_DE,
+    PAGE_CONTACT_US_EN,
+    PAGE_CONTACT_US_PL,
+    PAGE_REQUEST_DEVICE_MAINTENANCE_DE,
+    PAGE_REQUEST_DEVICE_MAINTENANCE_EN,
+    PAGE_REQUEST_DEVICE_MAINTENANCE_PL,
+} from './mocks/pages/surveyjs-forms.page';
 import {
     PAGE_TICKET_DETAILS_DE,
     PAGE_TICKET_DETAILS_EN,
@@ -135,7 +148,49 @@ export const mapPage = (slug: string, locale: string): CMS.Model.Page.Page | und
                 slug: `/uslugi/${slug.match(/(.+)\/(.+)/)?.[2]}`,
                 updatedAt: '2025-01-01',
             };
+        case '/orders':
+            return PAGE_ORDER_LIST_EN;
+        case '/bestellungen':
+            return PAGE_ORDER_LIST_DE;
+        case '/zamowienia':
+            return PAGE_ORDER_LIST_PL;
 
+        case slug.match(/\/orders\/.+/)?.[0]:
+            return {
+                ...PAGE_ORDER_DETAILS_EN,
+                slug: `/orders/${slug.match(/(.+)\/(.+)/)?.[2]}`,
+                updatedAt: '2025-01-01',
+            };
+        case slug.match(/\/bestellungen\/.+/)?.[0]:
+            return {
+                ...PAGE_ORDER_DETAILS_DE,
+                slug: `/bestellungen/${slug.match(/(.+)\/(.+)/)?.[2]}`,
+                updatedAt: '2025-01-01',
+            };
+        case slug.match(/\/zamowienia\/.+/)?.[0]:
+            return {
+                ...PAGE_ORDER_DETAILS_PL,
+                slug: `/zamowienia/${slug.match(/(.+)\/(.+)/)?.[2]}`,
+                updatedAt: '2025-01-01',
+            };
+        case '/contact-us':
+            return PAGE_CONTACT_US_EN;
+        case '/kontaktiere-uns':
+            return PAGE_CONTACT_US_DE;
+        case '/skontaktuj-sie-z-nami':
+            return PAGE_CONTACT_US_PL;
+        case '/submit-complaint':
+            return PAGE_COMPLAINT_FORM_EN;
+        case '/einreichen-reklamacji':
+            return PAGE_COMPLAINT_FORM_DE;
+        case '/wyslij-reklamacje':
+            return PAGE_COMPLAINT_FORM_PL;
+        case '/request-device-maintenance':
+            return PAGE_REQUEST_DEVICE_MAINTENANCE_EN;
+        case '/geratewartungsanfrage':
+            return PAGE_REQUEST_DEVICE_MAINTENANCE_DE;
+        case '/zglos-naprawe-urzadzenia':
+            return PAGE_REQUEST_DEVICE_MAINTENANCE_PL;
         case '/help-and-support':
             return PAGE_HELP_AND_SUPPORT_EN;
         case '/hilfe-und-support':
@@ -168,6 +223,11 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_USER_ACCOUNT_PL,
                 PAGE_SERVICE_LIST_PL,
                 PAGE_SERVICE_DETAILS_PL,
+                PAGE_CONTACT_US_PL,
+                PAGE_COMPLAINT_FORM_PL,
+                PAGE_REQUEST_DEVICE_MAINTENANCE_PL,
+                PAGE_ORDER_LIST_PL,
+                PAGE_ORDER_DETAILS_PL,
             ];
         case 'de':
             return [
@@ -180,6 +240,11 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_USER_ACCOUNT_DE,
                 PAGE_SERVICE_LIST_DE,
                 PAGE_SERVICE_DETAILS_DE,
+                PAGE_CONTACT_US_DE,
+                PAGE_COMPLAINT_FORM_DE,
+                PAGE_REQUEST_DEVICE_MAINTENANCE_DE,
+                PAGE_ORDER_LIST_DE,
+                PAGE_ORDER_DETAILS_DE,
             ];
         case 'en':
             return [
@@ -192,6 +257,11 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_USER_ACCOUNT_EN,
                 PAGE_SERVICE_LIST_EN,
                 PAGE_SERVICE_DETAILS_EN,
+                PAGE_CONTACT_US_EN,
+                PAGE_COMPLAINT_FORM_EN,
+                PAGE_REQUEST_DEVICE_MAINTENANCE_EN,
+                PAGE_ORDER_LIST_EN,
+                PAGE_ORDER_DETAILS_EN,
             ];
         default:
             return [];
@@ -227,6 +297,21 @@ export const getAlternativePages = (id: string, slug: string, locale: string): C
         PAGE_SERVICE_DETAILS_EN,
         PAGE_SERVICE_DETAILS_DE,
         PAGE_SERVICE_DETAILS_PL,
+        PAGE_CONTACT_US_EN,
+        PAGE_CONTACT_US_DE,
+        PAGE_CONTACT_US_PL,
+        PAGE_COMPLAINT_FORM_EN,
+        PAGE_COMPLAINT_FORM_DE,
+        PAGE_COMPLAINT_FORM_PL,
+        PAGE_REQUEST_DEVICE_MAINTENANCE_EN,
+        PAGE_REQUEST_DEVICE_MAINTENANCE_DE,
+        PAGE_REQUEST_DEVICE_MAINTENANCE_PL,
+        PAGE_ORDER_LIST_EN,
+        PAGE_ORDER_LIST_DE,
+        PAGE_ORDER_LIST_PL,
+        PAGE_ORDER_DETAILS_EN,
+        PAGE_ORDER_DETAILS_DE,
+        PAGE_ORDER_DETAILS_PL,
     ]
         .filter((page) => page.id === id)
         .map((page) => mapPage(page.slug, locale)!)

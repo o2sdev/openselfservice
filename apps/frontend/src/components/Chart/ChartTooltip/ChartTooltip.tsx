@@ -1,5 +1,4 @@
-import { TooltipProps } from 'recharts';
-import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
+import React from 'react';
 
 import { Models } from '@o2s/framework/modules';
 
@@ -7,9 +6,9 @@ import { Typography } from '@o2s/ui/components/typography';
 
 import { Price } from '@/components/Price/Price';
 
-export const ChartTooltip = (props: TooltipProps<ValueType, NameType>) => {
-    const { active, payload } = props;
+import { ChartTooltipProps } from './ChartTooltip.types';
 
+export const ChartTooltip: React.FC<ChartTooltipProps> = ({ type = 'number', active, payload }) => {
     if (!active || !payload?.length) {
         return null;
     }
@@ -18,18 +17,25 @@ export const ChartTooltip = (props: TooltipProps<ValueType, NameType>) => {
         <div className="rounded-md bg-background p-2 border">
             <div className="flex flex-col gap-2">
                 {payload
-                    .map((bar) => (
-                        <div key={bar.name} className="flex flex-row justify-between gap-2">
+                    .map((item, index) => (
+                        <div key={`${item.name}-${index}`} className="flex flex-row justify-between gap-2">
                             <div className="flex items-center gap-2">
                                 <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="0" y="0" width="12" height="12" fill={bar?.color} rx="4" ry="4" />
+                                    <rect x="0" y="0" width="12" height="12" fill={item?.color} rx="4" ry="4" />
                                 </svg>
-                                <Typography variant="small">{`${bar?.name} :`}</Typography>
+                                <Typography variant="small">{`${item?.name} :`}</Typography>
                             </div>
                             <Typography variant="small" className="text-right">
-                                <Price
-                                    price={{ value: Number(bar.value), currency: bar.unit as Models.Price.Currency }}
-                                />
+                                {type === 'price' ? (
+                                    <Price
+                                        price={{
+                                            value: Number(item.value),
+                                            currency: item.unit as Models.Price.Currency,
+                                        }}
+                                    />
+                                ) : (
+                                    item.value
+                                )}
                             </Typography>
                         </div>
                     ))
