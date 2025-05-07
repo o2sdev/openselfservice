@@ -21,7 +21,7 @@ import { Price } from '@/components/Price/Price';
 
 import { OrdersSummaryPureProps } from './OrdersSummary.types';
 
-const Trend: React.FC<{ value?: number }> = ({ value }) => {
+const Trend: React.FC<Readonly<{ value?: number }>> = ({ value }) => {
     const locale = useLocale();
 
     if (!value) {
@@ -44,12 +44,14 @@ const Trend: React.FC<{ value?: number }> = ({ value }) => {
     );
 };
 
-const StatCard: React.FC<{
-    title: string;
-    value?: number | Models.Price.Price;
-    trend?: number;
-    icon?: React.ReactNode;
-}> = ({ title, value, trend, icon }) => {
+const StatCard: React.FC<
+    Readonly<{
+        title: string;
+        value?: number | Models.Price.Price;
+        trend?: number;
+        icon?: React.ReactNode;
+    }>
+> = ({ title, value, trend, icon }) => {
     return (
         <Card className="h-full w-full">
             <div className="p-6 flex flex-col gap-3">
@@ -66,7 +68,11 @@ const StatCard: React.FC<{
     );
 };
 
-export const OrdersSummaryPure: React.FC<OrdersSummaryPureProps> = ({ locale, accessToken, ...component }) => {
+export const OrdersSummaryPure: React.FC<Readonly<OrdersSummaryPureProps>> = ({
+    locale,
+    accessToken,
+    ...component
+}) => {
     const initialFilters: Blocks.OrdersSummary.Request.GetOrdersSummaryBlockQuery = {
         id: component.id,
         dateFrom: dayjs().subtract(6, 'months').toISOString(),

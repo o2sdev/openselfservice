@@ -22,10 +22,10 @@ const PRODUCT_DATA = [
     { id: 'PRD-014', name: 'RapidFix Repair', price: 19.99, currency: 'EUR', type: 'VIRTUAL', category: 'MAINTENANCE' },
 ];
 
-// Customer IDs for generating random orders
+// Customer IDs
 const CUSTOMER_IDS = ['cust-001'];
 
-// Shipping methods for generating random orders
+// Shipping methods
 const SHIPPING_METHODS = [
     {
         id: 'SHIP-001',
@@ -282,7 +282,7 @@ const MOCKED_ORDERS = [
     ...generateOrders(100, getRandomDatePastYear),
     ...generateOrders(50, getRandomDatePastMonth),
     ...generateOrders(400, getRandomDateYearBefore),
-    ...generateOrders(25, getRandomDateMonthLastYear),
+    ...generateOrders(10, getRandomDateMonthLastYear),
 ];
 
 export const mapOrder = (id: string): Orders.Model.Order | undefined => {

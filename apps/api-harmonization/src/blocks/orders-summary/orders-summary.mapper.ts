@@ -36,22 +36,18 @@ export const mapOrdersSummary = (
         subtitle: cms.subtitle,
         totalValue: {
             title: cms.totalValue.title,
-            value: totalValueCurrent
-                ? {
-                      value: totalValueCurrent,
-                      currency: currency!,
-                  }
-                : undefined,
+            value: {
+                value: totalValueCurrent,
+                currency: currency!,
+            },
             trend: totalValueTrend,
         },
         averageValue: {
             title: cms.averageValue.title,
-            value: averageValueCurrent
-                ? {
-                      value: averageValueCurrent,
-                      currency: currency!,
-                  }
-                : undefined,
+            value: {
+                value: averageValueCurrent,
+                currency: currency!,
+            },
             trend: averageValueTrend,
         },
         averageNumber: {
@@ -97,12 +93,11 @@ const getChartData = (
     diff: number,
     locale: string,
 ): ChartData[] => {
-    // Set locale for dayjs
     dayjs.locale(locale);
 
-    // Create maps to store monthly totals for both previous and current orders
-    const prevMonthlyTotals = new Map<string, number>();
-    const currentMonthlyTotals = new Map<string, number>();
+    // Create maps to store date-based totals for both previous and current orders
+    const prevTotals = new Map<string, number>();
+    const currentTotals = new Map<string, number>();
 
     // Find the latest order date from current orders
     let latestDate = dayjs();
@@ -122,36 +117,36 @@ const getChartData = (
     // Process previous orders
     prev.data.forEach((order) => {
         const date = dayjs(order.createdAt);
-        const monthKey = date.format(format); // Use YYYY-MM-DD format for sorting
-        const monthTotal = prevMonthlyTotals.get(monthKey) || 0;
-        prevMonthlyTotals.set(monthKey, monthTotal + 1);
+        const key = date.format(format);
+        const total = prevTotals.get(key) || 0;
+        prevTotals.set(key, total + 1);
     });
 
     // Process current orders
     current.data.forEach((order) => {
         const date = dayjs(order.createdAt);
-        const monthKey = date.format(format); // Use YYYY-MM-DD format for sorting
-        const monthTotal = currentMonthlyTotals.get(monthKey) || 0;
-        currentMonthlyTotals.set(monthKey, monthTotal + 1);
+        const key = date.format(format);
+        const total = currentTotals.get(key) || 0;
+        currentTotals.set(key, total + 1);
     });
 
-    // Generate a list of months based on the range parameter, starting from the latest month
-    const monthKeys: string[] = [];
+    // Generate a list of keys based on the range parameter, starting from the latest date
+    const dateKeys: string[] = [];
     for (let i = 0; i < diff; i++) {
-        const monthDate = latestDate.subtract(i, range === 'month' ? 'months' : 'days');
-        const monthKey = monthDate.format(format);
-        monthKeys.push(monthKey);
+        const date = latestDate.subtract(i, range === 'month' ? 'months' : 'days');
+        const key = date.format(format);
+        dateKeys.push(key);
     }
 
-    // Create chart data array with empty values for months in the range
-    const chartData = monthKeys.map((monthKey) => {
-        const date = dayjs(monthKey);
-        // Subtract 1 year from monthKey when getting value from prevMonthlyTotals
-        const prevMonthKey = dayjs(monthKey).subtract(1, 'year').format(format);
+    // Create a chart data array with empty values for dates in the range
+    const chartData = dateKeys.map((dateKey) => {
+        const date = dayjs(dateKey);
+        // Subtract 1 year
+        const prevDateKey = dayjs(dateKey).subtract(1, 'year').format(format);
         return {
-            date: date, // Format as "Jan 2023"
-            prev: prevMonthlyTotals.get(prevMonthKey) || 0,
-            current: currentMonthlyTotals.get(monthKey) || 0,
+            date: date,
+            prev: prevTotals.get(prevDateKey) || 0,
+            current: currentTotals.get(dateKey) || 0,
         };
     });
 
@@ -160,9 +155,9 @@ const getChartData = (
         return a.date.valueOf() - b.date.valueOf();
     });
 
-    return chartData.map((month) => ({
-        label: month.date.format(range === 'month' ? 'MMM' : 'DD.MM'),
-        prev: month.prev,
-        current: month.current,
+    return chartData.map((date) => ({
+        label: date.date.format(range === 'month' ? 'MMM' : 'DD.MM'),
+        prev: date.prev,
+        current: date.current,
     }));
 };
