@@ -15,6 +15,10 @@ const MOCK_ORDER_LIST_BLOCK_EN: CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock 
     },
     chart: {
         title: 'Number of orders',
+        legend: {
+            prev: 'Previous period',
+            current: 'Current period',
+        },
     },
     noResults: {
         title: "So far, there's nothing here",
@@ -55,6 +59,10 @@ const MOCK_ORDER_LIST_BLOCK_DE: CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock 
     },
     chart: {
         title: 'Anzahl der Bestellungen',
+        legend: {
+            prev: 'Vorheriger Zeitraum',
+            current: 'Aktueller Zeitraum',
+        },
     },
     noResults: {
         title: 'Bisher gibt es hier nichts',
@@ -95,6 +103,10 @@ const MOCK_ORDER_LIST_BLOCK_PL: CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock 
     },
     chart: {
         title: 'Liczba zamówień',
+        legend: {
+            prev: 'Poprzedni okres',
+            current: 'Obecny okres',
+        },
     },
     noResults: {
         title: 'Jak dotąd nie ma tu nic',
