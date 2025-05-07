@@ -8,7 +8,7 @@ const typographyVariants = cva('mt-0', {
     variants: {
         variant: {
             h1: 'scroll-m-20 text-2xl md:text-3xl font-bold tracking-tight',
-            h2: 'scroll-m-20 text-lg md:text-2xl font-semibold tracking-tight first:mt-0',
+            h2: 'scroll-m-20 text-lg md:text-2xl font-semibold tracking-tight',
             h3: 'scroll-m-20 text-base md:text-xl font-semibold tracking-tight',
             h4: 'scroll-m-20 text-base md:text-lg font-semibold tracking-tight',
             highlightedBig: 'text-3xl md:text-4xl font-semibold tracking-tight',
@@ -17,8 +17,8 @@ const typographyVariants = cva('mt-0', {
             small: 'text-sm',
             body: 'text-sm md:text-base',
             large: 'text-lg',
-            p: 'text-sm md:text-base not-first:mt-6',
-            blockquote: 'text-sm md:text-base mt-6 border-l-2 pl-6 italic',
+            p: 'text-sm md:text-base',
+            blockquote: 'text-sm md:text-base border-l-2 pl-6 italic',
             inlineCode:
                 'text-sm md:text-base relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold',
             lead: 'text-xl text-muted-foreground',

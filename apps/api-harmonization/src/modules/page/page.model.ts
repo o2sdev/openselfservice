@@ -5,6 +5,8 @@ import {
     InvoiceList,
     NotificationDetails,
     NotificationList,
+    OrderList,
+    OrdersSummary,
     PaymentsHistory,
     PaymentsSummary,
     ServiceDetails,
@@ -72,4 +74,6 @@ export type Blocks =
     | TicketRecent.Model.TicketRecentBlock['__typename']
     | ServiceList.Model.ServiceListBlock['__typename']
     | ServiceDetails.Model.ServiceDetailsBlock['__typename']
-    | Surveyjs.Model.SurveyjsBlock['__typename'];
+    | Surveyjs.Model.SurveyjsBlock['__typename']
+    | OrderList.Model.OrderListBlock['__typename']
+    | OrdersSummary.Model.OrdersSummaryBlock['__typename'];

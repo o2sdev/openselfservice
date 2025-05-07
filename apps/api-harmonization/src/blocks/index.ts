@@ -13,4 +13,6 @@ export * as TicketRecent from './ticket-recent';
 export * as ServiceList from './service-list';
 export * as ServiceDetails from './service-details';
 export * as Surveyjs from './surveyjs';
+export * as OrderList from './order-list';
+export * as OrdersSummary from './orders-summary';
 // BLOCK EXPORT

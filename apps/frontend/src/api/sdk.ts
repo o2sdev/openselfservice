@@ -2,6 +2,7 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Blocks, Headers, Modules } from '@o2s/api-harmonization';
 import { Notifications } from '@o2s/integrations.mocked/sdk';
+import { ordersSummary } from 'src/api/blocks/orders-summary';
 
 import { extendSdk, getSdk } from '@o2s/framework/sdk';
 
@@ -9,6 +10,7 @@ import { faq } from '@/api/blocks/faq';
 import { invoiceList } from '@/api/blocks/invoice-list';
 import { notificationDetails } from '@/api/blocks/notification-details';
 import { notificationList } from '@/api/blocks/notification-list';
+import { orderList } from '@/api/blocks/order-list';
 import { paymentsHistory } from '@/api/blocks/payments-history';
 import { paymentsSummary } from '@/api/blocks/payments-summary';
 import { serviceDetails } from '@/api/blocks/service-details';
@@ -55,6 +57,8 @@ export const sdk = extendSdk(internalSdk, {
         getFaq: faq(internalSdk).blocks.getFaq,
         getUserAccount: userAccount(internalSdk).blocks.getUserAccount,
         getSurveyJsBlock: surveyJSBlock(internalSdk).blocks.getSurveyjsBlock,
+        getOrderList: orderList(internalSdk).blocks.getOrderList,
+        getOrdersSummary: ordersSummary(internalSdk).blocks.getOrdersSummary,
     },
     modules: {
         getInit: page(internalSdk).modules.getInit,

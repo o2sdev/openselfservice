@@ -1,0 +1,23 @@
+fragment OrderListComponent on ComponentComponentsOrderList {
+    __typename
+    id
+    title
+    subtitle
+    fields {
+        ...FieldMapping
+    }
+    table {
+        ...Table
+    }
+    pagination {
+        ...Pagination
+    }
+    filters {
+        ...Filters
+    }
+    noResults {
+        title
+        description
+    }
+    detailsURL
+}
