@@ -20,7 +20,7 @@ export const mapCategory = (
         pagination: cms.pagination,
         articles: {
             title: cms.title,
-            description: cms.categoryId,
+            description: cms.description,
             items: {
                 ...articles,
                 data: articles.data.map((article: Articles.Model.Article) => mapArticle(article, cms, _locale)),
