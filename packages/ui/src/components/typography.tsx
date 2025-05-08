@@ -20,9 +20,16 @@ const typographyVariants = cva('', {
             p: 'text-sm md:text-base',
             blockquote: 'text-sm md:text-base border-l-2 pl-6 italic',
             inlineCode:
-                'text-sm md:text-base relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold',
+                'text-sm md:text-base relative rounded bg-foreground text-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold',
             lead: 'text-xl text-muted-foreground',
-            code: 'relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold',
+            code: 'relative rounded bg-foreground text-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold',
+            table: 'w-full border-collapse border border-border',
+            tableHeader: 'px-4 py-2 border-b border-border text-left font-bold border-r last:border-r-0',
+            tableRow: 'border-b border-border transition-colors last:border-b-0',
+            tableCell: 'px-4 py-2 align-middle border-r last:border-r-0',
+            tableCellHighlighted: 'px-4 py-2 align-middle bg-muted/50 border-r last:border-r-0',
+            image: 'relative overflow-hidden mx-auto',
+            imageCaption: 'text-sm text-muted-foreground text-center mt-2',
         },
     },
     defaultVariants: {

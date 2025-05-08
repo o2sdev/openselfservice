@@ -15,25 +15,28 @@ import { CategoryPureProps } from './Category.types';
 const { renderBlocks } = await import('@/blocks/renderBlocks');
 
 export const CategoryPure: React.FC<CategoryPureProps> = ({ slug, locale, accessToken, ...component }) => {
-    console.log(component);
     return (
         <div className="w-full flex flex-col gap-6">
             <Container variant="narrow">
                 <div className="flex gap-6 items-start px-4 md:px-0">
                     {component.icon && (
-                        <Image
-                            src={component.icon.url}
-                            alt={component.icon.alt}
-                            width={component.icon.width}
-                            height={component.icon.height}
-                        />
+                        <div className="flex max-w-12 max-h-12 p-2 rounded-md items-center justify-center bg-card border border-border">
+                            <Image
+                                src={component.icon.url}
+                                alt={component.icon.alt}
+                                width="24"
+                                height="24"
+                                className="max-w-6 max-h-6"
+                            />
+                        </div>
                     )}
                     <Typography>{component.description}</Typography>
                 </div>
             </Container>
             <Separator orientation="horizontal" className="shrink-[1]" />
             <div className="flex flex-col gap-12">
-                <div>{component.components && <div>{renderBlocks(component.components, slug, accessToken)}</div>}</div>
+                {component.components && <div>{renderBlocks(component.components, slug, accessToken)}</div>}
+
                 <Container variant="narrow">
                     <ArticlesSection title={component.articles.title} description={component.articles.description}>
                         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">

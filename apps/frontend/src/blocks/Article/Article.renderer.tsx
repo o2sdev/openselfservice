@@ -22,7 +22,7 @@ export const ArticleRenderer: React.FC<ArticleRendererProps> = ({ id, slug, acce
                 <>
                     <Loading bars={1} />
                     <Container variant="narrow">
-                        <Loading bars={8} />
+                        <Loading bars={20} />
                     </Container>
                 </>
             }
