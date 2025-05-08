@@ -8,6 +8,7 @@ import { Observable, concatMap, forkJoin, from, map, mergeMap, of } from 'rxjs';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { CMS, Cache, Models } from '@o2s/framework/modules';
 
+import { mapCategoryListBlock } from './mappers/blocks/cms.category-list.mapper';
 import { mapFaqBlock } from './mappers/blocks/cms.faq.mapper';
 import { mapInvoiceDetailsBlock } from './mappers/blocks/cms.invoice-details.mapper';
 import { mapInvoiceListBlock } from './mappers/blocks/cms.invoice-list.mapper';
@@ -406,13 +407,14 @@ export class CmsService implements CMS.Service {
         throw new NotImplementedException();
     }
 
-    getCategoryListBlock(
-        _options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.CategoryListBlock.CategoryListBlock> {
-        throw new NotImplementedException();
+    getCategoryListBlock(options: CMS.Request.GetCmsEntryParams) {
+        const key = `quick-links-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () =>
+            this.getBlock(options).pipe(map((data) => mapCategoryListBlock(data, this.baseUrl))),
+        );
     }
 
-    getQuickLinksBlock(options: CMS.Request.GetCmsEntryParams): Observable<CMS.Model.QuickLinksBlock.QuickLinksBlock> {
+    getQuickLinksBlock(options: CMS.Request.GetCmsEntryParams) {
         const key = `quick-links-component-${options.id}-${options.locale}`;
         return this.getCachedBlock(key, () =>
             this.getBlock(options).pipe(map((data) => mapQuickLinksBlock(data, this.baseUrl))),

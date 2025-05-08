@@ -171,5 +171,7 @@ const mapComponent = (component: ComponentFragment) => {
             return 'OrderListBlock';
         case 'ComponentComponentsQuickLinks':
             return 'QuickLinksBlock';
+        case 'ComponentComponentsCategoryList':
+            return 'CategoryListBlock';
     }
 };

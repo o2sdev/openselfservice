@@ -320,6 +320,7 @@ export type ComponentComponentsCategoryList = {
     categories_connection?: Maybe<CategoryRelationResponseCollection>;
     description?: Maybe<Scalars['String']['output']>;
     id: Scalars['ID']['output'];
+    parent?: Maybe<Page>;
     title?: Maybe<Scalars['String']['output']>;
 };
 
@@ -3027,9 +3028,10 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
           })
         | ComponentComponentsArticleSections
         | (Omit<ComponentComponentsCategory, 'category'> & { category?: Maybe<_RefType['Category']> })
-        | (Omit<ComponentComponentsCategoryList, 'categories' | 'categories_connection'> & {
+        | (Omit<ComponentComponentsCategoryList, 'categories' | 'categories_connection' | 'parent'> & {
               categories: Array<Maybe<_RefType['Category']>>;
               categories_connection?: Maybe<_RefType['CategoryRelationResponseCollection']>;
+              parent?: Maybe<_RefType['Page']>;
           })
         | (Omit<ComponentComponentsFaq, 'banner'> & { banner?: Maybe<_RefType['ComponentContentBanner']> })
         | (Omit<ComponentComponentsInvoiceList, 'filters' | 'noResults'> & {
@@ -3126,9 +3128,10 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
           })
         | ComponentComponentsArticleSections
         | (Omit<ComponentComponentsCategory, 'category'> & { category?: Maybe<_RefType['Category']> })
-        | (Omit<ComponentComponentsCategoryList, 'categories' | 'categories_connection'> & {
+        | (Omit<ComponentComponentsCategoryList, 'categories' | 'categories_connection' | 'parent'> & {
               categories: Array<Maybe<_RefType['Category']>>;
               categories_connection?: Maybe<_RefType['CategoryRelationResponseCollection']>;
+              parent?: Maybe<_RefType['Page']>;
           })
         | (Omit<ComponentComponentsFaq, 'banner'> & { banner?: Maybe<_RefType['ComponentContentBanner']> })
         | (Omit<ComponentComponentsInvoiceList, 'filters' | 'noResults'> & {
@@ -3412,9 +3415,10 @@ export type ResolversTypes = {
         Omit<ComponentComponentsCategory, 'category'> & { category?: Maybe<ResolversTypes['Category']> }
     >;
     ComponentComponentsCategoryList: ResolverTypeWrapper<
-        Omit<ComponentComponentsCategoryList, 'categories' | 'categories_connection'> & {
+        Omit<ComponentComponentsCategoryList, 'categories' | 'categories_connection' | 'parent'> & {
             categories: Array<Maybe<ResolversTypes['Category']>>;
             categories_connection?: Maybe<ResolversTypes['CategoryRelationResponseCollection']>;
+            parent?: Maybe<ResolversTypes['Page']>;
         }
     >;
     ComponentComponentsFaq: ResolverTypeWrapper<
@@ -3852,9 +3856,13 @@ export type ResolversParentTypes = {
     ComponentComponentsCategory: Omit<ComponentComponentsCategory, 'category'> & {
         category?: Maybe<ResolversParentTypes['Category']>;
     };
-    ComponentComponentsCategoryList: Omit<ComponentComponentsCategoryList, 'categories' | 'categories_connection'> & {
+    ComponentComponentsCategoryList: Omit<
+        ComponentComponentsCategoryList,
+        'categories' | 'categories_connection' | 'parent'
+    > & {
         categories: Array<Maybe<ResolversParentTypes['Category']>>;
         categories_connection?: Maybe<ResolversParentTypes['CategoryRelationResponseCollection']>;
+        parent?: Maybe<ResolversParentTypes['Page']>;
     };
     ComponentComponentsFaq: Omit<ComponentComponentsFaq, 'banner'> & {
         banner?: Maybe<ResolversParentTypes['ComponentContentBanner']>;
@@ -4434,6 +4442,7 @@ export type ComponentComponentsCategoryListResolvers<
     >;
     description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    parent?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType>;
     title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -7392,6 +7401,15 @@ export type TemplateFragment =
     | Template_ComponentTemplatesTwoColumn_Fragment
     | Template_Error_Fragment;
 
+export type CategoryListComponentFragment = {
+    __typename: 'ComponentComponentsCategoryList';
+    id: string;
+    title?: string;
+    description?: string;
+    categories: Array<{ slug: string }>;
+    parent?: { slug: string };
+};
+
 export type FaqComponentFragment = {
     __typename: 'ComponentComponentsFaq';
     id: string;
@@ -8028,7 +8046,14 @@ export type GetComponentQuery = {
             | { __typename: 'ComponentComponentsArticleList' }
             | { __typename: 'ComponentComponentsArticleSections' }
             | { __typename: 'ComponentComponentsCategory' }
-            | { __typename: 'ComponentComponentsCategoryList' }
+            | {
+                  __typename: 'ComponentComponentsCategoryList';
+                  id: string;
+                  title?: string;
+                  description?: string;
+                  categories: Array<{ slug: string }>;
+                  parent?: { slug: string };
+              }
             | {
                   __typename: 'ComponentComponentsFaq';
                   id: string;
@@ -9197,6 +9222,20 @@ export const TemplateFragmentDoc = gql`
     ${OneColumnTemplateFragmentDoc}
     ${TwoColumnTemplateFragmentDoc}
 `;
+export const CategoryListComponentFragmentDoc = gql`
+    fragment CategoryListComponent on ComponentComponentsCategoryList {
+        __typename
+        id
+        title
+        description
+        categories {
+            slug
+        }
+        parent {
+            slug
+        }
+    }
+`;
 export const BannerFragmentDoc = gql`
     fragment Banner on ComponentContentBanner {
         title
@@ -9668,6 +9707,9 @@ export const GetComponentDocument = gql`
                 ... on ComponentComponentsQuickLinks {
                     ...QuickLinksComponent
                 }
+                ... on ComponentComponentsCategoryList {
+                    ...CategoryListComponent
+                }
             }
         }
         configurableTexts(locale: $locale) {
@@ -9712,6 +9754,7 @@ export const GetComponentDocument = gql`
     ${SurveyjsComponentFragmentDoc}
     ${OrderListComponentFragmentDoc}
     ${QuickLinksComponentFragmentDoc}
+    ${CategoryListComponentFragmentDoc}
 `;
 export const GetFooterDocument = gql`
     query getFooter($locale: I18NLocaleCode!, $id: ID!) {
