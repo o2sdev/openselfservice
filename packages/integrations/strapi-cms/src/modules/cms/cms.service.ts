@@ -10,6 +10,7 @@ import { CMS, Cache, Models } from '@o2s/framework/modules';
 
 import { mapArticleListBlock } from './mappers/blocks/cms.article-list.mapper';
 import { mapCategoryListBlock } from './mappers/blocks/cms.category-list.mapper';
+import { mapCategoryBlock } from './mappers/blocks/cms.category.mapper';
 import { mapFaqBlock } from './mappers/blocks/cms.faq.mapper';
 import { mapInvoiceDetailsBlock } from './mappers/blocks/cms.invoice-details.mapper';
 import { mapInvoiceListBlock } from './mappers/blocks/cms.invoice-list.mapper';
@@ -407,8 +408,11 @@ export class CmsService implements CMS.Service {
         );
     }
 
-    getCategoryBlock(_options: CMS.Request.GetCmsEntryParams): Observable<CMS.Model.CategoryBlock.CategoryBlock> {
-        throw new NotImplementedException();
+    getCategoryBlock(options: CMS.Request.GetCmsEntryParams): Observable<CMS.Model.CategoryBlock.CategoryBlock> {
+        const key = `quick-links-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () =>
+            this.getBlock(options).pipe(map((data) => mapCategoryBlock(data, this.baseUrl))),
+        );
     }
 
     getCategoryListBlock(options: CMS.Request.GetCmsEntryParams) {

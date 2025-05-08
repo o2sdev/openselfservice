@@ -122,7 +122,7 @@ const mapTemplate = (template?: TemplateFragment): CMS.Model.Page.PageTemplate =
     throw new NotFoundException();
 };
 
-const mapSlot = (slot: ComponentFragment[]): CMS.Model.Page.SlotBlock[] => {
+export const mapSlot = (slot: ComponentFragment[]): CMS.Model.Page.SlotBlock[] => {
     return slot.reduce((acc, component) => {
         const __typename = mapComponent(component);
 

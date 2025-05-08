@@ -51,6 +51,9 @@ query getComponent($id: ID!, $locale: I18NLocaleCode!) {
             ... on ComponentComponentsArticleList {
                 ...ArticleListComponent
             }
+            ... on ComponentComponentsCategory {
+                ...CategoryComponent
+            }
         }
     }
     configurableTexts(locale: $locale) {

@@ -161,7 +161,7 @@ export type Category = {
     locale?: Maybe<Scalars['String']['output']>;
     localizations: Array<Maybe<Category>>;
     localizations_connection?: Maybe<CategoryRelationResponseCollection>;
-    name?: Maybe<Scalars['String']['output']>;
+    name: Scalars['String']['output'];
     pages: Array<Maybe<Page>>;
     pages_connection?: Maybe<PageRelationResponseCollection>;
     publishedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -314,6 +314,7 @@ export type ComponentComponentsArticleSectionsSectionsArgs = {
 export type ComponentComponentsCategory = {
     category?: Maybe<Category>;
     id: Scalars['ID']['output'];
+    parent?: Maybe<Page>;
 };
 
 export type ComponentComponentsCategoryList = {
@@ -3029,7 +3030,10 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
               parent?: Maybe<_RefType['Page']>;
           })
         | ComponentComponentsArticleSections
-        | (Omit<ComponentComponentsCategory, 'category'> & { category?: Maybe<_RefType['Category']> })
+        | (Omit<ComponentComponentsCategory, 'category' | 'parent'> & {
+              category?: Maybe<_RefType['Category']>;
+              parent?: Maybe<_RefType['Page']>;
+          })
         | (Omit<ComponentComponentsCategoryList, 'categories' | 'categories_connection' | 'parent'> & {
               categories: Array<Maybe<_RefType['Category']>>;
               categories_connection?: Maybe<_RefType['CategoryRelationResponseCollection']>;
@@ -3130,7 +3134,10 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
               parent?: Maybe<_RefType['Page']>;
           })
         | ComponentComponentsArticleSections
-        | (Omit<ComponentComponentsCategory, 'category'> & { category?: Maybe<_RefType['Category']> })
+        | (Omit<ComponentComponentsCategory, 'category' | 'parent'> & {
+              category?: Maybe<_RefType['Category']>;
+              parent?: Maybe<_RefType['Page']>;
+          })
         | (Omit<ComponentComponentsCategoryList, 'categories' | 'categories_connection' | 'parent'> & {
               categories: Array<Maybe<_RefType['Category']>>;
               categories_connection?: Maybe<_RefType['CategoryRelationResponseCollection']>;
@@ -3416,7 +3423,10 @@ export type ResolversTypes = {
     >;
     ComponentComponentsArticleSections: ResolverTypeWrapper<ComponentComponentsArticleSections>;
     ComponentComponentsCategory: ResolverTypeWrapper<
-        Omit<ComponentComponentsCategory, 'category'> & { category?: Maybe<ResolversTypes['Category']> }
+        Omit<ComponentComponentsCategory, 'category' | 'parent'> & {
+            category?: Maybe<ResolversTypes['Category']>;
+            parent?: Maybe<ResolversTypes['Page']>;
+        }
     >;
     ComponentComponentsCategoryList: ResolverTypeWrapper<
         Omit<ComponentComponentsCategoryList, 'categories' | 'categories_connection' | 'parent'> & {
@@ -3861,8 +3871,9 @@ export type ResolversParentTypes = {
         parent?: Maybe<ResolversParentTypes['Page']>;
     };
     ComponentComponentsArticleSections: ComponentComponentsArticleSections;
-    ComponentComponentsCategory: Omit<ComponentComponentsCategory, 'category'> & {
+    ComponentComponentsCategory: Omit<ComponentComponentsCategory, 'category' | 'parent'> & {
         category?: Maybe<ResolversParentTypes['Category']>;
+        parent?: Maybe<ResolversParentTypes['Page']>;
     };
     ComponentComponentsCategoryList: Omit<
         ComponentComponentsCategoryList,
@@ -4317,7 +4328,7 @@ export type CategoryResolvers<
         ContextType,
         RequireFields<CategoryLocalizations_ConnectionArgs, 'pagination' | 'sort'>
     >;
-    name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     pages?: Resolver<
         Array<Maybe<ResolversTypes['Page']>>,
         ParentType,
@@ -4429,6 +4440,7 @@ export type ComponentComponentsCategoryResolvers<
 > = {
     category?: Resolver<Maybe<ResolversTypes['Category']>, ParentType, ContextType>;
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    parent?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -7421,6 +7433,44 @@ export type ArticleListComponentFragment = {
     parent?: { slug: string };
 };
 
+export type CategoryComponentFragment = {
+    __typename: 'ComponentComponentsCategory';
+    id: string;
+    category?: {
+        slug: string;
+        name: string;
+        description: string;
+        components: Array<{
+            __typename: 'Component';
+            documentId: string;
+            content: Array<
+                | { __typename: 'ComponentComponentsArticleList' }
+                | { __typename: 'ComponentComponentsArticleSections' }
+                | { __typename: 'ComponentComponentsCategory' }
+                | { __typename: 'ComponentComponentsCategoryList' }
+                | { __typename: 'ComponentComponentsFaq' }
+                | { __typename: 'ComponentComponentsInvoiceList' }
+                | { __typename: 'ComponentComponentsNotificationDetails' }
+                | { __typename: 'ComponentComponentsNotificationList' }
+                | { __typename: 'ComponentComponentsOrderList' }
+                | { __typename: 'ComponentComponentsOrdersSummary' }
+                | { __typename: 'ComponentComponentsPaymentsHistory' }
+                | { __typename: 'ComponentComponentsPaymentsSummary' }
+                | { __typename: 'ComponentComponentsQuickLinks' }
+                | { __typename: 'ComponentComponentsServiceDetails' }
+                | { __typename: 'ComponentComponentsServiceList' }
+                | { __typename: 'ComponentComponentsSurveyJsComponent' }
+                | { __typename: 'ComponentComponentsTicketDetails' }
+                | { __typename: 'ComponentComponentsTicketList' }
+                | { __typename: 'ComponentComponentsTicketRecent' }
+                | { __typename: 'ComponentComponentsUserAccount' }
+                | { __typename: 'Error' }
+            >;
+        }>;
+    };
+    parent?: { slug: string };
+};
+
 export type CategoryListComponentFragment = {
     __typename: 'ComponentComponentsCategoryList';
     id: string;
@@ -8074,7 +8124,43 @@ export type GetComponentQuery = {
                   parent?: { slug: string };
               }
             | { __typename: 'ComponentComponentsArticleSections' }
-            | { __typename: 'ComponentComponentsCategory' }
+            | {
+                  __typename: 'ComponentComponentsCategory';
+                  id: string;
+                  category?: {
+                      slug: string;
+                      name: string;
+                      description: string;
+                      components: Array<{
+                          __typename: 'Component';
+                          documentId: string;
+                          content: Array<
+                              | { __typename: 'ComponentComponentsArticleList' }
+                              | { __typename: 'ComponentComponentsArticleSections' }
+                              | { __typename: 'ComponentComponentsCategory' }
+                              | { __typename: 'ComponentComponentsCategoryList' }
+                              | { __typename: 'ComponentComponentsFaq' }
+                              | { __typename: 'ComponentComponentsInvoiceList' }
+                              | { __typename: 'ComponentComponentsNotificationDetails' }
+                              | { __typename: 'ComponentComponentsNotificationList' }
+                              | { __typename: 'ComponentComponentsOrderList' }
+                              | { __typename: 'ComponentComponentsOrdersSummary' }
+                              | { __typename: 'ComponentComponentsPaymentsHistory' }
+                              | { __typename: 'ComponentComponentsPaymentsSummary' }
+                              | { __typename: 'ComponentComponentsQuickLinks' }
+                              | { __typename: 'ComponentComponentsServiceDetails' }
+                              | { __typename: 'ComponentComponentsServiceList' }
+                              | { __typename: 'ComponentComponentsSurveyJsComponent' }
+                              | { __typename: 'ComponentComponentsTicketDetails' }
+                              | { __typename: 'ComponentComponentsTicketList' }
+                              | { __typename: 'ComponentComponentsTicketRecent' }
+                              | { __typename: 'ComponentComponentsUserAccount' }
+                              | { __typename: 'Error' }
+                          >;
+                      }>;
+                  };
+                  parent?: { slug: string };
+              }
             | {
                   __typename: 'ComponentComponentsCategoryList';
                   id: string;
@@ -9269,6 +9355,24 @@ export const ArticleListComponentFragmentDoc = gql`
         }
     }
 `;
+export const CategoryComponentFragmentDoc = gql`
+    fragment CategoryComponent on ComponentComponentsCategory {
+        __typename
+        id
+        category {
+            slug
+            name
+            description
+            components {
+                ...Component
+            }
+        }
+        parent {
+            slug
+        }
+    }
+    ${ComponentFragmentDoc}
+`;
 export const CategoryListComponentFragmentDoc = gql`
     fragment CategoryListComponent on ComponentComponentsCategoryList {
         __typename
@@ -9760,6 +9864,9 @@ export const GetComponentDocument = gql`
                 ... on ComponentComponentsArticleList {
                     ...ArticleListComponent
                 }
+                ... on ComponentComponentsCategory {
+                    ...CategoryComponent
+                }
             }
         }
         configurableTexts(locale: $locale) {
@@ -9806,6 +9913,7 @@ export const GetComponentDocument = gql`
     ${QuickLinksComponentFragmentDoc}
     ${CategoryListComponentFragmentDoc}
     ${ArticleListComponentFragmentDoc}
+    ${CategoryComponentFragmentDoc}
 `;
 export const GetFooterDocument = gql`
     query getFooter($locale: I18NLocaleCode!, $id: ID!) {
