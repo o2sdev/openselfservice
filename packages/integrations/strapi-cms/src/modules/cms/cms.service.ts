@@ -8,6 +8,7 @@ import { Observable, concatMap, forkJoin, from, map, mergeMap, of } from 'rxjs';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { CMS, Cache, Models } from '@o2s/framework/modules';
 
+import { mapArticleListBlock } from './mappers/blocks/cms.article-list.mapper';
 import { mapCategoryListBlock } from './mappers/blocks/cms.category-list.mapper';
 import { mapFaqBlock } from './mappers/blocks/cms.faq.mapper';
 import { mapInvoiceDetailsBlock } from './mappers/blocks/cms.invoice-details.mapper';
@@ -398,9 +399,12 @@ export class CmsService implements CMS.Service {
     }
 
     getArticleListBlock(
-        _options: CMS.Request.GetCmsEntryParams,
+        options: CMS.Request.GetCmsEntryParams,
     ): Observable<CMS.Model.ArticleListBlock.ArticleListBlock> {
-        throw new NotImplementedException();
+        const key = `quick-links-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () =>
+            this.getBlock(options).pipe(map((data) => mapArticleListBlock(data, this.baseUrl))),
+        );
     }
 
     getCategoryBlock(_options: CMS.Request.GetCmsEntryParams): Observable<CMS.Model.CategoryBlock.CategoryBlock> {

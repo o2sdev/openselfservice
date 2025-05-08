@@ -1,0 +1,16 @@
+fragment ArticleListComponent on ComponentComponentsArticleList {
+    __typename
+    id
+    title
+    description
+    articles_to_show
+    pages {
+        slug
+    }
+    category {
+        slug
+    }
+    parent {
+        slug
+    }
+}

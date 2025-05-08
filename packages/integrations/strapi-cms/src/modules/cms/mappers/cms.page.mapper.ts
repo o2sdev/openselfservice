@@ -173,5 +173,9 @@ const mapComponent = (component: ComponentFragment) => {
             return 'QuickLinksBlock';
         case 'ComponentComponentsCategoryList':
             return 'CategoryListBlock';
+        case 'ComponentComponentsArticleList':
+            return 'ArticleListBlock';
+        case 'ComponentComponentsCategory':
+            return 'CategoryBlock';
     }
 };
