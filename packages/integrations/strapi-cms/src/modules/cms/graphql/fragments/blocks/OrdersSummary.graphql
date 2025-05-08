@@ -1,0 +1,21 @@
+fragment OrdersSummaryComponent on ComponentComponentsOrdersSummary {
+    __typename
+    id
+    title
+    subtitle
+    totalValueTitle
+    averageValueTitle
+    averageNumberTitle
+    chartTitle
+    ranges {
+        id
+        label
+        value
+        type
+        default
+    }
+    noResults {
+        title
+        description
+    }
+}

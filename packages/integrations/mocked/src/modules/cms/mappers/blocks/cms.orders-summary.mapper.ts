@@ -18,7 +18,6 @@ const MOCK_ORDER_LIST_BLOCK_EN: CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock 
     },
     noResults: {
         title: "So far, there's nothing here",
-        description: '',
     },
     ranges: [
         {
