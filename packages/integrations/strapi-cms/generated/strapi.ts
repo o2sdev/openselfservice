@@ -425,6 +425,8 @@ export type ComponentComponentsOrderListFieldsArgs = {
 export type ComponentComponentsOrdersSummary = {
     averageNumberTitle: Scalars['String']['output'];
     averageValueTitle: Scalars['String']['output'];
+    chartCurrentPeriodLabel: Scalars['String']['output'];
+    chartPreviousPeriodLabel: Scalars['String']['output'];
     chartTitle: Scalars['String']['output'];
     id: Scalars['ID']['output'];
     noResults: ComponentContentBanner;
@@ -4492,6 +4494,8 @@ export type ComponentComponentsOrdersSummaryResolvers<
 > = {
     averageNumberTitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     averageValueTitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    chartCurrentPeriodLabel?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    chartPreviousPeriodLabel?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     chartTitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     noResults?: Resolver<ResolversTypes['ComponentContentBanner'], ParentType, ContextType>;
@@ -7346,6 +7350,8 @@ export type OrdersSummaryComponentFragment = {
     averageValueTitle: string;
     averageNumberTitle: string;
     chartTitle: string;
+    chartPreviousPeriodLabel: string;
+    chartCurrentPeriodLabel: string;
     ranges?: Array<{
         id: string;
         label: string;
@@ -8135,6 +8141,8 @@ export type GetComponentQuery = {
                   averageValueTitle: string;
                   averageNumberTitle: string;
                   chartTitle: string;
+                  chartPreviousPeriodLabel: string;
+                  chartCurrentPeriodLabel: string;
                   ranges?: Array<{
                       id: string;
                       label: string;
@@ -9145,6 +9153,8 @@ export const OrdersSummaryComponentFragmentDoc = gql`
         averageValueTitle
         averageNumberTitle
         chartTitle
+        chartPreviousPeriodLabel
+        chartCurrentPeriodLabel
         ranges {
             id
             label

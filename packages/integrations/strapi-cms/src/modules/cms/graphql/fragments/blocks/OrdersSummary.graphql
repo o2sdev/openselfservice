@@ -7,6 +7,8 @@ fragment OrdersSummaryComponent on ComponentComponentsOrdersSummary {
     averageValueTitle
     averageNumberTitle
     chartTitle
+    chartPreviousPeriodLabel
+    chartCurrentPeriodLabel
     ranges {
         id
         label
