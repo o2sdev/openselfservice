@@ -17,3 +17,7 @@ class CategoryArticlesListBlock {
     description?: CMS.Model.CategoryBlock.CategoryBlock['description'];
     items!: Articles.Model.Articles;
 }
+
+export class CategoryArticles {
+    items!: Articles.Model.Articles;
+}

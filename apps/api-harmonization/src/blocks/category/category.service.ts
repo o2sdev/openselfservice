@@ -5,9 +5,9 @@ import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
 
 import { Articles, CMS } from '../../models';
 
-import { mapCategory } from './category.mapper';
-import { CategoryBlock } from './category.model';
-import { GetCategoryBlockQuery } from './category.request';
+import { mapCategory, mapCategoryArticles } from './category.mapper';
+import { CategoryArticles, CategoryBlock } from './category.model';
+import { GetCategoryBlockArticlesQuery, GetCategoryBlockQuery } from './category.request';
 
 @Injectable()
 export class CategoryService {
@@ -24,10 +24,25 @@ export class CategoryService {
                 return forkJoin([
                     this.articlesService.getCategory({ id: cms.categoryId, locale: headers['x-locale'] }),
                     this.articlesService.getArticleList(
-                        { limit: 10, locale: headers['x-locale'] },
+                        { limit: query.limit || 6, locale: headers['x-locale'] },
                         { category: cms.categoryId },
                     ),
                 ]).pipe(map(([category, articles]) => mapCategory(cms, category, articles, headers['x-locale'])));
+            }),
+        );
+    }
+
+    getCategoryArticles(query: GetCategoryBlockArticlesQuery, headers: AppHeaders): Observable<CategoryArticles> {
+        const cms = this.cmsService.getCategoryBlock({ ...query, locale: headers['x-locale'] });
+
+        return forkJoin([cms]).pipe(
+            concatMap(([cms]) => {
+                return forkJoin([
+                    this.articlesService.getArticleList(
+                        { limit: query.limit || 2, offset: query.offset || 0, locale: headers['x-locale'] },
+                        { category: cms.categoryId },
+                    ),
+                ]).pipe(map(([articles]) => mapCategoryArticles(cms, articles, headers['x-locale'])));
             }),
         );
     }
