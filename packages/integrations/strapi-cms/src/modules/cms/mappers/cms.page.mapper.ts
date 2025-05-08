@@ -169,5 +169,7 @@ const mapComponent = (component: ComponentFragment) => {
             return 'SurveyJsBlock';
         case 'ComponentComponentsOrderList':
             return 'OrderListBlock';
+        case 'ComponentComponentsQuickLinks':
+            return 'QuickLinksBlock';
     }
 };

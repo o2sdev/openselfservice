@@ -16,6 +16,7 @@ import { mapNotificationListBlock } from './mappers/blocks/cms.notification-list
 import { mapOrderListBlock } from './mappers/blocks/cms.order-list.mapper';
 import { mapPaymentsHistoryBlock } from './mappers/blocks/cms.payments-history.mapper';
 import { mapPaymentsSummaryBlock } from './mappers/blocks/cms.payments-summary.mapper';
+import { mapQuickLinksBlock } from './mappers/blocks/cms.quick-links.mapper';
 import { mapResourceDetailsBlock } from './mappers/blocks/cms.resource-details.mapper';
 import { mapResourceListBlock } from './mappers/blocks/cms.resource-list.mapper';
 import { mapServiceDetailsBlock } from './mappers/blocks/cms.service-details.mapper';
@@ -38,11 +39,15 @@ import { Service as GraphqlService } from '@/modules/graphql';
 
 @Injectable()
 export class CmsService implements CMS.Service {
+    baseUrl: string;
+
     constructor(
         private readonly graphqlService: GraphqlService,
         private readonly config: ConfigService,
         private readonly cacheService: Cache.Service,
-    ) {}
+    ) {
+        this.baseUrl = this.config.get('CMS_STRAPI_BASE_URL')!;
+    }
 
     private getBlock = (options: CMS.Request.GetCmsEntryParams) => {
         const key = `component-${options.id}-${options.locale}`;
@@ -202,7 +207,7 @@ export class CmsService implements CMS.Service {
                         throw new NotFoundException();
                     }
 
-                    return mapLoginPage(loginPage.data, this.config.get('CMS_STRAPI_BASE_URL'));
+                    return mapLoginPage(loginPage.data, this.baseUrl);
                 }),
             );
         });
@@ -241,7 +246,7 @@ export class CmsService implements CMS.Service {
                         throw new NotFoundException();
                     }
 
-                    return mapHeader(header.data, this.config.get('CMS_STRAPI_BASE_URL'));
+                    return mapHeader(header.data, this.baseUrl);
                 }),
             );
         });
@@ -261,7 +266,7 @@ export class CmsService implements CMS.Service {
                         throw new NotFoundException();
                     }
 
-                    return mapFooter(footer.data, this.config.get('CMS_STRAPI_BASE_URL'));
+                    return mapFooter(footer.data, this.baseUrl);
                 }),
             );
         });
@@ -407,7 +412,10 @@ export class CmsService implements CMS.Service {
         throw new NotImplementedException();
     }
 
-    getQuickLinksBlock(_options: CMS.Request.GetCmsEntryParams): Observable<CMS.Model.QuickLinksBlock.QuickLinksBlock> {
-        throw new NotImplementedException();
+    getQuickLinksBlock(options: CMS.Request.GetCmsEntryParams): Observable<CMS.Model.QuickLinksBlock.QuickLinksBlock> {
+        const key = `quick-links-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () =>
+            this.getBlock(options).pipe(map((data) => mapQuickLinksBlock(data, this.baseUrl))),
+        );
     }
 }
