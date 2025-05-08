@@ -81,7 +81,7 @@ export const OrdersSummaryPure: React.FC<Readonly<OrdersSummaryPureProps>> = ({
     };
 
     const [data, setData] = useState<Blocks.OrdersSummary.Model.OrdersSummaryBlock>(component);
-    const [range, setRange] = useState(component.ranges.find((range) => range.isDefault)!);
+    const [range, setRange] = useState(component.ranges?.find((range) => range.isDefault));
     const [filters, setFilters] = useState(initialFilters);
 
     const [isPending, startTransition] = useTransition();
@@ -111,7 +111,10 @@ export const OrdersSummaryPure: React.FC<Readonly<OrdersSummaryPureProps>> = ({
             const newData = await sdk.blocks.getOrdersSummary(newFilters, { 'x-locale': locale }, accessToken);
             setFilters(newFilters);
             setData(newData);
-            setRange(component.ranges.find((item) => item.value === range && item.type === type)!);
+
+            if (component.ranges) {
+                setRange(component.ranges.find((item) => item.value === range && item.type === type)!);
+            }
         });
     };
 
@@ -119,28 +122,30 @@ export const OrdersSummaryPure: React.FC<Readonly<OrdersSummaryPureProps>> = ({
         <div className="w-full">
             <LoadingOverlay isActive={isPending}>
                 <div className="w-full flex flex-col gap-8">
-                    <div className="w-full flex gap-4 justify-between">
+                    <div className="w-full flex flex-col md:flex-row gap-4 justify-between">
                         <div className="flex flex-col gap-2">
                             {data.title && <Typography variant="h2">{data.title}</Typography>}
                             {data.subtitle && <Typography>{data.subtitle}</Typography>}
                         </div>
-                        <div className="flex gap-2 items-end">
-                            <ToggleGroup
-                                type="single"
-                                value={`${range.value}-${range.type}`}
-                                variant="outline"
-                                onValueChange={handleFilter}
-                            >
-                                {component.ranges.map((range) => (
-                                    <ToggleGroupItem key={range.value} value={`${range.value}-${range.type}`}>
-                                        {range.label}
-                                    </ToggleGroupItem>
-                                ))}
-                            </ToggleGroup>
-                        </div>
+                        {component.ranges && range && (
+                            <div className="flex gap-2 items-end">
+                                <ToggleGroup
+                                    type="single"
+                                    value={`${range.value}-${range.type}`}
+                                    variant="outline"
+                                    onValueChange={handleFilter}
+                                >
+                                    {component.ranges.map((range) => (
+                                        <ToggleGroupItem key={range.value} value={`${range.value}-${range.type}`}>
+                                            {range.label}
+                                        </ToggleGroupItem>
+                                    ))}
+                                </ToggleGroup>
+                            </div>
+                        )}
                     </div>
 
-                    <div className="w-full flex gap-6">
+                    <div className="w-full flex flex-col lg:flex-row gap-6">
                         <div className="w-full flex flex-col gap-6">
                             <StatCard
                                 title={data.totalValue.title}
@@ -149,7 +154,7 @@ export const OrdersSummaryPure: React.FC<Readonly<OrdersSummaryPureProps>> = ({
                                 icon={<Coins size={24} />}
                             />
 
-                            <div className="w-full flex gap-6">
+                            <div className="w-full flex flex-col sm:flex-row gap-6">
                                 <StatCard
                                     title={data.averageValue.title}
                                     value={data.averageValue.value}

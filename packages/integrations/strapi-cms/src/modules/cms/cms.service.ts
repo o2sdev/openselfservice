@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, NotImplementedException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore module type mismatch
@@ -16,6 +16,7 @@ import { mapInvoiceListBlock } from './mappers/blocks/cms.invoice-list.mapper';
 import { mapNotificationDetailsBlock } from './mappers/blocks/cms.notification-details.mapper';
 import { mapNotificationListBlock } from './mappers/blocks/cms.notification-list.mapper';
 import { mapOrderListBlock } from './mappers/blocks/cms.order-list.mapper';
+import { mapOrdersSummaryBlock } from './mappers/blocks/cms.orders-summary.mapper';
 import { mapPaymentsHistoryBlock } from './mappers/blocks/cms.payments-history.mapper';
 import { mapPaymentsSummaryBlock } from './mappers/blocks/cms.payments-summary.mapper';
 import { mapResourceDetailsBlock } from './mappers/blocks/cms.resource-details.mapper';
@@ -398,8 +399,9 @@ export class CmsService implements CMS.Service {
     }
 
     getOrdersSummaryBlock(
-        _options: CMS.Request.GetCmsEntryParams,
+        options: CMS.Request.GetCmsEntryParams,
     ): Observable<CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock> {
-        throw new NotImplementedException();
+        const key = `orders-summary-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapOrdersSummaryBlock)));
     }
 }

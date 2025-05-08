@@ -7,11 +7,11 @@ export class OrdersSummaryBlock extends Block.Block {
     averageValue!: OrdersInfo;
     averageNumber!: OrdersInfo;
     chart!: OrdersChart;
+    ranges?: Range[];
     noResults!: {
         title: string;
         description?: string;
     };
-    ranges!: Range[];
 }
 
 export class OrdersInfo {
@@ -20,6 +20,12 @@ export class OrdersInfo {
 
 export class OrdersChart {
     title!: string;
+    legend!: ChartLegend;
+}
+
+export class ChartLegend {
+    prev!: string;
+    current!: string;
 }
 
 export class Range {
