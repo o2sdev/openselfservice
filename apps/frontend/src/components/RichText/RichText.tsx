@@ -6,9 +6,6 @@ import { Link } from '@o2s/ui/components/link';
 import { Typography, TypographyProps } from '@o2s/ui/components/typography';
 import { cn } from '@o2s/ui/lib/utils';
 
-import { Image } from '@/components/Image/Image';
-import { ImageProps } from '@/components/Image/Image.types';
-
 import { RichTextProps } from './RichText.types';
 
 const LinkComp: FC<LinkProps & { children: ReactNode; className?: string }> = ({ children, ...props }) => {
@@ -19,8 +16,6 @@ const LinkComp: FC<LinkProps & { children: ReactNode; className?: string }> = ({
         </Link>
     );
 };
-
-const ImageComp: FC<ImageProps> = ({ ...props }) => <Image {...props} alt={props.alt} />;
 
 const TypographyComp: FC<TypographyProps & { children: ReactNode; tag: string }> = ({ children, ...props }) => {
     const Tag = props.tag || 'p';
@@ -136,15 +131,60 @@ export const RichText: FC<RichTextProps> = ({ content, baseFontSize = 'body', cl
             props: {
                 variant: 'inlineCode',
                 tag: 'pre',
-                className: cn('mt-6 first:mt-0', baseFontSizeClass),
+                className: cn('mt-6 first:mt-0 text-foreground', baseFontSizeClass),
             },
         },
         img: {
-            component: ImageComp,
+            component: TypographyComp,
             props: {
-                width: 1000,
-                height: 1000,
-                className: 'mt-6 first:mt-0',
+                variant: 'image',
+                tag: 'img',
+                className: cn('mt-6 first:mt-0', className),
+            },
+        },
+        table: {
+            component: TypographyComp,
+            props: {
+                variant: 'table',
+                tag: 'table',
+                className: cn('mt-6 first:mt-0', className),
+            },
+        },
+        thead: {
+            component: TypographyComp,
+            props: {
+                tag: 'thead',
+            },
+        },
+        tbody: {
+            component: TypographyComp,
+            props: {
+                tag: 'tbody',
+            },
+        },
+        tr: {
+            component: TypographyComp,
+            props: {
+                variant: 'tableRow',
+                tag: 'tr',
+            },
+        },
+        th: {
+            component: TypographyComp,
+            props: {
+                variant: 'tableHeader',
+                tag: 'th',
+                className: cn('p-4', className),
+            },
+        },
+        td: {
+            component: ({ children, ...props }: { children: ReactNode; 'data-highlighted'?: boolean }) => {
+                const variant = props['data-highlighted'] ? 'tableCellHighlighted' : 'tableCell';
+                return (
+                    <TypographyComp variant={variant} tag="td" {...props}>
+                        {children}
+                    </TypographyComp>
+                );
             },
         },
     };

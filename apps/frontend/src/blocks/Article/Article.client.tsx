@@ -31,22 +31,27 @@ export const ArticlePure: React.FC<Readonly<ArticlePureProps>> = ({ ...component
                         switch (section.__typename) {
                             case 'ArticleSectionText':
                                 return (
-                                    <li key={section.id} className="border p-4">
-                                        <Typography variant="h2">{section.__typename}</Typography>
+                                    <li key={section.id}>
                                         <RichText content={section.content} />
                                     </li>
                                 );
                             case 'ArticleSectionImage':
                                 return (
-                                    <li key={section.id} className="border p-4">
-                                        <Typography variant="h2">{section.__typename}</Typography>
-                                        <Image
-                                            src={section.image.url}
-                                            alt={section.image.alt}
-                                            width={section.image.width}
-                                            height={section.image.height}
-                                        />
-                                        <Typography>{section.caption}</Typography>
+                                    <li key={section.id} className="flex flex-col gap-4">
+                                        <div className="relative overflow-hidden max-w-fit mx-auto">
+                                            <Image
+                                                src={section.image.url}
+                                                alt={section.image.alt}
+                                                width={section.image.width}
+                                                height={section.image.height}
+                                                className="w-full h-auto object-cover"
+                                            />
+                                        </div>
+                                        {section.caption && (
+                                            <Typography variant="small" className="text-muted-foreground text-center">
+                                                {section.caption}
+                                            </Typography>
+                                        )}
                                     </li>
                                 );
                         }

@@ -8,7 +8,7 @@ export const MOCK_ARTICLES_EN: Articles.Model.Article[] = [
         slug: '/help-and-support/warranty-and-repair/managing-your-powerpro-tools-online',
         createdAt: '2023-05-12T08:30:00Z',
         updatedAt: '2023-06-15T14:25:00Z',
-        title: 'Managing Your PowerPro Tools Online',
+        title: 'Managing Your PowerPro Tools Online 1',
         lead: 'Learn how to efficiently manage your PowerPro tools through our self-service portal available 24/7.',
         tags: ['tag1', 'tag2'],
         image: {
@@ -79,7 +79,78 @@ export const MOCK_ARTICLES_EN: Articles.Model.Article[] = [
         slug: '/help-and-support/warranty-and-repair/managing-your-powerpro-tools-online',
         createdAt: '2023-05-12T08:30:00Z',
         updatedAt: '2023-06-15T14:25:00Z',
-        title: 'Managing Your PowerPro Tools Online',
+        title: 'Managing Your PowerPro Tools Online 2',
+        lead: 'Learn how to efficiently manage your PowerPro tools through our self-service portal available 24/7.',
+        tags: ['tag1', 'tag2'],
+        image: {
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
+            width: 640,
+            height: 656,
+            alt: '',
+        },
+        thumbnail: {
+            url: 'https://example.com/images/tool-management-thumb.jpg',
+            alt: '',
+        },
+        category: {
+            id: 'warranty-and-repair',
+            title: 'Warranty & Repair',
+        },
+        author: {
+            name: 'Lando Norris',
+            position: 'Content Creator',
+            avatar: 'https://example.com/images/user-001.jpg',
+        },
+        sections: [
+            {
+                id: 'sect-001-1',
+                createdAt: '2023-05-12T08:30:00Z',
+                updatedAt: '2023-06-15T14:25:00Z',
+                __typename: 'ArticleSectionText',
+                title: 'Getting Started',
+                content:
+                    "To begin managing your PowerPro tools online, log into your account at powerprotools.com and navigate to the 'My Tools' section.",
+            },
+            {
+                id: 'sect-001-2',
+                createdAt: '2023-05-12T09:15:00Z',
+                updatedAt: '2023-06-15T14:25:00Z',
+                __typename: 'ArticleSectionImage',
+                image: {
+                    url: 'https://picsum.photos/400/400',
+                    alt: 'PowerPro dashboard view',
+                },
+                caption:
+                    'The PowerPro tool management dashboard provides a comprehensive overview of your registered tools.',
+            },
+            {
+                id: 'sect-001-3',
+                createdAt: '2023-05-12T08:30:00Z',
+                updatedAt: '2023-06-15T14:25:00Z',
+                __typename: 'ArticleSectionText',
+                title: 'Getting Started',
+                content: markdownContent,
+            },
+            {
+                id: 'sect-001-4',
+                createdAt: '2023-05-12T09:15:00Z',
+                updatedAt: '2023-06-15T14:25:00Z',
+                __typename: 'ArticleSectionImage',
+                image: {
+                    url: 'https://picsum.photos/1200/800',
+                    alt: 'PowerPro dashboard view',
+                },
+                caption:
+                    'The PowerPro tool management dashboard provides a comprehensive overview of your registered tools.',
+            },
+        ],
+    },
+    {
+        id: 'art-003',
+        slug: '/help-and-support/warranty-and-repair/managing-your-powerpro-tools-online',
+        createdAt: '2023-05-12T08:30:00Z',
+        updatedAt: '2023-06-15T14:25:00Z',
+        title: 'Managing Your PowerPro Tools Online 3',
         lead: 'Learn how to efficiently manage your PowerPro tools through our self-service portal available 24/7.',
         tags: ['tag1', 'tag2'],
         image: {

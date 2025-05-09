@@ -6,7 +6,7 @@ import { Auth } from '@o2s/framework/modules';
 import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
 
 import { URL } from './';
-import { GetCategoryBlockQuery } from './category.request';
+import { GetCategoryBlockArticlesQuery, GetCategoryBlockQuery } from './category.request';
 import { CategoryService } from './category.service';
 
 @Controller(URL)
@@ -18,5 +18,12 @@ export class CategoryController {
     @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
     getCategoryBlock(@Headers() headers: AppHeaders, @Query() query: GetCategoryBlockQuery) {
         return this.service.getCategoryBlock(query, headers);
+    }
+
+    @Get('articles')
+    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
+    getCategoryArticles(@Headers() headers: AppHeaders, @Query() query: GetCategoryBlockArticlesQuery) {
+        console.log('Controller query (GetCategoryBlockArticlesQuery', query);
+        return this.service.getCategoryArticles(query, headers);
     }
 }

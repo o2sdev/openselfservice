@@ -16,10 +16,11 @@ const InformativeCardContent: React.FC<Readonly<InformativeCardProps>> = ({
     title,
     description,
     href,
+    lineClamp,
 }) => {
     return (
-        <div className="flex flex-row gap-2 p-6 rounded-lg bg-card border border-border w-full h-full items-end justify-between">
-            <div className="flex flex-col gap-2">
+        <div className="flex flex-row w-full gap-2 p-6 items-end justify-between">
+            <div className="flex flex-col gap-2 flex-grow">
                 {iconUrl && (
                     <img
                         src={iconUrl}
@@ -31,14 +32,20 @@ const InformativeCardContent: React.FC<Readonly<InformativeCardProps>> = ({
                 {title && <Typography variant="h3">{title}</Typography>}
 
                 {description && (
-                    <Typography variant="p" className="text-muted-foreground">
+                    <Typography
+                        variant="p"
+                        className={cn(
+                            'text-muted-foreground',
+                            lineClamp && `overflow-ellipsis line-clamp-${lineClamp}`,
+                        )}
+                    >
                         {description}
                     </Typography>
                 )}
             </div>
             {href && (
-                <div className="px-4 py-2 w-4">
-                    <ArrowRight className="h-4 w-4" />
+                <div className="px-4 py-2 w-4 items-end">
+                    <ArrowRight className="h-4 w-4 flex-shrink-0 align-bottom" />
                 </div>
             )}
         </div>
@@ -50,7 +57,7 @@ export const InformativeCard: React.FC<Readonly<InformativeCardProps>> = (props)
         return (
             <Link
                 asChild
-                className="whitespace-normal text-foreground hover:no-underline [&>div]:hover:border-primary hover:[&_svg]:text-primary w-full"
+                className="flex flex-grow whitespace-normal text-foreground hover:no-underline [&>div]:hover:border-primary hover:[&_svg]:text-primary rounded-lg bg-card border border-border w-full h-full items-start"
             >
                 <NextLink href={props.href} aria-label={props.title}>
                     <InformativeCardContent {...props} />

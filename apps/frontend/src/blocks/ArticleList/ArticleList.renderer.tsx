@@ -19,12 +19,25 @@ export const ArticleListRenderer: React.FC<ArticleListRendererProps> = ({ id, ac
         <Suspense
             key={id}
             fallback={
-                <>
-                    <Loading bars={1} />
-                    <Container variant="narrow">
-                        <Loading bars={8} />
-                    </Container>
-                </>
+                <div className="w-full flex flex-col gap-4">
+                    <div className="w-full">
+                        <Loading bars={0} />
+                    </div>
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
+                        <li>
+                            <Loading bars={9} />
+                        </li>
+                        <li>
+                            <Loading bars={9} />
+                        </li>
+                        <li>
+                            <Loading bars={9} />
+                        </li>
+                        <li>
+                            <Loading bars={9} />
+                        </li>
+                    </ul>
+                </div>
             }
         >
             <ArticleList id={id} accessToken={accessToken} locale={locale} />
