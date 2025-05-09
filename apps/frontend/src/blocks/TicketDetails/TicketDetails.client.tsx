@@ -3,7 +3,6 @@
 import { Download, Link as LinkIcon } from 'lucide-react';
 import React from 'react';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@o2s/ui/components/avatar';
 import { Badge } from '@o2s/ui/components/badge';
 import { Button } from '@o2s/ui/components/button';
 import { Separator } from '@o2s/ui/components/separator';
@@ -12,12 +11,13 @@ import { Typography } from '@o2s/ui/components/typography';
 
 import { ticketBadgeVariants } from '@/utils/mappings/ticket-badge';
 
+import { Author } from '@/components/Author/Author';
 import { Container } from '@/components/Container/Container';
 import { RichText } from '@/components/RichText/RichText';
 
 import { TicketDetailsPureProps } from './TicketDetails.types';
 
-export const TicketDetailsPure: React.FC<TicketDetailsPureProps> = ({ ...component }) => {
+export const TicketDetailsPure: React.FC<Readonly<TicketDetailsPureProps>> = ({ ...component }) => {
     const { data: ticket } = component;
     return (
         <div className="w-full">
@@ -86,19 +86,11 @@ export const TicketDetailsPure: React.FC<TicketDetailsPureProps> = ({ ...compone
                                     {ticket.comments.items.map((comment, index) => (
                                         <div key={index} className="flex flex-col gap-4">
                                             <Separator />
-                                            <div className="flex items-center gap-2">
-                                                <Avatar>
-                                                    <AvatarImage src={comment.author.avatar} />
-                                                    <AvatarFallback name={comment.author.name} />
-                                                </Avatar>
-
-                                                <div className="flex flex-col gap-1">
-                                                    <Typography variant="subtitle">{comment.author.name}</Typography>
-                                                    <Typography variant="small" className="text-muted-foreground">
-                                                        {comment.date}
-                                                    </Typography>
-                                                </div>
-                                            </div>
+                                            <Author
+                                                name={comment.author.name}
+                                                avatar={comment.author.avatar}
+                                                position={comment.date}
+                                            />
 
                                             <div>
                                                 <RichText
@@ -130,21 +122,11 @@ export const TicketDetailsPure: React.FC<TicketDetailsPureProps> = ({ ...compone
                                         <div key={index} className="flex flex-col gap-4">
                                             <Separator />
                                             <div className="flex flex-col gap-2">
-                                                <div className="flex items-center gap-2">
-                                                    <Avatar>
-                                                        <AvatarImage src={attachment.author.avatar} />
-                                                        <AvatarFallback name={attachment.author.name} />
-                                                    </Avatar>
-
-                                                    <div className="flex flex-col gap-1">
-                                                        <Typography variant="subtitle">
-                                                            {attachment.author.name}
-                                                        </Typography>
-                                                        <Typography variant="small" className="text-muted-foreground">
-                                                            {attachment.date}
-                                                        </Typography>
-                                                    </div>
-                                                </div>
+                                                <Author
+                                                    name={attachment.author.name}
+                                                    avatar={attachment.author.avatar}
+                                                    position={attachment.date}
+                                                />
 
                                                 <div className="flex items-center py-2 px-4 gap-2 border rounded-lg shadow-sm">
                                                     <LinkIcon className="w-4 h-4" />

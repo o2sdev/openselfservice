@@ -26,8 +26,8 @@ export type PaymentStatus =
 export class Order {
     id!: string;
     customerId?: string;
-    createdAt?: string;
-    updatedAt?: string;
+    createdAt!: string;
+    updatedAt!: string;
     total!: Price;
     subtotal?: Price;
     shippingTotal?: Price;

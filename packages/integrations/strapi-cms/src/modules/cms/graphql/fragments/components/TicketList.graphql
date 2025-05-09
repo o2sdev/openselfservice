@@ -20,4 +20,13 @@ fragment TicketListComponent on ComponentComponentsTicketList {
         description
     }
     detailsURL
+    actionLinks {
+        id
+        label
+        visible
+        page {
+            slug
+        }
+        icon
+    }
 }

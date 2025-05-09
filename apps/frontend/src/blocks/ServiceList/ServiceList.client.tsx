@@ -5,7 +5,6 @@ import React, { useState, useTransition } from 'react';
 
 import { LoadingOverlay } from '@o2s/ui/components/loading-overlay';
 import { Separator } from '@o2s/ui/components/separator';
-import { Typography } from '@o2s/ui/components/typography';
 
 import { sdk } from '@/api/sdk';
 
@@ -13,8 +12,8 @@ import { statusBadgeVariants } from '@/utils/mappings/services-badge';
 
 import { Card } from '@/components/Card/Card';
 import { Badge } from '@/components/Card/Card.types';
-import { Filters } from '@/components/Filters/Filters';
-import FiltersContextProvider, { InitialFilters } from '@/components/Filters/FiltersContext';
+import { InitialFilters } from '@/components/Filters/FiltersContext';
+import { FiltersSection } from '@/components/Filters/FiltersSection';
 import { NoResults } from '@/components/NoResults/NoResults';
 import { Pagination } from '@/components/Pagination/Pagination';
 
@@ -53,21 +52,14 @@ export const ServiceListPure: React.FC<ServiceListPureProps> = ({ locale, access
         <div className="w-full">
             {initialData.length > 0 ? (
                 <div className="flex flex-col gap-6">
-                    <div className="flex justify-between items-center gap-4 flex-wrap md:flex-nowrap">
-                        <Typography variant="h2" asChild>
-                            <h2>{data.subtitle}</h2>
-                        </Typography>
-                        {data.filters && data.filters.items.length > 0 && (
-                            <FiltersContextProvider initialFilters={initialFilters as unknown as InitialFilters}>
-                                <Filters
-                                    filters={data.filters}
-                                    initialValues={filters}
-                                    onSubmit={handleFilter}
-                                    onReset={handleReset}
-                                />
-                            </FiltersContextProvider>
-                        )}
-                    </div>
+                    <FiltersSection
+                        title={data.subtitle}
+                        initialFilters={initialFilters as unknown as InitialFilters}
+                        filters={data.filters}
+                        initialValues={filters}
+                        onSubmit={handleFilter}
+                        onReset={handleReset}
+                    />
 
                     <LoadingOverlay isActive={isPending}>
                         {data.services.data.length ? (

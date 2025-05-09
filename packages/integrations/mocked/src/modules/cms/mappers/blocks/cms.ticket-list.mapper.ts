@@ -2,8 +2,31 @@ import { CMS } from '@o2s/framework/modules';
 
 const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
     id: 'ticket-list-1',
-    title: 'Cases overview',
+    title: 'Cases',
     subtitle: 'Your recent cases',
+    actionLinks: [
+        {
+            id: 'submit-complaint',
+            label: 'Submit complaint',
+            visible: true,
+            slug: '/submit-complaint',
+            icon: 'MessageSquareWarning',
+        },
+        {
+            id: 'request-device-maintenance',
+            label: 'Request device maintenance',
+            visible: true,
+            slug: '/request-device-maintenance',
+            icon: 'Hammer',
+        },
+        {
+            id: 'contact-us',
+            label: 'Contact us',
+            visible: false,
+            icon: 'ClipboardPenLine',
+            slug: '/contact-us',
+        },
+    ],
     table: {
         columns: [
             { id: 'topic', title: 'Topic' },
@@ -38,7 +61,7 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
         },
     },
     pagination: {
-        limit: 5,
+        limit: 10,
         legend: 'of {totalPages} pages',
         prev: 'Previous',
         next: 'Next',
@@ -53,6 +76,19 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
         close: 'Close filters',
         removeFilters: 'Remove filters ({active})',
         items: [
+            {
+                __typename: 'FilterToggleGroup',
+                id: 'status',
+                label: 'Status',
+                allowMultiple: true,
+                isLeading: true,
+                options: [
+                    { label: 'All', value: 'ALL' },
+                    { label: 'Under consideration', value: 'OPEN' },
+                    { label: 'Resolved', value: 'CLOSED' },
+                    { label: 'New response', value: 'IN_PROGRESS' },
+                ],
+            },
             {
                 __typename: 'FilterSelect',
                 id: 'sort',
@@ -73,8 +109,10 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
                 __typename: 'FilterSelect',
                 id: 'topic',
                 label: 'Topic',
-                allowMultiple: true,
+                allowMultiple: false,
+                isLeading: false,
                 options: [
+                    { label: 'All', value: 'ALL' },
                     { label: 'Tool Repair', value: 'TOOL_REPAIR' },
                     { label: 'Fleet Exchange', value: 'FLEET_EXCHANGE' },
                     { label: 'Calibration', value: 'CALIBRATION' },
@@ -115,6 +153,7 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
     labels: {
         today: 'Today',
         yesterday: 'Yesterday',
+        showMore: 'Show more',
     },
     detailsUrl: '/cases/{id}',
 };
@@ -123,6 +162,29 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
     id: 'ticket-list-1',
     title: 'Fallübersicht',
     subtitle: 'Ihre neuesten Fälle',
+    actionLinks: [
+        {
+            id: 'submit-complaint',
+            label: 'Beschwerde einreichen',
+            visible: true,
+            slug: '/submit-complaint',
+            icon: 'MessageSquareWarning',
+        },
+        {
+            id: 'request-device-maintenance',
+            label: 'Gerätewartung anfordern',
+            visible: true,
+            slug: '/request-device-maintenance',
+            icon: 'Hammer',
+        },
+        {
+            id: 'contact-us',
+            label: 'Kontakt',
+            visible: false,
+            icon: 'ClipboardPenLine',
+            slug: '/contact-us',
+        },
+    ],
     table: {
         columns: [
             { id: 'topic', title: 'Thema' },
@@ -137,6 +199,7 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
     },
     fieldMapping: {
         topic: {
+            ALL: 'Alle',
             TOOL_REPAIR: 'Werkzeugreparatur',
             FLEET_EXCHANGE: 'Flottenaustausch',
             CALIBRATION: 'Kalibrierung',
@@ -157,7 +220,7 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
         },
     },
     pagination: {
-        limit: 5,
+        limit: 10,
         legend: 'von {totalPages} Seiten',
         prev: 'Zurück',
         next: 'Weiter',
@@ -177,6 +240,7 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
                 id: 'sort',
                 label: 'Sortieren nach',
                 allowMultiple: false,
+                isLeading: true,
                 options: [
                     { label: 'Thema aufsteigend', value: 'topic_ASC' },
                     { label: 'Thema absteigend', value: 'topic_DESC' },
@@ -189,11 +253,26 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
                 ],
             },
             {
+                __typename: 'FilterToggleGroup',
+                id: 'status',
+                label: 'Status',
+                allowMultiple: false,
+                isLeading: false,
+                options: [
+                    { label: 'Alle', value: 'ALL' },
+                    { label: 'In Bearbeitung', value: 'OPEN' },
+                    { label: 'Gelöst', value: 'CLOSED' },
+                    { label: 'Neue Antwort', value: 'IN_PROGRESS' },
+                ],
+            },
+            {
                 __typename: 'FilterSelect',
                 id: 'topic',
                 label: 'Thema',
                 allowMultiple: true,
+                isLeading: false,
                 options: [
+                    { label: 'Alle', value: 'ALL' },
                     { label: 'Werkzeugreparatur', value: 'TOOL_REPAIR' },
                     { label: 'Flottenaustausch', value: 'FLEET_EXCHANGE' },
                     { label: 'Kalibrierung', value: 'CALIBRATION' },
@@ -234,14 +313,39 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
     labels: {
         today: 'Heute',
         yesterday: 'Gestern',
+        showMore: 'Mehr anzeigen',
     },
     detailsUrl: '/faelle/{id}',
 };
 
 const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
     id: 'ticket-list-1',
-    title: 'Przegląd zgłoszeń',
+    title: 'Zgłoszenia',
     subtitle: 'Twoje ostatnie zgłoszenia',
+    actionLinks: [
+        {
+            id: 'submit-complaint',
+            label: 'Zgłoś błąd',
+            visible: true,
+            slug: '/submit-complaint',
+            icon: 'MessageSquareWarning',
+        },
+        {
+            id: 'request-device-maintenance',
+            label: 'Zgłoś wymagane konserwacje',
+            visible: true,
+            slug: '/request-device-maintenance',
+            icon: 'Hammer',
+        },
+        {
+            id: 'contact-us',
+            label: 'Skontaktuj się z nami',
+            visible: false,
+            icon: 'ClipboardPenLine',
+            slug: '/contact-us',
+        },
+    ],
+
     table: {
         columns: [
             { id: 'topic', title: 'Temat' },
@@ -256,6 +360,7 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
     },
     fieldMapping: {
         topic: {
+            ALL: 'Wszystko',
             TOOL_REPAIR: 'Naprawa narzędzi',
             FLEET_EXCHANGE: 'Wymiana floty',
             CALIBRATION: 'Kalibracja',
@@ -276,7 +381,7 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
         },
     },
     pagination: {
-        limit: 5,
+        limit: 10,
         legend: 'z {totalPages} stron',
         prev: 'Poprzednia',
         next: 'Następna',
@@ -309,11 +414,26 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
                 ],
             },
             {
+                __typename: 'FilterToggleGroup',
+                id: 'status',
+                label: 'Status',
+                allowMultiple: false,
+                isLeading: true,
+                options: [
+                    { label: 'Wszystko', value: 'ALL' },
+                    { label: 'W rozpatrzeniu', value: 'OPEN' },
+                    { label: 'Rozwiązane', value: 'CLOSED' },
+                    { label: 'Nowa odpowiedź', value: 'IN_PROGRESS' },
+                ],
+            },
+            {
                 __typename: 'FilterSelect',
                 id: 'topic',
                 label: 'Temat',
-                allowMultiple: true,
+                allowMultiple: false,
+                isLeading: false,
                 options: [
+                    { label: 'Wszystko', value: 'ALL' },
                     { label: 'Naprawa narzędzi', value: 'TOOL_REPAIR' },
                     { label: 'Wymiana floty', value: 'FLEET_EXCHANGE' },
                     { label: 'Kalibracja', value: 'CALIBRATION' },
@@ -354,6 +474,7 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
     labels: {
         today: 'Dzisiaj',
         yesterday: 'Wczoraj',
+        showMore: 'Pokaż więcej',
     },
     detailsUrl: '/zgloszenia/{id}',
 };

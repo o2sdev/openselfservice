@@ -1,8 +1,8 @@
 import { HttpModule } from '@nestjs/axios';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { APP_GUARD } from '@nestjs/core';
-import { LoggerModule } from '@o2s/utils.logger';
+import { APP_GUARD, Reflector } from '@nestjs/core';
+import { LoggerModule, LoggerService } from '@o2s/utils.logger';
 
 import {
     Articles,
@@ -31,11 +31,14 @@ import { FaqBlockModule } from '@o2s/api-harmonization/blocks/faq/faq.module';
 import { InvoiceListBlockModule } from '@o2s/api-harmonization/blocks/invoice-list/invoice-list.module';
 import { NotificationDetailsBlockModule } from '@o2s/api-harmonization/blocks/notification-details/notification-details.module';
 import { NotificationListBlockModule } from '@o2s/api-harmonization/blocks/notification-list/notification-list.module';
+import { OrderListBlockModule } from '@o2s/api-harmonization/blocks/order-list/order-list.module';
+import { OrdersSummaryBlockModule } from '@o2s/api-harmonization/blocks/orders-summary/orders-summary.module';
 import { PaymentsHistoryBlockModule } from '@o2s/api-harmonization/blocks/payments-history/payments-history.module';
 import { PaymentsSummaryBlockModule } from '@o2s/api-harmonization/blocks/payments-summary/payments-summary.module';
 import { QuickLinksBlockModule } from '@o2s/api-harmonization/blocks/quick-links/quick-links.module';
 import { ServiceDetailsBlockModule } from '@o2s/api-harmonization/blocks/service-details/service-details.module';
 import { ServiceListBlockModule } from '@o2s/api-harmonization/blocks/service-list/service-list.module';
+import { SurveyjsBlockModule } from '@o2s/api-harmonization/blocks/surveyjs/surveyjs.module';
 import { TicketDetailsBlockModule } from '@o2s/api-harmonization/blocks/ticket-details/ticket-details.module';
 import { TicketListBlockModule } from '@o2s/api-harmonization/blocks/ticket-list/ticket-list.module';
 import { TicketRecentBlockModule } from '@o2s/api-harmonization/blocks/ticket-recent/ticket-recent.module';
@@ -96,6 +99,9 @@ import { SurveyjsModule } from './modules/surveyjs-forms/surveyjs.module';
         TicketRecentBlockModule.register(AppConfig),
         ServiceListBlockModule.register(AppConfig),
         ServiceDetailsBlockModule.register(AppConfig),
+        SurveyjsBlockModule.register(AppConfig),
+        OrderListBlockModule.register(AppConfig),
+        OrdersSummaryBlockModule.register(AppConfig),
         QuickLinksBlockModule.register(AppConfig),
         CategoryListBlockModule.register(AppConfig),
         ArticleListBlockModule.register(AppConfig),
@@ -107,7 +113,8 @@ import { SurveyjsModule } from './modules/surveyjs-forms/surveyjs.module';
         AppService,
         {
             provide: APP_GUARD,
-            useClass: Auth.Guards.RolesGuard,
+            useFactory: (reflector: Reflector, logger: LoggerService) => new Auth.Guards.RolesGuard(reflector, logger),
+            inject: [Reflector, LoggerService],
         },
     ],
 })

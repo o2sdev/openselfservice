@@ -14,4 +14,5 @@ export class GetOrderListQuery extends PaginationQuery {
     sort?: string;
     dateFrom?: Date;
     dateTo?: Date;
+    locale?: string;
 }

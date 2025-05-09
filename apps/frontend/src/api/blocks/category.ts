@@ -23,5 +23,20 @@ export const category = (sdk: Sdk) => ({
                 },
                 params: query,
             }),
+        getCategoryArticles: (
+            query: Blocks.Category.Request.GetCategoryBlockArticlesQuery,
+            headers: Headers.AppHeaders,
+            authorization: string,
+        ): Promise<Blocks.Category.Model.CategoryArticles> =>
+            sdk.makeRequest({
+                method: 'get',
+                url: `${API_URL}/articles`,
+                headers: {
+                    ...getApiHeaders(),
+                    ...headers,
+                    Authorization: `Bearer ${authorization}`,
+                },
+                params: query,
+            }),
     },
 });

@@ -37,7 +37,7 @@ const MOCK_NOTIFICATION_LIST_BLOCK_EN: CMS.Model.NotificationListBlock.Notificat
         },
     },
     pagination: {
-        limit: 5,
+        limit: 10,
         legend: 'of {totalPages} pages',
         prev: 'Previous',
         next: 'Next',

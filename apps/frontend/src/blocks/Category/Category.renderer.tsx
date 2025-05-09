@@ -19,12 +19,21 @@ export const CategoryRenderer: React.FC<CategoryRendererProps> = ({ slug, id, ac
         <Suspense
             key={id}
             fallback={
-                <>
-                    <Loading bars={1} />
+                <div className="w-full flex flex-col gap-4">
+                    <div className="w-full">
+                        <Loading bars={0} />
+                    </div>
                     <Container variant="narrow">
-                        <Loading bars={8} />
+                        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
+                            <li>
+                                <Loading bars={12} />
+                            </li>
+                            <li>
+                                <Loading bars={12} />
+                            </li>
+                        </ul>
                     </Container>
-                </>
+                </div>
             }
         >
             <Category id={id} slug={slug} accessToken={accessToken} locale={locale} />

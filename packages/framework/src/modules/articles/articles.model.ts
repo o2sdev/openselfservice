@@ -63,7 +63,6 @@ export class ArticleSectionImage extends ArticleSectionCommon {
 }
 
 export type Articles = Pagination.Paginated<Article>;
-
 export class Author {
     name!: string;
     position?: string;

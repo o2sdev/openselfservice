@@ -13,13 +13,14 @@ import { mapInvoiceDetailsBlock } from './mappers/blocks/cms.invoice-details.map
 import { mapInvoiceListBlock } from './mappers/blocks/cms.invoice-list.mapper';
 import { mapNotificationDetailsBlock } from './mappers/blocks/cms.notification-details.mapper';
 import { mapNotificationListBlock } from './mappers/blocks/cms.notification-list.mapper';
+import { mapOrderListBlock } from './mappers/blocks/cms.order-list.mapper';
 import { mapPaymentsHistoryBlock } from './mappers/blocks/cms.payments-history.mapper';
 import { mapPaymentsSummaryBlock } from './mappers/blocks/cms.payments-summary.mapper';
 import { mapResourceDetailsBlock } from './mappers/blocks/cms.resource-details.mapper';
 import { mapResourceListBlock } from './mappers/blocks/cms.resource-list.mapper';
 import { mapServiceDetailsBlock } from './mappers/blocks/cms.service-details.mapper';
 import { mapServiceListBlock } from './mappers/blocks/cms.service-list.mapper';
-import { mapSurveyBlock } from './mappers/blocks/cms.survey.mapper';
+import { mapSurveyJsBlock } from './mappers/blocks/cms.surveyjs-block.mapper';
 import { mapTicketDetailsBlock } from './mappers/blocks/cms.ticket-details.mapper';
 import { mapTicketListBlock } from './mappers/blocks/cms.ticket-list.mapper';
 import { mapTicketRecentBlock } from './mappers/blocks/cms.ticket-recent.mapper';
@@ -31,6 +32,7 @@ import { mapLoginPage } from './mappers/cms.login-page.mapper';
 import { mapNotFoundPage } from './mappers/cms.not-found-page.mapper';
 import { mapOrganizationList } from './mappers/cms.organization-list.mapper';
 import { mapPage } from './mappers/cms.page.mapper';
+import { mapSurvey } from './mappers/cms.survey.mapper';
 import { PageFragment } from '@/generated/strapi';
 import { Service as GraphqlService } from '@/modules/graphql';
 
@@ -284,6 +286,20 @@ export class CmsService implements CMS.Service {
         });
     }
 
+    getSurvey(options: CMS.Request.GetCmsSurveyParams) {
+        const key = `survey-${options.code}`;
+        return this.getCachedBlock(key, () => {
+            const survey = this.graphqlService.getSurvey({
+                code: options.code,
+            });
+            return forkJoin([survey]).pipe(
+                map(([survey]) => {
+                    return mapSurvey(survey.data);
+                }),
+            );
+        });
+    }
+
     getFaqBlock(options: CMS.Request.GetCmsEntryParams) {
         const key = `faq-component-${options.id}-${options.locale}`;
         return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapFaqBlock)));
@@ -359,18 +375,20 @@ export class CmsService implements CMS.Service {
         return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapServiceDetailsBlock)));
     }
 
-    getSurvey(options: CMS.Request.GetCmsSurveyParams) {
-        const key = `survey-${options.code}`;
-        return this.getCachedBlock(key, () => {
-            const survey = this.graphqlService.getSurvey({
-                code: options.code,
-            });
-            return forkJoin([survey]).pipe(
-                map(([survey]) => {
-                    return mapSurveyBlock(survey.data);
-                }),
-            );
-        });
+    getSurveyJsBlock(options: CMS.Request.GetCmsEntryParams) {
+        const key = `survey-js-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapSurveyJsBlock)));
+    }
+
+    getOrderListBlock(options: CMS.Request.GetCmsEntryParams) {
+        const key = `order-list-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapOrderListBlock)));
+    }
+
+    getOrdersSummaryBlock(
+        _options: CMS.Request.GetCmsEntryParams,
+    ): Observable<CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock> {
+        throw new NotImplementedException();
     }
 
     getArticleListBlock(

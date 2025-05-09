@@ -7,7 +7,7 @@
         "updatedAt_timestamp": 1686838500,
         "title": "Verwalten Ihrer PowerPro-Werkzeuge online",
         "lead": "Erfahren Sie, wie Sie Ihre PowerPro-Werkzeuge effizient über unser rund um die Uhr verfügbares Selbstbedienungsportal verwalten können.",
-        "image": "https://example.com/images/tool-management.jpg",
+        "image": "https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg",
         "thumbnail": "https://example.com/images/tool-management-thumb.jpg",
         "category": "SELF_SERVICE",
         "sections": [

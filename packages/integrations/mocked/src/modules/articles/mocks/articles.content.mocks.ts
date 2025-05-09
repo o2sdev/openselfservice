@@ -134,6 +134,33 @@ Right aligned columns
 | engine | engine to be used for processing templates. Handlebars is the default. |
 | ext    | extension to be used for dest files. |
 
+Table with highlighted cell
+
+<table>
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>data</td>
+      <td>path to data files to supply the data that will be passed into templates.</td>
+    </tr>
+    <tr>
+      <td data-highlighted>engine</td>
+      <td data-highlighted>engine to be used for processing templates. Handlebars is the default.</td>
+    </tr>
+    <tr>
+      <td>ext</td>
+      <td>extension to be used for dest files.</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
 
 ## Links
 

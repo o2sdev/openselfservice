@@ -27,6 +27,8 @@ export default function FiltersContextProvider({
             for (const key in currentFilters) {
                 if (key === 'offset' || key === 'limit' || key === 'id') {
                     continue;
+                } else if (currentFilters[key as keyof InitialFilters] === '') {
+                    continue;
                 }
 
                 if (currentFilters[key as keyof InitialFilters] !== initialFilters[key as keyof InitialFilters]) {

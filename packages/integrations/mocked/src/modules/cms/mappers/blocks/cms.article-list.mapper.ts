@@ -8,6 +8,10 @@ const MOCK_ARTICLE_LIST_BLOCK_EN: CMS.Model.ArticleListBlock.ArticleListBlock = 
     parent: {
         slug: '/help-and-support',
     },
+    labels: {
+        today: 'Today',
+        yesterday: 'Yesterday',
+    },
 };
 
 const MOCK_ARTICLE_LIST_BLOCK_DE: CMS.Model.ArticleListBlock.ArticleListBlock = {
@@ -18,6 +22,10 @@ const MOCK_ARTICLE_LIST_BLOCK_DE: CMS.Model.ArticleListBlock.ArticleListBlock = 
     parent: {
         slug: '/hilfe-und-support',
     },
+    labels: {
+        today: 'Heute',
+        yesterday: 'Gestern',
+    },
 };
 
 const MOCK_ARTICLE_LIST_BLOCK_PL: CMS.Model.ArticleListBlock.ArticleListBlock = {
@@ -27,6 +35,10 @@ const MOCK_ARTICLE_LIST_BLOCK_PL: CMS.Model.ArticleListBlock.ArticleListBlock = 
     categoryId: 'warranty-and-repair',
     parent: {
         slug: '/pomoc-i-wsparcie',
+    },
+    labels: {
+        today: 'Dzisiaj',
+        yesterday: 'Wczoraj',
     },
 };
 

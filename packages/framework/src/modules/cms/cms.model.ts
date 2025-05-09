@@ -5,6 +5,7 @@ export * as Footer from './models/footer.model';
 export * as AppConfig from './models/app-config.model';
 export * as NotFoundPage from './models/not-found-page.model';
 export * as OrganizationList from './models/organization-list.model';
+export * as Survey from './models/survey.model';
 
 export * as FaqBlock from './models/blocks/faq.model';
 export * as TicketListBlock from './models/blocks/ticket-list.model';
@@ -21,6 +22,9 @@ export * as TicketRecentBlock from './models/blocks/tickets-recent.model';
 export * as PaymentsSummaryBlock from './models/blocks/payments-summary.model';
 export * as PaymentsHistoryBlock from './models/blocks/payments-history.model';
 export * as UserAccountBlock from './models/blocks/user-account.model';
+export * as SurveyJsBlock from './models/blocks/surveyjs-block.model';
+export * as OrderListBlock from './models/blocks/order-list.model';
+export * as OrdersSummaryBlock from './models/blocks/orders-summary.model';
 export * as SurveyBlock from './models/blocks/survey.model';
 export * as ArticleListBlock from './models/blocks/article-list.model';
 export * as CategoryBlock from './models/blocks/category.model';

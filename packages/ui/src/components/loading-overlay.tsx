@@ -21,13 +21,14 @@ interface SpinnerContentProps extends VariantProps<typeof spinnerVariants> {
     size?: VariantProps<typeof loaderVariants>['size'];
     className?: string;
     children?: React.ReactNode;
+    fallback?: React.ReactNode;
 }
 
-export function LoadingOverlay({ isActive, size = 'large', children, className }: SpinnerContentProps) {
+export function LoadingOverlay({ isActive, size = 'large', children, className, fallback }: SpinnerContentProps) {
     return (
         <div className="relative">
             <div className={cn(spinnerVariants({ isActive }), className)}>
-                <Spinner size={size} />
+                {fallback ? fallback : <Spinner size={size} />}
             </div>
             {children}
         </div>

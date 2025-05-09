@@ -8,8 +8,7 @@ import { object as YupObject, string as YupString } from 'yup';
 
 import { Alert, AlertDescription } from '@o2s/ui/components/alert';
 import { Button } from '@o2s/ui/components/button';
-import { Input } from '@o2s/ui/components/input';
-import { Label } from '@o2s/ui/components/label';
+import { InputWithLabel } from '@o2s/ui/components/input';
 import { Separator } from '@o2s/ui/components/separator';
 import { Typography } from '@o2s/ui/components/typography';
 
@@ -95,8 +94,7 @@ export const SignInForm: React.FC<SignInFormProps> = ({ providers, labels, onSig
                             <Field name="username" validateOnChange={true}>
                                 {({ field, form: { touched, errors } }: FieldProps<string, FormValues>) => (
                                     <div className="flex flex-col gap-2">
-                                        <Label htmlFor={field.name}>{labels.username.label}</Label>
-                                        <Input
+                                        <InputWithLabel
                                             id={field.name}
                                             type="text"
                                             placeholder={labels.username.placeholder}
@@ -106,6 +104,7 @@ export const SignInForm: React.FC<SignInFormProps> = ({ providers, labels, onSig
                                             disabled={isSubmitting}
                                             onChange={field.onChange}
                                             onBlur={field.onBlur}
+                                            label={labels.username.label}
                                         />
                                         <ErrorMessage name="username">
                                             {(msg) => (
@@ -126,8 +125,7 @@ export const SignInForm: React.FC<SignInFormProps> = ({ providers, labels, onSig
                             <Field name="password">
                                 {({ field, form: { touched, errors } }: FieldProps<string, FormValues>) => (
                                     <div className="flex flex-col gap-2">
-                                        <Label htmlFor={field.name}>{labels.password.label}</Label>
-                                        <Input
+                                        <InputWithLabel
                                             id={field.name}
                                             type={passwordVisible ? 'text' : 'password'}
                                             placeholder={labels.password.placeholder}
@@ -137,6 +135,7 @@ export const SignInForm: React.FC<SignInFormProps> = ({ providers, labels, onSig
                                             aria-invalid={!!(touched.password && errors.password)}
                                             onChange={field.onChange}
                                             onBlur={field.onBlur}
+                                            label={labels.password.label}
                                             adornment={
                                                 <button
                                                     type="button"

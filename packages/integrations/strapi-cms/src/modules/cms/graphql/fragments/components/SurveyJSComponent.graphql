@@ -1,0 +1,8 @@
+fragment SurveyjsComponent on ComponentComponentsSurveyJsComponent {
+    __typename
+    id
+    title
+    survey_js_form {
+        code
+    }
+}

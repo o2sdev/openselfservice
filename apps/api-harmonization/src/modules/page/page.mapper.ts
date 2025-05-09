@@ -67,7 +67,7 @@ export const mapArticle = (
                     ],
                 },
             },
-            hasOwnTitle: false,
+            hasOwnTitle: true,
             breadcrumbs: mapArticleBreadcrumbs(article, category),
         },
     };

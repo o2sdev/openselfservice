@@ -48,6 +48,11 @@ const MOCK_HEADER_LOGON_EN: CMS.Model.Header.Header = {
                     label: 'Services',
                     url: '/services',
                 },
+                {
+                    __typename: 'NavigationItem',
+                    label: 'Orders',
+                    url: '/orders',
+                },
             ],
         },
         {
@@ -56,7 +61,7 @@ const MOCK_HEADER_LOGON_EN: CMS.Model.Header.Header = {
             items: [
                 {
                     __typename: 'NavigationItem',
-                    label: 'O2S Documentation',
+                    label: 'Welcome Hub',
                     url: '/help-and-support',
                 },
             ],
@@ -115,6 +120,11 @@ const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
                     label: 'Dienstleistungen',
                     url: '/dienstleistungen',
                 },
+                {
+                    __typename: 'NavigationItem',
+                    label: 'Bestellungen',
+                    url: '/bestellungen',
+                },
             ],
         },
         {
@@ -123,7 +133,7 @@ const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
             items: [
                 {
                     __typename: 'NavigationItem',
-                    label: 'O2S Dokumentation',
+                    label: 'Willkommen Hub',
                     url: '/help-and-support',
                 },
             ],
@@ -186,6 +196,11 @@ const MOCK_HEADER_LOGON_PL: CMS.Model.Header.Header = {
                     label: 'Usługi',
                     url: '/uslugi',
                 },
+                {
+                    __typename: 'NavigationItem',
+                    label: 'Zamówienia',
+                    url: '/zamowienia',
+                },
             ],
         },
         {
@@ -194,7 +209,7 @@ const MOCK_HEADER_LOGON_PL: CMS.Model.Header.Header = {
             items: [
                 {
                     __typename: 'NavigationItem',
-                    label: 'Dokumentacja O2S',
+                    label: 'Centrum powitalne',
                     url: '/help-and-support',
                 },
             ],
