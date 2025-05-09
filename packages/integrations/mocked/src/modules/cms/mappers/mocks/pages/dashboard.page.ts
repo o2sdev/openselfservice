@@ -43,6 +43,7 @@ export const PAGE_DASHBOARD_PL: CMS.Model.Page.Page = {
         },
     },
     updatedAt: '2025-01-01',
+    createdAt: '2025-01-01',
 };
 
 export const PAGE_DASHBOARD_EN: CMS.Model.Page.Page = {
@@ -88,6 +89,7 @@ export const PAGE_DASHBOARD_EN: CMS.Model.Page.Page = {
         },
     },
     updatedAt: '2025-01-01',
+    createdAt: '2025-01-01',
 };
 
 export const PAGE_DASHBOARD_DE: CMS.Model.Page.Page = {
@@ -133,4 +135,5 @@ export const PAGE_DASHBOARD_DE: CMS.Model.Page.Page = {
         },
     },
     updatedAt: '2025-01-01',
+    createdAt: '2025-01-01',
 };

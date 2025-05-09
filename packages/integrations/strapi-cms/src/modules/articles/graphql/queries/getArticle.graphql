@@ -1,0 +1,11 @@
+query getArticle($id: ID!, $locale: I18NLocaleCode!) {
+    component(documentId: $id, locale: $locale) {
+        name
+        content {
+            __typename
+            ... on ComponentComponentsArticle {
+                ...Article
+            }
+        }
+    }
+}

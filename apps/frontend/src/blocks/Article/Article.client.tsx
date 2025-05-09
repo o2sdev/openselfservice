@@ -14,7 +14,6 @@ export const ArticlePure: React.FC<Readonly<ArticlePureProps>> = ({ ...component
     const {
         data: { author, createdAt, sections },
     } = component;
-    console.log(component);
     return (
         <div className="w-full flex flex-col gap-6">
             <div className="flex flex-col gap-2">

@@ -1,10 +1,5 @@
 import React from 'react';
 
-import { Link } from '@o2s/ui/components/link';
-import { Typography } from '@o2s/ui/components/typography';
-
-import { Link as NextLink } from '@/i18n';
-
 import { ArticlesSection } from '@/components/ArticlesSection/ArticlesSection';
 import { InformativeCard } from '@/components/InformativeCard/InformativeCard';
 

@@ -1,0 +1,9 @@
+fragment Article on ComponentComponentsArticle {
+    id
+    __typename
+    sections {
+        id
+        title
+        content
+    }
+}

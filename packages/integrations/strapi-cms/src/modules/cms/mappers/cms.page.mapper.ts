@@ -15,6 +15,7 @@ export const mapPage = (data: PageFragment): CMS.Model.Page.Page => {
         locale: data.locale!,
         template: template,
         updatedAt: data.updatedAt,
+        createdAt: data.createdAt,
         seo: {
             title: data.SEO!.title,
             noIndex: data.SEO!.noIndex,
@@ -61,6 +62,7 @@ export const mapAlternativePages = (data: PageFragment): CMS.Model.Page.Page => 
         locale: data.locale!,
         template: template,
         updatedAt: data.updatedAt,
+        createdAt: data.createdAt,
         seo: {
             title: data.SEO!.title,
             noIndex: data.SEO!.noIndex,
@@ -177,5 +179,7 @@ const mapComponent = (component: ComponentFragment) => {
             return 'ArticleListBlock';
         case 'ComponentComponentsCategory':
             return 'CategoryBlock';
+        case 'ComponentComponentsArticle':
+            return 'ArticleBlock';
     }
 };

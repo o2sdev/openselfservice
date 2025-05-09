@@ -36,6 +36,7 @@ export const PAGE_CONTACT_US_EN: CMS.Model.Page.Page = {
         },
     },
     updatedAt: '2025-01-01',
+    createdAt: '2025-01-01',
 };
 
 export const PAGE_CONTACT_US_DE: CMS.Model.Page.Page = {
@@ -74,6 +75,7 @@ export const PAGE_CONTACT_US_DE: CMS.Model.Page.Page = {
         },
     },
     updatedAt: '2025-01-01',
+    createdAt: '2025-01-01',
 };
 
 export const PAGE_CONTACT_US_PL: CMS.Model.Page.Page = {
@@ -112,6 +114,7 @@ export const PAGE_CONTACT_US_PL: CMS.Model.Page.Page = {
         },
     },
     updatedAt: '2025-01-01',
+    createdAt: '2025-01-01',
 };
 
 export const PAGE_COMPLAINT_FORM_EN: CMS.Model.Page.Page = {
@@ -150,6 +153,7 @@ export const PAGE_COMPLAINT_FORM_EN: CMS.Model.Page.Page = {
         },
     },
     updatedAt: '2025-01-01',
+    createdAt: '2025-01-01',
 };
 
 export const PAGE_COMPLAINT_FORM_DE: CMS.Model.Page.Page = {
@@ -188,6 +192,7 @@ export const PAGE_COMPLAINT_FORM_DE: CMS.Model.Page.Page = {
         },
     },
     updatedAt: '2025-01-01',
+    createdAt: '2025-01-01',
 };
 
 export const PAGE_COMPLAINT_FORM_PL: CMS.Model.Page.Page = {
@@ -226,6 +231,7 @@ export const PAGE_COMPLAINT_FORM_PL: CMS.Model.Page.Page = {
         },
     },
     updatedAt: '2025-01-01',
+    createdAt: '2025-01-01',
 };
 
 export const PAGE_REQUEST_DEVICE_MAINTENANCE_EN: CMS.Model.Page.Page = {
@@ -264,6 +270,7 @@ export const PAGE_REQUEST_DEVICE_MAINTENANCE_EN: CMS.Model.Page.Page = {
         },
     },
     updatedAt: '2025-01-01',
+    createdAt: '2025-01-01',
 };
 
 export const PAGE_REQUEST_DEVICE_MAINTENANCE_DE: CMS.Model.Page.Page = {
@@ -302,6 +309,7 @@ export const PAGE_REQUEST_DEVICE_MAINTENANCE_DE: CMS.Model.Page.Page = {
         },
     },
     updatedAt: '2025-01-01',
+    createdAt: '2025-01-01',
 };
 
 export const PAGE_REQUEST_DEVICE_MAINTENANCE_PL: CMS.Model.Page.Page = {
@@ -340,4 +348,5 @@ export const PAGE_REQUEST_DEVICE_MAINTENANCE_PL: CMS.Model.Page.Page = {
         },
     },
     updatedAt: '2025-01-01',
+    createdAt: '2025-01-01',
 };

@@ -156,14 +156,14 @@ export type Category = {
     createdAt?: Maybe<Scalars['DateTime']['output']>;
     description: Scalars['String']['output'];
     documentId: Scalars['ID']['output'];
-    icon: Array<Maybe<UploadFile>>;
-    icon_connection?: Maybe<UploadFileRelationResponseCollection>;
+    icon?: Maybe<UploadFile>;
     locale?: Maybe<Scalars['String']['output']>;
     localizations: Array<Maybe<Category>>;
     localizations_connection?: Maybe<CategoryRelationResponseCollection>;
     name: Scalars['String']['output'];
     pages: Array<Maybe<Page>>;
     pages_connection?: Maybe<PageRelationResponseCollection>;
+    parent?: Maybe<Page>;
     publishedAt?: Maybe<Scalars['DateTime']['output']>;
     slug: Scalars['String']['output'];
     updatedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -177,18 +177,6 @@ export type CategoryComponentsArgs = {
 
 export type CategoryComponents_ConnectionArgs = {
     filters?: InputMaybe<ComponentFiltersInput>;
-    pagination?: InputMaybe<PaginationArg>;
-    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-export type CategoryIconArgs = {
-    filters?: InputMaybe<UploadFileFiltersInput>;
-    pagination?: InputMaybe<PaginationArg>;
-    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-export type CategoryIcon_ConnectionArgs = {
-    filters?: InputMaybe<UploadFileFiltersInput>;
     pagination?: InputMaybe<PaginationArg>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
@@ -234,6 +222,7 @@ export type CategoryFiltersInput = {
     not?: InputMaybe<CategoryFiltersInput>;
     or?: InputMaybe<Array<InputMaybe<CategoryFiltersInput>>>;
     pages?: InputMaybe<PageFiltersInput>;
+    parent?: InputMaybe<PageFiltersInput>;
     publishedAt?: InputMaybe<DateTimeFilterInput>;
     slug?: InputMaybe<StringFilterInput>;
     updatedAt?: InputMaybe<DateTimeFilterInput>;
@@ -242,9 +231,10 @@ export type CategoryFiltersInput = {
 export type CategoryInput = {
     components?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
     description?: InputMaybe<Scalars['String']['input']>;
-    icon?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+    icon?: InputMaybe<Scalars['ID']['input']>;
     name?: InputMaybe<Scalars['String']['input']>;
     pages?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+    parent?: InputMaybe<Scalars['ID']['input']>;
     publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
     slug?: InputMaybe<Scalars['String']['input']>;
 };
@@ -277,6 +267,18 @@ export type ComponentLocalizations_ConnectionArgs = {
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
+export type ComponentComponentsArticle = {
+    id: Scalars['ID']['output'];
+    name: Scalars['String']['output'];
+    sections: Array<Maybe<ComponentContentArticleSection>>;
+};
+
+export type ComponentComponentsArticleSectionsArgs = {
+    filters?: InputMaybe<ComponentContentArticleSectionFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
 export type ComponentComponentsArticleList = {
     articles_to_show?: Maybe<Scalars['Int']['output']>;
     category?: Maybe<Category>;
@@ -296,17 +298,6 @@ export type ComponentComponentsArticleListPagesArgs = {
 
 export type ComponentComponentsArticleListPages_ConnectionArgs = {
     filters?: InputMaybe<PageFiltersInput>;
-    pagination?: InputMaybe<PaginationArg>;
-    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-export type ComponentComponentsArticleSections = {
-    id: Scalars['ID']['output'];
-    sections: Array<Maybe<ComponentContentArticleSection>>;
-};
-
-export type ComponentComponentsArticleSectionsSectionsArgs = {
-    filters?: InputMaybe<ComponentContentArticleSectionFiltersInput>;
     pagination?: InputMaybe<PaginationArg>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
@@ -644,8 +635,8 @@ export type ComponentContentChartDateRangeFiltersInput = {
 };
 
 export type ComponentContentDynamicZone =
+    | ComponentComponentsArticle
     | ComponentComponentsArticleList
-    | ComponentComponentsArticleSections
     | ComponentComponentsCategory
     | ComponentComponentsCategoryList
     | ComponentComponentsFaq
@@ -1395,8 +1386,8 @@ export type GenericMorph =
     | Author
     | Category
     | Component
+    | ComponentComponentsArticle
     | ComponentComponentsArticleList
-    | ComponentComponentsArticleSections
     | ComponentComponentsCategory
     | ComponentComponentsCategoryList
     | ComponentComponentsFaq
@@ -3023,13 +3014,13 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping of union types */
 export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
     ComponentContentDynamicZone:
+        | ComponentComponentsArticle
         | (Omit<ComponentComponentsArticleList, 'category' | 'pages' | 'pages_connection' | 'parent'> & {
               category?: Maybe<_RefType['Category']>;
               pages: Array<Maybe<_RefType['Page']>>;
               pages_connection?: Maybe<_RefType['PageRelationResponseCollection']>;
               parent?: Maybe<_RefType['Page']>;
           })
-        | ComponentComponentsArticleSections
         | (Omit<ComponentComponentsCategory, 'category' | 'parent'> & {
               category?: Maybe<_RefType['Category']>;
               parent?: Maybe<_RefType['Page']>;
@@ -3107,33 +3098,33 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
               | 'components'
               | 'components_connection'
               | 'icon'
-              | 'icon_connection'
               | 'localizations'
               | 'localizations_connection'
               | 'pages'
               | 'pages_connection'
+              | 'parent'
           > & {
               components: Array<Maybe<_RefType['Component']>>;
               components_connection?: Maybe<_RefType['ComponentRelationResponseCollection']>;
-              icon: Array<Maybe<_RefType['UploadFile']>>;
-              icon_connection?: Maybe<_RefType['UploadFileRelationResponseCollection']>;
+              icon?: Maybe<_RefType['UploadFile']>;
               localizations: Array<Maybe<_RefType['Category']>>;
               localizations_connection?: Maybe<_RefType['CategoryRelationResponseCollection']>;
               pages: Array<Maybe<_RefType['Page']>>;
               pages_connection?: Maybe<_RefType['PageRelationResponseCollection']>;
+              parent?: Maybe<_RefType['Page']>;
           })
         | (Omit<Component, 'content' | 'localizations' | 'localizations_connection'> & {
               content: Array<Maybe<_RefType['ComponentContentDynamicZone']>>;
               localizations: Array<Maybe<_RefType['Component']>>;
               localizations_connection?: Maybe<_RefType['ComponentRelationResponseCollection']>;
           })
+        | ComponentComponentsArticle
         | (Omit<ComponentComponentsArticleList, 'category' | 'pages' | 'pages_connection' | 'parent'> & {
               category?: Maybe<_RefType['Category']>;
               pages: Array<Maybe<_RefType['Page']>>;
               pages_connection?: Maybe<_RefType['PageRelationResponseCollection']>;
               parent?: Maybe<_RefType['Page']>;
           })
-        | ComponentComponentsArticleSections
         | (Omit<ComponentComponentsCategory, 'category' | 'parent'> & {
               category?: Maybe<_RefType['Category']>;
               parent?: Maybe<_RefType['Page']>;
@@ -3382,20 +3373,20 @@ export type ResolversTypes = {
             | 'components'
             | 'components_connection'
             | 'icon'
-            | 'icon_connection'
             | 'localizations'
             | 'localizations_connection'
             | 'pages'
             | 'pages_connection'
+            | 'parent'
         > & {
             components: Array<Maybe<ResolversTypes['Component']>>;
             components_connection?: Maybe<ResolversTypes['ComponentRelationResponseCollection']>;
-            icon: Array<Maybe<ResolversTypes['UploadFile']>>;
-            icon_connection?: Maybe<ResolversTypes['UploadFileRelationResponseCollection']>;
+            icon?: Maybe<ResolversTypes['UploadFile']>;
             localizations: Array<Maybe<ResolversTypes['Category']>>;
             localizations_connection?: Maybe<ResolversTypes['CategoryRelationResponseCollection']>;
             pages: Array<Maybe<ResolversTypes['Page']>>;
             pages_connection?: Maybe<ResolversTypes['PageRelationResponseCollection']>;
+            parent?: Maybe<ResolversTypes['Page']>;
         }
     >;
     CategoryEntityResponseCollection: ResolverTypeWrapper<
@@ -3413,6 +3404,7 @@ export type ResolversTypes = {
             localizations_connection?: Maybe<ResolversTypes['ComponentRelationResponseCollection']>;
         }
     >;
+    ComponentComponentsArticle: ResolverTypeWrapper<ComponentComponentsArticle>;
     ComponentComponentsArticleList: ResolverTypeWrapper<
         Omit<ComponentComponentsArticleList, 'category' | 'pages' | 'pages_connection' | 'parent'> & {
             category?: Maybe<ResolversTypes['Category']>;
@@ -3421,7 +3413,6 @@ export type ResolversTypes = {
             parent?: Maybe<ResolversTypes['Page']>;
         }
     >;
-    ComponentComponentsArticleSections: ResolverTypeWrapper<ComponentComponentsArticleSections>;
     ComponentComponentsCategory: ResolverTypeWrapper<
         Omit<ComponentComponentsCategory, 'category' | 'parent'> & {
             category?: Maybe<ResolversTypes['Category']>;
@@ -3833,20 +3824,20 @@ export type ResolversParentTypes = {
         | 'components'
         | 'components_connection'
         | 'icon'
-        | 'icon_connection'
         | 'localizations'
         | 'localizations_connection'
         | 'pages'
         | 'pages_connection'
+        | 'parent'
     > & {
         components: Array<Maybe<ResolversParentTypes['Component']>>;
         components_connection?: Maybe<ResolversParentTypes['ComponentRelationResponseCollection']>;
-        icon: Array<Maybe<ResolversParentTypes['UploadFile']>>;
-        icon_connection?: Maybe<ResolversParentTypes['UploadFileRelationResponseCollection']>;
+        icon?: Maybe<ResolversParentTypes['UploadFile']>;
         localizations: Array<Maybe<ResolversParentTypes['Category']>>;
         localizations_connection?: Maybe<ResolversParentTypes['CategoryRelationResponseCollection']>;
         pages: Array<Maybe<ResolversParentTypes['Page']>>;
         pages_connection?: Maybe<ResolversParentTypes['PageRelationResponseCollection']>;
+        parent?: Maybe<ResolversParentTypes['Page']>;
     };
     CategoryEntityResponseCollection: Omit<CategoryEntityResponseCollection, 'nodes'> & {
         nodes: Array<ResolversParentTypes['Category']>;
@@ -3861,6 +3852,7 @@ export type ResolversParentTypes = {
         localizations: Array<Maybe<ResolversParentTypes['Component']>>;
         localizations_connection?: Maybe<ResolversParentTypes['ComponentRelationResponseCollection']>;
     };
+    ComponentComponentsArticle: ComponentComponentsArticle;
     ComponentComponentsArticleList: Omit<
         ComponentComponentsArticleList,
         'category' | 'pages' | 'pages_connection' | 'parent'
@@ -3870,7 +3862,6 @@ export type ResolversParentTypes = {
         pages_connection?: Maybe<ResolversParentTypes['PageRelationResponseCollection']>;
         parent?: Maybe<ResolversParentTypes['Page']>;
     };
-    ComponentComponentsArticleSections: ComponentComponentsArticleSections;
     ComponentComponentsCategory: Omit<ComponentComponentsCategory, 'category' | 'parent'> & {
         category?: Maybe<ResolversParentTypes['Category']>;
         parent?: Maybe<ResolversParentTypes['Page']>;
@@ -4303,18 +4294,7 @@ export type CategoryResolvers<
     createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
     description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     documentId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-    icon?: Resolver<
-        Array<Maybe<ResolversTypes['UploadFile']>>,
-        ParentType,
-        ContextType,
-        RequireFields<CategoryIconArgs, 'pagination' | 'sort'>
-    >;
-    icon_connection?: Resolver<
-        Maybe<ResolversTypes['UploadFileRelationResponseCollection']>,
-        ParentType,
-        ContextType,
-        RequireFields<CategoryIcon_ConnectionArgs, 'pagination' | 'sort'>
-    >;
+    icon?: Resolver<Maybe<ResolversTypes['UploadFile']>, ParentType, ContextType>;
     locale?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     localizations?: Resolver<
         Array<Maybe<ResolversTypes['Category']>>,
@@ -4341,6 +4321,7 @@ export type CategoryResolvers<
         ContextType,
         RequireFields<CategoryPages_ConnectionArgs, 'pagination' | 'sort'>
     >;
+    parent?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType>;
     publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
     slug?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
@@ -4392,6 +4373,22 @@ export type ComponentResolvers<
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type ComponentComponentsArticleResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentComponentsArticle'] = ResolversParentTypes['ComponentComponentsArticle'],
+> = {
+    id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    sections?: Resolver<
+        Array<Maybe<ResolversTypes['ComponentContentArticleSection']>>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentComponentsArticleSectionsArgs, 'pagination' | 'sort'>
+    >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type ComponentComponentsArticleListResolvers<
     ContextType = any,
     ParentType extends
@@ -4415,21 +4412,6 @@ export type ComponentComponentsArticleListResolvers<
     >;
     parent?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType>;
     title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type ComponentComponentsArticleSectionsResolvers<
-    ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentComponentsArticleSections'] = ResolversParentTypes['ComponentComponentsArticleSections'],
-> = {
-    id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-    sections?: Resolver<
-        Array<Maybe<ResolversTypes['ComponentContentArticleSection']>>,
-        ParentType,
-        ContextType,
-        RequireFields<ComponentComponentsArticleSectionsSectionsArgs, 'pagination' | 'sort'>
-    >;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -4833,8 +4815,8 @@ export type ComponentContentDynamicZoneResolvers<
         ResolversParentTypes['ComponentContentDynamicZone'] = ResolversParentTypes['ComponentContentDynamicZone'],
 > = {
     __resolveType: TypeResolveFn<
+        | 'ComponentComponentsArticle'
         | 'ComponentComponentsArticleList'
-        | 'ComponentComponentsArticleSections'
         | 'ComponentComponentsCategory'
         | 'ComponentComponentsCategoryList'
         | 'ComponentComponentsFaq'
@@ -5489,8 +5471,8 @@ export type GenericMorphResolvers<
         | 'Author'
         | 'Category'
         | 'Component'
+        | 'ComponentComponentsArticle'
         | 'ComponentComponentsArticleList'
-        | 'ComponentComponentsArticleSections'
         | 'ComponentComponentsCategory'
         | 'ComponentComponentsCategoryList'
         | 'ComponentComponentsFaq'
@@ -6805,8 +6787,8 @@ export type Resolvers<ContextType = any> = {
     CategoryEntityResponseCollection?: CategoryEntityResponseCollectionResolvers<ContextType>;
     CategoryRelationResponseCollection?: CategoryRelationResponseCollectionResolvers<ContextType>;
     Component?: ComponentResolvers<ContextType>;
+    ComponentComponentsArticle?: ComponentComponentsArticleResolvers<ContextType>;
     ComponentComponentsArticleList?: ComponentComponentsArticleListResolvers<ContextType>;
-    ComponentComponentsArticleSections?: ComponentComponentsArticleSectionsResolvers<ContextType>;
     ComponentComponentsCategory?: ComponentComponentsCategoryResolvers<ContextType>;
     ComponentComponentsCategoryList?: ComponentComponentsCategoryListResolvers<ContextType>;
     ComponentComponentsFaq?: ComponentComponentsFaqResolvers<ContextType>;
@@ -6925,6 +6907,84 @@ export type Resolvers<ContextType = any> = {
     UsersPermissionsUserRelationResponseCollection?: UsersPermissionsUserRelationResponseCollectionResolvers<ContextType>;
 };
 
+export type ArticleFragment = {
+    __typename: 'ComponentComponentsArticle';
+    id: string;
+    sections: Array<{ id: string; title?: string; content: string }>;
+};
+
+export type CategoryFragment = {
+    __typename: 'Category';
+    documentId: string;
+    slug: string;
+    createdAt?: any;
+    updatedAt?: any;
+    name: string;
+    description: string;
+    icon?: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
+    parent?: { slug: string; SEO: { title: string } };
+};
+
+export type GetArticleQueryVariables = Exact<{
+    id: Scalars['ID']['input'];
+    locale: Scalars['I18NLocaleCode']['input'];
+}>;
+
+export type GetArticleQuery = {
+    component?: {
+        name: string;
+        content: Array<
+            | {
+                  __typename: 'ComponentComponentsArticle';
+                  id: string;
+                  sections: Array<{ id: string; title?: string; content: string }>;
+              }
+            | { __typename: 'ComponentComponentsArticleList' }
+            | { __typename: 'ComponentComponentsCategory' }
+            | { __typename: 'ComponentComponentsCategoryList' }
+            | { __typename: 'ComponentComponentsFaq' }
+            | { __typename: 'ComponentComponentsInvoiceList' }
+            | { __typename: 'ComponentComponentsNotificationDetails' }
+            | { __typename: 'ComponentComponentsNotificationList' }
+            | { __typename: 'ComponentComponentsOrderList' }
+            | { __typename: 'ComponentComponentsOrdersSummary' }
+            | { __typename: 'ComponentComponentsPaymentsHistory' }
+            | { __typename: 'ComponentComponentsPaymentsSummary' }
+            | { __typename: 'ComponentComponentsQuickLinks' }
+            | { __typename: 'ComponentComponentsServiceDetails' }
+            | { __typename: 'ComponentComponentsServiceList' }
+            | { __typename: 'ComponentComponentsSurveyJsComponent' }
+            | { __typename: 'ComponentComponentsTicketDetails' }
+            | { __typename: 'ComponentComponentsTicketList' }
+            | { __typename: 'ComponentComponentsTicketRecent' }
+            | { __typename: 'ComponentComponentsUserAccount' }
+            | { __typename: 'Error' }
+        >;
+    };
+};
+
+export type GetCategoriesQueryVariables = Exact<{
+    id?: InputMaybe<Scalars['String']['input']>;
+    locale: Scalars['I18NLocaleCode']['input'];
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    offset?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+export type GetCategoriesQuery = {
+    categories_connection?: { pageInfo: { total: number } };
+    categories: Array<{
+        __typename: 'Category';
+        documentId: string;
+        slug: string;
+        createdAt?: any;
+        updatedAt?: any;
+        name: string;
+        description: string;
+        icon?: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
+        parent?: { slug: string; SEO: { title: string } };
+    }>;
+};
+
 export type AppConfigFragment = {
     documentId: string;
     header?: { documentId: string };
@@ -6935,8 +6995,8 @@ export type ComponentFragment = {
     __typename: 'Component';
     documentId: string;
     content: Array<
+        | { __typename: 'ComponentComponentsArticle' }
         | { __typename: 'ComponentComponentsArticleList' }
-        | { __typename: 'ComponentComponentsArticleSections' }
         | { __typename: 'ComponentComponentsCategory' }
         | { __typename: 'ComponentComponentsCategoryList' }
         | { __typename: 'ComponentComponentsFaq' }
@@ -7133,8 +7193,8 @@ export type PageFragment = {
                   __typename: 'Component';
                   documentId: string;
                   content: Array<
+                      | { __typename: 'ComponentComponentsArticle' }
                       | { __typename: 'ComponentComponentsArticleList' }
-                      | { __typename: 'ComponentComponentsArticleSections' }
                       | { __typename: 'ComponentComponentsCategory' }
                       | { __typename: 'ComponentComponentsCategoryList' }
                       | { __typename: 'ComponentComponentsFaq' }
@@ -7163,8 +7223,8 @@ export type PageFragment = {
                   __typename: 'Component';
                   documentId: string;
                   content: Array<
+                      | { __typename: 'ComponentComponentsArticle' }
                       | { __typename: 'ComponentComponentsArticleList' }
-                      | { __typename: 'ComponentComponentsArticleSections' }
                       | { __typename: 'ComponentComponentsCategory' }
                       | { __typename: 'ComponentComponentsCategoryList' }
                       | { __typename: 'ComponentComponentsFaq' }
@@ -7190,8 +7250,8 @@ export type PageFragment = {
                   __typename: 'Component';
                   documentId: string;
                   content: Array<
+                      | { __typename: 'ComponentComponentsArticle' }
                       | { __typename: 'ComponentComponentsArticleList' }
-                      | { __typename: 'ComponentComponentsArticleSections' }
                       | { __typename: 'ComponentComponentsCategory' }
                       | { __typename: 'ComponentComponentsCategoryList' }
                       | { __typename: 'ComponentComponentsFaq' }
@@ -7217,8 +7277,8 @@ export type PageFragment = {
                   __typename: 'Component';
                   documentId: string;
                   content: Array<
+                      | { __typename: 'ComponentComponentsArticle' }
                       | { __typename: 'ComponentComponentsArticleList' }
-                      | { __typename: 'ComponentComponentsArticleSections' }
                       | { __typename: 'ComponentComponentsCategory' }
                       | { __typename: 'ComponentComponentsCategoryList' }
                       | { __typename: 'ComponentComponentsFaq' }
@@ -7244,8 +7304,8 @@ export type PageFragment = {
                   __typename: 'Component';
                   documentId: string;
                   content: Array<
+                      | { __typename: 'ComponentComponentsArticle' }
                       | { __typename: 'ComponentComponentsArticleList' }
-                      | { __typename: 'ComponentComponentsArticleSections' }
                       | { __typename: 'ComponentComponentsCategory' }
                       | { __typename: 'ComponentComponentsCategoryList' }
                       | { __typename: 'ComponentComponentsFaq' }
@@ -7278,8 +7338,8 @@ type Template_ComponentTemplatesOneColumn_Fragment = {
         __typename: 'Component';
         documentId: string;
         content: Array<
+            | { __typename: 'ComponentComponentsArticle' }
             | { __typename: 'ComponentComponentsArticleList' }
-            | { __typename: 'ComponentComponentsArticleSections' }
             | { __typename: 'ComponentComponentsCategory' }
             | { __typename: 'ComponentComponentsCategoryList' }
             | { __typename: 'ComponentComponentsFaq' }
@@ -7309,8 +7369,8 @@ type Template_ComponentTemplatesTwoColumn_Fragment = {
         __typename: 'Component';
         documentId: string;
         content: Array<
+            | { __typename: 'ComponentComponentsArticle' }
             | { __typename: 'ComponentComponentsArticleList' }
-            | { __typename: 'ComponentComponentsArticleSections' }
             | { __typename: 'ComponentComponentsCategory' }
             | { __typename: 'ComponentComponentsCategoryList' }
             | { __typename: 'ComponentComponentsFaq' }
@@ -7336,8 +7396,8 @@ type Template_ComponentTemplatesTwoColumn_Fragment = {
         __typename: 'Component';
         documentId: string;
         content: Array<
+            | { __typename: 'ComponentComponentsArticle' }
             | { __typename: 'ComponentComponentsArticleList' }
-            | { __typename: 'ComponentComponentsArticleSections' }
             | { __typename: 'ComponentComponentsCategory' }
             | { __typename: 'ComponentComponentsCategoryList' }
             | { __typename: 'ComponentComponentsFaq' }
@@ -7363,8 +7423,8 @@ type Template_ComponentTemplatesTwoColumn_Fragment = {
         __typename: 'Component';
         documentId: string;
         content: Array<
+            | { __typename: 'ComponentComponentsArticle' }
             | { __typename: 'ComponentComponentsArticleList' }
-            | { __typename: 'ComponentComponentsArticleSections' }
             | { __typename: 'ComponentComponentsCategory' }
             | { __typename: 'ComponentComponentsCategoryList' }
             | { __typename: 'ComponentComponentsFaq' }
@@ -7390,8 +7450,8 @@ type Template_ComponentTemplatesTwoColumn_Fragment = {
         __typename: 'Component';
         documentId: string;
         content: Array<
+            | { __typename: 'ComponentComponentsArticle' }
             | { __typename: 'ComponentComponentsArticleList' }
-            | { __typename: 'ComponentComponentsArticleSections' }
             | { __typename: 'ComponentComponentsCategory' }
             | { __typename: 'ComponentComponentsCategoryList' }
             | { __typename: 'ComponentComponentsFaq' }
@@ -7444,8 +7504,8 @@ export type CategoryComponentFragment = {
             __typename: 'Component';
             documentId: string;
             content: Array<
+                | { __typename: 'ComponentComponentsArticle' }
                 | { __typename: 'ComponentComponentsArticleList' }
-                | { __typename: 'ComponentComponentsArticleSections' }
                 | { __typename: 'ComponentComponentsCategory' }
                 | { __typename: 'ComponentComponentsCategoryList' }
                 | { __typename: 'ComponentComponentsFaq' }
@@ -7941,8 +8001,8 @@ export type OneColumnTemplateFragment = {
         __typename: 'Component';
         documentId: string;
         content: Array<
+            | { __typename: 'ComponentComponentsArticle' }
             | { __typename: 'ComponentComponentsArticleList' }
-            | { __typename: 'ComponentComponentsArticleSections' }
             | { __typename: 'ComponentComponentsCategory' }
             | { __typename: 'ComponentComponentsCategoryList' }
             | { __typename: 'ComponentComponentsFaq' }
@@ -7971,8 +8031,8 @@ export type TwoColumnTemplateFragment = {
         __typename: 'Component';
         documentId: string;
         content: Array<
+            | { __typename: 'ComponentComponentsArticle' }
             | { __typename: 'ComponentComponentsArticleList' }
-            | { __typename: 'ComponentComponentsArticleSections' }
             | { __typename: 'ComponentComponentsCategory' }
             | { __typename: 'ComponentComponentsCategoryList' }
             | { __typename: 'ComponentComponentsFaq' }
@@ -7998,8 +8058,8 @@ export type TwoColumnTemplateFragment = {
         __typename: 'Component';
         documentId: string;
         content: Array<
+            | { __typename: 'ComponentComponentsArticle' }
             | { __typename: 'ComponentComponentsArticleList' }
-            | { __typename: 'ComponentComponentsArticleSections' }
             | { __typename: 'ComponentComponentsCategory' }
             | { __typename: 'ComponentComponentsCategoryList' }
             | { __typename: 'ComponentComponentsFaq' }
@@ -8025,8 +8085,8 @@ export type TwoColumnTemplateFragment = {
         __typename: 'Component';
         documentId: string;
         content: Array<
+            | { __typename: 'ComponentComponentsArticle' }
             | { __typename: 'ComponentComponentsArticleList' }
-            | { __typename: 'ComponentComponentsArticleSections' }
             | { __typename: 'ComponentComponentsCategory' }
             | { __typename: 'ComponentComponentsCategoryList' }
             | { __typename: 'ComponentComponentsFaq' }
@@ -8052,8 +8112,8 @@ export type TwoColumnTemplateFragment = {
         __typename: 'Component';
         documentId: string;
         content: Array<
+            | { __typename: 'ComponentComponentsArticle' }
             | { __typename: 'ComponentComponentsArticleList' }
-            | { __typename: 'ComponentComponentsArticleSections' }
             | { __typename: 'ComponentComponentsCategory' }
             | { __typename: 'ComponentComponentsCategoryList' }
             | { __typename: 'ComponentComponentsFaq' }
@@ -8113,6 +8173,7 @@ export type GetComponentQuery = {
     component?: {
         name: string;
         content: Array<
+            | { __typename: 'ComponentComponentsArticle' }
             | {
                   __typename: 'ComponentComponentsArticleList';
                   id: string;
@@ -8123,7 +8184,6 @@ export type GetComponentQuery = {
                   category?: { slug: string };
                   parent?: { slug: string };
               }
-            | { __typename: 'ComponentComponentsArticleSections' }
             | {
                   __typename: 'ComponentComponentsCategory';
                   id: string;
@@ -8135,8 +8195,8 @@ export type GetComponentQuery = {
                           __typename: 'Component';
                           documentId: string;
                           content: Array<
+                              | { __typename: 'ComponentComponentsArticle' }
                               | { __typename: 'ComponentComponentsArticleList' }
-                              | { __typename: 'ComponentComponentsArticleSections' }
                               | { __typename: 'ComponentComponentsCategory' }
                               | { __typename: 'ComponentComponentsCategoryList' }
                               | { __typename: 'ComponentComponentsFaq' }
@@ -8732,8 +8792,8 @@ export type GetPageQuery = {
                       __typename: 'Component';
                       documentId: string;
                       content: Array<
+                          | { __typename: 'ComponentComponentsArticle' }
                           | { __typename: 'ComponentComponentsArticleList' }
-                          | { __typename: 'ComponentComponentsArticleSections' }
                           | { __typename: 'ComponentComponentsCategory' }
                           | { __typename: 'ComponentComponentsCategoryList' }
                           | { __typename: 'ComponentComponentsFaq' }
@@ -8762,8 +8822,8 @@ export type GetPageQuery = {
                       __typename: 'Component';
                       documentId: string;
                       content: Array<
+                          | { __typename: 'ComponentComponentsArticle' }
                           | { __typename: 'ComponentComponentsArticleList' }
-                          | { __typename: 'ComponentComponentsArticleSections' }
                           | { __typename: 'ComponentComponentsCategory' }
                           | { __typename: 'ComponentComponentsCategoryList' }
                           | { __typename: 'ComponentComponentsFaq' }
@@ -8789,8 +8849,8 @@ export type GetPageQuery = {
                       __typename: 'Component';
                       documentId: string;
                       content: Array<
+                          | { __typename: 'ComponentComponentsArticle' }
                           | { __typename: 'ComponentComponentsArticleList' }
-                          | { __typename: 'ComponentComponentsArticleSections' }
                           | { __typename: 'ComponentComponentsCategory' }
                           | { __typename: 'ComponentComponentsCategoryList' }
                           | { __typename: 'ComponentComponentsFaq' }
@@ -8816,8 +8876,8 @@ export type GetPageQuery = {
                       __typename: 'Component';
                       documentId: string;
                       content: Array<
+                          | { __typename: 'ComponentComponentsArticle' }
                           | { __typename: 'ComponentComponentsArticleList' }
-                          | { __typename: 'ComponentComponentsArticleSections' }
                           | { __typename: 'ComponentComponentsCategory' }
                           | { __typename: 'ComponentComponentsCategoryList' }
                           | { __typename: 'ComponentComponentsFaq' }
@@ -8843,8 +8903,8 @@ export type GetPageQuery = {
                       __typename: 'Component';
                       documentId: string;
                       content: Array<
+                          | { __typename: 'ComponentComponentsArticle' }
                           | { __typename: 'ComponentComponentsArticleList' }
-                          | { __typename: 'ComponentComponentsArticleSections' }
                           | { __typename: 'ComponentComponentsCategory' }
                           | { __typename: 'ComponentComponentsCategoryList' }
                           | { __typename: 'ComponentComponentsFaq' }
@@ -8905,8 +8965,8 @@ export type GetPagesQuery = {
                       __typename: 'Component';
                       documentId: string;
                       content: Array<
+                          | { __typename: 'ComponentComponentsArticle' }
                           | { __typename: 'ComponentComponentsArticleList' }
-                          | { __typename: 'ComponentComponentsArticleSections' }
                           | { __typename: 'ComponentComponentsCategory' }
                           | { __typename: 'ComponentComponentsCategoryList' }
                           | { __typename: 'ComponentComponentsFaq' }
@@ -8935,8 +8995,8 @@ export type GetPagesQuery = {
                       __typename: 'Component';
                       documentId: string;
                       content: Array<
+                          | { __typename: 'ComponentComponentsArticle' }
                           | { __typename: 'ComponentComponentsArticleList' }
-                          | { __typename: 'ComponentComponentsArticleSections' }
                           | { __typename: 'ComponentComponentsCategory' }
                           | { __typename: 'ComponentComponentsCategoryList' }
                           | { __typename: 'ComponentComponentsFaq' }
@@ -8962,8 +9022,8 @@ export type GetPagesQuery = {
                       __typename: 'Component';
                       documentId: string;
                       content: Array<
+                          | { __typename: 'ComponentComponentsArticle' }
                           | { __typename: 'ComponentComponentsArticleList' }
-                          | { __typename: 'ComponentComponentsArticleSections' }
                           | { __typename: 'ComponentComponentsCategory' }
                           | { __typename: 'ComponentComponentsCategoryList' }
                           | { __typename: 'ComponentComponentsFaq' }
@@ -8989,8 +9049,8 @@ export type GetPagesQuery = {
                       __typename: 'Component';
                       documentId: string;
                       content: Array<
+                          | { __typename: 'ComponentComponentsArticle' }
                           | { __typename: 'ComponentComponentsArticleList' }
-                          | { __typename: 'ComponentComponentsArticleSections' }
                           | { __typename: 'ComponentComponentsCategory' }
                           | { __typename: 'ComponentComponentsCategoryList' }
                           | { __typename: 'ComponentComponentsFaq' }
@@ -9016,8 +9076,8 @@ export type GetPagesQuery = {
                       __typename: 'Component';
                       documentId: string;
                       content: Array<
+                          | { __typename: 'ComponentComponentsArticle' }
                           | { __typename: 'ComponentComponentsArticleList' }
-                          | { __typename: 'ComponentComponentsArticleSections' }
                           | { __typename: 'ComponentComponentsCategory' }
                           | { __typename: 'ComponentComponentsCategoryList' }
                           | { __typename: 'ComponentComponentsFaq' }
@@ -9060,14 +9120,14 @@ export type GetSurveyQuery = {
     }>;
 };
 
-export const AppConfigFragmentDoc = gql`
-    fragment AppConfig on AppConfig {
-        documentId
-        header: signedInHeader {
-            documentId
-        }
-        footer: signedInFooter {
-            documentId
+export const ArticleFragmentDoc = gql`
+    fragment Article on ComponentComponentsArticle {
+        id
+        __typename
+        sections {
+            id
+            title
+            content
         }
     }
 `;
@@ -9078,6 +9138,38 @@ export const MediaFragmentDoc = gql`
         width
         height
         name
+    }
+`;
+export const CategoryFragmentDoc = gql`
+    fragment Category on Category {
+        documentId
+        __typename
+        slug
+        createdAt
+        updatedAt
+        name
+        description
+        icon {
+            ...Media
+        }
+        parent {
+            slug
+            SEO {
+                title
+            }
+        }
+    }
+    ${MediaFragmentDoc}
+`;
+export const AppConfigFragmentDoc = gql`
+    fragment AppConfig on AppConfig {
+        documentId
+        header: signedInHeader {
+            documentId
+        }
+        footer: signedInFooter {
+            documentId
+        }
     }
 `;
 export const NavigationItemFragmentDoc = gql`
@@ -9773,6 +9865,33 @@ export const UserAccountComponentFragmentDoc = gql`
     }
     ${FormFieldComponentFragmentDoc}
 `;
+export const GetArticleDocument = gql`
+    query getArticle($id: ID!, $locale: I18NLocaleCode!) {
+        component(documentId: $id, locale: $locale) {
+            name
+            content {
+                __typename
+                ... on ComponentComponentsArticle {
+                    ...Article
+                }
+            }
+        }
+    }
+    ${ArticleFragmentDoc}
+`;
+export const GetCategoriesDocument = gql`
+    query getCategories($id: String, $locale: I18NLocaleCode!, $limit: Int, $offset: Int) {
+        categories_connection {
+            pageInfo {
+                total
+            }
+        }
+        categories(locale: $locale, filters: { slug: { eq: $id } }, pagination: { limit: $limit, start: $offset }) {
+            ...Category
+        }
+    }
+    ${CategoryFragmentDoc}
+`;
 export const GetAppConfigDocument = gql`
     query getAppConfig($locale: I18NLocaleCode!) {
         appConfig(locale: $locale) {
@@ -10015,6 +10134,8 @@ export type SdkFunctionWrapper = <T>(
 ) => Promise<T>;
 
 const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationType, _variables) => action();
+const GetArticleDocumentString = print(GetArticleDocument);
+const GetCategoriesDocumentString = print(GetCategoriesDocument);
 const GetAppConfigDocumentString = print(GetAppConfigDocument);
 const GetComponentDocumentString = print(GetComponentDocument);
 const GetFooterDocumentString = print(GetFooterDocument);
@@ -10028,6 +10149,48 @@ const GetPagesDocumentString = print(GetPagesDocument);
 const GetSurveyDocumentString = print(GetSurveyDocument);
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
     return {
+        getArticle(
+            variables: GetArticleQueryVariables,
+            requestHeaders?: GraphQLClientRequestHeaders,
+        ): Promise<{
+            data: GetArticleQuery;
+            errors?: GraphQLError[];
+            extensions?: any;
+            headers: Headers;
+            status: number;
+        }> {
+            return withWrapper(
+                (wrappedRequestHeaders) =>
+                    client.rawRequest<GetArticleQuery>(GetArticleDocumentString, variables, {
+                        ...requestHeaders,
+                        ...wrappedRequestHeaders,
+                    }),
+                'getArticle',
+                'query',
+                variables,
+            );
+        },
+        getCategories(
+            variables: GetCategoriesQueryVariables,
+            requestHeaders?: GraphQLClientRequestHeaders,
+        ): Promise<{
+            data: GetCategoriesQuery;
+            errors?: GraphQLError[];
+            extensions?: any;
+            headers: Headers;
+            status: number;
+        }> {
+            return withWrapper(
+                (wrappedRequestHeaders) =>
+                    client.rawRequest<GetCategoriesQuery>(GetCategoriesDocumentString, variables, {
+                        ...requestHeaders,
+                        ...wrappedRequestHeaders,
+                    }),
+                'getCategories',
+                'query',
+                variables,
+            );
+        },
         getAppConfig(
             variables: GetAppConfigQueryVariables,
             requestHeaders?: GraphQLClientRequestHeaders,

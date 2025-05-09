@@ -53,6 +53,7 @@ export const PAGE_INVOICE_LIST_EN: CMS.Model.Page.Page = {
         },
     },
     updatedAt: '2025-01-01',
+    createdAt: '2025-01-01',
 };
 
 export const PAGE_INVOICE_LIST_DE: CMS.Model.Page.Page = {
@@ -108,6 +109,7 @@ export const PAGE_INVOICE_LIST_DE: CMS.Model.Page.Page = {
         },
     },
     updatedAt: '2025-01-01',
+    createdAt: '2025-01-01',
 };
 
 export const PAGE_INVOICE_LIST_PL: CMS.Model.Page.Page = {
@@ -163,4 +165,5 @@ export const PAGE_INVOICE_LIST_PL: CMS.Model.Page.Page = {
         },
     },
     updatedAt: '2025-01-01',
+    createdAt: '2025-01-01',
 };
