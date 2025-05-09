@@ -10,7 +10,7 @@ const slides = [
     {
         title: 'Composable',
         description:
-            'Based on MACH and composable architecture to deliver flexibility, extendibility and make your Customer Portal future-proof.',
+            'Solution based on MACH and composable architecture to deliver flexibility, extendibility and make your Customer Portal future-proof.',
         badges: [
             { title: 'M.A.C.H.', icon: null },
             { title: 'Headless', icon: null },
@@ -159,10 +159,9 @@ export function HomepageAboutSection() {
         <section ref={sectionRef} className="container relative mb-16 pt-20 md:py-[50px]">
             <div className="md:hidden">
                 <H2>
-                    What's{' '}
-                    <span className="text-highlighted block md:inline">
-                        {siteConfig.customFields.brandName as ReactNode}
-                    </span>
+                    What{' '}
+                    <span className="text-highlighted md:inline">{siteConfig.customFields.brandName as ReactNode}</span>{' '}
+                    is?
                 </H2>
                 <div className="flex flex-col gap-20">
                     {slides.map((slide, index) => (
@@ -181,8 +180,9 @@ export function HomepageAboutSection() {
                 <motion.div ref={headerRef} className="sticky top-[100px] z-10">
                     <div className="">
                         <H2>
-                            What's{' '}
-                            <span className="text-highlighted">{siteConfig.customFields.brandName as ReactNode}</span>
+                            What{' '}
+                            <span className="text-highlighted">{siteConfig.customFields.brandName as ReactNode}</span>{' '}
+                            is?
                         </H2>
                     </div>
                 </motion.div>

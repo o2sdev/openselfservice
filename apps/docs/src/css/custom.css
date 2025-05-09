@@ -484,6 +484,16 @@ aside:not(.theme-doc-sidebar-container) {
     margin: 0 auto;
     padding: 0 1rem;
 }
+@media (max-width: 996px) {
+    .container {
+        margin-bottom: 4rem;
+    }
+}
+@media (min-width: 1440px) {
+    .container {
+        max-width: var(--ifm-container-width-xl) !important;
+    }
+}
 
 /* --------------------------
    STOPKA
