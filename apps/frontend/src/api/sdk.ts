@@ -69,6 +69,7 @@ export const sdk = extendSdk(internalSdk, {
         getCategoryList: categoryList(internalSdk).blocks.getCategoryList,
         getArticleList: articleList(internalSdk).blocks.getArticleList,
         getCategory: category(internalSdk).blocks.getCategory,
+        getCategoryArticles: category(internalSdk).blocks.getCategoryArticles,
         getArticle: article(internalSdk).blocks.getArticle,
         // BLOCK REGISTER
     },

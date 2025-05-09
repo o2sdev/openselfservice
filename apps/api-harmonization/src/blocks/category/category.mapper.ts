@@ -2,7 +2,7 @@ import { formatDateRelative } from '@o2s/api-harmonization/utils/date';
 
 import { Articles, CMS } from '../../models';
 
-import { CategoryBlock } from './category.model';
+import { CategoryArticles, CategoryBlock } from './category.model';
 
 export const mapCategory = (
     cms: CMS.Model.CategoryBlock.CategoryBlock,
@@ -26,6 +26,16 @@ export const mapCategory = (
                 data: articles.data.map((article: Articles.Model.Article) => mapArticle(article, cms, _locale)),
             },
         },
+    };
+};
+
+export const mapCategoryArticles = (
+    cms: CMS.Model.CategoryBlock.CategoryBlock,
+    articles: Articles.Model.Articles,
+    _locale: string,
+): CategoryArticles => {
+    return {
+        data: articles.data.map((article: Articles.Model.Article) => mapArticle(article, cms, _locale)),
     };
 };
 
