@@ -1,5 +1,11 @@
 # @o2s/eslint-config
 
+## 0.11.0
+
+### Minor Changes
+
+- 68f7858: chore: updated dependencies
+
 ## 0.10.0
 
 ### Minor Changes
