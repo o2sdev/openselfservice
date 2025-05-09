@@ -8,7 +8,7 @@ import { cn } from '@o2s/ui/lib/utils';
 
 import { RichTextProps } from './RichText.types';
 
-const LinkComp: FC<LinkProps & { children: ReactNode; className?: string }> = ({ children, ...props }) => {
+const LinkComp: FC<Readonly<LinkProps & { children: ReactNode; className?: string }>> = ({ children, ...props }) => {
     const { className, ...rest } = props;
     return (
         <Link className={className} asChild>
@@ -17,7 +17,10 @@ const LinkComp: FC<LinkProps & { children: ReactNode; className?: string }> = ({
     );
 };
 
-const TypographyComp: FC<TypographyProps & { children: ReactNode; tag: string }> = ({ children, ...props }) => {
+const TypographyComp: FC<Readonly<TypographyProps & { children: ReactNode; tag: string }>> = ({
+    children,
+    ...props
+}) => {
     const Tag = props.tag || 'p';
     return (
         <Typography variant={props.variant} asChild>
@@ -26,12 +29,42 @@ const TypographyComp: FC<TypographyProps & { children: ReactNode; tag: string }>
     );
 };
 
-export const RichText: FC<RichTextProps> = ({ content, baseFontSize = 'body', className }) => {
+export const RichText: FC<Readonly<RichTextProps>> = ({
+    content,
+    baseFontSize = 'body',
+    className,
+    increaseHeadingLevels = false,
+}) => {
     if (!content) {
         return null;
     }
 
     const baseFontSizeClass = baseFontSize === 'body' ? 'text-base md:text-base' : 'text-sm md:text-sm';
+
+    const getHeadingProps = (level: number) => {
+        const adjustedLevel = increaseHeadingLevels ? Math.min(level + 1, 4) : level;
+
+        const marginClass = {
+            1: 'mt-12',
+            2: 'mt-10',
+            3: 'mt-8',
+            4: 'mt-6',
+        }[level];
+
+        if (adjustedLevel === 4) {
+            return {
+                variant: 'subtitle',
+                tag: 'p',
+                className: cn('font-semibold', marginClass, className),
+            };
+        }
+
+        return {
+            variant: `h${adjustedLevel}` as const,
+            tag: `h${adjustedLevel}` as const,
+            className: cn(marginClass, adjustedLevel === 2 ? 'pb-2 border-b border-border' : '', className),
+        };
+    };
 
     const overrides: MarkdownToJSX.Overrides = {
         a: {
@@ -42,34 +75,19 @@ export const RichText: FC<RichTextProps> = ({ content, baseFontSize = 'body', cl
         },
         h1: {
             component: TypographyComp,
-            props: {
-                variant: 'h1',
-                tag: 'h1',
-            },
+            props: getHeadingProps(1),
         },
         h2: {
             component: TypographyComp,
-            props: {
-                variant: 'h2',
-                tag: 'h2',
-                className: 'mt-10 pb-2 border-b border-border',
-            },
+            props: getHeadingProps(2),
         },
         h3: {
             component: TypographyComp,
-            props: {
-                variant: 'h3',
-                tag: 'h3',
-                className: 'mt-8',
-            },
+            props: getHeadingProps(3),
         },
         h4: {
             component: TypographyComp,
-            props: {
-                variant: 'h4',
-                tag: 'h4',
-                className: 'mt-8',
-            },
+            props: getHeadingProps(4),
         },
         p: {
             component: TypographyComp,
@@ -124,6 +142,14 @@ export const RichText: FC<RichTextProps> = ({ content, baseFontSize = 'body', cl
                 variant: baseFontSize,
                 tag: 'ol',
                 className: cn('list-decimal list-inside mt-6 mb-6 first:mt-0 last:mb-0', className),
+            },
+        },
+        hr: {
+            component: TypographyComp,
+            props: {
+                variant: baseFontSize,
+                tag: 'hr',
+                className: cn('mt-6 border border-border border-t-1', className),
             },
         },
         pre: {

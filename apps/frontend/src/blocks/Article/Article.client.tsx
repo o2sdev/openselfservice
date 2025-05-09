@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Separator } from '@o2s/ui/components/separator';
 import { Typography } from '@o2s/ui/components/typography';
+import { cn } from '@o2s/ui/lib/utils';
 
 import { Author } from '@/components/Author/Author';
 import { Container } from '@/components/Container/Container';
@@ -26,18 +27,35 @@ export const ArticlePure: React.FC<Readonly<ArticlePureProps>> = ({ ...component
             <Separator />
 
             <Container variant="narrow">
-                <ul className="flex flex-col gap-8">
-                    {sections.map((section) => {
+                <ul className="flex flex-col gap-20">
+                    {sections.map((section, index) => {
                         switch (section.__typename) {
                             case 'ArticleSectionText':
                                 return (
-                                    <li key={section.id}>
-                                        <RichText content={section.content} />
+                                    <li
+                                        key={`${section.id}-text`}
+                                        className={cn(
+                                            'flex flex-col gap-6',
+                                            index > 0 && 'pt-20 border-t border-t-border ',
+                                        )}
+                                    >
+                                        <Typography variant="h2" asChild>
+                                            <h2>
+                                                {section.title} {index}
+                                            </h2>
+                                        </Typography>
+                                        <RichText content={section.content} increaseHeadingLevels={true} />
                                     </li>
                                 );
                             case 'ArticleSectionImage':
                                 return (
-                                    <li key={section.id} className="flex flex-col gap-4">
+                                    <li
+                                        key={`${section.id}-img`}
+                                        className={cn(
+                                            'flex flex-col gap-4',
+                                            index > 0 && 'pt-20 border-t border-t-border ',
+                                        )}
+                                    >
                                         <div className="relative overflow-hidden max-w-fit mx-auto">
                                             <Image
                                                 src={section.image.url}
