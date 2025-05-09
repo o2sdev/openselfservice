@@ -29,12 +29,12 @@ export function HomepageArchitectureSection() {
             <div className="mt-14 md:mt-24 w-full flex justify-center">
                 <img
                     src="/img/homepage/architecture.svg"
-                    alt="Archotecture illustration"
+                    alt="Architecture illustration"
                     className="w-full hidden md:block"
                 />
                 <img
                     src="/img/homepage/architecture-mobile.svg"
-                    alt="Archotecture illustration"
+                    alt="Architecture illustration"
                     className="block md:hidden"
                 />
             </div>
