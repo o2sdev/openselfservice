@@ -1,7 +1,7 @@
-export interface ArticlesSectionProps {
+export interface ContentSectionProps {
     title?: string;
     description?: string;
-    allArticlesLink?: {
+    additionalLink?: {
         url: string;
         label: string;
     };

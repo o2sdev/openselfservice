@@ -1,6 +1,6 @@
 'use client';
 
-import { Blocks } from '@o2s/api-harmonization';
+import { Blocks, Modules } from '@o2s/api-harmonization';
 import React, { useState, useTransition } from 'react';
 
 import { LoadingOverlay } from '@o2s/ui/components/loading-overlay';
@@ -9,15 +9,15 @@ import { Typography } from '@o2s/ui/components/typography';
 
 import { sdk } from '@/api/sdk';
 
-import { ArticlesSection } from '@/components/ArticlesSection/ArticlesSection';
 import { BlogCard } from '@/components/BlogCard/BlogCard';
 import { Container } from '@/components/Container/Container';
+import { ContentSection } from '@/components/ContentSection/ContentSection';
 import { Image } from '@/components/Image/Image';
 import { Pagination } from '@/components/Pagination/Pagination';
 
 import { CategoryPureProps } from './Category.types';
 
-//const { renderBlocks } = await import('@/blocks/renderBlocks');
+/*const { renderBlocks } = await import('@/blocks/renderBlocks');*/
 
 export const CategoryPure: React.FC<CategoryPureProps> = ({ slug, locale, accessToken, ...component }) => {
     const initialArticles: Blocks.Category.Request.GetCategoryBlockArticlesQuery = {
@@ -60,11 +60,12 @@ export const CategoryPure: React.FC<CategoryPureProps> = ({ slug, locale, access
             </Container>
             <Separator orientation="horizontal" className="shrink-[1]" />
             <div className="flex flex-col gap-12">
+                {/*component.components && <div>{renderBlocks(component.components, slug, accessToken)}</div> */}
                 {initialData.length > 0 && (
                     <Container variant="narrow">
                         <div className="flex flex-col gap-6">
                             <LoadingOverlay isActive={isPending}>
-                                <ArticlesSection
+                                <ContentSection
                                     title={component.articles.title}
                                     description={component.articles.description}
                                 >
@@ -83,7 +84,7 @@ export const CategoryPure: React.FC<CategoryPureProps> = ({ slug, locale, access
                                             </li>
                                         ))}
                                     </ul>
-                                </ArticlesSection>
+                                </ContentSection>
                             </LoadingOverlay>
                             {component.pagination && (
                                 <Pagination

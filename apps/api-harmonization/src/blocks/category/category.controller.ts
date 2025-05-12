@@ -23,7 +23,6 @@ export class CategoryController {
     @Get('articles')
     @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
     getCategoryArticles(@Headers() headers: AppHeaders, @Query() query: GetCategoryBlockArticlesQuery) {
-        console.log('Controller query (GetCategoryBlockArticlesQuery', query);
         return this.service.getCategoryArticles(query, headers);
     }
 }
