@@ -9,3 +9,32 @@ query getArticle($id: ID!, $locale: I18NLocaleCode!) {
         }
     }
 }
+
+query getArticles(
+    $locale: I18NLocaleCode!
+    $categories: [String]
+    $title: String
+    $dateFrom: DateTime
+    $dateTo: DateTime
+    $limit: Int
+    $offset: Int
+    $sort: [String]
+) {
+    pages_connection {
+        pageInfo {
+            total
+        }
+    }
+    articles: pages(
+        filters: {
+            categories: { slug: { in: $categories } }
+            SEO: { title: { contains: $title } }
+            updatedAt: { gte: $dateFrom, lte: $dateTo }
+        }
+        pagination: { limit: $limit, start: $offset }
+        sort: $sort
+        locale: $locale
+    ) {
+        ...Page
+    }
+}

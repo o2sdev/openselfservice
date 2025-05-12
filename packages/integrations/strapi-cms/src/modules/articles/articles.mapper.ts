@@ -2,8 +2,7 @@ import { NotFoundException } from '@nestjs/common';
 
 import { Articles, CMS } from '@o2s/framework/modules';
 
-import { MOCK_ARTICLES_DE, MOCK_ARTICLES_EN, MOCK_ARTICLES_PL } from './mocks';
-import { CategoryFragment, GetArticleQuery } from '@/generated/strapi';
+import { CategoryFragment, GetArticleQuery, PageFragment } from '@/generated/strapi';
 import { mapMedia } from '@/modules/cms/mappers/cms.media.mapper';
 
 export const mapCategory = (data: CategoryFragment, baseUrl: string): Articles.Model.Category => {
@@ -63,28 +62,51 @@ export const mapArticle = (
                     position: 'Content Creator',
                     avatar: 'https://example.com/images/user-001.jpg',
                 },
-                sections: [],
+                sections: component.sections.map((section) => {
+                    switch (section.__typename) {
+                        case 'ComponentContentArticleSection':
+                            return {
+                                id: section.id,
+                                __typename: 'ArticleSectionText',
+                                createdAt: page.updatedAt,
+                                updatedAt: page.updatedAt,
+                                title: section.title,
+                                content: section.content,
+                            };
+                        // case 'ComponentContentArticleSectionImage':
+                        //     return {}
+                    }
+                }),
             };
     }
 
     throw new NotFoundException();
 };
 
-export const mapArticles = (locale: string, options: Articles.Request.GetArticleListQuery): Articles.Model.Articles => {
-    const { offset = 0, limit = 10 } = options;
-    const articles = locale === 'pl' ? MOCK_ARTICLES_PL : locale === 'de' ? MOCK_ARTICLES_DE : MOCK_ARTICLES_EN;
-    const filteredArticles = articles.filter((article) => {
-        if (options.dateFrom && new Date(article.createdAt) < new Date(options.dateFrom)) {
-            return false;
-        }
-        if (options.dateTo && new Date(article.createdAt) > new Date(options.dateTo)) {
-            return false;
-        }
-        return true;
-    });
-
+export const mapArticles = (data: PageFragment[], total: number, baseUrl: string): Articles.Model.Articles => {
     return {
-        data: filteredArticles.slice(offset, offset + limit),
-        total: filteredArticles.length,
+        data: data.map((article) => {
+            return {
+                id: article.documentId,
+                slug: article.slug,
+                createdAt: article.updatedAt,
+                updatedAt: article.updatedAt,
+                title: article.SEO.title,
+                lead: article.SEO.description,
+                tags: [],
+                image: mapMedia(article.SEO.image, baseUrl),
+                thumbnail: mapMedia(article.SEO.image, baseUrl),
+                category: {
+                    id: 'string',
+                    title: 'string',
+                },
+                author: {
+                    name: 'Lando Norris',
+                    position: 'Content Creator',
+                    avatar: 'https://example.com/images/user-001.jpg',
+                },
+            };
+        }),
+        total: total,
     };
 };

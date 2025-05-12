@@ -5,6 +5,7 @@ import { GraphQLClient } from 'graphql-request';
 import {
     GetAppConfigQueryVariables,
     GetArticleQueryVariables,
+    GetArticlesQueryVariables,
     GetCategoriesQueryVariables,
     GetComponentQueryVariables,
     GetFooterQueryVariables,
@@ -80,5 +81,9 @@ export class GraphqlService {
 
     public getArticle(params: GetArticleQueryVariables) {
         return this.sdk.getArticle(params);
+    }
+
+    public getArticles(params: GetArticlesQueryVariables) {
+        return this.sdk.getArticles(params);
     }
 }

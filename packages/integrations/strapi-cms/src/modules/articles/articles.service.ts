@@ -4,7 +4,7 @@ import { Observable, concatMap, forkJoin, map, of } from 'rxjs';
 
 import { Articles, CMS, Search } from '@o2s/framework/modules';
 
-import { mapArticle, mapCategories, mapCategory } from './articles.mapper';
+import { mapArticle, mapArticles, mapCategories, mapCategory } from './articles.mapper';
 import { Service as GraphqlService } from '@/modules/graphql';
 
 @Injectable()
@@ -84,22 +84,25 @@ export class ArticlesService implements Articles.Service {
         options: Articles.Request.GetArticleListQuery,
         body: Articles.Request.GetArticleListBody,
     ): Observable<Articles.Model.Articles> {
-        const searchPayload: Search.Model.SearchPayload = {
-            query: body?.query,
-            exact: body?.category
-                ? {
-                      category: body.category,
-                  }
-                : undefined,
-            hitsPerPage: options.limit,
-            page: options.offset,
-            sort: body?.sort ? [body.sort] : undefined,
-            pagination: {
-                offset: options.offset,
-                limit: options.limit,
-            },
-        };
+        const articles = this.graphqlService.getArticles({
+            locale: options.locale,
+            categories: body.category ? [body.category] : undefined,
+            title: options.title,
+            dateFrom: options.dateFrom,
+            dateTo: options.dateTo,
+            offset: options.offset,
+            limit: options.limit,
+            sort: body.sort ? [`${body.sort.field}:${body.sort.order}`] : undefined,
+        });
 
-        return this.searchService.searchArticles(options.locale, searchPayload);
+        return forkJoin([articles]).pipe(
+            map(([articles]) =>
+                mapArticles(
+                    articles.data.articles,
+                    articles.data.pages_connection?.pageInfo.total || articles.data.articles.length,
+                    this.baseUrl,
+                ),
+            ),
+        );
     }
 }

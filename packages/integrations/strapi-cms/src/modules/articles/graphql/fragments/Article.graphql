@@ -3,6 +3,7 @@ fragment Article on ComponentComponentsArticle {
     __typename
     sections {
         id
+        __typename
         title
         content
     }

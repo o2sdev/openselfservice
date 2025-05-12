@@ -6910,7 +6910,7 @@ export type Resolvers<ContextType = any> = {
 export type ArticleFragment = {
     __typename: 'ComponentComponentsArticle';
     id: string;
-    sections: Array<{ id: string; title?: string; content: string }>;
+    sections: Array<{ __typename: 'ComponentContentArticleSection'; id: string; title?: string; content: string }>;
 };
 
 export type CategoryFragment = {
@@ -6937,7 +6937,12 @@ export type GetArticleQuery = {
             | {
                   __typename: 'ComponentComponentsArticle';
                   id: string;
-                  sections: Array<{ id: string; title?: string; content: string }>;
+                  sections: Array<{
+                      __typename: 'ComponentContentArticleSection';
+                      id: string;
+                      title?: string;
+                      content: string;
+                  }>;
               }
             | { __typename: 'ComponentComponentsArticleList' }
             | { __typename: 'ComponentComponentsCategory' }
@@ -6961,6 +6966,187 @@ export type GetArticleQuery = {
             | { __typename: 'Error' }
         >;
     };
+};
+
+export type GetArticlesQueryVariables = Exact<{
+    locale: Scalars['I18NLocaleCode']['input'];
+    categories?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>>;
+    title?: InputMaybe<Scalars['String']['input']>;
+    dateFrom?: InputMaybe<Scalars['DateTime']['input']>;
+    dateTo?: InputMaybe<Scalars['DateTime']['input']>;
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    offset?: InputMaybe<Scalars['Int']['input']>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>>;
+}>;
+
+export type GetArticlesQuery = {
+    pages_connection?: { pageInfo: { total: number } };
+    articles: Array<{
+        documentId: string;
+        slug: string;
+        locale?: string;
+        createdAt?: any;
+        updatedAt?: any;
+        publishedAt?: any;
+        hasOwnTitle: boolean;
+        SEO: {
+            title: string;
+            noIndex: boolean;
+            noFollow: boolean;
+            description: string;
+            keywords?: Array<{ keyword: string }>;
+            image?: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
+        };
+        parent?: {
+            slug: string;
+            SEO: { title: string };
+            parent?: { slug: string; SEO: { title: string }; parent?: { slug: string; SEO: { title: string } } };
+        };
+        template: Array<
+            | {
+                  __typename: 'ComponentTemplatesOneColumn';
+                  mainSlot: Array<{
+                      __typename: 'Component';
+                      documentId: string;
+                      content: Array<
+                          | { __typename: 'ComponentComponentsArticle' }
+                          | { __typename: 'ComponentComponentsArticleList' }
+                          | { __typename: 'ComponentComponentsCategory' }
+                          | { __typename: 'ComponentComponentsCategoryList' }
+                          | { __typename: 'ComponentComponentsFaq' }
+                          | { __typename: 'ComponentComponentsInvoiceList' }
+                          | { __typename: 'ComponentComponentsNotificationDetails' }
+                          | { __typename: 'ComponentComponentsNotificationList' }
+                          | { __typename: 'ComponentComponentsOrderList' }
+                          | { __typename: 'ComponentComponentsOrdersSummary' }
+                          | { __typename: 'ComponentComponentsPaymentsHistory' }
+                          | { __typename: 'ComponentComponentsPaymentsSummary' }
+                          | { __typename: 'ComponentComponentsQuickLinks' }
+                          | { __typename: 'ComponentComponentsServiceDetails' }
+                          | { __typename: 'ComponentComponentsServiceList' }
+                          | { __typename: 'ComponentComponentsSurveyJsComponent' }
+                          | { __typename: 'ComponentComponentsTicketDetails' }
+                          | { __typename: 'ComponentComponentsTicketList' }
+                          | { __typename: 'ComponentComponentsTicketRecent' }
+                          | { __typename: 'ComponentComponentsUserAccount' }
+                          | { __typename: 'Error' }
+                      >;
+                  }>;
+              }
+            | {
+                  __typename: 'ComponentTemplatesTwoColumn';
+                  topSlot: Array<{
+                      __typename: 'Component';
+                      documentId: string;
+                      content: Array<
+                          | { __typename: 'ComponentComponentsArticle' }
+                          | { __typename: 'ComponentComponentsArticleList' }
+                          | { __typename: 'ComponentComponentsCategory' }
+                          | { __typename: 'ComponentComponentsCategoryList' }
+                          | { __typename: 'ComponentComponentsFaq' }
+                          | { __typename: 'ComponentComponentsInvoiceList' }
+                          | { __typename: 'ComponentComponentsNotificationDetails' }
+                          | { __typename: 'ComponentComponentsNotificationList' }
+                          | { __typename: 'ComponentComponentsOrderList' }
+                          | { __typename: 'ComponentComponentsOrdersSummary' }
+                          | { __typename: 'ComponentComponentsPaymentsHistory' }
+                          | { __typename: 'ComponentComponentsPaymentsSummary' }
+                          | { __typename: 'ComponentComponentsQuickLinks' }
+                          | { __typename: 'ComponentComponentsServiceDetails' }
+                          | { __typename: 'ComponentComponentsServiceList' }
+                          | { __typename: 'ComponentComponentsSurveyJsComponent' }
+                          | { __typename: 'ComponentComponentsTicketDetails' }
+                          | { __typename: 'ComponentComponentsTicketList' }
+                          | { __typename: 'ComponentComponentsTicketRecent' }
+                          | { __typename: 'ComponentComponentsUserAccount' }
+                          | { __typename: 'Error' }
+                      >;
+                  }>;
+                  leftSlot: Array<{
+                      __typename: 'Component';
+                      documentId: string;
+                      content: Array<
+                          | { __typename: 'ComponentComponentsArticle' }
+                          | { __typename: 'ComponentComponentsArticleList' }
+                          | { __typename: 'ComponentComponentsCategory' }
+                          | { __typename: 'ComponentComponentsCategoryList' }
+                          | { __typename: 'ComponentComponentsFaq' }
+                          | { __typename: 'ComponentComponentsInvoiceList' }
+                          | { __typename: 'ComponentComponentsNotificationDetails' }
+                          | { __typename: 'ComponentComponentsNotificationList' }
+                          | { __typename: 'ComponentComponentsOrderList' }
+                          | { __typename: 'ComponentComponentsOrdersSummary' }
+                          | { __typename: 'ComponentComponentsPaymentsHistory' }
+                          | { __typename: 'ComponentComponentsPaymentsSummary' }
+                          | { __typename: 'ComponentComponentsQuickLinks' }
+                          | { __typename: 'ComponentComponentsServiceDetails' }
+                          | { __typename: 'ComponentComponentsServiceList' }
+                          | { __typename: 'ComponentComponentsSurveyJsComponent' }
+                          | { __typename: 'ComponentComponentsTicketDetails' }
+                          | { __typename: 'ComponentComponentsTicketList' }
+                          | { __typename: 'ComponentComponentsTicketRecent' }
+                          | { __typename: 'ComponentComponentsUserAccount' }
+                          | { __typename: 'Error' }
+                      >;
+                  }>;
+                  rightSlot: Array<{
+                      __typename: 'Component';
+                      documentId: string;
+                      content: Array<
+                          | { __typename: 'ComponentComponentsArticle' }
+                          | { __typename: 'ComponentComponentsArticleList' }
+                          | { __typename: 'ComponentComponentsCategory' }
+                          | { __typename: 'ComponentComponentsCategoryList' }
+                          | { __typename: 'ComponentComponentsFaq' }
+                          | { __typename: 'ComponentComponentsInvoiceList' }
+                          | { __typename: 'ComponentComponentsNotificationDetails' }
+                          | { __typename: 'ComponentComponentsNotificationList' }
+                          | { __typename: 'ComponentComponentsOrderList' }
+                          | { __typename: 'ComponentComponentsOrdersSummary' }
+                          | { __typename: 'ComponentComponentsPaymentsHistory' }
+                          | { __typename: 'ComponentComponentsPaymentsSummary' }
+                          | { __typename: 'ComponentComponentsQuickLinks' }
+                          | { __typename: 'ComponentComponentsServiceDetails' }
+                          | { __typename: 'ComponentComponentsServiceList' }
+                          | { __typename: 'ComponentComponentsSurveyJsComponent' }
+                          | { __typename: 'ComponentComponentsTicketDetails' }
+                          | { __typename: 'ComponentComponentsTicketList' }
+                          | { __typename: 'ComponentComponentsTicketRecent' }
+                          | { __typename: 'ComponentComponentsUserAccount' }
+                          | { __typename: 'Error' }
+                      >;
+                  }>;
+                  bottomSlot: Array<{
+                      __typename: 'Component';
+                      documentId: string;
+                      content: Array<
+                          | { __typename: 'ComponentComponentsArticle' }
+                          | { __typename: 'ComponentComponentsArticleList' }
+                          | { __typename: 'ComponentComponentsCategory' }
+                          | { __typename: 'ComponentComponentsCategoryList' }
+                          | { __typename: 'ComponentComponentsFaq' }
+                          | { __typename: 'ComponentComponentsInvoiceList' }
+                          | { __typename: 'ComponentComponentsNotificationDetails' }
+                          | { __typename: 'ComponentComponentsNotificationList' }
+                          | { __typename: 'ComponentComponentsOrderList' }
+                          | { __typename: 'ComponentComponentsOrdersSummary' }
+                          | { __typename: 'ComponentComponentsPaymentsHistory' }
+                          | { __typename: 'ComponentComponentsPaymentsSummary' }
+                          | { __typename: 'ComponentComponentsQuickLinks' }
+                          | { __typename: 'ComponentComponentsServiceDetails' }
+                          | { __typename: 'ComponentComponentsServiceList' }
+                          | { __typename: 'ComponentComponentsSurveyJsComponent' }
+                          | { __typename: 'ComponentComponentsTicketDetails' }
+                          | { __typename: 'ComponentComponentsTicketList' }
+                          | { __typename: 'ComponentComponentsTicketRecent' }
+                          | { __typename: 'ComponentComponentsUserAccount' }
+                          | { __typename: 'Error' }
+                      >;
+                  }>;
+              }
+            | { __typename: 'Error' }
+        >;
+    }>;
 };
 
 export type GetCategoriesQueryVariables = Exact<{
@@ -7166,12 +7352,12 @@ export type NotFoundPageFragment = {
 export type OrganizationListFragment = { documentId: string; title?: string; description?: string };
 
 export type PageFragment = {
+    documentId: string;
     slug: string;
     locale?: string;
     createdAt?: any;
     updatedAt?: any;
     publishedAt?: any;
-    documentId: string;
     hasOwnTitle: boolean;
     SEO: {
         title: string;
@@ -8765,12 +8951,12 @@ export type GetPageQueryVariables = Exact<{
 
 export type GetPageQuery = {
     pages: Array<{
+        documentId: string;
         slug: string;
         locale?: string;
         createdAt?: any;
         updatedAt?: any;
         publishedAt?: any;
-        documentId: string;
         hasOwnTitle: boolean;
         SEO: {
             title: string;
@@ -8938,12 +9124,12 @@ export type GetPagesQueryVariables = Exact<{
 
 export type GetPagesQuery = {
     pages: Array<{
+        documentId: string;
         slug: string;
         locale?: string;
         createdAt?: any;
         updatedAt?: any;
         publishedAt?: any;
-        documentId: string;
         hasOwnTitle: boolean;
         SEO: {
             title: string;
@@ -9126,6 +9312,7 @@ export const ArticleFragmentDoc = gql`
         __typename
         sections {
             id
+            __typename
             title
             content
         }
@@ -9374,6 +9561,7 @@ export const TwoColumnTemplateFragmentDoc = gql`
 `;
 export const PageFragmentDoc = gql`
     fragment Page on Page {
+        documentId
         slug
         locale
         createdAt
@@ -9879,6 +10067,37 @@ export const GetArticleDocument = gql`
     }
     ${ArticleFragmentDoc}
 `;
+export const GetArticlesDocument = gql`
+    query getArticles(
+        $locale: I18NLocaleCode!
+        $categories: [String]
+        $title: String
+        $dateFrom: DateTime
+        $dateTo: DateTime
+        $limit: Int
+        $offset: Int
+        $sort: [String]
+    ) {
+        pages_connection {
+            pageInfo {
+                total
+            }
+        }
+        articles: pages(
+            filters: {
+                categories: { slug: { in: $categories } }
+                SEO: { title: { contains: $title } }
+                updatedAt: { gte: $dateFrom, lte: $dateTo }
+            }
+            pagination: { limit: $limit, start: $offset }
+            sort: $sort
+            locale: $locale
+        ) {
+            ...Page
+        }
+    }
+    ${PageFragmentDoc}
+`;
 export const GetCategoriesDocument = gql`
     query getCategories($id: String, $locale: I18NLocaleCode!, $limit: Int, $offset: Int) {
         categories_connection {
@@ -10135,6 +10354,7 @@ export type SdkFunctionWrapper = <T>(
 
 const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationType, _variables) => action();
 const GetArticleDocumentString = print(GetArticleDocument);
+const GetArticlesDocumentString = print(GetArticlesDocument);
 const GetCategoriesDocumentString = print(GetCategoriesDocument);
 const GetAppConfigDocumentString = print(GetAppConfigDocument);
 const GetComponentDocumentString = print(GetComponentDocument);
@@ -10166,6 +10386,27 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
                         ...wrappedRequestHeaders,
                     }),
                 'getArticle',
+                'query',
+                variables,
+            );
+        },
+        getArticles(
+            variables: GetArticlesQueryVariables,
+            requestHeaders?: GraphQLClientRequestHeaders,
+        ): Promise<{
+            data: GetArticlesQuery;
+            errors?: GraphQLError[];
+            extensions?: any;
+            headers: Headers;
+            status: number;
+        }> {
+            return withWrapper(
+                (wrappedRequestHeaders) =>
+                    client.rawRequest<GetArticlesQuery>(GetArticlesDocumentString, variables, {
+                        ...requestHeaders,
+                        ...wrappedRequestHeaders,
+                    }),
+                'getArticles',
                 'query',
                 variables,
             );

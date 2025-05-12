@@ -19,5 +19,5 @@ class CategoryArticlesListBlock {
 }
 
 export class CategoryArticles {
-    data!: Articles.Model.Article[];
+    data!: Omit<Articles.Model.Article, 'sections'>[];
 }

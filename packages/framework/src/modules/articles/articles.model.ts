@@ -52,7 +52,7 @@ class ArticleSectionCommon {
 
 export class ArticleSectionText extends ArticleSectionCommon {
     __typename!: 'ArticleSectionText';
-    title!: string;
+    title?: string;
     content!: string;
 }
 
@@ -62,7 +62,7 @@ export class ArticleSectionImage extends ArticleSectionCommon {
     caption?: string;
 }
 
-export type Articles = Pagination.Paginated<Article>;
+export type Articles = Pagination.Paginated<Omit<Article, 'sections'>>;
 export class Author {
     name!: string;
     position?: string;
