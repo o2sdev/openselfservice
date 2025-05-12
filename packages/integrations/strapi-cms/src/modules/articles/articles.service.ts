@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Observable, concatMap, forkJoin, map, of } from 'rxjs';
+import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
 import { Articles, CMS, Search } from '@o2s/framework/modules';
 
@@ -86,6 +86,7 @@ export class ArticlesService implements Articles.Service {
     ): Observable<Articles.Model.Articles> {
         const articles = this.graphqlService.getArticles({
             locale: options.locale,
+            slugs: body.ids?.length ? body.ids : undefined,
             categories: body.category ? [body.category] : undefined,
             title: options.title,
             dateFrom: options.dateFrom,
@@ -104,5 +105,28 @@ export class ArticlesService implements Articles.Service {
                 ),
             ),
         );
+    }
+
+    searchArticles(
+        options: Articles.Request.GetArticleListQuery,
+        body: Articles.Request.GetArticleListBody,
+    ): Observable<Articles.Model.Articles> {
+        const searchPayload: Search.Model.SearchPayload = {
+            query: body?.query,
+            exact: body?.category
+                ? {
+                      category: body.category,
+                  }
+                : undefined,
+            hitsPerPage: options.limit,
+            page: options.offset,
+            sort: body?.sort ? [body.sort] : undefined,
+            pagination: {
+                offset: options.offset,
+                limit: options.limit,
+            },
+        };
+
+        return this.searchService.searchArticles(options.locale, searchPayload);
     }
 }

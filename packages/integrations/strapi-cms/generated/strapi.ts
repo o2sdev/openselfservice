@@ -6970,6 +6970,7 @@ export type GetArticleQuery = {
 
 export type GetArticlesQueryVariables = Exact<{
     locale: Scalars['I18NLocaleCode']['input'];
+    slugs?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>>;
     categories?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>>;
     title?: InputMaybe<Scalars['String']['input']>;
     dateFrom?: InputMaybe<Scalars['DateTime']['input']>;
@@ -10070,6 +10071,7 @@ export const GetArticleDocument = gql`
 export const GetArticlesDocument = gql`
     query getArticles(
         $locale: I18NLocaleCode!
+        $slugs: [String]
         $categories: [String]
         $title: String
         $dateFrom: DateTime
@@ -10085,6 +10087,7 @@ export const GetArticlesDocument = gql`
         }
         articles: pages(
             filters: {
+                slug: { in: $slugs }
                 categories: { slug: { in: $categories } }
                 SEO: { title: { contains: $title } }
                 updatedAt: { gte: $dateFrom, lte: $dateTo }

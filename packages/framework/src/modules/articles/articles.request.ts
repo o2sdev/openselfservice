@@ -27,6 +27,7 @@ export class GetArticleListQuery extends PaginationQuery {
 
 export class GetArticleListBody {
     query?: string;
+    ids?: string[];
     category?: string;
     sort?: {
         field: string;

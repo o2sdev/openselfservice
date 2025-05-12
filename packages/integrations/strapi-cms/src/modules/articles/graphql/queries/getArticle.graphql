@@ -12,6 +12,7 @@ query getArticle($id: ID!, $locale: I18NLocaleCode!) {
 
 query getArticles(
     $locale: I18NLocaleCode!
+    $slugs: [String]
     $categories: [String]
     $title: String
     $dateFrom: DateTime
@@ -27,6 +28,7 @@ query getArticles(
     }
     articles: pages(
         filters: {
+            slug: { in: $slugs }
             categories: { slug: { in: $categories } }
             SEO: { title: { contains: $title } }
             updatedAt: { gte: $dateFrom, lte: $dateTo }

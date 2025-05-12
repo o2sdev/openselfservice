@@ -33,7 +33,7 @@ export const mapCategories = (data: CategoryFragment[], total: number, baseUrl: 
 export const mapArticle = (
     page: CMS.Model.Page.Page,
     article: GetArticleQuery,
-    baseUrl: string,
+    _baseUrl: string,
 ): Articles.Model.Article => {
     const component = article.component!.content[0];
 
