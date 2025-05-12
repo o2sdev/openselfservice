@@ -1232,6 +1232,16 @@ export enum Enum_Surveyjsform_Submitdestination {
     Surveyjs = 'surveyjs',
 }
 
+export enum Enum_Translatebatchtranslatejob_Status {
+    Cancelled = 'cancelled',
+    Created = 'created',
+    Failed = 'failed',
+    Finished = 'finished',
+    Paused = 'paused',
+    Running = 'running',
+    Setup = 'setup',
+}
+
 export type Error = {
     code: Scalars['String']['output'];
     message?: Maybe<Scalars['String']['output']>;
@@ -1448,6 +1458,8 @@ export type GenericMorph =
     | ReviewWorkflowsWorkflow
     | ReviewWorkflowsWorkflowStage
     | SurveyJsForm
+    | TranslateBatchTranslateJob
+    | TranslateUpdatedEntry
     | UploadFile
     | UsersPermissionsPermission
     | UsersPermissionsRole
@@ -1679,6 +1691,8 @@ export type Mutation = {
     createReviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
     createReviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
     createSurveyJsForm?: Maybe<SurveyJsForm>;
+    createTranslateBatchTranslateJob?: Maybe<TranslateBatchTranslateJob>;
+    createTranslateUpdatedEntry?: Maybe<TranslateUpdatedEntry>;
     /** Create a new role */
     createUsersPermissionsRole?: Maybe<UsersPermissionsCreateRolePayload>;
     /** Create a new user */
@@ -1698,6 +1712,8 @@ export type Mutation = {
     deleteReviewWorkflowsWorkflow?: Maybe<DeleteMutationResponse>;
     deleteReviewWorkflowsWorkflowStage?: Maybe<DeleteMutationResponse>;
     deleteSurveyJsForm?: Maybe<DeleteMutationResponse>;
+    deleteTranslateBatchTranslateJob?: Maybe<DeleteMutationResponse>;
+    deleteTranslateUpdatedEntry?: Maybe<DeleteMutationResponse>;
     deleteUploadFile?: Maybe<UploadFile>;
     /** Delete an existing role */
     deleteUsersPermissionsRole?: Maybe<UsersPermissionsDeleteRolePayload>;
@@ -1727,6 +1743,8 @@ export type Mutation = {
     updateReviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
     updateReviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
     updateSurveyJsForm?: Maybe<SurveyJsForm>;
+    updateTranslateBatchTranslateJob?: Maybe<TranslateBatchTranslateJob>;
+    updateTranslateUpdatedEntry?: Maybe<TranslateUpdatedEntry>;
     updateUploadFile: UploadFile;
     /** Update an existing role */
     updateUsersPermissionsRole?: Maybe<UsersPermissionsUpdateRolePayload>;
@@ -1794,6 +1812,16 @@ export type MutationCreateReviewWorkflowsWorkflowStageArgs = {
 
 export type MutationCreateSurveyJsFormArgs = {
     data: SurveyJsFormInput;
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type MutationCreateTranslateBatchTranslateJobArgs = {
+    data: TranslateBatchTranslateJobInput;
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type MutationCreateTranslateUpdatedEntryArgs = {
+    data: TranslateUpdatedEntryInput;
     status?: InputMaybe<PublicationStatus>;
 };
 
@@ -1869,6 +1897,14 @@ export type MutationDeleteReviewWorkflowsWorkflowStageArgs = {
 };
 
 export type MutationDeleteSurveyJsFormArgs = {
+    documentId: Scalars['ID']['input'];
+};
+
+export type MutationDeleteTranslateBatchTranslateJobArgs = {
+    documentId: Scalars['ID']['input'];
+};
+
+export type MutationDeleteTranslateUpdatedEntryArgs = {
     documentId: Scalars['ID']['input'];
 };
 
@@ -1999,6 +2035,18 @@ export type MutationUpdateReviewWorkflowsWorkflowStageArgs = {
 
 export type MutationUpdateSurveyJsFormArgs = {
     data: SurveyJsFormInput;
+    documentId: Scalars['ID']['input'];
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type MutationUpdateTranslateBatchTranslateJobArgs = {
+    data: TranslateBatchTranslateJobInput;
+    documentId: Scalars['ID']['input'];
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type MutationUpdateTranslateUpdatedEntryArgs = {
+    data: TranslateUpdatedEntryInput;
     documentId: Scalars['ID']['input'];
     status?: InputMaybe<PublicationStatus>;
 };
@@ -2209,6 +2257,12 @@ export type Query = {
     surveyJsForm?: Maybe<SurveyJsForm>;
     surveyJsForms: Array<Maybe<SurveyJsForm>>;
     surveyJsForms_connection?: Maybe<SurveyJsFormEntityResponseCollection>;
+    translateBatchTranslateJob?: Maybe<TranslateBatchTranslateJob>;
+    translateBatchTranslateJobs: Array<Maybe<TranslateBatchTranslateJob>>;
+    translateBatchTranslateJobs_connection?: Maybe<TranslateBatchTranslateJobEntityResponseCollection>;
+    translateUpdatedEntries: Array<Maybe<TranslateUpdatedEntry>>;
+    translateUpdatedEntries_connection?: Maybe<TranslateUpdatedEntryEntityResponseCollection>;
+    translateUpdatedEntry?: Maybe<TranslateUpdatedEntry>;
     uploadFile?: Maybe<UploadFile>;
     uploadFiles: Array<Maybe<UploadFile>>;
     uploadFiles_connection?: Maybe<UploadFileEntityResponseCollection>;
@@ -2475,6 +2529,44 @@ export type QuerySurveyJsForms_ConnectionArgs = {
     status?: InputMaybe<PublicationStatus>;
 };
 
+export type QueryTranslateBatchTranslateJobArgs = {
+    documentId: Scalars['ID']['input'];
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type QueryTranslateBatchTranslateJobsArgs = {
+    filters?: InputMaybe<TranslateBatchTranslateJobFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type QueryTranslateBatchTranslateJobs_ConnectionArgs = {
+    filters?: InputMaybe<TranslateBatchTranslateJobFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type QueryTranslateUpdatedEntriesArgs = {
+    filters?: InputMaybe<TranslateUpdatedEntryFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type QueryTranslateUpdatedEntries_ConnectionArgs = {
+    filters?: InputMaybe<TranslateUpdatedEntryFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type QueryTranslateUpdatedEntryArgs = {
+    documentId: Scalars['ID']['input'];
+    status?: InputMaybe<PublicationStatus>;
+};
+
 export type QueryUploadFileArgs = {
     documentId: Scalars['ID']['input'];
     status?: InputMaybe<PublicationStatus>;
@@ -2689,6 +2781,91 @@ export type SurveyJsFormInput = {
     submitDestination?: InputMaybe<Enum_Surveyjsform_Submitdestination>;
     surveyId?: InputMaybe<Scalars['String']['input']>;
     surveyType?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type TranslateBatchTranslateJob = {
+    autoPublish?: Maybe<Scalars['Boolean']['output']>;
+    contentType: Scalars['String']['output'];
+    createdAt?: Maybe<Scalars['DateTime']['output']>;
+    documentId: Scalars['ID']['output'];
+    entityIds?: Maybe<Scalars['JSON']['output']>;
+    failureReason?: Maybe<Scalars['JSON']['output']>;
+    progress?: Maybe<Scalars['Float']['output']>;
+    publishedAt?: Maybe<Scalars['DateTime']['output']>;
+    sourceLocale: Scalars['String']['output'];
+    status?: Maybe<Enum_Translatebatchtranslatejob_Status>;
+    targetLocale: Scalars['String']['output'];
+    updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type TranslateBatchTranslateJobEntityResponseCollection = {
+    nodes: Array<TranslateBatchTranslateJob>;
+    pageInfo: Pagination;
+};
+
+export type TranslateBatchTranslateJobFiltersInput = {
+    and?: InputMaybe<Array<InputMaybe<TranslateBatchTranslateJobFiltersInput>>>;
+    autoPublish?: InputMaybe<BooleanFilterInput>;
+    contentType?: InputMaybe<StringFilterInput>;
+    createdAt?: InputMaybe<DateTimeFilterInput>;
+    documentId?: InputMaybe<IdFilterInput>;
+    entityIds?: InputMaybe<JsonFilterInput>;
+    failureReason?: InputMaybe<JsonFilterInput>;
+    not?: InputMaybe<TranslateBatchTranslateJobFiltersInput>;
+    or?: InputMaybe<Array<InputMaybe<TranslateBatchTranslateJobFiltersInput>>>;
+    progress?: InputMaybe<FloatFilterInput>;
+    publishedAt?: InputMaybe<DateTimeFilterInput>;
+    sourceLocale?: InputMaybe<StringFilterInput>;
+    status?: InputMaybe<StringFilterInput>;
+    targetLocale?: InputMaybe<StringFilterInput>;
+    updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type TranslateBatchTranslateJobInput = {
+    autoPublish?: InputMaybe<Scalars['Boolean']['input']>;
+    contentType?: InputMaybe<Scalars['String']['input']>;
+    entityIds?: InputMaybe<Scalars['JSON']['input']>;
+    failureReason?: InputMaybe<Scalars['JSON']['input']>;
+    progress?: InputMaybe<Scalars['Float']['input']>;
+    publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+    sourceLocale?: InputMaybe<Scalars['String']['input']>;
+    status?: InputMaybe<Enum_Translatebatchtranslatejob_Status>;
+    targetLocale?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type TranslateUpdatedEntry = {
+    contentType?: Maybe<Scalars['String']['output']>;
+    createdAt?: Maybe<Scalars['DateTime']['output']>;
+    documentId: Scalars['ID']['output'];
+    groupID?: Maybe<Scalars['String']['output']>;
+    localesWithUpdates?: Maybe<Scalars['JSON']['output']>;
+    publishedAt?: Maybe<Scalars['DateTime']['output']>;
+    updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type TranslateUpdatedEntryEntityResponseCollection = {
+    nodes: Array<TranslateUpdatedEntry>;
+    pageInfo: Pagination;
+};
+
+export type TranslateUpdatedEntryFiltersInput = {
+    and?: InputMaybe<Array<InputMaybe<TranslateUpdatedEntryFiltersInput>>>;
+    contentType?: InputMaybe<StringFilterInput>;
+    createdAt?: InputMaybe<DateTimeFilterInput>;
+    documentId?: InputMaybe<IdFilterInput>;
+    groupID?: InputMaybe<StringFilterInput>;
+    localesWithUpdates?: InputMaybe<JsonFilterInput>;
+    not?: InputMaybe<TranslateUpdatedEntryFiltersInput>;
+    or?: InputMaybe<Array<InputMaybe<TranslateUpdatedEntryFiltersInput>>>;
+    publishedAt?: InputMaybe<DateTimeFilterInput>;
+    updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type TranslateUpdatedEntryInput = {
+    contentType?: InputMaybe<Scalars['String']['input']>;
+    groupID?: InputMaybe<Scalars['String']['input']>;
+    localesWithUpdates?: InputMaybe<Scalars['JSON']['input']>;
+    publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
 export type UploadFile = {
@@ -3287,6 +3464,8 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
         | ReviewWorkflowsWorkflow
         | ReviewWorkflowsWorkflowStage
         | SurveyJsForm
+        | TranslateBatchTranslateJob
+        | TranslateUpdatedEntry
         | (Omit<UploadFile, 'related'> & { related?: Maybe<Array<Maybe<_RefType['GenericMorph']>>> })
         | UsersPermissionsPermission
         | UsersPermissionsRole
@@ -3599,6 +3778,7 @@ export type ResolversTypes = {
     ENUM_COMPONENTCONTENTERRORMESSAGE_TYPE: Enum_Componentcontenterrormessage_Type;
     ENUM_SURVEYJSFORM_REQUIREDROLES: Enum_Surveyjsform_Requiredroles;
     ENUM_SURVEYJSFORM_SUBMITDESTINATION: Enum_Surveyjsform_Submitdestination;
+    ENUM_TRANSLATEBATCHTRANSLATEJOB_STATUS: Enum_Translatebatchtranslatejob_Status;
     Error: ResolverTypeWrapper<Error>;
     FileInfoInput: FileInfoInput;
     FilterItem: ResolverTypeWrapper<
@@ -3747,6 +3927,14 @@ export type ResolversTypes = {
     SurveyJsFormEntityResponseCollection: ResolverTypeWrapper<SurveyJsFormEntityResponseCollection>;
     SurveyJsFormFiltersInput: SurveyJsFormFiltersInput;
     SurveyJsFormInput: SurveyJsFormInput;
+    TranslateBatchTranslateJob: ResolverTypeWrapper<TranslateBatchTranslateJob>;
+    TranslateBatchTranslateJobEntityResponseCollection: ResolverTypeWrapper<TranslateBatchTranslateJobEntityResponseCollection>;
+    TranslateBatchTranslateJobFiltersInput: TranslateBatchTranslateJobFiltersInput;
+    TranslateBatchTranslateJobInput: TranslateBatchTranslateJobInput;
+    TranslateUpdatedEntry: ResolverTypeWrapper<TranslateUpdatedEntry>;
+    TranslateUpdatedEntryEntityResponseCollection: ResolverTypeWrapper<TranslateUpdatedEntryEntityResponseCollection>;
+    TranslateUpdatedEntryFiltersInput: TranslateUpdatedEntryFiltersInput;
+    TranslateUpdatedEntryInput: TranslateUpdatedEntryInput;
     UploadFile: ResolverTypeWrapper<
         Omit<UploadFile, 'related'> & { related?: Maybe<Array<Maybe<ResolversTypes['GenericMorph']>>> }
     >;
@@ -4155,6 +4343,14 @@ export type ResolversParentTypes = {
     SurveyJsFormEntityResponseCollection: SurveyJsFormEntityResponseCollection;
     SurveyJsFormFiltersInput: SurveyJsFormFiltersInput;
     SurveyJsFormInput: SurveyJsFormInput;
+    TranslateBatchTranslateJob: TranslateBatchTranslateJob;
+    TranslateBatchTranslateJobEntityResponseCollection: TranslateBatchTranslateJobEntityResponseCollection;
+    TranslateBatchTranslateJobFiltersInput: TranslateBatchTranslateJobFiltersInput;
+    TranslateBatchTranslateJobInput: TranslateBatchTranslateJobInput;
+    TranslateUpdatedEntry: TranslateUpdatedEntry;
+    TranslateUpdatedEntryEntityResponseCollection: TranslateUpdatedEntryEntityResponseCollection;
+    TranslateUpdatedEntryFiltersInput: TranslateUpdatedEntryFiltersInput;
+    TranslateUpdatedEntryInput: TranslateUpdatedEntryInput;
     UploadFile: Omit<UploadFile, 'related'> & { related?: Maybe<Array<Maybe<ResolversParentTypes['GenericMorph']>>> };
     UploadFileEntityResponseCollection: Omit<UploadFileEntityResponseCollection, 'nodes'> & {
         nodes: Array<ResolversParentTypes['UploadFile']>;
@@ -5533,6 +5729,8 @@ export type GenericMorphResolvers<
         | 'ReviewWorkflowsWorkflow'
         | 'ReviewWorkflowsWorkflowStage'
         | 'SurveyJsForm'
+        | 'TranslateBatchTranslateJob'
+        | 'TranslateUpdatedEntry'
         | 'UploadFile'
         | 'UsersPermissionsPermission'
         | 'UsersPermissionsRole'
@@ -5748,6 +5946,18 @@ export type MutationResolvers<
         ContextType,
         RequireFields<MutationCreateSurveyJsFormArgs, 'data' | 'status'>
     >;
+    createTranslateBatchTranslateJob?: Resolver<
+        Maybe<ResolversTypes['TranslateBatchTranslateJob']>,
+        ParentType,
+        ContextType,
+        RequireFields<MutationCreateTranslateBatchTranslateJobArgs, 'data' | 'status'>
+    >;
+    createTranslateUpdatedEntry?: Resolver<
+        Maybe<ResolversTypes['TranslateUpdatedEntry']>,
+        ParentType,
+        ContextType,
+        RequireFields<MutationCreateTranslateUpdatedEntryArgs, 'data' | 'status'>
+    >;
     createUsersPermissionsRole?: Resolver<
         Maybe<ResolversTypes['UsersPermissionsCreateRolePayload']>,
         ParentType,
@@ -5849,6 +6059,18 @@ export type MutationResolvers<
         ParentType,
         ContextType,
         RequireFields<MutationDeleteSurveyJsFormArgs, 'documentId'>
+    >;
+    deleteTranslateBatchTranslateJob?: Resolver<
+        Maybe<ResolversTypes['DeleteMutationResponse']>,
+        ParentType,
+        ContextType,
+        RequireFields<MutationDeleteTranslateBatchTranslateJobArgs, 'documentId'>
+    >;
+    deleteTranslateUpdatedEntry?: Resolver<
+        Maybe<ResolversTypes['DeleteMutationResponse']>,
+        ParentType,
+        ContextType,
+        RequireFields<MutationDeleteTranslateUpdatedEntryArgs, 'documentId'>
     >;
     deleteUploadFile?: Resolver<
         Maybe<ResolversTypes['UploadFile']>,
@@ -5987,6 +6209,18 @@ export type MutationResolvers<
         ParentType,
         ContextType,
         RequireFields<MutationUpdateSurveyJsFormArgs, 'data' | 'documentId' | 'status'>
+    >;
+    updateTranslateBatchTranslateJob?: Resolver<
+        Maybe<ResolversTypes['TranslateBatchTranslateJob']>,
+        ParentType,
+        ContextType,
+        RequireFields<MutationUpdateTranslateBatchTranslateJobArgs, 'data' | 'documentId' | 'status'>
+    >;
+    updateTranslateUpdatedEntry?: Resolver<
+        Maybe<ResolversTypes['TranslateUpdatedEntry']>,
+        ParentType,
+        ContextType,
+        RequireFields<MutationUpdateTranslateUpdatedEntryArgs, 'data' | 'documentId' | 'status'>
     >;
     updateUploadFile?: Resolver<
         ResolversTypes['UploadFile'],
@@ -6391,6 +6625,42 @@ export type QueryResolvers<
         ContextType,
         RequireFields<QuerySurveyJsForms_ConnectionArgs, 'pagination' | 'sort' | 'status'>
     >;
+    translateBatchTranslateJob?: Resolver<
+        Maybe<ResolversTypes['TranslateBatchTranslateJob']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryTranslateBatchTranslateJobArgs, 'documentId' | 'status'>
+    >;
+    translateBatchTranslateJobs?: Resolver<
+        Array<Maybe<ResolversTypes['TranslateBatchTranslateJob']>>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryTranslateBatchTranslateJobsArgs, 'pagination' | 'sort' | 'status'>
+    >;
+    translateBatchTranslateJobs_connection?: Resolver<
+        Maybe<ResolversTypes['TranslateBatchTranslateJobEntityResponseCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryTranslateBatchTranslateJobs_ConnectionArgs, 'pagination' | 'sort' | 'status'>
+    >;
+    translateUpdatedEntries?: Resolver<
+        Array<Maybe<ResolversTypes['TranslateUpdatedEntry']>>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryTranslateUpdatedEntriesArgs, 'pagination' | 'sort' | 'status'>
+    >;
+    translateUpdatedEntries_connection?: Resolver<
+        Maybe<ResolversTypes['TranslateUpdatedEntryEntityResponseCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryTranslateUpdatedEntries_ConnectionArgs, 'pagination' | 'sort' | 'status'>
+    >;
+    translateUpdatedEntry?: Resolver<
+        Maybe<ResolversTypes['TranslateUpdatedEntry']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryTranslateUpdatedEntryArgs, 'documentId' | 'status'>
+    >;
     uploadFile?: Resolver<
         Maybe<ResolversTypes['UploadFile']>,
         ParentType,
@@ -6541,6 +6811,60 @@ export type SurveyJsFormEntityResponseCollectionResolvers<
         ResolversParentTypes['SurveyJsFormEntityResponseCollection'] = ResolversParentTypes['SurveyJsFormEntityResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['SurveyJsForm']>, ParentType, ContextType>;
+    pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type TranslateBatchTranslateJobResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['TranslateBatchTranslateJob'] = ResolversParentTypes['TranslateBatchTranslateJob'],
+> = {
+    autoPublish?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+    contentType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    documentId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    entityIds?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+    failureReason?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+    progress?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+    publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    sourceLocale?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    status?: Resolver<Maybe<ResolversTypes['ENUM_TRANSLATEBATCHTRANSLATEJOB_STATUS']>, ParentType, ContextType>;
+    targetLocale?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type TranslateBatchTranslateJobEntityResponseCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['TranslateBatchTranslateJobEntityResponseCollection'] = ResolversParentTypes['TranslateBatchTranslateJobEntityResponseCollection'],
+> = {
+    nodes?: Resolver<Array<ResolversTypes['TranslateBatchTranslateJob']>, ParentType, ContextType>;
+    pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type TranslateUpdatedEntryResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['TranslateUpdatedEntry'] = ResolversParentTypes['TranslateUpdatedEntry'],
+> = {
+    contentType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    documentId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    groupID?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    localesWithUpdates?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+    publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type TranslateUpdatedEntryEntityResponseCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['TranslateUpdatedEntryEntityResponseCollection'] = ResolversParentTypes['TranslateUpdatedEntryEntityResponseCollection'],
+> = {
+    nodes?: Resolver<Array<ResolversTypes['TranslateUpdatedEntry']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -6887,6 +7211,10 @@ export type Resolvers<ContextType = any> = {
     ReviewWorkflowsWorkflowStageRelationResponseCollection?: ReviewWorkflowsWorkflowStageRelationResponseCollectionResolvers<ContextType>;
     SurveyJsForm?: SurveyJsFormResolvers<ContextType>;
     SurveyJsFormEntityResponseCollection?: SurveyJsFormEntityResponseCollectionResolvers<ContextType>;
+    TranslateBatchTranslateJob?: TranslateBatchTranslateJobResolvers<ContextType>;
+    TranslateBatchTranslateJobEntityResponseCollection?: TranslateBatchTranslateJobEntityResponseCollectionResolvers<ContextType>;
+    TranslateUpdatedEntry?: TranslateUpdatedEntryResolvers<ContextType>;
+    TranslateUpdatedEntryEntityResponseCollection?: TranslateUpdatedEntryEntityResponseCollectionResolvers<ContextType>;
     UploadFile?: UploadFileResolvers<ContextType>;
     UploadFileEntityResponseCollection?: UploadFileEntityResponseCollectionResolvers<ContextType>;
     UploadFileRelationResponseCollection?: UploadFileRelationResponseCollectionResolvers<ContextType>;
