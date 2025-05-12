@@ -39,7 +39,7 @@ export class CategoryService {
             concatMap(([cms]) => {
                 return forkJoin([
                     this.articlesService.getArticleList(
-                        { limit: query.limit || 2, offset: query.offset || 0, locale: headers['x-locale'] },
+                        { limit: query.limit || 6, offset: query.offset || 0, locale: headers['x-locale'] },
                         { category: cms.categoryId },
                     ),
                 ]).pipe(map(([articles]) => mapCategoryArticles(cms, articles, headers['x-locale'])));
