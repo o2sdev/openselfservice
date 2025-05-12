@@ -90,13 +90,13 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                                             {data.table.columns.map((column) => (
                                                 <TableHead
                                                     key={column.id}
-                                                    className="py-3 px-4 text-sm font-medium text-muted-foreground"
+                                                    className="py-3 px-4 text-sm font-medium text-muted-foreground md:text-nowrap"
                                                 >
                                                     {column.title}
                                                 </TableHead>
                                             ))}
                                             {data.table.actions && (
-                                                <TableHead className="py-3 px-4 text-sm font-medium text-muted-foreground">
+                                                <TableHead className="py-3 px-4 text-sm font-medium text-muted-foreground md:text-nowrap">
                                                     {data.table.actions.title}
                                                 </TableHead>
                                             )}
