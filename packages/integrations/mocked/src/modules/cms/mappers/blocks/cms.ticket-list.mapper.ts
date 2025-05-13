@@ -154,6 +154,7 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
         today: 'Today',
         yesterday: 'Yesterday',
         showMore: 'Show more',
+        clickToSelect: 'Click to select',
     },
     detailsUrl: '/cases/{id}',
 };
@@ -314,6 +315,7 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
         today: 'Heute',
         yesterday: 'Gestern',
         showMore: 'Mehr anzeigen',
+        clickToSelect: 'Klicken Sie, um auszuwählen',
     },
     detailsUrl: '/faelle/{id}',
 };
@@ -475,6 +477,7 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
         today: 'Dzisiaj',
         yesterday: 'Wczoraj',
         showMore: 'Pokaż więcej',
+        clickToSelect: 'Kliknij, aby wybrać',
     },
     detailsUrl: '/zgloszenia/{id}',
 };

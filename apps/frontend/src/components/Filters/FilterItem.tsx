@@ -14,6 +14,7 @@ export const FilterItem = <T, S extends FormikValues>({
     submitForm,
     setFieldValue,
     isLeading,
+    labels,
 }: Readonly<FilterItemProps<T, S>>) => {
     const allWasClickedRef = useRef(false);
 
@@ -137,7 +138,8 @@ export const FilterItem = <T, S extends FormikValues>({
                                 <Select
                                     value={field.value}
                                     onValueChange={async (value) => {
-                                        await setFieldValue(field.name, value);
+                                        const newValue = value === ' ' ? '' : value;
+                                        await setFieldValue(field.name, newValue);
                                         if (isLeading) {
                                             await submitForm();
                                         }
@@ -148,6 +150,9 @@ export const FilterItem = <T, S extends FormikValues>({
                                     </SelectTrigger>
                                     <SelectContent>
                                         <SelectGroup>
+                                            {labels && labels.clickToSelect && (
+                                                <SelectItem value=" ">{labels.clickToSelect}</SelectItem>
+                                            )}
                                             {item.options.map((option) => (
                                                 <SelectItem key={option.value} value={option.value}>
                                                     {option.label}

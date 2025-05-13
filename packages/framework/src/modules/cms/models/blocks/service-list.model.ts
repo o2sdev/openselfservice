@@ -17,5 +17,6 @@ export class ServiceListBlock extends Block.Block {
     labels!: {
         today: string;
         yesterday: string;
+        clickToSelect: string;
     };
 }

@@ -20,13 +20,4 @@ fragment OrderListComponent on ComponentComponentsOrderList {
         description
     }
     detailsURL
-    actionLinks {
-        id
-        label
-        visible
-        page {
-            slug
-        }
-        icon
-    }
 }

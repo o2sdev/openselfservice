@@ -972,6 +972,7 @@ export type ComponentLabelsActions = {
     apply: Scalars['String']['output'];
     cancel: Scalars['String']['output'];
     clear: Scalars['String']['output'];
+    clickToSelect: Scalars['String']['output'];
     close: Scalars['String']['output'];
     delete: Scalars['String']['output'];
     details: Scalars['String']['output'];
@@ -993,6 +994,7 @@ export type ComponentLabelsActionsInput = {
     apply?: InputMaybe<Scalars['String']['input']>;
     cancel?: InputMaybe<Scalars['String']['input']>;
     clear?: InputMaybe<Scalars['String']['input']>;
+    clickToSelect?: InputMaybe<Scalars['String']['input']>;
     close?: InputMaybe<Scalars['String']['input']>;
     delete?: InputMaybe<Scalars['String']['input']>;
     details?: InputMaybe<Scalars['String']['input']>;
@@ -5328,6 +5330,7 @@ export type ComponentLabelsActionsResolvers<
     apply?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     cancel?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     clear?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    clickToSelect?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     close?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     delete?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     details?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -7300,7 +7303,6 @@ export type GetArticlesQueryVariables = Exact<{
     locale: Scalars['I18NLocaleCode']['input'];
     slugs?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>>;
     categories?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>>;
-    title?: InputMaybe<Scalars['String']['input']>;
     dateFrom?: InputMaybe<Scalars['DateTime']['input']>;
     dateTo?: InputMaybe<Scalars['DateTime']['input']>;
     limit?: InputMaybe<Scalars['Int']['input']>;
@@ -9111,6 +9113,7 @@ export type GetComponentQuery = {
             renew: string;
             details: string;
             reorder: string;
+            clickToSelect: string;
         };
         errors: { requestError: { title: string; content: string } };
     };
@@ -10401,7 +10404,6 @@ export const GetArticlesDocument = gql`
         $locale: I18NLocaleCode!
         $slugs: [String]
         $categories: [String]
-        $title: String
         $dateFrom: DateTime
         $dateTo: DateTime
         $limit: Int
@@ -10417,7 +10419,6 @@ export const GetArticlesDocument = gql`
             filters: {
                 slug: { in: $slugs }
                 categories: { slug: { in: $categories } }
-                SEO: { title: { contains: $title } }
                 updatedAt: { gte: $dateFrom, lte: $dateTo }
             }
             pagination: { limit: $limit, start: $offset }
@@ -10557,6 +10558,7 @@ export const GetComponentDocument = gql`
                 renew
                 details
                 reorder
+                clickToSelect
             }
             errors {
                 requestError {
