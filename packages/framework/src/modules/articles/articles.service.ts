@@ -11,8 +11,7 @@ export abstract class ArticlesService {
     abstract getCategoryList(options: Articles.Request.GetCategoryListQuery): Observable<Articles.Model.Categories>;
 
     abstract getArticle(options: Articles.Request.GetArticleParams): Observable<Articles.Model.Article>;
-    abstract getArticleList(
-        options: Articles.Request.GetArticleListQuery,
-        body: Articles.Request.GetArticleListBody,
-    ): Observable<Articles.Model.Articles>;
+    abstract getArticleList(options: Articles.Request.GetArticleListQuery): Observable<Articles.Model.Articles>;
+
+    abstract searchArticles(options: Articles.Request.SearchArticlesBody): Observable<Articles.Model.Articles>;
 }

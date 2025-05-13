@@ -19,18 +19,15 @@ export class GetArticleParams {
 }
 
 export class GetArticleListQuery extends PaginationQuery {
-    title?: string;
-    dateFrom?: Date;
-    dateTo?: Date;
     locale!: string;
-}
-
-export class GetArticleListBody {
-    query?: string;
     ids?: string[];
     category?: string;
-    sort?: {
-        field: string;
-        order: 'asc' | 'desc';
-    };
+    dateFrom?: Date;
+    dateTo?: Date;
+    sortBy?: string;
+    sortOrder?: 'asc' | 'desc';
+}
+
+export class SearchArticlesBody extends GetArticleListQuery {
+    query?: string;
 }

@@ -80,20 +80,16 @@ export class ArticlesService implements Articles.Service {
         );
     }
 
-    getArticleList(
-        options: Articles.Request.GetArticleListQuery,
-        body: Articles.Request.GetArticleListBody,
-    ): Observable<Articles.Model.Articles> {
+    getArticleList(options: Articles.Request.GetArticleListQuery): Observable<Articles.Model.Articles> {
         const articles = this.graphqlService.getArticles({
             locale: options.locale,
-            slugs: body.ids?.length ? body.ids : undefined,
-            categories: body.category ? [body.category] : undefined,
-            title: options.title,
+            slugs: options.ids?.length ? options.ids : undefined,
+            categories: options.category ? [options.category] : undefined,
             dateFrom: options.dateFrom,
             dateTo: options.dateTo,
             offset: options.offset,
             limit: options.limit,
-            sort: body.sort ? [`${body.sort.field}:${body.sort.order}`] : undefined,
+            sort: options.sortBy ? [`${options.sortBy}:${options.sortOrder || 'desc'}`] : undefined,
         });
 
         return forkJoin([articles]).pipe(
@@ -107,20 +103,24 @@ export class ArticlesService implements Articles.Service {
         );
     }
 
-    searchArticles(
-        options: Articles.Request.GetArticleListQuery,
-        body: Articles.Request.GetArticleListBody,
-    ): Observable<Articles.Model.Articles> {
+    searchArticles(options: Articles.Request.SearchArticlesBody): Observable<Articles.Model.Articles> {
         const searchPayload: Search.Model.SearchPayload = {
-            query: body?.query,
-            exact: body?.category
+            query: options.query,
+            exact: options.category
                 ? {
-                      category: body.category,
+                      category: options.category,
                   }
                 : undefined,
             hitsPerPage: options.limit,
             page: options.offset,
-            sort: body?.sort ? [body.sort] : undefined,
+            sort: options.sortBy
+                ? [
+                      {
+                          field: options.sortBy,
+                          order: options.sortOrder || 'desc',
+                      },
+                  ]
+                : undefined,
             pagination: {
                 offset: options.offset,
                 limit: options.limit,
