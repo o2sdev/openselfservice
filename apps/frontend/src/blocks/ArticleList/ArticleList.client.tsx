@@ -1,29 +1,28 @@
 import React from 'react';
 
-import { Link } from '@o2s/ui/components/link';
-import { Typography } from '@o2s/ui/components/typography';
-
-import { Link as NextLink } from '@/i18n';
+import { BlogCard } from '@/components/BlogCard/BlogCard';
+import { ContentSection } from '@/components/ContentSection/ContentSection';
 
 import { ArticleListPureProps } from './ArticleList.types';
 
-export const ArticleListPure: React.FC<ArticleListPureProps> = ({ ...component }) => {
+export const ArticleListPure: React.FC<Readonly<ArticleListPureProps>> = ({ ...component }) => {
     return (
-        <div className="w-full flex flex-col gap-4">
-            <div className="border p-4">
-                {component.__typename}: {component.id}
-                <Typography>{component.title}</Typography>
-                <Typography>{component.description}</Typography>
-                <ul>
-                    {component.items.data.map((item) => (
-                        <li key={item.id}>
-                            <Link asChild>
-                                <NextLink href={item.slug}>{item.title}</NextLink>
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        </div>
+        <ContentSection title={component.title} description={component.description}>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
+                {component.items.data.map((item) => (
+                    <li key={item.id} className="w-full">
+                        <BlogCard
+                            title={item.title}
+                            lead={item.lead}
+                            image={item.image}
+                            url={item.slug}
+                            date={item.createdAt}
+                            author={item.author}
+                            categoryTitle={item.category.title}
+                        />
+                    </li>
+                ))}
+            </ul>
+        </ContentSection>
     );
 };

@@ -61,7 +61,7 @@ You can track the status of your repair by visiting "Track Repairs" in the Devic
     banner: {
         title: 'Still have questions?',
         description: 'If you have further questions or need assistance, our customer service team is here to help!',
-        button: { label: 'Contact us', url: '/' },
+        button: { label: 'Contact us', url: '/contact-us' },
     },
 };
 
@@ -127,7 +127,7 @@ Sie können den Status Ihrer Reparatur verfolgen, indem Sie "Reparaturen verfolg
         title: 'Noch Fragen?',
         description:
             'Wenn Sie weitere Fragen haben oder Hilfe benötigen, steht Ihnen unser Kundenservice-Team zur Verfügung!',
-        button: { label: 'Kontaktieren Sie uns', url: '/' },
+        button: { label: 'Kontaktieren Sie uns', url: '/kontaktiere-uns' },
     },
 };
 
@@ -193,7 +193,7 @@ Możesz śledzić status swojej naprawy, odwiedzając "Śledź naprawy" w sekcji
         title: 'Masz jeszcze pytania?',
         description:
             'Jeśli masz dodatkowe pytania lub potrzebujesz pomocy, nasz zespół obsługi klienta jest tutaj, aby pomóc!',
-        button: { label: 'Skontaktuj się z nami', url: '/' },
+        button: { label: 'Skontaktuj się z nami', url: '/skontaktuj-sie-z-nami' },
     },
 };
 

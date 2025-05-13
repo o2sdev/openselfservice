@@ -1,4 +1,4 @@
-import { SurveyResult } from './models/surveyjs.model';
+import { SurveyResult } from './surveyjs.model';
 
 export class SurveyJsQuery {
     code!: string;

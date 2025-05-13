@@ -4,7 +4,7 @@ import { CMS } from '@o2s/framework/modules';
 
 import { GetSurveyQuery } from '@/generated/strapi';
 
-export const mapSurveyBlock = (data: GetSurveyQuery): CMS.Model.SurveyBlock.SurveyBlock => {
+export const mapSurvey = (data: GetSurveyQuery): CMS.Model.Survey.Survey => {
     const survey = data.surveyJsForms[0];
 
     if (!survey) {
@@ -12,7 +12,6 @@ export const mapSurveyBlock = (data: GetSurveyQuery): CMS.Model.SurveyBlock.Surv
     }
 
     return {
-        id: survey.documentId,
         code: survey.code,
         surveyId: survey.surveyId,
         surveyType: survey.surveyType,

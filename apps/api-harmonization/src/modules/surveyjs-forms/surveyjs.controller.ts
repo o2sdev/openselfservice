@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
 
 import { URL } from './index';
-import { SurveyJs } from './models/surveyjs.model';
+import { SurveyJs } from './surveyjs.model';
 import { SurveyJsQuery, SurveyJsSubmitPayload } from './surveyjs.request';
 import { SurveyjsService } from './surveyjs.service';
 

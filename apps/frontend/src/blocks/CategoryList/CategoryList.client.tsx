@@ -1,29 +1,26 @@
 import React from 'react';
 
-import { Link } from '@o2s/ui/components/link';
-import { Typography } from '@o2s/ui/components/typography';
-
-import { Link as NextLink } from '@/i18n';
+import { ContentSection } from '@/components/ContentSection/ContentSection';
+import { InformativeCard } from '@/components/InformativeCard/InformativeCard';
 
 import { CategoryListPureProps } from './CategoryList.types';
 
-export const CategoryListPure: React.FC<CategoryListPureProps> = ({ ...component }) => {
+export const CategoryListPure: React.FC<Readonly<CategoryListPureProps>> = ({ ...component }) => {
     return (
-        <div className="w-full flex flex-col gap-4">
-            <div className="border p-4">
-                {component.__typename}: {component.id}
-                <Typography>{component.title}</Typography>
-                <Typography>{component.description}</Typography>
-                <ul>
-                    {component.items.map((item) => (
-                        <li key={item.id}>
-                            <Link asChild>
-                                <NextLink href={item.slug}>{item.title}</NextLink>
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        </div>
+        <ContentSection title={component.title} description={component.description}>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+                {component.items.map((item) => (
+                    <li key={item.id} className="w-full">
+                        <InformativeCard
+                            title={item.title}
+                            description={item.description}
+                            href={item.slug}
+                            iconUrl={item.icon?.url}
+                            iconSize="small"
+                        />
+                    </li>
+                ))}
+            </ul>
+        </ContentSection>
     );
 };

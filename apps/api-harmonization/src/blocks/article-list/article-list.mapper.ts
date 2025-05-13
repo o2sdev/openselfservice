@@ -1,3 +1,5 @@
+import { formatDateRelative } from '@o2s/api-harmonization/utils/date';
+
 import { Articles, CMS } from '../../models';
 
 import { ArticleListBlock } from './article-list.model';
@@ -5,13 +7,29 @@ import { ArticleListBlock } from './article-list.model';
 export const mapArticleList = (
     cms: CMS.Model.ArticleListBlock.ArticleListBlock,
     articles: Articles.Model.Articles,
-    _locale: string,
+
+    locale: string,
 ): ArticleListBlock => {
     return {
         __typename: 'ArticleListBlock',
         id: cms.id,
         title: cms.title,
         description: cms.description,
-        items: articles,
+        items: {
+            ...articles,
+            data: articles.data.map((article: Articles.Model.Article) => mapArticle(article, cms, locale)),
+        },
+    };
+};
+
+const mapArticle = (
+    article: Articles.Model.Article,
+    cms: CMS.Model.ArticleListBlock.ArticleListBlock,
+    locale: string,
+) => {
+    return {
+        ...article,
+        createdAt: formatDateRelative(article.createdAt, locale, cms.labels.today, cms.labels.yesterday),
+        updatedAt: formatDateRelative(article.updatedAt, locale, cms.labels.today, cms.labels.yesterday),
     };
 };

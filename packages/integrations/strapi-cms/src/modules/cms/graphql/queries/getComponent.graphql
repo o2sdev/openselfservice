@@ -36,6 +36,12 @@ query getComponent($id: ID!, $locale: I18NLocaleCode!) {
             ... on ComponentComponentsTicketRecent {
                 ...TicketRecentComponent
             }
+            ... on ComponentComponentsSurveyJsComponent {
+                ...SurveyjsComponent
+            }
+            ... on ComponentComponentsOrderList {
+                ...OrderListComponent
+            }
         }
     }
     configurableTexts(locale: $locale) {
@@ -56,6 +62,7 @@ query getComponent($id: ID!, $locale: I18NLocaleCode!) {
             settings
             renew
             details
+            reorder
         }
         errors {
             requestError {

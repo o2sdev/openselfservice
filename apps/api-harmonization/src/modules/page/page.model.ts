@@ -10,11 +10,14 @@ import {
     InvoiceList,
     NotificationDetails,
     NotificationList,
+    OrderList,
+    OrdersSummary,
     PaymentsHistory,
     PaymentsSummary,
     QuickLinks,
     ServiceDetails,
     ServiceList,
+    Surveyjs,
     TicketDetails,
     TicketList,
     TicketRecent,
@@ -81,5 +84,8 @@ export type Blocks =
     | TicketRecent.Model.TicketRecentBlock['__typename']
     | ServiceList.Model.ServiceListBlock['__typename']
     | ServiceDetails.Model.ServiceDetailsBlock['__typename']
+    | Surveyjs.Model.SurveyjsBlock['__typename']
+    | OrderList.Model.OrderListBlock['__typename']
+    | OrdersSummary.Model.OrdersSummaryBlock['__typename']
     | QuickLinks.Model.QuickLinksBlock['__typename']
     | CategoryList.Model.CategoryListBlock['__typename'];

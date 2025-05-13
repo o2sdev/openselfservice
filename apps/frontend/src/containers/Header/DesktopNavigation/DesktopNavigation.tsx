@@ -40,10 +40,10 @@ export function DesktopNavigation({
               if (item.__typename === 'NavigationGroup') {
                   return item.items
                       .filter((item) => item.__typename === 'NavigationItem')
-                      .some((item) => item.url === pathname);
+                      .some((item) => item.url && pathname.includes(item.url) && item.url !== '/');
               }
 
-              return item.url === pathname;
+              return item.url && pathname.includes(item.url) && item.url !== '/';
           }) || items[0]
         : undefined;
 

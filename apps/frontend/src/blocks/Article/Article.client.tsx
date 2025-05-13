@@ -1,71 +1,79 @@
 import React from 'react';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@o2s/ui/components/avatar';
+import { Separator } from '@o2s/ui/components/separator';
 import { Typography } from '@o2s/ui/components/typography';
+import { cn } from '@o2s/ui/lib/utils';
 
+import { Author } from '@/components/Author/Author';
 import { Container } from '@/components/Container/Container';
 import { Image } from '@/components/Image/Image';
 import { RichText } from '@/components/RichText/RichText';
 
 import { ArticlePureProps } from './Article.types';
 
-export const ArticlePure: React.FC<ArticlePureProps> = ({ ...component }) => {
+export const ArticlePure: React.FC<Readonly<ArticlePureProps>> = ({ ...component }) => {
     const {
         data: { author, createdAt, sections },
     } = component;
-
     return (
-        <div className="w-full flex flex-col gap-4">
-            {component.__typename}: {component.id}
-            <a href="https://markdown-it.github.io/">https://markdown-it.github.io/</a>
-            <div className="border p-4">
-                {author && (
-                    // the same avatar as on the ticket detailsp page - let's extract it to a component
-                    <div className="flex items-center gap-2">
-                        <Avatar>
-                            <AvatarImage src={author.avatar} />
-                            <AvatarFallback name={author.name} />
-                        </Avatar>
-                        <div className="flex flex-col gap-1">
-                            <Typography variant="subtitle">{author.name}</Typography>
-                            <Typography variant="small" className="text-muted-foreground">
-                                {author.position}
-                            </Typography>
-                        </div>
-                    </div>
-                )}
+        <div className="w-full flex flex-col gap-6">
+            <div className="flex flex-col gap-2">
+                <Typography variant="h1" asChild>
+                    <h1>{component.data.title}</h1>
+                </Typography>
+                {author && <Author name={author.name} avatar={author.avatar} position={author.position} />}
+                <Typography variant="p">{createdAt}</Typography>
+            </div>
+            <Separator />
 
-                {createdAt}
-
-                <Container variant="narrow">
-                    <ul className="flex flex-col gap-4">
-                        {sections.map((section) => {
-                            switch (section.__typename) {
-                                case 'ArticleSectionText':
-                                    return (
-                                        <li key={section.id} className="border p-4">
-                                            <Typography variant="h2">{section.__typename}</Typography>
-                                            <RichText content={section.content} />
-                                        </li>
-                                    );
-                                case 'ArticleSectionImage':
-                                    return (
-                                        <li key={section.id} className="border p-4">
-                                            <Typography variant="h2">{section.__typename}</Typography>
+            <Container variant="narrow">
+                <ul className="flex flex-col gap-20">
+                    {sections.map((section, index) => {
+                        switch (section.__typename) {
+                            case 'ArticleSectionText':
+                                return (
+                                    <li
+                                        key={`${section.id}-text`}
+                                        className={cn(
+                                            'flex flex-col gap-6',
+                                            index > 0 && 'pt-20 border-t border-t-border ',
+                                        )}
+                                    >
+                                        <Typography variant="h2" asChild>
+                                            <h2>{section.title}</h2>
+                                        </Typography>
+                                        <RichText content={section.content} startingHeadingLevel={3} />
+                                    </li>
+                                );
+                            case 'ArticleSectionImage':
+                                return (
+                                    <li
+                                        key={`${section.id}-img`}
+                                        className={cn(
+                                            'flex flex-col gap-4',
+                                            index > 0 && 'pt-20 border-t border-t-border ',
+                                        )}
+                                    >
+                                        <div className="relative overflow-hidden max-w-fit mx-auto">
                                             <Image
                                                 src={section.image.url}
                                                 alt={section.image.alt}
                                                 width={section.image.width}
                                                 height={section.image.height}
+                                                className="w-full h-auto object-cover"
                                             />
-                                            <Typography>{section.caption}</Typography>
-                                        </li>
-                                    );
-                            }
-                        })}
-                    </ul>
-                </Container>
-            </div>
+                                        </div>
+                                        {section.caption && (
+                                            <Typography variant="small" className="text-muted-foreground text-center">
+                                                {section.caption}
+                                            </Typography>
+                                        )}
+                                    </li>
+                                );
+                        }
+                    })}
+                </ul>
+            </Container>
         </div>
     );
 };
