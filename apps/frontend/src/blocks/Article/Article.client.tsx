@@ -40,11 +40,9 @@ export const ArticlePure: React.FC<Readonly<ArticlePureProps>> = ({ ...component
                                         )}
                                     >
                                         <Typography variant="h2" asChild>
-                                            <h2>
-                                                {section.title} {index}
-                                            </h2>
+                                            <h2>{section.title}</h2>
                                         </Typography>
-                                        <RichText content={section.content} increaseHeadingLevels={true} />
+                                        <RichText content={section.content} startingHeadingLevel={3} />
                                     </li>
                                 );
                             case 'ArticleSectionImage':

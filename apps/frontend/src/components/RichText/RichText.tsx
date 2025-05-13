@@ -33,7 +33,7 @@ export const RichText: FC<Readonly<RichTextProps>> = ({
     content,
     baseFontSize = 'body',
     className,
-    increaseHeadingLevels = false,
+    startingHeadingLevel = 1,
 }) => {
     if (!content) {
         return null;
@@ -42,27 +42,35 @@ export const RichText: FC<Readonly<RichTextProps>> = ({
     const baseFontSizeClass = baseFontSize === 'body' ? 'text-base md:text-base' : 'text-sm md:text-sm';
 
     const getHeadingProps = (level: number) => {
-        const adjustedLevel = increaseHeadingLevels ? Math.min(level + 1, 4) : level;
+        const adjustedLevel = startingHeadingLevel === 1 ? level : level + (startingHeadingLevel - 1);
 
         const marginClass = {
             1: 'mt-12',
             2: 'mt-10',
             3: 'mt-8',
             4: 'mt-6',
-        }[level];
+        }[adjustedLevel];
 
-        if (adjustedLevel === 4) {
+        if (adjustedLevel === 5) {
             return {
                 variant: 'subtitle',
                 tag: 'p',
-                className: cn('font-semibold', marginClass, className),
+                className: cn('mt-6', className),
+            };
+        }
+
+        if (adjustedLevel >= 6) {
+            return {
+                variant: 'body',
+                tag: 'p',
+                className: cn('mt-6', className),
             };
         }
 
         return {
             variant: `h${adjustedLevel}` as const,
             tag: `h${adjustedLevel}` as const,
-            className: cn(marginClass, adjustedLevel === 2 ? 'pb-2 border-b border-border' : '', className),
+            className: cn(marginClass, className),
         };
     };
 
@@ -73,27 +81,27 @@ export const RichText: FC<Readonly<RichTextProps>> = ({
                 className: `${baseFontSizeClass} text-foreground hover:text-primary underline`,
             },
         },
-        h1: {
-            component: TypographyComp,
-            props: getHeadingProps(1),
-        },
-        h2: {
-            component: TypographyComp,
-            props: getHeadingProps(2),
-        },
-        h3: {
-            component: TypographyComp,
-            props: getHeadingProps(3),
-        },
-        h4: {
-            component: TypographyComp,
-            props: getHeadingProps(4),
-        },
+        ...Object.fromEntries(
+            Array.from({ length: 6 }, (_, i) => i + 1).map((level) => [
+                `h${level}`,
+                {
+                    component: TypographyComp,
+                    props: getHeadingProps(level),
+                },
+            ]),
+        ),
         p: {
             component: TypographyComp,
             props: {
                 variant: baseFontSize,
                 className: cn('[&:not(:first-child)]:mt-6', className),
+            },
+        },
+        subtitle: {
+            component: TypographyComp,
+            props: {
+                variant: 'subtitle',
+                className: cn(baseFontSize, className),
             },
         },
         blockquote: {
@@ -123,25 +131,25 @@ export const RichText: FC<Readonly<RichTextProps>> = ({
         ul: {
             component: TypographyComp,
             props: {
-                variant: baseFontSize,
+                variant: 'list',
                 tag: 'ul',
-                className: cn('list-disc list-outside mt-6 mb-6 pl-10 first:mt-0 last:mb-0', className),
+                className: cn('first:mt-0 last:mb-0', className),
             },
         },
         li: {
             component: TypographyComp,
             props: {
-                variant: baseFontSize,
+                variant: 'listItem',
                 tag: 'li',
-                className: cn('mt-2 ml-2', className),
+                className: cn('marker:text-primary', className),
             },
         },
         ol: {
             component: TypographyComp,
             props: {
-                variant: baseFontSize,
+                variant: 'listOrdered',
                 tag: 'ol',
-                className: cn('list-decimal list-inside mt-6 mb-6 first:mt-0 last:mb-0', className),
+                className: cn('first:mt-0 last:mb-0', className),
             },
         },
         hr: {

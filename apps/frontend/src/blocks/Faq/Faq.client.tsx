@@ -15,6 +15,7 @@ import { FaqPureProps } from './Faq.types';
 
 export const FaqPure: React.FC<FaqPureProps> = ({ ...component }) => {
     const { title, subtitle, items, banner } = component;
+
     return (
         <Container variant="narrow">
             <div className="w-full flex flex-col gap-6">

@@ -35,7 +35,10 @@ export const mapCategoryArticles = (
     _locale: string,
 ): CategoryArticles => {
     return {
-        data: articles.data.map((article) => mapArticle(article, cms, _locale)),
+        items: {
+            ...articles,
+            data: articles.data.map((article) => mapArticle(article, cms, _locale)),
+        },
     };
 };
 

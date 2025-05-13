@@ -26,17 +26,19 @@ export const BlogCard: React.FC<Readonly<BlogCardProps>> = ({
         >
             <NextLink href={url} aria-label={title}>
                 <div className="flex flex-col gap-6">
-                    <div className="relative overflow-hidden max-h-[164px] flex-shrink-0 rounded-xl w-full">
-                        {image?.url && (
-                            <Image
-                                src={image?.url}
-                                alt={image?.alt}
-                                width={image?.width}
-                                height={image?.height}
-                                className="object-cover object-center max-h-[164px] max-w-full"
-                            />
-                        )}
-                    </div>
+                    {image && (
+                        <div className="relative overflow-hidden max-h-[164px] flex-shrink-0 rounded-xl w-full">
+                            {image?.url && (
+                                <Image
+                                    src={image.url}
+                                    alt={image.alt}
+                                    width={image.width}
+                                    height={image.height}
+                                    className="object-cover object-center max-h-[164px] max-w-full"
+                                />
+                            )}
+                        </div>
+                    )}
                     <div className="flex flex-col gap-2">
                         <Typography variant="body" className="flex flex-row gap-2 text-muted-foreground items-center">
                             <span>{date}</span>

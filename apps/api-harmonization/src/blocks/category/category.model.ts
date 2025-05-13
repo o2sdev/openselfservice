@@ -19,5 +19,8 @@ class CategoryArticlesListBlock {
 }
 
 export class CategoryArticles {
-    data!: Omit<Articles.Model.Article, 'sections'>[];
+    items!: {
+        total: Articles.Model.Articles['total'];
+        data: Omit<Articles.Model.Article, 'sections'>[];
+    };
 }

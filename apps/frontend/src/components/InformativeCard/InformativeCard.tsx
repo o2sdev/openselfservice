@@ -18,6 +18,9 @@ const InformativeCardContent: React.FC<Readonly<InformativeCardProps>> = ({
     href,
     lineClamp,
 }) => {
+    if (!iconUrl && !title && !description) {
+        return null;
+    }
     return (
         <div className="flex flex-row w-full gap-2 p-6 items-end justify-between">
             <div className="flex flex-col gap-2 flex-grow">
