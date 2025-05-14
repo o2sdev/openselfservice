@@ -35,6 +35,7 @@ export const Filters = <T, S extends FormikValues>({
     onSubmit,
     onReset,
     hasLeadingItem,
+    labels,
 }: Readonly<FiltersProps<T, S>>) => {
     const [filtersOpen, setFiltersOpen] = useState(false);
     const { activeFilters, countActiveFilters, initialFilters } = useFiltersContext();
@@ -77,6 +78,7 @@ export const Filters = <T, S extends FormikValues>({
                                             submitForm={submitForm}
                                             setFieldValue={setFieldValue}
                                             isLeading={true}
+                                            labels={labels}
                                         />
                                     </ScrollContainer>
                                 </div>
@@ -118,6 +120,7 @@ export const Filters = <T, S extends FormikValues>({
                                                 item={item}
                                                 setFieldValue={setFieldValue}
                                                 submitForm={submitForm}
+                                                labels={labels}
                                             />
                                         ))}
                                     </div>

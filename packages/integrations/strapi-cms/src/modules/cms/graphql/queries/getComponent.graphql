@@ -75,6 +75,7 @@ query getComponent($id: ID!, $locale: I18NLocaleCode!) {
             renew
             details
             reorder
+            clickToSelect
         }
         errors {
             requestError {

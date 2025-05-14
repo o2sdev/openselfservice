@@ -124,6 +124,7 @@ const MOCK_NOTIFICATION_LIST_BLOCK_EN: CMS.Model.NotificationListBlock.Notificat
     labels: {
         today: 'Today',
         yesterday: 'Yesterday',
+        clickToSelect: 'Click to select',
     },
     detailsUrl: '/notifications/:id',
 };
@@ -252,6 +253,7 @@ const MOCK_NOTIFICATION_LIST_BLOCK_DE: CMS.Model.NotificationListBlock.Notificat
     labels: {
         today: 'Heute',
         yesterday: 'Gestern',
+        clickToSelect: 'Klicken Sie, um auszuwählen',
     },
     detailsUrl: '/benachrichtigungen/:id',
 };
@@ -380,6 +382,7 @@ const MOCK_NOTIFICATION_LIST_BLOCK_PL: CMS.Model.NotificationListBlock.Notificat
     labels: {
         today: 'Dzisiaj',
         yesterday: 'Wczoraj',
+        clickToSelect: 'Kliknij, aby wybrać',
     },
     detailsUrl: '/powiadomienia/:id',
 };

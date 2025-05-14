@@ -21,6 +21,7 @@ export class TicketListBlock extends Block.Block {
     };
     labels!: {
         showMore: string;
+        clickToSelect: string;
     };
 }
 

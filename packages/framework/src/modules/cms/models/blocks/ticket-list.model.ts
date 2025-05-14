@@ -24,6 +24,7 @@ export class TicketListBlock extends Block.Block {
         today: string;
         yesterday: string;
         showMore: string;
+        clickToSelect: string;
     };
     detailsUrl!: string;
     actionLinks?: ActionLink[];
