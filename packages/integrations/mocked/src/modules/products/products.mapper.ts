@@ -357,3 +357,10 @@ export const mapProducts = (options: Products.Request.GetProductListQuery): Prod
         total: filteredProducts.length,
     };
 };
+
+export const mapRelatedProducts = (_options: Products.Request.GetRelatedProductListParams): Products.Model.Products => {
+    return {
+        data: MOCK_PRODUCTS,
+        total: MOCK_PRODUCTS.length,
+    };
+};
