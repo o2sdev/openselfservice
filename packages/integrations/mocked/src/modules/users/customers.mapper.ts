@@ -26,7 +26,7 @@ const MOCK_CUSTOMER_1: Models.Customer.Customer = {
 };
 
 const MOCK_CUSTOMER_2: Models.Customer.Customer = {
-    id: 'cus_01JS1JBXAPK2BTV504ASWVFC4S',
+    id: 'cust-002',
     name: 'Tech Solutions Inc',
     clientType: 'B2B',
     address: {
@@ -48,7 +48,7 @@ const MOCK_CUSTOMER_2: Models.Customer.Customer = {
 };
 
 const MOCK_CUSTOMER_3: Models.Customer.Customer = {
-    id: 'cus_01JDHDFV0KYFC6VJK4GRDRBTS9',
+    id: 'cust-003',
     name: 'Digital Services GmbH',
     clientType: 'B2C',
     address: {
