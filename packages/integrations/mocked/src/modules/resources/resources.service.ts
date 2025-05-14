@@ -1,13 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { Observable, of } from 'rxjs';
 
-import { Resources } from '@o2s/framework/modules';
+import { Products, Resources } from '@o2s/framework/modules';
 
-import { mapAsset, mapAssets, mapService, mapServices } from './resources.mapper';
+import { mapAsset, mapAssets, mapCompatibleServices, mapService, mapServices } from './resources.mapper';
 import { responseDelay } from '@/utils/delay';
 
 @Injectable()
 export class ResourcesService implements Resources.Service {
+    purchaseOrActivateService(_params: Resources.Request.GetServiceParams): Observable<void> {
+        throw new Error('Method not implemented.');
+    }
+
     purchaseOrActivateResource(_params: Resources.Request.GetResourceParams): Observable<void> {
         throw new Error('Method not implemented');
     }
@@ -29,5 +33,9 @@ export class ResourcesService implements Resources.Service {
 
     getAsset(params: Resources.Request.GetAssetParams): Observable<Resources.Model.Asset> {
         return of(mapAsset(params.id)).pipe(responseDelay());
+    }
+
+    getCompatibleServiceList(params: Resources.Request.GetAssetParams): Observable<Products.Model.Products> {
+        return of(mapCompatibleServices(params)).pipe(responseDelay());
     }
 }
