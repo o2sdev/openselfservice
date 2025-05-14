@@ -1,8 +1,9 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
-import { CategoryBlocks } from 'src/blocks/Category/CategoryBlocks';
 
 import { sdk } from '@/api/sdk';
+
+import { CategoryBlocks } from '@/blocks/Category/CategoryBlocks';
 
 import { CategoryProps } from './Category.types';
 

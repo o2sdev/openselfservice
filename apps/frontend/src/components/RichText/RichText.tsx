@@ -29,6 +29,21 @@ const TypographyComp: FC<Readonly<TypographyProps & { children: ReactNode; tag: 
     );
 };
 
+const TdComp: FC<Readonly<TypographyProps & { children: ReactNode }>> = ({
+    children,
+    ...props
+}: {
+    children: ReactNode;
+    'data-highlighted'?: boolean;
+}) => {
+    const variant = props['data-highlighted'] ? 'tableCellHighlighted' : 'tableCell';
+    return (
+        <TypographyComp variant={variant} tag="td" {...props}>
+            {children}
+        </TypographyComp>
+    );
+};
+
 export const RichText: FC<Readonly<RichTextProps>> = ({
     content,
     baseFontSize = 'body',
@@ -212,14 +227,7 @@ export const RichText: FC<Readonly<RichTextProps>> = ({
             },
         },
         td: {
-            component: ({ children, ...props }: { children: ReactNode; 'data-highlighted'?: boolean }) => {
-                const variant = props['data-highlighted'] ? 'tableCellHighlighted' : 'tableCell';
-                return (
-                    <TypographyComp variant={variant} tag="td" {...props}>
-                        {children}
-                    </TypographyComp>
-                );
-            },
+            component: TdComp,
         },
     };
 
