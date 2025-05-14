@@ -1,0 +1,60 @@
+fragment Article on ComponentComponentsArticle {
+    id
+    __typename
+    author {
+        name
+        position
+        avatar {
+            ...Media
+        }
+    }
+    category {
+        documentId
+        slug
+        name
+    }
+    sections {
+        id
+        __typename
+        title
+        content
+    }
+}
+
+fragment ArticleSimple on ComponentComponentsArticle {
+    id
+    __typename
+    author {
+        name
+        position
+        avatar {
+            ...Media
+        }
+    }
+    category {
+        documentId
+        slug
+        name
+    }
+}
+
+fragment ArticleTemplate on Page {
+    ...Page
+    article: template {
+        __typename
+        ... on ComponentTemplatesOneColumn {
+            mainSlot {
+                __typename
+                ... on Component {
+                    __typename
+                    content {
+                        __typename
+                        ... on ComponentComponentsArticle {
+                            ...ArticleSimple
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

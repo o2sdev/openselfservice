@@ -4,6 +4,9 @@ import { GraphQLClient } from 'graphql-request';
 
 import {
     GetAppConfigQueryVariables,
+    GetArticleQueryVariables,
+    GetArticlesQueryVariables,
+    GetCategoriesQueryVariables,
     GetComponentQueryVariables,
     GetFooterQueryVariables,
     GetHeaderQueryVariables,
@@ -70,5 +73,17 @@ export class GraphqlService {
 
     public getSurvey(params: GetSurveyQueryVariables) {
         return this.sdk.getSurvey(params);
+    }
+
+    public getCategories(params: GetCategoriesQueryVariables) {
+        return this.sdk.getCategories(params);
+    }
+
+    public getArticle(params: GetArticleQueryVariables) {
+        return this.sdk.getArticle(params);
+    }
+
+    public getArticles(params: GetArticlesQueryVariables) {
+        return this.sdk.getArticles(params);
     }
 }

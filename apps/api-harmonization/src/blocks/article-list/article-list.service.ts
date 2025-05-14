@@ -22,7 +22,12 @@ export class ArticleListService {
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {
                 return this.articlesService
-                    .getArticleList({ limit: 10, locale: headers['x-locale'] }, { category: cms.categoryId })
+                    .getArticleList({
+                        limit: 10,
+                        locale: headers['x-locale'],
+                        ids: cms.articleIds,
+                        category: cms.categoryId,
+                    })
                     .pipe(map((articles) => mapArticleList(cms, articles, headers['x-locale'])));
             }),
         );

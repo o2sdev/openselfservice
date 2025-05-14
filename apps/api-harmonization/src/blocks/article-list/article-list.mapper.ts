@@ -17,13 +17,13 @@ export const mapArticleList = (
         description: cms.description,
         items: {
             ...articles,
-            data: articles.data.map((article: Articles.Model.Article) => mapArticle(article, cms, locale)),
+            data: articles.data.map((article) => mapArticle(article, cms, locale)),
         },
     };
 };
 
 const mapArticle = (
-    article: Articles.Model.Article,
+    article: Omit<Articles.Model.Article, 'sections'>,
     cms: CMS.Model.ArticleListBlock.ArticleListBlock,
     locale: string,
 ) => {

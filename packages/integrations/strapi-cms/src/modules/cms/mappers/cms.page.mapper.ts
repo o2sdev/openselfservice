@@ -15,6 +15,7 @@ export const mapPage = (data: PageFragment): CMS.Model.Page.Page => {
         locale: data.locale!,
         template: template,
         updatedAt: data.updatedAt,
+        createdAt: data.createdAt,
         seo: {
             title: data.SEO!.title,
             noIndex: data.SEO!.noIndex,
@@ -61,6 +62,7 @@ export const mapAlternativePages = (data: PageFragment): CMS.Model.Page.Page => 
         locale: data.locale!,
         template: template,
         updatedAt: data.updatedAt,
+        createdAt: data.createdAt,
         seo: {
             title: data.SEO!.title,
             noIndex: data.SEO!.noIndex,
@@ -122,7 +124,7 @@ const mapTemplate = (template?: TemplateFragment): CMS.Model.Page.PageTemplate =
     throw new NotFoundException();
 };
 
-const mapSlot = (slot: ComponentFragment[]): CMS.Model.Page.SlotBlock[] => {
+export const mapSlot = (slot: ComponentFragment[]): CMS.Model.Page.SlotBlock[] => {
     return slot.reduce((acc, component) => {
         const __typename = mapComponent(component);
 
@@ -169,5 +171,15 @@ const mapComponent = (component: ComponentFragment) => {
             return 'SurveyJsBlock';
         case 'ComponentComponentsOrderList':
             return 'OrderListBlock';
+        case 'ComponentComponentsQuickLinks':
+            return 'QuickLinksBlock';
+        case 'ComponentComponentsCategoryList':
+            return 'CategoryListBlock';
+        case 'ComponentComponentsArticleList':
+            return 'ArticleListBlock';
+        case 'ComponentComponentsCategory':
+            return 'CategoryBlock';
+        case 'ComponentComponentsArticle':
+            return 'ArticleBlock';
     }
 };

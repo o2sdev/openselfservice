@@ -5,6 +5,7 @@ export class Page {
     slug!: string;
     locale!: string;
     template!: PageTemplate;
+    createdAt!: string;
     updatedAt!: string;
     seo!: Models.SEO.Page;
     hasOwnTitle!: boolean;

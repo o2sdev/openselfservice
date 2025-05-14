@@ -8,6 +8,9 @@ import { Observable, concatMap, forkJoin, from, map, mergeMap, of } from 'rxjs';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { CMS, Cache, Models } from '@o2s/framework/modules';
 
+import { mapArticleListBlock } from './mappers/blocks/cms.article-list.mapper';
+import { mapCategoryListBlock } from './mappers/blocks/cms.category-list.mapper';
+import { mapCategoryBlock } from './mappers/blocks/cms.category.mapper';
 import { mapFaqBlock } from './mappers/blocks/cms.faq.mapper';
 import { mapInvoiceDetailsBlock } from './mappers/blocks/cms.invoice-details.mapper';
 import { mapInvoiceListBlock } from './mappers/blocks/cms.invoice-list.mapper';
@@ -16,6 +19,7 @@ import { mapNotificationListBlock } from './mappers/blocks/cms.notification-list
 import { mapOrderListBlock } from './mappers/blocks/cms.order-list.mapper';
 import { mapPaymentsHistoryBlock } from './mappers/blocks/cms.payments-history.mapper';
 import { mapPaymentsSummaryBlock } from './mappers/blocks/cms.payments-summary.mapper';
+import { mapQuickLinksBlock } from './mappers/blocks/cms.quick-links.mapper';
 import { mapResourceDetailsBlock } from './mappers/blocks/cms.resource-details.mapper';
 import { mapResourceListBlock } from './mappers/blocks/cms.resource-list.mapper';
 import { mapServiceDetailsBlock } from './mappers/blocks/cms.service-details.mapper';
@@ -38,11 +42,15 @@ import { Service as GraphqlService } from '@/modules/graphql';
 
 @Injectable()
 export class CmsService implements CMS.Service {
+    baseUrl: string;
+
     constructor(
         private readonly graphqlService: GraphqlService,
         private readonly config: ConfigService,
         private readonly cacheService: Cache.Service,
-    ) {}
+    ) {
+        this.baseUrl = this.config.get('CMS_STRAPI_BASE_URL')!;
+    }
 
     private getBlock = (options: CMS.Request.GetCmsEntryParams) => {
         const key = `component-${options.id}-${options.locale}`;
@@ -76,7 +84,6 @@ export class CmsService implements CMS.Service {
         return from(this.cacheService.get(key)).pipe(
             mergeMap((cachedData) => {
                 if (cachedData) {
-                    console.log('cachedData', cachedData);
                     return of(parse(cachedData));
                 }
                 return getData().pipe(
@@ -202,7 +209,7 @@ export class CmsService implements CMS.Service {
                         throw new NotFoundException();
                     }
 
-                    return mapLoginPage(loginPage.data, this.config.get('CMS_STRAPI_BASE_URL'));
+                    return mapLoginPage(loginPage.data, this.baseUrl);
                 }),
             );
         });
@@ -241,7 +248,7 @@ export class CmsService implements CMS.Service {
                         throw new NotFoundException();
                     }
 
-                    return mapHeader(header.data, this.config.get('CMS_STRAPI_BASE_URL'));
+                    return mapHeader(header.data, this.baseUrl);
                 }),
             );
         });
@@ -261,7 +268,7 @@ export class CmsService implements CMS.Service {
                         throw new NotFoundException();
                     }
 
-                    return mapFooter(footer.data, this.config.get('CMS_STRAPI_BASE_URL'));
+                    return mapFooter(footer.data, this.baseUrl);
                 }),
             );
         });
@@ -392,22 +399,32 @@ export class CmsService implements CMS.Service {
     }
 
     getArticleListBlock(
-        _options: CMS.Request.GetCmsEntryParams,
+        options: CMS.Request.GetCmsEntryParams,
     ): Observable<CMS.Model.ArticleListBlock.ArticleListBlock> {
-        throw new NotImplementedException();
+        const key = `quick-links-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () =>
+            this.getBlock(options).pipe(map((data) => mapArticleListBlock(data, this.baseUrl))),
+        );
     }
 
-    getCategoryBlock(_options: CMS.Request.GetCmsEntryParams): Observable<CMS.Model.CategoryBlock.CategoryBlock> {
-        throw new NotImplementedException();
+    getCategoryBlock(options: CMS.Request.GetCmsEntryParams): Observable<CMS.Model.CategoryBlock.CategoryBlock> {
+        const key = `quick-links-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () =>
+            this.getBlock(options).pipe(map((data) => mapCategoryBlock(data, this.baseUrl))),
+        );
     }
 
-    getCategoryListBlock(
-        _options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.CategoryListBlock.CategoryListBlock> {
-        throw new NotImplementedException();
+    getCategoryListBlock(options: CMS.Request.GetCmsEntryParams) {
+        const key = `quick-links-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () =>
+            this.getBlock(options).pipe(map((data) => mapCategoryListBlock(data, this.baseUrl))),
+        );
     }
 
-    getQuickLinksBlock(_options: CMS.Request.GetCmsEntryParams): Observable<CMS.Model.QuickLinksBlock.QuickLinksBlock> {
-        throw new NotImplementedException();
+    getQuickLinksBlock(options: CMS.Request.GetCmsEntryParams) {
+        const key = `quick-links-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () =>
+            this.getBlock(options).pipe(map((data) => mapQuickLinksBlock(data, this.baseUrl))),
+        );
     }
 }

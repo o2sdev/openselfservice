@@ -22,20 +22,55 @@ export class ArticlesService implements Articles.Service {
         return of(mapArticle(params.locale, params.slug)).pipe(responseDelay());
     }
 
-    getArticleList(
-        options: Articles.Request.GetArticleListQuery,
-        body: Articles.Request.GetArticleListBody,
-    ): Observable<Articles.Model.Articles> {
+    getArticleList(options: Articles.Request.GetArticleListQuery): Observable<Articles.Model.Articles> {
         const searchPayload: Search.Model.SearchPayload = {
-            query: body?.query,
-            exact: body?.category
+            exact: options.category
                 ? {
-                      category: body.category,
+                      category: options.category,
                   }
                 : undefined,
             hitsPerPage: options.limit,
             page: options.offset,
-            sort: body?.sort ? [body.sort] : undefined,
+            sort: options.sortBy
+                ? [
+                      {
+                          field: options.sortBy,
+                          order: options.sortOrder || 'desc',
+                      },
+                  ]
+                : undefined,
+            pagination: {
+                offset: options.offset,
+                limit: options.limit,
+            },
+        };
+
+        return this.searchService.searchArticles(options.locale, searchPayload).pipe(
+            map((result) => {
+                return result;
+            }),
+            responseDelay(),
+        );
+    }
+
+    searchArticles(options: Articles.Request.SearchArticlesBody): Observable<Articles.Model.Articles> {
+        const searchPayload: Search.Model.SearchPayload = {
+            query: options.query,
+            exact: options.category
+                ? {
+                      category: options.category,
+                  }
+                : undefined,
+            hitsPerPage: options.limit,
+            page: options.offset,
+            sort: options.sortBy
+                ? [
+                      {
+                          field: options.sortBy,
+                          order: options.sortOrder || 'desc',
+                      },
+                  ]
+                : undefined,
             pagination: {
                 offset: options.offset,
                 limit: options.limit,

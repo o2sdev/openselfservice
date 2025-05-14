@@ -46,6 +46,7 @@ export const PAGE_ORDER_DETAILS_EN: CMS.Model.Page.Page = {
         },
     },
     updatedAt: '2025-01-01',
+    createdAt: '2025-01-01',
 };
 
 export const PAGE_ORDER_DETAILS_DE: CMS.Model.Page.Page = {
@@ -94,6 +95,7 @@ export const PAGE_ORDER_DETAILS_DE: CMS.Model.Page.Page = {
         },
     },
     updatedAt: '2025-01-01',
+    createdAt: '2025-01-01',
 };
 
 export const PAGE_ORDER_DETAILS_PL: CMS.Model.Page.Page = {
@@ -142,4 +144,5 @@ export const PAGE_ORDER_DETAILS_PL: CMS.Model.Page.Page = {
         },
     },
     updatedAt: '2025-01-01',
+    createdAt: '2025-01-01',
 };

@@ -28,13 +28,15 @@ export const BlogCard: React.FC<Readonly<BlogCardProps>> = ({
                 <div className="flex flex-col gap-6">
                     {image && (
                         <div className="relative overflow-hidden max-h-[164px] flex-shrink-0 rounded-xl w-full">
-                            <Image
-                                src={image.url}
-                                alt={image.alt}
-                                width={image.width}
-                                height={image.height}
-                                className="object-cover object-center max-h-[164px] max-w-full"
-                            />
+                            {image?.url && (
+                                <Image
+                                    src={image.url}
+                                    alt={image.alt}
+                                    width={image.width}
+                                    height={image.height}
+                                    className="object-cover object-center max-h-[164px] max-w-full"
+                                />
+                            )}
                         </div>
                     )}
                     <div className="flex flex-col gap-2">

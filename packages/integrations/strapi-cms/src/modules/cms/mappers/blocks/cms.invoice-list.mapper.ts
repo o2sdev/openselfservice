@@ -33,6 +33,7 @@ export const mapInvoiceListBlock = (data: GetComponentQuery): CMS.Model.InvoiceL
                 labels: {
                     today: configurableTexts?.dates.today,
                     yesterday: configurableTexts?.dates.today,
+                    clickToSelect: configurableTexts.actions.clickToSelect,
                 },
                 table: mapTable(component.table),
                 downloadFileName: component.downloadFileName,

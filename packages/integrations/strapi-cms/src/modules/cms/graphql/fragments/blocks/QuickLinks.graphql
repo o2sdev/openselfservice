@@ -1,0 +1,9 @@
+fragment QuickLinksComponent on ComponentComponentsQuickLinks {
+    __typename
+    id
+    title
+    description
+    quickLinks: items {
+        ...Link
+    }
+}

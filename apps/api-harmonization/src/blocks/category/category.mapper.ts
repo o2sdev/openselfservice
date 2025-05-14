@@ -23,7 +23,7 @@ export const mapCategory = (
             description: cms.description,
             items: {
                 ...articles,
-                data: articles.data.map((article: Articles.Model.Article) => mapArticle(article, cms, _locale)),
+                data: articles.data.map((article) => mapArticle(article, cms, _locale)),
             },
         },
     };
@@ -37,12 +37,16 @@ export const mapCategoryArticles = (
     return {
         items: {
             ...articles,
-            data: articles.data.map((article: Articles.Model.Article) => mapArticle(article, cms, _locale)),
+            data: articles.data.map((article) => mapArticle(article, cms, _locale)),
         },
     };
 };
 
-const mapArticle = (article: Articles.Model.Article, cms: CMS.Model.CategoryBlock.CategoryBlock, _locale: string) => {
+const mapArticle = (
+    article: Omit<Articles.Model.Article, 'sections'>,
+    cms: CMS.Model.CategoryBlock.CategoryBlock,
+    _locale: string,
+) => {
     return {
         ...article,
         createdAt: formatDateRelative(article.createdAt, _locale, cms.labels.today, cms.labels.yesterday),

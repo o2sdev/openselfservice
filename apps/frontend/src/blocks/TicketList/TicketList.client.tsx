@@ -79,6 +79,9 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                         initialValues={filters}
                         onSubmit={handleFilter}
                         onReset={handleReset}
+                        labels={{
+                            clickToSelect: data.labels.clickToSelect,
+                        }}
                     />
 
                     <LoadingOverlay isActive={isPending}>

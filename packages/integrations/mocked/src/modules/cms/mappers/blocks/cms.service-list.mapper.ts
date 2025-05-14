@@ -80,6 +80,7 @@ const MOCK_SERVICE_LIST_BLOCK_EN: CMS.Model.ServiceListBlock.ServiceListBlock = 
     labels: {
         today: 'Today',
         yesterday: 'Yesterday',
+        clickToSelect: 'Click to select',
     },
 };
 
@@ -163,6 +164,7 @@ const MOCK_SERVICE_LIST_BLOCK_DE: CMS.Model.ServiceListBlock.ServiceListBlock = 
     labels: {
         today: 'Heute',
         yesterday: 'Gestern',
+        clickToSelect: 'Klicken Sie, um auszuwählen',
     },
 };
 
@@ -246,6 +248,7 @@ const MOCK_SERVICE_LIST_BLOCK_PL: CMS.Model.ServiceListBlock.ServiceListBlock = 
     labels: {
         today: 'Dzisiaj',
         yesterday: 'Wczoraj',
+        clickToSelect: 'Kliknij, aby wybrać',
     },
 };
 

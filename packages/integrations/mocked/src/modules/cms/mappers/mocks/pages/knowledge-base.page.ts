@@ -7,8 +7,8 @@ export const PAGE_HELP_AND_SUPPORT_EN: CMS.Model.Page.Page = {
     seo: {
         noIndex: false,
         noFollow: false,
-        title: 'Help & Support',
-        description: 'Help & Support',
+        title: 'Welcome Hub',
+        description: 'Welcome Hub',
         keywords: [],
         image: {
             url: 'https://picsum.photos/150',
@@ -42,6 +42,7 @@ export const PAGE_HELP_AND_SUPPORT_EN: CMS.Model.Page.Page = {
         },
     },
     updatedAt: '2025-01-01',
+    createdAt: '2025-01-01',
 };
 
 export const PAGE_HELP_AND_SUPPORT_DE: CMS.Model.Page.Page = {
@@ -51,8 +52,8 @@ export const PAGE_HELP_AND_SUPPORT_DE: CMS.Model.Page.Page = {
     seo: {
         noIndex: false,
         noFollow: false,
-        title: 'Hilfe und Support',
-        description: 'Hilfe und Support',
+        title: 'Willkommen Hub',
+        description: 'Willkommen Hub',
         keywords: [],
         image: {
             url: 'https://picsum.photos/150',
@@ -86,6 +87,7 @@ export const PAGE_HELP_AND_SUPPORT_DE: CMS.Model.Page.Page = {
         },
     },
     updatedAt: '2025-01-01',
+    createdAt: '2025-01-01',
 };
 
 export const PAGE_HELP_AND_SUPPORT_PL: CMS.Model.Page.Page = {
@@ -95,8 +97,8 @@ export const PAGE_HELP_AND_SUPPORT_PL: CMS.Model.Page.Page = {
     seo: {
         noIndex: false,
         noFollow: false,
-        title: 'Pomoc i Wsparcie',
-        description: 'Pomoc i Wsparcie',
+        title: 'Centrum powitalne',
+        description: 'Centrum powitalne',
         keywords: [],
         image: {
             url: 'https://picsum.photos/150',
@@ -130,4 +132,5 @@ export const PAGE_HELP_AND_SUPPORT_PL: CMS.Model.Page.Page = {
         },
     },
     updatedAt: '2025-01-01',
+    createdAt: '2025-01-01',
 };

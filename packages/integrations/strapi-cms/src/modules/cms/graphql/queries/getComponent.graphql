@@ -42,6 +42,18 @@ query getComponent($id: ID!, $locale: I18NLocaleCode!) {
             ... on ComponentComponentsOrderList {
                 ...OrderListComponent
             }
+            ... on ComponentComponentsQuickLinks {
+                ...QuickLinksComponent
+            }
+            ... on ComponentComponentsCategoryList {
+                ...CategoryListComponent
+            }
+            ... on ComponentComponentsArticleList {
+                ...ArticleListComponent
+            }
+            ... on ComponentComponentsCategory {
+                ...CategoryComponent
+            }
         }
     }
     configurableTexts(locale: $locale) {
@@ -63,6 +75,7 @@ query getComponent($id: ID!, $locale: I18NLocaleCode!) {
             renew
             details
             reorder
+            clickToSelect
         }
         errors {
             requestError {

@@ -28,7 +28,10 @@ export const MOCK_ARTICLES_EN: Articles.Model.Article[] = [
         author: {
             name: 'Lando Norris',
             position: 'Content Creator',
-            avatar: 'https://example.com/images/user-001.jpg',
+            avatar: {
+                url: 'https://example.com/images/user-001.jpg',
+                alt: '',
+            },
         },
         sections: [
             {
@@ -99,7 +102,10 @@ export const MOCK_ARTICLES_EN: Articles.Model.Article[] = [
         author: {
             name: 'Lando Norris',
             position: 'Content Creator',
-            avatar: 'https://example.com/images/user-001.jpg',
+            avatar: {
+                url: 'https://example.com/images/user-001.jpg',
+                alt: '',
+            },
         },
         sections: [
             {
@@ -170,7 +176,10 @@ export const MOCK_ARTICLES_EN: Articles.Model.Article[] = [
         author: {
             name: 'Lando Norris',
             position: 'Content Creator',
-            avatar: 'https://example.com/images/user-001.jpg',
+            avatar: {
+                url: 'https://example.com/images/user-001.jpg',
+                alt: '',
+            },
         },
         sections: [
             {

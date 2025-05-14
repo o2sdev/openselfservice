@@ -1,0 +1,14 @@
+fragment Link on ComponentContentLink {
+    label
+    url
+    page {
+        slug
+        SEO {
+            title
+            description
+        }
+    }
+    icon {
+        ...Media
+    }
+}
