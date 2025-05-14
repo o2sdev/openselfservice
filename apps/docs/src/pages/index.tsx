@@ -7,6 +7,7 @@ import { HomepageArchitectureSection } from '@site/src/components/HomepageArchit
 import { HomepageBannerSection } from '@site/src/components/HomepageBannerSection';
 import { HomepageBenefitsSection } from '@site/src/components/HomepageBenefitsSection';
 import HomepageJoinTheWaitlistSection from '@site/src/components/HomepageJoinTheWaitlistSection';
+import { HomepageUseCases } from '@site/src/components/HomepageUseCases';
 
 import Layout from '@theme/Layout';
 
@@ -25,9 +26,11 @@ export default function Home(): ReactNode {
                             <div className={`${styles.mainContentWrapper}`}>
                                 <HomepageBannerSection />
                                 <HomepageArchitectureSection />
+                                <HomepageUseCases />
                             </div>
                         </div>
                     </div>
+
                     <HomepageAboutSection />
                     <HomepageBenefitsSection />
                 </div>

@@ -1,7 +1,6 @@
 import { useLocale } from 'next-intl';
 import React, { Suspense } from 'react';
 
-import { Container } from '@/components/Container/Container';
 import { Loading } from '@/components/Loading/Loading';
 
 import { CategoryList } from './CategoryList.server';

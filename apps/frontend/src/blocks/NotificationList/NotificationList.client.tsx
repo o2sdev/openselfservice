@@ -78,13 +78,13 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({ loca
                                             {data.table.columns.map((column) => (
                                                 <TableHead
                                                     key={column.id}
-                                                    className="py-3 px-4 text-sm text-muted-foreground"
+                                                    className="py-3 px-4 text-sm text-muted-foreground md:text-nowrap"
                                                 >
                                                     {column.id !== 'status' ? column.title : null}
                                                 </TableHead>
                                             ))}
                                             {data.table.actions && (
-                                                <TableHead className="py-3 px-4 text-sm text-muted-foreground">
+                                                <TableHead className="py-3 px-4 text-sm text-muted-foreground md:text-nowrap">
                                                     {data.table.actions.title}
                                                 </TableHead>
                                             )}

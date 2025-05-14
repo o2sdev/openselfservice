@@ -95,7 +95,7 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
                                                     <TableHead
                                                         key={column.id}
                                                         className={cn(
-                                                            'py-3 px-4 text-sm text-muted-foreground',
+                                                            'py-3 px-4 text-sm text-muted-foreground md:text-nowrap',
                                                             column.id === 'totalAmountDue' && 'text-right',
                                                             column.id === 'amountToPay' && 'text-right',
                                                         )}
@@ -104,7 +104,7 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
                                                     </TableHead>
                                                 ))}
                                                 {data.table.data.actions && (
-                                                    <TableHead className="py-3 px-4 text-sm text-muted-foreground">
+                                                    <TableHead className="py-3 px-4 text-sm text-muted-foreground md:text-nowrap">
                                                         {data.table.data.actions.title}
                                                     </TableHead>
                                                 )}

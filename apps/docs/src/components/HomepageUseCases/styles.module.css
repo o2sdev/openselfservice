@@ -1,0 +1,19 @@
+.useCasesSection {
+    margin-bottom: 5rem;
+}
+
+.useCasesSection h2 {
+    margin-bottom: 24px;
+}
+.useCasesSection h2 + p {
+    margin-bottom: 80px;
+}
+
+@media (max-width: 996px) {
+    .useCasesSection {
+        margin-bottom: 2rem;
+    }
+    .useCasesSection h2 + p {
+        margin-bottom: 2rem;
+    }
+}

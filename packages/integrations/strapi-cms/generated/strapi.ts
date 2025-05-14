@@ -8525,6 +8525,27 @@ export type OrderListComponentFragment = {
     noResults: { title: string; description?: string };
 };
 
+export type OrdersSummaryComponentFragment = {
+    __typename: 'ComponentComponentsOrdersSummary';
+    id: string;
+    title?: string;
+    subtitle?: string;
+    totalValueTitle: string;
+    averageValueTitle: string;
+    averageNumberTitle: string;
+    chartTitle: string;
+    chartPreviousPeriodLabel: string;
+    chartCurrentPeriodLabel: string;
+    ranges?: Array<{
+        id: string;
+        label: string;
+        value: number;
+        type: Enum_Componentcontentchartdaterange_Type;
+        default: boolean;
+    }>;
+    noResults: { title: string; description?: string };
+};
+
 export type PaymentsHistoryComponentFragment = {
     __typename: 'ComponentComponentsPaymentsHistory';
     id: string;
@@ -9221,7 +9242,26 @@ export type GetComponentQuery = {
                   };
                   noResults: { title: string; description?: string };
               }
-            | { __typename: 'ComponentComponentsOrdersSummary' }
+            | {
+                  __typename: 'ComponentComponentsOrdersSummary';
+                  id: string;
+                  title?: string;
+                  subtitle?: string;
+                  totalValueTitle: string;
+                  averageValueTitle: string;
+                  averageNumberTitle: string;
+                  chartTitle: string;
+                  chartPreviousPeriodLabel: string;
+                  chartCurrentPeriodLabel: string;
+                  ranges?: Array<{
+                      id: string;
+                      label: string;
+                      value: number;
+                      type: Enum_Componentcontentchartdaterange_Type;
+                      default: boolean;
+                  }>;
+                  noResults: { title: string; description?: string };
+              }
             | {
                   __typename: 'ComponentComponentsPaymentsHistory';
                   id: string;
@@ -10563,6 +10603,31 @@ export const OrderListComponentFragmentDoc = gql`
     ${PaginationFragmentDoc}
     ${FiltersFragmentDoc}
 `;
+export const OrdersSummaryComponentFragmentDoc = gql`
+    fragment OrdersSummaryComponent on ComponentComponentsOrdersSummary {
+        __typename
+        id
+        title
+        subtitle
+        totalValueTitle
+        averageValueTitle
+        averageNumberTitle
+        chartTitle
+        chartPreviousPeriodLabel
+        chartCurrentPeriodLabel
+        ranges {
+            id
+            label
+            value
+            type
+            default
+        }
+        noResults {
+            title
+            description
+        }
+    }
+`;
 export const PaymentsHistoryComponentFragmentDoc = gql`
     fragment PaymentsHistoryComponent on ComponentComponentsPaymentsHistory {
         __typename
@@ -10891,6 +10956,9 @@ export const GetComponentDocument = gql`
                 ... on ComponentComponentsOrderList {
                     ...OrderListComponent
                 }
+                ... on ComponentComponentsOrdersSummary {
+                    ...OrdersSummaryComponent
+                }
                 ... on ComponentComponentsQuickLinks {
                     ...QuickLinksComponent
                 }
@@ -10947,6 +11015,7 @@ export const GetComponentDocument = gql`
     ${TicketRecentComponentFragmentDoc}
     ${SurveyjsComponentFragmentDoc}
     ${OrderListComponentFragmentDoc}
+    ${OrdersSummaryComponentFragmentDoc}
     ${QuickLinksComponentFragmentDoc}
     ${CategoryListComponentFragmentDoc}
     ${ArticleListComponentFragmentDoc}

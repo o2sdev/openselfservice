@@ -81,7 +81,7 @@ export const OrdersSummaryPure: React.FC<Readonly<OrdersSummaryPureProps>> = ({
     };
 
     const [data, setData] = useState<Blocks.OrdersSummary.Model.OrdersSummaryBlock>(component);
-    const [range, setRange] = useState(component.ranges.find((range) => range.isDefault)!);
+    const [range, setRange] = useState(component.ranges?.find((range) => range.isDefault));
     const [filters, setFilters] = useState(initialFilters);
 
     const [isPending, startTransition] = useTransition();
@@ -111,7 +111,10 @@ export const OrdersSummaryPure: React.FC<Readonly<OrdersSummaryPureProps>> = ({
             const newData = await sdk.blocks.getOrdersSummary(newFilters, { 'x-locale': locale }, accessToken);
             setFilters(newFilters);
             setData(newData);
-            setRange(component.ranges.find((item) => item.value === range && item.type === type)!);
+
+            if (component.ranges) {
+                setRange(component.ranges.find((item) => item.value === range && item.type === type)!);
+            }
         });
     };
 
@@ -124,20 +127,22 @@ export const OrdersSummaryPure: React.FC<Readonly<OrdersSummaryPureProps>> = ({
                             {data.title && <Typography variant="h2">{data.title}</Typography>}
                             {data.subtitle && <Typography>{data.subtitle}</Typography>}
                         </div>
-                        <div className="flex gap-2 items-end">
-                            <ToggleGroup
-                                type="single"
-                                value={`${range.value}-${range.type}`}
-                                variant="outline"
-                                onValueChange={handleFilter}
-                            >
-                                {component.ranges.map((range) => (
-                                    <ToggleGroupItem key={range.value} value={`${range.value}-${range.type}`}>
-                                        {range.label}
-                                    </ToggleGroupItem>
-                                ))}
-                            </ToggleGroup>
-                        </div>
+                        {component.ranges && range && (
+                            <div className="flex gap-2 items-end">
+                                <ToggleGroup
+                                    type="single"
+                                    value={`${range.value}-${range.type}`}
+                                    variant="outline"
+                                    onValueChange={handleFilter}
+                                >
+                                    {component.ranges.map((range) => (
+                                        <ToggleGroupItem key={range.value} value={`${range.value}-${range.type}`}>
+                                            {range.label}
+                                        </ToggleGroupItem>
+                                    ))}
+                                </ToggleGroup>
+                            </div>
+                        )}
                     </div>
 
                     <div className="w-full flex flex-col lg:flex-row gap-6">
