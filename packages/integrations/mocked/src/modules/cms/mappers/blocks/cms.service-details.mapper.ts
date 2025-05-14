@@ -34,6 +34,8 @@ const MOCK_SERVICE_DETAILS_BLOCK_EN: CMS.Model.ServiceDetailsBlock.ServiceDetail
         paymentPeriod: {
             MONTHLY: 'mo',
             YEARLY: 'ye',
+            WEEKLY: 'we',
+            ONE_TIME: 'one-time',
         },
     },
     labels: {
@@ -75,6 +77,8 @@ const MOCK_SERVICE_DETAILS_BLOCK_PL: CMS.Model.ServiceDetailsBlock.ServiceDetail
         paymentPeriod: {
             MONTHLY: 'Miesięczny',
             YEARLY: 'Roczny',
+            WEEKLY: 'Tygodniowy',
+            ONE_TIME: 'Jednorazowy',
         },
     },
     labels: {
@@ -116,6 +120,8 @@ const MOCK_SERVICE_DETAILS_BLOCK_DE: CMS.Model.ServiceDetailsBlock.ServiceDetail
         paymentPeriod: {
             MONTHLY: 'Monatlich',
             YEARLY: 'Jährlich',
+            WEEKLY: 'Wochenweise',
+            ONE_TIME: 'Einmalig',
         },
     },
     labels: {

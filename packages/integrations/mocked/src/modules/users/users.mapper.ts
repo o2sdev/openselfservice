@@ -39,7 +39,7 @@ const MOCK_USER_2: Users.Model.User = {
     roles: [
         {
             customer: {
-                id: 'cust-003',
+                id: 'cus_01JS1JBXAPK2BTV504ASWVFC4S',
                 name: 'Tech Solutions Inc',
                 clientType: 'B2B',
             },
@@ -47,7 +47,7 @@ const MOCK_USER_2: Users.Model.User = {
         },
         {
             customer: {
-                id: 'cust-004',
+                id: 'cus_01JDHDFV0KYFC6VJK4GRDRBTS9',
                 name: 'Digital Services GmbH',
                 clientType: 'B2B',
             },

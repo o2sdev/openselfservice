@@ -14,7 +14,7 @@ export interface CardProps {
         label: string;
         url: string;
     };
-    image: Models.Media.Media;
+    image?: Models.Media.Media;
 }
 
 export interface Badge {

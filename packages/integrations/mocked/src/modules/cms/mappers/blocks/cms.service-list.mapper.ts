@@ -24,6 +24,8 @@ const MOCK_SERVICE_LIST_BLOCK_EN: CMS.Model.ServiceListBlock.ServiceListBlock = 
         paymentPeriod: {
             MONTHLY: 'mo',
             YEARLY: 'ye',
+            WEEKLY: 'we',
+            ONE_TIME: 'one-time',
         },
     },
     pagination: {
@@ -105,8 +107,10 @@ const MOCK_SERVICE_LIST_BLOCK_DE: CMS.Model.ServiceListBlock.ServiceListBlock = 
             EXPIRED: 'Abgelaufen',
         },
         paymentPeriod: {
-            MONTHLY: 'mo',
-            YEARLY: 'ye',
+            MONTHLY: 'monatlich',
+            YEARLY: 'jährlich',
+            WEEKLY: 'wochenweise',
+            ONE_TIME: 'einmalig',
         },
     },
     pagination: {
@@ -190,6 +194,8 @@ const MOCK_SERVICE_LIST_BLOCK_PL: CMS.Model.ServiceListBlock.ServiceListBlock = 
         paymentPeriod: {
             MONTHLY: 'miesięczny',
             YEARLY: 'roczny',
+            WEEKLY: 'tygodniowy',
+            ONE_TIME: 'jednorazowy',
         },
     },
     pagination: {
