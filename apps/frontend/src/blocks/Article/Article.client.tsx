@@ -21,7 +21,7 @@ export const ArticlePure: React.FC<Readonly<ArticlePureProps>> = ({ ...component
                 <Typography variant="h1" asChild>
                     <h1>{component.data.title}</h1>
                 </Typography>
-                {author && <Author name={author.name} avatar={author.avatar} position={author.position} />}
+                {author && <Author name={author.name} avatar={author.avatar?.url} position={author.position} />}
                 <Typography variant="p">{createdAt}</Typography>
             </div>
             <Separator />

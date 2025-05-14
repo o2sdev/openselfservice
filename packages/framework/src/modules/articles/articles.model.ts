@@ -34,7 +34,7 @@ export class Article {
     tags!: string[];
     image?: Media.Media;
     thumbnail?: Media.Media;
-    category!: {
+    category?: {
         id: string;
         title: string;
     };
@@ -67,5 +67,5 @@ export class Author {
     name!: string;
     position?: string;
     email?: string;
-    avatar?: string;
+    avatar?: Media.Media;
 }

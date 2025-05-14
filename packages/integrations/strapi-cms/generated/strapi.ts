@@ -268,6 +268,8 @@ export type ComponentLocalizations_ConnectionArgs = {
 };
 
 export type ComponentComponentsArticle = {
+    author?: Maybe<Author>;
+    category?: Maybe<Category>;
     id: Scalars['ID']['output'];
     name: Scalars['String']['output'];
     sections: Array<Maybe<ComponentContentArticleSection>>;
@@ -3193,7 +3195,10 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping of union types */
 export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
     ComponentContentDynamicZone:
-        | ComponentComponentsArticle
+        | (Omit<ComponentComponentsArticle, 'author' | 'category'> & {
+              author?: Maybe<_RefType['Author']>;
+              category?: Maybe<_RefType['Category']>;
+          })
         | (Omit<ComponentComponentsArticleList, 'category' | 'pages' | 'pages_connection' | 'parent'> & {
               category?: Maybe<_RefType['Category']>;
               pages: Array<Maybe<_RefType['Page']>>;
@@ -3297,7 +3302,10 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
               localizations: Array<Maybe<_RefType['Component']>>;
               localizations_connection?: Maybe<_RefType['ComponentRelationResponseCollection']>;
           })
-        | ComponentComponentsArticle
+        | (Omit<ComponentComponentsArticle, 'author' | 'category'> & {
+              author?: Maybe<_RefType['Author']>;
+              category?: Maybe<_RefType['Category']>;
+          })
         | (Omit<ComponentComponentsArticleList, 'category' | 'pages' | 'pages_connection' | 'parent'> & {
               category?: Maybe<_RefType['Category']>;
               pages: Array<Maybe<_RefType['Page']>>;
@@ -3585,7 +3593,12 @@ export type ResolversTypes = {
             localizations_connection?: Maybe<ResolversTypes['ComponentRelationResponseCollection']>;
         }
     >;
-    ComponentComponentsArticle: ResolverTypeWrapper<ComponentComponentsArticle>;
+    ComponentComponentsArticle: ResolverTypeWrapper<
+        Omit<ComponentComponentsArticle, 'author' | 'category'> & {
+            author?: Maybe<ResolversTypes['Author']>;
+            category?: Maybe<ResolversTypes['Category']>;
+        }
+    >;
     ComponentComponentsArticleList: ResolverTypeWrapper<
         Omit<ComponentComponentsArticleList, 'category' | 'pages' | 'pages_connection' | 'parent'> & {
             category?: Maybe<ResolversTypes['Category']>;
@@ -4042,7 +4055,10 @@ export type ResolversParentTypes = {
         localizations: Array<Maybe<ResolversParentTypes['Component']>>;
         localizations_connection?: Maybe<ResolversParentTypes['ComponentRelationResponseCollection']>;
     };
-    ComponentComponentsArticle: ComponentComponentsArticle;
+    ComponentComponentsArticle: Omit<ComponentComponentsArticle, 'author' | 'category'> & {
+        author?: Maybe<ResolversParentTypes['Author']>;
+        category?: Maybe<ResolversParentTypes['Category']>;
+    };
     ComponentComponentsArticleList: Omit<
         ComponentComponentsArticleList,
         'category' | 'pages' | 'pages_connection' | 'parent'
@@ -4576,6 +4592,8 @@ export type ComponentComponentsArticleResolvers<
     ParentType extends
         ResolversParentTypes['ComponentComponentsArticle'] = ResolversParentTypes['ComponentComponentsArticle'],
 > = {
+    author?: Resolver<Maybe<ResolversTypes['Author']>, ParentType, ContextType>;
+    category?: Resolver<Maybe<ResolversTypes['Category']>, ParentType, ContextType>;
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     sections?: Resolver<
@@ -7241,7 +7259,239 @@ export type Resolvers<ContextType = any> = {
 export type ArticleFragment = {
     __typename: 'ComponentComponentsArticle';
     id: string;
+    author?: {
+        name: string;
+        position?: string;
+        avatar: Array<{ url: string; alternativeText?: string; width?: number; height?: number; name: string }>;
+    };
+    category?: { documentId: string; slug: string; name: string };
     sections: Array<{ __typename: 'ComponentContentArticleSection'; id: string; title?: string; content: string }>;
+};
+
+export type ArticleSimpleFragment = {
+    __typename: 'ComponentComponentsArticle';
+    id: string;
+    author?: {
+        name: string;
+        position?: string;
+        avatar: Array<{ url: string; alternativeText?: string; width?: number; height?: number; name: string }>;
+    };
+    category?: { documentId: string; slug: string; name: string };
+};
+
+export type ArticleTemplateFragment = {
+    documentId: string;
+    slug: string;
+    locale?: string;
+    createdAt?: any;
+    updatedAt?: any;
+    publishedAt?: any;
+    hasOwnTitle: boolean;
+    article: Array<
+        | {
+              __typename: 'ComponentTemplatesOneColumn';
+              mainSlot: Array<{
+                  __typename: 'Component';
+                  content: Array<
+                      | {
+                            __typename: 'ComponentComponentsArticle';
+                            id: string;
+                            author?: {
+                                name: string;
+                                position?: string;
+                                avatar: Array<{
+                                    url: string;
+                                    alternativeText?: string;
+                                    width?: number;
+                                    height?: number;
+                                    name: string;
+                                }>;
+                            };
+                            category?: { documentId: string; slug: string; name: string };
+                        }
+                      | { __typename: 'ComponentComponentsArticleList' }
+                      | { __typename: 'ComponentComponentsCategory' }
+                      | { __typename: 'ComponentComponentsCategoryList' }
+                      | { __typename: 'ComponentComponentsFaq' }
+                      | { __typename: 'ComponentComponentsInvoiceList' }
+                      | { __typename: 'ComponentComponentsNotificationDetails' }
+                      | { __typename: 'ComponentComponentsNotificationList' }
+                      | { __typename: 'ComponentComponentsOrderList' }
+                      | { __typename: 'ComponentComponentsOrdersSummary' }
+                      | { __typename: 'ComponentComponentsPaymentsHistory' }
+                      | { __typename: 'ComponentComponentsPaymentsSummary' }
+                      | { __typename: 'ComponentComponentsQuickLinks' }
+                      | { __typename: 'ComponentComponentsServiceDetails' }
+                      | { __typename: 'ComponentComponentsServiceList' }
+                      | { __typename: 'ComponentComponentsSurveyJsComponent' }
+                      | { __typename: 'ComponentComponentsTicketDetails' }
+                      | { __typename: 'ComponentComponentsTicketList' }
+                      | { __typename: 'ComponentComponentsTicketRecent' }
+                      | { __typename: 'ComponentComponentsUserAccount' }
+                      | { __typename: 'Error' }
+                  >;
+              }>;
+          }
+        | { __typename: 'ComponentTemplatesTwoColumn' }
+        | { __typename: 'Error' }
+    >;
+    SEO: {
+        title: string;
+        noIndex: boolean;
+        noFollow: boolean;
+        description: string;
+        keywords?: Array<{ keyword: string }>;
+        image?: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
+    };
+    parent?: {
+        slug: string;
+        SEO: { title: string };
+        parent?: { slug: string; SEO: { title: string }; parent?: { slug: string; SEO: { title: string } } };
+    };
+    template: Array<
+        | {
+              __typename: 'ComponentTemplatesOneColumn';
+              mainSlot: Array<{
+                  __typename: 'Component';
+                  documentId: string;
+                  content: Array<
+                      | { __typename: 'ComponentComponentsArticle' }
+                      | { __typename: 'ComponentComponentsArticleList' }
+                      | { __typename: 'ComponentComponentsCategory' }
+                      | { __typename: 'ComponentComponentsCategoryList' }
+                      | { __typename: 'ComponentComponentsFaq' }
+                      | { __typename: 'ComponentComponentsInvoiceList' }
+                      | { __typename: 'ComponentComponentsNotificationDetails' }
+                      | { __typename: 'ComponentComponentsNotificationList' }
+                      | { __typename: 'ComponentComponentsOrderList' }
+                      | { __typename: 'ComponentComponentsOrdersSummary' }
+                      | { __typename: 'ComponentComponentsPaymentsHistory' }
+                      | { __typename: 'ComponentComponentsPaymentsSummary' }
+                      | { __typename: 'ComponentComponentsQuickLinks' }
+                      | { __typename: 'ComponentComponentsServiceDetails' }
+                      | { __typename: 'ComponentComponentsServiceList' }
+                      | { __typename: 'ComponentComponentsSurveyJsComponent' }
+                      | { __typename: 'ComponentComponentsTicketDetails' }
+                      | { __typename: 'ComponentComponentsTicketList' }
+                      | { __typename: 'ComponentComponentsTicketRecent' }
+                      | { __typename: 'ComponentComponentsUserAccount' }
+                      | { __typename: 'Error' }
+                  >;
+              }>;
+          }
+        | {
+              __typename: 'ComponentTemplatesTwoColumn';
+              topSlot: Array<{
+                  __typename: 'Component';
+                  documentId: string;
+                  content: Array<
+                      | { __typename: 'ComponentComponentsArticle' }
+                      | { __typename: 'ComponentComponentsArticleList' }
+                      | { __typename: 'ComponentComponentsCategory' }
+                      | { __typename: 'ComponentComponentsCategoryList' }
+                      | { __typename: 'ComponentComponentsFaq' }
+                      | { __typename: 'ComponentComponentsInvoiceList' }
+                      | { __typename: 'ComponentComponentsNotificationDetails' }
+                      | { __typename: 'ComponentComponentsNotificationList' }
+                      | { __typename: 'ComponentComponentsOrderList' }
+                      | { __typename: 'ComponentComponentsOrdersSummary' }
+                      | { __typename: 'ComponentComponentsPaymentsHistory' }
+                      | { __typename: 'ComponentComponentsPaymentsSummary' }
+                      | { __typename: 'ComponentComponentsQuickLinks' }
+                      | { __typename: 'ComponentComponentsServiceDetails' }
+                      | { __typename: 'ComponentComponentsServiceList' }
+                      | { __typename: 'ComponentComponentsSurveyJsComponent' }
+                      | { __typename: 'ComponentComponentsTicketDetails' }
+                      | { __typename: 'ComponentComponentsTicketList' }
+                      | { __typename: 'ComponentComponentsTicketRecent' }
+                      | { __typename: 'ComponentComponentsUserAccount' }
+                      | { __typename: 'Error' }
+                  >;
+              }>;
+              leftSlot: Array<{
+                  __typename: 'Component';
+                  documentId: string;
+                  content: Array<
+                      | { __typename: 'ComponentComponentsArticle' }
+                      | { __typename: 'ComponentComponentsArticleList' }
+                      | { __typename: 'ComponentComponentsCategory' }
+                      | { __typename: 'ComponentComponentsCategoryList' }
+                      | { __typename: 'ComponentComponentsFaq' }
+                      | { __typename: 'ComponentComponentsInvoiceList' }
+                      | { __typename: 'ComponentComponentsNotificationDetails' }
+                      | { __typename: 'ComponentComponentsNotificationList' }
+                      | { __typename: 'ComponentComponentsOrderList' }
+                      | { __typename: 'ComponentComponentsOrdersSummary' }
+                      | { __typename: 'ComponentComponentsPaymentsHistory' }
+                      | { __typename: 'ComponentComponentsPaymentsSummary' }
+                      | { __typename: 'ComponentComponentsQuickLinks' }
+                      | { __typename: 'ComponentComponentsServiceDetails' }
+                      | { __typename: 'ComponentComponentsServiceList' }
+                      | { __typename: 'ComponentComponentsSurveyJsComponent' }
+                      | { __typename: 'ComponentComponentsTicketDetails' }
+                      | { __typename: 'ComponentComponentsTicketList' }
+                      | { __typename: 'ComponentComponentsTicketRecent' }
+                      | { __typename: 'ComponentComponentsUserAccount' }
+                      | { __typename: 'Error' }
+                  >;
+              }>;
+              rightSlot: Array<{
+                  __typename: 'Component';
+                  documentId: string;
+                  content: Array<
+                      | { __typename: 'ComponentComponentsArticle' }
+                      | { __typename: 'ComponentComponentsArticleList' }
+                      | { __typename: 'ComponentComponentsCategory' }
+                      | { __typename: 'ComponentComponentsCategoryList' }
+                      | { __typename: 'ComponentComponentsFaq' }
+                      | { __typename: 'ComponentComponentsInvoiceList' }
+                      | { __typename: 'ComponentComponentsNotificationDetails' }
+                      | { __typename: 'ComponentComponentsNotificationList' }
+                      | { __typename: 'ComponentComponentsOrderList' }
+                      | { __typename: 'ComponentComponentsOrdersSummary' }
+                      | { __typename: 'ComponentComponentsPaymentsHistory' }
+                      | { __typename: 'ComponentComponentsPaymentsSummary' }
+                      | { __typename: 'ComponentComponentsQuickLinks' }
+                      | { __typename: 'ComponentComponentsServiceDetails' }
+                      | { __typename: 'ComponentComponentsServiceList' }
+                      | { __typename: 'ComponentComponentsSurveyJsComponent' }
+                      | { __typename: 'ComponentComponentsTicketDetails' }
+                      | { __typename: 'ComponentComponentsTicketList' }
+                      | { __typename: 'ComponentComponentsTicketRecent' }
+                      | { __typename: 'ComponentComponentsUserAccount' }
+                      | { __typename: 'Error' }
+                  >;
+              }>;
+              bottomSlot: Array<{
+                  __typename: 'Component';
+                  documentId: string;
+                  content: Array<
+                      | { __typename: 'ComponentComponentsArticle' }
+                      | { __typename: 'ComponentComponentsArticleList' }
+                      | { __typename: 'ComponentComponentsCategory' }
+                      | { __typename: 'ComponentComponentsCategoryList' }
+                      | { __typename: 'ComponentComponentsFaq' }
+                      | { __typename: 'ComponentComponentsInvoiceList' }
+                      | { __typename: 'ComponentComponentsNotificationDetails' }
+                      | { __typename: 'ComponentComponentsNotificationList' }
+                      | { __typename: 'ComponentComponentsOrderList' }
+                      | { __typename: 'ComponentComponentsOrdersSummary' }
+                      | { __typename: 'ComponentComponentsPaymentsHistory' }
+                      | { __typename: 'ComponentComponentsPaymentsSummary' }
+                      | { __typename: 'ComponentComponentsQuickLinks' }
+                      | { __typename: 'ComponentComponentsServiceDetails' }
+                      | { __typename: 'ComponentComponentsServiceList' }
+                      | { __typename: 'ComponentComponentsSurveyJsComponent' }
+                      | { __typename: 'ComponentComponentsTicketDetails' }
+                      | { __typename: 'ComponentComponentsTicketList' }
+                      | { __typename: 'ComponentComponentsTicketRecent' }
+                      | { __typename: 'ComponentComponentsUserAccount' }
+                      | { __typename: 'Error' }
+                  >;
+              }>;
+          }
+        | { __typename: 'Error' }
+    >;
 };
 
 export type CategoryFragment = {
@@ -7268,6 +7518,18 @@ export type GetArticleQuery = {
             | {
                   __typename: 'ComponentComponentsArticle';
                   id: string;
+                  author?: {
+                      name: string;
+                      position?: string;
+                      avatar: Array<{
+                          url: string;
+                          alternativeText?: string;
+                          width?: number;
+                          height?: number;
+                          name: string;
+                      }>;
+                  };
+                  category?: { documentId: string; slug: string; name: string };
                   sections: Array<{
                       __typename: 'ComponentContentArticleSection';
                       id: string;
@@ -7320,6 +7582,54 @@ export type GetArticlesQuery = {
         updatedAt?: any;
         publishedAt?: any;
         hasOwnTitle: boolean;
+        article: Array<
+            | {
+                  __typename: 'ComponentTemplatesOneColumn';
+                  mainSlot: Array<{
+                      __typename: 'Component';
+                      content: Array<
+                          | {
+                                __typename: 'ComponentComponentsArticle';
+                                id: string;
+                                author?: {
+                                    name: string;
+                                    position?: string;
+                                    avatar: Array<{
+                                        url: string;
+                                        alternativeText?: string;
+                                        width?: number;
+                                        height?: number;
+                                        name: string;
+                                    }>;
+                                };
+                                category?: { documentId: string; slug: string; name: string };
+                            }
+                          | { __typename: 'ComponentComponentsArticleList' }
+                          | { __typename: 'ComponentComponentsCategory' }
+                          | { __typename: 'ComponentComponentsCategoryList' }
+                          | { __typename: 'ComponentComponentsFaq' }
+                          | { __typename: 'ComponentComponentsInvoiceList' }
+                          | { __typename: 'ComponentComponentsNotificationDetails' }
+                          | { __typename: 'ComponentComponentsNotificationList' }
+                          | { __typename: 'ComponentComponentsOrderList' }
+                          | { __typename: 'ComponentComponentsOrdersSummary' }
+                          | { __typename: 'ComponentComponentsPaymentsHistory' }
+                          | { __typename: 'ComponentComponentsPaymentsSummary' }
+                          | { __typename: 'ComponentComponentsQuickLinks' }
+                          | { __typename: 'ComponentComponentsServiceDetails' }
+                          | { __typename: 'ComponentComponentsServiceList' }
+                          | { __typename: 'ComponentComponentsSurveyJsComponent' }
+                          | { __typename: 'ComponentComponentsTicketDetails' }
+                          | { __typename: 'ComponentComponentsTicketList' }
+                          | { __typename: 'ComponentComponentsTicketRecent' }
+                          | { __typename: 'ComponentComponentsUserAccount' }
+                          | { __typename: 'Error' }
+                      >;
+                  }>;
+              }
+            | { __typename: 'ComponentTemplatesTwoColumn' }
+            | { __typename: 'Error' }
+        >;
         SEO: {
             title: string;
             noIndex: boolean;
@@ -9638,18 +9948,6 @@ export type GetSurveyQuery = {
     }>;
 };
 
-export const ArticleFragmentDoc = gql`
-    fragment Article on ComponentComponentsArticle {
-        id
-        __typename
-        sections {
-            id
-            __typename
-            title
-            content
-        }
-    }
-`;
 export const MediaFragmentDoc = gql`
     fragment Media on UploadFile {
         url
@@ -9658,6 +9956,168 @@ export const MediaFragmentDoc = gql`
         height
         name
     }
+`;
+export const ArticleFragmentDoc = gql`
+    fragment Article on ComponentComponentsArticle {
+        id
+        __typename
+        author {
+            name
+            position
+            avatar {
+                ...Media
+            }
+        }
+        category {
+            documentId
+            slug
+            name
+        }
+        sections {
+            id
+            __typename
+            title
+            content
+        }
+    }
+    ${MediaFragmentDoc}
+`;
+export const SeoFragmentDoc = gql`
+    fragment Seo on ComponentSeoSeo {
+        title
+        noIndex
+        noFollow
+        description
+        keywords {
+            keyword
+        }
+        image {
+            ...Media
+        }
+    }
+    ${MediaFragmentDoc}
+`;
+export const ComponentFragmentDoc = gql`
+    fragment Component on Component {
+        __typename
+        documentId
+        content {
+            __typename
+        }
+    }
+`;
+export const OneColumnTemplateFragmentDoc = gql`
+    fragment OneColumnTemplate on ComponentTemplatesOneColumn {
+        mainSlot {
+            ...Component
+        }
+    }
+    ${ComponentFragmentDoc}
+`;
+export const TwoColumnTemplateFragmentDoc = gql`
+    fragment TwoColumnTemplate on ComponentTemplatesTwoColumn {
+        topSlot {
+            ...Component
+        }
+        leftSlot {
+            ...Component
+        }
+        rightSlot {
+            ...Component
+        }
+        bottomSlot {
+            ...Component
+        }
+    }
+    ${ComponentFragmentDoc}
+`;
+export const PageFragmentDoc = gql`
+    fragment Page on Page {
+        documentId
+        slug
+        locale
+        createdAt
+        updatedAt
+        publishedAt
+        documentId
+        hasOwnTitle
+        SEO {
+            ...Seo
+        }
+        parent {
+            slug
+            SEO {
+                title
+            }
+            parent {
+                slug
+                SEO {
+                    title
+                }
+                parent {
+                    slug
+                    SEO {
+                        title
+                    }
+                }
+            }
+        }
+        template {
+            __typename
+            ... on ComponentTemplatesOneColumn {
+                ...OneColumnTemplate
+            }
+            ... on ComponentTemplatesTwoColumn {
+                ...TwoColumnTemplate
+            }
+        }
+    }
+    ${SeoFragmentDoc}
+    ${OneColumnTemplateFragmentDoc}
+    ${TwoColumnTemplateFragmentDoc}
+`;
+export const ArticleSimpleFragmentDoc = gql`
+    fragment ArticleSimple on ComponentComponentsArticle {
+        id
+        __typename
+        author {
+            name
+            position
+            avatar {
+                ...Media
+            }
+        }
+        category {
+            documentId
+            slug
+            name
+        }
+    }
+    ${MediaFragmentDoc}
+`;
+export const ArticleTemplateFragmentDoc = gql`
+    fragment ArticleTemplate on Page {
+        ...Page
+        article: template {
+            __typename
+            ... on ComponentTemplatesOneColumn {
+                mainSlot {
+                    __typename
+                    ... on Component {
+                        __typename
+                        content {
+                            __typename
+                            ... on ComponentComponentsArticle {
+                                ...ArticleSimple
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    ${PageFragmentDoc}
+    ${ArticleSimpleFragmentDoc}
 `;
 export const CategoryFragmentDoc = gql`
     fragment Category on Category {
@@ -9796,21 +10256,6 @@ export const FormFieldComponentFragmentDoc = gql`
     }
     ${ErrorMessageComponentFragmentDoc}
 `;
-export const SeoFragmentDoc = gql`
-    fragment Seo on ComponentSeoSeo {
-        title
-        noIndex
-        noFollow
-        description
-        keywords {
-            keyword
-        }
-        image {
-            ...Media
-        }
-    }
-    ${MediaFragmentDoc}
-`;
 export const LoginPageFragmentDoc = gql`
     fragment LoginPage on LoginPage {
         createdAt
@@ -9856,85 +10301,6 @@ export const OrganizationListFragmentDoc = gql`
         title
         description
     }
-`;
-export const ComponentFragmentDoc = gql`
-    fragment Component on Component {
-        __typename
-        documentId
-        content {
-            __typename
-        }
-    }
-`;
-export const OneColumnTemplateFragmentDoc = gql`
-    fragment OneColumnTemplate on ComponentTemplatesOneColumn {
-        mainSlot {
-            ...Component
-        }
-    }
-    ${ComponentFragmentDoc}
-`;
-export const TwoColumnTemplateFragmentDoc = gql`
-    fragment TwoColumnTemplate on ComponentTemplatesTwoColumn {
-        topSlot {
-            ...Component
-        }
-        leftSlot {
-            ...Component
-        }
-        rightSlot {
-            ...Component
-        }
-        bottomSlot {
-            ...Component
-        }
-    }
-    ${ComponentFragmentDoc}
-`;
-export const PageFragmentDoc = gql`
-    fragment Page on Page {
-        documentId
-        slug
-        locale
-        createdAt
-        updatedAt
-        publishedAt
-        documentId
-        hasOwnTitle
-        SEO {
-            ...Seo
-        }
-        parent {
-            slug
-            SEO {
-                title
-            }
-            parent {
-                slug
-                SEO {
-                    title
-                }
-                parent {
-                    slug
-                    SEO {
-                        title
-                    }
-                }
-            }
-        }
-        template {
-            __typename
-            ... on ComponentTemplatesOneColumn {
-                ...OneColumnTemplate
-            }
-            ... on ComponentTemplatesTwoColumn {
-                ...TwoColumnTemplate
-            }
-        }
-    }
-    ${SeoFragmentDoc}
-    ${OneColumnTemplateFragmentDoc}
-    ${TwoColumnTemplateFragmentDoc}
 `;
 export const TemplateFragmentDoc = gql`
     fragment Template on PageTemplateDynamicZone {
@@ -10425,10 +10791,10 @@ export const GetArticlesDocument = gql`
             sort: $sort
             locale: $locale
         ) {
-            ...Page
+            ...ArticleTemplate
         }
     }
-    ${PageFragmentDoc}
+    ${ArticleTemplateFragmentDoc}
 `;
 export const GetCategoriesDocument = gql`
     query getCategories($id: String, $locale: I18NLocaleCode!, $limit: Int, $offset: Int) {

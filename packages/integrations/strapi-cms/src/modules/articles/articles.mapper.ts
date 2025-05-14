@@ -2,7 +2,7 @@ import { NotFoundException } from '@nestjs/common';
 
 import { Articles, CMS } from '@o2s/framework/modules';
 
-import { CategoryFragment, GetArticleQuery, PageFragment } from '@/generated/strapi';
+import { ArticleSimpleFragment, ArticleTemplateFragment, CategoryFragment, GetArticleQuery } from '@/generated/strapi';
 import { mapMedia } from '@/modules/cms/mappers/cms.media.mapper';
 
 export const mapCategory = (data: CategoryFragment, baseUrl: string): Articles.Model.Category => {
@@ -33,7 +33,7 @@ export const mapCategories = (data: CategoryFragment[], total: number, baseUrl: 
 export const mapArticle = (
     page: CMS.Model.Page.Page,
     article: GetArticleQuery,
-    _baseUrl: string,
+    baseUrl: string,
 ): Articles.Model.Article => {
     const component = article.component!.content[0];
 
@@ -53,15 +53,19 @@ export const mapArticle = (
                 tags: [],
                 image: page.seo.image,
                 thumbnail: page.seo.image,
-                category: {
-                    id: 'string',
-                    title: 'string',
-                },
-                author: {
-                    name: 'Lando Norris',
-                    position: 'Content Creator',
-                    avatar: 'https://example.com/images/user-001.jpg',
-                },
+                category: component.category
+                    ? {
+                          id: component.category.slug,
+                          title: component.category?.name,
+                      }
+                    : undefined,
+                author: component.author
+                    ? {
+                          name: component.author.name,
+                          position: component.author.position,
+                          avatar: mapMedia(component.author.avatar[0], baseUrl),
+                      }
+                    : undefined,
                 sections: component.sections.map((section) => {
                     switch (section.__typename) {
                         case 'ComponentContentArticleSection':
@@ -73,8 +77,6 @@ export const mapArticle = (
                                 title: section.title,
                                 content: section.content,
                             };
-                        // case 'ComponentContentArticleSectionImage':
-                        //     return {}
                     }
                 }),
             };
@@ -83,28 +85,45 @@ export const mapArticle = (
     throw new NotFoundException();
 };
 
-export const mapArticles = (data: PageFragment[], total: number, baseUrl: string): Articles.Model.Articles => {
+export const mapArticles = (
+    data: ArticleTemplateFragment[],
+    total: number,
+    baseUrl: string,
+): Articles.Model.Articles => {
     return {
-        data: data.map((article) => {
+        data: data.map((page) => {
+            let article: ArticleSimpleFragment | undefined;
+
+            switch (page.article[0]?.__typename) {
+                case 'ComponentTemplatesOneColumn':
+                    article = page.article[0].mainSlot[0]?.content.find(
+                        (content) => content.__typename === 'ComponentComponentsArticle',
+                    ) as ArticleSimpleFragment;
+            }
+
             return {
-                id: article.documentId,
-                slug: article.slug,
-                createdAt: article.updatedAt,
-                updatedAt: article.updatedAt,
-                title: article.SEO.title,
-                lead: article.SEO.description,
+                id: page.documentId,
+                slug: page.slug,
+                createdAt: page.updatedAt,
+                updatedAt: page.updatedAt,
+                title: page.SEO.title,
+                lead: page.SEO.description,
                 tags: [],
-                image: mapMedia(article.SEO.image, baseUrl),
-                thumbnail: mapMedia(article.SEO.image, baseUrl),
-                category: {
-                    id: 'string',
-                    title: 'string',
-                },
-                author: {
-                    name: 'Lando Norris',
-                    position: 'Content Creator',
-                    avatar: 'https://example.com/images/user-001.jpg',
-                },
+                image: mapMedia(page.SEO.image, baseUrl),
+                thumbnail: mapMedia(page.SEO.image, baseUrl),
+                category: article?.category
+                    ? {
+                          id: article.category.slug,
+                          title: article.category?.name,
+                      }
+                    : undefined,
+                author: article?.author
+                    ? {
+                          name: article.author.name,
+                          position: article.author.position,
+                          avatar: mapMedia(article.author.avatar[0], baseUrl),
+                      }
+                    : undefined,
             };
         }),
         total: total,

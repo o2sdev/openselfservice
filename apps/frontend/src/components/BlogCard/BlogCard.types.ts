@@ -1,6 +1,6 @@
 import { Models } from '@o2s/framework/modules';
 
-import { AuthorProps } from '../Author/Author.types';
+import { AuthorProps } from '@/components/Author/Author.types';
 
 export interface BlogCardProps {
     title: string;
@@ -13,5 +13,5 @@ export interface BlogCardProps {
     url: string;
     date: string;
     author?: AuthorProps;
-    categoryTitle: string;
+    categoryTitle?: string;
 }

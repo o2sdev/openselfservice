@@ -78,8 +78,16 @@ export const CategoryPure: React.FC<CategoryPureProps> = ({ slug, locale, access
                                                     image={item.image}
                                                     url={item.slug}
                                                     date={item.createdAt}
-                                                    author={item.author}
-                                                    categoryTitle={item.category.title}
+                                                    author={
+                                                        item.author
+                                                            ? {
+                                                                  name: item.author.name,
+                                                                  position: item.author.position,
+                                                                  avatar: item.author.avatar?.url,
+                                                              }
+                                                            : undefined
+                                                    }
+                                                    categoryTitle={item.category?.title}
                                                 />
                                             </li>
                                         ))}

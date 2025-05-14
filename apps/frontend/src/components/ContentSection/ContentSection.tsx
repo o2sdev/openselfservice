@@ -1,4 +1,5 @@
 import React from 'react';
+import { RichText } from 'src/components/RichText/RichText';
 
 import { Button } from '@o2s/ui/components/button';
 import { Typography } from '@o2s/ui/components/typography';
@@ -19,7 +20,7 @@ export const ContentSection: React.FC<Readonly<ContentSectionProps>> = ({
                 {(title || description) && (
                     <div className="flex flex-col gap-2">
                         {title && <Typography variant="h2">{title}</Typography>}
-                        {description && <Typography variant="body">{description}</Typography>}
+                        {description && <RichText content={description} />}
                     </div>
                 )}
                 {additionalLink && (

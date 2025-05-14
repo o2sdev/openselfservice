@@ -101,7 +101,9 @@ export class PageService {
     };
 
     private processArticle = (article: Articles.Model.Article, _query: GetPageQuery, headers: AppHeaders) => {
-        // TODO: handle alternative pages
+        if (!article.category) {
+            throw new NotFoundException();
+        }
 
         const category = this.articlesService.getCategory({ id: article.category.id, locale: headers['x-locale'] });
 
