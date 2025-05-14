@@ -1,6 +1,7 @@
+'use server';
+
 import { Modules } from '@o2s/api-harmonization';
 import React from 'react';
-import { OrdersSummaryRenderer } from 'src/blocks/OrdersSummary/OrdersSummary.renderer';
 
 import { CMS } from '@o2s/framework/modules';
 
@@ -13,6 +14,7 @@ import { InvoiceListRenderer } from '@/blocks/InvoiceList/InvoiceList.renderer';
 import { NotificationDetailsRenderer } from '@/blocks/NotificationDetails/NotificationDetails.renderer';
 import { NotificationListRenderer } from '@/blocks/NotificationList/NotificationList.renderer';
 import { OrderListRenderer } from '@/blocks/OrderList/OrderList.renderer';
+import { OrdersSummaryRenderer } from '@/blocks/OrdersSummary/OrdersSummary.renderer';
 import { PaymentsHistoryRenderer } from '@/blocks/PaymentsHistory/PaymentsHistory.renderer';
 import { PaymentsSummaryRenderer } from '@/blocks/PaymentsSummary/PaymentsSummary.renderer';
 import { QuickLinksRenderer } from '@/blocks/QuickLinks/QuickLinks.renderer';
@@ -26,7 +28,7 @@ import { UserAccountRenderer } from '@/blocks/UserAccount/UserAccount.renderer';
 
 // BLOCK IMPORT
 
-export const renderBlocks = (blocks: CMS.Model.Page.SlotBlock[], slug: string[], accessToken: string) => {
+export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: string[], accessToken: string) => {
     return blocks.map((block) => {
         switch (block.__typename as Modules.Page.Model.Blocks) {
             case 'TicketListBlock':

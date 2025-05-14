@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
+import { CategoryBlocks } from 'src/blocks/Category/CategoryBlocks';
 
 import { sdk } from '@/api/sdk';
 
@@ -16,5 +17,14 @@ export const Category: React.FC<CategoryProps> = async ({ id, slug, accessToken,
         accessToken,
     );
 
-    return <CategoryDynamic {...data} id={id} slug={slug} accessToken={accessToken} locale={locale} />;
+    return (
+        <CategoryDynamic
+            {...data}
+            id={id}
+            slug={slug}
+            accessToken={accessToken}
+            locale={locale}
+            blocks={<CategoryBlocks components={data.components} slug={slug} accessToken={accessToken} />}
+        />
+    );
 };

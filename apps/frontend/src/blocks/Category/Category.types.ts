@@ -1,4 +1,5 @@
 import { Blocks } from '@o2s/api-harmonization';
+import React from 'react';
 
 export interface CategoryProps {
     id: string;
@@ -7,4 +8,7 @@ export interface CategoryProps {
     locale: string;
 }
 
-export type CategoryPureProps = CategoryProps & Blocks.Category.Model.CategoryBlock;
+export type CategoryPureProps = CategoryProps &
+    Blocks.Category.Model.CategoryBlock & {
+        blocks: React.ReactNode;
+    };

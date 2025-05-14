@@ -17,9 +17,7 @@ import { Pagination } from '@/components/Pagination/Pagination';
 
 import { CategoryPureProps } from './Category.types';
 
-/*const { renderBlocks } = await import('@/blocks/renderBlocks');*/
-
-export const CategoryPure: React.FC<CategoryPureProps> = ({ slug, locale, accessToken, ...component }) => {
+export const CategoryPure: React.FC<CategoryPureProps> = ({ slug, locale, accessToken, blocks, ...component }) => {
     const initialArticles: Blocks.Category.Request.GetCategoryBlockArticlesQuery = {
         id: component.id,
         offset: 0,
@@ -60,7 +58,8 @@ export const CategoryPure: React.FC<CategoryPureProps> = ({ slug, locale, access
             </Container>
             <Separator orientation="horizontal" className="shrink-[1]" />
             <div className="flex flex-col gap-12">
-                {/*component.components && <div>{renderBlocks(component.components, slug, accessToken)}</div> */}
+                {blocks}
+
                 {initialData.length > 0 && (
                     <Container variant="narrow">
                         <div className="flex flex-col gap-6">
