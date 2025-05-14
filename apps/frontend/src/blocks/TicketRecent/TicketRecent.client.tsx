@@ -1,9 +1,12 @@
+'use client';
+
 import { ArrowRight } from 'lucide-react';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@o2s/ui/components/avatar';
 import { Card, CardContent, CardHeader } from '@o2s/ui/components/card';
 import { Link } from '@o2s/ui/components/link';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@o2s/ui/components/tooltip';
 import { Typography } from '@o2s/ui/components/typography';
 
 import { Link as NextLink } from '@/i18n';
@@ -13,10 +16,11 @@ import { RichText } from '@/components/RichText/RichText';
 import { TicketRecentPureProps } from './TicketRecent.types';
 
 export const TicketRecentPure: React.FC<TicketRecentPureProps> = ({ ...component }) => {
+    const [openTooltips, setOpenTooltips] = useState<Record<string, boolean>>({});
     const { title, tickets, noResults, details } = component;
 
     function extractFirst(content: string) {
-        const match = content.match(/<p>(.*?)<\/p>/);
+        const match = content.match(/<p>([\s\S]*?)<\/p>/);
         const extractedContent = match ? match[1] : content;
         return extractedContent?.slice(0, 90) + '...';
     }
@@ -61,18 +65,44 @@ export const TicketRecentPure: React.FC<TicketRecentPureProps> = ({ ...component
                                                             </div>
                                                         </div>
                                                         <div className="basis-2/3 flex items-center justify-between gap-4">
-                                                            <Link
-                                                                asChild
-                                                                className="whitespace-normal text-foreground hover:text-primary"
+                                                            <Tooltip
+                                                                open={openTooltips[ticket.id.value] || false}
+                                                                onOpenChange={(isOpen) =>
+                                                                    setOpenTooltips((prev) => ({
+                                                                        ...prev,
+                                                                        [ticket.id.value]: isOpen,
+                                                                    }))
+                                                                }
                                                             >
-                                                                <NextLink href={ticket.detailsUrl} title={details}>
+                                                                <TooltipTrigger asChild>
+                                                                    <Link
+                                                                        asChild
+                                                                        className="whitespace-normal text-foreground hover:text-primary"
+                                                                    >
+                                                                        <NextLink
+                                                                            href={ticket.detailsUrl}
+                                                                            title={details}
+                                                                        >
+                                                                            <div className="line-clamp-2">
+                                                                                <RichText
+                                                                                    content={extractFirst(
+                                                                                        comment.content,
+                                                                                    )}
+                                                                                    baseFontSize="small"
+                                                                                    className=""
+                                                                                />
+                                                                            </div>
+                                                                            <ArrowRight className="h-4 w-4" />
+                                                                        </NextLink>
+                                                                    </Link>
+                                                                </TooltipTrigger>
+                                                                <TooltipContent className="max-w-[300px]">
                                                                     <RichText
-                                                                        content={extractFirst(comment.content)}
+                                                                        content={comment.content}
                                                                         baseFontSize="small"
                                                                     />
-                                                                    <ArrowRight className="h-4 w-4" />
-                                                                </NextLink>
-                                                            </Link>
+                                                                </TooltipContent>
+                                                            </Tooltip>
                                                         </div>
                                                     </div>
                                                 )}
