@@ -28,9 +28,9 @@
         "concurrently": "^9.1.2",
         "eslint": "^9.26.0",
         "prettier": "^3.5.3",
-        "tsc-alias": "^1.8.15",
+        "tsc-alias": "^1.8.16",
         "typescript": "^5.8.3",
-        "eslint-config-prettier": "^10.1.2"
+        "eslint-config-prettier": "^10.1.5"
     },
     "peerDependencies": {
         "@nestjs/axios": "^4",

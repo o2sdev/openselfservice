@@ -18,7 +18,7 @@
     "dependencies": {
         "@o2s/framework": "*",
         "@o2s/utils.logger": "*",
-        "algoliasearch": "^5.24.0"
+        "algoliasearch": "^5.25.0"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",
@@ -27,7 +27,7 @@
         "concurrently": "^9.1.2",
         "eslint": "^9.26.0",
         "prettier": "^3.5.3",
-        "tsc-alias": "^1.8.15",
+        "tsc-alias": "^1.8.16",
         "typescript": "^5.8.3"
     },
     "peerDependencies": {
