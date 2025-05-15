@@ -6,6 +6,7 @@ import { CMS } from '@o2s/framework/modules';
 const MOCK_WARRANTY_REPAIR_BLOCK_EN: CMS.Model.CategoryBlock.CategoryBlock = {
     id: 'category-1',
     categoryId: 'warranty-and-repair',
+    componentsPosition: 'bottom',
     components: [
         {
             __typename: 'FaqBlock',
@@ -33,6 +34,7 @@ const MOCK_WARRANTY_REPAIR_BLOCK_EN: CMS.Model.CategoryBlock.CategoryBlock = {
 const MOCK_WARRANTY_REPAIR_BLOCK_DE: CMS.Model.CategoryBlock.CategoryBlock = {
     id: 'category-1',
     categoryId: 'warranty-and-repair',
+    componentsPosition: 'bottom',
     components: [
         {
             __typename: 'FaqBlock',
@@ -60,6 +62,7 @@ const MOCK_WARRANTY_REPAIR_BLOCK_DE: CMS.Model.CategoryBlock.CategoryBlock = {
 const MOCK_WARRANTY_REPAIR_BLOCK_PL: CMS.Model.CategoryBlock.CategoryBlock = {
     id: 'category-1',
     categoryId: 'warranty-and-repair',
+    componentsPosition: 'bottom',
     components: [
         {
             __typename: 'FaqBlock',
@@ -89,6 +92,7 @@ const MOCK_WARRANTY_REPAIR_BLOCK_PL: CMS.Model.CategoryBlock.CategoryBlock = {
 const MOCK_MAINTENANCE_BLOCK_EN: CMS.Model.CategoryBlock.CategoryBlock = {
     id: 'category-2',
     categoryId: 'maintenance',
+    componentsPosition: 'bottom',
     components: [
         {
             __typename: 'FaqBlock',
@@ -115,6 +119,7 @@ const MOCK_MAINTENANCE_BLOCK_EN: CMS.Model.CategoryBlock.CategoryBlock = {
 const MOCK_MAINTENANCE_BLOCK_DE: CMS.Model.CategoryBlock.CategoryBlock = {
     id: 'category-2',
     categoryId: 'maintenance',
+    componentsPosition: 'bottom',
     components: [
         {
             __typename: 'FaqBlock',
@@ -141,6 +146,7 @@ const MOCK_MAINTENANCE_BLOCK_DE: CMS.Model.CategoryBlock.CategoryBlock = {
 const MOCK_MAINTENANCE_BLOCK_PL: CMS.Model.CategoryBlock.CategoryBlock = {
     id: 'category-2',
     categoryId: 'maintenance',
+    componentsPosition: 'bottom',
     components: [
         {
             __typename: 'FaqBlock',
@@ -169,6 +175,7 @@ const MOCK_MAINTENANCE_BLOCK_PL: CMS.Model.CategoryBlock.CategoryBlock = {
 const MOCK_SAFETY_BLOCK_EN: CMS.Model.CategoryBlock.CategoryBlock = {
     id: 'category-3',
     categoryId: 'safety',
+    componentsPosition: 'bottom',
     components: [
         {
             __typename: 'FaqBlock',
@@ -195,6 +202,7 @@ const MOCK_SAFETY_BLOCK_EN: CMS.Model.CategoryBlock.CategoryBlock = {
 const MOCK_SAFETY_BLOCK_DE: CMS.Model.CategoryBlock.CategoryBlock = {
     id: 'category-3',
     categoryId: 'safety',
+    componentsPosition: 'bottom',
     components: [
         {
             __typename: 'FaqBlock',
@@ -221,6 +229,7 @@ const MOCK_SAFETY_BLOCK_DE: CMS.Model.CategoryBlock.CategoryBlock = {
 const MOCK_SAFETY_BLOCK_PL: CMS.Model.CategoryBlock.CategoryBlock = {
     id: 'category-3',
     categoryId: 'safety',
+    componentsPosition: 'bottom',
     components: [
         {
             __typename: 'FaqBlock',
@@ -249,6 +258,7 @@ const MOCK_SAFETY_BLOCK_PL: CMS.Model.CategoryBlock.CategoryBlock = {
 const MOCK_ACCESSORIES_BLOCK_EN: CMS.Model.CategoryBlock.CategoryBlock = {
     id: 'category-4',
     categoryId: 'accessories',
+    componentsPosition: 'bottom',
     components: [
         {
             __typename: 'FaqBlock',
@@ -275,6 +285,7 @@ const MOCK_ACCESSORIES_BLOCK_EN: CMS.Model.CategoryBlock.CategoryBlock = {
 const MOCK_ACCESSORIES_BLOCK_DE: CMS.Model.CategoryBlock.CategoryBlock = {
     id: 'category-4',
     categoryId: 'accessories',
+    componentsPosition: 'bottom',
     components: [
         {
             __typename: 'FaqBlock',
@@ -301,6 +312,7 @@ const MOCK_ACCESSORIES_BLOCK_DE: CMS.Model.CategoryBlock.CategoryBlock = {
 const MOCK_ACCESSORIES_BLOCK_PL: CMS.Model.CategoryBlock.CategoryBlock = {
     id: 'category-4',
     categoryId: 'accessories',
+    componentsPosition: 'bottom',
     components: [
         {
             __typename: 'FaqBlock',
@@ -329,13 +341,21 @@ export const mapCategoryBlock = (id: string, locale: string): CMS.Model.Category
     switch (id) {
         case 'category-1':
             if (locale === 'de') {
+                return MOCK_WARRANTY_REPAIR_BLOCK_DE;
+            } else if (locale === 'pl') {
+                return MOCK_WARRANTY_REPAIR_BLOCK_PL;
+            } else {
+                return MOCK_WARRANTY_REPAIR_BLOCK_EN;
+            }
+        case 'category-2':
+            if (locale === 'de') {
                 return MOCK_MAINTENANCE_BLOCK_DE;
             } else if (locale === 'pl') {
                 return MOCK_MAINTENANCE_BLOCK_PL;
             } else {
                 return MOCK_MAINTENANCE_BLOCK_EN;
             }
-        case 'category-2':
+        case 'category-3':
             if (locale === 'de') {
                 return MOCK_SAFETY_BLOCK_DE;
             } else if (locale === 'pl') {
@@ -343,21 +363,13 @@ export const mapCategoryBlock = (id: string, locale: string): CMS.Model.Category
             } else {
                 return MOCK_SAFETY_BLOCK_EN;
             }
-        case 'category-3':
+        case 'category-4':
             if (locale === 'de') {
                 return MOCK_ACCESSORIES_BLOCK_DE;
             } else if (locale === 'pl') {
                 return MOCK_ACCESSORIES_BLOCK_PL;
             } else {
                 return MOCK_ACCESSORIES_BLOCK_EN;
-            }
-        case 'category-4':
-            if (locale === 'de') {
-                return MOCK_WARRANTY_REPAIR_BLOCK_DE;
-            } else if (locale === 'pl') {
-                return MOCK_WARRANTY_REPAIR_BLOCK_PL;
-            } else {
-                return MOCK_WARRANTY_REPAIR_BLOCK_EN;
             }
     }
 

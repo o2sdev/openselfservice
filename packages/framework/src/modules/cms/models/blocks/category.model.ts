@@ -6,6 +6,7 @@ export class CategoryBlock extends Block.Block {
     description?: string;
     categoryId!: string;
     components?: SlotBlock[];
+    componentsPosition!: 'top' | 'bottom';
     pagination?: Pagination.Pagination;
     parent?: {
         slug: string;

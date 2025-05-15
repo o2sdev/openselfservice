@@ -8,6 +8,7 @@ export class CategoryBlock extends Block.Block {
     description!: Articles.Model.Category['description'];
     icon?: Articles.Model.Category['icon'];
     components?: CMS.Model.CategoryBlock.CategoryBlock['components'];
+    componentsPosition!: CMS.Model.CategoryBlock.CategoryBlock['componentsPosition'];
     articles!: CategoryArticlesListBlock;
     pagination?: Models.Pagination.Pagination;
 }

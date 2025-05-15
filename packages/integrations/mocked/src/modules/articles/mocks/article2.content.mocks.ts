@@ -24,10 +24,10 @@ export const MOCK_ARTICLE2_EN: Articles.Model.Article[] = [
             title: 'Safety',
         },
         author: {
-            name: 'Lewis Hamilton',
+            name: 'Michael Johnson',
             position: 'Safety Specialist',
             avatar: {
-                url: 'https://example.com/images/user-003.jpg',
+                url: 'https://avatar.iran.liara.run/public/boy',
                 alt: '',
             },
         },
@@ -260,6 +260,14 @@ export const MOCK_ARTICLE2_DE: Articles.Model.Article[] = [
             id: 'safety',
             title: 'Sicherheit',
         },
+        author: {
+            name: 'Michael Johnson',
+            position: 'Safety Specialist',
+            avatar: {
+                url: 'https://avatar.iran.liara.run/public/boy',
+                alt: '',
+            },
+        },
         sections: [
             {
                 id: 'sect-003-1',
@@ -308,6 +316,14 @@ export const MOCK_ARTICLE2_PL: Articles.Model.Article[] = [
         category: {
             id: 'safety',
             title: 'Bezpieczeństwo',
+        },
+        author: {
+            name: 'Michael Johnson',
+            position: 'Safety Specialist',
+            avatar: {
+                url: 'https://avatar.iran.liara.run/public/boy',
+                alt: '',
+            },
         },
         sections: [
             {

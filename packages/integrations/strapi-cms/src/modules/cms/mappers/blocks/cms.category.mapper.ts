@@ -22,6 +22,7 @@ export const mapCategoryBlock = (data: GetComponentQuery, _baseUrl: string): CMS
                 description: component.category!.description,
                 categoryId: component.category!.slug,
                 components: component.category?.components ? mapSlot(component.category?.components) : undefined,
+                componentsPosition: 'bottom',
                 parent: component.parent,
                 labels: {
                     today: configurableTexts.dates.today,

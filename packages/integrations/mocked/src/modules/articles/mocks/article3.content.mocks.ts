@@ -24,10 +24,10 @@ export const MOCK_ARTICLE3_EN: Articles.Model.Article[] = [
             title: 'Accessories',
         },
         author: {
-            name: 'Charles Leclerc',
+            name: 'Sarah Williams',
             position: 'Product Specialist',
             avatar: {
-                url: 'https://example.com/images/user-004.jpg',
+                url: 'https://avatar.iran.liara.run/public/girl',
                 alt: '',
             },
         },
@@ -333,6 +333,14 @@ export const MOCK_ARTICLE3_DE: Articles.Model.Article[] = [
             id: 'accessories',
             title: 'Zubehör',
         },
+        author: {
+            name: 'Sarah Williams',
+            position: 'Product Specialist',
+            avatar: {
+                url: 'https://avatar.iran.liara.run/public/girl',
+                alt: '',
+            },
+        },
         sections: [
             {
                 id: 'sect-004-1',
@@ -381,6 +389,14 @@ export const MOCK_ARTICLE3_PL: Articles.Model.Article[] = [
         category: {
             id: 'accessories',
             title: 'Akcesoria',
+        },
+        author: {
+            name: 'Sarah Williams',
+            position: 'Product Specialist',
+            avatar: {
+                url: 'https://avatar.iran.liara.run/public/girl',
+                alt: '',
+            },
         },
         sections: [
             {

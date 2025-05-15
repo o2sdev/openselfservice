@@ -60,7 +60,7 @@ export const InformativeCard: React.FC<Readonly<InformativeCardProps>> = (props)
         return (
             <Link
                 asChild
-                className="flex flex-grow whitespace-normal text-foreground hover:no-underline [&>div]:hover:border-primary hover:[&_svg]:text-primary rounded-lg bg-card border border-border w-full h-full items-start"
+                className="flex flex-grow whitespace-normal text-foreground hover:no-underline hover:border-primary hover:[&_svg]:text-primary rounded-lg bg-card border border-border w-full h-full items-start"
             >
                 <NextLink href={props.href} aria-label={props.title}>
                     <InformativeCardContent {...props} />

@@ -38,6 +38,7 @@ export const CategoryPure: React.FC<CategoryPureProps> = ({ slug, locale, access
             setData(newData);
         });
     };
+
     return (
         <div className="w-full flex flex-col gap-6">
             <Container variant="narrow">
@@ -58,7 +59,7 @@ export const CategoryPure: React.FC<CategoryPureProps> = ({ slug, locale, access
             </Container>
             <Separator orientation="horizontal" className="shrink-[1]" />
             <div className="flex flex-col gap-12">
-                {blocks}
+                {component.componentsPosition === 'top' && blocks}
 
                 {initialData.length > 0 && (
                     <Container variant="narrow">
@@ -114,6 +115,8 @@ export const CategoryPure: React.FC<CategoryPureProps> = ({ slug, locale, access
                         </div>
                     </Container>
                 )}
+
+                {component.componentsPosition === 'bottom' && blocks}
             </div>
         </div>
     );

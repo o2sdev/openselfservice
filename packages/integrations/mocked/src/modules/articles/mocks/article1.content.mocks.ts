@@ -24,10 +24,10 @@ export const MOCK_ARTICLE1_EN: Articles.Model.Article[] = [
             title: 'Maintenance',
         },
         author: {
-            name: 'Max Verstappen',
+            name: 'Jane Doe',
             position: 'Technical Specialist',
             avatar: {
-                url: 'https://example.com/images/user-002.jpg',
+                url: 'https://avatar.iran.liara.run/public/girl',
                 alt: '',
             },
         },
@@ -254,6 +254,14 @@ export const MOCK_ARTICLE1_DE: Articles.Model.Article[] = [
             id: 'maintenance',
             title: 'Wartung',
         },
+        author: {
+            name: 'Jane Doe',
+            position: 'Technical Specialist',
+            avatar: {
+                url: 'https://avatar.iran.liara.run/public/girl',
+                alt: '',
+            },
+        },
         sections: [
             {
                 id: 'sect-002-1',
@@ -302,6 +310,14 @@ export const MOCK_ARTICLE1_PL: Articles.Model.Article[] = [
         category: {
             id: 'maintenance',
             title: 'Konserwacja',
+        },
+        author: {
+            name: 'Jane Doe',
+            position: 'Technical Specialist',
+            avatar: {
+                url: 'https://avatar.iran.liara.run/public/girl',
+                alt: '',
+            },
         },
         sections: [
             {

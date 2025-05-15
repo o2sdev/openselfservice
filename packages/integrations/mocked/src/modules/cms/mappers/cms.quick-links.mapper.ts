@@ -11,7 +11,7 @@ const MOCK_QUICK_LINKS_BLOCK_EN: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
             description:
                 'Locate authorized retailers and service centers near you for in-person assistance, product demos, and expert advice.',
             icon: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-1.svg',
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/MapPin.svg',
                 alt: '',
             },
         },
@@ -21,7 +21,7 @@ const MOCK_QUICK_LINKS_BLOCK_EN: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
             description:
                 'Diagnose and schedule repairs for your tools online. Get quick service estimates and track repair status in real-time.',
             icon: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/Drill.svg',
                 alt: '',
             },
         },
@@ -31,7 +31,7 @@ const MOCK_QUICK_LINKS_BLOCK_EN: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
             description:
                 'Access and download your invoices and payment history. Keep track of all your transactions in one place.',
             icon: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-3.svg',
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/CreditCard.svg',
                 alt: '',
             },
         },
@@ -41,7 +41,7 @@ const MOCK_QUICK_LINKS_BLOCK_EN: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
             description:
                 'Track and manage your orders. View order history, check status, and access order details in one place.',
             icon: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-4.svg',
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/ShoppingBag.svg',
                 alt: '',
             },
         },
@@ -60,7 +60,7 @@ const MOCK_QUICK_LINKS_BLOCK_DE: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
             description:
                 'Finden Sie autorisierte Händler und Servicezentren in Ihrer Nähe für persönliche Unterstützung, Produktdemonstrationen und Expertenberatung.',
             icon: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-1.svg',
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/MapPin.svg',
                 alt: '',
             },
         },
@@ -70,7 +70,7 @@ const MOCK_QUICK_LINKS_BLOCK_DE: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
             description:
                 'Diagnostizieren und planen Sie Reparaturen für Ihre Werkzeuge online. Erhalten Sie schnelle Serviceschätzungen und verfolgen Sie den Reparaturstatus in Echtzeit.',
             icon: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/Drill.svg',
                 alt: '',
             },
         },
@@ -80,7 +80,7 @@ const MOCK_QUICK_LINKS_BLOCK_DE: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
             description:
                 'Greifen Sie auf Ihre Rechnungen und Zahlungshistorie zu. Behalten Sie alle Ihre Transaktionen an einem Ort im Blick.',
             icon: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-3.svg',
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/CreditCard.svg',
                 alt: '',
             },
         },
@@ -90,7 +90,7 @@ const MOCK_QUICK_LINKS_BLOCK_DE: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
             description:
                 'Verfolgen und verwalten Sie Ihre Bestellungen. Sehen Sie Ihre Bestellhistorie, prüfen Sie den Status und greifen Sie auf Bestelldetails an einem Ort zu.',
             icon: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-4.svg',
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/ShoppingBag.svg',
                 alt: '',
             },
         },
@@ -109,7 +109,7 @@ const MOCK_QUICK_LINKS_BLOCK_PL: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
             description:
                 'Znajdź autoryzowanych sprzedawców i centra serwisowe w Twojej okolicy, aby uzyskać osobistą pomoc, demonstracje produktów i porady ekspertów.',
             icon: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-1.svg',
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/MapPin.svg',
                 alt: '',
             },
         },
@@ -119,7 +119,7 @@ const MOCK_QUICK_LINKS_BLOCK_PL: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
             description:
                 'Diagnozuj i planuj naprawy swoich narzędzi online. Otrzymuj szybkie wyceny serwisowe i śledź status naprawy w czasie rzeczywistym.',
             icon: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/Drill.svg',
                 alt: '',
             },
         },
@@ -129,7 +129,7 @@ const MOCK_QUICK_LINKS_BLOCK_PL: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
             description:
                 'Uzyskaj dostęp do swoich faktur i historii płatności. Śledź wszystkie swoje transakcje w jednym miejscu.',
             icon: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-3.svg',
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/CreditCard.svg',
                 alt: '',
             },
         },
@@ -139,7 +139,7 @@ const MOCK_QUICK_LINKS_BLOCK_PL: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
             description:
                 'Śledź i zarządzaj swoimi zamówieniami. Przeglądaj historię zamówień, sprawdzaj status i uzyskaj dostęp do szczegółów zamówień w jednym miejscu.',
             icon: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-4.svg',
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/ShoppingBag.svg',
                 alt: '',
             },
         },

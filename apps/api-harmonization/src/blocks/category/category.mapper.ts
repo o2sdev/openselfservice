@@ -17,6 +17,7 @@ export const mapCategory = (
         description: category.description,
         icon: category.icon,
         components: cms.components,
+        componentsPosition: cms.componentsPosition,
         pagination: cms.pagination,
         articles: {
             title: cms.title,

@@ -8,7 +8,7 @@ export const MOCK_CATEGORIES_EN: Articles.Model.Category[] = [
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Warranty & Repair',
         icon: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-1.svg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/Wrench.svg',
             alt: '',
         },
         description:
@@ -25,7 +25,7 @@ export const MOCK_CATEGORIES_EN: Articles.Model.Category[] = [
         updatedAt: '2023-07-20T16:30:00Z',
         title: 'Maintenance',
         icon: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/Wrench.svg',
             alt: '',
         },
         description:
@@ -42,7 +42,7 @@ export const MOCK_CATEGORIES_EN: Articles.Model.Category[] = [
         updatedAt: '2023-08-25T13:20:00Z',
         title: 'Safety',
         icon: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-3.svg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/ShieldCheck.svg',
             alt: '',
         },
         description:
@@ -59,7 +59,7 @@ export const MOCK_CATEGORIES_EN: Articles.Model.Category[] = [
         updatedAt: '2023-09-30T15:45:00Z',
         title: 'Accessories',
         icon: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-4.svg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/ShieldCheck.svg',
             alt: '',
         },
         description:
@@ -79,7 +79,7 @@ export const MOCK_CATEGORIES_DE: Articles.Model.Category[] = [
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Garantie & Reparatur',
         icon: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-1.svg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/Wrench.svg',
             alt: '',
         },
         description:
@@ -96,7 +96,7 @@ export const MOCK_CATEGORIES_DE: Articles.Model.Category[] = [
         updatedAt: '2023-07-20T16:30:00Z',
         title: 'Wartung',
         icon: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/Wrench.svg',
             alt: '',
         },
         description:
@@ -113,7 +113,7 @@ export const MOCK_CATEGORIES_DE: Articles.Model.Category[] = [
         updatedAt: '2023-08-25T13:20:00Z',
         title: 'Sicherheit',
         icon: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-3.svg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/ShieldCheck.svg',
             alt: '',
         },
         description:
@@ -130,7 +130,7 @@ export const MOCK_CATEGORIES_DE: Articles.Model.Category[] = [
         updatedAt: '2023-09-30T15:45:00Z',
         title: 'Zubehör',
         icon: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-4.svg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/ShieldCheck.svg',
             alt: '',
         },
         description:
@@ -150,7 +150,7 @@ export const MOCK_CATEGORIES_PL: Articles.Model.Category[] = [
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Gwarancja i Naprawa',
         icon: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-1.svg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/Wrench.svg',
             alt: '',
         },
         description:
@@ -167,7 +167,7 @@ export const MOCK_CATEGORIES_PL: Articles.Model.Category[] = [
         updatedAt: '2023-07-20T16:30:00Z',
         title: 'Konserwacja',
         icon: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/Wrench.svg',
             alt: '',
         },
         description:
@@ -184,7 +184,7 @@ export const MOCK_CATEGORIES_PL: Articles.Model.Category[] = [
         updatedAt: '2023-08-25T13:20:00Z',
         title: 'Bezpieczeństwo',
         icon: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-3.svg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/ShieldCheck.svg',
             alt: '',
         },
         description:
@@ -201,7 +201,7 @@ export const MOCK_CATEGORIES_PL: Articles.Model.Category[] = [
         updatedAt: '2023-09-30T15:45:00Z',
         title: 'Akcesoria',
         icon: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-4.svg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/ShieldCheck.svg',
             alt: '',
         },
         description:

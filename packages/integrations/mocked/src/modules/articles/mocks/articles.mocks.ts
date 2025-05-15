@@ -32,10 +32,10 @@ export const MOCK_ARTICLES_EN: Articles.Model.Article[] = [
             title: 'Warranty & Repair',
         },
         author: {
-            name: 'Lando Norris',
+            name: 'John Smith',
             position: 'Content Creator',
             avatar: {
-                url: 'https://example.com/images/user-001.jpg',
+                url: 'https://avatar.iran.liara.run/public/boy',
                 alt: '',
             },
         },
@@ -111,6 +111,14 @@ export const MOCK_ARTICLES_DE: Articles.Model.Article[] = [
             id: 'warranty-and-repair',
             title: 'Warranty & Repair',
         },
+        author: {
+            name: 'John Smith',
+            position: 'Content Creator',
+            avatar: {
+                url: 'https://avatar.iran.liara.run/public/boy',
+                alt: '',
+            },
+        },
         sections: [
             {
                 id: 'sect-001-1',
@@ -170,6 +178,14 @@ export const MOCK_ARTICLES_PL: Articles.Model.Article[] = [
         category: {
             id: 'warranty-and-repair',
             title: 'Warranty & Repair',
+        },
+        author: {
+            name: 'John Smith',
+            position: 'Content Creator',
+            avatar: {
+                url: 'https://avatar.iran.liara.run/public/boy',
+                alt: '',
+            },
         },
         sections: [
             {
