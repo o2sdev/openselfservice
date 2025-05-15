@@ -1,5 +1,15 @@
 # @o2s/api-harmonization
 
+## 0.21.1
+
+### Patch Changes
+
+- 87185e9: feat: updated mocked content for knowledge base
+- Updated dependencies [9ce2262]
+- Updated dependencies [87185e9]
+    - @o2s/integrations.mocked@0.22.1
+    - @o2s/framework@0.22.1
+
 ## 0.21.0
 
 ### Minor Changes

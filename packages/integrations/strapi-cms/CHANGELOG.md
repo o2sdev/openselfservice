@@ -1,5 +1,13 @@
 # @o2s/integrations.strapi-cms
 
+## 1.2.1
+
+### Patch Changes
+
+- 87185e9: feat: updated mocked content for knowledge base
+- Updated dependencies [87185e9]
+    - @o2s/framework@0.22.1
+
 ## 1.2.0
 
 ### Minor Changes
