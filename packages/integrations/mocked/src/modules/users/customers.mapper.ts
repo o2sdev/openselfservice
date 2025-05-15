@@ -2,7 +2,7 @@ import { Models } from '@o2s/framework/modules';
 
 const MOCK_CUSTOMER_1: Models.Customer.Customer = {
     id: 'cust-001',
-    name: 'Acme Corporationh',
+    name: 'Acme Corporation',
     clientType: 'B2B',
     address: {
         country: 'US',
