@@ -1,5 +1,61 @@
 # @o2s/api-harmonization
 
+## 0.21.0
+
+### Minor Changes
+
+- 8b93cbf: feat: Implement SurveyJS forms
+- 8d92afc: Adding label clickToSelect for reseting filters
+- 30f3524: added `OrdersSummary` block and reworked mocked orders to return random orders instead of them being hardcoded
+- 8b93cbf: feat: Integrated SurveyJS
+- 8d92afc: Help center pages and subpages implemented:
+
+    - Added new UI components InformativeCard, BlogCard, Author, ContentSection
+    - Styled blocks, Article, Article List, Category, Category List
+    - Added pagination to Category block
+    - Made changes to mocks and models
+
+- 30f3524: feat: implemented orderListBlock
+
+    - new page /orders,
+    - added strapi integration for page /orders
+    - new UI dropdown-menu component
+
+- 8b93cbf: feat: implement surveyJS forms
+- 6d63cb1: feat: added surveyJS module
+- ba125d6: Added orders module
+- bb46536: feat: cases submission
+
+    - new component DynamicIcon - for loading icons dinamicly,
+    - new component ActionLinks - for showing button list with dropdown-menu,
+    - new pages: /contact-us, /submit-complaint, /request-device-maintenance,
+    - fixed placeholders and disabled state in SurveyJS fields,
+
+- 68f7858: chore: updated dependencies
+
+### Patch Changes
+
+- e4ebc5a: updated dependencies
+- Updated dependencies [2e4f22d]
+- Updated dependencies [8b93cbf]
+- Updated dependencies [e4ebc5a]
+- Updated dependencies [8d92afc]
+- Updated dependencies [30f3524]
+- Updated dependencies [84b9002]
+- Updated dependencies [8b93cbf]
+- Updated dependencies [68925cf]
+- Updated dependencies [30f3524]
+- Updated dependencies [8b93cbf]
+- Updated dependencies [84b9002]
+- Updated dependencies [6d63cb1]
+- Updated dependencies [ba125d6]
+- Updated dependencies [2e4f22d]
+- Updated dependencies [bb46536]
+- Updated dependencies [68f7858]
+    - @o2s/integrations.mocked@0.22.0
+    - @o2s/framework@0.22.0
+    - @o2s/utils.logger@0.11.0
+
 ## 0.20.0
 
 ### Minor Changes

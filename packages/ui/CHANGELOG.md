@@ -1,5 +1,42 @@
 # @o2s/ui
 
+## 0.15.0
+
+### Minor Changes
+
+- 2e4f22d: feat: add scrollable toggle group filter with multiple selection
+
+    - Add scroll container for toggle group filter in overlay view
+    - Implement multiple selection version for toggle group filter
+    - Add support for horizontal scrolling in filter items
+    - Improve filter item layout with proper spacing and alignment
+    - Add new components: ScrollContainer and ToggleGroup
+    - Add shx script for better cross-platform shell compatibility
+    - Add proper styling for filter items in scroll container
+
+- 8b93cbf: feat: Implement SurveyJS forms
+- 30f3524: added `OrdersSummary` block and reworked mocked orders to return random orders instead of them being hardcoded
+- 8b93cbf: feat: Integrated SurveyJS
+- 30f3524: feat: implemented orderListBlock
+
+    - new page /orders,
+    - added strapi integration for page /orders
+    - new UI dropdown-menu component
+
+- 8b93cbf: feat: implement surveyJS forms
+- bb46536: feat: cases submission
+
+    - new component DynamicIcon - for loading icons dinamicly,
+    - new component ActionLinks - for showing button list with dropdown-menu,
+    - new pages: /contact-us, /submit-complaint, /request-device-maintenance,
+    - fixed placeholders and disabled state in SurveyJS fields,
+
+- 68f7858: chore: updated dependencies
+
+### Patch Changes
+
+- e4ebc5a: updated dependencies
+
 ## 0.14.0
 
 ### Minor Changes
