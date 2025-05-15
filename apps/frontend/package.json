@@ -24,6 +24,7 @@
         "@prisma/client": "^6.7.0",
         "bcryptjs": "^3.0.2",
         "class-variance-authority": "^0.7.1",
+        "date-fns": "^4.1.0",
         "dotenv-cli": "^8.0.0",
         "formik": "^2.4.6",
         "jsonwebtoken": "^9.0.2",
@@ -36,9 +37,9 @@
         "react-dom": "^19.1.0",
         "react-indiana-drag-scroll": "^2.2.1",
         "react-string-replace": "^1.1.1",
+        "string-template": "^1.0.0",
         "survey-core": "^2.0.9",
         "survey-react-ui": "^2.0.9",
-        "string-template": "^1.0.0",
         "yup": "^1.6.1",
         "zod": "^3.24.4"
     },
