@@ -1,5 +1,11 @@
 # @o2s/integrations.mocked
 
+## 0.22.2
+
+### Patch Changes
+
+- fedee10: fixed mocks for different locales
+
 ## 0.22.1
 
 ### Patch Changes
