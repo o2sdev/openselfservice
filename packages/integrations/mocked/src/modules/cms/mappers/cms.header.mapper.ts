@@ -134,7 +134,7 @@ const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
                 {
                     __typename: 'NavigationItem',
                     label: 'Willkommen Hub',
-                    url: '/help-and-support',
+                    url: '/hilfe-und-support',
                 },
             ],
         },
@@ -210,7 +210,7 @@ const MOCK_HEADER_LOGON_PL: CMS.Model.Header.Header = {
                 {
                     __typename: 'NavigationItem',
                     label: 'Centrum powitalne',
-                    url: '/help-and-support',
+                    url: '/pomoc-i-wsparcie',
                 },
             ],
         },
