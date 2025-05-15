@@ -59,24 +59,45 @@ Input.displayName = 'Input';
 
 export type InputWithLabelProps = InputProps & {
     label: string | React.ReactNode;
+    labelAdornment?: React.ReactNode;
     labelClassName?: string;
+    children?: React.ReactNode;
 };
 
-const InputWithLabel = React.forwardRef<HTMLInputElement, InputWithLabelProps>(
-    ({ label, className, labelClassName, id, ...props }, ref) => {
+const InputWithLabel = React.forwardRef<HTMLInputElement, Readonly<InputWithLabelProps>>(
+    ({ label, labelAdornment, className, labelClassName, id, children, ...props }, ref) => {
         const generatedId = React.useId();
         const inputId = id || generatedId;
 
         return (
             <div className="grid gap-2">
-                <Label htmlFor={inputId} className={labelClassName}>
-                    {label}
-                </Label>
+                <div className="flex items-center justify-between gap-2">
+                    <Label htmlFor={inputId} className={labelClassName}>
+                        {label}
+                    </Label>
+                    {labelAdornment}
+                </div>
                 <Input id={inputId} ref={ref} {...props} className={className} />
+                {children}
             </div>
         );
     },
 );
 InputWithLabel.displayName = 'InputWithLabel';
 
-export { Input, InputWithLabel };
+export type InputWithLabelAndDescriptionProps = InputWithLabelProps & {
+    description?: string;
+};
+
+const InputWithLabelAndDescription = React.forwardRef<HTMLInputElement, Readonly<InputWithLabelAndDescriptionProps>>(
+    ({ description, ...props }, ref) => {
+        return (
+            <InputWithLabel {...props} ref={ref}>
+                {description && <p className="text-sm text-muted-foreground">{description}</p>}
+            </InputWithLabel>
+        );
+    },
+);
+InputWithLabelAndDescription.displayName = 'InputWithLabelAndDescription';
+
+export { Input, InputWithLabel, InputWithLabelAndDescription };

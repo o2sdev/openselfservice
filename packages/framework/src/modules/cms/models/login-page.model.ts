@@ -22,4 +22,28 @@ export class LoginPage {
     image?: Media.Media;
     seo!: Models.SEO.Page;
     invalidCredentials!: string;
+    forgotPassword?: {
+        label: string;
+        link: string;
+    };
+    resetPassword!: ResetPassword;
+}
+
+export class ResetPasswordStep {
+    title!: string;
+    subtitle?: string;
+    submitButton!: string;
+}
+
+export class ResetPassword {
+    password!: Models.FormField.FormField;
+    confirmPassword!: Models.FormField.FormField;
+    username!: Models.FormField.FormField;
+    labels!: {
+        show: string;
+        hide: string;
+    };
+    step1!: ResetPasswordStep;
+    step2!: ResetPasswordStep;
+    invalidCredentials!: string;
 }

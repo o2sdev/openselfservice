@@ -31,6 +31,10 @@ export interface SignInFormProps {
             label: string;
         };
         invalidCredentials: string;
+        forgotPassword?: {
+            label: string;
+            link: string;
+        };
     };
     onSignIn: (providerId: string, credentials?: FormValues) => Promise<AuthError | void>;
 }
