@@ -36,6 +36,7 @@ export const mapOrderListBlock = (data: GetComponentQuery): CMS.Model.OrderListB
                     yesterday: configurableTexts.dates.yesterday,
                     showMore: configurableTexts.actions.showMore,
                     reorder: configurableTexts.actions.reorder,
+                    clickToSelect: configurableTexts.actions.clickToSelect,
                 },
                 detailsUrl: component.detailsURL as string,
             };

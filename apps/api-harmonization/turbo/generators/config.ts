@@ -64,6 +64,18 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                 pattern: /(\/\/ BLOCK EXPORT)/g,
                 template: `export * as {{ pascalCase name }} from './{{kebabCase name}}';\n// BLOCK EXPORT`,
             },
+            {
+                type: 'modify',
+                path: 'src/modules/page/page.model.ts',
+                pattern: /(\/\/ BLOCK IMPORT)/g,
+                template: `{{ pascalCase name }},\n// BLOCK IMPORT`,
+            },
+            {
+                type: 'modify',
+                path: 'src/modules/page/page.model.ts',
+                pattern: /(\/\/ BLOCK REGISTER)/g,
+                template: `| {{ pascalCase name }}.Model.{{ pascalCase name }}Block['__typename']\n        // BLOCK REGISTER`,
+            },
         ],
     });
 }

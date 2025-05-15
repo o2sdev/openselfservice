@@ -47,9 +47,7 @@ export const TicketRecentPure: React.FC<TicketRecentPureProps> = ({ ...component
                                                             <div className="flex items-center gap-2">
                                                                 <Avatar>
                                                                     <AvatarImage src={comment.author.avatar} />
-                                                                    <AvatarFallback>
-                                                                        {comment.author.initials}
-                                                                    </AvatarFallback>
+                                                                    <AvatarFallback name={comment.author.name} />
                                                                 </Avatar>
                                                                 <div className="flex flex-col gap-1">
                                                                     <Typography variant="small">

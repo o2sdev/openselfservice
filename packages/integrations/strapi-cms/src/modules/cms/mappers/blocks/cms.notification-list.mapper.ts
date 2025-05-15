@@ -36,6 +36,7 @@ export const mapNotificationListBlock = (
                 labels: {
                     today: configurableTexts.dates.today,
                     yesterday: configurableTexts.dates.yesterday,
+                    clickToSelect: configurableTexts.actions.clickToSelect,
                 },
                 detailsUrl: component.detailsURL as string,
             };

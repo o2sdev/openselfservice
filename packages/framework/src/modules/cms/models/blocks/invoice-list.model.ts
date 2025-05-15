@@ -16,6 +16,7 @@ export class InvoiceListBlock extends Block.Block {
     labels!: {
         today: string;
         yesterday: string;
+        clickToSelect: string;
     };
     downloadButtonAriaDescription?: string;
 }

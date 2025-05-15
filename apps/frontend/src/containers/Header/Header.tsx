@@ -1,12 +1,13 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
-import Image from 'next/image';
 import React from 'react';
 
 import { Link } from '@o2s/ui/components/link';
 
 import { Link as NextLink } from '@/i18n';
+
+import { Image } from '@/components/Image/Image';
 
 import { LocaleSwitcher } from '../Auth/Toolbar/LocaleSwitcher';
 import { ContextSwitcher } from '../ContextSwitcher/ContextSwitcher';
@@ -23,11 +24,12 @@ export const Header: React.FC<HeaderProps> = ({ headerData, children }) => {
 
     const LogoSlot = (
         <Link asChild>
-            <NextLink href="/" aria-label={headerData.logo?.name}>
+            {/*TODO: get label from API*/}
+            <NextLink href="/" aria-label={'go to home'}>
                 {headerData.logo?.url && (
                     <Image
                         src={headerData.logo.url}
-                        alt={headerData.logo.alternativeText ?? ''}
+                        alt={headerData.logo.alt}
                         width={headerData.logo.width}
                         height={headerData.logo.height}
                     />

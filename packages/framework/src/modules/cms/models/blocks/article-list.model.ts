@@ -1,20 +1,15 @@
-import { Article } from '@/modules/articles/articles.model';
-import { Block, DataTable, Filters, Mapping, Pagination } from '@/utils/models';
+import { Block, RichText } from '@/utils/models';
 
 export class ArticleListBlock extends Block.Block {
-    title!: string;
-    subtitle?: string;
-    table!: DataTable.DataTable<Article>;
-    pagination!: Pagination.Pagination;
-    filters?: Filters.Filters<Article>;
-    fieldMapping!: Mapping.Mapping<Article>;
-    noResults!: {
-        title: string;
-        description: string;
+    title?: string;
+    description?: RichText.RichText;
+    categoryId?: string;
+    articleIds?: string[];
+    parent?: {
+        slug: string;
     };
     labels!: {
         today: string;
         yesterday: string;
     };
-    detailsUrl!: string;
 }

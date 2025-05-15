@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@o2s/ui/components/accordion';

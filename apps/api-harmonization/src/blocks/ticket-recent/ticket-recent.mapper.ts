@@ -54,14 +54,7 @@ export const mapTicket = (
                 ticket.comments?.map((comment) => ({
                     ...comment,
                     date: formatDateRelative(comment.date, locale, cms.labels.today, cms.labels.yesterday, timezone),
-                    author: {
-                        ...comment.author,
-                        initials: comment.author.name
-                            .split(' ')
-                            .map((name) => name[0])
-                            .join('')
-                            .toUpperCase(),
-                    },
+                    author: comment.author,
                 })) || [],
         },
     };

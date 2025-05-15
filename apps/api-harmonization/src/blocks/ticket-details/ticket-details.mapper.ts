@@ -71,14 +71,7 @@ export const mapTicket = (
                 ticket.comments?.map((comment) => ({
                     ...comment,
                     date: formatDateRelative(comment.date, locale, cms.labels.today, cms.labels.yesterday, timezone),
-                    author: {
-                        ...comment.author,
-                        initials: comment.author.name
-                            .split(' ')
-                            .map((name) => name[0])
-                            .join('')
-                            .toUpperCase(),
-                    },
+                    author: comment.author,
                 })) || [],
         },
         attachments: {
@@ -87,14 +80,7 @@ export const mapTicket = (
                 ticket.attachments?.map((attachment) => ({
                     ...attachment,
                     date: formatDateRelative(attachment.date, locale, cms.labels.today, cms.labels.yesterday, timezone),
-                    author: {
-                        ...attachment.author,
-                        initials: attachment.author.name
-                            .split(' ')
-                            .map((name) => name[0])
-                            .join('')
-                            .toUpperCase(),
-                    },
+                    author: attachment.author,
                     ariaLabel: attachment.ariaLabel,
                 })) || [],
         },

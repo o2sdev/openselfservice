@@ -47,14 +47,6 @@ export abstract class CmsService {
         options: CMS.Request.GetCmsEntryParams,
     ): Observable<CMS.Model.NotificationDetailsBlock.NotificationDetailsBlock>;
 
-    abstract getArticleListBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.ArticleListBlock.ArticleListBlock>;
-
-    abstract getArticleDetailsBlock(
-        options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.ArticleDetailsBlock.ArticleDetailsBlock>;
-
     abstract getInvoiceListBlock(
         options: CMS.Request.GetCmsEntryParams,
     ): Observable<CMS.Model.InvoiceListBlock.InvoiceListBlock>;
@@ -112,4 +104,20 @@ export abstract class CmsService {
     abstract getOrdersSummaryBlock(
         options: CMS.Request.GetCmsEntryParams,
     ): Observable<CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock>;
+
+    abstract getQuickLinksBlock(
+        options: CMS.Request.GetCmsEntryParams,
+    ): Observable<CMS.Model.QuickLinksBlock.QuickLinksBlock>;
+
+    abstract getArticleListBlock(
+        options: CMS.Request.GetCmsEntryParams,
+    ): Observable<CMS.Model.ArticleListBlock.ArticleListBlock>;
+
+    abstract getCategoryBlock(
+        options: CMS.Request.GetCmsEntryParams,
+    ): Observable<CMS.Model.CategoryBlock.CategoryBlock>;
+
+    abstract getCategoryListBlock(
+        options: CMS.Request.GetCmsEntryParams,
+    ): Observable<CMS.Model.CategoryListBlock.CategoryListBlock>;
 }

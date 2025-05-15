@@ -79,6 +79,9 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                         initialValues={filters}
                         onSubmit={handleFilter}
                         onReset={handleReset}
+                        labels={{
+                            clickToSelect: data.labels.clickToSelect,
+                        }}
                     />
 
                     <LoadingOverlay isActive={isPending}>
@@ -90,13 +93,13 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                                             {data.table.columns.map((column) => (
                                                 <TableHead
                                                     key={column.id}
-                                                    className="py-3 px-4 text-sm font-medium text-muted-foreground md:text-nowrap"
+                                                    className="py-3 px-4 text-sm font-medium text-muted-foreground"
                                                 >
                                                     {column.title}
                                                 </TableHead>
                                             ))}
                                             {data.table.actions && (
-                                                <TableHead className="py-3 px-4 text-sm font-medium text-muted-foreground md:text-nowrap">
+                                                <TableHead className="py-3 px-4 text-sm font-medium text-muted-foreground">
                                                     {data.table.actions.title}
                                                 </TableHead>
                                             )}

@@ -155,8 +155,7 @@ const generateOrderItem = (itemIndex: number): Orders.Model.OrderItem => {
                 url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
                 width: 640,
                 height: 656,
-                name: product.name,
-                alternativeText: product.name,
+                alt: product.name,
             },
             price: {
                 value: product.price,

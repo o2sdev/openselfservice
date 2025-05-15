@@ -1,12 +1,13 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Observable, forkJoin, map, of, switchMap } from 'rxjs';
+import { Observable, concatMap, forkJoin, map, of, switchMap } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
 
-import { CMS } from '../../models';
+import { Articles, CMS } from '../../models';
 
-import { mapInit, mapPage } from './page.mapper';
+import { mapArticle, mapInit, mapPage } from './page.mapper';
 import { Init, NotFound, Page } from './page.model';
 import { GetInitQuery, GetPageQuery } from './page.request';
 
@@ -17,6 +18,7 @@ export class PageService {
     constructor(
         private readonly config: ConfigService,
         private readonly cmsService: CMS.Service,
+        private readonly articlesService: Articles.Service,
     ) {
         this.SUPPORTED_LOCALES = this.config.get('SUPPORTED_LOCALES').split(',') as string[];
     }
@@ -69,22 +71,42 @@ export class PageService {
         const page = this.cmsService.getPage({ slug: query.slug, locale: headers['x-locale'] });
 
         return forkJoin([page]).pipe(
-            switchMap(([page]) => {
+            concatMap(([page]) => {
                 if (!page) {
-                    throw new NotFoundException();
+                    return this.articlesService
+                        .getArticle({ slug: query.slug, locale: headers['x-locale'] })
+                        .pipe(
+                            catchError(() => {
+                                throw new NotFoundException();
+                            }),
+                        )
+                        .pipe(concatMap((article) => this.processArticle(article, query, headers)));
                 }
-
-                const alternatePages = this.cmsService
-                    .getAlternativePages({ id: page.id, slug: query.slug, locale: headers['x-locale'] })
-                    .pipe(map((pages) => pages.filter((p) => p.id === page.id)));
-
-                return forkJoin([of(page), alternatePages]).pipe(
-                    map(([page, alternatePages]) => {
-                        const alternates = alternatePages?.filter((p) => p?.id === page.id);
-                        return mapPage(page, headers['x-locale'], alternates);
-                    }),
-                );
+                return this.processPage(page, query, headers);
             }),
         );
     }
+
+    private processPage = (page: CMS.Model.Page.Page, query: GetPageQuery, headers: AppHeaders) => {
+        const alternatePages = this.cmsService
+            .getAlternativePages({ id: page.id, slug: query.slug, locale: headers['x-locale'] })
+            .pipe(map((pages) => pages.filter((p) => p.id === page.id)));
+
+        return forkJoin([of(page), alternatePages]).pipe(
+            map(([page, alternatePages]) => {
+                const alternates = alternatePages?.filter((p) => p?.id === page.id);
+                return mapPage(page, headers['x-locale'], alternates);
+            }),
+        );
+    };
+
+    private processArticle = (article: Articles.Model.Article, _query: GetPageQuery, headers: AppHeaders) => {
+        if (!article.category) {
+            throw new NotFoundException();
+        }
+
+        const category = this.articlesService.getCategory({ id: article.category.id, locale: headers['x-locale'] });
+
+        return forkJoin([category]).pipe(map(([category]) => mapArticle(article, category, headers['x-locale'])));
+    };
 }

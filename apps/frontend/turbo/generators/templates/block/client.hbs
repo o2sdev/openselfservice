@@ -5,7 +5,7 @@ import { {{ pascalCase name }}PureProps} from './{{ pascalCase name }}.types';
 export const {{ pascalCase name }}Pure: React.FC<{{ pascalCase name }}PureProps> = ({ ...component }) => {
     return (
         <div className="w-full flex flex-col gap-4">
-            {{ pascalCase name }}
+            {component.__typename}: {component.id}
         </div>
     );
 };

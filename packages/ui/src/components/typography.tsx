@@ -4,7 +4,7 @@ import * as React from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
-const typographyVariants = cva('mt-0', {
+const typographyVariants = cva('', {
     variants: {
         variant: {
             h1: 'scroll-m-20 text-2xl md:text-3xl font-bold tracking-tight',
@@ -20,9 +20,19 @@ const typographyVariants = cva('mt-0', {
             p: 'text-sm md:text-base',
             blockquote: 'text-sm md:text-base border-l-2 pl-6 italic',
             inlineCode:
-                'text-sm md:text-base relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold',
+                'text-sm md:text-base relative rounded bg-foreground text-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold',
             lead: 'text-xl text-muted-foreground',
-            code: 'relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold',
+            code: 'relative rounded bg-foreground text-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold',
+            table: 'w-full border-collapse border border-border',
+            tableHeader: 'px-4 py-2 border-b border-border text-left font-bold border-r last:border-r-0',
+            tableRow: 'border-b border-border transition-colors last:border-b-0',
+            tableCell: 'px-4 py-2 align-middle border-r last:border-r-0',
+            tableCellHighlighted: 'px-4 py-2 align-middle bg-muted/50 border-r last:border-r-0',
+            image: 'relative overflow-hidden mx-auto',
+            imageCaption: 'text-sm text-muted-foreground text-center mt-2',
+            list: 'text-sm md:text-base mt-6 pl-7 md:pl-8 list-disc [&>li]:mt-2 md:[&>li]:mt-3 [&>li::marker]:text-foreground [&>li::marker]:size-1 md:[&>li::marker]:size-[5px]',
+            listOrdered:
+                'text-sm md:text-base mt-6 pl-7 md:pl-8 list-decimal [&>li]:mt-2 md:[&>li]:mt-3 [&>li::marker]:text-foreground',
         },
     },
     defaultVariants: {

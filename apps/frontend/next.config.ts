@@ -21,6 +21,14 @@ const nextConfig: NextConfig = {
                 protocol: 'https',
                 hostname: 'raw.githubusercontent.com',
             },
+            {
+                protocol: 'https',
+                hostname: 'picsum.photos',
+            },
+            {
+                protocol: 'https',
+                hostname: 'strapi-oss.dev.hycom.pl',
+            },
         ],
     },
     sassOptions: {

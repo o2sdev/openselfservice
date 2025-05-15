@@ -1,6 +1,11 @@
 import { CMS, Models } from '@o2s/framework/modules';
 
 import {
+    Article,
+    ArticleList,
+    Category,
+    // BLOCK IMPORT
+    CategoryList,
     Faq,
     InvoiceList,
     NotificationDetails,
@@ -9,6 +14,7 @@ import {
     OrdersSummary,
     PaymentsHistory,
     PaymentsSummary,
+    QuickLinks,
     ServiceDetails,
     ServiceList,
     Surveyjs,
@@ -62,6 +68,10 @@ export class PageData {
 }
 
 export type Blocks =
+    | ArticleList.Model.ArticleListBlock['__typename']
+    | Category.Model.CategoryBlock['__typename']
+    | Article.Model.ArticleBlock['__typename']
+    // BLOCK REGISTER
     | TicketList.Model.TicketListBlock['__typename']
     | TicketDetails.Model.TicketDetailsBlock['__typename']
     | NotificationList.Model.NotificationListBlock['__typename']
@@ -76,4 +86,6 @@ export type Blocks =
     | ServiceDetails.Model.ServiceDetailsBlock['__typename']
     | Surveyjs.Model.SurveyjsBlock['__typename']
     | OrderList.Model.OrderListBlock['__typename']
-    | OrdersSummary.Model.OrdersSummaryBlock['__typename'];
+    | OrdersSummary.Model.OrdersSummaryBlock['__typename']
+    | QuickLinks.Model.QuickLinksBlock['__typename']
+    | CategoryList.Model.CategoryListBlock['__typename'];
