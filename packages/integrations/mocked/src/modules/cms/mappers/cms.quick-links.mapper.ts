@@ -3,12 +3,13 @@ import { CMS } from '@o2s/framework/modules';
 const MOCK_QUICK_LINKS_BLOCK_EN: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
     id: 'quick-links-1',
     title: 'Find it in an instant',
-    description: 'A short description of the heading H2',
+    description: 'Quick access to our most popular tools and services to help you get what you need without delay.',
     items: [
         {
             label: 'Find a retailer',
             url: '/help-and-support/warranty-and-repair',
-            description: 'A short description of the action, limited to two lines.',
+            description:
+                'Locate authorized retailers and service centers near you for in-person assistance, product demos, and expert advice.',
             icon: {
                 url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-1.svg',
                 alt: '',
@@ -50,12 +51,14 @@ const MOCK_QUICK_LINKS_BLOCK_EN: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
 const MOCK_QUICK_LINKS_BLOCK_DE: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
     id: 'quick-links-1',
     title: 'Finden Sie es im Handumdrehen',
-    description: 'Eine kurze Beschreibung der Überschrift H2',
+    description:
+        'Schneller Zugriff auf unsere beliebtesten Tools und Dienste, um Ihnen zu helfen, das zu bekommen, was Sie ohne Verzögerung benötigen.',
     items: [
         {
             label: 'Händler finden',
             url: '/hilfe-und-support/garantie-und-reparatur',
-            description: 'Eine kurze Beschreibung der Aktion, auf zwei Zeilen beschränkt.',
+            description:
+                'Finden Sie autorisierte Händler und Servicezentren in Ihrer Nähe für persönliche Unterstützung, Produktdemonstrationen und Expertenberatung.',
             icon: {
                 url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-1.svg',
                 alt: '',
@@ -97,12 +100,14 @@ const MOCK_QUICK_LINKS_BLOCK_DE: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
 const MOCK_QUICK_LINKS_BLOCK_PL: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
     id: 'quick-links-1',
     title: 'Znajdź to w mgnieniu oka',
-    description: 'Krótki opis nagłówka H2',
+    description:
+        'Szybki dostęp do naszych najpopularniejszych narzędzi i usług, aby pomóc Ci uzyskać to, czego potrzebujesz bez opóźnień.',
     items: [
         {
             label: 'Znajdź sprzedawcę',
             url: '/pomoc-i-wsparcie/gwarancja-i-naprawa',
-            description: 'Krótki opis akcji, ograniczony do dwóch linii.',
+            description:
+                'Znajdź autoryzowanych sprzedawców i centra serwisowe w Twojej okolicy, aby uzyskać osobistą pomoc, demonstracje produktów i porady ekspertów.',
             icon: {
                 url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-1.svg',
                 alt: '',

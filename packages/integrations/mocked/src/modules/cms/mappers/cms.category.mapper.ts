@@ -20,7 +20,8 @@ const MOCK_WARRANTY_REPAIR_BLOCK_EN: CMS.Model.CategoryBlock.CategoryBlock = {
         yesterday: 'Yesterday',
     },
     title: 'How-to Articles',
-    description: 'A short description of the heading H2',
+    description:
+        'Find information about product warranties, repair services, and how to get support for your PowerPro tools.',
     pagination: {
         limit: 6,
         legend: 'of {totalPages} pages',
@@ -46,7 +47,8 @@ const MOCK_WARRANTY_REPAIR_BLOCK_DE: CMS.Model.CategoryBlock.CategoryBlock = {
         yesterday: 'Gestern',
     },
     title: 'Anleitungsartikel',
-    description: 'Eine kurze Beschreibung der Überschrift H2',
+    description:
+        'Finden Sie Informationen zu Produktgarantien, Reparaturservices und wie Sie Unterstützung für Ihre PowerPro-Werkzeuge erhalten können.',
     pagination: {
         limit: 6,
         legend: 'von {totalPages} Seiten',
@@ -72,7 +74,8 @@ const MOCK_WARRANTY_REPAIR_BLOCK_PL: CMS.Model.CategoryBlock.CategoryBlock = {
         yesterday: 'Wczoraj',
     },
     title: 'Artykuły instruktażowe',
-    description: 'Krótki opis nagłówka H2',
+    description:
+        'Znajdź informacje o gwarancjach produktów, usługach naprawczych i jak uzyskać wsparcie dla swoich narzędzi PowerPro.',
     pagination: {
         limit: 6,
         legend: 'z {totalPages} stron',
