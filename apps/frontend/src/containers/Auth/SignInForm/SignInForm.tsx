@@ -48,139 +48,143 @@ export const SignInForm: React.FC<SignInFormProps> = ({ providers, labels, onSig
     });
 
     return (
-        <div className="flex flex-col gap-6 w-full">
-            <div className="flex flex-col gap-2 items-center text-center">
-                <Typography variant="h1" asChild>
-                    <h1>{labels.title}</h1>
-                </Typography>
-                {labels.subtitle && (
-                    <Typography variant="body" className="text-muted-foreground">
-                        {labels.subtitle}
-                    </Typography>
+        <div className="flex flex-col gap-12 w-full">
+            <div className="flex flex-col gap-6">
+                {error && (
+                    <Alert variant="destructive">
+                        <AlertCircle className="h-4 w-4 mt-1" />
+                        <AlertDescription>
+                            <Typography variant="small" className="mt-1">
+                                {labels.invalidCredentials}
+                            </Typography>
+                        </AlertDescription>
+                    </Alert>
                 )}
-            </div>
-            {error && (
-                <Alert variant="destructive">
-                    <AlertCircle className="h-4 w-4 mt-1" />
-                    <AlertDescription>
-                        <Typography variant="small" className="mt-1">
-                            {labels.invalidCredentials}
+                <div className="flex flex-col gap-2 items-center text-center">
+                    <Typography variant="h1" asChild>
+                        <h1>{labels.title}</h1>
+                    </Typography>
+                    {labels.subtitle && (
+                        <Typography variant="body" className="text-muted-foreground">
+                            {labels.subtitle}
                         </Typography>
-                    </AlertDescription>
-                </Alert>
-            )}
-            <Formik<FormValues>
-                initialValues={{
-                    username: '',
-                    password: '',
-                }}
-                onSubmit={async (values) => {
-                    setError(null);
-                    setIsSubmitting(true);
-                    const error = await onSignIn('credentials', values);
-                    if (error) {
-                        setIsSubmitting(false);
-                        setError(error);
-                    }
-                }}
-                validateOnBlur={true}
-                validateOnMount={false}
-                validateOnChange={false}
-                validationSchema={validationSchema}
-            >
-                <Form>
-                    <div className="flex flex-col gap-6">
-                        <div className="flex flex-col gap-4">
-                            <Field name="username" validateOnChange={true}>
-                                {({ field, form: { touched, errors } }: FieldProps<string, FormValues>) => (
-                                    <div className="flex flex-col gap-2">
-                                        <InputWithLabel
-                                            id={field.name}
-                                            type="text"
-                                            placeholder={labels.username.placeholder}
-                                            aria-invalid={!!(touched.username && errors.username)}
-                                            name={field.name}
-                                            value={field.value}
-                                            disabled={isSubmitting}
-                                            onChange={field.onChange}
-                                            onBlur={field.onBlur}
-                                            label={labels.username.label}
-                                        />
-                                        <ErrorMessage name="username">
-                                            {(msg) => (
-                                                <Alert variant="destructive">
-                                                    <CircleAlert className="h-4 w-4 mt-1" />
-                                                    <AlertDescription>
-                                                        <Typography variant="small" className="mt-1">
-                                                            {msg}
-                                                        </Typography>
-                                                    </AlertDescription>
-                                                </Alert>
-                                            )}
-                                        </ErrorMessage>
-                                    </div>
-                                )}
-                            </Field>
+                    )}
+                </div>
 
-                            <Field name="password">
-                                {({ field, form: { touched, errors } }: FieldProps<string, FormValues>) => (
-                                    <div className="flex flex-col gap-2">
-                                        <InputWithLabel
-                                            id={field.name}
-                                            type={passwordVisible ? 'text' : 'password'}
-                                            placeholder={labels.password.placeholder}
-                                            name={field.name}
-                                            value={field.value}
-                                            disabled={isSubmitting}
-                                            aria-invalid={!!(touched.password && errors.password)}
-                                            onChange={field.onChange}
-                                            onBlur={field.onBlur}
-                                            label={labels.password.label}
-                                            adornment={
-                                                <button
-                                                    type="button"
-                                                    onClick={() => setPasswordVisible(!passwordVisible)}
-                                                >
-                                                    {passwordVisible ? (
-                                                        <Eye width={16} height={16} />
-                                                    ) : (
-                                                        <EyeOff width={16} height={16} />
-                                                    )}
-                                                    <span className="sr-only">
-                                                        {passwordVisible ? labels.password.hide : labels.password.show}
-                                                    </span>
-                                                </button>
-                                            }
-                                            adornmentProps={{ behavior: 'append' }}
-                                        />
-                                        <ErrorMessage name="password">
-                                            {(msg) => (
-                                                <Alert variant="destructive">
-                                                    <AlertCircle className="h-4 w-4 mt-1" />
-                                                    <AlertDescription>
-                                                        <Typography variant="small" className="mt-1">
-                                                            {msg}
-                                                        </Typography>
-                                                    </AlertDescription>
-                                                </Alert>
-                                            )}
-                                        </ErrorMessage>
-                                    </div>
-                                )}
-                            </Field>
+                <Formik<FormValues>
+                    initialValues={{
+                        username: '',
+                        password: '',
+                    }}
+                    onSubmit={async (values) => {
+                        setError(null);
+                        setIsSubmitting(true);
+                        const error = await onSignIn('credentials', values);
+                        if (error) {
+                            setIsSubmitting(false);
+                            setError(error);
+                        }
+                    }}
+                    validateOnBlur={true}
+                    validateOnMount={false}
+                    validateOnChange={false}
+                    validationSchema={validationSchema}
+                >
+                    <Form>
+                        <div className="flex flex-col gap-6">
+                            <div className="flex flex-col gap-4">
+                                <Field name="username" validateOnChange={true}>
+                                    {({ field, form: { touched, errors } }: FieldProps<string, FormValues>) => (
+                                        <div className="flex flex-col gap-2">
+                                            <InputWithLabel
+                                                id={field.name}
+                                                type="text"
+                                                placeholder={labels.username.placeholder}
+                                                aria-invalid={!!(touched.username && errors.username)}
+                                                name={field.name}
+                                                value={field.value}
+                                                disabled={isSubmitting}
+                                                onChange={field.onChange}
+                                                onBlur={field.onBlur}
+                                                label={labels.username.label}
+                                            />
+                                            <ErrorMessage name="username">
+                                                {(msg) => (
+                                                    <Alert variant="destructive">
+                                                        <CircleAlert className="h-4 w-4 mt-1" />
+                                                        <AlertDescription>
+                                                            <Typography variant="small" className="mt-1">
+                                                                {msg}
+                                                            </Typography>
+                                                        </AlertDescription>
+                                                    </Alert>
+                                                )}
+                                            </ErrorMessage>
+                                        </div>
+                                    )}
+                                </Field>
+
+                                <Field name="password">
+                                    {({ field, form: { touched, errors } }: FieldProps<string, FormValues>) => (
+                                        <div className="flex flex-col gap-2">
+                                            <InputWithLabel
+                                                id={field.name}
+                                                type={passwordVisible ? 'text' : 'password'}
+                                                placeholder={labels.password.placeholder}
+                                                name={field.name}
+                                                value={field.value}
+                                                disabled={isSubmitting}
+                                                aria-invalid={!!(touched.password && errors.password)}
+                                                onChange={field.onChange}
+                                                onBlur={field.onBlur}
+                                                label={labels.password.label}
+                                                adornment={
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => setPasswordVisible(!passwordVisible)}
+                                                    >
+                                                        {passwordVisible ? (
+                                                            <Eye width={16} height={16} />
+                                                        ) : (
+                                                            <EyeOff width={16} height={16} />
+                                                        )}
+                                                        <span className="sr-only">
+                                                            {passwordVisible
+                                                                ? labels.password.hide
+                                                                : labels.password.show}
+                                                        </span>
+                                                    </button>
+                                                }
+                                                adornmentProps={{ behavior: 'append' }}
+                                            />
+                                            <ErrorMessage name="password">
+                                                {(msg) => (
+                                                    <Alert variant="destructive">
+                                                        <AlertCircle className="h-4 w-4 mt-1" />
+                                                        <AlertDescription>
+                                                            <Typography variant="small" className="mt-1">
+                                                                {msg}
+                                                            </Typography>
+                                                        </AlertDescription>
+                                                    </Alert>
+                                                )}
+                                            </ErrorMessage>
+                                        </div>
+                                    )}
+                                </Field>
+                            </div>
+
+                            <Button type="submit" disabled={isSubmitting}>
+                                {labels.signIn}
+                            </Button>
                         </div>
-
-                        <Button type="submit" disabled={isSubmitting}>
-                            {labels.signIn}
-                        </Button>
-                    </div>
-                </Form>
-            </Formik>
-
+                    </Form>
+                </Formik>
+            </div>
             {labels.providers && (
-                <>
+                <div className="flex flex-col gap-6">
                     {providers.length ? (
-                        <div className="flex flex-row gap-2 items-center">
+                        <div className="flex flex-row gap-2 items-center mt-[-10px] mb-[-9px]">
                             <Separator orientation="horizontal" className="shrink-[1]" />
                             <div className="text-center">
                                 <Typography variant="small" className="text-muted-foreground">
@@ -205,7 +209,7 @@ export const SignInForm: React.FC<SignInFormProps> = ({ providers, labels, onSig
                             </Button>
                         </form>
                     ))}
-                </>
+                </div>
             )}
         </div>
     );
