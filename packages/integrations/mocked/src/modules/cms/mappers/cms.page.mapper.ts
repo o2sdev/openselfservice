@@ -1,6 +1,15 @@
 import { CMS } from '@o2s/framework/modules';
 
 import {
+    PAGE_ACCESSORIES_DE,
+    PAGE_ACCESSORIES_EN,
+    PAGE_ACCESSORIES_PL,
+    PAGE_MAINTENANCE_DE,
+    PAGE_MAINTENANCE_EN,
+    PAGE_MAINTENANCE_PL,
+    PAGE_SAFETY_DE,
+    PAGE_SAFETY_EN,
+    PAGE_SAFETY_PL,
     PAGE_WARRANTY_AND_REPAIR_DE,
     PAGE_WARRANTY_AND_REPAIR_EN,
     PAGE_WARRANTY_AND_REPAIR_PL,
@@ -205,6 +214,27 @@ export const mapPage = (slug: string, locale: string): CMS.Model.Page.Page | und
         case '/pomoc-i-wsparcie/gwarancja-i-naprawa':
             return PAGE_WARRANTY_AND_REPAIR_PL;
 
+        case '/help-and-support/maintenance':
+            return PAGE_MAINTENANCE_EN;
+        case '/hilfe-und-support/wartung':
+            return PAGE_MAINTENANCE_DE;
+        case '/pomoc-i-wsparcie/konserwacja':
+            return PAGE_MAINTENANCE_PL;
+
+        case '/help-and-support/safety':
+            return PAGE_SAFETY_EN;
+        case '/hilfe-und-support/sicherheit':
+            return PAGE_SAFETY_DE;
+        case '/pomoc-i-wsparcie/bezpieczenstwo':
+            return PAGE_SAFETY_PL;
+
+        case '/help-and-support/accessories':
+            return PAGE_ACCESSORIES_EN;
+        case '/hilfe-und-support/zubehoer':
+            return PAGE_ACCESSORIES_DE;
+        case '/pomoc-i-wsparcie/akcesoria':
+            return PAGE_ACCESSORIES_PL;
+
         default:
             return undefined;
     }
@@ -228,6 +258,10 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_REQUEST_DEVICE_MAINTENANCE_PL,
                 PAGE_ORDER_LIST_PL,
                 PAGE_ORDER_DETAILS_PL,
+                PAGE_WARRANTY_AND_REPAIR_PL,
+                PAGE_MAINTENANCE_PL,
+                PAGE_SAFETY_PL,
+                PAGE_ACCESSORIES_PL,
             ];
         case 'de':
             return [
@@ -245,6 +279,10 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_REQUEST_DEVICE_MAINTENANCE_DE,
                 PAGE_ORDER_LIST_DE,
                 PAGE_ORDER_DETAILS_DE,
+                PAGE_WARRANTY_AND_REPAIR_DE,
+                PAGE_MAINTENANCE_DE,
+                PAGE_SAFETY_DE,
+                PAGE_ACCESSORIES_DE,
             ];
         case 'en':
             return [
@@ -262,6 +300,10 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_REQUEST_DEVICE_MAINTENANCE_EN,
                 PAGE_ORDER_LIST_EN,
                 PAGE_ORDER_DETAILS_EN,
+                PAGE_WARRANTY_AND_REPAIR_EN,
+                PAGE_MAINTENANCE_EN,
+                PAGE_SAFETY_EN,
+                PAGE_ACCESSORIES_EN,
             ];
         default:
             return [];
@@ -312,6 +354,18 @@ export const getAlternativePages = (id: string, slug: string, locale: string): C
         PAGE_ORDER_DETAILS_EN,
         PAGE_ORDER_DETAILS_DE,
         PAGE_ORDER_DETAILS_PL,
+        PAGE_WARRANTY_AND_REPAIR_EN,
+        PAGE_WARRANTY_AND_REPAIR_DE,
+        PAGE_WARRANTY_AND_REPAIR_PL,
+        PAGE_MAINTENANCE_EN,
+        PAGE_MAINTENANCE_DE,
+        PAGE_MAINTENANCE_PL,
+        PAGE_SAFETY_EN,
+        PAGE_SAFETY_DE,
+        PAGE_SAFETY_PL,
+        PAGE_ACCESSORIES_EN,
+        PAGE_ACCESSORIES_DE,
+        PAGE_ACCESSORIES_PL,
     ]
         .filter((page) => page.id === id)
         .map((page) => mapPage(page.slug, locale)!)

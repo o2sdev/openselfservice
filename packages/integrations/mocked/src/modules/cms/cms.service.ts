@@ -166,7 +166,7 @@ export class CmsService implements CMS.Service {
     }
 
     getCategoryBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapCategoryBlock(options.locale)).pipe(responseDelay());
+        return of(mapCategoryBlock(options.id, options.locale)).pipe(responseDelay());
     }
 
     getCategoryListBlock(options: CMS.Request.GetCmsEntryParams) {

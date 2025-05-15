@@ -17,26 +17,28 @@ const MOCK_QUICK_LINKS_BLOCK_EN: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
         {
             label: 'Online repair',
             url: '/help-and-support/warranty-and-repair/managing-your-powerpro-tools-online',
-            description: 'A short description of the action',
+            description:
+                'Diagnose and schedule repairs for your tools online. Get quick service estimates and track repair status in real-time.',
             icon: {
                 url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
                 alt: '',
             },
         },
         {
-            label: 'Quick action 3',
-            url: 'https://www.google.com',
+            label: 'View Invoices',
+            url: '/invoices',
             description:
-                'A short description of the action, limited to two lines. A short description of the action, limited to two lines',
+                'Access and download your invoices and payment history. Keep track of all your transactions in one place.',
             icon: {
                 url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-3.svg',
                 alt: '',
             },
         },
         {
-            label: 'Quick action 4',
-            url: 'https://www.google.com',
-            description: 'A short description of the action, limited to two lines.',
+            label: 'View Orders',
+            url: '/orders',
+            description:
+                'Track and manage your orders. View order history, check status, and access order details in one place.',
             icon: {
                 url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-4.svg',
                 alt: '',
@@ -62,25 +64,28 @@ const MOCK_QUICK_LINKS_BLOCK_DE: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
         {
             label: 'Reparatur online',
             url: '/hilfe-und-support/garantie-und-reparatur/verwalten-ihrer-powerpro-werkzeuge-online',
-            description: 'Eine kurze Beschreibung der Aktion, auf zwei Zeilen beschränkt.',
+            description:
+                'Diagnostizieren und planen Sie Reparaturen für Ihre Werkzeuge online. Erhalten Sie schnelle Serviceschätzungen und verfolgen Sie den Reparaturstatus in Echtzeit.',
             icon: {
                 url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
                 alt: '',
             },
         },
         {
-            label: 'Schnellaktion 3',
-            url: 'https://www.google.com',
-            description: 'Eine kurze Beschreibung der Aktion, auf zwei Zeilen beschränkt.',
+            label: 'Rechnungen anzeigen',
+            url: '/rechnungen',
+            description:
+                'Greifen Sie auf Ihre Rechnungen und Zahlungshistorie zu. Behalten Sie alle Ihre Transaktionen an einem Ort im Blick.',
             icon: {
                 url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-3.svg',
                 alt: '',
             },
         },
         {
-            label: 'Schnellaktion 4',
-            url: 'https://www.google.com',
-            description: 'Eine kurze Beschreibung der Aktion, auf zwei Zeilen beschränkt.',
+            label: 'Bestellungen anzeigen',
+            url: '/bestellungen',
+            description:
+                'Verfolgen und verwalten Sie Ihre Bestellungen. Sehen Sie Ihre Bestellhistorie, prüfen Sie den Status und greifen Sie auf Bestelldetails an einem Ort zu.',
             icon: {
                 url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-4.svg',
                 alt: '',
@@ -106,25 +111,28 @@ const MOCK_QUICK_LINKS_BLOCK_PL: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
         {
             label: 'Naprawa online',
             url: '/pomoc-i-wsparcie/gwarancja-i-naprawa/zarzadzanie-narzedziami-powerpro-online',
-            description: 'Krótki opis akcji, ograniczony do dwóch linii.',
+            description:
+                'Diagnozuj i planuj naprawy swoich narzędzi online. Otrzymuj szybkie wyceny serwisowe i śledź status naprawy w czasie rzeczywistym.',
             icon: {
                 url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-2.svg',
                 alt: '',
             },
         },
         {
-            label: 'Szybka akcja 3',
-            url: 'https://www.google.com',
-            description: 'Krótki opis akcji, ograniczony do dwóch linii.',
+            label: 'Przeglądaj faktury',
+            url: '/rachunki',
+            description:
+                'Uzyskaj dostęp do swoich faktur i historii płatności. Śledź wszystkie swoje transakcje w jednym miejscu.',
             icon: {
                 url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-3.svg',
                 alt: '',
             },
         },
         {
-            label: 'Szybka akcja 4',
-            url: 'https://www.google.com',
-            description: 'Krótki opis akcji, ograniczony do dwóch linii.',
+            label: 'Przeglądaj zamówienia',
+            url: '/zamowienia',
+            description:
+                'Śledź i zarządzaj swoimi zamówieniami. Przeglądaj historię zamówień, sprawdzaj status i uzyskaj dostęp do szczegółów zamówień w jednym miejscu.',
             icon: {
                 url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/icon-4.svg',
                 alt: '',
