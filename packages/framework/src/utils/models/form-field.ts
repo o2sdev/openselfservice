@@ -3,7 +3,9 @@ export class FormField {
     name!: string;
     label!: string;
     placeholder?: string;
+    description?: string;
     errorMessages?: ErrorMessage[];
+    regexValidations?: RegexValidation[];
 }
 
 export class ErrorMessage {
@@ -11,4 +13,11 @@ export class ErrorMessage {
     name!: string;
     type!: string;
     description!: string;
+}
+
+export class RegexValidation {
+    id!: string;
+    type!: string;
+    label!: string;
+    regex!: string;
 }
