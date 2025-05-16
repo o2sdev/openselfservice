@@ -13,6 +13,16 @@ export const routing = defineRouting({
             de: '/einloggen',
             pl: '/logowanie',
         },
+        '/reset-password': {
+            en: '/reset-password',
+            de: '/passwort-zuruecksetzen',
+            pl: '/reset-hasla',
+        },
+        '/create-new-password': {
+            en: '/create-new-password',
+            de: '/neues-passwort-erstellen',
+            pl: '/ustaw-nowe-haslo',
+        },
     } as { [key: string]: { [locale: string]: string } },
 });
 

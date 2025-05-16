@@ -3,31 +3,29 @@
 import { Field, FieldProps, Form, Formik } from 'formik';
 import { AlertCircle } from 'lucide-react';
 import { AuthError } from 'next-auth';
-import NextLink from 'next/link';
 import React, { useState } from 'react';
 import { object as YupObject } from 'yup';
 
 import { Alert, AlertDescription } from '@o2s/ui/components/alert';
 import { Button } from '@o2s/ui/components/button';
-import { Link } from '@o2s/ui/components/link';
-import { Separator } from '@o2s/ui/components/separator';
 import { Typography } from '@o2s/ui/components/typography';
 
-import LogoGithub from '@/assets/icons/logo-github.svg';
-
-import { FormField } from '../FormField/FormField';
 import { PasswordFormField } from '../FormField/PasswordFormField';
-import { getPasswordSchema, getUsernameSchema } from '../Utils/validationSchema';
+import { getConfirmPasswordSchema } from '../Utils/validationSchema';
+import { getPasswordSchema } from '../Utils/validationSchema';
 
-import { FormValues, SignInFormProps } from './SignInForm.types';
+import { CreateNewPasswordFormProps, FormValues } from './CreateNewPassword.types';
 
-export const SignInForm: React.FC<Readonly<SignInFormProps>> = ({ providers, labels, onSignIn }) => {
+export const CreateNewPasswordForm: React.FC<Readonly<CreateNewPasswordFormProps>> = ({
+    labels,
+    onCreateNewPassword,
+}) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [error, setError] = useState<AuthError | null>(null);
 
     const validationSchema = YupObject().shape({
-        username: getUsernameSchema(labels.username.errorMessages),
         password: getPasswordSchema(labels.password.errorMessages),
+        confirmPassword: getConfirmPasswordSchema(labels.confirmPassword.errorMessages),
     });
 
     return (
@@ -38,7 +36,7 @@ export const SignInForm: React.FC<Readonly<SignInFormProps>> = ({ providers, lab
                         <AlertCircle className="h-4 w-4 mt-1" />
                         <AlertDescription>
                             <Typography variant="small" className="mt-1">
-                                {labels.invalidCredentials}
+                                {labels.creatingPasswordError}
                             </Typography>
                         </AlertDescription>
                     </Alert>
@@ -56,13 +54,13 @@ export const SignInForm: React.FC<Readonly<SignInFormProps>> = ({ providers, lab
 
                 <Formik<FormValues>
                     initialValues={{
-                        username: '',
                         password: '',
+                        confirmPassword: '',
                     }}
                     onSubmit={async (values) => {
                         setError(null);
                         setIsSubmitting(true);
-                        const error = await onSignIn('credentials', values);
+                        const error = await onCreateNewPassword(values);
                         if (error) {
                             setIsSubmitting(false);
                             setError(error);
@@ -76,20 +74,6 @@ export const SignInForm: React.FC<Readonly<SignInFormProps>> = ({ providers, lab
                     <Form>
                         <div className="flex flex-col gap-6">
                             <div className="flex flex-col gap-4">
-                                <Field name="username" validateOnChange={true}>
-                                    {({ field, form: { touched, errors } }: FieldProps<string, FormValues>) => (
-                                        <FormField
-                                            field={field}
-                                            touched={touched}
-                                            errors={errors}
-                                            name="username"
-                                            label={labels.username.label}
-                                            placeholder={labels.username.placeholder}
-                                            disabled={isSubmitting}
-                                        />
-                                    )}
-                                </Field>
-
                                 <Field name="password">
                                     {({ field, form: { touched, errors } }: FieldProps<string, FormValues>) => (
                                         <PasswordFormField
@@ -102,57 +86,34 @@ export const SignInForm: React.FC<Readonly<SignInFormProps>> = ({ providers, lab
                                             disabled={isSubmitting}
                                             showLabel={labels.password.show}
                                             hideLabel={labels.password.hide}
-                                            labelAdornment={
-                                                labels.forgotPassword ? (
-                                                    <Link asChild>
-                                                        <NextLink href={labels.forgotPassword.link}>
-                                                            {labels.forgotPassword.label}
-                                                        </NextLink>
-                                                    </Link>
-                                                ) : undefined
-                                            }
+                                            validations={labels.password.regexValidations}
+                                        />
+                                    )}
+                                </Field>
+                                <Field name="confirmPassword">
+                                    {({ field, form: { touched, errors } }: FieldProps<string, FormValues>) => (
+                                        <PasswordFormField
+                                            field={field}
+                                            touched={touched}
+                                            errors={errors}
+                                            name="confirmPassword"
+                                            label={labels.confirmPassword.label}
+                                            placeholder={labels.confirmPassword.placeholder}
+                                            disabled={isSubmitting}
+                                            showLabel={labels.confirmPassword.show}
+                                            hideLabel={labels.confirmPassword.hide}
                                         />
                                     )}
                                 </Field>
                             </div>
 
                             <Button type="submit" disabled={isSubmitting}>
-                                {labels.signIn}
+                                {labels.submitButton}
                             </Button>
                         </div>
                     </Form>
                 </Formik>
             </div>
-            {labels.providers && (
-                <div className="flex flex-col gap-6">
-                    {providers.length ? (
-                        <div className="flex flex-row gap-2 items-center mt-[-10px] mb-[-9px]">
-                            <Separator orientation="horizontal" className="shrink-[1]" />
-                            <div className="text-center">
-                                <Typography variant="small" className="text-muted-foreground">
-                                    {labels.providers.title}
-                                </Typography>
-                            </div>
-                            <Separator orientation="horizontal" className="shrink-[1]" />
-                        </div>
-                    ) : null}
-                    {providers.map((provider) => (
-                        <form
-                            key={provider.id}
-                            action={async () => {
-                                setIsSubmitting(true);
-                                setTimeout(async () => await onSignIn(provider.id), 1);
-                            }}
-                            className="flex flex-col gap-4"
-                        >
-                            <Button type="submit" variant="outline" disabled={isSubmitting}>
-                                <LogoGithub />
-                                {labels.providers?.label} {provider.name}
-                            </Button>
-                        </form>
-                    ))}
-                </div>
-            )}
         </div>
     );
 };
