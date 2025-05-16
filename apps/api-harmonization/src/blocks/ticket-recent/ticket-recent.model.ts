@@ -37,7 +37,7 @@ export class TicketComments {
 }
 
 export class TicketComment {
-    author!: Tickets.Model.Author & { initials: string };
+    author!: Tickets.Model.Author;
     date!: string;
     content!: string;
 }

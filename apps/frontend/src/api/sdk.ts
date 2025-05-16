@@ -6,6 +6,10 @@ import { ordersSummary } from 'src/api/blocks/orders-summary';
 
 import { extendSdk, getSdk } from '@o2s/framework/sdk';
 
+import { article } from '@/api/blocks/article';
+import { articleList } from '@/api/blocks/article-list';
+import { category } from '@/api/blocks/category';
+import { categoryList } from '@/api/blocks/category-list';
 import { faq } from '@/api/blocks/faq';
 import { invoiceList } from '@/api/blocks/invoice-list';
 import { notificationDetails } from '@/api/blocks/notification-details';
@@ -14,6 +18,7 @@ import { orderDetails } from '@/api/blocks/order-details';
 import { orderList } from '@/api/blocks/order-list';
 import { paymentsHistory } from '@/api/blocks/payments-history';
 import { paymentsSummary } from '@/api/blocks/payments-summary';
+import { quickLinks } from '@/api/blocks/quick-links';
 import { serviceDetails } from '@/api/blocks/service-details';
 import { serviceList } from '@/api/blocks/services-list';
 import { surveyJSBlock } from '@/api/blocks/surveyjs';
@@ -21,6 +26,7 @@ import { ticketDetails } from '@/api/blocks/ticket-details';
 import { ticketList } from '@/api/blocks/ticket-list';
 import { ticketRecent } from '@/api/blocks/ticket-recent';
 import { userAccount } from '@/api/blocks/user-account';
+// BLOCK IMPORT
 import { loginPage } from '@/api/modules/login-page';
 import { notFoundPage } from '@/api/modules/not-found-page';
 import { organizations } from '@/api/modules/organizations';
@@ -62,6 +68,13 @@ export const sdk = extendSdk(internalSdk, {
         getOrdersSummary: ordersSummary(internalSdk).blocks.getOrdersSummary,
         getOrderDetails: orderDetails(internalSdk).blocks.getOrderDetails,
         getOrderPdf: orderDetails(internalSdk).blocks.getOrderPdf,
+        getQuickLinks: quickLinks(internalSdk).blocks.getQuickLinks,
+        getCategoryList: categoryList(internalSdk).blocks.getCategoryList,
+        getArticleList: articleList(internalSdk).blocks.getArticleList,
+        getCategory: category(internalSdk).blocks.getCategory,
+        getCategoryArticles: category(internalSdk).blocks.getCategoryArticles,
+        getArticle: article(internalSdk).blocks.getArticle,
+        // BLOCK REGISTER
     },
     modules: {
         getInit: page(internalSdk).modules.getInit,

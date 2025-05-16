@@ -1,0 +1,12 @@
+fragment CategoryListComponent on ComponentComponentsCategoryList {
+    __typename
+    id
+    title
+    description
+    categories {
+        slug
+    }
+    parent {
+        slug
+    }
+}

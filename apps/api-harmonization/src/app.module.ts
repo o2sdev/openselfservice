@@ -23,8 +23,10 @@ import {
 
 import { configuration } from '@o2s/api-harmonization/config/configuration';
 
-import { ArticleDetailsBlockModule } from '@o2s/api-harmonization/blocks/article-details/article-details.module';
 import { ArticleListBlockModule } from '@o2s/api-harmonization/blocks/article-list/article-list.module';
+import { ArticleBlockModule } from '@o2s/api-harmonization/blocks/article/article.module';
+import { CategoryListBlockModule } from '@o2s/api-harmonization/blocks/category-list/category-list.module';
+import { CategoryBlockModule } from '@o2s/api-harmonization/blocks/category/category.module';
 import { FaqBlockModule } from '@o2s/api-harmonization/blocks/faq/faq.module';
 import { InvoiceListBlockModule } from '@o2s/api-harmonization/blocks/invoice-list/invoice-list.module';
 import { NotificationDetailsBlockModule } from '@o2s/api-harmonization/blocks/notification-details/notification-details.module';
@@ -34,6 +36,7 @@ import { OrderListBlockModule } from '@o2s/api-harmonization/blocks/order-list/o
 import { OrdersSummaryBlockModule } from '@o2s/api-harmonization/blocks/orders-summary/orders-summary.module';
 import { PaymentsHistoryBlockModule } from '@o2s/api-harmonization/blocks/payments-history/payments-history.module';
 import { PaymentsSummaryBlockModule } from '@o2s/api-harmonization/blocks/payments-summary/payments-summary.module';
+import { QuickLinksBlockModule } from '@o2s/api-harmonization/blocks/quick-links/quick-links.module';
 import { ServiceDetailsBlockModule } from '@o2s/api-harmonization/blocks/service-details/service-details.module';
 import { ServiceListBlockModule } from '@o2s/api-harmonization/blocks/service-list/service-list.module';
 import { SurveyjsBlockModule } from '@o2s/api-harmonization/blocks/surveyjs/surveyjs.module';
@@ -90,8 +93,6 @@ import { SurveyjsModule } from './modules/surveyjs-forms/surveyjs.module';
         NotificationListBlockModule.register(AppConfig),
         NotificationDetailsBlockModule.register(AppConfig),
         FaqBlockModule.register(AppConfig),
-        ArticleDetailsBlockModule.register(AppConfig),
-        ArticleListBlockModule.register(AppConfig),
         InvoiceListBlockModule.register(AppConfig),
         PaymentsSummaryBlockModule.register(AppConfig),
         PaymentsHistoryBlockModule.register(AppConfig),
@@ -103,6 +104,11 @@ import { SurveyjsModule } from './modules/surveyjs-forms/surveyjs.module';
         OrderListBlockModule.register(AppConfig),
         OrdersSummaryBlockModule.register(AppConfig),
         OrderDetailsBlockModule.register(AppConfig),
+        QuickLinksBlockModule.register(AppConfig),
+        CategoryListBlockModule.register(AppConfig),
+        ArticleListBlockModule.register(AppConfig),
+        CategoryBlockModule.register(AppConfig),
+        ArticleBlockModule.register(AppConfig),
         // BLOCK REGISTER
     ],
     providers: [

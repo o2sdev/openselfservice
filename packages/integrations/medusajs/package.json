@@ -1,6 +1,6 @@
 {
   "name": "@o2s/integrations.medusajs",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": false,
   "license": "MIT",
   "exports": {
@@ -20,8 +20,8 @@
     "update-deps:latest": "npx npm-check-updates --target latest -u"
   },
   "dependencies": {
-    "@medusajs/js-sdk": "^2.7.1",
-    "@medusajs/types": "^2.7.1",
+    "@medusajs/js-sdk": "^2.8.1",
+    "@medusajs/types": "^2.8.1",
     "@o2s/framework": "*",
     "@o2s/utils.logger": "*"
   },
@@ -32,7 +32,7 @@
     "concurrently": "^9.1.2",
     "eslint": "^9.26.0",
     "prettier": "^3.5.3",
-    "tsc-alias": "^1.8.15",
+    "tsc-alias": "^1.8.16",
     "typescript": "^5.8.3"
   },
   "peerDependencies": {

@@ -181,6 +181,7 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
             setItems(newData.productList.products.data);
         });
     };
+    console.log('data', data);
 
     return (
         <div className="w-full">
@@ -424,8 +425,7 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
                                                                         {orderItem.product?.image?.url && (
                                                                             <div className="relative w-10 h-10 overflow-hidden flex-shrink-0 rounded-lg">
                                                                                 {orderItem.product?.image?.url &&
-                                                                                    orderItem.product?.image
-                                                                                        ?.alternativeText && (
+                                                                                    orderItem.product?.image?.alt && (
                                                                                         <Image
                                                                                             src={
                                                                                                 orderItem.product?.image
@@ -433,7 +433,7 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
                                                                                             }
                                                                                             alt={
                                                                                                 orderItem.product?.image
-                                                                                                    ?.alternativeText
+                                                                                                    ?.alt
                                                                                             }
                                                                                             fill
                                                                                             className="object-cover object-center"

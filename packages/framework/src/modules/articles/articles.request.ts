@@ -1,22 +1,33 @@
 import { PaginationQuery } from '@/utils/models/pagination';
 
-export class GetArticleParams {
+export class GetCategoryParams {
     id!: string;
     locale!: string;
 }
 
-export class GetArticleListQuery extends PaginationQuery {
-    title?: string;
-    dateFrom?: Date;
-    dateTo?: Date;
+export class GetCategoryListQuery extends PaginationQuery {
     locale!: string;
-}
-
-export class GetArticleListBody {
-    query?: string;
-    category?: string;
     sort?: {
         field: string;
         order: 'asc' | 'desc';
     };
+}
+
+export class GetArticleParams {
+    slug!: string;
+    locale!: string;
+}
+
+export class GetArticleListQuery extends PaginationQuery {
+    locale!: string;
+    ids?: string[];
+    category?: string;
+    dateFrom?: Date;
+    dateTo?: Date;
+    sortBy?: string;
+    sortOrder?: 'asc' | 'desc';
+}
+
+export class SearchArticlesBody extends GetArticleListQuery {
+    query?: string;
 }

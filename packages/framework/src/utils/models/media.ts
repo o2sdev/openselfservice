@@ -1,8 +1,7 @@
 export class Media {
-    url?: string;
-    alternativeText?: string;
+    url!: string;
+    alt!: string;
     width?: number;
     height?: number;
-    name?: string;
     priority?: boolean;
 }

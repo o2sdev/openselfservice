@@ -91,7 +91,7 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
                                                         return (
                                                             <TableHead
                                                                 key={column.id}
-                                                                className="py-3 px-4 text-sm font-medium text-muted-foreground text-right md:text-nowrap"
+                                                                className="py-3 px-4 text-sm font-medium text-muted-foreground text-right"
                                                             >
                                                                 {column.title}
                                                             </TableHead>
@@ -100,7 +100,7 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
                                                         return (
                                                             <TableHead
                                                                 key={column.id}
-                                                                className="py-3 px-4 text-sm font-medium text-muted-foreground md:text-nowrap"
+                                                                className="py-3 px-4 text-sm font-medium text-muted-foreground"
                                                             >
                                                                 {column.title}
                                                             </TableHead>
@@ -108,7 +108,7 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
                                                 }
                                             })}
                                             {data.table.actions && (
-                                                <TableHead className="py-3 px-4 text-sm font-medium text-muted-foreground md:text-nowrap">
+                                                <TableHead className="py-3 px-4 text-sm font-medium text-muted-foreground">
                                                     {data.table.actions.title}
                                                 </TableHead>
                                             )}

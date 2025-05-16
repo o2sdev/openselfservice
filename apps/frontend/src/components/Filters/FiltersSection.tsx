@@ -18,6 +18,7 @@ export const FiltersSection = <T, S extends FormikValues>({
     initialValues,
     onSubmit,
     onReset,
+    labels,
 }: Readonly<FiltersSectionProps<T, S>>) => {
     const hasLeadingItem = filters?.items.some((item) => item.isLeading === true);
 
@@ -41,6 +42,7 @@ export const FiltersSection = <T, S extends FormikValues>({
                     onSubmit={onSubmit}
                     onReset={onReset}
                     hasLeadingItem={hasLeadingItem}
+                    labels={labels}
                 />
             </FiltersContextProvider>
         </div>

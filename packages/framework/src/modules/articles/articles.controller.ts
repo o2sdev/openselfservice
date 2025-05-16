@@ -15,7 +15,12 @@ export class ArticleController {
     }
 
     @Get()
-    getArticleList(@Query() query: Request.GetArticleListQuery, @Body() body: Request.GetArticleListBody) {
-        return this.articleService.getArticleList(query, body);
+    getArticleList(@Query() query: Request.GetArticleListQuery) {
+        return this.articleService.getArticleList(query);
+    }
+
+    @Get('/search')
+    searchArticles(@Body() body: Request.SearchArticlesBody) {
+        return this.articleService.searchArticles(body);
     }
 }

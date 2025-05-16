@@ -1,6 +1,6 @@
 {
     "name": "@o2s/integrations.mocked",
-    "version": "0.21.0",
+    "version": "0.22.2",
     "private": false,
     "license": "MIT",
     "exports": {
@@ -29,7 +29,7 @@
         "eslint": "^9.26.0",
         "prettier": "^3.5.3",
         "shx": "^0.4.0",
-        "tsc-alias": "^1.8.15",
+        "tsc-alias": "^1.8.16",
         "typescript": "^5.8.3"
     },
     "peerDependencies": {

@@ -110,6 +110,7 @@ const MOCK_INVOICE_LIST_BLOCK_EN: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
     labels: {
         today: 'Today',
         yesterday: 'Yesterday',
+        clickToSelect: 'Click to select',
     },
     downloadFileName: 'invoice-{id}.pdf',
     downloadButtonAriaDescription: 'Download invoice {id}',
@@ -225,6 +226,7 @@ const MOCK_INVOICE_LIST_BLOCK_DE: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
     labels: {
         today: 'Heute',
         yesterday: 'Gestern',
+        clickToSelect: 'Klicken Sie, um auszuwählen',
     },
     downloadFileName: 'rechnung-{id}.pdf',
     downloadButtonAriaDescription: 'Rechnung {id} herunterladen',
@@ -340,6 +342,7 @@ const MOCK_INVOICE_LIST_BLOCK_PL: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
     labels: {
         today: 'Dzisiaj',
         yesterday: 'Wczoraj',
+        clickToSelect: 'Kliknij, aby wybrać',
     },
     downloadFileName: 'faktura-{id}.pdf',
     downloadButtonAriaDescription: 'Pobierz fakturę {id}',

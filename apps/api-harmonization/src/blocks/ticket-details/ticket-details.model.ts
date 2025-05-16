@@ -43,7 +43,7 @@ export class TicketAttachment {
     name!: string;
     url!: string;
     size!: number;
-    author!: Tickets.Model.Author & { initials: string };
+    author!: Tickets.Model.Author;
     date!: string;
     ariaLabel!: string;
 }
@@ -54,7 +54,7 @@ export class TicketComments {
 }
 
 export class TicketComment {
-    author!: Tickets.Model.Author & { initials: string };
+    author!: Tickets.Model.Author;
     date!: string;
     content!: string;
 }

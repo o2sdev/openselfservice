@@ -3,8 +3,6 @@ export * as TicketDetails from './ticket-details';
 export * as NotificationList from './notification-list';
 export * as NotificationDetails from './notification-details';
 export * as Faq from './faq';
-export * as ArticleDetails from './article-details';
-export * as ArticleList from './article-list';
 export * as InvoiceList from './invoice-list';
 export * as PaymentsSummary from './payments-summary';
 export * as PaymentsHistory from './payments-history';
@@ -16,4 +14,9 @@ export * as Surveyjs from './surveyjs';
 export * as OrderList from './order-list';
 export * as OrdersSummary from './orders-summary';
 export * as OrderDetails from './order-details';
+export * as QuickLinks from './quick-links';
+export * as CategoryList from './category-list';
+export * as ArticleList from './article-list';
+export * as Category from './category';
+export * as Article from './article';
 // BLOCK EXPORT

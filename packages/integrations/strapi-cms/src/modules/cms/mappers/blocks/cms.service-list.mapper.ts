@@ -34,6 +34,7 @@ export const mapServiceListBlock = (data: GetComponentQuery): CMS.Model.ServiceL
                 labels: {
                     today: configurableTexts.dates.today,
                     yesterday: configurableTexts.dates.yesterday,
+                    clickToSelect: configurableTexts.actions.clickToSelect,
                 },
             };
     }

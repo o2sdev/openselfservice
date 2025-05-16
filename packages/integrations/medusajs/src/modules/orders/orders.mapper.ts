@@ -62,6 +62,7 @@ const mapProduct = (
         shortDescription: item.description || '',
         image: {
             url: item.thumbnail || '',
+            alt: '',
         },
         price: mapPrice(unitPrice, currency) as Models.Price.Price,
         link: '',
