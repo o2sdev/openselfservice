@@ -52,7 +52,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     });
 }
 
-export default async function LoginPage({ params }: Readonly<Props>) {
+export default async function ResetPasswordPage({ params }: Readonly<Props>) {
     const { locale, callbackUrl } = await params;
 
     try {
