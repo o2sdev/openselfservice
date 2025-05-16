@@ -7,7 +7,7 @@ export class OrderListBlock extends Block.Block {
     __typename!: 'OrderListBlock';
     title?: string;
     subtitle?: string;
-    table!: Models.DataTable.DataTable<Orders.Model.Order & { paymentDueDate: string }>;
+    table!: Models.DataTable.DataTable<Orders.Model.Order>;
     pagination?: Models.Pagination.Pagination;
     filters?: Models.Filters.Filters<Orders.Model.Order>;
     noResults!: {
@@ -34,7 +34,7 @@ export class Order {
         label: string;
     };
     paymentDueDate!: {
-        value: string;
+        value: Orders.Model.Order['paymentDueDate'];
         label: string;
     };
     status!: {

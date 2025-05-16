@@ -14,3 +14,8 @@ export class PaymentsSummaryBlock extends Block.Block {
         buttonLabel?: string;
     };
 }
+
+// export class PaymentsSummaryBlock extends Block.Block {
+//     overdue!: InfoCard;
+//     toBePaid!: InfoCard;
+// }

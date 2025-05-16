@@ -180,7 +180,7 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
                                                             }
                                                         })}
                                                         {data.table.data.actions && (
-                                                            <TableCell>
+                                                            <TableCell className="py-0">
                                                                 <Link asChild>
                                                                     <Button
                                                                         variant="link"

@@ -8,6 +8,7 @@ import { FaqRenderer } from '@/blocks/Faq/Faq.renderer';
 import { InvoiceListRenderer } from '@/blocks/InvoiceList/InvoiceList.renderer';
 import { NotificationDetailsRenderer } from '@/blocks/NotificationDetails/NotificationDetails.renderer';
 import { NotificationListRenderer } from '@/blocks/NotificationList/NotificationList.renderer';
+import { OrderDetailsRenderer } from '@/blocks/OrderDetails/OrderDetails.renderer';
 import { OrderListRenderer } from '@/blocks/OrderList/OrderList.renderer';
 import { PaymentsHistoryRenderer } from '@/blocks/PaymentsHistory/PaymentsHistory.renderer';
 import { PaymentsSummaryRenderer } from '@/blocks/PaymentsSummary/PaymentsSummary.renderer';
@@ -54,6 +55,8 @@ export const renderBlocks = (blocks: CMS.Model.Page.SlotBlock[], slug: string[],
                 return <OrderListRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
             case 'OrdersSummaryBlock':
                 return <OrdersSummaryRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
+            case 'OrderDetailsBlock':
+                return <OrderDetailsRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
         }
     });
 };

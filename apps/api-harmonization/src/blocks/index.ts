@@ -15,4 +15,5 @@ export * as ServiceDetails from './service-details';
 export * as Surveyjs from './surveyjs';
 export * as OrderList from './order-list';
 export * as OrdersSummary from './orders-summary';
+export * as OrderDetails from './order-details';
 // BLOCK EXPORT

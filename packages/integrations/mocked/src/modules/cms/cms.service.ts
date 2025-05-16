@@ -10,6 +10,7 @@ import { mapInvoiceDetailsBlock } from './mappers/blocks/cms.invoice-details.map
 import { mapInvoiceListBlock } from './mappers/blocks/cms.invoice-list.mapper';
 import { mapNotificationDetailsBlock } from './mappers/blocks/cms.notification-details.mapper';
 import { mapNotificationListBlock } from './mappers/blocks/cms.notification-list.mapper';
+import { mapOrderDetailsBlock } from './mappers/blocks/cms.order-details.mapper';
 import { mapOrderListBlock } from './mappers/blocks/cms.order-list.mapper';
 import { mapOrdersSummaryBlock } from './mappers/blocks/cms.orders-summary.mapper';
 import { mapPaymentsHistoryBlock } from './mappers/blocks/cms.payments-history.mapper';
@@ -161,5 +162,9 @@ export class CmsService implements CMS.Service {
 
     getOrdersSummaryBlock(options: CMS.Request.GetCmsEntryParams) {
         return of(mapOrdersSummaryBlock(options.locale)).pipe(responseDelay());
+    }
+
+    getOrderDetailsBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapOrderDetailsBlock(options.locale)).pipe(responseDelay());
     }
 }

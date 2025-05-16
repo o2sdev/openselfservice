@@ -123,7 +123,7 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
                                                             return (
                                                                 <TableCell
                                                                     key={column.id}
-                                                                    className="whitespace-nowrap"
+                                                                    className="whitespace-nowrap py-0"
                                                                 >
                                                                     <Button asChild variant="link">
                                                                         <NextLink href={order.detailsUrl}>
@@ -171,7 +171,7 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
                                                     }
                                                 })}
                                                 {data.table.actions && (
-                                                    <TableCell className="p-4 w-[180px]">
+                                                    <TableCell className="py-0 w-[180px] ">
                                                         <div className="flex items-center">
                                                             <Button asChild variant="link">
                                                                 <NextLink

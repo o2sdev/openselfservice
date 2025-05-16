@@ -8,6 +8,7 @@ export * as Customer from './customer';
 export * as Address from './address';
 export * as UserCustomerRole from './roles';
 export * as Price from './price';
+export * as Unit from './unit';
 export * as FormField from './form-field';
 export * as Link from './link';
 export * as Media from './media';

@@ -27,3 +27,4 @@ export * as UserAccountBlock from './models/blocks/user-account.model';
 export * as SurveyJsBlock from './models/blocks/surveyjs-block.model';
 export * as OrderListBlock from './models/blocks/order-list.model';
 export * as OrdersSummaryBlock from './models/blocks/orders-summary.model';
+export * as OrderDetailsBlock from './models/blocks/order-details.model';

@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import format from 'string-template';
 
 import { formatDateRelative } from '@o2s/api-harmonization/utils/date';
@@ -37,9 +36,6 @@ export const mapOrder = (
     locale: string,
     timezone: string,
 ): Order => {
-    const createdAtDate = dayjs(order.createdAt);
-    const paymentDueDate = createdAtDate.add(7, 'day').format('YYYY-MM-DDTHH:mm:ss');
-
     return {
         id: {
             label: cms.fieldMapping.id?.[order.id] || order.id,
@@ -54,8 +50,10 @@ export const mapOrder = (
             value: order.createdAt,
         },
         paymentDueDate: {
-            label: formatDateRelative(paymentDueDate, locale, cms.labels.today, cms.labels.yesterday, timezone),
-            value: paymentDueDate,
+            label: order.paymentDueDate
+                ? formatDateRelative(order.paymentDueDate, locale, cms.labels.today, cms.labels.yesterday, timezone)
+                : '-',
+            value: order.paymentDueDate,
         },
         total: {
             label: checkNegativeValue(order.total).value.toString(),
