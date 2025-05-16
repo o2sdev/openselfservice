@@ -11,7 +11,7 @@ export const category = (sdk: Sdk) => ({
         getCategory: (
             query: Blocks.Category.Request.GetCategoryBlockQuery,
             headers: Headers.AppHeaders,
-            authorization: string,
+            authorization?: string,
         ): Promise<Blocks.Category.Model.CategoryBlock> =>
             sdk.makeRequest({
                 method: 'get',
@@ -19,14 +19,18 @@ export const category = (sdk: Sdk) => ({
                 headers: {
                     ...getApiHeaders(),
                     ...headers,
-                    Authorization: `Bearer ${authorization}`,
+                    ...(authorization
+                        ? {
+                              Authorization: `Bearer ${authorization}`,
+                          }
+                        : {}),
                 },
                 params: query,
             }),
         getCategoryArticles: (
             query: Blocks.Category.Request.GetCategoryBlockArticlesQuery,
             headers: Headers.AppHeaders,
-            authorization: string,
+            authorization?: string,
         ): Promise<Blocks.Category.Model.CategoryArticles> =>
             sdk.makeRequest({
                 method: 'get',
@@ -34,7 +38,11 @@ export const category = (sdk: Sdk) => ({
                 headers: {
                     ...getApiHeaders(),
                     ...headers,
-                    Authorization: `Bearer ${authorization}`,
+                    ...(authorization
+                        ? {
+                              Authorization: `Bearer ${authorization}`,
+                          }
+                        : {}),
                 },
                 params: query,
             }),

@@ -15,7 +15,7 @@ export class ArticleListController {
     constructor(protected readonly service: ArticleListService) {}
 
     @Get()
-    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
+    @Auth.Decorators.Roles({ roles: [] })
     getArticleListBlock(@Headers() headers: AppHeaders, @Query() query: GetArticleListBlockQuery) {
         return this.service.getArticleListBlock(query, headers);
     }

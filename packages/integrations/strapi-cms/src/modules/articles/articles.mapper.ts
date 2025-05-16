@@ -46,6 +46,7 @@ export const mapArticle = (
             return {
                 id: page.id,
                 slug: page.slug,
+                isProtected: page.isProtected,
                 createdAt: page.updatedAt,
                 updatedAt: page.updatedAt,
                 title: page.seo.title,
@@ -104,6 +105,7 @@ export const mapArticles = (
             return {
                 id: page.documentId,
                 slug: page.slug,
+                isProtected: page.protected,
                 createdAt: page.updatedAt,
                 updatedAt: page.updatedAt,
                 title: page.SEO.title,

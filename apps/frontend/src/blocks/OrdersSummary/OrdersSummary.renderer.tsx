@@ -8,7 +8,7 @@ import { OrdersSummary } from './OrdersSummary.server';
 export interface OrdersSummaryRendererProps {
     slug: string[];
     id: string;
-    accessToken: string;
+    accessToken?: string;
 }
 
 export const OrdersSummaryRenderer: React.FC<OrdersSummaryRendererProps> = ({ id, accessToken }) => {

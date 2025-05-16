@@ -2,25 +2,14 @@ import { SessionProvider } from 'next-auth/react';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { Inter } from 'next/font/google';
-import { headers } from 'next/headers';
 import { notFound } from 'next/navigation';
 import React from 'react';
 
-import { Toaster } from '@o2s/ui/components/toaster';
 import { TooltipProvider } from '@o2s/ui/components/tooltip';
-
-import { sdk } from '@/api/sdk';
 
 import { auth } from '@/auth';
 
 import { routing } from '@/i18n';
-
-import { GlobalProvider } from '@/providers/GlobalProvider';
-
-import { Footer } from '@/containers/Footer/Footer';
-import { Header } from '@/containers/Header/Header';
-
-import { AppSpinner } from '@/components/AppSpinner/AppSpinner';
 
 import '@/styles/global.css';
 
@@ -37,7 +26,6 @@ interface Props {
 }
 
 export default async function RootLayout({ children, params }: Props) {
-    const headersList = await headers();
     const session = await auth();
 
     const { locale } = await params;
@@ -45,16 +33,6 @@ export default async function RootLayout({ children, params }: Props) {
     if (!routing.locales.includes(locale)) {
         return notFound();
     }
-
-    const init = await sdk.modules.getInit(
-        {
-            referrer: headersList.get('referrer') || (process.env.NEXT_PUBLIC_BASE_URL as string),
-        },
-        { 'x-locale': locale },
-        session?.accessToken,
-    );
-
-    const { labels, ...config } = init;
 
     setRequestLocale(locale);
 
@@ -73,18 +51,7 @@ export default async function RootLayout({ children, params }: Props) {
                 {/*@see https://github.com/nextauthjs/next-auth/issues/9504#issuecomment-2516665386*/}
                 <SessionProvider key={session?.user?.id} session={session} refetchOnWindowFocus={false}>
                     <NextIntlClientProvider messages={messages}>
-                        <GlobalProvider config={config} labels={labels} locale={locale}>
-                            <TooltipProvider>
-                                <div className="flex flex-col min-h-dvh">
-                                    <Header headerData={init.common.header} />
-                                    <div className="flex flex-col grow">{children}</div>
-                                    <Footer data={init.common.footer} />
-
-                                    <Toaster />
-                                    <AppSpinner />
-                                </div>
-                            </TooltipProvider>
-                        </GlobalProvider>
+                        <TooltipProvider>{children}</TooltipProvider>
                     </NextIntlClientProvider>
                 </SessionProvider>
             </body>

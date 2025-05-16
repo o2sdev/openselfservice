@@ -1,21 +1,29 @@
 import { Metadata } from 'next';
 import { AuthError } from 'next-auth';
 import { setRequestLocale } from 'next-intl/server';
+import { headers } from 'next/headers';
 import { notFound } from 'next/navigation';
 import React from 'react';
 import { providerMap } from 'src/auth.providers';
+
+import { Toaster } from '@o2s/ui/components/toaster';
 
 import { sdk } from '@/api/sdk';
 
 import { generateSeo } from '@/utils/seo';
 
-import { signIn } from '@/auth';
+import { auth, signIn } from '@/auth';
 
 import { routing } from '@/i18n/routing';
 
+import { GlobalProvider } from '@/providers/GlobalProvider';
+
 import { AuthLayout } from '@/containers/Auth/AuthLayout/AuthLayout';
 import { FormValues, SignInForm } from '@/containers/Auth/SignInForm';
+import { Footer } from '@/containers/Footer/Footer';
+import { Header } from '@/containers/Header/Header';
 
+import { AppSpinner } from '@/components/AppSpinner/AppSpinner';
 import { Image } from '@/components/Image/Image';
 
 interface Props {
@@ -52,9 +60,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function LoginPage({ params }: Readonly<Props>) {
+    const headersList = await headers();
+    const session = await auth();
     const { locale, callbackUrl } = await params;
 
     try {
+        const init = await sdk.modules.getInit(
+            {
+                referrer: headersList.get('referrer') || (process.env.NEXT_PUBLIC_BASE_URL as string),
+            },
+            { 'x-locale': locale },
+            session?.accessToken,
+        );
+
         const { data } = await sdk.modules.getLoginPage({ 'x-locale': locale });
 
         if (!data) {
@@ -78,34 +96,50 @@ export default async function LoginPage({ params }: Readonly<Props>) {
         };
 
         return (
-            <AuthLayout>
-                <SignInForm
-                    providers={providerMap}
-                    labels={{
-                        title: data.title,
-                        subtitle: data.subtitle,
-                        password: {
-                            label: data.password.label,
-                            placeholder: data.password.placeholder,
-                            hide: data.labels?.hide,
-                            show: data.labels?.show,
-                            errorMessages: data.password?.errorMessages,
-                        },
-                        username: {
-                            label: data.username.label,
-                            placeholder: data.username.placeholder,
-                            errorMessages: data.username?.errorMessages,
-                        },
-                        signIn: data.signIn,
-                        providers: data.providers,
-                        invalidCredentials: data.invalidCredentials,
-                    }}
-                    onSignIn={handleSignIn}
-                />
-                {data.image?.url && (
-                    <Image src={data.image?.url} alt={data.image?.alt} fill={true} className="object-cover" />
-                )}
-            </AuthLayout>
+            <GlobalProvider config={init} labels={init.labels} locale={locale}>
+                <div className="flex flex-col min-h-dvh">
+                    <Header data={init.common.header} />
+                    <div className="flex flex-col grow">
+                        <AuthLayout>
+                            <SignInForm
+                                providers={providerMap}
+                                labels={{
+                                    title: data.title,
+                                    subtitle: data.subtitle,
+                                    password: {
+                                        label: data.password.label,
+                                        placeholder: data.password.placeholder,
+                                        hide: data.labels?.hide,
+                                        show: data.labels?.show,
+                                        errorMessages: data.password?.errorMessages,
+                                    },
+                                    username: {
+                                        label: data.username.label,
+                                        placeholder: data.username.placeholder,
+                                        errorMessages: data.username?.errorMessages,
+                                    },
+                                    signIn: data.signIn,
+                                    providers: data.providers,
+                                    invalidCredentials: data.invalidCredentials,
+                                }}
+                                onSignIn={handleSignIn}
+                            />
+                            {data.image?.url && (
+                                <Image
+                                    src={data.image?.url}
+                                    alt={data.image?.alt}
+                                    fill={true}
+                                    className="object-cover"
+                                />
+                            )}
+                        </AuthLayout>
+                    </div>
+                    <Footer data={init.common.footer} />
+
+                    <Toaster />
+                    <AppSpinner />
+                </div>
+            </GlobalProvider>
         );
     } catch (_error) {
         notFound();

@@ -1,6 +1,5 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
 import React from 'react';
 
 import { Models } from '@o2s/framework/modules';
@@ -30,22 +29,23 @@ export function DesktopNavigation({
     userSlot,
     items,
 }: DesktopNavigationProps) {
-    const session = useSession();
-    const isSignedIn = !!session.data?.user;
-
     const pathname = usePathname();
 
-    const activeNavigationGroup = isSignedIn
-        ? items.find((item) => {
-              if (item.__typename === 'NavigationGroup') {
-                  return item.items
-                      .filter((item) => item.__typename === 'NavigationItem')
-                      .some((item) => item.url && pathname.includes(item.url) && item.url !== '/');
-              }
+    const activeNavigationGroup = items.find((item) => {
+        if (item.__typename === 'NavigationGroup') {
+            return item.items
+                .filter((item) => item.__typename === 'NavigationItem')
+                .some((item) => {
+                    if (pathname !== '/') {
+                        return item.url !== '/' && item.url && pathname.startsWith(item.url);
+                    }
 
-              return item.url && pathname.includes(item.url) && item.url !== '/';
-          }) || items[0]
-        : undefined;
+                    return item.url && pathname.startsWith(item.url);
+                });
+        }
+
+        return item.url && pathname.includes(item.url);
+    });
 
     const navigationItemClass = cn(navigationMenuTriggerStyle());
 

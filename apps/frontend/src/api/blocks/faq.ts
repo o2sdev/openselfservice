@@ -11,7 +11,7 @@ export const faq = (sdk: Sdk) => ({
         getFaq: (
             query: Blocks.Faq.Request.GetFaqBlockQuery,
             headers: Headers.AppHeaders,
-            authorization: string,
+            authorization?: string,
         ): Promise<Blocks.Faq.Model.FaqBlock> =>
             sdk.makeRequest({
                 method: 'get',
@@ -19,7 +19,11 @@ export const faq = (sdk: Sdk) => ({
                 headers: {
                     ...getApiHeaders(),
                     ...headers,
-                    Authorization: `Bearer ${authorization}`,
+                    ...(authorization
+                        ? {
+                              Authorization: `Bearer ${authorization}`,
+                          }
+                        : {}),
                 },
                 params: query,
             }),

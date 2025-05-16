@@ -28,6 +28,7 @@ export const mapPage = (
                 noFollow: page.seo.noFollow,
             },
             locales,
+            isProtected: page.isProtected,
         },
         data: {
             alternativeUrls,
@@ -53,6 +54,7 @@ export const mapArticle = (
                 noFollow: false,
             },
             locales: [mainLocale],
+            isProtected: article.isProtected,
         },
         data: {
             alternativeUrls: {},

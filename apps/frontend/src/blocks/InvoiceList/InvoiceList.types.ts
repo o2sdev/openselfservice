@@ -2,7 +2,7 @@ import { Blocks } from '@o2s/api-harmonization';
 
 export interface InvoiceListProps {
     id: string;
-    accessToken: string;
+    accessToken?: string;
     locale: string;
 }
 

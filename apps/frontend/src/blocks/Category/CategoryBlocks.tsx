@@ -7,7 +7,7 @@ import { renderBlocks } from '@/blocks/renderBlocks';
 export const CategoryBlocks: React.FC<{
     components?: CMS.Model.CategoryBlock.CategoryBlock['components'];
     slug: string[];
-    accessToken: string;
+    accessToken?: string;
 }> = ({ components, slug, accessToken }) => {
     if (!components?.length) return null;
 

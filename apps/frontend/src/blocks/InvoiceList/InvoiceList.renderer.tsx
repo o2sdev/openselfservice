@@ -7,7 +7,7 @@ import { InvoiceList } from './InvoiceList.server';
 
 export interface InvoiceListRendererProps {
     id: string;
-    accessToken: string;
+    accessToken?: string;
 }
 
 export const InvoiceListRenderer: React.FC<InvoiceListRendererProps> = ({ id, accessToken }) => {

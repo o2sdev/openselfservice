@@ -28,7 +28,7 @@ import { UserAccountRenderer } from '@/blocks/UserAccount/UserAccount.renderer';
 
 // BLOCK IMPORT
 
-export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: string[], accessToken: string) => {
+export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: string[], accessToken?: string) => {
     return blocks.map((block) => {
         switch (block.__typename as Modules.Page.Model.Blocks) {
             case 'TicketListBlock':

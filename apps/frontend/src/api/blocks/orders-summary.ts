@@ -11,7 +11,7 @@ export const ordersSummary = (sdk: Sdk) => ({
         getOrdersSummary: (
             query: Blocks.OrdersSummary.Request.GetOrdersSummaryBlockQuery,
             headers: Headers.AppHeaders,
-            authorization: string,
+            authorization?: string,
         ): Promise<Blocks.OrdersSummary.Model.OrdersSummaryBlock> =>
             sdk.makeRequest({
                 method: 'get',
@@ -19,7 +19,11 @@ export const ordersSummary = (sdk: Sdk) => ({
                 headers: {
                     ...getApiHeaders(),
                     ...headers,
-                    Authorization: `Bearer ${authorization}`,
+                    ...(authorization
+                        ? {
+                              Authorization: `Bearer ${authorization}`,
+                          }
+                        : {}),
                 },
                 params: query,
             }),

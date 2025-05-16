@@ -17,6 +17,8 @@ export const PAGE_SERVICE_DETAILS_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+
+    isProtected: true,
     hasOwnTitle: true,
     parent: {
         slug: '/services',
@@ -66,6 +68,8 @@ export const PAGE_SERVICE_DETAILS_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+
+    isProtected: true,
     hasOwnTitle: true,
     parent: {
         slug: '/dienstleistungen',
@@ -115,6 +119,8 @@ export const PAGE_SERVICE_DETAILS_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+
+    isProtected: true,
     hasOwnTitle: true,
     parent: {
         slug: '/uslugi',

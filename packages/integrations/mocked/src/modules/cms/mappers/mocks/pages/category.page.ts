@@ -18,6 +18,8 @@ export const PAGE_WARRANTY_AND_REPAIR_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+
+    isProtected: false,
     hasOwnTitle: false,
     parent: {
         slug: '/help-and-support',
@@ -57,6 +59,8 @@ export const PAGE_WARRANTY_AND_REPAIR_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+
+    isProtected: false,
     hasOwnTitle: false,
     parent: {
         slug: '/hilfe-und-support',
@@ -96,6 +100,8 @@ export const PAGE_WARRANTY_AND_REPAIR_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+
+    isProtected: false,
     hasOwnTitle: false,
     parent: {
         slug: '/pomoc-i-wsparcie',
@@ -136,6 +142,8 @@ export const PAGE_MAINTENANCE_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+
+    isProtected: false,
     hasOwnTitle: false,
     parent: {
         slug: '/help-and-support',
@@ -175,6 +183,8 @@ export const PAGE_MAINTENANCE_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+
+    isProtected: false,
     hasOwnTitle: false,
     parent: {
         slug: '/hilfe-und-support',
@@ -214,6 +224,8 @@ export const PAGE_MAINTENANCE_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+
+    isProtected: false,
     hasOwnTitle: false,
     parent: {
         slug: '/pomoc-i-wsparcie',
@@ -254,6 +266,8 @@ export const PAGE_SAFETY_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+
+    isProtected: false,
     hasOwnTitle: false,
     parent: {
         slug: '/help-and-support',
@@ -293,6 +307,8 @@ export const PAGE_SAFETY_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+
+    isProtected: false,
     hasOwnTitle: false,
     parent: {
         slug: '/hilfe-und-support',
@@ -332,6 +348,8 @@ export const PAGE_SAFETY_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+
+    isProtected: false,
     hasOwnTitle: false,
     parent: {
         slug: '/pomoc-i-wsparcie',
@@ -372,6 +390,8 @@ export const PAGE_ACCESSORIES_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+
+    isProtected: false,
     hasOwnTitle: false,
     parent: {
         slug: '/help-and-support',
@@ -411,6 +431,8 @@ export const PAGE_ACCESSORIES_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+
+    isProtected: false,
     hasOwnTitle: false,
     parent: {
         slug: '/hilfe-und-support',
@@ -450,6 +472,8 @@ export const PAGE_ACCESSORIES_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+
+    isProtected: false,
     hasOwnTitle: false,
     parent: {
         slug: '/pomoc-i-wsparcie',

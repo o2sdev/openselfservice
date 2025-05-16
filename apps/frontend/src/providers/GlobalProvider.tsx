@@ -16,12 +16,6 @@ export interface GlobalContextType {
     config: Omit<Modules.Page.Model.Init, 'labels'>;
     labels: Modules.Page.Model.Init['labels'];
     priceService: PriceService;
-    alternativeUrls: {
-        values: {
-            [key: string]: string;
-        };
-        set: (values: { [key: string]: string }) => void;
-    };
     spinner: {
         isVisible: boolean;
         toggle: (show: boolean) => void;
@@ -31,10 +25,6 @@ export interface GlobalContextType {
 export const GlobalContext = createContext({} as GlobalContextType);
 
 export const GlobalProvider = ({ config, labels, locale, children }: GlobalProviderProps) => {
-    const [alternativeUrls, setAlternativeUrls] = useState<{
-        [key: string]: string;
-    }>({});
-
     const priceService = usePriceService(locale);
 
     const [isSpinnerVisible, setIsSpinnerVisible] = useState(false);
@@ -43,16 +33,12 @@ export const GlobalProvider = ({ config, labels, locale, children }: GlobalProvi
         <GlobalContext.Provider
             value={{
                 config,
+                labels,
                 priceService,
-                alternativeUrls: {
-                    values: alternativeUrls,
-                    set: setAlternativeUrls,
-                },
                 spinner: {
                     isVisible: isSpinnerVisible,
                     toggle: setIsSpinnerVisible,
                 },
-                labels,
             }}
         >
             {children}

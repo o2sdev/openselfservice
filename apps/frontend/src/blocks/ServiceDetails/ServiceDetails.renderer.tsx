@@ -9,7 +9,7 @@ import { ServiceDetails } from './ServiceDetails.server';
 export interface ServiceDetailsRendererProps {
     slug: string[];
     id: string;
-    accessToken: string;
+    accessToken?: string;
 }
 
 export const ServiceDetailsRenderer: React.FC<ServiceDetailsRendererProps> = ({ slug, id, accessToken }) => {

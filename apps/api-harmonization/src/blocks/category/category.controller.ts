@@ -15,13 +15,13 @@ export class CategoryController {
     constructor(protected readonly service: CategoryService) {}
 
     @Get()
-    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
+    @Auth.Decorators.Roles({ roles: [] })
     getCategoryBlock(@Headers() headers: AppHeaders, @Query() query: GetCategoryBlockQuery) {
         return this.service.getCategoryBlock(query, headers);
     }
 
     @Get('articles')
-    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
+    @Auth.Decorators.Roles({ roles: [] })
     getCategoryArticles(@Headers() headers: AppHeaders, @Query() query: GetCategoryBlockArticlesQuery) {
         return this.service.getCategoryArticles(query, headers);
     }

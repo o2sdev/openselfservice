@@ -11,7 +11,7 @@ export const paymentsSummary = (sdk: Sdk) => ({
         getPaymentsSummary: (
             query: Blocks.PaymentsSummary.Request.GetPaymentsSummaryBlockQuery,
             headers: Headers.AppHeaders,
-            authorization: string,
+            authorization?: string,
         ): Promise<Blocks.PaymentsSummary.Model.PaymentsSummaryBlock> =>
             sdk.makeRequest({
                 method: 'get',
@@ -19,7 +19,11 @@ export const paymentsSummary = (sdk: Sdk) => ({
                 headers: {
                     ...getApiHeaders(),
                     ...headers,
-                    Authorization: `Bearer ${authorization}`,
+                    ...(authorization
+                        ? {
+                              Authorization: `Bearer ${authorization}`,
+                          }
+                        : {}),
                 },
                 params: query,
             }),

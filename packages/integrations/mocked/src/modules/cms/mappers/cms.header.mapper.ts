@@ -90,6 +90,10 @@ const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
         open: 'Menü öffnen',
         close: 'Menü schließen',
     },
+    userInfo: {
+        url: '/user-account',
+        label: 'Benutzerprofil',
+    },
     items: [
         {
             __typename: 'NavigationGroup',

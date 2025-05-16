@@ -30,7 +30,7 @@ export const page = (sdk: Sdk) => ({
         getPage: (
             params: Modules.Page.Request.GetPageQuery,
             headers: Headers.AppHeaders,
-            authorization: string,
+            authorization?: string,
         ): Promise<Modules.Page.Model.Page> =>
             sdk.makeRequest({
                 method: 'get',
@@ -38,7 +38,11 @@ export const page = (sdk: Sdk) => ({
                 headers: {
                     ...getApiHeaders(),
                     ...headers,
-                    Authorization: `Bearer ${authorization}`,
+                    ...(authorization
+                        ? {
+                              Authorization: `Bearer ${authorization}`,
+                          }
+                        : {}),
                 },
                 params: params,
             }),

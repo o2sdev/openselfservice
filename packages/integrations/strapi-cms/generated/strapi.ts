@@ -7282,6 +7282,7 @@ export type ArticleSimpleFragment = {
 export type ArticleTemplateFragment = {
     documentId: string;
     slug: string;
+    protected: boolean;
     locale?: string;
     createdAt?: any;
     updatedAt?: any;
@@ -7576,6 +7577,7 @@ export type GetArticlesQuery = {
     pages_connection?: { pageInfo: { total: number } };
     articles: Array<{
         documentId: string;
+        protected: boolean;
         slug: string;
         locale?: string;
         createdAt?: any;
@@ -7995,6 +7997,7 @@ export type OrganizationListFragment = { documentId: string; title?: string; des
 export type PageFragment = {
     documentId: string;
     slug: string;
+    protected: boolean;
     locale?: string;
     createdAt?: any;
     updatedAt?: any;
@@ -9635,6 +9638,7 @@ export type GetPageQuery = {
     pages: Array<{
         documentId: string;
         slug: string;
+        protected: boolean;
         locale?: string;
         createdAt?: any;
         updatedAt?: any;
@@ -9808,6 +9812,7 @@ export type GetPagesQuery = {
     pages: Array<{
         documentId: string;
         slug: string;
+        protected: boolean;
         locale?: string;
         createdAt?: any;
         updatedAt?: any;

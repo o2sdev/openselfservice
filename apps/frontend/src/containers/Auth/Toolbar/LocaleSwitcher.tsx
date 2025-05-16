@@ -13,17 +13,17 @@ import { useGlobalContext } from '@/providers/GlobalProvider';
 
 import { ToolbarProps } from './Toolbar.types';
 
-export const LocaleSwitcher: React.FC<ToolbarProps> = ({ label = 'Language' }) => {
+export const LocaleSwitcher: React.FC<ToolbarProps> = ({ label, alternativeUrls }) => {
     const pathname = usePathname();
     const searchParams = useSearchParams();
     const router = useRouter();
 
-    const { config, alternativeUrls } = useGlobalContext();
+    const { config } = useGlobalContext();
 
     const currentLocale = useLocale();
 
     const handleLocaleChange = (locale: string) => {
-        const alternative = alternativeUrls.values?.[locale];
+        const alternative = alternativeUrls?.[locale];
         const url = alternative || pathname;
 
         router.push(
@@ -42,7 +42,7 @@ export const LocaleSwitcher: React.FC<ToolbarProps> = ({ label = 'Language' }) =
             </Label>
             <Select value={currentLocale} onValueChange={handleLocaleChange}>
                 <SelectTrigger variant="secondary" className="md:w-[80px] w-full" id="language-switch">
-                    <SelectValue placeholder={currentLocale} />
+                    <SelectValue placeholder={currentLocale}>{currentLocale.toUpperCase()}</SelectValue>
                 </SelectTrigger>
                 <SelectContent>
                     {config.locales.map((locale) => (

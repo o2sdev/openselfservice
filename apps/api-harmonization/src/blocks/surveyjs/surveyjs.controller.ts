@@ -15,7 +15,7 @@ export class SurveyjsController {
     constructor(protected readonly service: SurveyjsService) {}
 
     @Get()
-    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
+    @Auth.Decorators.Roles({ roles: [] })
     getSurveyJSBlock(@Headers() headers: AppHeaders, @Query() query: GetSurveyjsBlockQuery) {
         return this.service.getSurveyjsBlock(query, headers);
     }

@@ -4,7 +4,7 @@ import React from 'react';
 export interface CategoryProps {
     id: string;
     slug: string[];
-    accessToken: string;
+    accessToken?: string;
     locale: string;
 }
 

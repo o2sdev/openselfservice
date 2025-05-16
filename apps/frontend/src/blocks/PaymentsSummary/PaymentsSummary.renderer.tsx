@@ -7,7 +7,7 @@ import { PaymentsSummary } from './PaymentsSummary.server';
 
 export interface PaymentsSummaryRendererProps {
     id: string;
-    accessToken: string;
+    accessToken?: string;
 }
 
 export const PaymentsSummaryRenderer: React.FC<PaymentsSummaryRendererProps> = ({ id, accessToken }) => {
