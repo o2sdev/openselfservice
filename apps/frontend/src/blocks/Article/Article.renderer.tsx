@@ -9,7 +9,7 @@ import { Article } from './Article.server';
 export interface ArticleRendererProps {
     slug: string[];
     id: string;
-    accessToken: string;
+    accessToken?: string;
 }
 
 export const ArticleRenderer: React.FC<ArticleRendererProps> = ({ id, slug, accessToken }) => {

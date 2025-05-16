@@ -11,7 +11,7 @@ export const surveyJSBlock = (sdk: Sdk) => ({
         getSurveyjsBlock: (
             query: Blocks.Surveyjs.Request.GetSurveyjsBlockQuery,
             headers: Headers.AppHeaders,
-            authorization: string,
+            authorization?: string,
         ): Promise<Blocks.Surveyjs.Model.SurveyjsBlock> =>
             sdk.makeRequest({
                 method: 'get',
@@ -19,7 +19,11 @@ export const surveyJSBlock = (sdk: Sdk) => ({
                 headers: {
                     ...getApiHeaders(),
                     ...headers,
-                    Authorization: `Bearer ${authorization}`,
+                    ...(authorization
+                        ? {
+                              Authorization: `Bearer ${authorization}`,
+                          }
+                        : {}),
                 },
                 params: query,
             }),

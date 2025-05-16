@@ -15,7 +15,7 @@ export class CategoryListController {
     constructor(protected readonly service: CategoryListService) {}
 
     @Get()
-    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
+    @Auth.Decorators.Roles({ roles: [] })
     getCategoryListBlock(@Headers() headers: AppHeaders, @Query() query: GetCategoryListBlockQuery) {
         return this.service.getCategoryListBlock(query, headers);
     }

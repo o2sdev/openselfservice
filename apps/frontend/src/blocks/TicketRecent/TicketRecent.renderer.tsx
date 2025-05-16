@@ -8,7 +8,7 @@ import { TicketRecent } from './TicketRecent.server';
 
 export interface TicketRecentRendererProps {
     id: string;
-    accessToken: string;
+    accessToken?: string;
 }
 
 export const TicketRecentRenderer: React.FC<TicketRecentRendererProps> = ({ id, accessToken }) => {

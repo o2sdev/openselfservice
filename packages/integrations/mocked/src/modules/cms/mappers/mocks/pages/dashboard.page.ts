@@ -17,6 +17,8 @@ export const PAGE_DASHBOARD_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+
+    isProtected: true,
     hasOwnTitle: false,
     template: {
         __typename: 'TwoColumnTemplate',
@@ -63,6 +65,8 @@ export const PAGE_DASHBOARD_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+
+    isProtected: true,
     hasOwnTitle: false,
     template: {
         __typename: 'TwoColumnTemplate',
@@ -109,6 +113,8 @@ export const PAGE_DASHBOARD_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+
+    isProtected: true,
     hasOwnTitle: false,
     template: {
         __typename: 'TwoColumnTemplate',

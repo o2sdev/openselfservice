@@ -2,7 +2,7 @@ import { Blocks } from '@o2s/api-harmonization';
 
 export interface ArticleProps {
     slug: string;
-    accessToken: string;
+    accessToken?: string;
     locale: string;
 }
 

@@ -4,6 +4,7 @@ export const MOCK_ARTICLE2_EN: Articles.Model.Article[] = [
     {
         id: 'art-003',
         slug: '/help-and-support/safety/powerpro-tool-safety-guidelines',
+        isProtected: false,
         createdAt: '2023-07-15T09:45:00Z',
         updatedAt: '2023-08-25T13:20:00Z',
         title: 'PowerPro Tool Safety Guidelines',
@@ -241,6 +242,7 @@ export const MOCK_ARTICLE2_DE: Articles.Model.Article[] = [
     {
         id: 'art-003',
         slug: '/hilfe-und-support/sicherheit/powerpro-werkzeug-sicherheitsrichtlinien',
+        isProtected: false,
         createdAt: '2023-07-15T09:45:00Z',
         updatedAt: '2023-08-25T13:20:00Z',
         title: 'PowerPro-Werkzeug-Sicherheitsrichtlinien',
@@ -478,6 +480,7 @@ export const MOCK_ARTICLE2_PL: Articles.Model.Article[] = [
     {
         id: 'art-003',
         slug: '/pomoc-i-wsparcie/bezpieczenstwo/wytyczne-bezpieczenstwa-narzedzi-powerpro',
+        isProtected: false,
         createdAt: '2023-07-15T09:45:00Z',
         updatedAt: '2023-08-25T13:20:00Z',
         title: 'Wytyczne bezpieczeństwa narzędzi PowerPro',

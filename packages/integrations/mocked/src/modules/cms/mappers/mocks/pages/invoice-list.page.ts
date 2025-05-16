@@ -17,6 +17,8 @@ export const PAGE_INVOICE_LIST_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+
+    isProtected: true,
     hasOwnTitle: false,
     parent: {
         slug: '/',
@@ -73,6 +75,8 @@ export const PAGE_INVOICE_LIST_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+
+    isProtected: true,
     hasOwnTitle: false,
     parent: {
         slug: '/',
@@ -129,6 +133,8 @@ export const PAGE_INVOICE_LIST_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+
+    isProtected: true,
     hasOwnTitle: false,
     parent: {
         slug: '/',

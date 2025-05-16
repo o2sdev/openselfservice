@@ -8,7 +8,7 @@ import { SurveyJs } from './SurveyJs.server';
 
 export interface SurveyJsRendererProps {
     id: string;
-    accessToken: string;
+    accessToken?: string;
 }
 
 export const SurveyJsRenderer: React.FC<SurveyJsRendererProps> = ({ id, accessToken }) => {

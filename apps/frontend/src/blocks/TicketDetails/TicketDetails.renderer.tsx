@@ -9,7 +9,7 @@ import { TicketDetails } from './TicketDetails.server';
 export interface TicketDetailsRendererProps {
     slug: string[];
     id: string;
-    accessToken: string;
+    accessToken?: string;
 }
 
 export const TicketDetailsRenderer: React.FC<TicketDetailsRendererProps> = ({ slug, id, accessToken }) => {
