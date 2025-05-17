@@ -62,7 +62,7 @@ If commits are related to specific apps you can structure the massage like so: `
 Before submitting your PR, create a changeset to document your changes:
 
 ```
-npm changeset # or pnpm changeset / yarn changeset
+npm run changeset 
 ```
 
 This will prompt you to:
