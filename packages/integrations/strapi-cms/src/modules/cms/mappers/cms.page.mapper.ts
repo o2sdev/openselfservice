@@ -171,6 +171,10 @@ const mapComponent = (component: ComponentFragment) => {
             return 'SurveyJsBlock';
         case 'ComponentComponentsOrderList':
             return 'OrderListBlock';
+        case 'ComponentComponentsOrdersSummary':
+            return 'OrdersSummaryBlock';
+        case 'ComponentComponentsOrderDetails':
+            return 'OrderDetailsBlock';
         case 'ComponentComponentsQuickLinks':
             return 'QuickLinksBlock';
         case 'ComponentComponentsCategoryList':

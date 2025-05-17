@@ -1,21 +1,6 @@
-import { Block } from '@/utils/models';
+import { Block, InfoCard } from '@/utils/models';
 
 export class PaymentsSummaryBlock extends Block.Block {
-    overdue!: {
-        title?: string;
-        message?: string;
-        noPaymentsMessage?: string;
-        buttonLabel?: string;
-    };
-    toBePaid!: {
-        title?: string;
-        message?: string;
-        noPaymentsMessage?: string;
-        buttonLabel?: string;
-    };
+    overdue!: InfoCard.InfoCard;
+    toBePaid!: InfoCard.InfoCard;
 }
-
-// export class PaymentsSummaryBlock extends Block.Block {
-//     overdue!: InfoCard;
-//     toBePaid!: InfoCard;
-// }

@@ -6,12 +6,15 @@ const MOCK_ORDER_LIST_BLOCK_EN: CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock 
     subtitle: 'Compared to the same period a year before',
     totalValue: {
         title: 'Total order value',
+        icon: 'Coins',
     },
     averageValue: {
         title: 'Avg. order value',
+        icon: 'ShoppingCart',
     },
     averageNumber: {
         title: 'Avg. number of orders',
+        icon: 'Package',
     },
     chart: {
         title: 'Number of orders',
@@ -50,12 +53,15 @@ const MOCK_ORDER_LIST_BLOCK_DE: CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock 
     subtitle: 'Im Vergleich zum gleichen Zeitraum des Vorjahres',
     totalValue: {
         title: 'Gesamtbestellwert',
+        icon: 'Coins',
     },
     averageValue: {
         title: 'Durchschn. Bestellwert',
+        icon: 'ShoppingCart',
     },
     averageNumber: {
         title: 'Durchschn. Anzahl der Bestellungen',
+        icon: 'Package',
     },
     chart: {
         title: 'Anzahl der Bestellungen',
@@ -94,12 +100,15 @@ const MOCK_ORDER_LIST_BLOCK_PL: CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock 
     subtitle: 'W porównaniu z tym samym okresem roku poprzedniego',
     totalValue: {
         title: 'Całkowita wartość zamówień',
+        icon: 'Coins',
     },
     averageValue: {
         title: 'Średnia wartość zamówienia',
+        icon: 'ShoppingCart',
     },
     averageNumber: {
         title: 'Średnia liczba zamówień',
+        icon: 'Package',
     },
     chart: {
         title: 'Liczba zamówień',

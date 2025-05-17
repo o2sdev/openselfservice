@@ -2,15 +2,9 @@ fragment PaymentsSummaryComponent on ComponentComponentsPaymentsSummary {
     __typename
     id
     overdue {
-        title
-        message
-        noPaymentsMessage
-        buttonLabel
+        ...InformationCard
     }
     toBePaid {
-        title
-        message
-        noPaymentsMessage
-        buttonLabel
+        ...InformationCard
     }
 }

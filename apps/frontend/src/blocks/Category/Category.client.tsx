@@ -9,10 +9,10 @@ import { Typography } from '@o2s/ui/components/typography';
 
 import { sdk } from '@/api/sdk';
 
-import { BlogCard } from '@/components/BlogCard/BlogCard';
+import { BlogCard } from '@/components/Cards/BlogCard/BlogCard';
 import { Container } from '@/components/Container/Container';
 import { ContentSection } from '@/components/ContentSection/ContentSection';
-import { Image } from '@/components/Image/Image';
+import { DynamicIcon } from '@/components/DynamicIcon/DynamicIcon';
 import { Pagination } from '@/components/Pagination/Pagination';
 
 import { CategoryPureProps } from './Category.types';
@@ -45,13 +45,7 @@ export const CategoryPure: React.FC<CategoryPureProps> = ({ slug, locale, access
                 <div className="flex gap-6 items-start px-4 md:px-0">
                     {component.icon && (
                         <div className="flex max-w-12 max-h-12 p-2 rounded-md items-center justify-center bg-card border border-border">
-                            <Image
-                                src={component.icon.url}
-                                alt={component.icon.alt}
-                                width="24"
-                                height="24"
-                                className="max-w-6 max-h-6"
-                            />
+                            <DynamicIcon name={component.icon} />
                         </div>
                     )}
                     <Typography>{component.description}</Typography>

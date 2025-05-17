@@ -15,3 +15,4 @@ export * as Media from './media';
 export * as Navigation from './navigation';
 export * as SEO from './seo';
 export * as Headers from './headers';
+export * as InfoCard from './info-card';

@@ -1,13 +1,10 @@
 import { Order, OrderItem } from '@/modules/orders/orders.model';
 import { Product } from '@/modules/products/products.model';
 import { Block, DataTable, Filters, Mapping, Pagination } from '@/utils/models';
-import { InfoCard } from '@/utils/models/info-card';
+import { InfoCard } from '@/utils/models';
 
 export class OrderDetailsBlock extends Block.Block {
     title?: string;
-    properties?: {
-        [key: string]: string;
-    };
     fieldMapping!: Mapping.Mapping<Order & OrderItem>;
     productsTitle!: string;
     table!: DataTable.DataTable<Product & OrderItem>;
@@ -26,7 +23,10 @@ export class OrderDetailsBlock extends Block.Block {
         payOnline: string;
         close: string;
     };
-    cards!: {
-        [key: string]: InfoCard;
-    };
+    totalValue!: InfoCard.InfoCard;
+    createdOrderAt!: InfoCard.InfoCard;
+    paymentDueDate!: InfoCard.InfoCard;
+    overdue!: InfoCard.InfoCard;
+    orderStatus!: InfoCard.InfoCard;
+    customerComment!: InfoCard.InfoCard;
 }

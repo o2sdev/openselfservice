@@ -3,9 +3,6 @@ fragment OrdersSummaryComponent on ComponentComponentsOrdersSummary {
     id
     title
     subtitle
-    totalValueTitle
-    averageValueTitle
-    averageNumberTitle
     chartTitle
     chartPreviousPeriodLabel
     chartCurrentPeriodLabel
@@ -20,4 +17,14 @@ fragment OrdersSummaryComponent on ComponentComponentsOrdersSummary {
         title
         description
     }
+    totalValue {
+        ...InformationCard
+    }
+    averageValue {
+        ...InformationCard
+    }
+    averageNumber {
+        ...InformationCard
+    }
+    
 }

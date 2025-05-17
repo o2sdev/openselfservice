@@ -33,7 +33,6 @@ export class OrderDetailsBlock extends Block.Block {
 
 export class Order {
     id!: {
-        title: string;
         value: Orders.Model.Order['id'];
     };
     total!: {
@@ -63,6 +62,7 @@ export class Order {
         label: string;
         description: string;
         value: Models.Price.Price;
+        isOverdue: boolean;
     };
     status!: {
         title: string;

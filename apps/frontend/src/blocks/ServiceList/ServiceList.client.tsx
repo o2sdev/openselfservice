@@ -10,8 +10,8 @@ import { sdk } from '@/api/sdk';
 
 import { statusBadgeVariants } from '@/utils/mappings/services-badge';
 
-import { Card } from '@/components/Card/Card';
-import { Badge } from '@/components/Card/Card.types';
+import { ProductCard } from '@/components/Cards/ProductCard/ProductCard';
+import { Badge } from '@/components/Cards/ProductCard/ProductCard.types';
 import { InitialFilters } from '@/components/Filters/FiltersContext';
 import { FiltersSection } from '@/components/Filters/FiltersSection';
 import { NoResults } from '@/components/NoResults/NoResults';
@@ -67,7 +67,7 @@ export const ServiceListPure: React.FC<ServiceListPureProps> = ({ locale, access
                                 <ul className="grid gap-6 w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                                     {data.services.data.map((service) => (
                                         <li key={service.id}>
-                                            <Card
+                                            <ProductCard
                                                 key={service.id}
                                                 title={service.product.name}
                                                 tags={service.product.tags as Badge[]}

@@ -11,7 +11,6 @@ import { Orders } from '@o2s/framework/modules';
 
 import { Badge, badgeVariants } from '@o2s/ui/components/badge';
 import { Button } from '@o2s/ui/components/button';
-import { Card } from '@o2s/ui/components/card';
 import { LoadingOverlay } from '@o2s/ui/components/loading-overlay';
 import { Progress } from '@o2s/ui/components/progress';
 import { Separator } from '@o2s/ui/components/separator';
@@ -28,6 +27,7 @@ import { orderBadgeVariants } from '@/utils/mappings/order-badge';
 
 import { Link as NextLink } from '@/i18n';
 
+import { InfoCard } from '@/components/Cards/InfoCard/InfoCard';
 import { DynamicIcon } from '@/components/DynamicIcon/DynamicIcon';
 import { InitialFilters } from '@/components/Filters/FiltersContext';
 import { FiltersSection } from '@/components/Filters/FiltersSection';
@@ -86,41 +86,6 @@ const ProgressBar: React.FC<
     );
 };
 
-const InfoCard: React.FC<
-    Readonly<{
-        title: string;
-        value?: React.ReactNode | string;
-        icon?: React.ReactNode;
-        description?: React.ReactNode | string;
-        button?: React.ReactNode;
-        className?: string;
-    }>
-> = ({ title, value, description, icon, button, className }) => {
-    return (
-        <Card className={cn('h-full w-full', className)}>
-            <div className="p-6 flex flex-col gap-2">
-                <div className="flex flex-row justify-between items-center gap-2">
-                    <Typography variant="subtitle">{title}</Typography>
-                    {icon}
-                </div>
-                <div className="flex flex-row justify-between items-end gap-2">
-                    <div className="flex flex-col gap-2 w-full">
-                        {typeof value === 'string' ? <Typography variant="highlightedBig">{value}</Typography> : value}
-                        {typeof description === 'string' ? (
-                            <div className="line-clamp-3">
-                                <RichText content={description} className="text-muted-foreground" />
-                            </div>
-                        ) : (
-                            description
-                        )}
-                    </div>
-                    {button}
-                </div>
-            </div>
-        </Card>
-    );
-};
-
 export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
     locale,
     accessToken,
@@ -135,7 +100,6 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
 
     const initialData = component.productList.products.data;
     const data = component;
-    const isOverdue = data.order.overdue.value.value > 0;
 
     const t = useTranslations();
 
@@ -181,7 +145,6 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
             setItems(newData.productList.products.data);
         });
     };
-    console.log('data', data);
 
     return (
         <div className="w-full">
@@ -264,7 +227,7 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
                         <div className="w-full flex flex-col md:flex-row gap-6">
                             <InfoCard
                                 title={data.order.total.title}
-                                icon={<DynamicIcon name={data.order.total.icon} />}
+                                icon={data.order.total.icon}
                                 value={
                                     <Typography variant="highlightedBig">
                                         <Price price={data.order.total.value} />
@@ -275,7 +238,7 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
 
                             <InfoCard
                                 title={data.order.createdAt.title}
-                                icon={<DynamicIcon name={data.order.createdAt.icon} />}
+                                icon={data.order.createdAt.icon}
                                 value={data.order.createdAt.label}
                                 description={data.order.createdAt.description}
                             />
@@ -283,7 +246,7 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
                         <div className="w-full flex flex-col md:flex-row gap-6">
                             <InfoCard
                                 title={data.order.paymentDueDate.title}
-                                icon={<DynamicIcon name={data.order.paymentDueDate.icon} />}
+                                icon={data.order.paymentDueDate.icon}
                                 value={data.order.paymentDueDate.label}
                                 description={data.order.paymentDueDate.description}
                             />
@@ -293,12 +256,12 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
                                 icon={
                                     <DynamicIcon
                                         name={data.order.overdue.icon}
-                                        className={cn(isOverdue && 'text-destructive')}
+                                        className={cn(data.order.overdue.isOverdue && 'text-destructive')}
                                     />
                                 }
                                 value={
                                     <Typography
-                                        className={cn(isOverdue && 'text-destructive')}
+                                        className={cn(data.order.overdue.isOverdue && 'text-destructive')}
                                         variant="highlightedBig"
                                     >
                                         <Price price={data.order.overdue.value} />
@@ -308,7 +271,11 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
                                     <div className="line-clamp-3">
                                         <RichText
                                             content={data.order.overdue.description}
-                                            className={cn(isOverdue ? 'text-destructive' : 'text-muted-foreground')}
+                                            className={cn(
+                                                data.order.overdue.isOverdue
+                                                    ? 'text-destructive'
+                                                    : 'text-muted-foreground',
+                                            )}
                                         />
                                     </div>
                                 }
@@ -318,7 +285,7 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
                     <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-6">
                         <InfoCard
                             title={data.order.status.title}
-                            icon={<DynamicIcon name={data.order.status.icon} />}
+                            icon={data.order.status.icon}
                             description={
                                 <ProgressBar
                                     currentStatus={data.order.status}
@@ -328,7 +295,7 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
                         />
                         <InfoCard
                             title={data.order.customerComment.title}
-                            icon={<DynamicIcon name={data.order.customerComment.icon} />}
+                            icon={data.order.customerComment.icon}
                             description={data.order.customerComment.value}
                             button={
                                 <Sheet>

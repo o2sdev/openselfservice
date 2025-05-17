@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import { ArrowRight } from 'lucide-react';
 import React from 'react';
 
@@ -8,30 +7,26 @@ import { cn } from '@o2s/ui/lib/utils';
 
 import { Link as NextLink } from '@/i18n';
 
+import { DynamicIcon } from '../../DynamicIcon/DynamicIcon';
+
 import { InformativeCardProps } from './InformativeCard.types';
 
 const InformativeCardContent: React.FC<Readonly<InformativeCardProps>> = ({
-    iconUrl,
+    icon,
     iconSize,
     title,
     description,
     href,
     lineClamp,
 }) => {
-    if (!iconUrl && !title && !description) {
+    if (!icon && !title && !description) {
         return null;
     }
+
     return (
         <div className="flex flex-row w-full gap-2 p-6 items-end justify-between">
             <div className="flex flex-col gap-2 flex-grow">
-                {iconUrl && (
-                    <img
-                        src={iconUrl}
-                        alt=""
-                        aria-hidden="true"
-                        className={cn(iconSize === 'small' ? 'w-6 h-6' : 'w-9 h-9')}
-                    />
-                )}
+                {icon && <DynamicIcon name={icon} size={iconSize} className="!text-foreground" />}
                 {title && <Typography variant="h3">{title}</Typography>}
 
                 {description && (

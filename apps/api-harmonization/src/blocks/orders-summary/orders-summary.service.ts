@@ -19,6 +19,7 @@ export class OrdersSummaryService {
 
     getOrdersSummaryBlock(query: GetOrdersSummaryBlockQuery, headers: AppHeaders): Observable<OrdersSummaryBlock> {
         const cms = this.cmsService.getOrdersSummaryBlock({ ...query, locale: headers['x-locale'] });
+
         const ordersCurrent = this.orderService.getOrderList(
             {
                 ...query,
@@ -29,6 +30,7 @@ export class OrdersSummaryService {
             },
             headers['authorization'],
         );
+
         const ordersPrevious = this.orderService.getOrderList(
             {
                 ...query,

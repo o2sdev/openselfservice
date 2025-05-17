@@ -4,7 +4,7 @@ export class InfoCard {
     message?: string;
     altMessage?: string;
     link?: {
-        label?: string;
+        label: string;
         icon?: string;
         url?: string;
         page?: {

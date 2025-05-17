@@ -4,7 +4,7 @@ import { Models } from '@o2s/framework/modules';
 
 import { badgeVariants } from '@o2s/ui/components/badge';
 
-export interface CardProps {
+export interface ProductCardProps {
     title: string;
     description?: Models.RichText.RichText;
     price?: Models.Price.Price;

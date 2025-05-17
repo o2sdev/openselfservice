@@ -4,12 +4,8 @@ import { CMS } from '@o2s/framework/modules';
 
 import { GetComponentQuery } from '@/generated/strapi';
 import { mapLink } from '@/modules/cms/mappers/cms.link.mapper';
-import { mapMedia } from '@/modules/cms/mappers/cms.media.mapper';
 
-export const mapQuickLinksBlock = (
-    data: GetComponentQuery,
-    baseUrl: string,
-): CMS.Model.QuickLinksBlock.QuickLinksBlock => {
+export const mapQuickLinksBlock = (data: GetComponentQuery): CMS.Model.QuickLinksBlock.QuickLinksBlock => {
     const component = data.component!.content[0];
 
     if (!component) {
@@ -24,7 +20,6 @@ export const mapQuickLinksBlock = (
                 description: component.description,
                 items: component.quickLinks.map((item) => ({
                     ...mapLink(item)!,
-                    icon: mapMedia(item.icon, baseUrl),
                 })),
             };
     }

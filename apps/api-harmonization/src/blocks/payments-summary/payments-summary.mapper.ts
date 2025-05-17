@@ -21,6 +21,7 @@ export const mapPaymentsSummary = (
         : null;
 
     const overdueDays = earliestDueDate ? Math.floor((Date.now() - earliestDueDate) / (1000 * 60 * 60 * 24)) : 0;
+    const isOverdue = overdueDays > 0 && overdueAmount > 0;
 
     const toBePaidAmount = invoices.data
         .filter((invoice) => invoice.paymentStatus === 'PAYMENT_DUE' || invoice.paymentStatus === 'PAYMENT_DECLINED')
@@ -34,18 +35,20 @@ export const mapPaymentsSummary = (
         currency: currency,
         overdue: {
             title: cms.overdue.title,
-            message: cms.overdue.message,
-            noPaymentsMessage: cms.overdue.noPaymentsMessage,
-            buttonLabel: cms.overdue.buttonLabel,
-            amount: checkNegativeValue({ value: overdueAmount, currency: currency }),
-            overdueDays: overdueDays,
+            link: cms.overdue.link,
+            description: isOverdue
+                ? cms.overdue?.message?.replace(/{days}/g, overdueDays.toString()) || ''
+                : cms.overdue?.altMessage || '',
+            value: { value: checkNegativeValue({ value: overdueAmount, currency }).value, currency },
+            isOverdue: isOverdue,
+            icon: cms.overdue.icon,
         },
         toBePaid: {
             title: cms.toBePaid.title,
-            message: cms.toBePaid.message,
-            noPaymentsMessage: cms.toBePaid.noPaymentsMessage,
-            buttonLabel: cms.toBePaid.buttonLabel,
-            amount: checkNegativeValue({ value: toBePaidAmount, currency: currency }),
+            icon: cms.toBePaid.icon,
+            description: toBePaidAmount > 0 ? cms.toBePaid?.message : cms.toBePaid?.altMessage,
+            link: cms.toBePaid.link,
+            value: { value: checkNegativeValue({ value: toBePaidAmount, currency }).value, currency },
         },
     };
 };

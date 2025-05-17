@@ -3,37 +3,35 @@ import { CMS } from '@o2s/framework/modules';
 const MOCK_ORDER_DETAILS_BLOCK_EN: CMS.Model.OrderDetailsBlock.OrderDetailsBlock = {
     id: 'order-details-1',
     title: 'Order details',
-    cards: {
-        total: {
-            title: 'Order value',
-            icon: 'Package',
-            message: '{value} times',
-        },
-        createdAt: {
-            title: 'Order date',
-            icon: 'CalendarClock',
-        },
-        paymentDueDate: {
-            title: 'Payment due date',
-            icon: 'Coins',
-            message: 'Document no. {value}',
-        },
-        overdue: {
-            title: 'Overdue',
-            icon: 'Info',
-            message: '{days} days overdue',
-            altMessage: 'No orders to be paid',
-        },
-        status: {
-            title: 'Order status',
-            icon: 'CheckCheck',
-        },
-        customerComment: {
-            title: 'Comment',
-            icon: 'Text',
-            link: {
-                label: 'See full',
-            },
+    totalValue: {
+        title: 'Order value',
+        icon: 'Package',
+        message: '{value} times',
+    },
+    createdOrderAt: {
+        title: 'Order date',
+        icon: 'CalendarClock',
+    },
+    paymentDueDate: {
+        title: 'Payment due date',
+        icon: 'Coins',
+        message: 'Document no. {value}',
+    },
+    overdue: {
+        title: 'Overdue',
+        icon: 'Info',
+        message: '{days} days overdue',
+        altMessage: 'No orders to be paid',
+    },
+    orderStatus: {
+        title: 'Order status',
+        icon: 'CheckCheck',
+    },
+    customerComment: {
+        title: 'Comment',
+        icon: 'Text',
+        link: {
+            label: 'See full',
         },
     },
     fieldMapping: {
@@ -125,38 +123,36 @@ const MOCK_ORDER_DETAILS_BLOCK_EN: CMS.Model.OrderDetailsBlock.OrderDetailsBlock
 const MOCK_ORDER_DETAILS_BLOCK_DE: CMS.Model.OrderDetailsBlock.OrderDetailsBlock = {
     id: 'order-details-1',
     title: 'Bestellung Details',
-    cards: {
-        total: {
-            title: 'Gesamt',
-            icon: 'Package',
-            message: '{value} mal',
-        },
-        createdAt: {
-            title: 'Bestellungsdatum',
-            icon: 'CalendarClock',
-        },
-        paymentDueDate: {
-            title: 'Zahlungsfrist',
-            icon: 'Coins',
-            message: 'Dokumenten-Nr. {value}',
-        },
-        overdue: {
-            title: 'Überfällig',
-            icon: 'Info',
-            message: '{days} Tage überfällig',
-            altMessage: 'Keine Bestellungen zu zahlen',
-        },
-        status: {
-            title: 'Bestellstatus',
-            icon: 'CheckCheck',
-        },
-        customerComment: {
-            title: 'Kommentar',
-            icon: 'Text',
-            link: {
-                label: 'Sehen',
-                icon: 'ArrowRight',
-            },
+    totalValue: {
+        title: 'Gesamt',
+        icon: 'Package',
+        message: '{value} mal',
+    },
+    createdOrderAt: {
+        title: 'Bestellungsdatum',
+        icon: 'CalendarClock',
+    },
+    paymentDueDate: {
+        title: 'Zahlungsfrist',
+        icon: 'Coins',
+        message: 'Dokumenten-Nr. {value}',
+    },
+    overdue: {
+        title: 'Überfällig',
+        icon: 'Info',
+        message: '{days} Tage überfällig',
+        altMessage: 'Keine Bestellungen zu zahlen',
+    },
+    orderStatus: {
+        title: 'Bestellstatus',
+        icon: 'CheckCheck',
+    },
+    customerComment: {
+        title: 'Kommentar',
+        icon: 'Text',
+        link: {
+            label: 'Sehen',
+            icon: 'ArrowRight',
         },
     },
     fieldMapping: {
@@ -248,38 +244,37 @@ const MOCK_ORDER_DETAILS_BLOCK_DE: CMS.Model.OrderDetailsBlock.OrderDetailsBlock
 const MOCK_ORDER_DETAILS_BLOCK_PL: CMS.Model.OrderDetailsBlock.OrderDetailsBlock = {
     id: 'order-details-1',
     title: 'Szczegóły zamówienia',
-    cards: {
-        total: {
-            title: 'Wartość',
-            icon: 'Package',
-            message: '{value} elementów',
-        },
-        createdAt: {
-            title: 'Data zamówienia',
-            icon: 'CalendarClock',
-        },
-        paymentDueDate: {
-            title: 'Data płatności',
-            icon: 'Coins',
-            message: 'Numer dokumentu {value}',
-        },
-        overdue: {
-            title: 'Niezrealizowane',
-            icon: 'Info',
-            message: '{days} dni przekroczone',
-            altMessage: 'Brak zamówień do zapłacenia',
-        },
-        status: {
-            title: 'Status zamówienia',
-            icon: 'CheckCheck',
-        },
-        customerComment: {
-            title: 'Komentarz',
-            icon: 'Text',
-            link: {
-                label: 'Zobacz',
-                icon: 'ArrowRight',
-            },
+
+    totalValue: {
+        title: 'Wartość',
+        icon: 'Package',
+        message: '{value} elementów',
+    },
+    createdOrderAt: {
+        title: 'Data zamówienia',
+        icon: 'CalendarClock',
+    },
+    paymentDueDate: {
+        title: 'Data płatności',
+        icon: 'Coins',
+        message: 'Numer dokumentu {value}',
+    },
+    overdue: {
+        title: 'Niezrealizowane',
+        icon: 'Info',
+        message: '{days} dni przekroczone',
+        altMessage: 'Brak zamówień do zapłacenia',
+    },
+    orderStatus: {
+        title: 'Status zamówienia',
+        icon: 'CheckCheck',
+    },
+    customerComment: {
+        title: 'Komentarz',
+        icon: 'Text',
+        link: {
+            label: 'Zobacz',
+            icon: 'ArrowRight',
         },
     },
     fieldMapping: {

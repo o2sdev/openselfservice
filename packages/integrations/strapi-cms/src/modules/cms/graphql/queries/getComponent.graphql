@@ -42,6 +42,9 @@ query getComponent($id: ID!, $locale: I18NLocaleCode!) {
             ... on ComponentComponentsOrderList {
                 ...OrderListComponent
             }
+            ... on ComponentComponentsOrderDetails {
+                ...OrderDetailsComponent
+            }
             ... on ComponentComponentsOrdersSummary {
                 ...OrdersSummaryComponent
             }
@@ -79,6 +82,9 @@ query getComponent($id: ID!, $locale: I18NLocaleCode!) {
             details
             reorder
             clickToSelect
+            payOnline
+            close
+            trackOrder
         }
         errors {
             requestError {
