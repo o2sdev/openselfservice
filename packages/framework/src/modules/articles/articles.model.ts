@@ -7,7 +7,7 @@ export class Category {
     updatedAt!: string;
     title!: string;
     description!: string;
-    icon?: Media.Media;
+    icon?: string;
     parent?: {
         slug: string;
         title: string;

@@ -9,12 +9,12 @@ import { cn } from '@o2s/ui/lib/utils';
 
 import { Link as NextLink } from '@/i18n';
 
-import { Price } from '../Price/Price';
-import { RichText } from '../RichText/RichText';
+import { Price } from '../../Price/Price';
+import { RichText } from '../../RichText/RichText';
 
-import { CardProps } from './Card.types';
+import { ProductCardProps } from './ProductCard.types';
 
-export const Card: React.FC<CardProps> = ({ title, description, price, image, tags, status, link }) => {
+export const ProductCard: React.FC<ProductCardProps> = ({ title, description, price, image, tags, status, link }) => {
     return (
         <div className={cn('flex flex-col bg-card rounded-lg border border-border shadow-sm relative w-full h-full')}>
             {/* Image section */}

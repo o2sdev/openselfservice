@@ -5,6 +5,7 @@ export type ProductType = 'PHYSICAL' | 'VIRTUAL';
 
 export class Product {
     id!: string;
+    sku!: string;
     name!: string;
     description!: string;
     shortDescription!: string;

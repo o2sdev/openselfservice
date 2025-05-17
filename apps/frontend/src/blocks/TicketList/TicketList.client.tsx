@@ -157,7 +157,7 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                                                     }
                                                 })}
                                                 {data.table.actions && (
-                                                    <TableCell className="p-4">
+                                                    <TableCell className="py-0">
                                                         <Button asChild variant="link">
                                                             <NextLink
                                                                 href={ticket.detailsUrl}

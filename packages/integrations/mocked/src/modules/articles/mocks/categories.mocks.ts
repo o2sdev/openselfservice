@@ -7,10 +7,7 @@ export const MOCK_CATEGORIES_EN: Articles.Model.Category[] = [
         createdAt: '2023-05-12T08:30:00Z',
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Warranty & Repair',
-        icon: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/Wrench.svg',
-            alt: '',
-        },
+        icon: 'Wrench',
         description:
             'The Warranty & Repair category offers FAQs, troubleshooting guides, step-by-step tutorials, and support contacts to help users resolve issues and navigate services efficiently.',
         parent: {
@@ -24,10 +21,7 @@ export const MOCK_CATEGORIES_EN: Articles.Model.Category[] = [
         createdAt: '2023-06-10T10:15:00Z',
         updatedAt: '2023-07-20T16:30:00Z',
         title: 'Maintenance',
-        icon: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/Wrench.svg',
-            alt: '',
-        },
+        icon: 'Wrench',
         description:
             'The Maintenance category provides guides, tips, and best practices for keeping your PowerPro tools in optimal condition, ensuring longevity and peak performance.',
         parent: {
@@ -41,10 +35,7 @@ export const MOCK_CATEGORIES_EN: Articles.Model.Category[] = [
         createdAt: '2023-07-15T09:45:00Z',
         updatedAt: '2023-08-25T13:20:00Z',
         title: 'Safety',
-        icon: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/ShieldCheck.svg',
-            alt: '',
-        },
+        icon: 'ShieldCheck',
         description:
             'The Safety category offers essential guidelines, precautions, and best practices to ensure safe operation of PowerPro tools, preventing accidents and injuries.',
         parent: {
@@ -58,10 +49,7 @@ export const MOCK_CATEGORIES_EN: Articles.Model.Category[] = [
         createdAt: '2023-08-20T11:30:00Z',
         updatedAt: '2023-09-30T15:45:00Z',
         title: 'Accessories',
-        icon: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/ShieldCheck.svg',
-            alt: '',
-        },
+        icon: 'ShieldCheck',
         description:
             'The Accessories category showcases the wide range of attachments, add-ons, and enhancements available for PowerPro tools, helping you expand functionality and tackle specialized projects.',
         parent: {
@@ -78,10 +66,7 @@ export const MOCK_CATEGORIES_DE: Articles.Model.Category[] = [
         createdAt: '2023-05-12T08:30:00Z',
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Garantie & Reparatur',
-        icon: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/Wrench.svg',
-            alt: '',
-        },
+        icon: 'Wrench',
         description:
             'Die Kategorie Garantie & Reparatur bietet FAQs, Fehlerbehebungsanleitungen, Schritt-für-Schritt-Tutorials und Support-Kontakte, um Benutzern zu helfen, Probleme effizient zu lösen und Services zu navigieren.',
         parent: {
@@ -95,10 +80,7 @@ export const MOCK_CATEGORIES_DE: Articles.Model.Category[] = [
         createdAt: '2023-06-10T10:15:00Z',
         updatedAt: '2023-07-20T16:30:00Z',
         title: 'Wartung',
-        icon: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/Wrench.svg',
-            alt: '',
-        },
+        icon: 'Wrench',
         description:
             'Die Kategorie Wartung bietet Anleitungen, Tipps und bewährte Praktiken zur Erhaltung Ihrer PowerPro-Werkzeuge in optimalem Zustand, um Langlebigkeit und Höchstleistung zu gewährleisten.',
         parent: {
@@ -112,10 +94,7 @@ export const MOCK_CATEGORIES_DE: Articles.Model.Category[] = [
         createdAt: '2023-07-15T09:45:00Z',
         updatedAt: '2023-08-25T13:20:00Z',
         title: 'Sicherheit',
-        icon: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/ShieldCheck.svg',
-            alt: '',
-        },
+        icon: 'ShieldCheck',
         description:
             'Die Kategorie Sicherheit bietet wesentliche Richtlinien, Vorsichtsmaßnahmen und bewährte Praktiken, um den sicheren Betrieb von PowerPro-Werkzeugen zu gewährleisten und Unfälle und Verletzungen zu vermeiden.',
         parent: {
@@ -129,10 +108,7 @@ export const MOCK_CATEGORIES_DE: Articles.Model.Category[] = [
         createdAt: '2023-08-20T11:30:00Z',
         updatedAt: '2023-09-30T15:45:00Z',
         title: 'Zubehör',
-        icon: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/ShieldCheck.svg',
-            alt: '',
-        },
+        icon: 'ShieldCheck',
         description:
             'Die Kategorie Zubehör präsentiert die breite Palette an Aufsätzen, Erweiterungen und Verbesserungen, die für PowerPro-Werkzeuge erhältlich sind, und hilft Ihnen, die Funktionalität zu erweitern und spezialisierte Projekte anzugehen.',
         parent: {
@@ -149,10 +125,7 @@ export const MOCK_CATEGORIES_PL: Articles.Model.Category[] = [
         createdAt: '2023-05-12T08:30:00Z',
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Gwarancja i Naprawa',
-        icon: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/Wrench.svg',
-            alt: '',
-        },
+        icon: 'Wrench',
         description:
             'Kategoria Gwarancja i Naprawa oferuje FAQ, poradniki rozwiązywania problemów, szczegółowe instrukcje oraz dane kontaktowe wsparcia technicznego, aby pomóc użytkownikom efektywnie rozwiązywać problemy i korzystać z usług serwisowych.',
         parent: {
@@ -166,10 +139,7 @@ export const MOCK_CATEGORIES_PL: Articles.Model.Category[] = [
         createdAt: '2023-06-10T10:15:00Z',
         updatedAt: '2023-07-20T16:30:00Z',
         title: 'Konserwacja',
-        icon: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/Wrench.svg',
-            alt: '',
-        },
+        icon: 'Wrench',
         description:
             'Kategoria Konserwacja zawiera przewodniki, wskazówki i najlepsze praktyki dotyczące utrzymania narzędzi PowerPro w optymalnym stanie, zapewniając ich długą żywotność i najwyższą wydajność.',
         parent: {
@@ -183,10 +153,7 @@ export const MOCK_CATEGORIES_PL: Articles.Model.Category[] = [
         createdAt: '2023-07-15T09:45:00Z',
         updatedAt: '2023-08-25T13:20:00Z',
         title: 'Bezpieczeństwo',
-        icon: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/ShieldCheck.svg',
-            alt: '',
-        },
+        icon: 'ShieldCheck',
         description:
             'Kategoria Bezpieczeństwo oferuje niezbędne wytyczne, środki ostrożności i najlepsze praktyki zapewniające bezpieczną obsługę narzędzi PowerPro, zapobiegając wypadkom i obrażeniom.',
         parent: {
@@ -200,10 +167,7 @@ export const MOCK_CATEGORIES_PL: Articles.Model.Category[] = [
         createdAt: '2023-08-20T11:30:00Z',
         updatedAt: '2023-09-30T15:45:00Z',
         title: 'Akcesoria',
-        icon: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/icons/ShieldCheck.svg',
-            alt: '',
-        },
+        icon: 'ShieldCheck',
         description:
             'Kategoria Akcesoria prezentuje szeroki zakres przystawek, dodatków i ulepszeń dostępnych dla narzędzi PowerPro, pomagając rozszerzyć ich funkcjonalność i realizować specjalistyczne projekty.',
         parent: {

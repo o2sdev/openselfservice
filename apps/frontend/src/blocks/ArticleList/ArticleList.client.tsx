@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BlogCard } from '@/components/BlogCard/BlogCard';
+import { BlogCard } from '@/components/Cards/BlogCard/BlogCard';
 import { ContentSection } from '@/components/ContentSection/ContentSection';
 
 import { ArticleListPureProps } from './ArticleList.types';

@@ -6,10 +6,10 @@ import { badgeVariants } from '@o2s/ui/components/badge';
 
 export const orderBadgeVariants: Record<Orders.Model.OrderStatus, VariantProps<typeof badgeVariants>['variant']> = {
     PENDING: 'default',
-    COMPLETED: 'outline',
-    SHIPPED: 'secondary',
-    CANCELLED: 'destructive',
-    ARCHIVED: 'outline',
+    COMPLETED: 'default',
+    SHIPPED: 'outline',
+    ARCHIVED: 'secondary',
     REQUIRES_ACTION: 'secondary',
     UNKNOWN: 'outline',
+    CANCELLED: 'destructive',
 };

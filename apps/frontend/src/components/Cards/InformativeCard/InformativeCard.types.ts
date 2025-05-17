@@ -1,7 +1,7 @@
 export interface InformativeCardProps {
     href?: string;
-    iconUrl?: string;
-    iconSize?: 'small' | 'medium';
+    icon?: string;
+    iconSize?: number;
     title?: string;
     description?: string;
     lineClamp?: number;

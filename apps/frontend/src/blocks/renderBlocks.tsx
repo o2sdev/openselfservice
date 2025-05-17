@@ -13,6 +13,7 @@ import { FaqRenderer } from '@/blocks/Faq/Faq.renderer';
 import { InvoiceListRenderer } from '@/blocks/InvoiceList/InvoiceList.renderer';
 import { NotificationDetailsRenderer } from '@/blocks/NotificationDetails/NotificationDetails.renderer';
 import { NotificationListRenderer } from '@/blocks/NotificationList/NotificationList.renderer';
+import { OrderDetailsRenderer } from '@/blocks/OrderDetails/OrderDetails.renderer';
 import { OrderListRenderer } from '@/blocks/OrderList/OrderList.renderer';
 import { OrdersSummaryRenderer } from '@/blocks/OrdersSummary/OrdersSummary.renderer';
 import { PaymentsHistoryRenderer } from '@/blocks/PaymentsHistory/PaymentsHistory.renderer';
@@ -63,6 +64,8 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: str
                 return <OrderListRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
             case 'OrdersSummaryBlock':
                 return <OrdersSummaryRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
+            case 'OrderDetailsBlock':
+                return <OrderDetailsRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
             case 'QuickLinksBlock':
                 return <QuickLinksRenderer key={block.id} slug={slug} id={block.id} accessToken={accessToken} />;
             case 'CategoryListBlock':

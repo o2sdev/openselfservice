@@ -11,16 +11,19 @@ export class OrdersSummaryBlock extends Block.Block {
         title: CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock['totalValue']['title'];
         value?: Models.Price.Price;
         trend?: number;
+        icon?: string;
     };
     averageValue!: {
         title: CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock['averageValue']['title'];
         value: Models.Price.Price;
         trend: number;
+        icon?: string;
     };
     averageNumber!: {
         title: CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock['averageNumber']['title'];
         value: number;
         trend: number;
+        icon?: string;
     };
     chart!: {
         title: CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock['chart']['title'];

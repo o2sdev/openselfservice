@@ -8,7 +8,5 @@ fragment Link on ComponentContentLink {
             description
         }
     }
-    icon {
-        ...Media
-    }
+    icon
 }

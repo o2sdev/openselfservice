@@ -18,13 +18,16 @@ export const mapOrdersSummaryBlock = (data: GetComponentQuery): CMS.Model.Orders
                 title: component.title,
                 subtitle: component.subtitle,
                 totalValue: {
-                    title: component.totalValueTitle,
+                    title: component.totalValue.title,
+                    icon: component.totalValue.icon,
                 },
                 averageValue: {
-                    title: component.averageValueTitle,
+                    title: component.averageValue.title,
+                    icon: component.averageValue.icon,
                 },
                 averageNumber: {
-                    title: component.averageNumberTitle,
+                    title: component.averageNumber.title,
+                    icon: component.averageNumber.icon,
                 },
                 chart: {
                     title: component.chartTitle,

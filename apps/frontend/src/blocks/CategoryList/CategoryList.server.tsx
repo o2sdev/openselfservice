@@ -10,13 +10,17 @@ export const CategoryListDynamic = dynamic(() =>
 );
 
 export const CategoryList: React.FC<CategoryListProps> = async ({ id, accessToken, locale }) => {
-    const data = await sdk.blocks.getCategoryList(
-        {
-            id,
-        },
-        { 'x-locale': locale },
-        accessToken,
-    );
+    try {
+        const data = await sdk.blocks.getCategoryList(
+            {
+                id,
+            },
+            { 'x-locale': locale },
+            accessToken,
+        );
 
-    return <CategoryListDynamic {...data} id={id} accessToken={accessToken} locale={locale} />;
+        return <CategoryListDynamic {...data} id={id} accessToken={accessToken} locale={locale} />;
+    } catch (_error) {
+        return null;
+    }
 };

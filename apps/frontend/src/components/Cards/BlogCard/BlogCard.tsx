@@ -6,7 +6,7 @@ import { Typography } from '@o2s/ui/components/typography';
 
 import { Link as NextLink } from '@/i18n';
 
-import { Author } from '../Author/Author';
+import { Author } from '../../Author/Author';
 
 import { BlogCardProps } from './BlogCard.types';
 

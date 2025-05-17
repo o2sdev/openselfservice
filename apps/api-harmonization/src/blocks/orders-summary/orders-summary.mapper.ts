@@ -41,6 +41,7 @@ export const mapOrdersSummary = (
                 currency: currency!,
             },
             trend: totalValueTrend,
+            icon: cms.totalValue.icon,
         },
         averageValue: {
             title: cms.averageValue.title,
@@ -49,11 +50,13 @@ export const mapOrdersSummary = (
                 currency: currency!,
             },
             trend: averageValueTrend,
+            icon: cms.averageValue.icon,
         },
         averageNumber: {
             title: cms.averageNumber.title,
             value: ordersCurrent.total,
             trend: averageNumberTrend,
+            icon: cms.averageNumber.icon,
         },
         chart: {
             title: cms.chart.title,

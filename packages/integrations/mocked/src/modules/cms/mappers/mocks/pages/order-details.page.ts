@@ -38,10 +38,6 @@ export const PAGE_ORDER_DETAILS_EN: CMS.Model.Page.Page = {
                     __typename: 'OrderDetailsBlock',
                     id: 'order-details-1',
                 },
-                {
-                    __typename: 'FaqBlock',
-                    id: 'faq-1',
-                },
             ],
         },
     },
@@ -87,10 +83,6 @@ export const PAGE_ORDER_DETAILS_DE: CMS.Model.Page.Page = {
                     __typename: 'OrderDetailsBlock',
                     id: 'order-details-1',
                 },
-                {
-                    __typename: 'FaqBlock',
-                    id: 'faq-1',
-                },
             ],
         },
     },
@@ -135,10 +127,6 @@ export const PAGE_ORDER_DETAILS_PL: CMS.Model.Page.Page = {
                 {
                     __typename: 'OrderDetailsBlock',
                     id: 'order-details-1',
-                },
-                {
-                    __typename: 'FaqBlock',
-                    id: 'faq-1',
                 },
             ],
         },

@@ -2,11 +2,8 @@
 
 import { Blocks } from '@o2s/api-harmonization';
 import dayjs from 'dayjs';
-import { Coins, Package, ShoppingCart } from 'lucide-react';
 import { useLocale } from 'next-intl';
 import React, { useState, useTransition } from 'react';
-
-import { Models } from '@o2s/framework/modules';
 
 import { Card } from '@o2s/ui/components/card';
 import { LoadingOverlay } from '@o2s/ui/components/loading-overlay';
@@ -16,6 +13,7 @@ import { cn } from '@o2s/ui/lib/utils';
 
 import { sdk } from '@/api/sdk';
 
+import { InfoCard } from '@/components/Cards/InfoCard/InfoCard';
 import { DoubleLineChart } from '@/components/Chart/DoubleLineChart/DoubleLineChart';
 import { Price } from '@/components/Price/Price';
 
@@ -41,30 +39,6 @@ const Trend: React.FC<Readonly<{ value?: number }>> = ({ value }) => {
                 {Math.abs(value).toLocaleString(locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}%
             </Typography>
         </div>
-    );
-};
-
-const StatCard: React.FC<
-    Readonly<{
-        title: string;
-        value?: number | Models.Price.Price;
-        trend?: number;
-        icon?: React.ReactNode;
-    }>
-> = ({ title, value, trend, icon }) => {
-    return (
-        <Card className="h-full w-full">
-            <div className="p-6 flex flex-col gap-3">
-                <div className="flex flex-row justify-between items-center">
-                    <Typography variant="subtitle">{title}</Typography>
-                    {icon}
-                </div>
-                <Typography variant="highlightedBig">
-                    {typeof value !== 'number' ? <Price price={value} /> : value}
-                </Typography>
-                <Trend value={trend} />
-            </div>
-        </Card>
     );
 };
 
@@ -147,25 +121,33 @@ export const OrdersSummaryPure: React.FC<Readonly<OrdersSummaryPureProps>> = ({
 
                     <div className="w-full flex flex-col lg:flex-row gap-6">
                         <div className="w-full flex flex-col gap-6">
-                            <StatCard
+                            <InfoCard
                                 title={data.totalValue.title}
-                                value={data.totalValue.value}
-                                trend={data.totalValue.trend}
-                                icon={<Coins size={24} />}
+                                value={
+                                    <Typography variant="highlightedBig">
+                                        <Price price={data.totalValue.value} />
+                                    </Typography>
+                                }
+                                description={<Trend value={data.totalValue.trend} />}
+                                icon={data.totalValue.icon}
                             />
 
                             <div className="w-full flex flex-col sm:flex-row gap-6">
-                                <StatCard
+                                <InfoCard
                                     title={data.averageValue.title}
-                                    value={data.averageValue.value}
-                                    trend={data.averageValue.trend}
-                                    icon={<ShoppingCart size={24} />}
+                                    value={
+                                        <Typography variant="highlightedBig">
+                                            <Price price={data.averageValue.value} />
+                                        </Typography>
+                                    }
+                                    description={<Trend value={data.averageValue.trend} />}
+                                    icon={data.averageValue.icon}
                                 />
-                                <StatCard
+                                <InfoCard
                                     title={data.averageNumber.title}
-                                    value={data.averageNumber.value}
-                                    trend={data.averageNumber.trend}
-                                    icon={<Package size={24} />}
+                                    value={<Typography variant="highlightedBig">{data.averageNumber.value}</Typography>}
+                                    description={<Trend value={data.averageNumber.trend} />}
+                                    icon={data.averageNumber.icon}
                                 />
                             </div>
                         </div>

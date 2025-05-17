@@ -18,16 +18,18 @@ export const mapPaymentsSummaryBlock = (
             return {
                 id: component.id,
                 toBePaid: {
-                    title: component.toBePaid?.title,
-                    message: component.toBePaid?.message,
-                    noPaymentsMessage: component.toBePaid?.noPaymentsMessage,
-                    buttonLabel: component.toBePaid?.buttonLabel,
+                    title: component.toBePaid.title,
+                    message: component.toBePaid.message,
+                    altMessage: component.toBePaid.altMessage,
+                    link: component.toBePaid.link,
+                    icon: component.toBePaid.icon,
                 },
                 overdue: {
-                    title: component.overdue?.title,
-                    message: component.overdue?.message,
-                    noPaymentsMessage: component.overdue?.noPaymentsMessage,
-                    buttonLabel: component.overdue?.buttonLabel,
+                    title: component.overdue.title,
+                    message: component.overdue.message,
+                    altMessage: component.overdue.altMessage,
+                    link: component.overdue.link,
+                    icon: component.overdue.icon,
                 },
             };
     }

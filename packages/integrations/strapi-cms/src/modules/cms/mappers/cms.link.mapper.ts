@@ -9,5 +9,6 @@ export const mapLink = (component?: LinkFragment): Models.Link.Link | undefined 
         label: component.label,
         description: component.page?.SEO.description,
         url: (component.page?.slug || component.url)!,
+        icon: component.icon,
     };
 };

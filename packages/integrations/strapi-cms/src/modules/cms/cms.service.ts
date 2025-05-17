@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, NotImplementedException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore module type mismatch
@@ -16,7 +16,9 @@ import { mapInvoiceDetailsBlock } from './mappers/blocks/cms.invoice-details.map
 import { mapInvoiceListBlock } from './mappers/blocks/cms.invoice-list.mapper';
 import { mapNotificationDetailsBlock } from './mappers/blocks/cms.notification-details.mapper';
 import { mapNotificationListBlock } from './mappers/blocks/cms.notification-list.mapper';
+import { mapOrderDetailsBlock } from './mappers/blocks/cms.order-details.mapper';
 import { mapOrderListBlock } from './mappers/blocks/cms.order-list.mapper';
+import { mapOrdersSummaryBlock } from './mappers/blocks/cms.orders-summary.mapper';
 import { mapPaymentsHistoryBlock } from './mappers/blocks/cms.payments-history.mapper';
 import { mapPaymentsSummaryBlock } from './mappers/blocks/cms.payments-summary.mapper';
 import { mapQuickLinksBlock } from './mappers/blocks/cms.quick-links.mapper';
@@ -392,10 +394,9 @@ export class CmsService implements CMS.Service {
         return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapOrderListBlock)));
     }
 
-    getOrdersSummaryBlock(
-        _options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock> {
-        throw new NotImplementedException();
+    getOrdersSummaryBlock(options: CMS.Request.GetCmsEntryParams) {
+        const key = `orders-summary-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapOrdersSummaryBlock)));
     }
 
     getArticleListBlock(
@@ -423,8 +424,10 @@ export class CmsService implements CMS.Service {
 
     getQuickLinksBlock(options: CMS.Request.GetCmsEntryParams) {
         const key = `quick-links-component-${options.id}-${options.locale}`;
-        return this.getCachedBlock(key, () =>
-            this.getBlock(options).pipe(map((data) => mapQuickLinksBlock(data, this.baseUrl))),
-        );
+        return this.getCachedBlock(key, () => this.getBlock(options).pipe(map((data) => mapQuickLinksBlock(data))));
+    }
+    getOrderDetailsBlock(options: CMS.Request.GetCmsEntryParams) {
+        const key = `order-details-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapOrderDetailsBlock)));
     }
 }

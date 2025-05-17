@@ -11,16 +11,21 @@ export const OrdersSummaryDynamic = dynamic(() =>
 );
 
 export const OrdersSummary: React.FC<OrdersSummaryProps> = async ({ id, accessToken, locale }) => {
-    const data = await sdk.blocks.getOrdersSummary(
-        {
-            id,
-            dateFrom: dayjs().subtract(6, 'months').toISOString(),
-            dateTo: dayjs().toISOString(),
-            range: 'month',
-        },
-        { 'x-locale': locale },
-        accessToken,
-    );
+    try {
+        const data = await sdk.blocks.getOrdersSummary(
+            {
+                id,
+                dateFrom: dayjs().subtract(6, 'months').toISOString(),
+                dateTo: dayjs().toISOString(),
+                range: 'month',
+            },
+            { 'x-locale': locale },
+            accessToken,
+        );
 
-    return <OrdersSummaryDynamic {...data} id={id} accessToken={accessToken} locale={locale} />;
+        return <OrdersSummaryDynamic {...data} id={id} accessToken={accessToken} locale={locale} />;
+    } catch (_error) {
+        console.error(_error);
+        return null;
+    }
 };

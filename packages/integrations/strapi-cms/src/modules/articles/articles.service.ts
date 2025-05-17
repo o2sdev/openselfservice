@@ -31,7 +31,7 @@ export class ArticlesService implements Articles.Service {
                 if (!categories?.data?.categories?.length) {
                     throw new NotFoundException();
                 }
-                return mapCategory(categories.data.categories[0]!, this.baseUrl);
+                return mapCategory(categories.data.categories[0]!);
             }),
         );
     }
@@ -49,7 +49,6 @@ export class ArticlesService implements Articles.Service {
                 return mapCategories(
                     categories.data.categories,
                     categories.data.categories_connection?.pageInfo.total || categories.data.categories.length,
-                    this.baseUrl,
                 );
             }),
         );
