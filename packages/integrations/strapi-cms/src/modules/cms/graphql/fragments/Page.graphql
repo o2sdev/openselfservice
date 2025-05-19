@@ -1,6 +1,7 @@
 fragment Page on Page {
     documentId
     slug
+    protected
     locale
     createdAt
     updatedAt

@@ -9,7 +9,7 @@ import { Category } from './Category.server';
 export interface CategoryRendererProps {
     slug: string[];
     id: string;
-    accessToken: string;
+    accessToken?: string;
 }
 
 export const CategoryRenderer: React.FC<CategoryRendererProps> = ({ slug, id, accessToken }) => {

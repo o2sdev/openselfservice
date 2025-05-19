@@ -7,7 +7,7 @@ const MOCK_QUICK_LINKS_BLOCK_EN: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
     items: [
         {
             label: 'Find a retailer',
-            url: '/help-and-support/warranty-and-repair',
+            url: '/contact-us',
             description:
                 'Locate authorized retailers and service centers near you for in-person assistance, product demos, and expert advice.',
             icon: {
@@ -56,7 +56,7 @@ const MOCK_QUICK_LINKS_BLOCK_DE: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
     items: [
         {
             label: 'Händler finden',
-            url: '/hilfe-und-support/garantie-und-reparatur',
+            url: '/kontaktiere-uns',
             description:
                 'Finden Sie autorisierte Händler und Servicezentren in Ihrer Nähe für persönliche Unterstützung, Produktdemonstrationen und Expertenberatung.',
             icon: {
@@ -105,7 +105,7 @@ const MOCK_QUICK_LINKS_BLOCK_PL: CMS.Model.QuickLinksBlock.QuickLinksBlock = {
     items: [
         {
             label: 'Znajdź sprzedawcę',
-            url: '/pomoc-i-wsparcie/gwarancja-i-naprawa',
+            url: '/skontaktuj-sie-z-nami',
             description:
                 'Znajdź autoryzowanych sprzedawców i centra serwisowe w Twojej okolicy, aby uzyskać osobistą pomoc, demonstracje produktów i porady ekspertów.',
             icon: {

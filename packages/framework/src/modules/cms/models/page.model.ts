@@ -21,6 +21,7 @@ export class Page {
             };
         };
     };
+    isProtected!: boolean;
 }
 
 export abstract class Template {

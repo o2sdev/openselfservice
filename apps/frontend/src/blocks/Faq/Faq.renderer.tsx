@@ -8,7 +8,7 @@ import { Faq } from './Faq.server';
 
 export interface FaqRendererProps {
     id: string;
-    accessToken: string;
+    accessToken?: string;
 }
 
 export const FaqRenderer: React.FC<FaqRendererProps> = ({ id, accessToken }) => {

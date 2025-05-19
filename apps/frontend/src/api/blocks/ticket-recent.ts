@@ -11,7 +11,7 @@ export const ticketRecent = (sdk: Sdk) => ({
         getTicketRecent: (
             query: Blocks.TicketRecent.Request.GetTicketRecentBlockQuery,
             headers: Headers.AppHeaders,
-            authorization: string,
+            authorization?: string,
         ): Promise<Blocks.TicketRecent.Model.TicketRecentBlock> =>
             sdk.makeRequest({
                 method: 'get',
@@ -19,7 +19,11 @@ export const ticketRecent = (sdk: Sdk) => ({
                 headers: {
                     ...getApiHeaders(),
                     ...headers,
-                    Authorization: `Bearer ${authorization}`,
+                    ...(authorization
+                        ? {
+                              Authorization: `Bearer ${authorization}`,
+                          }
+                        : {}),
                 },
                 params: query,
             }),

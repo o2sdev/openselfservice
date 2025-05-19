@@ -35,6 +35,7 @@ query getArticles(
         sort: $sort
         locale: $locale
     ) {
+        protected
         ...ArticleTemplate
     }
 }

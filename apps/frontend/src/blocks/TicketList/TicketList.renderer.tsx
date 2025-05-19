@@ -7,7 +7,7 @@ import { TicketListServer } from './TicketList.server';
 
 export interface TicketListRendererProps {
     id: string;
-    accessToken: string;
+    accessToken?: string;
 }
 
 export const TicketListRenderer: React.FC<TicketListRendererProps> = ({ id, accessToken }) => {

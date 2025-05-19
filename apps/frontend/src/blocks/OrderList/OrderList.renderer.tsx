@@ -8,7 +8,7 @@ import { OrderList } from './OrderList.server';
 export interface OrderListRendererProps {
     slug: string[];
     id: string;
-    accessToken: string;
+    accessToken?: string;
 }
 
 export const OrderListRenderer: React.FC<OrderListRendererProps> = ({ id, accessToken }) => {

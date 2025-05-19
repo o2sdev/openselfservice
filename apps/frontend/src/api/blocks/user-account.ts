@@ -11,7 +11,7 @@ export const userAccount = (sdk: Sdk) => ({
         getUserAccount: (
             query: Blocks.UserAccount.Request.GetUserAccountBlockQuery,
             headers: Headers.AppHeaders,
-            authorization: string,
+            authorization?: string,
         ): Promise<Blocks.UserAccount.Model.UserAccountBlock> =>
             sdk.makeRequest({
                 method: 'get',
@@ -19,7 +19,11 @@ export const userAccount = (sdk: Sdk) => ({
                 headers: {
                     ...getApiHeaders(),
                     ...headers,
-                    Authorization: `Bearer ${authorization}`,
+                    ...(authorization
+                        ? {
+                              Authorization: `Bearer ${authorization}`,
+                          }
+                        : {}),
                 },
                 params: query,
             }),

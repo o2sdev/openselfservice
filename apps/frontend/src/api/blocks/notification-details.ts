@@ -12,7 +12,7 @@ export const notificationDetails = (sdk: Sdk) => ({
             params: Blocks.NotificationDetails.Request.GetNotificationDetailsBlockParams,
             query: Blocks.NotificationDetails.Request.GetNotificationDetailsBlockQuery,
             headers: Headers.AppHeaders,
-            authorization: string,
+            authorization?: string,
         ): Promise<Blocks.NotificationDetails.Model.NotificationDetailsBlock> =>
             sdk.makeRequest({
                 method: 'get',
@@ -20,7 +20,11 @@ export const notificationDetails = (sdk: Sdk) => ({
                 headers: {
                     ...getApiHeaders(),
                     ...headers,
-                    Authorization: `Bearer ${authorization}`,
+                    ...(authorization
+                        ? {
+                              Authorization: `Bearer ${authorization}`,
+                          }
+                        : {}),
                 },
                 params: query,
             }),
@@ -28,7 +32,7 @@ export const notificationDetails = (sdk: Sdk) => ({
         markNotificationAs: (
             body: Blocks.NotificationDetails.Request.MarkNotificationAsBlockBody,
             headers: Headers.AppHeaders,
-            authorization: string,
+            authorization?: string,
         ): Promise<void> =>
             sdk.makeRequest({
                 method: 'post',
@@ -36,7 +40,11 @@ export const notificationDetails = (sdk: Sdk) => ({
                 headers: {
                     ...getApiHeaders(),
                     ...headers,
-                    Authorization: `Bearer ${authorization}`,
+                    ...(authorization
+                        ? {
+                              Authorization: `Bearer ${authorization}`,
+                          }
+                        : {}),
                 },
                 data: body,
             }),

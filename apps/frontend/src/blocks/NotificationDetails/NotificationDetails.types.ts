@@ -3,7 +3,7 @@ import { Blocks } from '@o2s/api-harmonization';
 export interface NotificationDetailsProps {
     id: string;
     notificationId: string;
-    accessToken: string;
+    accessToken?: string;
     locale: string;
 }
 

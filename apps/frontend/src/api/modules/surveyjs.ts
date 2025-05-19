@@ -11,7 +11,7 @@ export const surveyjs = (sdk: Sdk) => ({
         getSurvey: (
             params: Modules.SurveyjsForms.Request.SurveyJsQuery,
             headers: Headers.AppHeaders,
-            authorization: string,
+            authorization?: string,
         ): Promise<Modules.SurveyjsForms.Model.SurveyJs> =>
             sdk.makeRequest({
                 method: 'get',
@@ -19,7 +19,11 @@ export const surveyjs = (sdk: Sdk) => ({
                 headers: {
                     ...getApiHeaders(),
                     ...headers,
-                    Authorization: `Bearer ${authorization}`,
+                    ...(authorization
+                        ? {
+                              Authorization: `Bearer ${authorization}`,
+                          }
+                        : {}),
                 },
                 params: params,
             }),
@@ -27,7 +31,7 @@ export const surveyjs = (sdk: Sdk) => ({
         submitSurvey: (
             params: Modules.SurveyjsForms.Request.SurveyJsSubmitPayload,
             headers: Headers.AppHeaders,
-            authorization: string,
+            authorization?: string,
         ): Promise<void> =>
             sdk.makeRequest({
                 method: 'post',
@@ -35,7 +39,11 @@ export const surveyjs = (sdk: Sdk) => ({
                 headers: {
                     ...getApiHeaders(),
                     ...headers,
-                    Authorization: `Bearer ${authorization}`,
+                    ...(authorization
+                        ? {
+                              Authorization: `Bearer ${authorization}`,
+                          }
+                        : {}),
                 },
                 data: params,
             }),
