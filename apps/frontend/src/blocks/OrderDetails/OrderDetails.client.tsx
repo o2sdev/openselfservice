@@ -28,7 +28,6 @@ import { Link as NextLink } from '@/i18n';
 
 import { InfoCard } from '@/components/Cards/InfoCard/InfoCard';
 import { DynamicIcon } from '@/components/DynamicIcon/DynamicIcon';
-import { InitialFilters } from '@/components/Filters/FiltersContext';
 import { FiltersSection } from '@/components/Filters/FiltersSection';
 import { NoResults } from '@/components/NoResults/NoResults';
 import { Pagination } from '@/components/Pagination/Pagination';
@@ -303,7 +302,7 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
                     <div className="flex flex-col gap-6">
                         <FiltersSection
                             title={data.productList.title}
-                            initialFilters={initialFilters as unknown as InitialFilters}
+                            initialFilters={initialFilters}
                             filters={data.productList.filters}
                             initialValues={filters}
                             onSubmit={handleFilter}
