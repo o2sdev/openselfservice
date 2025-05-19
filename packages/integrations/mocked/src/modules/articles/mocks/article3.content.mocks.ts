@@ -11,9 +11,9 @@ export const MOCK_ARTICLE3_EN: Articles.Model.Article[] = [
         lead: 'Explore the wide range of accessories available for your PowerPro tools to enhance functionality, improve efficiency, and tackle specialized projects.',
         tags: ['accessories', 'tools', 'attachments'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-accessories-thumb.jpg',
             width: 640,
-            height: 656,
+            height: 427,
             alt: 'Tool accessories',
         },
         thumbnail: {
@@ -48,7 +48,7 @@ export const MOCK_ARTICLE3_EN: Articles.Model.Article[] = [
                 updatedAt: '2023-09-30T15:45:00Z',
                 __typename: 'ArticleSectionImage',
                 image: {
-                    url: 'https://picsum.photos/800/500',
+                    url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-accessories-1.jpg',
                     alt: 'PowerPro accessory kit',
                 },
                 caption:
@@ -88,7 +88,7 @@ Before purchasing accessories, verify compatibility using one of these methods:
 3. Enter your tool's model number on the PowerPro website
 4. Consult your tool's manual for recommended accessories
 
-![Compatibility Chart](https://picsum.photos/800/400 "PowerPro Accessory Compatibility Chart")
+![Compatibility Chart](https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-accessories-compat.jpg "PowerPro Accessory Compatibility Chart")
 
 ## Drill and Driver Accessories
 
@@ -140,7 +140,7 @@ Every PowerPro owner should have these driver bits:
 
 ### Specialty Attachments
 
-![Drill Attachments](https://picsum.photos/800/500 "PowerPro Specialty Drill Attachments")
+![Drill Attachments](https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-accessories-attach.jpg "PowerPro Specialty Drill Attachments")
 
 Transform your drill with these innovative attachments:
 
@@ -197,8 +197,6 @@ Different grits for different applications:
 * **Very Fine (220+ grit)** - Final smoothing before finishing
 
 ### Specialty Sanding Accessories
-
-![Sanding Accessories](https://picsum.photos/800/500 "PowerPro Sanding Accessories")
 
 Enhance your sander's capabilities:
 
@@ -261,7 +259,7 @@ Keep your tools and accessories organized and protected:
 
 ### Tool Storage Options
 
-![Storage Systems](https://picsum.photos/600/1200 "PowerPro Storage Systems")
+![Storage Systems](https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-accessories-storage.jpg "PowerPro Storage Systems")
 
 PowerPro offers a comprehensive storage system:
 
@@ -322,13 +320,13 @@ export const MOCK_ARTICLE3_DE: Articles.Model.Article[] = [
         lead: 'Entdecken Sie die breite Palette an Zubehör für Ihre PowerPro-Werkzeuge, um die Funktionalität zu erweitern, die Effizienz zu verbessern und spezialisierte Projekte anzugehen.',
         tags: ['zubehör', 'werkzeuge', 'aufsätze'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-accessories-thumb.jpg',
             width: 640,
-            height: 656,
+            height: 427,
             alt: 'Werkzeugzubehör',
         },
         thumbnail: {
-            url: 'https://example.com/images/tool-accessories-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-accessories-thumb.jpg',
             alt: 'Werkzeugzubehör-Thumbnail',
         },
         category: {
@@ -509,8 +507,6 @@ Verschiedene Körnungen für verschiedene Anwendungen:
 
 ### Spezial-Schleifzubehör
 
-![Schleifzubehör](https://picsum.photos/800/500 "PowerPro Schleifzubehör")
-
 Erweitern Sie die Fähigkeiten Ihres Schleifers:
 
 1. **Konturschleifgriffe** - Schleifen Sie gekrümmte und unregelmäßige Oberflächen
@@ -633,13 +629,13 @@ export const MOCK_ARTICLE3_PL: Articles.Model.Article[] = [
         lead: 'Poznaj szeroki zakres akcesoriów dostępnych do narzędzi PowerPro, które zwiększają funkcjonalność, poprawiają wydajność i umożliwiają realizację specjalistycznych projektów.',
         tags: ['akcesoria', 'narzędzia', 'przystawki'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-accessories-thumb.jpg',
             width: 640,
-            height: 656,
+            height: 427,
             alt: 'Akcesoria do narzędzi',
         },
         thumbnail: {
-            url: 'https://example.com/images/tool-accessories-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-accessories-thumb.jpg',
             alt: 'Miniatura akcesoriów do narzędzi',
         },
         category: {
@@ -819,8 +815,6 @@ Różne ziarnistości do różnych zastosowań:
 * **Bardzo drobnoziarnisty (220+)** - Końcowe wygładzanie przed wykończeniem
 
 ### Specjalistyczne akcesoria do szlifowania
-
-![Akcesoria do szlifowania](https://picsum.photos/800/500 "Akcesoria do szlifowania PowerPro")
 
 Zwiększ możliwości swojej szlifierki:
 

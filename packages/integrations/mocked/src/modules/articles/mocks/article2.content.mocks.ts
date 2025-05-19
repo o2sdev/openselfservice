@@ -11,13 +11,13 @@ export const MOCK_ARTICLE2_EN: Articles.Model.Article[] = [
         lead: 'Discover essential safety practices to follow when using PowerPro tools to prevent accidents and ensure a safe working environment.',
         tags: ['safety', 'tools', 'guidelines'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-thumb.jpg',
             width: 640,
-            height: 656,
+            height: 427,
             alt: 'Tool safety',
         },
         thumbnail: {
-            url: 'https://example.com/images/tool-safety-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-thumb.jpg',
             alt: 'Tool safety thumbnail',
         },
         category: {
@@ -48,7 +48,7 @@ export const MOCK_ARTICLE2_EN: Articles.Model.Article[] = [
                 updatedAt: '2023-08-25T13:20:00Z',
                 __typename: 'ArticleSectionImage',
                 image: {
-                    url: 'https://picsum.photos/800/500',
+                    url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-1.jpg',
                     alt: 'Safety equipment',
                 },
                 caption:
@@ -90,7 +90,7 @@ Maintain a safe workspace to prevent accidents:
 4. Ensure proper ventilation, especially when working with chemicals
 5. Have a first aid kit and fire extinguisher readily accessible
 
-![Safe Workspace Setup](https://picsum.photos/800/400 "Example of a Safe Workspace")
+![Safe Workspace Setup](https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety.jpg "Example of a Safe Workspace")
 
 ## Power Tool General Safety
 
@@ -143,7 +143,7 @@ Different tools present unique safety challenges. Follow these specific guidelin
 
 ### Drill Safety
 
-![Drill Safety](https://picsum.photos/800/500 "Proper Drill Handling")
+![Drill Safety](https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-drill.jpg "Proper Drill Handling")
 
 When using PowerPro drills:
 
@@ -226,7 +226,7 @@ Proper training is essential for safe tool operation:
 * **Stay Updated** - Regularly review safety guidelines and new recommendations
 * **Certifications** - Consider professional certification for specialized tools
 
-![Safety Training](https://picsum.photos/600/1200 "PowerPro Safety Training Session")
+![Safety Training](https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-training.jpg "PowerPro Safety Training Session")
 
 ## Conclusion
 
@@ -249,13 +249,13 @@ export const MOCK_ARTICLE2_DE: Articles.Model.Article[] = [
         lead: 'Entdecken Sie wesentliche Sicherheitspraktiken, die bei der Verwendung von PowerPro-Werkzeugen zu befolgen sind, um Unfälle zu vermeiden und eine sichere Arbeitsumgebung zu gewährleisten.',
         tags: ['sicherheit', 'werkzeuge', 'richtlinien'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-thumb.jpg',
             width: 640,
-            height: 656,
+            height: 427,
             alt: 'Werkzeugsicherheit',
         },
         thumbnail: {
-            url: 'https://example.com/images/tool-safety-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-thumb.jpg',
             alt: 'Werkzeugsicherheit-Thumbnail',
         },
         category: {
@@ -286,7 +286,7 @@ export const MOCK_ARTICLE2_DE: Articles.Model.Article[] = [
                 updatedAt: '2023-08-25T13:20:00Z',
                 __typename: 'ArticleSectionImage',
                 image: {
-                    url: 'https://picsum.photos/800/500',
+                    url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-1.jpg',
                     alt: 'Sicherheitsausrüstung',
                 },
                 caption:
@@ -328,7 +328,7 @@ Halten Sie einen sicheren Arbeitsplatz, um Unfälle zu vermeiden:
 4. Sorgen Sie für ausreichende Belüftung, besonders bei der Arbeit mit Chemikalien
 5. Halten Sie einen Erste-Hilfe-Kasten und Feuerlöscher griffbereit
 
-![Sichere Arbeitsplatzeinrichtung](https://picsum.photos/800/400 "Beispiel für einen sicheren Arbeitsplatz")
+![Sichere Arbeitsplatzeinrichtung](https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety.jpg "Beispiel für einen sicheren Arbeitsplatz")
 
 ## Allgemeine Sicherheit für Elektrowerkzeuge
 
@@ -381,7 +381,7 @@ Verschiedene Werkzeuge stellen einzigartige Sicherheitsherausforderungen dar. Be
 
 ### Bohrersicherheit
 
-![Bohrersicherheit](https://picsum.photos/800/500 "Richtige Bohrhandhabung")
+![Bohrersicherheit](https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-1.jpg "Richtige Bohrhandhabung")
 
 Bei der Verwendung von PowerPro-Bohrern:
 
@@ -464,7 +464,7 @@ Eine ordnungsgemäße Schulung ist für den sicheren Betrieb von Werkzeugen uner
 * **Auf dem Laufenden bleiben** - Überprüfen Sie regelmäßig Sicherheitsrichtlinien und neue Empfehlungen
 * **Zertifizierungen** - Erwägen Sie eine professionelle Zertifizierung für spezialisierte Werkzeuge
 
-![Sicherheitsschulung](https://picsum.photos/600/1200 "PowerPro Sicherheitsschulungssitzung")
+![Sicherheitsschulung](https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-training.jpg "PowerPro Sicherheitsschulungssitzung")
 
 ## Fazit
 
@@ -487,13 +487,13 @@ export const MOCK_ARTICLE2_PL: Articles.Model.Article[] = [
         lead: 'Poznaj niezbędne praktyki bezpieczeństwa, których należy przestrzegać podczas korzystania z narzędzi PowerPro, aby zapobiec wypadkom i zapewnić bezpieczne środowisko pracy.',
         tags: ['bezpieczeństwo', 'narzędzia', 'wytyczne'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-thumb.jpg',
             width: 640,
-            height: 656,
+            height: 427,
             alt: 'Bezpieczeństwo narzędzi',
         },
         thumbnail: {
-            url: 'https://example.com/images/tool-safety-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-thumb.jpg',
             alt: 'Miniatura bezpieczeństwa narzędzi',
         },
         category: {
@@ -524,7 +524,7 @@ export const MOCK_ARTICLE2_PL: Articles.Model.Article[] = [
                 updatedAt: '2023-08-25T13:20:00Z',
                 __typename: 'ArticleSectionImage',
                 image: {
-                    url: 'https://picsum.photos/800/500',
+                    url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-1.jpg',
                     alt: 'Sprzęt ochronny',
                 },
                 caption:
@@ -566,7 +566,7 @@ Utrzymuj bezpieczne miejsce pracy, aby zapobiegać wypadkom:
 4. Zapewnij odpowiednią wentylację, szczególnie podczas pracy z chemikaliami
 5. Miej apteczkę pierwszej pomocy i gaśnicę łatwo dostępne
 
-![Bezpieczna organizacja miejsca pracy](https://picsum.photos/800/400 "Przykład bezpiecznego miejsca pracy")
+![Bezpieczna organizacja miejsca pracy](https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety.jpg "Przykład bezpiecznego miejsca pracy")
 
 ## Ogólne zasady bezpieczeństwa elektronarzędzi
 
@@ -619,7 +619,7 @@ Różne narzędzia stanowią unikalne wyzwania w zakresie bezpieczeństwa. Przes
 
 ### Bezpieczeństwo wiertarek
 
-![Bezpieczeństwo wiertarki](https://picsum.photos/800/500 "Prawidłowa obsługa wiertarki")
+![Bezpieczeństwo wiertarki](https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-drill.jpg "Prawidłowa obsługa wiertarki")
 
 Podczas korzystania z wiertarek PowerPro:
 
@@ -702,7 +702,7 @@ Odpowiednie szkolenie jest niezbędne do bezpiecznej obsługi narzędzi:
 * **Bądź na bieżąco** - Regularnie przeglądaj wytyczne bezpieczeństwa i nowe zalecenia
 * **Certyfikaty** - Rozważ profesjonalną certyfikację dla specjalistycznych narzędzi
 
-![Szkolenie bezpieczeństwa](https://picsum.photos/600/1200 "Sesja szkoleniowa PowerPro dotycząca bezpieczeństwa")
+![Szkolenie bezpieczeństwa](https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-training.jpg "Sesja szkoleniowa PowerPro dotycząca bezpieczeństwa")
 
 ## Podsumowanie
 
