@@ -16,7 +16,6 @@ import { Separator } from '@o2s/ui/components/separator';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@o2s/ui/components/sheet';
 import { TableBody, TableCell, TableHead, TableHeader, TableRow } from '@o2s/ui/components/table';
 import { Table } from '@o2s/ui/components/table';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@o2s/ui/components/tooltip';
 import { Typography } from '@o2s/ui/components/typography';
 import { cn } from '@o2s/ui/lib/utils';
 
@@ -35,6 +34,7 @@ import { NoResults } from '@/components/NoResults/NoResults';
 import { Pagination } from '@/components/Pagination/Pagination';
 import { Price } from '@/components/Price/Price';
 import { RichText } from '@/components/RichText/RichText';
+import { TooltipHover } from '@/components/TooltipHover/TooltipHover';
 
 import { OrderDetailsPureProps } from './OrderDetails.types';
 
@@ -111,12 +111,6 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
         useState<Blocks.OrderDetails.Model.OrderDetailsBlock['productList']['products']['data']>(initialData);
     const [filters, setFilters] = useState(initialFilters);
 
-    const [isTooltipOpen, setIsTooltipOpen] = useState({
-        trackOrder: false,
-        reorder: false,
-        payOnline: false,
-    });
-
     const [isPending, startTransition] = useTransition();
 
     const handleFilter = (data: Partial<Blocks.OrderList.Request.GetOrderListBlockQuery>) => {
@@ -167,59 +161,35 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
                     </div>
                     <div className="flex flex-row justify-end">
                         <div className="flex flex-col gap-4 sm:flex-row sm:items-center w-full sm:w-auto">
-                            <Tooltip
-                                open={isTooltipOpen.trackOrder}
-                                onOpenChange={(open) => setIsTooltipOpen((prev) => ({ ...prev, trackOrder: open }))}
-                            >
-                                <TooltipTrigger asChild>
-                                    <Button
-                                        variant="secondary"
-                                        onClick={() => setIsTooltipOpen((prev) => ({ ...prev, trackOrder: true }))}
-                                    >
+                            <TooltipHover
+                                trigger={(setIsOpen) => (
+                                    <Button variant="secondary" onClick={() => setIsOpen(true)}>
                                         <Truck className="w-4 h-4" />
                                         {data.labels.trackOrder}
                                     </Button>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                    <p>{t('general.comingSoon')}</p>
-                                </TooltipContent>
-                            </Tooltip>
+                                )}
+                                content={<p>{t('general.comingSoon')}</p>}
+                            />
 
-                            <Tooltip
-                                open={isTooltipOpen.reorder}
-                                onOpenChange={(open) => setIsTooltipOpen((prev) => ({ ...prev, reorder: open }))}
-                            >
-                                <TooltipTrigger asChild>
-                                    <Button
-                                        variant="secondary"
-                                        onClick={() => setIsTooltipOpen((prev) => ({ ...prev, reorder: true }))}
-                                    >
+                            <TooltipHover
+                                trigger={(setIsOpen) => (
+                                    <Button variant="secondary" onClick={() => setIsOpen(true)}>
                                         <IterationCw className="w-4 h-4" />
                                         {data.labels.reorder}
                                     </Button>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                    <p>{t('general.comingSoon')}</p>
-                                </TooltipContent>
-                            </Tooltip>
+                                )}
+                                content={<p>{t('general.comingSoon')}</p>}
+                            />
 
-                            <Tooltip
-                                open={isTooltipOpen.payOnline}
-                                onOpenChange={(open) => setIsTooltipOpen((prev) => ({ ...prev, payOnline: open }))}
-                            >
-                                <TooltipTrigger asChild>
-                                    <Button
-                                        variant="destructive"
-                                        onClick={() => setIsTooltipOpen((prev) => ({ ...prev, payOnline: true }))}
-                                    >
+                            <TooltipHover
+                                trigger={(setIsOpen) => (
+                                    <Button variant="destructive" onClick={() => setIsOpen(true)}>
                                         <ArrowUpRight className="w-4 h-4" />
                                         {data.labels.payOnline}
                                     </Button>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                    <p>{t('general.comingSoon')}</p>
-                                </TooltipContent>
-                            </Tooltip>
+                                )}
+                                content={<p>{t('general.comingSoon')}</p>}
+                            />
                         </div>
                     </div>
                 </div>
@@ -409,6 +379,8 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
                                                                                                     ?.alt
                                                                                             }
                                                                                             fill
+                                                                                            width={40}
+                                                                                            height={40}
                                                                                             className="object-cover object-center"
                                                                                         />
                                                                                     )}

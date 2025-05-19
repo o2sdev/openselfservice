@@ -1,22 +1,21 @@
 'use client';
 
 import { ArrowRight } from 'lucide-react';
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@o2s/ui/components/avatar';
 import { Card, CardContent, CardHeader } from '@o2s/ui/components/card';
 import { Link } from '@o2s/ui/components/link';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@o2s/ui/components/tooltip';
 import { Typography } from '@o2s/ui/components/typography';
 
 import { Link as NextLink } from '@/i18n';
 
 import { RichText } from '@/components/RichText/RichText';
+import { TooltipHover } from '@/components/TooltipHover/TooltipHover';
 
 import { TicketRecentPureProps } from './TicketRecent.types';
 
 export const TicketRecentPure: React.FC<TicketRecentPureProps> = ({ ...component }) => {
-    const [openTooltips, setOpenTooltips] = useState<Record<string, boolean>>({});
     const { title, tickets, noResults, details } = component;
 
     function extractFirst(content: string) {
@@ -63,16 +62,8 @@ export const TicketRecentPure: React.FC<TicketRecentPureProps> = ({ ...component
                                                             </div>
                                                         </div>
                                                         <div className="basis-2/3 flex items-center justify-between gap-4">
-                                                            <Tooltip
-                                                                open={openTooltips[ticket.id.value] || false}
-                                                                onOpenChange={(isOpen) =>
-                                                                    setOpenTooltips((prev) => ({
-                                                                        ...prev,
-                                                                        [ticket.id.value]: isOpen,
-                                                                    }))
-                                                                }
-                                                            >
-                                                                <TooltipTrigger asChild>
+                                                            <TooltipHover
+                                                                trigger={() => (
                                                                     <Link
                                                                         asChild
                                                                         className="whitespace-normal text-foreground hover:text-primary"
@@ -93,14 +84,15 @@ export const TicketRecentPure: React.FC<TicketRecentPureProps> = ({ ...component
                                                                             <ArrowRight className="h-4 w-4" />
                                                                         </NextLink>
                                                                     </Link>
-                                                                </TooltipTrigger>
-                                                                <TooltipContent className="max-w-[300px]">
+                                                                )}
+                                                                content={
                                                                     <RichText
                                                                         content={comment.content}
+                                                                        className="max-w-[300px]"
                                                                         baseFontSize="small"
                                                                     />
-                                                                </TooltipContent>
-                                                            </Tooltip>
+                                                                }
+                                                            />
                                                         </div>
                                                     </div>
                                                 )}

@@ -1,11 +1,9 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Button } from '@o2s/ui/components/button';
-import { TooltipContent, TooltipTrigger } from '@o2s/ui/components/tooltip';
-import { Tooltip } from '@o2s/ui/components/tooltip';
 import { Typography } from '@o2s/ui/components/typography';
 import { cn } from '@o2s/ui/lib/utils';
 
@@ -13,6 +11,7 @@ import { InfoCard } from '@/components/Cards/InfoCard/InfoCard';
 import { DynamicIcon } from '@/components/DynamicIcon/DynamicIcon';
 import { Price } from '@/components/Price/Price';
 import { RichText } from '@/components/RichText/RichText';
+import { TooltipHover } from '@/components/TooltipHover/TooltipHover';
 
 import { PaymentsSummaryPureProps } from './PaymentsSummary.types';
 
@@ -20,9 +19,6 @@ export const PaymentsSummaryPure: React.FC<PaymentsSummaryPureProps> = ({ ...com
     const { overdue, toBePaid } = component;
 
     const t = useTranslations();
-
-    const [overdueTooltipOpen, setOverdueTooltipOpen] = useState(false);
-    const [toBePaidTooltipOpen, setToBePaidTooltipOpen] = useState(false);
 
     return (
         <div className="w-full flex flex-col gap-6">
@@ -48,22 +44,20 @@ export const PaymentsSummaryPure: React.FC<PaymentsSummaryPureProps> = ({ ...com
                 }
                 button={
                     overdue.link && (
-                        <Tooltip open={overdueTooltipOpen} onOpenChange={setOverdueTooltipOpen}>
-                            <TooltipTrigger asChild>
+                        <TooltipHover
+                            trigger={(setIsOpen) => (
                                 <Button
                                     variant={overdue.isOverdue ? 'destructive' : 'secondary'}
                                     size="sm"
-                                    onClick={() => setOverdueTooltipOpen(true)}
+                                    onClick={() => setIsOpen(true)}
                                     className="flex items-center gap-2 w-full"
                                 >
-                                    {overdue.link.icon && <DynamicIcon name={overdue.link.icon} size={16} />}
-                                    {overdue.link.label}
+                                    {overdue.link?.icon && <DynamicIcon name={overdue.link.icon} size={16} />}
+                                    {overdue.link?.label}
                                 </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                                <p>{t('general.comingSoon')}</p>
-                            </TooltipContent>
-                        </Tooltip>
+                            )}
+                            content={<p>{t('general.comingSoon')}</p>}
+                        />
                     )
                 }
             />
@@ -80,22 +74,20 @@ export const PaymentsSummaryPure: React.FC<PaymentsSummaryPureProps> = ({ ...com
                 button={
                     toBePaid.value.value > 0 &&
                     toBePaid.link && (
-                        <Tooltip open={toBePaidTooltipOpen} onOpenChange={setToBePaidTooltipOpen}>
-                            <TooltipTrigger asChild>
+                        <TooltipHover
+                            trigger={(setIsOpen) => (
                                 <Button
                                     variant={'secondary'}
                                     size="sm"
-                                    onClick={() => setToBePaidTooltipOpen(true)}
+                                    onClick={() => setIsOpen(true)}
                                     className="flex items-center gap-2 w-full"
                                 >
-                                    {toBePaid.link.icon && <DynamicIcon name={toBePaid.link.icon} size={16} />}
-                                    {toBePaid.link.label}
+                                    {toBePaid.link?.icon && <DynamicIcon name={toBePaid.link.icon} size={16} />}
+                                    {toBePaid.link?.label}
                                 </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                                <p>{t('general.comingSoon')}</p>
-                            </TooltipContent>
-                        </Tooltip>
+                            )}
+                            content={<p>{t('general.comingSoon')}</p>}
+                        />
                     )
                 }
             />

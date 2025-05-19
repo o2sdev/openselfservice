@@ -32,7 +32,7 @@ export const ActionLinks: React.FC<Readonly<ActionLinksProps>> = ({ actionLinks,
                     className="no-underline hover:no-underline"
                 >
                     <NextLink href={action.slug}>
-                        {action.icon && <DynamicIcon name={action.icon} />}
+                        {action.icon && <DynamicIcon name={action.icon} size={16} />}
                         {action.label}
                     </NextLink>
                 </Button>
@@ -47,7 +47,7 @@ export const ActionLinks: React.FC<Readonly<ActionLinksProps>> = ({ actionLinks,
                         className="no-underline hover:no-underline w-full"
                     >
                         <NextLink href={lastVisible.slug}>
-                            {lastVisible.icon && <DynamicIcon name={lastVisible.icon} />}
+                            {lastVisible.icon && <DynamicIcon name={lastVisible.icon} size={16} />}
                             {lastVisible.label}
                         </NextLink>
                     </Button>
@@ -65,7 +65,7 @@ export const ActionLinks: React.FC<Readonly<ActionLinksProps>> = ({ actionLinks,
                                             href={action.slug}
                                             className="flex items-center gap-2 !no-underline hover:!no-underline cursor-pointer"
                                         >
-                                            {action.icon && <DynamicIcon name={action.icon} />}
+                                            {action.icon && <DynamicIcon name={action.icon} size={16} />}
                                             {action.label}
                                         </NextLink>
                                     </DropdownMenuItem>
