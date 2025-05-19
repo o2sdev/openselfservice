@@ -18,7 +18,6 @@ import { sdk } from '@/api/sdk';
 import { downloadFile } from '@/utils/downloadFile';
 import { invoiceBadgePaymentStatusVariants } from '@/utils/mappings/invoice-badge';
 
-import { InitialFilters } from '@/components/Filters/FiltersContext';
 import { FiltersSection } from '@/components/Filters/FiltersSection';
 import { NoResults } from '@/components/NoResults/NoResults';
 import { Pagination } from '@/components/Pagination/Pagination';
@@ -78,7 +77,7 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
                     <div className="flex flex-col gap-6">
                         <FiltersSection
                             title={data.table.title}
-                            initialFilters={initialFilters as unknown as InitialFilters}
+                            initialFilters={initialFilters}
                             filters={data.filters}
                             initialValues={filters}
                             onSubmit={handleFilter}
@@ -180,7 +179,7 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
                                                             }
                                                         })}
                                                         {data.table.data.actions && (
-                                                            <TableCell>
+                                                            <TableCell className="py-0">
                                                                 <Link asChild>
                                                                     <Button
                                                                         variant="link"

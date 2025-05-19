@@ -47,3 +47,23 @@ export const formatDateRelative = (
         return formattedDate.format(DATE_FORMAT);
     }
 };
+
+export const formatTime = (date: string | number, locale: string, timezone?: string) => {
+    let formattedTime = dayjs(date);
+
+    if (!formattedTime.isValid()) {
+        return '';
+    }
+
+    if (locale) {
+        formattedTime = formattedTime.locale(locale);
+    }
+
+    if (timezone) {
+        formattedTime = formattedTime.tz(timezone);
+    } else {
+        formattedTime = formattedTime.tz('Europe/London');
+    }
+
+    return formattedTime.format('LT');
+};

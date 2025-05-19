@@ -17,7 +17,6 @@ export const PAGE_ORDER_LIST_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-
     isProtected: true,
     hasOwnTitle: false,
     parent: {
@@ -62,7 +61,6 @@ export const PAGE_ORDER_LIST_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-
     isProtected: true,
     hasOwnTitle: false,
     parent: {
@@ -107,7 +105,6 @@ export const PAGE_ORDER_LIST_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-
     isProtected: true,
     hasOwnTitle: false,
     parent: {

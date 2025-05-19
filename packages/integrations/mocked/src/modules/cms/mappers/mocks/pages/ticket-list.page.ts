@@ -17,9 +17,8 @@ export const PAGE_TICKET_LIST_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-
+    hasOwnTitle: true,
     isProtected: true,
-    hasOwnTitle: false,
     parent: {
         slug: '/',
         seo: {
@@ -62,9 +61,8 @@ export const PAGE_TICKET_LIST_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-
+    hasOwnTitle: true,
     isProtected: true,
-    hasOwnTitle: false,
     parent: {
         slug: '/',
         seo: {
@@ -107,9 +105,8 @@ export const PAGE_TICKET_LIST_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-
+    hasOwnTitle: true,
     isProtected: true,
-    hasOwnTitle: false,
     parent: {
         slug: '/',
         seo: {

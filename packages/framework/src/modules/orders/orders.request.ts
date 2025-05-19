@@ -4,6 +4,8 @@ import { PaginationQuery } from '@/utils/models/pagination';
 
 export class GetOrderParams {
     id!: string;
+    limit?: number;
+    offset?: number;
 }
 
 export class GetOrderListQuery extends PaginationQuery {

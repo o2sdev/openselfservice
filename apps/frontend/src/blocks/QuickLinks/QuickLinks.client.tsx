@@ -1,7 +1,7 @@
 import React from 'react';
 
+import { InformativeCard } from '@/components/Cards/InformativeCard/InformativeCard';
 import { ContentSection } from '@/components/ContentSection/ContentSection';
-import { InformativeCard } from '@/components/InformativeCard/InformativeCard';
 
 import { QuickLinksPureProps } from './QuickLinks.types';
 
@@ -15,8 +15,8 @@ export const QuickLinksPure: React.FC<Readonly<QuickLinksPureProps>> = ({ ...com
                             title={item.label}
                             description={item.description}
                             href={item.url}
-                            iconUrl={item.icon?.url}
-                            iconSize="medium"
+                            icon={item.icon}
+                            iconSize={36}
                             lineClamp={2}
                         />
                     </li>

@@ -4,7 +4,7 @@ import { Block, DataTable, Filters, Mapping, Pagination } from '@/utils/models';
 export class OrderListBlock extends Block.Block {
     title?: string;
     subtitle?: string;
-    table!: DataTable.DataTable<Order & { paymentDueDate: string }>;
+    table!: DataTable.DataTable<Order>;
     fieldMapping!: Mapping.Mapping<Order>;
     pagination?: Pagination.Pagination;
     filters?: Filters.Filters<Order & { sort?: string }>;

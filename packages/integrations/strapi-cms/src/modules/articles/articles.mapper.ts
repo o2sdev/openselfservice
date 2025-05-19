@@ -5,7 +5,7 @@ import { Articles, CMS } from '@o2s/framework/modules';
 import { ArticleSimpleFragment, ArticleTemplateFragment, CategoryFragment, GetArticleQuery } from '@/generated/strapi';
 import { mapMedia } from '@/modules/cms/mappers/cms.media.mapper';
 
-export const mapCategory = (data: CategoryFragment, baseUrl: string): Articles.Model.Category => {
+export const mapCategory = (data: CategoryFragment): Articles.Model.Category => {
     return {
         id: data.documentId,
         slug: `${data.parent?.slug ? `${data.parent?.slug}/` : ''}${data.slug}`,
@@ -13,7 +13,7 @@ export const mapCategory = (data: CategoryFragment, baseUrl: string): Articles.M
         updatedAt: data.updatedAt,
         title: data.name,
         description: data.description,
-        icon: mapMedia(data.icon, baseUrl),
+        icon: data.icon,
         parent: data.parent
             ? {
                   slug: data.parent.slug,
@@ -23,9 +23,9 @@ export const mapCategory = (data: CategoryFragment, baseUrl: string): Articles.M
     };
 };
 
-export const mapCategories = (data: CategoryFragment[], total: number, baseUrl: string): Articles.Model.Categories => {
+export const mapCategories = (data: CategoryFragment[], total: number): Articles.Model.Categories => {
     return {
-        data: data.map((category) => mapCategory(category, baseUrl)),
+        data: data.map((category) => mapCategory(category)),
         total: total,
     };
 };

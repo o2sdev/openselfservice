@@ -1,15 +1,15 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Button } from '@o2s/ui/components/button';
 import { Separator } from '@o2s/ui/components/separator';
 import { TextItem } from '@o2s/ui/components/text-item';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@o2s/ui/components/tooltip';
 import { Typography } from '@o2s/ui/components/typography';
 
 import { Container } from '@/components/Container/Container';
+import { TooltipHover } from '@/components/TooltipHover/TooltipHover';
 
 import { signOutAction } from './Actions/Actions';
 import { UserAccountPureProps } from './UserAccount.types';
@@ -18,7 +18,6 @@ export const UserAccountPure: React.FC<UserAccountPureProps> = (component) => {
     const { fields, labels, basicInformationTitle, basicInformationDescription, user, title } = component;
 
     const t = useTranslations();
-    const [isTooltipOpen, setIsTooltipOpen] = useState(false);
 
     return (
         <div className="w-full">
@@ -47,20 +46,18 @@ export const UserAccountPure: React.FC<UserAccountPureProps> = (component) => {
                                     {basicInformationDescription}
                                 </Typography>
                             </div>
-                            <Tooltip open={isTooltipOpen} onOpenChange={setIsTooltipOpen}>
-                                <TooltipTrigger asChild>
+                            <TooltipHover
+                                trigger={(setIsOpen) => (
                                     <Button
                                         variant="outline"
                                         className="w-full md:w-fit"
-                                        onClick={() => setIsTooltipOpen(true)}
+                                        onClick={() => setIsOpen(true)}
                                     >
                                         {labels.edit}
                                     </Button>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                    <p>{t('general.comingSoon')}</p>
-                                </TooltipContent>
-                            </Tooltip>
+                                )}
+                                content={<p>{t('general.comingSoon')}</p>}
+                            />
                         </div>
 
                         <Separator className="mt-6" />

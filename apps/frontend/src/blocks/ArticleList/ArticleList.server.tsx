@@ -10,13 +10,17 @@ export const ArticleListDynamic = dynamic(() =>
 );
 
 export const ArticleList: React.FC<ArticleListProps> = async ({ id, accessToken, locale }) => {
-    const data = await sdk.blocks.getArticleList(
-        {
-            id,
-        },
-        { 'x-locale': locale },
-        accessToken,
-    );
+    try {
+        const data = await sdk.blocks.getArticleList(
+            {
+                id,
+            },
+            { 'x-locale': locale },
+            accessToken,
+        );
 
-    return <ArticleListDynamic {...data} id={id} accessToken={accessToken} locale={locale} />;
+        return <ArticleListDynamic {...data} id={id} accessToken={accessToken} locale={locale} />;
+    } catch (_error) {
+        return null;
+    }
 };

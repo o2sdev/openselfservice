@@ -15,8 +15,7 @@ import {
 } from '@o2s/ui/components/dropdown-menu';
 import { LoadingOverlay } from '@o2s/ui/components/loading-overlay';
 import { Separator } from '@o2s/ui/components/separator';
-import { TableBody, TableCell, TableHead, TableHeader, TableRow } from '@o2s/ui/components/table';
-import { Table } from '@o2s/ui/components/table';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@o2s/ui/components/table';
 import { Typography } from '@o2s/ui/components/typography';
 
 import { sdk } from '@/api/sdk';
@@ -25,7 +24,6 @@ import { orderBadgeVariants } from '@/utils/mappings/order-badge';
 
 import { Link as NextLink } from '@/i18n';
 
-import { InitialFilters } from '@/components/Filters/FiltersContext';
 import { FiltersSection } from '@/components/Filters/FiltersSection';
 import { NoResults } from '@/components/NoResults/NoResults';
 import { Pagination } from '@/components/Pagination/Pagination';
@@ -72,7 +70,7 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
                 <div className="flex flex-col gap-6">
                     <FiltersSection
                         title={data.subtitle}
-                        initialFilters={initialFilters as unknown as InitialFilters}
+                        initialFilters={initialFilters}
                         filters={data.filters}
                         initialValues={filters}
                         onSubmit={handleFilter}
@@ -123,7 +121,7 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
                                                             return (
                                                                 <TableCell
                                                                     key={column.id}
-                                                                    className="whitespace-nowrap"
+                                                                    className="whitespace-nowrap py-0"
                                                                 >
                                                                     <Button asChild variant="link">
                                                                         <NextLink href={order.detailsUrl}>
@@ -171,7 +169,7 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
                                                     }
                                                 })}
                                                 {data.table.actions && (
-                                                    <TableCell className="p-4 w-[180px]">
+                                                    <TableCell className="py-0 w-[180px] ">
                                                         <div className="flex items-center">
                                                             <Button asChild variant="link">
                                                                 <NextLink

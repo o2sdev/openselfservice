@@ -43,18 +43,20 @@ const mapOrderItem = (item: HttpTypes.AdminOrderLineItem, currency: string): Ord
         total: mapPrice(item.total, currency),
         subtotal: mapPrice(item.subtotal, currency),
         currency: currency as Models.Price.Currency,
-        product: mapProduct(item.product, item.unit_price, currency),
+        product: mapProduct(item.product, item.variant, item.unit_price, currency),
     };
 };
 
 const mapProduct = (
     item: HttpTypes.AdminProduct | undefined,
+    variant: HttpTypes.AdminProductVariant | undefined,
     unitPrice: number,
     currency: string,
 ): Products.Model.Product | undefined => {
-    if (!item) return undefined;
+    if (!item || !variant) return undefined;
     return {
         id: item.id,
+        sku: variant.sku || '',
         name: item.title,
         description: item.description || '',
         shortDescription: item.description || '',

@@ -6,9 +6,7 @@ fragment Category on Category {
     updatedAt
     name
     description
-    icon {
-        ...Media
-    }
+    icon
     parent {
         slug
         SEO {

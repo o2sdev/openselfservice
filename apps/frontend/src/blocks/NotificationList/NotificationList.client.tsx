@@ -18,7 +18,6 @@ import { notificationBadgePriorityVariants } from '@/utils/mappings/notification
 
 import { Link as NextLink } from '@/i18n';
 
-import { InitialFilters } from '@/components/Filters/FiltersContext';
 import { FiltersSection } from '@/components/Filters/FiltersSection';
 import { NoResults } from '@/components/NoResults/NoResults';
 import { Pagination } from '@/components/Pagination/Pagination';
@@ -62,7 +61,7 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({ loca
                 <div className="flex flex-col gap-6">
                     <FiltersSection
                         title={data.subtitle}
-                        initialFilters={initialFilters as unknown as InitialFilters}
+                        initialFilters={initialFilters}
                         filters={data.filters}
                         initialValues={filters}
                         onSubmit={handleFilter}
@@ -161,7 +160,7 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({ loca
                                                         }
                                                     })}
                                                     {data.table.actions && (
-                                                        <TableCell className="p-4">
+                                                        <TableCell className="py-0">
                                                             <Button asChild variant="link">
                                                                 <NextLink
                                                                     href={notification.detailsUrl}

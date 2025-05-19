@@ -2,15 +2,87 @@ import { Models, Orders, Products } from '@o2s/framework/modules';
 
 // Product data for generating random orders
 const PRODUCT_DATA = [
-    { id: 'PRD-004', name: 'Rotary Hammer', price: 100, currency: 'USD', type: 'PHYSICAL', category: 'TOOLS' },
-    { id: 'PRD-005', name: 'Angle Grinder', price: 79.99, currency: 'USD', type: 'PHYSICAL', category: 'TOOLS' },
-    { id: 'PRD-006', name: 'Cordless Drill', price: 129.99, currency: 'USD', type: 'PHYSICAL', category: 'TOOLS' },
-    { id: 'PRD-007', name: 'Laser Measure', price: 149.99, currency: 'USD', type: 'PHYSICAL', category: 'TOOLS' },
-    { id: 'PRD-008', name: 'Safety Glasses', price: 19.99, currency: 'USD', type: 'PHYSICAL', category: 'SAFETY' },
-    { id: 'PRD-009', name: 'Work Gloves', price: 24.99, currency: 'USD', type: 'PHYSICAL', category: 'SAFETY' },
-    { id: 'PRD-010', name: 'Hard Hat', price: 29.99, currency: 'USD', type: 'PHYSICAL', category: 'SAFETY' },
-    { id: 'PRD-011', name: 'Tool Belt', price: 39.99, currency: 'USD', type: 'PHYSICAL', category: 'ACCESSORIES' },
-    { id: 'PRD-012', name: 'Tool Box', price: 59.99, currency: 'USD', type: 'PHYSICAL', category: 'ACCESSORIES' },
+    {
+        id: 'PRD-004',
+        name: 'Rotary Hammer',
+        price: 100,
+        currency: 'USD',
+        type: 'PHYSICAL',
+        category: 'TOOLS',
+        sku: 'ABC-12345-S-BL',
+    },
+    {
+        id: 'PRD-005',
+        name: 'Angle Grinder',
+        price: 79.99,
+        currency: 'USD',
+        type: 'PHYSICAL',
+        category: 'TOOLS',
+        sku: 'ABC-12345-S-BL',
+    },
+    {
+        id: 'PRD-006',
+        name: 'Cordless Drill',
+        price: 129.99,
+        currency: 'USD',
+        type: 'PHYSICAL',
+        category: 'TOOLS',
+        sku: 'ABC-12345-S-BL',
+    },
+    {
+        id: 'PRD-007',
+        name: 'Laser Measure',
+        price: 149.99,
+        currency: 'USD',
+        type: 'PHYSICAL',
+        category: 'TOOLS',
+        sku: 'ABC-12345-S-BL',
+    },
+    {
+        id: 'PRD-008',
+        name: 'Safety Glasses',
+        price: 19.99,
+        currency: 'USD',
+        type: 'PHYSICAL',
+        category: 'SAFETY',
+        sku: 'ABC-12345-S-BL',
+    },
+    {
+        id: 'PRD-009',
+        name: 'Work Gloves',
+        price: 24.99,
+        currency: 'USD',
+        type: 'PHYSICAL',
+        category: 'SAFETY',
+        sku: 'ABC-12345-S-BL',
+    },
+    {
+        id: 'PRD-010',
+        name: 'Hard Hat',
+        price: 29.99,
+        currency: 'USD',
+        type: 'PHYSICAL',
+        category: 'SAFETY',
+        sku: 'ABC-12345-S-BL',
+    },
+    {
+        id: 'PRD-011',
+        name: 'Tool Belt',
+        price: 39.99,
+        currency: 'USD',
+        type: 'PHYSICAL',
+        category: 'ACCESSORIES',
+        sku: 'ABC-12345-S-BL',
+    },
+    {
+        id: 'PRD-012',
+        name: 'Tool Box',
+        price: 59.99,
+        currency: 'USD',
+        type: 'PHYSICAL',
+        category: 'ACCESSORIES',
+        sku: 'ABC-12345-S-BL',
+    },
     {
         id: 'PRD-013',
         name: 'MaxFlow Air Systems',
@@ -18,8 +90,53 @@ const PRODUCT_DATA = [
         currency: 'USD',
         type: 'VIRTUAL',
         category: 'MAINTENANCE',
+        sku: 'ABC-12345-S-BL',
     },
-    { id: 'PRD-014', name: 'RapidFix Repair', price: 19.99, currency: 'EUR', type: 'VIRTUAL', category: 'MAINTENANCE' },
+    {
+        id: 'PRD-014',
+        name: 'RapidFix Repair',
+        price: 19.99,
+        currency: 'EUR',
+        type: 'VIRTUAL',
+        category: 'MAINTENANCE',
+        sku: 'ABC-12345-S-BL',
+    },
+];
+
+const DOCUMENT_DATA: Orders.Model.Document[] = [
+    {
+        id: '56700/08/2025',
+        type: 'CORRECTION',
+        createdAt: '2025-08-08',
+        updatedAt: '2025-08-08',
+        orderId: 'ORD-001',
+        dueDate: '2025-08-08',
+        status: 'PAID',
+        toBePaid: { value: 100, currency: 'USD' },
+        total: { value: 100, currency: 'USD' },
+    },
+    {
+        id: '56699/07/2025',
+        type: 'SETTLEMENT_INVOICE',
+        createdAt: '2025-07-07',
+        updatedAt: '2025-07-07',
+        orderId: 'ORD-002',
+        dueDate: '2025-07-07',
+        status: 'PENDING',
+        toBePaid: { value: 100, currency: 'USD' },
+        total: { value: 100, currency: 'USD' },
+    },
+    {
+        id: '56698/06/2025',
+        type: 'INVOICE',
+        createdAt: '2025-06-06',
+        updatedAt: '2025-06-06',
+        orderId: 'ORD-003',
+        dueDate: '2025-06-06',
+        status: 'NOT_PAID',
+        toBePaid: { value: 100, currency: 'USD' },
+        total: { value: 100, currency: 'USD' },
+    },
 ];
 
 // Customer IDs
@@ -145,9 +262,11 @@ const generateOrderItem = (itemIndex: number): Orders.Model.OrderItem => {
             value: total,
             currency: product.currency as Orders.Model.Order['currency'],
         },
+        unit: 'PCS' as Orders.Model.OrderItem['unit'],
         currency: product.currency as Orders.Model.Order['currency'],
         product: {
             id: product.id,
+            sku: product.sku,
             name: product.name,
             description: `Description for ${product.name}`,
             shortDescription: `Short description for ${product.name}`,
@@ -179,9 +298,11 @@ const generateOrder = (orderIndex: number, getRandomDate: () => Date): Orders.Mo
     const orderDate = getRandomDate();
     const updateDate = new Date(orderDate);
     updateDate.setHours(updateDate.getHours() + getRandomInt(1, 48)); // Update 1-48 hours later
+    const paymentDueDate = new Date(orderDate);
+    paymentDueDate.setDate(paymentDueDate.getDate() + getRandomInt(1, 5)); // Add 1-5 days
 
     const customerId = CUSTOMER_IDS[getRandomInt(0, CUSTOMER_IDS.length - 1)];
-    const numItems = getRandomInt(1, 3);
+    const numItems = getRandomInt(1, 8);
     const items: Orders.Model.OrderItem[] = [];
 
     let subtotal = 0;
@@ -209,6 +330,7 @@ const generateOrder = (orderIndex: number, getRandomDate: () => Date): Orders.Mo
         customerId,
         createdAt: formatDate(orderDate),
         updatedAt: formatDate(updateDate),
+        paymentDueDate: formatDate(paymentDueDate),
         total: {
             value: total,
             currency,
@@ -233,6 +355,7 @@ const generateOrder = (orderIndex: number, getRandomDate: () => Date): Orders.Mo
         paymentStatus,
         status,
         items,
+        documents: DOCUMENT_DATA,
         shippingMethods: [
             {
                 id: shippingMethod.id,
@@ -264,6 +387,8 @@ const generateOrder = (orderIndex: number, getRandomDate: () => Date): Orders.Mo
             phone: '555-123-4567',
             email: 'john.doe@example.com',
         },
+        customerComment:
+            'Please confirm stock availability before shipping and ensure timely delivery. Include a packing list with batch numbers and certifications, if applicable. Additionally, verify that all documents are accurate and complete to avoid delays',
     };
 };
 
@@ -312,7 +437,7 @@ export const mapOrders = (options: Orders.Request.GetOrderListQuery, customerId:
 
         if (typeof aValue === 'string' && typeof bValue === 'string') {
             return isAscending ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
-        } else if (field === 'createdAt' || field === 'updatedAt') {
+        } else if (field === 'createdAt' || field === 'updatedAt' || field === 'paymentDueDate') {
             const aDate = new Date(aValue as string);
             const bDate = new Date(bValue as string);
             return isAscending ? aDate.getTime() - bDate.getTime() : bDate.getTime() - aDate.getTime();
