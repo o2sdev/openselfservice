@@ -4,6 +4,7 @@ import { CMS } from '@o2s/framework/modules';
 
 import { mapFields } from '../cms.fieldMapping.mapper';
 import { mapFilters } from '../cms.filters.mapper';
+import { mapInfoCard } from '../cms.information-card.mapper';
 import { mapPagination } from '../cms.pagination.mapper';
 import { mapTable } from '../cms.table.mapper';
 
@@ -40,12 +41,12 @@ export const mapOrderDetailsBlock = (data: GetComponentQuery): CMS.Model.OrderDe
                     payOnline: configurableTexts.actions.payOnline,
                     close: configurableTexts.actions.close,
                 },
-                totalValue: component.totalValue,
-                createdOrderAt: component.createdOrderAt,
-                paymentDueDate: component.paymentDueDate,
-                overdue: component.overdue,
-                orderStatus: component.orderStatus,
-                customerComment: component.customerComment,
+                totalValue: mapInfoCard(component.totalValue),
+                createdOrderAt: mapInfoCard(component.createdOrderAt),
+                paymentDueDate: mapInfoCard(component.paymentDueDate),
+                overdue: mapInfoCard(component.overdue),
+                orderStatus: mapInfoCard(component.orderStatus),
+                customerComment: mapInfoCard(component.customerComment),
             };
     }
 

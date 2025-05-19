@@ -54,7 +54,7 @@ export const PaymentsSummaryPure: React.FC<PaymentsSummaryPureProps> = ({ ...com
                                     variant={overdue.isOverdue ? 'destructive' : 'secondary'}
                                     size="sm"
                                     onClick={() => setOverdueTooltipOpen(true)}
-                                    className="flex items-center gap-2"
+                                    className="flex items-center gap-2 w-full"
                                 >
                                     {overdue.link.icon && <DynamicIcon name={overdue.link.icon} size={16} />}
                                     {overdue.link.label}
@@ -86,7 +86,7 @@ export const PaymentsSummaryPure: React.FC<PaymentsSummaryPureProps> = ({ ...com
                                     variant={'secondary'}
                                     size="sm"
                                     onClick={() => setToBePaidTooltipOpen(true)}
-                                    className="flex items-center gap-2"
+                                    className="flex items-center gap-2 w-full"
                                 >
                                     {toBePaid.link.icon && <DynamicIcon name={toBePaid.link.icon} size={16} />}
                                     {toBePaid.link.label}

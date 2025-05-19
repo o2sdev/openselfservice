@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { Observable, forkJoin, map, of, switchMap } from 'rxjs';
 
 import { Models } from '@o2s/framework/modules';
@@ -13,11 +14,16 @@ import { GetOrderDetailsBlockParams, GetOrderDetailsBlockQuery } from './order-d
 
 @Injectable()
 export class OrderDetailsService {
+    private readonly defaultProductUnit: string;
+
     constructor(
         private readonly cmsService: CMS.Service,
         private readonly orderService: Orders.Service,
         private readonly productService: Products.Service,
-    ) {}
+        private readonly configService: ConfigService,
+    ) {
+        this.defaultProductUnit = this.configService.get('DEFAULT_PRODUCT_UNIT') || 'PCS';
+    }
 
     getOrderDetailsBlock(
         params: GetOrderDetailsBlockParams,
@@ -101,6 +107,7 @@ export class OrderDetailsService {
                     order as Orders.Model.Order & { totalItems: number },
                     headers['x-locale'],
                     headers['x-client-timezone'] || '',
+                    this.defaultProductUnit,
                 ),
             ),
         );

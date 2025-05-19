@@ -1,7 +1,6 @@
 'use client';
 
 import { Blocks } from '@o2s/api-harmonization';
-import { VariantProps } from 'class-variance-authority';
 import { ArrowUpRight, IterationCw, Truck } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
@@ -9,7 +8,7 @@ import React, { useState, useTransition } from 'react';
 
 import { Orders } from '@o2s/framework/modules';
 
-import { Badge, badgeVariants } from '@o2s/ui/components/badge';
+import { Badge } from '@o2s/ui/components/badge';
 import { Button } from '@o2s/ui/components/button';
 import { LoadingOverlay } from '@o2s/ui/components/loading-overlay';
 import { Progress } from '@o2s/ui/components/progress';
@@ -24,6 +23,7 @@ import { cn } from '@o2s/ui/lib/utils';
 import { sdk } from '@/api/sdk';
 
 import { orderBadgeVariants } from '@/utils/mappings/order-badge';
+import { statusMap } from '@/utils/mappings/status-order';
 
 import { Link as NextLink } from '@/i18n';
 
@@ -48,40 +48,44 @@ const ProgressBar: React.FC<
         statusLadder?: string[];
     }>
 > = ({ currentStatus, statusLadder }) => {
-    const statusMap: {
-        value: number;
-        id: Orders.Model.OrderStatus;
-        badge: VariantProps<typeof badgeVariants>['variant'];
-    }[] = [
-        { value: 100, id: 'COMPLETED', badge: 'default' },
-        { value: 100, id: 'ARCHIVED', badge: 'secondary' },
-        { value: 100, id: 'CANCELLED', badge: 'destructive' },
-        { value: 100, id: 'UNKNOWN', badge: 'outline' },
-        { value: 75, id: 'PENDING', badge: 'default' },
-        { value: 75, id: 'REQUIRES_ACTION', badge: 'secondary' },
-        { value: 75, id: 'SHIPPED', badge: 'default' },
-    ];
     const value = statusMap.find((item) => item.id === currentStatus.value)?.value || 0;
     const badge = statusMap.find((item) => item.id === currentStatus.value)?.badge || 'outline';
     const previousStatuses = statusLadder?.slice(0, -1);
     const lastStatus = statusLadder?.slice(-1);
 
     return (
-        <div className="w-full flex flex-col gap-4">
-            <Progress value={value} className="w-full h-2" />
-            <div className="flex flex-row justify-between items-center gap-2">
+        <div className="w-full flex flex-row sm:flex-col gap-4">
+            <Progress value={value} orientation="vertical" className="w-2 sm:hidden" />
+            <Progress value={value} orientation="horizontal" className="h-2 hidden sm:block" />
+            <ul className="flex flex-col sm:flex-row justify-between sm:items-center gap-2">
                 {previousStatuses?.map((status) => (
-                    <Badge key={status} variant="outline" className="line-through">
-                        {status}
-                    </Badge>
+                    <li key={status}>
+                        <Badge variant="outline" className="line-through text-center">
+                            {status}
+                        </Badge>
+                    </li>
                 ))}
-                {value === 75 && <Badge variant={badge}>{currentStatus.label}</Badge>}
-                {value === 100 ? (
-                    <Badge variant={orderBadgeVariants[currentStatus.value]}>{currentStatus.label}</Badge>
-                ) : (
-                    <Badge variant="outline">{lastStatus}</Badge>
+                {value === 75 && (
+                    <li>
+                        <Badge variant={badge} className="text-center">
+                            {currentStatus.label}
+                        </Badge>
+                    </li>
                 )}
-            </div>
+                {value === 100 ? (
+                    <li>
+                        <Badge variant={orderBadgeVariants[currentStatus.value]} className="text-center">
+                            {currentStatus.label}
+                        </Badge>
+                    </li>
+                ) : (
+                    <li>
+                        <Badge variant="outline" className="text-center">
+                            {lastStatus}
+                        </Badge>
+                    </li>
+                )}
+            </ul>
         </div>
     );
 };
@@ -149,19 +153,19 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
     return (
         <div className="w-full">
             <div className="flex flex-col gap-6">
-                <div className="flex gap-4 sm:gap-16 flex-col sm:flex-row flex-wrap sm:flex-nowrap justify-between">
+                <div className="flex gap-4 lg:gap-16 flex-col lg:flex-row flex-wrap lg:flex-nowrap justify-between">
                     <div className="flex flex-col sm:flex-row gap-4 sm:items-start">
                         <Typography variant="h1" asChild>
                             <h1>{data.order.id.value}</h1>
                         </Typography>
 
-                        <div>
-                            <Badge variant={orderBadgeVariants[data.order.status.value]}>
+                        {data.order.status.value && (
+                            <Badge variant={orderBadgeVariants[data.order.status.value]} className="w-fit">
                                 {data.order.status.label}
                             </Badge>
-                        </div>
+                        )}
                     </div>
-                    <div className="flex flex-row sm:items-end">
+                    <div className="flex flex-row justify-end">
                         <div className="flex flex-col gap-4 sm:flex-row sm:items-center w-full sm:w-auto">
                             <Tooltip
                                 open={isTooltipOpen.trackOrder}
@@ -254,10 +258,12 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
                             <InfoCard
                                 title={data.order.overdue.title}
                                 icon={
-                                    <DynamicIcon
-                                        name={data.order.overdue.icon}
-                                        className={cn(data.order.overdue.isOverdue && 'text-destructive')}
-                                    />
+                                    data.order.overdue.icon && (
+                                        <DynamicIcon
+                                            name={data.order.overdue.icon}
+                                            className={cn(data.order.overdue.isOverdue && 'text-destructive')}
+                                        />
+                                    )
                                 }
                                 value={
                                     <Typography

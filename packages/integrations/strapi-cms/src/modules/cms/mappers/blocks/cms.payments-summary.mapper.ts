@@ -2,6 +2,8 @@ import { NotFoundException } from '@nestjs/common';
 
 import { CMS } from '@o2s/framework/modules';
 
+import { mapInfoCard } from '../cms.information-card.mapper';
+
 import { GetComponentQuery } from '@/generated/strapi';
 
 export const mapPaymentsSummaryBlock = (
@@ -17,20 +19,8 @@ export const mapPaymentsSummaryBlock = (
         case 'ComponentComponentsPaymentsSummary':
             return {
                 id: component.id,
-                toBePaid: {
-                    title: component.toBePaid.title,
-                    message: component.toBePaid.message,
-                    altMessage: component.toBePaid.altMessage,
-                    link: component.toBePaid.link,
-                    icon: component.toBePaid.icon,
-                },
-                overdue: {
-                    title: component.overdue.title,
-                    message: component.overdue.message,
-                    altMessage: component.overdue.altMessage,
-                    link: component.overdue.link,
-                    icon: component.overdue.icon,
-                },
+                toBePaid: mapInfoCard(component.toBePaid),
+                overdue: mapInfoCard(component.overdue),
             };
     }
 

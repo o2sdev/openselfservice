@@ -14,3 +14,4 @@ feat: orderDetails page implemented
 - used InfoCard in PaymentsSummaryBlock, OrdersSummary and OrderDetails, 
 - fixed ordersSummaryBlock integration with strapi,
 - used DynamicIcon in CategoryBlock,
+- added orientation prop for Progress component

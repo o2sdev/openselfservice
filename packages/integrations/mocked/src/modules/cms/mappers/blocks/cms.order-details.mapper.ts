@@ -32,6 +32,7 @@ const MOCK_ORDER_DETAILS_BLOCK_EN: CMS.Model.OrderDetailsBlock.OrderDetailsBlock
         icon: 'Text',
         link: {
             label: 'See full',
+            url: '',
         },
     },
     fieldMapping: {
@@ -153,6 +154,7 @@ const MOCK_ORDER_DETAILS_BLOCK_DE: CMS.Model.OrderDetailsBlock.OrderDetailsBlock
         link: {
             label: 'Sehen',
             icon: 'ArrowRight',
+            url: '',
         },
     },
     fieldMapping: {
@@ -275,6 +277,7 @@ const MOCK_ORDER_DETAILS_BLOCK_PL: CMS.Model.OrderDetailsBlock.OrderDetailsBlock
         link: {
             label: 'Zobacz',
             icon: 'ArrowRight',
+            url: '',
         },
     },
     fieldMapping: {

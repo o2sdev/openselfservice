@@ -1,7 +1,6 @@
 import { useLocale } from 'next-intl';
 import React, { Suspense } from 'react';
 
-import { Container } from '@/components/Container/Container';
 import { Loading } from '@/components/Loading/Loading';
 
 import { OrderDetails } from './OrderDetails.server';
@@ -25,9 +24,10 @@ export const OrderDetailsRenderer: React.FC<OrderDetailsRendererProps> = ({ slug
             fallback={
                 <>
                     <Loading bars={1} />
-                    <Container variant="narrow">
+                    <div className="w-full flex flex-col md:flex-row gap-6">
                         <Loading bars={8} />
-                    </Container>
+                        <Loading bars={8} />
+                    </div>
                     <Loading bars={8} />
                 </>
             }

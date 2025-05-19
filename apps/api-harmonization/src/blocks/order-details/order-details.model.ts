@@ -37,48 +37,48 @@ export class Order {
     };
     total!: {
         title: string;
-        icon: string;
+        icon?: string;
         label: string;
-        description: string;
+        description?: string;
         value: Orders.Model.Order['total'];
     };
     createdAt!: {
         title: string;
-        icon: string;
+        icon?: string;
         label: string;
-        description: string;
+        description?: string;
         value: Orders.Model.Order['createdAt'];
     };
     paymentDueDate!: {
         title: string;
-        icon: string;
+        icon?: string;
         label: string;
         description?: string;
         value: Orders.Model.Order['paymentDueDate'];
     };
     overdue!: {
         title: string;
-        icon: string;
+        icon?: string;
         label: string;
-        description: string;
+        description?: string;
         value: Models.Price.Price;
         isOverdue: boolean;
     };
     status!: {
         title: string;
-        icon: string;
+        icon?: string;
         label: string;
         value: Orders.Model.Order['status'];
         statusLadder?: string[];
     };
     customerComment!: {
         title: string;
-        icon: string;
+        icon?: string;
         value: Orders.Model.Order['customerComment'];
         link: {
-            label: string;
-            icon: string;
-            url: string;
+            label?: string;
+            icon?: string;
+            url?: string;
         };
     };
 }

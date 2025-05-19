@@ -9,6 +9,7 @@ const MOCK_PAYMENTS_SUMMARY_BLOCK_EN: CMS.Model.PaymentsSummaryBlock.PaymentsSum
         link: {
             label: 'Pay online',
             icon: 'ArrowUpRight',
+            url: '',
         },
         icon: 'Info',
     },
@@ -19,6 +20,7 @@ const MOCK_PAYMENTS_SUMMARY_BLOCK_EN: CMS.Model.PaymentsSummaryBlock.PaymentsSum
         link: {
             label: 'Pay online',
             icon: 'ArrowUpRight',
+            url: '',
         },
         icon: 'CreditCard',
     },
@@ -33,6 +35,7 @@ const MOCK_PAYMENTS_SUMMARY_BLOCK_PL: CMS.Model.PaymentsSummaryBlock.PaymentsSum
         link: {
             label: 'Zapłać online',
             icon: 'ArrowUpRight',
+            url: '',
         },
         icon: 'Info',
     },
@@ -43,6 +46,7 @@ const MOCK_PAYMENTS_SUMMARY_BLOCK_PL: CMS.Model.PaymentsSummaryBlock.PaymentsSum
         link: {
             label: 'Zapłać online',
             icon: 'ArrowUpRight',
+            url: '',
         },
         icon: 'Info',
     },
@@ -57,6 +61,7 @@ const MOCK_PAYMENTS_SUMMARY_BLOCK_DE: CMS.Model.PaymentsSummaryBlock.PaymentsSum
         link: {
             label: 'Online bezahlen',
             icon: 'ArrowUpRight',
+            url: '',
         },
         icon: 'Info',
     },
@@ -67,6 +72,7 @@ const MOCK_PAYMENTS_SUMMARY_BLOCK_DE: CMS.Model.PaymentsSummaryBlock.PaymentsSum
         link: {
             label: 'Online bezahlen',
             icon: 'ArrowUpRight',
+            url: '',
         },
         icon: 'CreditCard',
     },
