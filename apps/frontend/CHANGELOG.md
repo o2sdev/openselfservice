@@ -1,5 +1,17 @@
 # @o2s/frontend
 
+## 0.23.0
+
+### Minor Changes
+
+- 2e81dca: added possibility to defined unprotected pages
+
+### Patch Changes
+
+- Updated dependencies [2e81dca]
+    - @o2s/api-harmonization@0.22.0
+    - @o2s/framework@0.23.0
+
 ## 0.22.1
 
 ### Patch Changes

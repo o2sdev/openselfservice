@@ -8,7 +8,7 @@ import { NotificationDetails } from './NotificationDetails.server';
 export interface NotificationDetailsRendererProps {
     slug: string[];
     id: string;
-    accessToken: string;
+    accessToken?: string;
 }
 
 export const NotificationDetailsRenderer: React.FC<NotificationDetailsRendererProps> = ({ slug, id, accessToken }) => {

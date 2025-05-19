@@ -7,7 +7,7 @@ import { PaymentsHistory } from './PaymentsHistory.server';
 
 export interface PaymentsHistoryRendererProps {
     id: string;
-    accessToken: string;
+    accessToken?: string;
 }
 
 export const PaymentsHistoryRenderer: React.FC<PaymentsHistoryRendererProps> = ({ id, accessToken }) => {

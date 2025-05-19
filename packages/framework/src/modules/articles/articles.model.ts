@@ -40,6 +40,7 @@ export class Article {
     };
     author?: Author;
     sections!: ArticleSection[];
+    isProtected!: boolean;
 }
 
 export type ArticleSection = ArticleSectionText | ArticleSectionImage;

@@ -7,7 +7,7 @@ import { NotificationListServer } from './NotificationList.server';
 
 export interface NotificationListRendererProps {
     id: string;
-    accessToken: string;
+    accessToken?: string;
 }
 
 export const NotificationListRenderer: React.FC<NotificationListRendererProps> = ({ id, accessToken }) => {

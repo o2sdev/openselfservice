@@ -17,6 +17,7 @@ export const PAGE_NOTIFICATION_DETAILS_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+    isProtected: true,
     hasOwnTitle: true,
     parent: {
         slug: '/notifications',
@@ -66,6 +67,7 @@ export const PAGE_NOTIFICATION_DETAILS_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+    isProtected: true,
     hasOwnTitle: true,
     parent: {
         slug: '/benachrichtigungen',
@@ -115,6 +117,7 @@ export const PAGE_NOTIFICATION_DETAILS_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+    isProtected: true,
     hasOwnTitle: true,
     parent: {
         slug: '/powiadomienia',

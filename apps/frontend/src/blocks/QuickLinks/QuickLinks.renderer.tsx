@@ -8,7 +8,7 @@ import { QuickLinks } from './QuickLinks.server';
 export interface QuickLinksRendererProps {
     slug: string[];
     id: string;
-    accessToken: string;
+    accessToken?: string;
 }
 
 export const QuickLinksRenderer: React.FC<QuickLinksRendererProps> = ({ id, accessToken }) => {

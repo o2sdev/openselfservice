@@ -7,7 +7,7 @@ import { ServiceList } from './ServiceList.server';
 
 export interface ServiceListRendererProps {
     id: string;
-    accessToken: string;
+    accessToken?: string;
 }
 
 export const ServiceListRenderer: React.FC<ServiceListRendererProps> = ({ id, accessToken }) => {

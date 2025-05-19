@@ -8,7 +8,7 @@ import { ArticleList } from './ArticleList.server';
 export interface ArticleListRendererProps {
     slug: string[];
     id: string;
-    accessToken: string;
+    accessToken?: string;
 }
 
 export const ArticleListRenderer: React.FC<ArticleListRendererProps> = ({ id, accessToken }) => {

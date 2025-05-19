@@ -17,6 +17,7 @@ export const PAGE_ORDER_DETAILS_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+    isProtected: true,
     hasOwnTitle: true,
     parent: {
         slug: '/orders',
@@ -62,6 +63,7 @@ export const PAGE_ORDER_DETAILS_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+    isProtected: true,
     hasOwnTitle: true,
     parent: {
         slug: '/bestellungen',
@@ -107,6 +109,7 @@ export const PAGE_ORDER_DETAILS_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+    isProtected: true,
     hasOwnTitle: true,
     parent: {
         slug: '/zamowienia',

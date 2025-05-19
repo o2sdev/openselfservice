@@ -8,7 +8,7 @@ import { CategoryList } from './CategoryList.server';
 export interface CategoryListRendererProps {
     slug: string[];
     id: string;
-    accessToken: string;
+    accessToken?: string;
 }
 
 export const CategoryListRenderer: React.FC<CategoryListRendererProps> = ({ id, accessToken }) => {

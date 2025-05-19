@@ -12,6 +12,7 @@ export const mapPage = (data: PageFragment): CMS.Model.Page.Page => {
     return {
         id: data.documentId,
         slug: data.slug,
+        isProtected: data.protected,
         locale: data.locale!,
         template: template,
         updatedAt: data.updatedAt,
@@ -59,6 +60,7 @@ export const mapAlternativePages = (data: PageFragment): CMS.Model.Page.Page => 
     return {
         id: data.documentId,
         slug: data.slug,
+        isProtected: data.protected,
         locale: data.locale!,
         template: template,
         updatedAt: data.updatedAt,

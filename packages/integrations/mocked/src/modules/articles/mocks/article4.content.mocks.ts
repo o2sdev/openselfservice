@@ -28,7 +28,7 @@ Once your account is created, you can log in anytime:
 3. Click "Sign In"
 4. You'll be directed to your personalized dashboard
 
-![PowerPro Dashboard](https://picsum.photos/800/400 "PowerPro Dashboard")
+![PowerPro Dashboard](https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-login.jpg "PowerPro Dashboard")
 
 ## Registering Your Tools
 
@@ -112,7 +112,7 @@ If your tool needs repair, our online system simplifies the warranty claim proce
 
 ### Tracking Repair Status
 
-![Repair Tracking Interface](https://picsum.photos/800/500 "Repair Tracking Interface")
+![Repair Tracking Interface](https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-tracking.jpg "Repair Tracking Interface")
 
 Our repair tracking system provides real-time updates on your tool's repair status:
 
@@ -164,7 +164,7 @@ Access your tool management system on the go with our mobile application.
 4. Chat with customer support directly
 5. Locate nearby service centers with GPS integration
 
-![Mobile App Interface](https://picsum.photos/600/1200 "PowerPro Mobile App")
+![Mobile App Interface](https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-app.jpg "PowerPro Mobile App")
 
 ## Conclusion
 
@@ -200,7 +200,7 @@ Sobald Ihr Konto erstellt ist, können Sie sich jederzeit anmelden:
 3. Klicken Sie auf "Anmelden"
 4. Sie werden zu Ihrem personalisierten Dashboard weitergeleitet
 
-![PowerPro Dashboard](https://picsum.photos/800/400 "PowerPro Dashboard")
+![PowerPro Dashboard](https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-login.jpg "PowerPro Dashboard")
 
 ## Registrieren Ihrer Werkzeuge
 
@@ -284,7 +284,7 @@ Wenn Ihr Werkzeug repariert werden muss, vereinfacht unser Online-System den Gar
 
 ### Verfolgung des Reparaturstatus
 
-![Reparaturverfolgungsschnittstelle](https://picsum.photos/800/500 "Reparaturverfolgungsschnittstelle")
+![Reparaturverfolgungsschnittstelle](https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-tracking.jpg "Reparaturverfolgungsschnittstelle")
 
 Unser Reparaturverfolgungssystem bietet Echtzeit-Updates zum Reparaturstatus Ihres Werkzeugs:
 
@@ -336,7 +336,7 @@ Greifen Sie unterwegs auf Ihr Werkzeugverwaltungssystem mit unserer mobilen Anwe
 4. Chatten Sie direkt mit dem Kundensupport
 5. Finden Sie nahegelegene Servicecenter mit GPS-Integration
 
-![Mobile App-Oberfläche](https://picsum.photos/600/1200 "PowerPro Mobile App")
+![Mobile App-Oberfläche](https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-app.jpg "PowerPro Mobile App")
 
 ## Fazit
 
@@ -372,7 +372,7 @@ Po utworzeniu konta możesz logować się w dowolnym momencie:
 3. Kliknij "Zaloguj się"
 4. Zostaniesz przekierowany do spersonalizowanego panelu
 
-![Panel PowerPro](https://picsum.photos/800/400 "Panel PowerPro")
+![Panel PowerPro](https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-login.jpg "Panel PowerPro")
 
 ## Rejestracja narzędzi
 
@@ -456,7 +456,7 @@ Jeśli Twoje narzędzie wymaga naprawy, nasz system online upraszcza proces rosz
 
 ### Śledzenie statusu naprawy
 
-![Interfejs śledzenia naprawy](https://picsum.photos/800/500 "Interfejs śledzenia naprawy")
+![Interfejs śledzenia naprawy](https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-tracking.jpg "Interfejs śledzenia naprawy")
 
 Nasz system śledzenia napraw zapewnia aktualizacje statusu naprawy Twojego narzędzia w czasie rzeczywistym:
 
@@ -508,7 +508,7 @@ Uzyskaj dostęp do systemu zarządzania narzędziami w podróży dzięki naszej 
 4. Czatuj bezpośrednio z obsługą klienta
 5. Lokalizuj pobliskie centra serwisowe dzięki integracji GPS
 
-![Interfejs aplikacji mobilnej](https://picsum.photos/600/1200 "Aplikacja mobilna PowerPro")
+![Interfejs aplikacji mobilnej](https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-app.jpg "Aplikacja mobilna PowerPro")
 
 ## Podsumowanie
 
@@ -520,15 +520,16 @@ export const MOCK_ARTICLE4_EN: Articles.Model.Article[] = [
     {
         id: 'art-001',
         slug: '/help-and-support/warranty-and-repair/managing-your-powerpro-tools-online',
+        isProtected: false,
         createdAt: '2023-05-12T08:30:00Z',
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Managing Your PowerPro Tools Online',
         lead: 'Learn how to efficiently manage your PowerPro tools through our self-service portal available 24/7.',
         tags: ['tag1', 'tag2'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-thumb.jpg',
             width: 640,
-            height: 656,
+            height: 427,
             alt: '',
         },
         thumbnail: {
@@ -563,7 +564,7 @@ export const MOCK_ARTICLE4_EN: Articles.Model.Article[] = [
                 updatedAt: '2023-06-15T14:25:00Z',
                 __typename: 'ArticleSectionImage',
                 image: {
-                    url: 'https://picsum.photos/400/400',
+                    url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-dash.jpg',
                     alt: 'PowerPro dashboard view',
                 },
                 caption:
@@ -577,18 +578,6 @@ export const MOCK_ARTICLE4_EN: Articles.Model.Article[] = [
                 title: 'Getting Started',
                 content: markdownContentEN,
             },
-            {
-                id: 'sect-001-4',
-                createdAt: '2023-05-12T09:15:00Z',
-                updatedAt: '2023-06-15T14:25:00Z',
-                __typename: 'ArticleSectionImage',
-                image: {
-                    url: 'https://picsum.photos/1200/800',
-                    alt: 'PowerPro dashboard view',
-                },
-                caption:
-                    'The PowerPro tool management dashboard provides a comprehensive overview of your registered tools.',
-            },
         ],
     },
 ];
@@ -597,15 +586,16 @@ export const MOCK_ARTICLE4_DE: Articles.Model.Article[] = [
     {
         id: 'art-001',
         slug: '/hilfe-und-support/garantie-und-reparatur/verwalten-ihrer-powerpro-werkzeuge-online',
+        isProtected: false,
         createdAt: '2023-05-12T08:30:00Z',
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Verwalten Ihrer PowerPro-Werkzeuge online',
         lead: 'Erfahren Sie, wie Sie Ihre PowerPro-Werkzeuge effizient über unser rund um die Uhr verfügbares Selbstbedienungsportal verwalten können.',
         tags: ['tag1', 'tag2'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-thumb.jpg',
             width: 640,
-            height: 656,
+            height: 427,
             alt: '',
         },
         thumbnail: {
@@ -640,7 +630,7 @@ export const MOCK_ARTICLE4_DE: Articles.Model.Article[] = [
                 updatedAt: '2023-06-15T14:25:00Z',
                 __typename: 'ArticleSectionImage',
                 image: {
-                    url: 'https://picsum.photos/1200/800',
+                    url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-dash.jpg',
                     alt: 'PowerPro-Dashboard-Ansicht',
                 },
                 caption:
@@ -662,15 +652,16 @@ export const MOCK_ARTICLE4_PL: Articles.Model.Article[] = [
     {
         id: 'art-001',
         slug: '/pomoc-i-wsparcie/gwarancja-i-naprawa/zarzadzanie-narzedziami-powerpro-online',
+        isProtected: false,
         createdAt: '2023-05-12T08:30:00Z',
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Zarządzanie narzędziami PowerPro online',
         lead: 'Dowiedz się, jak efektywnie zarządzać narzędziami PowerPro za pomocą naszego portalu samoobsługowego dostępnego 24/7.',
         tags: ['tag1', 'tag2'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-thumb.jpg',
             width: 640,
-            height: 656,
+            height: 427,
             alt: '',
         },
         thumbnail: {
@@ -705,7 +696,7 @@ export const MOCK_ARTICLE4_PL: Articles.Model.Article[] = [
                 updatedAt: '2023-06-15T14:25:00Z',
                 __typename: 'ArticleSectionImage',
                 image: {
-                    url: 'https://picsum.photos/1200/800',
+                    url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-dash.jpg',
                     alt: 'Widok panelu PowerPro',
                 },
                 caption:

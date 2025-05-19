@@ -15,7 +15,7 @@ export class QuickLinksController {
     constructor(protected readonly service: QuickLinksService) {}
 
     @Get()
-    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
+    @Auth.Decorators.Roles({ roles: [] })
     getQuickLinksBlock(@Headers() headers: AppHeaders, @Query() query: GetQuickLinksBlockQuery) {
         return this.service.getQuickLinksBlock(query, headers);
     }

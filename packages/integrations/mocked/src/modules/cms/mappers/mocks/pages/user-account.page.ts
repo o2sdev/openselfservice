@@ -17,6 +17,7 @@ export const PAGE_USER_ACCOUNT_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+    isProtected: true,
     hasOwnTitle: true,
     parent: {
         slug: '/',
@@ -56,6 +57,7 @@ export const PAGE_USER_ACCOUNT_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+    isProtected: true,
     hasOwnTitle: true,
     parent: {
         slug: '/',
@@ -95,6 +97,7 @@ export const PAGE_USER_ACCOUNT_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+    isProtected: true,
     hasOwnTitle: true,
     parent: {
         slug: '/',

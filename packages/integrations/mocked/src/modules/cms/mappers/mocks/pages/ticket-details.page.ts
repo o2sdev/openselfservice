@@ -17,6 +17,7 @@ export const PAGE_TICKET_DETAILS_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+    isProtected: true,
     hasOwnTitle: true,
     parent: {
         slug: '/cases',
@@ -66,6 +67,7 @@ export const PAGE_TICKET_DETAILS_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+    isProtected: true,
     hasOwnTitle: true,
     parent: {
         slug: '/faelle',
@@ -115,6 +117,7 @@ export const PAGE_TICKET_DETAILS_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
+    isProtected: true,
     hasOwnTitle: true,
     parent: {
         slug: '/zgloszenia',

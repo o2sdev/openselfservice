@@ -11,7 +11,7 @@ export const paymentsHistory = (sdk: Sdk) => ({
         getPaymentsHistory: (
             query: Blocks.PaymentsHistory.Request.GetPaymentsHistoryBlockQuery,
             headers: Headers.AppHeaders,
-            authorization: string,
+            authorization?: string,
         ): Promise<Blocks.PaymentsHistory.Model.PaymentsHistoryBlock> =>
             sdk.makeRequest({
                 method: 'get',
@@ -19,7 +19,11 @@ export const paymentsHistory = (sdk: Sdk) => ({
                 headers: {
                     ...getApiHeaders(),
                     ...headers,
-                    Authorization: `Bearer ${authorization}`,
+                    ...(authorization
+                        ? {
+                              Authorization: `Bearer ${authorization}`,
+                          }
+                        : {}),
                 },
                 params: query,
             }),

@@ -47,6 +47,7 @@ export class NotFound {
 export class Metadata {
     seo!: Models.SEO.Page;
     locales!: string[];
+    isProtected!: boolean;
 }
 
 export class Breadcrumb {

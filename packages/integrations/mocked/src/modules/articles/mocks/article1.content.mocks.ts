@@ -4,19 +4,20 @@ export const MOCK_ARTICLE1_EN: Articles.Model.Article[] = [
     {
         id: 'art-002',
         slug: '/help-and-support/maintenance/powerpro-tool-maintenance-guide',
+        isProtected: false,
         createdAt: '2023-06-10T10:15:00Z',
         updatedAt: '2023-07-20T16:30:00Z',
         title: 'PowerPro Tool Maintenance Guide',
         lead: 'Learn how to properly maintain your PowerPro tools to ensure optimal performance and longevity.',
         tags: ['maintenance', 'tools', 'guide'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-maintenance-thumb.jpg',
             width: 640,
-            height: 656,
+            height: 427,
             alt: 'Tool maintenance',
         },
         thumbnail: {
-            url: 'https://example.com/images/tool-maintenance-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-maintenance-thumb.jpg',
             alt: 'Tool maintenance thumbnail',
         },
         category: {
@@ -47,7 +48,7 @@ export const MOCK_ARTICLE1_EN: Articles.Model.Article[] = [
                 updatedAt: '2023-07-20T16:30:00Z',
                 __typename: 'ArticleSectionImage',
                 image: {
-                    url: 'https://picsum.photos/800/500',
+                    url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-maintanance.jpg',
                     alt: 'Tool maintenance kit',
                 },
                 caption:
@@ -87,7 +88,7 @@ How you store your tools significantly impacts their longevity:
 3. Keep batteries separate from tools during long-term storage
 4. Hang tools when appropriate to prevent damage
 
-![Proper Tool Storage](https://picsum.photos/800/400 "Proper Tool Storage Example")
+![Proper Tool Storage](https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-maintenance-storage.jpg "Proper Tool Storage Example")
 
 ## Power Drill Maintenance
 
@@ -158,8 +159,6 @@ These tools generate significant dust and require special attention.
 
 ### Dust Collection System
 
-![Dust Collection System](https://picsum.photos/800/500 "Dust Collection System")
-
 Maintaining the dust collection system is crucial:
 
 1. Empty dust collection bags or containers after each use
@@ -219,8 +218,6 @@ Some maintenance tasks are best left to professionals:
 * **Precision Calibration** - For tools requiring exact measurements
 * **Electrical Safety Testing** - Especially for older tools
 
-![Professional Maintenance](https://picsum.photos/600/1200 "Professional Maintenance Service")
-
 ## Conclusion
 
 Consistent maintenance of your PowerPro tools is an investment that pays dividends in performance and longevity. By following this guide, you'll ensure your tools are always ready when you need them and operating at peak efficiency.
@@ -235,19 +232,20 @@ export const MOCK_ARTICLE1_DE: Articles.Model.Article[] = [
     {
         id: 'art-002',
         slug: '/hilfe-und-support/wartung/powerpro-werkzeug-wartungsanleitung',
+        isProtected: false,
         createdAt: '2023-06-10T10:15:00Z',
         updatedAt: '2023-07-20T16:30:00Z',
         title: 'PowerPro-Werkzeug-Wartungsanleitung',
         lead: 'Erfahren Sie, wie Sie Ihre PowerPro-Werkzeuge richtig warten, um optimale Leistung und Langlebigkeit zu gewährleisten.',
         tags: ['wartung', 'werkzeuge', 'anleitung'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-thumb-maintenance.jpg',
             width: 640,
-            height: 656,
+            height: 427,
             alt: 'Werkzeugwartung',
         },
         thumbnail: {
-            url: 'https://example.com/images/tool-maintenance-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-thumb-accessories.jpg',
             alt: 'Werkzeugwartung-Thumbnail',
         },
         category: {
@@ -278,7 +276,7 @@ export const MOCK_ARTICLE1_DE: Articles.Model.Article[] = [
                 updatedAt: '2023-07-20T16:30:00Z',
                 __typename: 'ArticleSectionImage',
                 image: {
-                    url: 'https://picsum.photos/800/500',
+                    url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-maintanance.jpg',
                     alt: 'Werkzeugwartungsset',
                 },
                 caption:
@@ -318,7 +316,7 @@ Wie Sie Ihre Werkzeuge lagern, beeinflusst maßgeblich ihre Langlebigkeit:
 3. Bewahren Sie Batterien bei längerer Lagerung getrennt von den Werkzeugen auf
 4. Hängen Sie Werkzeuge auf, wenn es angebracht ist, um Beschädigungen zu vermeiden
 
-![Richtige Werkzeuglagerung](https://picsum.photos/800/400 "Beispiel für richtige Werkzeuglagerung")
+![Richtige Werkzeuglagerung](https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-maintenance-storage.jpg "Beispiel für richtige Werkzeuglagerung")
 
 ## Wartung von Elektrobohrern
 
@@ -389,8 +387,6 @@ Diese Werkzeuge erzeugen erheblichen Staub und erfordern besondere Aufmerksamkei
 
 ### Staubsammelsystem
 
-![Staubsammelsystem](https://picsum.photos/800/500 "Staubsammelsystem")
-
 Die Wartung des Staubsammelsystems ist entscheidend:
 
 1. Leeren Sie Staubsammelbeutel oder -behälter nach jedem Gebrauch
@@ -450,8 +446,6 @@ Einige Wartungsaufgaben sollten Fachleuten überlassen werden:
 * **Präzisionskalibrierung** - Für Werkzeuge, die exakte Messungen erfordern
 * **Elektrische Sicherheitsprüfung** - Besonders bei älteren Werkzeugen
 
-![Professionelle Wartung](https://picsum.photos/600/1200 "Professioneller Wartungsservice")
-
 ## Fazit
 
 Konsequente Wartung Ihrer PowerPro-Werkzeuge ist eine Investition, die sich in Leistung und Langlebigkeit auszahlt. Wenn Sie diesem Leitfaden folgen, stellen Sie sicher, dass Ihre Werkzeuge immer einsatzbereit sind und mit maximaler Effizienz arbeiten.
@@ -466,19 +460,20 @@ export const MOCK_ARTICLE1_PL: Articles.Model.Article[] = [
     {
         id: 'art-002',
         slug: '/pomoc-i-wsparcie/konserwacja/przewodnik-konserwacji-narzedzi-powerpro',
+        isProtected: false,
         createdAt: '2023-06-10T10:15:00Z',
         updatedAt: '2023-07-20T16:30:00Z',
         title: 'Przewodnik konserwacji narzędzi PowerPro',
         lead: 'Dowiedz się, jak prawidłowo konserwować narzędzia PowerPro, aby zapewnić optymalną wydajność i trwałość.',
         tags: ['konserwacja', 'narzędzia', 'przewodnik'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-thumb-maintenance.jpg',
             width: 640,
-            height: 656,
+            height: 427,
             alt: 'Konserwacja narzędzi',
         },
         thumbnail: {
-            url: 'https://example.com/images/tool-maintenance-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-thumb-accessories.jpg',
             alt: 'Miniatura konserwacji narzędzi',
         },
         category: {
@@ -509,7 +504,7 @@ export const MOCK_ARTICLE1_PL: Articles.Model.Article[] = [
                 updatedAt: '2023-07-20T16:30:00Z',
                 __typename: 'ArticleSectionImage',
                 image: {
-                    url: 'https://picsum.photos/800/500',
+                    url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-maintanance.jpg',
                     alt: 'Zestaw do konserwacji narzędzi',
                 },
                 caption:
@@ -549,7 +544,7 @@ Sposób przechowywania narzędzi znacząco wpływa na ich żywotność:
 3. Przechowuj baterie oddzielnie od narzędzi podczas długotrwałego przechowywania
 4. Wieszaj narzędzia, gdy jest to wskazane, aby zapobiec uszkodzeniom
 
-![Prawidłowe przechowywanie narzędzi](https://picsum.photos/800/400 "Przykład prawidłowego przechowywania narzędzi")
+![Prawidłowe przechowywanie narzędzi](https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-maintenance-storage.jpg "Przykład prawidłowego przechowywania narzędzi")
 
 ## Konserwacja wiertarek elektrycznych
 
@@ -620,8 +615,6 @@ Te narzędzia generują znaczną ilość pyłu i wymagają szczególnej uwagi.
 
 ### System zbierania pyłu
 
-![System zbierania pyłu](https://picsum.photos/800/500 "System zbierania pyłu")
-
 Konserwacja systemu zbierania pyłu jest kluczowa:
 
 1. Opróżniaj worki lub pojemniki na pył po każdym użyciu
@@ -680,8 +673,6 @@ Niektóre zadania konserwacyjne najlepiej pozostawić profesjonalistom:
 * **Regeneracja silnika** - Gdy wydajność znacznie spada
 * **Precyzyjna kalibracja** - Dla narzędzi wymagających dokładnych pomiarów
 * **Testy bezpieczeństwa elektrycznego** - Szczególnie w przypadku starszych narzędzi
-
-![Profesjonalna konserwacja](https://picsum.photos/600/1200 "Profesjonalna usługa konserwacyjna")
 
 ## Podsumowanie
 
