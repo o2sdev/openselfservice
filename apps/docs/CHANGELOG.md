@@ -1,5 +1,11 @@
 # @o2s/docs
 
+## 0.12.0
+
+### Minor Changes
+
+- 86c8732: Added detailed instructions for using changeset to the CONTRIBUTING.md file. This will help contributors understand when and how to create changesets before submitting their pull requests, improving the project's release management process and ensuring all changes are properly documented.
+
 ## 0.11.1
 
 ### Patch Changes

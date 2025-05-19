@@ -1,5 +1,16 @@
 # @o2s/integrations.algolia
 
+## 0.5.0
+
+### Minor Changes
+
+- 2e81dca: added possibility to defined unprotected pages
+
+### Patch Changes
+
+- Updated dependencies [2e81dca]
+    - @o2s/framework@0.23.0
+
 ## 0.4.0
 
 ### Minor Changes

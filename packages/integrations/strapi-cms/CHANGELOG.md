@@ -1,5 +1,16 @@
 # @o2s/integrations.strapi-cms
 
+## 1.3.0
+
+### Minor Changes
+
+- 2e81dca: added possibility to defined unprotected pages
+
+### Patch Changes
+
+- Updated dependencies [2e81dca]
+    - @o2s/framework@0.23.0
+
 ## 1.2.1
 
 ### Patch Changes

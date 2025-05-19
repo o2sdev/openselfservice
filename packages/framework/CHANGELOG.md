@@ -1,5 +1,11 @@
 # @o2s/framework
 
+## 0.23.0
+
+### Minor Changes
+
+- 2e81dca: added possibility to defined unprotected pages
+
 ## 0.22.1
 
 ### Patch Changes
