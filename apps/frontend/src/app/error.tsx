@@ -1,8 +1,8 @@
 'use client';
 
-import { useLocale } from 'next-intl';
 import { NextIntlClientProvider } from 'next-intl';
 import { Inter } from 'next/font/google';
+import { useParams } from 'next/navigation';
 import React from 'react';
 
 import { ErrorPage } from '@/components/ErrorPage/ErrorPage';
@@ -41,7 +41,8 @@ const CONTENT: {
 };
 
 export default function Error() {
-    const locale = useLocale();
+    const params = useParams();
+    const locale = (params?.locale as string) || 'en';
 
     const errorData = CONTENT[locale]!;
 
