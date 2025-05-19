@@ -15,8 +15,7 @@ import { LoadingOverlay } from '@o2s/ui/components/loading-overlay';
 import { Progress } from '@o2s/ui/components/progress';
 import { Separator } from '@o2s/ui/components/separator';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@o2s/ui/components/sheet';
-import { TableBody, TableCell, TableHead, TableHeader, TableRow } from '@o2s/ui/components/table';
-import { Table } from '@o2s/ui/components/table';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@o2s/ui/components/table';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@o2s/ui/components/tooltip';
 import { Typography } from '@o2s/ui/components/typography';
 import { cn } from '@o2s/ui/lib/utils';
@@ -29,7 +28,6 @@ import { Link as NextLink } from '@/i18n';
 
 import { InfoCard } from '@/components/Cards/InfoCard/InfoCard';
 import { DynamicIcon } from '@/components/DynamicIcon/DynamicIcon';
-import { InitialFilters } from '@/components/Filters/FiltersContext';
 import { FiltersSection } from '@/components/Filters/FiltersSection';
 import { NoResults } from '@/components/NoResults/NoResults';
 import { Pagination } from '@/components/Pagination/Pagination';
@@ -327,7 +325,7 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
                     <div className="flex flex-col gap-6">
                         <FiltersSection
                             title={data.productList.title}
-                            initialFilters={initialFilters as unknown as InitialFilters}
+                            initialFilters={initialFilters}
                             filters={data.productList.filters}
                             initialValues={filters}
                             onSubmit={handleFilter}

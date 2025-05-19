@@ -12,7 +12,6 @@ import { statusBadgeVariants } from '@/utils/mappings/services-badge';
 
 import { ProductCard } from '@/components/Cards/ProductCard/ProductCard';
 import { Badge } from '@/components/Cards/ProductCard/ProductCard.types';
-import { InitialFilters } from '@/components/Filters/FiltersContext';
 import { FiltersSection } from '@/components/Filters/FiltersSection';
 import { NoResults } from '@/components/NoResults/NoResults';
 import { Pagination } from '@/components/Pagination/Pagination';
@@ -54,7 +53,7 @@ export const ServiceListPure: React.FC<ServiceListPureProps> = ({ locale, access
                 <div className="flex flex-col gap-6">
                     <FiltersSection
                         title={data.subtitle}
-                        initialFilters={initialFilters as unknown as InitialFilters}
+                        initialFilters={initialFilters}
                         filters={data.filters}
                         initialValues={filters}
                         onSubmit={handleFilter}
