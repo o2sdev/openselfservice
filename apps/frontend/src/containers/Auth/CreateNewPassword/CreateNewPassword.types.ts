@@ -21,7 +21,7 @@ export interface CreateNewPasswordFormProps {
     labels: {
         title: string;
         subtitle?: string;
-        submitButton: string;
+        setNewPassword: string;
         password: CreateNewPasswordInputLabels;
         confirmPassword: CreateNewPasswordInputLabels;
         creatingPasswordError: string;

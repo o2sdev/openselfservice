@@ -108,7 +108,7 @@ export const CreateNewPasswordForm: React.FC<Readonly<CreateNewPasswordFormProps
                             </div>
 
                             <Button type="submit" disabled={isSubmitting}>
-                                {labels.submitButton}
+                                {labels.setNewPassword}
                             </Button>
                         </div>
                     </Form>

@@ -28,6 +28,13 @@ export class GetCmsAlternativePagesParams {
 export class GetCmsLoginPageParams {
     locale!: string;
 }
+export class GetCmsResetPasswordPageParams {
+    locale!: string;
+}
+
+export class GetCmsCreateNewPasswordPageParams {
+    locale!: string;
+}
 
 export class GetCmsNotFoundPageParams {
     locale!: string;

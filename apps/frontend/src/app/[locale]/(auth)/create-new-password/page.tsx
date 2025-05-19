@@ -11,7 +11,7 @@ import { generateSeo } from '@/utils/seo';
 import { routing } from '@/i18n/routing';
 
 import { AuthLayout } from '@/containers/Auth/AuthLayout/AuthLayout';
-import { FormValues, ResetPasswordForm } from '@/containers/Auth/ResetPassword';
+import { CreateNewPasswordForm, FormValues } from '@/containers/Auth/CreateNewPassword';
 
 interface Props {
     params: Promise<{
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { locale } = await params;
     const slug = routing.pathnames['/login']?.[locale] || '/';
 
-    const { seo } = await sdk.modules.getResetPasswordPage({ 'x-locale': locale });
+    const { seo } = await sdk.modules.getCreateNewPasswordPage({ 'x-locale': locale });
 
     setRequestLocale(locale);
 
@@ -46,38 +46,49 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     });
 }
 
-export default async function ResetPasswordPage({ params }: Readonly<Props>) {
+export default async function CreateNewPasswordPage({ params }: Readonly<Props>) {
     const { locale } = await params;
 
     try {
-        const { data } = await sdk.modules.getResetPasswordPage({ 'x-locale': locale });
+        const { data } = await sdk.modules.getCreateNewPasswordPage({ 'x-locale': locale });
 
         if (!data) {
             notFound();
         }
 
-        const handleResetPassword = async (credentials: FormValues) => {
+        const handleSetNewPassword = async (credentials: FormValues) => {
             'use server';
-            console.log('reset password', credentials);
+
+            console.log('set new password', credentials);
             return Promise.resolve();
         };
 
         return (
             <AuthLayout>
                 <div className="flex flex-col gap-20">
-                    <ResetPasswordForm
+                    <CreateNewPasswordForm
                         labels={{
                             title: data.title,
                             subtitle: data.subtitle,
-                            username: {
-                                label: data.username.label,
-                                placeholder: data.username.placeholder,
-                                errorMessages: data.username?.errorMessages,
+                            setNewPassword: data.setNewPassword,
+                            password: {
+                                label: data.password.label,
+                                placeholder: data.password.placeholder,
+                                hide: data.labels?.hide,
+                                show: data.labels?.show,
+                                errorMessages: data.password?.errorMessages,
+                                regexValidations: data.password?.regexValidations,
                             },
-                            resetPassword: data.resetPassword,
-                            invalidCredentials: data.invalidCredentials,
+                            confirmPassword: {
+                                label: data.confirmPassword.label,
+                                placeholder: data.confirmPassword.placeholder,
+                                hide: data.labels?.hide,
+                                show: data.labels?.show,
+                                errorMessages: data.confirmPassword?.errorMessages,
+                            },
+                            creatingPasswordError: data.creatingPasswordError,
                         }}
-                        onResetPassword={handleResetPassword}
+                        onCreateNewPassword={handleSetNewPassword}
                     />
                 </div>
                 {data.image?.url && (

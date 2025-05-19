@@ -49,10 +49,12 @@ import { UserAccountBlockModule } from '@o2s/api-harmonization/blocks/user-accou
 import { AppConfig } from './app.config';
 import { AppService } from './app.service';
 import { ContextHeadersMiddleware } from './middleware/context-headers.middleware';
+import { CreateNewPasswordPageModule } from './modules/create-new-password-page/create-new-password-page.module';
 import { LoginPageModule } from './modules/login-page/login-page.module';
 import { NotFoundPageModule } from './modules/not-found-page/not-found-page.module';
 import { OrganizationsModule } from './modules/organizations/organizations.module';
 import { PageModule } from './modules/page/page.module';
+import { ResetPasswordPageModule } from './modules/reset-password-page/reset-password-page.module';
 import { RoutesModule } from './modules/routes/routes.module';
 import { SurveyjsModule } from './modules/surveyjs-forms/surveyjs.module';
 
@@ -84,6 +86,8 @@ import { SurveyjsModule } from './modules/surveyjs-forms/surveyjs.module';
         PageModule.register(AppConfig),
         RoutesModule.register(AppConfig),
         LoginPageModule.register(AppConfig),
+        CreateNewPasswordPageModule.register(AppConfig),
+        ResetPasswordPageModule.register(AppConfig),
         NotFoundPageModule.register(AppConfig),
         OrganizationsModule.register(AppConfig),
         SurveyjsModule.register(AppConfig),

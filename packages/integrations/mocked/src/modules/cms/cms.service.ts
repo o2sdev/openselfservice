@@ -26,6 +26,7 @@ import { mapUserAccountBlock } from './mappers/blocks/cms.user-account.mapper';
 import { mapAppConfig } from './mappers/cms.app-config.mapper';
 import { mapCategoryListBlock } from './mappers/cms.category-list.mapper';
 import { mapCategoryBlock } from './mappers/cms.category.mapper';
+import { mapCreateNewPasswordPage } from './mappers/cms.create-new-password-page.mapper';
 import { mapFooter } from './mappers/cms.footer.mapper';
 import { mapHeader } from './mappers/cms.header.mapper';
 import { mapLoginPage } from './mappers/cms.login-page.mapper';
@@ -33,6 +34,7 @@ import { mapNotFoundPage } from './mappers/cms.not-found-page.mapper';
 import { mapOrganizationList } from './mappers/cms.organization-list.mapper';
 import { getAllPages, getAlternativePages, mapPage } from './mappers/cms.page.mapper';
 import { mapQuickLinksBlock } from './mappers/cms.quick-links.mapper';
+import { mapResetPasswordPage } from './mappers/cms.reset-password-page.mapper';
 import { mapSurvey } from './mappers/cms.survey.mapper';
 import { responseDelay } from '@/utils/delay';
 
@@ -64,6 +66,14 @@ export class CmsService implements CMS.Service {
 
     getLoginPage(options: CMS.Request.GetCmsLoginPageParams) {
         return of(mapLoginPage(options.locale));
+    }
+
+    getResetPasswordPage(options: CMS.Request.GetCmsResetPasswordPageParams) {
+        return of(mapResetPasswordPage(options.locale));
+    }
+
+    getCreateNewPasswordPage(options: CMS.Request.GetCmsCreateNewPasswordPageParams) {
+        return of(mapCreateNewPasswordPage(options.locale));
     }
 
     getNotFoundPage(options: CMS.Request.GetCmsNotFoundPageParams) {

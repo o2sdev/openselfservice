@@ -1,5 +1,7 @@
 export * as Page from './models/page.model';
 export * as LoginPage from './models/login-page.model';
+export * as ResetPasswordPage from './models/reset-password-page.model';
+export * as CreateNewPasswordPage from './models/create-new-password-page.model';
 export * as Header from './models/header.model';
 export * as Footer from './models/footer.model';
 export * as AppConfig from './models/app-config.model';

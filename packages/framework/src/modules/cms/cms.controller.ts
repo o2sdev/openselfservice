@@ -34,6 +34,16 @@ export class CmsController {
         return this.cms.getLoginPage(params);
     }
 
+    @Get('/reset-password-page')
+    getResetPasswordPage(@Query() params: Request.GetCmsResetPasswordPageParams) {
+        return this.cms.getResetPasswordPage(params);
+    }
+
+    @Get('/create-new-password-page')
+    getCreateNewPasswordPage(@Query() params: Request.GetCmsCreateNewPasswordPageParams) {
+        return this.cms.getCreateNewPasswordPage(params);
+    }
+
     @Get('/not-found-page')
     getNotFoundPage(@Query() params: Request.GetCmsNotFoundPageParams) {
         return this.cms.getNotFoundPage(params);

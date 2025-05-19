@@ -430,4 +430,18 @@ export class CmsService implements CMS.Service {
         const key = `order-details-component-${options.id}-${options.locale}`;
         return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapOrderDetailsBlock)));
     }
+
+    getCreateNewPasswordPage(
+        options: CMS.Request.GetCmsCreateNewPasswordPageParams,
+    ): Observable<CMS.Model.CreateNewPasswordPage.CreateNewPasswordPage> {
+        console.log('getCreateNewPasswordPage', options);
+        throw new NotImplementedException();
+    }
+
+    getResetPasswordPage(
+        options: CMS.Request.GetCmsResetPasswordPageParams,
+    ): Observable<CMS.Model.ResetPasswordPage.ResetPasswordPage> {
+        console.log('getResetPasswordPage', options);
+        throw new NotImplementedException();
+    }
 }
