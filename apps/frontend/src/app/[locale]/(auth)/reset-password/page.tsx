@@ -1,17 +1,29 @@
 import { Metadata } from 'next';
+import { AuthError } from 'next-auth';
 import { setRequestLocale } from 'next-intl/server';
+import { headers } from 'next/headers';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import React from 'react';
+
+import { Toaster } from '@o2s/ui/components/toaster';
 
 import { sdk } from '@/api/sdk';
 
 import { generateSeo } from '@/utils/seo';
 
+import { auth } from '@/auth';
+
 import { routing } from '@/i18n/routing';
+
+import { GlobalProvider } from '@/providers/GlobalProvider';
 
 import { AuthLayout } from '@/containers/Auth/AuthLayout/AuthLayout';
 import { FormValues, ResetPasswordForm } from '@/containers/Auth/ResetPassword';
+import { Footer } from '@/containers/Footer/Footer';
+import { Header } from '@/containers/Header/Header';
+
+import { AppSpinner } from '@/components/AppSpinner/AppSpinner';
 
 interface Props {
     params: Promise<{
@@ -23,7 +35,7 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { locale } = await params;
-    const slug = routing.pathnames['/login']?.[locale] || '/';
+    const slug = routing.pathnames['/reset-password']?.[locale] || '/';
 
     const { seo } = await sdk.modules.getResetPasswordPage({ 'x-locale': locale });
 
@@ -42,14 +54,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         noIndex: seo.noIndex,
         noFollow: seo.noFollow,
         translations: routing.locales,
-        alternates: routing.pathnames['/login'],
+        alternates: routing.pathnames['/reset-password'],
     });
 }
 
 export default async function ResetPasswordPage({ params }: Readonly<Props>) {
+    const headersList = await headers();
+    const session = await auth();
     const { locale } = await params;
 
     try {
+        const init = await sdk.modules.getInit(
+            {
+                referrer: headersList.get('referrer') || (process.env.NEXT_PUBLIC_BASE_URL as string),
+            },
+            { 'x-locale': locale },
+            session?.accessToken,
+        );
+
         const { data } = await sdk.modules.getResetPasswordPage({ 'x-locale': locale });
 
         if (!data) {
@@ -58,32 +80,54 @@ export default async function ResetPasswordPage({ params }: Readonly<Props>) {
 
         const handleResetPassword = async (credentials: FormValues) => {
             'use server';
-            console.log('reset password', credentials);
-            return Promise.resolve();
+            try {
+                console.log('reset password', credentials);
+                return Promise.resolve();
+            } catch (error) {
+                if (error instanceof AuthError) {
+                    return error;
+                }
+                throw error;
+            }
         };
 
         return (
-            <AuthLayout>
-                <div className="flex flex-col gap-20">
-                    <ResetPasswordForm
-                        labels={{
-                            title: data.title,
-                            subtitle: data.subtitle,
-                            username: {
-                                label: data.username.label,
-                                placeholder: data.username.placeholder,
-                                errorMessages: data.username?.errorMessages,
-                            },
-                            resetPassword: data.resetPassword,
-                            invalidCredentials: data.invalidCredentials,
-                        }}
-                        onResetPassword={handleResetPassword}
-                    />
+            <GlobalProvider config={init} labels={init.labels} locale={locale}>
+                <div className="flex flex-col min-h-dvh">
+                    <Header data={init.common.header} />
+                    <div className="flex flex-col grow">
+                        <AuthLayout>
+                            <ResetPasswordForm
+                                labels={{
+                                    title: data.title,
+                                    subtitle: data.subtitle,
+                                    username: {
+                                        label: data.username.label,
+                                        placeholder: data.username.placeholder,
+                                        errorMessages: data.username?.errorMessages,
+                                    },
+                                    resetPassword: data.resetPassword,
+                                    invalidCredentials: data.invalidCredentials,
+                                }}
+                                onResetPassword={handleResetPassword}
+                            />
+
+                            {data.image?.url && (
+                                <Image
+                                    src={data.image?.url}
+                                    alt={data.image?.alt}
+                                    fill={true}
+                                    className="object-cover"
+                                />
+                            )}
+                        </AuthLayout>
+                    </div>
+                    <Footer data={init.common.footer} />
+
+                    <Toaster />
+                    <AppSpinner />
                 </div>
-                {data.image?.url && (
-                    <Image src={data.image?.url} alt={data.image?.alt} fill={true} className="object-cover" />
-                )}
-            </AuthLayout>
+            </GlobalProvider>
         );
     } catch (_error) {
         notFound();

@@ -85,11 +85,11 @@ const InputWithLabel = React.forwardRef<HTMLInputElement, Readonly<InputWithLabe
 );
 InputWithLabel.displayName = 'InputWithLabel';
 
-export type InputWithLabelAndDescriptionProps = InputWithLabelProps & {
+export type InputWithDetailsProps = InputWithLabelProps & {
     description?: string;
 };
 
-const InputWithLabelAndDescription = React.forwardRef<HTMLInputElement, Readonly<InputWithLabelAndDescriptionProps>>(
+const InputWithDetails = React.forwardRef<HTMLInputElement, Readonly<InputWithDetailsProps>>(
     ({ description, ...props }, ref) => {
         return (
             <InputWithLabel {...props} ref={ref}>
@@ -98,6 +98,6 @@ const InputWithLabelAndDescription = React.forwardRef<HTMLInputElement, Readonly
         );
     },
 );
-InputWithLabelAndDescription.displayName = 'InputWithLabelAndDescription';
+InputWithDetails.displayName = 'InputWithDetails';
 
-export { Input, InputWithLabel, InputWithLabelAndDescription };
+export { Input, InputWithLabel, InputWithDetails };

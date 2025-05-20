@@ -7,6 +7,7 @@ const LOGIN_PAGE_PL: CMS.Model.LoginPage.LoginPage = {
         id: 'username-1',
         name: 'username',
         label: 'Nazwa użytkownika',
+        description: 'Powiązana z Twoim ID Klienta',
         placeholder: 'Wprowadź nazwę użytkownika',
         errorMessages: [
             {
@@ -92,7 +93,7 @@ const LOGIN_PAGE_PL: CMS.Model.LoginPage.LoginPage = {
         link: '/pl/reset-hasla',
     },
     resetPasswordMessage: {
-        title: 'Na podany adres email jest powiązany z kontem, otrzymasz wiadomość z linkiem do resetowania hasła.',
+        title: 'Jeśli podany adres email jest powiązany z kontem, otrzymasz wiadomość z linkiem do resetowania hasła.',
         description: 'Sprawdź folder spam, jeśli wiadomość nie dotarła.',
     },
     newPasswordMessage: {
@@ -107,6 +108,7 @@ const LOGIN_PAGE_EN: CMS.Model.LoginPage.LoginPage = {
         id: 'username-1',
         name: 'username',
         label: 'Username',
+        description: 'Associated with your Client ID',
         placeholder: 'Enter your username',
         errorMessages: [
             {
@@ -228,6 +230,7 @@ const LOGIN_PAGE_DE: CMS.Model.LoginPage.LoginPage = {
         id: 'username-1',
         name: 'username',
         label: 'Benutzername',
+        description: 'Mit Ihrer Kunden-ID verknüpft',
         placeholder: 'Geben Sie Ihren Benutzernamen ein',
         errorMessages: [
             {

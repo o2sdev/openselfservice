@@ -72,7 +72,7 @@ export const Banner: React.FC<Readonly<BannerProps>> = ({
     const content = <BannerContent title={title} description={description} showIcon={showIcon} variant={variant} />;
 
     return (
-        <Alert variant={variant}>
+        <Alert variant={variant} className="p-6 [&_svg~*]:pl-8 [&_svg]:left-6 [&_svg]:top-6 text-foreground">
             {button ? (
                 <div
                     className={cn(

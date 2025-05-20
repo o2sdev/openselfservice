@@ -1,4 +1,4 @@
-import { object as YupObject, string as YupString, ref } from 'yup';
+import { string as YupString, ref } from 'yup';
 
 import { Models } from '@o2s/framework/modules';
 
@@ -9,6 +9,7 @@ const MIN_PASSWORD_CHARS = 8;
 const MAX_PASSWORD_CHARS = 64;
 
 export const getUsernameSchema = (errorMessages?: Models.FormField.ErrorMessage[]) => {
+    console.log('errorMessages', errorMessages);
     return YupString()
         .required(errorMessages?.find((error) => error.type === 'required')?.description)
         .min(MIN_USERNAME_CHARS, errorMessages?.find((error) => error.type === 'min')?.description)

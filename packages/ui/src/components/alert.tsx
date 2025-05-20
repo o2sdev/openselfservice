@@ -4,14 +4,15 @@ import * as React from 'react';
 import { cn } from '@o2s/ui/lib/utils';
 
 const alertVariants = cva(
-    'relative w-full text-foreground rounded-lg border p-6 [&_svg~*]:pl-8 [&_svg+div]:translate-y-[-3px] [&_svg]:absolute [&_svg]:left-6 [&_svg]:top-6 [&_svg]:text-foreground',
+    'relative w-full rounded-lg border p-4 [&_svg~*]:pl-7 [&_svg+div]:translate-y-[-3px] [&_svg]:absolute [&_svg]:left-4 [&_svg]:top-4 [&_svg]:text-foreground',
     {
         variants: {
             variant: {
-                default: 'bg-background',
+                default: 'bg-background text-foreground',
                 destructive:
-                    'border-destructive/50 bg-destructive/10  dark:border-destructive [&_svg]:text-destructive',
-                positive: 'border-green-700 bg-green-700/10 dark:border-green-700 [&_svg]:text-green-700',
+                    'border-destructive/50 bg-destructive/10 text-destructive dark:border-destructive [&_svg]:text-destructive',
+                positive:
+                    'border-green-700 bg-green-700/10 text-green-700 dark:border-green-700 [&_svg]:text-green-700',
             },
         },
         defaultVariants: {

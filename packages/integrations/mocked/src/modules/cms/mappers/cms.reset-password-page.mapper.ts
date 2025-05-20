@@ -7,6 +7,7 @@ const RESET_PASSWORD_PAGE_PL: CMS.Model.ResetPasswordPage.ResetPasswordPage = {
         id: 'username-1',
         name: 'username',
         label: 'Nazwa użytkownika',
+        description: 'Powiązana z Twoim ID Klienta',
         placeholder: 'Wprowadź swoją nazwę użytkownika',
         errorMessages: [
             {
@@ -14,6 +15,18 @@ const RESET_PASSWORD_PAGE_PL: CMS.Model.ResetPasswordPage.ResetPasswordPage = {
                 description: 'Nazwa użytkownika jest wymagana',
                 id: 'required-1',
                 name: 'Required',
+            },
+            {
+                type: 'matches',
+                description: 'Nazwa użytkownika może zawierać tylko litery, cyfry, kropki, myślniki i znak @',
+                id: 'matches-1',
+                name: 'Matches',
+            },
+            {
+                type: 'min',
+                description: 'Nazwa użytkownika musi zawierać co najmniej 5 znaków',
+                id: 'min-1',
+                name: 'Min',
             },
         ],
     },
@@ -54,6 +67,7 @@ const RESET_PASSWORD_PAGE_EN: CMS.Model.ResetPasswordPage.ResetPasswordPage = {
         id: 'username-1',
         name: 'username',
         label: 'Username',
+        description: 'Associated with your Client ID',
         placeholder: 'Enter your username',
         errorMessages: [
             {
@@ -61,6 +75,18 @@ const RESET_PASSWORD_PAGE_EN: CMS.Model.ResetPasswordPage.ResetPasswordPage = {
                 description: 'Username is required',
                 id: 'required-1',
                 name: 'Required',
+            },
+            {
+                type: 'matches',
+                description: 'Username can only contain letters, numbers, dots, hyphens and @',
+                id: 'matches-1',
+                name: 'Matches',
+            },
+            {
+                type: 'min',
+                description: 'Username must contain at least 5 characters',
+                id: 'min-1',
+                name: 'Min',
             },
         ],
     },
@@ -101,6 +127,7 @@ const RESET_PASSWORD_PAGE_DE: CMS.Model.ResetPasswordPage.ResetPasswordPage = {
         id: 'username-1',
         name: 'username',
         label: 'Benutzername',
+        description: 'Mit Ihrer Kunden-ID verknüpft',
         placeholder: 'Geben Sie Ihren Benutzernamen ein',
         errorMessages: [
             {
@@ -108,6 +135,18 @@ const RESET_PASSWORD_PAGE_DE: CMS.Model.ResetPasswordPage.ResetPasswordPage = {
                 description: 'Benutzername ist erforderlich',
                 id: 'required-1',
                 name: 'Required',
+            },
+            {
+                type: 'min',
+                description: 'Benutzername muss mindestens 5 Zeichen lang sein',
+                id: 'min-1',
+                name: 'Min',
+            },
+            {
+                type: 'matches',
+                description: 'Benutzername kann nur Buchstaben, Zahlen, Punkte, Bindestriche und @ enthalten',
+                id: 'matches-1',
+                name: 'Matches',
             },
         ],
     },
