@@ -80,15 +80,15 @@ export default async function Page({ params }: Props) {
 
     const { locale, slug } = await params;
 
-    try {
-        const init = await sdk.modules.getInit(
-            {
-                referrer: headersList.get('referrer') || (process.env.NEXT_PUBLIC_BASE_URL as string),
-            },
-            { 'x-locale': locale },
-            session?.accessToken,
-        );
+    const init = await sdk.modules.getInit(
+        {
+            referrer: headersList.get('referrer') || (process.env.NEXT_PUBLIC_BASE_URL as string),
+        },
+        { 'x-locale': locale },
+        session?.accessToken,
+    );
 
+    try {
         const { data, meta } = await sdk.modules.getPage(
             {
                 slug: slug ? `/${slug.join('/')}` : '/',
@@ -132,7 +132,16 @@ export default async function Page({ params }: Props) {
                 </div>
             </GlobalProvider>
         );
-    } catch (_error) {
-        notFound();
+    } catch (error) {
+        if (
+            // @ts-expect-error TODO add proper error type detection
+            (error && 'status' in error && error.status === 404) ||
+            // @ts-expect-error TODO add proper error type detection
+            (error && 'response' in error && 'status' in error.response && error.response.status === 404)
+        ) {
+            notFound();
+        }
+
+        throw error;
     }
 }

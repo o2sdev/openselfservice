@@ -8,7 +8,7 @@ import { OrderDetails } from './OrderDetails.server';
 export interface OrderDetailsRendererProps {
     slug: string[];
     id: string;
-    accessToken: string;
+    accessToken?: string;
 }
 
 export const OrderDetailsRenderer: React.FC<OrderDetailsRendererProps> = ({ slug, id, accessToken }) => {
