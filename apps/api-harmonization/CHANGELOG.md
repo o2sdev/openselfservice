@@ -1,5 +1,30 @@
 # @o2s/api-harmonization
 
+## 0.23.0
+
+### Minor Changes
+
+- 05eea01: chore: update dependencies
+- 44653fb: feat: orderDetails page implemented
+
+    - added new UI component: InfoCard,
+    - used InfoCard in PaymentsSummaryBlock, OrdersSummary and OrderDetails,
+    - fixed ordersSummaryBlock integration with strapi,
+    - used DynamicIcon in CategoryBlock,
+    - added orientation prop for Progress component
+
+### Patch Changes
+
+- 10fbec4: improved global error handling for not-found and unexpected errors
+- Updated dependencies [05eea01]
+- Updated dependencies [1200a28]
+- Updated dependencies [44653fb]
+- Updated dependencies [a4cf40d]
+- Updated dependencies [6baaae4]
+    - @o2s/integrations.mocked@0.24.0
+    - @o2s/utils.logger@0.12.0
+    - @o2s/framework@0.24.0
+
 ## 0.22.0
 
 ### Minor Changes

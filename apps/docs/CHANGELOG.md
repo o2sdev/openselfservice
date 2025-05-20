@@ -1,5 +1,11 @@
 # @o2s/docs
 
+## 0.13.0
+
+### Minor Changes
+
+- 05eea01: chore: update dependencies
+
 ## 0.12.0
 
 ### Minor Changes
