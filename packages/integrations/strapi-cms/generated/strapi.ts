@@ -1704,10 +1704,12 @@ export type LoginPage = {
     locale?: Maybe<Scalars['String']['output']>;
     localizations: Array<Maybe<LoginPage>>;
     localizations_connection?: Maybe<LoginPageRelationResponseCollection>;
+    newPasswordMessage: Scalars['String']['output'];
     password: ComponentContentFormField;
     providersLabel?: Maybe<Scalars['String']['output']>;
     providersTitle?: Maybe<Scalars['String']['output']>;
     publishedAt?: Maybe<Scalars['DateTime']['output']>;
+    resetPasswordMessage: Scalars['String']['output'];
     signIn: Scalars['String']['output'];
     subtitle?: Maybe<Scalars['String']['output']>;
     title: Scalars['String']['output'];
@@ -1719,10 +1721,12 @@ export type LoginPageInput = {
     SEO?: InputMaybe<ComponentSeoSeoInput>;
     image?: InputMaybe<Scalars['ID']['input']>;
     invalidCredentials?: InputMaybe<Scalars['String']['input']>;
+    newPasswordMessage?: InputMaybe<Scalars['String']['input']>;
     password?: InputMaybe<ComponentContentFormFieldInput>;
     providersLabel?: InputMaybe<Scalars['String']['input']>;
     providersTitle?: InputMaybe<Scalars['String']['input']>;
     publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+    resetPasswordMessage?: InputMaybe<Scalars['String']['input']>;
     signIn?: InputMaybe<Scalars['String']['input']>;
     subtitle?: InputMaybe<Scalars['String']['input']>;
     title?: InputMaybe<Scalars['String']['input']>;
@@ -6080,10 +6084,12 @@ export type LoginPageResolvers<
         ParentType,
         ContextType
     >;
+    newPasswordMessage?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     password?: Resolver<ResolversTypes['ComponentContentFormField'], ParentType, ContextType>;
     providersLabel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     providersTitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    resetPasswordMessage?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     signIn?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     subtitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -7488,7 +7494,7 @@ export type ArticleSimpleFragment = {
 export type ArticleTemplateFragment = {
     documentId: string;
     slug: string;
-    protected: boolean;
+    protected?: boolean;
     locale?: string;
     createdAt?: any;
     updatedAt?: any;
@@ -7789,8 +7795,8 @@ export type GetArticlesQueryVariables = Exact<{
 export type GetArticlesQuery = {
     pages_connection?: { pageInfo: { total: number } };
     articles: Array<{
+        protected?: boolean;
         documentId: string;
-        protected: boolean;
         slug: string;
         locale?: string;
         createdAt?: any;
@@ -8217,7 +8223,7 @@ export type OrganizationListFragment = { documentId: string; title?: string; des
 export type PageFragment = {
     documentId: string;
     slug: string;
-    protected: boolean;
+    protected?: boolean;
     locale?: string;
     createdAt?: any;
     updatedAt?: any;
@@ -10242,7 +10248,7 @@ export type GetPageQuery = {
     pages: Array<{
         documentId: string;
         slug: string;
-        protected: boolean;
+        protected?: boolean;
         locale?: string;
         createdAt?: any;
         updatedAt?: any;
@@ -10421,7 +10427,7 @@ export type GetPagesQuery = {
     pages: Array<{
         documentId: string;
         slug: string;
-        protected: boolean;
+        protected?: boolean;
         locale?: string;
         createdAt?: any;
         updatedAt?: any;
@@ -10694,6 +10700,7 @@ export const PageFragmentDoc = gql`
     fragment Page on Page {
         documentId
         slug
+        protected
         locale
         createdAt
         updatedAt
@@ -11533,6 +11540,7 @@ export const GetArticlesDocument = gql`
             sort: $sort
             locale: $locale
         ) {
+            protected
             ...ArticleTemplate
         }
     }

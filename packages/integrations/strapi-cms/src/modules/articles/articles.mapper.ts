@@ -105,7 +105,7 @@ export const mapArticles = (
             return {
                 id: page.documentId,
                 slug: page.slug,
-                isProtected: page.protected,
+                isProtected: !!page.protected,
                 createdAt: page.updatedAt,
                 updatedAt: page.updatedAt,
                 title: page.SEO.title,
