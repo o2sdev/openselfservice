@@ -26,4 +26,12 @@ export class LoginPage {
         label: string;
         link: string;
     };
+    resetPasswordMessage?: {
+        title?: string;
+        description?: string;
+    };
+    newPasswordMessage?: {
+        title?: string;
+        description?: string;
+    };
 }

@@ -1,17 +1,17 @@
 'use client';
 
 import { Field, FieldProps, Form, Formik } from 'formik';
-import { AlertCircle } from 'lucide-react';
 import { AuthError } from 'next-auth';
 import NextLink from 'next/link';
 import React, { useState } from 'react';
 import { object as YupObject } from 'yup';
 
-import { Alert, AlertDescription } from '@o2s/ui/components/alert';
 import { Button } from '@o2s/ui/components/button';
 import { Link } from '@o2s/ui/components/link';
 import { Separator } from '@o2s/ui/components/separator';
 import { Typography } from '@o2s/ui/components/typography';
+
+import { Banner } from '@/components/Banner/Banner';
 
 import LogoGithub from '@/assets/icons/logo-github.svg';
 
@@ -33,16 +33,22 @@ export const SignInForm: React.FC<Readonly<SignInFormProps>> = ({ providers, lab
     return (
         <div className="flex flex-col gap-12 w-full">
             <div className="flex flex-col gap-6">
-                {error && (
-                    <Alert variant="destructive">
-                        <AlertCircle className="h-4 w-4 mt-1" />
-                        <AlertDescription>
-                            <Typography variant="small" className="mt-1">
-                                {labels.invalidCredentials}
-                            </Typography>
-                        </AlertDescription>
-                    </Alert>
+                {labels.resetPasswordMessage && (
+                    <Banner
+                        title={labels.resetPasswordMessage.title}
+                        description={labels.resetPasswordMessage.description}
+                        variant="positive"
+                    />
                 )}
+                {labels.newPasswordMessage && (
+                    <Banner
+                        title={labels.newPasswordMessage.title}
+                        description={labels.newPasswordMessage.description}
+                        variant="positive"
+                    />
+                )}
+
+                {error && <Banner description={labels.invalidCredentials} variant="destructive" />}
                 <div className="flex flex-col gap-2 items-center text-center">
                     <Typography variant="h1" asChild>
                         <h1>{labels.title}</h1>

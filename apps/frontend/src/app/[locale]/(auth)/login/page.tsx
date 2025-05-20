@@ -32,6 +32,7 @@ interface Props {
         slug: string[];
         callbackUrl: string;
     }>;
+    searchParams: { [key: string]: string | string[] | undefined };
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -59,11 +60,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     });
 }
 
-export default async function LoginPage({ params }: Readonly<Props>) {
+export default async function LoginPage({ params, searchParams }: Readonly<Props>) {
     const headersList = await headers();
     const session = await auth();
     const { locale, callbackUrl } = await params;
-
+    const resetPassword = searchParams.resetPassword as string | undefined;
+    const newPassword = searchParams.newPassword as string | undefined;
     try {
         const init = await sdk.modules.getInit(
             {
@@ -122,6 +124,8 @@ export default async function LoginPage({ params }: Readonly<Props>) {
                                     providers: data.providers,
                                     invalidCredentials: data.invalidCredentials,
                                     forgotPassword: data.forgotPassword,
+                                    resetPasswordMessage: resetPassword ? data.resetPasswordMessage : undefined,
+                                    newPasswordMessage: newPassword ? data.newPasswordMessage : undefined,
                                 }}
                                 onSignIn={handleSignIn}
                             />

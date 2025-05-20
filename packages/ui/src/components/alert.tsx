@@ -4,12 +4,14 @@ import * as React from 'react';
 import { cn } from '@o2s/ui/lib/utils';
 
 const alertVariants = cva(
-    'relative w-full rounded-lg border p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground',
+    'relative w-full text-foreground rounded-lg border p-6 [&_svg~*]:pl-8 [&_svg+div]:translate-y-[-3px] [&_svg]:absolute [&_svg]:left-6 [&_svg]:top-6 [&_svg]:text-foreground',
     {
         variants: {
             variant: {
-                default: 'bg-background text-foreground',
-                destructive: 'border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive',
+                default: 'bg-background',
+                destructive:
+                    'border-destructive/50 bg-destructive/10  dark:border-destructive [&_svg]:text-destructive',
+                positive: 'border-green-700 bg-green-700/10 dark:border-green-700 [&_svg]:text-green-700',
             },
         },
         defaultVariants: {
@@ -28,14 +30,18 @@ Alert.displayName = 'Alert';
 
 const AlertTitle = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLHeadingElement>>(
     ({ className, ...props }, ref) => (
-        <h5 ref={ref} className={cn('mb-1 font-medium leading-none tracking-tight', className)} {...props} />
+        <h5
+            ref={ref}
+            className={cn('text-sm md:text-base font-medium leading-none tracking-tight', className)}
+            {...props}
+        />
     ),
 );
 AlertTitle.displayName = 'AlertTitle';
 
 const AlertDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
     ({ className, ...props }, ref) => (
-        <div ref={ref} className={cn('text-sm [&_p]:leading-relaxed', className)} {...props} />
+        <div ref={ref} className={cn('text-sm md:text-base [&_p]:leading-relaxed', className)} {...props} />
     ),
 );
 AlertDescription.displayName = 'AlertDescription';

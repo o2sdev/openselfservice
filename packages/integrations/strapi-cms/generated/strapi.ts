@@ -10181,6 +10181,8 @@ export type GetLoginPageQuery = {
         providersLabel?: string;
         providersTitle?: string;
         invalidCredentials: string;
+        resetPasswordMessage: string;
+        newPasswordMessage: string;
         username: {
             __typename: 'ComponentContentFormField';
             id: string;

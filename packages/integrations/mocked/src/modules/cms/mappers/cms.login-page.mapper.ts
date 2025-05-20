@@ -91,6 +91,13 @@ const LOGIN_PAGE_PL: CMS.Model.LoginPage.LoginPage = {
         label: 'Zapomniałeś hasła?',
         link: '/pl/reset-hasla',
     },
+    resetPasswordMessage: {
+        title: 'Na podany adres email jest powiązany z kontem, otrzymasz wiadomość z linkiem do resetowania hasła.',
+        description: 'Sprawdź folder spam, jeśli wiadomość nie dotarła.',
+    },
+    newPasswordMessage: {
+        title: 'Nowe hasło zostało ustawione. Możesz się teraz zalogować.',
+    },
 };
 
 const LOGIN_PAGE_EN: CMS.Model.LoginPage.LoginPage = {
@@ -205,6 +212,13 @@ const LOGIN_PAGE_EN: CMS.Model.LoginPage.LoginPage = {
         label: 'Forgot password?',
         link: '/en/reset-password',
     },
+    resetPasswordMessage: {
+        title: 'If the email is linked to an account, you should receive a message with a return link.',
+        description: 'Check spam if it does not arrive.',
+    },
+    newPasswordMessage: {
+        title: 'The new password has been set. You can now sign in.',
+    },
 };
 
 const LOGIN_PAGE_DE: CMS.Model.LoginPage.LoginPage = {
@@ -297,6 +311,13 @@ const LOGIN_PAGE_DE: CMS.Model.LoginPage.LoginPage = {
     forgotPassword: {
         label: 'Passwort vergessen?',
         link: '/de/passwort-zuruecksetzen',
+    },
+    resetPasswordMessage: {
+        title: 'Wenn die E-Mail mit einem Konto verknüpft ist, erhalten Sie eine Nachricht mit einem Rücksetzlink.',
+        description: 'Überprüfen Sie den Spam-Ordner, falls die Nachricht nicht ankommt.',
+    },
+    newPasswordMessage: {
+        title: 'Das neue Passwort wurde festgelegt. Sie können sich jetzt anmelden.',
     },
 };
 

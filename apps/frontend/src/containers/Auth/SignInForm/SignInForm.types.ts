@@ -35,6 +35,15 @@ export interface SignInFormProps {
             label: string;
             link: string;
         };
+        resetPasswordMessage?: {
+            title?: string;
+            description?: string;
+        };
+        newPasswordMessage?: {
+            title?: string;
+            description?: string;
+        };
     };
     onSignIn: (providerId: string, credentials?: FormValues) => Promise<AuthError | void>;
+    resetPassword?: string;
 }
