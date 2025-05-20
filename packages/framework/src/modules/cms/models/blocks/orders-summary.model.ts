@@ -1,21 +1,17 @@
-import { Block } from '@/utils/models';
+import { Block, InfoCard } from '@/utils/models';
 
 export class OrdersSummaryBlock extends Block.Block {
     title?: string;
     subtitle?: string;
-    totalValue!: OrdersInfo;
-    averageValue!: OrdersInfo;
-    averageNumber!: OrdersInfo;
+    totalValue!: InfoCard.InfoCard;
+    averageValue!: InfoCard.InfoCard;
+    averageNumber!: InfoCard.InfoCard;
     chart!: OrdersChart;
     ranges?: Range[];
     noResults!: {
         title: string;
         description?: string;
     };
-}
-
-export class OrdersInfo {
-    title!: string;
 }
 
 export class OrdersChart {

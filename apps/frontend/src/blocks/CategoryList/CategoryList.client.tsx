@@ -1,7 +1,7 @@
 import React from 'react';
 
+import { InformativeCard } from '@/components/Cards/InformativeCard/InformativeCard';
 import { ContentSection } from '@/components/ContentSection/ContentSection';
-import { InformativeCard } from '@/components/InformativeCard/InformativeCard';
 
 import { CategoryListPureProps } from './CategoryList.types';
 
@@ -15,8 +15,8 @@ export const CategoryListPure: React.FC<Readonly<CategoryListPureProps>> = ({ ..
                             title={item.title}
                             description={item.description}
                             href={item.slug}
-                            iconUrl={item.icon?.url}
-                            iconSize="small"
+                            icon={item.icon}
+                            iconSize={24}
                         />
                     </li>
                 ))}

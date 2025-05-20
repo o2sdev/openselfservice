@@ -5,14 +5,24 @@ const MOCK_PAYMENTS_SUMMARY_BLOCK_EN: CMS.Model.PaymentsSummaryBlock.PaymentsSum
     overdue: {
         title: 'Overdue',
         message: '{days} days overdue',
-        buttonLabel: 'Pay online',
-        noPaymentsMessage: 'No overdue invoices',
+        altMessage: 'No overdue invoices',
+        link: {
+            label: 'Pay online',
+            icon: 'ArrowUpRight',
+            url: '',
+        },
+        icon: 'Info',
     },
     toBePaid: {
         title: 'To be paid',
         message: 'New and overdue',
-        noPaymentsMessage: 'No invoices to be paid',
-        buttonLabel: 'Pay online',
+        altMessage: 'No invoices to be paid',
+        link: {
+            label: 'Pay online',
+            icon: 'ArrowUpRight',
+            url: '',
+        },
+        icon: 'CreditCard',
     },
 };
 
@@ -21,14 +31,24 @@ const MOCK_PAYMENTS_SUMMARY_BLOCK_PL: CMS.Model.PaymentsSummaryBlock.PaymentsSum
     overdue: {
         title: 'Zaległe',
         message: '{days} dni po terminie',
-        buttonLabel: 'Zapłać online',
-        noPaymentsMessage: 'Brak zaległych faktur',
+        altMessage: 'Brak zaległych faktur',
+        link: {
+            label: 'Zapłać online',
+            icon: 'ArrowUpRight',
+            url: '',
+        },
+        icon: 'Info',
     },
     toBePaid: {
         title: 'Do zapłaty',
         message: 'Nowe i zaległe',
-        noPaymentsMessage: 'Brak faktur do zapłaty',
-        buttonLabel: 'Zapłać online',
+        altMessage: 'Brak faktur do zapłaty',
+        link: {
+            label: 'Zapłać online',
+            icon: 'ArrowUpRight',
+            url: '',
+        },
+        icon: 'Info',
     },
 };
 
@@ -37,14 +57,24 @@ const MOCK_PAYMENTS_SUMMARY_BLOCK_DE: CMS.Model.PaymentsSummaryBlock.PaymentsSum
     overdue: {
         title: 'Überfällig',
         message: '{days} Tage überfällig',
-        buttonLabel: 'Online bezahlen',
-        noPaymentsMessage: 'Keine überfälligen Rechnungen',
+        altMessage: 'Keine überfälligen Rechnungen',
+        link: {
+            label: 'Online bezahlen',
+            icon: 'ArrowUpRight',
+            url: '',
+        },
+        icon: 'Info',
     },
     toBePaid: {
         title: 'Zu bezahlen',
         message: 'Neue und überfällige',
-        noPaymentsMessage: 'Keine zu zahlenden Rechnungen',
-        buttonLabel: 'Online bezahlen',
+        altMessage: 'Keine zu zahlenden Rechnungen',
+        link: {
+            label: 'Online bezahlen',
+            icon: 'ArrowUpRight',
+            url: '',
+        },
+        icon: 'CreditCard',
     },
 };
 

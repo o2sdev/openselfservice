@@ -18,7 +18,6 @@ export const PAGE_WARRANTY_AND_REPAIR_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-
     isProtected: false,
     hasOwnTitle: false,
     parent: {
@@ -59,7 +58,6 @@ export const PAGE_WARRANTY_AND_REPAIR_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-
     isProtected: false,
     hasOwnTitle: false,
     parent: {
@@ -100,7 +98,6 @@ export const PAGE_WARRANTY_AND_REPAIR_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-
     isProtected: false,
     hasOwnTitle: false,
     parent: {

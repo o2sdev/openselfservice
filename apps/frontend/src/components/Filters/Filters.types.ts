@@ -2,8 +2,6 @@ import { FormikErrors, FormikValues } from 'formik';
 
 import { Models } from '@o2s/framework/modules';
 
-import { InitialFilters } from './FiltersContext';
-
 export interface FiltersProps<T, S> {
     filters?: Models.Filters.Filters<T>;
     initialValues: S;
@@ -17,7 +15,7 @@ export interface FiltersProps<T, S> {
 
 export interface FiltersSectionProps<T, S> extends FiltersProps<T, S> {
     title?: string;
-    initialFilters: InitialFilters;
+    initialFilters: S;
 }
 
 export interface FilterItemProps<T, S extends FormikValues> {

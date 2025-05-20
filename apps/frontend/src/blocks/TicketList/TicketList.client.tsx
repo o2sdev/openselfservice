@@ -18,7 +18,6 @@ import { ticketBadgeVariants } from '@/utils/mappings/ticket-badge';
 import { Link as NextLink } from '@/i18n';
 
 import { ActionLinks } from '@/components/ActionLinks/ActionLinks';
-import { InitialFilters } from '@/components/Filters/FiltersContext';
 import { FiltersSection } from '@/components/Filters/FiltersSection';
 import { NoResults } from '@/components/NoResults/NoResults';
 import { Pagination } from '@/components/Pagination/Pagination';
@@ -74,7 +73,7 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
 
                     <FiltersSection
                         title={data.subtitle}
-                        initialFilters={initialFilters as unknown as InitialFilters}
+                        initialFilters={initialFilters}
                         filters={data.filters}
                         initialValues={filters}
                         onSubmit={handleFilter}
@@ -157,7 +156,7 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                                                     }
                                                 })}
                                                 {data.table.actions && (
-                                                    <TableCell className="p-4">
+                                                    <TableCell className="py-0">
                                                         <Button asChild variant="link">
                                                             <NextLink
                                                                 href={ticket.detailsUrl}

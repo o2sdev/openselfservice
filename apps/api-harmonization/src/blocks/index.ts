@@ -13,6 +13,7 @@ export * as ServiceDetails from './service-details';
 export * as Surveyjs from './surveyjs';
 export * as OrderList from './order-list';
 export * as OrdersSummary from './orders-summary';
+export * as OrderDetails from './order-details';
 export * as QuickLinks from './quick-links';
 export * as CategoryList from './category-list';
 export * as ArticleList from './article-list';
