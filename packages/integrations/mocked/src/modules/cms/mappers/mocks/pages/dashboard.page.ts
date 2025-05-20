@@ -37,8 +37,16 @@ export const PAGE_DASHBOARD_PL: CMS.Model.Page.Page = {
             ],
             bottom: [
                 {
-                    __typename: 'FaqBlock',
-                    id: 'faq-1',
+                    __typename: 'QuickLinksBlock',
+                    id: 'quick-links-1',
+                },
+                {
+                    __typename: 'CategoryListBlock',
+                    id: 'category-list-1',
+                },
+                {
+                    __typename: 'ArticleListBlock',
+                    id: 'article-list-1',
                 },
             ],
         },
@@ -84,8 +92,16 @@ export const PAGE_DASHBOARD_EN: CMS.Model.Page.Page = {
             ],
             bottom: [
                 {
-                    __typename: 'FaqBlock',
-                    id: 'faq-1',
+                    __typename: 'QuickLinksBlock',
+                    id: 'quick-links-1',
+                },
+                {
+                    __typename: 'CategoryListBlock',
+                    id: 'category-list-1',
+                },
+                {
+                    __typename: 'ArticleListBlock',
+                    id: 'article-list-1',
                 },
             ],
         },
@@ -131,8 +147,16 @@ export const PAGE_DASHBOARD_DE: CMS.Model.Page.Page = {
             ],
             bottom: [
                 {
-                    __typename: 'FaqBlock',
-                    id: 'faq-1',
+                    __typename: 'QuickLinksBlock',
+                    id: 'quick-links-1',
+                },
+                {
+                    __typename: 'CategoryListBlock',
+                    id: 'category-list-1',
+                },
+                {
+                    __typename: 'ArticleListBlock',
+                    id: 'article-list-1',
                 },
             ],
         },
