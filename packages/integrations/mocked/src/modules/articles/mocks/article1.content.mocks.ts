@@ -239,13 +239,13 @@ export const MOCK_ARTICLE1_DE: Articles.Model.Article[] = [
         lead: 'Erfahren Sie, wie Sie Ihre PowerPro-Werkzeuge richtig warten, um optimale Leistung und Langlebigkeit zu gewährleisten.',
         tags: ['wartung', 'werkzeuge', 'anleitung'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-thumb-maintenance.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-maintenance-thumb.jpg',
             width: 640,
             height: 427,
             alt: 'Werkzeugwartung',
         },
         thumbnail: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-thumb-accessories.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-maintenance-thumb.jpg',
             alt: 'Werkzeugwartung-Thumbnail',
         },
         category: {
@@ -467,13 +467,13 @@ export const MOCK_ARTICLE1_PL: Articles.Model.Article[] = [
         lead: 'Dowiedz się, jak prawidłowo konserwować narzędzia PowerPro, aby zapewnić optymalną wydajność i trwałość.',
         tags: ['konserwacja', 'narzędzia', 'przewodnik'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-thumb-maintenance.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-maintenance-thumb.jpg',
             width: 640,
             height: 427,
             alt: 'Konserwacja narzędzi',
         },
         thumbnail: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-thumb-accessories.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-maintenance-thumb.jpg',
             alt: 'Miniatura konserwacji narzędzi',
         },
         category: {
