@@ -1,5 +1,11 @@
 # @o2s/frontend
 
+## 0.24.1
+
+### Patch Changes
+
+- aaa8c37: code formatting fixes
+
 ## 0.24.0
 
 ### Minor Changes

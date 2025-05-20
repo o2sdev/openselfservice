@@ -1,5 +1,11 @@
 # @o2s/integrations.strapi-cms
 
+## 1.4.1
+
+### Patch Changes
+
+- b91bfc4: fixed incorrect mapping of an optional field
+
 ## 1.4.0
 
 ### Minor Changes
