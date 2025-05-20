@@ -20,8 +20,8 @@
     "update-deps:latest": "npx npm-check-updates --target latest -u"
   },
   "dependencies": {
-    "@medusajs/js-sdk": "^2.8.1",
-    "@medusajs/types": "^2.8.1",
+    "@medusajs/js-sdk": "^2.8.2",
+    "@medusajs/types": "^2.8.2",
     "@o2s/framework": "*",
     "@o2s/utils.logger": "*"
   },
@@ -30,7 +30,7 @@
     "@o2s/prettier-config": "*",
     "@o2s/typescript-config": "*",
     "concurrently": "^9.1.2",
-    "eslint": "^9.26.0",
+    "eslint": "^9.27.0",
     "prettier": "^3.5.3",
     "tsc-alias": "^1.8.16",
     "typescript": "^5.8.3"

@@ -75,14 +75,12 @@ export class PageService {
                 if (!page) {
                     return this.articlesService
                         .getArticle({ slug: query.slug, locale: headers['x-locale'] })
-                        .pipe(
-                            catchError(() => {
-                                throw new NotFoundException();
-                            }),
-                        )
                         .pipe(concatMap((article) => this.processArticle(article, query, headers)));
                 }
                 return this.processPage(page, query, headers);
+            }),
+            catchError(() => {
+                throw new NotFoundException();
             }),
         );
     }
