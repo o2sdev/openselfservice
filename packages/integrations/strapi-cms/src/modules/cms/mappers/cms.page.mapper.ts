@@ -12,16 +12,23 @@ export const mapPage = (data: PageFragment): CMS.Model.Page.Page => {
     return {
         id: data.documentId,
         slug: data.slug,
+        isProtected: !!data.protected,
         locale: data.locale!,
         template: template,
         updatedAt: data.updatedAt,
+        createdAt: data.createdAt,
         seo: {
             title: data.SEO!.title,
             noIndex: data.SEO!.noIndex,
             noFollow: data.SEO!.noFollow,
             description: data.SEO!.description,
             keywords: data.SEO!.keywords?.map((keyword) => keyword.keyword) || [],
-            image: data.SEO!.image,
+            image: data.SEO!.image
+                ? {
+                      ...data.SEO!.image,
+                      alt: data.SEO!.image?.alternativeText || '',
+                  }
+                : undefined,
         },
         hasOwnTitle: data.hasOwnTitle,
         parent: {
@@ -53,16 +60,23 @@ export const mapAlternativePages = (data: PageFragment): CMS.Model.Page.Page => 
     return {
         id: data.documentId,
         slug: data.slug,
+        isProtected: !!data.protected,
         locale: data.locale!,
         template: template,
         updatedAt: data.updatedAt,
+        createdAt: data.createdAt,
         seo: {
             title: data.SEO!.title,
             noIndex: data.SEO!.noIndex,
             noFollow: data.SEO!.noFollow,
             description: data.SEO!.description,
             keywords: data.SEO!.keywords?.map((keyword) => keyword.keyword) || [],
-            image: data.SEO!.image,
+            image: data.SEO!.image
+                ? {
+                      ...data.SEO!.image,
+                      alt: data.SEO!.image?.alternativeText || '',
+                  }
+                : undefined,
         },
         hasOwnTitle: data.hasOwnTitle,
         parent: {
@@ -112,7 +126,7 @@ const mapTemplate = (template?: TemplateFragment): CMS.Model.Page.PageTemplate =
     throw new NotFoundException();
 };
 
-const mapSlot = (slot: ComponentFragment[]): CMS.Model.Page.SlotBlock[] => {
+export const mapSlot = (slot: ComponentFragment[]): CMS.Model.Page.SlotBlock[] => {
     return slot.reduce((acc, component) => {
         const __typename = mapComponent(component);
 
@@ -155,5 +169,23 @@ const mapComponent = (component: ComponentFragment) => {
             return 'ServiceDetailsBlock';
         case 'ComponentComponentsTicketRecent':
             return 'TicketRecentBlock';
+        case 'ComponentComponentsSurveyJsComponent':
+            return 'SurveyJsBlock';
+        case 'ComponentComponentsOrderList':
+            return 'OrderListBlock';
+        case 'ComponentComponentsOrdersSummary':
+            return 'OrdersSummaryBlock';
+        case 'ComponentComponentsOrderDetails':
+            return 'OrderDetailsBlock';
+        case 'ComponentComponentsQuickLinks':
+            return 'QuickLinksBlock';
+        case 'ComponentComponentsCategoryList':
+            return 'CategoryListBlock';
+        case 'ComponentComponentsArticleList':
+            return 'ArticleListBlock';
+        case 'ComponentComponentsCategory':
+            return 'CategoryBlock';
+        case 'ComponentComponentsArticle':
+            return 'ArticleBlock';
     }
 };

@@ -1,0 +1,10 @@
+query getCategories($id: String, $locale: I18NLocaleCode!, $limit: Int, $offset: Int) {
+    categories_connection {
+        pageInfo {
+            total
+        }
+    }
+    categories(locale: $locale, filters: { slug: { eq: $id } }, pagination: { limit: $limit, start: $offset }) {
+        ...Category
+    }
+}

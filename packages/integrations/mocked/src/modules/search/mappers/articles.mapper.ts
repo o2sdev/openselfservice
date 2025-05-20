@@ -1,6 +1,6 @@
 import { Articles, Search } from '@o2s/framework/modules';
 
-import { MOCK_ARTICLES_DE, MOCK_ARTICLES_EN, MOCK_ARTICLES_PL } from '@/modules/articles/articles.mapper';
+import { MOCK_ARTICLES_DE, MOCK_ARTICLES_EN, MOCK_ARTICLES_PL } from '@/modules/articles/mocks/articles.mocks';
 
 export const mapArticles = (payload: Search.Model.SearchPayload): Articles.Model.Articles => {
     const offset = payload.pagination?.offset ?? 0;

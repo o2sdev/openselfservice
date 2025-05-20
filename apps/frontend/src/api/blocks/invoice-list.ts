@@ -11,7 +11,7 @@ export const invoiceList = (sdk: Sdk) => ({
         getInvoiceList: (
             query: Blocks.InvoiceList.Request.GetInvoiceListBlockQuery,
             headers: Headers.AppHeaders,
-            authorization: string,
+            authorization?: string,
         ): Promise<Blocks.InvoiceList.Model.InvoiceListBlock> =>
             sdk.makeRequest({
                 method: 'get',
@@ -19,12 +19,16 @@ export const invoiceList = (sdk: Sdk) => ({
                 headers: {
                     ...getApiHeaders(),
                     ...headers,
-                    Authorization: `Bearer ${authorization}`,
+                    ...(authorization
+                        ? {
+                              Authorization: `Bearer ${authorization}`,
+                          }
+                        : {}),
                 },
                 params: query,
             }),
 
-        getInvoicePdf: (id: string, headers: Headers.AppHeaders, authorization: string): Promise<Blob> =>
+        getInvoicePdf: (id: string, headers: Headers.AppHeaders, authorization?: string): Promise<Blob> =>
             sdk.makeRequest({
                 method: 'get',
                 url: `${API_URL}/${id}/pdf`,
@@ -32,7 +36,11 @@ export const invoiceList = (sdk: Sdk) => ({
                 headers: {
                     ...getApiHeaders(),
                     ...headers,
-                    Authorization: `Bearer ${authorization}`,
+                    ...(authorization
+                        ? {
+                              Authorization: `Bearer ${authorization}`,
+                          }
+                        : {}),
                     Accept: 'application/pdf',
                 },
             }),

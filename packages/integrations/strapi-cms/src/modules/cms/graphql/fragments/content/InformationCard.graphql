@@ -1,0 +1,9 @@
+fragment InformationCard on ComponentContentInformationCard {
+    title
+    icon
+    message
+    altMessage
+    link {
+        ...Link
+    }
+}

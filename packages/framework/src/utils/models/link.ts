@@ -1,5 +1,6 @@
 export class Link {
-    label!: string;
-    ariaLabel?: string;
     url!: string;
+    label!: string;
+    description?: string;
+    icon?: string;
 }

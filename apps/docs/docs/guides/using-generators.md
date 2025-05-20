@@ -44,7 +44,8 @@ To create a new block within the `frontend` app, you can choose the `frontend-bl
     - server component,
     - client component,
     - renderer,
-    - typings.
+    - typings,
+    - API methods,
 
 ---
 

@@ -1,5 +1,71 @@
 # @o2s/framework
 
+## 0.24.0
+
+### Minor Changes
+
+- 05eea01: chore: update dependencies
+- 44653fb: feat: orderDetails page implemented
+
+    - added new UI component: InfoCard,
+    - used InfoCard in PaymentsSummaryBlock, OrdersSummary and OrderDetails,
+    - fixed ordersSummaryBlock integration with strapi,
+    - used DynamicIcon in CategoryBlock,
+    - added orientation prop for Progress component
+
+## 0.23.0
+
+### Minor Changes
+
+- 2e81dca: added possibility to defined unprotected pages
+
+## 0.22.1
+
+### Patch Changes
+
+- 87185e9: feat: updated mocked content for knowledge base
+
+## 0.22.0
+
+### Minor Changes
+
+- 2e4f22d: feat: add scrollable toggle group filter with multiple selection
+
+    - Add scroll container for toggle group filter in overlay view
+    - Implement multiple selection version for toggle group filter
+    - Add support for horizontal scrolling in filter items
+    - Improve filter item layout with proper spacing and alignment
+    - Add new components: ScrollContainer and ToggleGroup
+    - Add shx script for better cross-platform shell compatibility
+    - Add proper styling for filter items in scroll container
+
+- 8b93cbf: feat: Implement SurveyJS forms
+- 8d92afc: Adding label clickToSelect for reseting filters
+- 30f3524: added `OrdersSummary` block and reworked mocked orders to return random orders instead of them being hardcoded
+- 8b93cbf: feat: Integrated SurveyJS
+- 30f3524: feat: implemented orderListBlock
+
+    - new page /orders,
+    - added strapi integration for page /orders
+    - new UI dropdown-menu component
+
+- 8b93cbf: feat: implement surveyJS forms
+- 84b9002: modified `OrdersSummary` to make range filters optional
+- 6d63cb1: feat: added surveyJS module
+- ba125d6: Added orders module
+- bb46536: feat: cases submission
+
+    - new component DynamicIcon - for loading icons dinamicly,
+    - new component ActionLinks - for showing button list with dropdown-menu,
+    - new pages: /contact-us, /submit-complaint, /request-device-maintenance,
+    - fixed placeholders and disabled state in SurveyJS fields,
+
+- 68f7858: chore: updated dependencies
+
+### Patch Changes
+
+- e4ebc5a: updated dependencies
+
 ## 0.21.1
 
 ### Patch Changes

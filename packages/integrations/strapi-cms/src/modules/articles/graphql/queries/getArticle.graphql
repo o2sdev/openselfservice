@@ -1,0 +1,41 @@
+query getArticle($id: ID!, $locale: I18NLocaleCode!) {
+    component(documentId: $id, locale: $locale) {
+        name
+        content {
+            __typename
+            ... on ComponentComponentsArticle {
+                ...Article
+            }
+        }
+    }
+}
+
+query getArticles(
+    $locale: I18NLocaleCode!
+    $slugs: [String]
+    $categories: [String]
+    $dateFrom: DateTime
+    $dateTo: DateTime
+    $limit: Int
+    $offset: Int
+    $sort: [String]
+) {
+    pages_connection {
+        pageInfo {
+            total
+        }
+    }
+    articles: pages(
+        filters: {
+            slug: { in: $slugs }
+            categories: { slug: { in: $categories } }
+            updatedAt: { gte: $dateFrom, lte: $dateTo }
+        }
+        pagination: { limit: $limit, start: $offset }
+        sort: $sort
+        locale: $locale
+    ) {
+        protected
+        ...ArticleTemplate
+    }
+}

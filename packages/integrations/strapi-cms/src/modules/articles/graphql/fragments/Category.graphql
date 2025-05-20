@@ -1,0 +1,16 @@
+fragment Category on Category {
+    documentId
+    __typename
+    slug
+    createdAt
+    updatedAt
+    name
+    description
+    icon
+    parent {
+        slug
+        SEO {
+            title
+        }
+    }
+}

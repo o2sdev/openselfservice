@@ -14,12 +14,13 @@
         "changeset": "changeset",
         "version-packages": "changeset version",
         "prerelease": "turbo run build",
-        "release": "changeset publish"
+        "release": "changeset publish",
+        "update-deps": "npx npm-check-updates --format group --workspaces --interactive"
     },
     "engines": {
         "node": ">=22"
     },
-    "packageManager": "npm@11.3.0",
+    "packageManager": "npm@11.4.0",
     "workspaces": [
         "apps/*",
         "packages/*",
@@ -28,15 +29,16 @@
         "packages/utils/*"
     ],
     "devDependencies": {
-        "@commitlint/cli": "^19.8.0",
-        "@commitlint/config-conventional": "^19.8.0",
+        "@commitlint/cli": "^19.8.1",
+        "@commitlint/config-conventional": "^19.8.1",
         "husky": "^9.1.7",
-        "lint-staged": "^15.5.1",
+        "lint-staged": "^16.0.0",
         "prettier": "^3.5.3",
-        "turbo": "^2.5.0",
+        "syncpack": "^14.0.0-alpha.11",
+        "turbo": "^2.5.3",
         "typescript": "5.8.3"
     },
     "dependencies": {
-        "@changesets/cli": "^2.29.0"
+        "@changesets/cli": "^2.29.4"
     }
 }

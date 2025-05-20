@@ -1,0 +1,30 @@
+fragment OrdersSummaryComponent on ComponentComponentsOrdersSummary {
+    __typename
+    id
+    title
+    subtitle
+    chartTitle
+    chartPreviousPeriodLabel
+    chartCurrentPeriodLabel
+    ranges {
+        id
+        label
+        value
+        type
+        default
+    }
+    noResults {
+        title
+        description
+    }
+    totalValue {
+        ...InformationCard
+    }
+    averageValue {
+        ...InformationCard
+    }
+    averageNumber {
+        ...InformationCard
+    }
+    
+}

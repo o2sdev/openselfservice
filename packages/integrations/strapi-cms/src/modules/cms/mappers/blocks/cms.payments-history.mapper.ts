@@ -18,10 +18,10 @@ export const mapPaymentsHistoryBlock = (
             return {
                 id: component.id,
                 title: component.title,
-                topSegment: component.topSegment,
-                middleSegment: component.middleSegment,
-                bottomSegment: component.bottomSegment,
-                total: component.total,
+                topSegment: component.topSegment!,
+                middleSegment: component.middleSegment!,
+                bottomSegment: component.bottomSegment!,
+                total: component.total!,
                 monthsToShow: component.monthsToShow,
             };
     }

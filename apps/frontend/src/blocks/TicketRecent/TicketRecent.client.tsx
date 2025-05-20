@@ -1,3 +1,5 @@
+'use client';
+
 import { ArrowRight } from 'lucide-react';
 import React from 'react';
 
@@ -9,6 +11,7 @@ import { Typography } from '@o2s/ui/components/typography';
 import { Link as NextLink } from '@/i18n';
 
 import { RichText } from '@/components/RichText/RichText';
+import { TooltipHover } from '@/components/TooltipHover/TooltipHover';
 
 import { TicketRecentPureProps } from './TicketRecent.types';
 
@@ -16,7 +19,7 @@ export const TicketRecentPure: React.FC<TicketRecentPureProps> = ({ ...component
     const { title, tickets, noResults, details } = component;
 
     function extractFirst(content: string) {
-        const match = content.match(/<p>(.*?)<\/p>/);
+        const match = content.match(/<p>([\s\S]*?)<\/p>/);
         const extractedContent = match ? match[1] : content;
         return extractedContent?.slice(0, 90) + '...';
     }
@@ -43,9 +46,7 @@ export const TicketRecentPure: React.FC<TicketRecentPureProps> = ({ ...component
                                                             <div className="flex items-center gap-2">
                                                                 <Avatar>
                                                                     <AvatarImage src={comment.author.avatar} />
-                                                                    <AvatarFallback>
-                                                                        {comment.author.initials}
-                                                                    </AvatarFallback>
+                                                                    <AvatarFallback name={comment.author.name} />
                                                                 </Avatar>
                                                                 <div className="flex flex-col gap-1">
                                                                     <Typography variant="small">
@@ -60,21 +61,38 @@ export const TicketRecentPure: React.FC<TicketRecentPureProps> = ({ ...component
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div className="basis-2/3">
-                                                            <RichText
-                                                                content={extractFirst(comment.content)}
-                                                                baseFontSize="small"
+                                                        <div className="basis-2/3 flex items-center justify-between gap-4">
+                                                            <TooltipHover
+                                                                trigger={() => (
+                                                                    <Link
+                                                                        asChild
+                                                                        className="whitespace-normal text-foreground hover:text-primary"
+                                                                    >
+                                                                        <NextLink
+                                                                            href={ticket.detailsUrl}
+                                                                            title={details}
+                                                                        >
+                                                                            <div className="line-clamp-2">
+                                                                                <RichText
+                                                                                    content={extractFirst(
+                                                                                        comment.content,
+                                                                                    )}
+                                                                                    baseFontSize="small"
+                                                                                    className=""
+                                                                                />
+                                                                            </div>
+                                                                            <ArrowRight className="h-4 w-4" />
+                                                                        </NextLink>
+                                                                    </Link>
+                                                                )}
+                                                                content={
+                                                                    <RichText
+                                                                        content={comment.content}
+                                                                        className="max-w-[300px]"
+                                                                        baseFontSize="small"
+                                                                    />
+                                                                }
                                                             />
-
-                                                            <Link asChild>
-                                                                <NextLink
-                                                                    href={ticket.detailsUrl}
-                                                                    className="flex items-center justify-end gap-2"
-                                                                >
-                                                                    {details}
-                                                                    <ArrowRight className="h-4 w-4" />
-                                                                </NextLink>
-                                                            </Link>
                                                         </div>
                                                     </div>
                                                 )}

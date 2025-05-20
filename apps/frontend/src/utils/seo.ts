@@ -72,7 +72,7 @@ export const generateSeo = ({
                           url: image.url as string,
                           width: image.width as number,
                           height: image.height as number,
-                          alt: image.alternativeText as string,
+                          alt: image.alt as string,
                       },
                   ]
                 : undefined,

@@ -5,10 +5,9 @@ const MOCK_HEADER_LOGON_EN: CMS.Model.Header.Header = {
     title: 'MOCK_HEADER_LOGON_EN',
     logo: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/logo.svg',
-        alternativeText: 'Logo',
+        alt: 'Logo',
         width: 92,
         height: 24,
-        name: 'Logo',
     },
     languageSwitcherLabel: 'Language',
     mobileMenuLabel: {
@@ -49,6 +48,11 @@ const MOCK_HEADER_LOGON_EN: CMS.Model.Header.Header = {
                     label: 'Services',
                     url: '/services',
                 },
+                {
+                    __typename: 'NavigationItem',
+                    label: 'Orders',
+                    url: '/orders',
+                },
             ],
         },
         {
@@ -57,8 +61,8 @@ const MOCK_HEADER_LOGON_EN: CMS.Model.Header.Header = {
             items: [
                 {
                     __typename: 'NavigationItem',
-                    label: 'O2S Documentation',
-                    url: 'https://www.openselfservice.com/',
+                    label: 'Welcome Hub',
+                    url: '/help-and-support',
                 },
             ],
         },
@@ -77,15 +81,18 @@ const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
     title: 'MOCK_HEADER_LOGON_DE',
     logo: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/logo.svg',
-        alternativeText: 'Logo',
+        alt: 'Logo',
         width: 92,
         height: 24,
-        name: 'Logo',
     },
     languageSwitcherLabel: 'Sprache',
     mobileMenuLabel: {
         open: 'Menü öffnen',
         close: 'Menü schließen',
+    },
+    userInfo: {
+        url: '/user-account',
+        label: 'Benutzerprofil',
     },
     items: [
         {
@@ -117,6 +124,11 @@ const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
                     label: 'Dienstleistungen',
                     url: '/dienstleistungen',
                 },
+                {
+                    __typename: 'NavigationItem',
+                    label: 'Bestellungen',
+                    url: '/bestellungen',
+                },
             ],
         },
         {
@@ -125,8 +137,8 @@ const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
             items: [
                 {
                     __typename: 'NavigationItem',
-                    label: 'O2S Dokumentation',
-                    url: 'https://www.openselfservice.com/',
+                    label: 'Willkommen Hub',
+                    url: '/hilfe-und-support',
                 },
             ],
         },
@@ -145,10 +157,9 @@ const MOCK_HEADER_LOGON_PL: CMS.Model.Header.Header = {
     title: 'MOCK_HEADER_LOGON_PL',
     logo: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/logo.svg',
-        alternativeText: 'Logo',
+        alt: 'Logo',
         width: 92,
         height: 24,
-        name: 'Logo',
     },
     languageSwitcherLabel: 'Język',
     mobileMenuLabel: {
@@ -189,6 +200,11 @@ const MOCK_HEADER_LOGON_PL: CMS.Model.Header.Header = {
                     label: 'Usługi',
                     url: '/uslugi',
                 },
+                {
+                    __typename: 'NavigationItem',
+                    label: 'Zamówienia',
+                    url: '/zamowienia',
+                },
             ],
         },
         {
@@ -197,8 +213,8 @@ const MOCK_HEADER_LOGON_PL: CMS.Model.Header.Header = {
             items: [
                 {
                     __typename: 'NavigationItem',
-                    label: 'Dokumentacja O2S',
-                    url: 'https://www.openselfservice.com/',
+                    label: 'Centrum powitalne',
+                    url: '/pomoc-i-wsparcie',
                 },
             ],
         },
@@ -218,10 +234,9 @@ const MOCK_HEADER_LOGOUT_EN: CMS.Model.Header.Header = {
     title: 'MOCK_HEADER_LOGOUT_EN',
     logo: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/logo.svg',
-        alternativeText: 'Logo',
+        alt: 'Logo',
         width: 92,
         height: 24,
-        name: 'Logo',
     },
     languageSwitcherLabel: 'Language',
     mobileMenuLabel: {
@@ -250,10 +265,9 @@ const MOCK_HEADER_LOGOUT_DE: CMS.Model.Header.Header = {
     title: 'MOCK_HEADER_LOGOUT_DE',
     logo: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/logo.svg',
-        alternativeText: 'Logo',
+        alt: 'Logo',
         width: 92,
         height: 24,
-        name: 'Logo',
     },
     languageSwitcherLabel: 'Sprache',
     mobileMenuLabel: {
@@ -282,10 +296,9 @@ const MOCK_HEADER_LOGOUT_PL: CMS.Model.Header.Header = {
     title: 'MOCK_HEADER_LOGOUT_PL',
     logo: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/logo.svg',
-        alternativeText: 'Logo',
+        alt: 'Logo',
         width: 92,
         height: 24,
-        name: 'Logo',
     },
     languageSwitcherLabel: 'Język',
     mobileMenuLabel: {

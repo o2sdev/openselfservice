@@ -5,7 +5,7 @@ import { ArrowRight } from 'lucide-react';
 import React, { useState, useTransition } from 'react';
 
 import { Badge } from '@o2s/ui/components/badge';
-import { Link } from '@o2s/ui/components/link';
+import { Button } from '@o2s/ui/components/button';
 import { LoadingOverlay } from '@o2s/ui/components/loading-overlay';
 import { Separator } from '@o2s/ui/components/separator';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@o2s/ui/components/table';
@@ -17,8 +17,8 @@ import { ticketBadgeVariants } from '@/utils/mappings/ticket-badge';
 
 import { Link as NextLink } from '@/i18n';
 
-import { Filters } from '@/components/Filters/Filters';
-import FiltersContextProvider, { InitialFilters } from '@/components/Filters/FiltersContext';
+import { ActionLinks } from '@/components/ActionLinks/ActionLinks';
+import { FiltersSection } from '@/components/Filters/FiltersSection';
 import { NoResults } from '@/components/NoResults/NoResults';
 import { Pagination } from '@/components/Pagination/Pagination';
 
@@ -32,8 +32,10 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
     };
 
     const initialData = component.tickets.data;
+
     const [data, setData] = useState<Blocks.TicketList.Model.TicketListBlock>(component);
     const [filters, setFilters] = useState(initialFilters);
+
     const [isPending, startTransition] = useTransition();
 
     const handleFilter = (data: Partial<Blocks.TicketList.Request.GetTicketListBlockQuery>) => {
@@ -57,19 +59,29 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
         <div className="w-full">
             {initialData.length > 0 ? (
                 <div className="flex flex-col gap-6">
-                    <div className="flex justify-between items-center gap-4 flex-wrap md:flex-nowrap">
-                        <Typography variant="h2" asChild>
-                            <h2>{data.subtitle}</h2>
+                    <div className="w-full flex gap-4 flex-col md:flex-row justify-between">
+                        <Typography variant="h1" asChild>
+                            <h1>{data.title}</h1>
                         </Typography>
-                        <FiltersContextProvider initialFilters={initialFilters as unknown as InitialFilters}>
-                            <Filters
-                                filters={data.filters}
-                                initialValues={filters}
-                                onSubmit={handleFilter}
-                                onReset={handleReset}
-                            />
-                        </FiltersContextProvider>
+
+                        {data.actionLinks && (
+                            <ActionLinks actionLinks={data.actionLinks} showMoreLabel={data.labels.showMore} />
+                        )}
                     </div>
+
+                    <Separator />
+
+                    <FiltersSection
+                        title={data.subtitle}
+                        initialFilters={initialFilters}
+                        filters={data.filters}
+                        initialValues={filters}
+                        onSubmit={handleFilter}
+                        onReset={handleReset}
+                        labels={{
+                            clickToSelect: data.labels.clickToSelect,
+                        }}
+                    />
 
                     <LoadingOverlay isActive={isPending}>
                         {data.tickets.data.length ? (
@@ -144,16 +156,16 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                                                     }
                                                 })}
                                                 {data.table.actions && (
-                                                    <TableCell className="p-4">
-                                                        <Link asChild>
+                                                    <TableCell className="py-0">
+                                                        <Button asChild variant="link">
                                                             <NextLink
                                                                 href={ticket.detailsUrl}
                                                                 className="flex items-center justify-end gap-2"
                                                             >
-                                                                {data.table.actions.label}
                                                                 <ArrowRight className="h-4 w-4" />
+                                                                {data.table.actions.label}
                                                             </NextLink>
-                                                        </Link>
+                                                        </Button>
                                                     </TableCell>
                                                 )}
                                             </TableRow>

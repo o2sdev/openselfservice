@@ -8,7 +8,7 @@ import { UserAccount } from './UserAccount.server';
 
 export interface UserAccountRendererProps {
     id: string;
-    accessToken: string;
+    accessToken?: string;
 }
 
 export const UserAccountRenderer: React.FC<UserAccountRendererProps> = ({ id, accessToken }) => {

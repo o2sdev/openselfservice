@@ -1,4 +1,4 @@
-import { CMS } from '../../models';
+import { Articles, CMS } from '../../models';
 
 import { Breadcrumb, Init, Page } from './page.model';
 
@@ -28,20 +28,57 @@ export const mapPage = (
                 noFollow: page.seo.noFollow,
             },
             locales,
+            isProtected: page.isProtected,
         },
         data: {
             alternativeUrls,
             template: page.template,
             hasOwnTitle: page.hasOwnTitle,
-            breadcrumbs: mapBreadcrumbs(page),
+            breadcrumbs: mapPageBreadcrumbs(page),
+        },
+    };
+};
+export const mapArticle = (
+    article: Articles.Model.Article,
+    category: Articles.Model.Category,
+    mainLocale: string,
+): Page => {
+    return {
+        meta: {
+            seo: {
+                title: article.title,
+                description: article.lead,
+                keywords: article.tags,
+                image: article.image,
+                noIndex: false,
+                noFollow: false,
+            },
+            locales: [mainLocale],
+            isProtected: article.isProtected,
+        },
+        data: {
+            alternativeUrls: {},
+            template: {
+                __typename: 'OneColumnTemplate',
+                slots: {
+                    main: [
+                        {
+                            __typename: 'ArticleBlock',
+                            ...article,
+                        },
+                    ],
+                },
+            },
+            hasOwnTitle: true,
+            breadcrumbs: mapArticleBreadcrumbs(article, category),
         },
     };
 };
 
-const mapBreadcrumbs = (page: CMS.Model.Page.Page): Breadcrumb[] => {
+const mapPageBreadcrumbs = (page: CMS.Model.Page.Page): Breadcrumb[] => {
     const breadcrumbs: Breadcrumb[] = [];
 
-    function extractFromParent(parent: CMS.Model.Page.Page['parent'] | undefined): void {
+    function extractFromParent(parent: CMS.Model.Page.Page['parent']): void {
         if (!parent) return;
 
         if (parent.parent) {
@@ -50,7 +87,7 @@ const mapBreadcrumbs = (page: CMS.Model.Page.Page): Breadcrumb[] => {
 
         breadcrumbs.push({
             slug: parent.slug,
-            label: parent.seo?.title || parent.slug,
+            label: parent.seo.title,
         });
     }
 
@@ -58,7 +95,33 @@ const mapBreadcrumbs = (page: CMS.Model.Page.Page): Breadcrumb[] => {
 
     breadcrumbs.push({
         slug: page.slug,
-        label: page.seo?.title || page.slug,
+        label: page.seo?.title,
+    });
+
+    return breadcrumbs.filter((breadcrumb) => breadcrumb.slug);
+};
+
+const mapArticleBreadcrumbs = (article: Articles.Model.Article, category: Articles.Model.Category): Breadcrumb[] => {
+    const breadcrumbs: Breadcrumb[] = [];
+
+    function extractFromParent(parent: Articles.Model.Category['parent']): void {
+        if (!parent) return;
+
+        if (parent.parent) {
+            extractFromParent(parent.parent);
+        }
+
+        breadcrumbs.push({
+            slug: parent.slug,
+            label: parent.title,
+        });
+    }
+
+    extractFromParent(category);
+
+    breadcrumbs.push({
+        slug: article.slug,
+        label: article.title,
     });
 
     return breadcrumbs.filter((breadcrumb) => breadcrumb.slug);

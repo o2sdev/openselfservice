@@ -1,5 +1,128 @@
 # @o2s/frontend
 
+## 0.24.1
+
+### Patch Changes
+
+- aaa8c37: code formatting fixes
+
+## 0.24.0
+
+### Minor Changes
+
+- 05eea01: chore: update dependencies
+- 1200a28: feat: update dashboard mock
+- 44653fb: feat: orderDetails page implemented
+
+    - added new UI component: InfoCard,
+    - used InfoCard in PaymentsSummaryBlock, OrdersSummary and OrderDetails,
+    - fixed ordersSummaryBlock integration with strapi,
+    - used DynamicIcon in CategoryBlock,
+    - added orientation prop for Progress component
+
+- 10fbec4: fix: fixed image implementation
+
+### Patch Changes
+
+- 10fbec4: improved global error handling for not-found and unexpected errors
+- Updated dependencies [05eea01]
+- Updated dependencies [44653fb]
+- Updated dependencies [10fbec4]
+    - @o2s/api-harmonization@0.23.0
+    - @o2s/framework@0.24.0
+    - @o2s/ui@0.16.0
+
+## 0.23.0
+
+### Minor Changes
+
+- 2e81dca: added possibility to defined unprotected pages
+
+### Patch Changes
+
+- Updated dependencies [2e81dca]
+    - @o2s/api-harmonization@0.22.0
+    - @o2s/framework@0.23.0
+
+## 0.22.1
+
+### Patch Changes
+
+- 87185e9: feat: updated mocked content for knowledge base
+- Updated dependencies [87185e9]
+    - @o2s/api-harmonization@0.21.1
+    - @o2s/framework@0.22.1
+
+## 0.22.0
+
+### Minor Changes
+
+- 2e4f22d: feat: add scrollable toggle group filter with multiple selection
+
+    - Add scroll container for toggle group filter in overlay view
+    - Implement multiple selection version for toggle group filter
+    - Add support for horizontal scrolling in filter items
+    - Improve filter item layout with proper spacing and alignment
+    - Add new components: ScrollContainer and ToggleGroup
+    - Add shx script for better cross-platform shell compatibility
+    - Add proper styling for filter items in scroll container
+
+- 04ed4ce: - Coherence of action buttons in tables.
+    - Changing styles for links in RichText component.
+- 8b93cbf: feat: Implement SurveyJS forms
+- 8d92afc: Adding label clickToSelect for reseting filters
+- 30f3524: added `OrdersSummary` block and reworked mocked orders to return random orders instead of them being hardcoded
+- 9a33c13: Add Tooltip to TicketRecent component.
+- 8b93cbf: feat: Integrated SurveyJS
+- 8d92afc: Help center pages and subpages implemented:
+
+    - Added new UI components InformativeCard, BlogCard, Author, ContentSection
+    - Styled blocks, Article, Article List, Category, Category List
+    - Added pagination to Category block
+    - Made changes to mocks and models
+
+- 30f3524: feat: implemented orderListBlock
+
+    - new page /orders,
+    - added strapi integration for page /orders
+    - new UI dropdown-menu component
+
+- a1acbd1: fixed text wrapping in table headers on larger screens
+- 8b93cbf: feat: implement surveyJS forms
+- 84b9002: modified `OrdersSummary` to make range filters optional
+- 2f05843: Moved link to whole row in recent tickets
+- bb46536: feat: cases submission
+
+    - new component DynamicIcon - for loading icons dinamicly,
+    - new component ActionLinks - for showing button list with dropdown-menu,
+    - new pages: /contact-us, /submit-complaint, /request-device-maintenance,
+    - fixed placeholders and disabled state in SurveyJS fields,
+
+- 68f7858: chore: updated dependencies
+
+### Patch Changes
+
+- e4ebc5a: updated dependencies
+- 84b9002: added explicit legend to the chart in `OrdersSummary` block
+- 84b9002: added responsive design to the `OrdersSummary` block
+- Updated dependencies [2e4f22d]
+- Updated dependencies [8b93cbf]
+- Updated dependencies [e4ebc5a]
+- Updated dependencies [8d92afc]
+- Updated dependencies [30f3524]
+- Updated dependencies [8b93cbf]
+- Updated dependencies [8d92afc]
+- Updated dependencies [30f3524]
+- Updated dependencies [8b93cbf]
+- Updated dependencies [84b9002]
+- Updated dependencies [6d63cb1]
+- Updated dependencies [ba125d6]
+- Updated dependencies [bb46536]
+- Updated dependencies [68f7858]
+    - @o2s/framework@0.22.0
+    - @o2s/ui@0.15.0
+    - @o2s/api-harmonization@0.21.0
+
 ## 0.21.1
 
 ### Patch Changes

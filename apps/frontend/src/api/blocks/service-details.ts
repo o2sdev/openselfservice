@@ -12,7 +12,7 @@ export const serviceDetails = (sdk: Sdk) => ({
             params: Blocks.ServiceDetails.Request.GetServiceDetailsBlockParams,
             query: Blocks.ServiceDetails.Request.GetServiceDetailsBlockQuery,
             headers: Headers.AppHeaders,
-            authorization: string,
+            authorization?: string,
         ): Promise<Blocks.ServiceDetails.Model.ServiceDetailsBlock> =>
             sdk.makeRequest({
                 method: 'get',
@@ -20,7 +20,11 @@ export const serviceDetails = (sdk: Sdk) => ({
                 headers: {
                     ...getApiHeaders(),
                     ...headers,
-                    Authorization: `Bearer ${authorization}`,
+                    ...(authorization
+                        ? {
+                              Authorization: `Bearer ${authorization}`,
+                          }
+                        : {}),
                 },
                 params: query,
             }),

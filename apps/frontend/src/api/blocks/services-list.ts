@@ -11,7 +11,7 @@ export const serviceList = (sdk: Sdk) => ({
         getServiceList: (
             query: Blocks.ServiceList.Request.GetServiceListBlockQuery,
             headers: Headers.AppHeaders,
-            authorization: string,
+            authorization?: string,
         ): Promise<Blocks.ServiceList.Model.ServiceListBlock> =>
             sdk.makeRequest({
                 method: 'get',
@@ -19,7 +19,11 @@ export const serviceList = (sdk: Sdk) => ({
                 headers: {
                     ...getApiHeaders(),
                     ...headers,
-                    Authorization: `Bearer ${authorization}`,
+                    ...(authorization
+                        ? {
+                              Authorization: `Bearer ${authorization}`,
+                          }
+                        : {}),
                 },
                 params: query,
             }),

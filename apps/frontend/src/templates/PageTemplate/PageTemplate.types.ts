@@ -4,5 +4,5 @@ import { Session } from 'next-auth';
 export interface PageTemplateProps {
     slug: string[];
     data: Modules.Page.Model.PageData;
-    session: NonNullable<Session>;
+    session: Session | null;
 }

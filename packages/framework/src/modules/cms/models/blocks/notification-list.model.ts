@@ -15,6 +15,7 @@ export class NotificationListBlock extends Block.Block {
     labels!: {
         today: string;
         yesterday: string;
+        clickToSelect: string;
     };
     detailsUrl!: string;
 }

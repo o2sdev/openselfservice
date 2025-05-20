@@ -36,6 +36,30 @@ query getComponent($id: ID!, $locale: I18NLocaleCode!) {
             ... on ComponentComponentsTicketRecent {
                 ...TicketRecentComponent
             }
+            ... on ComponentComponentsSurveyJsComponent {
+                ...SurveyjsComponent
+            }
+            ... on ComponentComponentsOrderList {
+                ...OrderListComponent
+            }
+            ... on ComponentComponentsOrderDetails {
+                ...OrderDetailsComponent
+            }
+            ... on ComponentComponentsOrdersSummary {
+                ...OrdersSummaryComponent
+            }
+            ... on ComponentComponentsQuickLinks {
+                ...QuickLinksComponent
+            }
+            ... on ComponentComponentsCategoryList {
+                ...CategoryListComponent
+            }
+            ... on ComponentComponentsArticleList {
+                ...ArticleListComponent
+            }
+            ... on ComponentComponentsCategory {
+                ...CategoryComponent
+            }
         }
     }
     configurableTexts(locale: $locale) {
@@ -56,6 +80,11 @@ query getComponent($id: ID!, $locale: I18NLocaleCode!) {
             settings
             renew
             details
+            reorder
+            clickToSelect
+            payOnline
+            close
+            trackOrder
         }
         errors {
             requestError {

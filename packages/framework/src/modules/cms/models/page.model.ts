@@ -5,21 +5,23 @@ export class Page {
     slug!: string;
     locale!: string;
     template!: PageTemplate;
+    createdAt!: string;
     updatedAt!: string;
     seo!: Models.SEO.Page;
     hasOwnTitle!: boolean;
-    parent!: {
+    parent?: {
         slug: string;
-        seo?: Pick<Models.SEO.Page, 'title'>;
+        seo: Pick<Models.SEO.Page, 'title'>;
         parent?: {
             slug: string;
-            seo?: Pick<Models.SEO.Page, 'title'>;
+            seo: Pick<Models.SEO.Page, 'title'>;
             parent?: {
                 slug: string;
-                seo?: Pick<Models.SEO.Page, 'title'>;
+                seo: Pick<Models.SEO.Page, 'title'>;
             };
         };
     };
+    isProtected!: boolean;
 }
 
 export abstract class Template {

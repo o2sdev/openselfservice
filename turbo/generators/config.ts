@@ -36,6 +36,11 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                 },
                 {
                     type: 'add',
+                    path: 'packages/integrations/{{kebabCase name}}/lint-staged.config.mjs',
+                    templateFile: 'templates/integration/lint-staged.config.hbs',
+                },
+                {
+                    type: 'add',
                     path: 'packages/integrations/{{kebabCase name}}/tsconfig.json',
                     templateFile: 'templates/integration/tsconfig.hbs',
                 },

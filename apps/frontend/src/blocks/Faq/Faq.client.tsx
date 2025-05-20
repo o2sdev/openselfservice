@@ -1,13 +1,10 @@
-'use client';
-
-import { useTranslations } from 'next-intl';
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@o2s/ui/components/accordion';
 import { Button } from '@o2s/ui/components/button';
-import { TooltipContent, TooltipTrigger } from '@o2s/ui/components/tooltip';
-import { Tooltip } from '@o2s/ui/components/tooltip';
 import { Typography } from '@o2s/ui/components/typography';
+
+import { Link as NextLink } from '@/i18n';
 
 import { Container } from '@/components/Container/Container';
 import { RichText } from '@/components/RichText/RichText';
@@ -16,9 +13,6 @@ import { FaqPureProps } from './Faq.types';
 
 export const FaqPure: React.FC<FaqPureProps> = ({ ...component }) => {
     const { title, subtitle, items, banner } = component;
-
-    const t = useTranslations();
-    const [isTooltipOpen, setIsTooltipOpen] = useState(false);
 
     return (
         <Container variant="narrow">
@@ -59,16 +53,9 @@ export const FaqPure: React.FC<FaqPureProps> = ({ ...component }) => {
                             <RichText content={banner?.description} className="text-muted-foreground" />
                         </div>
                         {banner?.button && (
-                            <Tooltip open={isTooltipOpen} onOpenChange={setIsTooltipOpen}>
-                                <TooltipTrigger asChild>
-                                    <Button key={banner?.button?.label} onClick={() => setIsTooltipOpen(true)}>
-                                        {banner?.button?.label}
-                                    </Button>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                    <p>{t('general.comingSoon')}</p>
-                                </TooltipContent>
-                            </Tooltip>
+                            <Button asChild aria-label={banner?.button?.label}>
+                                <NextLink href={banner?.button?.url}>{banner?.button?.label}</NextLink>
+                            </Button>
                         )}
                     </div>
                 )}

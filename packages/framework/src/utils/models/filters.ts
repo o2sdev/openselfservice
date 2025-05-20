@@ -9,15 +9,25 @@ export class Filters<T> {
     items!: FilterItem<T & { sort: string }>[];
 }
 
-export type FilterItem<T> = FilterSelect<T> | FilterDateRange<T>;
+export type FilterItem<T> = FilterSelect<T> | FilterDateRange<T> | FilterToggleGroup<T>;
 
 export class Filter<T> {
     id!: keyof T;
     label!: string;
+    isLeading?: boolean;
 }
 
 export class FilterSelect<T> extends Filter<T> {
     __typename!: 'FilterSelect';
+    allowMultiple!: boolean;
+    options!: {
+        value: string;
+        label: string;
+    }[];
+}
+
+export class FilterToggleGroup<T> extends Filter<T> {
+    __typename!: 'FilterToggleGroup';
     allowMultiple!: boolean;
     options!: {
         value: string;

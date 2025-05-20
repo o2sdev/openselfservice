@@ -2,13 +2,12 @@
 
 import { Repeat2, Settings } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Badge } from '@o2s/ui/components/badge';
 import { Button } from '@o2s/ui/components/button';
 import { Separator } from '@o2s/ui/components/separator';
 import { TextItem } from '@o2s/ui/components/text-item';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@o2s/ui/components/tooltip';
 import { Typography } from '@o2s/ui/components/typography';
 
 import { statusBadgeVariants } from '@/utils/mappings/services-badge';
@@ -16,6 +15,7 @@ import { statusBadgeVariants } from '@/utils/mappings/services-badge';
 import { Container } from '@/components/Container/Container';
 import { Price } from '@/components/Price/Price';
 import { RichText } from '@/components/RichText/RichText';
+import { TooltipHover } from '@/components/TooltipHover/TooltipHover';
 
 import { ServiceDetailsPureProps } from './ServiceDetails.types';
 
@@ -23,8 +23,6 @@ export const ServiceDetailsPure: React.FC<ServiceDetailsPureProps> = ({ ...compo
     const { data: service } = component;
 
     const t = useTranslations();
-    const [isSettingsTooltipOpen, setIsSettingsTooltipOpen] = useState(false);
-    const [isRenewTooltipOpen, setIsRenewTooltipOpen] = useState(false);
 
     return (
         <div className="w-full">
@@ -45,31 +43,27 @@ export const ServiceDetailsPure: React.FC<ServiceDetailsPureProps> = ({ ...compo
                                 <Price price={service.price.value} />
                             </Typography>
 
-                            <Tooltip open={isSettingsTooltipOpen} onOpenChange={setIsSettingsTooltipOpen}>
-                                <TooltipTrigger asChild>
-                                    <Button onClick={() => setIsSettingsTooltipOpen(true)}>
+                            <TooltipHover
+                                trigger={(setIsOpen) => (
+                                    <Button onClick={() => setIsOpen(true)}>
                                         <Settings className="w-4 h-4" />
                                         {service.labels.settings}
                                     </Button>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                    <p>{t('general.comingSoon')}</p>
-                                </TooltipContent>
-                            </Tooltip>
+                                )}
+                                content={<p>{t('general.comingSoon')}</p>}
+                            />
 
                             {service.status.value === 'INACTIVE' ||
                                 (service.status.value === 'EXPIRED' && (
-                                    <Tooltip open={isRenewTooltipOpen} onOpenChange={setIsRenewTooltipOpen}>
-                                        <TooltipTrigger asChild>
-                                            <Button variant="destructive" onClick={() => setIsRenewTooltipOpen(true)}>
+                                    <TooltipHover
+                                        trigger={(setIsOpen) => (
+                                            <Button variant="destructive" onClick={() => setIsOpen(true)}>
                                                 <Repeat2 className="w-4 h-4" />
                                                 {service.labels.renew}
                                             </Button>
-                                        </TooltipTrigger>
-                                        <TooltipContent>
-                                            <p>{t('general.comingSoon')}</p>
-                                        </TooltipContent>
-                                    </Tooltip>
+                                        )}
+                                        content={<p>{t('general.comingSoon')}</p>}
+                                    />
                                 ))}
                         </div>
                     </div>

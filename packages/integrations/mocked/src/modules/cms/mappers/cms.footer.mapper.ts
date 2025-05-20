@@ -5,10 +5,9 @@ const MOCK_FOOTER_EN: CMS.Model.Footer.Footer = {
     title: 'Legal and privacy',
     logo: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/logo.svg',
-        alternativeText: 'Logo',
+        alt: 'Logo',
         width: 92,
         height: 24,
-        name: 'Logo',
     },
     items: [
         {
@@ -60,10 +59,9 @@ const MOCK_FOOTER_PL: CMS.Model.Footer.Footer = {
     title: 'Informacje prawne i prywatność',
     logo: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/logo.svg',
-        alternativeText: 'Logo',
+        alt: 'Logo',
         width: 92,
         height: 24,
-        name: 'Logo',
     },
     items: [
         {
@@ -99,10 +97,9 @@ const MOCK_FOOTER_DE: CMS.Model.Footer.Footer = {
     title: 'Rechtliches und Datenschutz',
     logo: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/logo.svg',
-        alternativeText: 'Logo',
+        alt: 'Logo',
         width: 92,
         height: 24,
-        name: 'Logo',
     },
     items: [
         {

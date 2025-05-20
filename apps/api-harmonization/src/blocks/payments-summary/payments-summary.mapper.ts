@@ -1,3 +1,7 @@
+import dayjs from 'dayjs';
+
+import { Models } from '@o2s/framework/modules';
+
 import { checkNegativeValue } from '@o2s/api-harmonization/utils/price';
 
 import { CMS, Invoices } from '../../models';
@@ -8,9 +12,9 @@ export const mapPaymentsSummary = (
     cms: CMS.Model.PaymentsSummaryBlock.PaymentsSummaryBlock,
     invoices: Invoices.Model.Invoices,
     _locale: string,
+    defaultCurrency: Models.Price.Currency,
 ): PaymentsSummaryBlock => {
-    // TODO: get currency from header when it's implemented
-    const currency = invoices.data[0]?.currency || 'PLN';
+    const currency = invoices.data[0]?.currency || defaultCurrency;
     const overdueInvoices = invoices.data.filter((invoice) => invoice.paymentStatus === 'PAYMENT_PAST_DUE');
     const overdueAmount = overdueInvoices.reduce((acc, invoice) => {
         return acc + invoice.totalToBePaid.value;
@@ -20,7 +24,8 @@ export const mapPaymentsSummary = (
         ? Math.min(...overdueInvoices.map((invoice) => new Date(invoice.paymentDueDate).getTime()))
         : null;
 
-    const overdueDays = earliestDueDate ? Math.floor((Date.now() - earliestDueDate) / (1000 * 60 * 60 * 24)) : 0;
+    const overdueDays = earliestDueDate ? dayjs().diff(dayjs(earliestDueDate), 'days') : 0;
+    const isOverdue = overdueDays > 0 && overdueAmount > 0;
 
     const toBePaidAmount = invoices.data
         .filter((invoice) => invoice.paymentStatus === 'PAYMENT_DUE' || invoice.paymentStatus === 'PAYMENT_DECLINED')
@@ -34,18 +39,20 @@ export const mapPaymentsSummary = (
         currency: currency,
         overdue: {
             title: cms.overdue.title,
-            message: cms.overdue.message,
-            noPaymentsMessage: cms.overdue.noPaymentsMessage,
-            buttonLabel: cms.overdue.buttonLabel,
-            amount: checkNegativeValue({ value: overdueAmount, currency: currency }),
-            overdueDays: overdueDays,
+            link: cms.overdue.link,
+            description: isOverdue
+                ? cms.overdue?.message?.replace(/{days}/g, overdueDays.toString()) || ''
+                : cms.overdue?.altMessage || '',
+            value: { value: checkNegativeValue({ value: overdueAmount, currency }).value, currency },
+            isOverdue: isOverdue,
+            icon: cms.overdue.icon,
         },
         toBePaid: {
             title: cms.toBePaid.title,
-            message: cms.toBePaid.message,
-            noPaymentsMessage: cms.toBePaid.noPaymentsMessage,
-            buttonLabel: cms.toBePaid.buttonLabel,
-            amount: checkNegativeValue({ value: toBePaidAmount, currency: currency }),
+            icon: cms.toBePaid.icon,
+            description: toBePaidAmount > 0 ? cms.toBePaid?.message : cms.toBePaid?.altMessage,
+            link: cms.toBePaid.link,
+            value: { value: checkNegativeValue({ value: toBePaidAmount, currency }).value, currency },
         },
     };
 };
