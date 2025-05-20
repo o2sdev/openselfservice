@@ -12,7 +12,7 @@ export const orderDetails = (sdk: Sdk) => ({
             params: Blocks.OrderDetails.Request.GetOrderDetailsBlockParams,
             query: Blocks.OrderDetails.Request.GetOrderDetailsBlockQuery,
             headers: Headers.AppHeaders,
-            authorization: string,
+            authorization?: string,
         ): Promise<Blocks.OrderDetails.Model.OrderDetailsBlock> =>
             sdk.makeRequest({
                 method: 'get',
@@ -25,7 +25,7 @@ export const orderDetails = (sdk: Sdk) => ({
                 params: query,
             }),
 
-        getOrderPdf: (id: string, headers: Headers.AppHeaders, authorization: string): Promise<Blob> =>
+        getOrderPdf: (id: string, headers: Headers.AppHeaders, authorization?: string): Promise<Blob> =>
             sdk.makeRequest({
                 method: 'get',
                 url: `${API_URL}/documents/${id}/pdf`,
