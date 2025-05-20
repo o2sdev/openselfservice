@@ -6,7 +6,8 @@ const CREATE_NEW_PASSWORD_PAGE_PL: CMS.Model.CreateNewPasswordPage.CreateNewPass
     password: {
         id: 'password-1',
         name: 'password',
-        label: 'Hasło',
+        label: 'Nowe hasło',
+        description: 'Hasło musi spełniać następujące wymagania:',
         placeholder: 'Wprowadź swoje hasło',
         errorMessages: [
             {
@@ -124,7 +125,8 @@ const CREATE_NEW_PASSWORD_PAGE_EN: CMS.Model.CreateNewPasswordPage.CreateNewPass
     password: {
         id: 'password-1',
         name: 'password',
-        label: 'Password',
+        label: 'New password',
+        description: 'The password must meet the following requirements:',
         placeholder: 'Enter your password',
         errorMessages: [
             {
@@ -263,7 +265,8 @@ const CREATE_NEW_PASSWORD_PAGE_DE: CMS.Model.CreateNewPasswordPage.CreateNewPass
     password: {
         id: 'password-1',
         name: 'password',
-        label: 'Passwort',
+        label: 'Neues Passwort',
+        description: 'Das Passwort muss folgende Anforderungen erfüllen:',
         placeholder: 'Geben Sie Ihr Passwort ein',
         errorMessages: [
             {

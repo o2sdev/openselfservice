@@ -3,10 +3,11 @@ import { CircleAlert } from 'lucide-react';
 import React from 'react';
 
 import { Alert, AlertDescription } from '@o2s/ui/components/alert';
-import { InputWithLabelAndDescription } from '@o2s/ui/components/input';
+import { InputWithDetails } from '@o2s/ui/components/input';
 import { Typography } from '@o2s/ui/components/typography';
 
 import { InputValidations } from '@/components/InputValidation/InputValidation';
+import { InputValidationRegExpLabel } from '@/components/InputValidation/InputValidation.types';
 
 import { FormFieldProps } from './FormField.types';
 
@@ -27,7 +28,7 @@ export const FormField: React.FC<Readonly<FormFieldProps>> = ({
 }) => {
     return (
         <div className="flex flex-col gap-2">
-            <InputWithLabelAndDescription
+            <InputWithDetails
                 id={field.name}
                 type={type}
                 placeholder={placeholder}
@@ -57,7 +58,11 @@ export const FormField: React.FC<Readonly<FormFieldProps>> = ({
                 )}
             </ErrorMessage>
             {validations && (
-                <InputValidations targetInputName={field.name} validations={validations} value={field.value} />
+                <InputValidations
+                    targetInputName={field.name}
+                    validations={validations as InputValidationRegExpLabel[]}
+                    value={field.value}
+                />
             )}
         </div>
     );
