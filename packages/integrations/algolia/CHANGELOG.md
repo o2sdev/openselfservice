@@ -1,5 +1,18 @@
 # @o2s/integrations.algolia
 
+## 0.6.0
+
+### Minor Changes
+
+- 05eea01: chore: update dependencies
+
+### Patch Changes
+
+- Updated dependencies [05eea01]
+- Updated dependencies [44653fb]
+    - @o2s/utils.logger@0.12.0
+    - @o2s/framework@0.24.0
+
 ## 0.5.0
 
 ### Minor Changes
