@@ -1,5 +1,11 @@
 # @o2s/framework
 
+## 1.0.0
+
+### Major Changes
+
+- 0e0c816: Official stable release
+
 ## 0.24.0
 
 ### Minor Changes
