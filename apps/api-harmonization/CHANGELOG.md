@@ -1,5 +1,18 @@
 # @o2s/api-harmonization
 
+## 1.0.0
+
+### Major Changes
+
+- 0e0c816: Official stable release
+
+### Patch Changes
+
+- Updated dependencies [0e0c816]
+    - @o2s/framework@1.0.0
+    - @o2s/integrations.mocked@1.0.0
+    - @o2s/utils.logger@1.0.0
+
 ## 0.23.0
 
 ### Minor Changes
