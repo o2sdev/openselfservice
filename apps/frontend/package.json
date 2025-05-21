@@ -1,6 +1,6 @@
 {
     "name": "@o2s/frontend",
-    "version": "0.24.1",
+    "version": "0.25.0",
     "private": true,
     "scripts": {
         "prepare": "npx prisma generate && dotenv -e .env.local -- prisma migrate deploy && dotenv -e .env.local -- prisma db seed",
