@@ -48,7 +48,7 @@ const MOCK_PAYMENTS_SUMMARY_BLOCK_PL: CMS.Model.PaymentsSummaryBlock.PaymentsSum
             icon: 'ArrowUpRight',
             url: '',
         },
-        icon: 'Info',
+        icon: 'CreditCard',
     },
 };
 

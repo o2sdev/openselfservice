@@ -34,7 +34,7 @@ const MOCK_PRODUCT_2: Products.Model.Product = {
     description: 'Cordless angle grinder with 22V battery platform',
     shortDescription: 'Cordless angle grinder with 22V battery platform',
     image: {
-        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-charger.jpg',
         width: 640,
         height: 656,
         alt: 'Cordless Angle Grinder',
@@ -148,7 +148,7 @@ const MOCK_PRODUCT_6: Products.Model.Product = {
     shortDescription:
         '<ul><li>Short & Long-Term Rentals</li><li>Wide Equipment Selection</li><li>Maintenance & Support Included</li></ul>',
     image: {
-        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-rental.jpg',
         width: 640,
         height: 656,
         alt: 'RentPro Industrial™ – Flexible Equipment Rental Solutions',
@@ -177,7 +177,7 @@ const MOCK_PRODUCT_7: Products.Model.Product = {
     shortDescription:
         '<ul><li>ISO-Certified Calibration</li><li>On-Site & Remote Services</li><li>Detailed Reports</li></ul>',
     image: {
-        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-calibration.jpg',
         width: 640,
         height: 656,
         alt: 'PrecisionPro Calibration™ – Ensuring Accuracy for Industrial Equipment',
@@ -209,7 +209,7 @@ const MOCK_PRODUCT_8: Products.Model.Product = {
     shortDescription:
         '<ul><li>Smart Diagnostics</li><li>Sustainable Recycling</li><li>On-Demand Replacements</li></ul>',
     image: {
-        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-charger.jpg',
         width: 640,
         height: 656,
         alt: 'PowerCharge Solutions™ – Battery & Charger Management for Manufacturing',
@@ -242,7 +242,7 @@ const MOCK_PRODUCT_9: Products.Model.Product = {
     shortDescription:
         '<ul><li>Advanced Fume Extraction</li><li>Heat-Resistant PPE</li><li>Safety Compliance Checks</li></ul>',
     image: {
-        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-welding.jpg',
         width: 640,
         height: 656,
         alt: 'WeldGuard Safety™ – Protective Solutions for Welding Environments',
@@ -271,7 +271,7 @@ const MOCK_PRODUCT_10: Products.Model.Product = {
     shortDescription:
         '<ul><li>Energy Efficiency Audits</li><li>Custom Airflow Solutions</li><li>Preventative Maintenance</li></ul>',
     image: {
-        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-air.jpg',
         width: 640,
         height: 656,
         alt: 'MaxFlow Air Systems™ – Industrial Pneumatics Maintenance & Optimization',
@@ -299,7 +299,7 @@ const MOCK_PRODUCT_11: Products.Model.Product = {
         '<h2>RapidFix Repair™ – Fast & Reliable Industrial Tool Repairs</h2><ul><li>Express Repairs</li><li>Genuine Parts</li><li>Warranty Protection</li></ul>',
     shortDescription: '<ul><li>Express Repairs</li><li>Genuine Parts</li><li>Warranty Protection</li></ul>',
     image: {
-        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-repair.jpg',
         width: 640,
         height: 656,
         alt: 'RapidFix Repair™ – Fast & Reliable Industrial Tool Repairs',
