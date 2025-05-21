@@ -44,6 +44,11 @@ export class CmsController {
         return this.cms.getCreateNewPasswordPage(params);
     }
 
+    @Get('/create-account-page')
+    getCreateAccountPage(@Query() params: Request.GetCmsCreateAccountPageParams) {
+        return this.cms.getCreateAccountPage(params);
+    }
+
     @Get('/not-found-page')
     getNotFoundPage(@Query() params: Request.GetCmsNotFoundPageParams) {
         return this.cms.getNotFoundPage(params);

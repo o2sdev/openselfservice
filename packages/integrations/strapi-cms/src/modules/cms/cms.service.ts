@@ -445,4 +445,11 @@ export class CmsService implements CMS.Service {
         console.log('getResetPasswordPage', options);
         throw new NotImplementedException();
     }
+
+    getCreateAccountPage(
+        options: CMS.Request.GetCmsCreateAccountPageParams,
+    ): Observable<CMS.Model.CreateAccountPage.CreateAccountPage> {
+        console.log('getCreateAccountPage', options);
+        throw new NotImplementedException();
+    }
 }

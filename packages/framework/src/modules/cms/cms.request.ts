@@ -36,6 +36,10 @@ export class GetCmsCreateNewPasswordPageParams {
     locale!: string;
 }
 
+export class GetCmsCreateAccountPageParams {
+    locale!: string;
+}
+
 export class GetCmsNotFoundPageParams {
     locale!: string;
 }

@@ -23,6 +23,11 @@ export const routing = defineRouting({
             de: '/neues-passwort-erstellen',
             pl: '/ustaw-nowe-haslo',
         },
+        '/create-account': {
+            en: '/create-account',
+            de: '/konto-erstellen',
+            pl: '/utworz-konto',
+        },
     } as { [key: string]: { [locale: string]: string } },
 });
 

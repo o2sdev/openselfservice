@@ -29,6 +29,10 @@ export abstract class CmsService {
         options: CMS.Request.GetCmsCreateNewPasswordPageParams,
     ): Observable<CMS.Model.CreateNewPasswordPage.CreateNewPasswordPage>;
 
+    abstract getCreateAccountPage(
+        options: CMS.Request.GetCmsCreateAccountPageParams,
+    ): Observable<CMS.Model.CreateAccountPage.CreateAccountPage>;
+
     abstract getNotFoundPage(
         options: CMS.Request.GetCmsNotFoundPageParams,
     ): Observable<CMS.Model.NotFoundPage.NotFoundPage>;

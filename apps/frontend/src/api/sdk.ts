@@ -34,6 +34,7 @@ import { page } from '@/api/modules/page';
 import { surveyjs } from '@/api/modules/surveyjs';
 import { users } from '@/api/modules/user';
 
+import { createAccountPage } from './modules/create-account-page';
 import { createNewPasswordPage } from './modules/create-new-password-page';
 import { resetPasswordPage } from './modules/reset-password-page';
 
@@ -86,6 +87,7 @@ export const sdk = extendSdk(internalSdk, {
         getLoginPage: loginPage(internalSdk).modules.getLoginPage,
         getResetPasswordPage: resetPasswordPage(internalSdk).modules.getResetPasswordPage,
         getCreateNewPasswordPage: createNewPasswordPage(internalSdk).modules.getCreateNewPasswordPage,
+        getCreateAccountPage: createAccountPage(internalSdk).modules.getCreateAccountPage,
         getNotFoundPage: notFoundPage(internalSdk).modules.getNotFoundPage,
         getCustomers: organizations(internalSdk).modules.getCustomers,
         getSurvey: surveyjs(internalSdk).modules.getSurvey,

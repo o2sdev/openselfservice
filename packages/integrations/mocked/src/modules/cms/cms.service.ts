@@ -28,6 +28,7 @@ import { mapUserAccountBlock } from './mappers/blocks/cms.user-account.mapper';
 import { mapAppConfig } from './mappers/cms.app-config.mapper';
 import { mapCategoryListBlock } from './mappers/cms.category-list.mapper';
 import { mapCategoryBlock } from './mappers/cms.category.mapper';
+import { mapCreateAccountPage } from './mappers/cms.create-account-page.mapper';
 import { mapCreateNewPasswordPage } from './mappers/cms.create-new-password-page.mapper';
 import { mapFooter } from './mappers/cms.footer.mapper';
 import { mapHeader } from './mappers/cms.header.mapper';
@@ -75,6 +76,10 @@ export class CmsService implements CMS.Service {
 
     getCreateNewPasswordPage(options: CMS.Request.GetCmsCreateNewPasswordPageParams) {
         return of(mapCreateNewPasswordPage(options.locale));
+    }
+
+    getCreateAccountPage(options: CMS.Request.GetCmsCreateAccountPageParams) {
+        return of(mapCreateAccountPage(options.locale));
     }
 
     getNotFoundPage(options: CMS.Request.GetCmsNotFoundPageParams) {

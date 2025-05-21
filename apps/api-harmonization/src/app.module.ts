@@ -49,6 +49,7 @@ import { UserAccountBlockModule } from '@o2s/api-harmonization/blocks/user-accou
 import { AppConfig } from './app.config';
 import { AppService } from './app.service';
 import { ContextHeadersMiddleware } from './middleware/context-headers.middleware';
+import { CreateAccountPageModule } from './modules/create-account/create-account-page.module';
 import { CreateNewPasswordPageModule } from './modules/create-new-password-page/create-new-password-page.module';
 import { LoginPageModule } from './modules/login-page/login-page.module';
 import { NotFoundPageModule } from './modules/not-found-page/not-found-page.module';
@@ -88,6 +89,7 @@ import { UsersBlockModule } from './modules/users/users.module';
         RoutesModule.register(AppConfig),
         LoginPageModule.register(AppConfig),
         CreateNewPasswordPageModule.register(AppConfig),
+        CreateAccountPageModule.register(AppConfig),
         ResetPasswordPageModule.register(AppConfig),
         NotFoundPageModule.register(AppConfig),
         OrganizationsModule.register(AppConfig),
