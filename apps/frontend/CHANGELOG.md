@@ -1,5 +1,15 @@
 # @o2s/frontend
 
+## 0.25.0
+
+### Minor Changes
+
+- 123da31: fix: fixed blogCart hover
+
+### Patch Changes
+
+- 9a2344d: minor UI fixes
+
 ## 0.24.1
 
 ### Patch Changes
