@@ -3,9 +3,7 @@ import { getLocale } from 'next-intl/server';
 import { headers } from 'next/headers';
 import React from 'react';
 
-import { Separator } from '@o2s/ui/components/separator';
 import { Toaster } from '@o2s/ui/components/toaster';
-import { Typography } from '@o2s/ui/components/typography';
 
 import { sdk } from '@/api/sdk';
 
@@ -15,13 +13,10 @@ import { auth } from '@/auth';
 
 import { GlobalProvider } from '@/providers/GlobalProvider';
 
-import { PageTemplate } from '@/templates/PageTemplate/PageTemplate';
-
 import { Footer } from '@/containers/Footer/Footer';
 import { Header } from '@/containers/Header/Header';
 
 import { AppSpinner } from '@/components/AppSpinner/AppSpinner';
-import { Breadcrumbs } from '@/components/Breadcrumbs/Breadcrumbs';
 import { ErrorPage } from '@/components/ErrorPage/ErrorPage';
 
 interface Props {

@@ -1,5 +1,34 @@
 # @o2s/integrations.mocked
 
+## 0.24.1
+
+### Patch Changes
+
+- f52a3fe: updated images in services mocks
+
+## 0.24.0
+
+### Minor Changes
+
+- 05eea01: chore: update dependencies
+- 1200a28: feat: update dashboard mock
+- 44653fb: feat: orderDetails page implemented
+
+    - added new UI component: InfoCard,
+    - used InfoCard in PaymentsSummaryBlock, OrdersSummary and OrderDetails,
+    - fixed ordersSummaryBlock integration with strapi,
+    - used DynamicIcon in CategoryBlock,
+    - added orientation prop for Progress component
+
+### Patch Changes
+
+- a4cf40d: images in articles changed
+- 6baaae4: fixed a typo in a filename
+- Updated dependencies [05eea01]
+- Updated dependencies [44653fb]
+    - @o2s/utils.logger@0.12.0
+    - @o2s/framework@0.24.0
+
 ## 0.23.0
 
 ### Minor Changes
