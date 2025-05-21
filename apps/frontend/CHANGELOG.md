@@ -1,5 +1,11 @@
 # @o2s/frontend
 
+## 0.25.1
+
+### Patch Changes
+
+- 320512b: fixed tables in rich text expanding beyond the viewport
+
 ## 0.25.0
 
 ### Minor Changes
