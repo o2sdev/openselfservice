@@ -1,5 +1,11 @@
 # @o2s/integrations.mocked
 
+## 0.24.1
+
+### Patch Changes
+
+- f52a3fe: updated images in services mocks
+
 ## 0.24.0
 
 ### Minor Changes

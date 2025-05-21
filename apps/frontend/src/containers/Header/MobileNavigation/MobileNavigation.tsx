@@ -99,7 +99,7 @@ export function MobileNavigation({
     };
 
     return (
-        <nav className="w-full">
+        <nav className="w-full bg-navbar-background">
             {/* Top Navigation Bar */}
             <div className="flex justify-between py-4 px-4">
                 {/* Left Section */}
@@ -117,7 +117,7 @@ export function MobileNavigation({
                     <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
                         <SheetTrigger asChild>
                             <Button
-                                variant="default"
+                                variant="outline"
                                 size="icon"
                                 className="h-10 w-10"
                                 onClick={() => setIsMenuOpen((prev) => !prev)}
