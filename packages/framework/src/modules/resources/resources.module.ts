@@ -12,7 +12,7 @@ export class ResourceModule {
     static register(config: ApiConfig): DynamicModule {
         const service = config.integrations.resources.service;
         const controller = config.integrations.resources.controller || ResourceController;
-        const imports = config.integrations.cms.imports || [];
+        const imports = config.integrations.resources.imports || [];
 
         return {
             module: ResourceModule,
