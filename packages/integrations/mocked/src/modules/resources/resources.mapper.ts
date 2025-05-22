@@ -194,6 +194,7 @@ const MOCK_SERVICE_6: Resources.Model.Service = {
 
 const MOCK_COMPATIBLE_SERVICE_1: Products.Model.Product = {
     id: 'SRV-001',
+    sku: 'SRV-001',
     name: 'WeldGuard Safety',
     description: 'WeldGuard Safety - Protective Solutions for Welding Environments',
     shortDescription: 'WeldGuard Safety - Protective Solutions for Welding Environments',
@@ -201,8 +202,7 @@ const MOCK_COMPATIBLE_SERVICE_1: Products.Model.Product = {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
         width: 640,
         height: 656,
-        name: 'WeldGuard Safety',
-        alternativeText: 'WeldGuard Safety',
+        alt: 'WeldGuard Safety',
     },
     price: {
         value: 79.83,
@@ -221,6 +221,7 @@ const MOCK_COMPATIBLE_SERVICE_1: Products.Model.Product = {
 
 const MOCK_COMPATIBLE_SERVICE_2: Products.Model.Product = {
     id: 'SRV-002',
+    sku: 'SRV-002',
     name: 'MaxFlow Air Systems',
     description: 'MaxFlow Air Systems - Industrial Pneumatics Maintenance',
     shortDescription: 'MaxFlow Air Systems - Industrial Pneumatics Maintenance',
@@ -228,8 +229,7 @@ const MOCK_COMPATIBLE_SERVICE_2: Products.Model.Product = {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
         width: 640,
         height: 656,
-        name: 'MaxFlow Air Systems',
-        alternativeText: 'MaxFlow Air Systems',
+        alt: 'MaxFlow Air Systems',
     },
     price: {
         value: 79.83,
@@ -248,6 +248,7 @@ const MOCK_COMPATIBLE_SERVICE_2: Products.Model.Product = {
 
 const MOCK_COMPATIBLE_SERVICE_3: Products.Model.Product = {
     id: 'SRV-003',
+    sku: 'SRV-003',
     name: 'RapidFix Repair',
     description: 'RapidFix Repair - Fast & Reliable Industrial Tool Repairs',
     shortDescription: 'RapidFix Repair - Fast & Reliable Industrial Tool Repairs',
@@ -255,8 +256,7 @@ const MOCK_COMPATIBLE_SERVICE_3: Products.Model.Product = {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
         width: 640,
         height: 656,
-        name: 'RapidFix Repair',
-        alternativeText: 'RapidFix Repair',
+        alt: 'RapidFix Repair',
     },
     price: {
         value: 79.83,
@@ -354,6 +354,13 @@ export const mapServices = (
 };
 
 export const mapCompatibleServices = (_query: Resources.Request.GetAssetParams): Products.Model.Products => {
+    return {
+        data: MOCK_COMPATIBLE_SERVICES,
+        total: MOCK_COMPATIBLE_SERVICES.length,
+    };
+};
+
+export const mapFeaturedServices = (): Products.Model.Products => {
     return {
         data: MOCK_COMPATIBLE_SERVICES,
         total: MOCK_COMPATIBLE_SERVICES.length,

@@ -3,7 +3,14 @@ import { Observable, of } from 'rxjs';
 
 import { Products, Resources } from '@o2s/framework/modules';
 
-import { mapAsset, mapAssets, mapCompatibleServices, mapService, mapServices } from './resources.mapper';
+import {
+    mapAsset,
+    mapAssets,
+    mapCompatibleServices,
+    mapFeaturedServices,
+    mapService,
+    mapServices,
+} from './resources.mapper';
 import { responseDelay } from '@/utils/delay';
 
 @Injectable()
@@ -37,5 +44,9 @@ export class ResourcesService implements Resources.Service {
 
     getCompatibleServiceList(params: Resources.Request.GetAssetParams): Observable<Products.Model.Products> {
         return of(mapCompatibleServices(params)).pipe(responseDelay());
+    }
+
+    getFeaturedServiceList(): Observable<Products.Model.Products> {
+        return of(mapFeaturedServices()).pipe(responseDelay());
     }
 }

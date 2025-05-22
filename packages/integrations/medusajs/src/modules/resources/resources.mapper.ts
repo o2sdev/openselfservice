@@ -27,16 +27,16 @@ export const mapAssets = (data: AssetsResponse): Resources.Model.Assets => {
     };
 };
 
-export const mapServices = (data: ServiceInstancesResponse): Resources.Model.Services => {
+export const mapServices = (data: ServiceInstancesResponse, defaultCurrency: string): Resources.Model.Services => {
     return {
         data: data?.serviceInstances.map((service) => {
-            return mapService(service);
+            return mapService(service, defaultCurrency);
         }),
         total: data.count,
     };
 };
 
-export const mapService = (serviceInstance: ServiceInstance): Resources.Model.Service => {
+export const mapService = (serviceInstance: ServiceInstance, defaultCurrency: string): Resources.Model.Service => {
     return {
         id: serviceInstance.id,
         __typename: 'Service',
@@ -46,13 +46,13 @@ export const mapService = (serviceInstance: ServiceInstance): Resources.Model.Se
         contract: {
             id: serviceInstance.id,
             type: '',
-            status: serviceInstance.status as Resources.Model.ContractStatus,
+            status: serviceInstance?.status as Resources.Model.ContractStatus,
             startDate: serviceInstance.start_date,
-            endDate: serviceInstance.end_date,
+            endDate: serviceInstance?.end_date,
             paymentPeriod: serviceInstance.payment_type as Resources.Model.PaymentPeriod,
             price: {
-                value: serviceInstance.totals.total_price.value,
-                currency: serviceInstance.totals.currency as Models.Price.Currency,
+                value: serviceInstance?.totals?.total_price?.value ?? 0,
+                currency: mapCurrency(serviceInstance?.totals?.currency) || defaultCurrency,
             },
         },
         assets:
@@ -76,4 +76,17 @@ const mapAddress = (address: AddressDTO): Models.Address.Address | undefined => 
         postalCode: address.postal_code || '',
         phone: address.phone || '',
     };
+};
+
+const mapCurrency = (currency: string): Models.Price.Currency => {
+    switch (currency) {
+        case 'pln':
+            return 'PLN';
+        case 'eur':
+            return 'EUR';
+        case 'usd':
+            return 'USD';
+        default:
+            return currency as Models.Price.Currency;
+    }
 };

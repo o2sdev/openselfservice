@@ -62,3 +62,10 @@ export type CompatibleServicesResponse = {
     offset: number;
     limit: number;
 };
+
+export type FeaturedServicesResponse = {
+    featuredServices: HttpTypes.AdminProductVariant[];
+    count: number;
+    offset: number;
+    limit: number;
+};

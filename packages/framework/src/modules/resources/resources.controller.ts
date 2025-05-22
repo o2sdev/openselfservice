@@ -39,6 +39,11 @@ export class ResourceController {
         return this.resourceService.getService(params);
     }
 
+    @Get('services/featured')
+    getFeaturedServiceList(): Observable<Products.Model.Products> {
+        return this.resourceService.getFeaturedServiceList();
+    }
+
     @Get('assets')
     getAssetList(@Query() query: GetAssetListQuery, @Headers() headers: AppHeaders): Observable<Assets> {
         const authorization = headers?.authorization;

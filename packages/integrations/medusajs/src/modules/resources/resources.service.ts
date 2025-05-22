@@ -1,12 +1,13 @@
 import Medusa from '@medusajs/js-sdk';
 import { HttpService } from '@nestjs/axios';
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { LoggerService } from '@o2s/utils.logger';
 import { Observable, catchError, map } from 'rxjs';
 
 import { Auth, Products, Resources } from '@o2s/framework/modules';
 
-import { mapCompatibleServices } from '../products/products.mapper';
+import { mapCompatibleServices, mapFeaturedServices } from '../products/products.mapper';
 import { handleHttpError } from '../utils/handle-http-error';
 
 import { mapAsset, mapAssets, mapService, mapServices } from './resources.mapper';
@@ -14,6 +15,7 @@ import {
     Asset,
     AssetsResponse,
     CompatibleServicesResponse,
+    FeaturedServicesResponse,
     ServiceInstance,
     ServiceInstancesResponse,
 } from './response.types';
@@ -22,14 +24,17 @@ import { Service as MedusaJsService } from '@/modules/medusajs';
 @Injectable()
 export class ResourcesService extends Resources.Service {
     private readonly sdk: Medusa;
+    private readonly defaultCurrency: string;
 
     constructor(
         protected httpClient: HttpService,
         @Inject(LoggerService) protected readonly logger: LoggerService,
         private readonly medusaJsService: MedusaJsService,
+        private readonly config: ConfigService,
     ) {
         super();
         this.sdk = this.medusaJsService.getSdk();
+        this.defaultCurrency = this.config.get('DEFAULT_CURRENCY') || 'EUR';
     }
 
     purchaseOrActivateResource(_params: Resources.Request.GetResourceParams): Observable<void> {
@@ -62,7 +67,7 @@ export class ResourcesService extends Resources.Service {
             })
             .pipe(
                 map(({ data }) => {
-                    return mapServices(data);
+                    return mapServices(data, this.defaultCurrency);
                 }),
                 catchError((error) => {
                     return handleHttpError(error);
@@ -80,7 +85,7 @@ export class ResourcesService extends Resources.Service {
             )
             .pipe(
                 map(({ data }) => {
-                    return mapService(data.serviceInstance);
+                    return mapService(data.serviceInstance, this.defaultCurrency);
                 }),
                 catchError((error) => {
                     return handleHttpError(error);
@@ -143,7 +148,22 @@ export class ResourcesService extends Resources.Service {
             )
             .pipe(
                 map(({ data }) => {
-                    return mapCompatibleServices(data, 'USD');
+                    return mapCompatibleServices(data, this.defaultCurrency);
+                }),
+                catchError((error) => {
+                    return handleHttpError(error);
+                }),
+            );
+    }
+
+    getFeaturedServiceList(): Observable<Products.Model.Products> {
+        return this.httpClient
+            .get<FeaturedServicesResponse>(`${this.medusaJsService.getBaseUrl()}/admin/service-instances/featured`, {
+                headers: this.medusaJsService.getMedusaAdminApiHeaders(),
+            })
+            .pipe(
+                map(({ data }) => {
+                    return mapFeaturedServices(data, this.defaultCurrency);
                 }),
                 catchError((error) => {
                     return handleHttpError(error);

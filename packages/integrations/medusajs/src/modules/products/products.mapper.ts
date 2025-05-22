@@ -2,7 +2,7 @@ import { HttpTypes } from '@medusajs/types';
 
 import { Models, Products } from '@o2s/framework/modules';
 
-import { CompatibleServicesResponse } from '../resources/response.types';
+import { CompatibleServicesResponse, FeaturedServicesResponse } from '../resources/response.types';
 
 import { RelatedProductsResponse } from './response.types';
 
@@ -14,16 +14,14 @@ export const mapProduct = (
     const price = productVariant.prices?.find((price) => price.currency_code.toUpperCase() === defaultCurrency);
     return {
         id: productVariant.id,
+        sku: productVariant?.sku || '',
         name: productVariant?.product?.title || '',
         description: productVariant?.product?.description || '',
-        // There is no short description in Medusa
-        shortDescription: productVariant?.product?.description
-            ? `${productVariant.product.description.slice(0, 100)}...`
-            : undefined,
+        shortDescription: (productVariant?.product?.subtitle as string) || '',
         image: productVariant?.product?.thumbnail
             ? {
                   url: productVariant?.product?.thumbnail,
-                  name: productVariant?.product?.title,
+                  alt: productVariant?.product?.title,
               }
             : undefined,
         price: {
@@ -47,12 +45,13 @@ export const mapProducts = (
         data: data.products.map((product) => {
             return {
                 id: product.id,
+                sku: '',
                 name: product.title,
                 description: product?.description || '',
                 image: product?.thumbnail
                     ? {
                           url: product.thumbnail,
-                          name: product.title,
+                          alt: product.title,
                       }
                     : undefined,
                 price: {
@@ -74,11 +73,13 @@ export const mapRelatedProducts = (data: RelatedProductsResponse, defaultCurrenc
         data: data.productReferences.map((product) => {
             return {
                 id: product.targetProduct.id,
+                sku: product.targetProduct.sku || '',
                 name: product.targetProduct.title,
                 description: product.targetProduct.product?.description || '',
                 shortDescription: product.targetProduct.product?.description || undefined,
                 image: {
                     url: product.targetProduct.product?.thumbnail || '',
+                    alt: product.targetProduct.title,
                 },
                 price: {
                     value: 0,
@@ -100,6 +101,18 @@ export const mapCompatibleServices = (
 ): Products.Model.Products => {
     return {
         data: data.compatibleServices.map((product) => {
+            return mapProduct(product, defaultCurrency);
+        }),
+        total: data.count,
+    };
+};
+
+export const mapFeaturedServices = (
+    data: FeaturedServicesResponse,
+    defaultCurrency: string,
+): Products.Model.Products => {
+    return {
+        data: data.featuredServices.map((product) => {
             return mapProduct(product, defaultCurrency);
         }),
         total: data.count,

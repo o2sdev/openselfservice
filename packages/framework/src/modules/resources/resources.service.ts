@@ -25,4 +25,5 @@ export abstract class ResourceService {
     abstract getAsset(params: GetAssetParams): Observable<Asset>;
 
     abstract getCompatibleServiceList(params: GetAssetParams): Observable<Products.Model.Products>;
+    abstract getFeaturedServiceList(): Observable<Products.Model.Products>;
 }
