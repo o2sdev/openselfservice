@@ -294,7 +294,7 @@ const generateOrderItem = (itemIndex: number): Orders.Model.OrderItem => {
 };
 
 // Function to generate a random order
-const generateOrder = (orderIndex: number, getRandomDate: () => Date): Orders.Model.Order => {
+const generateOrder = (orderIndex: number, count: number, getRandomDate: () => Date): Orders.Model.Order => {
     const orderDate = getRandomDate();
     const updateDate = new Date(orderDate);
     updateDate.setHours(updateDate.getHours() + getRandomInt(1, 48)); // Update 1-48 hours later
@@ -324,9 +324,7 @@ const generateOrder = (orderIndex: number, getRandomDate: () => Date): Orders.Mo
     const paymentStatus = PAYMENT_STATUSES[getRandomInt(0, PAYMENT_STATUSES.length - 1)]!;
 
     return {
-        id: `ORD-${Math.ceil(Math.random() * 1000000)
-            .toString()
-            .padStart(3, '0')}`,
+        id: `ORD-${count + (orderIndex * orderIndex).toString().padStart(5, '0')}`,
         customerId,
         createdAt: formatDate(orderDate),
         updatedAt: formatDate(updateDate),
@@ -396,7 +394,7 @@ const generateOrder = (orderIndex: number, getRandomDate: () => Date): Orders.Mo
 const generateOrders = (count: number, getRandomDate: () => Date): Orders.Model.Order[] => {
     const orders: Orders.Model.Order[] = [];
     for (let i = 1; i <= count; i++) {
-        orders.push(generateOrder(i, getRandomDate));
+        orders.push(generateOrder(i, count, getRandomDate));
     }
     return orders;
 };
