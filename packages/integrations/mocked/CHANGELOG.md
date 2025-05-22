@@ -1,5 +1,11 @@
 # @o2s/integrations.mocked
 
+## 1.0.1
+
+### Patch Changes
+
+- b575e8e: made mocked orders IDs more consistent
+
 ## 1.0.0
 
 ### Major Changes
