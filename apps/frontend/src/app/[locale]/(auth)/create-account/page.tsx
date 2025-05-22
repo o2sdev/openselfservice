@@ -19,7 +19,7 @@ import { routing } from '@/i18n/routing';
 import { GlobalProvider } from '@/providers/GlobalProvider';
 
 import { AuthLayout } from '@/containers/Auth/AuthLayout/AuthLayout';
-import { FormValues, SignInForm } from '@/containers/Auth/SignInForm';
+import { CreateAccountForm, FormValues } from '@/containers/Auth/CreateAccountForm';
 import { Footer } from '@/containers/Footer/Footer';
 import { Header } from '@/containers/Header/Header';
 
@@ -103,7 +103,7 @@ export default async function CreateAccountPage({ params, searchParams }: Readon
                     <Header data={init.common.header} />
                     <div className="flex flex-col grow">
                         <AuthLayout>
-                            <SignInForm
+                            <CreateAccountForm
                                 providers={providerMap}
                                 labels={{
                                     title: data.title,
