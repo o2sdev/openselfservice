@@ -1,3 +1,4 @@
+import { HttpModule } from '@nestjs/axios';
 import { DynamicModule, Module } from '@nestjs/common';
 
 import { ApiConfig } from '@o2s/framework/modules';
@@ -15,6 +16,7 @@ export class OrderDetailsBlockModule {
             providers: [OrderDetailsService, CMS.Service, Orders.Service, Products.Service],
             controllers: [OrderDetailsController],
             exports: [OrderDetailsService],
+            imports: [HttpModule],
         };
     }
 }

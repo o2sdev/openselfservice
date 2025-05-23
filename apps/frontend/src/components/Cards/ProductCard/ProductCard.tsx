@@ -19,7 +19,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ title, description, pr
         <div className={cn('flex flex-col bg-card rounded-lg border border-border shadow-sm relative w-full h-full')}>
             {/* Image section */}
             <div className="relative overflow-hidden h-[180px] flex-shrink-0 rounded-t-lg">
-                {image.url && image.alt && (
+                {image?.url && image?.alt && (
                     <Image
                         src={image.url}
                         alt={image.alt}
