@@ -1,5 +1,17 @@
 # @o2s/integrations.medusajs
 
+## 1.1.0
+
+### Minor Changes
+
+- 61d4f2f: Added integration of services and assets with MedusaJS
+
+### Patch Changes
+
+- Updated dependencies [61d4f2f]
+    - @o2s/framework@1.1.0
+    - @o2s/utils.logger@1.1.0
+
 ## 1.0.0
 
 ### Major Changes
