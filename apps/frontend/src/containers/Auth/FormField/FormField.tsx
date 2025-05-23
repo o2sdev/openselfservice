@@ -5,6 +5,7 @@ import React from 'react';
 import { Alert, AlertDescription } from '@o2s/ui/components/alert';
 import { InputWithDetails } from '@o2s/ui/components/input';
 import { Typography } from '@o2s/ui/components/typography';
+import { cn } from '@o2s/ui/lib/utils';
 
 import { InputValidations } from '@/components/InputValidations/InputValidations';
 
@@ -39,6 +40,7 @@ export const FormField: React.FC<Readonly<FormFieldProps>> = ({
                 onBlur={field.onBlur}
                 label={label}
                 labelAdornment={labelAdornment}
+                labelClassName={cn(errors[name] && 'text-destructive')}
                 adornment={adornment}
                 adornmentProps={adornmentProps}
                 description={description}
@@ -46,14 +48,9 @@ export const FormField: React.FC<Readonly<FormFieldProps>> = ({
 
             <ErrorMessage name={name}>
                 {(msg) => (
-                    <Alert variant="destructive">
-                        <CircleAlert className="h-4 w-4 mt-1" />
-                        <AlertDescription>
-                            <Typography variant="small" className="mt-1">
-                                {msg}
-                            </Typography>
-                        </AlertDescription>
-                    </Alert>
+                    <Typography variant="small" className="mb-1 text-destructive font-medium">
+                        {msg}
+                    </Typography>
                 )}
             </ErrorMessage>
             {validations && (
