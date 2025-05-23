@@ -8,18 +8,20 @@ type AdornmentPropsWithBehavior = { behavior: 'append' | 'prepend' };
 
 type AdornmentComponent = React.ReactNode;
 
-export type InputProps<T extends AdornmentComponent = AdornmentComponent> =
-    React.InputHTMLAttributes<HTMLInputElement> &
-        (
+export type InputProps<T extends AdornmentComponent = AdornmentComponent> = Readonly<
+    React.InputHTMLAttributes<HTMLInputElement> & {
+        hasError?: boolean;
+    } & (
             | {
                   adornment?: T;
                   adornmentProps?: T extends AdornmentComponent ? AdornmentPropsWithBehavior : never;
               }
             | never
-        );
+        )
+>;
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-    ({ className, type, adornment, adornmentProps, ...props }, ref) => {
+    ({ className, type, adornment, adornmentProps, hasError, ...props }, ref) => {
         return (
             <div className={cn('relative')}>
                 {adornment && adornmentProps?.behavior === 'prepend' && (
@@ -37,6 +39,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                         'flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
                         adornmentProps?.behavior === 'prepend' && 'pl-12',
                         adornmentProps?.behavior === 'append' && 'pr-12',
+                        hasError && 'border-destructive focus-visible:ring-destructive',
                         className,
                     )}
                     ref={ref}
@@ -57,27 +60,29 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 );
 Input.displayName = 'Input';
 
-export type InputWithLabelProps = InputProps & {
-    label: string | React.ReactNode;
-    labelAdornment?: React.ReactNode;
-    labelClassName?: string;
-    children?: React.ReactNode;
-};
+export type InputWithLabelProps = Readonly<
+    InputProps & {
+        label: string | React.ReactNode;
+        labelAdornment?: React.ReactNode;
+        labelClassName?: string;
+        children?: React.ReactNode;
+    }
+>;
 
-const InputWithLabel = React.forwardRef<HTMLInputElement, Readonly<InputWithLabelProps>>(
-    ({ label, labelAdornment, className, labelClassName, id, children, ...props }, ref) => {
+const InputWithLabel = React.forwardRef<HTMLInputElement, InputWithLabelProps>(
+    ({ label, labelAdornment, className, labelClassName, id, children, hasError, ...props }, ref) => {
         const generatedId = React.useId();
         const inputId = id || generatedId;
 
         return (
             <div className="grid gap-2">
                 <div className="flex items-center justify-between gap-2">
-                    <Label htmlFor={inputId} className={labelClassName}>
+                    <Label htmlFor={inputId} className={cn(labelClassName, hasError && 'text-destructive')}>
                         {label}
                     </Label>
                     {labelAdornment}
                 </div>
-                <Input id={inputId} ref={ref} {...props} className={className} />
+                <Input id={inputId} ref={ref} {...props} className={className} hasError={hasError} />
                 {children}
             </div>
         );
@@ -85,15 +90,19 @@ const InputWithLabel = React.forwardRef<HTMLInputElement, Readonly<InputWithLabe
 );
 InputWithLabel.displayName = 'InputWithLabel';
 
-export type InputWithDetailsProps = InputWithLabelProps & {
-    description?: string;
-};
+export type InputWithDetailsProps = Readonly<
+    InputWithLabelProps & {
+        description?: string;
+        errorMessage?: string;
+    }
+>;
 
-const InputWithDetails = React.forwardRef<HTMLInputElement, Readonly<InputWithDetailsProps>>(
-    ({ description, ...props }, ref) => {
+const InputWithDetails = React.forwardRef<HTMLInputElement, InputWithDetailsProps>(
+    ({ description, errorMessage, ...props }, ref) => {
         return (
             <InputWithLabel {...props} ref={ref}>
                 {description && <p className="text-sm text-muted-foreground">{description}</p>}
+                {errorMessage && <p className="text-sm text-destructive">{errorMessage}</p>}
             </InputWithLabel>
         );
     },

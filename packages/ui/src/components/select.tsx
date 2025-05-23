@@ -31,12 +31,21 @@ const SelectGroup = SelectPrimitive.Group;
 const SelectValue = SelectPrimitive.Value;
 
 export interface SelectTriggerProps
-    extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>,
-        VariantProps<typeof selectVariants> {}
+    extends Readonly<React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>>,
+        VariantProps<typeof selectVariants> {
+    hasError?: boolean;
+}
 
 const SelectTrigger = React.forwardRef<React.ElementRef<typeof SelectPrimitive.Trigger>, SelectTriggerProps>(
-    ({ variant, className, children, ...props }, ref) => (
-        <SelectPrimitive.Trigger ref={ref} className={cn(selectVariants({ variant, className }))} {...props}>
+    ({ variant, className, children, hasError, ...props }, ref) => (
+        <SelectPrimitive.Trigger
+            ref={ref}
+            className={cn(
+                selectVariants({ variant, className }),
+                hasError && 'border-destructive focus:ring-destructive',
+            )}
+            {...props}
+        >
             {children}
             <SelectPrimitive.Icon asChild>
                 <ChevronDown className="h-4 w-4 opacity-50" />
@@ -48,7 +57,7 @@ SelectTrigger.displayName = SelectPrimitive.Trigger.displayName;
 
 const SelectScrollUpButton = React.forwardRef<
     React.ElementRef<typeof SelectPrimitive.ScrollUpButton>,
-    React.ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollUpButton>
+    Readonly<React.ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollUpButton>>
 >(({ className, ...props }, ref) => (
     <SelectPrimitive.ScrollUpButton
         ref={ref}
@@ -62,7 +71,7 @@ SelectScrollUpButton.displayName = SelectPrimitive.ScrollUpButton.displayName;
 
 const SelectScrollDownButton = React.forwardRef<
     React.ElementRef<typeof SelectPrimitive.ScrollDownButton>,
-    React.ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollDownButton>
+    Readonly<React.ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollDownButton>>
 >(({ className, ...props }, ref) => (
     <SelectPrimitive.ScrollDownButton
         ref={ref}
@@ -76,7 +85,7 @@ SelectScrollDownButton.displayName = SelectPrimitive.ScrollDownButton.displayNam
 
 const SelectContent = React.forwardRef<
     React.ElementRef<typeof SelectPrimitive.Content>,
-    React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>
+    Readonly<React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>>
 >(({ className, children, position = 'popper', ...props }, ref) => (
     <SelectPrimitive.Portal>
         <SelectPrimitive.Content
@@ -108,7 +117,7 @@ SelectContent.displayName = SelectPrimitive.Content.displayName;
 
 const SelectLabel = React.forwardRef<
     React.ElementRef<typeof SelectPrimitive.Label>,
-    React.ComponentPropsWithoutRef<typeof SelectPrimitive.Label>
+    Readonly<React.ComponentPropsWithoutRef<typeof SelectPrimitive.Label>>
 >(({ className, ...props }, ref) => (
     <SelectPrimitive.Label ref={ref} className={cn('py-1.5 pl-8 pr-2 text-sm font-semibold', className)} {...props} />
 ));
@@ -116,7 +125,7 @@ SelectLabel.displayName = SelectPrimitive.Label.displayName;
 
 const SelectItem = React.forwardRef<
     React.ElementRef<typeof SelectPrimitive.Item>,
-    React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item>
+    Readonly<React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item>>
 >(({ className, children, ...props }, ref) => (
     <SelectPrimitive.Item
         ref={ref}
@@ -139,7 +148,7 @@ SelectItem.displayName = SelectPrimitive.Item.displayName;
 
 const SelectSeparator = React.forwardRef<
     React.ElementRef<typeof SelectPrimitive.Separator>,
-    React.ComponentPropsWithoutRef<typeof SelectPrimitive.Separator>
+    Readonly<React.ComponentPropsWithoutRef<typeof SelectPrimitive.Separator>>
 >(({ className, ...props }, ref) => (
     <SelectPrimitive.Separator ref={ref} className={cn('-mx-1 my-1 h-px bg-muted', className)} {...props} />
 ));
@@ -160,19 +169,24 @@ interface SelectWithTitleProps {
     disabled?: boolean;
     required?: boolean;
     children: React.ReactNode;
+    hasError?: boolean;
+    description?: string;
+    errorMessage?: string;
 }
 
-const SelectWithTitle = React.forwardRef<HTMLDivElement, SelectWithTitleProps>(
-    ({ label, labelClassName, children, id, ...props }, ref) => {
+const SelectWithTitle = React.forwardRef<HTMLDivElement, Readonly<SelectWithTitleProps>>(
+    ({ label, labelClassName, children, id, hasError, description, errorMessage, ...props }, ref) => {
         const generatedId = React.useId();
         const selectId = id || generatedId;
 
         return (
             <div className="grid gap-2" ref={ref}>
-                <Label htmlFor={selectId} className={labelClassName}>
+                <Label htmlFor={selectId} className={cn(labelClassName, hasError && 'text-destructive')}>
                     {label}
                 </Label>
                 <Select {...props}>{children}</Select>
+                {description && <p className="text-sm text-muted-foreground">{description}</p>}
+                {hasError && errorMessage && <p className="text-sm text-destructive">{errorMessage}</p>}
             </div>
         );
     },
