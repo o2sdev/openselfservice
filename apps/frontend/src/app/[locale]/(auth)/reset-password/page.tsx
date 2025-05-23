@@ -19,7 +19,7 @@ import { routing } from '@/i18n/routing';
 import { GlobalProvider } from '@/providers/GlobalProvider';
 
 import { AuthLayout } from '@/containers/Auth/AuthLayout/AuthLayout';
-import { FormValues, ResetPasswordForm } from '@/containers/Auth/ResetPassword';
+import { FormValues, ResetPasswordForm } from '@/containers/Auth/ResetPasswordForm';
 import { Footer } from '@/containers/Footer/Footer';
 import { Header } from '@/containers/Header/Header';
 

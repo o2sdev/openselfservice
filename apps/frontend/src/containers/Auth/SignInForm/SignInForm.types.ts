@@ -31,19 +31,22 @@ export interface SignInFormProps {
             label: string;
         };
         invalidCredentials: string;
-        forgotPassword?: {
+        forgotPassword: {
             label: string;
             link: string;
         };
-        resetPasswordMessage?: {
+        resetPasswordMessage: {
             title?: string;
             description?: string;
         };
-        newPasswordMessage?: {
+        newPasswordMessage: {
             title?: string;
             description?: string;
         };
     };
     onSignIn: (providerId: string, credentials?: FormValues) => Promise<AuthError | void>;
-    resetPassword?: string;
+    params: {
+        resetPassword: boolean;
+        newPassword: boolean;
+    };
 }

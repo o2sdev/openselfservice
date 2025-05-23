@@ -44,13 +44,14 @@ const LOGIN_PAGE_PL: CMS.Model.LoginPage.LoginPage = {
             },
             {
                 type: 'min',
-                description: 'Hasło musi zawierać co najmniej 4 znaki',
+                description: 'Hasło musi zawierać co najmniej 8 znaków',
                 id: 'min-1',
                 name: 'Min',
             },
             {
                 type: 'matches',
-                description: 'Hasło musi zawierać co najmniej 4 znaki',
+                description:
+                    'Hasło musi zawierać co najmniej jedną wielką literę, jedną małą literę, cyfrę, znak specjalny i nie może zawierać spacji',
                 id: 'matches-1',
                 name: 'Matches',
             },
@@ -145,13 +146,14 @@ const LOGIN_PAGE_EN: CMS.Model.LoginPage.LoginPage = {
             },
             {
                 type: 'min',
-                description: 'Password must contain at least 4 characters',
+                description: 'Password must contain at least 8 characters',
                 id: 'min-1',
                 name: 'Min',
             },
             {
                 type: 'matches',
-                description: 'Password must contain at least 4 characters',
+                description:
+                    'Password must contain at least one uppercase, lowercase, digit, special character and no spaces',
                 id: 'matches-1',
                 name: 'Matches',
             },
@@ -267,13 +269,14 @@ const LOGIN_PAGE_DE: CMS.Model.LoginPage.LoginPage = {
             },
             {
                 type: 'min',
-                description: 'Passwort muss mindestens 4 Zeichen lang sein',
+                description: 'Das Passwort muss mindestens 8 Zeichen lang sein',
                 id: 'min-1',
                 name: 'Min',
             },
             {
                 type: 'matches',
-                description: 'Passwort muss mindestens 4 Zeichen lang sein',
+                description:
+                    'Das Passwort muss mindestens einen Großbuchstaben, einen Kleinbuchstaben, eine Zahl, ein Sonderzeichen enthalten und keine Leerzeichen aufweisen',
                 id: 'matches-1',
                 name: 'Matches',
             },

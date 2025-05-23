@@ -22,16 +22,16 @@ export class LoginPage {
     image?: Media.Media;
     seo!: Models.SEO.Page;
     invalidCredentials!: string;
-    forgotPassword?: {
+    forgotPassword!: {
         label: string;
         link: string;
     };
-    resetPasswordMessage?: {
-        title?: string;
+    resetPasswordMessage!: {
+        title: string;
         description?: string;
     };
-    newPasswordMessage?: {
-        title?: string;
+    newPasswordMessage!: {
+        title: string;
         description?: string;
     };
 }

@@ -124,11 +124,20 @@ export default async function LoginPage({ params, searchParams }: Readonly<Props
                                     providers: data.providers,
                                     invalidCredentials: data.invalidCredentials,
                                     forgotPassword: data.forgotPassword,
-
-                                    resetPasswordMessage: resetPassword ? data.resetPasswordMessage : undefined,
-                                    newPasswordMessage: newPassword ? data.newPasswordMessage : undefined,
+                                    resetPasswordMessage: {
+                                        title: data.resetPasswordMessage?.title || '',
+                                        description: data.resetPasswordMessage?.description || '',
+                                    },
+                                    newPasswordMessage: {
+                                        title: data.newPasswordMessage?.title || '',
+                                        description: data.newPasswordMessage?.description || '',
+                                    },
                                 }}
                                 onSignIn={handleSignIn}
+                                params={{
+                                    resetPassword: resetPassword === 'true',
+                                    newPassword: newPassword === 'true',
+                                }}
                             />
                             {data.image?.url && (
                                 <Image

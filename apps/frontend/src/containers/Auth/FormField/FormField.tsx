@@ -6,8 +6,7 @@ import { Alert, AlertDescription } from '@o2s/ui/components/alert';
 import { InputWithDetails } from '@o2s/ui/components/input';
 import { Typography } from '@o2s/ui/components/typography';
 
-import { InputValidations } from '@/components/InputValidation/InputValidation';
-import { InputValidationRegExpLabel } from '@/components/InputValidation/InputValidation.types';
+import { InputValidations } from '@/components/InputValidations/InputValidations';
 
 import { FormFieldProps } from './FormField.types';
 
@@ -58,11 +57,7 @@ export const FormField: React.FC<Readonly<FormFieldProps>> = ({
                 )}
             </ErrorMessage>
             {validations && (
-                <InputValidations
-                    targetInputName={field.name}
-                    validations={validations as InputValidationRegExpLabel[]}
-                    value={field.value}
-                />
+                <InputValidations targetInputName={field.name} validations={validations} value={field.value} />
             )}
         </div>
     );

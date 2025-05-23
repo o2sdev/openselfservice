@@ -17,7 +17,7 @@ export class ErrorMessage {
 
 export class RegexValidation {
     id!: string;
-    type!: string;
+    type!: 'min' | 'lowercase' | 'uppercase' | 'digit' | 'special' | 'nospace';
     label!: string;
     regex!: string;
 }

@@ -4,7 +4,7 @@ import { AuthLayoutProps } from './AuthLayout.types';
 
 export const AuthLayout: React.FC<AuthLayoutProps> = ({ layout = 'main-side', toolbar, children }) => {
     const main = (
-        <div className="flex flex-col md:max-w-[50%] w-full p-4">
+        <div className="flex flex-col md:max-w-[50%] w-full p-4 self-center">
             <div className="flex flex-col justify-center items-center md:h-full">
                 <div className="w-full max-w-[360px] m-auto">
                     {toolbar ? <div className="flex justify-center mb-6">{toolbar}</div> : null}

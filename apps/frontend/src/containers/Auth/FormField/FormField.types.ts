@@ -1,5 +1,7 @@
 import { FieldProps } from 'formik';
 
+import { InputValidationsRegExpLabel } from '@/components/InputValidations/InputValidations.types';
+
 export interface FormFieldProps {
     field: FieldProps['field'];
     touched: Record<string, boolean>;
@@ -15,12 +17,7 @@ export interface FormFieldProps {
     adornmentProps?: {
         behavior: 'append' | 'prepend';
     };
-    validations?: {
-        id: string;
-        type: string;
-        label: string;
-        regex: string;
-    }[];
+    validations?: InputValidationsRegExpLabel[];
 }
 
 export interface PasswordFormFieldProps extends Omit<FormFieldProps, 'type' | 'adornment' | 'adornmentProps'> {

@@ -71,5 +71,17 @@ export const mapLoginPage = (data: GetLoginPageQuery, baseURL?: string): CMS.Mod
             noFollow: loginPage.SEO.noFollow,
         },
         invalidCredentials: loginPage.invalidCredentials,
+        resetPasswordMessage: {
+            title: loginPage.resetPasswordMessage.title,
+            description: loginPage.resetPasswordMessage.description,
+        },
+        newPasswordMessage: {
+            title: loginPage.newPasswordMessage.title,
+            description: loginPage.newPasswordMessage.description,
+        },
+        forgotPassword: {
+            label: loginPage.forgotPassword.label,
+            link: loginPage.forgotPassword.url ?? '',
+        },
     };
 };
