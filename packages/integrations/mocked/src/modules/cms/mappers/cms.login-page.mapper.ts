@@ -7,6 +7,7 @@ const LOGIN_PAGE_PL: CMS.Model.LoginPage.LoginPage = {
         id: 'username-1',
         name: 'username',
         label: 'Nazwa użytkownika',
+        description: 'Powiązana z Twoim ID Klienta',
         placeholder: 'Wprowadź nazwę użytkownika',
         errorMessages: [
             {
@@ -43,13 +44,14 @@ const LOGIN_PAGE_PL: CMS.Model.LoginPage.LoginPage = {
             },
             {
                 type: 'min',
-                description: 'Hasło musi zawierać co najmniej 4 znaki',
+                description: 'Hasło musi zawierać co najmniej 8 znaków',
                 id: 'min-1',
                 name: 'Min',
             },
             {
                 type: 'matches',
-                description: 'Hasło musi zawierać co najmniej 4 znaki',
+                description:
+                    'Hasło musi zawierać co najmniej jedną wielką literę, jedną małą literę, cyfrę, znak specjalny i nie może zawierać spacji',
                 id: 'matches-1',
                 name: 'Matches',
             },
@@ -87,6 +89,17 @@ const LOGIN_PAGE_PL: CMS.Model.LoginPage.LoginPage = {
         noFollow: false,
     },
     invalidCredentials: 'Nieprawidłowe dane logowania',
+    forgotPassword: {
+        label: 'Zapomniałeś hasła?',
+        link: '/pl/reset-hasla',
+    },
+    resetPasswordMessage: {
+        title: 'Jeśli podany adres email jest powiązany z kontem, otrzymasz wiadomość z linkiem do resetowania hasła.',
+        description: 'Sprawdź folder spam, jeśli wiadomość nie dotarła.',
+    },
+    newPasswordMessage: {
+        title: 'Nowe hasło zostało ustawione. Możesz się teraz zalogować.',
+    },
 };
 
 const LOGIN_PAGE_EN: CMS.Model.LoginPage.LoginPage = {
@@ -96,6 +109,7 @@ const LOGIN_PAGE_EN: CMS.Model.LoginPage.LoginPage = {
         id: 'username-1',
         name: 'username',
         label: 'Username',
+        description: 'Associated with your Client ID',
         placeholder: 'Enter your username',
         errorMessages: [
             {
@@ -132,13 +146,14 @@ const LOGIN_PAGE_EN: CMS.Model.LoginPage.LoginPage = {
             },
             {
                 type: 'min',
-                description: 'Password must contain at least 4 characters',
+                description: 'Password must contain at least 8 characters',
                 id: 'min-1',
                 name: 'Min',
             },
             {
                 type: 'matches',
-                description: 'Password must contain at least 4 characters',
+                description:
+                    'Password must contain at least one uppercase, lowercase, digit, special character and no spaces',
                 id: 'matches-1',
                 name: 'Matches',
             },
@@ -197,6 +212,17 @@ const LOGIN_PAGE_EN: CMS.Model.LoginPage.LoginPage = {
         noFollow: false,
     },
     invalidCredentials: 'Invalid credentials',
+    forgotPassword: {
+        label: 'Forgot password?',
+        link: '/en/reset-password',
+    },
+    resetPasswordMessage: {
+        title: 'If the email is linked to an account, you should receive a message with a return link.',
+        description: 'Check spam if it does not arrive.',
+    },
+    newPasswordMessage: {
+        title: 'The new password has been set. You can now sign in.',
+    },
 };
 
 const LOGIN_PAGE_DE: CMS.Model.LoginPage.LoginPage = {
@@ -206,6 +232,7 @@ const LOGIN_PAGE_DE: CMS.Model.LoginPage.LoginPage = {
         id: 'username-1',
         name: 'username',
         label: 'Benutzername',
+        description: 'Mit Ihrer Kunden-ID verknüpft',
         placeholder: 'Geben Sie Ihren Benutzernamen ein',
         errorMessages: [
             {
@@ -242,13 +269,14 @@ const LOGIN_PAGE_DE: CMS.Model.LoginPage.LoginPage = {
             },
             {
                 type: 'min',
-                description: 'Passwort muss mindestens 4 Zeichen lang sein',
+                description: 'Das Passwort muss mindestens 8 Zeichen lang sein',
                 id: 'min-1',
                 name: 'Min',
             },
             {
                 type: 'matches',
-                description: 'Passwort muss mindestens 4 Zeichen lang sein',
+                description:
+                    'Das Passwort muss mindestens einen Großbuchstaben, einen Kleinbuchstaben, eine Zahl, ein Sonderzeichen enthalten und keine Leerzeichen aufweisen',
                 id: 'matches-1',
                 name: 'Matches',
             },
@@ -286,6 +314,17 @@ const LOGIN_PAGE_DE: CMS.Model.LoginPage.LoginPage = {
         noFollow: false,
     },
     invalidCredentials: 'Ungültige Anmeldeinformationen',
+    forgotPassword: {
+        label: 'Passwort vergessen?',
+        link: '/de/passwort-zuruecksetzen',
+    },
+    resetPasswordMessage: {
+        title: 'Wenn die E-Mail mit einem Konto verknüpft ist, erhalten Sie eine Nachricht mit einem Rücksetzlink.',
+        description: 'Überprüfen Sie den Spam-Ordner, falls die Nachricht nicht ankommt.',
+    },
+    newPasswordMessage: {
+        title: 'Das neue Passwort wurde festgelegt. Sie können sich jetzt anmelden.',
+    },
 };
 
 export const mapLoginPage = (locale: string): CMS.Model.LoginPage.LoginPage => {

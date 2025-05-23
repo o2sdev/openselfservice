@@ -32,6 +32,7 @@ interface Props {
         slug: string[];
         callbackUrl: string;
     }>;
+    searchParams: Promise<{ resetPassword: string; newPassword: string }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -59,10 +60,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     });
 }
 
-export default async function LoginPage({ params }: Readonly<Props>) {
+export default async function LoginPage({ params, searchParams }: Readonly<Props>) {
     const headersList = await headers();
     const session = await auth();
     const { locale, callbackUrl } = await params;
+    const { resetPassword, newPassword } = await searchParams;
 
     try {
         const init = await sdk.modules.getInit(
@@ -121,8 +123,21 @@ export default async function LoginPage({ params }: Readonly<Props>) {
                                     signIn: data.signIn,
                                     providers: data.providers,
                                     invalidCredentials: data.invalidCredentials,
+                                    forgotPassword: data.forgotPassword,
+                                    resetPasswordMessage: {
+                                        title: data.resetPasswordMessage?.title || '',
+                                        description: data.resetPasswordMessage?.description || '',
+                                    },
+                                    newPasswordMessage: {
+                                        title: data.newPasswordMessage?.title || '',
+                                        description: data.newPasswordMessage?.description || '',
+                                    },
                                 }}
                                 onSignIn={handleSignIn}
+                                params={{
+                                    resetPassword: resetPassword === 'true',
+                                    newPassword: newPassword === 'true',
+                                }}
                             />
                             {data.image?.url && (
                                 <Image

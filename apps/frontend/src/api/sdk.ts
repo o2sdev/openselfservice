@@ -33,6 +33,9 @@ import { organizations } from '@/api/modules/organizations';
 import { page } from '@/api/modules/page';
 import { surveyjs } from '@/api/modules/surveyjs';
 
+import { createNewPasswordPage } from './modules/create-new-password-page';
+import { resetPasswordPage } from './modules/reset-password-page';
+
 const internalSdk = getSdk({
     apiUrl: process.env.NEXT_PUBLIC_API_URL as string,
     logger: {
@@ -80,6 +83,8 @@ export const sdk = extendSdk(internalSdk, {
         getInit: page(internalSdk).modules.getInit,
         getPage: page(internalSdk).modules.getPage,
         getLoginPage: loginPage(internalSdk).modules.getLoginPage,
+        getResetPasswordPage: resetPasswordPage(internalSdk).modules.getResetPasswordPage,
+        getCreateNewPasswordPage: createNewPasswordPage(internalSdk).modules.getCreateNewPasswordPage,
         getNotFoundPage: notFoundPage(internalSdk).modules.getNotFoundPage,
         getCustomers: organizations(internalSdk).modules.getCustomers,
         getSurvey: surveyjs(internalSdk).modules.getSurvey,

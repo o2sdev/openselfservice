@@ -21,6 +21,14 @@ export abstract class CmsService {
 
     abstract getLoginPage(options: CMS.Request.GetCmsLoginPageParams): Observable<CMS.Model.LoginPage.LoginPage>;
 
+    abstract getResetPasswordPage(
+        options: CMS.Request.GetCmsResetPasswordPageParams,
+    ): Observable<CMS.Model.ResetPasswordPage.ResetPasswordPage>;
+
+    abstract getCreateNewPasswordPage(
+        options: CMS.Request.GetCmsCreateNewPasswordPageParams,
+    ): Observable<CMS.Model.CreateNewPasswordPage.CreateNewPasswordPage>;
+
     abstract getNotFoundPage(
         options: CMS.Request.GetCmsNotFoundPageParams,
     ): Observable<CMS.Model.NotFoundPage.NotFoundPage>;

@@ -20,4 +20,15 @@ fragment LoginPage on LoginPage {
         ...Seo
     }
     invalidCredentials
+    resetPasswordMessage {
+        title
+        description
+    }
+    newPasswordMessage {
+        title
+        description
+    }
+    forgotPassword {
+        ...Link
+    }
 }

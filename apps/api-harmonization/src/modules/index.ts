@@ -1,6 +1,8 @@
 export * as Page from './page';
 export * as Sitemap from './routes/';
 export * as LoginPage from './login-page';
+export * as ResetPasswordPage from './reset-password-page';
+export * as CreateNewPasswordPage from './create-new-password-page';
 export * as NotFoundPage from './not-found-page';
 export * as Organizations from './organizations';
 export * as SurveyjsForms from './surveyjs-forms';
