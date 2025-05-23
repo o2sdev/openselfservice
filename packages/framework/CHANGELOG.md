@@ -1,5 +1,24 @@
 # @o2s/framework
 
+## 1.0.0
+
+### Major Changes
+
+- 0e0c816: Official stable release
+
+## 0.24.0
+
+### Minor Changes
+
+- 05eea01: chore: update dependencies
+- 44653fb: feat: orderDetails page implemented
+
+    - added new UI component: InfoCard,
+    - used InfoCard in PaymentsSummaryBlock, OrdersSummary and OrderDetails,
+    - fixed ordersSummaryBlock integration with strapi,
+    - used DynamicIcon in CategoryBlock,
+    - added orientation prop for Progress component
+
 ## 0.23.0
 
 ### Minor Changes

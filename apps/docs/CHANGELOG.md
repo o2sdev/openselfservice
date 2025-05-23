@@ -1,5 +1,17 @@
 # @o2s/docs
 
+## 1.0.0
+
+### Major Changes
+
+- 0e0c816: Official stable release
+
+## 0.13.0
+
+### Minor Changes
+
+- 05eea01: chore: update dependencies
+
 ## 0.12.0
 
 ### Minor Changes

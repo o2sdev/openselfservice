@@ -1,65 +1,40 @@
 import Medusa from '@medusajs/js-sdk';
 import { HttpTypes, OrderStatus } from '@medusajs/types';
 import { HttpService } from '@nestjs/axios';
-import {
-    ForbiddenException,
-    Inject,
-    Injectable,
-    InternalServerErrorException,
-    NotFoundException,
-    UnauthorizedException,
-} from '@nestjs/common';
+import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { LoggerService } from '@o2s/utils.logger';
-import { Observable, catchError, from, throwError } from 'rxjs';
+import { Observable, catchError, from } from 'rxjs';
 
 import { Auth, Orders } from '@o2s/framework/modules';
 
+import { handleHttpError } from '../utils/handle-http-error';
+
 import { mapOrder, mapOrders } from './orders.mapper';
+import { Service as MedusaJsService } from '@/modules/medusajs';
 
 @Injectable()
 export class OrdersService extends Orders.Service {
-    private readonly logLevel: string;
-    private readonly medusaBaseUrl: string;
-    private readonly medusaPublishableApiKey: string;
-    private readonly medusaAdminApiKey: string;
     private readonly sdk: Medusa;
     private readonly defaultCurrency: string;
 
     private readonly additionalOrderListFields =
         '+total,+subtotal,+tax_total,+discount_total,+shipping_total,+shipping_subtotal,+tax_total,+items.product.*';
     private readonly additionalOrderDetailsFields = 'items.product.*';
+
     constructor(
         private readonly config: ConfigService,
         protected httpClient: HttpService,
         @Inject(LoggerService) protected readonly logger: LoggerService,
+        private readonly medusaJsService: MedusaJsService,
     ) {
         super();
-        this.medusaBaseUrl = this.config.get('MEDUSAJS_BASE_URL') || '';
-        this.medusaPublishableApiKey = this.config.get('MEDUSAJS_PUBLISHABLE_API_KEY') || '';
-        this.medusaAdminApiKey = this.config.get('MEDUSAJS_ADMIN_API_KEY') || '';
-        this.logLevel = this.config.get('LOG_LEVEL') || '';
+        this.sdk = this.medusaJsService.getSdk();
         this.defaultCurrency = this.config.get('DEFAULT_CURRENCY') || '';
 
-        if (!this.medusaBaseUrl) {
-            throw new Error('MEDUSAJS_BASE_URL is not defined');
-        }
-        if (!this.medusaPublishableApiKey) {
-            throw new Error('MEDUSAJS_PUBLISHABLE_API_KEY is not defined');
-        }
-        if (!this.medusaAdminApiKey) {
-            throw new Error('MEDUSAJS_ADMIN_API_KEY is not defined');
-        }
         if (!this.defaultCurrency) {
             throw new Error('DEFAULT_CURRENCY is not defined');
         }
-
-        this.sdk = new Medusa({
-            baseUrl: this.medusaBaseUrl,
-            debug: this.logLevel === 'debug',
-            publishableKey: this.medusaPublishableApiKey,
-            apiKey: this.medusaAdminApiKey,
-        });
     }
 
     getOrder(
@@ -86,7 +61,7 @@ export class OrdersService extends Orders.Service {
                 }),
         ).pipe(
             catchError((error) => {
-                return this.handleHttpError(error);
+                return handleHttpError(error);
             }),
         );
     }
@@ -129,7 +104,7 @@ export class OrdersService extends Orders.Service {
                 }),
         ).pipe(
             catchError((error) => {
-                return this.handleHttpError(error);
+                return handleHttpError(error);
             }),
         );
     }
@@ -162,17 +137,5 @@ export class OrdersService extends Orders.Service {
             default:
                 return undefined;
         }
-    }
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    private handleHttpError(error: any) {
-        if (error.status === 404) {
-            throw new NotFoundException(`Orders not found`);
-        } else if (error.status === 403) {
-            throw new ForbiddenException('Forbidden');
-        } else if (error.status === 401) {
-            throw new UnauthorizedException('Unauthorized');
-        }
-        return throwError(() => new InternalServerErrorException(error.message));
     }
 }

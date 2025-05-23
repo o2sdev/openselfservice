@@ -22,7 +22,7 @@ export const BlogCard: React.FC<Readonly<BlogCardProps>> = ({
     return (
         <Link
             asChild
-            className="whitespace-normal text-foreground hover:no-underline w-full focus-visible:ring-offset-4 block"
+            className="group whitespace-normal text-foreground hover:no-underline w-full focus-visible:ring-offset-4 block"
         >
             <NextLink href={url} aria-label={title}>
                 <div className="flex flex-col gap-6">

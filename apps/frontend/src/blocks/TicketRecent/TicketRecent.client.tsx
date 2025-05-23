@@ -37,7 +37,7 @@ export const TicketRecentPure: React.FC<TicketRecentPureProps> = ({ ...component
                                 const comment = ticket.comments?.items?.[0];
 
                                 return (
-                                    <li key={ticket.id.value} className="p-2 border-t">
+                                    <li key={ticket.id.value} className="p-2 [&+&]:border-t">
                                         {!!ticket.comments?.items?.length && (
                                             <div className="flex flex-col gap-6">
                                                 {comment && (

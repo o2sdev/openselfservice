@@ -1,5 +1,43 @@
 # @o2s/integrations.strapi-cms
 
+## 2.0.0
+
+### Major Changes
+
+- 0e0c816: Official stable release
+
+### Patch Changes
+
+- Updated dependencies [0e0c816]
+    - @o2s/framework@1.0.0
+    - @o2s/utils.logger@1.0.0
+
+## 1.4.1
+
+### Patch Changes
+
+- b91bfc4: fixed incorrect mapping of an optional field
+
+## 1.4.0
+
+### Minor Changes
+
+- 05eea01: chore: update dependencies
+- 44653fb: feat: orderDetails page implemented
+
+    - added new UI component: InfoCard,
+    - used InfoCard in PaymentsSummaryBlock, OrdersSummary and OrderDetails,
+    - fixed ordersSummaryBlock integration with strapi,
+    - used DynamicIcon in CategoryBlock,
+    - added orientation prop for Progress component
+
+### Patch Changes
+
+- Updated dependencies [05eea01]
+- Updated dependencies [44653fb]
+    - @o2s/utils.logger@0.12.0
+    - @o2s/framework@0.24.0
+
 ## 1.3.0
 
 ### Minor Changes

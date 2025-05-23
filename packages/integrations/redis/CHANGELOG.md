@@ -1,5 +1,30 @@
 # @o2s/integrations.redis
 
+## 1.0.0
+
+### Major Changes
+
+- 0e0c816: Official stable release
+
+### Patch Changes
+
+- Updated dependencies [0e0c816]
+    - @o2s/framework@1.0.0
+    - @o2s/utils.logger@1.0.0
+
+## 0.12.0
+
+### Minor Changes
+
+- 05eea01: chore: update dependencies
+
+### Patch Changes
+
+- Updated dependencies [05eea01]
+- Updated dependencies [44653fb]
+    - @o2s/utils.logger@0.12.0
+    - @o2s/framework@0.24.0
+
 ## 0.11.0
 
 ### Minor Changes

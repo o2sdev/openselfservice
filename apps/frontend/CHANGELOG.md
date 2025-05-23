@@ -1,5 +1,66 @@
 # @o2s/frontend
 
+## 1.0.0
+
+### Major Changes
+
+- 0e0c816: Official stable release
+
+### Patch Changes
+
+- Updated dependencies [0e0c816]
+    - @o2s/api-harmonization@1.0.0
+    - @o2s/framework@1.0.0
+    - @o2s/ui@1.0.0
+
+## 0.25.1
+
+### Patch Changes
+
+- 320512b: fixed tables in rich text expanding beyond the viewport
+
+## 0.25.0
+
+### Minor Changes
+
+- 123da31: fix: fixed blogCart hover
+
+### Patch Changes
+
+- 9a2344d: minor UI fixes
+
+## 0.24.1
+
+### Patch Changes
+
+- aaa8c37: code formatting fixes
+
+## 0.24.0
+
+### Minor Changes
+
+- 05eea01: chore: update dependencies
+- 1200a28: feat: update dashboard mock
+- 44653fb: feat: orderDetails page implemented
+
+    - added new UI component: InfoCard,
+    - used InfoCard in PaymentsSummaryBlock, OrdersSummary and OrderDetails,
+    - fixed ordersSummaryBlock integration with strapi,
+    - used DynamicIcon in CategoryBlock,
+    - added orientation prop for Progress component
+
+- 10fbec4: fix: fixed image implementation
+
+### Patch Changes
+
+- 10fbec4: improved global error handling for not-found and unexpected errors
+- Updated dependencies [05eea01]
+- Updated dependencies [44653fb]
+- Updated dependencies [10fbec4]
+    - @o2s/api-harmonization@0.23.0
+    - @o2s/framework@0.24.0
+    - @o2s/ui@0.16.0
+
 ## 0.23.0
 
 ### Minor Changes
