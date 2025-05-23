@@ -290,7 +290,6 @@ export type ComponentComponentsArticleList = {
     id: Scalars['ID']['output'];
     pages: Array<Maybe<Page>>;
     pages_connection?: Maybe<PageRelationResponseCollection>;
-    pagination?: Maybe<ComponentContentPagination>;
     parent?: Maybe<Page>;
     title?: Maybe<Scalars['String']['output']>;
 };
@@ -645,6 +644,12 @@ export type ComponentContentAlertBox = {
     title: Scalars['String']['output'];
 };
 
+export type ComponentContentAlertBoxInput = {
+    description?: InputMaybe<Scalars['String']['input']>;
+    id?: InputMaybe<Scalars['ID']['input']>;
+    title?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type ComponentContentArticleSection = {
     content: Scalars['String']['output'];
     id: Scalars['ID']['output'];
@@ -912,7 +917,7 @@ export type ComponentContentMessageFiltersInput = {
 };
 
 export type ComponentContentMessageSimple = {
-    content?: Maybe<Scalars['String']['output']>;
+    content: Scalars['String']['output'];
     id: Scalars['ID']['output'];
     title: Scalars['String']['output'];
 };
@@ -1058,6 +1063,7 @@ export type ComponentLabelsActions = {
     save: Scalars['String']['output'];
     settings: Scalars['String']['output'];
     show: Scalars['String']['output'];
+    showAllArticles: Scalars['String']['output'];
     showLess: Scalars['String']['output'];
     showMore: Scalars['String']['output'];
     trackOrder: Scalars['String']['output'];
@@ -1082,6 +1088,7 @@ export type ComponentLabelsActionsInput = {
     save?: InputMaybe<Scalars['String']['input']>;
     settings?: InputMaybe<Scalars['String']['input']>;
     show?: InputMaybe<Scalars['String']['input']>;
+    showAllArticles?: InputMaybe<Scalars['String']['input']>;
     showLess?: InputMaybe<Scalars['String']['input']>;
     showMore?: InputMaybe<Scalars['String']['input']>;
     trackOrder?: InputMaybe<Scalars['String']['input']>;
@@ -1730,12 +1737,12 @@ export type LoginPage = {
     locale?: Maybe<Scalars['String']['output']>;
     localizations: Array<Maybe<LoginPage>>;
     localizations_connection?: Maybe<LoginPageRelationResponseCollection>;
-    newPasswordMessage: ComponentContentMessageSimple;
+    newPasswordMessage: ComponentContentAlertBox;
     password: ComponentContentFormField;
     providersLabel?: Maybe<Scalars['String']['output']>;
     providersTitle?: Maybe<Scalars['String']['output']>;
     publishedAt?: Maybe<Scalars['DateTime']['output']>;
-    resetPasswordMessage: ComponentContentMessageSimple;
+    resetPasswordMessage: ComponentContentAlertBox;
     signIn: Scalars['String']['output'];
     subtitle?: Maybe<Scalars['String']['output']>;
     title: Scalars['String']['output'];
@@ -1748,12 +1755,12 @@ export type LoginPageInput = {
     forgotPassword?: InputMaybe<ComponentContentLinkInput>;
     image?: InputMaybe<Scalars['ID']['input']>;
     invalidCredentials?: InputMaybe<Scalars['String']['input']>;
-    newPasswordMessage?: InputMaybe<ComponentContentMessageSimpleInput>;
+    newPasswordMessage?: InputMaybe<ComponentContentAlertBoxInput>;
     password?: InputMaybe<ComponentContentFormFieldInput>;
     providersLabel?: InputMaybe<Scalars['String']['input']>;
     providersTitle?: InputMaybe<Scalars['String']['input']>;
     publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
-    resetPasswordMessage?: InputMaybe<ComponentContentMessageSimpleInput>;
+    resetPasswordMessage?: InputMaybe<ComponentContentAlertBoxInput>;
     signIn?: InputMaybe<Scalars['String']['input']>;
     subtitle?: InputMaybe<Scalars['String']['input']>;
     title?: InputMaybe<Scalars['String']['input']>;
@@ -2214,7 +2221,7 @@ export type Page = {
     localizations: Array<Maybe<Page>>;
     localizations_connection?: Maybe<PageRelationResponseCollection>;
     parent?: Maybe<Page>;
-    protected: Scalars['Boolean']['output'];
+    protected?: Maybe<Scalars['Boolean']['output']>;
     publishedAt?: Maybe<Scalars['DateTime']['output']>;
     slug: Scalars['String']['output'];
     template: Array<Maybe<PageTemplateDynamicZone>>;
@@ -3846,6 +3853,7 @@ export type ResolversTypes = {
     >;
     ComponentContentActionLinksFiltersInput: ComponentContentActionLinksFiltersInput;
     ComponentContentAlertBox: ResolverTypeWrapper<ComponentContentAlertBox>;
+    ComponentContentAlertBoxInput: ComponentContentAlertBoxInput;
     ComponentContentArticleSection: ResolverTypeWrapper<ComponentContentArticleSection>;
     ComponentContentArticleSectionFiltersInput: ComponentContentArticleSectionFiltersInput;
     ComponentContentBanner: ResolverTypeWrapper<
@@ -4329,6 +4337,7 @@ export type ResolversParentTypes = {
     };
     ComponentContentActionLinksFiltersInput: ComponentContentActionLinksFiltersInput;
     ComponentContentAlertBox: ComponentContentAlertBox;
+    ComponentContentAlertBoxInput: ComponentContentAlertBoxInput;
     ComponentContentArticleSection: ComponentContentArticleSection;
     ComponentContentArticleSectionFiltersInput: ComponentContentArticleSectionFiltersInput;
     ComponentContentBanner: Omit<ComponentContentBanner, 'button'> & {
@@ -4836,7 +4845,6 @@ export type ComponentComponentsArticleListResolvers<
         ContextType,
         RequireFields<ComponentComponentsArticleListPages_ConnectionArgs, 'pagination' | 'sort'>
     >;
-    pagination?: Resolver<Maybe<ResolversTypes['ComponentContentPagination']>, ParentType, ContextType>;
     parent?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType>;
     title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -5501,7 +5509,7 @@ export type ComponentContentMessageSimpleResolvers<
     ParentType extends
         ResolversParentTypes['ComponentContentMessageSimple'] = ResolversParentTypes['ComponentContentMessageSimple'],
 > = {
-    content?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    content?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -5636,6 +5644,7 @@ export type ComponentLabelsActionsResolvers<
     save?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     settings?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     show?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    showAllArticles?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     showLess?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     showMore?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     trackOrder?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -6155,12 +6164,12 @@ export type LoginPageResolvers<
         ParentType,
         ContextType
     >;
-    newPasswordMessage?: Resolver<ResolversTypes['ComponentContentMessageSimple'], ParentType, ContextType>;
+    newPasswordMessage?: Resolver<ResolversTypes['ComponentContentAlertBox'], ParentType, ContextType>;
     password?: Resolver<ResolversTypes['ComponentContentFormField'], ParentType, ContextType>;
     providersLabel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     providersTitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-    resetPasswordMessage?: Resolver<ResolversTypes['ComponentContentMessageSimple'], ParentType, ContextType>;
+    resetPasswordMessage?: Resolver<ResolversTypes['ComponentContentAlertBox'], ParentType, ContextType>;
     signIn?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     subtitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -6640,7 +6649,7 @@ export type PageResolvers<
         RequireFields<PageLocalizations_ConnectionArgs, 'pagination' | 'sort'>
     >;
     parent?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType>;
-    protected?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+    protected?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
     publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
     slug?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     template?: Resolver<Array<Maybe<ResolversTypes['PageTemplateDynamicZone']>>, ParentType, ContextType>;
@@ -7567,7 +7576,7 @@ export type ArticleSimpleFragment = {
 export type ArticleTemplateFragment = {
     documentId: string;
     slug: string;
-    protected: boolean;
+    protected?: boolean;
     locale?: string;
     createdAt?: any;
     updatedAt?: any;
@@ -7875,7 +7884,7 @@ export type GetArticlesQueryVariables = Exact<{
 export type GetArticlesQuery = {
     pages_connection?: { pageInfo: { total: number } };
     articles: Array<{
-        protected: boolean;
+        protected?: boolean;
         documentId: string;
         slug: string;
         locale?: string;
@@ -8310,7 +8319,7 @@ export type OrganizationListFragment = { documentId: string; title?: string; des
 export type PageFragment = {
     documentId: string;
     slug: string;
-    protected: boolean;
+    protected?: boolean;
     locale?: string;
     createdAt?: any;
     updatedAt?: any;
@@ -9535,7 +9544,7 @@ export type GetAppConfigQueryVariables = Exact<{
 export type GetAppConfigQuery = {
     appConfig?: { documentId: string; header?: { documentId: string }; footer?: { documentId: string } };
     configurableTexts?: {
-        errors: { requestError: { title: string; content?: string } };
+        errors: { requestError: { title: string; content: string } };
         dates: { today: string; yesterday: string };
         actions: {
             showMore: string;
@@ -10196,8 +10205,9 @@ export type GetComponentQuery = {
             payOnline: string;
             close: string;
             trackOrder: string;
+            showAllArticles: string;
         };
-        errors: { requestError: { title: string; content?: string } };
+        errors: { requestError: { title: string; content: string } };
     };
 };
 
@@ -10367,7 +10377,7 @@ export type GetPageQuery = {
     pages: Array<{
         documentId: string;
         slug: string;
-        protected: boolean;
+        protected?: boolean;
         locale?: string;
         createdAt?: any;
         updatedAt?: any;
@@ -10551,7 +10561,7 @@ export type GetPagesQuery = {
     pages: Array<{
         documentId: string;
         slug: string;
-        protected: boolean;
+        protected?: boolean;
         locale?: string;
         createdAt?: any;
         updatedAt?: any;
@@ -11828,6 +11838,7 @@ export const GetComponentDocument = gql`
                 payOnline
                 close
                 trackOrder
+                showAllArticles
             }
             errors {
                 requestError {

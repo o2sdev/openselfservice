@@ -5,5 +5,9 @@ export class ArticleListBlock extends Block.Block {
     __typename!: 'ArticleListBlock';
     title!: CMS.Model.ArticleListBlock.ArticleListBlock['title'];
     description!: CMS.Model.ArticleListBlock.ArticleListBlock['description'];
+    additionalLink?: {
+        label: string;
+        url: string;
+    };
     items!: Articles.Model.Articles;
 }

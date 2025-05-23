@@ -24,7 +24,7 @@ export const ContentSection: React.FC<Readonly<ContentSectionProps>> = ({
                     </div>
                 )}
                 {additionalLink && (
-                    <Button asChild variant="outline">
+                    <Button asChild variant="secondary">
                         <NextLink href={additionalLink.url}>{additionalLink.label}</NextLink>
                     </Button>
                 )}
