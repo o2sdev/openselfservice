@@ -57,6 +57,20 @@ export const MOCK_CATEGORIES_EN: Articles.Model.Category[] = [
             title: 'Help & Support',
         },
     },
+    {
+        id: 'troubleshooting',
+        slug: '/help-and-support/troubleshooting',
+        createdAt: '2023-08-20T11:30:00Z',
+        updatedAt: '2023-09-30T15:45:00Z',
+        title: 'Troubleshooting',
+        icon: 'Settings',
+        description:
+            'The Troubleshooting category provides solutions to common problems and issues with PowerPro tools, offering step-by-step guides, troubleshooting tips, and support contacts to help users resolve issues quickly and efficiently.',
+        parent: {
+            slug: '/help-and-support',
+            title: 'Help & Support',
+        },
+    },
 ];
 
 export const MOCK_CATEGORIES_DE: Articles.Model.Category[] = [
@@ -116,6 +130,20 @@ export const MOCK_CATEGORIES_DE: Articles.Model.Category[] = [
             title: 'Hilfe und Support',
         },
     },
+    {
+        id: 'troubleshooting',
+        slug: '/hilfe-und-support/fehlerbehebung',
+        createdAt: '2023-08-20T11:30:00Z',
+        updatedAt: '2023-09-30T15:45:00Z',
+        title: 'Fehlerbehebung',
+        icon: 'Settings',
+        description:
+            'Die Kategorie Fehlerbehebung stellt Lösungen für häufige Probleme und Fragen mit PowerPro-Werkzeugen bereit, indem sie Schritt-für-Schritt-Anleitungen, Fehlerbehebungshinweise und Support-Kontakte bereitstellt, um Benutzern zu helfen, Probleme schnell und effizient zu lösen.',
+        parent: {
+            slug: '/hilfe-und-support',
+            title: 'Hilfe und Support',
+        },
+    },
 ];
 
 export const MOCK_CATEGORIES_PL: Articles.Model.Category[] = [
@@ -170,6 +198,20 @@ export const MOCK_CATEGORIES_PL: Articles.Model.Category[] = [
         icon: 'ShieldCheck',
         description:
             'Kategoria Akcesoria prezentuje szeroki zakres przystawek, dodatków i ulepszeń dostępnych dla narzędzi PowerPro, pomagając rozszerzyć ich funkcjonalność i realizować specjalistyczne projekty.',
+        parent: {
+            slug: '/pomoc-i-wsparcie',
+            title: 'Pomoc i Wsparcie',
+        },
+    },
+    {
+        id: 'troubleshooting',
+        slug: '/pomoc-i-wsparcie/rozwiązywanie-problemów',
+        createdAt: '2023-08-20T11:30:00Z',
+        updatedAt: '2023-09-30T15:45:00Z',
+        title: 'Rozwiązywanie problemów',
+        icon: 'Settings',
+        description:
+            'Kategoria Rozwiązywanie problemów zawiera rozwiązania dla typowych problemów i pytań dotyczących narzędzi PowerPro, oferując kroki po kroku, porady dotyczące rozwiązywania problemów i dane kontaktowe wsparcia technicznego, aby pomóc użytkownikom szybko i efektywnie rozwiązywać problemy.',
         parent: {
             slug: '/pomoc-i-wsparcie',
             title: 'Pomoc i Wsparcie',

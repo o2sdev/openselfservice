@@ -4,7 +4,7 @@ const MOCK_ARTICLE_LIST_BLOCK_EN: CMS.Model.CategoryListBlock.CategoryListBlock 
     id: 'category-list-1',
     title: 'Browse by categories',
     description: 'Explore our help topics organized by category to find the information you need quickly and easily.',
-    categoryIds: ['warranty-and-repair', 'maintenance', 'safety', 'accessories'],
+    categoryIds: ['warranty-and-repair', 'maintenance', 'safety', 'accessories', 'troubleshooting'],
     parent: {
         slug: '/help-and-support',
     },
@@ -14,7 +14,7 @@ const MOCK_ARTICLE_LIST_BLOCK_DE: CMS.Model.CategoryListBlock.CategoryListBlock 
     title: 'Nach Kategorien durchsuchen',
     description:
         'Entdecken Sie unsere Hilfethemen nach Kategorien geordnet, um die benötigten Informationen schnell und einfach zu finden.',
-    categoryIds: ['warranty-and-repair', 'maintenance', 'safety', 'accessories'],
+    categoryIds: ['warranty-and-repair', 'maintenance', 'safety', 'accessories', 'troubleshooting'],
     parent: {
         slug: '/hilfe-und-support',
     },
@@ -24,7 +24,7 @@ const MOCK_ARTICLE_LIST_BLOCK_PL: CMS.Model.CategoryListBlock.CategoryListBlock 
     title: 'Przeglądaj według kategorii',
     description:
         'Przeglądaj nasze tematy pomocy uporządkowane według kategorii, aby szybko i łatwo znaleźć potrzebne informacje.',
-    categoryIds: ['warranty-and-repair', 'maintenance', 'safety', 'accessories'],
+    categoryIds: ['warranty-and-repair', 'maintenance', 'safety', 'accessories', 'troubleshooting'],
     parent: {
         slug: '/pomoc-i-wsparcie',
     },
