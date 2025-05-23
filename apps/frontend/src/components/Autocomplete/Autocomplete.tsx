@@ -1,125 +1,156 @@
-import { Search } from 'lucide-react';
-import React, { useCallback, useEffect, useState } from 'react';
-import Autosuggest from 'react-autosuggest';
-import { debounce } from 'throttle-debounce';
+'use client';
 
-import { Input } from '@o2s/ui/components/input';
+import { Command as CommandPrimitive } from 'cmdk';
+import { Check } from 'lucide-react';
+import { type KeyboardEvent, useCallback, useRef, useState } from 'react';
 
-// import styles from './Autocomplete.module.scss';
-import { AutocompleteProps } from './Autocomplete.types';
+import { CommandGroup, CommandInput, CommandItem, CommandList } from '@o2s/ui/components/command';
+import { Label } from '@o2s/ui/components/label';
+import { Skeleton } from '@o2s/ui/components/skeleton';
+import { cn } from '@o2s/ui/lib/utils';
 
-// const NAME = 'Autocomplete';
+import { AutocompleteProps, Suggestion } from './Autocomplete.types';
 
-export const Autocomplete = <T,>({
-    id,
-    // label,
-    minLength = 3,
-    throttleInterval = 300,
-    disabled,
-    defaultValue,
-    // caption,
+export const Autocomplete = ({
+    suggestions,
     placeholder,
-    autoClear = false,
-    onSelectedSuggestion,
-    getSuggestionValue,
-    onSuggestionsFetchRequested,
-    renderSuggestion,
-    onChange,
-    onBlur,
-    onFocus,
-    // customClass,
-    // componentSize = 'large',
-    required,
-    adornment = false,
-    'aria-invalid': ariaInvalid,
-}: AutocompleteProps<T>) => {
-    const [value, setValue] = useState(defaultValue);
-    const [suggestions, setSuggestions] = useState<T[]>([]);
-    const [isSelectedValue, setIsSelectedValue] = useState(false);
-    useEffect(() => {
-        setValue(defaultValue);
-    }, [defaultValue]);
+    emptyMessage,
+    value,
+    onValueChange,
+    onSelected,
+    disabled,
+    label,
+    minLength = 3,
+    isLoading = false,
+}: AutocompleteProps) => {
+    const inputRef = useRef<HTMLInputElement>(null);
 
-    const fetchSuggestions = useCallback(
-        debounce(throttleInterval, async (value: string) => {
-            const suggestions = await onSuggestionsFetchRequested(value);
-            if (suggestions) setSuggestions(suggestions);
-        }),
-        [onSuggestionsFetchRequested, throttleInterval],
+    const [isOpen, setOpen] = useState(false);
+    const [selected, setSelected] = useState<Suggestion>(value as Suggestion);
+    const [inputValue, setInputValue] = useState<string>(value?.label || '');
+
+    const handleKeyDown = useCallback(
+        (event: KeyboardEvent<HTMLDivElement>) => {
+            const input = inputRef.current;
+            if (!input) {
+                return;
+            }
+
+            // This is not a default behaviour of the <input /> field
+            if (event.key === 'Enter' && input.value !== '') {
+                const suggestionToSelect = suggestions.find((suggestion) => suggestion.label === input.value);
+                if (suggestionToSelect) {
+                    setSelected(suggestionToSelect);
+                    onSelected?.(suggestionToSelect);
+                }
+            }
+
+            if (event.key === 'Escape') {
+                input.blur();
+            }
+        },
+        [suggestions, onSelected],
+    );
+
+    const handleBlur = useCallback(() => {
+        setOpen(false);
+        setInputValue(selected?.label);
+    }, [selected]);
+
+    const handleSelectOption = useCallback(
+        (selectedSuggestion: Suggestion) => {
+            setInputValue(selectedSuggestion.label);
+
+            setSelected(selectedSuggestion);
+            onSelected?.(selectedSuggestion);
+
+            // This is a hack to prevent the input from being focused after the user selects an option
+            // We can call this hack: "The next tick"
+            setTimeout(() => {
+                inputRef?.current?.blur();
+            }, 0);
+        },
+        [onSelected],
     );
 
     return (
-        <div className="w-full">
-            {/* <div className={cn(styles.autocomplete, styles[componentSize], customClass)}> */}
-            <Autosuggest
-                suggestions={suggestions}
-                shouldRenderSuggestions={(value) => value.length >= minLength}
-                onSuggestionsClearRequested={() => setSuggestions([])}
-                onSuggestionsFetchRequested={async ({ value }) => {
-                    setValue(value);
-                    await fetchSuggestions(value);
-                }}
-                onSuggestionSelected={(_e, { suggestion }) => {
-                    onSelectedSuggestion(suggestion);
-                    setIsSelectedValue(true);
-                }}
-                getSuggestionValue={getSuggestionValue}
-                renderSuggestion={renderSuggestion}
-                inputProps={{
-                    value: value || '',
-                    onChange: (_e, { newValue }) => {
-                        setValue(newValue);
-                        setIsSelectedValue(false);
-                        onChange && onChange(newValue);
-                    },
-                    onBlur: (event) => {
-                        if (!isSelectedValue && autoClear) setValue('');
-                        onBlur && onBlur(event as React.FocusEvent<HTMLInputElement>);
-                    },
-                    onFocus: (event) => {
-                        onFocus && onFocus(event as React.FocusEvent<HTMLInputElement>);
-                    },
-                }}
-                renderInputComponent={(inputProps) => (
-                    // <Input
-                    //     data-test={dataTest}
-                    //     componentSize={componentSize}
-                    //     required={required}
-                    //     id={id}
-                    //     label={label}
-                    //     disabled={disabled}
-                    //     aria-invalid={ariaInvalid}
-                    //     autoComplete="off"
-                    //     rightAdornment={
-                    //         adornment ? (
-                    //             <InputAdornment type={'icon'}>
-                    //                 <Icon size={componentSize}>
-                    //                     <Search className="w-4 h-4" />
-                    //                 </Icon>
-                    //             </InputAdornment>
-                    //         ) : undefined
-                    //     }
-                    //     placeholder={placeholder}
-                    //     caption={caption}
-                    //     {...inputProps}
-                    // />
-                    <Input
-                        placeholder={placeholder}
-                        adornment={adornment && <Search className="w-4 h-4" />}
-                        adornmentProps={{ behavior: 'prepend' }}
-                        className="w-full pl-8"
-                        onChange={(e) => {
-                            console.log('e', e);
+        <>
+            {label && (
+                <Label htmlFor="autocomplete" className="sr-only">
+                    {label}
+                </Label>
+            )}
+            <CommandPrimitive
+                onKeyDown={handleKeyDown}
+                className="border rounded-md focus-within:outline-hidden focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2"
+            >
+                <div>
+                    <CommandInput
+                        ref={inputRef}
+                        value={inputValue}
+                        onValueChange={(e) => {
+                            setInputValue(e);
+                            if (e.length >= minLength) {
+                                setOpen(true);
+                                onValueChange?.(e);
+                            }
                         }}
+                        onBlur={handleBlur}
+                        placeholder={placeholder}
                         disabled={disabled}
-                        required={required}
-                        id={id}
-                        aria-invalid={ariaInvalid}
-                        {...inputProps}
+                        className="text-base text-muted-foreground"
+                        id="autocomplete"
                     />
-                )}
-                // theme={styles}
-            />
-        </div>
+                </div>
+                <div className="relative">
+                    <div
+                        className={cn(
+                            'animate-in mt-2 fade-in-0 zoom-in-95 absolute top-0 z-10 w-full rounded-md bg-background outline-none',
+                            isOpen ? 'block' : 'hidden',
+                        )}
+                    >
+                        <CommandList className="rounded-md border bg-popover p-1 text-popover-foreground shadow-md">
+                            {isLoading ? (
+                                <CommandPrimitive.Loading>
+                                    <div className="p-1">
+                                        <Skeleton className="h-8 w-full" />
+                                    </div>
+                                </CommandPrimitive.Loading>
+                            ) : null}
+                            {suggestions.length > 0 && !isLoading ? (
+                                <CommandGroup>
+                                    {suggestions.map((suggestion) => {
+                                        const isSelected = selected?.value === suggestion.value;
+                                        return (
+                                            <CommandItem
+                                                key={suggestion.value}
+                                                value={suggestion.label}
+                                                onMouseDown={(event) => {
+                                                    event.preventDefault();
+                                                    event.stopPropagation();
+                                                }}
+                                                onSelect={() => handleSelectOption(suggestion)}
+                                                className={cn(
+                                                    'flex w-full items-center gap-2 cursor-pointer',
+                                                    !isSelected ? 'pl-8' : null,
+                                                )}
+                                            >
+                                                {isSelected ? <Check className="w-4" /> : null}
+                                                {suggestion.label}
+                                            </CommandItem>
+                                        );
+                                    })}
+                                </CommandGroup>
+                            ) : null}
+                            {!isLoading ? (
+                                <CommandPrimitive.Empty className="select-none rounded-sm px-2 py-3 text-center text-sm">
+                                    {emptyMessage}
+                                </CommandPrimitive.Empty>
+                            ) : null}
+                        </CommandList>
+                    </div>
+                </div>
+            </CommandPrimitive>
+        </>
     );
 };

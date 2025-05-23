@@ -492,3 +492,127 @@ export const PAGE_ACCESSORIES_PL: CMS.Model.Page.Page = {
     updatedAt: '2025-01-01',
     createdAt: '2025-01-01',
 };
+
+// Troubleshooting category pages
+export const PAGE_TROUBLESHOOTING_EN: CMS.Model.Page.Page = {
+    id: 'troubleshooting',
+    slug: '/help-and-support/troubleshooting',
+    locale: 'en',
+    seo: {
+        noIndex: false,
+        noFollow: false,
+        title: 'Troubleshooting',
+        description: 'Troubleshooting',
+        keywords: [],
+        image: {
+            url: 'https://picsum.photos/150',
+            width: 150,
+            height: 150,
+            alt: 'Placeholder',
+        },
+    },
+
+    isProtected: false,
+    hasOwnTitle: false,
+    parent: {
+        slug: '/help-and-support',
+        seo: {
+            title: 'Help & Support',
+        },
+    },
+    template: {
+        __typename: 'OneColumnTemplate',
+        slots: {
+            main: [
+                {
+                    __typename: 'CategoryBlock',
+                    id: 'category-5',
+                },
+            ],
+        },
+    },
+    updatedAt: '2025-01-01',
+    createdAt: '2025-01-01',
+};
+
+export const PAGE_TROUBLESHOOTING_DE: CMS.Model.Page.Page = {
+    id: 'troubleshooting',
+    slug: '/hilfe-und-support/fehlerbehebung',
+    locale: 'de',
+    seo: {
+        noIndex: false,
+        noFollow: false,
+        title: 'Fehlerbehebung',
+        description: 'Fehlerbehebung',
+        keywords: [],
+        image: {
+            url: 'https://picsum.photos/150',
+            width: 150,
+            height: 150,
+            alt: 'Placeholder',
+        },
+    },
+
+    isProtected: false,
+    hasOwnTitle: false,
+    parent: {
+        slug: '/hilfe-und-support',
+        seo: {
+            title: 'Hilfe und Support',
+        },
+    },
+    template: {
+        __typename: 'OneColumnTemplate',
+        slots: {
+            main: [
+                {
+                    __typename: 'CategoryBlock',
+                    id: 'category-5',
+                },
+            ],
+        },
+    },
+    updatedAt: '2025-01-01',
+    createdAt: '2025-01-01',
+};
+
+export const PAGE_TROUBLESHOOTING_PL: CMS.Model.Page.Page = {
+    id: 'troubleshooting',
+    slug: '/pomoc-i-wsparcie/rozwiązywanie-problemów',
+    locale: 'pl',
+    seo: {
+        noIndex: false,
+        noFollow: false,
+        title: 'Rozwiązywanie problemów',
+        description: 'Rozwiązywanie problemów',
+        keywords: [],
+        image: {
+            url: 'https://picsum.photos/150',
+            width: 150,
+            height: 150,
+            alt: 'Placeholder',
+        },
+    },
+
+    isProtected: false,
+    hasOwnTitle: false,
+    parent: {
+        slug: '/pomoc-i-wsparcie',
+        seo: {
+            title: 'Pomoc i Wsparcie',
+        },
+    },
+    template: {
+        __typename: 'OneColumnTemplate',
+        slots: {
+            main: [
+                {
+                    __typename: 'CategoryBlock',
+                    id: 'category-5',
+                },
+            ],
+        },
+    },
+    updatedAt: '2025-01-01',
+    createdAt: '2025-01-01',
+};

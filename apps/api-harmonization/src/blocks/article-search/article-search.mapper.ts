@@ -10,7 +10,7 @@ export const mapArticleSearch = (
         __typename: 'ArticleSearchBlock',
         id: cms.id,
         title: cms.title,
-        label: cms.label,
+        inputLabel: cms.inputLabel,
         noResults: cms.noResults,
     };
 };
@@ -18,9 +18,8 @@ export const mapArticleSearch = (
 export const mapArticles = (articles: Articles.Model.Articles): ArticleList => {
     return {
         articles: articles.data.map((article) => ({
-            id: article.id,
-            title: article.title,
-            slug: article.slug,
+            label: article.title,
+            value: article.slug,
         })),
     };
 };

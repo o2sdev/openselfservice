@@ -1,16 +1,41 @@
 'use client';
 
-import React from 'react';
+import React, { useCallback, useState, useTransition } from 'react';
+import { debounce } from 'throttle-debounce';
 
 import { Typography } from '@o2s/ui/components/typography';
 
+import { sdk } from '@/api/sdk';
+
+import { useRouter } from '@/i18n';
+
 import { Autocomplete } from '@/components/Autocomplete/Autocomplete';
+import { Suggestion } from '@/components/Autocomplete/Autocomplete.types';
 import { Container } from '@/components/Container/Container';
 
 import { ArticleSearchPureProps } from './ArticleSearch.types';
 
 export const ArticleSearchPure: React.FC<ArticleSearchPureProps> = ({ ...component }) => {
-    const { title, label } = component;
+    const { title, inputLabel, noResults, accessToken, locale } = component;
+
+    const router = useRouter();
+
+    const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
+    const [isPending, startTransition] = useTransition();
+
+    const getSuggestions = useCallback(
+        debounce(300, async (value: string) => {
+            startTransition(async () => {
+                const result = await sdk.blocks.searchArticles(
+                    { query: value, limit: 5, offset: 0 },
+                    { 'x-locale': locale },
+                    accessToken,
+                );
+                if (result.articles) setSuggestions(result.articles as Suggestion[]);
+            });
+        }),
+        [accessToken, locale],
+    );
 
     return (
         <Container variant="narrow">
@@ -20,29 +45,18 @@ export const ArticleSearchPure: React.FC<ArticleSearchPureProps> = ({ ...compone
                         <h2>{title}</h2>
                     </Typography>
                 )}
-                {label && (
+                {inputLabel && (
                     <Autocomplete
-                        id="autocomplete"
-                        label=""
-                        placeholder={label}
-                        onChange={(e) => {
-                            console.log('e', e);
+                        suggestions={suggestions}
+                        placeholder={inputLabel}
+                        label={inputLabel}
+                        emptyMessage={noResults.title}
+                        minLength={3}
+                        onValueChange={getSuggestions}
+                        onSelected={(e) => {
+                            router.push(e.value);
                         }}
-                        onSelectedSuggestion={(e) => {
-                            console.log('e', e);
-                        }}
-                        getSuggestionValue={(e) => {
-                            console.log('e', e);
-                            return 'test';
-                        }}
-                        onSuggestionsFetchRequested={(e) => {
-                            console.log('e', e);
-                            return Promise.resolve([]);
-                        }}
-                        renderSuggestion={(e) => {
-                            console.log('e', e);
-                            return <div>test</div>;
-                        }}
+                        isLoading={isPending}
                     />
                 )}
             </div>
