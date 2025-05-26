@@ -6,3 +6,4 @@ export * as CreateNewPasswordPage from './create-new-password-page';
 export * as NotFoundPage from './not-found-page';
 export * as Organizations from './organizations';
 export * as SurveyjsForms from './surveyjs-forms';
+export * as Users from './users';

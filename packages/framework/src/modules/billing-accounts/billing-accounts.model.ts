@@ -1,5 +1,6 @@
-import { Resource } from '@/modules/resources/resources.model';
 import { Pagination } from '@/utils/models';
+
+import { Resource } from '@/modules/resources/resources.model';
 
 export class BillingAccount {
     id!: string;

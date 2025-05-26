@@ -3,8 +3,9 @@ import { Observable, of } from 'rxjs';
 
 import { BillingAccounts } from '@o2s/framework/modules';
 
-import { mapBillingAccount, mapBillingAccounts } from './billing-accounts.mapper';
 import { responseDelay } from '@/utils/delay';
+
+import { mapBillingAccount, mapBillingAccounts } from './billing-accounts.mapper';
 
 @Injectable()
 export class BillingAccountService implements BillingAccounts.Service {

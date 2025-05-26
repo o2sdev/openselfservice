@@ -1,5 +1,6 @@
-import { Resource } from '@/modules/resources/resources.model';
 import { Block, DataTable, Filters, Pagination } from '@/utils/models';
+
+import { Resource } from '@/modules/resources/resources.model';
 
 type ResourceKeys = keyof Resource | string | '__typename';
 

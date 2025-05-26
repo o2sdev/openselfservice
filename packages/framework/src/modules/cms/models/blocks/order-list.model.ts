@@ -1,5 +1,6 @@
-import { Order } from '@/modules/orders/orders.model';
 import { Block, DataTable, Filters, Mapping, Pagination } from '@/utils/models';
+
+import { Order } from '@/modules/orders/orders.model';
 
 export class OrderListBlock extends Block.Block {
     title?: string;

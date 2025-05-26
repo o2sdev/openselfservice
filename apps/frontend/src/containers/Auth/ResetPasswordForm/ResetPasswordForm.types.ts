@@ -1,5 +1,3 @@
-import { AuthError } from 'next-auth';
-
 import { Models } from '@o2s/framework/modules';
 
 export interface FormValues {
@@ -19,5 +17,5 @@ export interface ResetPasswordFormProps {
         };
         invalidCredentials: string;
     };
-    onResetPassword: (credentials: FormValues) => Promise<AuthError | void>;
+    onResetPassword: (credentials: FormValues) => Promise<void>;
 }

@@ -1,5 +1,6 @@
-import { Asset, Contract, Resource, Service } from '@/modules/resources/resources.model';
 import { Block, Mapping } from '@/utils/models';
+
+import { Asset, Contract, Resource, Service } from '@/modules/resources/resources.model';
 
 type ResourceKeys =
     | keyof Resource

@@ -1,9 +1,10 @@
 import { Controller, Get, Headers, Param, Query, UseInterceptors } from '@nestjs/common';
 import { LoggerService } from '@o2s/utils.logger';
 
+import { AppHeaders } from '@/utils/models/headers';
+
 import { Request } from './';
 import { OrderService } from './orders.service';
-import { AppHeaders } from '@/utils/models/headers';
 
 @Controller('/orders')
 @UseInterceptors(LoggerService)

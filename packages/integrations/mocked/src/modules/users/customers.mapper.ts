@@ -1,3 +1,5 @@
+import { NotFoundException } from '@nestjs/common';
+
 import { Models } from '@o2s/framework/modules';
 
 const MOCK_CUSTOMER_1: Models.Customer.Customer = {
@@ -69,12 +71,18 @@ const MOCK_CUSTOMER_3: Models.Customer.Customer = {
     parentOrgId: 'org-003',
 };
 
-export const mapCustomers = (): Models.Customer.Customer[] | undefined => {
+export const mapCustomers = (): Models.Customer.Customer[] => {
     const mocks = [MOCK_CUSTOMER_1, MOCK_CUSTOMER_2, MOCK_CUSTOMER_3];
     const count = Math.floor(Math.random() * 3) + 1;
     return mocks.slice(0, count);
 };
 
-export const mapCustomer = (id: string): Models.Customer.Customer | undefined => {
-    return [MOCK_CUSTOMER_1, MOCK_CUSTOMER_2, MOCK_CUSTOMER_3].find((customer) => customer.id === id);
+export const mapCustomer = (id: string): Models.Customer.Customer => {
+    const customer = [MOCK_CUSTOMER_1, MOCK_CUSTOMER_2, MOCK_CUSTOMER_3].find((customer) => customer.id === id);
+
+    if (customer) {
+        return customer;
+    }
+
+    throw new NotFoundException();
 };

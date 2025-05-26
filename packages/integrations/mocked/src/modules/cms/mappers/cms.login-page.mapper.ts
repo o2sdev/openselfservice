@@ -98,7 +98,8 @@ const LOGIN_PAGE_PL: CMS.Model.LoginPage.LoginPage = {
         description: 'Sprawdź folder spam, jeśli wiadomość nie dotarła.',
     },
     newPasswordMessage: {
-        title: 'Nowe hasło zostało ustawione. Możesz się teraz zalogować.',
+        title: 'Nowe hasło zostało ustawione.',
+        description: 'Możesz się teraz zalogować.',
     },
 };
 
@@ -221,7 +222,8 @@ const LOGIN_PAGE_EN: CMS.Model.LoginPage.LoginPage = {
         description: 'Check spam if it does not arrive.',
     },
     newPasswordMessage: {
-        title: 'The new password has been set. You can now sign in.',
+        title: 'The new password has been set.',
+        description: 'You can now sign in.',
     },
 };
 
@@ -323,7 +325,8 @@ const LOGIN_PAGE_DE: CMS.Model.LoginPage.LoginPage = {
         description: 'Überprüfen Sie den Spam-Ordner, falls die Nachricht nicht ankommt.',
     },
     newPasswordMessage: {
-        title: 'Das neue Passwort wurde festgelegt. Sie können sich jetzt anmelden.',
+        title: 'Das neue Passwort wurde festgelegt.',
+        description: 'Sie können sich jetzt anmelden.',
     },
 };
 

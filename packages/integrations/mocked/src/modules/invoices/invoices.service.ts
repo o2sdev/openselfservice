@@ -5,8 +5,9 @@ import { Observable, of } from 'rxjs';
 
 import { Invoices } from '@o2s/framework/modules';
 
-import { mapInvoice, mapInvoices } from './invoices.mapper';
 import { responseDelay } from '@/utils/delay';
+
+import { mapInvoice, mapInvoices } from './invoices.mapper';
 
 @Injectable()
 export class InvoicesService implements Invoices.Service {

@@ -2,8 +2,9 @@ import { NotFoundException } from '@nestjs/common';
 
 import { Articles, CMS } from '@o2s/framework/modules';
 
-import { ArticleSimpleFragment, ArticleTemplateFragment, CategoryFragment, GetArticleQuery } from '@/generated/strapi';
 import { mapMedia } from '@/modules/cms/mappers/cms.media.mapper';
+
+import { ArticleSimpleFragment, ArticleTemplateFragment, CategoryFragment, GetArticleQuery } from '@/generated/strapi';
 
 export const mapCategory = (data: CategoryFragment): Articles.Model.Category => {
     return {

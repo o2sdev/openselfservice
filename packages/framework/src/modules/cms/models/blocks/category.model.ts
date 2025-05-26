@@ -1,5 +1,6 @@
-import { SlotBlock } from '@/modules/cms/models/page.model';
 import { Block, Pagination } from '@/utils/models';
+
+import { SlotBlock } from '@/modules/cms/models/page.model';
 
 export class CategoryBlock extends Block.Block {
     title!: string;

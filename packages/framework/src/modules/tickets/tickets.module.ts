@@ -2,9 +2,10 @@ import { HttpModule } from '@nestjs/axios';
 import { DynamicModule, Global, Module } from '@nestjs/common';
 import { Type } from '@nestjs/common/interfaces/type.interface';
 
+import { ApiConfig } from '@/api-config';
+
 import { TicketsController } from './tickets.controller';
 import { TicketService } from './tickets.service';
-import { ApiConfig } from '@/api-config';
 
 @Global()
 @Module({})

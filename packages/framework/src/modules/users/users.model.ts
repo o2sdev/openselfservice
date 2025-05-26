@@ -1,6 +1,5 @@
-import { UserCustomerRole } from '../../utils/models/roles';
-
 import { Customer } from '@/utils/models/customer';
+import { UserCustomerRole } from '@/utils/models/roles';
 
 export class User {
     id!: string;

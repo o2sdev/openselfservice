@@ -3,8 +3,9 @@ import { Observable, of } from 'rxjs';
 
 import { Resources } from '@o2s/framework/modules';
 
-import { mapAsset, mapAssets, mapService, mapServices } from './resources.mapper';
 import { responseDelay } from '@/utils/delay';
+
+import { mapAsset, mapAssets, mapService, mapServices } from './resources.mapper';
 
 @Injectable()
 export class ResourcesService implements Resources.Service {

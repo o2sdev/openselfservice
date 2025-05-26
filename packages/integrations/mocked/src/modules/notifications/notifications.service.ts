@@ -3,9 +3,10 @@ import { Observable, of } from 'rxjs';
 
 import { Notifications } from '@o2s/framework/modules';
 
+import { responseDelay } from '@/utils/delay';
+
 import { mapNotification, mapNotifications } from './notifications.mapper';
 import * as CustomNotifications from './notifications.model';
-import { responseDelay } from '@/utils/delay';
 
 @Injectable()
 export class NotificationsService implements Notifications.Service {

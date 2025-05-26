@@ -1,5 +1,3 @@
-import { AuthError } from 'next-auth';
-
 import { Models } from '@o2s/framework/modules';
 
 export interface FormValues {
@@ -26,5 +24,5 @@ export interface CreateNewPasswordFormProps {
         confirmPassword: CreateNewPasswordInputLabels;
         creatingPasswordError: string;
     };
-    onCreateNewPassword: (credentials: FormValues) => Promise<AuthError | void>;
+    onCreateNewPassword: (credentials: FormValues) => Promise<void>;
 }
