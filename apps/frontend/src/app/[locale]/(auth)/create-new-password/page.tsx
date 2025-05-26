@@ -110,6 +110,7 @@ export default async function CreateNewPasswordPage({ params }: Readonly<Props>)
                                         show: data.labels?.show,
                                         errorMessages: data.password?.errorMessages,
                                         regexValidations: data.password?.regexValidations,
+                                        description: data.password?.description,
                                     },
                                     confirmPassword: {
                                         label: data.confirmPassword.label,

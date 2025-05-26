@@ -86,6 +86,7 @@ export const CreateNewPasswordForm: React.FC<Readonly<CreateNewPasswordFormProps
                                                 showLabel={labels.password.show}
                                                 hideLabel={labels.password.hide}
                                                 validations={labels.password.regexValidations}
+                                                description={labels.password.description}
                                             />
                                         )}
                                     </Field>
