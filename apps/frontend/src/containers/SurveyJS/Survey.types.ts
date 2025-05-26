@@ -17,7 +17,7 @@ export type SurveyAction =
 
 export interface ErrorLabels {
     title: string;
-    content: string;
+    content?: string;
 }
 
 export interface Labels {

@@ -4,6 +4,7 @@ import { of } from 'rxjs';
 import { CMS } from '@o2s/framework/modules';
 
 import { mapArticleListBlock } from './mappers/blocks/cms.article-list.mapper';
+import { mapArticleSearchBlock } from './mappers/blocks/cms.article-search.mapper';
 import { mapFaqBlock } from './mappers/blocks/cms.faq.mapper';
 import { mapInvoiceDetailsBlock } from './mappers/blocks/cms.invoice-details.mapper';
 import { mapInvoiceListBlock } from './mappers/blocks/cms.invoice-list.mapper';
@@ -176,5 +177,9 @@ export class CmsService implements CMS.Service {
 
     getCategoryListBlock(options: CMS.Request.GetCmsEntryParams) {
         return of(mapCategoryListBlock(options.locale)).pipe(responseDelay());
+    }
+
+    getArticleSearchBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapArticleSearchBlock(options.locale)).pipe(responseDelay());
     }
 }

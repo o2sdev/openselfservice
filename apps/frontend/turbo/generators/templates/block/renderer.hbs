@@ -9,7 +9,7 @@ import { {{ pascalCase name }} } from './{{ pascalCase name }}.server';
 export interface {{ pascalCase name }}RendererProps {
     slug: string[];
     id: string;
-    accessToken: string;
+    accessToken?: string;
 }
 
 export const {{ pascalCase name }}Renderer: React.FC<{{ pascalCase name }}RendererProps> = ({ id, accessToken }) => {
