@@ -33,6 +33,6 @@ export class OrdersService implements Orders.Service {
             throw new UnauthorizedException('Unauthorized');
         }
 
-        return of(mapOrder(params.id)).pipe(responseDelay());
+        return of(mapOrder(params)).pipe(responseDelay());
     }
 }

@@ -352,7 +352,10 @@ const generateOrder = (orderIndex: number, count: number, getRandomDate: () => D
         currency,
         paymentStatus,
         status,
-        items,
+        items: {
+            data: items,
+            total: items.length,
+        },
         documents: DOCUMENT_DATA,
         shippingMethods: [
             {
@@ -407,8 +410,50 @@ const MOCKED_ORDERS = [
     ...generateOrders(10, getRandomDateMonthLastYear),
 ];
 
-export const mapOrder = (id: string): Orders.Model.Order | undefined => {
-    return MOCKED_ORDERS.find((order) => order.id === id);
+export const mapOrder = (options: Orders.Request.GetOrderParams): Orders.Model.Order | undefined => {
+    const { offset = 0, limit = 10, sort, id } = options;
+
+    const order = MOCKED_ORDERS.find((order) => order.id === id);
+
+    if (!order) {
+        return undefined;
+    }
+    const items = order?.items;
+
+    if (sort) {
+        const [field, order] = sort.split('_');
+        const isAscending = order === 'ASC';
+
+        items.data.sort((a, b) => {
+            const aValue = a[field as keyof Orders.Model.OrderItem];
+            const bValue = b[field as keyof Orders.Model.OrderItem];
+
+            if (field === 'discountTotal' || field === 'total' || field === 'price') {
+                if (!aValue || !bValue) return 0;
+
+                const aValueNumber = (aValue as Models.Price.Price).value;
+                const bValueNumber = (bValue as Models.Price.Price).value;
+                return isAscending ? aValueNumber - bValueNumber : bValueNumber - aValueNumber;
+            } else if (field === 'name' || field === 'sku') {
+                const aField = a.product?.[field] ?? '';
+                const bField = b.product?.[field] ?? '';
+                return isAscending ? aField.localeCompare(bField) : bField.localeCompare(aField);
+            } else if (typeof aValue === 'string' && typeof bValue === 'string') {
+                return isAscending ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+            } else if (typeof aValue === 'number' && typeof bValue === 'number') {
+                return isAscending ? aValue - bValue : bValue - aValue;
+            }
+            return 0;
+        });
+    }
+
+    return {
+        ...order,
+        items: {
+            data: items.data.slice(Number(offset), Number(offset) + Number(limit)),
+            total: order?.items.total,
+        },
+    };
 };
 
 export const mapOrders = (options: Orders.Request.GetOrderListQuery, customerId: string): Orders.Model.Orders => {

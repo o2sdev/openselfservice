@@ -6,6 +6,7 @@ export class GetOrderParams {
     id!: string;
     limit?: number;
     offset?: number;
+    sort?: string;
 }
 
 export class GetOrderListQuery extends PaginationQuery {
