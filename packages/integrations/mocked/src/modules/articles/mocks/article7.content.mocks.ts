@@ -401,13 +401,13 @@ export const MOCK_ARTICLE7_EN: Articles.Model.Article[] = [
         lead: 'Register your PowerPro tools to activate warranty and access premium support services.',
         tags: ['registration', 'warranty', 'support'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-registration-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-thumb.jpg',
             width: 640,
             height: 427,
             alt: '',
         },
         thumbnail: {
-            url: 'https://example.com/images/registration-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-thumb.jpg',
             alt: '',
         },
         category: {
@@ -466,13 +466,13 @@ export const MOCK_ARTICLE7_DE: Articles.Model.Article[] = [
         lead: 'Registrieren Sie Ihre PowerPro-Werkzeuge, um die Garantie zu aktivieren und Zugang zu Premium-Support-Diensten zu erhalten.',
         tags: ['registrierung', 'garantie', 'support'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-registration-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-thumb.jpg',
             width: 640,
             height: 427,
             alt: '',
         },
         thumbnail: {
-            url: 'https://example.com/images/registration-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-thumb.jpg',
             alt: '',
         },
         category: {
@@ -532,13 +532,13 @@ export const MOCK_ARTICLE7_PL: Articles.Model.Article[] = [
         lead: 'Zarejestruj swoje narzędzia PowerPro, aby aktywować gwarancję i uzyskać dostęp do usług premium support.',
         tags: ['rejestracja', 'gwarancja', 'wsparcie'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-registration-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-thumb.jpg',
             width: 640,
             height: 427,
             alt: '',
         },
         thumbnail: {
-            url: 'https://example.com/images/registration-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-thumb.jpg',
             alt: '',
         },
         category: {

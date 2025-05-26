@@ -11,13 +11,13 @@ export const MOCK_ARTICLE11_EN: Articles.Model.Article[] = [
         lead: 'Learn about our certification program ensuring your tools meet industry safety standards.',
         tags: ['certification', 'safety', 'standards'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/certification-program.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-thumb.jpg',
             width: 640,
             height: 427,
             alt: 'PowerPro certification program',
         },
         thumbnail: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/certification-program-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-thumb.jpg',
             alt: 'PowerPro certification program thumbnail',
         },
         category: {
@@ -75,13 +75,13 @@ export const MOCK_ARTICLE11_EN: Articles.Model.Article[] = [
         lead: "Learn about PowerPro's expedited repair services to minimize downtime on critical projects.",
         tags: ['repair', 'service', 'expedited'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/expedited-repair.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-thumb.jpg',
             width: 640,
             height: 427,
             alt: 'Expedited repair service',
         },
         thumbnail: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/expedited-repair-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-thumb.jpg',
             alt: 'Expedited repair service thumbnail',
         },
         category: {
@@ -118,13 +118,13 @@ export const MOCK_ARTICLE11_EN: Articles.Model.Article[] = [
         lead: 'How our advanced repair tracking system keeps you informed throughout the repair process.',
         tags: ['tracking', 'repair', 'system'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/repair-tracking.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-thumb.jpg',
             width: 640,
             height: 427,
             alt: 'Repair tracking system',
         },
         thumbnail: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/repair-tracking-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-thumb.jpg',
             alt: 'Repair tracking system thumbnail',
         },
         category: {
@@ -176,13 +176,13 @@ export const MOCK_ARTICLE11_DE: Articles.Model.Article[] = [
         lead: 'Erfahren Sie mehr über unser Zertifizierungsprogramm, das sicherstellt, dass Ihre Werkzeuge den Sicherheitsstandards der Branche entsprechen.',
         tags: ['zertifizierung', 'sicherheit', 'standards'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/certification-program.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-thumb.jpg',
             width: 640,
             height: 427,
             alt: 'PowerPro Zertifizierungsprogramm',
         },
         thumbnail: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/certification-program-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-thumb.jpg',
             alt: 'PowerPro Zertifizierungsprogramm Thumbnail',
         },
         category: {
@@ -243,13 +243,13 @@ export const MOCK_ARTICLE11_PL: Articles.Model.Article[] = [
         lead: 'Dowiedz się więcej o naszym programie certyfikacji, który zapewnia, że Twoje narzędzia spełniają standardy bezpieczeństwa branży.',
         tags: ['certyfikacja', 'bezpieczenstwo', 'standardy'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/certification-program.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-thumb.jpg',
             width: 640,
             height: 427,
             alt: 'Program certyfikacji PowerPro',
         },
         thumbnail: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/certification-program-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-thumb.jpg',
             alt: 'Miniatura programu certyfikacji PowerPro',
         },
         category: {

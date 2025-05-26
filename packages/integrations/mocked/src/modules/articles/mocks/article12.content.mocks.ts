@@ -11,13 +11,13 @@ export const MOCK_ARTICLE12_EN: Articles.Model.Article[] = [
         lead: "Everything you need to know about PowerPro's warranty coverage for your professional tools.",
         tags: ['warranty', 'coverage', 'terms'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/warranty-coverage.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-maintenance-thumb.jpg',
             width: 640,
             height: 427,
             alt: 'PowerPro warranty coverage',
         },
         thumbnail: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/warranty-coverage-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-maintenance-thumb.jpg',
             alt: 'PowerPro warranty coverage thumbnail',
         },
         category: {
@@ -74,13 +74,13 @@ export const MOCK_ARTICLE12_EN: Articles.Model.Article[] = [
         lead: 'Guidelines to help you decide whether to repair your PowerPro tool or invest in a replacement.',
         tags: ['repair', 'replacement', 'decision'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/repair-or-replace.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-maintenance-thumb.jpg',
             width: 640,
             height: 427,
             alt: 'Repair or replace decision',
         },
         thumbnail: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/repair-or-replace-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-maintenance-thumb.jpg',
             alt: 'Repair or replace decision thumbnail',
         },
         category: {
@@ -140,13 +140,13 @@ export const MOCK_ARTICLE12_DE: Articles.Model.Article[] = [
         lead: 'Alles, was Sie über die PowerPro-Garantieabdeckung für Ihre professionellen Werkzeuge wissen müssen.',
         tags: ['garantie', 'abdeckung', 'bedingungen'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/warranty-coverage.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-maintenance-thumb.jpg',
             width: 640,
             height: 427,
             alt: 'PowerPro Garantieabdeckung',
         },
         thumbnail: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/warranty-coverage-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-maintenance-thumb.jpg',
             alt: 'PowerPro Garantieabdeckung Thumbnail',
         },
         category: {
@@ -206,13 +206,13 @@ export const MOCK_ARTICLE12_PL: Articles.Model.Article[] = [
         lead: 'Wszystko, co musisz wiedzieć o zakresie gwarancji PowerPro dla Twoich profesjonalnych narzędzi.',
         tags: ['gwarancja', 'zakres', 'warunki'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/warranty-coverage.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-maintenance-thumb.jpg',
             width: 640,
             height: 427,
             alt: 'Zakres gwarancji PowerPro',
         },
         thumbnail: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/warranty-coverage-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-maintenance-thumb.jpg',
             alt: 'Miniatura zakresu gwarancji PowerPro',
         },
         category: {

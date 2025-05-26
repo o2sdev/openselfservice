@@ -11,13 +11,13 @@ export const MOCK_ARTICLE13_EN: Articles.Model.Article[] = [
         lead: "Learn how regular maintenance can extend your tool's lifespan and prevent costly repairs.",
         tags: ['maintenance', 'prevention', 'care'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/preventive-maintenance.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-thumb.jpg',
             width: 640,
             height: 427,
             alt: 'Preventive maintenance of PowerPro tools',
         },
         thumbnail: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/preventive-maintenance-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-thumb.jpg',
             alt: 'Preventive maintenance thumbnail',
         },
         category: {
@@ -77,13 +77,13 @@ export const MOCK_ARTICLE13_DE: Articles.Model.Article[] = [
         lead: 'Erfahren Sie, wie regelmäßige Wartung die Lebensdauer Ihrer Werkzeuge verlängern und teure Reparaturen verhindern kann.',
         tags: ['wartung', 'vorbeugung', 'pflege'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/preventive-maintenance.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-thumb.jpg',
             width: 640,
             height: 427,
             alt: 'Vorbeugende Wartung von PowerPro-Werkzeugen',
         },
         thumbnail: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/preventive-maintenance-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-thumb.jpg',
             alt: 'Vorbeugende Wartung Thumbnail',
         },
         category: {
@@ -144,13 +144,13 @@ export const MOCK_ARTICLE13_PL: Articles.Model.Article[] = [
         lead: 'Dowiedz się, jak regularna konserwacja może wydłużyć żywotność narzędzi i zapobiec kosztownym naprawom.',
         tags: ['konserwacja', 'zapobieganie', 'pielęgnacja'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/preventive-maintenance.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-thumb.jpg',
             width: 640,
             height: 427,
             alt: 'Konserwacja zapobiegawcza narzędzi PowerPro',
         },
         thumbnail: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/preventive-maintenance-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-thumb.jpg',
             alt: 'Miniatura konserwacji zapobiegawczej',
         },
         category: {
