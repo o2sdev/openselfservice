@@ -179,16 +179,17 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
                                 )}
                                 content={<p>{t('general.comingSoon')}</p>}
                             />
-
-                            <TooltipHover
-                                trigger={(setIsOpen) => (
-                                    <Button variant="destructive" onClick={() => setIsOpen(true)}>
-                                        <ArrowUpRight className="w-4 h-4" />
-                                        {data.labels.payOnline}
-                                    </Button>
-                                )}
-                                content={<p>{t('general.comingSoon')}</p>}
-                            />
+                            {data.order.overdue.isOverdue && (
+                                <TooltipHover
+                                    trigger={(setIsOpen) => (
+                                        <Button variant="destructive" onClick={() => setIsOpen(true)}>
+                                            <ArrowUpRight className="w-4 h-4" />
+                                            {data.labels.payOnline}
+                                        </Button>
+                                    )}
+                                    content={<p>{t('general.comingSoon')}</p>}
+                                />
+                            )}
                         </div>
                     </div>
                 </div>

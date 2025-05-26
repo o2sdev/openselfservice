@@ -23,9 +23,12 @@ export const mapOrder = (order: HttpTypes.AdminOrder, defaultCurrency: string): 
         customerId: order.customer_id || undefined,
         createdAt: order.created_at.toString(),
         updatedAt: order.updated_at.toString(),
-        items: order?.items
-            ? order.items.map((item) => mapOrderItem(item, order?.currency_code ?? defaultCurrency))
-            : [],
+        items: {
+            data: order?.items
+                ? order.items.map((item) => mapOrderItem(item, order?.currency_code ?? defaultCurrency))
+                : [],
+            total: order?.items?.length ?? 0,
+        },
         shippingAddress: mapAddress(order.shipping_address),
         billingAddress: mapAddress(order.billing_address),
         shippingMethods: order.shipping_methods
@@ -43,7 +46,7 @@ const mapOrderItem = (item: HttpTypes.AdminOrderLineItem, currency: string): Ord
         total: mapPrice(item.total, currency),
         subtotal: mapPrice(item.subtotal, currency),
         currency: currency as Models.Price.Currency,
-        product: mapProduct(item.product, item.variant, item.unit_price, currency),
+        product: mapProduct(item.product, item.variant, item.unit_price, currency) as Products.Model.Product,
     };
 };
 
@@ -52,8 +55,9 @@ const mapProduct = (
     variant: HttpTypes.AdminProductVariant | undefined,
     unitPrice: number,
     currency: string,
-): Products.Model.Product | undefined => {
-    if (!item || !variant) return undefined;
+): Products.Model.Product => {
+    if (!item || !variant) throw new Error('Product or variant not found');
+
     return {
         id: item.id,
         sku: variant.sku || '',
