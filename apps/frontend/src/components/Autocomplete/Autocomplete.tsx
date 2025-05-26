@@ -1,7 +1,6 @@
 'use client';
 
 import { Command as CommandPrimitive } from 'cmdk';
-import { Check } from 'lucide-react';
 import { type KeyboardEvent, useCallback, useRef, useState } from 'react';
 
 import { CommandGroup, CommandInput, CommandItem, CommandList } from '@o2s/ui/components/command';
@@ -9,25 +8,28 @@ import { Label } from '@o2s/ui/components/label';
 import { Skeleton } from '@o2s/ui/components/skeleton';
 import { cn } from '@o2s/ui/lib/utils';
 
-import { AutocompleteProps, Suggestion } from './Autocomplete.types';
+import { AutocompleteProps } from './Autocomplete.types';
 
-export const Autocomplete = ({
+export const Autocomplete = <Suggestion,>({
     suggestions,
     placeholder,
     emptyMessage,
     value,
     onValueChange,
     onSelected,
+    onRenderSuggestion,
+    getSuggestionValue,
     disabled,
     label,
+    labelHidden = false,
     minLength = 3,
     isLoading = false,
-}: AutocompleteProps) => {
+}: AutocompleteProps<Suggestion>) => {
     const inputRef = useRef<HTMLInputElement>(null);
 
     const [isOpen, setOpen] = useState(false);
-    const [selected, setSelected] = useState<Suggestion>(value as Suggestion);
-    const [inputValue, setInputValue] = useState<string>(value?.label || '');
+    const [selected, setSelected] = useState<Suggestion | undefined>(value);
+    const [inputValue, setInputValue] = useState<string>('');
 
     const handleKeyDown = useCallback(
         (event: KeyboardEvent<HTMLDivElement>) => {
@@ -38,7 +40,9 @@ export const Autocomplete = ({
 
             // This is not a default behaviour of the <input /> field
             if (event.key === 'Enter' && input.value !== '') {
-                const suggestionToSelect = suggestions.find((suggestion) => suggestion.label === input.value);
+                const suggestionToSelect = suggestions.find(
+                    (suggestion) => getSuggestionValue(suggestion) === input.value,
+                );
                 if (suggestionToSelect) {
                     setSelected(suggestionToSelect);
                     onSelected?.(suggestionToSelect);
@@ -49,39 +53,35 @@ export const Autocomplete = ({
                 input.blur();
             }
         },
-        [suggestions, onSelected],
+        [getSuggestionValue, onSelected, suggestions],
     );
 
-    const handleBlur = useCallback(() => {
+    const handleBlur = () => {
         setOpen(false);
-        setInputValue(selected?.label);
-    }, [selected]);
+        selected && setInputValue(getSuggestionValue(selected));
+    };
 
-    const handleSelectOption = useCallback(
-        (selectedSuggestion: Suggestion) => {
-            setInputValue(selectedSuggestion.label);
+    const handleSelectOption = (selectedSuggestion: Suggestion) => {
+        setInputValue(getSuggestionValue(selectedSuggestion));
 
-            setSelected(selectedSuggestion);
-            onSelected?.(selectedSuggestion);
+        setSelected(selectedSuggestion);
+        onSelected?.(selectedSuggestion);
 
-            // This is a hack to prevent the input from being focused after the user selects an option
-            // We can call this hack: "The next tick"
-            setTimeout(() => {
-                inputRef?.current?.blur();
-            }, 0);
-        },
-        [onSelected],
-    );
+        // This is a hack to prevent the input from being focused after the user selects an option
+        // We can call this hack: "The next tick"
+        setTimeout(() => {
+            inputRef?.current?.blur();
+        }, 0);
+    };
 
     return (
-        <>
-            {label && (
-                <Label htmlFor="autocomplete" className="sr-only">
-                    {label}
-                </Label>
-            )}
+        <div className="flex flex-col gap-2">
+            <Label htmlFor="autocomplete" className={cn(labelHidden && 'sr-only')}>
+                {label}
+            </Label>
             <CommandPrimitive
                 onKeyDown={handleKeyDown}
+                shouldFilter={false}
                 className="border rounded-md focus-within:outline-hidden focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2"
             >
                 <div>
@@ -120,23 +120,18 @@ export const Autocomplete = ({
                             {suggestions.length > 0 && !isLoading ? (
                                 <CommandGroup>
                                     {suggestions.map((suggestion) => {
-                                        const isSelected = selected?.value === suggestion.value;
                                         return (
                                             <CommandItem
-                                                key={suggestion.value}
-                                                value={suggestion.label}
+                                                key={getSuggestionValue(suggestion)}
+                                                value={getSuggestionValue(suggestion)}
                                                 onMouseDown={(event) => {
                                                     event.preventDefault();
                                                     event.stopPropagation();
                                                 }}
                                                 onSelect={() => handleSelectOption(suggestion)}
-                                                className={cn(
-                                                    'flex w-full items-center gap-2 cursor-pointer',
-                                                    !isSelected ? 'pl-8' : null,
-                                                )}
+                                                className={cn('flex w-full items-center gap-2 cursor-pointer')}
                                             >
-                                                {isSelected ? <Check className="w-4" /> : null}
-                                                {suggestion.label}
+                                                {onRenderSuggestion(suggestion)}
                                             </CommandItem>
                                         );
                                     })}
@@ -151,6 +146,6 @@ export const Autocomplete = ({
                     </div>
                 </div>
             </CommandPrimitive>
-        </>
+        </div>
     );
 };

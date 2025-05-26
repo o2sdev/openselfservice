@@ -290,6 +290,7 @@ export type ComponentComponentsArticleList = {
     id: Scalars['ID']['output'];
     pages: Array<Maybe<Page>>;
     pages_connection?: Maybe<PageRelationResponseCollection>;
+    pagination?: Maybe<ComponentContentPagination>;
     parent?: Maybe<Page>;
     title?: Maybe<Scalars['String']['output']>;
 };
@@ -917,7 +918,7 @@ export type ComponentContentMessageFiltersInput = {
 };
 
 export type ComponentContentMessageSimple = {
-    content: Scalars['String']['output'];
+    content?: Maybe<Scalars['String']['output']>;
     id: Scalars['ID']['output'];
     title: Scalars['String']['output'];
 };
@@ -2221,7 +2222,7 @@ export type Page = {
     localizations: Array<Maybe<Page>>;
     localizations_connection?: Maybe<PageRelationResponseCollection>;
     parent?: Maybe<Page>;
-    protected?: Maybe<Scalars['Boolean']['output']>;
+    protected: Scalars['Boolean']['output'];
     publishedAt?: Maybe<Scalars['DateTime']['output']>;
     slug: Scalars['String']['output'];
     template: Array<Maybe<PageTemplateDynamicZone>>;
@@ -4845,6 +4846,7 @@ export type ComponentComponentsArticleListResolvers<
         ContextType,
         RequireFields<ComponentComponentsArticleListPages_ConnectionArgs, 'pagination' | 'sort'>
     >;
+    pagination?: Resolver<Maybe<ResolversTypes['ComponentContentPagination']>, ParentType, ContextType>;
     parent?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType>;
     title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -5509,7 +5511,7 @@ export type ComponentContentMessageSimpleResolvers<
     ParentType extends
         ResolversParentTypes['ComponentContentMessageSimple'] = ResolversParentTypes['ComponentContentMessageSimple'],
 > = {
-    content?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    content?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -6649,7 +6651,7 @@ export type PageResolvers<
         RequireFields<PageLocalizations_ConnectionArgs, 'pagination' | 'sort'>
     >;
     parent?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType>;
-    protected?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+    protected?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
     publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
     slug?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     template?: Resolver<Array<Maybe<ResolversTypes['PageTemplateDynamicZone']>>, ParentType, ContextType>;
@@ -7576,7 +7578,7 @@ export type ArticleSimpleFragment = {
 export type ArticleTemplateFragment = {
     documentId: string;
     slug: string;
-    protected?: boolean;
+    protected: boolean;
     locale?: string;
     createdAt?: any;
     updatedAt?: any;
@@ -7884,7 +7886,7 @@ export type GetArticlesQueryVariables = Exact<{
 export type GetArticlesQuery = {
     pages_connection?: { pageInfo: { total: number } };
     articles: Array<{
-        protected?: boolean;
+        protected: boolean;
         documentId: string;
         slug: string;
         locale?: string;
@@ -8319,7 +8321,7 @@ export type OrganizationListFragment = { documentId: string; title?: string; des
 export type PageFragment = {
     documentId: string;
     slug: string;
-    protected?: boolean;
+    protected: boolean;
     locale?: string;
     createdAt?: any;
     updatedAt?: any;
@@ -9544,7 +9546,7 @@ export type GetAppConfigQueryVariables = Exact<{
 export type GetAppConfigQuery = {
     appConfig?: { documentId: string; header?: { documentId: string }; footer?: { documentId: string } };
     configurableTexts?: {
-        errors: { requestError: { title: string; content: string } };
+        errors: { requestError: { title: string; content?: string } };
         dates: { today: string; yesterday: string };
         actions: {
             showMore: string;
@@ -10207,7 +10209,7 @@ export type GetComponentQuery = {
             trackOrder: string;
             showAllArticles: string;
         };
-        errors: { requestError: { title: string; content: string } };
+        errors: { requestError: { title: string; content?: string } };
     };
 };
 
@@ -10377,7 +10379,7 @@ export type GetPageQuery = {
     pages: Array<{
         documentId: string;
         slug: string;
-        protected?: boolean;
+        protected: boolean;
         locale?: string;
         createdAt?: any;
         updatedAt?: any;
@@ -10561,7 +10563,7 @@ export type GetPagesQuery = {
     pages: Array<{
         documentId: string;
         slug: string;
-        protected?: boolean;
+        protected: boolean;
         locale?: string;
         createdAt?: any;
         updatedAt?: any;

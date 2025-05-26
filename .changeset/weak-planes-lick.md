@@ -7,7 +7,7 @@
 '@o2s/ui': minor
 ---
 
-New block ArticleSearch added
+New block ArticleSearch - Input field with suggestions to find appropriate article.
 
 - added new UI component - Command,
 - added new articles mock,

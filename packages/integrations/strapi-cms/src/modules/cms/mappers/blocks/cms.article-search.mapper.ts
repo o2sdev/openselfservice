@@ -16,7 +16,7 @@ export const mapArticleSearchBlock = (data: GetComponentQuery): CMS.Model.Articl
             return {
                 id: component.id,
                 title: component.title,
-                inputLabel: component.inputLabel,
+                inputLabel: component.inputLabel as string,
                 noResults: {
                     title: component.noResults?.title,
                     description: component.noResults?.description,

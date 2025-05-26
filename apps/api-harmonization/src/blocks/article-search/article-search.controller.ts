@@ -17,13 +17,13 @@ export class ArticleSearchController {
     constructor(protected readonly service: ArticleSearchService) {}
 
     @Get()
-    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
+    @Auth.Decorators.Roles({ roles: [] })
     getArticleSearchBlock(@Headers() headers: AppHeaders, @Query() query: GetArticleSearchBlockQuery) {
         return this.service.getArticleSearchBlock(query, headers);
     }
 
     @Get('articles')
-    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
+    @Auth.Decorators.Roles({ roles: [] })
     searchArticles(@Headers() headers: AppHeaders, @Query() query: SearchArticlesQuery): Observable<ArticleList> {
         return this.service.searchArticles(query, headers);
     }
