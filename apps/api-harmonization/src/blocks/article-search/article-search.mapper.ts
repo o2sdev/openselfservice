@@ -19,7 +19,7 @@ export const mapArticles = (articles: Articles.Model.Articles): ArticleList => {
     return {
         articles: articles.data.map((article) => ({
             label: article.title,
-            value: article.slug,
+            url: article.slug,
         })),
     };
 };

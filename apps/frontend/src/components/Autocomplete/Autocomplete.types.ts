@@ -2,6 +2,7 @@ import React from 'react';
 
 export type AutocompleteProps<Suggestion> = {
     label: string;
+    labelHidden?: boolean;
     value?: Suggestion;
     placeholder?: string;
     suggestions: Suggestion[];

@@ -42,22 +42,21 @@ export const ArticleSearchPure: React.FC<ArticleSearchPureProps> = ({ ...compone
                         <h2>{title}</h2>
                     </Typography>
                 )}
-                {inputLabel && (
-                    <Autocomplete
-                        suggestions={suggestions}
-                        placeholder={inputLabel}
-                        label={inputLabel}
-                        emptyMessage={noResults.title}
-                        minLength={3}
-                        onValueChange={getSuggestions}
-                        onSelected={(suggestion) => {
-                            router.push(suggestion.value);
-                        }}
-                        onRenderSuggestion={(suggestion) => suggestion.label}
-                        getSuggestionValue={(suggestion) => suggestion.label}
-                        isLoading={isPending}
-                    />
-                )}
+                <Autocomplete
+                    suggestions={suggestions}
+                    labelHidden={true}
+                    placeholder={inputLabel}
+                    label={inputLabel}
+                    emptyMessage={noResults.title}
+                    minLength={3}
+                    onValueChange={getSuggestions}
+                    onSelected={(suggestion) => {
+                        router.push(suggestion.url);
+                    }}
+                    onRenderSuggestion={(suggestion) => suggestion.label}
+                    getSuggestionValue={(suggestion) => suggestion.label}
+                    isLoading={isPending}
+                />
             </div>
         </Container>
     );

@@ -21,6 +21,7 @@ export const Autocomplete = <Suggestion,>({
     getSuggestionValue,
     disabled,
     label,
+    labelHidden = false,
     minLength = 3,
     isLoading = false,
 }: AutocompleteProps<Suggestion>) => {
@@ -74,12 +75,10 @@ export const Autocomplete = <Suggestion,>({
     };
 
     return (
-        <>
-            {label && (
-                <Label htmlFor="autocomplete" className="sr-only">
-                    {label}
-                </Label>
-            )}
+        <div className="flex flex-col gap-2">
+            <Label htmlFor="autocomplete" className={cn(labelHidden && 'sr-only')}>
+                {label}
+            </Label>
             <CommandPrimitive
                 onKeyDown={handleKeyDown}
                 shouldFilter={false}
@@ -147,6 +146,6 @@ export const Autocomplete = <Suggestion,>({
                     </div>
                 </div>
             </CommandPrimitive>
-        </>
+        </div>
     );
 };

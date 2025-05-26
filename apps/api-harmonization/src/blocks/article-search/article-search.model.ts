@@ -3,7 +3,7 @@ import { Block } from '../../utils';
 export class ArticleSearchBlock extends Block.Block {
     __typename!: 'ArticleSearchBlock';
     title?: string;
-    inputLabel?: string;
+    inputLabel!: string;
     noResults!: {
         title: string;
         description?: string;
@@ -16,5 +16,5 @@ export class ArticleList {
 
 class Article {
     label!: string;
-    value!: string;
+    url!: string;
 }
