@@ -1,3 +1,5 @@
+import { NotFoundException } from '@nestjs/common';
+
 import { Users } from '@o2s/framework/modules';
 
 const dateToday = new Date();
@@ -75,11 +77,27 @@ const MOCK_USER_4: Users.Model.User = {
     customers: [],
 };
 
-export const mapUser = (id?: string): Users.Model.User | undefined => {
+export const MOCK_USERS = [MOCK_USER_1, MOCK_USER_2, MOCK_USER_3, MOCK_USER_4];
+
+export const mapUser = (id?: string): Users.Model.User => {
     const users = [MOCK_USER_1, MOCK_USER_2, MOCK_USER_3, MOCK_USER_4];
-    if (id) {
-        return users.find((user) => user.id === id);
+
+    if (!id) {
+        const randomIndex = Math.floor(Math.random() * users.length);
+        const user = users[randomIndex];
+
+        if (user) {
+            return user;
+        }
+
+        throw new NotFoundException();
     }
-    const randomIndex = Math.floor(Math.random() * users.length);
-    return users[randomIndex];
+
+    const user = users.find((user) => user.id === id);
+
+    if (user) {
+        return user;
+    }
+
+    throw new NotFoundException();
 };

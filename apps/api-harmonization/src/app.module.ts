@@ -57,6 +57,7 @@ import { PageModule } from './modules/page/page.module';
 import { ResetPasswordPageModule } from './modules/reset-password-page/reset-password-page.module';
 import { RoutesModule } from './modules/routes/routes.module';
 import { SurveyjsModule } from './modules/surveyjs-forms/surveyjs.module';
+import { UsersBlockModule } from './modules/users/users.module';
 
 @Module({
     imports: [
@@ -113,6 +114,7 @@ import { SurveyjsModule } from './modules/surveyjs-forms/surveyjs.module';
         ArticleListBlockModule.register(AppConfig),
         CategoryBlockModule.register(AppConfig),
         ArticleBlockModule.register(AppConfig),
+        UsersBlockModule.register(AppConfig),
         // BLOCK REGISTER
     ],
     providers: [

@@ -8,14 +8,21 @@ import { Customer } from '@/utils/models/customer';
 export abstract class UserService {
     protected constructor(..._services: unknown[]) {}
 
-    abstract getCurrentUser(): Observable<Users.Model.User | undefined>;
-    abstract getUser(options: Users.Request.GetUserParams): Observable<Users.Model.User | undefined>;
-    abstract updateCurrentUser(body: Users.Request.PostUserBody): Observable<Users.Model.User | undefined>;
+    abstract getCurrentUser(): Observable<Users.Model.User>;
+    abstract getUser(options: Users.Request.GetUserParams): Observable<Users.Model.User>;
+
+    abstract createUser(options: Users.Request.PostUserBody): Observable<Users.Model.User>;
+    abstract deleteUser(): Observable<void>;
+
+    abstract resetPassword(body: Users.Request.ResetPasswordBody): Observable<void>;
+    abstract setNewPassword(body: Users.Request.SetNewPasswordBody): Observable<void>;
+
+    abstract updateCurrentUser(body: Users.Request.PatchUserBody): Observable<Users.Model.User>;
     abstract updateUser(
         options: Users.Request.GetUserParams,
-        body: Users.Request.PostUserBody,
-    ): Observable<Users.Model.User | undefined>;
-    abstract getCurrentUserCustomers(): Observable<Customer[] | undefined>;
-    abstract getCurrentUserCustomer(options: Users.Request.GetCustomerParams): Observable<Customer | undefined>;
-    abstract deleteUser(): Observable<void>;
+        body: Users.Request.PatchUserBody,
+    ): Observable<Users.Model.User>;
+
+    abstract getCurrentUserCustomers(): Observable<Customer[]>;
+    abstract getCurrentUserCustomer(options: Users.Request.GetCustomerParams): Observable<Customer>;
 }

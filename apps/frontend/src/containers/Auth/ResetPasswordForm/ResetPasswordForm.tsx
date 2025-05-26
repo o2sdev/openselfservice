@@ -1,7 +1,7 @@
 'use client';
 
 import { Field, FieldProps, Form, Formik } from 'formik';
-import { AuthError } from 'next-auth';
+import { isRedirectError } from 'next/dist/client/components/redirect-error';
 import React, { useState, useTransition } from 'react';
 import { object as YupObject } from 'yup';
 
@@ -17,7 +17,7 @@ import { getUsernameSchema } from '../Utils/validationSchema';
 import { FormValues, ResetPasswordFormProps } from './ResetPasswordForm.types';
 
 export const ResetPasswordForm: React.FC<Readonly<ResetPasswordFormProps>> = ({ labels, onResetPassword }) => {
-    const [error, setError] = useState<AuthError | null>(null);
+    const [error, setError] = useState(false);
     const [isPending, startTransition] = useTransition();
 
     const validationSchema = YupObject().shape({
@@ -25,12 +25,15 @@ export const ResetPasswordForm: React.FC<Readonly<ResetPasswordFormProps>> = ({ 
     });
 
     const handleSubmit = async (values: FormValues) => {
-        setError(null);
+        setError(false);
 
         startTransition(async () => {
-            const error = await onResetPassword(values);
-            if (error) {
-                setError(error);
+            try {
+                await onResetPassword(values);
+            } catch (err) {
+                if (!isRedirectError(err)) {
+                    setError(true);
+                }
             }
         });
     };
@@ -38,7 +41,6 @@ export const ResetPasswordForm: React.FC<Readonly<ResetPasswordFormProps>> = ({ 
     return (
         <div className="flex flex-col gap-12 w-full">
             <div className="flex flex-col gap-6">
-                {error && <Banner description={labels.invalidCredentials} variant="destructive" />}
                 <div className="flex flex-col gap-2 items-center text-center">
                     <Typography variant="h1" asChild>
                         <h1>{labels.title}</h1>
@@ -49,6 +51,8 @@ export const ResetPasswordForm: React.FC<Readonly<ResetPasswordFormProps>> = ({ 
                         </Typography>
                     )}
                 </div>
+
+                {error && <Banner description={labels.invalidCredentials} variant="destructive" />}
 
                 <Formik<FormValues>
                     initialValues={{

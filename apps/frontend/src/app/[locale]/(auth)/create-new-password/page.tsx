@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import { AuthError } from 'next-auth';
 import { setRequestLocale } from 'next-intl/server';
 import { headers } from 'next/headers';
 import Image from 'next/image';
@@ -14,7 +13,7 @@ import { generateSeo } from '@/utils/seo';
 
 import { auth } from '@/auth';
 
-import { routing } from '@/i18n/routing';
+import { redirect, routing } from '@/i18n/routing';
 
 import { GlobalProvider } from '@/providers/GlobalProvider';
 
@@ -80,15 +79,17 @@ export default async function CreateNewPasswordPage({ params }: Readonly<Props>)
         const handleSetNewPassword = async (credentials: FormValues) => {
             'use server';
 
-            try {
-                console.log('set new password', credentials);
-                return Promise.resolve();
-            } catch (error) {
-                if (error instanceof AuthError) {
-                    return error;
-                }
-                throw error;
-            }
+            await sdk.modules.setNewPassword(credentials, { 'x-locale': locale });
+
+            redirect({
+                locale,
+                href: {
+                    pathname: '/login',
+                    query: {
+                        newPassword: true,
+                    },
+                },
+            });
         };
 
         return (

@@ -3,8 +3,9 @@ import { of } from 'rxjs';
 
 import { Tickets } from '@o2s/framework/modules';
 
-import { mapTicket, mapTickets } from './tickets.mapper';
 import { responseDelay } from '@/utils/delay';
+
+import { mapTicket, mapTickets } from './tickets.mapper';
 
 @Injectable()
 export class TicketService implements Tickets.Service {

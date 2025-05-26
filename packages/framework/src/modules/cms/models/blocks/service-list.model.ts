@@ -1,6 +1,7 @@
+import { Block, Filters, Mapping, Pagination } from '@/utils/models';
+
 import { Product } from '@/modules/products/products.model';
 import { Contract } from '@/modules/resources/resources.model';
-import { Block, Filters, Mapping, Pagination } from '@/utils/models';
 
 export class ServiceListBlock extends Block.Block {
     title?: string;

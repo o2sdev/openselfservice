@@ -1,6 +1,6 @@
-import { Product } from '../products/products.model';
-
 import { Address, Pagination, Price, Unit } from '@/utils/models';
+
+import { Product } from '../products/products.model';
 
 export type OrderStatus =
     | 'PENDING'

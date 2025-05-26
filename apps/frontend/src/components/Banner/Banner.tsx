@@ -37,16 +37,12 @@ const BannerContent: React.FC<BannerContentProps> = ({ title, description, showI
             {showIcon && <Icon className={iconStyles} />}
             {title && (
                 <AlertTitle>
-                    <Typography variant="small" className="font-bold">
-                        {title}
-                    </Typography>
+                    <Typography>{title}</Typography>
                 </AlertTitle>
             )}
             {description && (
                 <AlertDescription>
-                    <Typography variant="small" className="mt-1">
-                        {description}
-                    </Typography>
+                    <Typography className="mt-1">{description}</Typography>
                 </AlertDescription>
             )}
         </>

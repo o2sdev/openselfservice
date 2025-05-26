@@ -2,9 +2,10 @@ import { HttpModule } from '@nestjs/axios';
 import { DynamicModule, Global, Module } from '@nestjs/common';
 import { Type } from '@nestjs/common/interfaces/type.interface';
 
+import { ApiConfig } from '@/api-config';
+
 import { InvoiceController } from './invoices.controller';
 import { InvoiceService } from './invoices.service';
-import { ApiConfig } from '@/api-config';
 
 @Global()
 @Module({})

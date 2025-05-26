@@ -1,5 +1,6 @@
-import { Ticket } from '@/modules/tickets/tickets.model';
 import { Block, DataTable, Filters, Mapping, Pagination } from '@/utils/models';
+
+import { Ticket } from '@/modules/tickets/tickets.model';
 
 export type ActionLink = {
     id: string;

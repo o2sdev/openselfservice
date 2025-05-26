@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseInterceptors } from '@nestjs/common';
 import { LoggerService } from '@o2s/utils.logger';
 
 import { Constants } from '../auth';
@@ -24,15 +24,39 @@ export class UserController {
         return this.userService.getUser(params);
     }
 
+    @Post()
+    @Roles({ roles: [] })
+    createUser(@Body() body: Request.PostUserBody) {
+        return this.userService.createUser(body);
+    }
+
+    @Delete('/me')
+    @Roles({ roles: [Constants.Roles.USER, Constants.Roles.ADMIN] })
+    deleteUser() {
+        return this.userService.deleteUser();
+    }
+
+    @Post('/reset-password')
+    @Roles({ roles: [] })
+    resetPassword(@Body() body: Request.ResetPasswordBody) {
+        return this.userService.resetPassword(body);
+    }
+
+    @Post('/set-new-password')
+    @Roles({ roles: [] })
+    setNewPassword(@Body() body: Request.SetNewPasswordBody) {
+        return this.userService.setNewPassword(body);
+    }
+
     @Patch('/me')
     @Roles({ roles: [Constants.Roles.USER, Constants.Roles.ADMIN] })
-    updateCurrentUser(@Body() body: Request.PostUserBody) {
+    updateCurrentUser(@Body() body: Request.PatchUserBody) {
         return this.userService.updateCurrentUser(body);
     }
 
     @Patch(':id')
     @Roles({ roles: [Constants.Roles.USER, Constants.Roles.ADMIN] })
-    updateUser(@Param() params: Request.GetUserParams, @Body() body: Request.PostUserBody) {
+    updateUser(@Param() params: Request.GetUserParams, @Body() body: Request.PatchUserBody) {
         return this.userService.updateUser(params, body);
     }
 
@@ -46,11 +70,5 @@ export class UserController {
     @Roles({ roles: [Constants.Roles.USER, Constants.Roles.ADMIN] })
     getCustomerForCurrentUserById(@Param() params: Request.GetCustomerParams) {
         return this.userService.getCurrentUserCustomer(params);
-    }
-
-    @Delete('/me')
-    @Roles({ roles: [Constants.Roles.USER, Constants.Roles.ADMIN] })
-    deleteUser() {
-        return this.userService.deleteUser();
     }
 }

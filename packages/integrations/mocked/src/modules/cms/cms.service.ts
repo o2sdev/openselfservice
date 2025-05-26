@@ -3,6 +3,8 @@ import { of } from 'rxjs';
 
 import { CMS } from '@o2s/framework/modules';
 
+import { responseDelay } from '@/utils/delay';
+
 import { mapArticleListBlock } from './mappers/blocks/cms.article-list.mapper';
 import { mapFaqBlock } from './mappers/blocks/cms.faq.mapper';
 import { mapInvoiceDetailsBlock } from './mappers/blocks/cms.invoice-details.mapper';
@@ -36,7 +38,6 @@ import { getAllPages, getAlternativePages, mapPage } from './mappers/cms.page.ma
 import { mapQuickLinksBlock } from './mappers/cms.quick-links.mapper';
 import { mapResetPasswordPage } from './mappers/cms.reset-password-page.mapper';
 import { mapSurvey } from './mappers/cms.survey.mapper';
-import { responseDelay } from '@/utils/delay';
 
 @Injectable()
 export class CmsService implements CMS.Service {

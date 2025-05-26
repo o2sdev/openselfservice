@@ -32,6 +32,7 @@ import { notFoundPage } from '@/api/modules/not-found-page';
 import { organizations } from '@/api/modules/organizations';
 import { page } from '@/api/modules/page';
 import { surveyjs } from '@/api/modules/surveyjs';
+import { users } from '@/api/modules/user';
 
 import { createNewPasswordPage } from './modules/create-new-password-page';
 import { resetPasswordPage } from './modules/reset-password-page';
@@ -89,5 +90,8 @@ export const sdk = extendSdk(internalSdk, {
         getCustomers: organizations(internalSdk).modules.getCustomers,
         getSurvey: surveyjs(internalSdk).modules.getSurvey,
         submitSurvey: surveyjs(internalSdk).modules.submitSurvey,
+        registerUser: users(internalSdk).modules.registerUser,
+        resetPassword: users(internalSdk).modules.resetPassword,
+        setNewPassword: users(internalSdk).modules.setNewPassword,
     },
 });

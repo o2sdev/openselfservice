@@ -3,8 +3,9 @@ import { Observable, of } from 'rxjs';
 
 import { Products } from '@o2s/framework/modules';
 
-import { mapProduct, mapProducts } from './products.mapper';
 import { responseDelay } from '@/utils/delay';
+
+import { mapProduct, mapProducts } from './products.mapper';
 
 @Injectable()
 export class ProductsService implements Products.Service {

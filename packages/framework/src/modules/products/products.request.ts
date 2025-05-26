@@ -1,5 +1,6 @@
-import { ProductType } from './products.model';
 import { PaginationQuery } from '@/utils/models/pagination';
+
+import { ProductType } from './products.model';
 
 export class GetProductListQuery extends PaginationQuery {
     type?: ProductType;

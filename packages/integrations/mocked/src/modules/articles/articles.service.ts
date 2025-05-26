@@ -3,8 +3,9 @@ import { Observable, map, of } from 'rxjs';
 
 import { Articles, Search } from '@o2s/framework/modules';
 
-import { mapArticle, mapCategories, mapCategory } from './articles.mapper';
 import { responseDelay } from '@/utils/delay';
+
+import { mapArticle, mapCategories, mapCategory } from './articles.mapper';
 
 @Injectable()
 export class ArticlesService implements Articles.Service {

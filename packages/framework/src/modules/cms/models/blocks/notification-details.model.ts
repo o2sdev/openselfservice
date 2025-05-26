@@ -1,5 +1,6 @@
-import { Notification } from '@/modules/notifications/notifications.model';
 import { Block, Mapping } from '@/utils/models';
+
+import { Notification } from '@/modules/notifications/notifications.model';
 
 export class NotificationDetailsBlock extends Block.Block {
     properties!: {

@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
-import { AuthError } from 'next-auth';
 import { setRequestLocale } from 'next-intl/server';
+import { isRedirectError } from 'next/dist/client/components/redirect-error';
 import { headers } from 'next/headers';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
@@ -14,7 +14,7 @@ import { generateSeo } from '@/utils/seo';
 
 import { auth } from '@/auth';
 
-import { routing } from '@/i18n/routing';
+import { redirect, routing } from '@/i18n/routing';
 
 import { GlobalProvider } from '@/providers/GlobalProvider';
 
@@ -80,15 +80,17 @@ export default async function ResetPasswordPage({ params }: Readonly<Props>) {
 
         const handleResetPassword = async (credentials: FormValues) => {
             'use server';
-            try {
-                console.log('reset password', credentials);
-                return Promise.resolve();
-            } catch (error) {
-                if (error instanceof AuthError) {
-                    return error;
-                }
-                throw error;
-            }
+
+            await sdk.modules.resetPassword(credentials, { 'x-locale': locale });
+            redirect({
+                locale,
+                href: {
+                    pathname: '/login',
+                    query: {
+                        resetPassword: true,
+                    },
+                },
+            });
         };
 
         return (

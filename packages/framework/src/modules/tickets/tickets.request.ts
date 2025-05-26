@@ -1,5 +1,6 @@
-import { TicketStatus } from './tickets.model';
 import { PaginationQuery } from '@/utils/models/pagination';
+
+import { TicketStatus } from './tickets.model';
 
 export class GetTicketParams {
     id!: string;

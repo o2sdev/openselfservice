@@ -1,7 +1,7 @@
 'use client';
 
 import { Field, FieldProps, Form, Formik } from 'formik';
-import { AuthError } from 'next-auth';
+import { isRedirectError } from 'next/dist/client/components/redirect-error';
 import React, { useState, useTransition } from 'react';
 import { object as YupObject } from 'yup';
 
@@ -12,8 +12,7 @@ import { Typography } from '@o2s/ui/components/typography';
 import { Banner } from '@/components/Banner/Banner';
 
 import { PasswordFormField } from '../FormField/PasswordFormField';
-import { getConfirmPasswordSchema } from '../Utils/validationSchema';
-import { getPasswordSchema } from '../Utils/validationSchema';
+import { getConfirmPasswordSchema, getPasswordSchema } from '../Utils/validationSchema';
 
 import { CreateNewPasswordFormProps, FormValues } from './CreateNewPasswordForm.types';
 
@@ -22,19 +21,23 @@ export const CreateNewPasswordForm: React.FC<Readonly<CreateNewPasswordFormProps
     onCreateNewPassword,
 }) => {
     const [isPending, startTransition] = useTransition();
-    const [error, setError] = useState<AuthError | null>(null);
+    const [error, setError] = useState(false);
 
     const validationSchema = YupObject().shape({
         password: getPasswordSchema(labels.password.errorMessages),
         confirmPassword: getConfirmPasswordSchema(labels.confirmPassword.errorMessages),
     });
+
     const handleSubmit = async (values: FormValues) => {
-        setError(null);
+        setError(false);
 
         startTransition(async () => {
-            const error = await onCreateNewPassword(values);
-            if (error) {
-                setError(error);
+            try {
+                await onCreateNewPassword(values);
+            } catch (err) {
+                if (!isRedirectError(err)) {
+                    setError(true);
+                }
             }
         });
     };
@@ -42,8 +45,6 @@ export const CreateNewPasswordForm: React.FC<Readonly<CreateNewPasswordFormProps
     return (
         <div className="flex flex-col gap-12 w-full">
             <div className="flex flex-col gap-6">
-                {error && <Banner description={labels.creatingPasswordError} variant="destructive" />}
-
                 <div className="flex flex-col gap-2 items-center text-center">
                     <Typography variant="h1" asChild>
                         <h1>{labels.title}</h1>
@@ -54,6 +55,8 @@ export const CreateNewPasswordForm: React.FC<Readonly<CreateNewPasswordFormProps
                         </Typography>
                     )}
                 </div>
+
+                {error && <Banner description={labels.creatingPasswordError} variant="destructive" />}
 
                 <Formik<FormValues>
                     initialValues={{
