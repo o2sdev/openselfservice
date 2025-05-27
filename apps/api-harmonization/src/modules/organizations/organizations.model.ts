@@ -10,3 +10,12 @@ export class CustomerList extends Block.Block {
         apply: string;
     };
 }
+
+export class OrganizationMembership {
+    id!: string;
+    name!: string;
+    taxId!: string;
+    user?: {
+        username: string;
+    };
+}

@@ -11,11 +11,30 @@ export const organizations = (sdk: Sdk) => ({
         getCustomers: (
             query: Modules.Organizations.Request.GetCustomersQuery,
             headers: Headers.AppHeaders,
-            authorization: string,
+            authorization?: string,
         ): Promise<Modules.Organizations.Model.CustomerList> =>
             sdk.makeRequest({
                 method: 'get',
                 url: `${API_URL}`,
+                headers: {
+                    ...getApiHeaders(),
+                    ...headers,
+                    ...(authorization
+                        ? {
+                              Authorization: `Bearer ${authorization}`,
+                          }
+                        : {}),
+                },
+                params: query,
+            }),
+        checkMembership: (
+            query: Modules.Organizations.Request.CheckMembershipQuery,
+            headers: Headers.AppHeaders,
+            authorization?: string,
+        ): Promise<Modules.Organizations.Model.OrganizationMembership> =>
+            sdk.makeRequest({
+                method: 'get',
+                url: `${API_URL}${Modules.Organizations.CHECK_MEMBERSHIP_URL}`,
                 headers: {
                     ...getApiHeaders(),
                     ...headers,

@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import { AuthError } from 'next-auth';
 import { setRequestLocale } from 'next-intl/server';
 import { headers } from 'next/headers';
 import { notFound } from 'next/navigation';
@@ -12,14 +11,14 @@ import { sdk } from '@/api/sdk';
 
 import { generateSeo } from '@/utils/seo';
 
-import { auth, signIn } from '@/auth';
+import { auth } from '@/auth';
 
 import { routing } from '@/i18n/routing';
 
 import { GlobalProvider } from '@/providers/GlobalProvider';
 
 import { AuthLayout } from '@/containers/Auth/AuthLayout/AuthLayout';
-import { CreateAccountForm, FormValues } from '@/containers/Auth/CreateAccountForm';
+import { CreateAccountForm } from '@/containers/Auth/CreateAccountForm';
 import { Footer } from '@/containers/Footer/Footer';
 import { Header } from '@/containers/Header/Header';
 
@@ -81,20 +80,16 @@ export default async function CreateAccountPage({ params, searchParams }: Readon
             notFound();
         }
 
-        const handleSignIn = async (providerId: string, credentials?: FormValues) => {
+        const handleCheckMembership = async (data: any) => {
             'use server';
 
-            try {
-                await signIn(providerId, {
-                    ...credentials,
-                    redirectTo: callbackUrl ?? '/',
-                });
-            } catch (error) {
-                if (error instanceof AuthError) {
-                    return error;
-                }
-                throw error;
-            }
+            return await sdk.modules.checkMembership(data, { 'x-locale': locale }, session?.accessToken);
+        };
+
+        const hadleRegisterUser = async (data: any) => {
+            'use server';
+
+            return await sdk.modules.registerUser(data, { 'x-locale': locale }, session?.accessToken);
         };
 
         return (
@@ -128,7 +123,8 @@ export default async function CreateAccountPage({ params, searchParams }: Readon
                                     resetPasswordMessage: resetPassword ? data.resetPasswordMessage : undefined,
                                     newPasswordMessage: newPassword ? data.newPasswordMessage : undefined,
                                 }}
-                                onSignIn={handleSignIn}
+                                onCheckMembership={handleCheckMembership}
+                                onRegisterUser={hadleRegisterUser}
                             />
                             {data.image?.url && (
                                 <Image

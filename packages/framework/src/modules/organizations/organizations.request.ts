@@ -4,4 +4,11 @@ export class GetOrganizationParams {
     id!: string;
 }
 
-export class OrganizationsListQuery extends PaginationQuery {}
+export class OrganizationsListQuery extends PaginationQuery {
+    taxId?: string;
+}
+
+export class CheckMembershipParams {
+    orgId!: string;
+    userId!: string;
+}

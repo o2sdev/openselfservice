@@ -4,3 +4,8 @@ export class GetCustomersQuery implements Organizations.Request.OrganizationsLis
     offset?: number;
     limit?: number;
 }
+
+export class CheckMembershipQuery implements Organizations.Request.OrganizationsListQuery {
+    taxId!: string;
+    username!: string;
+}

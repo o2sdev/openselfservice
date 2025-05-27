@@ -1,4 +1,4 @@
-import { AuthError } from 'next-auth';
+import { Modules } from '@o2s/api-harmonization';
 import { Providers } from 'src/auth.providers';
 
 import { Models } from '@o2s/framework/modules';
@@ -44,6 +44,10 @@ export interface CreateAccountFormProps {
             description?: string;
         };
     };
-    onSignIn: (providerId: string, credentials?: FormValues) => Promise<AuthError | void>;
+    onCheckMembership: (
+        providerId: string,
+        credentials?: FormValues,
+    ) => Promise<Modules.Organizations.Model.OrganizationMembership>;
+    onRegisterUser: (providerId: string, credentials?: FormValues) => Promise<Modules.Users.Model.RegisterUser>;
     resetPassword?: string;
 }
