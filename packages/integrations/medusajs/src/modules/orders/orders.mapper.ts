@@ -46,32 +46,33 @@ const mapOrderItem = (item: HttpTypes.AdminOrderLineItem, currency: string): Ord
         total: mapPrice(item.total, currency),
         subtotal: mapPrice(item.subtotal, currency),
         currency: currency as Models.Price.Currency,
-        product: mapProduct(item.product, item.variant, item.unit_price, currency) as Products.Model.Product,
+        product: mapProduct(item, item.unit_price, currency) as Products.Model.Product,
     };
 };
 
 const mapProduct = (
-    item: HttpTypes.AdminProduct | undefined,
-    variant: HttpTypes.AdminProductVariant | undefined,
+    item: HttpTypes.AdminOrderLineItem | undefined,
     unitPrice: number,
     currency: string,
 ): Products.Model.Product => {
-    if (!item || !variant) throw new Error('Product or variant not found');
+    if (!item) throw new Error('Product not found');
 
     return {
-        id: item.id,
-        sku: variant.sku || '',
-        name: item.title,
-        description: item.description || '',
-        shortDescription: item.description || '',
-        image: {
-            url: item.thumbnail || '',
-            alt: '',
-        },
+        id: item.product_id || '',
+        sku: item.variant_sku || '',
+        name: item.product_title || item.title,
+        description: item.product_description || '',
+        shortDescription: item.product_subtitle || '',
+        image: item.thumbnail
+            ? {
+                  url: item.thumbnail,
+                  alt: item.product_title || item.title,
+              }
+            : undefined,
         price: mapPrice(unitPrice, currency) as Models.Price.Price,
         link: '',
         type: 'PHYSICAL' as Products.Model.ProductType,
-        category: item.categories?.[0]?.name || '',
+        category: item.product?.categories?.[0]?.name || '',
         tags: [],
     };
 };
