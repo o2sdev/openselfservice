@@ -78,7 +78,7 @@ const mapProduct = (
     };
 };
 
-const mapAddress = (address: HttpTypes.AdminOrderAddress | null | undefined): Models.Address.Address | undefined => {
+const mapAddress = (address?: HttpTypes.AdminOrderAddress | null): Models.Address.Address | undefined => {
     if (!address) return undefined;
     return {
         country: address.country_code || '',
