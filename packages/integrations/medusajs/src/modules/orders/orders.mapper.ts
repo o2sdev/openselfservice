@@ -1,4 +1,5 @@
 import { HttpTypes } from '@medusajs/types';
+import { NotFoundException } from '@nestjs/common';
 
 import { Models, Orders, Products } from '@o2s/framework/modules';
 
@@ -46,16 +47,16 @@ const mapOrderItem = (item: HttpTypes.AdminOrderLineItem, currency: string): Ord
         total: mapPrice(item.total, currency),
         subtotal: mapPrice(item.subtotal, currency),
         currency: currency as Models.Price.Currency,
-        product: mapProduct(item, item.unit_price, currency) as Products.Model.Product,
+        product: mapProduct(item.unit_price, currency, item) as Products.Model.Product,
     };
 };
 
 const mapProduct = (
-    item: HttpTypes.AdminOrderLineItem | undefined,
     unitPrice: number,
     currency: string,
+    item?: HttpTypes.AdminOrderLineItem,
 ): Products.Model.Product => {
-    if (!item) throw new Error('Product not found');
+    if (!item) throw new NotFoundException('Product not found');
 
     return {
         id: item.product_id || '',
