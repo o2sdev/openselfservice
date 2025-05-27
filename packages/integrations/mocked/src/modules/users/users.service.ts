@@ -6,7 +6,7 @@ import { Models, Users } from '@o2s/framework/modules';
 import { responseDelay } from '@/utils/delay';
 
 import { mapCustomer, mapCustomers } from './customers.mapper';
-import { MOCK_USERS, mapUser } from './users.mapper';
+import { MOCK_USERS, mapUser, mapUsers } from './users.mapper';
 
 export class UserService implements Users.Service {
     getCurrentUser(): Observable<Users.Model.User> {
@@ -15,6 +15,10 @@ export class UserService implements Users.Service {
 
     getUser(options: Users.Request.GetUserParams): Observable<Users.Model.User> {
         return of(mapUser(options.id)).pipe(responseDelay());
+    }
+
+    getUsers(options: Users.Request.GetUsersQuery): Observable<Users.Model.Users> {
+        return of(mapUsers(options)).pipe(responseDelay());
     }
 
     createUser(body: Users.Request.PostUserBody): Observable<Users.Model.User> {

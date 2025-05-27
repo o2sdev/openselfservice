@@ -18,4 +18,9 @@ export class OrganizationController {
     getOrganizations(@Query() options: Request.OrganizationsListQuery) {
         return this.organizationService.getOrganizationList(options);
     }
+
+    @Get('/membership/:orgId/:userId')
+    checkMembership(@Param() params: Request.CheckMembershipParams) {
+        return this.organizationService.checkMembership(params);
+    }
 }

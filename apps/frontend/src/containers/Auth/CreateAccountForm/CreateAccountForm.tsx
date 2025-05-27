@@ -21,7 +21,12 @@ import { getPasswordSchema, getUsernameSchema } from '../Utils/validationSchema'
 
 import { CreateAccountFormProps, FormValues } from './CreateAccountForm.types';
 
-export const CreateAccountForm: React.FC<Readonly<CreateAccountFormProps>> = ({ providers, labels, onSignIn }) => {
+export const CreateAccountForm: React.FC<Readonly<CreateAccountFormProps>> = ({
+    providers,
+    labels,
+    onRegisterUser,
+    onCheckMembership,
+}) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [error, setError] = useState<AuthError | null>(null);
 
@@ -68,11 +73,11 @@ export const CreateAccountForm: React.FC<Readonly<CreateAccountFormProps>> = ({ 
                     onSubmit={async (values) => {
                         setError(null);
                         setIsSubmitting(true);
-                        const error = await onSignIn('credentials', values);
-                        if (error) {
-                            setIsSubmitting(false);
-                            setError(error);
-                        }
+                        const error = await onRegisterUser('credentials', values);
+                        // if (error) {
+                        //     setIsSubmitting(false);
+                        //     setError(error);
+                        // }
                     }}
                     validateOnBlur={true}
                     validateOnMount={false}
@@ -147,7 +152,7 @@ export const CreateAccountForm: React.FC<Readonly<CreateAccountFormProps>> = ({ 
                             key={provider.id}
                             action={async () => {
                                 setIsSubmitting(true);
-                                setTimeout(async () => await onSignIn(provider.id), 1);
+                                // setTimeout(async () => await onSignIn(provider.id), 1);
                             }}
                             className="flex flex-col gap-4"
                         >

@@ -9,7 +9,9 @@ export abstract class UserService {
     protected constructor(..._services: unknown[]) {}
 
     abstract getCurrentUser(): Observable<Users.Model.User>;
+
     abstract getUser(options: Users.Request.GetUserParams): Observable<Users.Model.User>;
+    abstract getUsers(options: Users.Request.GetUsersQuery): Observable<Users.Model.Users>;
 
     abstract createUser(options: Users.Request.PostUserBody): Observable<Users.Model.User>;
     abstract deleteUser(): Observable<void>;

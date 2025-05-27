@@ -90,6 +90,7 @@ export const sdk = extendSdk(internalSdk, {
         getCreateAccountPage: createAccountPage(internalSdk).modules.getCreateAccountPage,
         getNotFoundPage: notFoundPage(internalSdk).modules.getNotFoundPage,
         getCustomers: organizations(internalSdk).modules.getCustomers,
+        checkMembership: organizations(internalSdk).modules.checkMembership,
         getSurvey: surveyjs(internalSdk).modules.getSurvey,
         submitSurvey: surveyjs(internalSdk).modules.submitSurvey,
         registerUser: users(internalSdk).modules.registerUser,
