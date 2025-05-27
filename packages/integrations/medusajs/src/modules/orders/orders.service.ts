@@ -83,7 +83,6 @@ export class OrdersService extends Orders.Service {
         }
 
         const params: HttpTypes.AdminOrderFilters = {
-            id: query.id,
             limit: query.limit,
             offset: query.offset,
             status: query.status ? this.getMedusaStatus(query.status) : undefined,
