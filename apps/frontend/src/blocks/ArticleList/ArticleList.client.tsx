@@ -10,7 +10,7 @@ export const ArticleListPure: React.FC<Readonly<ArticleListPureProps>> = ({ ...c
         <ContentSection
             title={component.title}
             description={component.description}
-            additionalLink={component.additionalLink}
+            categoryLink={component.categoryLink}
         >
             <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
                 {component.items.data.map((item) => (

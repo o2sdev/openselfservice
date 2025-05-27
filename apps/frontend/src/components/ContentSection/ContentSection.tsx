@@ -11,7 +11,7 @@ import { ContentSectionProps } from './ContentSection.types';
 export const ContentSection: React.FC<Readonly<ContentSectionProps>> = ({
     title,
     description,
-    additionalLink,
+    categoryLink,
     children,
 }) => {
     return (
@@ -23,9 +23,9 @@ export const ContentSection: React.FC<Readonly<ContentSectionProps>> = ({
                         {description && <RichText content={description} />}
                     </div>
                 )}
-                {additionalLink && (
+                {categoryLink && (
                     <Button asChild variant="secondary">
-                        <NextLink href={additionalLink.url}>{additionalLink.label}</NextLink>
+                        <NextLink href={categoryLink.url}>{categoryLink.label}</NextLink>
                     </Button>
                 )}
             </div>
