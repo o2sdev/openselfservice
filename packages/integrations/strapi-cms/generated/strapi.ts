@@ -290,7 +290,6 @@ export type ComponentComponentsArticleList = {
     id: Scalars['ID']['output'];
     pages: Array<Maybe<Page>>;
     pages_connection?: Maybe<PageRelationResponseCollection>;
-    pagination?: Maybe<ComponentContentPagination>;
     parent?: Maybe<Page>;
     title?: Maybe<Scalars['String']['output']>;
 };
@@ -643,6 +642,12 @@ export type ComponentContentAlertBox = {
     description?: Maybe<Scalars['String']['output']>;
     id: Scalars['ID']['output'];
     title: Scalars['String']['output'];
+};
+
+export type ComponentContentAlertBoxInput = {
+    description?: InputMaybe<Scalars['String']['input']>;
+    id?: InputMaybe<Scalars['ID']['input']>;
+    title?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ComponentContentArticleSection = {
@@ -1058,6 +1063,7 @@ export type ComponentLabelsActions = {
     save: Scalars['String']['output'];
     settings: Scalars['String']['output'];
     show: Scalars['String']['output'];
+    showAllArticles: Scalars['String']['output'];
     showLess: Scalars['String']['output'];
     showMore: Scalars['String']['output'];
     trackOrder: Scalars['String']['output'];
@@ -1082,6 +1088,7 @@ export type ComponentLabelsActionsInput = {
     save?: InputMaybe<Scalars['String']['input']>;
     settings?: InputMaybe<Scalars['String']['input']>;
     show?: InputMaybe<Scalars['String']['input']>;
+    showAllArticles?: InputMaybe<Scalars['String']['input']>;
     showLess?: InputMaybe<Scalars['String']['input']>;
     showMore?: InputMaybe<Scalars['String']['input']>;
     trackOrder?: InputMaybe<Scalars['String']['input']>;
@@ -1298,15 +1305,6 @@ export enum Enum_Componentcontenterrormessage_Type {
     Max = 'max',
     Min = 'min',
     Required = 'required',
-}
-
-export enum Enum_Surveyjsform_Requiredroles {
-    SelfserviceAdmin = 'selfservice_admin',
-    SelfserviceUser = 'selfservice_user',
-}
-
-export enum Enum_Surveyjsform_Submitdestination {
-    Surveyjs = 'surveyjs',
 }
 
 export enum Enum_Translatebatchtranslatejob_Status {
@@ -1730,12 +1728,12 @@ export type LoginPage = {
     locale?: Maybe<Scalars['String']['output']>;
     localizations: Array<Maybe<LoginPage>>;
     localizations_connection?: Maybe<LoginPageRelationResponseCollection>;
-    newPasswordMessage: ComponentContentMessageSimple;
+    newPasswordMessage: ComponentContentAlertBox;
     password: ComponentContentFormField;
     providersLabel?: Maybe<Scalars['String']['output']>;
     providersTitle?: Maybe<Scalars['String']['output']>;
     publishedAt?: Maybe<Scalars['DateTime']['output']>;
-    resetPasswordMessage: ComponentContentMessageSimple;
+    resetPasswordMessage: ComponentContentAlertBox;
     signIn: Scalars['String']['output'];
     subtitle?: Maybe<Scalars['String']['output']>;
     title: Scalars['String']['output'];
@@ -1748,12 +1746,12 @@ export type LoginPageInput = {
     forgotPassword?: InputMaybe<ComponentContentLinkInput>;
     image?: InputMaybe<Scalars['ID']['input']>;
     invalidCredentials?: InputMaybe<Scalars['String']['input']>;
-    newPasswordMessage?: InputMaybe<ComponentContentMessageSimpleInput>;
+    newPasswordMessage?: InputMaybe<ComponentContentAlertBoxInput>;
     password?: InputMaybe<ComponentContentFormFieldInput>;
     providersLabel?: InputMaybe<Scalars['String']['input']>;
     providersTitle?: InputMaybe<Scalars['String']['input']>;
     publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
-    resetPasswordMessage?: InputMaybe<ComponentContentMessageSimpleInput>;
+    resetPasswordMessage?: InputMaybe<ComponentContentAlertBoxInput>;
     signIn?: InputMaybe<Scalars['String']['input']>;
     subtitle?: InputMaybe<Scalars['String']['input']>;
     title?: InputMaybe<Scalars['String']['input']>;
@@ -2214,7 +2212,7 @@ export type Page = {
     localizations: Array<Maybe<Page>>;
     localizations_connection?: Maybe<PageRelationResponseCollection>;
     parent?: Maybe<Page>;
-    protected: Scalars['Boolean']['output'];
+    protected?: Maybe<Scalars['Boolean']['output']>;
     publishedAt?: Maybe<Scalars['DateTime']['output']>;
     slug: Scalars['String']['output'];
     template: Array<Maybe<PageTemplateDynamicZone>>;
@@ -2834,8 +2832,8 @@ export type SurveyJsForm = {
     documentId: Scalars['ID']['output'];
     postId: Scalars['String']['output'];
     publishedAt?: Maybe<Scalars['DateTime']['output']>;
-    requiredRoles: Enum_Surveyjsform_Requiredroles;
-    submitDestination?: Maybe<Enum_Surveyjsform_Submitdestination>;
+    requiredRoles: Scalars['JSON']['output'];
+    submitDestination?: Maybe<Scalars['JSON']['output']>;
     surveyId: Scalars['String']['output'];
     surveyType: Scalars['String']['output'];
     updatedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -2855,8 +2853,8 @@ export type SurveyJsFormFiltersInput = {
     or?: InputMaybe<Array<InputMaybe<SurveyJsFormFiltersInput>>>;
     postId?: InputMaybe<StringFilterInput>;
     publishedAt?: InputMaybe<DateTimeFilterInput>;
-    requiredRoles?: InputMaybe<StringFilterInput>;
-    submitDestination?: InputMaybe<StringFilterInput>;
+    requiredRoles?: InputMaybe<JsonFilterInput>;
+    submitDestination?: InputMaybe<JsonFilterInput>;
     surveyId?: InputMaybe<StringFilterInput>;
     surveyType?: InputMaybe<StringFilterInput>;
     updatedAt?: InputMaybe<DateTimeFilterInput>;
@@ -2866,8 +2864,8 @@ export type SurveyJsFormInput = {
     code?: InputMaybe<Scalars['String']['input']>;
     postId?: InputMaybe<Scalars['String']['input']>;
     publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
-    requiredRoles?: InputMaybe<Enum_Surveyjsform_Requiredroles>;
-    submitDestination?: InputMaybe<Enum_Surveyjsform_Submitdestination>;
+    requiredRoles?: InputMaybe<Scalars['JSON']['input']>;
+    submitDestination?: InputMaybe<Scalars['JSON']['input']>;
     surveyId?: InputMaybe<Scalars['String']['input']>;
     surveyType?: InputMaybe<Scalars['String']['input']>;
 };
@@ -3846,6 +3844,7 @@ export type ResolversTypes = {
     >;
     ComponentContentActionLinksFiltersInput: ComponentContentActionLinksFiltersInput;
     ComponentContentAlertBox: ResolverTypeWrapper<ComponentContentAlertBox>;
+    ComponentContentAlertBoxInput: ComponentContentAlertBoxInput;
     ComponentContentArticleSection: ResolverTypeWrapper<ComponentContentArticleSection>;
     ComponentContentArticleSectionFiltersInput: ComponentContentArticleSectionFiltersInput;
     ComponentContentBanner: ResolverTypeWrapper<
@@ -3966,8 +3965,6 @@ export type ResolversTypes = {
     DeleteMutationResponse: ResolverTypeWrapper<DeleteMutationResponse>;
     ENUM_COMPONENTCONTENTCHARTDATERANGE_TYPE: Enum_Componentcontentchartdaterange_Type;
     ENUM_COMPONENTCONTENTERRORMESSAGE_TYPE: Enum_Componentcontenterrormessage_Type;
-    ENUM_SURVEYJSFORM_REQUIREDROLES: Enum_Surveyjsform_Requiredroles;
-    ENUM_SURVEYJSFORM_SUBMITDESTINATION: Enum_Surveyjsform_Submitdestination;
     ENUM_TRANSLATEBATCHTRANSLATEJOB_STATUS: Enum_Translatebatchtranslatejob_Status;
     Error: ResolverTypeWrapper<Error>;
     FileInfoInput: FileInfoInput;
@@ -4329,6 +4326,7 @@ export type ResolversParentTypes = {
     };
     ComponentContentActionLinksFiltersInput: ComponentContentActionLinksFiltersInput;
     ComponentContentAlertBox: ComponentContentAlertBox;
+    ComponentContentAlertBoxInput: ComponentContentAlertBoxInput;
     ComponentContentArticleSection: ComponentContentArticleSection;
     ComponentContentArticleSectionFiltersInput: ComponentContentArticleSectionFiltersInput;
     ComponentContentBanner: Omit<ComponentContentBanner, 'button'> & {
@@ -4836,7 +4834,6 @@ export type ComponentComponentsArticleListResolvers<
         ContextType,
         RequireFields<ComponentComponentsArticleListPages_ConnectionArgs, 'pagination' | 'sort'>
     >;
-    pagination?: Resolver<Maybe<ResolversTypes['ComponentContentPagination']>, ParentType, ContextType>;
     parent?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType>;
     title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -5636,6 +5633,7 @@ export type ComponentLabelsActionsResolvers<
     save?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     settings?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     show?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    showAllArticles?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     showLess?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     showMore?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     trackOrder?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -6155,12 +6153,12 @@ export type LoginPageResolvers<
         ParentType,
         ContextType
     >;
-    newPasswordMessage?: Resolver<ResolversTypes['ComponentContentMessageSimple'], ParentType, ContextType>;
+    newPasswordMessage?: Resolver<ResolversTypes['ComponentContentAlertBox'], ParentType, ContextType>;
     password?: Resolver<ResolversTypes['ComponentContentFormField'], ParentType, ContextType>;
     providersLabel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     providersTitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-    resetPasswordMessage?: Resolver<ResolversTypes['ComponentContentMessageSimple'], ParentType, ContextType>;
+    resetPasswordMessage?: Resolver<ResolversTypes['ComponentContentAlertBox'], ParentType, ContextType>;
     signIn?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     subtitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -6640,7 +6638,7 @@ export type PageResolvers<
         RequireFields<PageLocalizations_ConnectionArgs, 'pagination' | 'sort'>
     >;
     parent?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType>;
-    protected?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+    protected?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
     publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
     slug?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     template?: Resolver<Array<Maybe<ResolversTypes['PageTemplateDynamicZone']>>, ParentType, ContextType>;
@@ -7100,8 +7098,8 @@ export type SurveyJsFormResolvers<
     documentId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     postId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-    requiredRoles?: Resolver<ResolversTypes['ENUM_SURVEYJSFORM_REQUIREDROLES'], ParentType, ContextType>;
-    submitDestination?: Resolver<Maybe<ResolversTypes['ENUM_SURVEYJSFORM_SUBMITDESTINATION']>, ParentType, ContextType>;
+    requiredRoles?: Resolver<ResolversTypes['JSON'], ParentType, ContextType>;
+    submitDestination?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
     surveyId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     surveyType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
@@ -7567,7 +7565,7 @@ export type ArticleSimpleFragment = {
 export type ArticleTemplateFragment = {
     documentId: string;
     slug: string;
-    protected: boolean;
+    protected?: boolean;
     locale?: string;
     createdAt?: any;
     updatedAt?: any;
@@ -7875,7 +7873,7 @@ export type GetArticlesQueryVariables = Exact<{
 export type GetArticlesQuery = {
     pages_connection?: { pageInfo: { total: number } };
     articles: Array<{
-        protected: boolean;
+        protected?: boolean;
         documentId: string;
         slug: string;
         locale?: string;
@@ -8310,7 +8308,7 @@ export type OrganizationListFragment = { documentId: string; title?: string; des
 export type PageFragment = {
     documentId: string;
     slug: string;
-    protected: boolean;
+    protected?: boolean;
     locale?: string;
     createdAt?: any;
     updatedAt?: any;
@@ -10367,7 +10365,7 @@ export type GetPageQuery = {
     pages: Array<{
         documentId: string;
         slug: string;
-        protected: boolean;
+        protected?: boolean;
         locale?: string;
         createdAt?: any;
         updatedAt?: any;
@@ -10551,7 +10549,7 @@ export type GetPagesQuery = {
     pages: Array<{
         documentId: string;
         slug: string;
-        protected: boolean;
+        protected?: boolean;
         locale?: string;
         createdAt?: any;
         updatedAt?: any;
@@ -10737,8 +10735,8 @@ export type GetSurveyQuery = {
         surveyId: string;
         postId: string;
         surveyType: string;
-        requiredRoles: Enum_Surveyjsform_Requiredroles;
-        submitDestination?: Enum_Surveyjsform_Submitdestination;
+        requiredRoles: any;
+        submitDestination?: any;
     }>;
 };
 
