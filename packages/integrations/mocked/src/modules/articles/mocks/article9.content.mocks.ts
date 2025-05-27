@@ -599,13 +599,13 @@ export const MOCK_ARTICLE9_EN: Articles.Model.Article[] = [
         lead: 'Learn essential safety practices and maintenance procedures to keep your PowerPro tools in optimal condition.',
         tags: ['safety', 'maintenance', 'tools'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-maintenance-thumb.jpg',
             width: 640,
             height: 427,
             alt: '',
         },
         thumbnail: {
-            url: 'https://example.com/images/safety-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-maintenance-thumb.jpg',
             alt: '',
         },
         category: {
@@ -664,13 +664,13 @@ export const MOCK_ARTICLE9_DE: Articles.Model.Article[] = [
         lead: 'Erfahren Sie mehr über wichtige Sicherheitspraktiken und Wartungsverfahren, um Ihre PowerPro-Werkzeuge in optimalem Zustand zu halten.',
         tags: ['sicherheit', 'wartung', 'werkzeuge'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-maintenance-thumb.jpg',
             width: 640,
             height: 427,
             alt: '',
         },
         thumbnail: {
-            url: 'https://example.com/images/safety-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-maintenance-thumb.jpg',
             alt: '',
         },
         category: {

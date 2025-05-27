@@ -278,7 +278,7 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
                                     <SheetTrigger asChild>
                                         <Button variant="secondary">
                                             {data.order.customerComment.link.icon && (
-                                                <DynamicIcon name={data.order.customerComment.link.icon} />
+                                                <DynamicIcon name={data.order.customerComment.link.icon} size={16} />
                                             )}
                                             {data.order.customerComment.link.label}
                                         </Button>

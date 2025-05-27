@@ -419,13 +419,13 @@ export const MOCK_ARTICLE8_EN: Articles.Model.Article[] = [
         lead: 'Learn how to identify and resolve common issues with your PowerPro tools.',
         tags: ['troubleshooting', 'maintenance', 'repair'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-troubleshooting-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-thumb.jpg',
             width: 640,
             height: 427,
             alt: '',
         },
         thumbnail: {
-            url: 'https://example.com/images/troubleshooting-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-thumb.jpg',
             alt: '',
         },
         category: {
@@ -485,7 +485,7 @@ export const MOCK_ARTICLE8_DE: Articles.Model.Article[] = [
         lead: 'Erfahren Sie, wie Sie häufige Probleme mit Ihren PowerPro-Werkzeugen identifizieren und lösen können.',
         tags: ['fehlerbehebung', 'wartung', 'reparatur'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-troubleshooting-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-thumb.jpg',
             width: 640,
             height: 427,
             alt: '',
@@ -551,7 +551,7 @@ export const MOCK_ARTICLE8_PL: Articles.Model.Article[] = [
         lead: 'Dowiedz się, jak identyfikować i rozwiązywać typowe problemy z narzędziami PowerPro.',
         tags: ['rozwiązywanie-problemów', 'konserwacja', 'naprawa'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-troubleshooting-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-thumb.jpg',
             width: 640,
             height: 427,
             alt: '',

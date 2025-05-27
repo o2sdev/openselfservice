@@ -32,6 +32,7 @@ const MOCK_ORDER_DETAILS_BLOCK_EN: CMS.Model.OrderDetailsBlock.OrderDetailsBlock
         icon: 'Text',
         link: {
             label: 'See full',
+            icon: 'ArrowRight',
             url: '',
         },
     },

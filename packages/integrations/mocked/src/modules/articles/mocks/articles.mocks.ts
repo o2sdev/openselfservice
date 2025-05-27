@@ -10,6 +10,9 @@ import { MOCK_ARTICLE7_DE, MOCK_ARTICLE7_EN, MOCK_ARTICLE7_PL } from './article7
 import { MOCK_ARTICLE8_DE, MOCK_ARTICLE8_EN, MOCK_ARTICLE8_PL } from './article8.content.mocks';
 import { MOCK_ARTICLE9_DE, MOCK_ARTICLE9_EN, MOCK_ARTICLE9_PL } from './article9.content.mocks';
 import { MOCK_ARTICLE10_DE, MOCK_ARTICLE10_EN, MOCK_ARTICLE10_PL } from './article10.content.mocks';
+import { MOCK_ARTICLE11_DE, MOCK_ARTICLE11_EN, MOCK_ARTICLE11_PL } from './article11.content.mocks';
+import { MOCK_ARTICLE12_DE, MOCK_ARTICLE12_EN, MOCK_ARTICLE12_PL } from './article12.content.mocks';
+import { MOCK_ARTICLE13_DE, MOCK_ARTICLE13_EN, MOCK_ARTICLE13_PL } from './article13.content.mocks';
 
 export const MOCK_ARTICLES_EN: Articles.Model.Article[] = [
     ...MOCK_ARTICLE1_EN,
@@ -22,6 +25,9 @@ export const MOCK_ARTICLES_EN: Articles.Model.Article[] = [
     ...MOCK_ARTICLE8_EN,
     ...MOCK_ARTICLE9_EN,
     ...MOCK_ARTICLE10_EN,
+    ...MOCK_ARTICLE11_EN,
+    ...MOCK_ARTICLE12_EN,
+    ...MOCK_ARTICLE13_EN,
 ];
 
 export const MOCK_ARTICLES_DE: Articles.Model.Article[] = [
@@ -35,6 +41,9 @@ export const MOCK_ARTICLES_DE: Articles.Model.Article[] = [
     ...MOCK_ARTICLE8_DE,
     ...MOCK_ARTICLE9_DE,
     ...MOCK_ARTICLE10_DE,
+    ...MOCK_ARTICLE11_DE,
+    ...MOCK_ARTICLE12_DE,
+    ...MOCK_ARTICLE13_DE,
 ];
 
 export const MOCK_ARTICLES_PL: Articles.Model.Article[] = [
@@ -48,4 +57,7 @@ export const MOCK_ARTICLES_PL: Articles.Model.Article[] = [
     ...MOCK_ARTICLE8_PL,
     ...MOCK_ARTICLE9_PL,
     ...MOCK_ARTICLE10_PL,
+    ...MOCK_ARTICLE11_PL,
+    ...MOCK_ARTICLE12_PL,
+    ...MOCK_ARTICLE13_PL,
 ];

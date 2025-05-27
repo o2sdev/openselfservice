@@ -509,13 +509,13 @@ export const MOCK_ARTICLE6_EN: Articles.Model.Article[] = [
         lead: 'Learn how to identify and resolve common problems with your PowerPro tools.',
         tags: ['troubleshooting', 'maintenance', 'repair'],
         image: {
-            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-troubleshooting-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-maintenance-thumb.jpg',
             width: 640,
             height: 427,
             alt: '',
         },
         thumbnail: {
-            url: 'https://example.com/images/troubleshooting-thumb.jpg',
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-maintenance-thumb.jpg',
             alt: '',
         },
         category: {
