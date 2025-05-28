@@ -110,6 +110,8 @@ export default async function ResetPasswordPage({ params }: Readonly<Props>) {
                                     },
                                     resetPassword: data.resetPassword,
                                     invalidCredentials: data.invalidCredentials,
+                                    requiredLabel: data.labels?.requiredLabel,
+                                    optionalLabel: data.labels?.optionalLabel,
                                 }}
                                 onResetPassword={handleResetPassword}
                             />

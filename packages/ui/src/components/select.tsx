@@ -172,17 +172,36 @@ interface SelectWithTitleProps {
     hasError?: boolean;
     description?: string;
     errorMessage?: string;
+    isRequired?: boolean;
+    requiredLabel: string;
+    optionalLabel: string;
 }
 
 const SelectWithTitle = React.forwardRef<HTMLDivElement, Readonly<SelectWithTitleProps>>(
-    ({ label, labelClassName, children, id, hasError, description, errorMessage, ...props }, ref) => {
+    (
+        {
+            label,
+            labelClassName,
+            children,
+            id,
+            hasError,
+            description,
+            errorMessage,
+            isRequired,
+            requiredLabel,
+            optionalLabel,
+            ...props
+        },
+        ref,
+    ) => {
         const generatedId = React.useId();
         const selectId = id || generatedId;
 
         return (
             <div className="grid gap-2" ref={ref}>
                 <Label htmlFor={selectId} className={cn(labelClassName, hasError && 'text-destructive')}>
-                    {label}
+                    <span className="pr-2">{label}</span>
+                    <span className="font-normal text-sm">({isRequired ? requiredLabel : optionalLabel})</span>
                 </Label>
                 <Select {...props}>{children}</Select>
                 {description && <p className="text-sm text-muted-foreground">{description}</p>}

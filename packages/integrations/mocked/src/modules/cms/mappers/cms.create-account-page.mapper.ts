@@ -1,204 +1,316 @@
 import { CMS } from '@o2s/framework/modules';
 
 const CREATE_ACCOUNT_PL: CMS.Model.CreateAccountPage.CreateAccountPage = {
-    title: 'Zaloguj się',
-    subtitle: 'Wprowadź swój email i hasło, aby uzyskać dostęp do konta',
-    username: {
-        id: 'username-1',
-        name: 'username',
-        label: 'Nazwa użytkownika',
-        description: 'Powiązana z Twoim ID Klienta',
-        placeholder: 'Wprowadź nazwę użytkownika',
-        errorMessages: [
-            {
-                type: 'required',
-                description: 'Nazwa użytkownika jest wymagana',
-                id: 'required-1',
-                name: 'Required',
-            },
-            {
-                type: 'matches',
-                description: 'Nazwa użytkownika może zawierać tylko litery, cyfry, kropki, myślniki i znak @',
-                id: 'matches-1',
-                name: 'Matches',
-            },
-            {
-                type: 'min',
-                description: 'Nazwa użytkownika musi zawierać co najmniej 5 znaków',
-                id: 'min-1',
-                name: 'Min',
-            },
-        ],
-    },
-    password: {
-        id: 'password-1',
-        name: 'password',
-        label: 'Hasło',
-        placeholder: 'Wprowadź swoje hasło',
-        errorMessages: [
-            {
-                type: 'required',
-                description: 'Hasło jest wymagane',
-                id: 'required-1',
-                name: 'Required',
-            },
-            {
-                type: 'min',
-                description: 'Hasło musi zawierać co najmniej 4 znaki',
-                id: 'min-1',
-                name: 'Min',
-            },
-            {
-                type: 'matches',
-                description: 'Hasło musi zawierać co najmniej 4 znaki',
-                id: 'matches-1',
-                name: 'Matches',
-            },
-        ],
-    },
-    signIn: 'Zaloguj się',
-    providers: {
-        title: 'LUB',
-        label: 'Zaloguj się przez ',
-    },
     createdAt: '2024-01-01',
     updatedAt: '2024-01-01',
     publishedAt: '2024-01-01',
-    labels: {
-        show: 'Pokaż',
-        hide: 'Ukryj',
-    },
-    image: {
-        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
-        alt: 'Sign in image',
-        width: 640,
-        height: 656,
+    sideContent: {
+        title: 'Korzyści z konta B2B',
+        icons: [
+            {
+                name: 'KeySquare',
+                title: 'Jedno ID',
+                description:
+                    'Jedno ID zapewnia łatwy dostęp do stron internetowych, sklepów, aplikacji i usług za pomocą jednego logowania.',
+            },
+            {
+                name: 'Tags',
+                title: 'Spersonalizowane ceny',
+                description:
+                    'Dostęp do ofert specjalnych, rabatów hurtowych i specjalnych promocji dopasowanych do Twoich wzorców zakupowych.',
+            },
+            {
+                name: 'PackageCheck',
+                title: 'Szybsze i łatwiejsze zamawianie',
+                description:
+                    'Składaj zamówienia hurtowe, ponawiaj zakupy jednym kliknięciem i zarządzaj listami zakupów.',
+            },
+        ],
     },
     seo: {
-        title: 'Zaloguj się',
-        description: 'Wprowadź swój email i hasło, aby uzyskać dostęp do konta',
-        keywords: ['zaloguj się', 'hasło', 'email'],
+        title: 'Utwórz konto',
+        description: 'Wprowadź swoje dane, aby utworzyć nowe konto',
+        keywords: ['utwórz konto', 'rejestracja', 'nowe konto'],
         image: {
             url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
-            alt: 'Sign in image',
+            alt: 'Utwórz konto obraz',
             width: 640,
             height: 656,
         },
         noIndex: false,
         noFollow: false,
     },
-    invalidCredentials: 'Nieprawidłowe dane logowania',
-    forgotPassword: {
-        label: 'Zapomniałeś hasła?',
-        link: '/pl/reset-hasla',
-    },
-    resetPasswordMessage: {
-        title: 'Jeśli podany adres email jest powiązany z kontem, otrzymasz wiadomość z linkiem do resetowania hasła.',
-        description: 'Sprawdź folder spam, jeśli wiadomość nie dotarła.',
-    },
-    newPasswordMessage: {
-        title: 'Nowe hasło zostało ustawione. Możesz się teraz zalogować.',
+    labels: {
+        email: {
+            id: 'email',
+            name: 'email',
+            label: 'Email',
+            placeholder: 'jan.kowalski@firma.com',
+            description: 'Email używany do celów biznesowych. To będzie nazwa użytkownika Twojego konta',
+            errorMessages: [
+                {
+                    type: 'required',
+                    description: 'Email jest wymagany',
+                    id: 'required-1',
+                    name: 'Required',
+                },
+                {
+                    type: 'email',
+                    description: 'Wprowadź prawidłowy adres email',
+                    id: 'email-1',
+                    name: 'Email',
+                },
+                {
+                    type: 'max',
+                    description: 'Email może zawierać maksymalnie 128 znaków',
+                    id: 'max-1',
+                    name: 'Max',
+                },
+            ],
+        },
+        companyTaxId: {
+            id: 'company-tax-id',
+            name: 'companyTaxId',
+            label: 'NIP firmy',
+            placeholder: '12-3456789',
+            description: 'Pozwala nam sprawdzić czy firma jest w naszej bazie danych',
+            errorMessages: [
+                {
+                    type: 'required',
+                    description: 'NIP firmy jest wymagany',
+                    id: 'required-2',
+                    name: 'Required',
+                },
+                {
+                    type: 'matches',
+                    description: 'NIP musi mieć dokładnie 10 znaków i zawierać tylko cyfry oraz myślniki',
+                    id: 'matches-2',
+                    name: 'Matches',
+                },
+            ],
+        },
+        optionalLabel: 'Opcjonalne',
+        requiredLabel: 'Wymagane',
+        step1: {
+            title: 'Utwórz konto',
+            subtitle: 'Wprowadź NIP firmy i email poniżej, aby utworzyć konto.',
+            submitButton: 'Kontynuuj',
+            signIn: {
+                title: 'Masz już konto?',
+                button: {
+                    label: 'Zaloguj się',
+                    link: '/pl/zaloguj-sie',
+                },
+            },
+        },
+        step2: {
+            title: 'Utwórz konto',
+            subtitle: 'Wypełnij pozostałe dane, aby utworzyć swoje konto.',
+            submitButton: 'Zarejestruj się',
+            badge: {
+                newCompany: 'Dołącz jako nowa firma',
+                existingCompany: 'Dołącz do "Nazwa istniejącej organizacji"',
+            },
+            firstName: {
+                id: 'first-name',
+                name: 'firstName',
+                label: 'Imię',
+                placeholder: 'Jan',
+                errorMessages: [
+                    {
+                        type: 'required',
+                        description: 'Imię jest wymagane',
+                        id: 'required-3',
+                        name: 'Required',
+                    },
+                    {
+                        type: 'min',
+                        description: 'Imię musi zawierać co najmniej 2 znaki',
+                        id: 'min-3',
+                        name: 'Min',
+                    },
+                    {
+                        type: 'max',
+                        description: 'Imię może zawierać maksymalnie 64 znaki',
+                        id: 'max-3',
+                        name: 'Max',
+                    },
+                ],
+            },
+            lastName: {
+                id: 'last-name',
+                name: 'lastName',
+                label: 'Nazwisko',
+                placeholder: 'Kowalski',
+                errorMessages: [
+                    {
+                        type: 'required',
+                        description: 'Nazwisko jest wymagane',
+                        id: 'required-4',
+                        name: 'Required',
+                    },
+                    {
+                        type: 'min',
+                        description: 'Nazwisko musi zawierać co najmniej 2 znaki',
+                        id: 'min-4',
+                        name: 'Min',
+                    },
+                    {
+                        type: 'max',
+                        description: 'Nazwisko może zawierać maksymalnie 64 znaki',
+                        id: 'max-4',
+                        name: 'Max',
+                    },
+                ],
+            },
+            companyName: {
+                id: 'company-name',
+                name: 'companyName',
+                label: 'Nazwa firmy',
+                placeholder: 'Nazwa nowej firmy',
+                errorMessages: [
+                    {
+                        type: 'required',
+                        description: 'Nazwa firmy jest wymagana',
+                        id: 'required-5',
+                        name: 'Required',
+                    },
+                    {
+                        type: 'max',
+                        description: 'Nazwa firmy może zawierać maksymalnie 256 znaków',
+                        id: 'max-5',
+                        name: 'Max',
+                    },
+                ],
+            },
+            clientId: {
+                id: 'client-id',
+                name: 'clientId',
+                label: 'ID Klienta',
+                placeholder: '1298001',
+                description: 'Znajdź ID Klienta, np. na fakturze. Powiązany numer telefonu: +48 ****** 1432',
+                errorMessages: [
+                    {
+                        type: 'required',
+                        description: 'ID Klienta jest wymagane',
+                        id: 'required-6',
+                        name: 'Required',
+                    },
+                    {
+                        type: 'max',
+                        description: 'ID Klienta może zawierać maksymalnie 64 znaki',
+                        id: 'max-6',
+                        name: 'Max',
+                    },
+                    {
+                        type: 'matches',
+                        description: 'ID Klienta może zawierać tylko cyfry',
+                        id: 'matches-6',
+                        name: 'Matches',
+                    },
+                ],
+            },
+            phoneNumber: {
+                id: 'phone-number',
+                name: 'phoneNumber',
+                label: 'Numer telefonu',
+                placeholder: '+48 123-456-789',
+                description: 'Telefon używany do celów biznesowych',
+                errorMessages: [
+                    {
+                        type: 'required',
+                        description: 'Numer telefonu jest wymagany',
+                        id: 'required-7',
+                        name: 'Required',
+                    },
+                    {
+                        type: 'matches',
+                        description: 'Numer telefonu musi zawierać 10-13 cyfr z opcjonalnym znakiem +',
+                        id: 'matches-7',
+                        name: 'Matches',
+                    },
+                ],
+            },
+            position: {
+                id: 'position',
+                name: 'position',
+                label: 'Stanowisko',
+                placeholder: 'Wybierz swoje stanowisko',
+                options: [
+                    { label: 'Prezes', value: 'ceo' },
+                    { label: 'Dyrektor techniczny', value: 'cto' },
+                    { label: 'Dyrektor finansowy', value: 'cfo' },
+                    { label: 'Menedżer', value: 'manager' },
+                    { label: 'Programista', value: 'developer' },
+                    { label: 'Projektant', value: 'designer' },
+                    { label: 'Księgowy', value: 'accountant' },
+                    { label: 'Przedstawiciel handlowy', value: 'sales' },
+                    { label: 'Inne', value: 'other' },
+                ],
+                errorMessages: [
+                    {
+                        type: 'required',
+                        description: 'Stanowisko jest wymagane',
+                        id: 'required-8',
+                        name: 'Required',
+                    },
+                ],
+            },
+            existingCompanyMessage: {
+                title: 'Firma już istnieje',
+                description: 'Ta firma jest już zarejestrowana. Możesz dołączyć do istniejącej firmy.',
+            },
+            changeCompanyTaxIdLabel: 'Zmień',
+            companySectionTitle: 'Informacje o firmie',
+            userSectionTitle: 'Twoje informacje',
+            activationContactInfo:
+                'Po utworzeniu konta nasz przedstawiciel skontaktuje się z Tobą w ciągu 24 godzin, aby pomóc w jego aktywacji.',
+            termsAndConditions:
+                'Tworząc konto, wyrażasz zgodę na nasze Warunki użytkowania i Politykę prywatności. Możesz usunąć konto w dowolnym momencie.',
+        },
     },
 };
 
 const CREATE_ACCOUNT_EN: CMS.Model.CreateAccountPage.CreateAccountPage = {
-    title: 'Sign in',
-    subtitle: 'Please enter your email and password below to access your account.',
-    username: {
-        id: 'username-1',
-        name: 'username',
-        label: 'Username',
-        description: 'Associated with your Client ID',
-        placeholder: 'Enter your username',
-        errorMessages: [
-            {
-                type: 'required',
-                description: 'Username is required',
-                id: 'required-1',
-                name: 'Required',
-            },
-            {
-                type: 'matches',
-                description: 'Username can only contain letters, numbers, dots, hyphens and @',
-                id: 'matches-1',
-                name: 'Matches',
-            },
-            {
-                type: 'min',
-                description: 'Username must contain at least 5 characters',
-                id: 'min-1',
-                name: 'Min',
-            },
-        ],
-    },
-    password: {
-        id: 'password-1',
-        name: 'password',
-        label: 'Password',
-        placeholder: 'Enter your password',
-        errorMessages: [
-            {
-                type: 'required',
-                description: 'Password is required',
-                id: 'required-1',
-                name: 'Required',
-            },
-            {
-                type: 'min',
-                description: 'Password must contain at least 4 characters',
-                id: 'min-1',
-                name: 'Min',
-            },
-            {
-                type: 'matches',
-                description: 'Password must contain at least 4 characters',
-                id: 'matches-1',
-                name: 'Matches',
-            },
-        ],
-    },
-    signIn: 'Sign in',
-    providers: {
-        title: 'OR',
-        label: 'Sign in with ',
-    },
     createdAt: '2024-01-01',
     updatedAt: '2024-01-01',
     publishedAt: '2024-01-01',
-    labels: {
-        show: 'Show',
-        hide: 'Hide',
-    },
-    image: {
-        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
-        alt: 'Sign in image',
-        width: 640,
-        height: 656,
+    sideContent: {
+        title: 'Benefits of a B2B account',
+        icons: [
+            {
+                name: 'KeySquare',
+                title: 'Single ID',
+                description: 'Single ID provides easy access to websites, shops, apps, and services with one login.',
+            },
+            {
+                name: 'Tags',
+                title: 'Personalized prices',
+                description:
+                    'Access custom offers, volume discounts, and special deals that match your purchasing patterns.',
+            },
+            {
+                name: 'PackageCheck',
+                title: 'Quicker & easier ordering',
+                description: 'Place bulk orders, reorder purchases with one click, and manage shopping lists.',
+            },
+        ],
     },
     seo: {
-        title: 'Sign in | Open Self Service demo application',
+        title: 'Create Account | Open Self Service demo application',
         description:
             "Demo app of Open Self Service. Build future-proof Customer Portals with composable architecture and a modern frontend tech stack. Open Self Service offers a Next.js boilerplate, an API integration & data normalization server, and capabilities to integrate headless APIs like CMS, CRM, Search or headless e-commerce. It's powered by Next.js, React.js, TypeScript, and NestJS.",
         keywords: [
             'Open Self Service',
+            'create account',
+            'registration',
+            'new account',
             'open source customer portal',
             'headless customer portal',
             'composable frontend',
-            'fullstack framework',
-            'composable architecture',
-            'MACH',
             'Next.js',
             'TypeScript',
             'NestJS',
-            'headless integration',
-            'customer portal framework',
-            'headless CMS',
-            'headless self service',
-            'CRM headless frontend',
-            'e-commerce API',
-            'self-service platform',
-            'open-source frontend',
-            'composable CX',
         ],
         image: {
             url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/o2s-social-card-1.jpg',
@@ -209,118 +321,510 @@ const CREATE_ACCOUNT_EN: CMS.Model.CreateAccountPage.CreateAccountPage = {
         noIndex: false,
         noFollow: false,
     },
-    invalidCredentials: 'Invalid credentials',
-    forgotPassword: {
-        label: 'Forgot password?',
-        link: '/en/reset-password',
-    },
-    resetPasswordMessage: {
-        title: 'If the email is linked to an account, you should receive a message with a return link.',
-        description: 'Check spam if it does not arrive.',
-    },
-    newPasswordMessage: {
-        title: 'The new password has been set. You can now sign in.',
+    labels: {
+        email: {
+            id: 'email',
+            name: 'email',
+            label: 'Email',
+            placeholder: 'frank.smith@companyname.com',
+            description: 'Email used for business purposes. This will be your account username',
+            errorMessages: [
+                {
+                    type: 'required',
+                    description: 'Email is required',
+                    id: 'required-1',
+                    name: 'Required',
+                },
+                {
+                    type: 'email',
+                    description: 'Please enter a valid email address',
+                    id: 'email-1',
+                    name: 'Email',
+                },
+                {
+                    type: 'max',
+                    description: 'Email can contain maximum 128 characters',
+                    id: 'max-1',
+                    name: 'Max',
+                },
+            ],
+        },
+        companyTaxId: {
+            id: 'company-tax-id',
+            name: 'companyTaxId',
+            label: 'Company Tax ID',
+            placeholder: '12-3456789',
+            description: 'This lets us check if the company is in our database',
+            errorMessages: [
+                {
+                    type: 'required',
+                    description: 'Company Tax ID is required',
+                    id: 'required-2',
+                    name: 'Required',
+                },
+                {
+                    type: 'matches',
+                    description: 'Tax ID must be exactly 10 characters long and contain only digits and hyphens',
+                    id: 'matches-2',
+                    name: 'Matches',
+                },
+            ],
+        },
+        optionalLabel: 'Optional',
+        requiredLabel: 'Required',
+        step1: {
+            title: 'Create an account',
+            subtitle: 'Please enter your company Tax ID, and email below to create an account.',
+            submitButton: 'Continue',
+            signIn: {
+                title: 'Already have an account?',
+                button: {
+                    label: 'Sign in',
+                    link: '/en/sign-in',
+                },
+            },
+        },
+        step2: {
+            title: 'Create an account',
+            subtitle: 'Fill in the remaining details to create your account.',
+            submitButton: 'Sign up',
+            badge: {
+                newCompany: 'Join as a new company',
+                existingCompany: 'Join "Existing Organization Name"',
+            },
+            firstName: {
+                id: 'first-name',
+                name: 'firstName',
+                label: 'First Name',
+                placeholder: 'Frank',
+                errorMessages: [
+                    {
+                        type: 'required',
+                        description: 'First name is required',
+                        id: 'required-3',
+                        name: 'Required',
+                    },
+                    {
+                        type: 'min',
+                        description: 'First name must contain at least 2 characters',
+                        id: 'min-3',
+                        name: 'Min',
+                    },
+                    {
+                        type: 'max',
+                        description: 'First name can contain maximum 64 characters',
+                        id: 'max-3',
+                        name: 'Max',
+                    },
+                ],
+            },
+            lastName: {
+                id: 'last-name',
+                name: 'lastName',
+                label: 'Last Name',
+                placeholder: 'Smith',
+                errorMessages: [
+                    {
+                        type: 'required',
+                        description: 'Last name is required',
+                        id: 'required-4',
+                        name: 'Required',
+                    },
+                    {
+                        type: 'min',
+                        description: 'Last name must contain at least 2 characters',
+                        id: 'min-4',
+                        name: 'Min',
+                    },
+                    {
+                        type: 'max',
+                        description: 'Last name can contain maximum 64 characters',
+                        id: 'max-4',
+                        name: 'Max',
+                    },
+                ],
+            },
+            companyName: {
+                id: 'company-name',
+                name: 'companyName',
+                label: 'Company Name',
+                placeholder: 'New Company Name',
+                errorMessages: [
+                    {
+                        type: 'required',
+                        description: 'Company name is required',
+                        id: 'required-5',
+                        name: 'Required',
+                    },
+                    {
+                        type: 'max',
+                        description: 'Company name can contain maximum 256 characters',
+                        id: 'max-5',
+                        name: 'Max',
+                    },
+                ],
+            },
+            clientId: {
+                id: 'client-id',
+                name: 'clientId',
+                label: 'Client ID',
+                placeholder: '1298001',
+                description:
+                    'Find the Client ID, for example, on the invoice. The phone number associeted with is: +1 ****** 1432',
+                errorMessages: [
+                    {
+                        type: 'required',
+                        description: 'Client ID is required',
+                        id: 'required-6',
+                        name: 'Required',
+                    },
+                    {
+                        type: 'max',
+                        description: 'Client ID can contain maximum 64 characters',
+                        id: 'max-6',
+                        name: 'Max',
+                    },
+                    {
+                        type: 'matches',
+                        description: 'Client ID can only contain numbers',
+                        id: 'matches-6',
+                        name: 'Matches',
+                    },
+                ],
+            },
+            phoneNumber: {
+                id: 'phone-number',
+                name: 'phoneNumber',
+                label: 'Phone Number',
+                placeholder: '+1 415-555-1234',
+                description: 'Phone used for business purposes',
+                errorMessages: [
+                    {
+                        type: 'required',
+                        description: 'Phone number is required',
+                        id: 'required-7',
+                        name: 'Required',
+                    },
+                    {
+                        type: 'matches',
+                        description: 'Phone number must contain 10-13 digits with optional + sign',
+                        id: 'matches-7',
+                        name: 'Matches',
+                    },
+                ],
+            },
+            position: {
+                id: 'position',
+                name: 'position',
+                label: 'Position',
+                placeholder: 'Select your position',
+                options: [
+                    { label: 'CEO', value: 'ceo' },
+                    { label: 'CTO', value: 'cto' },
+                    { label: 'CFO', value: 'cfo' },
+                    { label: 'Manager', value: 'manager' },
+                    { label: 'Developer', value: 'developer' },
+                    { label: 'Designer', value: 'designer' },
+                    { label: 'Accountant', value: 'accountant' },
+                    { label: 'Sales Representative', value: 'sales' },
+                    { label: 'Other', value: 'other' },
+                ],
+                errorMessages: [
+                    {
+                        type: 'required',
+                        description: 'Position is required',
+                        id: 'required-8',
+                        name: 'Required',
+                    },
+                ],
+            },
+            existingCompanyMessage: {
+                title: 'Company already exists',
+                description: 'This company is already registered. You can join the existing company instead.',
+            },
+            changeCompanyTaxIdLabel: 'Change',
+            companySectionTitle: 'Company Information',
+            userSectionTitle: 'Your Information',
+            activationContactInfo:
+                'Once created, our representative will contact you within 24 hours to assist with its activation.',
+            termsAndConditions:
+                'By creating an account, you agree to our Terms & Conditions and Privacy Policy. You can delete an account at any time.',
+        },
     },
 };
 
 const CREATE_ACCOUNT_DE: CMS.Model.CreateAccountPage.CreateAccountPage = {
-    title: 'Einloggen',
-    subtitle: 'Geben Sie Ihre E-Mail und Ihr Passwort ein, um auf Ihr Konto zuzugreifen',
-    username: {
-        id: 'username-1',
-        name: 'username',
-        label: 'Benutzername',
-        description: 'Mit Ihrer Kunden-ID verknüpft',
-        placeholder: 'Geben Sie Ihren Benutzernamen ein',
-        errorMessages: [
-            {
-                type: 'required',
-                description: 'Benutzername ist erforderlich',
-                id: 'required-1',
-                name: 'Required',
-            },
-            {
-                type: 'min',
-                description: 'Benutzername muss mindestens 5 Zeichen lang sein',
-                id: 'min-1',
-                name: 'Min',
-            },
-            {
-                type: 'matches',
-                description: 'Benutzername kann nur Buchstaben, Zahlen, Punkte, Bindestriche und @ enthalten',
-                id: 'matches-1',
-                name: 'Matches',
-            },
-        ],
-    },
-    password: {
-        id: 'password-1',
-        name: 'password',
-        label: 'Passwort',
-        placeholder: 'Geben Sie Ihr Passwort ein',
-        errorMessages: [
-            {
-                type: 'required',
-                description: 'Passwort ist erforderlich',
-                id: 'required-1',
-                name: 'Required',
-            },
-            {
-                type: 'min',
-                description: 'Passwort muss mindestens 4 Zeichen lang sein',
-                id: 'min-1',
-                name: 'Min',
-            },
-            {
-                type: 'matches',
-                description: 'Passwort muss mindestens 4 Zeichen lang sein',
-                id: 'matches-1',
-                name: 'Matches',
-            },
-        ],
-    },
-    signIn: 'Anmelden',
-    providers: {
-        title: 'ODER',
-        label: 'Anmelden mit ',
-    },
     createdAt: '2024-01-01',
     updatedAt: '2024-01-01',
     publishedAt: '2024-01-01',
-    labels: {
-        show: 'Anzeigen',
-        hide: 'Verbergen',
-    },
-    image: {
-        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
-        alt: 'Sign in image',
-        width: 640,
-        height: 656,
+    sideContent: {
+        title: 'Vorteile eines B2B-Kontos',
+        icons: [
+            {
+                name: 'KeySquare',
+                title: 'Einmalige ID',
+                description:
+                    'Einmalige ID bietet einfachen Zugang zu Websites, Shops, Apps und Services mit einem Login.',
+            },
+            {
+                name: 'Tags',
+                title: 'Personalisierte Preise',
+                description:
+                    'Zugang zu individuellen Angeboten, Mengenrabatten und Sonderaktionen, die zu Ihren Einkaufsmustern passen.',
+            },
+            {
+                name: 'PackageCheck',
+                title: 'Schnellere und einfachere Bestellung',
+                description:
+                    'Bulk-Bestellungen aufgeben, Käufe mit einem Klick wiederholen und Einkaufslisten verwalten.',
+            },
+        ],
     },
     seo: {
-        title: 'Einloggen',
-        description: 'Geben Sie Ihre E-Mail und Ihr Passwort ein, um auf Ihr Konto zuzugreifen',
-        keywords: ['einloggen', 'passwort', 'email'],
+        title: 'Konto erstellen',
+        description: 'Geben Sie Ihre Daten ein, um ein neues Konto zu erstellen',
+        keywords: ['konto erstellen', 'registrierung', 'neues konto'],
         image: {
             url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
-            alt: 'Sign in image',
+            alt: 'Konto erstellen Bild',
             width: 640,
             height: 656,
         },
         noIndex: false,
         noFollow: false,
     },
-    invalidCredentials: 'Ungültige Anmeldeinformationen',
-    forgotPassword: {
-        label: 'Passwort vergessen?',
-        link: '/de/passwort-zuruecksetzen',
-    },
-    resetPasswordMessage: {
-        title: 'Wenn die E-Mail mit einem Konto verknüpft ist, erhalten Sie eine Nachricht mit einem Rücksetzlink.',
-        description: 'Überprüfen Sie den Spam-Ordner, falls die Nachricht nicht ankommt.',
-    },
-    newPasswordMessage: {
-        title: 'Das neue Passwort wurde festgelegt. Sie können sich jetzt anmelden.',
+    labels: {
+        email: {
+            id: 'email',
+            name: 'email',
+            label: 'E-Mail',
+            placeholder: 'frank.mueller@firmenname.de',
+            description: 'E-Mail für geschäftliche Zwecke. Dies wird Ihr Benutzername sein',
+            errorMessages: [
+                {
+                    type: 'required',
+                    description: 'E-Mail ist erforderlich',
+                    id: 'required-1',
+                    name: 'Required',
+                },
+                {
+                    type: 'email',
+                    description: 'Bitte geben Sie eine gültige E-Mail-Adresse ein',
+                    id: 'email-1',
+                    name: 'Email',
+                },
+                {
+                    type: 'max',
+                    description: 'E-Mail kann maximal 128 Zeichen enthalten',
+                    id: 'max-1',
+                    name: 'Max',
+                },
+            ],
+        },
+        companyTaxId: {
+            id: 'company-tax-id',
+            name: 'companyTaxId',
+            label: 'Steuer-ID des Unternehmens',
+            placeholder: '12-3456789',
+            description: 'Dies ermöglicht uns zu prüfen, ob das Unternehmen in unserer Datenbank ist',
+            errorMessages: [
+                {
+                    type: 'required',
+                    description: 'Steuer-ID des Unternehmens ist erforderlich',
+                    id: 'required-2',
+                    name: 'Required',
+                },
+                {
+                    type: 'matches',
+                    description:
+                        'Steuer-ID muss genau 10 Zeichen lang sein und darf nur Ziffern und Bindestriche enthalten',
+                    id: 'matches-2',
+                    name: 'Matches',
+                },
+            ],
+        },
+        optionalLabel: 'Optional',
+        requiredLabel: 'Erforderlich',
+        step1: {
+            title: 'Konto erstellen',
+            subtitle:
+                'Geben Sie die Steuer-ID Ihres Unternehmens und Ihre E-Mail unten ein, um ein Konto zu erstellen.',
+            submitButton: 'Weiter',
+            signIn: {
+                title: 'Haben Sie bereits ein Konto?',
+                button: {
+                    label: 'Anmelden',
+                    link: '/de/anmelden',
+                },
+            },
+        },
+        step2: {
+            title: 'Konto erstellen',
+            subtitle: 'Füllen Sie die restlichen Details aus, um Ihr Konto zu erstellen.',
+            submitButton: 'Registrieren',
+            badge: {
+                newCompany: 'Als neues Unternehmen beitreten',
+                existingCompany: 'Bei "Bestehende Organisationsname" beitreten',
+            },
+            firstName: {
+                id: 'first-name',
+                name: 'firstName',
+                label: 'Vorname',
+                placeholder: 'Frank',
+                errorMessages: [
+                    {
+                        type: 'required',
+                        description: 'Vorname ist erforderlich',
+                        id: 'required-3',
+                        name: 'Required',
+                    },
+                    {
+                        type: 'min',
+                        description: 'Vorname muss mindestens 2 Zeichen enthalten',
+                        id: 'min-3',
+                        name: 'Min',
+                    },
+                    {
+                        type: 'max',
+                        description: 'Vorname kann maximal 64 Zeichen enthalten',
+                        id: 'max-3',
+                        name: 'Max',
+                    },
+                ],
+            },
+            lastName: {
+                id: 'last-name',
+                name: 'lastName',
+                label: 'Nachname',
+                placeholder: 'Müller',
+                errorMessages: [
+                    {
+                        type: 'required',
+                        description: 'Nachname ist erforderlich',
+                        id: 'required-4',
+                        name: 'Required',
+                    },
+                    {
+                        type: 'min',
+                        description: 'Nachname muss mindestens 2 Zeichen enthalten',
+                        id: 'min-4',
+                        name: 'Min',
+                    },
+                    {
+                        type: 'max',
+                        description: 'Nachname kann maximal 64 Zeichen enthalten',
+                        id: 'max-4',
+                        name: 'Max',
+                    },
+                ],
+            },
+            companyName: {
+                id: 'company-name',
+                name: 'companyName',
+                label: 'Firmenname',
+                placeholder: 'Neuer Firmenname',
+                errorMessages: [
+                    {
+                        type: 'required',
+                        description: 'Firmenname ist erforderlich',
+                        id: 'required-5',
+                        name: 'Required',
+                    },
+                    {
+                        type: 'max',
+                        description: 'Firmenname kann maximal 256 Zeichen enthalten',
+                        id: 'max-5',
+                        name: 'Max',
+                    },
+                ],
+            },
+            clientId: {
+                id: 'client-id',
+                name: 'clientId',
+                label: 'Kunden-ID',
+                placeholder: '1298001',
+                description:
+                    'Finden Sie die Kunden-ID, z.B. auf der Rechnung. Die zugehörige Telefonnummer: +49 ****** 1432',
+                errorMessages: [
+                    {
+                        type: 'required',
+                        description: 'Kunden-ID ist erforderlich',
+                        id: 'required-6',
+                        name: 'Required',
+                    },
+                    {
+                        type: 'max',
+                        description: 'Kunden-ID kann maximal 64 Zeichen enthalten',
+                        id: 'max-6',
+                        name: 'Max',
+                    },
+                    {
+                        type: 'matches',
+                        description: 'Kunden-ID kann nur Zahlen enthalten',
+                        id: 'matches-6',
+                        name: 'Matches',
+                    },
+                ],
+            },
+            phoneNumber: {
+                id: 'phone-number',
+                name: 'phoneNumber',
+                label: 'Telefonnummer',
+                placeholder: '+49 30-1234567',
+                description: 'Telefon für geschäftliche Zwecke',
+                errorMessages: [
+                    {
+                        type: 'required',
+                        description: 'Telefonnummer ist erforderlich',
+                        id: 'required-7',
+                        name: 'Required',
+                    },
+                    {
+                        type: 'matches',
+                        description: 'Telefonnummer muss 10-13 Ziffern mit optionalem + Zeichen enthalten',
+                        id: 'matches-7',
+                        name: 'Matches',
+                    },
+                ],
+            },
+            position: {
+                id: 'position',
+                name: 'position',
+                label: 'Position',
+                placeholder: 'Wählen Sie Ihre Position',
+                options: [
+                    { label: 'Geschäftsführer', value: 'ceo' },
+                    { label: 'Technischer Direktor', value: 'cto' },
+                    { label: 'Finanzdirektor', value: 'cfo' },
+                    { label: 'Manager', value: 'manager' },
+                    { label: 'Entwickler', value: 'developer' },
+                    { label: 'Designer', value: 'designer' },
+                    { label: 'Buchhalter', value: 'accountant' },
+                    { label: 'Vertriebsmitarbeiter', value: 'sales' },
+                    { label: 'Andere', value: 'other' },
+                ],
+                errorMessages: [
+                    {
+                        type: 'required',
+                        description: 'Position ist erforderlich',
+                        id: 'required-8',
+                        name: 'Required',
+                    },
+                ],
+            },
+            existingCompanyMessage: {
+                title: 'Unternehmen existiert bereits',
+                description:
+                    'Dieses Unternehmen ist bereits registriert. Sie können stattdessen dem bestehenden Unternehmen beitreten.',
+            },
+            changeCompanyTaxIdLabel: 'Ändern',
+            companySectionTitle: 'Unternehmensinformationen',
+            userSectionTitle: 'Ihre Informationen',
+            activationContactInfo:
+                'Nach der Erstellung wird sich unser Vertreter innerhalb von 24 Stunden mit Ihnen in Verbindung setzen, um bei der Aktivierung zu helfen.',
+            termsAndConditions:
+                'Durch die Erstellung eines Kontos stimmen Sie unseren Geschäftsbedingungen und Datenschutzrichtlinien zu. Sie können ein Konto jederzeit löschen.',
+        },
     },
 };
 

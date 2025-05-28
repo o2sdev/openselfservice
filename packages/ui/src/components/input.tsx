@@ -66,11 +66,29 @@ export type InputWithLabelProps = Readonly<
         labelAdornment?: React.ReactNode;
         labelClassName?: string;
         children?: React.ReactNode;
+        isRequired?: boolean;
+        requiredLabel: string;
+        optionalLabel: string;
     }
 >;
 
 const InputWithLabel = React.forwardRef<HTMLInputElement, InputWithLabelProps>(
-    ({ label, labelAdornment, className, labelClassName, id, children, hasError, ...props }, ref) => {
+    (
+        {
+            label,
+            labelAdornment,
+            className,
+            labelClassName,
+            id,
+            children,
+            hasError,
+            isRequired = false,
+            requiredLabel,
+            optionalLabel,
+            ...props
+        },
+        ref,
+    ) => {
         const generatedId = React.useId();
         const inputId = id || generatedId;
 
@@ -78,7 +96,8 @@ const InputWithLabel = React.forwardRef<HTMLInputElement, InputWithLabelProps>(
             <div className="grid gap-2">
                 <div className="flex items-center justify-between gap-2">
                     <Label htmlFor={inputId} className={cn(labelClassName, hasError && 'text-destructive')}>
-                        {label}
+                        <span className="pr-2">{label}</span>
+                        <span className="font-normal text-sm">({isRequired ? requiredLabel : optionalLabel})</span>
                     </Label>
                     {labelAdornment}
                 </div>

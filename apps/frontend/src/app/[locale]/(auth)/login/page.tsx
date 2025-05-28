@@ -132,6 +132,8 @@ export default async function LoginPage({ params, searchParams }: Readonly<Props
                                         title: data.newPasswordMessage?.title || '',
                                         description: data.newPasswordMessage?.description || '',
                                     },
+                                    requiredLabel: data.labels?.requiredLabel,
+                                    optionalLabel: data.labels?.optionalLabel,
                                 }}
                                 onSignIn={handleSignIn}
                                 params={{

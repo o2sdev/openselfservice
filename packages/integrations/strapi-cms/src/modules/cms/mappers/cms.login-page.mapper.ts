@@ -1,5 +1,6 @@
 import { CMS } from '@o2s/framework/modules';
 
+import { mapMedia } from './cms.media.mapper';
 import { GetLoginPageQuery } from '@/generated/strapi';
 
 export const mapLoginPage = (data: GetLoginPageQuery, baseURL?: string): CMS.Model.LoginPage.LoginPage => {
@@ -46,27 +47,17 @@ export const mapLoginPage = (data: GetLoginPageQuery, baseURL?: string): CMS.Mod
                 type: errorMessage.type,
             })),
         },
-        labels: labels.actions,
-        image: loginPage.image
-            ? {
-                  url: `${baseURL}${loginPage.image.url}`,
-                  alt: loginPage.image.alternativeText || '',
-                  width: loginPage.image.width,
-                  height: loginPage.image.height,
-              }
-            : undefined,
+        labels: {
+            ...labels.actions,
+            requiredLabel: 'requiredLabel',
+            optionalLabel: 'optionalLabel',
+        },
+        image: mapMedia(loginPage.image, baseURL),
         seo: {
             title: loginPage.SEO.title,
             description: loginPage.SEO.description,
             keywords: loginPage.SEO.keywords?.map((keyword) => keyword.keyword) || [],
-            image: loginPage.SEO.image
-                ? {
-                      url: `${baseURL}${loginPage.SEO.image.url}`,
-                      alt: loginPage.SEO.image.alternativeText || '',
-                      width: loginPage.SEO.image.width,
-                      height: loginPage.SEO.image.height,
-                  }
-                : undefined,
+            image: mapMedia(loginPage.SEO.image, baseURL),
             noIndex: loginPage.SEO.noIndex,
             noFollow: loginPage.SEO.noFollow,
         },

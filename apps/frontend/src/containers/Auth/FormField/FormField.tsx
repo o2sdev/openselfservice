@@ -20,6 +20,9 @@ export const FormField: React.FC<Readonly<FormFieldProps>> = ({
     adornmentProps,
     description,
     validations,
+    isRequired = false,
+    requiredLabel,
+    optionalLabel,
 }) => {
     const hasError = !!(touched[name] && errors[name]);
 
@@ -42,6 +45,9 @@ export const FormField: React.FC<Readonly<FormFieldProps>> = ({
                 description={description}
                 hasError={hasError}
                 errorMessage={errors[name]}
+                isRequired={isRequired}
+                requiredLabel={requiredLabel}
+                optionalLabel={optionalLabel}
             />
 
             {validations && (

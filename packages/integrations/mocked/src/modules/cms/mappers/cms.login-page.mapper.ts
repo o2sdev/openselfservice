@@ -68,6 +68,8 @@ const LOGIN_PAGE_PL: CMS.Model.LoginPage.LoginPage = {
     labels: {
         show: 'Pokaż',
         hide: 'Ukryj',
+        requiredLabel: 'Wymagane',
+        optionalLabel: 'Opcjonalne',
     },
     image: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
@@ -171,6 +173,8 @@ const LOGIN_PAGE_EN: CMS.Model.LoginPage.LoginPage = {
     labels: {
         show: 'Show',
         hide: 'Hide',
+        requiredLabel: 'Required',
+        optionalLabel: 'Optional',
     },
     image: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
@@ -295,6 +299,8 @@ const LOGIN_PAGE_DE: CMS.Model.LoginPage.LoginPage = {
     labels: {
         show: 'Anzeigen',
         hide: 'Verbergen',
+        requiredLabel: 'Erforderlich',
+        optionalLabel: 'Optional',
     },
     image: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',

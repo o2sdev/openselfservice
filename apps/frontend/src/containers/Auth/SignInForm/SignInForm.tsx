@@ -103,6 +103,9 @@ export const SignInForm: React.FC<Readonly<SignInFormProps>> = ({ providers, lab
                                                 label={labels.username.label}
                                                 placeholder={labels.username.placeholder}
                                                 disabled={isPending}
+                                                requiredLabel={labels.requiredLabel}
+                                                optionalLabel={labels.optionalLabel}
+                                                isRequired={true}
                                             />
                                         )}
                                     </Field>
@@ -126,6 +129,9 @@ export const SignInForm: React.FC<Readonly<SignInFormProps>> = ({ providers, lab
                                                         </NextLink>
                                                     </Link>
                                                 }
+                                                requiredLabel={labels.requiredLabel}
+                                                optionalLabel={labels.optionalLabel}
+                                                isRequired={true}
                                             />
                                         )}
                                     </Field>

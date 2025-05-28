@@ -103,37 +103,60 @@ interface RadioGroupWithDetailsProps extends Readonly<React.ComponentPropsWithou
     errorMessage?: string;
     label?: string;
     labelClassName?: string;
+    isRequired?: boolean;
+    requiredLabel: string;
+    optionalLabel: string;
 }
 
 const RadioGroupWithDetails = React.forwardRef<
     React.ElementRef<typeof RadioGroupPrimitive.Root>,
     Readonly<RadioGroupWithDetailsProps>
->(({ className, hasError, description, errorMessage, label, labelClassName, children, ...props }, ref) => {
-    const contextValue = React.useMemo(() => ({ hasError }), [hasError]);
+>(
+    (
+        {
+            className,
+            hasError,
+            description,
+            errorMessage,
+            label,
+            labelClassName,
+            children,
+            isRequired,
+            requiredLabel,
+            optionalLabel,
+            ...props
+        },
+        ref,
+    ) => {
+        const contextValue = React.useMemo(() => ({ hasError }), [hasError]);
 
-    return (
-        <RadioGroupContext.Provider value={contextValue}>
-            <div className="flex flex-col gap-2">
-                {label && (
-                    <Label
-                        className={cn(
-                            'text-sm font-medium leading-none',
-                            labelClassName,
-                            hasError && 'text-destructive',
-                        )}
-                    >
-                        {label}
-                    </Label>
-                )}
-                <RadioGroup className={className} {...props} ref={ref}>
-                    {children}
-                </RadioGroup>
-                {description && <div className="text-sm text-muted-foreground">{description}</div>}
-                {hasError && errorMessage && <div className="text-sm text-destructive font-medium">{errorMessage}</div>}
-            </div>
-        </RadioGroupContext.Provider>
-    );
-});
+        return (
+            <RadioGroupContext.Provider value={contextValue}>
+                <div className="flex flex-col gap-2">
+                    {label && (
+                        <Label
+                            className={cn(
+                                'text-sm font-medium leading-none',
+                                labelClassName,
+                                hasError && 'text-destructive',
+                            )}
+                        >
+                            <span className="pr-2">{label}</span>
+                            <span className="font-normal text-sm">({isRequired ? requiredLabel : optionalLabel})</span>
+                        </Label>
+                    )}
+                    <RadioGroup className={className} {...props} ref={ref}>
+                        {children}
+                    </RadioGroup>
+                    {description && <div className="text-sm text-muted-foreground">{description}</div>}
+                    {hasError && errorMessage && (
+                        <div className="text-sm text-destructive font-medium">{errorMessage}</div>
+                    )}
+                </div>
+            </RadioGroupContext.Provider>
+        );
+    },
+);
 RadioGroupWithDetails.displayName = 'RadioGroupWithDetails';
 
 export {

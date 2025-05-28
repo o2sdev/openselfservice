@@ -18,6 +18,8 @@ export class LoginPage {
     labels!: {
         show: string;
         hide: string;
+        requiredLabel: string;
+        optionalLabel: string;
     };
     image?: Media.Media;
     seo!: Models.SEO.Page;

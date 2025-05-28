@@ -78,6 +78,9 @@ export const ResetPasswordForm: React.FC<Readonly<ResetPasswordFormProps>> = ({ 
                                                 label={labels.username.label}
                                                 placeholder={labels.username.placeholder}
                                                 disabled={isPending}
+                                                requiredLabel={labels.requiredLabel}
+                                                optionalLabel={labels.optionalLabel}
+                                                isRequired={true}
                                             />
                                         )}
                                     </Field>

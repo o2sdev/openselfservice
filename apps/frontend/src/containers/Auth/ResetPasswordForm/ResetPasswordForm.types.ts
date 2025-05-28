@@ -16,6 +16,8 @@ export interface ResetPasswordFormProps {
             errorMessages?: Models.FormField.ErrorMessage[];
         };
         invalidCredentials: string;
+        optionalLabel: string;
+        requiredLabel: string;
     };
     onResetPassword: (credentials: FormValues) => Promise<void>;
 }

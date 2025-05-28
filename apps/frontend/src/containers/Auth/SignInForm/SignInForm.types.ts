@@ -43,6 +43,8 @@ export interface SignInFormProps {
             title?: string;
             description?: string;
         };
+        optionalLabel: string;
+        requiredLabel: string;
     };
     onSignIn: (providerId: string, credentials?: FormValues) => Promise<AuthError | void>;
     params: {

@@ -96,6 +96,8 @@ const CREATE_NEW_PASSWORD_PAGE_PL: CMS.Model.CreateNewPasswordPage.CreateNewPass
     labels: {
         show: 'Pokaż',
         hide: 'Ukryj',
+        requiredLabel: 'Wymagane',
+        optionalLabel: 'Opcjonalne',
     },
     image: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
@@ -215,6 +217,8 @@ const CREATE_NEW_PASSWORD_PAGE_EN: CMS.Model.CreateNewPasswordPage.CreateNewPass
     labels: {
         show: 'Show',
         hide: 'Hide',
+        requiredLabel: 'Required',
+        optionalLabel: 'Optional',
     },
     image: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
@@ -355,6 +359,8 @@ const CREATE_NEW_PASSWORD_PAGE_DE: CMS.Model.CreateNewPasswordPage.CreateNewPass
     labels: {
         show: 'Anzeigen',
         hide: 'Verbergen',
+        requiredLabel: 'Erforderlich',
+        optionalLabel: 'Optional',
     },
     image: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',

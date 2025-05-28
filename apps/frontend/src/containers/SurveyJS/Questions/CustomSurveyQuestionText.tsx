@@ -41,6 +41,9 @@ interface CustomSurveyQuestionTextProps {
         errors?: Array<unknown>;
         inputType?: string;
         readOnly: boolean;
+        requiredLabel: string;
+        optionalLabel: string;
+        isRequired: boolean;
     };
 }
 
@@ -114,6 +117,9 @@ const CustomSurveyQuestionText: React.FC<CustomSurveyQuestionTextProps> = (props
             aria-invalid={!!question.errors?.length}
             className={cn(question.errors?.length && 'border-destructive', 'font-regular')}
             label={question.title}
+            requiredLabel={question.requiredLabel}
+            optionalLabel={question.optionalLabel}
+            isRequired={question.isRequired}
         />
     );
 };
