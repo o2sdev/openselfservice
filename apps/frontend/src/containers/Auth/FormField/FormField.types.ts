@@ -18,6 +18,10 @@ export interface FormFieldProps {
         behavior: 'append' | 'prepend';
     };
     validations?: InputValidationsRegExpLabel[];
+    isRequired?: boolean;
+    requiredLabel: string;
+    optionalLabel: string;
+    readOnly?: boolean;
 }
 
 export interface PasswordFormFieldProps extends Omit<FormFieldProps, 'type' | 'adornment' | 'adornmentProps'> {

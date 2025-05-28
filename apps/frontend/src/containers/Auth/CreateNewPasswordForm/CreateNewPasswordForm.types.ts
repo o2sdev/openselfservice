@@ -23,6 +23,8 @@ export interface CreateNewPasswordFormProps {
         password: CreateNewPasswordInputLabels;
         confirmPassword: CreateNewPasswordInputLabels;
         creatingPasswordError: string;
+        optionalLabel: string;
+        requiredLabel: string;
     };
     onCreateNewPassword: (credentials: FormValues) => Promise<void>;
 }

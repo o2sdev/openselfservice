@@ -32,7 +32,7 @@ interface Props {
         slug: string[];
         callbackUrl: string;
     }>;
-    searchParams: Promise<{ resetPassword: string; newPassword: string }>;
+    searchParams: Promise<{ resetPassword: string; newPassword: string; createAccount: string }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -64,7 +64,7 @@ export default async function LoginPage({ params, searchParams }: Readonly<Props
     const headersList = await headers();
     const session = await auth();
     const { locale, callbackUrl } = await params;
-    const { resetPassword, newPassword } = await searchParams;
+    const { resetPassword, newPassword, createAccount } = await searchParams;
 
     try {
         const init = await sdk.modules.getInit(
@@ -132,11 +132,18 @@ export default async function LoginPage({ params, searchParams }: Readonly<Props
                                         title: data.newPasswordMessage?.title || '',
                                         description: data.newPasswordMessage?.description || '',
                                     },
+                                    createAccountMessage: {
+                                        title: data.createAccountMessage?.title || '',
+                                        description: data.createAccountMessage?.description || '',
+                                    },
+                                    requiredLabel: data.labels?.requiredLabel,
+                                    optionalLabel: data.labels?.optionalLabel,
                                 }}
                                 onSignIn={handleSignIn}
                                 params={{
                                     resetPassword: resetPassword === 'true',
                                     newPassword: newPassword === 'true',
+                                    createAccount: createAccount === 'true',
                                 }}
                             />
                             {data.image?.url && (

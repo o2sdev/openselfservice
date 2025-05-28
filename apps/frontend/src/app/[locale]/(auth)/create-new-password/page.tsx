@@ -120,6 +120,8 @@ export default async function CreateNewPasswordPage({ params }: Readonly<Props>)
                                         errorMessages: data.confirmPassword?.errorMessages,
                                     },
                                     creatingPasswordError: data.creatingPasswordError,
+                                    requiredLabel: data.labels?.requiredLabel,
+                                    optionalLabel: data.labels?.optionalLabel,
                                 }}
                                 onCreateNewPassword={handleSetNewPassword}
                             />

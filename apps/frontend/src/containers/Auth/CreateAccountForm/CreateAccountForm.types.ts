@@ -1,53 +1,74 @@
 import { Modules } from '@o2s/api-harmonization';
-import { Providers } from 'src/auth.providers';
 
 import { Models } from '@o2s/framework/modules';
 
-export interface FormValues {
+export interface FormValuesStep1 {
     username: string;
-    password: string;
+    taxId: string;
+}
+
+export interface FormValues extends FormValuesStep1 {
+    companyName: string;
+    clientId: string;
+    firstName: string;
+    lastName: string;
+    phone: string;
+    position: string;
+}
+
+interface InputLabels {
+    label: string;
+    placeholder?: string;
+    errorMessages?: Models.FormField.ErrorMessage[];
+    description?: string;
+}
+
+interface SelectLabels {
+    label: string;
+    placeholder?: string;
+    options: { label: string; value: string }[];
+    errorMessages?: Models.FormField.ErrorMessage[];
+    description?: string;
+}
+
+interface StepLabels {
+    title: string;
+    subtitle?: string;
+    submitButton: string;
 }
 
 export interface CreateAccountFormProps {
-    providers: Providers;
     labels: {
-        title: string;
-        subtitle?: string;
-        username: {
-            label: string;
-            placeholder?: string;
-            errorMessages?: Models.FormField.ErrorMessage[];
+        username: InputLabels;
+        taxId: InputLabels;
+        optionalLabel: string;
+        requiredLabel: string;
+        step1: StepLabels & {
+            signIn: {
+                title: string;
+                button: {
+                    label: string;
+                    link: string;
+                };
+            };
+            invalidCredentials: string;
         };
-        password: {
-            label: string;
-            placeholder?: string;
-            hide: string;
-            show: string;
-            errorMessages?: Models.FormField.ErrorMessage[];
-        };
-        signIn: string;
-        providers?: {
-            title: string;
-            label: string;
-        };
-        invalidCredentials: string;
-        forgotPassword?: {
-            label: string;
-            link: string;
-        };
-        resetPasswordMessage?: {
-            title?: string;
-            description?: string;
-        };
-        newPasswordMessage?: {
-            title?: string;
-            description?: string;
+        step2: StepLabels & {
+            badge: string;
+            firstName: InputLabels;
+            lastName: InputLabels;
+            companyName: InputLabels;
+            clientId: InputLabels;
+            phone: InputLabels;
+            position: SelectLabels;
+            changeCompanyTaxIdLabel: string;
+            companySectionTitle: string;
+            userSectionTitle: string;
+            activationContactInfo: string;
+            termsAndConditions: string;
+            creatingAccountProblem: string;
         };
     };
-    onCheckMembership: (
-        providerId: string,
-        credentials?: FormValues,
-    ) => Promise<Modules.Organizations.Model.OrganizationMembership>;
-    onRegisterUser: (providerId: string, credentials?: FormValues) => Promise<Modules.Users.Model.RegisterUser>;
-    resetPassword?: string;
+    onCheckMembership: (credentials?: FormValuesStep1) => Promise<Modules.Organizations.Model.OrganizationMembership>;
+    onRegisterUser: (credentials?: FormValues) => Promise<Modules.Users.Model.RegisterUser>;
 }

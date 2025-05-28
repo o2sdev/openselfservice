@@ -3,9 +3,9 @@ import { setRequestLocale } from 'next-intl/server';
 import { headers } from 'next/headers';
 import { notFound } from 'next/navigation';
 import React from 'react';
-import { providerMap } from 'src/auth.providers';
 
 import { Toaster } from '@o2s/ui/components/toaster';
+import { Typography } from '@o2s/ui/components/typography';
 
 import { sdk } from '@/api/sdk';
 
@@ -13,17 +13,18 @@ import { generateSeo } from '@/utils/seo';
 
 import { auth } from '@/auth';
 
-import { routing } from '@/i18n/routing';
+import { redirect, routing } from '@/i18n/routing';
 
 import { GlobalProvider } from '@/providers/GlobalProvider';
 
 import { AuthLayout } from '@/containers/Auth/AuthLayout/AuthLayout';
-import { CreateAccountForm } from '@/containers/Auth/CreateAccountForm';
+import { CreateAccountForm, FormValues } from '@/containers/Auth/CreateAccountForm';
+import { FormValuesStep1 } from '@/containers/Auth/CreateAccountForm/CreateAccountForm.types';
 import { Footer } from '@/containers/Footer/Footer';
 import { Header } from '@/containers/Header/Header';
 
 import { AppSpinner } from '@/components/AppSpinner/AppSpinner';
-import { Image } from '@/components/Image/Image';
+import { IconsList } from '@/components/IconsList/IconsList';
 
 interface Props {
     params: Promise<{
@@ -59,11 +60,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     });
 }
 
-export default async function CreateAccountPage({ params, searchParams }: Readonly<Props>) {
+export default async function CreateAccountPage({ params }: Readonly<Props>) {
     const headersList = await headers();
     const session = await auth();
-    const { locale, callbackUrl } = await params;
-    const { resetPassword, newPassword } = await searchParams;
+    const { locale } = await params;
 
     try {
         const init = await sdk.modules.getInit(
@@ -80,16 +80,50 @@ export default async function CreateAccountPage({ params, searchParams }: Readon
             notFound();
         }
 
-        const handleCheckMembership = async (data: any) => {
+        const handleCheckMembership = async (credentials?: FormValuesStep1) => {
             'use server';
 
-            return await sdk.modules.checkMembership(data, { 'x-locale': locale }, session?.accessToken);
+            if (!credentials) {
+                throw new Error('No credentials provided');
+            }
+
+            const response = await sdk.modules.checkMembership(
+                credentials,
+                { 'x-locale': locale },
+                session?.accessToken,
+            );
+
+            return response;
         };
 
-        const hadleRegisterUser = async (data: any) => {
+        const hadleRegisterUser = async (credentials?: FormValues) => {
             'use server';
 
-            return await sdk.modules.registerUser(data, { 'x-locale': locale }, session?.accessToken);
+            if (!credentials) {
+                throw new Error('No credentials provided');
+            }
+
+            const mappedData = {
+                ...credentials,
+                email: credentials.username,
+                companyTaxId: credentials.taxId,
+            };
+
+            const response = await sdk.modules.registerUser(mappedData, { 'x-locale': locale }, session?.accessToken);
+
+            if (response) {
+                redirect({
+                    locale,
+                    href: {
+                        pathname: '/login',
+                        query: {
+                            createAccount: true,
+                        },
+                    },
+                });
+            }
+
+            return response;
         };
 
         return (
@@ -97,41 +131,16 @@ export default async function CreateAccountPage({ params, searchParams }: Readon
                 <div className="flex flex-col min-h-dvh">
                     <Header data={init.common.header} />
                     <div className="flex flex-col grow">
-                        <AuthLayout>
+                        <AuthLayout sideVisibleOnMobile={true} sideClassName="px-16 py-20 bg-muted">
                             <CreateAccountForm
-                                providers={providerMap}
-                                labels={{
-                                    title: data.title,
-                                    subtitle: data.subtitle,
-                                    password: {
-                                        label: data.password.label,
-                                        placeholder: data.password.placeholder,
-                                        hide: data.labels?.hide,
-                                        show: data.labels?.show,
-                                        errorMessages: data.password?.errorMessages,
-                                    },
-                                    username: {
-                                        label: data.username.label,
-                                        placeholder: data.username.placeholder,
-                                        errorMessages: data.username?.errorMessages,
-                                    },
-                                    signIn: data.signIn,
-                                    providers: data.providers,
-                                    invalidCredentials: data.invalidCredentials,
-                                    forgotPassword: data.forgotPassword,
-
-                                    resetPasswordMessage: resetPassword ? data.resetPasswordMessage : undefined,
-                                    newPasswordMessage: newPassword ? data.newPasswordMessage : undefined,
-                                }}
+                                labels={data.labels}
                                 onCheckMembership={handleCheckMembership}
                                 onRegisterUser={hadleRegisterUser}
                             />
-                            {data.image?.url && (
-                                <Image
-                                    src={data.image?.url}
-                                    alt={data.image?.alt}
-                                    fill={true}
-                                    className="object-cover"
+                            {data.sideContent && data.sideContent.icons && (
+                                <IconsList
+                                    header={<Typography variant="highlightedBig">{data.sideContent.title}</Typography>}
+                                    icons={data.sideContent.icons}
                                 />
                             )}
                         </AuthLayout>

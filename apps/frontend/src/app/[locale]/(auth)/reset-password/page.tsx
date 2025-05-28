@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
-import { isRedirectError } from 'next/dist/client/components/redirect-error';
 import { headers } from 'next/headers';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
@@ -110,6 +109,8 @@ export default async function ResetPasswordPage({ params }: Readonly<Props>) {
                                     },
                                     resetPassword: data.resetPassword,
                                     invalidCredentials: data.invalidCredentials,
+                                    requiredLabel: data.labels?.requiredLabel,
+                                    optionalLabel: data.labels?.optionalLabel,
                                 }}
                                 onResetPassword={handleResetPassword}
                             />

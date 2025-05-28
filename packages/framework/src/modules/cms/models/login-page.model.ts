@@ -18,6 +18,8 @@ export class LoginPage {
     labels!: {
         show: string;
         hide: string;
+        requiredLabel: string;
+        optionalLabel: string;
     };
     image?: Media.Media;
     seo!: Models.SEO.Page;
@@ -31,6 +33,10 @@ export class LoginPage {
         description?: string;
     };
     newPasswordMessage!: {
+        title: string;
+        description?: string;
+    };
+    createAccountMessage!: {
         title: string;
         description?: string;
     };

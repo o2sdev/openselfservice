@@ -43,10 +43,17 @@ export interface SignInFormProps {
             title?: string;
             description?: string;
         };
+        createAccountMessage: {
+            title?: string;
+            description?: string;
+        };
+        optionalLabel: string;
+        requiredLabel: string;
     };
     onSignIn: (providerId: string, credentials?: FormValues) => Promise<AuthError | void>;
     params: {
         resetPassword: boolean;
         newPassword: boolean;
+        createAccount: boolean;
     };
 }

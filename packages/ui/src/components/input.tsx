@@ -11,6 +11,7 @@ type AdornmentComponent = React.ReactNode;
 export type InputProps<T extends AdornmentComponent = AdornmentComponent> = Readonly<
     React.InputHTMLAttributes<HTMLInputElement> & {
         hasError?: boolean;
+        readOnly?: boolean;
     } & (
             | {
                   adornment?: T;
@@ -21,7 +22,7 @@ export type InputProps<T extends AdornmentComponent = AdornmentComponent> = Read
 >;
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-    ({ className, type, adornment, adornmentProps, hasError, ...props }, ref) => {
+    ({ className, type, adornment, adornmentProps, hasError, readOnly = false, ...props }, ref) => {
         return (
             <div className={cn('relative')}>
                 {adornment && adornmentProps?.behavior === 'prepend' && (
@@ -40,9 +41,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                         adornmentProps?.behavior === 'prepend' && 'pl-12',
                         adornmentProps?.behavior === 'append' && 'pr-12',
                         hasError && 'border-destructive focus-visible:ring-destructive',
+                        readOnly && 'cursor-not-allowed text-muted-foreground',
                         className,
                     )}
                     ref={ref}
+                    readOnly={readOnly}
                     {...props}
                 />
                 {adornment && adornmentProps?.behavior === 'append' && (
@@ -66,11 +69,29 @@ export type InputWithLabelProps = Readonly<
         labelAdornment?: React.ReactNode;
         labelClassName?: string;
         children?: React.ReactNode;
+        isRequired?: boolean;
+        requiredLabel: string;
+        optionalLabel: string;
     }
 >;
 
 const InputWithLabel = React.forwardRef<HTMLInputElement, InputWithLabelProps>(
-    ({ label, labelAdornment, className, labelClassName, id, children, hasError, ...props }, ref) => {
+    (
+        {
+            label,
+            labelAdornment,
+            className,
+            labelClassName,
+            id,
+            children,
+            hasError,
+            isRequired = false,
+            requiredLabel,
+            optionalLabel,
+            ...props
+        },
+        ref,
+    ) => {
         const generatedId = React.useId();
         const inputId = id || generatedId;
 
@@ -78,7 +99,10 @@ const InputWithLabel = React.forwardRef<HTMLInputElement, InputWithLabelProps>(
             <div className="grid gap-2">
                 <div className="flex items-center justify-between gap-2">
                     <Label htmlFor={inputId} className={cn(labelClassName, hasError && 'text-destructive')}>
-                        {label}
+                        <span className="pr-2">{label}</span>
+                        {!props.readOnly && (
+                            <span className="font-normal text-sm">({isRequired ? requiredLabel : optionalLabel})</span>
+                        )}
                     </Label>
                     {labelAdornment}
                 </div>

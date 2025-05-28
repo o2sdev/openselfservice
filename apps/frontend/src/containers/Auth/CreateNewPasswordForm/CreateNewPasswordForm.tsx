@@ -87,6 +87,9 @@ export const CreateNewPasswordForm: React.FC<Readonly<CreateNewPasswordFormProps
                                                 hideLabel={labels.password.hide}
                                                 validations={labels.password.regexValidations}
                                                 description={labels.password.description}
+                                                requiredLabel={labels.requiredLabel}
+                                                optionalLabel={labels.optionalLabel}
+                                                isRequired={true}
                                             />
                                         )}
                                     </Field>
@@ -102,6 +105,9 @@ export const CreateNewPasswordForm: React.FC<Readonly<CreateNewPasswordFormProps
                                                 disabled={isPending}
                                                 showLabel={labels.confirmPassword.show}
                                                 hideLabel={labels.confirmPassword.hide}
+                                                requiredLabel={labels.requiredLabel}
+                                                optionalLabel={labels.optionalLabel}
+                                                isRequired={true}
                                             />
                                         )}
                                     </Field>

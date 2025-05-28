@@ -68,6 +68,8 @@ const LOGIN_PAGE_PL: CMS.Model.LoginPage.LoginPage = {
     labels: {
         show: 'Pokaż',
         hide: 'Ukryj',
+        requiredLabel: 'Wymagane',
+        optionalLabel: 'Opcjonalne',
     },
     image: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
@@ -100,6 +102,9 @@ const LOGIN_PAGE_PL: CMS.Model.LoginPage.LoginPage = {
     newPasswordMessage: {
         title: 'Nowe hasło zostało ustawione.',
         description: 'Możesz się teraz zalogować.',
+    },
+    createAccountMessage: {
+        title: 'Konto użytkownika zostało utworzone, ale wymaga aktywacji. Administrator musi aktywować Twoje konto.',
     },
 };
 
@@ -171,6 +176,8 @@ const LOGIN_PAGE_EN: CMS.Model.LoginPage.LoginPage = {
     labels: {
         show: 'Show',
         hide: 'Hide',
+        requiredLabel: 'Required',
+        optionalLabel: 'Optional',
     },
     image: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
@@ -224,6 +231,9 @@ const LOGIN_PAGE_EN: CMS.Model.LoginPage.LoginPage = {
     newPasswordMessage: {
         title: 'The new password has been set.',
         description: 'You can now sign in.',
+    },
+    createAccountMessage: {
+        title: 'The user account has been created but needs activation. Your administrator must activate your account.',
     },
 };
 
@@ -295,6 +305,8 @@ const LOGIN_PAGE_DE: CMS.Model.LoginPage.LoginPage = {
     labels: {
         show: 'Anzeigen',
         hide: 'Verbergen',
+        requiredLabel: 'Erforderlich',
+        optionalLabel: 'Optional',
     },
     image: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
@@ -327,6 +339,9 @@ const LOGIN_PAGE_DE: CMS.Model.LoginPage.LoginPage = {
     newPasswordMessage: {
         title: 'Das neue Passwort wurde festgelegt.',
         description: 'Sie können sich jetzt anmelden.',
+    },
+    createAccountMessage: {
+        title: 'Das Benutzerkonto wurde erstellt, muss aber aktiviert werden. Ihr Administrator muss Ihr Konto aktivieren.',
     },
 };
 

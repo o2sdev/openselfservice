@@ -37,6 +37,8 @@ const RESET_PASSWORD_PAGE_PL: CMS.Model.ResetPasswordPage.ResetPasswordPage = {
     labels: {
         show: 'Pokaż',
         hide: 'Ukryj',
+        requiredLabel: 'Wymagane',
+        optionalLabel: 'Opcjonalne',
     },
     image: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
@@ -97,6 +99,8 @@ const RESET_PASSWORD_PAGE_EN: CMS.Model.ResetPasswordPage.ResetPasswordPage = {
     labels: {
         show: 'Show',
         hide: 'Hide',
+        requiredLabel: 'Required',
+        optionalLabel: 'Optional',
     },
     image: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
@@ -157,6 +161,8 @@ const RESET_PASSWORD_PAGE_DE: CMS.Model.ResetPasswordPage.ResetPasswordPage = {
     labels: {
         show: 'Anzeigen',
         hide: 'Verbergen',
+        requiredLabel: 'Erforderlich',
+        optionalLabel: 'Optional',
     },
     image: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',

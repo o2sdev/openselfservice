@@ -66,6 +66,13 @@ export const SignInForm: React.FC<Readonly<SignInFormProps>> = ({ providers, lab
                             variant="positive"
                         />
                     )}
+                    {params.createAccount && (
+                        <Banner
+                            title={labels.createAccountMessage.title}
+                            description={labels.createAccountMessage.description}
+                            variant="positive"
+                        />
+                    )}
 
                     {error && <Banner description={labels.invalidCredentials} variant="destructive" />}
                     <div className="flex flex-col gap-2 items-center text-center">
@@ -103,6 +110,9 @@ export const SignInForm: React.FC<Readonly<SignInFormProps>> = ({ providers, lab
                                                 label={labels.username.label}
                                                 placeholder={labels.username.placeholder}
                                                 disabled={isPending}
+                                                requiredLabel={labels.requiredLabel}
+                                                optionalLabel={labels.optionalLabel}
+                                                isRequired={true}
                                             />
                                         )}
                                     </Field>
@@ -126,6 +136,9 @@ export const SignInForm: React.FC<Readonly<SignInFormProps>> = ({ providers, lab
                                                         </NextLink>
                                                     </Link>
                                                 }
+                                                requiredLabel={labels.requiredLabel}
+                                                optionalLabel={labels.optionalLabel}
+                                                isRequired={true}
                                             />
                                         )}
                                     </Field>

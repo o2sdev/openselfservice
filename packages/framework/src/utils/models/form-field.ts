@@ -8,6 +8,10 @@ export class FormField {
     regexValidations?: RegexValidation[];
 }
 
+export class SelectFormField extends FormField {
+    options: { label: string; value: string }[] = [];
+}
+
 export class ErrorMessage {
     id!: string;
     name!: string;

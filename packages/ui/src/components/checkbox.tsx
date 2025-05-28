@@ -34,10 +34,27 @@ interface CheckboxWithLabelProps extends Readonly<CheckboxProps> {
     label: string | React.ReactNode;
     labelClassName?: string;
     children?: React.ReactNode;
+    isRequired?: boolean;
+    requiredLabel: string;
+    optionalLabel: string;
 }
 
 const CheckboxWithLabel = React.forwardRef<React.ElementRef<typeof CheckboxPrimitive.Root>, CheckboxWithLabelProps>(
-    ({ className, label, labelClassName, id, children, hasError, ...props }, ref) => {
+    (
+        {
+            className,
+            label,
+            labelClassName,
+            id,
+            children,
+            hasError,
+            isRequired,
+            requiredLabel,
+            optionalLabel,
+            ...props
+        },
+        ref,
+    ) => {
         const generatedId = React.useId();
         const checkboxId = id || generatedId;
 
@@ -49,7 +66,8 @@ const CheckboxWithLabel = React.forwardRef<React.ElementRef<typeof CheckboxPrimi
                         htmlFor={checkboxId}
                         className={cn('mt-[1px]', labelClassName, hasError && 'text-destructive')}
                     >
-                        {label}
+                        <span className="pr-2">{label}</span>
+                        <span className="font-normal text-sm">({isRequired ? requiredLabel : optionalLabel})</span>
                     </Label>
                     {children}
                 </div>

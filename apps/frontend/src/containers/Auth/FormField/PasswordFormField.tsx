@@ -17,6 +17,9 @@ export const PasswordFormField: React.FC<Readonly<PasswordFormFieldProps>> = ({
     description,
     labelAdornment,
     validations,
+    requiredLabel,
+    optionalLabel,
+    isRequired,
 }) => {
     const [passwordVisible, setPasswordVisible] = useState(false);
 
@@ -40,6 +43,9 @@ export const PasswordFormField: React.FC<Readonly<PasswordFormFieldProps>> = ({
             description={description}
             labelAdornment={labelAdornment}
             validations={validations}
+            requiredLabel={requiredLabel}
+            optionalLabel={optionalLabel}
+            isRequired={isRequired}
         />
     );
 };
