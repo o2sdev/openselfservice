@@ -1,5 +1,17 @@
 # @o2s/ui
 
+## 1.1.0
+
+### Minor Changes
+
+- f015c2b: New block ArticleSearch - Input field with suggestions to find appropriate article.
+
+    - added new UI component - Command,
+    - added new articles mock,
+    - added mock for ArticleSearchBlock,
+    - added strapi integration for ArticleSearchBlock,
+    - added new component Autocomplete,
+
 ## 1.0.0
 
 ### Major Changes
