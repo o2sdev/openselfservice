@@ -1,60 +1,59 @@
-fragment Article on ComponentComponentsArticle {
-    id
-    __typename
-    author {
-        name
-        position
-        avatar {
-            ...Media
-        }
+fragment ArticleSimple on Article {
+    documentId
+    slug
+    protected
+    locale
+    createdAt
+    updatedAt
+    publishedAt
+    documentId
+    SEO {
+        ...Seo
     }
-    category {
-        documentId
+    parent {
         slug
-        name
-    }
-    sections {
-        id
-        __typename
-        title
-        content
-    }
-}
-
-fragment ArticleSimple on ComponentComponentsArticle {
-    id
-    __typename
-    author {
-        name
-        position
-        avatar {
-            ...Media
+        SEO {
+            title
         }
-    }
-    category {
-        documentId
-        slug
-        name
-    }
-}
-
-fragment ArticleTemplate on Page {
-    ...Page
-    article: template {
-        __typename
-        ... on ComponentTemplatesOneColumn {
-            mainSlot {
-                __typename
-                ... on Component {
-                    __typename
-                    content {
-                        __typename
-                        ... on ComponentComponentsArticle {
-                            ...ArticleSimple
-                        }
-                    }
+        parent {
+            slug
+            SEO {
+                title
+            }
+            parent {
+                slug
+                SEO {
+                    title
                 }
             }
+        }
+    }
+    content {
+        id
+        __typename
+        author {
+            name
+            position
+            avatar {
+                ...Media
+            }
+        }
+        category {
+            documentId
+            slug
+            name
+        }
+    }
+}
+
+fragment Article on Article {
+    ...ArticleSimple
+    content {
+        sections {
+            id
+            __typename
+            title
+            content
         }
     }
 }
