@@ -9,6 +9,7 @@ const config = {
     importOrder: [
         '@o2s/framework',
         '@o2s/framework/sdk',
+        '@o2s/auth',
         '@o2s/ui',
         '@o2s/frontend',
         '@/api',

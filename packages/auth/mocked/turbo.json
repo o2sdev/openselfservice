@@ -1,0 +1,13 @@
+{
+    "extends": [
+        "//"
+    ],
+    "tasks": {
+        "start": {
+            "env": [
+                "NODE_ENV",
+                "AUTH_DATABASE_URL"
+            ]
+        }
+    }
+}

@@ -1,5 +1,3 @@
-import { DefaultSession } from 'next-auth';
-
 export * from 'next/cache';
 declare module 'next/cache' {
     /**
@@ -16,40 +14,4 @@ declare module 'next/cache' {
      * If this entry has no traffic for 5 seconds it will expire. The next request will recompute it.
      */
     export function unstable_cacheLife(profile: 'render'): void;
-}
-
-export * from 'next-auth';
-declare module 'next-auth' {
-    interface Session extends DefaultSession {
-        accessToken: string;
-        user?: {
-            role?: string;
-            customer?: {
-                id: string;
-                roles: string[];
-                name: string;
-            };
-        } & DefaultSession['user'];
-    }
-
-    interface User {
-        role?: string;
-        password?: string | null;
-        defaultCustomerId?: string;
-        accessToken?: string;
-    }
-}
-
-export * from 'next-auth/jwt';
-declare module 'next-auth/jwt' {
-    interface JWT {
-        accessToken: string;
-        accessTokenExpires: number;
-        role?: string;
-        customer?: {
-            id: string;
-            roles: string[];
-            name: string;
-        };
-    }
 }

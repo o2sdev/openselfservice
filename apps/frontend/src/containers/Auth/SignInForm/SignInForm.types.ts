@@ -1,7 +1,8 @@
 import { AuthError } from 'next-auth';
-import { Providers } from 'src/auth.providers';
 
 import { Models } from '@o2s/framework/modules';
+
+import { Providers } from '@/auth/auth.providers';
 
 export interface FormValues {
     username: string;

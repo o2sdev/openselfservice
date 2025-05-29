@@ -7,6 +7,9 @@ import { Label } from '@o2s/ui/components/label';
 import { RadioGroup, RadioGroupItem } from '@o2s/ui/components/radio-group';
 import { SheetDescription, SheetFooter, SheetHeader, SheetTitle } from '@o2s/ui/components/sheet';
 import { Typography } from '@o2s/ui/components/typography';
+import { toast } from '@o2s/ui/hooks/use-toast';
+
+import { updateOrganization } from '@/auth';
 
 import { useGlobalContext } from '@/providers/GlobalProvider';
 
@@ -15,7 +18,7 @@ import { ContentProps, ContextSwitcherFormValues } from './Content.types';
 export const Content = ({ data }: ContentProps) => {
     const session = useSession();
 
-    const { spinner } = useGlobalContext();
+    const { spinner, labels } = useGlobalContext();
 
     const initialValues = {
         customer: session.data?.user?.customer?.id,
@@ -26,17 +29,26 @@ export const Content = ({ data }: ContentProps) => {
     });
 
     const onSubmit = async (values: ContextSwitcherFormValues) => {
-        const customer = data.items.find((item) => item.id === values.customer);
-        if (!customer) {
-            return;
-        }
-
         spinner.toggle(true);
-        await session.update({
-            customer,
-        });
 
-        window.location.reload();
+        try {
+            const customer = data.items.find((item) => item.id === values.customer);
+            if (!customer) {
+                throw new Error('No customer found');
+            }
+
+            await updateOrganization(session, customer);
+        } catch (error) {
+            console.error('Failed to update organization:', error);
+
+            toast({
+                variant: 'destructive',
+                title: labels.errors.requestError.title,
+                description: labels.errors.requestError.content,
+            });
+        } finally {
+            spinner.toggle(false);
+        }
     };
 
     return (

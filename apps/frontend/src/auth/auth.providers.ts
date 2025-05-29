@@ -1,11 +1,9 @@
-import { compare } from 'bcryptjs';
-import { User } from 'next-auth';
 import { Provider } from 'next-auth/providers';
 import Credentials from 'next-auth/providers/credentials';
 import GitHub from 'next-auth/providers/github';
-import { ZodError, object, string } from 'zod';
+import { object, string } from 'zod';
 
-import { prisma } from './lib/prisma';
+import { credentialsCallback } from './auth.config';
 
 export const providers: Provider[] = [
     Credentials({
@@ -14,30 +12,7 @@ export const providers: Provider[] = [
             password: { label: 'Password', placeholder: 'admin', type: 'password' },
         },
         authorize: async (credentials) => {
-            try {
-                const { username, password } = await signInSchema.parseAsync(credentials);
-
-                const user = await prisma.user.findUnique({
-                    where: { email: username },
-                });
-                if (!user || !user.password) {
-                    throw new Error('Invalid credentials');
-                }
-
-                const isValidPassword = await compare(password, user.password);
-
-                if (!isValidPassword) {
-                    throw new Error('Invalid credentials');
-                }
-
-                return user as User;
-            } catch (error) {
-                if (error instanceof ZodError) {
-                    throw new Error('Validation error');
-                } else {
-                    throw new Error('Authentication error');
-                }
-            }
+            return await credentialsCallback(credentials);
         },
     }),
     GitHub({
