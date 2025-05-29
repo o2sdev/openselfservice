@@ -1,12 +1,13 @@
 import type { AdapterSession } from '@auth/core/adapters';
 import type { Account, DefaultSession, Profile } from '@auth/core/types';
-import * as Auth from '@o2s/auth.mocked';
 import { Session, User } from 'next-auth';
 import { AdapterUser } from 'next-auth/adapters';
 import { JWT } from 'next-auth/jwt';
 import { useSession } from 'next-auth/react';
 
 import { Models } from '@o2s/framework/modules';
+
+import * as Auth from '@o2s/auth.mocked';
 
 import { sdk } from '@/api/sdk';
 
