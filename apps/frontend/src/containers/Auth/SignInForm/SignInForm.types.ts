@@ -1,5 +1,5 @@
 import { AuthError } from 'next-auth';
-import { Providers } from 'src/auth.providers';
+import { Providers } from 'src/auth/auth.providers';
 
 import { Models } from '@o2s/framework/modules';
 

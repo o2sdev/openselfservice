@@ -1,13 +1,11 @@
-import { PrismaAdapter } from '@auth/prisma-adapter';
 import NextAuth, { NextAuthResult } from 'next-auth';
 
-import { mockJwtCallback } from './auth.mock';
+import { Adapter, jwtCallback, sessionCallback } from './auth.config';
 import { providers } from './auth.providers';
-import { prisma } from './lib/prisma';
 
 export const nextAuthResult = NextAuth({
     debug: true,
-    adapter: PrismaAdapter(prisma),
+    adapter: Adapter,
     providers: providers,
     session: {
         strategy: 'jwt',
@@ -15,16 +13,10 @@ export const nextAuthResult = NextAuth({
     },
     callbacks: {
         jwt: async (params) => {
-            return mockJwtCallback(params);
+            return jwtCallback(params);
         },
-        session: async ({ session, token }) => {
-            if (session.user) {
-                session.user.role = token?.role;
-                session.user.id = token?.id as string;
-                session.user.customer = token?.customer;
-                session.accessToken = token.accessToken;
-            }
-            return session;
+        session: async (params) => {
+            return sessionCallback(params);
         },
     },
     pages: {

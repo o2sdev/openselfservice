@@ -3,6 +3,7 @@ import { setRequestLocale } from 'next-intl/server';
 import { headers } from 'next/headers';
 import { notFound } from 'next/navigation';
 import React from 'react';
+import { auth, signIn } from 'src/auth/auth';
 
 import { Separator } from '@o2s/ui/components/separator';
 import { Toaster } from '@o2s/ui/components/toaster';
@@ -11,8 +12,6 @@ import { Typography } from '@o2s/ui/components/typography';
 import { sdk } from '@/api/sdk';
 
 import { generateSeo } from '@/utils/seo';
-
-import { auth, signIn } from '@/auth';
 
 import { GlobalProvider } from '@/providers/GlobalProvider';
 
