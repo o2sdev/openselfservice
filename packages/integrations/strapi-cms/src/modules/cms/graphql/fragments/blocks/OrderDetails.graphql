@@ -40,4 +40,7 @@ fragment OrderDetailsComponent on ComponentComponentsOrderDetails {
     customerComment {
         ...InformationCard
     }
+    actionLinks {
+        ...ActionLinks
+    }
 }

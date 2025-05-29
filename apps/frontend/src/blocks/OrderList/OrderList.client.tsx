@@ -1,22 +1,15 @@
 'use client';
 
 import { Blocks } from '@o2s/api-harmonization';
-import { ArrowRight, IterationCw, MoreVertical } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React, { useState, useTransition } from 'react';
 
 import { Badge } from '@o2s/ui/components/badge';
 import { Button } from '@o2s/ui/components/button';
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from '@o2s/ui/components/dropdown-menu';
 import { LoadingOverlay } from '@o2s/ui/components/loading-overlay';
 import { Separator } from '@o2s/ui/components/separator';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@o2s/ui/components/table';
-import { Typography } from '@o2s/ui/components/typography';
 
 import { sdk } from '@/api/sdk';
 
@@ -24,6 +17,7 @@ import { orderBadgeVariants } from '@/utils/mappings/order-badge';
 
 import { Link as NextLink } from '@/i18n';
 
+import { ActionLinks } from '@/components/ActionLinks/ActionLinks';
 import { FiltersSection } from '@/components/Filters/FiltersSection';
 import { NoResults } from '@/components/NoResults/NoResults';
 import { Pagination } from '@/components/Pagination/Pagination';
@@ -180,29 +174,14 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
                                                                     {data.table.actions.label}
                                                                 </NextLink>
                                                             </Button>
-                                                            <DropdownMenu>
-                                                                <DropdownMenuTrigger asChild>
-                                                                    <Button
-                                                                        variant="ghost"
-                                                                        size="icon"
-                                                                        aria-label={data.labels.showMore}
-                                                                    >
-                                                                        <MoreVertical className="h-4 w-4" />
-                                                                    </Button>
-                                                                </DropdownMenuTrigger>
-                                                                <DropdownMenuContent align="end" className="min-w-70">
-                                                                    <DropdownMenuItem asChild disabled>
-                                                                        <Typography
-                                                                            variant="small"
-                                                                            className="text-muted-foreground"
-                                                                        >
-                                                                            <IterationCw className="h-4 w-4" />
-                                                                            {data.labels.reorder} -{' '}
-                                                                            {t('general.comingSoon')}
-                                                                        </Typography>
-                                                                    </DropdownMenuItem>
-                                                                </DropdownMenuContent>
-                                                            </DropdownMenu>
+                                                            {order.actionLinks && (
+                                                                <ActionLinks
+                                                                    actionLinks={order.actionLinks}
+                                                                    showMoreLabel={data.labels.showMore}
+                                                                    hideAll={true}
+                                                                    triggerVariant="ghost"
+                                                                />
+                                                            )}
                                                         </div>
                                                     </TableCell>
                                                 )}

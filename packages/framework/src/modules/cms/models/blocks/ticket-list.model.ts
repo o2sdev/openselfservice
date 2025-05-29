@@ -1,13 +1,6 @@
 import { Ticket } from '@/modules/tickets/tickets.model';
 import { Block, DataTable, Filters, Mapping, Pagination } from '@/utils/models';
-
-export type ActionLink = {
-    id: string;
-    label: string;
-    visible?: boolean;
-    icon?: string;
-    slug: string;
-};
+import { ActionLink } from '@/utils/models/action-link';
 
 export class TicketListBlock extends Block.Block {
     title?: string;

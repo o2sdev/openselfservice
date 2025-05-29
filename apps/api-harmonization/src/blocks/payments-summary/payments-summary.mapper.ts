@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import format from 'string-template';
 
 import { Models } from '@o2s/framework/modules';
 
@@ -41,7 +42,9 @@ export const mapPaymentsSummary = (
             title: cms.overdue.title,
             link: cms.overdue.link,
             description: isOverdue
-                ? cms.overdue?.message?.replace(/{days}/g, overdueDays.toString()) || ''
+                ? format(cms.overdue?.message || '', {
+                      days: overdueDays,
+                  })
                 : cms.overdue?.altMessage || '',
             value: { value: checkNegativeValue({ value: overdueAmount, currency }).value, currency },
             isOverdue: isOverdue,

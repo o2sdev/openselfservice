@@ -1,0 +1,9 @@
+fragment ActionLinks on ComponentContentActionLinks {
+    label
+    icon
+    url
+    page {
+        slug
+    }
+    inProgress
+}

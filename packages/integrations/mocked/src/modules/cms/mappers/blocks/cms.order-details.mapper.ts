@@ -57,9 +57,7 @@ const MOCK_ORDER_DETAILS_BLOCK_EN: CMS.Model.OrderDetailsBlock.OrderDetailsBlock
     labels: {
         today: 'Today',
         yesterday: 'Yesterday',
-        reorder: 'Reorder',
-        trackOrder: 'Track order',
-        payOnline: 'Pay online',
+        showMore: 'Show more',
         close: 'Close',
     },
     productsTitle: 'Product list',
@@ -116,6 +114,26 @@ const MOCK_ORDER_DETAILS_BLOCK_EN: CMS.Model.OrderDetailsBlock.OrderDetailsBlock
         ],
     },
     statusLadder: ['Created', 'Confirmed', 'Completed'],
+    actionLinks: [
+        {
+            label: 'Pay online',
+            url: '/',
+            icon: 'Truck',
+            inProgress: true,
+        },
+        {
+            label: 'Reorder',
+            url: '/',
+            icon: 'IterationCw',
+            inProgress: true,
+        },
+        {
+            label: 'Track order',
+            url: '/',
+            icon: 'ArrowUpRight',
+            inProgress: true,
+        },
+    ],
     noResults: {
         title: "So far, there's nothing here",
         description: '',
@@ -179,9 +197,7 @@ const MOCK_ORDER_DETAILS_BLOCK_DE: CMS.Model.OrderDetailsBlock.OrderDetailsBlock
     labels: {
         today: 'Heute',
         yesterday: 'Gestern',
-        reorder: 'Erneut bestellen',
-        trackOrder: 'Bestellung verfolgen',
-        payOnline: 'Online bezahlen',
+        showMore: 'Mehr anzeigen',
         close: 'Schließen',
     },
     productsTitle: 'Produktliste',
@@ -238,6 +254,26 @@ const MOCK_ORDER_DETAILS_BLOCK_DE: CMS.Model.OrderDetailsBlock.OrderDetailsBlock
         selectPage: 'Seite auswählen',
     },
     statusLadder: ['Erstellt', 'Bestätigt', 'Abgeschlossen'],
+    actionLinks: [
+        {
+            label: 'Online bezahlen',
+            url: '/',
+            icon: 'Truck',
+            inProgress: true,
+        },
+        {
+            label: 'Erneut bestellen',
+            url: '/',
+            icon: 'IterationCw',
+            inProgress: true,
+        },
+        {
+            label: 'Bestellung verfolgen',
+            url: '/',
+            icon: 'ArrowUpRight',
+            inProgress: true,
+        },
+    ],
     noResults: {
         title: 'Bis jetzt ist hier nichts',
         description: '',
@@ -302,9 +338,7 @@ const MOCK_ORDER_DETAILS_BLOCK_PL: CMS.Model.OrderDetailsBlock.OrderDetailsBlock
     labels: {
         today: 'Dzisiaj',
         yesterday: 'Wczoraj',
-        reorder: 'Zamów ponownie',
-        trackOrder: 'Śledź zamówienie',
-        payOnline: 'Płatność online',
+        showMore: 'Więcej',
         close: 'Zamknij',
     },
     productsTitle: 'Lista produktów',
@@ -361,6 +395,26 @@ const MOCK_ORDER_DETAILS_BLOCK_PL: CMS.Model.OrderDetailsBlock.OrderDetailsBlock
         selectPage: 'Wybierz stronę',
     },
     statusLadder: ['Utworzono', 'Zatwierdzono', 'Zakończono'],
+    actionLinks: [
+        {
+            label: 'Płatność online',
+            url: '/',
+            icon: 'Truck',
+            inProgress: true,
+        },
+        {
+            label: 'Zamów ponownie',
+            url: '/',
+            icon: 'IterationCw',
+            inProgress: true,
+        },
+        {
+            label: 'Śledź zamówienie',
+            url: '/',
+            icon: 'ArrowUpRight',
+            inProgress: true,
+        },
+    ],
     noResults: {
         title: 'Dotąd nic tu nie ma',
         description: '',

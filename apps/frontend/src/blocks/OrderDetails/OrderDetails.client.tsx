@@ -1,8 +1,6 @@
 'use client';
 
 import { Blocks } from '@o2s/api-harmonization';
-import { ArrowUpRight, IterationCw, Truck } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import React, { useState, useTransition } from 'react';
 
@@ -26,6 +24,7 @@ import { statusMap } from '@/utils/mappings/status-order';
 
 import { Link as NextLink } from '@/i18n';
 
+import { ActionLinks } from '@/components/ActionLinks/ActionLinks';
 import { InfoCard } from '@/components/Cards/InfoCard/InfoCard';
 import { DynamicIcon } from '@/components/DynamicIcon/DynamicIcon';
 import { FiltersSection } from '@/components/Filters/FiltersSection';
@@ -33,7 +32,6 @@ import { NoResults } from '@/components/NoResults/NoResults';
 import { Pagination } from '@/components/Pagination/Pagination';
 import { Price } from '@/components/Price/Price';
 import { RichText } from '@/components/RichText/RichText';
-import { TooltipHover } from '@/components/TooltipHover/TooltipHover';
 
 import { OrderDetailsPureProps } from './OrderDetails.types';
 
@@ -104,8 +102,6 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
     const initialData = component.productList.products.data;
     const data = component;
 
-    const t = useTranslations();
-
     const [items, setItems] =
         useState<Blocks.OrderDetails.Model.OrderDetailsBlock['productList']['products']['data']>(initialData);
     const [filters, setFilters] = useState(initialFilters);
@@ -160,34 +156,13 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
                     </div>
                     <div className="flex flex-row justify-end">
                         <div className="flex flex-col gap-4 sm:flex-row sm:items-center w-full sm:w-auto">
-                            <TooltipHover
-                                trigger={(setIsOpen) => (
-                                    <Button variant="secondary" onClick={() => setIsOpen(true)}>
-                                        <Truck className="w-4 h-4" />
-                                        {data.labels.trackOrder}
-                                    </Button>
-                                )}
-                                content={<p>{t('general.comingSoon')}</p>}
-                            />
-
-                            <TooltipHover
-                                trigger={(setIsOpen) => (
-                                    <Button variant="secondary" onClick={() => setIsOpen(true)}>
-                                        <IterationCw className="w-4 h-4" />
-                                        {data.labels.reorder}
-                                    </Button>
-                                )}
-                                content={<p>{t('general.comingSoon')}</p>}
-                            />
-                            {data.order.overdue.isOverdue && (
-                                <TooltipHover
-                                    trigger={(setIsOpen) => (
-                                        <Button variant="destructive" onClick={() => setIsOpen(true)}>
-                                            <ArrowUpRight className="w-4 h-4" />
-                                            {data.labels.payOnline}
-                                        </Button>
-                                    )}
-                                    content={<p>{t('general.comingSoon')}</p>}
+                            {data.actionLinks && (
+                                <ActionLinks
+                                    actionLinks={
+                                        data.order.overdue.isOverdue ? data.actionLinks : data.actionLinks.slice(1)
+                                    }
+                                    showMoreLabel={data.labels.showMore}
+                                    alert={data.order.overdue.isOverdue}
                                 />
                             )}
                         </div>

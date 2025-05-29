@@ -99,10 +99,17 @@ const MOCK_ORDER_LIST_BLOCK_EN: CMS.Model.OrderListBlock.OrderListBlock = {
         today: 'Today',
         yesterday: 'Yesterday',
         showMore: 'Show more',
-        reorder: 'Reorder',
         clickToSelect: 'Click to select',
     },
     detailsUrl: '/orders/{id}',
+    actionLinks: [
+        {
+            label: 'Reorder',
+            icon: 'IterationCw',
+            inProgress: true,
+            url: '/orders/{id}',
+        },
+    ],
 };
 
 const MOCK_ORDER_LIST_BLOCK_DE: CMS.Model.OrderListBlock.OrderListBlock = {
@@ -204,10 +211,17 @@ const MOCK_ORDER_LIST_BLOCK_DE: CMS.Model.OrderListBlock.OrderListBlock = {
         today: 'Heute',
         yesterday: 'Gestern',
         showMore: 'Mehr anzeigen',
-        reorder: 'Erneut bestellen',
         clickToSelect: 'Klicken Sie, um auszuwählen',
     },
     detailsUrl: '/bestellungen/{id}',
+    actionLinks: [
+        {
+            label: 'Erneut bestellen',
+            icon: 'IterationCw',
+            inProgress: true,
+            url: '/bestellungen/{id}',
+        },
+    ],
 };
 
 const MOCK_ORDER_LIST_BLOCK_PL: CMS.Model.OrderListBlock.OrderListBlock = {
@@ -309,19 +323,26 @@ const MOCK_ORDER_LIST_BLOCK_PL: CMS.Model.OrderListBlock.OrderListBlock = {
         today: 'Dzisiaj',
         yesterday: 'Wczoraj',
         showMore: 'Pokaż więcej',
-        reorder: 'Zamów ponownie',
         clickToSelect: 'Kliknij, aby wybrać',
     },
     detailsUrl: '/zamowienia/{id}',
+    actionLinks: [
+        {
+            label: 'Zamów ponownie',
+            icon: 'IterationCw',
+            inProgress: true,
+            url: '/zamowienia/{id}',
+        },
+    ],
 };
 
 export const mapOrderListBlock = (locale: string): CMS.Model.OrderListBlock.OrderListBlock => {
     switch (locale) {
         case 'de':
-            return { ...MOCK_ORDER_LIST_BLOCK_DE, detailsUrl: '/bestellungen/{id}' };
+            return { ...MOCK_ORDER_LIST_BLOCK_DE };
         case 'pl':
-            return { ...MOCK_ORDER_LIST_BLOCK_PL, detailsUrl: '/zamowienia/{id}' };
+            return { ...MOCK_ORDER_LIST_BLOCK_PL };
         default:
-            return { ...MOCK_ORDER_LIST_BLOCK_EN, detailsUrl: '/orders/{id}' };
+            return { ...MOCK_ORDER_LIST_BLOCK_EN };
     }
 };

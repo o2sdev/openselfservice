@@ -2,6 +2,7 @@ import { NotFoundException } from '@nestjs/common';
 
 import { CMS } from '@o2s/framework/modules';
 
+import { mapActionLinks } from '../cms.actionLinks.mapper';
 import { mapFields } from '../cms.fieldMapping.mapper';
 import { mapFilters } from '../cms.filters.mapper';
 import { mapPagination } from '../cms.pagination.mapper';
@@ -43,22 +44,4 @@ export const mapTicketListBlock = (data: GetComponentQuery): CMS.Model.TicketLis
     }
 
     throw new NotFoundException();
-};
-
-const mapActionLinks = (
-    actionLinks: ComponentContentActionLinks[] | undefined,
-): CMS.Model.TicketListBlock.ActionLink[] | undefined => {
-    if (!actionLinks) {
-        return undefined;
-    }
-
-    return actionLinks
-        .filter((actionLink) => actionLink.page?.slug)
-        .map((actionLink) => ({
-            id: actionLink.id,
-            label: actionLink.label,
-            visible: actionLink.visible ?? false,
-            slug: actionLink.page?.slug as string,
-            icon: actionLink.icon,
-        }));
 };

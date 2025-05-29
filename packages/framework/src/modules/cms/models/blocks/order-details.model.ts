@@ -1,6 +1,6 @@
 import { Order, OrderItem } from '@/modules/orders/orders.model';
 import { Product } from '@/modules/products/products.model';
-import { Block, DataTable, Filters, Mapping, Pagination } from '@/utils/models';
+import { ActionLink, Block, DataTable, Filters, Mapping, Pagination } from '@/utils/models';
 import { InfoCard } from '@/utils/models';
 
 export class OrderDetailsBlock extends Block.Block {
@@ -18,9 +18,7 @@ export class OrderDetailsBlock extends Block.Block {
     labels!: {
         today: string;
         yesterday: string;
-        reorder: string;
-        trackOrder: string;
-        payOnline: string;
+        showMore: string;
         close: string;
     };
     totalValue!: InfoCard.InfoCard;
@@ -29,4 +27,5 @@ export class OrderDetailsBlock extends Block.Block {
     overdue!: InfoCard.InfoCard;
     orderStatus!: InfoCard.InfoCard;
     customerComment!: InfoCard.InfoCard;
+    actionLinks?: ActionLink.ActionLink[];
 }

@@ -57,6 +57,68 @@ export type AppConfigRelationResponseCollection = {
     nodes: Array<AppConfig>;
 };
 
+export type Article = {
+    SEO: ComponentSeoSeo;
+    content: ComponentComponentsArticle;
+    createdAt?: Maybe<Scalars['DateTime']['output']>;
+    documentId: Scalars['ID']['output'];
+    locale?: Maybe<Scalars['String']['output']>;
+    localizations: Array<Maybe<Article>>;
+    localizations_connection?: Maybe<ArticleRelationResponseCollection>;
+    parent?: Maybe<Page>;
+    protected?: Maybe<Scalars['Boolean']['output']>;
+    publishedAt?: Maybe<Scalars['DateTime']['output']>;
+    slug: Scalars['String']['output'];
+    updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ArticleLocalizationsArgs = {
+    filters?: InputMaybe<ArticleFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ArticleLocalizations_ConnectionArgs = {
+    filters?: InputMaybe<ArticleFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ArticleEntityResponseCollection = {
+    nodes: Array<Article>;
+    pageInfo: Pagination;
+};
+
+export type ArticleFiltersInput = {
+    SEO?: InputMaybe<ComponentSeoSeoFiltersInput>;
+    and?: InputMaybe<Array<InputMaybe<ArticleFiltersInput>>>;
+    content?: InputMaybe<ComponentComponentsArticleFiltersInput>;
+    createdAt?: InputMaybe<DateTimeFilterInput>;
+    documentId?: InputMaybe<IdFilterInput>;
+    locale?: InputMaybe<StringFilterInput>;
+    localizations?: InputMaybe<ArticleFiltersInput>;
+    not?: InputMaybe<ArticleFiltersInput>;
+    or?: InputMaybe<Array<InputMaybe<ArticleFiltersInput>>>;
+    parent?: InputMaybe<PageFiltersInput>;
+    protected?: InputMaybe<BooleanFilterInput>;
+    publishedAt?: InputMaybe<DateTimeFilterInput>;
+    slug?: InputMaybe<StringFilterInput>;
+    updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type ArticleInput = {
+    SEO?: InputMaybe<ComponentSeoSeoInput>;
+    content?: InputMaybe<ComponentComponentsArticleInput>;
+    parent?: InputMaybe<Scalars['ID']['input']>;
+    protected?: InputMaybe<Scalars['Boolean']['input']>;
+    publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+    slug?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ArticleRelationResponseCollection = {
+    nodes: Array<Article>;
+};
+
 export type Author = {
     avatar: Array<Maybe<UploadFile>>;
     avatar_connection?: Maybe<UploadFileRelationResponseCollection>;
@@ -161,8 +223,6 @@ export type Category = {
     localizations: Array<Maybe<Category>>;
     localizations_connection?: Maybe<CategoryRelationResponseCollection>;
     name: Scalars['String']['output'];
-    pages: Array<Maybe<Page>>;
-    pages_connection?: Maybe<PageRelationResponseCollection>;
     parent?: Maybe<Page>;
     publishedAt?: Maybe<Scalars['DateTime']['output']>;
     slug: Scalars['String']['output'];
@@ -193,18 +253,6 @@ export type CategoryLocalizations_ConnectionArgs = {
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-export type CategoryPagesArgs = {
-    filters?: InputMaybe<PageFiltersInput>;
-    pagination?: InputMaybe<PaginationArg>;
-    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-export type CategoryPages_ConnectionArgs = {
-    filters?: InputMaybe<PageFiltersInput>;
-    pagination?: InputMaybe<PaginationArg>;
-    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export type CategoryEntityResponseCollection = {
     nodes: Array<Category>;
     pageInfo: Pagination;
@@ -222,7 +270,6 @@ export type CategoryFiltersInput = {
     name?: InputMaybe<StringFilterInput>;
     not?: InputMaybe<CategoryFiltersInput>;
     or?: InputMaybe<Array<InputMaybe<CategoryFiltersInput>>>;
-    pages?: InputMaybe<PageFiltersInput>;
     parent?: InputMaybe<PageFiltersInput>;
     publishedAt?: InputMaybe<DateTimeFilterInput>;
     slug?: InputMaybe<StringFilterInput>;
@@ -234,7 +281,6 @@ export type CategoryInput = {
     description?: InputMaybe<Scalars['String']['input']>;
     icon?: InputMaybe<Scalars['String']['input']>;
     name?: InputMaybe<Scalars['String']['input']>;
-    pages?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
     parent?: InputMaybe<Scalars['ID']['input']>;
     publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
     slug?: InputMaybe<Scalars['String']['input']>;
@@ -273,7 +319,6 @@ export type ComponentComponentsArticle = {
     category?: Maybe<Category>;
     id: Scalars['ID']['output'];
     name: Scalars['String']['output'];
-    protected?: Maybe<Scalars['Boolean']['output']>;
     sections: Array<Maybe<ComponentContentArticleSection>>;
 };
 
@@ -281,6 +326,24 @@ export type ComponentComponentsArticleSectionsArgs = {
     filters?: InputMaybe<ComponentContentArticleSectionFiltersInput>;
     pagination?: InputMaybe<PaginationArg>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ComponentComponentsArticleFiltersInput = {
+    and?: InputMaybe<Array<InputMaybe<ComponentComponentsArticleFiltersInput>>>;
+    author?: InputMaybe<AuthorFiltersInput>;
+    category?: InputMaybe<CategoryFiltersInput>;
+    name?: InputMaybe<StringFilterInput>;
+    not?: InputMaybe<ComponentComponentsArticleFiltersInput>;
+    or?: InputMaybe<Array<InputMaybe<ComponentComponentsArticleFiltersInput>>>;
+    sections?: InputMaybe<ComponentContentArticleSectionFiltersInput>;
+};
+
+export type ComponentComponentsArticleInput = {
+    author?: InputMaybe<Scalars['ID']['input']>;
+    category?: InputMaybe<Scalars['ID']['input']>;
+    id?: InputMaybe<Scalars['ID']['input']>;
+    name?: InputMaybe<Scalars['String']['input']>;
+    sections?: InputMaybe<Array<InputMaybe<ComponentContentArticleSectionInput>>>;
 };
 
 export type ComponentComponentsArticleList = {
@@ -410,6 +473,7 @@ export type ComponentComponentsNotificationListFieldsArgs = {
 };
 
 export type ComponentComponentsOrderDetails = {
+    actionLinks?: Maybe<Array<Maybe<ComponentContentActionLinks>>>;
     createdOrderAt: ComponentContentInformationCard;
     customerComment: ComponentContentInformationCard;
     fields: Array<Maybe<ComponentContentFieldMapping>>;
@@ -427,6 +491,12 @@ export type ComponentComponentsOrderDetails = {
     totalValue: ComponentContentInformationCard;
 };
 
+export type ComponentComponentsOrderDetailsActionLinksArgs = {
+    filters?: InputMaybe<ComponentContentActionLinksFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
 export type ComponentComponentsOrderDetailsFieldsArgs = {
     filters?: InputMaybe<ComponentContentFieldMappingFiltersInput>;
     pagination?: InputMaybe<PaginationArg>;
@@ -440,6 +510,7 @@ export type ComponentComponentsOrderDetailsStatusLadderArgs = {
 };
 
 export type ComponentComponentsOrderList = {
+    actionLinks?: Maybe<Array<Maybe<ComponentContentActionLinks>>>;
     detailsURL?: Maybe<Scalars['String']['output']>;
     fields: Array<Maybe<ComponentContentFieldMapping>>;
     filters?: Maybe<ComponentContentFilters>;
@@ -449,6 +520,12 @@ export type ComponentComponentsOrderList = {
     subtitle?: Maybe<Scalars['String']['output']>;
     table: ComponentContentTable;
     title?: Maybe<Scalars['String']['output']>;
+};
+
+export type ComponentComponentsOrderListActionLinksArgs = {
+    filters?: InputMaybe<ComponentContentActionLinksFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type ComponentComponentsOrderListFieldsArgs = {
@@ -623,19 +700,21 @@ export type ComponentComponentsUserAccountInputsArgs = {
 export type ComponentContentActionLinks = {
     icon?: Maybe<Scalars['String']['output']>;
     id: Scalars['ID']['output'];
+    inProgress?: Maybe<Scalars['Boolean']['output']>;
     label: Scalars['String']['output'];
     page?: Maybe<Page>;
-    visible?: Maybe<Scalars['Boolean']['output']>;
+    url?: Maybe<Scalars['String']['output']>;
 };
 
 export type ComponentContentActionLinksFiltersInput = {
     and?: InputMaybe<Array<InputMaybe<ComponentContentActionLinksFiltersInput>>>;
     icon?: InputMaybe<StringFilterInput>;
+    inProgress?: InputMaybe<BooleanFilterInput>;
     label?: InputMaybe<StringFilterInput>;
     not?: InputMaybe<ComponentContentActionLinksFiltersInput>;
     or?: InputMaybe<Array<InputMaybe<ComponentContentActionLinksFiltersInput>>>;
     page?: InputMaybe<PageFiltersInput>;
-    visible?: InputMaybe<BooleanFilterInput>;
+    url?: InputMaybe<StringFilterInput>;
 };
 
 export type ComponentContentAlertBox = {
@@ -662,6 +741,12 @@ export type ComponentContentArticleSectionFiltersInput = {
     not?: InputMaybe<ComponentContentArticleSectionFiltersInput>;
     or?: InputMaybe<Array<InputMaybe<ComponentContentArticleSectionFiltersInput>>>;
     title?: InputMaybe<StringFilterInput>;
+};
+
+export type ComponentContentArticleSectionInput = {
+    content?: InputMaybe<Scalars['String']['input']>;
+    id?: InputMaybe<Scalars['ID']['input']>;
+    title?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ComponentContentBanner = {
@@ -1468,6 +1553,7 @@ export type FooterRelationResponseCollection = {
 
 export type GenericMorph =
     | AppConfig
+    | Article
     | Author
     | Category
     | Component
@@ -1765,6 +1851,7 @@ export type LoginPageRelationResponseCollection = {
 export type Mutation = {
     /** Change user password. Confirm with the current password. */
     changePassword?: Maybe<UsersPermissionsLoginPayload>;
+    createArticle?: Maybe<Article>;
     createAuthor?: Maybe<Author>;
     createCategory?: Maybe<Category>;
     createComponent?: Maybe<Component>;
@@ -1782,6 +1869,7 @@ export type Mutation = {
     /** Create a new user */
     createUsersPermissionsUser: UsersPermissionsUserEntityResponse;
     deleteAppConfig?: Maybe<DeleteMutationResponse>;
+    deleteArticle?: Maybe<DeleteMutationResponse>;
     deleteAuthor?: Maybe<DeleteMutationResponse>;
     deleteCategory?: Maybe<DeleteMutationResponse>;
     deleteComponent?: Maybe<DeleteMutationResponse>;
@@ -1813,6 +1901,7 @@ export type Mutation = {
     /** Reset user password. Confirm with a code (resetToken from forgotPassword) */
     resetPassword?: Maybe<UsersPermissionsLoginPayload>;
     updateAppConfig?: Maybe<AppConfig>;
+    updateArticle?: Maybe<Article>;
     updateAuthor?: Maybe<Author>;
     updateCategory?: Maybe<Category>;
     updateComponent?: Maybe<Component>;
@@ -1840,6 +1929,12 @@ export type MutationChangePasswordArgs = {
     currentPassword: Scalars['String']['input'];
     password: Scalars['String']['input'];
     passwordConfirmation: Scalars['String']['input'];
+};
+
+export type MutationCreateArticleArgs = {
+    data: ArticleInput;
+    locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    status?: InputMaybe<PublicationStatus>;
 };
 
 export type MutationCreateAuthorArgs = {
@@ -1918,6 +2013,11 @@ export type MutationCreateUsersPermissionsUserArgs = {
 };
 
 export type MutationDeleteAppConfigArgs = {
+    locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+};
+
+export type MutationDeleteArticleArgs = {
+    documentId: Scalars['ID']['input'];
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
 };
 
@@ -2028,6 +2128,13 @@ export type MutationResetPasswordArgs = {
 
 export type MutationUpdateAppConfigArgs = {
     data: AppConfigInput;
+    locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type MutationUpdateArticleArgs = {
+    data: ArticleInput;
+    documentId: Scalars['ID']['input'];
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
     status?: InputMaybe<PublicationStatus>;
 };
@@ -2202,8 +2309,6 @@ export type OrganizationListRelationResponseCollection = {
 
 export type Page = {
     SEO: ComponentSeoSeo;
-    categories: Array<Maybe<Category>>;
-    categories_connection?: Maybe<CategoryRelationResponseCollection>;
     child?: Maybe<Page>;
     createdAt?: Maybe<Scalars['DateTime']['output']>;
     documentId: Scalars['ID']['output'];
@@ -2217,18 +2322,6 @@ export type Page = {
     slug: Scalars['String']['output'];
     template: Array<Maybe<PageTemplateDynamicZone>>;
     updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
-export type PageCategoriesArgs = {
-    filters?: InputMaybe<CategoryFiltersInput>;
-    pagination?: InputMaybe<PaginationArg>;
-    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-export type PageCategories_ConnectionArgs = {
-    filters?: InputMaybe<CategoryFiltersInput>;
-    pagination?: InputMaybe<PaginationArg>;
-    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type PageLocalizationsArgs = {
@@ -2251,7 +2344,6 @@ export type PageEntityResponseCollection = {
 export type PageFiltersInput = {
     SEO?: InputMaybe<ComponentSeoSeoFiltersInput>;
     and?: InputMaybe<Array<InputMaybe<PageFiltersInput>>>;
-    categories?: InputMaybe<CategoryFiltersInput>;
     child?: InputMaybe<PageFiltersInput>;
     createdAt?: InputMaybe<DateTimeFilterInput>;
     documentId?: InputMaybe<IdFilterInput>;
@@ -2269,7 +2361,6 @@ export type PageFiltersInput = {
 
 export type PageInput = {
     SEO?: InputMaybe<ComponentSeoSeoInput>;
-    categories?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
     child?: InputMaybe<Scalars['ID']['input']>;
     hasOwnTitle?: InputMaybe<Scalars['Boolean']['input']>;
     parent?: InputMaybe<Scalars['ID']['input']>;
@@ -2306,6 +2397,9 @@ export enum PublicationStatus {
 
 export type Query = {
     appConfig?: Maybe<AppConfig>;
+    article?: Maybe<Article>;
+    articles: Array<Maybe<Article>>;
+    articles_connection?: Maybe<ArticleEntityResponseCollection>;
     author?: Maybe<Author>;
     authors: Array<Maybe<Author>>;
     authors_connection?: Maybe<AuthorEntityResponseCollection>;
@@ -2363,6 +2457,28 @@ export type Query = {
 
 export type QueryAppConfigArgs = {
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type QueryArticleArgs = {
+    documentId: Scalars['ID']['input'];
+    locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type QueryArticlesArgs = {
+    filters?: InputMaybe<ArticleFiltersInput>;
+    locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type QueryArticles_ConnectionArgs = {
+    filters?: InputMaybe<ArticleFiltersInput>;
+    locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
@@ -3310,6 +3426,7 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
           })
         | (Omit<
               ComponentComponentsOrderDetails,
+              | 'actionLinks'
               | 'createdOrderAt'
               | 'customerComment'
               | 'filters'
@@ -3319,6 +3436,7 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
               | 'paymentDueDate'
               | 'totalValue'
           > & {
+              actionLinks?: Maybe<Array<Maybe<_RefType['ComponentContentActionLinks']>>>;
               createdOrderAt: _RefType['ComponentContentInformationCard'];
               customerComment: _RefType['ComponentContentInformationCard'];
               filters?: Maybe<_RefType['ComponentContentFilters']>;
@@ -3328,7 +3446,8 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
               paymentDueDate: _RefType['ComponentContentInformationCard'];
               totalValue: _RefType['ComponentContentInformationCard'];
           })
-        | (Omit<ComponentComponentsOrderList, 'filters' | 'noResults'> & {
+        | (Omit<ComponentComponentsOrderList, 'actionLinks' | 'filters' | 'noResults'> & {
+              actionLinks?: Maybe<Array<Maybe<_RefType['ComponentContentActionLinks']>>>;
               filters?: Maybe<_RefType['ComponentContentFilters']>;
               noResults: _RefType['ComponentContentBanner'];
           })
@@ -3383,6 +3502,13 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
               signedOutFooter?: Maybe<_RefType['Footer']>;
               signedOutHeader?: Maybe<_RefType['Header']>;
           })
+        | (Omit<Article, 'SEO' | 'content' | 'localizations' | 'localizations_connection' | 'parent'> & {
+              SEO: _RefType['ComponentSeoSeo'];
+              content: _RefType['ComponentComponentsArticle'];
+              localizations: Array<Maybe<_RefType['Article']>>;
+              localizations_connection?: Maybe<_RefType['ArticleRelationResponseCollection']>;
+              parent?: Maybe<_RefType['Page']>;
+          })
         | (Omit<Author, 'avatar' | 'avatar_connection' | 'localizations' | 'localizations_connection'> & {
               avatar: Array<Maybe<_RefType['UploadFile']>>;
               avatar_connection?: Maybe<_RefType['UploadFileRelationResponseCollection']>;
@@ -3391,20 +3517,12 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
           })
         | (Omit<
               Category,
-              | 'components'
-              | 'components_connection'
-              | 'localizations'
-              | 'localizations_connection'
-              | 'pages'
-              | 'pages_connection'
-              | 'parent'
+              'components' | 'components_connection' | 'localizations' | 'localizations_connection' | 'parent'
           > & {
               components: Array<Maybe<_RefType['Component']>>;
               components_connection?: Maybe<_RefType['ComponentRelationResponseCollection']>;
               localizations: Array<Maybe<_RefType['Category']>>;
               localizations_connection?: Maybe<_RefType['CategoryRelationResponseCollection']>;
-              pages: Array<Maybe<_RefType['Page']>>;
-              pages_connection?: Maybe<_RefType['PageRelationResponseCollection']>;
               parent?: Maybe<_RefType['Page']>;
           })
         | (Omit<Component, 'content' | 'localizations' | 'localizations_connection'> & {
@@ -3444,6 +3562,7 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
           })
         | (Omit<
               ComponentComponentsOrderDetails,
+              | 'actionLinks'
               | 'createdOrderAt'
               | 'customerComment'
               | 'filters'
@@ -3453,6 +3572,7 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
               | 'paymentDueDate'
               | 'totalValue'
           > & {
+              actionLinks?: Maybe<Array<Maybe<_RefType['ComponentContentActionLinks']>>>;
               createdOrderAt: _RefType['ComponentContentInformationCard'];
               customerComment: _RefType['ComponentContentInformationCard'];
               filters?: Maybe<_RefType['ComponentContentFilters']>;
@@ -3462,7 +3582,8 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
               paymentDueDate: _RefType['ComponentContentInformationCard'];
               totalValue: _RefType['ComponentContentInformationCard'];
           })
-        | (Omit<ComponentComponentsOrderList, 'filters' | 'noResults'> & {
+        | (Omit<ComponentComponentsOrderList, 'actionLinks' | 'filters' | 'noResults'> & {
+              actionLinks?: Maybe<Array<Maybe<_RefType['ComponentContentActionLinks']>>>;
               filters?: Maybe<_RefType['ComponentContentFilters']>;
               noResults: _RefType['ComponentContentBanner'];
           })
@@ -3589,20 +3710,8 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
               page?: Maybe<_RefType['Page']>;
           })
         | OrganizationList
-        | (Omit<
-              Page,
-              | 'SEO'
-              | 'categories'
-              | 'categories_connection'
-              | 'child'
-              | 'localizations'
-              | 'localizations_connection'
-              | 'parent'
-              | 'template'
-          > & {
+        | (Omit<Page, 'SEO' | 'child' | 'localizations' | 'localizations_connection' | 'parent' | 'template'> & {
               SEO: _RefType['ComponentSeoSeo'];
-              categories: Array<Maybe<_RefType['Category']>>;
-              categories_connection?: Maybe<_RefType['CategoryRelationResponseCollection']>;
               child?: Maybe<_RefType['Page']>;
               localizations: Array<Maybe<_RefType['Page']>>;
               localizations_connection?: Maybe<_RefType['PageRelationResponseCollection']>;
@@ -3676,6 +3785,23 @@ export type ResolversTypes = {
     AppConfigRelationResponseCollection: ResolverTypeWrapper<
         Omit<AppConfigRelationResponseCollection, 'nodes'> & { nodes: Array<ResolversTypes['AppConfig']> }
     >;
+    Article: ResolverTypeWrapper<
+        Omit<Article, 'SEO' | 'content' | 'localizations' | 'localizations_connection' | 'parent'> & {
+            SEO: ResolversTypes['ComponentSeoSeo'];
+            content: ResolversTypes['ComponentComponentsArticle'];
+            localizations: Array<Maybe<ResolversTypes['Article']>>;
+            localizations_connection?: Maybe<ResolversTypes['ArticleRelationResponseCollection']>;
+            parent?: Maybe<ResolversTypes['Page']>;
+        }
+    >;
+    ArticleEntityResponseCollection: ResolverTypeWrapper<
+        Omit<ArticleEntityResponseCollection, 'nodes'> & { nodes: Array<ResolversTypes['Article']> }
+    >;
+    ArticleFiltersInput: ArticleFiltersInput;
+    ArticleInput: ArticleInput;
+    ArticleRelationResponseCollection: ResolverTypeWrapper<
+        Omit<ArticleRelationResponseCollection, 'nodes'> & { nodes: Array<ResolversTypes['Article']> }
+    >;
     Author: ResolverTypeWrapper<
         Omit<Author, 'avatar' | 'avatar_connection' | 'localizations' | 'localizations_connection'> & {
             avatar: Array<Maybe<ResolversTypes['UploadFile']>>;
@@ -3697,20 +3823,12 @@ export type ResolversTypes = {
     Category: ResolverTypeWrapper<
         Omit<
             Category,
-            | 'components'
-            | 'components_connection'
-            | 'localizations'
-            | 'localizations_connection'
-            | 'pages'
-            | 'pages_connection'
-            | 'parent'
+            'components' | 'components_connection' | 'localizations' | 'localizations_connection' | 'parent'
         > & {
             components: Array<Maybe<ResolversTypes['Component']>>;
             components_connection?: Maybe<ResolversTypes['ComponentRelationResponseCollection']>;
             localizations: Array<Maybe<ResolversTypes['Category']>>;
             localizations_connection?: Maybe<ResolversTypes['CategoryRelationResponseCollection']>;
-            pages: Array<Maybe<ResolversTypes['Page']>>;
-            pages_connection?: Maybe<ResolversTypes['PageRelationResponseCollection']>;
             parent?: Maybe<ResolversTypes['Page']>;
         }
     >;
@@ -3735,6 +3853,8 @@ export type ResolversTypes = {
             category?: Maybe<ResolversTypes['Category']>;
         }
     >;
+    ComponentComponentsArticleFiltersInput: ComponentComponentsArticleFiltersInput;
+    ComponentComponentsArticleInput: ComponentComponentsArticleInput;
     ComponentComponentsArticleList: ResolverTypeWrapper<
         Omit<ComponentComponentsArticleList, 'category' | 'pages' | 'pages_connection' | 'parent'> & {
             category?: Maybe<ResolversTypes['Category']>;
@@ -3778,6 +3898,7 @@ export type ResolversTypes = {
     ComponentComponentsOrderDetails: ResolverTypeWrapper<
         Omit<
             ComponentComponentsOrderDetails,
+            | 'actionLinks'
             | 'createdOrderAt'
             | 'customerComment'
             | 'filters'
@@ -3787,6 +3908,7 @@ export type ResolversTypes = {
             | 'paymentDueDate'
             | 'totalValue'
         > & {
+            actionLinks?: Maybe<Array<Maybe<ResolversTypes['ComponentContentActionLinks']>>>;
             createdOrderAt: ResolversTypes['ComponentContentInformationCard'];
             customerComment: ResolversTypes['ComponentContentInformationCard'];
             filters?: Maybe<ResolversTypes['ComponentContentFilters']>;
@@ -3798,7 +3920,8 @@ export type ResolversTypes = {
         }
     >;
     ComponentComponentsOrderList: ResolverTypeWrapper<
-        Omit<ComponentComponentsOrderList, 'filters' | 'noResults'> & {
+        Omit<ComponentComponentsOrderList, 'actionLinks' | 'filters' | 'noResults'> & {
+            actionLinks?: Maybe<Array<Maybe<ResolversTypes['ComponentContentActionLinks']>>>;
             filters?: Maybe<ResolversTypes['ComponentContentFilters']>;
             noResults: ResolversTypes['ComponentContentBanner'];
         }
@@ -3847,6 +3970,7 @@ export type ResolversTypes = {
     ComponentContentAlertBoxInput: ComponentContentAlertBoxInput;
     ComponentContentArticleSection: ResolverTypeWrapper<ComponentContentArticleSection>;
     ComponentContentArticleSectionFiltersInput: ComponentContentArticleSectionFiltersInput;
+    ComponentContentArticleSectionInput: ComponentContentArticleSectionInput;
     ComponentContentBanner: ResolverTypeWrapper<
         Omit<ComponentContentBanner, 'button'> & { button?: Maybe<ResolversTypes['ComponentContentLink']> }
     >;
@@ -4065,20 +4189,8 @@ export type ResolversTypes = {
     OrganizationListInput: OrganizationListInput;
     OrganizationListRelationResponseCollection: ResolverTypeWrapper<OrganizationListRelationResponseCollection>;
     Page: ResolverTypeWrapper<
-        Omit<
-            Page,
-            | 'SEO'
-            | 'categories'
-            | 'categories_connection'
-            | 'child'
-            | 'localizations'
-            | 'localizations_connection'
-            | 'parent'
-            | 'template'
-        > & {
+        Omit<Page, 'SEO' | 'child' | 'localizations' | 'localizations_connection' | 'parent' | 'template'> & {
             SEO: ResolversTypes['ComponentSeoSeo'];
-            categories: Array<Maybe<ResolversTypes['Category']>>;
-            categories_connection?: Maybe<ResolversTypes['CategoryRelationResponseCollection']>;
             child?: Maybe<ResolversTypes['Page']>;
             localizations: Array<Maybe<ResolversTypes['Page']>>;
             localizations_connection?: Maybe<ResolversTypes['PageRelationResponseCollection']>;
@@ -4179,6 +4291,21 @@ export type ResolversParentTypes = {
     AppConfigRelationResponseCollection: Omit<AppConfigRelationResponseCollection, 'nodes'> & {
         nodes: Array<ResolversParentTypes['AppConfig']>;
     };
+    Article: Omit<Article, 'SEO' | 'content' | 'localizations' | 'localizations_connection' | 'parent'> & {
+        SEO: ResolversParentTypes['ComponentSeoSeo'];
+        content: ResolversParentTypes['ComponentComponentsArticle'];
+        localizations: Array<Maybe<ResolversParentTypes['Article']>>;
+        localizations_connection?: Maybe<ResolversParentTypes['ArticleRelationResponseCollection']>;
+        parent?: Maybe<ResolversParentTypes['Page']>;
+    };
+    ArticleEntityResponseCollection: Omit<ArticleEntityResponseCollection, 'nodes'> & {
+        nodes: Array<ResolversParentTypes['Article']>;
+    };
+    ArticleFiltersInput: ArticleFiltersInput;
+    ArticleInput: ArticleInput;
+    ArticleRelationResponseCollection: Omit<ArticleRelationResponseCollection, 'nodes'> & {
+        nodes: Array<ResolversParentTypes['Article']>;
+    };
     Author: Omit<Author, 'avatar' | 'avatar_connection' | 'localizations' | 'localizations_connection'> & {
         avatar: Array<Maybe<ResolversParentTypes['UploadFile']>>;
         avatar_connection?: Maybe<ResolversParentTypes['UploadFileRelationResponseCollection']>;
@@ -4197,20 +4324,12 @@ export type ResolversParentTypes = {
     BooleanFilterInput: BooleanFilterInput;
     Category: Omit<
         Category,
-        | 'components'
-        | 'components_connection'
-        | 'localizations'
-        | 'localizations_connection'
-        | 'pages'
-        | 'pages_connection'
-        | 'parent'
+        'components' | 'components_connection' | 'localizations' | 'localizations_connection' | 'parent'
     > & {
         components: Array<Maybe<ResolversParentTypes['Component']>>;
         components_connection?: Maybe<ResolversParentTypes['ComponentRelationResponseCollection']>;
         localizations: Array<Maybe<ResolversParentTypes['Category']>>;
         localizations_connection?: Maybe<ResolversParentTypes['CategoryRelationResponseCollection']>;
-        pages: Array<Maybe<ResolversParentTypes['Page']>>;
-        pages_connection?: Maybe<ResolversParentTypes['PageRelationResponseCollection']>;
         parent?: Maybe<ResolversParentTypes['Page']>;
     };
     CategoryEntityResponseCollection: Omit<CategoryEntityResponseCollection, 'nodes'> & {
@@ -4230,6 +4349,8 @@ export type ResolversParentTypes = {
         author?: Maybe<ResolversParentTypes['Author']>;
         category?: Maybe<ResolversParentTypes['Category']>;
     };
+    ComponentComponentsArticleFiltersInput: ComponentComponentsArticleFiltersInput;
+    ComponentComponentsArticleInput: ComponentComponentsArticleInput;
     ComponentComponentsArticleList: Omit<
         ComponentComponentsArticleList,
         'category' | 'pages' | 'pages_connection' | 'parent'
@@ -4268,6 +4389,7 @@ export type ResolversParentTypes = {
     };
     ComponentComponentsOrderDetails: Omit<
         ComponentComponentsOrderDetails,
+        | 'actionLinks'
         | 'createdOrderAt'
         | 'customerComment'
         | 'filters'
@@ -4277,6 +4399,7 @@ export type ResolversParentTypes = {
         | 'paymentDueDate'
         | 'totalValue'
     > & {
+        actionLinks?: Maybe<Array<Maybe<ResolversParentTypes['ComponentContentActionLinks']>>>;
         createdOrderAt: ResolversParentTypes['ComponentContentInformationCard'];
         customerComment: ResolversParentTypes['ComponentContentInformationCard'];
         filters?: Maybe<ResolversParentTypes['ComponentContentFilters']>;
@@ -4286,7 +4409,8 @@ export type ResolversParentTypes = {
         paymentDueDate: ResolversParentTypes['ComponentContentInformationCard'];
         totalValue: ResolversParentTypes['ComponentContentInformationCard'];
     };
-    ComponentComponentsOrderList: Omit<ComponentComponentsOrderList, 'filters' | 'noResults'> & {
+    ComponentComponentsOrderList: Omit<ComponentComponentsOrderList, 'actionLinks' | 'filters' | 'noResults'> & {
+        actionLinks?: Maybe<Array<Maybe<ResolversParentTypes['ComponentContentActionLinks']>>>;
         filters?: Maybe<ResolversParentTypes['ComponentContentFilters']>;
         noResults: ResolversParentTypes['ComponentContentBanner'];
     };
@@ -4329,6 +4453,7 @@ export type ResolversParentTypes = {
     ComponentContentAlertBoxInput: ComponentContentAlertBoxInput;
     ComponentContentArticleSection: ComponentContentArticleSection;
     ComponentContentArticleSectionFiltersInput: ComponentContentArticleSectionFiltersInput;
+    ComponentContentArticleSectionInput: ComponentContentArticleSectionInput;
     ComponentContentBanner: Omit<ComponentContentBanner, 'button'> & {
         button?: Maybe<ResolversParentTypes['ComponentContentLink']>;
     };
@@ -4520,20 +4645,8 @@ export type ResolversParentTypes = {
     OrganizationList: OrganizationList;
     OrganizationListInput: OrganizationListInput;
     OrganizationListRelationResponseCollection: OrganizationListRelationResponseCollection;
-    Page: Omit<
-        Page,
-        | 'SEO'
-        | 'categories'
-        | 'categories_connection'
-        | 'child'
-        | 'localizations'
-        | 'localizations_connection'
-        | 'parent'
-        | 'template'
-    > & {
+    Page: Omit<Page, 'SEO' | 'child' | 'localizations' | 'localizations_connection' | 'parent' | 'template'> & {
         SEO: ResolversParentTypes['ComponentSeoSeo'];
-        categories: Array<Maybe<ResolversParentTypes['Category']>>;
-        categories_connection?: Maybe<ResolversParentTypes['CategoryRelationResponseCollection']>;
         child?: Maybe<ResolversParentTypes['Page']>;
         localizations: Array<Maybe<ResolversParentTypes['Page']>>;
         localizations_connection?: Maybe<ResolversParentTypes['PageRelationResponseCollection']>;
@@ -4639,6 +4752,54 @@ export type AppConfigRelationResponseCollectionResolvers<
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type ArticleResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['Article'] = ResolversParentTypes['Article'],
+> = {
+    SEO?: Resolver<ResolversTypes['ComponentSeoSeo'], ParentType, ContextType>;
+    content?: Resolver<ResolversTypes['ComponentComponentsArticle'], ParentType, ContextType>;
+    createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    documentId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    locale?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    localizations?: Resolver<
+        Array<Maybe<ResolversTypes['Article']>>,
+        ParentType,
+        ContextType,
+        RequireFields<ArticleLocalizationsArgs, 'pagination' | 'sort'>
+    >;
+    localizations_connection?: Resolver<
+        Maybe<ResolversTypes['ArticleRelationResponseCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ArticleLocalizations_ConnectionArgs, 'pagination' | 'sort'>
+    >;
+    parent?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType>;
+    protected?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+    publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    slug?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ArticleEntityResponseCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ArticleEntityResponseCollection'] = ResolversParentTypes['ArticleEntityResponseCollection'],
+> = {
+    nodes?: Resolver<Array<ResolversTypes['Article']>, ParentType, ContextType>;
+    pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ArticleRelationResponseCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ArticleRelationResponseCollection'] = ResolversParentTypes['ArticleRelationResponseCollection'],
+> = {
+    nodes?: Resolver<Array<ResolversTypes['Article']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type AuthorResolvers<
     ContextType = any,
     ParentType extends ResolversParentTypes['Author'] = ResolversParentTypes['Author'],
@@ -4730,18 +4891,6 @@ export type CategoryResolvers<
         RequireFields<CategoryLocalizations_ConnectionArgs, 'pagination' | 'sort'>
     >;
     name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-    pages?: Resolver<
-        Array<Maybe<ResolversTypes['Page']>>,
-        ParentType,
-        ContextType,
-        RequireFields<CategoryPagesArgs, 'pagination' | 'sort'>
-    >;
-    pages_connection?: Resolver<
-        Maybe<ResolversTypes['PageRelationResponseCollection']>,
-        ParentType,
-        ContextType,
-        RequireFields<CategoryPages_ConnectionArgs, 'pagination' | 'sort'>
-    >;
     parent?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType>;
     publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
     slug?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -4803,7 +4952,6 @@ export type ComponentComponentsArticleResolvers<
     category?: Resolver<Maybe<ResolversTypes['Category']>, ParentType, ContextType>;
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-    protected?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
     sections?: Resolver<
         Array<Maybe<ResolversTypes['ComponentContentArticleSection']>>,
         ParentType,
@@ -4974,6 +5122,12 @@ export type ComponentComponentsOrderDetailsResolvers<
     ParentType extends
         ResolversParentTypes['ComponentComponentsOrderDetails'] = ResolversParentTypes['ComponentComponentsOrderDetails'],
 > = {
+    actionLinks?: Resolver<
+        Maybe<Array<Maybe<ResolversTypes['ComponentContentActionLinks']>>>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentComponentsOrderDetailsActionLinksArgs, 'pagination' | 'sort'>
+    >;
     createdOrderAt?: Resolver<ResolversTypes['ComponentContentInformationCard'], ParentType, ContextType>;
     customerComment?: Resolver<ResolversTypes['ComponentContentInformationCard'], ParentType, ContextType>;
     fields?: Resolver<
@@ -5007,6 +5161,12 @@ export type ComponentComponentsOrderListResolvers<
     ParentType extends
         ResolversParentTypes['ComponentComponentsOrderList'] = ResolversParentTypes['ComponentComponentsOrderList'],
 > = {
+    actionLinks?: Resolver<
+        Maybe<Array<Maybe<ResolversTypes['ComponentContentActionLinks']>>>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentComponentsOrderListActionLinksArgs, 'pagination' | 'sort'>
+    >;
     detailsURL?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     fields?: Resolver<
         Array<Maybe<ResolversTypes['ComponentContentFieldMapping']>>,
@@ -5239,9 +5399,10 @@ export type ComponentContentActionLinksResolvers<
 > = {
     icon?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    inProgress?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
     label?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     page?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType>;
-    visible?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+    url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -5958,6 +6119,7 @@ export type GenericMorphResolvers<
 > = {
     __resolveType: TypeResolveFn<
         | 'AppConfig'
+        | 'Article'
         | 'Author'
         | 'Category'
         | 'Component'
@@ -6186,6 +6348,12 @@ export type MutationResolvers<
         ContextType,
         RequireFields<MutationChangePasswordArgs, 'currentPassword' | 'password' | 'passwordConfirmation'>
     >;
+    createArticle?: Resolver<
+        Maybe<ResolversTypes['Article']>,
+        ParentType,
+        ContextType,
+        RequireFields<MutationCreateArticleArgs, 'data' | 'status'>
+    >;
     createAuthor?: Resolver<
         Maybe<ResolversTypes['Author']>,
         ParentType,
@@ -6275,6 +6443,12 @@ export type MutationResolvers<
         ParentType,
         ContextType,
         Partial<MutationDeleteAppConfigArgs>
+    >;
+    deleteArticle?: Resolver<
+        Maybe<ResolversTypes['DeleteMutationResponse']>,
+        ParentType,
+        ContextType,
+        RequireFields<MutationDeleteArticleArgs, 'documentId'>
     >;
     deleteAuthor?: Resolver<
         Maybe<ResolversTypes['DeleteMutationResponse']>,
@@ -6425,6 +6599,12 @@ export type MutationResolvers<
         ParentType,
         ContextType,
         RequireFields<MutationUpdateAppConfigArgs, 'data' | 'status'>
+    >;
+    updateArticle?: Resolver<
+        Maybe<ResolversTypes['Article']>,
+        ParentType,
+        ContextType,
+        RequireFields<MutationUpdateArticleArgs, 'data' | 'documentId' | 'status'>
     >;
     updateAuthor?: Resolver<
         Maybe<ResolversTypes['Author']>,
@@ -6608,18 +6788,6 @@ export type PageResolvers<
     ParentType extends ResolversParentTypes['Page'] = ResolversParentTypes['Page'],
 > = {
     SEO?: Resolver<ResolversTypes['ComponentSeoSeo'], ParentType, ContextType>;
-    categories?: Resolver<
-        Array<Maybe<ResolversTypes['Category']>>,
-        ParentType,
-        ContextType,
-        RequireFields<PageCategoriesArgs, 'pagination' | 'sort'>
-    >;
-    categories_connection?: Resolver<
-        Maybe<ResolversTypes['CategoryRelationResponseCollection']>,
-        ParentType,
-        ContextType,
-        RequireFields<PageCategories_ConnectionArgs, 'pagination' | 'sort'>
-    >;
     child?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType>;
     createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
     documentId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -6702,6 +6870,24 @@ export type QueryResolvers<
         ParentType,
         ContextType,
         RequireFields<QueryAppConfigArgs, 'status'>
+    >;
+    article?: Resolver<
+        Maybe<ResolversTypes['Article']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryArticleArgs, 'documentId' | 'status'>
+    >;
+    articles?: Resolver<
+        Array<Maybe<ResolversTypes['Article']>>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryArticlesArgs, 'pagination' | 'sort' | 'status'>
+    >;
+    articles_connection?: Resolver<
+        Maybe<ResolversTypes['ArticleEntityResponseCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryArticles_ConnectionArgs, 'pagination' | 'sort' | 'status'>
     >;
     author?: Resolver<
         Maybe<ResolversTypes['Author']>,
@@ -7405,6 +7591,9 @@ export type UsersPermissionsUserRelationResponseCollectionResolvers<
 export type Resolvers<ContextType = any> = {
     AppConfig?: AppConfigResolvers<ContextType>;
     AppConfigRelationResponseCollection?: AppConfigRelationResponseCollectionResolvers<ContextType>;
+    Article?: ArticleResolvers<ContextType>;
+    ArticleEntityResponseCollection?: ArticleEntityResponseCollectionResolvers<ContextType>;
+    ArticleRelationResponseCollection?: ArticleRelationResponseCollectionResolvers<ContextType>;
     Author?: AuthorResolvers<ContextType>;
     AuthorEntityResponseCollection?: AuthorEntityResponseCollectionResolvers<ContextType>;
     AuthorRelationResponseCollection?: AuthorRelationResponseCollectionResolvers<ContextType>;
@@ -8939,6 +9128,7 @@ export type OrderDetailsComponentFragment = {
             page?: { slug: string; SEO: { title: string; description: string } };
         };
     };
+    actionLinks?: Array<{ label: string; icon?: string; url?: string; inProgress?: boolean; page?: { slug: string } }>;
 };
 
 export type OrderListComponentFragment = {
@@ -8986,6 +9176,7 @@ export type OrderListComponentFragment = {
         }>;
     };
     noResults: { title: string; description?: string };
+    actionLinks?: Array<{ label: string; icon?: string; url?: string; inProgress?: boolean; page?: { slug: string } }>;
 };
 
 export type OrdersSummaryComponentFragment = {
@@ -9212,7 +9403,7 @@ export type TicketListComponentFragment = {
         }>;
     };
     noResults: { title: string; description?: string };
-    actionLinks?: Array<{ id: string; label: string; visible?: boolean; icon?: string; page?: { slug: string } }>;
+    actionLinks?: Array<{ label: string; icon?: string; url?: string; inProgress?: boolean; page?: { slug: string } }>;
 };
 
 export type TicketRecentComponentFragment = {
@@ -9244,6 +9435,14 @@ export type UserAccountComponentFragment = {
             type: Enum_Componentcontenterrormessage_Type;
         }>;
     }>;
+};
+
+export type ActionLinksFragment = {
+    label: string;
+    icon?: string;
+    url?: string;
+    inProgress?: boolean;
+    page?: { slug: string };
 };
 
 export type BannerFragment = {
@@ -9863,6 +10062,13 @@ export type GetComponentQuery = {
                           page?: { slug: string; SEO: { title: string; description: string } };
                       };
                   };
+                  actionLinks?: Array<{
+                      label: string;
+                      icon?: string;
+                      url?: string;
+                      inProgress?: boolean;
+                      page?: { slug: string };
+                  }>;
               }
             | {
                   __typename: 'ComponentComponentsOrderList';
@@ -9913,6 +10119,13 @@ export type GetComponentQuery = {
                       }>;
                   };
                   noResults: { title: string; description?: string };
+                  actionLinks?: Array<{
+                      label: string;
+                      icon?: string;
+                      url?: string;
+                      inProgress?: boolean;
+                      page?: { slug: string };
+                  }>;
               }
             | {
                   __typename: 'ComponentComponentsOrdersSummary';
@@ -10135,10 +10348,10 @@ export type GetComponentQuery = {
                   };
                   noResults: { title: string; description?: string };
                   actionLinks?: Array<{
-                      id: string;
                       label: string;
-                      visible?: boolean;
                       icon?: string;
+                      url?: string;
+                      inProgress?: boolean;
                       page?: { slug: string };
                   }>;
               }
@@ -11363,6 +11576,17 @@ export const InformationCardFragmentDoc = gql`
     }
     ${LinkFragmentDoc}
 `;
+export const ActionLinksFragmentDoc = gql`
+    fragment ActionLinks on ComponentContentActionLinks {
+        label
+        icon
+        url
+        page {
+            slug
+        }
+        inProgress
+    }
+`;
 export const OrderDetailsComponentFragmentDoc = gql`
     fragment OrderDetailsComponent on ComponentComponentsOrderDetails {
         __typename
@@ -11406,12 +11630,16 @@ export const OrderDetailsComponentFragmentDoc = gql`
         customerComment {
             ...InformationCard
         }
+        actionLinks {
+            ...ActionLinks
+        }
     }
     ${FieldMappingFragmentDoc}
     ${TableFragmentDoc}
     ${PaginationFragmentDoc}
     ${FiltersFragmentDoc}
     ${InformationCardFragmentDoc}
+    ${ActionLinksFragmentDoc}
 `;
 export const OrderListComponentFragmentDoc = gql`
     fragment OrderListComponent on ComponentComponentsOrderList {
@@ -11436,11 +11664,15 @@ export const OrderListComponentFragmentDoc = gql`
             description
         }
         detailsURL
+        actionLinks {
+            ...ActionLinks
+        }
     }
     ${FieldMappingFragmentDoc}
     ${TableFragmentDoc}
     ${PaginationFragmentDoc}
     ${FiltersFragmentDoc}
+    ${ActionLinksFragmentDoc}
 `;
 export const OrdersSummaryComponentFragmentDoc = gql`
     fragment OrdersSummaryComponent on ComponentComponentsOrdersSummary {
@@ -11603,19 +11835,14 @@ export const TicketListComponentFragmentDoc = gql`
         }
         detailsURL
         actionLinks {
-            id
-            label
-            visible
-            page {
-                slug
-            }
-            icon
+            ...ActionLinks
         }
     }
     ${FieldMappingFragmentDoc}
     ${TableFragmentDoc}
     ${PaginationFragmentDoc}
     ${FiltersFragmentDoc}
+    ${ActionLinksFragmentDoc}
 `;
 export const TicketRecentComponentFragmentDoc = gql`
     fragment TicketRecentComponent on ComponentComponentsTicketRecent {
@@ -11671,11 +11898,7 @@ export const GetArticlesDocument = gql`
             }
         }
         articles: pages(
-            filters: {
-                slug: { in: $slugs }
-                categories: { slug: { in: $categories } }
-                updatedAt: { gte: $dateFrom, lte: $dateTo }
-            }
+            filters: { slug: { in: $slugs }, updatedAt: { gte: $dateFrom, lte: $dateTo } }
             pagination: { limit: $limit, start: $offset }
             sort: $sort
             locale: $locale

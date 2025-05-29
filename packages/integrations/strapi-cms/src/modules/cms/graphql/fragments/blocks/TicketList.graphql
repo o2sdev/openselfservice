@@ -21,12 +21,6 @@ fragment TicketListComponent on ComponentComponentsTicketList {
     }
     detailsURL
     actionLinks {
-        id
-        label
-        visible
-        page {
-            slug
-        }
-        icon
+        ...ActionLinks
     }
 }

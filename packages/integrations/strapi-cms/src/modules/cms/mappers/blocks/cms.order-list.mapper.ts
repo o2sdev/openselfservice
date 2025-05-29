@@ -2,12 +2,13 @@ import { NotFoundException } from '@nestjs/common';
 
 import { CMS } from '@o2s/framework/modules';
 
+import { mapActionLinks } from '../cms.actionLinks.mapper';
 import { mapFields } from '../cms.fieldMapping.mapper';
 import { mapFilters } from '../cms.filters.mapper';
 import { mapPagination } from '../cms.pagination.mapper';
 import { mapTable } from '../cms.table.mapper';
 
-import { GetComponentQuery } from '@/generated/strapi';
+import { ComponentContentActionLinks, GetComponentQuery } from '@/generated/strapi';
 
 export const mapOrderListBlock = (data: GetComponentQuery): CMS.Model.OrderListBlock.OrderListBlock => {
     const component = data.component!.content[0];
@@ -19,6 +20,7 @@ export const mapOrderListBlock = (data: GetComponentQuery): CMS.Model.OrderListB
 
     switch (component.__typename) {
         case 'ComponentComponentsOrderList':
+            console.log('component.actionLinks', component.actionLinks);
             return {
                 id: component.id,
                 title: component.title,
@@ -35,10 +37,10 @@ export const mapOrderListBlock = (data: GetComponentQuery): CMS.Model.OrderListB
                     today: configurableTexts.dates.today,
                     yesterday: configurableTexts.dates.yesterday,
                     showMore: configurableTexts.actions.showMore,
-                    reorder: configurableTexts.actions.reorder,
                     clickToSelect: configurableTexts.actions.clickToSelect,
                 },
                 detailsUrl: component.detailsURL as string,
+                actionLinks: mapActionLinks(component.actionLinks as ComponentContentActionLinks[]),
             };
     }
 

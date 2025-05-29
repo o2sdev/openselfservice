@@ -13,6 +13,7 @@ export const mapOrderList = (
     locale: string,
     timezone: string,
 ): OrderListBlock => {
+    console.log('cms.actionLinks', cms.actionLinks);
     return {
         __typename: 'OrderListBlock',
         id: cms.id,
@@ -63,5 +64,11 @@ export const mapOrder = (
         detailsUrl: format(cms.detailsUrl, {
             id: order.id,
         }),
+        actionLinks: cms.actionLinks?.map((actionLink) => ({
+            ...actionLink,
+            url: format(actionLink.url || '', {
+                id: order.id,
+            }),
+        })),
     };
 };
