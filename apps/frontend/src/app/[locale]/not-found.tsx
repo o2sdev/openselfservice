@@ -2,13 +2,14 @@ import { Metadata } from 'next';
 import { getLocale } from 'next-intl/server';
 import { headers } from 'next/headers';
 import React from 'react';
-import { auth } from 'src/auth/auth';
 
 import { Toaster } from '@o2s/ui/components/toaster';
 
 import { sdk } from '@/api/sdk';
 
 import { generateSeo } from '@/utils/seo';
+
+import { auth } from '@/auth';
 
 import { GlobalProvider } from '@/providers/GlobalProvider';
 

@@ -1,8 +1,9 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
-import { auth } from 'src/auth/auth';
 
 import { sdk } from '@/api/sdk';
+
+import { auth } from '@/auth';
 
 import { UserAccountProps } from './UserAccount.types';
 

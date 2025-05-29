@@ -4,9 +4,10 @@ import { getMessages, setRequestLocale } from 'next-intl/server';
 import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import React from 'react';
-import { auth } from 'src/auth/auth';
 
 import { TooltipProvider } from '@o2s/ui/components/tooltip';
+
+import { auth } from '@/auth';
 
 import { routing } from '@/i18n';
 

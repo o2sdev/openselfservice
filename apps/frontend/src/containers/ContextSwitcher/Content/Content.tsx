@@ -9,7 +9,7 @@ import { SheetDescription, SheetFooter, SheetHeader, SheetTitle } from '@o2s/ui/
 import { Typography } from '@o2s/ui/components/typography';
 import { toast } from '@o2s/ui/hooks/use-toast';
 
-import { updateOrganization } from '@/auth/auth.mock';
+import { updateOrganization } from '@/auth';
 
 import { useGlobalContext } from '@/providers/GlobalProvider';
 
