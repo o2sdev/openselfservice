@@ -4,27 +4,21 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
     id: 'ticket-list-1',
     title: 'Cases',
     subtitle: 'Your recent cases',
-    actionLinks: [
+    forms: [
         {
-            id: 'submit-complaint',
             label: 'Submit complaint',
-            visible: true,
-            slug: '/submit-complaint',
+            url: '/submit-complaint',
             icon: 'MessageSquareWarning',
         },
         {
-            id: 'request-device-maintenance',
             label: 'Request device maintenance',
-            visible: true,
-            slug: '/request-device-maintenance',
+            url: '/request-device-maintenance',
             icon: 'Hammer',
         },
         {
-            id: 'contact-us',
             label: 'Contact us',
-            visible: false,
             icon: 'ClipboardPenLine',
-            slug: '/contact-us',
+            url: '/contact-us',
         },
     ],
     table: {
@@ -163,27 +157,21 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
     id: 'ticket-list-1',
     title: 'Fallübersicht',
     subtitle: 'Ihre neuesten Fälle',
-    actionLinks: [
+    forms: [
         {
-            id: 'submit-complaint',
             label: 'Beschwerde einreichen',
-            visible: true,
-            slug: '/submit-complaint',
+            url: '/submit-complaint',
             icon: 'MessageSquareWarning',
         },
         {
-            id: 'request-device-maintenance',
             label: 'Gerätewartung anfordern',
-            visible: true,
-            slug: '/request-device-maintenance',
+            url: '/request-device-maintenance',
             icon: 'Hammer',
         },
         {
-            id: 'contact-us',
             label: 'Kontakt',
-            visible: false,
             icon: 'ClipboardPenLine',
-            slug: '/contact-us',
+            url: '/contact-us',
         },
     ],
     table: {
@@ -324,27 +312,21 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
     id: 'ticket-list-1',
     title: 'Zgłoszenia',
     subtitle: 'Twoje ostatnie zgłoszenia',
-    actionLinks: [
+    forms: [
         {
-            id: 'submit-complaint',
             label: 'Zgłoś błąd',
-            visible: true,
-            slug: '/submit-complaint',
+            url: '/submit-complaint',
             icon: 'MessageSquareWarning',
         },
         {
-            id: 'request-device-maintenance',
             label: 'Zgłoś wymagane konserwacje',
-            visible: true,
-            slug: '/request-device-maintenance',
+            url: '/request-device-maintenance',
             icon: 'Hammer',
         },
         {
-            id: 'contact-us',
             label: 'Skontaktuj się z nami',
-            visible: false,
             icon: 'ClipboardPenLine',
-            slug: '/contact-us',
+            url: '/contact-us',
         },
     ],
 

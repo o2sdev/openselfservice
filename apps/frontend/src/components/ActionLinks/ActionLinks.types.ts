@@ -1,12 +1,11 @@
-export type ActionLink = {
-    label: string;
-    visible: boolean;
-    slug: string;
-    icon?: string;
-};
+import { VariantProps } from 'class-variance-authority';
+
+import { buttonVariants } from '@o2s/ui/components/button';
 
 export type ActionLinksProps = {
-    actionLinks: ActionLink[];
+    visibleActions: React.ReactNode[];
+    dropdownActions: React.ReactNode[];
     showMoreLabel: string;
     className?: string;
+    triggerVariant?: VariantProps<typeof buttonVariants>['variant'];
 };

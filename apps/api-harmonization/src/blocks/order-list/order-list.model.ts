@@ -20,8 +20,8 @@ export class OrderListBlock extends Block.Block {
     };
     labels!: {
         showMore: string;
-        reorder: string;
         clickToSelect: string;
+        reorder: string;
     };
 }
 

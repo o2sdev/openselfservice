@@ -36,6 +36,7 @@ export const mapOrderDetailsBlock = (data: GetComponentQuery): CMS.Model.OrderDe
                 labels: {
                     today: configurableTexts.dates.today,
                     yesterday: configurableTexts.dates.yesterday,
+                    showMore: configurableTexts.actions.showMore,
                     reorder: configurableTexts.actions.reorder,
                     trackOrder: configurableTexts.actions.trackOrder,
                     payOnline: configurableTexts.actions.payOnline,

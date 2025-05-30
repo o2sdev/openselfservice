@@ -85,7 +85,7 @@ export const Filters = <T, S extends FormikValues>({
                             )}
                             <div className="flex gap-4 flex-col w-full sm:flex-row md:w-auto">
                                 {activeFilters > 0 && (
-                                    <Button variant="secondary" onClick={handleReset} className="gap-0">
+                                    <Button variant="outline" onClick={handleReset} className="gap-0">
                                         <X className="h-4 w-4 mr-2" />
                                         {reactStringReplace(removeFilters, /{active}/g, (match, i) => (
                                             <span key={i}>
@@ -96,6 +96,7 @@ export const Filters = <T, S extends FormikValues>({
                                     </Button>
                                 )}
                                 <Button
+                                    variant="secondary"
                                     onClick={(e: React.MouseEvent) => {
                                         e.preventDefault();
                                         setFiltersOpen(!filtersOpen);

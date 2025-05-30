@@ -7,7 +7,7 @@ export class TicketListBlock extends Block.Block {
     __typename!: 'TicketListBlock';
     title?: string;
     subtitle?: string;
-    actionLinks?: ActionLink[];
+    forms?: Models.Link.Link[];
     table!: Models.DataTable.DataTable<Tickets.Model.Ticket>;
     pagination?: Models.Pagination.Pagination;
     filters?: Models.Filters.Filters<Tickets.Model.Ticket>;
@@ -42,11 +42,4 @@ export class Ticket {
     createdAt!: Tickets.Model.Ticket['createdAt'];
     updatedAt!: Tickets.Model.Ticket['updatedAt'];
     detailsUrl!: string;
-}
-
-export class ActionLink {
-    label!: string;
-    visible!: boolean;
-    slug!: string;
-    icon?: string;
 }

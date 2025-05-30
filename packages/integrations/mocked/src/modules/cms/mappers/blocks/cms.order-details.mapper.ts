@@ -57,10 +57,11 @@ const MOCK_ORDER_DETAILS_BLOCK_EN: CMS.Model.OrderDetailsBlock.OrderDetailsBlock
     labels: {
         today: 'Today',
         yesterday: 'Yesterday',
+        showMore: 'Show more',
+        close: 'Close',
         reorder: 'Reorder',
         trackOrder: 'Track order',
         payOnline: 'Pay online',
-        close: 'Close',
     },
     productsTitle: 'Product list',
     table: {
@@ -179,10 +180,11 @@ const MOCK_ORDER_DETAILS_BLOCK_DE: CMS.Model.OrderDetailsBlock.OrderDetailsBlock
     labels: {
         today: 'Heute',
         yesterday: 'Gestern',
+        showMore: 'Mehr anzeigen',
+        close: 'Schließen',
         reorder: 'Erneut bestellen',
         trackOrder: 'Bestellung verfolgen',
         payOnline: 'Online bezahlen',
-        close: 'Schließen',
     },
     productsTitle: 'Produktliste',
     table: {
@@ -302,10 +304,11 @@ const MOCK_ORDER_DETAILS_BLOCK_PL: CMS.Model.OrderDetailsBlock.OrderDetailsBlock
     labels: {
         today: 'Dzisiaj',
         yesterday: 'Wczoraj',
+        showMore: 'Więcej',
+        close: 'Zamknij',
         reorder: 'Zamów ponownie',
         trackOrder: 'Śledź zamówienie',
         payOnline: 'Płatność online',
-        close: 'Zamknij',
     },
     productsTitle: 'Lista produktów',
     table: {
