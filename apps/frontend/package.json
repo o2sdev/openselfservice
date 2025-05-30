@@ -14,7 +14,7 @@
         "@o2s/api-harmonization": "*",
         "@o2s/framework": "*",
         "@o2s/ui": "*",
-        "@o2s/auth.mocked": "*",
+        "@o2s/integrations.mocked": "*",
         "class-variance-authority": "^0.7.1",
         "date-fns": "^4.1.0",
         "dotenv-cli": "^8.0.0",

@@ -26,8 +26,7 @@
         "packages/*",
         "packages/configs/*",
         "packages/integrations/*",
-        "packages/utils/*",
-        "packages/auth/*"
+        "packages/utils/*"
     ],
     "devDependencies": {
         "@commitlint/cli": "^19.8.1",

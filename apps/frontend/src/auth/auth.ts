@@ -1,6 +1,6 @@
 import NextAuth, { NextAuthResult } from 'next-auth';
 
-import { Adapter, jwtCallback, sessionCallback, updateOrganization } from './auth.config';
+import { Adapter, DefaultAuthProvider, jwtCallback, sessionCallback, updateOrganization } from './auth.config';
 import { providers } from './auth.providers';
 
 export const nextAuthResult = NextAuth({
@@ -20,7 +20,8 @@ export const nextAuthResult = NextAuth({
         },
     },
     pages: {
-        signIn: '/login',
+        signIn: DefaultAuthProvider ? '/api/signIn' : '/login',
+        signOut: '/api/signOut',
         error: '/error',
     },
     events: {

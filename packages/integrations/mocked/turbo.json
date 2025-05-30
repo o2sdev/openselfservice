@@ -2,11 +2,12 @@
     "extends": ["//"],
     "tasks": {
         "dev": {
-            "dependsOn": ["@o2s/utils.logger#build", "@o2s/framework#build"]
+            "dependsOn": ["@o2s/utils.logger#build", "@o2s/framework#build"],
+            "env": ["MOCKED_INTEGRATION_DELAYS_ENABLED", "NODE_ENV", "AUTH_DATABASE_URL"]
         },
         "build": {
             "dependsOn": ["@o2s/utils.logger#build", "@o2s/framework#build"],
-            "env": ["MOCKED_INTEGRATION_DELAYS_ENABLED"]
+            "env": ["MOCKED_INTEGRATION_DELAYS_ENABLED", "NODE_ENV", "AUTH_DATABASE_URL"]
         }
     }
 }

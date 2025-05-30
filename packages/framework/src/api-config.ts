@@ -2,6 +2,7 @@ import { Type } from '@nestjs/common';
 
 import {
     Articles,
+    Auth,
     BillingAccounts,
     CMS,
     Cache,
@@ -80,6 +81,10 @@ export interface ApiConfig {
         orders: {
             service: typeof Orders.Service;
             controller?: typeof Orders.Controller;
+            imports?: Type[];
+        };
+        auth: {
+            service: typeof Auth.Service;
             imports?: Type[];
         };
     };

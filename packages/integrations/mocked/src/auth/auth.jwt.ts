@@ -29,11 +29,11 @@ export const jwtCallback = async (
         await updateCustomerToken(getCustomer, token, user?.defaultCustomerId);
     }
     // Update means that user wants to change customer. Normally you don't want to do this.
-    // Instead, you should call your IAM service to change customer and then refresh access token.
+    // Instead, you should call your IAM service to change customer and then refresh the access token.
     else if (trigger === 'update') {
         await updateCustomerToken(getCustomer, token, session?.customer?.id);
     }
-    // Since we don't have any IAM to provide access token, we just sign it with our own token
+    // Since we don't have any IAM to provide an access token, we just sign it with our own token
     token.accessToken = signUserToken(token);
 
     if (Date.now() >= token.accessTokenExpires) {

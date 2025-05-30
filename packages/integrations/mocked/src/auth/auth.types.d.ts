@@ -12,11 +12,11 @@ declare module 'next-auth' {
                 name: string;
             };
         } & DefaultSession['user'];
+        error?: 'RefreshTokenError';
     }
 
     interface User {
         role?: string;
-        password?: string | null;
         defaultCustomerId?: string;
         accessToken?: string;
     }

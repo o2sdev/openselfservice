@@ -1,5 +1,4 @@
-import { CustomDecorator } from '@nestjs/common';
-import { SetMetadata } from '@nestjs/common';
+import { CustomDecorator, SetMetadata } from '@nestjs/common';
 
 import { RoleMatchingMode } from './auth.constants';
 

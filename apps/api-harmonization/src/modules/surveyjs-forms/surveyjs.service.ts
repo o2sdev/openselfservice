@@ -129,7 +129,7 @@ export class SurveyjsService {
         );
     }
 
-    private hasAccess(requiredRoles: string[], decodedToken?: Auth.Models.Jwt | undefined): boolean {
+    private hasAccess(requiredRoles: string[], decodedToken?: Auth.Model.Jwt | undefined): boolean {
         const userRoles: string[] = [];
         if (decodedToken) {
             userRoles.push(...extractUserRolesFromJwt(decodedToken));

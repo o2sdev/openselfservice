@@ -1,10 +1,11 @@
 // this unused import is necessary for TypeScript to properly resolve API methods
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Blocks, Headers, Modules } from '@o2s/api-harmonization';
-import { Notifications } from '@o2s/integrations.mocked/sdk';
 import { ordersSummary } from 'src/api/blocks/orders-summary';
 
 import { extendSdk, getSdk } from '@o2s/framework/sdk';
+
+import { Notifications } from '@o2s/integrations.mocked/sdk';
 
 import { article } from '@/api/blocks/article';
 import { articleList } from '@/api/blocks/article-list';

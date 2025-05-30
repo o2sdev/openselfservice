@@ -4,6 +4,7 @@ export * from 'next-auth';
 declare module 'next-auth' {
     interface Session extends DefaultSession {
         accessToken: string;
+        idToken?: string;
         user?: {
             role?: string;
             customer?: {
@@ -12,6 +13,7 @@ declare module 'next-auth' {
                 name: string;
             };
         } & DefaultSession['user'];
+        error?: 'RefreshTokenError';
     }
 
     interface User {
@@ -27,6 +29,7 @@ declare module 'next-auth/jwt' {
     interface JWT {
         accessToken: string;
         accessTokenExpires: number;
+        idToken?: string;
         role?: string;
         customer?: {
             id: string;

@@ -7,11 +7,9 @@ import { useSession } from 'next-auth/react';
 
 import { Models } from '@o2s/framework/modules';
 
-import * as Auth from '@o2s/auth.mocked';
+import * as Auth from '@o2s/integrations.mocked/auth';
 
 import { sdk } from '@/api/sdk';
-
-import { signInSchema } from '@/auth/auth.providers';
 
 const DEFAULT_ROLE = process.env.AUTH_DEFAULT_USER_ROLE!;
 
@@ -37,7 +35,13 @@ type SessionCallbackParams = ({
     trigger?: 'update';
 };
 
+export const DefaultAuthProvider = Auth.ProviderName;
+
 export const Adapter = Auth.Adapter;
+
+export const Providers = Auth.Providers;
+
+export const onSignOut = Auth.signOut;
 
 export async function updateOrganization(session: ReturnType<typeof useSession>, customer: Models.Customer.Customer) {
     return Auth.updateOrganization(session, customer);
@@ -55,10 +59,4 @@ export const jwtCallback = async (params: JwtCallbackParams): Promise<JWT | null
 
 export const sessionCallback = async (params: SessionCallbackParams): Promise<DefaultSession | Session> => {
     return Auth.sessionCallback(params);
-};
-
-export const credentialsCallback = async (
-    credentials: Partial<Record<'username' | 'password', unknown>>,
-): Promise<User | null> => {
-    return Auth.credentialsCallback(credentials, signInSchema);
 };

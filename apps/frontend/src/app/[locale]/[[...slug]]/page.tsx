@@ -46,7 +46,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             session?.accessToken,
         );
 
-        if (meta.isProtected && !session?.user) return signIn();
+        if (meta.isProtected && (!session?.user || session?.error === 'RefreshTokenError')) {
+            return signIn();
+        }
 
         if (!data || !meta) {
             notFound();
@@ -97,7 +99,9 @@ export default async function Page({ params }: Props) {
             session?.accessToken,
         );
 
-        if (meta.isProtected && !session?.user) return signIn();
+        if (meta.isProtected && (!session?.user || session?.error === 'RefreshTokenError')) {
+            return await signIn();
+        }
 
         if (!data || !meta) {
             notFound();

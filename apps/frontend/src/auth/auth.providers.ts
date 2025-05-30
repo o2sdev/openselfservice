@@ -1,20 +1,10 @@
 import { Provider } from 'next-auth/providers';
-import Credentials from 'next-auth/providers/credentials';
 import GitHub from 'next-auth/providers/github';
-import { object, string } from 'zod';
 
-import { credentialsCallback } from './auth.config';
+import { Providers } from './auth.config';
 
 export const providers: Provider[] = [
-    Credentials({
-        credentials: {
-            username: { label: 'Username', placeholder: 'admin', type: 'text' },
-            password: { label: 'Password', placeholder: 'admin', type: 'password' },
-        },
-        authorize: async (credentials) => {
-            return await credentialsCallback(credentials);
-        },
-    }),
+    ...Providers,
     GitHub({
         clientId: process.env.GITHUB_CLIENT_ID,
         clientSecret: process.env.GITHUB_CLIENT_SECRET,
@@ -32,6 +22,7 @@ export const providers: Provider[] = [
 export type Providers = {
     id: string;
     name: string;
+    icon?: string;
 }[];
 
 export const providerMap: Providers = providers
@@ -40,12 +31,11 @@ export const providerMap: Providers = providers
             const providerData = provider();
             return { id: providerData.id, name: providerData.name };
         } else {
-            return { id: provider.id, name: provider.name };
+            return {
+                id: provider.id,
+                name: provider.name,
+                logo: `logo-${provider.id}`,
+            };
         }
     })
     .filter((provider) => provider.id !== 'credentials');
-
-export const signInSchema = object({
-    username: string().email('Must be a valid email'),
-    password: string().min(4, 'Password must be at least 4 characters'),
-});

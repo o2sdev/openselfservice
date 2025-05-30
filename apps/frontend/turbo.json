@@ -18,6 +18,7 @@
                 "AUTH_TRUST_HOST",
                 "AUTH_GOOGLE_ID",
                 "AUTH_DEFAULT_USER_ROLE",
+                "AUTH_DEFAULT_PROVIDER",
                 "AUTH_DATABASE_URL"
             ]
         }
