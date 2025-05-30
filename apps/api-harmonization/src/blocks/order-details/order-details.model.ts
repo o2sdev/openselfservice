@@ -26,8 +26,10 @@ export class OrderDetailsBlock extends Block.Block {
         yesterday: string;
         showMore: string;
         close: string;
+        reorder: string;
+        trackOrder: string;
+        payOnline: string;
     };
-    actionLinks?: Models.ActionLink.ActionLink[];
 }
 
 export class Order {

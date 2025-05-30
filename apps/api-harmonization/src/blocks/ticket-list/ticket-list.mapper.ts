@@ -25,7 +25,7 @@ export const mapTicketList = (
             total: tickets.total,
             data: tickets.data.map((ticket) => mapTicket(ticket, cms, locale, timezone)),
         },
-        actionLinks: cms.actionLinks,
+        forms: cms.forms,
         labels: cms.labels,
     };
 };

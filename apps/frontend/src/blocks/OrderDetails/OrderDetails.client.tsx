@@ -1,6 +1,7 @@
 'use client';
 
 import { Blocks } from '@o2s/api-harmonization';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import React, { useState, useTransition } from 'react';
 
@@ -32,6 +33,7 @@ import { NoResults } from '@/components/NoResults/NoResults';
 import { Pagination } from '@/components/Pagination/Pagination';
 import { Price } from '@/components/Price/Price';
 import { RichText } from '@/components/RichText/RichText';
+import { TooltipHover } from '@/components/TooltipHover/TooltipHover';
 
 import { OrderDetailsPureProps } from './OrderDetails.types';
 
@@ -139,6 +141,25 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
         });
     };
 
+    const buttons = [
+        {
+            label: data.labels.payOnline,
+            icon: 'ArrowUpRight',
+        },
+        {
+            label: data.labels.reorder,
+            icon: 'IterationCw',
+        },
+        {
+            label: data.labels.trackOrder,
+            icon: 'Truck',
+        },
+    ];
+
+    const actions = data.order.overdue.isOverdue ? buttons : buttons.slice(1);
+
+    const t = useTranslations();
+
     return (
         <div className="w-full">
             <div className="flex flex-col gap-6">
@@ -156,15 +177,59 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
                     </div>
                     <div className="flex flex-row justify-end">
                         <div className="flex flex-col gap-4 sm:flex-row sm:items-center w-full sm:w-auto">
-                            {data.actionLinks && (
-                                <ActionLinks
-                                    actionLinks={
-                                        data.order.overdue.isOverdue ? data.actionLinks : data.actionLinks.slice(1)
-                                    }
-                                    showMoreLabel={data.labels.showMore}
-                                    alert={data.order.overdue.isOverdue}
-                                />
-                            )}
+                            {/* <ActionLinks
+                                actionLinks={
+                                    data.order.overdue.isOverdue ? data.actionLinks : data.actionLinks.slice(1)
+                                }
+                                showMoreLabel={data.labels.showMore}
+                                alert={data.order.overdue.isOverdue}
+                            /> */}
+                            <ActionLinks
+                                visibleActions={[
+                                    <TooltipHover
+                                        key={actions[0]?.label}
+                                        trigger={(setIsOpen) => (
+                                            <Button
+                                                variant={data.order.overdue.isOverdue ? 'destructive' : 'default'}
+                                                onClick={() => setIsOpen(true)}
+                                            >
+                                                {actions[0]?.icon && <DynamicIcon name={actions[0].icon} size={16} />}
+                                                {actions[0]?.label}
+                                            </Button>
+                                        )}
+                                        content={<p>{t('general.comingSoon')}</p>}
+                                    />,
+                                    <TooltipHover
+                                        key={actions[1]?.label}
+                                        trigger={(setIsOpen) => (
+                                            <Button variant={'secondary'} onClick={() => setIsOpen(true)}>
+                                                {actions[1]?.icon && <DynamicIcon name={actions[1].icon} size={16} />}
+                                                {actions[1]?.label}
+                                            </Button>
+                                        )}
+                                        content={<p>{t('general.comingSoon')}</p>}
+                                    />,
+                                ]}
+                                dropdownActions={actions.slice(2).map((action) => (
+                                    <TooltipHover
+                                        key={action.label}
+                                        trigger={(setIsOpen) => (
+                                            <Button
+                                                variant="ghost"
+                                                size="sm"
+                                                disabled
+                                                className="w-full justify-start h-8"
+                                                onClick={() => setIsOpen(true)}
+                                            >
+                                                {action.icon && <DynamicIcon name={action.icon} size={16} />}
+                                                {action.label}
+                                            </Button>
+                                        )}
+                                        content={<p>{t('general.comingSoon')}</p>}
+                                    />
+                                ))}
+                                showMoreLabel={data.labels.showMore}
+                            />
                         </div>
                     </div>
                 </div>

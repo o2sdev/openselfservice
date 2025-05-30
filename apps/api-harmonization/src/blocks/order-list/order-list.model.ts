@@ -21,6 +21,7 @@ export class OrderListBlock extends Block.Block {
     labels!: {
         showMore: string;
         clickToSelect: string;
+        reorder: string;
     };
 }
 
@@ -47,5 +48,4 @@ export class Order {
     };
     currency!: Orders.Model.Order['currency'];
     detailsUrl!: string;
-    actionLinks?: Models.ActionLink.ActionLink[];
 }

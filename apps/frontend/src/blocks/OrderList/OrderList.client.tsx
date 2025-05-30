@@ -1,15 +1,21 @@
 'use client';
 
 import { Blocks } from '@o2s/api-harmonization';
-import { ArrowRight } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { ArrowRight, IterationCw, MoreVertical } from 'lucide-react';
 import React, { useState, useTransition } from 'react';
 
 import { Badge } from '@o2s/ui/components/badge';
 import { Button } from '@o2s/ui/components/button';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from '@o2s/ui/components/dropdown-menu';
 import { LoadingOverlay } from '@o2s/ui/components/loading-overlay';
 import { Separator } from '@o2s/ui/components/separator';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@o2s/ui/components/table';
+import { Typography } from '@o2s/ui/components/typography';
 
 import { sdk } from '@/api/sdk';
 
@@ -17,7 +23,6 @@ import { orderBadgeVariants } from '@/utils/mappings/order-badge';
 
 import { Link as NextLink } from '@/i18n';
 
-import { ActionLinks } from '@/components/ActionLinks/ActionLinks';
 import { FiltersSection } from '@/components/Filters/FiltersSection';
 import { NoResults } from '@/components/NoResults/NoResults';
 import { Pagination } from '@/components/Pagination/Pagination';
@@ -33,8 +38,6 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
     };
 
     const initialData = component.orders.data;
-
-    const t = useTranslations();
 
     const [data, setData] = useState<Blocks.OrderList.Model.OrderListBlock>(component);
     const [filters, setFilters] = useState(initialFilters);
@@ -174,14 +177,28 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
                                                                     {data.table.actions.label}
                                                                 </NextLink>
                                                             </Button>
-                                                            {order.actionLinks && (
-                                                                <ActionLinks
-                                                                    actionLinks={order.actionLinks}
-                                                                    showMoreLabel={data.labels.showMore}
-                                                                    hideAll={true}
-                                                                    triggerVariant="ghost"
-                                                                />
-                                                            )}
+                                                            <DropdownMenu>
+                                                                <DropdownMenuTrigger asChild>
+                                                                    <Button
+                                                                        variant="ghost"
+                                                                        size="icon"
+                                                                        aria-label={data.labels.showMore}
+                                                                    >
+                                                                        <MoreVertical className="h-4 w-4" />
+                                                                    </Button>
+                                                                </DropdownMenuTrigger>
+                                                                <DropdownMenuContent align="end" className="min-w-50">
+                                                                    <DropdownMenuItem asChild disabled>
+                                                                        <Typography
+                                                                            variant="small"
+                                                                            className="text-muted-foreground"
+                                                                        >
+                                                                            <IterationCw className="h-4 w-4" />
+                                                                            {data.labels.reorder}
+                                                                        </Typography>
+                                                                    </DropdownMenuItem>
+                                                                </DropdownMenuContent>
+                                                            </DropdownMenu>
                                                         </div>
                                                     </TableCell>
                                                 )}

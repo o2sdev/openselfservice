@@ -1,5 +1,5 @@
 import { Order } from '@/modules/orders/orders.model';
-import { ActionLink, Block, DataTable, Filters, Mapping, Pagination } from '@/utils/models';
+import { Block, DataTable, Filters, Mapping, Pagination } from '@/utils/models';
 
 export class OrderListBlock extends Block.Block {
     title?: string;
@@ -16,8 +16,8 @@ export class OrderListBlock extends Block.Block {
         today: string;
         yesterday: string;
         showMore: string;
+        reorder: string;
         clickToSelect: string;
     };
     detailsUrl!: string;
-    actionLinks?: ActionLink.ActionLink[];
 }

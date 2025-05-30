@@ -100,16 +100,9 @@ const MOCK_ORDER_LIST_BLOCK_EN: CMS.Model.OrderListBlock.OrderListBlock = {
         yesterday: 'Yesterday',
         showMore: 'Show more',
         clickToSelect: 'Click to select',
+        reorder: 'Reorder',
     },
     detailsUrl: '/orders/{id}',
-    actionLinks: [
-        {
-            label: 'Reorder',
-            icon: 'IterationCw',
-            inProgress: true,
-            url: '/orders/{id}',
-        },
-    ],
 };
 
 const MOCK_ORDER_LIST_BLOCK_DE: CMS.Model.OrderListBlock.OrderListBlock = {
@@ -212,16 +205,9 @@ const MOCK_ORDER_LIST_BLOCK_DE: CMS.Model.OrderListBlock.OrderListBlock = {
         yesterday: 'Gestern',
         showMore: 'Mehr anzeigen',
         clickToSelect: 'Klicken Sie, um auszuwählen',
+        reorder: 'Erneut bestellen',
     },
     detailsUrl: '/bestellungen/{id}',
-    actionLinks: [
-        {
-            label: 'Erneut bestellen',
-            icon: 'IterationCw',
-            inProgress: true,
-            url: '/bestellungen/{id}',
-        },
-    ],
 };
 
 const MOCK_ORDER_LIST_BLOCK_PL: CMS.Model.OrderListBlock.OrderListBlock = {
@@ -324,16 +310,9 @@ const MOCK_ORDER_LIST_BLOCK_PL: CMS.Model.OrderListBlock.OrderListBlock = {
         yesterday: 'Wczoraj',
         showMore: 'Pokaż więcej',
         clickToSelect: 'Kliknij, aby wybrać',
+        reorder: 'Zamów ponownie',
     },
     detailsUrl: '/zamowienia/{id}',
-    actionLinks: [
-        {
-            label: 'Zamów ponownie',
-            icon: 'IterationCw',
-            inProgress: true,
-            url: '/zamowienia/{id}',
-        },
-    ],
 };
 
 export const mapOrderListBlock = (locale: string): CMS.Model.OrderListBlock.OrderListBlock => {

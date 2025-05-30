@@ -7,7 +7,7 @@ export class TicketListBlock extends Block.Block {
     __typename!: 'TicketListBlock';
     title?: string;
     subtitle?: string;
-    actionLinks?: Models.ActionLink.ActionLink[];
+    forms?: Models.Link.Link[];
     table!: Models.DataTable.DataTable<Tickets.Model.Ticket>;
     pagination?: Models.Pagination.Pagination;
     filters?: Models.Filters.Filters<Tickets.Model.Ticket>;

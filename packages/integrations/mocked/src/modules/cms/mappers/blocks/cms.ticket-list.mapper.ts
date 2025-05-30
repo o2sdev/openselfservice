@@ -4,24 +4,21 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
     id: 'ticket-list-1',
     title: 'Cases',
     subtitle: 'Your recent cases',
-    actionLinks: [
+    forms: [
         {
             label: 'Submit complaint',
             url: '/submit-complaint',
             icon: 'MessageSquareWarning',
-            inProgress: false,
         },
         {
             label: 'Request device maintenance',
             url: '/request-device-maintenance',
             icon: 'Hammer',
-            inProgress: false,
         },
         {
             label: 'Contact us',
             icon: 'ClipboardPenLine',
             url: '/contact-us',
-            inProgress: false,
         },
     ],
     table: {
@@ -160,24 +157,21 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
     id: 'ticket-list-1',
     title: 'Fallübersicht',
     subtitle: 'Ihre neuesten Fälle',
-    actionLinks: [
+    forms: [
         {
             label: 'Beschwerde einreichen',
             url: '/submit-complaint',
             icon: 'MessageSquareWarning',
-            inProgress: false,
         },
         {
             label: 'Gerätewartung anfordern',
             url: '/request-device-maintenance',
             icon: 'Hammer',
-            inProgress: false,
         },
         {
             label: 'Kontakt',
             icon: 'ClipboardPenLine',
             url: '/contact-us',
-            inProgress: false,
         },
     ],
     table: {
@@ -318,24 +312,21 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
     id: 'ticket-list-1',
     title: 'Zgłoszenia',
     subtitle: 'Twoje ostatnie zgłoszenia',
-    actionLinks: [
+    forms: [
         {
             label: 'Zgłoś błąd',
             url: '/submit-complaint',
             icon: 'MessageSquareWarning',
-            inProgress: false,
         },
         {
             label: 'Zgłoś wymagane konserwacje',
             url: '/request-device-maintenance',
             icon: 'Hammer',
-            inProgress: false,
         },
         {
             label: 'Skontaktuj się z nami',
             icon: 'ClipboardPenLine',
             url: '/contact-us',
-            inProgress: false,
         },
     ],
 

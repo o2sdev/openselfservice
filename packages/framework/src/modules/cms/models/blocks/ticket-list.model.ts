@@ -1,6 +1,6 @@
 import { Ticket } from '@/modules/tickets/tickets.model';
 import { Block, DataTable, Filters, Mapping, Pagination } from '@/utils/models';
-import { ActionLink } from '@/utils/models/action-link';
+import { Link } from '@/utils/models/link';
 
 export class TicketListBlock extends Block.Block {
     title?: string;
@@ -20,5 +20,5 @@ export class TicketListBlock extends Block.Block {
         clickToSelect: string;
     };
     detailsUrl!: string;
-    actionLinks?: ActionLink[];
+    forms?: Link[];
 }

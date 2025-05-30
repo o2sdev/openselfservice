@@ -20,7 +20,7 @@ fragment TicketListComponent on ComponentComponentsTicketList {
         description
     }
     detailsURL
-    actionLinks {
-        ...ActionLinks
+    forms {
+        ...Link
     }
 }

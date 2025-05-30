@@ -105,7 +105,6 @@ export const mapOrderDetails = (
             noResults: cms.noResults,
         },
         labels: cms.labels,
-        actionLinks: cms.actionLinks,
     };
 };
 

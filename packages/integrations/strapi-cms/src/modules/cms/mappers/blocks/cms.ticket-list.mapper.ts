@@ -2,13 +2,13 @@ import { NotFoundException } from '@nestjs/common';
 
 import { CMS } from '@o2s/framework/modules';
 
-import { mapActionLinks } from '../cms.actionLinks.mapper';
 import { mapFields } from '../cms.fieldMapping.mapper';
 import { mapFilters } from '../cms.filters.mapper';
+import { mapLink } from '../cms.link.mapper';
 import { mapPagination } from '../cms.pagination.mapper';
 import { mapTable } from '../cms.table.mapper';
 
-import { ComponentContentActionLinks, GetComponentQuery } from '@/generated/strapi';
+import { GetComponentQuery } from '@/generated/strapi';
 
 export const mapTicketListBlock = (data: GetComponentQuery): CMS.Model.TicketListBlock.TicketListBlock => {
     const component = data.component!.content[0];
@@ -24,7 +24,7 @@ export const mapTicketListBlock = (data: GetComponentQuery): CMS.Model.TicketLis
                 id: component.id,
                 title: component.title,
                 subtitle: component.subtitle,
-                actionLinks: mapActionLinks(component.actionLinks as ComponentContentActionLinks[]),
+                forms: component.forms?.map((link) => mapLink(link)).filter((link) => link !== undefined),
                 table: mapTable(component.table),
                 fieldMapping: mapFields(component.fields),
                 pagination: mapPagination(component.pagination),

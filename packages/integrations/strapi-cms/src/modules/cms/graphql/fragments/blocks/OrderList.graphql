@@ -20,7 +20,4 @@ fragment OrderListComponent on ComponentComponentsOrderList {
         description
     }
     detailsURL
-    actionLinks {
-        ...ActionLinks
-    }
 }
