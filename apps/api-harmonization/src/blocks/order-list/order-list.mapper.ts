@@ -27,6 +27,7 @@ export const mapOrderList = (
         },
         pagination: cms.pagination,
         labels: cms.labels,
+        reorderLabel: cms.reorderLabel,
     };
 };
 

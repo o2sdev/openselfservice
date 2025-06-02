@@ -1,5 +1,11 @@
 # @o2s/integrations.algolia
 
+## 1.1.0
+
+### Minor Changes
+
+- 84510e2: adjusted algolia article search
+
 ## 1.0.0
 
 ### Major Changes

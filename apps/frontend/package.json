@@ -1,6 +1,6 @@
 {
     "name": "@o2s/frontend",
-    "version": "1.0.0",
+    "version": "1.2.0",
     "private": true,
     "scripts": {"dev": "next dev --turbopack",
         "dev:https": "next dev --turbopack --experimental-https",
