@@ -1,0 +1,5 @@
+fragment RegexValidationComponent on ComponentContentRegexValidation {
+    type
+    label
+    regex
+}

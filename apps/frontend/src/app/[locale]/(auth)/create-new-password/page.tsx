@@ -118,6 +118,7 @@ export default async function CreateNewPasswordPage({ params }: Readonly<Props>)
                                         hide: data.labels?.hide,
                                         show: data.labels?.show,
                                         errorMessages: data.confirmPassword?.errorMessages,
+                                        description: data.confirmPassword?.description,
                                     },
                                     creatingPasswordError: data.creatingPasswordError,
                                     requiredLabel: data.labels?.requiredLabel,

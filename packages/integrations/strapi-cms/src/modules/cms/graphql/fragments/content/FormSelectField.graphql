@@ -1,4 +1,4 @@
-fragment FormFieldComponent on ComponentContentFormField {
+fragment FormSelectFieldComponent on ComponentContentFormSelectField {
     __typename
     id
     name
@@ -8,4 +8,8 @@ fragment FormFieldComponent on ComponentContentFormField {
         ...ErrorMessageComponent
     }
     description
+    options {
+        key
+        value
+    }
 }

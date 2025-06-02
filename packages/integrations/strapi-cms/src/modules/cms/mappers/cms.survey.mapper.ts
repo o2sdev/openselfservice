@@ -18,5 +18,9 @@ export const mapSurvey = (data: GetSurveyQuery): CMS.Model.Survey.Survey => {
         postId: survey.postId,
         submitDestination: survey.submitDestination ? (survey.submitDestination as string[]) : [],
         requiredRoles: survey.requiredRoles ? (survey.requiredRoles as string[]) : [],
+        labels: {
+            requiredLabel: data.configurableTexts?.validation?.isRequired || '',
+            optionalLabel: data.configurableTexts?.validation?.isOptional || '',
+        },
     };
 };

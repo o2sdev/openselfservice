@@ -5,4 +5,8 @@ export class Survey {
     surveyType!: string;
     submitDestination!: string[];
     postId!: string;
+    labels!: {
+        requiredLabel: string;
+        optionalLabel: string;
+    };
 }

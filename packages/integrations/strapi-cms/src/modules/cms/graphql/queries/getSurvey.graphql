@@ -7,4 +7,10 @@ query getSurvey($code: String) {
         requiredRoles
         submitDestination
     }
+    configurableTexts {
+        validation {
+            isRequired
+            isOptional
+        }
+    }
 }

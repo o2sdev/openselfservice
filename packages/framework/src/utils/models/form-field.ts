@@ -5,7 +5,10 @@ export class FormField {
     placeholder?: string;
     description?: string;
     errorMessages?: ErrorMessage[];
-    regexValidations?: RegexValidation[];
+}
+
+export class FormFieldWithRegex extends FormField {
+    regexValidations!: RegexValidation[];
 }
 
 export class SelectFormField extends FormField {
@@ -20,8 +23,7 @@ export class ErrorMessage {
 }
 
 export class RegexValidation {
-    id!: string;
-    type!: 'min' | 'lowercase' | 'uppercase' | 'digit' | 'special' | 'nospace';
+    type!: string;
     label!: string;
     regex!: string;
 }

@@ -7,6 +7,10 @@ const MOCK_SURVEY_1: CMS.Model.Survey.Survey = {
     submitDestination: ['surveyjs'],
     requiredRoles: [],
     postId: 'a91349b1-0c4c-4b7a-b712-91f04a1e6e99',
+    labels: {
+        requiredLabel: 'Required',
+        optionalLabel: 'Optional',
+    },
 };
 
 const MOCK_SURVEY_2: CMS.Model.Survey.Survey = {
@@ -16,6 +20,10 @@ const MOCK_SURVEY_2: CMS.Model.Survey.Survey = {
     submitDestination: ['surveyjs'],
     requiredRoles: ['selfservice_user'],
     postId: 'e0f1b26b-a434-44ab-9608-c49dcd0658ec',
+    labels: {
+        requiredLabel: 'Required',
+        optionalLabel: 'Optional',
+    },
 };
 
 const MOCK_SURVEY_3: CMS.Model.Survey.Survey = {
@@ -25,6 +33,10 @@ const MOCK_SURVEY_3: CMS.Model.Survey.Survey = {
     submitDestination: ['surveyjs'],
     requiredRoles: ['selfservice_user'],
     postId: '17931fe3-2492-408c-8f91-8fc062606604',
+    labels: {
+        requiredLabel: 'Required',
+        optionalLabel: 'Optional',
+    },
 };
 
 const MOCK_SURVEYS = [MOCK_SURVEY_1, MOCK_SURVEY_2, MOCK_SURVEY_3];

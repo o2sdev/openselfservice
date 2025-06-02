@@ -27,6 +27,10 @@ query getAppConfig($locale: I18NLocaleCode!) {
             renew
             details
         }
+        validation {
+            isRequired
+            isOptional
+        }
     }
     i18NLocales {
         code

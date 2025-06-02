@@ -1,0 +1,6 @@
+fragment ListWithIconsComponent on ComponentContentListWithIcons {
+    title
+    icons {
+        ...IconWithTextComponent
+    }
+}

@@ -35,8 +35,6 @@ const RESET_PASSWORD_PAGE_PL: CMS.Model.ResetPasswordPage.ResetPasswordPage = {
     updatedAt: '2024-01-01',
     publishedAt: '2024-01-01',
     labels: {
-        show: 'Pokaż',
-        hide: 'Ukryj',
         requiredLabel: 'Wymagane',
         optionalLabel: 'Opcjonalne',
     },
@@ -97,8 +95,6 @@ const RESET_PASSWORD_PAGE_EN: CMS.Model.ResetPasswordPage.ResetPasswordPage = {
     updatedAt: '2024-01-01',
     publishedAt: '2024-01-01',
     labels: {
-        show: 'Show',
-        hide: 'Hide',
         requiredLabel: 'Required',
         optionalLabel: 'Optional',
     },
@@ -159,8 +155,6 @@ const RESET_PASSWORD_PAGE_DE: CMS.Model.ResetPasswordPage.ResetPasswordPage = {
     updatedAt: '2024-01-01',
     publishedAt: '2024-01-01',
     labels: {
-        show: 'Anzeigen',
-        hide: 'Verbergen',
         requiredLabel: 'Erforderlich',
         optionalLabel: 'Optional',
     },

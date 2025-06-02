@@ -22,6 +22,8 @@ class CustomSurveyQuestionDropdown extends SurveyQuestionDropdown {
                     disabled={this.question.readOnly}
                     label={this.question.title}
                     id={this.question.name}
+                    requiredLabel={this.question.labels.requiredLabel}
+                    optionalLabel={this.question.labels.optionalLabel}
                 >
                     <SelectTrigger
                         className={cn(this.question.errors?.length && 'border-destructive')}

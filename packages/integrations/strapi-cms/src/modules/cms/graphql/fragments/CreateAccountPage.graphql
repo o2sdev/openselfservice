@@ -1,0 +1,53 @@
+fragment CreateAccountPage on CreateAccountPage {
+    createdAt
+    updatedAt
+    publishedAt
+    SEO {
+        ...Seo
+    }
+    username {
+        ...FormFieldComponent
+    }
+    taxId {
+        ...FormFieldComponent
+    }
+    firstName {
+        ...FormFieldComponent
+    }
+    lastName {
+        ...FormFieldComponent
+    }
+    companyName {
+        ...FormFieldComponent
+    }
+    clientId {
+        ...FormFieldComponent
+    }
+    phone {
+        ...FormFieldComponent
+    }
+    position {
+        ...FormSelectFieldComponent
+    }
+    invalidCredentials
+    badge
+    changeCompanyTaxIdLabel
+    companySectionTitle
+    userSectionTitle
+    termsAndConditions
+    creatingAccountProblem
+    step1Title
+    step1Subtitle
+    step1SubmitButton
+    step2Title
+    step2Subtitle
+    step2SubmitButton
+    signInTitle
+    signInButton {
+        ...Link
+    }
+    sideContent {
+        ...ListWithIconsComponent
+    }
+    activationContactInfo
+}

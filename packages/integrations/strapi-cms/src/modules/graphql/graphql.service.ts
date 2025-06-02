@@ -8,6 +8,8 @@ import {
     GetArticlesQueryVariables,
     GetCategoriesQueryVariables,
     GetComponentQueryVariables,
+    GetCreateAccountPageQueryVariables,
+    GetCreateNewPasswordPageQueryVariables,
     GetFooterQueryVariables,
     GetHeaderQueryVariables,
     GetLoginPageQueryVariables,
@@ -15,6 +17,7 @@ import {
     GetOrganizationListQueryVariables,
     GetPageQueryVariables,
     GetPagesQueryVariables,
+    GetResetPasswordPageQueryVariables,
     GetSurveyQueryVariables,
     Sdk,
     getSdk,
@@ -49,6 +52,17 @@ export class GraphqlService {
 
     public getLoginPage(params: GetLoginPageQueryVariables) {
         return this.sdk.getLoginPage(params);
+    }
+    public getResetPasswordPage(params: GetResetPasswordPageQueryVariables) {
+        return this.sdk.getResetPasswordPage(params);
+    }
+
+    public getCreateNewPasswordPage(params: GetCreateNewPasswordPageQueryVariables) {
+        return this.sdk.getCreateNewPasswordPage(params);
+    }
+
+    public getCreateAccountPage(params: GetCreateAccountPageQueryVariables) {
+        return this.sdk.getCreateAccountPage(params);
     }
 
     public getNotFoundPage(params: GetNotFoundPageQueryVariables) {

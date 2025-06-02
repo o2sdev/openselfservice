@@ -37,7 +37,6 @@ export const mapOrderListBlock = (data: GetComponentQuery): CMS.Model.OrderListB
                     showMore: configurableTexts.actions.showMore,
                     clickToSelect: configurableTexts.actions.clickToSelect,
                 },
-                reorderLabel: component.reorderLabel,
                 detailsUrl: component.detailsURL as string,
             };
     }

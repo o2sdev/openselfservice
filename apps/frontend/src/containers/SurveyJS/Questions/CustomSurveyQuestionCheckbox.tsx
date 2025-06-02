@@ -42,6 +42,8 @@ class CustomSurveyQuestionCheckboxItem extends SurveyQuestionCheckboxItem {
                 aria-invalid={!!this.question.errors?.length}
                 className={cn(this.question.errors?.length && 'border-destructive')}
                 label={this.renderLocString(this.item.locText, this.textStyle)}
+                requiredLabel={this.question.labels.requiredLabel}
+                optionalLabel={this.question.labels.optionalLabel}
             />
         );
     }

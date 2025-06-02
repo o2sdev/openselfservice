@@ -482,12 +482,15 @@ export type ComponentComponentsOrderDetails = {
     orderStatus: ComponentContentInformationCard;
     overdue: ComponentContentInformationCard;
     pagination?: Maybe<ComponentContentPagination>;
+    payOnlineLabel?: Maybe<Scalars['String']['output']>;
     paymentDueDate: ComponentContentInformationCard;
     productsTitle?: Maybe<Scalars['String']['output']>;
+    reorderLabel?: Maybe<Scalars['String']['output']>;
     statusLadder: Array<Maybe<ComponentContentMessageSimple>>;
     table: ComponentContentTable;
     title?: Maybe<Scalars['String']['output']>;
     totalValue: ComponentContentInformationCard;
+    trackOrderLabel?: Maybe<Scalars['String']['output']>;
 };
 
 export type ComponentComponentsOrderDetailsFieldsArgs = {
@@ -865,6 +868,7 @@ export type ComponentContentFiltersItems_ConnectionArgs = {
 };
 
 export type ComponentContentFormField = {
+    description?: Maybe<Scalars['String']['output']>;
     errorMessages?: Maybe<Array<Maybe<ComponentContentErrorMessage>>>;
     id: Scalars['ID']['output'];
     label: Scalars['String']['output'];
@@ -880,6 +884,7 @@ export type ComponentContentFormFieldErrorMessagesArgs = {
 
 export type ComponentContentFormFieldFiltersInput = {
     and?: InputMaybe<Array<InputMaybe<ComponentContentFormFieldFiltersInput>>>;
+    description?: InputMaybe<StringFilterInput>;
     errorMessages?: InputMaybe<ComponentContentErrorMessageFiltersInput>;
     label?: InputMaybe<StringFilterInput>;
     name?: InputMaybe<StringFilterInput>;
@@ -889,11 +894,99 @@ export type ComponentContentFormFieldFiltersInput = {
 };
 
 export type ComponentContentFormFieldInput = {
+    description?: InputMaybe<Scalars['String']['input']>;
     errorMessages?: InputMaybe<Array<InputMaybe<ComponentContentErrorMessageInput>>>;
     id?: InputMaybe<Scalars['ID']['input']>;
     label?: InputMaybe<Scalars['String']['input']>;
     name?: InputMaybe<Scalars['String']['input']>;
     placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ComponentContentFormFieldWithRegex = {
+    description?: Maybe<Scalars['String']['output']>;
+    errorMessages?: Maybe<Array<Maybe<ComponentContentErrorMessage>>>;
+    id: Scalars['ID']['output'];
+    label: Scalars['String']['output'];
+    name: Scalars['String']['output'];
+    placeholder?: Maybe<Scalars['String']['output']>;
+    regexValidations: Array<Maybe<ComponentContentRegexValidation>>;
+};
+
+export type ComponentContentFormFieldWithRegexErrorMessagesArgs = {
+    filters?: InputMaybe<ComponentContentErrorMessageFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ComponentContentFormFieldWithRegexRegexValidationsArgs = {
+    filters?: InputMaybe<ComponentContentRegexValidationFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ComponentContentFormFieldWithRegexInput = {
+    description?: InputMaybe<Scalars['String']['input']>;
+    errorMessages?: InputMaybe<Array<InputMaybe<ComponentContentErrorMessageInput>>>;
+    id?: InputMaybe<Scalars['ID']['input']>;
+    label?: InputMaybe<Scalars['String']['input']>;
+    name?: InputMaybe<Scalars['String']['input']>;
+    placeholder?: InputMaybe<Scalars['String']['input']>;
+    regexValidations?: InputMaybe<Array<InputMaybe<ComponentContentRegexValidationInput>>>;
+};
+
+export type ComponentContentFormSelectField = {
+    description?: Maybe<Scalars['String']['output']>;
+    errorMessages?: Maybe<Array<Maybe<ComponentContentErrorMessage>>>;
+    id: Scalars['ID']['output'];
+    label: Scalars['String']['output'];
+    name: Scalars['String']['output'];
+    options: Array<Maybe<ComponentContentKeyValue>>;
+    placeholder?: Maybe<Scalars['String']['output']>;
+};
+
+export type ComponentContentFormSelectFieldErrorMessagesArgs = {
+    filters?: InputMaybe<ComponentContentErrorMessageFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ComponentContentFormSelectFieldOptionsArgs = {
+    filters?: InputMaybe<ComponentContentKeyValueFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ComponentContentFormSelectFieldInput = {
+    description?: InputMaybe<Scalars['String']['input']>;
+    errorMessages?: InputMaybe<Array<InputMaybe<ComponentContentErrorMessageInput>>>;
+    id?: InputMaybe<Scalars['ID']['input']>;
+    label?: InputMaybe<Scalars['String']['input']>;
+    name?: InputMaybe<Scalars['String']['input']>;
+    options?: InputMaybe<Array<InputMaybe<ComponentContentKeyValueInput>>>;
+    placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ComponentContentIconWithText = {
+    description?: Maybe<Scalars['String']['output']>;
+    id: Scalars['ID']['output'];
+    name: Scalars['String']['output'];
+    title?: Maybe<Scalars['String']['output']>;
+};
+
+export type ComponentContentIconWithTextFiltersInput = {
+    and?: InputMaybe<Array<InputMaybe<ComponentContentIconWithTextFiltersInput>>>;
+    description?: InputMaybe<StringFilterInput>;
+    name?: InputMaybe<StringFilterInput>;
+    not?: InputMaybe<ComponentContentIconWithTextFiltersInput>;
+    or?: InputMaybe<Array<InputMaybe<ComponentContentIconWithTextFiltersInput>>>;
+    title?: InputMaybe<StringFilterInput>;
+};
+
+export type ComponentContentIconWithTextInput = {
+    description?: InputMaybe<Scalars['String']['input']>;
+    id?: InputMaybe<Scalars['ID']['input']>;
+    name?: InputMaybe<Scalars['String']['input']>;
+    title?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ComponentContentInformationCard = {
@@ -917,6 +1010,12 @@ export type ComponentContentKeyValueFiltersInput = {
     not?: InputMaybe<ComponentContentKeyValueFiltersInput>;
     or?: InputMaybe<Array<InputMaybe<ComponentContentKeyValueFiltersInput>>>;
     value?: InputMaybe<StringFilterInput>;
+};
+
+export type ComponentContentKeyValueInput = {
+    id?: InputMaybe<Scalars['ID']['input']>;
+    key?: InputMaybe<Scalars['String']['input']>;
+    value?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ComponentContentKeyword = {
@@ -960,6 +1059,24 @@ export type ComponentContentLinkInput = {
     label?: InputMaybe<Scalars['String']['input']>;
     page?: InputMaybe<Scalars['ID']['input']>;
     url?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ComponentContentListWithIcons = {
+    icons: Array<Maybe<ComponentContentIconWithText>>;
+    id: Scalars['ID']['output'];
+    title?: Maybe<Scalars['String']['output']>;
+};
+
+export type ComponentContentListWithIconsIconsArgs = {
+    filters?: InputMaybe<ComponentContentIconWithTextFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ComponentContentListWithIconsInput = {
+    icons?: InputMaybe<Array<InputMaybe<ComponentContentIconWithTextInput>>>;
+    id?: InputMaybe<Scalars['ID']['input']>;
+    title?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ComponentContentMessage = {
@@ -1045,6 +1162,29 @@ export type ComponentContentPagination = {
     perPage: Scalars['Int']['output'];
     previousLabel: Scalars['String']['output'];
     selectPageLabel: Scalars['String']['output'];
+};
+
+export type ComponentContentRegexValidation = {
+    id: Scalars['ID']['output'];
+    label: Scalars['String']['output'];
+    regex: Scalars['String']['output'];
+    type: Scalars['String']['output'];
+};
+
+export type ComponentContentRegexValidationFiltersInput = {
+    and?: InputMaybe<Array<InputMaybe<ComponentContentRegexValidationFiltersInput>>>;
+    label?: InputMaybe<StringFilterInput>;
+    not?: InputMaybe<ComponentContentRegexValidationFiltersInput>;
+    or?: InputMaybe<Array<InputMaybe<ComponentContentRegexValidationFiltersInput>>>;
+    regex?: InputMaybe<StringFilterInput>;
+    type?: InputMaybe<StringFilterInput>;
+};
+
+export type ComponentContentRegexValidationInput = {
+    id?: InputMaybe<Scalars['ID']['input']>;
+    label?: InputMaybe<Scalars['String']['input']>;
+    regex?: InputMaybe<Scalars['String']['input']>;
+    type?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ComponentContentRichTextWithTitle = {
@@ -1178,7 +1318,7 @@ export type ComponentLabelsErrorsInput = {
 
 export type ComponentLabelsValidation = {
     id: Scalars['ID']['output'];
-    isOptional?: Maybe<Scalars['String']['output']>;
+    isOptional: Scalars['String']['output'];
     isRequired: Scalars['String']['output'];
 };
 
@@ -1338,6 +1478,110 @@ export type ConfigurableTextsInput = {
 
 export type ConfigurableTextsRelationResponseCollection = {
     nodes: Array<ConfigurableTexts>;
+};
+
+export type CreateAccountPage = {
+    SEO: ComponentSeoSeo;
+    activationContactInfo: Scalars['String']['output'];
+    badge: Scalars['String']['output'];
+    changeCompanyTaxIdLabel: Scalars['String']['output'];
+    clientId: ComponentContentFormField;
+    companyName: ComponentContentFormField;
+    companySectionTitle: Scalars['String']['output'];
+    createdAt?: Maybe<Scalars['DateTime']['output']>;
+    creatingAccountProblem: Scalars['String']['output'];
+    documentId: Scalars['ID']['output'];
+    firstName: ComponentContentFormField;
+    invalidCredentials: Scalars['String']['output'];
+    lastName: ComponentContentFormField;
+    locale?: Maybe<Scalars['String']['output']>;
+    localizations: Array<Maybe<CreateAccountPage>>;
+    localizations_connection?: Maybe<CreateAccountPageRelationResponseCollection>;
+    phone: ComponentContentFormField;
+    position: ComponentContentFormSelectField;
+    publishedAt?: Maybe<Scalars['DateTime']['output']>;
+    sideContent: ComponentContentListWithIcons;
+    signInButton: ComponentContentLink;
+    signInTitle: Scalars['String']['output'];
+    step1SubmitButton: Scalars['String']['output'];
+    step1Subtitle: Scalars['String']['output'];
+    step1Title: Scalars['String']['output'];
+    step2SubmitButton: Scalars['String']['output'];
+    step2Subtitle: Scalars['String']['output'];
+    step2Title: Scalars['String']['output'];
+    taxId: ComponentContentFormField;
+    termsAndConditions: Scalars['String']['output'];
+    updatedAt?: Maybe<Scalars['DateTime']['output']>;
+    userSectionTitle: Scalars['String']['output'];
+    username: ComponentContentFormField;
+};
+
+export type CreateAccountPageInput = {
+    SEO?: InputMaybe<ComponentSeoSeoInput>;
+    activationContactInfo?: InputMaybe<Scalars['String']['input']>;
+    badge?: InputMaybe<Scalars['String']['input']>;
+    changeCompanyTaxIdLabel?: InputMaybe<Scalars['String']['input']>;
+    clientId?: InputMaybe<ComponentContentFormFieldInput>;
+    companyName?: InputMaybe<ComponentContentFormFieldInput>;
+    companySectionTitle?: InputMaybe<Scalars['String']['input']>;
+    creatingAccountProblem?: InputMaybe<Scalars['String']['input']>;
+    firstName?: InputMaybe<ComponentContentFormFieldInput>;
+    invalidCredentials?: InputMaybe<Scalars['String']['input']>;
+    lastName?: InputMaybe<ComponentContentFormFieldInput>;
+    phone?: InputMaybe<ComponentContentFormFieldInput>;
+    position?: InputMaybe<ComponentContentFormSelectFieldInput>;
+    publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+    sideContent?: InputMaybe<ComponentContentListWithIconsInput>;
+    signInButton?: InputMaybe<ComponentContentLinkInput>;
+    signInTitle?: InputMaybe<Scalars['String']['input']>;
+    step1SubmitButton?: InputMaybe<Scalars['String']['input']>;
+    step1Subtitle?: InputMaybe<Scalars['String']['input']>;
+    step1Title?: InputMaybe<Scalars['String']['input']>;
+    step2SubmitButton?: InputMaybe<Scalars['String']['input']>;
+    step2Subtitle?: InputMaybe<Scalars['String']['input']>;
+    step2Title?: InputMaybe<Scalars['String']['input']>;
+    taxId?: InputMaybe<ComponentContentFormFieldInput>;
+    termsAndConditions?: InputMaybe<Scalars['String']['input']>;
+    userSectionTitle?: InputMaybe<Scalars['String']['input']>;
+    username?: InputMaybe<ComponentContentFormFieldInput>;
+};
+
+export type CreateAccountPageRelationResponseCollection = {
+    nodes: Array<CreateAccountPage>;
+};
+
+export type CreateNewPasswordPage = {
+    SEO: ComponentSeoSeo;
+    confirmPassword: ComponentContentFormField;
+    createdAt?: Maybe<Scalars['DateTime']['output']>;
+    creatingPasswordError: Scalars['String']['output'];
+    documentId: Scalars['ID']['output'];
+    image: UploadFile;
+    locale?: Maybe<Scalars['String']['output']>;
+    localizations: Array<Maybe<CreateNewPasswordPage>>;
+    localizations_connection?: Maybe<CreateNewPasswordPageRelationResponseCollection>;
+    password: ComponentContentFormFieldWithRegex;
+    publishedAt?: Maybe<Scalars['DateTime']['output']>;
+    setNewPassword: Scalars['String']['output'];
+    subtitle: Scalars['String']['output'];
+    title: Scalars['String']['output'];
+    updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type CreateNewPasswordPageInput = {
+    SEO?: InputMaybe<ComponentSeoSeoInput>;
+    confirmPassword?: InputMaybe<ComponentContentFormFieldInput>;
+    creatingPasswordError?: InputMaybe<Scalars['String']['input']>;
+    image?: InputMaybe<Scalars['ID']['input']>;
+    password?: InputMaybe<ComponentContentFormFieldWithRegexInput>;
+    publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+    setNewPassword?: InputMaybe<Scalars['String']['input']>;
+    subtitle?: InputMaybe<Scalars['String']['input']>;
+    title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CreateNewPasswordPageRelationResponseCollection = {
+    nodes: Array<CreateNewPasswordPage>;
 };
 
 export type DateTimeFilterInput = {
@@ -1579,16 +1823,21 @@ export type GenericMorph =
     | ComponentContentFilterSelect
     | ComponentContentFilters
     | ComponentContentFormField
+    | ComponentContentFormFieldWithRegex
+    | ComponentContentFormSelectField
+    | ComponentContentIconWithText
     | ComponentContentInformationCard
     | ComponentContentKeyValue
     | ComponentContentKeyword
     | ComponentContentLink
+    | ComponentContentListWithIcons
     | ComponentContentMessage
     | ComponentContentMessageSimple
     | ComponentContentNavigationColumn
     | ComponentContentNavigationGroup
     | ComponentContentNavigationItem
     | ComponentContentPagination
+    | ComponentContentRegexValidation
     | ComponentContentRichTextWithTitle
     | ComponentContentTable
     | ComponentContentTableColumn
@@ -1601,6 +1850,8 @@ export type GenericMorph =
     | ComponentTemplatesOneColumn
     | ComponentTemplatesTwoColumn
     | ConfigurableTexts
+    | CreateAccountPage
+    | CreateNewPasswordPage
     | FilterItem
     | Footer
     | Header
@@ -1609,6 +1860,7 @@ export type GenericMorph =
     | NotFoundPage
     | OrganizationList
     | Page
+    | ResetPasswordPage
     | ReviewWorkflowsWorkflow
     | ReviewWorkflowsWorkflowStage
     | SurveyJsForm
@@ -1796,6 +2048,7 @@ export type JsonFilterInput = {
 
 export type LoginPage = {
     SEO: ComponentSeoSeo;
+    createAccountMessage: ComponentContentAlertBox;
     createdAt?: Maybe<Scalars['DateTime']['output']>;
     documentId: Scalars['ID']['output'];
     forgotPassword: ComponentContentLink;
@@ -1819,6 +2072,7 @@ export type LoginPage = {
 
 export type LoginPageInput = {
     SEO?: InputMaybe<ComponentSeoSeoInput>;
+    createAccountMessage?: InputMaybe<ComponentContentAlertBoxInput>;
     forgotPassword?: InputMaybe<ComponentContentLinkInput>;
     image?: InputMaybe<Scalars['ID']['input']>;
     invalidCredentials?: InputMaybe<Scalars['String']['input']>;
@@ -1864,6 +2118,8 @@ export type Mutation = {
     deleteCategory?: Maybe<DeleteMutationResponse>;
     deleteComponent?: Maybe<DeleteMutationResponse>;
     deleteConfigurableTexts?: Maybe<DeleteMutationResponse>;
+    deleteCreateAccountPage?: Maybe<DeleteMutationResponse>;
+    deleteCreateNewPasswordPage?: Maybe<DeleteMutationResponse>;
     deleteFilterItem?: Maybe<DeleteMutationResponse>;
     deleteFooter?: Maybe<DeleteMutationResponse>;
     deleteHeader?: Maybe<DeleteMutationResponse>;
@@ -1871,6 +2127,7 @@ export type Mutation = {
     deleteNotFoundPage?: Maybe<DeleteMutationResponse>;
     deleteOrganizationList?: Maybe<DeleteMutationResponse>;
     deletePage?: Maybe<DeleteMutationResponse>;
+    deleteResetPasswordPage?: Maybe<DeleteMutationResponse>;
     deleteReviewWorkflowsWorkflow?: Maybe<DeleteMutationResponse>;
     deleteReviewWorkflowsWorkflowStage?: Maybe<DeleteMutationResponse>;
     deleteSurveyJsForm?: Maybe<DeleteMutationResponse>;
@@ -1896,6 +2153,8 @@ export type Mutation = {
     updateCategory?: Maybe<Category>;
     updateComponent?: Maybe<Component>;
     updateConfigurableTexts?: Maybe<ConfigurableTexts>;
+    updateCreateAccountPage?: Maybe<CreateAccountPage>;
+    updateCreateNewPasswordPage?: Maybe<CreateNewPasswordPage>;
     updateFilterItem?: Maybe<FilterItem>;
     updateFooter?: Maybe<Footer>;
     updateHeader?: Maybe<Header>;
@@ -1903,6 +2162,7 @@ export type Mutation = {
     updateNotFoundPage?: Maybe<NotFoundPage>;
     updateOrganizationList?: Maybe<OrganizationList>;
     updatePage?: Maybe<Page>;
+    updateResetPasswordPage?: Maybe<ResetPasswordPage>;
     updateReviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
     updateReviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
     updateSurveyJsForm?: Maybe<SurveyJsForm>;
@@ -2030,6 +2290,14 @@ export type MutationDeleteConfigurableTextsArgs = {
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
 };
 
+export type MutationDeleteCreateAccountPageArgs = {
+    locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+};
+
+export type MutationDeleteCreateNewPasswordPageArgs = {
+    locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+};
+
 export type MutationDeleteFilterItemArgs = {
     documentId: Scalars['ID']['input'];
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
@@ -2059,6 +2327,10 @@ export type MutationDeleteOrganizationListArgs = {
 
 export type MutationDeletePageArgs = {
     documentId: Scalars['ID']['input'];
+    locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+};
+
+export type MutationDeleteResetPasswordPageArgs = {
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
 };
 
@@ -2156,6 +2428,18 @@ export type MutationUpdateConfigurableTextsArgs = {
     status?: InputMaybe<PublicationStatus>;
 };
 
+export type MutationUpdateCreateAccountPageArgs = {
+    data: CreateAccountPageInput;
+    locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type MutationUpdateCreateNewPasswordPageArgs = {
+    data: CreateNewPasswordPageInput;
+    locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    status?: InputMaybe<PublicationStatus>;
+};
+
 export type MutationUpdateFilterItemArgs = {
     data: FilterItemInput;
     documentId: Scalars['ID']['input'];
@@ -2198,6 +2482,12 @@ export type MutationUpdateOrganizationListArgs = {
 export type MutationUpdatePageArgs = {
     data: PageInput;
     documentId: Scalars['ID']['input'];
+    locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type MutationUpdateResetPasswordPageArgs = {
+    data: ResetPasswordPageInput;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
     status?: InputMaybe<PublicationStatus>;
 };
@@ -2400,6 +2690,8 @@ export type Query = {
     components: Array<Maybe<Component>>;
     components_connection?: Maybe<ComponentEntityResponseCollection>;
     configurableTexts?: Maybe<ConfigurableTexts>;
+    createAccountPage?: Maybe<CreateAccountPage>;
+    createNewPasswordPage?: Maybe<CreateNewPasswordPage>;
     filterItem?: Maybe<FilterItem>;
     filterItems: Array<Maybe<FilterItem>>;
     filterItems_connection?: Maybe<FilterItemEntityResponseCollection>;
@@ -2419,6 +2711,7 @@ export type Query = {
     page?: Maybe<Page>;
     pages: Array<Maybe<Page>>;
     pages_connection?: Maybe<PageEntityResponseCollection>;
+    resetPasswordPage?: Maybe<ResetPasswordPage>;
     reviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
     reviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
     reviewWorkflowsWorkflowStages: Array<Maybe<ReviewWorkflowsWorkflowStage>>;
@@ -2543,6 +2836,16 @@ export type QueryConfigurableTextsArgs = {
     status?: InputMaybe<PublicationStatus>;
 };
 
+export type QueryCreateAccountPageArgs = {
+    locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type QueryCreateNewPasswordPageArgs = {
+    locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    status?: InputMaybe<PublicationStatus>;
+};
+
 export type QueryFilterItemArgs = {
     documentId: Scalars['ID']['input'];
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
@@ -2662,6 +2965,11 @@ export type QueryPages_ConnectionArgs = {
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
     pagination?: InputMaybe<PaginationArg>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type QueryResetPasswordPageArgs = {
+    locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
     status?: InputMaybe<PublicationStatus>;
 };
 
@@ -2815,6 +3123,38 @@ export type QueryUsersPermissionsUsers_ConnectionArgs = {
     pagination?: InputMaybe<PaginationArg>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
+};
+
+export type ResetPasswordPage = {
+    SEO: ComponentSeoSeo;
+    createdAt?: Maybe<Scalars['DateTime']['output']>;
+    documentId: Scalars['ID']['output'];
+    image: UploadFile;
+    invalidCredentials: Scalars['String']['output'];
+    locale?: Maybe<Scalars['String']['output']>;
+    localizations: Array<Maybe<ResetPasswordPage>>;
+    localizations_connection?: Maybe<ResetPasswordPageRelationResponseCollection>;
+    publishedAt?: Maybe<Scalars['DateTime']['output']>;
+    resetPassword: Scalars['String']['output'];
+    subtitle: Scalars['String']['output'];
+    title: Scalars['String']['output'];
+    updatedAt?: Maybe<Scalars['DateTime']['output']>;
+    username: ComponentContentFormField;
+};
+
+export type ResetPasswordPageInput = {
+    SEO?: InputMaybe<ComponentSeoSeoInput>;
+    image?: InputMaybe<Scalars['ID']['input']>;
+    invalidCredentials?: InputMaybe<Scalars['String']['input']>;
+    publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+    resetPassword?: InputMaybe<Scalars['String']['input']>;
+    subtitle?: InputMaybe<Scalars['String']['input']>;
+    title?: InputMaybe<Scalars['String']['input']>;
+    username?: InputMaybe<ComponentContentFormFieldInput>;
+};
+
+export type ResetPasswordPageRelationResponseCollection = {
+    nodes: Array<ResetPasswordPage>;
 };
 
 export type ReviewWorkflowsWorkflow = {
@@ -3611,10 +3951,14 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
               items_connection?: Maybe<_RefType['FilterItemRelationResponseCollection']>;
           })
         | ComponentContentFormField
+        | ComponentContentFormFieldWithRegex
+        | ComponentContentFormSelectField
+        | ComponentContentIconWithText
         | (Omit<ComponentContentInformationCard, 'link'> & { link?: Maybe<_RefType['ComponentContentLink']> })
         | ComponentContentKeyValue
         | ComponentContentKeyword
         | (Omit<ComponentContentLink, 'page'> & { page?: Maybe<_RefType['Page']> })
+        | ComponentContentListWithIcons
         | ComponentContentMessage
         | ComponentContentMessageSimple
         | (Omit<ComponentContentNavigationColumn, 'items'> & {
@@ -3625,6 +3969,7 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
           })
         | (Omit<ComponentContentNavigationItem, 'page'> & { page?: Maybe<_RefType['Page']> })
         | ComponentContentPagination
+        | ComponentContentRegexValidation
         | ComponentContentRichTextWithTitle
         | ComponentContentTable
         | ComponentContentTableColumn
@@ -3659,6 +4004,18 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
               topSlot_connection?: Maybe<_RefType['ComponentRelationResponseCollection']>;
           })
         | ConfigurableTexts
+        | (Omit<CreateAccountPage, 'SEO' | 'localizations' | 'localizations_connection' | 'signInButton'> & {
+              SEO: _RefType['ComponentSeoSeo'];
+              localizations: Array<Maybe<_RefType['CreateAccountPage']>>;
+              localizations_connection?: Maybe<_RefType['CreateAccountPageRelationResponseCollection']>;
+              signInButton: _RefType['ComponentContentLink'];
+          })
+        | (Omit<CreateNewPasswordPage, 'SEO' | 'image' | 'localizations' | 'localizations_connection'> & {
+              SEO: _RefType['ComponentSeoSeo'];
+              image: _RefType['UploadFile'];
+              localizations: Array<Maybe<_RefType['CreateNewPasswordPage']>>;
+              localizations_connection?: Maybe<_RefType['CreateNewPasswordPageRelationResponseCollection']>;
+          })
         | (Omit<FilterItem, 'field' | 'localizations' | 'localizations_connection'> & {
               field: Array<Maybe<_RefType['FilterItemFieldDynamicZone']>>;
               localizations: Array<Maybe<_RefType['FilterItem']>>;
@@ -3702,6 +4059,12 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
               localizations_connection?: Maybe<_RefType['PageRelationResponseCollection']>;
               parent?: Maybe<_RefType['Page']>;
               template: Array<Maybe<_RefType['PageTemplateDynamicZone']>>;
+          })
+        | (Omit<ResetPasswordPage, 'SEO' | 'image' | 'localizations' | 'localizations_connection'> & {
+              SEO: _RefType['ComponentSeoSeo'];
+              image: _RefType['UploadFile'];
+              localizations: Array<Maybe<_RefType['ResetPasswordPage']>>;
+              localizations_connection?: Maybe<_RefType['ResetPasswordPageRelationResponseCollection']>;
           })
         | ReviewWorkflowsWorkflow
         | ReviewWorkflowsWorkflowStage
@@ -3977,11 +4340,19 @@ export type ResolversTypes = {
     ComponentContentFormField: ResolverTypeWrapper<ComponentContentFormField>;
     ComponentContentFormFieldFiltersInput: ComponentContentFormFieldFiltersInput;
     ComponentContentFormFieldInput: ComponentContentFormFieldInput;
+    ComponentContentFormFieldWithRegex: ResolverTypeWrapper<ComponentContentFormFieldWithRegex>;
+    ComponentContentFormFieldWithRegexInput: ComponentContentFormFieldWithRegexInput;
+    ComponentContentFormSelectField: ResolverTypeWrapper<ComponentContentFormSelectField>;
+    ComponentContentFormSelectFieldInput: ComponentContentFormSelectFieldInput;
+    ComponentContentIconWithText: ResolverTypeWrapper<ComponentContentIconWithText>;
+    ComponentContentIconWithTextFiltersInput: ComponentContentIconWithTextFiltersInput;
+    ComponentContentIconWithTextInput: ComponentContentIconWithTextInput;
     ComponentContentInformationCard: ResolverTypeWrapper<
         Omit<ComponentContentInformationCard, 'link'> & { link?: Maybe<ResolversTypes['ComponentContentLink']> }
     >;
     ComponentContentKeyValue: ResolverTypeWrapper<ComponentContentKeyValue>;
     ComponentContentKeyValueFiltersInput: ComponentContentKeyValueFiltersInput;
+    ComponentContentKeyValueInput: ComponentContentKeyValueInput;
     ComponentContentKeyword: ResolverTypeWrapper<ComponentContentKeyword>;
     ComponentContentKeywordFiltersInput: ComponentContentKeywordFiltersInput;
     ComponentContentKeywordInput: ComponentContentKeywordInput;
@@ -3990,6 +4361,8 @@ export type ResolversTypes = {
     >;
     ComponentContentLinkFiltersInput: ComponentContentLinkFiltersInput;
     ComponentContentLinkInput: ComponentContentLinkInput;
+    ComponentContentListWithIcons: ResolverTypeWrapper<ComponentContentListWithIcons>;
+    ComponentContentListWithIconsInput: ComponentContentListWithIconsInput;
     ComponentContentMessage: ResolverTypeWrapper<ComponentContentMessage>;
     ComponentContentMessageFiltersInput: ComponentContentMessageFiltersInput;
     ComponentContentMessageSimple: ResolverTypeWrapper<ComponentContentMessageSimple>;
@@ -4010,6 +4383,9 @@ export type ResolversTypes = {
     >;
     ComponentContentNavigationItemFiltersInput: ComponentContentNavigationItemFiltersInput;
     ComponentContentPagination: ResolverTypeWrapper<ComponentContentPagination>;
+    ComponentContentRegexValidation: ResolverTypeWrapper<ComponentContentRegexValidation>;
+    ComponentContentRegexValidationFiltersInput: ComponentContentRegexValidationFiltersInput;
+    ComponentContentRegexValidationInput: ComponentContentRegexValidationInput;
     ComponentContentRichTextWithTitle: ResolverTypeWrapper<ComponentContentRichTextWithTitle>;
     ComponentContentTable: ResolverTypeWrapper<ComponentContentTable>;
     ComponentContentTableColumn: ResolverTypeWrapper<ComponentContentTableColumn>;
@@ -4067,6 +4443,34 @@ export type ResolversTypes = {
     ConfigurableTexts: ResolverTypeWrapper<ConfigurableTexts>;
     ConfigurableTextsInput: ConfigurableTextsInput;
     ConfigurableTextsRelationResponseCollection: ResolverTypeWrapper<ConfigurableTextsRelationResponseCollection>;
+    CreateAccountPage: ResolverTypeWrapper<
+        Omit<CreateAccountPage, 'SEO' | 'localizations' | 'localizations_connection' | 'signInButton'> & {
+            SEO: ResolversTypes['ComponentSeoSeo'];
+            localizations: Array<Maybe<ResolversTypes['CreateAccountPage']>>;
+            localizations_connection?: Maybe<ResolversTypes['CreateAccountPageRelationResponseCollection']>;
+            signInButton: ResolversTypes['ComponentContentLink'];
+        }
+    >;
+    CreateAccountPageInput: CreateAccountPageInput;
+    CreateAccountPageRelationResponseCollection: ResolverTypeWrapper<
+        Omit<CreateAccountPageRelationResponseCollection, 'nodes'> & {
+            nodes: Array<ResolversTypes['CreateAccountPage']>;
+        }
+    >;
+    CreateNewPasswordPage: ResolverTypeWrapper<
+        Omit<CreateNewPasswordPage, 'SEO' | 'image' | 'localizations' | 'localizations_connection'> & {
+            SEO: ResolversTypes['ComponentSeoSeo'];
+            image: ResolversTypes['UploadFile'];
+            localizations: Array<Maybe<ResolversTypes['CreateNewPasswordPage']>>;
+            localizations_connection?: Maybe<ResolversTypes['CreateNewPasswordPageRelationResponseCollection']>;
+        }
+    >;
+    CreateNewPasswordPageInput: CreateNewPasswordPageInput;
+    CreateNewPasswordPageRelationResponseCollection: ResolverTypeWrapper<
+        Omit<CreateNewPasswordPageRelationResponseCollection, 'nodes'> & {
+            nodes: Array<ResolversTypes['CreateNewPasswordPage']>;
+        }
+    >;
     DateTime: ResolverTypeWrapper<Scalars['DateTime']['output']>;
     DateTimeFilterInput: DateTimeFilterInput;
     DeleteMutationResponse: ResolverTypeWrapper<DeleteMutationResponse>;
@@ -4195,6 +4599,20 @@ export type ResolversTypes = {
     PaginationArg: PaginationArg;
     PublicationStatus: PublicationStatus;
     Query: ResolverTypeWrapper<{}>;
+    ResetPasswordPage: ResolverTypeWrapper<
+        Omit<ResetPasswordPage, 'SEO' | 'image' | 'localizations' | 'localizations_connection'> & {
+            SEO: ResolversTypes['ComponentSeoSeo'];
+            image: ResolversTypes['UploadFile'];
+            localizations: Array<Maybe<ResolversTypes['ResetPasswordPage']>>;
+            localizations_connection?: Maybe<ResolversTypes['ResetPasswordPageRelationResponseCollection']>;
+        }
+    >;
+    ResetPasswordPageInput: ResetPasswordPageInput;
+    ResetPasswordPageRelationResponseCollection: ResolverTypeWrapper<
+        Omit<ResetPasswordPageRelationResponseCollection, 'nodes'> & {
+            nodes: Array<ResolversTypes['ResetPasswordPage']>;
+        }
+    >;
     ReviewWorkflowsWorkflow: ResolverTypeWrapper<ReviewWorkflowsWorkflow>;
     ReviewWorkflowsWorkflowEntityResponseCollection: ResolverTypeWrapper<ReviewWorkflowsWorkflowEntityResponseCollection>;
     ReviewWorkflowsWorkflowFiltersInput: ReviewWorkflowsWorkflowFiltersInput;
@@ -4454,17 +4872,27 @@ export type ResolversParentTypes = {
     ComponentContentFormField: ComponentContentFormField;
     ComponentContentFormFieldFiltersInput: ComponentContentFormFieldFiltersInput;
     ComponentContentFormFieldInput: ComponentContentFormFieldInput;
+    ComponentContentFormFieldWithRegex: ComponentContentFormFieldWithRegex;
+    ComponentContentFormFieldWithRegexInput: ComponentContentFormFieldWithRegexInput;
+    ComponentContentFormSelectField: ComponentContentFormSelectField;
+    ComponentContentFormSelectFieldInput: ComponentContentFormSelectFieldInput;
+    ComponentContentIconWithText: ComponentContentIconWithText;
+    ComponentContentIconWithTextFiltersInput: ComponentContentIconWithTextFiltersInput;
+    ComponentContentIconWithTextInput: ComponentContentIconWithTextInput;
     ComponentContentInformationCard: Omit<ComponentContentInformationCard, 'link'> & {
         link?: Maybe<ResolversParentTypes['ComponentContentLink']>;
     };
     ComponentContentKeyValue: ComponentContentKeyValue;
     ComponentContentKeyValueFiltersInput: ComponentContentKeyValueFiltersInput;
+    ComponentContentKeyValueInput: ComponentContentKeyValueInput;
     ComponentContentKeyword: ComponentContentKeyword;
     ComponentContentKeywordFiltersInput: ComponentContentKeywordFiltersInput;
     ComponentContentKeywordInput: ComponentContentKeywordInput;
     ComponentContentLink: Omit<ComponentContentLink, 'page'> & { page?: Maybe<ResolversParentTypes['Page']> };
     ComponentContentLinkFiltersInput: ComponentContentLinkFiltersInput;
     ComponentContentLinkInput: ComponentContentLinkInput;
+    ComponentContentListWithIcons: ComponentContentListWithIcons;
+    ComponentContentListWithIconsInput: ComponentContentListWithIconsInput;
     ComponentContentMessage: ComponentContentMessage;
     ComponentContentMessageFiltersInput: ComponentContentMessageFiltersInput;
     ComponentContentMessageSimple: ComponentContentMessageSimple;
@@ -4481,6 +4909,9 @@ export type ResolversParentTypes = {
     };
     ComponentContentNavigationItemFiltersInput: ComponentContentNavigationItemFiltersInput;
     ComponentContentPagination: ComponentContentPagination;
+    ComponentContentRegexValidation: ComponentContentRegexValidation;
+    ComponentContentRegexValidationFiltersInput: ComponentContentRegexValidationFiltersInput;
+    ComponentContentRegexValidationInput: ComponentContentRegexValidationInput;
     ComponentContentRichTextWithTitle: ComponentContentRichTextWithTitle;
     ComponentContentTable: ComponentContentTable;
     ComponentContentTableColumn: ComponentContentTableColumn;
@@ -4532,6 +4963,32 @@ export type ResolversParentTypes = {
     ConfigurableTexts: ConfigurableTexts;
     ConfigurableTextsInput: ConfigurableTextsInput;
     ConfigurableTextsRelationResponseCollection: ConfigurableTextsRelationResponseCollection;
+    CreateAccountPage: Omit<
+        CreateAccountPage,
+        'SEO' | 'localizations' | 'localizations_connection' | 'signInButton'
+    > & {
+        SEO: ResolversParentTypes['ComponentSeoSeo'];
+        localizations: Array<Maybe<ResolversParentTypes['CreateAccountPage']>>;
+        localizations_connection?: Maybe<ResolversParentTypes['CreateAccountPageRelationResponseCollection']>;
+        signInButton: ResolversParentTypes['ComponentContentLink'];
+    };
+    CreateAccountPageInput: CreateAccountPageInput;
+    CreateAccountPageRelationResponseCollection: Omit<CreateAccountPageRelationResponseCollection, 'nodes'> & {
+        nodes: Array<ResolversParentTypes['CreateAccountPage']>;
+    };
+    CreateNewPasswordPage: Omit<
+        CreateNewPasswordPage,
+        'SEO' | 'image' | 'localizations' | 'localizations_connection'
+    > & {
+        SEO: ResolversParentTypes['ComponentSeoSeo'];
+        image: ResolversParentTypes['UploadFile'];
+        localizations: Array<Maybe<ResolversParentTypes['CreateNewPasswordPage']>>;
+        localizations_connection?: Maybe<ResolversParentTypes['CreateNewPasswordPageRelationResponseCollection']>;
+    };
+    CreateNewPasswordPageInput: CreateNewPasswordPageInput;
+    CreateNewPasswordPageRelationResponseCollection: Omit<CreateNewPasswordPageRelationResponseCollection, 'nodes'> & {
+        nodes: Array<ResolversParentTypes['CreateNewPasswordPage']>;
+    };
     DateTime: Scalars['DateTime']['output'];
     DateTimeFilterInput: DateTimeFilterInput;
     DeleteMutationResponse: DeleteMutationResponse;
@@ -4647,6 +5104,16 @@ export type ResolversParentTypes = {
     Pagination: Pagination;
     PaginationArg: PaginationArg;
     Query: {};
+    ResetPasswordPage: Omit<ResetPasswordPage, 'SEO' | 'image' | 'localizations' | 'localizations_connection'> & {
+        SEO: ResolversParentTypes['ComponentSeoSeo'];
+        image: ResolversParentTypes['UploadFile'];
+        localizations: Array<Maybe<ResolversParentTypes['ResetPasswordPage']>>;
+        localizations_connection?: Maybe<ResolversParentTypes['ResetPasswordPageRelationResponseCollection']>;
+    };
+    ResetPasswordPageInput: ResetPasswordPageInput;
+    ResetPasswordPageRelationResponseCollection: Omit<ResetPasswordPageRelationResponseCollection, 'nodes'> & {
+        nodes: Array<ResolversParentTypes['ResetPasswordPage']>;
+    };
     ReviewWorkflowsWorkflow: ReviewWorkflowsWorkflow;
     ReviewWorkflowsWorkflowEntityResponseCollection: ReviewWorkflowsWorkflowEntityResponseCollection;
     ReviewWorkflowsWorkflowFiltersInput: ReviewWorkflowsWorkflowFiltersInput;
@@ -5117,8 +5584,10 @@ export type ComponentComponentsOrderDetailsResolvers<
     orderStatus?: Resolver<ResolversTypes['ComponentContentInformationCard'], ParentType, ContextType>;
     overdue?: Resolver<ResolversTypes['ComponentContentInformationCard'], ParentType, ContextType>;
     pagination?: Resolver<Maybe<ResolversTypes['ComponentContentPagination']>, ParentType, ContextType>;
+    payOnlineLabel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     paymentDueDate?: Resolver<ResolversTypes['ComponentContentInformationCard'], ParentType, ContextType>;
     productsTitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    reorderLabel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     statusLadder?: Resolver<
         Array<Maybe<ResolversTypes['ComponentContentMessageSimple']>>,
         ParentType,
@@ -5128,6 +5597,7 @@ export type ComponentComponentsOrderDetailsResolvers<
     table?: Resolver<ResolversTypes['ComponentContentTable'], ParentType, ContextType>;
     title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     totalValue?: Resolver<ResolversTypes['ComponentContentInformationCard'], ParentType, ContextType>;
+    trackOrderLabel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -5552,6 +6022,7 @@ export type ComponentContentFormFieldResolvers<
     ParentType extends
         ResolversParentTypes['ComponentContentFormField'] = ResolversParentTypes['ComponentContentFormField'],
 > = {
+    description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     errorMessages?: Resolver<
         Maybe<Array<Maybe<ResolversTypes['ComponentContentErrorMessage']>>>,
         ParentType,
@@ -5562,6 +6033,68 @@ export type ComponentContentFormFieldResolvers<
     label?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     placeholder?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentContentFormFieldWithRegexResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentContentFormFieldWithRegex'] = ResolversParentTypes['ComponentContentFormFieldWithRegex'],
+> = {
+    description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    errorMessages?: Resolver<
+        Maybe<Array<Maybe<ResolversTypes['ComponentContentErrorMessage']>>>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentContentFormFieldWithRegexErrorMessagesArgs, 'pagination' | 'sort'>
+    >;
+    id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    label?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    placeholder?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    regexValidations?: Resolver<
+        Array<Maybe<ResolversTypes['ComponentContentRegexValidation']>>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentContentFormFieldWithRegexRegexValidationsArgs, 'pagination' | 'sort'>
+    >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentContentFormSelectFieldResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentContentFormSelectField'] = ResolversParentTypes['ComponentContentFormSelectField'],
+> = {
+    description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    errorMessages?: Resolver<
+        Maybe<Array<Maybe<ResolversTypes['ComponentContentErrorMessage']>>>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentContentFormSelectFieldErrorMessagesArgs, 'pagination' | 'sort'>
+    >;
+    id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    label?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    options?: Resolver<
+        Array<Maybe<ResolversTypes['ComponentContentKeyValue']>>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentContentFormSelectFieldOptionsArgs, 'pagination' | 'sort'>
+    >;
+    placeholder?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentContentIconWithTextResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentContentIconWithText'] = ResolversParentTypes['ComponentContentIconWithText'],
+> = {
+    description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -5609,6 +6142,22 @@ export type ComponentContentLinkResolvers<
     label?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     page?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType>;
     url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentContentListWithIconsResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentContentListWithIcons'] = ResolversParentTypes['ComponentContentListWithIcons'],
+> = {
+    icons?: Resolver<
+        Array<Maybe<ResolversTypes['ComponentContentIconWithText']>>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentContentListWithIconsIconsArgs, 'pagination' | 'sort'>
+    >;
+    id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -5690,6 +6239,18 @@ export type ComponentContentPaginationResolvers<
     perPage?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     previousLabel?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     selectPageLabel?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentContentRegexValidationResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentContentRegexValidation'] = ResolversParentTypes['ComponentContentRegexValidation'],
+> = {
+    id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    label?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    regex?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -5795,7 +6356,7 @@ export type ComponentLabelsValidationResolvers<
         ResolversParentTypes['ComponentLabelsValidation'] = ResolversParentTypes['ComponentLabelsValidation'],
 > = {
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-    isOptional?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    isOptional?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     isRequired?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -5945,6 +6506,94 @@ export type ConfigurableTextsRelationResponseCollectionResolvers<
         ResolversParentTypes['ConfigurableTextsRelationResponseCollection'] = ResolversParentTypes['ConfigurableTextsRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['ConfigurableTexts']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CreateAccountPageResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['CreateAccountPage'] = ResolversParentTypes['CreateAccountPage'],
+> = {
+    SEO?: Resolver<ResolversTypes['ComponentSeoSeo'], ParentType, ContextType>;
+    activationContactInfo?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    badge?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    changeCompanyTaxIdLabel?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    clientId?: Resolver<ResolversTypes['ComponentContentFormField'], ParentType, ContextType>;
+    companyName?: Resolver<ResolversTypes['ComponentContentFormField'], ParentType, ContextType>;
+    companySectionTitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    creatingAccountProblem?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    documentId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    firstName?: Resolver<ResolversTypes['ComponentContentFormField'], ParentType, ContextType>;
+    invalidCredentials?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    lastName?: Resolver<ResolversTypes['ComponentContentFormField'], ParentType, ContextType>;
+    locale?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    localizations?: Resolver<Array<Maybe<ResolversTypes['CreateAccountPage']>>, ParentType, ContextType>;
+    localizations_connection?: Resolver<
+        Maybe<ResolversTypes['CreateAccountPageRelationResponseCollection']>,
+        ParentType,
+        ContextType
+    >;
+    phone?: Resolver<ResolversTypes['ComponentContentFormField'], ParentType, ContextType>;
+    position?: Resolver<ResolversTypes['ComponentContentFormSelectField'], ParentType, ContextType>;
+    publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    sideContent?: Resolver<ResolversTypes['ComponentContentListWithIcons'], ParentType, ContextType>;
+    signInButton?: Resolver<ResolversTypes['ComponentContentLink'], ParentType, ContextType>;
+    signInTitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    step1SubmitButton?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    step1Subtitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    step1Title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    step2SubmitButton?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    step2Subtitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    step2Title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    taxId?: Resolver<ResolversTypes['ComponentContentFormField'], ParentType, ContextType>;
+    termsAndConditions?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    userSectionTitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    username?: Resolver<ResolversTypes['ComponentContentFormField'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CreateAccountPageRelationResponseCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['CreateAccountPageRelationResponseCollection'] = ResolversParentTypes['CreateAccountPageRelationResponseCollection'],
+> = {
+    nodes?: Resolver<Array<ResolversTypes['CreateAccountPage']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CreateNewPasswordPageResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['CreateNewPasswordPage'] = ResolversParentTypes['CreateNewPasswordPage'],
+> = {
+    SEO?: Resolver<ResolversTypes['ComponentSeoSeo'], ParentType, ContextType>;
+    confirmPassword?: Resolver<ResolversTypes['ComponentContentFormField'], ParentType, ContextType>;
+    createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    creatingPasswordError?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    documentId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    image?: Resolver<ResolversTypes['UploadFile'], ParentType, ContextType>;
+    locale?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    localizations?: Resolver<Array<Maybe<ResolversTypes['CreateNewPasswordPage']>>, ParentType, ContextType>;
+    localizations_connection?: Resolver<
+        Maybe<ResolversTypes['CreateNewPasswordPageRelationResponseCollection']>,
+        ParentType,
+        ContextType
+    >;
+    password?: Resolver<ResolversTypes['ComponentContentFormFieldWithRegex'], ParentType, ContextType>;
+    publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    setNewPassword?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    subtitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CreateNewPasswordPageRelationResponseCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['CreateNewPasswordPageRelationResponseCollection'] = ResolversParentTypes['CreateNewPasswordPageRelationResponseCollection'],
+> = {
+    nodes?: Resolver<Array<ResolversTypes['CreateNewPasswordPage']>, ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -6137,16 +6786,21 @@ export type GenericMorphResolvers<
         | 'ComponentContentFilterSelect'
         | 'ComponentContentFilters'
         | 'ComponentContentFormField'
+        | 'ComponentContentFormFieldWithRegex'
+        | 'ComponentContentFormSelectField'
+        | 'ComponentContentIconWithText'
         | 'ComponentContentInformationCard'
         | 'ComponentContentKeyValue'
         | 'ComponentContentKeyword'
         | 'ComponentContentLink'
+        | 'ComponentContentListWithIcons'
         | 'ComponentContentMessage'
         | 'ComponentContentMessageSimple'
         | 'ComponentContentNavigationColumn'
         | 'ComponentContentNavigationGroup'
         | 'ComponentContentNavigationItem'
         | 'ComponentContentPagination'
+        | 'ComponentContentRegexValidation'
         | 'ComponentContentRichTextWithTitle'
         | 'ComponentContentTable'
         | 'ComponentContentTableColumn'
@@ -6159,6 +6813,8 @@ export type GenericMorphResolvers<
         | 'ComponentTemplatesOneColumn'
         | 'ComponentTemplatesTwoColumn'
         | 'ConfigurableTexts'
+        | 'CreateAccountPage'
+        | 'CreateNewPasswordPage'
         | 'FilterItem'
         | 'Footer'
         | 'Header'
@@ -6167,6 +6823,7 @@ export type GenericMorphResolvers<
         | 'NotFoundPage'
         | 'OrganizationList'
         | 'Page'
+        | 'ResetPasswordPage'
         | 'ReviewWorkflowsWorkflow'
         | 'ReviewWorkflowsWorkflowStage'
         | 'SurveyJsForm'
@@ -6285,6 +6942,7 @@ export type LoginPageResolvers<
     ParentType extends ResolversParentTypes['LoginPage'] = ResolversParentTypes['LoginPage'],
 > = {
     SEO?: Resolver<ResolversTypes['ComponentSeoSeo'], ParentType, ContextType>;
+    createAccountMessage?: Resolver<ResolversTypes['ComponentContentAlertBox'], ParentType, ContextType>;
     createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
     documentId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     forgotPassword?: Resolver<ResolversTypes['ComponentContentLink'], ParentType, ContextType>;
@@ -6456,6 +7114,18 @@ export type MutationResolvers<
         ContextType,
         Partial<MutationDeleteConfigurableTextsArgs>
     >;
+    deleteCreateAccountPage?: Resolver<
+        Maybe<ResolversTypes['DeleteMutationResponse']>,
+        ParentType,
+        ContextType,
+        Partial<MutationDeleteCreateAccountPageArgs>
+    >;
+    deleteCreateNewPasswordPage?: Resolver<
+        Maybe<ResolversTypes['DeleteMutationResponse']>,
+        ParentType,
+        ContextType,
+        Partial<MutationDeleteCreateNewPasswordPageArgs>
+    >;
     deleteFilterItem?: Resolver<
         Maybe<ResolversTypes['DeleteMutationResponse']>,
         ParentType,
@@ -6497,6 +7167,12 @@ export type MutationResolvers<
         ParentType,
         ContextType,
         RequireFields<MutationDeletePageArgs, 'documentId'>
+    >;
+    deleteResetPasswordPage?: Resolver<
+        Maybe<ResolversTypes['DeleteMutationResponse']>,
+        ParentType,
+        ContextType,
+        Partial<MutationDeleteResetPasswordPageArgs>
     >;
     deleteReviewWorkflowsWorkflow?: Resolver<
         Maybe<ResolversTypes['DeleteMutationResponse']>,
@@ -6612,6 +7288,18 @@ export type MutationResolvers<
         ContextType,
         RequireFields<MutationUpdateConfigurableTextsArgs, 'data' | 'status'>
     >;
+    updateCreateAccountPage?: Resolver<
+        Maybe<ResolversTypes['CreateAccountPage']>,
+        ParentType,
+        ContextType,
+        RequireFields<MutationUpdateCreateAccountPageArgs, 'data' | 'status'>
+    >;
+    updateCreateNewPasswordPage?: Resolver<
+        Maybe<ResolversTypes['CreateNewPasswordPage']>,
+        ParentType,
+        ContextType,
+        RequireFields<MutationUpdateCreateNewPasswordPageArgs, 'data' | 'status'>
+    >;
     updateFilterItem?: Resolver<
         Maybe<ResolversTypes['FilterItem']>,
         ParentType,
@@ -6653,6 +7341,12 @@ export type MutationResolvers<
         ParentType,
         ContextType,
         RequireFields<MutationUpdatePageArgs, 'data' | 'documentId' | 'status'>
+    >;
+    updateResetPasswordPage?: Resolver<
+        Maybe<ResolversTypes['ResetPasswordPage']>,
+        ParentType,
+        ContextType,
+        RequireFields<MutationUpdateResetPasswordPageArgs, 'data' | 'status'>
     >;
     updateReviewWorkflowsWorkflow?: Resolver<
         Maybe<ResolversTypes['ReviewWorkflowsWorkflow']>,
@@ -6931,6 +7625,18 @@ export type QueryResolvers<
         ContextType,
         RequireFields<QueryConfigurableTextsArgs, 'status'>
     >;
+    createAccountPage?: Resolver<
+        Maybe<ResolversTypes['CreateAccountPage']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryCreateAccountPageArgs, 'status'>
+    >;
+    createNewPasswordPage?: Resolver<
+        Maybe<ResolversTypes['CreateNewPasswordPage']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryCreateNewPasswordPageArgs, 'status'>
+    >;
     filterItem?: Resolver<
         Maybe<ResolversTypes['FilterItem']>,
         ParentType,
@@ -7039,6 +7745,12 @@ export type QueryResolvers<
         ParentType,
         ContextType,
         RequireFields<QueryPages_ConnectionArgs, 'pagination' | 'sort' | 'status'>
+    >;
+    resetPasswordPage?: Resolver<
+        Maybe<ResolversTypes['ResetPasswordPage']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryResetPasswordPageArgs, 'status'>
     >;
     reviewWorkflowsWorkflow?: Resolver<
         Maybe<ResolversTypes['ReviewWorkflowsWorkflow']>,
@@ -7184,6 +7896,40 @@ export type QueryResolvers<
         ContextType,
         RequireFields<QueryUsersPermissionsUsers_ConnectionArgs, 'pagination' | 'sort' | 'status'>
     >;
+};
+
+export type ResetPasswordPageResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['ResetPasswordPage'] = ResolversParentTypes['ResetPasswordPage'],
+> = {
+    SEO?: Resolver<ResolversTypes['ComponentSeoSeo'], ParentType, ContextType>;
+    createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    documentId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    image?: Resolver<ResolversTypes['UploadFile'], ParentType, ContextType>;
+    invalidCredentials?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    locale?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    localizations?: Resolver<Array<Maybe<ResolversTypes['ResetPasswordPage']>>, ParentType, ContextType>;
+    localizations_connection?: Resolver<
+        Maybe<ResolversTypes['ResetPasswordPageRelationResponseCollection']>,
+        ParentType,
+        ContextType
+    >;
+    publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    resetPassword?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    subtitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    username?: Resolver<ResolversTypes['ComponentContentFormField'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ResetPasswordPageRelationResponseCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ResetPasswordPageRelationResponseCollection'] = ResolversParentTypes['ResetPasswordPageRelationResponseCollection'],
+> = {
+    nodes?: Resolver<Array<ResolversTypes['ResetPasswordPage']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ReviewWorkflowsWorkflowResolvers<
@@ -7618,16 +8364,21 @@ export type Resolvers<ContextType = any> = {
     ComponentContentFilterSelect?: ComponentContentFilterSelectResolvers<ContextType>;
     ComponentContentFilters?: ComponentContentFiltersResolvers<ContextType>;
     ComponentContentFormField?: ComponentContentFormFieldResolvers<ContextType>;
+    ComponentContentFormFieldWithRegex?: ComponentContentFormFieldWithRegexResolvers<ContextType>;
+    ComponentContentFormSelectField?: ComponentContentFormSelectFieldResolvers<ContextType>;
+    ComponentContentIconWithText?: ComponentContentIconWithTextResolvers<ContextType>;
     ComponentContentInformationCard?: ComponentContentInformationCardResolvers<ContextType>;
     ComponentContentKeyValue?: ComponentContentKeyValueResolvers<ContextType>;
     ComponentContentKeyword?: ComponentContentKeywordResolvers<ContextType>;
     ComponentContentLink?: ComponentContentLinkResolvers<ContextType>;
+    ComponentContentListWithIcons?: ComponentContentListWithIconsResolvers<ContextType>;
     ComponentContentMessage?: ComponentContentMessageResolvers<ContextType>;
     ComponentContentMessageSimple?: ComponentContentMessageSimpleResolvers<ContextType>;
     ComponentContentNavigationColumn?: ComponentContentNavigationColumnResolvers<ContextType>;
     ComponentContentNavigationGroup?: ComponentContentNavigationGroupResolvers<ContextType>;
     ComponentContentNavigationItem?: ComponentContentNavigationItemResolvers<ContextType>;
     ComponentContentPagination?: ComponentContentPaginationResolvers<ContextType>;
+    ComponentContentRegexValidation?: ComponentContentRegexValidationResolvers<ContextType>;
     ComponentContentRichTextWithTitle?: ComponentContentRichTextWithTitleResolvers<ContextType>;
     ComponentContentTable?: ComponentContentTableResolvers<ContextType>;
     ComponentContentTableColumn?: ComponentContentTableColumnResolvers<ContextType>;
@@ -7643,6 +8394,10 @@ export type Resolvers<ContextType = any> = {
     ComponentTemplatesTwoColumn?: ComponentTemplatesTwoColumnResolvers<ContextType>;
     ConfigurableTexts?: ConfigurableTextsResolvers<ContextType>;
     ConfigurableTextsRelationResponseCollection?: ConfigurableTextsRelationResponseCollectionResolvers<ContextType>;
+    CreateAccountPage?: CreateAccountPageResolvers<ContextType>;
+    CreateAccountPageRelationResponseCollection?: CreateAccountPageRelationResponseCollectionResolvers<ContextType>;
+    CreateNewPasswordPage?: CreateNewPasswordPageResolvers<ContextType>;
+    CreateNewPasswordPageRelationResponseCollection?: CreateNewPasswordPageRelationResponseCollectionResolvers<ContextType>;
     DateTime?: GraphQLScalarType;
     DeleteMutationResponse?: DeleteMutationResponseResolvers<ContextType>;
     Error?: ErrorResolvers<ContextType>;
@@ -7680,6 +8435,8 @@ export type Resolvers<ContextType = any> = {
     PageTemplateDynamicZoneInput?: GraphQLScalarType;
     Pagination?: PaginationResolvers<ContextType>;
     Query?: QueryResolvers<ContextType>;
+    ResetPasswordPage?: ResetPasswordPageResolvers<ContextType>;
+    ResetPasswordPageRelationResponseCollection?: ResetPasswordPageRelationResponseCollectionResolvers<ContextType>;
     ReviewWorkflowsWorkflow?: ReviewWorkflowsWorkflowResolvers<ContextType>;
     ReviewWorkflowsWorkflowEntityResponseCollection?: ReviewWorkflowsWorkflowEntityResponseCollectionResolvers<ContextType>;
     ReviewWorkflowsWorkflowStage?: ReviewWorkflowsWorkflowStageResolvers<ContextType>;
@@ -7941,6 +8698,213 @@ export type ComponentFragment = {
     >;
 };
 
+export type CreateAccountPageFragment = {
+    createdAt?: any;
+    updatedAt?: any;
+    publishedAt?: any;
+    invalidCredentials: string;
+    badge: string;
+    changeCompanyTaxIdLabel: string;
+    companySectionTitle: string;
+    userSectionTitle: string;
+    termsAndConditions: string;
+    creatingAccountProblem: string;
+    step1Title: string;
+    step1Subtitle: string;
+    step1SubmitButton: string;
+    step2Title: string;
+    step2Subtitle: string;
+    step2SubmitButton: string;
+    signInTitle: string;
+    activationContactInfo: string;
+    SEO: {
+        title: string;
+        noIndex: boolean;
+        noFollow: boolean;
+        description: string;
+        keywords?: Array<{ keyword: string }>;
+        image?: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
+    };
+    username: {
+        __typename: 'ComponentContentFormField';
+        id: string;
+        name: string;
+        label: string;
+        placeholder?: string;
+        description?: string;
+        errorMessages?: Array<{
+            __typename: 'ComponentContentErrorMessage';
+            id: string;
+            description: string;
+            name: string;
+            type: Enum_Componentcontenterrormessage_Type;
+        }>;
+    };
+    taxId: {
+        __typename: 'ComponentContentFormField';
+        id: string;
+        name: string;
+        label: string;
+        placeholder?: string;
+        description?: string;
+        errorMessages?: Array<{
+            __typename: 'ComponentContentErrorMessage';
+            id: string;
+            description: string;
+            name: string;
+            type: Enum_Componentcontenterrormessage_Type;
+        }>;
+    };
+    firstName: {
+        __typename: 'ComponentContentFormField';
+        id: string;
+        name: string;
+        label: string;
+        placeholder?: string;
+        description?: string;
+        errorMessages?: Array<{
+            __typename: 'ComponentContentErrorMessage';
+            id: string;
+            description: string;
+            name: string;
+            type: Enum_Componentcontenterrormessage_Type;
+        }>;
+    };
+    lastName: {
+        __typename: 'ComponentContentFormField';
+        id: string;
+        name: string;
+        label: string;
+        placeholder?: string;
+        description?: string;
+        errorMessages?: Array<{
+            __typename: 'ComponentContentErrorMessage';
+            id: string;
+            description: string;
+            name: string;
+            type: Enum_Componentcontenterrormessage_Type;
+        }>;
+    };
+    companyName: {
+        __typename: 'ComponentContentFormField';
+        id: string;
+        name: string;
+        label: string;
+        placeholder?: string;
+        description?: string;
+        errorMessages?: Array<{
+            __typename: 'ComponentContentErrorMessage';
+            id: string;
+            description: string;
+            name: string;
+            type: Enum_Componentcontenterrormessage_Type;
+        }>;
+    };
+    clientId: {
+        __typename: 'ComponentContentFormField';
+        id: string;
+        name: string;
+        label: string;
+        placeholder?: string;
+        description?: string;
+        errorMessages?: Array<{
+            __typename: 'ComponentContentErrorMessage';
+            id: string;
+            description: string;
+            name: string;
+            type: Enum_Componentcontenterrormessage_Type;
+        }>;
+    };
+    phone: {
+        __typename: 'ComponentContentFormField';
+        id: string;
+        name: string;
+        label: string;
+        placeholder?: string;
+        description?: string;
+        errorMessages?: Array<{
+            __typename: 'ComponentContentErrorMessage';
+            id: string;
+            description: string;
+            name: string;
+            type: Enum_Componentcontenterrormessage_Type;
+        }>;
+    };
+    position: {
+        __typename: 'ComponentContentFormSelectField';
+        id: string;
+        name: string;
+        label: string;
+        placeholder?: string;
+        description?: string;
+        errorMessages?: Array<{
+            __typename: 'ComponentContentErrorMessage';
+            id: string;
+            description: string;
+            name: string;
+            type: Enum_Componentcontenterrormessage_Type;
+        }>;
+        options: Array<{ key: string; value: string }>;
+    };
+    signInButton: {
+        label: string;
+        url?: string;
+        icon?: string;
+        page?: { slug: string; SEO: { title: string; description: string } };
+    };
+    sideContent: { title?: string; icons: Array<{ name: string; title?: string; description?: string }> };
+};
+
+export type CreateNewPasswordPageFragment = {
+    createdAt?: any;
+    updatedAt?: any;
+    publishedAt?: any;
+    subtitle: string;
+    title: string;
+    setNewPassword: string;
+    creatingPasswordError: string;
+    password: {
+        __typename: 'ComponentContentFormFieldWithRegex';
+        id: string;
+        name: string;
+        label: string;
+        placeholder?: string;
+        description?: string;
+        errorMessages?: Array<{
+            __typename: 'ComponentContentErrorMessage';
+            id: string;
+            description: string;
+            name: string;
+            type: Enum_Componentcontenterrormessage_Type;
+        }>;
+        regexValidations: Array<{ type: string; label: string; regex: string }>;
+    };
+    confirmPassword: {
+        __typename: 'ComponentContentFormField';
+        id: string;
+        name: string;
+        label: string;
+        placeholder?: string;
+        description?: string;
+        errorMessages?: Array<{
+            __typename: 'ComponentContentErrorMessage';
+            id: string;
+            description: string;
+            name: string;
+            type: Enum_Componentcontenterrormessage_Type;
+        }>;
+    };
+    image: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
+    SEO: {
+        title: string;
+        noIndex: boolean;
+        noFollow: boolean;
+        description: string;
+        keywords?: Array<{ keyword: string }>;
+        image?: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
+    };
+};
+
 export type FilterItemFragment = {
     field: Array<
         | {
@@ -8044,6 +9008,7 @@ export type LoginPageFragment = {
         name: string;
         label: string;
         placeholder?: string;
+        description?: string;
         errorMessages?: Array<{
             __typename: 'ComponentContentErrorMessage';
             id: string;
@@ -8058,6 +9023,7 @@ export type LoginPageFragment = {
         name: string;
         label: string;
         placeholder?: string;
+        description?: string;
         errorMessages?: Array<{
             __typename: 'ComponentContentErrorMessage';
             id: string;
@@ -8075,6 +9041,15 @@ export type LoginPageFragment = {
         keywords?: Array<{ keyword: string }>;
         image?: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
     };
+    resetPasswordMessage: { title: string; description?: string };
+    newPasswordMessage: { title: string; description?: string };
+    forgotPassword: {
+        label: string;
+        url?: string;
+        icon?: string;
+        page?: { slug: string; SEO: { title: string; description: string } };
+    };
+    createAccountMessage: { title: string; description?: string };
 };
 
 export type NotFoundPageFragment = {
@@ -8263,6 +9238,40 @@ export type PageFragment = {
           }
         | { __typename: 'Error' }
     >;
+};
+
+export type ResetPasswordPageFragment = {
+    createdAt?: any;
+    updatedAt?: any;
+    publishedAt?: any;
+    subtitle: string;
+    title: string;
+    invalidCredentials: string;
+    resetPassword: string;
+    username: {
+        __typename: 'ComponentContentFormField';
+        id: string;
+        name: string;
+        label: string;
+        placeholder?: string;
+        description?: string;
+        errorMessages?: Array<{
+            __typename: 'ComponentContentErrorMessage';
+            id: string;
+            description: string;
+            name: string;
+            type: Enum_Componentcontenterrormessage_Type;
+        }>;
+    };
+    image: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
+    SEO: {
+        title: string;
+        noIndex: boolean;
+        noFollow: boolean;
+        description: string;
+        keywords?: Array<{ keyword: string }>;
+        image?: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
+    };
 };
 
 type Template_ComponentTemplatesOneColumn_Fragment = {
@@ -8609,6 +9618,9 @@ export type OrderDetailsComponentFragment = {
     id: string;
     title?: string;
     productsTitle?: string;
+    reorderLabel?: string;
+    trackOrderLabel?: string;
+    payOnlineLabel?: string;
     statusLadder: Array<{ title: string }>;
     fields: Array<{ name: string; values: Array<{ key: string; value: string }> }>;
     table: { actionsTitle?: string; actionsLabel?: string; columns: Array<{ title: string; field: string }> };
@@ -9023,6 +10035,7 @@ export type UserAccountComponentFragment = {
         name: string;
         label: string;
         placeholder?: string;
+        description?: string;
         errorMessages?: Array<{
             __typename: 'ComponentContentErrorMessage';
             id: string;
@@ -9031,14 +10044,6 @@ export type UserAccountComponentFragment = {
             type: Enum_Componentcontenterrormessage_Type;
         }>;
     }>;
-};
-
-export type ActionLinksFragment = {
-    label: string;
-    icon?: string;
-    url?: string;
-    inProgress?: boolean;
-    page?: { slug: string };
 };
 
 export type BannerFragment = {
@@ -9094,6 +10099,7 @@ export type FormFieldComponentFragment = {
     name: string;
     label: string;
     placeholder?: string;
+    description?: string;
     errorMessages?: Array<{
         __typename: 'ComponentContentErrorMessage';
         id: string;
@@ -9102,6 +10108,42 @@ export type FormFieldComponentFragment = {
         type: Enum_Componentcontenterrormessage_Type;
     }>;
 };
+
+export type FormFieldComponentWithRegexFragment = {
+    __typename: 'ComponentContentFormFieldWithRegex';
+    id: string;
+    name: string;
+    label: string;
+    placeholder?: string;
+    description?: string;
+    errorMessages?: Array<{
+        __typename: 'ComponentContentErrorMessage';
+        id: string;
+        description: string;
+        name: string;
+        type: Enum_Componentcontenterrormessage_Type;
+    }>;
+    regexValidations: Array<{ type: string; label: string; regex: string }>;
+};
+
+export type FormSelectFieldComponentFragment = {
+    __typename: 'ComponentContentFormSelectField';
+    id: string;
+    name: string;
+    label: string;
+    placeholder?: string;
+    description?: string;
+    errorMessages?: Array<{
+        __typename: 'ComponentContentErrorMessage';
+        id: string;
+        description: string;
+        name: string;
+        type: Enum_Componentcontenterrormessage_Type;
+    }>;
+    options: Array<{ key: string; value: string }>;
+};
+
+export type IconWithTextComponentFragment = { name: string; title?: string; description?: string };
 
 export type InformationCardFragment = {
     title: string;
@@ -9121,6 +10163,11 @@ export type LinkFragment = {
     url?: string;
     icon?: string;
     page?: { slug: string; SEO: { title: string; description: string } };
+};
+
+export type ListWithIconsComponentFragment = {
+    title?: string;
+    icons: Array<{ name: string; title?: string; description?: string }>;
 };
 
 export type MediaFragment = { url: string; alternativeText?: string; width?: number; height?: number; name: string };
@@ -9154,6 +10201,8 @@ export type PaginationFragment = {
     perPage: number;
     selectPageLabel: string;
 };
+
+export type RegexValidationComponentFragment = { type: string; label: string; regex: string };
 
 export type SeoFragment = {
     title: string;
@@ -9344,6 +10393,7 @@ export type GetAppConfigQuery = {
             renew: string;
             details: string;
         };
+        validation: { isRequired: string; isOptional: string };
     };
     i18NLocales: Array<{ code?: string }>;
 };
@@ -9668,7 +10718,6 @@ export type GetComponentQuery = {
                   title?: string;
                   subtitle?: string;
                   detailsURL?: string;
-                  reorderLabel?: string;
                   fields: Array<{ name: string; values: Array<{ key: string; value: string }> }>;
                   table: {
                       actionsTitle?: string;
@@ -9960,6 +11009,7 @@ export type GetComponentQuery = {
                       name: string;
                       label: string;
                       placeholder?: string;
+                      description?: string;
                       errorMessages?: Array<{
                           __typename: 'ComponentContentErrorMessage';
                           id: string;
@@ -9995,6 +11045,230 @@ export type GetComponentQuery = {
             showAllArticles: string;
         };
         errors: { requestError: { title: string; content?: string } };
+    };
+};
+
+export type GetCreateAccountPageQueryVariables = Exact<{
+    locale: Scalars['I18NLocaleCode']['input'];
+}>;
+
+export type GetCreateAccountPageQuery = {
+    createAccountPage?: {
+        createdAt?: any;
+        updatedAt?: any;
+        publishedAt?: any;
+        invalidCredentials: string;
+        badge: string;
+        changeCompanyTaxIdLabel: string;
+        companySectionTitle: string;
+        userSectionTitle: string;
+        termsAndConditions: string;
+        creatingAccountProblem: string;
+        step1Title: string;
+        step1Subtitle: string;
+        step1SubmitButton: string;
+        step2Title: string;
+        step2Subtitle: string;
+        step2SubmitButton: string;
+        signInTitle: string;
+        activationContactInfo: string;
+        SEO: {
+            title: string;
+            noIndex: boolean;
+            noFollow: boolean;
+            description: string;
+            keywords?: Array<{ keyword: string }>;
+            image?: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
+        };
+        username: {
+            __typename: 'ComponentContentFormField';
+            id: string;
+            name: string;
+            label: string;
+            placeholder?: string;
+            description?: string;
+            errorMessages?: Array<{
+                __typename: 'ComponentContentErrorMessage';
+                id: string;
+                description: string;
+                name: string;
+                type: Enum_Componentcontenterrormessage_Type;
+            }>;
+        };
+        taxId: {
+            __typename: 'ComponentContentFormField';
+            id: string;
+            name: string;
+            label: string;
+            placeholder?: string;
+            description?: string;
+            errorMessages?: Array<{
+                __typename: 'ComponentContentErrorMessage';
+                id: string;
+                description: string;
+                name: string;
+                type: Enum_Componentcontenterrormessage_Type;
+            }>;
+        };
+        firstName: {
+            __typename: 'ComponentContentFormField';
+            id: string;
+            name: string;
+            label: string;
+            placeholder?: string;
+            description?: string;
+            errorMessages?: Array<{
+                __typename: 'ComponentContentErrorMessage';
+                id: string;
+                description: string;
+                name: string;
+                type: Enum_Componentcontenterrormessage_Type;
+            }>;
+        };
+        lastName: {
+            __typename: 'ComponentContentFormField';
+            id: string;
+            name: string;
+            label: string;
+            placeholder?: string;
+            description?: string;
+            errorMessages?: Array<{
+                __typename: 'ComponentContentErrorMessage';
+                id: string;
+                description: string;
+                name: string;
+                type: Enum_Componentcontenterrormessage_Type;
+            }>;
+        };
+        companyName: {
+            __typename: 'ComponentContentFormField';
+            id: string;
+            name: string;
+            label: string;
+            placeholder?: string;
+            description?: string;
+            errorMessages?: Array<{
+                __typename: 'ComponentContentErrorMessage';
+                id: string;
+                description: string;
+                name: string;
+                type: Enum_Componentcontenterrormessage_Type;
+            }>;
+        };
+        clientId: {
+            __typename: 'ComponentContentFormField';
+            id: string;
+            name: string;
+            label: string;
+            placeholder?: string;
+            description?: string;
+            errorMessages?: Array<{
+                __typename: 'ComponentContentErrorMessage';
+                id: string;
+                description: string;
+                name: string;
+                type: Enum_Componentcontenterrormessage_Type;
+            }>;
+        };
+        phone: {
+            __typename: 'ComponentContentFormField';
+            id: string;
+            name: string;
+            label: string;
+            placeholder?: string;
+            description?: string;
+            errorMessages?: Array<{
+                __typename: 'ComponentContentErrorMessage';
+                id: string;
+                description: string;
+                name: string;
+                type: Enum_Componentcontenterrormessage_Type;
+            }>;
+        };
+        position: {
+            __typename: 'ComponentContentFormSelectField';
+            id: string;
+            name: string;
+            label: string;
+            placeholder?: string;
+            description?: string;
+            errorMessages?: Array<{
+                __typename: 'ComponentContentErrorMessage';
+                id: string;
+                description: string;
+                name: string;
+                type: Enum_Componentcontenterrormessage_Type;
+            }>;
+            options: Array<{ key: string; value: string }>;
+        };
+        signInButton: {
+            label: string;
+            url?: string;
+            icon?: string;
+            page?: { slug: string; SEO: { title: string; description: string } };
+        };
+        sideContent: { title?: string; icons: Array<{ name: string; title?: string; description?: string }> };
+    };
+    configurableTexts?: { validation: { isRequired: string; isOptional: string } };
+};
+
+export type GetCreateNewPasswordPageQueryVariables = Exact<{
+    locale: Scalars['I18NLocaleCode']['input'];
+}>;
+
+export type GetCreateNewPasswordPageQuery = {
+    createNewPasswordPage?: {
+        createdAt?: any;
+        updatedAt?: any;
+        publishedAt?: any;
+        subtitle: string;
+        title: string;
+        setNewPassword: string;
+        creatingPasswordError: string;
+        password: {
+            __typename: 'ComponentContentFormFieldWithRegex';
+            id: string;
+            name: string;
+            label: string;
+            placeholder?: string;
+            description?: string;
+            errorMessages?: Array<{
+                __typename: 'ComponentContentErrorMessage';
+                id: string;
+                description: string;
+                name: string;
+                type: Enum_Componentcontenterrormessage_Type;
+            }>;
+            regexValidations: Array<{ type: string; label: string; regex: string }>;
+        };
+        confirmPassword: {
+            __typename: 'ComponentContentFormField';
+            id: string;
+            name: string;
+            label: string;
+            placeholder?: string;
+            description?: string;
+            errorMessages?: Array<{
+                __typename: 'ComponentContentErrorMessage';
+                id: string;
+                description: string;
+                name: string;
+                type: Enum_Componentcontenterrormessage_Type;
+            }>;
+        };
+        image: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
+        SEO: {
+            title: string;
+            noIndex: boolean;
+            noFollow: boolean;
+            description: string;
+            keywords?: Array<{ keyword: string }>;
+            image?: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
+        };
+    };
+    configurableTexts?: {
+        actions: { show: string; hide: string };
+        validation: { isRequired: string; isOptional: string };
     };
 };
 
@@ -10103,6 +11377,7 @@ export type GetLoginPageQuery = {
             name: string;
             label: string;
             placeholder?: string;
+            description?: string;
             errorMessages?: Array<{
                 __typename: 'ComponentContentErrorMessage';
                 id: string;
@@ -10117,6 +11392,7 @@ export type GetLoginPageQuery = {
             name: string;
             label: string;
             placeholder?: string;
+            description?: string;
             errorMessages?: Array<{
                 __typename: 'ComponentContentErrorMessage';
                 id: string;
@@ -10142,8 +11418,12 @@ export type GetLoginPageQuery = {
             icon?: string;
             page?: { slug: string; SEO: { title: string; description: string } };
         };
+        createAccountMessage: { title: string; description?: string };
     };
-    configurableTexts?: { actions: { show: string; hide: string } };
+    configurableTexts?: {
+        actions: { show: string; hide: string };
+        validation: { isRequired: string; isOptional: string };
+    };
 };
 
 export type GetNotFoundPageQueryVariables = Exact<{
@@ -10532,6 +11812,47 @@ export type GetPagesQuery = {
     }>;
 };
 
+export type GetResetPasswordPageQueryVariables = Exact<{
+    locale: Scalars['I18NLocaleCode']['input'];
+}>;
+
+export type GetResetPasswordPageQuery = {
+    resetPasswordPage?: {
+        createdAt?: any;
+        updatedAt?: any;
+        publishedAt?: any;
+        subtitle: string;
+        title: string;
+        invalidCredentials: string;
+        resetPassword: string;
+        username: {
+            __typename: 'ComponentContentFormField';
+            id: string;
+            name: string;
+            label: string;
+            placeholder?: string;
+            description?: string;
+            errorMessages?: Array<{
+                __typename: 'ComponentContentErrorMessage';
+                id: string;
+                description: string;
+                name: string;
+                type: Enum_Componentcontenterrormessage_Type;
+            }>;
+        };
+        image: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
+        SEO: {
+            title: string;
+            noIndex: boolean;
+            noFollow: boolean;
+            description: string;
+            keywords?: Array<{ keyword: string }>;
+            image?: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
+        };
+    };
+    configurableTexts?: { validation: { isRequired: string; isOptional: string } };
+};
+
 export type GetSurveyQueryVariables = Exact<{
     code?: InputMaybe<Scalars['String']['input']>;
 }>;
@@ -10545,6 +11866,7 @@ export type GetSurveyQuery = {
         requiredRoles: any;
         submitDestination?: any;
     }>;
+    configurableTexts?: { validation: { isRequired: string; isOptional: string } };
 };
 
 export const MediaFragmentDoc = gql`
@@ -10665,6 +11987,189 @@ export const AppConfigFragmentDoc = gql`
         }
     }
 `;
+export const ErrorMessageComponentFragmentDoc = gql`
+    fragment ErrorMessageComponent on ComponentContentErrorMessage {
+        __typename
+        id
+        description
+        name
+        type
+    }
+`;
+export const FormFieldComponentFragmentDoc = gql`
+    fragment FormFieldComponent on ComponentContentFormField {
+        __typename
+        id
+        name
+        label
+        placeholder
+        errorMessages {
+            ...ErrorMessageComponent
+        }
+        description
+    }
+    ${ErrorMessageComponentFragmentDoc}
+`;
+export const FormSelectFieldComponentFragmentDoc = gql`
+    fragment FormSelectFieldComponent on ComponentContentFormSelectField {
+        __typename
+        id
+        name
+        label
+        placeholder
+        errorMessages {
+            ...ErrorMessageComponent
+        }
+        description
+        options {
+            key
+            value
+        }
+    }
+    ${ErrorMessageComponentFragmentDoc}
+`;
+export const LinkFragmentDoc = gql`
+    fragment Link on ComponentContentLink {
+        label
+        url
+        page {
+            slug
+            SEO {
+                title
+                description
+            }
+        }
+        icon
+    }
+`;
+export const IconWithTextComponentFragmentDoc = gql`
+    fragment IconWithTextComponent on ComponentContentIconWithText {
+        name
+        title
+        description
+    }
+`;
+export const ListWithIconsComponentFragmentDoc = gql`
+    fragment ListWithIconsComponent on ComponentContentListWithIcons {
+        title
+        icons {
+            ...IconWithTextComponent
+        }
+    }
+    ${IconWithTextComponentFragmentDoc}
+`;
+export const CreateAccountPageFragmentDoc = gql`
+    fragment CreateAccountPage on CreateAccountPage {
+        createdAt
+        updatedAt
+        publishedAt
+        SEO {
+            ...Seo
+        }
+        username {
+            ...FormFieldComponent
+        }
+        taxId {
+            ...FormFieldComponent
+        }
+        firstName {
+            ...FormFieldComponent
+        }
+        lastName {
+            ...FormFieldComponent
+        }
+        companyName {
+            ...FormFieldComponent
+        }
+        clientId {
+            ...FormFieldComponent
+        }
+        phone {
+            ...FormFieldComponent
+        }
+        position {
+            ...FormSelectFieldComponent
+        }
+        invalidCredentials
+        badge
+        changeCompanyTaxIdLabel
+        companySectionTitle
+        userSectionTitle
+        termsAndConditions
+        creatingAccountProblem
+        step1Title
+        step1Subtitle
+        step1SubmitButton
+        step2Title
+        step2Subtitle
+        step2SubmitButton
+        signInTitle
+        signInButton {
+            ...Link
+        }
+        sideContent {
+            ...ListWithIconsComponent
+        }
+        activationContactInfo
+    }
+    ${SeoFragmentDoc}
+    ${FormFieldComponentFragmentDoc}
+    ${FormSelectFieldComponentFragmentDoc}
+    ${LinkFragmentDoc}
+    ${ListWithIconsComponentFragmentDoc}
+`;
+export const RegexValidationComponentFragmentDoc = gql`
+    fragment RegexValidationComponent on ComponentContentRegexValidation {
+        type
+        label
+        regex
+    }
+`;
+export const FormFieldComponentWithRegexFragmentDoc = gql`
+    fragment FormFieldComponentWithRegex on ComponentContentFormFieldWithRegex {
+        __typename
+        id
+        name
+        label
+        placeholder
+        errorMessages {
+            ...ErrorMessageComponent
+        }
+        description
+        regexValidations {
+            ...RegexValidationComponent
+        }
+    }
+    ${ErrorMessageComponentFragmentDoc}
+    ${RegexValidationComponentFragmentDoc}
+`;
+export const CreateNewPasswordPageFragmentDoc = gql`
+    fragment CreateNewPasswordPage on CreateNewPasswordPage {
+        createdAt
+        updatedAt
+        publishedAt
+        subtitle
+        title
+        password {
+            ...FormFieldComponentWithRegex
+        }
+        confirmPassword {
+            ...FormFieldComponent
+        }
+        image {
+            ...Media
+        }
+        SEO {
+            ...Seo
+        }
+        setNewPassword
+        creatingPasswordError
+    }
+    ${FormFieldComponentWithRegexFragmentDoc}
+    ${FormFieldComponentFragmentDoc}
+    ${MediaFragmentDoc}
+    ${SeoFragmentDoc}
+`;
 export const NavigationItemFragmentDoc = gql`
     fragment NavigationItem on ComponentContentNavigationItem {
         __typename
@@ -10748,28 +12253,6 @@ export const HeaderFragmentDoc = gql`
     ${NavigationGroupFragmentDoc}
     ${NavigationItemFragmentDoc}
 `;
-export const ErrorMessageComponentFragmentDoc = gql`
-    fragment ErrorMessageComponent on ComponentContentErrorMessage {
-        __typename
-        id
-        description
-        name
-        type
-    }
-`;
-export const FormFieldComponentFragmentDoc = gql`
-    fragment FormFieldComponent on ComponentContentFormField {
-        __typename
-        id
-        name
-        label
-        placeholder
-        errorMessages {
-            ...ErrorMessageComponent
-        }
-    }
-    ${ErrorMessageComponentFragmentDoc}
-`;
 export const LoginPageFragmentDoc = gql`
     fragment LoginPage on LoginPage {
         createdAt
@@ -10793,10 +12276,26 @@ export const LoginPageFragmentDoc = gql`
             ...Seo
         }
         invalidCredentials
+        resetPasswordMessage {
+            title
+            description
+        }
+        newPasswordMessage {
+            title
+            description
+        }
+        forgotPassword {
+            ...Link
+        }
+        createAccountMessage {
+            title
+            description
+        }
     }
     ${FormFieldComponentFragmentDoc}
     ${MediaFragmentDoc}
     ${SeoFragmentDoc}
+    ${LinkFragmentDoc}
 `;
 export const NotFoundPageFragmentDoc = gql`
     fragment NotFoundPage on NotFoundPage {
@@ -10895,6 +12394,29 @@ export const PageFragmentDoc = gql`
     ${SeoFragmentDoc}
     ${OneColumnTemplateFragmentDoc}
     ${TwoColumnTemplateFragmentDoc}
+`;
+export const ResetPasswordPageFragmentDoc = gql`
+    fragment ResetPasswordPage on ResetPasswordPage {
+        createdAt
+        updatedAt
+        publishedAt
+        subtitle
+        title
+        username {
+            ...FormFieldComponent
+        }
+        image {
+            ...Media
+        }
+        SEO {
+            ...Seo
+        }
+        invalidCredentials
+        resetPassword
+    }
+    ${FormFieldComponentFragmentDoc}
+    ${MediaFragmentDoc}
+    ${SeoFragmentDoc}
 `;
 export const TemplateFragmentDoc = gql`
     fragment Template on PageTemplateDynamicZone {
@@ -11140,20 +12662,6 @@ export const NotificationListComponentFragmentDoc = gql`
     ${PaginationFragmentDoc}
     ${FiltersFragmentDoc}
 `;
-export const LinkFragmentDoc = gql`
-    fragment Link on ComponentContentLink {
-        label
-        url
-        page {
-            slug
-            SEO {
-                title
-                description
-            }
-        }
-        icon
-    }
-`;
 export const InformationCardFragmentDoc = gql`
     fragment InformationCard on ComponentContentInformationCard {
         title
@@ -11209,6 +12717,9 @@ export const OrderDetailsComponentFragmentDoc = gql`
         customerComment {
             ...InformationCard
         }
+        reorderLabel
+        trackOrderLabel
+        payOnlineLabel
     }
     ${FieldMappingFragmentDoc}
     ${TableFragmentDoc}
@@ -11438,17 +12949,6 @@ export const UserAccountComponentFragmentDoc = gql`
     }
     ${FormFieldComponentFragmentDoc}
 `;
-export const ActionLinksFragmentDoc = gql`
-    fragment ActionLinks on ComponentContentActionLinks {
-        label
-        icon
-        url
-        page {
-            slug
-        }
-        inProgress
-    }
-`;
 export const GetArticleDocument = gql`
     query getArticle($slug: String!, $locale: I18NLocaleCode!) {
         articles(locale: $locale, filters: { slug: { eq: $slug } }) {
@@ -11530,6 +13030,10 @@ export const GetAppConfigDocument = gql`
                 settings
                 renew
                 details
+            }
+            validation {
+                isRequired
+                isOptional
             }
         }
         i18NLocales {
@@ -11660,6 +13164,38 @@ export const GetComponentDocument = gql`
     ${CategoryComponentFragmentDoc}
     ${ArticleSearchComponentFragmentDoc}
 `;
+export const GetCreateAccountPageDocument = gql`
+    query getCreateAccountPage($locale: I18NLocaleCode!) {
+        createAccountPage(locale: $locale) {
+            ...CreateAccountPage
+        }
+        configurableTexts {
+            validation {
+                isRequired
+                isOptional
+            }
+        }
+    }
+    ${CreateAccountPageFragmentDoc}
+`;
+export const GetCreateNewPasswordPageDocument = gql`
+    query getCreateNewPasswordPage($locale: I18NLocaleCode!) {
+        createNewPasswordPage(locale: $locale) {
+            ...CreateNewPasswordPage
+        }
+        configurableTexts {
+            actions {
+                show
+                hide
+            }
+            validation {
+                isRequired
+                isOptional
+            }
+        }
+    }
+    ${CreateNewPasswordPageFragmentDoc}
+`;
 export const GetFooterDocument = gql`
     query getFooter($locale: I18NLocaleCode!, $id: ID!) {
         footer(locale: $locale, documentId: $id) {
@@ -11697,6 +13233,10 @@ export const GetLoginPageDocument = gql`
             actions {
                 show
                 hide
+            }
+            validation {
+                isRequired
+                isOptional
             }
         }
     }
@@ -11739,6 +13279,20 @@ export const GetPagesDocument = gql`
     }
     ${PageFragmentDoc}
 `;
+export const GetResetPasswordPageDocument = gql`
+    query getResetPasswordPage($locale: I18NLocaleCode!) {
+        resetPasswordPage(locale: $locale) {
+            ...ResetPasswordPage
+        }
+        configurableTexts {
+            validation {
+                isRequired
+                isOptional
+            }
+        }
+    }
+    ${ResetPasswordPageFragmentDoc}
+`;
 export const GetSurveyDocument = gql`
     query getSurvey($code: String) {
         surveyJsForms(filters: { code: { eq: $code } }) {
@@ -11748,6 +13302,12 @@ export const GetSurveyDocument = gql`
             surveyType
             requiredRoles
             submitDestination
+        }
+        configurableTexts {
+            validation {
+                isRequired
+                isOptional
+            }
         }
     }
 `;
@@ -11765,6 +13325,8 @@ const GetArticlesDocumentString = print(GetArticlesDocument);
 const GetCategoriesDocumentString = print(GetCategoriesDocument);
 const GetAppConfigDocumentString = print(GetAppConfigDocument);
 const GetComponentDocumentString = print(GetComponentDocument);
+const GetCreateAccountPageDocumentString = print(GetCreateAccountPageDocument);
+const GetCreateNewPasswordPageDocumentString = print(GetCreateNewPasswordPageDocument);
 const GetFooterDocumentString = print(GetFooterDocument);
 const GetHeaderDocumentString = print(GetHeaderDocument);
 const GetLocalesDocumentString = print(GetLocalesDocument);
@@ -11773,6 +13335,7 @@ const GetNotFoundPageDocumentString = print(GetNotFoundPageDocument);
 const GetOrganizationListDocumentString = print(GetOrganizationListDocument);
 const GetPageDocumentString = print(GetPageDocument);
 const GetPagesDocumentString = print(GetPagesDocument);
+const GetResetPasswordPageDocumentString = print(GetResetPasswordPageDocument);
 const GetSurveyDocumentString = print(GetSurveyDocument);
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
     return {
@@ -11877,6 +13440,49 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
                         ...wrappedRequestHeaders,
                     }),
                 'getComponent',
+                'query',
+                variables,
+            );
+        },
+        getCreateAccountPage(
+            variables: GetCreateAccountPageQueryVariables,
+            requestHeaders?: GraphQLClientRequestHeaders,
+        ): Promise<{
+            data: GetCreateAccountPageQuery;
+            errors?: GraphQLError[];
+            extensions?: any;
+            headers: Headers;
+            status: number;
+        }> {
+            return withWrapper(
+                (wrappedRequestHeaders) =>
+                    client.rawRequest<GetCreateAccountPageQuery>(GetCreateAccountPageDocumentString, variables, {
+                        ...requestHeaders,
+                        ...wrappedRequestHeaders,
+                    }),
+                'getCreateAccountPage',
+                'query',
+                variables,
+            );
+        },
+        getCreateNewPasswordPage(
+            variables: GetCreateNewPasswordPageQueryVariables,
+            requestHeaders?: GraphQLClientRequestHeaders,
+        ): Promise<{
+            data: GetCreateNewPasswordPageQuery;
+            errors?: GraphQLError[];
+            extensions?: any;
+            headers: Headers;
+            status: number;
+        }> {
+            return withWrapper(
+                (wrappedRequestHeaders) =>
+                    client.rawRequest<GetCreateNewPasswordPageQuery>(
+                        GetCreateNewPasswordPageDocumentString,
+                        variables,
+                        { ...requestHeaders, ...wrappedRequestHeaders },
+                    ),
+                'getCreateNewPasswordPage',
                 'query',
                 variables,
             );
@@ -12045,6 +13651,27 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
                         ...wrappedRequestHeaders,
                     }),
                 'getPages',
+                'query',
+                variables,
+            );
+        },
+        getResetPasswordPage(
+            variables: GetResetPasswordPageQueryVariables,
+            requestHeaders?: GraphQLClientRequestHeaders,
+        ): Promise<{
+            data: GetResetPasswordPageQuery;
+            errors?: GraphQLError[];
+            extensions?: any;
+            headers: Headers;
+            status: number;
+        }> {
+            return withWrapper(
+                (wrappedRequestHeaders) =>
+                    client.rawRequest<GetResetPasswordPageQuery>(GetResetPasswordPageDocumentString, variables, {
+                        ...requestHeaders,
+                        ...wrappedRequestHeaders,
+                    }),
+                'getResetPasswordPage',
                 'query',
                 variables,
             );

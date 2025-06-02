@@ -9,7 +9,7 @@ export class CreateNewPasswordPage {
     title!: string;
     subtitle?: string;
     setNewPassword!: string;
-    password!: Models.FormField.FormField;
+    password!: Models.FormField.FormFieldWithRegex;
     confirmPassword!: Models.FormField.FormField;
     labels!: {
         show: string;
@@ -20,5 +20,4 @@ export class CreateNewPasswordPage {
     image?: Media.Media;
     seo!: Models.SEO.Page;
     creatingPasswordError!: string;
-    regexValidations?: Models.FormField.RegexValidation[];
 }

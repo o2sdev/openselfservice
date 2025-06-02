@@ -31,4 +31,8 @@ fragment LoginPage on LoginPage {
     forgotPassword {
         ...Link
     }
+    createAccountMessage {
+        title
+        description
+    }
 }

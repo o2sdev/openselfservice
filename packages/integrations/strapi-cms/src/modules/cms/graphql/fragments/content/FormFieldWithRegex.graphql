@@ -1,0 +1,14 @@
+fragment FormFieldComponentWithRegex on ComponentContentFormFieldWithRegex {
+    __typename
+    id
+    name
+    label
+    placeholder
+    errorMessages {
+        ...ErrorMessageComponent
+    }
+    description
+    regexValidations {
+        ...RegexValidationComponent
+    }
+}

@@ -48,9 +48,10 @@ export const mapLoginPage = (data: GetLoginPageQuery, baseURL?: string): CMS.Mod
             })),
         },
         labels: {
-            ...labels.actions,
-            requiredLabel: 'requiredLabel',
-            optionalLabel: 'optionalLabel',
+            show: labels.actions.show,
+            hide: labels.actions.hide,
+            requiredLabel: labels.validation.isRequired,
+            optionalLabel: labels.validation.isOptional,
         },
         image: mapMedia(loginPage.image, baseURL),
         seo: {
@@ -71,7 +72,8 @@ export const mapLoginPage = (data: GetLoginPageQuery, baseURL?: string): CMS.Mod
             description: loginPage.newPasswordMessage.description,
         },
         createAccountMessage: {
-            title: 'tmp Das Benutzerkonto wurde erstellt, muss aber aktiviert werden. Ihr Administrator muss Ihr Konto aktivieren.',
+            title: loginPage.createAccountMessage.title,
+            description: loginPage.createAccountMessage.description,
         },
         forgotPassword: {
             label: loginPage.forgotPassword.label,

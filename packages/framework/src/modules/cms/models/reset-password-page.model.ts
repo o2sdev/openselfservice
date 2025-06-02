@@ -11,8 +11,6 @@ export class ResetPasswordPage {
     resetPassword!: string;
     username!: Models.FormField.FormField;
     labels!: {
-        show: string;
-        hide: string;
         requiredLabel: string;
         optionalLabel: string;
     };

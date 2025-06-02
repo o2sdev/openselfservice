@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, NotImplementedException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore module type mismatch
@@ -35,12 +35,15 @@ import { mapTicketListBlock } from './mappers/blocks/cms.ticket-list.mapper';
 import { mapTicketRecentBlock } from './mappers/blocks/cms.ticket-recent.mapper';
 import { mapUserAccountBlock } from './mappers/blocks/cms.user-account.mapper';
 import { mapAppConfig } from './mappers/cms.app-config.mapper';
+import { mapCreateAccountPage } from './mappers/cms.create-account-page.mapper';
+import { mapCreateNewPasswordPage } from './mappers/cms.create-new-password-page.mapper';
 import { mapFooter } from './mappers/cms.footer.mapper';
 import { mapHeader } from './mappers/cms.header.mapper';
 import { mapLoginPage } from './mappers/cms.login-page.mapper';
 import { mapNotFoundPage } from './mappers/cms.not-found-page.mapper';
 import { mapOrganizationList } from './mappers/cms.organization-list.mapper';
 import { mapPage } from './mappers/cms.page.mapper';
+import { mapResetPasswordPage } from './mappers/cms.reset-password-page.mapper';
 import { mapSurvey } from './mappers/cms.survey.mapper';
 import { PageFragment } from '@/generated/strapi';
 
@@ -441,21 +444,63 @@ export class CmsService implements CMS.Service {
     getCreateNewPasswordPage(
         options: CMS.Request.GetCmsCreateNewPasswordPageParams,
     ): Observable<CMS.Model.CreateNewPasswordPage.CreateNewPasswordPage> {
-        console.log('getCreateNewPasswordPage', options);
-        throw new NotImplementedException();
+        const key = `create-new-password-page-${options.locale}`;
+        return this.getCachedBlock(key, () => {
+            const createNewPasswordPage = this.graphqlService.getCreateNewPasswordPage({
+                locale: options.locale,
+            });
+
+            return forkJoin([createNewPasswordPage]).pipe(
+                map(([createNewPasswordPage]) => {
+                    if (!createNewPasswordPage?.data.createNewPasswordPage) {
+                        throw new NotFoundException();
+                    }
+
+                    return mapCreateNewPasswordPage(createNewPasswordPage.data, this.baseUrl);
+                }),
+            );
+        });
     }
 
     getResetPasswordPage(
         options: CMS.Request.GetCmsResetPasswordPageParams,
     ): Observable<CMS.Model.ResetPasswordPage.ResetPasswordPage> {
-        console.log('getResetPasswordPage', options);
-        throw new NotImplementedException();
+        const key = `login-page-${options.locale}`;
+        return this.getCachedBlock(key, () => {
+            const resetPasswordPage = this.graphqlService.getResetPasswordPage({
+                locale: options.locale,
+            });
+
+            return forkJoin([resetPasswordPage]).pipe(
+                map(([resetPasswordPage]) => {
+                    if (!resetPasswordPage?.data.resetPasswordPage) {
+                        throw new NotFoundException();
+                    }
+
+                    return mapResetPasswordPage(resetPasswordPage.data, this.baseUrl);
+                }),
+            );
+        });
     }
 
     getCreateAccountPage(
         options: CMS.Request.GetCmsCreateAccountPageParams,
     ): Observable<CMS.Model.CreateAccountPage.CreateAccountPage> {
-        console.log('getCreateAccountPage', options);
-        throw new NotImplementedException();
+        const key = `create-account-page-${options.locale}`;
+        return this.getCachedBlock(key, () => {
+            const createAccountPage = this.graphqlService.getCreateAccountPage({
+                locale: options.locale,
+            });
+
+            return forkJoin([createAccountPage]).pipe(
+                map(([createAccountPage]) => {
+                    if (!createAccountPage?.data.createAccountPage) {
+                        throw new NotFoundException();
+                    }
+
+                    return mapCreateAccountPage(createAccountPage.data, this.baseUrl);
+                }),
+            );
+        });
     }
 }

@@ -1,6 +1,5 @@
 export interface InputValidationsRegExpLabel {
-    id: string;
-    type: 'min' | 'lowercase' | 'uppercase' | 'digit' | 'special' | 'nospace';
+    type: string;
     label: string;
     regex: string;
 }

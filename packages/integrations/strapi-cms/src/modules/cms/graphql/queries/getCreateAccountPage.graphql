@@ -1,0 +1,11 @@
+query getCreateAccountPage($locale: I18NLocaleCode!) {
+    createAccountPage(locale: $locale) {
+        ...CreateAccountPage
+    }
+    configurableTexts {
+        validation {
+            isRequired
+            isOptional
+        }
+    }
+}

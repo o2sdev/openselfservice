@@ -1,0 +1,5 @@
+fragment IconWithTextComponent on ComponentContentIconWithText {
+    name
+    title
+    description
+}
