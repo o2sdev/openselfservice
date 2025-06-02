@@ -1,0 +1,10 @@
+fragment ArticleSearchComponent on ComponentComponentsArticleSearch {
+    __typename
+    id
+    title
+    inputLabel
+    noResults {
+        title
+        description
+    }
+}

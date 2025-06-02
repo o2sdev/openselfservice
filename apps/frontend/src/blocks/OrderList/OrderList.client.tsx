@@ -2,7 +2,6 @@
 
 import { Blocks } from '@o2s/api-harmonization';
 import { ArrowRight, IterationCw, MoreVertical } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 import React, { useState, useTransition } from 'react';
 
 import { Badge } from '@o2s/ui/components/badge';
@@ -39,8 +38,6 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
     };
 
     const initialData = component.orders.data;
-
-    const t = useTranslations();
 
     const [data, setData] = useState<Blocks.OrderList.Model.OrderListBlock>(component);
     const [filters, setFilters] = useState(initialFilters);
@@ -190,15 +187,14 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
                                                                         <MoreVertical className="h-4 w-4" />
                                                                     </Button>
                                                                 </DropdownMenuTrigger>
-                                                                <DropdownMenuContent align="end" className="min-w-70">
+                                                                <DropdownMenuContent align="end" className="min-w-50">
                                                                     <DropdownMenuItem asChild disabled>
                                                                         <Typography
                                                                             variant="small"
                                                                             className="text-muted-foreground"
                                                                         >
                                                                             <IterationCw className="h-4 w-4" />
-                                                                            {data.labels.reorder} -{' '}
-                                                                            {t('general.comingSoon')}
+                                                                            {data.reorderLabel}
                                                                         </Typography>
                                                                     </DropdownMenuItem>
                                                                 </DropdownMenuContent>

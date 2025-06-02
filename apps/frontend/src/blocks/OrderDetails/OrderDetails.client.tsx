@@ -1,7 +1,6 @@
 'use client';
 
 import { Blocks } from '@o2s/api-harmonization';
-import { ArrowUpRight, IterationCw, Truck } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import React, { useState, useTransition } from 'react';
@@ -26,6 +25,7 @@ import { statusMap } from '@/utils/mappings/status-order';
 
 import { Link as NextLink } from '@/i18n';
 
+import { ActionList } from '@/components/ActionList/ActionList';
 import { InfoCard } from '@/components/Cards/InfoCard/InfoCard';
 import { DynamicIcon } from '@/components/DynamicIcon/DynamicIcon';
 import { FiltersSection } from '@/components/Filters/FiltersSection';
@@ -104,8 +104,6 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
     const initialData = component.productList.products.data;
     const data = component;
 
-    const t = useTranslations();
-
     const [items, setItems] =
         useState<Blocks.OrderDetails.Model.OrderDetailsBlock['productList']['products']['data']>(initialData);
     const [filters, setFilters] = useState(initialFilters);
@@ -143,6 +141,25 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
         });
     };
 
+    const buttons = [
+        {
+            label: data.payOnlineLabel,
+            icon: 'ArrowUpRight',
+        },
+        {
+            label: data.reorderLabel,
+            icon: 'IterationCw',
+        },
+        {
+            label: data.trackOrderLabel,
+            icon: 'Truck',
+        },
+    ];
+
+    const actions = data.order.overdue.isOverdue ? buttons : buttons.slice(1);
+
+    const t = useTranslations();
+
     return (
         <div className="w-full">
             <div className="flex flex-col gap-6">
@@ -160,34 +177,51 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
                     </div>
                     <div className="flex flex-row justify-end">
                         <div className="flex flex-col gap-4 sm:flex-row sm:items-center w-full sm:w-auto">
-                            <TooltipHover
-                                trigger={(setIsOpen) => (
-                                    <Button variant="secondary" onClick={() => setIsOpen(true)}>
-                                        <Truck className="w-4 h-4" />
-                                        {data.labels.trackOrder}
-                                    </Button>
-                                )}
-                                content={<p>{t('general.comingSoon')}</p>}
-                            />
-
-                            <TooltipHover
-                                trigger={(setIsOpen) => (
-                                    <Button variant="secondary" onClick={() => setIsOpen(true)}>
-                                        <IterationCw className="w-4 h-4" />
-                                        {data.labels.reorder}
-                                    </Button>
-                                )}
-                                content={<p>{t('general.comingSoon')}</p>}
-                            />
-
-                            <TooltipHover
-                                trigger={(setIsOpen) => (
-                                    <Button variant="destructive" onClick={() => setIsOpen(true)}>
-                                        <ArrowUpRight className="w-4 h-4" />
-                                        {data.labels.payOnline}
-                                    </Button>
-                                )}
-                                content={<p>{t('general.comingSoon')}</p>}
+                            <ActionList
+                                visibleActions={[
+                                    <TooltipHover
+                                        key={actions[0]?.label}
+                                        trigger={(setIsOpen) => (
+                                            <Button
+                                                variant={data.order.overdue.isOverdue ? 'destructive' : 'default'}
+                                                onClick={() => setIsOpen(true)}
+                                            >
+                                                {actions[0]?.icon && <DynamicIcon name={actions[0].icon} size={16} />}
+                                                {actions[0]?.label}
+                                            </Button>
+                                        )}
+                                        content={<p>{t('general.comingSoon')}</p>}
+                                    />,
+                                    <TooltipHover
+                                        key={actions[1]?.label}
+                                        trigger={(setIsOpen) => (
+                                            <Button variant={'secondary'} onClick={() => setIsOpen(true)}>
+                                                {actions[1]?.icon && <DynamicIcon name={actions[1].icon} size={16} />}
+                                                {actions[1]?.label}
+                                            </Button>
+                                        )}
+                                        content={<p>{t('general.comingSoon')}</p>}
+                                    />,
+                                ]}
+                                dropdownActions={actions.slice(2).map((action) => (
+                                    <TooltipHover
+                                        key={action.label}
+                                        trigger={(setIsOpen) => (
+                                            <Button
+                                                variant="ghost"
+                                                size="sm"
+                                                disabled
+                                                className="w-full justify-start h-8"
+                                                onClick={() => setIsOpen(true)}
+                                            >
+                                                {action.icon && <DynamicIcon name={action.icon} size={16} />}
+                                                {action.label}
+                                            </Button>
+                                        )}
+                                        content={<p>{t('general.comingSoon')}</p>}
+                                    />
+                                ))}
+                                showMoreLabel={data.labels.showMore}
                             />
                         </div>
                     </div>
@@ -277,7 +311,7 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
                                     <SheetTrigger asChild>
                                         <Button variant="secondary">
                                             {data.order.customerComment.link.icon && (
-                                                <DynamicIcon name={data.order.customerComment.link.icon} />
+                                                <DynamicIcon name={data.order.customerComment.link.icon} size={16} />
                                             )}
                                             {data.order.customerComment.link.label}
                                         </Button>

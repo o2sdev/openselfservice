@@ -12,7 +12,7 @@ export class Labels {
     errors!: {
         requestError: {
             title: string;
-            content: string;
+            content?: string;
         };
     };
     dates!: {

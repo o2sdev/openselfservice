@@ -192,7 +192,11 @@ export const RichText: FC<Readonly<RichTextProps>> = ({
             },
         },
         table: {
-            component: TypographyComp,
+            component: (props) => (
+                <div className="w-full overflow-auto">
+                    <TypographyComp {...props} />
+                </div>
+            ),
             props: {
                 variant: 'table',
                 tag: 'table',

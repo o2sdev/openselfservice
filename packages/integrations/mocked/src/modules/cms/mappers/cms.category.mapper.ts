@@ -337,6 +337,89 @@ const MOCK_ACCESSORIES_BLOCK_PL: CMS.Model.CategoryBlock.CategoryBlock = {
     },
 };
 
+// Troubleshooting category blocks
+const MOCK_TROUBLESHOOTING_BLOCK_EN: CMS.Model.CategoryBlock.CategoryBlock = {
+    id: 'category-5',
+    categoryId: 'troubleshooting',
+    componentsPosition: 'bottom',
+    components: [
+        {
+            __typename: 'FaqBlock',
+            id: 'faq-4',
+        },
+    ],
+    parent: {
+        slug: '/help-and-support',
+    },
+    labels: {
+        today: 'Today',
+        yesterday: 'Yesterday',
+    },
+    title: 'Troubleshooting',
+    description: 'Explore troubleshooting to enhance your PowerPro tools',
+    pagination: {
+        limit: 6,
+        legend: 'of {totalPages} pages',
+        prev: 'Previous',
+        next: 'Next',
+        selectPage: 'Select page',
+    },
+};
+const MOCK_TROUBLESHOOTING_BLOCK_DE: CMS.Model.CategoryBlock.CategoryBlock = {
+    id: 'category-5',
+    categoryId: 'troubleshooting',
+    componentsPosition: 'bottom',
+    components: [
+        {
+            __typename: 'FaqBlock',
+            id: 'faq-4',
+        },
+    ],
+    parent: {
+        slug: '/hilfe-und-support',
+    },
+    labels: {
+        today: 'Heute',
+        yesterday: 'Gestern',
+    },
+    title: 'Fehlerbehebung',
+    description: 'Entdecken Sie Fehlerbehebung für Ihre PowerPro-Werkzeuge',
+    pagination: {
+        limit: 6,
+        legend: 'von {totalPages} Seiten',
+        prev: 'Zurück',
+        next: 'Weiter',
+        selectPage: 'Seite auswählen',
+    },
+};
+const MOCK_TROUBLESHOOTING_BLOCK_PL: CMS.Model.CategoryBlock.CategoryBlock = {
+    id: 'category-5',
+    categoryId: 'troubleshooting',
+    componentsPosition: 'bottom',
+    components: [
+        {
+            __typename: 'FaqBlock',
+            id: 'faq-4',
+        },
+    ],
+    parent: {
+        slug: '/pomoc-i-wsparcie',
+    },
+    labels: {
+        today: 'Dzisiaj',
+        yesterday: 'Wczoraj',
+    },
+    title: 'Rozwiązywanie problemów',
+    description: 'Rozwiązywanie problemów z Twoimi narzędziami PowerPro',
+    pagination: {
+        limit: 6,
+        legend: 'z {totalPages} stron',
+        prev: 'Poprzednia',
+        next: 'Następna',
+        selectPage: 'Wybierz stronę',
+    },
+};
+
 export const mapCategoryBlock = (id: string, locale: string): CMS.Model.CategoryBlock.CategoryBlock => {
     switch (id) {
         case 'category-1':
@@ -371,7 +454,15 @@ export const mapCategoryBlock = (id: string, locale: string): CMS.Model.Category
             } else {
                 return MOCK_ACCESSORIES_BLOCK_EN;
             }
+        case 'category-5':
+            if (locale === 'de') {
+                return MOCK_TROUBLESHOOTING_BLOCK_DE;
+            } else if (locale === 'pl') {
+                return MOCK_TROUBLESHOOTING_BLOCK_PL;
+            } else {
+                return MOCK_TROUBLESHOOTING_BLOCK_EN;
+            }
+        default:
+            throw new NotFoundException();
     }
-
-    throw new NotFoundException();
 };

@@ -8,6 +8,7 @@ import { extendSdk, getSdk } from '@o2s/framework/sdk';
 
 import { article } from '@/api/blocks/article';
 import { articleList } from '@/api/blocks/article-list';
+import { articleSearch } from '@/api/blocks/article-search';
 import { category } from '@/api/blocks/category';
 import { categoryList } from '@/api/blocks/category-list';
 import { faq } from '@/api/blocks/faq';
@@ -78,6 +79,8 @@ export const sdk = extendSdk(internalSdk, {
         getCategory: category(internalSdk).blocks.getCategory,
         getCategoryArticles: category(internalSdk).blocks.getCategoryArticles,
         getArticle: article(internalSdk).blocks.getArticle,
+        getArticleSearch: articleSearch(internalSdk).blocks.getArticleSearch,
+        searchArticles: articleSearch(internalSdk).blocks.searchArticles,
         // BLOCK REGISTER
     },
     modules: {

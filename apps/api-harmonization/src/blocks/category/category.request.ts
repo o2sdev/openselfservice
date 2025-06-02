@@ -9,4 +9,5 @@ export class GetCategoryBlockArticlesQuery implements Omit<CMS.Request.GetCmsEnt
     id!: string;
     offset?: number;
     limit?: number;
+    category?: string;
 }

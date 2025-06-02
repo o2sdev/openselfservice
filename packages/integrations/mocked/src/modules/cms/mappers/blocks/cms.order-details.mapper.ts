@@ -32,6 +32,7 @@ const MOCK_ORDER_DETAILS_BLOCK_EN: CMS.Model.OrderDetailsBlock.OrderDetailsBlock
         icon: 'Text',
         link: {
             label: 'See full',
+            icon: 'ArrowRight',
             url: '',
         },
     },
@@ -56,9 +57,7 @@ const MOCK_ORDER_DETAILS_BLOCK_EN: CMS.Model.OrderDetailsBlock.OrderDetailsBlock
     labels: {
         today: 'Today',
         yesterday: 'Yesterday',
-        reorder: 'Reorder',
-        trackOrder: 'Track order',
-        payOnline: 'Pay online',
+        showMore: 'Show more',
         close: 'Close',
     },
     productsTitle: 'Product list',
@@ -119,6 +118,9 @@ const MOCK_ORDER_DETAILS_BLOCK_EN: CMS.Model.OrderDetailsBlock.OrderDetailsBlock
         title: "So far, there's nothing here",
         description: '',
     },
+    reorderLabel: 'Erneut bestellen',
+    trackOrderLabel: 'Bestellung verfolgen',
+    payOnlineLabel: 'Online bezahlen',
 };
 
 const MOCK_ORDER_DETAILS_BLOCK_DE: CMS.Model.OrderDetailsBlock.OrderDetailsBlock = {
@@ -178,9 +180,7 @@ const MOCK_ORDER_DETAILS_BLOCK_DE: CMS.Model.OrderDetailsBlock.OrderDetailsBlock
     labels: {
         today: 'Heute',
         yesterday: 'Gestern',
-        reorder: 'Erneut bestellen',
-        trackOrder: 'Bestellung verfolgen',
-        payOnline: 'Online bezahlen',
+        showMore: 'Mehr anzeigen',
         close: 'Schließen',
     },
     productsTitle: 'Produktliste',
@@ -241,6 +241,9 @@ const MOCK_ORDER_DETAILS_BLOCK_DE: CMS.Model.OrderDetailsBlock.OrderDetailsBlock
         title: 'Bis jetzt ist hier nichts',
         description: '',
     },
+    reorderLabel: 'Erneut bestellen',
+    trackOrderLabel: 'Bestellung verfolgen',
+    payOnlineLabel: 'Online bezahlen',
 };
 
 const MOCK_ORDER_DETAILS_BLOCK_PL: CMS.Model.OrderDetailsBlock.OrderDetailsBlock = {
@@ -301,9 +304,7 @@ const MOCK_ORDER_DETAILS_BLOCK_PL: CMS.Model.OrderDetailsBlock.OrderDetailsBlock
     labels: {
         today: 'Dzisiaj',
         yesterday: 'Wczoraj',
-        reorder: 'Zamów ponownie',
-        trackOrder: 'Śledź zamówienie',
-        payOnline: 'Płatność online',
+        showMore: 'Więcej',
         close: 'Zamknij',
     },
     productsTitle: 'Lista produktów',
@@ -364,6 +365,9 @@ const MOCK_ORDER_DETAILS_BLOCK_PL: CMS.Model.OrderDetailsBlock.OrderDetailsBlock
         title: 'Dotąd nic tu nie ma',
         description: '',
     },
+    reorderLabel: 'Zamów ponownie',
+    trackOrderLabel: 'Śledź zamówienie',
+    payOnlineLabel: 'Płatność online',
 };
 
 export const mapOrderDetailsBlock = (_locale: string): CMS.Model.OrderDetailsBlock.OrderDetailsBlock => {

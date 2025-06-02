@@ -36,7 +36,10 @@ export class Order {
     currency!: Price.Currency;
     paymentStatus!: PaymentStatus;
     status!: OrderStatus;
-    items!: OrderItem[];
+    items!: {
+        data: OrderItem[];
+        total: number;
+    };
     purchaseOrderNumber?: string;
     shippingAddress?: Address.Address;
     billingAddress?: Address.Address;
@@ -55,7 +58,7 @@ export class OrderItem {
     discountTotal?: Price.Price;
     unit?: Unit.Unit;
     currency!: Price.Currency;
-    product?: Product;
+    product!: Product;
 }
 
 export class ShippingMethod {

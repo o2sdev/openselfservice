@@ -23,10 +23,10 @@ export class ArticleListService {
             concatMap(([cms]) => {
                 return this.articlesService
                     .getArticleList({
-                        limit: 10,
+                        limit: cms.articlesToShow || 4,
                         locale: headers['x-locale'],
                         ids: cms.articleIds,
-                        category: cms.categoryId,
+                        category: cms.categorySlug,
                     })
                     .pipe(map((articles) => mapArticleList(cms, articles, headers['x-locale'])));
             }),

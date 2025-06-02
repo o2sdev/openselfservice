@@ -5,7 +5,7 @@ import { Products } from '@o2s/framework/modules';
 
 import { responseDelay } from '@/utils/delay';
 
-import { mapProduct, mapProducts } from './products.mapper';
+import { mapProduct, mapProducts, mapRelatedProducts } from './products.mapper';
 
 @Injectable()
 export class ProductsService implements Products.Service {
@@ -15,5 +15,9 @@ export class ProductsService implements Products.Service {
 
     getProduct(params: Products.Request.GetProductParams): Observable<Products.Model.Product> {
         return of(mapProduct(params.id)).pipe(responseDelay());
+    }
+
+    getRelatedProductList(params: Products.Request.GetRelatedProductListParams): Observable<Products.Model.Products> {
+        return of(mapRelatedProducts(params)).pipe(responseDelay());
     }
 }

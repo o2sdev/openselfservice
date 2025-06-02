@@ -33,7 +33,8 @@
                 "ALGOLIA_API_KEY",
                 "MEDUSAJS_BASE_URL",
                 "MEDUSAJS_PUBLISHABLE_API_KEY",
-                "MEDUSAJS_ADMIN_API_KEY"
+                "MEDUSAJS_ADMIN_API_KEY",
+                "SEARCH_ARTICLES_INDEX_NAME"
             ]
         }
     }
