@@ -1,5 +1,11 @@
 # @o2s/framework
 
+## 1.3.0
+
+### Minor Changes
+
+- 8c29a31: moved mocked auth integration (with a local database) to a separate package to allow easier switching between other integrations
+
 ## 1.2.0
 
 ### Minor Changes
