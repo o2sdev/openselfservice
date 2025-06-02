@@ -1,5 +1,33 @@
 # @o2s/integrations.strapi-cms
 
+## 2.1.0
+
+### Minor Changes
+
+- 565b63d: feat: fixed pagination issue in articleList
+
+    - added new mocked articles
+    - implemented new additionalLink in ArticleList
+
+- 6225c14: remodeled how articles are kept in Strapi in order to suppport indexing them by search engines (e.g. Algolia) by separating them into their own content type
+- f015c2b: New block ArticleSearch - Input field with suggestions to find appropriate article.
+
+    - added new UI component - Command,
+    - added new articles mock,
+    - added mock for ArticleSearchBlock,
+    - added strapi integration for ArticleSearchBlock,
+    - added new component Autocomplete,
+
+### Patch Changes
+
+- fb99085: survey mapper changes after adding multiselect plugin
+- Updated dependencies [565b63d]
+- Updated dependencies [5d16edf]
+- Updated dependencies [61d4f2f]
+- Updated dependencies [f015c2b]
+    - @o2s/framework@1.1.0
+    - @o2s/utils.logger@1.1.0
+
 ## 2.0.0
 
 ### Major Changes

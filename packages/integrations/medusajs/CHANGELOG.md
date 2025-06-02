@@ -1,5 +1,27 @@
 # @o2s/integrations.medusajs
 
+## 1.1.0
+
+### Minor Changes
+
+- 5d16edf: orderDetails fixes:
+
+    - order model update - product is required now,
+    - filtering moved to order mapper,
+    - PayOnline button visible only when the order is overdue,
+
+- 61d4f2f: Added integration of services and assets with MedusaJS
+
+### Patch Changes
+
+- 3bd8970: fixed mapping of order list and details
+- Updated dependencies [565b63d]
+- Updated dependencies [5d16edf]
+- Updated dependencies [61d4f2f]
+- Updated dependencies [f015c2b]
+    - @o2s/framework@1.1.0
+    - @o2s/utils.logger@1.1.0
+
 ## 1.0.0
 
 ### Major Changes
