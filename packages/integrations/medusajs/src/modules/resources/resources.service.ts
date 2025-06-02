@@ -30,6 +30,7 @@ export class ResourcesService extends Resources.Service {
         protected httpClient: HttpService,
         @Inject(LoggerService) protected readonly logger: LoggerService,
         private readonly medusaJsService: MedusaJsService,
+        private readonly authService: Auth.Service,
         private readonly config: ConfigService,
     ) {
         super();
@@ -49,7 +50,7 @@ export class ResourcesService extends Resources.Service {
         query: Resources.Request.GetServiceListQuery,
         authorization: string,
     ): Observable<Resources.Model.Services> {
-        const customerId = Auth.Utils.decodeAuthorizationToken(authorization)?.customer?.id;
+        const customerId = this.authService.getCustomerId(authorization);
 
         if (!customerId) {
             this.logger.debug('Customer ID not found in authorization token');
@@ -97,7 +98,7 @@ export class ResourcesService extends Resources.Service {
         query: Resources.Request.GetAssetListQuery,
         authorization: string,
     ): Observable<Resources.Model.Assets> {
-        const customerId = Auth.Utils.decodeAuthorizationToken(authorization)?.customer?.id;
+        const customerId = this.authService.getCustomerId(authorization);
 
         if (!customerId) {
             this.logger.debug('Customer ID not found in authorization token');

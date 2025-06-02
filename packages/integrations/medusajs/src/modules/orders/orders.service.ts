@@ -27,6 +27,7 @@ export class OrdersService extends Orders.Service {
         protected httpClient: HttpService,
         @Inject(LoggerService) protected readonly logger: LoggerService,
         private readonly medusaJsService: MedusaJsService,
+        private readonly authService: Auth.Service,
     ) {
         super();
         this.sdk = this.medusaJsService.getSdk();
@@ -75,7 +76,7 @@ export class OrdersService extends Orders.Service {
             throw new UnauthorizedException('Unauthorized');
         }
 
-        const customerId = Auth.Utils.decodeAuthorizationToken(authorization)?.customer?.id;
+        const customerId = this.authService.getCustomerId(authorization);
 
         if (!customerId) {
             this.logger.debug('Customer ID not found in authorization token');

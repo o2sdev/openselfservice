@@ -1,5 +1,9 @@
-export * as Guards from './roles.guard';
-export * as Decorators from './roles.decorator';
+export * as Decorators from './auth.decorators';
 export * as Constants from './auth.constants';
-export * as Models from './jwt.model';
-export * as Utils from './auth.utils';
+export * as Model from './auth.model';
+
+export { Roles } from './auth.decorators';
+
+export { AuthModule as Module } from './auth.module';
+export { AuthService as Service } from './auth.service';
+export { AuthGuard as Guard } from './auth.guard';

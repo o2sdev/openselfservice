@@ -6,7 +6,7 @@ import { LoggerModule, LoggerService } from '@o2s/utils.logger';
 
 import {
     Articles,
-    Auth,
+    Auth as AuthModule,
     BillingAccounts,
     CMS,
     Cache,
@@ -22,6 +22,8 @@ import {
 } from '@o2s/framework/modules';
 
 import { configuration } from '@o2s/api-harmonization/config/configuration';
+
+import * as Auth from '@o2s/api-harmonization/models/auth';
 
 import { ArticleListBlockModule } from '@o2s/api-harmonization/blocks/article-list/article-list.module';
 import { ArticleSearchBlockModule } from '@o2s/api-harmonization/blocks/article-search/article-search.module';
@@ -81,6 +83,7 @@ import { SurveyjsModule } from './modules/surveyjs-forms/surveyjs.module';
         Search.Module.register(AppConfig),
         Products.Module.register(AppConfig),
         Orders.Module.register(AppConfig),
+        AuthModule.Module.register(AppConfig),
 
         PageModule.register(AppConfig),
         RoutesModule.register(AppConfig),
@@ -117,7 +120,7 @@ import { SurveyjsModule } from './modules/surveyjs-forms/surveyjs.module';
         AppService,
         {
             provide: APP_GUARD,
-            useFactory: (reflector: Reflector, logger: LoggerService) => new Auth.Guards.RolesGuard(reflector, logger),
+            useFactory: (reflector: Reflector, logger: LoggerService) => new Auth.Guard(reflector, logger),
             inject: [Reflector, LoggerService],
         },
     ],

@@ -13,8 +13,14 @@ import { Separator } from '@o2s/ui/components/separator';
 import { Typography } from '@o2s/ui/components/typography';
 
 import LogoGithub from '@/assets/icons/logo-github.svg';
+import LogoKeycloak from '@/assets/icons/logo-keycloak.svg';
 
 import { FormValues, SignInFormProps } from './SignInForm.types';
+
+const PROVIDERS_LOGOS = {
+    github: <LogoGithub />,
+    keycloak: <LogoKeycloak />,
+};
 
 const MIN_USERNAME_CHARS = 5;
 const MAX_USERNAME_CHARS = 64;
@@ -200,7 +206,7 @@ export const SignInForm: React.FC<SignInFormProps> = ({ providers, labels, onSig
                             className="flex flex-col gap-4"
                         >
                             <Button type="submit" variant="outline" disabled={isSubmitting}>
-                                <LogoGithub />
+                                {PROVIDERS_LOGOS[provider.id as keyof typeof PROVIDERS_LOGOS] || null}
                                 {labels.providers?.label} {provider.name}
                             </Button>
                         </form>

@@ -3,9 +3,9 @@ export type SearchEngineArticleModel = {
     documentId: string;
     slug: string;
     locale?: string;
-    createdAt?: any;
-    updatedAt?: any;
-    publishedAt?: any;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
     SEO: {
         title: string;
         noIndex: boolean;

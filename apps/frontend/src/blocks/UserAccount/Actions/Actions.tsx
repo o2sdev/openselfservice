@@ -1,7 +1,15 @@
 'use server';
 
-import { signOut } from '@/auth';
+import { auth, signOut } from '@/auth';
 
 export async function signOutAction() {
-    await signOut();
+    const session = await auth();
+
+    const returnTo = encodeURI(process.env.NEXT_PUBLIC_BASE_URL!) + encodeURIComponent('/');
+
+    if (session) {
+        await signOut({
+            redirectTo: `/api/signOut?callbackUrl=${returnTo}&idToken=${session.idToken}`,
+        });
+    }
 }

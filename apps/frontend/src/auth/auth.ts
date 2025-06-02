@@ -1,13 +1,11 @@
-import { PrismaAdapter } from '@auth/prisma-adapter';
 import NextAuth, { NextAuthResult } from 'next-auth';
 
-import { mockJwtCallback } from './auth.mock';
+import { Adapter, DefaultAuthProvider, jwtCallback, sessionCallback, updateOrganization } from './auth.config';
 import { providers } from './auth.providers';
-import { prisma } from './lib/prisma';
 
 export const nextAuthResult = NextAuth({
     debug: true,
-    adapter: PrismaAdapter(prisma),
+    adapter: Adapter,
     providers: providers,
     session: {
         strategy: 'jwt',
@@ -15,20 +13,15 @@ export const nextAuthResult = NextAuth({
     },
     callbacks: {
         jwt: async (params) => {
-            return mockJwtCallback(params);
+            return jwtCallback(params);
         },
-        session: async ({ session, token }) => {
-            if (session.user) {
-                session.user.role = token?.role;
-                session.user.id = token?.id as string;
-                session.user.customer = token?.customer;
-                session.accessToken = token.accessToken;
-            }
-            return session;
+        session: async (params) => {
+            return sessionCallback(params);
         },
     },
     pages: {
-        signIn: '/login',
+        signIn: DefaultAuthProvider ? '/api/signIn' : '/login',
+        signOut: '/api/signOut',
         error: '/error',
     },
     events: {
@@ -43,3 +36,4 @@ export const nextAuthResult = NextAuth({
 
 export const { handlers, signIn, signOut } = nextAuthResult;
 export const auth: NextAuthResult['auth'] = nextAuthResult.auth;
+export { updateOrganization };

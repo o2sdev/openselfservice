@@ -18,6 +18,8 @@ import { sdk } from '@/api/sdk';
 import { downloadFile } from '@/utils/downloadFile';
 import { invoiceBadgePaymentStatusVariants } from '@/utils/mappings/invoice-badge';
 
+import { useGlobalContext } from '@/providers/GlobalProvider';
+
 import { FiltersSection } from '@/components/Filters/FiltersSection';
 import { NoResults } from '@/components/NoResults/NoResults';
 import { Pagination } from '@/components/Pagination/Pagination';
@@ -26,6 +28,8 @@ import { Price } from '@/components/Price/Price';
 import { InvoiceListPureProps } from './InvoiceList.types';
 
 export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, accessToken, ...component }) => {
+    const { labels } = useGlobalContext();
+
     const initialFilters: Blocks.InvoiceList.Request.GetInvoiceListBlockQuery = {
         id: component.id,
         offset: 0,
@@ -63,9 +67,8 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
         } catch (_error) {
             toast({
                 variant: 'destructive',
-                // TODO: get labels from configurable texts
-                title: 'Uh oh! Something went wrong.',
-                description: 'There was a problem with your request.',
+                title: labels.errors.requestError.title,
+                description: labels.errors.requestError.content,
             });
         }
     };

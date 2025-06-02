@@ -8,6 +8,8 @@ import { responseDelay } from '@/utils/delay';
 
 @Injectable()
 export class OrdersService implements Orders.Service {
+    constructor(private readonly authService: Auth.Service) {}
+
     getOrderList(
         query: Orders.Request.GetOrderListQuery,
         authorization: string | undefined,
@@ -16,7 +18,7 @@ export class OrdersService implements Orders.Service {
             throw new UnauthorizedException('Unauthorized');
         }
 
-        const customerId = Auth.Utils.decodeAuthorizationToken(authorization)?.customer?.id;
+        const customerId = this.authService.getCustomerId(authorization);
 
         if (!customerId) {
             throw new UnauthorizedException('Unauthorized');
