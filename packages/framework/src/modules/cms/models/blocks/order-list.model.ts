@@ -16,8 +16,8 @@ export class OrderListBlock extends Block.Block {
         today: string;
         yesterday: string;
         showMore: string;
-        reorder: string;
         clickToSelect: string;
     };
+    reorderLabel?: string;
     detailsUrl!: string;
 }
