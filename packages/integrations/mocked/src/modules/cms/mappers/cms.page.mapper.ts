@@ -10,6 +10,9 @@ import {
     PAGE_SAFETY_DE,
     PAGE_SAFETY_EN,
     PAGE_SAFETY_PL,
+    PAGE_TROUBLESHOOTING_DE,
+    PAGE_TROUBLESHOOTING_EN,
+    PAGE_TROUBLESHOOTING_PL,
     PAGE_WARRANTY_AND_REPAIR_DE,
     PAGE_WARRANTY_AND_REPAIR_EN,
     PAGE_WARRANTY_AND_REPAIR_PL,
@@ -182,24 +185,28 @@ export const mapPage = (slug: string, locale: string): CMS.Model.Page.Page | und
                 slug: `/zamowienia/${slug.match(/(.+)\/(.+)/)?.[2]}`,
                 updatedAt: '2025-01-01',
             };
+
         case '/contact-us':
             return PAGE_CONTACT_US_EN;
         case '/kontaktiere-uns':
             return PAGE_CONTACT_US_DE;
         case '/skontaktuj-sie-z-nami':
             return PAGE_CONTACT_US_PL;
+
         case '/submit-complaint':
             return PAGE_COMPLAINT_FORM_EN;
         case '/einreichen-reklamacji':
             return PAGE_COMPLAINT_FORM_DE;
         case '/wyslij-reklamacje':
             return PAGE_COMPLAINT_FORM_PL;
+
         case '/request-device-maintenance':
             return PAGE_REQUEST_DEVICE_MAINTENANCE_EN;
         case '/geratewartungsanfrage':
             return PAGE_REQUEST_DEVICE_MAINTENANCE_DE;
         case '/zglos-naprawe-urzadzenia':
             return PAGE_REQUEST_DEVICE_MAINTENANCE_PL;
+
         case '/help-and-support':
             return PAGE_HELP_AND_SUPPORT_EN;
         case '/hilfe-und-support':
@@ -234,6 +241,13 @@ export const mapPage = (slug: string, locale: string): CMS.Model.Page.Page | und
             return PAGE_ACCESSORIES_DE;
         case '/pomoc-i-wsparcie/akcesoria':
             return PAGE_ACCESSORIES_PL;
+
+        case '/help-and-support/troubleshooting':
+            return PAGE_TROUBLESHOOTING_EN;
+        case '/hilfe-und-support/fehlerbehebung':
+            return PAGE_TROUBLESHOOTING_DE;
+        case '/pomoc-i-wsparcie/rozwiązywanie-problemów':
+            return PAGE_TROUBLESHOOTING_PL;
 
         default:
             return undefined;

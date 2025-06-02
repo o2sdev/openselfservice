@@ -29,7 +29,7 @@ export class Service {
     detailsUrl!: string;
     contract!: {
         id: string;
-        type: {
+        type?: {
             value: Resources.Model.Contract['type'];
             label: string;
         };
@@ -39,6 +39,7 @@ export class Service {
         };
         startDate: string;
         endDate: string;
+        price: Models.Price.Price;
     };
     product!: {
         id: string;
@@ -52,9 +53,8 @@ export class Service {
             label: string;
         };
         description: string;
-        shortDescription: string;
-        image: Models.Media.Media;
-        price: Models.Price.Price;
+        shortDescription?: string;
+        image?: Models.Media.Media;
         link: string;
         tags: Products.Model.Product['tags'];
     };

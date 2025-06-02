@@ -21,12 +21,14 @@ export const mapArticleListBlock = (
                 id: component.id,
                 title: component.title,
                 description: component.description,
-                categoryId: component.category?.slug,
+                categorySlug: component.category?.slug,
                 articleIds: component.pages.map((page) => page.slug),
+                articlesToShow: component.articles_to_show,
                 parent: component.parent,
                 labels: {
                     today: configurableTexts.dates.today,
                     yesterday: configurableTexts.dates.yesterday,
+                    seeAllArticles: configurableTexts.actions.showAllArticles,
                 },
             };
     }

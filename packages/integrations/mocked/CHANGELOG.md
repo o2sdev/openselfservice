@@ -1,5 +1,59 @@
 # @o2s/integrations.mocked
 
+## 1.2.0
+
+### Minor Changes
+
+- 1ee5be1: feat: aligned buttons - used ActionList component with dropdown menu
+
+    - used ActionList in the OrderDetailBlock to display buttons,
+    - updated the mock and strapi - now an action is a Link,
+    - used the format method from the string-template to inject a value into a string,
+
+### Patch Changes
+
+- Updated dependencies [1ee5be1]
+    - @o2s/framework@1.2.0
+
+## 1.1.0
+
+### Minor Changes
+
+- 565b63d: feat: fixed pagination issue in articleList
+
+    - added new mocked articles
+    - implemented new additionalLink in ArticleList
+
+- 5d16edf: orderDetails fixes:
+
+    - order model update - product is required now,
+    - filtering moved to order mapper,
+    - PayOnline button visible only when the order is overdue,
+
+- 61d4f2f: Added integration of services and assets with MedusaJS
+- f015c2b: New block ArticleSearch - Input field with suggestions to find appropriate article.
+
+    - added new UI component - Command,
+    - added new articles mock,
+    - added mock for ArticleSearchBlock,
+    - added strapi integration for ArticleSearchBlock,
+    - added new component Autocomplete,
+
+### Patch Changes
+
+- Updated dependencies [565b63d]
+- Updated dependencies [5d16edf]
+- Updated dependencies [61d4f2f]
+- Updated dependencies [f015c2b]
+    - @o2s/framework@1.1.0
+    - @o2s/utils.logger@1.1.0
+
+## 1.0.1
+
+### Patch Changes
+
+- b575e8e: made mocked orders IDs more consistent
+
 ## 1.0.0
 
 ### Major Changes

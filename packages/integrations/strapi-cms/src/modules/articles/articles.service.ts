@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Observable, concatMap, forkJoin, map } from 'rxjs';
+import { Observable, forkJoin, map } from 'rxjs';
 
 import { Articles, CMS, Search } from '@o2s/framework/modules';
 
@@ -10,7 +10,7 @@ import { Service as GraphqlService } from '@/modules/graphql';
 @Injectable()
 export class ArticlesService implements Articles.Service {
     baseUrl: string;
-
+    searchIndexName: string;
     constructor(
         private readonly config: ConfigService,
         private readonly graphqlService: GraphqlService,
@@ -18,6 +18,11 @@ export class ArticlesService implements Articles.Service {
         private readonly cmsService: CMS.Service,
     ) {
         this.baseUrl = this.config.get('CMS_STRAPI_BASE_URL')!;
+        this.searchIndexName = this.config.get('SEARCH_ARTICLES_INDEX_NAME')!;
+
+        if (!this.searchIndexName) {
+            throw new Error('Environment variable SEARCH_ARTICLES_INDEX_NAME is not set');
+        }
     }
 
     getCategory(options: Articles.Request.GetCategoryParams): Observable<Articles.Model.Category> {
@@ -55,26 +60,15 @@ export class ArticlesService implements Articles.Service {
     }
 
     getArticle(params: Articles.Request.GetArticleParams): Observable<Articles.Model.Article> {
-        return this.cmsService.getPage(params).pipe(
-            concatMap((page) => {
-                if (!page) {
+        return forkJoin([this.graphqlService.getArticle(params)]).pipe(
+            map(([pages]) => {
+                if (!pages?.data?.articles?.length) {
                     throw new NotFoundException();
                 }
 
-                const articleBlock = Object.values(page.template.slots)
-                    .flat()
-                    .find((block) => block.__typename === 'ArticleBlock');
+                const article = pages.data.articles[0]!;
 
-                if (!articleBlock) {
-                    throw new NotFoundException();
-                }
-
-                return forkJoin([
-                    this.graphqlService.getArticle({
-                        id: articleBlock.id,
-                        locale: params.locale,
-                    }),
-                ]).pipe(map(([article]) => mapArticle(page, article.data, this.baseUrl)));
+                return mapArticle(article, this.baseUrl);
             }),
         );
     }
@@ -83,7 +77,7 @@ export class ArticlesService implements Articles.Service {
         const articles = this.graphqlService.getArticles({
             locale: options.locale,
             slugs: options.ids?.length ? options.ids : undefined,
-            categories: options.category ? [options.category] : undefined,
+            category: options.category,
             dateFrom: options.dateFrom,
             dateTo: options.dateTo,
             offset: options.offset,
@@ -95,7 +89,7 @@ export class ArticlesService implements Articles.Service {
             map(([articles]) =>
                 mapArticles(
                     articles.data.articles,
-                    articles.data.pages_connection?.pageInfo.total || articles.data.articles.length,
+                    articles.data.articles_connection?.pageInfo.total || articles.data.articles.length,
                     this.baseUrl,
                 ),
             ),
@@ -124,8 +118,9 @@ export class ArticlesService implements Articles.Service {
                 offset: options.offset,
                 limit: options.limit,
             },
+            locale: options.locale,
         };
 
-        return this.searchService.searchArticles(options.locale, searchPayload);
+        return this.searchService.searchArticles(this.searchIndexName, searchPayload);
     }
 }

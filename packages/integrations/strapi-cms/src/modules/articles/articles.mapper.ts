@@ -1,8 +1,6 @@
-import { NotFoundException } from '@nestjs/common';
+import { Articles } from '@o2s/framework/modules';
 
-import { Articles, CMS } from '@o2s/framework/modules';
-
-import { ArticleSimpleFragment, ArticleTemplateFragment, CategoryFragment, GetArticleQuery } from '@/generated/strapi';
+import { ArticleFragment, ArticleSimpleFragment, CategoryFragment } from '@/generated/strapi';
 import { mapMedia } from '@/modules/cms/mappers/cms.media.mapper';
 
 export const mapCategory = (data: CategoryFragment): Articles.Model.Category => {
@@ -30,100 +28,72 @@ export const mapCategories = (data: CategoryFragment[], total: number): Articles
     };
 };
 
-export const mapArticle = (
-    page: CMS.Model.Page.Page,
-    article: GetArticleQuery,
-    baseUrl: string,
-): Articles.Model.Article => {
-    const component = article.component!.content[0];
-
-    if (!component) {
-        throw new NotFoundException();
-    }
-
-    switch (component.__typename) {
-        case 'ComponentComponentsArticle':
-            return {
-                id: page.id,
-                slug: page.slug,
-                isProtected: page.isProtected,
-                createdAt: page.updatedAt,
-                updatedAt: page.updatedAt,
-                title: page.seo.title,
-                lead: page.seo.description,
-                tags: [],
-                image: page.seo.image,
-                thumbnail: page.seo.image,
-                category: component.category
-                    ? {
-                          id: component.category.slug,
-                          title: component.category?.name,
-                      }
-                    : undefined,
-                author: component.author
-                    ? {
-                          name: component.author.name,
-                          position: component.author.position,
-                          avatar: mapMedia(component.author.avatar[0], baseUrl),
-                      }
-                    : undefined,
-                sections: component.sections.map((section) => {
-                    switch (section.__typename) {
-                        case 'ComponentContentArticleSection':
-                            return {
-                                id: section.id,
-                                __typename: 'ArticleSectionText',
-                                createdAt: page.updatedAt,
-                                updatedAt: page.updatedAt,
-                                title: section.title,
-                                content: section.content,
-                            };
-                    }
-                }),
-            };
-    }
-
-    throw new NotFoundException();
+export const mapArticle = (page: ArticleFragment, baseUrl: string): Articles.Model.Article => {
+    return {
+        id: page.documentId,
+        slug: page.slug,
+        isProtected: !!page.protected,
+        createdAt: page.updatedAt,
+        updatedAt: page.updatedAt,
+        title: page.SEO.title,
+        lead: page.SEO.description,
+        tags: [],
+        image: mapMedia(page.SEO.image, baseUrl),
+        thumbnail: mapMedia(page.SEO.image, baseUrl),
+        category: page.content.category
+            ? {
+                  id: page.content.category.slug,
+                  title: page.content.category?.name,
+              }
+            : undefined,
+        author: page.content.author
+            ? {
+                  name: page.content.author.name,
+                  position: page.content.author.position,
+                  avatar: mapMedia(page.content.author.avatar[0], baseUrl),
+              }
+            : undefined,
+        sections: page.content.sections.map((section) => {
+            switch (section.__typename) {
+                case 'ComponentContentArticleSection':
+                    return {
+                        id: section.id,
+                        __typename: 'ArticleSectionText',
+                        createdAt: page.updatedAt,
+                        updatedAt: page.updatedAt,
+                        title: section.title,
+                        content: section.content,
+                    };
+            }
+        }),
+    };
 };
 
-export const mapArticles = (
-    data: ArticleTemplateFragment[],
-    total: number,
-    baseUrl: string,
-): Articles.Model.Articles => {
+export const mapArticles = (data: ArticleSimpleFragment[], total: number, baseUrl: string): Articles.Model.Articles => {
     return {
-        data: data.map((page) => {
-            let article: ArticleSimpleFragment | undefined;
-
-            switch (page.article[0]?.__typename) {
-                case 'ComponentTemplatesOneColumn':
-                    article = page.article[0].mainSlot[0]?.content.find(
-                        (content) => content.__typename === 'ComponentComponentsArticle',
-                    ) as ArticleSimpleFragment;
-            }
-
+        data: data.map((article) => {
             return {
-                id: page.documentId,
-                slug: page.slug,
-                isProtected: !!page.protected,
-                createdAt: page.updatedAt,
-                updatedAt: page.updatedAt,
-                title: page.SEO.title,
-                lead: page.SEO.description,
+                id: article.documentId,
+                slug: article.slug,
+                isProtected: !!article.protected,
+                createdAt: article.updatedAt,
+                updatedAt: article.updatedAt,
+                title: article.SEO.title,
+                lead: article.SEO.description,
                 tags: [],
-                image: mapMedia(page.SEO.image, baseUrl),
-                thumbnail: mapMedia(page.SEO.image, baseUrl),
-                category: article?.category
+                image: mapMedia(article.SEO.image, baseUrl),
+                thumbnail: mapMedia(article.SEO.image, baseUrl),
+                category: article.content?.category
                     ? {
-                          id: article.category.slug,
-                          title: article.category?.name,
+                          id: article.content.category.slug,
+                          title: article.content.category?.name,
                       }
                     : undefined,
-                author: article?.author
+                author: article.content?.author
                     ? {
-                          name: article.author.name,
-                          position: article.author.position,
-                          avatar: mapMedia(article.author.avatar[0], baseUrl),
+                          name: article.content.author.name,
+                          position: article.content.author.position,
+                          avatar: mapMedia(article.content.author.avatar[0], baseUrl),
                       }
                     : undefined,
             };

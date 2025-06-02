@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import format from 'string-template';
 
 import { formatDateRelative, formatTime } from '@o2s/api-harmonization/utils/date';
 import { checkNegativeValue } from '@o2s/api-harmonization/utils/price';
@@ -9,7 +10,7 @@ import { OrderDetailsBlock } from './order-details.model';
 
 export const mapOrderDetails = (
     cms: CMS.Model.OrderDetailsBlock.OrderDetailsBlock,
-    order: Orders.Model.Order & { totalItems: number },
+    order: Orders.Model.Order,
     locale: string,
     timezone: string,
     defaultProductUnit: string,
@@ -37,7 +38,9 @@ export const mapOrderDetails = (
                 title: cms.totalValue.title,
                 icon: cms.totalValue.icon,
                 label: checkNegativeValue(order.total).value.toString(),
-                description: cms.totalValue.message?.replace(/{value}/g, order.totalItems.toString()),
+                description: format(cms.totalValue.message || '', {
+                    value: order.items.total,
+                }),
                 value: order.total,
             },
             createdAt: {
@@ -54,7 +57,9 @@ export const mapOrderDetails = (
                     : '-',
                 icon: cms.paymentDueDate.icon,
                 description: order.documents?.[0]?.id
-                    ? cms.paymentDueDate.message?.replace(/{value}/g, order.documents?.[0]?.id)
+                    ? format(cms.paymentDueDate.message || '', {
+                          value: order.documents?.[0]?.id,
+                      })
                     : cms.paymentDueDate.altMessage,
                 value: order.paymentDueDate,
             },
@@ -63,7 +68,9 @@ export const mapOrderDetails = (
                 icon: cms.overdue.icon,
                 label: checkNegativeValue({ value: overdueAmount, currency }).value.toString(),
                 description: isOverdue
-                    ? cms.overdue.message?.replace(/{days}/g, overdueDays.toString())
+                    ? format(cms.overdue.message || '', {
+                          days: overdueDays,
+                      })
                     : cms.overdue.altMessage,
                 value: { value: checkNegativeValue({ value: overdueAmount, currency }).value, currency },
                 isOverdue,
@@ -89,8 +96,8 @@ export const mapOrderDetails = (
         productList: {
             title: cms.productsTitle,
             products: {
-                data: mapOrderItems(order.items, cms.fieldMapping, defaultProductUnit),
-                total: order.totalItems,
+                data: mapOrderItems(order.items.data, cms.fieldMapping, defaultProductUnit),
+                total: order.items.total,
             },
             table: cms.table,
             pagination: cms.pagination,
@@ -98,6 +105,9 @@ export const mapOrderDetails = (
             noResults: cms.noResults,
         },
         labels: cms.labels,
+        reorderLabel: cms.reorderLabel,
+        trackOrderLabel: cms.trackOrderLabel,
+        payOnlineLabel: cms.payOnlineLabel,
     };
 };
 

@@ -1,4 +1,5 @@
 import { HttpTypes } from '@medusajs/types';
+import { NotFoundException } from '@nestjs/common';
 
 import { Models, Orders, Products } from '@o2s/framework/modules';
 
@@ -23,9 +24,12 @@ export const mapOrder = (order: HttpTypes.AdminOrder, defaultCurrency: string): 
         customerId: order.customer_id || undefined,
         createdAt: order.created_at.toString(),
         updatedAt: order.updated_at.toString(),
-        items: order?.items
-            ? order.items.map((item) => mapOrderItem(item, order?.currency_code ?? defaultCurrency))
-            : [],
+        items: {
+            data: order?.items
+                ? order.items.map((item) => mapOrderItem(item, order?.currency_code ?? defaultCurrency))
+                : [],
+            total: order?.items?.length ?? 0,
+        },
         shippingAddress: mapAddress(order.shipping_address),
         billingAddress: mapAddress(order.billing_address),
         shippingMethods: order.shipping_methods
@@ -43,36 +47,38 @@ const mapOrderItem = (item: HttpTypes.AdminOrderLineItem, currency: string): Ord
         total: mapPrice(item.total, currency),
         subtotal: mapPrice(item.subtotal, currency),
         currency: currency as Models.Price.Currency,
-        product: mapProduct(item.product, item.variant, item.unit_price, currency),
+        product: mapProduct(item.unit_price, currency, item) as Products.Model.Product,
     };
 };
 
 const mapProduct = (
-    item: HttpTypes.AdminProduct | undefined,
-    variant: HttpTypes.AdminProductVariant | undefined,
     unitPrice: number,
     currency: string,
-): Products.Model.Product | undefined => {
-    if (!item || !variant) return undefined;
+    item?: HttpTypes.AdminOrderLineItem,
+): Products.Model.Product => {
+    if (!item) throw new NotFoundException('Product not found');
+
     return {
-        id: item.id,
-        sku: variant.sku || '',
-        name: item.title,
-        description: item.description || '',
-        shortDescription: item.description || '',
-        image: {
-            url: item.thumbnail || '',
-            alt: '',
-        },
+        id: item.product_id || '',
+        sku: item.variant_sku || '',
+        name: item.product_title || item.title,
+        description: item.product_description || '',
+        shortDescription: item.product_subtitle || '',
+        image: item.thumbnail
+            ? {
+                  url: item.thumbnail,
+                  alt: item.product_title || item.title,
+              }
+            : undefined,
         price: mapPrice(unitPrice, currency) as Models.Price.Price,
         link: '',
         type: 'PHYSICAL' as Products.Model.ProductType,
-        category: item.categories?.[0]?.name || '',
+        category: item.product?.categories?.[0]?.name || '',
         tags: [],
     };
 };
 
-const mapAddress = (address: HttpTypes.AdminOrderAddress | null | undefined): Models.Address.Address | undefined => {
+const mapAddress = (address?: HttpTypes.AdminOrderAddress | null): Models.Address.Address | undefined => {
     if (!address) return undefined;
     return {
         country: address.country_code || '',
