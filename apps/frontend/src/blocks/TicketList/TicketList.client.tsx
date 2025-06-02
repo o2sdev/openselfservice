@@ -17,7 +17,7 @@ import { ticketBadgeVariants } from '@/utils/mappings/ticket-badge';
 
 import { Link as NextLink } from '@/i18n';
 
-import { ActionLinks } from '@/components/ActionLinks/ActionLinks';
+import { ActionList } from '@/components/ActionList/ActionList';
 import { DynamicIcon } from '@/components/DynamicIcon/DynamicIcon';
 import { FiltersSection } from '@/components/Filters/FiltersSection';
 import { NoResults } from '@/components/NoResults/NoResults';
@@ -66,7 +66,7 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                         </Typography>
 
                         {data.forms && (
-                            <ActionLinks
+                            <ActionList
                                 visibleActions={data.forms.slice(0, 2).map((form, index) => (
                                     <Button
                                         asChild

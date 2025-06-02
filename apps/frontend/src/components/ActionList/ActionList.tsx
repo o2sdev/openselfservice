@@ -9,9 +9,9 @@ import { cn } from '@o2s/ui/lib/utils';
 
 import { DynamicIcon } from '../DynamicIcon/DynamicIcon';
 
-import { ActionLinksProps } from './ActionLinks.types';
+import { ActionListProps } from './ActionList.types';
 
-export const ActionLinks: React.FC<Readonly<ActionLinksProps>> = ({
+export const ActionList: React.FC<Readonly<ActionListProps>> = ({
     className,
     showMoreLabel,
     visibleActions,

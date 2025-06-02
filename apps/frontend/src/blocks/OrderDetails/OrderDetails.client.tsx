@@ -25,7 +25,7 @@ import { statusMap } from '@/utils/mappings/status-order';
 
 import { Link as NextLink } from '@/i18n';
 
-import { ActionLinks } from '@/components/ActionLinks/ActionLinks';
+import { ActionList } from '@/components/ActionList/ActionList';
 import { InfoCard } from '@/components/Cards/InfoCard/InfoCard';
 import { DynamicIcon } from '@/components/DynamicIcon/DynamicIcon';
 import { FiltersSection } from '@/components/Filters/FiltersSection';
@@ -177,7 +177,7 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
                     </div>
                     <div className="flex flex-row justify-end">
                         <div className="flex flex-col gap-4 sm:flex-row sm:items-center w-full sm:w-auto">
-                            <ActionLinks
+                            <ActionList
                                 visibleActions={[
                                     <TooltipHover
                                         key={actions[0]?.label}
