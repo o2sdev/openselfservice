@@ -1,5 +1,15 @@
 # @o2s/framework
 
+## 1.2.0
+
+### Minor Changes
+
+- 1ee5be1: feat: aligned buttons - used ActionList component with dropdown menu
+
+    - used ActionList in the OrderDetailBlock to display buttons,
+    - updated the mock and strapi - now an action is a Link,
+    - used the format method from the string-template to inject a value into a string,
+
 ## 1.1.0
 
 ### Minor Changes
