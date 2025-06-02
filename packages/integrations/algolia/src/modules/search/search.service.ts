@@ -81,6 +81,18 @@ export class SearchService extends Search.Service {
                     };
                 })
                 .catch((error) => {
+                    this.logger.error(JSON.stringify(error), 'Algolia search error');
+                    if (error?.name === 'ApiError') {
+                        if (error?.status === 404) {
+                            this.logger.error(
+                                `Algolia index with name ${indexName} not found, please check your environment variables`,
+                            );
+                        }
+                        return {
+                            hits: [] as T[],
+                            total: 0,
+                        };
+                    }
                     throw error;
                 }),
         );
@@ -98,6 +110,10 @@ export class SearchService extends Search.Service {
             algoliaQuery.query = payload.query;
         }
 
+        if (payload.locale) {
+            algoliaQuery.facetFilters = [`locale:${payload.locale}`];
+        }
+
         if (payload.exact && Object.keys(payload.exact).length > 0) {
             const facetFilters = Object.entries(payload.exact)
                 .filter(([_, value]) => value !== undefined)
@@ -109,7 +125,7 @@ export class SearchService extends Search.Service {
                 });
 
             if (facetFilters.length > 0) {
-                algoliaQuery.facetFilters = facetFilters;
+                algoliaQuery.facetFilters = [...facetFilters, ...(algoliaQuery.facetFilters || [])];
             }
         }
 

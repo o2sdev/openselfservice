@@ -7,18 +7,15 @@ export const mapArticlesFromSearch = (
 ): Articles.Model.Articles => {
     const articles: Articles.Model.Article[] = searchResult.hits.map(
         (hit): Articles.Model.Article => ({
-            id: hit.objectID,
+            id: hit.documentId,
             slug: hit.slug,
-            title: hit.title,
-            lead: hit.lead,
-            tags: hit.tags,
-            createdAt: hit.createdAt,
+            isProtected: false,
+            createdAt: hit.updatedAt,
             updatedAt: hit.updatedAt,
-            image: hit.image,
-            thumbnail: hit.thumbnail,
-            category: hit.category,
-            sections: hit.sections,
-            isProtected: hit.isProtected,
+            title: hit.SEO.title,
+            lead: hit.SEO.description,
+            tags: [],
+            sections: [],
         }),
     );
 

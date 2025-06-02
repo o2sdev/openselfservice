@@ -10,7 +10,7 @@ import { Service as GraphqlService } from '@/modules/graphql';
 @Injectable()
 export class ArticlesService implements Articles.Service {
     baseUrl: string;
-
+    searchIndexName: string;
     constructor(
         private readonly config: ConfigService,
         private readonly graphqlService: GraphqlService,
@@ -18,6 +18,11 @@ export class ArticlesService implements Articles.Service {
         private readonly cmsService: CMS.Service,
     ) {
         this.baseUrl = this.config.get('CMS_STRAPI_BASE_URL')!;
+        this.searchIndexName = this.config.get('SEARCH_ARTICLES_INDEX_NAME')!;
+
+        if (!this.searchIndexName) {
+            throw new Error('Environment variable SEARCH_ARTICLES_INDEX_NAME is not set');
+        }
     }
 
     getCategory(options: Articles.Request.GetCategoryParams): Observable<Articles.Model.Category> {
@@ -113,8 +118,9 @@ export class ArticlesService implements Articles.Service {
                 offset: options.offset,
                 limit: options.limit,
             },
+            locale: options.locale,
         };
 
-        return this.searchService.searchArticles(options.locale, searchPayload);
+        return this.searchService.searchArticles(this.searchIndexName, searchPayload);
     }
 }
