@@ -194,7 +194,7 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
                                                                             className="text-muted-foreground"
                                                                         >
                                                                             <IterationCw className="h-4 w-4" />
-                                                                            {data.labels.reorder}
+                                                                            {data.reorderLabel}
                                                                         </Typography>
                                                                     </DropdownMenuItem>
                                                                 </DropdownMenuContent>

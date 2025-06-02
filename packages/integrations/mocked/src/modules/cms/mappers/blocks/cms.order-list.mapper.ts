@@ -100,8 +100,8 @@ const MOCK_ORDER_LIST_BLOCK_EN: CMS.Model.OrderListBlock.OrderListBlock = {
         yesterday: 'Yesterday',
         showMore: 'Show more',
         clickToSelect: 'Click to select',
-        reorder: 'Reorder',
     },
+    reorderLabel: 'Reorder',
     detailsUrl: '/orders/{id}',
 };
 
@@ -205,8 +205,8 @@ const MOCK_ORDER_LIST_BLOCK_DE: CMS.Model.OrderListBlock.OrderListBlock = {
         yesterday: 'Gestern',
         showMore: 'Mehr anzeigen',
         clickToSelect: 'Klicken Sie, um auszuwählen',
-        reorder: 'Erneut bestellen',
     },
+    reorderLabel: 'Erneut bestellen',
     detailsUrl: '/bestellungen/{id}',
 };
 
@@ -310,8 +310,8 @@ const MOCK_ORDER_LIST_BLOCK_PL: CMS.Model.OrderListBlock.OrderListBlock = {
         yesterday: 'Wczoraj',
         showMore: 'Pokaż więcej',
         clickToSelect: 'Kliknij, aby wybrać',
-        reorder: 'Zamów ponownie',
     },
+    reorderLabel: 'Zamów ponownie',
     detailsUrl: '/zamowienia/{id}',
 };
 

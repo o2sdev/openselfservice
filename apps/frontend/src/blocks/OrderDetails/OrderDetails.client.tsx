@@ -143,15 +143,15 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
 
     const buttons = [
         {
-            label: data.labels.payOnline,
+            label: data.payOnlineLabel,
             icon: 'ArrowUpRight',
         },
         {
-            label: data.labels.reorder,
+            label: data.reorderLabel,
             icon: 'IterationCw',
         },
         {
-            label: data.labels.trackOrder,
+            label: data.trackOrderLabel,
             icon: 'Truck',
         },
     ];
@@ -177,13 +177,6 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
                     </div>
                     <div className="flex flex-row justify-end">
                         <div className="flex flex-col gap-4 sm:flex-row sm:items-center w-full sm:w-auto">
-                            {/* <ActionLinks
-                                actionLinks={
-                                    data.order.overdue.isOverdue ? data.actionLinks : data.actionLinks.slice(1)
-                                }
-                                showMoreLabel={data.labels.showMore}
-                                alert={data.order.overdue.isOverdue}
-                            /> */}
                             <ActionLinks
                                 visibleActions={[
                                     <TooltipHover

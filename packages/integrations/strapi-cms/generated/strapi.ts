@@ -9542,6 +9542,9 @@ export type GetComponentQuery = {
                   id: string;
                   title?: string;
                   productsTitle?: string;
+                  reorderLabel?: string;
+                  trackOrderLabel?: string;
+                  payOnlineLabel?: string;
                   statusLadder: Array<{ title: string }>;
                   fields: Array<{ name: string; values: Array<{ key: string; value: string }> }>;
                   table: {
@@ -9665,6 +9668,7 @@ export type GetComponentQuery = {
                   title?: string;
                   subtitle?: string;
                   detailsURL?: string;
+                  reorderLabel?: string;
                   fields: Array<{ name: string; values: Array<{ key: string; value: string }> }>;
                   table: {
                       actionsTitle?: string;

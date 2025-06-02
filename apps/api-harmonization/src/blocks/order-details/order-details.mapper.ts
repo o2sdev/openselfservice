@@ -105,6 +105,9 @@ export const mapOrderDetails = (
             noResults: cms.noResults,
         },
         labels: cms.labels,
+        reorderLabel: cms.reorderLabel,
+        trackOrderLabel: cms.trackOrderLabel,
+        payOnlineLabel: cms.payOnlineLabel,
     };
 };
 

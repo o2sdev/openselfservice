@@ -26,10 +26,10 @@ export class OrderDetailsBlock extends Block.Block {
         yesterday: string;
         showMore: string;
         close: string;
-        reorder: string;
-        trackOrder: string;
-        payOnline: string;
     };
+    reorderLabel?: string;
+    trackOrderLabel?: string;
+    payOnlineLabel?: string;
 }
 
 export class Order {

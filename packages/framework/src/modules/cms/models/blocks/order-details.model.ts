@@ -20,9 +20,6 @@ export class OrderDetailsBlock extends Block.Block {
         yesterday: string;
         showMore: string;
         close: string;
-        reorder: string;
-        trackOrder: string;
-        payOnline: string;
     };
     totalValue!: InfoCard.InfoCard;
     createdOrderAt!: InfoCard.InfoCard;
@@ -30,4 +27,7 @@ export class OrderDetailsBlock extends Block.Block {
     overdue!: InfoCard.InfoCard;
     orderStatus!: InfoCard.InfoCard;
     customerComment!: InfoCard.InfoCard;
+    reorderLabel?: string;
+    trackOrderLabel?: string;
+    payOnlineLabel?: string;
 }

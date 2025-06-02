@@ -21,8 +21,8 @@ export class OrderListBlock extends Block.Block {
     labels!: {
         showMore: string;
         clickToSelect: string;
-        reorder: string;
     };
+    reorderLabel?: string;
 }
 
 export class Order {
