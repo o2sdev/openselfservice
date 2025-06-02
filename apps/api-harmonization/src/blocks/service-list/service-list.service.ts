@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Observable, concatMap, forkJoin, map, switchMap } from 'rxjs';
+import { Observable, concatMap, forkJoin, map, of, switchMap } from 'rxjs';
 
 import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
 
@@ -19,7 +19,7 @@ export class ServiceListService {
 
     getServiceListBlock(query: GetServiceListBlockQuery, headers: AppHeaders): Observable<ServiceListBlock> {
         const cms = this.cmsService.getServiceListBlock({ ...query, locale: headers['x-locale'] });
-        const { type, category, status } = query;
+        const { status } = query;
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {
@@ -35,43 +35,33 @@ export class ServiceListService {
                     )
                     .pipe(
                         switchMap((services) => {
-                            const serviceList = services.data.map((service) => {
-                                return this.productService
+                            if (!services.total) {
+                                return of({
+                                    total: 0,
+                                    data: [],
+                                });
+                            }
+
+                            const serviceList = services.data.map((service) =>
+                                this.productService
                                     .getProduct({
                                         id: service.productId,
+                                        variantId: service?.productVariantId,
                                         locale: headers['x-locale'],
                                     })
-                                    .pipe(
-                                        map((product) => {
-                                            return {
-                                                ...service,
-                                                product,
-                                            };
-                                        }),
-                                    );
-                            });
+                                    .pipe(map((product) => ({ ...service, product }))),
+                            );
+
                             return forkJoin(serviceList).pipe(
-                                map((servicesList) => {
-                                    const filteredServices = servicesList.filter(
-                                        (item) =>
-                                            (!type || item.product.type === type) &&
-                                            (!category || item.product.category === category),
-                                    );
-                                    return {
-                                        total: filteredServices.length,
-                                        data: filteredServices,
-                                    };
-                                }),
-                                map((services) => {
-                                    return mapServiceList(
-                                        services,
-                                        cms,
-                                        headers['x-locale'],
-                                        headers['x-client-timezone'] || '',
-                                    );
-                                }),
+                                map((servicesList) => ({
+                                    total: services.total,
+                                    data: servicesList,
+                                })),
                             );
                         }),
+                        map((services) =>
+                            mapServiceList(services, cms, headers['x-locale'], headers['x-client-timezone'] || ''),
+                        ),
                     );
             }),
         );

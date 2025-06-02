@@ -1,6 +1,6 @@
 import { PaginationQuery } from '@/utils/models/pagination';
 
-import { ProductType } from './products.model';
+import { ProductReferenceType, ProductType } from './products.model';
 
 export class GetProductListQuery extends PaginationQuery {
     type?: ProductType;
@@ -10,5 +10,13 @@ export class GetProductListQuery extends PaginationQuery {
 
 export class GetProductParams {
     id!: string;
+    variantId?: string;
+    locale?: string;
+}
+
+export class GetRelatedProductListParams {
+    type!: ProductReferenceType;
+    id!: string;
+    variantId!: string;
     locale?: string;
 }

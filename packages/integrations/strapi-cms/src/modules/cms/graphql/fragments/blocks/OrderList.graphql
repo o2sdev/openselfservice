@@ -20,4 +20,5 @@ fragment OrderListComponent on ComponentComponentsOrderList {
         description
     }
     detailsURL
+    reorderLabel
 }

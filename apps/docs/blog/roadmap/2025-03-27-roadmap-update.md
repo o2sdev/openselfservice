@@ -1,6 +1,7 @@
 ---
 slug: roadmap-update-2025-03
 title: Update on our roadmap and current development status
+date: 2025-03-27T12:00
 tags: [releases]
 authors: [jan.jagoda, marcin.krasowski]
 toc_max_heading_level: 2
@@ -30,12 +31,12 @@ We're moving fast with some new features and improvements that will roll out ove
 ### A new look and feel
 
 Our UX/UI team has redesigned the frontend app with a cleaner, more professional look. If you’re one of those who “eat with their eyes 😉” this will be worth checking out. Below is a sneak peek:
-![new-design-preview](./assets/o2s-features-8-min.jpg)
+![new-design-preview](../assets/o2s-features-8-min.jpg)
 
 ### Services management pages
 
 The frontend app will soon include views related to managing services – including service overviews & detail pages.
-![services-preview](./assets/o2s-features-6-min.jpg)
+![services-preview](../assets/o2s-features-6-min.jpg)
 
 ### Knowledge base (with search)
 
@@ -45,7 +46,7 @@ We're laying the foundations for an intelligent knowledge base:
 - Algolia integration is complete and will power the search
 - Frontend pages for browsing and searching articles are in development
 
-![kb-preview](./assets/o2s-features-7-min.jpg)
+![kb-preview](../assets/o2s-features-7-min.jpg)
 
 ### SurveyJS integration
 

@@ -7,6 +7,7 @@ import { CMS } from '@o2s/framework/modules';
 
 import { ArticleRenderer } from '@/blocks/Article/Article.renderer';
 import { ArticleListRenderer } from '@/blocks/ArticleList/ArticleList.renderer';
+import { ArticleSearchRenderer } from '@/blocks/ArticleSearch/ArticleSearch.renderer';
 import { CategoryRenderer } from '@/blocks/Category/Category.renderer';
 import { CategoryListRenderer } from '@/blocks/CategoryList/CategoryList.renderer';
 import { FaqRenderer } from '@/blocks/Faq/Faq.renderer';
@@ -76,6 +77,8 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: str
                 return <CategoryRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
             case 'ArticleBlock':
                 return <ArticleRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
+            case 'ArticleSearchBlock':
+                return <ArticleSearchRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
             // BLOCK REGISTER
         }
     });

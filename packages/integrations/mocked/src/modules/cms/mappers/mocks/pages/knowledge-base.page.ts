@@ -24,6 +24,10 @@ export const PAGE_HELP_AND_SUPPORT_EN: CMS.Model.Page.Page = {
         slots: {
             main: [
                 {
+                    __typename: 'ArticleSearchBlock',
+                    id: 'article-search-1',
+                },
+                {
                     __typename: 'QuickLinksBlock',
                     id: 'quick-links-1',
                 },
@@ -70,6 +74,10 @@ export const PAGE_HELP_AND_SUPPORT_DE: CMS.Model.Page.Page = {
         slots: {
             main: [
                 {
+                    __typename: 'ArticleSearchBlock',
+                    id: 'article-search-1',
+                },
+                {
                     __typename: 'QuickLinksBlock',
                     id: 'quick-links-1',
                 },
@@ -115,6 +123,10 @@ export const PAGE_HELP_AND_SUPPORT_PL: CMS.Model.Page.Page = {
         __typename: 'OneColumnTemplate',
         slots: {
             main: [
+                {
+                    __typename: 'ArticleSearchBlock',
+                    id: 'article-search-1',
+                },
                 {
                     __typename: 'QuickLinksBlock',
                     id: 'quick-links-1',

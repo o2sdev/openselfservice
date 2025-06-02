@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-import { Resources } from '@o2s/framework/modules';
+import { Products, Resources } from '@o2s/framework/modules';
 
 interface Jwt extends jwt.JwtPayload {
     role: string;
@@ -84,8 +84,13 @@ const MOCK_SERVICE_1: Resources.Model.Service = {
         startDate: '2024-01-01',
         endDate: '2024-12-31',
         paymentPeriod: 'YEARLY',
+        price: {
+            value: 89.9,
+            currency: 'USD',
+        },
     },
     productId: 'PRD-009',
+    assets: [],
 };
 
 const MOCK_SERVICE_2: Resources.Model.Service = {
@@ -98,8 +103,13 @@ const MOCK_SERVICE_2: Resources.Model.Service = {
         status: 'ACTIVE',
         startDate: '2024-01-01',
         endDate: '2024-12-31',
+        price: {
+            value: 67.0,
+            currency: 'USD',
+        },
     },
     productId: 'PRD-010',
+    assets: [],
 };
 
 const MOCK_SERVICE_3: Resources.Model.Service = {
@@ -113,8 +123,13 @@ const MOCK_SERVICE_3: Resources.Model.Service = {
         startDate: '2024-01-01',
         endDate: '2024-12-31',
         paymentPeriod: 'MONTHLY',
+        price: {
+            value: 88.0,
+            currency: 'USD',
+        },
     },
     productId: 'PRD-011',
+    assets: [],
 };
 
 const MOCK_SERVICE_4: Resources.Model.Service = {
@@ -128,8 +143,13 @@ const MOCK_SERVICE_4: Resources.Model.Service = {
         startDate: '2024-01-01',
         endDate: '2026-12-31',
         paymentPeriod: 'MONTHLY',
+        price: {
+            value: 89.99,
+            currency: 'USD',
+        },
     },
     productId: 'PRD-012',
+    assets: [],
 };
 
 const MOCK_SERVICE_5: Resources.Model.Service = {
@@ -143,8 +163,13 @@ const MOCK_SERVICE_5: Resources.Model.Service = {
         startDate: '2024-01-01',
         endDate: '2024-12-31',
         paymentPeriod: 'MONTHLY',
+        price: {
+            value: 66.5,
+            currency: 'USD',
+        },
     },
     productId: 'PRD-013',
+    assets: [],
 };
 
 const MOCK_SERVICE_6: Resources.Model.Service = {
@@ -158,8 +183,94 @@ const MOCK_SERVICE_6: Resources.Model.Service = {
         startDate: '2024-01-01',
         endDate: '2024-12-31',
         paymentPeriod: 'YEARLY',
+        price: {
+            value: 78.9,
+            currency: 'USD',
+        },
     },
     productId: 'PRD-014',
+    assets: [],
+};
+
+const MOCK_COMPATIBLE_SERVICE_1: Products.Model.Product = {
+    id: 'SRV-001',
+    sku: 'SRV-001',
+    name: 'WeldGuard Safety',
+    description: 'WeldGuard Safety - Protective Solutions for Welding Environments',
+    shortDescription: 'WeldGuard Safety - Protective Solutions for Welding Environments',
+    image: {
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
+        width: 640,
+        height: 656,
+        alt: 'WeldGuard Safety',
+    },
+    price: {
+        value: 79.83,
+        currency: 'USD',
+    },
+    link: 'https://example.com/products/weldguard-safety',
+    type: 'VIRTUAL',
+    category: 'SAFETY',
+    tags: [
+        {
+            label: 'New',
+            variant: 'secondary',
+        },
+    ],
+};
+
+const MOCK_COMPATIBLE_SERVICE_2: Products.Model.Product = {
+    id: 'SRV-002',
+    sku: 'SRV-002',
+    name: 'MaxFlow Air Systems',
+    description: 'MaxFlow Air Systems - Industrial Pneumatics Maintenance',
+    shortDescription: 'MaxFlow Air Systems - Industrial Pneumatics Maintenance',
+    image: {
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
+        width: 640,
+        height: 656,
+        alt: 'MaxFlow Air Systems',
+    },
+    price: {
+        value: 79.83,
+        currency: 'USD',
+    },
+    link: 'https://example.com/products/maxflow-air-systems',
+    type: 'VIRTUAL',
+    category: 'SAFETY',
+    tags: [
+        {
+            label: 'New',
+            variant: 'secondary',
+        },
+    ],
+};
+
+const MOCK_COMPATIBLE_SERVICE_3: Products.Model.Product = {
+    id: 'SRV-003',
+    sku: 'SRV-003',
+    name: 'RapidFix Repair',
+    description: 'RapidFix Repair - Fast & Reliable Industrial Tool Repairs',
+    shortDescription: 'RapidFix Repair - Fast & Reliable Industrial Tool Repairs',
+    image: {
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
+        width: 640,
+        height: 656,
+        alt: 'RapidFix Repair',
+    },
+    price: {
+        value: 79.83,
+        currency: 'USD',
+    },
+    link: 'https://example.com/products/rapidfix-repair',
+    type: 'VIRTUAL',
+    category: 'SAFETY',
+    tags: [
+        {
+            label: 'New',
+            variant: 'secondary',
+        },
+    ],
 };
 
 const MOCK_ASSETS = [MOCK_ASSET_1, MOCK_ASSET_2, MOCK_ASSET_3, MOCK_ASSET_4, MOCK_ASSET_5];
@@ -173,6 +284,8 @@ const MOCK_SERVICES_DEFAULT = [
 ];
 const MOCK_SERVICES_FOR_CUSTOMER_1 = [MOCK_SERVICE_3, MOCK_SERVICE_2, MOCK_SERVICE_1];
 const MOCK_SERVICES_FOR_CUSTOMER_2 = [MOCK_SERVICE_5, MOCK_SERVICE_6];
+
+const MOCK_COMPATIBLE_SERVICES = [MOCK_COMPATIBLE_SERVICE_1, MOCK_COMPATIBLE_SERVICE_2, MOCK_COMPATIBLE_SERVICE_3];
 
 export const mapAsset = (id: string): Resources.Model.Asset => {
     const asset = MOCK_ASSETS.find((asset) => asset.id === id);
@@ -237,6 +350,20 @@ export const mapServices = (
     return {
         data: filteredServices,
         total: filteredServices.length,
+    };
+};
+
+export const mapCompatibleServices = (_query: Resources.Request.GetAssetParams): Products.Model.Products => {
+    return {
+        data: MOCK_COMPATIBLE_SERVICES,
+        total: MOCK_COMPATIBLE_SERVICES.length,
+    };
+};
+
+export const mapFeaturedServices = (): Products.Model.Products => {
+    return {
+        data: MOCK_COMPATIBLE_SERVICES,
+        total: MOCK_COMPATIBLE_SERVICES.length,
     };
 };
 

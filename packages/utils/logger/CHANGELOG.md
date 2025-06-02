@@ -1,5 +1,17 @@
 # @o2s/utils.logger
 
+## 1.1.0
+
+### Minor Changes
+
+- 61d4f2f: Added integration of services and assets with MedusaJS
+
+## 1.0.0
+
+### Major Changes
+
+- 0e0c816: Official stable release
+
 ## 0.12.0
 
 ### Minor Changes

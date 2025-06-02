@@ -36,9 +36,7 @@ export const mapOrderDetailsBlock = (data: GetComponentQuery): CMS.Model.OrderDe
                 labels: {
                     today: configurableTexts.dates.today,
                     yesterday: configurableTexts.dates.yesterday,
-                    reorder: configurableTexts.actions.reorder,
-                    trackOrder: configurableTexts.actions.trackOrder,
-                    payOnline: configurableTexts.actions.payOnline,
+                    showMore: configurableTexts.actions.showMore,
                     close: configurableTexts.actions.close,
                 },
                 totalValue: mapInfoCard(component.totalValue),
@@ -47,6 +45,9 @@ export const mapOrderDetailsBlock = (data: GetComponentQuery): CMS.Model.OrderDe
                 overdue: mapInfoCard(component.overdue),
                 orderStatus: mapInfoCard(component.orderStatus),
                 customerComment: mapInfoCard(component.customerComment),
+                reorderLabel: component.reorderLabel,
+                trackOrderLabel: component.trackOrderLabel,
+                payOnlineLabel: component.payOnlineLabel,
             };
     }
 

@@ -1,6 +1,10 @@
-import { Controller, Get, Param, Post, Query, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Headers, Param, Post, Query, UnauthorizedException, UseInterceptors } from '@nestjs/common';
 import { LoggerService } from '@o2s/utils.logger';
 import { Observable } from 'rxjs';
+
+import { Products } from '@o2s/framework/modules';
+
+import { AppHeaders } from '@/utils/models/headers';
 
 import { Asset, Assets, Service, Services } from './resources.model';
 import {
@@ -23,7 +27,11 @@ export class ResourceController {
     }
 
     @Get('services')
-    getServiceList(@Query() query: GetServiceListQuery, authorization: string): Observable<Services> {
+    getServiceList(@Query() query: GetServiceListQuery, @Headers() headers: AppHeaders): Observable<Services> {
+        const authorization = headers?.authorization;
+        if (!authorization) {
+            throw new UnauthorizedException('Unauthorized');
+        }
         return this.resourceService.getServiceList(query, authorization);
     }
 
@@ -32,13 +40,27 @@ export class ResourceController {
         return this.resourceService.getService(params);
     }
 
+    @Get('services/featured')
+    getFeaturedServiceList(): Observable<Products.Model.Products> {
+        return this.resourceService.getFeaturedServiceList();
+    }
+
     @Get('assets')
-    getAssetList(@Query() query: GetAssetListQuery): Observable<Assets> {
-        return this.resourceService.getAssetList(query);
+    getAssetList(@Query() query: GetAssetListQuery, @Headers() headers: AppHeaders): Observable<Assets> {
+        const authorization = headers?.authorization;
+        if (!authorization) {
+            throw new UnauthorizedException('Unauthorized');
+        }
+        return this.resourceService.getAssetList(query, authorization);
     }
 
     @Get('assets/:id')
     getAsset(@Param() params: GetAssetParams): Observable<Asset> {
         return this.resourceService.getAsset(params);
+    }
+
+    @Get('assets/:id/compatible-services')
+    getCompatibleServiceList(@Param() params: GetAssetParams): Observable<Products.Model.Products> {
+        return this.resourceService.getCompatibleServiceList(params);
     }
 }

@@ -17,7 +17,8 @@ import { ticketBadgeVariants } from '@/utils/mappings/ticket-badge';
 
 import { Link as NextLink } from '@/i18n';
 
-import { ActionLinks } from '@/components/ActionLinks/ActionLinks';
+import { ActionList } from '@/components/ActionList/ActionList';
+import { DynamicIcon } from '@/components/DynamicIcon/DynamicIcon';
 import { FiltersSection } from '@/components/Filters/FiltersSection';
 import { NoResults } from '@/components/NoResults/NoResults';
 import { Pagination } from '@/components/Pagination/Pagination';
@@ -64,8 +65,33 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                             <h1>{data.title}</h1>
                         </Typography>
 
-                        {data.actionLinks && (
-                            <ActionLinks actionLinks={data.actionLinks} showMoreLabel={data.labels.showMore} />
+                        {data.forms && (
+                            <ActionList
+                                visibleActions={data.forms.slice(0, 2).map((form, index) => (
+                                    <Button
+                                        asChild
+                                        variant={index === 0 ? 'default' : 'secondary'}
+                                        key={form.label}
+                                        className="no-underline hover:no-underline"
+                                    >
+                                        <NextLink href={form.url}>
+                                            {form.icon && <DynamicIcon name={form.icon} size={16} />}
+                                            {form.label}
+                                        </NextLink>
+                                    </Button>
+                                ))}
+                                dropdownActions={data.forms.slice(2).map((form) => (
+                                    <NextLink
+                                        href={form.url}
+                                        key={form.label}
+                                        className="flex items-center gap-2 !no-underline hover:!no-underline cursor-pointer"
+                                    >
+                                        {form.icon && <DynamicIcon name={form.icon} size={16} />}
+                                        {form.label}
+                                    </NextLink>
+                                ))}
+                                showMoreLabel={data.labels.showMore}
+                            />
                         )}
                     </div>
 

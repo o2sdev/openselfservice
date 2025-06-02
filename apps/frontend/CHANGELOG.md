@@ -1,5 +1,85 @@
 # @o2s/frontend
 
+## 1.2.0
+
+### Minor Changes
+
+- 1ee5be1: feat: aligned buttons - used ActionList component with dropdown menu
+
+    - used ActionList in the OrderDetailBlock to display buttons,
+    - updated the mock and strapi - now an action is a Link,
+    - used the format method from the string-template to inject a value into a string,
+
+### Patch Changes
+
+- Updated dependencies [1ee5be1]
+    - @o2s/api-harmonization@1.2.0
+    - @o2s/framework@1.2.0
+
+## 1.1.0
+
+### Minor Changes
+
+- 565b63d: feat: fixed pagination issue in articleList
+
+    - added new mocked articles
+    - implemented new additionalLink in ArticleList
+
+- 5d16edf: orderDetails fixes:
+
+    - order model update - product is required now,
+    - filtering moved to order mapper,
+    - PayOnline button visible only when the order is overdue,
+
+- 61d4f2f: Added integration of services and assets with MedusaJS
+- f015c2b: New block ArticleSearch - Input field with suggestions to find appropriate article.
+
+    - added new UI component - Command,
+    - added new articles mock,
+    - added mock for ArticleSearchBlock,
+    - added strapi integration for ArticleSearchBlock,
+    - added new component Autocomplete,
+
+### Patch Changes
+
+- Updated dependencies [565b63d]
+- Updated dependencies [5d16edf]
+- Updated dependencies [6225c14]
+- Updated dependencies [61d4f2f]
+- Updated dependencies [f015c2b]
+    - @o2s/api-harmonization@1.1.0
+    - @o2s/framework@1.1.0
+    - @o2s/ui@1.1.0
+
+## 1.0.0
+
+### Major Changes
+
+- 0e0c816: Official stable release
+
+### Patch Changes
+
+- Updated dependencies [0e0c816]
+    - @o2s/api-harmonization@1.0.0
+    - @o2s/framework@1.0.0
+    - @o2s/ui@1.0.0
+
+## 0.25.1
+
+### Patch Changes
+
+- 320512b: fixed tables in rich text expanding beyond the viewport
+
+## 0.25.0
+
+### Minor Changes
+
+- 123da31: fix: fixed blogCart hover
+
+### Patch Changes
+
+- 9a2344d: minor UI fixes
+
 ## 0.24.1
 
 ### Patch Changes

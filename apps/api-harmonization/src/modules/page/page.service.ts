@@ -80,6 +80,11 @@ export class PageService {
                 return this.processPage(page, query, headers);
             }),
             catchError(() => {
+                return this.articlesService
+                    .getArticle({ slug: query.slug, locale: headers['x-locale'] })
+                    .pipe(concatMap((article) => this.processArticle(article, query, headers)));
+            }),
+            catchError(() => {
                 throw new NotFoundException();
             }),
         );

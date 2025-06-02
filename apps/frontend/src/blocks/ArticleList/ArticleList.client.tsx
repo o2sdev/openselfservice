@@ -7,7 +7,11 @@ import { ArticleListPureProps } from './ArticleList.types';
 
 export const ArticleListPure: React.FC<Readonly<ArticleListPureProps>> = ({ ...component }) => {
     return (
-        <ContentSection title={component.title} description={component.description}>
+        <ContentSection
+            title={component.title}
+            description={component.description}
+            categoryLink={component.categoryLink}
+        >
             <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
                 {component.items.data.map((item) => (
                     <li key={item.id} className="w-full">

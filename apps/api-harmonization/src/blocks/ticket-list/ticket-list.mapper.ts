@@ -4,7 +4,7 @@ import { formatDateRelative } from '@o2s/api-harmonization/utils/date';
 
 import { CMS, Tickets } from '../../models';
 
-import { ActionLink, Ticket, TicketListBlock } from './ticket-list.model';
+import { Ticket, TicketListBlock } from './ticket-list.model';
 
 export const mapTicketList = (
     tickets: Tickets.Model.Tickets,
@@ -25,22 +25,9 @@ export const mapTicketList = (
             total: tickets.total,
             data: tickets.data.map((ticket) => mapTicket(ticket, cms, locale, timezone)),
         },
-        actionLinks: mapActionLinks(cms.actionLinks),
+        forms: cms.forms,
         labels: cms.labels,
     };
-};
-
-const mapActionLinks = (actionLinks: CMS.Model.TicketListBlock.ActionLink[] | undefined): ActionLink[] | undefined => {
-    if (!actionLinks) {
-        return undefined;
-    }
-
-    return actionLinks.map((actionLink) => ({
-        label: actionLink.label,
-        visible: actionLink.visible ?? false,
-        slug: actionLink.slug,
-        icon: actionLink.icon,
-    }));
 };
 
 export const mapTicket = (
