@@ -4,6 +4,7 @@ import { LoggerService } from '@o2s/utils.logger';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
+import process from 'node:process';
 
 import { AppModule } from './app.module';
 
@@ -22,8 +23,10 @@ async function bootstrap() {
         app.setGlobalPrefix(process.env.API_PREFIX);
     }
 
+    const origins = process.env.FRONT_BASE_URLS!.split(',');
+
     app.enableCors({
-        origin: [process.env.FRONT_BASE_URL as string],
+        origin: [...origins],
         preflightContinue: false,
         credentials: true,
         allowedHeaders: [

@@ -21,7 +21,7 @@
                 "DEFAULT_PRODUCT_UNIT",
                 "SUPPORTED_CURRENCIES",
                 "SUPPORTED_LOCALES",
-                "FRONT_BASE_URL",
+                "FRONT_BASE_URLS",
                 "MOCKED_INTEGRATION_DELAYS_ENABLED",
                 "CMS_STRAPI_BASE_URL",
                 "CACHE_ENABLED",
