@@ -118,9 +118,9 @@ const MOCK_ORDER_DETAILS_BLOCK_EN: CMS.Model.OrderDetailsBlock.OrderDetailsBlock
         title: "So far, there's nothing here",
         description: '',
     },
-    reorderLabel: 'Erneut bestellen',
-    trackOrderLabel: 'Bestellung verfolgen',
-    payOnlineLabel: 'Online bezahlen',
+    reorderLabel: 'Reorder',
+    trackOrderLabel: 'Track order',
+    payOnlineLabel: 'Pay online',
 };
 
 const MOCK_ORDER_DETAILS_BLOCK_DE: CMS.Model.OrderDetailsBlock.OrderDetailsBlock = {

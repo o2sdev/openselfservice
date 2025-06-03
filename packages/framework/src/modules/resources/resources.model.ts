@@ -42,6 +42,7 @@ export class Asset extends Resource {
     status?: AssetStatus;
     address?: Address;
     compatibleServices?: Product[];
+    endOfWarranty?: string;
 }
 
 export type Resources = Pagination.Paginated<Resource>;
