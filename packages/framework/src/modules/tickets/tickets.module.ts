@@ -12,7 +12,7 @@ export class TicketsModule {
     static register(config: ApiConfig): DynamicModule {
         const service = config.integrations.tickets.service;
         const controller = config.integrations.tickets.controller || TicketsController;
-        const imports = config.integrations.cms.imports || [];
+        const imports = config.integrations.tickets.imports || [];
 
         return {
             module: TicketsModule,

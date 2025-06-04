@@ -7,10 +7,10 @@ export abstract class OrderService {
 
     abstract getOrder(
         params: Orders.Request.GetOrderParams,
-        authorization: string | undefined,
+        authorization?: string,
     ): Observable<Orders.Model.Order | undefined>;
     abstract getOrderList(
         query: Orders.Request.GetOrderListQuery,
-        authorization: string | undefined,
+        authorization?: string,
     ): Observable<Orders.Model.Orders>;
 }

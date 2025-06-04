@@ -12,7 +12,7 @@ export class ProductsModule {
     static register(config: ApiConfig): DynamicModule {
         const service = config.integrations.products.service;
         const controller = config.integrations.products.controller || ProductsController;
-        const imports = config.integrations.cms.imports || [];
+        const imports = config.integrations.products.imports || [];
 
         return {
             module: ProductsModule,
