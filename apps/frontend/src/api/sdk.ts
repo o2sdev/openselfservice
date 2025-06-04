@@ -13,6 +13,7 @@ import { articleSearch } from '@/api/blocks/article-search';
 import { category } from '@/api/blocks/category';
 import { categoryList } from '@/api/blocks/category-list';
 import { faq } from '@/api/blocks/faq';
+import { featuredServiceList } from '@/api/blocks/featured-service-list';
 import { invoiceList } from '@/api/blocks/invoice-list';
 import { notificationDetails } from '@/api/blocks/notification-details';
 import { notificationList } from '@/api/blocks/notification-list';
@@ -78,6 +79,7 @@ export const sdk = extendSdk(internalSdk, {
         getArticle: article(internalSdk).blocks.getArticle,
         getArticleSearch: articleSearch(internalSdk).blocks.getArticleSearch,
         searchArticles: articleSearch(internalSdk).blocks.searchArticles,
+        getFeaturedServiceList: featuredServiceList(internalSdk).blocks.getFeaturedServiceList,
         // BLOCK REGISTER
     },
     modules: {

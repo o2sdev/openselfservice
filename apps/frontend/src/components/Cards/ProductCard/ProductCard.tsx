@@ -14,7 +14,16 @@ import { RichText } from '../../RichText/RichText';
 
 import { ProductCardProps } from './ProductCard.types';
 
-export const ProductCard: React.FC<ProductCardProps> = ({ title, description, price, image, tags, status, link }) => {
+export const ProductCard: React.FC<ProductCardProps> = ({
+    title,
+    description,
+    price,
+    image,
+    tags,
+    status,
+    link,
+    action,
+}) => {
     return (
         <div className={cn('flex flex-col bg-card rounded-lg border border-border shadow-sm relative w-full h-full')}>
             {/* Image section */}
@@ -23,6 +32,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ title, description, pr
                     <Image
                         src={image.url}
                         alt={image.alt}
+                        sizes="180px"
                         fill
                         className="object-cover object-center"
                         priority={image.priority}
@@ -65,6 +75,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ title, description, pr
                                 {status.label}
                             </Badge>
                         )}
+
+                        {action}
 
                         {link && (
                             <Link asChild variant="primaryButton">
