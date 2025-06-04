@@ -9,9 +9,11 @@ export abstract class NotificationService {
 
     abstract getNotification(
         options: Notifications.Request.GetNotificationParams,
+        authorization?: string,
     ): Observable<Notifications.Model.Notification | undefined>;
     abstract getNotificationList(
         options: Notifications.Request.GetNotificationListQuery,
+        authorization?: string,
     ): Observable<Notifications.Model.Notifications>;
-    abstract markAs(request: Notifications.Request.MarkNotificationAsRequest): Observable<void>;
+    abstract markAs(request: Notifications.Request.MarkNotificationAsRequest, authorization?: string): Observable<void>;
 }

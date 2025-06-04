@@ -12,7 +12,7 @@ export class NotificationsModule {
     static register(config: ApiConfig): DynamicModule {
         const service = config.integrations.notifications.service;
         const controller = config.integrations.notifications.controller || NotificationsController;
-        const imports = config.integrations.cms.imports || [];
+        const imports = config.integrations.notifications.imports || [];
 
         return {
             module: NotificationsModule,

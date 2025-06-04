@@ -6,6 +6,9 @@ import { GetBillingAccountParams, GetBillingAccountsListQuery } from './billing-
 export abstract class BillingAccountService {
     protected constructor(..._services: unknown[]) {}
 
-    abstract getBillingAccounts(query: GetBillingAccountsListQuery): Observable<BillingAccounts>;
-    abstract getBillingAccount(params: GetBillingAccountParams): Observable<BillingAccount>;
+    abstract getBillingAccounts(
+        query: GetBillingAccountsListQuery,
+        authorization?: string,
+    ): Observable<BillingAccounts>;
+    abstract getBillingAccount(params: GetBillingAccountParams, authorization?: string): Observable<BillingAccount>;
 }

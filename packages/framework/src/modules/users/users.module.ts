@@ -12,7 +12,7 @@ export class UsersModule {
     static register(config: ApiConfig): DynamicModule {
         const service = config.integrations.users.service;
         const controller = config.integrations.users.controller || UserController;
-        const imports = config.integrations.cms.imports || [];
+        const imports = config.integrations.users.imports || [];
 
         return {
             module: UsersModule,
