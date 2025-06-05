@@ -189,5 +189,7 @@ const mapComponent = (component: ComponentFragment) => {
             return 'ArticleBlock';
         case 'ComponentComponentsArticleSearch':
             return 'ArticleSearchBlock';
+        case 'ComponentComponentsFeaturedServiceList':
+            return 'FeaturedServiceListBlock';
     }
 };
