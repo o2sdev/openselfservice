@@ -23,6 +23,7 @@ const MOCK_ASSET_1: Resources.Model.Asset = {
     description: 'Hammer drill with Active Torque Control and Active Vibration Reduction',
     status: 'ACTIVE',
     productId: 'PRD-004',
+    endOfWarranty: '2027-12-31',
 };
 
 const MOCK_ASSET_2: Resources.Model.Asset = {
@@ -35,6 +36,7 @@ const MOCK_ASSET_2: Resources.Model.Asset = {
     description: 'Cordless angle grinder with 22V battery platform',
     status: 'ACTIVE',
     productId: 'PRD-005',
+    endOfWarranty: '2027-07-31',
 };
 
 const MOCK_ASSET_3: Resources.Model.Asset = {
@@ -47,6 +49,7 @@ const MOCK_ASSET_3: Resources.Model.Asset = {
     description: 'Laser measurement device for distance measurements',
     status: 'ACTIVE',
     productId: 'PRD-006',
+    endOfWarranty: '2027-03-12',
 };
 
 const MOCK_ASSET_4: Resources.Model.Asset = {
@@ -59,6 +62,7 @@ const MOCK_ASSET_4: Resources.Model.Asset = {
     description: 'Cordless drill driver with 22V battery platform',
     status: 'INACTIVE',
     productId: 'PRD-007',
+    endOfWarranty: '2027-03-21',
 };
 
 const MOCK_ASSET_5: Resources.Model.Asset = {
@@ -71,6 +75,7 @@ const MOCK_ASSET_5: Resources.Model.Asset = {
     description: 'Engineering software for designing anchoring and installation systems',
     status: 'ACTIVE',
     productId: 'PRD-008',
+    endOfWarranty: '2027-04-21',
 };
 
 const MOCK_SERVICE_1: Resources.Model.Service = {

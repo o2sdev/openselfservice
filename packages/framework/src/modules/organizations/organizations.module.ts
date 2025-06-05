@@ -12,7 +12,7 @@ export class OrganizationsModule {
     static register(config: ApiConfig): DynamicModule {
         const service = config.integrations.organizations.service;
         const controller = config.integrations.organizations.controller || OrganizationController;
-        const imports = config.integrations.cms.imports || [];
+        const imports = config.integrations.organizations.imports || [];
 
         return {
             module: OrganizationsModule,

@@ -15,6 +15,7 @@ export const mapAsset = (asset: Asset): Resources.Model.Asset => {
         productId: asset?.product_variant?.product_id || '',
         productVariantId: asset?.product_variant?.id || '',
         address: mapAddress(asset.address),
+        endOfWarranty: asset?.end_of_warranty_date,
     };
 };
 

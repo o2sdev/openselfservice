@@ -7,7 +7,16 @@ import * as Tickets from './';
 export abstract class TicketService {
     protected constructor(..._services: unknown[]) {}
 
-    abstract getTicket(options: Tickets.Request.GetTicketParams): Observable<Tickets.Model.Ticket | undefined>;
-    abstract getTicketList(options: Tickets.Request.GetTicketListQuery): Observable<Tickets.Model.Tickets>;
-    abstract createTicket(data: Tickets.Request.PostTicketBody): Observable<Tickets.Model.Ticket>;
+    abstract getTicket(
+        options: Tickets.Request.GetTicketParams,
+        authorization?: string,
+    ): Observable<Tickets.Model.Ticket | undefined>;
+    abstract getTicketList(
+        options: Tickets.Request.GetTicketListQuery,
+        authorization?: string,
+    ): Observable<Tickets.Model.Tickets>;
+    abstract createTicket(
+        data: Tickets.Request.PostTicketBody,
+        authorization?: string,
+    ): Observable<Tickets.Model.Ticket>;
 }
