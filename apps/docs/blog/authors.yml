@@ -15,3 +15,12 @@ jan.jagoda:
     page: true
     socials:
         github: jan-jagoda
+
+adam.makiewicz:
+    name: Adam Mąkiewicz
+    title: Backend Engineer @ O2S
+    url: https://github.com/Shriz07
+    image_url: https://avatars.githubusercontent.com/u/56472765?v=4
+    page: true
+    socials:
+        github: Shriz07
