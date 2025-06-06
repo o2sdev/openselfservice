@@ -1,5 +1,21 @@
 # @o2s/integrations.medusajs
 
+## 1.3.0
+
+### Minor Changes
+
+- 9c31433: - added endOfWarranty attribute on asset model
+    - fixed German labels in English mocks
+    - fixed incorrect imports in framework modules configuration
+    - added optional authorization param in most service methods
+
+### Patch Changes
+
+- Updated dependencies [027ed39]
+- Updated dependencies [985780a]
+- Updated dependencies [9c31433]
+    - @o2s/framework@1.4.0
+
 ## 1.2.0
 
 ### Minor Changes

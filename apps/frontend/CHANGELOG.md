@@ -1,5 +1,26 @@
 # @o2s/frontend
 
+## 1.4.0
+
+### Minor Changes
+
+- 027ed39: featuredServiceListBlock - list of available services
+
+    - added new UI componetnt from Shadcn - Switch,
+    - extended ProductCard with action property,
+    - implemented model and mock for FeatureServiceListBlock,
+    - integrated with strapi,
+
+### Patch Changes
+
+- Updated dependencies [027ed39]
+- Updated dependencies [985780a]
+- Updated dependencies [9c31433]
+    - @o2s/integrations.mocked@1.4.0
+    - @o2s/api-harmonization@1.4.0
+    - @o2s/framework@1.4.0
+    - @o2s/ui@1.2.0
+
 ## 1.3.0
 
 ### Minor Changes
