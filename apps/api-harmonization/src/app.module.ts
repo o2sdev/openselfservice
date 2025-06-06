@@ -31,6 +31,7 @@ import { ArticleBlockModule } from '@o2s/api-harmonization/blocks/article/articl
 import { CategoryListBlockModule } from '@o2s/api-harmonization/blocks/category-list/category-list.module';
 import { CategoryBlockModule } from '@o2s/api-harmonization/blocks/category/category.module';
 import { FaqBlockModule } from '@o2s/api-harmonization/blocks/faq/faq.module';
+import { FeaturedServiceListBlockModule } from '@o2s/api-harmonization/blocks/featured-service-list/featured-service-list.module';
 import { InvoiceListBlockModule } from '@o2s/api-harmonization/blocks/invoice-list/invoice-list.module';
 import { NotificationDetailsBlockModule } from '@o2s/api-harmonization/blocks/notification-details/notification-details.module';
 import { NotificationListBlockModule } from '@o2s/api-harmonization/blocks/notification-list/notification-list.module';
@@ -114,6 +115,7 @@ import { SurveyjsModule } from './modules/surveyjs-forms/surveyjs.module';
         CategoryBlockModule.register(AppConfig),
         ArticleBlockModule.register(AppConfig),
         ArticleSearchBlockModule.register(AppConfig),
+        FeaturedServiceListBlockModule.register(AppConfig),
         // BLOCK REGISTER
     ],
     providers: [

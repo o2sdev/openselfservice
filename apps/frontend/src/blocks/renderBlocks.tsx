@@ -11,6 +11,7 @@ import { ArticleSearchRenderer } from '@/blocks/ArticleSearch/ArticleSearch.rend
 import { CategoryRenderer } from '@/blocks/Category/Category.renderer';
 import { CategoryListRenderer } from '@/blocks/CategoryList/CategoryList.renderer';
 import { FaqRenderer } from '@/blocks/Faq/Faq.renderer';
+import { FeaturedServiceListRenderer } from '@/blocks/FeaturedServiceList/FeaturedServiceList.renderer';
 import { InvoiceListRenderer } from '@/blocks/InvoiceList/InvoiceList.renderer';
 import { NotificationDetailsRenderer } from '@/blocks/NotificationDetails/NotificationDetails.renderer';
 import { NotificationListRenderer } from '@/blocks/NotificationList/NotificationList.renderer';
@@ -79,6 +80,10 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: str
                 return <ArticleRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
             case 'ArticleSearchBlock':
                 return <ArticleSearchRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
+            case 'FeaturedServiceListBlock':
+                return (
+                    <FeaturedServiceListRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />
+                );
             // BLOCK REGISTER
         }
     });

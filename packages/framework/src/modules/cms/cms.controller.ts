@@ -124,4 +124,9 @@ export class CmsController {
     getServiceDetailsBlock(@Query() params: Request.GetCmsEntryParams) {
         return this.cms.getServiceDetailsBlock(params);
     }
+
+    @Get('/blocks/featured-service-list')
+    getFeaturedServiceListBlock(@Query() params: Request.GetCmsEntryParams) {
+        return this.cms.getFeaturedServiceListBlock(params);
+    }
 }

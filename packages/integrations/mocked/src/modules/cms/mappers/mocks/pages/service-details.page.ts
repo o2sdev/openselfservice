@@ -40,6 +40,10 @@ export const PAGE_SERVICE_DETAILS_EN: CMS.Model.Page.Page = {
                     id: 'service-details-1',
                 },
                 {
+                    __typename: 'FeaturedServiceListBlock',
+                    id: 'featured-service-list-1',
+                },
+                {
                     __typename: 'FaqBlock',
                     id: 'faq-1',
                 },
@@ -90,6 +94,10 @@ export const PAGE_SERVICE_DETAILS_DE: CMS.Model.Page.Page = {
                     id: 'service-details-1',
                 },
                 {
+                    __typename: 'FeaturedServiceListBlock',
+                    id: 'featured-service-list-1',
+                },
+                {
                     __typename: 'FaqBlock',
                     id: 'faq-1',
                 },
@@ -138,6 +146,10 @@ export const PAGE_SERVICE_DETAILS_PL: CMS.Model.Page.Page = {
                 {
                     __typename: 'ServiceDetailsBlock',
                     id: 'service-details-1',
+                },
+                {
+                    __typename: 'FeaturedServiceListBlock',
+                    id: 'featured-service-list-1',
                 },
                 {
                     __typename: 'FaqBlock',

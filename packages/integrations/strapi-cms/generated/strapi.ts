@@ -417,6 +417,15 @@ export type ComponentComponentsFaqItemsArgs = {
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
+export type ComponentComponentsFeaturedServiceList = {
+    detailsLabel?: Maybe<Scalars['String']['output']>;
+    detailsURL?: Maybe<Scalars['String']['output']>;
+    id: Scalars['ID']['output'];
+    noResults: ComponentContentBanner;
+    pagination?: Maybe<ComponentContentPagination>;
+    title?: Maybe<Scalars['String']['output']>;
+};
+
 export type ComponentComponentsInvoiceList = {
     downloadButtonAriaDescription?: Maybe<Scalars['String']['output']>;
     downloadFileName?: Maybe<Scalars['String']['output']>;
@@ -482,12 +491,15 @@ export type ComponentComponentsOrderDetails = {
     orderStatus: ComponentContentInformationCard;
     overdue: ComponentContentInformationCard;
     pagination?: Maybe<ComponentContentPagination>;
+    payOnlineLabel?: Maybe<Scalars['String']['output']>;
     paymentDueDate: ComponentContentInformationCard;
     productsTitle?: Maybe<Scalars['String']['output']>;
+    reorderLabel?: Maybe<Scalars['String']['output']>;
     statusLadder: Array<Maybe<ComponentContentMessageSimple>>;
     table: ComponentContentTable;
     title?: Maybe<Scalars['String']['output']>;
     totalValue: ComponentContentInformationCard;
+    trackOrderLabel?: Maybe<Scalars['String']['output']>;
 };
 
 export type ComponentComponentsOrderDetailsFieldsArgs = {
@@ -509,6 +521,7 @@ export type ComponentComponentsOrderList = {
     id: Scalars['ID']['output'];
     noResults: ComponentContentBanner;
     pagination?: Maybe<ComponentContentPagination>;
+    reorderLabel?: Maybe<Scalars['String']['output']>;
     subtitle?: Maybe<Scalars['String']['output']>;
     table: ComponentContentTable;
     title?: Maybe<Scalars['String']['output']>;
@@ -686,7 +699,6 @@ export type ComponentComponentsUserAccountInputsArgs = {
 export type ComponentContentActionLinks = {
     icon?: Maybe<Scalars['String']['output']>;
     id: Scalars['ID']['output'];
-    inProgress?: Maybe<Scalars['Boolean']['output']>;
     label: Scalars['String']['output'];
     page?: Maybe<Page>;
     url?: Maybe<Scalars['String']['output']>;
@@ -757,6 +769,7 @@ export type ComponentContentDynamicZone =
     | ComponentComponentsCategory
     | ComponentComponentsCategoryList
     | ComponentComponentsFaq
+    | ComponentComponentsFeaturedServiceList
     | ComponentComponentsInvoiceList
     | ComponentComponentsNotificationDetails
     | ComponentComponentsNotificationList
@@ -865,6 +878,7 @@ export type ComponentContentFiltersItems_ConnectionArgs = {
 };
 
 export type ComponentContentFormField = {
+    description?: Maybe<Scalars['String']['output']>;
     errorMessages?: Maybe<Array<Maybe<ComponentContentErrorMessage>>>;
     id: Scalars['ID']['output'];
     label: Scalars['String']['output'];
@@ -880,6 +894,7 @@ export type ComponentContentFormFieldErrorMessagesArgs = {
 
 export type ComponentContentFormFieldFiltersInput = {
     and?: InputMaybe<Array<InputMaybe<ComponentContentFormFieldFiltersInput>>>;
+    description?: InputMaybe<StringFilterInput>;
     errorMessages?: InputMaybe<ComponentContentErrorMessageFiltersInput>;
     label?: InputMaybe<StringFilterInput>;
     name?: InputMaybe<StringFilterInput>;
@@ -889,11 +904,99 @@ export type ComponentContentFormFieldFiltersInput = {
 };
 
 export type ComponentContentFormFieldInput = {
+    description?: InputMaybe<Scalars['String']['input']>;
     errorMessages?: InputMaybe<Array<InputMaybe<ComponentContentErrorMessageInput>>>;
     id?: InputMaybe<Scalars['ID']['input']>;
     label?: InputMaybe<Scalars['String']['input']>;
     name?: InputMaybe<Scalars['String']['input']>;
     placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ComponentContentFormFieldWithRegex = {
+    description?: Maybe<Scalars['String']['output']>;
+    errorMessages?: Maybe<Array<Maybe<ComponentContentErrorMessage>>>;
+    id: Scalars['ID']['output'];
+    label: Scalars['String']['output'];
+    name: Scalars['String']['output'];
+    placeholder?: Maybe<Scalars['String']['output']>;
+    regexValidations: Array<Maybe<ComponentContentRegexValidation>>;
+};
+
+export type ComponentContentFormFieldWithRegexErrorMessagesArgs = {
+    filters?: InputMaybe<ComponentContentErrorMessageFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ComponentContentFormFieldWithRegexRegexValidationsArgs = {
+    filters?: InputMaybe<ComponentContentRegexValidationFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ComponentContentFormFieldWithRegexInput = {
+    description?: InputMaybe<Scalars['String']['input']>;
+    errorMessages?: InputMaybe<Array<InputMaybe<ComponentContentErrorMessageInput>>>;
+    id?: InputMaybe<Scalars['ID']['input']>;
+    label?: InputMaybe<Scalars['String']['input']>;
+    name?: InputMaybe<Scalars['String']['input']>;
+    placeholder?: InputMaybe<Scalars['String']['input']>;
+    regexValidations?: InputMaybe<Array<InputMaybe<ComponentContentRegexValidationInput>>>;
+};
+
+export type ComponentContentFormSelectField = {
+    description?: Maybe<Scalars['String']['output']>;
+    errorMessages?: Maybe<Array<Maybe<ComponentContentErrorMessage>>>;
+    id: Scalars['ID']['output'];
+    label: Scalars['String']['output'];
+    name: Scalars['String']['output'];
+    options: Array<Maybe<ComponentContentKeyValue>>;
+    placeholder?: Maybe<Scalars['String']['output']>;
+};
+
+export type ComponentContentFormSelectFieldErrorMessagesArgs = {
+    filters?: InputMaybe<ComponentContentErrorMessageFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ComponentContentFormSelectFieldOptionsArgs = {
+    filters?: InputMaybe<ComponentContentKeyValueFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ComponentContentFormSelectFieldInput = {
+    description?: InputMaybe<Scalars['String']['input']>;
+    errorMessages?: InputMaybe<Array<InputMaybe<ComponentContentErrorMessageInput>>>;
+    id?: InputMaybe<Scalars['ID']['input']>;
+    label?: InputMaybe<Scalars['String']['input']>;
+    name?: InputMaybe<Scalars['String']['input']>;
+    options?: InputMaybe<Array<InputMaybe<ComponentContentKeyValueInput>>>;
+    placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ComponentContentIconWithText = {
+    description?: Maybe<Scalars['String']['output']>;
+    id: Scalars['ID']['output'];
+    name: Scalars['String']['output'];
+    title?: Maybe<Scalars['String']['output']>;
+};
+
+export type ComponentContentIconWithTextFiltersInput = {
+    and?: InputMaybe<Array<InputMaybe<ComponentContentIconWithTextFiltersInput>>>;
+    description?: InputMaybe<StringFilterInput>;
+    name?: InputMaybe<StringFilterInput>;
+    not?: InputMaybe<ComponentContentIconWithTextFiltersInput>;
+    or?: InputMaybe<Array<InputMaybe<ComponentContentIconWithTextFiltersInput>>>;
+    title?: InputMaybe<StringFilterInput>;
+};
+
+export type ComponentContentIconWithTextInput = {
+    description?: InputMaybe<Scalars['String']['input']>;
+    id?: InputMaybe<Scalars['ID']['input']>;
+    name?: InputMaybe<Scalars['String']['input']>;
+    title?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ComponentContentInformationCard = {
@@ -917,6 +1020,12 @@ export type ComponentContentKeyValueFiltersInput = {
     not?: InputMaybe<ComponentContentKeyValueFiltersInput>;
     or?: InputMaybe<Array<InputMaybe<ComponentContentKeyValueFiltersInput>>>;
     value?: InputMaybe<StringFilterInput>;
+};
+
+export type ComponentContentKeyValueInput = {
+    id?: InputMaybe<Scalars['ID']['input']>;
+    key?: InputMaybe<Scalars['String']['input']>;
+    value?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ComponentContentKeyword = {
@@ -960,6 +1069,24 @@ export type ComponentContentLinkInput = {
     label?: InputMaybe<Scalars['String']['input']>;
     page?: InputMaybe<Scalars['ID']['input']>;
     url?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ComponentContentListWithIcons = {
+    icons: Array<Maybe<ComponentContentIconWithText>>;
+    id: Scalars['ID']['output'];
+    title?: Maybe<Scalars['String']['output']>;
+};
+
+export type ComponentContentListWithIconsIconsArgs = {
+    filters?: InputMaybe<ComponentContentIconWithTextFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ComponentContentListWithIconsInput = {
+    icons?: InputMaybe<Array<InputMaybe<ComponentContentIconWithTextInput>>>;
+    id?: InputMaybe<Scalars['ID']['input']>;
+    title?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ComponentContentMessage = {
@@ -1047,6 +1174,29 @@ export type ComponentContentPagination = {
     selectPageLabel: Scalars['String']['output'];
 };
 
+export type ComponentContentRegexValidation = {
+    id: Scalars['ID']['output'];
+    label: Scalars['String']['output'];
+    regex: Scalars['String']['output'];
+    type: Scalars['String']['output'];
+};
+
+export type ComponentContentRegexValidationFiltersInput = {
+    and?: InputMaybe<Array<InputMaybe<ComponentContentRegexValidationFiltersInput>>>;
+    label?: InputMaybe<StringFilterInput>;
+    not?: InputMaybe<ComponentContentRegexValidationFiltersInput>;
+    or?: InputMaybe<Array<InputMaybe<ComponentContentRegexValidationFiltersInput>>>;
+    regex?: InputMaybe<StringFilterInput>;
+    type?: InputMaybe<StringFilterInput>;
+};
+
+export type ComponentContentRegexValidationInput = {
+    id?: InputMaybe<Scalars['ID']['input']>;
+    label?: InputMaybe<Scalars['String']['input']>;
+    regex?: InputMaybe<Scalars['String']['input']>;
+    type?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type ComponentContentRichTextWithTitle = {
     content: Scalars['String']['output'];
     id: Scalars['ID']['output'];
@@ -1117,6 +1267,8 @@ export type ComponentLabelsActions = {
     id: Scalars['ID']['output'];
     logIn: Scalars['String']['output'];
     logOut: Scalars['String']['output'];
+    off: Scalars['String']['output'];
+    on: Scalars['String']['output'];
     payOnline: Scalars['String']['output'];
     renew: Scalars['String']['output'];
     reorder: Scalars['String']['output'];
@@ -1142,6 +1294,8 @@ export type ComponentLabelsActionsInput = {
     id?: InputMaybe<Scalars['ID']['input']>;
     logIn?: InputMaybe<Scalars['String']['input']>;
     logOut?: InputMaybe<Scalars['String']['input']>;
+    off?: InputMaybe<Scalars['String']['input']>;
+    on?: InputMaybe<Scalars['String']['input']>;
     payOnline?: InputMaybe<Scalars['String']['input']>;
     renew?: InputMaybe<Scalars['String']['input']>;
     reorder?: InputMaybe<Scalars['String']['input']>;
@@ -1178,7 +1332,7 @@ export type ComponentLabelsErrorsInput = {
 
 export type ComponentLabelsValidation = {
     id: Scalars['ID']['output'];
-    isOptional?: Maybe<Scalars['String']['output']>;
+    isOptional: Scalars['String']['output'];
     isRequired: Scalars['String']['output'];
 };
 
@@ -1338,6 +1492,110 @@ export type ConfigurableTextsInput = {
 
 export type ConfigurableTextsRelationResponseCollection = {
     nodes: Array<ConfigurableTexts>;
+};
+
+export type CreateAccountPage = {
+    SEO: ComponentSeoSeo;
+    activationContactInfo: Scalars['String']['output'];
+    badge: Scalars['String']['output'];
+    changeCompanyTaxIdLabel: Scalars['String']['output'];
+    clientId: ComponentContentFormField;
+    companyName: ComponentContentFormField;
+    companySectionTitle: Scalars['String']['output'];
+    createdAt?: Maybe<Scalars['DateTime']['output']>;
+    creatingAccountProblem: Scalars['String']['output'];
+    documentId: Scalars['ID']['output'];
+    firstName: ComponentContentFormField;
+    invalidCredentials: Scalars['String']['output'];
+    lastName: ComponentContentFormField;
+    locale?: Maybe<Scalars['String']['output']>;
+    localizations: Array<Maybe<CreateAccountPage>>;
+    localizations_connection?: Maybe<CreateAccountPageRelationResponseCollection>;
+    phone: ComponentContentFormField;
+    position: ComponentContentFormSelectField;
+    publishedAt?: Maybe<Scalars['DateTime']['output']>;
+    sideContent: ComponentContentListWithIcons;
+    signInButton: ComponentContentLink;
+    signInTitle: Scalars['String']['output'];
+    step1SubmitButton: Scalars['String']['output'];
+    step1Subtitle: Scalars['String']['output'];
+    step1Title: Scalars['String']['output'];
+    step2SubmitButton: Scalars['String']['output'];
+    step2Subtitle: Scalars['String']['output'];
+    step2Title: Scalars['String']['output'];
+    taxId: ComponentContentFormField;
+    termsAndConditions: Scalars['String']['output'];
+    updatedAt?: Maybe<Scalars['DateTime']['output']>;
+    userSectionTitle: Scalars['String']['output'];
+    username: ComponentContentFormField;
+};
+
+export type CreateAccountPageInput = {
+    SEO?: InputMaybe<ComponentSeoSeoInput>;
+    activationContactInfo?: InputMaybe<Scalars['String']['input']>;
+    badge?: InputMaybe<Scalars['String']['input']>;
+    changeCompanyTaxIdLabel?: InputMaybe<Scalars['String']['input']>;
+    clientId?: InputMaybe<ComponentContentFormFieldInput>;
+    companyName?: InputMaybe<ComponentContentFormFieldInput>;
+    companySectionTitle?: InputMaybe<Scalars['String']['input']>;
+    creatingAccountProblem?: InputMaybe<Scalars['String']['input']>;
+    firstName?: InputMaybe<ComponentContentFormFieldInput>;
+    invalidCredentials?: InputMaybe<Scalars['String']['input']>;
+    lastName?: InputMaybe<ComponentContentFormFieldInput>;
+    phone?: InputMaybe<ComponentContentFormFieldInput>;
+    position?: InputMaybe<ComponentContentFormSelectFieldInput>;
+    publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+    sideContent?: InputMaybe<ComponentContentListWithIconsInput>;
+    signInButton?: InputMaybe<ComponentContentLinkInput>;
+    signInTitle?: InputMaybe<Scalars['String']['input']>;
+    step1SubmitButton?: InputMaybe<Scalars['String']['input']>;
+    step1Subtitle?: InputMaybe<Scalars['String']['input']>;
+    step1Title?: InputMaybe<Scalars['String']['input']>;
+    step2SubmitButton?: InputMaybe<Scalars['String']['input']>;
+    step2Subtitle?: InputMaybe<Scalars['String']['input']>;
+    step2Title?: InputMaybe<Scalars['String']['input']>;
+    taxId?: InputMaybe<ComponentContentFormFieldInput>;
+    termsAndConditions?: InputMaybe<Scalars['String']['input']>;
+    userSectionTitle?: InputMaybe<Scalars['String']['input']>;
+    username?: InputMaybe<ComponentContentFormFieldInput>;
+};
+
+export type CreateAccountPageRelationResponseCollection = {
+    nodes: Array<CreateAccountPage>;
+};
+
+export type CreateNewPasswordPage = {
+    SEO: ComponentSeoSeo;
+    confirmPassword: ComponentContentFormField;
+    createdAt?: Maybe<Scalars['DateTime']['output']>;
+    creatingPasswordError: Scalars['String']['output'];
+    documentId: Scalars['ID']['output'];
+    image: UploadFile;
+    locale?: Maybe<Scalars['String']['output']>;
+    localizations: Array<Maybe<CreateNewPasswordPage>>;
+    localizations_connection?: Maybe<CreateNewPasswordPageRelationResponseCollection>;
+    password: ComponentContentFormFieldWithRegex;
+    publishedAt?: Maybe<Scalars['DateTime']['output']>;
+    setNewPassword: Scalars['String']['output'];
+    subtitle: Scalars['String']['output'];
+    title: Scalars['String']['output'];
+    updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type CreateNewPasswordPageInput = {
+    SEO?: InputMaybe<ComponentSeoSeoInput>;
+    confirmPassword?: InputMaybe<ComponentContentFormFieldInput>;
+    creatingPasswordError?: InputMaybe<Scalars['String']['input']>;
+    image?: InputMaybe<Scalars['ID']['input']>;
+    password?: InputMaybe<ComponentContentFormFieldWithRegexInput>;
+    publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+    setNewPassword?: InputMaybe<Scalars['String']['input']>;
+    subtitle?: InputMaybe<Scalars['String']['input']>;
+    title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CreateNewPasswordPageRelationResponseCollection = {
+    nodes: Array<CreateNewPasswordPage>;
 };
 
 export type DateTimeFilterInput = {
@@ -1552,6 +1810,7 @@ export type GenericMorph =
     | ComponentComponentsCategory
     | ComponentComponentsCategoryList
     | ComponentComponentsFaq
+    | ComponentComponentsFeaturedServiceList
     | ComponentComponentsInvoiceList
     | ComponentComponentsNotificationDetails
     | ComponentComponentsNotificationList
@@ -1579,16 +1838,21 @@ export type GenericMorph =
     | ComponentContentFilterSelect
     | ComponentContentFilters
     | ComponentContentFormField
+    | ComponentContentFormFieldWithRegex
+    | ComponentContentFormSelectField
+    | ComponentContentIconWithText
     | ComponentContentInformationCard
     | ComponentContentKeyValue
     | ComponentContentKeyword
     | ComponentContentLink
+    | ComponentContentListWithIcons
     | ComponentContentMessage
     | ComponentContentMessageSimple
     | ComponentContentNavigationColumn
     | ComponentContentNavigationGroup
     | ComponentContentNavigationItem
     | ComponentContentPagination
+    | ComponentContentRegexValidation
     | ComponentContentRichTextWithTitle
     | ComponentContentTable
     | ComponentContentTableColumn
@@ -1601,6 +1865,8 @@ export type GenericMorph =
     | ComponentTemplatesOneColumn
     | ComponentTemplatesTwoColumn
     | ConfigurableTexts
+    | CreateAccountPage
+    | CreateNewPasswordPage
     | FilterItem
     | Footer
     | Header
@@ -1609,6 +1875,7 @@ export type GenericMorph =
     | NotFoundPage
     | OrganizationList
     | Page
+    | ResetPasswordPage
     | ReviewWorkflowsWorkflow
     | ReviewWorkflowsWorkflowStage
     | SurveyJsForm
@@ -1796,6 +2063,7 @@ export type JsonFilterInput = {
 
 export type LoginPage = {
     SEO: ComponentSeoSeo;
+    createAccountMessage: ComponentContentAlertBox;
     createdAt?: Maybe<Scalars['DateTime']['output']>;
     documentId: Scalars['ID']['output'];
     forgotPassword: ComponentContentLink;
@@ -1819,6 +2087,7 @@ export type LoginPage = {
 
 export type LoginPageInput = {
     SEO?: InputMaybe<ComponentSeoSeoInput>;
+    createAccountMessage?: InputMaybe<ComponentContentAlertBoxInput>;
     forgotPassword?: InputMaybe<ComponentContentLinkInput>;
     image?: InputMaybe<Scalars['ID']['input']>;
     invalidCredentials?: InputMaybe<Scalars['String']['input']>;
@@ -1864,6 +2133,8 @@ export type Mutation = {
     deleteCategory?: Maybe<DeleteMutationResponse>;
     deleteComponent?: Maybe<DeleteMutationResponse>;
     deleteConfigurableTexts?: Maybe<DeleteMutationResponse>;
+    deleteCreateAccountPage?: Maybe<DeleteMutationResponse>;
+    deleteCreateNewPasswordPage?: Maybe<DeleteMutationResponse>;
     deleteFilterItem?: Maybe<DeleteMutationResponse>;
     deleteFooter?: Maybe<DeleteMutationResponse>;
     deleteHeader?: Maybe<DeleteMutationResponse>;
@@ -1871,6 +2142,7 @@ export type Mutation = {
     deleteNotFoundPage?: Maybe<DeleteMutationResponse>;
     deleteOrganizationList?: Maybe<DeleteMutationResponse>;
     deletePage?: Maybe<DeleteMutationResponse>;
+    deleteResetPasswordPage?: Maybe<DeleteMutationResponse>;
     deleteReviewWorkflowsWorkflow?: Maybe<DeleteMutationResponse>;
     deleteReviewWorkflowsWorkflowStage?: Maybe<DeleteMutationResponse>;
     deleteSurveyJsForm?: Maybe<DeleteMutationResponse>;
@@ -1896,6 +2168,8 @@ export type Mutation = {
     updateCategory?: Maybe<Category>;
     updateComponent?: Maybe<Component>;
     updateConfigurableTexts?: Maybe<ConfigurableTexts>;
+    updateCreateAccountPage?: Maybe<CreateAccountPage>;
+    updateCreateNewPasswordPage?: Maybe<CreateNewPasswordPage>;
     updateFilterItem?: Maybe<FilterItem>;
     updateFooter?: Maybe<Footer>;
     updateHeader?: Maybe<Header>;
@@ -1903,6 +2177,7 @@ export type Mutation = {
     updateNotFoundPage?: Maybe<NotFoundPage>;
     updateOrganizationList?: Maybe<OrganizationList>;
     updatePage?: Maybe<Page>;
+    updateResetPasswordPage?: Maybe<ResetPasswordPage>;
     updateReviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
     updateReviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
     updateSurveyJsForm?: Maybe<SurveyJsForm>;
@@ -2030,6 +2305,14 @@ export type MutationDeleteConfigurableTextsArgs = {
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
 };
 
+export type MutationDeleteCreateAccountPageArgs = {
+    locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+};
+
+export type MutationDeleteCreateNewPasswordPageArgs = {
+    locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+};
+
 export type MutationDeleteFilterItemArgs = {
     documentId: Scalars['ID']['input'];
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
@@ -2059,6 +2342,10 @@ export type MutationDeleteOrganizationListArgs = {
 
 export type MutationDeletePageArgs = {
     documentId: Scalars['ID']['input'];
+    locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+};
+
+export type MutationDeleteResetPasswordPageArgs = {
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
 };
 
@@ -2156,6 +2443,18 @@ export type MutationUpdateConfigurableTextsArgs = {
     status?: InputMaybe<PublicationStatus>;
 };
 
+export type MutationUpdateCreateAccountPageArgs = {
+    data: CreateAccountPageInput;
+    locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type MutationUpdateCreateNewPasswordPageArgs = {
+    data: CreateNewPasswordPageInput;
+    locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    status?: InputMaybe<PublicationStatus>;
+};
+
 export type MutationUpdateFilterItemArgs = {
     data: FilterItemInput;
     documentId: Scalars['ID']['input'];
@@ -2198,6 +2497,12 @@ export type MutationUpdateOrganizationListArgs = {
 export type MutationUpdatePageArgs = {
     data: PageInput;
     documentId: Scalars['ID']['input'];
+    locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type MutationUpdateResetPasswordPageArgs = {
+    data: ResetPasswordPageInput;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
     status?: InputMaybe<PublicationStatus>;
 };
@@ -2400,6 +2705,8 @@ export type Query = {
     components: Array<Maybe<Component>>;
     components_connection?: Maybe<ComponentEntityResponseCollection>;
     configurableTexts?: Maybe<ConfigurableTexts>;
+    createAccountPage?: Maybe<CreateAccountPage>;
+    createNewPasswordPage?: Maybe<CreateNewPasswordPage>;
     filterItem?: Maybe<FilterItem>;
     filterItems: Array<Maybe<FilterItem>>;
     filterItems_connection?: Maybe<FilterItemEntityResponseCollection>;
@@ -2419,6 +2726,7 @@ export type Query = {
     page?: Maybe<Page>;
     pages: Array<Maybe<Page>>;
     pages_connection?: Maybe<PageEntityResponseCollection>;
+    resetPasswordPage?: Maybe<ResetPasswordPage>;
     reviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
     reviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
     reviewWorkflowsWorkflowStages: Array<Maybe<ReviewWorkflowsWorkflowStage>>;
@@ -2543,6 +2851,16 @@ export type QueryConfigurableTextsArgs = {
     status?: InputMaybe<PublicationStatus>;
 };
 
+export type QueryCreateAccountPageArgs = {
+    locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type QueryCreateNewPasswordPageArgs = {
+    locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    status?: InputMaybe<PublicationStatus>;
+};
+
 export type QueryFilterItemArgs = {
     documentId: Scalars['ID']['input'];
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
@@ -2662,6 +2980,11 @@ export type QueryPages_ConnectionArgs = {
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
     pagination?: InputMaybe<PaginationArg>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type QueryResetPasswordPageArgs = {
+    locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
     status?: InputMaybe<PublicationStatus>;
 };
 
@@ -2815,6 +3138,38 @@ export type QueryUsersPermissionsUsers_ConnectionArgs = {
     pagination?: InputMaybe<PaginationArg>;
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
+};
+
+export type ResetPasswordPage = {
+    SEO: ComponentSeoSeo;
+    createdAt?: Maybe<Scalars['DateTime']['output']>;
+    documentId: Scalars['ID']['output'];
+    image: UploadFile;
+    invalidCredentials: Scalars['String']['output'];
+    locale?: Maybe<Scalars['String']['output']>;
+    localizations: Array<Maybe<ResetPasswordPage>>;
+    localizations_connection?: Maybe<ResetPasswordPageRelationResponseCollection>;
+    publishedAt?: Maybe<Scalars['DateTime']['output']>;
+    resetPassword: Scalars['String']['output'];
+    subtitle: Scalars['String']['output'];
+    title: Scalars['String']['output'];
+    updatedAt?: Maybe<Scalars['DateTime']['output']>;
+    username: ComponentContentFormField;
+};
+
+export type ResetPasswordPageInput = {
+    SEO?: InputMaybe<ComponentSeoSeoInput>;
+    image?: InputMaybe<Scalars['ID']['input']>;
+    invalidCredentials?: InputMaybe<Scalars['String']['input']>;
+    publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+    resetPassword?: InputMaybe<Scalars['String']['input']>;
+    subtitle?: InputMaybe<Scalars['String']['input']>;
+    title?: InputMaybe<Scalars['String']['input']>;
+    username?: InputMaybe<ComponentContentFormFieldInput>;
+};
+
+export type ResetPasswordPageRelationResponseCollection = {
+    nodes: Array<ResetPasswordPage>;
 };
 
 export type ReviewWorkflowsWorkflow = {
@@ -3405,6 +3760,9 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
               parent?: Maybe<_RefType['Page']>;
           })
         | (Omit<ComponentComponentsFaq, 'banner'> & { banner?: Maybe<_RefType['ComponentContentBanner']> })
+        | (Omit<ComponentComponentsFeaturedServiceList, 'noResults'> & {
+              noResults: _RefType['ComponentContentBanner'];
+          })
         | (Omit<ComponentComponentsInvoiceList, 'filters' | 'noResults'> & {
               filters?: Maybe<_RefType['ComponentContentFilters']>;
               noResults: _RefType['ComponentContentBanner'];
@@ -3538,6 +3896,9 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
               parent?: Maybe<_RefType['Page']>;
           })
         | (Omit<ComponentComponentsFaq, 'banner'> & { banner?: Maybe<_RefType['ComponentContentBanner']> })
+        | (Omit<ComponentComponentsFeaturedServiceList, 'noResults'> & {
+              noResults: _RefType['ComponentContentBanner'];
+          })
         | (Omit<ComponentComponentsInvoiceList, 'filters' | 'noResults'> & {
               filters?: Maybe<_RefType['ComponentContentFilters']>;
               noResults: _RefType['ComponentContentBanner'];
@@ -3611,10 +3972,14 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
               items_connection?: Maybe<_RefType['FilterItemRelationResponseCollection']>;
           })
         | ComponentContentFormField
+        | ComponentContentFormFieldWithRegex
+        | ComponentContentFormSelectField
+        | ComponentContentIconWithText
         | (Omit<ComponentContentInformationCard, 'link'> & { link?: Maybe<_RefType['ComponentContentLink']> })
         | ComponentContentKeyValue
         | ComponentContentKeyword
         | (Omit<ComponentContentLink, 'page'> & { page?: Maybe<_RefType['Page']> })
+        | ComponentContentListWithIcons
         | ComponentContentMessage
         | ComponentContentMessageSimple
         | (Omit<ComponentContentNavigationColumn, 'items'> & {
@@ -3625,6 +3990,7 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
           })
         | (Omit<ComponentContentNavigationItem, 'page'> & { page?: Maybe<_RefType['Page']> })
         | ComponentContentPagination
+        | ComponentContentRegexValidation
         | ComponentContentRichTextWithTitle
         | ComponentContentTable
         | ComponentContentTableColumn
@@ -3659,6 +4025,18 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
               topSlot_connection?: Maybe<_RefType['ComponentRelationResponseCollection']>;
           })
         | ConfigurableTexts
+        | (Omit<CreateAccountPage, 'SEO' | 'localizations' | 'localizations_connection' | 'signInButton'> & {
+              SEO: _RefType['ComponentSeoSeo'];
+              localizations: Array<Maybe<_RefType['CreateAccountPage']>>;
+              localizations_connection?: Maybe<_RefType['CreateAccountPageRelationResponseCollection']>;
+              signInButton: _RefType['ComponentContentLink'];
+          })
+        | (Omit<CreateNewPasswordPage, 'SEO' | 'image' | 'localizations' | 'localizations_connection'> & {
+              SEO: _RefType['ComponentSeoSeo'];
+              image: _RefType['UploadFile'];
+              localizations: Array<Maybe<_RefType['CreateNewPasswordPage']>>;
+              localizations_connection?: Maybe<_RefType['CreateNewPasswordPageRelationResponseCollection']>;
+          })
         | (Omit<FilterItem, 'field' | 'localizations' | 'localizations_connection'> & {
               field: Array<Maybe<_RefType['FilterItemFieldDynamicZone']>>;
               localizations: Array<Maybe<_RefType['FilterItem']>>;
@@ -3702,6 +4080,12 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
               localizations_connection?: Maybe<_RefType['PageRelationResponseCollection']>;
               parent?: Maybe<_RefType['Page']>;
               template: Array<Maybe<_RefType['PageTemplateDynamicZone']>>;
+          })
+        | (Omit<ResetPasswordPage, 'SEO' | 'image' | 'localizations' | 'localizations_connection'> & {
+              SEO: _RefType['ComponentSeoSeo'];
+              image: _RefType['UploadFile'];
+              localizations: Array<Maybe<_RefType['ResetPasswordPage']>>;
+              localizations_connection?: Maybe<_RefType['ResetPasswordPageRelationResponseCollection']>;
           })
         | ReviewWorkflowsWorkflow
         | ReviewWorkflowsWorkflowStage
@@ -3867,6 +4251,11 @@ export type ResolversTypes = {
     ComponentComponentsFaq: ResolverTypeWrapper<
         Omit<ComponentComponentsFaq, 'banner'> & { banner?: Maybe<ResolversTypes['ComponentContentBanner']> }
     >;
+    ComponentComponentsFeaturedServiceList: ResolverTypeWrapper<
+        Omit<ComponentComponentsFeaturedServiceList, 'noResults'> & {
+            noResults: ResolversTypes['ComponentContentBanner'];
+        }
+    >;
     ComponentComponentsInvoiceList: ResolverTypeWrapper<
         Omit<ComponentComponentsInvoiceList, 'filters' | 'noResults'> & {
             filters?: Maybe<ResolversTypes['ComponentContentFilters']>;
@@ -3977,11 +4366,19 @@ export type ResolversTypes = {
     ComponentContentFormField: ResolverTypeWrapper<ComponentContentFormField>;
     ComponentContentFormFieldFiltersInput: ComponentContentFormFieldFiltersInput;
     ComponentContentFormFieldInput: ComponentContentFormFieldInput;
+    ComponentContentFormFieldWithRegex: ResolverTypeWrapper<ComponentContentFormFieldWithRegex>;
+    ComponentContentFormFieldWithRegexInput: ComponentContentFormFieldWithRegexInput;
+    ComponentContentFormSelectField: ResolverTypeWrapper<ComponentContentFormSelectField>;
+    ComponentContentFormSelectFieldInput: ComponentContentFormSelectFieldInput;
+    ComponentContentIconWithText: ResolverTypeWrapper<ComponentContentIconWithText>;
+    ComponentContentIconWithTextFiltersInput: ComponentContentIconWithTextFiltersInput;
+    ComponentContentIconWithTextInput: ComponentContentIconWithTextInput;
     ComponentContentInformationCard: ResolverTypeWrapper<
         Omit<ComponentContentInformationCard, 'link'> & { link?: Maybe<ResolversTypes['ComponentContentLink']> }
     >;
     ComponentContentKeyValue: ResolverTypeWrapper<ComponentContentKeyValue>;
     ComponentContentKeyValueFiltersInput: ComponentContentKeyValueFiltersInput;
+    ComponentContentKeyValueInput: ComponentContentKeyValueInput;
     ComponentContentKeyword: ResolverTypeWrapper<ComponentContentKeyword>;
     ComponentContentKeywordFiltersInput: ComponentContentKeywordFiltersInput;
     ComponentContentKeywordInput: ComponentContentKeywordInput;
@@ -3990,6 +4387,8 @@ export type ResolversTypes = {
     >;
     ComponentContentLinkFiltersInput: ComponentContentLinkFiltersInput;
     ComponentContentLinkInput: ComponentContentLinkInput;
+    ComponentContentListWithIcons: ResolverTypeWrapper<ComponentContentListWithIcons>;
+    ComponentContentListWithIconsInput: ComponentContentListWithIconsInput;
     ComponentContentMessage: ResolverTypeWrapper<ComponentContentMessage>;
     ComponentContentMessageFiltersInput: ComponentContentMessageFiltersInput;
     ComponentContentMessageSimple: ResolverTypeWrapper<ComponentContentMessageSimple>;
@@ -4010,6 +4409,9 @@ export type ResolversTypes = {
     >;
     ComponentContentNavigationItemFiltersInput: ComponentContentNavigationItemFiltersInput;
     ComponentContentPagination: ResolverTypeWrapper<ComponentContentPagination>;
+    ComponentContentRegexValidation: ResolverTypeWrapper<ComponentContentRegexValidation>;
+    ComponentContentRegexValidationFiltersInput: ComponentContentRegexValidationFiltersInput;
+    ComponentContentRegexValidationInput: ComponentContentRegexValidationInput;
     ComponentContentRichTextWithTitle: ResolverTypeWrapper<ComponentContentRichTextWithTitle>;
     ComponentContentTable: ResolverTypeWrapper<ComponentContentTable>;
     ComponentContentTableColumn: ResolverTypeWrapper<ComponentContentTableColumn>;
@@ -4067,6 +4469,34 @@ export type ResolversTypes = {
     ConfigurableTexts: ResolverTypeWrapper<ConfigurableTexts>;
     ConfigurableTextsInput: ConfigurableTextsInput;
     ConfigurableTextsRelationResponseCollection: ResolverTypeWrapper<ConfigurableTextsRelationResponseCollection>;
+    CreateAccountPage: ResolverTypeWrapper<
+        Omit<CreateAccountPage, 'SEO' | 'localizations' | 'localizations_connection' | 'signInButton'> & {
+            SEO: ResolversTypes['ComponentSeoSeo'];
+            localizations: Array<Maybe<ResolversTypes['CreateAccountPage']>>;
+            localizations_connection?: Maybe<ResolversTypes['CreateAccountPageRelationResponseCollection']>;
+            signInButton: ResolversTypes['ComponentContentLink'];
+        }
+    >;
+    CreateAccountPageInput: CreateAccountPageInput;
+    CreateAccountPageRelationResponseCollection: ResolverTypeWrapper<
+        Omit<CreateAccountPageRelationResponseCollection, 'nodes'> & {
+            nodes: Array<ResolversTypes['CreateAccountPage']>;
+        }
+    >;
+    CreateNewPasswordPage: ResolverTypeWrapper<
+        Omit<CreateNewPasswordPage, 'SEO' | 'image' | 'localizations' | 'localizations_connection'> & {
+            SEO: ResolversTypes['ComponentSeoSeo'];
+            image: ResolversTypes['UploadFile'];
+            localizations: Array<Maybe<ResolversTypes['CreateNewPasswordPage']>>;
+            localizations_connection?: Maybe<ResolversTypes['CreateNewPasswordPageRelationResponseCollection']>;
+        }
+    >;
+    CreateNewPasswordPageInput: CreateNewPasswordPageInput;
+    CreateNewPasswordPageRelationResponseCollection: ResolverTypeWrapper<
+        Omit<CreateNewPasswordPageRelationResponseCollection, 'nodes'> & {
+            nodes: Array<ResolversTypes['CreateNewPasswordPage']>;
+        }
+    >;
     DateTime: ResolverTypeWrapper<Scalars['DateTime']['output']>;
     DateTimeFilterInput: DateTimeFilterInput;
     DeleteMutationResponse: ResolverTypeWrapper<DeleteMutationResponse>;
@@ -4195,6 +4625,20 @@ export type ResolversTypes = {
     PaginationArg: PaginationArg;
     PublicationStatus: PublicationStatus;
     Query: ResolverTypeWrapper<{}>;
+    ResetPasswordPage: ResolverTypeWrapper<
+        Omit<ResetPasswordPage, 'SEO' | 'image' | 'localizations' | 'localizations_connection'> & {
+            SEO: ResolversTypes['ComponentSeoSeo'];
+            image: ResolversTypes['UploadFile'];
+            localizations: Array<Maybe<ResolversTypes['ResetPasswordPage']>>;
+            localizations_connection?: Maybe<ResolversTypes['ResetPasswordPageRelationResponseCollection']>;
+        }
+    >;
+    ResetPasswordPageInput: ResetPasswordPageInput;
+    ResetPasswordPageRelationResponseCollection: ResolverTypeWrapper<
+        Omit<ResetPasswordPageRelationResponseCollection, 'nodes'> & {
+            nodes: Array<ResolversTypes['ResetPasswordPage']>;
+        }
+    >;
     ReviewWorkflowsWorkflow: ResolverTypeWrapper<ReviewWorkflowsWorkflow>;
     ReviewWorkflowsWorkflowEntityResponseCollection: ResolverTypeWrapper<ReviewWorkflowsWorkflowEntityResponseCollection>;
     ReviewWorkflowsWorkflowFiltersInput: ReviewWorkflowsWorkflowFiltersInput;
@@ -4361,6 +4805,9 @@ export type ResolversParentTypes = {
     ComponentComponentsFaq: Omit<ComponentComponentsFaq, 'banner'> & {
         banner?: Maybe<ResolversParentTypes['ComponentContentBanner']>;
     };
+    ComponentComponentsFeaturedServiceList: Omit<ComponentComponentsFeaturedServiceList, 'noResults'> & {
+        noResults: ResolversParentTypes['ComponentContentBanner'];
+    };
     ComponentComponentsInvoiceList: Omit<ComponentComponentsInvoiceList, 'filters' | 'noResults'> & {
         filters?: Maybe<ResolversParentTypes['ComponentContentFilters']>;
         noResults: ResolversParentTypes['ComponentContentBanner'];
@@ -4454,17 +4901,27 @@ export type ResolversParentTypes = {
     ComponentContentFormField: ComponentContentFormField;
     ComponentContentFormFieldFiltersInput: ComponentContentFormFieldFiltersInput;
     ComponentContentFormFieldInput: ComponentContentFormFieldInput;
+    ComponentContentFormFieldWithRegex: ComponentContentFormFieldWithRegex;
+    ComponentContentFormFieldWithRegexInput: ComponentContentFormFieldWithRegexInput;
+    ComponentContentFormSelectField: ComponentContentFormSelectField;
+    ComponentContentFormSelectFieldInput: ComponentContentFormSelectFieldInput;
+    ComponentContentIconWithText: ComponentContentIconWithText;
+    ComponentContentIconWithTextFiltersInput: ComponentContentIconWithTextFiltersInput;
+    ComponentContentIconWithTextInput: ComponentContentIconWithTextInput;
     ComponentContentInformationCard: Omit<ComponentContentInformationCard, 'link'> & {
         link?: Maybe<ResolversParentTypes['ComponentContentLink']>;
     };
     ComponentContentKeyValue: ComponentContentKeyValue;
     ComponentContentKeyValueFiltersInput: ComponentContentKeyValueFiltersInput;
+    ComponentContentKeyValueInput: ComponentContentKeyValueInput;
     ComponentContentKeyword: ComponentContentKeyword;
     ComponentContentKeywordFiltersInput: ComponentContentKeywordFiltersInput;
     ComponentContentKeywordInput: ComponentContentKeywordInput;
     ComponentContentLink: Omit<ComponentContentLink, 'page'> & { page?: Maybe<ResolversParentTypes['Page']> };
     ComponentContentLinkFiltersInput: ComponentContentLinkFiltersInput;
     ComponentContentLinkInput: ComponentContentLinkInput;
+    ComponentContentListWithIcons: ComponentContentListWithIcons;
+    ComponentContentListWithIconsInput: ComponentContentListWithIconsInput;
     ComponentContentMessage: ComponentContentMessage;
     ComponentContentMessageFiltersInput: ComponentContentMessageFiltersInput;
     ComponentContentMessageSimple: ComponentContentMessageSimple;
@@ -4481,6 +4938,9 @@ export type ResolversParentTypes = {
     };
     ComponentContentNavigationItemFiltersInput: ComponentContentNavigationItemFiltersInput;
     ComponentContentPagination: ComponentContentPagination;
+    ComponentContentRegexValidation: ComponentContentRegexValidation;
+    ComponentContentRegexValidationFiltersInput: ComponentContentRegexValidationFiltersInput;
+    ComponentContentRegexValidationInput: ComponentContentRegexValidationInput;
     ComponentContentRichTextWithTitle: ComponentContentRichTextWithTitle;
     ComponentContentTable: ComponentContentTable;
     ComponentContentTableColumn: ComponentContentTableColumn;
@@ -4532,6 +4992,32 @@ export type ResolversParentTypes = {
     ConfigurableTexts: ConfigurableTexts;
     ConfigurableTextsInput: ConfigurableTextsInput;
     ConfigurableTextsRelationResponseCollection: ConfigurableTextsRelationResponseCollection;
+    CreateAccountPage: Omit<
+        CreateAccountPage,
+        'SEO' | 'localizations' | 'localizations_connection' | 'signInButton'
+    > & {
+        SEO: ResolversParentTypes['ComponentSeoSeo'];
+        localizations: Array<Maybe<ResolversParentTypes['CreateAccountPage']>>;
+        localizations_connection?: Maybe<ResolversParentTypes['CreateAccountPageRelationResponseCollection']>;
+        signInButton: ResolversParentTypes['ComponentContentLink'];
+    };
+    CreateAccountPageInput: CreateAccountPageInput;
+    CreateAccountPageRelationResponseCollection: Omit<CreateAccountPageRelationResponseCollection, 'nodes'> & {
+        nodes: Array<ResolversParentTypes['CreateAccountPage']>;
+    };
+    CreateNewPasswordPage: Omit<
+        CreateNewPasswordPage,
+        'SEO' | 'image' | 'localizations' | 'localizations_connection'
+    > & {
+        SEO: ResolversParentTypes['ComponentSeoSeo'];
+        image: ResolversParentTypes['UploadFile'];
+        localizations: Array<Maybe<ResolversParentTypes['CreateNewPasswordPage']>>;
+        localizations_connection?: Maybe<ResolversParentTypes['CreateNewPasswordPageRelationResponseCollection']>;
+    };
+    CreateNewPasswordPageInput: CreateNewPasswordPageInput;
+    CreateNewPasswordPageRelationResponseCollection: Omit<CreateNewPasswordPageRelationResponseCollection, 'nodes'> & {
+        nodes: Array<ResolversParentTypes['CreateNewPasswordPage']>;
+    };
     DateTime: Scalars['DateTime']['output'];
     DateTimeFilterInput: DateTimeFilterInput;
     DeleteMutationResponse: DeleteMutationResponse;
@@ -4647,6 +5133,16 @@ export type ResolversParentTypes = {
     Pagination: Pagination;
     PaginationArg: PaginationArg;
     Query: {};
+    ResetPasswordPage: Omit<ResetPasswordPage, 'SEO' | 'image' | 'localizations' | 'localizations_connection'> & {
+        SEO: ResolversParentTypes['ComponentSeoSeo'];
+        image: ResolversParentTypes['UploadFile'];
+        localizations: Array<Maybe<ResolversParentTypes['ResetPasswordPage']>>;
+        localizations_connection?: Maybe<ResolversParentTypes['ResetPasswordPageRelationResponseCollection']>;
+    };
+    ResetPasswordPageInput: ResetPasswordPageInput;
+    ResetPasswordPageRelationResponseCollection: Omit<ResetPasswordPageRelationResponseCollection, 'nodes'> & {
+        nodes: Array<ResolversParentTypes['ResetPasswordPage']>;
+    };
     ReviewWorkflowsWorkflow: ReviewWorkflowsWorkflow;
     ReviewWorkflowsWorkflowEntityResponseCollection: ReviewWorkflowsWorkflowEntityResponseCollection;
     ReviewWorkflowsWorkflowFiltersInput: ReviewWorkflowsWorkflowFiltersInput;
@@ -5032,6 +5528,20 @@ export type ComponentComponentsFaqResolvers<
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type ComponentComponentsFeaturedServiceListResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentComponentsFeaturedServiceList'] = ResolversParentTypes['ComponentComponentsFeaturedServiceList'],
+> = {
+    detailsLabel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    detailsURL?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    noResults?: Resolver<ResolversTypes['ComponentContentBanner'], ParentType, ContextType>;
+    pagination?: Resolver<Maybe<ResolversTypes['ComponentContentPagination']>, ParentType, ContextType>;
+    title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type ComponentComponentsInvoiceListResolvers<
     ContextType = any,
     ParentType extends
@@ -5117,8 +5627,10 @@ export type ComponentComponentsOrderDetailsResolvers<
     orderStatus?: Resolver<ResolversTypes['ComponentContentInformationCard'], ParentType, ContextType>;
     overdue?: Resolver<ResolversTypes['ComponentContentInformationCard'], ParentType, ContextType>;
     pagination?: Resolver<Maybe<ResolversTypes['ComponentContentPagination']>, ParentType, ContextType>;
+    payOnlineLabel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     paymentDueDate?: Resolver<ResolversTypes['ComponentContentInformationCard'], ParentType, ContextType>;
     productsTitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    reorderLabel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     statusLadder?: Resolver<
         Array<Maybe<ResolversTypes['ComponentContentMessageSimple']>>,
         ParentType,
@@ -5128,6 +5640,7 @@ export type ComponentComponentsOrderDetailsResolvers<
     table?: Resolver<ResolversTypes['ComponentContentTable'], ParentType, ContextType>;
     title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     totalValue?: Resolver<ResolversTypes['ComponentContentInformationCard'], ParentType, ContextType>;
+    trackOrderLabel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -5147,6 +5660,7 @@ export type ComponentComponentsOrderListResolvers<
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     noResults?: Resolver<ResolversTypes['ComponentContentBanner'], ParentType, ContextType>;
     pagination?: Resolver<Maybe<ResolversTypes['ComponentContentPagination']>, ParentType, ContextType>;
+    reorderLabel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     subtitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     table?: Resolver<ResolversTypes['ComponentContentTable'], ParentType, ContextType>;
     title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -5368,7 +5882,6 @@ export type ComponentContentActionLinksResolvers<
 > = {
     icon?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-    inProgress?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
     label?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     page?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType>;
     url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -5434,6 +5947,7 @@ export type ComponentContentDynamicZoneResolvers<
         | 'ComponentComponentsCategory'
         | 'ComponentComponentsCategoryList'
         | 'ComponentComponentsFaq'
+        | 'ComponentComponentsFeaturedServiceList'
         | 'ComponentComponentsInvoiceList'
         | 'ComponentComponentsNotificationDetails'
         | 'ComponentComponentsNotificationList'
@@ -5552,6 +6066,7 @@ export type ComponentContentFormFieldResolvers<
     ParentType extends
         ResolversParentTypes['ComponentContentFormField'] = ResolversParentTypes['ComponentContentFormField'],
 > = {
+    description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     errorMessages?: Resolver<
         Maybe<Array<Maybe<ResolversTypes['ComponentContentErrorMessage']>>>,
         ParentType,
@@ -5562,6 +6077,68 @@ export type ComponentContentFormFieldResolvers<
     label?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     placeholder?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentContentFormFieldWithRegexResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentContentFormFieldWithRegex'] = ResolversParentTypes['ComponentContentFormFieldWithRegex'],
+> = {
+    description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    errorMessages?: Resolver<
+        Maybe<Array<Maybe<ResolversTypes['ComponentContentErrorMessage']>>>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentContentFormFieldWithRegexErrorMessagesArgs, 'pagination' | 'sort'>
+    >;
+    id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    label?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    placeholder?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    regexValidations?: Resolver<
+        Array<Maybe<ResolversTypes['ComponentContentRegexValidation']>>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentContentFormFieldWithRegexRegexValidationsArgs, 'pagination' | 'sort'>
+    >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentContentFormSelectFieldResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentContentFormSelectField'] = ResolversParentTypes['ComponentContentFormSelectField'],
+> = {
+    description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    errorMessages?: Resolver<
+        Maybe<Array<Maybe<ResolversTypes['ComponentContentErrorMessage']>>>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentContentFormSelectFieldErrorMessagesArgs, 'pagination' | 'sort'>
+    >;
+    id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    label?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    options?: Resolver<
+        Array<Maybe<ResolversTypes['ComponentContentKeyValue']>>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentContentFormSelectFieldOptionsArgs, 'pagination' | 'sort'>
+    >;
+    placeholder?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentContentIconWithTextResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentContentIconWithText'] = ResolversParentTypes['ComponentContentIconWithText'],
+> = {
+    description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -5609,6 +6186,22 @@ export type ComponentContentLinkResolvers<
     label?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     page?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType>;
     url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentContentListWithIconsResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentContentListWithIcons'] = ResolversParentTypes['ComponentContentListWithIcons'],
+> = {
+    icons?: Resolver<
+        Array<Maybe<ResolversTypes['ComponentContentIconWithText']>>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentContentListWithIconsIconsArgs, 'pagination' | 'sort'>
+    >;
+    id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -5693,6 +6286,18 @@ export type ComponentContentPaginationResolvers<
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type ComponentContentRegexValidationResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentContentRegexValidation'] = ResolversParentTypes['ComponentContentRegexValidation'],
+> = {
+    id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    label?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    regex?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type ComponentContentRichTextWithTitleResolvers<
     ContextType = any,
     ParentType extends
@@ -5757,6 +6362,8 @@ export type ComponentLabelsActionsResolvers<
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     logIn?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     logOut?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    off?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    on?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     payOnline?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     renew?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     reorder?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -5795,7 +6402,7 @@ export type ComponentLabelsValidationResolvers<
         ResolversParentTypes['ComponentLabelsValidation'] = ResolversParentTypes['ComponentLabelsValidation'],
 > = {
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-    isOptional?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    isOptional?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     isRequired?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -5945,6 +6552,94 @@ export type ConfigurableTextsRelationResponseCollectionResolvers<
         ResolversParentTypes['ConfigurableTextsRelationResponseCollection'] = ResolversParentTypes['ConfigurableTextsRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['ConfigurableTexts']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CreateAccountPageResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['CreateAccountPage'] = ResolversParentTypes['CreateAccountPage'],
+> = {
+    SEO?: Resolver<ResolversTypes['ComponentSeoSeo'], ParentType, ContextType>;
+    activationContactInfo?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    badge?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    changeCompanyTaxIdLabel?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    clientId?: Resolver<ResolversTypes['ComponentContentFormField'], ParentType, ContextType>;
+    companyName?: Resolver<ResolversTypes['ComponentContentFormField'], ParentType, ContextType>;
+    companySectionTitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    creatingAccountProblem?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    documentId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    firstName?: Resolver<ResolversTypes['ComponentContentFormField'], ParentType, ContextType>;
+    invalidCredentials?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    lastName?: Resolver<ResolversTypes['ComponentContentFormField'], ParentType, ContextType>;
+    locale?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    localizations?: Resolver<Array<Maybe<ResolversTypes['CreateAccountPage']>>, ParentType, ContextType>;
+    localizations_connection?: Resolver<
+        Maybe<ResolversTypes['CreateAccountPageRelationResponseCollection']>,
+        ParentType,
+        ContextType
+    >;
+    phone?: Resolver<ResolversTypes['ComponentContentFormField'], ParentType, ContextType>;
+    position?: Resolver<ResolversTypes['ComponentContentFormSelectField'], ParentType, ContextType>;
+    publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    sideContent?: Resolver<ResolversTypes['ComponentContentListWithIcons'], ParentType, ContextType>;
+    signInButton?: Resolver<ResolversTypes['ComponentContentLink'], ParentType, ContextType>;
+    signInTitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    step1SubmitButton?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    step1Subtitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    step1Title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    step2SubmitButton?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    step2Subtitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    step2Title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    taxId?: Resolver<ResolversTypes['ComponentContentFormField'], ParentType, ContextType>;
+    termsAndConditions?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    userSectionTitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    username?: Resolver<ResolversTypes['ComponentContentFormField'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CreateAccountPageRelationResponseCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['CreateAccountPageRelationResponseCollection'] = ResolversParentTypes['CreateAccountPageRelationResponseCollection'],
+> = {
+    nodes?: Resolver<Array<ResolversTypes['CreateAccountPage']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CreateNewPasswordPageResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['CreateNewPasswordPage'] = ResolversParentTypes['CreateNewPasswordPage'],
+> = {
+    SEO?: Resolver<ResolversTypes['ComponentSeoSeo'], ParentType, ContextType>;
+    confirmPassword?: Resolver<ResolversTypes['ComponentContentFormField'], ParentType, ContextType>;
+    createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    creatingPasswordError?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    documentId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    image?: Resolver<ResolversTypes['UploadFile'], ParentType, ContextType>;
+    locale?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    localizations?: Resolver<Array<Maybe<ResolversTypes['CreateNewPasswordPage']>>, ParentType, ContextType>;
+    localizations_connection?: Resolver<
+        Maybe<ResolversTypes['CreateNewPasswordPageRelationResponseCollection']>,
+        ParentType,
+        ContextType
+    >;
+    password?: Resolver<ResolversTypes['ComponentContentFormFieldWithRegex'], ParentType, ContextType>;
+    publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    setNewPassword?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    subtitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CreateNewPasswordPageRelationResponseCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['CreateNewPasswordPageRelationResponseCollection'] = ResolversParentTypes['CreateNewPasswordPageRelationResponseCollection'],
+> = {
+    nodes?: Resolver<Array<ResolversTypes['CreateNewPasswordPage']>, ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -6110,6 +6805,7 @@ export type GenericMorphResolvers<
         | 'ComponentComponentsCategory'
         | 'ComponentComponentsCategoryList'
         | 'ComponentComponentsFaq'
+        | 'ComponentComponentsFeaturedServiceList'
         | 'ComponentComponentsInvoiceList'
         | 'ComponentComponentsNotificationDetails'
         | 'ComponentComponentsNotificationList'
@@ -6137,16 +6833,21 @@ export type GenericMorphResolvers<
         | 'ComponentContentFilterSelect'
         | 'ComponentContentFilters'
         | 'ComponentContentFormField'
+        | 'ComponentContentFormFieldWithRegex'
+        | 'ComponentContentFormSelectField'
+        | 'ComponentContentIconWithText'
         | 'ComponentContentInformationCard'
         | 'ComponentContentKeyValue'
         | 'ComponentContentKeyword'
         | 'ComponentContentLink'
+        | 'ComponentContentListWithIcons'
         | 'ComponentContentMessage'
         | 'ComponentContentMessageSimple'
         | 'ComponentContentNavigationColumn'
         | 'ComponentContentNavigationGroup'
         | 'ComponentContentNavigationItem'
         | 'ComponentContentPagination'
+        | 'ComponentContentRegexValidation'
         | 'ComponentContentRichTextWithTitle'
         | 'ComponentContentTable'
         | 'ComponentContentTableColumn'
@@ -6159,6 +6860,8 @@ export type GenericMorphResolvers<
         | 'ComponentTemplatesOneColumn'
         | 'ComponentTemplatesTwoColumn'
         | 'ConfigurableTexts'
+        | 'CreateAccountPage'
+        | 'CreateNewPasswordPage'
         | 'FilterItem'
         | 'Footer'
         | 'Header'
@@ -6167,6 +6870,7 @@ export type GenericMorphResolvers<
         | 'NotFoundPage'
         | 'OrganizationList'
         | 'Page'
+        | 'ResetPasswordPage'
         | 'ReviewWorkflowsWorkflow'
         | 'ReviewWorkflowsWorkflowStage'
         | 'SurveyJsForm'
@@ -6285,6 +6989,7 @@ export type LoginPageResolvers<
     ParentType extends ResolversParentTypes['LoginPage'] = ResolversParentTypes['LoginPage'],
 > = {
     SEO?: Resolver<ResolversTypes['ComponentSeoSeo'], ParentType, ContextType>;
+    createAccountMessage?: Resolver<ResolversTypes['ComponentContentAlertBox'], ParentType, ContextType>;
     createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
     documentId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     forgotPassword?: Resolver<ResolversTypes['ComponentContentLink'], ParentType, ContextType>;
@@ -6456,6 +7161,18 @@ export type MutationResolvers<
         ContextType,
         Partial<MutationDeleteConfigurableTextsArgs>
     >;
+    deleteCreateAccountPage?: Resolver<
+        Maybe<ResolversTypes['DeleteMutationResponse']>,
+        ParentType,
+        ContextType,
+        Partial<MutationDeleteCreateAccountPageArgs>
+    >;
+    deleteCreateNewPasswordPage?: Resolver<
+        Maybe<ResolversTypes['DeleteMutationResponse']>,
+        ParentType,
+        ContextType,
+        Partial<MutationDeleteCreateNewPasswordPageArgs>
+    >;
     deleteFilterItem?: Resolver<
         Maybe<ResolversTypes['DeleteMutationResponse']>,
         ParentType,
@@ -6497,6 +7214,12 @@ export type MutationResolvers<
         ParentType,
         ContextType,
         RequireFields<MutationDeletePageArgs, 'documentId'>
+    >;
+    deleteResetPasswordPage?: Resolver<
+        Maybe<ResolversTypes['DeleteMutationResponse']>,
+        ParentType,
+        ContextType,
+        Partial<MutationDeleteResetPasswordPageArgs>
     >;
     deleteReviewWorkflowsWorkflow?: Resolver<
         Maybe<ResolversTypes['DeleteMutationResponse']>,
@@ -6612,6 +7335,18 @@ export type MutationResolvers<
         ContextType,
         RequireFields<MutationUpdateConfigurableTextsArgs, 'data' | 'status'>
     >;
+    updateCreateAccountPage?: Resolver<
+        Maybe<ResolversTypes['CreateAccountPage']>,
+        ParentType,
+        ContextType,
+        RequireFields<MutationUpdateCreateAccountPageArgs, 'data' | 'status'>
+    >;
+    updateCreateNewPasswordPage?: Resolver<
+        Maybe<ResolversTypes['CreateNewPasswordPage']>,
+        ParentType,
+        ContextType,
+        RequireFields<MutationUpdateCreateNewPasswordPageArgs, 'data' | 'status'>
+    >;
     updateFilterItem?: Resolver<
         Maybe<ResolversTypes['FilterItem']>,
         ParentType,
@@ -6653,6 +7388,12 @@ export type MutationResolvers<
         ParentType,
         ContextType,
         RequireFields<MutationUpdatePageArgs, 'data' | 'documentId' | 'status'>
+    >;
+    updateResetPasswordPage?: Resolver<
+        Maybe<ResolversTypes['ResetPasswordPage']>,
+        ParentType,
+        ContextType,
+        RequireFields<MutationUpdateResetPasswordPageArgs, 'data' | 'status'>
     >;
     updateReviewWorkflowsWorkflow?: Resolver<
         Maybe<ResolversTypes['ReviewWorkflowsWorkflow']>,
@@ -6931,6 +7672,18 @@ export type QueryResolvers<
         ContextType,
         RequireFields<QueryConfigurableTextsArgs, 'status'>
     >;
+    createAccountPage?: Resolver<
+        Maybe<ResolversTypes['CreateAccountPage']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryCreateAccountPageArgs, 'status'>
+    >;
+    createNewPasswordPage?: Resolver<
+        Maybe<ResolversTypes['CreateNewPasswordPage']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryCreateNewPasswordPageArgs, 'status'>
+    >;
     filterItem?: Resolver<
         Maybe<ResolversTypes['FilterItem']>,
         ParentType,
@@ -7039,6 +7792,12 @@ export type QueryResolvers<
         ParentType,
         ContextType,
         RequireFields<QueryPages_ConnectionArgs, 'pagination' | 'sort' | 'status'>
+    >;
+    resetPasswordPage?: Resolver<
+        Maybe<ResolversTypes['ResetPasswordPage']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryResetPasswordPageArgs, 'status'>
     >;
     reviewWorkflowsWorkflow?: Resolver<
         Maybe<ResolversTypes['ReviewWorkflowsWorkflow']>,
@@ -7184,6 +7943,40 @@ export type QueryResolvers<
         ContextType,
         RequireFields<QueryUsersPermissionsUsers_ConnectionArgs, 'pagination' | 'sort' | 'status'>
     >;
+};
+
+export type ResetPasswordPageResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['ResetPasswordPage'] = ResolversParentTypes['ResetPasswordPage'],
+> = {
+    SEO?: Resolver<ResolversTypes['ComponentSeoSeo'], ParentType, ContextType>;
+    createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    documentId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    image?: Resolver<ResolversTypes['UploadFile'], ParentType, ContextType>;
+    invalidCredentials?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    locale?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    localizations?: Resolver<Array<Maybe<ResolversTypes['ResetPasswordPage']>>, ParentType, ContextType>;
+    localizations_connection?: Resolver<
+        Maybe<ResolversTypes['ResetPasswordPageRelationResponseCollection']>,
+        ParentType,
+        ContextType
+    >;
+    publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    resetPassword?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    subtitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    username?: Resolver<ResolversTypes['ComponentContentFormField'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ResetPasswordPageRelationResponseCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ResetPasswordPageRelationResponseCollection'] = ResolversParentTypes['ResetPasswordPageRelationResponseCollection'],
+> = {
+    nodes?: Resolver<Array<ResolversTypes['ResetPasswordPage']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ReviewWorkflowsWorkflowResolvers<
@@ -7589,6 +8382,7 @@ export type Resolvers<ContextType = any> = {
     ComponentComponentsCategory?: ComponentComponentsCategoryResolvers<ContextType>;
     ComponentComponentsCategoryList?: ComponentComponentsCategoryListResolvers<ContextType>;
     ComponentComponentsFaq?: ComponentComponentsFaqResolvers<ContextType>;
+    ComponentComponentsFeaturedServiceList?: ComponentComponentsFeaturedServiceListResolvers<ContextType>;
     ComponentComponentsInvoiceList?: ComponentComponentsInvoiceListResolvers<ContextType>;
     ComponentComponentsNotificationDetails?: ComponentComponentsNotificationDetailsResolvers<ContextType>;
     ComponentComponentsNotificationList?: ComponentComponentsNotificationListResolvers<ContextType>;
@@ -7618,16 +8412,21 @@ export type Resolvers<ContextType = any> = {
     ComponentContentFilterSelect?: ComponentContentFilterSelectResolvers<ContextType>;
     ComponentContentFilters?: ComponentContentFiltersResolvers<ContextType>;
     ComponentContentFormField?: ComponentContentFormFieldResolvers<ContextType>;
+    ComponentContentFormFieldWithRegex?: ComponentContentFormFieldWithRegexResolvers<ContextType>;
+    ComponentContentFormSelectField?: ComponentContentFormSelectFieldResolvers<ContextType>;
+    ComponentContentIconWithText?: ComponentContentIconWithTextResolvers<ContextType>;
     ComponentContentInformationCard?: ComponentContentInformationCardResolvers<ContextType>;
     ComponentContentKeyValue?: ComponentContentKeyValueResolvers<ContextType>;
     ComponentContentKeyword?: ComponentContentKeywordResolvers<ContextType>;
     ComponentContentLink?: ComponentContentLinkResolvers<ContextType>;
+    ComponentContentListWithIcons?: ComponentContentListWithIconsResolvers<ContextType>;
     ComponentContentMessage?: ComponentContentMessageResolvers<ContextType>;
     ComponentContentMessageSimple?: ComponentContentMessageSimpleResolvers<ContextType>;
     ComponentContentNavigationColumn?: ComponentContentNavigationColumnResolvers<ContextType>;
     ComponentContentNavigationGroup?: ComponentContentNavigationGroupResolvers<ContextType>;
     ComponentContentNavigationItem?: ComponentContentNavigationItemResolvers<ContextType>;
     ComponentContentPagination?: ComponentContentPaginationResolvers<ContextType>;
+    ComponentContentRegexValidation?: ComponentContentRegexValidationResolvers<ContextType>;
     ComponentContentRichTextWithTitle?: ComponentContentRichTextWithTitleResolvers<ContextType>;
     ComponentContentTable?: ComponentContentTableResolvers<ContextType>;
     ComponentContentTableColumn?: ComponentContentTableColumnResolvers<ContextType>;
@@ -7643,6 +8442,10 @@ export type Resolvers<ContextType = any> = {
     ComponentTemplatesTwoColumn?: ComponentTemplatesTwoColumnResolvers<ContextType>;
     ConfigurableTexts?: ConfigurableTextsResolvers<ContextType>;
     ConfigurableTextsRelationResponseCollection?: ConfigurableTextsRelationResponseCollectionResolvers<ContextType>;
+    CreateAccountPage?: CreateAccountPageResolvers<ContextType>;
+    CreateAccountPageRelationResponseCollection?: CreateAccountPageRelationResponseCollectionResolvers<ContextType>;
+    CreateNewPasswordPage?: CreateNewPasswordPageResolvers<ContextType>;
+    CreateNewPasswordPageRelationResponseCollection?: CreateNewPasswordPageRelationResponseCollectionResolvers<ContextType>;
     DateTime?: GraphQLScalarType;
     DeleteMutationResponse?: DeleteMutationResponseResolvers<ContextType>;
     Error?: ErrorResolvers<ContextType>;
@@ -7680,6 +8483,8 @@ export type Resolvers<ContextType = any> = {
     PageTemplateDynamicZoneInput?: GraphQLScalarType;
     Pagination?: PaginationResolvers<ContextType>;
     Query?: QueryResolvers<ContextType>;
+    ResetPasswordPage?: ResetPasswordPageResolvers<ContextType>;
+    ResetPasswordPageRelationResponseCollection?: ResetPasswordPageRelationResponseCollectionResolvers<ContextType>;
     ReviewWorkflowsWorkflow?: ReviewWorkflowsWorkflowResolvers<ContextType>;
     ReviewWorkflowsWorkflowEntityResponseCollection?: ReviewWorkflowsWorkflowEntityResponseCollectionResolvers<ContextType>;
     ReviewWorkflowsWorkflowStage?: ReviewWorkflowsWorkflowStageResolvers<ContextType>;
@@ -7921,6 +8726,7 @@ export type ComponentFragment = {
         | { __typename: 'ComponentComponentsCategory' }
         | { __typename: 'ComponentComponentsCategoryList' }
         | { __typename: 'ComponentComponentsFaq' }
+        | { __typename: 'ComponentComponentsFeaturedServiceList' }
         | { __typename: 'ComponentComponentsInvoiceList' }
         | { __typename: 'ComponentComponentsNotificationDetails' }
         | { __typename: 'ComponentComponentsNotificationList' }
@@ -8122,6 +8928,7 @@ export type PageFragment = {
                       | { __typename: 'ComponentComponentsCategory' }
                       | { __typename: 'ComponentComponentsCategoryList' }
                       | { __typename: 'ComponentComponentsFaq' }
+                      | { __typename: 'ComponentComponentsFeaturedServiceList' }
                       | { __typename: 'ComponentComponentsInvoiceList' }
                       | { __typename: 'ComponentComponentsNotificationDetails' }
                       | { __typename: 'ComponentComponentsNotificationList' }
@@ -8154,6 +8961,7 @@ export type PageFragment = {
                       | { __typename: 'ComponentComponentsCategory' }
                       | { __typename: 'ComponentComponentsCategoryList' }
                       | { __typename: 'ComponentComponentsFaq' }
+                      | { __typename: 'ComponentComponentsFeaturedServiceList' }
                       | { __typename: 'ComponentComponentsInvoiceList' }
                       | { __typename: 'ComponentComponentsNotificationDetails' }
                       | { __typename: 'ComponentComponentsNotificationList' }
@@ -8183,6 +8991,7 @@ export type PageFragment = {
                       | { __typename: 'ComponentComponentsCategory' }
                       | { __typename: 'ComponentComponentsCategoryList' }
                       | { __typename: 'ComponentComponentsFaq' }
+                      | { __typename: 'ComponentComponentsFeaturedServiceList' }
                       | { __typename: 'ComponentComponentsInvoiceList' }
                       | { __typename: 'ComponentComponentsNotificationDetails' }
                       | { __typename: 'ComponentComponentsNotificationList' }
@@ -8212,6 +9021,7 @@ export type PageFragment = {
                       | { __typename: 'ComponentComponentsCategory' }
                       | { __typename: 'ComponentComponentsCategoryList' }
                       | { __typename: 'ComponentComponentsFaq' }
+                      | { __typename: 'ComponentComponentsFeaturedServiceList' }
                       | { __typename: 'ComponentComponentsInvoiceList' }
                       | { __typename: 'ComponentComponentsNotificationDetails' }
                       | { __typename: 'ComponentComponentsNotificationList' }
@@ -8241,6 +9051,7 @@ export type PageFragment = {
                       | { __typename: 'ComponentComponentsCategory' }
                       | { __typename: 'ComponentComponentsCategoryList' }
                       | { __typename: 'ComponentComponentsFaq' }
+                      | { __typename: 'ComponentComponentsFeaturedServiceList' }
                       | { __typename: 'ComponentComponentsInvoiceList' }
                       | { __typename: 'ComponentComponentsNotificationDetails' }
                       | { __typename: 'ComponentComponentsNotificationList' }
@@ -8277,6 +9088,7 @@ type Template_ComponentTemplatesOneColumn_Fragment = {
             | { __typename: 'ComponentComponentsCategory' }
             | { __typename: 'ComponentComponentsCategoryList' }
             | { __typename: 'ComponentComponentsFaq' }
+            | { __typename: 'ComponentComponentsFeaturedServiceList' }
             | { __typename: 'ComponentComponentsInvoiceList' }
             | { __typename: 'ComponentComponentsNotificationDetails' }
             | { __typename: 'ComponentComponentsNotificationList' }
@@ -8310,6 +9122,7 @@ type Template_ComponentTemplatesTwoColumn_Fragment = {
             | { __typename: 'ComponentComponentsCategory' }
             | { __typename: 'ComponentComponentsCategoryList' }
             | { __typename: 'ComponentComponentsFaq' }
+            | { __typename: 'ComponentComponentsFeaturedServiceList' }
             | { __typename: 'ComponentComponentsInvoiceList' }
             | { __typename: 'ComponentComponentsNotificationDetails' }
             | { __typename: 'ComponentComponentsNotificationList' }
@@ -8339,6 +9152,7 @@ type Template_ComponentTemplatesTwoColumn_Fragment = {
             | { __typename: 'ComponentComponentsCategory' }
             | { __typename: 'ComponentComponentsCategoryList' }
             | { __typename: 'ComponentComponentsFaq' }
+            | { __typename: 'ComponentComponentsFeaturedServiceList' }
             | { __typename: 'ComponentComponentsInvoiceList' }
             | { __typename: 'ComponentComponentsNotificationDetails' }
             | { __typename: 'ComponentComponentsNotificationList' }
@@ -8368,6 +9182,7 @@ type Template_ComponentTemplatesTwoColumn_Fragment = {
             | { __typename: 'ComponentComponentsCategory' }
             | { __typename: 'ComponentComponentsCategoryList' }
             | { __typename: 'ComponentComponentsFaq' }
+            | { __typename: 'ComponentComponentsFeaturedServiceList' }
             | { __typename: 'ComponentComponentsInvoiceList' }
             | { __typename: 'ComponentComponentsNotificationDetails' }
             | { __typename: 'ComponentComponentsNotificationList' }
@@ -8397,6 +9212,7 @@ type Template_ComponentTemplatesTwoColumn_Fragment = {
             | { __typename: 'ComponentComponentsCategory' }
             | { __typename: 'ComponentComponentsCategoryList' }
             | { __typename: 'ComponentComponentsFaq' }
+            | { __typename: 'ComponentComponentsFeaturedServiceList' }
             | { __typename: 'ComponentComponentsInvoiceList' }
             | { __typename: 'ComponentComponentsNotificationDetails' }
             | { __typename: 'ComponentComponentsNotificationList' }
@@ -8461,6 +9277,7 @@ export type CategoryComponentFragment = {
                 | { __typename: 'ComponentComponentsCategory' }
                 | { __typename: 'ComponentComponentsCategoryList' }
                 | { __typename: 'ComponentComponentsFaq' }
+                | { __typename: 'ComponentComponentsFeaturedServiceList' }
                 | { __typename: 'ComponentComponentsInvoiceList' }
                 | { __typename: 'ComponentComponentsNotificationDetails' }
                 | { __typename: 'ComponentComponentsNotificationList' }
@@ -8500,6 +9317,22 @@ export type FaqComponentFragment = {
     subtitle?: string;
     items?: Array<{ title: string; description: string }>;
     banner?: { title: string; description?: string; altDescription?: string; button?: { label: string; url?: string } };
+};
+
+export type FeaturedServiceListComponentFragment = {
+    __typename: 'ComponentComponentsFeaturedServiceList';
+    id: string;
+    title?: string;
+    detailsURL?: string;
+    detailsLabel?: string;
+    pagination?: {
+        description: string;
+        previousLabel: string;
+        nextLabel: string;
+        perPage: number;
+        selectPageLabel: string;
+    };
+    noResults: { title: string; description?: string };
 };
 
 export type InvoiceListComponentFragment = {
@@ -8609,6 +9442,9 @@ export type OrderDetailsComponentFragment = {
     id: string;
     title?: string;
     productsTitle?: string;
+    reorderLabel?: string;
+    trackOrderLabel?: string;
+    payOnlineLabel?: string;
     statusLadder: Array<{ title: string }>;
     fields: Array<{ name: string; values: Array<{ key: string; value: string }> }>;
     table: { actionsTitle?: string; actionsLabel?: string; columns: Array<{ title: string; field: string }> };
@@ -8729,6 +9565,7 @@ export type OrderListComponentFragment = {
     title?: string;
     subtitle?: string;
     detailsURL?: string;
+    reorderLabel?: string;
     fields: Array<{ name: string; values: Array<{ key: string; value: string }> }>;
     table: { actionsTitle?: string; actionsLabel?: string; columns: Array<{ title: string; field: string }> };
     pagination?: {
@@ -9033,14 +9870,6 @@ export type UserAccountComponentFragment = {
     }>;
 };
 
-export type ActionLinksFragment = {
-    label: string;
-    icon?: string;
-    url?: string;
-    inProgress?: boolean;
-    page?: { slug: string };
-};
-
 export type BannerFragment = {
     title: string;
     description?: string;
@@ -9181,6 +10010,7 @@ export type OneColumnTemplateFragment = {
             | { __typename: 'ComponentComponentsCategory' }
             | { __typename: 'ComponentComponentsCategoryList' }
             | { __typename: 'ComponentComponentsFaq' }
+            | { __typename: 'ComponentComponentsFeaturedServiceList' }
             | { __typename: 'ComponentComponentsInvoiceList' }
             | { __typename: 'ComponentComponentsNotificationDetails' }
             | { __typename: 'ComponentComponentsNotificationList' }
@@ -9213,6 +10043,7 @@ export type TwoColumnTemplateFragment = {
             | { __typename: 'ComponentComponentsCategory' }
             | { __typename: 'ComponentComponentsCategoryList' }
             | { __typename: 'ComponentComponentsFaq' }
+            | { __typename: 'ComponentComponentsFeaturedServiceList' }
             | { __typename: 'ComponentComponentsInvoiceList' }
             | { __typename: 'ComponentComponentsNotificationDetails' }
             | { __typename: 'ComponentComponentsNotificationList' }
@@ -9242,6 +10073,7 @@ export type TwoColumnTemplateFragment = {
             | { __typename: 'ComponentComponentsCategory' }
             | { __typename: 'ComponentComponentsCategoryList' }
             | { __typename: 'ComponentComponentsFaq' }
+            | { __typename: 'ComponentComponentsFeaturedServiceList' }
             | { __typename: 'ComponentComponentsInvoiceList' }
             | { __typename: 'ComponentComponentsNotificationDetails' }
             | { __typename: 'ComponentComponentsNotificationList' }
@@ -9271,6 +10103,7 @@ export type TwoColumnTemplateFragment = {
             | { __typename: 'ComponentComponentsCategory' }
             | { __typename: 'ComponentComponentsCategoryList' }
             | { __typename: 'ComponentComponentsFaq' }
+            | { __typename: 'ComponentComponentsFeaturedServiceList' }
             | { __typename: 'ComponentComponentsInvoiceList' }
             | { __typename: 'ComponentComponentsNotificationDetails' }
             | { __typename: 'ComponentComponentsNotificationList' }
@@ -9300,6 +10133,7 @@ export type TwoColumnTemplateFragment = {
             | { __typename: 'ComponentComponentsCategory' }
             | { __typename: 'ComponentComponentsCategoryList' }
             | { __typename: 'ComponentComponentsFaq' }
+            | { __typename: 'ComponentComponentsFeaturedServiceList' }
             | { __typename: 'ComponentComponentsInvoiceList' }
             | { __typename: 'ComponentComponentsNotificationDetails' }
             | { __typename: 'ComponentComponentsNotificationList' }
@@ -9392,6 +10226,7 @@ export type GetComponentQuery = {
                               | { __typename: 'ComponentComponentsCategory' }
                               | { __typename: 'ComponentComponentsCategoryList' }
                               | { __typename: 'ComponentComponentsFaq' }
+                              | { __typename: 'ComponentComponentsFeaturedServiceList' }
                               | { __typename: 'ComponentComponentsInvoiceList' }
                               | { __typename: 'ComponentComponentsNotificationDetails' }
                               | { __typename: 'ComponentComponentsNotificationList' }
@@ -9434,6 +10269,21 @@ export type GetComponentQuery = {
                       altDescription?: string;
                       button?: { label: string; url?: string };
                   };
+              }
+            | {
+                  __typename: 'ComponentComponentsFeaturedServiceList';
+                  id: string;
+                  title?: string;
+                  detailsURL?: string;
+                  detailsLabel?: string;
+                  pagination?: {
+                      description: string;
+                      previousLabel: string;
+                      nextLabel: string;
+                      perPage: number;
+                      selectPageLabel: string;
+                  };
+                  noResults: { title: string; description?: string };
               }
             | {
                   __typename: 'ComponentComponentsInvoiceList';
@@ -9993,6 +10843,8 @@ export type GetComponentQuery = {
             close: string;
             trackOrder: string;
             showAllArticles: string;
+            on: string;
+            off: string;
         };
         errors: { requestError: { title: string; content?: string } };
     };
@@ -10196,6 +11048,7 @@ export type GetPageQuery = {
                           | { __typename: 'ComponentComponentsCategory' }
                           | { __typename: 'ComponentComponentsCategoryList' }
                           | { __typename: 'ComponentComponentsFaq' }
+                          | { __typename: 'ComponentComponentsFeaturedServiceList' }
                           | { __typename: 'ComponentComponentsInvoiceList' }
                           | { __typename: 'ComponentComponentsNotificationDetails' }
                           | { __typename: 'ComponentComponentsNotificationList' }
@@ -10228,6 +11081,7 @@ export type GetPageQuery = {
                           | { __typename: 'ComponentComponentsCategory' }
                           | { __typename: 'ComponentComponentsCategoryList' }
                           | { __typename: 'ComponentComponentsFaq' }
+                          | { __typename: 'ComponentComponentsFeaturedServiceList' }
                           | { __typename: 'ComponentComponentsInvoiceList' }
                           | { __typename: 'ComponentComponentsNotificationDetails' }
                           | { __typename: 'ComponentComponentsNotificationList' }
@@ -10257,6 +11111,7 @@ export type GetPageQuery = {
                           | { __typename: 'ComponentComponentsCategory' }
                           | { __typename: 'ComponentComponentsCategoryList' }
                           | { __typename: 'ComponentComponentsFaq' }
+                          | { __typename: 'ComponentComponentsFeaturedServiceList' }
                           | { __typename: 'ComponentComponentsInvoiceList' }
                           | { __typename: 'ComponentComponentsNotificationDetails' }
                           | { __typename: 'ComponentComponentsNotificationList' }
@@ -10286,6 +11141,7 @@ export type GetPageQuery = {
                           | { __typename: 'ComponentComponentsCategory' }
                           | { __typename: 'ComponentComponentsCategoryList' }
                           | { __typename: 'ComponentComponentsFaq' }
+                          | { __typename: 'ComponentComponentsFeaturedServiceList' }
                           | { __typename: 'ComponentComponentsInvoiceList' }
                           | { __typename: 'ComponentComponentsNotificationDetails' }
                           | { __typename: 'ComponentComponentsNotificationList' }
@@ -10315,6 +11171,7 @@ export type GetPageQuery = {
                           | { __typename: 'ComponentComponentsCategory' }
                           | { __typename: 'ComponentComponentsCategoryList' }
                           | { __typename: 'ComponentComponentsFaq' }
+                          | { __typename: 'ComponentComponentsFeaturedServiceList' }
                           | { __typename: 'ComponentComponentsInvoiceList' }
                           | { __typename: 'ComponentComponentsNotificationDetails' }
                           | { __typename: 'ComponentComponentsNotificationList' }
@@ -10380,6 +11237,7 @@ export type GetPagesQuery = {
                           | { __typename: 'ComponentComponentsCategory' }
                           | { __typename: 'ComponentComponentsCategoryList' }
                           | { __typename: 'ComponentComponentsFaq' }
+                          | { __typename: 'ComponentComponentsFeaturedServiceList' }
                           | { __typename: 'ComponentComponentsInvoiceList' }
                           | { __typename: 'ComponentComponentsNotificationDetails' }
                           | { __typename: 'ComponentComponentsNotificationList' }
@@ -10412,6 +11270,7 @@ export type GetPagesQuery = {
                           | { __typename: 'ComponentComponentsCategory' }
                           | { __typename: 'ComponentComponentsCategoryList' }
                           | { __typename: 'ComponentComponentsFaq' }
+                          | { __typename: 'ComponentComponentsFeaturedServiceList' }
                           | { __typename: 'ComponentComponentsInvoiceList' }
                           | { __typename: 'ComponentComponentsNotificationDetails' }
                           | { __typename: 'ComponentComponentsNotificationList' }
@@ -10441,6 +11300,7 @@ export type GetPagesQuery = {
                           | { __typename: 'ComponentComponentsCategory' }
                           | { __typename: 'ComponentComponentsCategoryList' }
                           | { __typename: 'ComponentComponentsFaq' }
+                          | { __typename: 'ComponentComponentsFeaturedServiceList' }
                           | { __typename: 'ComponentComponentsInvoiceList' }
                           | { __typename: 'ComponentComponentsNotificationDetails' }
                           | { __typename: 'ComponentComponentsNotificationList' }
@@ -10470,6 +11330,7 @@ export type GetPagesQuery = {
                           | { __typename: 'ComponentComponentsCategory' }
                           | { __typename: 'ComponentComponentsCategoryList' }
                           | { __typename: 'ComponentComponentsFaq' }
+                          | { __typename: 'ComponentComponentsFeaturedServiceList' }
                           | { __typename: 'ComponentComponentsInvoiceList' }
                           | { __typename: 'ComponentComponentsNotificationDetails' }
                           | { __typename: 'ComponentComponentsNotificationList' }
@@ -10499,6 +11360,7 @@ export type GetPagesQuery = {
                           | { __typename: 'ComponentComponentsCategory' }
                           | { __typename: 'ComponentComponentsCategoryList' }
                           | { __typename: 'ComponentComponentsFaq' }
+                          | { __typename: 'ComponentComponentsFeaturedServiceList' }
                           | { __typename: 'ComponentComponentsInvoiceList' }
                           | { __typename: 'ComponentComponentsNotificationDetails' }
                           | { __typename: 'ComponentComponentsNotificationList' }
@@ -10992,6 +11854,32 @@ export const FaqComponentFragmentDoc = gql`
     }
     ${BannerFragmentDoc}
 `;
+export const PaginationFragmentDoc = gql`
+    fragment Pagination on ComponentContentPagination {
+        description
+        previousLabel
+        nextLabel
+        perPage
+        selectPageLabel
+    }
+`;
+export const FeaturedServiceListComponentFragmentDoc = gql`
+    fragment FeaturedServiceListComponent on ComponentComponentsFeaturedServiceList {
+        __typename
+        id
+        title
+        pagination {
+            ...Pagination
+        }
+        noResults {
+            title
+            description
+        }
+        detailsURL
+        detailsLabel
+    }
+    ${PaginationFragmentDoc}
+`;
 export const FieldMappingFragmentDoc = gql`
     fragment FieldMapping on ComponentContentFieldMapping {
         name
@@ -11009,15 +11897,6 @@ export const TableFragmentDoc = gql`
         }
         actionsTitle
         actionsLabel
-    }
-`;
-export const PaginationFragmentDoc = gql`
-    fragment Pagination on ComponentContentPagination {
-        description
-        previousLabel
-        nextLabel
-        perPage
-        selectPageLabel
     }
 `;
 export const FilterItemFragmentDoc = gql`
@@ -11201,6 +12080,9 @@ export const OrderDetailsComponentFragmentDoc = gql`
         customerComment {
             ...InformationCard
         }
+        reorderLabel
+        trackOrderLabel
+        payOnlineLabel
     }
     ${FieldMappingFragmentDoc}
     ${TableFragmentDoc}
@@ -11231,6 +12113,7 @@ export const OrderListComponentFragmentDoc = gql`
             description
         }
         detailsURL
+        reorderLabel
     }
     ${FieldMappingFragmentDoc}
     ${TableFragmentDoc}
@@ -11430,17 +12313,6 @@ export const UserAccountComponentFragmentDoc = gql`
     }
     ${FormFieldComponentFragmentDoc}
 `;
-export const ActionLinksFragmentDoc = gql`
-    fragment ActionLinks on ComponentContentActionLinks {
-        label
-        icon
-        url
-        page {
-            slug
-        }
-        inProgress
-    }
-`;
 export const GetArticleDocument = gql`
     query getArticle($slug: String!, $locale: I18NLocaleCode!) {
         articles(locale: $locale, filters: { slug: { eq: $slug } }) {
@@ -11596,6 +12468,9 @@ export const GetComponentDocument = gql`
                 ... on ComponentComponentsArticleSearch {
                     ...ArticleSearchComponent
                 }
+                ... on ComponentComponentsFeaturedServiceList {
+                    ...FeaturedServiceListComponent
+                }
             }
         }
         configurableTexts(locale: $locale) {
@@ -11622,6 +12497,8 @@ export const GetComponentDocument = gql`
                 close
                 trackOrder
                 showAllArticles
+                on
+                off
             }
             errors {
                 requestError {
@@ -11651,6 +12528,7 @@ export const GetComponentDocument = gql`
     ${ArticleListComponentFragmentDoc}
     ${CategoryComponentFragmentDoc}
     ${ArticleSearchComponentFragmentDoc}
+    ${FeaturedServiceListComponentFragmentDoc}
 `;
 export const GetFooterDocument = gql`
     query getFooter($locale: I18NLocaleCode!, $id: ID!) {

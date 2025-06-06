@@ -63,6 +63,9 @@ query getComponent($id: ID!, $locale: I18NLocaleCode!) {
             ... on ComponentComponentsArticleSearch {
                 ...ArticleSearchComponent
             }
+            ... on ComponentComponentsFeaturedServiceList {
+                ...FeaturedServiceListComponent
+            }
         }
     }
     configurableTexts(locale: $locale) {
@@ -89,6 +92,8 @@ query getComponent($id: ID!, $locale: I18NLocaleCode!) {
             close
             trackOrder
             showAllArticles
+            on
+            off
         }
         errors {
             requestError {

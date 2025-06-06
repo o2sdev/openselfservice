@@ -13,6 +13,7 @@ import { mapArticleSearchBlock } from './mappers/blocks/cms.article-search.mappe
 import { mapCategoryListBlock } from './mappers/blocks/cms.category-list.mapper';
 import { mapCategoryBlock } from './mappers/blocks/cms.category.mapper';
 import { mapFaqBlock } from './mappers/blocks/cms.faq.mapper';
+import { mapFeaturedServiceListBlock } from './mappers/blocks/cms.featured-service-list.mapper';
 import { mapInvoiceDetailsBlock } from './mappers/blocks/cms.invoice-details.mapper';
 import { mapInvoiceListBlock } from './mappers/blocks/cms.invoice-list.mapper';
 import { mapNotificationDetailsBlock } from './mappers/blocks/cms.notification-details.mapper';
@@ -378,6 +379,11 @@ export class CmsService implements CMS.Service {
     getServiceListBlock(options: CMS.Request.GetCmsEntryParams) {
         const key = `service-list-component-${options.id}-${options.locale}`;
         return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapServiceListBlock)));
+    }
+
+    getFeaturedServiceListBlock(options: CMS.Request.GetCmsEntryParams) {
+        const key = `featured-service-list-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapFeaturedServiceListBlock)));
     }
 
     getServiceDetailsBlock(options: CMS.Request.GetCmsEntryParams) {
