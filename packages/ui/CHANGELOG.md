@@ -1,5 +1,16 @@
 # @o2s/ui
 
+## 1.2.0
+
+### Minor Changes
+
+- 027ed39: featuredServiceListBlock - list of available services
+
+    - added new UI componetnt from Shadcn - Switch,
+    - extended ProductCard with action property,
+    - implemented model and mock for FeatureServiceListBlock,
+    - integrated with strapi,
+
 ## 1.1.0
 
 ### Minor Changes
