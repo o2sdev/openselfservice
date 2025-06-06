@@ -1,5 +1,22 @@
 # @o2s/framework
 
+## 1.4.0
+
+### Minor Changes
+
+- 027ed39: featuredServiceListBlock - list of available services
+
+    - added new UI componetnt from Shadcn - Switch,
+    - extended ProductCard with action property,
+    - implemented model and mock for FeatureServiceListBlock,
+    - integrated with strapi,
+
+- 985780a: added passing of authorization header to most of crucial services
+- 9c31433: - added endOfWarranty attribute on asset model
+    - fixed German labels in English mocks
+    - fixed incorrect imports in framework modules configuration
+    - added optional authorization param in most service methods
+
 ## 1.3.0
 
 ### Minor Changes
