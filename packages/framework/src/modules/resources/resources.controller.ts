@@ -21,8 +21,8 @@ export class ResourceController {
     constructor(protected readonly resourceService: ResourceService) {}
 
     @Post(':id/purchase')
-    purchaseResource(@Param() params: GetResourceParams) {
-        return this.resourceService.purchaseOrActivateResource(params);
+    purchaseResource(@Param() params: GetResourceParams, @Headers() headers: AppHeaders) {
+        return this.resourceService.purchaseOrActivateResource(params, headers.authorization);
     }
 
     @Get('services')
@@ -35,8 +35,8 @@ export class ResourceController {
     }
 
     @Get('services/:id')
-    getService(@Param() params: GetServiceParams): Observable<Service> {
-        return this.resourceService.getService(params);
+    getService(@Param() params: GetServiceParams, @Headers() headers: AppHeaders): Observable<Service> {
+        return this.resourceService.getService(params, headers.authorization);
     }
 
     @Get('services/featured')
@@ -54,8 +54,8 @@ export class ResourceController {
     }
 
     @Get('assets/:id')
-    getAsset(@Param() params: GetAssetParams): Observable<Asset> {
-        return this.resourceService.getAsset(params);
+    getAsset(@Param() params: GetAssetParams, @Headers() headers: AppHeaders): Observable<Asset> {
+        return this.resourceService.getAsset(params, headers.authorization);
     }
 
     @Get('assets/:id/compatible-services')
