@@ -126,7 +126,7 @@ const InputWithDetails = React.forwardRef<HTMLInputElement, InputWithDetailsProp
         return (
             <InputWithLabel {...props} ref={ref}>
                 {description && <p className="text-sm text-muted-foreground">{description}</p>}
-                {errorMessage && <p className="text-sm text-destructive">{errorMessage}</p>}
+                {errorMessage && props.hasError && <p className="text-sm text-destructive">{errorMessage}</p>}
             </InputWithLabel>
         );
     },

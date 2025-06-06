@@ -89,7 +89,7 @@ const CheckboxWithDetails = React.forwardRef<React.ElementRef<typeof CheckboxPri
         return (
             <CheckboxWithLabel {...props} ref={ref}>
                 {description && <p className="text-sm text-muted-foreground">{description}</p>}
-                {errorMessage && <p className="text-sm text-destructive">{errorMessage}</p>}
+                {errorMessage && props.hasError && <p className="text-sm text-destructive">{errorMessage}</p>}
             </CheckboxWithLabel>
         );
     },
