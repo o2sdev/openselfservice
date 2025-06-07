@@ -92,6 +92,9 @@ O2S includes pre-built integrations and allows you to extend functionality as ne
 We welcome contributions!
 If you’d like to contribute, please check the **[Contribution Guide](CONTRIBUTING.md)**.
 
+## Contact e-mail
+[contact@openselfservice.com](mailto:contact@openselfservice.com)
+
 ## 📩 Stay Updated
 
 - Website: [openselfservice.com](https://www.openselfservice.com)
@@ -107,28 +110,3 @@ Open Self Service is **open-source software** licensed under the **MIT License**
 ## Built by Hycom
 
 O2S is maintained as an open-source project by **[hycom.digital](https://hycom.digital)** - a Polish tech company that delivers enterprise digital self-service and e-commerce solutions.
-
-
-Hey everyone!
-
-We’ve just published a new Medusa plugin that might be useful for those of you building B2B customer portals or after-sales platforms.
-
-Medusa Assets & Services Plugin
-It extends Medusa with support for:
-Assets (e.g. purchased products with serial numbers assigned to a customer)
-Service Instances (e.g. paid service plans assigned to purchased items or customers)
-
-These models are often needed in B2B use cases where customers need to track and manage their products or services post-sale. Now you can manage them directly in Medusa!
-
-The plugin was developed as part of our open-source project Open Self Service - a composable frontend framework for customer portals… but the plugin can be used standalone in any Medusa-based solution.
-
-👉 Check it out: https://github.com/o2sdev/medusa-plugin-assets-services
-📦 NPM: https://www.npmjs.com/package/medusa-plugin-assets-services
-🔍 Open Self Service website: https://www.openselfservice.com
-
-Happy to answer any questions or get your feedback!
-
-PS.
-You like our solution, its architecture or stack and would like to use it as a headless storefront for Medusa that is CMS-managed and flexible to connect other APIs?
-
-Currently Open Self Service is missing e-commerce features but we could adjust our roadmap. If this direction aligns with your needs, let us know via contact@openselfservice.com or DM.
