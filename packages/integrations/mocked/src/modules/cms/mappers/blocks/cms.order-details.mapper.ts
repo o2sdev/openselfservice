@@ -19,7 +19,7 @@ const MOCK_ORDER_DETAILS_BLOCK_EN: CMS.Model.OrderDetailsBlock.OrderDetailsBlock
     },
     overdue: {
         title: 'Overdue',
-        icon: 'Info',
+        icon: 'ThumbsUp',
         message: '{days} days overdue',
         altMessage: 'No orders to be paid',
     },
@@ -142,7 +142,7 @@ const MOCK_ORDER_DETAILS_BLOCK_DE: CMS.Model.OrderDetailsBlock.OrderDetailsBlock
     },
     overdue: {
         title: 'Überfällig',
-        icon: 'Info',
+        icon: 'ThumbsUp',
         message: '{days} Tage überfällig',
         altMessage: 'Keine Bestellungen zu zahlen',
     },
@@ -266,7 +266,7 @@ const MOCK_ORDER_DETAILS_BLOCK_PL: CMS.Model.OrderDetailsBlock.OrderDetailsBlock
     },
     overdue: {
         title: 'Niezrealizowane',
-        icon: 'Info',
+        icon: 'ThumbsUp',
         message: '{days} dni przekroczone',
         altMessage: 'Brak zamówień do zapłacenia',
     },

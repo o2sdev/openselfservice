@@ -38,11 +38,10 @@ export const PaymentsSummaryPure: React.FC<PaymentsSummaryPureProps> = ({ ...com
                     </div>
                 }
                 icon={
-                    overdue.isOverdue
-                        ? overdue.icon && <DynamicIcon name={overdue.icon} className="text-destructive" />
-                        : overdue.icon
+                    overdue.isOverdue ? <DynamicIcon name="CircleAlert" className="text-destructive" /> : overdue.icon
                 }
                 button={
+                    overdue.isOverdue &&
                     overdue.link && (
                         <TooltipHover
                             trigger={(setIsOpen) => (

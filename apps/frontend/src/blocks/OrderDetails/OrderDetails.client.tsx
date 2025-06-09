@@ -261,11 +261,10 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
                             <InfoCard
                                 title={data.order.overdue.title}
                                 icon={
-                                    data.order.overdue.icon && (
-                                        <DynamicIcon
-                                            name={data.order.overdue.icon}
-                                            className={cn(data.order.overdue.isOverdue && 'text-destructive')}
-                                        />
+                                    data.order.overdue.isOverdue ? (
+                                        <DynamicIcon name="CircleAlert" className="text-destructive" />
+                                    ) : (
+                                        data.order.overdue.icon
                                     )
                                 }
                                 value={
