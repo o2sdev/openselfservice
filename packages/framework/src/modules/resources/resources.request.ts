@@ -12,9 +12,12 @@ export class GetResourceListQuery extends PaginationQuery {
 
 export class GetServiceListQuery extends PaginationQuery {
     status?: ContractStatus;
+    type?: ProductType;
+    category?: string;
     billingAccountId?: string;
     dateFrom?: string;
     dateTo?: string;
+    sort?: string;
 }
 
 export class GetAssetListQuery extends PaginationQuery {
@@ -23,6 +26,7 @@ export class GetAssetListQuery extends PaginationQuery {
     billingAccountId?: string;
     dateFrom?: string;
     dateTo?: string;
+    sort?: string;
 }
 
 export class GetResourceParams {

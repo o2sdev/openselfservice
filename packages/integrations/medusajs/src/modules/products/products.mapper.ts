@@ -18,6 +18,7 @@ export const mapProduct = (
         name: productVariant?.product?.title || '',
         description: productVariant?.product?.description || '',
         shortDescription: (productVariant?.product?.subtitle as string) || '',
+        variantId: productVariant?.product?.id || '',
         image: productVariant?.product?.thumbnail
             ? {
                   url: productVariant?.product?.thumbnail,
@@ -119,7 +120,7 @@ export const mapFeaturedServices = (
     };
 };
 
-const mapProductType = (type?: HttpTypes.AdminProductType): Products.Model.ProductType => {
+export const mapProductType = (type?: HttpTypes.AdminProductType): Products.Model.ProductType => {
     if (!type) {
         return 'PHYSICAL';
     }

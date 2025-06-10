@@ -1,3 +1,4 @@
+import { HttpModule } from '@nestjs/axios';
 import { DynamicModule, Module } from '@nestjs/common';
 
 import { ApiConfig } from '@o2s/framework/modules';
@@ -13,6 +14,7 @@ export class FeaturedServiceListBlockModule {
         return {
             module: FeaturedServiceListBlockModule,
             providers: [FeaturedServiceListService, CMS.Service, Resources.Service],
+            imports: [HttpModule],
             controllers: [FeaturedServiceListController],
             exports: [FeaturedServiceListService],
         };

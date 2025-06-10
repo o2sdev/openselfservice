@@ -12,8 +12,7 @@ export const mapAsset = (asset: Asset): Resources.Model.Asset => {
         model: asset.name,
         serialNo: asset.serial_number,
         description: asset.description,
-        productId: asset?.product_variant?.product_id || '',
-        productVariantId: asset?.product_variant?.id || '',
+        product: asset.product,
         address: mapAddress(asset.address),
         endOfWarranty: asset?.end_of_warranty_date,
     };
@@ -42,8 +41,7 @@ export const mapService = (serviceInstance: ServiceInstance, defaultCurrency: st
         id: serviceInstance.id,
         __typename: 'Service',
         billingAccountId: '',
-        productId: serviceInstance?.product_variant?.product_id || '',
-        productVariantId: serviceInstance?.product_variant?.id || '',
+        product: serviceInstance.product,
         contract: {
             id: serviceInstance.id,
             type: '',

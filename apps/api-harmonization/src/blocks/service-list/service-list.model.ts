@@ -10,7 +10,10 @@ export class ServiceListBlock extends Block.Block {
     detailsLabel!: string;
     filters?: Models.Filters.Filters<Resources.Model.Contract & Products.Model.Product>;
     pagination?: Models.Pagination.Pagination;
-    services!: Services;
+    services!: {
+        data: Service[];
+        total: number;
+    };
     noResults!: {
         title: string;
         description?: string;
@@ -59,9 +62,3 @@ export class Service {
         tags: Products.Model.Product['tags'];
     };
 }
-
-export type ServiceWithProduct = Omit<Resources.Model.Service, 'productId'> & {
-    product: Products.Model.Product;
-};
-
-export type ServicesList = Models.Pagination.Paginated<ServiceWithProduct>;

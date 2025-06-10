@@ -1,4 +1,6 @@
-import { AddressDTO, HttpTypes } from '@medusajs/types';
+import { AddressDTO, AdminProductVariant, HttpTypes } from '@medusajs/types';
+
+import { Products } from '@o2s/framework/modules';
 
 export type Asset = {
     id: string;
@@ -12,6 +14,7 @@ export type Asset = {
     updated_at: string;
     address: AddressDTO;
     product_variant: HttpTypes.AdminProductVariant;
+    product: Products.Model.Product;
     totals: Totals;
 };
 
@@ -34,10 +37,8 @@ export type ServiceInstance = {
         email: string;
     };
     assets: Asset[];
-    product_variant: {
-        product_id: string;
-        id: string;
-    };
+    product_variant: AdminProductVariant;
+    product: Products.Model.Product;
     totals: Totals;
 };
 

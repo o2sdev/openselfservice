@@ -7,4 +7,5 @@ export class GetServiceListBlockQuery implements Omit<CMS.Request.GetCmsEntryPar
     type?: string;
     category?: string;
     status?: string;
+    sort?: string;
 }
