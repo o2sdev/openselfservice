@@ -46,6 +46,18 @@ const MOCK_SERVICE_LIST_BLOCK_EN: CMS.Model.ServiceListBlock.ServiceListBlock = 
         items: [
             {
                 __typename: 'FilterSelect',
+                id: 'sort',
+                label: 'Sort by',
+                allowMultiple: false,
+                options: [
+                    { label: 'Service number ascending', value: 'id_ASC' },
+                    { label: 'Service number descending', value: 'id_DESC' },
+                    { label: 'Service name ascending', value: 'name_ASC' },
+                    { label: 'Service name descending', value: 'name_DESC' },
+                ],
+            },
+            {
+                __typename: 'FilterSelect',
                 id: 'type',
                 label: 'Product Type',
                 allowMultiple: true,

@@ -6,7 +6,7 @@ const MOCK_ORDER_DETAILS_BLOCK_EN: CMS.Model.OrderDetailsBlock.OrderDetailsBlock
     totalValue: {
         title: 'Order value',
         icon: 'Package',
-        message: '{value} times',
+        message: '{value} items',
     },
     createdOrderAt: {
         title: 'Order date',
@@ -129,7 +129,7 @@ const MOCK_ORDER_DETAILS_BLOCK_DE: CMS.Model.OrderDetailsBlock.OrderDetailsBlock
     totalValue: {
         title: 'Gesamt',
         icon: 'Package',
-        message: '{value} mal',
+        message: '{value} Artikel',
     },
     createdOrderAt: {
         title: 'Bestellungsdatum',

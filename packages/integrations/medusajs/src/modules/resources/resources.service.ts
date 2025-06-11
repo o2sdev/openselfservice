@@ -3,7 +3,7 @@ import { HttpService } from '@nestjs/axios';
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { LoggerService } from '@o2s/utils.logger';
-import { Observable, catchError, map } from 'rxjs';
+import { Observable, catchError, forkJoin, map, switchMap } from 'rxjs';
 
 import { Auth, Products, Resources } from '@o2s/framework/modules';
 
@@ -32,6 +32,7 @@ export class ResourcesService extends Resources.Service {
         private readonly medusaJsService: MedusaJsService,
         private readonly authService: Auth.Service,
         private readonly config: ConfigService,
+        private readonly productService: Products.Service,
     ) {
         super();
         this.sdk = this.medusaJsService.getSdk();
@@ -67,8 +68,33 @@ export class ResourcesService extends Resources.Service {
                 },
             })
             .pipe(
-                map(({ data }) => {
-                    return mapServices(data, this.defaultCurrency);
+                switchMap(({ data }) => {
+                    const productRequests = data.serviceInstances.map((service) => {
+                        if (!service.product_variant.product_id) {
+                            throw new Error('Product ID not found');
+                        }
+
+                        return this.productService.getProduct({
+                            id: service.product_variant.product_id,
+                            variantId: service.product_variant.id,
+                            locale: query.locale,
+                        });
+                    });
+
+                    return forkJoin(productRequests).pipe(
+                        map((products) => {
+                            return mapServices(
+                                {
+                                    serviceInstances: data.serviceInstances,
+                                    count: data.count,
+                                    offset: data.offset,
+                                    limit: data.limit,
+                                },
+                                products,
+                                this.defaultCurrency,
+                            );
+                        }),
+                    );
                 }),
                 catchError((error) => {
                     return handleHttpError(error);
@@ -85,8 +111,22 @@ export class ResourcesService extends Resources.Service {
                 },
             )
             .pipe(
-                map(({ data }) => {
-                    return mapService(data.serviceInstance, this.defaultCurrency);
+                switchMap(({ data }) => {
+                    if (!data.serviceInstance.product_variant.product_id) {
+                        throw new Error('Product ID not found');
+                    }
+
+                    return this.productService
+                        .getProduct({
+                            id: data.serviceInstance.product_variant.product_id,
+                            variantId: data.serviceInstance.product_variant.id,
+                            locale: params.locale,
+                        })
+                        .pipe(
+                            map((product) => {
+                                return mapService(data.serviceInstance, product, this.defaultCurrency);
+                            }),
+                        );
                 }),
                 catchError((error) => {
                     return handleHttpError(error);
@@ -115,8 +155,24 @@ export class ResourcesService extends Resources.Service {
                 },
             })
             .pipe(
-                map(({ data }) => {
-                    return mapAssets(data);
+                switchMap(({ data }) => {
+                    const productRequests = data.assets.map((asset) => {
+                        if (!asset.product_variant.product_id) {
+                            throw new Error('Product ID not found');
+                        }
+
+                        return this.productService.getProduct({
+                            id: asset.product_variant.product_id,
+                            variantId: asset.product_variant.id,
+                            locale: query.locale,
+                        });
+                    });
+
+                    return forkJoin(productRequests).pipe(
+                        map((products) => {
+                            return mapAssets(data, products);
+                        }),
+                    );
                 }),
                 catchError((error) => {
                     return handleHttpError(error);
@@ -130,8 +186,22 @@ export class ResourcesService extends Resources.Service {
                 headers: this.medusaJsService.getMedusaAdminApiHeaders(),
             })
             .pipe(
-                map(({ data }) => {
-                    return mapAsset(data.asset);
+                switchMap(({ data }) => {
+                    if (!data.asset.product_variant.product_id) {
+                        throw new Error('Product ID not found');
+                    }
+
+                    return this.productService
+                        .getProduct({
+                            id: data.asset.product_variant.product_id,
+                            variantId: data.asset.product_variant.id,
+                            locale: params.locale,
+                        })
+                        .pipe(
+                            map((product) => {
+                                return mapAsset(data.asset, product);
+                            }),
+                        );
                 }),
                 catchError((error) => {
                     return handleHttpError(error);

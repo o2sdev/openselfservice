@@ -3,7 +3,7 @@ import { DynamicModule, Module } from '@nestjs/common';
 
 import { ApiConfig } from '@o2s/framework/modules';
 
-import { CMS, Products, Resources } from '../../models';
+import { CMS, Resources } from '../../models';
 
 import { ServiceListController } from './service-list.controller';
 import { ServiceListService } from './service-list.service';
@@ -13,10 +13,10 @@ export class ServiceListBlockModule {
     static register(_config: ApiConfig): DynamicModule {
         return {
             module: ServiceListBlockModule,
-            providers: [ServiceListService, CMS.Service, Resources.Service, Products.Service],
+            providers: [ServiceListService, CMS.Service, Resources.Service],
             controllers: [ServiceListController],
-            exports: [ServiceListService],
             imports: [HttpModule],
+            exports: [ServiceListService],
         };
     }
 }
