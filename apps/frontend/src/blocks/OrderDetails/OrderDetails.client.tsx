@@ -306,26 +306,31 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
                             icon={data.order.customerComment.icon}
                             description={data.order.customerComment.value}
                             button={
-                                <Sheet>
-                                    <SheetTrigger asChild>
-                                        <Button variant="secondary">
-                                            {data.order.customerComment.link.icon && (
-                                                <DynamicIcon name={data.order.customerComment.link.icon} size={16} />
-                                            )}
-                                            {data.order.customerComment.link.label}
-                                        </Button>
-                                    </SheetTrigger>
+                                data.order.customerComment.value && (
+                                    <Sheet>
+                                        <SheetTrigger asChild>
+                                            <Button variant="secondary">
+                                                {data.order.customerComment.link.icon && (
+                                                    <DynamicIcon
+                                                        name={data.order.customerComment.link.icon}
+                                                        size={16}
+                                                    />
+                                                )}
+                                                {data.order.customerComment.link.label}
+                                            </Button>
+                                        </SheetTrigger>
 
-                                    <SheetContent closeLabel={data.labels.close} className="flex flex-col gap-2">
-                                        <SheetHeader>
-                                            <SheetTitle>{data.order.customerComment.title}</SheetTitle>
-                                        </SheetHeader>
-                                        <RichText
-                                            content={data.order.customerComment.value}
-                                            className="text-muted-foreground"
-                                        />
-                                    </SheetContent>
-                                </Sheet>
+                                        <SheetContent closeLabel={data.labels.close} className="flex flex-col gap-2">
+                                            <SheetHeader>
+                                                <SheetTitle>{data.order.customerComment.title}</SheetTitle>
+                                            </SheetHeader>
+                                            <RichText
+                                                content={data.order.customerComment.value}
+                                                className="text-muted-foreground"
+                                            />
+                                        </SheetContent>
+                                    </Sheet>
+                                )
                             }
                         />
                     </div>

@@ -15,8 +15,8 @@ export class ServiceListBlockModule {
             module: ServiceListBlockModule,
             providers: [ServiceListService, CMS.Service, Resources.Service],
             controllers: [ServiceListController],
-            exports: [ServiceListService],
             imports: [HttpModule],
+            exports: [ServiceListService],
         };
     }
 }

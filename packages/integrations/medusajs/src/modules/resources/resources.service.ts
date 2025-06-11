@@ -3,7 +3,7 @@ import { HttpService } from '@nestjs/axios';
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { LoggerService } from '@o2s/utils.logger';
-import { Observable, catchError, map, switchMap } from 'rxjs';
+import { Observable, catchError, forkJoin, map, switchMap } from 'rxjs';
 
 import { Auth, Products, Resources } from '@o2s/framework/modules';
 
@@ -68,8 +68,88 @@ export class ResourcesService extends Resources.Service {
                 },
             })
             .pipe(
-                map(({ data }) => {
-                    return mapServices(data, this.defaultCurrency);
+                switchMap(({ data }) => {
+                    // Collect all product IDs
+                    const productIds = new Map<string, { id: string; variantId: string }>();
+
+                    data.serviceInstances.forEach((service: ServiceInstance) => {
+                        if (service.product_variant.product_id) {
+                            productIds.set(service.product_variant.id, {
+                                id: service.product_variant.product_id,
+                                variantId: service.product_variant.id,
+                            });
+                        }
+
+                        service.assets?.forEach((asset) => {
+                            if (asset.product_variant.product_id) {
+                                productIds.set(asset.product_variant.id, {
+                                    id: asset.product_variant.product_id,
+                                    variantId: asset.product_variant.id,
+                                });
+                            }
+                        });
+                    });
+
+                    // Fetch all products at once
+                    const productRequests = Array.from(productIds.values()).map(({ id, variantId }) =>
+                        this.productService
+                            .getProduct({
+                                id,
+                                variantId,
+                                locale: query.locale,
+                            })
+                            .pipe(
+                                map((product) => ({
+                                    key: variantId,
+                                    product,
+                                })),
+                            ),
+                    );
+
+                    return forkJoin(productRequests).pipe(
+                        map((products) => {
+                            // Create a map of products for easy access
+                            const productsMap = new Map(products.map(({ key, product }) => [key, product]));
+
+                            // Combine products with services
+                            const servicesWithProducts = data.serviceInstances.map((service) => {
+                                const serviceProduct = productsMap.get(service.product_variant.id);
+
+                                if (!serviceProduct) {
+                                    throw new Error(`Product not found for service ${service.id}`);
+                                }
+
+                                const assetsWithProducts = service.assets?.map((asset) => {
+                                    const assetProduct = productsMap.get(asset.product_variant.id);
+
+                                    if (!assetProduct) {
+                                        throw new Error(`Product not found for asset ${asset.id}`);
+                                    }
+
+                                    return {
+                                        ...asset,
+                                        product: assetProduct,
+                                    };
+                                });
+
+                                return {
+                                    ...service,
+                                    product: serviceProduct,
+                                    assets: assetsWithProducts,
+                                };
+                            });
+
+                            return mapServices(
+                                {
+                                    serviceInstances: servicesWithProducts,
+                                    count: data.count,
+                                    offset: data.offset,
+                                    limit: data.limit,
+                                },
+                                this.defaultCurrency,
+                            );
+                        }),
+                    );
                 }),
                 catchError((error) => {
                     return handleHttpError(error);
@@ -130,8 +210,62 @@ export class ResourcesService extends Resources.Service {
                 },
             })
             .pipe(
-                map(({ data }) => {
-                    return mapAssets(data);
+                switchMap(({ data }) => {
+                    // Collect all product IDs
+                    const productIds = new Map<string, { id: string; variantId: string }>();
+
+                    data.assets.forEach((asset) => {
+                        if (asset.product_variant.product_id) {
+                            productIds.set(asset.product_variant.id, {
+                                id: asset.product_variant.product_id,
+                                variantId: asset.product_variant.id,
+                            });
+                        }
+                    });
+
+                    // Fetch all products at once
+                    const productRequests = Array.from(productIds.values()).map(({ id, variantId }) =>
+                        this.productService
+                            .getProduct({
+                                id,
+                                variantId,
+                                locale: query.locale,
+                            })
+                            .pipe(
+                                map((product) => ({
+                                    key: variantId,
+                                    product,
+                                })),
+                            ),
+                    );
+
+                    return forkJoin(productRequests).pipe(
+                        map((products) => {
+                            // Create a map of products for easy access
+                            const productsMap = new Map(products.map(({ key, product }) => [key, product]));
+
+                            // Combine products with assets
+                            const assetsWithProducts = data.assets.map((asset) => {
+                                const assetProduct = productsMap.get(asset.product_variant.id);
+
+                                if (!assetProduct) {
+                                    throw new Error(`Product not found for asset ${asset.id}`);
+                                }
+
+                                return {
+                                    ...asset,
+                                    product: assetProduct,
+                                };
+                            });
+
+                            return mapAssets({
+                                assets: assetsWithProducts,
+                                count: data.count,
+                                offset: data.offset,
+                                limit: data.limit,
+                            });
+                        }),
+                    );
                 }),
                 catchError((error) => {
                     return handleHttpError(error);

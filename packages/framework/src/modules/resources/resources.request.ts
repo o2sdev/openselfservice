@@ -18,6 +18,7 @@ export class GetServiceListQuery extends PaginationQuery {
     dateFrom?: string;
     dateTo?: string;
     sort?: string;
+    locale?: string;
 }
 
 export class GetAssetListQuery extends PaginationQuery {
@@ -27,6 +28,7 @@ export class GetAssetListQuery extends PaginationQuery {
     dateFrom?: string;
     dateTo?: string;
     sort?: string;
+    locale?: string;
 }
 
 export class GetResourceParams {
