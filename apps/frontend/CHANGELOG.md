@@ -1,5 +1,19 @@
 # @o2s/frontend
 
+## 1.5.0
+
+### Minor Changes
+
+- fb98e38: feat: align overdue cards state on Invoices and OrderDetails pages
+
+### Patch Changes
+
+- Updated dependencies [fb98e38]
+- Updated dependencies [6949717]
+    - @o2s/integrations.mocked@1.5.0
+    - @o2s/api-harmonization@1.5.0
+    - @o2s/framework@1.5.0
+
 ## 1.4.0
 
 ### Minor Changes
