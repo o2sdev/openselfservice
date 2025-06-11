@@ -6,7 +6,7 @@ tags: [integrations, tech, backend]
 authors: [adam.makiewicz, jan.jagoda]
 ---
 
-We’re excited to share the initial release of our integration between **Open Self Service** and [Medusa.js](https://medusajs.com/).
+We’re excited to share the initial release of our integration between **Open Self Service** and [Medusa](https://medusajs.com/).
 
 This integration allows developers to easily display commerce-related data such as **Orders**, **Assets**, and **Services** within customer-facing portals built with O2S.
 
@@ -16,9 +16,8 @@ This integration allows developers to easily display commerce-related data such 
 
 ## Why integrate Medusa with O2S?
 
-Open Self Service is not a classic storefront. It's a full-stack frontend framework for customer portals — enabling use cases like after-sales, self-service, support requests, or knowledge base apps.
-
-Medusa, on the other hand, is an excellent choice for headless commerce logic — fast, modular, and open.
+Open Self Service is a full-stack frontend framework for customer portals - applications designed for efficient customer support, combining data from multiple sources and offering rich self-service capabilities.
+Medusa, on the other hand, is an excellent choice for headless commerce logic - fast, customizable, and open.
 
 By combining both, you can:
 
@@ -30,7 +29,7 @@ By combining both, you can:
 ## What’s included in the integration?
 
 We created a dedicated Medusa plugin:
-[medusa-plugin-assets-services on GitHub](https://github.com/o2sdev/medusa-plugin-assets-services)
+[see medusa-plugin-assets-services on GitHub](https://github.com/o2sdev/medusa-plugin-assets-services)
 
 This plugin adds support for two new models:
 
@@ -44,23 +43,22 @@ Additionally, it enables creation of product references between variants with ty
 These are **fully accessible via the Medusa API** and can be queried from the frontend app using our **API Harmonization Layer**.
 
 ## What does it look like in Medusa and Open Self Service?
+
 Once integrated, O2S provides the following out-of-the-box screens:
 
-- **Orders page** with list, status info, and order details
+- **Orders page** with list, status info, and order details.
   Supports sorting, pagination, and orders summary metrics.
 
-- **Services page** presenting customer's services
-  Data pulled from Medusa API (ServiceInstance model).
+- **Services page** presenting customer's services. Data pulled from Medusa API (ServiceInstance model).
 
-- **(Optional) Assets page** (currently not part of open-sourced O2S)
-  Displays assigned/purchased devices / products.
+- **(Optional) Assets page** (currently not part of open-sourced O2S). Displays assigned/purchased devices / products.
 
 In Medusa the plugin adds admin widgets to view and manage data, e.g.:
 
-- **Service instances list**  
+- **Service instances list**
   ![Service instances list](service-instances-list.png)
 
-- **Asset details**  
+- **Asset details**
   ![Asset details](asset-details.png)
 
 
@@ -80,15 +78,14 @@ You can find both:
 ## What’s next?
 
 We’re planning to extend this integration further:
-- Add **Product** APIs
-- Potentially, somewhere in future add other commerce features to our frontend and extend e-commerce integration
+- Add handling of **Product** endpoints (simple product catalogue)
+- Potentially, somewhere in future cover even more endpoints and add more commerce features to the frontend app so that O2S could be used like a full sales and customr support solution.
 
 If you're working with Medusa and looking to build **something beyond a classic shop**, we’d love your feedback.
 
 Let us know what you'd like to see next.
 And if you find it useful -> give us a ⭐ on GitHub 🙌
 
-- [openselfservice.com](https://openselfservice.com)
 - [github.com/o2sdev/openselfservice](https://github.com/o2sdev/openselfservice)
 - [Demo](https://demo.openselfservice.com)
 
