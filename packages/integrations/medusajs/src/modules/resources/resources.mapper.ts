@@ -1,10 +1,10 @@
 import { AddressDTO } from '@medusajs/types';
 
-import { Models, Resources } from '@o2s/framework/modules';
+import { Models, Products, Resources } from '@o2s/framework/modules';
 
 import { Asset, AssetsResponse, ServiceInstance, ServiceInstancesResponse } from './response.types';
 
-export const mapAsset = (asset: Asset): Resources.Model.Asset => {
+export const mapAsset = (asset: Asset, product: Products.Model.Product): Resources.Model.Asset => {
     return {
         id: asset.id,
         __typename: 'Asset',
@@ -12,36 +12,58 @@ export const mapAsset = (asset: Asset): Resources.Model.Asset => {
         model: asset.name,
         serialNo: asset.serial_number,
         description: asset.description,
-        product: asset.product,
+        product: product,
         address: mapAddress(asset.address),
         endOfWarranty: asset?.end_of_warranty_date,
     };
 };
 
-export const mapAssets = (data: AssetsResponse): Resources.Model.Assets => {
+export const mapAssets = (data: AssetsResponse, products: Products.Model.Product[]): Resources.Model.Assets => {
     return {
-        data: data?.assets.map((asset) => {
-            return mapAsset(asset);
-        }),
+        data: data?.assets
+            .map((asset) => {
+                const product = products.find((p) => p.id === asset.product_variant.product_id);
+                if (!product) {
+                    return undefined;
+                }
+                return mapAsset(asset, product);
+            })
+            .filter((asset) => asset !== undefined),
         total: data.count,
     };
 };
 
-export const mapServices = (data: ServiceInstancesResponse, defaultCurrency: string): Resources.Model.Services => {
+export const mapServices = (
+    data: ServiceInstancesResponse,
+    products: Products.Model.Product[],
+    defaultCurrency: string,
+): Resources.Model.Services => {
+    const services = data?.serviceInstances
+        .map((service) => {
+            const product = products.find((p) => p.id === service.product_variant.product_id);
+            if (!product) {
+                return undefined;
+            }
+            return mapService(service, product, defaultCurrency);
+        })
+        .filter((service) => service !== undefined);
+
     return {
-        data: data?.serviceInstances.map((service) => {
-            return mapService(service, defaultCurrency);
-        }),
-        total: data.count,
+        data: services,
+        total: services.length,
     };
 };
 
-export const mapService = (serviceInstance: ServiceInstance, defaultCurrency: string): Resources.Model.Service => {
+export const mapService = (
+    serviceInstance: ServiceInstance,
+    product: Products.Model.Product,
+    defaultCurrency: string,
+): Resources.Model.Service => {
     return {
         id: serviceInstance.id,
         __typename: 'Service',
         billingAccountId: '',
-        product: serviceInstance.product,
+        product: product,
         contract: {
             id: serviceInstance.id,
             type: '',
@@ -57,7 +79,7 @@ export const mapService = (serviceInstance: ServiceInstance, defaultCurrency: st
         assets:
             serviceInstance?.assets.length > 0
                 ? serviceInstance.assets.map((asset) => {
-                      return mapAsset(asset);
+                      return mapAsset(asset, {} as Products.Model.Product);
                   })
                 : [],
     };

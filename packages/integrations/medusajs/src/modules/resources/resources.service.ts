@@ -69,83 +69,28 @@ export class ResourcesService extends Resources.Service {
             })
             .pipe(
                 switchMap(({ data }) => {
-                    // Collect all product IDs
-                    const productIds = new Map<string, { id: string; variantId: string }>();
-
-                    data.serviceInstances.forEach((service: ServiceInstance) => {
-                        if (service.product_variant.product_id) {
-                            productIds.set(service.product_variant.id, {
-                                id: service.product_variant.product_id,
-                                variantId: service.product_variant.id,
-                            });
+                    const productRequests = data.serviceInstances.map((service) => {
+                        if (!service.product_variant.product_id) {
+                            throw new Error('Product ID not found');
                         }
 
-                        service.assets?.forEach((asset) => {
-                            if (asset.product_variant.product_id) {
-                                productIds.set(asset.product_variant.id, {
-                                    id: asset.product_variant.product_id,
-                                    variantId: asset.product_variant.id,
-                                });
-                            }
+                        return this.productService.getProduct({
+                            id: service.product_variant.product_id,
+                            variantId: service.product_variant.id,
+                            locale: query.locale,
                         });
                     });
 
-                    // Fetch all products at once
-                    const productRequests = Array.from(productIds.values()).map(({ id, variantId }) =>
-                        this.productService
-                            .getProduct({
-                                id,
-                                variantId,
-                                locale: query.locale,
-                            })
-                            .pipe(
-                                map((product) => ({
-                                    key: variantId,
-                                    product,
-                                })),
-                            ),
-                    );
-
                     return forkJoin(productRequests).pipe(
                         map((products) => {
-                            // Create a map of products for easy access
-                            const productsMap = new Map(products.map(({ key, product }) => [key, product]));
-
-                            // Combine products with services
-                            const servicesWithProducts = data.serviceInstances.map((service) => {
-                                const serviceProduct = productsMap.get(service.product_variant.id);
-
-                                if (!serviceProduct) {
-                                    throw new Error(`Product not found for service ${service.id}`);
-                                }
-
-                                const assetsWithProducts = service.assets?.map((asset) => {
-                                    const assetProduct = productsMap.get(asset.product_variant.id);
-
-                                    if (!assetProduct) {
-                                        throw new Error(`Product not found for asset ${asset.id}`);
-                                    }
-
-                                    return {
-                                        ...asset,
-                                        product: assetProduct,
-                                    };
-                                });
-
-                                return {
-                                    ...service,
-                                    product: serviceProduct,
-                                    assets: assetsWithProducts,
-                                };
-                            });
-
                             return mapServices(
                                 {
-                                    serviceInstances: servicesWithProducts,
+                                    serviceInstances: data.serviceInstances,
                                     count: data.count,
                                     offset: data.offset,
                                     limit: data.limit,
                                 },
+                                products,
                                 this.defaultCurrency,
                             );
                         }),
@@ -179,7 +124,7 @@ export class ResourcesService extends Resources.Service {
                         })
                         .pipe(
                             map((product) => {
-                                return mapService({ ...data.serviceInstance, product: product }, this.defaultCurrency);
+                                return mapService(data.serviceInstance, product, this.defaultCurrency);
                             }),
                         );
                 }),
@@ -211,59 +156,21 @@ export class ResourcesService extends Resources.Service {
             })
             .pipe(
                 switchMap(({ data }) => {
-                    // Collect all product IDs
-                    const productIds = new Map<string, { id: string; variantId: string }>();
-
-                    data.assets.forEach((asset) => {
-                        if (asset.product_variant.product_id) {
-                            productIds.set(asset.product_variant.id, {
-                                id: asset.product_variant.product_id,
-                                variantId: asset.product_variant.id,
-                            });
+                    const productRequests = data.assets.map((asset) => {
+                        if (!asset.product_variant.product_id) {
+                            throw new Error('Product ID not found');
                         }
-                    });
 
-                    // Fetch all products at once
-                    const productRequests = Array.from(productIds.values()).map(({ id, variantId }) =>
-                        this.productService
-                            .getProduct({
-                                id,
-                                variantId,
-                                locale: query.locale,
-                            })
-                            .pipe(
-                                map((product) => ({
-                                    key: variantId,
-                                    product,
-                                })),
-                            ),
-                    );
+                        return this.productService.getProduct({
+                            id: asset.product_variant.product_id,
+                            variantId: asset.product_variant.id,
+                            locale: query.locale,
+                        });
+                    });
 
                     return forkJoin(productRequests).pipe(
                         map((products) => {
-                            // Create a map of products for easy access
-                            const productsMap = new Map(products.map(({ key, product }) => [key, product]));
-
-                            // Combine products with assets
-                            const assetsWithProducts = data.assets.map((asset) => {
-                                const assetProduct = productsMap.get(asset.product_variant.id);
-
-                                if (!assetProduct) {
-                                    throw new Error(`Product not found for asset ${asset.id}`);
-                                }
-
-                                return {
-                                    ...asset,
-                                    product: assetProduct,
-                                };
-                            });
-
-                            return mapAssets({
-                                assets: assetsWithProducts,
-                                count: data.count,
-                                offset: data.offset,
-                                limit: data.limit,
-                            });
+                            return mapAssets(data, products);
                         }),
                     );
                 }),
@@ -292,7 +199,7 @@ export class ResourcesService extends Resources.Service {
                         })
                         .pipe(
                             map((product) => {
-                                return mapAsset({ ...data.asset, product: product });
+                                return mapAsset(data.asset, product);
                             }),
                         );
                 }),
