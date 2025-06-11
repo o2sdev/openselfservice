@@ -61,6 +61,10 @@ In Medusa the plugin adds admin widgets to view and manage data, e.g.:
 - **Asset details**
   ![Asset details](asset-details.png)
 
+In our frontend app Medusa is the data source for the Orders, Services and Assets (not open-sourced) screens:
+
+![Orders history](open-self-service-orders-medusa.png)
+
 
 ## Technical details
 
