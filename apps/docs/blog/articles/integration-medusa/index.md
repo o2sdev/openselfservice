@@ -37,6 +37,10 @@ This plugin adds support for two new models:
 - `Asset` - represents purchased items with serial numbers or support-relevant metadata
 - `ServiceInstance` - describes purchased or assigned services for the customer
 
+Additionally, it enables creation of product references between variants with types such as spare parts, replacements, accessories, and more.
+
+![service-instances-list](product-references.png)
+
 These are **fully accessible via the Medusa API** and can be queried from the frontend app using our **API Harmonization Layer**.
 
 ## What does it look like in Medusa and Open Self Service?
@@ -51,14 +55,20 @@ Once integrated, O2S provides the following out-of-the-box screens:
 - **(Optional) Assets page** (currently not part of open-sourced O2S)
   Displays assigned/purchased devices / products.
 
-In Medusa the plugin adds a few editing screens, e.g.:
+In Medusa the plugin adds admin widgets to view and manage data, e.g.:
 
-[//]: # (> ![Medusa plugin UI preview]&#40;medusa-plugin-ui.png&#41;)
+- **Service instances list**  
+  ![Service instances list](service-instances-list.png)
+
+- **Asset details**  
+  ![Asset details](asset-details.png)
 
 
 ## Technical details
 
-- The Medusa plugin is installed via npm and automatically adds `Asset` and `ServiceInstance` entities to your Medusa instance.
+The Medusa plugin was build using the standard approach outlined in [Medusa's plugin creation documentation](https://docs.medusajs.com/learn/fundamentals/plugins/create).
+
+- Plugin is installed via npm and automatically adds `Asset` and `ServiceInstance` entities to your Medusa instance.
 - These are exposed via REST API and can be used with any frontend (not only O2S).
 - In O2S, you configure a Medusa integration module that maps the data to O2S’s normalized schema.
 
