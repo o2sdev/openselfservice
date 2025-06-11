@@ -1,5 +1,13 @@
 # @o2s/integrations.mocked
 
+## 1.5.1
+
+### Patch Changes
+
+- 7fdb9c9: added delete user with id method in users module
+- Updated dependencies [7fdb9c9]
+    - @o2s/framework@1.5.1
+
 ## 1.5.0
 
 ### Minor Changes
