@@ -1,0 +1,56 @@
+/* --------------------------
+   Contact Page
+   -------------------------- */
+.contactContainer {
+    overflow: hidden;
+    min-height: 400px;
+}
+.contactFormText {
+    color: var(--inverted-foreground-color);
+}
+
+.contactFormText a {
+    font-weight: bold;
+}
+
+.contactFormH2 {
+    color: var(--inverted-foreground-color);
+    font-size: 1.5rem;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+.text-highlighted {
+    color: var(--color-highlighted, #21d99a);
+}
+
+.font-extrabold {
+    font-weight: 800;
+}
+
+.msg {
+    display: flex;
+}
+.msg:before {
+    content: '';
+    display: flex;
+    height: 23px;
+    min-width: 24px;
+    width: 24px;
+    margin-right: 0.5rem;
+}
+.error {
+    color: #d61830;
+}
+.error:before {
+    background: url('../../src/assets/icons/circle-alert.svg') no-repeat;
+}
+.success {
+    color: var(--inverted-foreground-color);
+}
+.success:before {
+    background: url('../../src/assets/icons/circle-check.svg') no-repeat;
+}
+body:not(.navigation-with-keyboard) *:not(input):focus {
+    outline-width: 2px;
+}

@@ -40,9 +40,11 @@
     --ifm-leading-desktop: 1;
 
     /* Navbar & Menu */
-    --ifm-navbar-height: 64px;
-    --ifm-navbar-padding-vertical: 12px;
-    --ifm-navbar-padding-horizontal: 1rem;
+    --ifm-navbar-height: 88px;
+    --ifm-navbar-padding-vertical: 1.5rem;
+    --ifm-navbar-padding-horizontal: 1.5rem;
+    --ifm-navbar-item-padding-vertical: 0.25rem;
+    --ifm-navbar-item-padding-horizontal: 0rem;
     --ifm-navbar-background-color: #001360;
     --ifm-navbar-link-color: #ffffff;
     --ifm-menu-color: #ffffff;
@@ -96,6 +98,8 @@
     /* Inne */
     --foreground: 0 100% 100%;
     --ifm-toc-link-color: #fff;
+
+    --inverted-foreground-color: #000d42;
 
     /*  https://github.com/easyops-cn/docusaurus-search-local?tab=readme-ov-file#custom-styles  */
     /*--search-local-modal-background: #fff;*/
@@ -203,7 +207,9 @@ blockquote {
     margin: 1rem 0;
     padding: 0.5rem 1rem;
 }
-
+textarea {
+    font-family: var(--ifm-font-family-base);
+}
 /* --------------------------
    MENU
    -------------------------- */
@@ -411,11 +417,31 @@ aside:not(.theme-doc-sidebar-container) {
 
 .navbar__item {
     display: flex;
+    margin: 0 0.75rem;
+}
+.navbar__items--right > :last-child {
+    padding-right: 2rem;
+}
+.navbar .button {
+    height: auto;
+    padding: 0.5rem 1rem;
+    border: none;
+    font-size: 1rem;
+}
+.navbar .button:hover {
+    border: none;
+}
+.navbar .button-secondary:hover {
+    background-color: #001a85;
 }
 
 @media (max-width: 996px) {
     .navbar__item {
-        display: none;
+        display: none !important;
+    }
+    .menu__list-item .button {
+        margin: var(--ifm-menu-link-padding-horizontal);
+        margin-bottom: 1rem;
     }
 }
 
@@ -424,7 +450,7 @@ aside:not(.theme-doc-sidebar-container) {
     display: flex;
     height: 20px;
     width: 20px;
-    margin-right: 0.5rem;
+    margin-right: 0.8rem;
 }
 
 /* Navbar - docs only!!! */
@@ -455,17 +481,22 @@ aside:not(.theme-doc-sidebar-container) {
 .navbar__item--github:before {
     background: url('../../src/assets/icons/github.svg') no-repeat;
 }
-.navbar__item.navbar__link.navbar__item--github.navbar__link--active::before,
-.navbar__item.navbar__link.navbar__item--github:hover:before {
-    background: url('../../src/assets/icons/github-active.svg') no-repeat;
-}
+/*.navbar__item.navbar__link.navbar__item--github.navbar__link--active::before,*/
+/*.navbar__item.navbar__link.navbar__item--github:hover:before {*/
+/*    background: url('../../src/assets/icons/github-active.svg') no-repeat;*/
+/*}*/
 
 .navbar__item--discord:before {
     background: url('../../src/assets/icons/discord.svg') no-repeat;
+    width: 24px;
 }
 .navbar__item.navbar__link.navbar__item--discord.navbar__link--active::before,
 .navbar__item.navbar__link.navbar__item--discord:hover:before {
     background: url('../../src/assets/icons/discord-active.svg') no-repeat;
+}
+
+.navbar__item--contact:before {
+    display: none;
 }
 
 .markdown hr {
@@ -646,6 +677,14 @@ footer a {
 /* --------------------------
    SEARCH
    -------------------------- */
+
+.navbar__search {
+    display: none;
+}
+.plugin-docs .navbar__search {
+    display: block;
+}
+
 .navbar__search-input {
     align-self: stretch;
     color: #000d42;
@@ -759,4 +798,97 @@ footer a {
     background: #4c5ce5;
     border: 1px solid #4c5ce5;
     color: #fff;
+}
+
+/* --------------------------
+   Page Gradients - make this styles global for future use
+   -------------------------- */
+.linearGradient {
+    background-image: linear-gradient(
+        153deg,
+        var(--page-linear-gradient-color-1) 0%,
+        var(--page-linear-gradient-color-2) 65.1%
+    );
+    background-size: 600%;
+    background-position: 0 0;
+}
+
+.gradientWrapper {
+    position: relative;
+    max-width: var(--ifm-container-width-xl);
+    margin: 0 auto;
+}
+
+.mainContentWrapper {
+    position: relative;
+    z-index: 1;
+}
+
+.gradientCircleGreen {
+    content: '';
+    position: absolute;
+    top: -725px;
+    right: -50%;
+    width: 1206px;
+    height: 1445px;
+    background: radial-gradient(50% 50% at 50% 50%, #34d399 0%, rgba(52, 211, 153, 0) 100%);
+    /* Animation */
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+    animation-name: radialGradientAnimation;
+}
+
+@media screen and (max-width: 767px) {
+    .gradientCircleGreen {
+        width: 100vw;
+    }
+}
+
+.gradientCircleBlue {
+    content: '';
+    position: absolute;
+    top: -720px;
+    left: -40%;
+    width: 1398px;
+    height: 1653px;
+    /*background: radial-gradient(50% 50% at 50% 50%, #2563EB 0%, rgba(37, 99, 235, 0.00) 100%);*/
+    background: radial-gradient(50% 50% at 50% 50%, rgba(37, 99, 235, 0.7) 0%, rgba(37, 99, 235, 0) 100%);
+    /* Animation */
+    animation-duration: 15s;
+    animation-iteration-count: infinite;
+    animation-name: radialGradientAnimation;
+}
+.gradientCircleBlue.static,
+.gradientCircleGreen.static {
+    animation: none;
+}
+.gradientCircleBlue.static {
+    left: -100%;
+}
+.linearGradient.static {
+    background-size: 100%;
+}
+
+@media screen and (max-width: 767px) {
+    .gradientCircleGreen,
+    .gradientCircleBlue {
+        animation: none;
+    }
+
+    .gradientCircleGreen {
+        width: 100vw;
+    }
+}
+
+@keyframes radialGradientAnimation {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
