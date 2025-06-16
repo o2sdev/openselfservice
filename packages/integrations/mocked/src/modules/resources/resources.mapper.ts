@@ -23,6 +23,18 @@ const MOCK_ASSET_1: Resources.Model.Asset = {
     status: 'ACTIVE',
     product: MOCK_PRODUCTS[0]!,
     endOfWarranty: '2027-12-31',
+    address: {
+        city: 'New York',
+        streetName: 'Broadway',
+        postalCode: '10001',
+        country: 'USA',
+        district: 'Manhattan',
+        region: 'New York',
+        streetNumber: '350',
+        apartment: '15A',
+        email: 'test@test.com',
+        phone: '1234567890',
+    },
 };
 
 const MOCK_ASSET_2: Resources.Model.Asset = {
@@ -36,6 +48,18 @@ const MOCK_ASSET_2: Resources.Model.Asset = {
     status: 'ACTIVE',
     product: MOCK_PRODUCTS[1]!,
     endOfWarranty: '2027-07-31',
+    address: {
+        city: 'Los Angeles',
+        streetName: 'Hollywood Boulevard',
+        postalCode: '90028',
+        country: 'USA',
+        district: 'Hollywood',
+        region: 'California',
+        streetNumber: '6801',
+        apartment: 'B',
+        email: 'test@test.com',
+        phone: '1234567890',
+    },
 };
 
 const MOCK_ASSET_3: Resources.Model.Asset = {
@@ -75,6 +99,18 @@ const MOCK_ASSET_5: Resources.Model.Asset = {
     status: 'ACTIVE',
     product: MOCK_PRODUCTS[4]!,
     endOfWarranty: '2027-04-21',
+    address: {
+        city: 'Toronto',
+        streetName: 'Yonge Street',
+        postalCode: 'M5B 2L7',
+        country: 'Canada',
+        district: 'Downtown',
+        region: 'Ontario',
+        streetNumber: '220',
+        apartment: '1203',
+        email: 'test@test.com',
+        phone: '1234567890',
+    },
 };
 
 const MOCK_ASSET_6: Resources.Model.Asset = {
@@ -88,6 +124,18 @@ const MOCK_ASSET_6: Resources.Model.Asset = {
     status: 'ACTIVE',
     product: MOCK_PRODUCTS[5]!,
     endOfWarranty: '2027-04-21',
+    address: {
+        city: 'Los Angeles',
+        streetName: 'Hollywood Boulevard',
+        postalCode: '90028',
+        country: 'USA',
+        district: 'Hollywood',
+        region: 'California',
+        streetNumber: '6801',
+        apartment: 'B',
+        email: 'test@test.com',
+        phone: '1234567890',
+    },
 };
 
 const MOCK_SERVICE_1: Resources.Model.Service = {
@@ -373,13 +421,12 @@ export const mapAssets = (
             total: 0,
         };
     }
-    const data = filteredAssets;
 
     if (sort) {
         const [field, order] = sort.split('_');
         const isAscending = order === 'ASC';
 
-        data.sort((a, b) => {
+        filteredAssets.sort((a, b) => {
             const aValue = a[field as keyof Resources.Model.Asset];
             const bValue = b[field as keyof Resources.Model.Asset];
 
@@ -400,8 +447,10 @@ export const mapAssets = (
         });
     }
 
+    const data = filteredAssets.slice(Number(offset), Number(offset) + Number(limit));
+
     return {
-        data: data.slice(Number(offset), Number(offset) + Number(limit)),
+        data: data,
         total: data.length,
     };
 };
@@ -460,13 +509,12 @@ export const mapServices = (
             total: 0,
         };
     }
-    const data = filteredServices;
 
     if (sort) {
         const [field, order] = sort.split('_');
         const isAscending = order === 'ASC';
 
-        data.sort((a, b) => {
+        filteredServices.sort((a, b) => {
             const aValue = a[field as keyof Resources.Model.Service];
             const bValue = b[field as keyof Resources.Model.Service];
 
@@ -483,8 +531,10 @@ export const mapServices = (
         });
     }
 
+    const data = filteredServices.slice(Number(offset), Number(offset) + Number(limit));
+
     return {
-        data: data.slice(Number(offset), Number(offset) + Number(limit)),
+        data: data,
         total: data.length,
     };
 };

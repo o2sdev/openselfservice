@@ -358,9 +358,47 @@ export const mapProducts = (options: Products.Request.GetProductListQuery): Prod
     };
 };
 
-export const mapRelatedProducts = (_options: Products.Request.GetRelatedProductListParams): Products.Model.Products => {
+export const mapRelatedProducts = (options: Products.Request.GetRelatedProductListParams): Products.Model.Products => {
+    const { offset = 0, limit = 10, sort } = options;
+
+    const products: Products.Model.Product[] = MOCK_PRODUCTS;
+
+    if (!products.length) {
+        return {
+            data: [],
+            total: 0,
+        };
+    }
+
+    if (sort) {
+        const [field, order] = sort.split('_');
+        const isAscending = order === 'ASC';
+
+        products.sort((a, b) => {
+            const aValue = a[field as keyof Products.Model.Product];
+            const bValue = b[field as keyof Products.Model.Product];
+
+            if (field === 'name') {
+                const aField = a.name;
+                const bField = b.name;
+                return isAscending ? aField.localeCompare(bField) : bField.localeCompare(aField);
+            } else if (field === 'price') {
+                const aPrice = a.price.value;
+                const bPrice = b.price.value;
+                return isAscending ? aPrice - bPrice : bPrice - aPrice;
+            } else if (typeof aValue === 'string' && typeof bValue === 'string') {
+                return isAscending ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+            } else if (typeof aValue === 'number' && typeof bValue === 'number') {
+                return isAscending ? aValue - bValue : bValue - aValue;
+            }
+            return 0;
+        });
+    }
+
+    const data = products.slice(Number(offset), Number(offset) + Number(limit));
+
     return {
-        data: MOCK_PRODUCTS,
-        total: MOCK_PRODUCTS.length,
+        data: data,
+        total: data.length,
     };
 };

@@ -15,7 +15,10 @@ export class GetProductParams {
 
 export class GetRelatedProductListParams {
     type!: ProductReferenceType;
-    id!: string;
-    variantId!: string;
+    productId!: string;
+    productVariantId?: string;
     locale?: string;
+    limit?: number;
+    offset?: number;
+    sort?: string;
 }
