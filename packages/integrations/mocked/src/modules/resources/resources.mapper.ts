@@ -422,11 +422,13 @@ export const mapAssets = (
         };
     }
 
+    const data = filteredAssets;
+
     if (sort) {
         const [field, order] = sort.split('_');
         const isAscending = order === 'ASC';
 
-        filteredAssets.sort((a, b) => {
+        data.sort((a, b) => {
             const aValue = a[field as keyof Resources.Model.Asset];
             const bValue = b[field as keyof Resources.Model.Asset];
 
@@ -447,10 +449,8 @@ export const mapAssets = (
         });
     }
 
-    const data = filteredAssets.slice(Number(offset), Number(offset) + Number(limit));
-
     return {
-        data: data,
+        data: data.slice(Number(offset), Number(offset) + Number(limit)),
         total: data.length,
     };
 };
@@ -510,11 +510,13 @@ export const mapServices = (
         };
     }
 
+    const data = filteredServices;
+
     if (sort) {
         const [field, order] = sort.split('_');
         const isAscending = order === 'ASC';
 
-        filteredServices.sort((a, b) => {
+        data.sort((a, b) => {
             const aValue = a[field as keyof Resources.Model.Service];
             const bValue = b[field as keyof Resources.Model.Service];
 
@@ -531,10 +533,8 @@ export const mapServices = (
         });
     }
 
-    const data = filteredServices.slice(Number(offset), Number(offset) + Number(limit));
-
     return {
-        data: data,
+        data: data.slice(Number(offset), Number(offset) + Number(limit)),
         total: data.length,
     };
 };
