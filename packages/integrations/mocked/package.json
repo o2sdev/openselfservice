@@ -9,7 +9,9 @@
         "./auth": "./dist/auth/index.js"
     },
     "files": [
-        "dist"
+        "dist",
+        "prisma",
+        ".env.local"
     ],
     "scripts": {
         "prepare": "npx prisma generate && dotenv -e .env.local -- prisma migrate deploy && dotenv -e .env.local -- prisma db seed",
