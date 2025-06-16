@@ -1,5 +1,14 @@
 # @o2s/api-harmonization
 
+## 1.5.1
+
+### Patch Changes
+
+- 900d3d1: changed `FRONT_BASE_URLS` env variable to allow defining multiple origins for the API Harmonization Server
+- Updated dependencies [d878a0b]
+- Updated dependencies [85bb4bb]
+    - @o2s/integrations.mocked@1.6.1
+
 ## 1.5.0
 
 ### Minor Changes
