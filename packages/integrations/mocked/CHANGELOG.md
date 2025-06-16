@@ -1,5 +1,12 @@
 # @o2s/integrations.mocked
 
+## 1.6.1
+
+### Patch Changes
+
+- d878a0b: added postinstall stage to properly initialize database
+- 85bb4bb: fix: fixed pagination in products and resources mocks
+
 ## 1.6.0
 
 ### Minor Changes
