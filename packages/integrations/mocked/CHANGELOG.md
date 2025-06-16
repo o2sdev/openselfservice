@@ -1,5 +1,21 @@
 # @o2s/integrations.mocked
 
+## 1.6.0
+
+### Minor Changes
+
+- 2a0475c: feat: update products, resources mocks, InfoCard - layout fix
+
+    - updated model for GetRelatedProductListParams - renamed id and variantId to inform that we need to provide product data as params,
+    - added natural data to products and resources mocks,
+    - added sorting and filtering to products.mapper.ts,
+    - fixed InfoCard layout issue,
+
+### Patch Changes
+
+- Updated dependencies [2a0475c]
+    - @o2s/framework@1.6.0
+
 ## 1.5.1
 
 ### Patch Changes
