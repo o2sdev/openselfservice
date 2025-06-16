@@ -13,6 +13,7 @@
     ],
     "scripts": {
         "prepare": "npx prisma generate && dotenv -e .env.local -- prisma migrate deploy && dotenv -e .env.local -- prisma db seed",
+        "postinstall": "npx prisma generate && dotenv -e .env.local -- prisma migrate deploy && dotenv -e .env.local -- prisma db seed",
         "dev": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")",
         "build": "dotenv -e .env.local -- prisma migrate deploy && tsc && tsc-alias",
         "postbuild": "shx cp -r src/modules/invoices/resources dist/modules/invoices/",
