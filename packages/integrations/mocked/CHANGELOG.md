@@ -1,5 +1,11 @@
 # @o2s/integrations.mocked
 
+## 1.6.3
+
+### Patch Changes
+
+- 6102f12: added prisma files to package files
+
 ## 1.6.2
 
 ### Patch Changes
