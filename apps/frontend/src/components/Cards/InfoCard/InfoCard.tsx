@@ -10,13 +10,13 @@ import { InfoCardProps } from './InfoCard.types';
 export const InfoCard: React.FC<Readonly<InfoCardProps>> = ({ title, value, description, icon, button, className }) => {
     return (
         <Card className={cn('h-full w-full', className)}>
-            <div className="p-6 flex flex-col gap-2">
+            <div className="p-6 flex flex-col gap-2 h-full">
                 <div className="flex flex-row justify-between items-top gap-2">
                     <Typography variant="subtitle">{title}</Typography>
                     {typeof icon === 'string' ? <DynamicIcon name={icon} /> : icon}
                 </div>
-                <div className="flex flex-col sm:flex-row justify-between items-end gap-2">
-                    <div className="flex flex-col gap-2 w-full">
+                <div className="flex flex-col sm:flex-row justify-between items-end gap-2 h-full">
+                    <div className="flex flex-col gap-2 w-full h-full">
                         {typeof value === 'string' ? <Typography variant="highlightedBig">{value}</Typography> : value}
                         {typeof description === 'string' ? (
                             <div className="line-clamp-3">

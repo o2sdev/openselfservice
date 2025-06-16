@@ -77,7 +77,7 @@ export class ProductsService extends Products.Service {
     getRelatedProductList(params: Products.Request.GetRelatedProductListParams): Observable<Products.Model.Products> {
         return this.httpClient
             .get<RelatedProductsResponse>(
-                `${this.medusaJsService.getBaseUrl()}/admin/products/${params.id}/variants/${params.variantId}/references`,
+                `${this.medusaJsService.getBaseUrl()}/admin/products/${params.productId}/variants/${params.productVariantId}/references`,
                 {
                     headers: this.medusaJsService.getMedusaAdminApiHeaders(),
                     params: {
