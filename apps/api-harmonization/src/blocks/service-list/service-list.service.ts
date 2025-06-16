@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { Observable, concatMap, forkJoin, map, of, switchMap } from 'rxjs';
+import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
 import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
 
-import { CMS, Products, Resources } from '../../models';
+import { CMS, Resources } from '../../models';
 
 import { mapServiceList } from './service-list.mapper';
 import { ServiceListBlock } from './service-list.model';
@@ -14,12 +14,10 @@ export class ServiceListService {
     constructor(
         private readonly cmsService: CMS.Service,
         private readonly resourceService: Resources.Service,
-        private readonly productService: Products.Service,
     ) {}
 
     getServiceListBlock(query: GetServiceListBlockQuery, headers: AppHeaders): Observable<ServiceListBlock> {
         const cms = this.cmsService.getServiceListBlock({ ...query, locale: headers['x-locale'] });
-        const { status } = query;
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {
@@ -27,38 +25,16 @@ export class ServiceListService {
                     .getServiceList(
                         {
                             ...query,
-                            limit: query.limit || cms.pagination?.limit || 1,
+                            limit: query.limit || cms.pagination?.limit || 6,
                             offset: query.offset || 0,
-                            status: status as Resources.Model.ContractStatus,
+                            status: query.status as Resources.Model.ContractStatus,
+                            type: query.type as Resources.Model.ProductType,
+                            category: query.category,
+                            sort: query.sort,
                         },
                         headers['authorization'] || '',
                     )
                     .pipe(
-                        switchMap((services) => {
-                            if (!services.total) {
-                                return of({
-                                    total: 0,
-                                    data: [],
-                                });
-                            }
-
-                            const serviceList = services.data.map((service) =>
-                                this.productService
-                                    .getProduct({
-                                        id: service.productId,
-                                        variantId: service?.productVariantId,
-                                        locale: headers['x-locale'],
-                                    })
-                                    .pipe(map((product) => ({ ...service, product }))),
-                            );
-
-                            return forkJoin(serviceList).pipe(
-                                map((servicesList) => ({
-                                    total: services.total,
-                                    data: servicesList,
-                                })),
-                            );
-                        }),
                         map((services) =>
                             mapServiceList(services, cms, headers['x-locale'], headers['x-client-timezone'] || ''),
                         ),

@@ -5,13 +5,13 @@ const MOCK_PAYMENTS_SUMMARY_BLOCK_EN: CMS.Model.PaymentsSummaryBlock.PaymentsSum
     overdue: {
         title: 'Overdue',
         message: '{days} days overdue',
-        altMessage: 'No overdue invoices',
+        altMessage: 'All good. No outstanding payments',
         link: {
             label: 'Pay online',
             icon: 'ArrowUpRight',
             url: '',
         },
-        icon: 'Info',
+        icon: 'ThumbsUp',
     },
     toBePaid: {
         title: 'To be paid',
@@ -31,13 +31,13 @@ const MOCK_PAYMENTS_SUMMARY_BLOCK_PL: CMS.Model.PaymentsSummaryBlock.PaymentsSum
     overdue: {
         title: 'Zaległe',
         message: '{days} dni po terminie',
-        altMessage: 'Brak zaległych faktur',
+        altMessage: 'Wszystko w porządku. Brak zaległych płatności',
         link: {
             label: 'Zapłać online',
             icon: 'ArrowUpRight',
             url: '',
         },
-        icon: 'Info',
+        icon: 'ThumbsUp',
     },
     toBePaid: {
         title: 'Do zapłaty',
@@ -57,13 +57,13 @@ const MOCK_PAYMENTS_SUMMARY_BLOCK_DE: CMS.Model.PaymentsSummaryBlock.PaymentsSum
     overdue: {
         title: 'Überfällig',
         message: '{days} Tage überfällig',
-        altMessage: 'Keine überfälligen Rechnungen',
+        altMessage: 'Alles in Ordnung. Keine überfälligen Rechnungen',
         link: {
             label: 'Online bezahlen',
             icon: 'ArrowUpRight',
             url: '',
         },
-        icon: 'Info',
+        icon: 'ThumbsUp',
     },
     toBePaid: {
         title: 'Zu bezahlen',

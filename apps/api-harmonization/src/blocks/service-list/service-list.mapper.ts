@@ -2,12 +2,12 @@ import format from 'string-template';
 
 import { formatDateRelative } from '@o2s/api-harmonization/utils/date';
 
-import { CMS } from '../../models';
+import { CMS, Resources } from '../../models';
 
-import { Service, ServiceListBlock, ServiceWithProduct, ServicesList } from './service-list.model';
+import { Service, ServiceListBlock } from './service-list.model';
 
 export const mapServiceList = (
-    services: ServicesList,
+    services: Resources.Model.Services,
     cms: CMS.Model.ServiceListBlock.ServiceListBlock,
     locale: string,
     timezone: string,
@@ -29,7 +29,7 @@ export const mapServiceList = (
 };
 
 const mapService = (
-    service: ServiceWithProduct,
+    service: Resources.Model.Service,
     cms: CMS.Model.ServiceListBlock.ServiceListBlock,
     locale: string,
     timezone: string,

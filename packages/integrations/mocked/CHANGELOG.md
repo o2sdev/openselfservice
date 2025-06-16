@@ -1,5 +1,28 @@
 # @o2s/integrations.mocked
 
+## 1.5.1
+
+### Patch Changes
+
+- 7fdb9c9: added delete user with id method in users module
+- Updated dependencies [7fdb9c9]
+    - @o2s/framework@1.5.1
+
+## 1.5.0
+
+### Minor Changes
+
+- fb98e38: feat: align overdue cards state on Invoices and OrderDetails pages
+- 6949717: feat: updated resource integration - added product to the Resource model
+
+    - updated service-list and service-details blocks,
+    - added sorting and filters to mocks,
+
+### Patch Changes
+
+- Updated dependencies [6949717]
+    - @o2s/framework@1.5.0
+
 ## 1.4.0
 
 ### Minor Changes

@@ -35,7 +35,11 @@ export class UserService implements Users.Service {
         return of(mapCustomer(options.id)).pipe(responseDelay());
     }
 
-    deleteUser(): Observable<void> {
+    deleteCurrentUser(): Observable<void> {
+        throw new NotImplementedException('Delete current user method not implemented');
+    }
+
+    deleteUser(_options: Users.Request.GetUserParams): Observable<void> {
         throw new NotImplementedException('Delete user method not implemented');
     }
 }

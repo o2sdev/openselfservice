@@ -6,7 +6,10 @@ export const mapFeaturedServiceList = (
     featuredServices: Products.Model.Products,
     cms: CMS.Model.FeaturedServiceListBlock.FeaturedServiceListBlock,
 ): FeaturedServiceListBlock => {
-    const services = featuredServices.data.slice(0, cms.pagination?.limit || 3).map((product) => mapProduct(product));
+    const services = featuredServices.data
+        .slice(0, cms.pagination?.limit || 3)
+        .map((product) => mapProduct(product))
+        .filter((service) => service !== undefined);
 
     return {
         __typename: 'FeaturedServiceListBlock',
@@ -24,7 +27,11 @@ export const mapFeaturedServiceList = (
     };
 };
 
-const mapProduct = (product: Products.Model.Product): FeaturedService => {
+const mapProduct = (product: Products.Model.Product): FeaturedService | undefined => {
+    if (!product.id || !product.name) {
+        return undefined;
+    }
+
     return {
         id: product.id,
         name: product.name,

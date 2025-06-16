@@ -13,11 +13,12 @@ export const mapProduct = (
     //TODO: Find customer currency
     const price = productVariant.prices?.find((price) => price.currency_code.toUpperCase() === defaultCurrency);
     return {
-        id: productVariant.id,
+        id: productVariant?.product?.id || '',
         sku: productVariant?.sku || '',
         name: productVariant?.product?.title || '',
         description: productVariant?.product?.description || '',
         shortDescription: (productVariant?.product?.subtitle as string) || '',
+        variantId: productVariant.id,
         image: productVariant?.product?.thumbnail
             ? {
                   url: productVariant?.product?.thumbnail,
@@ -119,7 +120,7 @@ export const mapFeaturedServices = (
     };
 };
 
-const mapProductType = (type?: HttpTypes.AdminProductType): Products.Model.ProductType => {
+export const mapProductType = (type?: HttpTypes.AdminProductType): Products.Model.ProductType => {
     if (!type) {
         return 'PHYSICAL';
     }

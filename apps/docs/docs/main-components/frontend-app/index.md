@@ -20,31 +20,49 @@ This research outlines the core functionalities required for effective self-serv
 ### List of supported pages:
 
 #### Login
-A user authentication page integrated with **NextAuth**, supporting both email-based login and OAuth providers.
+A user authentication page integrated with **Auth.js**, supporting both email-based login and OAuth providers.
 
-#### User account (planned)
-Allow users to manage their profile information, including account settings, password updates, and preferences.
+Advanced features like RBAC or SSO could be provided through additional integrations e.g. with Keycloak (contact us for details).
 
 #### Dashboard
-Provide a personalized overview of customer-specific data, such as services, payments, notifications, or quick links to other portal features.
+Provides a personalized overview of customer-specific data, such as services, payments, notifications, or quick links to other portal features.
 
-#### Cases / Tickets (submission planned)
-Enable users to create, view, and manage support tickets or service requests. Includes a detailed ticket view and status tracking.
+#### User's context switcher
+The **context switcher** feature allows users to seamlessly switch between multiple organizations or accounts configured under a single user. This is especially useful in **multi-organization setups**, such as B2B scenarios, where users need to manage data for different entities.
+
+![services-preview](/img/blog/o2s-context-switcher.png)
+
+#### Cases / Tickets
+Enables users to browse, create, view, and manage support tickets or service requests.
+
+![services-preview](/img/blog/o2s-ticket-submission.png)
 
 #### Payments
-Display payment history, pending invoices, and transaction details, with potential integration to payment APIs or billing systems.
+Displays payment history, pending invoices, and transaction details, with potential integration to payment APIs or billing systems.
 
 #### Notifications
 A page to display user-specific notifications, such as updates on tickets, services, or system alerts.
 
-#### Services and products (planned)
-Showcase a list of customer-specific services or products with detailed views. These pages can also integrate with APIs for service configuration or updates.
+#### Services and products
+Showcases a list of customer-specific services or products with detailed views. These pages can also integrate with APIs for service configuration or updates.
 
-#### Knowledge base (planned)
+![services-preview](/img/blog/o2s-services.png)
+
+#### Customer's orders pages
+Users can also see and manage their orders (returned from an ERP or e-commerce).
+
+![services-preview](/img/blog/o2s-orders.png)
+
+#### Knowledge base
 A searchable help center powered by a CMS, enabling customers to find answers to their questions or browse categories.
+
+![kb-preview](/img/blog/o2s-knowledge-base.png)
 
 #### Navigation and footer
 Pre-configured navigation menus and footer components, easily managed via the CMS for updates and custom links.
+
+#### User account (basic implementation)
+Allows users to manage their profile information, including account settings, password updates, and preferences.
 
 ---
 

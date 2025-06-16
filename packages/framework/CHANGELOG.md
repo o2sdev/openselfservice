@@ -1,5 +1,20 @@
 # @o2s/framework
 
+## 1.5.1
+
+### Patch Changes
+
+- 7fdb9c9: added delete user with id method in users module
+
+## 1.5.0
+
+### Minor Changes
+
+- 6949717: feat: updated resource integration - added product to the Resource model
+
+    - updated service-list and service-details blocks,
+    - added sorting and filters to mocks,
+
 ## 1.4.0
 
 ### Minor Changes

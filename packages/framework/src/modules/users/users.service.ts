@@ -27,5 +27,6 @@ export abstract class UserService {
         options: Users.Request.GetCustomerParams,
         authorization?: string,
     ): Observable<Customer | undefined>;
-    abstract deleteUser(authorization?: string): Observable<void>;
+    abstract deleteCurrentUser(authorization?: string): Observable<void>;
+    abstract deleteUser(options: Users.Request.GetUserParams, authorization?: string): Observable<void>;
 }

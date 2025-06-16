@@ -53,7 +53,13 @@ export class UserController {
 
     @Delete('/me')
     @Auth.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
-    deleteUser(@Headers() headers: AppHeaders) {
-        return this.userService.deleteUser(headers.authorization);
+    deleteCurrentUser(@Headers() headers: AppHeaders) {
+        return this.userService.deleteCurrentUser(headers.authorization);
+    }
+
+    @Delete(':id')
+    @Auth.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
+    deleteUser(@Param() params: Request.GetUserParams, @Headers() headers: AppHeaders) {
+        return this.userService.deleteUser(params, headers.authorization);
     }
 }

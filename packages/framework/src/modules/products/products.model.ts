@@ -11,6 +11,7 @@ export class Product {
     name!: string;
     description!: string;
     shortDescription?: string;
+    variantId?: string;
     image?: Media.Media;
     price!: Price.Price;
     link!: string;
