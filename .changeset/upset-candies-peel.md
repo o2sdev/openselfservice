@@ -7,8 +7,7 @@
 
 feat: update products, resources mocks, InfoCard - layout fix
 
-- updated model for GetRelatedProductListParams, 
+- updated model for GetRelatedProductListParams - renamed id and variantId to inform that we need to provide product data as params, 
 - added natural data to products and resources mocks,
 - added sorting and filtering to products.mapper.ts,
 - fixed InfoCard layout issue,
-
