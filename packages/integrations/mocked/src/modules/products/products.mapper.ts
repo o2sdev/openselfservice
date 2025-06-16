@@ -370,11 +370,13 @@ export const mapRelatedProducts = (options: Products.Request.GetRelatedProductLi
         };
     }
 
+    const data = products;
+
     if (sort) {
         const [field, order] = sort.split('_');
         const isAscending = order === 'ASC';
 
-        products.sort((a, b) => {
+        data.sort((a, b) => {
             const aValue = a[field as keyof Products.Model.Product];
             const bValue = b[field as keyof Products.Model.Product];
 
@@ -395,10 +397,8 @@ export const mapRelatedProducts = (options: Products.Request.GetRelatedProductLi
         });
     }
 
-    const data = products.slice(Number(offset), Number(offset) + Number(limit));
-
     return {
-        data: data,
+        data: data.slice(Number(offset), Number(offset) + Number(limit)),
         total: data.length,
     };
 };
