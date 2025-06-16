@@ -1,5 +1,11 @@
 # @o2s/integrations.mocked
 
+## 1.6.2
+
+### Patch Changes
+
+- d1eeee2: reverted postinstall script as it fails when trying to initialise prisma
+
 ## 1.6.1
 
 ### Patch Changes
