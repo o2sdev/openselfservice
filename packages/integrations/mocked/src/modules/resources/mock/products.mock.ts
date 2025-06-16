@@ -5,7 +5,22 @@ export const MOCK_PRODUCTS: Products.Model.Product[] = [
         id: 'PRD-004',
         sku: 'ABC-12345-S-BL',
         name: 'Rotary Hammer',
-        description: 'Professional heavy-duty hammer drill for concrete and masonry',
+        description: `<h2>Detailed description</h2>
+<p>The PrecisionCut Laser TS1 Cutter is a state-of-the-art laser cutting system engineered for high-accuracy material processing across a wide range of industries. Designed with advanced laser technology and precision control systems, the TS1 delivers clean, intricate cuts with exceptional speed and reliability.</p>
+
+<ul>
+    <li>Advanced CO₂ or Fiber Laser Technology</li>
+    <li>Intuitive Touchscreen Interface</li>
+    <li>Customizable Cutting Parameters</li>
+    <li>Integrated Safety Features</li>
+    <li>24/7 Operation Capability</li>
+</ul>
+
+<p>Whether you're working with metals, plastics, wood, or composite materials, the TS1 offers unmatched performance for both prototyping and high-volume production. Equipped with a powerful CO₂ or fiber laser (depending on configuration), the TS1 ensures minimal heat distortion and superior edge quality.</p>
+
+<p>Its intuitive touchscreen interface, combined with customizable cutting parameters and integrated safety features, make it ideal for professionals in manufacturing, design, architecture, signage, and beyond. The TS1 supports a variety of file formats and works seamlessly with leading CAD/CAM software, streamlining workflow from concept to completion.</p>
+
+<p>Durable, compact, and built for 24/7 operation, the PrecisionCut Laser TS1 Cutter is the perfect solution for businesses and creators who demand precision, efficiency, and reliability in every cut.</p>`,
         shortDescription: 'Professional heavy-duty hammer drill for concrete and masonry',
         image: {
             url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
@@ -31,7 +46,16 @@ export const MOCK_PRODUCTS: Products.Model.Product[] = [
         id: 'PRD-005',
         sku: 'ABC-12345-S-BL',
         name: 'Cordless Angle Grinder',
-        description: 'Cordless angle grinder with 22V battery platform',
+        description: `<h2>Detailed description</h2>
+<p>The PrecisionCut Laser TS2 Cutter represents the next evolution in laser cutting technology, offering enhanced precision and versatility for modern manufacturing needs. This advanced system combines cutting-edge laser technology with intelligent control systems to deliver exceptional cutting quality and operational efficiency.</p>
+
+<ul>
+    <li>Dual-Laser System (CO₂ + Fiber)</li>
+    <li>Smart Control Interface</li>
+    <li>Automated Material Detection</li>
+    <li>Advanced Cooling System</li>
+    <li>Cloud-Based Monitoring</li>
+</ul>`,
         shortDescription: 'Cordless angle grinder with 22V battery platform',
         image: {
             url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-charger.jpg',
@@ -61,7 +85,22 @@ export const MOCK_PRODUCTS: Products.Model.Product[] = [
         id: 'PRD-006',
         sku: 'ABC-12345-S-BL',
         name: 'Laser Measurement',
-        description: 'Laser measurement device for distance measurements',
+        description: `<h2>Detailed description</h2>
+<p>The PrecisionCut Laser TS2 Cutter represents the next evolution in laser cutting technology, offering enhanced precision and versatility for modern manufacturing needs. This advanced system combines cutting-edge laser technology with intelligent control systems to deliver exceptional cutting quality and operational efficiency.</p>
+
+<ul>
+    <li>Dual-Laser System (CO₂ + Fiber)</li>
+    <li>Smart Control Interface</li>
+    <li>Automated Material Detection</li>
+    <li>Advanced Cooling System</li>
+    <li>Cloud-Based Monitoring</li>
+</ul>
+
+<p>Engineered for maximum versatility, the TS2 excels in processing a diverse range of materials including specialized alloys, advanced composites, and delicate substrates. The dual-laser system allows for optimal processing of both reflective and non-reflective materials, while maintaining superior edge quality and minimal thermal impact.</p>
+
+<p>The smart control interface features AI-powered optimization algorithms that automatically adjust cutting parameters based on material properties and desired outcomes. Integrated sensors and real-time monitoring systems ensure consistent quality and prevent material waste, while the advanced cooling system maintains optimal operating temperatures for extended production runs.</p>
+
+<p>With cloud-based monitoring and remote operation capabilities, the TS2 enables seamless integration into modern manufacturing workflows. Regular software updates and a comprehensive support network ensure your investment remains at the forefront of laser cutting technology, delivering exceptional results for years to come.</p>`,
         shortDescription: 'Laser measurement device for distance measurements',
         image: {
             url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
@@ -87,7 +126,22 @@ export const MOCK_PRODUCTS: Products.Model.Product[] = [
         id: 'PRD-007',
         sku: 'ABC-12345-S-BL',
         name: 'Cordless Drill Driver',
-        description: 'Cordless drill driver with 22V battery platform',
+        description: `<h2>Detailed description</h2>
+<p>The PrecisionCut Laser TS2 Cutter represents the next evolution in laser cutting technology, offering enhanced precision and versatility for modern manufacturing needs. This advanced system combines cutting-edge laser technology with intelligent control systems to deliver exceptional cutting quality and operational efficiency.</p>
+
+<ul>
+    <li>Dual-Laser System (CO₂ + Fiber)</li>
+    <li>Smart Control Interface</li>
+    <li>Automated Material Detection</li>
+    <li>Advanced Cooling System</li>
+    <li>Cloud-Based Monitoring</li>
+</ul>
+
+<p>Engineered for maximum versatility, the TS2 excels in processing a diverse range of materials including specialized alloys, advanced composites, and delicate substrates. The dual-laser system allows for optimal processing of both reflective and non-reflective materials, while maintaining superior edge quality and minimal thermal impact.</p>
+
+<p>The smart control interface features AI-powered optimization algorithms that automatically adjust cutting parameters based on material properties and desired outcomes. Integrated sensors and real-time monitoring systems ensure consistent quality and prevent material waste, while the advanced cooling system maintains optimal operating temperatures for extended production runs.</p>
+
+<p>With cloud-based monitoring and remote operation capabilities, the TS2 enables seamless integration into modern manufacturing workflows. Regular software updates and a comprehensive support network ensure your investment remains at the forefront of laser cutting technology, delivering exceptional results for years to come.</p>`,
         shortDescription: 'Cordless drill driver with 22V battery platform',
         image: {
             url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
