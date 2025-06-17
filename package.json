@@ -3,6 +3,7 @@
     "private": true,
     "scripts": {
         "prepare": "husky",
+        "postinstall": "turbo run prepare --filter=@o2s/integrations.mocked",
         "dev": "turbo dev",
         "build": "turbo build",
         "start": "turbo start",
