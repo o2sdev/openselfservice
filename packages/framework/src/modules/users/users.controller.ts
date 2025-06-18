@@ -1,9 +1,10 @@
 import { Body, Controller, Delete, Get, Headers, Param, Patch, UseInterceptors } from '@nestjs/common';
 import { LoggerService } from '@o2s/utils.logger';
 
+import * as Auth from '@/modules/auth';
+
 import { Request } from './';
 import { UserService } from './users.service';
-import * as Auth from '@/modules/auth';
 import { AppHeaders } from '@/utils/models/headers';
 
 @Controller('/users')

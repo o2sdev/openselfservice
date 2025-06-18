@@ -1,4 +1,5 @@
 import { SlotBlock } from '@/modules/cms/models/page.model';
+
 import { Block, Pagination } from '@/utils/models';
 
 export class CategoryBlock extends Block.Block {

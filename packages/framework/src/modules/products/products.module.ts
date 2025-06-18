@@ -14,17 +14,17 @@ export class ProductsModule {
         const controller = config.integrations.products.controller || ProductsController;
         const imports = config.integrations.products.imports || [];
 
+        const provider = {
+            provide: ProductService,
+            useClass: service as Type,
+        };
+
         return {
             module: ProductsModule,
-            providers: [
-                {
-                    provide: ProductService,
-                    useClass: service as Type,
-                },
-            ],
+            providers: [provider],
             imports: [HttpModule, ...imports],
             controllers: [controller],
-            exports: [ProductService],
+            exports: [provider],
         };
     }
 }

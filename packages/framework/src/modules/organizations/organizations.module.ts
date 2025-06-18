@@ -14,17 +14,18 @@ export class OrganizationsModule {
         const controller = config.integrations.organizations.controller || OrganizationController;
         const imports = config.integrations.organizations.imports || [];
 
+        const provider = {
+            provide: OrganizationService,
+            useClass: service as Type,
+        };
+        const providers = config.integrations.organizations.providers || [];
+
         return {
             module: OrganizationsModule,
-            providers: [
-                {
-                    provide: OrganizationService,
-                    useClass: service as Type,
-                },
-            ],
+            providers: [provider, ...providers],
             imports: [HttpModule, ...imports],
             controllers: [controller],
-            exports: [OrganizationService],
+            exports: [provider],
         };
     }
 }

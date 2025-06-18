@@ -1,10 +1,11 @@
 import { ApiConfig } from '@o2s/framework/modules';
 import { Auth } from '@o2s/framework/modules';
 
+import { MedusaJsModule } from '@/modules/medusajs/medusajs.module';
+
 import { Service as OrdersService } from './modules/orders';
 import { Service as ProductsService } from './modules/products';
 import { Service as ResourcesService } from './modules/resources';
-import { MedusaJsModule } from '@/modules/medusajs/medusajs.module';
 
 export * as Integration from './modules/index';
 

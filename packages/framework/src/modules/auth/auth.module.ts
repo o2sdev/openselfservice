@@ -11,17 +11,16 @@ export class AuthModule {
     static register(config: ApiConfig): DynamicModule {
         const service = config.integrations.auth.service;
         const imports = config.integrations.auth.imports || [];
+        const provider = {
+            provide: AuthService,
+            useClass: service as Type,
+        };
 
         return {
             module: AuthModule,
-            providers: [
-                {
-                    provide: AuthService,
-                    useClass: service as Type,
-                },
-            ],
+            providers: [provider],
             imports: [HttpModule, ...imports],
-            exports: [AuthService],
+            exports: [provider],
         };
     }
 }

@@ -43,11 +43,13 @@ export interface ApiConfig {
             service: typeof Organizations.Service;
             controller?: typeof Organizations.Controller;
             imports?: Type[];
+            providers?: Type[];
         };
         users: {
             service: typeof Users.Service;
             controller?: typeof Users.Controller;
             imports?: Type[];
+            providers?: Type[];
         };
         resources: {
             service: typeof Resources.Service;

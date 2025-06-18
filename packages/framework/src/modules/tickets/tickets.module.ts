@@ -14,17 +14,17 @@ export class TicketsModule {
         const controller = config.integrations.tickets.controller || TicketsController;
         const imports = config.integrations.tickets.imports || [];
 
+        const provider = {
+            provide: TicketService,
+            useClass: service as Type,
+        };
+
         return {
             module: TicketsModule,
-            providers: [
-                {
-                    provide: TicketService,
-                    useClass: service as Type,
-                },
-            ],
+            providers: [provider],
             imports: [HttpModule, ...imports],
             controllers: [controller],
-            exports: [TicketService],
+            exports: [provider],
         };
     }
 }

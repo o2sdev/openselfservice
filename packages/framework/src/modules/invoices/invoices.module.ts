@@ -14,17 +14,17 @@ export class InvoiceModule {
         const controller = config.integrations.invoices.controller || InvoiceController;
         const imports = config.integrations.invoices.imports || [];
 
+        const provider = {
+            provide: InvoiceService,
+            useClass: service as Type,
+        };
+
         return {
             module: InvoiceModule,
-            providers: [
-                {
-                    provide: InvoiceService,
-                    useClass: service as Type,
-                },
-            ],
+            providers: [provider],
             imports: [HttpModule, ...imports],
             controllers: [controller],
-            exports: [InvoiceService],
+            exports: [provider],
         };
     }
 }

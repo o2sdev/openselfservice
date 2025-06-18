@@ -60,6 +60,21 @@ import { PageModule } from './modules/page/page.module';
 import { RoutesModule } from './modules/routes/routes.module';
 import { SurveyjsModule } from './modules/surveyjs-forms/surveyjs.module';
 
+export const CMSBaseModule = CMS.Module.register(AppConfig);
+export const TicketsBaseModule = Tickets.Module.register(AppConfig);
+export const NotificationsBaseModule = Notifications.Module.register(AppConfig);
+export const UsersBaseModule = Users.Module.register(AppConfig);
+export const OrganizationsBaseModule = Organizations.Module.register(AppConfig);
+export const CacheBaseModule = Cache.Module.register(AppConfig);
+export const BillingAccountsBaseModule = BillingAccounts.Module.register(AppConfig);
+export const ResourcesBaseModule = Resources.Module.register(AppConfig);
+export const InvoicesBaseModule = Invoices.Module.register(AppConfig);
+export const ArticlesBaseModule = Articles.Module.register(AppConfig);
+export const SearchBaseModule = Search.Module.register(AppConfig);
+export const ProductsBaseModule = Products.Module.register(AppConfig);
+export const OrdersBaseModule = Orders.Module.register(AppConfig);
+export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
+
 @Module({
     imports: [
         HttpModule,
@@ -71,20 +86,20 @@ import { SurveyjsModule } from './modules/surveyjs-forms/surveyjs.module';
             envFilePath: `.env.local`,
         }),
 
-        CMS.Module.register(AppConfig),
-        Tickets.Module.register(AppConfig),
-        Notifications.Module.register(AppConfig),
-        Users.Module.register(AppConfig),
-        Organizations.Module.register(AppConfig),
-        Cache.Module.register(AppConfig),
-        BillingAccounts.Module.register(AppConfig),
-        Resources.Module.register(AppConfig),
-        Invoices.Module.register(AppConfig),
-        Articles.Module.register(AppConfig),
-        Search.Module.register(AppConfig),
-        Products.Module.register(AppConfig),
-        Orders.Module.register(AppConfig),
-        AuthModule.Module.register(AppConfig),
+        CMSBaseModule,
+        TicketsBaseModule,
+        NotificationsBaseModule,
+        UsersBaseModule,
+        OrganizationsBaseModule,
+        CacheBaseModule,
+        BillingAccountsBaseModule,
+        ResourcesBaseModule,
+        InvoicesBaseModule,
+        ArticlesBaseModule,
+        SearchBaseModule,
+        ProductsBaseModule,
+        OrdersBaseModule,
+        AuthModuleBaseModule,
 
         PageModule.register(AppConfig),
         RoutesModule.register(AppConfig),

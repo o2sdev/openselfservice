@@ -1,8 +1,9 @@
 import { ApiConfig, Cache } from '@o2s/framework/modules';
 
+import { GraphqlModule } from '@/modules/graphql/graphql.module';
+
 import { Service as ArticleService } from './modules/articles';
 import { Service as CmsService } from './modules/cms';
-import { GraphqlModule } from '@/modules/graphql/graphql.module';
 
 export * as Integration from './modules/index';
 

@@ -1,4 +1,5 @@
 import { Invoice } from '@/modules/invoices/invoices.model';
+
 import { Block, DataTable, Filters, Mapping, Pagination } from '@/utils/models';
 
 export class InvoiceListBlock extends Block.Block {

@@ -1,6 +1,6 @@
 import { DynamicModule, Module } from '@nestjs/common';
 
-import { ApiConfig } from '@o2s/framework/modules';
+import * as Framework from '@o2s/framework/modules';
 
 import { CMS, Invoices } from '../../models';
 
@@ -9,10 +9,20 @@ import { PaymentsHistoryService } from './payments-history.service';
 
 @Module({})
 export class PaymentsHistoryBlockModule {
-    static register(_config: ApiConfig): DynamicModule {
+    static register(_config: Framework.ApiConfig): DynamicModule {
         return {
             module: PaymentsHistoryBlockModule,
-            providers: [PaymentsHistoryService, CMS.Service, Invoices.Service],
+            providers: [
+                PaymentsHistoryService,
+                {
+                    provide: CMS.Service,
+                    useExisting: Framework.CMS.Service,
+                },
+                {
+                    provide: Invoices.Service,
+                    useExisting: Framework.Invoices.Service,
+                },
+            ],
             controllers: [PaymentsHistoryController],
             exports: [PaymentsHistoryService],
         };

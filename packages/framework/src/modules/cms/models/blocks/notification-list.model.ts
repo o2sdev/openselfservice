@@ -1,4 +1,5 @@
 import { Notification } from '@/modules/notifications/notifications.model';
+
 import { Block, DataTable, Filters, Mapping, Pagination } from '@/utils/models';
 
 export class NotificationListBlock extends Block.Block {

@@ -1,6 +1,6 @@
 import { DynamicModule, Module } from '@nestjs/common';
 
-import { ApiConfig } from '@o2s/framework/modules';
+import * as Framework from '@o2s/framework/modules';
 
 import { CMS, Notifications } from '../../models';
 
@@ -9,10 +9,20 @@ import { NotificationDetailsService } from './notification-details.service';
 
 @Module({})
 export class NotificationDetailsBlockModule {
-    static register(_config: ApiConfig): DynamicModule {
+    static register(_config: Framework.ApiConfig): DynamicModule {
         return {
             module: NotificationDetailsBlockModule,
-            providers: [NotificationDetailsService, CMS.Service, Notifications.Service],
+            providers: [
+                NotificationDetailsService,
+                {
+                    provide: CMS.Service,
+                    useExisting: Framework.CMS.Service,
+                },
+                {
+                    provide: Notifications.Service,
+                    useExisting: Framework.Notifications.Service,
+                },
+            ],
             controllers: [NotificationDetailsController],
             exports: [NotificationDetailsService],
         };
