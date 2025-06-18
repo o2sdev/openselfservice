@@ -4,9 +4,6 @@
     "concurrency": "100",
     "tasks": {
         "init": {},
-        "prepare": {
-            "cache": false
-        },
         "build": {
             "dependsOn": [
                 "^build"
