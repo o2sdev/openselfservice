@@ -4,6 +4,11 @@
     "concurrency": "100",
     "tasks": {
         "init": {},
+        "postinstall": {
+            "dependsOn": [
+                "^postinstall"
+            ]
+        },
         "build": {
             "dependsOn": [
                 "^build"
@@ -51,24 +56,6 @@
             "cache": false,
             "dependsOn": [
                 "^check-deps"
-            ]
-        },
-        "update-deps:patch": {
-            "cache": false,
-            "dependsOn": [
-                "^update-deps:patch"
-            ]
-        },
-        "update-deps:minor": {
-            "cache": false,
-            "dependsOn": [
-                "^update-deps:minor"
-            ]
-        },
-        "update-deps:latest": {
-            "cache": false,
-            "dependsOn": [
-                "^update-deps:latest"
             ]
         }
     }

@@ -3,6 +3,7 @@
     "private": true,
     "scripts": {
         "prepare": "husky",
+        "postinstall": "turbo run postinstall",
         "dev": "turbo dev",
         "build": "turbo build",
         "start": "turbo start",
