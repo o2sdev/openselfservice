@@ -527,6 +527,19 @@ aside:not(.theme-doc-sidebar-container) {
         margin-bottom: 4rem;
     }
 }
+
+@media (min-width: 48rem) {
+    .container {
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 40rem) {
+    .container {
+        max-width: 100%;
+    }
+}
+
 @media (min-width: 1440px) {
     .container {
         max-width: var(--ifm-container-width-xl) !important;
@@ -752,7 +765,7 @@ footer a {
 
 .button {
     font-family: var(--ifm-font-family-base);
-    background: rgba(76, 92, 229, 0.8);
+    background: rgb(76, 92, 229);
     border: 1px solid #4c5ce5;
     display: flex;
     padding: 0.5rem 1rem;
@@ -866,6 +879,8 @@ footer a {
 }
 .linearGradient.static {
     background-size: 100%;
+    display: flex;
+    flex: 1 0 auto;
 }
 
 @media screen and (max-width: 767px) {

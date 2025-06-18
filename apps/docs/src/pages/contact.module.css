@@ -4,6 +4,8 @@
 .contactContainer {
     overflow: hidden;
     min-height: 400px;
+    max-width: 100%;
+    flex: 1 0 auto;
 }
 .contactFormText {
     color: var(--inverted-foreground-color);
