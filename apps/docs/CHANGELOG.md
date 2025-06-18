@@ -1,5 +1,11 @@
 # @o2s/docs
 
+## 1.1.0
+
+### Minor Changes
+
+- 8bee8e5: docs(feat): adding contact form and few other changes to the website
+
 ## 1.0.0
 
 ### Major Changes
