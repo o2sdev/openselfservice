@@ -1,5 +1,11 @@
 # @o2s/framework
 
+## 1.6.1
+
+### Patch Changes
+
+- 36463a4: refactored how modules dependencies are defined to improve extending integrations with multiple modules within them
+
 ## 1.6.0
 
 ### Minor Changes
