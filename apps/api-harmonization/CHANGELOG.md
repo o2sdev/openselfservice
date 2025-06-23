@@ -1,5 +1,13 @@
 # @o2s/api-harmonization
 
+## 1.5.2
+
+### Patch Changes
+
+- 36463a4: refactored how modules dependencies are defined to improve extending integrations with multiple modules within them
+- Updated dependencies [36463a4]
+    - @o2s/framework@1.6.1
+
 ## 1.5.1
 
 ### Patch Changes
