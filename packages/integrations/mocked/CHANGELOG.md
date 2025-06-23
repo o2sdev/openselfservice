@@ -1,5 +1,17 @@
 # @o2s/integrations.mocked
 
+## 1.6.4
+
+### Patch Changes
+
+- 41ca705: feat: generate db in prisma as postinstall task
+
+## 1.6.3
+
+### Patch Changes
+
+- 6102f12: added prisma files to package files
+
 ## 1.6.2
 
 ### Patch Changes
