@@ -4,8 +4,9 @@ import { Observable, forkJoin, map } from 'rxjs';
 
 import { Articles, CMS, Search } from '@o2s/framework/modules';
 
-import { mapArticle, mapArticles, mapCategories, mapCategory } from './articles.mapper';
 import { Service as GraphqlService } from '@/modules/graphql';
+
+import { mapArticle, mapArticles, mapCategories, mapCategory } from './articles.mapper';
 
 @Injectable()
 export class ArticlesService implements Articles.Service {

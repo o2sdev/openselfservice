@@ -1,4 +1,5 @@
 import { Invoice } from '@/modules/invoices/invoices.model';
+
 import { Block, Mapping } from '@/utils/models';
 
 export class InvoiceDetailsBlock extends Block.Block {

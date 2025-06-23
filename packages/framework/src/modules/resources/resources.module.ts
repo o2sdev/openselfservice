@@ -17,21 +17,22 @@ export class ResourceModule {
         const controller = config.integrations.resources.controller || ResourceController;
         const imports = config.integrations.resources.imports || [];
 
+        const provider = {
+            provide: ResourceService,
+            useClass: service as Type,
+        };
+
+        const productProvider = {
+            provide: ProductService,
+            useClass: productService as Type,
+        };
+
         return {
             module: ResourceModule,
-            providers: [
-                {
-                    provide: ResourceService,
-                    useClass: service as Type,
-                },
-                {
-                    provide: ProductService,
-                    useClass: productService as Type,
-                },
-            ],
+            providers: [provider, productProvider],
             imports: [HttpModule, ...imports],
             controllers: [controller],
-            exports: [ResourceService],
+            exports: [provider],
         };
     }
 }

@@ -8,3 +8,4 @@ export * as Products from './products';
 export * as Organizations from './organizations';
 export * as Orders from './orders';
 export * as Articles from './articles';
+export * as Auth from './auth';

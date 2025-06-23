@@ -7,6 +7,8 @@ import { Observable, catchError, forkJoin, map, switchMap } from 'rxjs';
 
 import { Auth, Products, Resources } from '@o2s/framework/modules';
 
+import { Service as MedusaJsService } from '@/modules/medusajs';
+
 import { mapCompatibleServices, mapFeaturedServices } from '../products/products.mapper';
 import { handleHttpError } from '../utils/handle-http-error';
 
@@ -19,7 +21,6 @@ import {
     ServiceInstance,
     ServiceInstancesResponse,
 } from './response.types';
-import { Service as MedusaJsService } from '@/modules/medusajs';
 
 @Injectable()
 export class ResourcesService extends Resources.Service {

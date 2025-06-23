@@ -14,17 +14,17 @@ export class CmsModule {
         const controller = config.integrations.cms.controller || CmsController;
         const imports = config.integrations.cms.imports || [];
 
+        const provider = {
+            provide: CmsService,
+            useClass: service as Type,
+        };
+
         return {
             module: CmsModule,
-            providers: [
-                {
-                    provide: CmsService,
-                    useClass: service as Type,
-                },
-            ],
+            providers: [provider],
             imports: [HttpModule, ...imports],
             controllers: [controller],
-            exports: [CmsService],
+            exports: [provider],
         };
     }
 }

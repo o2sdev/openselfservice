@@ -14,17 +14,18 @@ export class UsersModule {
         const controller = config.integrations.users.controller || UserController;
         const imports = config.integrations.users.imports || [];
 
+        const provider = {
+            provide: UserService,
+            useClass: service as Type,
+        };
+        const providers = config.integrations.users.providers || [];
+
         return {
             module: UsersModule,
-            providers: [
-                {
-                    provide: UserService,
-                    useClass: service as Type,
-                },
-            ],
+            providers: [provider, ...providers],
             imports: [HttpModule, ...imports],
             controllers: [controller],
-            exports: [UserService],
+            exports: [provider],
         };
     }
 }

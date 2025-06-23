@@ -1,6 +1,7 @@
 import { DynamicModule, Module } from '@nestjs/common';
+import { CMSBaseModule, OrganizationsBaseModule } from 'src/app.module';
 
-import { ApiConfig } from '@o2s/framework/modules';
+import * as Framework from '@o2s/framework/modules';
 
 import { CMS, Organizations } from '../../models';
 
@@ -9,12 +10,22 @@ import { OrganizationsService } from './organizations.service';
 
 @Module({})
 export class OrganizationsModule {
-    static register(_config: ApiConfig): DynamicModule {
+    static register(_config: Framework.ApiConfig): DynamicModule {
         return {
             module: OrganizationsModule,
-            providers: [OrganizationsService, CMS.Service, Organizations.Service],
+            imports: [CMSBaseModule, OrganizationsBaseModule],
+            providers: [
+                OrganizationsService,
+                {
+                    provide: CMS.Service,
+                    useExisting: Framework.CMS.Service,
+                },
+                {
+                    provide: Organizations.Service,
+                    useExisting: Framework.Organizations.Service,
+                },
+            ],
             controllers: [OrganizationsController],
-            exports: [OrganizationsService],
         };
     }
 }

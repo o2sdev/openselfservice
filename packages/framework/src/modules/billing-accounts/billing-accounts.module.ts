@@ -14,17 +14,17 @@ export class BillingAccountModule {
         const controller = config.integrations.billingAccounts.controller || BillingAccountController;
         const imports = config.integrations.billingAccounts.imports || [];
 
+        const provider = {
+            provide: BillingAccountService,
+            useClass: service as Type,
+        };
+
         return {
             module: BillingAccountModule,
-            providers: [
-                {
-                    provide: BillingAccountService,
-                    useClass: service as Type,
-                },
-            ],
+            providers: [provider],
             imports: [HttpModule, ...imports],
             controllers: [controller],
-            exports: [BillingAccountService],
+            exports: [provider],
         };
     }
 }
