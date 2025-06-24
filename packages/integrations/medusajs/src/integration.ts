@@ -11,14 +11,17 @@ export * as Integration from './modules/index';
 
 export const Config: Partial<ApiConfig['integrations']> = {
     orders: {
+        name: 'medusajs',
         service: OrdersService,
         imports: [MedusaJsModule, Auth.Module],
     },
     resources: {
+        name: 'medusajs',
         service: ResourcesService,
         imports: [MedusaJsModule, Auth.Module],
     },
     products: {
+        name: 'medusajs',
         service: ProductsService,
         imports: [MedusaJsModule, Auth.Module],
     },

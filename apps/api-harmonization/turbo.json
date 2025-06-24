@@ -34,7 +34,9 @@
                 "MEDUSAJS_BASE_URL",
                 "MEDUSAJS_PUBLISHABLE_API_KEY",
                 "MEDUSAJS_ADMIN_API_KEY",
-                "SEARCH_ARTICLES_INDEX_NAME"
+                "SEARCH_ARTICLES_INDEX_NAME",
+                "TELEMETRY_DISABLED",
+                "TELEMETRY_BASE_URL"
             ]
         }
     }
