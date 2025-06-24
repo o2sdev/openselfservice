@@ -22,7 +22,7 @@ export const mapPaymentsSummary = (
     }, 0);
 
     const earliestDueDate = overdueInvoices.length
-        ? Math.min(...overdueInvoices.map((invoice) => new Date(invoice.paymentDueDate).getTime()))
+        ? Math.min(...overdueInvoices.map((invoice) => new Date(invoice.issuedDate).getTime()))
         : null;
 
     const overdueDays = earliestDueDate ? dayjs().diff(dayjs(earliestDueDate), 'days') : 0;
