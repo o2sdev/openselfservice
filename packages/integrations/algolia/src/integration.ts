@@ -6,6 +6,7 @@ export * as Integration from './modules/index';
 
 export const Config: Partial<ApiConfig['integrations']> = {
     search: {
+        name: 'algolia',
         service: SearchService,
     },
 };

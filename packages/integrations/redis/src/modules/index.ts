@@ -1,1 +1,1 @@
-export * as Cache from './redis';
+export * as Cache from './cache';

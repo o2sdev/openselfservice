@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import * as telemetry from '@o2s/telemetry';
 import { execSync } from 'child_process';
 import cliProgress from 'cli-progress';
 import { Command } from 'commander';
@@ -14,6 +15,9 @@ program
     .argument('[name]', 'Name of the new project')
     .option('--directory [directory]', 'Specify the destination directory', 'my-o2s-project')
     .action(async (name, options) => {
+        telemetry.sendEvent('create-o2s-app', 'create-project');
+        await telemetry.flushEvents();
+
         const projectName = name
             ? name
             : (

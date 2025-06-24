@@ -1,4 +1,4 @@
-import { Config, Integration } from '@o2s/integrations.mocked/integration';
+import { Config, Integration } from '@o2s/integrations.strapi-cms/integration';
 
 import { ApiConfig } from '@o2s/framework/modules';
 

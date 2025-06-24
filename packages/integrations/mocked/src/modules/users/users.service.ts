@@ -1,4 +1,4 @@
-import { NotImplementedException } from '@nestjs/common';
+import { Injectable, NotImplementedException } from '@nestjs/common';
 import { Observable, of } from 'rxjs';
 
 import { Models, Users } from '@o2s/framework/modules';
@@ -7,6 +7,7 @@ import { mapCustomer, mapCustomers } from './customers.mapper';
 import { mapUser } from './users.mapper';
 import { responseDelay } from '@/utils/delay';
 
+@Injectable()
 export class UserService implements Users.Service {
     getCurrentUser(): Observable<Users.Model.User | undefined> {
         return of(mapUser()).pipe(responseDelay());

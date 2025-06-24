@@ -1,0 +1,17 @@
+{
+    "extends": ["//"],
+    "tasks": {
+        "dev": {
+            "env": [
+                "TELEMETRY_DISABLED",
+                "TELEMETRY_BASE_URL"
+            ]
+        },
+        "build": {
+            "env": [
+                "TELEMETRY_DISABLED",
+                "TELEMETRY_BASE_URL"
+            ]
+        }
+    }
+}

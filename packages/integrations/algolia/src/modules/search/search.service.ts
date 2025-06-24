@@ -18,6 +18,7 @@ export class SearchService extends Search.Service {
         @Inject(LoggerService) private readonly logger: LoggerService,
     ) {
         super();
+
         const appId = this.config.get('ALGOLIA_APP_ID');
         const apiKey = this.config.get('ALGOLIA_API_KEY');
 
