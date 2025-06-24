@@ -99,7 +99,7 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
                                                         className={cn(
                                                             'py-3 px-4 text-sm text-muted-foreground md:text-nowrap',
                                                             column.id === 'totalAmountDue' && 'text-right',
-                                                            column.id === 'amountToPay' && 'text-right',
+                                                            column.id === 'totalNetAmountDue' && 'text-right',
                                                         )}
                                                     >
                                                         {column.title}
@@ -163,7 +163,7 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
                                                                         </TableCell>
                                                                     );
                                                                 case 'totalAmountDue':
-                                                                case 'amountToPay':
+                                                                case 'totalNetAmountDue':
                                                                     return (
                                                                         <TableCell
                                                                             key={column.id}

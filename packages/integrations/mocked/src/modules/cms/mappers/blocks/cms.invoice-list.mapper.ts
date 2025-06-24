@@ -24,8 +24,8 @@ const MOCK_INVOICE_LIST_BLOCK_EN: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
             { id: 'id', title: 'Invoice Number' },
             { id: 'paymentDueDate', title: 'Due Date' },
             { id: 'paymentStatus', title: 'Payment Status' },
-            { id: 'totalAmountDue', title: 'Total Amount Due' },
-            { id: 'amountToPay', title: 'To be Paid' },
+            { id: 'totalAmountDue', title: 'Gross Amount' },
+            { id: 'totalNetAmountDue', title: 'Net amount' },
         ],
         actions: {
             title: 'Actions',
@@ -62,8 +62,8 @@ const MOCK_INVOICE_LIST_BLOCK_EN: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
                     { label: 'Payment Due Date (descending)', value: 'paymentDueDate_DESC' },
                     { label: 'Total Amount Due (ascending)', value: 'totalAmountDue_ASC' },
                     { label: 'Total Amount Due (descending)', value: 'totalAmountDue_DESC' },
-                    { label: 'To Be Paid (ascending)', value: 'totalToBePaid_ASC' },
-                    { label: 'To Be Paid (descending)', value: 'totalToBePaid_DESC' },
+                    { label: 'Net Amount Due (ascending)', value: 'totalNetAmountDue_ASC' },
+                    { label: 'Net Amount Due (descending)', value: 'totalNetAmountDue_DESC' },
                 ],
             },
             {
@@ -141,7 +141,7 @@ const MOCK_INVOICE_LIST_BLOCK_DE: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
             { id: 'paymentDueDate', title: 'Fälligkeitsdatum' },
             { id: 'paymentStatus', title: 'Zahlungsstatus' },
             { id: 'totalAmountDue', title: 'Gesamtbetrag' },
-            { id: 'amountToPay', title: 'Zu zahlen' },
+            { id: 'totalNetAmountDue', title: 'Gesamtbetrag net' },
         ],
         actions: {
             title: 'Aktionen',
@@ -178,8 +178,8 @@ const MOCK_INVOICE_LIST_BLOCK_DE: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
                     { label: 'Fälligkeitsdatum (absteigend)', value: 'paymentDueDate_DESC' },
                     { label: 'Gesamtbetrag (aufsteigend)', value: 'totalAmountDue_ASC' },
                     { label: 'Gesamtbetrag (absteigend)', value: 'totalAmountDue_DESC' },
-                    { label: 'Zu zahlen (aufsteigend)', value: 'amountToPay_ASC' },
-                    { label: 'Zu zahlen (absteigend)', value: 'amountToPay_DESC' },
+                    { label: 'Gesamtbetrag net (aufsteigend)', value: 'totalNetAmountDue_ASC' },
+                    { label: 'Gesamtbetrag net (absteigend)', value: 'totalNetAmountDue_DESC' },
                 ],
             },
             {
@@ -257,7 +257,7 @@ const MOCK_INVOICE_LIST_BLOCK_PL: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
             { id: 'paymentDueDate', title: 'Termin płatności' },
             { id: 'paymentStatus', title: 'Status płatności' },
             { id: 'totalAmountDue', title: 'Kwota do zapłaty' },
-            { id: 'amountToPay', title: 'Do zapłacenia' },
+            { id: 'totalNetAmountDue', title: 'Kwota do zapłacenia netto' },
         ],
         actions: {
             title: 'Akcje',
@@ -294,8 +294,8 @@ const MOCK_INVOICE_LIST_BLOCK_PL: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
                     { label: 'Termin płatności (malejąco)', value: 'paymentDueDate_DESC' },
                     { label: 'Kwota do zapłaty (rosnąco)', value: 'totalAmountDue_ASC' },
                     { label: 'Kwota do zapłaty (malejąco)', value: 'totalAmountDue_DESC' },
-                    { label: 'Do zapłacenia (rosnąco)', value: 'amountToPay_ASC' },
-                    { label: 'Do zapłacenia (malejąco)', value: 'amountToPay_DESC' },
+                    { label: 'Kwota do zapłaty netto (rosnąco)', value: 'totalNetAmountDue_ASC' },
+                    { label: 'Kwota do zapłaty netto (malejąco)', value: 'totalNetAmountDue_DESC' },
                 ],
             },
             {
