@@ -1,5 +1,13 @@
 # create-o2s-app
 
+## 1.0.1
+
+### Patch Changes
+
+- f4b70b3: added telemetry events for anonymous data collection about usage
+- Updated dependencies [f4b70b3]
+    - @o2s/telemetry@1.0.0
+
 ## 1.0.0
 
 ### Major Changes

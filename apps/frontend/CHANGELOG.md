@@ -1,5 +1,17 @@
 # @o2s/frontend
 
+## 1.6.1
+
+### Patch Changes
+
+- 97264f1: feat: replace To be Paid column with Net amount on invoices
+- Updated dependencies [25af511]
+- Updated dependencies [97264f1]
+- Updated dependencies [f4b70b3]
+    - @o2s/api-harmonization@1.5.3
+    - @o2s/integrations.mocked@1.6.5
+    - @o2s/framework@1.6.2
+
 ## 1.6.0
 
 ### Minor Changes
