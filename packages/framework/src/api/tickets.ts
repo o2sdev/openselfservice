@@ -1,6 +1,6 @@
-import { RequestMethod } from '../sdk';
-
 import { Model, Request } from '@/modules/tickets';
+
+import { RequestMethod } from '../sdk';
 
 const API_URL = '/tickets';
 

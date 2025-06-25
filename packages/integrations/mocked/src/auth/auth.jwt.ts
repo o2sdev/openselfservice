@@ -1,38 +1,39 @@
+import type { Account, Profile } from '@auth/core/types';
 import jwt from 'jsonwebtoken';
-import { User } from 'next-auth';
+import { Session, User } from 'next-auth';
 import { AdapterUser } from 'next-auth/adapters';
 import { JWT } from 'next-auth/jwt';
 
-import { sdk } from '@/api/sdk';
+import { Models } from '@o2s/framework/modules';
 
-const DEFAULT_ROLE = process.env.AUTH_DEFAULT_USER_ROLE;
+import { refreshAccessToken } from './auth.refreshAccessToken';
 
-interface JwtCallbackParams {
+type JwtCallbackParams = {
     token: JWT;
     user: User | AdapterUser;
-    trigger?: 'signIn' | 'update' | 'signUp';
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    session?: any;
-}
+    account?: Account | null;
+    profile?: Profile;
+    trigger?: 'signIn' | 'signUp' | 'update';
+    session?: Session['user'];
+};
 
-// TODO: Implement refresh access token
-async function refreshAccessToken(token: JWT) {
-    return token;
-}
-
-export const mockJwtCallback = async ({ token, user, trigger, session }: JwtCallbackParams) => {
+export const jwtCallback = async (
+    getCustomer: (id: string | undefined, accessToken: string) => Promise<Models.Customer.Customer>,
+    { token, user, trigger, session }: JwtCallbackParams,
+    defaultRole: string,
+): Promise<JWT | null> => {
     // Sign in so we fetch customer data and save it on token
     if (trigger === 'signIn') {
-        token.role = user.role || DEFAULT_ROLE;
+        token.role = user.role || defaultRole;
         token.id = user.id;
-        await updateCustomerToken(token, user?.defaultCustomerId);
+        await updateCustomerToken(getCustomer, token, user?.defaultCustomerId);
     }
     // Update means that user wants to change customer. Normally you don't want to do this.
-    // Instead, you should call your IAM service to change customer and then refresh access token.
+    // Instead, you should call your IAM service to change customer and then refresh the access token.
     else if (trigger === 'update') {
-        await updateCustomerToken(token, session?.customer?.id);
+        await updateCustomerToken(getCustomer, token, session?.customer?.id);
     }
-    // Since we don't have any IAM to provide access token, we just sign it with our own token
+    // Since we don't have any IAM to provide an access token, we just sign it with our own token
     token.accessToken = signUserToken(token);
 
     if (Date.now() >= token.accessTokenExpires) {
@@ -41,12 +42,14 @@ export const mockJwtCallback = async ({ token, user, trigger, session }: JwtCall
     return { ...token, ...user };
 };
 
-async function updateCustomerToken(token: JWT, customerId: string | undefined) {
+async function updateCustomerToken(
+    getCustomer: (id: string | undefined, accessToken: string) => Promise<Models.Customer.Customer>,
+    token: JWT,
+    customerId?: string,
+) {
     try {
         const accessToken = signUserToken(token);
-        const customer = customerId
-            ? await sdk.users.getCustomerForCurrentUserById({ id: customerId }, accessToken)
-            : await sdk.users.getDefaultCustomerForCurrentUser(accessToken);
+        const customer = await getCustomer(customerId, accessToken);
 
         if (customer) {
             token.customer = {

@@ -8,8 +8,8 @@ import { GetInvoiceListQuery, GetInvoiceParams } from './invoices.request';
 export abstract class InvoiceService {
     protected constructor(..._services: unknown[]) {}
 
-    abstract getInvoiceList(query: GetInvoiceListQuery): Observable<Invoices.Model.Invoices>;
-    abstract getInvoice(params: GetInvoiceParams): Observable<Invoices.Model.Invoice>;
+    abstract getInvoiceList(query: GetInvoiceListQuery, authorization?: string): Observable<Invoices.Model.Invoices>;
+    abstract getInvoice(params: GetInvoiceParams, authorization?: string): Observable<Invoices.Model.Invoice>;
 
-    abstract getInvoicePdf(params: GetInvoiceParams): Observable<Buffer>;
+    abstract getInvoicePdf(params: GetInvoiceParams, authorization?: string): Observable<Buffer>;
 }

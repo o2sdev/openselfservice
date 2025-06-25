@@ -8,10 +8,11 @@ import { Observable, catchError, from } from 'rxjs';
 
 import { Auth, Orders } from '@o2s/framework/modules';
 
+import { Service as MedusaJsService } from '@/modules/medusajs';
+
 import { handleHttpError } from '../utils/handle-http-error';
 
 import { mapOrder, mapOrders } from './orders.mapper';
-import { Service as MedusaJsService } from '@/modules/medusajs';
 
 @Injectable()
 export class OrdersService extends Orders.Service {
@@ -27,6 +28,7 @@ export class OrdersService extends Orders.Service {
         protected httpClient: HttpService,
         @Inject(LoggerService) protected readonly logger: LoggerService,
         private readonly medusaJsService: MedusaJsService,
+        private readonly authService: Auth.Service,
     ) {
         super();
         this.sdk = this.medusaJsService.getSdk();
@@ -75,7 +77,7 @@ export class OrdersService extends Orders.Service {
             throw new UnauthorizedException('Unauthorized');
         }
 
-        const customerId = Auth.Utils.decodeAuthorizationToken(authorization)?.customer?.id;
+        const customerId = this.authService.getCustomerId(authorization);
 
         if (!customerId) {
             this.logger.debug('Customer ID not found in authorization token');

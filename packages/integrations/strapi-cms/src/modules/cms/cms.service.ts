@@ -8,11 +8,14 @@ import { Observable, concatMap, forkJoin, from, map, mergeMap, of } from 'rxjs';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { CMS, Cache, Models } from '@o2s/framework/modules';
 
+import { Service as GraphqlService } from '@/modules/graphql';
+
 import { mapArticleListBlock } from './mappers/blocks/cms.article-list.mapper';
 import { mapArticleSearchBlock } from './mappers/blocks/cms.article-search.mapper';
 import { mapCategoryListBlock } from './mappers/blocks/cms.category-list.mapper';
 import { mapCategoryBlock } from './mappers/blocks/cms.category.mapper';
 import { mapFaqBlock } from './mappers/blocks/cms.faq.mapper';
+import { mapFeaturedServiceListBlock } from './mappers/blocks/cms.featured-service-list.mapper';
 import { mapInvoiceDetailsBlock } from './mappers/blocks/cms.invoice-details.mapper';
 import { mapInvoiceListBlock } from './mappers/blocks/cms.invoice-list.mapper';
 import { mapNotificationDetailsBlock } from './mappers/blocks/cms.notification-details.mapper';
@@ -41,7 +44,6 @@ import { mapOrganizationList } from './mappers/cms.organization-list.mapper';
 import { mapPage } from './mappers/cms.page.mapper';
 import { mapSurvey } from './mappers/cms.survey.mapper';
 import { PageFragment } from '@/generated/strapi';
-import { Service as GraphqlService } from '@/modules/graphql';
 
 @Injectable()
 export class CmsService implements CMS.Service {
@@ -378,6 +380,11 @@ export class CmsService implements CMS.Service {
     getServiceListBlock(options: CMS.Request.GetCmsEntryParams) {
         const key = `service-list-component-${options.id}-${options.locale}`;
         return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapServiceListBlock)));
+    }
+
+    getFeaturedServiceListBlock(options: CMS.Request.GetCmsEntryParams) {
+        const key = `featured-service-list-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapFeaturedServiceListBlock)));
     }
 
     getServiceDetailsBlock(options: CMS.Request.GetCmsEntryParams) {

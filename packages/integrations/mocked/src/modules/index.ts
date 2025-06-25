@@ -11,3 +11,4 @@ export * as Cache from './cache';
 export * as BillingAccounts from './billing-accounts';
 export * as Search from './search';
 export * as Products from './products';
+export * as Auth from './auth';

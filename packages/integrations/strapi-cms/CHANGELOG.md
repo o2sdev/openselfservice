@@ -1,5 +1,39 @@
 # @o2s/integrations.strapi-cms
 
+## 2.4.2
+
+### Patch Changes
+
+- f4b70b3: added telemetry events for anonymous data collection about usage
+- Updated dependencies [97264f1]
+    - @o2s/framework@1.6.2
+
+## 2.4.1
+
+### Patch Changes
+
+- 36463a4: refactored how modules dependencies are defined to improve extending integrations with multiple modules within them
+- Updated dependencies [36463a4]
+    - @o2s/framework@1.6.1
+
+## 2.4.0
+
+### Minor Changes
+
+- 027ed39: featuredServiceListBlock - list of available services
+
+    - added new UI componetnt from Shadcn - Switch,
+    - extended ProductCard with action property,
+    - implemented model and mock for FeatureServiceListBlock,
+    - integrated with strapi,
+
+### Patch Changes
+
+- Updated dependencies [027ed39]
+- Updated dependencies [985780a]
+- Updated dependencies [9c31433]
+    - @o2s/framework@1.4.0
+
 ## 2.3.0
 
 ### Minor Changes

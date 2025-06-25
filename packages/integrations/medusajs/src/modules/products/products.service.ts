@@ -8,11 +8,12 @@ import { Observable, catchError, map } from 'rxjs';
 
 import { Products } from '@o2s/framework/modules';
 
+import { Service as MedusaJsService } from '@/modules/medusajs';
+
 import { handleHttpError } from '../utils/handle-http-error';
 
 import { mapProduct, mapProducts, mapRelatedProducts } from './products.mapper';
 import { RelatedProductsResponse } from './response.types';
-import { Service as MedusaJsService } from '@/modules/medusajs';
 
 @Injectable()
 export class ProductsService extends Products.Service {
@@ -77,7 +78,7 @@ export class ProductsService extends Products.Service {
     getRelatedProductList(params: Products.Request.GetRelatedProductListParams): Observable<Products.Model.Products> {
         return this.httpClient
             .get<RelatedProductsResponse>(
-                `${this.medusaJsService.getBaseUrl()}/admin/products/${params.id}/variants/${params.variantId}/references`,
+                `${this.medusaJsService.getBaseUrl()}/admin/products/${params.productId}/variants/${params.productVariantId}/references`,
                 {
                     headers: this.medusaJsService.getMedusaAdminApiHeaders(),
                     params: {

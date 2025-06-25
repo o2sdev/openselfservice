@@ -22,6 +22,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                     'tickets',
                     'users',
                     'cache',
+                    'auth',
                 ],
                 message: 'Choose which modules you want to be included in the integration.',
                 validate: (input: string[]) => !!input.length,
@@ -56,8 +57,8 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                 },
                 {
                     type: 'add',
-                    path: 'packages/integrations/{{kebabCase name}}/.eslintrc.js',
-                    templateFile: 'templates/integration/eslintrc.hbs',
+                    path: 'packages/integrations/{{kebabCase name}}/eslint.config.mjs',
+                    templateFile: 'templates/integration/eslint.config.hbs',
                 },
                 {
                     type: 'add',

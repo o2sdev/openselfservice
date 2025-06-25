@@ -1,6 +1,6 @@
 {
     "name": "create-o2s-app",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "private": false,
     "license": "MIT",
     "main": "./dist/index.js",
@@ -14,6 +14,7 @@
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
+        "@o2s/telemetry": "*",
         "@types/adm-zip": "^0.5.7",
         "@types/prompts": "^2.4.9",
         "cli-progress": "^3.12.0",

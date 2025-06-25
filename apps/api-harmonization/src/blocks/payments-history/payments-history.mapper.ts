@@ -44,7 +44,7 @@ const mapChartData = (data: Invoices.Model.Invoice[], locale: string, monthsToSh
 
     // Sum up invoice amounts for each month
     data.forEach((invoice) => {
-        const invoiceDate = new Date(invoice.paymentDueDate);
+        const invoiceDate = new Date(invoice.issuedDate);
         if (invoiceDate >= monthsToShowAgo) {
             const month = months.find(
                 (m) =>

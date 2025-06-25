@@ -1,11 +1,11 @@
-import { Body, Controller, Delete, Get, Param, Patch, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Headers, Param, Patch, UseInterceptors } from '@nestjs/common';
 import { LoggerService } from '@o2s/utils.logger';
 
-import { Constants } from '../auth';
-import { Roles } from '../auth/roles.decorator';
+import * as Auth from '@/modules/auth';
 
 import { Request } from './';
 import { UserService } from './users.service';
+import { AppHeaders } from '@/utils/models/headers';
 
 @Controller('/users')
 @UseInterceptors(LoggerService)
@@ -13,44 +13,54 @@ export class UserController {
     constructor(protected readonly userService: UserService) {}
 
     @Get('/me')
-    @Roles({ roles: [Constants.Roles.USER, Constants.Roles.ADMIN] })
-    getCurrentUser() {
-        return this.userService.getCurrentUser();
+    @Auth.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
+    getCurrentUser(@Headers() headers: AppHeaders) {
+        return this.userService.getCurrentUser(headers.authorization);
     }
 
     @Get(':id')
-    @Roles({ roles: [Constants.Roles.USER, Constants.Roles.ADMIN] })
-    getUser(@Param() params: Request.GetUserParams) {
-        return this.userService.getUser(params);
+    @Auth.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
+    getUser(@Param() params: Request.GetUserParams, @Headers() headers: AppHeaders) {
+        return this.userService.getUser(params, headers.authorization);
     }
 
     @Patch('/me')
-    @Roles({ roles: [Constants.Roles.USER, Constants.Roles.ADMIN] })
-    updateCurrentUser(@Body() body: Request.PostUserBody) {
-        return this.userService.updateCurrentUser(body);
+    @Auth.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
+    updateCurrentUser(@Body() body: Request.PostUserBody, @Headers() headers: AppHeaders) {
+        return this.userService.updateCurrentUser(body, headers.authorization);
     }
 
     @Patch(':id')
-    @Roles({ roles: [Constants.Roles.USER, Constants.Roles.ADMIN] })
-    updateUser(@Param() params: Request.GetUserParams, @Body() body: Request.PostUserBody) {
-        return this.userService.updateUser(params, body);
+    @Auth.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
+    updateUser(
+        @Param() params: Request.GetUserParams,
+        @Body() body: Request.PostUserBody,
+        @Headers() headers: AppHeaders,
+    ) {
+        return this.userService.updateUser(params, body, headers.authorization);
     }
 
     @Get('/me/customers')
-    @Roles({ roles: [Constants.Roles.USER, Constants.Roles.ADMIN] })
-    getCustomersForCurrentUser() {
-        return this.userService.getCurrentUserCustomers();
+    @Auth.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
+    getCustomersForCurrentUser(@Headers() headers: AppHeaders) {
+        return this.userService.getCurrentUserCustomers(headers.authorization);
     }
 
     @Get('/me/customers/:id')
-    @Roles({ roles: [Constants.Roles.USER, Constants.Roles.ADMIN] })
-    getCustomerForCurrentUserById(@Param() params: Request.GetCustomerParams) {
-        return this.userService.getCurrentUserCustomer(params);
+    @Auth.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
+    getCustomerForCurrentUserById(@Param() params: Request.GetCustomerParams, @Headers() headers: AppHeaders) {
+        return this.userService.getCurrentUserCustomer(params, headers.authorization);
     }
 
     @Delete('/me')
-    @Roles({ roles: [Constants.Roles.USER, Constants.Roles.ADMIN] })
-    deleteUser() {
-        return this.userService.deleteUser();
+    @Auth.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
+    deleteCurrentUser(@Headers() headers: AppHeaders) {
+        return this.userService.deleteCurrentUser(headers.authorization);
+    }
+
+    @Delete(':id')
+    @Auth.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
+    deleteUser(@Param() params: Request.GetUserParams, @Headers() headers: AppHeaders) {
+        return this.userService.deleteUser(params, headers.authorization);
     }
 }

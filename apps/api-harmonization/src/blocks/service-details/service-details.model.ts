@@ -1,4 +1,4 @@
-import { Products, Resources } from '../../models';
+import { Resources } from '../../models';
 import { Block } from '../../utils';
 
 export class ServiceDetailsBlock extends Block.Block {
@@ -9,12 +9,12 @@ export class ServiceDetailsBlock extends Block.Block {
 export class Service {
     price!: {
         title: string;
-        value: Products.Model.Product['price'];
+        value: Resources.Model.Service['product']['price'];
     };
     type!: {
         label: string;
         title: string;
-        value: Products.Model.Product['type'];
+        value: Resources.Model.Service['product']['type'];
     };
     status!: {
         label: string;
@@ -24,7 +24,7 @@ export class Service {
     category!: {
         label: string;
         title: string;
-        value: Products.Model.Product['category'];
+        value: Resources.Model.Service['product']['category'];
     };
     startDate!: {
         title: string;

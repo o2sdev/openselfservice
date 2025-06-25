@@ -1,26 +1,27 @@
-import { Injectable } from '@nestjs/common';
-import { Observable, forkJoin, map } from 'rxjs';
+import { DynamicModule, Module } from '@nestjs/common';
 
-import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
+import * as Framework from '@o2s/framework/modules';
 
-import { CMS } from '../../models';
+import { Articles, CMS } from '../../models';
 
-import { map{{ pascalCase name }} } from './{{ kebabCase name }}.mapper';
-import { {{ pascalCase name }}Block } from './{{ kebabCase name }}.model';
-import { Get{{ pascalCase name }}BlockQuery } from './{{ kebabCase name }}.request';
+import { {{ pascalCase name }}Controller } from './{{ kebabCase name }}.controller';
+import { {{ pascalCase name }}Service } from './{{ kebabCase name }}.service';
 
-@Injectable()
-export class {{ pascalCase name }}Service {
-    constructor(
-        private readonly cmsService: CMS.Service,
-    ) {}
-
-    get{{ pascalCase name }}Block(
-        query: Get{{ pascalCase name }}BlockQuery,
-        headers: AppHeaders,
-    ): Observable<{{ pascalCase name }}Block> {
-        const cms = this.cmsService.get{{ pascalCase name }}Block({ ...query, locale: headers['x-locale'] });
-
-        return forkJoin([cms]).pipe(map(([cms]) => map{{ pascalCase name }}(cms, headers['x-locale'])));
+@Module({})
+export class {{ pascalCase name }}BlockModule {
+    static register(_config: Framework.ApiConfig): DynamicModule {
+        return {
+            module: {{ pascalCase name }}BlockModule,
+            providers: [
+                {{ pascalCase name }}Service,
+                {
+                    provide: CMS.Service,
+                    useExisting: Framework.CMS.Service,
+                },
+            ],
+            controllers: [{{ pascalCase name }}Controller],
+            exports: [{{ pascalCase name }}Service],
+        };
     }
 }
+

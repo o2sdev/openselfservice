@@ -1,4 +1,4 @@
-import { AddressDTO, HttpTypes } from '@medusajs/types';
+import { AddressDTO, AdminProductVariant, HttpTypes } from '@medusajs/types';
 
 export type Asset = {
     id: string;
@@ -34,10 +34,7 @@ export type ServiceInstance = {
         email: string;
     };
     assets: Asset[];
-    product_variant: {
-        product_id: string;
-        id: string;
-    };
+    product_variant: AdminProductVariant;
     totals: Totals;
 };
 

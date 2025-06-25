@@ -1,5 +1,112 @@
 # @o2s/integrations.mocked
 
+## 1.6.5
+
+### Patch Changes
+
+- 97264f1: feat: replace To be Paid column with Net amount on invoices
+- f4b70b3: added telemetry events for anonymous data collection about usage
+- Updated dependencies [97264f1]
+    - @o2s/framework@1.6.2
+
+## 1.6.4
+
+### Patch Changes
+
+- 41ca705: feat: generate db in prisma as postinstall task
+
+## 1.6.3
+
+### Patch Changes
+
+- 6102f12: added prisma files to package files
+
+## 1.6.2
+
+### Patch Changes
+
+- d1eeee2: reverted postinstall script as it fails when trying to initialise prisma
+
+## 1.6.1
+
+### Patch Changes
+
+- d878a0b: added postinstall stage to properly initialize database
+- 85bb4bb: fix: fixed pagination in products and resources mocks
+
+## 1.6.0
+
+### Minor Changes
+
+- 2a0475c: feat: update products, resources mocks, InfoCard - layout fix
+
+    - updated model for GetRelatedProductListParams - renamed id and variantId to inform that we need to provide product data as params,
+    - added natural data to products and resources mocks,
+    - added sorting and filtering to products.mapper.ts,
+    - fixed InfoCard layout issue,
+
+### Patch Changes
+
+- Updated dependencies [2a0475c]
+    - @o2s/framework@1.6.0
+
+## 1.5.1
+
+### Patch Changes
+
+- 7fdb9c9: added delete user with id method in users module
+- Updated dependencies [7fdb9c9]
+    - @o2s/framework@1.5.1
+
+## 1.5.0
+
+### Minor Changes
+
+- fb98e38: feat: align overdue cards state on Invoices and OrderDetails pages
+- 6949717: feat: updated resource integration - added product to the Resource model
+
+    - updated service-list and service-details blocks,
+    - added sorting and filters to mocks,
+
+### Patch Changes
+
+- Updated dependencies [6949717]
+    - @o2s/framework@1.5.0
+
+## 1.4.0
+
+### Minor Changes
+
+- 027ed39: featuredServiceListBlock - list of available services
+
+    - added new UI componetnt from Shadcn - Switch,
+    - extended ProductCard with action property,
+    - implemented model and mock for FeatureServiceListBlock,
+    - integrated with strapi,
+
+- 9c31433: - added endOfWarranty attribute on asset model
+    - fixed German labels in English mocks
+    - fixed incorrect imports in framework modules configuration
+    - added optional authorization param in most service methods
+
+### Patch Changes
+
+- Updated dependencies [027ed39]
+- Updated dependencies [985780a]
+- Updated dependencies [9c31433]
+    - @o2s/framework@1.4.0
+
+## 1.3.0
+
+### Minor Changes
+
+- 8c29a31: moved mocked auth integration (with a local database) to a separate package to allow easier switching between other integrations
+
+### Patch Changes
+
+- Updated dependencies [8c29a31]
+    - @o2s/framework@1.3.0
+
 ## 1.2.0
 
 ### Minor Changes

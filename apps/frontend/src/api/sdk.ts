@@ -1,10 +1,11 @@
 // this unused import is necessary for TypeScript to properly resolve API methods
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Blocks, Headers, Modules } from '@o2s/api-harmonization';
-import { Notifications } from '@o2s/integrations.mocked/sdk';
 import { ordersSummary } from 'src/api/blocks/orders-summary';
 
 import { extendSdk, getSdk } from '@o2s/framework/sdk';
+
+import { Notifications } from '@o2s/integrations.mocked/sdk';
 
 import { article } from '@/api/blocks/article';
 import { articleList } from '@/api/blocks/article-list';
@@ -12,6 +13,7 @@ import { articleSearch } from '@/api/blocks/article-search';
 import { category } from '@/api/blocks/category';
 import { categoryList } from '@/api/blocks/category-list';
 import { faq } from '@/api/blocks/faq';
+import { featuredServiceList } from '@/api/blocks/featured-service-list';
 import { invoiceList } from '@/api/blocks/invoice-list';
 import { notificationDetails } from '@/api/blocks/notification-details';
 import { notificationList } from '@/api/blocks/notification-list';
@@ -77,6 +79,7 @@ export const sdk = extendSdk(internalSdk, {
         getArticle: article(internalSdk).blocks.getArticle,
         getArticleSearch: articleSearch(internalSdk).blocks.getArticleSearch,
         searchArticles: articleSearch(internalSdk).blocks.searchArticles,
+        getFeaturedServiceList: featuredServiceList(internalSdk).blocks.getFeaturedServiceList,
         // BLOCK REGISTER
     },
     modules: {

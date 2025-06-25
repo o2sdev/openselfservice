@@ -13,17 +13,17 @@ export class OrdersModule {
         const controller = config.integrations.orders.controller || OrdersController;
         const imports = config.integrations.orders.imports || [];
 
+        const provider = {
+            provide: OrderService,
+            useClass: service as Type,
+        };
+
         return {
             module: OrdersModule,
-            providers: [
-                {
-                    provide: OrderService,
-                    useClass: service as Type,
-                },
-            ],
+            providers: [provider],
             imports: [HttpModule, ...imports],
             controllers: [controller],
-            exports: [OrderService],
+            exports: [provider],
         };
     }
 }

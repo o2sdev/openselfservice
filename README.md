@@ -69,14 +69,16 @@ For a detailed breakdown, visit **[Project structure](https://www.openselfservic
 
 O2S includes pre-built integrations and allows you to extend functionality as needed.
 
-| Integration              | Status         |
-|--------------------------| -------------- |
-| **StrapiCMS**            | ✅ Available   |
-| **NextAuth**             | ✅ Available   |
-| **Redis cache**          | ✅ Available   |
-| **Search (Algolia)**     | 🔄 In progress |
-| **CRM (TBD)**            | 🔄 Planned     |
-| **ERP / Commerce (TBD)** | 🔄 Planned     |
+| Integration type/area | Status                                                                                                                                   |
+|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| **CMS**               | ✅ **StrapiCMS** - available<br/> 🔄 **Contentful** - in progress                                                                         |
+| **IAM**               | ✅ **Auth.js** - available<br/> ✅ **Keycloak** - available (not part of O2S, contact us for details)                                      |
+| **Cache**             | ✅ **Redis** - available                                                                                                                  |
+| **Search**            | ✅ **Algolia** - available                                                                                                                |
+| **CRM**               | ✅ **SurveyJS** - ticket submission handling<br/> 🔄 **other CRM solutions** - planned                                                    |
+| **ERP**               | ✅ **Medusa** - via Medusa plugin adding ERP-like features<br/>🔄 **SAP S/4HANA** - In progress (not part of O2S, contact us for details) |
+| **Commerce**          | 🔄 **Medusa** - in progress (basic product information, other areas TBD)                                                                 |
+
 
 ## 🔥 Why Open Self Service?
 
@@ -89,6 +91,9 @@ O2S includes pre-built integrations and allows you to extend functionality as ne
 
 We welcome contributions!
 If you’d like to contribute, please check the **[Contribution Guide](CONTRIBUTING.md)**.
+
+## Contact e-mail
+[contact@openselfservice.com](mailto:contact@openselfservice.com)
 
 ## 📩 Stay Updated
 

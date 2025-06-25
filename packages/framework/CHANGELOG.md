@@ -1,5 +1,66 @@
 # @o2s/framework
 
+## 1.6.2
+
+### Patch Changes
+
+- 97264f1: feat: replace To be Paid column with Net amount on invoices
+
+## 1.6.1
+
+### Patch Changes
+
+- 36463a4: refactored how modules dependencies are defined to improve extending integrations with multiple modules within them
+
+## 1.6.0
+
+### Minor Changes
+
+- 2a0475c: feat: update products, resources mocks, InfoCard - layout fix
+
+    - updated model for GetRelatedProductListParams - renamed id and variantId to inform that we need to provide product data as params,
+    - added natural data to products and resources mocks,
+    - added sorting and filtering to products.mapper.ts,
+    - fixed InfoCard layout issue,
+
+## 1.5.1
+
+### Patch Changes
+
+- 7fdb9c9: added delete user with id method in users module
+
+## 1.5.0
+
+### Minor Changes
+
+- 6949717: feat: updated resource integration - added product to the Resource model
+
+    - updated service-list and service-details blocks,
+    - added sorting and filters to mocks,
+
+## 1.4.0
+
+### Minor Changes
+
+- 027ed39: featuredServiceListBlock - list of available services
+
+    - added new UI componetnt from Shadcn - Switch,
+    - extended ProductCard with action property,
+    - implemented model and mock for FeatureServiceListBlock,
+    - integrated with strapi,
+
+- 985780a: added passing of authorization header to most of crucial services
+- 9c31433: - added endOfWarranty attribute on asset model
+    - fixed German labels in English mocks
+    - fixed incorrect imports in framework modules configuration
+    - added optional authorization param in most service methods
+
+## 1.3.0
+
+### Minor Changes
+
+- 8c29a31: moved mocked auth integration (with a local database) to a separate package to allow easier switching between other integrations
+
 ## 1.2.0
 
 ### Minor Changes

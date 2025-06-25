@@ -1,24 +1,43 @@
 {
     "$schema": "https://turbo.build/schema.json",
     "ui": "stream",
+    "concurrency": "100",
     "tasks": {
         "init": {},
         "build": {
-            "dependsOn": ["^build"],
-            "inputs": ["$TURBO_DEFAULT$", ".env*"],
-            "outputs": ["dist/**", "build/**", ".next/**", "!.next/cache/**"]
+            "dependsOn": [
+                "^build"
+            ],
+            "inputs": [
+                "$TURBO_DEFAULT$",
+                ".env*"
+            ],
+            "outputs": [
+                "dist/**",
+                "build/**",
+                ".next/**",
+                "!.next/cache/**"
+            ]
         },
         "lint": {
-            "dependsOn": ["^lint"]
+            "dependsOn": [
+                "^lint"
+            ]
         },
         "test": {
-            "dependsOn": ["^test"]
+            "dependsOn": [
+                "^test"
+            ]
         },
         "format": {
-            "dependsOn": ["^format"]
+            "dependsOn": [
+                "^format"
+            ]
         },
         "check-types": {
-            "dependsOn": ["^check-types"]
+            "dependsOn": [
+                "^check-types"
+            ]
         },
         "dev": {
             "cache": false,
@@ -30,19 +49,27 @@
         },
         "check-deps": {
             "cache": false,
-            "dependsOn": ["^check-deps"]
+            "dependsOn": [
+                "^check-deps"
+            ]
         },
         "update-deps:patch": {
             "cache": false,
-            "dependsOn": ["^update-deps:patch"]
+            "dependsOn": [
+                "^update-deps:patch"
+            ]
         },
         "update-deps:minor": {
             "cache": false,
-            "dependsOn": ["^update-deps:minor"]
+            "dependsOn": [
+                "^update-deps:minor"
+            ]
         },
         "update-deps:latest": {
             "cache": false,
-            "dependsOn": ["^update-deps:latest"]
+            "dependsOn": [
+                "^update-deps:latest"
+            ]
         }
     }
 }

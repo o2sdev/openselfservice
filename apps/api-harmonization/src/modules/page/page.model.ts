@@ -7,6 +7,8 @@ import {
     Category,
     CategoryList,
     Faq,
+    FeaturedServiceList,
+    // BLOCK IMPORT
     InvoiceList,
     NotificationDetails,
     NotificationList,
@@ -23,7 +25,6 @@ import {
     TicketList,
     TicketRecent,
     UserAccount,
-    // BLOCK IMPORT
 } from '@o2s/api-harmonization/blocks';
 
 export class Init {
@@ -92,5 +93,6 @@ export type Blocks =
     | OrdersSummary.Model.OrdersSummaryBlock['__typename']
     | OrderDetails.Model.OrderDetailsBlock['__typename']
     | QuickLinks.Model.QuickLinksBlock['__typename']
-    | CategoryList.Model.CategoryListBlock['__typename'];
+    | CategoryList.Model.CategoryListBlock['__typename']
+    | FeaturedServiceList.Model.FeaturedServiceListBlock['__typename'];
 // BLOCK REGISTER

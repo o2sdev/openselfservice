@@ -14,15 +14,15 @@ import {
 export abstract class ResourceService {
     protected constructor(..._services: unknown[]) {}
 
-    abstract purchaseOrActivateResource(params: GetResourceParams): Observable<void>;
+    abstract purchaseOrActivateResource(params: GetResourceParams, authorization?: string): Observable<void>;
 
-    abstract purchaseOrActivateService(params: GetServiceParams): Observable<void>;
+    abstract purchaseOrActivateService(params: GetServiceParams, authorization?: string): Observable<void>;
 
     abstract getServiceList(query: GetServiceListQuery, authorization: string): Observable<Services>;
-    abstract getService(params: GetServiceParams): Observable<Service>;
+    abstract getService(params: GetServiceParams, authorization?: string): Observable<Service>;
 
     abstract getAssetList(query: GetAssetListQuery, authorization: string): Observable<Assets>;
-    abstract getAsset(params: GetAssetParams): Observable<Asset>;
+    abstract getAsset(params: GetAssetParams, authorization?: string): Observable<Asset>;
 
     abstract getCompatibleServiceList(params: GetAssetParams): Observable<Products.Model.Products>;
     abstract getFeaturedServiceList(): Observable<Products.Model.Products>;

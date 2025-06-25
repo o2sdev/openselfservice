@@ -1,5 +1,83 @@
 # @o2s/api-harmonization
 
+## 1.5.3
+
+### Patch Changes
+
+- 25af511: feat: replaced chart to be based on issueDate field
+- 97264f1: feat: replace To be Paid column with Net amount on invoices
+- f4b70b3: added telemetry events for anonymous data collection about usage
+- Updated dependencies [97264f1]
+- Updated dependencies [f4b70b3]
+- Updated dependencies [f4b70b3]
+    - @o2s/integrations.mocked@1.6.5
+    - @o2s/framework@1.6.2
+    - @o2s/telemetry@1.0.0
+
+## 1.5.2
+
+### Patch Changes
+
+- 36463a4: refactored how modules dependencies are defined to improve extending integrations with multiple modules within them
+- Updated dependencies [36463a4]
+    - @o2s/framework@1.6.1
+
+## 1.5.1
+
+### Patch Changes
+
+- 900d3d1: changed `FRONT_BASE_URLS` env variable to allow defining multiple origins for the API Harmonization Server
+- Updated dependencies [d878a0b]
+- Updated dependencies [85bb4bb]
+    - @o2s/integrations.mocked@1.6.1
+
+## 1.5.0
+
+### Minor Changes
+
+- 6949717: feat: updated resource integration - added product to the Resource model
+
+    - updated service-list and service-details blocks,
+    - added sorting and filters to mocks,
+
+### Patch Changes
+
+- Updated dependencies [fb98e38]
+- Updated dependencies [6949717]
+    - @o2s/integrations.mocked@1.5.0
+    - @o2s/framework@1.5.0
+
+## 1.4.0
+
+### Minor Changes
+
+- 027ed39: featuredServiceListBlock - list of available services
+
+    - added new UI componetnt from Shadcn - Switch,
+    - extended ProductCard with action property,
+    - implemented model and mock for FeatureServiceListBlock,
+    - integrated with strapi,
+
+### Patch Changes
+
+- Updated dependencies [027ed39]
+- Updated dependencies [985780a]
+- Updated dependencies [9c31433]
+    - @o2s/integrations.mocked@1.4.0
+    - @o2s/framework@1.4.0
+
+## 1.3.0
+
+### Minor Changes
+
+- 8c29a31: moved mocked auth integration (with a local database) to a separate package to allow easier switching between other integrations
+
+### Patch Changes
+
+- Updated dependencies [8c29a31]
+    - @o2s/integrations.mocked@1.3.0
+    - @o2s/framework@1.3.0
+
 ## 1.2.0
 
 ### Minor Changes

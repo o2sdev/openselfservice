@@ -1,6 +1,7 @@
 import { ApiConfig } from '@o2s/framework/modules';
 
 import { ArticlesIntegrationConfig } from '@o2s/api-harmonization/models/articles';
+import { AuthIntegrationConfig } from '@o2s/api-harmonization/models/auth';
 import { BillingAccountsIntegrationConfig } from '@o2s/api-harmonization/models/billing-accounts';
 import { CacheIntegrationConfig } from '@o2s/api-harmonization/models/cache';
 import { CmsIntegrationConfig } from '@o2s/api-harmonization/models/cms';
@@ -30,5 +31,6 @@ export const AppConfig: ApiConfig = {
         search: SearchIntegrationConfig,
         products: ProductsIntegrationConfig,
         orders: OrdersIntegrationConfig,
+        auth: AuthIntegrationConfig,
     },
 };

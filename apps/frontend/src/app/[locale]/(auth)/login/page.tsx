@@ -4,7 +4,6 @@ import { setRequestLocale } from 'next-intl/server';
 import { headers } from 'next/headers';
 import { notFound } from 'next/navigation';
 import React from 'react';
-import { providerMap } from 'src/auth.providers';
 
 import { Toaster } from '@o2s/ui/components/toaster';
 
@@ -13,6 +12,7 @@ import { sdk } from '@/api/sdk';
 import { generateSeo } from '@/utils/seo';
 
 import { auth, signIn } from '@/auth';
+import { providerMap } from '@/auth/auth.providers';
 
 import { routing } from '@/i18n/routing';
 

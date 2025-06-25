@@ -11,17 +11,16 @@ export class CacheModule {
     static register(config: ApiConfig): DynamicModule {
         const service = config.integrations.cache.service;
         const imports = config.integrations.cache.imports || [];
+        const provider = {
+            provide: CacheService,
+            useClass: service as Type,
+        };
 
         return {
             module: CacheModule,
-            providers: [
-                {
-                    provide: CacheService,
-                    useClass: service as Type,
-                },
-            ],
+            providers: [provider],
             imports: [HttpModule, ...imports],
-            exports: [CacheService],
+            exports: [provider],
         };
     }
 }

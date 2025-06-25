@@ -18,7 +18,7 @@ export class InvoiceListBlock extends Block.Block {
     };
     table!: {
         title?: string;
-        data: Models.DataTable.DataTable<Invoices.Model.Invoice & { amountToPay: number }>;
+        data: Models.DataTable.DataTable<Invoices.Model.Invoice>;
     };
     downloadFileName?: string;
     downloadButtonAriaDescription?: string;
@@ -42,7 +42,7 @@ export class Invoice {
     totalAmountDue!: {
         value: Invoices.Model.Invoice['totalAmountDue']['value'];
     };
-    amountToPay!: {
-        value: Invoices.Model.Invoice['totalToBePaid']['value'];
+    totalNetAmountDue!: {
+        value: Invoices.Model.Invoice['totalNetAmountDue']['value'];
     };
 }

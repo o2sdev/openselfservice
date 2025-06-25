@@ -1,22 +1,21 @@
 import { ExecutionContext, Inject, Injectable } from '@nestjs/common';
-import { CanActivate } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { LoggerService } from '@o2s/utils.logger';
 import jwt from 'jsonwebtoken';
 
-import { RoleMatchingMode } from './auth.constants';
-import { Jwt } from './jwt.model';
-import { RoleDecorator } from './roles.decorator';
+import { Auth } from '@o2s/framework/modules';
+
+import { Jwt } from './auth.model';
 
 @Injectable()
-export class RolesGuard implements CanActivate {
+export class RolesGuard implements Auth.Guard {
     constructor(
         private readonly reflector: Reflector,
         @Inject(LoggerService) private readonly logger: LoggerService,
     ) {}
 
     async canActivate(context: ExecutionContext): Promise<boolean> {
-        const roleMetadata = this.reflector.getAllAndMerge<RoleDecorator>('roles', [
+        const roleMetadata = this.reflector.getAllAndMerge<Auth.Decorators.RoleDecorator>('roles', [
             context.getClass(),
             context.getHandler(),
         ]);
@@ -25,7 +24,7 @@ export class RolesGuard implements CanActivate {
             return true;
         }
 
-        const roleMatchingMode = roleMetadata.mode || RoleMatchingMode.ANY;
+        const roleMatchingMode = roleMetadata.mode || Auth.Constants.RoleMatchingMode.ANY;
 
         const request = context.switchToHttp().getRequest();
         const accessToken = request.headers['authorization']?.replace('Bearer ', '');
@@ -41,11 +40,9 @@ export class RolesGuard implements CanActivate {
         this.logger.debug(userRoles.join(','), 'User roles');
         this.logger.debug(requiredRoles.join(','), 'Required roles');
 
-        const granted =
-            roleMatchingMode === RoleMatchingMode.ALL
-                ? requiredRoles.every((role) => userRoles.includes(role))
-                : requiredRoles.some((role) => userRoles.includes(role));
-        return granted;
+        return roleMatchingMode === Auth.Constants.RoleMatchingMode.ALL
+            ? requiredRoles.every((role) => userRoles.includes(role))
+            : requiredRoles.some((role) => userRoles.includes(role));
     }
 
     private getUserRoles(decodedToken: Jwt): string[] {

@@ -1,5 +1,82 @@
 # @o2s/frontend
 
+## 1.6.1
+
+### Patch Changes
+
+- 97264f1: feat: replace To be Paid column with Net amount on invoices
+- Updated dependencies [25af511]
+- Updated dependencies [97264f1]
+- Updated dependencies [f4b70b3]
+    - @o2s/api-harmonization@1.5.3
+    - @o2s/integrations.mocked@1.6.5
+    - @o2s/framework@1.6.2
+
+## 1.6.0
+
+### Minor Changes
+
+- 2a0475c: feat: update products, resources mocks, InfoCard - layout fix
+
+    - updated model for GetRelatedProductListParams - renamed id and variantId to inform that we need to provide product data as params,
+    - added natural data to products and resources mocks,
+    - added sorting and filtering to products.mapper.ts,
+    - fixed InfoCard layout issue,
+
+### Patch Changes
+
+- Updated dependencies [2a0475c]
+    - @o2s/integrations.mocked@1.6.0
+    - @o2s/framework@1.6.0
+
+## 1.5.0
+
+### Minor Changes
+
+- fb98e38: feat: align overdue cards state on Invoices and OrderDetails pages
+
+### Patch Changes
+
+- Updated dependencies [fb98e38]
+- Updated dependencies [6949717]
+    - @o2s/integrations.mocked@1.5.0
+    - @o2s/api-harmonization@1.5.0
+    - @o2s/framework@1.5.0
+
+## 1.4.0
+
+### Minor Changes
+
+- 027ed39: featuredServiceListBlock - list of available services
+
+    - added new UI componetnt from Shadcn - Switch,
+    - extended ProductCard with action property,
+    - implemented model and mock for FeatureServiceListBlock,
+    - integrated with strapi,
+
+### Patch Changes
+
+- Updated dependencies [027ed39]
+- Updated dependencies [985780a]
+- Updated dependencies [9c31433]
+    - @o2s/integrations.mocked@1.4.0
+    - @o2s/api-harmonization@1.4.0
+    - @o2s/framework@1.4.0
+    - @o2s/ui@1.2.0
+
+## 1.3.0
+
+### Minor Changes
+
+- 8c29a31: moved mocked auth integration (with a local database) to a separate package to allow easier switching between other integrations
+
+### Patch Changes
+
+- Updated dependencies [8c29a31]
+    - @o2s/integrations.mocked@1.3.0
+    - @o2s/api-harmonization@1.3.0
+    - @o2s/framework@1.3.0
+
 ## 1.2.0
 
 ### Minor Changes

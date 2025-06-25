@@ -34,8 +34,11 @@ export class ResourcesService implements Resources.Service {
         return of(mapService(params.id)).pipe(responseDelay());
     }
 
-    getAssetList(query: Resources.Request.GetAssetListQuery): Observable<Resources.Model.Assets> {
-        return of(mapAssets(query)).pipe(responseDelay());
+    getAssetList(
+        query: Resources.Request.GetAssetListQuery,
+        authorization: string,
+    ): Observable<Resources.Model.Assets> {
+        return of(mapAssets(query, authorization)).pipe(responseDelay());
     }
 
     getAsset(params: Resources.Request.GetAssetParams): Observable<Resources.Model.Asset> {

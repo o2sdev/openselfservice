@@ -6,7 +6,7 @@ import { LoggerModule, LoggerService } from '@o2s/utils.logger';
 
 import {
     Articles,
-    Auth,
+    Auth as AuthModule,
     BillingAccounts,
     CMS,
     Cache,
@@ -23,12 +23,15 @@ import {
 
 import { configuration } from '@o2s/api-harmonization/config/configuration';
 
+import * as Auth from '@o2s/api-harmonization/models/auth';
+
 import { ArticleListBlockModule } from '@o2s/api-harmonization/blocks/article-list/article-list.module';
 import { ArticleSearchBlockModule } from '@o2s/api-harmonization/blocks/article-search/article-search.module';
 import { ArticleBlockModule } from '@o2s/api-harmonization/blocks/article/article.module';
 import { CategoryListBlockModule } from '@o2s/api-harmonization/blocks/category-list/category-list.module';
 import { CategoryBlockModule } from '@o2s/api-harmonization/blocks/category/category.module';
 import { FaqBlockModule } from '@o2s/api-harmonization/blocks/faq/faq.module';
+import { FeaturedServiceListBlockModule } from '@o2s/api-harmonization/blocks/featured-service-list/featured-service-list.module';
 import { InvoiceListBlockModule } from '@o2s/api-harmonization/blocks/invoice-list/invoice-list.module';
 import { NotificationDetailsBlockModule } from '@o2s/api-harmonization/blocks/notification-details/notification-details.module';
 import { NotificationListBlockModule } from '@o2s/api-harmonization/blocks/notification-list/notification-list.module';
@@ -57,6 +60,21 @@ import { PageModule } from './modules/page/page.module';
 import { RoutesModule } from './modules/routes/routes.module';
 import { SurveyjsModule } from './modules/surveyjs-forms/surveyjs.module';
 
+export const CMSBaseModule = CMS.Module.register(AppConfig);
+export const TicketsBaseModule = Tickets.Module.register(AppConfig);
+export const NotificationsBaseModule = Notifications.Module.register(AppConfig);
+export const UsersBaseModule = Users.Module.register(AppConfig);
+export const OrganizationsBaseModule = Organizations.Module.register(AppConfig);
+export const CacheBaseModule = Cache.Module.register(AppConfig);
+export const BillingAccountsBaseModule = BillingAccounts.Module.register(AppConfig);
+export const ResourcesBaseModule = Resources.Module.register(AppConfig);
+export const InvoicesBaseModule = Invoices.Module.register(AppConfig);
+export const ArticlesBaseModule = Articles.Module.register(AppConfig);
+export const SearchBaseModule = Search.Module.register(AppConfig);
+export const ProductsBaseModule = Products.Module.register(AppConfig);
+export const OrdersBaseModule = Orders.Module.register(AppConfig);
+export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
+
 @Module({
     imports: [
         HttpModule,
@@ -68,19 +86,20 @@ import { SurveyjsModule } from './modules/surveyjs-forms/surveyjs.module';
             envFilePath: `.env.local`,
         }),
 
-        CMS.Module.register(AppConfig),
-        Tickets.Module.register(AppConfig),
-        Notifications.Module.register(AppConfig),
-        Users.Module.register(AppConfig),
-        Organizations.Module.register(AppConfig),
-        Cache.Module.register(AppConfig),
-        BillingAccounts.Module.register(AppConfig),
-        Resources.Module.register(AppConfig),
-        Invoices.Module.register(AppConfig),
-        Articles.Module.register(AppConfig),
-        Search.Module.register(AppConfig),
-        Products.Module.register(AppConfig),
-        Orders.Module.register(AppConfig),
+        CMSBaseModule,
+        TicketsBaseModule,
+        NotificationsBaseModule,
+        UsersBaseModule,
+        OrganizationsBaseModule,
+        CacheBaseModule,
+        BillingAccountsBaseModule,
+        ResourcesBaseModule,
+        InvoicesBaseModule,
+        ArticlesBaseModule,
+        SearchBaseModule,
+        ProductsBaseModule,
+        OrdersBaseModule,
+        AuthModuleBaseModule,
 
         PageModule.register(AppConfig),
         RoutesModule.register(AppConfig),
@@ -111,13 +130,14 @@ import { SurveyjsModule } from './modules/surveyjs-forms/surveyjs.module';
         CategoryBlockModule.register(AppConfig),
         ArticleBlockModule.register(AppConfig),
         ArticleSearchBlockModule.register(AppConfig),
+        FeaturedServiceListBlockModule.register(AppConfig),
         // BLOCK REGISTER
     ],
     providers: [
         AppService,
         {
             provide: APP_GUARD,
-            useFactory: (reflector: Reflector, logger: LoggerService) => new Auth.Guards.RolesGuard(reflector, logger),
+            useFactory: (reflector: Reflector, logger: LoggerService) => new Auth.Guard(reflector, logger),
             inject: [Reflector, LoggerService],
         },
     ],

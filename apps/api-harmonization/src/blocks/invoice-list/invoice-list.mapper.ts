@@ -49,7 +49,7 @@ export const mapInvoice = (
             value: invoice.paymentStatus,
         },
         totalAmountDue: checkNegativeValue(invoice.totalAmountDue),
-        amountToPay: checkNegativeValue(invoice.totalToBePaid),
+        totalNetAmountDue: checkNegativeValue(invoice.totalNetAmountDue),
         paymentDueDate: {
             displayValue: formatDateRelative(
                 invoice.paymentDueDate,

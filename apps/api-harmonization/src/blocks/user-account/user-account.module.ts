@@ -1,5 +1,6 @@
 import { DynamicModule, Module } from '@nestjs/common';
 
+import * as Framework from '@o2s/framework/modules';
 import { ApiConfig } from '@o2s/framework/modules';
 
 import { CMS, Users } from '../../models';
@@ -12,7 +13,17 @@ export class UserAccountBlockModule {
     static register(_config: ApiConfig): DynamicModule {
         return {
             module: UserAccountBlockModule,
-            providers: [UserAccountService, CMS.Service, Users.Service],
+            providers: [
+                UserAccountService,
+                {
+                    provide: CMS.Service,
+                    useExisting: Framework.CMS.Service,
+                },
+                {
+                    provide: Users.Service,
+                    useExisting: Framework.Users.Service,
+                },
+            ],
             controllers: [UserAccountController],
             exports: [UserAccountService],
         };

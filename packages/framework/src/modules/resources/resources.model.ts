@@ -1,4 +1,5 @@
-import { Product } from '@/modules/products/products.model';
+import { Products } from '@o2s/framework/modules';
+
 import { Pagination, Price } from '@/utils/models';
 import { Address } from '@/utils/models/address';
 
@@ -22,8 +23,7 @@ export class Contract {
 
 export class Resource {
     id!: string;
-    productId!: string;
-    productVariantId?: string;
+    product!: Products.Model.Product;
     billingAccountId!: string;
 }
 
@@ -41,7 +41,8 @@ export class Asset extends Resource {
     description!: string;
     status?: AssetStatus;
     address?: Address;
-    compatibleServices?: Product[];
+    compatibleServices?: Products.Model.Products;
+    endOfWarranty?: string;
 }
 
 export type Resources = Pagination.Paginated<Resource>;
