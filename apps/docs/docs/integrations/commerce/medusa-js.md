@@ -24,7 +24,10 @@ This integration relies upon the following environmental variables:
 |------------------------------|--------|------------------------------------------------------------------------------------------------------------------|
 | MEDUSAJS_BASE_URL            | string | the base URL pointing to the domain hosting your Medusa instance                                                 |
 | MEDUSAJS_PUBLISHABLE_API_KEY | string | A string indicating the publishable API key to use in the storefront. You can retrieve it from the Medusa Admin. |
-| MEDUSAJS_ADMIN_API_KEY       | string | A string indicating the admin user's API key. If specified, it's used to send authenticated requests.            |
+| MEDUSAJS_ADMIN_API_KEY       | string | A string indicating the admin user's API key.                                                                    |
+
+
+Go to Medusa JS SDK docs to learn how to set up API authentication keys: [Medusa JS SDK](https://docs.medusajs.com/resources/js-sdk)
 
 ## Supported modules
 
