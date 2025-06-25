@@ -3,14 +3,20 @@ import { v4 as uuid } from 'uuid';
 
 import { getMetadata } from './metadata';
 
-const config = new Configstore(
-    `o2s`,
-    {
-        metadata: getMetadata(),
-        machineId: uuid(),
-    },
-    { globalConfigPath: true },
-);
+const data = {
+    metadata: getMetadata(),
+    machineId: uuid(),
+};
+
+let config: Pick<Configstore, 'get'>;
+
+try {
+    config = new Configstore(`o2s`, data, { globalConfigPath: true });
+} catch (_error) {
+    config = {
+        get: (key: string) => data[key as keyof typeof data],
+    };
+}
 
 const metadata = (config.get('metadata') as ReturnType<typeof getMetadata>) || getMetadata();
 const machineId = (config.get('machineId') as string) || uuid();
