@@ -76,6 +76,7 @@ program
             rmSync(`${targetDirectory}/packages/integrations`, { recursive: true });
             rmSync(`${targetDirectory}/packages/utils`, { recursive: true });
             rmSync(`${targetDirectory}/packages/create-o2s-app`, { recursive: true });
+            rmSync(`${targetDirectory}/packages/telemetry`, { recursive: true });
 
             let file = readFileSync(targetDirectory + '/package-lock.json', 'utf8');
             file = removeSymLinks(file);
@@ -119,9 +120,12 @@ const removeSymLinks = (file: string) => {
         ['create-o2s-app', 'packages/create-o2s-app'],
         ['utils.logger', 'packages/utils/logger'],
         ['framework', 'packages/framework'],
+        ['telemetry', 'packages/telemetry'],
         ['integrations.mocked', 'packages/integrations/mocked'],
         ['integrations.strapi-cms', 'packages/integrations/strapi-cms'],
         ['integrations.redis', 'packages/integrations/redis'],
+        ['integrations.medusajs', 'packages/integrations/medusajs'],
+        ['integrations.algolia', 'packages/integrations/algolia'],
     ];
 
     let newFile = file;
