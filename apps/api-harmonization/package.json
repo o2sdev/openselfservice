@@ -27,7 +27,7 @@
         "@nestjs/platform-express": "^11.1.1",
         "@o2s/framework": "^1.6.2",
         "@o2s/integrations.mocked": "^1.6.5",
-        "@o2s/telemetry": "^1.0.0",
+        "@o2s/telemetry": "^1.0.6",
         "@o2s/utils.logger": "^1.1.0",
         "compression": "^1.8.0",
         "cookie": "^1.0.2",
