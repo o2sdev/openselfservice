@@ -1,5 +1,13 @@
 # @o2s/integrations.redis
 
+## 1.0.1
+
+### Patch Changes
+
+- f4b70b3: added telemetry events for anonymous data collection about usage
+- Updated dependencies [97264f1]
+    - @o2s/framework@1.6.2
+
 ## 1.0.0
 
 ### Major Changes

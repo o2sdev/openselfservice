@@ -1,5 +1,14 @@
 # @o2s/integrations.mocked
 
+## 1.6.5
+
+### Patch Changes
+
+- 97264f1: feat: replace To be Paid column with Net amount on invoices
+- f4b70b3: added telemetry events for anonymous data collection about usage
+- Updated dependencies [97264f1]
+    - @o2s/framework@1.6.2
+
 ## 1.6.4
 
 ### Patch Changes

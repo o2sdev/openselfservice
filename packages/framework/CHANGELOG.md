@@ -1,5 +1,11 @@
 # @o2s/framework
 
+## 1.6.2
+
+### Patch Changes
+
+- 97264f1: feat: replace To be Paid column with Net amount on invoices
+
 ## 1.6.1
 
 ### Patch Changes
