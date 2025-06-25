@@ -4,14 +4,13 @@ import { headers } from 'next/headers';
 import { notFound } from 'next/navigation';
 import React from 'react';
 
-import { Models } from '@o2s/framework/modules';
-
 import { Separator } from '@o2s/ui/components/separator';
 import { Toaster } from '@o2s/ui/components/toaster';
 import { Typography } from '@o2s/ui/components/typography';
 
 import { sdk } from '@/api/sdk';
 
+import { getRootBreadcrumb } from '@/utils/breadcrumb';
 import { generateSeo } from '@/utils/seo';
 
 import { auth, signIn } from '@/auth';
@@ -32,45 +31,6 @@ interface Props {
         slug: Array<string>;
     }>;
 }
-
-const findNavigationItem = (
-    items: (Models.Navigation.NavigationGroup | Models.Navigation.NavigationItem)[],
-    targetUrl: string,
-) => {
-    for (const item of items) {
-        if (item.__typename !== 'NavigationGroup') {
-            continue;
-        }
-
-        const navItem = item.items.find(
-            (navItem, index): navItem is Models.Navigation.NavigationItem =>
-                navItem.__typename === 'NavigationItem' && navItem.url === targetUrl && index === 0,
-        );
-
-        if (navItem) {
-            return {
-                slug: navItem.url,
-                label: item.title,
-            };
-        }
-    }
-
-    return null;
-};
-
-const getRootBreadcrumb = (
-    items: (Models.Navigation.NavigationGroup | Models.Navigation.NavigationItem)[],
-    slug: Array<string> | undefined,
-) => {
-    const rootSlug = slug ? `/${slug[0]}` : '/';
-
-    const rootBreadcrumb = findNavigationItem(items, rootSlug);
-    if (rootBreadcrumb) {
-        return rootBreadcrumb;
-    }
-
-    return findNavigationItem(items, '/');
-};
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const session = await auth();
