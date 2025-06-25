@@ -1,5 +1,17 @@
 # create-o2s-app
 
+## 1.0.3
+
+### Patch Changes
+
+- b0b16e5: updated script to remove unnecessary packages
+
+## 1.0.2
+
+### Patch Changes
+
+- 7486781: fixed telemetry package version
+
 ## 1.0.1
 
 ### Patch Changes
