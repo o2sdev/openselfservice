@@ -1,5 +1,11 @@
 # @o2s/docs
 
+## 1.1.1
+
+### Patch Changes
+
+- 49878d6: Medusa integration docs added
+
 ## 1.1.0
 
 ### Minor Changes

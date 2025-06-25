@@ -1,5 +1,11 @@
 # @o2s/telemetry
 
+## 1.0.5
+
+### Patch Changes
+
+- 03f71a4: re-publish to fix missing `dist` files in the package
+
 ## 1.0.4
 
 ### Patch Changes
