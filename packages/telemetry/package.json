@@ -3,9 +3,7 @@
     "version": "1.0.0",
     "private": false,
     "license": "MIT",
-    "exports": {
-        ".": "./dist/index.js"
-    },
+    "main": "./dist/index.js",
     "scripts": {
         "prepare": "npm run build",
         "postinstall": "node dist/postinstall.js || true",
