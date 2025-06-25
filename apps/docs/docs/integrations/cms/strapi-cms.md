@@ -145,11 +145,12 @@ To resolve a single page to an entry within the CMS, the following process happe
 
 ### Content model
 
-Coming soon!
+You can import the content models required by the integration from this repository: [https://github.com/o2sdev/openselfservice-resources/tree/main/packages/cms/strapi](https://github.com/o2sdev/openselfservice-resources/tree/main/packages/cms/strapi)
 
 ### Importing sample content
 
-Coming soon!
+Our sample content is available in the same [repo](https://github.com/o2sdev/openselfservice-resources/tree/main/packages/cms/strapi). It might give you some hints how to leverage the models to manage content and components in the frontend app.
+
 
 ## Cache integration
 
