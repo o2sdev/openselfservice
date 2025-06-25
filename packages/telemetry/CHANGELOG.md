@@ -1,5 +1,11 @@
 # @o2s/telemetry
 
+## 1.0.7
+
+### Patch Changes
+
+- b961738: added a failsafe around `configstore` not being available e.g. in serverless environements
+
 ## 1.0.6
 
 ### Patch Changes
