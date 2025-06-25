@@ -19,7 +19,6 @@
         "configstore": "^6.0.0",
         "boxen": "^6.2.1",
         "is-docker": "^3.0.0",
-        "posthog-node": "^5.1.1",
         "ts-node": "^10.9.2",
         "uuid": "^11.1.0"
     },
@@ -30,6 +29,7 @@
         "@types/configstore": "^6.0.2",
         "eslint": "^9.27.0",
         "prettier": "^3.5.3",
+        "tsc-alias": "^1.8.16",
         "typescript": "^5.8.3"
     }
 }
