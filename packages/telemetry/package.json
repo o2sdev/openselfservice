@@ -1,11 +1,13 @@
 {
     "name": "@o2s/telemetry",
-    "version": "1.0.1",
+    "version": "1.0.3",
     "private": false,
     "license": "MIT",
     "main": "./dist/index.js",
+    "files": [
+        "dist"
+    ],
     "scripts": {
-        "prepare": "npm run build",
         "postinstall": "node dist/postinstall.js || true",
         "dev": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")",
         "build": "tsc && tsc-alias",
