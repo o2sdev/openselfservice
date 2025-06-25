@@ -19,12 +19,6 @@ export const PAGE_INVOICE_LIST_EN: CMS.Model.Page.Page = {
     },
     isProtected: true,
     hasOwnTitle: false,
-    parent: {
-        slug: '/',
-        seo: {
-            title: 'Dashboard',
-        },
-    },
     template: {
         __typename: 'TwoColumnTemplate',
         slots: {
@@ -76,12 +70,6 @@ export const PAGE_INVOICE_LIST_DE: CMS.Model.Page.Page = {
     },
     isProtected: true,
     hasOwnTitle: false,
-    parent: {
-        slug: '/',
-        seo: {
-            title: 'Startseite',
-        },
-    },
     template: {
         __typename: 'TwoColumnTemplate',
         slots: {
@@ -133,12 +121,6 @@ export const PAGE_INVOICE_LIST_PL: CMS.Model.Page.Page = {
     },
     isProtected: true,
     hasOwnTitle: false,
-    parent: {
-        slug: '/',
-        seo: {
-            title: 'Strona główna',
-        },
-    },
     template: {
         __typename: 'TwoColumnTemplate',
         slots: {

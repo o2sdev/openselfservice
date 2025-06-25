@@ -4,6 +4,8 @@ import { headers } from 'next/headers';
 import { notFound } from 'next/navigation';
 import React from 'react';
 
+import { Models } from '@o2s/framework/modules';
+
 import { Separator } from '@o2s/ui/components/separator';
 import { Toaster } from '@o2s/ui/components/toaster';
 import { Typography } from '@o2s/ui/components/typography';
@@ -30,6 +32,45 @@ interface Props {
         slug: Array<string>;
     }>;
 }
+
+const findNavigationItem = (
+    items: (Models.Navigation.NavigationGroup | Models.Navigation.NavigationItem)[],
+    targetUrl: string,
+) => {
+    for (const item of items) {
+        if (item.__typename !== 'NavigationGroup') {
+            continue;
+        }
+
+        const navItem = item.items.find(
+            (navItem, index): navItem is Models.Navigation.NavigationItem =>
+                navItem.__typename === 'NavigationItem' && navItem.url === targetUrl && index === 0,
+        );
+
+        if (navItem) {
+            return {
+                slug: navItem.url,
+                label: item.title,
+            };
+        }
+    }
+
+    return null;
+};
+
+const getRootBreadcrumb = (
+    items: (Models.Navigation.NavigationGroup | Models.Navigation.NavigationItem)[],
+    slug: Array<string> | undefined,
+) => {
+    const rootSlug = slug ? `/${slug[0]}` : '/';
+
+    const rootBreadcrumb = findNavigationItem(items, rootSlug);
+    if (rootBreadcrumb) {
+        return rootBreadcrumb;
+    }
+
+    return findNavigationItem(items, '/');
+};
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const session = await auth();
@@ -90,6 +131,8 @@ export default async function Page({ params }: Props) {
         session?.accessToken,
     );
 
+    const rootBreadcrumb = getRootBreadcrumb(init.common.header.items, slug);
+
     try {
         const { data, meta } = await sdk.modules.getPage(
             {
@@ -114,7 +157,11 @@ export default async function Page({ params }: Props) {
                         <div className="py-6 px-4 md:px-6 ml-auto mr-auto w-full md:max-w-7xl">
                             <main className="flex flex-col gap-6 row-start-2 items-center sm:items-start">
                                 <div className="flex flex-col gap-6 w-full">
-                                    <Breadcrumbs breadcrumbs={data.breadcrumbs} />
+                                    <Breadcrumbs
+                                        breadcrumbs={
+                                            rootBreadcrumb ? [rootBreadcrumb, ...data.breadcrumbs] : data.breadcrumbs
+                                        }
+                                    />
                                     {!data.hasOwnTitle && (
                                         <>
                                             <Typography variant="h1" asChild>

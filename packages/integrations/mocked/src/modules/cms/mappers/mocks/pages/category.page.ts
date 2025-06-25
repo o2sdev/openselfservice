@@ -20,12 +20,6 @@ export const PAGE_WARRANTY_AND_REPAIR_EN: CMS.Model.Page.Page = {
     },
     isProtected: false,
     hasOwnTitle: false,
-    parent: {
-        slug: '/help-and-support',
-        seo: {
-            title: 'Help & Support',
-        },
-    },
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
@@ -60,12 +54,6 @@ export const PAGE_WARRANTY_AND_REPAIR_DE: CMS.Model.Page.Page = {
     },
     isProtected: false,
     hasOwnTitle: false,
-    parent: {
-        slug: '/hilfe-und-support',
-        seo: {
-            title: 'Hilfe und Support',
-        },
-    },
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
@@ -100,12 +88,6 @@ export const PAGE_WARRANTY_AND_REPAIR_PL: CMS.Model.Page.Page = {
     },
     isProtected: false,
     hasOwnTitle: false,
-    parent: {
-        slug: '/pomoc-i-wsparcie',
-        seo: {
-            title: 'Pomoc i Wsparcie',
-        },
-    },
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
@@ -142,12 +124,6 @@ export const PAGE_MAINTENANCE_EN: CMS.Model.Page.Page = {
 
     isProtected: false,
     hasOwnTitle: false,
-    parent: {
-        slug: '/help-and-support',
-        seo: {
-            title: 'Help & Support',
-        },
-    },
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
@@ -183,12 +159,6 @@ export const PAGE_MAINTENANCE_DE: CMS.Model.Page.Page = {
 
     isProtected: false,
     hasOwnTitle: false,
-    parent: {
-        slug: '/hilfe-und-support',
-        seo: {
-            title: 'Hilfe und Support',
-        },
-    },
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
@@ -224,12 +194,6 @@ export const PAGE_MAINTENANCE_PL: CMS.Model.Page.Page = {
 
     isProtected: false,
     hasOwnTitle: false,
-    parent: {
-        slug: '/pomoc-i-wsparcie',
-        seo: {
-            title: 'Pomoc i Wsparcie',
-        },
-    },
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
@@ -266,12 +230,6 @@ export const PAGE_SAFETY_EN: CMS.Model.Page.Page = {
 
     isProtected: false,
     hasOwnTitle: false,
-    parent: {
-        slug: '/help-and-support',
-        seo: {
-            title: 'Help & Support',
-        },
-    },
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
@@ -307,12 +265,6 @@ export const PAGE_SAFETY_DE: CMS.Model.Page.Page = {
 
     isProtected: false,
     hasOwnTitle: false,
-    parent: {
-        slug: '/hilfe-und-support',
-        seo: {
-            title: 'Hilfe und Support',
-        },
-    },
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
@@ -348,12 +300,6 @@ export const PAGE_SAFETY_PL: CMS.Model.Page.Page = {
 
     isProtected: false,
     hasOwnTitle: false,
-    parent: {
-        slug: '/pomoc-i-wsparcie',
-        seo: {
-            title: 'Pomoc i Wsparcie',
-        },
-    },
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
@@ -390,12 +336,6 @@ export const PAGE_ACCESSORIES_EN: CMS.Model.Page.Page = {
 
     isProtected: false,
     hasOwnTitle: false,
-    parent: {
-        slug: '/help-and-support',
-        seo: {
-            title: 'Help & Support',
-        },
-    },
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
@@ -431,12 +371,6 @@ export const PAGE_ACCESSORIES_DE: CMS.Model.Page.Page = {
 
     isProtected: false,
     hasOwnTitle: false,
-    parent: {
-        slug: '/hilfe-und-support',
-        seo: {
-            title: 'Hilfe und Support',
-        },
-    },
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
@@ -472,12 +406,6 @@ export const PAGE_ACCESSORIES_PL: CMS.Model.Page.Page = {
 
     isProtected: false,
     hasOwnTitle: false,
-    parent: {
-        slug: '/pomoc-i-wsparcie',
-        seo: {
-            title: 'Pomoc i Wsparcie',
-        },
-    },
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
@@ -514,12 +442,6 @@ export const PAGE_TROUBLESHOOTING_EN: CMS.Model.Page.Page = {
 
     isProtected: false,
     hasOwnTitle: false,
-    parent: {
-        slug: '/help-and-support',
-        seo: {
-            title: 'Help & Support',
-        },
-    },
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
@@ -555,12 +477,6 @@ export const PAGE_TROUBLESHOOTING_DE: CMS.Model.Page.Page = {
 
     isProtected: false,
     hasOwnTitle: false,
-    parent: {
-        slug: '/hilfe-und-support',
-        seo: {
-            title: 'Hilfe und Support',
-        },
-    },
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
@@ -596,12 +512,6 @@ export const PAGE_TROUBLESHOOTING_PL: CMS.Model.Page.Page = {
 
     isProtected: false,
     hasOwnTitle: false,
-    parent: {
-        slug: '/pomoc-i-wsparcie',
-        seo: {
-            title: 'Pomoc i Wsparcie',
-        },
-    },
     template: {
         __typename: 'OneColumnTemplate',
         slots: {

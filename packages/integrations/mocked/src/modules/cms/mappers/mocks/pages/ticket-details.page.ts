@@ -24,12 +24,6 @@ export const PAGE_TICKET_DETAILS_EN: CMS.Model.Page.Page = {
         seo: {
             title: 'Cases',
         },
-        parent: {
-            slug: '/',
-            seo: {
-                title: 'Dashboard',
-            },
-        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -74,12 +68,6 @@ export const PAGE_TICKET_DETAILS_DE: CMS.Model.Page.Page = {
         seo: {
             title: 'Fälle',
         },
-        parent: {
-            slug: '/',
-            seo: {
-                title: 'Startseite',
-            },
-        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -123,12 +111,6 @@ export const PAGE_TICKET_DETAILS_PL: CMS.Model.Page.Page = {
         slug: '/zgloszenia',
         seo: {
             title: 'Zgłoszenia',
-        },
-        parent: {
-            slug: '/',
-            seo: {
-                title: 'Strona główna',
-            },
         },
     },
     template: {

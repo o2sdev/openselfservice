@@ -24,12 +24,6 @@ export const PAGE_NOTIFICATION_DETAILS_EN: CMS.Model.Page.Page = {
         seo: {
             title: 'Notifications',
         },
-        parent: {
-            slug: '/',
-            seo: {
-                title: 'Dashboard',
-            },
-        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -74,12 +68,6 @@ export const PAGE_NOTIFICATION_DETAILS_DE: CMS.Model.Page.Page = {
         seo: {
             title: 'Benachrichtigungen',
         },
-        parent: {
-            slug: '/',
-            seo: {
-                title: 'Startseite',
-            },
-        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -123,12 +111,6 @@ export const PAGE_NOTIFICATION_DETAILS_PL: CMS.Model.Page.Page = {
         slug: '/powiadomienia',
         seo: {
             title: 'Powiadomienia',
-        },
-        parent: {
-            slug: '/',
-            seo: {
-                title: 'Strona główna',
-            },
         },
     },
     template: {
