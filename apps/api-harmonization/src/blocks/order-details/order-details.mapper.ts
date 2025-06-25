@@ -24,7 +24,7 @@ export const mapOrderDetails = (
 
     const overdueDays = dayjs(order.paymentDueDate).diff(dayjs(), 'days');
     const isOverdue = notPaid && overdueDays > 0;
-    const overdueAmount = isOverdue ? order.total.value : 0;
+    const overdueAmount = isOverdue ? order.subtotal?.value || 0 : 0;
 
     return {
         __typename: 'OrderDetailsBlock',
@@ -34,14 +34,14 @@ export const mapOrderDetails = (
             id: {
                 value: order.id,
             },
-            total: {
+            subtotal: {
                 title: cms.totalValue.title,
                 icon: cms.totalValue.icon,
-                label: checkNegativeValue(order.total).value.toString(),
+                label: checkNegativeValue(order.subtotal || { value: 0, currency }).value.toString(),
                 description: format(cms.totalValue.message || '', {
                     value: order.items.total,
                 }),
-                value: order.total,
+                value: order.subtotal,
             },
             createdAt: {
                 title: cms.createdOrderAt.title,
