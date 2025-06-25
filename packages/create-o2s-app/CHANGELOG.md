@@ -1,5 +1,11 @@
 # create-o2s-app
 
+## 1.0.2
+
+### Patch Changes
+
+- 7486781: fixed telemetry package version
+
 ## 1.0.1
 
 ### Patch Changes
