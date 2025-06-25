@@ -24,12 +24,6 @@ export const PAGE_SERVICE_DETAILS_EN: CMS.Model.Page.Page = {
         seo: {
             title: 'Services',
         },
-        parent: {
-            slug: '/',
-            seo: {
-                title: 'Dashboard',
-            },
-        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -78,12 +72,6 @@ export const PAGE_SERVICE_DETAILS_DE: CMS.Model.Page.Page = {
         seo: {
             title: 'Dienstleistungen',
         },
-        parent: {
-            slug: '/',
-            seo: {
-                title: 'Startseite',
-            },
-        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -131,12 +119,6 @@ export const PAGE_SERVICE_DETAILS_PL: CMS.Model.Page.Page = {
         slug: '/uslugi',
         seo: {
             title: 'Usługi',
-        },
-        parent: {
-            slug: '/',
-            seo: {
-                title: 'Strona główna',
-            },
         },
     },
     template: {
