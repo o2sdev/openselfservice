@@ -1,5 +1,11 @@
 # @o2s/telemetry
 
+## 1.0.6
+
+### Patch Changes
+
+- edda060: added missing dependencies
+
 ## 1.0.5
 
 ### Patch Changes
