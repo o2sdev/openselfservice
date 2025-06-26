@@ -69,7 +69,7 @@ export const mapOrdersSummary = (
 };
 
 const getTotalValue = (orders: Orders.Model.Orders) => {
-    return orders.data.reduce((acc, order) => acc + order.total.value, 0);
+    return orders.data.reduce((acc, order) => acc + (order.subtotal?.value || 0), 0);
 };
 
 /**

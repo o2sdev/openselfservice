@@ -262,6 +262,10 @@ const generateOrderItem = (itemIndex: number): Orders.Model.OrderItem => {
             value: total,
             currency: product.currency as Orders.Model.Order['currency'],
         },
+        subtotal: {
+            value: total - total * 0.23,
+            currency: product.currency as Orders.Model.Order['currency'],
+        },
         unit: 'PCS' as Orders.Model.OrderItem['unit'],
         currency: product.currency as Orders.Model.Order['currency'],
         product: {
@@ -428,7 +432,7 @@ export const mapOrder = (options: Orders.Request.GetOrderParams): Orders.Model.O
             const aValue = a[field as keyof Orders.Model.OrderItem];
             const bValue = b[field as keyof Orders.Model.OrderItem];
 
-            if (field === 'discountTotal' || field === 'total' || field === 'price') {
+            if (field === 'discountTotal' || field === 'total' || field === 'subtotal' || field === 'price') {
                 if (!aValue || !bValue) return 0;
 
                 const aValueNumber = (aValue as Models.Price.Price).value;
@@ -484,7 +488,7 @@ export const mapOrders = (options: Orders.Request.GetOrderListQuery, customerId:
             const aDate = new Date(aValue as string);
             const bDate = new Date(bValue as string);
             return isAscending ? aDate.getTime() - bDate.getTime() : bDate.getTime() - aDate.getTime();
-        } else if (field === 'total') {
+        } else if (field === 'total' || field === 'subtotal') {
             const aTotal = (aValue as Models.Price.Price).value;
             const bTotal = (bValue as Models.Price.Price).value;
             return isAscending ? aTotal - bTotal : bTotal - aTotal;

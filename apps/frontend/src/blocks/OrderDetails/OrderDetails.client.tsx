@@ -233,14 +233,14 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
                     <div className="w-full grid grid-cols-1 xl:grid-cols-2 gap-6">
                         <div className="w-full flex flex-col md:flex-row gap-6">
                             <InfoCard
-                                title={data.order.total.title}
-                                icon={data.order.total.icon}
+                                title={data.order.subtotal.title}
+                                icon={data.order.subtotal.icon}
                                 value={
                                     <Typography variant="highlightedBig">
-                                        <Price price={data.order.total.value} />
+                                        <Price price={data.order.subtotal.value} />
                                     </Typography>
                                 }
-                                description={data.order.total.description}
+                                description={data.order.subtotal.description}
                             />
 
                             <InfoCard
@@ -355,7 +355,7 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
                                             <TableRow>
                                                 {data.productList.table.columns.map((column) => {
                                                     switch (column.id) {
-                                                        case 'total':
+                                                        case 'subtotal':
                                                             return (
                                                                 <TableHead
                                                                     key={column.id}
@@ -463,9 +463,9 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
                                                                         key={column.id}
                                                                         className="whitespace-nowrap"
                                                                     >
-                                                                        {orderItem.total?.value
+                                                                        {orderItem.subtotal?.value
                                                                             ? (orderItem.discountTotal?.value || 0) /
-                                                                              orderItem.total?.value
+                                                                              orderItem.subtotal?.value
                                                                             : 0}
                                                                         %
                                                                     </TableCell>
@@ -479,7 +479,7 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
                                                                         <Price price={orderItem[column.id]} />
                                                                     </TableCell>
                                                                 );
-                                                            case 'total':
+                                                            case 'subtotal':
                                                                 return (
                                                                     <TableCell
                                                                         key={column.id}

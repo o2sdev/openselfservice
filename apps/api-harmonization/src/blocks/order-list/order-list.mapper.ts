@@ -56,9 +56,9 @@ export const mapOrder = (
                 : '-',
             value: order.paymentDueDate,
         },
-        total: {
-            label: checkNegativeValue(order.total).value.toString(),
-            value: checkNegativeValue(order.total),
+        subtotal: {
+            label: checkNegativeValue(order.subtotal || { value: 0, currency: order.currency }).value.toString(),
+            value: checkNegativeValue(order.subtotal || { value: 0, currency: order.currency }),
         },
         currency: order.currency,
         detailsUrl: format(cms.detailsUrl, {
