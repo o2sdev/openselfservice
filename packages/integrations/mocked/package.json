@@ -1,6 +1,6 @@
 {
     "name": "@o2s/integrations.mocked",
-    "version": "1.6.5",
+    "version": "1.6.8",
     "private": false,
     "license": "MIT",
     "exports": {
@@ -15,7 +15,7 @@
     ],
     "scripts": {
         "prepare": "npx prisma generate && dotenv -e .env.local -- prisma migrate deploy && dotenv -e .env.local -- prisma db seed",
-        "postinstall": "npm run prepare",
+        "postinstall": "npx prisma generate",
         "dev": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")",
         "build": "dotenv -e .env.local -- prisma migrate deploy && tsc && tsc-alias",
         "postbuild": "shx cp -r src/modules/invoices/resources dist/modules/invoices/",

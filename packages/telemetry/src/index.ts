@@ -1,66 +1,159 @@
-import Configstore from 'configstore';
 import { v4 as uuid } from 'uuid';
 
 import { getMetadata } from './metadata';
 
-const config = new Configstore(
-    `o2s`,
-    {
-        metadata: getMetadata(),
-        machineId: uuid(),
-    },
-    { globalConfigPath: true },
-);
+/**
+ * Telemetry class that handles configuration and event sending
+ */
+class Telemetry {
+    private metadata!: ReturnType<typeof getMetadata>;
+    private machineId!: string;
+    private readonly config!: Promise<void>;
 
-const metadata = (config.get('metadata') as ReturnType<typeof getMetadata>) || getMetadata();
-const machineId = (config.get('machineId') as string) || uuid();
+    constructor() {
+        // Don't initialize metadata and machineId here
+        // They will be loaded from configstore in initConfig
+        this.config = this.initConfig();
+    }
 
-export const sendEvent = (moduleName: string, eventName: string, data?: unknown) => {
-    try {
-        const IS_DISABLED = process.env.TELEMETRY_DISABLED === 'true';
+    /**
+     * Initialize configuration with dynamic import of configstore
+     * @returns Promise that resolves when configuration is loaded
+     */
+    private async initConfig(): Promise<void> {
+        try {
+            // Dynamically import configstore
+            const { default: Configstore } = await import('configstore');
 
-        if (IS_DISABLED) {
+            // Create configstore instance with empty default values
+            const config = new Configstore(`o2s`, {}, { globalConfigPath: true });
+
+            // Get metadata and machineId from config
+            this.metadata = config.get('metadata') as ReturnType<typeof getMetadata>;
+            this.machineId = config.get('machineId') as string;
+
+            // If values don't exist in configstore, set them with default values and save to configstore
+            if (!this.metadata) {
+                this.metadata = getMetadata();
+                // Only write to configstore if we successfully got metadata
+                if (this.metadata) {
+                    config.set('metadata', this.metadata);
+                }
+            }
+
+            if (!this.machineId) {
+                this.machineId = uuid();
+                config.set('machineId', this.machineId);
+            }
+        } catch (_error) {
+            // If configstore fails, use default values
+            this.metadata = getMetadata();
+            this.machineId = uuid();
+
+            // Log error in development environment
+            if (process.env.NODE_ENV === 'development') {
+                console.debug('Telemetry config initialization error:', _error);
+            }
+        }
+    }
+
+    /**
+     * Send a telemetry event
+     */
+    public async sendEvent(moduleName: string, eventName: string, data?: unknown) {
+        await this.config;
+
+        // Read environment variables at method call time, not class instantiation time
+        // This ensures we always have the latest values, as they might not be available when the class is instantiated
+        const isDisabled = process.env.TELEMETRY_DISABLED === 'true';
+        if (isDisabled) {
             return;
         }
 
         const event = {
-            metadata,
+            metadata: this.metadata,
             data,
         };
 
-        const url = process.env.TELEMETRY_BASE_URL || 'http://telemetry.openselfservice.com';
-
-        fetch(`${url}/event`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                machineId,
-                moduleName,
-                eventName,
-                event,
-            }),
-        }).catch(() => {});
-    } catch (error) {
-        console.log('There was an error', error);
+        try {
+            // Read URL at method call time to ensure we have the latest value
+            const url = process.env.TELEMETRY_BASE_URL || 'http://telemetry.openselfservice.com';
+            fetch(`${url}/event`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    machineId: this.machineId,
+                    moduleName,
+                    eventName,
+                    event,
+                }),
+            }).catch((error) => {
+                // Silent fail, but log in debug environments
+                if (process.env.NODE_ENV === 'development') {
+                    console.debug('Telemetry event send failed:', error);
+                }
+            });
+        } catch (_error) {
+            // Silent fail, but log in debug environments
+            if (process.env.NODE_ENV === 'development') {
+                console.debug('Telemetry event send error:', _error);
+            }
+        }
     }
-};
 
-export const flushEvents = async () => {
-    try {
-        const IS_DISABLED = process.env.TELEMETRY_DISABLED === 'true';
+    /**
+     * Flush telemetry events
+     */
+    public async flushEvents() {
+        await this.config;
 
-        if (IS_DISABLED) {
+        // Read environment variables at method call time, not class instantiation time
+        // This ensures we always have the latest values, as they might not be available when the class is instantiated
+        const isDisabled = process.env.TELEMETRY_DISABLED === 'true';
+        if (isDisabled) {
             return;
         }
 
-        const url = process.env.TELEMETRY_BASE_URL || 'http://telemetry.openselfservice.com/';
-
-        await fetch(`${url}/flush`, {
-            method: 'POST',
-        }).catch(() => {});
-    } catch (error) {
-        console.log('There was an error', error);
+        try {
+            // Read URL at method call time to ensure we have the latest value
+            const url = process.env.TELEMETRY_BASE_URL || 'http://telemetry.openselfservice.com';
+            await fetch(`${url}/flush`, {
+                method: 'POST',
+            }).catch((error) => {
+                // Silent fail, but log in debug environments
+                if (process.env.NODE_ENV === 'development') {
+                    console.debug('Telemetry flush failed:', error);
+                }
+            });
+        } catch (_error) {
+            // Silent fail, but log in debug environments
+            if (process.env.NODE_ENV === 'development') {
+                console.debug('Telemetry flush error:', _error);
+            }
+        }
     }
+}
+
+// Create a singleton instance
+const telemetryInstance = new Telemetry();
+
+/**
+ * Send a telemetry event
+ * @param moduleName - The name of the module sending the event
+ * @param eventName - The name of the event
+ * @param data - Optional data to include with the event
+ * @returns Promise that resolves when the event is sent
+ */
+export const sendEvent = async (moduleName: string, eventName: string, data?: unknown): Promise<void> => {
+    return telemetryInstance.sendEvent(moduleName, eventName, data);
+};
+
+/**
+ * Flush telemetry events
+ * @returns Promise that resolves when events are flushed
+ */
+export const flushEvents = async (): Promise<void> => {
+    return telemetryInstance.flushEvents();
 };

@@ -1,6 +1,6 @@
 {
     "name": "@o2s/api-harmonization",
-    "version": "1.5.3",
+    "version": "1.5.5",
     "description": "",
     "author": "",
     "private": true,
@@ -34,6 +34,7 @@
         "cookie-parser": "^1.4.7",
         "dayjs": "^1.11.13",
         "helmet": "^8.1.0",
+        "jsonwebtoken": "^9.0.2",
         "jwt-decode": "^4.0.0",
         "reflect-metadata": "^0.2.2",
         "rxjs": "^7.8.2",
@@ -54,6 +55,7 @@
         "@types/cookie-parser": "^1.4.8",
         "@types/express": "^5.0.2",
         "@types/jest": "^29.5.14",
+        "@types/jsonwebtoken": "^9.0.10",
         "@types/node": "^22.15.19",
         "@types/string-template": "^1.0.6",
         "@types/supertest": "^6.0.3",

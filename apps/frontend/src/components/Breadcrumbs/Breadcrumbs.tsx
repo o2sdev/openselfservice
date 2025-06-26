@@ -23,7 +23,7 @@ export function Breadcrumbs({ breadcrumbs }: BreadcrumbsProps) {
             <BreadcrumbList>
                 {breadcrumbs?.map((item, index) =>
                     index !== breadcrumbs.length - 1 ? (
-                        <React.Fragment key={item.slug}>
+                        <React.Fragment key={`${item.slug}-${index}`}>
                             <BreadcrumbItem>
                                 {item.slug ? (
                                     <BreadcrumbLink asChild>

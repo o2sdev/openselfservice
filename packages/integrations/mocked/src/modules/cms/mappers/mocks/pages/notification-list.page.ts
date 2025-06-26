@@ -19,12 +19,6 @@ export const PAGE_NOTIFICATION_LIST_EN: CMS.Model.Page.Page = {
     },
     isProtected: true,
     hasOwnTitle: false,
-    parent: {
-        slug: '/',
-        seo: {
-            title: 'Dashboard',
-        },
-    },
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
@@ -63,12 +57,6 @@ export const PAGE_NOTIFICATION_LIST_DE: CMS.Model.Page.Page = {
     },
     isProtected: true,
     hasOwnTitle: false,
-    parent: {
-        slug: '/',
-        seo: {
-            title: 'Dashboard',
-        },
-    },
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
@@ -107,12 +95,6 @@ export const PAGE_NOTIFICATION_LIST_PL: CMS.Model.Page.Page = {
     },
     isProtected: true,
     hasOwnTitle: false,
-    parent: {
-        slug: '/',
-        seo: {
-            title: 'Dashboard',
-        },
-    },
     template: {
         __typename: 'OneColumnTemplate',
         slots: {

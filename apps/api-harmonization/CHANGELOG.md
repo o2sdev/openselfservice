@@ -1,5 +1,21 @@
 # @o2s/api-harmonization
 
+## 1.5.5
+
+### Patch Changes
+
+- d038e21: added missing dependency
+- Updated dependencies [38a9331]
+    - @o2s/integrations.mocked@1.6.8
+
+## 1.5.4
+
+### Patch Changes
+
+- 9a93a3d: feat: orders - replace price to be NET
+- Updated dependencies [9a93a3d]
+    - @o2s/integrations.mocked@1.6.7
+
 ## 1.5.3
 
 ### Patch Changes

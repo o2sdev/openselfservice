@@ -24,12 +24,6 @@ export const PAGE_ORDER_DETAILS_EN: CMS.Model.Page.Page = {
         seo: {
             title: 'Orders',
         },
-        parent: {
-            slug: '/',
-            seo: {
-                title: 'Dashboard',
-            },
-        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -70,12 +64,6 @@ export const PAGE_ORDER_DETAILS_DE: CMS.Model.Page.Page = {
         seo: {
             title: 'Bestellungen',
         },
-        parent: {
-            slug: '/',
-            seo: {
-                title: 'Startseite',
-            },
-        },
     },
     template: {
         __typename: 'OneColumnTemplate',
@@ -115,12 +103,6 @@ export const PAGE_ORDER_DETAILS_PL: CMS.Model.Page.Page = {
         slug: '/zamowienia',
         seo: {
             title: 'Zamówienia',
-        },
-        parent: {
-            slug: '/',
-            seo: {
-                title: 'Strona główna',
-            },
         },
     },
     template: {

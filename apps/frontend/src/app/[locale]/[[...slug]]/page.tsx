@@ -10,6 +10,7 @@ import { Typography } from '@o2s/ui/components/typography';
 
 import { sdk } from '@/api/sdk';
 
+import { getRootBreadcrumb } from '@/utils/breadcrumb';
 import { generateSeo } from '@/utils/seo';
 
 import { auth, signIn } from '@/auth';
@@ -90,6 +91,8 @@ export default async function Page({ params }: Props) {
         session?.accessToken,
     );
 
+    const rootBreadcrumb = getRootBreadcrumb(init.common.header.items, slug);
+
     try {
         const { data, meta } = await sdk.modules.getPage(
             {
@@ -114,7 +117,11 @@ export default async function Page({ params }: Props) {
                         <div className="py-6 px-4 md:px-6 ml-auto mr-auto w-full md:max-w-7xl">
                             <main className="flex flex-col gap-6 row-start-2 items-center sm:items-start">
                                 <div className="flex flex-col gap-6 w-full">
-                                    <Breadcrumbs breadcrumbs={data.breadcrumbs} />
+                                    <Breadcrumbs
+                                        breadcrumbs={
+                                            rootBreadcrumb ? [rootBreadcrumb, ...data.breadcrumbs] : data.breadcrumbs
+                                        }
+                                    />
                                     {!data.hasOwnTitle && (
                                         <>
                                             <Typography variant="h1" asChild>

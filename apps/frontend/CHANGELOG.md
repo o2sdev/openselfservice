@@ -1,5 +1,22 @@
 # @o2s/frontend
 
+## 1.6.3
+
+### Patch Changes
+
+- 9a93a3d: feat: orders - replace price to be NET
+- Updated dependencies [9a93a3d]
+    - @o2s/integrations.mocked@1.6.7
+    - @o2s/api-harmonization@1.5.4
+
+## 1.6.2
+
+### Patch Changes
+
+- ec84ef0: fix: fixed breadcrumb - removed redundant dashboard text
+- Updated dependencies [ec84ef0]
+    - @o2s/integrations.mocked@1.6.6
+
 ## 1.6.1
 
 ### Patch Changes

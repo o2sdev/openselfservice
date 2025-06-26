@@ -10,7 +10,7 @@ const MOCK_ORDER_LIST_BLOCK_EN: CMS.Model.OrderListBlock.OrderListBlock = {
             { id: 'createdAt', title: 'Order date' },
             { id: 'paymentDueDate', title: 'Payment due date' },
             { id: 'status', title: 'Status' },
-            { id: 'total', title: 'Order value' },
+            { id: 'subtotal', title: 'Order net value' },
         ],
         actions: {
             title: 'Actions',
@@ -56,8 +56,8 @@ const MOCK_ORDER_LIST_BLOCK_EN: CMS.Model.OrderListBlock.OrderListBlock = {
                     { label: 'Order date (descending)', value: 'createdAt_DESC' },
                     { label: 'Payment due date (ascending)', value: 'updatedAt_ASC' },
                     { label: 'Payment due date (descending)', value: 'updatedAt_DESC' },
-                    { label: 'Order value (ascending)', value: 'total_ASC' },
-                    { label: 'Order value (descending)', value: 'total_DESC' },
+                    { label: 'Order net value (ascending)', value: 'subtotal_ASC' },
+                    { label: 'Order net value (descending)', value: 'subtotal_DESC' },
                 ],
             },
             {
@@ -115,7 +115,7 @@ const MOCK_ORDER_LIST_BLOCK_DE: CMS.Model.OrderListBlock.OrderListBlock = {
             { id: 'createdAt', title: 'Bestelldatum' },
             { id: 'paymentDueDate', title: 'Zahlungsfrist' },
             { id: 'status', title: 'Status' },
-            { id: 'total', title: 'Bestellwert' },
+            { id: 'subtotal', title: 'Bestellnetto' },
         ],
         actions: {
             title: 'Aktion',
@@ -161,8 +161,8 @@ const MOCK_ORDER_LIST_BLOCK_DE: CMS.Model.OrderListBlock.OrderListBlock = {
                     { label: 'Bestelldatum aufsteigend', value: 'createdAt_ASC' },
                     { label: 'Bestelldatum absteigend', value: 'createdAt_DESC' },
                     { label: 'Zahlungsfrist aufsteigend', value: 'updatedAt_ASC' },
-                    { label: 'Bestellwert aufsteigend', value: 'total_ASC' },
-                    { label: 'Bestellwert absteigend', value: 'total_DESC' },
+                    { label: 'Bestellnetto aufsteigend', value: 'subtotal_ASC' },
+                    { label: 'Bestellnetto absteigend', value: 'subtotal_DESC' },
                 ],
             },
             {
@@ -220,7 +220,7 @@ const MOCK_ORDER_LIST_BLOCK_PL: CMS.Model.OrderListBlock.OrderListBlock = {
             { id: 'createdAt', title: 'Data zamówienia' },
             { id: 'paymentDueDate', title: 'Data płatności' },
             { id: 'status', title: 'Status' },
-            { id: 'total', title: 'Wartość zamówienia' },
+            { id: 'subtotal', title: 'Wartość zamówienia netto' },
         ],
         actions: {
             title: 'Akcja',
@@ -266,8 +266,8 @@ const MOCK_ORDER_LIST_BLOCK_PL: CMS.Model.OrderListBlock.OrderListBlock = {
                     { label: 'Data zamówienia rosnąco', value: 'createdAt_ASC' },
                     { label: 'Data zamówienia malejąco', value: 'createdAt_DESC' },
                     { label: 'Data płatności rosnąco', value: 'updatedAt_ASC' },
-                    { label: 'Wartość zamówienia rosnąco', value: 'total_ASC' },
-                    { label: 'Wartość zamówienia malejąco', value: 'total_DESC' },
+                    { label: 'Wartość zamówienia netto rosnąco', value: 'subtotal_ASC' },
+                    { label: 'Wartość zamówienia netto malejąco', value: 'subtotal_DESC' },
                 ],
             },
             {

@@ -82,7 +82,7 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
                                         <TableRow>
                                             {data.table.columns.map((column) => {
                                                 switch (column.id) {
-                                                    case 'total':
+                                                    case 'subtotal':
                                                         return (
                                                             <TableHead
                                                                 key={column.id}
@@ -152,7 +152,7 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
                                                                     </Badge>
                                                                 </TableCell>
                                                             );
-                                                        case 'total':
+                                                        case 'subtotal':
                                                             return (
                                                                 <TableCell
                                                                     key={column.id}

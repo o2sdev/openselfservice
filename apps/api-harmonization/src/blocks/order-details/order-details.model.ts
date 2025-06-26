@@ -36,12 +36,12 @@ export class Order {
     id!: {
         value: Orders.Model.Order['id'];
     };
-    total!: {
+    subtotal!: {
         title: string;
         icon?: string;
         label: string;
         description?: string;
-        value: Orders.Model.Order['total'];
+        value: Orders.Model.Order['subtotal'];
     };
     createdAt!: {
         title: string;

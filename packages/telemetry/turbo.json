@@ -4,13 +4,15 @@
         "dev": {
             "env": [
                 "TELEMETRY_DISABLED",
-                "TELEMETRY_BASE_URL"
+                "TELEMETRY_BASE_URL",
+                "NODE_ENV"
             ]
         },
         "build": {
             "env": [
                 "TELEMETRY_DISABLED",
-                "TELEMETRY_BASE_URL"
+                "TELEMETRY_BASE_URL",
+                "NODE_ENV"
             ]
         }
     }
