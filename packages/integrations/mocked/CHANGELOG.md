@@ -1,5 +1,11 @@
 # @o2s/integrations.mocked
 
+## 1.6.6
+
+### Patch Changes
+
+- ec84ef0: fix: fixed breadcrumb - removed redundant dashboard text
+
 ## 1.6.5
 
 ### Patch Changes

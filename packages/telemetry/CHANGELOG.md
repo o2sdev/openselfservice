@@ -1,5 +1,11 @@
 # @o2s/telemetry
 
+## 1.0.8
+
+### Patch Changes
+
+- c660045: refactored telemetry package to be class-based
+
 ## 1.0.7
 
 ### Patch Changes
