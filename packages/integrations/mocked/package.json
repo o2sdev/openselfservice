@@ -1,6 +1,6 @@
 {
     "name": "@o2s/integrations.mocked",
-    "version": "1.6.7",
+    "version": "1.6.8",
     "private": false,
     "license": "MIT",
     "exports": {
