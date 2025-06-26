@@ -1,5 +1,11 @@
 # @o2s/integrations.mocked
 
+## 1.6.7
+
+### Patch Changes
+
+- 9a93a3d: feat: orders - replace price to be NET
+
 ## 1.6.6
 
 ### Patch Changes
