@@ -1,5 +1,13 @@
 # @o2s/frontend
 
+## 1.6.2
+
+### Patch Changes
+
+- ec84ef0: fix: fixed breadcrumb - removed redundant dashboard text
+- Updated dependencies [ec84ef0]
+    - @o2s/integrations.mocked@1.6.6
+
 ## 1.6.1
 
 ### Patch Changes

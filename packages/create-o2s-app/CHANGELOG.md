@@ -1,5 +1,11 @@
 # create-o2s-app
 
+## 1.0.4
+
+### Patch Changes
+
+- 141b4b2: updated telemetry version
+
 ## 1.0.3
 
 ### Patch Changes

@@ -16,7 +16,7 @@ There are two ways to get started with O2S
 To quickly set up the project, you can use the following command:
 
 ```shell
-npx create-o2s-app
+npx create-o2s-app@latest
 ```
 
 which will automatically download the necessary source code, as well as install the dependencies and where necessary, initialize the packages.
