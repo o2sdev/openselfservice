@@ -1,5 +1,16 @@
 # @o2s/frontend
 
+## 1.6.4
+
+### Patch Changes
+
+- a5b8ee5: added missing dependency
+- 50b2ba3: added example docker config
+- 97055f7: split `NEXT_PUBLIC_API_URL` variable into public and internal ones
+- Updated dependencies [a5b8ee5]
+- Updated dependencies [50b2ba3]
+    - @o2s/api-harmonization@1.5.6
+
 ## 1.6.3
 
 ### Patch Changes

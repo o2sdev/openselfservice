@@ -1,5 +1,12 @@
 # @o2s/api-harmonization
 
+## 1.5.6
+
+### Patch Changes
+
+- a5b8ee5: added missing dependency
+- 50b2ba3: added example docker config
+
 ## 1.5.5
 
 ### Patch Changes
