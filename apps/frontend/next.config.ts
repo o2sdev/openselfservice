@@ -11,6 +11,7 @@ const withBundleAnalyzer = createBundleAnalyzer({
 const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
+    output: 'standalone',
     images: {
         remotePatterns: [
             {

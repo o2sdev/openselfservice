@@ -36,8 +36,12 @@ import { organizations } from '@/api/modules/organizations';
 import { page } from '@/api/modules/page';
 import { surveyjs } from '@/api/modules/surveyjs';
 
+const API_URL =
+    (typeof window === 'undefined' ? process.env.NEXT_PUBLIC_API_URL_INTERNAL : process.env.NEXT_PUBLIC_API_URL) ||
+    process.env.NEXT_PUBLIC_API_URL;
+
 const internalSdk = getSdk({
-    apiUrl: process.env.NEXT_PUBLIC_API_URL as string,
+    apiUrl: API_URL!,
     logger: {
         // @ts-expect-error missing types
         level: process.env.NEXT_PUBLIC_LOG_LEVEL,

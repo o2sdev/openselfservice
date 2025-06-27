@@ -12,6 +12,7 @@
                 "NEXT_PUBLIC_LOG_FORMAT",
                 "NEXT_PUBLIC_BASE_URL",
                 "NEXT_PUBLIC_API_URL",
+                "NEXT_PUBLIC_API_URL_INTERNAL",
                 "GITHUB_CLIENT_ID",
                 "GITHUB_CLIENT_SECRET",
                 "AUTH_SECRET",
