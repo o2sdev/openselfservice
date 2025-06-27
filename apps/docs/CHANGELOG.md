@@ -1,5 +1,11 @@
 # @o2s/docs
 
+## 1.2.0
+
+### Minor Changes
+
+- ed7b699: added blog post about release 1.1.0
+
 ## 1.1.1
 
 ### Patch Changes
