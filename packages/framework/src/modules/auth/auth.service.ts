@@ -7,5 +7,5 @@ export abstract class AuthService {
 
     abstract decodeAuthorizationToken(token: string): Auth.Model.Jwt;
     abstract getCustomerId(token: string): string | undefined;
-    abstract extractUserRoles(token: string | Auth.Model.Jwt): string[];
+    abstract extractUserRoles(token?: string | Auth.Model.Jwt): Auth.Constants.Roles[];
 }

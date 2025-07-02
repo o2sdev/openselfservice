@@ -21,6 +21,7 @@ export const Config: Partial<ApiConfig['integrations']> = {
     cms: {
         name: 'mocked',
         service: CmsService,
+        imports: [Auth.Module],
     },
     tickets: {
         name: 'mocked',

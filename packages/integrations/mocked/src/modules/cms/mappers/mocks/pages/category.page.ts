@@ -18,7 +18,7 @@ export const PAGE_WARRANTY_AND_REPAIR_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    isProtected: false,
+    permissions: [],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',
@@ -52,7 +52,7 @@ export const PAGE_WARRANTY_AND_REPAIR_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    isProtected: false,
+    permissions: [],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',
@@ -86,7 +86,7 @@ export const PAGE_WARRANTY_AND_REPAIR_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    isProtected: false,
+    permissions: [],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',
@@ -122,7 +122,7 @@ export const PAGE_MAINTENANCE_EN: CMS.Model.Page.Page = {
         },
     },
 
-    isProtected: false,
+    permissions: [],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',
@@ -157,7 +157,7 @@ export const PAGE_MAINTENANCE_DE: CMS.Model.Page.Page = {
         },
     },
 
-    isProtected: false,
+    permissions: [],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',
@@ -192,7 +192,7 @@ export const PAGE_MAINTENANCE_PL: CMS.Model.Page.Page = {
         },
     },
 
-    isProtected: false,
+    permissions: [],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',
@@ -228,7 +228,7 @@ export const PAGE_SAFETY_EN: CMS.Model.Page.Page = {
         },
     },
 
-    isProtected: false,
+    permissions: [],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',
@@ -263,7 +263,7 @@ export const PAGE_SAFETY_DE: CMS.Model.Page.Page = {
         },
     },
 
-    isProtected: false,
+    permissions: [],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',
@@ -298,7 +298,7 @@ export const PAGE_SAFETY_PL: CMS.Model.Page.Page = {
         },
     },
 
-    isProtected: false,
+    permissions: [],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',
@@ -334,7 +334,7 @@ export const PAGE_ACCESSORIES_EN: CMS.Model.Page.Page = {
         },
     },
 
-    isProtected: false,
+    permissions: [],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',
@@ -369,7 +369,7 @@ export const PAGE_ACCESSORIES_DE: CMS.Model.Page.Page = {
         },
     },
 
-    isProtected: false,
+    permissions: [],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',
@@ -404,7 +404,7 @@ export const PAGE_ACCESSORIES_PL: CMS.Model.Page.Page = {
         },
     },
 
-    isProtected: false,
+    permissions: [],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',
@@ -440,7 +440,7 @@ export const PAGE_TROUBLESHOOTING_EN: CMS.Model.Page.Page = {
         },
     },
 
-    isProtected: false,
+    permissions: [],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',
@@ -475,7 +475,7 @@ export const PAGE_TROUBLESHOOTING_DE: CMS.Model.Page.Page = {
         },
     },
 
-    isProtected: false,
+    permissions: [],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',
@@ -510,7 +510,7 @@ export const PAGE_TROUBLESHOOTING_PL: CMS.Model.Page.Page = {
         },
     },
 
-    isProtected: false,
+    permissions: [],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',

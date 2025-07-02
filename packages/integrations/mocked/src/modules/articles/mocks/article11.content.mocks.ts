@@ -4,7 +4,7 @@ export const MOCK_ARTICLE11_EN: Articles.Model.Article[] = [
     {
         id: 'art-011',
         slug: '/help-and-support/warranty-and-repair/powerpro-tool-certification-program',
-        isProtected: false,
+        permissions: [],
         createdAt: '2023-09-12T14:50:00Z',
         updatedAt: '2023-09-12T14:50:00Z',
         title: 'PowerPro Tool Certification Program',
@@ -68,7 +68,7 @@ export const MOCK_ARTICLE11_EN: Articles.Model.Article[] = [
     {
         id: 'art-015',
         slug: '/help-and-support/warranty/expedited-repair-service-options',
-        isProtected: false,
+        permissions: [],
         createdAt: '2023-07-30T12:10:00Z',
         updatedAt: '2023-07-30T12:10:00Z',
         title: 'Expedited Repair Service Options',
@@ -111,7 +111,7 @@ export const MOCK_ARTICLE11_EN: Articles.Model.Article[] = [
     {
         id: 'art-017',
         slug: '/help-and-support/warranty/repair-tracking-system-benefits',
-        isProtected: false,
+        permissions: [],
         createdAt: '2023-01-15T13:30:00Z',
         updatedAt: '2023-04-22T15:45:00Z',
         title: "Benefits of PowerPro's Repair Tracking System",
@@ -169,7 +169,7 @@ export const MOCK_ARTICLE11_DE: Articles.Model.Article[] = [
     {
         id: 'art-011',
         slug: '/hilfe-und-support/garantie/powerpro-werkzeug-zertifizierungsprogramm',
-        isProtected: false,
+        permissions: [],
         createdAt: '2023-09-12T14:50:00Z',
         updatedAt: '2023-09-12T14:50:00Z',
         title: 'PowerPro-Werkzeug-Zertifizierungsprogramm',
@@ -236,7 +236,7 @@ export const MOCK_ARTICLE11_PL: Articles.Model.Article[] = [
     {
         id: 'art-011',
         slug: '/pomoc-i-wsparcie/gwarancja/program-certyfikacji-narzedzi-powerpro',
-        isProtected: false,
+        permissions: [],
         createdAt: '2023-09-12T14:50:00Z',
         updatedAt: '2023-09-12T14:50:00Z',
         title: 'Program certyfikacji narzędzi PowerPro',

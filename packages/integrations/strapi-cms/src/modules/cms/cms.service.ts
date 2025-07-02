@@ -6,7 +6,7 @@ import { parse, stringify } from 'flatted';
 import { Observable, concatMap, forkJoin, from, map, mergeMap, of } from 'rxjs';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { CMS, Cache, Models } from '@o2s/framework/modules';
+import { Auth, CMS, Cache, Models } from '@o2s/framework/modules';
 
 import { Service as GraphqlService } from '@/modules/graphql';
 

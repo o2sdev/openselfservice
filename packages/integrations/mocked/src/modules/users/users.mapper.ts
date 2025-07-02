@@ -1,9 +1,4 @@
-import { Users } from '@o2s/framework/modules';
-
-const dateToday = new Date();
-dateToday.setHours(dateToday.getHours() - 1);
-const dateYesterday = new Date();
-dateYesterday.setDate(dateYesterday.getDate() - 1);
+import { Auth, Users } from '@o2s/framework/modules';
 
 const MOCK_USER_1: Users.Model.User = {
     id: 'user-100',
@@ -17,7 +12,7 @@ const MOCK_USER_1: Users.Model.User = {
                 name: 'Acme Corporation',
                 clientType: 'B2B',
             },
-            role: 'selfservice_admin',
+            roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
         },
         {
             customer: {
@@ -25,7 +20,7 @@ const MOCK_USER_1: Users.Model.User = {
                 name: 'Retail Customer Ltd',
                 clientType: 'B2C',
             },
-            role: 'selfservice_user',
+            roles: [Auth.Constants.Roles.USER],
         },
     ],
     customers: [],
@@ -43,7 +38,7 @@ const MOCK_USER_2: Users.Model.User = {
                 name: 'Tech Solutions Inc',
                 clientType: 'B2B',
             },
-            role: 'selfservice_manager',
+            roles: [Auth.Constants.Roles.USER],
         },
         {
             customer: {
@@ -51,7 +46,7 @@ const MOCK_USER_2: Users.Model.User = {
                 name: 'Digital Services GmbH',
                 clientType: 'B2B',
             },
-            role: 'selfservice_admin',
+            roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
         },
     ],
     customers: [],

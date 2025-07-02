@@ -23,7 +23,11 @@ export class AuthService implements Auth.Service {
         return decodedToken.customer?.id;
     }
 
-    extractUserRoles(token: string | Jwt): string[] {
+    extractUserRoles(token?: string | Jwt): Auth.Constants.Roles[] {
+        if (!token) {
+            return [];
+        }
+
         let decodedToken: Jwt;
         if (typeof token === 'string') {
             decodedToken = this.decodeAuthorizationToken(token);
@@ -41,6 +45,6 @@ export class AuthService implements Auth.Service {
             userRoles.push(...decodedToken.customer.roles);
         }
 
-        return userRoles;
+        return userRoles as Auth.Constants.Roles[];
     }
 }

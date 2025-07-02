@@ -2,6 +2,8 @@ import { NotFoundException } from '@nestjs/common';
 
 import { CMS, Models } from '@o2s/framework/modules';
 
+import { mapRoles } from '@/modules/cms/mappers/cms.roles.mapper';
+
 import { GetHeaderQuery, NavigationGroupFragment, NavigationItemFragment } from '@/generated/strapi';
 
 export const mapHeader = (data: GetHeaderQuery, baseURL?: string): CMS.Model.Header.Header => {
@@ -73,5 +75,6 @@ const mapHeaderItem = (item: NavigationItemFragment): Models.Navigation.Navigati
         label: item.label,
         url: item.url || item.page?.slug || '/',
         description: item.description,
+        permissions: mapRoles(item.page?.permissions),
     };
 };

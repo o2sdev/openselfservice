@@ -4,7 +4,7 @@ export const MOCK_ARTICLE13_EN: Articles.Model.Article[] = [
     {
         id: 'art-012',
         slug: '/help-and-support/warranty-and-repair/preventive-maintenance-guide',
-        isProtected: false,
+        permissions: [],
         createdAt: '2023-08-20T11:30:00Z',
         updatedAt: '2023-09-05T15:20:00Z',
         title: 'Preventive Maintenance Guide for PowerPro Tools',
@@ -70,7 +70,7 @@ export const MOCK_ARTICLE13_DE: Articles.Model.Article[] = [
     {
         id: 'art-012',
         slug: '/hilfe-und-support/garantie/vorbeugende-wartung-leitfaden',
-        isProtected: false,
+        permissions: [],
         createdAt: '2023-08-20T11:30:00Z',
         updatedAt: '2023-09-05T15:20:00Z',
         title: 'Leitfaden zur vorbeugenden Wartung von PowerPro-Werkzeugen',
@@ -137,7 +137,7 @@ export const MOCK_ARTICLE13_PL: Articles.Model.Article[] = [
     {
         id: 'art-012',
         slug: '/pomoc-i-wsparcie/gwarancja/przewodnik-po-konserwacji-zapobiegawczej',
-        isProtected: false,
+        permissions: [],
         createdAt: '2023-08-20T11:30:00Z',
         updatedAt: '2023-09-05T15:20:00Z',
         title: 'Przewodnik po konserwacji zapobiegawczej narzędzi PowerPro',
