@@ -2,6 +2,8 @@ import { NotFoundException } from '@nestjs/common';
 
 import { CMS } from '@o2s/framework/modules';
 
+import { mapRoles } from '@/modules/cms/mappers/cms.roles.mapper';
+
 import { GetSurveyQuery } from '@/generated/strapi';
 
 export const mapSurvey = (data: GetSurveyQuery): CMS.Model.Survey.Survey => {
@@ -17,6 +19,6 @@ export const mapSurvey = (data: GetSurveyQuery): CMS.Model.Survey.Survey => {
         surveyType: survey.surveyType,
         postId: survey.postId,
         submitDestination: survey.submitDestination ? (survey.submitDestination as string[]) : [],
-        requiredRoles: survey.requiredRoles ? (survey.requiredRoles as string[]) : [],
+        requiredRoles: mapRoles(survey.requiredRoles),
     };
 };

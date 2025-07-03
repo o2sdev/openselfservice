@@ -54,7 +54,7 @@ async function updateCustomerToken(
         if (customer) {
             token.customer = {
                 id: customer.id,
-                roles: customer?.roles?.map((role) => role.role) ?? [],
+                roles: customer?.roles?.map((role) => role.roles).flat() ?? [],
                 name: customer?.name ?? '',
             };
         }

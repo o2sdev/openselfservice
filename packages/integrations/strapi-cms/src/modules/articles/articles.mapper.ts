@@ -1,6 +1,7 @@
 import { Articles } from '@o2s/framework/modules';
 
 import { mapMedia } from '@/modules/cms/mappers/cms.media.mapper';
+import { mapRoles } from '@/modules/cms/mappers/cms.roles.mapper';
 
 import { ArticleFragment, ArticleSimpleFragment, CategoryFragment } from '@/generated/strapi';
 
@@ -33,7 +34,7 @@ export const mapArticle = (page: ArticleFragment, baseUrl: string): Articles.Mod
     return {
         id: page.documentId,
         slug: page.slug,
-        isProtected: !!page.protected,
+        permissions: mapRoles(page.permissions),
         createdAt: page.updatedAt,
         updatedAt: page.updatedAt,
         title: page.SEO.title,
@@ -76,7 +77,7 @@ export const mapArticles = (data: ArticleSimpleFragment[], total: number, baseUr
             return {
                 id: article.documentId,
                 slug: article.slug,
-                isProtected: !!article.protected,
+                permissions: mapRoles(article.permissions),
                 createdAt: article.updatedAt,
                 updatedAt: article.updatedAt,
                 title: article.SEO.title,

@@ -4,7 +4,7 @@ export const MOCK_ARTICLE1_EN: Articles.Model.Article[] = [
     {
         id: 'art-002',
         slug: '/help-and-support/maintenance/powerpro-tool-maintenance-guide',
-        isProtected: false,
+        permissions: [],
         createdAt: '2023-06-10T10:15:00Z',
         updatedAt: '2023-07-20T16:30:00Z',
         title: 'PowerPro Tool Maintenance Guide',
@@ -232,7 +232,7 @@ export const MOCK_ARTICLE1_DE: Articles.Model.Article[] = [
     {
         id: 'art-002',
         slug: '/hilfe-und-support/wartung/powerpro-werkzeug-wartungsanleitung',
-        isProtected: false,
+        permissions: [],
         createdAt: '2023-06-10T10:15:00Z',
         updatedAt: '2023-07-20T16:30:00Z',
         title: 'PowerPro-Werkzeug-Wartungsanleitung',
@@ -460,7 +460,7 @@ export const MOCK_ARTICLE1_PL: Articles.Model.Article[] = [
     {
         id: 'art-002',
         slug: '/pomoc-i-wsparcie/konserwacja/przewodnik-konserwacji-narzedzi-powerpro',
-        isProtected: false,
+        permissions: [],
         createdAt: '2023-06-10T10:15:00Z',
         updatedAt: '2023-07-20T16:30:00Z',
         title: 'Przewodnik konserwacji narzędzi PowerPro',

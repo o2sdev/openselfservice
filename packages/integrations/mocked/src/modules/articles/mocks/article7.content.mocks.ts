@@ -394,7 +394,7 @@ export const MOCK_ARTICLE7_EN: Articles.Model.Article[] = [
     {
         id: 'art-007',
         slug: '/help-and-support/registration/step-by-step-guide-to-tool-registration',
-        isProtected: false,
+        permissions: [],
         createdAt: '2023-01-30T11:20:00Z',
         updatedAt: '2023-05-22T09:10:00Z',
         title: 'Step-by-Step Guide to Tool Registration',
@@ -459,7 +459,7 @@ export const MOCK_ARTICLE7_DE: Articles.Model.Article[] = [
     {
         id: 'art-007',
         slug: '/hilfe-und-support/registrierung/schritt-fur-schritt-anleitung-zur-werkzeugregistrierung',
-        isProtected: false,
+        permissions: [],
         createdAt: '2023-01-30T11:20:00Z',
         updatedAt: '2023-05-22T09:10:00Z',
         title: 'Schritt-für-Schritt-Anleitung zur Werkzeugregistrierung',
@@ -525,7 +525,7 @@ export const MOCK_ARTICLE7_PL: Articles.Model.Article[] = [
     {
         id: 'art-007',
         slug: '/pomoc-i-wsparcie/rejestracja/przewodnik-krok-po-kroku-rejestracja-narzedzi',
-        isProtected: false,
+        permissions: [],
         createdAt: '2023-01-30T11:20:00Z',
         updatedAt: '2023-05-22T09:10:00Z',
         title: 'Przewodnik krok po kroku: Rejestracja narzędzi',

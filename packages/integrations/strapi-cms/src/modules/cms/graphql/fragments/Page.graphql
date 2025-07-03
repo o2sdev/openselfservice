@@ -1,7 +1,9 @@
 fragment Page on Page {
     documentId
     slug
-    protected
+    permissions {
+        ...Roles
+    }
     locale
     createdAt
     updatedAt

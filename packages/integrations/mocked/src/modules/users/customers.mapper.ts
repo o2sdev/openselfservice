@@ -1,4 +1,4 @@
-import { Models } from '@o2s/framework/modules';
+import { Auth, Models } from '@o2s/framework/modules';
 
 const MOCK_CUSTOMER_1: Models.Customer.Customer = {
     id: 'cust-001',
@@ -16,10 +16,10 @@ const MOCK_CUSTOMER_1: Models.Customer.Customer = {
     },
     roles: [
         {
-            role: 'selfservice_user',
+            roles: [Auth.Constants.Roles.USER],
         },
         {
-            role: 'selfservice_admin',
+            roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
         },
     ],
     parentOrgId: 'org-001',
@@ -41,7 +41,7 @@ const MOCK_CUSTOMER_2: Models.Customer.Customer = {
     },
     roles: [
         {
-            role: 'selfservice_user',
+            roles: [Auth.Constants.Roles.USER],
         },
     ],
     parentOrgId: 'org-002',
@@ -63,7 +63,7 @@ const MOCK_CUSTOMER_3: Models.Customer.Customer = {
     },
     roles: [
         {
-            role: 'selfservice_admin',
+            roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
         },
     ],
     parentOrgId: 'org-003',

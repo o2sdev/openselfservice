@@ -1,4 +1,4 @@
-import { CMS } from '@o2s/framework/modules';
+import { Auth, CMS } from '@o2s/framework/modules';
 
 export const PAGE_DASHBOARD_PL: CMS.Model.Page.Page = {
     slug: '/',
@@ -17,7 +17,7 @@ export const PAGE_DASHBOARD_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    isProtected: true,
+    permissions: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
     hasOwnTitle: false,
     template: {
         __typename: 'TwoColumnTemplate',
@@ -72,7 +72,7 @@ export const PAGE_DASHBOARD_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    isProtected: true,
+    permissions: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
     hasOwnTitle: false,
     template: {
         __typename: 'TwoColumnTemplate',
@@ -127,7 +127,7 @@ export const PAGE_DASHBOARD_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    isProtected: true,
+    permissions: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
     hasOwnTitle: false,
     template: {
         __typename: 'TwoColumnTemplate',

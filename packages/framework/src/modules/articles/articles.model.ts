@@ -1,3 +1,5 @@
+import { Auth } from '@o2s/framework/modules';
+
 import { Media, Pagination } from '@/utils/models';
 
 export class Category {
@@ -40,7 +42,7 @@ export class Article {
     };
     author?: Author;
     sections!: ArticleSection[];
-    isProtected!: boolean;
+    permissions?: Auth.Constants.Roles[];
 }
 
 export type ArticleSection = ArticleSectionText | ArticleSectionImage;

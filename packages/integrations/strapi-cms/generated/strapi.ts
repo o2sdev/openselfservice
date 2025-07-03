@@ -66,7 +66,7 @@ export type Article = {
     localizations: Array<Maybe<Article>>;
     localizations_connection?: Maybe<ArticleRelationResponseCollection>;
     parent?: Maybe<Page>;
-    protected?: Maybe<Scalars['Boolean']['output']>;
+    permissions?: Maybe<ComponentSeoUserRoles>;
     publishedAt?: Maybe<Scalars['DateTime']['output']>;
     slug: Scalars['String']['output'];
     updatedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -100,7 +100,7 @@ export type ArticleFiltersInput = {
     not?: InputMaybe<ArticleFiltersInput>;
     or?: InputMaybe<Array<InputMaybe<ArticleFiltersInput>>>;
     parent?: InputMaybe<PageFiltersInput>;
-    protected?: InputMaybe<BooleanFilterInput>;
+    permissions?: InputMaybe<ComponentSeoUserRolesFiltersInput>;
     publishedAt?: InputMaybe<DateTimeFilterInput>;
     slug?: InputMaybe<StringFilterInput>;
     updatedAt?: InputMaybe<DateTimeFilterInput>;
@@ -110,7 +110,7 @@ export type ArticleInput = {
     SEO?: InputMaybe<ComponentSeoSeoInput>;
     content?: InputMaybe<ComponentComponentsArticleInput>;
     parent?: InputMaybe<Scalars['ID']['input']>;
-    protected?: InputMaybe<Scalars['Boolean']['input']>;
+    permissions?: InputMaybe<ComponentSeoUserRolesInput>;
     publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
     slug?: InputMaybe<Scalars['String']['input']>;
 };
@@ -696,14 +696,6 @@ export type ComponentComponentsUserAccountInputsArgs = {
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-export type ComponentContentActionLinks = {
-    icon?: Maybe<Scalars['String']['output']>;
-    id: Scalars['ID']['output'];
-    label: Scalars['String']['output'];
-    page?: Maybe<Page>;
-    url?: Maybe<Scalars['String']['output']>;
-};
-
 export type ComponentContentAlertBox = {
     description?: Maybe<Scalars['String']['output']>;
     id: Scalars['ID']['output'];
@@ -829,6 +821,12 @@ export type ComponentContentFieldMappingFiltersInput = {
     not?: InputMaybe<ComponentContentFieldMappingFiltersInput>;
     or?: InputMaybe<Array<InputMaybe<ComponentContentFieldMappingFiltersInput>>>;
     values?: InputMaybe<ComponentContentKeyValueFiltersInput>;
+};
+
+export type ComponentContentFieldMappingInput = {
+    id?: InputMaybe<Scalars['ID']['input']>;
+    name?: InputMaybe<Scalars['String']['input']>;
+    values?: InputMaybe<Array<InputMaybe<ComponentContentKeyValueInput>>>;
 };
 
 export type ComponentContentFilterDateRange = {
@@ -1390,6 +1388,23 @@ export type ComponentSeoSeoInput = {
     title?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type ComponentSeoUserRoles = {
+    id: Scalars['ID']['output'];
+    roles?: Maybe<Scalars['JSON']['output']>;
+};
+
+export type ComponentSeoUserRolesFiltersInput = {
+    and?: InputMaybe<Array<InputMaybe<ComponentSeoUserRolesFiltersInput>>>;
+    not?: InputMaybe<ComponentSeoUserRolesFiltersInput>;
+    or?: InputMaybe<Array<InputMaybe<ComponentSeoUserRolesFiltersInput>>>;
+    roles?: InputMaybe<JsonFilterInput>;
+};
+
+export type ComponentSeoUserRolesInput = {
+    id?: InputMaybe<Scalars['ID']['input']>;
+    roles?: InputMaybe<Scalars['JSON']['input']>;
+};
+
 export type ComponentTemplatesOneColumn = {
     id: Scalars['ID']['output'];
     mainSlot: Array<Maybe<Component>>;
@@ -1827,7 +1842,6 @@ export type GenericMorph =
     | ComponentComponentsTicketList
     | ComponentComponentsTicketRecent
     | ComponentComponentsUserAccount
-    | ComponentContentActionLinks
     | ComponentContentAlertBox
     | ComponentContentArticleSection
     | ComponentContentBanner
@@ -1862,6 +1876,7 @@ export type GenericMorph =
     | ComponentLabelsValidation
     | ComponentSeoMetadata
     | ComponentSeoSeo
+    | ComponentSeoUserRoles
     | ComponentTemplatesOneColumn
     | ComponentTemplatesTwoColumn
     | ConfigurableTexts
@@ -1872,6 +1887,7 @@ export type GenericMorph =
     | Header
     | I18NLocale
     | LoginPage
+    | Mapping
     | NotFoundPage
     | OrganizationList
     | Page
@@ -2107,6 +2123,38 @@ export type LoginPageRelationResponseCollection = {
     nodes: Array<LoginPage>;
 };
 
+export type Mapping = {
+    createdAt?: Maybe<Scalars['DateTime']['output']>;
+    documentId: Scalars['ID']['output'];
+    fields?: Maybe<ComponentContentFieldMapping>;
+    name: Scalars['String']['output'];
+    publishedAt?: Maybe<Scalars['DateTime']['output']>;
+    updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type MappingEntityResponseCollection = {
+    nodes: Array<Mapping>;
+    pageInfo: Pagination;
+};
+
+export type MappingFiltersInput = {
+    and?: InputMaybe<Array<InputMaybe<MappingFiltersInput>>>;
+    createdAt?: InputMaybe<DateTimeFilterInput>;
+    documentId?: InputMaybe<IdFilterInput>;
+    fields?: InputMaybe<ComponentContentFieldMappingFiltersInput>;
+    name?: InputMaybe<StringFilterInput>;
+    not?: InputMaybe<MappingFiltersInput>;
+    or?: InputMaybe<Array<InputMaybe<MappingFiltersInput>>>;
+    publishedAt?: InputMaybe<DateTimeFilterInput>;
+    updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type MappingInput = {
+    fields?: InputMaybe<ComponentContentFieldMappingInput>;
+    name?: InputMaybe<Scalars['String']['input']>;
+    publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
 export type Mutation = {
     /** Change user password. Confirm with the current password. */
     changePassword?: Maybe<UsersPermissionsLoginPayload>;
@@ -2117,6 +2165,7 @@ export type Mutation = {
     createFilterItem?: Maybe<FilterItem>;
     createFooter?: Maybe<Footer>;
     createHeader?: Maybe<Header>;
+    createMapping?: Maybe<Mapping>;
     createPage?: Maybe<Page>;
     createReviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
     createReviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
@@ -2139,6 +2188,7 @@ export type Mutation = {
     deleteFooter?: Maybe<DeleteMutationResponse>;
     deleteHeader?: Maybe<DeleteMutationResponse>;
     deleteLoginPage?: Maybe<DeleteMutationResponse>;
+    deleteMapping?: Maybe<DeleteMutationResponse>;
     deleteNotFoundPage?: Maybe<DeleteMutationResponse>;
     deleteOrganizationList?: Maybe<DeleteMutationResponse>;
     deletePage?: Maybe<DeleteMutationResponse>;
@@ -2174,6 +2224,7 @@ export type Mutation = {
     updateFooter?: Maybe<Footer>;
     updateHeader?: Maybe<Header>;
     updateLoginPage?: Maybe<LoginPage>;
+    updateMapping?: Maybe<Mapping>;
     updateNotFoundPage?: Maybe<NotFoundPage>;
     updateOrganizationList?: Maybe<OrganizationList>;
     updatePage?: Maybe<Page>;
@@ -2235,6 +2286,11 @@ export type MutationCreateFooterArgs = {
 export type MutationCreateHeaderArgs = {
     data: HeaderInput;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type MutationCreateMappingArgs = {
+    data: MappingInput;
     status?: InputMaybe<PublicationStatus>;
 };
 
@@ -2330,6 +2386,10 @@ export type MutationDeleteHeaderArgs = {
 
 export type MutationDeleteLoginPageArgs = {
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+};
+
+export type MutationDeleteMappingArgs = {
+    documentId: Scalars['ID']['input'];
 };
 
 export type MutationDeleteNotFoundPageArgs = {
@@ -2482,6 +2542,12 @@ export type MutationUpdateLoginPageArgs = {
     status?: InputMaybe<PublicationStatus>;
 };
 
+export type MutationUpdateMappingArgs = {
+    data: MappingInput;
+    documentId: Scalars['ID']['input'];
+    status?: InputMaybe<PublicationStatus>;
+};
+
 export type MutationUpdateNotFoundPageArgs = {
     data: NotFoundPageInput;
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
@@ -2612,7 +2678,7 @@ export type Page = {
     localizations: Array<Maybe<Page>>;
     localizations_connection?: Maybe<PageRelationResponseCollection>;
     parent?: Maybe<Page>;
-    protected?: Maybe<Scalars['Boolean']['output']>;
+    permissions?: Maybe<ComponentSeoUserRoles>;
     publishedAt?: Maybe<Scalars['DateTime']['output']>;
     slug: Scalars['String']['output'];
     template: Array<Maybe<PageTemplateDynamicZone>>;
@@ -2648,7 +2714,7 @@ export type PageFiltersInput = {
     not?: InputMaybe<PageFiltersInput>;
     or?: InputMaybe<Array<InputMaybe<PageFiltersInput>>>;
     parent?: InputMaybe<PageFiltersInput>;
-    protected?: InputMaybe<BooleanFilterInput>;
+    permissions?: InputMaybe<ComponentSeoUserRolesFiltersInput>;
     publishedAt?: InputMaybe<DateTimeFilterInput>;
     slug?: InputMaybe<StringFilterInput>;
     updatedAt?: InputMaybe<DateTimeFilterInput>;
@@ -2659,7 +2725,7 @@ export type PageInput = {
     child?: InputMaybe<Scalars['ID']['input']>;
     hasOwnTitle?: InputMaybe<Scalars['Boolean']['input']>;
     parent?: InputMaybe<Scalars['ID']['input']>;
-    protected?: InputMaybe<Scalars['Boolean']['input']>;
+    permissions?: InputMaybe<ComponentSeoUserRolesInput>;
     publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
     slug?: InputMaybe<Scalars['String']['input']>;
     template?: InputMaybe<Array<Scalars['PageTemplateDynamicZoneInput']['input']>>;
@@ -2720,6 +2786,9 @@ export type Query = {
     i18NLocales: Array<Maybe<I18NLocale>>;
     i18NLocales_connection?: Maybe<I18NLocaleEntityResponseCollection>;
     loginPage?: Maybe<LoginPage>;
+    mapping?: Maybe<Mapping>;
+    mappings: Array<Maybe<Mapping>>;
+    mappings_connection?: Maybe<MappingEntityResponseCollection>;
     me?: Maybe<UsersPermissionsMe>;
     notFoundPage?: Maybe<NotFoundPage>;
     organizationList?: Maybe<OrganizationList>;
@@ -2948,6 +3017,25 @@ export type QueryI18NLocales_ConnectionArgs = {
 
 export type QueryLoginPageArgs = {
     locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type QueryMappingArgs = {
+    documentId: Scalars['ID']['input'];
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type QueryMappingsArgs = {
+    filters?: InputMaybe<MappingFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type QueryMappings_ConnectionArgs = {
+    filters?: InputMaybe<MappingFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     status?: InputMaybe<PublicationStatus>;
 };
 
@@ -3293,7 +3381,7 @@ export type SurveyJsForm = {
     documentId: Scalars['ID']['output'];
     postId: Scalars['String']['output'];
     publishedAt?: Maybe<Scalars['DateTime']['output']>;
-    requiredRoles: Scalars['JSON']['output'];
+    requiredRoles: ComponentSeoUserRoles;
     submitDestination?: Maybe<Scalars['JSON']['output']>;
     surveyId: Scalars['String']['output'];
     surveyType: Scalars['String']['output'];
@@ -3314,7 +3402,7 @@ export type SurveyJsFormFiltersInput = {
     or?: InputMaybe<Array<InputMaybe<SurveyJsFormFiltersInput>>>;
     postId?: InputMaybe<StringFilterInput>;
     publishedAt?: InputMaybe<DateTimeFilterInput>;
-    requiredRoles?: InputMaybe<JsonFilterInput>;
+    requiredRoles?: InputMaybe<ComponentSeoUserRolesFiltersInput>;
     submitDestination?: InputMaybe<JsonFilterInput>;
     surveyId?: InputMaybe<StringFilterInput>;
     surveyType?: InputMaybe<StringFilterInput>;
@@ -3325,7 +3413,7 @@ export type SurveyJsFormInput = {
     code?: InputMaybe<Scalars['String']['input']>;
     postId?: InputMaybe<Scalars['String']['input']>;
     publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
-    requiredRoles?: InputMaybe<Scalars['JSON']['input']>;
+    requiredRoles?: InputMaybe<ComponentSeoUserRolesInput>;
     submitDestination?: InputMaybe<Scalars['JSON']['input']>;
     surveyId?: InputMaybe<Scalars['String']['input']>;
     surveyType?: InputMaybe<Scalars['String']['input']>;
@@ -3958,7 +4046,6 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
           })
         | ComponentComponentsTicketRecent
         | ComponentComponentsUserAccount
-        | (Omit<ComponentContentActionLinks, 'page'> & { page?: Maybe<_RefType['Page']> })
         | ComponentContentAlertBox
         | ComponentContentArticleSection
         | (Omit<ComponentContentBanner, 'button'> & { button?: Maybe<_RefType['ComponentContentLink']> })
@@ -4000,6 +4087,7 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
         | ComponentLabelsValidation
         | ComponentSeoMetadata
         | (Omit<ComponentSeoSeo, 'image'> & { image?: Maybe<_RefType['UploadFile']> })
+        | ComponentSeoUserRoles
         | (Omit<ComponentTemplatesOneColumn, 'mainSlot' | 'mainSlot_connection'> & {
               mainSlot: Array<Maybe<_RefType['Component']>>;
               mainSlot_connection?: Maybe<_RefType['ComponentRelationResponseCollection']>;
@@ -4067,6 +4155,7 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
               localizations: Array<Maybe<_RefType['LoginPage']>>;
               localizations_connection?: Maybe<_RefType['LoginPageRelationResponseCollection']>;
           })
+        | Mapping
         | (Omit<NotFoundPage, 'localizations' | 'localizations_connection' | 'page'> & {
               localizations: Array<Maybe<_RefType['NotFoundPage']>>;
               localizations_connection?: Maybe<_RefType['NotFoundPageRelationResponseCollection']>;
@@ -4333,9 +4422,6 @@ export type ResolversTypes = {
     >;
     ComponentComponentsTicketRecent: ResolverTypeWrapper<ComponentComponentsTicketRecent>;
     ComponentComponentsUserAccount: ResolverTypeWrapper<ComponentComponentsUserAccount>;
-    ComponentContentActionLinks: ResolverTypeWrapper<
-        Omit<ComponentContentActionLinks, 'page'> & { page?: Maybe<ResolversTypes['Page']> }
-    >;
     ComponentContentAlertBox: ResolverTypeWrapper<ComponentContentAlertBox>;
     ComponentContentAlertBoxInput: ComponentContentAlertBoxInput;
     ComponentContentArticleSection: ResolverTypeWrapper<ComponentContentArticleSection>;
@@ -4355,6 +4441,7 @@ export type ResolversTypes = {
     ComponentContentErrorMessageInput: ComponentContentErrorMessageInput;
     ComponentContentFieldMapping: ResolverTypeWrapper<ComponentContentFieldMapping>;
     ComponentContentFieldMappingFiltersInput: ComponentContentFieldMappingFiltersInput;
+    ComponentContentFieldMappingInput: ComponentContentFieldMappingInput;
     ComponentContentFilterDateRange: ResolverTypeWrapper<ComponentContentFilterDateRange>;
     ComponentContentFilterSelect: ResolverTypeWrapper<ComponentContentFilterSelect>;
     ComponentContentFilters: ResolverTypeWrapper<
@@ -4438,6 +4525,9 @@ export type ResolversTypes = {
     >;
     ComponentSeoSeoFiltersInput: ComponentSeoSeoFiltersInput;
     ComponentSeoSeoInput: ComponentSeoSeoInput;
+    ComponentSeoUserRoles: ResolverTypeWrapper<ComponentSeoUserRoles>;
+    ComponentSeoUserRolesFiltersInput: ComponentSeoUserRolesFiltersInput;
+    ComponentSeoUserRolesInput: ComponentSeoUserRolesInput;
     ComponentTemplatesOneColumn: ResolverTypeWrapper<
         Omit<ComponentTemplatesOneColumn, 'mainSlot' | 'mainSlot_connection'> & {
             mainSlot: Array<Maybe<ResolversTypes['Component']>>;
@@ -4586,6 +4676,10 @@ export type ResolversTypes = {
     LoginPageRelationResponseCollection: ResolverTypeWrapper<
         Omit<LoginPageRelationResponseCollection, 'nodes'> & { nodes: Array<ResolversTypes['LoginPage']> }
     >;
+    Mapping: ResolverTypeWrapper<Mapping>;
+    MappingEntityResponseCollection: ResolverTypeWrapper<MappingEntityResponseCollection>;
+    MappingFiltersInput: MappingFiltersInput;
+    MappingInput: MappingInput;
     Mutation: ResolverTypeWrapper<{}>;
     NotFoundPage: ResolverTypeWrapper<
         Omit<NotFoundPage, 'localizations' | 'localizations_connection' | 'page'> & {
@@ -4872,9 +4966,6 @@ export type ResolversParentTypes = {
     };
     ComponentComponentsTicketRecent: ComponentComponentsTicketRecent;
     ComponentComponentsUserAccount: ComponentComponentsUserAccount;
-    ComponentContentActionLinks: Omit<ComponentContentActionLinks, 'page'> & {
-        page?: Maybe<ResolversParentTypes['Page']>;
-    };
     ComponentContentAlertBox: ComponentContentAlertBox;
     ComponentContentAlertBoxInput: ComponentContentAlertBoxInput;
     ComponentContentArticleSection: ComponentContentArticleSection;
@@ -4892,6 +4983,7 @@ export type ResolversParentTypes = {
     ComponentContentErrorMessageInput: ComponentContentErrorMessageInput;
     ComponentContentFieldMapping: ComponentContentFieldMapping;
     ComponentContentFieldMappingFiltersInput: ComponentContentFieldMappingFiltersInput;
+    ComponentContentFieldMappingInput: ComponentContentFieldMappingInput;
     ComponentContentFilterDateRange: ComponentContentFilterDateRange;
     ComponentContentFilterSelect: ComponentContentFilterSelect;
     ComponentContentFilters: Omit<ComponentContentFilters, 'items' | 'items_connection'> & {
@@ -4965,6 +5057,9 @@ export type ResolversParentTypes = {
     ComponentSeoSeo: Omit<ComponentSeoSeo, 'image'> & { image?: Maybe<ResolversParentTypes['UploadFile']> };
     ComponentSeoSeoFiltersInput: ComponentSeoSeoFiltersInput;
     ComponentSeoSeoInput: ComponentSeoSeoInput;
+    ComponentSeoUserRoles: ComponentSeoUserRoles;
+    ComponentSeoUserRolesFiltersInput: ComponentSeoUserRolesFiltersInput;
+    ComponentSeoUserRolesInput: ComponentSeoUserRolesInput;
     ComponentTemplatesOneColumn: Omit<ComponentTemplatesOneColumn, 'mainSlot' | 'mainSlot_connection'> & {
         mainSlot: Array<Maybe<ResolversParentTypes['Component']>>;
         mainSlot_connection?: Maybe<ResolversParentTypes['ComponentRelationResponseCollection']>;
@@ -5099,6 +5194,10 @@ export type ResolversParentTypes = {
     LoginPageRelationResponseCollection: Omit<LoginPageRelationResponseCollection, 'nodes'> & {
         nodes: Array<ResolversParentTypes['LoginPage']>;
     };
+    Mapping: Mapping;
+    MappingEntityResponseCollection: MappingEntityResponseCollection;
+    MappingFiltersInput: MappingFiltersInput;
+    MappingInput: MappingInput;
     Mutation: {};
     NotFoundPage: Omit<NotFoundPage, 'localizations' | 'localizations_connection' | 'page'> & {
         localizations: Array<Maybe<ResolversParentTypes['NotFoundPage']>>;
@@ -5251,7 +5350,7 @@ export type ArticleResolvers<
         RequireFields<ArticleLocalizations_ConnectionArgs, 'pagination' | 'sort'>
     >;
     parent?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType>;
-    protected?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+    permissions?: Resolver<Maybe<ResolversTypes['ComponentSeoUserRoles']>, ParentType, ContextType>;
     publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
     slug?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
@@ -5875,19 +5974,6 @@ export type ComponentComponentsUserAccountResolvers<
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type ComponentContentActionLinksResolvers<
-    ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentContentActionLinks'] = ResolversParentTypes['ComponentContentActionLinks'],
-> = {
-    icon?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-    id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-    label?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-    page?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType>;
-    url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
 export type ComponentContentAlertBoxResolvers<
     ContextType = any,
     ParentType extends
@@ -6446,6 +6532,15 @@ export type ComponentSeoSeoResolvers<
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type ComponentSeoUserRolesResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['ComponentSeoUserRoles'] = ResolversParentTypes['ComponentSeoUserRoles'],
+> = {
+    id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    roles?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type ComponentTemplatesOneColumnResolvers<
     ContextType = any,
     ParentType extends
@@ -6822,7 +6917,6 @@ export type GenericMorphResolvers<
         | 'ComponentComponentsTicketList'
         | 'ComponentComponentsTicketRecent'
         | 'ComponentComponentsUserAccount'
-        | 'ComponentContentActionLinks'
         | 'ComponentContentAlertBox'
         | 'ComponentContentArticleSection'
         | 'ComponentContentBanner'
@@ -6857,6 +6951,7 @@ export type GenericMorphResolvers<
         | 'ComponentLabelsValidation'
         | 'ComponentSeoMetadata'
         | 'ComponentSeoSeo'
+        | 'ComponentSeoUserRoles'
         | 'ComponentTemplatesOneColumn'
         | 'ComponentTemplatesTwoColumn'
         | 'ConfigurableTexts'
@@ -6867,6 +6962,7 @@ export type GenericMorphResolvers<
         | 'Header'
         | 'I18NLocale'
         | 'LoginPage'
+        | 'Mapping'
         | 'NotFoundPage'
         | 'OrganizationList'
         | 'Page'
@@ -7025,6 +7121,29 @@ export type LoginPageRelationResponseCollectionResolvers<
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type MappingResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['Mapping'] = ResolversParentTypes['Mapping'],
+> = {
+    createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    documentId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    fields?: Resolver<Maybe<ResolversTypes['ComponentContentFieldMapping']>, ParentType, ContextType>;
+    name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MappingEntityResponseCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['MappingEntityResponseCollection'] = ResolversParentTypes['MappingEntityResponseCollection'],
+> = {
+    nodes?: Resolver<Array<ResolversTypes['Mapping']>, ParentType, ContextType>;
+    pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type MutationResolvers<
     ContextType = any,
     ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation'],
@@ -7076,6 +7195,12 @@ export type MutationResolvers<
         ParentType,
         ContextType,
         RequireFields<MutationCreateHeaderArgs, 'data' | 'status'>
+    >;
+    createMapping?: Resolver<
+        Maybe<ResolversTypes['Mapping']>,
+        ParentType,
+        ContextType,
+        RequireFields<MutationCreateMappingArgs, 'data' | 'status'>
     >;
     createPage?: Resolver<
         Maybe<ResolversTypes['Page']>,
@@ -7196,6 +7321,12 @@ export type MutationResolvers<
         ParentType,
         ContextType,
         Partial<MutationDeleteLoginPageArgs>
+    >;
+    deleteMapping?: Resolver<
+        Maybe<ResolversTypes['DeleteMutationResponse']>,
+        ParentType,
+        ContextType,
+        RequireFields<MutationDeleteMappingArgs, 'documentId'>
     >;
     deleteNotFoundPage?: Resolver<
         Maybe<ResolversTypes['DeleteMutationResponse']>,
@@ -7371,6 +7502,12 @@ export type MutationResolvers<
         ContextType,
         RequireFields<MutationUpdateLoginPageArgs, 'data' | 'status'>
     >;
+    updateMapping?: Resolver<
+        Maybe<ResolversTypes['Mapping']>,
+        ParentType,
+        ContextType,
+        RequireFields<MutationUpdateMappingArgs, 'data' | 'documentId' | 'status'>
+    >;
     updateNotFoundPage?: Resolver<
         Maybe<ResolversTypes['NotFoundPage']>,
         ParentType,
@@ -7529,7 +7666,7 @@ export type PageResolvers<
         RequireFields<PageLocalizations_ConnectionArgs, 'pagination' | 'sort'>
     >;
     parent?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType>;
-    protected?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+    permissions?: Resolver<Maybe<ResolversTypes['ComponentSeoUserRoles']>, ParentType, ContextType>;
     publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
     slug?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     template?: Resolver<Array<Maybe<ResolversTypes['PageTemplateDynamicZone']>>, ParentType, ContextType>;
@@ -7761,6 +7898,24 @@ export type QueryResolvers<
         ParentType,
         ContextType,
         RequireFields<QueryLoginPageArgs, 'status'>
+    >;
+    mapping?: Resolver<
+        Maybe<ResolversTypes['Mapping']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryMappingArgs, 'documentId' | 'status'>
+    >;
+    mappings?: Resolver<
+        Array<Maybe<ResolversTypes['Mapping']>>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryMappingsArgs, 'pagination' | 'sort' | 'status'>
+    >;
+    mappings_connection?: Resolver<
+        Maybe<ResolversTypes['MappingEntityResponseCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryMappings_ConnectionArgs, 'pagination' | 'sort' | 'status'>
     >;
     me?: Resolver<Maybe<ResolversTypes['UsersPermissionsMe']>, ParentType, ContextType>;
     notFoundPage?: Resolver<
@@ -8059,7 +8214,7 @@ export type SurveyJsFormResolvers<
     documentId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     postId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-    requiredRoles?: Resolver<ResolversTypes['JSON'], ParentType, ContextType>;
+    requiredRoles?: Resolver<ResolversTypes['ComponentSeoUserRoles'], ParentType, ContextType>;
     submitDestination?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
     surveyId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     surveyType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -8399,7 +8554,6 @@ export type Resolvers<ContextType = any> = {
     ComponentComponentsTicketList?: ComponentComponentsTicketListResolvers<ContextType>;
     ComponentComponentsTicketRecent?: ComponentComponentsTicketRecentResolvers<ContextType>;
     ComponentComponentsUserAccount?: ComponentComponentsUserAccountResolvers<ContextType>;
-    ComponentContentActionLinks?: ComponentContentActionLinksResolvers<ContextType>;
     ComponentContentAlertBox?: ComponentContentAlertBoxResolvers<ContextType>;
     ComponentContentArticleSection?: ComponentContentArticleSectionResolvers<ContextType>;
     ComponentContentBanner?: ComponentContentBannerResolvers<ContextType>;
@@ -8438,6 +8592,7 @@ export type Resolvers<ContextType = any> = {
     ComponentRelationResponseCollection?: ComponentRelationResponseCollectionResolvers<ContextType>;
     ComponentSeoMetadata?: ComponentSeoMetadataResolvers<ContextType>;
     ComponentSeoSeo?: ComponentSeoSeoResolvers<ContextType>;
+    ComponentSeoUserRoles?: ComponentSeoUserRolesResolvers<ContextType>;
     ComponentTemplatesOneColumn?: ComponentTemplatesOneColumnResolvers<ContextType>;
     ComponentTemplatesTwoColumn?: ComponentTemplatesTwoColumnResolvers<ContextType>;
     ConfigurableTexts?: ConfigurableTextsResolvers<ContextType>;
@@ -8471,6 +8626,8 @@ export type Resolvers<ContextType = any> = {
     JSON?: GraphQLScalarType;
     LoginPage?: LoginPageResolvers<ContextType>;
     LoginPageRelationResponseCollection?: LoginPageRelationResponseCollectionResolvers<ContextType>;
+    Mapping?: MappingResolvers<ContextType>;
+    MappingEntityResponseCollection?: MappingEntityResponseCollectionResolvers<ContextType>;
     Mutation?: MutationResolvers<ContextType>;
     NotFoundPage?: NotFoundPageResolvers<ContextType>;
     NotFoundPageRelationResponseCollection?: NotFoundPageRelationResponseCollectionResolvers<ContextType>;
@@ -8519,11 +8676,11 @@ export type Resolvers<ContextType = any> = {
 export type ArticleSimpleFragment = {
     documentId: string;
     slug: string;
-    protected?: boolean;
     locale?: string;
     createdAt?: any;
     updatedAt?: any;
     publishedAt?: any;
+    permissions?: { __typename: 'ComponentSeoUserRoles'; roles?: any };
     SEO: {
         title: string;
         noIndex: boolean;
@@ -8552,7 +8709,6 @@ export type ArticleSimpleFragment = {
 export type ArticleFragment = {
     documentId: string;
     slug: string;
-    protected?: boolean;
     locale?: string;
     createdAt?: any;
     updatedAt?: any;
@@ -8568,6 +8724,7 @@ export type ArticleFragment = {
         };
         category?: { documentId: string; slug: string; name: string };
     };
+    permissions?: { __typename: 'ComponentSeoUserRoles'; roles?: any };
     SEO: {
         title: string;
         noIndex: boolean;
@@ -8604,7 +8761,6 @@ export type GetArticleQuery = {
     articles: Array<{
         documentId: string;
         slug: string;
-        protected?: boolean;
         locale?: string;
         createdAt?: any;
         updatedAt?: any;
@@ -8625,6 +8781,7 @@ export type GetArticleQuery = {
             };
             category?: { documentId: string; slug: string; name: string };
         };
+        permissions?: { __typename: 'ComponentSeoUserRoles'; roles?: any };
         SEO: {
             title: string;
             noIndex: boolean;
@@ -8657,11 +8814,11 @@ export type GetArticlesQuery = {
     articles: Array<{
         documentId: string;
         slug: string;
-        protected?: boolean;
         locale?: string;
         createdAt?: any;
         updatedAt?: any;
         publishedAt?: any;
+        permissions?: { __typename: 'ComponentSeoUserRoles'; roles?: any };
         SEO: {
             title: string;
             noIndex: boolean;
@@ -8784,7 +8941,7 @@ export type FooterFragment = {
                   url?: string;
                   label: string;
                   description?: string;
-                  page?: { slug: string };
+                  page?: { slug: string; permissions?: { __typename: 'ComponentSeoUserRoles'; roles?: any } };
               }>;
           }
         | {
@@ -8793,7 +8950,7 @@ export type FooterFragment = {
               url?: string;
               label: string;
               description?: string;
-              page?: { slug: string };
+              page?: { slug: string; permissions?: { __typename: 'ComponentSeoUserRoles'; roles?: any } };
           }
         | {}
     >;
@@ -8817,7 +8974,7 @@ export type HeaderFragment = {
                   url?: string;
                   label: string;
                   description?: string;
-                  page?: { slug: string };
+                  page?: { slug: string; permissions?: { __typename: 'ComponentSeoUserRoles'; roles?: any } };
               }>;
           }
         | {
@@ -8826,7 +8983,7 @@ export type HeaderFragment = {
               url?: string;
               label: string;
               description?: string;
-              page?: { slug: string };
+              page?: { slug: string; permissions?: { __typename: 'ComponentSeoUserRoles'; roles?: any } };
           }
         | {}
     >;
@@ -8896,12 +9053,12 @@ export type OrganizationListFragment = { documentId: string; title?: string; des
 export type PageFragment = {
     documentId: string;
     slug: string;
-    protected?: boolean;
     locale?: string;
     createdAt?: any;
     updatedAt?: any;
     publishedAt?: any;
     hasOwnTitle: boolean;
+    permissions?: { __typename: 'ComponentSeoUserRoles'; roles?: any };
     SEO: {
         title: string;
         noIndex: boolean;
@@ -9075,6 +9232,8 @@ export type PageFragment = {
         | { __typename: 'Error' }
     >;
 };
+
+export type RolesFragment = { __typename: 'ComponentSeoUserRoles'; roles?: any };
 
 type Template_ComponentTemplatesOneColumn_Fragment = {
     __typename: 'ComponentTemplatesOneColumn';
@@ -9963,7 +10122,7 @@ export type NavigationGroupFragment = {
         url?: string;
         label: string;
         description?: string;
-        page?: { slug: string };
+        page?: { slug: string; permissions?: { __typename: 'ComponentSeoUserRoles'; roles?: any } };
     }>;
 };
 
@@ -9973,7 +10132,7 @@ export type NavigationItemFragment = {
     url?: string;
     label: string;
     description?: string;
-    page?: { slug: string };
+    page?: { slug: string; permissions?: { __typename: 'ComponentSeoUserRoles'; roles?: any } };
 };
 
 export type PaginationFragment = {
@@ -10871,7 +11030,7 @@ export type GetFooterQuery = {
                       url?: string;
                       label: string;
                       description?: string;
-                      page?: { slug: string };
+                      page?: { slug: string; permissions?: { __typename: 'ComponentSeoUserRoles'; roles?: any } };
                   }>;
               }
             | {
@@ -10880,7 +11039,7 @@ export type GetFooterQuery = {
                   url?: string;
                   label: string;
                   description?: string;
-                  page?: { slug: string };
+                  page?: { slug: string; permissions?: { __typename: 'ComponentSeoUserRoles'; roles?: any } };
               }
             | {}
         >;
@@ -10911,7 +11070,7 @@ export type GetHeaderQuery = {
                       url?: string;
                       label: string;
                       description?: string;
-                      page?: { slug: string };
+                      page?: { slug: string; permissions?: { __typename: 'ComponentSeoUserRoles'; roles?: any } };
                   }>;
               }
             | {
@@ -10920,7 +11079,7 @@ export type GetHeaderQuery = {
                   url?: string;
                   label: string;
                   description?: string;
-                  page?: { slug: string };
+                  page?: { slug: string; permissions?: { __typename: 'ComponentSeoUserRoles'; roles?: any } };
               }
             | {}
         >;
@@ -11016,12 +11175,12 @@ export type GetPageQuery = {
     pages: Array<{
         documentId: string;
         slug: string;
-        protected?: boolean;
         locale?: string;
         createdAt?: any;
         updatedAt?: any;
         publishedAt?: any;
         hasOwnTitle: boolean;
+        permissions?: { __typename: 'ComponentSeoUserRoles'; roles?: any };
         SEO: {
             title: string;
             noIndex: boolean;
@@ -11205,12 +11364,12 @@ export type GetPagesQuery = {
     pages: Array<{
         documentId: string;
         slug: string;
-        protected?: boolean;
         locale?: string;
         createdAt?: any;
         updatedAt?: any;
         publishedAt?: any;
         hasOwnTitle: boolean;
+        permissions?: { __typename: 'ComponentSeoUserRoles'; roles?: any };
         SEO: {
             title: string;
             noIndex: boolean;
@@ -11396,11 +11555,17 @@ export type GetSurveyQuery = {
         surveyId: string;
         postId: string;
         surveyType: string;
-        requiredRoles: any;
         submitDestination?: any;
+        requiredRoles: { __typename: 'ComponentSeoUserRoles'; roles?: any };
     }>;
 };
 
+export const RolesFragmentDoc = gql`
+    fragment Roles on ComponentSeoUserRoles {
+        __typename
+        roles
+    }
+`;
 export const MediaFragmentDoc = gql`
     fragment Media on UploadFile {
         url
@@ -11429,7 +11594,9 @@ export const ArticleSimpleFragmentDoc = gql`
     fragment ArticleSimple on Article {
         documentId
         slug
-        protected
+        permissions {
+            ...Roles
+        }
         locale
         createdAt
         updatedAt
@@ -11473,6 +11640,7 @@ export const ArticleSimpleFragmentDoc = gql`
             }
         }
     }
+    ${RolesFragmentDoc}
     ${SeoFragmentDoc}
     ${MediaFragmentDoc}
 `;
@@ -11529,9 +11697,13 @@ export const NavigationItemFragmentDoc = gql`
         page {
             ... on Page {
                 slug
+                permissions {
+                    ...Roles
+                }
             }
         }
     }
+    ${RolesFragmentDoc}
 `;
 export const NavigationGroupFragmentDoc = gql`
     fragment NavigationGroup on ComponentContentNavigationGroup {
@@ -11708,7 +11880,9 @@ export const PageFragmentDoc = gql`
     fragment Page on Page {
         documentId
         slug
-        protected
+        permissions {
+            ...Roles
+        }
         locale
         createdAt
         updatedAt
@@ -11746,6 +11920,7 @@ export const PageFragmentDoc = gql`
             }
         }
     }
+    ${RolesFragmentDoc}
     ${SeoFragmentDoc}
     ${OneColumnTemplateFragmentDoc}
     ${TwoColumnTemplateFragmentDoc}
@@ -12616,10 +12791,13 @@ export const GetSurveyDocument = gql`
             surveyId
             postId
             surveyType
-            requiredRoles
+            requiredRoles {
+                ...Roles
+            }
             submitDestination
         }
     }
+    ${RolesFragmentDoc}
 `;
 
 export type SdkFunctionWrapper = <T>(

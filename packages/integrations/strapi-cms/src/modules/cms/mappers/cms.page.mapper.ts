@@ -2,6 +2,8 @@ import { NotFoundException } from '@nestjs/common';
 
 import { CMS } from '@o2s/framework/modules';
 
+import { mapRoles } from '@/modules/cms/mappers/cms.roles.mapper';
+
 import { ComponentFragment, PageFragment, TemplateFragment } from '@/generated/strapi';
 
 export const mapPage = (data: PageFragment): CMS.Model.Page.Page => {
@@ -12,7 +14,7 @@ export const mapPage = (data: PageFragment): CMS.Model.Page.Page => {
     return {
         id: data.documentId,
         slug: data.slug,
-        isProtected: !!data.protected,
+        permissions: mapRoles(data.permissions),
         locale: data.locale!,
         template: template,
         updatedAt: data.updatedAt,
@@ -60,7 +62,7 @@ export const mapAlternativePages = (data: PageFragment): CMS.Model.Page.Page => 
     return {
         id: data.documentId,
         slug: data.slug,
-        isProtected: !!data.protected,
+        permissions: mapRoles(data.permissions),
         locale: data.locale!,
         template: template,
         updatedAt: data.updatedAt,

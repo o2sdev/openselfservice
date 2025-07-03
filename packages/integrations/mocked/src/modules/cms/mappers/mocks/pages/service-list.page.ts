@@ -1,4 +1,4 @@
-import { CMS } from '@o2s/framework/modules';
+import { Auth, CMS } from '@o2s/framework/modules';
 
 export const PAGE_SERVICE_LIST_EN: CMS.Model.Page.Page = {
     id: '8',
@@ -17,7 +17,7 @@ export const PAGE_SERVICE_LIST_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    isProtected: true,
+    permissions: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',
@@ -59,7 +59,7 @@ export const PAGE_SERVICE_LIST_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    isProtected: true,
+    permissions: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',
@@ -101,7 +101,7 @@ export const PAGE_SERVICE_LIST_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    isProtected: true,
+    permissions: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',

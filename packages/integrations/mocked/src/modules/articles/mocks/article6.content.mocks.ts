@@ -502,7 +502,7 @@ export const MOCK_ARTICLE6_EN: Articles.Model.Article[] = [
     {
         id: 'art-006',
         slug: '/help-and-support/troubleshooting/common-powerpro-tool-issues',
-        isProtected: false,
+        permissions: [],
         createdAt: '2023-05-12T08:30:00Z',
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Troubleshooting Common PowerPro Tool Issues',
@@ -567,7 +567,7 @@ export const MOCK_ARTICLE6_DE: Articles.Model.Article[] = [
     {
         id: 'art-006',
         slug: '/hilfe-und-support/fehlerbehebung/haufige-powerpro-werkzeugprobleme',
-        isProtected: false,
+        permissions: [],
         createdAt: '2023-05-12T08:30:00Z',
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Behebung häufiger PowerPro-Werkzeugprobleme',
@@ -633,7 +633,7 @@ export const MOCK_ARTICLE6_PL: Articles.Model.Article[] = [
     {
         id: 'art-006',
         slug: '/pomoc-i-wsparcie/rozwiazywanie-problemow/typowe-problemy-z-narzedziami-powerpro',
-        isProtected: false,
+        permissions: [],
         createdAt: '2023-05-12T08:30:00Z',
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Rozwiązywanie typowych problemów z narzędziami PowerPro',
