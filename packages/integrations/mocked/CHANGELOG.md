@@ -1,5 +1,16 @@
 # @o2s/integrations.mocked
 
+## 1.7.0
+
+### Minor Changes
+
+- c13192c: adjusted `Page` and `Article` models to conform with new user-based permission model
+
+### Patch Changes
+
+- Updated dependencies [c13192c]
+    - @o2s/framework@1.7.0
+
 ## 1.6.8
 
 ### Patch Changes
