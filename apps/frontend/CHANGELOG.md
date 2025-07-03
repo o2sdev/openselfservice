@@ -1,5 +1,20 @@
 # @o2s/frontend
 
+## 1.7.0
+
+### Minor Changes
+
+- c13192c: implemented user role-based access to pages and articles
+
+### Patch Changes
+
+- Updated dependencies [c13192c]
+- Updated dependencies [c13192c]
+- Updated dependencies [c13192c]
+    - @o2s/framework@1.7.0
+    - @o2s/api-harmonization@1.6.0
+    - @o2s/integrations.mocked@1.7.0
+
 ## 1.6.4
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @o2s/framework
 
+## 1.7.0
+
+### Minor Changes
+
+- c13192c: refactored user roles to allow more than one role on organization level and added permission fields on `Page` and `Article` models to allow displaying them based on user roles
+
 ## 1.6.2
 
 ### Patch Changes
