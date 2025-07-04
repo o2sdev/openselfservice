@@ -1,5 +1,11 @@
 # @o2s/api-harmonization
 
+## 1.6.1
+
+### Patch Changes
+
+- ca33e9a: fix: fixed api-harmonization generator
+
 ## 1.6.0
 
 ### Minor Changes
