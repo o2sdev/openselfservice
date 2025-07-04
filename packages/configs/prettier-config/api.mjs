@@ -18,6 +18,7 @@ const config = {
         '@o2s/api-harmonization/pages',
         '@o2s/api-harmonization/blocks',
         '@o2s/api-harmonization/components',
+        '@/generated',
         '@/modules',
         '@/blocks',
         '@/auth',

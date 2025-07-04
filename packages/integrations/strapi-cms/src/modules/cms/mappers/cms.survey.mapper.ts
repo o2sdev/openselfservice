@@ -2,9 +2,9 @@ import { NotFoundException } from '@nestjs/common';
 
 import { CMS } from '@o2s/framework/modules';
 
-import { mapRoles } from '@/modules/cms/mappers/cms.roles.mapper';
-
 import { GetSurveyQuery } from '@/generated/strapi';
+
+import { mapRoles } from '@/modules/cms/mappers/cms.roles.mapper';
 
 export const mapSurvey = (data: GetSurveyQuery): CMS.Model.Survey.Survey => {
     const survey = data.surveyJsForms[0];

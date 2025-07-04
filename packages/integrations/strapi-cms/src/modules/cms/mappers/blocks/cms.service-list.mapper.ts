@@ -2,11 +2,11 @@ import { NotFoundException } from '@nestjs/common';
 
 import { CMS } from '@o2s/framework/modules';
 
+import { GetComponentQuery } from '@/generated/strapi';
+
 import { mapFields } from '../cms.fieldMapping.mapper';
 import { mapFilters } from '../cms.filters.mapper';
 import { mapPagination } from '../cms.pagination.mapper';
-
-import { GetComponentQuery } from '@/generated/strapi';
 
 export const mapServiceListBlock = (data: GetComponentQuery): CMS.Model.ServiceListBlock.ServiceListBlock => {
     const component = data.component!.content[0];

@@ -14,6 +14,7 @@ const config = {
         '@o2s/frontend',
         '@/api',
         '@/sdk',
+        '@/actions',
         '@/utils',
         '@/auth',
         '@/i18n',

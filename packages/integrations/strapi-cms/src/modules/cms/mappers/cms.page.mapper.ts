@@ -2,9 +2,9 @@ import { NotFoundException } from '@nestjs/common';
 
 import { CMS } from '@o2s/framework/modules';
 
-import { mapRoles } from '@/modules/cms/mappers/cms.roles.mapper';
-
 import { ComponentFragment, PageFragment, TemplateFragment } from '@/generated/strapi';
+
+import { mapRoles } from '@/modules/cms/mappers/cms.roles.mapper';
 
 export const mapPage = (data: PageFragment): CMS.Model.Page.Page => {
     const template = mapTemplate(data.template[0]);

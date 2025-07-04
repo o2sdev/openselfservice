@@ -1,9 +1,9 @@
 import { Articles } from '@o2s/framework/modules';
 
+import { ArticleFragment, ArticleSimpleFragment, CategoryFragment } from '@/generated/strapi';
+
 import { mapMedia } from '@/modules/cms/mappers/cms.media.mapper';
 import { mapRoles } from '@/modules/cms/mappers/cms.roles.mapper';
-
-import { ArticleFragment, ArticleSimpleFragment, CategoryFragment } from '@/generated/strapi';
 
 export const mapCategory = (data: CategoryFragment): Articles.Model.Category => {
     return {

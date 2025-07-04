@@ -2,9 +2,9 @@ import { NotFoundException } from '@nestjs/common';
 
 import { CMS } from '@o2s/framework/modules';
 
-import { mapInfoCard } from '../cms.information-card.mapper';
-
 import { GetComponentQuery } from '@/generated/strapi';
+
+import { mapInfoCard } from '../cms.information-card.mapper';
 
 export const mapPaymentsSummaryBlock = (
     data: GetComponentQuery,
