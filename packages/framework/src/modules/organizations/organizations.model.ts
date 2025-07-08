@@ -4,6 +4,7 @@ import { Party } from '@/utils/models/party';
 
 export class Organization extends Party {
     isActive!: boolean;
+    taxId!: string;
     children!: Organization[];
     customers!: Customer[];
 }

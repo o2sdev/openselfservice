@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 
 import { Organizations } from '@o2s/framework/modules';
 
-import { mapOrganization, mapOrganizations } from './organizations.mapper';
+import { checkMembership, mapOrganization, mapOrganizations } from './organizations.mapper';
 import { responseDelay } from '@/utils/delay';
 
 @Injectable()
@@ -18,5 +18,9 @@ export class OrganizationsService implements Organizations.Service {
         params: Organizations.Request.GetOrganizationParams,
     ): Observable<Organizations.Model.Organization | undefined> {
         return of(mapOrganization(params.id)).pipe(responseDelay());
+    }
+
+    checkMembership(params: Organizations.Request.CheckMembershipParams): Observable<boolean> {
+        return of(checkMembership(params.orgId, params.userId)).pipe(responseDelay());
     }
 }

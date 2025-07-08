@@ -2,6 +2,9 @@ export class GetUserParams {
     id!: string;
 }
 
+export class GetUsersQuery {
+    username?: string;
+}
 export class GetCustomerParams {
     id!: string;
 }
