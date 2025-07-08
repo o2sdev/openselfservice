@@ -2,6 +2,8 @@ import { HttpModule } from '@nestjs/axios';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD, Reflector } from '@nestjs/core';
+import { Auth } from '@o2s/configs.integrations';
+
 import { LoggerModule, LoggerService } from '@o2s/utils.logger';
 
 import {
@@ -21,16 +23,15 @@ import {
     Users,
 } from '@o2s/framework/modules';
 
-import { configuration } from '@o2s/api-harmonization/config/configuration';
+import * as Faq from '@o2s/blocks.faq/api-harmonization';
 
-import * as Auth from '@o2s/api-harmonization/models/auth';
+import { configuration } from '@o2s/api-harmonization/config/configuration';
 
 import { ArticleListBlockModule } from '@o2s/api-harmonization/blocks/article-list/article-list.module';
 import { ArticleSearchBlockModule } from '@o2s/api-harmonization/blocks/article-search/article-search.module';
 import { ArticleBlockModule } from '@o2s/api-harmonization/blocks/article/article.module';
 import { CategoryListBlockModule } from '@o2s/api-harmonization/blocks/category-list/category-list.module';
 import { CategoryBlockModule } from '@o2s/api-harmonization/blocks/category/category.module';
-import { FaqBlockModule } from '@o2s/api-harmonization/blocks/faq/faq.module';
 import { FeaturedServiceListBlockModule } from '@o2s/api-harmonization/blocks/featured-service-list/featured-service-list.module';
 import { InvoiceListBlockModule } from '@o2s/api-harmonization/blocks/invoice-list/invoice-list.module';
 import { NotificationDetailsBlockModule } from '@o2s/api-harmonization/blocks/notification-details/notification-details.module';
@@ -112,7 +113,7 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
         TicketDetailsBlockModule.register(AppConfig),
         NotificationListBlockModule.register(AppConfig),
         NotificationDetailsBlockModule.register(AppConfig),
-        FaqBlockModule.register(AppConfig),
+        Faq.Module.FaqBlockModule.register(AppConfig),
         InvoiceListBlockModule.register(AppConfig),
         PaymentsSummaryBlockModule.register(AppConfig),
         PaymentsHistoryBlockModule.register(AppConfig),

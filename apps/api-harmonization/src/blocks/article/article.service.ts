@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
+import { Articles, CMS } from '@o2s/configs.integrations';
 import { Observable, forkJoin, map } from 'rxjs';
 
 import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
-
-import { Articles, CMS } from '../../models';
 
 import { mapArticle } from './article.mapper';
 import { ArticleBlock } from './article.model';

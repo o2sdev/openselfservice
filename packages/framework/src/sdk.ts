@@ -59,7 +59,7 @@ export type ExtendedSdkMethods = {
     tickets: Partial<TicketMethods> & { [key: string]: unknown };
     notifications: Partial<NotificationMethods> & { [key: string]: unknown };
     invoices: Partial<InvoicesMethods> & { [key: string]: unknown };
-    components: { [key: string]: unknown };
+    blocks: { [key: string]: unknown };
     modules: { [key: string]: unknown };
 };
 

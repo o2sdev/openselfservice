@@ -3,9 +3,9 @@
 import { Blocks } from '@o2s/api-harmonization';
 import React, { useState, useTransition } from 'react';
 
-import { LoadingOverlay } from '@o2s/ui/components/loading-overlay';
-import { Separator } from '@o2s/ui/components/separator';
-import { Typography } from '@o2s/ui/components/typography';
+import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
+import { Separator } from '@o2s/ui/elements/separator';
+import { Typography } from '@o2s/ui/elements/typography';
 
 import { sdk } from '@/api/sdk';
 

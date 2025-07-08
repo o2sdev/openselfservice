@@ -1,6 +1,7 @@
+import { Notifications } from '@o2s/configs.integrations';
+
 import { Models } from '@o2s/framework/modules';
 
-import { Notifications } from '../../models';
 import { Block } from '../../utils';
 
 export class NotificationListBlock extends Block.Block {

@@ -1,6 +1,6 @@
-import { Models } from '@o2s/framework/modules';
+import { CMS, Invoices } from '@o2s/configs.integrations';
 
-import { CMS, Invoices } from '../../models';
+import { Models } from '@o2s/framework/modules';
 
 import { BarData, PaymentsHistoryBlock } from './payments-history.model';
 

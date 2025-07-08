@@ -2,7 +2,7 @@ import { VariantProps } from 'class-variance-authority';
 
 import { Orders } from '@o2s/framework/modules';
 
-import { badgeVariants } from '@o2s/ui/components/badge';
+import { badgeVariants } from '@o2s/ui/elements/badge';
 
 export const statusMap: {
     value: number;

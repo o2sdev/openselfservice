@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { Typography } from '@o2s/ui/components/typography';
+import { Typography } from '@o2s/ui/elements/typography';
 
 import { FieldsetProps } from './Fieldset.types';
 

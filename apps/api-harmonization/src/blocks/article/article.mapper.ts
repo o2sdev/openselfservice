@@ -1,8 +1,8 @@
+import { Articles } from '@o2s/configs.integrations';
+
 import { CMS } from '@o2s/framework/modules';
 
 import { formatDateRelative } from '@o2s/api-harmonization/utils/date';
-
-import { Articles } from '../../models';
 
 import { ArticleBlock } from './article.model';
 

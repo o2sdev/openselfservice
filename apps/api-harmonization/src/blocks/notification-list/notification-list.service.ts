@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
+import { CMS, Notifications } from '@o2s/configs.integrations';
 import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
 import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
-
-import { CMS, Notifications } from '../../models';
 
 import { mapNotificationList } from './notification-list.mapper';
 import { NotificationListBlock } from './notification-list.model';

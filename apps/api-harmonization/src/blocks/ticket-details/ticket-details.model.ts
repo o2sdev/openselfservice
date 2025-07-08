@@ -1,4 +1,5 @@
-import { Tickets } from '../../models';
+import { Tickets } from '@o2s/configs.integrations';
+
 import { Block } from '../../utils';
 
 export class TicketDetailsBlock extends Block.Block {

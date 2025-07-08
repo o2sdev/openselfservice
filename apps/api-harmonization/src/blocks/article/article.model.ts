@@ -1,4 +1,5 @@
-import { Articles } from '../../models';
+import { Articles } from '@o2s/configs.integrations';
+
 import { Block } from '../../utils';
 
 export class ArticleBlock extends Block.Block {

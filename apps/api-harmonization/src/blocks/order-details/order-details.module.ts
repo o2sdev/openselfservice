@@ -1,9 +1,8 @@
 import { HttpModule } from '@nestjs/axios';
 import { DynamicModule, Module } from '@nestjs/common';
+import { CMS, Orders } from '@o2s/configs.integrations';
 
 import * as Framework from '@o2s/framework/modules';
-
-import { CMS, Orders } from '../../models';
 
 import { OrderDetailsController } from './order-details.controller';
 import { OrderDetailsService } from './order-details.service';

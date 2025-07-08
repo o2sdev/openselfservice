@@ -1,6 +1,7 @@
+import { Users } from '@o2s/configs.integrations';
+
 import { Models } from '@o2s/framework/modules';
 
-import { Users } from '../../models';
 import { Block } from '../../utils';
 
 export class UserAccountBlock extends Block.Block {

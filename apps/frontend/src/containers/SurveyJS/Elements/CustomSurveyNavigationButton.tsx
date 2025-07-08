@@ -1,7 +1,7 @@
 import React, { JSX } from 'react';
 import { ReactElementFactory, SurveyNavigationButton } from 'survey-react-ui';
 
-import { Button } from '@o2s/ui/components/button';
+import { Button } from '@o2s/ui/elements/button';
 
 class CustomSurveyNavigationButton extends SurveyNavigationButton {
     renderElement(): JSX.Element {

@@ -1,10 +1,9 @@
+import { CMS, Orders } from '@o2s/configs.integrations';
 import dayjs from 'dayjs';
 import format from 'string-template';
 
 import { formatDateRelative, formatTime } from '@o2s/api-harmonization/utils/date';
 import { checkNegativeValue } from '@o2s/api-harmonization/utils/price';
-
-import { CMS, Orders } from '../../models';
 
 import { OrderDetailsBlock } from './order-details.model';
 

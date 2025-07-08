@@ -2,7 +2,7 @@ import type { VariantProps } from 'class-variance-authority';
 
 import { Orders } from '@o2s/framework/modules';
 
-import { badgeVariants } from '@o2s/ui/components/badge';
+import { badgeVariants } from '@o2s/ui/elements/badge';
 
 export const orderBadgeVariants: Record<Orders.Model.OrderStatus, VariantProps<typeof badgeVariants>['variant']> = {
     PENDING: 'default',

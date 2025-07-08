@@ -1,6 +1,7 @@
+import { Products, Resources } from '@o2s/configs.integrations';
+
 import { Models } from '@o2s/framework/modules';
 
-import { Products, Resources } from '../../models';
 import { Block } from '../../utils';
 
 export class ServiceListBlock extends Block.Block {

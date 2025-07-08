@@ -3,11 +3,11 @@
 import { Download, Link as LinkIcon } from 'lucide-react';
 import React from 'react';
 
-import { Badge } from '@o2s/ui/components/badge';
-import { Button } from '@o2s/ui/components/button';
-import { Separator } from '@o2s/ui/components/separator';
-import { TextItem } from '@o2s/ui/components/text-item';
-import { Typography } from '@o2s/ui/components/typography';
+import { Badge } from '@o2s/ui/elements/badge';
+import { Button } from '@o2s/ui/elements/button';
+import { Separator } from '@o2s/ui/elements/separator';
+import { TextItem } from '@o2s/ui/elements/text-item';
+import { Typography } from '@o2s/ui/elements/typography';
 
 import { ticketBadgeVariants } from '@/utils/mappings/ticket-badge';
 

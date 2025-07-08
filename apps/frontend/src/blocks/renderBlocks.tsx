@@ -5,12 +5,19 @@ import React from 'react';
 
 import { CMS } from '@o2s/framework/modules';
 
+import * as Faq from '@o2s/blocks.faq/frontend';
+
+import { sdk } from '@/api/sdk';
+
+// BLOCK IMPORT
+
+import { Link } from '@/i18n';
+
 import { ArticleRenderer } from '@/blocks/Article/Article.renderer';
 import { ArticleListRenderer } from '@/blocks/ArticleList/ArticleList.renderer';
 import { ArticleSearchRenderer } from '@/blocks/ArticleSearch/ArticleSearch.renderer';
 import { CategoryRenderer } from '@/blocks/Category/Category.renderer';
 import { CategoryListRenderer } from '@/blocks/CategoryList/CategoryList.renderer';
-import { FaqRenderer } from '@/blocks/Faq/Faq.renderer';
 import { FeaturedServiceListRenderer } from '@/blocks/FeaturedServiceList/FeaturedServiceList.renderer';
 import { InvoiceListRenderer } from '@/blocks/InvoiceList/InvoiceList.renderer';
 import { NotificationDetailsRenderer } from '@/blocks/NotificationDetails/NotificationDetails.renderer';
@@ -29,8 +36,6 @@ import { TicketListRenderer } from '@/blocks/TicketList/TicketList.renderer';
 import { TicketRecentRenderer } from '@/blocks/TicketRecent/TicketRecent.renderer';
 import { UserAccountRenderer } from '@/blocks/UserAccount/UserAccount.renderer';
 
-// BLOCK IMPORT
-
 export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: string[], accessToken?: string) => {
     return blocks.map((block) => {
         switch (block.__typename as Modules.Page.Model.Blocks) {
@@ -47,7 +52,15 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: str
                     <NotificationDetailsRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />
                 );
             case 'FaqBlock':
-                return <FaqRenderer key={block.id} id={block.id} accessToken={accessToken} />;
+                return (
+                    <Faq.Renderer.FaqRenderer
+                        key={block.id}
+                        id={block.id}
+                        accessToken={accessToken}
+                        sdk={sdk}
+                        LinkComponent={Link}
+                    />
+                );
             case 'InvoiceListBlock':
                 return <InvoiceListRenderer key={block.id} id={block.id} accessToken={accessToken} />;
             case 'PaymentsSummaryBlock':

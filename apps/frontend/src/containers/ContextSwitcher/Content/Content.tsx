@@ -2,11 +2,11 @@ import { Field, FieldProps, Form, Formik } from 'formik';
 import { useSession } from 'next-auth/react';
 import { object as YupObject, string as YupString } from 'yup';
 
-import { Button } from '@o2s/ui/components/button';
-import { Label } from '@o2s/ui/components/label';
-import { RadioGroup, RadioGroupItem } from '@o2s/ui/components/radio-group';
-import { SheetDescription, SheetFooter, SheetHeader, SheetTitle } from '@o2s/ui/components/sheet';
-import { Typography } from '@o2s/ui/components/typography';
+import { Button } from '@o2s/ui/elements/button';
+import { Label } from '@o2s/ui/elements/label';
+import { RadioGroup, RadioGroupItem } from '@o2s/ui/elements/radio-group';
+import { SheetDescription, SheetFooter, SheetHeader, SheetTitle } from '@o2s/ui/elements/sheet';
+import { Typography } from '@o2s/ui/elements/typography';
 import { toast } from '@o2s/ui/hooks/use-toast';
 
 import { updateOrganization } from '@/auth';

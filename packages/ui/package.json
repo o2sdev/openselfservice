@@ -8,7 +8,8 @@
         "./theme": "./src/theme.css",
         "./postcss.config": "./postcss.config.mjs",
         "./lib/*": "./src/lib/*.ts",
-        "./components/*": "./src/components/*.tsx",
+        "./elements/*": "./src/elements/*.tsx",
+        "./components/*": "./src/components/*/index.ts",
         "./hooks/*": "./src/hooks/*.ts"
     },
     "scripts": {

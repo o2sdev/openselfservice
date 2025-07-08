@@ -1,9 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { CMS, Tickets } from '@o2s/configs.integrations';
 import { Observable, forkJoin, map } from 'rxjs';
 
 import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
-
-import { CMS, Tickets } from '../../models';
 
 import { mapTicketDetails } from './ticket-details.mapper';
 import { TicketDetailsBlock } from './ticket-details.model';

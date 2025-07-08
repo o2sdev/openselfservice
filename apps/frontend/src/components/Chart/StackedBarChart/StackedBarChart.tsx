@@ -4,7 +4,7 @@ import { Props as BarProps } from 'recharts/types/cartesian/Bar';
 import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
 import { Props } from 'recharts/types/component/Label';
 
-import { ChartConfig, ChartContainer, ChartTooltip } from '@o2s/ui/components/chart';
+import { ChartConfig, ChartContainer, ChartTooltip } from '@o2s/ui/elements/chart';
 
 import { ChartTooltip as CustomTooltip } from '@/components/Chart/ChartTooltip/ChartTooltip';
 import { Price } from '@/components/Price/Price';

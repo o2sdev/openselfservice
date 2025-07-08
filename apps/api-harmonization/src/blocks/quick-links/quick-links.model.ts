@@ -1,4 +1,5 @@
-import { CMS } from '../../models';
+import { CMS } from '@o2s/configs.integrations';
+
 import { Block } from '../../utils';
 
 export class QuickLinksBlock extends Block.Block {

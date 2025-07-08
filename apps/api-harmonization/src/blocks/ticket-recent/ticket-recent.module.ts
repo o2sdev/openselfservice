@@ -1,8 +1,7 @@
 import { DynamicModule, Module } from '@nestjs/common';
+import { CMS, Tickets } from '@o2s/configs.integrations';
 
 import { ApiConfig } from '@o2s/framework/modules';
-
-import { CMS, Tickets } from '../../models';
 
 import { TicketRecentController } from './ticket-recent.controller';
 import { TicketRecentService } from './ticket-recent.service';

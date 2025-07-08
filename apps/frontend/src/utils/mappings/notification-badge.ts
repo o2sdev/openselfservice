@@ -2,7 +2,7 @@ import type { VariantProps } from 'class-variance-authority';
 
 import { Notifications } from '@o2s/framework/modules';
 
-import { badgeVariants } from '@o2s/ui/components/badge';
+import { badgeVariants } from '@o2s/ui/elements/badge';
 
 export const notificationBadgePriorityVariants: Record<
     Notifications.Model.NotificationPriority,

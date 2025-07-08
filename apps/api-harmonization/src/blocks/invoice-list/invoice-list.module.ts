@@ -1,8 +1,7 @@
 import { DynamicModule, Module } from '@nestjs/common';
+import { CMS, Invoices } from '@o2s/configs.integrations';
 
 import * as Framework from '@o2s/framework/modules';
-
-import { CMS, Invoices } from '../../models';
 
 import { InvoiceListController } from './invoice-list.controller';
 import { InvoiceListService } from './invoice-list.service';

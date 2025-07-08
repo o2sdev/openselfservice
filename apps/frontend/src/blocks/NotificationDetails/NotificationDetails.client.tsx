@@ -2,9 +2,9 @@
 
 import React, { useEffect } from 'react';
 
-import { Badge } from '@o2s/ui/components/badge';
-import { Separator } from '@o2s/ui/components/separator';
-import { Typography } from '@o2s/ui/components/typography';
+import { Badge } from '@o2s/ui/elements/badge';
+import { Separator } from '@o2s/ui/elements/separator';
+import { Typography } from '@o2s/ui/elements/typography';
 
 import { sdk } from '@/api/sdk';
 

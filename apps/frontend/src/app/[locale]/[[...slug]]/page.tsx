@@ -4,9 +4,9 @@ import { headers } from 'next/headers';
 import { notFound } from 'next/navigation';
 import React from 'react';
 
-import { Separator } from '@o2s/ui/components/separator';
-import { Toaster } from '@o2s/ui/components/toaster';
-import { Typography } from '@o2s/ui/components/typography';
+import { Separator } from '@o2s/ui/elements/separator';
+import { Toaster } from '@o2s/ui/elements/toaster';
+import { Typography } from '@o2s/ui/elements/typography';
 
 import { sdk } from '@/api/sdk';
 

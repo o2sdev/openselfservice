@@ -4,7 +4,7 @@ import { Blocks } from '@o2s/api-harmonization';
 import React, { useState, useTransition } from 'react';
 import { debounce } from 'throttle-debounce';
 
-import { Typography } from '@o2s/ui/components/typography';
+import { Typography } from '@o2s/ui/elements/typography';
 
 import { sdk } from '@/api/sdk';
 

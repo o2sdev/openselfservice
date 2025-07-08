@@ -1,6 +1,7 @@
+import { Orders, Products } from '@o2s/configs.integrations';
+
 import { Models } from '@o2s/framework/modules';
 
-import { Orders, Products } from '../../models';
 import { Block } from '../../utils';
 
 export class OrderDetailsBlock extends Block.Block {

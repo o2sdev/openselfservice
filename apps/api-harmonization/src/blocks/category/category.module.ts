@@ -1,8 +1,7 @@
 import { DynamicModule, Module } from '@nestjs/common';
+import { Articles, CMS } from '@o2s/configs.integrations';
 
 import * as Framework from '@o2s/framework/modules';
-
-import { Articles, CMS } from '../../models';
 
 import { CategoryController } from './category.controller';
 import { CategoryService } from './category.service';

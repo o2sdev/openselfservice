@@ -1,10 +1,10 @@
-import { Button } from '@o2s/ui/components/button';
+import { Button } from '@o2s/ui/elements/button';
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuTrigger,
-} from '@o2s/ui/components/dropdown-menu';
+} from '@o2s/ui/elements/dropdown-menu';
 import { cn } from '@o2s/ui/lib/utils';
 
 import { DynamicIcon } from '../DynamicIcon/DynamicIcon';

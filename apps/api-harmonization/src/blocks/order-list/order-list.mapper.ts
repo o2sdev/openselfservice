@@ -1,9 +1,8 @@
+import { CMS, Orders } from '@o2s/configs.integrations';
 import format from 'string-template';
 
 import { formatDateRelative } from '@o2s/api-harmonization/utils/date';
 import { checkNegativeValue } from '@o2s/api-harmonization/utils/price';
-
-import { CMS, Orders } from '../../models';
 
 import { Order, OrderListBlock } from './order-list.model';
 

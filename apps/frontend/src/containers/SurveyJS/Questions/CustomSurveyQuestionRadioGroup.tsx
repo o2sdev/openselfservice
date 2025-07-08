@@ -7,7 +7,7 @@ import {
     SurveyQuestionRadiogroup,
 } from 'survey-react-ui';
 
-import { RadioGroup, RadioGroupItemWithLabel } from '@o2s/ui/components/radio-group';
+import { RadioGroup, RadioGroupItemWithLabel } from '@o2s/ui/elements/radio-group';
 import { cn } from '@o2s/ui/lib/utils';
 
 class CustomSurveyQuestionRadiogroup extends SurveyQuestionRadiogroup {

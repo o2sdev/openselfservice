@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Models } from '@o2s/framework/modules';
 
-import { Typography } from '@o2s/ui/components/typography';
+import { Typography } from '@o2s/ui/elements/typography';
 
 import { Price } from '@/components/Price/Price';
 

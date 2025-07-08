@@ -1,10 +1,11 @@
 import React from 'react';
-import { RichText } from 'src/components/RichText/RichText';
 
-import { Button } from '@o2s/ui/components/button';
-import { Typography } from '@o2s/ui/components/typography';
+import { Button } from '@o2s/ui/elements/button';
+import { Typography } from '@o2s/ui/elements/typography';
 
 import { Link as NextLink } from '@/i18n';
+
+import { RichText } from '@/components/RichText/RichText';
 
 import { ContentSectionProps } from './ContentSection.types';
 

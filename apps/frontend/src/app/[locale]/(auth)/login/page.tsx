@@ -5,7 +5,7 @@ import { headers } from 'next/headers';
 import { notFound } from 'next/navigation';
 import React from 'react';
 
-import { Toaster } from '@o2s/ui/components/toaster';
+import { Toaster } from '@o2s/ui/elements/toaster';
 
 import { sdk } from '@/api/sdk';
 

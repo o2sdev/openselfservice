@@ -1,4 +1,4 @@
-import { Articles, CMS } from '../../models';
+import { Articles, CMS } from '@o2s/configs.integrations';
 
 import { CategoryListBlock } from './category-list.model';
 

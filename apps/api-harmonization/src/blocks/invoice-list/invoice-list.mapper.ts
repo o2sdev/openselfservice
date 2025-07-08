@@ -1,7 +1,7 @@
+import { CMS, Invoices } from '@o2s/configs.integrations';
+
 import { formatDateRelative } from '@o2s/api-harmonization/utils/date';
 import { checkNegativeValue } from '@o2s/api-harmonization/utils/price';
-
-import { CMS, Invoices } from '../../models';
 
 import { Invoice, InvoiceListBlock } from './invoice-list.model';
 

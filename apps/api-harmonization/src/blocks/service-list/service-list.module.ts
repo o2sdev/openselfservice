@@ -1,9 +1,8 @@
 import { HttpModule } from '@nestjs/axios';
 import { DynamicModule, Module } from '@nestjs/common';
+import { CMS, Resources } from '@o2s/configs.integrations';
 
 import * as Framework from '@o2s/framework/modules';
-
-import { CMS, Resources } from '../../models';
 
 import { ServiceListController } from './service-list.controller';
 import { ServiceListService } from './service-list.service';

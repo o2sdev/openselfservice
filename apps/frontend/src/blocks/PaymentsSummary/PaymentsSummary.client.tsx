@@ -3,8 +3,8 @@
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-import { Button } from '@o2s/ui/components/button';
-import { Typography } from '@o2s/ui/components/typography';
+import { Button } from '@o2s/ui/elements/button';
+import { Typography } from '@o2s/ui/elements/typography';
 import { cn } from '@o2s/ui/lib/utils';
 
 import { InfoCard } from '@/components/Cards/InfoCard/InfoCard';

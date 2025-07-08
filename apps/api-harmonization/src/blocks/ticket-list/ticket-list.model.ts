@@ -1,6 +1,7 @@
+import { Tickets } from '@o2s/configs.integrations';
+
 import { Models } from '@o2s/framework/modules';
 
-import { Tickets } from '../../models';
 import { Block } from '../../utils';
 
 export class TicketListBlock extends Block.Block {

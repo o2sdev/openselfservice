@@ -2,7 +2,7 @@ import React from 'react';
 import { CartesianGrid, Legend, Line, LineChart, TooltipProps, XAxis, YAxis } from 'recharts';
 import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
 
-import { ChartConfig, ChartContainer, ChartTooltip } from '@o2s/ui/components/chart';
+import { ChartConfig, ChartContainer, ChartTooltip } from '@o2s/ui/elements/chart';
 
 import { ChartTooltip as CustomTooltip } from '@/components/Chart/ChartTooltip/ChartTooltip';
 

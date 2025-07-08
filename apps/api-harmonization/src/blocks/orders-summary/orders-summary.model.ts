@@ -1,6 +1,7 @@
+import { CMS } from '@o2s/configs.integrations';
+
 import { Models } from '@o2s/framework/modules';
 
-import { CMS } from '../../models';
 import { Block } from '../../utils';
 
 export class OrdersSummaryBlock extends Block.Block {

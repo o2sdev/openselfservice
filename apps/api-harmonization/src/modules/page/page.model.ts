@@ -1,12 +1,13 @@
 import { CMS, Models } from '@o2s/framework/modules';
 
+import * as Faq from '@o2s/blocks.faq/api-harmonization';
+
 import {
     Article,
     ArticleList,
     ArticleSearch,
     Category,
     CategoryList,
-    Faq,
     FeaturedServiceList,
     // BLOCK IMPORT
     InvoiceList,

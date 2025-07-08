@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Separator } from '@o2s/ui/components/separator';
-import { Typography } from '@o2s/ui/components/typography';
+import { Separator } from '@o2s/ui/elements/separator';
+import { Typography } from '@o2s/ui/elements/typography';
 import { cn } from '@o2s/ui/lib/utils';
 
 import { Author } from '@/components/Author/Author';

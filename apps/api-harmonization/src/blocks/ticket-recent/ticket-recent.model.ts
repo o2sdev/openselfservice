@@ -1,4 +1,5 @@
-import { Tickets } from '../../models';
+import { Tickets } from '@o2s/configs.integrations';
+
 // TODO: this has to be a relative import so it could be resolved properly in `frontend` app; try to find a better way
 import { Block } from '../../utils';
 

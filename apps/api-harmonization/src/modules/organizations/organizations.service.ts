@@ -1,9 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { CMS, Organizations } from '@o2s/configs.integrations';
 import { Observable, forkJoin, map } from 'rxjs';
 
 import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
-
-import { CMS, Organizations } from '../../models';
 
 import { mapCustomerList } from './organizations.mapper';
 import { CustomerList } from './organizations.model';

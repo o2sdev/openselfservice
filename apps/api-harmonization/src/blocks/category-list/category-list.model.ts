@@ -1,4 +1,5 @@
-import { Articles, CMS } from '../../models';
+import { Articles, CMS } from '@o2s/configs.integrations';
+
 import { Block } from '../../utils';
 
 export class CategoryListBlock extends Block.Block {

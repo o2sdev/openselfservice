@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
+import { CMS, Resources } from '@o2s/configs.integrations';
 import { Observable, forkJoin, map } from 'rxjs';
 
 import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
-
-import { CMS, Resources } from '../../models';
 
 import { mapFeaturedServiceList } from './featured-service-list.mapper';
 import { FeaturedServiceListBlock } from './featured-service-list.model';

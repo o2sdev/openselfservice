@@ -6,8 +6,8 @@ import reactStringReplace from 'react-string-replace';
 
 import { Models } from '@o2s/framework/modules';
 
-import { Button } from '@o2s/ui/components/button';
-import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle } from '@o2s/ui/components/sheet';
+import { Button } from '@o2s/ui/elements/button';
+import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle } from '@o2s/ui/elements/sheet';
 import { cn } from '@o2s/ui/lib/utils';
 
 import { FilterItem } from './FilterItem';

@@ -2,8 +2,8 @@ import Markdown, { MarkdownToJSX } from 'markdown-to-jsx';
 import NextLink, { LinkProps } from 'next/link';
 import React, { FC, ReactNode } from 'react';
 
-import { Link } from '@o2s/ui/components/link';
-import { Typography, TypographyProps } from '@o2s/ui/components/typography';
+import { Link } from '@o2s/ui/elements/link';
+import { Typography, TypographyProps } from '@o2s/ui/elements/typography';
 import { cn } from '@o2s/ui/lib/utils';
 
 import { RichTextProps } from './RichText.types';

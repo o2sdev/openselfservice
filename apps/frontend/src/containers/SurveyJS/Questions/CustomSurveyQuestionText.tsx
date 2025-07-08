@@ -8,11 +8,11 @@ import React, { useState } from 'react';
 import { RendererFactory } from 'survey-core';
 import { ReactQuestionFactory } from 'survey-react-ui';
 
-import { Button } from '@o2s/ui/components/button';
-import { Calendar } from '@o2s/ui/components/calendar';
-import { InputWithLabel } from '@o2s/ui/components/input';
-import { Label } from '@o2s/ui/components/label';
-import { Popover, PopoverContent, PopoverTrigger } from '@o2s/ui/components/popover';
+import { Button } from '@o2s/ui/elements/button';
+import { Calendar } from '@o2s/ui/elements/calendar';
+import { InputWithLabel } from '@o2s/ui/elements/input';
+import { Label } from '@o2s/ui/elements/label';
+import { Popover, PopoverContent, PopoverTrigger } from '@o2s/ui/elements/popover';
 import { cn } from '@o2s/ui/lib/utils';
 
 const localeMap = {

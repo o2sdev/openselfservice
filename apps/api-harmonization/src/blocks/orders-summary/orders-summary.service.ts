@@ -1,10 +1,9 @@
 import { Injectable } from '@nestjs/common';
+import { CMS, Orders } from '@o2s/configs.integrations';
 import dayjs from 'dayjs';
 import { Observable, forkJoin, map } from 'rxjs';
 
 import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
-
-import { CMS, Orders } from '../../models';
 
 import { mapOrdersSummary } from './orders-summary.mapper';
 import { OrdersSummaryBlock } from './orders-summary.model';

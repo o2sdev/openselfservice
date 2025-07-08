@@ -3,7 +3,7 @@
 import { useSession } from 'next-auth/react';
 import React from 'react';
 
-import { Link } from '@o2s/ui/components/link';
+import { Link } from '@o2s/ui/elements/link';
 
 import { Link as NextLink } from '@/i18n';
 

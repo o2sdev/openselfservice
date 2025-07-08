@@ -3,7 +3,7 @@
 import { FormikValues } from 'formik';
 import React from 'react';
 
-import { Typography } from '@o2s/ui/components/typography';
+import { Typography } from '@o2s/ui/elements/typography';
 import { cn } from '@o2s/ui/lib/utils';
 
 import { Filters } from '@/components/Filters/Filters';

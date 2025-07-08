@@ -1,8 +1,8 @@
 import { ArrowRight } from 'lucide-react';
 import React from 'react';
 
-import { Link } from '@o2s/ui/components/link';
-import { Typography } from '@o2s/ui/components/typography';
+import { Link } from '@o2s/ui/elements/link';
+import { Typography } from '@o2s/ui/elements/typography';
 import { cn } from '@o2s/ui/lib/utils';
 
 import { Link as NextLink } from '@/i18n';

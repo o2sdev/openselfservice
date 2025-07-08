@@ -1,11 +1,10 @@
+import { CMS, Invoices } from '@o2s/configs.integrations';
 import dayjs from 'dayjs';
 import format from 'string-template';
 
 import { Models } from '@o2s/framework/modules';
 
 import { checkNegativeValue } from '@o2s/api-harmonization/utils/price';
-
-import { CMS, Invoices } from '../../models';
 
 import { PaymentsSummaryBlock } from './payments-summary.model';
 

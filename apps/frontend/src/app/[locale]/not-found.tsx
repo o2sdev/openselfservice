@@ -3,7 +3,7 @@ import { getLocale } from 'next-intl/server';
 import { headers } from 'next/headers';
 import React from 'react';
 
-import { Toaster } from '@o2s/ui/components/toaster';
+import { Toaster } from '@o2s/ui/elements/toaster';
 
 import { sdk } from '@/api/sdk';
 

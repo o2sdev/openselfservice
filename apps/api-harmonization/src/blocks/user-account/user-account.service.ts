@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
+import { CMS, Users } from '@o2s/configs.integrations';
 import { Observable, forkJoin, map } from 'rxjs';
 
 import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
-
-import { CMS, Users } from '../../models';
 
 import { mapUserAccount } from './user-account.mapper';
 import { UserAccountBlock } from './user-account.model';

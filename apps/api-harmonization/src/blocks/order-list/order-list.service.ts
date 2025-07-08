@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
+import { CMS, Orders } from '@o2s/configs.integrations';
 import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
 import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
-
-import { CMS, Orders } from '../../models';
 
 import { mapOrderList } from './order-list.mapper';
 import { OrderListBlock } from './order-list.model';

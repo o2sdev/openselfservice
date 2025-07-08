@@ -3,10 +3,10 @@
 import { ArrowRight } from 'lucide-react';
 import React from 'react';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@o2s/ui/components/avatar';
-import { Card, CardContent, CardHeader } from '@o2s/ui/components/card';
-import { Link } from '@o2s/ui/components/link';
-import { Typography } from '@o2s/ui/components/typography';
+import { Avatar, AvatarFallback, AvatarImage } from '@o2s/ui/elements/avatar';
+import { Card, CardContent, CardHeader } from '@o2s/ui/elements/card';
+import { Link } from '@o2s/ui/elements/link';
+import { Typography } from '@o2s/ui/elements/typography';
 
 import { Link as NextLink } from '@/i18n';
 

@@ -1,4 +1,4 @@
-import { CMS, Users } from '../../models';
+import { CMS, Users } from '@o2s/configs.integrations';
 
 import { UserAccountBlock } from './user-account.model';
 

@@ -1,5 +1,5 @@
-import { Card } from '@o2s/ui/components/card';
-import { Typography } from '@o2s/ui/components/typography';
+import { Card } from '@o2s/ui/elements/card';
+import { Typography } from '@o2s/ui/elements/typography';
 import { cn } from '@o2s/ui/lib/utils';
 
 import { DynamicIcon } from '@/components/DynamicIcon/DynamicIcon';

@@ -2,7 +2,7 @@ import React, { JSX } from 'react';
 import { PanelModel } from 'survey-core';
 import { ReactElementFactory, SurveyElementErrors, SurveyPanel } from 'survey-react-ui';
 
-import { Typography } from '@o2s/ui/components/typography';
+import { Typography } from '@o2s/ui/elements/typography';
 import { cn } from '@o2s/ui/lib/utils';
 
 class CustomSurveyPanel extends SurveyPanel {

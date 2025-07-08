@@ -1,8 +1,7 @@
 import { DynamicModule, Module } from '@nestjs/common';
+import { CMS } from '@o2s/configs.integrations';
 
 import * as Framework from '@o2s/framework/modules';
-
-import { CMS } from '../../models';
 
 import { SurveyjsController } from './surveyjs.controller';
 import { SurveyjsService } from './surveyjs.service';

@@ -8,8 +8,8 @@ import {
     BreadcrumbList,
     BreadcrumbPage,
     BreadcrumbSeparator,
-} from '@o2s/ui/components/breadcrumb';
-import { Link } from '@o2s/ui/components/link';
+} from '@o2s/ui/elements/breadcrumb';
+import { Link } from '@o2s/ui/elements/link';
 
 import { Link as NextLink } from '@/i18n';
 

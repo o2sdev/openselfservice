@@ -1,8 +1,8 @@
 import React, { JSX } from 'react';
 import { ReactElementFactory, SurveyQuestion } from 'survey-react-ui';
 
-import { Label } from '@o2s/ui/components/label';
-import { Typography } from '@o2s/ui/components/typography';
+import { Label } from '@o2s/ui/elements/label';
+import { Typography } from '@o2s/ui/elements/typography';
 
 class CustomSurveyQuestion extends SurveyQuestion {
     renderElement(): JSX.Element {

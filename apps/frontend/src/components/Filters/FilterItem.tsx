@@ -2,9 +2,9 @@ import { Field, FieldProps, FormikValues } from 'formik';
 import { useRef } from 'react';
 import ScrollContainer from 'react-indiana-drag-scroll';
 
-import { Label } from '@o2s/ui/components/label';
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@o2s/ui/components/select';
-import { ToggleGroup, ToggleGroupItem } from '@o2s/ui/components/toggle-group';
+import { Label } from '@o2s/ui/elements/label';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@o2s/ui/elements/select';
+import { ToggleGroup, ToggleGroupItem } from '@o2s/ui/elements/toggle-group';
 import { cn } from '@o2s/ui/lib/utils';
 
 import { FilterItemProps } from './Filters.types';

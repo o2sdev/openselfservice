@@ -1,6 +1,6 @@
-import { formatDateRelative } from '@o2s/api-harmonization/utils/date';
+import { CMS, Notifications } from '@o2s/configs.integrations';
 
-import { CMS, Notifications } from '../../models';
+import { formatDateRelative } from '@o2s/api-harmonization/utils/date';
 
 import { Notification, NotificationDetailsBlock } from './notification-details.model';
 

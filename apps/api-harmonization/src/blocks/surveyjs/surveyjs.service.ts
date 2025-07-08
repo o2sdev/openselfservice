@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
+import { CMS } from '@o2s/configs.integrations';
 import { Observable, forkJoin, map } from 'rxjs';
 
 import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
-
-import { CMS } from '../../models';
 
 import { mapSurveyjs } from './surveyjs.mapper';
 import { SurveyjsBlock } from './surveyjs.model';

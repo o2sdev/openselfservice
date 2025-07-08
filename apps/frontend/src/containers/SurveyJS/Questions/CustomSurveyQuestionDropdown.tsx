@@ -2,7 +2,7 @@ import React from 'react';
 import { RendererFactory } from 'survey-core';
 import { ReactQuestionFactory, SurveyQuestionDropdown } from 'survey-react-ui';
 
-import { SelectContent, SelectItem, SelectTrigger, SelectValue, SelectWithTitle } from '@o2s/ui/components/select';
+import { SelectContent, SelectItem, SelectTrigger, SelectValue, SelectWithTitle } from '@o2s/ui/elements/select';
 import { cn } from '@o2s/ui/lib/utils';
 
 interface Choice {

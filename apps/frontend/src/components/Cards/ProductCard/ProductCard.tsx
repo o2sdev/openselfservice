@@ -1,10 +1,10 @@
 import React from 'react';
 import { Image } from 'src/components/Image/Image';
 
-import { Badge } from '@o2s/ui/components/badge';
-import { Link } from '@o2s/ui/components/link';
-import { Separator } from '@o2s/ui/components/separator';
-import { Typography } from '@o2s/ui/components/typography';
+import { Badge } from '@o2s/ui/elements/badge';
+import { Link } from '@o2s/ui/elements/link';
+import { Separator } from '@o2s/ui/elements/separator';
+import { Typography } from '@o2s/ui/elements/typography';
 import { cn } from '@o2s/ui/lib/utils';
 
 import { Link as NextLink } from '@/i18n';

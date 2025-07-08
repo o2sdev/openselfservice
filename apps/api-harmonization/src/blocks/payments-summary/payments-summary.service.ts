@@ -1,12 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { CMS, Invoices } from '@o2s/configs.integrations';
 import { Observable, forkJoin, map } from 'rxjs';
 
 import { Models } from '@o2s/framework/modules';
 
 import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
-
-import { CMS, Invoices } from '../../models';
 
 import { mapPaymentsSummary } from './payments-summary.mapper';
 import { PaymentsSummaryBlock } from './payments-summary.model';

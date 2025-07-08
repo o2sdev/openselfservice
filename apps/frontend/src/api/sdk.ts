@@ -12,7 +12,6 @@ import { articleList } from '@/api/blocks/article-list';
 import { articleSearch } from '@/api/blocks/article-search';
 import { category } from '@/api/blocks/category';
 import { categoryList } from '@/api/blocks/category-list';
-import { faq } from '@/api/blocks/faq';
 import { featuredServiceList } from '@/api/blocks/featured-service-list';
 import { invoiceList } from '@/api/blocks/invoice-list';
 import { notificationDetails } from '@/api/blocks/notification-details';
@@ -68,7 +67,6 @@ export const sdk = extendSdk(internalSdk, {
         getPaymentsHistory: paymentsHistory(internalSdk).blocks.getPaymentsHistory,
         getServiceList: serviceList(internalSdk).blocks.getServiceList,
         getServiceDetails: serviceDetails(internalSdk).blocks.getServiceDetails,
-        getFaq: faq(internalSdk).blocks.getFaq,
         getUserAccount: userAccount(internalSdk).blocks.getUserAccount,
         getSurveyJsBlock: surveyJSBlock(internalSdk).blocks.getSurveyjsBlock,
         getOrderList: orderList(internalSdk).blocks.getOrderList,

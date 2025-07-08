@@ -1,8 +1,7 @@
+import { CMS, Tickets } from '@o2s/configs.integrations';
 import format from 'string-template';
 
 import { formatDateRelative } from '@o2s/api-harmonization/utils/date';
-
-import { CMS, Tickets } from '../../models';
 
 import { Ticket, TicketListBlock } from './ticket-list.model';
 

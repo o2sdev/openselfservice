@@ -6,9 +6,9 @@ import {
     PaginationNext,
     PaginationPrevious,
     Pagination as PaginationUI,
-} from '@o2s/ui/components/pagination';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@o2s/ui/components/select';
-import { Typography } from '@o2s/ui/components/typography';
+} from '@o2s/ui/elements/pagination';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@o2s/ui/elements/select';
+import { Typography } from '@o2s/ui/elements/typography';
 
 import { reactStringReplace } from '@/utils/string-replace';
 

@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
+import { CMS, Tickets } from '@o2s/configs.integrations';
 import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
 import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
-
-import { CMS, Tickets } from '../../models';
 
 import { mapTicketRecent } from './ticket-recent.mapper';
 import { TicketRecentBlock } from './ticket-recent.model';

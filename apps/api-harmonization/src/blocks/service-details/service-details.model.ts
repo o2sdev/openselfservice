@@ -1,4 +1,5 @@
-import { Resources } from '../../models';
+import { Resources } from '@o2s/configs.integrations';
+
 import { Block } from '../../utils';
 
 export class ServiceDetailsBlock extends Block.Block {

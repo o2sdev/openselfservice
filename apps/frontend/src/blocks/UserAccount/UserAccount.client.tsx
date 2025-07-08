@@ -3,10 +3,10 @@
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-import { Button } from '@o2s/ui/components/button';
-import { Separator } from '@o2s/ui/components/separator';
-import { TextItem } from '@o2s/ui/components/text-item';
-import { Typography } from '@o2s/ui/components/typography';
+import { Button } from '@o2s/ui/elements/button';
+import { Separator } from '@o2s/ui/elements/separator';
+import { TextItem } from '@o2s/ui/elements/text-item';
+import { Typography } from '@o2s/ui/elements/typography';
 
 import { Container } from '@/components/Container/Container';
 import { TooltipHover } from '@/components/TooltipHover/TooltipHover';

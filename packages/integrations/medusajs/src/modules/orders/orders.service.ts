@@ -3,8 +3,9 @@ import { HttpTypes, OrderStatus } from '@medusajs/types';
 import { HttpService } from '@nestjs/axios';
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { LoggerService } from '@o2s/utils.logger';
 import { Observable, catchError, from } from 'rxjs';
+
+import { LoggerService } from '@o2s/utils.logger';
 
 import { Auth, Orders } from '@o2s/framework/modules';
 

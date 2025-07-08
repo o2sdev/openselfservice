@@ -1,4 +1,5 @@
 import { DynamicModule, Module } from '@nestjs/common';
+
 import { LoggerModule } from '@o2s/utils.logger';
 
 import { ApiConfig, CMS } from '@o2s/framework/modules';

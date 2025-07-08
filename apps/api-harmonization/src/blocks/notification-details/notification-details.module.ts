@@ -1,8 +1,7 @@
 import { DynamicModule, Module } from '@nestjs/common';
+import { CMS, Notifications } from '@o2s/configs.integrations';
 
 import * as Framework from '@o2s/framework/modules';
-
-import { CMS, Notifications } from '../../models';
 
 import { NotificationDetailsController } from './notification-details.controller';
 import { NotificationDetailsService } from './notification-details.service';

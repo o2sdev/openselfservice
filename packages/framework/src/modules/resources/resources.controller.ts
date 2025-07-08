@@ -1,6 +1,7 @@
 import { Controller, Get, Headers, Param, Post, Query, UnauthorizedException, UseInterceptors } from '@nestjs/common';
-import { LoggerService } from '@o2s/utils.logger';
 import { Observable } from 'rxjs';
+
+import { LoggerService } from '@o2s/utils.logger';
 
 import { Products } from '@o2s/framework/modules';
 

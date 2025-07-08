@@ -7,15 +7,15 @@ import React, { useState, useTransition } from 'react';
 
 import { Orders } from '@o2s/framework/modules';
 
-import { Badge } from '@o2s/ui/components/badge';
-import { Button } from '@o2s/ui/components/button';
-import { LoadingOverlay } from '@o2s/ui/components/loading-overlay';
-import { Progress } from '@o2s/ui/components/progress';
-import { Separator } from '@o2s/ui/components/separator';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@o2s/ui/components/sheet';
-import { TableBody, TableCell, TableHead, TableHeader, TableRow } from '@o2s/ui/components/table';
-import { Table } from '@o2s/ui/components/table';
-import { Typography } from '@o2s/ui/components/typography';
+import { Badge } from '@o2s/ui/elements/badge';
+import { Button } from '@o2s/ui/elements/button';
+import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
+import { Progress } from '@o2s/ui/elements/progress';
+import { Separator } from '@o2s/ui/elements/separator';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@o2s/ui/elements/sheet';
+import { TableBody, TableCell, TableHead, TableHeader, TableRow } from '@o2s/ui/elements/table';
+import { Table } from '@o2s/ui/elements/table';
+import { Typography } from '@o2s/ui/elements/typography';
 import { cn } from '@o2s/ui/lib/utils';
 
 import { sdk } from '@/api/sdk';

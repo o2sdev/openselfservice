@@ -2,8 +2,8 @@
 
 import React, { FC } from 'react';
 
-import { Link } from '@o2s/ui/components/link';
-import { Typography } from '@o2s/ui/components/typography';
+import { Link } from '@o2s/ui/elements/link';
+import { Typography } from '@o2s/ui/elements/typography';
 
 import { Link as NextLink } from '@/i18n';
 

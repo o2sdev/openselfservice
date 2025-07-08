@@ -4,12 +4,12 @@ import { Blocks } from '@o2s/api-harmonization';
 import { Download } from 'lucide-react';
 import React, { useState, useTransition } from 'react';
 
-import { Badge } from '@o2s/ui/components/badge';
-import { Button } from '@o2s/ui/components/button';
-import { Link } from '@o2s/ui/components/link';
-import { LoadingOverlay } from '@o2s/ui/components/loading-overlay';
-import { Separator } from '@o2s/ui/components/separator';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@o2s/ui/components/table';
+import { Badge } from '@o2s/ui/elements/badge';
+import { Button } from '@o2s/ui/elements/button';
+import { Link } from '@o2s/ui/elements/link';
+import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
+import { Separator } from '@o2s/ui/elements/separator';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@o2s/ui/elements/table';
 import { toast } from '@o2s/ui/hooks/use-toast';
 import { cn } from '@o2s/ui/lib/utils';
 

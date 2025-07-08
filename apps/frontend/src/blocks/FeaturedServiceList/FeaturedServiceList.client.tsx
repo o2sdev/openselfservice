@@ -3,9 +3,9 @@
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-import { Separator } from '@o2s/ui/components/separator';
-import { SwitchWithLabel } from '@o2s/ui/components/switch';
-import { Typography } from '@o2s/ui/components/typography';
+import { Separator } from '@o2s/ui/elements/separator';
+import { SwitchWithLabel } from '@o2s/ui/elements/switch';
+import { Typography } from '@o2s/ui/elements/typography';
 
 import { ProductCard } from '@/components/Cards/ProductCard/ProductCard';
 import { Badge } from '@/components/Cards/ProductCard/ProductCard.types';

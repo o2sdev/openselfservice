@@ -3,9 +3,9 @@
 import { Command as CommandPrimitive } from 'cmdk';
 import { type KeyboardEvent, useCallback, useRef, useState } from 'react';
 
-import { CommandGroup, CommandInput, CommandItem, CommandList } from '@o2s/ui/components/command';
-import { Label } from '@o2s/ui/components/label';
-import { Skeleton } from '@o2s/ui/components/skeleton';
+import { CommandGroup, CommandInput, CommandItem, CommandList } from '@o2s/ui/elements/command';
+import { Label } from '@o2s/ui/elements/label';
+import { Skeleton } from '@o2s/ui/elements/skeleton';
 import { cn } from '@o2s/ui/lib/utils';
 
 import { AutocompleteProps } from './Autocomplete.types';

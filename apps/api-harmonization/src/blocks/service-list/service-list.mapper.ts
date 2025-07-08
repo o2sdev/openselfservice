@@ -1,8 +1,7 @@
+import { CMS, Resources } from '@o2s/configs.integrations';
 import format from 'string-template';
 
 import { formatDateRelative } from '@o2s/api-harmonization/utils/date';
-
-import { CMS, Resources } from '../../models';
 
 import { Service, ServiceListBlock } from './service-list.model';
 

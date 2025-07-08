@@ -1,4 +1,4 @@
-import { CMS, Products } from '../../models';
+import { CMS, Products } from '@o2s/configs.integrations';
 
 import { FeaturedService, FeaturedServiceListBlock } from './featured-service-list.model';
 

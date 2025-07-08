@@ -7,7 +7,7 @@ import React, { startTransition, useActionState, useEffect } from 'react';
 import { Model } from 'survey-core';
 import { Survey as SurveySDK } from 'survey-react-ui';
 
-import { LoadingOverlay } from '@o2s/ui/components/loading-overlay';
+import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
 import { toast } from '@o2s/ui/hooks/use-toast';
 import { cn } from '@o2s/ui/lib/utils';
 
