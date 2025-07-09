@@ -19,4 +19,9 @@ export class OrganizationController {
     getOrganizations(@Query() options: Request.OrganizationsListQuery, @Headers() headers: AppHeaders) {
         return this.organizationService.getOrganizationList(options, headers.authorization);
     }
+
+    @Get('/membership/:orgId/:userId')
+    checkMembership(@Param() params: Request.CheckMembershipParams, @Headers() headers: AppHeaders) {
+        return this.organizationService.checkMembership(params, headers.authorization);
+    }
 }
