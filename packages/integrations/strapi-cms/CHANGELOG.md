@@ -1,5 +1,11 @@
 # @o2s/integrations.strapi-cms
 
+## 2.5.1
+
+### Patch Changes
+
+- 916fcaa: improved prettier rules and reformatted the code
+
 ## 2.5.0
 
 ### Minor Changes

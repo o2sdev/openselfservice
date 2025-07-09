@@ -1,5 +1,11 @@
 # @o2s/prettier-config
 
+## 1.0.2
+
+### Patch Changes
+
+- 916fcaa: improved prettier rules and reformatted the code
+
 ## 1.0.1
 
 ### Patch Changes
