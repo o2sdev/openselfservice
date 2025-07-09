@@ -1,7 +1,7 @@
 import { useLocale } from 'next-intl';
 
 import { PriceProps } from './Price.types';
-import { usePriceService } from '@/hooks/usePriceService';
+import { usePriceService } from './usePriceService';
 
 export const Price = ({ price }: PriceProps) => {
     const locale = useLocale();

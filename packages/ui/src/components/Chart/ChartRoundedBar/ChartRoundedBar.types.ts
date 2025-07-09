@@ -1,4 +1,4 @@
-export interface BarData {
+export interface ChartRoundedBarProps {
     month: string;
     topSegment: string;
     middleSegment: string;

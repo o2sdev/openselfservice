@@ -3,15 +3,14 @@
 import { ArrowRight } from 'lucide-react';
 import React from 'react';
 
+import { RichText } from '@o2s/ui/components/RichText';
+import { TooltipHover } from '@o2s/ui/components/TooltipHover';
 import { Avatar, AvatarFallback, AvatarImage } from '@o2s/ui/elements/avatar';
 import { Card, CardContent, CardHeader } from '@o2s/ui/elements/card';
 import { Link } from '@o2s/ui/elements/link';
 import { Typography } from '@o2s/ui/elements/typography';
 
 import { Link as NextLink } from '@/i18n';
-
-import { RichText } from '@/components/RichText/RichText';
-import { TooltipHover } from '@/components/TooltipHover/TooltipHover';
 
 import { TicketRecentPureProps } from './TicketRecent.types';
 

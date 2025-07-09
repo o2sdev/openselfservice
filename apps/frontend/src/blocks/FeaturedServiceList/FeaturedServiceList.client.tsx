@@ -3,14 +3,15 @@
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
+import { ProductCard } from '@o2s/ui/components/Cards/ProductCard';
+import { ProductCardBadge } from '@o2s/ui/components/Cards/ProductCard';
+import { NoResults } from '@o2s/ui/components/NoResults';
+import { TooltipHover } from '@o2s/ui/components/TooltipHover';
 import { Separator } from '@o2s/ui/elements/separator';
 import { SwitchWithLabel } from '@o2s/ui/elements/switch';
 import { Typography } from '@o2s/ui/elements/typography';
 
-import { ProductCard } from '@/components/Cards/ProductCard/ProductCard';
-import { Badge } from '@/components/Cards/ProductCard/ProductCard.types';
-import { NoResults } from '@/components/NoResults/NoResults';
-import { TooltipHover } from '@/components/TooltipHover/TooltipHover';
+import { Link } from '@/i18n';
 
 import { FeaturedServiceListPureProps } from './FeaturedServiceList.types';
 
@@ -32,7 +33,7 @@ export const FeaturedServiceListPure: React.FC<FeaturedServiceListPureProps> = (
                                 <ProductCard
                                     key={service.id}
                                     title={service.name}
-                                    tags={service.tags as Badge[]}
+                                    tags={service.tags as ProductCardBadge[]}
                                     description={service.shortDescription}
                                     image={service.image}
                                     price={service.price}
@@ -54,6 +55,7 @@ export const FeaturedServiceListPure: React.FC<FeaturedServiceListPureProps> = (
                                             content={<p>{t('general.comingSoon')}</p>}
                                         />
                                     }
+                                    LinkComponent={Link}
                                 />
                             </li>
                         ))}

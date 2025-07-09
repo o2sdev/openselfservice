@@ -4,6 +4,9 @@ import { Blocks } from '@o2s/api-harmonization';
 import { ArrowRight } from 'lucide-react';
 import React, { useState, useTransition } from 'react';
 
+import { FiltersSection } from '@o2s/ui/components/Filters';
+import { NoResults } from '@o2s/ui/components/NoResults';
+import { Pagination } from '@o2s/ui/components/Pagination';
 import { Badge } from '@o2s/ui/elements/badge';
 import { BadgeStatus } from '@o2s/ui/elements/badge-status';
 import { Button } from '@o2s/ui/elements/button';
@@ -17,10 +20,6 @@ import { sdk } from '@/api/sdk';
 import { notificationBadgePriorityVariants } from '@/utils/mappings/notification-badge';
 
 import { Link as NextLink } from '@/i18n';
-
-import { FiltersSection } from '@/components/Filters/FiltersSection';
-import { NoResults } from '@/components/NoResults/NoResults';
-import { Pagination } from '@/components/Pagination/Pagination';
 
 import { NotificationListPureProps } from './NotificationList.types';
 

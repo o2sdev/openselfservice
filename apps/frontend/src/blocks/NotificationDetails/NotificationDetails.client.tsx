@@ -2,6 +2,8 @@
 
 import React, { useEffect } from 'react';
 
+import { Container } from '@o2s/ui/components/Container';
+import { RichText } from '@o2s/ui/components/RichText';
 import { Badge } from '@o2s/ui/elements/badge';
 import { Separator } from '@o2s/ui/elements/separator';
 import { Typography } from '@o2s/ui/elements/typography';
@@ -9,9 +11,6 @@ import { Typography } from '@o2s/ui/elements/typography';
 import { sdk } from '@/api/sdk';
 
 import { notificationBadgePriorityVariants } from '@/utils/mappings/notification-badge';
-
-import { Container } from '@/components/Container/Container';
-import { RichText } from '@/components/RichText/RichText';
 
 import { NotificationDetailsPureProps } from './NotificationDetails.types';
 

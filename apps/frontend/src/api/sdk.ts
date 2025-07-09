@@ -53,6 +53,7 @@ const internalSdk = getSdk({
 export const sdk = extendSdk(internalSdk, {
     notifications: {
         ...Notifications.extend(internalSdk),
+        getTicketList: ticketList(internalSdk).blocks.getTicketList,
     },
     blocks: {
         getTicketList: ticketList(internalSdk).blocks.getTicketList,

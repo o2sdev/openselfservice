@@ -4,14 +4,13 @@ import { Blocks } from '@o2s/api-harmonization';
 import React, { useState, useTransition } from 'react';
 import { debounce } from 'throttle-debounce';
 
+import { Autocomplete } from '@o2s/ui/components/Autocomplete';
+import { Container } from '@o2s/ui/components/Container';
 import { Typography } from '@o2s/ui/elements/typography';
 
 import { sdk } from '@/api/sdk';
 
 import { useRouter } from '@/i18n';
-
-import { Autocomplete } from '@/components/Autocomplete/Autocomplete';
-import { Container } from '@/components/Container/Container';
 
 import { ArticleSearchPureProps } from './ArticleSearch.types';
 

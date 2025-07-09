@@ -4,6 +4,10 @@ import { Repeat2, Settings } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
+import { Container } from '@o2s/ui/components/Container';
+import { Price } from '@o2s/ui/components/Price';
+import { RichText } from '@o2s/ui/components/RichText';
+import { TooltipHover } from '@o2s/ui/components/TooltipHover';
 import { Badge } from '@o2s/ui/elements/badge';
 import { Button } from '@o2s/ui/elements/button';
 import { Separator } from '@o2s/ui/elements/separator';
@@ -11,11 +15,6 @@ import { TextItem } from '@o2s/ui/elements/text-item';
 import { Typography } from '@o2s/ui/elements/typography';
 
 import { statusBadgeVariants } from '@/utils/mappings/services-badge';
-
-import { Container } from '@/components/Container/Container';
-import { Price } from '@/components/Price/Price';
-import { RichText } from '@/components/RichText/RichText';
-import { TooltipHover } from '@/components/TooltipHover/TooltipHover';
 
 import { ServiceDetailsPureProps } from './ServiceDetails.types';
 

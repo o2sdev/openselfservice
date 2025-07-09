@@ -1,13 +1,12 @@
 import React from 'react';
 
+import { Author } from '@o2s/ui/components/Author';
+import { Container } from '@o2s/ui/components/Container';
+import { Image } from '@o2s/ui/components/Image';
+import { RichText } from '@o2s/ui/components/RichText';
 import { Separator } from '@o2s/ui/elements/separator';
 import { Typography } from '@o2s/ui/elements/typography';
 import { cn } from '@o2s/ui/lib/utils';
-
-import { Author } from '@/components/Author/Author';
-import { Container } from '@/components/Container/Container';
-import { Image } from '@/components/Image/Image';
-import { RichText } from '@/components/RichText/RichText';
 
 import { ArticlePureProps } from './Article.types';
 

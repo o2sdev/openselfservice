@@ -6,11 +6,10 @@ import { Props } from 'recharts/types/component/Label';
 
 import { ChartConfig, ChartContainer, ChartTooltip } from '@o2s/ui/elements/chart';
 
-import { ChartTooltip as CustomTooltip } from '@o2s/ui/components/Chart/ChartTooltip/ChartTooltip';
-import { Price } from '@o2s/ui/components/Price/Price';
+import { Price } from '@o2s/ui/components/Price';
 
-import { ChartRoundedBar } from '../ChartRoundedBar/ChartRoundedBar';
-import { BarData } from '../ChartRoundedBar/ChartRoundedBar.types';
+import { ChartRoundedBar, ChartRoundedBarProps } from '../ChartRoundedBar';
+import { ChartTooltip as CustomTooltip } from '../ChartTooltip';
 
 import { StackedBarChartProps } from './StackedBarChart.types';
 
@@ -68,7 +67,7 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
                         name={labels.bottomSegment}
                         fill={chartConfig.bottomSegment.color}
                         stroke={chartConfig.bottomSegment.stroke}
-                        shape={(props: BarProps) => <ChartRoundedBar {...(props as BarProps & BarData)} />}
+                        shape={(props: BarProps) => <ChartRoundedBar {...(props as BarProps & ChartRoundedBarProps)} />}
                         unit={unit}
                     />
                     <Bar
@@ -77,7 +76,7 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
                         name={labels.middleSegment}
                         fill={chartConfig.middleSegment.color}
                         stroke={chartConfig.middleSegment.stroke}
-                        shape={(props: BarProps) => <ChartRoundedBar {...(props as BarProps & BarData)} />}
+                        shape={(props: BarProps) => <ChartRoundedBar {...(props as BarProps & ChartRoundedBarProps)} />}
                         unit={unit}
                     />
                     <Bar
@@ -86,7 +85,7 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
                         name={labels.topSegment}
                         fill={chartConfig.topSegment.color}
                         stroke={chartConfig.topSegment.stroke}
-                        shape={(props: BarProps) => <ChartRoundedBar {...(props as BarProps & BarData)} />}
+                        shape={(props: BarProps) => <ChartRoundedBar {...(props as BarProps & ChartRoundedBarProps)} />}
                         unit={unit}
                     >
                         <LabelList

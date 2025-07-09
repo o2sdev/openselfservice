@@ -3,15 +3,14 @@
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
+import { InfoCard } from '@o2s/ui/components/Cards/InfoCard';
+import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
+import { Price } from '@o2s/ui/components/Price';
+import { RichText } from '@o2s/ui/components/RichText';
+import { TooltipHover } from '@o2s/ui/components/TooltipHover';
 import { Button } from '@o2s/ui/elements/button';
 import { Typography } from '@o2s/ui/elements/typography';
 import { cn } from '@o2s/ui/lib/utils';
-
-import { InfoCard } from '@/components/Cards/InfoCard/InfoCard';
-import { DynamicIcon } from '@/components/DynamicIcon/DynamicIcon';
-import { Price } from '@/components/Price/Price';
-import { RichText } from '@/components/RichText/RichText';
-import { TooltipHover } from '@/components/TooltipHover/TooltipHover';
 
 import { PaymentsSummaryPureProps } from './PaymentsSummary.types';
 

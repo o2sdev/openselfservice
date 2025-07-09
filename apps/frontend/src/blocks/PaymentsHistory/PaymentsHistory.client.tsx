@@ -2,10 +2,9 @@
 
 import React from 'react';
 
+import { StackedBarChart } from '@o2s/ui/components/Chart/StackedBarChart';
 import { Card } from '@o2s/ui/elements/card';
 import { Typography } from '@o2s/ui/elements/typography';
-
-import { StackedBarChart } from '@/components/Chart/StackedBarChart/StackedBarChart';
 
 import { PaymentsHistoryPureProps } from './PaymentsHistory.types';
 

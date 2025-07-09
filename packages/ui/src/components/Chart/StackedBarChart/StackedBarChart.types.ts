@@ -1,11 +1,10 @@
 import { Models } from '@o2s/framework/modules';
 
-import { ChartTooltipProps } from '@o2s/ui/components/Chart/ChartTooltip/ChartTooltip.types';
-
-import { BarData } from '../ChartRoundedBar/ChartRoundedBar.types';
+import { ChartRoundedBarProps } from '../ChartRoundedBar';
+import { ChartTooltipProps } from '../ChartTooltip';
 
 export interface StackedBarChartProps {
-    chartData: BarData[];
+    chartData: ChartRoundedBarProps[];
     labels: {
         topSegment: string;
         middleSegment: string;

@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Typography } from '@o2s/ui/elements/typography';
 
-import { Price } from '@o2s/ui/components/Price/Price';
+import { Price } from '@o2s/ui/components/Price';
 
 import { ChartTooltipProps } from './ChartTooltip.types';
 

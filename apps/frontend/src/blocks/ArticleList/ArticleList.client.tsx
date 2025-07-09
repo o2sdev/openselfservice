@@ -1,7 +1,9 @@
 import React from 'react';
 
-import { BlogCard } from '@/components/Cards/BlogCard/BlogCard';
-import { ContentSection } from '@/components/ContentSection/ContentSection';
+import { BlogCard } from '@o2s/ui/components/Cards/BlogCard';
+import { ContentSection } from '@o2s/ui/components/ContentSection';
+
+import { Link } from '@/i18n';
 
 import { ArticleListPureProps } from './ArticleList.types';
 
@@ -11,6 +13,7 @@ export const ArticleListPure: React.FC<Readonly<ArticleListPureProps>> = ({ ...c
             title={component.title}
             description={component.description}
             categoryLink={component.categoryLink}
+            LinkComponent={Link}
         >
             <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
                 {component.items.data.map((item) => (
@@ -31,6 +34,7 @@ export const ArticleListPure: React.FC<Readonly<ArticleListPureProps>> = ({ ...c
                                     : undefined
                             }
                             categoryTitle={item.category?.title}
+                            LinkComponent={Link}
                         />
                     </li>
                 ))}

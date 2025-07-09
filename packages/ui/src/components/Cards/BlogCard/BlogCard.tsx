@@ -1,13 +1,12 @@
 import React from 'react';
-import { Image } from 'src/elements/Image/Image';
 
 import { Link } from '@o2s/ui/elements/link';
 import { Typography } from '@o2s/ui/elements/typography';
 
-import { Author } from '../../Author/Author';
+import { Author } from '@o2s/ui/components/Author';
+import { Image } from '@o2s/ui/components/Image';
 
 import { BlogCardProps } from './BlogCard.types';
-import { Link as NextLink } from '@/i18n';
 
 export const BlogCard: React.FC<Readonly<BlogCardProps>> = ({
     title,
@@ -17,13 +16,14 @@ export const BlogCard: React.FC<Readonly<BlogCardProps>> = ({
     date,
     author,
     categoryTitle,
+    LinkComponent,
 }) => {
     return (
         <Link
             asChild
             className="group whitespace-normal text-foreground hover:no-underline w-full focus-visible:ring-offset-4 block"
         >
-            <NextLink href={url} aria-label={title}>
+            <LinkComponent href={url} aria-label={title}>
                 <div className="flex flex-col gap-6">
                     {image && (
                         <div className="relative overflow-hidden max-h-[164px] flex-shrink-0 rounded-xl w-full">
@@ -60,7 +60,7 @@ export const BlogCard: React.FC<Readonly<BlogCardProps>> = ({
                     </div>
                     {author && <Author name={author.name} avatar={author.avatar} position={author.position} />}
                 </div>
-            </NextLink>
+            </LinkComponent>
         </Link>
     );
 };

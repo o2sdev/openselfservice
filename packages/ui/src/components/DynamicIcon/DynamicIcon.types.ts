@@ -1,4 +1,4 @@
-export interface IconProps {
+export interface DynamicIconProps {
     name: string;
     size?: number;
     color?: string;

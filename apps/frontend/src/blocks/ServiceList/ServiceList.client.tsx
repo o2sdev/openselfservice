@@ -3,6 +3,10 @@
 import { Blocks } from '@o2s/api-harmonization';
 import React, { useState, useTransition } from 'react';
 
+import { ProductCard, ProductCardBadge } from '@o2s/ui/components/Cards/ProductCard';
+import { FiltersSection } from '@o2s/ui/components/Filters';
+import { NoResults } from '@o2s/ui/components/NoResults';
+import { Pagination } from '@o2s/ui/components/Pagination';
 import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
 import { Separator } from '@o2s/ui/elements/separator';
 
@@ -10,11 +14,7 @@ import { sdk } from '@/api/sdk';
 
 import { statusBadgeVariants } from '@/utils/mappings/services-badge';
 
-import { ProductCard } from '@/components/Cards/ProductCard/ProductCard';
-import { Badge } from '@/components/Cards/ProductCard/ProductCard.types';
-import { FiltersSection } from '@/components/Filters/FiltersSection';
-import { NoResults } from '@/components/NoResults/NoResults';
-import { Pagination } from '@/components/Pagination/Pagination';
+import { Link } from '@/i18n';
 
 import { ServiceListPureProps } from './ServiceList.types';
 
@@ -69,7 +69,7 @@ export const ServiceListPure: React.FC<ServiceListPureProps> = ({ locale, access
                                             <ProductCard
                                                 key={service.id}
                                                 title={service.product.name}
-                                                tags={service.product.tags as Badge[]}
+                                                tags={service.product.tags as ProductCardBadge[]}
                                                 description={service.product.shortDescription}
                                                 image={service.product.image}
                                                 price={service.contract.price}
@@ -81,6 +81,7 @@ export const ServiceListPure: React.FC<ServiceListPureProps> = ({ locale, access
                                                     label: service.contract.status.label,
                                                     variant: statusBadgeVariants[service.contract.status.value],
                                                 }}
+                                                LinkComponent={Link}
                                             />
                                         </li>
                                     ))}

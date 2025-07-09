@@ -7,6 +7,15 @@ import React, { useState, useTransition } from 'react';
 
 import { Orders } from '@o2s/framework/modules';
 
+import { ActionList } from '@o2s/ui/components/ActionList';
+import { InfoCard } from '@o2s/ui/components/Cards/InfoCard';
+import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
+import { FiltersSection } from '@o2s/ui/components/Filters';
+import { NoResults } from '@o2s/ui/components/NoResults';
+import { Pagination } from '@o2s/ui/components/Pagination';
+import { Price } from '@o2s/ui/components/Price';
+import { RichText } from '@o2s/ui/components/RichText';
+import { TooltipHover } from '@o2s/ui/components/TooltipHover';
 import { Badge } from '@o2s/ui/elements/badge';
 import { Button } from '@o2s/ui/elements/button';
 import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
@@ -24,16 +33,6 @@ import { orderBadgeVariants } from '@/utils/mappings/order-badge';
 import { statusMap } from '@/utils/mappings/status-order';
 
 import { Link as NextLink } from '@/i18n';
-
-import { ActionList } from '@/components/ActionList/ActionList';
-import { InfoCard } from '@/components/Cards/InfoCard/InfoCard';
-import { DynamicIcon } from '@/components/DynamicIcon/DynamicIcon';
-import { FiltersSection } from '@/components/Filters/FiltersSection';
-import { NoResults } from '@/components/NoResults/NoResults';
-import { Pagination } from '@/components/Pagination/Pagination';
-import { Price } from '@/components/Price/Price';
-import { RichText } from '@/components/RichText/RichText';
-import { TooltipHover } from '@/components/TooltipHover/TooltipHover';
 
 import { OrderDetailsPureProps } from './OrderDetails.types';
 

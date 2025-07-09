@@ -1,6 +1,7 @@
 'use server';
 
 import { Modules } from '@o2s/api-harmonization';
+import { getLocale } from 'next-intl/server';
 import React from 'react';
 
 import { CMS } from '@o2s/framework/modules';
@@ -10,7 +11,6 @@ import * as Faq from '@o2s/blocks.faq/frontend';
 import { sdk } from '@/api/sdk';
 
 // BLOCK IMPORT
-
 import { Link } from '@/i18n';
 
 import { ArticleRenderer } from '@/blocks/Article/Article.renderer';
@@ -37,6 +37,8 @@ import { TicketRecentRenderer } from '@/blocks/TicketRecent/TicketRecent.rendere
 import { UserAccountRenderer } from '@/blocks/UserAccount/UserAccount.renderer';
 
 export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: string[], accessToken?: string) => {
+    const locale = await getLocale();
+
     return blocks.map((block) => {
         switch (block.__typename as Modules.Page.Model.Blocks) {
             case 'TicketListBlock':
@@ -53,9 +55,10 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: str
                 );
             case 'FaqBlock':
                 return (
-                    <Faq.Renderer.FaqRenderer
+                    <Faq.Renderer
                         key={block.id}
                         id={block.id}
+                        locale={locale}
                         accessToken={accessToken}
                         sdk={sdk}
                         LinkComponent={Link}

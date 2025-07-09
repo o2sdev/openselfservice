@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Articles, CMS } from '@o2s/configs.integrations';
 import { Observable, forkJoin, map } from 'rxjs';
 
@@ -20,7 +20,13 @@ export class ArticleService {
         const article = this.articlesService.getArticle({ slug: query.slug, locale: headers['x-locale'] });
 
         return forkJoin([cms, article]).pipe(
-            map(([cms, article]) => mapArticle(cms, article, headers['x-locale'], headers['x-client-timezone'] || '')),
+            map(([cms, article]) => {
+                if (!article) {
+                    throw new NotFoundException();
+                }
+
+                return mapArticle(cms, article, headers['x-locale'], headers['x-client-timezone'] || '');
+            }),
         );
     }
 }

@@ -4,6 +4,8 @@ import { headers } from 'next/headers';
 import { notFound } from 'next/navigation';
 import React from 'react';
 
+import { AppSpinner } from '@o2s/ui/components/AppSpinner';
+import { Breadcrumbs } from '@o2s/ui/components/Breadcrumbs';
 import { Separator } from '@o2s/ui/elements/separator';
 import { Toaster } from '@o2s/ui/elements/toaster';
 import { Typography } from '@o2s/ui/elements/typography';
@@ -15,15 +17,14 @@ import { generateSeo } from '@/utils/seo';
 
 import { auth, signIn } from '@/auth';
 
+import { Link } from '@/i18n';
+
 import { GlobalProvider } from '@/providers/GlobalProvider';
 
 import { PageTemplate } from '@/templates/PageTemplate/PageTemplate';
 
 import { Footer } from '@/containers/Footer/Footer';
 import { Header } from '@/containers/Header/Header';
-
-import { AppSpinner } from '@/components/AppSpinner/AppSpinner';
-import { Breadcrumbs } from '@/components/Breadcrumbs/Breadcrumbs';
 
 interface Props {
     params: Promise<{
@@ -113,6 +114,7 @@ export default async function Page({ params }: Props) {
                                         breadcrumbs={
                                             rootBreadcrumb ? [rootBreadcrumb, ...data.breadcrumbs] : data.breadcrumbs
                                         }
+                                        LinkComponent={Link}
                                     />
                                     {!data.hasOwnTitle && (
                                         <>
@@ -131,7 +133,8 @@ export default async function Page({ params }: Props) {
                     <Footer data={init.common.footer} />
 
                     <Toaster />
-                    <AppSpinner />
+                    {/*TODO: fix isVisible*/}
+                    <AppSpinner isVisible={false} />
                 </div>
             </GlobalProvider>
         );

@@ -113,7 +113,7 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
         TicketDetailsBlockModule.register(AppConfig),
         NotificationListBlockModule.register(AppConfig),
         NotificationDetailsBlockModule.register(AppConfig),
-        Faq.Module.FaqBlockModule.register(AppConfig),
+        Faq.Module.register(AppConfig),
         InvoiceListBlockModule.register(AppConfig),
         PaymentsSummaryBlockModule.register(AppConfig),
         PaymentsHistoryBlockModule.register(AppConfig),

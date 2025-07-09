@@ -4,6 +4,10 @@ import { Blocks } from '@o2s/api-harmonization';
 import { ArrowRight, IterationCw, MoreVertical } from 'lucide-react';
 import React, { useState, useTransition } from 'react';
 
+import { FiltersSection } from '@o2s/ui/components/Filters';
+import { NoResults } from '@o2s/ui/components/NoResults';
+import { Pagination } from '@o2s/ui/components/Pagination';
+import { Price } from '@o2s/ui/components/Price';
 import { Badge } from '@o2s/ui/elements/badge';
 import { Button } from '@o2s/ui/elements/button';
 import {
@@ -22,11 +26,6 @@ import { sdk } from '@/api/sdk';
 import { orderBadgeVariants } from '@/utils/mappings/order-badge';
 
 import { Link as NextLink } from '@/i18n';
-
-import { FiltersSection } from '@/components/Filters/FiltersSection';
-import { NoResults } from '@/components/NoResults/NoResults';
-import { Pagination } from '@/components/Pagination/Pagination';
-import { Price } from '@/components/Price/Price';
 
 import { OrderListPureProps } from './OrderList.types';
 

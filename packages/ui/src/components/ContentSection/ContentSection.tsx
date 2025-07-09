@@ -1,17 +1,18 @@
 import React from 'react';
-import { RichText } from 'src/elements/RichText/RichText';
 
 import { Button } from '@o2s/ui/elements/button';
 import { Typography } from '@o2s/ui/elements/typography';
 
+import { RichText } from '@o2s/ui/components/RichText';
+
 import { ContentSectionProps } from './ContentSection.types';
-import { Link as NextLink } from '@/i18n';
 
 export const ContentSection: React.FC<Readonly<ContentSectionProps>> = ({
     title,
     description,
     categoryLink,
     children,
+    LinkComponent,
 }) => {
     return (
         <div className="flex flex-col gap-6 w-full">
@@ -24,7 +25,7 @@ export const ContentSection: React.FC<Readonly<ContentSectionProps>> = ({
                 )}
                 {categoryLink && (
                     <Button asChild variant="secondary">
-                        <NextLink href={categoryLink.url}>{categoryLink.label}</NextLink>
+                        <LinkComponent href={categoryLink.url}>{categoryLink.label}</LinkComponent>
                     </Button>
                 )}
             </div>

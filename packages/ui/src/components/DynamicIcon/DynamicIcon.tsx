@@ -1,8 +1,9 @@
 import * as Icons from 'lucide-react';
+import React from 'react';
 
-import { IconProps } from './DynamicIcon.types';
+import { DynamicIconProps } from './DynamicIcon.types';
 
-export const DynamicIcon = ({ name, size = 24, color = 'currentColor', className }: Readonly<IconProps>) => {
+export const DynamicIcon: React.FC<DynamicIconProps> = ({ name, size = 24, color = 'currentColor', className }) => {
     const Icon = Icons[name as keyof typeof Icons] as React.ComponentType<{
         width?: number;
         height?: number;

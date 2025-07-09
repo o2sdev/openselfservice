@@ -4,7 +4,7 @@ import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipCont
 
 import { ChartConfig, ChartContainer, ChartTooltip } from '@o2s/ui/elements/chart';
 
-import { ChartTooltip as CustomTooltip } from '@o2s/ui/components/Chart/ChartTooltip/ChartTooltip';
+import { ChartTooltip as CustomTooltip } from '../ChartTooltip';
 
 import { DoubleLineChartProps } from './DoubleLineChart.types';
 

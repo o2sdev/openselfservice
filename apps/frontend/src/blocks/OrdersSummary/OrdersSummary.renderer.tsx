@@ -1,7 +1,7 @@
 import { useLocale } from 'next-intl';
 import React, { Suspense } from 'react';
 
-import { Loading } from '@/components/Loading/Loading';
+import { Loading } from '@o2s/ui/components/Loading';
 
 import { OrdersSummary } from './OrdersSummary.server';
 

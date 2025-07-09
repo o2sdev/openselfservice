@@ -1,16 +1,13 @@
-'use client';
-
 import React, { FC } from 'react';
 
 import { Link } from '@o2s/ui/elements/link';
 import { Typography } from '@o2s/ui/elements/typography';
 
-import { RichText } from '../RichText/RichText';
+import { RichText } from '@o2s/ui/components/RichText';
 
 import { ErrorPageProps } from './ErrorPage.types';
-import { Link as NextLink } from '@/i18n';
 
-export const ErrorPage: FC<ErrorPageProps> = ({ errorType, title, description, link }) => {
+export const ErrorPage: FC<ErrorPageProps> = ({ errorType, title, description, link, LinkComponent }) => {
     return (
         <div className="w-full h-full flex flex-col justify-center items-center gap-6 my-24">
             <Typography variant="subtitle">{errorType}</Typography>
@@ -23,7 +20,7 @@ export const ErrorPage: FC<ErrorPageProps> = ({ errorType, title, description, l
                     asChild
                     className="h-10 px-4 py-2 bg-primary text-primary-foreground hover:bg-primary/90 no-underline hover:no-underline"
                 >
-                    <NextLink href={link.url || '/'}>{link.label}</NextLink>
+                    <LinkComponent href={link.url || '/'}>{link.label}</LinkComponent>
                 </Link>
             </div>
         </div>

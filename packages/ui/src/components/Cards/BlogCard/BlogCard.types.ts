@@ -1,6 +1,8 @@
 import { Models } from '@o2s/framework/modules';
 
-import { AuthorProps } from '@o2s/ui/components/Author/Author.types';
+import { Models as FrontendModels } from '@o2s/utils.frontend';
+
+import { AuthorProps } from '@o2s/ui/components/Author';
 
 export interface BlogCardProps {
     title: string;
@@ -14,4 +16,5 @@ export interface BlogCardProps {
     date: string;
     author?: AuthorProps;
     categoryTitle?: string;
+    LinkComponent: FrontendModels.Link.LinkComponent;
 }

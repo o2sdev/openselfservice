@@ -12,9 +12,8 @@ import {
 import { Link } from '@o2s/ui/elements/link';
 
 import { BreadcrumbsProps } from './Breadcrumbs.types';
-import { Link as NextLink } from '@/i18n';
 
-export function Breadcrumbs({ breadcrumbs }: BreadcrumbsProps) {
+export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ breadcrumbs, LinkComponent }) => {
     if (!breadcrumbs?.length) return null;
 
     return (
@@ -27,12 +26,12 @@ export function Breadcrumbs({ breadcrumbs }: BreadcrumbsProps) {
                                 {item.slug ? (
                                     <BreadcrumbLink asChild>
                                         <Link asChild>
-                                            <NextLink
+                                            <LinkComponent
                                                 href={item.slug}
                                                 className="no-underline hover:no-underline !text-muted-foreground hover:!text-foreground"
                                             >
                                                 {item.label}
-                                            </NextLink>
+                                            </LinkComponent>
                                         </Link>
                                     </BreadcrumbLink>
                                 ) : (
@@ -52,4 +51,4 @@ export function Breadcrumbs({ breadcrumbs }: BreadcrumbsProps) {
             </BreadcrumbList>
         </Breadcrumb>
     );
-}
+};

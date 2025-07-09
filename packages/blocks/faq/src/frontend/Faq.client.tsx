@@ -14,7 +14,6 @@ export const FaqPure: React.FC<FaqPureProps> = ({ sdk, LinkComponent, ...compone
     return (
         <Container variant="narrow">
             <div className="w-full flex flex-col gap-6">
-                111222333444
                 {title && (
                     <div className="w-full flex flex-col gap-4">
                         <Typography variant="h2" asChild>

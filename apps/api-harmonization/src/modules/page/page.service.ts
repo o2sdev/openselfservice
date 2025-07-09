@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Articles, Auth, CMS } from '@o2s/configs.integrations';
 import { Observable, concatMap, forkJoin, map, of, switchMap } from 'rxjs';
@@ -78,9 +78,17 @@ export class PageService {
         return forkJoin([page]).pipe(
             concatMap(([page]) => {
                 if (!page) {
-                    return this.articlesService
-                        .getArticle({ slug: query.slug, locale: headers['x-locale'] })
-                        .pipe(concatMap((article) => this.processArticle(article, query, headers)));
+                    return this.articlesService.getArticle({ slug: query.slug, locale: headers['x-locale'] }).pipe(
+                        concatMap((article) => {
+                            if (!article) {
+                                throw new NotFoundException();
+                            }
+
+                            checkPermissions(article.permissions, userRoles);
+
+                            return this.processArticle(article, query, headers);
+                        }),
+                    );
                 }
 
                 checkPermissions(page.permissions, userRoles);
@@ -107,10 +115,6 @@ export class PageService {
         if (!article.category) {
             throw new NotFoundException();
         }
-
-        const userRoles = this.authService.extractUserRoles(headers['authorization']);
-
-        checkPermissions(article.permissions, userRoles);
 
         const category = this.articlesService.getCategory({ id: article.category.id, locale: headers['x-locale'] });
 

@@ -3,17 +3,18 @@
 import { Blocks } from '@o2s/api-harmonization';
 import React, { useState, useTransition } from 'react';
 
+import { BlogCard } from '@o2s/ui/components/Cards/BlogCard';
+import { Container } from '@o2s/ui/components/Container';
+import { ContentSection } from '@o2s/ui/components/ContentSection';
+import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
+import { Pagination } from '@o2s/ui/components/Pagination';
 import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
 import { Separator } from '@o2s/ui/elements/separator';
 import { Typography } from '@o2s/ui/elements/typography';
 
 import { sdk } from '@/api/sdk';
 
-import { BlogCard } from '@/components/Cards/BlogCard/BlogCard';
-import { Container } from '@/components/Container/Container';
-import { ContentSection } from '@/components/ContentSection/ContentSection';
-import { DynamicIcon } from '@/components/DynamicIcon/DynamicIcon';
-import { Pagination } from '@/components/Pagination/Pagination';
+import { Link } from '@/i18n';
 
 import { CategoryPureProps } from './Category.types';
 
@@ -62,6 +63,7 @@ export const CategoryPure: React.FC<CategoryPureProps> = ({ slug, locale, access
                                 <ContentSection
                                     title={component.articles.title}
                                     description={component.articles.description}
+                                    LinkComponent={Link}
                                 >
                                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
                                         {data.items.data.map((item) => (
@@ -82,6 +84,7 @@ export const CategoryPure: React.FC<CategoryPureProps> = ({ slug, locale, access
                                                             : undefined
                                                     }
                                                     categoryTitle={item.category?.title}
+                                                    LinkComponent={Link}
                                                 />
                                             </li>
                                         ))}

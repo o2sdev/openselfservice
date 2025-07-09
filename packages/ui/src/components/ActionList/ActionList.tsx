@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { cn } from '@o2s/ui/lib/utils';
 
 import { Button } from '@o2s/ui/elements/button';
@@ -8,7 +10,7 @@ import {
     DropdownMenuTrigger,
 } from '@o2s/ui/elements/dropdown-menu';
 
-import { DynamicIcon } from '../DynamicIcon/DynamicIcon';
+import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
 
 import { ActionListProps } from './ActionList.types';
 

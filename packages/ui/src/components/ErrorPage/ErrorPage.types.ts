@@ -1,3 +1,5 @@
+import { Models } from '@o2s/utils.frontend';
+
 export type ErrorPageProps = {
     errorType: string;
     title: string;
@@ -6,4 +8,5 @@ export type ErrorPageProps = {
         url: string;
         label: string;
     };
+    LinkComponent: Models.Link.LinkComponent;
 };

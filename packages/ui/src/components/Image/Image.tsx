@@ -16,6 +16,5 @@ export const Image: React.FC<ImageProps> = ({ src, alt, width, height, fill, ...
         );
     }
 
-    // eslint-disable-next-line @next/next/no-img-element
     return <img src={src as string} alt={alt} />;
 };

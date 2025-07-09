@@ -4,6 +4,11 @@ import { Blocks } from '@o2s/api-harmonization';
 import { ArrowRight } from 'lucide-react';
 import React, { useState, useTransition } from 'react';
 
+import { ActionList } from '@o2s/ui/components/ActionList';
+import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
+import { FiltersSection } from '@o2s/ui/components/Filters';
+import { NoResults } from '@o2s/ui/components/NoResults';
+import { Pagination } from '@o2s/ui/components/Pagination';
 import { Badge } from '@o2s/ui/elements/badge';
 import { Button } from '@o2s/ui/elements/button';
 import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
@@ -16,12 +21,6 @@ import { sdk } from '@/api/sdk';
 import { ticketBadgeVariants } from '@/utils/mappings/ticket-badge';
 
 import { Link as NextLink } from '@/i18n';
-
-import { ActionList } from '@/components/ActionList/ActionList';
-import { DynamicIcon } from '@/components/DynamicIcon/DynamicIcon';
-import { FiltersSection } from '@/components/Filters/FiltersSection';
-import { NoResults } from '@/components/NoResults/NoResults';
-import { Pagination } from '@/components/Pagination/Pagination';
 
 import { TicketListPureProps } from './TicketList.types';
 

@@ -7,10 +7,9 @@ import { cn } from '@o2s/ui/lib/utils';
 
 import { Typography } from '@o2s/ui/elements/typography';
 
-import { Filters } from '@o2s/ui/components/Filters/Filters';
-import FiltersContextProvider from '@o2s/ui/components/Filters/FiltersContext';
-
+import { Filters } from './Filters';
 import { FiltersSectionProps } from './Filters.types';
+import FiltersContextProvider from './FiltersContext';
 
 export const FiltersSection = <T, S extends FormikValues>({
     title,

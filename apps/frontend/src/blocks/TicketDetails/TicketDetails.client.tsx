@@ -3,6 +3,9 @@
 import { Download, Link as LinkIcon } from 'lucide-react';
 import React from 'react';
 
+import { Author } from '@o2s/ui/components/Author';
+import { Container } from '@o2s/ui/components/Container';
+import { RichText } from '@o2s/ui/components/RichText';
 import { Badge } from '@o2s/ui/elements/badge';
 import { Button } from '@o2s/ui/elements/button';
 import { Separator } from '@o2s/ui/elements/separator';
@@ -10,10 +13,6 @@ import { TextItem } from '@o2s/ui/elements/text-item';
 import { Typography } from '@o2s/ui/elements/typography';
 
 import { ticketBadgeVariants } from '@/utils/mappings/ticket-badge';
-
-import { Author } from '@/components/Author/Author';
-import { Container } from '@/components/Container/Container';
-import { RichText } from '@/components/RichText/RichText';
 
 import { TicketDetailsPureProps } from './TicketDetails.types';
 

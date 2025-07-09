@@ -1,4 +1,4 @@
-import { ChartTooltipProps } from '@o2s/ui/components/Chart/ChartTooltip/ChartTooltip.types';
+import { ChartTooltipProps } from '../ChartTooltip';
 
 export interface LineChartData {
     label: string;

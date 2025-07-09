@@ -6,10 +6,9 @@ import { cn } from '@o2s/ui/lib/utils';
 import { Link } from '@o2s/ui/elements/link';
 import { Typography } from '@o2s/ui/elements/typography';
 
-import { DynamicIcon } from '../../DynamicIcon/DynamicIcon';
+import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
 
 import { InformativeCardProps } from './InformativeCard.types';
-import { Link as NextLink } from '@/i18n';
 
 const InformativeCardContent: React.FC<Readonly<InformativeCardProps>> = ({
     icon,
@@ -51,15 +50,17 @@ const InformativeCardContent: React.FC<Readonly<InformativeCardProps>> = ({
 };
 
 export const InformativeCard: React.FC<Readonly<InformativeCardProps>> = (props) => {
+    const LinkComponent = props.LinkComponent;
+
     if (props.href) {
         return (
             <Link
                 asChild
                 className="flex flex-grow whitespace-normal text-foreground hover:no-underline hover:border-primary hover:[&_svg]:text-primary rounded-lg bg-card border border-border w-full h-full items-start"
             >
-                <NextLink href={props.href} aria-label={props.title}>
+                <LinkComponent href={props.href} aria-label={props.title}>
                     <InformativeCardContent {...props} />
-                </NextLink>
+                </LinkComponent>
             </Link>
         );
     }

@@ -4,6 +4,10 @@ import { Blocks } from '@o2s/api-harmonization';
 import { Download } from 'lucide-react';
 import React, { useState, useTransition } from 'react';
 
+import { FiltersSection } from '@o2s/ui/components/Filters';
+import { NoResults } from '@o2s/ui/components/NoResults';
+import { Pagination } from '@o2s/ui/components/Pagination';
+import { Price } from '@o2s/ui/components/Price';
 import { Badge } from '@o2s/ui/elements/badge';
 import { Button } from '@o2s/ui/elements/button';
 import { Link } from '@o2s/ui/elements/link';
@@ -19,11 +23,6 @@ import { downloadFile } from '@/utils/downloadFile';
 import { invoiceBadgePaymentStatusVariants } from '@/utils/mappings/invoice-badge';
 
 import { useGlobalContext } from '@/providers/GlobalProvider';
-
-import { FiltersSection } from '@/components/Filters/FiltersSection';
-import { NoResults } from '@/components/NoResults/NoResults';
-import { Pagination } from '@/components/Pagination/Pagination';
-import { Price } from '@/components/Price/Price';
 
 import { InvoiceListPureProps } from './InvoiceList.types';
 

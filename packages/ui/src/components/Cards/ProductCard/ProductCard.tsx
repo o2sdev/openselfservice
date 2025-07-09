@@ -1,5 +1,4 @@
 import React from 'react';
-import { Image } from 'src/elements/Image/Image';
 
 import { cn } from '@o2s/ui/lib/utils';
 
@@ -8,11 +7,11 @@ import { Link } from '@o2s/ui/elements/link';
 import { Separator } from '@o2s/ui/elements/separator';
 import { Typography } from '@o2s/ui/elements/typography';
 
-import { Price } from '../../Price/Price';
-import { RichText } from '../../RichText/RichText';
+import { Image } from '@o2s/ui/components/Image';
+import { Price } from '@o2s/ui/components/Price';
+import { RichText } from '@o2s/ui/components/RichText';
 
 import { ProductCardProps } from './ProductCard.types';
-import { Link as NextLink } from '@/i18n';
 
 export const ProductCard: React.FC<ProductCardProps> = ({
     title,
@@ -23,6 +22,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     status,
     link,
     action,
+    LinkComponent,
 }) => {
     return (
         <div className={cn('flex flex-col bg-card rounded-lg border border-border shadow-sm relative w-full h-full')}>
@@ -80,7 +80,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
                         {link && (
                             <Link asChild variant="primaryButton">
-                                <NextLink href={link.url}>{link.label}</NextLink>
+                                <LinkComponent href={link.url}>{link.label}</LinkComponent>
                             </Link>
                         )}
                     </div>

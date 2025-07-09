@@ -3,7 +3,7 @@
 import { Modules } from '@o2s/api-harmonization';
 import React, { ReactNode, createContext, useContext, useState } from 'react';
 
-import { PriceService, usePriceService } from '@/hooks/usePriceService';
+import { PriceService, usePriceService } from '@o2s/ui/components/Price';
 
 interface GlobalProviderProps {
     config: Omit<Modules.Page.Model.Init, 'labels'>;

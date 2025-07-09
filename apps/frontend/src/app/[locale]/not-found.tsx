@@ -3,6 +3,8 @@ import { getLocale } from 'next-intl/server';
 import { headers } from 'next/headers';
 import React from 'react';
 
+import { AppSpinner } from '@o2s/ui/components/AppSpinner';
+import { ErrorPage } from '@o2s/ui/components/ErrorPage';
 import { Toaster } from '@o2s/ui/elements/toaster';
 
 import { sdk } from '@/api/sdk';
@@ -11,13 +13,12 @@ import { generateSeo } from '@/utils/seo';
 
 import { auth } from '@/auth';
 
+import { Link } from '@/i18n';
+
 import { GlobalProvider } from '@/providers/GlobalProvider';
 
 import { Footer } from '@/containers/Footer/Footer';
 import { Header } from '@/containers/Header/Header';
-
-import { AppSpinner } from '@/components/AppSpinner/AppSpinner';
-import { ErrorPage } from '@/components/ErrorPage/ErrorPage';
 
 interface Props {
     params: Promise<{
@@ -76,6 +77,7 @@ export default async function NotFound() {
                                     url: data.url || '/',
                                     label: data.urlLabel,
                                 }}
+                                LinkComponent={Link}
                             />
                         </main>
                     </div>
@@ -83,7 +85,8 @@ export default async function NotFound() {
                 <Footer data={init.common.footer} />
 
                 <Toaster />
-                <AppSpinner />
+                {/*TODO: fix isVisible*/}
+                <AppSpinner isVisible={false} />
             </div>
         </GlobalProvider>
     );

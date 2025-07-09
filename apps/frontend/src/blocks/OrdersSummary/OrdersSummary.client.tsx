@@ -5,6 +5,9 @@ import dayjs from 'dayjs';
 import { useLocale } from 'next-intl';
 import React, { useState, useTransition } from 'react';
 
+import { InfoCard } from '@o2s/ui/components/Cards/InfoCard';
+import { DoubleLineChart } from '@o2s/ui/components/Chart/DoubleLineChart';
+import { Price } from '@o2s/ui/components/Price';
 import { Card } from '@o2s/ui/elements/card';
 import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
 import { ToggleGroup, ToggleGroupItem } from '@o2s/ui/elements/toggle-group';
@@ -12,10 +15,6 @@ import { Typography } from '@o2s/ui/elements/typography';
 import { cn } from '@o2s/ui/lib/utils';
 
 import { sdk } from '@/api/sdk';
-
-import { InfoCard } from '@/components/Cards/InfoCard/InfoCard';
-import { DoubleLineChart } from '@/components/Chart/DoubleLineChart/DoubleLineChart';
-import { Price } from '@/components/Price/Price';
 
 import { OrdersSummaryPureProps } from './OrdersSummary.types';
 

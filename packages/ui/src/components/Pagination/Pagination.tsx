@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Utils } from '@o2s/utils.frontend';
+
 import {
     PaginationContent,
     PaginationItem,
@@ -11,7 +13,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Typography } from '@o2s/ui/elements/typography';
 
 import { PaginationProps } from './Pagination.types';
-import { reactStringReplace } from '@/utils/string-replace';
 
 export const Pagination: React.FC<PaginationProps> = ({
     disabled,
@@ -63,7 +64,7 @@ export const Pagination: React.FC<PaginationProps> = ({
                             </Select>
 
                             <Typography variant="small" className="text-muted-foreground">
-                                {reactStringReplace(legend, {
+                                {Utils.StringReplace.reactStringReplace(legend, {
                                     total: <span>{total}</span>,
                                     totalPages: <span>{totalPages}</span>,
                                 })}
