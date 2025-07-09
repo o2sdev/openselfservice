@@ -13,7 +13,7 @@ export abstract class UserService {
         options: Users.Request.GetUserParams,
         authorization?: string,
     ): Observable<Users.Model.User | undefined>;
-    abstract getUsers(options: Users.Request.GetUsersQuery): Observable<Users.Model.Users>;
+    abstract getUsers(options: Users.Request.GetUsersQuery, authorization?: string): Observable<Users.Model.Users>;
     abstract updateCurrentUser(
         body: Users.Request.PostUserBody,
         authorization?: string,
