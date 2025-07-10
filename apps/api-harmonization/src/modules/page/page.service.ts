@@ -1,11 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Observable, concatMap, forkJoin, map, of, switchMap } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 
 import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
+import { checkPermissions } from '@o2s/api-harmonization/utils/permissions';
 
-import { Articles, CMS } from '../../models';
+import { Articles, Auth, CMS } from '../../models';
 
 import { mapArticle, mapInit, mapPage } from './page.mapper';
 import { Init, NotFound, Page } from './page.model';
@@ -19,6 +19,7 @@ export class PageService {
         private readonly config: ConfigService,
         private readonly cmsService: CMS.Service,
         private readonly articlesService: Articles.Service,
+        private readonly authService: Auth.Service,
     ) {
         this.SUPPORTED_LOCALES = this.config.get('SUPPORTED_LOCALES').split(',') as string[];
     }
@@ -46,6 +47,8 @@ export class PageService {
     }
 
     getInit(query: GetInitQuery, headers: AppHeaders): Observable<Init> {
+        const userRoles = this.authService.extractUserRoles(headers['authorization']);
+
         return this.cmsService.getAppConfig({ referrer: query.referrer, locale: headers['x-locale'] }).pipe(
             switchMap((appConfig) => {
                 const header = this.cmsService.getHeader({
@@ -60,7 +63,7 @@ export class PageService {
 
                 return forkJoin([header, footer]).pipe(
                     map(([header, footer]) => {
-                        return mapInit(appConfig.locales, header, footer, appConfig.labels);
+                        return mapInit(appConfig.locales, header, footer, appConfig.labels, userRoles);
                     }),
                 );
             }),
@@ -70,6 +73,8 @@ export class PageService {
     getPage(query: GetPageQuery, headers: AppHeaders): Observable<Page | NotFound> {
         const page = this.cmsService.getPage({ slug: query.slug, locale: headers['x-locale'] });
 
+        const userRoles = this.authService.extractUserRoles(headers['authorization']);
+
         return forkJoin([page]).pipe(
             concatMap(([page]) => {
                 if (!page) {
@@ -77,15 +82,10 @@ export class PageService {
                         .getArticle({ slug: query.slug, locale: headers['x-locale'] })
                         .pipe(concatMap((article) => this.processArticle(article, query, headers)));
                 }
+
+                checkPermissions(page.permissions, userRoles);
+
                 return this.processPage(page, query, headers);
-            }),
-            catchError(() => {
-                return this.articlesService
-                    .getArticle({ slug: query.slug, locale: headers['x-locale'] })
-                    .pipe(concatMap((article) => this.processArticle(article, query, headers)));
-            }),
-            catchError(() => {
-                throw new NotFoundException();
             }),
         );
     }
@@ -107,6 +107,10 @@ export class PageService {
         if (!article.category) {
             throw new NotFoundException();
         }
+
+        const userRoles = this.authService.extractUserRoles(headers['authorization']);
+
+        checkPermissions(article.permissions, userRoles);
 
         const category = this.articlesService.getCategory({ id: article.category.id, locale: headers['x-locale'] });
 

@@ -1,4 +1,4 @@
-import { CMS } from '@o2s/framework/modules';
+import { Auth, CMS } from '@o2s/framework/modules';
 
 export const PAGE_ORDER_DETAILS_EN: CMS.Model.Page.Page = {
     id: '14',
@@ -17,7 +17,7 @@ export const PAGE_ORDER_DETAILS_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    isProtected: true,
+    permissions: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
     hasOwnTitle: true,
     parent: {
         slug: '/orders',
@@ -57,7 +57,7 @@ export const PAGE_ORDER_DETAILS_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    isProtected: true,
+    permissions: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
     hasOwnTitle: true,
     parent: {
         slug: '/bestellungen',
@@ -97,7 +97,7 @@ export const PAGE_ORDER_DETAILS_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    isProtected: true,
+    permissions: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
     hasOwnTitle: true,
     parent: {
         slug: '/zamowienia',

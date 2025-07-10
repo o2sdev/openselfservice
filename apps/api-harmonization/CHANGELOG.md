@@ -1,5 +1,37 @@
 # @o2s/api-harmonization
 
+## 1.7.0
+
+### Minor Changes
+
+- fb09383: Removing unused import
+
+### Patch Changes
+
+- Updated dependencies [fb09383]
+- Updated dependencies [fb09383]
+    - @o2s/integrations.mocked@1.8.0
+    - @o2s/framework@1.8.0
+
+## 1.6.1
+
+### Patch Changes
+
+- ca33e9a: fix: fixed api-harmonization generator
+
+## 1.6.0
+
+### Minor Changes
+
+- c13192c: implemented user role-based access to pages and articles
+
+### Patch Changes
+
+- Updated dependencies [c13192c]
+- Updated dependencies [c13192c]
+    - @o2s/framework@1.7.0
+    - @o2s/integrations.mocked@1.7.0
+
 ## 1.5.6
 
 ### Patch Changes

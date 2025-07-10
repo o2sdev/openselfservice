@@ -1,12 +1,8 @@
-import { Users } from '@o2s/framework/modules';
-
-const dateToday = new Date();
-dateToday.setHours(dateToday.getHours() - 1);
-const dateYesterday = new Date();
-dateYesterday.setDate(dateYesterday.getDate() - 1);
+import { Auth, Users } from '@o2s/framework/modules';
 
 const MOCK_USER_1: Users.Model.User = {
     id: 'user-100',
+    username: 'john@example.com',
     email: 'john@example.com',
     firstName: 'John',
     lastName: 'Adams',
@@ -17,7 +13,7 @@ const MOCK_USER_1: Users.Model.User = {
                 name: 'Acme Corporation',
                 clientType: 'B2B',
             },
-            role: 'selfservice_admin',
+            roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
         },
         {
             customer: {
@@ -25,7 +21,7 @@ const MOCK_USER_1: Users.Model.User = {
                 name: 'Retail Customer Ltd',
                 clientType: 'B2C',
             },
-            role: 'selfservice_user',
+            roles: [Auth.Constants.Roles.USER],
         },
     ],
     customers: [],
@@ -33,6 +29,7 @@ const MOCK_USER_1: Users.Model.User = {
 
 const MOCK_USER_2: Users.Model.User = {
     id: 'admin-1',
+    username: 'jane@example.com',
     email: 'jane@example.com',
     firstName: 'Jane',
     lastName: 'Doe',
@@ -43,7 +40,7 @@ const MOCK_USER_2: Users.Model.User = {
                 name: 'Tech Solutions Inc',
                 clientType: 'B2B',
             },
-            role: 'selfservice_manager',
+            roles: [Auth.Constants.Roles.USER],
         },
         {
             customer: {
@@ -51,7 +48,7 @@ const MOCK_USER_2: Users.Model.User = {
                 name: 'Digital Services GmbH',
                 clientType: 'B2B',
             },
-            role: 'selfservice_admin',
+            roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
         },
     ],
     customers: [],
@@ -59,6 +56,7 @@ const MOCK_USER_2: Users.Model.User = {
 
 const MOCK_USER_3: Users.Model.User = {
     id: 'user-102',
+    username: 'bob.wilson@example.com',
     email: 'bob.wilson@example.com',
     firstName: 'Bob',
     lastName: 'Wilson',
@@ -68,12 +66,15 @@ const MOCK_USER_3: Users.Model.User = {
 
 const MOCK_USER_4: Users.Model.User = {
     id: 'user-101',
+    username: 'lyon@example.com',
     email: 'lyon@example.com',
     firstName: 'Lyon',
     lastName: 'Gaultier',
     roles: [],
     customers: [],
 };
+
+export const MOCK_USERS = [MOCK_USER_1, MOCK_USER_2, MOCK_USER_3, MOCK_USER_4];
 
 export const mapUser = (id?: string): Users.Model.User | undefined => {
     const users = [MOCK_USER_1, MOCK_USER_2, MOCK_USER_3, MOCK_USER_4];
@@ -82,4 +83,20 @@ export const mapUser = (id?: string): Users.Model.User | undefined => {
     }
     const randomIndex = Math.floor(Math.random() * users.length);
     return users[randomIndex];
+};
+
+export const mapUsers = (options: Users.Request.GetUsersQuery): Users.Model.Users => {
+    if (options.username) {
+        const users = MOCK_USERS.filter((user) => user.username === options.username);
+
+        return {
+            data: users,
+            total: users.length,
+        };
+    }
+
+    return {
+        data: MOCK_USERS,
+        total: MOCK_USERS.length,
+    };
 };

@@ -4,6 +4,8 @@ import { CMS, Models } from '@o2s/framework/modules';
 
 import { GetHeaderQuery, NavigationGroupFragment, NavigationItemFragment } from '@/generated/strapi';
 
+import { mapRoles } from '@/modules/cms/mappers/cms.roles.mapper';
+
 export const mapHeader = (data: GetHeaderQuery, baseURL?: string): CMS.Model.Header.Header => {
     const component = data.header!;
     const configurableTexts = data.configurableTexts!;
@@ -73,5 +75,6 @@ const mapHeaderItem = (item: NavigationItemFragment): Models.Navigation.Navigati
         label: item.label,
         url: item.url || item.page?.slug || '/',
         description: item.description,
+        permissions: mapRoles(item.page?.permissions),
     };
 };

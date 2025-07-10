@@ -6,7 +6,9 @@ import { parse, stringify } from 'flatted';
 import { Observable, concatMap, forkJoin, from, map, mergeMap, of } from 'rxjs';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { CMS, Cache, Models } from '@o2s/framework/modules';
+import { Auth, CMS, Cache, Models } from '@o2s/framework/modules';
+
+import { PageFragment } from '@/generated/strapi';
 
 import { Service as GraphqlService } from '@/modules/graphql';
 
@@ -43,7 +45,6 @@ import { mapNotFoundPage } from './mappers/cms.not-found-page.mapper';
 import { mapOrganizationList } from './mappers/cms.organization-list.mapper';
 import { mapPage } from './mappers/cms.page.mapper';
 import { mapSurvey } from './mappers/cms.survey.mapper';
-import { PageFragment } from '@/generated/strapi';
 
 @Injectable()
 export class CmsService implements CMS.Service {

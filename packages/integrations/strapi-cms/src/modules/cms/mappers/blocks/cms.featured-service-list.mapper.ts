@@ -2,9 +2,9 @@ import { NotFoundException } from '@nestjs/common';
 
 import { CMS } from '@o2s/framework/modules';
 
-import { mapPagination } from '../cms.pagination.mapper';
-
 import { GetComponentQuery } from '@/generated/strapi';
+
+import { mapPagination } from '../cms.pagination.mapper';
 
 export const mapFeaturedServiceListBlock = (
     data: GetComponentQuery,

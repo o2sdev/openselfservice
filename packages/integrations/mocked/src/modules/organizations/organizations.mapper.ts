@@ -1,5 +1,7 @@
 import { Models, Organizations } from '@o2s/framework/modules';
 
+import { MOCK_USERS } from '@/modules/users/users.mapper';
+
 const MOCK_CUSTOMERS: Models.Customer.Customer[] = [
     {
         id: 'cust-001',
@@ -51,6 +53,7 @@ const MOCK_CUSTOMERS: Models.Customer.Customer[] = [
 const MOCK_ORGANIZATION_2: Organizations.Model.Organization = {
     id: 'org-002',
     name: 'Acme East Coast Division',
+    taxId: '12-3456789',
     address: {
         country: 'US',
         district: 'Brooklyn',
@@ -71,6 +74,7 @@ const MOCK_ORGANIZATION_2: Organizations.Model.Organization = {
 const MOCK_ORGANIZATION_3: Organizations.Model.Organization = {
     id: 'org-003',
     name: 'Acme West Coast Division',
+    taxId: '98-7654321',
     address: {
         country: 'US',
         district: 'Silicon Valley',
@@ -91,6 +95,7 @@ const MOCK_ORGANIZATION_3: Organizations.Model.Organization = {
 const MOCK_ORGANIZATION_1: Organizations.Model.Organization = {
     id: 'org-001',
     name: 'Acme Global Solutions',
+    taxId: '56-4738291',
     address: {
         country: 'US',
         district: 'Manhattan',
@@ -108,12 +113,22 @@ const MOCK_ORGANIZATION_1: Organizations.Model.Organization = {
     customers: [MOCK_CUSTOMERS[0]!],
 };
 
-const MOCK_ORGANIZATIONS = [MOCK_ORGANIZATION_1];
+const MOCK_ORGANIZATIONS = [MOCK_ORGANIZATION_1, MOCK_ORGANIZATION_2, MOCK_ORGANIZATION_3];
 
 export const mapOrganizations = (
     options: Organizations.Request.OrganizationsListQuery,
 ): Organizations.Model.Organizations => {
     const { offset = 0, limit = 10 } = options;
+
+    if (options.taxId) {
+        const organizations = MOCK_ORGANIZATIONS.filter((org) => org.taxId === options.taxId);
+
+        return {
+            data: organizations.slice(offset, offset + limit),
+            total: organizations.length,
+        };
+    }
+
     return {
         data: MOCK_ORGANIZATIONS.slice(offset, offset + limit),
         total: MOCK_ORGANIZATIONS.length,
@@ -122,4 +137,11 @@ export const mapOrganizations = (
 
 export const mapOrganization = (id: string): Organizations.Model.Organization | undefined => {
     return MOCK_ORGANIZATIONS.find((organization) => organization.id === id);
+};
+
+export const checkMembership = (orgId: string, userId: string): boolean => {
+    const org = MOCK_ORGANIZATIONS.find((organization) => organization.id === orgId);
+    const user = MOCK_USERS.find((user) => user.id === userId);
+
+    return !!org && !!user;
 };

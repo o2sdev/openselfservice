@@ -1,5 +1,28 @@
 # @o2s/framework
 
+## 1.8.0
+
+### Minor Changes
+
+- fb09383: Organizations module:
+
+    - Extending the Organization model with taxId
+    - Adding taxId to OrganizationsListQuery and adding CheckMembershipParams class for membership validation
+    - Adding GET /membership/:orgId/:userId endpoint to check user membership and implementing checkMembership method in OrganizationController
+    - Adding abstract checkMembership method to OrganizationService to support membership verification operations with boolean return type.
+
+    Users module:
+
+    - Extending the User model with username and adding an export of User type
+    - Adding GetUsersQuery class to support optional username filtering
+    - Adding getUsers method to UserService
+
+## 1.7.0
+
+### Minor Changes
+
+- c13192c: refactored user roles to allow more than one role on organization level and added permission fields on `Page` and `Article` models to allow displaying them based on user roles
+
 ## 1.6.2
 
 ### Patch Changes

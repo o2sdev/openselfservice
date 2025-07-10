@@ -2,9 +2,9 @@ import { NotFoundException } from '@nestjs/common';
 
 import { CMS } from '@o2s/framework/modules';
 
-import { mapSlot } from '../cms.page.mapper';
-
 import { GetComponentQuery } from '@/generated/strapi';
+
+import { mapSlot } from '../cms.page.mapper';
 
 export const mapCategoryBlock = (data: GetComponentQuery, _baseUrl: string): CMS.Model.CategoryBlock.CategoryBlock => {
     const component = data.component!.content[0];

@@ -4,7 +4,9 @@ query getSurvey($code: String) {
         surveyId
         postId
         surveyType
-        requiredRoles
+        requiredRoles {
+            ...Roles
+        }
         submitDestination
     }
 }

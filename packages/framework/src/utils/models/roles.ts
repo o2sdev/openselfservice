@@ -1,6 +1,8 @@
+import { Auth } from '@o2s/framework/modules';
+
 import { Customer } from '@/utils/models/customer';
 
 export class UserCustomerRole {
-    role!: string;
+    roles!: Auth.Constants.Roles[];
     customer?: Customer;
 }

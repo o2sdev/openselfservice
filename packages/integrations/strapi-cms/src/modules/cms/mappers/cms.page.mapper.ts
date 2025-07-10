@@ -4,6 +4,8 @@ import { CMS } from '@o2s/framework/modules';
 
 import { ComponentFragment, PageFragment, TemplateFragment } from '@/generated/strapi';
 
+import { mapRoles } from '@/modules/cms/mappers/cms.roles.mapper';
+
 export const mapPage = (data: PageFragment): CMS.Model.Page.Page => {
     const template = mapTemplate(data.template[0]);
 
@@ -12,7 +14,7 @@ export const mapPage = (data: PageFragment): CMS.Model.Page.Page => {
     return {
         id: data.documentId,
         slug: data.slug,
-        isProtected: !!data.protected,
+        permissions: mapRoles(data.permissions),
         locale: data.locale!,
         template: template,
         updatedAt: data.updatedAt,
@@ -60,7 +62,7 @@ export const mapAlternativePages = (data: PageFragment): CMS.Model.Page.Page => 
     return {
         id: data.documentId,
         slug: data.slug,
-        isProtected: !!data.protected,
+        permissions: mapRoles(data.permissions),
         locale: data.locale!,
         template: template,
         updatedAt: data.updatedAt,

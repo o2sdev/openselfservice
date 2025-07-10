@@ -1,4 +1,4 @@
-import { Models } from '@o2s/framework/modules';
+import { Auth, Models } from '@o2s/framework/modules';
 
 export class Page {
     id!: string;
@@ -21,7 +21,7 @@ export class Page {
             };
         };
     };
-    isProtected!: boolean;
+    permissions?: Auth.Constants.Roles[];
 }
 
 export abstract class Template {

@@ -1,7 +1,9 @@
 fragment ArticleSimple on Article {
     documentId
     slug
-    protected
+    permissions {
+        ...Roles
+    }
     locale
     createdAt
     updatedAt

@@ -17,7 +17,7 @@ export const PAGE_HELP_AND_SUPPORT_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    isProtected: false,
+    permissions: [],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',
@@ -67,7 +67,7 @@ export const PAGE_HELP_AND_SUPPORT_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    isProtected: false,
+    permissions: [],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',
@@ -117,7 +117,7 @@ export const PAGE_HELP_AND_SUPPORT_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    isProtected: false,
+    permissions: [],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',

@@ -1,0 +1,4 @@
+fragment Roles on ComponentSeoUserRoles {
+    __typename
+    roles
+}

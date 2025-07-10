@@ -13,7 +13,7 @@ hide_table_of_contents: false
 We’re building a frontend-first framework for composable customer portals – Open Self Service.
 To support dynamic content, reusable UI blocks, and flexible layouts, we needed a CMS that gives developers control over structure while staying accessible to business users.
 
-That’s where Strapi comes in. In O2S, we use it not just for managing page content, but also for defining layout templates, page structures, and component configurations. This approach helps us find the right balance between flexibility for editors and consistency in the frontend.
+That’s where **[Strapi](https://strapi.io/)** comes in. In O2S, we use it not just for managing page content, but also for defining layout templates, page structures, and component configurations. This approach helps us find the right balance between flexibility for editors and consistency in the frontend.
 <!--truncate-->
 
 In this article, we’ll show how Strapi powers the content architecture behind our composable frontend, and how it integrates with Next.js to deliver dynamic pages, structured layouts, and scalable UI patterns.

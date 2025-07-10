@@ -2,9 +2,9 @@ import { NotFoundException } from '@nestjs/common';
 
 import { CMS } from '@o2s/framework/modules';
 
-import { mapFields } from '../cms.fieldMapping.mapper';
-
 import { GetComponentQuery } from '@/generated/strapi';
+
+import { mapFields } from '../cms.fieldMapping.mapper';
 
 export const mapTicketDetailsBlock = (data: GetComponentQuery): CMS.Model.TicketDetailsBlock.TicketDetailsBlock => {
     const component = data.component!.content[0];

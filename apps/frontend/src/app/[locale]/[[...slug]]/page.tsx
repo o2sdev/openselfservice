@@ -47,14 +47,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             session?.accessToken,
         );
 
-        if (meta.isProtected && (!session?.user || session?.error === 'RefreshTokenError')) {
-            return signIn();
-        }
-
-        if (!data || !meta) {
-            notFound();
-        }
-
         setRequestLocale(locale);
 
         return generateSeo({
@@ -102,7 +94,7 @@ export default async function Page({ params }: Props) {
             session?.accessToken,
         );
 
-        if (meta.isProtected && (!session?.user || session?.error === 'RefreshTokenError')) {
+        if (session?.user && session?.error === 'RefreshTokenError') {
             return await signIn();
         }
 
@@ -151,6 +143,19 @@ export default async function Page({ params }: Props) {
             (error && 'response' in error && 'status' in error.response && error.response.status === 404)
         ) {
             notFound();
+        }
+
+        if (
+            // @ts-expect-error TODO add proper error type detection
+            (error && 'status' in error && error.status === 401) ||
+            // @ts-expect-error TODO add proper error type detection
+            (error && 'response' in error && 'status' in error.response && error.response.status === 401)
+        ) {
+            if (!session?.user) {
+                return await signIn();
+            } else {
+                notFound();
+            }
         }
 
         throw error;

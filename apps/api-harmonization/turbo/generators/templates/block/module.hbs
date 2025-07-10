@@ -1,6 +1,6 @@
 import { DynamicModule, Module } from '@nestjs/common';
 
-import { ApiConfig } from '@o2s/framework/modules';
+import * as Framework from '@o2s/framework/modules';
 
 import { CMS } from '../../models';
 
@@ -9,15 +9,19 @@ import { {{ pascalCase name }}Service } from './{{ kebabCase name }}.service';
 
 @Module({})
 export class {{ pascalCase name }}BlockModule {
-    static register(_config: ApiConfig): DynamicModule {
+    static register(_config: Framework.ApiConfig): DynamicModule {
         return {
             module: {{ pascalCase name }}BlockModule,
             providers: [
                 {{ pascalCase name }}Service,
-                CMS.Service,
+                {
+                    provide: CMS.Service,
+                    useExisting: Framework.CMS.Service,
+                },
             ],
             controllers: [{{ pascalCase name }}Controller],
             exports: [{{ pascalCase name }}Service],
         };
     }
 }
+

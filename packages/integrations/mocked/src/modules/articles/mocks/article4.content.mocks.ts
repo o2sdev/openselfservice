@@ -520,7 +520,7 @@ export const MOCK_ARTICLE4_EN: Articles.Model.Article[] = [
     {
         id: 'art-001',
         slug: '/help-and-support/warranty-and-repair/managing-your-powerpro-tools-online',
-        isProtected: false,
+        permissions: [],
         createdAt: '2023-05-12T08:30:00Z',
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Managing Your PowerPro Tools Online',
@@ -586,7 +586,7 @@ export const MOCK_ARTICLE4_DE: Articles.Model.Article[] = [
     {
         id: 'art-001',
         slug: '/hilfe-und-support/garantie-und-reparatur/verwalten-ihrer-powerpro-werkzeuge-online',
-        isProtected: false,
+        permissions: [],
         createdAt: '2023-05-12T08:30:00Z',
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Verwalten Ihrer PowerPro-Werkzeuge online',
@@ -652,7 +652,7 @@ export const MOCK_ARTICLE4_PL: Articles.Model.Article[] = [
     {
         id: 'art-001',
         slug: '/pomoc-i-wsparcie/gwarancja-i-naprawa/zarzadzanie-narzedziami-powerpro-online',
-        isProtected: false,
+        permissions: [],
         createdAt: '2023-05-12T08:30:00Z',
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Zarządzanie narzędziami PowerPro online',

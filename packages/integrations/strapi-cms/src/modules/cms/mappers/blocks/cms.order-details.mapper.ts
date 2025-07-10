@@ -2,13 +2,13 @@ import { NotFoundException } from '@nestjs/common';
 
 import { CMS } from '@o2s/framework/modules';
 
+import { GetComponentQuery } from '@/generated/strapi';
+
 import { mapFields } from '../cms.fieldMapping.mapper';
 import { mapFilters } from '../cms.filters.mapper';
 import { mapInfoCard } from '../cms.information-card.mapper';
 import { mapPagination } from '../cms.pagination.mapper';
 import { mapTable } from '../cms.table.mapper';
-
-import { GetComponentQuery } from '@/generated/strapi';
 
 export const mapOrderDetailsBlock = (data: GetComponentQuery): CMS.Model.OrderDetailsBlock.OrderDetailsBlock => {
     const component = data.component!.content[0];

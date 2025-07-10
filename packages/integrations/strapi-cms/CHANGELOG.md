@@ -1,5 +1,22 @@
 # @o2s/integrations.strapi-cms
 
+## 2.5.1
+
+### Patch Changes
+
+- 916fcaa: improved prettier rules and reformatted the code
+
+## 2.5.0
+
+### Minor Changes
+
+- c13192c: adjusted `Page` and `Article` models to conform with new user-based permission model
+
+### Patch Changes
+
+- Updated dependencies [c13192c]
+    - @o2s/framework@1.7.0
+
 ## 2.4.2
 
 ### Patch Changes
