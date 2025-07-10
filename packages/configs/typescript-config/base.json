@@ -14,7 +14,8 @@
         "resolveJsonModule": true,
         "skipLibCheck": true,
         "strict": true,
-        "target": "ES2022"
+        "target": "ES2022",
+        "jsx": "preserve"
     },
     "exclude": ["node_modules"]
 }

@@ -42,7 +42,8 @@
         "survey-core": "^2.0.9",
         "winston": "^3.17.0",
         "xmlbuilder2": "^3.1.1",
-        "@o2s/blocks.faq": "*"
+        "@o2s/blocks.faq": "*",
+        "@o2s/blocks.ticket-list": "*"
     },
     "devDependencies": {
         "@nestjs/cli": "^11.0.7",

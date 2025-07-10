@@ -1,13 +1,13 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-import { sdk } from '@/api/sdk';
+import { sdk } from '../sdk';
 
 import { TicketListProps } from './TicketList.types';
 
 export const TicketListDynamic = dynamic(() => import('./TicketList.client').then((module) => module.TicketListPure));
 
-export const TicketListServer: React.FC<TicketListProps> = async ({ id, accessToken, locale }) => {
+export const TicketListServer: React.FC<TicketListProps> = async ({ id, accessToken, locale, routing }) => {
     try {
         const data = await sdk.blocks.getTicketList(
             {
@@ -17,7 +17,7 @@ export const TicketListServer: React.FC<TicketListProps> = async ({ id, accessTo
             accessToken,
         );
 
-        return <TicketListDynamic {...data} id={id} accessToken={accessToken} locale={locale} />;
+        return <TicketListDynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />;
     } catch (_error) {
         return null;
     }

@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react';
 import React from 'react';
 
 import { Image } from '@o2s/ui/components/Image';
+
 import { Link } from '@o2s/ui/elements/link';
 
 import { Link as NextLink } from '@/i18n';

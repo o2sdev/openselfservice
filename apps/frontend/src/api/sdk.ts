@@ -25,7 +25,6 @@ import { serviceDetails } from '@/api/blocks/service-details';
 import { serviceList } from '@/api/blocks/services-list';
 import { surveyJSBlock } from '@/api/blocks/surveyjs';
 import { ticketDetails } from '@/api/blocks/ticket-details';
-import { ticketList } from '@/api/blocks/ticket-list';
 import { ticketRecent } from '@/api/blocks/ticket-recent';
 import { userAccount } from '@/api/blocks/user-account';
 // BLOCK IMPORT
@@ -53,10 +52,8 @@ const internalSdk = getSdk({
 export const sdk = extendSdk(internalSdk, {
     notifications: {
         ...Notifications.extend(internalSdk),
-        getTicketList: ticketList(internalSdk).blocks.getTicketList,
     },
     blocks: {
-        getTicketList: ticketList(internalSdk).blocks.getTicketList,
         getTicketRecent: ticketRecent(internalSdk).blocks.getTicketRecent,
         getTicketDetails: ticketDetails(internalSdk).blocks.getTicketDetails,
         getNotificationList: notificationList(internalSdk).blocks.getNotificationList,

@@ -5,7 +5,10 @@ import React, { JSX } from 'react';
 
 import { Models } from '@o2s/framework/modules';
 
+import { cn } from '@o2s/ui/lib/utils';
+
 import { Image } from '@o2s/ui/components/Image';
+
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@o2s/ui/elements/accordion';
 import { Link } from '@o2s/ui/elements/link';
 import {
@@ -17,7 +20,6 @@ import {
 } from '@o2s/ui/elements/navigation-menu';
 import { Separator } from '@o2s/ui/elements/separator';
 import { Typography } from '@o2s/ui/elements/typography';
-import { cn } from '@o2s/ui/lib/utils';
 
 import { Link as NextLink } from '@/i18n';
 

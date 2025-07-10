@@ -8,6 +8,7 @@ import { Container } from '@o2s/ui/components/Container';
 import { Price } from '@o2s/ui/components/Price';
 import { RichText } from '@o2s/ui/components/RichText';
 import { TooltipHover } from '@o2s/ui/components/TooltipHover';
+
 import { Badge } from '@o2s/ui/elements/badge';
 import { Button } from '@o2s/ui/elements/button';
 import { Separator } from '@o2s/ui/elements/separator';

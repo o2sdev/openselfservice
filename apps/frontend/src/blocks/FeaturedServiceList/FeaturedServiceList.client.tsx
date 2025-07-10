@@ -7,6 +7,7 @@ import { ProductCard } from '@o2s/ui/components/Cards/ProductCard';
 import { ProductCardBadge } from '@o2s/ui/components/Cards/ProductCard';
 import { NoResults } from '@o2s/ui/components/NoResults';
 import { TooltipHover } from '@o2s/ui/components/TooltipHover';
+
 import { Separator } from '@o2s/ui/elements/separator';
 import { SwitchWithLabel } from '@o2s/ui/elements/switch';
 import { Typography } from '@o2s/ui/elements/typography';

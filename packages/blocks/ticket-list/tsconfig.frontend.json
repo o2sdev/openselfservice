@@ -1,0 +1,21 @@
+{
+    "extends": "@o2s/typescript-config/frontend.json",
+    "compilerOptions": {
+        "outDir": "./dist/frontend",
+        "rootDir": "./src",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "composite": true,
+        "declaration": true,
+        "declarationMap": true,
+        "noEmit": false,
+        "baseUrl": "./src/frontend"
+    },
+    "include": [
+        "src/frontend",
+        "src/api-harmonization/ticket-list.client.ts",
+        "src/api-harmonization/ticket-list.model.ts",
+        "src/api-harmonization/ticket-list.request.ts",
+        "src/sdk"
+    ]
+}

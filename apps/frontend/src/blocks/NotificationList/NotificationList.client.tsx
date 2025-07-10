@@ -4,16 +4,18 @@ import { Blocks } from '@o2s/api-harmonization';
 import { ArrowRight } from 'lucide-react';
 import React, { useState, useTransition } from 'react';
 
+import { cn } from '@o2s/ui/lib/utils';
+
 import { FiltersSection } from '@o2s/ui/components/Filters';
 import { NoResults } from '@o2s/ui/components/NoResults';
 import { Pagination } from '@o2s/ui/components/Pagination';
+
 import { Badge } from '@o2s/ui/elements/badge';
 import { BadgeStatus } from '@o2s/ui/elements/badge-status';
 import { Button } from '@o2s/ui/elements/button';
 import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
 import { Separator } from '@o2s/ui/elements/separator';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@o2s/ui/elements/table';
-import { cn } from '@o2s/ui/lib/utils';
 
 import { sdk } from '@/api/sdk';
 

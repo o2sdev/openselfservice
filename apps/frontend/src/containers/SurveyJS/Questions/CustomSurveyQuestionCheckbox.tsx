@@ -7,8 +7,9 @@ import {
     SurveyQuestionCheckboxItem,
 } from 'survey-react-ui';
 
-import { CheckboxWithLabel } from '@o2s/ui/elements/checkbox';
 import { cn } from '@o2s/ui/lib/utils';
+
+import { CheckboxWithLabel } from '@o2s/ui/elements/checkbox';
 
 import { Fieldset } from '../Components/Fieldset/Fieldset';
 

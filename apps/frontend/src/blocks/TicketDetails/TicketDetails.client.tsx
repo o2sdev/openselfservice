@@ -6,6 +6,7 @@ import React from 'react';
 import { Author } from '@o2s/ui/components/Author';
 import { Container } from '@o2s/ui/components/Container';
 import { RichText } from '@o2s/ui/components/RichText';
+
 import { Badge } from '@o2s/ui/elements/badge';
 import { Button } from '@o2s/ui/elements/button';
 import { Separator } from '@o2s/ui/elements/separator';

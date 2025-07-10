@@ -4,12 +4,12 @@ import { useLocale } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
 import React from 'react';
 
+import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
+
 import { Label } from '@o2s/ui/elements/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@o2s/ui/elements/select';
 
 import { usePathname, useRouter } from '@/i18n';
-
-import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
 
 import { ToolbarProps } from './Toolbar.types';
 

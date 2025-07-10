@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Container } from '@o2s/ui/components/Container';
+
 import { Typography } from '@o2s/ui/elements/typography';
 
 import { Survey } from '@/containers/SurveyJS/Survey';

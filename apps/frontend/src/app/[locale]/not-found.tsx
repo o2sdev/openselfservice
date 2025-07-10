@@ -3,10 +3,12 @@ import { getLocale } from 'next-intl/server';
 import { headers } from 'next/headers';
 import React from 'react';
 
+import { GlobalProvider } from '@o2s/ui/providers/GlobalProvider';
+
 import { AppSpinner } from '@o2s/ui/components/AppSpinner';
 import { ErrorPage } from '@o2s/ui/components/ErrorPage';
+
 import { Toaster } from '@o2s/ui/elements/toaster';
-import { GlobalProvider } from '@o2s/ui/providers/GlobalProvider';
 
 import { sdk } from '@/api/sdk';
 

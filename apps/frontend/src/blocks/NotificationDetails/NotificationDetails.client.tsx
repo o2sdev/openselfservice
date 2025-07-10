@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 
 import { Container } from '@o2s/ui/components/Container';
 import { RichText } from '@o2s/ui/components/RichText';
+
 import { Badge } from '@o2s/ui/elements/badge';
 import { Separator } from '@o2s/ui/elements/separator';
 import { Typography } from '@o2s/ui/elements/typography';

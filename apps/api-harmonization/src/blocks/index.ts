@@ -1,4 +1,3 @@
-export * as TicketList from './ticket-list';
 export * as TicketDetails from './ticket-details';
 export * as NotificationList from './notification-list';
 export * as NotificationDetails from './notification-details';

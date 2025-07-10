@@ -1,8 +1,7 @@
-import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Articles, Auth, CMS } from '@o2s/configs.integrations';
 import { Observable, concatMap, forkJoin, map, of, switchMap } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 
 import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
 import { checkPermissions } from '@o2s/api-harmonization/utils/permissions';

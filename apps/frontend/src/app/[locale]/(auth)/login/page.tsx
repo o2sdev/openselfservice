@@ -5,10 +5,12 @@ import { headers } from 'next/headers';
 import { notFound } from 'next/navigation';
 import React from 'react';
 
+import { GlobalProvider } from '@o2s/ui/providers/GlobalProvider';
+
 import { AppSpinner } from '@o2s/ui/components/AppSpinner';
 import { Image } from '@o2s/ui/components/Image';
+
 import { Toaster } from '@o2s/ui/elements/toaster';
-import { GlobalProvider } from '@o2s/ui/providers/GlobalProvider';
 
 import { sdk } from '@/api/sdk';
 

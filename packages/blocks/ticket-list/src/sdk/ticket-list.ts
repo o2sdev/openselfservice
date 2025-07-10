@@ -1,23 +1,23 @@
-import { Blocks, Headers } from '@o2s/api-harmonization';
+import { Model, Request, URL } from "../api-harmonization/ticket-list.client";
 
-import { Sdk } from '@o2s/framework/sdk';
+import { Sdk } from "@o2s/framework/sdk";
+import { Utils } from "@o2s/utils.frontend";
+import { Models } from "@o2s/utils.api-harmonization";
 
-import { getApiHeaders } from '../../utils/api';
-
-const API_URL = Blocks.TicketList.URL;
+const API_URL = URL;
 
 export const ticketList = (sdk: Sdk) => ({
     blocks: {
         getTicketList: (
-            query: Blocks.TicketList.Request.GetTicketListBlockQuery,
-            headers: Headers.AppHeaders,
+            query: Request.GetTicketListBlockQuery,
+            headers: Models.Headers.AppHeaders,
             authorization?: string,
-        ): Promise<Blocks.TicketList.Model.TicketListBlock> =>
+        ): Promise<Model.TicketListBlock> =>
             sdk.makeRequest({
-                method: 'get',
+                method: "get",
                 url: `${API_URL}`,
                 headers: {
-                    ...getApiHeaders(),
+                    ...Utils.Headers.getApiHeaders(),
                     ...headers,
                     ...(authorization
                         ? {

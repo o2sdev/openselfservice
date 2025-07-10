@@ -2,8 +2,9 @@ import React from 'react';
 import { RendererFactory } from 'survey-core';
 import { ReactQuestionFactory, SurveyQuestionComment } from 'survey-react-ui';
 
-import { TextareaWithLabel } from '@o2s/ui/elements/textarea';
 import { cn } from '@o2s/ui/lib/utils';
+
+import { TextareaWithLabel } from '@o2s/ui/elements/textarea';
 
 class CustomSurveyQuestionComment extends SurveyQuestionComment {
     renderElement() {

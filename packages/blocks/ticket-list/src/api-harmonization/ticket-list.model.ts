@@ -1,10 +1,10 @@
 import { Tickets } from '@o2s/configs.integrations';
 
+import { Models as ApiModels } from '@o2s/utils.api-harmonization';
+
 import { Models } from '@o2s/framework/modules';
 
-import { Block } from '../../utils';
-
-export class TicketListBlock extends Block.Block {
+export class TicketListBlock extends ApiModels.Block.Block {
     __typename!: 'TicketListBlock';
     title?: string;
     subtitle?: string;

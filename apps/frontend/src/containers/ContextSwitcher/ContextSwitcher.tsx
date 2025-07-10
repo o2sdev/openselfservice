@@ -4,15 +4,16 @@ import { useSession } from 'next-auth/react';
 import { useLocale } from 'next-intl';
 import React, { useState, useTransition } from 'react';
 
+import { useToast } from '@o2s/ui/hooks/use-toast';
+
+import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
+
 import { Button } from '@o2s/ui/elements/button';
 import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
 import { Sheet, SheetContent, SheetTrigger } from '@o2s/ui/elements/sheet';
 import { Typography } from '@o2s/ui/elements/typography';
-import { useToast } from '@o2s/ui/hooks/use-toast';
 
 import { sdk } from '@/api/sdk';
-
-import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
 
 import { Content } from './Content/Content';
 import { ContextSwitcherProps } from './ContextSwitcher.types';

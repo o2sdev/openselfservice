@@ -1,7 +1,7 @@
 import { CMS, Tickets } from '@o2s/configs.integrations';
 import format from 'string-template';
 
-import { formatDateRelative } from '@o2s/api-harmonization/utils/date';
+import { Utils } from '@o2s/utils.api-harmonization';
 
 import { Ticket, TicketListBlock } from './ticket-list.model';
 
@@ -49,8 +49,20 @@ export const mapTicket = (
             label: cms.fieldMapping.status?.[ticket.status] || ticket.status,
             value: ticket.status,
         },
-        createdAt: formatDateRelative(ticket.createdAt, locale, cms.labels.today, cms.labels.yesterday, timezone),
-        updatedAt: formatDateRelative(ticket.updatedAt, locale, cms.labels.today, cms.labels.yesterday, timezone),
+        createdAt: Utils.Date.formatDateRelative(
+            ticket.createdAt,
+            locale,
+            cms.labels.today,
+            cms.labels.yesterday,
+            timezone,
+        ),
+        updatedAt: Utils.Date.formatDateRelative(
+            ticket.updatedAt,
+            locale,
+            cms.labels.today,
+            cms.labels.yesterday,
+            timezone,
+        ),
         detailsUrl: format(cms.detailsUrl, {
             id: ticket.id,
         }),

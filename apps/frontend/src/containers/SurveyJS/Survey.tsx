@@ -7,14 +7,17 @@ import React, { startTransition, useActionState, useEffect } from 'react';
 import { Model } from 'survey-core';
 import { Survey as SurveySDK } from 'survey-react-ui';
 
-import { Loading } from '@o2s/ui/components/Loading';
-import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
-import { toast } from '@o2s/ui/hooks/use-toast';
 import { cn } from '@o2s/ui/lib/utils';
 
-import { sdk } from '@/api/sdk';
+import { toast } from '@o2s/ui/hooks/use-toast';
 
 import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
+
+import { Loading } from '@o2s/ui/components/Loading';
+
+import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
+
+import { sdk } from '@/api/sdk';
 
 import './Elements/CustomSurveyNavigationButton';
 import './Elements/CustomSurveyPanel';

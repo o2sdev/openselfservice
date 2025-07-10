@@ -1,12 +1,14 @@
 import React from 'react';
 
+import { cn } from '@o2s/ui/lib/utils';
+
 import { Author } from '@o2s/ui/components/Author';
 import { Container } from '@o2s/ui/components/Container';
 import { Image } from '@o2s/ui/components/Image';
 import { RichText } from '@o2s/ui/components/RichText';
+
 import { Separator } from '@o2s/ui/elements/separator';
 import { Typography } from '@o2s/ui/elements/typography';
-import { cn } from '@o2s/ui/lib/utils';
 
 import { ArticlePureProps } from './Article.types';
 

@@ -1,14 +1,17 @@
 'use client';
 
-import { Blocks } from '@o2s/api-harmonization';
 import { ArrowRight } from 'lucide-react';
+import { createNavigation } from 'next-intl/navigation';
 import React, { useState, useTransition } from 'react';
+
+import { Mappings } from '@o2s/utils.frontend';
 
 import { ActionList } from '@o2s/ui/components/ActionList';
 import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
 import { FiltersSection } from '@o2s/ui/components/Filters';
 import { NoResults } from '@o2s/ui/components/NoResults';
 import { Pagination } from '@o2s/ui/components/Pagination';
+
 import { Badge } from '@o2s/ui/elements/badge';
 import { Button } from '@o2s/ui/elements/button';
 import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
@@ -16,16 +19,17 @@ import { Separator } from '@o2s/ui/elements/separator';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@o2s/ui/elements/table';
 import { Typography } from '@o2s/ui/elements/typography';
 
-import { sdk } from '@/api/sdk';
+import { routing } from '@o2s/frontend/src/i18n';
 
-import { ticketBadgeVariants } from '@/utils/mappings/ticket-badge';
-
-import { Link as NextLink } from '@/i18n';
+import { Model, Request } from '../api-harmonization/ticket-list.client';
+import { sdk } from '../sdk';
 
 import { TicketListPureProps } from './TicketList.types';
 
 export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessToken, ...component }) => {
-    const initialFilters: Blocks.TicketList.Request.GetTicketListBlockQuery = {
+    const { Link: LinkComponent } = createNavigation(routing);
+
+    const initialFilters: Request.GetTicketListBlockQuery = {
         id: component.id,
         offset: 0,
         limit: component.pagination?.limit || 5,
@@ -33,12 +37,12 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
 
     const initialData = component.tickets.data;
 
-    const [data, setData] = useState<Blocks.TicketList.Model.TicketListBlock>(component);
+    const [data, setData] = useState<Model.TicketListBlock>(component);
     const [filters, setFilters] = useState(initialFilters);
 
     const [isPending, startTransition] = useTransition();
 
-    const handleFilter = (data: Partial<Blocks.TicketList.Request.GetTicketListBlockQuery>) => {
+    const handleFilter = (data: Partial<Request.GetTicketListBlockQuery>) => {
         startTransition(async () => {
             const newFilters = { ...filters, ...data };
             const newData = await sdk.blocks.getTicketList(newFilters, { 'x-locale': locale }, accessToken);
@@ -73,21 +77,21 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                                         key={form.label}
                                         className="no-underline hover:no-underline"
                                     >
-                                        <NextLink href={form.url}>
+                                        <LinkComponent href={form.url}>
                                             {form.icon && <DynamicIcon name={form.icon} size={16} />}
                                             {form.label}
-                                        </NextLink>
+                                        </LinkComponent>
                                     </Button>
                                 ))}
                                 dropdownActions={data.forms.slice(2).map((form) => (
-                                    <NextLink
+                                    <LinkComponent
                                         href={form.url}
                                         key={form.label}
                                         className="flex items-center gap-2 !no-underline hover:!no-underline cursor-pointer"
                                     >
                                         {form.icon && <DynamicIcon name={form.icon} size={16} />}
                                         {form.label}
-                                    </NextLink>
+                                    </LinkComponent>
                                 ))}
                                 showMoreLabel={data.labels.showMore}
                             />
@@ -160,7 +164,9 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                                                                 >
                                                                     <Badge
                                                                         variant={
-                                                                            ticketBadgeVariants[ticket[column.id].value]
+                                                                            Mappings.TicketBadge.ticketBadgeVariants[
+                                                                                ticket[column.id].value
+                                                                            ]
                                                                         }
                                                                     >
                                                                         {ticket[column.id].label}
@@ -183,13 +189,13 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                                                 {data.table.actions && (
                                                     <TableCell className="py-0">
                                                         <Button asChild variant="link">
-                                                            <NextLink
+                                                            <LinkComponent
                                                                 href={ticket.detailsUrl}
                                                                 className="flex items-center justify-end gap-2"
                                                             >
                                                                 <ArrowRight className="h-4 w-4" />
                                                                 {data.table.actions.label}
-                                                            </NextLink>
+                                                            </LinkComponent>
                                                         </Button>
                                                     </TableCell>
                                                 )}

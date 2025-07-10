@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Container } from '@o2s/ui/components/Container';
 import { RichText } from '@o2s/ui/components/RichText';
+
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@o2s/ui/elements/accordion';
 import { Button } from '@o2s/ui/elements/button';
 import { Typography } from '@o2s/ui/elements/typography';

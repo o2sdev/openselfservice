@@ -36,7 +36,8 @@
         "throttle-debounce": "^5.0.2",
         "yup": "^1.6.1",
         "zod": "^3.25.4",
-        "@o2s/blocks.faq": "*"
+        "@o2s/blocks.faq": "*",
+        "@o2s/blocks.ticket-list": "*"
     },
     "devDependencies": {
         "@next/bundle-analyzer": "^15.3.2",

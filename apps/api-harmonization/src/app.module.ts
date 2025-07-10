@@ -24,6 +24,7 @@ import {
 } from '@o2s/framework/modules';
 
 import * as Faq from '@o2s/blocks.faq/api-harmonization';
+import * as TicketList from '@o2s/blocks.ticket-list/api-harmonization';
 
 import { configuration } from '@o2s/api-harmonization/config/configuration';
 
@@ -46,7 +47,6 @@ import { ServiceDetailsBlockModule } from '@o2s/api-harmonization/blocks/service
 import { ServiceListBlockModule } from '@o2s/api-harmonization/blocks/service-list/service-list.module';
 import { SurveyjsBlockModule } from '@o2s/api-harmonization/blocks/surveyjs/surveyjs.module';
 import { TicketDetailsBlockModule } from '@o2s/api-harmonization/blocks/ticket-details/ticket-details.module';
-import { TicketListBlockModule } from '@o2s/api-harmonization/blocks/ticket-list/ticket-list.module';
 import { TicketRecentBlockModule } from '@o2s/api-harmonization/blocks/ticket-recent/ticket-recent.module';
 import { UserAccountBlockModule } from '@o2s/api-harmonization/blocks/user-account/user-account.module';
 
@@ -109,7 +109,7 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
         OrganizationsModule.register(AppConfig),
         SurveyjsModule.register(AppConfig),
 
-        TicketListBlockModule.register(AppConfig),
+        TicketList.Module.register(AppConfig),
         TicketDetailsBlockModule.register(AppConfig),
         NotificationListBlockModule.register(AppConfig),
         NotificationDetailsBlockModule.register(AppConfig),

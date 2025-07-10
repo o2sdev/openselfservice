@@ -2,8 +2,9 @@ import React from 'react';
 import { RendererFactory } from 'survey-core';
 import { ReactQuestionFactory, SurveyQuestionBoolean } from 'survey-react-ui';
 
-import { ToggleGroup, ToggleGroupItem } from '@o2s/ui/elements/toggle-group';
 import { cn } from '@o2s/ui/lib/utils';
+
+import { ToggleGroup, ToggleGroupItem } from '@o2s/ui/elements/toggle-group';
 
 class CustomSurveyQuestionBoolean extends SurveyQuestionBoolean {
     renderElement() {

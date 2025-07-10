@@ -5,6 +5,7 @@ import React from 'react';
 
 import { RichText } from '@o2s/ui/components/RichText';
 import { TooltipHover } from '@o2s/ui/components/TooltipHover';
+
 import { Avatar, AvatarFallback, AvatarImage } from '@o2s/ui/elements/avatar';
 import { Card, CardContent, CardHeader } from '@o2s/ui/elements/card';
 import { Link } from '@o2s/ui/elements/link';
