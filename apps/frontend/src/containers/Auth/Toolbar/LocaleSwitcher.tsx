@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 
 import { usePathname, useRouter } from '@/i18n';
 
-import { useGlobalContext } from '@/providers/GlobalProvider';
+import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
 
 import { ToolbarProps } from './Toolbar.types';
 

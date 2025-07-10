@@ -8,9 +8,10 @@
         "./theme": "./src/theme.css",
         "./postcss.config": "./postcss.config.mjs",
         "./lib/*": "./src/lib/*.ts",
+        "./hooks/*": "./src/hooks/*.ts",
+        "./providers/*": "./src/providers/*/index.ts",
         "./elements/*": "./src/elements/*.tsx",
-        "./components/*": "./src/components/*/index.ts",
-        "./hooks/*": "./src/hooks/*.ts"
+        "./components/*": "./src/components/*/index.ts"
     },
     "scripts": {
         "lint": "tsc --noEmit && eslint . --max-warnings 0",

@@ -2,14 +2,14 @@ import React from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
+import { Image } from '@o2s/ui/components/Image';
+import { Price } from '@o2s/ui/components/Price';
+import { RichText } from '@o2s/ui/components/RichText';
+
 import { Badge } from '@o2s/ui/elements/badge';
 import { Link } from '@o2s/ui/elements/link';
 import { Separator } from '@o2s/ui/elements/separator';
 import { Typography } from '@o2s/ui/elements/typography';
-
-import { Image } from '@o2s/ui/components/Image';
-import { Price } from '@o2s/ui/components/Price';
-import { RichText } from '@o2s/ui/components/RichText';
 
 import { ProductCardProps } from './ProductCard.types';
 

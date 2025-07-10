@@ -12,7 +12,7 @@ import { useToast } from '@o2s/ui/hooks/use-toast';
 
 import { sdk } from '@/api/sdk';
 
-import { useGlobalContext } from '@/providers/GlobalProvider';
+import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
 
 import { Content } from './Content/Content';
 import { ContextSwitcherProps } from './ContextSwitcher.types';

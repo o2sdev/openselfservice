@@ -1,9 +1,9 @@
 import { Models } from '@o2s/framework/modules';
 import React from 'react';
 
-import { Typography } from '@o2s/ui/elements/typography';
-
 import { Price } from '@o2s/ui/components/Price';
+
+import { Typography } from '@o2s/ui/elements/typography';
 
 import { ChartTooltipProps } from './ChartTooltip.types';
 

@@ -6,6 +6,7 @@ import React from 'react';
 import { AppSpinner } from '@o2s/ui/components/AppSpinner';
 import { ErrorPage } from '@o2s/ui/components/ErrorPage';
 import { Toaster } from '@o2s/ui/elements/toaster';
+import { GlobalProvider } from '@o2s/ui/providers/GlobalProvider';
 
 import { sdk } from '@/api/sdk';
 
@@ -14,8 +15,6 @@ import { generateSeo } from '@/utils/seo';
 import { auth } from '@/auth';
 
 import { Link } from '@/i18n';
-
-import { GlobalProvider } from '@/providers/GlobalProvider';
 
 import { Footer } from '@/containers/Footer/Footer';
 import { Header } from '@/containers/Header/Header';
@@ -85,8 +84,7 @@ export default async function NotFound() {
                 <Footer data={init.common.footer} />
 
                 <Toaster />
-                {/*TODO: fix isVisible*/}
-                <AppSpinner isVisible={false} />
+                <AppSpinner />
             </div>
         </GlobalProvider>
     );

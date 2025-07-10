@@ -9,6 +9,7 @@ import { Breadcrumbs } from '@o2s/ui/components/Breadcrumbs';
 import { Separator } from '@o2s/ui/elements/separator';
 import { Toaster } from '@o2s/ui/elements/toaster';
 import { Typography } from '@o2s/ui/elements/typography';
+import { GlobalProvider } from '@o2s/ui/providers/GlobalProvider';
 
 import { sdk } from '@/api/sdk';
 
@@ -18,8 +19,6 @@ import { generateSeo } from '@/utils/seo';
 import { auth, signIn } from '@/auth';
 
 import { Link } from '@/i18n';
-
-import { GlobalProvider } from '@/providers/GlobalProvider';
 
 import { PageTemplate } from '@/templates/PageTemplate/PageTemplate';
 
@@ -133,8 +132,7 @@ export default async function Page({ params }: Props) {
                     <Footer data={init.common.footer} />
 
                     <Toaster />
-                    {/*TODO: fix isVisible*/}
-                    <AppSpinner isVisible={false} />
+                    <AppSpinner />
                 </div>
             </GlobalProvider>
         );

@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 
+import { RichText } from '@o2s/ui/components/RichText';
+
 import { Link } from '@o2s/ui/elements/link';
 import { Typography } from '@o2s/ui/elements/typography';
-
-import { RichText } from '@o2s/ui/components/RichText';
 
 import { ErrorPageProps } from './ErrorPage.types';
 

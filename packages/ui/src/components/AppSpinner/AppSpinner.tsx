@@ -2,12 +2,14 @@
 
 import React from 'react';
 
+import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
+
 import { Spinner } from '@o2s/ui/elements/spinner';
 
-import { AppSpinnerProps } from './AppSpinner.types';
+export const AppSpinner: React.FC = () => {
+    const { spinner } = useGlobalContext();
 
-export const AppSpinner: React.FC<AppSpinnerProps> = ({ isVisible }) => {
-    if (!isVisible) {
+    if (!spinner.isVisible) {
         return null;
     }
 

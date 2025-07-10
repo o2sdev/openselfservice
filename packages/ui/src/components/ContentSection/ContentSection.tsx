@@ -1,9 +1,9 @@
 import React from 'react';
 
+import { RichText } from '@o2s/ui/components/RichText';
+
 import { Button } from '@o2s/ui/elements/button';
 import { Typography } from '@o2s/ui/elements/typography';
-
-import { RichText } from '@o2s/ui/components/RichText';
 
 import { ContentSectionProps } from './ContentSection.types';
 

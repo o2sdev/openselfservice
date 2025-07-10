@@ -22,7 +22,7 @@ import { sdk } from '@/api/sdk';
 import { downloadFile } from '@/utils/downloadFile';
 import { invoiceBadgePaymentStatusVariants } from '@/utils/mappings/invoice-badge';
 
-import { useGlobalContext } from '@/providers/GlobalProvider';
+import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
 
 import { InvoiceListPureProps } from './InvoiceList.types';
 

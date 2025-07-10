@@ -2,11 +2,11 @@ import React from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
-import { Card } from '@o2s/ui/elements/card';
-import { Typography } from '@o2s/ui/elements/typography';
-
 import { DynamicIcon, DynamicIconProps } from '@o2s/ui/components/DynamicIcon';
 import { RichText } from '@o2s/ui/components/RichText';
+
+import { Card } from '@o2s/ui/elements/card';
+import { Typography } from '@o2s/ui/elements/typography';
 
 import { InfoCardProps } from './InfoCard.types';
 

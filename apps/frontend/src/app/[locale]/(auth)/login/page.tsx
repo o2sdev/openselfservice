@@ -8,6 +8,7 @@ import React from 'react';
 import { AppSpinner } from '@o2s/ui/components/AppSpinner';
 import { Image } from '@o2s/ui/components/Image';
 import { Toaster } from '@o2s/ui/elements/toaster';
+import { GlobalProvider } from '@o2s/ui/providers/GlobalProvider';
 
 import { sdk } from '@/api/sdk';
 
@@ -17,8 +18,6 @@ import { auth, signIn } from '@/auth';
 import { providerMap } from '@/auth/auth.providers';
 
 import { routing } from '@/i18n/routing';
-
-import { GlobalProvider } from '@/providers/GlobalProvider';
 
 import { AuthLayout } from '@/containers/Auth/AuthLayout/AuthLayout';
 import { FormValues, SignInForm } from '@/containers/Auth/SignInForm';
@@ -136,8 +135,7 @@ export default async function LoginPage({ params }: Readonly<Props>) {
                     <Footer data={init.common.footer} />
 
                     <Toaster />
-                    {/*TODO: fix isVisible*/}
-                    <AppSpinner isVisible={false} />
+                    <AppSpinner />
                 </div>
             </GlobalProvider>
         );

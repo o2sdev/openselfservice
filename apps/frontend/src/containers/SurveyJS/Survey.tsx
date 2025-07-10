@@ -14,7 +14,7 @@ import { cn } from '@o2s/ui/lib/utils';
 
 import { sdk } from '@/api/sdk';
 
-import { useGlobalContext } from '@/providers/GlobalProvider';
+import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
 
 import './Elements/CustomSurveyNavigationButton';
 import './Elements/CustomSurveyPanel';

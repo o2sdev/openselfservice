@@ -3,10 +3,10 @@ import React from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
+import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
+
 import { Link } from '@o2s/ui/elements/link';
 import { Typography } from '@o2s/ui/elements/typography';
-
-import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
 
 import { InformativeCardProps } from './InformativeCard.types';
 

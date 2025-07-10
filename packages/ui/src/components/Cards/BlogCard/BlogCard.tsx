@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { Link } from '@o2s/ui/elements/link';
-import { Typography } from '@o2s/ui/elements/typography';
-
 import { Author } from '@o2s/ui/components/Author';
 import { Image } from '@o2s/ui/components/Image';
+
+import { Link } from '@o2s/ui/elements/link';
+import { Typography } from '@o2s/ui/elements/typography';
 
 import { BlogCardProps } from './BlogCard.types';
 

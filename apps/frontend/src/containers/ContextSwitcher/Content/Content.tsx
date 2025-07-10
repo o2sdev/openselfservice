@@ -11,7 +11,7 @@ import { toast } from '@o2s/ui/hooks/use-toast';
 
 import { updateOrganization } from '@/auth';
 
-import { useGlobalContext } from '@/providers/GlobalProvider';
+import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
 
 import { ContentProps, ContextSwitcherFormValues } from './Content.types';
 
