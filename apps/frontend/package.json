@@ -13,8 +13,8 @@
     },
     "dependencies": {
         "@o2s/api-harmonization": "*",
-        "@o2s/framework": "^1.6.2",
-        "@o2s/integrations.mocked": "^1.6.8",
+        "@o2s/framework": "^1.8.0",
+        "@o2s/integrations.mocked": "^1.8.0",
         "@o2s/ui": "*",
         "class-variance-authority": "^0.7.1",
         "date-fns": "^4.1.0",
