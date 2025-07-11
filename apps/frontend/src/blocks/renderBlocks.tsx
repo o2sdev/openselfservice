@@ -1,16 +1,15 @@
 import { Modules } from '@o2s/api-harmonization';
 import * as Faq from '@o2s/blocks.faq/frontend';
-import * as TicketList from '@o2s/blocks.ticket-list/frontend';
+import * as InvoiceList from '@o2s/blocks.invoice-list/frontend';
 import * as TicketDetails from '@o2s/blocks.ticket-details/frontend';
+import * as TicketList from '@o2s/blocks.ticket-list/frontend';
 import { getLocale } from 'next-intl/server';
 import React from 'react';
 
 import { CMS } from '@o2s/framework/modules';
 
-import { sdk } from '@/api/sdk';
-
 // BLOCK IMPORT
-import { Link, routing } from '@/i18n';
+import { routing } from '@/i18n';
 
 import { ArticleRenderer } from '@/blocks/Article/Article.renderer';
 import { ArticleListRenderer } from '@/blocks/ArticleList/ArticleList.renderer';
@@ -18,7 +17,6 @@ import { ArticleSearchRenderer } from '@/blocks/ArticleSearch/ArticleSearch.rend
 import { CategoryRenderer } from '@/blocks/Category/Category.renderer';
 import { CategoryListRenderer } from '@/blocks/CategoryList/CategoryList.renderer';
 import { FeaturedServiceListRenderer } from '@/blocks/FeaturedServiceList/FeaturedServiceList.renderer';
-import { InvoiceListRenderer } from '@/blocks/InvoiceList/InvoiceList.renderer';
 import { NotificationDetailsRenderer } from '@/blocks/NotificationDetails/NotificationDetails.renderer';
 import { NotificationListRenderer } from '@/blocks/NotificationList/NotificationList.renderer';
 import { OrderDetailsRenderer } from '@/blocks/OrderDetails/OrderDetails.renderer';
@@ -43,6 +41,7 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: str
                     <TicketList.Renderer
                         key={block.id}
                         id={block.id}
+                        slug={slug}
                         locale={locale}
                         accessToken={accessToken}
                         routing={routing}
@@ -51,7 +50,16 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: str
             case 'TicketRecentBlock':
                 return <TicketRecentRenderer key={block.id} id={block.id} accessToken={accessToken} />;
             case 'TicketDetailsBlock':
-                return <TicketDetails.Renderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
+                return (
+                    <TicketDetails.Renderer
+                        key={block.id}
+                        id={block.id}
+                        slug={slug}
+                        locale={locale}
+                        accessToken={accessToken}
+                        routing={routing}
+                    />
+                );
             case 'NotificationListBlock':
                 return <NotificationListRenderer key={block.id} id={block.id} accessToken={accessToken} />;
             case 'NotificationDetailsBlock':
@@ -63,14 +71,23 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: str
                     <Faq.Renderer
                         key={block.id}
                         id={block.id}
+                        slug={slug}
                         locale={locale}
                         accessToken={accessToken}
-                        sdk={sdk}
-                        LinkComponent={Link}
+                        routing={routing}
                     />
                 );
             case 'InvoiceListBlock':
-                return <InvoiceListRenderer key={block.id} id={block.id} accessToken={accessToken} />;
+                return (
+                    <InvoiceList.Renderer
+                        key={block.id}
+                        id={block.id}
+                        slug={slug}
+                        locale={locale}
+                        accessToken={accessToken}
+                        routing={routing}
+                    />
+                );
             case 'PaymentsSummaryBlock':
                 return <PaymentsSummaryRenderer key={block.id} id={block.id} accessToken={accessToken} />;
             case 'PaymentsHistoryBlock':

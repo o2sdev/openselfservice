@@ -19,14 +19,12 @@ import { Separator } from '@o2s/ui/elements/separator';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@o2s/ui/elements/table';
 import { Typography } from '@o2s/ui/elements/typography';
 
-import { routing } from '@o2s/frontend/src/i18n';
-
 import { Model, Request } from '../api-harmonization/ticket-list.client';
 import { sdk } from '../sdk';
 
 import { TicketListPureProps } from './TicketList.types';
 
-export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessToken, ...component }) => {
+export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessToken, routing, ...component }) => {
     const { Link: LinkComponent } = createNavigation(routing);
 
     const initialFilters: Request.GetTicketListBlockQuery = {

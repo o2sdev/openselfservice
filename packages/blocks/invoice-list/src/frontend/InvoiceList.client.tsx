@@ -1,8 +1,9 @@
 'use client';
 
-import { Blocks } from '@o2s/api-harmonization';
 import { Download } from 'lucide-react';
 import React, { useState, useTransition } from 'react';
+
+import { Mappings, Utils } from '@o2s/utils.frontend';
 
 import { cn } from '@o2s/ui/lib/utils';
 
@@ -22,28 +23,26 @@ import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
 import { Separator } from '@o2s/ui/elements/separator';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@o2s/ui/elements/table';
 
-import { sdk } from '@/api/sdk';
-
-import { downloadFile } from '@/utils/downloadFile';
-import { invoiceBadgePaymentStatusVariants } from '@/utils/mappings/invoice-badge';
+import { Request } from '../api-harmonization/invoice-list.client';
+import { sdk } from '../sdk';
 
 import { InvoiceListPureProps } from './InvoiceList.types';
 
-export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, accessToken, ...component }) => {
+export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, accessToken, routing, ...component }) => {
     const { labels } = useGlobalContext();
 
-    const initialFilters: Blocks.InvoiceList.Request.GetInvoiceListBlockQuery = {
+    const initialFilters: Request.GetInvoiceListBlockQuery = {
         id: component.id,
         offset: 0,
         limit: component.pagination?.limit || 5,
     };
 
     const initialData = component.invoices.data;
-    const [data, setData] = useState<Blocks.InvoiceList.Model.InvoiceListBlock>(component);
+    const [data, setData] = useState(component);
     const [filters, setFilters] = useState(initialFilters);
     const [isPending, startTransition] = useTransition();
 
-    const handleFilter = (data: Partial<Blocks.InvoiceList.Request.GetInvoiceListBlockQuery>) => {
+    const handleFilter = (data: Partial<Request.GetInvoiceListBlockQuery>) => {
         startTransition(async () => {
             const newFilters = { ...filters, ...data };
             const newData = await sdk.blocks.getInvoiceList(newFilters, { 'x-locale': locale }, accessToken);
@@ -65,7 +64,7 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
     const handleDownload = async (id: string) => {
         try {
             const response = await sdk.blocks.getInvoicePdf(id, { 'x-locale': locale }, accessToken);
-            downloadFile(response, data.downloadFileName?.replace('{id}', id) || 'invoice.pdf');
+            Utils.DownloadFile.downloadFile(response, data.downloadFileName?.replace('{id}', id) || 'invoice.pdf');
         } catch (_error) {
             toast({
                 variant: 'destructive',
@@ -146,7 +145,8 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
                                                                         >
                                                                             <Badge
                                                                                 variant={
-                                                                                    invoiceBadgePaymentStatusVariants[
+                                                                                    Mappings.InvoiceBadge
+                                                                                        .invoiceBadgePaymentStatusVariants[
                                                                                         invoice.paymentStatus.value
                                                                                     ]
                                                                                 }

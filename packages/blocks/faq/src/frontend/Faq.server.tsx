@@ -1,21 +1,13 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-import { extendSdk } from '@o2s/framework/sdk';
-
-import { faq } from '../sdk/faq';
+import { sdk } from '../sdk';
 
 import { FaqProps } from './Faq.types';
 
 export const FaqDynamic = dynamic(() => import('./Faq.client').then((module) => module.FaqPure));
 
-export const Faq: React.FC<FaqProps> = async ({ id, accessToken, locale, sdk: internalSdk, LinkComponent }) => {
-    const sdk = extendSdk(internalSdk, {
-        blocks: {
-            getFaq: faq(internalSdk).blocks.getFaq,
-        },
-    });
-
+export const Faq: React.FC<FaqProps> = async ({ id, accessToken, locale, routing }) => {
     try {
         const data = await sdk.blocks.getFaq(
             {
@@ -25,16 +17,7 @@ export const Faq: React.FC<FaqProps> = async ({ id, accessToken, locale, sdk: in
             accessToken,
         );
 
-        return (
-            <FaqDynamic
-                {...data}
-                id={id}
-                accessToken={accessToken}
-                locale={locale}
-                sdk={sdk}
-                LinkComponent={LinkComponent}
-            />
-        );
+        return <FaqDynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />;
     } catch (_error) {
         return null;
     }

@@ -1,3 +1,4 @@
+import { createNavigation } from 'next-intl/navigation';
 import React from 'react';
 
 import { Container } from '@o2s/ui/components/Container';
@@ -9,7 +10,9 @@ import { Typography } from '@o2s/ui/elements/typography';
 
 import { FaqPureProps } from './Faq.types';
 
-export const FaqPure: React.FC<FaqPureProps> = ({ sdk, LinkComponent, ...component }) => {
+export const FaqPure: React.FC<FaqPureProps> = ({ locale, accessToken, routing, ...component }) => {
+    const { Link: LinkComponent } = createNavigation(routing);
+
     const { title, subtitle, items, banner } = component;
 
     return (

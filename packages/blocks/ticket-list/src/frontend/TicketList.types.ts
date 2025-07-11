@@ -10,3 +10,7 @@ export interface TicketListProps {
 }
 
 export type TicketListPureProps = TicketListProps & Model.TicketListBlock;
+
+export type TicketListRendererProps = Omit<TicketListProps, ''> & {
+    slug: string[];
+};

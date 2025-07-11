@@ -1,8 +1,9 @@
 import { CMS, Models } from '@o2s/framework/modules';
 
 import * as Faq from '@o2s/blocks.faq/api-harmonization';
-import * as TicketList from '@o2s/blocks.ticket-list/api-harmonization';
+import * as BlockInvoiceList from '@o2s/blocks.invoice-list/api-harmonization';
 import * as TicketDetails from '@o2s/blocks.ticket-details/api-harmonization';
+import * as TicketList from '@o2s/blocks.ticket-list/api-harmonization';
 
 import {
     Article,
@@ -11,8 +12,6 @@ import {
     Category,
     CategoryList,
     FeaturedServiceList,
-    // BLOCK IMPORT
-    InvoiceList,
     NotificationDetails,
     NotificationList,
     OrderDetails,
@@ -81,7 +80,7 @@ export type Blocks =
     | NotificationList.Model.NotificationListBlock['__typename']
     | NotificationDetails.Model.NotificationDetailsBlock['__typename']
     | Faq.Model.FaqBlock['__typename']
-    | InvoiceList.Model.InvoiceListBlock['__typename']
+    | BlockInvoiceList.Model.InvoiceListBlock['__typename']
     | PaymentsSummary.Model.PaymentsSummaryBlock['__typename']
     | PaymentsHistory.Model.PaymentsHistoryBlock['__typename']
     | UserAccount.Model.UserAccountBlock['__typename']

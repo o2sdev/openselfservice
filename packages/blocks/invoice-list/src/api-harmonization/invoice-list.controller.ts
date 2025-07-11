@@ -2,11 +2,10 @@ import { Controller, Get, Headers, Param, Query, Res, UseInterceptors } from '@n
 import type { Response } from 'express';
 import { Observable, map } from 'rxjs';
 
+import { Models } from '@o2s/utils.api-harmonization';
 import { LoggerService } from '@o2s/utils.logger';
 
 import { Auth } from '@o2s/framework/modules';
-
-import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
 
 import { URL } from './';
 import { GetInvoiceListBlockQuery } from './invoice-list.request';
@@ -19,7 +18,7 @@ export class InvoiceListController {
 
     @Get()
     @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
-    getInvoiceListBlock(@Headers() headers: AppHeaders, @Query() query: GetInvoiceListBlockQuery) {
+    getInvoiceListBlock(@Headers() headers: Models.Headers.AppHeaders, @Query() query: GetInvoiceListBlockQuery) {
         return this.service.getInvoiceListBlock(query, headers);
     }
 

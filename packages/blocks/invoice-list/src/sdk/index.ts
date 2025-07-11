@@ -1,4 +1,4 @@
-import { faq } from "./faq";
+import { invoiceList } from "./invoice-list";
 // this unused import is necessary for TypeScript to properly resolve API methods
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Blocks, Headers, Modules } from "@o2s/api-harmonization";
@@ -26,6 +26,7 @@ const internalSdk = getSdk({
 
 export const sdk = extendSdk(internalSdk, {
     blocks: {
-        getFaq: faq(internalSdk).blocks.getFaq,
+        getInvoiceList: invoiceList(internalSdk).blocks.getInvoiceList,
+        getInvoicePdf: invoiceList(internalSdk).blocks.getInvoicePdf,
     },
 });

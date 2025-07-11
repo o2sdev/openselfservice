@@ -1,10 +1,10 @@
 import { Invoices } from '@o2s/configs.integrations';
 
+import { Models as FrontendModels } from '@o2s/utils.api-harmonization';
+
 import { Models } from '@o2s/framework/modules';
 
-import { Block } from '../../utils';
-
-export class InvoiceListBlock extends Block.Block {
+export class InvoiceListBlock extends FrontendModels.Block.Block {
     __typename!: 'InvoiceListBlock';
     title?: string;
     pagination?: Models.Pagination.Pagination;

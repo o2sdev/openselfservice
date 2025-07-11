@@ -1,7 +1,6 @@
 import { CMS, Invoices } from '@o2s/configs.integrations';
 
-import { formatDateRelative } from '@o2s/api-harmonization/utils/date';
-import { checkNegativeValue } from '@o2s/api-harmonization/utils/price';
+import { Utils } from '@o2s/utils.api-harmonization';
 
 import { Invoice, InvoiceListBlock } from './invoice-list.model';
 
@@ -48,10 +47,10 @@ export const mapInvoice = (
             displayValue: cms.fieldMapping.paymentStatus?.[invoice.paymentStatus] || invoice.paymentStatus,
             value: invoice.paymentStatus,
         },
-        totalAmountDue: checkNegativeValue(invoice.totalAmountDue),
-        totalNetAmountDue: checkNegativeValue(invoice.totalNetAmountDue),
+        totalAmountDue: Utils.Price.checkNegativeValue(invoice.totalAmountDue),
+        totalNetAmountDue: Utils.Price.checkNegativeValue(invoice.totalNetAmountDue),
         paymentDueDate: {
-            displayValue: formatDateRelative(
+            displayValue: Utils.Date.formatDateRelative(
                 invoice.paymentDueDate,
                 locale,
                 cms.labels.today,

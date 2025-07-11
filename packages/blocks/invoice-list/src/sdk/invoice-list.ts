@@ -1,23 +1,23 @@
-import { Blocks, Headers } from '@o2s/api-harmonization';
+import { Model, Request, URL } from "../api-harmonization/invoice-list.client";
 
-import { Sdk } from '@o2s/framework/sdk';
+import { Sdk } from "@o2s/framework/sdk";
+import { Utils } from "@o2s/utils.frontend";
+import { Models } from "@o2s/utils.api-harmonization";
 
-import { getApiHeaders } from '../../utils/api';
-
-const API_URL = Blocks.InvoiceList.URL;
+const API_URL = URL;
 
 export const invoiceList = (sdk: Sdk) => ({
     blocks: {
         getInvoiceList: (
-            query: Blocks.InvoiceList.Request.GetInvoiceListBlockQuery,
-            headers: Headers.AppHeaders,
+            query: Request.GetInvoiceListBlockQuery,
+            headers: Models.Headers.AppHeaders,
             authorization?: string,
-        ): Promise<Blocks.InvoiceList.Model.InvoiceListBlock> =>
+        ): Promise<Model.InvoiceListBlock> =>
             sdk.makeRequest({
-                method: 'get',
+                method: "get",
                 url: `${API_URL}`,
                 headers: {
-                    ...getApiHeaders(),
+                    ...Utils.Headers.getApiHeaders(),
                     ...headers,
                     ...(authorization
                         ? {
@@ -27,22 +27,24 @@ export const invoiceList = (sdk: Sdk) => ({
                 },
                 params: query,
             }),
-
-        getInvoicePdf: (id: string, headers: Headers.AppHeaders, authorization?: string): Promise<Blob> =>
+        getInvoicePdf: (
+            id: string,
+            headers: Models.Headers.AppHeaders,
+            authorization?: string,
+        ): Promise<Blob> =>
             sdk.makeRequest({
-                method: 'get',
+                method: "get",
                 url: `${API_URL}/${id}/pdf`,
-                responseType: 'blob',
                 headers: {
-                    ...getApiHeaders(),
+                    ...Utils.Headers.getApiHeaders(),
                     ...headers,
                     ...(authorization
                         ? {
                               Authorization: `Bearer ${authorization}`,
                           }
                         : {}),
-                    Accept: 'application/pdf',
                 },
+                responseType: "blob",
             }),
     },
 });

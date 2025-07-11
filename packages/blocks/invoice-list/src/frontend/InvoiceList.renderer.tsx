@@ -4,20 +4,11 @@ import React, { Suspense } from 'react';
 import { Container } from '@o2s/ui/components/Container';
 import { Loading } from '@o2s/ui/components/Loading';
 
-import { TicketDetails } from './TicketDetails.server';
+import { InvoiceListServer } from './InvoiceList.server';
+import { InvoiceListRendererProps } from './InvoiceList.types';
 
-export interface TicketDetailsRendererProps {
-    slug: string[];
-    id: string;
-    accessToken?: string;
-}
-
-export const TicketDetailsRenderer: React.FC<TicketDetailsRendererProps> = ({ slug, id, accessToken }) => {
+export const InvoiceListRenderer: React.FC<InvoiceListRendererProps> = ({ id, accessToken, routing }) => {
     const locale = useLocale();
-
-    if (!slug[1]) {
-        return null;
-    }
 
     return (
         <Suspense
@@ -31,7 +22,7 @@ export const TicketDetailsRenderer: React.FC<TicketDetailsRendererProps> = ({ sl
                 </>
             }
         >
-            <TicketDetails id={id} ticketId={slug[1]} accessToken={accessToken} locale={locale} />
+            <InvoiceListServer id={id} accessToken={accessToken} locale={locale} routing={routing} />
         </Suspense>
     );
 };

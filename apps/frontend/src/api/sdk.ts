@@ -13,7 +13,6 @@ import { articleSearch } from '@/api/blocks/article-search';
 import { category } from '@/api/blocks/category';
 import { categoryList } from '@/api/blocks/category-list';
 import { featuredServiceList } from '@/api/blocks/featured-service-list';
-import { invoiceList } from '@/api/blocks/invoice-list';
 import { notificationDetails } from '@/api/blocks/notification-details';
 import { notificationList } from '@/api/blocks/notification-list';
 import { orderDetails } from '@/api/blocks/order-details';
@@ -24,7 +23,6 @@ import { quickLinks } from '@/api/blocks/quick-links';
 import { serviceDetails } from '@/api/blocks/service-details';
 import { serviceList } from '@/api/blocks/services-list';
 import { surveyJSBlock } from '@/api/blocks/surveyjs';
-import { ticketDetails } from '@/api/blocks/ticket-details';
 import { ticketRecent } from '@/api/blocks/ticket-recent';
 import { userAccount } from '@/api/blocks/user-account';
 // BLOCK IMPORT
@@ -55,12 +53,9 @@ export const sdk = extendSdk(internalSdk, {
     },
     blocks: {
         getTicketRecent: ticketRecent(internalSdk).blocks.getTicketRecent,
-        getTicketDetails: ticketDetails(internalSdk).blocks.getTicketDetails,
         getNotificationList: notificationList(internalSdk).blocks.getNotificationList,
         getNotificationDetails: notificationDetails(internalSdk).blocks.getNotificationDetails,
         markNotificationAs: notificationDetails(internalSdk).blocks.markNotificationAs,
-        getInvoiceList: invoiceList(internalSdk).blocks.getInvoiceList,
-        getInvoicePdf: invoiceList(internalSdk).blocks.getInvoicePdf,
         getPaymentsSummary: paymentsSummary(internalSdk).blocks.getPaymentsSummary,
         getPaymentsHistory: paymentsHistory(internalSdk).blocks.getPaymentsHistory,
         getServiceList: serviceList(internalSdk).blocks.getServiceList,

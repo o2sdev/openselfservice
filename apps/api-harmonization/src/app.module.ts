@@ -24,8 +24,9 @@ import {
 } from '@o2s/framework/modules';
 
 import * as Faq from '@o2s/blocks.faq/api-harmonization';
-import * as TicketList from '@o2s/blocks.ticket-list/api-harmonization';
+import * as InvoiceList from '@o2s/blocks.invoice-list/api-harmonization';
 import * as TicketDetails from '@o2s/blocks.ticket-details/api-harmonization';
+import * as TicketList from '@o2s/blocks.ticket-list/api-harmonization';
 
 import { configuration } from '@o2s/api-harmonization/config/configuration';
 
@@ -35,7 +36,6 @@ import { ArticleBlockModule } from '@o2s/api-harmonization/blocks/article/articl
 import { CategoryListBlockModule } from '@o2s/api-harmonization/blocks/category-list/category-list.module';
 import { CategoryBlockModule } from '@o2s/api-harmonization/blocks/category/category.module';
 import { FeaturedServiceListBlockModule } from '@o2s/api-harmonization/blocks/featured-service-list/featured-service-list.module';
-import { InvoiceListBlockModule } from '@o2s/api-harmonization/blocks/invoice-list/invoice-list.module';
 import { NotificationDetailsBlockModule } from '@o2s/api-harmonization/blocks/notification-details/notification-details.module';
 import { NotificationListBlockModule } from '@o2s/api-harmonization/blocks/notification-list/notification-list.module';
 import { OrderDetailsBlockModule } from '@o2s/api-harmonization/blocks/order-details/order-details.module';
@@ -114,7 +114,7 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
         NotificationListBlockModule.register(AppConfig),
         NotificationDetailsBlockModule.register(AppConfig),
         Faq.Module.register(AppConfig),
-        InvoiceListBlockModule.register(AppConfig),
+        InvoiceList.Module.register(AppConfig),
         PaymentsSummaryBlockModule.register(AppConfig),
         PaymentsHistoryBlockModule.register(AppConfig),
         UserAccountBlockModule.register(AppConfig),

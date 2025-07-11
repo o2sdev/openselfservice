@@ -9,7 +9,7 @@ export const TicketDetailsDynamic = dynamic(() =>
     import('./TicketDetails.client').then((module) => module.TicketDetailsPure),
 );
 
-export const TicketDetails: React.FC<TicketDetailsProps> = async ({ id, ticketId, accessToken, locale }) => {
+export const TicketDetails: React.FC<TicketDetailsProps> = async ({ id, ticketId, accessToken, locale, routing }) => {
     try {
         const data = await sdk.blocks.getTicketDetails(
             {
@@ -22,7 +22,16 @@ export const TicketDetails: React.FC<TicketDetailsProps> = async ({ id, ticketId
             accessToken,
         );
 
-        return <TicketDetailsDynamic {...data} id={id} ticketId={ticketId} accessToken={accessToken} locale={locale} />;
+        return (
+            <TicketDetailsDynamic
+                {...data}
+                id={id}
+                ticketId={ticketId}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+            />
+        );
     } catch (_error) {
         return null;
     }

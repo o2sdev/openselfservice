@@ -4,9 +4,9 @@ import React, { Suspense } from 'react';
 import { Loading } from '@o2s/ui/components/Loading';
 
 import { TicketListServer } from './TicketList.server';
-import { TicketListProps } from './TicketList.types';
+import { TicketListRendererProps } from './TicketList.types';
 
-export const TicketListRenderer: React.FC<TicketListProps> = ({ id, accessToken, routing }) => {
+export const TicketListRenderer: React.FC<TicketListRendererProps> = ({ id, accessToken, routing }) => {
     const locale = useLocale();
 
     return (

@@ -1,0 +1,19 @@
+import { DynamicModule, Module } from '@nestjs/common';
+import { CMS, Invoices } from '@o2s/configs.integrations';
+
+import { ApiConfig } from '@o2s/framework/modules';
+
+import { InvoiceListController } from './invoice-list.controller';
+import { InvoiceListService } from './invoice-list.service';
+
+@Module({})
+export class InvoiceListBlockModule {
+    static register(_config: ApiConfig): DynamicModule {
+        return {
+            module: InvoiceListBlockModule,
+            providers: [InvoiceListService, CMS.Service, Invoices.Service],
+            controllers: [InvoiceListController],
+            exports: [InvoiceListService],
+        };
+    }
+}
