@@ -3,6 +3,7 @@
     "version": "0.0.1",
     "private": true,
     "license": "MIT",
+    "description": "A block for displaying and managing user cases and tickets.",
     "exports": {
         "./api-harmonization": "./dist/api-harmonization/api-harmonization/index.js",
         "./frontend": "./dist/frontend/frontend/index.js",
