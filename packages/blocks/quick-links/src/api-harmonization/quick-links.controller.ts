@@ -1,10 +1,9 @@
 import { Controller, Get, Headers, Query, UseInterceptors } from '@nestjs/common';
 
+import { Models } from '@o2s/utils.api-harmonization';
 import { LoggerService } from '@o2s/utils.logger';
 
 import { Auth } from '@o2s/framework/modules';
-
-import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
 
 import { URL } from './';
 import { GetQuickLinksBlockQuery } from './quick-links.request';
@@ -17,7 +16,7 @@ export class QuickLinksController {
 
     @Get()
     @Auth.Decorators.Roles({ roles: [] })
-    getQuickLinksBlock(@Headers() headers: AppHeaders, @Query() query: GetQuickLinksBlockQuery) {
+    getQuickLinksBlock(@Headers() headers: Models.Headers.AppHeaders, @Query() query: GetQuickLinksBlockQuery) {
         return this.service.getQuickLinksBlock(query, headers);
     }
 }

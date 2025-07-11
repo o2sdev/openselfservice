@@ -1,6 +1,7 @@
 import { Modules } from '@o2s/api-harmonization';
 import * as Faq from '@o2s/blocks.faq/frontend';
 import * as InvoiceList from '@o2s/blocks.invoice-list/frontend';
+import * as QuickLinks from '@o2s/blocks.quick-links/frontend';
 import * as TicketDetails from '@o2s/blocks.ticket-details/frontend';
 import * as TicketList from '@o2s/blocks.ticket-list/frontend';
 import { getLocale } from 'next-intl/server';
@@ -24,7 +25,6 @@ import { OrderListRenderer } from '@/blocks/OrderList/OrderList.renderer';
 import { OrdersSummaryRenderer } from '@/blocks/OrdersSummary/OrdersSummary.renderer';
 import { PaymentsHistoryRenderer } from '@/blocks/PaymentsHistory/PaymentsHistory.renderer';
 import { PaymentsSummaryRenderer } from '@/blocks/PaymentsSummary/PaymentsSummary.renderer';
-import { QuickLinksRenderer } from '@/blocks/QuickLinks/QuickLinks.renderer';
 import { ServiceDetailsRenderer } from '@/blocks/ServiceDetails/ServiceDetails.renderer';
 import { ServiceListRenderer } from '@/blocks/ServiceList/ServiceList.renderer';
 import { SurveyJsRenderer } from '@/blocks/SurveyJs/SurveyJs.renderer';
@@ -107,7 +107,16 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: str
             case 'OrderDetailsBlock':
                 return <OrderDetailsRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
             case 'QuickLinksBlock':
-                return <QuickLinksRenderer key={block.id} slug={slug} id={block.id} accessToken={accessToken} />;
+                return (
+                    <QuickLinks.Renderer
+                        key={block.id}
+                        id={block.id}
+                        slug={slug}
+                        locale={locale}
+                        accessToken={accessToken}
+                        routing={routing}
+                    />
+                );
             case 'CategoryListBlock':
                 return <CategoryListRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
             case 'ArticleListBlock':

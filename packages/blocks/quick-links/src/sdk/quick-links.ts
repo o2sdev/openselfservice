@@ -1,23 +1,23 @@
-import { Blocks, Headers } from '@o2s/api-harmonization';
+import { Model, Request, URL } from "../api-harmonization/quick-links.client";
 
-import { Sdk } from '@o2s/framework/sdk';
+import { Sdk } from "@o2s/framework/sdk";
+import { Utils } from "@o2s/utils.frontend";
+import { Models } from "@o2s/utils.api-harmonization";
 
-import { getApiHeaders } from '../../utils/api';
-
-const API_URL = Blocks.QuickLinks.URL;
+const API_URL = URL;
 
 export const quickLinks = (sdk: Sdk) => ({
     blocks: {
         getQuickLinks: (
-            query: Blocks.QuickLinks.Request.GetQuickLinksBlockQuery,
-            headers: Headers.AppHeaders,
+            query: Request.GetQuickLinksBlockQuery,
+            headers: Models.Headers.AppHeaders,
             authorization?: string,
-        ): Promise<Blocks.QuickLinks.Model.QuickLinksBlock> =>
+        ): Promise<Model.QuickLinksBlock> =>
             sdk.makeRequest({
-                method: 'get',
+                method: "get",
                 url: `${API_URL}`,
                 headers: {
-                    ...getApiHeaders(),
+                    ...Utils.Headers.getApiHeaders(),
                     ...headers,
                     ...(authorization
                         ? {

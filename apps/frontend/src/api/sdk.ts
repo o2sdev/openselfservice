@@ -19,7 +19,6 @@ import { orderDetails } from '@/api/blocks/order-details';
 import { orderList } from '@/api/blocks/order-list';
 import { paymentsHistory } from '@/api/blocks/payments-history';
 import { paymentsSummary } from '@/api/blocks/payments-summary';
-import { quickLinks } from '@/api/blocks/quick-links';
 import { serviceDetails } from '@/api/blocks/service-details';
 import { serviceList } from '@/api/blocks/services-list';
 import { surveyJSBlock } from '@/api/blocks/surveyjs';
@@ -66,7 +65,6 @@ export const sdk = extendSdk(internalSdk, {
         getOrdersSummary: ordersSummary(internalSdk).blocks.getOrdersSummary,
         getOrderDetails: orderDetails(internalSdk).blocks.getOrderDetails,
         getOrderPdf: orderDetails(internalSdk).blocks.getOrderPdf,
-        getQuickLinks: quickLinks(internalSdk).blocks.getQuickLinks,
         getCategoryList: categoryList(internalSdk).blocks.getCategoryList,
         getArticleList: articleList(internalSdk).blocks.getArticleList,
         getCategory: category(internalSdk).blocks.getCategory,
