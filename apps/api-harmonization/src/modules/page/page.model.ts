@@ -2,6 +2,7 @@ import { CMS, Models } from '@o2s/framework/modules';
 
 import * as Faq from '@o2s/blocks.faq/api-harmonization';
 import * as TicketList from '@o2s/blocks.ticket-list/api-harmonization';
+import * as TicketDetails from '@o2s/blocks.ticket-details/api-harmonization';
 
 import {
     Article,
@@ -23,7 +24,6 @@ import {
     ServiceDetails,
     ServiceList,
     Surveyjs,
-    TicketDetails,
     TicketRecent,
     UserAccount,
 } from '@o2s/api-harmonization/blocks';

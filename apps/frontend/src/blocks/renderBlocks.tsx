@@ -1,6 +1,7 @@
 import { Modules } from '@o2s/api-harmonization';
 import * as Faq from '@o2s/blocks.faq/frontend';
 import * as TicketList from '@o2s/blocks.ticket-list/frontend';
+import * as TicketDetails from '@o2s/blocks.ticket-details/frontend';
 import { getLocale } from 'next-intl/server';
 import React from 'react';
 
@@ -29,7 +30,6 @@ import { QuickLinksRenderer } from '@/blocks/QuickLinks/QuickLinks.renderer';
 import { ServiceDetailsRenderer } from '@/blocks/ServiceDetails/ServiceDetails.renderer';
 import { ServiceListRenderer } from '@/blocks/ServiceList/ServiceList.renderer';
 import { SurveyJsRenderer } from '@/blocks/SurveyJs/SurveyJs.renderer';
-import { TicketDetailsRenderer } from '@/blocks/TicketDetails/TicketDetails.renderer';
 import { TicketRecentRenderer } from '@/blocks/TicketRecent/TicketRecent.renderer';
 import { UserAccountRenderer } from '@/blocks/UserAccount/UserAccount.renderer';
 
@@ -51,7 +51,7 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: str
             case 'TicketRecentBlock':
                 return <TicketRecentRenderer key={block.id} id={block.id} accessToken={accessToken} />;
             case 'TicketDetailsBlock':
-                return <TicketDetailsRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
+                return <TicketDetails.Renderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
             case 'NotificationListBlock':
                 return <NotificationListRenderer key={block.id} id={block.id} accessToken={accessToken} />;
             case 'NotificationDetailsBlock':
