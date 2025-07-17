@@ -3,6 +3,8 @@ export class FormField {
     name!: string;
     label!: string;
     placeholder?: string;
+    description?: string;
+    caption?: string;
     errorMessages?: ErrorMessage[];
 }
 
