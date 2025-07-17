@@ -1,5 +1,11 @@
 # @o2s/framework
 
+## 1.9.0
+
+### Minor Changes
+
+- e81621c: added `PROSPECT` role for freshly-created users
+
 ## 1.8.0
 
 ### Minor Changes
