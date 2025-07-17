@@ -1,5 +1,16 @@
 # @o2s/integrations.mocked
 
+## 1.9.0
+
+### Minor Changes
+
+- e81621c: added `PROSPECT` role for freshly-created users
+
+### Patch Changes
+
+- Updated dependencies [e81621c]
+    - @o2s/framework@1.9.0
+
 ## 1.8.0
 
 ### Minor Changes
