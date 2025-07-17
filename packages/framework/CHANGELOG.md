@@ -1,5 +1,11 @@
 # @o2s/framework
 
+## 1.9.1
+
+### Patch Changes
+
+- db8c779: extended `FormField` model with optional description and caption
+
 ## 1.9.0
 
 ### Minor Changes
