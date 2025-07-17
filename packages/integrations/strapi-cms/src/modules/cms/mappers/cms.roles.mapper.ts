@@ -7,6 +7,8 @@ export const mapRoles = (data?: RolesFragment): Auth.Constants.Roles[] => {
 
     return (data.roles as string[]).reduce<Auth.Constants.Roles[]>((prev, role) => {
         switch (role) {
+            case 'prospect':
+                return [...prev, Auth.Constants.Roles.PROSPECT];
             case 'user':
                 return [...prev, Auth.Constants.Roles.USER];
             case 'admin':
