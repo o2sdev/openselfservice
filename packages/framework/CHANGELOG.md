@@ -1,5 +1,11 @@
 # @o2s/framework
 
+## 1.9.2
+
+### Patch Changes
+
+- 4c5a8a4: extended `FormField` model into input/select/switch subtypes for future use
+
 ## 1.9.1
 
 ### Patch Changes

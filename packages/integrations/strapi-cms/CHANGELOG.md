@@ -1,5 +1,13 @@
 # @o2s/integrations.strapi-cms
 
+## 2.6.1
+
+### Patch Changes
+
+- 4c5a8a4: extended `FormField` model into input/select/switch subtypes for future use
+- Updated dependencies [4c5a8a4]
+    - @o2s/framework@1.9.2
+
 ## 2.6.0
 
 ### Minor Changes

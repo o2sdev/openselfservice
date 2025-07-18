@@ -1,5 +1,13 @@
 # @o2s/integrations.mocked
 
+## 1.9.1
+
+### Patch Changes
+
+- 4c5a8a4: extended `FormField` model into input/select/switch subtypes for future use
+- Updated dependencies [4c5a8a4]
+    - @o2s/framework@1.9.2
+
 ## 1.9.0
 
 ### Minor Changes
