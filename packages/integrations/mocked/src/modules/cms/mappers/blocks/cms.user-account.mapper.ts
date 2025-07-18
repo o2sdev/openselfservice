@@ -7,6 +7,7 @@ const MOCK_USER_ACCOUNT_BLOCK_EN: CMS.Model.UserAccountBlock.UserAccountBlock = 
     basicInformationDescription: 'Update your personal information to keep your account details current and accurate.',
     fields: [
         {
+            __typename: 'Input',
             id: 'first-name-1',
             name: 'firstName',
             label: 'First Name',
@@ -33,6 +34,7 @@ const MOCK_USER_ACCOUNT_BLOCK_EN: CMS.Model.UserAccountBlock.UserAccountBlock = 
             ],
         },
         {
+            __typename: 'Input',
             id: 'last-name-1',
             name: 'lastName',
             label: 'Last Name',
@@ -47,6 +49,7 @@ const MOCK_USER_ACCOUNT_BLOCK_EN: CMS.Model.UserAccountBlock.UserAccountBlock = 
             ],
         },
         {
+            __typename: 'Input',
             id: 'email-1',
             name: 'email',
             label: 'Email',
@@ -78,6 +81,7 @@ const MOCK_USER_ACCOUNT_BLOCK_PL: CMS.Model.UserAccountBlock.UserAccountBlock = 
         'Zaktualizuj swoje dane osobowe, aby utrzymać aktualne i dokładne informacje o koncie.',
     fields: [
         {
+            __typename: 'Input',
             id: 'first-name-1',
             name: 'firstName',
             label: 'Imię',
@@ -104,6 +108,7 @@ const MOCK_USER_ACCOUNT_BLOCK_PL: CMS.Model.UserAccountBlock.UserAccountBlock = 
             ],
         },
         {
+            __typename: 'Input',
             id: 'last-name-1',
             name: 'lastName',
             label: 'Nazwisko',
@@ -118,6 +123,7 @@ const MOCK_USER_ACCOUNT_BLOCK_PL: CMS.Model.UserAccountBlock.UserAccountBlock = 
             ],
         },
         {
+            __typename: 'Input',
             id: 'email-1',
             name: 'email',
             label: 'Email',
@@ -149,6 +155,7 @@ const MOCK_USER_ACCOUNT_BLOCK_DE: CMS.Model.UserAccountBlock.UserAccountBlock = 
         'Aktualisieren Sie Ihre persönlichen Daten, um Ihre Kontoinformationen aktuell und genau zu halten.',
     fields: [
         {
+            __typename: 'Input',
             id: 'first-name-1',
             name: 'firstName',
             label: 'Vorname',
@@ -175,6 +182,7 @@ const MOCK_USER_ACCOUNT_BLOCK_DE: CMS.Model.UserAccountBlock.UserAccountBlock = 
             ],
         },
         {
+            __typename: 'Input',
             id: 'last-name-1',
             name: 'lastName',
             label: 'Nachname',
@@ -189,6 +197,7 @@ const MOCK_USER_ACCOUNT_BLOCK_DE: CMS.Model.UserAccountBlock.UserAccountBlock = 
             ],
         },
         {
+            __typename: 'Input',
             id: 'email-1',
             name: 'email',
             label: 'E-Mail',
