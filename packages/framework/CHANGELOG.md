@@ -1,5 +1,11 @@
 # @o2s/framework
 
+## 1.9.3
+
+### Patch Changes
+
+- e240813: added a model for pattern/regex field validation
+
 ## 1.9.2
 
 ### Patch Changes
