@@ -36,3 +36,9 @@ export class ErrorMessage {
     type!: string;
     description!: string;
 }
+
+export class PatternValidation {
+    type!: string;
+    label!: string;
+    pattern!: string;
+}
