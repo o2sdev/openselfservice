@@ -12,7 +12,7 @@ export const providers: Provider[] = [
             return {
                 id: profile.id.toString(),
                 email: profile.email,
-                role: 'selfservice_user' as const,
+                role: 'selfservice_org_user' as const,
                 name: profile.name ?? profile.login,
             };
         },
