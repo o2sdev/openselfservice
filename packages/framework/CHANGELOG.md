@@ -1,5 +1,46 @@
 # @o2s/framework
 
+## 1.9.3
+
+### Patch Changes
+
+- e240813: added a model for pattern/regex field validation
+
+## 1.9.2
+
+### Patch Changes
+
+- 4c5a8a4: extended `FormField` model into input/select/switch subtypes for future use
+
+## 1.9.1
+
+### Patch Changes
+
+- db8c779: extended `FormField` model with optional description and caption
+
+## 1.9.0
+
+### Minor Changes
+
+- e81621c: added `PROSPECT` role for freshly-created users
+
+## 1.8.0
+
+### Minor Changes
+
+- fb09383: Organizations module:
+
+    - Extending the Organization model with taxId
+    - Adding taxId to OrganizationsListQuery and adding CheckMembershipParams class for membership validation
+    - Adding GET /membership/:orgId/:userId endpoint to check user membership and implementing checkMembership method in OrganizationController
+    - Adding abstract checkMembership method to OrganizationService to support membership verification operations with boolean return type.
+
+    Users module:
+
+    - Extending the User model with username and adding an export of User type
+    - Adding GetUsersQuery class to support optional username filtering
+    - Adding getUsers method to UserService
+
 ## 1.7.0
 
 ### Minor Changes

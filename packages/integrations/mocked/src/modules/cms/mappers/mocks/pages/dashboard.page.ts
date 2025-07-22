@@ -17,7 +17,7 @@ export const PAGE_DASHBOARD_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
+    permissions: [Auth.Constants.Roles.PROSPECT, Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
     hasOwnTitle: false,
     template: {
         __typename: 'TwoColumnTemplate',
@@ -72,7 +72,7 @@ export const PAGE_DASHBOARD_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
+    permissions: [Auth.Constants.Roles.PROSPECT, Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
     hasOwnTitle: false,
     template: {
         __typename: 'TwoColumnTemplate',
@@ -127,7 +127,7 @@ export const PAGE_DASHBOARD_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
+    permissions: [Auth.Constants.Roles.PROSPECT, Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
     hasOwnTitle: false,
     template: {
         __typename: 'TwoColumnTemplate',

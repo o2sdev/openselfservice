@@ -15,4 +15,8 @@ export abstract class OrganizationService {
         params: Organizations.Request.GetOrganizationParams,
         authorization?: string,
     ): Observable<Organizations.Model.Organization | undefined>;
+    abstract checkMembership(
+        params: Organizations.Request.CheckMembershipParams,
+        authorization?: string,
+    ): Observable<boolean>;
 }

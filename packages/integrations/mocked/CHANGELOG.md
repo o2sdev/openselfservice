@@ -1,5 +1,45 @@
 # @o2s/integrations.mocked
 
+## 1.9.1
+
+### Patch Changes
+
+- 4c5a8a4: extended `FormField` model into input/select/switch subtypes for future use
+- Updated dependencies [4c5a8a4]
+    - @o2s/framework@1.9.2
+
+## 1.9.0
+
+### Minor Changes
+
+- e81621c: added `PROSPECT` role for freshly-created users
+
+### Patch Changes
+
+- Updated dependencies [e81621c]
+    - @o2s/framework@1.9.0
+
+## 1.8.0
+
+### Minor Changes
+
+- fb09383: Organizations module:
+
+    - Adding taxId to organization's mock data and adding filtering by taxId in mapOrganizations method.
+    - Adding checkMembership mapper function that validates membership by checking if both organization and user exist in mock data.
+    - Implement checkMembership method in mocked organizations service using the mapper function with simulated response delay.
+
+    Users module:
+
+    - Adding username to users mock data, exporting MOCK_USERS and adding mapUsers mapper function that filter existing users by username
+    - Adding mapUsers function to users mapper with GetUsersQuery support that implements username-based filtering for mock user data
+    - Add abstract getUsers method to UserService to support filtered user list retrieval with pagination and authorization support.
+
+### Patch Changes
+
+- Updated dependencies [fb09383]
+    - @o2s/framework@1.8.0
+
 ## 1.7.0
 
 ### Minor Changes

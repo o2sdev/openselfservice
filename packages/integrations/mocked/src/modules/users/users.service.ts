@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { Models, Users } from '@o2s/framework/modules';
 
 import { mapCustomer, mapCustomers } from './customers.mapper';
-import { mapUser } from './users.mapper';
+import { mapUser, mapUsers } from './users.mapper';
 import { responseDelay } from '@/utils/delay';
 
 @Injectable()
@@ -15,6 +15,10 @@ export class UserService implements Users.Service {
 
     getUser(options: Users.Request.GetUserParams): Observable<Users.Model.User | undefined> {
         return of(mapUser(options.id)).pipe(responseDelay());
+    }
+
+    getUsers(options: Users.Request.GetUsersQuery): Observable<Users.Model.Users> {
+        return of(mapUsers(options)).pipe(responseDelay());
     }
 
     updateCurrentUser(_body: Users.Request.PostUserBody): Observable<Users.Model.User | undefined> {

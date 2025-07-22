@@ -2,6 +2,8 @@ import { CMS } from '@o2s/framework/modules';
 
 import { GetLoginPageQuery } from '@/generated/strapi';
 
+import { mapFormField } from './cms.form-field.mapper';
+
 export const mapLoginPage = (data: GetLoginPageQuery, baseURL?: string): CMS.Model.LoginPage.LoginPage => {
     const loginPage = data.loginPage!;
     const labels = data.configurableTexts!;
@@ -22,30 +24,8 @@ export const mapLoginPage = (data: GetLoginPageQuery, baseURL?: string): CMS.Mod
         subtitle: loginPage.subtitle,
         title: loginPage.title,
         providers,
-        username: {
-            id: loginPage.username.id,
-            name: loginPage.username.name,
-            label: loginPage.username.label,
-            placeholder: loginPage.username.placeholder,
-            errorMessages: loginPage.username.errorMessages?.map((errorMessage) => ({
-                id: errorMessage.id,
-                description: errorMessage.description,
-                name: errorMessage.name,
-                type: errorMessage.type,
-            })),
-        },
-        password: {
-            id: loginPage.password.id,
-            name: loginPage.password.name,
-            label: loginPage.password.label,
-            placeholder: loginPage.password.placeholder,
-            errorMessages: loginPage.password.errorMessages?.map((errorMessage) => ({
-                id: errorMessage.id,
-                description: errorMessage.description,
-                name: errorMessage.name,
-                type: errorMessage.type,
-            })),
-        },
+        username: mapFormField(loginPage.username),
+        password: mapFormField(loginPage.password),
         labels: labels.actions,
         image: loginPage.image
             ? {

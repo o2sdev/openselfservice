@@ -17,7 +17,9 @@ export class UserAccountController {
     constructor(protected readonly service: UserAccountService) {}
 
     @Get()
-    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
+    @Auth.Decorators.Roles({
+        roles: [Auth.Constants.Roles.PROSPECT, Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
+    })
     getUserAccountBlock(@Headers() headers: AppHeaders, @Query() query: GetUserAccountBlockQuery) {
         return this.service.getUserAccountBlock(query, headers).pipe(delay(500));
     }

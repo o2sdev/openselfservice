@@ -1,5 +1,30 @@
 # @o2s/integrations.strapi-cms
 
+## 2.6.1
+
+### Patch Changes
+
+- 4c5a8a4: extended `FormField` model into input/select/switch subtypes for future use
+- Updated dependencies [4c5a8a4]
+    - @o2s/framework@1.9.2
+
+## 2.6.0
+
+### Minor Changes
+
+- e81621c: added `PROSPECT` role for freshly-created users
+
+### Patch Changes
+
+- Updated dependencies [e81621c]
+    - @o2s/framework@1.9.0
+
+## 2.5.1
+
+### Patch Changes
+
+- 916fcaa: improved prettier rules and reformatted the code
+
 ## 2.5.0
 
 ### Minor Changes
