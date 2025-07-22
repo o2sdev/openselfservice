@@ -14,7 +14,7 @@ const MOCK_SURVEY_2: CMS.Model.Survey.Survey = {
     surveyId: '3897de9c-279b-4c50-b359-09f5c73a3c49',
     surveyType: 'survey',
     submitDestination: ['surveyjs'],
-    requiredRoles: ['selfservice_user'],
+    requiredRoles: ['selfservice_org_user'],
     postId: 'e0f1b26b-a434-44ab-9608-c49dcd0658ec',
 };
 
@@ -23,7 +23,7 @@ const MOCK_SURVEY_3: CMS.Model.Survey.Survey = {
     surveyId: 'd93ccc83-4aff-418b-9e9b-c9c3447908cf',
     surveyType: 'survey',
     submitDestination: ['surveyjs'],
-    requiredRoles: ['selfservice_user'],
+    requiredRoles: ['selfservice_org_user'],
     postId: '17931fe3-2492-408c-8f91-8fc062606604',
 };
 

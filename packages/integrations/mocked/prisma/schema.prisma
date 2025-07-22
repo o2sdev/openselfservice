@@ -51,5 +51,7 @@ model Session {
 
 enum Role {
     selfservice_user
-    selfservice_admin
+    selfservice_prospect
+    selfservice_org_user
+    selfservice_org_admin
 }

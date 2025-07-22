@@ -12,7 +12,7 @@ export const providers: Provider[] = [
             return {
                 id: profile.id.toString(),
                 email: profile.email,
-                role: 'selfservice_user' as const,
+                role: process.env.AUTH_DEFAULT_USER_ROLE,
                 name: profile.name ?? profile.login,
             };
         },

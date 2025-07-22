@@ -17,7 +17,7 @@ export class UserAccountController {
 
     @Get()
     @Auth.Decorators.Roles({
-        roles: [Auth.Constants.Roles.PROSPECT, Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
+        roles: [Auth.Constants.Roles.PROSPECT, Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
     })
     getUserAccountBlock(@Headers() headers: AppHeaders, @Query() query: GetUserAccountBlockQuery) {
         return this.service.getUserAccountBlock(query, headers).pipe(delay(500));
