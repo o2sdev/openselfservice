@@ -1,5 +1,11 @@
 # @o2s/framework
 
+## 1.10.0
+
+### Minor Changes
+
+- 6e5f193: feat: update organization role names
+
 ## 1.9.3
 
 ### Patch Changes
