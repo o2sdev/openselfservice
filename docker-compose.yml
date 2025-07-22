@@ -36,7 +36,7 @@ services:
             AUTH_GITHUB_SECRET: GITHUB_ID
 
             AUTH_DATABASE_URL: file:./dev.db
-            AUTH_DEFAULT_USER_ROLE: selfservice_org_user
+            AUTH_DEFAULT_USER_ROLE: selfservice_user
 
     api-harmonization:
         container_name: api-harmonization

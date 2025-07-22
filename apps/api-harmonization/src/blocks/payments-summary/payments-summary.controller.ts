@@ -15,7 +15,7 @@ export class PaymentsSummaryController {
     constructor(protected readonly service: PaymentsSummaryService) {}
 
     @Get()
-    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
+    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN] })
     getPaymentsSummaryBlock(@Headers() headers: AppHeaders, @Query() query: GetPaymentsSummaryBlockQuery) {
         return this.service.getPaymentsSummaryBlock(query, headers);
     }

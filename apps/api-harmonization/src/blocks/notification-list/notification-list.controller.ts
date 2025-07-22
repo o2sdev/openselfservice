@@ -15,7 +15,7 @@ export class NotificationListController {
     constructor(protected readonly service: NotificationListService) {}
 
     @Get()
-    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
+    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN] })
     getNotificationListBlock(@Headers() headers: AppHeaders, @Query() query: GetNotificationListBlockQuery) {
         return this.service.getNotificationListBlock(query, headers);
     }

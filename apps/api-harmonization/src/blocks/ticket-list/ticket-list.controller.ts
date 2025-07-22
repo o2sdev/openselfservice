@@ -15,7 +15,7 @@ export class TicketListController {
     constructor(protected readonly service: TicketListService) {}
 
     @Get()
-    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
+    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN] })
     getTicketListBlock(@Headers() headers: AppHeaders, @Query() query: GetTicketListBlockQuery) {
         return this.service.getTicketListBlock(query, headers);
     }

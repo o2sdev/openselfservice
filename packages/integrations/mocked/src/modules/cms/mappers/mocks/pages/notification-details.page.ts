@@ -17,7 +17,7 @@ export const PAGE_NOTIFICATION_DETAILS_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
+    permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
     hasOwnTitle: true,
     parent: {
         slug: '/notifications',
@@ -61,7 +61,7 @@ export const PAGE_NOTIFICATION_DETAILS_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
+    permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
     hasOwnTitle: true,
     parent: {
         slug: '/benachrichtigungen',
@@ -105,7 +105,7 @@ export const PAGE_NOTIFICATION_DETAILS_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
+    permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
     hasOwnTitle: true,
     parent: {
         slug: '/powiadomienia',

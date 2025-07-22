@@ -17,7 +17,7 @@ export const PAGE_INVOICE_LIST_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
+    permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
     hasOwnTitle: false,
     template: {
         __typename: 'TwoColumnTemplate',
@@ -68,7 +68,7 @@ export const PAGE_INVOICE_LIST_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
+    permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
     hasOwnTitle: false,
     template: {
         __typename: 'TwoColumnTemplate',
@@ -119,7 +119,7 @@ export const PAGE_INVOICE_LIST_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
+    permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
     hasOwnTitle: false,
     template: {
         __typename: 'TwoColumnTemplate',

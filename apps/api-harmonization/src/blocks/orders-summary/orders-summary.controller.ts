@@ -15,7 +15,7 @@ export class OrdersSummaryController {
     constructor(protected readonly service: OrdersSummaryService) {}
 
     @Get()
-    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
+    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN] })
     getOrdersSummaryBlock(@Headers() headers: AppHeaders, @Query() query: GetOrdersSummaryBlockQuery) {
         return this.service.getOrdersSummaryBlock(query, headers);
     }
