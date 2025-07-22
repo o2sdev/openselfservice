@@ -1,5 +1,17 @@
 # @o2s/frontend
 
+## 1.8.0
+
+### Minor Changes
+
+- 6e5f193: feat: update organization role names
+
+### Patch Changes
+
+- Updated dependencies [6e5f193]
+    - @o2s/integrations.mocked@1.10.0
+    - @o2s/framework@1.10.0
+
 ## 1.7.0
 
 ### Minor Changes
