@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-import { sdk } from '@/api/sdk';
+import { sdk } from '../sdk';
 
 import { NotificationDetailsProps } from './NotificationDetails.types';
 
@@ -14,6 +14,7 @@ export const NotificationDetails: React.FC<NotificationDetailsProps> = async ({
     notificationId,
     accessToken,
     locale,
+    routing,
 }) => {
     try {
         const data = await sdk.blocks.getNotificationDetails(
@@ -34,6 +35,7 @@ export const NotificationDetails: React.FC<NotificationDetailsProps> = async ({
                 id={id}
                 accessToken={accessToken}
                 locale={locale}
+                routing={routing}
             />
         );
     } catch (_error) {

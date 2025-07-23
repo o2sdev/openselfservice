@@ -13,7 +13,6 @@ import { articleSearch } from '@/api/blocks/article-search';
 import { category } from '@/api/blocks/category';
 import { categoryList } from '@/api/blocks/category-list';
 import { featuredServiceList } from '@/api/blocks/featured-service-list';
-import { notificationDetails } from '@/api/blocks/notification-details';
 import { orderDetails } from '@/api/blocks/order-details';
 import { orderList } from '@/api/blocks/order-list';
 import { paymentsHistory } from '@/api/blocks/payments-history';
@@ -48,8 +47,6 @@ export const sdk = extendSdk(internalSdk, {
         ...Notifications.extend(internalSdk),
     },
     blocks: {
-        getNotificationDetails: notificationDetails(internalSdk).blocks.getNotificationDetails,
-        markNotificationAs: notificationDetails(internalSdk).blocks.markNotificationAs,
         getPaymentsSummary: paymentsSummary(internalSdk).blocks.getPaymentsSummary,
         getPaymentsHistory: paymentsHistory(internalSdk).blocks.getPaymentsHistory,
         getServiceList: serviceList(internalSdk).blocks.getServiceList,

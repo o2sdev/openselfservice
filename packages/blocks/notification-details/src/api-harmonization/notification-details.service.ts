@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CMS, Notifications } from '@o2s/configs.integrations';
 import { Observable, forkJoin, map } from 'rxjs';
 
-import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
+import { Models } from '@o2s/utils.api-harmonization';
 
 import { mapNotificationDetails } from './notification-details.mapper';
 import { NotificationDetailsBlock } from './notification-details.model';
@@ -22,7 +22,7 @@ export class NotificationDetailsService {
     getNotificationDetailsBlock(
         params: GetNotificationDetailsBlockParams,
         query: GetNotificationDetailsBlockQuery,
-        headers: AppHeaders,
+        headers: Models.Headers.AppHeaders,
     ): Observable<NotificationDetailsBlock> {
         const cms = this.cmsService.getNotificationDetailsBlock({ ...query, locale: headers['x-locale'] });
         const notification = this.notificationService.getNotification({ ...params, locale: headers['x-locale'] });

@@ -2,6 +2,8 @@
 
 import React, { useEffect } from 'react';
 
+import { Mappings } from '@o2s/utils.frontend';
+
 import { Container } from '@o2s/ui/components/Container';
 import { RichText } from '@o2s/ui/components/RichText';
 
@@ -9,9 +11,7 @@ import { Badge } from '@o2s/ui/elements/badge';
 import { Separator } from '@o2s/ui/elements/separator';
 import { Typography } from '@o2s/ui/elements/typography';
 
-import { sdk } from '@/api/sdk';
-
-import { notificationBadgePriorityVariants } from '@/utils/mappings/notification-badge';
+import { sdk } from '../sdk';
 
 import { NotificationDetailsPureProps } from './NotificationDetails.types';
 
@@ -45,7 +45,13 @@ export const NotificationDetailsPure: React.FC<NotificationDetailsPureProps> = (
                         </Typography>
 
                         <div>
-                            <Badge variant={notificationBadgePriorityVariants[notification.priority.value]}>
+                            <Badge
+                                variant={
+                                    Mappings.NotificationBadge.notificationBadgePriorityVariants[
+                                        notification.priority.value
+                                    ]
+                                }
+                            >
                                 {notification.priority.label}
                             </Badge>
                         </div>

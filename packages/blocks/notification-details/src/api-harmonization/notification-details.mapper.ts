@@ -1,6 +1,6 @@
 import { CMS, Notifications } from '@o2s/configs.integrations';
 
-import { formatDateRelative } from '@o2s/api-harmonization/utils/date';
+import { Utils } from '@o2s/utils.api-harmonization';
 
 import { Notification, NotificationDetailsBlock } from './notification-details.model';
 
@@ -55,7 +55,19 @@ export const mapNotification = (
             title: cms.properties['priority'] as string,
             label: cms.fieldMapping.priority?.[notification.priority] || notification.priority,
         },
-        createdAt: formatDateRelative(notification.createdAt, locale, cms.labels.today, cms.labels.yesterday, timezone),
-        updatedAt: formatDateRelative(notification.updatedAt, locale, cms.labels.today, cms.labels.yesterday, timezone),
+        createdAt: Utils.Date.formatDateRelative(
+            notification.createdAt,
+            locale,
+            cms.labels.today,
+            cms.labels.yesterday,
+            timezone,
+        ),
+        updatedAt: Utils.Date.formatDateRelative(
+            notification.updatedAt,
+            locale,
+            cms.labels.today,
+            cms.labels.yesterday,
+            timezone,
+        ),
     };
 };

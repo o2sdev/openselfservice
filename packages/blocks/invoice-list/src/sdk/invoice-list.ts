@@ -1,8 +1,9 @@
-import { Model, Request, URL } from "../api-harmonization/invoice-list.client";
+import { Models } from '@o2s/utils.api-harmonization';
+import { Utils } from '@o2s/utils.frontend';
 
-import { Sdk } from "@o2s/framework/sdk";
-import { Utils } from "@o2s/utils.frontend";
-import { Models } from "@o2s/utils.api-harmonization";
+import { Sdk } from '@o2s/framework/sdk';
+
+import { Model, Request, URL } from '../api-harmonization/invoice-list.client';
 
 const API_URL = URL;
 
@@ -14,7 +15,7 @@ export const invoiceList = (sdk: Sdk) => ({
             authorization?: string,
         ): Promise<Model.InvoiceListBlock> =>
             sdk.makeRequest({
-                method: "get",
+                method: 'get',
                 url: `${API_URL}`,
                 headers: {
                     ...Utils.Headers.getApiHeaders(),
@@ -27,13 +28,9 @@ export const invoiceList = (sdk: Sdk) => ({
                 },
                 params: query,
             }),
-        getInvoicePdf: (
-            id: string,
-            headers: Models.Headers.AppHeaders,
-            authorization?: string,
-        ): Promise<Blob> =>
+        getInvoicePdf: (id: string, headers: Models.Headers.AppHeaders, authorization?: string): Promise<Blob> =>
             sdk.makeRequest({
-                method: "get",
+                method: 'get',
                 url: `${API_URL}/${id}/pdf`,
                 headers: {
                     ...Utils.Headers.getApiHeaders(),
@@ -44,7 +41,7 @@ export const invoiceList = (sdk: Sdk) => ({
                           }
                         : {}),
                 },
-                responseType: "blob",
+                responseType: 'blob',
             }),
     },
 });

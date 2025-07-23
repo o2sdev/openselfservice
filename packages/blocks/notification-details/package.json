@@ -1,14 +1,14 @@
 {
-    "name": "@o2s/blocks.notification-list",
+    "name": "@o2s/blocks.notification-details",
     "version": "0.0.1",
     "private": true,
     "license": "MIT",
-    "description": "A block displaying and managing notifications.",
+    "description": "A block displaying and managing notification details.",
     "exports": {
         "./api-harmonization": "./dist/api-harmonization/api-harmonization/index.js",
         "./frontend": "./dist/frontend/frontend/index.js",
         "./sdk": "./dist/sdk/sdk/index.js",
-        "./client": "./dist/api-harmonization/api-harmonization/notification-list.client.js"
+        "./client": "./dist/api-harmonization/api-harmonization/notification-details.client.js"
     },
     "files": [
         "dist"

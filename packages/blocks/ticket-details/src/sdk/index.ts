@@ -1,17 +1,18 @@
-import { ticketDetails } from "./ticket-details";
 // this unused import is necessary for TypeScript to properly resolve API methods
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Blocks, Headers, Modules } from "@o2s/api-harmonization";
-// this unused import is necessary for TypeScript to properly resolve API methods
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Models } from "@o2s/utils.api-harmonization";
+import { Blocks, Headers, Modules } from '@o2s/api-harmonization';
 
-import { extendSdk, getSdk } from "@o2s/framework/sdk";
+// this unused import is necessary for TypeScript to properly resolve API methods
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { Models } from '@o2s/utils.api-harmonization';
+
+import { extendSdk, getSdk } from '@o2s/framework/sdk';
+
+import { ticketDetails } from './ticket-details';
 
 const API_URL =
-    (typeof window === "undefined"
-        ? process.env.NEXT_PUBLIC_API_URL_INTERNAL
-        : process.env.NEXT_PUBLIC_API_URL) || process.env.NEXT_PUBLIC_API_URL;
+    (typeof window === 'undefined' ? process.env.NEXT_PUBLIC_API_URL_INTERNAL : process.env.NEXT_PUBLIC_API_URL) ||
+    process.env.NEXT_PUBLIC_API_URL;
 
 const internalSdk = getSdk({
     apiUrl: API_URL!,
@@ -20,7 +21,7 @@ const internalSdk = getSdk({
         level: process.env.NEXT_PUBLIC_LOG_LEVEL,
         // @ts-expect-error missing types
         format: process.env.NEXT_PUBLIC_LOG_FORMAT,
-        colorsEnabled: process.env.NEXT_PUBLIC_LOG_COLORS_ENABLED === "true",
+        colorsEnabled: process.env.NEXT_PUBLIC_LOG_COLORS_ENABLED === 'true',
     },
 });
 

@@ -1,6 +1,5 @@
 'use client';
 
-import { Blocks } from '@o2s/api-harmonization';
 import { ArrowRight } from 'lucide-react';
 import { createNavigation } from 'next-intl/navigation';
 import React, { useState, useTransition } from 'react';
@@ -20,6 +19,7 @@ import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
 import { Separator } from '@o2s/ui/elements/separator';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@o2s/ui/elements/table';
 
+import { Model, Request } from '../api-harmonization/notification-list.client';
 import { sdk } from '../sdk';
 
 import { NotificationListPureProps } from './NotificationList.types';
@@ -32,18 +32,18 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({
 }) => {
     const { Link: LinkComponent } = createNavigation(routing);
 
-    const initialFilters: Blocks.NotificationList.Request.GetNotificationListBlockQuery = {
+    const initialFilters: Request.GetNotificationListBlockQuery = {
         id: component.id,
         offset: 0,
         limit: component.pagination?.limit || 5,
     };
 
     const initialData = component.notifications.data;
-    const [data, setData] = useState<Blocks.NotificationList.Model.NotificationListBlock>(component);
+    const [data, setData] = useState<Model.NotificationListBlock>(component);
     const [filters, setFilters] = useState(initialFilters);
     const [isPending, startTransition] = useTransition();
 
-    const handleFilter = (data: Partial<Blocks.NotificationList.Request.GetNotificationListBlockQuery>) => {
+    const handleFilter = (data: Partial<Request.GetNotificationListBlockQuery>) => {
         startTransition(async () => {
             const newFilters = { ...filters, ...data };
             const newData = await sdk.blocks.getNotificationList(newFilters, { 'x-locale': locale }, accessToken);

@@ -1,24 +1,25 @@
-import { Blocks, Headers } from '@o2s/api-harmonization';
+import { Models as ApiModels } from '@o2s/utils.api-harmonization';
+import { Utils } from '@o2s/utils.frontend';
 
 import { Sdk } from '@o2s/framework/sdk';
 
-import { getApiHeaders } from '../../utils/api';
+import { Model, Request, URL } from '../api-harmonization/notification-details.client';
 
-const API_URL = Blocks.NotificationDetails.URL;
+const API_URL = URL;
 
 export const notificationDetails = (sdk: Sdk) => ({
     blocks: {
         getNotificationDetails: (
-            params: Blocks.NotificationDetails.Request.GetNotificationDetailsBlockParams,
-            query: Blocks.NotificationDetails.Request.GetNotificationDetailsBlockQuery,
-            headers: Headers.AppHeaders,
+            params: Request.GetNotificationDetailsBlockParams,
+            query: Request.GetNotificationDetailsBlockQuery,
+            headers: ApiModels.Headers.AppHeaders,
             authorization?: string,
-        ): Promise<Blocks.NotificationDetails.Model.NotificationDetailsBlock> =>
+        ): Promise<Model.NotificationDetailsBlock> =>
             sdk.makeRequest({
                 method: 'get',
                 url: `${API_URL}/${params.id}`,
                 headers: {
-                    ...getApiHeaders(),
+                    ...Utils.Headers.getApiHeaders(),
                     ...headers,
                     ...(authorization
                         ? {
@@ -28,17 +29,16 @@ export const notificationDetails = (sdk: Sdk) => ({
                 },
                 params: query,
             }),
-
         markNotificationAs: (
-            body: Blocks.NotificationDetails.Request.MarkNotificationAsBlockBody,
-            headers: Headers.AppHeaders,
+            body: Request.MarkNotificationAsBlockBody,
+            headers: ApiModels.Headers.AppHeaders,
             authorization?: string,
         ): Promise<void> =>
             sdk.makeRequest({
                 method: 'post',
-                url: API_URL,
+                url: `${API_URL}`,
                 headers: {
-                    ...getApiHeaders(),
+                    ...Utils.Headers.getApiHeaders(),
                     ...headers,
                     ...(authorization
                         ? {

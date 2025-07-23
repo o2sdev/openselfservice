@@ -4,11 +4,11 @@ import { Blocks, Headers, Modules } from '@o2s/api-harmonization';
 
 // this unused import is necessary for TypeScript to properly resolve API methods
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Models } from '@o2s/utils.api-harmonization';
+import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 
 import { extendSdk, getSdk } from '@o2s/framework/sdk';
 
-import { quickLinks } from './quick-links';
+import { notificationDetails } from './notification-details';
 
 const API_URL =
     (typeof window === 'undefined' ? process.env.NEXT_PUBLIC_API_URL_INTERNAL : process.env.NEXT_PUBLIC_API_URL) ||
@@ -27,6 +27,7 @@ const internalSdk = getSdk({
 
 export const sdk = extendSdk(internalSdk, {
     blocks: {
-        getQuickLinks: quickLinks(internalSdk).blocks.getQuickLinks,
+        getNotificationDetails: notificationDetails(internalSdk).blocks.getNotificationDetails,
+        markNotificationAs: notificationDetails(internalSdk).blocks.markNotificationAs,
     },
 });

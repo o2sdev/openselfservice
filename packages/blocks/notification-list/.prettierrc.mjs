@@ -15,6 +15,10 @@ const config = {
             files: "./src/frontend/**/*",
             options: frontendConfig,
         },
+        {
+            files: "./src/sdk/**/*",
+            options: frontendConfig,
+        },
     ],
 };
 

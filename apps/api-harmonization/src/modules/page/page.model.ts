@@ -2,6 +2,7 @@ import { CMS, Models } from '@o2s/framework/modules';
 
 import * as Faq from '@o2s/blocks.faq/api-harmonization';
 import * as BlockInvoiceList from '@o2s/blocks.invoice-list/api-harmonization';
+import * as NotificationDetails from '@o2s/blocks.notification-details/api-harmonization';
 import * as NotificationList from '@o2s/blocks.notification-list/api-harmonization';
 import * as QuickLinks from '@o2s/blocks.quick-links/api-harmonization';
 import * as TicketDetails from '@o2s/blocks.ticket-details/api-harmonization';
@@ -16,7 +17,6 @@ import {
     Category,
     CategoryList,
     FeaturedServiceList,
-    NotificationDetails,
     OrderDetails,
     OrderList,
     OrdersSummary,

@@ -1,6 +1,7 @@
 import { Modules } from '@o2s/api-harmonization';
 import * as Faq from '@o2s/blocks.faq/frontend';
 import * as InvoiceList from '@o2s/blocks.invoice-list/frontend';
+import * as NotificationDetails from '@o2s/blocks.notification-details/frontend';
 import * as NotificationList from '@o2s/blocks.notification-list/frontend';
 import * as QuickLinks from '@o2s/blocks.quick-links/frontend';
 import * as TicketDetails from '@o2s/blocks.ticket-details/frontend';
@@ -23,7 +24,6 @@ import { ArticleSearchRenderer } from '@/blocks/ArticleSearch/ArticleSearch.rend
 import { CategoryRenderer } from '@/blocks/Category/Category.renderer';
 import { CategoryListRenderer } from '@/blocks/CategoryList/CategoryList.renderer';
 import { FeaturedServiceListRenderer } from '@/blocks/FeaturedServiceList/FeaturedServiceList.renderer';
-import { NotificationDetailsRenderer } from '@/blocks/NotificationDetails/NotificationDetails.renderer';
 import { OrderDetailsRenderer } from '@/blocks/OrderDetails/OrderDetails.renderer';
 import { OrderListRenderer } from '@/blocks/OrderList/OrderList.renderer';
 import { OrdersSummaryRenderer } from '@/blocks/OrdersSummary/OrdersSummary.renderer';
@@ -58,14 +58,7 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: str
             case 'NotificationListBlock':
                 return <NotificationList.Renderer key={block.id} {...blockProps} />;
             case 'NotificationDetailsBlock':
-                return (
-                    <NotificationDetailsRenderer
-                        key={block.id}
-                        slug={slug}
-                        id={block.id}
-                        accessToken={session?.accessToken}
-                    />
-                );
+                return <NotificationDetails.Renderer key={block.id} {...blockProps} />;
             case 'FaqBlock':
                 return <Faq.Renderer key={block.id} {...blockProps} />;
             case 'InvoiceListBlock':

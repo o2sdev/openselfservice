@@ -1,4 +1,3 @@
-export * as NotificationDetails from './notification-details';
 export * as PaymentsSummary from './payments-summary';
 export * as PaymentsHistory from './payments-history';
 export * as ServiceList from './service-list';

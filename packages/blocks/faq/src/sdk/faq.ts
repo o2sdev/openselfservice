@@ -1,8 +1,9 @@
-import { Model, Request, URL } from "../api-harmonization/faq.client";
+import { Models } from '@o2s/utils.api-harmonization';
+import { Utils } from '@o2s/utils.frontend';
 
-import { Sdk } from "@o2s/framework/sdk";
-import { Utils } from "@o2s/utils.frontend";
-import { Models } from "@o2s/utils.api-harmonization";
+import { Sdk } from '@o2s/framework/sdk';
+
+import { Model, Request, URL } from '../api-harmonization/faq.client';
 
 const API_URL = URL;
 
@@ -14,7 +15,7 @@ export const faq = (sdk: Sdk) => ({
             authorization?: string,
         ): Promise<Model.FaqBlock> =>
             sdk.makeRequest({
-                method: "get",
+                method: 'get',
                 url: `${API_URL}`,
                 headers: {
                     ...Utils.Headers.getApiHeaders(),

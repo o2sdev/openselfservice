@@ -1,12 +1,9 @@
-import {
-    Model,
-    Request,
-    URL,
-} from "../api-harmonization/notification-list.client";
+import { Models as ApiModels } from '@o2s/utils.api-harmonization';
+import { Utils } from '@o2s/utils.frontend';
 
-import { Sdk } from "@o2s/framework/sdk";
-import { Utils } from "@o2s/utils.frontend";
-import { Models as ApiModels } from "@o2s/utils.api-harmonization";
+import { Sdk } from '@o2s/framework/sdk';
+
+import { Model, Request, URL } from '../api-harmonization/notification-list.client';
 
 const API_URL = URL;
 
@@ -18,7 +15,7 @@ export const notificationList = (sdk: Sdk) => ({
             authorization?: string,
         ): Promise<Model.NotificationListBlock> =>
             sdk.makeRequest({
-                method: "get",
+                method: 'get',
                 url: `${API_URL}`,
                 headers: {
                     ...Utils.Headers.getApiHeaders(),
