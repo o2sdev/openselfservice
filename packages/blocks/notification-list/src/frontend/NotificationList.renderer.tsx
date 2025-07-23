@@ -4,18 +4,14 @@ import React, { Suspense } from 'react';
 import { Loading } from '@o2s/ui/components/Loading';
 
 import { NotificationListServer } from './NotificationList.server';
+import { NotificationListRendererProps } from './NotificationList.types';
 
-export interface NotificationListRendererProps {
-    id: string;
-    accessToken?: string;
-}
-
-export const NotificationListRenderer: React.FC<NotificationListRendererProps> = ({ id, accessToken }) => {
+export const NotificationListRenderer: React.FC<NotificationListRendererProps> = ({ id, accessToken, routing }) => {
     const locale = useLocale();
 
     return (
         <Suspense key={id} fallback={<Loading bars={[15, 17]} />}>
-            <NotificationListServer id={id} accessToken={accessToken} locale={locale} />
+            <NotificationListServer id={id} accessToken={accessToken} locale={locale} routing={routing} />
         </Suspense>
     );
 };

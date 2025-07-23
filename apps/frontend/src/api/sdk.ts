@@ -14,7 +14,6 @@ import { category } from '@/api/blocks/category';
 import { categoryList } from '@/api/blocks/category-list';
 import { featuredServiceList } from '@/api/blocks/featured-service-list';
 import { notificationDetails } from '@/api/blocks/notification-details';
-import { notificationList } from '@/api/blocks/notification-list';
 import { orderDetails } from '@/api/blocks/order-details';
 import { orderList } from '@/api/blocks/order-list';
 import { paymentsHistory } from '@/api/blocks/payments-history';
@@ -49,7 +48,6 @@ export const sdk = extendSdk(internalSdk, {
         ...Notifications.extend(internalSdk),
     },
     blocks: {
-        getNotificationList: notificationList(internalSdk).blocks.getNotificationList,
         getNotificationDetails: notificationDetails(internalSdk).blocks.getNotificationDetails,
         markNotificationAs: notificationDetails(internalSdk).blocks.markNotificationAs,
         getPaymentsSummary: paymentsSummary(internalSdk).blocks.getPaymentsSummary,

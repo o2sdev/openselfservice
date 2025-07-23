@@ -2,7 +2,10 @@
 
 import { Blocks } from '@o2s/api-harmonization';
 import { ArrowRight } from 'lucide-react';
+import { createNavigation } from 'next-intl/navigation';
 import React, { useState, useTransition } from 'react';
+
+import { Mappings } from '@o2s/utils.frontend';
 
 import { cn } from '@o2s/ui/lib/utils';
 
@@ -17,15 +20,18 @@ import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
 import { Separator } from '@o2s/ui/elements/separator';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@o2s/ui/elements/table';
 
-import { sdk } from '@/api/sdk';
-
-import { notificationBadgePriorityVariants } from '@/utils/mappings/notification-badge';
-
-import { Link as NextLink } from '@/i18n';
+import { sdk } from '../sdk';
 
 import { NotificationListPureProps } from './NotificationList.types';
 
-export const NotificationListPure: React.FC<NotificationListPureProps> = ({ locale, accessToken, ...component }) => {
+export const NotificationListPure: React.FC<NotificationListPureProps> = ({
+    locale,
+    accessToken,
+    routing,
+    ...component
+}) => {
+    const { Link: LinkComponent } = createNavigation(routing);
+
     const initialFilters: Blocks.NotificationList.Request.GetNotificationListBlockQuery = {
         id: component.id,
         offset: 0,
@@ -134,7 +140,8 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({ loca
                                                                     <TableCell key={column.id} className="flex-initial">
                                                                         <Badge
                                                                             variant={
-                                                                                notificationBadgePriorityVariants[
+                                                                                Mappings.NotificationBadge
+                                                                                    .notificationBadgePriorityVariants[
                                                                                     notification.priority.value
                                                                                 ]
                                                                             }
@@ -163,13 +170,13 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({ loca
                                                     {data.table.actions && (
                                                         <TableCell className="py-0">
                                                             <Button asChild variant="link">
-                                                                <NextLink
+                                                                <LinkComponent
                                                                     href={notification.detailsUrl}
                                                                     className="flex items-center justify-end gap-2"
                                                                 >
                                                                     <ArrowRight className="h-4 w-4" />
                                                                     {data.table.actions.label}
-                                                                </NextLink>
+                                                                </LinkComponent>
                                                             </Button>
                                                         </TableCell>
                                                     )}

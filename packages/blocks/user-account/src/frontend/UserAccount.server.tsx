@@ -17,6 +17,10 @@ export const UserAccount: React.FC<UserAccountProps> = async ({
     userId,
     onSignOut,
 }) => {
+    if (!userId) {
+        return null;
+    }
+
     try {
         const data = await sdk.blocks.getUserAccount(
             {

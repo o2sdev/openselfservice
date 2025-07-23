@@ -44,6 +44,7 @@
         "xmlbuilder2": "^3.1.1",
         "@o2s/blocks.faq": "*",
         "@o2s/blocks.invoice-list": "*",
+        "@o2s/blocks.notification-list": "*",
         "@o2s/blocks.quick-links": "*",
         "@o2s/blocks.ticket-details": "*",
         "@o2s/blocks.ticket-list": "*",

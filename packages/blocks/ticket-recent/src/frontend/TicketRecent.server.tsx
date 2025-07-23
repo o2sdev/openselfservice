@@ -19,15 +19,7 @@ export const TicketRecent: React.FC<TicketRecentProps> = async ({ id, accessToke
             accessToken,
         );
 
-        return (
-            <TicketRecentDynamic
-                {...data}
-                id={id}
-                accessToken={accessToken}
-                locale={locale}
-                routing={routing}
-            />
-        );
+        return <TicketRecentDynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />;
     } catch (_error) {
         return null;
     }

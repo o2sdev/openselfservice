@@ -26,7 +26,7 @@ export const Category: React.FC<CategoryProps> = async ({ id, slug, accessToken,
                 slug={slug}
                 accessToken={accessToken}
                 locale={locale}
-                blocks={<CategoryBlocks components={data.components} slug={slug} accessToken={accessToken} />}
+                blocks={<CategoryBlocks components={data.components} slug={slug} />}
             />
         );
     } catch (_error) {

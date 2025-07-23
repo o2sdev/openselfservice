@@ -3,6 +3,7 @@
 
 @source "../../../apps/frontend/src/**/*.{js,ts,jsx,tsx,mdx}";
 @source "../../../packages/ui/src/**/*.{ts,tsx}";
+@source "../../../node_modules/@o2s/**/*.{js,ts,jsx,tsx}";
 
 @custom-variant dark (&:is(.dark *));
 @custom-variant hover (&:hover);
