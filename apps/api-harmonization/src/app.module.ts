@@ -28,6 +28,8 @@ import * as InvoiceList from '@o2s/blocks.invoice-list/api-harmonization';
 import * as QuickLinks from '@o2s/blocks.quick-links/api-harmonization';
 import * as TicketDetails from '@o2s/blocks.ticket-details/api-harmonization';
 import * as TicketList from '@o2s/blocks.ticket-list/api-harmonization';
+import * as TicketRecent from '@o2s/blocks.ticket-recent/api-harmonization';
+import * as UserAccount from '@o2s/blocks.user-account/api-harmonization';
 
 import { configuration } from '@o2s/api-harmonization/config/configuration';
 
@@ -47,8 +49,6 @@ import { PaymentsSummaryBlockModule } from '@o2s/api-harmonization/blocks/paymen
 import { ServiceDetailsBlockModule } from '@o2s/api-harmonization/blocks/service-details/service-details.module';
 import { ServiceListBlockModule } from '@o2s/api-harmonization/blocks/service-list/service-list.module';
 import { SurveyjsBlockModule } from '@o2s/api-harmonization/blocks/surveyjs/surveyjs.module';
-import { TicketRecentBlockModule } from '@o2s/api-harmonization/blocks/ticket-recent/ticket-recent.module';
-import { UserAccountBlockModule } from '@o2s/api-harmonization/blocks/user-account/user-account.module';
 
 // BLOCK IMPORT
 import { AppConfig } from './app.config';
@@ -117,8 +117,8 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
         InvoiceList.Module.register(AppConfig),
         PaymentsSummaryBlockModule.register(AppConfig),
         PaymentsHistoryBlockModule.register(AppConfig),
-        UserAccountBlockModule.register(AppConfig),
-        TicketRecentBlockModule.register(AppConfig),
+        UserAccount.Module.register(AppConfig),
+        TicketRecent.Module.register(AppConfig),
         ServiceListBlockModule.register(AppConfig),
         ServiceDetailsBlockModule.register(AppConfig),
         SurveyjsBlockModule.register(AppConfig),

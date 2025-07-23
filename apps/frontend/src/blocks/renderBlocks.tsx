@@ -4,10 +4,14 @@ import * as InvoiceList from '@o2s/blocks.invoice-list/frontend';
 import * as QuickLinks from '@o2s/blocks.quick-links/frontend';
 import * as TicketDetails from '@o2s/blocks.ticket-details/frontend';
 import * as TicketList from '@o2s/blocks.ticket-list/frontend';
+import * as TickeRecent from '@o2s/blocks.ticket-recent/frontend';
+import * as UserAccount from '@o2s/blocks.user-account/frontend';
 import { getLocale } from 'next-intl/server';
 import React from 'react';
 
 import { CMS } from '@o2s/framework/modules';
+
+import { auth } from '@/auth';
 
 // BLOCK IMPORT
 import { routing } from '@/i18n';
@@ -28,108 +32,118 @@ import { PaymentsSummaryRenderer } from '@/blocks/PaymentsSummary/PaymentsSummar
 import { ServiceDetailsRenderer } from '@/blocks/ServiceDetails/ServiceDetails.renderer';
 import { ServiceListRenderer } from '@/blocks/ServiceList/ServiceList.renderer';
 import { SurveyJsRenderer } from '@/blocks/SurveyJs/SurveyJs.renderer';
-import { TicketRecentRenderer } from '@/blocks/TicketRecent/TicketRecent.renderer';
-import { UserAccountRenderer } from '@/blocks/UserAccount/UserAccount.renderer';
 
-export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: string[], accessToken?: string) => {
+import { onSignOut } from '../actions/signOut';
+
+export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: string[]) => {
+    const session = await auth();
     const locale = await getLocale();
 
     return blocks.map((block) => {
+        const blockProps = {
+            id: block.id,
+            slug: slug,
+            locale: locale,
+            accessToken: session?.accessToken,
+            routing: routing,
+        };
+
         switch (block.__typename as Modules.Page.Model.Blocks) {
             case 'TicketListBlock':
-                return (
-                    <TicketList.Renderer
-                        key={block.id}
-                        id={block.id}
-                        slug={slug}
-                        locale={locale}
-                        accessToken={accessToken}
-                        routing={routing}
-                    />
-                );
+                return <TicketList.Renderer key={block.id} {...blockProps} />;
             case 'TicketRecentBlock':
-                return <TicketRecentRenderer key={block.id} id={block.id} accessToken={accessToken} />;
+                return <TickeRecent.Renderer key={block.id} {...blockProps} />;
             case 'TicketDetailsBlock':
-                return (
-                    <TicketDetails.Renderer
-                        key={block.id}
-                        id={block.id}
-                        slug={slug}
-                        locale={locale}
-                        accessToken={accessToken}
-                        routing={routing}
-                    />
-                );
+                return <TicketDetails.Renderer key={block.id} {...blockProps} />;
             case 'NotificationListBlock':
-                return <NotificationListRenderer key={block.id} id={block.id} accessToken={accessToken} />;
+                return <NotificationListRenderer key={block.id} id={block.id} accessToken={session?.accessToken} />;
             case 'NotificationDetailsBlock':
                 return (
-                    <NotificationDetailsRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />
+                    <NotificationDetailsRenderer
+                        key={block.id}
+                        slug={slug}
+                        id={block.id}
+                        accessToken={session?.accessToken}
+                    />
                 );
             case 'FaqBlock':
-                return (
-                    <Faq.Renderer
-                        key={block.id}
-                        id={block.id}
-                        slug={slug}
-                        locale={locale}
-                        accessToken={accessToken}
-                        routing={routing}
-                    />
-                );
+                return <Faq.Renderer key={block.id} {...blockProps} />;
             case 'InvoiceListBlock':
-                return (
-                    <InvoiceList.Renderer
-                        key={block.id}
-                        id={block.id}
-                        slug={slug}
-                        locale={locale}
-                        accessToken={accessToken}
-                        routing={routing}
-                    />
-                );
+                return <InvoiceList.Renderer key={block.id} {...blockProps} />;
             case 'PaymentsSummaryBlock':
-                return <PaymentsSummaryRenderer key={block.id} id={block.id} accessToken={accessToken} />;
+                return <PaymentsSummaryRenderer key={block.id} id={block.id} accessToken={session?.accessToken} />;
             case 'PaymentsHistoryBlock':
-                return <PaymentsHistoryRenderer key={block.id} id={block.id} accessToken={accessToken} />;
+                return <PaymentsHistoryRenderer key={block.id} id={block.id} accessToken={session?.accessToken} />;
             case 'UserAccountBlock':
-                return <UserAccountRenderer key={block.id} id={block.id} accessToken={accessToken} />;
-            case 'ServiceListBlock':
-                return <ServiceListRenderer key={block.id} id={block.id} accessToken={accessToken} />;
-            case 'ServiceDetailsBlock':
-                return <ServiceDetailsRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
-            case 'SurveyJsBlock':
-                return <SurveyJsRenderer key={block.id} id={block.id} accessToken={accessToken} />;
-            case 'OrderListBlock':
-                return <OrderListRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
-            case 'OrdersSummaryBlock':
-                return <OrdersSummaryRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
-            case 'OrderDetailsBlock':
-                return <OrderDetailsRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
-            case 'QuickLinksBlock':
                 return (
-                    <QuickLinks.Renderer
+                    <UserAccount.Renderer
                         key={block.id}
-                        id={block.id}
-                        slug={slug}
-                        locale={locale}
-                        accessToken={accessToken}
-                        routing={routing}
+                        {...blockProps}
+                        userId={session?.user?.id}
+                        onSignOut={onSignOut}
                     />
                 );
+            case 'ServiceListBlock':
+                return <ServiceListRenderer key={block.id} id={block.id} accessToken={session?.accessToken} />;
+            case 'ServiceDetailsBlock':
+                return (
+                    <ServiceDetailsRenderer
+                        slug={slug}
+                        key={block.id}
+                        id={block.id}
+                        accessToken={session?.accessToken}
+                    />
+                );
+            case 'SurveyJsBlock':
+                return <SurveyJsRenderer key={block.id} id={block.id} accessToken={session?.accessToken} />;
+            case 'OrderListBlock':
+                return (
+                    <OrderListRenderer slug={slug} key={block.id} id={block.id} accessToken={session?.accessToken} />
+                );
+            case 'OrdersSummaryBlock':
+                return (
+                    <OrdersSummaryRenderer
+                        slug={slug}
+                        key={block.id}
+                        id={block.id}
+                        accessToken={session?.accessToken}
+                    />
+                );
+            case 'OrderDetailsBlock':
+                return (
+                    <OrderDetailsRenderer slug={slug} key={block.id} id={block.id} accessToken={session?.accessToken} />
+                );
+            case 'QuickLinksBlock':
+                return <QuickLinks.Renderer key={block.id} {...blockProps} />;
             case 'CategoryListBlock':
-                return <CategoryListRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
+                return (
+                    <CategoryListRenderer slug={slug} key={block.id} id={block.id} accessToken={session?.accessToken} />
+                );
             case 'ArticleListBlock':
-                return <ArticleListRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
+                return (
+                    <ArticleListRenderer slug={slug} key={block.id} id={block.id} accessToken={session?.accessToken} />
+                );
             case 'CategoryBlock':
-                return <CategoryRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
+                return <CategoryRenderer slug={slug} key={block.id} id={block.id} accessToken={session?.accessToken} />;
             case 'ArticleBlock':
-                return <ArticleRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
+                return <ArticleRenderer slug={slug} key={block.id} id={block.id} accessToken={session?.accessToken} />;
             case 'ArticleSearchBlock':
-                return <ArticleSearchRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
+                return (
+                    <ArticleSearchRenderer
+                        slug={slug}
+                        key={block.id}
+                        id={block.id}
+                        accessToken={session?.accessToken}
+                    />
+                );
             case 'FeaturedServiceListBlock':
                 return (
-                    <FeaturedServiceListRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />
+                    <FeaturedServiceListRenderer
+                        slug={slug}
+                        key={block.id}
+                        id={block.id}
+                        accessToken={session?.accessToken}
+                    />
                 );
             // BLOCK REGISTER
         }

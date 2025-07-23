@@ -127,7 +127,7 @@ export default async function Page({ params }: Props) {
                                     )}
                                 </div>
 
-                                <PageTemplate slug={slug} data={data} session={session} />
+                                <PageTemplate slug={slug} data={data} />
                             </main>
                         </div>
                     </div>

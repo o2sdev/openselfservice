@@ -2,8 +2,6 @@ export * as NotificationList from './notification-list';
 export * as NotificationDetails from './notification-details';
 export * as PaymentsSummary from './payments-summary';
 export * as PaymentsHistory from './payments-history';
-export * as UserAccount from './user-account';
-export * as TicketRecent from './ticket-recent';
 export * as ServiceList from './service-list';
 export * as ServiceDetails from './service-details';
 export * as Surveyjs from './surveyjs';

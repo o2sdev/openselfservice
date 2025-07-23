@@ -46,7 +46,9 @@
         "@o2s/blocks.invoice-list": "*",
         "@o2s/blocks.quick-links": "*",
         "@o2s/blocks.ticket-details": "*",
-        "@o2s/blocks.ticket-list": "*"
+        "@o2s/blocks.ticket-list": "*",
+        "@o2s/blocks.ticket-recent": "*",
+        "@o2s/blocks.user-account": "*"
     },
     "devDependencies": {
         "@nestjs/cli": "^11.0.7",

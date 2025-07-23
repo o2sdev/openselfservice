@@ -22,8 +22,6 @@ import { paymentsSummary } from '@/api/blocks/payments-summary';
 import { serviceDetails } from '@/api/blocks/service-details';
 import { serviceList } from '@/api/blocks/services-list';
 import { surveyJSBlock } from '@/api/blocks/surveyjs';
-import { ticketRecent } from '@/api/blocks/ticket-recent';
-import { userAccount } from '@/api/blocks/user-account';
 // BLOCK IMPORT
 import { loginPage } from '@/api/modules/login-page';
 import { notFoundPage } from '@/api/modules/not-found-page';
@@ -51,7 +49,6 @@ export const sdk = extendSdk(internalSdk, {
         ...Notifications.extend(internalSdk),
     },
     blocks: {
-        getTicketRecent: ticketRecent(internalSdk).blocks.getTicketRecent,
         getNotificationList: notificationList(internalSdk).blocks.getNotificationList,
         getNotificationDetails: notificationDetails(internalSdk).blocks.getNotificationDetails,
         markNotificationAs: notificationDetails(internalSdk).blocks.markNotificationAs,
@@ -59,7 +56,6 @@ export const sdk = extendSdk(internalSdk, {
         getPaymentsHistory: paymentsHistory(internalSdk).blocks.getPaymentsHistory,
         getServiceList: serviceList(internalSdk).blocks.getServiceList,
         getServiceDetails: serviceDetails(internalSdk).blocks.getServiceDetails,
-        getUserAccount: userAccount(internalSdk).blocks.getUserAccount,
         getSurveyJsBlock: surveyJSBlock(internalSdk).blocks.getSurveyjsBlock,
         getOrderList: orderList(internalSdk).blocks.getOrderList,
         getOrdersSummary: ordersSummary(internalSdk).blocks.getOrdersSummary,
