@@ -1,8 +1,8 @@
+import { Models as ApiModels } from '@o2s/utils.api-harmonization';
+
 import { Models } from '@o2s/framework/modules';
 
-import { Block } from '../../utils';
-
-export class PaymentsHistoryBlock extends Block.Block {
+export class PaymentsHistoryBlock extends ApiModels.Block.Block {
     __typename!: 'PaymentsHistoryBlock';
     title?: string;
     labels!: {

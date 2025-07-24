@@ -15,7 +15,6 @@ import { categoryList } from '@/api/blocks/category-list';
 import { featuredServiceList } from '@/api/blocks/featured-service-list';
 import { orderDetails } from '@/api/blocks/order-details';
 import { orderList } from '@/api/blocks/order-list';
-import { paymentsHistory } from '@/api/blocks/payments-history';
 import { paymentsSummary } from '@/api/blocks/payments-summary';
 import { serviceDetails } from '@/api/blocks/service-details';
 import { serviceList } from '@/api/blocks/services-list';
@@ -48,7 +47,6 @@ export const sdk = extendSdk(internalSdk, {
     },
     blocks: {
         getPaymentsSummary: paymentsSummary(internalSdk).blocks.getPaymentsSummary,
-        getPaymentsHistory: paymentsHistory(internalSdk).blocks.getPaymentsHistory,
         getServiceList: serviceList(internalSdk).blocks.getServiceList,
         getServiceDetails: serviceDetails(internalSdk).blocks.getServiceDetails,
         getSurveyJsBlock: surveyJSBlock(internalSdk).blocks.getSurveyjsBlock,

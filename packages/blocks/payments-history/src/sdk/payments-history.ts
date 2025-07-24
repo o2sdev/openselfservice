@@ -1,23 +1,24 @@
-import { Blocks, Headers } from '@o2s/api-harmonization';
+import { Models as ApiModels } from '@o2s/utils.api-harmonization';
+import { Utils } from '@o2s/utils.frontend';
 
 import { Sdk } from '@o2s/framework/sdk';
 
-import { getApiHeaders } from '../../utils/api';
+import { Model, Request, URL } from '../api-harmonization/payments-history.client';
 
-const API_URL = Blocks.PaymentsHistory.URL;
+const API_URL = URL;
 
 export const paymentsHistory = (sdk: Sdk) => ({
     blocks: {
         getPaymentsHistory: (
-            query: Blocks.PaymentsHistory.Request.GetPaymentsHistoryBlockQuery,
-            headers: Headers.AppHeaders,
+            params: Request.GetPaymentsHistoryBlockQuery,
+            headers: ApiModels.Headers.AppHeaders,
             authorization?: string,
-        ): Promise<Blocks.PaymentsHistory.Model.PaymentsHistoryBlock> =>
+        ): Promise<Model.PaymentsHistoryBlock> =>
             sdk.makeRequest({
                 method: 'get',
                 url: `${API_URL}`,
                 headers: {
-                    ...getApiHeaders(),
+                    ...Utils.Headers.getApiHeaders(),
                     ...headers,
                     ...(authorization
                         ? {
@@ -25,7 +26,7 @@ export const paymentsHistory = (sdk: Sdk) => ({
                           }
                         : {}),
                 },
-                params: query,
+                params,
             }),
     },
 });

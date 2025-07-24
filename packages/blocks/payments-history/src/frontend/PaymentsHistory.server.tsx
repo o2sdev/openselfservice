@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-import { sdk } from '@/api/sdk';
+import { sdk } from '../sdk';
 
 import { PaymentsHistoryProps } from './PaymentsHistory.types';
 

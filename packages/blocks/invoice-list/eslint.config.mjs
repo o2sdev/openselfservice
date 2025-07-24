@@ -11,4 +11,8 @@ export default defineConfig([
         files: ['src/frontend/**/*'],
         extends: [frontendConfig],
     },
+    {
+        files: ['src/sdk/**/*'],
+        extends: [frontendConfig],
+    },
 ]);
