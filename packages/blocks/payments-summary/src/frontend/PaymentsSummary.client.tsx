@@ -16,10 +16,13 @@ import { Typography } from '@o2s/ui/elements/typography';
 
 import { PaymentsSummaryPureProps } from './PaymentsSummary.types';
 
-export const PaymentsSummaryPure: React.FC<PaymentsSummaryPureProps> = ({ ...component }) => {
+export const PaymentsSummaryPure: React.FC<PaymentsSummaryPureProps> = ({ routing, ...component }) => {
     const { overdue, toBePaid } = component;
 
     const t = useTranslations();
+
+    // If navigation is needed, use createNavigation(routing) as in other blocks
+    // const { Link: LinkComponent } = createNavigation(routing);
 
     return (
         <div className="w-full flex flex-col gap-6">

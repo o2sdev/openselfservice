@@ -1,4 +1,3 @@
-export * as PaymentsSummary from './payments-summary';
 export * as ServiceList from './service-list';
 export * as ServiceDetails from './service-details';
 export * as Surveyjs from './surveyjs';

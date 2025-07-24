@@ -4,6 +4,7 @@ import * as InvoiceList from '@o2s/blocks.invoice-list/frontend';
 import * as NotificationDetails from '@o2s/blocks.notification-details/frontend';
 import * as NotificationList from '@o2s/blocks.notification-list/frontend';
 import * as PaymentsHistory from '@o2s/blocks.payments-history/frontend';
+import * as PaymentsSummary from '@o2s/blocks.payments-summary/frontend';
 import * as QuickLinks from '@o2s/blocks.quick-links/frontend';
 import * as TicketDetails from '@o2s/blocks.ticket-details/frontend';
 import * as TicketList from '@o2s/blocks.ticket-list/frontend';
@@ -28,7 +29,6 @@ import { FeaturedServiceListRenderer } from '@/blocks/FeaturedServiceList/Featur
 import { OrderDetailsRenderer } from '@/blocks/OrderDetails/OrderDetails.renderer';
 import { OrderListRenderer } from '@/blocks/OrderList/OrderList.renderer';
 import { OrdersSummaryRenderer } from '@/blocks/OrdersSummary/OrdersSummary.renderer';
-import { PaymentsSummaryRenderer } from '@/blocks/PaymentsSummary/PaymentsSummary.renderer';
 import { ServiceDetailsRenderer } from '@/blocks/ServiceDetails/ServiceDetails.renderer';
 import { ServiceListRenderer } from '@/blocks/ServiceList/ServiceList.renderer';
 import { SurveyJsRenderer } from '@/blocks/SurveyJs/SurveyJs.renderer';
@@ -64,7 +64,7 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: str
             case 'InvoiceListBlock':
                 return <InvoiceList.Renderer key={block.id} {...blockProps} />;
             case 'PaymentsSummaryBlock':
-                return <PaymentsSummaryRenderer key={block.id} id={block.id} accessToken={session?.accessToken} />;
+                return <PaymentsSummary.Renderer key={block.id} {...blockProps} />;
             case 'PaymentsHistoryBlock':
                 return <PaymentsHistory.Renderer key={block.id} {...blockProps} />;
             case 'UserAccountBlock':

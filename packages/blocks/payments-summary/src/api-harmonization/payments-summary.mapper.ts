@@ -2,9 +2,9 @@ import { CMS, Invoices } from '@o2s/configs.integrations';
 import dayjs from 'dayjs';
 import format from 'string-template';
 
-import { Models } from '@o2s/framework/modules';
+import { Utils } from '@o2s/utils.api-harmonization';
 
-import { checkNegativeValue } from '@o2s/api-harmonization/utils/price';
+import { Models } from '@o2s/framework/modules';
 
 import { PaymentsSummaryBlock } from './payments-summary.model';
 
@@ -45,7 +45,7 @@ export const mapPaymentsSummary = (
                       days: overdueDays,
                   })
                 : cms.overdue?.altMessage || '',
-            value: { value: checkNegativeValue({ value: overdueAmount, currency }).value, currency },
+            value: { value: Utils.Price.checkNegativeValue({ value: overdueAmount, currency }).value, currency },
             isOverdue: isOverdue,
             icon: cms.overdue.icon,
         },
@@ -54,7 +54,7 @@ export const mapPaymentsSummary = (
             icon: cms.toBePaid.icon,
             description: toBePaidAmount > 0 ? cms.toBePaid?.message : cms.toBePaid?.altMessage,
             link: cms.toBePaid.link,
-            value: { value: checkNegativeValue({ value: toBePaidAmount, currency }).value, currency },
+            value: { value: Utils.Price.checkNegativeValue({ value: toBePaidAmount, currency }).value, currency },
         },
     };
 };
