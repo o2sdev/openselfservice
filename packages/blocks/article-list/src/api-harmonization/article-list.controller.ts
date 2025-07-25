@@ -1,14 +1,13 @@
 import { Controller, Get, Headers, Query, UseInterceptors } from '@nestjs/common';
 
+import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 import { LoggerService } from '@o2s/utils.logger';
 
 import { Auth } from '@o2s/framework/modules';
 
-import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
-
-import { URL } from './';
 import { GetArticleListBlockQuery } from './article-list.request';
 import { ArticleListService } from './article-list.service';
+import { URL } from './index';
 
 @Controller(URL)
 @UseInterceptors(LoggerService)
@@ -17,7 +16,7 @@ export class ArticleListController {
 
     @Get()
     @Auth.Decorators.Roles({ roles: [] })
-    getArticleListBlock(@Headers() headers: AppHeaders, @Query() query: GetArticleListBlockQuery) {
+    getArticleListBlock(@Headers() headers: ApiModels.Headers.AppHeaders, @Query() query: GetArticleListBlockQuery) {
         return this.service.getArticleListBlock(query, headers);
     }
 }

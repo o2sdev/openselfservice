@@ -4,16 +4,10 @@ import React, { Suspense } from 'react';
 import { Loading } from '@o2s/ui/components/Loading';
 
 import { ArticleList } from './ArticleList.server';
+import { ArticleListRendererProps } from './ArticleList.types';
 
-export interface ArticleListRendererProps {
-    slug: string[];
-    id: string;
-    accessToken?: string;
-}
-
-export const ArticleListRenderer: React.FC<ArticleListRendererProps> = ({ id, accessToken }) => {
+export const ArticleListRenderer: React.FC<ArticleListRendererProps> = ({ id, accessToken, routing }) => {
     const locale = useLocale();
-
     return (
         <Suspense
             key={id}
@@ -39,7 +33,7 @@ export const ArticleListRenderer: React.FC<ArticleListRendererProps> = ({ id, ac
                 </div>
             }
         >
-            <ArticleList id={id} accessToken={accessToken} locale={locale} />
+            <ArticleList id={id} accessToken={accessToken} locale={locale} routing={routing} />
         </Suspense>
     );
 };

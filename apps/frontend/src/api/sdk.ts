@@ -6,7 +6,6 @@ import { extendSdk, getSdk } from '@o2s/framework/sdk';
 
 import { Notifications } from '@o2s/integrations.mocked/sdk';
 
-import { articleList } from '@/api/blocks/article-list';
 import { articleSearch } from '@/api/blocks/article-search';
 import { category } from '@/api/blocks/category';
 import { categoryList } from '@/api/blocks/category-list';
@@ -40,7 +39,6 @@ export const sdk = extendSdk(internalSdk, {
     blocks: {
         getSurveyJsBlock: surveyJSBlock(internalSdk).blocks.getSurveyjsBlock,
         getCategoryList: categoryList(internalSdk).blocks.getCategoryList,
-        getArticleList: articleList(internalSdk).blocks.getArticleList,
         getCategory: category(internalSdk).blocks.getCategory,
         getCategoryArticles: category(internalSdk).blocks.getCategoryArticles,
         getArticleSearch: articleSearch(internalSdk).blocks.getArticleSearch,

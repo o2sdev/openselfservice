@@ -1,6 +1,6 @@
 import { Articles, CMS } from '@o2s/configs.integrations';
 
-import { formatDateRelative } from '@o2s/api-harmonization/utils/date';
+import { Utils } from '@o2s/utils.api-harmonization';
 
 import { ArticleListBlock } from './article-list.model';
 
@@ -35,7 +35,7 @@ const mapArticle = (
 ) => {
     return {
         ...article,
-        createdAt: formatDateRelative(article.createdAt, locale, cms.labels.today, cms.labels.yesterday),
-        updatedAt: formatDateRelative(article.updatedAt, locale, cms.labels.today, cms.labels.yesterday),
+        createdAt: Utils.Date.formatDateRelative(article.createdAt, locale, cms.labels.today, cms.labels.yesterday),
+        updatedAt: Utils.Date.formatDateRelative(article.updatedAt, locale, cms.labels.today, cms.labels.yesterday),
     };
 };

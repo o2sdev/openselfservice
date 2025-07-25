@@ -1,23 +1,24 @@
-import { Blocks, Headers } from '@o2s/api-harmonization';
+import { Models } from '@o2s/utils.api-harmonization';
+import { Utils } from '@o2s/utils.frontend';
 
 import { Sdk } from '@o2s/framework/sdk';
 
-import { getApiHeaders } from '../../utils/api';
+import { Model, Request, URL } from '../api-harmonization/article-list.client';
 
-const API_URL = Blocks.ArticleList.URL;
+const API_URL = URL;
 
 export const articleList = (sdk: Sdk) => ({
     blocks: {
         getArticleList: (
-            query: Blocks.ArticleList.Request.GetArticleListBlockQuery,
-            headers: Headers.AppHeaders,
+            query: Request.GetArticleListBlockQuery,
+            headers: Models.Headers.AppHeaders,
             authorization?: string,
-        ): Promise<Blocks.ArticleList.Model.ArticleListBlock> =>
+        ): Promise<Model.ArticleListBlock> =>
             sdk.makeRequest({
                 method: 'get',
                 url: `${API_URL}`,
                 headers: {
-                    ...getApiHeaders(),
+                    ...Utils.Headers.getApiHeaders(),
                     ...headers,
                     ...(authorization
                         ? {
