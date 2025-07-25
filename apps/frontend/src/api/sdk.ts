@@ -11,7 +11,6 @@ import { articleList } from '@/api/blocks/article-list';
 import { articleSearch } from '@/api/blocks/article-search';
 import { category } from '@/api/blocks/category';
 import { categoryList } from '@/api/blocks/category-list';
-import { featuredServiceList } from '@/api/blocks/featured-service-list';
 import { surveyJSBlock } from '@/api/blocks/surveyjs';
 // BLOCK IMPORT
 import { loginPage } from '@/api/modules/login-page';
@@ -48,7 +47,6 @@ export const sdk = extendSdk(internalSdk, {
         getArticle: article(internalSdk).blocks.getArticle,
         getArticleSearch: articleSearch(internalSdk).blocks.getArticleSearch,
         searchArticles: articleSearch(internalSdk).blocks.searchArticles,
-        getFeaturedServiceList: featuredServiceList(internalSdk).blocks.getFeaturedServiceList,
         // BLOCK REGISTER
     },
     modules: {
