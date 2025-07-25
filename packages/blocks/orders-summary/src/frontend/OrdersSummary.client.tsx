@@ -1,6 +1,5 @@
 'use client';
 
-import { Blocks } from '@o2s/api-harmonization';
 import dayjs from 'dayjs';
 import { useLocale } from 'next-intl';
 import React, { useState, useTransition } from 'react';
@@ -16,7 +15,8 @@ import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
 import { ToggleGroup, ToggleGroupItem } from '@o2s/ui/elements/toggle-group';
 import { Typography } from '@o2s/ui/elements/typography';
 
-import { sdk } from '@/api/sdk';
+import { Model, Request } from '../api-harmonization/orders-summary.client';
+import { sdk } from '../sdk';
 
 import { OrdersSummaryPureProps } from './OrdersSummary.types';
 
@@ -48,14 +48,14 @@ export const OrdersSummaryPure: React.FC<Readonly<OrdersSummaryPureProps>> = ({
     accessToken,
     ...component
 }) => {
-    const initialFilters: Blocks.OrdersSummary.Request.GetOrdersSummaryBlockQuery = {
+    const initialFilters: Request.GetOrdersSummaryBlockQuery = {
         id: component.id,
         dateFrom: dayjs().subtract(6, 'months').toISOString(),
         dateTo: dayjs().toISOString(),
         range: 'month',
     };
 
-    const [data, setData] = useState<Blocks.OrdersSummary.Model.OrdersSummaryBlock>(component);
+    const [data, setData] = useState<Model.OrdersSummaryBlock>(component);
     const [range, setRange] = useState(component.ranges?.find((range) => range.isDefault));
     const [filters, setFilters] = useState(initialFilters);
 
@@ -68,7 +68,7 @@ export const OrdersSummaryPure: React.FC<Readonly<OrdersSummaryPureProps>> = ({
 
             const parts = value.split('-');
             const range = Number(parts[0]!);
-            const type = parts[1]! as Blocks.OrdersSummary.Request.GetOrdersSummaryBlockQuery['range'];
+            const type = parts[1]! as Request.GetOrdersSummaryBlockQuery['range'];
 
             switch (type) {
                 case 'day':

@@ -1,23 +1,24 @@
-import { Blocks, Headers } from '@o2s/api-harmonization';
+import { Models as ApiModels } from '@o2s/utils.api-harmonization';
+import { Utils } from '@o2s/utils.frontend';
 
 import { Sdk } from '@o2s/framework/sdk';
 
-import { getApiHeaders } from '../../utils/api';
+import { Model, Request, URL } from '../api-harmonization/orders-summary.client';
 
-const API_URL = Blocks.OrdersSummary.URL;
+const API_URL = URL;
 
 export const ordersSummary = (sdk: Sdk) => ({
     blocks: {
         getOrdersSummary: (
-            query: Blocks.OrdersSummary.Request.GetOrdersSummaryBlockQuery,
-            headers: Headers.AppHeaders,
+            query: Request.GetOrdersSummaryBlockQuery,
+            headers: ApiModels.Headers.AppHeaders,
             authorization?: string,
-        ): Promise<Blocks.OrdersSummary.Model.OrdersSummaryBlock> =>
+        ): Promise<Model.OrdersSummaryBlock> =>
             sdk.makeRequest({
                 method: 'get',
                 url: `${API_URL}`,
                 headers: {
-                    ...getApiHeaders(),
+                    ...Utils.Headers.getApiHeaders(),
                     ...headers,
                     ...(authorization
                         ? {

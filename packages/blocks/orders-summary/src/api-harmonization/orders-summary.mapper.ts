@@ -3,9 +3,9 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/de';
 import 'dayjs/locale/en';
 import 'dayjs/locale/pl';
-import { GetOrdersSummaryBlockQuery } from 'src/blocks/orders-summary/orders-summary.request';
 
 import { ChartData, OrdersSummaryBlock } from './orders-summary.model';
+import { GetOrdersSummaryBlockQuery } from './orders-summary.request';
 
 export const mapOrdersSummary = (
     cms: CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock,

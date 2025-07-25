@@ -3,15 +3,12 @@ import React, { Suspense } from 'react';
 
 import { Loading } from '@o2s/ui/components/Loading';
 
+import { Model, Request } from '../api-harmonization/orders-summary.client';
+
 import { OrdersSummary } from './OrdersSummary.server';
+import { OrdersSummaryRendererProps } from './OrdersSummary.types';
 
-export interface OrdersSummaryRendererProps {
-    slug: string[];
-    id: string;
-    accessToken?: string;
-}
-
-export const OrdersSummaryRenderer: React.FC<OrdersSummaryRendererProps> = ({ id, accessToken }) => {
+export const OrdersSummaryRenderer: React.FC<OrdersSummaryRendererProps> = ({ id, accessToken, routing, slug }) => {
     const locale = useLocale();
 
     return (
@@ -36,7 +33,7 @@ export const OrdersSummaryRenderer: React.FC<OrdersSummaryRendererProps> = ({ id
                 </>
             }
         >
-            <OrdersSummary id={id} accessToken={accessToken} locale={locale} />
+            <OrdersSummary id={id} accessToken={accessToken} locale={locale} routing={routing} />
         </Suspense>
     );
 };

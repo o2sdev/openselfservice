@@ -1,10 +1,10 @@
 import { CMS } from '@o2s/configs.integrations';
 
+import { Models as ApiModels } from '@o2s/utils.api-harmonization';
+
 import { Models } from '@o2s/framework/modules';
 
-import { Block } from '../../utils';
-
-export class OrdersSummaryBlock extends Block.Block {
+export class OrdersSummaryBlock extends ApiModels.Block.Block {
     __typename!: 'OrdersSummaryBlock';
     title!: CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock['title'];
     subtitle!: CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock['subtitle'];

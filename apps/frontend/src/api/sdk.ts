@@ -1,7 +1,6 @@
 // this unused import is necessary for TypeScript to properly resolve API methods
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Blocks, Headers, Modules } from '@o2s/api-harmonization';
-import { ordersSummary } from 'src/api/blocks/orders-summary';
 
 import { extendSdk, getSdk } from '@o2s/framework/sdk';
 
@@ -49,7 +48,6 @@ export const sdk = extendSdk(internalSdk, {
         getServiceDetails: serviceDetails(internalSdk).blocks.getServiceDetails,
         getSurveyJsBlock: surveyJSBlock(internalSdk).blocks.getSurveyjsBlock,
         getOrderList: orderList(internalSdk).blocks.getOrderList,
-        getOrdersSummary: ordersSummary(internalSdk).blocks.getOrdersSummary,
         getOrderDetails: orderDetails(internalSdk).blocks.getOrderDetails,
         getOrderPdf: orderDetails(internalSdk).blocks.getOrderPdf,
         getCategoryList: categoryList(internalSdk).blocks.getCategoryList,
