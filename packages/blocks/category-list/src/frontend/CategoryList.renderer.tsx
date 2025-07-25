@@ -4,16 +4,10 @@ import React, { Suspense } from 'react';
 import { Loading } from '@o2s/ui/components/Loading';
 
 import { CategoryList } from './CategoryList.server';
+import { CategoryListRendererProps } from './CategoryList.types';
 
-export interface CategoryListRendererProps {
-    slug: string[];
-    id: string;
-    accessToken?: string;
-}
-
-export const CategoryListRenderer: React.FC<CategoryListRendererProps> = ({ id, accessToken }) => {
+export const CategoryListRenderer: React.FC<CategoryListRendererProps> = ({ id, accessToken, slug, routing }) => {
     const locale = useLocale();
-
     return (
         <Suspense
             key={id}
@@ -22,21 +16,24 @@ export const CategoryListRenderer: React.FC<CategoryListRendererProps> = ({ id, 
                     <div className="w-full">
                         <Loading bars={0} />
                     </div>
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full">
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
                         <li>
-                            <Loading bars={4} />
+                            <Loading bars={9} />
                         </li>
                         <li>
-                            <Loading bars={4} />
+                            <Loading bars={9} />
                         </li>
                         <li>
-                            <Loading bars={4} />
+                            <Loading bars={9} />
+                        </li>
+                        <li>
+                            <Loading bars={9} />
                         </li>
                     </ul>
                 </div>
             }
         >
-            <CategoryList id={id} accessToken={accessToken} locale={locale} />
+            <CategoryList id={id} accessToken={accessToken} locale={locale} routing={routing} />
         </Suspense>
     );
 };

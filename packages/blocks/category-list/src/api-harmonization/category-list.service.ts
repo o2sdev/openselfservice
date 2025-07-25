@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Articles, CMS } from '@o2s/configs.integrations';
 import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
-import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
+import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 
 import { mapCategoryList } from './category-list.mapper';
 import { CategoryListBlock } from './category-list.model';
@@ -15,14 +15,17 @@ export class CategoryListService {
         private readonly articlesService: Articles.Service,
     ) {}
 
-    getCategoryListBlock(query: GetCategoryListBlockQuery, headers: AppHeaders): Observable<CategoryListBlock> {
-        const cms = this.cmsService.getCategoryListBlock({ ...query, locale: headers['x-locale'] });
+    getCategoryListBlock(
+        query: GetCategoryListBlockQuery,
+        headers: ApiModels.Headers.AppHeaders,
+    ): Observable<CategoryListBlock> {
+        const cms$ = this.cmsService.getCategoryListBlock({ ...query, locale: headers['x-locale'] });
 
-        return forkJoin([cms]).pipe(
+        return forkJoin([cms$]).pipe(
             concatMap(([cms]) => {
                 if (cms.categoryIds) {
                     return forkJoin(
-                        cms.categoryIds.map((categoryId) =>
+                        cms.categoryIds.map((categoryId: string) =>
                             this.articlesService.getCategory({ id: categoryId, locale: headers['x-locale'] }),
                         ),
                     ).pipe(map((categories) => mapCategoryList(cms, categories, headers['x-locale'])));
