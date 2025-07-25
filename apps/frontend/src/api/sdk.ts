@@ -12,10 +12,6 @@ import { articleSearch } from '@/api/blocks/article-search';
 import { category } from '@/api/blocks/category';
 import { categoryList } from '@/api/blocks/category-list';
 import { featuredServiceList } from '@/api/blocks/featured-service-list';
-import { orderDetails } from '@/api/blocks/order-details';
-import { orderList } from '@/api/blocks/order-list';
-import { serviceDetails } from '@/api/blocks/service-details';
-import { serviceList } from '@/api/blocks/services-list';
 import { surveyJSBlock } from '@/api/blocks/surveyjs';
 // BLOCK IMPORT
 import { loginPage } from '@/api/modules/login-page';
@@ -44,12 +40,7 @@ export const sdk = extendSdk(internalSdk, {
         ...Notifications.extend(internalSdk),
     },
     blocks: {
-        getServiceList: serviceList(internalSdk).blocks.getServiceList,
-        getServiceDetails: serviceDetails(internalSdk).blocks.getServiceDetails,
         getSurveyJsBlock: surveyJSBlock(internalSdk).blocks.getSurveyjsBlock,
-        getOrderList: orderList(internalSdk).blocks.getOrderList,
-        getOrderDetails: orderDetails(internalSdk).blocks.getOrderDetails,
-        getOrderPdf: orderDetails(internalSdk).blocks.getOrderPdf,
         getCategoryList: categoryList(internalSdk).blocks.getCategoryList,
         getArticleList: articleList(internalSdk).blocks.getArticleList,
         getCategory: category(internalSdk).blocks.getCategory,

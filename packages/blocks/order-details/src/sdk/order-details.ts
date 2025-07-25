@@ -29,5 +29,17 @@ export const orderDetails = (sdk: Sdk) => ({
                 },
                 params: query,
             }),
+        getOrderPdf: (id: string, headers: ApiModels.Headers.AppHeaders, authorization?: string): Promise<Blob> =>
+            sdk.makeRequest({
+                method: 'get',
+                url: `${API_URL}/documents/${id}/pdf`,
+                responseType: 'blob',
+                headers: {
+                    ...Utils.Headers.getApiHeaders(),
+                    ...headers,
+                    Authorization: `Bearer ${authorization}`,
+                    Accept: 'application/pdf',
+                },
+            }),
     },
 });
