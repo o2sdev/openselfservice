@@ -3,6 +3,7 @@ import * as Faq from '@o2s/blocks.faq/frontend';
 import * as InvoiceList from '@o2s/blocks.invoice-list/frontend';
 import * as NotificationDetails from '@o2s/blocks.notification-details/frontend';
 import * as NotificationList from '@o2s/blocks.notification-list/frontend';
+import * as OrderDetails from '@o2s/blocks.order-details/frontend';
 import * as OrdersSummary from '@o2s/blocks.orders-summary/frontend';
 import * as PaymentsHistory from '@o2s/blocks.payments-history/frontend';
 import * as PaymentsSummary from '@o2s/blocks.payments-summary/frontend';
@@ -27,7 +28,6 @@ import { ArticleSearchRenderer } from '@/blocks/ArticleSearch/ArticleSearch.rend
 import { CategoryRenderer } from '@/blocks/Category/Category.renderer';
 import { CategoryListRenderer } from '@/blocks/CategoryList/CategoryList.renderer';
 import { FeaturedServiceListRenderer } from '@/blocks/FeaturedServiceList/FeaturedServiceList.renderer';
-import { OrderDetailsRenderer } from '@/blocks/OrderDetails/OrderDetails.renderer';
 import { OrderListRenderer } from '@/blocks/OrderList/OrderList.renderer';
 import { ServiceDetailsRenderer } from '@/blocks/ServiceDetails/ServiceDetails.renderer';
 import { ServiceListRenderer } from '@/blocks/ServiceList/ServiceList.renderer';
@@ -96,9 +96,7 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: str
             case 'OrdersSummaryBlock':
                 return <OrdersSummary.Renderer key={block.id} {...blockProps} />;
             case 'OrderDetailsBlock':
-                return (
-                    <OrderDetailsRenderer slug={slug} key={block.id} id={block.id} accessToken={session?.accessToken} />
-                );
+                return <OrderDetails.Renderer key={block.id} {...blockProps} />;
             case 'QuickLinksBlock':
                 return <QuickLinks.Renderer key={block.id} {...blockProps} />;
             case 'CategoryListBlock':
