@@ -1,5 +1,6 @@
 import { Modules } from '@o2s/api-harmonization';
 import * as ArticleList from '@o2s/blocks.article-list/frontend';
+import * as ArticleSearch from '@o2s/blocks.article-search/frontend';
 import * as Article from '@o2s/blocks.article/frontend';
 import * as CategoryList from '@o2s/blocks.category-list/frontend';
 import * as Faq from '@o2s/blocks.faq/frontend';
@@ -29,7 +30,6 @@ import { auth } from '@/auth';
 // BLOCK IMPORT
 import { routing } from '@/i18n';
 
-import { ArticleSearchRenderer } from '@/blocks/ArticleSearch/ArticleSearch.renderer';
 import { CategoryRenderer } from '@/blocks/Category/Category.renderer';
 import { SurveyJsRenderer } from '@/blocks/SurveyJs/SurveyJs.renderer';
 
@@ -99,14 +99,7 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: str
             case 'ArticleBlock':
                 return <Article.Renderer key={block.id} {...blockProps} />;
             case 'ArticleSearchBlock':
-                return (
-                    <ArticleSearchRenderer
-                        slug={slug}
-                        key={block.id}
-                        id={block.id}
-                        accessToken={session?.accessToken}
-                    />
-                );
+                return <ArticleSearch.Renderer key={block.id} {...blockProps} />;
             case 'FeaturedServiceListBlock':
                 return <FeaturedServiceList.Renderer key={block.id} {...blockProps} />;
             // BLOCK REGISTER
