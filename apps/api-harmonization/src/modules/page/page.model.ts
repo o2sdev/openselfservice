@@ -4,6 +4,7 @@ import * as Faq from '@o2s/blocks.faq/api-harmonization';
 import * as BlockInvoiceList from '@o2s/blocks.invoice-list/api-harmonization';
 import * as NotificationDetails from '@o2s/blocks.notification-details/api-harmonization';
 import * as NotificationList from '@o2s/blocks.notification-list/api-harmonization';
+import * as OrderList from '@o2s/blocks.order-list/api-harmonization';
 import * as OrdersSummary from '@o2s/blocks.orders-summary/api-harmonization';
 import * as PaymentsHistory from '@o2s/blocks.payments-history/api-harmonization';
 import * as PaymentsSummary from '@o2s/blocks.payments-summary/api-harmonization';
@@ -21,7 +22,6 @@ import {
     CategoryList,
     FeaturedServiceList,
     OrderDetails,
-    OrderList,
     ServiceDetails,
     ServiceList,
     Surveyjs,

@@ -4,6 +4,7 @@ import * as InvoiceList from '@o2s/blocks.invoice-list/frontend';
 import * as NotificationDetails from '@o2s/blocks.notification-details/frontend';
 import * as NotificationList from '@o2s/blocks.notification-list/frontend';
 import * as OrderDetails from '@o2s/blocks.order-details/frontend';
+import * as OrderList from '@o2s/blocks.order-list/frontend';
 import * as OrdersSummary from '@o2s/blocks.orders-summary/frontend';
 import * as PaymentsHistory from '@o2s/blocks.payments-history/frontend';
 import * as PaymentsSummary from '@o2s/blocks.payments-summary/frontend';
@@ -90,9 +91,7 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: str
             case 'SurveyJsBlock':
                 return <SurveyJsRenderer key={block.id} id={block.id} accessToken={session?.accessToken} />;
             case 'OrderListBlock':
-                return (
-                    <OrderListRenderer slug={slug} key={block.id} id={block.id} accessToken={session?.accessToken} />
-                );
+                return <OrderList.Renderer key={block.id} {...blockProps} />;
             case 'OrdersSummaryBlock':
                 return <OrdersSummary.Renderer key={block.id} {...blockProps} />;
             case 'OrderDetailsBlock':

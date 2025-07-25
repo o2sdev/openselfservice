@@ -28,6 +28,7 @@ import * as InvoiceList from '@o2s/blocks.invoice-list/api-harmonization';
 import * as NotificationDetails from '@o2s/blocks.notification-details/api-harmonization';
 import * as NotificationList from '@o2s/blocks.notification-list/api-harmonization';
 import * as OrderDetails from '@o2s/blocks.order-details/api-harmonization';
+import * as OrderList from '@o2s/blocks.order-list/api-harmonization';
 import * as OrdersSummary from '@o2s/blocks.orders-summary/api-harmonization';
 import * as PaymentsHistory from '@o2s/blocks.payments-history/api-harmonization';
 import * as PaymentsSummary from '@o2s/blocks.payments-summary/api-harmonization';
@@ -45,7 +46,6 @@ import { ArticleBlockModule } from '@o2s/api-harmonization/blocks/article/articl
 import { CategoryListBlockModule } from '@o2s/api-harmonization/blocks/category-list/category-list.module';
 import { CategoryBlockModule } from '@o2s/api-harmonization/blocks/category/category.module';
 import { FeaturedServiceListBlockModule } from '@o2s/api-harmonization/blocks/featured-service-list/featured-service-list.module';
-import { OrderListBlockModule } from '@o2s/api-harmonization/blocks/order-list/order-list.module';
 import { ServiceDetailsBlockModule } from '@o2s/api-harmonization/blocks/service-details/service-details.module';
 import { ServiceListBlockModule } from '@o2s/api-harmonization/blocks/service-list/service-list.module';
 import { SurveyjsBlockModule } from '@o2s/api-harmonization/blocks/surveyjs/surveyjs.module';
@@ -122,7 +122,7 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
         ServiceListBlockModule.register(AppConfig),
         ServiceDetailsBlockModule.register(AppConfig),
         SurveyjsBlockModule.register(AppConfig),
-        OrderListBlockModule.register(AppConfig),
+        OrderList.Module.register(AppConfig),
         OrdersSummary.Module.register(AppConfig),
         OrderDetails.Module.register(AppConfig),
         QuickLinks.Module.register(AppConfig),
