@@ -1,5 +1,6 @@
 import { Modules } from '@o2s/api-harmonization';
 import * as Faq from '@o2s/blocks.faq/frontend';
+import * as FeaturedServiceList from '@o2s/blocks.featured-service-list/frontend';
 import * as InvoiceList from '@o2s/blocks.invoice-list/frontend';
 import * as NotificationDetails from '@o2s/blocks.notification-details/frontend';
 import * as NotificationList from '@o2s/blocks.notification-list/frontend';
@@ -30,7 +31,6 @@ import { ArticleListRenderer } from '@/blocks/ArticleList/ArticleList.renderer';
 import { ArticleSearchRenderer } from '@/blocks/ArticleSearch/ArticleSearch.renderer';
 import { CategoryRenderer } from '@/blocks/Category/Category.renderer';
 import { CategoryListRenderer } from '@/blocks/CategoryList/CategoryList.renderer';
-import { FeaturedServiceListRenderer } from '@/blocks/FeaturedServiceList/FeaturedServiceList.renderer';
 import { SurveyJsRenderer } from '@/blocks/SurveyJs/SurveyJs.renderer';
 
 import { onSignOut } from '../actions/signOut';
@@ -112,14 +112,7 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: str
                     />
                 );
             case 'FeaturedServiceListBlock':
-                return (
-                    <FeaturedServiceListRenderer
-                        slug={slug}
-                        key={block.id}
-                        id={block.id}
-                        accessToken={session?.accessToken}
-                    />
-                );
+                return <FeaturedServiceList.Renderer key={block.id} {...blockProps} />;
             // BLOCK REGISTER
         }
     });

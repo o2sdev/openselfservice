@@ -24,6 +24,7 @@ import {
 } from '@o2s/framework/modules';
 
 import * as Faq from '@o2s/blocks.faq/api-harmonization';
+import * as FeaturedServiceList from '@o2s/blocks.featured-service-list/api-harmonization';
 import * as InvoiceList from '@o2s/blocks.invoice-list/api-harmonization';
 import * as NotificationDetails from '@o2s/blocks.notification-details/api-harmonization';
 import * as NotificationList from '@o2s/blocks.notification-list/api-harmonization';
@@ -47,7 +48,6 @@ import { ArticleSearchBlockModule } from '@o2s/api-harmonization/blocks/article-
 import { ArticleBlockModule } from '@o2s/api-harmonization/blocks/article/article.module';
 import { CategoryListBlockModule } from '@o2s/api-harmonization/blocks/category-list/category-list.module';
 import { CategoryBlockModule } from '@o2s/api-harmonization/blocks/category/category.module';
-import { FeaturedServiceListBlockModule } from '@o2s/api-harmonization/blocks/featured-service-list/featured-service-list.module';
 import { SurveyjsBlockModule } from '@o2s/api-harmonization/blocks/surveyjs/surveyjs.module';
 
 // BLOCK IMPORT
@@ -131,7 +131,7 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
         CategoryBlockModule.register(AppConfig),
         ArticleBlockModule.register(AppConfig),
         ArticleSearchBlockModule.register(AppConfig),
-        FeaturedServiceListBlockModule.register(AppConfig),
+        FeaturedServiceList.Module.register(AppConfig),
         // BLOCK REGISTER
     ],
     providers: [

@@ -1,5 +1,6 @@
-import { Blocks } from '@o2s/api-harmonization';
 import { defineRouting } from 'next-intl/routing';
+
+import { Model } from '../api-harmonization/payments-summary.client';
 
 export interface PaymentsSummaryProps {
     id: string;
@@ -8,7 +9,7 @@ export interface PaymentsSummaryProps {
     routing: ReturnType<typeof defineRouting>;
 }
 
-export type PaymentsSummaryPureProps = PaymentsSummaryProps & Blocks.PaymentsSummary.Model.PaymentsSummaryBlock;
+export type PaymentsSummaryPureProps = PaymentsSummaryProps & Model.PaymentsSummaryBlock;
 
 export interface PaymentsSummaryRendererProps extends Omit<PaymentsSummaryProps, ''> {
     slug: string[];
