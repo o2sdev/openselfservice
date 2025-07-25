@@ -5,14 +5,9 @@ import { Container } from '@o2s/ui/components/Container';
 import { Loading } from '@o2s/ui/components/Loading';
 
 import { Article } from './Article.server';
+import { ArticleRendererProps } from './Article.types';
 
-export interface ArticleRendererProps {
-    slug: string[];
-    id: string;
-    accessToken?: string;
-}
-
-export const ArticleRenderer: React.FC<ArticleRendererProps> = ({ id, slug, accessToken }) => {
+export const ArticleRenderer: React.FC<ArticleRendererProps> = ({ id, slug, accessToken, routing }) => {
     const locale = useLocale();
 
     return (
@@ -27,7 +22,7 @@ export const ArticleRenderer: React.FC<ArticleRendererProps> = ({ id, slug, acce
                 </>
             }
         >
-            <Article slug={`/${slug.join('/')}`} accessToken={accessToken} locale={locale} />
+            <Article id={id} slug={`/${slug.join('/')}`} accessToken={accessToken} locale={locale} routing={routing} />
         </Suspense>
     );
 };

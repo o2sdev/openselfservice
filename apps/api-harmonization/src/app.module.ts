@@ -23,6 +23,7 @@ import {
     Users,
 } from '@o2s/framework/modules';
 
+import * as Article from '@o2s/blocks.article/api-harmonization';
 import * as Faq from '@o2s/blocks.faq/api-harmonization';
 import * as FeaturedServiceList from '@o2s/blocks.featured-service-list/api-harmonization';
 import * as InvoiceList from '@o2s/blocks.invoice-list/api-harmonization';
@@ -45,7 +46,6 @@ import { configuration } from '@o2s/api-harmonization/config/configuration';
 
 import { ArticleListBlockModule } from '@o2s/api-harmonization/blocks/article-list/article-list.module';
 import { ArticleSearchBlockModule } from '@o2s/api-harmonization/blocks/article-search/article-search.module';
-import { ArticleBlockModule } from '@o2s/api-harmonization/blocks/article/article.module';
 import { CategoryListBlockModule } from '@o2s/api-harmonization/blocks/category-list/category-list.module';
 import { CategoryBlockModule } from '@o2s/api-harmonization/blocks/category/category.module';
 import { SurveyjsBlockModule } from '@o2s/api-harmonization/blocks/surveyjs/surveyjs.module';
@@ -129,7 +129,7 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
         CategoryListBlockModule.register(AppConfig),
         ArticleListBlockModule.register(AppConfig),
         CategoryBlockModule.register(AppConfig),
-        ArticleBlockModule.register(AppConfig),
+        Article.Module.register(AppConfig),
         ArticleSearchBlockModule.register(AppConfig),
         FeaturedServiceList.Module.register(AppConfig),
         // BLOCK REGISTER

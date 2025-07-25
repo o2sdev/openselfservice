@@ -1,5 +1,6 @@
 import { CMS, Models } from '@o2s/framework/modules';
 
+import * as Article from '@o2s/blocks.article/api-harmonization';
 import * as Faq from '@o2s/blocks.faq/api-harmonization';
 import * as FeaturedServiceList from '@o2s/blocks.featured-service-list/api-harmonization';
 import * as BlockInvoiceList from '@o2s/blocks.invoice-list/api-harmonization';
@@ -18,7 +19,7 @@ import * as TicketList from '@o2s/blocks.ticket-list/api-harmonization';
 import * as TicketRecent from '@o2s/blocks.ticket-recent/api-harmonization';
 import * as UserAccount from '@o2s/blocks.user-account/api-harmonization';
 
-import { Article, ArticleList, ArticleSearch, Category, CategoryList, Surveyjs } from '@o2s/api-harmonization/blocks';
+import { ArticleList, ArticleSearch, Category, CategoryList, Surveyjs } from '@o2s/api-harmonization/blocks';
 
 export class Init {
     locales!: {

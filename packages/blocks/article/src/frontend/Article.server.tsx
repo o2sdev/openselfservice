@@ -1,13 +1,13 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-import { sdk } from '@/api/sdk';
+import { sdk } from '../sdk';
 
 import { ArticleProps } from './Article.types';
 
 export const ArticleDynamic = dynamic(() => import('./Article.client').then((module) => module.ArticlePure));
 
-export const Article: React.FC<ArticleProps> = async ({ slug, accessToken, locale }) => {
+export const Article: React.FC<ArticleProps> = async ({ slug, accessToken, locale, routing }) => {
     try {
         const data = await sdk.blocks.getArticle(
             {
@@ -17,7 +17,7 @@ export const Article: React.FC<ArticleProps> = async ({ slug, accessToken, local
             accessToken,
         );
 
-        return <ArticleDynamic {...data} slug={slug} accessToken={accessToken} locale={locale} />;
+        return <ArticleDynamic {...data} slug={slug} accessToken={accessToken} locale={locale} routing={routing} />;
     } catch (_error) {
         return null;
     }
