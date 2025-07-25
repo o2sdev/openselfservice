@@ -9,6 +9,7 @@ import * as OrdersSummary from '@o2s/blocks.orders-summary/frontend';
 import * as PaymentsHistory from '@o2s/blocks.payments-history/frontend';
 import * as PaymentsSummary from '@o2s/blocks.payments-summary/frontend';
 import * as QuickLinks from '@o2s/blocks.quick-links/frontend';
+import * as ServiceDetails from '@o2s/blocks.service-details/frontend';
 import * as TicketDetails from '@o2s/blocks.ticket-details/frontend';
 import * as TicketList from '@o2s/blocks.ticket-list/frontend';
 import * as TickeRecent from '@o2s/blocks.ticket-recent/frontend';
@@ -29,8 +30,6 @@ import { ArticleSearchRenderer } from '@/blocks/ArticleSearch/ArticleSearch.rend
 import { CategoryRenderer } from '@/blocks/Category/Category.renderer';
 import { CategoryListRenderer } from '@/blocks/CategoryList/CategoryList.renderer';
 import { FeaturedServiceListRenderer } from '@/blocks/FeaturedServiceList/FeaturedServiceList.renderer';
-import { OrderListRenderer } from '@/blocks/OrderList/OrderList.renderer';
-import { ServiceDetailsRenderer } from '@/blocks/ServiceDetails/ServiceDetails.renderer';
 import { ServiceListRenderer } from '@/blocks/ServiceList/ServiceList.renderer';
 import { SurveyJsRenderer } from '@/blocks/SurveyJs/SurveyJs.renderer';
 
@@ -80,14 +79,7 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: str
             case 'ServiceListBlock':
                 return <ServiceListRenderer key={block.id} id={block.id} accessToken={session?.accessToken} />;
             case 'ServiceDetailsBlock':
-                return (
-                    <ServiceDetailsRenderer
-                        slug={slug}
-                        key={block.id}
-                        id={block.id}
-                        accessToken={session?.accessToken}
-                    />
-                );
+                return <ServiceDetails.Renderer key={block.id} {...blockProps} />;
             case 'SurveyJsBlock':
                 return <SurveyJsRenderer key={block.id} id={block.id} accessToken={session?.accessToken} />;
             case 'OrderListBlock':

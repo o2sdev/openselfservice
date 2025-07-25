@@ -9,6 +9,7 @@ import * as OrdersSummary from '@o2s/blocks.orders-summary/api-harmonization';
 import * as PaymentsHistory from '@o2s/blocks.payments-history/api-harmonization';
 import * as PaymentsSummary from '@o2s/blocks.payments-summary/api-harmonization';
 import * as QuickLinks from '@o2s/blocks.quick-links/api-harmonization';
+import * as ServiceDetails from '@o2s/blocks.service-details/api-harmonization';
 import * as TicketDetails from '@o2s/blocks.ticket-details/api-harmonization';
 import * as TicketList from '@o2s/blocks.ticket-list/api-harmonization';
 import * as TicketRecent from '@o2s/blocks.ticket-recent/api-harmonization';
@@ -22,7 +23,6 @@ import {
     CategoryList,
     FeaturedServiceList,
     OrderDetails,
-    ServiceDetails,
     ServiceList,
     Surveyjs,
 } from '@o2s/api-harmonization/blocks';

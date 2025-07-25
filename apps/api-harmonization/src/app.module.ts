@@ -33,6 +33,7 @@ import * as OrdersSummary from '@o2s/blocks.orders-summary/api-harmonization';
 import * as PaymentsHistory from '@o2s/blocks.payments-history/api-harmonization';
 import * as PaymentsSummary from '@o2s/blocks.payments-summary/api-harmonization';
 import * as QuickLinks from '@o2s/blocks.quick-links/api-harmonization';
+import * as ServiceDetails from '@o2s/blocks.service-details/api-harmonization';
 import * as TicketDetails from '@o2s/blocks.ticket-details/api-harmonization';
 import * as TicketList from '@o2s/blocks.ticket-list/api-harmonization';
 import * as TicketRecent from '@o2s/blocks.ticket-recent/api-harmonization';
@@ -46,7 +47,6 @@ import { ArticleBlockModule } from '@o2s/api-harmonization/blocks/article/articl
 import { CategoryListBlockModule } from '@o2s/api-harmonization/blocks/category-list/category-list.module';
 import { CategoryBlockModule } from '@o2s/api-harmonization/blocks/category/category.module';
 import { FeaturedServiceListBlockModule } from '@o2s/api-harmonization/blocks/featured-service-list/featured-service-list.module';
-import { ServiceDetailsBlockModule } from '@o2s/api-harmonization/blocks/service-details/service-details.module';
 import { ServiceListBlockModule } from '@o2s/api-harmonization/blocks/service-list/service-list.module';
 import { SurveyjsBlockModule } from '@o2s/api-harmonization/blocks/surveyjs/surveyjs.module';
 
@@ -120,7 +120,7 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
         UserAccount.Module.register(AppConfig),
         TicketRecent.Module.register(AppConfig),
         ServiceListBlockModule.register(AppConfig),
-        ServiceDetailsBlockModule.register(AppConfig),
+        ServiceDetails.Module.register(AppConfig),
         SurveyjsBlockModule.register(AppConfig),
         OrderList.Module.register(AppConfig),
         OrdersSummary.Module.register(AppConfig),
