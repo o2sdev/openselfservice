@@ -3,12 +3,12 @@
     "version": "0.0.1",
     "private": true,
     "license": "MIT",
-    "description": "A module that handles fetching and submitting SurveyJS-based forms.",
+    "description": "A module that handles fetching, rendering ans submitting SurveyJS-based forms.",
     "exports": {
         "./api-harmonization": "./dist/api-harmonization/api-harmonization/index.js",
         "./frontend": "./dist/frontend/frontend/index.js",
         "./sdk": "./dist/sdk/sdk/index.js",
-        "./client": "./dist/api-harmonization/api-  harmonization/surveyjs.client.js"
+        "./client": "./dist/api-harmonization/api-harmonization/surveyjs.client.js"
     },
     "files": [
         "dist"
