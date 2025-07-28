@@ -5,14 +5,9 @@ import { Container } from '@o2s/ui/components/Container';
 import { Loading } from '@o2s/ui/components/Loading';
 
 import { Category } from './Category.server';
+import { CategoryRendererProps } from './Category.types';
 
-export interface CategoryRendererProps {
-    slug: string[];
-    id: string;
-    accessToken?: string;
-}
-
-export const CategoryRenderer: React.FC<CategoryRendererProps> = ({ slug, id, accessToken }) => {
+export const CategoryRenderer: React.FC<CategoryRendererProps> = ({ slug, id, accessToken, routing, renderBlocks }) => {
     const locale = useLocale();
 
     return (
@@ -36,7 +31,16 @@ export const CategoryRenderer: React.FC<CategoryRendererProps> = ({ slug, id, ac
                 </div>
             }
         >
-            <Category id={id} slug={slug} accessToken={accessToken} locale={locale} />
+            <Category
+                id={id}
+                slug={slug}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+                renderBlocks={renderBlocks}
+            />
         </Suspense>
     );
 };
+
+export { CategoryRenderer as Renderer };

@@ -1,15 +1,14 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-import { sdk } from '@/api/sdk';
-
-import { CategoryBlocks } from '@/blocks/Category/CategoryBlocks';
+import { sdk } from '../sdk';
 
 import { CategoryProps } from './Category.types';
+import { CategoryBlocks } from './CategoryBlocks';
 
 export const CategoryDynamic = dynamic(() => import('./Category.client').then((module) => module.CategoryPure));
 
-export const Category: React.FC<CategoryProps> = async ({ id, slug, accessToken, locale }) => {
+export const Category: React.FC<CategoryProps> = async ({ id, slug, accessToken, locale, routing, renderBlocks }) => {
     try {
         const data = await sdk.blocks.getCategory(
             {
@@ -26,7 +25,9 @@ export const Category: React.FC<CategoryProps> = async ({ id, slug, accessToken,
                 slug={slug}
                 accessToken={accessToken}
                 locale={locale}
-                blocks={<CategoryBlocks components={data.components} slug={slug} />}
+                routing={routing}
+                blocks={<CategoryBlocks renderBlocks={renderBlocks} components={data.components} slug={slug} />}
+                renderBlocks={renderBlocks}
             />
         );
     } catch (_error) {

@@ -27,6 +27,7 @@ import * as ArticleList from '@o2s/blocks.article-list/api-harmonization';
 import * as ArticleSearch from '@o2s/blocks.article-search/api-harmonization';
 import * as Article from '@o2s/blocks.article/api-harmonization';
 import * as CategoryList from '@o2s/blocks.category-list/api-harmonization';
+import * as Category from '@o2s/blocks.category/api-harmonization';
 import * as Faq from '@o2s/blocks.faq/api-harmonization';
 import * as FeaturedServiceList from '@o2s/blocks.featured-service-list/api-harmonization';
 import * as InvoiceList from '@o2s/blocks.invoice-list/api-harmonization';
@@ -47,7 +48,6 @@ import * as UserAccount from '@o2s/blocks.user-account/api-harmonization';
 
 import { configuration } from '@o2s/api-harmonization/config/configuration';
 
-import { CategoryBlockModule } from '@o2s/api-harmonization/blocks/category/category.module';
 import { SurveyjsBlockModule } from '@o2s/api-harmonization/blocks/surveyjs/surveyjs.module';
 
 // BLOCK IMPORT
@@ -126,7 +126,7 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
         OrdersSummary.Module.register(AppConfig),
         OrderDetails.Module.register(AppConfig),
         QuickLinks.Module.register(AppConfig),
-        CategoryBlockModule.register(AppConfig),
+        Category.Module.register(AppConfig),
         CategoryList.Module.register(AppConfig),
         Article.Module.register(AppConfig),
         ArticleSearch.Module.register(AppConfig),

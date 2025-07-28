@@ -1,8 +1,11 @@
+'use server';
+
 import { Modules } from '@o2s/api-harmonization';
 import * as ArticleList from '@o2s/blocks.article-list/frontend';
 import * as ArticleSearch from '@o2s/blocks.article-search/frontend';
 import * as Article from '@o2s/blocks.article/frontend';
 import * as CategoryList from '@o2s/blocks.category-list/frontend';
+import * as Category from '@o2s/blocks.category/frontend';
 import * as Faq from '@o2s/blocks.faq/frontend';
 import * as FeaturedServiceList from '@o2s/blocks.featured-service-list/frontend';
 import * as InvoiceList from '@o2s/blocks.invoice-list/frontend';
@@ -30,7 +33,6 @@ import { auth } from '@/auth';
 // BLOCK IMPORT
 import { routing } from '@/i18n';
 
-import { CategoryRenderer } from '@/blocks/Category/Category.renderer';
 import { SurveyJsRenderer } from '@/blocks/SurveyJs/SurveyJs.renderer';
 
 import { onSignOut } from '../actions/signOut';
@@ -95,7 +97,7 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: str
             case 'ArticleListBlock':
                 return <ArticleList.Renderer key={block.id} {...blockProps} />;
             case 'CategoryBlock':
-                return <CategoryRenderer slug={slug} key={block.id} id={block.id} accessToken={session?.accessToken} />;
+                return <Category.Renderer key={block.id} {...blockProps} renderBlocks={renderBlocks} />;
             case 'ArticleBlock':
                 return <Article.Renderer key={block.id} {...blockProps} />;
             case 'ArticleSearchBlock':

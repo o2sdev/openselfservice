@@ -1,8 +1,10 @@
-import { Articles, CMS, Models } from '@o2s/framework/modules';
+import { Articles, CMS } from '@o2s/configs.integrations';
 
-import { Block } from '../../utils';
+import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 
-export class CategoryBlock extends Block.Block {
+import { Models } from '@o2s/framework/modules';
+
+export class CategoryBlock extends ApiModels.Block.Block {
     __typename!: 'CategoryBlock';
     title!: Articles.Model.Category['title'];
     description!: Articles.Model.Category['description'];

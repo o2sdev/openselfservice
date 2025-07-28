@@ -1,6 +1,6 @@
 'use client';
 
-import { Blocks } from '@o2s/api-harmonization';
+import { createNavigation } from 'next-intl/navigation';
 import React, { useState, useTransition } from 'react';
 
 import { BlogCard } from '@o2s/ui/components/Cards/BlogCard';
@@ -13,25 +13,33 @@ import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
 import { Separator } from '@o2s/ui/elements/separator';
 import { Typography } from '@o2s/ui/elements/typography';
 
-import { sdk } from '@/api/sdk';
-
-import { Link } from '@/i18n';
+import { Model, Request } from '../api-harmonization/category.client';
+import { sdk } from '../sdk';
 
 import { CategoryPureProps } from './Category.types';
 
-export const CategoryPure: React.FC<CategoryPureProps> = ({ slug, locale, accessToken, blocks, ...component }) => {
-    const initialArticles: Blocks.Category.Request.GetCategoryBlockArticlesQuery = {
+export const CategoryPure: React.FC<CategoryPureProps> = ({
+    slug,
+    locale,
+    accessToken,
+    routing,
+    blocks,
+    ...component
+}) => {
+    const { Link: LinkComponent } = createNavigation(routing);
+
+    const initialArticles: Request.GetCategoryBlockArticlesQuery = {
         id: component.id,
         offset: 0,
         limit: component.pagination?.limit || 6,
     };
 
     const initialData = component.articles.items.data;
-    const [data, setData] = useState<Blocks.Category.Model.CategoryArticles>(component.articles);
+    const [data, setData] = useState<Model.CategoryArticles>(component.articles);
     const [articles, setArticles] = useState(initialArticles);
     const [isPending, startTransition] = useTransition();
 
-    const handlePagination = (data: Partial<Blocks.Category.Request.GetCategoryBlockArticlesQuery>) => {
+    const handlePagination = (data: Partial<Request.GetCategoryBlockArticlesQuery>) => {
         startTransition(async () => {
             const newArticles = { ...articles, ...data };
             const newData = await sdk.blocks.getCategoryArticles(newArticles, { 'x-locale': locale }, accessToken);
@@ -64,7 +72,7 @@ export const CategoryPure: React.FC<CategoryPureProps> = ({ slug, locale, access
                                 <ContentSection
                                     title={component.articles.title}
                                     description={component.articles.description}
-                                    LinkComponent={Link}
+                                    LinkComponent={LinkComponent}
                                 >
                                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
                                         {data.items.data.map((item) => (
@@ -85,7 +93,7 @@ export const CategoryPure: React.FC<CategoryPureProps> = ({ slug, locale, access
                                                             : undefined
                                                     }
                                                     categoryTitle={item.category?.title}
-                                                    LinkComponent={Link}
+                                                    LinkComponent={LinkComponent}
                                                 />
                                             </li>
                                         ))}
