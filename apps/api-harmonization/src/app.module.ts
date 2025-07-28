@@ -3,6 +3,7 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD, Reflector } from '@nestjs/core';
 import { Auth } from '@o2s/configs.integrations';
+import * as SurveyJs from '@o2s/modules.surveyjs/api-harmonization';
 
 import { LoggerModule, LoggerService } from '@o2s/utils.logger';
 
@@ -41,14 +42,13 @@ import * as PaymentsSummary from '@o2s/blocks.payments-summary/api-harmonization
 import * as QuickLinks from '@o2s/blocks.quick-links/api-harmonization';
 import * as ServiceDetails from '@o2s/blocks.service-details/api-harmonization';
 import * as ServiceList from '@o2s/blocks.service-list/api-harmonization';
+import * as SurveyJsForm from '@o2s/blocks.surveyjs-form/api-harmonization';
 import * as TicketDetails from '@o2s/blocks.ticket-details/api-harmonization';
 import * as TicketList from '@o2s/blocks.ticket-list/api-harmonization';
 import * as TicketRecent from '@o2s/blocks.ticket-recent/api-harmonization';
 import * as UserAccount from '@o2s/blocks.user-account/api-harmonization';
 
 import { configuration } from '@o2s/api-harmonization/config/configuration';
-
-import { SurveyjsBlockModule } from '@o2s/api-harmonization/blocks/surveyjs/surveyjs.module';
 
 // BLOCK IMPORT
 import { AppConfig } from './app.config';
@@ -59,7 +59,6 @@ import { NotFoundPageModule } from './modules/not-found-page/not-found-page.modu
 import { OrganizationsModule } from './modules/organizations/organizations.module';
 import { PageModule } from './modules/page/page.module';
 import { RoutesModule } from './modules/routes/routes.module';
-import { SurveyjsModule } from './modules/surveyjs-forms/surveyjs.module';
 
 export const CMSBaseModule = CMS.Module.register(AppConfig);
 export const TicketsBaseModule = Tickets.Module.register(AppConfig);
@@ -107,7 +106,7 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
         LoginPageModule.register(AppConfig),
         NotFoundPageModule.register(AppConfig),
         OrganizationsModule.register(AppConfig),
-        SurveyjsModule.register(AppConfig),
+        SurveyJs.Module.register(AppConfig),
 
         TicketList.Module.register(AppConfig),
         TicketDetails.Module.register(AppConfig),
@@ -121,7 +120,7 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
         TicketRecent.Module.register(AppConfig),
         ServiceList.Module.register(AppConfig),
         ServiceDetails.Module.register(AppConfig),
-        SurveyjsBlockModule.register(AppConfig),
+        SurveyJsForm.Module.register(AppConfig),
         OrderList.Module.register(AppConfig),
         OrdersSummary.Module.register(AppConfig),
         OrderDetails.Module.register(AppConfig),

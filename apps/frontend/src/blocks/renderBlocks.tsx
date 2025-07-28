@@ -19,6 +19,7 @@ import * as PaymentsSummary from '@o2s/blocks.payments-summary/frontend';
 import * as QuickLinks from '@o2s/blocks.quick-links/frontend';
 import * as ServiceDetails from '@o2s/blocks.service-details/frontend';
 import * as ServiceList from '@o2s/blocks.service-list/frontend';
+import * as SurveyJsForm from '@o2s/blocks.surveyjs-form/frontend';
 import * as TicketDetails from '@o2s/blocks.ticket-details/frontend';
 import * as TicketList from '@o2s/blocks.ticket-list/frontend';
 import * as TickeRecent from '@o2s/blocks.ticket-recent/frontend';
@@ -32,8 +33,6 @@ import { auth } from '@/auth';
 
 // BLOCK IMPORT
 import { routing } from '@/i18n';
-
-import { SurveyJsRenderer } from '@/blocks/SurveyJs/SurveyJs.renderer';
 
 import { onSignOut } from '../actions/signOut';
 
@@ -83,7 +82,7 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: str
             case 'ServiceDetailsBlock':
                 return <ServiceDetails.Renderer key={block.id} {...blockProps} />;
             case 'SurveyJsBlock':
-                return <SurveyJsRenderer key={block.id} id={block.id} accessToken={session?.accessToken} />;
+                return <SurveyJsForm.Renderer key={block.id} {...blockProps} />;
             case 'OrderListBlock':
                 return <OrderList.Renderer key={block.id} {...blockProps} />;
             case 'OrdersSummaryBlock':
