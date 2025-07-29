@@ -1,7 +1,7 @@
 {
     "name": "@o2s/blocks.notification-details",
     "version": "0.0.1",
-    "private": true,
+    "private": false,
     "license": "MIT",
     "description": "A block displaying and managing notification details.",
     "exports": {

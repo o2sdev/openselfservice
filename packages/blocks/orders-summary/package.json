@@ -1,7 +1,7 @@
 {
     "name": "@o2s/blocks.orders-summary",
     "version": "0.0.1",
-    "private": true,
+    "private": false,
     "license": "MIT",
     "description": "A block displaying a summary of orders, including statistics and recent activity.",
     "exports": {

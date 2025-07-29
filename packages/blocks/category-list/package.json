@@ -1,7 +1,7 @@
 {
     "name": "@o2s/blocks.category-list",
     "version": "0.0.1",
-    "private": true,
+    "private": false,
     "license": "MIT",
     "description": "Block for displaying a list of categories.",
     "exports": {

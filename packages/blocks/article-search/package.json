@@ -1,7 +1,7 @@
 {
     "name": "@o2s/blocks.article-search",
     "version": "0.0.1",
-    "private": true,
+    "private": false,
     "license": "MIT",
     "description": "Block for searching articles.",
     "exports": {

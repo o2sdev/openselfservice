@@ -1,7 +1,7 @@
 {
     "name": "@o2s/modules.surveyjs",
     "version": "0.0.1",
-    "private": true,
+    "private": false,
     "license": "MIT",
     "description": "A module that handles fetching, rendering ans submitting SurveyJS-based forms.",
     "exports": {

@@ -1,7 +1,7 @@
 {
     "name": "@o2s/blocks.featured-service-list",
     "version": "0.0.1",
-    "private": true,
+    "private": false,
     "license": "MIT",
     "description": "A block displaying a list of featured services.",
     "exports": {

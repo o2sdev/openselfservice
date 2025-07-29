@@ -1,7 +1,7 @@
 {
     "name": "@o2s/blocks.category",
     "version": "0.0.1",
-    "private": true,
+    "private": false,
     "license": "MIT",
     "description": "A block displaying a category with its articles, including pagination and filtering capabilities.",
     "exports": {
