@@ -1,10 +1,10 @@
 import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 
-import { Models } from '@o2s/framework/modules';
+import { Invoices, Models } from '@o2s/framework/modules';
 
 export class PaymentsSummaryBlock extends ApiModels.Block.Block {
     __typename!: 'PaymentsSummaryBlock';
-    currency!: Models.Price.Currency;
+    currency!: Invoices.Model.Invoice['currency'];
     overdue!: {
         title: string;
         icon?: string;

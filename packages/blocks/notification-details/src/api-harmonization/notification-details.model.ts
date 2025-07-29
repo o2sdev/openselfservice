@@ -4,7 +4,6 @@ import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 
 export class NotificationDetailsBlock extends ApiModels.Block.Block {
     __typename!: 'NotificationDetailsBlock';
-    declare id: string;
     data!: Notification;
 }
 
