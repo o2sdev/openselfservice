@@ -25,7 +25,8 @@
         "@o2s/ui": "*",
         "@o2s/utils.api-harmonization": "*",
         "@o2s/utils.frontend": "*",
-        "@o2s/configs.integrations": "*"
+        "@o2s/configs.integrations": "*",
+        "@o2s/modules.surveyjs": "*"
     },
     "devDependencies": {
         "dotenv-cli": "^8.0.0",
