@@ -1,7 +1,7 @@
 export enum Roles {
     PROSPECT = 'selfservice_prospect',
-    USER = 'selfservice_user',
-    ADMIN = 'selfservice_admin',
+    ORG_USER = 'selfservice_org_user',
+    ORG_ADMIN = 'selfservice_org_admin',
 }
 
 export enum RoleMatchingMode {

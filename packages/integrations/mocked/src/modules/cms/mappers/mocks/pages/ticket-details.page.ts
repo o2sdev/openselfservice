@@ -17,7 +17,7 @@ export const PAGE_TICKET_DETAILS_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
+    permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
     hasOwnTitle: true,
     parent: {
         slug: '/cases',
@@ -61,7 +61,7 @@ export const PAGE_TICKET_DETAILS_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
+    permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
     hasOwnTitle: true,
     parent: {
         slug: '/faelle',
@@ -105,7 +105,7 @@ export const PAGE_TICKET_DETAILS_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
+    permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
     hasOwnTitle: true,
     parent: {
         slug: '/zgloszenia',

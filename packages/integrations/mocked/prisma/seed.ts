@@ -10,7 +10,7 @@ async function main() {
             name: 'Jane Doe',
             email: 'jane@example.com',
             password: await hash('admin', 10),
-            role: Role.selfservice_admin,
+            role: Role.selfservice_org_admin,
             defaultCustomerId: 'cust-001',
         },
         {
@@ -18,14 +18,14 @@ async function main() {
             name: 'John Adams',
             email: 'john@example.com',
             password: await hash('user', 10),
-            role: Role.selfservice_user,
+            role: Role.selfservice_org_user,
         },
         {
             id: 'user-101',
             name: 'Lyon Gaultier',
             email: 'lyon@example.com',
             password: await hash('user', 10),
-            role: Role.selfservice_user,
+            role: Role.selfservice_org_user,
         },
     ];
 

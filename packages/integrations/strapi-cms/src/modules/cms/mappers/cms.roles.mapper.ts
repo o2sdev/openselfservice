@@ -10,9 +10,9 @@ export const mapRoles = (data?: RolesFragment): Auth.Constants.Roles[] => {
             case 'prospect':
                 return [...prev, Auth.Constants.Roles.PROSPECT];
             case 'user':
-                return [...prev, Auth.Constants.Roles.USER];
+                return [...prev, Auth.Constants.Roles.ORG_USER];
             case 'admin':
-                return [...prev, Auth.Constants.Roles.ADMIN];
+                return [...prev, Auth.Constants.Roles.ORG_ADMIN];
         }
 
         return prev;

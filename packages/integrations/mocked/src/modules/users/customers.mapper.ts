@@ -16,10 +16,10 @@ const MOCK_CUSTOMER_1: Models.Customer.Customer = {
     },
     roles: [
         {
-            roles: [Auth.Constants.Roles.USER],
+            roles: [Auth.Constants.Roles.ORG_USER],
         },
         {
-            roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
+            roles: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
         },
     ],
     parentOrgId: 'org-001',
@@ -41,7 +41,7 @@ const MOCK_CUSTOMER_2: Models.Customer.Customer = {
     },
     roles: [
         {
-            roles: [Auth.Constants.Roles.USER],
+            roles: [Auth.Constants.Roles.ORG_USER],
         },
     ],
     parentOrgId: 'org-002',
@@ -63,7 +63,7 @@ const MOCK_CUSTOMER_3: Models.Customer.Customer = {
     },
     roles: [
         {
-            roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
+            roles: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
         },
     ],
     parentOrgId: 'org-003',

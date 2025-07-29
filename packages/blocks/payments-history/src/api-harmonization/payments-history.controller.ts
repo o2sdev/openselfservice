@@ -15,7 +15,7 @@ export class PaymentsHistoryController {
     constructor(protected readonly service: PaymentsHistoryService) {}
 
     @Get()
-    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN] })
+    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN] })
     getPaymentsHistoryBlock(
         @Headers() headers: Models.Headers.AppHeaders,
         @Query() query: GetPaymentsHistoryBlockQuery,
