@@ -1,3 +1,5 @@
+'use clientr';
+
 import { createNavigation } from 'next-intl/navigation';
 import React from 'react';
 

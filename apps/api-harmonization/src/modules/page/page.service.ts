@@ -3,7 +3,8 @@ import { ConfigService } from '@nestjs/config';
 import { Articles, Auth, CMS } from '@o2s/configs.integrations';
 import { Observable, concatMap, forkJoin, map, of, switchMap } from 'rxjs';
 
-import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
+import { Models } from '@o2s/utils.api-harmonization';
+
 import { checkPermissions } from '@o2s/api-harmonization/utils/permissions';
 
 import { mapArticle, mapInit, mapPage } from './page.mapper';
@@ -45,7 +46,7 @@ export class PageService {
         );
     }
 
-    getInit(query: GetInitQuery, headers: AppHeaders): Observable<Init> {
+    getInit(query: GetInitQuery, headers: Models.Headers.AppHeaders): Observable<Init> {
         const userRoles = this.authService.extractUserRoles(headers['authorization']);
 
         return this.cmsService.getAppConfig({ referrer: query.referrer, locale: headers['x-locale'] }).pipe(
@@ -69,7 +70,7 @@ export class PageService {
         );
     }
 
-    getPage(query: GetPageQuery, headers: AppHeaders): Observable<Page | NotFound> {
+    getPage(query: GetPageQuery, headers: Models.Headers.AppHeaders): Observable<Page | NotFound> {
         const page = this.cmsService.getPage({ slug: query.slug, locale: headers['x-locale'] });
 
         const userRoles = this.authService.extractUserRoles(headers['authorization']);
@@ -97,7 +98,7 @@ export class PageService {
         );
     }
 
-    private processPage = (page: CMS.Model.Page.Page, query: GetPageQuery, headers: AppHeaders) => {
+    private processPage = (page: CMS.Model.Page.Page, query: GetPageQuery, headers: Models.Headers.AppHeaders) => {
         const alternatePages = this.cmsService
             .getAlternativePages({ id: page.id, slug: query.slug, locale: headers['x-locale'] })
             .pipe(map((pages) => pages.filter((p) => p.id === page.id)));
@@ -110,7 +111,11 @@ export class PageService {
         );
     };
 
-    private processArticle = (article: Articles.Model.Article, _query: GetPageQuery, headers: AppHeaders) => {
+    private processArticle = (
+        article: Articles.Model.Article,
+        _query: GetPageQuery,
+        headers: Models.Headers.AppHeaders,
+    ) => {
         if (!article.category) {
             throw new NotFoundException();
         }

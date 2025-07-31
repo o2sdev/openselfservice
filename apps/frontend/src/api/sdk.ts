@@ -1,6 +1,10 @@
 // this unused import is necessary for TypeScript to properly resolve API methods
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Blocks, Headers, Modules } from '@o2s/api-harmonization';
+import { Blocks, Modules } from '@o2s/api-harmonization';
+
+// this unused import is necessary for TypeScript to properly resolve API methods
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { Models } from '@o2s/utils.api-harmonization';
 
 import { extendSdk, getSdk } from '@o2s/framework/sdk';
 

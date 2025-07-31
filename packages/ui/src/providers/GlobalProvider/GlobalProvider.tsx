@@ -1,20 +1,42 @@
 'use client';
 
-import { Modules } from '@o2s/api-harmonization';
+import { CMS } from '@o2s/framework/modules';
 import React, { ReactNode, createContext, useContext, useState } from 'react';
 
 import { PriceService, usePriceService } from '@o2s/ui/components/Price';
 
+// TODO: reowrk model for `config` to a) not duplicate `page.model.ts` and b) not have `@o2s/api-harmonization`
+// TODO: dependency as it creates circular dependency problem
 interface GlobalProviderProps {
-    config: Omit<Modules.Page.Model.Init, 'labels'>;
-    labels: Modules.Page.Model.Init['labels'];
+    config: {
+        locales: {
+            value: string;
+            label: string;
+        }[];
+        common: {
+            header: CMS.Model.Header.Header;
+            footer: CMS.Model.Footer.Footer;
+        };
+        labels: CMS.Model.AppConfig.Labels;
+    };
+    labels: CMS.Model.AppConfig.Labels;
     locale: string;
     children: ReactNode;
 }
 
 export interface GlobalContextType {
-    config: Omit<Modules.Page.Model.Init, 'labels'>;
-    labels: Modules.Page.Model.Init['labels'];
+    config: {
+        locales: {
+            value: string;
+            label: string;
+        }[];
+        common: {
+            header: CMS.Model.Header.Header;
+            footer: CMS.Model.Footer.Footer;
+        };
+        labels: CMS.Model.AppConfig.Labels;
+    };
+    labels: CMS.Model.AppConfig.Labels;
     priceService: PriceService;
     spinner: {
         isVisible: boolean;

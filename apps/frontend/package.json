@@ -57,7 +57,8 @@
         "@o2s/blocks.category-list": "*",
         "@o2s/blocks.article-search": "*",
         "@o2s/blocks.category": "*",
-        "@o2s/blocks.notification-details": "*"
+        "@o2s/blocks.notification-details": "*",
+        "@o2s/blocks.surveyjs-form": "*"
     },
     "devDependencies": {
         "@next/bundle-analyzer": "^15.3.2",

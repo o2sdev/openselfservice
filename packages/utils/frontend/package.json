@@ -17,8 +17,10 @@
         "lint": "tsc --noEmit && eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
         "format": "prettier --write \"src/**/*.ts\""
     },
+    "dependencies": {
+        "@o2s/framework": "*"
+    },
     "peerDependencies": {
-        "@o2s/framework": "*",
         "jsonwebtoken": "^9.0.2",
         "dayjs": "^1.11.13"
     }
