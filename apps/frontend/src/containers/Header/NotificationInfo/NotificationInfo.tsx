@@ -1,7 +1,7 @@
 import { Bell } from 'lucide-react';
 
-import { BadgeStatus } from '@o2s/ui/components/badge-status';
-import { Button } from '@o2s/ui/components/button';
+import { BadgeStatus } from '@o2s/ui/elements/badge-status';
+import { Button } from '@o2s/ui/elements/button';
 
 import { Link as NextLink } from '@/i18n';
 

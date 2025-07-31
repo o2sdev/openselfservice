@@ -1,8 +1,8 @@
+import { Articles, CMS } from '@o2s/configs.integrations';
+
 import { Auth } from '@o2s/framework/modules';
 
 import { getHasAccess } from '@o2s/api-harmonization/utils/permissions';
-
-import { Articles, CMS } from '../../models';
 
 import { Breadcrumb, Init, Page } from './page.model';
 

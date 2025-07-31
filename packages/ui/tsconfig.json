@@ -5,7 +5,11 @@
         "baseUrl": "./",
         "paths": {
             "@o2s/ui/*": ["./src/*"],
-            "@o2s/ui/components/ui*": ["./src/components/ui/*"]
+            "@o2s/ui/elements/*": ["./src/elements/*"],
+            "@o2s/ui/components/*": ["./src/components/*"],
+            "@o2s/ui/providers/*": ["./src/providers/*"],
+            "@o2s/ui/hooks/*": ["./src/hooks/*"],
+            "@o2s/ui/lib/*": ["./src/lib/*"],
         }
     },
     "include": ["src"],

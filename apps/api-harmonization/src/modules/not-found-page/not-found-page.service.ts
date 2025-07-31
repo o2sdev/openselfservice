@@ -1,9 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { CMS } from '@o2s/configs.integrations';
 import { Observable, map } from 'rxjs';
 
-import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
-
-import { CMS } from '../../models';
+import { Models } from '@o2s/utils.api-harmonization';
 
 import { mapNotFoundPage } from './not-found-page.mapper';
 import { NotFoundPage } from './not-found-page.model';
@@ -12,7 +11,7 @@ import { NotFoundPage } from './not-found-page.model';
 export class NotFoundPageService {
     constructor(private readonly cmsService: CMS.Service) {}
 
-    getNotFoundPage(headers: AppHeaders): Observable<NotFoundPage> {
+    getNotFoundPage(headers: Models.Headers.AppHeaders): Observable<NotFoundPage> {
         return this.cmsService.getNotFoundPage({ locale: headers['x-locale'] }).pipe(
             map((notFoundPage) => {
                 if (!notFoundPage) {

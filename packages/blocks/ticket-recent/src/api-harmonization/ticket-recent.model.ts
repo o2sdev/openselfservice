@@ -1,0 +1,43 @@
+import { Tickets } from '@o2s/configs.integrations';
+
+import { Models } from '@o2s/utils.api-harmonization';
+
+export class TicketRecentBlock extends Models.Block.Block {
+    __typename!: 'TicketRecentBlock';
+    title?: string;
+    noResults?: string;
+    details?: string;
+    tickets!: {
+        data: Ticket[];
+    };
+}
+
+export class Ticket {
+    id!: {
+        value: Tickets.Model.Ticket['id'];
+    };
+    topic!: {
+        value: Tickets.Model.Ticket['topic'];
+    };
+    type!: {
+        value: Tickets.Model.Ticket['type'];
+    };
+    status!: {
+        value: Tickets.Model.Ticket['status'];
+    };
+    createdAt!: Tickets.Model.Ticket['createdAt'];
+    updatedAt!: Tickets.Model.Ticket['updatedAt'];
+    comments!: TicketComments;
+    detailsUrl!: string;
+}
+
+export class TicketComments {
+    title?: string;
+    items!: TicketComment[];
+}
+
+export class TicketComment {
+    author!: Tickets.Model.Author;
+    date!: string;
+    content!: string;
+}

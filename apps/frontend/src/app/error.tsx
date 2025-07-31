@@ -5,7 +5,9 @@ import { Inter } from 'next/font/google';
 import { useParams } from 'next/navigation';
 import React from 'react';
 
-import { ErrorPage } from '@/components/ErrorPage/ErrorPage';
+import { ErrorPage } from '@o2s/ui/components/ErrorPage';
+
+import { Link } from '@/i18n';
 
 import '@/styles/global.css';
 
@@ -65,6 +67,7 @@ export default function Error() {
                                 url: '/',
                                 label: errorData.action,
                             }}
+                            LinkComponent={Link}
                         />
                     </main>
                 </NextIntlClientProvider>

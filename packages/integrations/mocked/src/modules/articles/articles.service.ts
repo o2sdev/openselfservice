@@ -4,22 +4,21 @@ import { Observable, map, of } from 'rxjs';
 import { Articles, Search } from '@o2s/framework/modules';
 
 import { mapArticle, mapCategories, mapCategory } from './articles.mapper';
-import { responseDelay } from '@/utils/delay';
 
 @Injectable()
 export class ArticlesService implements Articles.Service {
     constructor(private readonly searchService: Search.Service) {}
 
     getCategory(options: Articles.Request.GetCategoryParams): Observable<Articles.Model.Category> {
-        return of(mapCategory(options.locale, options.id)).pipe(responseDelay());
+        return of(mapCategory(options.locale, options.id));
     }
 
     getCategoryList(options: Articles.Request.GetCategoryListQuery): Observable<Articles.Model.Categories> {
-        return of(mapCategories(options.locale, options)).pipe(responseDelay());
+        return of(mapCategories(options.locale, options));
     }
 
-    getArticle(params: Articles.Request.GetArticleParams): Observable<Articles.Model.Article> {
-        return of(mapArticle(params.locale, params.slug)).pipe(responseDelay());
+    getArticle(params: Articles.Request.GetArticleParams): Observable<Articles.Model.Article | undefined> {
+        return of(mapArticle(params.locale, params.slug));
     }
 
     getArticleList(options: Articles.Request.GetArticleListQuery): Observable<Articles.Model.Articles> {
@@ -50,7 +49,6 @@ export class ArticlesService implements Articles.Service {
             map((result) => {
                 return result;
             }),
-            responseDelay(),
         );
     }
 
@@ -82,7 +80,6 @@ export class ArticlesService implements Articles.Service {
             map((result) => {
                 return result;
             }),
-            responseDelay(),
         );
     }
 }
