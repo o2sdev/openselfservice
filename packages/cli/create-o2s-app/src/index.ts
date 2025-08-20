@@ -115,60 +115,17 @@ program
 program.parse(process.argv);
 
 const removeSymLinks = (file: string) => {
-    // TODO: figure out how to remove symlinks in a smarter way without specifying every block here
-    const names = [
-        ['docs', 'apps/docs'],
-        ['create-o2s-app', 'packages/cli/create-o2s-app'],
-        ['framework', 'packages/framework'],
-        ['telemetry', 'packages/telemetry'],
+    const json = JSON.parse(file);
 
-        ['utils.api-harmonization', 'packages/utils/api-harmonization'],
-        ['utils.logger', 'packages/utils/logger'],
-        ['utils.frontend', 'packages/utils/frontend'],
+    // Traverse packages and remove any key with "link": true
+    if (json && json.packages) {
+        for (const [key, value] of Object.entries(json.packages)) {
+            if (value && typeof value === 'object' && (value as { link: boolean }).link) {
+                delete json.packages[key];
+            }
+        }
+    }
 
-        ['integrations.mocked', 'packages/integrations/mocked'],
-        ['integrations.strapi-cms', 'packages/integrations/strapi-cms'],
-        ['integrations.redis', 'packages/integrations/redis'],
-        ['integrations.medusajs', 'packages/integrations/medusajs'],
-        ['integrations.algolia', 'packages/integrations/algolia'],
-
-        ['blocks.article', 'packages/blocks/article'],
-        ['blocks.article-list', 'packages/blocks/article-list'],
-        ['blocks.article-search', 'packages/blocks/article-search'],
-        ['blocks.category', 'packages/blocks/category'],
-        ['blocks.category-list', 'packages/blocks/category-list'],
-        ['blocks.faq', 'packages/blocks/faq'],
-        ['blocks.featured-service-list', 'packages/blocks/featured-service-list'],
-        ['blocks.invoice-list', 'packages/blocks/invoice-list'],
-        ['blocks.notification-details', 'packages/blocks/notification-details'],
-        ['blocks.notification-list', 'packages/blocks/notification-list'],
-        ['blocks.order-details', 'packages/blocks/order-details'],
-        ['blocks.order-list', 'packages/blocks/order-list'],
-        ['blocks.orders-summary', 'packages/blocks/orders-summary'],
-        ['blocks.payments-history', 'packages/blocks/payments-history'],
-        ['blocks.payments-summary', 'packages/blocks/payments-summary'],
-        ['blocks.quick-links', 'packages/blocks/quick-links'],
-        ['blocks.service-details', 'packages/blocks/service-details'],
-        ['blocks.service-list', 'packages/blocks/service-list'],
-        ['blocks.surveyjs-form', 'packages/blocks/surveyjs-form'],
-        ['blocks.ticket-details', 'packages/blocks/ticket-details'],
-        ['blocks.ticket-list', 'packages/blocks/ticket-list'],
-        ['blocks.ticket-recent', 'packages/blocks/ticket-recent'],
-        ['blocks.user-account', 'packages/blocks/user-account'],
-    ];
-
-    let newFile = file;
-
-    names.forEach(([name, path]) => {
-        newFile = newFile.replaceAll(
-            `
-        "node_modules/@o2s/${name}": {
-            "resolved": "${path}",
-            "link": true
-        },`,
-            '',
-        );
-    });
-
-    return newFile;
+    // Stringify cleaned JSON
+    return JSON.stringify(json, null, 4);
 };
