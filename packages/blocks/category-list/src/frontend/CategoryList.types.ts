@@ -1,6 +1,6 @@
 import { defineRouting } from 'next-intl/routing';
 
-import { Model, Request } from '../api-harmonization/category-list.client';
+import { Model } from '../api-harmonization/category-list.client';
 
 export interface CategoryListProps {
     id: string;

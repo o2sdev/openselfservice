@@ -29,6 +29,7 @@
         "@o2s/integrations.mocked": "*",
         "@o2s/configs.integrations": "*",
         "@o2s/telemetry": "*",
+        "@dxp/utils.api-harmonization": "*",
         "@o2s/utils.logger": "*",
         "compression": "^1.8.0",
         "cookie": "^1.0.2",

@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useState } from 'react';
+import React, { createContext, useContext, useMemo, useState } from 'react';
 
 export interface InitialFilters {
     [key: string]: string | number;

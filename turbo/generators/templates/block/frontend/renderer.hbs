@@ -1,0 +1,28 @@
+import { useLocale } from 'next-intl';
+import React, { Suspense } from 'react';
+
+import { Container } from '@o2s/ui/components/Container';
+import { Loading } from '@o2s/ui/components/Loading';
+
+import { {{ pascalCase name }} } from './{{ pascalCase name }}.server';
+import { {{ pascalCase name }}RendererProps } from './{{ pascalCase name }}.types';
+
+export const {{ pascalCase name }}Renderer: React.FC<{{ pascalCase name }}RendererProps> = ({ id, accessToken, routing }) => {
+    const locale = useLocale();
+
+    return (
+        <Suspense
+            key={id}
+            fallback={
+                <>
+                    <Loading bars={1} />
+                    <Container variant="narrow">
+                        <Loading bars={8} />
+                    </Container>
+                </>
+            }
+        >
+            <{{ pascalCase name }} id={id} accessToken={accessToken} locale={locale} routing={routing} />
+        </Suspense>
+    );
+};

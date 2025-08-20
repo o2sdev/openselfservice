@@ -6,14 +6,9 @@
     "exports": {
         "./base": "./base.js",
         "./frontend": "./frontend.js",
+        "./frontend-block": "./frontend-block.js",
         "./api": "./api.js",
         "./ui": "./ui.js"
-    },
-    "scripts": {
-        "check-deps": "npx npm-check-updates --format group",
-        "update-deps:patch": "npx npm-check-updates --target patch -u",
-        "update-deps:minor": "npx npm-check-updates --target minor -u",
-        "update-deps:latest": "npx npm-check-updates --target latest -u"
     },
     "devDependencies": {
         "@eslint/js": "^9.27.0",

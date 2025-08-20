@@ -1,7 +1,5 @@
 import { CMS, Products } from '@o2s/configs.integrations';
 
-import { Utils } from '@o2s/utils.api-harmonization';
-
 import { FeaturedService, FeaturedServiceListBlock } from './featured-service-list.model';
 
 export const mapFeaturedServiceList = (

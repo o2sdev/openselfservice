@@ -75,7 +75,7 @@ program
             rmSync(`${targetDirectory}/packages/framework`, { recursive: true });
             rmSync(`${targetDirectory}/packages/integrations`, { recursive: true });
             rmSync(`${targetDirectory}/packages/utils`, { recursive: true });
-            rmSync(`${targetDirectory}/packages/create-o2s-app`, { recursive: true });
+            rmSync(`${targetDirectory}/packages/cli`, { recursive: true });
             rmSync(`${targetDirectory}/packages/telemetry`, { recursive: true });
 
             let file = readFileSync(targetDirectory + '/package-lock.json', 'utf8');
@@ -115,17 +115,46 @@ program
 program.parse(process.argv);
 
 const removeSymLinks = (file: string) => {
+    // TODO: figure out how to remove symlinks in a smarter way without specifying every block here
     const names = [
         ['docs', 'apps/docs'],
-        ['create-o2s-app', 'packages/create-o2s-app'],
-        ['utils.logger', 'packages/utils/logger'],
+        ['create-o2s-app', 'packages/cli/create-o2s-app'],
         ['framework', 'packages/framework'],
         ['telemetry', 'packages/telemetry'],
+
+        ['utils.api-harmonization', 'packages/utils/api-harmonization'],
+        ['utils.logger', 'packages/utils/logger'],
+        ['utils.frontend', 'packages/utils/frontend'],
+
         ['integrations.mocked', 'packages/integrations/mocked'],
         ['integrations.strapi-cms', 'packages/integrations/strapi-cms'],
         ['integrations.redis', 'packages/integrations/redis'],
         ['integrations.medusajs', 'packages/integrations/medusajs'],
         ['integrations.algolia', 'packages/integrations/algolia'],
+
+        ['blocks.article', 'packages/blocks/article'],
+        ['blocks.article-list', 'packages/blocks/article-list'],
+        ['blocks.article-search', 'packages/blocks/article-search'],
+        ['blocks.category', 'packages/blocks/category'],
+        ['blocks.category-list', 'packages/blocks/category-list'],
+        ['blocks.faq', 'packages/blocks/faq'],
+        ['blocks.featured-service-list', 'packages/blocks/featured-service-list'],
+        ['blocks.invoice-list', 'packages/blocks/invoice-list'],
+        ['blocks.notification-details', 'packages/blocks/notification-details'],
+        ['blocks.notification-list', 'packages/blocks/notification-list'],
+        ['blocks.order-details', 'packages/blocks/order-details'],
+        ['blocks.order-list', 'packages/blocks/order-list'],
+        ['blocks.orders-summary', 'packages/blocks/orders-summary'],
+        ['blocks.payments-history', 'packages/blocks/payments-history'],
+        ['blocks.payments-summary', 'packages/blocks/payments-summary'],
+        ['blocks.quick-links', 'packages/blocks/quick-links'],
+        ['blocks.service-details', 'packages/blocks/service-details'],
+        ['blocks.service-list', 'packages/blocks/service-list'],
+        ['blocks.surveyjs-form', 'packages/blocks/surveyjs-form'],
+        ['blocks.ticket-details', 'packages/blocks/ticket-details'],
+        ['blocks.ticket-list', 'packages/blocks/ticket-list'],
+        ['blocks.ticket-recent', 'packages/blocks/ticket-recent'],
+        ['blocks.user-account', 'packages/blocks/user-account'],
     ];
 
     let newFile = file;

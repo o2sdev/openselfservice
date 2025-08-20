@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import React from 'react';
 
 import { Tooltip, TooltipContent, TooltipTrigger } from '@o2s/ui/elements/tooltip';
 

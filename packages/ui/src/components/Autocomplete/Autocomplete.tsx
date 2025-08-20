@@ -1,7 +1,7 @@
 'use client';
 
 import { Command as CommandPrimitive } from 'cmdk';
-import { type KeyboardEvent, useCallback, useRef, useState } from 'react';
+import React, { type KeyboardEvent, useCallback, useRef, useState } from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
