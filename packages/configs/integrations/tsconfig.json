@@ -1,0 +1,9 @@
+{
+    "extends": "@o2s/typescript-config/api.json",
+    "compilerOptions": {
+        "outDir": "./dist",
+        "rootDir": "./"
+    },
+    "include": ["src"],
+    "exclude": ["node_modules", "dist"]
+}

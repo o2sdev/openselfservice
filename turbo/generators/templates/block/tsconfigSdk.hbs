@@ -1,0 +1,19 @@
+{
+    "extends": "@o2s/typescript-config/api.json",
+    "compilerOptions": {
+        "outDir": "./dist/sdk",
+        "rootDir": "./src",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "composite": true,
+        "declaration": true,
+        "declarationMap": true,
+        "baseUrl": "./src/sdk"
+    },
+    "include": [
+        "src/sdk",
+        "src/api-harmonization/{{kebabCase name}}.client.ts",
+        "src/api-harmonization/{{kebabCase name}}.model.ts",
+        "src/api-harmonization/{{kebabCase name}}.request.ts"
+    ]
+}

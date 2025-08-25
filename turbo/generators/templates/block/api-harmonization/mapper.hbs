@@ -1,0 +1,13 @@
+import { CMS } from '@o2s/configs.integrations';
+
+import { {{ pascalCase name }}Block } from './{{ kebabCase name }}.model';
+
+export const map{{ pascalCase name }} = (
+    cms: CMS.Model.{{ pascalCase name }}Block.{{ pascalCase name }}Block,
+    _locale: string,
+): {{ pascalCase name }}Block => {
+    return {
+        __typename: '{{ pascalCase name }}Block',
+        id: cms.id,
+    };
+};

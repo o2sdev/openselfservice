@@ -6,11 +6,11 @@ import { AuthError } from 'next-auth';
 import React, { useState } from 'react';
 import { object as YupObject, string as YupString } from 'yup';
 
-import { Alert, AlertDescription } from '@o2s/ui/components/alert';
-import { Button } from '@o2s/ui/components/button';
-import { InputWithLabel } from '@o2s/ui/components/input';
-import { Separator } from '@o2s/ui/components/separator';
-import { Typography } from '@o2s/ui/components/typography';
+import { Alert, AlertDescription } from '@o2s/ui/elements/alert';
+import { Button } from '@o2s/ui/elements/button';
+import { InputWithLabel } from '@o2s/ui/elements/input';
+import { Separator } from '@o2s/ui/elements/separator';
+import { Typography } from '@o2s/ui/elements/typography';
 
 import LogoGithub from '@/assets/icons/logo-github.svg';
 import LogoKeycloak from '@/assets/icons/logo-keycloak.svg';

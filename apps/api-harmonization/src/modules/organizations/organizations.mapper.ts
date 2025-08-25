@@ -1,6 +1,6 @@
-import { Models, Organizations as OrganizationModule } from '@o2s/framework/modules';
+import { CMS, Organizations } from '@o2s/configs.integrations';
 
-import { CMS, Organizations } from '../../models';
+import { Models, Organizations as OrganizationModule } from '@o2s/framework/modules';
 
 import { CustomerList } from './organizations.model';
 

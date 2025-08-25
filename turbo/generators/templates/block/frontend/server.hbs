@@ -1,0 +1,28 @@
+import dynamic from 'next/dynamic';
+import React from 'react';
+
+import { sdk } from '../sdk';
+
+import { {{ pascalCase name }}Props } from './{{ pascalCase name }}.types';
+
+
+export const {{ pascalCase name }}Dynamic = dynamic(() =>
+    import('./{{ pascalCase name }}.client').then((module) => module.{{ pascalCase name }}Pure),
+);
+
+export const {{ pascalCase name }}: React.FC<{{ pascalCase name }}Props> = async ({ id, accessToken, locale, routing }) => {
+    try {
+        const data = await sdk.blocks.get{{ pascalCase name }}(
+            {
+                id,
+            },
+            { 'x-locale': locale },
+            accessToken,
+        );
+
+        return <{{ pascalCase name }}Dynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />;
+    } catch (error) {
+        console.error('Error fetching {{ pascalCase name }} block', error);
+        return null;
+    }
+};

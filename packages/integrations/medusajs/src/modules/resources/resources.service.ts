@@ -2,8 +2,9 @@ import Medusa from '@medusajs/js-sdk';
 import { HttpService } from '@nestjs/axios';
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { LoggerService } from '@o2s/utils.logger';
 import { Observable, catchError, forkJoin, map, switchMap } from 'rxjs';
+
+import { LoggerService } from '@o2s/utils.logger';
 
 import { Auth, Products, Resources } from '@o2s/framework/modules';
 

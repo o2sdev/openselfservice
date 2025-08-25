@@ -5,7 +5,7 @@ import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import React from 'react';
 
-import { TooltipProvider } from '@o2s/ui/components/tooltip';
+import { TooltipProvider } from '@o2s/ui/elements/tooltip';
 
 import { auth } from '@/auth';
 

@@ -1,6 +1,7 @@
 import { Controller, Get, Headers, Param, Query, UseInterceptors } from '@nestjs/common';
-import { LoggerService } from '@o2s/utils.logger';
 import { Observable } from 'rxjs';
+
+import { LoggerService } from '@o2s/utils.logger';
 
 import { Product, Products } from './products.model';
 import { GetProductListQuery, GetProductParams, GetRelatedProductListParams } from './products.request';

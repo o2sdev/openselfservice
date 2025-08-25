@@ -2,16 +2,17 @@ import { Field, FieldProps, Form, Formik } from 'formik';
 import { useSession } from 'next-auth/react';
 import { object as YupObject, string as YupString } from 'yup';
 
-import { Button } from '@o2s/ui/components/button';
-import { Label } from '@o2s/ui/components/label';
-import { RadioGroup, RadioGroupItem } from '@o2s/ui/components/radio-group';
-import { SheetDescription, SheetFooter, SheetHeader, SheetTitle } from '@o2s/ui/components/sheet';
-import { Typography } from '@o2s/ui/components/typography';
 import { toast } from '@o2s/ui/hooks/use-toast';
 
-import { updateOrganization } from '@/auth';
+import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
 
-import { useGlobalContext } from '@/providers/GlobalProvider';
+import { Button } from '@o2s/ui/elements/button';
+import { Label } from '@o2s/ui/elements/label';
+import { RadioGroup, RadioGroupItem } from '@o2s/ui/elements/radio-group';
+import { SheetDescription, SheetFooter, SheetHeader, SheetTitle } from '@o2s/ui/elements/sheet';
+import { Typography } from '@o2s/ui/elements/typography';
+
+import { updateOrganization } from '@/auth';
 
 import { ContentProps, ContextSwitcherFormValues } from './Content.types';
 

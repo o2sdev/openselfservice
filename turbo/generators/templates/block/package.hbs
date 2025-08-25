@@ -1,0 +1,55 @@
+{
+    "name": "@o2s/blocks.{{kebabCase name}}",
+    "version": "0.0.1",
+    "private": false,
+    "license": "MIT",
+    "description": "A simple block displaying static content in the form of an {{pascalCase name}}.",
+    "exports": {
+        "./api-harmonization": "./dist/api-harmonization/api-harmonization/index.js",
+        "./frontend": "./dist/frontend/frontend/index.js",
+        "./sdk": "./dist/sdk/sdk/index.js",
+        "./client": "./dist/api-harmonization/api-harmonization/{{kebabCase name}}.client.js"
+    },
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "dev": "tsc --build tsconfig.json  && (concurrently \"tsc --build tsconfig.json -w\" \"tsc-alias -w\")",
+        "build": "tsc --build tsconfig.json && tsc-alias",
+        "lint": "tsc --noEmit && eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+        "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
+    },
+    "dependencies": {
+        "@o2s/framework": "*",
+        "@o2s/utils.logger": "*",
+        "@o2s/ui": "*",
+        "@o2s/utils.api-harmonization": "*",
+        "@o2s/utils.frontend": "*",
+        "@o2s/configs.integrations": "*"
+    },
+    "devDependencies": {
+        "dotenv-cli": "^8.0.0",
+        "@o2s/eslint-config": "*",
+        "@o2s/prettier-config": "*",
+        "@o2s/typescript-config": "*",
+        "concurrently": "^9.1.2",
+        "eslint": "^9.27.0",
+        "prettier": "^3.5.3",
+        "tsc-alias": "^1.8.16",
+        "typescript": "^5.8.3"
+    },
+    "peerDependencies": {
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
+        "react": "^19",
+        "react-dom": "^19",
+        "tailwindcss": "^4",
+        "@nestjs/axios": "^4",
+        "@nestjs/common": "^11",
+        "@nestjs/config": "^4.0.2",
+        "@nestjs/core": "^11",
+        "rxjs": "^7",
+        "next": "^15.3.2",
+        "next-intl": "^4.1.0"
+    }
+}

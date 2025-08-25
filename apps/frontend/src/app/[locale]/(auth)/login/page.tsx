@@ -5,7 +5,12 @@ import { headers } from 'next/headers';
 import { notFound } from 'next/navigation';
 import React from 'react';
 
-import { Toaster } from '@o2s/ui/components/toaster';
+import { GlobalProvider } from '@o2s/ui/providers/GlobalProvider';
+
+import { AppSpinner } from '@o2s/ui/components/AppSpinner';
+import { Image } from '@o2s/ui/components/Image';
+
+import { Toaster } from '@o2s/ui/elements/toaster';
 
 import { sdk } from '@/api/sdk';
 
@@ -16,15 +21,10 @@ import { providerMap } from '@/auth/auth.providers';
 
 import { routing } from '@/i18n/routing';
 
-import { GlobalProvider } from '@/providers/GlobalProvider';
-
 import { AuthLayout } from '@/containers/Auth/AuthLayout/AuthLayout';
 import { FormValues, SignInForm } from '@/containers/Auth/SignInForm';
 import { Footer } from '@/containers/Footer/Footer';
 import { Header } from '@/containers/Header/Header';
-
-import { AppSpinner } from '@/components/AppSpinner/AppSpinner';
-import { Image } from '@/components/Image/Image';
 
 interface Props {
     params: Promise<{

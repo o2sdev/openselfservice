@@ -1,0 +1,22 @@
+{
+    "name": "@o2s/configs.integrations",
+    "version": "0.0.1",
+    "private": true,
+    "license": "MIT",
+    "exports": {
+        ".": "./dist/src/models/index.js"
+    },
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "dev": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")",
+        "build": "tsc && tsc-alias",
+        "lint": "tsc --noEmit && eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+        "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
+    },
+    "dependencies": {
+        "@o2s/framework": "*",
+        "@o2s/integrations.mocked": "*"
+    }
+}

@@ -1,0 +1,24 @@
+import { CMS } from '@o2s/configs.integrations';
+import { Models } from '@o2s/utils.api-harmonization';
+import { Injectable } from '@nestjs/common';
+import { Observable, forkJoin, map } from 'rxjs';
+
+import { map{{ pascalCase name }} } from './{{ kebabCase name }}.mapper';
+import { {{ pascalCase name }}Block } from './{{ kebabCase name }}.model';
+import { Get{{ pascalCase name }}BlockQuery } from './{{ kebabCase name }}.request';
+
+@Injectable()
+export class {{ pascalCase name }}Service {
+    constructor(
+        private readonly cmsService: CMS.Service,
+    ) {}
+
+    get{{ pascalCase name }}Block(
+        query: Get{{ pascalCase name }}BlockQuery,
+        headers: Models.Headers.AppHeaders,
+    ): Observable<{{ pascalCase name }}Block> {
+        const cms = this.cmsService.get{{ pascalCase name }}Block({ ...query, locale: headers['x-locale'] });
+
+        return forkJoin([cms]).pipe(map(([cms]) => map{{ pascalCase name }}(cms, headers['x-locale'])));
+    }
+}

@@ -1,0 +1,27 @@
+{
+    "name": "@o2s/utils.api-harmonization",
+    "version": "0.0.1",
+    "description": "",
+    "author": "",
+    "private": false,
+    "license": "MIT",
+    "exports": {
+        ".": "./dist/index.js"
+    },
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "dev": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")",
+        "build": "tsc && tsc-alias",
+        "lint": "tsc --noEmit && eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+        "format": "prettier --write \"src/**/*.ts\""
+    },
+    "dependencies": {
+        "@o2s/framework": "*"
+    },
+    "peerDependencies": {
+        "jsonwebtoken": "^9.0.2",
+        "dayjs": "^1.11.13"
+    }
+}
