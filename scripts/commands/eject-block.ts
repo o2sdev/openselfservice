@@ -1,61 +1,100 @@
-import axios from 'axios';
+import { execSync } from 'child_process';
 import cliProgress from 'cli-progress';
-import * as fs from 'fs';
+import * as fs from 'fs-extra';
+import * as os from 'os';
 import * as path from 'path';
 import prompts, { PromptObject } from 'prompts';
+import simpleGit from 'simple-git';
 
 // Constants
-const GITHUB_API_REPO = 'https://api.github.com/repos/o2sdev/openselfservice';
-const BRANCH = 'feature/blocks-refactoring';
+const PROJECT_PREFIX = 'o2s';
+const PROJECT_NAME = `openselfservice`;
+const GITHUB_REPO_URL = `https://github.com/o2sdev/${PROJECT_NAME}.git`;
+const BRANCH = 'main';
 const BLOCKS_PATH = 'packages/blocks'; // Path to blocks directory in the repo relative to the branch
 const PROJECT_ROOT = path.resolve(__dirname, '../..'); // Adjust to project root
 const OUTPUT_DIR = path.join(PROJECT_ROOT, 'packages/blocks'); // Local target folder
+const FRONTEND_DIR = path.join(PROJECT_ROOT, 'apps/frontend'); // Frontend app directory
+const TEMP_DIR = path.join(os.tmpdir(), `${PROJECT_NAME}-${Date.now()}`); // Temporary directory for cloning
 
 // Types
-interface GitHubEntry {
+interface FileEntry {
     name: string;
     type: 'file' | 'dir';
     path: string;
-    download_url: string | null;
 }
 
-// Fetch the list of blocks (top-level folders) from GitHub
-const fetchBlocksList = async (): Promise<GitHubEntry[]> => {
+// Clone the repository to a temporary directory
+const cloneRepository = async (): Promise<string> => {
     try {
-        const response = await axios.get<GitHubEntry[]>(`${GITHUB_API_REPO}/contents/${BLOCKS_PATH}?ref=${BRANCH}`);
-        return response.data.filter((item) => item.type === 'dir'); // Only directories
+        console.log(`Cloning repository to temporary directory: ${TEMP_DIR}`);
+        await fs.ensureDir(TEMP_DIR);
+        const git = simpleGit();
+        await git.clone(GITHUB_REPO_URL, TEMP_DIR, ['--branch', BRANCH, '--single-branch', '--depth', '1']);
+        console.log('Repository cloned successfully');
+        console.log();
+
+        return TEMP_DIR;
+    } catch (error) {
+        console.error('Error cloning repository:', error);
+        throw new Error('Failed to clone repository.');
+    }
+};
+
+// Get the list of blocks (top-level folders) from the local clone
+const fetchBlocksList = async (): Promise<FileEntry[]> => {
+    try {
+        const blocksDir = path.join(TEMP_DIR, BLOCKS_PATH);
+        const entries = await fs.readdir(blocksDir, { withFileTypes: true });
+
+        return entries
+            .filter((entry) => entry.isDirectory())
+            .map((entry) => ({
+                name: entry.name,
+                type: 'dir',
+                path: path.join(BLOCKS_PATH, entry.name),
+            }));
     } catch (error) {
         console.error('Error fetching the block list:', error);
         throw new Error('Failed to fetch the block list.');
     }
 };
 
-// Fetch the package.json for a block and extract its description
+// Read the package.json for a block and extract its description
 const fetchBlockDescription = async (blockPath: string): Promise<string | undefined> => {
     try {
-        const packageJsonPath = `${blockPath}/package.json`;
-        const response = await axios.get<{ description?: string }>(
-            `${GITHUB_API_REPO}/contents/${packageJsonPath}?ref=${BRANCH}`,
-            { headers: { Accept: 'application/vnd.github.v3.raw' } }, // Fetch raw content
-        );
-
-        return response.data.description;
+        const packageJsonPath = path.join(TEMP_DIR, blockPath, 'package.json');
+        if (await fs.pathExists(packageJsonPath)) {
+            const packageJson = await fs.readJson(packageJsonPath);
+            return packageJson.description;
+        }
+        return undefined;
     } catch {
-        // Return a default value if the package.json does not exist or fails to fetch
+        // Return a default value if the package.json does not exist or fails to read
         return undefined;
     }
 };
 
-// Recursively fetch all files in a given directory
-const fetchAllFiles = async (directoryPath: string): Promise<GitHubEntry[]> => {
+// Recursively get all files in a given directory
+const fetchAllFiles = async (directoryPath: string): Promise<FileEntry[]> => {
     try {
-        const response = await axios.get<GitHubEntry[]>(`${GITHUB_API_REPO}/contents/${directoryPath}?ref=${BRANCH}`);
+        const fullPath = path.join(TEMP_DIR, directoryPath);
+        const entries = await fs.readdir(fullPath, { withFileTypes: true });
 
-        const files = response.data.filter((entry) => entry.type === 'file');
-        const subDirectories = response.data.filter((entry) => entry.type === 'dir');
+        const files: FileEntry[] = [];
 
-        for (const dir of subDirectories) {
-            files.push(...(await fetchAllFiles(dir.path)));
+        for (const entry of entries) {
+            const entryPath = path.join(directoryPath, entry.name);
+
+            if (entry.isFile()) {
+                files.push({
+                    name: entry.name,
+                    type: 'file',
+                    path: entryPath,
+                });
+            } else if (entry.isDirectory()) {
+                files.push(...(await fetchAllFiles(entryPath)));
+            }
         }
 
         return files;
@@ -65,49 +104,34 @@ const fetchAllFiles = async (directoryPath: string): Promise<GitHubEntry[]> => {
     }
 };
 
-// Function to construct the Raw GitHub URL for a file
-const getRawFileUrl = (filePath: string): string => {
-    const baseUrl = 'https://github.com/o2sdev/openselfservice/raw';
-    return `${baseUrl}/refs/heads/${BRANCH}/${filePath}`;
-};
-
-// Download a single file using the Raw URL
-const downloadFile = async (filePath: string, targetPath: string): Promise<void> => {
+// Copy a single file from the local clone to the target path
+const copyFile = async (filePath: string, targetPath: string): Promise<void> => {
     try {
-        const rawUrl = getRawFileUrl(filePath); // Use the raw GitHub URL for the file
-        const response = await axios.get(rawUrl, { responseType: 'stream' });
-
-        await new Promise<void>((resolve, reject) => {
-            const writer = fs.createWriteStream(targetPath);
-            response.data.pipe(writer);
-            writer.on('finish', resolve);
-            writer.on('error', reject);
-        });
+        const sourcePath = path.join(TEMP_DIR, filePath);
+        await fs.copy(sourcePath, targetPath);
     } catch (error) {
-        console.error(`Failed to download file: ${filePath}`, error);
+        console.error(`Failed to copy file: ${filePath}`, error);
     }
 };
 
-// Updated downloadBlock using the new downloadFile implementation
-const downloadBlock = async (blockPath: string, localPath: string): Promise<void> => {
+// Copy block files from the local clone to the target directory
+const copyBlock = async (blockPath: string, localPath: string): Promise<void> => {
     const entries = await fetchAllFiles(blockPath); // Fetch all files in the block
     const progressBar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
 
     progressBar.start(entries.length, 0);
 
     for (const entry of entries) {
-        const filePath = entry.path; // Full GitHub path of the file
+        const filePath = entry.path; // Full path of the file in the clone
         const relativePath = path.relative(blockPath, filePath); // Path relative to the block root
         const localFilePath = path.join(localPath, relativePath); // Reconstruct full local path
 
         // Ensure the directory exists
         const localDir = path.dirname(localFilePath);
-        if (!fs.existsSync(localDir)) {
-            fs.mkdirSync(localDir, { recursive: true });
-        }
+        await fs.ensureDir(localDir);
 
-        // Download the file
-        await downloadFile(filePath, localFilePath);
+        // Copy the file
+        await copyFile(filePath, localFilePath);
         progressBar.increment(); // Update the progress bar
     }
 
@@ -117,6 +141,9 @@ const downloadBlock = async (blockPath: string, localPath: string): Promise<void
 // Main Action for the eject-block Command
 export const ejectBlockCommand = async () => {
     try {
+        // Clone the repository
+        await cloneRepository();
+
         // Fetch available blocks
         const blocks = await fetchBlocksList();
 
@@ -143,24 +170,70 @@ export const ejectBlockCommand = async () => {
 
         if (!selectedBlocks || selectedBlocks.length === 0) {
             console.log('No blocks selected. Exiting...');
+            // Clean up temporary directory
+            await cleanupTempDir();
             return;
         }
 
-        // Download each selected block
+        // Copy each selected block
         for (const block of selectedBlocks) {
             const blockName = path.basename(block);
 
             console.log();
-            console.log(`Downloading block: ${blockName}`);
+            console.log(`Copying block: ${blockName}`);
 
-            await downloadBlock(block, path.join(OUTPUT_DIR, blockName));
+            await copyBlock(block, path.join(OUTPUT_DIR, blockName));
 
             console.log(`Block "${blockName}" ejected successfully.`);
+
+            // Install the ejected block in the frontend app
+            await installBlockInFrontend(blockName);
         }
 
         console.log();
         console.log('All selected blocks have been ejected!');
     } catch (error) {
         console.error('Error ejecting blocks:', error);
+    } finally {
+        // Clean up temporary directory
+        await cleanupTempDir();
+    }
+};
+
+// Run npm install for an ejected block in the frontend directory
+const installBlockInFrontend = async (blockName: string): Promise<void> => {
+    return new Promise<void>((resolve, reject) => {
+        console.log(`Installing block "${blockName}"...`);
+
+        // Construct the package name (assuming it follows the @dxp/blocks.{blockName} pattern)
+        const packageName = `@${PROJECT_PREFIX}/blocks.${blockName}`;
+
+        try {
+            execSync(
+                `npm install ${packageName}@* --workspace=@${PROJECT_PREFIX}/frontend  --workspace=@${PROJECT_PREFIX}/api-harmonization`,
+                {
+                    cwd: PROJECT_ROOT,
+                },
+            );
+        } catch (error) {
+            console.error(`Error installing block "${blockName}":`, error);
+            reject(error);
+            return;
+        }
+
+        console.log(`Block "${blockName}" installed successfully.`);
+        resolve();
+    });
+};
+
+// Clean up the temporary directory
+const cleanupTempDir = async (): Promise<void> => {
+    try {
+        if (await fs.pathExists(TEMP_DIR)) {
+            console.log(`Cleaning up temporary directory: ${TEMP_DIR}`);
+            await fs.remove(TEMP_DIR);
+        }
+    } catch (error) {
+        console.error('Error cleaning up temporary directory:', error);
     }
 };
