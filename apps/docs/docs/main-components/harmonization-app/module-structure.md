@@ -4,22 +4,11 @@ sidebar_position: 100
 
 # Module structure
 
-The API Harmonization server is using three main components:
+The API Harmonization server is using two main parts:
 
 ```
 apps/api-harmonization/src
-└───blocks
-│   │
-│   └───blocks
-│       ├───block.controller.ts
-│       ├───block.mapper.ts
-│       ├───block.model.ts
-│       ├───block.module.ts
-│       ├───block.request.ts
-│       └───block.service.ts
-│
 └───modules
-    │
     └───module
         ├───module.controller.ts
         ├───module.mapper.ts
@@ -39,31 +28,33 @@ packages/api/integrations
 └───integration-6
 ```
 
-## Blocks
+## Modules
 
-Blocks are designed to be a kind of bridge between the frontend app and the integrations.
+Modules are designed to be a kind of bridge between the frontend app and the integrations.
 
-While you could technically use integrations' endpoints directly on the frontend, it is usually not the best way, as it most often also requires some kind of data aggregation (e.g. data from a CMS with data from a backend service) or orchestration. Doing that on the frontend is possible, but it also makes it more complex and may decrease the overall performance and/or the user experience.
+While you could technically use integrations' endpoints directly on the frontend, it is usually not the best way, as it most often also requires some kind of data aggregation (e.g., data from a CMS with data from a backend service) or orchestration. Doing that on the frontend is possible, but it also makes it more complex and may decrease the overall performance and/or the user experience.
 
 Instead, the O2S offers a set of blocks on the side of the API Harmonization server. They are responsible for:
 
-- fetching all the necessary data from different integrations,
-- combining that data together, transforming it into one response for the frontend.
+fetching all the necessary data from different integrations,
+combining that data together, transforming it into one response for the frontend.
 
-Each block should have its own [block within the frontend app](../frontend-app/component-structure.md#blocks).
+They usually represent either:
 
-Each block consists of a few files:
+- larger pieces of the frontend app, like whole pages (with titles, SEO metadata and used template),
+- more utility-like entities that do not have to be rendered on the frontend at all, like routing information (e.g. for sitemaps) or some general configuration data (e.g. available locales).
+
 
 ### Module
 
-[A module](https://docs.nestjs.com/modules) is used to configure the dependencies of that block, including the framework modules that provide the data:
+[A module](https://docs.nestjs.com/modules) is used to configure the dependencies of that module, including the framework modules that provide the data:
 
-```typescript title="module metadata for the ticket list block"
+```typescript title="module metadata for the ticket list module"
 @Module({})
-export class TicketListBlockModule {
+export class TicketListModule {
     static register(_config: ApiConfig): DynamicModule {
         return {
-            module: TicketListBlockModule,
+            module: TicketListModule,
             providers: [TicketListService, CMS.Service, Tickets.Service],
             controllers: [TicketListController],
             exports: [TicketListService],
@@ -83,11 +74,11 @@ export class TicketListController {
     constructor(protected readonly service: TicketListService) {}
 
     @Get()
-    getTicketListBlock(
+    getTicketList(
         @Headers() headers: AppHeaders,
-        @Query() query: GetTicketListBlockQuery
+        @Query() query: GetTicketListQuery
     ) {
-        return this.service.getTicketListBlock(query, headers);
+        return this.service.getTicketList(query, headers);
     }
 }
 ```
@@ -96,7 +87,7 @@ export class TicketListController {
 
 [A service](https://docs.nestjs.com/providers#services) handles all the necessary logic concerning data fetching and orchestration (like fetching data based on previous response):
 
-```typescript title="handling fetching data for a ticket list block"
+```typescript title="handling fetching data for a ticket list module"
 @Injectable()
 export class TicketListService {
     constructor(
@@ -104,8 +95,8 @@ export class TicketListService {
         private readonly ticketService: Tickets.Service,
     ) {}
 
-    getTicketListBlock(query: GetTicketListBlockQuery, headers: AppHeaders): Observable<TicketListBlock> {
-        const cms = this.cmsService.getTicketListBlock({ ...query, locale: headers['x-locale'] });
+    getTicketList(query: GetTicketListQuery, headers: AppHeaders): Observable<TicketList> {
+        const cms = this.cmsService.getTicketList({ ...query, locale: headers['x-locale'] });
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {
@@ -125,7 +116,7 @@ A mapper is responsible for data aggregation, after it is fetched from APIs:
 ```typescript title="combining tickets with static content from CMS"
 export const mapTicket = (
     ticket: Tickets.Model.Ticket,
-    cms: CMS.Model.TicketDetailsBlock.TicketDetailsBlock,
+    cms: CMS.Model.TicketDetails.TicketDetails,
     locale: string,
 ): Ticket => {
     return {
@@ -151,7 +142,7 @@ export const mapTicket = (
 
 ### Model
 
-A model contains all data models that this block uses in its responses:
+A model contains all data models that this module uses in its responses:
 
 ```typescript title="defining an anhanced Ticket model with additional labels for each field"
 export class Ticket {
@@ -176,10 +167,10 @@ export class Ticket {
 
 ### Request
 
-Request defines data models that this block uses in its requests (like query params or request bodies):
+Request defines data models that this module uses in its requests (like query params or request bodies):
 
 ```typescript title="defining the query parameters for the GET endpoint"
-export class GetTicketListBlockQuery
+export class GetTicketListQuery
     implements Omit<CMS.Request.GetCmsEntryParams, 'locale'>, Tickets.Request.GetTicketListQuery
 {
     id!: string;
@@ -188,17 +179,6 @@ export class GetTicketListBlockQuery
 }
 ```
 
-## Modules
-
-Modules are technically the same entities as blocks - each module consists of the same set of files as a block [described earlier](#module) - but their purpose is a bit different.
-
-They usually represent either:
-
-- larger pieces of the frontend app, like whole pages (with titles, SEO metadata and used template),
-- more utility-like entities that do not have to be rendered on the frontend at all, like routing information (e.g. for sitemaps) or some general configuration data (e.g. available locales).
-
-On the code level, they are treated exactly the same as blocks, and are separated mostly for more clarity of purpose.
-
 ## Integrations
 
 An integration is a package that is responsible for:
@@ -206,7 +186,7 @@ An integration is a package that is responsible for:
 - communication with external APIs,
 - normalizing data
 
-While often integrations will not be a part of the main project, they are still an integral part of the API Harmonization server - without at least one integration configured, there is no data source available for any block or module.
+While often integrations will not be a part of the main project, they are still an integral part of the API Harmonization server - without at least one integration configured, there is no data source available for any module
 
 Integrations can be taken from one of two places:
 

@@ -4,12 +4,12 @@ sidebar_position: 100
 
 # Extending the CMS integration
 
-Most components usually need some kind of static content (like titles or labels) that do not come from any kind of backend APIs. There are actually two ways of fetching that content:
+Most blocks usually need some kind of static content (like titles or labels) that do not come from any kind of backend APIs. There are actually two ways of fetching that content:
 
-1. Simply fetching it directly in the harmonizing component - which is simpler, but less generic and strongly coupled with the specific data source,
-2. Or extending the CMS integration with new models and services (specific to newly created component), which makes it possible to re-use it even after switching the CMS integration to another.
+1. Simply fetching it directly in the harmonizing block - which is simpler, but less generic and strongly coupled with the specific data source,
+2. Or extending the CMS integration with new models and services (specific to newly created block), which makes it possible to re-use it even after switching the CMS integration to another.
 
-In case of the `TicketSummary` component let's use the second approach and see how we can extend an existing mocked integration.
+In case of the `TicketSummary` block let's use the second approach and see how we can extend an existing mocked integration.
 
 Customization of existing integrations is done by creating a new, custom integration that will add new features to the one it's extending.
 
@@ -19,20 +19,20 @@ We can start by using the [integration generator](../using-generators.md#integra
 
 ## Extend the model
 
-Firstly, let's create the `./src/modules/cms/cms.model.ts` file where we will include the new models for our component. While we could add the models there directly, it's usually not the best way as components usually require several classes or types, and if, in the future, we decide on adding more components, all models will be mixed together.
+Firstly, let's create the `./src/modules/cms/cms.model.ts` file where we will include the new models for our block. While we could add the models there directly, it's usually not the best way as blocks usually require several classes or types, and if, in the future, we decide on adding more blocks, all models will be mixed together.
 
-Instead, let's place our models in the `./src/modules/cms/models/components/tickets-summary.model.ts`, which we can re-export inside the `cms.model.ts`:
+Instead, let's place our models in the `./src/modules/cms/models/blocks/tickets-summary.model.ts`, which we can re-export inside the `cms.model.ts`:
 
 ```typescript
-export * as TicketsSummaryComponent from './models/components/tickets-summary.model';
+export * as TicketsSummaryBlock from './models/blocks/tickets-summary.model';
 ```
 
-Now, let's add the normalized component model in the `tickets-summary.model.ts`:
+Now, let's add the normalized block model in the `tickets-summary.model.ts`:
 
 ```typescript
 import { Models, Tickets } from '@o2s/framework/modules';
 
-export class TicketsSummaryComponent extends Models.Component.Component {
+export class TicketsSummaryBlock extends Models.Block.Block {
     title!: string;
     labels!: {
         open: string;
@@ -48,27 +48,27 @@ export class TicketsSummaryComponent extends Models.Component.Component {
 }
 ```
 
-We also need to re-export the original models from the base module from the framework. Let's open the `./src/modules/cms/cms.model.ts` and, in addition to the models related to the new component, we need to also add all the others:
+We also need to re-export the original models from the base module from the framework. Let's open the `./src/modules/cms/cms.model.ts` and, in addition to the models related to the new block, we need to also add all the others:
 
 ```typescript
 import { CMS } from '@o2s/framework/modules';
 
-export * as TicketsSummaryComponent from './models/components/tickets-summary.model';
+export * as TicketsSummaryBlock from './models/block/tickets-summary.model';
 
 export import Page = CMS.Model.Page;
 export import LoginPage = CMS.Model.LoginPage;
 export import Footer = CMS.Model.Footer;
 export import Header = CMS.Model.Header;
-export import FaqComponent = CMS.Model.FaqComponent;
-export import TicketListComponent = CMS.Model.TicketListComponent;
-export import TicketDetailsComponent = CMS.Model.TicketDetailsComponent;
-export import NotificationListComponent = CMS.Model.NotificationListComponent;
-export import NotificationDetailsComponent = CMS.Model.NotificationDetailsComponent;
-export import InvoiceListComponent = CMS.Model.InvoiceListComponent;
-export import PaymentsSummaryComponent = CMS.Model.PaymentsSummaryComponent;
-export import PaymentsHistoryComponent = CMS.Model.PaymentsHistoryComponent;
-export import ArticleListComponent = CMS.Model.ArticleListComponent;
-export import ArticleDetailsComponent = CMS.Model.ArticleDetailsComponent;
+export import FaqBlock = CMS.Model.FaqBlock;
+export import TicketListBlock = CMS.Model.TicketListBlock;
+export import TicketDetailsBlock = CMS.Model.TicketDetailsBlock;
+export import NotificationListBlock = CMS.Model.NotificationListBlock;
+export import NotificationDetailsBlock = CMS.Model.NotificationDetailsBlock;
+export import InvoiceListBlock = CMS.Model.InvoiceListBlock;
+export import PaymentsSummaryBlock = CMS.Model.PaymentsSummaryBlock;
+export import PaymentsHistoryBlock = CMS.Model.PaymentsHistoryBlock;
+export import ArticleListBlock = CMS.Model.ArticleListBlock;
+export import ArticleDetailsBlock = CMS.Model.ArticleDetailsBlock;
 ```
 
 :::info
@@ -98,7 +98,7 @@ npm install @o2s/integrations.mocked --workspace=@o2s/integrations.custom-cms
 Now we can edit the `cms.service.ts` file
 
 ```typescript
-import { TicketsSummaryComponent } from './cms.model'
+import { TicketsSummaryBlock } from './cms.model'
 
 // let's mock the response
 // notice that it's format is not exactly like the normalized one
@@ -138,12 +138,12 @@ const MOCK = {
 
 @Injectable()
 export class CmsService extends Integration.CMS.Service {
-    getTicketsSummaryComponent(): Observable<TicketsSummaryComponent.TicketsSummaryComponent> {
+    getTicketsSummaryBlock(): Observable<TicketsSummaryBlock.TicketsSummaryBlock> {
         // implement your own data fetching method
         // it can be anything, http/graphql request, database connection, or read from disk
         const response = Promise.resolve(MOCK);
 
-        return from(response).pipe(map((data) => mapTicketSummaryComponent(data)));
+        return from(response).pipe(map((data) => mapTicketSummaryBlock(data)));
     }
 }
 ```
@@ -155,13 +155,13 @@ We still need to normalize the response. To do that, let's create the `./mappers
 ```typescript
 import { Models } from '@o2s/framework/modules';
 
-import { TicketsSummaryComponent } from '../cms.model';
+import { TicketsSummaryBlock } from '../cms.model';
 // this is temporary, ideally the typings
 // should be taken from a "real" source
 // like auto-generated types from e.g. OpenApi definition
 import { MOCK } from '../cms.service';
 
-export const mapTicketSummaryComponent = (data: typeof MOCK): TicketsSummaryComponent.TicketsSummaryComponent => {
+export const mapTicketSummaryBlock = (data: typeof MOCK): TicketsSummaryBlock.TicketsSummaryBlock => {
     // in this case the mapping is quite simple,
     // but depending in the API it can also be more complex
     return {
@@ -182,7 +182,7 @@ export const mapTicketSummaryComponent = (data: typeof MOCK): TicketsSummaryComp
 
 const mapFields = <T>(
     data: (typeof MOCK)['fieldMapping'],
-): TicketsSummaryComponent.TicketsSummaryComponent['fieldMapping'] => {
+): TicketsSummaryBlock.TicketsSummaryBlock['fieldMapping'] => {
     return data.reduce(
         (acc, field) => ({
             ...acc,
@@ -199,16 +199,16 @@ const mapFields = <T>(
 };
 ```
 
-## Adding a new component to a page
+## Adding a new block to a page
 
-One more thing that will be required to actually see the component on the frontend, is to add it to some page. Let's open the `cms.service.ts` file again, and override the `getPage` method:
+One more thing that will be required to actually see the block on the frontend, is to add it to some page. Let's open the `cms.service.ts` file again, and override the `getPage` method:
 
 ```typescript
 getPage(options: CMS.Request.GetCmsPageParams) {
     // we can use the original method to fetch page data
     return super.getPage(options).pipe(
         map((data) => {
-            // let's add the new component to the page at `/` slug (e.g. the dashboard page)
+            // let's add the new block to the page at `/` slug (e.g. the dashboard page)
             if (data?.slug === '/') {
                 // deep clone of the original object
                 const newData = JSON.parse(JSON.stringify(data)) as typeof data;
@@ -216,10 +216,10 @@ getPage(options: CMS.Request.GetCmsPageParams) {
                     // we need to check the page template
                     // to decide which slot to use
                     case 'TwoColumnTemplate':
-                        // we add the component to a slot, and
-                        // component definition consists of just its ID and a name
+                        // we add the block to a slot, and
+                        // block definition consists of just its ID and a name
                         newData.template.slots.top.push({
-                            __typename: 'TicketsSummaryComponent',
+                            __typename: 'TicketsSummaryBlock',
                             id: 'tickets-summary-1',
                         });
                         return newData;
@@ -253,11 +253,11 @@ import { Config, Integration } from '@o2s/integrations.custom-cms/integration';
 
 ### Testing the API
 
-Once the model, service and mapper are ready, we should make sure that it actually works. To do that let's query the API Harmonization server for this component:
+Once the model, service and mapper are ready, we should make sure that it actually works. To do that let's query the API Harmonization server for this block:
 
 - the localhost port is defined by the `PORT` env variable (default `3001`),
 - there is an optional prefix that is added, defined by the `API_PREFIX` env variable (default `/api`),
-- finally, the path of the component is declared in the `./index.ts` file (default `'/components/tickets-summary'`),
+- finally, the path of the block is declared in the `./index.ts` file (default `'/blocks/tickets-summary'`),
 
 which gives a final URL of `http://localhost:3001/api/page?slug=/`.
 

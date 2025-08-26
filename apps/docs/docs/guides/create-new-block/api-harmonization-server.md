@@ -4,7 +4,7 @@ sidebar_position: 200
 
 # Creating the harmonizing block
 
-We can start by using [a generator](../using-generators.md#api-harmonization) to generate a scaffolded block, to which you will be adding your own implementation. After you provide the block name (using whatever case you want, e.g. `tickets summary`), it will create a new folder with the files: `./apps/api-harmonization/src/blocks/tickets-summary/`.
+We can start by using [a generator](../using-generators.md#block) to generate a scaffolded block, to which you will be adding your own implementation. After you provide the block name (using whatever case you want, e.g. `tickets summary`), it will create a new folder with the files: `./packages/blocks/tickets-summary/`.
 
 ### Declaring dependencies
 
@@ -164,15 +164,29 @@ export const mapTicketsSummary = (
 };
 ```
 
-### Extending block list
+### Importing the block and extending the block list
+
+The module part of the block has to be imported into the NestJS app for the block's API endpoints to be exposed. This happens within the `apps/api-harmonization/src/app.module.ts` file:
+
+```typescript
+import * as TicketsSummary from '@o2s/blocks.tickets-summary/api-harmonization';
+
+...
+
+
+@Module({
+    imports: [
+        ...,
+    TicketsSummary.Module.register(AppConfig),
+        ...,
+    ]
+})
+```
 
 As a last step, we need to add the new block's name to the `Blocks` type so that the frontend app would be able to resolve it correctly (when choosing which block to render). Let's open the `apps/api-harmonization/src/modules/page/page.model.ts` file and add the block's `__typename` to the list:
 
 ```typescript
-import {
-    ...
-    TicketsSummary,
-} from '@o2s/api-harmonization/blocks';
+import * as TicketsSummary from '@o2s/blocks.tickets-summary/api-harmonization';
 
 ...
 

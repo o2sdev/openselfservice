@@ -24,7 +24,7 @@ O2S is designed for seamless API integrations. These guides cover how to leverag
 
 ### Tutorials
 
-- **[Create a new component](./create-new-component/overview.md)** - An step-by-step tutorial about adding a new component to the Frontend app.
+- **[Create a new component](./create-new-block/overview.md)** - An step-by-step tutorial about adding a new component to the Frontend app.
 
 ## How to Use These Guides
 If you're new to Open Self Service, start with **The SDK** to learn how the frontend interacts with the backend.

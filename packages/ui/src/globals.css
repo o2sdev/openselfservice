@@ -1,9 +1,9 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
-@source "../../../apps/frontend/src/**/*.{js,ts,jsx,tsx,mdx}";
+@source "../../../apps/frontend/src/**/*.{js,ts,jsx,tsx}";
 @source "../../../packages/ui/src/**/*.{ts,tsx}";
-@source "../../../packages/blocks/**/*.{js,ts,jsx,tsx,mdx}";
+@source "../../../packages/blocks/**/*.{js,ts,jsx,tsx}";
 @source "../../../node_modules/@o2s/**/*.{js,ts,jsx,tsx}";
 @source "../../../node_modules/@dxp/**/*.{js,ts,jsx,tsx}";
 

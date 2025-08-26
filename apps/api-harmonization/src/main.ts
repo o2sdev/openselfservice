@@ -54,8 +54,9 @@ async function bootstrap() {
 
     app.useLogger(app.get(LoggerService));
 
-    telemetry.sendEvent('api-harmonization', 'bootstrap');
+    telemetry.sendEvent('o2s', 'api-harmonization', 'bootstrap');
     telemetry.sendEvent(
+        'o2s',
         'api-harmonization',
         'integrations',
         Object.entries(AppConfig.integrations).reduce((prev, [module, integration]) => {

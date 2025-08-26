@@ -16,29 +16,56 @@ The theme is defined within the `packages/ui/src/globals.css` file, which:
 2. Defines the CSS variables for theming.
 3. Prepares the necessary global classes (like body color and background).
 
-This file is then exported from the `ui` package, and can be used in other applications. For example, in the Frontend app it is imported inside the `apps/frontend/src/styles/global.scss` file:
+This file is then exported from the `ui` package, and can be used in other applications. For example, in the Frontend app it is imported inside the `apps/frontend/src/styles/global.css` file:
 
 ```css
-@use '@o2s/ui/globals';
+@import '@o2s/ui/globals';
+@import '@o2s/ui/theme';
 ```
 
-The theme variables are divided into two groups, for the default and dark themes:
+## globals.css
+
+The main purpose of the globals file is to:
+
+1. Specify paths for the Tailwind to analyze for the existence of its classes. By default, it looks into all folders that may contain any React components, but you can extend it according to your needs:
+   ```css
+    @source "../../../apps/frontend/src/**/*.{js,ts,jsx,tsx}";
+    @source "../../../packages/ui/src/**/*.{ts,tsx}";
+    @source "../../../packages/blocks/**/*.{js,ts,jsx,tsx}";
+    @source "../../../node_modules/@o2s/**/*.{js,ts,jsx,tsx}";
+    @source "../../../node_modules/@dxp/**/*.{js,ts,jsx,tsx}";
+    ```
+2. Configure Tailwind, including custom variables, utilities or animations.
+
+## theme.css
+
+This file contains just the variables defining the color schemes for the Frontend app. By default, the theme file contains one default color theme:
 
 ```css
-@layer base {
-    :root {
-        --background: 0 0% 100%;
-        --foreground: 240 6% 10%;
-        ...
-    }
-
-    .dark {
-        --background: 226 57% 21%;
-        --foreground: 0 0% 98%;
-        ...
-    }
+:root {
+    --background: 0 0% 100%;
+    --foreground: 240 6% 10%;
+    ...
 }
 ```
+
+but it can easily be extended by further themes by simple adding new classes containing new colors:
+
+```css
+:root {
+    --background: 0 0% 100%;
+    --foreground: 240 6% 10%;
+    ...
+}
+
+.dark {
+    --background: 240 6% 10%;
+    --foreground: 0 0% 100%;
+    ...
+}
+```
+
+To apply the new theme, you can set the CSS class on any element you want to be themed - either on the `body` (so that the entire page gets new theme) or on specific components or blocks.
 
 :::tip
 To quickly try out how theming works, you can check the [shadcn/ui theme generator](https://ui.shadcn.com/themes) to generate a new color scheme.
