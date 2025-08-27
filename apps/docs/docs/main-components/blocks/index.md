@@ -27,27 +27,23 @@ The primary purpose of blocks is to enhance **developer productivity** and **con
 
 Blocks bring several advantages for developers, simplifying and accelerating the app development process:
 
-1. **Streamlined Development**
+1. **Streamlined development**
 
     Blocks encapsulate both frontend and backend code for a feature. You can simply install and integrate pre-built blocks to their app, avoiding the need to write these functionalities from scratch.
 
-2. **Ease of Integration**
+2. **Ease of integration**
 
     Blocks can be installed with a single command as NPM packages and then easily imported into both the API Harmonization server and Frontend app.
 
-3. **Customization Support**
+3. **Customization support**
 
-    You can customize blocks to match your app's requirements while retaining the ability to receive updates from the base package.
+    You can customize blocks to match your app's requirements while retaining to some degree the ability to receive updates from the base package by leveraging your own code versioning.
 
-4. **Consistency Across Projects**
+4. **Consistency across projects**
 
     Using a modular approach encourages consistent code patterns and practices across teams and projects.
 
-5. **Focus on Business Logic**
-
-    With most of the repetitive work taken care of by blocks, you can focus more on solving business-related problems instead of spending time implementing boilerplate functionality.
-
-6. **Encourages Collaboration**
+5. **Encourages encapsulation**
 
     Blocks allow you to work on individual pieces of functionality without interfering with or breaking other parts of the application.
 

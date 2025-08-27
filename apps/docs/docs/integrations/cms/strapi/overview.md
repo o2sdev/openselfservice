@@ -22,7 +22,7 @@ This integration relies upon the following environmental variables:
 
 ## Supported modules
 
-This integration handles following base modules from the framework:
+This integration handles the following base modules from the framework:
 
 - cms
 
