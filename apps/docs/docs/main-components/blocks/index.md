@@ -41,7 +41,7 @@ Blocks bring several advantages for developers, simplifying and accelerating the
 
 4. **Consistency Across Projects**
 
-    Using block-based architecture encourages consistent code patterns and practices across teams and projects.
+    Using a modular approach encourages consistent code patterns and practices across teams and projects.
 
 5. **Focus on Business Logic**
 
