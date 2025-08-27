@@ -19,7 +19,7 @@ Each block is a self-contained unit consolidating the logic for both data fetchi
 The primary purpose of blocks is to enhance **developer productivity** and **consistency** across applications by creating reusable building blocks for key functionalities. Here’s how blocks fulfill this purpose:
 
 - **Modularity:** Each block is a fully isolated unit, allowing developers to quickly add or remove functionality without impacting other components of the application.
-- **Reusability:** Blocks are designed to work independently, making it easy to reuse them across multiple projects.
+- **Reusability:** Blocks are designed to work independently, making it easy to reuse them across multiple projects that are based on O2S.
 - **Ease of Customization:** Blocks can be easily customized to fit the needs of a specific project while keeping the base package upgradable.
 - **Scalability:** By decoupling concerns and encapsulating logic, blocks simplify scaling and adding features to applications.
 
