@@ -4,10 +4,7 @@ import { useTranslations } from 'next-intl';
 import { createNavigation } from 'next-intl/navigation';
 import React from 'react';
 
-import { Mappings } from '@o2s/utils.frontend';
-
-import { ProductCard } from '@o2s/ui/components/Cards/ProductCard';
-import { ProductCardBadge } from '@o2s/ui/components/Cards/ProductCard';
+import { ProductCard, ProductCardBadge } from '@o2s/ui/components/Cards/ProductCard';
 import { NoResults } from '@o2s/ui/components/NoResults';
 import { TooltipHover } from '@o2s/ui/components/TooltipHover';
 

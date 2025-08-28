@@ -36,3 +36,7 @@ yarn-error.log*
 
 # Local history
 .lh
+
+# Storybook
+*storybook.log
+storybook-static

@@ -7,7 +7,7 @@ import { PriceService, usePriceService } from '@o2s/ui/components/Price';
 
 // TODO: reowrk model for `config` to a) not duplicate `page.model.ts` and b) not have `@o2s/api-harmonization`
 // TODO: dependency as it creates circular dependency problem
-interface GlobalProviderProps {
+export interface GlobalProviderProps {
     config: {
         locales: {
             value: string;

@@ -58,7 +58,7 @@
     --tertiary-hover: hsl(220 13% 95%);
 }
 
-.dark {
+.theme-dark {
     --background: hsl(226 57% 21%);
     --foreground: hsl(0 0% 98%);
     --card: hsl(224 64% 33%);

@@ -1,4 +1,4 @@
-'use clientr';
+'use client';
 
 import { createNavigation } from 'next-intl/navigation';
 import React from 'react';
