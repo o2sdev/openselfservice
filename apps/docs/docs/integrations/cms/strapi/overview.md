@@ -45,7 +45,7 @@ The `GraphqlService` offers a few methods that can be used to retrieve data from
 
 - `getPage` that retrieves the full definition of a single page (with SEO metadata, used layouts, and shared elements like header and footer) based on a given slug and locale,
 - `getPages` that retrieves all pages for a given locale,
-- `getLoginPage` to fetch the content for the [login page](../../main-components/frontend-app/routing.md#authentication),
+- `getLoginPage` to fetch the content for the [login page](../../../main-components/frontend-app/routing.md#authentication),
 - `getComponent` that retrieves a single component with a given ID and locale.
 
 ### Code generation

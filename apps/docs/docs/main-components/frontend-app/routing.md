@@ -73,7 +73,7 @@ Therefore, adding a new page to the frontend app only requires to add a new page
 
 For example, in the Strapi CMS this mapping can look like this:
 ![img.png](img.png)
-where you may notice that some slugs contain Regex - this is to allow "dynamic" pages (like case details `/cases/12345`) to still be represented as a single page with the CMS. The resolution of a slug to the page is in this case handled within the [Strapi CMS integration](../../integrations/cms/strapi-cms.md).
+where you may notice that some slugs contain Regex - this is to allow "dynamic" pages (like case details `/cases/12345`) to still be represented as a single page with the CMS. The resolution of a slug to the page is in this case handled within the [Strapi CMS integration](../../integrations/cms/strapi/overview.md).
 
 ### Authentication
 
