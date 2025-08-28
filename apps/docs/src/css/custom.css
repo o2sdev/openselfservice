@@ -1092,6 +1092,26 @@ footer a {
     opacity: 1;
 }
 
+.iframe-container {
+    position: relative;
+    max-width: 100% !important;
+    height: 75vh;
+    z-index: 1;
+}
+
+.iframe-container .iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+@media (min-width: 996px) {
+    .iframe-container .iframe {
+        position: absolute;
+        width: calc(100% + 35%);
+    }
+}
+
 .theme-edit-this-page {
     font-size: 0.75rem;
 }
