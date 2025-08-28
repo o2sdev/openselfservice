@@ -26,8 +26,8 @@ import DocLinkTiles from '@site/src/components/DocLinkTiles';
 
 <DocLinkTiles
     items={[
-        { title: 'Customizing integrations', description: 'Extend or modify existing integrations.', href: '/docs/guides/integrations/overview' },
-        { title: 'Using generators for new integrations', description: 'Faster customization with generators.', href: '/docs/guides/using-generators' },
+        { title: 'Customizing integrations', description: 'Extend or modify existing integrations.', href: '/docs/guides/integrations' },
+        { title: 'Using generators for new integrations', description: 'Faster customization with generators.', href: '/docs/guides/using-generators/#integrations' },
         { title: 'SDK customization', description: 'Extend and override the SDK.', href: '/docs/guides/sdk' },
     ]}
 />
