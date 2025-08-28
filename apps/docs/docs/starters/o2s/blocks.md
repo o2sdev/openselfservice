@@ -4,11 +4,7 @@ sidebar_position: 200
 
 # Blocks
 
-> TODO intro? mention that blocks connect to a variety of modules, including CMS, tickets, invoices and more
-
-## Features
-
-Blocks included in Open Self Service include both components that only connect with a CMS
+Blocks included in Open Self Service include both components that only connect with a CMS:
 
 - articles-like sections,
 - article categories,

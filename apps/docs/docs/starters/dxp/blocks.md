@@ -8,8 +8,6 @@ DXP Starter Kit offers a set of blocks that are useful in creating landing or pr
 
 Currently, offered blocks aim to integrate only with a CMS and focus on presenting content. They will be expanded in the future to also include other integrations if they are needed - stay tuned for updates!
 
-## Features
-
 Blocks included in DXP Starter Kit include content-heavy components like:
 
 - hero banners,
