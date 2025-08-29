@@ -22,7 +22,7 @@ This command will:
 
 ## What's included
 
-- **Frontend app**: Next.js application with pre-configured [Blocks](blocks)
+- **Frontend app**: Next.js application with pre-configured [Blocks](./blocks.md)
 - **API Harmonization server**: NestJS server for API integration
 - **Mocked integration**: Ready-to-use mocked data for development. Replace it with your preferred real APIs.
 - **Authentication**: Local SQLite-based authentication system
@@ -30,9 +30,8 @@ This command will:
 
 ## Documentation
 
-- **[Blocks and content model](blocks.md)** - Docs on O2S Blocks and CMS content types
+- **[Blocks and content model](./blocks.md)** - Docs on O2S Blocks and CMS content types
 - **[O2S Storybook](http://storybook-o2s.openselfservice.com)** - Complete documentation of all O2S Blocks in Storybook
-
 
 ## Next steps
 

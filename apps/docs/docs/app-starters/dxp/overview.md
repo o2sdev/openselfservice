@@ -24,7 +24,7 @@ This command will:
 
 ## What's included
 
-- **Content-focused frontend**: Next.js application optimized for content delivery. See the [documentation](blocks) of included Blocks below.
+- **Content-focused frontend**: Next.js application optimized for content delivery. See the [documentation](./blocks.md) of included Blocks below.
 - **Marketing capabilities**: Blocks consisting of UI and content models for building marketing sites or landing pages
 - **Knowledge base features**: Pre-configured blocks for articles, categories, and search
 - **DXP foundation**: Scalable architecture for evolving into full DXP solutions
@@ -34,7 +34,7 @@ This command will:
 ## Documentation
 
 All Blocks that you can use are documented in our Storybook:
-- **[Blocks and content model](blocks.md)** - Docs on our DXP Blocks and CMS content types
+- **[Blocks and content model](./blocks.md)** - Docs on our DXP Blocks and CMS content types
 - **[DXP Starter Storybook](http://storybook-o2s.openselfservice.com)** - Complete documentation of all our DXP Blocks in Storybook
 
 
