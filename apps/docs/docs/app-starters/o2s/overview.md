@@ -30,8 +30,9 @@ This command will:
 
 ## Documentation
 
-- **[Blocks and content model](blocks)** - Docs on O2S Blocks and CMS content types
+- **[Blocks and content model](blocks.md)** - Docs on O2S Blocks and CMS content types
 - **[O2S Storybook](http://storybook-o2s.openselfservice.com)** - Complete documentation of all O2S Blocks in Storybook
+
 
 ## Next steps
 

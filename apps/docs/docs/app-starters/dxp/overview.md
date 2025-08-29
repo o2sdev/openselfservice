@@ -34,8 +34,9 @@ This command will:
 ## Documentation
 
 All Blocks that you can use are documented in our Storybook:
-- **[Blocks and content model](http://storybook-o2s.openselfservice.com)** - Docs on our DXP Blocks and CMS content types
+- **[Blocks and content model](blocks.md)** - Docs on our DXP Blocks and CMS content types
 - **[DXP Starter Storybook](http://storybook-o2s.openselfservice.com)** - Complete documentation of all our DXP Blocks in Storybook
+
 
 ## Next steps
 
