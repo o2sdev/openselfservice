@@ -2,7 +2,7 @@
 sidebar_position: 200
 ---
 
-# Blocks
+# DXP Blocks
 
 DXP Starter Kit offers a set of blocks that are useful in creating landing or product pages without being locked into any pre-defined industry. This means that whether you want to compose a banking-related website or create a homepage for an energy management service, this is a tool for you!
 

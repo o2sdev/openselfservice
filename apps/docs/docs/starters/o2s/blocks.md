@@ -2,7 +2,7 @@
 sidebar_position: 200
 ---
 
-# Blocks
+# O2S Blocks
 
 Blocks included in Open Self Service include both components that only connect with a CMS:
 
