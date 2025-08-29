@@ -9,7 +9,7 @@ Open Self Service (O2S) is an **open‑source framework** based on **composable 
 
 It provides a modern, extensible Next.js based  and CMS-managed frontend foundation and an integration server for composable extensibility - easy connection of headless services and APIs (CRM, ERP, PIM, commerce, AI, etc.).
 
-It's best to start your journey with Open Self Service by bootstrapping an app using one of our [Starters](./starters/overview) with one of the ``npx create-*-app`` commands.
+It's best to start your journey with Open Self Service by bootstrapping an app using one of our [Starters](../app-starters/overview.md) with one of the ``npx create-*-app`` commands.
 
 ---
 
