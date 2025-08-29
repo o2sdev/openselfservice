@@ -34,7 +34,7 @@ Both starters will automatically:
 **Recommended approach**: Start with one of our App starters. They provide the fastest path to a working application and include all the best practices and configurations you need.
 :::
 
-For detailed information about each starter, see our [App starters](/docs/app-starters/overview) section.
+For detailed information about each starter, see our [App starters](/docs/starters/overview) section.
 
 ---
 

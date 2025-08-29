@@ -39,8 +39,8 @@ All Blocks that you can use are documented in our Storybook:
 
 ## Next steps
 
-After creating your project, follow the [Getting Started](../getting-started/overview.md) guide to run and customize your application.
+After creating your project, follow the [Getting Started](../../getting-started/overview.md) guide to run and customize your application.
 
-For detailed customization options, see the [Customization](../guides/customization.md) section.
+For detailed customization options, see the [Customization](../../guides/customization.md) section.
 
 
