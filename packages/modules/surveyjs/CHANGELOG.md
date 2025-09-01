@@ -1,5 +1,11 @@
 # @o2s/modules.surveyjs
 
+## 0.1.1
+
+### Patch Changes
+
+- c9227bb: fixed incrrect TS target for react
+
 ## 0.1.0
 
 ### Minor Changes
