@@ -54,7 +54,7 @@
         "@o2s/modules.surveyjs": "^0.1.1",
         "@o2s/telemetry": "^1.1.0",
         "@o2s/utils.api-harmonization": "^0.1.1",
-        "@o2s/utils.frontend": "*",
+        "@o2s/utils.frontend": "^0.1.2",
         "@o2s/utils.logger": "^1.1.0",
         "compression": "^1.8.0",
         "cookie": "^1.0.2",
