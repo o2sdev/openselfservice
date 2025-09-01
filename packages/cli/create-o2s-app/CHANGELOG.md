@@ -1,5 +1,11 @@
 # create-o2s-app
 
+## 1.1.1
+
+### Patch Changes
+
+- ebadc3f: updated script to remove blocks and updated telemetry version
+
 ## 1.1.0
 
 ### Minor Changes
