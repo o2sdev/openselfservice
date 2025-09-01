@@ -4,32 +4,43 @@ sidebar_position: 200
 
 # Installation
 
-There are two ways to get started with O2S
+The best way to get started with Open Self Service is to create an application using one of our **App starters**. These provide pre-configured templates with all the necessary components, integrations, and best practices to accelerate your development.
 
-- using the `create-o2s-app` script,
-- cloning the main GitHub repository.
+## App starters (Recommended)
 
----
+We offer two starter templates to choose from:
 
-## create-o2s-app
-
-To quickly set up the project, you can use the following command:
+### O2S Customer Portal starter
+For building customer self-service applications and portals:
 
 ```shell
-npx create-o2s-app@latest
+npx create-o2s-app@latest my-customer-portal
 ```
 
-which will automatically download the necessary source code, as well as install the dependencies and where necessary, initialize the packages.
+### DXP Frontend Starter
+For building knowledge bases, marketing portals, and Digital Experience Platforms:
+
+```shell
+npx create-dxp-app@latest my-dxp-portal
+```
+
+Both starters will automatically:
+- Download the latest template
+- Install all dependencies
+- Set up the project structure
+- Initialize necessary integrations and configurations
 
 :::info
-This is the suggested way to get started, especially if you only need to use existing modules and integrations.
+**Recommended approach**: Start with one of our App starters. They provide the fastest path to a working application and include all the best practices and configurations you need.
 :::
+
+For detailed information about each starter, see our [App starters](../app-starters/overview.md) section.
 
 ---
 
-## Cloning the repository
+## Advanced: Cloning the repository
 
-You can also clone the main repository to have access to every package that is not part of the starter (like docs or integrations):
+You can also clone the main repository to have access to every package that is not part of the starters (like docs or integrations):
 
 ```shell
 git clone https://github.com/o2sdev/openselfservice.git

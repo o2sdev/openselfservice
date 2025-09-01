@@ -4,7 +4,7 @@ sidebar_position: 100
 
 # UI Library
 
-The UI Library in provides a reusable, component-based UI layer designed to ensure UI consistency across applications.
+The UI Library provides a reusable, component-based UI layer designed to ensure UI consistency across applications.
 It offers pre-built UI components and configuration utilities, all defined within an internal package located at `./packages/ui`.
 
 ## What’s inside?

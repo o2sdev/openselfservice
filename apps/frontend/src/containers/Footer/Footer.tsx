@@ -5,22 +5,23 @@ import React, { JSX } from 'react';
 
 import { Models } from '@o2s/framework/modules';
 
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@o2s/ui/components/accordion';
-import { Link } from '@o2s/ui/components/link';
+import { cn } from '@o2s/ui/lib/utils';
+
+import { Image } from '@o2s/ui/components/Image';
+
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@o2s/ui/elements/accordion';
+import { Link } from '@o2s/ui/elements/link';
 import {
     NavigationMenu,
     NavigationMenuItem,
     NavigationMenuLink,
     NavigationMenuList,
     navigationMenuTriggerStyle,
-} from '@o2s/ui/components/navigation-menu';
-import { Separator } from '@o2s/ui/components/separator';
-import { Typography } from '@o2s/ui/components/typography';
-import { cn } from '@o2s/ui/lib/utils';
+} from '@o2s/ui/elements/navigation-menu';
+import { Separator } from '@o2s/ui/elements/separator';
+import { Typography } from '@o2s/ui/elements/typography';
 
 import { Link as NextLink } from '@/i18n';
-
-import { Image } from '@/components/Image/Image';
 
 import { FooterProps } from './Footer.types';
 

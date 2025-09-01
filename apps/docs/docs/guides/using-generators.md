@@ -16,36 +16,25 @@ at the root level of the project, after which you will be asked which generator 
 
 ---
 
-## API Harmonization
+## Block
 
-### Block
+You can create a new block within the `api-harmonization` app by using `block` generator. It will:
 
-You can create a new block within the `api-harmonization` app by using `api-block` generator. It will:
-
-1. Create a new folder in the `apps/api-harmonization/src/block` directory.
-2. Inside this new folder, it will create all the necessary files that compose a module:
-    - module,
-    - controller,
-    - service,
-    - mapper,
-    - model and request.
-3. It will also add this new block to the `app.module.ts` file inside the `imports` section so that Nest.js could include it.
-
----
-
-## Frontend
-
-### Block
-
-To create a new block within the `frontend` app, you can choose the `frontend-block` generator. It will:
-
-1. Create a new folder in the `apps/frontend/src/containers` directory.
-2. Inside this new folder, it will create all the necessary files that compose a container:
-    - server component,
-    - client component,
-    - renderer,
-    - typings,
-    - API methods,
+1. Create a new package in the `packages/blocks` directory.
+2. Inside this new folder, it will create all the necessary files that compose a block:
+    1. API Harmonization part with
+       - module,
+       - controller,
+       - service,
+       - mapper,
+       - model and request.
+    2. Frontend app part with
+       - server component,
+       - client component,
+       - renderer,
+       - typings,
+       - API methods,
+    3. SDK part.
 
 ---
 

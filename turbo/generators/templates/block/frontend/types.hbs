@@ -1,0 +1,16 @@
+import { defineRouting } from 'next-intl/routing';
+
+import { Model } from '../api-harmonization/{{kebabCase name}}.client';
+
+export interface {{pascalCase name}}Props {
+    id: string;
+    accessToken?: string;
+    locale: string;
+    routing: ReturnType<typeof defineRouting>;
+}
+
+export type {{pascalCase name}}PureProps = {{pascalCase name}}Props & Model.{{pascalCase name}}Block;
+
+export type {{pascalCase name}}RendererProps = Omit<{{pascalCase name}}Props, ''> & {
+    slug: string[];
+};

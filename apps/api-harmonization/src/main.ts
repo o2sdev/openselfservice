@@ -1,11 +1,12 @@
 import { LogLevel } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import * as telemetry from '@o2s/telemetry';
-import { LoggerService } from '@o2s/utils.logger';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import process from 'node:process';
+
+import { LoggerService } from '@o2s/utils.logger';
 
 import { AppConfig } from './app.config';
 import { AppModule } from './app.module';
@@ -53,8 +54,9 @@ async function bootstrap() {
 
     app.useLogger(app.get(LoggerService));
 
-    telemetry.sendEvent('api-harmonization', 'bootstrap');
+    telemetry.sendEvent('o2s', 'api-harmonization', 'bootstrap');
     telemetry.sendEvent(
+        'o2s',
         'api-harmonization',
         'integrations',
         Object.entries(AppConfig.integrations).reduce((prev, [module, integration]) => {

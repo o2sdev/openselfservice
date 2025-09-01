@@ -1,6 +1,7 @@
 import { Controller, Get, Headers, Param, Query, UseInterceptors } from '@nestjs/common';
-import { LoggerService } from '@o2s/utils.logger';
 import { Observable } from 'rxjs';
+
+import { LoggerService } from '@o2s/utils.logger';
 
 import { BillingAccount, BillingAccounts } from './billing-accounts.model';
 import { GetBillingAccountParams, GetBillingAccountsListQuery } from './billing-accounts.request';

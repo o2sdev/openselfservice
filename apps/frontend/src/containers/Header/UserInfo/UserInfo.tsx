@@ -1,5 +1,5 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@o2s/ui/components/avatar';
-import { Link } from '@o2s/ui/components/link';
+import { Avatar, AvatarFallback, AvatarImage } from '@o2s/ui/elements/avatar';
+import { Link } from '@o2s/ui/elements/link';
 
 import { Link as NextLink } from '@/i18n';
 

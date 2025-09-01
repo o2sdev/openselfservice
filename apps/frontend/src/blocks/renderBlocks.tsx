@@ -1,89 +1,108 @@
 'use server';
 
 import { Modules } from '@o2s/api-harmonization';
+import * as ArticleList from '@o2s/blocks.article-list/frontend';
+import * as ArticleSearch from '@o2s/blocks.article-search/frontend';
+import * as Article from '@o2s/blocks.article/frontend';
+import * as CategoryList from '@o2s/blocks.category-list/frontend';
+import * as Category from '@o2s/blocks.category/frontend';
+import * as Faq from '@o2s/blocks.faq/frontend';
+import * as FeaturedServiceList from '@o2s/blocks.featured-service-list/frontend';
+import * as InvoiceList from '@o2s/blocks.invoice-list/frontend';
+import * as NotificationDetails from '@o2s/blocks.notification-details/frontend';
+import * as NotificationList from '@o2s/blocks.notification-list/frontend';
+import * as OrderDetails from '@o2s/blocks.order-details/frontend';
+import * as OrderList from '@o2s/blocks.order-list/frontend';
+import * as OrdersSummary from '@o2s/blocks.orders-summary/frontend';
+import * as PaymentsHistory from '@o2s/blocks.payments-history/frontend';
+import * as PaymentsSummary from '@o2s/blocks.payments-summary/frontend';
+import * as QuickLinks from '@o2s/blocks.quick-links/frontend';
+import * as ServiceDetails from '@o2s/blocks.service-details/frontend';
+import * as ServiceList from '@o2s/blocks.service-list/frontend';
+import * as SurveyJsForm from '@o2s/blocks.surveyjs-form/frontend';
+import * as TicketDetails from '@o2s/blocks.ticket-details/frontend';
+import * as TicketList from '@o2s/blocks.ticket-list/frontend';
+import * as TickeRecent from '@o2s/blocks.ticket-recent/frontend';
+import * as UserAccount from '@o2s/blocks.user-account/frontend';
+import { getLocale } from 'next-intl/server';
 import React from 'react';
 
 import { CMS } from '@o2s/framework/modules';
 
-import { ArticleRenderer } from '@/blocks/Article/Article.renderer';
-import { ArticleListRenderer } from '@/blocks/ArticleList/ArticleList.renderer';
-import { ArticleSearchRenderer } from '@/blocks/ArticleSearch/ArticleSearch.renderer';
-import { CategoryRenderer } from '@/blocks/Category/Category.renderer';
-import { CategoryListRenderer } from '@/blocks/CategoryList/CategoryList.renderer';
-import { FaqRenderer } from '@/blocks/Faq/Faq.renderer';
-import { FeaturedServiceListRenderer } from '@/blocks/FeaturedServiceList/FeaturedServiceList.renderer';
-import { InvoiceListRenderer } from '@/blocks/InvoiceList/InvoiceList.renderer';
-import { NotificationDetailsRenderer } from '@/blocks/NotificationDetails/NotificationDetails.renderer';
-import { NotificationListRenderer } from '@/blocks/NotificationList/NotificationList.renderer';
-import { OrderDetailsRenderer } from '@/blocks/OrderDetails/OrderDetails.renderer';
-import { OrderListRenderer } from '@/blocks/OrderList/OrderList.renderer';
-import { OrdersSummaryRenderer } from '@/blocks/OrdersSummary/OrdersSummary.renderer';
-import { PaymentsHistoryRenderer } from '@/blocks/PaymentsHistory/PaymentsHistory.renderer';
-import { PaymentsSummaryRenderer } from '@/blocks/PaymentsSummary/PaymentsSummary.renderer';
-import { QuickLinksRenderer } from '@/blocks/QuickLinks/QuickLinks.renderer';
-import { ServiceDetailsRenderer } from '@/blocks/ServiceDetails/ServiceDetails.renderer';
-import { ServiceListRenderer } from '@/blocks/ServiceList/ServiceList.renderer';
-import { SurveyJsRenderer } from '@/blocks/SurveyJs/SurveyJs.renderer';
-import { TicketDetailsRenderer } from '@/blocks/TicketDetails/TicketDetails.renderer';
-import { TicketListRenderer } from '@/blocks/TicketList/TicketList.renderer';
-import { TicketRecentRenderer } from '@/blocks/TicketRecent/TicketRecent.renderer';
-import { UserAccountRenderer } from '@/blocks/UserAccount/UserAccount.renderer';
+import { auth } from '@/auth';
 
 // BLOCK IMPORT
+import { routing } from '@/i18n';
 
-export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: string[], accessToken?: string) => {
+import { onSignOut } from '../actions/signOut';
+
+export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: string[]) => {
+    const session = await auth();
+    const locale = await getLocale();
+
     return blocks.map((block) => {
+        const blockProps = {
+            id: block.id,
+            slug: slug,
+            locale: locale,
+            accessToken: session?.accessToken,
+            routing: routing,
+        };
+
         switch (block.__typename as Modules.Page.Model.Blocks) {
             case 'TicketListBlock':
-                return <TicketListRenderer key={block.id} id={block.id} accessToken={accessToken} />;
+                return <TicketList.Renderer key={block.id} {...blockProps} />;
             case 'TicketRecentBlock':
-                return <TicketRecentRenderer key={block.id} id={block.id} accessToken={accessToken} />;
+                return <TickeRecent.Renderer key={block.id} {...blockProps} />;
             case 'TicketDetailsBlock':
-                return <TicketDetailsRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
+                return <TicketDetails.Renderer key={block.id} {...blockProps} />;
             case 'NotificationListBlock':
-                return <NotificationListRenderer key={block.id} id={block.id} accessToken={accessToken} />;
+                return <NotificationList.Renderer key={block.id} {...blockProps} />;
             case 'NotificationDetailsBlock':
-                return (
-                    <NotificationDetailsRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />
-                );
+                return <NotificationDetails.Renderer key={block.id} {...blockProps} />;
             case 'FaqBlock':
-                return <FaqRenderer key={block.id} id={block.id} accessToken={accessToken} />;
+                return <Faq.Renderer key={block.id} {...blockProps} />;
             case 'InvoiceListBlock':
-                return <InvoiceListRenderer key={block.id} id={block.id} accessToken={accessToken} />;
+                return <InvoiceList.Renderer key={block.id} {...blockProps} />;
             case 'PaymentsSummaryBlock':
-                return <PaymentsSummaryRenderer key={block.id} id={block.id} accessToken={accessToken} />;
+                return <PaymentsSummary.Renderer key={block.id} {...blockProps} />;
             case 'PaymentsHistoryBlock':
-                return <PaymentsHistoryRenderer key={block.id} id={block.id} accessToken={accessToken} />;
+                return <PaymentsHistory.Renderer key={block.id} {...blockProps} />;
             case 'UserAccountBlock':
-                return <UserAccountRenderer key={block.id} id={block.id} accessToken={accessToken} />;
-            case 'ServiceListBlock':
-                return <ServiceListRenderer key={block.id} id={block.id} accessToken={accessToken} />;
-            case 'ServiceDetailsBlock':
-                return <ServiceDetailsRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
-            case 'SurveyJsBlock':
-                return <SurveyJsRenderer key={block.id} id={block.id} accessToken={accessToken} />;
-            case 'OrderListBlock':
-                return <OrderListRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
-            case 'OrdersSummaryBlock':
-                return <OrdersSummaryRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
-            case 'OrderDetailsBlock':
-                return <OrderDetailsRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
-            case 'QuickLinksBlock':
-                return <QuickLinksRenderer key={block.id} slug={slug} id={block.id} accessToken={accessToken} />;
-            case 'CategoryListBlock':
-                return <CategoryListRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
-            case 'ArticleListBlock':
-                return <ArticleListRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
-            case 'CategoryBlock':
-                return <CategoryRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
-            case 'ArticleBlock':
-                return <ArticleRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
-            case 'ArticleSearchBlock':
-                return <ArticleSearchRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />;
-            case 'FeaturedServiceListBlock':
                 return (
-                    <FeaturedServiceListRenderer slug={slug} key={block.id} id={block.id} accessToken={accessToken} />
+                    <UserAccount.Renderer
+                        key={block.id}
+                        {...blockProps}
+                        userId={session?.user?.id}
+                        onSignOut={onSignOut}
+                    />
                 );
+            case 'ServiceListBlock':
+                return <ServiceList.Renderer key={block.id} {...blockProps} />;
+            case 'ServiceDetailsBlock':
+                return <ServiceDetails.Renderer key={block.id} {...blockProps} />;
+            case 'SurveyJsBlock':
+                return <SurveyJsForm.Renderer key={block.id} {...blockProps} />;
+            case 'OrderListBlock':
+                return <OrderList.Renderer key={block.id} {...blockProps} />;
+            case 'OrdersSummaryBlock':
+                return <OrdersSummary.Renderer key={block.id} {...blockProps} />;
+            case 'OrderDetailsBlock':
+                return <OrderDetails.Renderer key={block.id} {...blockProps} />;
+            case 'QuickLinksBlock':
+                return <QuickLinks.Renderer key={block.id} {...blockProps} />;
+            case 'CategoryListBlock':
+                return <CategoryList.Renderer key={block.id} {...blockProps} />;
+            case 'ArticleListBlock':
+                return <ArticleList.Renderer key={block.id} {...blockProps} />;
+            case 'CategoryBlock':
+                return <Category.Renderer key={block.id} {...blockProps} renderBlocks={renderBlocks} />;
+            case 'ArticleBlock':
+                return <Article.Renderer key={block.id} {...blockProps} />;
+            case 'ArticleSearchBlock':
+                return <ArticleSearch.Renderer key={block.id} {...blockProps} />;
+            case 'FeaturedServiceListBlock':
+                return <FeaturedServiceList.Renderer key={block.id} {...blockProps} />;
             // BLOCK REGISTER
         }
     });

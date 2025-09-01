@@ -49,13 +49,9 @@ export const mapCategories = (
     };
 };
 
-export const mapArticle = (locale: string, slug: string): Articles.Model.Article => {
+export const mapArticle = (locale: string, slug: string): Articles.Model.Article | undefined => {
     const articles = locale === 'pl' ? MOCK_ARTICLES_PL : locale === 'de' ? MOCK_ARTICLES_DE : MOCK_ARTICLES_EN;
-    const article = articles.find((article) => article.slug === slug);
-    if (!article) {
-        throw new NotFoundException(`Article with slug ${slug} not found`);
-    }
-    return article;
+    return articles.find((article) => article.slug === slug);
 };
 
 export const mapArticles = (locale: string, options: Articles.Request.GetArticleListQuery): Articles.Model.Articles => {
