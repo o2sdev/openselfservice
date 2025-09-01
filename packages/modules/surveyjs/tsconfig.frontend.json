@@ -9,6 +9,7 @@
         "declaration": true,
         "declarationMap": true,
         "noEmit": false,
+        "jsx": "react",
         "baseUrl": "./src/frontend"
     },
     "include": [
