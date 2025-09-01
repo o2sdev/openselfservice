@@ -51,7 +51,7 @@
         "@o2s/configs.integrations": "*",
         "@o2s/framework": "^1.11.0",
         "@o2s/integrations.mocked": "^1.11.0",
-        "@o2s/telemetry": "^1.0.8",
+        "@o2s/telemetry": "^1.1.0",
         "@o2s/utils.api-harmonization": "^0.1.0",
         "@o2s/utils.logger": "^1.1.0",
         "compression": "^1.8.0",
