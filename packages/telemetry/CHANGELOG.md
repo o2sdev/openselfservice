@@ -1,5 +1,11 @@
 # @o2s/telemetry
 
+## 1.1.0
+
+### Minor Changes
+
+- 93797de: added a new parameter to telemetry to define the name of the app that sends the events (e.g. 'o2s' or 'dxp')
+
 ## 1.0.8
 
 ### Patch Changes
