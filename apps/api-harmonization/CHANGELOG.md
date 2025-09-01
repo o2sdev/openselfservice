@@ -1,5 +1,11 @@
 # @o2s/api-harmonization
 
+## 1.9.1
+
+### Patch Changes
+
+- c25f982: added missing dependencies
+
 ## 1.9.0
 
 ### Minor Changes

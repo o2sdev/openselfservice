@@ -1,5 +1,11 @@
 # create-o2s-app
 
+## 1.1.2
+
+### Patch Changes
+
+- c25f982: updated script to remove unneeded files
+
 ## 1.1.1
 
 ### Patch Changes
