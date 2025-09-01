@@ -16,9 +16,9 @@
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
-        "@o2s/framework": "*",
-        "@o2s/integrations.mocked": "*",
-        "@o2s/integrations.strapi-cms": "*"
+        "@o2s/framework": "^1.11.0",
+        "@o2s/integrations.mocked": "^1.11.0",
+        "@o2s/integrations.strapi-cms": "^2.6.1"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",
