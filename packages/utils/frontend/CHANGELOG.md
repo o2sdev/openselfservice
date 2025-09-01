@@ -1,5 +1,11 @@
 # @o2s/utils.frontend
 
+## 0.1.2
+
+### Patch Changes
+
+- b9ba7af: fixed incorrect TS target for react
+
 ## 0.1.1
 
 ### Patch Changes
