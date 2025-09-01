@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.surveyjs-form",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "private": false,
     "license": "MIT",
     "description": "A block displaying a SurveyJS-based form that can be submitted.",
