@@ -2,7 +2,8 @@
     "extends": "@o2s/typescript-config/ui.json",
     "compilerOptions": {
         "outDir": "./dist",
-        "baseUrl": "./"
+        "baseUrl": "./",
+        "jsx": "react"
     },
     "include": ["src"],
     "exclude": ["node_modules", "dist"]
