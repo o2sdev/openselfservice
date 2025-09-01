@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.payments-summary",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "private": false,
     "license": "MIT",
     "description": "A block displaying a summary of payments, including overdue and to-be-paid amounts.",

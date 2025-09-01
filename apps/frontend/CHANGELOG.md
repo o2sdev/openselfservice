@@ -1,5 +1,42 @@
 # @o2s/frontend
 
+## 1.9.0
+
+### Minor Changes
+
+- 2421fb2: A major rework of the approach to the blocks - separated all block-related code from `api-harmonization` and `frontend` apps into separate packages, allowing versioning and much easier updates in other apps started using `create-o2s-app` script
+
+### Patch Changes
+
+- Updated dependencies [2421fb2]
+    - @o2s/blocks.featured-service-list@1.0.0
+    - @o2s/blocks.notification-details@1.0.0
+    - @o2s/blocks.notification-list@1.0.0
+    - @o2s/blocks.payments-history@1.0.0
+    - @o2s/blocks.payments-summary@1.0.0
+    - @o2s/blocks.service-details@1.0.0
+    - @o2s/blocks.article-search@1.0.0
+    - @o2s/blocks.orders-summary@1.0.0
+    - @o2s/blocks.ticket-details@1.0.0
+    - @o2s/blocks.category-list@1.0.0
+    - @o2s/blocks.order-details@1.0.0
+    - @o2s/blocks.surveyjs-form@1.0.0
+    - @o2s/blocks.ticket-recent@1.0.0
+    - @o2s/blocks.article-list@1.0.0
+    - @o2s/blocks.invoice-list@1.0.0
+    - @o2s/blocks.service-list@1.0.0
+    - @o2s/blocks.user-account@1.0.0
+    - @o2s/integrations.mocked@1.11.0
+    - @o2s/blocks.quick-links@1.0.0
+    - @o2s/blocks.ticket-list@1.0.0
+    - @o2s/blocks.order-list@1.0.0
+    - @o2s/blocks.category@1.0.0
+    - @o2s/blocks.article@1.0.0
+    - @o2s/api-harmonization@1.9.0
+    - @o2s/blocks.faq@1.0.0
+    - @o2s/framework@1.11.0
+    - @o2s/ui@1.3.0
+
 ## 1.8.0
 
 ### Minor Changes
