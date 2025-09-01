@@ -75,8 +75,10 @@ program
             rmSync(`${targetDirectory}/packages/framework`, { recursive: true });
             rmSync(`${targetDirectory}/packages/integrations`, { recursive: true });
             rmSync(`${targetDirectory}/packages/blocks`, { recursive: true });
+            rmSync(`${targetDirectory}/packages/modules`, { recursive: true });
             rmSync(`${targetDirectory}/packages/utils`, { recursive: true });
             rmSync(`${targetDirectory}/packages/cli`, { recursive: true });
+            rmSync(`${targetDirectory}/packages/telemetry`, { recursive: true });
 
             let file = readFileSync(targetDirectory + '/package-lock.json', 'utf8');
             file = removeSymLinks(file);
