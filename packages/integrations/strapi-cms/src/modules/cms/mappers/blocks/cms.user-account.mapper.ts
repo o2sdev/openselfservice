@@ -4,6 +4,8 @@ import { CMS } from '@o2s/framework/modules';
 
 import { GetComponentQuery } from '@/generated/strapi';
 
+import { mapFormField } from '../cms.form-field.mapper';
+
 export const mapUserAccountBlock = (data: GetComponentQuery): CMS.Model.UserAccountBlock.UserAccountBlock => {
     const component = data.component!.content[0];
     const configurableTexts = data.configurableTexts!;
@@ -19,7 +21,7 @@ export const mapUserAccountBlock = (data: GetComponentQuery): CMS.Model.UserAcco
                 title: component.title,
                 basicInformationTitle: component.basicInformationTitle,
                 basicInformationDescription: component.basicInformationDescription,
-                fields: component.inputs,
+                fields: component.inputs.map(mapFormField),
                 labels: {
                     edit: configurableTexts.actions.edit,
                     save: configurableTexts.actions.save,

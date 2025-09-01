@@ -2,6 +2,9 @@ import { HttpModule } from '@nestjs/axios';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD, Reflector } from '@nestjs/core';
+import { Auth } from '@o2s/configs.integrations';
+import * as SurveyJs from '@o2s/modules.surveyjs/api-harmonization';
+
 import { LoggerModule, LoggerService } from '@o2s/utils.logger';
 
 import {
@@ -21,33 +24,31 @@ import {
     Users,
 } from '@o2s/framework/modules';
 
+import * as ArticleList from '@o2s/blocks.article-list/api-harmonization';
+import * as ArticleSearch from '@o2s/blocks.article-search/api-harmonization';
+import * as Article from '@o2s/blocks.article/api-harmonization';
+import * as CategoryList from '@o2s/blocks.category-list/api-harmonization';
+import * as Category from '@o2s/blocks.category/api-harmonization';
+import * as Faq from '@o2s/blocks.faq/api-harmonization';
+import * as FeaturedServiceList from '@o2s/blocks.featured-service-list/api-harmonization';
+import * as InvoiceList from '@o2s/blocks.invoice-list/api-harmonization';
+import * as NotificationDetails from '@o2s/blocks.notification-details/api-harmonization';
+import * as NotificationList from '@o2s/blocks.notification-list/api-harmonization';
+import * as OrderDetails from '@o2s/blocks.order-details/api-harmonization';
+import * as OrderList from '@o2s/blocks.order-list/api-harmonization';
+import * as OrdersSummary from '@o2s/blocks.orders-summary/api-harmonization';
+import * as PaymentsHistory from '@o2s/blocks.payments-history/api-harmonization';
+import * as PaymentsSummary from '@o2s/blocks.payments-summary/api-harmonization';
+import * as QuickLinks from '@o2s/blocks.quick-links/api-harmonization';
+import * as ServiceDetails from '@o2s/blocks.service-details/api-harmonization';
+import * as ServiceList from '@o2s/blocks.service-list/api-harmonization';
+import * as SurveyJsForm from '@o2s/blocks.surveyjs-form/api-harmonization';
+import * as TicketDetails from '@o2s/blocks.ticket-details/api-harmonization';
+import * as TicketList from '@o2s/blocks.ticket-list/api-harmonization';
+import * as TicketRecent from '@o2s/blocks.ticket-recent/api-harmonization';
+import * as UserAccount from '@o2s/blocks.user-account/api-harmonization';
+
 import { configuration } from '@o2s/api-harmonization/config/configuration';
-
-import * as Auth from '@o2s/api-harmonization/models/auth';
-
-import { ArticleListBlockModule } from '@o2s/api-harmonization/blocks/article-list/article-list.module';
-import { ArticleSearchBlockModule } from '@o2s/api-harmonization/blocks/article-search/article-search.module';
-import { ArticleBlockModule } from '@o2s/api-harmonization/blocks/article/article.module';
-import { CategoryListBlockModule } from '@o2s/api-harmonization/blocks/category-list/category-list.module';
-import { CategoryBlockModule } from '@o2s/api-harmonization/blocks/category/category.module';
-import { FaqBlockModule } from '@o2s/api-harmonization/blocks/faq/faq.module';
-import { FeaturedServiceListBlockModule } from '@o2s/api-harmonization/blocks/featured-service-list/featured-service-list.module';
-import { InvoiceListBlockModule } from '@o2s/api-harmonization/blocks/invoice-list/invoice-list.module';
-import { NotificationDetailsBlockModule } from '@o2s/api-harmonization/blocks/notification-details/notification-details.module';
-import { NotificationListBlockModule } from '@o2s/api-harmonization/blocks/notification-list/notification-list.module';
-import { OrderDetailsBlockModule } from '@o2s/api-harmonization/blocks/order-details/order-details.module';
-import { OrderListBlockModule } from '@o2s/api-harmonization/blocks/order-list/order-list.module';
-import { OrdersSummaryBlockModule } from '@o2s/api-harmonization/blocks/orders-summary/orders-summary.module';
-import { PaymentsHistoryBlockModule } from '@o2s/api-harmonization/blocks/payments-history/payments-history.module';
-import { PaymentsSummaryBlockModule } from '@o2s/api-harmonization/blocks/payments-summary/payments-summary.module';
-import { QuickLinksBlockModule } from '@o2s/api-harmonization/blocks/quick-links/quick-links.module';
-import { ServiceDetailsBlockModule } from '@o2s/api-harmonization/blocks/service-details/service-details.module';
-import { ServiceListBlockModule } from '@o2s/api-harmonization/blocks/service-list/service-list.module';
-import { SurveyjsBlockModule } from '@o2s/api-harmonization/blocks/surveyjs/surveyjs.module';
-import { TicketDetailsBlockModule } from '@o2s/api-harmonization/blocks/ticket-details/ticket-details.module';
-import { TicketListBlockModule } from '@o2s/api-harmonization/blocks/ticket-list/ticket-list.module';
-import { TicketRecentBlockModule } from '@o2s/api-harmonization/blocks/ticket-recent/ticket-recent.module';
-import { UserAccountBlockModule } from '@o2s/api-harmonization/blocks/user-account/user-account.module';
 
 // BLOCK IMPORT
 import { AppConfig } from './app.config';
@@ -58,7 +59,6 @@ import { NotFoundPageModule } from './modules/not-found-page/not-found-page.modu
 import { OrganizationsModule } from './modules/organizations/organizations.module';
 import { PageModule } from './modules/page/page.module';
 import { RoutesModule } from './modules/routes/routes.module';
-import { SurveyjsModule } from './modules/surveyjs-forms/surveyjs.module';
 
 export const CMSBaseModule = CMS.Module.register(AppConfig);
 export const TicketsBaseModule = Tickets.Module.register(AppConfig);
@@ -106,31 +106,31 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
         LoginPageModule.register(AppConfig),
         NotFoundPageModule.register(AppConfig),
         OrganizationsModule.register(AppConfig),
-        SurveyjsModule.register(AppConfig),
+        SurveyJs.Module.register(AppConfig),
 
-        TicketListBlockModule.register(AppConfig),
-        TicketDetailsBlockModule.register(AppConfig),
-        NotificationListBlockModule.register(AppConfig),
-        NotificationDetailsBlockModule.register(AppConfig),
-        FaqBlockModule.register(AppConfig),
-        InvoiceListBlockModule.register(AppConfig),
-        PaymentsSummaryBlockModule.register(AppConfig),
-        PaymentsHistoryBlockModule.register(AppConfig),
-        UserAccountBlockModule.register(AppConfig),
-        TicketRecentBlockModule.register(AppConfig),
-        ServiceListBlockModule.register(AppConfig),
-        ServiceDetailsBlockModule.register(AppConfig),
-        SurveyjsBlockModule.register(AppConfig),
-        OrderListBlockModule.register(AppConfig),
-        OrdersSummaryBlockModule.register(AppConfig),
-        OrderDetailsBlockModule.register(AppConfig),
-        QuickLinksBlockModule.register(AppConfig),
-        CategoryListBlockModule.register(AppConfig),
-        ArticleListBlockModule.register(AppConfig),
-        CategoryBlockModule.register(AppConfig),
-        ArticleBlockModule.register(AppConfig),
-        ArticleSearchBlockModule.register(AppConfig),
-        FeaturedServiceListBlockModule.register(AppConfig),
+        TicketList.Module.register(AppConfig),
+        TicketDetails.Module.register(AppConfig),
+        NotificationList.Module.register(AppConfig),
+        NotificationDetails.Module.register(AppConfig),
+        Faq.Module.register(AppConfig),
+        InvoiceList.Module.register(AppConfig),
+        PaymentsSummary.Module.register(AppConfig),
+        PaymentsHistory.Module.register(AppConfig),
+        UserAccount.Module.register(AppConfig),
+        TicketRecent.Module.register(AppConfig),
+        ServiceList.Module.register(AppConfig),
+        ServiceDetails.Module.register(AppConfig),
+        SurveyJsForm.Module.register(AppConfig),
+        OrderList.Module.register(AppConfig),
+        OrdersSummary.Module.register(AppConfig),
+        OrderDetails.Module.register(AppConfig),
+        QuickLinks.Module.register(AppConfig),
+        Category.Module.register(AppConfig),
+        CategoryList.Module.register(AppConfig),
+        Article.Module.register(AppConfig),
+        ArticleSearch.Module.register(AppConfig),
+        FeaturedServiceList.Module.register(AppConfig),
+        ArticleList.Module.register(AppConfig),
         // BLOCK REGISTER
     ],
     providers: [

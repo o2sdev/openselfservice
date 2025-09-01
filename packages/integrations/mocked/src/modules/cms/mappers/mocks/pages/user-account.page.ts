@@ -17,7 +17,7 @@ export const PAGE_USER_ACCOUNT_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
+    permissions: [Auth.Constants.Roles.PROSPECT, Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
     hasOwnTitle: true,
     template: {
         __typename: 'OneColumnTemplate',
@@ -51,7 +51,7 @@ export const PAGE_USER_ACCOUNT_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
+    permissions: [Auth.Constants.Roles.PROSPECT, Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
     hasOwnTitle: true,
     template: {
         __typename: 'OneColumnTemplate',
@@ -85,7 +85,7 @@ export const PAGE_USER_ACCOUNT_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
+    permissions: [Auth.Constants.Roles.PROSPECT, Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
     hasOwnTitle: true,
     template: {
         __typename: 'OneColumnTemplate',

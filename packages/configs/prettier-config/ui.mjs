@@ -7,10 +7,13 @@ import base from './base.mjs';
 const config = {
     ...base,
     importOrder: [
+        '@o2s/utils',
         '@o2s/ui/lib',
         '@o2s/ui/utils',
         '@o2s/ui/hooks',
+        '@o2s/ui/providers',
         '@o2s/ui/components',
+        '@o2s/ui/elements',
         '^(\.\.\/)',
         '^(\.\/)',
     ],

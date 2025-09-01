@@ -60,7 +60,7 @@ class Telemetry {
     /**
      * Send a telemetry event
      */
-    public async sendEvent(moduleName: string, eventName: string, data?: unknown) {
+    public async sendEvent(appName: string, moduleName: string, eventName: string, data?: unknown) {
         await this.config;
 
         // Read environment variables at method call time, not class instantiation time
@@ -85,6 +85,7 @@ class Telemetry {
                 },
                 body: JSON.stringify({
                     machineId: this.machineId,
+                    appName,
                     moduleName,
                     eventName,
                     event,
@@ -141,13 +142,19 @@ const telemetryInstance = new Telemetry();
 
 /**
  * Send a telemetry event
+ * @param appName - The name of the app sending the event
  * @param moduleName - The name of the module sending the event
  * @param eventName - The name of the event
  * @param data - Optional data to include with the event
  * @returns Promise that resolves when the event is sent
  */
-export const sendEvent = async (moduleName: string, eventName: string, data?: unknown): Promise<void> => {
-    return telemetryInstance.sendEvent(moduleName, eventName, data);
+export const sendEvent = async (
+    appName: string,
+    moduleName: string,
+    eventName: string,
+    data?: unknown,
+): Promise<void> => {
+    return telemetryInstance.sendEvent(appName, moduleName, eventName, data);
 };
 
 /**

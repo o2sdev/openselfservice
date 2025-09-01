@@ -265,7 +265,7 @@ const config: Config = {
                           routeBasePath: '/docs',
                           // Please change this to your repo.
                           // Remove this to remove the "edit this page" links.
-                          editUrl: 'https://github.com/o2sdev/openselfservice/tree/main/apps/docs/',
+                          // editUrl: 'https://github.com/o2sdev/openselfservice/tree/main/apps/docs/',
                       },
                 // blog: false,
                 blog: hideDocs
@@ -278,7 +278,7 @@ const config: Config = {
                           },
                           // Please change this to your repo.
                           // Remove this to remove the "edit this page" links.
-                          editUrl: 'https://github.com/o2sdev/openselfservice/tree/main/apps/docs/',
+                          // editUrl: 'https://github.com/o2sdev/openselfservice/tree/main/apps/docs/',
                           // Useful options to enforce blogging best practices
                           onInlineTags: 'warn',
                           onInlineAuthors: 'warn',

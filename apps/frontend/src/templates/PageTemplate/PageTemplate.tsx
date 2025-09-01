@@ -5,13 +5,13 @@ import { TwoColumnTemplate } from '@/templates/TwoColumnTemplate/TwoColumnTempla
 
 import { PageTemplateProps } from './PageTemplate.types';
 
-export const PageTemplate: React.FC<PageTemplateProps> = ({ slug, data, session }) => {
+export const PageTemplate: React.FC<PageTemplateProps> = ({ slug, data }) => {
     const getTemplate = () => {
         switch (data.template.__typename) {
             case 'OneColumnTemplate':
-                return <OneColumnTemplate slug={slug} data={data.template} session={session} />;
+                return <OneColumnTemplate slug={slug} data={data.template} />;
             case 'TwoColumnTemplate':
-                return <TwoColumnTemplate slug={slug} data={data.template} session={session} />;
+                return <TwoColumnTemplate slug={slug} data={data.template} />;
         }
     };
 

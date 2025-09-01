@@ -8,7 +8,9 @@ const config = {
     ...base,
     importOrderParserPlugins: ['typescript', 'decorators-legacy'],
     importOrder: [
+        '@o2s/utils',
         '@o2s/framework',
+        '@o2s/blocks',
         '@o2s/api-harmonization/lib',
         '@o2s/api-harmonization/config',
         '@o2s/api-harmonization/api.config',

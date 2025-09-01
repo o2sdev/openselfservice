@@ -1,9 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { CMS, Organizations } from '@o2s/configs.integrations';
 import { Observable, forkJoin, map } from 'rxjs';
 
-import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
-
-import { CMS, Organizations } from '../../models';
+import { Models } from '@o2s/utils.api-harmonization';
 
 import { mapCustomerList } from './organizations.mapper';
 import { CustomerList } from './organizations.model';
@@ -16,7 +15,7 @@ export class OrganizationsService {
         private readonly organizationsService: Organizations.Service,
     ) {}
 
-    getCustomers(query: GetCustomersQuery, headers: AppHeaders): Observable<CustomerList> {
+    getCustomers(query: GetCustomersQuery, headers: Models.Headers.AppHeaders): Observable<CustomerList> {
         const cms = this.cmsService.getOrganizationList({ locale: headers['x-locale'] });
         const organizations = this.organizationsService.getOrganizationList({
             ...query,

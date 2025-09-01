@@ -1,7 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { LoggerService } from '@o2s/utils.logger';
 import { RedisClientType, createClient } from 'redis';
+
+import { LoggerService } from '@o2s/utils.logger';
 
 import { Cache } from '@o2s/framework/modules';
 

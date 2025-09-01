@@ -96,7 +96,7 @@ Check the [Techniques chapter](https://docs.nestjs.com/techniques) in the Nest.j
 
 ## External dependencies
 
-While some integrations will be self-sufficient, others may depend on other modules, from other integrations. An example might be a [CMS integration](../../integrations/cms/strapi-cms.md) that relies upon a cache module to cache incoming requests (to reduce CMS request usage and improve performance).
+While some integrations will be self-sufficient, others may depend on other modules, from other integrations. An example might be a [CMS integration](../../integrations/cms/strapi/overview.md) that relies upon a cache module to cache incoming requests (to reduce CMS request usage and improve performance).
 
 You can achieve that by following a few steps:
 
@@ -150,5 +150,5 @@ You can achieve that by following a few steps:
     ```
 
 :::tip
-For a full example about injecting dependencies, you can check the source code od the [Strapi CMS integration](../../integrations/cms/strapi-cms.md).
+For a full example about injecting dependencies, you can check the source code od the [Strapi CMS integration](../../integrations/cms/strapi/overview.md).
 :::

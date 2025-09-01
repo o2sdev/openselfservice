@@ -1,5 +1,46 @@
 # @o2s/integrations.mocked
 
+## 1.11.0
+
+### Minor Changes
+
+- 2421fb2: A major rework of the approach to the blocks - separated all block-related code from `api-harmonization` and `frontend` apps into separate packages, allowing versioning and much easier updates in other apps started using `create-o2s-app` script
+
+### Patch Changes
+
+- Updated dependencies [2421fb2]
+    - @o2s/framework@1.11.0
+
+## 1.10.0
+
+### Minor Changes
+
+- 6e5f193: feat: update organization role names
+
+### Patch Changes
+
+- Updated dependencies [6e5f193]
+    - @o2s/framework@1.10.0
+
+## 1.9.1
+
+### Patch Changes
+
+- 4c5a8a4: extended `FormField` model into input/select/switch subtypes for future use
+- Updated dependencies [4c5a8a4]
+    - @o2s/framework@1.9.2
+
+## 1.9.0
+
+### Minor Changes
+
+- e81621c: added `PROSPECT` role for freshly-created users
+
+### Patch Changes
+
+- Updated dependencies [e81621c]
+    - @o2s/framework@1.9.0
+
 ## 1.8.0
 
 ### Minor Changes

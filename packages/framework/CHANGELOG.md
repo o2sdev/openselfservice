@@ -1,5 +1,41 @@
 # @o2s/framework
 
+## 1.11.0
+
+### Minor Changes
+
+- 2421fb2: A major rework of the approach to the blocks - separated all block-related code from `api-harmonization` and `frontend` apps into separate packages, allowing versioning and much easier updates in other apps started using `create-o2s-app` script
+
+## 1.10.0
+
+### Minor Changes
+
+- 6e5f193: feat: update organization role names
+
+## 1.9.3
+
+### Patch Changes
+
+- e240813: added a model for pattern/regex field validation
+
+## 1.9.2
+
+### Patch Changes
+
+- 4c5a8a4: extended `FormField` model into input/select/switch subtypes for future use
+
+## 1.9.1
+
+### Patch Changes
+
+- db8c779: extended `FormField` model with optional description and caption
+
+## 1.9.0
+
+### Minor Changes
+
+- e81621c: added `PROSPECT` role for freshly-created users
+
 ## 1.8.0
 
 ### Minor Changes

@@ -13,7 +13,7 @@ const MOCK_USER_1: Users.Model.User = {
                 name: 'Acme Corporation',
                 clientType: 'B2B',
             },
-            roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
+            roles: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
         },
         {
             customer: {
@@ -21,7 +21,7 @@ const MOCK_USER_1: Users.Model.User = {
                 name: 'Retail Customer Ltd',
                 clientType: 'B2C',
             },
-            roles: [Auth.Constants.Roles.USER],
+            roles: [Auth.Constants.Roles.ORG_USER],
         },
     ],
     customers: [],
@@ -40,7 +40,7 @@ const MOCK_USER_2: Users.Model.User = {
                 name: 'Tech Solutions Inc',
                 clientType: 'B2B',
             },
-            roles: [Auth.Constants.Roles.USER],
+            roles: [Auth.Constants.Roles.ORG_USER],
         },
         {
             customer: {
@@ -48,7 +48,7 @@ const MOCK_USER_2: Users.Model.User = {
                 name: 'Digital Services GmbH',
                 clientType: 'B2B',
             },
-            roles: [Auth.Constants.Roles.USER, Auth.Constants.Roles.ADMIN],
+            roles: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
         },
     ],
     customers: [],

@@ -1,6 +1,6 @@
 {
   "name": "@o2s/integrations.medusajs",
-  "version": "1.5.2",
+  "version": "1.6.0",
   "private": false,
   "license": "MIT",
   "exports": {
@@ -13,11 +13,7 @@
     "dev": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")",
     "build": "tsc && tsc-alias",
     "lint": "tsc --noEmit && eslint . --max-warnings 0",
-    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\"",
-    "check-deps": "npx npm-check-updates --format group",
-    "update-deps:patch": "npx npm-check-updates --target patch -u",
-    "update-deps:minor": "npx npm-check-updates --target minor -u",
-    "update-deps:latest": "npx npm-check-updates --target latest -u"
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
   },
   "dependencies": {
     "@medusajs/js-sdk": "^2.8.2",

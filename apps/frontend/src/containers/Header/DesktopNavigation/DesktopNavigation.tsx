@@ -4,6 +4,8 @@ import React from 'react';
 
 import { Models } from '@o2s/framework/modules';
 
+import { cn } from '@o2s/ui/lib/utils';
+
 import {
     NavigationMenu,
     NavigationMenuContent,
@@ -12,10 +14,9 @@ import {
     NavigationMenuList,
     NavigationMenuTrigger,
     navigationMenuTriggerStyle,
-} from '@o2s/ui/components/navigation-menu';
-import { Separator } from '@o2s/ui/components/separator';
-import { Typography } from '@o2s/ui/components/typography';
-import { cn } from '@o2s/ui/lib/utils';
+} from '@o2s/ui/elements/navigation-menu';
+import { Separator } from '@o2s/ui/elements/separator';
+import { Typography } from '@o2s/ui/elements/typography';
 
 import { Link as NextLink, usePathname } from '@/i18n';
 

@@ -1,8 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { LoggerService } from '@o2s/utils.logger';
 import { Algoliasearch, SearchMethodParams, SearchParamsObject, algoliasearch } from 'algoliasearch';
 import { Observable, from, map } from 'rxjs';
+
+import { LoggerService } from '@o2s/utils.logger';
 
 import { Articles, Search } from '@o2s/framework/modules';
 

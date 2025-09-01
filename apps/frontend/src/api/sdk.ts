@@ -1,40 +1,19 @@
 // this unused import is necessary for TypeScript to properly resolve API methods
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Blocks, Headers, Modules } from '@o2s/api-harmonization';
-import { ordersSummary } from 'src/api/blocks/orders-summary';
+import { Modules } from '@o2s/api-harmonization';
+
+// this unused import is necessary for TypeScript to properly resolve API methods
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { Models } from '@o2s/utils.api-harmonization';
 
 import { extendSdk, getSdk } from '@o2s/framework/sdk';
 
 import { Notifications } from '@o2s/integrations.mocked/sdk';
 
-import { article } from '@/api/blocks/article';
-import { articleList } from '@/api/blocks/article-list';
-import { articleSearch } from '@/api/blocks/article-search';
-import { category } from '@/api/blocks/category';
-import { categoryList } from '@/api/blocks/category-list';
-import { faq } from '@/api/blocks/faq';
-import { featuredServiceList } from '@/api/blocks/featured-service-list';
-import { invoiceList } from '@/api/blocks/invoice-list';
-import { notificationDetails } from '@/api/blocks/notification-details';
-import { notificationList } from '@/api/blocks/notification-list';
-import { orderDetails } from '@/api/blocks/order-details';
-import { orderList } from '@/api/blocks/order-list';
-import { paymentsHistory } from '@/api/blocks/payments-history';
-import { paymentsSummary } from '@/api/blocks/payments-summary';
-import { quickLinks } from '@/api/blocks/quick-links';
-import { serviceDetails } from '@/api/blocks/service-details';
-import { serviceList } from '@/api/blocks/services-list';
-import { surveyJSBlock } from '@/api/blocks/surveyjs';
-import { ticketDetails } from '@/api/blocks/ticket-details';
-import { ticketList } from '@/api/blocks/ticket-list';
-import { ticketRecent } from '@/api/blocks/ticket-recent';
-import { userAccount } from '@/api/blocks/user-account';
-// BLOCK IMPORT
 import { loginPage } from '@/api/modules/login-page';
 import { notFoundPage } from '@/api/modules/not-found-page';
 import { organizations } from '@/api/modules/organizations';
 import { page } from '@/api/modules/page';
-import { surveyjs } from '@/api/modules/surveyjs';
 
 const API_URL =
     (typeof window === 'undefined' ? process.env.NEXT_PUBLIC_API_URL_INTERNAL : process.env.NEXT_PUBLIC_API_URL) ||
@@ -55,44 +34,11 @@ export const sdk = extendSdk(internalSdk, {
     notifications: {
         ...Notifications.extend(internalSdk),
     },
-    blocks: {
-        getTicketList: ticketList(internalSdk).blocks.getTicketList,
-        getTicketRecent: ticketRecent(internalSdk).blocks.getTicketRecent,
-        getTicketDetails: ticketDetails(internalSdk).blocks.getTicketDetails,
-        getNotificationList: notificationList(internalSdk).blocks.getNotificationList,
-        getNotificationDetails: notificationDetails(internalSdk).blocks.getNotificationDetails,
-        markNotificationAs: notificationDetails(internalSdk).blocks.markNotificationAs,
-        getInvoiceList: invoiceList(internalSdk).blocks.getInvoiceList,
-        getInvoicePdf: invoiceList(internalSdk).blocks.getInvoicePdf,
-        getPaymentsSummary: paymentsSummary(internalSdk).blocks.getPaymentsSummary,
-        getPaymentsHistory: paymentsHistory(internalSdk).blocks.getPaymentsHistory,
-        getServiceList: serviceList(internalSdk).blocks.getServiceList,
-        getServiceDetails: serviceDetails(internalSdk).blocks.getServiceDetails,
-        getFaq: faq(internalSdk).blocks.getFaq,
-        getUserAccount: userAccount(internalSdk).blocks.getUserAccount,
-        getSurveyJsBlock: surveyJSBlock(internalSdk).blocks.getSurveyjsBlock,
-        getOrderList: orderList(internalSdk).blocks.getOrderList,
-        getOrdersSummary: ordersSummary(internalSdk).blocks.getOrdersSummary,
-        getOrderDetails: orderDetails(internalSdk).blocks.getOrderDetails,
-        getOrderPdf: orderDetails(internalSdk).blocks.getOrderPdf,
-        getQuickLinks: quickLinks(internalSdk).blocks.getQuickLinks,
-        getCategoryList: categoryList(internalSdk).blocks.getCategoryList,
-        getArticleList: articleList(internalSdk).blocks.getArticleList,
-        getCategory: category(internalSdk).blocks.getCategory,
-        getCategoryArticles: category(internalSdk).blocks.getCategoryArticles,
-        getArticle: article(internalSdk).blocks.getArticle,
-        getArticleSearch: articleSearch(internalSdk).blocks.getArticleSearch,
-        searchArticles: articleSearch(internalSdk).blocks.searchArticles,
-        getFeaturedServiceList: featuredServiceList(internalSdk).blocks.getFeaturedServiceList,
-        // BLOCK REGISTER
-    },
     modules: {
         getInit: page(internalSdk).modules.getInit,
         getPage: page(internalSdk).modules.getPage,
         getLoginPage: loginPage(internalSdk).modules.getLoginPage,
         getNotFoundPage: notFoundPage(internalSdk).modules.getNotFoundPage,
         getCustomers: organizations(internalSdk).modules.getCustomers,
-        getSurvey: surveyjs(internalSdk).modules.getSurvey,
-        submitSurvey: surveyjs(internalSdk).modules.submitSurvey,
     },
 });

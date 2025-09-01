@@ -1,8 +1,7 @@
 import { DynamicModule, Module } from '@nestjs/common';
+import { CMS } from '@o2s/configs.integrations';
 
 import * as Framework from '@o2s/framework/modules';
-
-import { CMS } from '../../models';
 
 import { LoginPageController } from './login-page.controller';
 import { LoginPageService } from './login-page.service';
