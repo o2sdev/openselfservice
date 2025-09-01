@@ -16,6 +16,8 @@
         "@o2s/framework": "*",
         "@o2s/ui": "*",
         "@o2s/integrations.mocked": "*",
+        "@o2s/utils.api-harmonization": "*",
+        "@o2s/utils.frontend": "*",
         "class-variance-authority": "^0.7.1",
         "date-fns": "^4.1.0",
         "dotenv-cli": "^8.0.0",
