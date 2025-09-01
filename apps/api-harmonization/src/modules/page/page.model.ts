@@ -68,6 +68,7 @@ export class PageData {
 }
 
 export type Blocks =
+    // BLOCK REGISTER
     | ArticleList.Model.ArticleListBlock['__typename']
     | Category.Model.CategoryBlock['__typename']
     | Article.Model.ArticleBlock['__typename']
@@ -91,4 +92,3 @@ export type Blocks =
     | QuickLinks.Model.QuickLinksBlock['__typename']
     | CategoryList.Model.CategoryListBlock['__typename']
     | FeaturedServiceList.Model.FeaturedServiceListBlock['__typename'];
-// BLOCK REGISTER
