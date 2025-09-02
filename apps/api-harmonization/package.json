@@ -14,7 +14,7 @@
         "dev": "cross-env NODE_ENV=development nest start --watch",
         "debug": "nest start --debug --watch",
         "build": "nest build",
-        "start": "node dist/src/main",
+        "start": "node dist/main",
         "lint": "tsc --noEmit && eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
         "format": "prettier --write \"src/**/*.ts\"",
         "generate:component": "turbo gen api-component"

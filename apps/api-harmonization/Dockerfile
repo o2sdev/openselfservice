@@ -48,4 +48,4 @@ USER expressjs
 
 COPY --from=installer /app .
 
-CMD node apps/api-harmonization/dist/src/main.js
+CMD node apps/api-harmonization/dist/main.js
