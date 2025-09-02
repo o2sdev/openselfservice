@@ -262,7 +262,7 @@ const MOCK_SERVICE_LIST_BLOCK_PL: CMS.Model.ServiceListBlock.ServiceListBlock = 
         title: 'Nie znaleziono usług',
         description: 'Nie znaleziono usług spełniających Twoje kryteria',
     },
-    lsUrl: '/uslugi/{id}',
+    detailsUrl: '/uslugi/{id}',
     labels: {
         today: 'Dzisiaj',
         yesterday: 'Wczoraj',
