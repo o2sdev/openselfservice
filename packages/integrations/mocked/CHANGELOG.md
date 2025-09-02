@@ -1,5 +1,11 @@
 # @o2s/integrations.mocked
 
+## 1.11.1
+
+### Patch Changes
+
+- 9c62515: removed Polish characters from mocked URLs for servivces
+
 ## 1.11.0
 
 ### Minor Changes
