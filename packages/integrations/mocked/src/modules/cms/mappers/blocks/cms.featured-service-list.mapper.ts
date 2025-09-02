@@ -59,7 +59,7 @@ const MOCK_FEATURED_SERVICE_LIST_BLOCK_PL: CMS.Model.FeaturedServiceListBlock.Fe
         title: 'Nie znaleziono usług',
         description: 'Nie znaleziono usług spełniających Twoje kryteria',
     },
-    detailsUrl: '/usługi/{id}',
+    lsUrl: '/uslugi/{id}',
     labels: {
         on: 'Włącz',
         off: 'Wyłącz',
