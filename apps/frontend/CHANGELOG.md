@@ -1,5 +1,15 @@
 # @o2s/frontend
 
+## 1.9.1
+
+### Patch Changes
+
+- d9a9500: fixed `start` script to properly handle standalone output
+- Updated dependencies [d9a9500]
+- Updated dependencies [9c62515]
+    - @o2s/api-harmonization@1.9.2
+    - @o2s/integrations.mocked@1.11.1
+
 ## 1.9.0
 
 ### Minor Changes
