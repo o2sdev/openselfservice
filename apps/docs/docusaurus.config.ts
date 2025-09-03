@@ -345,8 +345,16 @@ const config: Config = {
                           to: 'https://github.com/o2sdev/openselfservice',
                           label: 'GitHub',
                           position: 'right',
-                          className: 'navbar__item--github button button-secondary',
+                          className: 'navbar__item--github',
                       },
+                      {
+                          to: '/dxp',
+                          //   label: 'DXP Starter',
+                          position: 'right',
+                          className: 'button-ultra',
+                          html: '<span class="label">DXP Starter</span>',
+                      },
+
                       {
                           to: '/contact',
                           label: 'Contact us',
@@ -388,10 +396,10 @@ const config: Config = {
                                   label: 'LinkedIn',
                                   href: 'https://www.linkedin.com/company/open-self-service/',
                               },
-                              {
-                                  label: 'Twitter / X',
-                                  href: 'https://x.com/openselfservice',
-                              },
+                              //   {
+                              //       label: 'Twitter / X',
+                              //       href: 'https://x.com/openselfservice',
+                              //   },
                               {
                                   label: 'Discord',
                                   href: 'https://discord.gg/4R568nZgsT',
