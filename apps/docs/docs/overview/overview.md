@@ -25,8 +25,8 @@ import DocLinkTiles from '@site/src/components/DocLinkTiles';
         { title: 'Guides', description: 'How‑tos and best practices (routing, theming, integrations).', href: '/docs/guides' },
         { title: 'Customization', description: 'All materials on customization and extensibility.', href: '/docs/guides/customization' },
         { title: 'Integrations', description: 'See integrations available in Open Self Service.', href: '/docs/integrations' },
-        { title: 'O2S Customer Portal starter', description: 'The default customer portal starter in O2S.', href: '/docs/starters/o2s' },
-        { title: 'DXP Frontend Starter', description: 'New starter for knowledge/marketing portals and DXP.', href: '/docs/starters/dxp' },
+        { title: 'O2S Customer Portal starter', description: 'The default customer portal starter in O2S.', href: '/docs/app-starters/o2s/overview' },
+        { title: 'DXP Frontend Starter', description: 'New starter for knowledge/marketing portals and DXP.', href: '/docs/app-starters/dxp/overview' },
     ]}
 />
 
