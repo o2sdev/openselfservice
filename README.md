@@ -1,4 +1,4 @@
-[![Open Self Service - open-source development kit for composable Customer Portals](apps/docs/static/img/o2s-gh-cover.png)](https://www.openselfservice.com)
+[![Open Self Service - open-source development kit for composable Customer Portals](https://raw.githubusercontent.com/o2sdev/openselfservice/main/apps/docs/static/img/dxp-gh-cover.png)](https://www.openselfservice.com)
 
 # Open Self Service (O2S)
 
@@ -63,7 +63,7 @@ O2S follows a **monorepo structure** using **Turborepo** for managing apps and i
 For a detailed breakdown, visit **[Project structure](https://www.openselfservice.com/docs/getting-started/project-structure)**.
 
 ## 🖥️ Demo app
-[![O2S Demo](apps/docs/static/img/o2s-gh-demo.png)](https://demo.openselfservice.com)
+[![O2S Demo](https://raw.githubusercontent.com/o2sdev/openselfservice/main/apps/docs/static/img/dxp-gh-demo.png)](https://demo-dxp.openselfservice.com)
 
 ## 🔌 Available Integrations
 
