@@ -81,7 +81,7 @@ export function DXPFeaturesSection() {
             ),
             features: ['Next.js based frontend', 'UI components & content types', 'Optimized for SEO, a11y & web perf'],
             buttonText: 'Learn more',
-            buttonUrl: '/docs/app-starters/o2s/overview#whats-included',
+            buttonUrl: '/docs/app-starters/dxp/overview',
         },
         {
             title: 'Composable Integration Layer',
