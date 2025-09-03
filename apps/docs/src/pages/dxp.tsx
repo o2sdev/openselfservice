@@ -46,7 +46,7 @@ export default function DXPStarter(): ReactNode {
                                     }}
                                     secondaryLink={{
                                         text: 'See on GitHub',
-                                        url: 'https://github.com/o2sdev/dxp-frontend-starter',
+                                        url: 'https://github.com/o2sdev/dxp-starter-kit',
                                     }}
                                     heroImage={{
                                         url: '/img/homepage/banner-dxp.png',

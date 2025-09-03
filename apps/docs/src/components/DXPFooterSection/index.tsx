@@ -25,7 +25,7 @@ export function DXPFooterSection() {
                     See DXP demo app
                 </a>
                 <a
-                    href="https://github.com/o2sdev/dxp-frontend-starter"
+                    href="https://github.com/o2sdev/dxp-starter-kit"
                     className="button button-ultra"
                     target="_blank"
                     rel="noopener"
