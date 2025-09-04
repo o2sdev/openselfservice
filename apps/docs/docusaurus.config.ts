@@ -351,7 +351,7 @@ const config: Config = {
                           to: '/dxp',
                           //   label: 'DXP Starter',
                           position: 'right',
-                          className: 'button-ultra',
+                          className: 'button button-tertiary',
                           html: '<span class="label">DXP Starter</span>',
                       },
 
