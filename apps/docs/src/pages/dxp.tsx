@@ -81,11 +81,9 @@ export default function DXPStarter(): ReactNode {
                             </div>
                         </div>
                     </div>
-                    <div className="section-border pr-4 pl-4 mb-0! pb-10">
+                    <div className="section-gradient px-4 py-40 mb-0!">
                         <section className="mb-0!">
-                            <div className="mt-20! mb-20!">
-                                <DXPFooterSection />
-                            </div>
+                            <DXPFooterSection />
                         </section>
                     </div>
                 </div>

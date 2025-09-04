@@ -1090,25 +1090,52 @@ footer a {
 
 .card-gradient-border {
     position: relative;
+    border-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='160' height='40' fill='none'%3e%3cpath stroke='url(%23a)' d='M6 .5h148a5.5 5.5 0 0 1 5.5 5.5v28a5.5 5.5 0 0 1-5.5 5.5H6A5.5 5.5 0 0 1 .5 34V6A5.5 5.5 0 0 1 6 .5Z'/%3e%3cdefs%3e%3clinearGradient id='a' x1='9.57' x2='152.54' y1='-2.661' y2='57.676' gradientUnits='userSpaceOnUse'%3e%3cstop stop-color='%234C5CE5'/%3e%3cstop offset='.346' stop-color='%232563EB'/%3e%3cstop offset='1' stop-color='%2334D399'/%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e")
+        8 / 8px stretch;
+    background-clip: padding-box;
+    padding: 1px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 0.375rem;
 }
 
-.card-gradient-border::before {
-    content: '';
-    position: absolute;
-    top: -1px;
-    left: -1px;
-    right: -1px;
-    bottom: -1px;
-    z-index: 1;
-    border-radius: 0.5rem;
-    background-image: linear-gradient(96deg, #4c5ce5 4.78%, #2563eb 37.76%, #34d399 100%);
+/* Base card class for all feature cards */
+.card-base {
+    position: relative;
+    background-clip: padding-box;
+    padding: 1px;
+}
+
+/* Card with solid border color */
+.card-solid-border {
+    position: relative;
+    background-clip: padding-box;
+    border: 1px solid;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 0.375rem;
+}
+
+/* Specific border color classes */
+.card-border-blue {
+    border-color: #4c5ce5;
+}
+
+.card-border-green {
+    border-color: #21d99a;
+}
+
+/* Base background for all feature cards */
+.card-base-bg {
+    background-color: rgba(255, 255, 255, 0.1);
+    z-index: 2;
+    position: relative;
+    border-radius: 0.375rem;
 }
 
 .card-gradient-bg {
-    background-color: #203074;
+    background-color: rgba(255, 255, 255, 0.1);
     z-index: 2;
     position: relative;
-    border-radius: 0.5rem;
+    border-radius: 0.375rem;
 }
 
 .card-benefits-bg {
@@ -1178,6 +1205,9 @@ footer a {
     border-top: 1px solid !important;
     border-image: linear-gradient(45deg, #2563eb, #21d99a) 1;
     background: var(--page--background-color);
+}
+.section-gradient {
+    background: linear-gradient(153deg, #001a85 0%, #16182b 65.1%);
 }
 
 .dxp-page .button-copy {

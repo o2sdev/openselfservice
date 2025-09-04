@@ -5,6 +5,7 @@ import CodepenIcon from '@site/src/assets/icons/codepen.svg';
 import GitcompareIcon from '@site/src/assets/icons/gitcompare.svg';
 import LightbulbIcon from '@site/src/assets/icons/lightbulb.svg';
 
+import Card from '../Card';
 import { Body, H2, H3 } from '../Typography';
 
 interface FeatureCardProps {
@@ -13,7 +14,7 @@ interface FeatureCardProps {
     features: string[];
     buttonText: string;
     buttonUrl: string;
-    borderColor?: string;
+    borderColor?: 'gradient' | 'blue' | 'green';
 }
 
 const FeatureCard: React.FC<FeatureCardProps> = ({
@@ -22,56 +23,50 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
     features,
     buttonText,
     buttonUrl,
-    borderColor = '#4c5ce5',
+    borderColor = 'blue',
 }) => {
     return (
-        <div
-            className={`rounded-lg relative flex-1 min-w-0 ${borderColor === 'gradient' ? 'card-gradient-border' : ''}`}
-        >
-            <div
-                className={`flex flex-col gap-[30px] items-start justify-between p-6 w-full h-full ${borderColor === 'gradient' ? 'card-gradient-bg' : 'card-features-bg'}`}
-            >
-                {/* Header */}
-                <div className="flex items-start justify-between w-full">
-                    <div className="flex flex-col items-start justify-start self-stretch w-full">
-                        <H3 className="text-2xl font-semibold leading-[1.5] text-white w-full">{title}</H3>
-                    </div>
-                    <div className="h-[26.533px] w-11 flex-shrink-0 relative">{icon}</div>
+        <Card borderColor={borderColor}>
+            {/* Header */}
+            <div className="flex items-start justify-between w-full">
+                <div className="flex flex-col items-start justify-start self-stretch w-full">
+                    <H3 className="text-2xl font-semibold leading-[1.5] text-white w-full">{title}</H3>
                 </div>
-
-                {/* Features List */}
-                <div className="flex flex-col items-start justify-start w-full flex-1">
-                    {features.map((feature, index) => (
-                        <div key={index} className="flex flex-col items-start justify-start w-full relative">
-                            <div className="absolute border-b border-zinc-400 inset-0 pointer-events-none" />
-                            <div className="flex items-center justify-between px-0 py-4 w-full">
-                                <div className="flex-1 font-bold leading-6 text-base text-white">{feature}</div>
-                                <div className="relative w-4 h-4 flex-shrink-0">
-                                    {/* <LightbulbIcon className="w-4 h-4 text-[#21d99a]" /> */}
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-
-                {/* Button */}
-                <a href={buttonUrl} className="button">
-                    {buttonText}
-                </a>
+                <div className="h-[26.533px] w-11 flex-shrink-0 relative">{icon}</div>
             </div>
 
-            {borderColor !== 'gradient' && (
-                <div
-                    className="absolute border inset-0 pointer-events-none rounded-lg shadow-sm"
-                    style={{ borderColor }}
-                />
-            )}
-        </div>
+            {/* Features List */}
+            <div className="flex flex-col items-start justify-start w-full flex-1">
+                {features.map((feature, index) => (
+                    <div key={index} className="flex flex-col items-start justify-start w-full relative">
+                        <div className="absolute border-b border-zinc-400 inset-0 pointer-events-none" />
+                        <div className="flex items-center justify-between px-0 py-4 w-full">
+                            <div className="flex-1 font-bold leading-6 text-base text-white">{feature}</div>
+                            <div className="relative w-4 h-4 flex-shrink-0">
+                                {/* <LightbulbIcon className="w-4 h-4 text-[#21d99a]" /> */}
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            {/* Button */}
+            <a href={buttonUrl} className="button">
+                {buttonText}
+            </a>
+        </Card>
     );
 };
 
 export function DXPFeaturesSection() {
-    const features = [
+    const features: Array<{
+        title: string;
+        icon: React.ReactNode;
+        features: string[];
+        buttonText: string;
+        buttonUrl: string;
+        borderColor?: 'gradient' | 'blue' | 'green';
+    }> = [
         {
             title: 'Modern Frontend Foundation',
             icon: (
@@ -105,7 +100,7 @@ export function DXPFeaturesSection() {
             features: ['Headless CMS integration', 'Powerful content management', 'Multilingual support'],
             buttonText: 'Learn more',
             buttonUrl: '/docs/integrations/cms/strapi/overview',
-            borderColor: '#21d99a',
+            borderColor: 'green',
         },
     ];
 

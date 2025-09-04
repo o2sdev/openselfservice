@@ -4,49 +4,43 @@ import CodeIcon from '@site/src/assets/icons/code.svg';
 import NetworkIcon from '@site/src/assets/icons/network.svg';
 import PenToolIcon from '@site/src/assets/icons/pentool.svg';
 
+import Card from '../Card';
 import { Body, H2, H3 } from '../Typography';
 
 interface BenefitCardProps {
     team: string;
     icon: React.ReactNode;
     title: string;
-    borderColor?: string;
+    borderColor?: 'gradient' | 'blue' | 'green';
 }
 
-const BenefitCard: React.FC<BenefitCardProps> = ({ team, icon, title, borderColor = '#4c5ce5' }) => {
+const BenefitCard: React.FC<BenefitCardProps> = ({ team, icon, title, borderColor = 'blue' }) => {
     return (
-        <div
-            className={`rounded-lg relative flex-1 min-w-0 ${borderColor === 'gradient' ? 'card-gradient-border' : ''}`}
-        >
-            <div
-                className={`flex flex-col gap-2 items-start justify-start p-6 w-full h-full ${borderColor === 'gradient' ? 'card-benefits-bg-gradient' : 'card-benefits-bg'}`}
-            >
-                {/* Header */}
-                <div className="flex items-start justify-between w-full">
-                    <Body className="flex-1 text-sm text-white font-medium">{team}</Body>
-                    <div className="w-4 h-4 flex-shrink-0">{icon}</div>
-                </div>
-
-                {/* Title */}
-                <H3 className="text-2xl font-bold leading-8 text-white w-full">{title}</H3>
+        <Card borderColor={borderColor} gap="gap-2">
+            {/* Header */}
+            <div className="flex items-start w-full">
+                <Body className="flex-1 text-sm text-white font-medium">{team}</Body>
+                <div className="w-4 h-4 flex-shrink-0">{icon}</div>
             </div>
 
-            {borderColor !== 'gradient' && (
-                <div
-                    className="absolute border inset-0 pointer-events-none rounded-lg shadow-sm"
-                    style={{ borderColor }}
-                />
-            )}
-        </div>
+            {/* Title */}
+            <H3 className="text-2xl font-bold leading-8 text-white w-full mt-auto">{title}</H3>
+        </Card>
     );
 };
 
 export function DXPBenefitsSection() {
-    const benefits = [
+    const benefits: Array<{
+        team: string;
+        icon: React.ReactNode;
+        title: string;
+        borderColor?: 'gradient' | 'blue' | 'green';
+    }> = [
         {
             team: 'Frontend Developers',
             icon: <CodeIcon className="w-4 h-4 text-[#21d99a]" />,
             title: 'Quick start with zero boilerplate',
+            borderColor: 'blue',
         },
         {
             team: 'Content Teams',
@@ -58,7 +52,7 @@ export function DXPBenefitsSection() {
             team: 'Solution Architects',
             icon: <NetworkIcon className="w-4 h-4 text-[#21d99a]" />,
             title: 'Flexible, composable stack as a base for future scaling',
-            borderColor: '#21d99a',
+            borderColor: 'green',
         },
     ];
 
@@ -70,7 +64,13 @@ export function DXPBenefitsSection() {
 
             <div className="flex flex-col lg:flex-row gap-8 items-stretch justify-start w-full">
                 {benefits.map((benefit, index) => (
-                    <BenefitCard key={index} {...benefit} />
+                    <BenefitCard
+                        key={index}
+                        team={benefit.team}
+                        icon={benefit.icon}
+                        title={benefit.title}
+                        borderColor={benefit.borderColor}
+                    />
                 ))}
             </div>
         </div>
