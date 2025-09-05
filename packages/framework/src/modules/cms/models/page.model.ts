@@ -22,6 +22,7 @@ export class Page {
         };
     };
     permissions?: Auth.Constants.Roles[];
+    theme?: string;
 }
 
 export abstract class Template {

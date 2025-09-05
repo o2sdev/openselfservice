@@ -10,22 +10,24 @@ export const Loading: React.FC<LoadingProps> = ({ bars = 2, variant = 'component
             return (
                 <div className="flex items-start space-x-4 w-full">
                     <Skeleton variant="circle" />
-                    {typeof bars === 'number' ? (
-                        Array.from(Array(bars).keys()).map((i) => <Skeleton key={i} />)
-                    ) : (
-                        <>
-                            <div className="space-y-2 w-full hidden md:block">
-                                {Array.from(Array(bars[0]).keys()).map((i) => (
-                                    <Skeleton key={i} />
-                                ))}
-                            </div>
-                            <div className="space-y-2 w-full block md:hidden">
-                                {Array.from(Array(bars[1]).keys()).map((i) => (
-                                    <Skeleton key={i} />
-                                ))}
-                            </div>
-                        </>
-                    )}
+                    <div className="space-y-2 w-full">
+                        {typeof bars === 'number' ? (
+                            Array.from(Array(bars).keys()).map((i) => <Skeleton key={i} />)
+                        ) : (
+                            <>
+                                <div className="space-y-2 w-full hidden md:block">
+                                    {Array.from(Array(bars[0]).keys()).map((i) => (
+                                        <Skeleton key={i} />
+                                    ))}
+                                </div>
+                                <div className="space-y-2 w-full block md:hidden">
+                                    {Array.from(Array(bars[1]).keys()).map((i) => (
+                                        <Skeleton key={i} />
+                                    ))}
+                                </div>
+                            </>
+                        )}
+                    </div>
                 </div>
             );
         case 'component':

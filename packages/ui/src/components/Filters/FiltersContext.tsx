@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useMemo, useState } from 'react';
 
 export interface InitialFilters {
-    [key: string]: string | number;
+    [key: string]: string | string[] | number;
 }
 
 type FiltersContextType = {

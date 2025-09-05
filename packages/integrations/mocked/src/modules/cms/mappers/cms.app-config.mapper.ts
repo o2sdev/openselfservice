@@ -43,6 +43,17 @@ const APP_CONFIG_EN: CMS.Model.AppConfig.AppConfig = {
             details: 'Details',
         },
     },
+    themes: {
+        default: {
+            name: 'default',
+            logo: {
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/logo.svg',
+                alt: 'Logo',
+                width: 92,
+                height: 24,
+            },
+        },
+    },
 };
 
 const APP_CONFIG_DE: CMS.Model.AppConfig.AppConfig = {
@@ -88,6 +99,17 @@ const APP_CONFIG_DE: CMS.Model.AppConfig.AppConfig = {
             details: 'Details',
         },
     },
+    themes: {
+        default: {
+            name: 'default',
+            logo: {
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/logo.svg',
+                alt: 'Logo',
+                width: 92,
+                height: 24,
+            },
+        },
+    },
 };
 
 const APP_CONFIG_PL: CMS.Model.AppConfig.AppConfig = {
@@ -131,6 +153,17 @@ const APP_CONFIG_PL: CMS.Model.AppConfig.AppConfig = {
             settings: 'Ustawienia',
             renew: 'Odnów',
             details: 'Szczegóły',
+        },
+    },
+    themes: {
+        default: {
+            name: 'default',
+            logo: {
+                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/logo.svg',
+                alt: 'Logo',
+                width: 92,
+                height: 24,
+            },
         },
     },
 };

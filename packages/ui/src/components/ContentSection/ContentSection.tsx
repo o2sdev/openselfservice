@@ -16,19 +16,21 @@ export const ContentSection: React.FC<Readonly<ContentSectionProps>> = ({
 }) => {
     return (
         <div className="flex flex-col gap-6 w-full">
-            <div className="flex flex-col sm:flex-row w-full sm:items-end justify-between gap-4">
-                {(title || description) && (
-                    <div className="flex flex-col gap-2">
-                        {title && <Typography variant="h2">{title}</Typography>}
-                        {description && <RichText content={description} />}
-                    </div>
-                )}
-                {categoryLink && (
-                    <Button asChild variant="secondary">
-                        <LinkComponent href={categoryLink.url}>{categoryLink.label}</LinkComponent>
-                    </Button>
-                )}
-            </div>
+            {(title || description || categoryLink) && (
+                <div className="flex flex-col sm:flex-row w-full sm:items-end justify-between gap-4">
+                    {(title || description) && (
+                        <div className="flex flex-col gap-2">
+                            {title && <Typography variant="h2">{title}</Typography>}
+                            {description && <RichText content={description} />}
+                        </div>
+                    )}
+                    {categoryLink && (
+                        <Button asChild variant="secondary">
+                            <LinkComponent href={categoryLink.url}>{categoryLink.label}</LinkComponent>
+                        </Button>
+                    )}
+                </div>
+            )}
             <div className="flex w-full">{children}</div>
         </div>
     );

@@ -3,7 +3,13 @@ import React from 'react';
 
 import { DynamicIconProps } from './DynamicIcon.types';
 
-export const DynamicIcon: React.FC<DynamicIconProps> = ({ name, size = 24, color = 'currentColor', className }) => {
+export const DynamicIcon: React.FC<DynamicIconProps> = ({
+    name,
+    size = 24,
+    color = 'currentColor',
+    className,
+    strokeWidth = 2,
+}) => {
     const Icon = Icons[name as keyof typeof Icons] as React.ComponentType<{
         width?: number;
         height?: number;
@@ -22,7 +28,7 @@ export const DynamicIcon: React.FC<DynamicIconProps> = ({ name, size = 24, color
             height={size}
             color={color}
             className={className}
-            style={{ minWidth: size, minHeight: size }}
+            style={{ minWidth: size, minHeight: size, strokeWidth: strokeWidth }}
         />
     );
 };

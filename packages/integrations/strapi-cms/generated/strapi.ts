@@ -42,7 +42,21 @@ export type AppConfig = {
     signedInHeader?: Maybe<Header>;
     signedOutFooter?: Maybe<Footer>;
     signedOutHeader?: Maybe<Header>;
+    themes: Array<Maybe<Theme>>;
+    themes_connection?: Maybe<ThemeRelationResponseCollection>;
     updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type AppConfigThemesArgs = {
+    filters?: InputMaybe<ThemeFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type AppConfigThemes_ConnectionArgs = {
+    filters?: InputMaybe<ThemeFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type AppConfigInput = {
@@ -51,6 +65,7 @@ export type AppConfigInput = {
     signedInHeader?: InputMaybe<Scalars['ID']['input']>;
     signedOutFooter?: InputMaybe<Scalars['ID']['input']>;
     signedOutHeader?: InputMaybe<Scalars['ID']['input']>;
+    themes?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
 };
 
 export type AppConfigRelationResponseCollection = {
@@ -1895,6 +1910,7 @@ export type GenericMorph =
     | ReviewWorkflowsWorkflow
     | ReviewWorkflowsWorkflowStage
     | SurveyJsForm
+    | Theme
     | TranslateBatchTranslateJob
     | TranslateUpdatedEntry
     | UploadFile
@@ -2170,6 +2186,7 @@ export type Mutation = {
     createReviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
     createReviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
     createSurveyJsForm?: Maybe<SurveyJsForm>;
+    createTheme?: Maybe<Theme>;
     createTranslateBatchTranslateJob?: Maybe<TranslateBatchTranslateJob>;
     createTranslateUpdatedEntry?: Maybe<TranslateUpdatedEntry>;
     /** Create a new role */
@@ -2196,6 +2213,7 @@ export type Mutation = {
     deleteReviewWorkflowsWorkflow?: Maybe<DeleteMutationResponse>;
     deleteReviewWorkflowsWorkflowStage?: Maybe<DeleteMutationResponse>;
     deleteSurveyJsForm?: Maybe<DeleteMutationResponse>;
+    deleteTheme?: Maybe<DeleteMutationResponse>;
     deleteTranslateBatchTranslateJob?: Maybe<DeleteMutationResponse>;
     deleteTranslateUpdatedEntry?: Maybe<DeleteMutationResponse>;
     deleteUploadFile?: Maybe<UploadFile>;
@@ -2232,6 +2250,7 @@ export type Mutation = {
     updateReviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
     updateReviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
     updateSurveyJsForm?: Maybe<SurveyJsForm>;
+    updateTheme?: Maybe<Theme>;
     updateTranslateBatchTranslateJob?: Maybe<TranslateBatchTranslateJob>;
     updateTranslateUpdatedEntry?: Maybe<TranslateUpdatedEntry>;
     updateUploadFile: UploadFile;
@@ -2312,6 +2331,11 @@ export type MutationCreateReviewWorkflowsWorkflowStageArgs = {
 
 export type MutationCreateSurveyJsFormArgs = {
     data: SurveyJsFormInput;
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type MutationCreateThemeArgs = {
+    data: ThemeInput;
     status?: InputMaybe<PublicationStatus>;
 };
 
@@ -2418,6 +2442,10 @@ export type MutationDeleteReviewWorkflowsWorkflowStageArgs = {
 };
 
 export type MutationDeleteSurveyJsFormArgs = {
+    documentId: Scalars['ID']['input'];
+};
+
+export type MutationDeleteThemeArgs = {
     documentId: Scalars['ID']['input'];
 };
 
@@ -2591,6 +2619,12 @@ export type MutationUpdateSurveyJsFormArgs = {
     status?: InputMaybe<PublicationStatus>;
 };
 
+export type MutationUpdateThemeArgs = {
+    data: ThemeInput;
+    documentId: Scalars['ID']['input'];
+    status?: InputMaybe<PublicationStatus>;
+};
+
 export type MutationUpdateTranslateBatchTranslateJobArgs = {
     data: TranslateBatchTranslateJobInput;
     documentId: Scalars['ID']['input'];
@@ -2682,6 +2716,7 @@ export type Page = {
     publishedAt?: Maybe<Scalars['DateTime']['output']>;
     slug: Scalars['String']['output'];
     template: Array<Maybe<PageTemplateDynamicZone>>;
+    theme?: Maybe<Theme>;
     updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
@@ -2717,6 +2752,7 @@ export type PageFiltersInput = {
     permissions?: InputMaybe<ComponentSeoUserRolesFiltersInput>;
     publishedAt?: InputMaybe<DateTimeFilterInput>;
     slug?: InputMaybe<StringFilterInput>;
+    theme?: InputMaybe<ThemeFiltersInput>;
     updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
 
@@ -2729,6 +2765,7 @@ export type PageInput = {
     publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
     slug?: InputMaybe<Scalars['String']['input']>;
     template?: InputMaybe<Array<Scalars['PageTemplateDynamicZoneInput']['input']>>;
+    theme?: InputMaybe<Scalars['ID']['input']>;
 };
 
 export type PageRelationResponseCollection = {
@@ -2805,6 +2842,9 @@ export type Query = {
     surveyJsForm?: Maybe<SurveyJsForm>;
     surveyJsForms: Array<Maybe<SurveyJsForm>>;
     surveyJsForms_connection?: Maybe<SurveyJsFormEntityResponseCollection>;
+    theme?: Maybe<Theme>;
+    themes: Array<Maybe<Theme>>;
+    themes_connection?: Maybe<ThemeEntityResponseCollection>;
     translateBatchTranslateJob?: Maybe<TranslateBatchTranslateJob>;
     translateBatchTranslateJobs: Array<Maybe<TranslateBatchTranslateJob>>;
     translateBatchTranslateJobs_connection?: Maybe<TranslateBatchTranslateJobEntityResponseCollection>;
@@ -3133,6 +3173,25 @@ export type QuerySurveyJsForms_ConnectionArgs = {
     status?: InputMaybe<PublicationStatus>;
 };
 
+export type QueryThemeArgs = {
+    documentId: Scalars['ID']['input'];
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type QueryThemesArgs = {
+    filters?: InputMaybe<ThemeFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    status?: InputMaybe<PublicationStatus>;
+};
+
+export type QueryThemes_ConnectionArgs = {
+    filters?: InputMaybe<ThemeFiltersInput>;
+    pagination?: InputMaybe<PaginationArg>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    status?: InputMaybe<PublicationStatus>;
+};
+
 export type QueryTranslateBatchTranslateJobArgs = {
     documentId: Scalars['ID']['input'];
     status?: InputMaybe<PublicationStatus>;
@@ -3417,6 +3476,41 @@ export type SurveyJsFormInput = {
     submitDestination?: InputMaybe<Scalars['JSON']['input']>;
     surveyId?: InputMaybe<Scalars['String']['input']>;
     surveyType?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Theme = {
+    createdAt?: Maybe<Scalars['DateTime']['output']>;
+    documentId: Scalars['ID']['output'];
+    logo?: Maybe<UploadFile>;
+    name: Scalars['String']['output'];
+    publishedAt?: Maybe<Scalars['DateTime']['output']>;
+    updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ThemeEntityResponseCollection = {
+    nodes: Array<Theme>;
+    pageInfo: Pagination;
+};
+
+export type ThemeFiltersInput = {
+    and?: InputMaybe<Array<InputMaybe<ThemeFiltersInput>>>;
+    createdAt?: InputMaybe<DateTimeFilterInput>;
+    documentId?: InputMaybe<IdFilterInput>;
+    name?: InputMaybe<StringFilterInput>;
+    not?: InputMaybe<ThemeFiltersInput>;
+    or?: InputMaybe<Array<InputMaybe<ThemeFiltersInput>>>;
+    publishedAt?: InputMaybe<DateTimeFilterInput>;
+    updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type ThemeInput = {
+    logo?: InputMaybe<Scalars['ID']['input']>;
+    name?: InputMaybe<Scalars['String']['input']>;
+    publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type ThemeRelationResponseCollection = {
+    nodes: Array<Theme>;
 };
 
 export type TranslateBatchTranslateJob = {
@@ -3927,6 +4021,8 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
               | 'signedInHeader'
               | 'signedOutFooter'
               | 'signedOutHeader'
+              | 'themes'
+              | 'themes_connection'
           > & {
               localizations: Array<Maybe<_RefType['AppConfig']>>;
               localizations_connection?: Maybe<_RefType['AppConfigRelationResponseCollection']>;
@@ -3934,6 +4030,8 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
               signedInHeader?: Maybe<_RefType['Header']>;
               signedOutFooter?: Maybe<_RefType['Footer']>;
               signedOutHeader?: Maybe<_RefType['Header']>;
+              themes: Array<Maybe<_RefType['Theme']>>;
+              themes_connection?: Maybe<_RefType['ThemeRelationResponseCollection']>;
           })
         | (Omit<Article, 'SEO' | 'content' | 'localizations' | 'localizations_connection' | 'parent'> & {
               SEO: _RefType['ComponentSeoSeo'];
@@ -4162,13 +4260,17 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
               page?: Maybe<_RefType['Page']>;
           })
         | OrganizationList
-        | (Omit<Page, 'SEO' | 'child' | 'localizations' | 'localizations_connection' | 'parent' | 'template'> & {
+        | (Omit<
+              Page,
+              'SEO' | 'child' | 'localizations' | 'localizations_connection' | 'parent' | 'template' | 'theme'
+          > & {
               SEO: _RefType['ComponentSeoSeo'];
               child?: Maybe<_RefType['Page']>;
               localizations: Array<Maybe<_RefType['Page']>>;
               localizations_connection?: Maybe<_RefType['PageRelationResponseCollection']>;
               parent?: Maybe<_RefType['Page']>;
               template: Array<Maybe<_RefType['PageTemplateDynamicZone']>>;
+              theme?: Maybe<_RefType['Theme']>;
           })
         | (Omit<ResetPasswordPage, 'SEO' | 'image' | 'localizations' | 'localizations_connection'> & {
               SEO: _RefType['ComponentSeoSeo'];
@@ -4179,6 +4281,7 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
         | ReviewWorkflowsWorkflow
         | ReviewWorkflowsWorkflowStage
         | SurveyJsForm
+        | (Omit<Theme, 'logo'> & { logo?: Maybe<_RefType['UploadFile']> })
         | TranslateBatchTranslateJob
         | TranslateUpdatedEntry
         | (Omit<UploadFile, 'related'> & { related?: Maybe<Array<Maybe<_RefType['GenericMorph']>>> })
@@ -4230,6 +4333,8 @@ export type ResolversTypes = {
             | 'signedInHeader'
             | 'signedOutFooter'
             | 'signedOutHeader'
+            | 'themes'
+            | 'themes_connection'
         > & {
             localizations: Array<Maybe<ResolversTypes['AppConfig']>>;
             localizations_connection?: Maybe<ResolversTypes['AppConfigRelationResponseCollection']>;
@@ -4237,6 +4342,8 @@ export type ResolversTypes = {
             signedInHeader?: Maybe<ResolversTypes['Header']>;
             signedOutFooter?: Maybe<ResolversTypes['Footer']>;
             signedOutHeader?: Maybe<ResolversTypes['Header']>;
+            themes: Array<Maybe<ResolversTypes['Theme']>>;
+            themes_connection?: Maybe<ResolversTypes['ThemeRelationResponseCollection']>;
         }
     >;
     AppConfigInput: AppConfigInput;
@@ -4696,13 +4803,14 @@ export type ResolversTypes = {
     OrganizationListInput: OrganizationListInput;
     OrganizationListRelationResponseCollection: ResolverTypeWrapper<OrganizationListRelationResponseCollection>;
     Page: ResolverTypeWrapper<
-        Omit<Page, 'SEO' | 'child' | 'localizations' | 'localizations_connection' | 'parent' | 'template'> & {
+        Omit<Page, 'SEO' | 'child' | 'localizations' | 'localizations_connection' | 'parent' | 'template' | 'theme'> & {
             SEO: ResolversTypes['ComponentSeoSeo'];
             child?: Maybe<ResolversTypes['Page']>;
             localizations: Array<Maybe<ResolversTypes['Page']>>;
             localizations_connection?: Maybe<ResolversTypes['PageRelationResponseCollection']>;
             parent?: Maybe<ResolversTypes['Page']>;
             template: Array<Maybe<ResolversTypes['PageTemplateDynamicZone']>>;
+            theme?: Maybe<ResolversTypes['Theme']>;
         }
     >;
     PageEntityResponseCollection: ResolverTypeWrapper<
@@ -4748,6 +4856,15 @@ export type ResolversTypes = {
     SurveyJsFormEntityResponseCollection: ResolverTypeWrapper<SurveyJsFormEntityResponseCollection>;
     SurveyJsFormFiltersInput: SurveyJsFormFiltersInput;
     SurveyJsFormInput: SurveyJsFormInput;
+    Theme: ResolverTypeWrapper<Omit<Theme, 'logo'> & { logo?: Maybe<ResolversTypes['UploadFile']> }>;
+    ThemeEntityResponseCollection: ResolverTypeWrapper<
+        Omit<ThemeEntityResponseCollection, 'nodes'> & { nodes: Array<ResolversTypes['Theme']> }
+    >;
+    ThemeFiltersInput: ThemeFiltersInput;
+    ThemeInput: ThemeInput;
+    ThemeRelationResponseCollection: ResolverTypeWrapper<
+        Omit<ThemeRelationResponseCollection, 'nodes'> & { nodes: Array<ResolversTypes['Theme']> }
+    >;
     TranslateBatchTranslateJob: ResolverTypeWrapper<TranslateBatchTranslateJob>;
     TranslateBatchTranslateJobEntityResponseCollection: ResolverTypeWrapper<TranslateBatchTranslateJobEntityResponseCollection>;
     TranslateBatchTranslateJobFiltersInput: TranslateBatchTranslateJobFiltersInput;
@@ -4800,6 +4917,8 @@ export type ResolversParentTypes = {
         | 'signedInHeader'
         | 'signedOutFooter'
         | 'signedOutHeader'
+        | 'themes'
+        | 'themes_connection'
     > & {
         localizations: Array<Maybe<ResolversParentTypes['AppConfig']>>;
         localizations_connection?: Maybe<ResolversParentTypes['AppConfigRelationResponseCollection']>;
@@ -4807,6 +4926,8 @@ export type ResolversParentTypes = {
         signedInHeader?: Maybe<ResolversParentTypes['Header']>;
         signedOutFooter?: Maybe<ResolversParentTypes['Footer']>;
         signedOutHeader?: Maybe<ResolversParentTypes['Header']>;
+        themes: Array<Maybe<ResolversParentTypes['Theme']>>;
+        themes_connection?: Maybe<ResolversParentTypes['ThemeRelationResponseCollection']>;
     };
     AppConfigInput: AppConfigInput;
     AppConfigRelationResponseCollection: Omit<AppConfigRelationResponseCollection, 'nodes'> & {
@@ -5211,13 +5332,17 @@ export type ResolversParentTypes = {
     OrganizationList: OrganizationList;
     OrganizationListInput: OrganizationListInput;
     OrganizationListRelationResponseCollection: OrganizationListRelationResponseCollection;
-    Page: Omit<Page, 'SEO' | 'child' | 'localizations' | 'localizations_connection' | 'parent' | 'template'> & {
+    Page: Omit<
+        Page,
+        'SEO' | 'child' | 'localizations' | 'localizations_connection' | 'parent' | 'template' | 'theme'
+    > & {
         SEO: ResolversParentTypes['ComponentSeoSeo'];
         child?: Maybe<ResolversParentTypes['Page']>;
         localizations: Array<Maybe<ResolversParentTypes['Page']>>;
         localizations_connection?: Maybe<ResolversParentTypes['PageRelationResponseCollection']>;
         parent?: Maybe<ResolversParentTypes['Page']>;
         template: Array<Maybe<ResolversParentTypes['PageTemplateDynamicZone']>>;
+        theme?: Maybe<ResolversParentTypes['Theme']>;
     };
     PageEntityResponseCollection: Omit<PageEntityResponseCollection, 'nodes'> & {
         nodes: Array<ResolversParentTypes['Page']>;
@@ -5257,6 +5382,15 @@ export type ResolversParentTypes = {
     SurveyJsFormEntityResponseCollection: SurveyJsFormEntityResponseCollection;
     SurveyJsFormFiltersInput: SurveyJsFormFiltersInput;
     SurveyJsFormInput: SurveyJsFormInput;
+    Theme: Omit<Theme, 'logo'> & { logo?: Maybe<ResolversParentTypes['UploadFile']> };
+    ThemeEntityResponseCollection: Omit<ThemeEntityResponseCollection, 'nodes'> & {
+        nodes: Array<ResolversParentTypes['Theme']>;
+    };
+    ThemeFiltersInput: ThemeFiltersInput;
+    ThemeInput: ThemeInput;
+    ThemeRelationResponseCollection: Omit<ThemeRelationResponseCollection, 'nodes'> & {
+        nodes: Array<ResolversParentTypes['Theme']>;
+    };
     TranslateBatchTranslateJob: TranslateBatchTranslateJob;
     TranslateBatchTranslateJobEntityResponseCollection: TranslateBatchTranslateJobEntityResponseCollection;
     TranslateBatchTranslateJobFiltersInput: TranslateBatchTranslateJobFiltersInput;
@@ -5315,6 +5449,18 @@ export type AppConfigResolvers<
     signedInHeader?: Resolver<Maybe<ResolversTypes['Header']>, ParentType, ContextType>;
     signedOutFooter?: Resolver<Maybe<ResolversTypes['Footer']>, ParentType, ContextType>;
     signedOutHeader?: Resolver<Maybe<ResolversTypes['Header']>, ParentType, ContextType>;
+    themes?: Resolver<
+        Array<Maybe<ResolversTypes['Theme']>>,
+        ParentType,
+        ContextType,
+        RequireFields<AppConfigThemesArgs, 'pagination' | 'sort'>
+    >;
+    themes_connection?: Resolver<
+        Maybe<ResolversTypes['ThemeRelationResponseCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<AppConfigThemes_ConnectionArgs, 'pagination' | 'sort'>
+    >;
     updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -6970,6 +7116,7 @@ export type GenericMorphResolvers<
         | 'ReviewWorkflowsWorkflow'
         | 'ReviewWorkflowsWorkflowStage'
         | 'SurveyJsForm'
+        | 'Theme'
         | 'TranslateBatchTranslateJob'
         | 'TranslateUpdatedEntry'
         | 'UploadFile'
@@ -7226,6 +7373,12 @@ export type MutationResolvers<
         ContextType,
         RequireFields<MutationCreateSurveyJsFormArgs, 'data' | 'status'>
     >;
+    createTheme?: Resolver<
+        Maybe<ResolversTypes['Theme']>,
+        ParentType,
+        ContextType,
+        RequireFields<MutationCreateThemeArgs, 'data' | 'status'>
+    >;
     createTranslateBatchTranslateJob?: Resolver<
         Maybe<ResolversTypes['TranslateBatchTranslateJob']>,
         ParentType,
@@ -7369,6 +7522,12 @@ export type MutationResolvers<
         ParentType,
         ContextType,
         RequireFields<MutationDeleteSurveyJsFormArgs, 'documentId'>
+    >;
+    deleteTheme?: Resolver<
+        Maybe<ResolversTypes['DeleteMutationResponse']>,
+        ParentType,
+        ContextType,
+        RequireFields<MutationDeleteThemeArgs, 'documentId'>
     >;
     deleteTranslateBatchTranslateJob?: Resolver<
         Maybe<ResolversTypes['DeleteMutationResponse']>,
@@ -7550,6 +7709,12 @@ export type MutationResolvers<
         ContextType,
         RequireFields<MutationUpdateSurveyJsFormArgs, 'data' | 'documentId' | 'status'>
     >;
+    updateTheme?: Resolver<
+        Maybe<ResolversTypes['Theme']>,
+        ParentType,
+        ContextType,
+        RequireFields<MutationUpdateThemeArgs, 'data' | 'documentId' | 'status'>
+    >;
     updateTranslateBatchTranslateJob?: Resolver<
         Maybe<ResolversTypes['TranslateBatchTranslateJob']>,
         ParentType,
@@ -7670,6 +7835,7 @@ export type PageResolvers<
     publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
     slug?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     template?: Resolver<Array<Maybe<ResolversTypes['PageTemplateDynamicZone']>>, ParentType, ContextType>;
+    theme?: Resolver<Maybe<ResolversTypes['Theme']>, ParentType, ContextType>;
     updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -8008,6 +8174,24 @@ export type QueryResolvers<
         ContextType,
         RequireFields<QuerySurveyJsForms_ConnectionArgs, 'pagination' | 'sort' | 'status'>
     >;
+    theme?: Resolver<
+        Maybe<ResolversTypes['Theme']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryThemeArgs, 'documentId' | 'status'>
+    >;
+    themes?: Resolver<
+        Array<Maybe<ResolversTypes['Theme']>>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryThemesArgs, 'pagination' | 'sort' | 'status'>
+    >;
+    themes_connection?: Resolver<
+        Maybe<ResolversTypes['ThemeEntityResponseCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryThemes_ConnectionArgs, 'pagination' | 'sort' | 'status'>
+    >;
     translateBatchTranslateJob?: Resolver<
         Maybe<ResolversTypes['TranslateBatchTranslateJob']>,
         ParentType,
@@ -8229,6 +8413,38 @@ export type SurveyJsFormEntityResponseCollectionResolvers<
 > = {
     nodes?: Resolver<Array<ResolversTypes['SurveyJsForm']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ThemeResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['Theme'] = ResolversParentTypes['Theme'],
+> = {
+    createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    documentId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    logo?: Resolver<Maybe<ResolversTypes['UploadFile']>, ParentType, ContextType>;
+    name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ThemeEntityResponseCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ThemeEntityResponseCollection'] = ResolversParentTypes['ThemeEntityResponseCollection'],
+> = {
+    nodes?: Resolver<Array<ResolversTypes['Theme']>, ParentType, ContextType>;
+    pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ThemeRelationResponseCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ThemeRelationResponseCollection'] = ResolversParentTypes['ThemeRelationResponseCollection'],
+> = {
+    nodes?: Resolver<Array<ResolversTypes['Theme']>, ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -8649,6 +8865,9 @@ export type Resolvers<ContextType = any> = {
     ReviewWorkflowsWorkflowStageRelationResponseCollection?: ReviewWorkflowsWorkflowStageRelationResponseCollectionResolvers<ContextType>;
     SurveyJsForm?: SurveyJsFormResolvers<ContextType>;
     SurveyJsFormEntityResponseCollection?: SurveyJsFormEntityResponseCollectionResolvers<ContextType>;
+    Theme?: ThemeResolvers<ContextType>;
+    ThemeEntityResponseCollection?: ThemeEntityResponseCollectionResolvers<ContextType>;
+    ThemeRelationResponseCollection?: ThemeRelationResponseCollectionResolvers<ContextType>;
     TranslateBatchTranslateJob?: TranslateBatchTranslateJobResolvers<ContextType>;
     TranslateBatchTranslateJobEntityResponseCollection?: TranslateBatchTranslateJobEntityResponseCollectionResolvers<ContextType>;
     TranslateUpdatedEntry?: TranslateUpdatedEntryResolvers<ContextType>;
@@ -8871,6 +9090,10 @@ export type AppConfigFragment = {
     documentId: string;
     header?: { documentId: string };
     footer?: { documentId: string };
+    themes: Array<{
+        name: string;
+        logo?: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
+    }>;
 };
 
 export type ComponentFragment = {
@@ -10319,7 +10542,15 @@ export type GetAppConfigQueryVariables = Exact<{
 }>;
 
 export type GetAppConfigQuery = {
-    appConfig?: { documentId: string; header?: { documentId: string }; footer?: { documentId: string } };
+    appConfig?: {
+        documentId: string;
+        header?: { documentId: string };
+        footer?: { documentId: string };
+        themes: Array<{
+            name: string;
+            logo?: { url: string; alternativeText?: string; width?: number; height?: number; name: string };
+        }>;
+    };
     configurableTexts?: {
         errors: { requestError: { title: string; content?: string } };
         dates: { today: string; yesterday: string };
@@ -11685,7 +11916,14 @@ export const AppConfigFragmentDoc = gql`
         footer: signedInFooter {
             documentId
         }
+        themes {
+            name
+            logo {
+                ...Media
+            }
+        }
     }
+    ${MediaFragmentDoc}
 `;
 export const NavigationItemFragmentDoc = gql`
     fragment NavigationItem on ComponentContentNavigationItem {
