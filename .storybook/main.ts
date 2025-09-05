@@ -9,6 +9,7 @@ const env: {
 dotenv.config({
     path: 'apps/frontend/.env.development',
     processEnv: env,
+    quiet: true,
 });
 
 /**
@@ -23,6 +24,7 @@ const config: StorybookConfig = {
     stories: [
         '../apps/frontend/src/**/*.stories.@(js|jsx|mjs|ts|tsx)',
         '../packages/blocks/**/src/frontend/**/*.stories.@(js|jsx|mjs|ts|tsx)',
+        '../packages/ui/**/*.stories.@(js|jsx|mjs|ts|tsx)',
     ],
     addons: [
         getAbsolutePath('@storybook/addon-docs'),
@@ -32,6 +34,9 @@ const config: StorybookConfig = {
     framework: {
         name: getAbsolutePath('@storybook/nextjs'),
         options: {},
+    },
+    typescript: {
+        reactDocgen: 'react-docgen-typescript',
     },
     env: (config) => ({
         ...config,

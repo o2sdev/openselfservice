@@ -10,7 +10,7 @@ import { AppSpinner } from '@o2s/ui/components/AppSpinner';
 import { Toaster } from '@o2s/ui/elements/toaster';
 import { TooltipProvider } from '@o2s/ui/elements/tooltip';
 
-import { globalProviderConfig, globalProviderLabels } from './data';
+import { globalProviderConfig, globalProviderCurrentTheme, globalProviderLabels, globalProviderThemes } from './data';
 
 import '../apps/frontend/src/styles/global.css';
 import messages from '../apps/frontend/src/i18n/messages/en.json'
@@ -37,12 +37,8 @@ const preview: Preview = {
         }),
         (Story) => {
             return(
-                <NextIntlClientProvider locale="en" messages={{
-                    "general": {
-                        "comingSoon": "This feature is coming soon!"
-                    }
-                }}>
-                    <GlobalProvider config={globalProviderConfig} labels={globalProviderLabels} locale="en">
+                <NextIntlClientProvider locale="en" messages={messages}>
+                    <GlobalProvider config={globalProviderConfig} labels={globalProviderLabels} themes={globalProviderThemes} currentTheme={globalProviderCurrentTheme} locale="en">
                         <TooltipProvider>
                             <Story />
 
