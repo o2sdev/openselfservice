@@ -21,6 +21,8 @@ export interface GlobalProviderProps {
     };
     labels: CMS.Model.AppConfig.Labels;
     locale: string;
+    themes: CMS.Model.AppConfig.Themes;
+    currentTheme?: string;
     children: ReactNode;
 }
 
@@ -42,11 +44,15 @@ export interface GlobalContextType {
         isVisible: boolean;
         toggle: (show: boolean) => void;
     };
+    themes: {
+        available: CMS.Model.AppConfig.Themes;
+        current?: string;
+    };
 }
 
 export const GlobalContext = createContext({} as GlobalContextType);
 
-export const GlobalProvider = ({ config, labels, locale, children }: GlobalProviderProps) => {
+export const GlobalProvider = ({ config, labels, locale, themes, currentTheme, children }: GlobalProviderProps) => {
     const priceService = usePriceService(locale);
 
     const [isSpinnerVisible, setIsSpinnerVisible] = useState(false);
@@ -60,6 +66,10 @@ export const GlobalProvider = ({ config, labels, locale, children }: GlobalProvi
                 spinner: {
                     isVisible: isSpinnerVisible,
                     toggle: setIsSpinnerVisible,
+                },
+                themes: {
+                    available: themes,
+                    current: currentTheme,
                 },
             }}
         >

@@ -3,4 +3,5 @@ export interface DynamicIconProps {
     size?: number;
     color?: string;
     className?: string;
+    strokeWidth?: number;
 }

@@ -43,6 +43,7 @@ export class Article {
     author?: Author;
     sections!: ArticleSection[];
     permissions?: Auth.Constants.Roles[];
+    theme?: string;
 }
 
 export type ArticleSection = ArticleSectionText | ArticleSectionImage;

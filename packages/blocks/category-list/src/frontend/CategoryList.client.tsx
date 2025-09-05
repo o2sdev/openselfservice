@@ -3,6 +3,7 @@ import React from 'react';
 
 import { InformativeCard } from '@o2s/ui/components/Cards/InformativeCard';
 import { ContentSection } from '@o2s/ui/components/ContentSection';
+import { DynamicIconProps } from '@o2s/ui/components/DynamicIcon';
 
 import { CategoryListPureProps } from './CategoryList.types';
 
@@ -18,8 +19,10 @@ export const CategoryListPure: React.FC<Readonly<CategoryListPureProps>> = ({ ro
                             title={item.title}
                             description={item.description}
                             href={item.slug}
-                            icon={item.icon}
-                            iconSize={24}
+                            icon={{
+                                name: item.icon as DynamicIconProps['name'],
+                                size: 24,
+                            }}
                             LinkComponent={LinkComponent}
                         />
                     </li>

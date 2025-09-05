@@ -63,7 +63,14 @@ export class PageService {
 
                 return forkJoin([header, footer]).pipe(
                     map(([header, footer]) => {
-                        return mapInit(appConfig.locales, header, footer, appConfig.labels, userRoles);
+                        return mapInit(
+                            appConfig.locales,
+                            header,
+                            footer,
+                            appConfig.labels,
+                            appConfig.themes,
+                            userRoles,
+                        );
                     }),
                 );
             }),

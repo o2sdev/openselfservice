@@ -64,30 +64,32 @@ export default async function NotFound() {
     });
 
     return (
-        <GlobalProvider config={init} labels={init.labels} locale={locale}>
-            <div className="flex flex-col min-h-dvh">
-                <Header data={init.common.header} />
-                <div className="flex flex-col grow">
-                    <div className="py-6 px-4 md:px-6 ml-auto mr-auto w-full md:max-w-7xl">
-                        <main className="flex flex-col items-center justify-center grow">
-                            <ErrorPage
-                                errorType="404"
-                                title={data.title}
-                                description={data.description}
-                                link={{
-                                    url: data.url || '/',
-                                    label: data.urlLabel,
-                                }}
-                                LinkComponent={Link}
-                            />
-                        </main>
+        <body>
+            <GlobalProvider config={init} labels={init.labels} locale={locale} themes={init.themes}>
+                <div className="flex flex-col min-h-dvh">
+                    <Header data={init.common.header} />
+                    <div className="flex flex-col grow">
+                        <div className="py-6 px-4 md:px-6 ml-auto mr-auto w-full md:max-w-7xl">
+                            <main className="flex flex-col items-center justify-center grow">
+                                <ErrorPage
+                                    errorType="404"
+                                    title={data.title}
+                                    description={data.description}
+                                    link={{
+                                        url: data.url || '/',
+                                        label: data.urlLabel,
+                                    }}
+                                    LinkComponent={Link}
+                                />
+                            </main>
+                        </div>
                     </div>
-                </div>
-                <Footer data={init.common.footer} />
+                    <Footer data={init.common.footer} />
 
-                <Toaster />
-                <AppSpinner />
-            </div>
-        </GlobalProvider>
+                    <Toaster />
+                    <AppSpinner />
+                </div>
+            </GlobalProvider>
+        </body>
     );
 }

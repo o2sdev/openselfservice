@@ -96,50 +96,52 @@ export default async function LoginPage({ params }: Readonly<Props>) {
         };
 
         return (
-            <GlobalProvider config={init} labels={init.labels} locale={locale}>
-                <div className="flex flex-col min-h-dvh">
-                    <Header data={init.common.header} />
-                    <div className="flex flex-col grow">
-                        <AuthLayout>
-                            <SignInForm
-                                providers={providerMap}
-                                labels={{
-                                    title: data.title,
-                                    subtitle: data.subtitle,
-                                    password: {
-                                        label: data.password.label,
-                                        placeholder: data.password.placeholder,
-                                        hide: data.labels?.hide,
-                                        show: data.labels?.show,
-                                        errorMessages: data.password?.errorMessages,
-                                    },
-                                    username: {
-                                        label: data.username.label,
-                                        placeholder: data.username.placeholder,
-                                        errorMessages: data.username?.errorMessages,
-                                    },
-                                    signIn: data.signIn,
-                                    providers: data.providers,
-                                    invalidCredentials: data.invalidCredentials,
-                                }}
-                                onSignIn={handleSignIn}
-                            />
-                            {data.image?.url && (
-                                <Image
-                                    src={data.image?.url}
-                                    alt={data.image?.alt}
-                                    fill={true}
-                                    className="object-cover"
+            <body>
+                <GlobalProvider config={init} labels={init.labels} locale={locale} themes={init.themes}>
+                    <div className="flex flex-col min-h-dvh">
+                        <Header data={init.common.header} />
+                        <div className="flex flex-col grow">
+                            <AuthLayout>
+                                <SignInForm
+                                    providers={providerMap}
+                                    labels={{
+                                        title: data.title,
+                                        subtitle: data.subtitle,
+                                        password: {
+                                            label: data.password.label,
+                                            placeholder: data.password.placeholder,
+                                            hide: data.labels?.hide,
+                                            show: data.labels?.show,
+                                            errorMessages: data.password?.errorMessages,
+                                        },
+                                        username: {
+                                            label: data.username.label,
+                                            placeholder: data.username.placeholder,
+                                            errorMessages: data.username?.errorMessages,
+                                        },
+                                        signIn: data.signIn,
+                                        providers: data.providers,
+                                        invalidCredentials: data.invalidCredentials,
+                                    }}
+                                    onSignIn={handleSignIn}
                                 />
-                            )}
-                        </AuthLayout>
-                    </div>
-                    <Footer data={init.common.footer} />
+                                {data.image?.url && (
+                                    <Image
+                                        src={data.image?.url}
+                                        alt={data.image?.alt}
+                                        fill={true}
+                                        className="object-cover"
+                                    />
+                                )}
+                            </AuthLayout>
+                        </div>
+                        <Footer data={init.common.footer} />
 
-                    <Toaster />
-                    <AppSpinner />
-                </div>
-            </GlobalProvider>
+                        <Toaster />
+                        <AppSpinner />
+                    </div>
+                </GlobalProvider>
+            </body>
         );
     } catch (_error) {
         notFound();

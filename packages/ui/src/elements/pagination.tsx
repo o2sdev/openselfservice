@@ -2,8 +2,9 @@ import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react';
 import * as React from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
+import { baseVariant } from '@o2s/ui/lib/utils';
 
-import { ButtonProps, buttonVariants } from '@o2s/ui/elements/button';
+import { ButtonProps } from '@o2s/ui/elements/button';
 
 const Pagination = ({ className, ...props }: React.ComponentProps<'nav'>) => (
     <nav
@@ -36,7 +37,7 @@ const PaginationLink = ({ className, isActive, size = 'icon', ...props }: Pagina
     <button
         aria-current={isActive ? 'page' : undefined}
         className={cn(
-            buttonVariants({
+            baseVariant({
                 variant: isActive ? 'outline' : 'ghost',
                 size,
             }),

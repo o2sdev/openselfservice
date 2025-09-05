@@ -20,7 +20,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, React.ComponentProps<'tex
 );
 Textarea.displayName = 'Textarea';
 
-interface TextareaWithLabelProps extends React.ComponentProps<'textarea'> {
+export interface TextareaWithLabelProps extends React.ComponentProps<'textarea'> {
     label: string | React.ReactNode;
     labelClassName?: string;
 }

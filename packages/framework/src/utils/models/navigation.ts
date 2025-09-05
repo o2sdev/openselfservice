@@ -5,6 +5,7 @@ export class NavigationGroup {
     title!: string;
     items!: (NavigationItem | NavigationGroup)[];
     permissions?: Auth.Constants.Roles[];
+    url?: string;
 }
 
 export class NavigationItem {

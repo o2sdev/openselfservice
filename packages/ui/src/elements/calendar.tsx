@@ -6,8 +6,9 @@ import * as React from 'react';
 import { DayPicker, type DayPickerProps, labelNext, labelPrevious, useDayPicker } from 'react-day-picker';
 
 import { cn } from '@o2s/ui/lib/utils';
+import { baseVariant } from '@o2s/ui/lib/utils';
 
-import { Button, buttonVariants } from '@o2s/ui/elements/button';
+import { Button } from '@o2s/ui/elements/button';
 
 export type CalendarProps = DayPickerProps & {
     /**
@@ -90,7 +91,7 @@ function Calendar({
     const _monthClassName = cn('w-full', props.monthClassName);
     const _captionClassName = cn('relative flex items-center justify-center pt-1', props.captionClassName);
     const _captionLabelClassName = cn('truncate text-sm font-medium', props.captionLabelClassName);
-    const buttonNavClassName = buttonVariants({
+    const buttonNavClassName = baseVariant({
         variant: 'outline',
         className: 'absolute h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100',
     });
@@ -101,7 +102,7 @@ function Calendar({
     const _weekClassName = cn('mt-2 flex w-max items-start', props.weekClassName);
     const _dayClassName = cn('flex size-8 flex-1 items-center justify-center p-0 text-sm', props.dayClassName);
     const _dayButtonClassName = cn(
-        buttonVariants({ variant: 'ghost' }),
+        baseVariant({ variant: 'ghost' }),
         'size-8 rounded-md p-0 font-normal transition-none aria-selected:opacity-100',
         props.dayButtonClassName,
     );
