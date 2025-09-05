@@ -11,7 +11,7 @@ RUN apk add --no-cache libc6-compat openjdk11-jre
 WORKDIR /app
 RUN npm i -g turbo
 COPY . .
-RUN turbo prune @o2s/frontend --docker
+RUN turbo prune @dxp/frontend --docker
 
 # Add lockfile and package.json's of isolated subworkspace
 FROM base AS installer
