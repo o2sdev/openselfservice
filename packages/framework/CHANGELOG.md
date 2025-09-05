@@ -1,5 +1,12 @@
 # @o2s/framework
 
+## 1.11.1
+
+### Patch Changes
+
+- 5f25529: added an option to set a page-based themes via CMS config
+- 5f25529: added stories for UI components
+
 ## 1.11.0
 
 ### Minor Changes

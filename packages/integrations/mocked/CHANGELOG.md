@@ -1,5 +1,14 @@
 # @o2s/integrations.mocked
 
+## 1.11.2
+
+### Patch Changes
+
+- 5f25529: added stories for UI components
+- Updated dependencies [5f25529]
+- Updated dependencies [5f25529]
+    - @o2s/framework@1.11.1
+
 ## 1.11.1
 
 ### Patch Changes
