@@ -51,7 +51,7 @@ export const CategoryPure: React.FC<CategoryPureProps> = ({
 
     return (
         <div className="w-full flex flex-col gap-6">
-            <Container variant="narrow">
+            <Container variant="narrow" spacing="none">
                 <div className="flex gap-6 items-start px-4 md:px-0">
                     {component.icon && (
                         <div className="flex max-w-12 max-h-12 p-2 rounded-md items-center justify-center bg-card border border-border">

@@ -21,7 +21,7 @@ export const mapArticleListBlock = (
                 id: component.id,
                 title: component.title,
                 description: component.description,
-                categorySlug: component.category?.slug,
+                categoryId: component.category?.slug,
                 articleIds: component.pages.map((page) => page.slug),
                 articlesToShow: component.articles_to_show,
                 parent: component.parent,

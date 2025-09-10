@@ -68,6 +68,11 @@ export const mapArticle = (
                     main: [
                         {
                             __typename: 'ArticleBlock',
+                            layout: {
+                                variant: 'full',
+                                spacing: 'none',
+                                background: 'none',
+                            },
                             ...article,
                         },
                     ],

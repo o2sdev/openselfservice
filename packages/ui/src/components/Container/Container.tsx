@@ -5,11 +5,12 @@ import { cn } from '@o2s/ui/lib/utils';
 
 import { ContainerProps } from './Container.types';
 
-const containerVariants = cva('w-full m-auto', {
+const containerVariants = cva('w-full mx-auto', {
     variants: {
         variant: {
-            full: 'w-full',
-            narrow: 'max-w-3xl',
+            narrow: 'md:max-w-3xl',
+            wide: 'md:max-w-7xl',
+            full: 'md:max-w-10xl',
         },
         spacing: {
             none: '',

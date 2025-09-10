@@ -4,6 +4,7 @@ export class ArticleSearchBlock extends ApiModels.Block.Block {
     __typename!: 'ArticleSearchBlock';
     title?: string;
     inputLabel!: string;
+    category?: string;
     noResults!: {
         title: string;
         description?: string;
