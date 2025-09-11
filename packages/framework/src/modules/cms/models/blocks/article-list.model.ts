@@ -3,7 +3,7 @@ import { Block, RichText } from '@/utils/models';
 export class ArticleListBlock extends Block.Block {
     title?: string;
     description?: RichText.RichText;
-    categorySlug?: string;
+    categoryId?: string;
     articleIds?: string[];
     articlesToShow?: number;
     parent?: {

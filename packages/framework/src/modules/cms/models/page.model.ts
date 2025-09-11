@@ -33,6 +33,7 @@ export abstract class Template {
 
 export class SlotBlock {
     __typename!: string;
+    layout?: LayoutSection;
     id!: string;
 }
 
@@ -53,4 +54,11 @@ export class TwoColumnTemplate implements Template {
         right: SlotBlock[];
         bottom: SlotBlock[];
     };
+}
+
+export class LayoutSection {
+    spacing?: 'none' | 'small' | 'medium' | 'large';
+    background?: 'none' | 'light' | 'dark' | 'brand';
+    variant?: 'narrow' | 'full' | 'wide';
+    theme?: string;
 }

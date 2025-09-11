@@ -8,4 +8,5 @@ export class SearchArticlesQuery implements Omit<Articles.Request.SearchArticles
     query!: string;
     limit!: number;
     offset!: number;
+    category?: string;
 }

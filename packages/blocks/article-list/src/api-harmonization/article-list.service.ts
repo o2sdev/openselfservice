@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Articles, CMS } from '@o2s/configs.integrations';
-import { Observable, concatMap, forkJoin, map } from 'rxjs';
+import { Observable, concatMap, forkJoin, map, of } from 'rxjs';
 
 import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 
@@ -23,14 +23,19 @@ export class ArticleListService {
 
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {
-                return this.articlesService
-                    .getArticleList({
-                        limit: cms.articlesToShow || 4,
-                        locale: headers['x-locale'],
-                        ids: cms.articleIds,
-                        category: cms.categorySlug,
-                    })
-                    .pipe(map((articles) => mapArticleList(cms, articles, headers['x-locale'])));
+                const articles = this.articlesService.getArticleList({
+                    limit: cms.articlesToShow || 4,
+                    locale: headers['x-locale'],
+                    ids: cms.articleIds,
+                    category: cms.categoryId,
+                });
+                const category = cms.categoryId
+                    ? this.articlesService.getCategory({ id: cms.categoryId, locale: headers['x-locale'] })
+                    : of(undefined);
+
+                return forkJoin([articles, category]).pipe(
+                    map(([articles, category]) => mapArticleList(cms, articles, category, headers['x-locale'])),
+                );
             }),
         );
     }

@@ -11,6 +11,7 @@ export const mapArticleSearch = (
         id: cms.id,
         title: cms.title,
         inputLabel: cms.inputLabel,
+        category: cms.category,
         noResults: cms.noResults,
     };
 };

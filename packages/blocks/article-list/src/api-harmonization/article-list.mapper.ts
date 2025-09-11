@@ -7,6 +7,7 @@ import { ArticleListBlock } from './article-list.model';
 export const mapArticleList = (
     cms: CMS.Model.ArticleListBlock.ArticleListBlock,
     articles: Articles.Model.Articles,
+    category: Articles.Model.Category | undefined,
     locale: string,
 ): ArticleListBlock => {
     return {
@@ -14,13 +15,12 @@ export const mapArticleList = (
         id: cms.id,
         title: cms.title,
         description: cms.description,
-        categoryLink:
-            cms.categorySlug && cms.parent?.slug
-                ? {
-                      url: `/${cms.parent?.slug}/${cms.categorySlug}`,
-                      label: cms.labels.seeAllArticles,
-                  }
-                : undefined,
+        categoryLink: category
+            ? {
+                  url: category.slug,
+                  label: cms.labels.seeAllArticles,
+              }
+            : undefined,
         items: {
             ...articles,
             data: articles.data.map((article) => mapArticle(article, cms, locale)),
