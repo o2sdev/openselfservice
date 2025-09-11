@@ -1,5 +1,11 @@
 # @o2s/framework
 
+## 1.11.2
+
+### Patch Changes
+
+- 4a42e9c: improvements for knowledge base blocks and layouts
+
 ## 1.11.1
 
 ### Patch Changes

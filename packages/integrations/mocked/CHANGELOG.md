@@ -1,5 +1,13 @@
 # @o2s/integrations.mocked
 
+## 1.11.3
+
+### Patch Changes
+
+- 4a42e9c: improvements for knowledge base blocks and layouts
+- Updated dependencies [4a42e9c]
+    - @o2s/framework@1.11.2
+
 ## 1.11.2
 
 ### Patch Changes

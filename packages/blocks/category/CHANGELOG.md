@@ -1,5 +1,14 @@
 # @o2s/blocks.category
 
+## 1.0.1
+
+### Patch Changes
+
+- 4a42e9c: improvements for knowledge base blocks and layouts
+- Updated dependencies [4a42e9c]
+  - @o2s/framework@1.11.2
+  - @o2s/ui@1.3.2
+
 ## 1.0.0
 
 ### Major Changes
