@@ -36,7 +36,7 @@ In real-world projects, the impact of these issues became even clearer. Here are
 ### Performance in enterprise storefronts
 
 Recently, we conducted performance audits for headless and enterprise e-commerce frontends for two clients. In both cases,
-Core Web Vitals scores were below 10/100, even though the frontend was part of products licensed for hundreds of thousands of euros.
+Core Web Vitals scores were below 10/100, even though the frontend was supplied by products licensed for hundreds of thousands of euros.
 
 ![o2s-arch-article-perf.png](o2s-arch-article-perf.png)
 
