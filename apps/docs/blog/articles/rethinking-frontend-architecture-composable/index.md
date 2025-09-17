@@ -75,7 +75,7 @@ Instead of being able to adapt and evolve, companies find themselves locked into
 
 Faced with such complexity, many clients began asking the same question: **is migration even possible without disrupting the frontend experience?**
 
-The answer is far from simple
+The answer is far from simple.
 
 How to build something without introducing the same problems?
 
