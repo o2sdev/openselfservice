@@ -7,6 +7,7 @@ export interface NotificationListProps {
     accessToken?: string;
     locale: string;
     routing: ReturnType<typeof defineRouting>;
+    hasPriority?: boolean;
 }
 
 export type NotificationListPureProps = NotificationListProps & Model.NotificationListBlock;

@@ -8,6 +8,7 @@ export interface ServiceDetailsProps {
     accessToken?: string;
     locale: string;
     routing: ReturnType<typeof defineRouting>;
+    hasPriority?: boolean;
 }
 
 export type ServiceDetailsPureProps = ServiceDetailsProps & Model.ServiceDetailsBlock;

@@ -8,7 +8,7 @@ import { ContentSection } from '@o2s/ui/components/ContentSection';
 
 import { ArticleListPureProps } from './ArticleList.types';
 
-export const ArticleListPure: React.FC<Readonly<ArticleListPureProps>> = ({ routing, ...component }) => {
+export const ArticleListPure: React.FC<Readonly<ArticleListPureProps>> = ({ routing, hasPriority, ...component }) => {
     const { Link: LinkComponent } = createNavigation(routing);
     return (
         <ContentSection
@@ -37,6 +37,7 @@ export const ArticleListPure: React.FC<Readonly<ArticleListPureProps>> = ({ rout
                             }
                             categoryTitle={item.category?.title}
                             LinkComponent={LinkComponent}
+                            priority={hasPriority}
                         />
                     </li>
                 ))}

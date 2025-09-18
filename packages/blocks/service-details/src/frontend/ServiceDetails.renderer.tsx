@@ -7,7 +7,13 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { ServiceDetails } from './ServiceDetails.server';
 import { ServiceDetailsRendererProps } from './ServiceDetails.types';
 
-export const ServiceDetailsRenderer: React.FC<ServiceDetailsRendererProps> = ({ slug, id, accessToken, routing }) => {
+export const ServiceDetailsRenderer: React.FC<ServiceDetailsRendererProps> = ({
+    slug,
+    id,
+    accessToken,
+    routing,
+    hasPriority,
+}) => {
     const locale = useLocale();
 
     if (!slug[1]) {
@@ -26,7 +32,14 @@ export const ServiceDetailsRenderer: React.FC<ServiceDetailsRendererProps> = ({ 
                 </>
             }
         >
-            <ServiceDetails id={id} serviceId={slug[1]} accessToken={accessToken} locale={locale} routing={routing} />
+            <ServiceDetails
+                id={id}
+                serviceId={slug[1]}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+                hasPriority={hasPriority}
+            />
         </Suspense>
     );
 };

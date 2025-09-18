@@ -8,6 +8,7 @@ export interface TicketDetailsProps {
     accessToken?: string;
     locale: string;
     routing: ReturnType<typeof defineRouting>;
+    hasPriority?: boolean;
 }
 
 export type TicketDetailsPureProps = TicketDetailsProps & Model.TicketDetailsBlock;

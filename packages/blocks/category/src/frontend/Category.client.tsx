@@ -24,6 +24,7 @@ export const CategoryPure: React.FC<CategoryPureProps> = ({
     accessToken,
     routing,
     blocks,
+    hasPriority,
     ...component
 }) => {
     const { Link: LinkComponent } = createNavigation(routing);
@@ -94,6 +95,7 @@ export const CategoryPure: React.FC<CategoryPureProps> = ({
                                                     }
                                                     categoryTitle={item.category?.title}
                                                     LinkComponent={LinkComponent}
+                                                    priority={hasPriority}
                                                 />
                                             </li>
                                         ))}

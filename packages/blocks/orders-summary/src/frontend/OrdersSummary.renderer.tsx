@@ -8,7 +8,13 @@ import { Model, Request } from '../api-harmonization/orders-summary.client';
 import { OrdersSummary } from './OrdersSummary.server';
 import { OrdersSummaryRendererProps } from './OrdersSummary.types';
 
-export const OrdersSummaryRenderer: React.FC<OrdersSummaryRendererProps> = ({ id, accessToken, routing, slug }) => {
+export const OrdersSummaryRenderer: React.FC<OrdersSummaryRendererProps> = ({
+    id,
+    accessToken,
+    routing,
+    slug,
+    hasPriority,
+}) => {
     const locale = useLocale();
 
     return (
@@ -33,7 +39,13 @@ export const OrdersSummaryRenderer: React.FC<OrdersSummaryRendererProps> = ({ id
                 </>
             }
         >
-            <OrdersSummary id={id} accessToken={accessToken} locale={locale} routing={routing} />
+            <OrdersSummary
+                id={id}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+                hasPriority={hasPriority}
+            />
         </Suspense>
     );
 };

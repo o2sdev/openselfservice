@@ -7,7 +7,7 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { InvoiceListServer } from './InvoiceList.server';
 import { InvoiceListRendererProps } from './InvoiceList.types';
 
-export const InvoiceListRenderer: React.FC<InvoiceListRendererProps> = ({ id, accessToken, routing }) => {
+export const InvoiceListRenderer: React.FC<InvoiceListRendererProps> = ({ id, accessToken, routing, hasPriority }) => {
     const locale = useLocale();
 
     return (
@@ -22,7 +22,13 @@ export const InvoiceListRenderer: React.FC<InvoiceListRendererProps> = ({ id, ac
                 </>
             }
         >
-            <InvoiceListServer id={id} accessToken={accessToken} locale={locale} routing={routing} />
+            <InvoiceListServer
+                id={id}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+                hasPriority={hasPriority}
+            />
         </Suspense>
     );
 };

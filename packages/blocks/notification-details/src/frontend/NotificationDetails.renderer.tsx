@@ -6,7 +6,13 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { NotificationDetails } from './NotificationDetails.server';
 import { FaqRendererProps } from './NotificationDetails.types';
 
-export const NotificationDetailsRenderer: React.FC<FaqRendererProps> = ({ slug, id, accessToken, routing }) => {
+export const NotificationDetailsRenderer: React.FC<FaqRendererProps> = ({
+    slug,
+    id,
+    accessToken,
+    routing,
+    hasPriority,
+}) => {
     const locale = useLocale();
 
     if (!slug[1]) {
@@ -21,6 +27,7 @@ export const NotificationDetailsRenderer: React.FC<FaqRendererProps> = ({ slug, 
                 accessToken={accessToken}
                 locale={locale}
                 routing={routing}
+                hasPriority={hasPriority}
             />
         </Suspense>
     );

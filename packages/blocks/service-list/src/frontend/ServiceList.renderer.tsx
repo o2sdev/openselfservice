@@ -6,7 +6,7 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { ServiceList } from './ServiceList.server';
 import { ServiceListRendererProps } from './ServiceList.types';
 
-export const Renderer: React.FC<ServiceListRendererProps> = ({ id, accessToken, slug, routing }) => {
+export const Renderer: React.FC<ServiceListRendererProps> = ({ id, accessToken, slug, routing, hasPriority }) => {
     const locale = useLocale();
 
     return (
@@ -18,7 +18,13 @@ export const Renderer: React.FC<ServiceListRendererProps> = ({ id, accessToken, 
                 </>
             }
         >
-            <ServiceList id={id} accessToken={accessToken} locale={locale} routing={routing} />
+            <ServiceList
+                id={id}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+                hasPriority={hasPriority}
+            />
         </Suspense>
     );
 };

@@ -5,7 +5,6 @@ import { cn } from '@o2s/ui/lib/utils';
 
 import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
 
-import { Link } from '@o2s/ui/elements/link';
 import { Typography } from '@o2s/ui/elements/typography';
 
 import { RichText } from '../../RichText';
@@ -61,14 +60,13 @@ export const InformativeCard: React.FC<Readonly<InformativeCardProps>> = (props)
 
     if (props.href) {
         return (
-            <Link
-                asChild
-                className="flex flex-grow whitespace-normal text-foreground hover:no-underline hover:border-primary hover:[&_svg]:text-primary rounded-lg bg-card border border-border w-full h-full items-start"
+            <LinkComponent
+                href={props.href}
+                aria-label={props.title}
+                className="flex flex-grow text-foreground hover:border-primary rounded-lg bg-card border border-border w-full h-full items-start"
             >
-                <LinkComponent href={props.href} aria-label={props.title}>
-                    <InformativeCardContent {...props} />
-                </LinkComponent>
-            </Link>
+                <InformativeCardContent {...props} />
+            </LinkComponent>
         );
     }
     return <InformativeCardContent {...props} />;

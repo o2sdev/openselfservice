@@ -7,22 +7,31 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { TicketRecent } from './TicketRecent.server';
 import { TicketRecentRendererProps } from './TicketRecent.types';
 
-export const TicketRecentRenderer: React.FC<TicketRecentRendererProps> = ({ id, accessToken, routing }) => {
+export const TicketRecentRenderer: React.FC<TicketRecentRendererProps> = ({
+    id,
+    accessToken,
+    routing,
+    hasPriority,
+}) => {
     const locale = useLocale();
 
     return (
         <Suspense
             key={id}
             fallback={
-                <>
+                <div className="w-full flex flex-col gap-4">
                     <Loading bars={1} />
-                    <Container variant="narrow">
-                        <Loading bars={4} />
-                    </Container>
-                </>
+                    <Loading bars={4} />
+                </div>
             }
         >
-            <TicketRecent id={id} accessToken={accessToken} locale={locale} routing={routing} />
+            <TicketRecent
+                id={id}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+                hasPriority={hasPriority}
+            />
         </Suspense>
     );
 };

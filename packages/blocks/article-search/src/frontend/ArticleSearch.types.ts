@@ -7,6 +7,7 @@ export interface ArticleSearchProps {
     accessToken?: string;
     locale: string;
     routing: ReturnType<typeof defineRouting>;
+    hasPriority?: boolean;
 }
 
 export type ArticleSearchPureProps = ArticleSearchProps & Model.ArticleSearchBlock;

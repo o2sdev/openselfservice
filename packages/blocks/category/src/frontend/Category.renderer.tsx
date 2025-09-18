@@ -7,7 +7,14 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { Category } from './Category.server';
 import { CategoryRendererProps } from './Category.types';
 
-export const CategoryRenderer: React.FC<CategoryRendererProps> = ({ slug, id, accessToken, routing, renderBlocks }) => {
+export const CategoryRenderer: React.FC<CategoryRendererProps> = ({
+    slug,
+    id,
+    accessToken,
+    routing,
+    renderBlocks,
+    hasPriority,
+}) => {
     const locale = useLocale();
 
     return (
@@ -38,6 +45,7 @@ export const CategoryRenderer: React.FC<CategoryRendererProps> = ({ slug, id, ac
                 locale={locale}
                 routing={routing}
                 renderBlocks={renderBlocks}
+                hasPriority={hasPriority}
             />
         </Suspense>
     );

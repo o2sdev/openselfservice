@@ -6,7 +6,13 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { CategoryList } from './CategoryList.server';
 import { CategoryListRendererProps } from './CategoryList.types';
 
-export const CategoryListRenderer: React.FC<CategoryListRendererProps> = ({ id, accessToken, slug, routing }) => {
+export const CategoryListRenderer: React.FC<CategoryListRendererProps> = ({
+    id,
+    accessToken,
+    slug,
+    routing,
+    hasPriority,
+}) => {
     const locale = useLocale();
     return (
         <Suspense
@@ -33,7 +39,13 @@ export const CategoryListRenderer: React.FC<CategoryListRendererProps> = ({ id, 
                 </div>
             }
         >
-            <CategoryList id={id} accessToken={accessToken} locale={locale} routing={routing} />
+            <CategoryList
+                id={id}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+                hasPriority={hasPriority}
+            />
         </Suspense>
     );
 };

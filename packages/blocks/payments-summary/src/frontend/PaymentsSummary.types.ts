@@ -7,6 +7,7 @@ export interface PaymentsSummaryProps {
     accessToken?: string;
     locale: string;
     routing: ReturnType<typeof defineRouting>;
+    hasPriority?: boolean;
 }
 
 export type PaymentsSummaryPureProps = PaymentsSummaryProps & Model.PaymentsSummaryBlock;

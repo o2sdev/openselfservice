@@ -7,6 +7,7 @@ export interface OrdersSummaryProps {
     accessToken?: string;
     locale: string;
     routing: ReturnType<typeof defineRouting>;
+    hasPriority?: boolean;
 }
 
 export type OrdersSummaryPureProps = OrdersSummaryProps & Model.OrdersSummaryBlock;

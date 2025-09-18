@@ -9,7 +9,7 @@ export const ArticleListDynamic = dynamic(() =>
     import('./ArticleList.client').then((module) => module.ArticleListPure),
 );
 
-export const ArticleList: React.FC<ArticleListProps> = async ({ id, accessToken, locale, routing }) => {
+export const ArticleList: React.FC<ArticleListProps> = async ({ id, accessToken, locale, routing, hasPriority }) => {
     try {
         const data = await sdk.blocks.getArticleList(
             {
@@ -18,7 +18,16 @@ export const ArticleList: React.FC<ArticleListProps> = async ({ id, accessToken,
             { 'x-locale': locale },
             accessToken,
         );
-        return <ArticleListDynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />;
+        return (
+            <ArticleListDynamic
+                {...data}
+                id={id}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+                hasPriority={hasPriority}
+            />
+        );
     } catch (_error) {
         return null;
     }

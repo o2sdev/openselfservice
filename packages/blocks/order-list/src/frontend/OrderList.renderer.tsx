@@ -6,7 +6,7 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { OrderList } from './OrderList.server';
 import { OrderListRendererProps } from './OrderList.types';
 
-export const Renderer: React.FC<OrderListRendererProps> = ({ id, accessToken, routing }) => {
+export const Renderer: React.FC<OrderListRendererProps> = ({ id, accessToken, routing, hasPriority }) => {
     const locale = useLocale();
 
     return (
@@ -25,7 +25,7 @@ export const Renderer: React.FC<OrderListRendererProps> = ({ id, accessToken, ro
                 </div>
             }
         >
-            <OrderList id={id} accessToken={accessToken} locale={locale} routing={routing} />
+            <OrderList id={id} accessToken={accessToken} locale={locale} routing={routing} hasPriority={hasPriority} />
         </Suspense>
     );
 };

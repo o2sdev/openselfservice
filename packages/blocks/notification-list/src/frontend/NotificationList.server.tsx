@@ -9,7 +9,13 @@ export const NotificationListDynamic = dynamic(() =>
     import('./NotificationList.client').then((module) => module.NotificationListPure),
 );
 
-export const NotificationListServer: React.FC<NotificationListProps> = async ({ id, accessToken, locale, routing }) => {
+export const NotificationListServer: React.FC<NotificationListProps> = async ({
+    id,
+    accessToken,
+    locale,
+    routing,
+    hasPriority,
+}) => {
     try {
         const data = await sdk.blocks.getNotificationList(
             {
@@ -20,7 +26,14 @@ export const NotificationListServer: React.FC<NotificationListProps> = async ({ 
         );
 
         return (
-            <NotificationListDynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />
+            <NotificationListDynamic
+                {...data}
+                id={id}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+                hasPriority={hasPriority}
+            />
         );
     } catch (_error) {
         return null;

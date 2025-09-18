@@ -16,6 +16,7 @@ export const UserAccount: React.FC<UserAccountProps> = async ({
     routing,
     userId,
     onSignOut,
+    hasPriority,
 }) => {
     if (!userId) {
         return null;
@@ -40,6 +41,7 @@ export const UserAccount: React.FC<UserAccountProps> = async ({
                 routing={routing}
                 userId={userId}
                 onSignOut={onSignOut}
+                hasPriority={hasPriority}
             />
         );
     } catch (_error) {

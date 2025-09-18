@@ -9,7 +9,13 @@ export const PaymentsSummaryDynamic = dynamic(() =>
     import('./PaymentsSummary.client').then((module) => module.PaymentsSummaryPure),
 );
 
-export const PaymentsSummary: React.FC<PaymentsSummaryProps> = async ({ id, accessToken, locale, routing }) => {
+export const PaymentsSummary: React.FC<PaymentsSummaryProps> = async ({
+    id,
+    accessToken,
+    locale,
+    routing,
+    hasPriority,
+}) => {
     try {
         const data = await sdk.blocks.getPaymentsSummary(
             {
@@ -21,7 +27,16 @@ export const PaymentsSummary: React.FC<PaymentsSummaryProps> = async ({ id, acce
             accessToken,
         );
 
-        return <PaymentsSummaryDynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />;
+        return (
+            <PaymentsSummaryDynamic
+                {...data}
+                id={id}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+                hasPriority={hasPriority}
+            />
+        );
     } catch (_error) {
         return null;
     }

@@ -10,7 +10,7 @@ import { RichText } from '@o2s/ui/components/RichText';
 import { Link } from '@o2s/ui/elements/link';
 import { Typography } from '@o2s/ui/elements/typography';
 
-import { FeatureCardProps } from '././FeatureCard.types';
+import { FeatureCardProps } from './FeatureCard.types';
 
 export const FeatureCardContent: React.FC<FeatureCardProps> = ({ title, description, image, link, LinkComponent }) => {
     return (
