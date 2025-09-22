@@ -24,56 +24,23 @@ At its core, composable architecture is characterized by:
 - **API-first approach**: Components communicate through well-defined APIs, allowing for flexibility in implementation details.
 - **Decoupled systems**: Frontend and backend systems are separated, enabling each to evolve independently without affecting the other.
 
-The benefits of composable frontends include:
+> TODO: While complex...
 
-- **Flexibility**: Easily replace or upgrade individual components without disrupting the entire system.
-- **Scalability**: Scale specific components based on demand rather than scaling the entire application.
-- **Future-proofing**: Adapt to changing requirements by swapping out components rather than rebuilding from scratch.
-- **Vendor independence**: Avoid lock-in by being able to integrate with multiple backend services and switch providers as needed.
-
-However, this approach introduces unique performance challenges:
-
-- **Multiple API calls**: Composable applications often require data from various sources, potentially leading to performance bottlenecks.
-- **Data transformation overhead**: Converting data between different formats can impact performance.
-- **Component coordination**: Ensuring efficient loading and rendering of interdependent components.
+Composable frontends provide significant advantages: flexibility to replace components without disruption, scalability of specific parts based on demand, adaptability to changing requirements, and freedom from vendor lock-in through multi-backend integration.
 
 ### The Separation of Concerns
 
-A key principle of composable architecture is the clear separation of concerns between different layers of the application:
+In building Open Self Service, we chose to implement a clear separation of concerns between different layers of the application. While there are multiple ways to achieve composable architecture, our approach focuses on:
 
-- **Frontend-backend decoupling**: The presentation layer (frontend) is completely separated from the data and business logic layers (backend). This allows each to evolve independently and enables the frontend to work with multiple backend services.
+- **Frontend-backend decoupling**: We completely separated the presentation layer from the data and business logic layers. This allows each to evolve independently and enables the frontend to work seamlessly with multiple backend services.
 
-- **API harmonization layer**: Open Self Service introduces an intermediate layer that acts as a bridge between the frontend and various backend APIs. This layer:
-  - Aggregates data from multiple sources
-  - Orchestrates complex data flows
-  - Combines static content (e.g., from a CMS) with dynamic user data
-  - Makes the process more efficient by handling complex logic server-side rather than in the browser
+- **API composition layer**: Our implementation introduces an intermediate layer that acts as a bridge between the frontend and various backend APIs. This layer aggregates data from multiple sources and orchestrates data flows between systems. It efficiently combines static content with dynamic data while handling complex logic server-side, reducing browser processing overhead.
 
-- **Data normalization patterns**: To achieve true separation between UI and APIs, Open Self Service implements a normalization process that:
-  - Defines a standardized data model that all integrated APIs must conform to
-  - Transforms data from various sources into a predefined API-agnostic format
-  - Provides base modules and classes that can be extended for new integrations
-  - Allows the frontend to work with a consistent data structure regardless of the actual data source
-
-This separation ensures that changes in backend services don't require corresponding changes in the frontend code, significantly reducing maintenance overhead and enabling greater flexibility.
+This approach ensures backend service changes don't require frontend code modifications, reducing maintenance overhead and increasing flexibility.
 
 ### Component-Based Design
 
-Composable applications are built using a component-based design approach, which in Open Self Service is implemented through a "blocks" system:
-
-- **Blocks approach**: The frontend is composed of independent, reusable blocks that:
-  - Encapsulate specific functionality (e.g., ticket lists, notifications, FAQs)
-  - Can be arranged in different layouts and combinations
-  - Are connected to corresponding harmonizing components on the server side
-  - Can be developed, tested, and deployed independently
-
-- **Performance implications of using block composition**:
-  - Each block can load its data independently, enabling parallel data fetching
-  - Server components can stream HTML to the browser as soon as data is available
-  - Blocks can be optimized individually based on their specific requirements
-  - The system leverages Next.js server components and streaming capabilities to make component loading asynchronous while keeping API requests server-side
-
-This component-based design not only improves maintainability and reusability but also enables performance optimizations at a granular level, which is crucial for delivering a responsive user experience in complex composable applications.
+Our implementation uses a "blocks" system of independent, reusable components that encapsulate specific functionality and connect to the API composition layer. This approach enables parallel data fetching, HTML streaming, and component-specific optimizations through Next.js server components. The result is improved maintainability and performance with granular optimizations for responsive user experiences.
 
 ## Key Performance Strategies
 
@@ -122,7 +89,5 @@ The Open Self Service framework demonstrates how these principles can be applied
 
 Want to see it in action?
 
-- [Open Self Service website](https://www.openselfservice.com)
-- [Documentation](https://www.openselfservice.com/docs)
-
-We'd love your feedback - or even better, your contributions!
+- [**Open Self Service website**](https://www.openselfservice.com)
+- [**Documentation**](https://www.openselfservice.com/docs)
