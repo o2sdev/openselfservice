@@ -13,6 +13,7 @@
     },
     "include": [
         "src/frontend",
+        "src/api-harmonization/category.url.ts",
         "src/api-harmonization/category.client.ts",
         "src/api-harmonization/category.model.ts",
         "src/api-harmonization/category.request.ts",

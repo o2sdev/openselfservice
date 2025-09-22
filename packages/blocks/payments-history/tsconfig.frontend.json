@@ -16,6 +16,7 @@
         "src/api-harmonization/payments-history.client.ts",
         "src/api-harmonization/payments-history.model.ts",
         "src/api-harmonization/payments-history.request.ts",
+        "src/api-harmonization/payments-history.url.ts",
         "src/sdk"
     ]
 }

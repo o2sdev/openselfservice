@@ -16,6 +16,7 @@
         "src/api-harmonization/user-account.client.ts",
         "src/api-harmonization/user-account.model.ts",
         "src/api-harmonization/user-account.request.ts",
+        "src/api-harmonization/user-account.url.ts",
         "src/sdk"
     ]
 }

@@ -7,8 +7,8 @@
     "license": "MIT",
     "exports": {
         ".": "./src/index.ts",
-        "./blocks": "./src/blocks/index.ts",
-        "./modules": "./src/modules/index.ts"
+        "./blocks/*": "./src/blocks/*.ts",
+        "./modules/*": "./src/modules/*.ts"
     },
     "scripts": {
         "dev": "cross-env NODE_ENV=development nest start --watch",

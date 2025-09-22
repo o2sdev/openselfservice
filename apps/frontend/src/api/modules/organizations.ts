@@ -1,4 +1,5 @@
 import { Modules } from '@o2s/api-harmonization';
+import { URL } from '@o2s/api-harmonization/modules/organizations/organizations.url';
 
 import { Models } from '@o2s/utils.api-harmonization';
 
@@ -6,7 +7,7 @@ import { Sdk } from '@o2s/framework/sdk';
 
 import { getApiHeaders } from '../../utils/api';
 
-const API_URL = Modules.Organizations.URL;
+const API_URL = URL;
 
 export const organizations = (sdk: Sdk) => ({
     modules: {

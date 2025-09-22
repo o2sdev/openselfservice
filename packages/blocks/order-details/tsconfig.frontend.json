@@ -16,6 +16,7 @@
         "src/api-harmonization/order-details.client.ts",
         "src/api-harmonization/order-details.model.ts",
         "src/api-harmonization/order-details.request.ts",
+        "src/api-harmonization/order-details.url.ts",
         "src/sdk"
     ]
 }

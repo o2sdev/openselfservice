@@ -12,6 +12,7 @@
     },
     "include": [
         "src/sdk",
+        "src/api-harmonization/faq.url.ts",
         "src/api-harmonization/faq.client.ts",
         "src/api-harmonization/faq.model.ts",
         "src/api-harmonization/faq.request.ts"

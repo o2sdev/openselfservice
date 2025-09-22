@@ -1,8 +1,7 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import React, { startTransition, useActionState, useEffect } from 'react';
-import { Model as SurveyJsModel } from 'survey-core';
-import { Survey as SurveySDK } from 'survey-react-ui';
 
 import { cn } from '@o2s/ui/lib/utils';
 
@@ -15,16 +14,9 @@ import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
 import { Model } from '../api-harmonization/surveyjs.client';
 import { sdk } from '../sdk';
 
-import './Elements/CustomSurveyNavigationButton';
-import './Elements/CustomSurveyPanel';
-import './Elements/CustomSurveyQuestion';
-import './Questions/CustomSurveyQuestionBoolean';
-import './Questions/CustomSurveyQuestionCheckbox';
-import './Questions/CustomSurveyQuestionComment';
-import './Questions/CustomSurveyQuestionDropdown';
-import './Questions/CustomSurveyQuestionRadioGroup';
-import './Questions/CustomSurveyQuestionText';
 import { Labels, SurveyAction, SurveyProps, SurveyState } from './Survey.types';
+
+const SurveySDK = dynamic(() => import('./lib').then((module) => module.SurveySDK));
 
 const initialState: SurveyState = {
     isLoading: true,
@@ -32,11 +24,12 @@ const initialState: SurveyState = {
     model: null,
 };
 
-const createSurveyModel = (
+const createSurveyModel = async (
     schema: Model.SurveyJSLibraryJsonSchema,
     locale: string,
     onComplete: (data: Model.SurveyResult) => void,
-): SurveyJsModel => {
+) => {
+    const SurveyJsModel = await import('./lib').then((module) => module.SurveyJsModel);
     const survey = new SurveyJsModel(schema);
 
     survey.loadingHtml = '';
@@ -148,7 +141,7 @@ export const Survey: React.FC<SurveyProps> = ({ code, labels, locale, accessToke
                         throw new Error(`No survey with code '${code}' found`);
                     }
 
-                    const model = createSurveyModel(schema, locale, handleSubmit);
+                    const model = await createSurveyModel(schema, locale, handleSubmit);
 
                     dispatch({ type: 'SET_MODEL', payload: model });
                 } catch (error) {

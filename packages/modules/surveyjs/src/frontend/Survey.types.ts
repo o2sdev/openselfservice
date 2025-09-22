@@ -1,4 +1,4 @@
-import { Model } from 'survey-core';
+import type { Model } from 'survey-core';
 
 export interface SurveyProps {
     code: string;

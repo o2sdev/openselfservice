@@ -12,6 +12,7 @@
     },
     "include": [
         "src/sdk",
+        "src/api-harmonization/invoice-list.url.ts",
         "src/api-harmonization/invoice-list.client.ts",
         "src/api-harmonization/invoice-list.model.ts",
         "src/api-harmonization/invoice-list.request.ts"

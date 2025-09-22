@@ -16,6 +16,7 @@
         "src/api-harmonization/notification-list.client.ts",
         "src/api-harmonization/notification-list.model.ts",
         "src/api-harmonization/notification-list.request.ts",
+        "src/api-harmonization/notification-list.url.ts",
         "src/sdk"
     ]
 }

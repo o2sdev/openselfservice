@@ -6,7 +6,7 @@
         "dev": "next dev --turbopack",
         "dev:https": "next dev --turbopack --experimental-https",
         "build": "next build",
-        "postbuild": "cp -r public .next/standalone/apps/frontend && cp -r .next/static .next/standalone/apps/frontend/.next/",
+        "postbuild": "cp ../../packages/integrations/mocked/prisma/dev.db .next/standalone/node_modules/.prisma/client/dev.db && cp -r public .next/standalone/apps/frontend && cp -r .next/static .next/standalone/apps/frontend/.next/",
         "start": "node .next/standalone/apps/frontend/server.js",
         "lint": "tsc --noEmit && next lint",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\"",

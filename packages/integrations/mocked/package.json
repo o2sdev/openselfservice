@@ -6,7 +6,8 @@
     "exports": {
         "./integration": "./dist/integration.js",
         "./sdk": "./dist/sdk/index.js",
-        "./auth": "./dist/auth/index.js"
+        "./auth": "./dist/auth/index.js",
+        "./auth.updateOrganization": "./dist/auth/auth.updateOrganization.js"
     },
     "files": [
         "dist",
