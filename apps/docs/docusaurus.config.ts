@@ -253,7 +253,7 @@ const config: Config = {
     markdown: {
         mermaid: true,
     },
-    plugins: [tailwindPlugin, '@docusaurus/theme-mermaid', 'docusaurus-plugin-image-zoom'],
+    plugins: [tailwindPlugin, '@docusaurus/theme-mermaid', 'docusaurus-plugin-image-zoom', 'docusaurus-plugin-sass'],
     presets: [
         [
             'classic',

@@ -5,7 +5,7 @@ import { Body } from '@site/src/components/Typography';
 
 import Layout from '@theme/Layout';
 
-import styles from './contact.module.css';
+import styles from './contact.module.scss';
 
 const Contact = ({ inputId }) => {
     const [email, setEmail] = useState('');
@@ -147,7 +147,7 @@ const Contact = ({ inputId }) => {
                                                 </p>
                                                 <label
                                                     className={
-                                                        'block text-sm font-semibold mb-1 ' + styles.contactFormText
+                                                        'block text-sm font-medium mb-1 ' + styles.contactFormText
                                                     }
                                                     htmlFor="email"
                                                 >
@@ -168,7 +168,7 @@ const Contact = ({ inputId }) => {
 
                                                 <label
                                                     className={
-                                                        'block text-sm font-semibold mb-1 ' + styles.contactFormText
+                                                        'block text-sm font-medium mb-1 ' + styles.contactFormText
                                                     }
                                                     htmlFor="firstName"
                                                 >
@@ -188,7 +188,7 @@ const Contact = ({ inputId }) => {
 
                                                 <label
                                                     className={
-                                                        'block text-sm font-semibold mb-1 ' + styles.contactFormText
+                                                        'block text-sm font-medium mb-1 ' + styles.contactFormText
                                                     }
                                                     htmlFor="lastName"
                                                 >
@@ -208,7 +208,7 @@ const Contact = ({ inputId }) => {
 
                                                 <label
                                                     className={
-                                                        'block text-sm font-semibold mb-1 ' + styles.contactFormText
+                                                        'block text-sm font-medium mb-1 ' + styles.contactFormText
                                                     }
                                                     htmlFor="message"
                                                 >
@@ -228,7 +228,7 @@ const Contact = ({ inputId }) => {
 
                                                 <div className="flex items-start mb-4">
                                                     <input
-                                                        className="mt-1 mr-2 accent-[#4c5ce5]"
+                                                        className="mr-2 accent-[#4c5ce5]"
                                                         type="checkbox"
                                                         id="consent"
                                                         name="consent"
@@ -239,7 +239,9 @@ const Contact = ({ inputId }) => {
                                                     />
                                                     <label
                                                         htmlFor="consent"
-                                                        className={'text-xs select-none ' + styles.contactFormText}
+                                                        className={
+                                                            'mt-0.5 text-xs select-none ' + styles.contactFormText
+                                                        }
                                                     >
                                                         I consent to the processing of my personal data by Hycom&nbsp;SA
                                                         as described in the{' '}

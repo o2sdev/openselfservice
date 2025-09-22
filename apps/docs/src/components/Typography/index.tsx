@@ -26,6 +26,14 @@ export function Body({ children, className }: TypographyProps) {
     return <p className={clsx('', className)}>{children}</p>;
 }
 
+export function BodyBold({ children, className }: TypographyProps) {
+    return <p className={clsx('font-bold', className)}>{children}</p>;
+}
+
+export function BodySmall({ children, className }: TypographyProps) {
+    return <p className={clsx('text-sm', className)}>{children}</p>;
+}
+
 export function InputCaption({ children, className }: TypographyProps) {
     return <span className={clsx('', className)}>{children}</span>;
 }

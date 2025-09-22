@@ -1,3 +1,5 @@
+@use '../main.module';
+
 /* --------------------------
    Contact Page
    -------------------------- */
@@ -18,8 +20,8 @@
 .contactFormH2 {
     color: var(--inverted-foreground-color);
     font-size: 1.5rem;
-    margin-bottom: 0;
-    font-weight: bold;
+    margin-bottom: 0.25rem;
+    font-weight: 600;
 }
 
 .text-highlighted {
@@ -45,13 +47,13 @@
     color: #d61830;
 }
 .error:before {
-    background: url('../../src/assets/icons/circle-alert.svg') no-repeat;
+    background: url('../../../src/assets/icons/circle-alert.svg') no-repeat;
 }
 .success {
     color: var(--inverted-foreground-color);
 }
 .success:before {
-    background: url('../../src/assets/icons/circle-check.svg') no-repeat;
+    background: url('../../../src/assets/icons/circle-check.svg') no-repeat;
 }
 body:not(.navigation-with-keyboard) *:not(input):focus {
     outline-width: 2px;

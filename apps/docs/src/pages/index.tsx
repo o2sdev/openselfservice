@@ -6,12 +6,11 @@ import { HeroBannerSection } from '@site/src/components/HeroBannerSection';
 import { HomepageAboutSection } from '@site/src/components/HomepageAboutSection';
 import { HomepageArchitectureSection } from '@site/src/components/HomepageArchitectureSection';
 import { HomepageBenefitsSection } from '@site/src/components/HomepageBenefitsSection';
-import HomepageJoinTheWaitlistSection from '@site/src/components/HomepageJoinTheWaitlistSection';
 import { HomepageUseCases } from '@site/src/components/HomepageUseCases';
 
 import Layout from '@theme/Layout';
 
-import styles from './index.module.css';
+import styles from './main.module.scss';
 
 export default function Home(): ReactNode {
     const { siteConfig } = useDocusaurusContext();
