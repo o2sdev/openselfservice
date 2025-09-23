@@ -573,6 +573,12 @@ aside:not(.theme-doc-sidebar-container) {
     height: 10px;
 }
 
+.footer__link-item[target='_blank'] svg {
+    opacity: 0.8;
+    width: 10px;
+    height: 10px;
+}
+
 .markdown hr {
     background-color: transparent;
     border-bottom: 1px solid !important;

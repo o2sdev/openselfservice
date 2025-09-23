@@ -43,10 +43,9 @@ export default function Home(): ReactNode {
                                     }
                                     description={
                                         <>
-                                            <b>Open Self Service</b>
-                                            is an open-source framework that lets you easily integrate APIs, unify data,
-                                            and build scalable, high-performance customer support portals with Next.js,
-                                            TypeScript, and NestJS.
+                                            <b>Open Self Service</b> is an open-source framework that lets you easily
+                                            integrate APIs, unify data, and build scalable, high-performance customer
+                                            support portals with Next.js, TypeScript, and NestJS.
                                         </>
                                     }
                                     cliCommand="npx create-o2s-app"

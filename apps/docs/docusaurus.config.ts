@@ -437,19 +437,23 @@ const config: Config = {
                           ],
                       },
                       {
-                          title: 'Community',
+                          title: 'Developers',
                           items: [
                               {
-                                  label: 'LinkedIn',
-                                  href: 'https://www.linkedin.com/company/open-self-service/',
+                                  label: 'Documentation',
+                                  to: '/docs',
                               },
-                              //   {
-                              //       label: 'Twitter / X',
-                              //       href: 'https://x.com/openselfservice',
-                              //   },
                               {
-                                  label: 'Discord',
+                                  label: 'Community',
                                   href: 'https://discord.gg/4R568nZgsT',
+                              },
+                              {
+                                  label: 'Changelog',
+                                  to: '/blog/tags/releases',
+                              },
+                              {
+                                  label: 'Github',
+                                  href: 'https://github.com/o2sdev/openselfservice',
                               },
                           ],
                       },
@@ -457,8 +461,12 @@ const config: Config = {
                           title: 'More',
                           items: [
                               {
-                                  label: 'GitHub',
-                                  href: 'https://github.com/o2sdev/openselfservice',
+                                  label: 'Partners',
+                                  to: '/partnership',
+                              },
+                              {
+                                  to: '/contact',
+                                  label: 'Contact us',
                               },
                           ],
                       },
