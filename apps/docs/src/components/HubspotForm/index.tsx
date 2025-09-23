@@ -326,7 +326,9 @@ const HubspotForm: React.FC<HubspotFormProps> = ({
                                                             type="checkbox"
                                                             id={`${f.name}-${index}`}
                                                             name={`${f.name}-${index}`}
-                                                            required={!!f.required && !(values[f.name] as string[]).length}
+                                                            required={
+                                                                !!f.required && !(values[f.name] as string[]).length
+                                                            }
                                                             checked={
                                                                 !!(values[f.name] as string[]).includes(
                                                                     option.value || option.label,

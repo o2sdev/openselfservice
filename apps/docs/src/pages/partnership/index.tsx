@@ -113,8 +113,7 @@ export default function Partnership(): ReactNode {
                                     <BenefitsSection
                                         title={
                                             <>
-                                                <span className="text-highlighted">Why join</span> our Partner
-                                                Program?
+                                                <span className="text-highlighted">Why join</span> our Partner Program?
                                             </>
                                         }
                                         benefits={whyJoin}
