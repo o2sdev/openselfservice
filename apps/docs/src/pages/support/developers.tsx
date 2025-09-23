@@ -76,7 +76,8 @@ const offer: Array<BenefitCardProps> = [
     {
         icon: <Icon_Mail />,
         title: 'Contact us',
-        description: 'Need expert technical guidance or have questions about extended Open Self Service features and offer?',
+        description:
+            'Need expert technical guidance or have questions about extended Open Self Service features and offer?',
         link: {
             text: 'Go to contact form',
             url: '/contact',

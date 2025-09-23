@@ -11,6 +11,7 @@ type HubspotField = {
     required?: boolean;
     name: string;
     rows?: number;
+    objectTypeId?: '0-1' | '0-2';
 };
 
 type HubspotFieldText = HubspotField & {
@@ -52,6 +53,7 @@ type HubspotConsent = {
     required?: boolean;
     name?: string;
     defaultChecked?: boolean;
+    objectTypeId?: '0-1' | '0-2';
 };
 
 type HubspotFormProps = {
@@ -121,8 +123,49 @@ const HubspotForm: React.FC<HubspotFormProps> = ({
 
         const payload = {
             fields: [
-                ...fields.map((f) => ({ name: f.name, value: values[f.name] })),
-                ...consents.map((c) => ({ name: c.name, value: consentValues[c.name] })),
+                ...fields.reduce((prev, f) => {
+                    switch (f.__typename) {
+                        case 'checkboxGroup': {
+                            let other = undefined;
+                            if (f.other && values[f.other.name]) {
+                                other = {
+                                    name: f.other.name,
+                                    objectTypeId: f.other.objectTypeId,
+                                    value: values[f.other.name],
+                                };
+                            }
+
+                            return [
+                                ...prev,
+                                {
+                                    name: f.name,
+                                    objectTypeId: f.objectTypeId,
+                                    value: (values[f.name] as string[]).join(';'),
+                                },
+                                ...(other ? [other] : []),
+                            ];
+                        }
+                        case 'select': {
+                            let other = undefined;
+                            if (f.other && values[f.other.name]) {
+                                other = {
+                                    name: f.other.name,
+                                    objectTypeId: f.other.objectTypeId,
+                                    value: values[f.other.name],
+                                };
+                            }
+
+                            return [
+                                ...prev,
+                                { name: f.name, objectTypeId: f.objectTypeId, value: values[f.name] },
+                                ...(other ? [other] : []),
+                            ];
+                        }
+                        default:
+                            return [...prev, { name: f.name, objectTypeId: f.objectTypeId, value: values[f.name] }];
+                    }
+                }, []),
+                ...consents.map((c) => ({ name: c.name, objectTypeId: c.objectTypeId, value: consentValues[c.name] })),
             ],
             context: {
                 pageUri: getPageUri(),
@@ -143,36 +186,34 @@ const HubspotForm: React.FC<HubspotFormProps> = ({
             },
         };
 
-        console.log(payload);
-
         try {
-            // const response = await fetch(
-            //     `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`,
-            //     {
-            //         method: 'POST',
-            //         headers: { 'Content-Type': 'application/json' },
-            //         body: JSON.stringify(payload),
-            //     },
-            // );
-            //
-            // if (response.ok) {
-            //     const data = await response.json();
-            //     setStatus({ type: 'success', message: data.inlineMessage });
-            //     setValues((prev) => {
-            //         const cleared: Record<string, string> = {};
-            //         Object.keys(prev).forEach((k) => (cleared[k] = ''));
-            //         return cleared;
-            //     });
-            //     setConsentValues((prev) => {
-            //         const cleared: Record<string, boolean> = {};
-            //         Object.keys(prev).forEach((k) => (cleared[k] = false));
-            //         return cleared;
-            //     });
-            // } else {
-            //     const data = await response.json();
-            //     setStatus({ type: 'error', message: data.message });
-            //     setIsSubmitting(false);
-            // }
+            const response = await fetch(
+                `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`,
+                {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                },
+            );
+
+            if (response.ok) {
+                const data = await response.json();
+                setStatus({ type: 'success', message: data.inlineMessage });
+                setValues((prev) => {
+                    const cleared: Record<string, string> = {};
+                    Object.keys(prev).forEach((k) => (cleared[k] = ''));
+                    return cleared;
+                });
+                setConsentValues((prev) => {
+                    const cleared: Record<string, boolean> = {};
+                    Object.keys(prev).forEach((k) => (cleared[k] = false));
+                    return cleared;
+                });
+            } else {
+                const data = await response.json();
+                setStatus({ type: 'error', message: data.message });
+                setIsSubmitting(false);
+            }
         } catch (error) {
             setStatus({ type: 'error', message: 'An unexpected error occurred. Please try again later.' });
             setIsSubmitting(false);

@@ -457,6 +457,9 @@ aside:not(.theme-doc-sidebar-container) {
     border: none;
     font-size: 1rem;
 }
+.navbar .button:last-child {
+    margin-right: 0;
+}
 .navbar .button:hover {
     border: none;
 }
@@ -480,6 +483,12 @@ aside:not(.theme-doc-sidebar-container) {
     .menu__list-item .button-ultra .label {
         padding-top: 9px;
         text-align: center;
+    }
+}
+
+@media (max-width: 1290px) {
+    .navbar__item {
+        margin: 0 0.55rem;
     }
 }
 
@@ -871,6 +880,12 @@ footer a {
     box-sizing: border-box;
     display: flex;
     font-family: var(--ifm-font-family-base);
+}
+
+@media (max-width: 996px) {
+    .navbar__search-input {
+        width: fit-content;
+    }
 }
 
 .navbar__search-input::placeholder {

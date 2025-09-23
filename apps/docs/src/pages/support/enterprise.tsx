@@ -9,7 +9,7 @@ import styles from '../contact/contact.module.scss';
 
 const SupportEnterprise = () => {
     const portalId = '143969481';
-    const formId = '0a05bbf7-cb3c-4a69-bbec-9b6801df31a8';
+    const formId = '6b3de277-12b7-4850-816b-2dc93d7ba30d';
 
     return (
         <Layout
@@ -36,12 +36,12 @@ const SupportEnterprise = () => {
                                         </p>
                                         <ul className="space-y-2 !ml-0 !p-0 list-none">
                                             {[
-                                                "Priority support with SLA",
-                                                "Implementation support and onboarding",
-                                                "Code and architecture reviews",
-                                                "Architecture and performance audits",
-                                                "Custom integrations (CRMs, support platforms, CMSs…)",
-                                                "Influence roadmap and access to private betas",
+                                                'Priority support with SLA',
+                                                'Implementation support and onboarding',
+                                                'Code and architecture reviews',
+                                                'Architecture and performance audits',
+                                                'Custom integrations (CRMs, support platforms, CMSs…)',
+                                                'Influence roadmap and access to private betas',
                                             ].map((item, index) => (
                                                 <li key={index} className="flex items-start gap-2">
                                                     <CircleCheckIcon className="h-5 w-5 flex-shrink-0 mt-0.5" />
@@ -64,10 +64,19 @@ const SupportEnterprise = () => {
                                         fields={[
                                             {
                                                 __typename: 'text',
-                                                label: 'Full Name',
+                                                label: 'First Name',
                                                 type: 'text',
                                                 required: true,
-                                                name: 'name',
+                                                name: 'firstname',
+                                                objectTypeId: '0-1',
+                                            },
+                                            {
+                                                __typename: 'text',
+                                                label: 'Last Name',
+                                                type: 'text',
+                                                required: true,
+                                                name: 'lastname',
+                                                objectTypeId: '0-1',
                                             },
                                             {
                                                 __typename: 'text',
@@ -75,9 +84,22 @@ const SupportEnterprise = () => {
                                                 type: 'email',
                                                 required: true,
                                                 name: 'email',
+                                                objectTypeId: '0-1',
                                             },
-                                            { __typename: 'text', label: 'Company', type: 'text', name: 'company' },
-                                            { __typename: 'textarea', label: 'Your needs', name: 'message', rows: 2 },
+                                            {
+                                                __typename: 'text',
+                                                label: 'Company',
+                                                type: 'text',
+                                                name: 'name',
+                                                objectTypeId: '0-2',
+                                            },
+                                            {
+                                                __typename: 'textarea',
+                                                label: 'Your needs',
+                                                name: 'your_needs',
+                                                rows: 2,
+                                                objectTypeId: '0-1',
+                                            },
                                         ]}
                                         consents={[
                                             {
@@ -98,6 +120,13 @@ const SupportEnterprise = () => {
                                                         and services.
                                                     </>
                                                 ),
+                                                objectTypeId: '0-1',
+                                            },
+                                            {
+                                                name: 'i_d_like_to_receive_product_updates_and_roadmap_news_',
+                                                required: false,
+                                                label: <>I’d like to receive product updates and roadmap news.</>,
+                                                objectTypeId: '0-1',
                                             },
                                         ]}
                                     />

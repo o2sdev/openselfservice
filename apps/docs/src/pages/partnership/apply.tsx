@@ -12,7 +12,7 @@ import { guides } from './index';
 
 const PartnershipApply = () => {
     const portalId = '143969481';
-    const formId = '0a05bbf7-cb3c-4a69-bbec-9b6801df31a8';
+    const formId = 'd8af9cd0-4e5e-427b-b4c7-324dffecab2e';
 
     return (
         <Layout
@@ -49,17 +49,27 @@ const PartnershipApply = () => {
                                         fields={[
                                             {
                                                 __typename: 'text',
-                                                label: 'Full name',
+                                                label: 'First Name',
                                                 type: 'text',
                                                 required: true,
-                                                name: 'name',
+                                                name: 'firstname',
+                                                objectTypeId: '0-1',
+                                            },
+                                            {
+                                                __typename: 'text',
+                                                label: 'Last Name',
+                                                type: 'text',
+                                                required: true,
+                                                name: 'lastname',
+                                                objectTypeId: '0-1',
                                             },
                                             {
                                                 __typename: 'text',
                                                 label: 'Company name',
                                                 type: 'text',
                                                 required: true,
-                                                name: 'company',
+                                                name: 'name',
+                                                objectTypeId: '0-2',
                                             },
                                             {
                                                 __typename: 'text',
@@ -67,6 +77,7 @@ const PartnershipApply = () => {
                                                 type: 'email',
                                                 required: true,
                                                 name: 'email',
+                                                objectTypeId: '0-1',
                                             },
                                             {
                                                 __typename: 'text',
@@ -74,35 +85,44 @@ const PartnershipApply = () => {
                                                 type: 'text',
                                                 required: true,
                                                 name: 'website',
+                                                objectTypeId: '0-1',
                                             },
                                             {
                                                 __typename: 'select',
                                                 label: 'Company size',
                                                 required: true,
-                                                name: 'companySize',
+                                                name: 'company_headcount',
                                                 options: [
                                                     {
                                                         label: '',
                                                     },
                                                     {
-                                                        label: '1-50',
+                                                        label: '1-10',
                                                     },
                                                     {
-                                                        label: '50-200',
+                                                        label: '11-50',
                                                     },
                                                     {
-                                                        label: '200-500',
+                                                        label: '51-200',
                                                     },
                                                     {
-                                                        label: 'Over 500',
+                                                        label: '201-500',
+                                                    },
+                                                    {
+                                                        label: '501-1000',
+                                                    },
+                                                    {
+                                                        label: 'Over 1000',
+                                                        value: '1001<',
                                                     },
                                                 ],
+                                                objectTypeId: '0-2',
                                             },
                                             {
                                                 __typename: 'select',
                                                 label: 'Where are you based?',
                                                 required: true,
-                                                name: 'location',
+                                                name: 'where_are_you_based_',
                                                 options: [
                                                     {
                                                         label: '',
@@ -117,12 +137,13 @@ const PartnershipApply = () => {
                                                         label: 'AMER',
                                                     },
                                                 ],
+                                                objectTypeId: '0-1',
                                             },
                                             {
                                                 __typename: 'checkboxGroup',
                                                 label: 'What types of projects do you usually work on?',
                                                 required: true,
-                                                name: 'typeOfProjects',
+                                                name: 'what_types_of_projects_do_you_usually_work_on_',
                                                 options: [
                                                     {
                                                         label: 'Customer self-service portals',
@@ -135,6 +156,7 @@ const PartnershipApply = () => {
                                                     },
                                                     {
                                                         label: 'Other (specify below)',
+                                                        value: 'Other',
                                                         other: true,
                                                     },
                                                 ],
@@ -143,15 +165,20 @@ const PartnershipApply = () => {
                                                     label: 'Other (please specify)',
                                                     type: 'text',
                                                     required: true,
-                                                    name: 'typeOfProjectsOther',
+                                                    name: 'other__please_specify_',
+                                                    objectTypeId: '0-1',
                                                 },
+                                                objectTypeId: '0-1',
                                             },
                                             {
                                                 __typename: 'select',
                                                 label: 'How did you hear about us?',
                                                 required: true,
-                                                name: 'howDidYouHearAboutUs',
+                                                name: 'how_did_you_hear_about_us_',
                                                 options: [
+                                                    {
+                                                        label: '',
+                                                    },
                                                     {
                                                         label: 'Google',
                                                     },
@@ -171,22 +198,31 @@ const PartnershipApply = () => {
                                                     label: 'If other – please specify',
                                                     type: 'text',
                                                     required: true,
-                                                    name: 'howDidYouHearAboutUsOther',
+                                                    name: 'if_other___please_specify',
+                                                    objectTypeId: '0-1',
                                                 },
+                                                objectTypeId: '0-1',
                                             },
                                             {
                                                 __typename: 'select',
                                                 label: 'Have you delivered projects using Open Self Service?',
                                                 required: true,
-                                                name: 'haveYouDeliveredProjectsUsingOpenSelfService',
+                                                name: 'have_you_delivered_projects_using_open_self_service_',
                                                 options: [
+                                                    {
+                                                        label: '',
+                                                    },
                                                     {
                                                         label: 'Yes',
                                                     },
                                                     {
                                                         label: 'No',
                                                     },
+                                                    {
+                                                        label: 'Soon',
+                                                    },
                                                 ],
+                                                objectTypeId: '0-1',
                                             },
                                         ]}
                                         consents={[
@@ -208,6 +244,7 @@ const PartnershipApply = () => {
                                                         and services.
                                                     </>
                                                 ),
+                                                objectTypeId: '0-1',
                                             },
                                         ]}
                                     />
