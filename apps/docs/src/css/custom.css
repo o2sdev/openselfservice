@@ -557,7 +557,8 @@ aside:not(.theme-doc-sidebar-container) {
     transform: rotate(180deg);
 }
 
-.dropdown__link:hover, .dropdown__link--active {
+.dropdown__link:hover,
+.dropdown__link--active {
     color: var(--color-violet);
 }
 
@@ -566,7 +567,7 @@ aside:not(.theme-doc-sidebar-container) {
     color: var(--color-violet);
 }
 
-.dropdown__link[target="_blank"] svg {
+.dropdown__link[target='_blank'] svg {
     opacity: 0.5;
     width: 10px;
     height: 10px;
@@ -1270,8 +1271,12 @@ footer a {
     border-image: linear-gradient(45deg, #2563eb, #21d99a) 1;
     background: var(--page--background-color);
 }
-.section-gradient {
+
+.section-gradient-1 {
     background: linear-gradient(153deg, #001a85 0%, #16182b 65.1%);
+}
+.section-gradient-2 {
+    background: linear-gradient(235deg, rgba(33, 217, 154, 0.51) 12.15%, #001a85 45.13%, #16182b 70.54%);
 }
 
 .dxp-page .button-copy {

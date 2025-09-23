@@ -116,7 +116,7 @@ export default function DXPStarter(): ReactNode {
                             </div>
                         </div>
                     </div>
-                    <div className="section-gradient px-4 py-40 mb-0!">
+                    <div className="section-gradient-1 px-4 py-40 mb-0!">
                         <section className="mb-0!">
                             <FooterSection
                                 title={
