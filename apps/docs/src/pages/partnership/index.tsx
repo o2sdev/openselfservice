@@ -61,7 +61,7 @@ const whyJoin: Array<BenefitCardProps> = [
     },
 ];
 
-const guides: Array<Guide> = [
+export const guides: Array<Guide> = [
     {
         title: 'Submit your application',
         description: 'Tell us about your experience and goals',
@@ -97,7 +97,7 @@ export default function Partnership(): ReactNode {
                                 <HeroBannerSection
                                     heading={
                                         <span className="max-sm:text-4xl">
-                                            <span className="text-highlighted">Build with us.</span> Become an O2S
+                                            <span className="text-highlighted">Build with us.</span> Become our
                                             Implementation Partner
                                         </span>
                                     }
@@ -113,7 +113,7 @@ export default function Partnership(): ReactNode {
                                     <BenefitsSection
                                         title={
                                             <>
-                                                <span className="text-highlighted">Why join</span> the O2S Partner
+                                                <span className="text-highlighted">Why join</span> our Partner
                                                 Program?
                                             </>
                                         }
@@ -143,7 +143,7 @@ export default function Partnership(): ReactNode {
                                             ),
                                             link: {
                                                 text: 'Fill out the application form',
-                                                url: '/support/enterprise',
+                                                url: '/partnership/apply',
                                                 iconRight: <SquareArrowOutUpRight className="[&>*]:stroke-current" />,
                                             },
                                             subtitle: 'Application takes 2 minutes to complete',
