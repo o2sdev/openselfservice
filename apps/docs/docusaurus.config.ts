@@ -334,7 +334,7 @@ const config: Config = {
                               },
                               {
                                   label: 'Roadmap',
-                                  to: 'https://github.com/orgs/o2sdev/projects/2',
+                                  href: 'https://github.com/orgs/o2sdev/projects/2',
                               },
                           ],
                       },
@@ -349,15 +349,15 @@ const config: Config = {
                               },
                               {
                                   label: 'Community',
-                                  to: 'https://discord.gg/4R568nZgsT',
+                                  href: 'https://discord.gg/4R568nZgsT',
                               },
                               {
                                   label: 'Changelog',
-                                  to: 'https://github.com/o2sdev/openselfservice/releases',
+                                  to: '/blog/tags/releases',
                               },
                               {
                                   label: 'Github',
-                                  to: 'https://github.com/o2sdev/openselfservice',
+                                  href: 'https://github.com/o2sdev/openselfservice',
                               },
                           ],
                       },
@@ -368,7 +368,7 @@ const config: Config = {
                           items: [
                               {
                                   label: 'For developers',
-                                  to: '/support',
+                                  to: '/support/developers',
                               },
                               {
                                   label: 'Enterprise support',

@@ -59,7 +59,8 @@
     --ifm-menu-color-background-active: rgba(76, 92, 229, 0.7);
     --ifm-menu-color-active: #ffffff;
 
-    --ifm-dropdown-link-color: #000;
+    --ifm-dropdown-hover-background-color: transparent;
+    --ifm-dropdown-link-color: #001360;
 
     /* Tła i Gradienty */
     --ifm-background-color: #001360;
@@ -428,6 +429,7 @@ aside:not(.theme-doc-sidebar-container) {
 /* --------------------------
    NAVBAR
    -------------------------- */
+
 .navbar-sidebar__brand {
     padding: 1rem;
 }
@@ -480,7 +482,6 @@ aside:not(.theme-doc-sidebar-container) {
         text-align: center;
     }
 }
-
 
 /* Navbar - docs only!!! */
 .blog-wrapper .navbar--fixed-top,
@@ -552,8 +553,23 @@ aside:not(.theme-doc-sidebar-container) {
     transition: transform 0.1s ease-in-out;
 }
 
-.dropdown > .navbar__link:hover:after {
+.dropdown:hover > .navbar__link:after {
     transform: rotate(180deg);
+}
+
+.dropdown__link:hover, .dropdown__link--active {
+    color: var(--color-violet);
+}
+
+.dropdown__link--active,
+.dropdown__link--active:hover {
+    color: var(--color-violet);
+}
+
+.dropdown__link[target="_blank"] svg {
+    opacity: 0.5;
+    width: 10px;
+    height: 10px;
 }
 
 .markdown hr {
@@ -848,8 +864,6 @@ footer a {
     box-sizing: border-box;
     display: flex;
     font-family: var(--ifm-font-family-base);
-    /*height: 2.5rem;*/
-    width: fit-content;
 }
 
 .navbar__search-input::placeholder {

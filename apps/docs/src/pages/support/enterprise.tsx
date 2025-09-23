@@ -4,6 +4,7 @@ import HubspotForm from '@site/src/components/HubspotForm';
 
 import Layout from '@theme/Layout';
 
+import CircleCheckIcon from '../../assets/icons/circle-check.svg';
 import styles from '../contact/contact.module.scss';
 
 const SupportEnterprise = () => {
@@ -33,6 +34,21 @@ const SupportEnterprise = () => {
                                             teams that require reliability, hands-on support, and architectural
                                             flexibility.
                                         </p>
+                                        <ul className="space-y-2 !ml-0 !p-0 list-none">
+                                            {[
+                                                "Priority support with SLA",
+                                                "Implementation support and onboarding",
+                                                "Code and architecture reviews",
+                                                "Architecture and performance audits",
+                                                "Custom integrations (CRMs, support platforms, CMSs…)",
+                                                "Influence roadmap and access to private betas",
+                                            ].map((item, index) => (
+                                                <li key={index} className="flex items-start gap-2">
+                                                    <CircleCheckIcon className="h-5 w-5 flex-shrink-0 mt-0.5" />
+                                                    <span>{item}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
                                     </div>
                                     <HubspotForm
                                         portalId={portalId}
