@@ -15,9 +15,9 @@ export interface ClientsSectionProps {
 export const ClientsSection: React.FC<ClientsSectionProps> = ({ lead, clients }) => {
     return (
         <div className="flex flex-col gap-6 items-start justify-start w-full">
-            {lead && <Body className="text-white w-[657px] m-auto! text-center">{lead}</Body>}
+            {lead && <Body className="text-white w-max-[657px] m-auto! text-center">{lead}</Body>}
 
-            <ul className="list-none p-0! m-0! flex gap-4 items-center justify-between w-full">
+            <ul className="list-none p-0! m-0! flex flex-wrap gap-4 items-center justify-between w-full">
                 {clients.map((client, index) => (
                     <li key={index}>
                         <span className="sr-only">{client.name}</span>
