@@ -13,6 +13,7 @@ import { HomepageUseCases } from '@site/src/components/HomepageUseCases';
 
 import Layout from '@theme/Layout';
 
+import Bosch from '../assets/logos/Bosch.svg';
 import DeutscheTelekom from '../assets/logos/DeutscheTelekom.svg';
 import DormerPramet from '../assets/logos/DormerPramet.svg';
 import Fortum from '../assets/logos/Fortum.svg';
@@ -79,7 +80,7 @@ export default function Home(): ReactNode {
                                             { name: 'Dormer Pramet', img: <DormerPramet /> },
                                             { name: 'Cerrad', img: <Cerrad /> },
                                             { name: 'Deutsche Telekom', img: <DeutscheTelekom /> },
-                                            { name: 'Orange', img: <Orange /> },
+                                            { name: 'Bosch', img: <Bosch /> },
                                         ]}
                                     />
                                 </section>
