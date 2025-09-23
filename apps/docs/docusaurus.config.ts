@@ -324,22 +324,71 @@ const config: Config = {
                 ? undefined
                 : [
                       {
+                          type: 'dropdown',
+                          label: 'Resources',
+                          position: 'left',
+                          items: [
+                              {
+                                  label: 'Blog',
+                                  to: '/blog',
+                              },
+                              {
+                                  label: 'Roadmap',
+                                  to: 'https://github.com/orgs/o2sdev/projects/2',
+                              },
+                          ],
+                      },
+                      {
+                          type: 'dropdown',
+                          label: 'Developers',
+                          position: 'left',
+                          items: [
+                              {
+                                  label: 'Documentation',
+                                  to: '/docs',
+                              },
+                              {
+                                  label: 'Community',
+                                  to: 'https://discord.gg/4R568nZgsT',
+                              },
+                              {
+                                  label: 'Changelog',
+                                  to: 'https://github.com/o2sdev/openselfservice/releases',
+                              },
+                              {
+                                  label: 'Github',
+                                  to: 'https://github.com/o2sdev/openselfservice',
+                              },
+                          ],
+                      },
+                      {
+                          type: 'dropdown',
+                          label: 'Support',
+                          position: 'left',
+                          items: [
+                              {
+                                  label: 'For developers',
+                                  to: '/support',
+                              },
+                              {
+                                  label: 'Enterprise support',
+                                  to: '/support/enterprise',
+                              },
+                              {
+                                  label: 'Contact us',
+                                  to: '/contact',
+                              },
+                          ],
+                      },
+                      {
+                          label: 'Partners',
+                          to: '/partnership',
+                          position: 'left',
+                      },
+
+                      {
                           type: 'search',
                           position: 'right',
-                      },
-                      {
-                          type: 'docSidebar',
-                          sidebarId: 'tutorialSidebar',
-                          position: 'right',
-                          label: 'Docs',
-                          className: 'navbar__item--docs',
-                      },
-                      { to: '/blog', label: 'Blog', position: 'right', className: 'navbar__item--guides' },
-                      {
-                          to: 'https://discord.gg/4R568nZgsT',
-                          label: 'Discord',
-                          position: 'right',
-                          className: 'navbar__item--discord',
                       },
                       {
                           to: 'https://github.com/o2sdev/openselfservice',
@@ -348,18 +397,16 @@ const config: Config = {
                           className: 'navbar__item--github',
                       },
                       {
-                          to: '/dxp',
-                          //   label: 'DXP Starter',
-                          position: 'right',
-                          className: 'button button-tertiary',
-                          html: '<span class="label">DXP Starter</span>',
-                      },
-
-                      {
                           to: '/contact',
                           label: 'Contact us',
                           position: 'right',
-                          className: 'navbar__item--contact button',
+                          className: 'button button-tertiary',
+                      },
+                      {
+                          to: '/dxp',
+                          label: 'DXP Starter',
+                          position: 'right',
+                          className: 'button button-primary',
                       },
                   ],
         },

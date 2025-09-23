@@ -23,6 +23,7 @@ import styles from './main.module.scss';
 
 export default function Home(): ReactNode {
     const { siteConfig } = useDocusaurusContext();
+
     return (
         <div>
             <Layout title={`${siteConfig.customFields.fullPageTitle}`}>
