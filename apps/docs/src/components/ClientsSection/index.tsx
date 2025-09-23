@@ -19,7 +19,10 @@ export const ClientsSection: React.FC<ClientsSectionProps> = ({ lead, clients })
 
             <ul className="list-none p-0! m-0! flex gap-4 items-center justify-between w-full">
                 {clients.map((client, index) => (
-                    <li key={index}>{client.img}</li>
+                    <li key={index}>
+                        <span className="sr-only">{client.name}</span>
+                        {client.img}
+                    </li>
                 ))}
             </ul>
         </div>
