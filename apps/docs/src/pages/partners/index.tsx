@@ -101,8 +101,9 @@ export default function Partnership(): ReactNode {
                                     description={
                                         <>
                                             <Body>
-                                                Are you working on headless or composable customer portals, digital
-                                                self-service apps, or large-scale frontend platforms?
+                                                Are you working on headless or composable customer portals,{' '}
+                                                <br className="hidden sm:block" />
+                                                digital self-service apps, or large-scale frontend platforms?
                                             </Body>
                                             <Body>
                                                 We’re building a network of forward-thinking agencies and integrators

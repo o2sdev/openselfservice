@@ -76,12 +76,10 @@ export default function Home(): ReactNode {
                                     <ClientsSection
                                         lead={
                                             <>
-                                                <BodyBold>
-                                                    We’ve spent over a decade designing, building, and operating
-                                                    self-service portals and digital platforms across industries.
-                                                </BodyBold>
                                                 <Body>
-                                                    Our experience spans telecom, energy, manufacturing, and financial
+                                                    We’ve spent over a decade designing, building, and operating
+                                                    self-service portals and digital platforms across industries. Our
+                                                    experience spans telecom, energy, manufacturing, and financial
                                                     services — with solutions used by millions of end users.
                                                 </Body>
                                             </>

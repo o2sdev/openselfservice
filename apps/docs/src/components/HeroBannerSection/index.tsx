@@ -75,7 +75,7 @@ export function HeroBannerSection({
                     ) : (
                         description
                     )}
-                    <div className="mt-16 space-y-4">
+                    <div className={clsx('mt-16 space-y-4 md:max-w-[415px]', !heroImage && 'm-auto')}>
                         {cliCommand && (
                             <div className="flex flex-col gap-4">
                                 <button
@@ -102,9 +102,13 @@ export function HeroBannerSection({
                             </div>
                         )}
                         {mainLink && (
-                            <div>
-                                <div className={clsx('sm:flex gap-2 space-y-4', !heroImage && 'justify-center')}>
-                                    <a className="button button" href={mainLink.url} target={mainLink.target}>
+                            <>
+                                <div className={clsx('sm:flex gap-2 space-y-4 w-full', !heroImage && 'justify-center')}>
+                                    <a
+                                        className={clsx('button', cliCommand && 'w-1/2')}
+                                        href={mainLink.url}
+                                        target={mainLink.target}
+                                    >
                                         {mainLink.iconLeft}
                                         {mainLink.text}
                                         {mainLink.iconRight}
@@ -113,7 +117,7 @@ export function HeroBannerSection({
                                     {secondaryLink && (
                                         <a
                                             href={secondaryLink.url}
-                                            className="button button-ultra"
+                                            className={clsx('button button-ultra', cliCommand && 'w-1/2')}
                                             target={secondaryLink.target}
                                             rel="noopener"
                                         >
@@ -128,7 +132,7 @@ export function HeroBannerSection({
                                     {tertiaryLink && (
                                         <a
                                             href={tertiaryLink.url}
-                                            className="button button-special"
+                                            className={clsx('button button-special', cliCommand && 'w-1/2')}
                                             target={tertiaryLink.target}
                                             rel="noopener"
                                         >
@@ -140,7 +144,7 @@ export function HeroBannerSection({
                                         </a>
                                     )}
                                 </div>
-                            </div>
+                            </>
                         )}
                     </div>
                 </div>
