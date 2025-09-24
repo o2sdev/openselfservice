@@ -31,13 +31,13 @@ const benefits: Array<BenefitCardProps> = [
         team: 'Content Teams',
         icon: <PenToolIcon className="w-4 h-4 text-[#21d99a]" />,
         title: 'Structured CMS and ready to use content models',
-        borderColor: 'gradient',
+        borderColor: 'light',
     },
     {
         team: 'Solution Architects',
         icon: <NetworkIcon className="w-4 h-4 text-[#21d99a]" />,
         title: 'Flexible, composable stack as a base for future scaling',
-        borderColor: 'green',
+        borderColor: 'light',
     },
 ];
 

@@ -5,11 +5,11 @@ import CircleCheckIcon from '@site/src/assets/icons/circle-check.svg';
 import CopyIcon from '@site/src/assets/icons/copy.svg';
 import TerminalIcon from '@site/src/assets/icons/terminal.svg';
 
-import { Body, H1 } from '../Typography';
+import { H1 } from '../Typography';
 
 interface HeroBannerSectionProps {
     heading?: ReactNode;
-    description: ReactNode | string[];
+    description: ReactNode | ReactNode[];
     cliCommand?: string;
     mainLink?: {
         text: string;
@@ -62,20 +62,19 @@ export function HeroBannerSection({
             <div className={clsx('container grid items-center', heroImage ? 'md:grid-cols-2' : 'text-center')}>
                 <div className={clsx(heroImage ? 'lg:w-[560px]' : 'lg:w-[842px] m-auto')}>
                     {heading && <H1 className="mt-12 md:mt-0">{heading}</H1>}
-                    <Body>
-                        {Array.isArray(description) ? (
-                            <ul className="space-y-2 !ml-0 !p-0 list-none">
-                                {description.map((item, index) => (
-                                    <li key={index} className="flex items-start gap-2">
-                                        <CircleCheckIcon className="h-5 w-5 flex-shrink-0 mt-0.5" />
-                                        <span>{item}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        ) : (
-                            description
-                        )}
-                    </Body>
+
+                    {Array.isArray(description) ? (
+                        <ul className="space-y-2 !ml-0 !p-0 list-none">
+                            {description.map((item, index) => (
+                                <li key={index} className="flex items-start gap-2">
+                                    <CircleCheckIcon className="h-5 w-5 flex-shrink-0 mt-0.5" />
+                                    <span>{item}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        description
+                    )}
                     <div className="mt-16 space-y-4">
                         {cliCommand && (
                             <div className="flex flex-col gap-4">

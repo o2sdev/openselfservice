@@ -323,6 +323,29 @@ const config: Config = {
             items: hideDocs
                 ? undefined
                 : [
+                    {
+                        type: 'dropdown',
+                        label: 'Developers',
+                        position: 'left',
+                        items: [
+                            {
+                                label: 'Documentation',
+                                to: '/docs',
+                            },
+                            {
+                                label: 'Community',
+                                href: 'https://discord.gg/4R568nZgsT',
+                            },
+                            {
+                                label: 'Changelog',
+                                to: '/blog/tags/releases',
+                            },
+                            {
+                                label: 'Github',
+                                href: 'https://github.com/o2sdev/openselfservice',
+                            },
+                        ],
+                    },
                       {
                           type: 'dropdown',
                           label: 'Resources',
@@ -335,29 +358,6 @@ const config: Config = {
                               {
                                   label: 'Roadmap',
                                   href: 'https://github.com/orgs/o2sdev/projects/2',
-                              },
-                          ],
-                      },
-                      {
-                          type: 'dropdown',
-                          label: 'Developers',
-                          position: 'left',
-                          items: [
-                              {
-                                  label: 'Documentation',
-                                  to: '/docs',
-                              },
-                              {
-                                  label: 'Community',
-                                  href: 'https://discord.gg/4R568nZgsT',
-                              },
-                              {
-                                  label: 'Changelog',
-                                  to: '/blog/tags/releases',
-                              },
-                              {
-                                  label: 'Github',
-                                  href: 'https://github.com/o2sdev/openselfservice',
                               },
                           ],
                       },
@@ -382,7 +382,7 @@ const config: Config = {
                       },
                       {
                           label: 'Partners',
-                          to: '/partnership',
+                          to: '/partners',
                           position: 'left',
                       },
 
@@ -436,33 +436,33 @@ const config: Config = {
                               },
                           ],
                       },
-                      {
-                          title: 'Developers',
-                          items: [
-                              {
-                                  label: 'Documentation',
-                                  to: '/docs',
-                              },
-                              {
-                                  label: 'Community',
-                                  href: 'https://discord.gg/4R568nZgsT',
-                              },
-                              {
-                                  label: 'Changelog',
-                                  to: '/blog/tags/releases',
-                              },
-                              {
-                                  label: 'Github',
-                                  href: 'https://github.com/o2sdev/openselfservice',
-                              },
-                          ],
-                      },
+                    {
+                        title: 'Developers',
+                        items: [
+                            {
+                                label: 'Documentation',
+                                to: '/docs',
+                            },
+                            {
+                                label: 'Community',
+                                href: 'https://discord.gg/4R568nZgsT',
+                            },
+                            {
+                                label: 'Changelog',
+                                to: '/blog/tags/releases',
+                            },
+                            {
+                                label: 'Github',
+                                href: 'https://github.com/o2sdev/openselfservice',
+                            },
+                        ],
+                    },
                       {
                           title: 'More',
                           items: [
                               {
                                   label: 'Partners',
-                                  to: '/partnership',
+                                  to: '/partners',
                               },
                               {
                                   to: '/contact',

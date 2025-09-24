@@ -11,7 +11,7 @@ const Badge: React.FC<BadgeProps> = ({ title, icon, variant = 'primary' }) => (
     <div
         className={clsx(
             'flex items-center justify-center gap-2.5 px-2.5 py-0.5 rounded-full',
-            variant === 'primary' ? 'bg-violet text-white!' : 'bg-secodnary text-dark-text!',
+            variant === 'primary' ? 'bg-violet text-white!' : 'bg-secondary text-dark-text!',
         )}
     >
         {icon && <img src={icon} alt={title + ' logo'} className="w-4 h-4" />}

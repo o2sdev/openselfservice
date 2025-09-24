@@ -1,8 +1,6 @@
 import React, { ReactNode } from 'react';
 
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-
-import SquareArrowOutUpRight from '@site/src/assets/icons/SquareArrowOutUpRight.svg';
+import ArrowDown from '@site/src/assets/icons/ArrowDown.svg';
 import Icon_call from '@site/src/assets/icons/icon call.svg';
 import Icon_handshake from '@site/src/assets/icons/icon handshake.svg';
 import Icon_text from '@site/src/assets/icons/icon text.svg';
@@ -19,8 +17,9 @@ import Layout from '@theme/Layout';
 
 import { FooterSection } from '../../components/FooterSection';
 import { Guide, GuidesSection } from '../../components/GuidesSection';
+import { Body } from '../../components/Typography';
 
-import styles from './partnership.module.scss';
+import styles from './partners.module.scss';
 
 const whyJoin: Array<BenefitCardProps> = [
     {
@@ -83,8 +82,6 @@ export const guides: Array<Guide> = [
 ];
 
 export default function Partnership(): ReactNode {
-    const { siteConfig } = useDocusaurusContext();
-
     return (
         <div className="dxp-page">
             <Layout title="Partnership">
@@ -97,15 +94,27 @@ export default function Partnership(): ReactNode {
                                 <HeroBannerSection
                                     heading={
                                         <span className="max-sm:text-4xl">
-                                            <span className="text-highlighted">Build with us.</span> Become our
-                                            Implementation Partner
+                                            <span className="text-highlighted">Build with us.</span> Help shape our
+                                            early partner network.
                                         </span>
                                     }
-                                    description="Are you working on headless or composable customer support portals, large-scale digital platforms or any composable frontends? Join our network of agencies and integrators building modern digital experiences."
+                                    description={
+                                        <>
+                                            <Body>
+                                                Are you working on headless or composable customer portals, digital
+                                                self-service apps, or large-scale frontend platforms?
+                                            </Body>
+                                            <Body>
+                                                We’re building a network of forward-thinking agencies and integrators
+                                                exploring the future of composable frontends. Join us in the early stage
+                                                and get access to the tools, support, and influence on where we go next.
+                                            </Body>
+                                        </>
+                                    }
                                     mainLink={{
                                         text: 'Apply to become a partner',
                                         url: '#how-to-join',
-                                        iconRight: <SquareArrowOutUpRight className="[&>*]:stroke-current" />,
+                                        iconRight: <ArrowDown className="[&>*]:stroke-current" />,
                                     }}
                                 />
 
@@ -142,8 +151,7 @@ export default function Partnership(): ReactNode {
                                             ),
                                             link: {
                                                 text: 'Fill out the application form',
-                                                url: '/partnership/apply',
-                                                iconRight: <SquareArrowOutUpRight className="[&>*]:stroke-current" />,
+                                                url: '/partners/apply',
                                             },
                                             subtitle: 'Application takes 2 minutes to complete',
                                         }}

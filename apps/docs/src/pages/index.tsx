@@ -3,7 +3,6 @@ import type { ReactNode } from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 import Cerrad from '@site/src/assets/logos/Cerrad.svg';
-import Orange from '@site/src/assets/logos/Orange.svg';
 import Osadkowski from '@site/src/assets/logos/Osadkowski.svg';
 import { HeroBannerSection } from '@site/src/components/HeroBannerSection';
 import { HomepageAboutSection } from '@site/src/components/HomepageAboutSection';
@@ -19,6 +18,7 @@ import DormerPramet from '../assets/logos/DormerPramet.svg';
 import Fortum from '../assets/logos/Fortum.svg';
 import OrangeEnergia from '../assets/logos/OrangeEnergia.svg';
 import { ClientsSection } from '../components/ClientsSection';
+import { Body, BodyBold } from '../components/Typography';
 
 import styles from './main.module.scss';
 
@@ -44,9 +44,17 @@ export default function Home(): ReactNode {
                                     }
                                     description={
                                         <>
-                                            <b>Open Self Service</b> is an open-source framework that lets you easily
-                                            integrate APIs, unify data, and build scalable, high-performance customer
-                                            support portals with Next.js, TypeScript, and NestJS.
+                                            <Body>
+                                                <b>Open Self Service</b> is an open-source framework for building modern
+                                                customer-facing portals in composable architecture. It helps you
+                                                integrate APIs, unify data, and deliver scalable, high-performance
+                                                self-service experiences using Next.js, TypeScript, and NestJS.
+                                            </Body>
+                                            <Body>
+                                                The framework provides the frontend layer – designed to connect with
+                                                your existing backend services or integrate with headless platforms
+                                                using our ready-to-use connectors.
+                                            </Body>
                                         </>
                                     }
                                     cliCommand="npx create-o2s-app"
@@ -68,9 +76,14 @@ export default function Home(): ReactNode {
                                     <ClientsSection
                                         lead={
                                             <>
-                                                We spent 10 years designing, implementing, and maintaining dedicated{' '}
-                                                <br />
-                                                self-service solutions and digital platforms for various sectors.
+                                                <BodyBold>
+                                                    We’ve spent over a decade designing, building, and operating
+                                                    self-service portals and digital platforms across industries.
+                                                </BodyBold>
+                                                <Body>
+                                                    Our experience spans telecom, energy, manufacturing, and financial
+                                                    services — with solutions used by millions of end users.
+                                                </Body>
                                             </>
                                         }
                                         clients={[

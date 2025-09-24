@@ -15,6 +15,7 @@ import { HeroBannerSection } from '@site/src/components/HeroBannerSection';
 import Layout from '@theme/Layout';
 
 import { FooterSection } from '../../components/FooterSection';
+import { Body } from '../../components/Typography';
 
 import styles from './support.module.scss';
 
@@ -105,7 +106,13 @@ export default function SupportStandard(): ReactNode {
                                             <span className="text-highlighted">build with confidence</span>
                                         </span>
                                     }
-                                    description="Open Self Service provides a developer-first experience with clear guidance, open collaboration, and active community support. Whether you’re just getting started or maintaining a production setup, we’ve got you covered."
+                                    description={
+                                        <Body>
+                                            Open Self Service provides a developer-first experience with clear guidance,
+                                            open collaboration, and active community support. Whether you’re just
+                                            getting started or maintaining a production setup, we’ve got you covered.
+                                        </Body>
+                                    }
                                     mainLink={{
                                         text: 'Join the Discord Community',
                                         url: 'https://discord.gg/4R568nZgsT',

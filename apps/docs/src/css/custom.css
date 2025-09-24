@@ -22,7 +22,7 @@
     --color-violet: #4c5ce5;
     --color-celadon: #21d99a;
 
-    --color-secodnary: #c6cfff;
+    --color-secondary: #c6fdff;
     --color-dark-text: #001360;
 }
 /*
@@ -988,7 +988,7 @@ footer a {
     color: #fff;
 }
 .button-tertiary {
-    border: 1px solid #4c5ce5 !important;
+    border: 1px solid var(--color-secondary) !important;
     background: rgba(255, 255, 255, 0.1);
     color: #fff;
     font-weight: 500;
@@ -1197,7 +1197,7 @@ footer a {
 }
 
 .card-border-light {
-    border-color: var(--color-secodnary);
+    border-color: var(--color-secondary);
 }
 
 /* Base background for all feature cards */

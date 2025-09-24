@@ -41,7 +41,7 @@ const SupportEnterprise = () => {
                                                 'Code and architecture reviews',
                                                 'Architecture and performance audits',
                                                 'Custom integrations (CRMs, support platforms, CMSs…)',
-                                                'Influence roadmap and access to private betas',
+                                                'Influence on roadmap and access to private betas',
                                             ].map((item, index) => (
                                                 <li key={index} className="flex items-start gap-2">
                                                     <CircleCheckIcon className="h-5 w-5 flex-shrink-0 mt-0.5" />
