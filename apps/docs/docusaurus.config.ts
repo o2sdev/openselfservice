@@ -53,6 +53,7 @@ const config: Config = {
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
                 gtag('config', 'G-RMFECPB5NW');
+                gtag('config', 'AW-16682846527');
             `,
         },
         // Apple touch icons (precomposed)
@@ -323,29 +324,29 @@ const config: Config = {
             items: hideDocs
                 ? undefined
                 : [
-                    {
-                        type: 'dropdown',
-                        label: 'Developers',
-                        position: 'left',
-                        items: [
-                            {
-                                label: 'Documentation',
-                                to: '/docs',
-                            },
-                            {
-                                label: 'Community',
-                                href: 'https://discord.gg/4R568nZgsT',
-                            },
-                            {
-                                label: 'Changelog',
-                                to: '/blog/tags/releases',
-                            },
-                            {
-                                label: 'Github',
-                                href: 'https://github.com/o2sdev/openselfservice',
-                            },
-                        ],
-                    },
+                      {
+                          type: 'dropdown',
+                          label: 'Developers',
+                          position: 'left',
+                          items: [
+                              {
+                                  label: 'Documentation',
+                                  to: '/docs',
+                              },
+                              {
+                                  label: 'Community',
+                                  href: 'https://discord.gg/4R568nZgsT',
+                              },
+                              {
+                                  label: 'Changelog',
+                                  to: '/blog/tags/releases',
+                              },
+                              {
+                                  label: 'Github',
+                                  href: 'https://github.com/o2sdev/openselfservice',
+                              },
+                          ],
+                      },
                       {
                           type: 'dropdown',
                           label: 'Resources',
@@ -436,27 +437,27 @@ const config: Config = {
                               },
                           ],
                       },
-                    {
-                        title: 'Developers',
-                        items: [
-                            {
-                                label: 'Documentation',
-                                to: '/docs',
-                            },
-                            {
-                                label: 'Community',
-                                href: 'https://discord.gg/4R568nZgsT',
-                            },
-                            {
-                                label: 'Changelog',
-                                to: '/blog/tags/releases',
-                            },
-                            {
-                                label: 'Github',
-                                href: 'https://github.com/o2sdev/openselfservice',
-                            },
-                        ],
-                    },
+                      {
+                          title: 'Developers',
+                          items: [
+                              {
+                                  label: 'Documentation',
+                                  to: '/docs',
+                              },
+                              {
+                                  label: 'Community',
+                                  href: 'https://discord.gg/4R568nZgsT',
+                              },
+                              {
+                                  label: 'Changelog',
+                                  to: '/blog/tags/releases',
+                              },
+                              {
+                                  label: 'Github',
+                                  href: 'https://github.com/o2sdev/openselfservice',
+                              },
+                          ],
+                      },
                       {
                           title: 'More',
                           items: [
