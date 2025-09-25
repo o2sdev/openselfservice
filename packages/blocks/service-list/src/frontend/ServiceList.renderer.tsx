@@ -6,7 +6,7 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { ServiceList } from './ServiceList.server';
 import { ServiceListRendererProps } from './ServiceList.types';
 
-export const Renderer: React.FC<ServiceListRendererProps> = ({ id, accessToken, slug, routing, hasPriority }) => {
+export const Renderer: React.FC<ServiceListRendererProps> = ({ id, accessToken, routing, hasPriority }) => {
     const locale = useLocale();
 
     return (
@@ -14,7 +14,11 @@ export const Renderer: React.FC<ServiceListRendererProps> = ({ id, accessToken, 
             key={id}
             fallback={
                 <>
-                    <Loading bars={32} />
+                    <div className="w-full flex flex-col md:flex-row gap-6">
+                        <Loading bars={21} />
+                        <Loading bars={21} />
+                        <Loading bars={21} />
+                    </div>
                 </>
             }
         >

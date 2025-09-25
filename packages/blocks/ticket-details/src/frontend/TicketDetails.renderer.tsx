@@ -24,12 +24,12 @@ export const TicketDetailsRenderer: React.FC<TicketDetailsRendererProps> = ({
         <Suspense
             key={id}
             fallback={
-                <>
+                <div className="w-full flex flex-col gap-6">
                     <Loading bars={1} />
                     <Container variant="narrow">
                         <Loading bars={[10, 23]} />
                     </Container>
-                </>
+                </div>
             }
         >
             <TicketDetails

@@ -10,21 +10,7 @@ export const Renderer: React.FC<OrderListRendererProps> = ({ id, accessToken, ro
     const locale = useLocale();
 
     return (
-        <Suspense
-            key={id}
-            fallback={
-                <div className="w-full flex gap-6">
-                    <div className="w-full flex flex-col gap-6">
-                        <Loading bars={2} />
-                        <div className="w-full flex gap-6">
-                            <Loading bars={1} />
-                            <Loading bars={1} />
-                        </div>
-                    </div>
-                    <Loading bars={4} />
-                </div>
-            }
-        >
+        <Suspense key={id} fallback={<Loading bars={[15, 17]} />}>
             <OrderList id={id} accessToken={accessToken} locale={locale} routing={routing} hasPriority={hasPriority} />
         </Suspense>
     );

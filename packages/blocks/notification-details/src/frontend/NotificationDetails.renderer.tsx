@@ -1,6 +1,7 @@
 import { useLocale } from 'next-intl';
 import React, { Suspense } from 'react';
 
+import { Container } from '@o2s/ui/components/Container';
 import { Loading } from '@o2s/ui/components/Loading';
 
 import { NotificationDetails } from './NotificationDetails.server';
@@ -20,7 +21,17 @@ export const NotificationDetailsRenderer: React.FC<FaqRendererProps> = ({
     }
 
     return (
-        <Suspense key={id} fallback={<Loading bars={5} />}>
+        <Suspense
+            key={id}
+            fallback={
+                <div className="w-full flex flex-col gap-6">
+                    <Loading bars={1} />
+                    <Container variant="narrow">
+                        <Loading bars={4} />
+                    </Container>
+                </div>
+            }
+        >
             <NotificationDetails
                 id={id}
                 notificationId={slug[1]}

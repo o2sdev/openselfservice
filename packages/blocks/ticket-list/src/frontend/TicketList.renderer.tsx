@@ -10,7 +10,15 @@ export const TicketListRenderer: React.FC<TicketListRendererProps> = ({ id, acce
     const locale = useLocale();
 
     return (
-        <Suspense key={id} fallback={<Loading bars={[15, 17]} />}>
+        <Suspense
+            key={id}
+            fallback={
+                <div className="w-full flex flex-col gap-6">
+                    <Loading bars={1} />
+                    <Loading bars={[15, 17]} />
+                </div>
+            }
+        >
             <TicketListServer
                 id={id}
                 accessToken={accessToken}

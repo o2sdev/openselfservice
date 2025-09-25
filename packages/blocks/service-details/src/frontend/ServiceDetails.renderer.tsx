@@ -24,12 +24,17 @@ export const ServiceDetailsRenderer: React.FC<ServiceDetailsRendererProps> = ({
         <Suspense
             key={id}
             fallback={
-                <>
+                <div className="w-full flex flex-col gap-6">
                     <Loading bars={1} />
                     <Container variant="narrow">
-                        <Loading bars={20} />
+                        <Loading bars={16} />
                     </Container>
-                </>
+                    <div className="w-full flex flex-col md:flex-row gap-6">
+                        <Loading bars={14} />
+                        <Loading bars={14} />
+                        <Loading bars={14} />
+                    </div>
+                </div>
             }
         >
             <ServiceDetails
