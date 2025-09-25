@@ -51,7 +51,7 @@ export default function Home(): ReactNode {
                                                 self-service experiences using Next.js, TypeScript, and NestJS.
                                             </Body>
                                             <Body>
-                                                The framework provides the frontend layer – designed to connect with
+                                                The framework provides the frontend layer designed to connect with
                                                 your existing backend services or integrate with headless platforms
                                                 using our ready-to-use connectors.
                                             </Body>
