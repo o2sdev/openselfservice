@@ -186,6 +186,8 @@ const HubspotForm: React.FC<HubspotFormProps> = ({
             },
         };
 
+        const url = new URL(window.location.href);
+
         try {
             const response = await fetch(
                 `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`,
@@ -209,14 +211,23 @@ const HubspotForm: React.FC<HubspotFormProps> = ({
                     Object.keys(prev).forEach((k) => (cleared[k] = false));
                     return cleared;
                 });
+
+                url.searchParams.append('success', 'true');
+                window.history.replaceState(null, null, url);
             } else {
                 const data = await response.json();
                 setStatus({ type: 'error', message: data.message });
                 setIsSubmitting(false);
+
+                url.searchParams.append('success', 'false');
+                window.history.replaceState(null, null, url);
             }
         } catch (error) {
             setStatus({ type: 'error', message: 'An unexpected error occurred. Please try again later.' });
             setIsSubmitting(false);
+
+            url.searchParams.append('success', 'false');
+            window.history.replaceState(null, null, url);
         }
     };
 
