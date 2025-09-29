@@ -3,10 +3,9 @@ import React from 'react';
 import CodeIcon from '@site/src/assets/icons/code.svg';
 import CodepenIcon from '@site/src/assets/icons/codepen.svg';
 import GitcompareIcon from '@site/src/assets/icons/gitcompare.svg';
-import LightbulbIcon from '@site/src/assets/icons/lightbulb.svg';
 
 import Card from '../Card';
-import { Body, H2, H3 } from '../Typography';
+import { H2, H3 } from '../Typography';
 
 interface FeatureCardProps {
     title: string;
@@ -14,8 +13,47 @@ interface FeatureCardProps {
     features: string[];
     buttonText: string;
     buttonUrl: string;
-    borderColor?: 'gradient' | 'blue' | 'green';
+    borderColor?: 'gradient' | 'blue' | 'green' | 'light';
 }
+
+const features: Array<FeatureCardProps> = [
+    {
+        title: 'Modern Frontend Foundation',
+        icon: (
+            <div className="absolute inset-[16.67%_8.33%]">
+                <CodeIcon className="w-7 h-7 text-[#21d99a]" />
+            </div>
+        ),
+        features: ['Next.js based frontend', 'UI components & content types', 'Optimized for SEO, a11y & web perf'],
+        buttonText: 'Learn more',
+        buttonUrl: '/docs/app-starters/dxp/overview',
+        borderColor: 'light',
+    },
+    {
+        title: 'Composable Integration Layer',
+        icon: (
+            <div className="absolute inset-[8.333%]">
+                <CodepenIcon className="w-7 h-7 text-[#21d99a]" />
+            </div>
+        ),
+        features: ['Future-ready architecture', 'API Harmonization', 'Vendor independence'],
+        buttonText: 'Learn more',
+        buttonUrl: '/docs/main-components/harmonization-app/',
+        borderColor: 'light',
+    },
+    {
+        title: 'Seamless CMS Experience',
+        icon: (
+            <div className="absolute inset-[12.5%]">
+                <GitcompareIcon className="w-7 h-7 text-[#21d99a]" />
+            </div>
+        ),
+        features: ['Headless CMS integration', 'Powerful content management', 'Multilingual support'],
+        buttonText: 'Learn more',
+        buttonUrl: '/docs/integrations/cms/strapi/overview',
+        borderColor: 'light',
+    },
+];
 
 const FeatureCard: React.FC<FeatureCardProps> = ({
     title,
@@ -59,51 +97,6 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
 };
 
 export function DXPFeaturesSection() {
-    const features: Array<{
-        title: string;
-        icon: React.ReactNode;
-        features: string[];
-        buttonText: string;
-        buttonUrl: string;
-        borderColor?: 'gradient' | 'blue' | 'green';
-    }> = [
-        {
-            title: 'Modern Frontend Foundation',
-            icon: (
-                <div className="absolute inset-[16.67%_8.33%]">
-                    <CodeIcon className="w-7 h-7 text-[#21d99a]" />
-                </div>
-            ),
-            features: ['Next.js based frontend', 'UI components & content types', 'Optimized for SEO, a11y & web perf'],
-            buttonText: 'Learn more',
-            buttonUrl: '/docs/app-starters/dxp/overview',
-        },
-        {
-            title: 'Composable Integration Layer',
-            icon: (
-                <div className="absolute inset-[8.333%]">
-                    <CodepenIcon className="w-7 h-7 text-[#21d99a]" />
-                </div>
-            ),
-            features: ['Future-ready architecture', 'API Harmonization', 'Vendor independence'],
-            buttonText: 'Learn more',
-            buttonUrl: '/docs/main-components/harmonization-app/',
-            borderColor: 'gradient',
-        },
-        {
-            title: 'Seamless CMS Experience',
-            icon: (
-                <div className="absolute inset-[12.5%]">
-                    <GitcompareIcon className="w-7 h-7 text-[#21d99a]" />
-                </div>
-            ),
-            features: ['Headless CMS integration', 'Powerful content management', 'Multilingual support'],
-            buttonText: 'Learn more',
-            buttonUrl: '/docs/integrations/cms/strapi/overview',
-            borderColor: 'green',
-        },
-    ];
-
     return (
         <div className="flex flex-col items-start justify-start w-full">
             <H2 className="font-semibold leading-[1.2] text-3xl text-white w-full">

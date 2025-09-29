@@ -1,0 +1,13 @@
+<svg width="51" height="50" viewBox="0 0 51 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="1.16602" y="8.5" width="41" height="41" rx="4.5" stroke="#4C5CE5"/>
+<rect x="7.66602" y="14.7568" width="12" height="12" rx="2" fill="#16182B" fill-opacity="0.8"/>
+<rect x="7.66602" y="14.7568" width="12" height="12" rx="2" fill="#4C5CE5"/>
+<rect x="23.666" y="14.7568" width="12" height="12" rx="2" stroke="#4C5CE5" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<rect x="7.66602" y="30.7568" width="12" height="12" rx="2" fill="#16182B" fill-opacity="0.8"/>
+<rect x="7.66602" y="30.7568" width="12" height="12" rx="2" fill="#4C5CE5"/>
+<rect x="23.666" y="30.7568" width="12" height="12" rx="2" fill="#16182B" fill-opacity="0.8"/>
+<rect x="23.666" y="30.7568" width="12" height="12" rx="2" fill="#4C5CE5"/>
+<rect x="31.666" width="19" height="19" rx="4" fill="#16182B" fill-opacity="0.8"/>
+<rect x="31.666" width="19" height="19" rx="4" fill="#4C5CE5"/>
+<path d="M41.5229 4.14307L43.2886 7.72021L47.2372 8.29735L44.38 11.0802L45.0543 15.0116L41.5229 13.1545L37.9915 15.0116L38.6657 11.0802L35.8086 8.29735L39.7572 7.72021L41.5229 4.14307Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

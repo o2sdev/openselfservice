@@ -53,6 +53,7 @@ const config: Config = {
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
                 gtag('config', 'G-RMFECPB5NW');
+                gtag('config', 'AW-16682846527');
             `,
         },
         // Apple touch icons (precomposed)
@@ -253,7 +254,7 @@ const config: Config = {
     markdown: {
         mermaid: true,
     },
-    plugins: [tailwindPlugin, '@docusaurus/theme-mermaid', 'docusaurus-plugin-image-zoom'],
+    plugins: [tailwindPlugin, '@docusaurus/theme-mermaid', 'docusaurus-plugin-image-zoom', 'docusaurus-plugin-sass'],
     presets: [
         [
             'classic',
@@ -324,22 +325,71 @@ const config: Config = {
                 ? undefined
                 : [
                       {
+                          type: 'dropdown',
+                          label: 'Developers',
+                          position: 'left',
+                          items: [
+                              {
+                                  label: 'Documentation',
+                                  to: '/docs',
+                              },
+                              {
+                                  label: 'Community',
+                                  href: 'https://discord.gg/4R568nZgsT',
+                              },
+                              {
+                                  label: 'Changelog',
+                                  to: '/blog/tags/releases',
+                              },
+                              {
+                                  label: 'Github',
+                                  href: 'https://github.com/o2sdev/openselfservice',
+                              },
+                          ],
+                      },
+                      {
+                          type: 'dropdown',
+                          label: 'Resources',
+                          position: 'left',
+                          items: [
+                              {
+                                  label: 'Blog',
+                                  to: '/blog',
+                              },
+                              {
+                                  label: 'Roadmap',
+                                  href: 'https://github.com/orgs/o2sdev/projects/2',
+                              },
+                          ],
+                      },
+                      {
+                          type: 'dropdown',
+                          label: 'Support',
+                          position: 'left',
+                          items: [
+                              {
+                                  label: 'For developers',
+                                  to: '/support/developers',
+                              },
+                              {
+                                  label: 'Enterprise support',
+                                  to: '/support/enterprise',
+                              },
+                              {
+                                  label: 'Contact us',
+                                  to: '/contact',
+                              },
+                          ],
+                      },
+                      {
+                          label: 'Partners',
+                          to: '/partners',
+                          position: 'left',
+                      },
+
+                      {
                           type: 'search',
                           position: 'right',
-                      },
-                      {
-                          type: 'docSidebar',
-                          sidebarId: 'tutorialSidebar',
-                          position: 'right',
-                          label: 'Docs',
-                          className: 'navbar__item--docs',
-                      },
-                      { to: '/blog', label: 'Blog', position: 'right', className: 'navbar__item--guides' },
-                      {
-                          to: 'https://discord.gg/4R568nZgsT',
-                          label: 'Discord',
-                          position: 'right',
-                          className: 'navbar__item--discord',
                       },
                       {
                           to: 'https://github.com/o2sdev/openselfservice',
@@ -348,18 +398,16 @@ const config: Config = {
                           className: 'navbar__item--github',
                       },
                       {
-                          to: '/dxp',
-                          //   label: 'DXP Starter',
-                          position: 'right',
-                          className: 'button button-tertiary',
-                          html: '<span class="label">DXP Starter</span>',
-                      },
-
-                      {
                           to: '/contact',
                           label: 'Contact us',
                           position: 'right',
-                          className: 'navbar__item--contact button',
+                          className: 'button button-tertiary',
+                      },
+                      {
+                          to: '/dxp',
+                          label: 'DXP Starter',
+                          position: 'right',
+                          className: 'button button-primary',
                       },
                   ],
         },
@@ -390,19 +438,23 @@ const config: Config = {
                           ],
                       },
                       {
-                          title: 'Community',
+                          title: 'Developers',
                           items: [
                               {
-                                  label: 'LinkedIn',
-                                  href: 'https://www.linkedin.com/company/open-self-service/',
+                                  label: 'Documentation',
+                                  to: '/docs',
                               },
-                              //   {
-                              //       label: 'Twitter / X',
-                              //       href: 'https://x.com/openselfservice',
-                              //   },
                               {
-                                  label: 'Discord',
+                                  label: 'Community',
                                   href: 'https://discord.gg/4R568nZgsT',
+                              },
+                              {
+                                  label: 'Changelog',
+                                  to: '/blog/tags/releases',
+                              },
+                              {
+                                  label: 'Github',
+                                  href: 'https://github.com/o2sdev/openselfservice',
                               },
                           ],
                       },
@@ -410,8 +462,12 @@ const config: Config = {
                           title: 'More',
                           items: [
                               {
-                                  label: 'GitHub',
-                                  href: 'https://github.com/o2sdev/openselfservice',
+                                  label: 'Partners',
+                                  to: '/partners',
+                              },
+                              {
+                                  to: '/contact',
+                                  label: 'Contact us',
                               },
                           ],
                       },

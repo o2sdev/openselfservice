@@ -1,14 +1,11 @@
 /* --------------------------
-   Contact Page
+   HubspotForm Styles
    -------------------------- */
-.contactContainer {
-    overflow: hidden;
-    min-height: 400px;
-    max-width: 100%;
-    flex: 1 0 auto;
-}
 .contactFormText {
     color: var(--inverted-foreground-color);
+}
+
+.contactFormSelect {
 }
 
 .contactFormText a {
@@ -18,16 +15,8 @@
 .contactFormH2 {
     color: var(--inverted-foreground-color);
     font-size: 1.5rem;
-    margin-bottom: 0;
-    font-weight: bold;
-}
-
-.text-highlighted {
-    color: var(--color-highlighted, #21d99a);
-}
-
-.font-extrabold {
-    font-weight: 800;
+    margin-bottom: 0.25rem;
+    font-weight: 600;
 }
 
 .msg {
@@ -45,14 +34,11 @@
     color: #d61830;
 }
 .error:before {
-    background: url('../../src/assets/icons/circle-alert.svg') no-repeat;
+    background: url('../../assets/icons/circle-alert.svg') no-repeat;
 }
 .success {
     color: var(--inverted-foreground-color);
 }
 .success:before {
-    background: url('../../src/assets/icons/circle-check.svg') no-repeat;
-}
-body:not(.navigation-with-keyboard) *:not(input):focus {
-    outline-width: 2px;
+    background: url('../../assets/icons/circle-check.svg') no-repeat;
 }
