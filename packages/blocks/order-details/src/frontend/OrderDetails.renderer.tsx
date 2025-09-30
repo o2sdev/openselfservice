@@ -24,11 +24,21 @@ export const OrderDetailsRenderer: React.FC<OrderDetailsRendererProps> = ({
             key={id}
             fallback={
                 <div className="w-full flex flex-col gap-6">
-                    <Loading bars={1} />
+                    <Loading bars={0} />
                     <div className="w-full flex flex-col md:flex-row gap-6">
-                        <div className="w-full flex flex-col md:flex-row gap-6">
-                            <Loading bars={8} />
-                            <Loading bars={8} />
+                        <div className="w-full flex flex-col gap-6">
+                            <div className="w-full flex flex-col md:flex-row gap-6">
+                                <Loading bars={2} />
+                                <Loading bars={2} />
+                            </div>
+                            <Loading bars={2} />
+                        </div>
+                        <div className="w-full flex flex-col gap-6">
+                            <div className="w-full flex flex-col md:flex-row gap-6">
+                                <Loading bars={2} />
+                                <Loading bars={2} />
+                            </div>
+                            <Loading bars={2} />
                         </div>
                     </div>
                     <Loading bars={8} />
