@@ -1,7 +1,7 @@
 ---
 slug: ensuring-high-frontend-performance-in-composable-apps
 title: 'Ensuring high Frontend performance in composable apps'
-date: 2025-09-19
+date: 2025-10-03
 tags: [tech, performance]
 authors: [marcin.krasowski]
 toc_max_heading_level: 3
@@ -34,7 +34,7 @@ In building Open Self Service, we chose to implement a clear separation of conce
 
 - Our implementation introduces an intermediate **API composition layer** that acts as a bridge between the frontend and various backend APIs. This layer aggregates data from multiple sources and orchestrates data flows between systems. It efficiently combines static content with dynamic data while handling complex logic server-side, reducing browser processing overhead.
 
-![high level architecture.svg](../../../docs/overview/high-level-architecture.svg)
+![high level architecture](./high-level-architecture.svg)
 
 This approach ensures backend service changes don't require frontend code modifications, reducing maintenance overhead and increasing flexibility.
 
