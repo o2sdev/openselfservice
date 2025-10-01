@@ -12,6 +12,8 @@ hide_table_of_contents: false
 
 In today's web development landscape, composable architectures are gaining popularity for their flexibility and scalability. However, this approach introduces unique performance challenges. This article explores strategies and best practices for ensuring high frontend performance in composable applications, using Open Self Service as a practical example.
 
+![lighthouse score.png](lighthouse-2.png)
+
 ## Understanding composable architecture
 
 ### What is a composable architecture?
