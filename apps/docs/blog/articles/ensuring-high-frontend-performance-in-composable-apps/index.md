@@ -222,12 +222,11 @@ export class OrderDetailsService {
 }
 ```
 
-This approach provides several benefits for the overall Frontend performance:
+This approach provides several benefits for the overall performance. Firstly, the composition layer combines data from multiple backend services into a single, optimized response that is specifically tailored for each block - returning only the information that block needs and nothing else, which eliminates overfetching.
 
-- The composition layer combines data from multiple backend services into a single, optimized response that is specifically tailored for each block - returning anly the information that block needs and nothing else, which eliminates overfetching.
-- Raw data from various backends is transformed into a consistent format, which does not necessarily improve performance itself but allows the Frontend to be implemented in an API-agnostic way.
-- Instead of making multiple API calls directly from the browser, the composition layer handles the communication with backend services, which reduces latency and bandwidth usage.
-- The composition layer can fetch data from multiple sources in parallel using e.g. RxJS observables, optimizing the overall response time.
+Instead of making multiple API calls directly from the browser (e.g. for client-sed user actions like fitlering or form submissions), the composition layer handles the communication with backend services, which reduces latency and bandwidth usage. The composition layer can fetch data from multiple sources in parallel using, for example, RxJS observables, optimizing the overall response time
+
+Additionally, raw data from various backend services is transformed into a consistent format, which does not necessarily improve performance itself but allows the Frontend to be implemented in an API-agnostic way.
 
 ### API-level caching
 
@@ -239,7 +238,33 @@ In our framework, blocks don't need to implement caching logic themselves; they 
 
 ### Request memoization
 
-Next.js 13 and later versions introduced an important performance optimization feature: automatic request memoization. This feature ensures that duplicate data fetching requests within the same render pass are automatically deduplicated, significantly reducing unnecessary network calls and improving performance.
+Next.js 13 and later versions introduced an important performance optimization feature: automatic request memoization. It ensures that identical data fetching requests within the same render pass are actually called only once, significantly reducing unnecessary network calls and improving performance.
+
+This is especially important for composable apps where the Frontend does not define every page, instead relying on a CMS configuration. In such cases, there will be, for example, two identical requests needed for a single page render: one to [generate metadata](https://nextjs.org/docs/app/getting-started/metadata-and-og-images#generated-metadata) and the second to actually render page body:
+
+```typescript jsx
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { locale, slug } = await params;
+    const { data, meta } = await sdk.modules.getPage({ slug }, locale);
+
+    return generateSeo({ data, meta });
+}
+
+export default async function Page({ params }: Props) {
+    const { locale, slug } = await params;
+    const { data } = await sdk.modules.getPage({ slug }, locale);
+
+    return (
+        <body>
+            <Header {...data.header} />
+            <PageTemplate slug={slug} data={data} />
+            <Footer {...data.footer} />
+        </body>
+    );
+}
+```
+
+Notice that `sdk.modules.getPage({ slug }, locale)` is identical in both cases - request memoization will then ensure that it is called only once.
 
 By default, the native `fetch` API in Next.js is automatically memoized. This means that if multiple components on the same page make identical fetch requests, Next.js will only execute the actual network request once and reuse the result for all components. This is particularly valuable in our composable architecture, where different blocks might need the same underlying data.
 
@@ -279,7 +304,6 @@ const makeRequest = <T>(config: CompatRequestConfig): Promise<T> => {
 ```
 
 This approach ensures that API requests are automatically memoized when used in server components, preventing redundant network calls and improving overall application performance without requiring block developers to implement any special logic.
-
 
 ## Conclusion
 
