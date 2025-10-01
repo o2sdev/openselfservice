@@ -34,6 +34,8 @@ In building Open Self Service, we chose to implement a clear separation of conce
 
 - Our implementation introduces an intermediate **API composition layer** that acts as a bridge between the frontend and various backend APIs. This layer aggregates data from multiple sources and orchestrates data flows between systems. It efficiently combines static content with dynamic data while handling complex logic server-side, reducing browser processing overhead.
 
+![high level architecture.svg](../../../docs/overview/high-level-architecture.svg)
+
 This approach ensures backend service changes don't require frontend code modifications, reducing maintenance overhead and increasing flexibility.
 
 ### Component-based design
@@ -164,7 +166,7 @@ So to sum up - this pattern eliminates the "waterfall" effect where one componen
 
 ### Component-level dynamic imports
 
-Beyond block-level code splitting, we implement finer-grained dynamic imports for heavy components within blocks. This is particularly beneficial e.g. for data visualization components that rely on large third-party libraries:
+Beyond block-level code splitting, we implement finer-grained dynamic imports for heavy components within blocks. This is particularly beneficial, e.g., for data visualization components that rely on large third-party libraries:
 
 ```typescript
 'use client';
@@ -180,13 +182,14 @@ export const PaymentsHistoryClient = ({ title, chartData }) => {
     return (
         <div>
             <Typography>{title}</Typography>
+            ...
             <StackedBarChart chartData={chartData} />
-        </Card>
+        </div>
     );
 };
 ```
 
-In this example, the chart component (which depends on the recharts library) is dynamically imported only when needed (in other words, when that block is rendered on the Frontend). Chart libraries are typically large and would significantly increase the initial bundle size, and typically not every page in the app will contain a chart component - so there's no point in preloading a resource-heavy library before it's actually necessary.
+In this example, the chart component (which depends on the [recharts library](https://recharts.org/)) is dynamically imported only when needed (in other words, when that block is rendered on the Frontend). Chart libraries are typically large and would significantly increase the initial bundle size, and typically not every page in the app will contain a chart component - so there's no point in preloading a resource-heavy library before it's actually necessary.
 
 ### API composition layer
 
@@ -234,28 +237,57 @@ We chose to address this issue by leveraging [Redis](https://redis.io/) that can
 
 In our framework, blocks don't need to implement caching logic themselves; they benefit automatically from the centralized caching system. When multiple blocks on a page require the same underlying data, the first request populates the cache, and subsequent requests are served from the cache without hitting the backend services.
 
-### Frontend-level caching
+### Request memoization
 
-Beyond our API-level caching, Open Self Service takes advantage of Next.js's built-in data caching capabilities to further optimize performance:
+Next.js 13 and later versions introduced an important performance optimization feature: automatic request memoization. This feature ensures that duplicate data fetching requests within the same render pass are automatically deduplicated, significantly reducing unnecessary network calls and improving performance.
+
+By default, the native `fetch` API in Next.js is automatically memoized. This means that if multiple components on the same page make identical fetch requests, Next.js will only execute the actual network request once and reuse the result for all components. This is particularly valuable in our composable architecture, where different blocks might need the same underlying data.
 
 ```typescript
-TODO;
+// In multiple server components across the page
+const data = await fetch('https://api.example.com/data');
+const result = await data.json();
 ```
 
-This multi-layered caching approach provides several benefits:
+In the example above, even if this code appears in multiple server components on the same page, the actual network request will only be made once.
 
-- data fetched in server components is automatically cached by Next.js, reducing redundant API calls when the same data is needed across multiple renders.
-- Next.js allows fine-tuned control over cache invalidation and revalidation strategies, enabling us to balance data freshness with performance.
-- the caching system can automatically revalidate stale data in the background, ensuring users always see fresh content without waiting for new data to load.
-- in production environments, cached data can persist across server restarts, further improving performance and reducing backend load.
+However, it's important to note that while the native `fetch` API is supported out of the box, other HTTP client libraries may require additional configuration or adaptations to benefit from Next.js's memoization capabilities.
 
-By implementing these efficient data fetching strategies, Open Self Service delivers a responsive user experience even with complex, data-rich interfaces composed of multiple independent blocks. The combination of our API composition layer, multi-level caching, and Next.js's built-in optimizations ensures that data flows efficiently from backend services to the user interface with minimal latency and redundancy.
+In our implementation, we initially used [axios](https://axios-http.com/) for API requests but later switched to [ofetch](https://github.com/unjs/ofetch), which provided a more seamless integration with Next.js's memoization system while still offering advanced features like interceptors for request/response handling. The transition was quite straightforward and didn't require too many additional adjustments:
+
+```typescript
+// Our SDK implementation using ofetch
+const ofetchInstance = ofetch.create({
+    baseURL: apiUrl,
+    onRequest,
+    onRequestError,
+    onResponse,
+    onResponseError,
+});
+
+const makeRequest = <T>(config: CompatRequestConfig): Promise<T> => {
+    // Configuration mapping from our standard format to ofetch format
+    const fetchOptions = {
+        method: config.method,
+        query: config.params,
+        body: config.data,
+        headers: config.headers,
+    };
+
+    return ofetchInstance(config.url, fetchOptions) as Promise<T>;
+};
+```
+
+This approach ensures that API requests are automatically memoized when used in server components, preventing redundant network calls and improving overall application performance without requiring block developers to implement any special logic.
+
 
 ## Conclusion
 
-Creating high-performance composable frontends requires a thoughtful approach to architecture, component design, and data management. By implementing the strategies outlined in this article, developers can build flexible, maintainable applications without sacrificing user experience or performance.
+Building high-performance composable frontends requires addressing challenges across multiple architectural levels. The approach described in this article combines modular architecture with Next.js server components for efficient rendering, strategic Suspense boundaries for progressive loading, and an API composition layer that optimizes data flow. We enhance performance through Redis-based caching, request memoization, and component-level dynamic imports for resource optimization.
 
-The Open Self Service framework demonstrates how these principles can be applied in practice, providing a solid foundation for building performant composable applications that scale with your needs.
+These strategies deliver real benefits: faster page loads, smoother interactions, and responsive applications even under challenging network conditions. For developers, the composable approach improves maintainability, simplifies testing, and allows independent evolution of different application parts.
+
+The Open Self Service framework demonstrates these principles in practice, providing a foundation for building performant composable applications that scale with business needs while delivering exceptional user experiences.
 
 Want to see it in action?
 
