@@ -1,6 +1,6 @@
 ---
 slug: ensuring-high-frontend-performance-in-composable-apps
-title: 'Ensuring high Frontend performance in composable apps'
+title: 'Ensuring high Frontend performance in composable Next.js apps'
 date: 2025-10-03
 tags: [tech, performance]
 authors: [marcin.krasowski]
@@ -306,6 +306,108 @@ const makeRequest = <T>(config: CompatRequestConfig): Promise<T> => {
 ```
 
 This approach ensures that API requests are automatically memoized when used in server components, preventing redundant network calls and improving overall application performance without requiring block developers to implement any special logic.
+
+### Image optimization
+
+Images are often the largest assets on a page, so getting them right has an outsized impact on LCP, CLS, and bandwidth. Next.js provides powerful, safe-by-default primitives through [Image component](https://nextjs.org/docs/pages/api-reference/components/image) that we use across blocks, with a few conventions to keep things fast and stable.
+
+We always provide `width`/`height` or `fill` to prevent layout shift and enable responsive sizing and lazy loading. Our `Image` component wraps `next/image` and only falls back to a plain `<img>` when dimensions are missing (prefer providing dimensions whenever possible). This is alongside with a default `quality=90` that is high enough to not be noticable, but still has a noticeable impact on image weight:
+
+```typescript jsx
+export const Image: React.FC<ImageProps> = ({ src, alt = '', width, height, quality = 90, fill, priority, ...rest }) => {
+    if ((width && height) || fill) {
+        return (
+            <NextImage
+                src={src}
+                alt={alt}
+                width={width}
+                height={height}
+                quality={quality}
+                fill={fill}
+                priority={priority}
+                fetchPriority={priority ? 'high' : 'auto'}
+                {...rest}
+            />
+        );
+    }
+
+    return <img src={src as string} alt={alt} />;
+};
+```
+
+Next.js by default [lazy loads images](https://nextjs.org/docs/pages/api-reference/components/image#priority), which is great if they are below-the-fold but should be manually disabled for images that are within the initial viewport, like a hero image. We compute `hasPriority` only for blocks above the fold and pass it down to images within:
+
+```typescript jsx
+export const renderBlocks = async (blocks) => {
+    return blocks.map((block, index) => {
+        // decides whether the block is above the fold,
+        // e.g., to disable image lazy loading
+        const hasPriority = index < 2;
+
+        return (
+            <Container key={block.id}
+            >
+                {renderBlock(block, hasPriority)}
+            </Container>
+        );
+    });
+};
+```
+
+Keep in mind that this "predictive algorithm", if it can be called that, is very basic and is prone to being wrong as it does not predict how large the components are. Which means that there can be situations where the third component on the page is still visible, if the first two erer quite small.
+
+This is one of the risks that come from page content being fully dependent on CMS configuration - the code cannot always predict every situation. A better, more foolproof solution would be to define the priority directly in the CMS, where app admins know how the component looks and if it is positioned above-the-fold or not - an improvement that we have in plans for the future.
+
+Nevertheless, this flag flows into other nested components and ultimately the Image component itself, which also sets the browser `fetchPriority` accordingly, as shown earlier.
+
+A good way to save on bandwith is to set the [sizes prop](https://nextjs.org/docs/pages/api-reference/components/image#sizes) that matches your CSS breakpoints so the browser downloads the smallest correct candidate.
+
+For example, for a Hero component with an image that on desktop is always no larger than 50% of the viewport and on mobile is always full width:
+
+![sizes prop](sizes.png)
+
+The `sizes` prop can be defined accordingly with media queries that match the app's breakpoints (`100vw` on smaller screens and `50vw` on larger):
+
+```typescript jsx
+<Image
+    src={image.url}
+    alt={image.alt}
+    width={image.width}
+    height={image.height}
+    priority={hasPriority}
+    sizes="(max-width: 64rem): 100vw, 50vw"
+/>
+```
+
+This will generate all the `srcset` accordingly so that the browser downloads the version that the closely matches the current viewport:
+
+```html
+<img  alt="" src="/_next/image?url=public/hero.png&amp;w=3840"
+    sizes="(max-width: 64rem): 100vw, 50vw"
+    srcset="
+        /_next/image?url=public/hero.png&amp;w=384 384w,
+        /_next/image?url=public/hero.png&amp;w=640 640w,
+        /_next/image?url=public/hero.png&amp;w=750 750w,
+        /_next/image?url=public/hero.png&amp;w=828 828w,
+        /_next/image?url=public/hero.png&amp;w=1080 1080w,
+        /_next/image?url=public/hero.png&amp;w=1200 1200w,
+        /_next/image?url=public/hero.png&amp;w=1920 1920w,
+        /_next/image?url=public/hero.png&amp;w=2048 2048w,
+        /_next/image?url=public/hero.png&amp;w=3840 3840w
+    "
+/>
+```
+
+This output is based on [deviceSizes config](https://nextjs.org/docs/app/api-reference/components/image#devicesizes) that you can also adjust to your own needs. For example, you might want to narrow down the list of possible viewports if your app is very image-heavy to simply save on the amount of HTML generated:
+
+```typescript
+deviceSizes: [430, 828, 1200, 2048, 3840]
+```
+
+At the end it's quite critical to monitor LCP and preloads in Lighthouse and check if it's possible to adjust the `priority` if you see that lazy loading:
+
+- does not occur on images below-the-fold
+- or it does occur for images above-the-fold
 
 ## Conclusion
 
