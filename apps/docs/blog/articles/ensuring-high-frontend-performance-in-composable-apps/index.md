@@ -309,7 +309,7 @@ This approach ensures that API requests are automatically memoized when used in 
 
 ### Image optimization
 
-Images are often the largest assets on a page, so getting them right has an outsized impact on LCP, CLS, and bandwidth. Next.js provides powerful, safe-by-default primitives through [Image component](https://nextjs.org/docs/pages/api-reference/components/image) that we use across blocks, with a few conventions to keep things fast and stable.
+Images are often the largest assets on a page, so getting them right has an outsized impact on LCP, CLS, and bandwidth. Next.js provides powerful, safe-by-default primitives through [Image component](https://nextjs.org/docs/app/api-reference/components/image) that we use across blocks, with a few conventions to keep things fast and stable.
 
 We always provide `width`/`height` or `fill` to prevent layout shift and enable responsive sizing and lazy loading. Our `Image` component wraps `next/image` and only falls back to a plain `<img>` when dimensions are missing (prefer providing dimensions whenever possible). This is alongside with a default `quality=90` that is high enough to not be noticable, but still has a noticeable impact on image weight:
 
@@ -335,7 +335,7 @@ export const Image: React.FC<ImageProps> = ({ src, alt = '', width, height, qual
 };
 ```
 
-Next.js by default [lazy loads images](https://nextjs.org/docs/pages/api-reference/components/image#priority), which is great if they are below-the-fold but should be manually disabled for images that are within the initial viewport, like a hero image. We compute `hasPriority` only for blocks above the fold and pass it down to images within:
+Next.js by default [lazy loads images](https://nextjs.org/docs/app/api-reference/components/image#priority), which is great if they are below-the-fold but should be manually disabled for images that are within the initial viewport, like a hero image. We compute `hasPriority` only for blocks above the fold and pass it down to images within:
 
 ```typescript jsx
 export const renderBlocks = async (blocks) => {
@@ -360,7 +360,7 @@ This is one of the risks that come from page content being fully dependent on CM
 
 Nevertheless, this flag flows into other nested components and ultimately the Image component itself, which also sets the browser `fetchPriority` accordingly, as shown earlier.
 
-A good way to save on bandwith is to set the [sizes prop](https://nextjs.org/docs/pages/api-reference/components/image#sizes) that matches your CSS breakpoints so the browser downloads the smallest correct candidate.
+A good way to save on bandwidth is to set the [sizes prop](https://nextjs.org/docs/app/api-reference/components/image#sizes) that matches your CSS breakpoints so the browser downloads the smallest correct candidate.
 
 For example, for a Hero component with an image that on desktop is always no larger than 50% of the viewport and on mobile is always full width:
 
