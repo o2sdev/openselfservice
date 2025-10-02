@@ -1,18 +1,20 @@
 ---
-slug: ensuring-high-frontend-performance-in-composable-apps
+slug: ensuring-high-frontend-performance-in-composable-nextjs-apps
 title: 'Ensuring high Frontend performance in composable Next.js apps'
-date: 2025-10-03
+date: 2025-10-06
 tags: [tech, performance]
 authors: [marcin.krasowski]
 toc_max_heading_level: 3
 hide_table_of_contents: false
 ---
 
-# Ensuring high Frontend performance in composable apps
+# Ensuring high Frontend performance in composable Next.js apps
 
 In today's web development landscape, composable architectures are gaining popularity for their flexibility and scalability. However, this approach introduces unique performance challenges. This article explores strategies and best practices for ensuring high frontend performance in composable applications, using Open Self Service as a practical example.
 
 ![lighthouse score.png](lighthouse-2.png)
+
+<!--truncate-->
 
 ## Understanding composable architecture
 
