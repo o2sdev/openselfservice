@@ -21,7 +21,7 @@ In today's web development landscape, composable architectures are gaining popul
 
 Open Self Service is a new framework for building enterprise-grade frontend solutions.
 
-Our aim is to create an open-source set of tools that would allow building not only storefronts but different client-facing frontends, with the main focus on customer self-service apps. We want to be backend-agnostic and to some extent eliminate vendor lock-in, so that the frontends you build are safe from backend changes or upgrades. Composable architecture helps us to achieve all of this, so we need to introduce it before I show you how we deal with the performance challenges we faced.
+Our aim is to create an open-source set of tools that would allow building not only storefronts but different client-facing frontends, with the main focus on customer self-service apps. We want to be backend-agnostic and to some extent eliminate vendor lock-in, so that the frontends you build are safe from backend changes or upgrades. Composable architecture helps us to achieve all of this, so we need to introduce it before we show you how we deal with the performance challenges we faced.
 
 ## Understanding composable architecture
 
@@ -35,7 +35,7 @@ At its core, composable architecture is characterized by:
 - **API-first approach**: components communicate through well-defined APIs, allowing for flexibility in implementation details
 - **Decoupled systems**: frontend and backend systems are separated, enabling each to evolve independently without affecting the other
 
-Composable frontends provide significant advantages: flexibility to replace components without disruption, scalability of specific parts based on demand, adaptability to changing requirements, and freedom from vendor lock-in through multi-backend integration.
+Composable frontends provide significant advantages: flexibility to replace backend components without disruption, freedom from vendor lock-in through multi-backend integration, and adaptability to changing requirements with the ability to scale specific parts based on business demands.
 
 ### The separation of concerns
 
@@ -51,7 +51,7 @@ This approach ensures backend service changes don't require frontend code modifi
 
 ## Performance strategies
 
-Now that we understand the architectural foundation, let's explore the specific performance strategies that make composable applications fast and responsive. These techniques leverage the modular nature of our blocks system to deliver optimal user experiences.
+Now that we understand the architectural foundation, let's explore the specific performance strategies that make composable applications fast and responsive. These techniques leverage the modular nature of our [blocks system](https://www.openselfservice.com/docs/main-components/blocks/) to deliver optimal user experiences.
 
 ### Leveraging server components
 
@@ -359,7 +359,7 @@ export const renderBlocks = async (blocks) => {
 };
 ```
 
-Keep in mind that this "predictive algorithm", if it can be called that, is very basic and is prone to being wrong as it does not predict how large the components are. Which means that there can be situations where the third component on the page is still visible, if the first two erer quite small.
+Keep in mind that this "predictive algorithm", if it can be called that, is very basic and is prone to being wrong as it does not predict how large the components are. Which means that there can be situations where the third component on the page is still visible, if the first two are quite small.
 
 This is one of the risks that come from page content being fully dependent on CMS configuration - the code cannot always predict every situation. A better, more foolproof solution would be to define the priority directly in the CMS, where app admins know how the component looks and if it is positioned above-the-fold or not - an improvement that we have in plans for the future.
 
