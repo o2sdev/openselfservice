@@ -1,6 +1,6 @@
 ---
 slug: ensuring-high-frontend-performance-in-composable-nextjs-apps
-title: 'Ensuring high Frontend performance in composable Next.js apps'
+title: 'Ensuring high frontend performance in composable Next.js apps'
 date: 2025-10-06
 tags: [tech, performance]
 authors: [marcin.krasowski]
@@ -8,7 +8,7 @@ toc_max_heading_level: 3
 hide_table_of_contents: false
 ---
 
-# Ensuring high Frontend performance in composable Next.js apps
+# Ensuring high frontend performance in composable Next.js apps
 
 In today's web development landscape, composable architectures are gaining popularity for their flexibility and scalability. However, this approach introduces unique performance challenges. This article explores strategies and best practices for ensuring high frontend performance in composable applications, using Open Self Service as a practical example.
 
@@ -16,17 +16,21 @@ In today's web development landscape, composable architectures are gaining popul
 
 <!--truncate-->
 
+Open Self Service is a new framework for building enterprise-grade frontend solutions.
+
+Our aim is to create an open-source set of tools that would allow building not only storefronts but different client-facing frontends, with the main focus on customer self-service apps. We want to be backend-agnostic and to some extent eliminate vendor lock-in, so that the frontends you build are safe from backend changes or upgrades. Composable architecture helps us to achieve all of this, so we need to introduce it before I show you how we deal with the performance challenges we faced.
+
 ## Understanding composable architecture
 
 ### What is a composable architecture?
 
-Composable architecture is an approach to building applications by assembling modular, independent components that work together to create a complete solution. In the context of Open Self Service, it's a framework that enables the integration of multiple API-based services to provide a seamless user experience.
+Composable architecture is an approach to building applications by assembling modular, independent components that work together to create a complete solution - not only in the context of frontend, but across the whole system architecture, and especially backend components. In the context of Open Self Service, we implemented this architecture as a framework that enables the integration of multiple API-based services to provide a seamless user experience.
 
 At its core, composable architecture is characterized by:
 
-- **Modularity**: Applications are built from discrete, interchangeable components that can be developed, deployed, and scaled independently.
-- **API-first approach**: Components communicate through well-defined APIs, allowing for flexibility in implementation details.
-- **Decoupled systems**: Frontend and backend systems are separated, enabling each to evolve independently without affecting the other.
+- **Modularity**: applications are built from discrete, interchangeable components that can be developed, deployed, and scaled independently
+- **API-first approach**: components communicate through well-defined APIs, allowing for flexibility in implementation details
+- **Decoupled systems**: frontend and backend systems are separated, enabling each to evolve independently without affecting the other
 
 Composable frontends provide significant advantages: flexibility to replace components without disruption, scalability of specific parts based on demand, adaptability to changing requirements, and freedom from vendor lock-in through multi-backend integration.
 
@@ -42,13 +46,9 @@ In building Open Self Service, we chose to implement a clear separation of conce
 
 This approach ensures backend service changes don't require frontend code modifications, reducing maintenance overhead and increasing flexibility.
 
-### Component-based design
-
-Our implementation uses a "blocks" system of independent, reusable components that encapsulate specific functionality and connect to the API composition layer. This approach enables parallel data fetching, HTML streaming, and component-specific optimizations through Next.js server components.
-
-The result is improved maintainability and performance with granular optimizations for responsive user experiences. What is more, it allows fully composing the page content via configuration (e.g. through a headless CMS like Strapi or Contentful) without having to implement new page types directly in the source code.
-
 ## Performance strategies
+
+Now that we understand the architectural foundation, let's explore the specific performance strategies that make composable applications fast and responsive. These techniques leverage the modular nature of our blocks system to deliver optimal user experiences.
 
 ### Leveraging server components
 
@@ -193,7 +193,7 @@ export const PaymentsHistoryClient = ({ title, chartData }) => {
 };
 ```
 
-In this example, the chart component (which depends on the [recharts library](https://recharts.org/)) is dynamically imported only when needed (in other words, when that block is rendered on the Frontend). Chart libraries are typically large and would significantly increase the initial bundle size, and typically not every page in the app will contain a chart component - so there's no point in preloading a resource-heavy library before it's actually necessary.
+In this example, the chart component (which depends on the [recharts library](https://recharts.org/)) is dynamically imported only when needed (in other words, when that block is rendered on the frontend). Chart libraries are typically large and would significantly increase the initial bundle size, and typically not every page in the app will contain a chart component - so there's no point in preloading a resource-heavy library before it's actually necessary.
 
 ### API composition layer
 
@@ -218,7 +218,7 @@ export class OrderDetailsService {
         // Fetch data from both sources simultaneously
         return forkJoin([cms, order]).pipe(
             map((order) => {
-                // Transform and combine data for the Frontend app
+                // Transform and combine data for the frontend app
                 return mapOrderDetails(cms, order);
             }),
         );
@@ -230,7 +230,7 @@ This approach provides several benefits for the overall performance. Firstly, th
 
 Instead of making multiple API calls directly from the browser (e.g. for client-sed user actions like fitlering or form submissions), the composition layer handles the communication with backend services, which reduces latency and bandwidth usage. The composition layer can fetch data from multiple sources in parallel using, for example, RxJS observables, optimizing the overall response time
 
-Additionally, raw data from various backend services is transformed into a consistent format, which does not necessarily improve performance itself but allows the Frontend to be implemented in an API-agnostic way.
+Additionally, raw data from various backend services is transformed into a consistent format, which does not necessarily improve performance itself but allows the frontend to be implemented in an API-agnostic way.
 
 ### API-level caching
 
@@ -244,7 +244,7 @@ In our framework, blocks don't need to implement caching logic themselves; they 
 
 Next.js 13 and later versions introduced an important performance optimization feature: automatic request memoization. It ensures that identical data fetching requests within the same render pass are actually called only once, significantly reducing unnecessary network calls and improving performance.
 
-This is especially important for composable apps where the Frontend does not define every page, instead relying on a CMS configuration. In such cases, there will be, for example, two identical requests needed for a single page render: one to [generate metadata](https://nextjs.org/docs/app/getting-started/metadata-and-og-images#generated-metadata) and the second to actually render page body:
+This is especially important for composable apps where the frontend does not define every page, instead relying on a CMS configuration. In such cases, there will be, for example, two identical requests needed for a single page render: one to [generate metadata](https://nextjs.org/docs/app/getting-started/metadata-and-og-images#generated-metadata) and the second to actually render page body:
 
 ```typescript jsx
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -417,7 +417,11 @@ Building high-performance composable frontends requires addressing challenges ac
 
 These strategies deliver real benefits: faster page loads, smoother interactions, and responsive applications even under challenging network conditions. For developers, the composable approach improves maintainability, simplifies testing, and allows independent evolution of different application parts.
 
-The Open Self Service framework demonstrates these principles in practice, providing a foundation for building performant composable applications that scale with business needs while delivering exceptional user experiences.
+As shown in the Lighthouse performance audit below, these optimizations result in excellent scores across all Core Web Vitals and performance metrics:
+
+![lighthouse score](lighthouse-1.png)
+
+The Open Self Service framework demonstrates these principles in practice, providing a foundation for building performant composable applications that scale with business needs while delivering exceptional user experiences. This approach is particularly effective in enterprise environments where complex integration requirements, high traffic, and demanding performance standards are common. Open Self Service delivers outstanding results by enabling organizations to build fast, maintainable frontends that seamlessly integrate with multiple backend systems while achieving superior performance metrics.
 
 Want to see it in action?
 
