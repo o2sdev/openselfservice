@@ -1,6 +1,9 @@
 ---
 slug: ensuring-high-frontend-performance-in-composable-nextjs-apps
-title: 'Ensuring high frontend performance in composable Next.js apps'
+title: Ensuring high frontend performance in composable Next.js apps
+description: Learn proven strategies for optimizing frontend performance in composable Next.js applications. Discover server components, streaming, caching, and Core Web Vitals optimization techniques for enterprise-grade apps.
+image: ./lighthouse-2.png
+keywords: ['Next.js performance', 'composable architecture', 'frontend optimization', 'server components', 'Core Web Vitals', 'Lighthouse', 'React Suspense', 'streaming', 'performance optimization', 'enterprise frontend', 'API composition', 'caching strategies', 'image optimization', 'bundle splitting', 'FCP', 'LCP', 'CLS', 'TBT']
 date: 2025-10-06
 tags: [tech, performance]
 authors: [marcin.krasowski]
@@ -12,7 +15,7 @@ hide_table_of_contents: false
 
 In today's web development landscape, composable architectures are gaining popularity for their flexibility and scalability. However, this approach introduces unique performance challenges. This article explores strategies and best practices for ensuring high frontend performance in composable applications, using Open Self Service as a practical example.
 
-![lighthouse score.png](lighthouse-2.png)
+![lighthouse score.png](./lighthouse-2.png)
 
 <!--truncate-->
 
@@ -419,7 +422,7 @@ These strategies deliver real benefits: faster page loads, smoother interactions
 
 As shown in the Lighthouse performance audit below, these optimizations result in excellent scores across all Core Web Vitals and performance metrics:
 
-![lighthouse score](lighthouse-1.png)
+![lighthouse score](./lighthouse-1.png)
 
 The Open Self Service framework demonstrates these principles in practice, providing a foundation for building performant composable applications that scale with business needs while delivering exceptional user experiences. This approach is particularly effective in enterprise environments where complex integration requirements, high traffic, and demanding performance standards are common. Open Self Service delivers outstanding results by enabling organizations to build fast, maintainable frontends that seamlessly integrate with multiple backend systems while achieving superior performance metrics.
 
