@@ -13,7 +13,7 @@ hide_table_of_contents: false
 
 # Ensuring high frontend performance in composable Next.js apps
 
-In today's web development landscape, composable architectures are gaining popularity for their flexibility and scalability. However, this approach introduces unique performance challenges. This article explores strategies and best practices for ensuring high frontend performance in composable applications, using Open Self Service as a practical example.
+In today's web development landscape, composable architectures are gaining popularity for their flexibility and scalability. However, this approach introduces unique performance challenges. In this article, we will explore strategies and best practices for ensuring high frontend performance in composable applications, using [**Open Self Service**](https://www.openselfservice.com/) as a practical example.
 
 ![lighthouse score.png](./lighthouse-2.png)
 
@@ -27,27 +27,27 @@ Our aim is to create an open-source set of tools that would allow building not o
 
 ### What is a composable architecture?
 
-Composable architecture is an approach to building applications by assembling modular, independent components that work together to create a complete solution - not only in the context of frontend, but across the whole system architecture, and especially backend components. In the context of Open Self Service, we implemented this architecture as a framework that enables the integration of multiple API-based services to provide a seamless user experience.
+In a nutshell, composable architecture is an approach to building applications by assembling modular, independent components that work together to create a complete solution - not only in the context of frontend, but across the whole system architecture, especially backend components. In the context of Open Self Service, we implemented this architecture in the form of a framework that enables the integration of multiple API-based services to provide a seamless user experience.
 
-At its core, composable architecture is characterized by:
+At its core, a few principles characterize composable architecture:
 
-- **Modularity**: applications are built from discrete, interchangeable components that can be developed, deployed, and scaled independently
-- **API-first approach**: components communicate through well-defined APIs, allowing for flexibility in implementation details
-- **Decoupled systems**: frontend and backend systems are separated, enabling each to evolve independently without affecting the other
+- applications are built from discrete, **interchangeable components** that can be developed, deployed, and scaled independently,
+- components communicate through **well-defined APIs** allowing for a wide flexibility in implementation details,
+- **decoupled systems** (like frontend and backend components), which allows for each to evolve independently without affecting the other.
 
-Composable frontends provide significant advantages: flexibility to replace backend components without disruption, freedom from vendor lock-in through multi-backend integration, and adaptability to changing requirements with the ability to scale specific parts based on business demands.
+Composable frontends provide significant advantages - you can be quite flexible in replacing backend components without disruption, are free from vendor lock-in through multi-backend integration, and are able to adapt to changing requirements with the ability to scale specific parts based on business demands.
 
 ### The separation of concerns
 
 In building Open Self Service, we chose to implement a clear separation of concerns between different layers of the application. While there are multiple ways to achieve composable architecture, our approach focuses on:
 
-- We completely **separated the presentation layer from the data and business logic layers**. This allows each to evolve independently and enables the frontend to work seamlessly with multiple backend services.
+- complete **separation of the presentation layer from the data and business logic layers**, which allows each to evolve independently and enables the frontend to work seamlessly with multiple backend services
 
-- Our implementation introduces an intermediate **API composition layer** that acts as a bridge between the frontend and various backend APIs. This layer aggregates data from multiple sources and orchestrates data flows between systems. It efficiently combines static content with dynamic data while handling complex logic server-side, reducing browser processing overhead.
+- introduction of an intermediate **API composition layer** that acts as a bridge between the frontend and various backend APIs. This layer aggregates data from multiple sources and orchestrates data flows between systems. It efficiently combines static content with dynamic data while handling complex logic server-side, reducing browser processing overhead
 
 ![high level architecture](./high-level-architecture.svg)
 
-This approach ensures backend service changes don't require frontend code modifications, reducing maintenance overhead and increasing flexibility.
+This kind of approach ensures backend service changes don't require frontend code modifications (as long as that backend API is still backwards compatible), reducing maintenance overhead and increasing the overall flexibility.
 
 ## Performance strategies
 
@@ -131,7 +131,7 @@ When users enter this page, they will be able to:
 - see meaningful loading states while data is being fetched
 - partly interact with the app (e.g. use the main navigation) even before the main content is fully ready
 
-And once the initial HTML is prepared server-side, it is immediately streamed to the browser, which can be seen on the following (artificially slowed-down so that loading states are actually visible) video:
+And once the initial HTML is prepared server-side, it is immediately streamed to the browser, which can be seen on the following (artificially slowed-down so that loading states are actually visible) video showing a single block:
 
 ![single block loading progress](./single-block-loading.gif)
 
@@ -173,7 +173,7 @@ So to sum up - this pattern eliminates the "waterfall" effect where one componen
 
 ### Component-level dynamic imports
 
-Beyond block-level code splitting, we implement finer-grained dynamic imports for heavy components within blocks. This is particularly beneficial, e.g., for data visualization components that rely on large third-party libraries:
+Beyond block-level code splitting, we use dynamic imports for heavy components within blocks. This is particularly beneficial, e.g., for data visualization components that rely on large third-party libraries:
 
 ```typescript
 'use client';
@@ -231,7 +231,7 @@ export class OrderDetailsService {
 
 This approach provides several benefits for the overall performance. Firstly, the composition layer combines data from multiple backend services into a single, optimized response that is specifically tailored for each block - returning only the information that block needs and nothing else, which eliminates overfetching.
 
-Instead of making multiple API calls directly from the browser (e.g. for client-sed user actions like fitlering or form submissions), the composition layer handles the communication with backend services, which reduces latency and bandwidth usage. The composition layer can fetch data from multiple sources in parallel using, for example, RxJS observables, optimizing the overall response time
+Instead of making multiple API calls directly from the browser (e.g. for user actions like filtering or form submissions), the composition layer handles the communication with backend services, which reduces latency and bandwidth usage. The composition layer can fetch data from multiple sources in parallel using, for example, [RxJS observables](https://rxjs.dev/), optimizing the overall response time
 
 Additionally, raw data from various backend services is transformed into a consistent format, which does not necessarily improve performance itself but allows the frontend to be implemented in an API-agnostic way.
 
@@ -416,15 +416,15 @@ At the end it's quite critical to monitor LCP and preloads in Lighthouse and che
 
 ## Conclusion
 
-Building high-performance composable frontends requires addressing challenges across multiple architectural levels. The approach described in this article combines modular architecture with Next.js server components for efficient rendering, strategic Suspense boundaries for progressive loading, and an API composition layer that optimizes data flow. We enhance performance through Redis-based caching, request memoization, and component-level dynamic imports for resource optimization.
+Building high-performance composable frontends requires addressing challenges across multiple architectural levels. The approach we've described combines modular architecture with Next.js server components for efficient rendering, strategic Suspense boundaries for progressive loading, and an API composition layer that optimizes data flow. We further enhance performance through caching, request memoization, and component-level dynamic imports.
 
 These strategies deliver real benefits: faster page loads, smoother interactions, and responsive applications even under challenging network conditions. For developers, the composable approach improves maintainability, simplifies testing, and allows independent evolution of different application parts.
 
-As shown in the Lighthouse performance audit below, these optimizations result in excellent scores across all Core Web Vitals and performance metrics:
+As shown in the Lighthouse performance audits, these optimizations result in excellent scores across all Core Web Vitals and performance metrics:
 
 ![lighthouse score](./lighthouse-1.png)
 
-The Open Self Service framework demonstrates these principles in practice, providing a foundation for building performant composable applications that scale with business needs while delivering exceptional user experiences. This approach is particularly effective in enterprise environments where complex integration requirements, high traffic, and demanding performance standards are common. Open Self Service delivers outstanding results by enabling organizations to build fast, maintainable frontends that seamlessly integrate with multiple backend systems while achieving superior performance metrics.
+The Open Self Service framework demonstrates this in practice, providing a foundation for building performant composable applications that scale with business needs while delivering exceptional user experiences. This approach is particularly effective in enterprise environments where complex integration requirements, high traffic, and demanding performance standards are common. Open Self Service delivers outstanding results by enabling organizations to build fast, maintainable frontends that seamlessly integrate with multiple backend systems while achieving superior performance metrics.
 
 Want to see it in action?
 
