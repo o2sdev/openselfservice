@@ -1,5 +1,11 @@
 # @o2s/modules.surveyjs
 
+## 0.2.1
+
+### Patch Changes
+
+- 1f735f9: corrected dependency
+
 ## 0.2.0
 
 ### Minor Changes
