@@ -1,5 +1,12 @@
 # @o2s/ui
 
+## 1.4.0
+
+### Minor Changes
+
+- 9ad8658: added support for prioritizing image rendering in order to disable lazyloading for images above the fold
+- 9ad8658: reduced JS bundle size by not moving to dynamic icon loading
+
 ## 1.3.2
 
 ### Patch Changes

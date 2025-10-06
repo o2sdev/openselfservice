@@ -1,5 +1,11 @@
 # @o2s/integrations.mocked
 
+## 1.12.0
+
+### Minor Changes
+
+- 9ad8658: made improvements to the way the code splitting to reduce the total size of JS bundles
+
 ## 1.11.3
 
 ### Patch Changes
