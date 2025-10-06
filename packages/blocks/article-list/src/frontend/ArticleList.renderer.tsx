@@ -6,7 +6,7 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { ArticleList } from './ArticleList.server';
 import { ArticleListRendererProps } from './ArticleList.types';
 
-export const ArticleListRenderer: React.FC<ArticleListRendererProps> = ({ id, accessToken, routing }) => {
+export const ArticleListRenderer: React.FC<ArticleListRendererProps> = ({ id, accessToken, routing, hasPriority }) => {
     const locale = useLocale();
     return (
         <Suspense
@@ -33,7 +33,13 @@ export const ArticleListRenderer: React.FC<ArticleListRendererProps> = ({ id, ac
                 </div>
             }
         >
-            <ArticleList id={id} accessToken={accessToken} locale={locale} routing={routing} />
+            <ArticleList
+                id={id}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+                hasPriority={hasPriority}
+            />
         </Suspense>
     );
 };

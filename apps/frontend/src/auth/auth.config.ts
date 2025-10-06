@@ -3,9 +3,6 @@ import type { Account, DefaultSession, Profile } from '@auth/core/types';
 import { Session, User } from 'next-auth';
 import { AdapterUser } from 'next-auth/adapters';
 import { JWT } from 'next-auth/jwt';
-import { useSession } from 'next-auth/react';
-
-import { Models } from '@o2s/framework/modules';
 
 import * as Auth from '@o2s/integrations.mocked/auth';
 
@@ -42,10 +39,6 @@ export const Adapter = Auth.Adapter;
 export const Providers = Auth.Providers;
 
 export const onSignOut = Auth.signOut;
-
-export async function updateOrganization(session: ReturnType<typeof useSession>, customer: Models.Customer.Customer) {
-    return Auth.updateOrganization(session, customer);
-}
 
 export const jwtCallback = async (params: JwtCallbackParams): Promise<JWT | null> => {
     const getCustomer = async (id: string | undefined, accessToken: string) => {

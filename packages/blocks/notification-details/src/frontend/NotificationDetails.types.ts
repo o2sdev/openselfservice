@@ -8,6 +8,7 @@ export interface NotificationDetailsProps {
     accessToken?: string;
     locale: string;
     routing: ReturnType<typeof defineRouting>;
+    hasPriority?: boolean;
 }
 
 export type NotificationDetailsPureProps = NotificationDetailsProps & Model.NotificationDetailsBlock;

@@ -7,6 +7,7 @@ export interface FaqProps {
     accessToken?: string;
     locale: string;
     routing: ReturnType<typeof defineRouting>;
+    hasPriority?: boolean;
 }
 
 export type FaqPureProps = FaqProps & Model.FaqBlock;

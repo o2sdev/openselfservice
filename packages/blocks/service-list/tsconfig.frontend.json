@@ -16,6 +16,7 @@
         "src/api-harmonization/service-list.client.ts",
         "src/api-harmonization/service-list.model.ts",
         "src/api-harmonization/service-list.request.ts",
+        "src/api-harmonization/service-list.url.ts",
         "src/sdk"
     ]
 }

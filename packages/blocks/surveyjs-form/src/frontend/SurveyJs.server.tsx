@@ -7,7 +7,13 @@ import { SurveyJsFormProps } from './SurveyJs.types';
 
 export const SurveyJsDynamic = dynamic(() => import('./SurveyJs.client').then((module) => module.SurveyJsPure));
 
-export const SurveyJsServer: React.FC<SurveyJsFormProps> = async ({ id, accessToken, locale, routing }) => {
+export const SurveyJsServer: React.FC<SurveyJsFormProps> = async ({
+    id,
+    accessToken,
+    locale,
+    routing,
+    hasPriority,
+}) => {
     try {
         const data = await sdk.blocks.getSurveyjsBlock(
             {
@@ -17,7 +23,16 @@ export const SurveyJsServer: React.FC<SurveyJsFormProps> = async ({ id, accessTo
             accessToken,
         );
 
-        return <SurveyJsDynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />;
+        return (
+            <SurveyJsDynamic
+                {...data}
+                id={id}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+                hasPriority={hasPriority}
+            />
+        );
     } catch (_error) {
         return null;
     }

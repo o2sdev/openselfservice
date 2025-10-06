@@ -4,6 +4,7 @@ export interface PaymentsHistoryProps {
     id: string;
     accessToken?: string;
     locale: string;
+    hasPriority?: boolean;
 }
 
 export type PaymentsHistoryPureProps = PaymentsHistoryProps & Model.PaymentsHistoryBlock;

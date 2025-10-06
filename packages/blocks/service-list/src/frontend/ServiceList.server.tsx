@@ -9,7 +9,7 @@ export const ServiceListDynamic = dynamic(() =>
     import('./ServiceList.client').then((module) => module.ServiceListPure),
 );
 
-export const ServiceList: React.FC<ServiceListProps> = async ({ id, accessToken, locale, routing }) => {
+export const ServiceList: React.FC<ServiceListProps> = async ({ id, accessToken, locale, routing, hasPriority }) => {
     try {
         const data = await sdk.blocks.getServiceList(
             {
@@ -18,7 +18,16 @@ export const ServiceList: React.FC<ServiceListProps> = async ({ id, accessToken,
             { 'x-locale': locale },
             accessToken,
         );
-        return <ServiceListDynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />;
+        return (
+            <ServiceListDynamic
+                {...data}
+                id={id}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+                hasPriority={hasPriority}
+            />
+        );
     } catch (_error) {
         return null;
     }

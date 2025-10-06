@@ -1,4 +1,5 @@
 import { Modules } from '@o2s/api-harmonization';
+import { URL } from '@o2s/api-harmonization/modules/not-found-page/not-found-page.url';
 
 import { Models } from '@o2s/utils.api-harmonization';
 
@@ -6,7 +7,7 @@ import { Sdk } from '@o2s/framework/sdk';
 
 import { getApiHeaders } from '../../utils/api';
 
-const API_URL = Modules.NotFoundPage.URL;
+const API_URL = URL;
 
 export const notFoundPage = (sdk: Sdk) => ({
     modules: {

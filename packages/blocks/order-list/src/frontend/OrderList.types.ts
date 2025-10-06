@@ -7,6 +7,7 @@ export interface OrderListProps {
     accessToken?: string;
     locale: string;
     routing: ReturnType<typeof defineRouting>;
+    hasPriority?: boolean;
 }
 
 export interface OrderListRendererProps extends Omit<OrderListProps, ''> {

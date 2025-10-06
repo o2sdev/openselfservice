@@ -12,7 +12,7 @@ import { Typography } from '@o2s/ui/elements/typography';
 
 import { ArticlePureProps } from './Article.types';
 
-export const ArticlePure: React.FC<Readonly<ArticlePureProps>> = ({ ...component }) => {
+export const ArticlePure: React.FC<Readonly<ArticlePureProps>> = ({ hasPriority, ...component }) => {
     const {
         data: { author, createdAt, sections },
     } = component;
@@ -67,6 +67,8 @@ export const ArticlePure: React.FC<Readonly<ArticlePureProps>> = ({ ...component
                                                 width={section.image.width}
                                                 height={section.image.height}
                                                 className="w-full h-auto object-cover"
+                                                sizes="100vw"
+                                                priority={hasPriority}
                                             />
                                         </div>
                                         {section.caption && (

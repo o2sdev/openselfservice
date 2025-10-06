@@ -7,7 +7,7 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { QuickLinks } from './QuickLinks.server';
 import { QuickLinksRendererProps } from './QuickLinks.types';
 
-export const QuickLinksRenderer: React.FC<QuickLinksRendererProps> = ({ id, accessToken, routing }) => {
+export const QuickLinksRenderer: React.FC<QuickLinksRendererProps> = ({ id, accessToken, routing, hasPriority }) => {
     const locale = useLocale();
 
     return (
@@ -19,7 +19,7 @@ export const QuickLinksRenderer: React.FC<QuickLinksRendererProps> = ({ id, acce
                 </Container>
             }
         >
-            <QuickLinks id={id} accessToken={accessToken} locale={locale} routing={routing} />
+            <QuickLinks id={id} accessToken={accessToken} locale={locale} routing={routing} hasPriority={hasPriority} />
         </Suspense>
     );
 };

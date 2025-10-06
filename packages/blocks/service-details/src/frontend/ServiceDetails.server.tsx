@@ -15,6 +15,7 @@ export const ServiceDetails: React.FC<ServiceDetailsProps> = async ({
     accessToken,
     locale,
     routing,
+    hasPriority,
 }) => {
     try {
         const data = await sdk.blocks.getServiceDetails(
@@ -36,6 +37,7 @@ export const ServiceDetails: React.FC<ServiceDetailsProps> = async ({
                 accessToken={accessToken}
                 locale={locale}
                 routing={routing}
+                hasPriority={hasPriority}
             />
         );
     } catch (_error) {

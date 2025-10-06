@@ -13,3 +13,8 @@
 *.jpg             binary
 *.jpeg            binary
 *.png             binary
+*.gif             binary
+*.webp            binary
+
+# Videos
+*.mp4             binary

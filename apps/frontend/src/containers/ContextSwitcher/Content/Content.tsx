@@ -12,7 +12,7 @@ import { RadioGroup, RadioGroupItem } from '@o2s/ui/elements/radio-group';
 import { SheetDescription, SheetFooter, SheetHeader, SheetTitle } from '@o2s/ui/elements/sheet';
 import { Typography } from '@o2s/ui/elements/typography';
 
-import { updateOrganization } from '@/auth';
+import { updateOrganization } from '@/auth/auth.organizations';
 
 import { ContentProps, ContextSwitcherFormValues } from './Content.types';
 

@@ -8,6 +8,7 @@ export interface OrderDetailsProps {
     accessToken?: string;
     locale: string;
     routing: ReturnType<typeof defineRouting>;
+    hasPriority?: boolean;
 }
 
 export type OrderDetailsPureProps = OrderDetailsProps & Model.OrderDetailsBlock;

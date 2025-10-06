@@ -7,6 +7,7 @@ export interface ArticleListProps {
     accessToken?: string;
     locale: string;
     routing: ReturnType<typeof defineRouting>;
+    hasPriority?: boolean;
 }
 
 export type ArticleListPureProps = ArticleListProps & Model.ArticleListBlock;

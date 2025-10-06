@@ -3,7 +3,8 @@ import { Utils } from '@o2s/utils.frontend';
 
 import { Sdk } from '@o2s/framework/sdk';
 
-import { Model, Request, URL } from '../api-harmonization/order-list.client';
+import { Model, Request } from '../api-harmonization/order-list.client';
+import { URL } from '../api-harmonization/order-list.url';
 
 export const orderList = (sdk: Sdk) => ({
     blocks: {

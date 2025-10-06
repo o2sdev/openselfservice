@@ -16,6 +16,7 @@ import '@/styles/global.css';
 const inter = Inter({
     subsets: ['latin-ext'],
     display: 'swap',
+    variable: '--font-body',
 });
 
 interface Props {
@@ -39,7 +40,7 @@ export default async function RootLayout({ children, params }: Props) {
     const messages = await getMessages();
 
     return (
-        <html lang={locale} className={inter.className}>
+        <html lang={locale} className={`${inter.variable} antialiased`}>
             <head>
                 <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
                 <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />

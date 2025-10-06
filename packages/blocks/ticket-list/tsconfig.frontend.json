@@ -16,6 +16,7 @@
         "src/api-harmonization/ticket-list.client.ts",
         "src/api-harmonization/ticket-list.model.ts",
         "src/api-harmonization/ticket-list.request.ts",
+        "src/api-harmonization/ticket-list.url.ts",
         "src/sdk"
     ]
 }
