@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.article-search",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "private": false,
     "license": "MIT",
     "description": "Block for searching articles.",
