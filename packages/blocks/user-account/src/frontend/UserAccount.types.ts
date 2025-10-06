@@ -9,6 +9,7 @@ export interface UserAccountProps {
     routing: ReturnType<typeof defineRouting>;
     userId?: string;
     onSignOut: () => void;
+    hasPriority?: boolean;
 }
 
 export type UserAccountPureProps = UserAccountProps & Model.UserAccountBlock;

@@ -16,6 +16,7 @@
         "src/api-harmonization/surveyjs.client.ts",
         "src/api-harmonization/surveyjs.model.ts",
         "src/api-harmonization/surveyjs.request.ts",
+        "src/api-harmonization/surveyjs.url.ts",
         "src/sdk"
     ]
 }

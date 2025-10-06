@@ -8,6 +8,7 @@ export interface ArticleProps {
     accessToken?: string;
     locale: string;
     routing: ReturnType<typeof defineRouting>;
+    hasPriority?: boolean;
 }
 
 export type ArticlePureProps = ArticleProps & Model.ArticleBlock;

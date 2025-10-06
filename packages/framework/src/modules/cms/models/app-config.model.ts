@@ -1,3 +1,5 @@
+import { Media } from '@/utils/models';
+
 export class AppConfig {
     locales!: {
         value: string;
@@ -6,6 +8,16 @@ export class AppConfig {
     header?: string;
     footer?: string;
     labels!: Labels;
+    themes!: Themes;
+}
+
+export type Themes = {
+    [name: string]: Theme;
+};
+
+export class Theme {
+    name!: string;
+    logo?: Media.Media;
 }
 
 export class Labels {

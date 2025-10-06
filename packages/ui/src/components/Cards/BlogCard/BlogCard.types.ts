@@ -17,4 +17,5 @@ export interface BlogCardProps {
     author?: AuthorProps;
     categoryTitle?: string;
     LinkComponent: FrontendModels.Link.LinkComponent;
+    priority?: boolean;
 }

@@ -103,40 +103,56 @@ export default async function Page({ params }: Props) {
         if (!data || !meta) {
             notFound();
         }
+
+        let theme = '';
+        if (meta.theme) {
+            theme = `theme-${meta.theme}`;
+        }
+
         return (
-            <GlobalProvider config={init} labels={init.labels} locale={locale}>
-                <div className="flex flex-col min-h-dvh">
-                    <Header data={init.common.header} alternativeUrls={data.alternativeUrls} />
-                    <div className="flex flex-col grow">
-                        <div className="py-6 px-4 md:px-6 ml-auto mr-auto w-full md:max-w-7xl">
-                            <main className="flex flex-col gap-6 row-start-2 items-center sm:items-start">
-                                <div className="flex flex-col gap-6 w-full">
-                                    <Breadcrumbs
-                                        breadcrumbs={
-                                            rootBreadcrumb ? [rootBreadcrumb, ...data.breadcrumbs] : data.breadcrumbs
-                                        }
-                                        LinkComponent={Link}
-                                    />
-                                    {!data.hasOwnTitle && (
-                                        <>
-                                            <Typography variant="h1" asChild>
-                                                <h1>{meta.seo.title}</h1>
-                                            </Typography>
-                                            <Separator />
-                                        </>
-                                    )}
-                                </div>
+            <body className={theme}>
+                <GlobalProvider
+                    config={init}
+                    labels={init.labels}
+                    locale={locale}
+                    themes={init.themes}
+                    currentTheme={meta.theme}
+                >
+                    <div className="flex flex-col min-h-dvh">
+                        <Header data={init.common.header} alternativeUrls={data.alternativeUrls} />
+                        <div className="flex flex-col grow">
+                            <div className="py-6 px-4 md:px-6 ml-auto mr-auto w-full md:max-w-7xl">
+                                <main className="flex flex-col gap-6 row-start-2 items-center sm:items-start">
+                                    <div className="flex flex-col gap-6 w-full">
+                                        <Breadcrumbs
+                                            breadcrumbs={
+                                                rootBreadcrumb
+                                                    ? [rootBreadcrumb, ...data.breadcrumbs]
+                                                    : data.breadcrumbs
+                                            }
+                                            LinkComponent={Link}
+                                        />
+                                        {!data.hasOwnTitle && (
+                                            <>
+                                                <Typography variant="h1" asChild>
+                                                    <h1>{meta.seo.title}</h1>
+                                                </Typography>
+                                                <Separator />
+                                            </>
+                                        )}
+                                    </div>
 
-                                <PageTemplate slug={slug} data={data} />
-                            </main>
+                                    <PageTemplate slug={slug} data={data} />
+                                </main>
+                            </div>
                         </div>
-                    </div>
-                    <Footer data={init.common.footer} />
+                        <Footer data={init.common.footer} />
 
-                    <Toaster />
-                    <AppSpinner />
-                </div>
-            </GlobalProvider>
+                        <Toaster />
+                        <AppSpinner />
+                    </div>
+                </GlobalProvider>
+            </body>
         );
     } catch (error) {
         if (

@@ -1,5 +1,70 @@
 # @o2s/frontend
 
+## 1.10.0
+
+### Minor Changes
+
+- 9ad8658: added support for prioritizing image rendering in order to disable lazyloading for images above the fold
+- 9ad8658: made improvements to the way the code splitting to reduce the total size of JS bundles
+- 9ad8658: reduced JS bundle size by not moving to dynamic icon loading
+
+### Patch Changes
+
+- Updated dependencies [9ad8658]
+- Updated dependencies [9ad8658]
+- Updated dependencies [9ad8658]
+    - @o2s/blocks.featured-service-list@1.1.0
+    - @o2s/blocks.notification-details@1.1.0
+    - @o2s/blocks.notification-list@1.1.0
+    - @o2s/blocks.payments-history@1.1.0
+    - @o2s/blocks.payments-summary@1.1.0
+    - @o2s/blocks.service-details@1.1.0
+    - @o2s/blocks.article-search@1.1.0
+    - @o2s/blocks.orders-summary@1.1.0
+    - @o2s/blocks.ticket-details@1.1.0
+    - @o2s/blocks.category-list@1.1.0
+    - @o2s/blocks.order-details@1.1.0
+    - @o2s/blocks.surveyjs-form@1.1.0
+    - @o2s/blocks.ticket-recent@1.1.0
+    - @o2s/blocks.article-list@1.1.0
+    - @o2s/blocks.invoice-list@1.1.0
+    - @o2s/blocks.service-list@1.1.0
+    - @o2s/blocks.user-account@1.1.0
+    - @o2s/blocks.quick-links@1.1.0
+    - @o2s/blocks.ticket-list@1.1.0
+    - @o2s/blocks.order-list@1.1.0
+    - @o2s/blocks.category@1.1.0
+    - @o2s/blocks.article@1.1.0
+    - @o2s/blocks.faq@1.1.0
+    - @o2s/ui@1.4.0
+    - @o2s/integrations.mocked@1.12.0
+    - @o2s/api-harmonization@1.10.0
+
+## 1.9.2
+
+### Patch Changes
+
+- 5f25529: added an option to set a page-based themes via CMS config
+- 5f25529: added stories for UI components
+- Updated dependencies [5f25529]
+- Updated dependencies [5f25529]
+    - @o2s/api-harmonization@1.9.3
+    - @o2s/framework@1.11.1
+    - @o2s/blocks.category-list@1.0.1
+    - @o2s/integrations.mocked@1.11.2
+    - @o2s/blocks.quick-links@1.0.1
+    - @o2s/ui@1.3.1
+
+## 1.9.1
+
+### Patch Changes
+
+- d9a9500: fixed `start` script to properly handle standalone output
+- Updated dependencies [d9a9500]
+- Updated dependencies [9c62515]
+    - @o2s/api-harmonization@1.9.2
+    - @o2s/integrations.mocked@1.11.1
+
 ## 1.9.0
 
 ### Minor Changes

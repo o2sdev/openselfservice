@@ -1,5 +1,75 @@
 # @o2s/api-harmonization
 
+## 1.10.0
+
+### Minor Changes
+
+- 9ad8658: made improvements to the way the code splitting to reduce the total size of JS bundles
+
+### Patch Changes
+
+- Updated dependencies [9ad8658]
+- Updated dependencies [9ad8658]
+    - @o2s/blocks.featured-service-list@1.1.0
+    - @o2s/blocks.notification-details@1.1.0
+    - @o2s/blocks.notification-list@1.1.0
+    - @o2s/blocks.payments-history@1.1.0
+    - @o2s/blocks.payments-summary@1.1.0
+    - @o2s/blocks.service-details@1.1.0
+    - @o2s/blocks.article-search@1.1.0
+    - @o2s/blocks.orders-summary@1.1.0
+    - @o2s/blocks.ticket-details@1.1.0
+    - @o2s/blocks.category-list@1.1.0
+    - @o2s/blocks.order-details@1.1.0
+    - @o2s/blocks.surveyjs-form@1.1.0
+    - @o2s/blocks.ticket-recent@1.1.0
+    - @o2s/blocks.article-list@1.1.0
+    - @o2s/blocks.invoice-list@1.1.0
+    - @o2s/blocks.service-list@1.1.0
+    - @o2s/blocks.user-account@1.1.0
+    - @o2s/blocks.quick-links@1.1.0
+    - @o2s/blocks.ticket-list@1.1.0
+    - @o2s/blocks.order-list@1.1.0
+    - @o2s/blocks.category@1.1.0
+    - @o2s/blocks.article@1.1.0
+    - @o2s/blocks.faq@1.1.0
+    - @o2s/integrations.mocked@1.12.0
+    - @o2s/modules.surveyjs@0.2.0
+
+## 1.9.4
+
+### Patch Changes
+
+- 4a42e9c: improvements for knowledge base blocks and layouts
+- Updated dependencies [4a42e9c]
+    - @o2s/blocks.article-search@1.0.1
+    - @o2s/blocks.article-list@1.0.1
+    - @o2s/integrations.mocked@1.11.3
+    - @o2s/blocks.category@1.0.1
+    - @o2s/blocks.article@1.0.1
+    - @o2s/framework@1.11.2
+
+## 1.9.3
+
+### Patch Changes
+
+- 5f25529: added an option to set a page-based themes via CMS config
+- 5f25529: added stories for UI components
+- Updated dependencies [5f25529]
+- Updated dependencies [5f25529]
+    - @o2s/framework@1.11.1
+    - @o2s/blocks.category-list@1.0.1
+    - @o2s/integrations.mocked@1.11.2
+    - @o2s/blocks.quick-links@1.0.1
+
+## 1.9.2
+
+### Patch Changes
+
+- d9a9500: fixed incorrect path to dist file after prod build
+- Updated dependencies [9c62515]
+    - @o2s/integrations.mocked@1.11.1
+
 ## 1.9.1
 
 ### Patch Changes

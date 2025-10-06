@@ -7,6 +7,7 @@ export interface FeaturedServiceListProps {
     locale: string;
     accessToken?: string;
     routing: ReturnType<typeof defineRouting>;
+    hasPriority?: boolean;
 }
 
 export type FeaturedServiceListPureProps = FeaturedServiceListProps & Model.FeaturedServiceListBlock;

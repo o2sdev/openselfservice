@@ -7,6 +7,7 @@ export interface CategoryListProps {
     accessToken?: string;
     locale: string;
     routing: ReturnType<typeof defineRouting>;
+    hasPriority?: boolean;
 }
 
 export type CategoryListPureProps = CategoryListProps & Model.CategoryListBlock;

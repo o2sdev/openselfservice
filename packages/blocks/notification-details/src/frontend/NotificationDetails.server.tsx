@@ -15,6 +15,7 @@ export const NotificationDetails: React.FC<NotificationDetailsProps> = async ({
     accessToken,
     locale,
     routing,
+    hasPriority,
 }) => {
     try {
         const data = await sdk.blocks.getNotificationDetails(
@@ -36,6 +37,7 @@ export const NotificationDetails: React.FC<NotificationDetailsProps> = async ({
                 accessToken={accessToken}
                 locale={locale}
                 routing={routing}
+                hasPriority={hasPriority}
             />
         );
     } catch (_error) {

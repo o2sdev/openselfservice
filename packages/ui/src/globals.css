@@ -12,7 +12,7 @@
 
 @theme inline {
     --font-*: initial;
-    --font-sans: Inter, sans-serif;
+    --font-sans: var(--font-body), sans-serif;
 
     --color-border: var(--border);
     --color-input: var(--input);
@@ -182,6 +182,7 @@
     * {
         @apply border-border;
     }
+
     body {
         @apply font-sans antialiased bg-background text-foreground;
     }
@@ -191,6 +192,7 @@
     * {
         @apply border-border outline-ring/50;
     }
+
     body {
         @apply bg-background text-foreground;
     }

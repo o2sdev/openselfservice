@@ -29,6 +29,8 @@ import React from 'react';
 
 import { CMS } from '@o2s/framework/modules';
 
+import { Container } from '@o2s/ui/components/Container';
+
 import { auth } from '@/auth';
 
 // BLOCK IMPORT
@@ -36,74 +38,99 @@ import { routing } from '@/i18n';
 
 import { onSignOut } from '../actions/signOut';
 
+interface BlockProps {
+    id: string;
+    slug: string[];
+    locale: string;
+    accessToken: string | undefined;
+    userId: string | undefined;
+    routing: typeof routing;
+    hasPriority?: boolean;
+}
+
 export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: string[]) => {
     const session = await auth();
     const locale = await getLocale();
 
-    return blocks.map((block) => {
-        const blockProps = {
+    return blocks.map((block, index) => {
+        // decides whether the block is above the fold,
+        // e.g., to disable image lazy loading
+        const hasPriority = index < 2;
+
+        const blockProps: BlockProps = {
             id: block.id,
             slug: slug,
             locale: locale,
             accessToken: session?.accessToken,
+            userId: session?.user?.id,
             routing: routing,
+            hasPriority,
         };
 
-        switch (block.__typename as Modules.Page.Model.Blocks) {
-            case 'TicketListBlock':
-                return <TicketList.Renderer key={block.id} {...blockProps} />;
-            case 'TicketRecentBlock':
-                return <TickeRecent.Renderer key={block.id} {...blockProps} />;
-            case 'TicketDetailsBlock':
-                return <TicketDetails.Renderer key={block.id} {...blockProps} />;
-            case 'NotificationListBlock':
-                return <NotificationList.Renderer key={block.id} {...blockProps} />;
-            case 'NotificationDetailsBlock':
-                return <NotificationDetails.Renderer key={block.id} {...blockProps} />;
-            case 'FaqBlock':
-                return <Faq.Renderer key={block.id} {...blockProps} />;
-            case 'InvoiceListBlock':
-                return <InvoiceList.Renderer key={block.id} {...blockProps} />;
-            case 'PaymentsSummaryBlock':
-                return <PaymentsSummary.Renderer key={block.id} {...blockProps} />;
-            case 'PaymentsHistoryBlock':
-                return <PaymentsHistory.Renderer key={block.id} {...blockProps} />;
-            case 'UserAccountBlock':
-                return (
-                    <UserAccount.Renderer
-                        key={block.id}
-                        {...blockProps}
-                        userId={session?.user?.id}
-                        onSignOut={onSignOut}
-                    />
-                );
-            case 'ServiceListBlock':
-                return <ServiceList.Renderer key={block.id} {...blockProps} />;
-            case 'ServiceDetailsBlock':
-                return <ServiceDetails.Renderer key={block.id} {...blockProps} />;
-            case 'SurveyJsBlock':
-                return <SurveyJsForm.Renderer key={block.id} {...blockProps} />;
-            case 'OrderListBlock':
-                return <OrderList.Renderer key={block.id} {...blockProps} />;
-            case 'OrdersSummaryBlock':
-                return <OrdersSummary.Renderer key={block.id} {...blockProps} />;
-            case 'OrderDetailsBlock':
-                return <OrderDetails.Renderer key={block.id} {...blockProps} />;
-            case 'QuickLinksBlock':
-                return <QuickLinks.Renderer key={block.id} {...blockProps} />;
-            case 'CategoryListBlock':
-                return <CategoryList.Renderer key={block.id} {...blockProps} />;
-            case 'ArticleListBlock':
-                return <ArticleList.Renderer key={block.id} {...blockProps} />;
-            case 'CategoryBlock':
-                return <Category.Renderer key={block.id} {...blockProps} renderBlocks={renderBlocks} />;
-            case 'ArticleBlock':
-                return <Article.Renderer key={block.id} {...blockProps} />;
-            case 'ArticleSearchBlock':
-                return <ArticleSearch.Renderer key={block.id} {...blockProps} />;
-            case 'FeaturedServiceListBlock':
-                return <FeaturedServiceList.Renderer key={block.id} {...blockProps} />;
-            // BLOCK REGISTER
-        }
+        return (
+            <Container
+                variant={block.layout?.variant}
+                spacing={block.layout?.spacing}
+                background={block.layout?.background}
+                theme={block.layout?.theme}
+                key={block.id}
+            >
+                {renderBlock(block.__typename, blockProps)}
+            </Container>
+        );
     });
+};
+
+const renderBlock = (typename: string, blockProps: BlockProps) => {
+    switch (typename as Modules.Page.Model.Blocks) {
+        case 'TicketListBlock':
+            return <TicketList.Renderer {...blockProps} />;
+        case 'TicketRecentBlock':
+            return <TickeRecent.Renderer {...blockProps} />;
+        case 'TicketDetailsBlock':
+            return <TicketDetails.Renderer {...blockProps} />;
+        case 'NotificationListBlock':
+            return <NotificationList.Renderer {...blockProps} />;
+        case 'NotificationDetailsBlock':
+            return <NotificationDetails.Renderer {...blockProps} />;
+        case 'FaqBlock':
+            return <Faq.Renderer {...blockProps} />;
+        case 'InvoiceListBlock':
+            return <InvoiceList.Renderer {...blockProps} />;
+        case 'PaymentsSummaryBlock':
+            return <PaymentsSummary.Renderer {...blockProps} />;
+        case 'PaymentsHistoryBlock':
+            return <PaymentsHistory.Renderer {...blockProps} />;
+        case 'UserAccountBlock':
+            return <UserAccount.Renderer {...blockProps} onSignOut={onSignOut} />;
+        case 'ServiceListBlock':
+            return <ServiceList.Renderer {...blockProps} />;
+        case 'ServiceDetailsBlock':
+            return <ServiceDetails.Renderer {...blockProps} />;
+        case 'SurveyJsBlock':
+            return <SurveyJsForm.Renderer {...blockProps} />;
+        case 'OrderListBlock':
+            return <OrderList.Renderer {...blockProps} />;
+        case 'OrdersSummaryBlock':
+            return <OrdersSummary.Renderer {...blockProps} />;
+        case 'OrderDetailsBlock':
+            return <OrderDetails.Renderer {...blockProps} />;
+        case 'QuickLinksBlock':
+            return <QuickLinks.Renderer {...blockProps} />;
+        case 'CategoryListBlock':
+            return <CategoryList.Renderer {...blockProps} />;
+        case 'ArticleListBlock':
+            return <ArticleList.Renderer {...blockProps} />;
+        case 'CategoryBlock':
+            return <Category.Renderer {...blockProps} renderBlocks={renderBlocks} />;
+        case 'ArticleBlock':
+            return <Article.Renderer {...blockProps} />;
+        case 'ArticleSearchBlock':
+            return <ArticleSearch.Renderer {...blockProps} />;
+        case 'FeaturedServiceListBlock':
+            return <FeaturedServiceList.Renderer {...blockProps} />;
+        // BLOCK REGISTER
+        default:
+            return null;
+    }
 };

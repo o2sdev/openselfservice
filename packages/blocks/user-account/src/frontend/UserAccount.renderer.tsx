@@ -13,6 +13,7 @@ export const UserAccountRenderer: React.FC<UserAccountRendererProps> = ({
     routing,
     userId,
     onSignOut,
+    hasPriority,
 }) => {
     const locale = useLocale();
 
@@ -36,6 +37,7 @@ export const UserAccountRenderer: React.FC<UserAccountRendererProps> = ({
                 routing={routing}
                 userId={userId}
                 onSignOut={onSignOut}
+                hasPriority={hasPriority}
             />
         </Suspense>
     );

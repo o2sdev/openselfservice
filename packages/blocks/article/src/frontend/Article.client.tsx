@@ -12,20 +12,25 @@ import { Typography } from '@o2s/ui/elements/typography';
 
 import { ArticlePureProps } from './Article.types';
 
-export const ArticlePure: React.FC<Readonly<ArticlePureProps>> = ({ ...component }) => {
+export const ArticlePure: React.FC<Readonly<ArticlePureProps>> = ({ hasPriority, ...component }) => {
     const {
         data: { author, createdAt, sections },
     } = component;
     return (
         <div className="w-full flex flex-col gap-6">
-            <div className="flex flex-col gap-2">
-                <Typography variant="h1" asChild>
-                    <h1>{component.data.title}</h1>
-                </Typography>
-                {author && <Author name={author.name} avatar={author.avatar?.url} position={author.position} />}
-                <Typography variant="p">{createdAt}</Typography>
-            </div>
-            <Separator />
+            <Container variant="wide" spacing="none">
+                <div className="flex flex-col gap-2">
+                    <Typography variant="h1" asChild>
+                        <h1>{component.data.title}</h1>
+                    </Typography>
+                    {author && <Author name={author.name} avatar={author.avatar?.url} position={author.position} />}
+                    <Typography variant="p">{createdAt}</Typography>
+                </div>
+            </Container>
+
+            <Container variant="wide" spacing="none">
+                <Separator />
+            </Container>
 
             <Container variant="narrow">
                 <ul className="flex flex-col gap-20">
@@ -62,6 +67,8 @@ export const ArticlePure: React.FC<Readonly<ArticlePureProps>> = ({ ...component
                                                 width={section.image.width}
                                                 height={section.image.height}
                                                 className="w-full h-auto object-cover"
+                                                sizes="100vw"
+                                                priority={hasPriority}
                                             />
                                         </div>
                                         {section.caption && (

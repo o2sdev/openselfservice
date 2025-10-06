@@ -1,0 +1,23 @@
+@use '../main.module';
+
+/* --------------------------
+   Contact Page
+   -------------------------- */
+.contactContainer {
+    overflow: hidden;
+    min-height: 400px;
+    max-width: 100%;
+    flex: 1 0 auto;
+}
+
+.text-highlighted {
+    color: var(--color-highlighted, #21d99a);
+}
+
+.font-extrabold {
+    font-weight: 800;
+}
+
+body:not(.navigation-with-keyboard) *:not(input):focus {
+    outline-width: 2px;
+}

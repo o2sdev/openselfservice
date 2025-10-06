@@ -3,6 +3,8 @@
 import { useSession } from 'next-auth/react';
 import React from 'react';
 
+import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
+
 import { Image } from '@o2s/ui/components/Image';
 
 import { Link } from '@o2s/ui/elements/link';
@@ -22,13 +24,19 @@ export const Header: React.FC<HeaderProps> = ({ data, alternativeUrls, children 
     const session = useSession();
     const isSignedIn = !!session.data?.user;
 
+    const { themes } = useGlobalContext();
+
+    let logo = data.logo;
+
+    if (themes.current) {
+        logo = themes.available[themes.current]?.logo;
+    }
+
     const LogoSlot = (
         <Link asChild>
             {/*TODO: get label from API*/}
             <NextLink href="/" aria-label={'go to home'}>
-                {data.logo?.url && (
-                    <Image src={data.logo.url} alt={data.logo.alt} width={data.logo.width} height={data.logo.height} />
-                )}
+                {logo?.url && <Image src={logo.url} alt={logo.alt} width={logo.width} height={logo.height} />}
             </NextLink>
         </Link>
     );

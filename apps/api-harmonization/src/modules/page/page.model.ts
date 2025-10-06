@@ -31,9 +31,12 @@ export class Init {
     }[];
     common!: PageCommon;
     labels!: Labels;
+    themes!: Themes;
 }
 
 export type Labels = CMS.Model.AppConfig.Labels;
+export type Themes = CMS.Model.AppConfig.Themes;
+
 export class Page {
     data?: PageData;
     meta!: Metadata;
@@ -46,6 +49,7 @@ export class NotFound {
 export class Metadata {
     seo!: Models.SEO.Page;
     locales!: string[];
+    theme?: string;
 }
 
 export class Breadcrumb {

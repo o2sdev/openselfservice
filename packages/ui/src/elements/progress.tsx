@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
-interface ProgressProps extends React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root> {
+export interface ProgressProps extends React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root> {
     orientation?: 'horizontal' | 'vertical';
 }
 

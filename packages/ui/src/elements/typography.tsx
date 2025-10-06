@@ -7,13 +7,14 @@ import { cn } from '@o2s/ui/lib/utils';
 const typographyVariants = cva('', {
     variants: {
         variant: {
-            h1: 'scroll-m-20 text-2xl md:text-3xl font-bold tracking-tight',
-            h2: 'scroll-m-20 text-lg md:text-2xl font-semibold tracking-tight',
-            h3: 'scroll-m-20 text-base md:text-xl font-semibold tracking-tight',
-            h4: 'scroll-m-20 text-base md:text-lg font-semibold tracking-tight',
-            highlightedBig: 'text-3xl/12 md:text-4xl/[54px] font-semibold tracking-tight',
-            highlightedSmall: 'text-base md:text-xl/8 font-semibold tracking-tight',
-            subtitle: 'scroll-m-20 text-sm md:text-base font-semibold tracking-tight',
+            h1: 'scroll-m-20 text-2xl md:text-3xl font-bold',
+            h2: 'scroll-m-20 text-lg md:text-2xl font-semibold',
+            h3: 'scroll-m-20 text-base md:text-xl font-semibold',
+            h4: 'scroll-m-20 text-base md:text-lg font-semibold',
+            highlightedBig: 'text-3xl/12 md:text-4xl/[54px] font-semibold',
+            highlightedMedium: 'text-2xl/12 md:text-4xl/[48px] font-bold',
+            highlightedSmall: 'text-base md:text-xl/8 font-semibold',
+            subtitle: 'scroll-m-20 text-sm md:text-base font-semibold',
             small: 'text-sm',
             body: 'text-sm md:text-base',
             large: 'text-lg',

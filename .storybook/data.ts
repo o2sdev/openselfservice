@@ -208,3 +208,17 @@ export const globalProviderLabels: GlobalProviderProps['labels'] = {
         details: 'Details',
     },
 };
+
+export const globalProviderThemes: GlobalProviderProps['themes'] = {
+    default: {
+        name: 'default',
+        logo: {
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/logo.svg',
+            alt: 'Logo',
+            width: 92,
+            height: 24,
+        },
+    },
+};
+
+export const globalProviderCurrentTheme: GlobalProviderProps['currentTheme'] = 'default';

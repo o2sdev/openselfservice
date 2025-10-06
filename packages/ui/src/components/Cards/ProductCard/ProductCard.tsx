@@ -79,7 +79,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                         {action}
 
                         {link && (
-                            <Link asChild variant="primaryButton">
+                            <Link asChild variant="primary" size="default">
                                 <LinkComponent href={link.url}>{link.label}</LinkComponent>
                             </Link>
                         )}

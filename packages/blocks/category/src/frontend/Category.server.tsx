@@ -8,7 +8,15 @@ import { CategoryBlocks } from './CategoryBlocks';
 
 export const CategoryDynamic = dynamic(() => import('./Category.client').then((module) => module.CategoryPure));
 
-export const Category: React.FC<CategoryProps> = async ({ id, slug, accessToken, locale, routing, renderBlocks }) => {
+export const Category: React.FC<CategoryProps> = async ({
+    id,
+    slug,
+    accessToken,
+    locale,
+    routing,
+    renderBlocks,
+    hasPriority,
+}) => {
     try {
         const data = await sdk.blocks.getCategory(
             {
@@ -28,6 +36,7 @@ export const Category: React.FC<CategoryProps> = async ({ id, slug, accessToken,
                 routing={routing}
                 blocks={<CategoryBlocks renderBlocks={renderBlocks} components={data.components} slug={slug} />}
                 renderBlocks={renderBlocks}
+                hasPriority={hasPriority}
             />
         );
     } catch (_error) {

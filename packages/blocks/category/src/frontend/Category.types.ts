@@ -11,6 +11,7 @@ export interface CategoryProps {
     accessToken?: string;
     locale: string;
     routing: ReturnType<typeof defineRouting>;
+    hasPriority?: boolean;
     renderBlocks: (blocks: CMS.Model.Page.SlotBlock[], slug: string[]) => React.ReactNode;
 }
 

@@ -7,6 +7,7 @@ export interface ServiceListProps {
     accessToken?: string;
     locale: string;
     routing: ReturnType<typeof defineRouting>;
+    hasPriority?: boolean;
 }
 
 export type ServiceListPureProps = ServiceListProps & Model.ServiceListBlock;

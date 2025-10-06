@@ -7,6 +7,7 @@ export interface SurveyJsFormProps {
     accessToken?: string;
     locale: string;
     routing: ReturnType<typeof defineRouting>;
+    hasPriority?: boolean;
 }
 
 export type SurveyJsFormPureProps = SurveyJsFormProps & Model.SurveyjsBlock;

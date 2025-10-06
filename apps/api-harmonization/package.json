@@ -1,20 +1,20 @@
 {
     "name": "@o2s/api-harmonization",
-    "version": "1.9.1",
+    "version": "1.10.0",
     "description": "",
     "author": "",
     "private": true,
     "license": "MIT",
     "exports": {
         ".": "./src/index.ts",
-        "./blocks": "./src/blocks/index.ts",
-        "./modules": "./src/modules/index.ts"
+        "./blocks/*": "./src/blocks/*.ts",
+        "./modules/*": "./src/modules/*.ts"
     },
     "scripts": {
         "dev": "cross-env NODE_ENV=development nest start --watch",
         "debug": "nest start --debug --watch",
         "build": "nest build",
-        "start": "node dist/src/main",
+        "start": "node dist/main",
         "lint": "tsc --noEmit && eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
         "format": "prettier --write \"src/**/*.ts\"",
         "generate:component": "turbo gen api-component"
@@ -66,7 +66,6 @@
         "reflect-metadata": "^0.2.2",
         "rxjs": "^7.8.2",
         "string-template": "^1.0.0",
-        "survey-core": "^2.0.9",
         "winston": "^3.17.0",
         "xmlbuilder2": "^3.1.1"
     },

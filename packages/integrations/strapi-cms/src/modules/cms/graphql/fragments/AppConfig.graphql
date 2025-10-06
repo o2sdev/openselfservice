@@ -6,4 +6,10 @@ fragment AppConfig on AppConfig {
     footer: signedInFooter {
         documentId
     }
+    themes {
+        name
+        logo {
+            ...Media
+        }
+    }
 }

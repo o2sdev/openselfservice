@@ -1,5 +1,28 @@
 # @o2s/blocks.category-list
 
+## 1.1.0
+
+### Minor Changes
+
+- 9ad8658: added support for prioritizing image rendering in order to disable lazyloading for images above the fold
+- 9ad8658: made improvements to the way the code splitting to reduce the total size of JS bundles
+
+### Patch Changes
+
+- Updated dependencies [9ad8658]
+- Updated dependencies [9ad8658]
+  - @o2s/ui@1.4.0
+
+## 1.0.1
+
+### Patch Changes
+
+- 5f25529: added stories for UI components
+- Updated dependencies [5f25529]
+- Updated dependencies [5f25529]
+  - @o2s/framework@1.11.1
+  - @o2s/ui@1.3.1
+
 ## 1.0.0
 
 ### Major Changes

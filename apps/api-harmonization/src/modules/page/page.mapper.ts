@@ -32,6 +32,7 @@ export const mapPage = (
                 noFollow: page.seo.noFollow,
             },
             locales,
+            theme: page.theme,
         },
         data: {
             alternativeUrls,
@@ -57,6 +58,7 @@ export const mapArticle = (
                 noFollow: false,
             },
             locales: [mainLocale],
+            theme: article.theme,
         },
         data: {
             alternativeUrls: {},
@@ -66,6 +68,11 @@ export const mapArticle = (
                     main: [
                         {
                             __typename: 'ArticleBlock',
+                            layout: {
+                                variant: 'full',
+                                spacing: 'none',
+                                background: 'none',
+                            },
                             ...article,
                         },
                     ],
@@ -137,6 +144,7 @@ export const mapInit = (
     header: CMS.Model.Header.Header,
     footer: CMS.Model.Footer.Footer,
     labels: CMS.Model.AppConfig.Labels,
+    themes: CMS.Model.AppConfig.Themes,
     roles: Auth.Constants.Roles[],
 ): Init => {
     return {
@@ -172,5 +180,6 @@ export const mapInit = (
             },
         },
         labels,
+        themes,
     };
 };

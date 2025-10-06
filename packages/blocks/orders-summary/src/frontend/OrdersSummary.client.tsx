@@ -2,12 +2,12 @@
 
 import dayjs from 'dayjs';
 import { useLocale } from 'next-intl';
+import dynamic from 'next/dynamic';
 import React, { useState, useTransition } from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
 import { InfoCard } from '@o2s/ui/components/Cards/InfoCard';
-import { DoubleLineChart } from '@o2s/ui/components/Chart/DoubleLineChart';
 import { Price } from '@o2s/ui/components/Price';
 
 import { Card } from '@o2s/ui/elements/card';
@@ -19,6 +19,11 @@ import { Model, Request } from '../api-harmonization/orders-summary.client';
 import { sdk } from '../sdk';
 
 import { OrdersSummaryPureProps } from './OrdersSummary.types';
+
+const DoubleLineChart = dynamic(
+    () => import('@o2s/ui/components/Chart/DoubleLineChart').then((module) => module.DoubleLineChart),
+    {},
+);
 
 const Trend: React.FC<Readonly<{ value?: number }>> = ({ value }) => {
     const locale = useLocale();

@@ -1,6 +1,6 @@
 import NextAuth, { NextAuthResult } from 'next-auth';
 
-import { Adapter, DefaultAuthProvider, jwtCallback, sessionCallback, updateOrganization } from './auth.config';
+import { Adapter, DefaultAuthProvider, jwtCallback, sessionCallback } from './auth.config';
 import { providers } from './auth.providers';
 
 export const nextAuthResult = NextAuth({
@@ -36,4 +36,3 @@ export const nextAuthResult = NextAuth({
 
 export const { handlers, signIn, signOut } = nextAuthResult;
 export const auth: NextAuthResult['auth'] = nextAuthResult.auth;
-export { updateOrganization };

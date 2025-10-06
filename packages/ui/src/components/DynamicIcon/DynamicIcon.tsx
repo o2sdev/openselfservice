@@ -1,28 +1,38 @@
-import * as Icons from 'lucide-react';
+import { IconName, DynamicIcon as LucideDynamicIcon, dynamicIconImports } from 'lucide-react/dynamic';
 import React from 'react';
 
 import { DynamicIconProps } from './DynamicIcon.types';
 
-export const DynamicIcon: React.FC<DynamicIconProps> = ({ name, size = 24, color = 'currentColor', className }) => {
-    const Icon = Icons[name as keyof typeof Icons] as React.ComponentType<{
-        width?: number;
-        height?: number;
-        color?: string;
-        className?: string;
-        style?: React.CSSProperties;
-    }>;
+const toKebabCase = (str: string) => str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
 
-    if (!Icon) {
+export const DynamicIcon: React.FC<DynamicIconProps> = ({
+    name,
+    size = 24,
+    color = 'currentColor',
+    className,
+    strokeWidth = 2,
+}) => {
+    const iconName = toKebabCase(name) as IconName;
+
+    if (!(iconName in dynamicIconImports)) {
         return null;
     }
 
     return (
-        <Icon
-            width={size}
-            height={size}
-            color={color}
-            className={className}
-            style={{ minWidth: size, minHeight: size }}
-        />
+        <span
+            style={{
+                width: size,
+                height: size,
+                display: 'inline-flex',
+            }}
+        >
+            <LucideDynamicIcon
+                name={iconName}
+                size={size}
+                color={color}
+                className={className}
+                strokeWidth={strokeWidth}
+            />
+        </span>
     );
 };

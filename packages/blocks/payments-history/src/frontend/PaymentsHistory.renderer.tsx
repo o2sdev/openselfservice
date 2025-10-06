@@ -8,14 +8,15 @@ import { PaymentsHistory } from './PaymentsHistory.server';
 export interface PaymentsHistoryRendererProps {
     id: string;
     accessToken?: string;
+    hasPriority?: boolean;
 }
 
-export const PaymentsHistoryRenderer: React.FC<PaymentsHistoryRendererProps> = ({ id, accessToken }) => {
+export const PaymentsHistoryRenderer: React.FC<PaymentsHistoryRendererProps> = ({ id, accessToken, hasPriority }) => {
     const locale = useLocale();
 
     return (
         <Suspense key={id} fallback={<Loading bars={10} />}>
-            <PaymentsHistory id={id} accessToken={accessToken} locale={locale} />
+            <PaymentsHistory id={id} accessToken={accessToken} locale={locale} hasPriority={hasPriority} />
         </Suspense>
     );
 };

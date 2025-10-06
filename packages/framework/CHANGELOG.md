@@ -1,5 +1,18 @@
 # @o2s/framework
 
+## 1.11.2
+
+### Patch Changes
+
+- 4a42e9c: improvements for knowledge base blocks and layouts
+
+## 1.11.1
+
+### Patch Changes
+
+- 5f25529: added an option to set a page-based themes via CMS config
+- 5f25529: added stories for UI components
+
 ## 1.11.0
 
 ### Minor Changes

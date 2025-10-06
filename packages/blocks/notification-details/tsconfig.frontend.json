@@ -13,6 +13,7 @@
     },
     "include": [
         "src/frontend",
+        "src/api-harmonization/notification-details.url.ts",
         "src/api-harmonization/notification-details.client.ts",
         "src/api-harmonization/notification-details.model.ts",
         "src/api-harmonization/notification-details.request.ts",

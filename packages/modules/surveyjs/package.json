@@ -1,6 +1,6 @@
 {
     "name": "@o2s/modules.surveyjs",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "private": false,
     "license": "MIT",
     "description": "A module that handles fetching, rendering ans submitting SurveyJS-based forms.",
@@ -35,6 +35,8 @@
         "concurrently": "^9.1.2",
         "eslint": "^9.27.0",
         "prettier": "^3.5.3",
+        "survey-core": "^2.0.9",
+        "survey-react-ui": "^2.0.9",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.8.3"
     },

@@ -9,7 +9,13 @@ export const ArticleSearchDynamic = dynamic(() =>
     import('./ArticleSearch.client').then((module) => module.ArticleSearchPure),
 );
 
-export const ArticleSearch: React.FC<ArticleSearchProps> = async ({ id, accessToken, locale, routing }) => {
+export const ArticleSearch: React.FC<ArticleSearchProps> = async ({
+    id,
+    accessToken,
+    locale,
+    routing,
+    hasPriority,
+}) => {
     try {
         const data = await sdk.blocks.getArticleSearch(
             {
@@ -18,7 +24,16 @@ export const ArticleSearch: React.FC<ArticleSearchProps> = async ({ id, accessTo
             { 'x-locale': locale },
             accessToken,
         );
-        return <ArticleSearchDynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />;
+        return (
+            <ArticleSearchDynamic
+                {...data}
+                id={id}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+                hasPriority={hasPriority}
+            />
+        );
     } catch (_error) {
         return null;
     }

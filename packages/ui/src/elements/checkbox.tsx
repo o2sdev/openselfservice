@@ -25,7 +25,7 @@ const Checkbox = React.forwardRef<
 ));
 Checkbox.displayName = CheckboxPrimitive.Root.displayName;
 
-interface CheckboxWithLabelProps extends React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> {
+export interface CheckboxWithLabelProps extends React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> {
     label: string | React.ReactNode;
     labelClassName?: string;
 }

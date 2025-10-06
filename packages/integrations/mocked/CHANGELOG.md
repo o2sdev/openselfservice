@@ -1,5 +1,34 @@
 # @o2s/integrations.mocked
 
+## 1.12.0
+
+### Minor Changes
+
+- 9ad8658: made improvements to the way the code splitting to reduce the total size of JS bundles
+
+## 1.11.3
+
+### Patch Changes
+
+- 4a42e9c: improvements for knowledge base blocks and layouts
+- Updated dependencies [4a42e9c]
+    - @o2s/framework@1.11.2
+
+## 1.11.2
+
+### Patch Changes
+
+- 5f25529: added stories for UI components
+- Updated dependencies [5f25529]
+- Updated dependencies [5f25529]
+    - @o2s/framework@1.11.1
+
+## 1.11.1
+
+### Patch Changes
+
+- 9c62515: removed Polish characters from mocked URLs for servivces
+
 ## 1.11.0
 
 ### Minor Changes

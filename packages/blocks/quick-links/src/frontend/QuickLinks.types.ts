@@ -7,6 +7,7 @@ export interface QuickLinksProps {
     accessToken?: string;
     locale: string;
     routing: ReturnType<typeof defineRouting>;
+    hasPriority?: boolean;
 }
 
 export type QuickLinksPureProps = QuickLinksProps & Model.QuickLinksBlock;

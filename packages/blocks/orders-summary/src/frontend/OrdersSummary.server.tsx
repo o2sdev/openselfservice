@@ -11,7 +11,13 @@ export const OrdersSummaryDynamic = dynamic(() =>
     import('./OrdersSummary.client').then((module) => module.OrdersSummaryPure),
 );
 
-export const OrdersSummary: React.FC<OrdersSummaryProps> = async ({ id, accessToken, locale, routing }) => {
+export const OrdersSummary: React.FC<OrdersSummaryProps> = async ({
+    id,
+    accessToken,
+    locale,
+    routing,
+    hasPriority,
+}) => {
     try {
         const data = await sdk.blocks.getOrdersSummary(
             {
@@ -24,7 +30,16 @@ export const OrdersSummary: React.FC<OrdersSummaryProps> = async ({ id, accessTo
             accessToken,
         );
 
-        return <OrdersSummaryDynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />;
+        return (
+            <OrdersSummaryDynamic
+                {...data}
+                id={id}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+                hasPriority={hasPriority}
+            />
+        );
     } catch (_error) {
         console.error(_error);
         return null;

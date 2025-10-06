@@ -12,6 +12,7 @@
     },
     "include": [
         "src/sdk",
+        "src/api-harmonization/payments-summary.url.ts",
         "src/api-harmonization/payments-summary.client.ts",
         "src/api-harmonization/payments-summary.model.ts",
         "src/api-harmonization/payments-summary.request.ts"

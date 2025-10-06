@@ -7,7 +7,7 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { SurveyJsServer } from './SurveyJs.server';
 import { SurveyJsFormRendererProps } from './SurveyJs.types';
 
-export const SurveyJsRenderer: React.FC<SurveyJsFormRendererProps> = ({ id, accessToken, routing }) => {
+export const SurveyJsRenderer: React.FC<SurveyJsFormRendererProps> = ({ id, accessToken, routing, hasPriority }) => {
     const locale = useLocale();
 
     return (
@@ -22,7 +22,13 @@ export const SurveyJsRenderer: React.FC<SurveyJsFormRendererProps> = ({ id, acce
                 </>
             }
         >
-            <SurveyJsServer id={id} accessToken={accessToken} locale={locale} routing={routing} />
+            <SurveyJsServer
+                id={id}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+                hasPriority={hasPriority}
+            />
         </Suspense>
     );
 };

@@ -9,7 +9,7 @@ export const PaymentsHistoryDynamic = dynamic(() =>
     import('./PaymentsHistory.client').then((module) => module.PaymentsHistoryPure),
 );
 
-export const PaymentsHistory: React.FC<PaymentsHistoryProps> = async ({ id, accessToken, locale }) => {
+export const PaymentsHistory: React.FC<PaymentsHistoryProps> = async ({ id, accessToken, locale, hasPriority }) => {
     try {
         const data = await sdk.blocks.getPaymentsHistory(
             {
@@ -21,7 +21,15 @@ export const PaymentsHistory: React.FC<PaymentsHistoryProps> = async ({ id, acce
             accessToken,
         );
 
-        return <PaymentsHistoryDynamic {...data} id={id} accessToken={accessToken} locale={locale} />;
+        return (
+            <PaymentsHistoryDynamic
+                {...data}
+                id={id}
+                accessToken={accessToken}
+                locale={locale}
+                hasPriority={hasPriority}
+            />
+        );
     } catch (_error) {
         return null;
     }

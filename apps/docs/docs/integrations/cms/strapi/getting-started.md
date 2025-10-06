@@ -10,5 +10,5 @@ With this export, you receive a ready-to-use content model that mirrors O2S's st
 
 To start, go to our resource repository where you can find the instruction on how to import the content into your own Strapi instance. Depending on which starter you use, this is one of:
 
-- [**Open Self Service** resources](https://github.com/o2sdev/openselfservice-resources/tree/main/packages/cms/strapi)
-- [**DXP Starter Kit** resources](https://github.com/o2sdev/dxp-resources/tree/main/packages/cms/strapi)
+- [**Open Self Service** resources](https://github.com/o2sdev/openselfservice-resources/tree/main/packages/cms/strapi/o2s)
+- [**DXP Starter Kit** resources](https://github.com/o2sdev/openselfservice-resources/tree/main/packages/cms/strapi/dxp)

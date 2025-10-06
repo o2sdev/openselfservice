@@ -6,7 +6,7 @@ sidebar_position: 000
 
 The DXP Frontend Starter is designed for building knowledge bases, marketing portals, and Digital Experience Platforms (DXP) of any size.
 It provides a foundation for content-rich applications that can evolve into comprehensive digital experience solutions.
-It's features can be extended with Blocks or integrations O2S provides or your own.
+Its features can be extended with Blocks or integrations O2S provides or your own.
 
 ## Quick start
 
@@ -35,7 +35,7 @@ This command will:
 
 All Blocks that you can use are documented in our Storybook:
 - **[Blocks and content model](./blocks.md)** - Docs on our DXP Blocks and CMS content types
-- **[DXP Starter Storybook](http://storybook-o2s.openselfservice.com)** - Complete documentation of all our DXP Blocks in Storybook
+- **[DXP Starter Storybook](http://storybook-dxp.openselfservice.com)** - Complete documentation of all our DXP Blocks in Storybook
 
 
 ## Next steps

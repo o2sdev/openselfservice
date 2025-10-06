@@ -7,7 +7,13 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { FeaturedServiceList } from './FeaturedServiceList.server';
 import { FeaturedServiceListRendererProps } from './FeaturedServiceList.types';
 
-export const Renderer: React.FC<FeaturedServiceListRendererProps> = ({ id, accessToken, slug, routing }) => {
+export const Renderer: React.FC<FeaturedServiceListRendererProps> = ({
+    id,
+    accessToken,
+    slug,
+    routing,
+    hasPriority,
+}) => {
     const locale = useLocale();
 
     return (
@@ -19,7 +25,13 @@ export const Renderer: React.FC<FeaturedServiceListRendererProps> = ({ id, acces
                 </>
             }
         >
-            <FeaturedServiceList id={id} accessToken={accessToken} locale={locale} routing={routing} />
+            <FeaturedServiceList
+                id={id}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+                hasPriority={hasPriority}
+            />
         </Suspense>
     );
 };

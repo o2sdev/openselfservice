@@ -1,12 +1,13 @@
 {
     "name": "@o2s/integrations.mocked",
-    "version": "1.11.0",
+    "version": "1.12.0",
     "private": false,
     "license": "MIT",
     "exports": {
         "./integration": "./dist/integration.js",
         "./sdk": "./dist/sdk/index.js",
-        "./auth": "./dist/auth/index.js"
+        "./auth": "./dist/auth/index.js",
+        "./auth.updateOrganization": "./dist/auth/auth.updateOrganization.js"
     },
     "files": [
         "dist",

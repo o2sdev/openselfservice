@@ -5,7 +5,7 @@ const MOCK_ARTICLE_LIST_BLOCK_EN: CMS.Model.ArticleListBlock.ArticleListBlock = 
     title: 'Explore How-To Guides',
     description:
         'Discover step-by-step tutorials and helpful guides to get the most out of your products and solve common issues.',
-    categorySlug: 'warranty-and-repair',
+    categoryId: 'warranty-and-repair',
     articlesToShow: 4,
     parent: {
         slug: '/help-and-support',
@@ -22,7 +22,7 @@ const MOCK_ARTICLE_LIST_BLOCK_DE: CMS.Model.ArticleListBlock.ArticleListBlock = 
     title: 'Entdecke Anleitungen',
     description:
         'Entdecken Sie Schritt-für-Schritt-Anleitungen und hilfreiche Ratgeber, um das Beste aus Ihren Produkten herauszuholen und häufige Probleme zu lösen.',
-    categorySlug: 'warranty-and-repair',
+    categoryId: 'warranty-and-repair',
     articlesToShow: 4,
     parent: {
         slug: '/hilfe-und-support',
@@ -39,7 +39,7 @@ const MOCK_ARTICLE_LIST_BLOCK_PL: CMS.Model.ArticleListBlock.ArticleListBlock = 
     title: 'Przeglądaj poradniki',
     description:
         'Odkryj szczegółowe instrukcje i pomocne poradniki, aby w pełni wykorzystać możliwości swoich produktów i rozwiązać typowe problemy.',
-    categorySlug: 'warranty-and-repair',
+    categoryId: 'warranty-and-repair',
     articlesToShow: 4,
     parent: {
         slug: '/pomoc-i-wsparcie',
