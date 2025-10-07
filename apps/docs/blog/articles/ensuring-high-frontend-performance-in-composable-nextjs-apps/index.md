@@ -202,7 +202,7 @@ In this example, the chart component (which depends on the [recharts library](ht
 
 The API composition layer serves as a critical intermediary between frontend blocks and backend services. It can be implemented in a variety of different ways, but we chose to use [Nest.js](https://nestjs.com/) as a framework which fits in nicely in the whole TypeScript-based tech stack.
 
-As an example for what we can achieve using such architecture, let's look at the service that is responsible for the endpoint for fetching data for the `OrderDetails` block:
+As an example of what we can achieve using such architecture, let's look at the service that is responsible for the endpoint for fetching data for the `OrderDetails` block:
 
 ```typescript
 // Data aggregation from multiple sources
