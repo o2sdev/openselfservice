@@ -1,61 +1,8 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
     "extends": ["config:recommended"],
-    "packageRules": [
-        {
-            "commitMessageTopic": "Node.js",
-            "matchDatasources": ["docker", "node-version"],
-            "matchPackageNames": [
-                "/(?:^|/)node$/",
-                "!calico/node",
-                "!docker.io/calico/node",
-                "!ghcr.io/devcontainers/features/node",
-                "!kindest/node"
-            ]
-        },
-        {
-            "extends": ["monorepo:nextjs"],
-            "groupName": "nextjs monorepo",
-            "matchUpdateTypes": ["digest", "patch", "minor", "major"]
-        },
-        {
-            "extends": ["monorepo:nest"],
-            "groupName": "nest monorepo",
-            "matchUpdateTypes": ["digest", "patch", "minor", "major"]
-        },
-        {
-            "groupName": "react monorepo",
-            "matchPackageNames": ["@types/react", "@types/react-dom", "@types/react-is"]
-        },
-        {
-            "extends": ["monorepo:tailwindcss"],
-            "groupName": "tailwindcss monorepo",
-            "matchUpdateTypes": ["digest", "patch", "minor", "major"]
-        },
-        {
-            "extends": ["monorepo:eslint"],
-            "groupName": "eslint monorepo",
-            "matchUpdateTypes": ["digest", "patch", "minor", "major"]
-        },
-        {
-            "extends": ["monorepo:turbo"],
-            "groupName": "turbo monorepo",
-            "matchUpdateTypes": ["digest", "patch", "minor", "major"]
-        },
-        {
-            "extends": ["monorepo:radix-ui-primitives"],
-            "groupName": "radix-ui-primitives monorepo",
-            "matchUpdateTypes": ["digest", "patch", "minor", "major"]
-        },
-        {
-            "extends": ["monorepo:docusaurus"],
-            "groupName": "docusaurus monorepo",
-            "matchUpdateTypes": ["digest", "patch", "minor", "major"]
-        },
-        {
-            "extends": ["monorepo:storybook"],
-            "groupName": "storybook monorepo",
-            "matchUpdateTypes": ["digest", "patch", "minor", "major"]
-        }
-    ]
+    "vulnerabilityAlerts": {
+        "enabled": true
+    },
+    "osvVulnerabilityAlerts": true
 }
