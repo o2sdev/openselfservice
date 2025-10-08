@@ -54,6 +54,7 @@ import { configuration } from '@o2s/api-harmonization/config/configuration';
 import { AppConfig } from './app.config';
 import { AppService } from './app.service';
 import { ContextHeadersMiddleware } from './middleware/context-headers.middleware';
+import { HealthModule } from './modules/health/health.module';
 import { LoginPageModule } from './modules/login-page/login-page.module';
 import { NotFoundPageModule } from './modules/not-found-page/not-found-page.module';
 import { OrganizationsModule } from './modules/organizations/organizations.module';
@@ -85,6 +86,7 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
             ignoreEnvFile: process.env.NODE_ENV !== 'development',
             envFilePath: `.env.local`,
         }),
+        HealthModule,
 
         CMSBaseModule,
         TicketsBaseModule,
