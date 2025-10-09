@@ -18,7 +18,8 @@
         "release": "changeset publish",
         "update-deps": "npx npm-check-updates --format group --workspaces --interactive",
         "storybook": "storybook dev -p 6006",
-        "build-storybook": "npm run build && storybook build"
+        "build-storybook": "npm run build && storybook build",
+        "clean": "npm exec --workspaces -- npx rimraf node_modules dist .next .turbo && npx rimraf node_modules dist .next .turbo"
     },
     "engines": {
         "node": ">=22"

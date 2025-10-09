@@ -1,0 +1,16 @@
+name: Quality
+
+runs:
+    using: 'composite'
+    steps:
+        - name: Build
+          shell: bash
+          run: npm run build
+
+        - name: Lint
+          shell: bash
+          run: npm run lint
+
+        - name: Test
+          shell: bash
+          run: npm run test

@@ -10,10 +10,12 @@ permissions:
 env:
     TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
     TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+
 on:
     push:
         branches:
             - main
+
 jobs:
     pre_job:
         runs-on: ubuntu-latest
@@ -43,6 +45,10 @@ jobs:
               with:
                   repo-token: ${{ secrets.GITHUB_TOKEN }}
 
+            - name: Code Quality
+              uses: ./.github/actions/quality
+              timeout-minutes: 10
+
             - name: Creating .npmrc
               run: |
                   cat << EOF > "$HOME/.npmrc"
@@ -62,7 +68,6 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
 #            - name: Checkout code
 #              if: steps.changesets.outputs.published == 'true'
 #              uses: actions/checkout@v3
