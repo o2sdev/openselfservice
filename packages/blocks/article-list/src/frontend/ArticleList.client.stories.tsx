@@ -45,7 +45,7 @@ export const Default: Story = {
                     lead: 'Learn how to efficiently manage your PowerPro tools through our self-service portal available 24/7.',
                     tags: ['tag1', 'tag2'],
                     image: {
-                        url: 'https://raw.githubusercontent.com/dxpdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-thumb.jpg',
+                        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-thumb.jpg',
                         width: 640,
                         height: 427,
                         alt: '',
@@ -77,13 +77,13 @@ export const Default: Story = {
                     lead: 'Learn about our certification program ensuring your tools meet industry safety standards.',
                     tags: ['certification', 'safety', 'standards'],
                     image: {
-                        url: 'https://raw.githubusercontent.com/dxpdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-thumb.jpg',
+                        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-thumb.jpg',
                         width: 640,
                         height: 427,
                         alt: 'PowerPro certification program',
                     },
                     thumbnail: {
-                        url: 'https://raw.githubusercontent.com/dxpdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-thumb.jpg',
+                        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-managing-thumb.jpg',
                         alt: 'PowerPro certification program thumbnail',
                     },
                     category: {
@@ -109,13 +109,13 @@ export const Default: Story = {
                     lead: "Everything you need to know about PowerPro's warranty coverage for your professional tools.",
                     tags: ['warranty', 'coverage', 'terms'],
                     image: {
-                        url: 'https://raw.githubusercontent.com/dxpdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-maintenance-thumb.jpg',
+                        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-maintenance-thumb.jpg',
                         width: 640,
                         height: 427,
                         alt: 'PowerPro warranty coverage',
                     },
                     thumbnail: {
-                        url: 'https://raw.githubusercontent.com/dxpdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-maintenance-thumb.jpg',
+                        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-maintenance-thumb.jpg',
                         alt: 'PowerPro warranty coverage thumbnail',
                     },
                     category: {
@@ -141,13 +141,13 @@ export const Default: Story = {
                     lead: "Learn how regular maintenance can extend your tool's lifespan and prevent costly repairs.",
                     tags: ['maintenance', 'prevention', 'care'],
                     image: {
-                        url: 'https://raw.githubusercontent.com/dxpdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-thumb.jpg',
+                        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-thumb.jpg',
                         width: 640,
                         height: 427,
                         alt: 'Preventive maintenance of PowerPro tools',
                     },
                     thumbnail: {
-                        url: 'https://raw.githubusercontent.com/dxpdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-thumb.jpg',
+                        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/article-safety-thumb.jpg',
                         alt: 'Preventive maintenance thumbnail',
                     },
                     category: {
