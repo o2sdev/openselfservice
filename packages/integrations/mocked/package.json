@@ -39,7 +39,7 @@
         "@o2s/utils.logger": "*"
     },
     "devDependencies": {
-        "@types/jsonwebtoken": "^9.0.9",
+        "@types/jsonwebtoken": "^9.0.10",
         "@o2s/eslint-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
