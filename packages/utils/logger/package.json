@@ -33,7 +33,7 @@
         "eslint-config-prettier": "^10.1.5"
     },
     "peerDependencies": {
-        "@nestjs/axios": "^4",
+        "@nestjs/axios": "^4.0.1",
         "@nestjs/common": "^11",
         "@nestjs/config": "^4.0.2",
         "@nestjs/core": "^11",
