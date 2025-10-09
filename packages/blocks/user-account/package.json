@@ -49,7 +49,7 @@
         "@nestjs/config": "^4.0.2",
         "@nestjs/core": "^11",
         "rxjs": "^7",
-        "next": "^15.3.2",
+        "next": "^15.4.7",
         "next-intl": "^4.1.0"
     }
 }
