@@ -80,7 +80,7 @@
         "@trivago/prettier-plugin-sort-imports": "^5.2.2",
         "@turbo/gen": "^2.5.3",
         "@types/compression": "^1.7.5",
-        "@types/cookie-parser": "^1.4.8",
+        "@types/cookie-parser": "^1.4.9",
         "@types/express": "^5.0.2",
         "@types/jest": "^29.5.14",
         "@types/jsonwebtoken": "^9.0.10",
