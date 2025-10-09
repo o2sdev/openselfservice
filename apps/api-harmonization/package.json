@@ -85,7 +85,7 @@
         "@types/jest": "^29.5.14",
         "@types/jsonwebtoken": "^9.0.10",
         "@types/node": "^22.15.19",
-        "@types/string-template": "^1.0.6",
+        "@types/string-template": "^1.0.7",
         "@types/supertest": "^6.0.3",
         "@typescript-eslint/eslint-plugin": "^8.32.1",
         "@typescript-eslint/parser": "^8.32.1",
