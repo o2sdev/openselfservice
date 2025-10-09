@@ -4,5 +4,6 @@
     "vulnerabilityAlerts": {
         "enabled": true
     },
-    "osvVulnerabilityAlerts": true
+    "osvVulnerabilityAlerts": true,
+    "rangeStrategy": "bump"
 }
