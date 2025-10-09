@@ -45,7 +45,7 @@
         "react-dom": "^19",
         "tailwindcss": "^4",
         "@nestjs/axios": "^4.0.1",
-        "@nestjs/common": "^11",
+        "@nestjs/common": "^11.0.16",
         "@nestjs/config": "^4.0.2",
         "@nestjs/core": "^11",
         "rxjs": "^7",
