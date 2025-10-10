@@ -1,5 +1,11 @@
 # @o2s/utils.logger
 
+## 1.1.1
+
+### Patch Changes
+
+- b519464: updated dependencies
+
 ## 1.1.0
 
 ### Minor Changes
