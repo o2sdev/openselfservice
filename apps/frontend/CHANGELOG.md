@@ -1,5 +1,19 @@
 # @o2s/frontend
 
+## 1.10.1
+
+### Patch Changes
+
+- b519464: updated dependencies
+- 38f7825: added healthchecks
+- Updated dependencies [b57d151]
+- Updated dependencies [b519464]
+- Updated dependencies [38f7825]
+    - @o2s/blocks.article-list@1.1.1
+    - @o2s/blocks.category@1.1.1
+    - @o2s/blocks.article@1.1.1
+    - @o2s/api-harmonization@1.10.1
+
 ## 1.10.0
 
 ### Minor Changes
