@@ -5,5 +5,19 @@
         "enabled": true
     },
     "osvVulnerabilityAlerts": true,
-    "rangeStrategy": "bump"
+    "packageRules": [
+        {
+            "matchDepTypes": [
+                "dependencies",
+                "devDependencies"
+            ],
+            "rangeStrategy": "bump"
+        },
+        {
+            "matchDepTypes": [
+                "peerDependencies"
+            ],
+            "rangeStrategy": "widen"
+        }
+    ]
 }
