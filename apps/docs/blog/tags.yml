@@ -20,6 +20,9 @@ backend:
 performance:
     label: 'Performance'
 
+ai:
+    label: 'AI'
+
 # An empty tag definition is also valid
 # Other attributes will be inferred from the key
 emptyTag:
