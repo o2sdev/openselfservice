@@ -19,7 +19,7 @@
     "dependencies": {
         "jwt-decode": "^4.0.0",
         "winston": "^3.17.0",
-        "axios": "^1.12.0"
+        "axios": "^1.12.2"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",
