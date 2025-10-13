@@ -78,7 +78,7 @@
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "@trivago/prettier-plugin-sort-imports": "^5.2.2",
-        "@turbo/gen": "^2.5.3",
+        "@turbo/gen": "^2.5.8",
         "@types/compression": "^1.7.5",
         "@types/cookie-parser": "^1.4.9",
         "@types/express": "^5.0.3",
