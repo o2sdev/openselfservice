@@ -64,7 +64,7 @@
         "react-day-picker": "^9.7.0",
         "markdown-to-jsx": "^7.7.15",
         "recharts": "^2.15.3",
-        "tailwind-merge": "^3.3.0",
+        "tailwind-merge": "^3.3.1",
         "tailwindcss-animate": "^1.0.7"
     },
     "peerDependencies": {
