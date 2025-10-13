@@ -84,7 +84,7 @@
         "@types/express": "^5.0.3",
         "@types/jest": "^29.5.14",
         "@types/jsonwebtoken": "^9.0.10",
-        "@types/node": "^22.15.19",
+        "@types/node": "^22.18.10",
         "@types/string-template": "^1.0.7",
         "@types/supertest": "^6.0.3",
         "@typescript-eslint/eslint-plugin": "^8.32.1",
