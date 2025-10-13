@@ -12,11 +12,13 @@ hide_table_of_contents: false
 
 # Leveraging AI to speed up Storybook documentation
 
-Starting with _"just ship it now, we'll add Storybook later"_ is probably a familiar idea to many development teams, including ours. When we kicked off the [**Open Self Service**](https://www.openselfservice.com/) platform, we made the pragmatic (at the time) decision to postpone Storybook integration in favor of rapid development.
+The silent debt of undocumented components sooner or later occurs in many development projects. What begins as a few simple UI elements inevitably grows into a complex ecosystem of specialized components, each with their own variants, states, and quirks. Without proper documentation, even the most elegant component library becomes a labyrinth that team members must navigate through tribal knowledge, scattered comments, and outdated design files.
+
+However, the tedious work of documenting dozens of components - a task that would typically consume days or weeks of developer time - can be transformed into an efficient, semi-automated process using AI-assisted tooling. This is the story of how we at [**Open Self Service**](https://www.openselfservice.com/) turned our documentation debt into a [comprehensive component library](https://storybook-o2s.openselfservice.com/) in a fraction of the expected time, and we hope that it can help you as well in your own projects.
 
 <!--truncate-->
 
-Our initial strategy wasn't completely reckless, however. We built our UI foundation on [shadcn/ui](https://ui.shadcn.com/) components with minimal customization, which gave us a solid starting point, especially as each component is already well documented on the library's website.
+## TODO title
 
 As our project grew, our component library evolved from a handful of simple elements into a larger ecosystem. We started with using just base elements like buttons and inputs, but eventually ended up with a set of larger and more specialized components, each with their own variants, states, and quirks. Our development workflow began to show serious cracks:
 
@@ -326,24 +328,55 @@ which seemed to help, as it limited the number of steps needed and Junie knew ex
 
 ![junie prompt with a specific location](junie-location-prompt.png)
 
-So, so far the output was pretty much perfect, and it was time to try generating stories for all the remaining components with a single prompt - I did not want to manually generate each one, as the entire point of this task was to reduce the amount of manual work.
+So far, the output was pretty much perfect, and it was time to try generating stories for all the remaining components with a single prompt - I did not want to manually generate each one, as the entire point of this task was to reduce the amount of manual work.
 
 ### Bulk story generation
 
-With a few examples of how the stories should look like, a more general prompt was needed, that pointed to the folder containing the components:
+With a few examples of what the stories should look like, a more general prompt was needed, that pointed to the folder containing the components:
 
 ```
 generate storybook stories for components inside `packages/ui/src/elements` in a similar way as it was done for other components in that UI library; try to limit the number of separate stories if they can be handled by args for props like variant/size/type
 ```
 
-TODO
+The first try with Junie was, however, less satisfactory. It somehow "forgot" about the rule to rely more on args, and instead once again tended to generate multiple stories where one or two would suffice, e.g. for the Checkbox component:
 
-## Comparing AI tools: Cursor vs. Junie
+```typescript jsx
+export const Default: Story = {...};
+export const Checked: Story = {...};
+export const Disabled: Story = {...};
+export const DisabledChecked: Story = {...};
+export const WithLabel: Story = {...};
+export const WithLabelChecked: Story = {...};
+export const WithLabelDisabled: Story = {...};
+```
 
-TODO:
+which, on one hand, provided o more comprehensive instant overview of all possible states:
 
-- How each tool performed for Storybook story generation
-- Which tool worked better in different scenarios
+![multi-story checkbox with junie](checkox-1.png)
+
+but on the other both increased the number of "pages" in Storybook and made it more cumbersome to maintain such a component. Documenting each new state or variant would make the stories too complex and might eventually become overwhelming.
+
+All of these combinations could have been instead handled by only a single story with appropriate args, which makes it possible to simply configure them directly in Storybook:
+
+```typescript jsx
+export const Default: Story = {
+    args: {
+        label: 'Accept terms and conditions',
+        checked: false,
+        disabled: false,
+    },
+};
+```
+
+![single story for checkbox](checkbox-2.png)
+
+Such overeagerness occurred in more or less half of generated files, and it was easy to fix either manually (if most of what was needed was to remove unnecessary stories) or via another prompt.
+
+So while generated stories were still mostly ok, only around a third of the components were analyzed, after which it simply stated the task as completed:
+
+![junie bulk generation](junie-bulk-1.png)
+
+The worst part was that it reported that supposedly all components were handled, without any further requests if it should continue. Further prompts that asked to generate stories for the missing components gave similar results. Again, it was overeager in creating multiple stories for a single component, and each time only a part of the total components were being taken into account. All in all, we would have needed maybe up to 10 attempts to handle every single component in our project.
 
 ## Results and lessons learned
 
@@ -357,6 +390,8 @@ The key was finding the right balance between AI automation and human oversight,
 
 TODO:
 
+- How each tool performed for Storybook story generation
+- Which tool worked better in different scenarios
 - Tips for using AI effectively for documentation tasks
 - Further plans
 
