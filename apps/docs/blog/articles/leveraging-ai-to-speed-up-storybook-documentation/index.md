@@ -1,8 +1,8 @@
 ---
 slug: leveraging-ai-to-speed-up-storybook-documentation
 title: 'Leveraging AI to speed up Storybook documentation'
-description: 'TODO'
-keywords: ['TODO']
+description: 'How we used AI to transform days of tedious component documentation into a comprehensive Storybook library in just hours'
+keywords: ['storybook', 'ai', 'documentation', 'component library', 'react', 'automation', 'developer productivity', 'nextjs']
 date: 2025-10-15
 tags: [tech, ai]
 authors: [marcin.krasowski]
@@ -18,7 +18,7 @@ However, the tedious work of documenting dozens of components - a task that woul
 
 <!--truncate-->
 
-## TODO title
+## Documentation debt
 
 As our project grew, our component library evolved from a handful of simple elements into a larger ecosystem. We started with using just base elements like buttons and inputs, but eventually ended up with a set of larger and more specialized components, each with their own variants, states, and quirks. Our development workflow began to show serious cracks:
 
@@ -137,27 +137,6 @@ const config: StorybookConfig = {
 };
 ```
 
-### Switching from Vite to webpack
-
-We initially tried using Vite with Storybook, but encountered issues with our block system. Our block system combines React/Next.js components with NestJS modules in a single package, which caused a syntax error, related to our SDK that is also exported from another package, when used in Storybook with Vite:
-
-```
-SyntaxError: The requested module '/packages/framework/dist/src/sdk.js' does not provide an export named 'extendSdk'
-```
-
-After troubleshooting, we decided to switch to the Webpack version of Storybook for Next.js, which resolved these issues:
-
-```typescript
-const config: StorybookConfig = {
-    framework: {
-        name: getAbsolutePath('@storybook/nextjs'),
-    },
-    // other config
-};
-```
-
-While this is more of a workaround than a perfect solution, it allowed us to proceed with documenting our components.
-
 ### Our first manual story
 
 With the environment set up, we created our first story for the Button component:
@@ -199,13 +178,13 @@ Once we had our Storybook environment properly configured, we faced the daunting
 
 ### Initial prompts
 
-The initial prompt itself was surprisingly simple, given that we already had one example of a story that we wanted. I started with the component at the top of the list, which happened to be [Accordion](https://storybook-o2s.openselfservice.com/?path=/docs/elements-accordion--docs):
+The initial prompt itself was surprisingly simple, given that we already had one example of a story that we wanted. We started with the component at the top of the list, which happened to be [Accordion](https://storybook-o2s.openselfservice.com/?path=/docs/elements-accordion--docs):
 
 ```
 generate storybook stories for Accordion component in a similar way as it was done for Button
 ```
 
-As a long-time Webstorm user, I much prefer using that IDE in a day-to-day work, which meant that I firstly tried it with [Junie](https://www.jetbrains.com/junie/), which is a plugin that can be run directly from Webstorm, instead from switching to other tools or IDEs. Like Cursor, it also gives a step-by-step walkthrough if its process:
+As long-time Webstorm user, I personally much prefer using that IDE in day-to-day work, which meant that we first tried it with [Junie](https://www.jetbrains.com/junie/). It's a plugin that can be run directly from Webstorm, instead of switching to other tools or IDEs. Like Cursor, it also gives a step-by-step walkthrough of its process:
 
 ![initial prompt for Junie](junie-initial-prompt.png)
 
@@ -261,7 +240,7 @@ export const Multiple: Story = {
 };
 ```
 
-The first change that I did was to ask to create less separate stories if a single would suffice. We didn't want to create a story for every single variant, type or size of a component - the ensuing combinations would quickly become overwhelming. So the next prompt was to:
+The first change that we did was to ask to create less separate stories if a single would suffice. We didn't want to create a story for every single variant, type or size of a component - the ensuing combinations would quickly become overwhelming. So the next prompt was to:
 
 ```
 do not create a separate story for params like variant, size or type, and instead make them configurable through args
@@ -269,7 +248,7 @@ do not create a separate story for params like variant, size or type, and instea
 
 which successfully reduced the number of generated stories to only one in this case.
 
-Before we started generating stories by bulk, I've also wanted to try another generating one more, this one that actually should contain multiple stories. I picked [Typography](https://storybook-o2s.openselfservice.com/?path=/story/elements-typography--default) for this, which I felt should show a few examples for headings, body text, or lists:
+Before we started generating stories by bulk, we've also wanted to try another generating one more, this one that actually should contain multiple stories. We picked [Typography](https://storybook-o2s.openselfservice.com/?path=/story/elements-typography--default) for this, which we felt should show a few examples for headings, body text, or lists:
 
 ```
 generate storybook stories for Typography component in a similar way as it was done for Button and Accordion
@@ -314,11 +293,11 @@ export const TextStyles: Story = {
 
 ```
 
-However, I've noticed one thing that occurred when Junie started working - since I did not actually provide any info where the Typography component was located, it had to find it on its own:
+However, we've noticed one thing that occurred when Junie started working - since we did not actually provide any info where the Typography component was located, it had to find it on its own:
 
 ![junie project search](junie-ls.png)
 
-It managed perfectly fine, but I felt that helping out a bit could both speed up its work and save up on the number of tokens used, so I've tried [one more component](http://localhost:6006/?path=/story/elements-table--default):
+It managed perfectly fine, but we felt that helping out a bit could both speed up its job and save up on the number of tokens used, so we've tried [one more component](https://storybook-dxp.openselfservice.com/?path=/story/elements-table--default):
 
 ```
 generate storybook stories for `packages/ui/src/elements/table.tsx` component in a similar way as it was done for other components in that UI library
@@ -328,7 +307,7 @@ which seemed to help, as it limited the number of steps needed and Junie knew ex
 
 ![junie prompt with a specific location](junie-location-prompt.png)
 
-So far, the output was pretty much perfect, and it was time to try generating stories for all the remaining components with a single prompt - I did not want to manually generate each one, as the entire point of this task was to reduce the amount of manual work.
+So far, the output was pretty much perfect, and it was time to try generating stories for all the remaining components with a single prompt - we did not want to manually generate each one, as the entire point of this task was to reduce the amount of manual work.
 
 ### Bulk story generation
 
@@ -350,11 +329,11 @@ export const WithLabelChecked: Story = {...};
 export const WithLabelDisabled: Story = {...};
 ```
 
-which, on one hand, provided o more comprehensive instant overview of all possible states:
+which, on the one hand, provided a more comprehensive instant overview of all possible states:
 
 ![multi-story checkbox with junie](checkox-1.png)
 
-but on the other both increased the number of "pages" in Storybook and made it more cumbersome to maintain such a component. Documenting each new state or variant would make the stories too complex and might eventually become overwhelming.
+But on the other hand, both increased the number of "pages" in Storybook and made it more cumbersome to maintain such a component. Documenting each new state or variant would make the stories too complex and might eventually become overwhelming.
 
 All of these combinations could have been instead handled by only a single story with appropriate args, which makes it possible to simply configure them directly in Storybook:
 
@@ -376,26 +355,56 @@ So while generated stories were still mostly ok, only around a third of the comp
 
 ![junie bulk generation](junie-bulk-1.png)
 
-The worst part was that it reported that supposedly all components were handled, without any further requests if it should continue. Further prompts that asked to generate stories for the missing components gave similar results. Again, it was overeager in creating multiple stories for a single component, and each time only a part of the total components were being taken into account. All in all, we would have needed maybe up to 10 attempts to handle every single component in our project.
+The worst part was that it reported that supposedly all components were handled, without any further requests if it should continue. Further prompts that asked to generate stories for the missing components gave similar results. Again, it was overeager in creating multiple stories for a single component, and each time only a part of the total components were being taken into account. All in all, we would have needed maybe up to 10 attempts to handle every single component in our project (as we had them split between three main categories/folders).
+
+We decided to try exactly the same prompt in Cursor, and the outcome was a bit better, but still far from perfect, as it also generated only about a third of the necessary stories:
+
+![first prompt for cursor](cursor-1.png)
+
+However, after another prompt to generate the rest, it successfully handled all the components in the folder, which meant that the overall number of prompts would be around half of what Junie needed.
+
+![second prompt for cursor](cursor-2.png)
+
+As for the quality of the stories, it, like Junie, was a bit overzealous with creating multiple story variants where only one or two based on args would be enough. So we tried a few more prompts to narrow it down:
+
+![reducing number of stories in cursor](cursor-3.png)
+![even more reducing number of stories in cursor](cursor-4.png)
+
+The outcome still wasn't perfect (there were still some stories that weren't strictly necessary in our opinion), but it was good enough, and ready for the final, human verification process.
+
+What was really nice was the form of the responses - unlike in Junie, Cursor gave very extensive summaries of what and how was modified, which was really helpful in estimating whether further prompts were still necessary. It proves that, as a more mature tool, Cursor still wins the AI battle in that regard.
+
+### Manual review
+
+Once we've run through all the remaining components in our project - not only simple elements like buttons or inputs, but also more complex ones like cards or filters - it was time to do a final review of the results.
+
+The manual review process was a critical step in ensuring the quality and accuracy of our AI-generated Storybook documentation. While AI tools significantly accelerated the initial creation, human oversight was still essential.
+
+First, we needed to verify that each component's stories accurately represented its functionality and available options. This involved checking that all important props were configurable through args and that the default values made sense in our application context.
+
+What we discovered were several instances where there were incorrect props used. Some components had props that simply did not exist in the component - for example, for the Input component it tried to set `label` which couldn't event be provided; in some other cases, it misinterpreted the purpose of certain props. These issues were relatively easy to fix but would have caused confusion if left unaddressed.
+
+As we've already seen, we also needed to manually adjust the number of stories for certain components. In some cases, the AI created too many separate stories where a single configurable one would be more maintainable. In other instances, particularly for complex components with distinct visual states, we actually needed to add more stories to properly showcase all the important variations - but these cases were thankfully very few. Actually, we found out that some generated stories reflected component states or variants that we ourselves would not think to document - which is another proof that such an approach not only speeds up development, but also helps in filling out blanks that would have been left by just human work.
+
+Overall, the manual review took less than half a day of focused work, which was a reasonable investment considering the time saved by using AI for the initial generation.
 
 ## Results and lessons learned
 
 Using AI for story creation provided significant benefits:
 
-1. **Reduced story creation time** - we initially estimated that it would take a better part of a week to configure Storybook and then to write the stories for all components. While the initial configuration was still done manually, the bigger and definitely more monotonous work was largely done automatically. All in all, the entire process of creating documentation took less **than 2 days**, and much of it was done in the background. I've just submitted a prompt and let the AI do its own thing, only returning to it to check and occasionally fix the output, while focusing on some other more engaging tasks.
+1. **Reduced story creation time** - we initially estimated that it would take a better part of a week to configure Storybook and then to write the stories for all components. While the initial configuration was still done manually, the bigger and definitely more monotonous work was largely done automatically. All in all, the entire process of creating documentation took less **than 2 days**, and much of it was done in the background. We've just submitted a prompt and let the AI do its own thing, only returning to it to check and occasionally fix the output, while focusing on some other more engaging tasks.
 2. AI-generated stories also followed **consistent patterns and naming conventions**, which might be a minor gain but still reduced the risk of e.g. typos or other small mistakes if it was done manually.
 3. We were positively surprised that the generated stories included some cases that we did not predict - like using banners or cards without a title (which was indeed optional, but was always provided in the rest of the app). This allowed us to make appropriate fixes and improvements in our components to properly handle some **edge cases** that have not been thought about earlier.
 
 The key was finding the right balance between AI automation and human oversight, ensuring that generated stories met our quality standards while maintaining the efficiency gains.
 
-TODO:
+As for Junie vs Cursor, we felt that **Cursor was overall better** for this task, mostly because it handled bulk story creation better. Fewer prompts were necessary to both analyze all components, and also to apply further changes to generated stories.
 
-- How each tool performed for Storybook story generation
-- Which tool worked better in different scenarios
-- Tips for using AI effectively for documentation tasks
-- Further plans
+The stories themselves were pretty much a **similar quality in both cases**, however. Both tools needed further prompts to accomodate the outcome to our needs, but neither was particularly better nor worse at it. The human verification and fixing was, of course, still very much required, of course, as it will be probably quite some time until the results are good enough that no supervision is a must.
 
-Want to see it in action?
+It's not the end of our plans to use the AI to reduce the time needed on such monotonous tasks in order to fix our technical debt. Similarly, we want to speed up the process of covering our project with unit tests, which, just like Storybook, were put off due to time constraints at the beginning of the project. Looking at the outcome of generating stories, we are quite certain that we can also achieve a high test coverage through a combination of automated AI testing and manual verification and adjustments.
+
+Want to see how all of turned out? Check our project page and Storybook:
 
 - [Open Self Service website](https://www.openselfservice.com)
 - [Storybook](https://storybook-o2s.openselfservice.com/)
