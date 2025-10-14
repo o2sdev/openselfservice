@@ -44,7 +44,7 @@
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "@o2s/telemetry": "*",
-        "concurrently": "^9.1.2",
+        "concurrently": "^9.2.1",
         "eslint": "^9.27.0",
         "prettier": "^3.5.3",
         "shx": "^0.4.0",
