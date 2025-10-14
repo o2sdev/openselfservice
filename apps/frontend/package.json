@@ -75,7 +75,7 @@
         "@types/react-autosuggest": "^10.1.11",
         "@types/react-dom": "^19.1.5",
         "@types/throttle-debounce": "^5.0.2",
-        "dotenv": "^16.5.0",
+        "dotenv": "^16.6.1",
         "eslint": "^9",
         "eslint-config-next": "^15.3.2",
         "postcss": "^8.5.6",
