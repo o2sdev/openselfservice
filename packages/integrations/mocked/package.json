@@ -32,7 +32,7 @@
         "@auth/prisma-adapter": "^2.11.0",
         "@prisma/client": "^6.17.1",
         "bcryptjs": "^3.0.2",
-        "dotenv-cli": "^8.0.0",
+        "dotenv-cli": "^10.0.0",
         "jsonwebtoken": "^9.0.2",
         "prisma": "^6.17.1",
         "@o2s/framework": "*",

@@ -16,11 +16,11 @@
     },
     "dependencies": {
         "ci-info": "^4.3.1",
-        "configstore": "^6.0.0",
-        "boxen": "^6.2.1",
-        "is-docker": "^3.0.0",
+        "configstore": "^7.1.0",
+        "boxen": "^8.0.1",
+        "is-docker": "^4.0.0",
         "ts-node": "^10.9.2",
-        "uuid": "^11.1.0"
+        "uuid": "^13.0.0"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",
