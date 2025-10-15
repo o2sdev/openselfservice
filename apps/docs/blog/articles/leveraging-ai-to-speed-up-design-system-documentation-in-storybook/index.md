@@ -349,7 +349,7 @@ export const Default: Story = {
 
 ![single story for checkbox](checkbox-2.png)
 
-Such overeagerness occurred in more or less half of generated files, and it was easy to fix either manually (if most of what was needed was to remove unnecessary stories) or via another prompt.
+Such behavior occurred in more or less half of generated files, and it was easy to fix either manually (if most of what was needed was to remove unnecessary stories) or via another prompt.
 
 So while generated stories were still mostly ok, only around a third of the components were analyzed, after which it simply stated the task as completed:
 
