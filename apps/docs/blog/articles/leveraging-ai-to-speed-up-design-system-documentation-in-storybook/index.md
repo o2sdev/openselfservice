@@ -52,7 +52,7 @@ npx storybook@latest init
 
 ### Provider setup and mocked data
 
-One of the first challenges we faced was setting up the necessary providers for our components. The types of components that we wanted to have documented included not only buttons and dropdowns, but also more complex blocks that are retrieving data from global contexts, like current locale or theme. They can also rely on some globally configured mechanisms like [tooltips](https://ui.shadcn.com/docs/components/tooltip) that can defined their own providers as well.
+One of the first challenges we faced was setting up the necessary providers for our components. The types of components that we wanted to have documented included not only buttons and dropdowns, but also more complex blocks that are retrieving data from global contexts, like current locale or theme. They can also rely on some globally configured mechanisms like [tooltips](https://ui.shadcn.com/docs/components/tooltip) that can define their own providers as well.
 
 In a Next.js application, these providers would typically by placed somewhere high-level (like a layout or a page), but for Storybook, we needed to mock them manually, which thankfully can be easily done via the [preview file](https://storybook.js.org/docs/configure#configure-story-rendering):
 
@@ -178,6 +178,8 @@ With this setup complete, we were ready to start creating stories for our compon
 
 Once we had our Storybook environment properly configured, we faced the daunting task of creating stories for dozens of components. Manual story creation would have been time-consuming and error-prone, so we turned to AI tools to accelerate the process.
 
+We also wanted this task to be kind of an experiment to check how different AI tools handle such automation - without having to specify any additional configs or rules, and without more advanced task plannings. What we wanted was to test the simplest case - just give a few prompts to do a relatively simple task and get the result.
+
 ### Initial prompts
 
 The initial prompt itself was surprisingly simple, given that we already had one example of a story that we wanted. We started with the component at the top of the list, which happened to be [Accordion](https://storybook-o2s.openselfservice.com/?path=/docs/elements-accordion--docs):
@@ -250,7 +252,7 @@ do not create a separate story for params like variant, size or type, and instea
 
 which successfully reduced the number of generated stories to only one in this case.
 
-Before we started generating stories by bulk, we've also wanted to try generating one more  that actually should contain multiple stories. We've picked [Typography](https://storybook-o2s.openselfservice.com/?path=/story/elements-typography--default) for this, which we felt should show a few examples for headings, body text, or lists:
+Before we started generating stories by bulk, we've decided to give one more try for a bit more complex component. We've picked [Typography](https://storybook-o2s.openselfservice.com/?path=/story/elements-typography--default) for this, which we felt should show a few examples for headings, body text, or lists:
 
 ```
 generate storybook stories for Typography component in a similar way as it was done for Button and Accordion
@@ -386,7 +388,9 @@ First, we needed to verify that each component's stories accurately represented 
 
 What we discovered were several instances where there were incorrect props used. Some components had props that simply did not exist - for example, for the Input component it tried to set `label` which couldn't even be provided; in some other cases, it misinterpreted the purpose of certain props. These issues were relatively easy to fix but would have caused confusion if left unaddressed.
 
-As we've already seen, we also needed to manually adjust the number of stories for certain components. In some cases, the AI created too many separate stories where a single configurable one would be more maintainable. In other instances, particularly for complex components with distinct visual states, we actually needed to add more stories to properly showcase all the important variations - but these cases were thankfully very few. Actually, we found out that some generated stories reflected component states or variants that we ourselves would not think to document - which is another proof that such an approach not only speeds up development, but also helps in filling out blanks that would have been left by just human work.
+As we've already seen, we also needed to manually adjust the number of stories for certain components. In some cases, the AI created too many separate stories where a single configurable one would be more maintainable. In other instances, particularly for complex components with distinct visual states, we actually needed to add more stories to properly showcase all the important variations - but these cases were thankfully very few. 
+
+> Actually, we found out that some generated stories reflected component states or variants that we ourselves would not think to document - which is another proof that such an approach not only speeds up development, but also helps in filling out blanks that would have been left by just human work.
 
 Overall, the manual review took less than half a day of focused work, which was a reasonable investment considering the time saved by using AI for the initial generation.
 
@@ -408,7 +412,7 @@ Looking back at the whole task, we would have done a few things a bit differentl
 - creating rules files (both for Cursor and for Junie) would probably be beneficial, as they might have encouraged the AI to stick to our requirements (e.g. to rely on args instead of creating multiple stories),
 - but probably even with explicit rules, we would try to process the components in smaller bulks, as the AI clearly struggles with large inputs; even though it would have required more involvement from our side, at the end the total dedicated time would probably be quite similar.
 
-It's not the end of our plans to use the AI to reduce the time needed on such monotonous tasks in order to fix our technical debt. Similarly, we want to speed up the process of covering our project with unit tests, which, just like Storybook, were put off due to time constraints at the beginning of the project. Looking at the outcome of generating stories, we are quite certain that we can also achieve high test coverage through a combination of automated AI testing and manual verification and adjustments.
+It's not the end of our plans to use the AI to reduce the time needed on such monotonous tasks. Similarly, we want to speed up the process of covering our project with unit tests, which, just like Storybook, were put off due to time constraints at the beginning of the project. Looking at the outcome of generating stories, we are quite certain that we can also achieve high test coverage through a combination of automated AI testing and manual verification and adjustments.
 
 Want to see how all of it turned out? Check our project page and Storybook:
 
