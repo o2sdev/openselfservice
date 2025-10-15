@@ -21,7 +21,7 @@
         "@o2s/utils.logger": "*",
         "flatted": "^3.3.3",
         "graphql": "16.11.0",
-        "graphql-request": "7.2.0",
+        "graphql-request": "7.3.0",
         "graphql-tag": "2.12.6"
     },
     "devDependencies": {
@@ -35,11 +35,11 @@
         "@o2s/eslint-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
-        "concurrently": "^9.1.2",
-        "eslint": "^9.27.0",
-        "prettier": "^3.5.3",
+        "concurrently": "^9.2.1",
+        "eslint": "^9.37.0",
+        "prettier": "^3.6.2",
         "tsc-alias": "^1.8.16",
-        "typescript": "^5.8.3"
+        "typescript": "^5.9.3"
     },
     "peerDependencies": {
         "@nestjs/axios": "^4.0.1",

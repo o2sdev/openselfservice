@@ -15,21 +15,21 @@
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
-        "ci-info": "^4.2.0",
-        "configstore": "^6.0.0",
-        "boxen": "^6.2.1",
-        "is-docker": "^3.0.0",
+        "ci-info": "^4.3.1",
+        "configstore": "^7.1.0",
+        "boxen": "^8.0.1",
+        "is-docker": "^4.0.0",
         "ts-node": "^10.9.2",
-        "uuid": "^11.1.0"
+        "uuid": "^13.0.0"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "@types/configstore": "^6.0.2",
-        "eslint": "^9.27.0",
-        "prettier": "^3.5.3",
+        "eslint": "^9.37.0",
+        "prettier": "^3.6.2",
         "tsc-alias": "^1.8.16",
-        "typescript": "^5.8.3"
+        "typescript": "^5.9.3"
     }
 }

@@ -29,12 +29,12 @@
         "seed": "tsx prisma/seed.ts"
     },
     "dependencies": {
-        "@auth/prisma-adapter": "^2.9.1",
-        "@prisma/client": "^6.8.2",
+        "@auth/prisma-adapter": "^2.11.0",
+        "@prisma/client": "^6.17.1",
         "bcryptjs": "^3.0.2",
-        "dotenv-cli": "^8.0.0",
+        "dotenv-cli": "^10.0.0",
         "jsonwebtoken": "^9.0.2",
-        "prisma": "^6.8.2",
+        "prisma": "^6.17.1",
         "@o2s/framework": "*",
         "@o2s/utils.logger": "*"
     },
@@ -44,12 +44,12 @@
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "@o2s/telemetry": "*",
-        "concurrently": "^9.1.2",
-        "eslint": "^9.27.0",
-        "prettier": "^3.5.3",
+        "concurrently": "^9.2.1",
+        "eslint": "^9.37.0",
+        "prettier": "^3.6.2",
         "shx": "^0.4.0",
         "tsc-alias": "^1.8.16",
-        "typescript": "^5.8.3"
+        "typescript": "^5.9.3"
     },
     "peerDependencies": {
         "@nestjs/axios": "^4.0.1",
