@@ -14,6 +14,8 @@ hide_table_of_contents: false
 
 The silent debt of undocumented components sooner or later occurs in many development projects. What begins as a few simple UI elements inevitably grows into a complex ecosystem of specialized components, each with their own variants, states, and quirks. Without proper documentation, even the most elegant component library becomes a labyrinth that team members must navigate through tribal knowledge and scattered comments.
 
+![intro image](o2s-ai-storybook.png)
+
 However, the tedious work of documenting dozens of components - a task that would typically consume days or weeks of developer time - can be transformed into an efficient, semi-automated process using AI-assisted tooling. This is the story of how we at [**Open Self Service**](https://www.openselfservice.com/) turned our documentation debt into a [comprehensive component library](https://storybook-o2s.openselfservice.com/) in a fraction of the expected time, and we hope that it can help you as well in your own projects.
 
 <!--truncate-->
