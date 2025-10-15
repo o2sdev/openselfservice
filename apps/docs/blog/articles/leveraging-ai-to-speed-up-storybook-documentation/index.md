@@ -400,9 +400,13 @@ The key was finding the right balance between AI automation and human oversight,
 
 As for Junie vs Cursor, we felt that **Cursor was overall better** for this task, mostly because it handled bulk story creation better. Fewer prompts were necessary to both analyze all components, and also to apply further changes to generated stories.
 
-The stories themselves were pretty much a **similar quality in both cases**, however. Both tools needed further prompts to accomodate the outcome to our needs, but neither was particularly better nor worse at it. The human verification and fixing was, of course, still very much required, of course, as it will be probably quite some time until the results are good enough that no supervision is a must.
+The stories themselves were pretty much a **similar quality in both cases**, however. Both tools needed further prompts to accommodate the outcome to our needs, but neither was particularly better nor worse at it. The human verification and fixing was, still very much required, of course, as it will be probably quite some time until the results are good enough that no supervision is a must.
 
-It's not the end of our plans to use the AI to reduce the time needed on such monotonous tasks in order to fix our technical debt. Similarly, we want to speed up the process of covering our project with unit tests, which, just like Storybook, were put off due to time constraints at the beginning of the project. Looking at the outcome of generating stories, we are quite certain that we can also achieve a high test coverage through a combination of automated AI testing and manual verification and adjustments.
+Looking back at the whole task, we would have done a few things a bit differently:
+- creating rules files (both for Cursor and for Junie) would probably be beneficial, as they might have encouraged the aI to stick to our requirements (e.g. to rely on args instead of creating multiple stories),
+- but probably event with explicit rules, we would try to process the components in smaller bulks, as the AI clearly struggles with large inputs; even though it would have required more involvement from our side, at the end the total dedicated time would probably be quite similar.
+
+It's not the end of our plans to use the AI to reduce the time needed on such monotonous tasks in order to fix our technical debt. Similarly, we want to speed up the process of covering our project with unit tests, which, just like Storybook, were put off due to time constraints at the beginning of the project. Looking at the outcome of generating stories, we are quite certain that we can also achieve high test coverage through a combination of automated AI testing and manual verification and adjustments.
 
 Want to see how all of turned out? Check our project page and Storybook:
 
