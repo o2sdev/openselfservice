@@ -36,7 +36,7 @@
         "eslint": "^9.37.0",
         "prettier": "^3.6.2",
         "tsc-alias": "^1.8.16",
-        "typescript": "^5.8.3"
+        "typescript": "^5.9.3"
     },
     "peerDependencies": {
         "@types/react": "^19",

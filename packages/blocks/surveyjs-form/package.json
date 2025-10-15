@@ -39,7 +39,7 @@
         "survey-core": "^2.3.10",
         "survey-react-ui": "^2.3.10",
         "tsc-alias": "^1.8.16",
-        "typescript": "^5.8.3"
+        "typescript": "^5.9.3"
     },
     "peerDependencies": {
         "@types/react": "^19",

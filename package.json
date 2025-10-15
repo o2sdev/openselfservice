@@ -57,7 +57,7 @@
         "storybook": "^9.1.10",
         "syncpack": "^14.0.0-alpha.11",
         "turbo": "^2.5.8",
-        "typescript": "5.8.3"
+        "typescript": "5.9.3"
     },
     "dependencies": {
         "@changesets/cli": "^2.29.7",
