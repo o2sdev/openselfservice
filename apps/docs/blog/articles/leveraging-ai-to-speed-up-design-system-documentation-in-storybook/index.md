@@ -410,7 +410,7 @@ It's not the end of our plans to use the AI to reduce the time needed on such mo
 
 Want to see how all of it turned out? Check our project page and Storybook:
 
-- [Open Self Service website](https://www.openselfservice.com)
-- [Storybook](https://storybook-o2s.openselfservice.com/)
+- [**Open Self Service website**](https://www.openselfservice.com)
+- [**Storybook**](https://storybook-o2s.openselfservice.com/)
 
 We’d love your feedback - or even better, your contributions!
