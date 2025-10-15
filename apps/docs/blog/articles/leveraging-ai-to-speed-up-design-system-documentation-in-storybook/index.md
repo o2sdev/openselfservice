@@ -34,6 +34,8 @@ The mapping between our React components and CMS blocks wasn't just a technical 
 
 So, how did we go from documentation debt to a comprehensive component library? Let's dive into our journey of implementing Storybook and then supercharging the process with AI.
 
+![intro image](o2s-ai-storybook.png)
+
 ## Getting started with Storybook
 
 Storybook isn't just a documentation tool — it's a development environment, a testing playground, and a communication bridge all rolled into one. Setting it up in a complex monorepo with Next.js is not always as straightforward as it's [explained in official docs](https://storybook.js.org/docs/get-started/frameworks/nextjs) and might need some further config and adjustments.
