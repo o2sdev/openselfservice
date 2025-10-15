@@ -24,7 +24,7 @@ jobs:
         steps:
             - name: Extract Tag Info
               id: tag-info-raw
-              uses: actions/github-script@v6
+              uses: actions/github-script@v8
               with:
                   script: |
                       const tag = "${{ github.ref }}";
