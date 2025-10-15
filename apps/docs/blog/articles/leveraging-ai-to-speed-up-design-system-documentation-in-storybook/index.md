@@ -1,8 +1,8 @@
 ---
-slug: leveraging-ai-to-speed-up-storybook-documentation
-title: 'Leveraging AI to speed up Storybook documentation'
+slug: leveraging-ai-to-speed-up-design-system-documentation-in-storybook
+title: 'Leveraging AI to speed up design system documentation in Storybook'
 description: 'How we used AI to transform days of tedious component documentation into a comprehensive Storybook library in just hours'
-keywords: ['storybook', 'ai', 'documentation', 'component library', 'react', 'automation', 'developer productivity', 'nextjs']
+keywords: ['storybook', 'ai', 'documentation', 'component library', 'react', 'automation', 'developer productivity', 'nextjs', 'design system', 'cursor', 'junie']
 date: 2025-10-15
 tags: [tech, ai]
 authors: [marcin.krasowski]
@@ -10,9 +10,9 @@ toc_max_heading_level: 3
 hide_table_of_contents: false
 ---
 
-# Leveraging AI to speed up Storybook documentation
+# Leveraging AI to speed up design system documentation in Storybook
 
-The silent debt of undocumented components sooner or later occurs in many development projects. What begins as a few simple UI elements inevitably grows into a complex ecosystem of specialized components, each with their own variants, states, and quirks. Without proper documentation, even the most elegant component library becomes a labyrinth that team members must navigate through tribal knowledge, scattered comments, and outdated design files.
+The silent debt of undocumented components sooner or later occurs in many development projects. What begins as a few simple UI elements inevitably grows into a complex ecosystem of specialized components, each with their own variants, states, and quirks. Without proper documentation, even the most elegant component library becomes a labyrinth that team members must navigate through tribal knowledge and scattered comments.
 
 However, the tedious work of documenting dozens of components - a task that would typically consume days or weeks of developer time - can be transformed into an efficient, semi-automated process using AI-assisted tooling. This is the story of how we at [**Open Self Service**](https://www.openselfservice.com/) turned our documentation debt into a [comprehensive component library](https://storybook-o2s.openselfservice.com/) in a fraction of the expected time, and we hope that it can help you as well in your own projects.
 
