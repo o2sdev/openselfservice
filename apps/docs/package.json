@@ -21,7 +21,7 @@
         "@docusaurus/preset-classic": "3.7.0",
         "@docusaurus/theme-mermaid": "3.7.0",
         "@easyops-cn/docusaurus-search-local": "^0.49.2",
-        "@mdx-js/react": "^3.1.0",
+        "@mdx-js/react": "^3.1.1",
         "@vercel/analytics": "^1.5.0",
         "@vercel/speed-insights": "^1.2.0",
         "clsx": "^2.1.1",
@@ -41,12 +41,12 @@
         "@o2s/eslint-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
-        "@tailwindcss/postcss": "^4.1.7",
+        "@tailwindcss/postcss": "^4.1.14",
         "@trivago/prettier-plugin-sort-imports": "^5.2.2",
         "autoprefixer": "^10.4.21",
         "postcss": "^8.5.6",
         "prettier": "^3.5.3",
-        "tailwindcss": "^4.1.7",
+        "tailwindcss": "^4.1.14",
         "typescript": "5.8.3"
     },
     "browserslist": {
