@@ -184,7 +184,7 @@ The initial prompt itself was surprisingly simple, given that we already had one
 generate storybook stories for Accordion component in a similar way as it was done for Button
 ```
 
-As long-time Webstorm user, I personally much prefer using that IDE in day-to-day work, which meant that we first tried it with [Junie](https://www.jetbrains.com/junie/). It's a plugin that can be run directly from Webstorm, instead of switching to other tools or IDEs. Like Cursor, it also gives a step-by-step walkthrough of its process:
+As a long-time Webstorm user, I personally much prefer using that IDE in day-to-day work, which meant that we first tried it with [Junie](https://www.jetbrains.com/junie/). It's a plugin that can be run directly from Webstorm, instead of switching to other tools or IDEs. Like Cursor, it also gives a step-by-step walkthrough of its process:
 
 ![initial prompt for Junie](junie-initial-prompt.png)
 
@@ -248,7 +248,7 @@ do not create a separate story for params like variant, size or type, and instea
 
 which successfully reduced the number of generated stories to only one in this case.
 
-Before we started generating stories by bulk, we've also wanted to try another generating one more, this one that actually should contain multiple stories. We picked [Typography](https://storybook-o2s.openselfservice.com/?path=/story/elements-typography--default) for this, which we felt should show a few examples for headings, body text, or lists:
+Before we started generating stories by bulk, we've also wanted to try generating one more  that actually should contain multiple stories. We've picked [Typography](https://storybook-o2s.openselfservice.com/?path=/story/elements-typography--default) for this, which we felt should show a few examples for headings, body text, or lists:
 
 ```
 generate storybook stories for Typography component in a similar way as it was done for Button and Accordion
@@ -382,7 +382,7 @@ The manual review process was a critical step in ensuring the quality and accura
 
 First, we needed to verify that each component's stories accurately represented its functionality and available options. This involved checking that all important props were configurable through args and that the default values made sense in our application context.
 
-What we discovered were several instances where there were incorrect props used. Some components had props that simply did not exist in the component - for example, for the Input component it tried to set `label` which couldn't event be provided; in some other cases, it misinterpreted the purpose of certain props. These issues were relatively easy to fix but would have caused confusion if left unaddressed.
+What we discovered were several instances where there were incorrect props used. Some components had props that simply did not exist - for example, for the Input component it tried to set `label` which couldn't even be provided; in some other cases, it misinterpreted the purpose of certain props. These issues were relatively easy to fix but would have caused confusion if left unaddressed.
 
 As we've already seen, we also needed to manually adjust the number of stories for certain components. In some cases, the AI created too many separate stories where a single configurable one would be more maintainable. In other instances, particularly for complex components with distinct visual states, we actually needed to add more stories to properly showcase all the important variations - but these cases were thankfully very few. Actually, we found out that some generated stories reflected component states or variants that we ourselves would not think to document - which is another proof that such an approach not only speeds up development, but also helps in filling out blanks that would have been left by just human work.
 
@@ -403,12 +403,12 @@ As for Junie vs Cursor, we felt that **Cursor was overall better** for this task
 The stories themselves were pretty much a **similar quality in both cases**, however. Both tools needed further prompts to accommodate the outcome to our needs, but neither was particularly better nor worse at it. The human verification and fixing was, still very much required, of course, as it will be probably quite some time until the results are good enough that no supervision is a must.
 
 Looking back at the whole task, we would have done a few things a bit differently:
-- creating rules files (both for Cursor and for Junie) would probably be beneficial, as they might have encouraged the aI to stick to our requirements (e.g. to rely on args instead of creating multiple stories),
-- but probably event with explicit rules, we would try to process the components in smaller bulks, as the AI clearly struggles with large inputs; even though it would have required more involvement from our side, at the end the total dedicated time would probably be quite similar.
+- creating rules files (both for Cursor and for Junie) would probably be beneficial, as they might have encouraged the AI to stick to our requirements (e.g. to rely on args instead of creating multiple stories),
+- but probably even with explicit rules, we would try to process the components in smaller bulks, as the AI clearly struggles with large inputs; even though it would have required more involvement from our side, at the end the total dedicated time would probably be quite similar.
 
 It's not the end of our plans to use the AI to reduce the time needed on such monotonous tasks in order to fix our technical debt. Similarly, we want to speed up the process of covering our project with unit tests, which, just like Storybook, were put off due to time constraints at the beginning of the project. Looking at the outcome of generating stories, we are quite certain that we can also achieve high test coverage through a combination of automated AI testing and manual verification and adjustments.
 
-Want to see how all of turned out? Check our project page and Storybook:
+Want to see how all of it turned out? Check our project page and Storybook:
 
 - [Open Self Service website](https://www.openselfservice.com)
 - [Storybook](https://storybook-o2s.openselfservice.com/)
