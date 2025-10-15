@@ -1,8 +1,8 @@
 ---
-slug: leveraging-ai-to-speed-up-design-system-documentation-in-storybook
-title: 'Leveraging AI to speed up design system documentation in Storybook'
+slug: leveraging-ai-to-speed-up-ui-documentation-in-storybook
+title: 'Leveraging AI to speed up UI documentation in Storybook'
 description: 'How we used AI to transform days of tedious component documentation into a comprehensive Storybook library in just hours'
-keywords: ['storybook', 'ai', 'documentation', 'component library', 'react', 'automation', 'developer productivity', 'nextjs', 'design system', 'cursor', 'junie']
+keywords: ['storybook', 'ai', 'documentation', 'component library', 'react', 'automation', 'developer productivity', 'nextjs', 'design system', 'ui', 'cursor', 'junie']
 date: 2025-10-15
 tags: [tech, ai]
 authors: [marcin.krasowski]
@@ -10,7 +10,7 @@ toc_max_heading_level: 3
 hide_table_of_contents: false
 ---
 
-# Leveraging AI to speed up design system documentation in Storybook
+# Leveraging AI to speed up UI documentation in Storybook
 
 The silent debt of undocumented components sooner or later occurs in many development projects. What begins as a few simple UI elements inevitably grows into a complex ecosystem of specialized components, each with their own variants, states, and quirks. Without proper documentation, even the most elegant component library becomes a labyrinth that team members must navigate through tribal knowledge and scattered comments.
 
@@ -388,7 +388,7 @@ First, we needed to verify that each component's stories accurately represented 
 
 What we discovered were several instances where there were incorrect props used. Some components had props that simply did not exist - for example, for the Input component it tried to set `label` which couldn't even be provided; in some other cases, it misinterpreted the purpose of certain props. These issues were relatively easy to fix but would have caused confusion if left unaddressed.
 
-As we've already seen, we also needed to manually adjust the number of stories for certain components. In some cases, the AI created too many separate stories where a single configurable one would be more maintainable. In other instances, particularly for complex components with distinct visual states, we actually needed to add more stories to properly showcase all the important variations - but these cases were thankfully very few. 
+As we've already seen, we also needed to manually adjust the number of stories for certain components. In some cases, the AI created too many separate stories where a single configurable one would be more maintainable. In other instances, particularly for complex components with distinct visual states, we actually needed to add more stories to properly showcase all the important variations - but these cases were thankfully very few.
 
 > Actually, we found out that some generated stories reflected component states or variants that we ourselves would not think to document - which is another proof that such an approach not only speeds up development, but also helps in filling out blanks that would have been left by just human work.
 
