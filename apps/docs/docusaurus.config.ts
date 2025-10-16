@@ -254,7 +254,18 @@ const config: Config = {
     markdown: {
         mermaid: true,
     },
-    plugins: [tailwindPlugin, '@docusaurus/theme-mermaid', 'docusaurus-plugin-image-zoom', 'docusaurus-plugin-sass'],
+    plugins: [
+        tailwindPlugin,
+        '@docusaurus/theme-mermaid',
+        'docusaurus-plugin-image-zoom',
+        'docusaurus-plugin-sass',
+        [
+            '@docusaurus/plugin-google-tag-manager',
+            {
+                containerId: 'GTM-MFNWVRP6',
+            },
+        ],
+    ],
     presets: [
         [
             'classic',
@@ -384,8 +395,12 @@ const config: Config = {
                       {
                           label: 'Partners',
                           to: '/partners',
-                          position: 'left',
                       },
+                    {
+                        to: '/dxp',
+                        label: 'DXP Starter',
+                        position: 'left',
+                    },
 
                       {
                           type: 'search',
@@ -402,12 +417,6 @@ const config: Config = {
                           label: 'Contact us',
                           position: 'right',
                           className: 'button button-tertiary',
-                      },
-                      {
-                          to: '/dxp',
-                          label: 'DXP Starter',
-                          position: 'right',
-                          className: 'button button-primary',
                       },
                   ],
         },

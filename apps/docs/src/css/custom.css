@@ -460,6 +460,9 @@ aside:not(.theme-doc-sidebar-container) {
 .navbar .navbar__item.button:last-child {
     margin-right: 0;
 }
+.navbar__items--right > :last-child {
+    padding-right: 1rem !important;
+}
 .navbar .button:hover {
     border: none;
 }

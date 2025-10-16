@@ -18,6 +18,8 @@
     },
     "dependencies": {
         "@docusaurus/core": "3.9.1",
+        "@docusaurus/plugin-google-gtag": "^3.9.1",
+        "@docusaurus/plugin-google-tag-manager": "^3.9.1",
         "@docusaurus/preset-classic": "3.9.1",
         "@docusaurus/theme-mermaid": "3.9.1",
         "@easyops-cn/docusaurus-search-local": "^0.52.1",
