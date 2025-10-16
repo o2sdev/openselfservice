@@ -19,5 +19,6 @@
             ],
             "rangeStrategy": "widen"
         }
-    ]
+    ],
+    "postUpdateOptions": ["npmInstallTwice"]
 }
