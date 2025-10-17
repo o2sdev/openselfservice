@@ -3,6 +3,9 @@
     "compilerOptions": {
         "outDir": "dist",
         "baseUrl": "./",
+        "jsx": "preserve",
+        "resolveJsonModule": true,
+        "types": ["react", "react-dom"],
         "paths": {
             "@o2s/ui/*": ["./src/*"],
             "@o2s/ui/elements/*": ["./src/elements/*"],
