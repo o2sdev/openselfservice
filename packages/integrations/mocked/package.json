@@ -45,7 +45,7 @@
         "@o2s/typescript-config": "*",
         "@o2s/telemetry": "*",
         "concurrently": "^9.2.1",
-        "eslint": "^9.37.0",
+        "eslint": "^9.38.0",
         "prettier": "^3.6.2",
         "shx": "^0.4.0",
         "tsc-alias": "^1.8.16",
