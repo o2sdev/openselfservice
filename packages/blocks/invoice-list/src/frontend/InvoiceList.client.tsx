@@ -5,25 +5,22 @@ import React, { useState, useTransition } from 'react';
 
 import { Mappings, Utils } from '@o2s/utils.frontend';
 
-import { cn } from '@o2s/ui/lib/utils';
-
 import { toast } from '@o2s/ui/hooks/use-toast';
 
 import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
 
+import { DataList } from '@o2s/ui/components/DataList';
+import type { DataListColumnConfig } from '@o2s/ui/components/DataList';
 import { FiltersSection } from '@o2s/ui/components/Filters';
 import { NoResults } from '@o2s/ui/components/NoResults';
 import { Pagination } from '@o2s/ui/components/Pagination';
-import { Price } from '@o2s/ui/components/Price';
 
-import { Badge } from '@o2s/ui/elements/badge';
 import { Button } from '@o2s/ui/elements/button';
 import { Link } from '@o2s/ui/elements/link';
 import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
 import { Separator } from '@o2s/ui/elements/separator';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@o2s/ui/elements/table';
 
-import { Request } from '../api-harmonization/invoice-list.client';
+import { Model, Request } from '../api-harmonization/invoice-list.client';
 import { sdk } from '../sdk';
 
 import { InvoiceListPureProps } from './InvoiceList.types';
@@ -74,6 +71,65 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
         }
     };
 
+    // Define columns configuration outside JSX for better readability
+    const columns = data.table.data.columns.map((column) => {
+        switch (column.id) {
+            case 'type':
+                return {
+                    ...column,
+                    type: 'text',
+                    cellClassName: 'max-w-[100px] md:max-w-sm',
+                };
+            case 'paymentStatus':
+                return {
+                    ...column,
+                    type: 'badge',
+                    variant: (value: string) =>
+                        Mappings.InvoiceBadge.invoiceBadgePaymentStatusVariants[
+                            value as keyof typeof Mappings.InvoiceBadge.invoiceBadgePaymentStatusVariants
+                        ],
+                };
+            case 'paymentDueDate':
+                return {
+                    ...column,
+                    type: 'date',
+                };
+            case 'totalAmountDue':
+            case 'totalNetAmountDue':
+                return {
+                    ...column,
+                    type: 'price',
+                    headerClassName: 'text-right',
+                    cellClassName: 'text-right',
+                    config: { currencyKey: 'currency' },
+                };
+            default:
+                return {
+                    ...column,
+                    type: 'text',
+                };
+        }
+    }) as DataListColumnConfig<Model.Invoice>[];
+
+    const actions = data.table.data.actions
+        ? {
+              ...data.table.data.actions,
+              render: (invoice: Model.Invoice) => (
+                  <Link asChild>
+                      <Button
+                          variant="link"
+                          className="flex items-center justify-end gap-2"
+                          onClick={() => handleDownload(invoice.id)}
+                          aria-description={data.downloadButtonAriaDescription?.replace('{id}', invoice.id)}
+                      >
+                          <Download className="h-4 w-4" />
+                          {data.table.data.actions!.label}
+                      </Button>
+                  </Link>
+              ),
+          }
+        : undefined;
+
     return (
         <div className="w-full">
             {initialData.length > 0 ? (
@@ -91,121 +147,12 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
                         <LoadingOverlay isActive={isPending}>
                             {data.invoices.data.length ? (
                                 <div className="flex flex-col gap-6">
-                                    <Table>
-                                        <TableHeader>
-                                            <TableRow>
-                                                {data.table.data.columns.map((column) => (
-                                                    <TableHead
-                                                        key={column.id}
-                                                        className={cn(
-                                                            'py-3 px-4 text-sm text-muted-foreground md:text-nowrap',
-                                                            column.id === 'totalAmountDue' && 'text-right',
-                                                            column.id === 'totalNetAmountDue' && 'text-right',
-                                                        )}
-                                                    >
-                                                        {column.title}
-                                                    </TableHead>
-                                                ))}
-                                                {data.table.data.actions && (
-                                                    <TableHead className="py-3 px-4 text-sm text-muted-foreground md:text-nowrap">
-                                                        {data.table.data.actions.title}
-                                                    </TableHead>
-                                                )}
-                                            </TableRow>
-                                        </TableHeader>
-                                        <TableBody>
-                                            {data.invoices.data.map((invoice) => {
-                                                return (
-                                                    <TableRow key={invoice.id}>
-                                                        {data.table.data.columns.map((column) => {
-                                                            switch (column.id) {
-                                                                case 'type':
-                                                                    return (
-                                                                        <TableCell
-                                                                            key={column.id}
-                                                                            className="max-w-[100px] md:max-w-sm truncate whitespace-nowrap"
-                                                                        >
-                                                                            {invoice[column.id].displayValue}
-                                                                        </TableCell>
-                                                                    );
-                                                                case 'id':
-                                                                    return (
-                                                                        <TableCell
-                                                                            key={column.id}
-                                                                            className="truncate whitespace-nowrap"
-                                                                        >
-                                                                            {invoice[column.id]}
-                                                                        </TableCell>
-                                                                    );
-                                                                case 'paymentStatus':
-                                                                    return (
-                                                                        <TableCell
-                                                                            key={column.id}
-                                                                            className="whitespace-nowrap"
-                                                                        >
-                                                                            <Badge
-                                                                                variant={
-                                                                                    Mappings.InvoiceBadge
-                                                                                        .invoiceBadgePaymentStatusVariants[
-                                                                                        invoice.paymentStatus.value
-                                                                                    ]
-                                                                                }
-                                                                            >
-                                                                                {invoice[column.id].displayValue}
-                                                                            </Badge>
-                                                                        </TableCell>
-                                                                    );
-                                                                case 'paymentDueDate':
-                                                                    return (
-                                                                        <TableCell
-                                                                            key={column.id}
-                                                                            className="whitespace-nowrap truncate"
-                                                                        >
-                                                                            {invoice[column.id].displayValue}
-                                                                        </TableCell>
-                                                                    );
-                                                                case 'totalAmountDue':
-                                                                case 'totalNetAmountDue':
-                                                                    return (
-                                                                        <TableCell
-                                                                            key={column.id}
-                                                                            className="whitespace-nowrap text-right truncate"
-                                                                        >
-                                                                            <Price
-                                                                                price={{
-                                                                                    value: invoice[column.id].value,
-                                                                                    currency: invoice.currency,
-                                                                                }}
-                                                                            />
-                                                                        </TableCell>
-                                                                    );
-                                                                default:
-                                                                    return null;
-                                                            }
-                                                        })}
-                                                        {data.table.data.actions && (
-                                                            <TableCell className="py-0">
-                                                                <Link asChild>
-                                                                    <Button
-                                                                        variant="link"
-                                                                        className="flex items-center justify-end gap-2"
-                                                                        onClick={() => handleDownload(invoice.id)}
-                                                                        aria-description={data.downloadButtonAriaDescription?.replace(
-                                                                            '{id}',
-                                                                            invoice.id,
-                                                                        )}
-                                                                    >
-                                                                        <Download className="h-4 w-4" />
-                                                                        {data.table.data.actions.label}
-                                                                    </Button>
-                                                                </Link>
-                                                            </TableCell>
-                                                        )}
-                                                    </TableRow>
-                                                );
-                                            })}
-                                        </TableBody>
-                                    </Table>
+                                    <DataList
+                                        data={data.invoices.data}
+                                        getRowKey={(invoice) => invoice.id}
+                                        columns={columns}
+                                        actions={actions}
+                                    />
 
                                     {data.pagination && (
                                         <Pagination
