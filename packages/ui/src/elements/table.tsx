@@ -26,12 +26,17 @@ const TableFooter = ({ className, ref, ...props }: TableFooterProps) => (
 
 type TableRowProps = React.HTMLAttributes<HTMLTableRowElement> & { ref?: React.Ref<HTMLTableRowElement> };
 const TableRow = ({ className, ref, ...props }: TableRowProps) => (
-    <tr ref={ref} className={cn('border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted', className)} {...props} />
+    <tr
+        ref={ref}
+        className={cn('border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted', className)}
+        {...props}
+    />
 );
 
-type TableHeadProps = React.ThHTMLAttributes<HTMLTableCellElement> & React.HTMLAttributes<HTMLTableCellElement> & {
-    ref?: React.Ref<HTMLTableCellElement>;
-};
+type TableHeadProps = React.ThHTMLAttributes<HTMLTableCellElement> &
+    React.HTMLAttributes<HTMLTableCellElement> & {
+        ref?: React.Ref<HTMLTableCellElement>;
+    };
 const TableHead = ({ className, ref, ...props }: TableHeadProps) => (
     <th
         ref={ref}
@@ -43,9 +48,10 @@ const TableHead = ({ className, ref, ...props }: TableHeadProps) => (
     />
 );
 
-type TableCellProps = React.TdHTMLAttributes<HTMLTableCellElement> & React.HTMLAttributes<HTMLTableCellElement> & {
-    ref?: React.Ref<HTMLTableCellElement>;
-};
+type TableCellProps = React.TdHTMLAttributes<HTMLTableCellElement> &
+    React.HTMLAttributes<HTMLTableCellElement> & {
+        ref?: React.Ref<HTMLTableCellElement>;
+    };
 const TableCell = ({ className, ref, ...props }: TableCellProps) => (
     <td ref={ref} className={cn('p-4 align-middle [&:has([role=checkbox])]:pr-0', className)} {...props} />
 );

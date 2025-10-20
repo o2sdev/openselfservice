@@ -16,7 +16,7 @@ const SheetClose = SheetPrimitive.Close;
 const SheetPortal = SheetPrimitive.Portal;
 
 type SheetOverlayProps = React.ComponentPropsWithoutRef<typeof SheetPrimitive.Overlay> & {
-    ref?: React.Ref<React.ElementRef<typeof SheetPrimitive.Overlay>>;
+    ref?: React.Ref<React.ComponentRef<typeof SheetPrimitive.Overlay>>;
 };
 const SheetOverlay = ({ className, ref, ...props }: SheetOverlayProps) => (
     <SheetPrimitive.Overlay
@@ -53,7 +53,7 @@ interface SheetContentProps
 }
 
 type SheetContentOwnProps = SheetContentProps & {
-    ref?: React.Ref<React.ElementRef<typeof SheetPrimitive.Content>>;
+    ref?: React.Ref<React.ComponentRef<typeof SheetPrimitive.Content>>;
 };
 const SheetContent = ({ side = 'right', closeLabel, className, children, ref, ...props }: SheetContentOwnProps) => (
     <SheetPortal>
@@ -79,14 +79,14 @@ const SheetFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElemen
 SheetFooter.displayName = 'SheetFooter';
 
 type SheetTitleProps = React.ComponentPropsWithoutRef<typeof SheetPrimitive.Title> & {
-    ref?: React.Ref<React.ElementRef<typeof SheetPrimitive.Title>>;
+    ref?: React.Ref<React.ComponentRef<typeof SheetPrimitive.Title>>;
 };
 const SheetTitle = ({ className, ref, ...props }: SheetTitleProps) => (
     <SheetPrimitive.Title ref={ref} className={cn('text-lg font-semibold text-foreground', className)} {...props} />
 );
 
 type SheetDescriptionProps = React.ComponentPropsWithoutRef<typeof SheetPrimitive.Description> & {
-    ref?: React.Ref<React.ElementRef<typeof SheetPrimitive.Description>>;
+    ref?: React.Ref<React.ComponentRef<typeof SheetPrimitive.Description>>;
 };
 const SheetDescription = ({ className, ref, ...props }: SheetDescriptionProps) => (
     <SheetPrimitive.Description ref={ref} className={cn('text-sm text-muted-foreground', className)} {...props} />

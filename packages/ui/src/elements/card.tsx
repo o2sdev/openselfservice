@@ -20,7 +20,9 @@ const CardDescription = ({ className, ref, ...props }: CardSectionProps) => (
     <div ref={ref} className={cn('text-sm text-muted-foreground', className)} {...props} />
 );
 
-const CardContent = ({ className, ref, ...props }: CardSectionProps) => <div ref={ref} className={cn('p-6', className)} {...props} />;
+const CardContent = ({ className, ref, ...props }: CardSectionProps) => (
+    <div ref={ref} className={cn('p-6', className)} {...props} />
+);
 
 const CardFooter = ({ className, ref, ...props }: CardSectionProps) => (
     <div ref={ref} className={cn('flex items-center p-6 pt-0', className)} {...props} />

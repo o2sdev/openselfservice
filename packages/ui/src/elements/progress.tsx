@@ -8,7 +8,7 @@ export interface ProgressProps extends React.ComponentPropsWithoutRef<typeof Pro
 }
 
 type ProgressOwnProps = ProgressProps & {
-    ref?: React.Ref<React.ElementRef<typeof ProgressPrimitive.Root>>;
+    ref?: React.Ref<React.ComponentRef<typeof ProgressPrimitive.Root>>;
 };
 const Progress = ({ className, value, orientation = 'horizontal', ref, ...props }: ProgressOwnProps) => (
     <ProgressPrimitive.Root

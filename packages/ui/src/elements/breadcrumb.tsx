@@ -4,14 +4,20 @@ import * as React from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
-type BreadcrumbProps = React.ComponentPropsWithoutRef<'nav'> & { separator?: React.ReactNode; ref?: React.Ref<HTMLElement> };
+type BreadcrumbProps = React.ComponentPropsWithoutRef<'nav'> & {
+    separator?: React.ReactNode;
+    ref?: React.Ref<HTMLElement>;
+};
 const Breadcrumb = ({ ref, ...props }: BreadcrumbProps) => <nav ref={ref} aria-label="breadcrumb" {...props} />;
 
 type BreadcrumbListProps = React.ComponentPropsWithoutRef<'ol'> & { ref?: React.Ref<HTMLOListElement> };
 const BreadcrumbList = ({ className, ref, ...props }: BreadcrumbListProps) => (
     <ol
         ref={ref}
-        className={cn('flex flex-wrap items-center gap-1.5 break-words text-sm text-muted-foreground sm:gap-2.5', className)}
+        className={cn(
+            'flex flex-wrap items-center gap-1.5 break-words text-sm text-muted-foreground sm:gap-2.5',
+            className,
+        )}
         {...props}
     />
 );
@@ -21,7 +27,10 @@ const BreadcrumbItem = ({ className, ref, ...props }: BreadcrumbItemProps) => (
     <li ref={ref} className={cn('inline-flex items-center gap-1.5', className)} {...props} />
 );
 
-type BreadcrumbLinkProps = React.ComponentPropsWithoutRef<'a'> & { asChild?: boolean; ref?: React.Ref<HTMLAnchorElement> };
+type BreadcrumbLinkProps = React.ComponentPropsWithoutRef<'a'> & {
+    asChild?: boolean;
+    ref?: React.Ref<HTMLAnchorElement>;
+};
 const BreadcrumbLink = ({ asChild, className, ref, ...props }: BreadcrumbLinkProps) => {
     const Comp = asChild ? Slot : 'a';
     return <Comp ref={ref} className={cn('transition-colors hover:text-foreground', className)} {...props} />;

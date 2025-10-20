@@ -4,7 +4,7 @@ import * as React from 'react';
 import { cn } from '@o2s/ui/lib/utils';
 
 type SeparatorProps = React.ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root> & {
-    ref?: React.Ref<React.ElementRef<typeof SeparatorPrimitive.Root>>;
+    ref?: React.Ref<React.ComponentRef<typeof SeparatorPrimitive.Root>>;
 };
 const Separator = ({ className, orientation = 'horizontal', decorative = true, ref, ...props }: SeparatorProps) => (
     <SeparatorPrimitive.Root

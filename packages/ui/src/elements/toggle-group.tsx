@@ -25,7 +25,7 @@ const toggleGroupVariants = cva('flex items-center justify-center gap-1', {
 });
 
 type ToggleGroupProps = React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> &
-    VariantProps<typeof toggleVariants> & { ref?: React.Ref<React.ElementRef<typeof ToggleGroupPrimitive.Root>> };
+    VariantProps<typeof toggleVariants> & { ref?: React.Ref<React.ComponentRef<typeof ToggleGroupPrimitive.Root>> };
 const ToggleGroup = ({ className, variant, size, children, ref, ...props }: ToggleGroupProps) => {
     const context = React.useContext(ToggleGroupContext);
 
@@ -46,7 +46,7 @@ const ToggleGroup = ({ className, variant, size, children, ref, ...props }: Togg
 };
 
 type ToggleGroupItemProps = React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Item> &
-    VariantProps<typeof toggleVariants> & { ref?: React.Ref<React.ElementRef<typeof ToggleGroupPrimitive.Item>> };
+    VariantProps<typeof toggleVariants> & { ref?: React.Ref<React.ComponentRef<typeof ToggleGroupPrimitive.Item>> };
 const ToggleGroupItem = ({ className, children, variant, size, ref, ...props }: ToggleGroupItemProps) => {
     const context = React.useContext(ToggleGroupContext);
 

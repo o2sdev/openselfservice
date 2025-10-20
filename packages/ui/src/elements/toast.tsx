@@ -8,7 +8,7 @@ import { cn } from '@o2s/ui/lib/utils';
 const ToastProvider = ToastPrimitives.Provider;
 
 type ToastViewportProps = React.ComponentPropsWithoutRef<typeof ToastPrimitives.Viewport> & {
-    ref?: React.Ref<React.ElementRef<typeof ToastPrimitives.Viewport>>;
+    ref?: React.Ref<React.ComponentRef<typeof ToastPrimitives.Viewport>>;
 };
 const ToastViewport = ({ className, ref, ...props }: ToastViewportProps) => (
     <ToastPrimitives.Viewport
@@ -37,13 +37,13 @@ const toastVariants = cva(
 );
 
 type ToastOwnProps = React.ComponentPropsWithoutRef<typeof ToastPrimitives.Root> &
-    VariantProps<typeof toastVariants> & { ref?: React.Ref<React.ElementRef<typeof ToastPrimitives.Root>> };
+    VariantProps<typeof toastVariants> & { ref?: React.Ref<React.ComponentRef<typeof ToastPrimitives.Root>> };
 const Toast = ({ className, variant, ref, ...props }: ToastOwnProps) => {
     return <ToastPrimitives.Root ref={ref} className={cn(toastVariants({ variant }), className)} {...props} />;
 };
 
 type ToastActionProps = React.ComponentPropsWithoutRef<typeof ToastPrimitives.Action> & {
-    ref?: React.Ref<React.ElementRef<typeof ToastPrimitives.Action>>;
+    ref?: React.Ref<React.ComponentRef<typeof ToastPrimitives.Action>>;
 };
 const ToastAction = ({ className, ref, ...props }: ToastActionProps) => (
     <ToastPrimitives.Action
@@ -57,7 +57,7 @@ const ToastAction = ({ className, ref, ...props }: ToastActionProps) => (
 );
 
 type ToastCloseProps = React.ComponentPropsWithoutRef<typeof ToastPrimitives.Close> & {
-    ref?: React.Ref<React.ElementRef<typeof ToastPrimitives.Close>>;
+    ref?: React.Ref<React.ComponentRef<typeof ToastPrimitives.Close>>;
 };
 const ToastClose = ({ className, ref, ...props }: ToastCloseProps) => (
     <ToastPrimitives.Close
@@ -74,14 +74,14 @@ const ToastClose = ({ className, ref, ...props }: ToastCloseProps) => (
 );
 
 type ToastTitleProps = React.ComponentPropsWithoutRef<typeof ToastPrimitives.Title> & {
-    ref?: React.Ref<React.ElementRef<typeof ToastPrimitives.Title>>;
+    ref?: React.Ref<React.ComponentRef<typeof ToastPrimitives.Title>>;
 };
 const ToastTitle = ({ className, ref, ...props }: ToastTitleProps) => (
     <ToastPrimitives.Title ref={ref} className={cn('text-sm font-semibold', className)} {...props} />
 );
 
 type ToastDescriptionProps = React.ComponentPropsWithoutRef<typeof ToastPrimitives.Description> & {
-    ref?: React.Ref<React.ElementRef<typeof ToastPrimitives.Description>>;
+    ref?: React.Ref<React.ComponentRef<typeof ToastPrimitives.Description>>;
 };
 const ToastDescription = ({ className, ref, ...props }: ToastDescriptionProps) => (
     <ToastPrimitives.Description ref={ref} className={cn('text-sm opacity-90', className)} {...props} />

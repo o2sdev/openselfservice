@@ -5,7 +5,7 @@ import * as React from 'react';
 import { cn } from '@o2s/ui/lib/utils';
 
 type SwitchProps = React.ComponentPropsWithoutRef<typeof SwitchPrimitives.Root> & {
-    ref?: React.Ref<React.ElementRef<typeof SwitchPrimitives.Root>>;
+    ref?: React.Ref<React.ComponentRef<typeof SwitchPrimitives.Root>>;
 };
 const Switch = ({ className, ref, ...props }: SwitchProps) => (
     <SwitchPrimitives.Root

@@ -10,7 +10,7 @@ const Tooltip = TooltipPrimitive.Root;
 const TooltipTrigger = TooltipPrimitive.Trigger;
 
 type TooltipContentProps = React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content> & {
-    ref?: React.Ref<React.ElementRef<typeof TooltipPrimitive.Content>>;
+    ref?: React.Ref<React.ComponentRef<typeof TooltipPrimitive.Content>>;
 };
 const TooltipContent = ({ className, sideOffset = 4, ref, ...props }: TooltipContentProps) => (
     <TooltipPrimitive.Content

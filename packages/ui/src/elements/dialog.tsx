@@ -15,7 +15,7 @@ const DialogPortal = DialogPrimitive.Portal;
 const DialogClose = DialogPrimitive.Close;
 
 type DialogOverlayProps = React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay> & {
-    ref?: React.Ref<React.ElementRef<typeof DialogPrimitive.Overlay>>;
+    ref?: React.Ref<React.ComponentRef<typeof DialogPrimitive.Overlay>>;
 };
 const DialogOverlay = ({ className, ref, ...props }: DialogOverlayProps) => (
     <DialogPrimitive.Overlay
@@ -29,7 +29,7 @@ const DialogOverlay = ({ className, ref, ...props }: DialogOverlayProps) => (
 );
 
 type DialogContentProps = React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & {
-    ref?: React.Ref<React.ElementRef<typeof DialogPrimitive.Content>>;
+    ref?: React.Ref<React.ComponentRef<typeof DialogPrimitive.Content>>;
 };
 const DialogContent = ({ className, children, ref, ...props }: DialogContentProps) => (
     <DialogPortal>
@@ -62,14 +62,18 @@ const DialogFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivEleme
 DialogFooter.displayName = 'DialogFooter';
 
 type DialogTitleProps = React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title> & {
-    ref?: React.Ref<React.ElementRef<typeof DialogPrimitive.Title>>;
+    ref?: React.Ref<React.ComponentRef<typeof DialogPrimitive.Title>>;
 };
 const DialogTitle = ({ className, ref, ...props }: DialogTitleProps) => (
-    <DialogPrimitive.Title ref={ref} className={cn('text-lg font-semibold leading-none tracking-tight', className)} {...props} />
+    <DialogPrimitive.Title
+        ref={ref}
+        className={cn('text-lg font-semibold leading-none tracking-tight', className)}
+        {...props}
+    />
 );
 
 type DialogDescriptionProps = React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description> & {
-    ref?: React.Ref<React.ElementRef<typeof DialogPrimitive.Description>>;
+    ref?: React.Ref<React.ComponentRef<typeof DialogPrimitive.Description>>;
 };
 const DialogDescription = ({ className, ref, ...props }: DialogDescriptionProps) => (
     <DialogPrimitive.Description ref={ref} className={cn('text-sm text-muted-foreground', className)} {...props} />

@@ -35,7 +35,7 @@ export interface SelectTriggerProps
         VariantProps<typeof selectVariants> {}
 
 type SelectTriggerOwnProps = SelectTriggerProps & {
-    ref?: React.Ref<React.ElementRef<typeof SelectPrimitive.Trigger>>;
+    ref?: React.Ref<React.ComponentRef<typeof SelectPrimitive.Trigger>>;
 };
 const SelectTrigger = ({ variant, className, children, ref, ...props }: SelectTriggerOwnProps) => (
     <SelectPrimitive.Trigger ref={ref} className={cn(selectVariants({ variant, className }))} {...props}>
@@ -47,25 +47,33 @@ const SelectTrigger = ({ variant, className, children, ref, ...props }: SelectTr
 );
 
 type SelectScrollUpButtonProps = React.ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollUpButton> & {
-    ref?: React.Ref<React.ElementRef<typeof SelectPrimitive.ScrollUpButton>>;
+    ref?: React.Ref<React.ComponentRef<typeof SelectPrimitive.ScrollUpButton>>;
 };
 const SelectScrollUpButton = ({ className, ref, ...props }: SelectScrollUpButtonProps) => (
-    <SelectPrimitive.ScrollUpButton ref={ref} className={cn('flex cursor-default items-center justify-center py-1', className)} {...props}>
+    <SelectPrimitive.ScrollUpButton
+        ref={ref}
+        className={cn('flex cursor-default items-center justify-center py-1', className)}
+        {...props}
+    >
         <ChevronUp className="h-4 w-4" />
     </SelectPrimitive.ScrollUpButton>
 );
 
 type SelectScrollDownButtonProps = React.ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollDownButton> & {
-    ref?: React.Ref<React.ElementRef<typeof SelectPrimitive.ScrollDownButton>>;
+    ref?: React.Ref<React.ComponentRef<typeof SelectPrimitive.ScrollDownButton>>;
 };
 const SelectScrollDownButton = ({ className, ref, ...props }: SelectScrollDownButtonProps) => (
-    <SelectPrimitive.ScrollDownButton ref={ref} className={cn('flex cursor-default items-center justify-center py-1', className)} {...props}>
+    <SelectPrimitive.ScrollDownButton
+        ref={ref}
+        className={cn('flex cursor-default items-center justify-center py-1', className)}
+        {...props}
+    >
         <ChevronDown className="h-4 w-4" />
     </SelectPrimitive.ScrollDownButton>
 );
 
 type SelectContentProps = React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content> & {
-    ref?: React.Ref<React.ElementRef<typeof SelectPrimitive.Content>>;
+    ref?: React.Ref<React.ComponentRef<typeof SelectPrimitive.Content>>;
 };
 const SelectContent = ({ className, children, position = 'popper', ref, ...props }: SelectContentProps) => (
     <SelectPrimitive.Portal>
@@ -96,14 +104,14 @@ const SelectContent = ({ className, children, position = 'popper', ref, ...props
 );
 
 type SelectLabelProps = React.ComponentPropsWithoutRef<typeof SelectPrimitive.Label> & {
-    ref?: React.Ref<React.ElementRef<typeof SelectPrimitive.Label>>;
+    ref?: React.Ref<React.ComponentRef<typeof SelectPrimitive.Label>>;
 };
 const SelectLabel = ({ className, ref, ...props }: SelectLabelProps) => (
     <SelectPrimitive.Label ref={ref} className={cn('py-1.5 pl-8 pr-2 text-sm font-semibold', className)} {...props} />
 );
 
 type SelectItemProps = React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item> & {
-    ref?: React.Ref<React.ElementRef<typeof SelectPrimitive.Item>>;
+    ref?: React.Ref<React.ComponentRef<typeof SelectPrimitive.Item>>;
 };
 const SelectItem = ({ className, children, ref, ...props }: SelectItemProps) => (
     <SelectPrimitive.Item
@@ -125,7 +133,7 @@ const SelectItem = ({ className, children, ref, ...props }: SelectItemProps) => 
 );
 
 type SelectSeparatorProps = React.ComponentPropsWithoutRef<typeof SelectPrimitive.Separator> & {
-    ref?: React.Ref<React.ElementRef<typeof SelectPrimitive.Separator>>;
+    ref?: React.Ref<React.ComponentRef<typeof SelectPrimitive.Separator>>;
 };
 const SelectSeparator = ({ className, ref, ...props }: SelectSeparatorProps) => (
     <SelectPrimitive.Separator ref={ref} className={cn('-mx-1 my-1 h-px bg-muted', className)} {...props} />
@@ -150,17 +158,17 @@ interface SelectWithTitleProps {
 
 type SelectWithTitleOwnProps = SelectWithTitleProps & { ref?: React.Ref<HTMLDivElement> };
 const SelectWithTitle = ({ label, labelClassName, children, id, ref, ...props }: SelectWithTitleOwnProps) => {
-        const generatedId = React.useId();
-        const selectId = id || generatedId;
+    const generatedId = React.useId();
+    const selectId = id || generatedId;
 
-        return (
-            <div className="grid gap-2" ref={ref}>
-                <Label htmlFor={selectId} className={labelClassName}>
-                    {label}
-                </Label>
-                <Select {...props}>{children}</Select>
-            </div>
-        );
+    return (
+        <div className="grid gap-2" ref={ref}>
+            <Label htmlFor={selectId} className={labelClassName}>
+                {label}
+            </Label>
+            <Select {...props}>{children}</Select>
+        </div>
+    );
 };
 
 export {

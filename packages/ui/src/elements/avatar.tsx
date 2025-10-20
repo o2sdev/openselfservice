@@ -23,7 +23,7 @@ type AvatarProps = {
     email?: string;
 } & React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>;
 
-type AvatarOwnProps = AvatarProps & { ref?: React.Ref<React.ElementRef<typeof AvatarPrimitive.Root>> };
+type AvatarOwnProps = AvatarProps & { ref?: React.Ref<React.ComponentRef<typeof AvatarPrimitive.Root>> };
 const Avatar = ({ name, email, className, ref, ...props }: AvatarOwnProps) => (
     <div className="flex items-center gap-2">
         <AvatarPrimitive.Root
@@ -36,7 +36,7 @@ const Avatar = ({ name, email, className, ref, ...props }: AvatarOwnProps) => (
 );
 
 type AvatarImageProps = React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image> & {
-    ref?: React.Ref<React.ElementRef<typeof AvatarPrimitive.Image>>;
+    ref?: React.Ref<React.ComponentRef<typeof AvatarPrimitive.Image>>;
 };
 const AvatarImage = ({ className, alt = '', ref, ...props }: AvatarImageProps) => (
     <AvatarPrimitive.Image ref={ref} className={cn('aspect-square h-full w-full', className)} alt={alt} {...props} />
@@ -49,20 +49,20 @@ export interface AvatarFallbackProps
 }
 
 type AvatarFallbackOwnProps = AvatarFallbackProps & {
-    ref?: React.Ref<React.ElementRef<typeof AvatarPrimitive.Fallback>>;
+    ref?: React.Ref<React.ComponentRef<typeof AvatarPrimitive.Fallback>>;
 };
 const AvatarFallback = ({ variant, className, name, ref, ...props }: AvatarFallbackOwnProps) => {
-        const initials = name
-            .split(' ')
-            .map((name) => name[0])
-            .join('')
-            .toUpperCase();
+    const initials = name
+        .split(' ')
+        .map((name) => name[0])
+        .join('')
+        .toUpperCase();
 
-        return (
-            <AvatarPrimitive.Fallback ref={ref} className={cn(avatarVariants({ variant, className }))} {...props}>
-                {initials}
-            </AvatarPrimitive.Fallback>
-        );
+    return (
+        <AvatarPrimitive.Fallback ref={ref} className={cn(avatarVariants({ variant, className }))} {...props}>
+            {initials}
+        </AvatarPrimitive.Fallback>
+    );
 };
 
 type AvatarUserProps = {

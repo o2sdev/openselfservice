@@ -18,9 +18,10 @@ const alertVariants = cva(
     },
 );
 
-type AlertProps = React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof alertVariants> & {
-    ref?: React.Ref<HTMLDivElement>;
-};
+type AlertProps = React.HTMLAttributes<HTMLDivElement> &
+    VariantProps<typeof alertVariants> & {
+        ref?: React.Ref<HTMLDivElement>;
+    };
 const Alert = ({ className, variant, ref, ...props }: AlertProps) => (
     <div ref={ref} role="alert" className={cn(alertVariants({ variant }), className)} {...props} />
 );

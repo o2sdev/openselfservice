@@ -7,7 +7,7 @@ import { cn } from '@o2s/ui/lib/utils';
 import { Label } from '@o2s/ui/elements/label';
 
 type CheckboxProps = React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> & {
-    ref?: React.Ref<React.ElementRef<typeof CheckboxPrimitive.Root>>;
+    ref?: React.Ref<React.ComponentRef<typeof CheckboxPrimitive.Root>>;
 };
 const Checkbox = ({ className, ref, ...props }: CheckboxProps) => (
     <CheckboxPrimitive.Root
@@ -30,7 +30,7 @@ export interface CheckboxWithLabelProps extends React.ComponentPropsWithoutRef<t
 }
 
 type CheckboxWithLabelOwnProps = CheckboxWithLabelProps & {
-    ref?: React.Ref<React.ElementRef<typeof CheckboxPrimitive.Root>>;
+    ref?: React.Ref<React.ComponentRef<typeof CheckboxPrimitive.Root>>;
 };
 const CheckboxWithLabel = ({ className, label, labelClassName, id, ref, ...props }: CheckboxWithLabelOwnProps) => {
     const generatedId = React.useId();
