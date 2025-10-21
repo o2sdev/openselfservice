@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, NotImplementedException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore module type mismatch
@@ -6,40 +6,57 @@ import { parse, stringify } from 'flatted';
 import { Observable, concatMap, forkJoin, from, map, mergeMap, of } from 'rxjs';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { CMS, Cache, Models } from '@o2s/framework/modules';
+import { Auth, CMS, Cache, Models } from '@o2s/framework/modules';
 
-import { mapArticleDetailsBlock } from './mappers/blocks/cms.article-details.mapper';
+import { PageFragment } from '@/generated/strapi';
+
+import { Service as GraphqlService } from '@/modules/graphql';
+
 import { mapArticleListBlock } from './mappers/blocks/cms.article-list.mapper';
+import { mapArticleSearchBlock } from './mappers/blocks/cms.article-search.mapper';
+import { mapCategoryListBlock } from './mappers/blocks/cms.category-list.mapper';
+import { mapCategoryBlock } from './mappers/blocks/cms.category.mapper';
 import { mapFaqBlock } from './mappers/blocks/cms.faq.mapper';
+import { mapFeaturedServiceListBlock } from './mappers/blocks/cms.featured-service-list.mapper';
 import { mapInvoiceDetailsBlock } from './mappers/blocks/cms.invoice-details.mapper';
 import { mapInvoiceListBlock } from './mappers/blocks/cms.invoice-list.mapper';
 import { mapNotificationDetailsBlock } from './mappers/blocks/cms.notification-details.mapper';
 import { mapNotificationListBlock } from './mappers/blocks/cms.notification-list.mapper';
+import { mapOrderDetailsBlock } from './mappers/blocks/cms.order-details.mapper';
+import { mapOrderListBlock } from './mappers/blocks/cms.order-list.mapper';
+import { mapOrdersSummaryBlock } from './mappers/blocks/cms.orders-summary.mapper';
 import { mapPaymentsHistoryBlock } from './mappers/blocks/cms.payments-history.mapper';
 import { mapPaymentsSummaryBlock } from './mappers/blocks/cms.payments-summary.mapper';
+import { mapQuickLinksBlock } from './mappers/blocks/cms.quick-links.mapper';
 import { mapResourceDetailsBlock } from './mappers/blocks/cms.resource-details.mapper';
 import { mapResourceListBlock } from './mappers/blocks/cms.resource-list.mapper';
 import { mapServiceDetailsBlock } from './mappers/blocks/cms.service-details.mapper';
 import { mapServiceListBlock } from './mappers/blocks/cms.service-list.mapper';
+import { mapSurveyJsBlock } from './mappers/blocks/cms.surveyjs-block.mapper';
 import { mapTicketDetailsBlock } from './mappers/blocks/cms.ticket-details.mapper';
 import { mapTicketListBlock } from './mappers/blocks/cms.ticket-list.mapper';
+import { mapTicketRecentBlock } from './mappers/blocks/cms.ticket-recent.mapper';
 import { mapUserAccountBlock } from './mappers/blocks/cms.user-account.mapper';
 import { mapAppConfig } from './mappers/cms.app-config.mapper';
 import { mapFooter } from './mappers/cms.footer.mapper';
 import { mapHeader } from './mappers/cms.header.mapper';
 import { mapLoginPage } from './mappers/cms.login-page.mapper';
 import { mapNotFoundPage } from './mappers/cms.not-found-page.mapper';
+import { mapOrganizationList } from './mappers/cms.organization-list.mapper';
 import { mapPage } from './mappers/cms.page.mapper';
-import { PageFragment } from '@/generated/strapi';
-import { Service as GraphqlService } from '@/modules/graphql';
+import { mapSurvey } from './mappers/cms.survey.mapper';
 
 @Injectable()
 export class CmsService implements CMS.Service {
+    baseUrl: string;
+
     constructor(
         private readonly graphqlService: GraphqlService,
         private readonly config: ConfigService,
         private readonly cacheService: Cache.Service,
-    ) {}
+    ) {
+        this.baseUrl = this.config.get('CMS_STRAPI_BASE_URL')!;
+    }
 
     private getBlock = (options: CMS.Request.GetCmsEntryParams) => {
         const key = `component-${options.id}-${options.locale}`;
@@ -73,7 +90,6 @@ export class CmsService implements CMS.Service {
         return from(this.cacheService.get(key)).pipe(
             mergeMap((cachedData) => {
                 if (cachedData) {
-                    console.log('cachedData', cachedData);
                     return of(parse(cachedData));
                 }
                 return getData().pipe(
@@ -93,7 +109,7 @@ export class CmsService implements CMS.Service {
                 locale: options.locale,
             });
 
-            return forkJoin([appConfig]).pipe(map(([appConfig]) => mapAppConfig(appConfig.data)));
+            return forkJoin([appConfig]).pipe(map(([appConfig]) => mapAppConfig(appConfig.data, this.baseUrl)));
         });
     }
 
@@ -199,7 +215,7 @@ export class CmsService implements CMS.Service {
                         throw new NotFoundException();
                     }
 
-                    return mapLoginPage(loginPage.data, this.config.get('CMS_STRAPI_BASE_URL'));
+                    return mapLoginPage(loginPage.data, this.baseUrl);
                 }),
             );
         });
@@ -238,7 +254,7 @@ export class CmsService implements CMS.Service {
                         throw new NotFoundException();
                     }
 
-                    return mapHeader(header.data, this.config.get('CMS_STRAPI_BASE_URL'));
+                    return mapHeader(header.data, this.baseUrl);
                 }),
             );
         });
@@ -258,7 +274,40 @@ export class CmsService implements CMS.Service {
                         throw new NotFoundException();
                     }
 
-                    return mapFooter(footer.data, this.config.get('CMS_STRAPI_BASE_URL'));
+                    return mapFooter(footer.data, this.baseUrl);
+                }),
+            );
+        });
+    }
+
+    getOrganizationList(options: CMS.Request.GetCmsOrganizationListParams) {
+        const key = `organization-list-${options.locale}`;
+        return this.getCachedBlock(key, () => {
+            const organizationList = this.graphqlService.getOrganizationList({
+                locale: options.locale,
+            });
+
+            return forkJoin([organizationList]).pipe(
+                map(([organizationList]) => {
+                    if (!organizationList?.data.organizationList) {
+                        throw new NotFoundException();
+                    }
+
+                    return mapOrganizationList(organizationList.data);
+                }),
+            );
+        });
+    }
+
+    getSurvey(options: CMS.Request.GetCmsSurveyParams) {
+        const key = `survey-${options.code}`;
+        return this.getCachedBlock(key, () => {
+            const survey = this.graphqlService.getSurvey({
+                code: options.code,
+            });
+            return forkJoin([survey]).pipe(
+                map(([survey]) => {
+                    return mapSurvey(survey.data);
                 }),
             );
         });
@@ -287,16 +336,6 @@ export class CmsService implements CMS.Service {
     getNotificationDetailsBlock(options: CMS.Request.GetCmsEntryParams) {
         const key = `notification-details-component-${options.id}-${options.locale}`;
         return this.getCachedBlock(key, () => of(mapNotificationDetailsBlock()));
-    }
-
-    getArticleListBlock(options: CMS.Request.GetCmsEntryParams) {
-        const key = `article-list-component-${options.id}-${options.locale}`;
-        return this.getCachedBlock(key, () => of(mapArticleListBlock(options.locale)));
-    }
-
-    getArticleDetailsBlock(options: CMS.Request.GetCmsEntryParams) {
-        const key = `article-details-component-${options.id}-${options.locale}`;
-        return this.getCachedBlock(key, () => of(mapArticleDetailsBlock()));
     }
 
     getResourceListBlock(options: CMS.Request.GetCmsEntryParams) {
@@ -334,10 +373,9 @@ export class CmsService implements CMS.Service {
         return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapUserAccountBlock)));
     }
 
-    getTicketRecentBlock(
-        _options: CMS.Request.GetCmsEntryParams,
-    ): Observable<CMS.Model.TicketRecentBlock.TicketRecentBlock> {
-        throw new NotImplementedException();
+    getTicketRecentBlock(options: CMS.Request.GetCmsEntryParams) {
+        const key = `ticket-recent-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapTicketRecentBlock)));
     }
 
     getServiceListBlock(options: CMS.Request.GetCmsEntryParams) {
@@ -345,8 +383,65 @@ export class CmsService implements CMS.Service {
         return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapServiceListBlock)));
     }
 
+    getFeaturedServiceListBlock(options: CMS.Request.GetCmsEntryParams) {
+        const key = `featured-service-list-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapFeaturedServiceListBlock)));
+    }
+
     getServiceDetailsBlock(options: CMS.Request.GetCmsEntryParams) {
         const key = `service-details-component-${options.id}-${options.locale}`;
         return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapServiceDetailsBlock)));
+    }
+
+    getSurveyJsBlock(options: CMS.Request.GetCmsEntryParams) {
+        const key = `survey-js-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapSurveyJsBlock)));
+    }
+
+    getOrderListBlock(options: CMS.Request.GetCmsEntryParams) {
+        const key = `order-list-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapOrderListBlock)));
+    }
+
+    getOrdersSummaryBlock(options: CMS.Request.GetCmsEntryParams) {
+        const key = `orders-summary-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapOrdersSummaryBlock)));
+    }
+
+    getArticleListBlock(
+        options: CMS.Request.GetCmsEntryParams,
+    ): Observable<CMS.Model.ArticleListBlock.ArticleListBlock> {
+        const key = `quick-links-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () =>
+            this.getBlock(options).pipe(map((data) => mapArticleListBlock(data, this.baseUrl))),
+        );
+    }
+
+    getCategoryBlock(options: CMS.Request.GetCmsEntryParams): Observable<CMS.Model.CategoryBlock.CategoryBlock> {
+        const key = `quick-links-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () =>
+            this.getBlock(options).pipe(map((data) => mapCategoryBlock(data, this.baseUrl))),
+        );
+    }
+
+    getCategoryListBlock(options: CMS.Request.GetCmsEntryParams) {
+        const key = `quick-links-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () =>
+            this.getBlock(options).pipe(map((data) => mapCategoryListBlock(data, this.baseUrl))),
+        );
+    }
+
+    getQuickLinksBlock(options: CMS.Request.GetCmsEntryParams) {
+        const key = `quick-links-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () => this.getBlock(options).pipe(map((data) => mapQuickLinksBlock(data))));
+    }
+    getOrderDetailsBlock(options: CMS.Request.GetCmsEntryParams) {
+        const key = `order-details-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapOrderDetailsBlock)));
+    }
+
+    getArticleSearchBlock(options: CMS.Request.GetCmsEntryParams) {
+        const key = `article-search-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapArticleSearchBlock)));
     }
 }

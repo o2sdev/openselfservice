@@ -7,6 +7,7 @@ export * as Integration from './modules/index';
 
 export const Config: Partial<ApiConfig['integrations']> = {
     cms: {
+        name: 'contentful-cms',
         service: CmsService,
         imports: [ContentfulModule, Cache.Module],
     },

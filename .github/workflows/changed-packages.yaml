@@ -22,7 +22,7 @@ jobs:
             package_changed: ${{ steps.changeset.outputs.result }}
 
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v5
               with:
                   # see `fetch-depth` in README: https://github.com/actions/checkout#checkout-v3,
                   # we set to `0` so the referenced commits are available for the command below

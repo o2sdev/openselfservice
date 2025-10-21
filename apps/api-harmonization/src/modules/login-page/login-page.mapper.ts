@@ -1,4 +1,4 @@
-import { CMS } from '../../models';
+import { CMS } from '@o2s/configs.integrations';
 
 import { LoginPage } from './login-page.model';
 

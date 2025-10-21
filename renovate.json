@@ -1,0 +1,24 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": ["config:recommended"],
+    "vulnerabilityAlerts": {
+        "enabled": true
+    },
+    "osvVulnerabilityAlerts": true,
+    "packageRules": [
+        {
+            "matchDepTypes": [
+                "dependencies",
+                "devDependencies"
+            ],
+            "rangeStrategy": "bump"
+        },
+        {
+            "matchDepTypes": [
+                "peerDependencies"
+            ],
+            "rangeStrategy": "widen"
+        }
+    ],
+    "postUpdateOptions": ["npmInstallTwice"]
+}

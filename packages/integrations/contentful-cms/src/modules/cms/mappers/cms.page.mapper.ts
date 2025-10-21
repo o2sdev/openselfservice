@@ -1,1248 +1,64 @@
 import { NotFoundException } from '@nestjs/common';
 import { Entry } from 'contentful';
 
-import { CMS } from '@o2s/framework/modules';
-import { Models } from '@o2s/framework/modules';
+import { CMS, Models } from '@o2s/framework/modules';
 
 import { IBlockFaq, IBlockTicketList, IPageFields, IPageOneColumnTemplate, IPageSeo } from '@/generated/contentful';
 
+import {
+    PAGE_ACCESSORIES_DE,
+    PAGE_ACCESSORIES_EN,
+    PAGE_ACCESSORIES_PL,
+    PAGE_MAINTENANCE_DE,
+    PAGE_MAINTENANCE_EN,
+    PAGE_MAINTENANCE_PL,
+    PAGE_SAFETY_DE,
+    PAGE_SAFETY_EN,
+    PAGE_SAFETY_PL,
+    PAGE_WARRANTY_AND_REPAIR_DE,
+    PAGE_WARRANTY_AND_REPAIR_EN,
+    PAGE_WARRANTY_AND_REPAIR_PL,
+} from './mocks/pages/category.page';
+import { PAGE_DASHBOARD_DE, PAGE_DASHBOARD_EN, PAGE_DASHBOARD_PL } from './mocks/pages/dashboard.page';
+import { PAGE_INVOICE_LIST_DE, PAGE_INVOICE_LIST_EN, PAGE_INVOICE_LIST_PL } from './mocks/pages/invoice-list.page';
+import {
+    PAGE_NOTIFICATION_DETAILS_DE,
+    PAGE_NOTIFICATION_DETAILS_EN,
+    PAGE_NOTIFICATION_DETAILS_PL,
+} from './mocks/pages/notification-details.page';
+import {
+    PAGE_NOTIFICATION_LIST_DE,
+    PAGE_NOTIFICATION_LIST_EN,
+    PAGE_NOTIFICATION_LIST_PL,
+} from './mocks/pages/notification-list.page';
+import { PAGE_ORDER_DETAILS_DE, PAGE_ORDER_DETAILS_EN, PAGE_ORDER_DETAILS_PL } from './mocks/pages/order-details.page';
+import { PAGE_ORDER_LIST_DE, PAGE_ORDER_LIST_EN, PAGE_ORDER_LIST_PL } from './mocks/pages/order-list.page';
+import {
+    PAGE_SERVICE_DETAILS_DE,
+    PAGE_SERVICE_DETAILS_EN,
+    PAGE_SERVICE_DETAILS_PL,
+} from './mocks/pages/service-details.page';
+import { PAGE_SERVICE_LIST_DE, PAGE_SERVICE_LIST_EN, PAGE_SERVICE_LIST_PL } from './mocks/pages/service-list.page';
+import {
+    PAGE_COMPLAINT_FORM_DE,
+    PAGE_COMPLAINT_FORM_EN,
+    PAGE_COMPLAINT_FORM_PL,
+    PAGE_CONTACT_US_DE,
+    PAGE_CONTACT_US_EN,
+    PAGE_CONTACT_US_PL,
+    PAGE_REQUEST_DEVICE_MAINTENANCE_DE,
+    PAGE_REQUEST_DEVICE_MAINTENANCE_EN,
+    PAGE_REQUEST_DEVICE_MAINTENANCE_PL,
+} from './mocks/pages/surveyjs-forms.page';
+import {
+    PAGE_TICKET_DETAILS_DE,
+    PAGE_TICKET_DETAILS_EN,
+    PAGE_TICKET_DETAILS_PL,
+} from './mocks/pages/ticket-details.page';
+import { PAGE_TICKET_LIST_DE, PAGE_TICKET_LIST_EN, PAGE_TICKET_LIST_PL } from './mocks/pages/ticket-list.page';
+import { PAGE_USER_ACCOUNT_DE, PAGE_USER_ACCOUNT_EN, PAGE_USER_ACCOUNT_PL } from './mocks/pages/user-account.page';
+
 export type IBlocks = IBlockTicketList | IBlockFaq;
-
-const PAGE_DASHBOARD_PL: CMS.Model.Page.Page = {
-    slug: '/',
-    id: '1',
-    locale: 'pl',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Strona główna',
-        description: 'Strona główna',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alternativeText: 'Placeholder',
-        },
-    },
-    hasOwnTitle: false,
-    parent: {
-        slug: '',
-    },
-    template: {
-        __typename: 'TwoColumnTemplate',
-        slots: {
-            top: [],
-            left: [
-                {
-                    __typename: 'PaymentsSummaryBlock',
-                    id: 'payments-summary-1',
-                },
-            ],
-            right: [
-                {
-                    __typename: 'TicketRecentBlock',
-                    id: 'ticket-recent-1',
-                },
-            ],
-
-            bottom: [
-                {
-                    __typename: 'FaqBlock',
-                    id: '1buaEvtriqqz7diUjOUP4x',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-};
-
-const PAGE_DASHBOARD_EN: CMS.Model.Page.Page = {
-    slug: '/',
-    id: '1',
-    locale: 'en',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Dashboard',
-        description: 'Dashboard',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alternativeText: 'Placeholder',
-        },
-    },
-    hasOwnTitle: false,
-    parent: {
-        slug: '',
-    },
-    template: {
-        __typename: 'TwoColumnTemplate',
-        slots: {
-            top: [],
-            left: [
-                {
-                    __typename: 'PaymentsSummaryBlock',
-                    id: 'payments-summary-1',
-                },
-            ],
-            right: [
-                {
-                    __typename: 'TicketRecentBlock',
-                    id: 'ticket-recent-1',
-                },
-            ],
-
-            bottom: [
-                {
-                    __typename: 'FaqBlock',
-                    id: '1buaEvtriqqz7diUjOUP4x',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-};
-
-const PAGE_DASHBOARD_DE: CMS.Model.Page.Page = {
-    slug: '/',
-    id: '1',
-    locale: 'de',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Startseite',
-        description: 'Startseite',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alternativeText: 'Placeholder',
-        },
-    },
-    hasOwnTitle: false,
-    parent: {
-        slug: '',
-    },
-    template: {
-        __typename: 'TwoColumnTemplate',
-        slots: {
-            top: [],
-            left: [
-                {
-                    __typename: 'PaymentsSummaryBlock',
-                    id: 'payments-summary-1',
-                },
-            ],
-            right: [
-                {
-                    __typename: 'TicketRecentBlock',
-                    id: 'ticket-recent-1',
-                },
-            ],
-
-            bottom: [
-                {
-                    __typename: 'FaqBlock',
-                    id: '1buaEvtriqqz7diUjOUP4x',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-};
-
-const PAGE_TICKET_LIST_EN: CMS.Model.Page.Page = {
-    id: '2',
-    slug: '/cases',
-    locale: 'en',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Cases',
-        description: 'Cases',
-        keywords: ['cases', 'case', 'casescase'],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alternativeText: 'Placeholder',
-        },
-    },
-    hasOwnTitle: false,
-    parent: {
-        slug: '/',
-        seo: {
-            title: 'Dashboard',
-        },
-    },
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'TicketListBlock',
-                    id: '2OKt2CbF5fmZZs3HLcTfk8',
-                },
-                {
-                    __typename: 'FaqBlock',
-                    id: '1buaEvtriqqz7diUjOUP4x',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-};
-
-const PAGE_TICKET_LIST_DE: CMS.Model.Page.Page = {
-    id: '2',
-    slug: '/faelle',
-    locale: 'de',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Fälle',
-        description: 'Fälle',
-        keywords: ['kassen', 'kassenfall', 'kassenfallfall'],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alternativeText: 'Placeholder',
-        },
-    },
-    hasOwnTitle: false,
-    parent: {
-        slug: '/',
-        seo: {
-            title: 'Startseite',
-        },
-    },
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'TicketListBlock',
-                    id: 'ticket-list-1',
-                },
-                {
-                    __typename: 'FaqBlock',
-                    id: '1buaEvtriqqz7diUjOUP4x',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-};
-
-const PAGE_TICKET_LIST_PL: CMS.Model.Page.Page = {
-    id: '2',
-    slug: '/zgloszenia',
-    locale: 'pl',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Zgłoszenia',
-        description: 'Zgłoszenia',
-        keywords: ['zgloszenia', 'zgloszenie', 'zgloszeniazgloszenia'],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alternativeText: 'Placeholder',
-        },
-    },
-    hasOwnTitle: false,
-    parent: {
-        slug: '/',
-        seo: {
-            title: 'Strona główna',
-        },
-    },
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'TicketListBlock',
-                    id: 'ticket-list-1',
-                },
-                {
-                    __typename: 'FaqBlock',
-                    id: '1buaEvtriqqz7diUjOUP4x',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-};
-
-const PAGE_TICKET_DETAILS_EN: CMS.Model.Page.Page = {
-    id: '3',
-    slug: '/cases/(.+)',
-    locale: 'en',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Ticket Details',
-        description: 'Ticket Details',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alternativeText: 'Placeholder',
-        },
-    },
-    hasOwnTitle: true,
-    parent: {
-        slug: '/cases',
-        seo: {
-            title: 'Cases',
-        },
-        parent: {
-            slug: '/',
-            seo: {
-                title: 'Dashboard',
-            },
-        },
-    },
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'TicketDetailsBlock',
-                    id: 'ticket-details-1',
-                },
-                {
-                    __typename: 'FaqBlock',
-                    id: '1buaEvtriqqz7diUjOUP4x',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-};
-
-const PAGE_TICKET_DETAILS_DE: CMS.Model.Page.Page = {
-    id: '3',
-    slug: '/faelle/(.+)',
-    locale: 'de',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Fälle',
-        description: 'Fälle',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alternativeText: 'Placeholder',
-        },
-    },
-    hasOwnTitle: true,
-    parent: {
-        slug: '/faelle',
-        seo: {
-            title: 'Fälle',
-        },
-        parent: {
-            slug: '/',
-            seo: {
-                title: 'Startseite',
-            },
-        },
-    },
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'TicketDetailsBlock',
-                    id: 'ticket-details-1',
-                },
-                {
-                    __typename: 'FaqBlock',
-                    id: '1buaEvtriqqz7diUjOUP4x',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-};
-
-const PAGE_TICKET_DETAILS_PL: CMS.Model.Page.Page = {
-    id: '3',
-    slug: '/zgloszenia/(.+)',
-    locale: 'pl',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Zgłoszenia',
-        description: 'Zgłoszenia',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alternativeText: 'Placeholder',
-        },
-    },
-    hasOwnTitle: true,
-    parent: {
-        slug: '/zgloszenia',
-        seo: {
-            title: 'Zgłoszenia',
-        },
-        parent: {
-            slug: '/',
-            seo: {
-                title: 'Strona główna',
-            },
-        },
-    },
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'TicketDetailsBlock',
-                    id: 'ticket-details-1',
-                },
-                {
-                    __typename: 'FaqBlock',
-                    id: '1buaEvtriqqz7diUjOUP4x',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-};
-
-const PAGE_NOTIFICATION_LIST_EN: CMS.Model.Page.Page = {
-    id: '4',
-    slug: '/notifications',
-    locale: 'en',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Notifications',
-        description: 'Notifications',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alternativeText: 'Placeholder',
-        },
-    },
-    hasOwnTitle: false,
-    parent: {
-        slug: '/',
-        seo: {
-            title: 'Dashboard',
-        },
-    },
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'NotificationListBlock',
-                    id: 'notification-list-1',
-                },
-                {
-                    __typename: 'FaqBlock',
-                    id: '1buaEvtriqqz7diUjOUP4x',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-};
-
-const PAGE_NOTIFICATION_LIST_DE: CMS.Model.Page.Page = {
-    id: '4',
-    slug: '/benachrichtigungen',
-    locale: 'de',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Benachrichtigungen',
-        description: 'Benachrichtigungen',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alternativeText: 'Placeholder',
-        },
-    },
-    hasOwnTitle: false,
-    parent: {
-        slug: '/',
-        seo: {
-            title: 'Dashboard',
-        },
-    },
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'NotificationListBlock',
-                    id: 'notification-list-1',
-                },
-                {
-                    __typename: 'FaqBlock',
-                    id: '1buaEvtriqqz7diUjOUP4x',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-};
-
-const PAGE_NOTIFICATION_LIST_PL: CMS.Model.Page.Page = {
-    id: '4',
-    slug: '/powiadomienia',
-    locale: 'pl',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Powiadomienia',
-        description: 'Powiadomienia',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alternativeText: 'Placeholder',
-        },
-    },
-    hasOwnTitle: false,
-    parent: {
-        slug: '/',
-        seo: {
-            title: 'Dashboard',
-        },
-    },
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'NotificationListBlock',
-                    id: 'notification-list-1',
-                },
-                {
-                    __typename: 'FaqBlock',
-                    id: '1buaEvtriqqz7diUjOUP4x',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-};
-
-const PAGE_INVOICE_LIST_EN: CMS.Model.Page.Page = {
-    id: '5',
-    slug: '/invoices',
-    locale: 'en',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Invoices',
-        description: 'Invoices',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alternativeText: 'Placeholder',
-        },
-    },
-    hasOwnTitle: false,
-    parent: {
-        slug: '/',
-        seo: {
-            title: 'Dashboard',
-        },
-    },
-    template: {
-        __typename: 'TwoColumnTemplate',
-        slots: {
-            top: [],
-            left: [
-                {
-                    __typename: 'PaymentsSummaryBlock',
-                    id: 'payments-summary-1',
-                },
-            ],
-            right: [
-                {
-                    __typename: 'PaymentsHistoryBlock',
-                    id: 'payments-history-1',
-                },
-            ],
-            bottom: [
-                {
-                    __typename: 'InvoiceListBlock',
-                    id: 'invoice-list-1',
-                },
-                {
-                    __typename: 'FaqBlock',
-                    id: '1buaEvtriqqz7diUjOUP4x',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-};
-
-const PAGE_INVOICE_LIST_DE: CMS.Model.Page.Page = {
-    id: '5',
-    slug: '/rechnungen',
-    locale: 'de',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Rechnungen',
-        description: 'Rechnungen',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alternativeText: 'Placeholder',
-        },
-    },
-    hasOwnTitle: false,
-    parent: {
-        slug: '/',
-        seo: {
-            title: 'Startseite',
-        },
-    },
-    template: {
-        __typename: 'TwoColumnTemplate',
-        slots: {
-            top: [],
-            left: [
-                {
-                    __typename: 'PaymentsSummaryBlock',
-                    id: 'payments-summary-1',
-                },
-            ],
-            right: [
-                {
-                    __typename: 'PaymentsHistoryBlock',
-                    id: 'payments-history-1',
-                },
-            ],
-            bottom: [
-                {
-                    __typename: 'InvoiceListBlock',
-                    id: 'invoice-list-1',
-                },
-                {
-                    __typename: 'FaqBlock',
-                    id: '1buaEvtriqqz7diUjOUP4x',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-};
-
-const PAGE_INVOICE_LIST_PL: CMS.Model.Page.Page = {
-    id: '5',
-    slug: '/rachunki',
-    locale: 'pl',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Rachunki',
-        description: 'Rachunki',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alternativeText: 'Placeholder',
-        },
-    },
-    hasOwnTitle: false,
-    parent: {
-        slug: '/',
-        seo: {
-            title: 'Strona główna',
-        },
-    },
-    template: {
-        __typename: 'TwoColumnTemplate',
-        slots: {
-            top: [],
-            left: [
-                {
-                    __typename: 'PaymentsSummaryBlock',
-                    id: 'payments-summary-1',
-                },
-            ],
-            right: [
-                {
-                    __typename: 'PaymentsHistoryBlock',
-                    id: 'payments-history-1',
-                },
-            ],
-            bottom: [
-                {
-                    __typename: 'InvoiceListBlock',
-                    id: 'invoice-list-1',
-                },
-                {
-                    __typename: 'FaqBlock',
-                    id: '1buaEvtriqqz7diUjOUP4x',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-};
-
-const PAGE_NOTIFICATION_DETAILS_EN: CMS.Model.Page.Page = {
-    id: '6',
-    slug: '/notifications/(.+)',
-    locale: 'en',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Notification Details',
-        description: 'Notification Details',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alternativeText: 'Placeholder',
-        },
-    },
-    hasOwnTitle: true,
-    parent: {
-        slug: '/notifications',
-        seo: {
-            title: 'Notifications',
-        },
-        parent: {
-            slug: '/',
-            seo: {
-                title: 'Dashboard',
-            },
-        },
-    },
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'NotificationDetailsBlock',
-                    id: 'notification-details-1',
-                },
-                {
-                    __typename: 'FaqBlock',
-                    id: '1buaEvtriqqz7diUjOUP4x',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-};
-
-const PAGE_NOTIFICATION_DETAILS_DE: CMS.Model.Page.Page = {
-    id: '6',
-    slug: '/benachrichtigungen/(.+)',
-    locale: 'de',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Benachrichtigung Details',
-        description: 'Benachrichtigung Details',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alternativeText: 'Placeholder',
-        },
-    },
-    hasOwnTitle: true,
-    parent: {
-        slug: '/benachrichtigungen',
-        seo: {
-            title: 'Benachrichtigungen',
-        },
-        parent: {
-            slug: '/',
-            seo: {
-                title: 'Startseite',
-            },
-        },
-    },
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'NotificationDetailsBlock',
-                    id: 'notification-details-1',
-                },
-                {
-                    __typename: 'FaqBlock',
-                    id: '1buaEvtriqqz7diUjOUP4x',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-};
-
-const PAGE_NOTIFICATION_DETAILS_PL: CMS.Model.Page.Page = {
-    id: '6',
-    slug: '/powiadomienia/(.+)',
-    locale: 'pl',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Powiadomienia',
-        description: 'Powiadomienia',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alternativeText: 'Placeholder',
-        },
-    },
-    hasOwnTitle: true,
-    parent: {
-        slug: '/powiadomienia',
-        seo: {
-            title: 'Powiadomienia',
-        },
-        parent: {
-            slug: '/',
-            seo: {
-                title: 'Strona główna',
-            },
-        },
-    },
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'NotificationDetailsBlock',
-                    id: 'notification-details-1',
-                },
-                {
-                    __typename: 'FaqBlock',
-                    id: '1buaEvtriqqz7diUjOUP4x',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-};
-
-const PAGE_USER_ACCOUNT_EN: CMS.Model.Page.Page = {
-    id: '7',
-    slug: '/user-account',
-    locale: 'en',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'User Account',
-        description: 'User Account',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alternativeText: 'Placeholder',
-        },
-    },
-    hasOwnTitle: true,
-    parent: {
-        slug: '/',
-        seo: {
-            title: 'Dashboard',
-        },
-    },
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'UserAccountBlock',
-                    id: 'user-account-1',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-};
-
-const PAGE_USER_ACCOUNT_DE: CMS.Model.Page.Page = {
-    id: '7',
-    slug: '/benutzerkonto',
-    locale: 'de',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Benutzerkonto',
-        description: 'Benutzerkonto',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alternativeText: 'Placeholder',
-        },
-    },
-    hasOwnTitle: true,
-    parent: {
-        slug: '/',
-        seo: {
-            title: 'Startseite',
-        },
-    },
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'UserAccountBlock',
-                    id: 'user-account-1',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-};
-
-const PAGE_USER_ACCOUNT_PL: CMS.Model.Page.Page = {
-    id: '7',
-    slug: '/konto-uzytkownika',
-    locale: 'pl',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Konto użytkownika',
-        description: 'Konto użytkownika',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alternativeText: 'Placeholder',
-        },
-    },
-    hasOwnTitle: true,
-    parent: {
-        slug: '/',
-        seo: {
-            title: 'Strona główna',
-        },
-    },
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'UserAccountBlock',
-                    id: 'user-account-1',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-};
-
-const PAGE_SERVICE_LIST_EN: CMS.Model.Page.Page = {
-    id: '8',
-    slug: '/services',
-    locale: 'en',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Services',
-        description: 'Services',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alternativeText: 'Placeholder',
-        },
-    },
-    hasOwnTitle: false,
-    parent: {
-        slug: '/',
-        seo: {
-            title: 'Dashboard',
-        },
-    },
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'ServiceListBlock',
-                    id: 'service-list-1',
-                },
-                {
-                    __typename: 'FaqBlock',
-                    id: '1buaEvtriqqz7diUjOUP4x',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-};
-
-const PAGE_SERVICE_LIST_DE: CMS.Model.Page.Page = {
-    id: '8',
-    slug: '/dienstleistungen',
-    locale: 'de',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Dienstleistungen',
-        description: 'Dienstleistungen',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alternativeText: 'Placeholder',
-        },
-    },
-    hasOwnTitle: false,
-    parent: {
-        slug: '/',
-        seo: {
-            title: 'Startseite',
-        },
-    },
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'ServiceListBlock',
-                    id: 'service-list-1',
-                },
-                {
-                    __typename: 'FaqBlock',
-                    id: '1buaEvtriqqz7diUjOUP4x',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-};
-
-const PAGE_SERVICE_LIST_PL: CMS.Model.Page.Page = {
-    id: '8',
-    slug: '/uslugi',
-    locale: 'pl',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Usługi',
-        description: 'Usługi',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alternativeText: 'Placeholder',
-        },
-    },
-    hasOwnTitle: false,
-    parent: {
-        slug: '/',
-        seo: {
-            title: 'Strona główna',
-        },
-    },
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'ServiceListBlock',
-                    id: 'service-list-1',
-                },
-                {
-                    __typename: 'FaqBlock',
-                    id: '1buaEvtriqqz7diUjOUP4x',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-};
-
-const PAGE_SERVICE_DETAILS_EN: CMS.Model.Page.Page = {
-    id: '3',
-    slug: '/services/(.+)',
-    locale: 'en',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Service Details',
-        description: 'Service Details',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alternativeText: 'Placeholder',
-        },
-    },
-    hasOwnTitle: true,
-    parent: {
-        slug: '/services',
-        seo: {
-            title: 'Services',
-        },
-        parent: {
-            slug: '/',
-            seo: {
-                title: 'Dashboard',
-            },
-        },
-    },
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'ServiceDetailsBlock',
-                    id: 'service-details-1',
-                },
-                {
-                    __typename: 'FaqBlock',
-                    id: '1buaEvtriqqz7diUjOUP4x',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-};
-
-const PAGE_SERVICE_DETAILS_DE: CMS.Model.Page.Page = {
-    id: '3',
-    slug: '/dienstleistungen/(.+)',
-    locale: 'de',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Dienstleistungen',
-        description: 'Dienstleistungen',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alternativeText: 'Placeholder',
-        },
-    },
-    hasOwnTitle: true,
-    parent: {
-        slug: '/dienstleistungen',
-        seo: {
-            title: 'Dienstleistungen',
-        },
-        parent: {
-            slug: '/',
-            seo: {
-                title: 'Startseite',
-            },
-        },
-    },
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'ServiceDetailsBlock',
-                    id: 'service-details-1',
-                },
-                {
-                    __typename: 'FaqBlock',
-                    id: '1buaEvtriqqz7diUjOUP4x',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-};
-
-const PAGE_SERVICE_DETAILS_PL: CMS.Model.Page.Page = {
-    id: '3',
-    slug: '/uslugi/(.+)',
-    locale: 'pl',
-    seo: {
-        noIndex: false,
-        noFollow: false,
-        title: 'Usługi',
-        description: 'Usługi',
-        keywords: [],
-        image: {
-            url: 'https://picsum.photos/150',
-            width: 150,
-            height: 150,
-            alternativeText: 'Placeholder',
-        },
-    },
-    hasOwnTitle: true,
-    parent: {
-        slug: '/uslugi',
-        seo: {
-            title: 'Usługi',
-        },
-        parent: {
-            slug: '/',
-            seo: {
-                title: 'Strona główna',
-            },
-        },
-    },
-    template: {
-        __typename: 'OneColumnTemplate',
-        slots: {
-            main: [
-                {
-                    __typename: 'ServiceDetailsBlock',
-                    id: 'service-details-1',
-                },
-                {
-                    __typename: 'FaqBlock',
-                    id: '1buaEvtriqqz7diUjOUP4x',
-                },
-            ],
-        },
-    },
-    updatedAt: '2025-01-01',
-};
 
 export const mapMockPage = (slug: string, locale: string): CMS.Model.Page.Page | undefined => {
     switch (slug) {
@@ -1361,6 +177,15 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_USER_ACCOUNT_PL,
                 PAGE_SERVICE_LIST_PL,
                 PAGE_SERVICE_DETAILS_PL,
+                PAGE_CONTACT_US_PL,
+                PAGE_COMPLAINT_FORM_PL,
+                PAGE_REQUEST_DEVICE_MAINTENANCE_PL,
+                PAGE_ORDER_LIST_PL,
+                PAGE_ORDER_DETAILS_PL,
+                PAGE_WARRANTY_AND_REPAIR_PL,
+                PAGE_MAINTENANCE_PL,
+                PAGE_SAFETY_PL,
+                PAGE_ACCESSORIES_PL,
             ];
         case 'de':
             return [
@@ -1373,6 +198,15 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_USER_ACCOUNT_DE,
                 PAGE_SERVICE_LIST_DE,
                 PAGE_SERVICE_DETAILS_DE,
+                PAGE_CONTACT_US_DE,
+                PAGE_COMPLAINT_FORM_DE,
+                PAGE_REQUEST_DEVICE_MAINTENANCE_DE,
+                PAGE_ORDER_LIST_DE,
+                PAGE_ORDER_DETAILS_DE,
+                PAGE_WARRANTY_AND_REPAIR_DE,
+                PAGE_MAINTENANCE_DE,
+                PAGE_SAFETY_DE,
+                PAGE_ACCESSORIES_DE,
             ];
         case 'en':
             return [
@@ -1385,6 +219,15 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_USER_ACCOUNT_EN,
                 PAGE_SERVICE_LIST_EN,
                 PAGE_SERVICE_DETAILS_EN,
+                PAGE_CONTACT_US_EN,
+                PAGE_COMPLAINT_FORM_EN,
+                PAGE_REQUEST_DEVICE_MAINTENANCE_EN,
+                PAGE_ORDER_LIST_EN,
+                PAGE_ORDER_DETAILS_EN,
+                PAGE_WARRANTY_AND_REPAIR_EN,
+                PAGE_MAINTENANCE_EN,
+                PAGE_SAFETY_EN,
+                PAGE_ACCESSORIES_EN,
             ];
         default:
             return [];
@@ -1420,6 +263,33 @@ export const getAlternativePages = (id: string, slug: string, locale: string): C
         PAGE_SERVICE_DETAILS_EN,
         PAGE_SERVICE_DETAILS_DE,
         PAGE_SERVICE_DETAILS_PL,
+        PAGE_CONTACT_US_EN,
+        PAGE_CONTACT_US_DE,
+        PAGE_CONTACT_US_PL,
+        PAGE_COMPLAINT_FORM_EN,
+        PAGE_COMPLAINT_FORM_DE,
+        PAGE_COMPLAINT_FORM_PL,
+        PAGE_REQUEST_DEVICE_MAINTENANCE_EN,
+        PAGE_REQUEST_DEVICE_MAINTENANCE_DE,
+        PAGE_REQUEST_DEVICE_MAINTENANCE_PL,
+        PAGE_ORDER_LIST_EN,
+        PAGE_ORDER_LIST_DE,
+        PAGE_ORDER_LIST_PL,
+        PAGE_ORDER_DETAILS_EN,
+        PAGE_ORDER_DETAILS_DE,
+        PAGE_ORDER_DETAILS_PL,
+        PAGE_WARRANTY_AND_REPAIR_EN,
+        PAGE_WARRANTY_AND_REPAIR_DE,
+        PAGE_WARRANTY_AND_REPAIR_PL,
+        PAGE_MAINTENANCE_EN,
+        PAGE_MAINTENANCE_DE,
+        PAGE_MAINTENANCE_PL,
+        PAGE_SAFETY_EN,
+        PAGE_SAFETY_DE,
+        PAGE_SAFETY_PL,
+        PAGE_ACCESSORIES_EN,
+        PAGE_ACCESSORIES_DE,
+        PAGE_ACCESSORIES_PL,
     ]
         .filter((page) => page.id === id)
         .map((page) => mapMockPage(page.slug, locale)!)
@@ -1444,23 +314,20 @@ export const mapPage = (entryPage: Entry<IPageFields>): CMS.Model.Page.Page => {
         locale: entryPage.sys.locale,
         template: template,
         updatedAt: entryPage.sys.updatedAt,
+        createdAt: entryPage.sys.createdAt,
         seo: seo,
         hasOwnTitle: entryPage.fields.hasOwnTitle,
         parent: {
             slug: entryPage.fields.parent?.fields.slug ?? '',
-            seo: entryPage.fields.parent?.fields.seo ? mapSeo(entryPage.fields.parent?.fields.seo) : undefined,
+            seo: mapSeo(entryPage.fields.parent?.fields.seo),
             parent: entryPage.fields.parent?.fields.parent
                 ? {
                       slug: entryPage.fields.parent?.fields.parent?.fields.slug ?? '',
-                      seo: entryPage.fields.parent?.fields.parent?.fields.seo
-                          ? mapSeo(entryPage.fields.parent?.fields.parent?.fields.seo)
-                          : undefined,
+                      seo: mapSeo(entryPage.fields.parent?.fields.parent?.fields.seo),
                       parent: entryPage.fields.parent?.fields.parent?.fields.parent
                           ? {
                                 slug: entryPage.fields.parent?.fields.parent?.fields.parent?.fields.slug ?? '',
-                                seo: entryPage.fields.parent?.fields.parent?.fields.parent?.fields.seo
-                                    ? mapSeo(entryPage.fields.parent?.fields.parent?.fields.parent?.fields.seo)
-                                    : undefined,
+                                seo: mapSeo(entryPage.fields.parent?.fields.parent?.fields.parent?.fields.seo),
                             }
                           : undefined,
                   }

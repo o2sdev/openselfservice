@@ -1,6 +1,6 @@
-import { RequestMethod } from '../sdk';
-
 import { Model, Request } from '@/modules/invoices';
+
+import { RequestMethod } from '../sdk';
 
 const API_URL = '/invoices';
 

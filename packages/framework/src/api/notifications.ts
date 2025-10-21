@@ -1,6 +1,6 @@
-import { RequestMethod } from '../sdk';
-
 import { Model, Request } from '@/modules/notifications';
+
+import { RequestMethod } from '../sdk';
 
 const API_URL = '/notifications';
 

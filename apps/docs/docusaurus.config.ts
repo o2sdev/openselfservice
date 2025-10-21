@@ -53,6 +53,7 @@ const config: Config = {
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
                 gtag('config', 'G-RMFECPB5NW');
+                gtag('config', 'AW-16682846527');
             `,
         },
         // Apple touch icons (precomposed)
@@ -253,7 +254,18 @@ const config: Config = {
     markdown: {
         mermaid: true,
     },
-    plugins: [tailwindPlugin, '@docusaurus/theme-mermaid', 'docusaurus-plugin-image-zoom'],
+    plugins: [
+        tailwindPlugin,
+        '@docusaurus/theme-mermaid',
+        'docusaurus-plugin-image-zoom',
+        'docusaurus-plugin-sass',
+        [
+            '@docusaurus/plugin-google-tag-manager',
+            {
+                containerId: 'GTM-MFNWVRP6',
+            },
+        ],
+    ],
     presets: [
         [
             'classic',
@@ -265,7 +277,7 @@ const config: Config = {
                           routeBasePath: '/docs',
                           // Please change this to your repo.
                           // Remove this to remove the "edit this page" links.
-                          editUrl: 'https://github.com/o2sdev/openselfservice/tree/main/apps/docs/',
+                          // editUrl: 'https://github.com/o2sdev/openselfservice/tree/main/apps/docs/',
                       },
                 // blog: false,
                 blog: hideDocs
@@ -278,7 +290,7 @@ const config: Config = {
                           },
                           // Please change this to your repo.
                           // Remove this to remove the "edit this page" links.
-                          editUrl: 'https://github.com/o2sdev/openselfservice/tree/main/apps/docs/',
+                          // editUrl: 'https://github.com/o2sdev/openselfservice/tree/main/apps/docs/',
                           // Useful options to enforce blogging best practices
                           onInlineTags: 'warn',
                           onInlineAuthors: 'warn',
@@ -324,22 +336,87 @@ const config: Config = {
                 ? undefined
                 : [
                       {
+                          type: 'dropdown',
+                          label: 'Developers',
+                          position: 'left',
+                          items: [
+                              {
+                                  label: 'Documentation',
+                                  to: '/docs',
+                              },
+                              {
+                                  label: 'Community',
+                                  href: 'https://discord.gg/4R568nZgsT',
+                              },
+                              {
+                                  label: 'Changelog',
+                                  to: '/blog/tags/releases',
+                              },
+                              {
+                                  label: 'Github',
+                                  href: 'https://github.com/o2sdev/openselfservice',
+                              },
+                          ],
+                      },
+                      {
+                          type: 'dropdown',
+                          label: 'Resources',
+                          position: 'left',
+                          items: [
+                              {
+                                  label: 'Blog',
+                                  to: '/blog',
+                              },
+                              {
+                                  label: 'Roadmap',
+                                  href: 'https://github.com/orgs/o2sdev/projects/2',
+                              },
+                          ],
+                      },
+                      {
+                          type: 'dropdown',
+                          label: 'Support',
+                          position: 'left',
+                          items: [
+                              {
+                                  label: 'For developers',
+                                  to: '/support/developers',
+                              },
+                              {
+                                  label: 'Enterprise support',
+                                  to: '/support/enterprise',
+                              },
+                              {
+                                  label: 'Contact us',
+                                  to: '/contact',
+                              },
+                          ],
+                      },
+                      {
+                          label: 'Partners',
+                          to: '/partners',
+                      },
+                    {
+                        to: '/dxp',
+                        label: 'DXP Starter',
+                        position: 'left',
+                    },
+
+                      {
                           type: 'search',
                           position: 'right',
                       },
-                      {
-                          type: 'docSidebar',
-                          sidebarId: 'tutorialSidebar',
-                          position: 'right',
-                          label: 'Docs',
-                          className: 'navbar__item--docs',
-                      },
-                      { to: '/blog', label: 'Blog', position: 'right', className: 'navbar__item--guides' },
                       {
                           to: 'https://github.com/o2sdev/openselfservice',
                           label: 'GitHub',
                           position: 'right',
                           className: 'navbar__item--github',
+                      },
+                      {
+                          to: '/contact',
+                          label: 'Contact us',
+                          position: 'right',
+                          className: 'button button-tertiary',
                       },
                   ],
         },
@@ -370,15 +447,23 @@ const config: Config = {
                           ],
                       },
                       {
-                          title: 'Community',
+                          title: 'Developers',
                           items: [
                               {
-                                  label: 'LinkedIn',
-                                  href: 'https://www.linkedin.com/company/open-self-service/',
+                                  label: 'Documentation',
+                                  to: '/docs',
                               },
                               {
-                                  label: 'O2S on X',
-                                  href: 'https://x.com/openselfservice',
+                                  label: 'Community',
+                                  href: 'https://discord.gg/4R568nZgsT',
+                              },
+                              {
+                                  label: 'Changelog',
+                                  to: '/blog/tags/releases',
+                              },
+                              {
+                                  label: 'Github',
+                                  href: 'https://github.com/o2sdev/openselfservice',
                               },
                           ],
                       },
@@ -386,8 +471,12 @@ const config: Config = {
                           title: 'More',
                           items: [
                               {
-                                  label: 'GitHub',
-                                  href: 'https://github.com/o2sdev/openselfservice',
+                                  label: 'Partners',
+                                  to: '/partners',
+                              },
+                              {
+                                  to: '/contact',
+                                  label: 'Contact us',
                               },
                           ],
                       },
@@ -399,7 +488,7 @@ const config: Config = {
                     </div>
 
                     <div class="text-right flex flex-col md:flex-row justify-between items-center gap-4">
-                        <a class="text-white" href="https://hycom.digital/privacy-policy" target="_blank">Privacy Policy</a> Open Self Service © ${new Date().getFullYear()} Hycom S.A.
+                        <a class="text-white!" href="https://hycom.digital/privacy-policy" target="_blank">Privacy Policy</a> Open Self Service © ${new Date().getFullYear()} Hycom S.A.
                     </div>
                 </div>
             `,

@@ -1,5 +1,437 @@
 # @o2s/integrations.mocked
 
+## 1.12.0
+
+### Minor Changes
+
+- 9ad8658: made improvements to the way the code splitting to reduce the total size of JS bundles
+
+## 1.11.3
+
+### Patch Changes
+
+- 4a42e9c: improvements for knowledge base blocks and layouts
+- Updated dependencies [4a42e9c]
+    - @o2s/framework@1.11.2
+
+## 1.11.2
+
+### Patch Changes
+
+- 5f25529: added stories for UI components
+- Updated dependencies [5f25529]
+- Updated dependencies [5f25529]
+    - @o2s/framework@1.11.1
+
+## 1.11.1
+
+### Patch Changes
+
+- 9c62515: removed Polish characters from mocked URLs for servivces
+
+## 1.11.0
+
+### Minor Changes
+
+- 2421fb2: A major rework of the approach to the blocks - separated all block-related code from `api-harmonization` and `frontend` apps into separate packages, allowing versioning and much easier updates in other apps started using `create-o2s-app` script
+
+### Patch Changes
+
+- Updated dependencies [2421fb2]
+    - @o2s/framework@1.11.0
+
+## 1.10.0
+
+### Minor Changes
+
+- 6e5f193: feat: update organization role names
+
+### Patch Changes
+
+- Updated dependencies [6e5f193]
+    - @o2s/framework@1.10.0
+
+## 1.9.1
+
+### Patch Changes
+
+- 4c5a8a4: extended `FormField` model into input/select/switch subtypes for future use
+- Updated dependencies [4c5a8a4]
+    - @o2s/framework@1.9.2
+
+## 1.9.0
+
+### Minor Changes
+
+- e81621c: added `PROSPECT` role for freshly-created users
+
+### Patch Changes
+
+- Updated dependencies [e81621c]
+    - @o2s/framework@1.9.0
+
+## 1.8.0
+
+### Minor Changes
+
+- fb09383: Organizations module:
+
+    - Adding taxId to organization's mock data and adding filtering by taxId in mapOrganizations method.
+    - Adding checkMembership mapper function that validates membership by checking if both organization and user exist in mock data.
+    - Implement checkMembership method in mocked organizations service using the mapper function with simulated response delay.
+
+    Users module:
+
+    - Adding username to users mock data, exporting MOCK_USERS and adding mapUsers mapper function that filter existing users by username
+    - Adding mapUsers function to users mapper with GetUsersQuery support that implements username-based filtering for mock user data
+    - Add abstract getUsers method to UserService to support filtered user list retrieval with pagination and authorization support.
+
+### Patch Changes
+
+- Updated dependencies [fb09383]
+    - @o2s/framework@1.8.0
+
+## 1.7.0
+
+### Minor Changes
+
+- c13192c: adjusted `Page` and `Article` models to conform with new user-based permission model
+
+### Patch Changes
+
+- Updated dependencies [c13192c]
+    - @o2s/framework@1.7.0
+
+## 1.6.8
+
+### Patch Changes
+
+- 38a9331: modified prisma init script
+
+## 1.6.7
+
+### Patch Changes
+
+- 9a93a3d: feat: orders - replace price to be NET
+
+## 1.6.6
+
+### Patch Changes
+
+- ec84ef0: fix: fixed breadcrumb - removed redundant dashboard text
+
+## 1.6.5
+
+### Patch Changes
+
+- 97264f1: feat: replace To be Paid column with Net amount on invoices
+- f4b70b3: added telemetry events for anonymous data collection about usage
+- Updated dependencies [97264f1]
+    - @o2s/framework@1.6.2
+
+## 1.6.4
+
+### Patch Changes
+
+- 41ca705: feat: generate db in prisma as postinstall task
+
+## 1.6.3
+
+### Patch Changes
+
+- 6102f12: added prisma files to package files
+
+## 1.6.2
+
+### Patch Changes
+
+- d1eeee2: reverted postinstall script as it fails when trying to initialise prisma
+
+## 1.6.1
+
+### Patch Changes
+
+- d878a0b: added postinstall stage to properly initialize database
+- 85bb4bb: fix: fixed pagination in products and resources mocks
+
+## 1.6.0
+
+### Minor Changes
+
+- 2a0475c: feat: update products, resources mocks, InfoCard - layout fix
+
+    - updated model for GetRelatedProductListParams - renamed id and variantId to inform that we need to provide product data as params,
+    - added natural data to products and resources mocks,
+    - added sorting and filtering to products.mapper.ts,
+    - fixed InfoCard layout issue,
+
+### Patch Changes
+
+- Updated dependencies [2a0475c]
+    - @o2s/framework@1.6.0
+
+## 1.5.1
+
+### Patch Changes
+
+- 7fdb9c9: added delete user with id method in users module
+- Updated dependencies [7fdb9c9]
+    - @o2s/framework@1.5.1
+
+## 1.5.0
+
+### Minor Changes
+
+- fb98e38: feat: align overdue cards state on Invoices and OrderDetails pages
+- 6949717: feat: updated resource integration - added product to the Resource model
+
+    - updated service-list and service-details blocks,
+    - added sorting and filters to mocks,
+
+### Patch Changes
+
+- Updated dependencies [6949717]
+    - @o2s/framework@1.5.0
+
+## 1.4.0
+
+### Minor Changes
+
+- 027ed39: featuredServiceListBlock - list of available services
+
+    - added new UI componetnt from Shadcn - Switch,
+    - extended ProductCard with action property,
+    - implemented model and mock for FeatureServiceListBlock,
+    - integrated with strapi,
+
+- 9c31433: - added endOfWarranty attribute on asset model
+    - fixed German labels in English mocks
+    - fixed incorrect imports in framework modules configuration
+    - added optional authorization param in most service methods
+
+### Patch Changes
+
+- Updated dependencies [027ed39]
+- Updated dependencies [985780a]
+- Updated dependencies [9c31433]
+    - @o2s/framework@1.4.0
+
+## 1.3.0
+
+### Minor Changes
+
+- 8c29a31: moved mocked auth integration (with a local database) to a separate package to allow easier switching between other integrations
+
+### Patch Changes
+
+- Updated dependencies [8c29a31]
+    - @o2s/framework@1.3.0
+
+## 1.2.0
+
+### Minor Changes
+
+- 1ee5be1: feat: aligned buttons - used ActionList component with dropdown menu
+
+    - used ActionList in the OrderDetailBlock to display buttons,
+    - updated the mock and strapi - now an action is a Link,
+    - used the format method from the string-template to inject a value into a string,
+
+### Patch Changes
+
+- Updated dependencies [1ee5be1]
+    - @o2s/framework@1.2.0
+
+## 1.1.0
+
+### Minor Changes
+
+- 565b63d: feat: fixed pagination issue in articleList
+
+    - added new mocked articles
+    - implemented new additionalLink in ArticleList
+
+- 5d16edf: orderDetails fixes:
+
+    - order model update - product is required now,
+    - filtering moved to order mapper,
+    - PayOnline button visible only when the order is overdue,
+
+- 61d4f2f: Added integration of services and assets with MedusaJS
+- f015c2b: New block ArticleSearch - Input field with suggestions to find appropriate article.
+
+    - added new UI component - Command,
+    - added new articles mock,
+    - added mock for ArticleSearchBlock,
+    - added strapi integration for ArticleSearchBlock,
+    - added new component Autocomplete,
+
+### Patch Changes
+
+- Updated dependencies [565b63d]
+- Updated dependencies [5d16edf]
+- Updated dependencies [61d4f2f]
+- Updated dependencies [f015c2b]
+    - @o2s/framework@1.1.0
+    - @o2s/utils.logger@1.1.0
+
+## 1.0.1
+
+### Patch Changes
+
+- b575e8e: made mocked orders IDs more consistent
+
+## 1.0.0
+
+### Major Changes
+
+- 0e0c816: Official stable release
+
+### Patch Changes
+
+- Updated dependencies [0e0c816]
+    - @o2s/framework@1.0.0
+    - @o2s/utils.logger@1.0.0
+
+## 0.24.1
+
+### Patch Changes
+
+- f52a3fe: updated images in services mocks
+
+## 0.24.0
+
+### Minor Changes
+
+- 05eea01: chore: update dependencies
+- 1200a28: feat: update dashboard mock
+- 44653fb: feat: orderDetails page implemented
+
+    - added new UI component: InfoCard,
+    - used InfoCard in PaymentsSummaryBlock, OrdersSummary and OrderDetails,
+    - fixed ordersSummaryBlock integration with strapi,
+    - used DynamicIcon in CategoryBlock,
+    - added orientation prop for Progress component
+
+### Patch Changes
+
+- a4cf40d: images in articles changed
+- 6baaae4: fixed a typo in a filename
+- Updated dependencies [05eea01]
+- Updated dependencies [44653fb]
+    - @o2s/utils.logger@0.12.0
+    - @o2s/framework@0.24.0
+
+## 0.23.0
+
+### Minor Changes
+
+- 2e81dca: added possibility to defined unprotected pages
+
+### Patch Changes
+
+- Updated dependencies [2e81dca]
+    - @o2s/framework@0.23.0
+
+## 0.22.2
+
+### Patch Changes
+
+- fedee10: fixed mocks for different locales
+
+## 0.22.1
+
+### Patch Changes
+
+- 9ce2262: fixed a typo in organization name
+- 87185e9: feat: updated mocked content for knowledge base
+- Updated dependencies [87185e9]
+    - @o2s/framework@0.22.1
+
+## 0.22.0
+
+### Minor Changes
+
+- 2e4f22d: feat: add scrollable toggle group filter with multiple selection
+
+    - Add scroll container for toggle group filter in overlay view
+    - Implement multiple selection version for toggle group filter
+    - Add support for horizontal scrolling in filter items
+    - Improve filter item layout with proper spacing and alignment
+    - Add new components: ScrollContainer and ToggleGroup
+    - Add shx script for better cross-platform shell compatibility
+    - Add proper styling for filter items in scroll container
+
+- 8b93cbf: feat: Implement SurveyJS forms
+- 8d92afc: Adding label clickToSelect for reseting filters
+- 30f3524: added `OrdersSummary` block and reworked mocked orders to return random orders instead of them being hardcoded
+- 8b93cbf: feat: Integrated SurveyJS
+- 30f3524: feat: implemented orderListBlock
+
+    - new page /orders,
+    - added strapi integration for page /orders
+    - new UI dropdown-menu component
+
+- 8b93cbf: feat: implement surveyJS forms
+- 6d63cb1: feat: added surveyJS module
+- ba125d6: Added orders module
+- 2e4f22d: Replaced cp with shx cp in the postbuild script for cross-platform compatibility.
+- bb46536: feat: cases submission
+
+    - new component DynamicIcon - for loading icons dinamicly,
+    - new component ActionLinks - for showing button list with dropdown-menu,
+    - new pages: /contact-us, /submit-complaint, /request-device-maintenance,
+    - fixed placeholders and disabled state in SurveyJS fields,
+
+- 68f7858: chore: updated dependencies
+
+### Patch Changes
+
+- e4ebc5a: updated dependencies
+- 84b9002: added explicit legend to the chart in `OrdersSummary` block
+- 68925cf: added example icons
+- Updated dependencies [2e4f22d]
+- Updated dependencies [8b93cbf]
+- Updated dependencies [e4ebc5a]
+- Updated dependencies [8d92afc]
+- Updated dependencies [30f3524]
+- Updated dependencies [8b93cbf]
+- Updated dependencies [30f3524]
+- Updated dependencies [8b93cbf]
+- Updated dependencies [84b9002]
+- Updated dependencies [6d63cb1]
+- Updated dependencies [ba125d6]
+- Updated dependencies [bb46536]
+- Updated dependencies [68f7858]
+    - @o2s/framework@0.22.0
+    - @o2s/utils.logger@0.11.0
+
+## 0.21.0
+
+### Minor Changes
+
+- c0ff0a7: implement context switch
+- de00274: updated dependencies
+- c0ff0a7: implement context change, user roles
+- e9dc277: feat: handle user's timezone
+- e9dc277: feat: handle user's timezone
+
+### Patch Changes
+
+- Updated dependencies [c0ff0a7]
+- Updated dependencies [de00274]
+- Updated dependencies [c0ff0a7]
+- Updated dependencies [e9dc277]
+- Updated dependencies [e9dc277]
+    - @o2s/framework@0.21.0
+    - @o2s/utils.logger@0.10.0
+
+## 0.20.0
+
+### Minor Changes
+
+- dadad64: fix: service-list - wrong tag color"
+
 ## 0.19.0
 
 ### Minor Changes

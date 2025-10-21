@@ -2,12 +2,12 @@ import { NotFoundException } from '@nestjs/common';
 
 import { CMS } from '@o2s/framework/modules';
 
+import { GetComponentQuery } from '@/generated/strapi';
+
 import { mapFields } from '../cms.fieldMapping.mapper';
 import { mapFilters } from '../cms.filters.mapper';
 import { mapPagination } from '../cms.pagination.mapper';
 import { mapTable } from '../cms.table.mapper';
-
-import { GetComponentQuery } from '@/generated/strapi';
 
 export const mapInvoiceListBlock = (data: GetComponentQuery): CMS.Model.InvoiceListBlock.InvoiceListBlock => {
     const component = data.component!.content[0];
@@ -33,6 +33,7 @@ export const mapInvoiceListBlock = (data: GetComponentQuery): CMS.Model.InvoiceL
                 labels: {
                     today: configurableTexts?.dates.today,
                     yesterday: configurableTexts?.dates.today,
+                    clickToSelect: configurableTexts.actions.clickToSelect,
                 },
                 table: mapTable(component.table),
                 downloadFileName: component.downloadFileName,

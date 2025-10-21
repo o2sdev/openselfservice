@@ -1,0 +1,8 @@
+fragment TicketRecentComponent on ComponentComponentsTicketRecent {
+    __typename
+    id
+    title
+    commentsTitle
+    limit
+    detailsUrl
+}

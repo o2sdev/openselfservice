@@ -6,32 +6,43 @@ import { Observable, forkJoin, from, map, mergeMap, of } from 'rxjs';
 
 import { CMS, Cache } from '@o2s/framework/modules';
 
+import { IEntry, IPageFields } from '@/generated/contentful';
+
 import { ContentfulService } from '../contentful/contentful.service';
 
-import { mapArticleDetailsBlock } from './mappers/blocks/cms.article-details.mapper';
 import { mapArticleListBlock } from './mappers/blocks/cms.article-list.mapper';
+import { mapArticleSearchBlock } from './mappers/blocks/cms.article-search.mapper';
 import { mapFaqBlock } from './mappers/blocks/cms.faq.mapper';
+import { mapFeaturedServiceListBlock } from './mappers/blocks/cms.featured-service-list.mapper';
 import { mapInvoiceDetailsBlock } from './mappers/blocks/cms.invoice-details.mapper';
 import { mapInvoiceListBlock } from './mappers/blocks/cms.invoice-list.mapper';
 import { mapNotificationDetailsBlock } from './mappers/blocks/cms.notification-details.mapper';
 import { mapNotificationListBlock } from './mappers/blocks/cms.notification-list.mapper';
+import { mapOrderDetailsBlock } from './mappers/blocks/cms.order-details.mapper';
+import { mapOrderListBlock } from './mappers/blocks/cms.order-list.mapper';
+import { mapOrdersSummaryBlock } from './mappers/blocks/cms.orders-summary.mapper';
 import { mapPaymentsHistoryBlock } from './mappers/blocks/cms.payments-history.mapper';
 import { mapPaymentsSummaryBlock } from './mappers/blocks/cms.payments-summary.mapper';
 import { mapResourceDetailsBlock } from './mappers/blocks/cms.resource-details.mapper';
 import { mapResourceListBlock } from './mappers/blocks/cms.resource-list.mapper';
 import { mapServiceDetailsBlock } from './mappers/blocks/cms.service-details.mapper';
 import { mapServiceListBlock } from './mappers/blocks/cms.service-list.mapper';
+import { mapSurveyJsBlock } from './mappers/blocks/cms.surveyjs-block.mapper';
 import { mapTicketDetailsBlock } from './mappers/blocks/cms.ticket-details.mapper';
 import { mapTicketListBlock } from './mappers/blocks/cms.ticket-list.mapper';
 import { mapTicketRecentBlock } from './mappers/blocks/cms.ticket-recent.mapper';
 import { mapUserAccountBlock } from './mappers/blocks/cms.user-account.mapper';
 import { mapAppConfig } from './mappers/cms.app-config.mapper';
+import { mapCategoryListBlock } from './mappers/cms.category-list.mapper';
+import { mapCategoryBlock } from './mappers/cms.category.mapper';
 import { mapFooter } from './mappers/cms.footer.mapper';
 import { mapHeader } from './mappers/cms.header.mapper';
 import { mapLoginPage } from './mappers/cms.login-page.mapper';
 import { mapNotFoundPage } from './mappers/cms.not-found-page.mapper';
+import { mapOrganizationList } from './mappers/cms.organization-list.mapper';
 import { getAllPages, getAlternativePages, mapMockPage, mapPage } from './mappers/cms.page.mapper';
-import { IEntry, IPageFields } from '@/generated/contentful';
+import { mapQuickLinksBlock } from './mappers/cms.quick-links.mapper';
+import { mapSurvey } from './mappers/cms.survey.mapper';
 
 @Injectable()
 export class CmsService implements CMS.Service {
@@ -95,7 +106,7 @@ export class CmsService implements CMS.Service {
     }
 
     getAppConfig(options: CMS.Request.GetCmsAppConfigParams) {
-        return of(mapAppConfig(options.referrer, options.locale));
+        return of(mapAppConfig(options.locale, options.referrer));
     }
 
     getPage(options: CMS.Request.GetCmsPageParams) {
@@ -180,14 +191,6 @@ export class CmsService implements CMS.Service {
         return of(mapNotificationDetailsBlock(_options.locale));
     }
 
-    getArticleListBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapArticleListBlock(options.locale));
-    }
-
-    getArticleDetailsBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of(mapArticleDetailsBlock());
-    }
-
     getInvoiceListBlock(options: CMS.Request.GetCmsEntryParams) {
         return of(mapInvoiceListBlock(options.locale));
     }
@@ -226,5 +229,53 @@ export class CmsService implements CMS.Service {
 
     getTicketRecentBlock(options: CMS.Request.GetCmsEntryParams) {
         return of(mapTicketRecentBlock(options.locale));
+    }
+
+    getOrganizationList(options: CMS.Request.GetCmsOrganizationListParams) {
+        return of(mapOrganizationList(options.locale));
+    }
+
+    getSurvey(options: CMS.Request.GetCmsSurveyParams) {
+        return of(mapSurvey(options.code));
+    }
+
+    getSurveyJsBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapSurveyJsBlock(options.locale, options.id));
+    }
+
+    getOrderListBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapOrderListBlock(options.locale));
+    }
+
+    getOrdersSummaryBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapOrdersSummaryBlock(options.locale));
+    }
+
+    getOrderDetailsBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapOrderDetailsBlock(options.locale));
+    }
+
+    getQuickLinksBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapQuickLinksBlock(options.locale));
+    }
+
+    getArticleListBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapArticleListBlock(options.locale));
+    }
+
+    getCategoryBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapCategoryBlock(options.id, options.locale));
+    }
+
+    getCategoryListBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapCategoryListBlock(options.locale));
+    }
+
+    getArticleSearchBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapArticleSearchBlock(options.locale));
+    }
+
+    getFeaturedServiceListBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapFeaturedServiceListBlock(options.locale));
     }
 }

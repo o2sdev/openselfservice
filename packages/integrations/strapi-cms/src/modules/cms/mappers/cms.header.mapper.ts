@@ -4,6 +4,8 @@ import { CMS, Models } from '@o2s/framework/modules';
 
 import { GetHeaderQuery, NavigationGroupFragment, NavigationItemFragment } from '@/generated/strapi';
 
+import { mapRoles } from '@/modules/cms/mappers/cms.roles.mapper';
+
 export const mapHeader = (data: GetHeaderQuery, baseURL?: string): CMS.Model.Header.Header => {
     const component = data.header!;
     const configurableTexts = data.configurableTexts!;
@@ -17,10 +19,9 @@ export const mapHeader = (data: GetHeaderQuery, baseURL?: string): CMS.Model.Hea
         title: component.title,
         logo: {
             url: `${baseURL}${component.logo.url}`,
-            alternativeText: component.logo.alternativeText,
+            alt: component.logo.alternativeText || '',
             width: component.logo.width,
             height: component.logo.height,
-            name: component.logo.name,
         },
         userInfo:
             component.userInfo?.slug && component.userInfo?.SEO?.title
@@ -40,20 +41,14 @@ export const mapHeader = (data: GetHeaderQuery, baseURL?: string): CMS.Model.Hea
                   }
                 : undefined,
         languageSwitcherLabel: component.languageSwitcherLabel,
-        // TODO: get labels from CMS
         mobileMenuLabel: {
-            open: 'Open menu',
-            close: 'Close Menu',
+            open: component.openMobileMenuLabel,
+            close: component.closeMobileMenuLabel,
         },
-        contextSwitcher: component.contextLabel
-            ? {
-                  label: component.contextLabel,
-                  clear: configurableTexts.actions.clear,
-                  apply: configurableTexts.actions.apply,
-                  // TODO: fetch label from cms
-                  close: 'configurableTexts.actions.close',
-              }
-            : undefined,
+        contextSwitcher: {
+            showContextSwitcher: component.showContextSwitcher || false,
+            closeLabel: configurableTexts.actions.close,
+        },
     };
 };
 
@@ -80,5 +75,6 @@ const mapHeaderItem = (item: NavigationItemFragment): Models.Navigation.Navigati
         label: item.label,
         url: item.url || item.page?.slug || '/',
         description: item.description,
+        permissions: mapRoles(item.page?.permissions),
     };
 };

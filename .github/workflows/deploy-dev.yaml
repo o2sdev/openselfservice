@@ -10,10 +10,12 @@ permissions:
 env:
     TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
     TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+
 on:
     push:
         branches:
             - main
+
 jobs:
     pre_job:
         runs-on: ubuntu-latest
@@ -32,7 +34,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout code
-              uses: actions/checkout@v3
+              uses: actions/checkout@v5
               with:
                   fetch-depth: 2
                   ref: ${{ needs.check-app.outputs.branch }}
@@ -42,6 +44,10 @@ jobs:
               timeout-minutes: 10
               with:
                   repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Code Quality
+              uses: ./.github/actions/quality
+              timeout-minutes: 10
 
             - name: Creating .npmrc
               run: |
@@ -57,34 +63,33 @@ jobs:
               id: changesets
               uses: changesets/action@v1
               with:
-                  # This expects you to have a script called release which does a build for your packages and calls changeset publish
                   publish: npm run release
+                  commit: 'feat(changeset): version packages'
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-            - name: Checkout code
-              if: steps.changesets.outputs.published == 'true'
-              uses: actions/checkout@v3
-              with:
-                  ref: create-o2s-app/base
-
-            - name: Reset branch
-              if: steps.changesets.outputs.published == 'true'
-              run: |
-                  git fetch origin main:main
-                  git reset --hard main
-
-            - name: Update api-harmonization dependencies
-              if: steps.changesets.outputs.published == 'true'
-              run: npm install @o2s/framework@latest @o2s/utils.logger@latest @o2s/integrations.mocked --workspace=@o2s/api-harmonization
-
-            - name: Create create-o2s-app Pull Request
-              id: cpr
-              uses: peter-evans/create-pull-request@v7
-              if: steps.changesets.outputs.published == 'true'
-              with:
-                  commit-message: Update dependencies
-                  branch: create-o2s-app/patch
-                  delete-branch: true
-                  title: 'feat(create-o2s-app): update dependencies'
+#            - name: Checkout code
+#              if: steps.changesets.outputs.published == 'true'
+#              uses: actions/checkout@v3
+#              with:
+#                  ref: create-o2s-app/base
+#
+#            - name: Reset branch
+#              if: steps.changesets.outputs.published == 'true'
+#              run: |
+#                  git fetch origin main:main
+#                  git reset --hard main
+#
+#            - name: Update api-harmonization dependencies
+#              if: steps.changesets.outputs.published == 'true'
+#              run: npm install @o2s/framework@latest @o2s/utils.logger@latest @o2s/integrations.mocked --workspace=@o2s/api-harmonization
+#
+#            - name: Create create-o2s-app Pull Request
+#              id: cpr
+#              uses: peter-evans/create-pull-request@v7
+#              if: steps.changesets.outputs.published == 'true'
+#              with:
+#                  commit-message: 'feat(create-o2s-app): update dependencies'
+#                  branch: create-o2s-app/patch
+#                  delete-branch: true
+#                  title: 'Update dependencies in create-o2s-app'

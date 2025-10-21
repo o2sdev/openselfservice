@@ -4,7 +4,6 @@ fragment Banner on ComponentContentBanner {
     altDescription
     button {
         label
-        ariaLabel
         url
     }
 }

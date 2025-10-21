@@ -2,7 +2,7 @@ import { CallHandler, ConsoleLogger, ExecutionContext, Global, Injectable } from
 import { ConfigService } from '@nestjs/config';
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Response } from 'express';
-import jwtDecode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import { Observable, tap } from 'rxjs';
 import { Logger, createLogger, format, transports } from 'winston';
 
@@ -425,9 +425,10 @@ export class LoggerService extends ConsoleLogger {
     }
 
     public apiRequest(request: AxiosRequestConfig): void {
-        const user = request?.headers?.Authorization
-            ? (jwtDecode(request.headers.Authorization.replace('Bearer ', '')) as { sub: string })
-            : undefined;
+        const user =
+            request?.headers?.Authorization && !request.headers.Authorization.startsWith('Basic')
+                ? (jwtDecode(request.headers.Authorization.replace('Bearer ', '')) as { sub: string })
+                : undefined;
 
         if (this.logLevel === 'verbose') {
             this.logger.verbose(
@@ -494,9 +495,13 @@ export class LoggerService extends ConsoleLogger {
     }
 
     public apiResponse(response: AxiosResponse): void {
-        const user = response?.config?.headers?.Authorization
-            ? (jwtDecode((response.config.headers.Authorization as string)?.replace('Bearer ', '')) as { sub: string })
-            : undefined;
+        const user =
+            response?.config?.headers?.Authorization &&
+            !(response.config.headers.Authorization as string).startsWith('Basic')
+                ? (jwtDecode((response.config.headers.Authorization as string)?.replace('Bearer ', '')) as {
+                      sub: string;
+                  })
+                : undefined;
 
         if (this.logLevel === 'verbose') {
             this.logger.verbose(

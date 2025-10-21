@@ -1,0 +1,10 @@
+fragment PaymentsSummaryComponent on ComponentComponentsPaymentsSummary {
+    __typename
+    id
+    overdue {
+        ...InformationCard
+    }
+    toBePaid {
+        ...InformationCard
+    }
+}

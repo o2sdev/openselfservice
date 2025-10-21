@@ -1,0 +1,99 @@
+version: '3'
+
+services:
+    frontend:
+        container_name: frontend
+        build:
+            context: .
+            dockerfile: ./apps/frontend/Dockerfile
+        restart: always
+        ports:
+            - '3000:3000'
+        networks:
+            - app_network
+        environment:
+            ANALYZE: 'false'
+
+            NEXT_PUBLIC_LOG_LEVEL: verbose
+            NEXT_PUBLIC_LOG_COLORS_ENABLED: 'true'
+            NEXT_PUBLIC_LOG_FORMAT: text
+
+            NEXT_PUBLIC_SUPPORTED_LOCALES: en,de,pl
+            NEXT_PUBLIC_DEFAULT_LOCALE: en
+
+            NEXT_PUBLIC_BASE_URL: http://localhost:3000
+
+            NEXT_PUBLIC_API_URL: http://localhost:3001/api
+            NEXT_PUBLIC_API_URL_INTERNAL: http://api-harmonization:3001/api
+
+            AUTH_SECRET: yYaVHF3L70TfHqcfyR6kIE6pXHAydlN2r+o36+Vrmyc=
+            AUTH_TRUST_HOST: 'true'
+
+            AUTH_GOOGLE_ID: CLIENT_ID
+            AUTH_GOOGLE_SECRET: CLIENT_SECRET
+
+            AUTH_GITHUB_ID: GITHUB_ID
+            AUTH_GITHUB_SECRET: GITHUB_ID
+
+            AUTH_DATABASE_URL: file:./dev.db
+            AUTH_DEFAULT_USER_ROLE: selfservice_user
+
+    api-harmonization:
+        container_name: api-harmonization
+        build:
+            context: .
+            dockerfile: ./apps/api-harmonization/Dockerfile
+        restart: always
+        ports:
+            - '3001:3001'
+        networks:
+            - app_network
+        environment:
+            NODE_ENV: development
+            PORT: 3001
+
+            TELEMETRY_DISABLED: 'false'
+
+            API_PREFIX: api
+
+            LOG_LEVEL: verbose
+            LOG_COLORS_ENABLED: 'true'
+            LOG_FORMAT: text
+
+            DEFAULT_LOCALE: en
+            DEFAULT_CURRENCY: EUR
+            DEFAULT_PRODUCT_UNIT: PCS
+
+            SUPPORTED_CURRENCIES: EUR,USD,PLN
+            SUPPORTED_LOCALES: en,de,pl
+
+            FRONT_BASE_URLS: http://localhost:3000
+
+            MOCKED_INTEGRATION_DELAYS_ENABLED: 'true'
+
+            CMS_STRAPI_BASE_URL:
+
+            CACHE_ENABLED: 'false'
+            CACHE_TTL: 3600
+
+            CACHE_REDIS_HOST: localhost
+            CACHE_REDIS_PORT: 6379
+            # redis-cli -> config set requirepass {REDIS_PASS}
+            CACHE_REDIS_PASS: REDIS_PASS
+
+            ALGOLIA_APP_ID:
+            ALGOLIA_API_KEY:
+
+            API_SURVEYJS_BASE_URL: https://api.surveyjs.io/public/v1
+
+            MEDUSAJS_BASE_URL:
+            MEDUSAJS_PUBLISHABLE_API_KEY:
+            MEDUSAJS_ADMIN_API_KEY:
+
+            SEARCH_ARTICLES_INDEX_NAME: mock
+
+# Define a network, which allows containers to communicate
+# with each other, by using their container name as a hostname
+networks:
+    app_network:
+        external: true

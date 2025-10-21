@@ -1,23 +1,25 @@
 'use client';
 
 import { useLocale } from 'next-intl';
-import Image from 'next/image';
-import { JSX } from 'react';
+import React, { JSX } from 'react';
 
 import { Models } from '@o2s/framework/modules';
 
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@o2s/ui/components/accordion';
-import { Link } from '@o2s/ui/components/link';
+import { cn } from '@o2s/ui/lib/utils';
+
+import { Image } from '@o2s/ui/components/Image';
+
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@o2s/ui/elements/accordion';
+import { Link } from '@o2s/ui/elements/link';
 import {
     NavigationMenu,
     NavigationMenuItem,
     NavigationMenuLink,
     NavigationMenuList,
     navigationMenuTriggerStyle,
-} from '@o2s/ui/components/navigation-menu';
-import { Separator } from '@o2s/ui/components/separator';
-import { Typography } from '@o2s/ui/components/typography';
-import { cn } from '@o2s/ui/lib/utils';
+} from '@o2s/ui/elements/navigation-menu';
+import { Separator } from '@o2s/ui/elements/separator';
+import { Typography } from '@o2s/ui/elements/typography';
 
 import { Link as NextLink } from '@/i18n';
 
@@ -26,9 +28,7 @@ import { FooterProps } from './Footer.types';
 export const Footer: React.FC<FooterProps> = ({ data }) => {
     const locale = useLocale();
 
-    const navigationItemClass = cn(
-        'no-underline hover:no-underline w-full !justify-between h-10 p-2 !text-base !text-navbar-primary hover:!text-navbar-sub-muted hover:!bg-navbar-accent-background',
-    );
+    const navigationItemClass = cn(navigationMenuTriggerStyle());
 
     const mobileNavigationItemClass = cn(navigationMenuTriggerStyle(), navigationItemClass);
 
@@ -61,11 +61,9 @@ export const Footer: React.FC<FooterProps> = ({ data }) => {
     }) => {
         return (
             <NavigationMenuLink asChild active={active}>
-                <Link asChild>
-                    <NextLink href={href} locale={locale} className={cn(navigationItemClass, className)}>
-                        {children}
-                    </NextLink>
-                </Link>
+                <NextLink href={href} locale={locale} className={cn(navigationItemClass, className)}>
+                    {children}
+                </NextLink>
             </NavigationMenuLink>
         );
     };
@@ -156,11 +154,12 @@ export const Footer: React.FC<FooterProps> = ({ data }) => {
             <Separator />
             <div className="w-full m-auto max-w-7xl flex flex-row justify-between px-4 md:px-6 py-4 md:py-6">
                 <div className="flex gap-8 items-center justify-between w-full md:justify-start">
-                    <Link href="/" aria-label={data.logo?.name}>
+                    {/*TODO: get label from API*/}
+                    <Link href="/" aria-label={'go to home'}>
                         {data.logo?.url && (
                             <Image
                                 src={data.logo.url}
-                                alt={data.logo.alternativeText ?? ''}
+                                alt={data.logo.alt}
                                 width={data.logo.width}
                                 height={data.logo.height}
                             />
@@ -172,7 +171,7 @@ export const Footer: React.FC<FooterProps> = ({ data }) => {
                 </div>
                 <div className="hidden md:block">
                     <NavigationMenu>
-                        <NavigationMenuList className="flex gap-7">
+                        <NavigationMenuList className="flex gap-3">
                             {data.items.map((item) => {
                                 switch (item.__typename) {
                                     case 'NavigationItem':

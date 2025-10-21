@@ -5,31 +5,29 @@ slug: "/"
 
 # Welcome to Open Self Service
 
-Open Self Service (O2S) is an **open-source framework** built on **composable architecture** principles,
-designed to **streamline and accelerate** the development of complex **customer self-service frontend applications**.
+Open Self Service (O2S) is an **open‑source framework** based on **composable architecture** principles that accelerates building customer-facing **self‑service applications** and portals.
 
-O2S provides a **modern, extensible, and customizable frontend starter app**, along with an **integration server**
-that makes possible connection of various headless services and APIs commonly used in self-service solutions.
-These may include CRMs, ERPs, PIMs, headless commerce platforms, AI assistants, and more, enabling
-different business capabilities for the frontend.
+It provides a modern, extensible Next.js based  and CMS-managed frontend foundation and an integration server for composable extensibility - easy connection of headless services and APIs (CRM, ERP, PIM, commerce, AI, etc.).
 
-By leveraging composable architecture and a modern tech stack, O2S ensures high performance,
-frontend-backend decoupling, and architectural flexibility, making it an ideal foundation for scalable and
-future-proof self-service solutions.
-
-[//]: # (Open Self Service &#40;O2S&#41; is an **open-source framework** designed to simplify and accelerate the development of **composable customer self-service applications**. Built with a **modern tech stack**, it enables seamless integration of multiple APIs, ensuring a **consistent, scalable, and vendor-agnostic** approach to building enterprise-grade self-service solutions.)
-
-[//]: # ()
-[//]: # (O2S provides a **high-performance Next.js frontend**, a **data harmonization layer**, and **pre-built integrations** with commonly used APIs such as **CRMs, ERPs, PIMs, and commerce platforms**. With its **decoupled architecture**, businesses can easily extend or modify their digital self-service experiences while maintaining flexibility and control.)
+It's best to start your journey with Open Self Service by bootstrapping an app using one of our [Starters](../app-starters/overview.md) with one of the ``npx create-*-app`` commands.
 
 ---
 
-## What’s in the Docs?
+## Quickstart links
 
-This documentation is here to guide you through everything Open Self Service offers. Start with these key sections:
+import DocLinkTiles from '@site/src/components/DocLinkTiles';
 
-- [**Getting Started**](../getting-started/overview.md): Learn how to set up, configure, and run your project locally to begin building with Open Self Service.
-- [**Essentials**](./essentials.md): Explore the core functionalities, benefits, and use cases supported by Open Self Service.
-- [**Architecture**](./architecture.md): Dive into the composable architecture and discover how each component of Open Self Service fits together.
-- [**Guides**](../guides/overview.md): Find detailed tutorials and best practices for developing with Open Self Service, from routing and theming to adding integrations.
+<DocLinkTiles
+    items={[
+        { title: 'Essentials', description: "Most essential information on O2S's core concepts.", href: '/docs/overview/essentials' },
+        { title: 'Getting Started', description: 'Quick start, installation, and local run.', href: '/docs/getting-started' },
+        { title: 'Architecture', description: 'Composable architecture and system components.', href: '/docs/overview/architecture' },
+        { title: 'Guides', description: 'How‑tos and best practices (routing, theming, integrations).', href: '/docs/guides' },
+        { title: 'Customization', description: 'All materials on customization and extensibility.', href: '/docs/guides/customization' },
+        { title: 'Integrations', description: 'See integrations available in Open Self Service.', href: '/docs/integrations' },
+        { title: 'O2S Customer Portal starter', description: 'The default customer portal starter in O2S.', href: '/docs/app-starters/o2s/overview' },
+        { title: 'DXP Frontend Starter', description: 'New starter for knowledge/marketing portals and DXP.', href: '/docs/app-starters/dxp/overview' },
+    ]}
+/>
+
 

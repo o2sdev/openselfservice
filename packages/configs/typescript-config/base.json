@@ -4,7 +4,7 @@
         "declaration": true,
         "declarationMap": true,
         "esModuleInterop": true,
-        "incremental": false,
+        "incremental": true,
         "isolatedModules": true,
         "lib": ["es2022", "DOM", "DOM.Iterable"],
         "module": "NodeNext",
@@ -14,7 +14,8 @@
         "resolveJsonModule": true,
         "skipLibCheck": true,
         "strict": true,
-        "target": "ES2022"
+        "target": "ES2022",
+        "jsx": "preserve"
     },
     "exclude": ["node_modules"]
 }

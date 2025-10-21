@@ -5,17 +5,19 @@ import { Model } from '../models';
 export const mapArticlesFromSearch = (
     searchResult: Search.Model.SearchResult<Model.SearchEngineArticleModel>,
 ): Articles.Model.Articles => {
-    const articles = searchResult.hits.map((hit) => ({
-        id: hit.objectID,
-        title: hit.title,
-        lead: hit.lead,
-        createdAt: hit.createdAt,
-        updatedAt: hit.updatedAt,
-        image: hit.image,
-        thumbnail: hit.thumbnail,
-        category: hit.category,
-        sections: hit.sections,
-    }));
+    const articles: Articles.Model.Article[] = searchResult.hits.map(
+        (hit): Articles.Model.Article => ({
+            id: hit.documentId,
+            slug: hit.slug,
+            permissions: [],
+            createdAt: hit.updatedAt,
+            updatedAt: hit.updatedAt,
+            title: hit.SEO.title,
+            lead: hit.SEO.description,
+            tags: [],
+            sections: [],
+        }),
+    );
 
     return {
         data: articles,

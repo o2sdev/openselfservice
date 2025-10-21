@@ -14,17 +14,17 @@ export class SearchModule {
         const controller = config.integrations.search.controller || SearchController;
         const service = config.integrations.search.service || SearchService;
 
+        const provider = {
+            provide: SearchService,
+            useClass: service as Type,
+        };
+
         return {
             module: SearchModule,
-            providers: [
-                {
-                    provide: SearchService,
-                    useClass: service as Type,
-                },
-            ],
+            providers: [provider],
             imports: [HttpModule, ...imports],
             controllers: [controller],
-            exports: [SearchService],
+            exports: [provider],
         };
     }
 }

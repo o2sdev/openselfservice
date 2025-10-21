@@ -1,11 +1,11 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
-import { useLocale } from 'next-intl';
+import React from 'react';
 
 import { Models } from '@o2s/framework/modules';
 
-import { Link } from '@o2s/ui/components/link';
+import { cn } from '@o2s/ui/lib/utils';
+
 import {
     NavigationMenu,
     NavigationMenuContent,
@@ -14,10 +14,9 @@ import {
     NavigationMenuList,
     NavigationMenuTrigger,
     navigationMenuTriggerStyle,
-} from '@o2s/ui/components/navigation-menu';
-import { Separator } from '@o2s/ui/components/separator';
-import { Typography } from '@o2s/ui/components/typography';
-import { cn } from '@o2s/ui/lib/utils';
+} from '@o2s/ui/elements/navigation-menu';
+import { Separator } from '@o2s/ui/elements/separator';
+import { Typography } from '@o2s/ui/elements/typography';
 
 import { Link as NextLink, usePathname } from '@/i18n';
 
@@ -31,23 +30,23 @@ export function DesktopNavigation({
     userSlot,
     items,
 }: DesktopNavigationProps) {
-    const session = useSession();
-    const isSignedIn = session?.status === 'authenticated';
-
     const pathname = usePathname();
-    const locale = useLocale();
 
-    const activeNavigationGroup = isSignedIn
-        ? items.find((item) => {
-              if (item.__typename === 'NavigationGroup') {
-                  return item.items
-                      .filter((item) => item.__typename === 'NavigationItem')
-                      .some((item) => item.url === pathname);
-              }
+    const activeNavigationGroup = items.find((item) => {
+        if (item.__typename === 'NavigationGroup') {
+            return item.items
+                .filter((item) => item.__typename === 'NavigationItem')
+                .some((item) => {
+                    if (pathname !== '/') {
+                        return item.url !== '/' && item.url && pathname.startsWith(item.url);
+                    }
 
-              return item.url === pathname;
-          }) || items[0]
-        : undefined;
+                    return item.url && pathname.startsWith(item.url);
+                });
+        }
+
+        return item.url && pathname.includes(item.url);
+    });
 
     const navigationItemClass = cn(navigationMenuTriggerStyle());
 
@@ -73,12 +72,8 @@ export function DesktopNavigation({
         active?: boolean;
     }) => {
         return (
-            <NavigationMenuLink asChild active={active}>
-                <Link asChild>
-                    <NextLink href={href} locale={locale} className={cn(navigationItemClass, className)}>
-                        {children}
-                    </NextLink>
-                </Link>
+            <NavigationMenuLink asChild active={active} className={cn(navigationItemClass, className)}>
+                <NextLink href={href}>{children}</NextLink>
             </NavigationMenuLink>
         );
     };

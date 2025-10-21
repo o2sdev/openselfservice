@@ -12,19 +12,19 @@ export class BillingAccountModule {
     static register(config: ApiConfig): DynamicModule {
         const service = config.integrations.billingAccounts.service;
         const controller = config.integrations.billingAccounts.controller || BillingAccountController;
-        const imports = config.integrations.cms.imports || [];
+        const imports = config.integrations.billingAccounts.imports || [];
+
+        const provider = {
+            provide: BillingAccountService,
+            useClass: service as Type,
+        };
 
         return {
             module: BillingAccountModule,
-            providers: [
-                {
-                    provide: BillingAccountService,
-                    useClass: service as Type,
-                },
-            ],
+            providers: [provider],
             imports: [HttpModule, ...imports],
             controllers: [controller],
-            exports: [BillingAccountService],
+            exports: [provider],
         };
     }
 }

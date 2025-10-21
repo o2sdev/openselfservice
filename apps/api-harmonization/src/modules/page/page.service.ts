@@ -1,12 +1,13 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Observable, forkJoin, map, of, switchMap } from 'rxjs';
+import { Articles, Auth, CMS } from '@o2s/configs.integrations';
+import { Observable, concatMap, forkJoin, map, of, switchMap } from 'rxjs';
 
-import { AppHeaders } from '@o2s/api-harmonization/utils/headers';
+import { Models } from '@o2s/utils.api-harmonization';
 
-import { CMS } from '../../models';
+import { checkPermissions } from '@o2s/api-harmonization/utils/permissions';
 
-import { mapInit, mapPage } from './page.mapper';
+import { mapArticle, mapInit, mapPage } from './page.mapper';
 import { Init, NotFound, Page } from './page.model';
 import { GetInitQuery, GetPageQuery } from './page.request';
 
@@ -17,6 +18,8 @@ export class PageService {
     constructor(
         private readonly config: ConfigService,
         private readonly cmsService: CMS.Service,
+        private readonly articlesService: Articles.Service,
+        private readonly authService: Auth.Service,
     ) {
         this.SUPPORTED_LOCALES = this.config.get('SUPPORTED_LOCALES').split(',') as string[];
     }
@@ -43,7 +46,9 @@ export class PageService {
         );
     }
 
-    getInit(query: GetInitQuery, headers: AppHeaders): Observable<Init> {
+    getInit(query: GetInitQuery, headers: Models.Headers.AppHeaders): Observable<Init> {
+        const userRoles = this.authService.extractUserRoles(headers['authorization']);
+
         return this.cmsService.getAppConfig({ referrer: query.referrer, locale: headers['x-locale'] }).pipe(
             switchMap((appConfig) => {
                 const header = this.cmsService.getHeader({
@@ -58,33 +63,72 @@ export class PageService {
 
                 return forkJoin([header, footer]).pipe(
                     map(([header, footer]) => {
-                        return mapInit(appConfig.locales, header, footer);
+                        return mapInit(
+                            appConfig.locales,
+                            header,
+                            footer,
+                            appConfig.labels,
+                            appConfig.themes,
+                            userRoles,
+                        );
                     }),
                 );
             }),
         );
     }
 
-    getPage(query: GetPageQuery, headers: AppHeaders): Observable<Page | NotFound> {
+    getPage(query: GetPageQuery, headers: Models.Headers.AppHeaders): Observable<Page | NotFound> {
         const page = this.cmsService.getPage({ slug: query.slug, locale: headers['x-locale'] });
 
+        const userRoles = this.authService.extractUserRoles(headers['authorization']);
+
         return forkJoin([page]).pipe(
-            switchMap(([page]) => {
+            concatMap(([page]) => {
                 if (!page) {
-                    throw new NotFoundException();
+                    return this.articlesService.getArticle({ slug: query.slug, locale: headers['x-locale'] }).pipe(
+                        concatMap((article) => {
+                            if (!article) {
+                                throw new NotFoundException();
+                            }
+
+                            checkPermissions(article.permissions, userRoles);
+
+                            return this.processArticle(article, query, headers);
+                        }),
+                    );
                 }
 
-                const alternatePages = this.cmsService
-                    .getAlternativePages({ id: page.id, slug: query.slug, locale: headers['x-locale'] })
-                    .pipe(map((pages) => pages.filter((p) => p.id === page.id)));
+                checkPermissions(page.permissions, userRoles);
 
-                return forkJoin([of(page), alternatePages]).pipe(
-                    map(([page, alternatePages]) => {
-                        const alternates = alternatePages?.filter((p) => p?.id === page.id);
-                        return mapPage(page, headers['x-locale'], alternates);
-                    }),
-                );
+                return this.processPage(page, query, headers);
             }),
         );
     }
+
+    private processPage = (page: CMS.Model.Page.Page, query: GetPageQuery, headers: Models.Headers.AppHeaders) => {
+        const alternatePages = this.cmsService
+            .getAlternativePages({ id: page.id, slug: query.slug, locale: headers['x-locale'] })
+            .pipe(map((pages) => pages.filter((p) => p.id === page.id)));
+
+        return forkJoin([of(page), alternatePages]).pipe(
+            map(([page, alternatePages]) => {
+                const alternates = alternatePages?.filter((p) => p?.id === page.id);
+                return mapPage(page, headers['x-locale'], alternates);
+            }),
+        );
+    };
+
+    private processArticle = (
+        article: Articles.Model.Article,
+        _query: GetPageQuery,
+        headers: Models.Headers.AppHeaders,
+    ) => {
+        if (!article.category) {
+            throw new NotFoundException();
+        }
+
+        const category = this.articlesService.getCategory({ id: article.category.id, locale: headers['x-locale'] });
+
+        return forkJoin([category]).pipe(map(([category]) => mapArticle(article, category, headers['x-locale'])));
+    };
 }

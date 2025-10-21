@@ -4,6 +4,7 @@ const LOGIN_PAGE_PL: CMS.Model.LoginPage.LoginPage = {
     title: 'Zaloguj się',
     subtitle: 'Wprowadź swój email i hasło, aby uzyskać dostęp do konta',
     username: {
+        __typename: 'Input',
         id: 'username-1',
         name: 'username',
         label: 'Nazwa użytkownika',
@@ -30,6 +31,7 @@ const LOGIN_PAGE_PL: CMS.Model.LoginPage.LoginPage = {
         ],
     },
     password: {
+        __typename: 'Input',
         id: 'password-1',
         name: 'password',
         label: 'Hasło',
@@ -69,10 +71,9 @@ const LOGIN_PAGE_PL: CMS.Model.LoginPage.LoginPage = {
     },
     image: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
-        alternativeText: 'Sign in image',
+        alt: 'Sign in image',
         width: 640,
         height: 656,
-        name: 'Sign in image',
     },
     seo: {
         title: 'Zaloguj się',
@@ -80,10 +81,9 @@ const LOGIN_PAGE_PL: CMS.Model.LoginPage.LoginPage = {
         keywords: ['zaloguj się', 'hasło', 'email'],
         image: {
             url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
-            alternativeText: 'Sign in image',
+            alt: 'Sign in image',
             width: 640,
             height: 656,
-            name: 'Sign in image',
         },
         noIndex: false,
         noFollow: false,
@@ -95,6 +95,7 @@ const LOGIN_PAGE_EN: CMS.Model.LoginPage.LoginPage = {
     title: 'Sign in',
     subtitle: 'Please enter your email and password below to access your account.',
     username: {
+        __typename: 'Input',
         id: 'username-1',
         name: 'username',
         label: 'Username',
@@ -121,6 +122,7 @@ const LOGIN_PAGE_EN: CMS.Model.LoginPage.LoginPage = {
         ],
     },
     password: {
+        __typename: 'Input',
         id: 'password-1',
         name: 'password',
         label: 'Password',
@@ -160,10 +162,9 @@ const LOGIN_PAGE_EN: CMS.Model.LoginPage.LoginPage = {
     },
     image: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
-        alternativeText: 'Sign in image',
+        alt: 'Sign in image',
         width: 640,
         height: 656,
-        name: 'Sign in image',
     },
     seo: {
         title: 'Sign in | Open Self Service demo application',
@@ -192,10 +193,9 @@ const LOGIN_PAGE_EN: CMS.Model.LoginPage.LoginPage = {
         ],
         image: {
             url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/o2s-social-card-1.jpg',
-            alternativeText: 'Open Self Service - The Open Source Composable Frontend for Customer Portals',
+            alt: 'Open Self Service - The Open Source Composable Frontend for Customer Portals',
             width: 640,
             height: 656,
-            name: 'Sign in image',
         },
         noIndex: false,
         noFollow: false,
@@ -207,6 +207,7 @@ const LOGIN_PAGE_DE: CMS.Model.LoginPage.LoginPage = {
     title: 'Einloggen',
     subtitle: 'Geben Sie Ihre E-Mail und Ihr Passwort ein, um auf Ihr Konto zuzugreifen',
     username: {
+        __typename: 'Input',
         id: 'username-1',
         name: 'username',
         label: 'Benutzername',
@@ -233,6 +234,7 @@ const LOGIN_PAGE_DE: CMS.Model.LoginPage.LoginPage = {
         ],
     },
     password: {
+        __typename: 'Input',
         id: 'password-1',
         name: 'password',
         label: 'Passwort',
@@ -272,10 +274,9 @@ const LOGIN_PAGE_DE: CMS.Model.LoginPage.LoginPage = {
     },
     image: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
-        alternativeText: 'Sign in image',
+        alt: 'Sign in image',
         width: 640,
         height: 656,
-        name: 'Sign in image',
     },
     seo: {
         title: 'Einloggen',
@@ -283,10 +284,9 @@ const LOGIN_PAGE_DE: CMS.Model.LoginPage.LoginPage = {
         keywords: ['einloggen', 'passwort', 'email'],
         image: {
             url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/sign-in.jpg',
-            alternativeText: 'Sign in image',
+            alt: 'Sign in image',
             width: 640,
             height: 656,
-            name: 'Sign in image',
         },
         noIndex: false,
         noFollow: false,

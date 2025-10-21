@@ -18,7 +18,7 @@ fragment Header on Header {
             title
         }
     }
-    contextLabel
+    showContextSwitcher
     languageSwitcherLabel
     userInfo {
         slug
@@ -26,4 +26,6 @@ fragment Header on Header {
             title
         }
     }
+    openMobileMenuLabel
+    closeMobileMenuLabel
 }

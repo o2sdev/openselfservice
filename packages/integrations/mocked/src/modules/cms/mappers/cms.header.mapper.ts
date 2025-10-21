@@ -1,14 +1,13 @@
-import { CMS } from '@o2s/framework/modules';
+import { Auth, CMS } from '@o2s/framework/modules';
 
 const MOCK_HEADER_LOGON_EN: CMS.Model.Header.Header = {
     id: 'fqj6nnyk4irqq5b7rnc4ogsj',
     title: 'MOCK_HEADER_LOGON_EN',
     logo: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/logo.svg',
-        alternativeText: 'Logo',
+        alt: 'Logo',
         width: 92,
         height: 24,
-        name: 'Logo',
     },
     languageSwitcherLabel: 'Language',
     mobileMenuLabel: {
@@ -28,26 +27,37 @@ const MOCK_HEADER_LOGON_EN: CMS.Model.Header.Header = {
                     __typename: 'NavigationItem',
                     label: 'Dashboard',
                     url: '/',
+                    permissions: [Auth.Constants.Roles.ORG_USER],
                 },
                 {
                     __typename: 'NavigationItem',
                     label: 'Cases',
                     url: '/cases',
+                    permissions: [Auth.Constants.Roles.ORG_USER],
                 },
                 {
                     __typename: 'NavigationItem',
                     label: 'Invoices',
                     url: '/invoices',
+                    permissions: [Auth.Constants.Roles.ORG_USER],
                 },
                 {
                     __typename: 'NavigationItem',
                     label: 'Notifications',
                     url: '/notifications',
+                    permissions: [Auth.Constants.Roles.ORG_USER],
                 },
                 {
                     __typename: 'NavigationItem',
                     label: 'Services',
                     url: '/services',
+                    permissions: [Auth.Constants.Roles.ORG_USER],
+                },
+                {
+                    __typename: 'NavigationItem',
+                    label: 'Orders',
+                    url: '/orders',
+                    permissions: [Auth.Constants.Roles.ORG_USER],
                 },
             ],
         },
@@ -57,8 +67,8 @@ const MOCK_HEADER_LOGON_EN: CMS.Model.Header.Header = {
             items: [
                 {
                     __typename: 'NavigationItem',
-                    label: 'O2S Documentation',
-                    url: 'https://www.openselfservice.com/',
+                    label: 'Welcome Hub',
+                    url: '/help-and-support',
                 },
             ],
         },
@@ -68,10 +78,8 @@ const MOCK_HEADER_LOGON_EN: CMS.Model.Header.Header = {
         label: 'Notifications',
     },
     contextSwitcher: {
-        label: 'Power Construction AG',
-        clear: 'Clear',
-        apply: 'Apply',
-        close: 'Close',
+        closeLabel: 'Close',
+        showContextSwitcher: true,
     },
 };
 const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
@@ -79,15 +87,18 @@ const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
     title: 'MOCK_HEADER_LOGON_DE',
     logo: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/logo.svg',
-        alternativeText: 'Logo',
+        alt: 'Logo',
         width: 92,
         height: 24,
-        name: 'Logo',
     },
     languageSwitcherLabel: 'Sprache',
     mobileMenuLabel: {
         open: 'Menü öffnen',
         close: 'Menü schließen',
+    },
+    userInfo: {
+        url: '/user-account',
+        label: 'Benutzerprofil',
     },
     items: [
         {
@@ -98,26 +109,37 @@ const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
                     __typename: 'NavigationItem',
                     label: 'Startseite',
                     url: '/',
+                    permissions: [Auth.Constants.Roles.ORG_USER],
                 },
                 {
                     __typename: 'NavigationItem',
                     label: 'Fälle',
                     url: '/faelle',
+                    permissions: [Auth.Constants.Roles.ORG_USER],
                 },
                 {
                     __typename: 'NavigationItem',
                     label: 'Rechnungen',
                     url: '/rechnungen',
+                    permissions: [Auth.Constants.Roles.ORG_USER],
                 },
                 {
                     __typename: 'NavigationItem',
                     label: 'Benachrichtigungen',
                     url: '/benachrichtigungen',
+                    permissions: [Auth.Constants.Roles.ORG_USER],
                 },
                 {
                     __typename: 'NavigationItem',
                     label: 'Dienstleistungen',
                     url: '/dienstleistungen',
+                    permissions: [Auth.Constants.Roles.ORG_USER],
+                },
+                {
+                    __typename: 'NavigationItem',
+                    label: 'Bestellungen',
+                    url: '/bestellungen',
+                    permissions: [Auth.Constants.Roles.ORG_USER],
                 },
             ],
         },
@@ -127,8 +149,8 @@ const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
             items: [
                 {
                     __typename: 'NavigationItem',
-                    label: 'O2S Dokumentation',
-                    url: 'https://www.openselfservice.com/',
+                    label: 'Willkommen Hub',
+                    url: '/hilfe-und-support',
                 },
             ],
         },
@@ -138,10 +160,8 @@ const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
         label: 'Benachrichtigungen',
     },
     contextSwitcher: {
-        label: 'Power Construction AG',
-        clear: 'Löschen',
-        apply: 'Anwenden',
-        close: 'Schließen',
+        closeLabel: 'Schließen',
+        showContextSwitcher: true,
     },
 };
 const MOCK_HEADER_LOGON_PL: CMS.Model.Header.Header = {
@@ -149,10 +169,9 @@ const MOCK_HEADER_LOGON_PL: CMS.Model.Header.Header = {
     title: 'MOCK_HEADER_LOGON_PL',
     logo: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/logo.svg',
-        alternativeText: 'Logo',
+        alt: 'Logo',
         width: 92,
         height: 24,
-        name: 'Logo',
     },
     languageSwitcherLabel: 'Język',
     mobileMenuLabel: {
@@ -172,26 +191,37 @@ const MOCK_HEADER_LOGON_PL: CMS.Model.Header.Header = {
                     __typename: 'NavigationItem',
                     label: 'Strona główna',
                     url: '/',
+                    permissions: [Auth.Constants.Roles.ORG_USER],
                 },
                 {
                     __typename: 'NavigationItem',
                     label: 'Zgłoszenia',
                     url: '/zgloszenia',
+                    permissions: [Auth.Constants.Roles.ORG_USER],
                 },
                 {
                     __typename: 'NavigationItem',
                     label: 'Rachunki',
                     url: '/rachunki',
+                    permissions: [Auth.Constants.Roles.ORG_USER],
                 },
                 {
                     __typename: 'NavigationItem',
                     label: 'Powiadomienia',
                     url: '/powiadomienia',
+                    permissions: [Auth.Constants.Roles.ORG_USER],
                 },
                 {
                     __typename: 'NavigationItem',
                     label: 'Usługi',
                     url: '/uslugi',
+                    permissions: [Auth.Constants.Roles.ORG_USER],
+                },
+                {
+                    __typename: 'NavigationItem',
+                    label: 'Zamówienia',
+                    url: '/zamowienia',
+                    permissions: [Auth.Constants.Roles.ORG_USER],
                 },
             ],
         },
@@ -201,8 +231,8 @@ const MOCK_HEADER_LOGON_PL: CMS.Model.Header.Header = {
             items: [
                 {
                     __typename: 'NavigationItem',
-                    label: 'Dokumentacja O2S',
-                    url: 'https://www.openselfservice.com/',
+                    label: 'Centrum powitalne',
+                    url: '/pomoc-i-wsparcie',
                 },
             ],
         },
@@ -212,107 +242,13 @@ const MOCK_HEADER_LOGON_PL: CMS.Model.Header.Header = {
         label: 'Powiadomienia',
     },
     contextSwitcher: {
-        label: 'Power Construction AG',
-        clear: 'Wyczyść',
-        apply: 'Zastosuj',
-        close: 'Zamknij',
+        closeLabel: 'Zamknij',
+        showContextSwitcher: true,
     },
-};
-
-const MOCK_HEADER_LOGOUT_EN: CMS.Model.Header.Header = {
-    id: 'lwvbmnaayn6w7xy5soicv1k2',
-    title: 'MOCK_HEADER_LOGOUT_EN',
-    logo: {
-        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/logo.svg',
-        alternativeText: 'Logo',
-        width: 92,
-        height: 24,
-        name: 'Logo',
-    },
-    languageSwitcherLabel: 'Language',
-    mobileMenuLabel: {
-        open: 'Open menu',
-        close: 'Close Menu',
-    },
-    items: [
-        {
-            __typename: 'NavigationItem',
-            label: 'Customer Portal',
-            url: '/',
-        },
-        {
-            __typename: 'NavigationItem',
-            label: 'Help & Support',
-            url: '/cases',
-        },
-    ],
-};
-const MOCK_HEADER_LOGOUT_DE: CMS.Model.Header.Header = {
-    id: 'lwvbmnaayn6w7xy5soicv1k2',
-    title: 'MOCK_HEADER_LOGOUT_DE',
-    logo: {
-        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/logo.svg',
-        alternativeText: 'Logo',
-        width: 92,
-        height: 24,
-        name: 'Logo',
-    },
-    languageSwitcherLabel: 'Sprache',
-    mobileMenuLabel: {
-        open: 'Menü öffnen',
-        close: 'Menü schließen',
-    },
-    items: [
-        {
-            __typename: 'NavigationItem',
-            label: 'Kunden Portal',
-            url: '/',
-        },
-        {
-            __typename: 'NavigationItem',
-            label: 'Hilfe & Unterstützung',
-            url: '/faelle',
-        },
-    ],
-};
-const MOCK_HEADER_LOGOUT_PL: CMS.Model.Header.Header = {
-    id: 'lwvbmnaayn6w7xy5soicv1k2',
-    title: 'MOCK_HEADER_LOGOUT_PL',
-    logo: {
-        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/logo.svg',
-        alternativeText: 'Logo',
-        width: 92,
-        height: 24,
-        name: 'Logo',
-    },
-    languageSwitcherLabel: 'Język',
-    mobileMenuLabel: {
-        open: 'Otwórz menu',
-        close: 'Zamknij menu',
-    },
-    items: [
-        {
-            __typename: 'NavigationItem',
-            label: 'Portal Klienta',
-            url: '/',
-        },
-        {
-            __typename: 'NavigationItem',
-            label: 'Pomoc & Wsparcie',
-            url: '/zgloszenia',
-        },
-    ],
 };
 
 export const mapHeader = (id: string, locale: string): CMS.Model.Header.Header => {
-    const headerList = [
-        MOCK_HEADER_LOGON_EN,
-        MOCK_HEADER_LOGON_DE,
-        MOCK_HEADER_LOGON_PL,
-        MOCK_HEADER_LOGOUT_EN,
-        MOCK_HEADER_LOGOUT_DE,
-        MOCK_HEADER_LOGOUT_PL,
-    ];
+    const headerList = [MOCK_HEADER_LOGON_EN, MOCK_HEADER_LOGON_DE, MOCK_HEADER_LOGON_PL];
 
     const header = headerList
         .filter((header) => header.title?.endsWith(locale.toUpperCase()))

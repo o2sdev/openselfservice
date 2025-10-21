@@ -1,5 +1,283 @@
 # @o2s/integrations.strapi-cms
 
+## 2.6.3
+
+### Patch Changes
+
+- 4a42e9c: improvements for knowledge base blocks and layouts
+- Updated dependencies [4a42e9c]
+    - @o2s/framework@1.11.2
+
+## 2.6.2
+
+### Patch Changes
+
+- 5f25529: added stories for UI components
+- Updated dependencies [5f25529]
+- Updated dependencies [5f25529]
+    - @o2s/framework@1.11.1
+
+## 2.6.1
+
+### Patch Changes
+
+- 4c5a8a4: extended `FormField` model into input/select/switch subtypes for future use
+- Updated dependencies [4c5a8a4]
+    - @o2s/framework@1.9.2
+
+## 2.6.0
+
+### Minor Changes
+
+- e81621c: added `PROSPECT` role for freshly-created users
+
+### Patch Changes
+
+- Updated dependencies [e81621c]
+    - @o2s/framework@1.9.0
+
+## 2.5.1
+
+### Patch Changes
+
+- 916fcaa: improved prettier rules and reformatted the code
+
+## 2.5.0
+
+### Minor Changes
+
+- c13192c: adjusted `Page` and `Article` models to conform with new user-based permission model
+
+### Patch Changes
+
+- Updated dependencies [c13192c]
+    - @o2s/framework@1.7.0
+
+## 2.4.2
+
+### Patch Changes
+
+- f4b70b3: added telemetry events for anonymous data collection about usage
+- Updated dependencies [97264f1]
+    - @o2s/framework@1.6.2
+
+## 2.4.1
+
+### Patch Changes
+
+- 36463a4: refactored how modules dependencies are defined to improve extending integrations with multiple modules within them
+- Updated dependencies [36463a4]
+    - @o2s/framework@1.6.1
+
+## 2.4.0
+
+### Minor Changes
+
+- 027ed39: featuredServiceListBlock - list of available services
+
+    - added new UI componetnt from Shadcn - Switch,
+    - extended ProductCard with action property,
+    - implemented model and mock for FeatureServiceListBlock,
+    - integrated with strapi,
+
+### Patch Changes
+
+- Updated dependencies [027ed39]
+- Updated dependencies [985780a]
+- Updated dependencies [9c31433]
+    - @o2s/framework@1.4.0
+
+## 2.3.0
+
+### Minor Changes
+
+- 84510e2: adjusted algolia article search
+
+## 2.2.0
+
+### Minor Changes
+
+- 1ee5be1: feat: aligned buttons - used ActionList component with dropdown menu
+
+    - used ActionList in the OrderDetailBlock to display buttons,
+    - updated the mock and strapi - now an action is a Link,
+    - used the format method from the string-template to inject a value into a string,
+
+### Patch Changes
+
+- Updated dependencies [1ee5be1]
+    - @o2s/framework@1.2.0
+
+## 2.1.0
+
+### Minor Changes
+
+- 565b63d: feat: fixed pagination issue in articleList
+
+    - added new mocked articles
+    - implemented new additionalLink in ArticleList
+
+- 6225c14: remodeled how articles are kept in Strapi in order to suppport indexing them by search engines (e.g. Algolia) by separating them into their own content type
+- f015c2b: New block ArticleSearch - Input field with suggestions to find appropriate article.
+
+    - added new UI component - Command,
+    - added new articles mock,
+    - added mock for ArticleSearchBlock,
+    - added strapi integration for ArticleSearchBlock,
+    - added new component Autocomplete,
+
+### Patch Changes
+
+- fb99085: survey mapper changes after adding multiselect plugin
+- Updated dependencies [565b63d]
+- Updated dependencies [5d16edf]
+- Updated dependencies [61d4f2f]
+- Updated dependencies [f015c2b]
+    - @o2s/framework@1.1.0
+    - @o2s/utils.logger@1.1.0
+
+## 2.0.0
+
+### Major Changes
+
+- 0e0c816: Official stable release
+
+### Patch Changes
+
+- Updated dependencies [0e0c816]
+    - @o2s/framework@1.0.0
+    - @o2s/utils.logger@1.0.0
+
+## 1.4.1
+
+### Patch Changes
+
+- b91bfc4: fixed incorrect mapping of an optional field
+
+## 1.4.0
+
+### Minor Changes
+
+- 05eea01: chore: update dependencies
+- 44653fb: feat: orderDetails page implemented
+
+    - added new UI component: InfoCard,
+    - used InfoCard in PaymentsSummaryBlock, OrdersSummary and OrderDetails,
+    - fixed ordersSummaryBlock integration with strapi,
+    - used DynamicIcon in CategoryBlock,
+    - added orientation prop for Progress component
+
+### Patch Changes
+
+- Updated dependencies [05eea01]
+- Updated dependencies [44653fb]
+    - @o2s/utils.logger@0.12.0
+    - @o2s/framework@0.24.0
+
+## 1.3.0
+
+### Minor Changes
+
+- 2e81dca: added possibility to defined unprotected pages
+
+### Patch Changes
+
+- Updated dependencies [2e81dca]
+    - @o2s/framework@0.23.0
+
+## 1.2.1
+
+### Patch Changes
+
+- 87185e9: feat: updated mocked content for knowledge base
+- Updated dependencies [87185e9]
+    - @o2s/framework@0.22.1
+
+## 1.2.0
+
+### Minor Changes
+
+- 8b93cbf: feat: Implement SurveyJS forms
+- 84b9002: added Strapi integration for `OrdersSummary` block
+- 8d92afc: Adding label clickToSelect for reseting filters
+- 30f3524: added `OrdersSummary` block and reworked mocked orders to return random orders instead of them being hardcoded
+- 8b93cbf: feat: Integrated SurveyJS
+- 8d92afc: added Strapi integration for `CategoryList` block
+- 8d92afc: added Strapi integration for `Category` block
+- 30f3524: feat: implemented orderListBlock
+
+    - new page /orders,
+    - added strapi integration for page /orders
+    - new UI dropdown-menu component
+
+- 8b93cbf: feat: implement surveyJS forms
+- 8d92afc: added Strapi integration for `QuickLinks` block
+- 8d92afc: added Strapi integration for `ArticleList` block
+- 6d63cb1: feat: added surveyJS module
+- bb46536: feat: cases submission
+
+    - new component DynamicIcon - for loading icons dinamicly,
+    - new component ActionLinks - for showing button list with dropdown-menu,
+    - new pages: /contact-us, /submit-complaint, /request-device-maintenance,
+    - fixed placeholders and disabled state in SurveyJS fields,
+
+- 68f7858: chore: updated dependencies
+
+### Patch Changes
+
+- e4ebc5a: updated dependencies
+- 84b9002: added explicit legend to the chart in `OrdersSummary` block
+- Updated dependencies [2e4f22d]
+- Updated dependencies [8b93cbf]
+- Updated dependencies [e4ebc5a]
+- Updated dependencies [8d92afc]
+- Updated dependencies [30f3524]
+- Updated dependencies [8b93cbf]
+- Updated dependencies [30f3524]
+- Updated dependencies [8b93cbf]
+- Updated dependencies [84b9002]
+- Updated dependencies [6d63cb1]
+- Updated dependencies [ba125d6]
+- Updated dependencies [bb46536]
+- Updated dependencies [68f7858]
+    - @o2s/framework@0.22.0
+    - @o2s/utils.logger@0.11.0
+
+## 1.1.1
+
+### Patch Changes
+
+- 0e8409e: fixed a typo in class name
+- Updated dependencies [0e8409e]
+    - @o2s/framework@0.21.1
+
+## 1.1.0
+
+### Minor Changes
+
+- c0ff0a7: implement context switch
+- de00274: updated dependencies
+- c0ff0a7: implement context change, user roles
+- 35cdf5e: implement TicketRecent component
+- e9dc277: feat: handle user's timezone
+- e9dc277: feat: handle user's timezone
+
+### Patch Changes
+
+- Updated dependencies [c0ff0a7]
+- Updated dependencies [de00274]
+- Updated dependencies [c0ff0a7]
+- Updated dependencies [e9dc277]
+- Updated dependencies [e9dc277]
+    - @o2s/framework@0.21.0
+    - @o2s/utils.logger@0.10.0
+
+## 1.0.0
+
+### Major Changes
+
+- 6391233: Mapper labels fixes
+
 ## 0.18.0
 
 ### Minor Changes

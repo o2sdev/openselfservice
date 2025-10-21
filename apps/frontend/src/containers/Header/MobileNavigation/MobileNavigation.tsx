@@ -1,19 +1,19 @@
 'use client';
 
 import { Menu, X } from 'lucide-react';
-import { useLocale } from 'next-intl';
 import React, { useEffect, useState } from 'react';
 
 import { Models } from '@o2s/framework/modules';
 
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@o2s/ui/components/accordion';
-import { Button } from '@o2s/ui/components/button';
-import { Link } from '@o2s/ui/components/link';
-import { navigationMenuTriggerStyle } from '@o2s/ui/components/navigation-menu';
-import { Separator } from '@o2s/ui/components/separator';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@o2s/ui/components/sheet';
-import { Typography } from '@o2s/ui/components/typography';
 import { cn } from '@o2s/ui/lib/utils';
+
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@o2s/ui/elements/accordion';
+import { Button } from '@o2s/ui/elements/button';
+import { Link } from '@o2s/ui/elements/link';
+import { navigationMenuTriggerStyle } from '@o2s/ui/elements/navigation-menu';
+import { Separator } from '@o2s/ui/elements/separator';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@o2s/ui/elements/sheet';
+import { Typography } from '@o2s/ui/elements/typography';
 
 import { Link as NextLink, usePathname } from '@/i18n';
 
@@ -30,7 +30,6 @@ export function MobileNavigation({
     mobileMenuLabel,
 }: MobileNavigationProps) {
     const pathname = usePathname();
-    const locale = useLocale();
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -46,10 +45,8 @@ export function MobileNavigation({
     const NavigationItem = ({ item }: { item: Models.Navigation.NavigationItem }) => {
         return (
             <li key={item.label} className="w-full">
-                <Link asChild>
-                    <NextLink href={item.url || '/'} locale={locale} className={navigationMobileItemClass}>
-                        {item.label}
-                    </NextLink>
+                <Link className={navigationMobileItemClass} asChild>
+                    <NextLink href={item.url || '/'}>{item.label}</NextLink>
                 </Link>
             </li>
         );
@@ -103,7 +100,7 @@ export function MobileNavigation({
     };
 
     return (
-        <nav className="w-full">
+        <nav className="w-full bg-navbar-background">
             {/* Top Navigation Bar */}
             <div className="flex justify-between py-4 px-4">
                 {/* Left Section */}
@@ -121,7 +118,7 @@ export function MobileNavigation({
                     <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
                         <SheetTrigger asChild>
                             <Button
-                                variant="default"
+                                variant="outline"
                                 size="icon"
                                 className="h-10 w-10"
                                 onClick={() => setIsMenuOpen((prev) => !prev)}

@@ -1,12 +1,13 @@
-import { NotImplementedException } from '@nestjs/common';
+import { Injectable, NotImplementedException } from '@nestjs/common';
 import { Observable, of } from 'rxjs';
 
 import { Models, Users } from '@o2s/framework/modules';
 
 import { mapCustomer, mapCustomers } from './customers.mapper';
-import { mapUser } from './users.mapper';
+import { mapUser, mapUsers } from './users.mapper';
 import { responseDelay } from '@/utils/delay';
 
+@Injectable()
 export class UserService implements Users.Service {
     getCurrentUser(): Observable<Users.Model.User | undefined> {
         return of(mapUser()).pipe(responseDelay());
@@ -14,6 +15,10 @@ export class UserService implements Users.Service {
 
     getUser(options: Users.Request.GetUserParams): Observable<Users.Model.User | undefined> {
         return of(mapUser(options.id)).pipe(responseDelay());
+    }
+
+    getUsers(options: Users.Request.GetUsersQuery): Observable<Users.Model.Users> {
+        return of(mapUsers(options)).pipe(responseDelay());
     }
 
     updateCurrentUser(_body: Users.Request.PostUserBody): Observable<Users.Model.User | undefined> {
@@ -32,10 +37,14 @@ export class UserService implements Users.Service {
     }
 
     getCurrentUserCustomer(options: Users.Request.GetCustomerParams): Observable<Models.Customer.Customer | undefined> {
-        return of(mapCustomer(options.id === 'default' ? 'cust-002' : options.id)).pipe(responseDelay());
+        return of(mapCustomer(options.id)).pipe(responseDelay());
     }
 
-    deleteUser(): Observable<void> {
+    deleteCurrentUser(): Observable<void> {
+        throw new NotImplementedException('Delete current user method not implemented');
+    }
+
+    deleteUser(_options: Users.Request.GetUserParams): Observable<void> {
         throw new NotImplementedException('Delete user method not implemented');
     }
 }

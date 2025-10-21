@@ -1,4 +1,5 @@
 import { Controller, Get, Query, UseInterceptors } from '@nestjs/common';
+
 import { LoggerService } from '@o2s/utils.logger';
 
 import { Request } from './';
@@ -86,7 +87,8 @@ export class CmsController {
 
     @Get('/blocks/article-details')
     getArticleDetailsBlock(@Query() params: Request.GetCmsEntryParams) {
-        return this.cms.getArticleDetailsBlock(params);
+        // TODO: fix it
+        return this.cms.getArticleListBlock(params);
     }
 
     @Get('/blocks/invoice-list')
@@ -122,5 +124,10 @@ export class CmsController {
     @Get('/blocks/service-details')
     getServiceDetailsBlock(@Query() params: Request.GetCmsEntryParams) {
         return this.cms.getServiceDetailsBlock(params);
+    }
+
+    @Get('/blocks/featured-service-list')
+    getFeaturedServiceListBlock(@Query() params: Request.GetCmsEntryParams) {
+        return this.cms.getFeaturedServiceListBlock(params);
     }
 }

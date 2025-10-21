@@ -1,0 +1,20 @@
+{
+    "extends": "@o2s/typescript-config/api.json",
+    "compilerOptions": {
+        "outDir": "./dist/sdk",
+        "rootDir": "./src",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "composite": true,
+        "declaration": true,
+        "declarationMap": true,
+        "baseUrl": "./src/sdk"
+    },
+    "include": [
+        "src/sdk",
+        "src/api-harmonization/service-list.url.ts",
+        "src/api-harmonization/service-list.client.ts",
+        "src/api-harmonization/service-list.model.ts",
+        "src/api-harmonization/service-list.request.ts"
+    ]
+}

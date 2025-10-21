@@ -1,8 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { LoggerService } from '@o2s/utils.logger';
 import { Algoliasearch, SearchMethodParams, SearchParamsObject, algoliasearch } from 'algoliasearch';
 import { Observable, from, map } from 'rxjs';
+
+import { LoggerService } from '@o2s/utils.logger';
 
 import { Articles, Search } from '@o2s/framework/modules';
 
@@ -18,6 +19,7 @@ export class SearchService extends Search.Service {
         @Inject(LoggerService) private readonly logger: LoggerService,
     ) {
         super();
+
         const appId = this.config.get('ALGOLIA_APP_ID');
         const apiKey = this.config.get('ALGOLIA_API_KEY');
 
@@ -81,6 +83,18 @@ export class SearchService extends Search.Service {
                     };
                 })
                 .catch((error) => {
+                    this.logger.error(JSON.stringify(error), 'Algolia search error');
+                    if (error?.name === 'ApiError') {
+                        if (error?.status === 404) {
+                            this.logger.error(
+                                `Algolia index with name ${indexName} not found, please check your environment variables`,
+                            );
+                        }
+                        return {
+                            hits: [] as T[],
+                            total: 0,
+                        };
+                    }
                     throw error;
                 }),
         );
@@ -98,6 +112,10 @@ export class SearchService extends Search.Service {
             algoliaQuery.query = payload.query;
         }
 
+        if (payload.locale) {
+            algoliaQuery.facetFilters = [`locale:${payload.locale}`];
+        }
+
         if (payload.exact && Object.keys(payload.exact).length > 0) {
             const facetFilters = Object.entries(payload.exact)
                 .filter(([_, value]) => value !== undefined)
@@ -109,7 +127,7 @@ export class SearchService extends Search.Service {
                 });
 
             if (facetFilters.length > 0) {
-                algoliaQuery.facetFilters = facetFilters;
+                algoliaQuery.facetFilters = [...facetFilters, ...(algoliaQuery.facetFilters || [])];
             }
         }
 

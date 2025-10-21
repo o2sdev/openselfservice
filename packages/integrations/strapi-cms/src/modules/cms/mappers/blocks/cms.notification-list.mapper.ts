@@ -2,12 +2,12 @@ import { NotFoundException } from '@nestjs/common';
 
 import { CMS } from '@o2s/framework/modules';
 
+import { GetComponentQuery } from '@/generated/strapi';
+
 import { mapFields } from '../cms.fieldMapping.mapper';
 import { mapFilters } from '../cms.filters.mapper';
 import { mapPagination } from '../cms.pagination.mapper';
 import { mapTable } from '../cms.table.mapper';
-
-import { GetComponentQuery } from '@/generated/strapi';
 
 export const mapNotificationListBlock = (
     data: GetComponentQuery,
@@ -35,7 +35,8 @@ export const mapNotificationListBlock = (
                 },
                 labels: {
                     today: configurableTexts.dates.today,
-                    yesterday: configurableTexts.dates.today,
+                    yesterday: configurableTexts.dates.yesterday,
+                    clickToSelect: configurableTexts.actions.clickToSelect,
                 },
                 detailsUrl: component.detailsURL as string,
             };

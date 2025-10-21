@@ -1,0 +1,14 @@
+fragment FeaturedServiceListComponent on ComponentComponentsFeaturedServiceList {
+    __typename
+    id
+    title
+    pagination {
+        ...Pagination
+    }
+    noResults {
+        title
+        description
+    }
+    detailsURL
+    detailsLabel
+}

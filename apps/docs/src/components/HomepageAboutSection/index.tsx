@@ -10,7 +10,7 @@ const slides = [
     {
         title: 'Composable',
         description:
-            'Based on MACH and composable architecture to deliver flexibility, extendibility and make your Customer Portal future-proof.',
+            'Solution based on MACH and composable architecture to deliver flexibility, extendibility and make your Customer Portal future-proof.',
         badges: [
             { title: 'M.A.C.H.', icon: null },
             { title: 'Headless', icon: null },
@@ -91,8 +91,8 @@ const SlideContent = ({ title, description, badges, index, activeIndex }) => {
             transition={{ duration: 0.3 }}
             className={`min-h-[calc(100vh-150px)] flex flex-col justify-top ${index === activeIndex ? 'opacity-100' : 'opacity-50'} ${index === 0 ? 'mt-[calc(-160vh)] lg:mt-[calc(50vh-190px)] lg:mb-[calc(50vh-190px)]' : ''}`}
         >
-            <h3 className="text-xl mb-6 font-normal  leading-120">{title}</h3>
-            <Body className="lg:text-2xl lg:font-semibold lg:leading-150 mb-10">{description}</Body>
+            <h3 className="text-xl! mb-6! font-normal! leading-6">{title}</h3>
+            <Body className="lg:text-2xl lg:font-semibold! lg:leading-9 mb-10! ">{description}</Body>
             <BadgeList badges={badges} />
         </motion.div>
     );
@@ -118,7 +118,7 @@ const MobileItem = ({ title, image, description, badges }) => {
         <div>
             <H3>{title}</H3>
             <img src={image || '/placeholder.svg'} alt="Slide illustration" className="mb-6" />
-            <Body className="lg:text-2xl lg:font-semibold lg:leading-150 mb-10">{description}</Body>
+            <Body className="lg:text-2xl lg:font-semibold! lg:leading-9 mb-10">{description}</Body>
             <BadgeList badges={badges} />
         </div>
     );
@@ -159,10 +159,9 @@ export function HomepageAboutSection() {
         <section ref={sectionRef} className="container relative mb-16 pt-20 md:py-[50px]">
             <div className="md:hidden">
                 <H2>
-                    What's{' '}
-                    <span className="text-highlighted block md:inline">
-                        {siteConfig.customFields.brandName as ReactNode}
-                    </span>
+                    What{' '}
+                    <span className="text-highlighted md:inline">{siteConfig.customFields.brandName as ReactNode}</span>{' '}
+                    is?
                 </H2>
                 <div className="flex flex-col gap-20">
                     {slides.map((slide, index) => (
@@ -181,8 +180,9 @@ export function HomepageAboutSection() {
                 <motion.div ref={headerRef} className="sticky top-[100px] z-10">
                     <div className="">
                         <H2>
-                            What's{' '}
-                            <span className="text-highlighted">{siteConfig.customFields.brandName as ReactNode}</span>
+                            What{' '}
+                            <span className="text-highlighted">{siteConfig.customFields.brandName as ReactNode}</span>{' '}
+                            is?
                         </H2>
                     </div>
                 </motion.div>

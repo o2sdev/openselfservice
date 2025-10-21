@@ -1,12 +1,15 @@
 'use client';
 
-import { useLocale } from 'next-intl';
+import { NextIntlClientProvider } from 'next-intl';
 import { Inter } from 'next/font/google';
+import { useParams } from 'next/navigation';
 import React from 'react';
 
-import { ErrorPage } from '@/components/ErrorPage/ErrorPage';
+import { ErrorPage } from '@o2s/ui/components/ErrorPage';
 
-import '@/styles/global.scss';
+import { Link } from '@/i18n';
+
+import '@/styles/global.css';
 
 const inter = Inter({
     subsets: ['latin-ext'],
@@ -40,7 +43,8 @@ const CONTENT: {
 };
 
 export default function Error() {
-    const locale = useLocale();
+    const params = useParams();
+    const locale = (params?.locale as string) || 'en';
 
     const errorData = CONTENT[locale]!;
 
@@ -53,17 +57,20 @@ export default function Error() {
                 <link rel="preconnect" href="https://images.ctfassets.net" />
             </head>
             <body className="flex flex-col min-h-dvh">
-                <main className="flex flex-col items-center justify-center grow">
-                    <ErrorPage
-                        errorType="500"
-                        title={errorData.title}
-                        description={errorData.description}
-                        link={{
-                            url: '/',
-                            label: errorData.action,
-                        }}
-                    />
-                </main>
+                <NextIntlClientProvider locale={locale} messages={{}}>
+                    <main className="flex flex-col items-center justify-center grow">
+                        <ErrorPage
+                            errorType="500"
+                            title={errorData.title}
+                            description={errorData.description}
+                            link={{
+                                url: '/',
+                                label: errorData.action,
+                            }}
+                            LinkComponent={Link}
+                        />
+                    </main>
+                </NextIntlClientProvider>
             </body>
         </html>
     );

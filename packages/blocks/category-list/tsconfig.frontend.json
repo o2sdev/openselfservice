@@ -1,0 +1,22 @@
+{
+    "extends": "@o2s/typescript-config/frontend.json",
+    "compilerOptions": {
+        "outDir": "./dist/frontend",
+        "rootDir": "./src",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "composite": true,
+        "declaration": true,
+        "declarationMap": true,
+        "noEmit": false,        "jsx": "react",
+        "baseUrl": "./src/frontend"
+    },
+    "include": [
+        "src/frontend",
+        "src/api-harmonization/category-list.url.ts",
+        "src/api-harmonization/category-list.client.ts",
+        "src/api-harmonization/category-list.model.ts",
+        "src/api-harmonization/category-list.request.ts",
+        "src/sdk"
+    ]
+}

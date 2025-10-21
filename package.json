@@ -3,38 +3,68 @@
     "private": true,
     "scripts": {
         "prepare": "husky",
-        "dev": "turbo dev",
+        "dev": "turbo dev --no-cache",
         "build": "turbo build",
         "start": "turbo start",
         "format": "turbo format",
         "lint": "turbo lint",
         "test": "turbo test",
         "generate": "turbo gen",
+        "eject-block": "ts-node ./scripts/cli.ts eject-block",
         "docs": "turbo start --filter=@o2s/docs",
         "changeset": "changeset",
         "version-packages": "changeset version",
         "prerelease": "turbo run build",
-        "release": "changeset publish"
-    },
-    "devDependencies": {
-        "husky": "^9.1.7",
-        "lint-staged": "^15.5.0",
-        "prettier": "^3.5.3",
-        "turbo": "^2.4.4",
-        "typescript": "5.8.2"
+        "release": "changeset publish",
+        "update-deps": "npx npm-check-updates --format group --workspaces --interactive",
+        "storybook": "storybook dev -p 6006",
+        "build-storybook": "npm run build && storybook build",
+        "clean": "npm exec --workspaces -- npx rimraf node_modules dist .next .turbo && npx rimraf node_modules dist .next .turbo"
     },
     "engines": {
-        "node": ">=18"
+        "node": ">=22"
     },
-    "packageManager": "npm@10.2.4",
+    "packageManager": "npm@11.6.2",
     "workspaces": [
         "apps/*",
         "packages/*",
         "packages/configs/*",
         "packages/integrations/*",
-        "packages/utils/*"
+        "packages/utils/*",
+        "packages/cli/*",
+        "packages/blocks/*",
+        "packages/modules/*"
     ],
+    "devDependencies": {
+        "@commitlint/cli": "^20.1.0",
+        "@commitlint/config-conventional": "^20.0.0",
+        "@storybook/addon-a11y": "^9.1.10",
+        "@storybook/addon-docs": "^9.1.10",
+        "@storybook/addon-themes": "^9.1.10",
+        "@storybook/nextjs": "^9.1.10",
+        "@turbo/gen": "^2.5.8",
+        "@types/cli-progress": "^3.11.6",
+        "@types/fs-extra": "^11.0.4",
+        "@types/prompts": "^2.4.9",
+        "@types/unzipper": "^0.10.11",
+        "dotenv": "^17.2.3",
+        "fs-extra": "^11.3.2",
+        "husky": "^9.1.7",
+        "lint-staged": "^16.2.4",
+        "playwright": "^1.56.0",
+        "prettier": "^3.6.2",
+        "simple-git": "^3.28.0",
+        "storybook": "^9.1.10",
+        "syncpack": "^14.0.0-alpha.23",
+        "turbo": "^2.5.8",
+        "typescript": "5.9.3"
+    },
     "dependencies": {
-        "@changesets/cli": "^2.28.1"
+        "@changesets/cli": "^2.29.7",
+        "@types/prompts": "^2.4.9",
+        "cli-progress": "^3.12.0",
+        "commander": "^14.0.1",
+        "prompts": "^2.4.2",
+        "unzipper": "^0.12.3"
     }
 }

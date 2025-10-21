@@ -8,12 +8,14 @@ permissions:
 
 env:
     VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+
 on:
     push:
         branches:
             - main
     pull_request:
         types: [opened, synchronize]
+
 jobs:
     pre_job:
         runs-on: ubuntu-latest
@@ -40,15 +42,20 @@ jobs:
         if: needs.pre_job.outputs.should_skip != 'true'
         steps:
             - name: Checkout code
-              uses: actions/checkout@v3
+              uses: actions/checkout@v5
               with:
                   fetch-depth: 2
                   ref: ${{ needs.check-app.outputs.branch }}
+
             - name: Prepare Environment
               uses: ./.github/actions/setup-env
               timeout-minutes: 10
               with:
                   repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Code Quality
+              uses: ./.github/actions/quality
+              timeout-minutes: 10
 
             - name: Deploy docs
               if: contains(toJson(fromJson(needs.changed-packages.outputs.package_changed).packages), 'docs') && always()

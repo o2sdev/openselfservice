@@ -1,4 +1,5 @@
 import { Ticket } from '@/modules/tickets/tickets.model';
+
 import { Block, Mapping } from '@/utils/models';
 
 export class TicketDetailsBlock extends Block.Block {

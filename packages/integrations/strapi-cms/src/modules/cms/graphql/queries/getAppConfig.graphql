@@ -2,4 +2,33 @@ query getAppConfig($locale: I18NLocaleCode!) {
     appConfig(locale: $locale) {
         ...AppConfig
     }
+    configurableTexts {
+        errors {
+            requestError {
+                title
+                content
+            }
+        }
+        dates {
+            today
+            yesterday
+        }
+        actions {
+            showMore
+            showLess
+            show
+            hide
+            edit
+            save
+            cancel
+            delete
+            logOut
+            settings
+            renew
+            details
+        }
+    }
+    i18NLocales {
+        code
+    }
 }

@@ -3,20 +3,17 @@ import type { NextConfig } from 'next';
 // @ts-expect-error missing types for this library
 import withPlugins from 'next-compose-plugins';
 import createNextIntlPlugin from 'next-intl/plugin';
-import withPwa from 'next-pwa';
 
 const withBundleAnalyzer = createBundleAnalyzer({
     enabled: process.env.ANALYZE === 'true',
 });
 
-const withPWA = withPwa({
-    dest: 'public',
-});
-
 const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
+    output: 'standalone',
     images: {
+        // deviceSizes: [430, 828, 1200, 2048, 3840],
         remotePatterns: [
             {
                 protocol: 'https',
@@ -26,20 +23,20 @@ const nextConfig: NextConfig = {
                 protocol: 'https',
                 hostname: 'raw.githubusercontent.com',
             },
+            {
+                protocol: 'https',
+                hostname: 'picsum.photos',
+            },
+            {
+                protocol: 'https',
+                hostname: 'medusa-public-images.s3.eu-west-1.amazonaws.com',
+            },
         ],
     },
     sassOptions: {
         silenceDeprecations: ['legacy-js-api'],
     },
     experimental: {
-        turbo: {
-            rules: {
-                '*.svg': {
-                    loaders: ['@svgr/webpack'],
-                    as: '*.js',
-                },
-            },
-        },
         // dynamicIO: true,
         // cacheLife: {
         //     render: {
@@ -48,6 +45,14 @@ const nextConfig: NextConfig = {
         //         expire: 5,
         //     },
         // },
+    },
+    turbopack: {
+        rules: {
+            '*.svg': {
+                loaders: ['@svgr/webpack'],
+                as: '*.js',
+            },
+        },
     },
     webpack(config) {
         config.module.rules.push({
@@ -59,4 +64,4 @@ const nextConfig: NextConfig = {
     },
 };
 
-export default withPlugins([withPWA, withBundleAnalyzer, withNextIntl], nextConfig);
+export default withPlugins([withBundleAnalyzer, withNextIntl], nextConfig);

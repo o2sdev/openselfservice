@@ -1,0 +1,22 @@
+{
+    "extends": "@o2s/typescript-config/frontend.json",
+    "compilerOptions": {
+        "outDir": "./dist/frontend",
+        "rootDir": "./src",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "composite": true,
+        "declaration": true,
+        "declarationMap": true,
+        "noEmit": false,        "jsx": "react",
+        "baseUrl": "./src/frontend"
+    },
+    "include": [
+        "src/frontend",
+        "src/api-harmonization/quick-links.client.ts",
+        "src/api-harmonization/quick-links.model.ts",
+        "src/api-harmonization/quick-links.request.ts",
+        "src/api-harmonization/quick-links.url.ts",
+        "src/sdk"
+    ]
+}

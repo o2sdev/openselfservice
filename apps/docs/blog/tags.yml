@@ -8,7 +8,6 @@ tech:
     permalink: '/tech-articles'
     description: 'Content related to technology or development of O2S.'
 
-
 integrations:
     label: 'Integrations'
 
@@ -17,6 +16,12 @@ frontend:
 
 backend:
     label: 'Backend'
+
+performance:
+    label: 'Performance'
+
+ai:
+    label: 'AI'
 
 # An empty tag definition is also valid
 # Other attributes will be inferred from the key

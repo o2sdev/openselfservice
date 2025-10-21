@@ -1,6 +1,7 @@
+import { BillingAccount } from '@/modules/billing-accounts/billing-accounts.model';
+
 import { Party } from './party';
 import { UserCustomerRole } from './roles';
-import { BillingAccount } from '@/modules/billing-accounts/billing-accounts.model';
 
 export class Customer extends Party {
     clientType?: ClientType;

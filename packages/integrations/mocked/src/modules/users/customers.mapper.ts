@@ -1,8 +1,8 @@
-import { Models } from '@o2s/framework/modules';
+import { Auth, Models } from '@o2s/framework/modules';
 
 const MOCK_CUSTOMER_1: Models.Customer.Customer = {
     id: 'cust-001',
-    name: 'Acme Corporationh',
+    name: 'Acme Corporation',
     clientType: 'B2B',
     address: {
         country: 'US',
@@ -16,10 +16,10 @@ const MOCK_CUSTOMER_1: Models.Customer.Customer = {
     },
     roles: [
         {
-            role: 'user',
+            roles: [Auth.Constants.Roles.ORG_USER],
         },
         {
-            role: 'admin',
+            roles: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
         },
     ],
     parentOrgId: 'org-001',
@@ -41,7 +41,7 @@ const MOCK_CUSTOMER_2: Models.Customer.Customer = {
     },
     roles: [
         {
-            role: 'user',
+            roles: [Auth.Constants.Roles.ORG_USER],
         },
     ],
     parentOrgId: 'org-002',
@@ -63,7 +63,7 @@ const MOCK_CUSTOMER_3: Models.Customer.Customer = {
     },
     roles: [
         {
-            role: 'admin',
+            roles: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
         },
     ],
     parentOrgId: 'org-003',

@@ -1,0 +1,46 @@
+fragment OrderDetailsComponent on ComponentComponentsOrderDetails {
+    __typename
+    id
+    title
+    productsTitle
+    statusLadder {
+        title
+    }
+    fields {
+        ...FieldMapping
+    }
+    table {
+        ...Table
+    }
+    pagination {
+        ...Pagination
+    }
+    filters {
+        ...Filters
+    }
+    noResults {
+        title
+        description
+    }
+    totalValue {
+        ...InformationCard
+    }
+    createdOrderAt {
+        ...InformationCard
+    }
+    paymentDueDate {
+        ...InformationCard
+    }
+    overdue {
+        ...InformationCard
+    }
+    orderStatus {
+        ...InformationCard
+    }
+    customerComment {
+        ...InformationCard
+    }
+    reorderLabel
+    trackOrderLabel
+    payOnlineLabel
+}

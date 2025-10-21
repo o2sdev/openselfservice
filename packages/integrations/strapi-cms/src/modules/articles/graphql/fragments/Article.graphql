@@ -1,0 +1,61 @@
+fragment ArticleSimple on Article {
+    documentId
+    slug
+    permissions {
+        ...Roles
+    }
+    locale
+    createdAt
+    updatedAt
+    publishedAt
+    documentId
+    SEO {
+        ...Seo
+    }
+    parent {
+        slug
+        SEO {
+            title
+        }
+        parent {
+            slug
+            SEO {
+                title
+            }
+            parent {
+                slug
+                SEO {
+                    title
+                }
+            }
+        }
+    }
+    content {
+        id
+        __typename
+        author {
+            name
+            position
+            avatar {
+                ...Media
+            }
+        }
+        category {
+            documentId
+            slug
+            name
+        }
+    }
+}
+
+fragment Article on Article {
+    ...ArticleSimple
+    content {
+        sections {
+            id
+            __typename
+            title
+            content
+        }
+    }
+}

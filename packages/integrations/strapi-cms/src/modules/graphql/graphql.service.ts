@@ -4,13 +4,18 @@ import { GraphQLClient } from 'graphql-request';
 
 import {
     GetAppConfigQueryVariables,
+    GetArticleQueryVariables,
+    GetArticlesQueryVariables,
+    GetCategoriesQueryVariables,
     GetComponentQueryVariables,
     GetFooterQueryVariables,
     GetHeaderQueryVariables,
     GetLoginPageQueryVariables,
     GetNotFoundPageQueryVariables,
+    GetOrganizationListQueryVariables,
     GetPageQueryVariables,
     GetPagesQueryVariables,
+    GetSurveyQueryVariables,
     Sdk,
     getSdk,
 } from '@/generated/strapi';
@@ -60,5 +65,25 @@ export class GraphqlService {
 
     public getComponent(params: GetComponentQueryVariables) {
         return this.sdk.getComponent(params);
+    }
+
+    public getOrganizationList(params: GetOrganizationListQueryVariables) {
+        return this.sdk.getOrganizationList(params);
+    }
+
+    public getSurvey(params: GetSurveyQueryVariables) {
+        return this.sdk.getSurvey(params);
+    }
+
+    public getCategories(params: GetCategoriesQueryVariables) {
+        return this.sdk.getCategories(params);
+    }
+
+    public getArticle(params: GetArticleQueryVariables) {
+        return this.sdk.getArticle(params);
+    }
+
+    public getArticles(params: GetArticlesQueryVariables) {
+        return this.sdk.getArticles(params);
     }
 }

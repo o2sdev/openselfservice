@@ -24,12 +24,10 @@ const Benefit: React.FC<BenefitProps> = ({ title, description, image }) => (
 export function HomepageBenefitsSection() {
     const { siteConfig } = useDocusaurusContext();
     return (
-        <section className="container my-16 md:mb-32">
+        <section className="container my-16! md:mb-32! lg:mb-32!">
             <H2>
-                Why{' '}
-                <span className="text-highlighted block md:inline">
-                    {siteConfig.customFields.brandName as ReactNode}
-                </span>
+                Why <span className="text-highlighted md:inline">{siteConfig.customFields.brandName as ReactNode}</span>
+                ?
             </H2>
 
             <div className="flex flex-col">

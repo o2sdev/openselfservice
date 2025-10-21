@@ -1,5 +1,7 @@
 import { Ticket } from '@/modules/tickets/tickets.model';
+
 import { Block, DataTable, Filters, Mapping, Pagination } from '@/utils/models';
+import { Link } from '@/utils/models/link';
 
 export class TicketListBlock extends Block.Block {
     title?: string;
@@ -15,6 +17,9 @@ export class TicketListBlock extends Block.Block {
     labels!: {
         today: string;
         yesterday: string;
+        showMore: string;
+        clickToSelect: string;
     };
     detailsUrl!: string;
+    forms?: Link[];
 }

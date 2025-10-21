@@ -1,0 +1,34 @@
+query getArticle($slug: String!, $locale: I18NLocaleCode!) {
+    articles(locale: $locale, filters: { slug: { eq: $slug } }) {
+        ...Article
+    }
+}
+
+query getArticles(
+    $locale: I18NLocaleCode!
+    $slugs: [String]
+    $category: String
+    $dateFrom: DateTime
+    $dateTo: DateTime
+    $limit: Int
+    $offset: Int
+    $sort: [String]
+) {
+    articles_connection {
+        pageInfo {
+            total
+        }
+    }
+    articles(
+        filters: {
+            slug: { in: $slugs }
+            updatedAt: { gte: $dateFrom, lte: $dateTo }
+            content: { category: { slug: { eq: $category } } }
+        }
+        pagination: { limit: $limit, start: $offset }
+        sort: $sort
+        locale: $locale
+    ) {
+        ...ArticleSimple
+    }
+}

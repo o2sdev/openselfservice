@@ -1,6 +1,8 @@
 ---
 slug: building-composable-frontends-with-strapi-and-nextjs
 title: 'Building composable frontends with Strapi and Next.js'
+description: 'Learn how to build composable frontends using Strapi CMS and Next.js. Discover dynamic content modeling, reusable UI blocks, flexible layouts, and scalable component architecture for modern web applications.'
+keywords: ['Strapi CMS', 'Next.js', 'composable frontend', 'headless CMS', 'content modeling', 'dynamic layouts', 'reusable components', 'UI blocks', 'content management', 'frontend architecture', 'component composition', 'page builder', 'content modeling', 'API integration', 'React components', 'TypeScript', 'frontend framework']
 date: 2025-03-28
 tags: [tech, integrations]
 authors: [marcin.krasowski]
@@ -13,11 +15,11 @@ hide_table_of_contents: false
 We’re building a frontend-first framework for composable customer portals – Open Self Service.
 To support dynamic content, reusable UI blocks, and flexible layouts, we needed a CMS that gives developers control over structure while staying accessible to business users.
 
-That’s where Strapi comes in. In O2S, we use it not just for managing page content, but also for defining layout templates, page structures, and component configurations. This approach helps us find the right balance between flexibility for editors and consistency in the frontend.
+That’s where **[Strapi](https://strapi.io/)** comes in. In O2S, we use it not just for managing page content, but also for defining layout templates, page structures, and component configurations. This approach helps us find the right balance between flexibility for editors and consistency in the frontend.
+
 <!--truncate-->
 
 In this article, we’ll show how Strapi powers the content architecture behind our composable frontend, and how it integrates with Next.js to deliver dynamic pages, structured layouts, and scalable UI patterns.
-
 
 ## Web content management in modern front-end apps
 

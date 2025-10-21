@@ -5,9 +5,9 @@
         "updatedAt": "2023-06-15T14:25:00Z",
         "createdAt_timestamp": 1683879000,
         "updatedAt_timestamp": 1686838500,
-        "title": "Managing Your PowerPro Tools Online",
+        "title": "Managing Your PowerPro Tools Online??????",
         "lead": "Learn how to efficiently manage your PowerPro tools through our self-service portal available 24/7.",
-        "image": "https://example.com/images/tool-management.jpg",
+        "image": "https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/o2s-social-card-1.jpg",
         "thumbnail": "https://example.com/images/tool-management-thumb.jpg",
         "category": "SELF_SERVICE",
         "sections": [

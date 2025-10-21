@@ -1,0 +1,5 @@
+fragment OrganizationList on OrganizationList {
+    documentId
+    title
+    description
+}

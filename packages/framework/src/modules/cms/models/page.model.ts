@@ -1,25 +1,28 @@
-import { Models } from '@o2s/framework/modules';
+import { Auth, Models } from '@o2s/framework/modules';
 
 export class Page {
     id!: string;
     slug!: string;
     locale!: string;
     template!: PageTemplate;
+    createdAt!: string;
     updatedAt!: string;
     seo!: Models.SEO.Page;
     hasOwnTitle!: boolean;
-    parent!: {
+    parent?: {
         slug: string;
-        seo?: Pick<Models.SEO.Page, 'title'>;
+        seo: Pick<Models.SEO.Page, 'title'>;
         parent?: {
             slug: string;
-            seo?: Pick<Models.SEO.Page, 'title'>;
+            seo: Pick<Models.SEO.Page, 'title'>;
             parent?: {
                 slug: string;
-                seo?: Pick<Models.SEO.Page, 'title'>;
+                seo: Pick<Models.SEO.Page, 'title'>;
             };
         };
     };
+    permissions?: Auth.Constants.Roles[];
+    theme?: string;
 }
 
 export abstract class Template {
@@ -30,6 +33,7 @@ export abstract class Template {
 
 export class SlotBlock {
     __typename!: string;
+    layout?: LayoutSection;
     id!: string;
 }
 
@@ -50,4 +54,11 @@ export class TwoColumnTemplate implements Template {
         right: SlotBlock[];
         bottom: SlotBlock[];
     };
+}
+
+export class LayoutSection {
+    spacing?: 'none' | 'small' | 'medium' | 'large';
+    background?: 'none' | 'light' | 'dark' | 'brand';
+    variant?: 'narrow' | 'full' | 'wide';
+    theme?: string;
 }

@@ -6,16 +6,21 @@ import { AuthError } from 'next-auth';
 import React, { useState } from 'react';
 import { object as YupObject, string as YupString } from 'yup';
 
-import { Alert, AlertDescription } from '@o2s/ui/components/alert';
-import { Button } from '@o2s/ui/components/button';
-import { Input } from '@o2s/ui/components/input';
-import { Label } from '@o2s/ui/components/label';
-import { Separator } from '@o2s/ui/components/separator';
-import { Typography } from '@o2s/ui/components/typography';
+import { Alert, AlertDescription } from '@o2s/ui/elements/alert';
+import { Button } from '@o2s/ui/elements/button';
+import { InputWithLabel } from '@o2s/ui/elements/input';
+import { Separator } from '@o2s/ui/elements/separator';
+import { Typography } from '@o2s/ui/elements/typography';
 
 import LogoGithub from '@/assets/icons/logo-github.svg';
+import LogoKeycloak from '@/assets/icons/logo-keycloak.svg';
 
 import { FormValues, SignInFormProps } from './SignInForm.types';
+
+const PROVIDERS_LOGOS = {
+    github: <LogoGithub />,
+    keycloak: <LogoKeycloak />,
+};
 
 const MIN_USERNAME_CHARS = 5;
 const MAX_USERNAME_CHARS = 64;
@@ -95,8 +100,7 @@ export const SignInForm: React.FC<SignInFormProps> = ({ providers, labels, onSig
                             <Field name="username" validateOnChange={true}>
                                 {({ field, form: { touched, errors } }: FieldProps<string, FormValues>) => (
                                     <div className="flex flex-col gap-2">
-                                        <Label htmlFor={field.name}>{labels.username.label}</Label>
-                                        <Input
+                                        <InputWithLabel
                                             id={field.name}
                                             type="text"
                                             placeholder={labels.username.placeholder}
@@ -106,6 +110,7 @@ export const SignInForm: React.FC<SignInFormProps> = ({ providers, labels, onSig
                                             disabled={isSubmitting}
                                             onChange={field.onChange}
                                             onBlur={field.onBlur}
+                                            label={labels.username.label}
                                         />
                                         <ErrorMessage name="username">
                                             {(msg) => (
@@ -126,8 +131,7 @@ export const SignInForm: React.FC<SignInFormProps> = ({ providers, labels, onSig
                             <Field name="password">
                                 {({ field, form: { touched, errors } }: FieldProps<string, FormValues>) => (
                                     <div className="flex flex-col gap-2">
-                                        <Label htmlFor={field.name}>{labels.password.label}</Label>
-                                        <Input
+                                        <InputWithLabel
                                             id={field.name}
                                             type={passwordVisible ? 'text' : 'password'}
                                             placeholder={labels.password.placeholder}
@@ -137,6 +141,7 @@ export const SignInForm: React.FC<SignInFormProps> = ({ providers, labels, onSig
                                             aria-invalid={!!(touched.password && errors.password)}
                                             onChange={field.onChange}
                                             onBlur={field.onBlur}
+                                            label={labels.password.label}
                                             adornment={
                                                 <button
                                                     type="button"
@@ -201,7 +206,7 @@ export const SignInForm: React.FC<SignInFormProps> = ({ providers, labels, onSig
                             className="flex flex-col gap-4"
                         >
                             <Button type="submit" variant="outline" disabled={isSubmitting}>
-                                <LogoGithub />
+                                {PROVIDERS_LOGOS[provider.id as keyof typeof PROVIDERS_LOGOS] || null}
                                 {labels.providers?.label} {provider.name}
                             </Button>
                         </form>

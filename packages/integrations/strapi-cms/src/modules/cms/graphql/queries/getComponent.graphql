@@ -33,6 +33,39 @@ query getComponent($id: ID!, $locale: I18NLocaleCode!) {
             ... on ComponentComponentsServiceDetails {
                 ...ServiceDetailsComponent
             }
+            ... on ComponentComponentsTicketRecent {
+                ...TicketRecentComponent
+            }
+            ... on ComponentComponentsSurveyJsComponent {
+                ...SurveyjsComponent
+            }
+            ... on ComponentComponentsOrderList {
+                ...OrderListComponent
+            }
+            ... on ComponentComponentsOrderDetails {
+                ...OrderDetailsComponent
+            }
+            ... on ComponentComponentsOrdersSummary {
+                ...OrdersSummaryComponent
+            }
+            ... on ComponentComponentsQuickLinks {
+                ...QuickLinksComponent
+            }
+            ... on ComponentComponentsCategoryList {
+                ...CategoryListComponent
+            }
+            ... on ComponentComponentsArticleList {
+                ...ArticleListComponent
+            }
+            ... on ComponentComponentsCategory {
+                ...CategoryComponent
+            }
+            ... on ComponentComponentsArticleSearch {
+                ...ArticleSearchComponent
+            }
+            ... on ComponentComponentsFeaturedServiceList {
+                ...FeaturedServiceListComponent
+            }
         }
     }
     configurableTexts(locale: $locale) {
@@ -52,6 +85,21 @@ query getComponent($id: ID!, $locale: I18NLocaleCode!) {
             logOut
             settings
             renew
+            details
+            reorder
+            clickToSelect
+            payOnline
+            close
+            trackOrder
+            showAllArticles
+            on
+            off
+        }
+        errors {
+            requestError {
+                title
+                content
+            }
         }
     }
 }

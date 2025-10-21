@@ -5,10 +5,9 @@ const MOCK_FOOTER_EN: CMS.Model.Footer.Footer = {
     title: 'Legal and privacy',
     logo: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/logo.svg',
-        alternativeText: 'Logo',
+        alt: 'Logo',
         width: 92,
         height: 24,
-        name: 'Logo',
     },
     items: [
         {
@@ -60,34 +59,57 @@ const MOCK_FOOTER_PL: CMS.Model.Footer.Footer = {
     title: 'Informacje prawne i prywatność',
     logo: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/logo.svg',
-        alternativeText: 'Logo',
+        alt: 'Logo',
         width: 92,
         height: 24,
-        name: 'Logo',
     },
     items: [
         {
             __typename: 'NavigationGroup',
             title: 'Polityka Prywatności',
             items: [
-                { label: 'Polityka Prywatności 1', url: '/powiadomienia', __typename: 'NavigationItem' },
-                { label: 'Polityka Prywatności 2', url: '/rachunki', __typename: 'NavigationItem' },
+                {
+                    label: 'Polityka Prywatności 1',
+                    url: 'https://hycom.digital/privacy-policy',
+                    __typename: 'NavigationItem',
+                },
+                {
+                    label: 'Polityka Prywatności 2',
+                    url: 'https://hycom.digital/privacy-policy',
+                    __typename: 'NavigationItem',
+                },
             ],
         },
         {
             __typename: 'NavigationGroup',
             title: 'Warunki Korzystania',
             items: [
-                { label: 'Warunki Korzystania 1', url: '/powiadomienia', __typename: 'NavigationItem' },
-                { label: 'Warunki Korzystania 2', url: '/rachunki', __typename: 'NavigationItem' },
+                {
+                    label: 'Warunki Korzystania 1',
+                    url: 'https://hycom.digital/terms-and-conditions',
+                    __typename: 'NavigationItem',
+                },
+                {
+                    label: 'Warunki Korzystania 2',
+                    url: 'https://hycom.digital/terms-and-conditions',
+                    __typename: 'NavigationItem',
+                },
             ],
         },
         {
             __typename: 'NavigationGroup',
             title: 'Ustawienia Plików Cookie',
             items: [
-                { label: 'Ustawienia Plików Cookie 1', url: '/powiadomienia', __typename: 'NavigationItem' },
-                { label: 'Ustawienia Plików Cookie 2', url: '/rachunki', __typename: 'NavigationItem' },
+                {
+                    label: 'Ustawienia Plików Cookie 1',
+                    url: '/',
+                    __typename: 'NavigationItem',
+                },
+                {
+                    label: 'Ustawienia Plików Cookie 2',
+                    url: '/',
+                    __typename: 'NavigationItem',
+                },
             ],
         },
     ],
@@ -99,34 +121,49 @@ const MOCK_FOOTER_DE: CMS.Model.Footer.Footer = {
     title: 'Rechtliches und Datenschutz',
     logo: {
         url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/logo.svg',
-        alternativeText: 'Logo',
+        alt: 'Logo',
         width: 92,
         height: 24,
-        name: 'Logo',
     },
     items: [
         {
             __typename: 'NavigationGroup',
             title: 'Datenschutzrichtlinie',
             items: [
-                { label: 'Datenschutzrichtlinie 1', url: '/benachrichtigungen', __typename: 'NavigationItem' },
-                { label: 'Datenschutzrichtlinie 2', url: '/invoices', __typename: 'NavigationItem' },
+                {
+                    label: 'Datenschutzrichtlinie 1',
+                    url: 'https://hycom.digital/privacy-policy',
+                    __typename: 'NavigationItem',
+                },
+                {
+                    label: 'Datenschutzrichtlinie 2',
+                    url: 'https://hycom.digital/privacy-policy',
+                    __typename: 'NavigationItem',
+                },
             ],
         },
         {
             __typename: 'NavigationGroup',
             title: 'Nutzungsbedingungen',
             items: [
-                { label: 'Nutzungsbedingungen 1', url: '/benachrichtigungen', __typename: 'NavigationItem' },
-                { label: 'Nutzungsbedingungen 2', url: '/invoices', __typename: 'NavigationItem' },
+                {
+                    label: 'Nutzungsbedingungen 1',
+                    url: 'https://hycom.digital/terms-and-conditions',
+                    __typename: 'NavigationItem',
+                },
+                {
+                    label: 'Nutzungsbedingungen 2',
+                    url: 'https://hycom.digital/terms-and-conditions',
+                    __typename: 'NavigationItem',
+                },
             ],
         },
         {
             __typename: 'NavigationGroup',
             title: 'Cookie-Einstellungen',
             items: [
-                { label: 'Cookie-Einstellungen 1', url: '/benachrichtigungen', __typename: 'NavigationItem' },
-                { label: 'Cookie-Einstellungen 2', url: '/invoices', __typename: 'NavigationItem' },
+                { label: 'Cookie-Einstellungen 1', url: '/', __typename: 'NavigationItem' },
+                { label: 'Cookie-Einstellungen 2', url: '/', __typename: 'NavigationItem' },
             ],
         },
     ],
