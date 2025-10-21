@@ -19,8 +19,14 @@ import {
     PAGE_WARRANTY_AND_REPAIR_EN,
     PAGE_WARRANTY_AND_REPAIR_PL,
 } from './mocks/pages/category.page';
+import { PAGE_TROUBLESHOOTING_DE, PAGE_TROUBLESHOOTING_EN, PAGE_TROUBLESHOOTING_PL } from './mocks/pages/category.page';
 import { PAGE_DASHBOARD_DE, PAGE_DASHBOARD_EN, PAGE_DASHBOARD_PL } from './mocks/pages/dashboard.page';
 import { PAGE_INVOICE_LIST_DE, PAGE_INVOICE_LIST_EN, PAGE_INVOICE_LIST_PL } from './mocks/pages/invoice-list.page';
+import {
+    PAGE_HELP_AND_SUPPORT_DE,
+    PAGE_HELP_AND_SUPPORT_EN,
+    PAGE_HELP_AND_SUPPORT_PL,
+} from './mocks/pages/knowledge-base.page';
 import {
     PAGE_NOTIFICATION_DETAILS_DE,
     PAGE_NOTIFICATION_DETAILS_EN,
@@ -159,6 +165,95 @@ export const mapMockPage = (slug: string, locale: string): CMS.Model.Page.Page |
                 slug: `/uslugi/${slug.match(/(.+)\/(.+)/)?.[2]}`,
                 updatedAt: '2025-01-01',
             };
+        case '/orders':
+            return PAGE_ORDER_LIST_EN;
+        case '/bestellungen':
+            return PAGE_ORDER_LIST_DE;
+        case '/zamowienia':
+            return PAGE_ORDER_LIST_PL;
+
+        case slug.match(/\/orders\/.+/)?.[0]:
+            return {
+                ...PAGE_ORDER_DETAILS_EN,
+                slug: `/orders/${slug.match(/(.+)\/(.+)/)?.[2]}`,
+                updatedAt: '2025-01-01',
+            };
+        case slug.match(/\/bestellungen\/.+/)?.[0]:
+            return {
+                ...PAGE_ORDER_DETAILS_DE,
+                slug: `/bestellungen/${slug.match(/(.+)\/(.+)/)?.[2]}`,
+                updatedAt: '2025-01-01',
+            };
+        case slug.match(/\/zamowienia\/.+/)?.[0]:
+            return {
+                ...PAGE_ORDER_DETAILS_PL,
+                slug: `/zamowienia/${slug.match(/(.+)\/(.+)/)?.[2]}`,
+                updatedAt: '2025-01-01',
+            };
+
+        case '/contact-us':
+            return PAGE_CONTACT_US_EN;
+        case '/kontaktiere-uns':
+            return PAGE_CONTACT_US_DE;
+        case '/skontaktuj-sie-z-nami':
+            return PAGE_CONTACT_US_PL;
+
+        case '/submit-complaint':
+            return PAGE_COMPLAINT_FORM_EN;
+        case '/einreichen-reklamacji':
+            return PAGE_COMPLAINT_FORM_DE;
+        case '/wyslij-reklamacje':
+            return PAGE_COMPLAINT_FORM_PL;
+
+        case '/request-device-maintenance':
+            return PAGE_REQUEST_DEVICE_MAINTENANCE_EN;
+        case '/geratewartungsanfrage':
+            return PAGE_REQUEST_DEVICE_MAINTENANCE_DE;
+        case '/zglos-naprawe-urzadzenia':
+            return PAGE_REQUEST_DEVICE_MAINTENANCE_PL;
+
+        case '/help-and-support':
+            return PAGE_HELP_AND_SUPPORT_EN;
+        case '/hilfe-und-support':
+            return PAGE_HELP_AND_SUPPORT_DE;
+        case '/pomoc-i-wsparcie':
+            return PAGE_HELP_AND_SUPPORT_PL;
+
+        case '/help-and-support/warranty-and-repair':
+            return PAGE_WARRANTY_AND_REPAIR_EN;
+        case '/hilfe-und-support/garantie-und-reparaturt':
+            return PAGE_WARRANTY_AND_REPAIR_DE;
+        case '/pomoc-i-wsparcie/gwarancja-i-naprawa':
+            return PAGE_WARRANTY_AND_REPAIR_PL;
+
+        case '/help-and-support/maintenance':
+            return PAGE_MAINTENANCE_EN;
+        case '/hilfe-und-support/wartung':
+            return PAGE_MAINTENANCE_DE;
+        case '/pomoc-i-wsparcie/konserwacja':
+            return PAGE_MAINTENANCE_PL;
+
+        case '/help-and-support/safety':
+            return PAGE_SAFETY_EN;
+        case '/hilfe-und-support/sicherheit':
+            return PAGE_SAFETY_DE;
+        case '/pomoc-i-wsparcie/bezpieczenstwo':
+            return PAGE_SAFETY_PL;
+
+        case '/help-and-support/accessories':
+            return PAGE_ACCESSORIES_EN;
+        case '/hilfe-und-support/zubehoer':
+            return PAGE_ACCESSORIES_DE;
+        case '/pomoc-i-wsparcie/akcesoria':
+            return PAGE_ACCESSORIES_PL;
+
+        case '/help-and-support/troubleshooting':
+            return PAGE_TROUBLESHOOTING_EN;
+        case '/hilfe-und-support/fehlerbehebung':
+            return PAGE_TROUBLESHOOTING_DE;
+        case '/pomoc-i-wsparcie/rozwiązywanie-problemów':
+            return PAGE_TROUBLESHOOTING_PL;
+
         default:
             return undefined;
     }
@@ -317,22 +412,24 @@ export const mapPage = (entryPage: Entry<IPageFields>): CMS.Model.Page.Page => {
         createdAt: entryPage.sys.createdAt,
         seo: seo,
         hasOwnTitle: entryPage.fields.hasOwnTitle,
-        parent: {
-            slug: entryPage.fields.parent?.fields.slug ?? '',
-            seo: mapSeo(entryPage.fields.parent?.fields.seo),
-            parent: entryPage.fields.parent?.fields.parent
-                ? {
-                      slug: entryPage.fields.parent?.fields.parent?.fields.slug ?? '',
-                      seo: mapSeo(entryPage.fields.parent?.fields.parent?.fields.seo),
-                      parent: entryPage.fields.parent?.fields.parent?.fields.parent
-                          ? {
-                                slug: entryPage.fields.parent?.fields.parent?.fields.parent?.fields.slug ?? '',
-                                seo: mapSeo(entryPage.fields.parent?.fields.parent?.fields.parent?.fields.seo),
-                            }
-                          : undefined,
-                  }
-                : undefined,
-        },
+        parent: entryPage.fields.parent
+            ? {
+                  slug: entryPage.fields.parent.fields.slug ?? '',
+                  seo: mapSeo(entryPage.fields.parent.fields.seo),
+                  parent: entryPage.fields.parent.fields.parent
+                      ? {
+                            slug: entryPage.fields.parent.fields.parent.fields.slug ?? '',
+                            seo: mapSeo(entryPage.fields.parent.fields.parent.fields.seo),
+                            parent: entryPage.fields.parent.fields.parent.fields.parent
+                                ? {
+                                      slug: entryPage.fields.parent.fields.parent.fields.parent.fields.slug ?? '',
+                                      seo: mapSeo(entryPage.fields.parent.fields.parent.fields.parent.fields.seo),
+                                  }
+                                : undefined,
+                        }
+                      : undefined,
+              }
+            : undefined,
     };
 };
 

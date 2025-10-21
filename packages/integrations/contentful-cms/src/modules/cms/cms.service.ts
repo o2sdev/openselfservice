@@ -1,6 +1,4 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore module type mismatch
 import { parse, stringify } from 'flatted';
 import { Observable, forkJoin, from, map, mergeMap, of } from 'rxjs';
 
@@ -8,7 +6,7 @@ import { CMS, Cache } from '@o2s/framework/modules';
 
 import { IEntry, IPageFields } from '@/generated/contentful';
 
-import { ContentfulService } from '../contentful/contentful.service';
+import { ContentfulService } from '@/modules/contentful/contentful.service';
 
 import { mapArticleListBlock } from './mappers/blocks/cms.article-list.mapper';
 import { mapArticleSearchBlock } from './mappers/blocks/cms.article-search.mapper';
