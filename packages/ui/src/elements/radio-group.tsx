@@ -6,18 +6,17 @@ import { cn } from '@o2s/ui/lib/utils';
 
 import { Label } from '@o2s/ui/elements/label';
 
-const RadioGroup = React.forwardRef<
-    React.ElementRef<typeof RadioGroupPrimitive.Root>,
-    React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>
->(({ className, ...props }, ref) => {
+type RadioGroupProps = React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root> & {
+    ref?: React.Ref<React.ComponentRef<typeof RadioGroupPrimitive.Root>>;
+};
+const RadioGroup = ({ className, ref, ...props }: RadioGroupProps) => {
     return <RadioGroupPrimitive.Root className={cn('grid gap-2', className)} {...props} ref={ref} />;
-});
-RadioGroup.displayName = RadioGroupPrimitive.Root.displayName;
+};
 
-const RadioGroupItem = React.forwardRef<
-    React.ElementRef<typeof RadioGroupPrimitive.Item>,
-    React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>
->(({ className, ...props }, ref) => {
+type RadioGroupItemProps = React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item> & {
+    ref?: React.Ref<React.ComponentRef<typeof RadioGroupPrimitive.Item>>;
+};
+const RadioGroupItem = ({ className, ref, ...props }: RadioGroupItemProps) => {
     return (
         <RadioGroupPrimitive.Item
             ref={ref}
@@ -32,18 +31,24 @@ const RadioGroupItem = React.forwardRef<
             </RadioGroupPrimitive.Indicator>
         </RadioGroupPrimitive.Item>
     );
-});
-RadioGroupItem.displayName = RadioGroupPrimitive.Item.displayName;
+};
 
 interface RadioGroupItemWithLabelProps extends React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item> {
     label: string | React.ReactNode;
     labelClassName?: string;
 }
 
-const RadioGroupItemWithLabel = React.forwardRef<
-    React.ElementRef<typeof RadioGroupPrimitive.Item>,
-    RadioGroupItemWithLabelProps
->(({ className, label, labelClassName, id, ...props }, ref) => {
+type RadioGroupItemWithLabelOwnProps = RadioGroupItemWithLabelProps & {
+    ref?: React.Ref<React.ComponentRef<typeof RadioGroupPrimitive.Item>>;
+};
+const RadioGroupItemWithLabel = ({
+    className,
+    label,
+    labelClassName,
+    id,
+    ref,
+    ...props
+}: RadioGroupItemWithLabelOwnProps) => {
     const generatedId = React.useId();
     const radioId = id || generatedId;
 
@@ -55,7 +60,6 @@ const RadioGroupItemWithLabel = React.forwardRef<
             </Label>
         </div>
     );
-});
-RadioGroupItemWithLabel.displayName = 'RadioGroupItemWithLabel';
+};
 
 export { RadioGroup, RadioGroupItem, RadioGroupItemWithLabel };
