@@ -19,6 +19,7 @@
     "dependencies": {
         "@o2s/framework": "*",
         "@o2s/utils.logger": "*",
+        "@strapi/client": "^1.5.0",
         "flatted": "^3.3.3",
         "graphql": "16.11.0",
         "graphql-request": "7.3.0",

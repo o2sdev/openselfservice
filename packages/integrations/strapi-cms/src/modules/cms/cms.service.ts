@@ -8,9 +8,13 @@ import { Observable, concatMap, forkJoin, from, map, mergeMap, of } from 'rxjs';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Auth, CMS, Cache, Models } from '@o2s/framework/modules';
 
+import { ApiComponentComponent } from '@/generated/contentTypes';
 import { PageFragment } from '@/generated/strapi';
 
 import { Service as GraphqlService } from '@/modules/graphql';
+
+import { POPULATE_BLOCKS } from '../strapi/populate';
+import { StrapiService } from '../strapi/strapi.service';
 
 import { mapArticleListBlock } from './mappers/blocks/cms.article-list.mapper';
 import { mapArticleSearchBlock } from './mappers/blocks/cms.article-search.mapper';
@@ -52,13 +56,44 @@ export class CmsService implements CMS.Service {
 
     constructor(
         private readonly graphqlService: GraphqlService,
+        private readonly strapiService: StrapiService,
         private readonly config: ConfigService,
         private readonly cacheService: Cache.Service,
     ) {
         this.baseUrl = this.config.get('CMS_STRAPI_BASE_URL')!;
     }
 
+    toPascalCase(text: string) {
+        return text.toLowerCase().replace(/(?:^|\s|_|-)(\w)/g, (_, c) => (c ? c.toUpperCase() : ''));
+    }
+
+    replaceKeysInObj(obj: { [key: string]: any }, oldKey: string, newKey: string) {
+        const newObj: { [key: string]: any } = {};
+
+        if (typeof obj !== 'object' || Array.isArray(obj) || obj === null) return obj;
+
+        for (const key in obj) {
+            const currentKey = key === oldKey ? newKey : key;
+
+            newObj[currentKey] = this.replaceKeysInObj(obj[key], oldKey, newKey);
+
+            let __typename = newObj.__typename;
+            __typename = __typename?.split('.')?.[1];
+
+            if (__typename) {
+                __typename = this.toPascalCase(__typename || '');
+                newObj.__typename = `ComponentComponents${__typename}`;
+            }
+        }
+        return newObj;
+    }
+
     private getBlock = (options: CMS.Request.GetCmsEntryParams) => {
+        // return this.getBlockGraphql(options);
+        return this.getBlockRest(options);
+    };
+
+    private getBlockGraphql = (options: CMS.Request.GetCmsEntryParams) => {
         const key = `component-${options.id}-${options.locale}`;
 
         return from(this.cacheService.get(key)).pipe(
@@ -78,6 +113,47 @@ export class CmsService implements CMS.Service {
                             throw new NotFoundException();
                         }
                         const data = component.data;
+                        this.cacheService.set(key, stringify(data));
+                        return data;
+                    }),
+                );
+            }),
+        );
+    };
+
+    private getBlockRest = (options: CMS.Request.GetCmsEntryParams) => {
+        const key = `component-${options.id}-${options.locale}`;
+
+        return from(this.cacheService.get(key)).pipe(
+            mergeMap((cachedBlock) => {
+                if (cachedBlock) {
+                    return of(parse(cachedBlock));
+                }
+                const component = this.strapiService.collectionSingle('components', options.id, {
+                    locale: options.locale,
+                    populate: POPULATE_BLOCKS,
+                });
+
+                const configurableTexts = this.strapiService.single('configurable-texts', {
+                    locale: options.locale,
+                    populate: '*',
+                });
+
+                return forkJoin([component, configurableTexts]).pipe(
+                    map(([component, configurableTexts]) => {
+                        if (!component?.data || !configurableTexts.data) {
+                            throw new NotFoundException();
+                        }
+
+                        const content = this.replaceKeysInObj(component.data.content[0], '__component', '__typename');
+
+                        const data = {
+                            component: {
+                                ...component.data,
+                                content: [content],
+                            },
+                            configurableTexts: configurableTexts.data,
+                        };
                         this.cacheService.set(key, stringify(data));
                         return data;
                     }),

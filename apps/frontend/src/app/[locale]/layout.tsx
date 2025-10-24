@@ -11,6 +11,8 @@ import { auth } from '@/auth';
 
 import { routing } from '@/i18n';
 
+import LivePreview from '@/containers/LivePreview/LivePreview';
+
 import '@/styles/global.css';
 
 const inter = Inter({
@@ -52,6 +54,7 @@ export default async function RootLayout({ children, params }: Props) {
             <SessionProvider key={session?.user?.id} session={session} refetchOnWindowFocus={false}>
                 <NextIntlClientProvider messages={messages}>
                     <TooltipProvider>{children}</TooltipProvider>
+                    <LivePreview />
                 </NextIntlClientProvider>
             </SessionProvider>
         </html>

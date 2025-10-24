@@ -14,15 +14,19 @@ export const mapQuickLinksBlock = (data: GetComponentQuery): CMS.Model.QuickLink
     }
 
     switch (component.__typename) {
-        case 'ComponentComponentsQuickLinks':
+        case 'ComponentComponentsQuickLinks': {
+            // @ts-expect-error `quickLinks` is not in the type definition when using REST
+            const items = component.quickLinks || component.items;
+
             return {
                 id: component.id,
                 title: component.title,
                 description: component.description,
-                items: component.quickLinks.map((item) => ({
+                items: items.map((item) => ({
                     ...mapLink(item)!,
                 })),
             };
+        }
     }
 
     throw new NotFoundException();
