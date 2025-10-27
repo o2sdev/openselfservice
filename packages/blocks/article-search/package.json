@@ -25,7 +25,8 @@
         "@o2s/ui": "*",
         "@o2s/utils.api-harmonization": "*",
         "@o2s/utils.frontend": "*",
-        "@o2s/configs.integrations": "*"
+        "@o2s/configs.integrations": "*",
+        "throttle-debounce": "^5.0.2"
     },
     "devDependencies": {
         "dotenv-cli": "^10.0.0",
@@ -41,6 +42,7 @@
     "peerDependencies": {
         "@types/react": "^19",
         "@types/react-dom": "^19",
+        "@types/throttle-debounce": "^5.0.2",
         "react": "^19",
         "react-dom": "^19",
         "tailwindcss": "^4",
