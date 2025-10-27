@@ -1,0 +1,10 @@
+fragment Table on ComponentTable {
+    columnsCollection {
+        items {
+            title
+            field
+        }
+    }
+    actionsTitle
+    actionsLabel
+}

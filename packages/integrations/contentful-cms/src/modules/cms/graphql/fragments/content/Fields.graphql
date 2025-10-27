@@ -1,0 +1,9 @@
+fragment FieldMapping on ComponentFieldMapping {
+    name
+    valuesCollection {
+        items {
+            key
+            value
+        }
+    }
+}
