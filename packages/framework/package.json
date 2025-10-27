@@ -32,7 +32,7 @@
         "@turbo/gen": "^2.5.8",
         "@types/qs": "^6.14.0",
         "concurrently": "^9.2.1",
-        "eslint": "^9.37.0",
+        "eslint": "^9.38.0",
         "jsonwebtoken": "^9.0.2",
         "prettier": "^3.6.2",
         "tsc-alias": "^1.8.16",
