@@ -8,14 +8,12 @@ import { baseVariant } from '@o2s/ui/lib/utils';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof baseVariant> {
     asChild?: boolean;
+    ref?: React.Ref<HTMLButtonElement>;
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-    ({ className, variant = 'primary', size = 'default', asChild = false, ...props }, ref) => {
-        const Comp = asChild ? Slot : 'button';
-        return <Comp className={cn(baseVariant({ variant, size }), buttonVariants, className)} ref={ref} {...props} />;
-    },
-);
-Button.displayName = 'Button';
+const Button = ({ className, variant = 'primary', size = 'default', asChild = false, ref, ...props }: ButtonProps) => {
+    const Comp = asChild ? Slot : 'button';
+    return <Comp className={cn(baseVariant({ variant, size }), buttonVariants, className)} ref={ref} {...props} />;
+};
 
 export { Button, buttonVariants };
