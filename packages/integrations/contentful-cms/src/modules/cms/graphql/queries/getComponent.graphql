@@ -1,0 +1,10 @@
+query getComponent($id: ID!, $locale: String!) {
+    _node(id: $id, locale: $locale) {
+        ... on BlockFaq {
+            ...FaqComponent
+        }
+        ... on BlockTicketList {
+            ...TicketListComponent
+        }
+    }
+}

@@ -1,31 +1,30 @@
 import { NotFoundException } from '@nestjs/common';
-import { Entry } from 'contentful';
 
 import { CMS } from '@o2s/framework/modules';
 
-import { IBlockFaqFields } from '@/generated/contentful';
+import { FaqComponentFragment } from '@/generated/contentful';
 
-export const mapFaqBlock = (data: Entry<IBlockFaqFields>): CMS.Model.FaqBlock.FaqBlock => {
+export const mapFaqBlock = (data: FaqComponentFragment): CMS.Model.FaqBlock.FaqBlock => {
     if (!data) {
         throw new NotFoundException();
     }
 
-    switch (data.sys.contentType.sys.id) {
-        case 'blockFaq':
+    switch (data.__typename) {
+        case 'BlockFaq':
             return {
                 id: data.sys.id,
-                title: data.fields.title,
-                subtitle: data.fields.subtitle,
-                items: data.fields.items?.map(
+                title: data.title,
+                subtitle: data.subtitle,
+                items: data.itemsCollection?.items.map(
                     (item): CMS.Model.FaqBlock.FaqItem => ({
-                        title: item.fields.title,
-                        content: item.fields.content,
+                        title: item.title!,
+                        content: item.content!,
                     }),
                 ),
                 banner: {
-                    title: data.fields.banner?.fields.title,
-                    description: data.fields.banner?.fields.description,
-                    button: data.fields.banner?.fields.link?.fields,
+                    title: data.banner?.title,
+                    description: data.banner?.description,
+                    button: data.banner?.link,
                 } as CMS.Model.FaqBlock.FaqBoxWithButton,
             };
     }

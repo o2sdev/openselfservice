@@ -1,21 +1,32 @@
-import { Entry } from 'contentful';
-
 import { Models } from '@o2s/framework/modules';
 
-import { IComponentFieldMappingFields } from '@/generated/contentful';
+import { FieldMappingFragment } from '@/generated/contentful';
 
-export const mapFields = <T>(component: Entry<IComponentFieldMappingFields>[]): Models.Mapping.Mapping<T> => {
-    return component.reduce(
-        (acc, field) => ({
+export const mapFields = <T>(component?: FieldMappingFragment[]): Models.Mapping.Mapping<T> => {
+    if (!component) {
+        return {};
+    }
+
+    return component.reduce((acc, field) => {
+        if (!field.name) {
+            return acc;
+        }
+
+        return {
             ...acc,
-            [field.fields.name]: field.fields.values.reduce(
-                (acc, item) => ({
-                    ...acc,
-                    [item.fields.key]: item.fields.value,
-                }),
+            [field.name]: field.valuesCollection?.items.reduce(
+                (acc, item) => {
+                    if (!item.key) {
+                        return acc;
+                    }
+
+                    return {
+                        ...acc,
+                        [item.key]: item.value,
+                    };
+                },
                 {} as { [key: string]: string },
             ),
-        }),
-        {} as Models.Mapping.Mapping<T>,
-    );
+        };
+    }, {} as Models.Mapping.Mapping<T>);
 };

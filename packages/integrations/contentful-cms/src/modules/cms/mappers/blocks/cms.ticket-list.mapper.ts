@@ -1,40 +1,40 @@
 import { NotFoundException } from '@nestjs/common';
-import { Entry } from 'contentful';
 
 import { CMS } from '@o2s/framework/modules';
 
-import { IBlockTicketListFields } from '@/generated/contentful';
+import { TicketListComponentFragment } from '@/generated/contentful';
 
 import { mapFields } from '../cms.fieldMapping.mapper';
 import { mapPagination } from '../cms.pagination.mapper';
 import { mapTable } from '../cms.table.mapper';
 
-export const mapTicketListBlock = (data: Entry<IBlockTicketListFields>): CMS.Model.TicketListBlock.TicketListBlock => {
+export const mapTicketListBlock = (data: TicketListComponentFragment): CMS.Model.TicketListBlock.TicketListBlock => {
     if (!data) {
         throw new NotFoundException();
     }
 
-    const { fields, sys } = data;
-
-    switch (sys.contentType.sys.id) {
-        case 'blockTicketList':
+    switch (data.__typename) {
+        case 'BlockTicketList':
             return {
-                id: sys.id,
-                title: fields.title,
-                subtitle: fields.subTitle,
-                table: mapTable(fields.table),
-                fieldMapping: mapFields(fields.fields),
-                pagination: mapPagination(fields.pagination),
+                id: data.sys.id,
+                title: data.title,
+                subtitle: data.subTitle,
+                table: mapTable(data.table),
+                fieldMapping: mapFields(data.fieldsCollection?.items),
+                pagination: mapPagination(data.pagination),
                 // TODO: add filters
                 // filters: mapFilters(component.filters),
-                noResults: fields.noResults.fields,
+                noResults: {
+                    title: data.noResults?.title || '',
+                    description: data.noResults?.description,
+                },
                 labels: {
-                    today: fields.labels.fields.today,
-                    yesterday: fields.labels.fields.yesterday,
+                    today: 'Today',
+                    yesterday: 'Yesterday',
                     showMore: 'Show more',
                     clickToSelect: 'Click to select',
                 },
-                detailsUrl: fields.detailsUrl,
+                detailsUrl: data.detailsUrl || '',
             };
     }
 

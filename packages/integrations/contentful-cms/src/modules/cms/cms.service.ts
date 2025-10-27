@@ -1,12 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { parse, stringify } from 'flatted';
 import { Observable, forkJoin, from, map, mergeMap, of } from 'rxjs';
 
 import { CMS, Cache } from '@o2s/framework/modules';
 
-import { IEntry, IPageFields } from '@/generated/contentful';
-
-import { ContentfulService } from '@/modules/contentful/contentful.service';
+import { GraphqlService } from '@/modules/graphql/graphql.service';
 
 import { mapArticleListBlock } from './mappers/blocks/cms.article-list.mapper';
 import { mapArticleSearchBlock } from './mappers/blocks/cms.article-search.mapper';
@@ -45,7 +44,8 @@ import { mapSurvey } from './mappers/cms.survey.mapper';
 @Injectable()
 export class CmsService implements CMS.Service {
     constructor(
-        private readonly cms: ContentfulService,
+        private readonly graphqlService: GraphqlService,
+        private readonly config: ConfigService,
         private readonly cacheService: Cache.Service,
     ) {}
 
@@ -58,18 +58,17 @@ export class CmsService implements CMS.Service {
                     return of(parse(cachedBlock));
                 }
 
-                const component = this.cms.getEntry<IEntry>(options.id, {
+                const component = this.graphqlService.getComponent({
+                    id: options.id,
                     locale: options.locale,
-                    include: 5,
                 });
 
                 return forkJoin([component]).pipe(
                     map(([component]) => {
-                        if (!component?.fields) {
+                        if (!component?.data._node) {
                             throw new NotFoundException();
                         }
-
-                        const data = component;
+                        const data = component.data._node;
                         this.cacheService.set(key, stringify(data));
                         return data;
                     }),
@@ -116,20 +115,18 @@ export class CmsService implements CMS.Service {
         }
 
         return this.getCachedBlock(key, () => {
-            const pages = this.cms.findEntries<IPageFields>({
+            const pages = this.graphqlService.getPages({
                 locale: options.locale,
-                content_type: 'page',
-                include: 5,
             });
 
             return forkJoin([pages]).pipe(
                 map(([pages]) => {
-                    if (!pages?.items?.length) {
+                    if (!pages?.data?.pageCollection?.items?.length) {
                         throw new NotFoundException();
                     }
 
-                    const page = pages.items.find((page) => {
-                        const pattern = new RegExp(`^${page.fields.slug}$`, 'i');
+                    const page = pages.data.pageCollection.items.find((page) => {
+                        const pattern = new RegExp(`^${page.slug}$`, 'i');
                         return pattern.test(options.slug);
                     });
 

@@ -1,0 +1,15 @@
+query getPage($slug: String!, $locale: String!) {
+    pageCollection(locale: $locale, where: { slug: $slug }, limit: 1) {
+        items {
+            ...Page
+        }
+    }
+}
+
+query getPages($locale: String!) {
+    pageCollection(locale: $locale) {
+        items {
+            ...Page
+        }
+    }
+}

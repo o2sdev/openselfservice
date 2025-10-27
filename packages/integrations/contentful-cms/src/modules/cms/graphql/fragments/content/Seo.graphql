@@ -1,0 +1,7 @@
+fragment Seo on PageSeo {
+    title
+    noIndex
+    noFollow
+    description
+    keywords
+}

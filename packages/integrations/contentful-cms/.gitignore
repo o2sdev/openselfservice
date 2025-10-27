@@ -3,6 +3,7 @@
 /dist
 /node_modules
 /build
+/graphql.schema.json
 
 # Logs
 logs

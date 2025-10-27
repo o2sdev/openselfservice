@@ -1,2 +1,2 @@
 export * as CMS from './cms';
-export * as Contentful from './contentful';
+export * as GraphQl from './graphql';

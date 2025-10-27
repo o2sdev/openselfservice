@@ -1,0 +1,36 @@
+fragment Page on Page {
+    slug
+    sys {
+        ...Sys
+        locale
+        publishedAt
+    }
+    hasOwnTitle
+    seo {
+        ...Seo
+    }
+    parent {
+        slug
+        seo {
+            title
+        }
+        parent {
+            slug
+            seo {
+                title
+            }
+            parent {
+                slug
+                seo {
+                    title
+                }
+            }
+        }
+    }
+    template {
+        __typename
+        ... on PageOneColumnTemplate {
+            ...OneColumnTemplate
+        }
+    }
+}

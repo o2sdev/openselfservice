@@ -1,23 +1,24 @@
-import { Entry } from 'contentful';
-
 import { Models } from '@o2s/framework/modules';
 
-import { IComponentTableFields } from '@/generated/contentful';
+import { TableFragment } from '@/generated/contentful';
 
-export const mapTable = <T>(component: Entry<IComponentTableFields>): Models.DataTable.DataTable<T> => {
-    const { fields } = component;
+export const mapTable = <T>(component?: TableFragment): Models.DataTable.DataTable<T> => {
+    if (!component) {
+        return {} as Models.DataTable.DataTable<T>;
+    }
 
     return {
-        columns: fields.columns.map(
-            (column): Models.DataTable.DataTableColumn<T> => ({
-                id: column.fields.field as keyof T,
-                title: column.fields.title,
-            }),
-        ),
-        actions: component.fields.actionsTitle
+        columns:
+            component.columnsCollection?.items.map(
+                (column, index): Models.DataTable.DataTableColumn<T> => ({
+                    id: (column.field || String(index)) as keyof T,
+                    title: column.title || '',
+                }),
+            ) || [],
+        actions: component.actionsTitle
             ? {
-                  title: fields.actionsTitle,
-                  label: fields.actionsLabel,
+                  title: component.actionsTitle,
+                  label: component.actionsLabel,
               }
             : undefined,
     };

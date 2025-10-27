@@ -1,0 +1,8 @@
+fragment Banner on ComponentBanner {
+    title
+    description
+    link {
+        label
+        url
+    }
+}

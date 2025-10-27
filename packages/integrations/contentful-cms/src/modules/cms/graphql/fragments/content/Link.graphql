@@ -1,0 +1,11 @@
+fragment Link on ComponentLink {
+    label
+    url
+    page {
+        slug
+        seo {
+            title
+            description
+        }
+    }
+}
