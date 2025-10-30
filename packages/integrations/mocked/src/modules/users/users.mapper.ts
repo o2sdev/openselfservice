@@ -81,8 +81,7 @@ export const mapUser = (id?: string): Users.Model.User | undefined => {
     if (id) {
         return users.find((user) => user.id === id);
     }
-    const randomIndex = Math.floor(Math.random() * users.length);
-    return users[randomIndex];
+    return MOCK_USER_2;
 };
 
 export const mapUsers = (options: Users.Request.GetUsersQuery): Users.Model.Users => {
