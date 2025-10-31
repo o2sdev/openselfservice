@@ -26,8 +26,8 @@
         "@o2s/utils.api-harmonization": "*",
         "@o2s/utils.frontend": "*",
         "@o2s/configs.integrations": "*",
-        "survey-core": "^2.3.11",
-        "survey-react-ui": "^2.3.11"
+        "survey-core": "^2.3.13",
+        "survey-react-ui": "^2.3.13"
     },
     "devDependencies": {
         "dotenv-cli": "^10.0.0",
@@ -35,7 +35,7 @@
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "concurrently": "^9.2.1",
-        "eslint": "^9.37.0",
+        "eslint": "^9.38.0",
         "prettier": "^3.6.2",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"

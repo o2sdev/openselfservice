@@ -6,12 +6,12 @@ import React, { useState, useTransition } from 'react';
 
 import { Mappings } from '@o2s/utils.frontend';
 
+import { DataList } from '@o2s/ui/components/DataList';
+import type { DataListColumnConfig } from '@o2s/ui/components/DataList';
 import { FiltersSection } from '@o2s/ui/components/Filters';
 import { NoResults } from '@o2s/ui/components/NoResults';
 import { Pagination } from '@o2s/ui/components/Pagination';
-import { Price } from '@o2s/ui/components/Price';
 
-import { Badge } from '@o2s/ui/elements/badge';
 import { Button } from '@o2s/ui/elements/button';
 import {
     DropdownMenu,
@@ -21,7 +21,6 @@ import {
 } from '@o2s/ui/elements/dropdown-menu';
 import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
 import { Separator } from '@o2s/ui/elements/separator';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@o2s/ui/elements/table';
 import { Typography } from '@o2s/ui/elements/typography';
 
 import { Model, Request } from '../api-harmonization/order-list.client';
@@ -62,6 +61,84 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
         });
     };
 
+    // Define columns configuration outside JSX for better readability
+    const columns = data.table.columns.map((column) => {
+        switch (column.id) {
+            case 'id':
+                return {
+                    ...column,
+                    type: 'custom',
+                    cellClassName: 'py-0',
+                    render: (value: unknown, order: Model.Order) => {
+                        const idValue = value as { label: string };
+                        return (
+                            <Button asChild variant="link">
+                                <LinkComponent href={order.detailsUrl}>{idValue.label}</LinkComponent>
+                            </Button>
+                        );
+                    },
+                };
+            case 'createdAt':
+            case 'paymentDueDate':
+                return {
+                    ...column,
+                    type: 'date',
+                };
+            case 'status':
+                return {
+                    ...column,
+                    type: 'badge',
+                    variant: (value: string) =>
+                        Mappings.OrderBadge.orderBadgeVariants[
+                            value as keyof typeof Mappings.OrderBadge.orderBadgeVariants
+                        ],
+                };
+            case 'subtotal':
+                return {
+                    ...column,
+                    type: 'price',
+                    headerClassName: 'text-right',
+                    cellClassName: 'text-right',
+                };
+            default:
+                return {
+                    ...column,
+                    type: 'text',
+                };
+        }
+    }) as DataListColumnConfig<Model.Order>[];
+    const actions = data.table.actions
+        ? {
+              ...data.table.actions,
+              cellClassName: 'py-0 w-[180px]',
+              render: (order: Model.Order) => (
+                  <div className="flex items-center">
+                      <Button asChild variant="link">
+                          <LinkComponent href={order.detailsUrl} className="flex items-center justify-end gap-2">
+                              <ArrowRight className="h-4 w-4" />
+                              {data.table.actions!.label}
+                          </LinkComponent>
+                      </Button>
+                      <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                              <Button variant="ghost" size="icon" aria-label={data.labels.showMore}>
+                                  <MoreVertical className="h-4 w-4" />
+                              </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end" className="min-w-50">
+                              <DropdownMenuItem asChild disabled>
+                                  <Typography variant="small" className="text-muted-foreground">
+                                      <IterationCw className="h-4 w-4" />
+                                      {data.reorderLabel}
+                                  </Typography>
+                              </DropdownMenuItem>
+                          </DropdownMenuContent>
+                      </DropdownMenu>
+                  </div>
+              ),
+          }
+        : undefined;
+
     return (
         <div className="w-full">
             {initialData.length > 0 ? (
@@ -78,137 +155,12 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
                     <LoadingOverlay isActive={isPending}>
                         {data.orders.data.length ? (
                             <div className="flex flex-col gap-6">
-                                <Table>
-                                    <TableHeader>
-                                        <TableRow>
-                                            {data.table.columns.map((column) => {
-                                                switch (column.id) {
-                                                    case 'subtotal':
-                                                        return (
-                                                            <TableHead
-                                                                key={column.id}
-                                                                className="py-3 px-4 text-sm font-medium text-muted-foreground text-right"
-                                                            >
-                                                                {column.title}
-                                                            </TableHead>
-                                                        );
-                                                    default:
-                                                        return (
-                                                            <TableHead
-                                                                key={column.id}
-                                                                className="py-3 px-4 text-sm font-medium text-muted-foreground"
-                                                            >
-                                                                {column.title}
-                                                            </TableHead>
-                                                        );
-                                                }
-                                            })}
-                                            {data.table.actions && (
-                                                <TableHead className="py-3 px-4 text-sm font-medium text-muted-foreground">
-                                                    {data.table.actions.title}
-                                                </TableHead>
-                                            )}
-                                        </TableRow>
-                                    </TableHeader>
-                                    <TableBody>
-                                        {data.orders.data.map((order) => (
-                                            <TableRow key={order.id.value}>
-                                                {data.table.columns.map((column) => {
-                                                    switch (column.id) {
-                                                        case 'id':
-                                                            return (
-                                                                <TableCell
-                                                                    key={column.id}
-                                                                    className="whitespace-nowrap py-0"
-                                                                >
-                                                                    <Button asChild variant="link">
-                                                                        <LinkComponent href={order.detailsUrl}>
-                                                                            {order[column.id].label}
-                                                                        </LinkComponent>
-                                                                    </Button>
-                                                                </TableCell>
-                                                            );
-                                                        case 'createdAt':
-                                                        case 'paymentDueDate':
-                                                            return (
-                                                                <TableCell
-                                                                    key={column.id}
-                                                                    className="whitespace-nowrap"
-                                                                >
-                                                                    {order[column.id].label}
-                                                                </TableCell>
-                                                            );
-                                                        case 'status':
-                                                            return (
-                                                                <TableCell
-                                                                    key={column.id}
-                                                                    className="whitespace-nowrap"
-                                                                >
-                                                                    <Badge
-                                                                        variant={
-                                                                            Mappings.OrderBadge.orderBadgeVariants[
-                                                                                order[column.id].value
-                                                                            ]
-                                                                        }
-                                                                    >
-                                                                        {order[column.id].label}
-                                                                    </Badge>
-                                                                </TableCell>
-                                                            );
-                                                        case 'subtotal':
-                                                            return (
-                                                                <TableCell
-                                                                    key={column.id}
-                                                                    className="whitespace-nowrap text-right"
-                                                                >
-                                                                    <Price price={order[column.id].value} />
-                                                                </TableCell>
-                                                            );
-                                                        default:
-                                                            return null;
-                                                    }
-                                                })}
-                                                {data.table.actions && (
-                                                    <TableCell className="py-0 w-[180px] ">
-                                                        <div className="flex items-center">
-                                                            <Button asChild variant="link">
-                                                                <LinkComponent
-                                                                    href={order.detailsUrl}
-                                                                    className="flex items-center justify-end gap-2"
-                                                                >
-                                                                    <ArrowRight className="h-4 w-4" />
-                                                                    {data.table.actions.label}
-                                                                </LinkComponent>
-                                                            </Button>
-                                                            <DropdownMenu>
-                                                                <DropdownMenuTrigger asChild>
-                                                                    <Button
-                                                                        variant="ghost"
-                                                                        size="icon"
-                                                                        aria-label={data.labels.showMore}
-                                                                    >
-                                                                        <MoreVertical className="h-4 w-4" />
-                                                                    </Button>
-                                                                </DropdownMenuTrigger>
-                                                                <DropdownMenuContent align="end" className="min-w-50">
-                                                                    <DropdownMenuItem asChild disabled>
-                                                                        <Typography
-                                                                            variant="small"
-                                                                            className="text-muted-foreground"
-                                                                        >
-                                                                            <IterationCw className="h-4 w-4" />
-                                                                            {data.reorderLabel}
-                                                                        </Typography>
-                                                                    </DropdownMenuItem>
-                                                                </DropdownMenuContent>
-                                                            </DropdownMenu>
-                                                        </div>
-                                                    </TableCell>
-                                                )}
-                                            </TableRow>
-                                        ))}
-                                    </TableBody>
-                                </Table>
+                                <DataList
+                                    data={data.orders.data}
+                                    getRowKey={(order) => order.id.value}
+                                    columns={columns}
+                                    actions={actions}
+                                />
 
                                 {data.pagination && (
                                     <Pagination

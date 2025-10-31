@@ -16,8 +16,8 @@
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
   },
   "dependencies": {
-    "@medusajs/js-sdk": "^2.10.3",
-    "@medusajs/types": "^2.10.3",
+    "@medusajs/js-sdk": "^2.11.2",
+    "@medusajs/types": "^2.11.2",
     "@o2s/framework": "*",
     "@o2s/utils.logger": "*"
   },
@@ -26,7 +26,7 @@
     "@o2s/prettier-config": "*",
     "@o2s/typescript-config": "*",
     "concurrently": "^9.2.1",
-    "eslint": "^9.37.0",
+    "eslint": "^9.38.0",
     "prettier": "^3.6.2",
     "tsc-alias": "^1.8.16",
     "typescript": "^5.9.3"

@@ -8,16 +8,16 @@ import { Mappings } from '@o2s/utils.frontend';
 
 import { cn } from '@o2s/ui/lib/utils';
 
+import { DataList } from '@o2s/ui/components/DataList';
+import type { DataListColumnConfig } from '@o2s/ui/components/DataList';
 import { FiltersSection } from '@o2s/ui/components/Filters';
 import { NoResults } from '@o2s/ui/components/NoResults';
 import { Pagination } from '@o2s/ui/components/Pagination';
 
-import { Badge } from '@o2s/ui/elements/badge';
 import { BadgeStatus } from '@o2s/ui/elements/badge-status';
 import { Button } from '@o2s/ui/elements/button';
 import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
 import { Separator } from '@o2s/ui/elements/separator';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@o2s/ui/elements/table';
 
 import { Model, Request } from '../api-harmonization/notification-list.client';
 import { sdk } from '../sdk';
@@ -62,6 +62,72 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({
         });
     };
 
+    // Define columns configuration outside JSX for better readability
+    const columns = data.table.columns.map((column) => {
+        switch (column.id) {
+            case 'status':
+                return {
+                    ...column,
+                    type: 'custom',
+                    title: '',
+                    cellClassName: 'text-center',
+                    render: (_value: unknown, notification: Model.Notification) => {
+                        const isUnViewed = notification.status.value === 'UNVIEWED';
+                        return isUnViewed ? <BadgeStatus variant="default" /> : null;
+                    },
+                };
+            case 'title':
+                return {
+                    ...column,
+                    type: 'text',
+                    cellClassName: (notification: Model.Notification) =>
+                        cn('max-w-[200px] lg:max-w-md', notification.status.value === 'UNVIEWED' && 'font-semibold'),
+                };
+            case 'type':
+                return {
+                    ...column,
+                    type: 'text',
+                    cellClassName: (notification: Model.Notification) =>
+                        cn(notification.status.value === 'UNVIEWED' && 'font-semibold'),
+                };
+            case 'priority':
+                return {
+                    ...column,
+                    type: 'badge',
+                    variant: (value: string) =>
+                        Mappings.NotificationBadge.notificationBadgePriorityVariants[
+                            value as keyof typeof Mappings.NotificationBadge.notificationBadgePriorityVariants
+                        ],
+                };
+            case 'createdAt':
+            case 'updatedAt':
+                return {
+                    ...column,
+                    type: 'date',
+                    cellClassName: (notification: Model.Notification) =>
+                        cn(notification.status.value === 'UNVIEWED' && 'font-semibold'),
+                };
+            default:
+                return {
+                    ...column,
+                    type: 'text',
+                };
+        }
+    }) as DataListColumnConfig<Model.Notification>[];
+    const actions = data.table.actions
+        ? {
+              ...data.table.actions,
+              render: (notification: Model.Notification) => (
+                  <LinkComponent href={notification.detailsUrl}>
+                      <Button variant="link" className="flex items-center justify-end gap-2">
+                          {data.table.actions!.label}
+                          <ArrowRight className="h-4 w-4" />
+                      </Button>
+                  </LinkComponent>
+              ),
+          }
+        : undefined;
+
     return (
         <div className="w-full">
             {initialData.length > 0 ? (
@@ -78,113 +144,15 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({
                     <LoadingOverlay isActive={isPending}>
                         {data.notifications.data.length ? (
                             <div className="flex flex-col gap-6">
-                                <Table>
-                                    <TableHeader>
-                                        <TableRow>
-                                            {data.table.columns.map((column) => (
-                                                <TableHead
-                                                    key={column.id}
-                                                    className="py-3 px-4 text-sm text-muted-foreground md:text-nowrap"
-                                                >
-                                                    {column.id !== 'status' ? column.title : null}
-                                                </TableHead>
-                                            ))}
-                                            {data.table.actions && (
-                                                <TableHead className="py-3 px-4 text-sm text-muted-foreground md:text-nowrap">
-                                                    {data.table.actions.title}
-                                                </TableHead>
-                                            )}
-                                        </TableRow>
-                                    </TableHeader>
-                                    <TableBody>
-                                        {data.notifications.data.map((notification) => {
-                                            const isUnViewed = notification.status.value === 'UNVIEWED';
-                                            return (
-                                                <TableRow key={notification.id}>
-                                                    {data.table.columns.map((column) => {
-                                                        switch (column.id) {
-                                                            case 'status':
-                                                                return (
-                                                                    <TableCell key={column.id} className="text-center">
-                                                                        {isUnViewed && (
-                                                                            <BadgeStatus variant="default"></BadgeStatus>
-                                                                        )}
-                                                                    </TableCell>
-                                                                );
-                                                            case 'title':
-                                                                return (
-                                                                    <TableCell
-                                                                        key={column.id}
-                                                                        className={cn(
-                                                                            'flex-initial max-w-[200px] lg:max-w-md truncate whitespace-nowrap',
-                                                                            isUnViewed && 'font-semibold',
-                                                                        )}
-                                                                    >
-                                                                        {notification.title}
-                                                                    </TableCell>
-                                                                );
-                                                            case 'type':
-                                                                return (
-                                                                    <TableCell
-                                                                        key={column.id}
-                                                                        className={cn(
-                                                                            'flex-initial whitespace-nowrap',
-                                                                            isUnViewed && 'font-semibold',
-                                                                        )}
-                                                                    >
-                                                                        {notification[column.id].label}
-                                                                    </TableCell>
-                                                                );
-                                                            case 'priority':
-                                                                return (
-                                                                    <TableCell key={column.id} className="flex-initial">
-                                                                        <Badge
-                                                                            variant={
-                                                                                Mappings.NotificationBadge
-                                                                                    .notificationBadgePriorityVariants[
-                                                                                    notification.priority.value
-                                                                                ]
-                                                                            }
-                                                                        >
-                                                                            {notification[column.id].label}
-                                                                        </Badge>
-                                                                    </TableCell>
-                                                                );
-                                                            case 'createdAt':
-                                                            case 'updatedAt':
-                                                                return (
-                                                                    <TableCell
-                                                                        key={column.id}
-                                                                        className={cn(
-                                                                            'whitespace-nowrap',
-                                                                            isUnViewed && 'font-semibold',
-                                                                        )}
-                                                                    >
-                                                                        {notification[column.id]}
-                                                                    </TableCell>
-                                                                );
-                                                            default:
-                                                                return null;
-                                                        }
-                                                    })}
-                                                    {data.table.actions && (
-                                                        <TableCell className="py-0">
-                                                            <Button asChild variant="link">
-                                                                <LinkComponent
-                                                                    href={notification.detailsUrl}
-                                                                    className="flex items-center justify-end gap-2"
-                                                                >
-                                                                    <ArrowRight className="h-4 w-4" />
-                                                                    {data.table.actions.label}
-                                                                </LinkComponent>
-                                                            </Button>
-                                                        </TableCell>
-                                                    )}
-                                                </TableRow>
-                                            );
-                                        })}
-                                    </TableBody>
-                                </Table>
+                                <DataList
+                                    data={data.notifications.data}
+                                    getRowKey={(notification) => notification.id}
+                                    getRowClassName={(notification) => {
+                                        return notification.status.value === 'UNVIEWED' ? '' : '';
+                                    }}
+                                    columns={columns}
+                                    actions={actions}
+                                />
 
                                 {data.pagination && (
                                     <Pagination
