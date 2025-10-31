@@ -61,7 +61,7 @@
         "clsx": "^2.1.1",
         "cmdk": "^1.1.1",
         "date-fns": "^4.1.0",
-        "lucide-react": "^0.548.0",
+        "lucide-react": "^0.552.0",
         "react-day-picker": "^9.11.1",
         "markdown-to-jsx": "^7.7.17",
         "react-indiana-drag-scroll": "^2.2.1",
