@@ -1,5 +1,16 @@
 # @o2s/blocks.article-search
 
+## 1.1.1
+
+### Patch Changes
+
+- 8ac0de9: added missing dependencies
+- Updated dependencies [8ac0de9]
+- Updated dependencies [b519464]
+  - @o2s/utils.logger@1.1.1
+  - @o2s/framework@1.11.3
+  - @o2s/ui@1.4.1
+
 ## 1.1.0
 
 ### Minor Changes
