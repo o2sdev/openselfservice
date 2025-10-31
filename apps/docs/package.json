@@ -43,12 +43,12 @@
         "@o2s/eslint-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
-        "@tailwindcss/postcss": "^4.1.14",
+        "@tailwindcss/postcss": "^4.1.16",
         "@trivago/prettier-plugin-sort-imports": "^5.2.2",
         "autoprefixer": "^10.4.21",
         "postcss": "^8.5.6",
         "prettier": "^3.6.2",
-        "tailwindcss": "^4.1.14",
+        "tailwindcss": "^4.1.16",
         "typescript": "5.9.3"
     },
     "browserslist": {
