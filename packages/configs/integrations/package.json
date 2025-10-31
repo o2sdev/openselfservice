@@ -18,7 +18,8 @@
     "dependencies": {
         "@o2s/framework": "*",
         "@o2s/integrations.mocked": "*",
-        "@o2s/integrations.strapi-cms": "*"
+        "@o2s/integrations.strapi-cms": "*",
+        "@o2s/integrations.zendesk": "*"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",

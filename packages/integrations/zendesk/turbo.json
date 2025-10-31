@@ -1,0 +1,13 @@
+{
+    "extends": ["//"],
+    "tasks": {
+        "dev": {
+            "dependsOn": ["@o2s/utils.logger#build", "@o2s/framework#build"],
+            "env": ["ZENDESK_API_URL", "ZENDESK_API_TOKEN"]
+        },
+        "build": {
+            "dependsOn": ["@o2s/utils.logger#build", "@o2s/framework#build"],
+            "env": ["ZENDESK_API_URL", "ZENDESK_API_TOKEN"]
+        }
+    }
+}
