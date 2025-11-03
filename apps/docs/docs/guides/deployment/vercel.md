@@ -29,7 +29,7 @@ Add these variables in Project Settings → Environment Variables for Preview an
 
 Notes
 
-- API hosting: Vercel Serverless is not recommended for the NestJS API in this repository. Use a container platform (Docker on VM/Kubernetes/Fly.io/Render/etc.) and expose a public URL consumed by the frontend.
+- API hosting: Historically, Vercel Serverless was not recommended for the NestJS API in this repository. However, Vercel has recently added improved backend support (including NestJS). For now we recommend deploying the API as a container (Docker on VM/Kubernetes/Fly.io/Render/etc.) and exposing a public URL consumed by the frontend, but this is under evaluation and may change. We plan to investigate first-class Vercel API hosting and update this guide accordingly.
 - CORS: Ensure the API’s `FRONT_BASE_URLS` includes your Vercel domains (both Preview and Production), e.g. `https://your-app.vercel.app,https://your-branch-your-team.vercel.app`.
 - Images and headers: If you use custom headers or remote images, configure them in `apps/frontend/next.config.ts`.
 
