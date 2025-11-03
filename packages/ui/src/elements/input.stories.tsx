@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
 import { Search } from 'lucide-react';
 
-import { Input, InputWithLabel } from './input';
+import { Input, InputWithDetails, InputWithLabel } from './input';
 
 const meta = {
     title: 'Elements/Input',
@@ -45,4 +45,34 @@ export const WithLabel: Story = {
             {...props}
         />
     ),
+};
+
+export const WithDetailsCaption: StoryObj<typeof InputWithDetails> = {
+    args: {
+        label: 'Email',
+        placeholder: 'Enter your email',
+        caption: 'We will never share your email with anyone else.',
+    },
+    render: (args) => <InputWithDetails {...args} />,
+};
+
+export const WithDetailsError: StoryObj<typeof InputWithDetails> = {
+    args: {
+        label: 'Email',
+        placeholder: 'Enter your email',
+        hasError: true,
+        errorMessage: 'Please enter a valid email address',
+    },
+    render: (args) => <InputWithDetails {...args} />,
+};
+
+export const WithDetailsCaptionAndError: StoryObj<typeof InputWithDetails> = {
+    args: {
+        label: 'Email',
+        placeholder: 'Enter your email',
+        hasError: true,
+        caption: 'We will never share your email with anyone else.',
+        errorMessage: 'Please enter a valid email address',
+    },
+    render: (args) => <InputWithDetails {...args} />,
 };
