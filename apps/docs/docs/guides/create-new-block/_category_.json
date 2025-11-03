@@ -1,6 +1,6 @@
 {
     "label": "Create a new block",
-    "position": 900,
+    "position": 500,
     "link": {
         "type": "doc",
         "id": "overview"

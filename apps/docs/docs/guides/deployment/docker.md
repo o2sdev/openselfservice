@@ -29,7 +29,7 @@ This will:
 - Build `apps/frontend/Dockerfile` and expose it on `http://localhost:3000`
 - Build `apps/api-harmonization/Dockerfile` and expose it on `http://localhost:3001`
 
-Environment variables
+## Environment variables
 
 The `docker-compose.yml` includes sane defaults. Adjust as needed (especially external API keys).
 
@@ -48,7 +48,7 @@ The `docker-compose.yml` includes sane defaults. Adjust as needed (especially ex
   - Optional logging: `LOG_LEVEL`, `LOG_FORMAT`, `LOG_COLORS_ENABLED`
   - Integrations: see `/docs/integrations` for provider-specific variables (e.g. `CMS_STRAPI_BASE_URL`, `ALGOLIA_*`, `MEDUSAJS_*`, `CACHE_*`, etc.)
 
-Useful commands
+## Useful commands
 
 ```bash
 # View logs
@@ -82,7 +82,7 @@ docker run --rm -p 3001:3001 --network app_network \
 
 **Note:** The Dockerfiles use Turborepo's `turbo prune` with `@dxp/frontend` and `@dxp/api-harmonization` package names internally. This is handled automatically by the build process.
 
-Example Dockerfiles
+## Example Dockerfiles
 
 See the repository for maintained examples:
 
