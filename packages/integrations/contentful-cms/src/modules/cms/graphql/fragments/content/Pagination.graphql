@@ -1,4 +1,7 @@
 fragment Pagination on ComponentPagination {
+    sys {
+        ...Sys
+    }
     description
     previousLabel
     nextLabel

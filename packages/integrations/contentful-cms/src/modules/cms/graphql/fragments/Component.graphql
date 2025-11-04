@@ -1,0 +1,23 @@
+fragment Component on Block {
+    ...ComponentBase
+    content {
+        __typename
+        ... on BlockFaq {
+            ...FaqComponent
+        }
+        ... on BlockTicketList {
+            ...TicketListComponent
+        }
+    }
+}
+
+fragment ComponentBase on Block {
+    __typename
+    sys {
+        ...Sys
+    }
+    ...LayoutSection
+    content {
+        __typename
+    }
+}

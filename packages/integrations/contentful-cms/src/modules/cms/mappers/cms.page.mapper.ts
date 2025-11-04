@@ -2,7 +2,7 @@ import { NotFoundException } from '@nestjs/common';
 
 import { CMS, Models } from '@o2s/framework/modules';
 
-import { OneColumnTemplateFragment, PageFragment, SeoFragment } from '@/generated/contentful';
+import { ComponentBaseFragment, OneColumnTemplateFragment, PageFragment, SeoFragment } from '@/generated/contentful';
 
 import {
     PAGE_ACCESSORIES_DE,
@@ -64,11 +64,6 @@ import {
 } from './mocks/pages/ticket-details.page';
 import { PAGE_TICKET_LIST_DE, PAGE_TICKET_LIST_EN, PAGE_TICKET_LIST_PL } from './mocks/pages/ticket-list.page';
 import { PAGE_USER_ACCOUNT_DE, PAGE_USER_ACCOUNT_EN, PAGE_USER_ACCOUNT_PL } from './mocks/pages/user-account.page';
-
-export type IBlocks = {
-    __typename: string;
-    _id: string;
-};
 
 export const mapMockPage = (slug: string, locale: string): CMS.Model.Page.Page | undefined => {
     switch (slug) {
@@ -476,7 +471,7 @@ const mapTemplate = (template?: OneColumnTemplateFragment): CMS.Model.Page.PageT
     }
 };
 
-const mapSlot = (slot?: IBlocks[]): CMS.Model.Page.SlotBlock[] => {
+const mapSlot = (slot?: ComponentBaseFragment[]): CMS.Model.Page.SlotBlock[] => {
     if (!slot) {
         return [];
     }
@@ -490,15 +485,26 @@ const mapSlot = (slot?: IBlocks[]): CMS.Model.Page.SlotBlock[] => {
             ...acc,
             {
                 __typename,
-                id: component._id,
+                id: component.sys.id,
+                layout: mapLayout(component),
             },
         ];
     }, [] as CMS.Model.Page.SlotBlock[]);
 };
 
+const mapLayout = ({ spacing }: ComponentBaseFragment): CMS.Model.Page.LayoutSection => {
+    return {
+        spacing: spacing as CMS.Model.Page.LayoutSection['spacing'],
+        // TODO: add the rest of the layout properties
+        // background: background,
+        // variant: variant,
+        // theme: theme?.name,
+    };
+};
+
 // TODO: check where component names should be defined, currently they are placed in the api-harmonization so we cannot access them here
-const mapComponent = (component: IBlocks) => {
-    switch (component.__typename) {
+const mapComponent = (component: ComponentBaseFragment) => {
+    switch (component.content?.__typename) {
         case 'BlockFaq':
             return 'FaqBlock';
         case 'BlockTicketList':

@@ -1,4 +1,4 @@
-import { Tickets } from '@o2s/configs.integrations';
+import { CMS, Tickets } from '@o2s/configs.integrations';
 
 import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 
@@ -24,6 +24,7 @@ export class TicketListBlock extends ApiModels.Block.Block {
         showMore: string;
         clickToSelect: string;
     };
+    meta?: CMS.Model.TicketListBlock.TicketListBlock['meta'];
 }
 
 export class Ticket {

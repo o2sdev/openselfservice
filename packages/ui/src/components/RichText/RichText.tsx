@@ -50,6 +50,7 @@ export const RichText: FC<Readonly<RichTextProps>> = ({
     baseFontSize = 'body',
     className,
     startingHeadingLevel = 1,
+    ...rest
 }) => {
     if (!content) {
         return null;
@@ -242,6 +243,7 @@ export const RichText: FC<Readonly<RichTextProps>> = ({
                 forceBlock: true,
                 overrides,
             }}
+            {...rest}
         >
             {content}
         </Markdown>

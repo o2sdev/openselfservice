@@ -22,11 +22,41 @@ export const mapFields = <T>(component?: FieldMappingFragment[]): Models.Mapping
 
                     return {
                         ...acc,
-                        [item.key]: item.value,
+                        [item.key]: item.value || '',
                     };
                 },
                 {} as { [key: string]: string },
             ),
         };
     }, {} as Models.Mapping.Mapping<T>);
+};
+
+export const mapFieldsMeta = <T>(component?: FieldMappingFragment[]): Models.Mapping.MappingMeta<T> => {
+    if (!component) {
+        return {};
+    }
+
+    return component.reduce((acc, field) => {
+        if (!field.name) {
+            return acc;
+        }
+
+        return {
+            ...acc,
+            __id: field.sys.id,
+            [field.name]: field.valuesCollection?.items.reduce((acc, item) => {
+                if (!item.key) {
+                    return acc;
+                }
+
+                return {
+                    ...acc,
+                    [item.key]: {
+                        __id: item.sys.id,
+                        value: 'value',
+                    },
+                };
+            }, {}),
+        };
+    }, {} as Models.Mapping.MappingMeta<T>);
 };

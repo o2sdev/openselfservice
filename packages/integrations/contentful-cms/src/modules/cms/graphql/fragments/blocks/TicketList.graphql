@@ -17,6 +17,9 @@ fragment TicketListComponent on BlockTicketList {
         ...Pagination
     }
     noResults {
+        sys {
+            ...Sys
+        }
         title
         description
     }

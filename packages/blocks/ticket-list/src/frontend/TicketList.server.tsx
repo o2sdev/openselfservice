@@ -13,11 +13,13 @@ export const TicketListServer: React.FC<TicketListProps> = async ({
     locale,
     routing,
     hasPriority,
+    isDraftModeEnabled,
 }) => {
     try {
         const data = await sdk.blocks.getTicketList(
             {
                 id,
+                preview: isDraftModeEnabled,
             },
             { 'x-locale': locale },
             accessToken,

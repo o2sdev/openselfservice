@@ -1,6 +1,12 @@
 fragment Table on ComponentTable {
+    sys {
+        ...Sys
+    }
     columnsCollection {
         items {
+            sys {
+                ...Sys
+            }
             title
             field
         }

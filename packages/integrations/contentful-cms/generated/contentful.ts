@@ -199,6 +199,48 @@ export enum AssetOrder {
     WidthDesc = 'width_DESC',
 }
 
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/block) */
+export type Block = Entry &
+    _Node & {
+        _id: Scalars['ID']['output'];
+        content?: Maybe<BlockContent>;
+        contentfulMetadata: ContentfulMetadata;
+        linkedFrom?: Maybe<BlockLinkingCollections>;
+        name?: Maybe<Scalars['String']['output']>;
+        spacing?: Maybe<Scalars['String']['output']>;
+        sys: Sys;
+    };
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/block) */
+export type BlockContentArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/block) */
+export type BlockLinkedFromArgs = {
+    allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/block) */
+export type BlockNameArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/block) */
+export type BlockSpacingArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type BlockCollection = {
+    items: Array<Maybe<Block>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export type BlockContent = BlockFaq | BlockTicketList;
+
 /** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/blockFaq) */
 export type BlockFaq = Entry &
     _Node & {
@@ -297,8 +339,16 @@ export enum BlockFaqItemsCollectionOrder {
 }
 
 export type BlockFaqLinkingCollections = {
+    blockCollection?: Maybe<BlockCollection>;
     entryCollection?: Maybe<EntryCollection>;
-    pageOneColumnTemplateCollection?: Maybe<PageOneColumnTemplateCollection>;
+};
+
+export type BlockFaqLinkingCollectionsBlockCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<BlockFaqLinkingCollectionsBlockCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type BlockFaqLinkingCollectionsEntryCollectionArgs = {
@@ -308,15 +358,11 @@ export type BlockFaqLinkingCollectionsEntryCollectionArgs = {
     skip?: InputMaybe<Scalars['Int']['input']>;
 };
 
-export type BlockFaqLinkingCollectionsPageOneColumnTemplateCollectionArgs = {
-    limit?: InputMaybe<Scalars['Int']['input']>;
-    locale?: InputMaybe<Scalars['String']['input']>;
-    order?: InputMaybe<Array<InputMaybe<BlockFaqLinkingCollectionsPageOneColumnTemplateCollectionOrder>>>;
-    preview?: InputMaybe<Scalars['Boolean']['input']>;
-    skip?: InputMaybe<Scalars['Int']['input']>;
-};
-
-export enum BlockFaqLinkingCollectionsPageOneColumnTemplateCollectionOrder {
+export enum BlockFaqLinkingCollectionsBlockCollectionOrder {
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SpacingAsc = 'spacing_ASC',
+    SpacingDesc = 'spacing_DESC',
     SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
     SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
     SysIdAsc = 'sys_id_ASC',
@@ -325,8 +371,6 @@ export enum BlockFaqLinkingCollectionsPageOneColumnTemplateCollectionOrder {
     SysPublishedAtDesc = 'sys_publishedAt_DESC',
     SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
     SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
-    TitleAsc = 'title_ASC',
-    TitleDesc = 'title_DESC',
 }
 
 export enum BlockFaqOrder {
@@ -342,6 +386,76 @@ export enum BlockFaqOrder {
     SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
     TitleAsc = 'title_ASC',
     TitleDesc = 'title_DESC',
+}
+
+export type BlockFilter = {
+    AND?: InputMaybe<Array<InputMaybe<BlockFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<BlockFilter>>>;
+    content_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    name?: InputMaybe<Scalars['String']['input']>;
+    name_contains?: InputMaybe<Scalars['String']['input']>;
+    name_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    name_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    name_not?: InputMaybe<Scalars['String']['input']>;
+    name_not_contains?: InputMaybe<Scalars['String']['input']>;
+    name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    spacing?: InputMaybe<Scalars['String']['input']>;
+    spacing_contains?: InputMaybe<Scalars['String']['input']>;
+    spacing_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    spacing_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    spacing_not?: InputMaybe<Scalars['String']['input']>;
+    spacing_not_contains?: InputMaybe<Scalars['String']['input']>;
+    spacing_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    sys?: InputMaybe<SysFilter>;
+};
+
+export type BlockLinkingCollections = {
+    entryCollection?: Maybe<EntryCollection>;
+    pageOneColumnTemplateCollection?: Maybe<PageOneColumnTemplateCollection>;
+};
+
+export type BlockLinkingCollectionsEntryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type BlockLinkingCollectionsPageOneColumnTemplateCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<BlockLinkingCollectionsPageOneColumnTemplateCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum BlockLinkingCollectionsPageOneColumnTemplateCollectionOrder {
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    TitleAsc = 'title_ASC',
+    TitleDesc = 'title_DESC',
+}
+
+export enum BlockOrder {
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SpacingAsc = 'spacing_ASC',
+    SpacingDesc = 'spacing_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
 /** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/blockTicketList) */
@@ -485,8 +599,16 @@ export type BlockTicketListFilter = {
 };
 
 export type BlockTicketListLinkingCollections = {
+    blockCollection?: Maybe<BlockCollection>;
     entryCollection?: Maybe<EntryCollection>;
-    pageOneColumnTemplateCollection?: Maybe<PageOneColumnTemplateCollection>;
+};
+
+export type BlockTicketListLinkingCollectionsBlockCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<BlockTicketListLinkingCollectionsBlockCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type BlockTicketListLinkingCollectionsEntryCollectionArgs = {
@@ -496,15 +618,11 @@ export type BlockTicketListLinkingCollectionsEntryCollectionArgs = {
     skip?: InputMaybe<Scalars['Int']['input']>;
 };
 
-export type BlockTicketListLinkingCollectionsPageOneColumnTemplateCollectionArgs = {
-    limit?: InputMaybe<Scalars['Int']['input']>;
-    locale?: InputMaybe<Scalars['String']['input']>;
-    order?: InputMaybe<Array<InputMaybe<BlockTicketListLinkingCollectionsPageOneColumnTemplateCollectionOrder>>>;
-    preview?: InputMaybe<Scalars['Boolean']['input']>;
-    skip?: InputMaybe<Scalars['Int']['input']>;
-};
-
-export enum BlockTicketListLinkingCollectionsPageOneColumnTemplateCollectionOrder {
+export enum BlockTicketListLinkingCollectionsBlockCollectionOrder {
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SpacingAsc = 'spacing_ASC',
+    SpacingDesc = 'spacing_DESC',
     SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
     SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
     SysIdAsc = 'sys_id_ASC',
@@ -513,8 +631,6 @@ export enum BlockTicketListLinkingCollectionsPageOneColumnTemplateCollectionOrde
     SysPublishedAtDesc = 'sys_publishedAt_DESC',
     SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
     SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
-    TitleAsc = 'title_ASC',
-    TitleDesc = 'title_DESC',
 }
 
 export enum BlockTicketListOrder {
@@ -2231,9 +2347,10 @@ export type PageOneColumnTemplateLinkedFromArgs = {
 export type PageOneColumnTemplateMainSlotCollectionArgs = {
     limit?: InputMaybe<Scalars['Int']['input']>;
     locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<PageOneColumnTemplateMainSlotCollectionOrder>>>;
     preview?: InputMaybe<Scalars['Boolean']['input']>;
     skip?: InputMaybe<Scalars['Int']['input']>;
-    where?: InputMaybe<PageOneColumnTemplateMainSlotFilter>;
+    where?: InputMaybe<BlockFilter>;
 };
 
 /** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/pageOneColumnTemplate) */
@@ -2252,7 +2369,7 @@ export type PageOneColumnTemplateFilter = {
     AND?: InputMaybe<Array<InputMaybe<PageOneColumnTemplateFilter>>>;
     OR?: InputMaybe<Array<InputMaybe<PageOneColumnTemplateFilter>>>;
     contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
-    mainSlot?: InputMaybe<CfmainSlotMultiTypeNestedFilter>;
+    mainSlot?: InputMaybe<CfBlockNestedFilter>;
     mainSlotCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
     sys?: InputMaybe<SysFilter>;
     title?: InputMaybe<Scalars['String']['input']>;
@@ -2300,27 +2417,26 @@ export enum PageOneColumnTemplateLinkingCollectionsPageCollectionOrder {
 }
 
 export type PageOneColumnTemplateMainSlotCollection = {
-    items: Array<Maybe<PageOneColumnTemplateMainSlotItem>>;
+    items: Array<Maybe<Block>>;
     limit: Scalars['Int']['output'];
     skip: Scalars['Int']['output'];
     total: Scalars['Int']['output'];
 };
 
-export type PageOneColumnTemplateMainSlotFilter = {
-    AND?: InputMaybe<Array<InputMaybe<PageOneColumnTemplateMainSlotFilter>>>;
-    OR?: InputMaybe<Array<InputMaybe<PageOneColumnTemplateMainSlotFilter>>>;
-    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
-    sys?: InputMaybe<SysFilter>;
-    title?: InputMaybe<Scalars['String']['input']>;
-    title_contains?: InputMaybe<Scalars['String']['input']>;
-    title_exists?: InputMaybe<Scalars['Boolean']['input']>;
-    title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-    title_not?: InputMaybe<Scalars['String']['input']>;
-    title_not_contains?: InputMaybe<Scalars['String']['input']>;
-    title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-export type PageOneColumnTemplateMainSlotItem = BlockFaq | BlockTicketList;
+export enum PageOneColumnTemplateMainSlotCollectionOrder {
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SpacingAsc = 'spacing_ASC',
+    SpacingDesc = 'spacing_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
 
 export enum PageOneColumnTemplateOrder {
     SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
@@ -2489,6 +2605,8 @@ export type Query = {
     _nodes: Array<Maybe<_Node>>;
     asset?: Maybe<Asset>;
     assetCollection?: Maybe<AssetCollection>;
+    block?: Maybe<Block>;
+    blockCollection?: Maybe<BlockCollection>;
     blockFaq?: Maybe<BlockFaq>;
     blockFaqCollection?: Maybe<BlockFaqCollection>;
     blockTicketList?: Maybe<BlockTicketList>;
@@ -2547,6 +2665,21 @@ export type QueryAssetCollectionArgs = {
     preview?: InputMaybe<Scalars['Boolean']['input']>;
     skip?: InputMaybe<Scalars['Int']['input']>;
     where?: InputMaybe<AssetFilter>;
+};
+
+export type QueryBlockArgs = {
+    id: Scalars['String']['input'];
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type QueryBlockCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<BlockOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<BlockFilter>;
 };
 
 export type QueryBlockFaqArgs = {
@@ -2848,6 +2981,28 @@ export type TimelineFilterInput = {
 
 export type _Node = {
     _id: Scalars['ID']['output'];
+};
+
+export type CfBlockNestedFilter = {
+    AND?: InputMaybe<Array<InputMaybe<CfBlockNestedFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<CfBlockNestedFilter>>>;
+    content_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    name?: InputMaybe<Scalars['String']['input']>;
+    name_contains?: InputMaybe<Scalars['String']['input']>;
+    name_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    name_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    name_not?: InputMaybe<Scalars['String']['input']>;
+    name_not_contains?: InputMaybe<Scalars['String']['input']>;
+    name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    spacing?: InputMaybe<Scalars['String']['input']>;
+    spacing_contains?: InputMaybe<Scalars['String']['input']>;
+    spacing_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    spacing_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    spacing_not?: InputMaybe<Scalars['String']['input']>;
+    spacing_not_contains?: InputMaybe<Scalars['String']['input']>;
+    spacing_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    sys?: InputMaybe<SysFilter>;
 };
 
 export type CfComponentBannerNestedFilter = {
@@ -3244,20 +3399,6 @@ export type CfPageSeoNestedFilter = {
     title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-export type CfmainSlotMultiTypeNestedFilter = {
-    AND?: InputMaybe<Array<InputMaybe<CfmainSlotMultiTypeNestedFilter>>>;
-    OR?: InputMaybe<Array<InputMaybe<CfmainSlotMultiTypeNestedFilter>>>;
-    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
-    sys?: InputMaybe<SysFilter>;
-    title?: InputMaybe<Scalars['String']['input']>;
-    title_contains?: InputMaybe<Scalars['String']['input']>;
-    title_exists?: InputMaybe<Scalars['Boolean']['input']>;
-    title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-    title_not?: InputMaybe<Scalars['String']['input']>;
-    title_not_contains?: InputMaybe<Scalars['String']['input']>;
-    title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export type ResolverTypeWrapper<T> = Promise<T> | T;
 
 export type ResolverWithResolve<TResult, TParent, TContext, TArgs> = {
@@ -3330,7 +3471,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping of union types */
 export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
-    PageOneColumnTemplateMainSlotItem:
+    BlockContent:
         | (Omit<BlockFaq, 'banner' | 'itemsCollection' | 'linkedFrom'> & {
               banner?: Maybe<_RefType['ComponentBanner']>;
               itemsCollection?: Maybe<_RefType['BlockFaqItemsCollection']>;
@@ -3352,6 +3493,10 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
 /** Mapping of interface types */
 export type ResolversInterfaceTypes<_RefType extends Record<string, unknown>> = {
     Entry:
+        | (Omit<Block, 'content' | 'linkedFrom'> & {
+              content?: Maybe<_RefType['BlockContent']>;
+              linkedFrom?: Maybe<_RefType['BlockLinkingCollections']>;
+          })
         | (Omit<BlockFaq, 'banner' | 'itemsCollection' | 'linkedFrom'> & {
               banner?: Maybe<_RefType['ComponentBanner']>;
               itemsCollection?: Maybe<_RefType['BlockFaqItemsCollection']>;
@@ -3414,6 +3559,10 @@ export type ResolversInterfaceTypes<_RefType extends Record<string, unknown>> = 
           })
         | (Omit<PageSeo, 'linkedFrom'> & { linkedFrom?: Maybe<_RefType['PageSeoLinkingCollections']> });
     _Node:
+        | (Omit<Block, 'content' | 'linkedFrom'> & {
+              content?: Maybe<_RefType['BlockContent']>;
+              linkedFrom?: Maybe<_RefType['BlockLinkingCollections']>;
+          })
         | (Omit<BlockFaq, 'banner' | 'itemsCollection' | 'linkedFrom'> & {
               banner?: Maybe<_RefType['ComponentBanner']>;
               itemsCollection?: Maybe<_RefType['BlockFaqItemsCollection']>;
@@ -3492,6 +3641,16 @@ export type ResolversTypes = {
         }
     >;
     AssetOrder: AssetOrder;
+    Block: ResolverTypeWrapper<
+        Omit<Block, 'content' | 'linkedFrom'> & {
+            content?: Maybe<ResolversTypes['BlockContent']>;
+            linkedFrom?: Maybe<ResolversTypes['BlockLinkingCollections']>;
+        }
+    >;
+    BlockCollection: ResolverTypeWrapper<
+        Omit<BlockCollection, 'items'> & { items: Array<Maybe<ResolversTypes['Block']>> }
+    >;
+    BlockContent: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['BlockContent']>;
     BlockFaq: ResolverTypeWrapper<
         Omit<BlockFaq, 'banner' | 'itemsCollection' | 'linkedFrom'> & {
             banner?: Maybe<ResolversTypes['ComponentBanner']>;
@@ -3508,13 +3667,22 @@ export type ResolversTypes = {
     >;
     BlockFaqItemsCollectionOrder: BlockFaqItemsCollectionOrder;
     BlockFaqLinkingCollections: ResolverTypeWrapper<
-        Omit<BlockFaqLinkingCollections, 'entryCollection' | 'pageOneColumnTemplateCollection'> & {
+        Omit<BlockFaqLinkingCollections, 'blockCollection' | 'entryCollection'> & {
+            blockCollection?: Maybe<ResolversTypes['BlockCollection']>;
+            entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
+        }
+    >;
+    BlockFaqLinkingCollectionsBlockCollectionOrder: BlockFaqLinkingCollectionsBlockCollectionOrder;
+    BlockFaqOrder: BlockFaqOrder;
+    BlockFilter: BlockFilter;
+    BlockLinkingCollections: ResolverTypeWrapper<
+        Omit<BlockLinkingCollections, 'entryCollection' | 'pageOneColumnTemplateCollection'> & {
             entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
             pageOneColumnTemplateCollection?: Maybe<ResolversTypes['PageOneColumnTemplateCollection']>;
         }
     >;
-    BlockFaqLinkingCollectionsPageOneColumnTemplateCollectionOrder: BlockFaqLinkingCollectionsPageOneColumnTemplateCollectionOrder;
-    BlockFaqOrder: BlockFaqOrder;
+    BlockLinkingCollectionsPageOneColumnTemplateCollectionOrder: BlockLinkingCollectionsPageOneColumnTemplateCollectionOrder;
+    BlockOrder: BlockOrder;
     BlockTicketList: ResolverTypeWrapper<
         Omit<BlockTicketList, 'fieldsCollection' | 'labels' | 'linkedFrom' | 'noResults' | 'pagination' | 'table'> & {
             fieldsCollection?: Maybe<ResolversTypes['BlockTicketListFieldsCollection']>;
@@ -3536,12 +3704,12 @@ export type ResolversTypes = {
     BlockTicketListFieldsCollectionOrder: BlockTicketListFieldsCollectionOrder;
     BlockTicketListFilter: BlockTicketListFilter;
     BlockTicketListLinkingCollections: ResolverTypeWrapper<
-        Omit<BlockTicketListLinkingCollections, 'entryCollection' | 'pageOneColumnTemplateCollection'> & {
+        Omit<BlockTicketListLinkingCollections, 'blockCollection' | 'entryCollection'> & {
+            blockCollection?: Maybe<ResolversTypes['BlockCollection']>;
             entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
-            pageOneColumnTemplateCollection?: Maybe<ResolversTypes['PageOneColumnTemplateCollection']>;
         }
     >;
-    BlockTicketListLinkingCollectionsPageOneColumnTemplateCollectionOrder: BlockTicketListLinkingCollectionsPageOneColumnTemplateCollectionOrder;
+    BlockTicketListLinkingCollectionsBlockCollectionOrder: BlockTicketListLinkingCollectionsBlockCollectionOrder;
     BlockTicketListOrder: BlockTicketListOrder;
     Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
     ComponentBanner: ResolverTypeWrapper<
@@ -3768,9 +3936,10 @@ export type ResolversTypes = {
     >;
     PageFilter: PageFilter;
     PageLinkingCollections: ResolverTypeWrapper<
-        Omit<PageLinkingCollections, 'componentLinkCollection' | 'entryCollection'> & {
+        Omit<PageLinkingCollections, 'componentLinkCollection' | 'entryCollection' | 'pageCollection'> & {
             componentLinkCollection?: Maybe<ResolversTypes['ComponentLinkCollection']>;
             entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
+            pageCollection?: Maybe<ResolversTypes['PageCollection']>;
         }
     >;
     PageLinkingCollectionsComponentLinkCollectionOrder: PageLinkingCollectionsComponentLinkCollectionOrder;
@@ -3788,20 +3957,16 @@ export type ResolversTypes = {
     >;
     PageOneColumnTemplateFilter: PageOneColumnTemplateFilter;
     PageOneColumnTemplateLinkingCollections: ResolverTypeWrapper<
-        Omit<PageOneColumnTemplateLinkingCollections, 'entryCollection'> & {
+        Omit<PageOneColumnTemplateLinkingCollections, 'entryCollection' | 'pageCollection'> & {
             entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
+            pageCollection?: Maybe<ResolversTypes['PageCollection']>;
         }
     >;
     PageOneColumnTemplateLinkingCollectionsPageCollectionOrder: PageOneColumnTemplateLinkingCollectionsPageCollectionOrder;
     PageOneColumnTemplateMainSlotCollection: ResolverTypeWrapper<
-        Omit<PageOneColumnTemplateMainSlotCollection, 'items'> & {
-            items: Array<Maybe<ResolversTypes['PageOneColumnTemplateMainSlotItem']>>;
-        }
+        Omit<PageOneColumnTemplateMainSlotCollection, 'items'> & { items: Array<Maybe<ResolversTypes['Block']>> }
     >;
-    PageOneColumnTemplateMainSlotFilter: PageOneColumnTemplateMainSlotFilter;
-    PageOneColumnTemplateMainSlotItem: ResolverTypeWrapper<
-        ResolversUnionTypes<ResolversTypes>['PageOneColumnTemplateMainSlotItem']
-    >;
+    PageOneColumnTemplateMainSlotCollectionOrder: PageOneColumnTemplateMainSlotCollectionOrder;
     PageOneColumnTemplateOrder: PageOneColumnTemplateOrder;
     PageOrder: PageOrder;
     PageSeo: ResolverTypeWrapper<
@@ -3812,8 +3977,9 @@ export type ResolversTypes = {
     >;
     PageSeoFilter: PageSeoFilter;
     PageSeoLinkingCollections: ResolverTypeWrapper<
-        Omit<PageSeoLinkingCollections, 'entryCollection'> & {
+        Omit<PageSeoLinkingCollections, 'entryCollection' | 'pageCollection'> & {
             entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
+            pageCollection?: Maybe<ResolversTypes['PageCollection']>;
         }
     >;
     PageSeoLinkingCollectionsPageCollectionOrder: PageSeoLinkingCollectionsPageCollectionOrder;
@@ -3826,6 +3992,7 @@ export type ResolversTypes = {
     TaxonomyConcept: ResolverTypeWrapper<TaxonomyConcept>;
     TimelineFilterInput: TimelineFilterInput;
     _Node: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>['_Node']>;
+    cfBlockNestedFilter: CfBlockNestedFilter;
     cfComponentBannerNestedFilter: CfComponentBannerNestedFilter;
     cfComponentFaqItemNestedFilter: CfComponentFaqItemNestedFilter;
     cfComponentFieldMappingNestedFilter: CfComponentFieldMappingNestedFilter;
@@ -3839,7 +4006,6 @@ export type ResolversTypes = {
     cfPageNestedFilter: CfPageNestedFilter;
     cfPageOneColumnTemplateNestedFilter: CfPageOneColumnTemplateNestedFilter;
     cfPageSeoNestedFilter: CfPageSeoNestedFilter;
-    cfmainSlotMultiTypeNestedFilter: CfmainSlotMultiTypeNestedFilter;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -3850,6 +4016,12 @@ export type ResolversParentTypes = {
     AssetLinkingCollections: Omit<AssetLinkingCollections, 'entryCollection'> & {
         entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
     };
+    Block: Omit<Block, 'content' | 'linkedFrom'> & {
+        content?: Maybe<ResolversParentTypes['BlockContent']>;
+        linkedFrom?: Maybe<ResolversParentTypes['BlockLinkingCollections']>;
+    };
+    BlockCollection: Omit<BlockCollection, 'items'> & { items: Array<Maybe<ResolversParentTypes['Block']>> };
+    BlockContent: ResolversUnionTypes<ResolversParentTypes>['BlockContent'];
     BlockFaq: Omit<BlockFaq, 'banner' | 'itemsCollection' | 'linkedFrom'> & {
         banner?: Maybe<ResolversParentTypes['ComponentBanner']>;
         itemsCollection?: Maybe<ResolversParentTypes['BlockFaqItemsCollection']>;
@@ -3860,10 +4032,12 @@ export type ResolversParentTypes = {
     BlockFaqItemsCollection: Omit<BlockFaqItemsCollection, 'items'> & {
         items: Array<Maybe<ResolversParentTypes['ComponentFaqItem']>>;
     };
-    BlockFaqLinkingCollections: Omit<
-        BlockFaqLinkingCollections,
-        'entryCollection' | 'pageOneColumnTemplateCollection'
-    > & {
+    BlockFaqLinkingCollections: Omit<BlockFaqLinkingCollections, 'blockCollection' | 'entryCollection'> & {
+        blockCollection?: Maybe<ResolversParentTypes['BlockCollection']>;
+        entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
+    };
+    BlockFilter: BlockFilter;
+    BlockLinkingCollections: Omit<BlockLinkingCollections, 'entryCollection' | 'pageOneColumnTemplateCollection'> & {
         entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
         pageOneColumnTemplateCollection?: Maybe<ResolversParentTypes['PageOneColumnTemplateCollection']>;
     };
@@ -3887,10 +4061,10 @@ export type ResolversParentTypes = {
     BlockTicketListFilter: BlockTicketListFilter;
     BlockTicketListLinkingCollections: Omit<
         BlockTicketListLinkingCollections,
-        'entryCollection' | 'pageOneColumnTemplateCollection'
+        'blockCollection' | 'entryCollection'
     > & {
+        blockCollection?: Maybe<ResolversParentTypes['BlockCollection']>;
         entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
-        pageOneColumnTemplateCollection?: Maybe<ResolversParentTypes['PageOneColumnTemplateCollection']>;
     };
     Boolean: Scalars['Boolean']['output'];
     ComponentBanner: Omit<ComponentBanner, 'link' | 'linkedFrom'> & {
@@ -4068,9 +4242,13 @@ export type ResolversParentTypes = {
     };
     PageCollection: Omit<PageCollection, 'items'> & { items: Array<Maybe<ResolversParentTypes['Page']>> };
     PageFilter: PageFilter;
-    PageLinkingCollections: Omit<PageLinkingCollections, 'componentLinkCollection' | 'entryCollection'> & {
+    PageLinkingCollections: Omit<
+        PageLinkingCollections,
+        'componentLinkCollection' | 'entryCollection' | 'pageCollection'
+    > & {
         componentLinkCollection?: Maybe<ResolversParentTypes['ComponentLinkCollection']>;
         entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
+        pageCollection?: Maybe<ResolversParentTypes['PageCollection']>;
     };
     PageOneColumnTemplate: Omit<PageOneColumnTemplate, 'linkedFrom' | 'mainSlotCollection'> & {
         linkedFrom?: Maybe<ResolversParentTypes['PageOneColumnTemplateLinkingCollections']>;
@@ -4080,19 +4258,22 @@ export type ResolversParentTypes = {
         items: Array<Maybe<ResolversParentTypes['PageOneColumnTemplate']>>;
     };
     PageOneColumnTemplateFilter: PageOneColumnTemplateFilter;
-    PageOneColumnTemplateLinkingCollections: Omit<PageOneColumnTemplateLinkingCollections, 'entryCollection'> & {
+    PageOneColumnTemplateLinkingCollections: Omit<
+        PageOneColumnTemplateLinkingCollections,
+        'entryCollection' | 'pageCollection'
+    > & {
         entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
+        pageCollection?: Maybe<ResolversParentTypes['PageCollection']>;
     };
     PageOneColumnTemplateMainSlotCollection: Omit<PageOneColumnTemplateMainSlotCollection, 'items'> & {
-        items: Array<Maybe<ResolversParentTypes['PageOneColumnTemplateMainSlotItem']>>;
+        items: Array<Maybe<ResolversParentTypes['Block']>>;
     };
-    PageOneColumnTemplateMainSlotFilter: PageOneColumnTemplateMainSlotFilter;
-    PageOneColumnTemplateMainSlotItem: ResolversUnionTypes<ResolversParentTypes>['PageOneColumnTemplateMainSlotItem'];
     PageSeo: Omit<PageSeo, 'linkedFrom'> & { linkedFrom?: Maybe<ResolversParentTypes['PageSeoLinkingCollections']> };
     PageSeoCollection: Omit<PageSeoCollection, 'items'> & { items: Array<Maybe<ResolversParentTypes['PageSeo']>> };
     PageSeoFilter: PageSeoFilter;
-    PageSeoLinkingCollections: Omit<PageSeoLinkingCollections, 'entryCollection'> & {
+    PageSeoLinkingCollections: Omit<PageSeoLinkingCollections, 'entryCollection' | 'pageCollection'> & {
         entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
+        pageCollection?: Maybe<ResolversParentTypes['PageCollection']>;
     };
     Quality: Scalars['Quality']['output'];
     Query: {};
@@ -4102,6 +4283,7 @@ export type ResolversParentTypes = {
     TaxonomyConcept: TaxonomyConcept;
     TimelineFilterInput: TimelineFilterInput;
     _Node: ResolversInterfaceTypes<ResolversParentTypes>['_Node'];
+    cfBlockNestedFilter: CfBlockNestedFilter;
     cfComponentBannerNestedFilter: CfComponentBannerNestedFilter;
     cfComponentFaqItemNestedFilter: CfComponentFaqItemNestedFilter;
     cfComponentFieldMappingNestedFilter: CfComponentFieldMappingNestedFilter;
@@ -4115,7 +4297,6 @@ export type ResolversParentTypes = {
     cfPageNestedFilter: CfPageNestedFilter;
     cfPageOneColumnTemplateNestedFilter: CfPageOneColumnTemplateNestedFilter;
     cfPageSeoNestedFilter: CfPageSeoNestedFilter;
-    cfmainSlotMultiTypeNestedFilter: CfmainSlotMultiTypeNestedFilter;
 };
 
 export type ContentSourceMapsDirectiveArgs = {};
@@ -4125,6 +4306,17 @@ export type ContentSourceMapsDirectiveResolver<
     Parent,
     ContextType = any,
     Args = ContentSourceMapsDirectiveArgs,
+> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
+
+export type ContentfulSchemaMetadataDirectiveArgs = {
+    contentTypePublishedCounters?: Maybe<Scalars['JSON']['input']>;
+};
+
+export type ContentfulSchemaMetadataDirectiveResolver<
+    Result,
+    Parent,
+    ContextType = any,
+    Args = ContentfulSchemaMetadataDirectiveArgs,
 > = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export type DelegatedResourceLinkDirectiveArgs = {
@@ -4243,6 +4435,43 @@ export type AssetLinkingCollectionsResolvers<
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type BlockResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['Block'] = ResolversParentTypes['Block'],
+> = {
+    _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    content?: Resolver<Maybe<ResolversTypes['BlockContent']>, ParentType, ContextType, Partial<BlockContentArgs>>;
+    contentfulMetadata?: Resolver<ResolversTypes['ContentfulMetadata'], ParentType, ContextType>;
+    linkedFrom?: Resolver<
+        Maybe<ResolversTypes['BlockLinkingCollections']>,
+        ParentType,
+        ContextType,
+        Partial<BlockLinkedFromArgs>
+    >;
+    name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<BlockNameArgs>>;
+    spacing?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<BlockSpacingArgs>>;
+    sys?: Resolver<ResolversTypes['Sys'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type BlockCollectionResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['BlockCollection'] = ResolversParentTypes['BlockCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['Block']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type BlockContentResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['BlockContent'] = ResolversParentTypes['BlockContent'],
+> = {
+    __resolveType: TypeResolveFn<'BlockFaq' | 'BlockTicketList', ParentType, ContextType>;
+};
+
 export type BlockFaqResolvers<
     ContextType = any,
     ParentType extends ResolversParentTypes['BlockFaq'] = ResolversParentTypes['BlockFaq'],
@@ -4296,17 +4525,37 @@ export type BlockFaqLinkingCollectionsResolvers<
     ParentType extends
         ResolversParentTypes['BlockFaqLinkingCollections'] = ResolversParentTypes['BlockFaqLinkingCollections'],
 > = {
+    blockCollection?: Resolver<
+        Maybe<ResolversTypes['BlockCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<BlockFaqLinkingCollectionsBlockCollectionArgs, 'limit' | 'skip'>
+    >;
     entryCollection?: Resolver<
         Maybe<ResolversTypes['EntryCollection']>,
         ParentType,
         ContextType,
         RequireFields<BlockFaqLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type BlockLinkingCollectionsResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['BlockLinkingCollections'] = ResolversParentTypes['BlockLinkingCollections'],
+> = {
+    entryCollection?: Resolver<
+        Maybe<ResolversTypes['EntryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<BlockLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
+    >;
     pageOneColumnTemplateCollection?: Resolver<
         Maybe<ResolversTypes['PageOneColumnTemplateCollection']>,
         ParentType,
         ContextType,
-        RequireFields<BlockFaqLinkingCollectionsPageOneColumnTemplateCollectionArgs, 'limit' | 'skip'>
+        RequireFields<BlockLinkingCollectionsPageOneColumnTemplateCollectionArgs, 'limit' | 'skip'>
     >;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -4394,17 +4643,17 @@ export type BlockTicketListLinkingCollectionsResolvers<
     ParentType extends
         ResolversParentTypes['BlockTicketListLinkingCollections'] = ResolversParentTypes['BlockTicketListLinkingCollections'],
 > = {
+    blockCollection?: Resolver<
+        Maybe<ResolversTypes['BlockCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<BlockTicketListLinkingCollectionsBlockCollectionArgs, 'limit' | 'skip'>
+    >;
     entryCollection?: Resolver<
         Maybe<ResolversTypes['EntryCollection']>,
         ParentType,
         ContextType,
         RequireFields<BlockTicketListLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
-    >;
-    pageOneColumnTemplateCollection?: Resolver<
-        Maybe<ResolversTypes['PageOneColumnTemplateCollection']>,
-        ParentType,
-        ContextType,
-        RequireFields<BlockTicketListLinkingCollectionsPageOneColumnTemplateCollectionArgs, 'limit' | 'skip'>
     >;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -5069,6 +5318,7 @@ export type EntryResolvers<
     ParentType extends ResolversParentTypes['Entry'] = ResolversParentTypes['Entry'],
 > = {
     __resolveType: TypeResolveFn<
+        | 'Block'
         | 'BlockFaq'
         | 'BlockTicketList'
         | 'ComponentBanner'
@@ -5232,19 +5482,11 @@ export type PageOneColumnTemplateMainSlotCollectionResolvers<
     ParentType extends
         ResolversParentTypes['PageOneColumnTemplateMainSlotCollection'] = ResolversParentTypes['PageOneColumnTemplateMainSlotCollection'],
 > = {
-    items?: Resolver<Array<Maybe<ResolversTypes['PageOneColumnTemplateMainSlotItem']>>, ParentType, ContextType>;
+    items?: Resolver<Array<Maybe<ResolversTypes['Block']>>, ParentType, ContextType>;
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type PageOneColumnTemplateMainSlotItemResolvers<
-    ContextType = any,
-    ParentType extends
-        ResolversParentTypes['PageOneColumnTemplateMainSlotItem'] = ResolversParentTypes['PageOneColumnTemplateMainSlotItem'],
-> = {
-    __resolveType: TypeResolveFn<'BlockFaq' | 'BlockTicketList', ParentType, ContextType>;
 };
 
 export type PageSeoResolvers<
@@ -5325,6 +5567,13 @@ export type QueryResolvers<
         ParentType,
         ContextType,
         RequireFields<QueryAssetCollectionArgs, 'limit' | 'skip'>
+    >;
+    block?: Resolver<Maybe<ResolversTypes['Block']>, ParentType, ContextType, RequireFields<QueryBlockArgs, 'id'>>;
+    blockCollection?: Resolver<
+        Maybe<ResolversTypes['BlockCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryBlockCollectionArgs, 'limit' | 'skip'>
     >;
     blockFaq?: Resolver<
         Maybe<ResolversTypes['BlockFaq']>,
@@ -5536,6 +5785,7 @@ export type _NodeResolvers<
     ParentType extends ResolversParentTypes['_Node'] = ResolversParentTypes['_Node'],
 > = {
     __resolveType: TypeResolveFn<
+        | 'Block'
         | 'BlockFaq'
         | 'BlockTicketList'
         | 'ComponentBanner'
@@ -5561,10 +5811,14 @@ export type Resolvers<ContextType = any> = {
     Asset?: AssetResolvers<ContextType>;
     AssetCollection?: AssetCollectionResolvers<ContextType>;
     AssetLinkingCollections?: AssetLinkingCollectionsResolvers<ContextType>;
+    Block?: BlockResolvers<ContextType>;
+    BlockCollection?: BlockCollectionResolvers<ContextType>;
+    BlockContent?: BlockContentResolvers<ContextType>;
     BlockFaq?: BlockFaqResolvers<ContextType>;
     BlockFaqCollection?: BlockFaqCollectionResolvers<ContextType>;
     BlockFaqItemsCollection?: BlockFaqItemsCollectionResolvers<ContextType>;
     BlockFaqLinkingCollections?: BlockFaqLinkingCollectionsResolvers<ContextType>;
+    BlockLinkingCollections?: BlockLinkingCollectionsResolvers<ContextType>;
     BlockTicketList?: BlockTicketListResolvers<ContextType>;
     BlockTicketListCollection?: BlockTicketListCollectionResolvers<ContextType>;
     BlockTicketListFieldsCollection?: BlockTicketListFieldsCollectionResolvers<ContextType>;
@@ -5616,7 +5870,6 @@ export type Resolvers<ContextType = any> = {
     PageOneColumnTemplateCollection?: PageOneColumnTemplateCollectionResolvers<ContextType>;
     PageOneColumnTemplateLinkingCollections?: PageOneColumnTemplateLinkingCollectionsResolvers<ContextType>;
     PageOneColumnTemplateMainSlotCollection?: PageOneColumnTemplateMainSlotCollectionResolvers<ContextType>;
-    PageOneColumnTemplateMainSlotItem?: PageOneColumnTemplateMainSlotItemResolvers<ContextType>;
     PageSeo?: PageSeoResolvers<ContextType>;
     PageSeoCollection?: PageSeoCollectionResolvers<ContextType>;
     PageSeoLinkingCollections?: PageSeoLinkingCollectionsResolvers<ContextType>;
@@ -5629,12 +5882,69 @@ export type Resolvers<ContextType = any> = {
 
 export type DirectiveResolvers<ContextType = any> = {
     contentSourceMaps?: ContentSourceMapsDirectiveResolver<any, any, ContextType>;
+    contentfulSchemaMetadata?: ContentfulSchemaMetadataDirectiveResolver<any, any, ContextType>;
     delegatedResourceLink?: DelegatedResourceLinkDirectiveResolver<any, any, ContextType>;
     enumMapper?: EnumMapperDirectiveResolver<any, any, ContextType>;
     featureFlag?: FeatureFlagDirectiveResolver<any, any, ContextType>;
     fieldResolver?: FieldResolverDirectiveResolver<any, any, ContextType>;
     timeline?: TimelineDirectiveResolver<any, any, ContextType>;
     typeIdentifier?: TypeIdentifierDirectiveResolver<any, any, ContextType>;
+};
+
+export type ComponentFragment = {
+    __typename: 'Block';
+    spacing?: string;
+    content?:
+        | {
+              __typename: 'BlockFaq';
+              title?: string;
+              subtitle?: string;
+              sys: { id: string };
+              itemsCollection?: { items: Array<{ title?: string; content?: string; sys: { id: string } }> };
+              banner?: {
+                  title?: string;
+                  description?: string;
+                  sys: { id: string };
+                  link?: { label?: string; url?: string };
+              };
+          }
+        | {
+              __typename: 'BlockTicketList';
+              title?: string;
+              subTitle?: string;
+              detailsUrl?: string;
+              sys: { id: string };
+              fieldsCollection?: {
+                  items: Array<{
+                      name?: string;
+                      sys: { id: string };
+                      valuesCollection?: { items: Array<{ key?: string; value?: string; sys: { id: string } }> };
+                  }>;
+              };
+              table?: {
+                  actionsTitle?: string;
+                  actionsLabel?: string;
+                  sys: { id: string };
+                  columnsCollection?: { items: Array<{ title?: string; field?: string; sys: { id: string } }> };
+              };
+              pagination?: {
+                  description?: string;
+                  previousLabel?: string;
+                  nextLabel?: string;
+                  perPage?: number;
+                  selectPageLabel?: string;
+                  sys: { id: string };
+              };
+              noResults?: { title?: string; description?: string; sys: { id: string } };
+          };
+    sys: { id: string };
+};
+
+export type ComponentBaseFragment = {
+    __typename: 'Block';
+    spacing?: string;
+    sys: { id: string };
+    content?: { __typename: 'BlockFaq' } | { __typename: 'BlockTicketList' };
 };
 
 export type PageFragment = {
@@ -5650,7 +5960,12 @@ export type PageFragment = {
     template?: {
         __typename: 'PageOneColumnTemplate';
         mainSlotCollection?: {
-            items: Array<{ __typename: 'BlockFaq'; _id: string } | { __typename: 'BlockTicketList'; _id: string }>;
+            items: Array<{
+                __typename: 'Block';
+                spacing?: string;
+                sys: { id: string };
+                content?: { __typename: 'BlockFaq' } | { __typename: 'BlockTicketList' };
+            }>;
         };
     };
 };
@@ -5662,8 +5977,8 @@ export type FaqComponentFragment = {
     title?: string;
     subtitle?: string;
     sys: { id: string };
-    itemsCollection?: { items: Array<{ title?: string; content?: string }> };
-    banner?: { title?: string; description?: string; link?: { label?: string; url?: string } };
+    itemsCollection?: { items: Array<{ title?: string; content?: string; sys: { id: string } }> };
+    banner?: { title?: string; description?: string; sys: { id: string }; link?: { label?: string; url?: string } };
 };
 
 export type TicketListComponentFragment = {
@@ -5673,12 +5988,17 @@ export type TicketListComponentFragment = {
     detailsUrl?: string;
     sys: { id: string };
     fieldsCollection?: {
-        items: Array<{ name?: string; valuesCollection?: { items: Array<{ key?: string; value?: string }> } }>;
+        items: Array<{
+            name?: string;
+            sys: { id: string };
+            valuesCollection?: { items: Array<{ key?: string; value?: string; sys: { id: string } }> };
+        }>;
     };
     table?: {
         actionsTitle?: string;
         actionsLabel?: string;
-        columnsCollection?: { items: Array<{ title?: string; field?: string }> };
+        sys: { id: string };
+        columnsCollection?: { items: Array<{ title?: string; field?: string; sys: { id: string } }> };
     };
     pagination?: {
         description?: string;
@@ -5686,20 +6006,28 @@ export type TicketListComponentFragment = {
         nextLabel?: string;
         perPage?: number;
         selectPageLabel?: string;
+        sys: { id: string };
     };
-    noResults?: { title?: string; description?: string };
+    noResults?: { title?: string; description?: string; sys: { id: string } };
 };
 
-export type BannerFragment = { title?: string; description?: string; link?: { label?: string; url?: string } };
+export type BannerFragment = {
+    title?: string;
+    description?: string;
+    sys: { id: string };
+    link?: { label?: string; url?: string };
+};
 
 export type FieldMappingFragment = {
     name?: string;
-    valuesCollection?: { items: Array<{ key?: string; value?: string }> };
+    sys: { id: string };
+    valuesCollection?: { items: Array<{ key?: string; value?: string; sys: { id: string } }> };
 };
 
 export type LinkFragment = {
     label?: string;
     url?: string;
+    sys: { id: string };
     page?: { slug?: string; seo?: { title?: string; description?: string } };
 };
 
@@ -5709,6 +6037,7 @@ export type PaginationFragment = {
     nextLabel?: string;
     perPage?: number;
     selectPageLabel?: string;
+    sys: { id: string };
 };
 
 export type SeoFragment = {
@@ -5722,63 +6051,85 @@ export type SeoFragment = {
 export type TableFragment = {
     actionsTitle?: string;
     actionsLabel?: string;
-    columnsCollection?: { items: Array<{ title?: string; field?: string }> };
+    sys: { id: string };
+    columnsCollection?: { items: Array<{ title?: string; field?: string; sys: { id: string } }> };
 };
+
+export type LayoutSectionFragment = { spacing?: string };
 
 export type OneColumnTemplateFragment = {
     __typename: 'PageOneColumnTemplate';
     mainSlotCollection?: {
-        items: Array<{ __typename: 'BlockFaq'; _id: string } | { __typename: 'BlockTicketList'; _id: string }>;
+        items: Array<{
+            __typename: 'Block';
+            spacing?: string;
+            sys: { id: string };
+            content?: { __typename: 'BlockFaq' } | { __typename: 'BlockTicketList' };
+        }>;
     };
 };
 
 export type GetComponentQueryVariables = Exact<{
-    id: Scalars['ID']['input'];
+    id: Scalars['String']['input'];
     locale: Scalars['String']['input'];
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
 }>;
 
 export type GetComponentQuery = {
-    _node?:
-        | {
-              __typename: 'BlockFaq';
-              title?: string;
-              subtitle?: string;
-              sys: { id: string };
-              itemsCollection?: { items: Array<{ title?: string; content?: string }> };
-              banner?: { title?: string; description?: string; link?: { label?: string; url?: string } };
-          }
-        | {
-              __typename: 'BlockTicketList';
-              title?: string;
-              subTitle?: string;
-              detailsUrl?: string;
-              sys: { id: string };
-              fieldsCollection?: {
-                  items: Array<{
-                      name?: string;
-                      valuesCollection?: { items: Array<{ key?: string; value?: string }> };
-                  }>;
+    block?: {
+        __typename: 'Block';
+        spacing?: string;
+        content?:
+            | {
+                  __typename: 'BlockFaq';
+                  title?: string;
+                  subtitle?: string;
+                  sys: { id: string };
+                  itemsCollection?: { items: Array<{ title?: string; content?: string; sys: { id: string } }> };
+                  banner?: {
+                      title?: string;
+                      description?: string;
+                      sys: { id: string };
+                      link?: { label?: string; url?: string };
+                  };
+              }
+            | {
+                  __typename: 'BlockTicketList';
+                  title?: string;
+                  subTitle?: string;
+                  detailsUrl?: string;
+                  sys: { id: string };
+                  fieldsCollection?: {
+                      items: Array<{
+                          name?: string;
+                          sys: { id: string };
+                          valuesCollection?: { items: Array<{ key?: string; value?: string; sys: { id: string } }> };
+                      }>;
+                  };
+                  table?: {
+                      actionsTitle?: string;
+                      actionsLabel?: string;
+                      sys: { id: string };
+                      columnsCollection?: { items: Array<{ title?: string; field?: string; sys: { id: string } }> };
+                  };
+                  pagination?: {
+                      description?: string;
+                      previousLabel?: string;
+                      nextLabel?: string;
+                      perPage?: number;
+                      selectPageLabel?: string;
+                      sys: { id: string };
+                  };
+                  noResults?: { title?: string; description?: string; sys: { id: string } };
               };
-              table?: {
-                  actionsTitle?: string;
-                  actionsLabel?: string;
-                  columnsCollection?: { items: Array<{ title?: string; field?: string }> };
-              };
-              pagination?: {
-                  description?: string;
-                  previousLabel?: string;
-                  nextLabel?: string;
-                  perPage?: number;
-                  selectPageLabel?: string;
-              };
-              noResults?: { title?: string; description?: string };
-          }
-        | {};
+        sys: { id: string };
+    };
 };
 
 export type GetPageQueryVariables = Exact<{
     slug: Scalars['String']['input'];
     locale: Scalars['String']['input'];
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
 }>;
 
 export type GetPageQuery = {
@@ -5806,9 +6157,12 @@ export type GetPageQuery = {
             template?: {
                 __typename: 'PageOneColumnTemplate';
                 mainSlotCollection?: {
-                    items: Array<
-                        { __typename: 'BlockFaq'; _id: string } | { __typename: 'BlockTicketList'; _id: string }
-                    >;
+                    items: Array<{
+                        __typename: 'Block';
+                        spacing?: string;
+                        sys: { id: string };
+                        content?: { __typename: 'BlockFaq' } | { __typename: 'BlockTicketList' };
+                    }>;
                 };
             };
         }>;
@@ -5817,6 +6171,7 @@ export type GetPageQuery = {
 
 export type GetPagesQueryVariables = Exact<{
     locale: Scalars['String']['input'];
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
 }>;
 
 export type GetPagesQuery = {
@@ -5844,9 +6199,12 @@ export type GetPagesQuery = {
             template?: {
                 __typename: 'PageOneColumnTemplate';
                 mainSlotCollection?: {
-                    items: Array<
-                        { __typename: 'BlockFaq'; _id: string } | { __typename: 'BlockTicketList'; _id: string }
-                    >;
+                    items: Array<{
+                        __typename: 'Block';
+                        spacing?: string;
+                        sys: { id: string };
+                        content?: { __typename: 'BlockFaq' } | { __typename: 'BlockTicketList' };
+                    }>;
                 };
             };
         }>;
@@ -5857,6 +6215,165 @@ export const SysFragmentDoc = gql`
     fragment Sys on Sys {
         id
     }
+`;
+export const LayoutSectionFragmentDoc = gql`
+    fragment LayoutSection on Block {
+        spacing
+    }
+`;
+export const ComponentBaseFragmentDoc = gql`
+    fragment ComponentBase on Block {
+        __typename
+        sys {
+            ...Sys
+        }
+        ...LayoutSection
+        content {
+            __typename
+        }
+    }
+    ${SysFragmentDoc}
+    ${LayoutSectionFragmentDoc}
+`;
+export const BannerFragmentDoc = gql`
+    fragment Banner on ComponentBanner {
+        sys {
+            ...Sys
+        }
+        title
+        description
+        link {
+            label
+            url
+        }
+    }
+    ${SysFragmentDoc}
+`;
+export const FaqComponentFragmentDoc = gql`
+    fragment FaqComponent on BlockFaq {
+        __typename
+        sys {
+            ...Sys
+        }
+        title
+        subtitle
+        itemsCollection {
+            items {
+                sys {
+                    ...Sys
+                }
+                title
+                content
+            }
+        }
+        banner {
+            ... on ComponentBanner {
+                ...Banner
+            }
+        }
+    }
+    ${SysFragmentDoc}
+    ${BannerFragmentDoc}
+`;
+export const FieldMappingFragmentDoc = gql`
+    fragment FieldMapping on ComponentFieldMapping {
+        sys {
+            ...Sys
+        }
+        name
+        valuesCollection {
+            items {
+                sys {
+                    ...Sys
+                }
+                key
+                value
+            }
+        }
+    }
+    ${SysFragmentDoc}
+`;
+export const TableFragmentDoc = gql`
+    fragment Table on ComponentTable {
+        sys {
+            ...Sys
+        }
+        columnsCollection {
+            items {
+                sys {
+                    ...Sys
+                }
+                title
+                field
+            }
+        }
+        actionsTitle
+        actionsLabel
+    }
+    ${SysFragmentDoc}
+`;
+export const PaginationFragmentDoc = gql`
+    fragment Pagination on ComponentPagination {
+        sys {
+            ...Sys
+        }
+        description
+        previousLabel
+        nextLabel
+        perPage
+        selectPageLabel
+    }
+    ${SysFragmentDoc}
+`;
+export const TicketListComponentFragmentDoc = gql`
+    fragment TicketListComponent on BlockTicketList {
+        __typename
+        sys {
+            ...Sys
+        }
+        title
+        subTitle
+        fieldsCollection {
+            items {
+                ...FieldMapping
+            }
+        }
+        table {
+            ...Table
+        }
+        pagination {
+            ...Pagination
+        }
+        noResults {
+            sys {
+                ...Sys
+            }
+            title
+            description
+        }
+        detailsUrl
+    }
+    ${SysFragmentDoc}
+    ${FieldMappingFragmentDoc}
+    ${TableFragmentDoc}
+    ${PaginationFragmentDoc}
+`;
+export const ComponentFragmentDoc = gql`
+    fragment Component on Block {
+        ...ComponentBase
+        content {
+            __typename
+            ... on BlockFaq {
+                ...FaqComponent
+            }
+            ... on BlockTicketList {
+                ...TicketListComponent
+            }
+        }
+    }
+    ${ComponentBaseFragmentDoc}
+    ${FaqComponentFragmentDoc}
+    ${TicketListComponentFragmentDoc}
 `;
 export const SeoFragmentDoc = gql`
     fragment Seo on PageSeo {
@@ -5873,13 +6390,13 @@ export const OneColumnTemplateFragmentDoc = gql`
         mainSlotCollection {
             items {
                 __typename
-                ... on _Node {
-                    _id
-                    __typename
+                ... on Block {
+                    ...ComponentBase
                 }
             }
         }
     }
+    ${ComponentBaseFragmentDoc}
 `;
 export const PageFragmentDoc = gql`
     fragment Page on Page {
@@ -5922,103 +6439,11 @@ export const PageFragmentDoc = gql`
     ${SeoFragmentDoc}
     ${OneColumnTemplateFragmentDoc}
 `;
-export const BannerFragmentDoc = gql`
-    fragment Banner on ComponentBanner {
-        title
-        description
-        link {
-            label
-            url
-        }
-    }
-`;
-export const FaqComponentFragmentDoc = gql`
-    fragment FaqComponent on BlockFaq {
-        __typename
-        sys {
-            ...Sys
-        }
-        title
-        subtitle
-        itemsCollection {
-            items {
-                title
-                content
-            }
-        }
-        banner {
-            ... on ComponentBanner {
-                ...Banner
-            }
-        }
-    }
-    ${SysFragmentDoc}
-    ${BannerFragmentDoc}
-`;
-export const FieldMappingFragmentDoc = gql`
-    fragment FieldMapping on ComponentFieldMapping {
-        name
-        valuesCollection {
-            items {
-                key
-                value
-            }
-        }
-    }
-`;
-export const TableFragmentDoc = gql`
-    fragment Table on ComponentTable {
-        columnsCollection {
-            items {
-                title
-                field
-            }
-        }
-        actionsTitle
-        actionsLabel
-    }
-`;
-export const PaginationFragmentDoc = gql`
-    fragment Pagination on ComponentPagination {
-        description
-        previousLabel
-        nextLabel
-        perPage
-        selectPageLabel
-    }
-`;
-export const TicketListComponentFragmentDoc = gql`
-    fragment TicketListComponent on BlockTicketList {
-        __typename
-        sys {
-            ...Sys
-        }
-        title
-        subTitle
-        fieldsCollection {
-            items {
-                ...FieldMapping
-            }
-        }
-        table {
-            ...Table
-        }
-        pagination {
-            ...Pagination
-        }
-        noResults {
-            title
-            description
-        }
-        detailsUrl
-    }
-    ${SysFragmentDoc}
-    ${FieldMappingFragmentDoc}
-    ${TableFragmentDoc}
-    ${PaginationFragmentDoc}
-`;
 export const LinkFragmentDoc = gql`
     fragment Link on ComponentLink {
+        sys {
+            ...Sys
+        }
         label
         url
         page {
@@ -6029,24 +6454,19 @@ export const LinkFragmentDoc = gql`
             }
         }
     }
+    ${SysFragmentDoc}
 `;
 export const GetComponentDocument = gql`
-    query getComponent($id: ID!, $locale: String!) {
-        _node(id: $id, locale: $locale) {
-            ... on BlockFaq {
-                ...FaqComponent
-            }
-            ... on BlockTicketList {
-                ...TicketListComponent
-            }
+    query getComponent($id: String!, $locale: String!, $preview: Boolean) {
+        block(id: $id, locale: $locale, preview: $preview) {
+            ...Component
         }
     }
-    ${FaqComponentFragmentDoc}
-    ${TicketListComponentFragmentDoc}
+    ${ComponentFragmentDoc}
 `;
 export const GetPageDocument = gql`
-    query getPage($slug: String!, $locale: String!) {
-        pageCollection(locale: $locale, where: { slug: $slug }, limit: 1) {
+    query getPage($slug: String!, $locale: String!, $preview: Boolean) {
+        pageCollection(locale: $locale, where: { slug: $slug }, limit: 1, preview: $preview) {
             items {
                 ...Page
             }
@@ -6055,8 +6475,8 @@ export const GetPageDocument = gql`
     ${PageFragmentDoc}
 `;
 export const GetPagesDocument = gql`
-    query getPages($locale: String!) {
-        pageCollection(locale: $locale) {
+    query getPages($locale: String!, $preview: Boolean) {
+        pageCollection(locale: $locale, preview: $preview) {
             items {
                 ...Page
             }

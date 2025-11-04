@@ -51,6 +51,8 @@ export class CmsService implements CMS.Service {
 
     private getBlock = (options: CMS.Request.GetCmsEntryParams) => {
         const key = `component-${options.id}-${options.locale}`;
+        // @ts-expect-error we are missing transforming string from query param back to boolean
+        const isPreview = options.preview === 'true';
 
         return from(this.cacheService.get(key)).pipe(
             mergeMap((cachedBlock) => {
@@ -61,16 +63,17 @@ export class CmsService implements CMS.Service {
                 const component = this.graphqlService.getComponent({
                     id: options.id,
                     locale: options.locale,
+                    preview: isPreview,
                 });
 
                 return forkJoin([component]).pipe(
                     map(([component]) => {
-                        if (!component?.data._node) {
+                        if (!component?.data.block?.content) {
                             throw new NotFoundException();
                         }
-                        const data = component.data._node;
+                        const data = component.data.block.content;
                         this.cacheService.set(key, stringify(data));
-                        return data;
+                        return { ...data, isPreview };
                     }),
                 );
             }),
@@ -108,6 +111,8 @@ export class CmsService implements CMS.Service {
 
     getPage(options: CMS.Request.GetCmsPageParams) {
         const key = `page-${options.slug}-${options.locale}`;
+        // @ts-expect-error we are missing transforming string from query param back to boolean
+        const isPreview = options.preview === 'true';
 
         // TODO: remove this once we have a full implementation of the page mapper
         if (options.slug !== '/cases') {
@@ -117,6 +122,7 @@ export class CmsService implements CMS.Service {
         return this.getCachedBlock(key, () => {
             const pages = this.graphqlService.getPages({
                 locale: options.locale,
+                preview: isPreview,
             });
 
             return forkJoin([pages]).pipe(

@@ -4,7 +4,10 @@ import { CMS } from '@o2s/framework/modules';
 
 import { FaqComponentFragment } from '@/generated/contentful';
 
-export const mapFaqBlock = (data: FaqComponentFragment): CMS.Model.FaqBlock.FaqBlock => {
+export const mapFaqBlock = ({
+    isPreview,
+    ...data
+}: FaqComponentFragment & { isPreview?: boolean }): CMS.Model.FaqBlock.FaqBlock => {
     if (!data) {
         throw new NotFoundException();
     }
@@ -26,9 +29,28 @@ export const mapFaqBlock = (data: FaqComponentFragment): CMS.Model.FaqBlock.FaqB
                     description: data.banner?.description,
                     button: data.banner?.link,
                 } as CMS.Model.FaqBlock.FaqBoxWithButton,
+                meta: isPreview
+                    ? {
+                          __id: data.sys.id,
+                          title: 'title',
+                          subtitle: 'subtitle',
+                          items: data.itemsCollection?.items.map((item) => ({
+                              __id: item.sys.id,
+                              title: 'title',
+                              content: 'content',
+                          })),
+                          banner: data.banner
+                              ? {
+                                    __id: data.banner.sys.id,
+                                    title: 'title',
+                                    description: 'description',
+                                    button: 'link',
+                                }
+                              : undefined,
+                      }
+                    : undefined,
             };
     }
-    // return MOCK_FAQ_LIST_BLOCK_EN;
 
     throw new NotFoundException();
 };

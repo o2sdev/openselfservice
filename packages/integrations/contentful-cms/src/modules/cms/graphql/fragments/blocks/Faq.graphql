@@ -7,6 +7,9 @@ fragment FaqComponent on BlockFaq {
     subtitle
     itemsCollection {
         items {
+            sys {
+                ...Sys
+            }
             title
             content
         }

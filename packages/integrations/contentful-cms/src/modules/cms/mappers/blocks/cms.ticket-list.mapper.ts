@@ -4,11 +4,14 @@ import { CMS } from '@o2s/framework/modules';
 
 import { TicketListComponentFragment } from '@/generated/contentful';
 
-import { mapFields } from '../cms.fieldMapping.mapper';
+import { mapFields, mapFieldsMeta } from '../cms.fieldMapping.mapper';
 import { mapPagination } from '../cms.pagination.mapper';
-import { mapTable } from '../cms.table.mapper';
+import { mapTable, mapTableMeta } from '../cms.table.mapper';
 
-export const mapTicketListBlock = (data: TicketListComponentFragment): CMS.Model.TicketListBlock.TicketListBlock => {
+export const mapTicketListBlock = ({
+    isPreview,
+    ...data
+}: TicketListComponentFragment & { isPreview?: boolean }): CMS.Model.TicketListBlock.TicketListBlock => {
     if (!data) {
         throw new NotFoundException();
     }
@@ -35,6 +38,31 @@ export const mapTicketListBlock = (data: TicketListComponentFragment): CMS.Model
                     clickToSelect: 'Click to select',
                 },
                 detailsUrl: data.detailsUrl || '',
+                meta: isPreview
+                    ? {
+                          __id: data.sys.id,
+                          title: 'title',
+                          subtitle: 'subtitle',
+                          table: mapTableMeta(data.table),
+                          fieldMapping: mapFieldsMeta(data.fieldsCollection?.items),
+                          // pagination: mapPagination(data.pagination),
+                          // TODO: add filters
+                          // filters: 'filters',
+                          noResults: {
+                              __id: data.noResults?.sys.id || '',
+                              title: 'title',
+                              description: 'description',
+                          },
+                          labels: {
+                              __id: data.sys.id,
+                              today: 'today',
+                              yesterday: 'yesterday',
+                              showMore: 'showMore',
+                              clickToSelect: 'clickToSelect',
+                          },
+                          detailsUrl: 'detailsUrl',
+                      }
+                    : undefined,
             };
     }
 

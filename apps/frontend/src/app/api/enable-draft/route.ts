@@ -1,4 +1,4 @@
-import { draftMode } from 'next/headers';
+import { draftMode, cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { NextRequest } from 'next/server';
 
@@ -17,6 +17,19 @@ export async function GET(request: NextRequest) {
     }
 
     (await draftMode()).enable();
+
+    // Override cookie header for draft mode for usage in live-preview
+    // https://github.com/vercel/next.js/issues/49927
+    const cookieStore = await cookies();
+    const cookie = cookieStore.get('__prerender_bypass')!;
+    cookieStore.set({
+        name: '__prerender_bypass',
+        value: cookie?.value,
+        httpOnly: true,
+        path: '/',
+        secure: true,
+        sameSite: 'none',
+    });
 
     redirect(`/${locale}/${slug}`);
 }

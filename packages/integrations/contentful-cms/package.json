@@ -4,7 +4,8 @@
     "private": false,
     "license": "MIT",
     "exports": {
-        "./integration": "./dist/src/integration.js"
+        "./integration": "./dist/src/integration.js",
+        "./live-preview": "./dist/src/modules/cms/live-preview/index.js"
     },
     "files": [
         "dist"
@@ -17,6 +18,7 @@
         "generate": "graphql-codegen && prettier --write \"generated/**/*.ts\""
     },
     "dependencies": {
+        "@contentful/live-preview": "^4.6.52",
         "@o2s/framework": "*",
         "@o2s/utils.logger": "*",
         "flatted": "^3.3.3",

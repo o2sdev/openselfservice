@@ -1,4 +1,7 @@
 fragment Link on ComponentLink {
+    sys {
+        ...Sys
+    }
     label
     url
     page {

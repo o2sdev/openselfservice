@@ -3,9 +3,8 @@ fragment OneColumnTemplate on PageOneColumnTemplate {
     mainSlotCollection {
         items {
             __typename
-            ... on _Node {
-                _id
-                __typename
+            ... on Block {
+                ...ComponentBase
             }
         }
     }
