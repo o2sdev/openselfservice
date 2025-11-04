@@ -1,0 +1,5 @@
+query getComponent($id: String!, $locale: String!, $preview: Boolean) {
+    block(id: $id, locale: $locale, preview: $preview) {
+        ...Component
+    }
+}

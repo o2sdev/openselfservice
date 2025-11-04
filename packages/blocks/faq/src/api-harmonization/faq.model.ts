@@ -8,4 +8,5 @@ export class FaqBlock extends Models.Block.Block {
     subtitle?: CMS.Model.FaqBlock.FaqBlock['subtitle'];
     items!: CMS.Model.FaqBlock.FaqBlock['items'];
     banner?: CMS.Model.FaqBlock.FaqBoxWithButton;
+    meta?: CMS.Model.FaqBlock.FaqBlock['meta'];
 }

@@ -1,0 +1,27 @@
+fragment TicketListComponent on BlockTicketList {
+    __typename
+    sys {
+        ...Sys
+    }
+    title
+    subTitle
+    fieldsCollection {
+        items {
+            ...FieldMapping
+        }
+    }
+    table {
+        ...Table
+    }
+    pagination {
+        ...Pagination
+    }
+    noResults {
+        sys {
+            ...Sys
+        }
+        title
+        description
+    }
+    detailsUrl
+}

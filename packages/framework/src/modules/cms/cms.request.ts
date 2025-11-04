@@ -1,9 +1,13 @@
-export class GetCmsEntryParams {
+export class GetCmsParams {
+    preview?: boolean;
+}
+
+export class GetCmsEntryParams extends GetCmsParams {
     id!: string;
     locale!: string;
 }
 
-export class GetCmsEntriesParams {
+export class GetCmsEntriesParams extends GetCmsParams {
     locale!: string;
     type!: string;
     filters?: {
@@ -11,45 +15,45 @@ export class GetCmsEntriesParams {
     };
 }
 
-export class GetCmsPageParams {
+export class GetCmsPageParams extends GetCmsParams {
     slug!: string;
     locale!: string;
 }
 
-export class GetCmsPagesParams {
+export class GetCmsPagesParams extends GetCmsParams {
     locale!: string;
 }
-export class GetCmsAlternativePagesParams {
+export class GetCmsAlternativePagesParams extends GetCmsParams {
     id!: string;
     slug!: string;
     locale!: string;
 }
 
-export class GetCmsLoginPageParams {
+export class GetCmsLoginPageParams extends GetCmsParams {
     locale!: string;
 }
 
-export class GetCmsNotFoundPageParams {
+export class GetCmsNotFoundPageParams extends GetCmsParams {
     locale!: string;
 }
 
-export class GetCmsHeaderParams {
+export class GetCmsHeaderParams extends GetCmsParams {
     id!: string;
     locale!: string;
 }
-export class GetCmsFooterParams {
+export class GetCmsFooterParams extends GetCmsParams {
     id!: string;
     locale!: string;
 }
 
-export class GetCmsAppConfigParams {
+export class GetCmsAppConfigParams extends GetCmsParams {
     referrer?: string;
     locale!: string;
 }
 
-export class GetCmsOrganizationListParams {
+export class GetCmsOrganizationListParams extends GetCmsParams {
     locale!: string;
 }
-export class GetCmsSurveyParams {
+export class GetCmsSurveyParams extends GetCmsParams {
     code!: string;
 }

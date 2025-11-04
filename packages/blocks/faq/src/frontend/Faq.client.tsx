@@ -1,5 +1,6 @@
 'use client';
 
+import { LivePreview } from '@o2s/configs.integrations/live-preview';
 import { createNavigation } from 'next-intl/navigation';
 import React from 'react';
 
@@ -15,7 +16,7 @@ import { FaqPureProps } from './Faq.types';
 export const FaqPure: React.FC<FaqPureProps> = ({ locale, accessToken, routing, ...component }) => {
     const { Link: LinkComponent } = createNavigation(routing);
 
-    const { title, subtitle, items, banner } = component;
+    const { title, subtitle, items, banner, meta } = component;
 
     return (
         <Container variant="narrow">
@@ -23,11 +24,15 @@ export const FaqPure: React.FC<FaqPureProps> = ({ locale, accessToken, routing, 
                 {title && (
                     <div className="w-full flex flex-col gap-4">
                         <Typography variant="h2" asChild>
-                            <h2>{title}</h2>
+                            <h2 {...LivePreview.inspector(meta, 'title')}>{title}</h2>
                         </Typography>
 
                         {subtitle && (
-                            <Typography variant="body" className="text-muted-foreground">
+                            <Typography
+                                variant="body"
+                                className="text-muted-foreground"
+                                {...LivePreview.inspector(meta, 'subtitle')}
+                            >
                                 {subtitle}
                             </Typography>
                         )}
@@ -36,9 +41,15 @@ export const FaqPure: React.FC<FaqPureProps> = ({ locale, accessToken, routing, 
                             <Accordion type="multiple">
                                 {items.map((item, index) => (
                                     <AccordionItem key={index} value={`${index}`}>
-                                        <AccordionTrigger>{item.title}</AccordionTrigger>
+                                        <AccordionTrigger {...LivePreview.inspector(meta?.items?.[index], 'title')}>
+                                            {item.title}
+                                        </AccordionTrigger>
                                         <AccordionContent>
-                                            <RichText content={item.content} className="text-muted-foreground" />
+                                            <RichText
+                                                content={item.content}
+                                                className="text-muted-foreground"
+                                                {...LivePreview.inspector(meta?.items?.[index], 'content')}
+                                            />
                                         </AccordionContent>
                                     </AccordionItem>
                                 ))}
@@ -50,13 +61,24 @@ export const FaqPure: React.FC<FaqPureProps> = ({ locale, accessToken, routing, 
                     <div className="flex flex-col p-6 bg-muted/60 rounded-lg gap-6 items-center">
                         <div className="flex flex-col gap-2 items-center">
                             <Typography variant="h2" asChild>
-                                <h2 className="text-foreground">{banner?.title}</h2>
+                                <h2 className="text-foreground" {...LivePreview.inspector(meta?.banner, 'title')}>
+                                    {banner?.title}
+                                </h2>
                             </Typography>
-                            <RichText content={banner?.description} className="text-muted-foreground" />
+                            <RichText
+                                content={banner?.description}
+                                className="text-muted-foreground"
+                                {...LivePreview.inspector(meta?.banner, 'description')}
+                            />
                         </div>
                         {banner?.button && (
                             <Button asChild aria-label={banner.button.label}>
-                                <LinkComponent href={banner?.button?.url}>{banner.button.label}</LinkComponent>
+                                <LinkComponent
+                                    href={banner?.button?.url}
+                                    {...LivePreview.inspector(meta?.banner, 'button')}
+                                >
+                                    {banner.button.label}
+                                </LinkComponent>
                             </Button>
                         )}
                     </div>
