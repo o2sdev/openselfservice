@@ -11044,6 +11044,16 @@ export type GetComponentQuery = {
                           page?: { slug: string; SEO: { title: string; description: string } };
                       };
                   };
+                  layout?: 'vertical' | 'horizontal';
+                  chart?: {
+                      title?: string;
+                      topSegment?: string;
+                      middleSegment?: string;
+                      bottomSegment?: string;
+                      total?: string;
+                      monthsToShow?: number;
+                      showChart?: boolean;
+                  };
               }
             | {
                   __typename: 'ComponentComponentsQuickLinks';

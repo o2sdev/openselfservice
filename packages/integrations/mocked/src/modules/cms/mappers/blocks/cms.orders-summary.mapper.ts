@@ -113,7 +113,7 @@ const MOCK_ORDER_LIST_BLOCK_PL: CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock 
         icon: 'Package',
     },
     chart: {
-        title: 'Liczba zamówień123',
+        title: 'Liczba zamówień',
         legend: {
             prev: 'Poprzedni okres',
             current: 'Obecny okres',

@@ -22,19 +22,14 @@ export const PAGE_INVOICE_LIST_EN: CMS.Model.Page.Page = {
     template: {
         __typename: 'TwoColumnTemplate',
         slots: {
-            top: [],
-            left: [
+            top: [
                 {
                     __typename: 'PaymentsSummaryBlock',
                     id: 'payments-summary-1',
                 },
             ],
-            right: [
-                {
-                    __typename: 'PaymentsHistoryBlock',
-                    id: 'payments-history-1',
-                },
-            ],
+            left: [],
+            right: [],
             bottom: [
                 {
                     __typename: 'InvoiceListBlock',
@@ -73,19 +68,14 @@ export const PAGE_INVOICE_LIST_DE: CMS.Model.Page.Page = {
     template: {
         __typename: 'TwoColumnTemplate',
         slots: {
-            top: [],
-            left: [
+            top: [
                 {
                     __typename: 'PaymentsSummaryBlock',
                     id: 'payments-summary-1',
                 },
             ],
-            right: [
-                {
-                    __typename: 'PaymentsHistoryBlock',
-                    id: 'payments-history-1',
-                },
-            ],
+            left: [],
+            right: [],
             bottom: [
                 {
                     __typename: 'InvoiceListBlock',
@@ -124,19 +114,14 @@ export const PAGE_INVOICE_LIST_PL: CMS.Model.Page.Page = {
     template: {
         __typename: 'TwoColumnTemplate',
         slots: {
-            top: [],
-            left: [
+            top: [
                 {
                     __typename: 'PaymentsSummaryBlock',
                     id: 'payments-summary-1',
                 },
             ],
-            right: [
-                {
-                    __typename: 'PaymentsHistoryBlock',
-                    id: 'payments-history-1',
-                },
-            ],
+            left: [],
+            right: [],
             bottom: [
                 {
                     __typename: 'InvoiceListBlock',
