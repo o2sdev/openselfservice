@@ -33,6 +33,7 @@ export class OrdersSummaryBlock extends ApiModels.Block.Block {
             prev: string;
             current: string;
         };
+        showChart?: boolean;
     };
     ranges!: CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock['ranges'];
     noResults!: CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock['noResults'];

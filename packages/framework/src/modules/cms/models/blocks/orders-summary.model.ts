@@ -17,6 +17,7 @@ export class OrdersSummaryBlock extends Block.Block {
 export class OrdersChart {
     title!: string;
     legend!: ChartLegend;
+    showChart?: boolean;
 }
 
 export class ChartLegend {

@@ -125,20 +125,70 @@ export const OrdersSummaryPure: React.FC<Readonly<OrdersSummaryPureProps>> = ({
                         )}
                     </div>
 
-                    <div className="w-full flex flex-col lg:flex-row gap-6">
-                        <div className="w-full flex flex-col gap-6">
-                            <InfoCard
-                                title={data.totalValue.title}
-                                value={
-                                    <Typography variant="highlightedBig">
-                                        <Price price={data.totalValue.value} />
-                                    </Typography>
-                                }
-                                description={<Trend value={data.totalValue.trend} />}
-                                icon={data.totalValue.icon}
-                            />
+                    <div
+                        className={cn('w-full flex gap-6', data.chart.showChart ? 'flex-col lg:flex-row' : 'flex-col')}
+                    >
+                        {data.chart.showChart ? (
+                            <>
+                                <div className="w-full flex flex-col gap-6">
+                                    <InfoCard
+                                        title={data.totalValue.title}
+                                        value={
+                                            <Typography variant="highlightedBig">
+                                                <Price price={data.totalValue.value} />
+                                            </Typography>
+                                        }
+                                        description={<Trend value={data.totalValue.trend} />}
+                                        icon={data.totalValue.icon}
+                                    />
 
-                            <div className="w-full flex flex-col sm:flex-row gap-6">
+                                    <div className="w-full flex flex-col sm:flex-row gap-6">
+                                        <InfoCard
+                                            title={data.averageValue.title}
+                                            value={
+                                                <Typography variant="highlightedBig">
+                                                    <Price price={data.averageValue.value} />
+                                                </Typography>
+                                            }
+                                            description={<Trend value={data.averageValue.trend} />}
+                                            icon={data.averageValue.icon}
+                                        />
+                                        <InfoCard
+                                            title={data.averageNumber.title}
+                                            value={
+                                                <Typography variant="highlightedBig">
+                                                    {data.averageNumber.value}
+                                                </Typography>
+                                            }
+                                            description={<Trend value={data.averageNumber.trend} />}
+                                            icon={data.averageNumber.icon}
+                                        />
+                                    </div>
+                                </div>
+                                <Card className="h-full w-full">
+                                    <div className="p-6 flex flex-col gap-6">
+                                        <Typography variant="subtitle">{data.chart.title}</Typography>
+
+                                        <DoubleLineChart
+                                            chartData={data.chart.data}
+                                            legend={data.chart.legend}
+                                            tooltipType="number"
+                                        />
+                                    </div>
+                                </Card>
+                            </>
+                        ) : (
+                            <div className="w-full flex flex-col md:flex-row gap-6">
+                                <InfoCard
+                                    title={data.totalValue.title}
+                                    value={
+                                        <Typography variant="highlightedBig">
+                                            <Price price={data.totalValue.value} />
+                                        </Typography>
+                                    }
+                                    description={<Trend value={data.totalValue.trend} />}
+                                    icon={data.totalValue.icon}
+                                />
                                 <InfoCard
                                     title={data.averageValue.title}
                                     value={
@@ -156,19 +206,7 @@ export const OrdersSummaryPure: React.FC<Readonly<OrdersSummaryPureProps>> = ({
                                     icon={data.averageNumber.icon}
                                 />
                             </div>
-                        </div>
-
-                        <Card className="h-full w-full">
-                            <div className="p-6 flex flex-col gap-6">
-                                <Typography variant="subtitle">{data.chart.title}</Typography>
-
-                                <DoubleLineChart
-                                    chartData={data.chart.data}
-                                    legend={data.chart.legend}
-                                    tooltipType="number"
-                                />
-                            </div>
-                        </Card>
+                        )}
                     </div>
                 </div>
             </LoadingOverlay>

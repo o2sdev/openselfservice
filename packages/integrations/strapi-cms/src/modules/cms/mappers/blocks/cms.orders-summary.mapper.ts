@@ -35,6 +35,7 @@ export const mapOrdersSummaryBlock = (data: GetComponentQuery): CMS.Model.Orders
                         prev: component.chartPreviousPeriodLabel,
                         current: component.chartCurrentPeriodLabel,
                     },
+                    showChart: component.showChart,
                 },
                 ranges: component.ranges?.map((range) => ({
                     label: range.label,

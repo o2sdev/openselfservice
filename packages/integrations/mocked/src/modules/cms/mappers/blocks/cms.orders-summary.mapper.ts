@@ -22,6 +22,7 @@ const MOCK_ORDER_LIST_BLOCK_EN: CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock 
             prev: 'Previous period',
             current: 'Current period',
         },
+        showChart: true,
     },
     noResults: {
         title: "So far, there's nothing here",
@@ -69,6 +70,7 @@ const MOCK_ORDER_LIST_BLOCK_DE: CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock 
             prev: 'Vorheriger Zeitraum',
             current: 'Aktueller Zeitraum',
         },
+        showChart: true,
     },
     noResults: {
         title: 'Bisher gibt es hier nichts',
@@ -111,11 +113,12 @@ const MOCK_ORDER_LIST_BLOCK_PL: CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock 
         icon: 'Package',
     },
     chart: {
-        title: 'Liczba zamówień',
+        title: 'Liczba zamówień123',
         legend: {
             prev: 'Poprzedni okres',
             current: 'Obecny okres',
         },
+        showChart: true,
     },
     noResults: {
         title: 'Jak dotąd nie ma tu nic',
