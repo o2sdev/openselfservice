@@ -60,14 +60,14 @@ export function HeroBannerSection({
     return (
         <div className="relative min-h-[calc(100vh-64px)] flex items-center">
             <div className={clsx('container grid items-center', heroImage ? 'md:grid-cols-2' : 'text-center')}>
-                <div className={clsx(heroImage ? 'lg:w-[560px]' : 'lg:w-[842px] m-auto')}>
+                <div className={clsx(heroImage ? 'lg:w-[515px]' : 'lg:w-[842px] m-auto')}>
                     {heading && <H1 className="mt-12 md:mt-0">{heading}</H1>}
 
                     {Array.isArray(description) ? (
-                        <ul className="space-y-2 !ml-0 !p-0 list-none">
+                        <ul className="space-y-2 ml-0! p-0! list-none">
                             {description.map((item, index) => (
                                 <li key={index} className="flex items-start gap-2">
-                                    <CircleCheckIcon className="h-5 w-5 flex-shrink-0 mt-0.5" />
+                                    <CircleCheckIcon className="h-5 w-5 shrink-0 mt-0.5" />
                                     <span>{item}</span>
                                 </li>
                             ))}
@@ -84,11 +84,11 @@ export function HeroBannerSection({
                                     style={{ justifyContent: 'space-between' }}
                                     onClick={handleCopyClick}
                                 >
-                                    <TerminalIcon className="h-5 w-5 mr-2 flex-shrink-0" />
+                                    <TerminalIcon className="h-5 w-5 mr-2 shrink-0" />
                                     <span className="flex-1 text-left ml-2 mr-2 whitespace-nowrap overflow-hidden text-ellipsis">
                                         {cliCommand}
                                     </span>
-                                    <span className="relative ml-2 h-5 w-5 flex-shrink-0">
+                                    <span className="relative ml-2 h-5 w-5 shrink-0">
                                         <CopyIcon
                                             className={`absolute inset-0 h-5 w-5 transition-opacity duration-200 ${copied ? 'opacity-0' : 'opacity-100'}`}
                                             style={{ pointerEvents: 'none' }}
@@ -154,7 +154,7 @@ export function HeroBannerSection({
                         <img
                             src={heroImage.url}
                             alt={heroImage.alt}
-                            className={`w-full relative h-auto  origin-left origin-center z-[-1] ${
+                            className={`w-full relative h-auto origin-left origin-center z-[-1] ${
                                 isDXPage ? `hidden md:block mt-20 ml-[-250px] scale-[2.6] z-10` : 'scale-[2]'
                             }`}
                         />

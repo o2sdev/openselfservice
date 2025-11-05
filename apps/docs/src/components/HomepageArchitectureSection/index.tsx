@@ -10,23 +10,25 @@ export function HomepageArchitectureSection() {
         <div className="container flex flex-col items-center">
             <div className="grid md:grid-cols-2 gap-14 md:gap-28">
                 <div>
-                    <H2 className="mb-[0]">
-                        Composable architecture <br />
-                        for digital self&nbsp;service solutions
+                    <H2 className="mb-0!">
+                        One framework. Three layers. <span className="text-highlighted">Full flexibility</span>
                     </H2>
                 </div>
-                <div>
-                    <Body>
-                        Open Self&nbsp;Service is designed to simplify the process of creating modern customer portals
-                        that need to integrate many data sources to provide capabilities to the users.
+                <div className="flex flex-col gap-6">
+                    <Body className="mb-0!">
+                        Open Self&nbsp;Service separates content, presentation and integration — enabling gradual
+                        growth.
                     </Body>
-                    <Body className="mb-[0]">
-                        The components we provide allow to build a decoupled, modern & fast frontend application and
-                        connect any API you might need - no matter if it's a CRM, CMS or a headless commerce backend.
-                    </Body>
+                    <a
+                        href={''} // TODO: add link
+                        className="button w-fit"
+                        rel="noopener"
+                    >
+                        <span className="label flex items-center justify-center gap-2">Learn more</span>
+                    </a>
                 </div>
             </div>
-            <div className="mt-14 md:mt-24 w-full flex justify-center">
+            <div className="mt-14 w-full flex justify-center">
                 <img
                     src="/img/homepage/architecture.svg"
                     alt="Architecture illustration"

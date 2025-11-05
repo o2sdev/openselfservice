@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
+import GithubIcon from '@site/src/assets/icons/github.svg';
 import Cerrad from '@site/src/assets/logos/Cerrad.svg';
 import Osadkowski from '@site/src/assets/logos/Osadkowski.svg';
 import { HeroBannerSection } from '@site/src/components/HeroBannerSection';
@@ -12,10 +13,10 @@ import { HomepageUseCases } from '@site/src/components/HomepageUseCases';
 
 import Layout from '@theme/Layout';
 
-import Bosch from '../assets/logos/Bosch.svg';
 import DeutscheTelekom from '../assets/logos/DeutscheTelekom.svg';
 import DormerPramet from '../assets/logos/DormerPramet.svg';
 import Fortum from '../assets/logos/Fortum.svg';
+import Orange from '../assets/logos/Orange.svg';
 import OrangeEnergia from '../assets/logos/OrangeEnergia.svg';
 import { ClientsSection } from '../components/ClientsSection';
 import { Body, BodyBold } from '../components/Typography';
@@ -37,34 +38,33 @@ export default function Home(): ReactNode {
                                 <HeroBannerSection
                                     heading={
                                         <>
-                                            <br /> The Open Source
-                                            <span className="text-highlighted"> Composable Frontend </span>for Customer
-                                            Portals
+                                            <br />
+                                            Build digital platforms for customer support.
+                                            <br />
+                                            <span className="text-highlighted">
+                                                Vendor-agnostic.
+                                                <br /> Flexible. Open.
+                                            </span>
                                         </>
                                     }
                                     description={
-                                        <>
-                                            <Body>
-                                                <b>Open Self Service</b> is an open-source framework for building modern
-                                                customer-facing portals in composable architecture. It helps you
-                                                integrate APIs, unify data, and deliver scalable, high-performance
-                                                self-service experiences using Next.js, TypeScript, and NestJS.
-                                            </Body>
-                                            <Body>
-                                                The framework provides the frontend layer designed to connect with your
-                                                existing backend services or integrate with headless platforms using our
-                                                ready-to-use connectors.
-                                            </Body>
-                                        </>
+                                        <Body>
+                                            Open Self Service is a modular frontend layer for composable customer
+                                            portals, support apps, and digital self-service platforms.
+                                            <br />
+                                            Connect it to your own APIs or use our growing set of ready-made
+                                            integrations to accelerate development and optimize customer experience.
+                                        </Body>
                                     }
-                                    cliCommand="npx create-o2s-app"
+                                    cliCommand="npx create-dxp-app"
                                     mainLink={{
-                                        text: 'See our demo app',
-                                        url: 'https://demo.openselfservice.com',
+                                        text: 'Explore app starters',
+                                        url: 'https://demo.openselfservice.com', // TODO: add link to app starters
                                     }}
                                     secondaryLink={{
-                                        text: 'Star us on GitHub',
+                                        text: 'See on GitHub',
                                         url: 'https://github.com/o2sdev/openselfservice',
+                                        iconLeft: <GithubIcon />,
                                     }}
                                     heroImage={{
                                         url: '/img/homepage/banner.png',
@@ -72,17 +72,15 @@ export default function Home(): ReactNode {
                                     }}
                                 />
 
-                                <section className="pr-4 pl-4 mb-40 scroll-m-[120px]">
+                                <section className="px-4 mb-40 scroll-m-[120px]">
                                     <ClientsSection
                                         lead={
-                                            <>
-                                                <Body>
-                                                    We’ve spent over a decade designing, building, and operating
-                                                    self-service portals and digital platforms across industries. Our
-                                                    experience spans telecom, energy, manufacturing, and financial
-                                                    services — with solutions used by millions of end users.
-                                                </Body>
-                                            </>
+                                            <Body>
+                                                We’ve spent over a decade designing, building, and operating
+                                                self-service portals and digital platforms across industries. Our
+                                                experience spans telecom, energy, manufacturing, and financial services
+                                                — with solutions used by millions of end users.
+                                            </Body>
                                         }
                                         clients={[
                                             { name: 'Orange Energia', img: <OrangeEnergia /> },
@@ -91,19 +89,19 @@ export default function Home(): ReactNode {
                                             { name: 'Dormer Pramet', img: <DormerPramet /> },
                                             { name: 'Cerrad', img: <Cerrad /> },
                                             { name: 'Deutsche Telekom', img: <DeutscheTelekom /> },
-                                            { name: 'Bosch', img: <Bosch /> },
+                                            { name: 'Orange', img: <Orange /> },
                                         ]}
                                     />
                                 </section>
 
                                 <HomepageArchitectureSection />
-                                <HomepageUseCases />
+                                {/* <HomepageUseCases /> */}
                             </div>
                         </div>
                     </div>
 
-                    <HomepageAboutSection />
-                    <HomepageBenefitsSection />
+                    {/* <HomepageAboutSection /> */}
+                    {/* <HomepageBenefitsSection /> */}
                 </div>
             </Layout>
         </div>
