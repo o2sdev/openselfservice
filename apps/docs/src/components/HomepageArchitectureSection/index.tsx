@@ -7,7 +7,7 @@ import { Body, H2 } from '../Typography';
 export function HomepageArchitectureSection() {
     const { siteConfig } = useDocusaurusContext();
     return (
-        <div className="container flex flex-col items-center">
+        <section className="px-4 flex flex-col items-center">
             <div className="grid md:grid-cols-2 gap-14 md:gap-28">
                 <div>
                     <H2 className="mb-0!">
@@ -40,6 +40,6 @@ export function HomepageArchitectureSection() {
                     className="block md:hidden"
                 />
             </div>
-        </div>
+        </section>
     );
 }
