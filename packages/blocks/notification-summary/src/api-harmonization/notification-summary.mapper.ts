@@ -1,6 +1,6 @@
 import { CMS, Notifications } from '@o2s/configs.integrations';
 
-import { NotificationSummaryBlock } from './notification-summary.model';
+import { NotificationSummaryBlock, NotificationSummaryInfoCard } from './notification-summary.model';
 
 export const mapNotificationSummary = (
     cms: CMS.Model.NotificationSummaryBlock.NotificationSummaryBlock,
@@ -15,51 +15,49 @@ export const mapNotificationSummary = (
         {} as Record<'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL', number>,
     );
 
-    const result: NotificationSummaryBlock = {
-        __typename: 'NotificationSummaryBlock',
-        id: cms.id,
-        layout: cms.layout,
-    };
-
-    if (cms.high) {
-        result.high = {
-            title: cms.high.title,
-            icon: cms.high.icon,
-            value: priorityCounts.HIGH || 0,
-            description: cms.high.message,
-            color: 'text-destructive',
-        };
-    }
-
-    if (cms.medium) {
-        result.medium = {
-            title: cms.medium.title,
-            icon: cms.medium.icon,
-            value: priorityCounts.MEDIUM || 0,
-            description: cms.medium.message,
-            color: 'text-badge-secondary-background',
-        };
-    }
-
-    if (cms.low) {
-        result.low = {
-            title: cms.low.title,
-            icon: cms.low.icon,
-            value: priorityCounts.LOW || 0,
-            description: cms.low.message,
-            color: 'text-muted-foreground',
-        };
-    }
+    const infoCards: NotificationSummaryInfoCard[] = [];
 
     if (cms.critical) {
-        result.critical = {
+        infoCards.push({
             title: cms.critical.title,
             icon: cms.critical.icon,
             value: priorityCounts.CRITICAL || 0,
             description: cms.critical.message,
             color: 'text-destructive',
-        };
+        });
+    }
+    if (cms.high) {
+        infoCards.push({
+            title: cms.high.title,
+            icon: cms.high.icon,
+            value: priorityCounts.HIGH || 0,
+            description: cms.high.message,
+            color: 'text-destructive',
+        });
+    }
+    if (cms.medium) {
+        infoCards.push({
+            title: cms.medium.title,
+            icon: cms.medium.icon,
+            value: priorityCounts.MEDIUM || 0,
+            description: cms.medium.message,
+            color: 'text-badge-secondary-background',
+        });
+    }
+    if (cms.low) {
+        infoCards.push({
+            title: cms.low.title,
+            icon: cms.low.icon,
+            value: priorityCounts.LOW || 0,
+            description: cms.low.message,
+            color: 'text-muted-foreground',
+        });
     }
 
-    return result;
+    return {
+        __typename: 'NotificationSummaryBlock',
+        id: cms.id,
+        layout: cms.layout,
+        infoCards,
+    };
 };
