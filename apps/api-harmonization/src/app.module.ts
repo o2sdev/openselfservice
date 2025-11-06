@@ -34,6 +34,7 @@ import * as FeaturedServiceList from '@o2s/blocks.featured-service-list/api-harm
 import * as InvoiceList from '@o2s/blocks.invoice-list/api-harmonization';
 import * as NotificationDetails from '@o2s/blocks.notification-details/api-harmonization';
 import * as NotificationList from '@o2s/blocks.notification-list/api-harmonization';
+import * as NotificationSummary from '@o2s/blocks.notification-summary/api-harmonization';
 import * as OrderDetails from '@o2s/blocks.order-details/api-harmonization';
 import * as OrderList from '@o2s/blocks.order-list/api-harmonization';
 import * as OrdersSummary from '@o2s/blocks.orders-summary/api-harmonization';
@@ -133,6 +134,7 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
         ArticleSearch.Module.register(AppConfig),
         FeaturedServiceList.Module.register(AppConfig),
         ArticleList.Module.register(AppConfig),
+        NotificationSummary.Module.register(AppConfig),
         // BLOCK REGISTER
     ],
     providers: [
