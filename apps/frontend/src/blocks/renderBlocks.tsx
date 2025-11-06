@@ -24,7 +24,9 @@ import * as SurveyJsForm from '@o2s/blocks.surveyjs-form/frontend';
 import * as TicketDetails from '@o2s/blocks.ticket-details/frontend';
 import * as TicketList from '@o2s/blocks.ticket-list/frontend';
 import * as TickeRecent from '@o2s/blocks.ticket-recent/frontend';
+import * as TicketSummary from '@o2s/blocks.ticket-summary/frontend';
 import * as UserAccount from '@o2s/blocks.user-account/frontend';
+// BLOCK IMPORT
 import { getLocale } from 'next-intl/server';
 import React from 'react';
 
@@ -34,7 +36,6 @@ import { Container } from '@o2s/ui/components/Container';
 
 import { auth } from '@/auth';
 
-// BLOCK IMPORT
 import { routing } from '@/i18n';
 
 import { onSignOut } from '../actions/signOut';
@@ -132,6 +133,8 @@ const renderBlock = (typename: string, blockProps: BlockProps) => {
             return <FeaturedServiceList.Renderer {...blockProps} />;
         case 'NotificationSummaryBlock':
             return <NotificationSummary.Renderer {...blockProps} />;
+        case 'TicketSummaryBlock':
+            return <TicketSummary.Renderer {...blockProps} />;
         // BLOCK REGISTER
         default:
             return null;

@@ -25,6 +25,7 @@ import { mapSurveyJsBlock } from './mappers/blocks/cms.surveyjs-block.mapper';
 import { mapTicketDetailsBlock } from './mappers/blocks/cms.ticket-details.mapper';
 import { mapTicketListBlock } from './mappers/blocks/cms.ticket-list.mapper';
 import { mapTicketRecentBlock } from './mappers/blocks/cms.ticket-recent.mapper';
+import { mapTicketSummaryBlock } from './mappers/blocks/cms.ticket-summary.mapper';
 import { mapUserAccountBlock } from './mappers/blocks/cms.user-account.mapper';
 import { mapAppConfig } from './mappers/cms.app-config.mapper';
 import { mapCategoryListBlock } from './mappers/cms.category-list.mapper';
@@ -191,5 +192,9 @@ export class CmsService implements CMS.Service {
 
     getFeaturedServiceListBlock(options: CMS.Request.GetCmsEntryParams) {
         return of(mapFeaturedServiceListBlock(options.locale)).pipe(responseDelay());
+    }
+
+    getTicketSummaryBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapTicketSummaryBlock(options.locale)).pipe(responseDelay());
     }
 }

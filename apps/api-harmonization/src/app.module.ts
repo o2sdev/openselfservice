@@ -47,11 +47,13 @@ import * as SurveyJsForm from '@o2s/blocks.surveyjs-form/api-harmonization';
 import * as TicketDetails from '@o2s/blocks.ticket-details/api-harmonization';
 import * as TicketList from '@o2s/blocks.ticket-list/api-harmonization';
 import * as TicketRecent from '@o2s/blocks.ticket-recent/api-harmonization';
+import * as TicketSummary from '@o2s/blocks.ticket-summary/api-harmonization';
 import * as UserAccount from '@o2s/blocks.user-account/api-harmonization';
+
+// BLOCK IMPORT
 
 import { configuration } from '@o2s/api-harmonization/config/configuration';
 
-// BLOCK IMPORT
 import { AppConfig } from './app.config';
 import { AppService } from './app.service';
 import { ContextHeadersMiddleware } from './middleware/context-headers.middleware';
@@ -135,6 +137,7 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
         FeaturedServiceList.Module.register(AppConfig),
         ArticleList.Module.register(AppConfig),
         NotificationSummary.Module.register(AppConfig),
+        TicketSummary.Module.register(AppConfig),
         // BLOCK REGISTER
     ],
     providers: [

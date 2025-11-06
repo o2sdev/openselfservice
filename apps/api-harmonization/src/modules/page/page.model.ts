@@ -23,7 +23,10 @@ import * as Surveyjs from '@o2s/blocks.surveyjs-form/api-harmonization';
 import * as TicketDetails from '@o2s/blocks.ticket-details/api-harmonization';
 import * as TicketList from '@o2s/blocks.ticket-list/api-harmonization';
 import * as TicketRecent from '@o2s/blocks.ticket-recent/api-harmonization';
+import * as TicketSummary from '@o2s/blocks.ticket-summary/api-harmonization';
 import * as UserAccount from '@o2s/blocks.user-account/api-harmonization';
+
+// BLOCK IMPORT
 
 export class Init {
     locales!: {
@@ -74,6 +77,7 @@ export class PageData {
 
 export type Blocks =
     // BLOCK REGISTER
+    | TicketSummary.Model.TicketSummaryBlock['__typename']
     | NotificationSummary.Model.NotificationSummaryBlock['__typename']
     | ArticleList.Model.ArticleListBlock['__typename']
     | Category.Model.CategoryBlock['__typename']
