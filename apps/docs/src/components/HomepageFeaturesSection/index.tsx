@@ -74,7 +74,7 @@ export function HomepageFeaturesSection() {
             </H2>
 
             <div className="w-full flex flex-col md:flex-row rounded-[20px] overflow-hidden">
-                <div className="flex-1 bg-[rgba(255,255,255,0.1)] p-10 rounded-t-[20px] md:rounded-tl-[20px] md:rounded-bl-[20px] md:rounded-tr-none md:rounded-br-none">
+                <div className="flex-1 bg-white/10 p-10 rounded-t-[20px] md:rounded-tl-[20px] md:rounded-bl-[20px] md:rounded-tr-none md:rounded-br-none">
                     <div className="flex flex-col gap-6">
                         <H3 className="mb-0!">For Developers</H3>
                         <ul className="flex flex-col gap-2 list-none p-0! m-0!">

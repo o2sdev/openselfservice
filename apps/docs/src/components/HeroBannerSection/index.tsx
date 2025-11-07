@@ -10,6 +10,10 @@ import { H1 } from '../Typography';
 interface HeroBannerSectionProps {
     heading?: ReactNode;
     description: ReactNode | ReactNode[];
+    badge?: {
+        text: string;
+        icon?: ReactNode;
+    };
     cliCommand?: string;
     mainLink?: {
         text: string;
@@ -42,6 +46,7 @@ interface HeroBannerSectionProps {
 export function HeroBannerSection({
     heading,
     description,
+    badge,
     cliCommand,
     mainLink,
     secondaryLink,
@@ -61,6 +66,16 @@ export function HeroBannerSection({
         <div className="relative min-h-[calc(100vh-64px)] flex items-center">
             <div className={clsx('container grid items-center', heroImage ? 'md:grid-cols-2' : 'text-center')}>
                 <div className={clsx(heroImage ? 'lg:w-[515px]' : 'lg:w-[842px] m-auto')}>
+                    {badge && (
+                        <div className="flex justify-center mb-12">
+                            <div className="bg-white/10 border border-white rounded-full px-4 py-2 h-10 flex items-center justify-center gap-2">
+                                {badge.icon && (
+                                    <span className="w-6 h-6 flex items-center justify-center">{badge.icon}</span>
+                                )}
+                                <span className="text-white text-sm font-medium leading-[1.3]">{badge.text}</span>
+                            </div>
+                        </div>
+                    )}
                     {heading && <H1 className="mt-12 md:mt-0">{heading}</H1>}
 
                     {Array.isArray(description) ? (
