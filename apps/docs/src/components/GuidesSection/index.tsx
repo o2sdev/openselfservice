@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import React, { type ReactNode } from 'react';
 
 import HistoryIcon from '../../assets/icons/History.svg';
-import { FeatureCard } from '../FeatureCard';
+import { FeatureTile } from '../FeatureTile';
 import { Body, BodySmall, H2, H3 } from '../Typography';
 
 export interface Guide {
@@ -40,7 +40,7 @@ export const GuidesSection: React.FC<GuidesSectionProps> = ({ title, guides, inf
                 <ul className="list-none p-0! m-0! flex flex-col gap-4 w-full">
                     {guides.map((guide, index) => (
                         <li key={index}>
-                            <FeatureCard
+                            <FeatureTile
                                 icon={guide.icon}
                                 title={guide.title}
                                 description={guide.description}

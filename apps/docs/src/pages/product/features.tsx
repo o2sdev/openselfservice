@@ -9,7 +9,7 @@ import LayoutDashboardGreenTileIcon from '@site/src/assets/icons/LayoutDashboard
 import ScalingGreenTileIcon from '@site/src/assets/icons/ScalingGreenTile.svg';
 import StarIcon from '@site/src/assets/icons/Star.svg';
 import WaypointsPurpleTileIcon from '@site/src/assets/icons/WaypointsPurpleTile.svg';
-import { FeatureCardsList } from '@site/src/components/FeatureCardsList';
+import { FeatureTileList } from '@site/src/components/FeatureTile';
 import { HeroBannerSection } from '@site/src/components/HeroBannerSection';
 import { Body, H2 } from '@site/src/components/Typography';
 
@@ -102,11 +102,11 @@ export default function ProductFeatures() {
                                         Key <span className="text-highlighted">Benefits</span>
                                     </H2>
                                     <div className="flex flex-col lg:flex-row gap-8 w-full">
-                                        <FeatureCardsList
+                                        <FeatureTileList
                                             title={keyBenefits.developers.title}
                                             features={keyBenefits.developers.features}
                                         />
-                                        <FeatureCardsList
+                                        <FeatureTileList
                                             title={keyBenefits.digitalTeams.title}
                                             features={keyBenefits.digitalTeams.features}
                                         />

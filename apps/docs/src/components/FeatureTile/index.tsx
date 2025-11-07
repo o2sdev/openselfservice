@@ -2,19 +2,18 @@ import clsx from 'clsx';
 import React from 'react';
 
 import Badge from '../Badge';
-import { BodyBold, BodySmall } from '../Typography';
+import { BodyBold, BodySmall, H3 } from '../Typography';
 
-export interface FeatureCardProps {
+export interface FeatureTileProps {
     icon?: React.ReactNode;
     title: string;
     description?: string;
     badge?: string;
-    className?: string;
 }
 
-export const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description, badge, className }) => {
+export const FeatureTile: React.FC<FeatureTileProps> = ({ icon, title, description, badge }) => {
     return (
-        <div className={clsx('card-base', className)}>
+        <div className={clsx('card-base')}>
             <div className="flex justify-between p-6 w-full h-full">
                 <div className="flex gap-6 flex-1 w-full">
                     {icon && <div className="flex items-center justify-center">{icon}</div>}
@@ -31,6 +30,26 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, descripti
                     </div>
                 )}
             </div>
+        </div>
+    );
+};
+
+export interface FeatureTileListProps {
+    title: string;
+    features: FeatureTileProps[];
+}
+
+export const FeatureTileList: React.FC<FeatureTileListProps> = ({ title, features }) => {
+    return (
+        <div className="flex flex-col gap-4 flex-1">
+            <H3 className="mb-0!">{title}</H3>
+            <ul className="list-none p-0! m-0! flex flex-col gap-4">
+                {features.map((feature, index) => (
+                    <li key={index}>
+                        <FeatureTile icon={feature.icon} title={feature.title} description={feature.description} />
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 };
