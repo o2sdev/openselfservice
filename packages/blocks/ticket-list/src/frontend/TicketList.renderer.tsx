@@ -13,9 +13,8 @@ export const TicketListRenderer: React.FC<TicketListRendererProps> = ({ id, acce
         <Suspense
             key={id}
             fallback={
-                <div className="w-full flex flex-col gap-6">
+                <div className="w-full flex">
                     <Loading bars={1} />
-                    <Loading bars={[15, 17]} />
                 </div>
             }
         >
