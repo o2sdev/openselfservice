@@ -1,5 +1,5 @@
 import { DynamicModule, Module } from '@nestjs/common';
-import { CMS } from '@o2s/configs.integrations';
+import { CMS, Tickets } from '@o2s/configs.integrations';
 
 import * as Framework from '@o2s/framework/modules';
 
@@ -16,6 +16,10 @@ export class TicketSummaryBlockModule {
                 {
                     provide: CMS.Service,
                     useExisting: Framework.CMS.Service,
+                },
+                {
+                    provide: Tickets.Service,
+                    useExisting: Framework.Tickets.Service,
                 },
             ],
             controllers: [TicketSummaryController],
