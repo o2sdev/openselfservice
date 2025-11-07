@@ -40,7 +40,7 @@ export const BenefitCard: React.FC<BenefitCardProps> = ({
                 <>
                     <div className={clsx('flex items-start w-full')}>
                         <Body className="flex-1 text-sm text-white font-medium">{team}</Body>
-                        <div className={clsx('flex-shrink-0', 'w-4 h-4')}>{icon}</div>
+                        <div className={clsx('shrink-0', 'w-4 h-4')}>{icon}</div>
                     </div>
                     <H3 className="text-2xl font-bold leading-8 text-white w-full mt-auto mb-0!">{title}</H3>
                 </>
@@ -49,7 +49,7 @@ export const BenefitCard: React.FC<BenefitCardProps> = ({
             {!team && !description && (
                 <>
                     <div className={clsx('flex items-start w-full')}>
-                        <div className={clsx('flex-shrink-0')}>{icon}</div>
+                        <div className={clsx('shrink-0')}>{icon}</div>
                     </div>
                     <H3 className="text-2xl font-bold leading-8 text-white w-full mt-auto mb-0!">{title}</H3>
                 </>
@@ -59,7 +59,7 @@ export const BenefitCard: React.FC<BenefitCardProps> = ({
                 <>
                     <div className={clsx('flex items-start gap-4 w-full')}>
                         <H3 className="text-2xl font-bold leading-8 text-white w-full mt-auto mb-0!">{title}</H3>
-                        <div className={clsx('flex-shrink-0')}>{icon}</div>
+                        <div className={clsx('shrink-0')}>{icon}</div>
                     </div>
                 </>
             )}
