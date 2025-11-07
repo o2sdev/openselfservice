@@ -15,6 +15,7 @@ import { HeroBannerSection } from '@site/src/components/HeroBannerSection';
 import { HomepageAboutSection } from '@site/src/components/HomepageAboutSection';
 import { HomepageArchitectureSection } from '@site/src/components/HomepageArchitectureSection';
 import { HomepageBenefitsSection } from '@site/src/components/HomepageBenefitsSection';
+import { HomepageFeaturesSection } from '@site/src/components/HomepageFeaturesSection';
 import { HomepageStartersSection } from '@site/src/components/HomepageStartersSection';
 import { HomepageUseCases } from '@site/src/components/HomepageUseCases';
 import { Body, BodyBold } from '@site/src/components/Typography';
@@ -96,6 +97,7 @@ export default function Home(): ReactNode {
                                     </section>
 
                                     <HomepageStartersSection />
+                                    <HomepageFeaturesSection />
                                     <HomepageArchitectureSection />
                                     {/* <HomepageUseCases /> */}
                                 </div>
