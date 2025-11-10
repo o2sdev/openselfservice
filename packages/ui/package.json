@@ -65,7 +65,7 @@
         "react-day-picker": "^9.11.1",
         "markdown-to-jsx": "^7.7.17",
         "react-indiana-drag-scroll": "^2.2.1",
-        "recharts": "^2.15.4",
+        "recharts": "^3.4.1",
         "tailwind-merge": "^3.3.1",
         "tailwindcss-animate": "^1.0.7"
     },
