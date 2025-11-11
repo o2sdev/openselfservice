@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React from 'react';
 
 import ArrowLeftRightGreenTileIcon from '@site/src/assets/icons/ArrowLeftRightGreenTile.svg';
@@ -11,7 +12,7 @@ import StarIcon from '@site/src/assets/icons/Star.svg';
 import WaypointsPurpleTileIcon from '@site/src/assets/icons/WaypointsPurpleTile.svg';
 import { FeatureTileList } from '@site/src/components/FeatureTile';
 import { HeroBannerSection } from '@site/src/components/HeroBannerSection';
-import { Body, H2 } from '@site/src/components/Typography';
+import { Body, H2, H3 } from '@site/src/components/Typography';
 
 import Layout from '@theme/Layout';
 
@@ -70,6 +71,108 @@ const keyBenefits = {
     },
 };
 
+const technicalCapabilities = [
+    {
+        title: 'Frontend App',
+        features: [
+            {
+                title: 'Next.js',
+                description: 'based frontend for great performance and developer experience.',
+            },
+            {
+                title: 'TypeScript',
+                description: 'full-stack TypeScript support out of the box.',
+            },
+            {
+                title: 'Tailwind and shadcn/ui',
+                description: 'large UI component library and solid tools for rapid UI development.',
+            },
+            {
+                title: 'Next-intl',
+                description: 'for Internationalization and localization with.',
+            },
+            {
+                title: 'Tailwind + UI tokens',
+                description: 'for Ui customization, theming and branding.',
+            },
+            {
+                title: '90+ Google Lighthouse scores',
+                description: 'for performance, accessibility, SEO, and best practices audits.',
+            },
+            {
+                title: 'Built-in authentication',
+                description: 'Auth.js-based authentication providers support.',
+            },
+            {
+                title: 'Dynamic, CMS-powered page composition',
+                description: 'page structure and component configuration built-in, managed via headless CMS-s.',
+            },
+        ],
+    },
+    {
+        title: 'API Harmonization Layer',
+        features: [
+            {
+                title: 'NestJS integration middleware',
+                description:
+                    'A powerful backend-for-frontend written in NestJS and TypeScript, ready for composable integrations.',
+            },
+            {
+                title: 'Data orchestration and aggregation',
+                description: 'Orchestrate requests and aggregate data from multiple sources.',
+            },
+            {
+                title: 'API normalization',
+                description: 'normalized frontend data model and stay vendor independent.',
+            },
+            {
+                title: 'Event-driven with RxJS',
+                description: 'Use reactive programming patterns for real-time updates and external triggers.',
+            },
+            {
+                title: 'Backend-agnostic frontend',
+                description: 'Swap APIs without changing the frontend.',
+            },
+        ],
+    },
+    {
+        title: 'Developer Experience',
+        features: [
+            {
+                title: 'TypeScript SDK',
+                description: 'for easy, type-safe API consumption.',
+            },
+            {
+                title: 'CLI app scaffolding',
+                description: 'Use our CLI to scaffold a full project in seconds.',
+            },
+            {
+                title: 'Docker-ready deployment',
+                description: 'Preconfigured Docker & Docker Compose setup for local and cloud deployments.',
+            },
+            {
+                title: 'Optimized monorepo tooling',
+                description: 'Use Turborepo with fast dev workflows, hot reload and modular builds.',
+            },
+            {
+                title: 'Storybook',
+                description: 'Browse and test our UI components with built-in Storybook integration.',
+            },
+            {
+                title: 'Code quality tooling',
+                description: 'Enforced code style and linting with ESLint, Prettier, and CI-ready configs.',
+            },
+            {
+                title: 'Integrations with headless APIs',
+                description: 'Many integrations come OOTB. Easily add your own with our built-in extension methods.',
+            },
+            {
+                title: 'Renovate bot',
+                description: 'Stay secure and up-to-date with Renovate preconfigured for monorepo environments.',
+            },
+        ],
+    },
+];
 export default function ProductFeatures() {
     return (
         <Layout title="Features">
@@ -112,7 +215,32 @@ export default function ProductFeatures() {
                                         />
                                     </div>
                                 </section>
-                                <div>TECHNICAL CAPABILITIES BY COMPONENT here</div>
+                                <section className="px-4 flex flex-col gap-20 w-full">
+                                    <H2 className="mb-0!">
+                                        <span className="text-highlighted">Technical Capabilities</span> by Component
+                                    </H2>
+                                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full">
+                                        {technicalCapabilities.map((component, componentIndex) => (
+                                            <div key={componentIndex} className="flex flex-col gap-8">
+                                                <H3 className="mb-0!">{component.title}</H3>
+                                                <ul className="list-none p-0! m-0! flex flex-col gap-4">
+                                                    {component.features.map((feature, featureIndex) => (
+                                                        <li key={featureIndex}>
+                                                            <div className={clsx('card-base card-light-bg p-6!')}>
+                                                                <div className="flex flex-col gap-2">
+                                                                    <h4 className="m-0! text-2xl! text-current! font-semibold! leading-9!">
+                                                                        {feature.title}
+                                                                    </h4>
+                                                                    <Body className="mb-0!">{feature.description}</Body>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </section>
                                 <div>FUNCTIONAL BLOCKS here</div>
                                 <div>Footer section here</div>
                             </div>
