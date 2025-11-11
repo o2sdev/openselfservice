@@ -6,6 +6,7 @@ import { Body, BodySmall, H2, H3 } from '../Typography';
 
 export interface BenefitsSectionProps {
     title?: React.ReactNode;
+    description?: React.ReactNode;
     benefits: BenefitCardProps[];
 }
 
@@ -77,10 +78,13 @@ export const BenefitCard: React.FC<BenefitCardProps> = ({
     );
 };
 
-export const BenefitsSection: React.FC<BenefitsSectionProps> = ({ title, benefits }) => {
+export const BenefitsSection: React.FC<BenefitsSectionProps> = ({ title, description, benefits }) => {
     return (
-        <div className="flex flex-col items-start justify-start w-full">
-            {title && <H2 className="text-3xl text-white w-full">{title}</H2>}
+        <div className="flex flex-col items-start justify-start w-full gap-20">
+            <div className="flex flex-col gap-6">
+                {title && <H2 className="mb-0! text-3xl text-white w-full">{title}</H2>}
+                {description && <Body className="mb-0! text-white w-full">{description}</Body>}
+            </div>
 
             <div className="grid lg:grid-cols-3 gap-8 w-full">
                 {benefits.map((benefit, index) => (
