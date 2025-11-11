@@ -20,6 +20,7 @@ import { mapResourceDetailsBlock } from './mappers/blocks/cms.resource-details.m
 import { mapResourceListBlock } from './mappers/blocks/cms.resource-list.mapper';
 import { mapServiceDetailsBlock } from './mappers/blocks/cms.service-details.mapper';
 import { mapServiceListBlock } from './mappers/blocks/cms.service-list.mapper';
+import { mapProductListBlock } from './mappers/blocks/cms.product-list.mapper';
 import { mapSurveyJsBlock } from './mappers/blocks/cms.surveyjs-block.mapper';
 import { mapTicketDetailsBlock } from './mappers/blocks/cms.ticket-details.mapper';
 import { mapTicketListBlock } from './mappers/blocks/cms.ticket-list.mapper';
@@ -122,6 +123,10 @@ export class CmsService implements CMS.Service {
 
     getResourceDetailsBlock(_options: CMS.Request.GetCmsEntryParams) {
         return of(mapResourceDetailsBlock()).pipe(responseDelay());
+    }
+
+    getProductListBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapProductListBlock(options.locale)).pipe(responseDelay());
     }
 
     getPaymentsSummaryBlock(options: CMS.Request.GetCmsEntryParams) {

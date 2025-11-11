@@ -32,6 +32,7 @@ import { mapResourceDetailsBlock } from './mappers/blocks/cms.resource-details.m
 import { mapResourceListBlock } from './mappers/blocks/cms.resource-list.mapper';
 import { mapServiceDetailsBlock } from './mappers/blocks/cms.service-details.mapper';
 import { mapServiceListBlock } from './mappers/blocks/cms.service-list.mapper';
+import { mapProductListBlock } from './mappers/blocks/cms.product-list.mapper';
 import { mapSurveyJsBlock } from './mappers/blocks/cms.surveyjs-block.mapper';
 import { mapTicketDetailsBlock } from './mappers/blocks/cms.ticket-details.mapper';
 import { mapTicketListBlock } from './mappers/blocks/cms.ticket-list.mapper';
@@ -346,6 +347,11 @@ export class CmsService implements CMS.Service {
     getResourceDetailsBlock(options: CMS.Request.GetCmsEntryParams) {
         const key = `resource-details-component-${options.id}-${options.locale}`;
         return this.getCachedBlock(key, () => of(mapResourceDetailsBlock()));
+    }
+
+    getProductListBlock(options: CMS.Request.GetCmsEntryParams) {
+        const key = `product-list-component-${options.id}-${options.locale}`;
+        return this.getCachedBlock(key, () => of(mapProductListBlock(undefined, options.locale)));
     }
 
     getInvoiceListBlock(options: CMS.Request.GetCmsEntryParams) {

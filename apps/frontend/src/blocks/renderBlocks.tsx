@@ -1,5 +1,6 @@
 'use server';
 
+import * as ProductList from '@dxp/blocks.product-list/frontend';
 import { Modules } from '@o2s/api-harmonization';
 import * as ArticleList from '@o2s/blocks.article-list/frontend';
 import * as ArticleSearch from '@o2s/blocks.article-search/frontend';
@@ -129,6 +130,8 @@ const renderBlock = (typename: string, blockProps: BlockProps) => {
             return <ArticleSearch.Renderer {...blockProps} />;
         case 'FeaturedServiceListBlock':
             return <FeaturedServiceList.Renderer {...blockProps} />;
+        case 'ProductListBlock':
+            return <ProductList.Renderer {...blockProps} />;
         // BLOCK REGISTER
         default:
             return null;

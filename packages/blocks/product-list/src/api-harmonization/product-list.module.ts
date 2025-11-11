@@ -1,0 +1,29 @@
+import { CMS, Products } from '@o2s/configs.integrations';
+import { DynamicModule, Module } from '@nestjs/common';
+
+import * as Framework from '@o2s/framework/modules';
+
+import { ProductListController } from './product-list.controller';
+import { ProductListService } from './product-list.service';
+
+@Module({})
+export class ProductListBlockModule {
+    static register(_config: Framework.ApiConfig): DynamicModule {
+        return {
+            module: ProductListBlockModule,
+            providers: [
+                ProductListService,
+                {
+                    provide: CMS.Service,
+                    useExisting: Framework.CMS.Service,
+                },
+                {
+                    provide: Products.Service,
+                    useExisting: Framework.Products.Service,
+                },
+            ],
+            controllers: [ProductListController],
+            exports: [ProductListService],
+        };
+    }
+}
