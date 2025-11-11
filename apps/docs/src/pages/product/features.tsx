@@ -11,6 +11,7 @@ import ScalingGreenTileIcon from '@site/src/assets/icons/ScalingGreenTile.svg';
 import StarIcon from '@site/src/assets/icons/Star.svg';
 import WaypointsPurpleTileIcon from '@site/src/assets/icons/WaypointsPurpleTile.svg';
 import { FeatureTileList } from '@site/src/components/FeatureTile';
+import { FooterSection } from '@site/src/components/FooterSection';
 import { HeroBannerSection } from '@site/src/components/HeroBannerSection';
 import { Body, H2, H3 } from '@site/src/components/Typography';
 
@@ -178,10 +179,10 @@ export default function ProductFeatures() {
         <Layout title="Features">
             <div className={styles.linearGradient}>
                 <div style={{ overflow: 'hidden' }}>
-                    <div className={styles.gradientWrapper}>
-                        {/* TODO: add new gradient circle here */}
-                        <div className={styles.gradientCircleBlue} />
-                        <main className={styles.mainContentWrapper}>
+                    <main className={styles.mainContentWrapper}>
+                        <div className={styles.gradientWrapper}>
+                            {/* TODO: add new gradient circle here */}
+                            <div className={styles.gradientCircleBlue} />
                             <HeroBannerSection
                                 badge={{
                                     text: 'Product Features',
@@ -199,7 +200,7 @@ export default function ProductFeatures() {
                                     </Body>
                                 }
                             />
-                            <div className="flex flex-col gap-y-40 pb-16">
+                            <div className="flex flex-col gap-y-40 pb-40">
                                 <section className="px-4 flex flex-col gap-20 w-full">
                                     <H2 className="mb-0!">
                                         Key <span className="text-highlighted">Benefits</span>
@@ -241,11 +242,36 @@ export default function ProductFeatures() {
                                         ))}
                                     </div>
                                 </section>
-                                <div>FUNCTIONAL BLOCKS here</div>
-                                <div>Footer section here</div>
+                                <section className="px-4 flex flex-col gap-20 w-full">
+                                    <div className="grid md:grid-cols-2 gap-14 md:gap-28">
+                                        <H2 className="mb-0!">Functional Blocks</H2>
+                                        <Body className="mb-0!">
+                                            Use functional blocks to speed up development and add essential
+                                            customer-support features.
+                                        </Body>
+                                    </div>
+                                    <div>Functional Blocks: in progress...</div>
+                                </section>
                             </div>
-                        </main>
-                    </div>
+                        </div>
+                        <div className="section-gradient-2 px-4 py-40 mb-0!">
+                            <section className="mb-0!">
+                                <FooterSection
+                                    title="Want to connect your own APIs?"
+                                    description={
+                                        <>
+                                            Go to the <a href="/product/integrations">Integrations</a> page to learn
+                                            more about supported services and how to add your own.
+                                        </>
+                                    }
+                                    primaryButton={{
+                                        text: 'Integrations',
+                                        url: '/product/integrations',
+                                    }}
+                                />
+                            </section>
+                        </div>
+                    </main>
                 </div>
             </div>
         </Layout>
