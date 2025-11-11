@@ -1,9 +1,16 @@
-import { Pagination, Price } from '@/utils/models';
-import { Media } from '@/utils/models';
+import { Media, Pagination, Price } from '@/utils/models';
 
 export type ProductType = 'PHYSICAL' | 'VIRTUAL';
 
 export type ProductReferenceType = 'SPARE_PART' | 'REPLACEMENT' | 'COMPATIBLE_SERVICE';
+
+export type ProductAvailability = 'IN_STOCK' | 'LOW_STOCK' | 'OUT_OF_STOCK' | 'PREORDER';
+
+export type ProductRating = {
+    value: number;
+    max?: number;
+    count?: number;
+};
 
 export class Product {
     id!: string;
@@ -17,6 +24,9 @@ export class Product {
     link!: string;
     type!: ProductType;
     category!: string;
+    availability?: ProductAvailability;
+    stock?: number;
+    rating?: ProductRating;
     tags!: {
         label: string;
         variant: string;

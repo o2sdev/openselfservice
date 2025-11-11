@@ -50,6 +50,7 @@ import * as UserAccount from '@o2s/blocks.user-account/api-harmonization';
 
 import { configuration } from '@o2s/api-harmonization/config/configuration';
 
+import * as ProductList from '@dxp/blocks.product-list/api-harmonization';
 // BLOCK IMPORT
 import { AppConfig } from './app.config';
 import { AppService } from './app.service';
@@ -133,6 +134,7 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
         ArticleSearch.Module.register(AppConfig),
         FeaturedServiceList.Module.register(AppConfig),
         ArticleList.Module.register(AppConfig),
+        ProductList.Module.register(AppConfig),
         // BLOCK REGISTER
     ],
     providers: [

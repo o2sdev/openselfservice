@@ -23,6 +23,7 @@ import * as TicketDetails from '@o2s/blocks.ticket-details/api-harmonization';
 import * as TicketList from '@o2s/blocks.ticket-list/api-harmonization';
 import * as TicketRecent from '@o2s/blocks.ticket-recent/api-harmonization';
 import * as UserAccount from '@o2s/blocks.user-account/api-harmonization';
+import * as ProductList from '@dxp/blocks.product-list/api-harmonization';
 
 export class Init {
     locales!: {
@@ -73,6 +74,7 @@ export class PageData {
 
 export type Blocks =
     // BLOCK REGISTER
+    | ProductList.Model.ProductListBlock['__typename']
     | ArticleList.Model.ArticleListBlock['__typename']
     | Category.Model.CategoryBlock['__typename']
     | Article.Model.ArticleBlock['__typename']
