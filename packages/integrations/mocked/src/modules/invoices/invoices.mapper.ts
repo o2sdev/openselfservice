@@ -219,6 +219,18 @@ export const mapInvoice = (id: string): Invoices.Model.Invoice => {
 export const mapInvoices = (query: Invoices.Request.GetInvoiceListQuery): Invoices.Model.Invoices => {
     const { offset = 0, limit = 5 } = query;
     let filteredInvoices = MOCK_INVOICES.filter((invoice) => {
+        if (query.search) {
+            const searchLower = query.search.toLowerCase();
+            const matchesSearch =
+                invoice.id.toLowerCase().includes(searchLower) ||
+                invoice.externalId.toLowerCase().includes(searchLower) ||
+                invoice.billingAccountId.toLowerCase().includes(searchLower) ||
+                invoice.billingPeriod.toLowerCase().includes(searchLower);
+            if (!matchesSearch) {
+                return false;
+            }
+        }
+
         if (query.type && invoice.type !== query.type) {
             return false;
         }

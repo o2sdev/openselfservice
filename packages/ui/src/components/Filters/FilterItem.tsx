@@ -1,9 +1,12 @@
 import { Field, FieldProps, FormikValues } from 'formik';
-import React, { useRef } from 'react';
+import { Search } from 'lucide-react';
+import React, { useMemo, useRef } from 'react';
 import ScrollContainer from 'react-indiana-drag-scroll';
+import { debounce } from 'throttle-debounce';
 
 import { cn } from '@o2s/ui/lib/utils';
 
+import { Input } from '@o2s/ui/elements/input';
 import { Label } from '@o2s/ui/elements/label';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@o2s/ui/elements/select';
 import { ToggleGroup, ToggleGroupItem } from '@o2s/ui/elements/toggle-group';
@@ -18,6 +21,16 @@ export const FilterItem = <T, S extends FormikValues>({
     labels,
 }: Readonly<FilterItemProps<T, S>>) => {
     const allWasClickedRef = useRef(false);
+
+    const debouncedSubmitRef = useMemo(
+        () =>
+            debounce(2000, () => {
+                if (isLeading) {
+                    submitForm();
+                }
+            }),
+        [isLeading, submitForm],
+    );
 
     switch (item.__typename) {
         case 'FilterToggleGroup':
@@ -163,6 +176,32 @@ export const FilterItem = <T, S extends FormikValues>({
                                     </SelectContent>
                                 </Select>
                             </>
+                        );
+                    }}
+                </Field>
+            );
+        case 'FilterText':
+            return (
+                <Field name={item.id}>
+                    {({ field }: FieldProps<string>) => {
+                        return (
+                            <Input
+                                id={field.name}
+                                type="text"
+                                value={field.value || ''}
+                                placeholder={item.placeholder}
+                                adornment={<Search className="h-4 w-4" />}
+                                adornmentProps={{
+                                    behavior: 'prepend',
+                                }}
+                                onChange={async (e) => {
+                                    const newValue = e.target.value;
+                                    await setFieldValue(field.name, newValue);
+                                    if (isLeading) {
+                                        debouncedSubmitRef();
+                                    }
+                                }}
+                            />
                         );
                     }}
                 </Field>

@@ -32,6 +32,7 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
         id: component.id,
         offset: 0,
         limit: component.pagination?.limit || 5,
+        search: '',
     };
 
     const initialData = component.invoices.data;

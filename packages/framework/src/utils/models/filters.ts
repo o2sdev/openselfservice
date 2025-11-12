@@ -6,10 +6,10 @@ export class Filters<T> {
     reset?: string;
     close!: string;
     removeFilters?: string;
-    items!: FilterItem<T & { sort: string }>[];
+    items!: FilterItem<T & { sort: string; search: string }>[];
 }
 
-export type FilterItem<T> = FilterSelect<T> | FilterDateRange<T> | FilterToggleGroup<T>;
+export type FilterItem<T> = FilterSelect<T> | FilterDateRange<T> | FilterToggleGroup<T> | FilterText<T>;
 
 export class Filter<T> {
     id!: keyof T;
@@ -45,4 +45,9 @@ export class FilterDateRange<T> extends Filter<T> {
         value?: string;
         label: string;
     };
+}
+
+export class FilterText<T> extends Filter<T> {
+    __typename!: 'FilterText';
+    placeholder?: string;
 }
