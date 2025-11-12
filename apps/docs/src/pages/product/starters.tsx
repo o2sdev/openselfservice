@@ -7,9 +7,10 @@ import LoopIcon from '@site/src/assets/icons/o2s-icon-loop.svg';
 import RoadmapIcon from '@site/src/assets/icons/o2s-icon-roadmap.svg';
 import SupportIcon from '@site/src/assets/icons/o2s-icon-support.svg';
 import { type BenefitCardProps, BenefitsSection } from '@site/src/components/BenefitsSection';
+import { CopyCommandButton } from '@site/src/components/CopyCommandButton';
 import { FooterSection } from '@site/src/components/FooterSection';
 import { HeroBannerSection } from '@site/src/components/HeroBannerSection';
-import { Body } from '@site/src/components/Typography';
+import { Body, H2 } from '@site/src/components/Typography';
 
 import Layout from '@theme/Layout';
 
@@ -48,10 +49,10 @@ export default function ProductStarters() {
         <Layout title="Starters">
             <div className={styles.linearGradient}>
                 <div style={{ overflow: 'hidden' }}>
-                    <main className={styles.mainContentWrapper}>
-                        <div className={styles.gradientWrapper}>
-                            {/* TODO: add new gradient circle here */}
-                            <div className={styles.gradientCircleBlue} />
+                    <div className={styles.gradientWrapper}>
+                        {/* TODO: add new gradient circle here */}
+                        <div className={styles.gradientCircleBlue} />
+                        <main className={styles.mainContentWrapper}>
                             <HeroBannerSection
                                 badge={{
                                     text: 'Starters',
@@ -71,7 +72,31 @@ export default function ProductStarters() {
                                 }
                             />
                             <div className="flex flex-col gap-y-40 pb-40">
-                                <section className="px-4 flex flex-col gap-20 w-full">
+                                <section className="px-4">
+                                    <div className="grid md:grid-cols-2 gap-14 md:gap-28">
+                                        <div className="flex flex-col gap-6">
+                                            <div className="flex flex-col gap-8">
+                                                <div className="flex gap-12">
+                                                    <a href="">Demo</a>
+                                                    <a href="">Docs</a>
+                                                    <a href="">Storybook</a>
+                                                    <a href="">Github</a>
+                                                </div>
+                                                <H2 className="mb-0!">Digital Portal Starter</H2>
+                                                <Body className="mb-0!">
+                                                    Headless CMS-powered content portal with knowledge base features.
+                                                    <br />
+                                                    Great for public help centers, marketing sites, and scalable
+                                                    experience platforms.
+                                                </Body>
+                                            </div>
+                                            <CopyCommandButton command="npx create-o2s-app@latest my-portal" />
+                                            <div>Accordion with features</div>
+                                        </div>
+                                        <div>IMG</div>
+                                    </div>
+                                </section>
+                                <section className="px-4">
                                     <BenefitsSection
                                         title={
                                             <>
@@ -90,25 +115,25 @@ export default function ProductStarters() {
                                     />
                                 </section>
                             </div>
-                        </div>
-                        <div className="section-gradient-1 px-4 py-40 mb-0!">
-                            <section className="mb-0!">
-                                <FooterSection
-                                    title={
-                                        <>
-                                            <span className="text-white">Looking for </span>
-                                            <span className="text-highlighted">something else?</span>
-                                        </>
-                                    }
-                                    description="Tell us what kind of frontend starter would help your next project.We're planning more — and we want your input."
-                                    primaryButton={{
-                                        text: 'Submit your idea',
-                                        url: '/contact', // TODO: confirm link
-                                    }}
-                                />
-                            </section>
-                        </div>
-                    </main>
+                        </main>
+                    </div>
+                    <div className="section-gradient-1 px-4 py-40 mb-0!">
+                        <section className="mb-0!">
+                            <FooterSection
+                                title={
+                                    <>
+                                        <span className="text-white">Looking for </span>
+                                        <span className="text-highlighted">something else?</span>
+                                    </>
+                                }
+                                description="Tell us what kind of frontend starter would help your next project.We're planning more — and we want your input."
+                                primaryButton={{
+                                    text: 'Submit your idea',
+                                    url: '/contact', // TODO: confirm link
+                                }}
+                            />
+                        </section>
+                    </div>
                 </div>
             </div>
         </Layout>

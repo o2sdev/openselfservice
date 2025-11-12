@@ -179,10 +179,10 @@ export default function ProductFeatures() {
         <Layout title="Features">
             <div className={styles.linearGradient}>
                 <div style={{ overflow: 'hidden' }}>
-                    <main className={styles.mainContentWrapper}>
-                        <div className={styles.gradientWrapper}>
-                            {/* TODO: add new gradient circle here */}
-                            <div className={styles.gradientCircleBlue} />
+                    <div className={styles.gradientWrapper}>
+                        {/* TODO: add new gradient circle here */}
+                        <div className={styles.gradientCircleBlue} />
+                        <main className={styles.mainContentWrapper}>
                             <HeroBannerSection
                                 badge={{
                                     text: 'Product Features',
@@ -253,25 +253,25 @@ export default function ProductFeatures() {
                                     <div>Functional Blocks: in progress...</div>
                                 </section>
                             </div>
-                        </div>
-                        <div className="section-gradient-2 px-4 py-40 mb-0!">
-                            <section className="mb-0!">
-                                <FooterSection
-                                    title="Want to connect your own APIs?"
-                                    description={
-                                        <>
-                                            Go to the <a href="/product/integrations">Integrations</a> page to learn
-                                            more about supported services and how to add your own.
-                                        </>
-                                    }
-                                    primaryButton={{
-                                        text: 'Integrations',
-                                        url: '/product/integrations',
-                                    }}
-                                />
-                            </section>
-                        </div>
-                    </main>
+                        </main>
+                    </div>
+                    <div className="section-gradient-2 px-4 py-40 mb-0!">
+                        <section className="mb-0!">
+                            <FooterSection
+                                title="Want to connect your own APIs?"
+                                description={
+                                    <>
+                                        Go to the <a href="/product/integrations">Integrations</a> page to learn more
+                                        about supported services and how to add your own.
+                                    </>
+                                }
+                                primaryButton={{
+                                    text: 'Integrations',
+                                    url: '/product/integrations',
+                                }}
+                            />
+                        </section>
+                    </div>
                 </div>
             </div>
         </Layout>

@@ -14,10 +14,10 @@ export default function ProductIntegrations() {
         <Layout title="Integrations">
             <div className={styles.linearGradient}>
                 <div style={{ overflow: 'hidden' }}>
-                    <main className={styles.mainContentWrapper}>
-                        <div className={styles.gradientWrapper}>
-                            {/* TODO: add new gradient circle here */}
-                            <div className={styles.gradientCircleBlue} />
+                    <div className={styles.gradientWrapper}>
+                        {/* TODO: add new gradient circle here */}
+                        <div className={styles.gradientCircleBlue} />
+                        <main className={styles.mainContentWrapper}>
                             <HeroBannerSection
                                 badge={{
                                     text: 'Integrations',
@@ -40,25 +40,25 @@ export default function ProductIntegrations() {
                                     Integrations: in progress...
                                 </section>
                             </div>
-                        </div>
-                        <div className="section-gradient-1 px-4 py-40 mb-0!">
-                            <section className="mb-0!">
-                                <FooterSection
-                                    title={
-                                        <>
-                                            <span className="text-white">Looking for </span>
-                                            <span className="text-highlighted">something else?</span>
-                                        </>
-                                    }
-                                    description="Tell us what kind of frontend starter would help your next project.We're planning more — and we want your input."
-                                    primaryButton={{
-                                        text: 'Submit your idea',
-                                        url: '/contact', // TODO: confirm link
-                                    }}
-                                />
-                            </section>
-                        </div>
-                    </main>
+                        </main>
+                    </div>
+                    <div className="section-gradient-1 px-4 py-40 mb-0!">
+                        <section className="mb-0!">
+                            <FooterSection
+                                title={
+                                    <>
+                                        <span className="text-white">Looking for </span>
+                                        <span className="text-highlighted">something else?</span>
+                                    </>
+                                }
+                                description="Tell us what kind of frontend starter would help your next project.We're planning more — and we want your input."
+                                primaryButton={{
+                                    text: 'Submit your idea',
+                                    url: '/contact', // TODO: confirm link
+                                }}
+                            />
+                        </section>
+                    </div>
                 </div>
             </div>
         </Layout>
