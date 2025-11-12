@@ -11,6 +11,7 @@ import ScalingGreenTileIcon from '@site/src/assets/icons/ScalingGreenTile.svg';
 import StarIcon from '@site/src/assets/icons/Star.svg';
 import WaypointsPurpleTileIcon from '@site/src/assets/icons/WaypointsPurpleTile.svg';
 import { FeatureTileList } from '@site/src/components/FeatureTile';
+import { FeaturesListWithImage } from '@site/src/components/FeaturesListWithImage';
 import { FooterSection } from '@site/src/components/FooterSection';
 import { HeroBannerSection } from '@site/src/components/HeroBannerSection';
 import { Body, H2, H3 } from '@site/src/components/Typography';
@@ -174,6 +175,68 @@ const technicalCapabilities = [
         ],
     },
 ];
+
+const functionalBlocks = [
+    {
+        title: 'Core customer portal blocks',
+        features: [
+            {
+                title: 'Authentication & Login',
+                image: '/img/docusaurus-social-card.jpg', // TODO: replace with actual image
+            },
+            {
+                title: 'User Profile & Preferences',
+                image: '/img/docusaurus-social-card.jpg', // TODO: replace with actual image
+            },
+            {
+                title: 'Ticket Submission & Status',
+                image: '/img/docusaurus-social-card.jpg', // TODO: replace with actual image
+            },
+            {
+                title: 'Service Overview',
+                image: '/img/docusaurus-social-card.jpg', // TODO: replace with actual image
+            },
+            {
+                title: 'Invoices & Payments',
+                image: '/img/docusaurus-social-card.jpg', // TODO: replace with actual image
+            },
+            {
+                title: 'Order List & Details',
+                image: '/img/docusaurus-social-card.jpg', // TODO: replace with actual image
+            },
+            {
+                title: 'Notifications',
+                image: '/img/docusaurus-social-card.jpg', // TODO: replace with actual image
+            },
+        ],
+    },
+    {
+        title: 'Content & knowledge blocks',
+        features: [
+            {
+                title: 'CMS-driven content sections',
+                image: '/img/docusaurus-social-card.jpg', // TODO: replace with actual image
+            },
+            {
+                title: 'Knowledge base pages',
+                image: '/img/docusaurus-social-card.jpg', // TODO: replace with actual image
+            },
+            {
+                title: 'Search & filtering',
+                image: '/img/docusaurus-social-card.jpg', // TODO: replace with actual image
+            },
+            {
+                title: 'Content categories & tags',
+                image: '/img/docusaurus-social-card.jpg', // TODO: replace with actual image
+            },
+            {
+                title: 'Document downloads',
+                image: '/img/docusaurus-social-card.jpg', // TODO: replace with actual image
+            },
+        ],
+    },
+];
+
 export default function ProductFeatures() {
     return (
         <Layout title="Features">
@@ -250,7 +313,13 @@ export default function ProductFeatures() {
                                             customer-support features.
                                         </Body>
                                     </div>
-                                    <div>Functional Blocks: in progress...</div>
+                                    {functionalBlocks.map((block, blockIndex) => (
+                                        <FeaturesListWithImage
+                                            key={blockIndex}
+                                            title={block.title}
+                                            features={block.features}
+                                        />
+                                    ))}
                                 </section>
                             </div>
                         </main>
