@@ -19,27 +19,27 @@ const benefits: Array<BenefitCardProps> = [
     {
         icon: <SupportIcon className="w-[50px] h-[50px]" />,
         title: 'Theming with Tailwind',
-        borderColor: 'blue',
+        borderColor: 'transparent',
     },
     {
         icon: <ContactIcon className="w-[50px] h-[50px]" />,
         title: 'Override or extend components',
-        borderColor: 'blue',
+        borderColor: 'transparent',
     },
     {
         icon: <LoopIcon className="w-[50px] h-[50px]" />,
         title: 'Add custom blocks (frontend + BFF logic)',
-        borderColor: 'blue',
+        borderColor: 'transparent',
     },
     {
         icon: <RoadmapIcon className="w-[50px] h-[50px]" />,
         title: 'CMS schema and layout control',
-        borderColor: 'blue',
+        borderColor: 'transparent',
     },
     {
         icon: <BadgeIcon className="w-[50px] h-[50px]" />,
         title: 'Lighthouse 90+ scores (Performance, SEO, A11y)',
-        borderColor: 'blue',
+        borderColor: 'transparent',
     },
 ];
 

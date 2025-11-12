@@ -23,7 +23,7 @@ export interface BenefitCardProps {
         iconRight?: ReactNode;
         target?: HTMLAnchorElement['target'];
     };
-    borderColor?: 'gradient' | 'blue' | 'green' | 'light';
+    borderColor?: 'gradient' | 'blue' | 'green' | 'light' | 'transparent';
 }
 
 export const BenefitCard: React.FC<BenefitCardProps> = ({
