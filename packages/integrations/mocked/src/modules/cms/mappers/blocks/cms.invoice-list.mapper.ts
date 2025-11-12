@@ -52,7 +52,7 @@ const MOCK_INVOICE_LIST_BLOCK_EN: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
                 __typename: 'FilterText',
                 id: 'search',
                 label: 'Search',
-                placeholder: 'Search by ID, external ID, account, or period',
+                placeholder: 'Search by Number',
                 isLeading: true,
             },
             {
@@ -175,7 +175,7 @@ const MOCK_INVOICE_LIST_BLOCK_DE: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
                 __typename: 'FilterText',
                 id: 'search',
                 label: 'Suchen',
-                placeholder: 'Suche nach ID, externer ID, Konto oder Periode',
+                placeholder: 'Suche nach Nummer',
                 isLeading: true,
             },
             {
@@ -298,7 +298,7 @@ const MOCK_INVOICE_LIST_BLOCK_PL: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
                 __typename: 'FilterText',
                 id: 'search',
                 label: 'Szukaj',
-                placeholder: 'Szukaj po ID, zewnętrznym ID, koncie lub okresie',
+                placeholder: 'Szukaj po numerze',
                 isLeading: true,
             },
             {

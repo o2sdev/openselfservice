@@ -221,11 +221,7 @@ export const mapInvoices = (query: Invoices.Request.GetInvoiceListQuery): Invoic
     let filteredInvoices = MOCK_INVOICES.filter((invoice) => {
         if (query.search) {
             const searchLower = query.search.toLowerCase();
-            const matchesSearch =
-                invoice.id.toLowerCase().includes(searchLower) ||
-                invoice.externalId.toLowerCase().includes(searchLower) ||
-                invoice.billingAccountId.toLowerCase().includes(searchLower) ||
-                invoice.billingPeriod.toLowerCase().includes(searchLower);
+            const matchesSearch = invoice.id.toLowerCase().includes(searchLower);
             if (!matchesSearch) {
                 return false;
             }
