@@ -52,8 +52,8 @@ const FiltersWrapper = <T, S extends FormikValues>({
 };
 
 // Define the specific types for our stories
-type FilterType = { category: string; price: string; rating: string[]; sort: string };
-type FilterValues = { category: string; price: string; rating: string[]; sort: string };
+type FilterType = { category: string; price: string; rating: string[]; sort: string; search: string };
+type FilterValues = { category: string; price: string; rating: string[]; sort: string; search: string };
 
 const meta = {
     title: 'Components/Filters',
@@ -127,6 +127,13 @@ const sortFilterItem: Models.Filters.FilterSelect<FilterType> = {
     ],
 };
 
+const searchFilterItem: Models.Filters.FilterText<FilterType> = {
+    __typename: 'FilterText',
+    id: 'search',
+    label: 'Search',
+    placeholder: 'Search products...',
+};
+
 const basicFilters: Models.Filters.Filters<FilterType> = {
     label: 'Filters',
     title: 'Filter Products',
@@ -151,6 +158,7 @@ export const Default: Story = {
             price: '',
             rating: [],
             sort: 'relevance',
+            search: '',
         },
         hasLeadingItem: false,
     },
@@ -164,6 +172,7 @@ export const WithLeadingItem: Story = {
             price: '',
             rating: [],
             sort: 'relevance',
+            search: '',
         },
         hasLeadingItem: true,
     },
@@ -177,6 +186,7 @@ export const WithPreselectedValues: Story = {
             price: '50-100',
             rating: ['5', '4'],
             sort: 'price_asc',
+            search: '',
         },
         hasLeadingItem: false,
     },
@@ -190,6 +200,7 @@ export const WithSection: Story = {
             price: '',
             rating: [],
             sort: 'relevance',
+            search: '',
         },
         hasLeadingItem: false,
     },
@@ -226,5 +237,45 @@ export const WithSection: Story = {
                 </div>
             </div>
         );
+    },
+};
+
+export const WithSearch: Story = {
+    args: {
+        filters: {
+            ...basicFilters,
+            items: [searchFilterItem, categoryFilterItem, priceFilterItem, ratingFilterItem, sortFilterItem],
+        },
+        initialValues: {
+            category: '',
+            price: '',
+            rating: [],
+            sort: 'relevance',
+            search: '',
+        },
+        hasLeadingItem: false,
+    },
+};
+
+export const WithSearchLeading: Story = {
+    args: {
+        filters: {
+            ...basicFilters,
+            items: [
+                { ...searchFilterItem, isLeading: true, isLabelHidden: true },
+                categoryFilterItem,
+                priceFilterItem,
+                ratingFilterItem,
+                sortFilterItem,
+            ],
+        },
+        initialValues: {
+            category: '',
+            price: '',
+            rating: [],
+            sort: 'relevance',
+            search: '',
+        },
+        hasLeadingItem: true,
     },
 };
