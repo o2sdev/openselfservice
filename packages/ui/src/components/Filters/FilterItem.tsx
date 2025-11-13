@@ -1,6 +1,6 @@
 import { Field, FieldProps, FormikValues } from 'formik';
 import { Search } from 'lucide-react';
-import React, { useMemo, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import ScrollContainer from 'react-indiana-drag-scroll';
 import { debounce } from 'throttle-debounce';
 
@@ -22,14 +22,23 @@ export const FilterItem = <T, S extends FormikValues>({
 }: Readonly<FilterItemProps<T, S>>) => {
     const allWasClickedRef = useRef(false);
 
-    const debouncedSubmitRef = useMemo(
-        () =>
-            debounce(2000, () => {
-                if (isLeading) {
-                    submitForm();
-                }
-            }),
-        [isLeading, submitForm],
+    const submitFormRef = useRef(submitForm);
+    const isLeadingRef = useRef(isLeading);
+
+    useEffect(() => {
+        submitFormRef.current = submitForm;
+    }, [submitForm]);
+
+    useEffect(() => {
+        isLeadingRef.current = isLeading;
+    }, [isLeading]);
+
+    const debouncedSubmitRef = useRef(
+        debounce(500, () => {
+            if (isLeadingRef.current) {
+                submitFormRef.current();
+            }
+        }),
     );
 
     switch (item.__typename) {
@@ -198,7 +207,7 @@ export const FilterItem = <T, S extends FormikValues>({
                                     const newValue = e.target.value;
                                     await setFieldValue(field.name, newValue);
                                     if (isLeading) {
-                                        debouncedSubmitRef();
+                                        debouncedSubmitRef.current();
                                     }
                                 }}
                             />
