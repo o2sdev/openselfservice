@@ -186,7 +186,7 @@ const functionalBlocks = [
             },
             {
                 title: 'User Profile & Preferences',
-                image: '/img/docusaurus-social-card.jpg', // TODO: replace with actual image
+                image: '/img/homepage/starters-card-digital-portal.png', // TODO: replace with actual image
             },
             {
                 title: 'Ticket Submission & Status',
@@ -194,7 +194,7 @@ const functionalBlocks = [
             },
             {
                 title: 'Service Overview',
-                image: '/img/docusaurus-social-card.jpg', // TODO: replace with actual image
+                image: '/img/homepage/starters-card-digital-portal.png', // TODO: replace with actual image
             },
             {
                 title: 'Invoices & Payments',
@@ -202,7 +202,7 @@ const functionalBlocks = [
             },
             {
                 title: 'Order List & Details',
-                image: '/img/docusaurus-social-card.jpg', // TODO: replace with actual image
+                image: '/img/homepage/starters-card-digital-portal.png', // TODO: replace with actual image
             },
             {
                 title: 'Notifications',

@@ -37,7 +37,12 @@ export function FeaturesListWithImage({ title, features }: FeaturesListWithImage
                                 )}
                             >
                                 <BodyBold className="text-base! leading-6! mb-0!">{feature.title}</BodyBold>
-                                <ArrowRightIcon className="w-4 h-4 shrink-0" />
+                                <ArrowRightIcon
+                                    className={clsx(
+                                        'w-4 h-4 shrink-0',
+                                        featureIndex === activeFeatureIndex ? '*:stroke-(--color-highlighted)' : '',
+                                    )}
+                                />
                             </button>
                         ))}
                     </div>

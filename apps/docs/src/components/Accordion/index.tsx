@@ -3,7 +3,6 @@ import clsx from 'clsx';
 import React, { type ReactNode } from 'react';
 
 import ChevronDownIcon from '@site/src/assets/icons/ChevronDown.svg';
-import { BodyBold } from '@site/src/components/Typography';
 
 import styles from './Accordion.module.scss';
 
@@ -79,8 +78,8 @@ const AccordionTrigger: React.FC<{
                 className,
             )}
         >
-            <BodyBold className="mb-0!">{children}</BodyBold>
-            <ChevronDownIcon className="h-4 w-4 shrink-0 transition-transform duration-200" />
+            <span className="text-sm leading-6 font-bold text-left">{children}</span>
+            <ChevronDownIcon className="shrink-0 transition-transform duration-200" />
         </AccordionPrimitive.Trigger>
     );
 };
