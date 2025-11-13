@@ -29,13 +29,14 @@ export const mapOrdersSummaryBlock = (data: GetComponentQuery): CMS.Model.Orders
                     title: component.averageNumber.title,
                     icon: component.averageNumber.icon,
                 },
+                // TODO: These values are hardcoded and require implementation to fetch real data.
                 chart: {
-                    title: component.chartTitle,
+                    title: 'Number of orders',
                     legend: {
-                        prev: component.chartPreviousPeriodLabel,
-                        current: component.chartCurrentPeriodLabel,
+                        prev: 'Previous period',
+                        current: 'Current period',
                     },
-                    showChart: component.showChart,
+                    showChart: true,
                 },
                 ranges: component.ranges?.map((range) => ({
                     label: range.label,
