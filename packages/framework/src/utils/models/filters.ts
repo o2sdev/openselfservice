@@ -49,5 +49,6 @@ export class FilterDateRange<T> extends Filter<T> {
 
 export class FilterText<T> extends Filter<T> {
     __typename!: 'FilterText';
+    isLabelHidden?: boolean;
     placeholder?: string;
 }

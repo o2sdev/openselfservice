@@ -262,7 +262,7 @@ export const WithSearchLeading: Story = {
         filters: {
             ...basicFilters,
             items: [
-                { ...searchFilterItem, isLeading: true },
+                { ...searchFilterItem, isLeading: true, isLabelHidden: true },
                 categoryFilterItem,
                 priceFilterItem,
                 ratingFilterItem,
