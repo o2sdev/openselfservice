@@ -148,7 +148,7 @@ export const FilterItem = <T, S extends FormikValues>({
                 <Field name={item.id}>
                     {({ field }: FieldProps<string>) => {
                         return (
-                            <>
+                            <div className="grid gap-2">
                                 <Label htmlFor={field.name}>{item.label}</Label>
                                 <Select
                                     value={field.value}
@@ -176,7 +176,7 @@ export const FilterItem = <T, S extends FormikValues>({
                                         </SelectGroup>
                                     </SelectContent>
                                 </Select>
-                            </>
+                            </div>
                         );
                     }}
                 </Field>
