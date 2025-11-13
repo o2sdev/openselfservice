@@ -33,15 +33,9 @@ export const FilterItem = <T, S extends FormikValues>({
         isLeadingRef.current = isLeading;
     }, [isLeading]);
 
-    const debouncedSubmitRef = useRef<ReturnType<typeof debounce> | null>(null);
-
-    useEffect(() => {
-        debouncedSubmitRef.current = debounce(500, () => {
-            if (isLeadingRef.current) {
-                submitFormRef.current();
-            }
-        });
-    }, []);
+    const onTextFilterChange = debounce(500, async () => {
+        await submitForm();
+    });
 
     switch (item.__typename) {
         case 'FilterToggleGroup':
@@ -205,7 +199,7 @@ export const FilterItem = <T, S extends FormikValues>({
                                     const newValue = e.target.value;
                                     await setFieldValue(field.name, newValue);
                                     if (isLeading) {
-                                        debouncedSubmitRef.current?.();
+                                        onTextFilterChange();
                                     }
                                 }}
                             />
