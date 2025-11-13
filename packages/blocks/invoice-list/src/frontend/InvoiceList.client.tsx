@@ -79,12 +79,14 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
                 return {
                     ...column,
                     type: 'text',
+                    displayField: 'displayValue',
                     cellClassName: 'max-w-[100px] md:max-w-sm',
                 };
             case 'paymentStatus':
                 return {
                     ...column,
                     type: 'badge',
+                    labelField: 'displayValue',
                     variant: (value: string) =>
                         Mappings.InvoiceBadge.invoiceBadgePaymentStatusVariants[
                             value as keyof typeof Mappings.InvoiceBadge.invoiceBadgePaymentStatusVariants
@@ -94,6 +96,7 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
                 return {
                     ...column,
                     type: 'date',
+                    displayField: 'displayValue',
                 };
             case 'totalAmountDue':
             case 'totalNetAmountDue':
