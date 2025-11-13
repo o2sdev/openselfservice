@@ -33,13 +33,15 @@ export const FilterItem = <T, S extends FormikValues>({
         isLeadingRef.current = isLeading;
     }, [isLeading]);
 
-    const debouncedSubmitRef = useRef(
-        debounce(500, () => {
+    const debouncedSubmitRef = useRef<ReturnType<typeof debounce> | null>(null);
+
+    useEffect(() => {
+        debouncedSubmitRef.current = debounce(500, () => {
             if (isLeadingRef.current) {
                 submitFormRef.current();
             }
-        }),
-    );
+        });
+    }, []);
 
     switch (item.__typename) {
         case 'FilterToggleGroup':
@@ -90,11 +92,7 @@ export const FilterItem = <T, S extends FormikValues>({
                                                 isSelected && isNextSelected ? 'rounded-r-none' : '',
                                             )}
                                             onClick={() => {
-                                                if (option.value === 'ALL') {
-                                                    allWasClickedRef.current = true;
-                                                } else {
-                                                    allWasClickedRef.current = false;
-                                                }
+                                                allWasClickedRef.current = option.value === 'ALL';
                                             }}
                                         >
                                             {option.label}
@@ -207,7 +205,7 @@ export const FilterItem = <T, S extends FormikValues>({
                                     const newValue = e.target.value;
                                     await setFieldValue(field.name, newValue);
                                     if (isLeading) {
-                                        debouncedSubmitRef.current();
+                                        debouncedSubmitRef.current?.();
                                     }
                                 }}
                             />
