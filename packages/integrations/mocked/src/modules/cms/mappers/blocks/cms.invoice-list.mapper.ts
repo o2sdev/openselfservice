@@ -54,6 +54,7 @@ const MOCK_INVOICE_LIST_BLOCK_EN: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
                 label: 'Search',
                 placeholder: 'Search by Number',
                 isLeading: true,
+                isLabelHidden: true,
             },
             {
                 __typename: 'FilterSelect',
@@ -177,6 +178,7 @@ const MOCK_INVOICE_LIST_BLOCK_DE: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
                 label: 'Suchen',
                 placeholder: 'Suche nach Nummer',
                 isLeading: true,
+                isLabelHidden: true,
             },
             {
                 __typename: 'FilterSelect',
@@ -300,6 +302,7 @@ const MOCK_INVOICE_LIST_BLOCK_PL: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
                 label: 'Szukaj',
                 placeholder: 'Szukaj po numerze',
                 isLeading: true,
+                isLabelHidden: true,
             },
             {
                 __typename: 'FilterSelect',
