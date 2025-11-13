@@ -19,20 +19,8 @@ export const mapPaymentsSummaryBlock = (
         case 'ComponentComponentsPaymentsSummary':
             return {
                 id: component.id,
-                layout: component.layout || undefined,
                 toBePaid: mapInfoCard(component.toBePaid),
                 overdue: mapInfoCard(component.overdue),
-                chart: component.chart
-                    ? {
-                          title: component.chart.title!,
-                          topSegment: component.chart.topSegment!,
-                          middleSegment: component.chart.middleSegment!,
-                          bottomSegment: component.chart.bottomSegment!,
-                          total: component.chart.total!,
-                          showChart: component.chart.showChart!,
-                          monthsToShow: component.chart.monthsToShow!,
-                      }
-                    : undefined,
             };
     }
 

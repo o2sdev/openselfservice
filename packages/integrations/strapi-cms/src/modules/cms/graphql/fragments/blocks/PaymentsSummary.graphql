@@ -1,20 +1,10 @@
 fragment PaymentsSummaryComponent on ComponentComponentsPaymentsSummary {
     __typename
     id
-    layout
     overdue {
         ...InformationCard
     }
     toBePaid {
         ...InformationCard
-    }
-    chart {
-        title
-        topSegment
-        middleSegment
-        bottomSegment
-        total
-        showChart
-        monthsToShow
     }
 }
