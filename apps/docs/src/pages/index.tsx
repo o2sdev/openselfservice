@@ -60,11 +60,11 @@ export default function Home(): ReactNode {
                                     cliCommand="npx create-dxp-app"
                                     mainLink={{
                                         text: 'Explore app starters',
-                                        url: 'https://demo.openselfservice.com', // TODO: add link to app starters
+                                        url: '/product/starters',
                                     }}
                                     secondaryLink={{
                                         text: 'See on GitHub',
-                                        url: 'https://github.com/o2sdev/openselfservice',
+                                        url: 'https://github.com/o2sdev/dxp-starter-kit',
                                         iconLeft: <GithubIcon />,
                                     }}
                                     heroImage={{

@@ -8,7 +8,7 @@ const STARTERS: HoverCardProps[] = [
         title: 'Customer Portal Starter',
         description:
             'Authentication, notifications, ticketing, service overview, payments, and order history. A production-grade foundation for secure, self-service customer portals.',
-        href: '/product/starters', // TODO: upadte link with anchor
+        href: '/product/starters#customer-portal-starter',
         ctaLabel: 'Learn More',
         gradient:
             'linear-gradient(90deg, rgba(0, 19, 96, 0.4) 0%, rgba(0, 19, 96, 0.4) 100%), linear-gradient(131.86deg, var(--color-celadon) 1.526%, var(--color-violet) 69.661%)',
@@ -21,7 +21,7 @@ const STARTERS: HoverCardProps[] = [
         title: 'Digital Portal Starter',
         description:
             'Headless CMS-powered content portal with knowledge base features. Great for public help centers, marketing sites, and scalable experience platforms.',
-        href: '/product/starters', // TODO: update link with anchor
+        href: '/product/starters#digital-portal-starter',
         ctaLabel: 'Learn More',
         gradient:
             'linear-gradient(90deg, rgba(0, 19, 96, 0.4) 0%, rgba(0, 19, 96, 0.4) 100%), linear-gradient(104.71deg, var(--color-violet) 31.575%, rgba(85, 34, 228, 1) 80.05%)',
