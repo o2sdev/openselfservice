@@ -36,13 +36,20 @@ const BuildingBlockCard: React.FC<BuildingBlockCardProps> = ({ title, icon }) =>
 
 export function HomepageFeaturesSection() {
     const developersFeatures = [
-        'Performance-first stack',
-        'API harmonization',
-        'Reusable blocks',
-        'Custom integrations & extensions',
+        'Performance-first, modern stack',
+        'Built-in reusable UI components & blocks',
+        'Full frontend decoupling & unified API layer',
+        'Ready to use CMS content models',
+        'Growing list of integrations',
     ];
 
-    const digitalTeamsFeatures = ['No vendor lock-in', 'Scalable architecture', 'Flexible use cases', 'CMS-driven UI'];
+    const digitalTeamsFeatures = [
+        'Quick start with built-in starters & components',
+        'Control over frontend without dev support',
+        'Flexible use cases',
+        'Vendor independent frontend',
+        'UX optimized for efficient customer self-service',
+    ];
 
     const buildingBlocks = [
         {
@@ -70,13 +77,13 @@ export function HomepageFeaturesSection() {
     return (
         <section className="px-4 flex flex-col items-center gap-y-20">
             <H2 className="mb-0! text-center">
-                <span className="text-highlighted">Build composable frontends</span> with real control
+                <span className="text-highlighted">Value</span> for developers and business leaders
             </H2>
 
             <div className="w-full flex flex-col md:flex-row rounded-[20px] overflow-hidden">
                 <div className="flex-1 bg-white/10 p-10 rounded-t-[20px] md:rounded-tl-[20px] md:rounded-bl-[20px] md:rounded-tr-none md:rounded-br-none">
                     <div className="flex flex-col gap-6">
-                        <H3 className="mb-0!">For Developers</H3>
+                        <H3 className="mb-0!">For developers</H3>
                         <ul className="flex flex-col gap-2 list-none p-0! m-0!">
                             {developersFeatures.map((feature, idx) => (
                                 <li key={idx} className="m-0 p-0">
@@ -91,7 +98,7 @@ export function HomepageFeaturesSection() {
                 </div>
                 <div className="flex-1 bg-white p-10 rounded-b-[20px] md:rounded-tr-[20px] md:rounded-br-[20px] md:rounded-tl-none md:rounded-bl-none">
                     <div className="flex flex-col gap-6">
-                        <H3 className="mb-0! text-[#000d42]!">For Digital Teams</H3>
+                        <H3 className="mb-0! text-[#000d42]!">For digital transformation leaders</H3>
                         <ul className="flex flex-col gap-2 list-none p-0! m-0!">
                             {digitalTeamsFeatures.map((feature, idx) => (
                                 <li key={idx} className="m-0 p-0">
@@ -107,14 +114,14 @@ export function HomepageFeaturesSection() {
                 </div>
             </div>
 
-            <div className="w-full flex flex-col gap-16">
-                <H3 className="mb-0! text-white">Built-in capabilities</H3>
-                <div className="grid grid-cols-1 md:grid-cols-5 gap-7">
-                    {buildingBlocks.map((block, idx) => (
-                        <BuildingBlockCard key={idx} title={block.title} icon={block.icon} />
-                    ))}
-                </div>
-            </div>
+            {/*<div className="w-full flex flex-col gap-16">*/}
+            {/*    <H3 className="mb-0! text-white">Built-in capabilities</H3>*/}
+            {/*    <div className="grid grid-cols-1 md:grid-cols-5 gap-7">*/}
+            {/*        {buildingBlocks.map((block, idx) => (*/}
+            {/*            <BuildingBlockCard key={idx} title={block.title} icon={block.icon} />*/}
+            {/*        ))}*/}
+            {/*    </div>*/}
+            {/*</div>*/}
 
             <a href="/product/features" className="button">
                 Explore full feature set

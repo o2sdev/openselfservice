@@ -44,7 +44,7 @@ export const HomepageStartersSection: React.FC = () => {
         <section className="px-4 flex flex-col items-center gap-y-20">
             <div className="flex flex-col gap-6 items-center text-center">
                 <H2 className="mb-0!">
-                    Start small. <span className="text-highlighted">Scale big.</span>
+                    Quick start. <span className="text-highlighted">Scale big.</span>
                 </H2>
                 <Body className="mb-0!">
                     Choose the frontend starter that matches your current needs and evolve as you grow.

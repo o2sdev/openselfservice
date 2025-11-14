@@ -20,54 +20,117 @@ import Layout from '@theme/Layout';
 
 import styles from './product.module.scss';
 
+// const keyBenefits = {
+//     developers: {
+//         title: 'For Developers',
+//         features: [
+//             {
+//                 icon: <BlocksPurpleTileIcon />,
+//                 title: 'Reusable blocks',
+//                 description: 'Create pages from modular components and UI blocks',
+//             },
+//             {
+//                 icon: <LayersPurpleTileIcon />,
+//                 title: 'API harmonization',
+//                 description: 'Integrate any backend system (CMS, CRM, search…) with a unified data layer',
+//             },
+//             {
+//                 icon: <WaypointsPurpleTileIcon />,
+//                 title: 'Custom integrations & extensions',
+//                 description: 'Extend logic, add your APIs, or replace services',
+//             },
+//             {
+//                 icon: <GaugePurpleTileIcon />,
+//                 title: 'Performance-first stack',
+//                 description: 'Next.js, Tailwind, SSR, ISR, SEO-optimized, Lighthouse 90+',
+//             },
+//         ],
+//     },
+//     digitalTeams: {
+//         title: 'For Digital Teams',
+//         features: [
+//             {
+//                 icon: <BanGreenTileIcon />,
+//                 title: 'No vendor lock-in',
+//                 description: 'Choose the best tools, replace them freely when needed',
+//             },
+//             {
+//                 icon: <ScalingGreenTileIcon />,
+//                 title: 'Scalable architecture',
+//                 description: 'Start small and evolve into multi-system experience platforms',
+//             },
+//             {
+//                 icon: <ArrowLeftRightGreenTileIcon />,
+//                 title: 'Flexible use cases',
+//                 description: 'From customer support portals to self-service platforms and beyond',
+//             },
+//             {
+//                 icon: <LayoutDashboardGreenTileIcon />,
+//                 title: 'CMS-driven UI',
+//                 description: 'Let non-tech teams manage layouts and content with no redeploys',
+//             },
+//         ],
+//     },
+// };
 const keyBenefits = {
     developers: {
-        title: 'For Developers',
+        title: 'For developers',
         features: [
             {
+                icon: <GaugePurpleTileIcon />,
+                title: 'Performance-first, modern stack',
+                description: 'Next.js, Tailwind, SSR, ISR, SEO-optimized, Lighthouse 90+',
+            },
+            {
                 icon: <BlocksPurpleTileIcon />,
-                title: 'Reusable blocks',
+                title: 'Built-in reusable UI components & blocks',
                 description: 'Create pages from modular components and UI blocks',
             },
             {
                 icon: <LayersPurpleTileIcon />,
-                title: 'API harmonization',
-                description: 'Integrate any backend system (CMS, CRM, search…) with a unified data layer',
+                title: 'Unified API layer',
+                description: 'Fetch all backend data via one normalized interface',
+            },
+            {
+                icon: <LayersPurpleTileIcon />,
+                title: 'Ready to use CMS content models',
+                description: 'Use pre-defined schemas mapped to frontend components',
             },
             {
                 icon: <WaypointsPurpleTileIcon />,
-                title: 'Custom integrations & extensions',
-                description: 'Extend logic, add your APIs, or replace services',
-            },
-            {
-                icon: <GaugePurpleTileIcon />,
-                title: 'Performance-first stack',
-                description: 'Next.js, Tailwind, SSR, ISR, SEO-optimized, Lighthouse 90+',
+                title: 'Growing list of integrations',
+                description: 'Connect to CRM, CMS, search, auth, and more...',
             },
         ],
     },
+
     digitalTeams: {
-        title: 'For Digital Teams',
+        title: 'For digital transformation leaders',
         features: [
             {
-                icon: <BanGreenTileIcon />,
-                title: 'No vendor lock-in',
-                description: 'Choose the best tools, replace them freely when needed',
+                icon: <ScalingGreenTileIcon />,
+                title: 'Quick start with built-in starters & components',
+                description: 'Build with our starters, functional blocks & components',
             },
             {
-                icon: <ScalingGreenTileIcon />,
-                title: 'Scalable architecture',
-                description: 'Start small and evolve into multi-system experience platforms',
+                icon: <LayoutDashboardGreenTileIcon />,
+                title: 'Control over frontend without dev support',
+                description: 'Let CMS users manage layout and content',
             },
             {
                 icon: <ArrowLeftRightGreenTileIcon />,
                 title: 'Flexible use cases',
-                description: 'From customer support portals to self-service platforms and beyond',
+                description: 'Support apps, help centers, DXPs and more',
             },
             {
-                icon: <LayoutDashboardGreenTileIcon />,
-                title: 'CMS-driven UI',
-                description: 'Let non-tech teams manage layouts and content with no redeploys',
+                icon: <BanGreenTileIcon />,
+                title: 'Vendor independent frontend',
+                description: 'Choose the best tools, replace them freely when needed',
+            },
+            {
+                icon: <ArrowLeftRightGreenTileIcon />,
+                title: 'UX optimized for efficient customer self-service',
+                description: 'Use proven UI patterns designed for support and self-care',
             },
         ],
     },
@@ -75,7 +138,7 @@ const keyBenefits = {
 
 const technicalCapabilities = [
     {
-        title: 'Frontend App',
+        title: 'Frontend app',
         features: [
             {
                 title: 'Next.js',
@@ -98,7 +161,7 @@ const technicalCapabilities = [
                 description: 'for Ui customization, theming and branding.',
             },
             {
-                title: '90+ Google Lighthouse scores',
+                title: '90+ Lighthouse scores',
                 description: 'for performance, accessibility, SEO, and best practices audits.',
             },
             {
@@ -112,7 +175,7 @@ const technicalCapabilities = [
         ],
     },
     {
-        title: 'API Harmonization Layer',
+        title: 'API layer',
         features: [
             {
                 title: 'NestJS integration middleware',
@@ -266,9 +329,9 @@ export default function ProductFeatures() {
                             />
                             <div className="flex flex-col gap-y-40 pb-40">
                                 <section className="px-4 flex flex-col gap-20 w-full">
-                                    <H2 className="mb-0!">
-                                        Key <span className="text-highlighted">Benefits</span>
-                                    </H2>
+                                    {/*<H2 className="mb-0!">*/}
+                                    {/*    Key <span className="text-highlighted">Benefits</span>*/}
+                                    {/*</H2>*/}
                                     <div className="flex flex-col lg:flex-row gap-8 w-full">
                                         <FeatureTileList
                                             title={keyBenefits.developers.title}
@@ -282,7 +345,7 @@ export default function ProductFeatures() {
                                 </section>
                                 <section className="px-4 flex flex-col gap-20 w-full">
                                     <H2 className="mb-0!">
-                                        <span className="text-highlighted">Technical Capabilities</span> by Component
+                                        What’s included in your <span className="text-highlighted">dev toolbox</span>
                                     </H2>
                                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full">
                                         {technicalCapabilities.map((component, componentIndex) => (
@@ -309,12 +372,27 @@ export default function ProductFeatures() {
                                     </div>
                                 </section>
                                 <section className="px-4 flex flex-col gap-20 w-full">
-                                    <div className="grid md:grid-cols-2 gap-14 md:gap-28">
-                                        <H2 className="mb-0!">Functional Blocks</H2>
-                                        <Body className="mb-0!">
-                                            Use functional blocks to speed up development and add essential
-                                            customer-support features.
-                                        </Body>
+                                    <div className="grid md:grid-cols-2 gap-14 md:gap-14">
+                                        <div>
+                                            <H2 className="mb-0!">
+                                                <span className="text-highlighted">Available</span> functional blocks
+                                            </H2>
+                                        </div>
+                                        <div className="flex flex-col gap-6">
+                                            <Body className="mb-0!">
+                                                Use functional blocks to speed up development and add essential
+                                                customer-support features.
+                                            </Body>
+                                            <a
+                                                href={'/docs/main-components/blocks'}
+                                                className="button w-fit"
+                                                rel="noopener"
+                                            >
+                                                <span className="label flex items-center justify-center gap-2">
+                                                    Learn more about Blocks
+                                                </span>
+                                            </a>
+                                        </div>
                                     </div>
                                     {functionalBlocks.map((block, blockIndex) => (
                                         <FeaturesListWithImage

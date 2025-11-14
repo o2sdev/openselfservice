@@ -41,27 +41,23 @@ export default function Home(): ReactNode {
                                     heading={
                                         <>
                                             <br />
-                                            Build digital platforms for customer support.
+                                            Frontend stack for
+                                            <span className="text-highlighted"> customer self-service</span>{' '}
+                                            experiences.
                                             <br />
-                                            <span className="text-highlighted">
-                                                Vendor-agnostic.
-                                                <br /> Flexible. Open.
-                                            </span>
                                         </>
                                     }
                                     description={
                                         <Body>
-                                            Open Self Service is a modular frontend layer for composable customer
-                                            portals, support apps, and digital self-service platforms.
-                                            <br />
-                                            Connect it to your own APIs or use our growing set of ready-made
-                                            integrations to accelerate development and optimize customer experience.
+                                            <b>Open Self Service</b> is a composable frontend layer for customer
+                                            portals, support apps, and digital self-service platforms. It can be powered
+                                            by your own backend APIs or our growing set of ready-made integrations.
                                         </Body>
                                     }
                                     cliCommand="npx create-dxp-app"
                                     mainLink={{
-                                        text: 'Explore app starters',
-                                        url: '/product/starters',
+                                        text: 'Explore features',
+                                        url: '/product/features',
                                     }}
                                     secondaryLink={{
                                         text: 'See on GitHub',

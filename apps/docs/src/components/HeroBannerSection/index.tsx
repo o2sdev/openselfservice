@@ -60,7 +60,7 @@ export function HeroBannerSection({
             <div className={clsx('container grid items-center', heroImage ? 'md:grid-cols-2' : 'text-center')}>
                 <div
                     className={clsx(
-                        heroImage ? 'lg:w-[515px]' : `lg:w-[${containerWidth === 'wide' ? '842' : '688'}px] m-auto`,
+                        heroImage ? 'lg:w-[555px]' : `lg:w-[${containerWidth === 'wide' ? '842' : '688'}px] m-auto`,
                     )}
                 >
                     {badge && (

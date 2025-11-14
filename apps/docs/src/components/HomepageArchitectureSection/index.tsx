@@ -8,22 +8,20 @@ export function HomepageArchitectureSection() {
     const { siteConfig } = useDocusaurusContext();
     return (
         <section className="px-4 flex flex-col items-center">
-            <div className="grid md:grid-cols-2 gap-14 md:gap-28">
+            <div className="grid md:grid-cols-2 gap-14 md:gap-14">
                 <div>
                     <H2 className="mb-0!">
-                        One framework. Three layers. <span className="text-highlighted">Full flexibility</span>
+                        One framework. <br />
+                        Three layers for <span className="text-highlighted">full flexibility.</span>
                     </H2>
                 </div>
                 <div className="flex flex-col gap-6">
                     <Body className="mb-0!">
-                        Open Self&nbsp;Service separates content, presentation and integration — enabling gradual
-                        growth.
+                        Built on composable principles — Open Self Service offers a modular, backend-agnostic foundation
+                        for building modern customer-facing platforms. Each layer is designed to be independently
+                        developed, extended or replaced — giving full control over how the frontend evolves.
                     </Body>
-                    <a
-                        href={''} // TODO: add link
-                        className="button w-fit"
-                        rel="noopener"
-                    >
+                    <a href={'/docs/overview/architecture'} className="button w-fit" rel="noopener">
                         <span className="label flex items-center justify-center gap-2">Learn more</span>
                     </a>
                 </div>
