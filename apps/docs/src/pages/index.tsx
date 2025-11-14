@@ -18,6 +18,7 @@ import { HomepageBenefitsSection } from '@site/src/components/HomepageBenefitsSe
 import { HomepageFeaturesSection } from '@site/src/components/HomepageFeaturesSection';
 import { HomepageStartersSection } from '@site/src/components/HomepageStartersSection';
 import { HomepageUseCases } from '@site/src/components/HomepageUseCases';
+import { SubscribeSection } from '@site/src/components/SubscribeSection';
 import { Body, BodyBold } from '@site/src/components/Typography';
 
 import Layout from '@theme/Layout';
@@ -103,6 +104,12 @@ export default function Home(): ReactNode {
                                 </div>
                             </main>
                         </div>
+                    </div>
+
+                    <div className="section-gradient-1 py-40 mb-0!">
+                        <section className="mb-0! px-4 max-w-[1080px] mx-auto">
+                            <SubscribeSection portalId="143969481" formId="ad91735e-018c-4a60-a749-18f11d57b0e4" />
+                        </section>
                     </div>
 
                     {/* <HomepageAboutSection /> */}
