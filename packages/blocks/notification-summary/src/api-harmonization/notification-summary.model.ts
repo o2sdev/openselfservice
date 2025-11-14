@@ -5,7 +5,7 @@ export class NotificationSummaryInfoCard {
     icon?: string;
     value!: number;
     description?: string;
-    color?: string;
+    variant?: 'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW';
 }
 
 export class NotificationSummaryBlock extends Models.Block.Block {
