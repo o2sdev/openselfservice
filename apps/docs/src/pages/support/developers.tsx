@@ -116,7 +116,7 @@ export default function SupportStandard(): ReactNode {
                                     mainLink={{
                                         text: 'Join the Discord Community',
                                         url: 'https://discord.gg/4R568nZgsT',
-                                        iconLeft: <Icon_discord className="[&>*]:stroke-current" />,
+                                        iconLeft: <Icon_discord className="*:stroke-current" />,
                                         target: '_blank',
                                     }}
                                     tertiaryLink={{
@@ -140,7 +140,7 @@ export default function SupportStandard(): ReactNode {
                             primaryButton={{
                                 text: 'Join the Discord Community',
                                 url: 'https://discord.gg/4R568nZgsT',
-                                iconLeft: <Icon_discord className="[&>*]:stroke-current" />,
+                                iconLeft: <Icon_discord className="*:stroke-current" />,
                                 target: '_blank',
                             }}
                         />

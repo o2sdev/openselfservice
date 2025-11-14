@@ -374,7 +374,7 @@ const HubspotForm: React.FC<HubspotFormProps> = ({
                                                 {f.options.map((option, index) => (
                                                     <div className="flex items-start" key={`${f.name}-${index}`}>
                                                         <input
-                                                            className="mr-2 accent-[#4c5ce5]"
+                                                            className="mr-2 accent-violet"
                                                             type="checkbox"
                                                             id={`${f.name}-${index}`}
                                                             name={`${f.name}-${index}`}
@@ -451,7 +451,7 @@ const HubspotForm: React.FC<HubspotFormProps> = ({
                     {consents.map((c) => (
                         <div className="flex items-start mb-4" key={c.name}>
                             <input
-                                className="mr-2 accent-[#4c5ce5]"
+                                className="mr-2 accent-violet"
                                 type="checkbox"
                                 id={c.name}
                                 name={c.name}

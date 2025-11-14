@@ -34,7 +34,7 @@ const SupportEnterprise = () => {
                                             teams that require reliability, hands-on support, and architectural
                                             flexibility.
                                         </p>
-                                        <ul className="space-y-2 !ml-0 !p-0 list-none">
+                                        <ul className="space-y-2 ml-0! p-0! list-none">
                                             {[
                                                 'Priority support with SLA',
                                                 'Implementation support and onboarding',
@@ -44,7 +44,7 @@ const SupportEnterprise = () => {
                                                 'Influence on roadmap and access to private betas',
                                             ].map((item, index) => (
                                                 <li key={index} className="flex items-start gap-2">
-                                                    <CircleCheckIcon className="h-5 w-5 flex-shrink-0 mt-0.5" />
+                                                    <CircleCheckIcon className="h-5 w-5 shrink-0 mt-0.5" />
                                                     <span>{item}</span>
                                                 </li>
                                             ))}

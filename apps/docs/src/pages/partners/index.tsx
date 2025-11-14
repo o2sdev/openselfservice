@@ -115,7 +115,7 @@ export default function Partnership(): ReactNode {
                                     mainLink={{
                                         text: 'Apply to become a partner',
                                         url: '#how-to-join',
-                                        iconRight: <ArrowDown className="[&>*]:stroke-current" />,
+                                        iconRight: <ArrowDown className="*:stroke-current" />,
                                     }}
                                 />
 

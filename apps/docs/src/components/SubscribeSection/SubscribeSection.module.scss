@@ -1,0 +1,30 @@
+.input {
+    border: none;
+    outline: none;
+
+    &::placeholder {
+        color: var(--inverted-foreground-color);
+    }
+
+    &:focus {
+        outline: 2px solid var(--ifm-color-primary);
+        outline-offset: 2px;
+    }
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+}
+
+.contactFormText {
+    color: var(--inverted-foreground-color);
+}
+
+.success {
+    color: var(--inverted-foreground-color);
+}
+
+.error {
+    color: #d61830;
+}

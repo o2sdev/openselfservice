@@ -188,9 +188,9 @@ export function HomepageAboutSection() {
                 </motion.div>
                 <div className="">
                     <div className="flex">
-                        <div className="left-[-16px] relative">
+                        <div className="-left-4 relative">
                             <div className="sticky top-[170px] h-[calc(100vh-190px)]">
-                                <div className="h-full w-[2px] bg-[#FFFFFF]/[.4] overflow-hidden">
+                                <div className="h-full w-0.5 bg-[#FFFFFF]/40 overflow-hidden">
                                     <motion.div
                                         className="w-full bg-[#FFFFFF]"
                                         style={{

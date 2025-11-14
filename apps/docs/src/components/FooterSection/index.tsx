@@ -32,7 +32,7 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ title, description
 
             {/* Buttons */}
             {(primaryButton || secondaryButton) && (
-                <div className="flex flex-col md:flex-row gap-2 items-start justify-center">
+                <div className="flex flex-col md:flex-row gap-2 justify-center">
                     {primaryButton && (
                         <a href={primaryButton.url} className="button" target={primaryButton.target} rel="noopener">
                             {primaryButton.iconLeft}

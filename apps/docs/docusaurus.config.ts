@@ -337,6 +337,25 @@ const config: Config = {
                 : [
                       {
                           type: 'dropdown',
+                          label: 'Product',
+                          position: 'left',
+                          items: [
+                              {
+                                  label: 'Features',
+                                  to: 'product/features',
+                              },
+                              {
+                                  label: 'Starters',
+                                  to: 'product/starters',
+                              },
+                              {
+                                  label: 'Integrations',
+                                  to: 'product/integrations',
+                              },
+                          ],
+                      },
+                      {
+                          type: 'dropdown',
                           label: 'Developers',
                           position: 'left',
                           items: [
@@ -396,12 +415,6 @@ const config: Config = {
                           label: 'Partners',
                           to: '/partners',
                       },
-                    {
-                        to: '/dxp',
-                        label: 'DXP Starter',
-                        position: 'left',
-                    },
-
                       {
                           type: 'search',
                           position: 'right',

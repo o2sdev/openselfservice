@@ -2,7 +2,7 @@ import React from 'react';
 
 interface CardProps {
     children: React.ReactNode;
-    borderColor?: 'gradient' | 'blue' | 'green' | 'light';
+    borderColor?: 'gradient' | 'blue' | 'green' | 'light' | 'transparent';
     className?: string;
     gap?: string;
 }
@@ -13,6 +13,7 @@ const Card: React.FC<CardProps> = ({ children, borderColor = 'blue', className =
         if (borderColor === 'blue') return 'card-base card-solid-border card-border-blue';
         if (borderColor === 'green') return 'card-base card-solid-border card-border-green';
         if (borderColor === 'light') return 'card-base card-solid-border card-border-light';
+        if (borderColor === 'transparent') return 'card-base';
 
         return 'card-base card-solid-border card-border-blue';
     };

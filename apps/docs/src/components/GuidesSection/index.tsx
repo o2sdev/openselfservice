@@ -2,8 +2,8 @@ import clsx from 'clsx';
 import React, { type ReactNode } from 'react';
 
 import HistoryIcon from '../../assets/icons/History.svg';
-import Badge from '../Badge';
-import { Body, BodyBold, BodySmall, H2, H3 } from '../Typography';
+import { FeatureTile } from '../FeatureTile';
+import { Body, BodySmall, H2, H3 } from '../Typography';
 
 export interface Guide {
     title: string;
@@ -40,20 +40,12 @@ export const GuidesSection: React.FC<GuidesSectionProps> = ({ title, guides, inf
                 <ul className="list-none p-0! m-0! flex flex-col gap-4 w-full">
                     {guides.map((guide, index) => (
                         <li key={index}>
-                            <div className={clsx('card-base')}>
-                                <div className={`flex justify-between p-6 w-full h-full`}>
-                                    <div className="self-center mr-6">{guide.icon}</div>
-
-                                    <div className={`flex flex-col gap-2`}>
-                                        <BodyBold className="m-0!">{guide.title}</BodyBold>
-                                        <BodySmall className="m-0!">{guide.description}</BodySmall>
-                                    </div>
-
-                                    <div className="shrink-0 ml-2">
-                                        <Badge title={guide.badge} variant="secondary" />
-                                    </div>
-                                </div>
-                            </div>
+                            <FeatureTile
+                                icon={guide.icon}
+                                title={guide.title}
+                                description={guide.description}
+                                badge={guide.badge}
+                            />
                         </li>
                     ))}
                 </ul>
