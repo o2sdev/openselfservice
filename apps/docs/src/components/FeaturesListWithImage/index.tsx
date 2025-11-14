@@ -1,8 +1,9 @@
 import clsx from 'clsx';
+import { AnimatePresence, motion } from 'framer-motion';
 import React, { useState } from 'react';
 
-import ArrowRightIcon from '@site/src/assets/icons/ArrowRight.svg';
-import { BodyBold, H3 } from '@site/src/components/Typography';
+import ChevronRightIcon from '@site/src/assets/icons/ChevronRight.svg';
+import { H3 } from '@site/src/components/Typography';
 
 interface FeaturesListWithImageProps {
     title: string;
@@ -28,19 +29,19 @@ export function FeaturesListWithImage({ title, features }: FeaturesListWithImage
                                 type="button"
                                 onClick={() => setActiveFeatureIndex(featureIndex)}
                                 className={clsx(
-                                    'flex items-center justify-between py-4! px-0! border-b border-[#FAFAFA] text-left! transition-colors cursor-pointer',
+                                    'flex items-center justify-between py-4! px-0! border-b-[#9CA3AF] text-left! transition-colors cursor-pointer',
                                     'bg-transparent! border-0! border-b! rounded-none!',
                                     'font-bold! text-base! leading-6!',
                                     featureIndex === activeFeatureIndex
-                                        ? 'text-highlighted!'
-                                        : 'text-white! hover:text-white/80!',
+                                        ? 'text-white border-b-white'
+                                        : 'text-[#9CA3AF]!',
                                 )}
                             >
                                 <span className="text-base leading-6 mb-0">{feature.title}</span>
-                                <ArrowRightIcon
+                                <ChevronRightIcon
                                     className={clsx(
                                         'w-4 h-4 shrink-0',
-                                        featureIndex === activeFeatureIndex ? '*:stroke-(--color-highlighted)' : '',
+                                        featureIndex === activeFeatureIndex ? '*:stroke-white' : '*:stroke-[#9CA3AF]',
                                     )}
                                 />
                             </button>
@@ -48,12 +49,19 @@ export function FeaturesListWithImage({ title, features }: FeaturesListWithImage
                     </div>
                 </div>
                 {/* Right column: Image */}
-                <div className="h-[546px] overflow-hidden rounded-lg">
-                    <img
-                        src={features[activeFeatureIndex].image}
-                        alt={features[activeFeatureIndex].title}
-                        className="w-full h-full object-cover"
-                    />
+                <div className="h-[546px] overflow-hidden rounded-lg relative">
+                    <AnimatePresence>
+                        <motion.img
+                            key={activeFeatureIndex}
+                            src={features[activeFeatureIndex].image}
+                            alt={features[activeFeatureIndex].title}
+                            className="w-full h-full object-cover absolute inset-0"
+                            initial={{ opacity: 0, x: '100%' }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: '-100%' }}
+                            transition={{ duration: 0.3, ease: 'easeInOut' }}
+                        />
+                    </AnimatePresence>
                 </div>
             </div>
 
