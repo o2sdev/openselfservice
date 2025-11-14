@@ -6,6 +6,7 @@ fragment OrdersSummaryComponent on ComponentComponentsOrdersSummary {
     chartTitle
     chartPreviousPeriodLabel
     chartCurrentPeriodLabel
+    showChart
     ranges {
         id
         label

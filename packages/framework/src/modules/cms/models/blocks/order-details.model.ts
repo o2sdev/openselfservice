@@ -22,12 +22,12 @@ export class OrderDetailsBlock extends Block.Block {
         showMore: string;
         close: string;
     };
-    totalValue!: InfoCard.InfoCard;
-    createdOrderAt!: InfoCard.InfoCard;
-    paymentDueDate!: InfoCard.InfoCard;
-    overdue!: InfoCard.InfoCard;
-    orderStatus!: InfoCard.InfoCard;
-    customerComment!: InfoCard.InfoCard;
+    totalValue?: InfoCard.InfoCard;
+    createdOrderAt?: InfoCard.InfoCard;
+    paymentDueDate?: InfoCard.InfoCard;
+    overdue?: InfoCard.InfoCard;
+    orderStatus?: InfoCard.InfoCard;
+    customerComment?: InfoCard.InfoCard;
     reorderLabel?: string;
     trackOrderLabel?: string;
     payOnlineLabel?: string;

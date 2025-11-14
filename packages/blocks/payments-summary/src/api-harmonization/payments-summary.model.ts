@@ -5,7 +5,7 @@ import { Invoices, Models } from '@o2s/framework/modules';
 export class PaymentsSummaryBlock extends ApiModels.Block.Block {
     __typename!: 'PaymentsSummaryBlock';
     currency!: Invoices.Model.Invoice['currency'];
-    overdue!: {
+    overdue?: {
         title: string;
         icon?: string;
         value: Models.Price.Price;
@@ -17,7 +17,7 @@ export class PaymentsSummaryBlock extends ApiModels.Block.Block {
         };
         isOverdue: boolean;
     };
-    toBePaid!: {
+    toBePaid?: {
         title: string;
         icon?: string;
         value: Models.Price.Price;
@@ -28,4 +28,25 @@ export class PaymentsSummaryBlock extends ApiModels.Block.Block {
             icon?: string;
         };
     };
+    layout?: 'vertical' | 'horizontal';
+    chart?: {
+        title?: string;
+        labels: {
+            topSegment: string;
+            middleSegment: string;
+            bottomSegment: string;
+            total: string;
+        };
+        chartData: BarData[];
+        showChart?: boolean;
+        monthsToShow?: number;
+    };
+}
+
+export class BarData {
+    month!: string;
+    topSegment!: string;
+    middleSegment!: string;
+    bottomSegment!: string;
+    total!: string;
 }

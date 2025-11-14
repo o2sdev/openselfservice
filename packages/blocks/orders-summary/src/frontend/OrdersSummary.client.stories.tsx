@@ -82,6 +82,7 @@ export const Default: Story = {
                 prev: 'Previous period',
                 current: 'Current period',
             },
+            showChart: true,
         },
         noResults: {
             title: "So far, there's nothing here",
