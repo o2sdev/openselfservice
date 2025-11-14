@@ -65,6 +65,7 @@ export const mapOrdersSummary = (
         },
         noResults: cms.noResults,
         ranges: cms.ranges,
+        layout: cms.layout,
     };
 };
 

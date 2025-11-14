@@ -8,6 +8,7 @@ export class OrdersSummaryBlock extends Block.Block {
     averageNumber!: InfoCard.InfoCard;
     chart!: OrdersChart;
     ranges?: Range[];
+    layout?: 'vertical' | 'horizontal';
     noResults!: {
         title: string;
         description?: string;

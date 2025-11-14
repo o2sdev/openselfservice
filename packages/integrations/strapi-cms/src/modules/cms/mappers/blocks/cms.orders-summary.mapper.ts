@@ -44,6 +44,7 @@ export const mapOrdersSummaryBlock = (data: GetComponentQuery): CMS.Model.Orders
                     type: range.type,
                     isDefault: range.default,
                 })),
+                layout: 'horizontal',
                 noResults: {
                     title: component.noResults.title,
                     description: component.noResults.description,

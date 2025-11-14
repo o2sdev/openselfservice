@@ -66,6 +66,8 @@ export const OrdersSummaryPure: React.FC<Readonly<OrdersSummaryPureProps>> = ({
 
     const [isPending, startTransition] = useTransition();
 
+    const cardsLayout = component.layout === 'horizontal' ? 'flex-col md:flex-row' : 'flex-col';
+
     const handleFilter = (value: string) => {
         startTransition(async () => {
             let dateFrom: string;
@@ -130,7 +132,7 @@ export const OrdersSummaryPure: React.FC<Readonly<OrdersSummaryPureProps>> = ({
                     >
                         {data.chart.showChart ? (
                             <>
-                                <div className="w-full flex flex-col gap-6">
+                                <div className={cn('w-full flex gap-6', cardsLayout)}>
                                     <InfoCard
                                         title={data.totalValue.title}
                                         value={
@@ -178,7 +180,7 @@ export const OrdersSummaryPure: React.FC<Readonly<OrdersSummaryPureProps>> = ({
                                 </Card>
                             </>
                         ) : (
-                            <div className="w-full flex flex-col md:flex-row gap-6">
+                            <div className={cn('w-full flex gap-6', cardsLayout)}>
                                 <InfoCard
                                     title={data.totalValue.title}
                                     value={
