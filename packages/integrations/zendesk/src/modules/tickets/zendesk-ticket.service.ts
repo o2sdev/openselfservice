@@ -1,69 +1,43 @@
-import { HttpService } from '@nestjs/axios';
 import { Injectable, NotFoundException, NotImplementedException } from '@nestjs/common';
-import axios from 'axios';
-import { Observable, catchError, map, of, switchMap, throwError } from 'rxjs';
+import { Observable, catchError, from, map, of, switchMap, throwError } from 'rxjs';
 
 import { Tickets, Users } from '@o2s/framework/modules';
 
-interface ZendeskTicket {
-    id: number;
-    created_at: string;
-    updated_at: string;
-    subject: string;
-    description: string;
-    status: string;
-    priority: string;
-    requester_id: number;
-    submitter_id: number;
-    assignee_id: number;
-    tags: string[];
-    custom_fields: Array<{ id: number; value: string }>;
-    via: { channel: string };
-    type: string;
-}
+import {
+    type SearchResponse,
+    type SearchResultObject,
+    type TicketObject,
+    type UserObject,
+    client,
+    listSearchResults,
+    listTicketComments,
+    showTicket,
+    showUser,
+} from '../../types';
 
-interface ZendeskSearchResponse {
-    count: number;
-    next_page?: string;
-    previous_page?: string;
-    results: ZendeskTicket[];
-}
-
-interface ZendeskTicketResponse {
-    ticket: ZendeskTicket;
-}
+type ZendeskTicket = TicketObject;
+type ZendeskUser = UserObject;
 
 interface ZendeskComment {
-    id: number;
-    author_id: number;
-    body: string;
-    created_at: string;
-    public: boolean;
-}
-
-interface ZendeskCommentsResponse {
-    comments: ZendeskComment[];
-}
-
-interface ZendeskUser {
-    id: number;
-    name: string;
-    email: string;
-    photo?: { content_url: string };
+    id?: number;
+    author_id?: number;
+    body?: string;
+    created_at?: string;
+    public?: boolean;
 }
 
 @Injectable()
 export class ZendeskTicketService extends Tickets.Service {
-    private readonly apiUrl: string;
-    private readonly apiToken: string;
-
-    constructor(
-        private readonly httpService: HttpService,
-        private readonly usersService: Users.Service,
-    ) {
+    constructor(private readonly usersService: Users.Service) {
         super();
-        this.apiUrl = process.env.ZENDESK_API_URL || '';
-        this.apiToken = process.env.ZENDESK_API_TOKEN || '';
+
+        client.setConfig({
+            baseUrl: process.env.ZENDESK_API_URL || '',
+            auth: async () => {
+                // Return the basic auth token (SDK will encode it as "Basic <base64>")
+                return process.env.ZENDESK_API_TOKEN || '';
+            },
+        });
     }
 
     getTicket(
@@ -78,7 +52,7 @@ export class ZendeskTicketService extends Tickets.Service {
 
                 return this.fetchTicket(options.id).pipe(
                     switchMap((ticket) => {
-                        return this.fetchUser(ticket.requester_id).pipe(
+                        return this.fetchUser(ticket.requester_id!).pipe(
                             switchMap((requester) => {
                                 if (requester.email !== user.email) {
                                     return of(undefined);
@@ -91,7 +65,7 @@ export class ZendeskTicketService extends Tickets.Service {
                         );
                     }),
                     catchError((error) => {
-                        if (axios.isAxiosError(error) && error.response?.status === 404) {
+                        if (error?.status === 404 || error?.message?.includes('404')) {
                             return of(undefined);
                         }
                         return throwError(() => error);
@@ -138,18 +112,19 @@ export class ZendeskTicketService extends Tickets.Service {
 
                 return this.searchTickets(searchQuery, page, perPage).pipe(
                     map((response) => {
-                        const tickets = response.results.map((ticket) => this.mapTicketToModel(ticket));
+                        const tickets = (response.results || []).map((result: SearchResultObject) => {
+                            // Search results contain the ticket object
+                            const ticket = result as unknown as ZendeskTicket;
+                            return this.mapTicketToModel(ticket);
+                        });
 
                         return {
-                            total: response.count,
+                            total: response.count || 0,
                             data: tickets,
                         };
                     }),
                     catchError((error) => {
-                        if (axios.isAxiosError(error)) {
-                            return throwError(() => new Error(`Failed to fetch ticket: ${error.message}`));
-                        }
-                        return throwError(() => error);
+                        return throwError(() => new Error(`Failed to fetch tickets: ${error.message || error}`));
                     }),
                 );
             }),
@@ -161,84 +136,73 @@ export class ZendeskTicketService extends Tickets.Service {
     }
 
     private fetchTicket(id: string): Observable<ZendeskTicket> {
-        return this.httpService
-            .get<ZendeskTicketResponse>(`${this.apiUrl}/api/v2/tickets/${id}`, {
-                headers: {
-                    Authorization: `Basic ${this.apiToken}`,
-                    'Content-Type': 'application/json',
+        return from(
+            showTicket({
+                path: {
+                    ticket_id: Number(id),
                 },
-            })
-            .pipe(
-                map((response) => response.data.ticket),
-                catchError((error) => {
-                    if (axios.isAxiosError(error)) {
-                        return throwError(() => new Error(`Failed to fetch ticket: ${error.message}`));
-                    }
-                    return throwError(() => error);
-                }),
-            );
+            }),
+        ).pipe(
+            map((response) => {
+                if (!response.data?.ticket) {
+                    throw new Error('Ticket not found in response');
+                }
+                return response.data.ticket;
+            }),
+            catchError((error) => {
+                return throwError(() => new Error(`Failed to fetch ticket: ${error.message || error}`));
+            }),
+        );
     }
 
-    private searchTickets(query: string, page: number, perPage: number): Observable<ZendeskSearchResponse> {
-        return this.httpService
-            .get<ZendeskSearchResponse>(`${this.apiUrl}/api/v2/search.json`, {
-                headers: {
-                    Authorization: `Basic ${this.apiToken}`,
-                    'Content-Type': 'application/json',
-                },
-                params: {
+    private searchTickets(query: string, _page: number, _perPage: number): Observable<SearchResponse> {
+        return from(
+            listSearchResults({
+                query: {
                     query,
-                    page,
-                    per_page: perPage,
                 },
-            })
-            .pipe(
-                map((response) => response.data),
-                catchError((error) => {
-                    if (axios.isAxiosError(error)) {
-                        return throwError(() => new Error(`Failed to search tickets: ${error.message}`));
-                    }
-                    return throwError(() => error);
-                }),
-            );
+            }),
+        ).pipe(
+            map((response) => response.data!),
+            catchError((error) => {
+                return throwError(() => new Error(`Failed to search tickets: ${error.message || error}`));
+            }),
+        );
     }
 
     private fetchTicketComments(ticketId: string): Observable<ZendeskComment[]> {
-        return this.httpService
-            .get<ZendeskCommentsResponse>(`${this.apiUrl}/api/v2/tickets/${ticketId}/comments`, {
-                headers: {
-                    Authorization: `Basic ${this.apiToken}`,
-                    'Content-Type': 'application/json',
+        return from(
+            listTicketComments({
+                path: {
+                    ticket_id: Number(ticketId),
                 },
-            })
-            .pipe(
-                map((response) => response.data.comments),
-                catchError((error) => {
-                    if (axios.isAxiosError(error)) {
-                        return throwError(() => new Error(`Failed to fetch ticket comments: ${error.message}`));
-                    }
-                    return throwError(() => error);
-                }),
-            );
+            }),
+        ).pipe(
+            map((response) => response.data?.comments || []),
+            catchError((error) => {
+                return throwError(() => new Error(`Failed to fetch ticket comments: ${error.message || error}`));
+            }),
+        );
     }
 
     private fetchUser(userId: number): Observable<ZendeskUser> {
-        return this.httpService
-            .get<{ user: ZendeskUser }>(`${this.apiUrl}/api/v2/users/${userId}`, {
-                headers: {
-                    Authorization: `Basic ${this.apiToken}`,
-                    'Content-Type': 'application/json',
+        return from(
+            showUser({
+                path: {
+                    user_id: userId,
                 },
-            })
-            .pipe(
-                map((response) => response.data.user),
-                catchError((error) => {
-                    if (axios.isAxiosError(error)) {
-                        return throwError(() => new Error(`Failed to fetch user: ${error.message}`));
-                    }
-                    return throwError(() => error);
-                }),
-            );
+            }),
+        ).pipe(
+            map((response) => {
+                if (!response.data?.user) {
+                    throw new Error('User not found in response');
+                }
+                return response.data.user;
+            }),
+            catchError((error) => {
+                return throwError(() => new Error(`Failed to fetch user: ${error.message || error}`));
+            }),
+        );
     }
 
     private mapTicketToModel(ticket: ZendeskTicket, comments: ZendeskComment[] = []): Tickets.Model.Ticket {
@@ -250,16 +214,16 @@ export class ZendeskTicketService extends Tickets.Service {
         }
 
         const properties: Tickets.Model.TicketProperty[] = [
-            { id: 'subject', value: ticket.subject },
+            { id: 'subject', value: ticket.subject || '' },
             { id: 'description', value: ticket.description || '' },
         ];
 
         if (ticket.custom_fields) {
             ticket.custom_fields.forEach((field) => {
-                if (field.value) {
+                if (field.value !== null && field.value !== undefined) {
                     properties.push({
                         id: `custom_field_${field.id}`,
-                        value: field.value,
+                        value: String(field.value),
                     });
                 }
             });
@@ -270,15 +234,15 @@ export class ZendeskTicketService extends Tickets.Service {
                 name: `User ${comment.author_id}`,
                 email: '',
             },
-            date: comment.created_at,
-            content: comment.body,
+            date: comment.created_at || '',
+            content: comment.body || '',
         }));
 
         return {
-            id: ticket.id.toString(),
-            createdAt: ticket.created_at,
-            updatedAt: ticket.updated_at,
-            topic: ticket.tags[0] || 'general',
+            id: ticket.id?.toString() || '',
+            createdAt: ticket.created_at || '',
+            updatedAt: ticket.updated_at || '',
+            topic: ticket.tags?.[0] || 'general',
             type: ticket.priority || 'normal',
             status,
             properties,

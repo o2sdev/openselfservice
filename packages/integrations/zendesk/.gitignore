@@ -4,6 +4,11 @@
 /node_modules
 /build
 
+# Generated OpenAPI files
+/scripts/oas/oas.yaml
+/src/types/*.gen.ts
+/src/types/core/
+
 # Logs
 logs
 *.log
@@ -54,3 +59,5 @@ pids
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+/src/types/
