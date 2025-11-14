@@ -23,7 +23,7 @@ export const mapNotificationSummary = (
             icon: cms.critical.icon,
             value: priorityCounts.CRITICAL || 0,
             description: cms.critical.message,
-            color: 'text-destructive',
+            variant: 'CRITICAL',
         });
     }
     if (cms.high) {
@@ -32,7 +32,7 @@ export const mapNotificationSummary = (
             icon: cms.high.icon,
             value: priorityCounts.HIGH || 0,
             description: cms.high.message,
-            color: 'text-destructive',
+            variant: 'HIGH',
         });
     }
     if (cms.medium) {
@@ -41,7 +41,7 @@ export const mapNotificationSummary = (
             icon: cms.medium.icon,
             value: priorityCounts.MEDIUM || 0,
             description: cms.medium.message,
-            color: 'text-badge-secondary-background',
+            variant: 'MEDIUM',
         });
     }
     if (cms.low) {
@@ -50,7 +50,7 @@ export const mapNotificationSummary = (
             icon: cms.low.icon,
             value: priorityCounts.LOW || 0,
             description: cms.low.message,
-            color: 'text-muted-foreground',
+            variant: 'LOW',
         });
     }
 

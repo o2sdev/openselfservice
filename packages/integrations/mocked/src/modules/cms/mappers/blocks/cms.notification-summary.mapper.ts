@@ -16,7 +16,7 @@ const MOCK_NOTIFICATION_SUMMARY_BLOCK_EN: CMS.Model.NotificationSummaryBlock.Not
     },
     low: {
         title: 'Low Priority',
-        icon: 'Info',
+        icon: 'AlertCircle',
         message: 'Low priority notifications',
     },
     critical: {
@@ -37,17 +37,17 @@ const MOCK_NOTIFICATION_SUMMARY_BLOCK_DE: CMS.Model.NotificationSummaryBlock.Not
     },
     medium: {
         title: 'Mittlere Priorität',
-        icon: 'Info',
+        icon: 'AlertCircle',
         message: 'Benachrichtigungen mit mittlerer Priorität',
     },
     low: {
         title: 'Niedrige Priorität',
-        icon: 'Info',
+        icon: 'AlertCircle',
         message: 'Benachrichtigungen mit niedriger Priorität',
     },
     critical: {
         title: 'Kritische Priorität',
-        icon: 'Info',
+        icon: 'AlertCircle',
         message: 'Benachrichtigungen mit kritischer Priorität',
     },
 };
@@ -63,17 +63,17 @@ const MOCK_NOTIFICATION_SUMMARY_BLOCK_PL: CMS.Model.NotificationSummaryBlock.Not
     },
     medium: {
         title: 'Średni priorytet',
-        icon: 'Info',
+        icon: 'AlertCircle',
         message: 'Powiadomienia o średnim priorytecie',
     },
     low: {
         title: 'Niski priorytet',
-        icon: 'Info',
+        icon: 'AlertCircle',
         message: 'Powiadomienia o niskim priorytecie',
     },
     critical: {
         title: 'Krytyczny priorytet',
-        icon: 'Info',
+        icon: 'AlertCircle',
         message: 'Powiadomienia o krytycznym priorytecie',
     },
 };

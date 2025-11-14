@@ -17,9 +17,12 @@ export const NotificationSummaryRenderer: React.FC<NotificationSummaryRendererPr
         <Suspense
             key={id}
             fallback={
-                <div className="w-full flex">
-                    <Loading bars={1} />
-                </div>
+                <>
+                    <div className="w-full flex gap-6">
+                        <Loading bars={0} />
+                        <Loading bars={0} />
+                    </div>
+                </>
             }
         >
             <NotificationSummary id={id} accessToken={accessToken} locale={locale} routing={routing} />
