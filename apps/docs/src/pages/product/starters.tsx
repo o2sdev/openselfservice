@@ -308,7 +308,7 @@ export default function ProductStarters() {
                                 description="Tell us what kind of frontend starter would help your next project.We're planning more — and we want your input."
                                 primaryButton={{
                                     text: 'Submit your idea',
-                                    url: '/contact', // TODO: confirm link
+                                    url: '/contact',
                                 }}
                             />
                         </section>
