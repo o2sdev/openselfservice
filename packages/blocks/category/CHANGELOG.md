@@ -1,5 +1,17 @@
 # @o2s/blocks.category
 
+## 1.1.1
+
+### Patch Changes
+
+- b57d151: fixed incorrect image links in storybook
+- Updated dependencies [8ac0de9]
+- Updated dependencies [485731c]
+- Updated dependencies [b519464]
+  - @o2s/utils.logger@1.1.1
+  - @o2s/framework@1.11.3
+  - @o2s/ui@1.5.0
+
 ## 1.1.0
 
 ### Minor Changes
