@@ -51,7 +51,7 @@ const digitalPortalStarter: StarterInfoSectionProps = {
         { link: 'https://demo-dxp.openselfservice.com/', label: 'Live Demo', target: '_blank' },
         { link: '/docs/app-starters/dxp/overview', label: 'Docs' },
         { link: 'https://storybook-dxp.openselfservice.com/?path=/docs', label: 'Storybook', target: '_blank' },
-        { link: 'https://github.com/o2sdev/dxp-starter-kit', label: 'Github', target: '_blank' },
+        { link: 'https://github.com/o2sdev/dxp-starter-kit', label: 'GitHub', target: '_blank' },
     ],
     mainTitle: 'Digital Portal Starter',
     description: (

@@ -36,7 +36,7 @@ export function FeaturesListWithImage({ title, features }: FeaturesListWithImage
                                         : 'text-white! hover:text-white/80!',
                                 )}
                             >
-                                <BodyBold className="text-base! leading-6! mb-0!">{feature.title}</BodyBold>
+                                <span className="text-base leading-6 mb-0">{feature.title}</span>
                                 <ArrowRightIcon
                                     className={clsx(
                                         'w-4 h-4 shrink-0',
