@@ -21,7 +21,7 @@
         "@o2s/utils.logger": "*",
         "flatted": "^3.3.3",
         "graphql": "16.11.0",
-        "graphql-request": "7.3.1",
+        "graphql-request": "7.3.3",
         "graphql-tag": "2.12.6"
     },
     "devDependencies": {
