@@ -6,8 +6,6 @@
 
 # Generated OpenAPI files
 /scripts/oas/oas.yaml
-/src/types/*.gen.ts
-/src/types/core/
 
 # Logs
 logs

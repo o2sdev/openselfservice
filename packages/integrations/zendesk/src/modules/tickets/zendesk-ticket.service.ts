@@ -31,11 +31,17 @@ export class ZendeskTicketService extends Tickets.Service {
     constructor(private readonly usersService: Users.Service) {
         super();
 
+        const baseUrl = process.env.ZENDESK_API_URL;
+        const token = process.env.ZENDESK_API_TOKEN;
+
+        if (!baseUrl || !token) {
+            throw new Error('Missing required environment variables: ZENDESK_API_URL and ZENDESK_API_TOKEN');
+        }
+
         client.setConfig({
-            baseUrl: process.env.ZENDESK_API_URL || '',
+            baseUrl,
             auth: async () => {
-                // Return the basic auth token (SDK will encode it as "Basic <base64>")
-                return process.env.ZENDESK_API_TOKEN || '';
+                return token;
             },
         });
     }
@@ -107,16 +113,21 @@ export class ZendeskTicketService extends Tickets.Service {
                     searchQuery += ` created<=${new Date(options.dateTo).toISOString()}`;
                 }
 
-                const page = options.offset ? Math.floor(options.offset / (options.limit || 10)) + 1 : 1;
-                const perPage = options.limit || 10;
-
-                return this.searchTickets(searchQuery, page, perPage).pipe(
+                // Note: Zendesk search api only supports query, sort_by, and sort_order parameters
+                // no page/per_page pagination available - using client-side pagination instead
+                // Limitation: Only works for datasets with ≤100 results (API's max response size)
+                return this.searchTickets(searchQuery).pipe(
                     map((response) => {
-                        const tickets = (response.results || []).map((result: SearchResultObject) => {
+                        const allTickets = (response.results || []).map((result: SearchResultObject) => {
                             // Search results contain the ticket object
                             const ticket = result as unknown as ZendeskTicket;
                             return this.mapTicketToModel(ticket);
                         });
+
+                        // Client-side pagination (API doesn't support server-side pagination)
+                        const startIndex = options.offset || 0;
+                        const endIndex = startIndex + (options.limit || 10);
+                        const tickets = allTickets.slice(startIndex, endIndex);
 
                         return {
                             total: response.count || 0,
@@ -155,7 +166,7 @@ export class ZendeskTicketService extends Tickets.Service {
         );
     }
 
-    private searchTickets(query: string, _page: number, _perPage: number): Observable<SearchResponse> {
+    private searchTickets(query: string): Observable<SearchResponse> {
         return from(
             listSearchResults({
                 query: {
