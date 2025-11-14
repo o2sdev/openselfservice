@@ -4,10 +4,12 @@ import React from 'react';
 import ArrowLeftRightGreenTileIcon from '@site/src/assets/icons/ArrowLeftRightGreenTile.svg';
 import BanGreenTileIcon from '@site/src/assets/icons/BanGreenTile.svg';
 import BlocksPurpleTileIcon from '@site/src/assets/icons/BlocksPurpleTile.svg';
+import CircleUserGreenTileIcon from '@site/src/assets/icons/CircleUserGreenTile.svg';
 import GaugePurpleTileIcon from '@site/src/assets/icons/GaugePurpleTile.svg';
 import LayersPurpleTileIcon from '@site/src/assets/icons/LayersPurpleTile.svg';
 import LayoutDashboardGreenTileIcon from '@site/src/assets/icons/LayoutDashboardGreenTile.svg';
 import ScalingGreenTileIcon from '@site/src/assets/icons/ScalingGreenTile.svg';
+import SquareStackPurpleTileIcon from '@site/src/assets/icons/SquareStackPurpleTile.svg';
 import StarIcon from '@site/src/assets/icons/Star.svg';
 import WaypointsPurpleTileIcon from '@site/src/assets/icons/WaypointsPurpleTile.svg';
 import { FeatureTileList } from '@site/src/components/FeatureTile';
@@ -92,7 +94,7 @@ const keyBenefits = {
                 description: 'Fetch all backend data via one normalized interface',
             },
             {
-                icon: <LayersPurpleTileIcon />,
+                icon: <SquareStackPurpleTileIcon />,
                 title: 'Ready to use CMS content models',
                 description: 'Use pre-defined schemas mapped to frontend components',
             },
@@ -128,7 +130,7 @@ const keyBenefits = {
                 description: 'Choose the best tools, replace them freely when needed',
             },
             {
-                icon: <ArrowLeftRightGreenTileIcon />,
+                icon: <CircleUserGreenTileIcon />,
                 title: 'UX optimized for efficient customer self-service',
                 description: 'Use proven UI patterns designed for support and self-care',
             },
