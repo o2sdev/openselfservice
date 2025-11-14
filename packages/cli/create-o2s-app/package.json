@@ -27,7 +27,7 @@
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "@types/cli-progress": "^3.11.6",
-        "eslint": "^9.38.0",
+        "eslint": "^9.39.1",
         "prettier": "^3.6.2",
         "typescript": "^5.9.3"
     }

@@ -26,7 +26,7 @@
     "@o2s/prettier-config": "*",
     "@o2s/typescript-config": "*",
     "concurrently": "^9.2.1",
-    "eslint": "^9.38.0",
+    "eslint": "^9.39.1",
     "prettier": "^3.6.2",
     "tsc-alias": "^1.8.16",
     "typescript": "^5.9.3"
