@@ -9,6 +9,7 @@ import { H1 } from '../Typography';
 interface HeroBannerSectionProps {
     heading?: ReactNode;
     description: ReactNode | ReactNode[];
+    containerWidth?: 'wide' | 'narrow'; // wide = 842px, narrow = 688px
     badge?: {
         text: string;
         icon?: ReactNode;
@@ -52,11 +53,16 @@ export function HeroBannerSection({
     tertiaryLink,
     heroImage,
     isDXPage = false,
+    containerWidth = 'wide',
 }: HeroBannerSectionProps) {
     return (
         <div className="relative min-h-[calc(100vh-64px)] flex items-center">
             <div className={clsx('container grid items-center', heroImage ? 'md:grid-cols-2' : 'text-center')}>
-                <div className={clsx(heroImage ? 'lg:w-[515px]' : 'lg:w-[842px] m-auto')}>
+                <div
+                    className={clsx(
+                        heroImage ? 'lg:w-[515px]' : `lg:w-[${containerWidth === 'wide' ? '842' : '688'}px] m-auto`,
+                    )}
+                >
                     {badge && (
                         <div className="flex justify-center mb-12">
                             <div className="bg-white/10 border border-white rounded-full px-4 py-2 h-10 flex items-center justify-center gap-2">

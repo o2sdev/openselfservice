@@ -204,6 +204,7 @@ export default function ProductIntegrations() {
                         <div className={styles.gradientCircleBlue} />
                         <main className={styles.mainContentWrapper}>
                             <HeroBannerSection
+                                containerWidth="narrow"
                                 badge={{
                                     text: 'Integrations',
                                     icon: <BlocksIcon className="*:stroke-white" />,

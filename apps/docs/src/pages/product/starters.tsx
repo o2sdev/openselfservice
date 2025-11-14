@@ -251,6 +251,7 @@ export default function ProductStarters() {
                         <div className={styles.gradientCircleBlue} />
                         <main className={styles.mainContentWrapper}>
                             <HeroBannerSection
+                                containerWidth="narrow"
                                 badge={{
                                     text: 'Starters',
                                     icon: <RocketIcon className="*:stroke-white" />,

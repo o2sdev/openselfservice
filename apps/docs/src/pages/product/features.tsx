@@ -14,7 +14,7 @@ import { FeatureTileList } from '@site/src/components/FeatureTile';
 import { FeaturesListWithImage } from '@site/src/components/FeaturesListWithImage';
 import { FooterSection } from '@site/src/components/FooterSection';
 import { HeroBannerSection } from '@site/src/components/HeroBannerSection';
-import { Body, H2, H3 } from '@site/src/components/Typography';
+import { Body, BodySmall, H2, H3 } from '@site/src/components/Typography';
 
 import Layout from '@theme/Layout';
 
@@ -247,6 +247,7 @@ export default function ProductFeatures() {
                         <div className={styles.gradientCircleBlue} />
                         <main className={styles.mainContentWrapper}>
                             <HeroBannerSection
+                                containerWidth="narrow"
                                 badge={{
                                     text: 'Product Features',
                                     icon: <StarIcon className="*:stroke-white" />,
@@ -292,10 +293,12 @@ export default function ProductFeatures() {
                                                         <li key={featureIndex}>
                                                             <div className={clsx('card-base card-light-bg p-6!')}>
                                                                 <div className="flex flex-col gap-2">
-                                                                    <h4 className="m-0! text-2xl! text-current! font-semibold! leading-9!">
+                                                                    <h4 className="m-0! text-xl! text-current! font-semibold! leading-7!">
                                                                         {feature.title}
                                                                     </h4>
-                                                                    <Body className="mb-0!">{feature.description}</Body>
+                                                                    <BodySmall className="mb-0!">
+                                                                        {feature.description}
+                                                                    </BodySmall>
                                                                 </div>
                                                             </div>
                                                         </li>
