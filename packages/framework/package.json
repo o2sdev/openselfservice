@@ -20,7 +20,7 @@
     "dependencies": {
         "@o2s/utils.logger": "*",
         "logform": "2.7.0",
-        "ofetch": "^1.5.0",
+        "ofetch": "^1.5.1",
         "qs": "^6.14.0",
         "winston": "^3.18.3"
     },
