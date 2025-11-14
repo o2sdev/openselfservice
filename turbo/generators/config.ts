@@ -1,5 +1,10 @@
 import type { PlopTypes } from '@turbo/gen';
 
+/**
+ * Registers the "integration" and "block" Plop generators used to scaffold integrations and blocks.
+ *
+ * @param plop - The Plop API instance used to define generators and their prompts/actions
+ */
 export default function generator(plop: PlopTypes.NodePlopAPI): void {
     plop.setGenerator('integration', {
         description: 'Adds a new API integration',
