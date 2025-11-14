@@ -17,8 +17,15 @@ import { NotificationSummaryPureProps } from './NotificationSummary.types';
 export const NotificationSummaryPure: React.FC<NotificationSummaryPureProps> = ({ ...component }) => {
     const { infoCards, layout } = component;
 
+    if (!infoCards || infoCards.length === 0) {
+        return null;
+    }
+
     const isVertical = layout === 'vertical';
-    const containerClass = cn('w-full gap-6', isVertical ? 'flex flex-col' : 'grid grid-cols-1 md:grid-cols-2');
+    const containerClass = cn(
+        'w-full gap-6',
+        isVertical ? 'flex flex-col' : 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4',
+    );
 
     return (
         <div className={containerClass}>
