@@ -13,17 +13,19 @@ import {
     listTicketComments,
     showTicket,
     showUser,
-} from '../../types';
+} from '@/generated/zendesk';
+
+import { type ZendeskComment, mapTicketToModel } from './zendesk-ticket.mapper';
 
 type ZendeskTicket = TicketObject;
 type ZendeskUser = UserObject;
 
-interface ZendeskComment {
-    id?: number;
-    author_id?: number;
-    body?: string;
-    created_at?: string;
-    public?: boolean;
+interface ZendeskSearchQuery {
+    query: string;
+    sort_by?: string;
+    sort_order?: string;
+    page?: number;
+    per_page?: number;
 }
 
 @Injectable()
@@ -40,9 +42,7 @@ export class ZendeskTicketService extends Tickets.Service {
 
         client.setConfig({
             baseUrl,
-            auth: async () => {
-                return token;
-            },
+            headers: { Authorization: `Basic ${token}` },
         });
     }
 
@@ -65,7 +65,7 @@ export class ZendeskTicketService extends Tickets.Service {
                                 }
 
                                 return this.fetchTicketComments(options.id).pipe(
-                                    map((comments) => this.mapTicketToModel(ticket, comments)),
+                                    map((comments) => mapTicketToModel(ticket, comments)),
                                 );
                             }),
                         );
@@ -113,21 +113,16 @@ export class ZendeskTicketService extends Tickets.Service {
                     searchQuery += ` created<=${new Date(options.dateTo).toISOString()}`;
                 }
 
-                // Note: Zendesk search api only supports query, sort_by, and sort_order parameters
-                // no page/per_page pagination available - using client-side pagination instead
-                // Limitation: Only works for datasets with ≤100 results (API's max response size)
-                return this.searchTickets(searchQuery).pipe(
+                const page = options.offset ? Math.floor(options.offset / (options.limit || 10)) + 1 : 1;
+                const perPage = options.limit || 10;
+
+                return this.searchTickets(searchQuery, page, perPage).pipe(
                     map((response) => {
-                        const allTickets = (response.results || []).map((result: SearchResultObject) => {
+                        const tickets = (response.results || []).map((result: SearchResultObject) => {
                             // Search results contain the ticket object
                             const ticket = result as unknown as ZendeskTicket;
-                            return this.mapTicketToModel(ticket);
+                            return mapTicketToModel(ticket);
                         });
-
-                        // Client-side pagination (API doesn't support server-side pagination)
-                        const startIndex = options.offset || 0;
-                        const endIndex = startIndex + (options.limit || 10);
-                        const tickets = allTickets.slice(startIndex, endIndex);
 
                         return {
                             total: response.count || 0,
@@ -166,12 +161,14 @@ export class ZendeskTicketService extends Tickets.Service {
         );
     }
 
-    private searchTickets(query: string): Observable<SearchResponse> {
+    private searchTickets(query: string, page: number, perPage: number): Observable<SearchResponse> {
         return from(
             listSearchResults({
                 query: {
                     query,
-                },
+                    page,
+                    per_page: perPage,
+                } as ZendeskSearchQuery,
             }),
         ).pipe(
             map((response) => response.data!),
@@ -214,50 +211,5 @@ export class ZendeskTicketService extends Tickets.Service {
                 return throwError(() => new Error(`Failed to fetch user: ${error.message || error}`));
             }),
         );
-    }
-
-    private mapTicketToModel(ticket: ZendeskTicket, comments: ZendeskComment[] = []): Tickets.Model.Ticket {
-        let status: Tickets.Model.TicketStatus = 'OPEN';
-        if (ticket.status === 'closed' || ticket.status === 'solved') {
-            status = 'CLOSED';
-        } else if (ticket.status === 'pending' || ticket.status === 'hold') {
-            status = 'IN_PROGRESS';
-        }
-
-        const properties: Tickets.Model.TicketProperty[] = [
-            { id: 'subject', value: ticket.subject || '' },
-            { id: 'description', value: ticket.description || '' },
-        ];
-
-        if (ticket.custom_fields) {
-            ticket.custom_fields.forEach((field) => {
-                if (field.value !== null && field.value !== undefined) {
-                    properties.push({
-                        id: `custom_field_${field.id}`,
-                        value: String(field.value),
-                    });
-                }
-            });
-        }
-
-        const mappedComments = comments.map((comment) => ({
-            author: {
-                name: `User ${comment.author_id}`,
-                email: '',
-            },
-            date: comment.created_at || '',
-            content: comment.body || '',
-        }));
-
-        return {
-            id: ticket.id?.toString() || '',
-            createdAt: ticket.created_at || '',
-            updatedAt: ticket.updated_at || '',
-            topic: ticket.tags?.[0] || 'general',
-            type: ticket.priority || 'normal',
-            status,
-            properties,
-            comments: mappedComments.length > 0 ? mappedComments : undefined,
-        };
     }
 }

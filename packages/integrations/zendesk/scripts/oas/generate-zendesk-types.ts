@@ -7,7 +7,7 @@ async function generateZendeskTypes(): Promise<void> {
     if (!existsSync(oasPath)) {
         throw new Error(`OAS file not found at ${oasPath}. Run 'npm run fetch-oas' first.`);
     }
-    const outputDirPath = resolve(__dirname, '../../src/types');
+    const outputDirPath = resolve(__dirname, '../../generated/zendesk');
 
     try {
         mkdirSync(outputDirPath, { recursive: true });

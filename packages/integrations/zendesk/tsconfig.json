@@ -2,7 +2,8 @@
     "extends": "@o2s/typescript-config/api.json",
     "compilerOptions": {
         "paths": {
-            "@/*": ["./src/*"]
+            "@/*": ["./src/*"],
+            "@/generated/*": ["./generated/*"]
         },
         "outDir": "./dist"
     },

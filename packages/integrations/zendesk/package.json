@@ -10,6 +10,7 @@
     "dist"
   ],
   "scripts": {
+    "prepare": "npm run fetch-oas && npm run generate-types",
     "dev": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")",
     "build": "tsc && tsc-alias",
     "lint": "tsc --noEmit && eslint . --max-warnings 0",
