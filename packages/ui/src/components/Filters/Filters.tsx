@@ -35,6 +35,7 @@ export const Filters = <T, S extends FormikValues>({
     onSubmit,
     onReset,
     hasLeadingItem,
+    variant = 'drawer',
     labels,
 }: Readonly<FiltersProps<T, S>>) => {
     const [filtersOpen, setFiltersOpen] = useState(false);
@@ -56,6 +57,50 @@ export const Filters = <T, S extends FormikValues>({
         onReset();
     };
 
+    // Inline variant: render filters directly without drawer
+    if (variant === 'inline') {
+        return (
+            <div className="w-full">
+                <Formik<S>
+                    initialValues={initialValues}
+                    enableReinitialize={true}
+                    onSubmit={(values) => {
+                        countActiveFilters(values);
+                        onSubmit(values);
+                    }}
+                >
+                    {({ submitForm, setFieldValue }) => (
+                        <Form>
+                            <div className="flex flex-col gap-4">
+                                {/* Filters container */}
+                                <div className="flex flex-wrap gap-4">
+                                    {filteredItems.map((item) => (
+                                        <div key={String(item.id)} className="flex-shrink-0">
+                                            <FilterItem
+                                                item={item}
+                                                setFieldValue={setFieldValue}
+                                                submitForm={submitForm}
+                                                labels={labels}
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+                                {/* Action buttons */}
+                                <div className="flex gap-4">
+                                    <Button type="button" variant="secondary" onClick={handleReset}>
+                                        {reset}
+                                    </Button>
+                                    <Button type="submit">{submit}</Button>
+                                </div>
+                            </div>
+                        </Form>
+                    )}
+                </Formik>
+            </div>
+        );
+    }
+
+    // Drawer variant: original implementation
     return (
         <div className={cn(leadingItem ? 'w-full' : 'w-full sm:w-auto')}>
             <Formik<S>
