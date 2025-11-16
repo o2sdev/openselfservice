@@ -12,10 +12,12 @@ const FiltersWrapper = <T, S extends FormikValues>({
     filters,
     initialValues,
     hasLeadingItem = false,
+    variant = 'drawer',
 }: {
     filters: Models.Filters.Filters<T>;
     initialValues: S;
     hasLeadingItem?: boolean;
+    variant?: 'drawer' | 'inline';
 }) => {
     const [currentFilters, setCurrentFilters] = useState<S>(initialValues);
 
@@ -45,6 +47,7 @@ const FiltersWrapper = <T, S extends FormikValues>({
                 onSubmit={handleSubmit}
                 onReset={handleReset}
                 hasLeadingItem={hasLeadingItem}
+                variant={variant}
                 labels={{ clickToSelect: 'Select an option' }}
             />
         </FiltersContextProvider>
@@ -68,7 +71,12 @@ export default meta;
 
 type Story = StoryObj<
     typeof meta & {
-        args: { filters: Models.Filters.Filters<FilterType>; initialValues: FilterValues; hasLeadingItem?: boolean };
+        args: {
+            filters: Models.Filters.Filters<FilterType>;
+            initialValues: FilterValues;
+            hasLeadingItem?: boolean;
+            variant?: 'drawer' | 'inline';
+        };
     }
 >;
 
@@ -219,6 +227,83 @@ export const WithSection: Story = {
                     initialValues={initialValues}
                     onSubmit={handleSubmit}
                     onReset={handleReset}
+                />
+                <div className="p-4 border rounded-md mb-4">
+                    <h3 className="text-sm font-semibold mb-2">Current Filters:</h3>
+                    <pre className="text-xs bg-gray-100 p-2 rounded">{JSON.stringify(currentFilters, null, 2)}</pre>
+                </div>
+            </div>
+        );
+    },
+};
+
+export const InlineVariant: Story = {
+    args: {
+        filters: basicFilters,
+        initialValues: {
+            category: '',
+            price: '',
+            rating: [],
+            sort: 'relevance',
+        },
+        hasLeadingItem: false,
+        variant: 'inline',
+    },
+};
+
+export const InlineWithPreselectedValues: Story = {
+    args: {
+        filters: basicFilters,
+        initialValues: {
+            category: 'electronics',
+            price: '50-100',
+            rating: ['5', '4'],
+            sort: 'price_asc',
+        },
+        hasLeadingItem: false,
+        variant: 'inline',
+    },
+};
+
+export const InlineSectionVariant: Story = {
+    args: {
+        filters: basicFilters,
+        initialValues: {
+            category: '',
+            price: '',
+            rating: [],
+            sort: 'relevance',
+        },
+        hasLeadingItem: false,
+        variant: 'inline',
+    },
+    render: ({ filters, initialValues }) => {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        const [currentFilters, setCurrentFilters] = useState<typeof initialValues>(initialValues);
+
+        const handleSubmit = (values: Partial<typeof initialValues>) => {
+            console.log('Filters submitted:', values);
+            setCurrentFilters({
+                ...currentFilters,
+                ...values,
+            });
+        };
+
+        const handleReset = () => {
+            console.log('Filters reset');
+            setCurrentFilters(initialValues);
+        };
+
+        return (
+            <div className="space-y-4">
+                <FiltersSection
+                    title="Filter Products"
+                    initialFilters={initialValues}
+                    filters={filters}
+                    initialValues={initialValues}
+                    onSubmit={handleSubmit}
+                    onReset={handleReset}
+                    variant="inline"
                 />
                 <div className="p-4 border rounded-md mb-4">
                     <h3 className="text-sm font-semibold mb-2">Current Filters:</h3>

@@ -18,6 +18,7 @@ export const FiltersSection = <T, S extends FormikValues>({
     initialValues,
     onSubmit,
     onReset,
+    variant,
     labels,
 }: Readonly<FiltersSectionProps<T, S>>) => {
     const hasLeadingItem = filters?.items.some((item) => item.isLeading === true);
@@ -26,7 +27,8 @@ export const FiltersSection = <T, S extends FormikValues>({
         <div
             className={cn(
                 'flex justify-between items-center gap-4 flex-wrap md:flex-nowrap',
-                hasLeadingItem && 'flex-col items-start sm:gap-6',
+                hasLeadingItem && variant === 'drawer' && 'flex-col items-start sm:gap-6',
+                variant === 'inline' && 'flex-col items-start gap-6',
             )}
         >
             {title && (
@@ -42,6 +44,7 @@ export const FiltersSection = <T, S extends FormikValues>({
                     onSubmit={onSubmit}
                     onReset={onReset}
                     hasLeadingItem={hasLeadingItem}
+                    variant={variant}
                     labels={labels}
                 />
             </FiltersContextProvider>

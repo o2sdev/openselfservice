@@ -15,6 +15,7 @@ export const FilterItem = <T, S extends FormikValues>({
     submitForm,
     setFieldValue,
     isLeading,
+    isInline,
     labels,
 }: Readonly<FilterItemProps<T, S>>) => {
     const allWasClickedRef = useRef(false);
@@ -84,6 +85,8 @@ export const FilterItem = <T, S extends FormikValues>({
 
                         return isLeading ? (
                             toggleGroup
+                        ) : isInline ? (
+                            <div className="flex">{toggleGroup}</div>
                         ) : (
                             <ScrollContainer className="scroll-container flex whitespace-nowrap w-full">
                                 {toggleGroup}
@@ -121,6 +124,8 @@ export const FilterItem = <T, S extends FormikValues>({
 
                         return isLeading ? (
                             toggleGroup
+                        ) : isInline ? (
+                            <div className="flex">{toggleGroup}</div>
                         ) : (
                             <ScrollContainer className="scroll-container flex whitespace-nowrap w-full">
                                 {toggleGroup}
@@ -133,7 +138,7 @@ export const FilterItem = <T, S extends FormikValues>({
             return (
                 <Field name={item.id}>
                     {({ field }: FieldProps<string>) => {
-                        return (
+                        const selectElement = (
                             <>
                                 <Label htmlFor={field.name}>{item.label}</Label>
                                 <Select
@@ -163,6 +168,12 @@ export const FilterItem = <T, S extends FormikValues>({
                                     </SelectContent>
                                 </Select>
                             </>
+                        );
+
+                        return isInline ? (
+                            <div className="flex flex-col gap-2 min-w-[200px]">{selectElement}</div>
+                        ) : (
+                            selectElement
                         );
                     }}
                 </Field>

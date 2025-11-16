@@ -7,6 +7,7 @@ export interface FiltersProps<T, S> {
     onSubmit: (filters: Partial<S>) => void;
     onReset: () => void;
     hasLeadingItem?: boolean;
+    variant?: 'drawer' | 'inline';
     labels?: {
         clickToSelect?: string;
     };
@@ -25,6 +26,7 @@ export interface FilterItemProps<T, S extends FormikValues> {
         value: string[] | string | number | boolean | null,
     ) => Promise<void | FormikErrors<S>>;
     isLeading?: boolean;
+    isInline?: boolean;
     labels?: {
         clickToSelect?: string;
     };

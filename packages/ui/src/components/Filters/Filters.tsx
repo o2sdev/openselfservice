@@ -35,6 +35,7 @@ export const Filters = <T, S extends FormikValues>({
     onSubmit,
     onReset,
     hasLeadingItem,
+    variant = 'drawer',
     labels,
 }: Readonly<FiltersProps<T, S>>) => {
     const [filtersOpen, setFiltersOpen] = useState(false);
@@ -57,7 +58,7 @@ export const Filters = <T, S extends FormikValues>({
     };
 
     return (
-        <div className={cn(leadingItem ? 'w-full' : 'w-full sm:w-auto')}>
+        <div className={cn(leadingItem && variant === 'drawer' ? 'w-full' : 'w-full sm:w-auto')}>
             <Formik<S>
                 initialValues={initialValues}
                 enableReinitialize={true}
@@ -67,23 +68,22 @@ export const Filters = <T, S extends FormikValues>({
                     onSubmit(values);
                 }}
             >
-                {({ submitForm, setFieldValue }) => (
-                    <>
-                        <div className="flex flex-col justify-between items-center w-full gap-6 md:flex-row">
-                            {leadingItem !== undefined && (
-                                <div className="w-full md:w-auto overflow-hidden rounded-md">
-                                    <ScrollContainer className="scroll-container flex whitespace-nowrap w-full items-center gap-4">
-                                        <FilterItem
-                                            item={leadingItem}
-                                            submitForm={submitForm}
-                                            setFieldValue={setFieldValue}
-                                            isLeading={true}
-                                            labels={labels}
-                                        />
-                                    </ScrollContainer>
-                                </div>
-                            )}
-                            <div className="flex gap-4 flex-col w-full sm:flex-row md:w-auto">
+                {({ submitForm, setFieldValue }) =>
+                    variant === 'inline' ? (
+                        <Form>
+                            <div className="flex flex-wrap gap-4 w-full items-end">
+                                {items.map((item) => (
+                                    <FilterItem
+                                        key={String(item.id)}
+                                        item={item}
+                                        setFieldValue={setFieldValue}
+                                        submitForm={submitForm}
+                                        isInline={true}
+                                        labels={labels}
+                                    />
+                                ))}
+                            </div>
+                            <div className="flex gap-4 flex-col sm:flex-row justify-end mt-4">
                                 {activeFilters > 0 && (
                                     <Button variant="outline" onClick={handleReset} className="gap-0">
                                         <X className="h-4 w-4 mr-2" />
@@ -95,54 +95,86 @@ export const Filters = <T, S extends FormikValues>({
                                         ))}
                                     </Button>
                                 )}
-                                <Button
-                                    variant="secondary"
-                                    onClick={(e: React.MouseEvent) => {
-                                        e.preventDefault();
-                                        setFiltersOpen(!filtersOpen);
-                                    }}
-                                >
-                                    <ListFilter />
-                                    {label}
-                                </Button>
+                                <Button type="submit">{submit}</Button>
                             </div>
-                        </div>
-                        <Sheet open={filtersOpen} onOpenChange={setFiltersOpen}>
-                            <SheetContent closeLabel={filters.close}>
-                                <SheetHeader>
-                                    <SheetTitle>{title}</SheetTitle>
-                                    {description && <SheetDescription>{description}</SheetDescription>}
-                                </SheetHeader>
-                                <Form>
-                                    <div className="grid gap-4 py-4">
-                                        {filteredItems.map((item) => (
+                        </Form>
+                    ) : (
+                        <>
+                            <div className="flex flex-col justify-between items-center w-full gap-6 md:flex-row">
+                                {leadingItem !== undefined && (
+                                    <div className="w-full md:w-auto overflow-hidden rounded-md">
+                                        <ScrollContainer className="scroll-container flex whitespace-nowrap w-full items-center gap-4">
                                             <FilterItem
-                                                key={String(item.id)}
-                                                item={item}
-                                                setFieldValue={setFieldValue}
+                                                item={leadingItem}
                                                 submitForm={submitForm}
+                                                setFieldValue={setFieldValue}
+                                                isLeading={true}
                                                 labels={labels}
                                             />
-                                        ))}
+                                        </ScrollContainer>
                                     </div>
-                                    <SheetFooter>
-                                        <Button
-                                            type="button"
-                                            variant="secondary"
-                                            onClick={(e: React.MouseEvent) => {
-                                                handleReset(e);
-                                                setFiltersOpen(false);
-                                            }}
-                                        >
-                                            {reset}
+                                )}
+                                <div className="flex gap-4 flex-col w-full sm:flex-row md:w-auto">
+                                    {activeFilters > 0 && (
+                                        <Button variant="outline" onClick={handleReset} className="gap-0">
+                                            <X className="h-4 w-4 mr-2" />
+                                            {reactStringReplace(removeFilters, /{active}/g, (match, i) => (
+                                                <span key={i}>
+                                                    <span className="mx-0.5">{activeFilters}</span>
+                                                    {match}
+                                                </span>
+                                            ))}
                                         </Button>
-                                        <Button type="submit">{submit}</Button>
-                                    </SheetFooter>
-                                </Form>
-                            </SheetContent>
-                        </Sheet>
-                    </>
-                )}
+                                    )}
+                                    <Button
+                                        variant="secondary"
+                                        onClick={(e: React.MouseEvent) => {
+                                            e.preventDefault();
+                                            setFiltersOpen(!filtersOpen);
+                                        }}
+                                    >
+                                        <ListFilter />
+                                        {label}
+                                    </Button>
+                                </div>
+                            </div>
+                            <Sheet open={filtersOpen} onOpenChange={setFiltersOpen}>
+                                <SheetContent closeLabel={filters.close}>
+                                    <SheetHeader>
+                                        <SheetTitle>{title}</SheetTitle>
+                                        {description && <SheetDescription>{description}</SheetDescription>}
+                                    </SheetHeader>
+                                    <Form>
+                                        <div className="grid gap-4 py-4">
+                                            {filteredItems.map((item) => (
+                                                <FilterItem
+                                                    key={String(item.id)}
+                                                    item={item}
+                                                    setFieldValue={setFieldValue}
+                                                    submitForm={submitForm}
+                                                    labels={labels}
+                                                />
+                                            ))}
+                                        </div>
+                                        <SheetFooter>
+                                            <Button
+                                                type="button"
+                                                variant="secondary"
+                                                onClick={(e: React.MouseEvent) => {
+                                                    handleReset(e);
+                                                    setFiltersOpen(false);
+                                                }}
+                                            >
+                                                {reset}
+                                            </Button>
+                                            <Button type="submit">{submit}</Button>
+                                        </SheetFooter>
+                                    </Form>
+                                </SheetContent>
+                            </Sheet>
+                        </>
+                    )
+                }
             </Formik>
         </div>
     );
