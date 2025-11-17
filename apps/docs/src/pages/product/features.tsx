@@ -255,31 +255,31 @@ const functionalBlocks = [
         features: [
             {
                 title: 'Authentication & access',
-                image: '/img/featurespage/img-authentication.png', // TODO: replace with actual image
+                image: '/img/featurespage/img-authentication.png',
             },
             {
                 title: 'User account & preferences',
-                image: '/img/featurespage/img-user-profile.png', // TODO: replace with actual image
+                image: '/img/featurespage/img-user-profile.png',
             },
             {
                 title: 'In-app notifications',
-                image: '/img/featurespage/img-notifications.png', // TODO: replace with actual image
+                image: '/img/featurespage/img-notifications.png',
             },
             {
                 title: 'Ticket & case lists and forms',
-                image: '/img/featurespage/img-cases.png', // TODO: replace with actual image
+                image: '/img/featurespage/img-ticket-submission.png',
             },
             {
                 title: 'Services overview & management',
-                image: '/img/featurespage/img-service-overview.png', // TODO: replace with actual image
+                image: '/img/featurespage/img-service-overview.png',
             },
             {
                 title: 'Billing & documents',
-                image: '/img/featurespage/img-invoices-payments.png', // TODO: replace with actual image
+                image: '/img/featurespage/img-invoices-payments.png',
             },
             {
                 title: 'Order list & details',
-                image: '/img/featurespage/img-orders.png', // TODO: replace with actual image
+                image: '/img/featurespage/img-orders.png',
             },
         ],
     },
@@ -292,23 +292,23 @@ const functionalBlocks = [
         features: [
             {
                 title: 'CMS-powered marketing content',
-                image: '/img/featurespage/img-cms.png', // TODO: replace with actual image
+                image: '/img/featurespage/img-cms.png',
             },
             {
                 title: 'Knowledge base & help center',
-                image: '/img/featurespage/img-knowledge.png', // TODO: replace with actual image
+                image: '/img/featurespage/img-knowledge.png',
             },
             {
                 title: 'Content search & browsing',
-                image: '/img/featurespage/img-search.png', // TODO: replace with actual image
+                image: '/img/featurespage/img-search.png',
             },
             {
                 title: 'Content categories & tags',
-                image: '/img/featurespage/img-categories.png', // TODO: replace with actual image
+                image: '/img/featurespage/img-content-categories.png',
             },
             {
                 title: 'Navigation & i18n',
-                image: '/img/featurespage/img-navigation-intl.png', // TODO: replace with actual image
+                image: '/img/featurespage/img-navigation.png',
             },
         ],
     },

@@ -78,6 +78,7 @@ export function FeaturesListWithImage({ title, features, link }: FeaturesListWit
             <div className="flex flex-col gap-8 lg:hidden w-full">
                 <H3 className="mb-0!">{title}</H3>
                 <Accordion
+                    defaultValue="feature-0"
                     items={features.map((feature, featureIndex) => ({
                         title: feature.title,
                         content: <img src={feature.image} alt={feature.title} className="w-full h-auto rounded-lg" />,
