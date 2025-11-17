@@ -31,7 +31,7 @@
     "dependencies": {
         "@auth/prisma-adapter": "^2.11.1",
         "@prisma/client": "^6.19.0",
-        "bcryptjs": "^3.0.2",
+        "bcryptjs": "^3.0.3",
         "dotenv-cli": "^10.0.0",
         "jsonwebtoken": "^9.0.2",
         "prisma": "^6.19.0",
