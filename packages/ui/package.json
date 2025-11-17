@@ -66,7 +66,7 @@
         "markdown-to-jsx": "^7.7.17",
         "react-indiana-drag-scroll": "^2.2.1",
         "recharts": "^2.15.4",
-        "tailwind-merge": "^3.3.1",
+        "tailwind-merge": "^3.4.0",
         "tailwindcss-animate": "^1.0.7"
     },
     "peerDependencies": {
