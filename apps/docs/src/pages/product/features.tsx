@@ -81,7 +81,7 @@ const keyBenefits = {
             {
                 icon: <GaugePurpleTileIcon />,
                 title: 'Performance-first, modern stack',
-                description: 'Next.js, Tailwind, SSR, ISR, SEO-optimized, Lighthouse 90+',
+                description: 'Next.js, SSR, Tailwind, shadcn, Lighthouse 90+ scores',
             },
             {
                 icon: <BlocksPurpleTileIcon />,
@@ -121,8 +121,8 @@ const keyBenefits = {
             },
             {
                 icon: <ArrowLeftRightGreenTileIcon />,
-                title: 'Flexible use cases',
-                description: 'Support apps, help centers, DXPs and more',
+                title: 'From simple portals to enterprise platforms',
+                description: 'Support apps, help centers, large-scale digital platforms and more',
             },
             {
                 icon: <BanGreenTileIcon />,
@@ -132,7 +132,7 @@ const keyBenefits = {
             {
                 icon: <CircleUserGreenTileIcon />,
                 title: 'UX optimized for efficient customer self-service',
-                description: 'Use proven UI patterns designed for support and self-care',
+                description: 'Use proven UI patterns designed for great CX',
             },
         ],
     },
@@ -140,74 +140,11 @@ const keyBenefits = {
 
 const technicalCapabilities = [
     {
-        title: 'Frontend app',
-        features: [
-            {
-                title: 'Next.js',
-                description: 'based frontend for great performance and developer experience.',
-            },
-            {
-                title: 'TypeScript',
-                description: 'full-stack TypeScript support out of the box.',
-            },
-            {
-                title: 'Tailwind and shadcn/ui',
-                description: 'large UI component library and solid tools for rapid UI development.',
-            },
-            {
-                title: 'Next-intl',
-                description: 'for Internationalization and localization with.',
-            },
-            {
-                title: 'Tailwind + UI tokens',
-                description: 'for Ui customization, theming and branding.',
-            },
-            {
-                title: '90+ Lighthouse scores',
-                description: 'for performance, accessibility, SEO, and best practices audits.',
-            },
-            {
-                title: 'Built-in authentication',
-                description: 'Auth.js-based authentication providers support.',
-            },
-            {
-                title: 'Dynamic, CMS-powered page composition',
-                description: 'page structure and component configuration built-in, managed via headless CMS-s.',
-            },
-        ],
-    },
-    {
-        title: 'API layer',
-        features: [
-            {
-                title: 'NestJS integration middleware',
-                description:
-                    'A powerful backend-for-frontend written in NestJS and TypeScript, ready for composable integrations.',
-            },
-            {
-                title: 'Data orchestration and aggregation',
-                description: 'Orchestrate requests and aggregate data from multiple sources.',
-            },
-            {
-                title: 'API normalization',
-                description: 'normalized frontend data model and stay vendor independent.',
-            },
-            {
-                title: 'Event-driven with RxJS',
-                description: 'Use reactive programming patterns for real-time updates and external triggers.',
-            },
-            {
-                title: 'Backend-agnostic frontend',
-                description: 'Swap APIs without changing the frontend.',
-            },
-        ],
-    },
-    {
         title: 'Developer Experience',
         features: [
             {
                 title: 'TypeScript SDK',
-                description: 'for easy, type-safe API consumption.',
+                description: 'For easy, type-safe API consumption.',
             },
             {
                 title: 'CLI app scaffolding',
@@ -239,64 +176,139 @@ const technicalCapabilities = [
             },
         ],
     },
+    {
+        title: 'Frontend app',
+        features: [
+            {
+                title: 'Next.js',
+                description: 'based frontend for great performance and developer experience.',
+            },
+            {
+                title: 'TypeScript',
+                description: 'full-stack TypeScript support out of the box.',
+            },
+            {
+                title: 'Tailwind and shadcn/ui',
+                description: 'large UI component library and solid tools for rapid UI development.',
+            },
+            {
+                title: 'Next-intl',
+                description: 'for Internationalization and localization support.',
+            },
+            {
+                title: 'Tailwind + UI tokens',
+                description: 'for Ui customization, theming and branding.',
+            },
+            {
+                title: '90+ Lighthouse scores',
+                description: 'Performance, accessibility, SEO, and dev best practices OOTB.',
+            },
+            {
+                title: 'Built-in authentication',
+                description: 'Auth.js-based authentication support. RBAC via extenral integrations.',
+            },
+            {
+                title: 'Dynamic, CMS-powered page composition',
+                description: 'Page structure and component configuration built-in, managed via headless CMS-s.',
+            },
+        ],
+    },
+    {
+        title: 'API layer',
+        features: [
+            {
+                title: 'NestJS integration middleware',
+                description:
+                    'A powerful backend-for-frontend written in NestJS and TypeScript, ready for composable integrations.',
+            },
+            {
+                title: 'Data orchestration and aggregation',
+                description: 'Orchestrate requests and aggregate data from multiple sources.',
+            },
+            {
+                title: 'API normalization',
+                description: 'Normalize frontend data model and stay vendor independent.',
+            },
+            {
+                title: 'Event-driven with RxJS',
+                description: 'Use reactive programming patterns for real-time updates and external triggers.',
+            },
+            {
+                title: 'Backend-agnostic frontend',
+                description: 'Swap APIs without changing the frontend.',
+            },
+            {
+                title: 'Request optimization',
+                description: 'Reduce over-fetching and minimize the number of API calls with smart data orchestration.',
+            },
+        ],
+    },
 ];
 
 const functionalBlocks = [
     {
         title: 'Core customer portal blocks',
+        link: {
+            text: 'Browse in Storybook',
+            href: 'https://storybook-o2s.openselfservice.com/',
+        },
         features: [
             {
-                title: 'Authentication & Login',
-                image: '/img/docusaurus-social-card.jpg', // TODO: replace with actual image
+                title: 'Authentication & access',
+                image: '/img/featurespage/img-authentication.png', // TODO: replace with actual image
             },
             {
-                title: 'User Profile & Preferences',
-                image: '/img/homepage/starters-card-digital-portal.png', // TODO: replace with actual image
+                title: 'User account & preferences',
+                image: '/img/featurespage/img-user-profile.png', // TODO: replace with actual image
             },
             {
-                title: 'Ticket Submission & Status',
-                image: '/img/docusaurus-social-card.jpg', // TODO: replace with actual image
+                title: 'In-app notifications',
+                image: '/img/featurespage/img-notifications.png', // TODO: replace with actual image
             },
             {
-                title: 'Service Overview',
-                image: '/img/homepage/starters-card-digital-portal.png', // TODO: replace with actual image
+                title: 'Ticket & case lists and forms',
+                image: '/img/featurespage/img-cases.png', // TODO: replace with actual image
             },
             {
-                title: 'Invoices & Payments',
-                image: '/img/docusaurus-social-card.jpg', // TODO: replace with actual image
+                title: 'Services overview & management',
+                image: '/img/featurespage/img-service-overview.png', // TODO: replace with actual image
             },
             {
-                title: 'Order List & Details',
-                image: '/img/homepage/starters-card-digital-portal.png', // TODO: replace with actual image
+                title: 'Billing & documents',
+                image: '/img/featurespage/img-invoices-payments.png', // TODO: replace with actual image
             },
             {
-                title: 'Notifications',
-                image: '/img/docusaurus-social-card.jpg', // TODO: replace with actual image
+                title: 'Order list & details',
+                image: '/img/featurespage/img-orders.png', // TODO: replace with actual image
             },
         ],
     },
     {
         title: 'Content & knowledge blocks',
+        link: {
+            text: 'Browse in Storybook',
+            href: 'https://storybook-dxp.openselfservice.com/',
+        },
         features: [
             {
-                title: 'CMS-driven content sections',
-                image: '/img/docusaurus-social-card.jpg', // TODO: replace with actual image
+                title: 'CMS-powered marketing content',
+                image: '/img/featurespage/img-cms.png', // TODO: replace with actual image
             },
             {
-                title: 'Knowledge base pages',
-                image: '/img/docusaurus-social-card.jpg', // TODO: replace with actual image
+                title: 'Knowledge base & help center',
+                image: '/img/featurespage/img-knowledge.png', // TODO: replace with actual image
             },
             {
-                title: 'Search & filtering',
-                image: '/img/docusaurus-social-card.jpg', // TODO: replace with actual image
+                title: 'Content search & browsing',
+                image: '/img/featurespage/img-search.png', // TODO: replace with actual image
             },
             {
                 title: 'Content categories & tags',
-                image: '/img/docusaurus-social-card.jpg', // TODO: replace with actual image
+                image: '/img/featurespage/img-categories.png', // TODO: replace with actual image
             },
             {
-                title: 'Document downloads',
-                image: '/img/docusaurus-social-card.jpg', // TODO: replace with actual image
+                title: 'Navigation & i18n',
+                image: '/img/featurespage/img-navigation-intl.png', // TODO: replace with actual image
             },
         ],
     },
@@ -401,6 +413,7 @@ export default function ProductFeatures() {
                                             key={blockIndex}
                                             title={block.title}
                                             features={block.features}
+                                            link={block.link}
                                         />
                                     ))}
                                 </section>

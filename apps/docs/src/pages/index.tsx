@@ -54,7 +54,7 @@ export default function Home(): ReactNode {
                                             by your own backend APIs or our growing set of ready-made integrations.
                                         </Body>
                                     }
-                                    cliCommand="npx create-dxp-app"
+                                    cliCommand="npx create-o2s-app"
                                     mainLink={{
                                         text: 'Explore features',
                                         url: '/product/features',

@@ -33,7 +33,7 @@ const STARTERS: HoverCardProps[] = [
     {
         title: 'Build your own',
         description:
-            "Soon, you'll be able to create fully tailored customer self-service frontends — composed of modular UI components, blocks and integrations.",
+            "Soon, with our CLI you'll be able to scaffold fully tailored customer self-service frontends — composed of modular UI components, blocks and integrations.",
         gradient: 'var(--color-violet)',
         badge: 'Coming soon',
     },

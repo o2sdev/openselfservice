@@ -45,8 +45,8 @@ export function HomepageFeaturesSection() {
 
     const digitalTeamsFeatures = [
         'Quick start with built-in starters & components',
-        'Control over frontend without dev support',
-        'Flexible use cases',
+        'Gain control over frontend without dev support',
+        'From simple portals to enterprise digital platforms',
         'Vendor independent frontend',
         'UX optimized for efficient customer self-service',
     ];

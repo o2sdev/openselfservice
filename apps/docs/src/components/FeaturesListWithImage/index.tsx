@@ -7,13 +7,17 @@ import { H3 } from '@site/src/components/Typography';
 
 interface FeaturesListWithImageProps {
     title: string;
+    link: {
+        text: string;
+        href: string;
+    };
     features: Array<{
         title: string;
         image: string;
     }>;
 }
 
-export function FeaturesListWithImage({ title, features }: FeaturesListWithImageProps) {
+export function FeaturesListWithImage({ title, features, link }: FeaturesListWithImageProps) {
     const [activeFeatureIndex, setActiveFeatureIndex] = useState(0);
     return (
         <div className="flex flex-col gap-8">
@@ -47,6 +51,9 @@ export function FeaturesListWithImage({ title, features }: FeaturesListWithImage
                             </button>
                         ))}
                     </div>
+                    <a href={link.href} className="button w-fit" rel="noopener" target={'blank'}>
+                        <span className="label flex items-center justify-center gap-2">{link.text} </span>
+                    </a>
                 </div>
                 {/* Right column: Image */}
                 <div className="h-[546px] overflow-hidden rounded-lg relative">
