@@ -11,183 +11,204 @@ import Layout from '@theme/Layout';
 
 import styles from './product.module.scss';
 
-const INTEGRATION_SECTIONS = [
+// TODO: add links to docs for each integration
+const INTEGRATION_SECTIONS: Array<{
+    title: string;
+    description: string;
+    integrations: Array<{
+        name: string;
+        status: 'available' | 'planned' | 'internal';
+        description: string;
+        icon: React.ReactNode;
+    }>;
+}> = [
     {
         title: 'CMS',
-        description: 'Content, frontend configuration',
+        description:
+            'Content, layout configuration, page structure, and more — including use as KB, notification, or ticket base.',
         integrations: [
             {
-                isAvailable: true,
                 name: 'Strapi',
-                description: 'integration description',
+                status: 'available',
+                description: 'Headless CMS used for content, layouts, KB, and more.',
                 icon: <BanGreenTileIcon className="w-4 h-4" />,
             },
             {
-                isAvailable: true,
                 name: 'Contentful',
-                description: 'integration description',
+                status: 'available',
+                description: 'CMS for multi-language content and marketing blocks.',
                 icon: <BanGreenTileIcon className="w-4 h-4" />,
             },
             {
-                isAvailable: false,
                 name: 'Storyblok',
-                description: 'integration description',
+                status: 'planned',
+                description: 'Visual CMS for content-driven experiences and static pages.',
                 icon: <BanGreenTileIcon className="w-4 h-4" />,
             },
         ],
     },
     {
-        title: 'Auth / Infra',
-        description: 'TODO: add description here',
+        title: 'Customer Support',
+        description: 'Integrations for ticketing, forms, CRM and other customer support automation.',
         integrations: [
             {
-                isAvailable: true,
-                name: 'Auth.js',
-                description: 'integration description',
-                icon: <BanGreenTileIcon className="w-4 h-4" />,
-            },
-            {
-                isAvailable: false,
-                name: 'Keycloak',
-                description: 'integration description',
-                icon: <BanGreenTileIcon className="w-4 h-4" />,
-            },
-            {
-                isAvailable: true,
-                name: 'Redis',
-                description: 'integration description',
-                icon: <BanGreenTileIcon className="w-4 h-4" />,
-            },
-        ],
-    },
-    {
-        title: 'CRM / Support ticket processing / Knowledge Base',
-        description: 'TODO: add description here',
-        integrations: [
-            {
-                isAvailable: true,
-                name: 'Strapi',
-                description: 'integration description',
-                icon: <BanGreenTileIcon className="w-4 h-4" />,
-            },
-            {
-                isAvailable: true,
                 name: 'SurveyJS',
-                description: 'integration description',
+                status: 'available',
+                description: 'Advanced survey and form engine for ticket submission.',
                 icon: <BanGreenTileIcon className="w-4 h-4" />,
             },
             {
-                isAvailable: false,
                 name: 'Zendesk',
-                description: 'integration description',
+                status: 'planned',
+                description: 'External ticketing and support knowledge base system.',
                 icon: <BanGreenTileIcon className="w-4 h-4" />,
             },
             {
-                isAvailable: false,
                 name: 'Salesforce Service Cloud',
-                description: 'integration description',
+                status: 'planned',
+                description: 'Enterprise CRM and customer case handling solution.',
                 icon: <BanGreenTileIcon className="w-4 h-4" />,
             },
         ],
     },
     {
         title: 'Billing',
-        description: 'TODO: add description here',
+        description: 'Expose invoice history, status and payments to customers.',
         integrations: [
             {
-                isAvailable: false,
-                name: 'Kill Bill',
-                description: 'integration description',
+                name: 'SAP S/4 Hana',
+                status: 'internal',
+                description: 'ERP integration for billing, orders and document summaries.',
                 icon: <BanGreenTileIcon className="w-4 h-4" />,
             },
             {
-                isAvailable: true,
+                name: 'Kill Bill',
+                status: 'planned',
+                description: 'Open-source billing and subscription management engine.',
+                icon: <BanGreenTileIcon className="w-4 h-4" />,
+            },
+        ],
+    },
+    {
+        title: 'Identity & Access Management',
+        description: 'Used for login, RBAC and session management.',
+        integrations: [
+            {
+                name: 'Auth.js',
+                status: 'available',
+                description: 'Authentication adapter supporting OAuth and custom providers.',
+                icon: <BanGreenTileIcon className="w-4 h-4" />,
+            },
+            {
+                name: 'Keycloak',
+                status: 'internal',
+                description: 'Enterprise IAM for SSO, user management and OpenID flows.',
+                icon: <BanGreenTileIcon className="w-4 h-4" />,
+            },
+        ],
+    },
+    {
+        title: 'Knowledge Base Management',
+        description: 'Manage articles, FAQs, categories and tags for support content.',
+        integrations: [
+            {
+                name: 'Strapi',
+                status: 'available',
+                description: 'Used to model and manage article-based support knowledge base.',
+                icon: <BanGreenTileIcon className="w-4 h-4" />,
+            },
+            {
+                name: 'Salesforce Service Cloud',
+                status: 'planned',
+                description: 'Enterprise CRM and customer case handling solution.',
+                icon: <BanGreenTileIcon className="w-4 h-4" />,
+            },
+            {
+                name: 'Zendesk',
+                status: 'planned',
+                description: 'External ticketing and support knowledge base system.',
+                icon: <BanGreenTileIcon className="w-4 h-4" />,
+            },
+        ],
+    },
+    {
+        title: 'ERP, Commerce & PIM',
+        description:
+            'Currently we support ERP scenarios (asset and order management). More advanced e-commerce capabilities & integrations are coming soon.',
+        integrations: [
+            {
+                name: 'Medusa',
+                status: 'available',
+                description:
+                    'Open-source composable commerce engine. Currently provides product & asset information in O2S.',
+                icon: <BanGreenTileIcon className="w-4 h-4" />,
+            },
+            {
                 name: 'SAP S/4 Hana',
-                description: 'integration description',
+                status: 'internal',
+                description: 'Used for order, billing, product and asset data integration.',
+                icon: <BanGreenTileIcon className="w-4 h-4" />,
+            },
+            {
+                name: 'OroCommerce',
+                status: 'planned',
+                description: 'B2B commerce platform with pricing, inventory and quote support.',
+                icon: <BanGreenTileIcon className="w-4 h-4" />,
+            },
+            {
+                name: 'Pimcore',
+                status: 'planned',
+                description: 'PIM and DAM solution for product content and digital assets.',
                 icon: <BanGreenTileIcon className="w-4 h-4" />,
             },
         ],
     },
     {
         title: 'Notifications',
-        description: 'TODO: add description here',
+        description: 'Send and manage in-app messages and status updates.',
         integrations: [
             {
-                isAvailable: true,
                 name: 'Strapi',
-                description: 'integration description',
+                status: 'available',
+                description: 'Used to manage in-app notification content and metadata.',
                 icon: <BanGreenTileIcon className="w-4 h-4" />,
             },
             {
-                isAvailable: true,
-                name: 'Notification service (custom, not open-sourced)',
-                description: 'integration description',
+                name: 'Notification API',
+                status: 'internal',
+                description: 'Our proprietary API for sending multi-channel notifications.',
                 icon: <BanGreenTileIcon className="w-4 h-4" />,
             },
-            {
-                isAvailable: false,
-                name: 'novu.co notification API',
-                description: 'integration description',
-                icon: <BanGreenTileIcon className="w-4 h-4" />,
-            },
+            // { name: 'novu.co notification API', status: 'planned', description: 'Notification engine for multi-channel delivery and tracking.', icon: <BanGreenTileIcon className="w-4 h-4" /> },
         ],
     },
     {
-        title: 'Search, Personalization, DXP',
-        description: 'TODO: add description here',
+        title: 'Search & Personalization',
+        description: 'Power content and article search, recommendations and user-tailored experiences.',
         integrations: [
             {
-                isAvailable: true,
                 name: 'Algolia',
-                description: 'integration description',
+                status: 'available',
+                description: 'Used for full-text and faceted search across content and articles.',
                 icon: <BanGreenTileIcon className="w-4 h-4" />,
             },
             {
-                isAvailable: false,
-                name: 'Pimcore',
-                description: 'integration description',
-                icon: <BanGreenTileIcon className="w-4 h-4" />,
-            },
-            {
-                isAvailable: false,
-                name: 'Headless personalization engine',
-                description: 'integration description',
+                name: 'Personalisation API',
+                status: 'planned',
+                description:
+                    'TBD. We plan to support more personalised experiences by means of integration with a suitable product.',
                 icon: <BanGreenTileIcon className="w-4 h-4" />,
             },
         ],
     },
     {
-        title: 'ERP/PIM/DAM/Commerce',
-        description: 'TODO: add description here',
+        title: 'Cache',
+        description: 'Improves performance and request optimization.',
         integrations: [
             {
-                isAvailable: true,
-                name: 'Medusa',
-                description: 'integration description',
-                icon: <BanGreenTileIcon className="w-4 h-4" />,
-            },
-            {
-                isAvailable: true,
-                name: 'SAP S/4 Hana',
-                description: 'integration description',
-                icon: <BanGreenTileIcon className="w-4 h-4" />,
-            },
-            {
-                isAvailable: false,
-                name: 'OroCommerce',
-                description: 'integration description',
-                icon: <BanGreenTileIcon className="w-4 h-4" />,
-            },
-            {
-                isAvailable: false,
-                name: 'Pimcore',
-                description: 'integration description',
-                icon: <BanGreenTileIcon className="w-4 h-4" />,
-            },
-            {
-                isAvailable: false,
-                name: 'Custom product API',
-                description: 'integration description',
+                name: 'Redis',
+                status: 'available',
+                description: 'Used for caching, session storage and notification delivery.',
                 icon: <BanGreenTileIcon className="w-4 h-4" />,
             },
         ],
@@ -211,8 +232,8 @@ export default function ProductIntegrations() {
                                 }}
                                 heading={
                                     <>
-                                        Connect our frontend <br />
-                                        <span className="text-highlighted"> to APIs and services </span>with ease
+                                        <span className="text-highlighted">Connect our frontend</span> <br />
+                                        to APIs with ease
                                     </>
                                 }
                                 description={

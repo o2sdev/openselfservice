@@ -38,7 +38,7 @@ export function HomepageFeaturesSection() {
     const developersFeatures = [
         'Performance-first, modern stack',
         'Built-in reusable UI components & blocks',
-        'Full frontend decoupling & unified API layer',
+        'Full frontend decoupling & unified API middleware',
         'Ready to use CMS content models',
         'Growing list of integrations',
     ];
@@ -46,7 +46,7 @@ export function HomepageFeaturesSection() {
     const digitalTeamsFeatures = [
         'Quick start with built-in starters & components',
         'Gain control over frontend without dev support',
-        'From simple portals to enterprise digital platforms',
+        'From support apps to enterprise CX platforms',
         'Vendor independent frontend',
         'UX optimized for efficient customer self-service',
     ];

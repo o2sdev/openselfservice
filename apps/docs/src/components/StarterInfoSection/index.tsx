@@ -34,7 +34,7 @@ export function StarterInfoSection({
     accordionItems,
     img,
     accordionDefaultValue,
-    accordionType = 'multiple',
+    accordionType = 'single',
 }: StarterInfoSectionProps) {
     return (
         <div className="grid md:grid-cols-2 gap-14 md:gap-20">

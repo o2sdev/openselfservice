@@ -4,7 +4,7 @@ import React from 'react';
 interface BadgeProps {
     title: string;
     icon?: string | null | React.ReactNode;
-    variant?: 'primary' | 'secondary' | 'light' | 'dark';
+    variant?: 'primary' | 'secondary' | 'light' | 'dark' | 'private';
 }
 
 const getVariantClasses = (variant: BadgeProps['variant']): string => {
@@ -17,6 +17,8 @@ const getVariantClasses = (variant: BadgeProps['variant']): string => {
             return 'bg-white text-violet';
         case 'dark':
             return 'bg-white/10 text-white';
+        case 'private':
+            return 'bg-[#001360] text-white';
         default:
             return 'bg-violet text-white!';
     }

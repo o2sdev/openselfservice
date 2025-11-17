@@ -22,58 +22,6 @@ import Layout from '@theme/Layout';
 
 import styles from './product.module.scss';
 
-// const keyBenefits = {
-//     developers: {
-//         title: 'For Developers',
-//         features: [
-//             {
-//                 icon: <BlocksPurpleTileIcon />,
-//                 title: 'Reusable blocks',
-//                 description: 'Create pages from modular components and UI blocks',
-//             },
-//             {
-//                 icon: <LayersPurpleTileIcon />,
-//                 title: 'API harmonization',
-//                 description: 'Integrate any backend system (CMS, CRM, search…) with a unified data layer',
-//             },
-//             {
-//                 icon: <WaypointsPurpleTileIcon />,
-//                 title: 'Custom integrations & extensions',
-//                 description: 'Extend logic, add your APIs, or replace services',
-//             },
-//             {
-//                 icon: <GaugePurpleTileIcon />,
-//                 title: 'Performance-first stack',
-//                 description: 'Next.js, Tailwind, SSR, ISR, SEO-optimized, Lighthouse 90+',
-//             },
-//         ],
-//     },
-//     digitalTeams: {
-//         title: 'For Digital Teams',
-//         features: [
-//             {
-//                 icon: <BanGreenTileIcon />,
-//                 title: 'No vendor lock-in',
-//                 description: 'Choose the best tools, replace them freely when needed',
-//             },
-//             {
-//                 icon: <ScalingGreenTileIcon />,
-//                 title: 'Scalable architecture',
-//                 description: 'Start small and evolve into multi-system experience platforms',
-//             },
-//             {
-//                 icon: <ArrowLeftRightGreenTileIcon />,
-//                 title: 'Flexible use cases',
-//                 description: 'From customer support portals to self-service platforms and beyond',
-//             },
-//             {
-//                 icon: <LayoutDashboardGreenTileIcon />,
-//                 title: 'CMS-driven UI',
-//                 description: 'Let non-tech teams manage layouts and content with no redeploys',
-//             },
-//         ],
-//     },
-// };
 const keyBenefits = {
     developers: {
         title: 'For developers',
@@ -121,8 +69,9 @@ const keyBenefits = {
             },
             {
                 icon: <ArrowLeftRightGreenTileIcon />,
-                title: 'From simple portals to enterprise platforms',
-                description: 'Support apps, help centers, large-scale digital platforms and more',
+                title: 'From support apps to enterprise CX platforms',
+                description:
+                    'Support apps; help centers; asset, subscription or fleet management portals; large-scale digital Customer eXperience platforms',
             },
             {
                 icon: <BanGreenTileIcon />,
@@ -151,10 +100,6 @@ const technicalCapabilities = [
                 description: 'Use our CLI to scaffold a full project in seconds.',
             },
             {
-                title: 'Docker-ready deployment',
-                description: 'Preconfigured Docker & Docker Compose setup for local and cloud deployments.',
-            },
-            {
                 title: 'Optimized monorepo tooling',
                 description: 'Use Turborepo with fast dev workflows, hot reload and modular builds.',
             },
@@ -169,6 +114,10 @@ const technicalCapabilities = [
             {
                 title: 'Integrations with headless APIs',
                 description: 'Many integrations come OOTB. Easily add your own with our built-in extension methods.',
+            },
+            {
+                title: 'Docker-ready deployment',
+                description: 'Preconfigured Docker & Docker Compose setup for local and cloud deployments.',
             },
             {
                 title: 'Renovate bot',
@@ -200,16 +149,16 @@ const technicalCapabilities = [
                 description: 'for Ui customization, theming and branding.',
             },
             {
-                title: '90+ Lighthouse scores',
-                description: 'Performance, accessibility, SEO, and dev best practices OOTB.',
-            },
-            {
                 title: 'Built-in authentication',
                 description: 'Auth.js-based authentication support. RBAC via extenral integrations.',
             },
             {
                 title: 'Dynamic, CMS-powered page composition',
                 description: 'Page structure and component configuration built-in, managed via headless CMS-s.',
+            },
+            {
+                title: '90+ Lighthouse scores',
+                description: 'Performance, accessibility, SEO, and dev best practices OOTB.',
             },
         ],
     },
@@ -254,7 +203,7 @@ const functionalBlocks = [
         },
         features: [
             {
-                title: 'Authentication & access',
+                title: 'Authentication & RBAC',
                 image: '/img/featurespage/img-authentication.png',
             },
             {
@@ -394,7 +343,7 @@ export default function ProductFeatures() {
                                         </div>
                                         <div className="flex flex-col gap-6">
                                             <Body className="mb-0!">
-                                                Use functional blocks to speed up development and add essential
+                                                Use built-in functional blocks to speed up development and add essential
                                                 customer-support features.
                                             </Body>
                                             <a

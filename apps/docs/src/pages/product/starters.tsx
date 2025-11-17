@@ -9,6 +9,7 @@ import LoopIcon from '@site/src/assets/icons/o2s-icon-loop.svg';
 import RoadmapIcon from '@site/src/assets/icons/o2s-icon-roadmap.svg';
 import SupportIcon from '@site/src/assets/icons/o2s-icon-support.svg';
 import { type BenefitCardProps, BenefitsSection } from '@site/src/components/BenefitsSection';
+import { DXPFeaturesSection } from '@site/src/components/DXPFeaturesSection';
 import { FooterSection } from '@site/src/components/FooterSection';
 import { HeroBannerSection } from '@site/src/components/HeroBannerSection';
 import { StarterInfoSection, type StarterInfoSectionProps } from '@site/src/components/StarterInfoSection';
@@ -56,75 +57,105 @@ const digitalPortalStarter: StarterInfoSectionProps = {
     mainTitle: 'Digital Portal Starter',
     description: (
         <>
-            Headless CMS-powered content portal with knowledge base features.
-            <br />
-            Great for public help centers, marketing sites, and scalable experience platforms.
+            Start with a flexible foundation for content-rich, customer-supportive platforms. Our ready-to-use frontend
+            for help centers, marketing sites, knowledge bases, scalable CX platforms — everything that is customer
+            self-service-oriented.
         </>
     ),
-    cliCommand: 'npx create-o2s-app@latest my-dxp-app --template dxp',
+    cliCommand: 'npx create-o2s-app@latest my-dxp-app',
     accordionItems: [
         {
-            title: 'Business value + key functionality',
-            value: 'business-value',
-            content: (
-                <ul className="pl-5! m-0!">
-                    <li className="text-white text-sm leading-[1.3] py-1.5">CMS-powered structure and layouts</li>
-                    <li className="text-white text-sm leading-[1.3] py-1.5">
-                        Multi-page navigation (home, articles, FAQs)
-                    </li>
-                    <li className="text-white text-sm leading-[1.3] py-1.5">
-                        Block-based architecture with layout mapping
-                    </li>
-                    <li className="text-white text-sm leading-[1.3] py-1.5">Optional personalization & i18n</li>
-                    <li className="text-white text-sm leading-[1.3] py-1.5">
-                        Storybook with reusable content components
-                    </li>
-                </ul>
-            ),
-        },
-        {
-            title: 'Functional blocks',
+            title: 'Feature list',
             value: 'functional-blocks',
             content: (
                 <ul className="pl-5! m-0!">
                     <li className="text-white text-sm leading-[1.3] py-1.5">
-                        <span className="font-semibold">Content blocks:</span> Hero, Media, Text+Image, Call-to-actions
+                        <span className="font-semibold">CMS-driven page layout</span>: structure pages from content
+                        blocks without code
                     </li>
                     <li className="text-white text-sm leading-[1.3] py-1.5">
-                        <span className="font-semibold">Structure blocks:</span> Sections, Columns, Cards
+                        <span className="font-semibold">Hero & media content</span>: highlight key messages with
+                        visual-first blocks
                     </li>
                     <li className="text-white text-sm leading-[1.3] py-1.5">
-                        <span className="font-semibold">Knowledge base:</span> Article, FAQ, Category overview
+                        <span className="font-semibold">Text & feature sections</span>: add product features, headlines,
+                        and callouts
                     </li>
                     <li className="text-white text-sm leading-[1.3] py-1.5">
-                        <span className="font-semibold">Search & filters:</span> Tag filter, breadcrumb
+                        <span className="font-semibold">Knowledge base</span>: organize help content by category or tags
                     </li>
                     <li className="text-white text-sm leading-[1.3] py-1.5">
-                        <span className="font-semibold">Contact:</span> Form, info section
+                        <span className="font-semibold">Content search & filtering</span>: help users find relevant
+                        information fast
+                    </li>
+                    <li className="text-white text-sm leading-[1.3] py-1.5">
+                        <span className="font-semibold">Contact & support info</span>: add inquiry forms or help center
+                        details
+                    </li>
+                    <li className="text-white text-sm leading-[1.3] py-1.5">
+                        <span className="font-semibold">Themeable design system</span>: customize look & feel with
+                        tokens and Tailwind
+                    </li>
+                    <li className="text-white text-sm leading-[1.3] py-1.5">
+                        <span className="font-semibold">Multilingual support</span>: manage content and routes across
+                        locales
+                    </li>
+                    <li className="text-white text-sm leading-[1.3] py-1.5">
+                        <span className="font-semibold">Prebuilt UI components</span>: Storybook-powered and
+                        production-ready
+                    </li>
+                    <li className="text-white text-sm leading-[1.3] py-1.5">
+                        <span className="font-semibold">Composable integration layer</span>: enrich content with CRM,
+                        search, forms
                     </li>
                 </ul>
             ),
         },
         {
-            title: 'Integrations',
+            title: 'Applicable integrations',
             value: 'integrations',
             content: (
                 <ul className="list-none! p-0! m-0!">
                     <li className="flex gap-4 items-center py-1.5">
-                        <CircleCheckIcon className="h-5 w-5 shrink-0 *:stroke-[#21D99A]" />
+                        <CircleCheckIcon title={'Available'} className="h-5 w-5 shrink-0 *:stroke-[#21D99A]" />
                         <BodySmall className="mb-0!">Strapi</BodySmall>
                     </li>
                     <li className="flex gap-4 items-center py-1.5">
-                        <RefreshCwIcon className="h-5 w-5 shrink-0 *:stroke-[#21D99A]/40" />
+                        <CircleCheckIcon title={'Available'} className="h-5 w-5 shrink-0 *:stroke-[#21D99A]" />
                         <BodySmall className="mb-0!">Contentful</BodySmall>
                     </li>
+
                     <li className="flex gap-4 items-center py-1.5">
-                        <RefreshCwIcon className="h-5 w-5 shrink-0 *:stroke-[#21D99A]/40" />
+                        <CircleCheckIcon title={'Available'} className="h-5 w-5 shrink-0 *:stroke-[#21D99A]" />
+                        <BodySmall className="mb-0!">SurveyJS</BodySmall>
+                    </li>
+                    <li className="flex gap-4 items-center py-1.5">
+                        <CircleCheckIcon title={'Available'} className="h-5 w-5 shrink-0 *:stroke-[#21D99A]" />
                         <BodySmall className="mb-0!">Algolia</BodySmall>
                     </li>
                     <li className="flex gap-4 items-center py-1.5">
+                        <CircleCheckIcon title={'Available'} className="h-5 w-5 shrink-0 *:stroke-[#21D99A]" />
+                        <BodySmall className="mb-0!">Medusa</BodySmall>
+                    </li>
+                    <li className="flex gap-4 items-center py-1.5">
+                        <CircleCheckIcon title={'Available'} className="h-5 w-5 shrink-0 *:stroke-[#21D99A]" />
+                        <BodySmall className="mb-0!">Redis</BodySmall>
+                    </li>
+                    <li className="flex gap-4 items-center py-1.5">
+                        <RefreshCwIcon title={'Planned'} className="h-5 w-5 shrink-0 *:stroke-[#21D99A]/40" />
+                        <BodySmall className="mb-0!">Storyblok</BodySmall>
+                    </li>
+                    <li className="flex gap-4 items-center py-1.5">
+                        <RefreshCwIcon title={'Planned'} className="h-5 w-5 shrink-0 *:stroke-[#21D99A]/40" />
+                        <BodySmall className="mb-0!">Pimcore</BodySmall>
+                    </li>
+                    <li title={'Planned'} className="flex gap-4 items-center py-1.5">
                         <RefreshCwIcon className="h-5 w-5 shrink-0 *:stroke-[#21D99A]/40" />
-                        <BodySmall className="mb-0!">Personalization</BodySmall>
+                        <BodySmall className="mb-0!">OroCommerce</BodySmall>
+                    </li>
+                    <li title={'Planned'} className="flex gap-4 items-center py-1.5">
+                        <RefreshCwIcon className="h-5 w-5 shrink-0 *:stroke-[#21D99A]/40" />
+                        <BodySmall className="mb-0!">Personalization API (TBD)</BodySmall>
                     </li>
                 </ul>
             ),
@@ -150,86 +181,129 @@ const customerPortalStarter: StarterInfoSectionProps = {
     mainTitle: 'Customer Portal Starter',
     description: (
         <>
-            Build scalable self-service customer portals faster.
-            <br />A production-grade foundation with prebuilt UI and backend logic for authenticated user areas, service
-            information, ticketing, and orders.
+            Build scalable self-service customer portals — faster.
+            <br />A production-ready foundation with prebuilt UI, extensible data model, and backend integration points.
+            Ideal for B2B or B2C use cases involving account access, service overviews, ticketing, knowledge base
+            content, and billing.
         </>
     ),
     cliCommand: 'npx create-o2s-app@latest my-portal',
     accordionItems: [
         {
-            title: 'Business value + key functionality',
-            value: 'business-value',
-            content: (
-                <ul className="pl-5! m-0!">
-                    <li className="text-white text-sm leading-[1.3] py-1.5">
-                        Authenticated login and protected routes
-                    </li>
-                    <li className="text-white text-sm leading-[1.3] py-1.5">
-                        Orders and payments integration (mocked or real API)
-                    </li>
-                    <li className="text-white text-sm leading-[1.3] py-1.5">Ticketing via CRM adapter</li>
-                    <li className="text-white text-sm leading-[1.3] py-1.5">
-                        Notification center with CMS-based content
-                    </li>
-                    <li className="text-white text-sm leading-[1.3] py-1.5">
-                        CMS-managed user dashboard using layout blocks
-                    </li>
-                    <li className="text-white text-sm leading-[1.3] py-1.5">Ready-to-use UI components in Storybook</li>
-                </ul>
-            ),
-        },
-        {
-            title: 'Functional blocks',
+            title: 'Feature list',
             value: 'functional-blocks',
             content: (
                 <ul className="pl-5! m-0!">
                     <li className="text-white text-sm leading-[1.3] py-1.5">
-                        <span className="font-semibold">User & access:</span> Login, dashboard, auth status
+                        <span className="font-semibold">Authentication & RBAC</span>: secure access control for user
+                        accounts
                     </li>
                     <li className="text-white text-sm leading-[1.3] py-1.5">
-                        <span className="font-semibold">Support:</span> Ticket list, ticket details, contact widgets
+                        <span className="font-semibold">User profile & preferences</span>: let users manage their own
+                        data
                     </li>
                     <li className="text-white text-sm leading-[1.3] py-1.5">
-                        <span className="font-semibold">Service info:</span> Service cards, status blocks
+                        <span className="font-semibold">In-app notifications</span>: communicate what’s important to
+                        users
                     </li>
                     <li className="text-white text-sm leading-[1.3] py-1.5">
-                        <span className="font-semibold">Knowledge base:</span> FAQ, category list, article viewer
+                        <span className="font-semibold">Ticket & case handling</span>: collect, manage, and resolve
+                        support issues
                     </li>
                     <li className="text-white text-sm leading-[1.3] py-1.5">
-                        <span className="font-semibold">Notifications:</span> Notification list, unread counter
+                        <span className="font-semibold">Service overview</span>: show relevant service data and upsell
+                        options
+                    </li>
+                    <li className="text-white text-sm leading-[1.3] py-1.5">
+                        <span className="font-semibold">Billing & documents</span>: provide access to invoices and files
+                    </li>
+                    <li className="text-white text-sm leading-[1.3] py-1.5">
+                        <span className="font-semibold">Orders & payments</span>: let customers view and track their
+                        purchases
+                    </li>
+                    <li className="text-white text-sm leading-[1.3] py-1.5">
+                        <span className="font-semibold">CMS-driven page layout</span>: empower teams to manage UI
+                        without code
+                    </li>
+                    <li className="text-white text-sm leading-[1.3] py-1.5">
+                        <span className="font-semibold">Ready UI components</span>: build fast using pre-made, tested
+                        elements
+                    </li>
+                    <li className="text-white text-sm leading-[1.3] py-1.5">
+                        <span className="font-semibold">Themeable design system</span>: adjust colors and layout to your
+                        brand
+                    </li>
+                    <li className="text-white text-sm leading-[1.3] py-1.5">
+                        <span className="font-semibold">Composable integration layer</span>: connect any backend via BFF
+                        modules
                     </li>
                 </ul>
             ),
         },
         {
-            title: 'Integrations',
+            title: 'Applicable integrations',
             value: 'integrations',
             content: (
                 <ul className="list-none! p-0! m-0!">
                     <li className="flex gap-4 items-center py-1.5">
-                        <CircleCheckIcon className="h-5 w-5 shrink-0 *:stroke-[#21D99A]" />
-                        <BodySmall className="mb-0!">Auth.js / Keycloak</BodySmall>
+                        <CircleCheckIcon title={'Available'} className="h-5 w-5 shrink-0 *:stroke-[#21D99A]" />
+                        <BodySmall className="mb-0!">Strapi</BodySmall>
                     </li>
                     <li className="flex gap-4 items-center py-1.5">
-                        <CircleCheckIcon className="h-5 w-5 shrink-0 *:stroke-[#21D99A]" />
-                        <BodySmall className="mb-0!">CRM ticket API (mock)</BodySmall>
+                        <CircleCheckIcon title={'Available'} className="h-5 w-5 shrink-0 *:stroke-[#21D99A]" />
+                        <BodySmall className="mb-0!">Contentful</BodySmall>
                     </li>
                     <li className="flex gap-4 items-center py-1.5">
-                        <CircleCheckIcon className="h-5 w-5 shrink-0 *:stroke-[#21D99A]" />
-                        <BodySmall className="mb-0!">Redis (notifications)</BodySmall>
+                        <CircleCheckIcon title={'Available'} className="h-5 w-5 shrink-0 *:stroke-[#21D99A]" />
+                        <BodySmall className="mb-0!">Keycloak</BodySmall>
                     </li>
                     <li className="flex gap-4 items-center py-1.5">
-                        <CircleCheckIcon className="h-5 w-5 shrink-0 *:stroke-[#21D99A]" />
-                        <BodySmall className="mb-0!">Strapi CMS</BodySmall>
+                        <CircleCheckIcon title={'Available'} className="h-5 w-5 shrink-0 *:stroke-[#21D99A]" />
+                        <BodySmall className="mb-0!">Auth.js</BodySmall>
                     </li>
                     <li className="flex gap-4 items-center py-1.5">
-                        <RefreshCwIcon className="h-5 w-5 shrink-0 *:stroke-[#21D99A]/40" />
+                        <CircleCheckIcon title={'Available'} className="h-5 w-5 shrink-0 *:stroke-[#21D99A]" />
+                        <BodySmall className="mb-0!">SurveyJS</BodySmall>
+                    </li>
+                    <li className="flex gap-4 items-center py-1.5">
+                        <CircleCheckIcon title={'Available'} className="h-5 w-5 shrink-0 *:stroke-[#21D99A]" />
+                        <BodySmall className="mb-0!">SAP S/4 Hana</BodySmall>
+                    </li>
+                    <li className="flex gap-4 items-center py-1.5">
+                        <CircleCheckIcon title={'Available'} className="h-5 w-5 shrink-0 *:stroke-[#21D99A]" />
                         <BodySmall className="mb-0!">Algolia</BodySmall>
                     </li>
                     <li className="flex gap-4 items-center py-1.5">
+                        <CircleCheckIcon title={'Available'} className="h-5 w-5 shrink-0 *:stroke-[#21D99A]" />
+                        <BodySmall className="mb-0!">Medusa</BodySmall>
+                    </li>
+                    <li className="flex gap-4 items-center py-1.5">
+                        <CircleCheckIcon title={'Available'} className="h-5 w-5 shrink-0 *:stroke-[#21D99A]" />
+                        <BodySmall className="mb-0!">Redis</BodySmall>
+                    </li>
+                    <li className="flex gap-4 items-center py-1.5">
+                        <RefreshCwIcon title={'Planned'} className="h-5 w-5 shrink-0 *:stroke-[#21D99A]/40" />
+                        <BodySmall className="mb-0!">Storyblok</BodySmall>
+                    </li>
+                    <li className="flex gap-4 items-center py-1.5">
                         <RefreshCwIcon className="h-5 w-5 shrink-0 *:stroke-[#21D99A]/40" />
-                        <BodySmall className="mb-0!">ERP / billing system</BodySmall>
+                        <BodySmall className="mb-0!">Zendesk</BodySmall>
+                    </li>
+                    <li className="flex gap-4 items-center py-1.5">
+                        <RefreshCwIcon title={'Planned'} className="h-5 w-5 shrink-0 *:stroke-[#21D99A]/40" />
+                        <BodySmall className="mb-0!">Pimcore</BodySmall>
+                    </li>
+                    <li title={'Planned'} className="flex gap-4 items-center py-1.5">
+                        <RefreshCwIcon className="h-5 w-5 shrink-0 *:stroke-[#21D99A]/40" />
+                        <BodySmall className="mb-0!">OroCommerce</BodySmall>
+                    </li>
+                    <li className="flex gap-4 items-center py-1.5">
+                        <RefreshCwIcon title={'Planned'} className="h-5 w-5 shrink-0 *:stroke-[#21D99A]/40" />
+                        <BodySmall className="mb-0!">Salesforce Service Cloud</BodySmall>
+                    </li>
+                    <li className="flex gap-4 items-center py-1.5">
+                        <RefreshCwIcon title={'Planned'} className="h-5 w-5 shrink-0 *:stroke-[#21D99A]/40" />
+                        <BodySmall className="mb-0!">Kill Bill (billing)</BodySmall>
                     </li>
                 </ul>
             ),
@@ -277,22 +351,7 @@ export default function ProductStarters() {
                                     <StarterInfoSection {...digitalPortalStarter} />
                                 </section>
                                 <section className="px-4">
-                                    <BenefitsSection
-                                        title={
-                                            <>
-                                                <span className="text-highlighted">What you get</span>
-                                                <span className="text-white">{' with every starter'}</span>
-                                            </>
-                                        }
-                                        description={
-                                            <>
-                                                Each starter includes a modular frontend layer built on Open Self
-                                                Service — with fully customizable UI, layout blocks, and modern DX
-                                                features.
-                                            </>
-                                        }
-                                        benefits={benefits}
-                                    />
+                                    <DXPFeaturesSection />
                                 </section>
                             </div>
                         </main>
