@@ -1,94 +1,290 @@
 # Agent Guidelines
 
-This file contains guidelines and conventions for working with the Open Self Service (O2S) codebase. These instructions help maintain consistency and ensure proper development practices across the project.
+This file provides guidance to AI coding assistants (including Claude Code, Cursor, Windsurf, and others) when working with code in this repository.
 
-This is a living document that will be expanded over time as the project evolves.
+## Overview
 
-## Conventions
+Open Self Service (O2S) is an open-source framework for building composable customer self-service portals. It's an API-agnostic system that aggregates multiple headless APIs through an integration layer and provides a scalable Next.js frontend.
 
-<!-- TODO: Add naming conventions, code style basics -->
+**Tech Stack:**
 
-## Project Structure
+- Frontend: Next.js 15 (App Router), React 19, Tailwind CSS 4, next-intl, next-auth
+- API Harmonization: NestJS 11, TypeScript
+- Monorepo: Turborepo with npm workspaces
+- Node: >=22 (specified in package.json engines)
 
-O2S is organized within a monorepo setup. This section explains how different packages and applications interact, how Turborepo is used for managing dependencies, and how external integrations fit into the system.
+## Development Commands
 
-### Monorepo
+### Running the Project
 
-This project relies upon Turborepo to manage the apps and internal packages within the monorepo. O2S leverages Turborepo by simplifying the process of running, building and linting every sub-package - this can easily be done by running scripts from the root-level package.json.
+```bash
+# Start all services in development mode (with --no-cache flag)
+npm run dev
 
-### Packages
+# Run individual apps
+cd apps/api-harmonization && npm run dev  # NestJS API server
+cd apps/frontend && npm run dev            # Next.js frontend (with Turbopack)
+cd apps/frontend && npm run dev:https      # Next.js with HTTPS
+```
 
-The packages can be either:
+### Building
 
-- **Internal ones** (used only within the monorepo)
-- **Publishable** (for cases when you want them to be accessible to other projects)
+```bash
+# Build all packages and apps
+npm run build
 
-Currently, when using the `create-o2s-app` starter, there is one package created:
+# Build specific app
+cd apps/api-harmonization && npm run build
+cd apps/frontend && npm run build
+```
 
-- `packages/ui` - the UI library of React components, offering a range of building blocks that can be used when implementing more complex components. Currently, this is an internal package used only within the frontend app.
+### Testing
 
-### Apps
+```bash
+# Run tests across all packages
+npm run test
 
-The apps are a type of packages that need to be built and run (either locally or remotely).
+# Run tests in specific app
+cd apps/api-harmonization && npm test
+```
 
-When using `create-o2s-app` there are two apps created:
+### Linting & Formatting
 
-- `apps/api-harmonization` - the API Harmonization server built on Nest.js, responsible for aggregations of data from different integrations
-- `apps/frontend` - the Next.js frontend app, responsible for rendering the views in the browser
-    - dependent on `packages/ui` for base UI components
-    - dependent on `apps/api-harmonization` for harmonized data model for components that aggregate data from integrations
+```bash
+# Lint all packages
+npm run lint
 
-### External Packages
+# Format all packages
+npm run format
 
-While not part of the starter created when using `create-o2s-app`, there are still a few packages that are used within O2S. They are maintained in the main GitHub repository, and are published as NPM packages.
+# Lint specific app
+cd apps/api-harmonization && npm run lint
+cd apps/frontend && npm run lint
+```
 
-- `@o2s/framework` - Defines the base modules that can be plugged into the api-harmonization application, as well as provides the normalized data model which can be used when implementing new integrations. It also provides the SDK that can be used to communicate with the API Harmonization server.
+### Other Useful Commands
 
-- `@o2s/integrations.*` - Under this category falls every integration that is provided by O2S. These integrations are published as NPM packages and are ready to be installed into the api-harmonization application and then used as data sources for the apps.
+```bash
+# Generate new components using Turbo generators
+npm run generate
 
-## Blocks
+# Run Storybook (UI component library)
+npm run storybook
 
-<!-- TODO: Add block structure and conventions -->
+# Update dependencies interactively
+npm run update-deps
 
-## API Harmonization
+# Find missing dependencies
+npm run find-missing-deps
 
-- **Never use Tailwind classes in api-harmonization part**: Avoid using Tailwind classes in api-harmonization part - it makes it tightly coupled with the current approach to styling on the frontend, and will break if we ever migrate away from Tailwind.
+# Clean all node_modules and build artifacts
+npm run clean
 
-<!-- TODO: Add server-side patterns (NestJS) -->
+# Eject a block (custom CLI tool)
+npm run eject-block
 
-### Decoupling from Frontend Styling
+# Run documentation site
+npm run docs
 
-## Frontend
+# Changesets (for versioning)
+npm run changeset
+npm run version-packages
+npm run release
+```
 
-- Use responsive variants (sm:, md:, lg:, etc.) for adaptive designs
-- Leverage state variants (hover:, focus:, active:, etc.) for interactive elements
+## Architecture
 
-### Frontend Mappings
+### Monorepo Structure
 
-- **Create mapping helpers to translate semantic variants to UI styling**: When the API harmonization layer provides semantic variants (e.g., `'CRITICAL'`, `'HIGH'`, `'PENDING'`, `'COMPLETED'`), create mapping helpers in `packages/utils/frontend/src/mappings/` to translate these variants to actual styling classes or UI component variants.
+O2S uses **Turborepo** to manage a monorepo with multiple apps and packages. The workspace structure includes:
 
-## Integrations
+```
+/apps                           # Deployable applications
+  /api-harmonization           # NestJS backend (integration layer)
+  /frontend                    # Next.js frontend application
+  /docs                        # Documentation site
 
-<!-- TODO: Add integration patterns -->
+/packages                       # Shared packages
+  /blocks/*                    # Reusable UI blocks (25+ blocks)
+  /framework                   # Core framework modules & SDK
+  /integrations/*              # Integration adapters (Strapi, Redis, Algolia, Medusa, mocked)
+  /modules/*                   # Feature modules (e.g., surveyjs)
+  /ui                          # Base UI component library (shadcn/ui + Tailwind)
+  /utils/*                     # Utility packages
+  /configs/*                   # Shared configurations
+  /cli/*                       # CLI tools
+  /telemetry                   # Telemetry package
+```
 
-## Code Style
+### Key Concepts
 
-- Use descriptive variable names; avoid single-letter identifiers.
-- Write code that clearly explains itself, rather than relying on in-line comments.
-- Expose only necessary, well-typed exports from each module.
-- Do not use `any` type; instead, apply specific types and use union narrowing where appropriate. If unsure, extract and share common types rather than defaulting to `any`.
-- Opt for compact, reusable utilities and libraries that introduce minimal or no extra dependencies wherever practical.
-- Prioritize functional programming principles, such as pure functions and data-first utilities, instead of using class-based approaches.
-- When code comments are required for clarity, always write them in English.
+#### 1. API Harmonization Layer
 
-## Security
+The `apps/api-harmonization` NestJS application serves as an **integration layer** that:
 
-- After making changes, always check that the project compiles successfully and immediately address any build issues.
+- Aggregates data from multiple backend services (CMS, CRM, ERP, etc.)
+- Normalizes data into a consistent data model
+- Provides a unified API for the frontend
+- Prevents vendor lock-in by abstracting backend implementations
 
-## Testing
+**Module Registration Pattern:**
+All framework modules and blocks are registered in `apps/api-harmonization/src/app.module.ts` using `.register(AppConfig)` pattern. The `AppConfig` (defined in `app.config.ts`) maps integration configurations to modules like Users, Organizations, Tickets, CMS, etc.
 
-<!-- TODO: Add testing conventions -->
+**Important:** Never use Tailwind classes in api-harmonization code. It should remain decoupled from frontend styling decisions.
 
-## Documentation
+#### 2. Framework Package
 
-<!-- TODO: Add documentation standards -->
+The `@o2s/framework` package is the core of O2S and provides:
+
+- **Base modules** for common domains: Users, Organizations, Tickets, Notifications, Articles, CMS, Cache, Invoices, Orders, Products, BillingAccounts, Resources, Search, Auth
+- **Normalized data models** that integrations must implement
+- **SDK** for communicating with the API Harmonization server from frontend or other TypeScript apps
+- Located at `packages/framework/src/`
+
+Framework modules are dynamically registered with specific integration configs (see `app.config.ts` and `app.module.ts`).
+
+#### 3. Blocks
+
+Blocks are **self-contained, reusable UI components** that represent a specific feature or page section. Each block has three parts:
+
+- `api-harmonization/` - NestJS module, controller, service, DTOs for backend logic
+- `frontend/` - React component for rendering in Next.js
+- `sdk/` - TypeScript SDK client for fetching block data
+
+**Block naming:** `@o2s/blocks.<block-name>` (e.g., `@o2s/blocks.article`, `@o2s/blocks.ticket-list`)
+
+Blocks are imported and registered in both:
+
+- `apps/api-harmonization/src/app.module.ts` (backend module registration)
+- `apps/frontend/src/blocks/` (frontend component usage)
+
+#### 4. Integrations
+
+Integrations are adapters that implement framework interfaces for specific backend services:
+
+- `@o2s/integrations.strapi-cms` - Strapi CMS adapter
+- `@o2s/integrations.redis` - Redis cache adapter
+- `@o2s/integrations.algolia` - Algolia search adapter
+- `@o2s/integrations.medusajs` - Medusa commerce adapter
+- `@o2s/integrations.mocked` - Mock data for development
+
+Integrations are configured in `@o2s/configs.integrations` and wired up via `AppConfig`.
+
+#### 5. Frontend Application
+
+The `apps/frontend` Next.js app uses:
+
+- **App Router** architecture (Next.js 15)
+- **Server Components** as default
+- **next-intl** for internationalization (i18n)
+- **next-auth** for authentication
+- **@o2s/ui** for base UI components
+- **Blocks** imported from `@o2s/blocks.*` packages
+
+Frontend structure:
+
+- `src/app/` - App Router pages and layouts
+- `src/blocks/` - Block component integration
+- `src/containers/` - Page-level container components
+- `src/auth/` - Authentication configuration
+- `src/actions/` - Server actions
+- `src/api/` - API route handlers
+- `src/i18n/` - Internationalization setup
+
+#### 6. Semantic Variants & Mapping Helpers
+
+When the API harmonization layer provides **semantic variants** (e.g., `'CRITICAL'`, `'HIGH'`, `'PENDING'`, `'COMPLETED'`), create **mapping helpers** in `packages/utils/frontend/src/mappings/` to translate these to UI styling classes or component variants. This maintains separation between backend semantics and frontend styling.
+
+## Code Style & Conventions
+
+**General:**
+
+- Use descriptive variable names (no single-letter identifiers)
+- Write self-documenting code
+- Expose only necessary, well-typed exports
+- **Never use `any` type** - use specific types with union narrowing
+- Prefer functional programming over class-based approaches
+- All comments must be in English
+
+**TypeScript:**
+
+- Strict type checking enabled
+- No implicit any
+- Extract and share common types rather than duplicating
+
+**Imports:**
+
+- Sorted using `@trivago/prettier-plugin-sort-imports`
+- Use path aliases from `tsconfig.json`
+
+**Tailwind (Frontend only):**
+
+- Use responsive variants (sm:, md:, lg:, xl:)
+- Use state variants (hover:, focus:, active:, disabled:)
+- Leverage Tailwind CSS 4 features
+
+## Contributing Workflow
+
+This project follows **Conventional Commits** and uses **Changesets** for versioning.
+
+### Before Creating a PR
+
+1. Create a changeset to document your changes:
+
+    ```bash
+    npm run changeset
+    ```
+
+    This will prompt you to select packages, change type (major/minor/patch), and add a description.
+
+2. Ensure code quality:
+    ```bash
+    npm run lint
+    npm run build
+    npm run test
+    ```
+
+### Branch Naming
+
+Use descriptive branch names:
+
+- `feature/your-feature-name`
+- `fix/auth-bug`
+- `docs/update-api-reference`
+
+### Commit Messages
+
+Follow Conventional Commits format:
+
+```
+feat: add new authentication flow
+fix: resolve dashboard layout bug
+docs: update API reference
+fix(frontend): fixing styles for Y component
+```
+
+## Security & Build Verification
+
+- After making changes, always verify the project compiles successfully
+- Immediately address any build issues
+- Check for security vulnerabilities in dependencies
+
+## Important Files
+
+- `turbo.json` - Turborepo pipeline configuration
+- `package.json` (root) - Workspace configuration and root-level scripts
+- `apps/api-harmonization/src/app.module.ts` - Main NestJS module with all registrations
+- `apps/api-harmonization/src/app.config.ts` - Integration configuration mapping
+- `apps/frontend/next.config.ts` - Next.js configuration
+- `AGENTS.md` - Detailed agent guidelines and conventions (living document)
+- `CONTRIBUTING.md` - Contribution guidelines
+
+## Notes
+
+- The project uses **npm workspaces** with `npm@11.6.2` as the package manager
+- All packages use shared configs: `@o2s/typescript-config`, `@o2s/eslint-config`, `@o2s/prettier-config`
+- The API Harmonization server uses **cookie-based authentication** (handled via middleware)
+- Frontend uses **standalone output** mode for production deployments
+- SVG files are handled via `@svgr/webpack` for both webpack and Turbopack
+- Storybook is configured for UI component development
+- Git hooks are managed with Husky and lint-staged
