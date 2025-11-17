@@ -5,3 +5,4 @@ export * as OrderBadge from './order-badge';
 export * as ServicesBadge from './services-badge';
 export * as StatusOrder from './status-order';
 export * as TicketBadge from './ticket-badge';
+export * as TicketSummary from './ticket-summary';

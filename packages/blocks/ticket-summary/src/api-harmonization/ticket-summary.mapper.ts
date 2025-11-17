@@ -23,7 +23,7 @@ export const mapTicketSummary = (
             icon: cms.open.icon,
             value: statusCounts.OPEN || 0,
             description: cms.open.message,
-            color: 'text-badge-default-background',
+            variant: 'OPEN',
         });
     }
     if (cms.inProgress) {
@@ -32,7 +32,7 @@ export const mapTicketSummary = (
             icon: cms.inProgress.icon,
             value: statusCounts.IN_PROGRESS || 0,
             description: cms.inProgress.message,
-            color: 'text-badge-secondary-background',
+            variant: 'IN_PROGRESS',
         });
     }
     if (cms.closed) {
@@ -41,7 +41,7 @@ export const mapTicketSummary = (
             icon: cms.closed.icon,
             value: statusCounts.CLOSED || 0,
             description: cms.closed.message,
-            color: 'text-muted-foreground',
+            variant: 'CLOSED',
         });
     }
 

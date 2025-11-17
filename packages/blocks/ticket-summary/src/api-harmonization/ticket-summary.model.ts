@@ -5,7 +5,7 @@ export class TicketSummaryInfoCard {
     icon?: string;
     value!: number;
     description?: string;
-    color?: string;
+    variant?: 'OPEN' | 'IN_PROGRESS' | 'CLOSED';
 }
 
 export class TicketSummaryBlock extends Models.Block.Block {
