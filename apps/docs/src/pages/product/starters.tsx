@@ -306,7 +306,7 @@ export default function ProductStarters() {
                                         <span className="text-highlighted">something else?</span>
                                     </>
                                 }
-                                description="Tell us what kind of frontend starter would help your next project.We're planning more — and we want your input."
+                                description="Tell us what kind of frontend starter would help your next project. We're planning more — and we want your input."
                                 primaryButton={{
                                     text: 'Submit your idea',
                                     url: '/contact',

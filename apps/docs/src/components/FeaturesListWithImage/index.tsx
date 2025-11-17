@@ -19,6 +19,7 @@ interface FeaturesListWithImageProps {
 
 export function FeaturesListWithImage({ title, features, link }: FeaturesListWithImageProps) {
     const [activeFeatureIndex, setActiveFeatureIndex] = useState(0);
+
     return (
         <div className="flex flex-col gap-8">
             {/* Desktop layout: 2 columns */}
@@ -56,17 +57,17 @@ export function FeaturesListWithImage({ title, features, link }: FeaturesListWit
                     </a>
                 </div>
                 {/* Right column: Image */}
-                <div className="h-[546px] overflow-hidden rounded-lg relative">
-                    <AnimatePresence>
+                <div className="rounded-lg overflow-hidden">
+                    <AnimatePresence mode="wait">
                         <motion.img
                             key={activeFeatureIndex}
                             src={features[activeFeatureIndex].image}
                             alt={features[activeFeatureIndex].title}
-                            className="w-full h-full object-cover absolute inset-0"
-                            initial={{ opacity: 0, x: '100%' }}
+                            className="w-full h-auto"
+                            initial={{ opacity: 0, x: 160 }}
                             animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: '-100%' }}
-                            transition={{ duration: 0.3, ease: 'easeInOut' }}
+                            exit={{ opacity: 0, x: -160 }}
+                            transition={{ duration: 0.16, ease: 'easeInOut' }}
                         />
                     </AnimatePresence>
                 </div>
