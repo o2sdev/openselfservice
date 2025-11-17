@@ -4,7 +4,7 @@
   "private": false,
   "license": "MIT",
   "exports": {
-    "./integration": "./dist/integration.js"
+    "./integration": "./dist/src/integration.js"
   },
   "files": [
     "dist"

@@ -1,25 +1,14 @@
 import { Tickets } from '@o2s/framework/modules';
 
-import { type TicketObject } from '@/generated/zendesk';
+import { type TicketCommentObject, type TicketObject, type UserObject } from '@/generated/zendesk';
 
 type ZendeskTicket = TicketObject;
 
-export interface ZendeskComment {
-    id?: number;
-    author_id?: number;
-    body?: string;
-    created_at?: string;
-    public?: boolean;
-    attachments?: Array<{
-        id?: number;
-        file_name?: string;
-        content_url?: string;
-        content_type?: string;
-        size?: number;
-    }>;
-}
-
-export function mapTicketToModel(ticket: ZendeskTicket, comments: ZendeskComment[] = []): Tickets.Model.Ticket {
+export function mapTicketToModel(
+    ticket: ZendeskTicket,
+    comments: TicketCommentObject[] = [],
+    authorMap?: Map<number, UserObject>,
+): Tickets.Model.Ticket {
     let status: Tickets.Model.TicketStatus = 'OPEN';
     switch (ticket.status) {
         case 'closed':
@@ -55,29 +44,33 @@ export function mapTicketToModel(ticket: ZendeskTicket, comments: ZendeskComment
         });
     }
 
-    const mappedComments = comments.map((comment) => ({
-        author: {
-            name: `User ${comment.author_id}`,
-            email: '',
-        },
-        date: comment.created_at || '',
-        content: comment.body || '',
-    }));
+    const mappedComments = comments.map((comment) => {
+        const author = authorMap?.get(comment.author_id!);
+        return {
+            author: {
+                name: author?.name || String(comment.author_id || ''),
+                email: author?.email || '',
+            },
+            date: comment.created_at || '',
+            content: comment.body || '',
+        };
+    });
 
     const attachments: Tickets.Model.TicketAttachment[] = [];
     comments.forEach((comment) => {
         if (comment.attachments && comment.attachments.length > 0) {
+            const author = authorMap?.get(comment.author_id!);
             comment.attachments.forEach((attachment) => {
                 attachments.push({
                     name: attachment.file_name || '',
                     url: attachment.content_url || '',
                     size: attachment.size || 0,
                     author: {
-                        name: `User ${comment.author_id}`,
-                        email: '',
+                        name: author?.name || String(comment.author_id || ''),
+                        email: author?.email || '',
                     },
                     date: comment.created_at || '',
-                    ariaLabel: `Download ${attachment.file_name || 'attachment'}`,
+                    ariaLabel: attachment.file_name || 'attachment',
                 });
             });
         }

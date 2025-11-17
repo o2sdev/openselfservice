@@ -6,16 +6,17 @@ import { Tickets, Users } from '@o2s/framework/modules';
 import {
     type SearchResponse,
     type SearchResultObject,
+    type TicketCommentObject,
     type TicketObject,
     type UserObject,
-    client,
     listSearchResults,
     listTicketComments,
     showTicket,
     showUser,
 } from '@/generated/zendesk';
+import { client } from '@/generated/zendesk/client.gen';
 
-import { type ZendeskComment, mapTicketToModel } from './zendesk-ticket.mapper';
+import { mapTicketToModel } from './zendesk-ticket.mapper';
 
 type ZendeskTicket = TicketObject;
 type ZendeskUser = UserObject;
@@ -58,6 +59,10 @@ export class ZendeskTicketService extends Tickets.Service {
 
                 return this.fetchTicket(options.id).pipe(
                     switchMap((ticket) => {
+                        if (!ticket.requester_id) {
+                            return of(undefined);
+                        }
+
                         return this.fetchUser(ticket.requester_id!).pipe(
                             switchMap((requester) => {
                                 if (requester.email !== user.email) {
@@ -65,7 +70,24 @@ export class ZendeskTicketService extends Tickets.Service {
                                 }
 
                                 return this.fetchTicketComments(options.id).pipe(
-                                    map((comments) => mapTicketToModel(ticket, comments)),
+                                    switchMap((comments) => {
+                                        const authorIds = [
+                                            ...new Set(comments.map((c) => c.author_id).filter(Boolean)),
+                                        ] as number[];
+                                        if (authorIds.length === 0) {
+                                            return of(mapTicketToModel(ticket, comments));
+                                        }
+                                        return from(
+                                            Promise.all(authorIds.map((id) => this.fetchUser(id).toPromise())),
+                                        ).pipe(
+                                            map((authors) => {
+                                                const authorMap = new Map(
+                                                    authors.filter((a) => a !== undefined).map((a) => [a!.id!, a!]),
+                                                );
+                                                return mapTicketToModel(ticket, comments, authorMap);
+                                            }),
+                                        );
+                                    }),
                                 );
                             }),
                         );
@@ -171,14 +193,19 @@ export class ZendeskTicketService extends Tickets.Service {
                 } as ZendeskSearchQuery,
             }),
         ).pipe(
-            map((response) => response.data!),
+            map((response) => {
+                if (!response.data) {
+                    throw new Error('Search response contains no data');
+                }
+                return response.data;
+            }),
             catchError((error) => {
                 return throwError(() => new Error(`Failed to search tickets: ${error.message || error}`));
             }),
         );
     }
 
-    private fetchTicketComments(ticketId: string): Observable<ZendeskComment[]> {
+    private fetchTicketComments(ticketId: string): Observable<TicketCommentObject[]> {
         return from(
             listTicketComments({
                 path: {
