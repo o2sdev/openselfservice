@@ -1,8 +1,10 @@
 {
-    "label": "Create a new block",
-    "position": 500,
+    "label": "Deployment",
+    "position": 600,
     "link": {
         "type": "doc",
         "id": "overview"
     }
 }
+
+

@@ -19,7 +19,7 @@
     "dependencies": {
         "jwt-decode": "^4.0.0",
         "winston": "^3.18.3",
-        "axios": "^1.12.2",
+        "axios": "^1.13.2",
         "express": "5.1.0"
     },
     "devDependencies": {
@@ -28,7 +28,7 @@
         "@o2s/typescript-config": "*",
         "@types/express": "^5.0.5",
         "concurrently": "^9.2.1",
-        "eslint": "^9.38.0",
+        "eslint": "^9.39.1",
         "prettier": "^3.6.2",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3",
