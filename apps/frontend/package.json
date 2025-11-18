@@ -21,7 +21,7 @@
         "@o2s/utils.frontend": "*",
         "class-variance-authority": "^0.7.1",
         "date-fns": "^4.1.0",
-        "dotenv-cli": "^10.0.0",
+        "dotenv-cli": "^11.0.0",
         "formik": "^2.4.9",
         "markdown-to-jsx": "^7.7.17",
         "next": "^15.5.6",
