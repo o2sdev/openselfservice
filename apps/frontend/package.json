@@ -69,7 +69,7 @@
         "@turbo/gen": "^2.6.1",
         "@types/bcryptjs": "^3.0.0",
         "@types/node": "^24.10.1",
-        "@types/react": "^19.2.5",
+        "@types/react": "^19.2.6",
         "@types/react-autosuggest": "^10.1.11",
         "@types/react-dom": "^19.2.3",
         "dotenv": "^17.2.3",
