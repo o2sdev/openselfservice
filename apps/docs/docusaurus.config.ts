@@ -343,14 +343,17 @@ const config: Config = {
                               {
                                   label: 'Features',
                                   to: 'product/features',
+                                  className: 'dropdown__link--icon dropdown__link--icon-features',
                               },
                               {
                                   label: 'Starters',
                                   to: 'product/starters',
+                                  className: 'dropdown__link--icon dropdown__link--icon-starters',
                               },
                               {
                                   label: 'Integrations',
                                   to: 'product/integrations',
+                                  className: 'dropdown__link--icon dropdown__link--icon-integrations',
                               },
                           ],
                       },
@@ -362,29 +365,24 @@ const config: Config = {
                               {
                                   label: 'Documentation',
                                   to: '/docs',
-                                  className: 'dropdown__link--icon dropdown__link--icon-github',
-                              },
-                              {
-                                  label: 'Community',
-                                  href: 'https://discord.gg/4R568nZgsT',
-                                  className: 'dropdown__link--icon dropdown__link--icon-github',
-                              },
-                              {
-                                  label: 'Changelog',
-                                  to: '/blog/tags/releases',
-                                  className: 'dropdown__link--icon dropdown__link--icon-github',
+                                  className: 'dropdown__link--icon dropdown__link--icon-documentation',
                               },
                               {
                                   label: 'Github',
                                   href: 'https://github.com/o2sdev/openselfservice',
                                   className: 'dropdown__link--icon dropdown__link--icon-github',
                               },
+                              {
+                                  label: 'Changelog',
+                                  to: '/blog/tags/releases',
+                                  className: 'dropdown__link--icon dropdown__link--icon-changelog',
+                              },
                           ],
                           linkMore: {
-                              title: 'Use cases',
+                              title: 'Community',
                               label: 'see more →',
-                              href: '/use-cases',
-                              background: '/img/dxp-gh-demo.png',
+                              href: 'https://discord.gg/4R568nZgsT',
+                              background: '/img/navbar/community-bg-img.png',
                           },
                       },
                       {
@@ -395,12 +393,12 @@ const config: Config = {
                               {
                                   label: 'Blog',
                                   to: '/blog',
-                                  className: 'dropdown__link--icon dropdown__link--icon-github',
+                                  className: 'dropdown__link--icon dropdown__link--icon-blog',
                               },
                               {
                                   label: 'Roadmap',
                                   href: 'https://github.com/orgs/o2sdev/projects/2',
-                                  className: 'dropdown__link--icon dropdown__link--icon-github',
+                                  className: 'dropdown__link--icon dropdown__link--icon-roadmap',
                               },
                           ],
                       },
@@ -412,17 +410,17 @@ const config: Config = {
                               {
                                   label: 'For developers',
                                   to: '/support/developers',
-                                  className: 'dropdown__link--icon dropdown__link--icon-github',
+                                  className: 'dropdown__link--icon dropdown__link--icon-dev',
                               },
                               {
                                   label: 'Enterprise support',
                                   to: '/support/enterprise',
-                                  className: 'dropdown__link--icon dropdown__link--icon-github',
+                                  className: 'dropdown__link--icon dropdown__link--icon-support',
                               },
                               {
                                   label: 'Contact us',
                                   to: '/contact',
-                                  className: 'dropdown__link--icon dropdown__link--icon-github',
+                                  className: 'dropdown__link--icon dropdown__link--icon-contact',
                               },
                           ],
                       },

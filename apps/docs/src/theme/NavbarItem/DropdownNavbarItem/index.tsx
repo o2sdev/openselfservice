@@ -107,8 +107,8 @@ function DropdownNavbarItemDesktop({
                 </ul>
                 {linkMore && (
                     <div className="dropdown__menu-more" style={{ backgroundImage: `url(${linkMore.background})` }}>
-                        <p className="dropdown__menu-more-title">{linkMore.title}</p>
-                        <a href={linkMore.href} className="dropdown__menu-more-link">
+                        <p className="dropdown__menu-more-title text-sm">{linkMore.title}</p>
+                        <a href={linkMore.href} className="dropdown__menu-more-link text-sm">
                             {linkMore.label}
                         </a>
                     </div>

@@ -606,8 +606,8 @@ aside:not(.theme-doc-sidebar-container) {
     justify-content: end;
     padding: 24px;
     color: #000;
-    min-width: 188px;
-    box-sizing: content-box;
+    width: 188px;
+    box-sizing: border-box;
     background: #f2f2f2 no-repeat;
     background-size: cover;
 }
@@ -629,7 +629,6 @@ aside:not(.theme-doc-sidebar-container) {
 
 .dropdown__menu-list > li,
 .menu__link {
-    min-height: 50px;
     margin: 0;
 }
 
@@ -655,13 +654,69 @@ aside:not(.theme-doc-sidebar-container) {
     content: '';
     display: inline-block;
     margin-right: 1rem;
-    width: 50px;
-    height: 50px;
+    width: 32px;
+    height: 32px;
     top: 0;
+    background-size: 100% !important;
+}
+
+@media (min-width: 997px) {
+    .dropdown__link--icon:before {
+        width: 44px;
+        height: 44px;
+    }
+}
+
+.dropdown__link--icon-blog:before {
+    background: url('../../src/assets/navbar/o2s-icon-blog.svg') no-repeat;
+}
+
+.dropdown__link--icon-features:before {
+    background: url('../../src/assets/navbar/o2s-icon-features.svg') no-repeat;
+}
+
+.dropdown__link--icon-starters:before {
+    background: url('../../src/assets/navbar/o2s-icon-starters.svg') no-repeat;
+}
+
+.dropdown__link--icon-integrations:before {
+    background: url('../../src/assets/navbar/o2s-icon-integrations.svg') no-repeat;
+}
+
+.dropdown__link--icon-documentation:before {
+    background: url('../../src/assets/navbar/o2s-icon-documentation.svg') no-repeat;
+}
+
+.dropdown__link--icon-community:before {
+    background: url('../../src/assets/navbar/o2s-icon-community.svg') no-repeat;
+}
+
+.dropdown__link--icon-changelog:before {
+    background: url('../../src/assets/navbar/o2s-icon-changelog.svg') no-repeat;
 }
 
 .dropdown__link--icon-github:before {
-    background: url('../../src/assets/icons/github.svg') no-repeat;
+    background: url('../../src/assets/navbar/o2s-icon-github.svg') no-repeat;
+}
+
+.dropdown__link--icon-roadmap:before {
+    background: url('../../src/assets/navbar/o2s-icon-roadmap.svg') no-repeat;
+}
+
+.dropdown__link--icon-dev:before {
+    background: url('../../src/assets/navbar/o2s-icon-dev.svg') no-repeat;
+}
+
+.dropdown__link--icon-support:before {
+    background: url('../../src/assets/navbar/o2s-icon-support.svg') no-repeat;
+}
+
+.dropdown__link--icon-contact:before {
+    background: url('../../src/assets/navbar/o2s-icon-contact.svg') no-repeat;
+}
+
+.dropdown__link--icon-case:before {
+    background: url('../../src/assets/navbar/o2s-icon-case.svg') no-repeat;
 }
 
 .footer__link-item[target='_blank'] svg {
