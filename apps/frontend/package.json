@@ -77,7 +77,7 @@
         "eslint-config-next": "^15.5.6",
         "postcss": "^8.5.6",
         "prettier": "^3.6.2",
-        "sass": "^1.94.0",
+        "sass": "^1.94.1",
         "tailwindcss": "^4.1.17",
         "tsx": "^4.20.6",
         "typescript": "^5.9.3"
