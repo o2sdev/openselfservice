@@ -64,7 +64,7 @@ export function IntegrationsBlocks({ title, description, integrations }: Integra
                             className={clsx('card-base p-6! flex flex-col gap-[30px] h-full', statusConfig.cardBgClass)}
                         >
                             <div className="flex gap-6">
-                                {integration.icon}
+                                <div>{integration.icon}</div>
                                 <div className="flex flex-col gap-2.5">
                                     <H3 className="mb-0!">{integration.name}</H3>
                                     <BodySmall className="mb-0!">{integration.description}</BodySmall>

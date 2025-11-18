@@ -1,7 +1,22 @@
 import React from 'react';
 
-import BanGreenTileIcon from '@site/src/assets/icons/BanGreenTile.svg';
 import BlocksIcon from '@site/src/assets/icons/Blocks.svg';
+import AlgoliaIcon from '@site/src/assets/integrations/algolia-integration-icon.svg';
+import AuthJsIcon from '@site/src/assets/integrations/auth.js-integration-icon.svg';
+import ContentfulIcon from '@site/src/assets/integrations/contentful-integration-icon.svg';
+import KeycloakIcon from '@site/src/assets/integrations/keycloak-integration-icon.svg';
+import KillBillIcon from '@site/src/assets/integrations/killbill-integration-icon.svg';
+import MedusaIcon from '@site/src/assets/integrations/medusa-integration-icon.svg';
+import O2SIcon from '@site/src/assets/integrations/o2s-integration-icon.svg';
+import OROIcon from '@site/src/assets/integrations/oro-integration-icon.svg';
+import PimcoreIcon from '@site/src/assets/integrations/pimcore-integration-icon.svg';
+import RedisIcon from '@site/src/assets/integrations/redis-integration-icon.svg';
+import SalesforceIcon from '@site/src/assets/integrations/salesforce-integration-icon.svg';
+import SAPIcon from '@site/src/assets/integrations/sap-integration-icon.svg';
+import StoryblokIcon from '@site/src/assets/integrations/storyblok-integration-icon.svg';
+import StrapiIcon from '@site/src/assets/integrations/strapi-integration-icon.svg';
+import SurveyJSIcon from '@site/src/assets/integrations/surveyjs-integration-icon.svg';
+import ZendeskIcon from '@site/src/assets/integrations/zendesk-integration-icon.svg';
 import { FooterSection } from '@site/src/components/FooterSection';
 import { HeroBannerSection } from '@site/src/components/HeroBannerSection';
 import { IntegrationsBlocks } from '@site/src/components/IntegrationsBlocks';
@@ -31,19 +46,19 @@ const INTEGRATION_SECTIONS: Array<{
                 name: 'Strapi',
                 status: 'available',
                 description: 'Headless CMS used for content, layouts, KB, and more.',
-                icon: <BanGreenTileIcon className="w-4 h-4" />,
+                icon: <StrapiIcon />,
             },
             {
                 name: 'Contentful',
                 status: 'available',
                 description: 'CMS for multi-language content and marketing blocks.',
-                icon: <BanGreenTileIcon className="w-4 h-4" />,
+                icon: <ContentfulIcon />,
             },
             {
                 name: 'Storyblok',
                 status: 'planned',
                 description: 'Visual CMS for content-driven experiences and static pages.',
-                icon: <BanGreenTileIcon className="w-4 h-4" />,
+                icon: <StoryblokIcon />,
             },
         ],
     },
@@ -55,19 +70,19 @@ const INTEGRATION_SECTIONS: Array<{
                 name: 'SurveyJS',
                 status: 'available',
                 description: 'Advanced survey and form engine for ticket submission.',
-                icon: <BanGreenTileIcon className="w-4 h-4" />,
+                icon: <SurveyJSIcon />,
             },
             {
                 name: 'Zendesk',
                 status: 'planned',
                 description: 'External ticketing and support knowledge base system.',
-                icon: <BanGreenTileIcon className="w-4 h-4" />,
+                icon: <ZendeskIcon />,
             },
             {
                 name: 'Salesforce Service Cloud',
                 status: 'planned',
                 description: 'Enterprise CRM and customer case handling solution.',
-                icon: <BanGreenTileIcon className="w-4 h-4" />,
+                icon: <SalesforceIcon />,
             },
         ],
     },
@@ -79,13 +94,13 @@ const INTEGRATION_SECTIONS: Array<{
                 name: 'SAP S/4 Hana',
                 status: 'internal',
                 description: 'ERP integration for billing, orders and document summaries.',
-                icon: <BanGreenTileIcon className="w-4 h-4" />,
+                icon: <SAPIcon />,
             },
             {
                 name: 'Kill Bill',
                 status: 'planned',
                 description: 'Open-source billing and subscription management engine.',
-                icon: <BanGreenTileIcon className="w-4 h-4" />,
+                icon: <KillBillIcon />,
             },
         ],
     },
@@ -97,13 +112,13 @@ const INTEGRATION_SECTIONS: Array<{
                 name: 'Auth.js',
                 status: 'available',
                 description: 'Authentication adapter supporting OAuth and custom providers.',
-                icon: <BanGreenTileIcon className="w-4 h-4" />,
+                icon: <AuthJsIcon />,
             },
             {
                 name: 'Keycloak',
                 status: 'internal',
                 description: 'Enterprise IAM for SSO, user management and OpenID flows.',
-                icon: <BanGreenTileIcon className="w-4 h-4" />,
+                icon: <KeycloakIcon />,
             },
         ],
     },
@@ -115,19 +130,19 @@ const INTEGRATION_SECTIONS: Array<{
                 name: 'Strapi',
                 status: 'available',
                 description: 'Used to model and manage article-based support knowledge base.',
-                icon: <BanGreenTileIcon className="w-4 h-4" />,
+                icon: <StrapiIcon />,
             },
             {
                 name: 'Salesforce Service Cloud',
                 status: 'planned',
                 description: 'Enterprise CRM and customer case handling solution.',
-                icon: <BanGreenTileIcon className="w-4 h-4" />,
+                icon: <SalesforceIcon />,
             },
             {
                 name: 'Zendesk',
                 status: 'planned',
                 description: 'External ticketing and support knowledge base system.',
-                icon: <BanGreenTileIcon className="w-4 h-4" />,
+                icon: <ZendeskIcon />,
             },
         ],
     },
@@ -141,25 +156,25 @@ const INTEGRATION_SECTIONS: Array<{
                 status: 'available',
                 description:
                     'Open-source composable commerce engine. Currently provides product & asset information in O2S.',
-                icon: <BanGreenTileIcon className="w-4 h-4" />,
+                icon: <MedusaIcon />,
             },
             {
                 name: 'SAP S/4 Hana',
                 status: 'internal',
                 description: 'Used for order, billing, product and asset data integration.',
-                icon: <BanGreenTileIcon className="w-4 h-4" />,
+                icon: <SAPIcon />,
             },
             {
                 name: 'OroCommerce',
                 status: 'planned',
                 description: 'B2B commerce platform with pricing, inventory and quote support.',
-                icon: <BanGreenTileIcon className="w-4 h-4" />,
+                icon: <OROIcon />,
             },
             {
                 name: 'Pimcore',
                 status: 'planned',
                 description: 'PIM and DAM solution for product content and digital assets.',
-                icon: <BanGreenTileIcon className="w-4 h-4" />,
+                icon: <PimcoreIcon />,
             },
         ],
     },
@@ -171,15 +186,15 @@ const INTEGRATION_SECTIONS: Array<{
                 name: 'Strapi',
                 status: 'available',
                 description: 'Used to manage in-app notification content and metadata.',
-                icon: <BanGreenTileIcon className="w-4 h-4" />,
+                icon: <StrapiIcon />,
             },
             {
                 name: 'Notification API',
                 status: 'internal',
                 description: 'Our proprietary API for sending multi-channel notifications.',
-                icon: <BanGreenTileIcon className="w-4 h-4" />,
+                icon: <O2SIcon />,
             },
-            // { name: 'novu.co notification API', status: 'planned', description: 'Notification engine for multi-channel delivery and tracking.', icon: <BanGreenTileIcon className="w-4 h-4" /> },
+            // { name: 'novu.co notification API', status: 'planned', description: 'Notification engine for multi-channel delivery and tracking.', icon: <BanGreenTileIcon /> },
         ],
     },
     {
@@ -190,14 +205,14 @@ const INTEGRATION_SECTIONS: Array<{
                 name: 'Algolia',
                 status: 'available',
                 description: 'Used for full-text and faceted search across content and articles.',
-                icon: <BanGreenTileIcon className="w-4 h-4" />,
+                icon: <AlgoliaIcon />,
             },
             {
                 name: 'Personalisation API',
                 status: 'planned',
                 description:
                     'TBD. We plan to support more personalised experiences by means of integration with a suitable product.',
-                icon: <BanGreenTileIcon className="w-4 h-4" />,
+                icon: <O2SIcon />,
             },
         ],
     },
@@ -209,7 +224,7 @@ const INTEGRATION_SECTIONS: Array<{
                 name: 'Redis',
                 status: 'available',
                 description: 'Used for caching, session storage and notification delivery.',
-                icon: <BanGreenTileIcon className="w-4 h-4" />,
+                icon: <RedisIcon />,
             },
         ],
     },
