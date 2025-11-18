@@ -362,20 +362,30 @@ const config: Config = {
                               {
                                   label: 'Documentation',
                                   to: '/docs',
+                                  className: 'dropdown__link--icon dropdown__link--icon-github',
                               },
                               {
                                   label: 'Community',
                                   href: 'https://discord.gg/4R568nZgsT',
+                                  className: 'dropdown__link--icon dropdown__link--icon-github',
                               },
                               {
                                   label: 'Changelog',
                                   to: '/blog/tags/releases',
+                                  className: 'dropdown__link--icon dropdown__link--icon-github',
                               },
                               {
                                   label: 'Github',
                                   href: 'https://github.com/o2sdev/openselfservice',
+                                  className: 'dropdown__link--icon dropdown__link--icon-github',
                               },
                           ],
+                          linkMore: {
+                              title: 'Use cases',
+                              label: 'see more →',
+                              href: '/use-cases',
+                              background: '/img/dxp-gh-demo.png',
+                          },
                       },
                       {
                           type: 'dropdown',
@@ -385,10 +395,12 @@ const config: Config = {
                               {
                                   label: 'Blog',
                                   to: '/blog',
+                                  className: 'dropdown__link--icon dropdown__link--icon-github',
                               },
                               {
                                   label: 'Roadmap',
                                   href: 'https://github.com/orgs/o2sdev/projects/2',
+                                  className: 'dropdown__link--icon dropdown__link--icon-github',
                               },
                           ],
                       },
@@ -400,14 +412,17 @@ const config: Config = {
                               {
                                   label: 'For developers',
                                   to: '/support/developers',
+                                  className: 'dropdown__link--icon dropdown__link--icon-github',
                               },
                               {
                                   label: 'Enterprise support',
                                   to: '/support/enterprise',
+                                  className: 'dropdown__link--icon dropdown__link--icon-github',
                               },
                               {
                                   label: 'Contact us',
                                   to: '/contact',
+                                  className: 'dropdown__link--icon dropdown__link--icon-github',
                               },
                           ],
                       },
