@@ -77,7 +77,7 @@
         "@o2s/eslint-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
-        "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+        "@trivago/prettier-plugin-sort-imports": "^6.0.0",
         "@turbo/gen": "^2.6.1",
         "@types/compression": "^1.8.1",
         "@types/cookie-parser": "^1.4.10",

@@ -24,7 +24,7 @@
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "@tailwindcss/postcss": "^4.1.17",
-        "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+        "@trivago/prettier-plugin-sort-imports": "^6.0.0",
         "@turbo/gen": "^2.6.1",
         "@types/eslint": "^9.6.1",
         "@types/node": "^24.10.1",

@@ -44,7 +44,7 @@
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "@tailwindcss/postcss": "^4.1.17",
-        "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+        "@trivago/prettier-plugin-sort-imports": "^6.0.0",
         "autoprefixer": "^10.4.22",
         "postcss": "^8.5.6",
         "prettier": "^3.6.2",
