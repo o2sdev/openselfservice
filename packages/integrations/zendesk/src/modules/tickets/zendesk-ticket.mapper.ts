@@ -30,9 +30,10 @@ export function mapTicketToModel(
     ];
 
     if (ticket.custom_fields) {
+        const topicFieldId = Number(process.env.ZENDESK_TOPIC_FIELD_ID || 0);
         ticket.custom_fields.forEach((field) => {
             if (field.value !== null && field.value !== undefined) {
-                if (field.id === 27720325153053) {
+                if (topicFieldId && field.id === topicFieldId) {
                     topic = String(field.value).toUpperCase();
                 } else {
                     properties.push({

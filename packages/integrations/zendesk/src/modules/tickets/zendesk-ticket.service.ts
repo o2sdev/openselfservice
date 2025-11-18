@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException, NotImplementedException } from '@nestjs/common';
-import { Observable, catchError, from, map, of, switchMap, throwError } from 'rxjs';
+import { Observable, catchError, firstValueFrom, from, map, of, switchMap, throwError } from 'rxjs';
 
 import { Tickets, Users } from '@o2s/framework/modules';
 
@@ -78,7 +78,7 @@ export class ZendeskTicketService extends Tickets.Service {
                                             return of(mapTicketToModel(ticket, comments));
                                         }
                                         return from(
-                                            Promise.all(authorIds.map((id) => this.fetchUser(id).toPromise())),
+                                            Promise.all(authorIds.map((id) => firstValueFrom(this.fetchUser(id)))),
                                         ).pipe(
                                             map((authors) => {
                                                 const authorMap = new Map(
