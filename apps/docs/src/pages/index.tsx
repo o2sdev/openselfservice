@@ -61,7 +61,7 @@ export default function Home(): ReactNode {
                                     }}
                                     secondaryLink={{
                                         text: 'See on GitHub',
-                                        url: 'https://github.com/o2sdev/dxp-starter-kit',
+                                        url: 'https://github.com/o2sdev/openselfservice',
                                         iconLeft: <GithubIcon />,
                                     }}
                                     heroImage={{
