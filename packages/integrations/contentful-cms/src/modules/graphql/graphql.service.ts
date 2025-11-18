@@ -13,31 +13,47 @@ import {
 @Global()
 @Injectable()
 export class GraphqlService {
-    private readonly client: GraphQLClient;
-    private readonly sdk: Sdk;
+    private readonly deliveryClient: GraphQLClient;
+    private readonly previewClient: GraphQLClient;
+    private readonly deliverySdk: Sdk;
+    private readonly previewSdk: Sdk;
 
     constructor(private readonly config: ConfigService) {
-        this.client = new GraphQLClient(
-            `https://graphql.contentful.com/content/v1/spaces/${process.env.CF_SPACE_ID}/environments/${process.env.CF_ENV}`,
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${process.env.CF_PREVIEW_TOKEN}`,
-                },
+        const baseUrl = `https://graphql.contentful.com/content/v1/spaces/${process.env.CF_SPACE_ID}/environments/${process.env.CF_ENV}`;
+
+        // Delivery API client (for published content)
+        this.deliveryClient = new GraphQLClient(baseUrl, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${process.env.CF_TOKEN}`,
             },
-        );
-        this.sdk = getSdk(this.client);
+        });
+
+        // Preview API client (for draft/unpublished content)
+        this.previewClient = new GraphQLClient(baseUrl, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${process.env.CF_PREVIEW_TOKEN}`,
+            },
+        });
+
+        this.deliverySdk = getSdk(this.deliveryClient);
+        this.previewSdk = getSdk(this.previewClient);
+    }
+
+    private getSdk(preview?: boolean | null): Sdk {
+        return preview === true ? this.previewSdk : this.deliverySdk;
     }
 
     public getPage(params: GetPageQueryVariables) {
-        return this.sdk.getPage(params);
+        return this.getSdk(params.preview).getPage(params);
     }
 
     public getPages(params: GetPagesQueryVariables) {
-        return this.sdk.getPages(params);
+        return this.getSdk(params.preview).getPages(params);
     }
 
     public getComponent(params: GetComponentQueryVariables) {
-        return this.sdk.getComponent(params);
+        return this.getSdk(params.preview).getComponent(params);
     }
 }

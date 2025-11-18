@@ -7,27 +7,36 @@ import { QuickLinksProps } from './QuickLinks.types';
 
 export const QuickLinksDynamic = dynamic(() => import('./QuickLinks.client').then((module) => module.QuickLinksPure));
 
-export const QuickLinks: React.FC<QuickLinksProps> = async ({ id, accessToken, locale, routing, hasPriority }) => {
+export const QuickLinks: React.FC<QuickLinksProps> = async ({
+    id,
+    accessToken,
+    locale,
+    routing,
+    hasPriority,
+    isDraftModeEnabled,
+}) => {
+    let data;
     try {
-        const data = await sdk.blocks.getQuickLinks(
+        data = await sdk.blocks.getQuickLinks(
             {
                 id,
+                preview: isDraftModeEnabled,
             },
             { 'x-locale': locale },
             accessToken,
         );
-
-        return (
-            <QuickLinksDynamic
-                {...data}
-                id={id}
-                accessToken={accessToken}
-                locale={locale}
-                routing={routing}
-                hasPriority={hasPriority}
-            />
-        );
     } catch (_error) {
         return null;
     }
+
+    return (
+        <QuickLinksDynamic
+            {...data}
+            id={id}
+            accessToken={accessToken}
+            locale={locale}
+            routing={routing}
+            hasPriority={hasPriority}
+        />
+    );
 };

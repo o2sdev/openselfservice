@@ -81,8 +81,8 @@ const APP_CONFIG_DE: CMS.Model.AppConfig.AppConfig = {
             },
         },
         dates: {
-            today: 'Dzisiaj',
-            yesterday: 'Wczoraj',
+            today: 'Heute',
+            yesterday: 'Gestern',
         },
         actions: {
             showMore: 'Mehr anzeigen',
@@ -137,8 +137,8 @@ const APP_CONFIG_PL: CMS.Model.AppConfig.AppConfig = {
             },
         },
         dates: {
-            today: 'Heute',
-            yesterday: 'Gestern',
+            today: 'Dzisiaj',
+            yesterday: 'Wczoraj',
         },
         actions: {
             showMore: 'Pokaż więcej',

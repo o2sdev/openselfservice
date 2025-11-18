@@ -11,4 +11,5 @@ fragment Link on ComponentLink {
             description
         }
     }
+    icon
 }

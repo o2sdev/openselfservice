@@ -8,6 +8,18 @@ fragment Component on Block {
         ... on BlockTicketList {
             ...TicketListComponent
         }
+        ... on BlockQuickLinks {
+            ...QuickLinksComponent
+        }
+        ... on BlockCategoryList {
+            ...CategoryListComponent
+        }
+        ... on BlockCategory {
+            ...CategoryComponent
+        }
+        ... on BlockArticleList {
+            ...ArticleListComponent
+        }
     }
 }
 

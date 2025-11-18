@@ -27,6 +27,7 @@ import { TicketListPureProps } from './TicketList.types';
 
 export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessToken, routing, meta, ...component }) => {
     const { Link: LinkComponent } = createNavigation(routing);
+    const inspector = LivePreview.useInspector();
 
     const initialFilters: Request.GetTicketListBlockQuery = {
         id: component.id,
@@ -108,7 +109,7 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                 <div className="flex flex-col gap-6">
                     <div className="w-full flex gap-4 flex-col md:flex-row justify-between">
                         <Typography variant="h1" asChild>
-                            <h1 {...LivePreview.inspector(meta, 'title')}>{data.title}</h1>
+                            <h1 {...inspector(meta, 'title')}>{data.title}</h1>
                         </Typography>
 
                         {data.forms && (

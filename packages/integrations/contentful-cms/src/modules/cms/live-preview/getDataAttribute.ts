@@ -3,7 +3,7 @@
 import { useContentfulInspectorMode } from '@contentful/live-preview/react';
 
 interface DataAttribute {
-    [key: string]: string;
+    [key: string]: string | null;
 }
 
 type Props<T> = {
@@ -12,15 +12,25 @@ type Props<T> = {
     __id: string;
 };
 
-export const getDataAttribute = <T>(data: Props<T> | undefined, name: keyof Omit<Props<T>, '__id'>): DataAttribute => {
+/**
+ * Hook that returns a function to automatically get inspector attributes from meta object
+ * This is the recommended way to use inspector mode in components
+ *
+ * @example
+ * const inspector = useInspector();
+ * <div {...inspector(meta, 'title')}>Title</div>
+ */
+export const useInspector = () => {
     const inspectorProps = useContentfulInspectorMode();
 
-    if (!data) return {};
+    return <T>(data: Props<T> | undefined, name: keyof Omit<Props<T>, '__id'>): DataAttribute => {
+        if (!data) return {};
 
-    return {
-        ...inspectorProps({
+        const attributes = inspectorProps({
             entryId: data.__id,
             fieldId: data[name] as unknown as string,
-        }),
+        });
+
+        return attributes as DataAttribute;
     };
 };

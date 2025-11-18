@@ -1,6 +1,6 @@
 import { Block, RichText } from '@/utils/models';
 
-export class ArticleListBlock extends Block.Block {
+export class ArticleListBlock extends Block.Block<Meta> {
     title?: string;
     description?: RichText.RichText;
     categoryId?: string;
@@ -14,4 +14,11 @@ export class ArticleListBlock extends Block.Block {
         yesterday: string;
         seeAllArticles: string;
     };
+}
+
+export class Meta {
+    __id!: string;
+    title!: string;
+    description!: string;
+    articles!: string;
 }

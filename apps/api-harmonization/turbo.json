@@ -37,8 +37,8 @@
                 "SEARCH_ARTICLES_INDEX_NAME",
                 "TELEMETRY_DISABLED",
                 "TELEMETRY_BASE_URL",
-                "ALGOLIA_API_KEY",
                 "CF_TOKEN",
+                "CF_PREVIEW_TOKEN",
                 "CF_SPACE_ID",
                 "CF_ENV",
                 "CF_MANAGEMENT_TOKEN"

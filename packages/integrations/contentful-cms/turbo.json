@@ -1,22 +1,34 @@
 {
-    "extends": ["//"],
+    "extends": [
+        "//"
+    ],
     "tasks": {
         "dev": {
-            "dependsOn": ["@o2s/utils.logger#build", "@o2s/framework#build"],
+            "dependsOn": [
+                "@o2s/utils.logger#build",
+                "@o2s/framework#build"
+            ],
             "env": [
                 "CF_TOKEN",
+                "CF_PREVIEW_TOKEN",
                 "CF_SPACE_ID",
                 "CF_ENV",
-                "CF_MANAGEMENT_TOKEN"
+                "CF_MANAGEMENT_TOKEN",
+                "DEFAULT_LOCALE"
             ]
         },
         "build": {
-            "dependsOn": ["@o2s/utils.logger#build", "@o2s/framework#build"],
+            "dependsOn": [
+                "@o2s/utils.logger#build",
+                "@o2s/framework#build"
+            ],
             "env": [
                 "CF_TOKEN",
+                "CF_PREVIEW_TOKEN",
                 "CF_SPACE_ID",
                 "CF_ENV",
-                "CF_MANAGEMENT_TOKEN"
+                "CF_MANAGEMENT_TOKEN",
+                "DEFAULT_LOCALE"
             ]
         }
     }

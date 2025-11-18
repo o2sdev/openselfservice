@@ -65,6 +65,4 @@ export const mapTicketListBlock = ({
                     : undefined,
             };
     }
-
-    throw new NotFoundException();
 };

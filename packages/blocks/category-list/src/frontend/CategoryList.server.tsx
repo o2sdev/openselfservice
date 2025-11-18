@@ -9,26 +9,36 @@ export const CategoryListDynamic = dynamic(() =>
     import('./CategoryList.client').then((module) => module.CategoryListPure),
 );
 
-export const CategoryList: React.FC<CategoryListProps> = async ({ id, accessToken, locale, routing, hasPriority }) => {
+export const CategoryList: React.FC<CategoryListProps> = async ({
+    id,
+    accessToken,
+    locale,
+    routing,
+    hasPriority,
+    isDraftModeEnabled,
+}) => {
+    let data;
     try {
-        const data = await sdk.blocks.getCategoryList(
+        data = await sdk.blocks.getCategoryList(
             {
                 id,
+                preview: isDraftModeEnabled,
             },
             { 'x-locale': locale },
             accessToken,
         );
-        return (
-            <CategoryListDynamic
-                {...data}
-                id={id}
-                accessToken={accessToken}
-                locale={locale}
-                routing={routing}
-                hasPriority={hasPriority}
-            />
-        );
     } catch (_error) {
         return null;
     }
+
+    return (
+        <CategoryListDynamic
+            {...data}
+            id={id}
+            accessToken={accessToken}
+            locale={locale}
+            routing={routing}
+            hasPriority={hasPriority}
+        />
+    );
 };

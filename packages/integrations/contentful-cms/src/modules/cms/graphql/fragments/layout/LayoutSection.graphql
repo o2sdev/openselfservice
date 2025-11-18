@@ -1,3 +1,8 @@
 fragment LayoutSection on  Block {
     spacing
+    background
+    variant
+    theme {
+        name
+    }
 }

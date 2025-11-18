@@ -28,6 +28,125 @@ export type Scalars = {
     Quality: { input: any; output: any };
 };
 
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/article) */
+export type Article = Entry &
+    _Node & {
+        _id: Scalars['ID']['output'];
+        content?: Maybe<ComponentArticle>;
+        contentfulMetadata: ContentfulMetadata;
+        linkedFrom?: Maybe<ArticleLinkingCollections>;
+        parent?: Maybe<Page>;
+        seo?: Maybe<PageSeo>;
+        slug?: Maybe<Scalars['String']['output']>;
+        sys: Sys;
+    };
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/article) */
+export type ArticleContentArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    where?: InputMaybe<ComponentArticleFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/article) */
+export type ArticleLinkedFromArgs = {
+    allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/article) */
+export type ArticleParentArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    where?: InputMaybe<PageFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/article) */
+export type ArticleSeoArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    where?: InputMaybe<PageSeoFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/article) */
+export type ArticleSlugArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ArticleCollection = {
+    items: Array<Maybe<Article>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export type ArticleFilter = {
+    AND?: InputMaybe<Array<InputMaybe<ArticleFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<ArticleFilter>>>;
+    content?: InputMaybe<CfComponentArticleNestedFilter>;
+    content_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    parent?: InputMaybe<CfPageNestedFilter>;
+    parent_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    seo?: InputMaybe<CfPageSeoNestedFilter>;
+    seo_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    slug?: InputMaybe<Scalars['String']['input']>;
+    slug_contains?: InputMaybe<Scalars['String']['input']>;
+    slug_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    slug_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    slug_not?: InputMaybe<Scalars['String']['input']>;
+    slug_not_contains?: InputMaybe<Scalars['String']['input']>;
+    slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    sys?: InputMaybe<SysFilter>;
+};
+
+export type ArticleLinkingCollections = {
+    blockArticleListCollection?: Maybe<BlockArticleListCollection>;
+    entryCollection?: Maybe<EntryCollection>;
+};
+
+export type ArticleLinkingCollectionsBlockArticleListCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<ArticleLinkingCollectionsBlockArticleListCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type ArticleLinkingCollectionsEntryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum ArticleLinkingCollectionsBlockArticleListCollectionOrder {
+    ArticlesToShowAsc = 'articlesToShow_ASC',
+    ArticlesToShowDesc = 'articlesToShow_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    TitleAsc = 'title_ASC',
+    TitleDesc = 'title_DESC',
+}
+
+export enum ArticleOrder {
+    SlugAsc = 'slug_ASC',
+    SlugDesc = 'slug_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
 /** Represents a binary file in a space. An asset can be any file type. */
 export type Asset = {
     contentType?: Maybe<Scalars['String']['output']>;
@@ -166,10 +285,34 @@ export type AssetFilter = {
 };
 
 export type AssetLinkingCollections = {
+    authorCollection?: Maybe<AuthorCollection>;
     entryCollection?: Maybe<EntryCollection>;
+    pageSeoCollection?: Maybe<PageSeoCollection>;
+    themeCollection?: Maybe<ThemeCollection>;
+};
+
+export type AssetLinkingCollectionsAuthorCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type AssetLinkingCollectionsEntryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type AssetLinkingCollectionsPageSeoCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type AssetLinkingCollectionsThemeCollectionArgs = {
     limit?: InputMaybe<Scalars['Int']['input']>;
     locale?: InputMaybe<Scalars['String']['input']>;
     preview?: InputMaybe<Scalars['Boolean']['input']>;
@@ -199,17 +342,135 @@ export enum AssetOrder {
     WidthDesc = 'width_DESC',
 }
 
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/author) */
+export type Author = Entry &
+    _Node & {
+        _id: Scalars['ID']['output'];
+        avatar?: Maybe<Asset>;
+        contentfulMetadata: ContentfulMetadata;
+        linkedFrom?: Maybe<AuthorLinkingCollections>;
+        name?: Maybe<Scalars['String']['output']>;
+        position?: Maybe<Scalars['String']['output']>;
+        sys: Sys;
+    };
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/author) */
+export type AuthorAvatarArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/author) */
+export type AuthorLinkedFromArgs = {
+    allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/author) */
+export type AuthorNameArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/author) */
+export type AuthorPositionArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AuthorCollection = {
+    items: Array<Maybe<Author>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export type AuthorFilter = {
+    AND?: InputMaybe<Array<InputMaybe<AuthorFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<AuthorFilter>>>;
+    avatar_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    name?: InputMaybe<Scalars['String']['input']>;
+    name_contains?: InputMaybe<Scalars['String']['input']>;
+    name_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    name_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    name_not?: InputMaybe<Scalars['String']['input']>;
+    name_not_contains?: InputMaybe<Scalars['String']['input']>;
+    name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    position?: InputMaybe<Scalars['String']['input']>;
+    position_contains?: InputMaybe<Scalars['String']['input']>;
+    position_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    position_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    position_not?: InputMaybe<Scalars['String']['input']>;
+    position_not_contains?: InputMaybe<Scalars['String']['input']>;
+    position_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    sys?: InputMaybe<SysFilter>;
+};
+
+export type AuthorLinkingCollections = {
+    componentArticleCollection?: Maybe<ComponentArticleCollection>;
+    entryCollection?: Maybe<EntryCollection>;
+};
+
+export type AuthorLinkingCollectionsComponentArticleCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<AuthorLinkingCollectionsComponentArticleCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type AuthorLinkingCollectionsEntryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum AuthorLinkingCollectionsComponentArticleCollectionOrder {
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum AuthorOrder {
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    PositionAsc = 'position_ASC',
+    PositionDesc = 'position_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
 /** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/block) */
 export type Block = Entry &
     _Node & {
         _id: Scalars['ID']['output'];
+        background?: Maybe<Scalars['String']['output']>;
         content?: Maybe<BlockContent>;
         contentfulMetadata: ContentfulMetadata;
         linkedFrom?: Maybe<BlockLinkingCollections>;
         name?: Maybe<Scalars['String']['output']>;
         spacing?: Maybe<Scalars['String']['output']>;
         sys: Sys;
+        theme?: Maybe<Theme>;
+        variant?: Maybe<Scalars['String']['output']>;
     };
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/block) */
+export type BlockBackgroundArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
 
 /** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/block) */
 export type BlockContentArgs = {
@@ -232,6 +493,486 @@ export type BlockSpacingArgs = {
     locale?: InputMaybe<Scalars['String']['input']>;
 };
 
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/block) */
+export type BlockThemeArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    where?: InputMaybe<ThemeFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/block) */
+export type BlockVariantArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/blockArticleList) */
+export type BlockArticleList = Entry &
+    _Node & {
+        _id: Scalars['ID']['output'];
+        articlesCollection?: Maybe<BlockArticleListArticlesCollection>;
+        articlesToShow?: Maybe<Scalars['Int']['output']>;
+        category?: Maybe<ComponentCategory>;
+        contentfulMetadata: ContentfulMetadata;
+        description?: Maybe<Scalars['String']['output']>;
+        linkedFrom?: Maybe<BlockArticleListLinkingCollections>;
+        parent?: Maybe<Page>;
+        sys: Sys;
+        title?: Maybe<Scalars['String']['output']>;
+    };
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/blockArticleList) */
+export type BlockArticleListArticlesCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<BlockArticleListArticlesCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<ArticleFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/blockArticleList) */
+export type BlockArticleListArticlesToShowArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/blockArticleList) */
+export type BlockArticleListCategoryArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    where?: InputMaybe<ComponentCategoryFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/blockArticleList) */
+export type BlockArticleListDescriptionArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/blockArticleList) */
+export type BlockArticleListLinkedFromArgs = {
+    allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/blockArticleList) */
+export type BlockArticleListParentArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    where?: InputMaybe<PageFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/blockArticleList) */
+export type BlockArticleListTitleArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type BlockArticleListArticlesCollection = {
+    items: Array<Maybe<Article>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export enum BlockArticleListArticlesCollectionOrder {
+    SlugAsc = 'slug_ASC',
+    SlugDesc = 'slug_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export type BlockArticleListCollection = {
+    items: Array<Maybe<BlockArticleList>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export type BlockArticleListFilter = {
+    AND?: InputMaybe<Array<InputMaybe<BlockArticleListFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<BlockArticleListFilter>>>;
+    articles?: InputMaybe<CfArticleNestedFilter>;
+    articlesCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    articlesToShow?: InputMaybe<Scalars['Int']['input']>;
+    articlesToShow_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    articlesToShow_gt?: InputMaybe<Scalars['Int']['input']>;
+    articlesToShow_gte?: InputMaybe<Scalars['Int']['input']>;
+    articlesToShow_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+    articlesToShow_lt?: InputMaybe<Scalars['Int']['input']>;
+    articlesToShow_lte?: InputMaybe<Scalars['Int']['input']>;
+    articlesToShow_not?: InputMaybe<Scalars['Int']['input']>;
+    articlesToShow_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+    category?: InputMaybe<CfComponentCategoryNestedFilter>;
+    category_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    description?: InputMaybe<Scalars['String']['input']>;
+    description_contains?: InputMaybe<Scalars['String']['input']>;
+    description_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    description_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    description_not?: InputMaybe<Scalars['String']['input']>;
+    description_not_contains?: InputMaybe<Scalars['String']['input']>;
+    description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    parent?: InputMaybe<CfPageNestedFilter>;
+    parent_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    sys?: InputMaybe<SysFilter>;
+    title?: InputMaybe<Scalars['String']['input']>;
+    title_contains?: InputMaybe<Scalars['String']['input']>;
+    title_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    title_not?: InputMaybe<Scalars['String']['input']>;
+    title_not_contains?: InputMaybe<Scalars['String']['input']>;
+    title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type BlockArticleListLinkingCollections = {
+    blockCollection?: Maybe<BlockCollection>;
+    entryCollection?: Maybe<EntryCollection>;
+};
+
+export type BlockArticleListLinkingCollectionsBlockCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<BlockArticleListLinkingCollectionsBlockCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type BlockArticleListLinkingCollectionsEntryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum BlockArticleListLinkingCollectionsBlockCollectionOrder {
+    BackgroundAsc = 'background_ASC',
+    BackgroundDesc = 'background_DESC',
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SpacingAsc = 'spacing_ASC',
+    SpacingDesc = 'spacing_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    VariantAsc = 'variant_ASC',
+    VariantDesc = 'variant_DESC',
+}
+
+export enum BlockArticleListOrder {
+    ArticlesToShowAsc = 'articlesToShow_ASC',
+    ArticlesToShowDesc = 'articlesToShow_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    TitleAsc = 'title_ASC',
+    TitleDesc = 'title_DESC',
+}
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/blockCategory) */
+export type BlockCategory = Entry &
+    _Node & {
+        _id: Scalars['ID']['output'];
+        category?: Maybe<ComponentCategory>;
+        contentfulMetadata: ContentfulMetadata;
+        linkedFrom?: Maybe<BlockCategoryLinkingCollections>;
+        name?: Maybe<Scalars['String']['output']>;
+        parent?: Maybe<Page>;
+        sys: Sys;
+    };
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/blockCategory) */
+export type BlockCategoryCategoryArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    where?: InputMaybe<ComponentCategoryFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/blockCategory) */
+export type BlockCategoryLinkedFromArgs = {
+    allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/blockCategory) */
+export type BlockCategoryNameArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/blockCategory) */
+export type BlockCategoryParentArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    where?: InputMaybe<PageFilter>;
+};
+
+export type BlockCategoryCollection = {
+    items: Array<Maybe<BlockCategory>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export type BlockCategoryFilter = {
+    AND?: InputMaybe<Array<InputMaybe<BlockCategoryFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<BlockCategoryFilter>>>;
+    category?: InputMaybe<CfComponentCategoryNestedFilter>;
+    category_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    name?: InputMaybe<Scalars['String']['input']>;
+    name_contains?: InputMaybe<Scalars['String']['input']>;
+    name_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    name_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    name_not?: InputMaybe<Scalars['String']['input']>;
+    name_not_contains?: InputMaybe<Scalars['String']['input']>;
+    name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    parent?: InputMaybe<CfPageNestedFilter>;
+    parent_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    sys?: InputMaybe<SysFilter>;
+};
+
+export type BlockCategoryLinkingCollections = {
+    blockCollection?: Maybe<BlockCollection>;
+    entryCollection?: Maybe<EntryCollection>;
+};
+
+export type BlockCategoryLinkingCollectionsBlockCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<BlockCategoryLinkingCollectionsBlockCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type BlockCategoryLinkingCollectionsEntryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum BlockCategoryLinkingCollectionsBlockCollectionOrder {
+    BackgroundAsc = 'background_ASC',
+    BackgroundDesc = 'background_DESC',
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SpacingAsc = 'spacing_ASC',
+    SpacingDesc = 'spacing_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    VariantAsc = 'variant_ASC',
+    VariantDesc = 'variant_DESC',
+}
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/blockCategoryList) */
+export type BlockCategoryList = Entry &
+    _Node & {
+        _id: Scalars['ID']['output'];
+        categoriesCollection?: Maybe<BlockCategoryListCategoriesCollection>;
+        contentfulMetadata: ContentfulMetadata;
+        description?: Maybe<Scalars['String']['output']>;
+        linkedFrom?: Maybe<BlockCategoryListLinkingCollections>;
+        parent?: Maybe<Page>;
+        sys: Sys;
+        title?: Maybe<Scalars['String']['output']>;
+    };
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/blockCategoryList) */
+export type BlockCategoryListCategoriesCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<BlockCategoryListCategoriesCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<ComponentCategoryFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/blockCategoryList) */
+export type BlockCategoryListDescriptionArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/blockCategoryList) */
+export type BlockCategoryListLinkedFromArgs = {
+    allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/blockCategoryList) */
+export type BlockCategoryListParentArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    where?: InputMaybe<PageFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/blockCategoryList) */
+export type BlockCategoryListTitleArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type BlockCategoryListCategoriesCollection = {
+    items: Array<Maybe<ComponentCategory>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export enum BlockCategoryListCategoriesCollectionOrder {
+    IconAsc = 'icon_ASC',
+    IconDesc = 'icon_DESC',
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SlugAsc = 'slug_ASC',
+    SlugDesc = 'slug_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export type BlockCategoryListCollection = {
+    items: Array<Maybe<BlockCategoryList>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export type BlockCategoryListFilter = {
+    AND?: InputMaybe<Array<InputMaybe<BlockCategoryListFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<BlockCategoryListFilter>>>;
+    categories?: InputMaybe<CfComponentCategoryNestedFilter>;
+    categoriesCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    description?: InputMaybe<Scalars['String']['input']>;
+    description_contains?: InputMaybe<Scalars['String']['input']>;
+    description_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    description_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    description_not?: InputMaybe<Scalars['String']['input']>;
+    description_not_contains?: InputMaybe<Scalars['String']['input']>;
+    description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    parent?: InputMaybe<CfPageNestedFilter>;
+    parent_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    sys?: InputMaybe<SysFilter>;
+    title?: InputMaybe<Scalars['String']['input']>;
+    title_contains?: InputMaybe<Scalars['String']['input']>;
+    title_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    title_not?: InputMaybe<Scalars['String']['input']>;
+    title_not_contains?: InputMaybe<Scalars['String']['input']>;
+    title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type BlockCategoryListLinkingCollections = {
+    blockCollection?: Maybe<BlockCollection>;
+    componentCategoryCollection?: Maybe<ComponentCategoryCollection>;
+    entryCollection?: Maybe<EntryCollection>;
+};
+
+export type BlockCategoryListLinkingCollectionsBlockCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<BlockCategoryListLinkingCollectionsBlockCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type BlockCategoryListLinkingCollectionsComponentCategoryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<BlockCategoryListLinkingCollectionsComponentCategoryCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type BlockCategoryListLinkingCollectionsEntryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum BlockCategoryListLinkingCollectionsBlockCollectionOrder {
+    BackgroundAsc = 'background_ASC',
+    BackgroundDesc = 'background_DESC',
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SpacingAsc = 'spacing_ASC',
+    SpacingDesc = 'spacing_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    VariantAsc = 'variant_ASC',
+    VariantDesc = 'variant_DESC',
+}
+
+export enum BlockCategoryListLinkingCollectionsComponentCategoryCollectionOrder {
+    IconAsc = 'icon_ASC',
+    IconDesc = 'icon_DESC',
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SlugAsc = 'slug_ASC',
+    SlugDesc = 'slug_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum BlockCategoryListOrder {
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    TitleAsc = 'title_ASC',
+    TitleDesc = 'title_DESC',
+}
+
+export enum BlockCategoryOrder {
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
 export type BlockCollection = {
     items: Array<Maybe<Block>>;
     limit: Scalars['Int']['output'];
@@ -239,7 +980,13 @@ export type BlockCollection = {
     total: Scalars['Int']['output'];
 };
 
-export type BlockContent = BlockFaq | BlockTicketList;
+export type BlockContent =
+    | BlockArticleList
+    | BlockCategory
+    | BlockCategoryList
+    | BlockFaq
+    | BlockQuickLinks
+    | BlockTicketList;
 
 /** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/blockFaq) */
 export type BlockFaq = Entry &
@@ -340,6 +1087,7 @@ export enum BlockFaqItemsCollectionOrder {
 
 export type BlockFaqLinkingCollections = {
     blockCollection?: Maybe<BlockCollection>;
+    componentCategoryCollection?: Maybe<ComponentCategoryCollection>;
     entryCollection?: Maybe<EntryCollection>;
 };
 
@@ -347,6 +1095,14 @@ export type BlockFaqLinkingCollectionsBlockCollectionArgs = {
     limit?: InputMaybe<Scalars['Int']['input']>;
     locale?: InputMaybe<Scalars['String']['input']>;
     order?: InputMaybe<Array<InputMaybe<BlockFaqLinkingCollectionsBlockCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type BlockFaqLinkingCollectionsComponentCategoryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<BlockFaqLinkingCollectionsComponentCategoryCollectionOrder>>>;
     preview?: InputMaybe<Scalars['Boolean']['input']>;
     skip?: InputMaybe<Scalars['Int']['input']>;
 };
@@ -359,10 +1115,31 @@ export type BlockFaqLinkingCollectionsEntryCollectionArgs = {
 };
 
 export enum BlockFaqLinkingCollectionsBlockCollectionOrder {
+    BackgroundAsc = 'background_ASC',
+    BackgroundDesc = 'background_DESC',
     NameAsc = 'name_ASC',
     NameDesc = 'name_DESC',
     SpacingAsc = 'spacing_ASC',
     SpacingDesc = 'spacing_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    VariantAsc = 'variant_ASC',
+    VariantDesc = 'variant_DESC',
+}
+
+export enum BlockFaqLinkingCollectionsComponentCategoryCollectionOrder {
+    IconAsc = 'icon_ASC',
+    IconDesc = 'icon_DESC',
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SlugAsc = 'slug_ASC',
+    SlugDesc = 'slug_DESC',
     SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
     SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
     SysIdAsc = 'sys_id_ASC',
@@ -391,6 +1168,13 @@ export enum BlockFaqOrder {
 export type BlockFilter = {
     AND?: InputMaybe<Array<InputMaybe<BlockFilter>>>;
     OR?: InputMaybe<Array<InputMaybe<BlockFilter>>>;
+    background?: InputMaybe<Scalars['String']['input']>;
+    background_contains?: InputMaybe<Scalars['String']['input']>;
+    background_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    background_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    background_not?: InputMaybe<Scalars['String']['input']>;
+    background_not_contains?: InputMaybe<Scalars['String']['input']>;
+    background_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     content_exists?: InputMaybe<Scalars['Boolean']['input']>;
     contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
     name?: InputMaybe<Scalars['String']['input']>;
@@ -408,6 +1192,15 @@ export type BlockFilter = {
     spacing_not_contains?: InputMaybe<Scalars['String']['input']>;
     spacing_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     sys?: InputMaybe<SysFilter>;
+    theme?: InputMaybe<CfThemeNestedFilter>;
+    theme_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    variant?: InputMaybe<Scalars['String']['input']>;
+    variant_contains?: InputMaybe<Scalars['String']['input']>;
+    variant_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    variant_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    variant_not?: InputMaybe<Scalars['String']['input']>;
+    variant_not_contains?: InputMaybe<Scalars['String']['input']>;
+    variant_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type BlockLinkingCollections = {
@@ -444,6 +1237,8 @@ export enum BlockLinkingCollectionsPageOneColumnTemplateCollectionOrder {
 }
 
 export enum BlockOrder {
+    BackgroundAsc = 'background_ASC',
+    BackgroundDesc = 'background_DESC',
     NameAsc = 'name_ASC',
     NameDesc = 'name_DESC',
     SpacingAsc = 'spacing_ASC',
@@ -456,6 +1251,179 @@ export enum BlockOrder {
     SysPublishedAtDesc = 'sys_publishedAt_DESC',
     SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
     SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    VariantAsc = 'variant_ASC',
+    VariantDesc = 'variant_DESC',
+}
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/blockQuickLinks) */
+export type BlockQuickLinks = Entry &
+    _Node & {
+        _id: Scalars['ID']['output'];
+        contentfulMetadata: ContentfulMetadata;
+        description?: Maybe<Scalars['String']['output']>;
+        itemsCollection?: Maybe<BlockQuickLinksItemsCollection>;
+        linkedFrom?: Maybe<BlockQuickLinksLinkingCollections>;
+        sys: Sys;
+        title?: Maybe<Scalars['String']['output']>;
+    };
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/blockQuickLinks) */
+export type BlockQuickLinksDescriptionArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/blockQuickLinks) */
+export type BlockQuickLinksItemsCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<BlockQuickLinksItemsCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<ComponentLinkFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/blockQuickLinks) */
+export type BlockQuickLinksLinkedFromArgs = {
+    allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/blockQuickLinks) */
+export type BlockQuickLinksTitleArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type BlockQuickLinksCollection = {
+    items: Array<Maybe<BlockQuickLinks>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export type BlockQuickLinksFilter = {
+    AND?: InputMaybe<Array<InputMaybe<BlockQuickLinksFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<BlockQuickLinksFilter>>>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    description?: InputMaybe<Scalars['String']['input']>;
+    description_contains?: InputMaybe<Scalars['String']['input']>;
+    description_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    description_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    description_not?: InputMaybe<Scalars['String']['input']>;
+    description_not_contains?: InputMaybe<Scalars['String']['input']>;
+    description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    items?: InputMaybe<CfComponentLinkNestedFilter>;
+    itemsCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    sys?: InputMaybe<SysFilter>;
+    title?: InputMaybe<Scalars['String']['input']>;
+    title_contains?: InputMaybe<Scalars['String']['input']>;
+    title_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    title_not?: InputMaybe<Scalars['String']['input']>;
+    title_not_contains?: InputMaybe<Scalars['String']['input']>;
+    title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type BlockQuickLinksItemsCollection = {
+    items: Array<Maybe<ComponentLink>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export enum BlockQuickLinksItemsCollectionOrder {
+    IconAsc = 'icon_ASC',
+    IconDesc = 'icon_DESC',
+    LabelAsc = 'label_ASC',
+    LabelDesc = 'label_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    UrlAsc = 'url_ASC',
+    UrlDesc = 'url_DESC',
+}
+
+export type BlockQuickLinksLinkingCollections = {
+    blockCollection?: Maybe<BlockCollection>;
+    componentCategoryCollection?: Maybe<ComponentCategoryCollection>;
+    entryCollection?: Maybe<EntryCollection>;
+};
+
+export type BlockQuickLinksLinkingCollectionsBlockCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<BlockQuickLinksLinkingCollectionsBlockCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type BlockQuickLinksLinkingCollectionsComponentCategoryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<BlockQuickLinksLinkingCollectionsComponentCategoryCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type BlockQuickLinksLinkingCollectionsEntryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum BlockQuickLinksLinkingCollectionsBlockCollectionOrder {
+    BackgroundAsc = 'background_ASC',
+    BackgroundDesc = 'background_DESC',
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SpacingAsc = 'spacing_ASC',
+    SpacingDesc = 'spacing_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    VariantAsc = 'variant_ASC',
+    VariantDesc = 'variant_DESC',
+}
+
+export enum BlockQuickLinksLinkingCollectionsComponentCategoryCollectionOrder {
+    IconAsc = 'icon_ASC',
+    IconDesc = 'icon_DESC',
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SlugAsc = 'slug_ASC',
+    SlugDesc = 'slug_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum BlockQuickLinksOrder {
+    DescriptionAsc = 'description_ASC',
+    DescriptionDesc = 'description_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    TitleAsc = 'title_ASC',
+    TitleDesc = 'title_DESC',
 }
 
 /** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/blockTicketList) */
@@ -600,6 +1568,7 @@ export type BlockTicketListFilter = {
 
 export type BlockTicketListLinkingCollections = {
     blockCollection?: Maybe<BlockCollection>;
+    componentCategoryCollection?: Maybe<ComponentCategoryCollection>;
     entryCollection?: Maybe<EntryCollection>;
 };
 
@@ -607,6 +1576,14 @@ export type BlockTicketListLinkingCollectionsBlockCollectionArgs = {
     limit?: InputMaybe<Scalars['Int']['input']>;
     locale?: InputMaybe<Scalars['String']['input']>;
     order?: InputMaybe<Array<InputMaybe<BlockTicketListLinkingCollectionsBlockCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type BlockTicketListLinkingCollectionsComponentCategoryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<BlockTicketListLinkingCollectionsComponentCategoryCollectionOrder>>>;
     preview?: InputMaybe<Scalars['Boolean']['input']>;
     skip?: InputMaybe<Scalars['Int']['input']>;
 };
@@ -619,10 +1596,31 @@ export type BlockTicketListLinkingCollectionsEntryCollectionArgs = {
 };
 
 export enum BlockTicketListLinkingCollectionsBlockCollectionOrder {
+    BackgroundAsc = 'background_ASC',
+    BackgroundDesc = 'background_DESC',
     NameAsc = 'name_ASC',
     NameDesc = 'name_DESC',
     SpacingAsc = 'spacing_ASC',
     SpacingDesc = 'spacing_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    VariantAsc = 'variant_ASC',
+    VariantDesc = 'variant_DESC',
+}
+
+export enum BlockTicketListLinkingCollectionsComponentCategoryCollectionOrder {
+    IconAsc = 'icon_ASC',
+    IconDesc = 'icon_DESC',
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SlugAsc = 'slug_ASC',
+    SlugDesc = 'slug_DESC',
     SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
     SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
     SysIdAsc = 'sys_id_ASC',
@@ -638,6 +1636,246 @@ export enum BlockTicketListOrder {
     DetailsUrlDesc = 'detailsUrl_DESC',
     SubTitleAsc = 'subTitle_ASC',
     SubTitleDesc = 'subTitle_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    TitleAsc = 'title_ASC',
+    TitleDesc = 'title_DESC',
+}
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentArticle) */
+export type ComponentArticle = Entry &
+    _Node & {
+        _id: Scalars['ID']['output'];
+        author?: Maybe<Author>;
+        category?: Maybe<ComponentCategory>;
+        contentfulMetadata: ContentfulMetadata;
+        linkedFrom?: Maybe<ComponentArticleLinkingCollections>;
+        name?: Maybe<Scalars['String']['output']>;
+        sectionsCollection?: Maybe<ComponentArticleSectionsCollection>;
+        sys: Sys;
+    };
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentArticle) */
+export type ComponentArticleAuthorArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    where?: InputMaybe<AuthorFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentArticle) */
+export type ComponentArticleCategoryArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    where?: InputMaybe<ComponentCategoryFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentArticle) */
+export type ComponentArticleLinkedFromArgs = {
+    allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentArticle) */
+export type ComponentArticleNameArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentArticle) */
+export type ComponentArticleSectionsCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<ComponentArticleSectionsCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<ComponentArticleSectionFilter>;
+};
+
+export type ComponentArticleCollection = {
+    items: Array<Maybe<ComponentArticle>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export type ComponentArticleFilter = {
+    AND?: InputMaybe<Array<InputMaybe<ComponentArticleFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<ComponentArticleFilter>>>;
+    author?: InputMaybe<CfAuthorNestedFilter>;
+    author_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    category?: InputMaybe<CfComponentCategoryNestedFilter>;
+    category_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    name?: InputMaybe<Scalars['String']['input']>;
+    name_contains?: InputMaybe<Scalars['String']['input']>;
+    name_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    name_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    name_not?: InputMaybe<Scalars['String']['input']>;
+    name_not_contains?: InputMaybe<Scalars['String']['input']>;
+    name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    sections?: InputMaybe<CfComponentArticleSectionNestedFilter>;
+    sectionsCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    sys?: InputMaybe<SysFilter>;
+};
+
+export type ComponentArticleLinkingCollections = {
+    articleCollection?: Maybe<ArticleCollection>;
+    entryCollection?: Maybe<EntryCollection>;
+};
+
+export type ComponentArticleLinkingCollectionsArticleCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<ComponentArticleLinkingCollectionsArticleCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type ComponentArticleLinkingCollectionsEntryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum ComponentArticleLinkingCollectionsArticleCollectionOrder {
+    SlugAsc = 'slug_ASC',
+    SlugDesc = 'slug_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum ComponentArticleOrder {
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentArticleSection) */
+export type ComponentArticleSection = Entry &
+    _Node & {
+        _id: Scalars['ID']['output'];
+        content?: Maybe<Scalars['String']['output']>;
+        contentfulMetadata: ContentfulMetadata;
+        linkedFrom?: Maybe<ComponentArticleSectionLinkingCollections>;
+        sys: Sys;
+        title?: Maybe<Scalars['String']['output']>;
+    };
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentArticleSection) */
+export type ComponentArticleSectionContentArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentArticleSection) */
+export type ComponentArticleSectionLinkedFromArgs = {
+    allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentArticleSection) */
+export type ComponentArticleSectionTitleArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ComponentArticleSectionCollection = {
+    items: Array<Maybe<ComponentArticleSection>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export type ComponentArticleSectionFilter = {
+    AND?: InputMaybe<Array<InputMaybe<ComponentArticleSectionFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<ComponentArticleSectionFilter>>>;
+    content?: InputMaybe<Scalars['String']['input']>;
+    content_contains?: InputMaybe<Scalars['String']['input']>;
+    content_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    content_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    content_not?: InputMaybe<Scalars['String']['input']>;
+    content_not_contains?: InputMaybe<Scalars['String']['input']>;
+    content_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    sys?: InputMaybe<SysFilter>;
+    title?: InputMaybe<Scalars['String']['input']>;
+    title_contains?: InputMaybe<Scalars['String']['input']>;
+    title_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    title_not?: InputMaybe<Scalars['String']['input']>;
+    title_not_contains?: InputMaybe<Scalars['String']['input']>;
+    title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ComponentArticleSectionLinkingCollections = {
+    componentArticleCollection?: Maybe<ComponentArticleCollection>;
+    entryCollection?: Maybe<EntryCollection>;
+};
+
+export type ComponentArticleSectionLinkingCollectionsComponentArticleCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<ComponentArticleSectionLinkingCollectionsComponentArticleCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type ComponentArticleSectionLinkingCollectionsEntryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum ComponentArticleSectionLinkingCollectionsComponentArticleCollectionOrder {
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum ComponentArticleSectionOrder {
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    TitleAsc = 'title_ASC',
+    TitleDesc = 'title_DESC',
+}
+
+export type ComponentArticleSectionsCollection = {
+    items: Array<Maybe<ComponentArticleSection>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export enum ComponentArticleSectionsCollectionOrder {
     SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
     SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
     SysIdAsc = 'sys_id_ASC',
@@ -760,6 +1998,249 @@ export enum ComponentBannerOrder {
     SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
     TitleAsc = 'title_ASC',
     TitleDesc = 'title_DESC',
+}
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentCategory) */
+export type ComponentCategory = Entry &
+    _Node & {
+        _id: Scalars['ID']['output'];
+        componentsCollection?: Maybe<ComponentCategoryComponentsCollection>;
+        contentfulMetadata: ContentfulMetadata;
+        description?: Maybe<Scalars['String']['output']>;
+        icon?: Maybe<Scalars['String']['output']>;
+        linkedFrom?: Maybe<ComponentCategoryLinkingCollections>;
+        name?: Maybe<Scalars['String']['output']>;
+        parent?: Maybe<Page>;
+        slug?: Maybe<Scalars['String']['output']>;
+        sys: Sys;
+    };
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentCategory) */
+export type ComponentCategoryComponentsCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<ComponentCategoryComponentsFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentCategory) */
+export type ComponentCategoryDescriptionArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentCategory) */
+export type ComponentCategoryIconArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentCategory) */
+export type ComponentCategoryLinkedFromArgs = {
+    allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentCategory) */
+export type ComponentCategoryNameArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentCategory) */
+export type ComponentCategoryParentArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    where?: InputMaybe<PageFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentCategory) */
+export type ComponentCategorySlugArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ComponentCategoryCollection = {
+    items: Array<Maybe<ComponentCategory>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export type ComponentCategoryComponentsCollection = {
+    items: Array<Maybe<ComponentCategoryComponentsItem>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export type ComponentCategoryComponentsFilter = {
+    AND?: InputMaybe<Array<InputMaybe<ComponentCategoryComponentsFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<ComponentCategoryComponentsFilter>>>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    sys?: InputMaybe<SysFilter>;
+    title?: InputMaybe<Scalars['String']['input']>;
+    title_contains?: InputMaybe<Scalars['String']['input']>;
+    title_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    title_not?: InputMaybe<Scalars['String']['input']>;
+    title_not_contains?: InputMaybe<Scalars['String']['input']>;
+    title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ComponentCategoryComponentsItem = BlockCategoryList | BlockFaq | BlockQuickLinks | BlockTicketList;
+
+export type ComponentCategoryFilter = {
+    AND?: InputMaybe<Array<InputMaybe<ComponentCategoryFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<ComponentCategoryFilter>>>;
+    components?: InputMaybe<CfcomponentsMultiTypeNestedFilter>;
+    componentsCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    description?: InputMaybe<Scalars['String']['input']>;
+    description_contains?: InputMaybe<Scalars['String']['input']>;
+    description_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    description_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    description_not?: InputMaybe<Scalars['String']['input']>;
+    description_not_contains?: InputMaybe<Scalars['String']['input']>;
+    description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    icon?: InputMaybe<Scalars['String']['input']>;
+    icon_contains?: InputMaybe<Scalars['String']['input']>;
+    icon_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    icon_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    icon_not?: InputMaybe<Scalars['String']['input']>;
+    icon_not_contains?: InputMaybe<Scalars['String']['input']>;
+    icon_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    name?: InputMaybe<Scalars['String']['input']>;
+    name_contains?: InputMaybe<Scalars['String']['input']>;
+    name_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    name_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    name_not?: InputMaybe<Scalars['String']['input']>;
+    name_not_contains?: InputMaybe<Scalars['String']['input']>;
+    name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    parent?: InputMaybe<CfPageNestedFilter>;
+    parent_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    slug?: InputMaybe<Scalars['String']['input']>;
+    slug_contains?: InputMaybe<Scalars['String']['input']>;
+    slug_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    slug_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    slug_not?: InputMaybe<Scalars['String']['input']>;
+    slug_not_contains?: InputMaybe<Scalars['String']['input']>;
+    slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    sys?: InputMaybe<SysFilter>;
+};
+
+export type ComponentCategoryLinkingCollections = {
+    blockArticleListCollection?: Maybe<BlockArticleListCollection>;
+    blockCategoryCollection?: Maybe<BlockCategoryCollection>;
+    blockCategoryListCollection?: Maybe<BlockCategoryListCollection>;
+    componentArticleCollection?: Maybe<ComponentArticleCollection>;
+    entryCollection?: Maybe<EntryCollection>;
+};
+
+export type ComponentCategoryLinkingCollectionsBlockArticleListCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<ComponentCategoryLinkingCollectionsBlockArticleListCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type ComponentCategoryLinkingCollectionsBlockCategoryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<ComponentCategoryLinkingCollectionsBlockCategoryCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type ComponentCategoryLinkingCollectionsBlockCategoryListCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<ComponentCategoryLinkingCollectionsBlockCategoryListCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type ComponentCategoryLinkingCollectionsComponentArticleCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<ComponentCategoryLinkingCollectionsComponentArticleCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type ComponentCategoryLinkingCollectionsEntryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum ComponentCategoryLinkingCollectionsBlockArticleListCollectionOrder {
+    ArticlesToShowAsc = 'articlesToShow_ASC',
+    ArticlesToShowDesc = 'articlesToShow_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    TitleAsc = 'title_ASC',
+    TitleDesc = 'title_DESC',
+}
+
+export enum ComponentCategoryLinkingCollectionsBlockCategoryCollectionOrder {
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum ComponentCategoryLinkingCollectionsBlockCategoryListCollectionOrder {
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    TitleAsc = 'title_ASC',
+    TitleDesc = 'title_DESC',
+}
+
+export enum ComponentCategoryLinkingCollectionsComponentArticleCollectionOrder {
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum ComponentCategoryOrder {
+    IconAsc = 'icon_ASC',
+    IconDesc = 'icon_DESC',
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SlugAsc = 'slug_ASC',
+    SlugDesc = 'slug_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
 /** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentFaqItem) */
@@ -1097,12 +2578,18 @@ export type ComponentLink = Entry &
     _Node & {
         _id: Scalars['ID']['output'];
         contentfulMetadata: ContentfulMetadata;
+        icon?: Maybe<Scalars['String']['output']>;
         label?: Maybe<Scalars['String']['output']>;
         linkedFrom?: Maybe<ComponentLinkLinkingCollections>;
         page?: Maybe<Page>;
         sys: Sys;
         url?: Maybe<Scalars['String']['output']>;
     };
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentLink) */
+export type ComponentLinkIconArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
 
 /** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentLink) */
 export type ComponentLinkLabelArgs = {
@@ -1137,6 +2624,13 @@ export type ComponentLinkFilter = {
     AND?: InputMaybe<Array<InputMaybe<ComponentLinkFilter>>>;
     OR?: InputMaybe<Array<InputMaybe<ComponentLinkFilter>>>;
     contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    icon?: InputMaybe<Scalars['String']['input']>;
+    icon_contains?: InputMaybe<Scalars['String']['input']>;
+    icon_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    icon_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    icon_not?: InputMaybe<Scalars['String']['input']>;
+    icon_not_contains?: InputMaybe<Scalars['String']['input']>;
+    icon_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     label?: InputMaybe<Scalars['String']['input']>;
     label_contains?: InputMaybe<Scalars['String']['input']>;
     label_exists?: InputMaybe<Scalars['Boolean']['input']>;
@@ -1157,8 +2651,17 @@ export type ComponentLinkFilter = {
 };
 
 export type ComponentLinkLinkingCollections = {
+    blockQuickLinksCollection?: Maybe<BlockQuickLinksCollection>;
     componentBannerCollection?: Maybe<ComponentBannerCollection>;
     entryCollection?: Maybe<EntryCollection>;
+};
+
+export type ComponentLinkLinkingCollectionsBlockQuickLinksCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<ComponentLinkLinkingCollectionsBlockQuickLinksCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type ComponentLinkLinkingCollectionsComponentBannerCollectionArgs = {
@@ -1176,6 +2679,21 @@ export type ComponentLinkLinkingCollectionsEntryCollectionArgs = {
     skip?: InputMaybe<Scalars['Int']['input']>;
 };
 
+export enum ComponentLinkLinkingCollectionsBlockQuickLinksCollectionOrder {
+    DescriptionAsc = 'description_ASC',
+    DescriptionDesc = 'description_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    TitleAsc = 'title_ASC',
+    TitleDesc = 'title_DESC',
+}
+
 export enum ComponentLinkLinkingCollectionsComponentBannerCollectionOrder {
     SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
     SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
@@ -1190,6 +2708,8 @@ export enum ComponentLinkLinkingCollectionsComponentBannerCollectionOrder {
 }
 
 export enum ComponentLinkOrder {
+    IconAsc = 'icon_ASC',
+    IconDesc = 'icon_DESC',
     LabelAsc = 'label_ASC',
     LabelDesc = 'label_DESC',
     SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
@@ -1202,6 +2722,106 @@ export enum ComponentLinkOrder {
     SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
     UrlAsc = 'url_ASC',
     UrlDesc = 'url_DESC',
+}
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentMessageSimple) */
+export type ComponentMessageSimple = Entry &
+    _Node & {
+        _id: Scalars['ID']['output'];
+        content?: Maybe<Scalars['String']['output']>;
+        contentfulMetadata: ContentfulMetadata;
+        linkedFrom?: Maybe<ComponentMessageSimpleLinkingCollections>;
+        sys: Sys;
+        title?: Maybe<Scalars['String']['output']>;
+    };
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentMessageSimple) */
+export type ComponentMessageSimpleContentArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentMessageSimple) */
+export type ComponentMessageSimpleLinkedFromArgs = {
+    allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentMessageSimple) */
+export type ComponentMessageSimpleTitleArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ComponentMessageSimpleCollection = {
+    items: Array<Maybe<ComponentMessageSimple>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export type ComponentMessageSimpleFilter = {
+    AND?: InputMaybe<Array<InputMaybe<ComponentMessageSimpleFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<ComponentMessageSimpleFilter>>>;
+    content?: InputMaybe<Scalars['String']['input']>;
+    content_contains?: InputMaybe<Scalars['String']['input']>;
+    content_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    content_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    content_not?: InputMaybe<Scalars['String']['input']>;
+    content_not_contains?: InputMaybe<Scalars['String']['input']>;
+    content_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    sys?: InputMaybe<SysFilter>;
+    title?: InputMaybe<Scalars['String']['input']>;
+    title_contains?: InputMaybe<Scalars['String']['input']>;
+    title_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    title_not?: InputMaybe<Scalars['String']['input']>;
+    title_not_contains?: InputMaybe<Scalars['String']['input']>;
+    title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ComponentMessageSimpleLinkingCollections = {
+    dataErrorsCollection?: Maybe<DataErrorsCollection>;
+    entryCollection?: Maybe<EntryCollection>;
+};
+
+export type ComponentMessageSimpleLinkingCollectionsDataErrorsCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<ComponentMessageSimpleLinkingCollectionsDataErrorsCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type ComponentMessageSimpleLinkingCollectionsEntryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum ComponentMessageSimpleLinkingCollectionsDataErrorsCollectionOrder {
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum ComponentMessageSimpleOrder {
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    TitleAsc = 'title_ASC',
+    TitleDesc = 'title_DESC',
 }
 
 /** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentNoResult) */
@@ -1706,6 +3326,111 @@ export enum ComponentTableOrder {
     SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/configurableTexts) */
+export type ConfigurableTexts = Entry &
+    _Node & {
+        _id: Scalars['ID']['output'];
+        actions?: Maybe<DataActions>;
+        contentfulMetadata: ContentfulMetadata;
+        dates?: Maybe<DataDates>;
+        errors?: Maybe<DataErrors>;
+        linkedFrom?: Maybe<ConfigurableTextsLinkingCollections>;
+        name?: Maybe<Scalars['String']['output']>;
+        sys: Sys;
+        validation?: Maybe<DataValidation>;
+    };
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/configurableTexts) */
+export type ConfigurableTextsActionsArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    where?: InputMaybe<DataActionsFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/configurableTexts) */
+export type ConfigurableTextsDatesArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    where?: InputMaybe<DataDatesFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/configurableTexts) */
+export type ConfigurableTextsErrorsArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    where?: InputMaybe<DataErrorsFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/configurableTexts) */
+export type ConfigurableTextsLinkedFromArgs = {
+    allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/configurableTexts) */
+export type ConfigurableTextsNameArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/configurableTexts) */
+export type ConfigurableTextsValidationArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    where?: InputMaybe<DataValidationFilter>;
+};
+
+export type ConfigurableTextsCollection = {
+    items: Array<Maybe<ConfigurableTexts>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export type ConfigurableTextsFilter = {
+    AND?: InputMaybe<Array<InputMaybe<ConfigurableTextsFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<ConfigurableTextsFilter>>>;
+    actions?: InputMaybe<CfDataActionsNestedFilter>;
+    actions_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    dates?: InputMaybe<CfDataDatesNestedFilter>;
+    dates_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    errors?: InputMaybe<CfDataErrorsNestedFilter>;
+    errors_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    name?: InputMaybe<Scalars['String']['input']>;
+    name_contains?: InputMaybe<Scalars['String']['input']>;
+    name_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    name_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    name_not?: InputMaybe<Scalars['String']['input']>;
+    name_not_contains?: InputMaybe<Scalars['String']['input']>;
+    name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    sys?: InputMaybe<SysFilter>;
+    validation?: InputMaybe<CfDataValidationNestedFilter>;
+    validation_exists?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type ConfigurableTextsLinkingCollections = {
+    entryCollection?: Maybe<EntryCollection>;
+};
+
+export type ConfigurableTextsLinkingCollectionsEntryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum ConfigurableTextsOrder {
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
 export type ContentfulMetadata = {
     concepts: Array<Maybe<TaxonomyConcept>>;
     tags: Array<Maybe<ContentfulTag>>;
@@ -1746,6 +3471,438 @@ export type ContentfulTag = {
     name?: Maybe<Scalars['String']['output']>;
 };
 
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataActions) */
+export type DataActions = Entry &
+    _Node & {
+        _id: Scalars['ID']['output'];
+        apply?: Maybe<Scalars['String']['output']>;
+        cancel?: Maybe<Scalars['String']['output']>;
+        clear?: Maybe<Scalars['String']['output']>;
+        clickToSelect?: Maybe<Scalars['String']['output']>;
+        close?: Maybe<Scalars['String']['output']>;
+        contentfulMetadata: ContentfulMetadata;
+        delete?: Maybe<Scalars['String']['output']>;
+        details?: Maybe<Scalars['String']['output']>;
+        edit?: Maybe<Scalars['String']['output']>;
+        hide?: Maybe<Scalars['String']['output']>;
+        linkedFrom?: Maybe<DataActionsLinkingCollections>;
+        logIn?: Maybe<Scalars['String']['output']>;
+        logOut?: Maybe<Scalars['String']['output']>;
+        off?: Maybe<Scalars['String']['output']>;
+        on?: Maybe<Scalars['String']['output']>;
+        payOnline?: Maybe<Scalars['String']['output']>;
+        renew?: Maybe<Scalars['String']['output']>;
+        reorder?: Maybe<Scalars['String']['output']>;
+        save?: Maybe<Scalars['String']['output']>;
+        seeAllArticles?: Maybe<Scalars['String']['output']>;
+        settings?: Maybe<Scalars['String']['output']>;
+        show?: Maybe<Scalars['String']['output']>;
+        showAllArticles?: Maybe<Scalars['String']['output']>;
+        showLess?: Maybe<Scalars['String']['output']>;
+        showMore?: Maybe<Scalars['String']['output']>;
+        sys: Sys;
+        trackOrder?: Maybe<Scalars['String']['output']>;
+    };
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataActions) */
+export type DataActionsApplyArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataActions) */
+export type DataActionsCancelArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataActions) */
+export type DataActionsClearArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataActions) */
+export type DataActionsClickToSelectArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataActions) */
+export type DataActionsCloseArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataActions) */
+export type DataActionsDeleteArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataActions) */
+export type DataActionsDetailsArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataActions) */
+export type DataActionsEditArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataActions) */
+export type DataActionsHideArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataActions) */
+export type DataActionsLinkedFromArgs = {
+    allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataActions) */
+export type DataActionsLogInArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataActions) */
+export type DataActionsLogOutArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataActions) */
+export type DataActionsOffArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataActions) */
+export type DataActionsOnArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataActions) */
+export type DataActionsPayOnlineArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataActions) */
+export type DataActionsRenewArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataActions) */
+export type DataActionsReorderArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataActions) */
+export type DataActionsSaveArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataActions) */
+export type DataActionsSeeAllArticlesArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataActions) */
+export type DataActionsSettingsArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataActions) */
+export type DataActionsShowArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataActions) */
+export type DataActionsShowAllArticlesArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataActions) */
+export type DataActionsShowLessArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataActions) */
+export type DataActionsShowMoreArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataActions) */
+export type DataActionsTrackOrderArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type DataActionsCollection = {
+    items: Array<Maybe<DataActions>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export type DataActionsFilter = {
+    AND?: InputMaybe<Array<InputMaybe<DataActionsFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<DataActionsFilter>>>;
+    apply?: InputMaybe<Scalars['String']['input']>;
+    apply_contains?: InputMaybe<Scalars['String']['input']>;
+    apply_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    apply_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    apply_not?: InputMaybe<Scalars['String']['input']>;
+    apply_not_contains?: InputMaybe<Scalars['String']['input']>;
+    apply_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    cancel?: InputMaybe<Scalars['String']['input']>;
+    cancel_contains?: InputMaybe<Scalars['String']['input']>;
+    cancel_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    cancel_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    cancel_not?: InputMaybe<Scalars['String']['input']>;
+    cancel_not_contains?: InputMaybe<Scalars['String']['input']>;
+    cancel_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    clear?: InputMaybe<Scalars['String']['input']>;
+    clear_contains?: InputMaybe<Scalars['String']['input']>;
+    clear_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    clear_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    clear_not?: InputMaybe<Scalars['String']['input']>;
+    clear_not_contains?: InputMaybe<Scalars['String']['input']>;
+    clear_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    clickToSelect?: InputMaybe<Scalars['String']['input']>;
+    clickToSelect_contains?: InputMaybe<Scalars['String']['input']>;
+    clickToSelect_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    clickToSelect_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    clickToSelect_not?: InputMaybe<Scalars['String']['input']>;
+    clickToSelect_not_contains?: InputMaybe<Scalars['String']['input']>;
+    clickToSelect_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    close?: InputMaybe<Scalars['String']['input']>;
+    close_contains?: InputMaybe<Scalars['String']['input']>;
+    close_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    close_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    close_not?: InputMaybe<Scalars['String']['input']>;
+    close_not_contains?: InputMaybe<Scalars['String']['input']>;
+    close_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    delete?: InputMaybe<Scalars['String']['input']>;
+    delete_contains?: InputMaybe<Scalars['String']['input']>;
+    delete_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    delete_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    delete_not?: InputMaybe<Scalars['String']['input']>;
+    delete_not_contains?: InputMaybe<Scalars['String']['input']>;
+    delete_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    details?: InputMaybe<Scalars['String']['input']>;
+    details_contains?: InputMaybe<Scalars['String']['input']>;
+    details_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    details_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    details_not?: InputMaybe<Scalars['String']['input']>;
+    details_not_contains?: InputMaybe<Scalars['String']['input']>;
+    details_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    edit?: InputMaybe<Scalars['String']['input']>;
+    edit_contains?: InputMaybe<Scalars['String']['input']>;
+    edit_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    edit_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    edit_not?: InputMaybe<Scalars['String']['input']>;
+    edit_not_contains?: InputMaybe<Scalars['String']['input']>;
+    edit_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    hide?: InputMaybe<Scalars['String']['input']>;
+    hide_contains?: InputMaybe<Scalars['String']['input']>;
+    hide_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    hide_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    hide_not?: InputMaybe<Scalars['String']['input']>;
+    hide_not_contains?: InputMaybe<Scalars['String']['input']>;
+    hide_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    logIn?: InputMaybe<Scalars['String']['input']>;
+    logIn_contains?: InputMaybe<Scalars['String']['input']>;
+    logIn_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    logIn_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    logIn_not?: InputMaybe<Scalars['String']['input']>;
+    logIn_not_contains?: InputMaybe<Scalars['String']['input']>;
+    logIn_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    logOut?: InputMaybe<Scalars['String']['input']>;
+    logOut_contains?: InputMaybe<Scalars['String']['input']>;
+    logOut_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    logOut_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    logOut_not?: InputMaybe<Scalars['String']['input']>;
+    logOut_not_contains?: InputMaybe<Scalars['String']['input']>;
+    logOut_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    off?: InputMaybe<Scalars['String']['input']>;
+    off_contains?: InputMaybe<Scalars['String']['input']>;
+    off_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    off_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    off_not?: InputMaybe<Scalars['String']['input']>;
+    off_not_contains?: InputMaybe<Scalars['String']['input']>;
+    off_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    on?: InputMaybe<Scalars['String']['input']>;
+    on_contains?: InputMaybe<Scalars['String']['input']>;
+    on_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    on_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    on_not?: InputMaybe<Scalars['String']['input']>;
+    on_not_contains?: InputMaybe<Scalars['String']['input']>;
+    on_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    payOnline?: InputMaybe<Scalars['String']['input']>;
+    payOnline_contains?: InputMaybe<Scalars['String']['input']>;
+    payOnline_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    payOnline_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    payOnline_not?: InputMaybe<Scalars['String']['input']>;
+    payOnline_not_contains?: InputMaybe<Scalars['String']['input']>;
+    payOnline_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    renew?: InputMaybe<Scalars['String']['input']>;
+    renew_contains?: InputMaybe<Scalars['String']['input']>;
+    renew_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    renew_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    renew_not?: InputMaybe<Scalars['String']['input']>;
+    renew_not_contains?: InputMaybe<Scalars['String']['input']>;
+    renew_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    reorder?: InputMaybe<Scalars['String']['input']>;
+    reorder_contains?: InputMaybe<Scalars['String']['input']>;
+    reorder_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    reorder_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    reorder_not?: InputMaybe<Scalars['String']['input']>;
+    reorder_not_contains?: InputMaybe<Scalars['String']['input']>;
+    reorder_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    save?: InputMaybe<Scalars['String']['input']>;
+    save_contains?: InputMaybe<Scalars['String']['input']>;
+    save_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    save_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    save_not?: InputMaybe<Scalars['String']['input']>;
+    save_not_contains?: InputMaybe<Scalars['String']['input']>;
+    save_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    seeAllArticles?: InputMaybe<Scalars['String']['input']>;
+    seeAllArticles_contains?: InputMaybe<Scalars['String']['input']>;
+    seeAllArticles_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    seeAllArticles_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    seeAllArticles_not?: InputMaybe<Scalars['String']['input']>;
+    seeAllArticles_not_contains?: InputMaybe<Scalars['String']['input']>;
+    seeAllArticles_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    settings?: InputMaybe<Scalars['String']['input']>;
+    settings_contains?: InputMaybe<Scalars['String']['input']>;
+    settings_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    settings_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    settings_not?: InputMaybe<Scalars['String']['input']>;
+    settings_not_contains?: InputMaybe<Scalars['String']['input']>;
+    settings_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    show?: InputMaybe<Scalars['String']['input']>;
+    showAllArticles?: InputMaybe<Scalars['String']['input']>;
+    showAllArticles_contains?: InputMaybe<Scalars['String']['input']>;
+    showAllArticles_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    showAllArticles_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    showAllArticles_not?: InputMaybe<Scalars['String']['input']>;
+    showAllArticles_not_contains?: InputMaybe<Scalars['String']['input']>;
+    showAllArticles_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    showLess?: InputMaybe<Scalars['String']['input']>;
+    showLess_contains?: InputMaybe<Scalars['String']['input']>;
+    showLess_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    showLess_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    showLess_not?: InputMaybe<Scalars['String']['input']>;
+    showLess_not_contains?: InputMaybe<Scalars['String']['input']>;
+    showLess_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    showMore?: InputMaybe<Scalars['String']['input']>;
+    showMore_contains?: InputMaybe<Scalars['String']['input']>;
+    showMore_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    showMore_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    showMore_not?: InputMaybe<Scalars['String']['input']>;
+    showMore_not_contains?: InputMaybe<Scalars['String']['input']>;
+    showMore_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    show_contains?: InputMaybe<Scalars['String']['input']>;
+    show_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    show_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    show_not?: InputMaybe<Scalars['String']['input']>;
+    show_not_contains?: InputMaybe<Scalars['String']['input']>;
+    show_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    sys?: InputMaybe<SysFilter>;
+    trackOrder?: InputMaybe<Scalars['String']['input']>;
+    trackOrder_contains?: InputMaybe<Scalars['String']['input']>;
+    trackOrder_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    trackOrder_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    trackOrder_not?: InputMaybe<Scalars['String']['input']>;
+    trackOrder_not_contains?: InputMaybe<Scalars['String']['input']>;
+    trackOrder_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type DataActionsLinkingCollections = {
+    configurableTextsCollection?: Maybe<ConfigurableTextsCollection>;
+    entryCollection?: Maybe<EntryCollection>;
+};
+
+export type DataActionsLinkingCollectionsConfigurableTextsCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<DataActionsLinkingCollectionsConfigurableTextsCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type DataActionsLinkingCollectionsEntryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum DataActionsLinkingCollectionsConfigurableTextsCollectionOrder {
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum DataActionsOrder {
+    ApplyAsc = 'apply_ASC',
+    ApplyDesc = 'apply_DESC',
+    CancelAsc = 'cancel_ASC',
+    CancelDesc = 'cancel_DESC',
+    ClearAsc = 'clear_ASC',
+    ClearDesc = 'clear_DESC',
+    ClickToSelectAsc = 'clickToSelect_ASC',
+    ClickToSelectDesc = 'clickToSelect_DESC',
+    CloseAsc = 'close_ASC',
+    CloseDesc = 'close_DESC',
+    DeleteAsc = 'delete_ASC',
+    DeleteDesc = 'delete_DESC',
+    DetailsAsc = 'details_ASC',
+    DetailsDesc = 'details_DESC',
+    EditAsc = 'edit_ASC',
+    EditDesc = 'edit_DESC',
+    HideAsc = 'hide_ASC',
+    HideDesc = 'hide_DESC',
+    LogInAsc = 'logIn_ASC',
+    LogInDesc = 'logIn_DESC',
+    LogOutAsc = 'logOut_ASC',
+    LogOutDesc = 'logOut_DESC',
+    OffAsc = 'off_ASC',
+    OffDesc = 'off_DESC',
+    OnAsc = 'on_ASC',
+    OnDesc = 'on_DESC',
+    PayOnlineAsc = 'payOnline_ASC',
+    PayOnlineDesc = 'payOnline_DESC',
+    RenewAsc = 'renew_ASC',
+    RenewDesc = 'renew_DESC',
+    ReorderAsc = 'reorder_ASC',
+    ReorderDesc = 'reorder_DESC',
+    SaveAsc = 'save_ASC',
+    SaveDesc = 'save_DESC',
+    SeeAllArticlesAsc = 'seeAllArticles_ASC',
+    SeeAllArticlesDesc = 'seeAllArticles_DESC',
+    SettingsAsc = 'settings_ASC',
+    SettingsDesc = 'settings_DESC',
+    ShowAllArticlesAsc = 'showAllArticles_ASC',
+    ShowAllArticlesDesc = 'showAllArticles_DESC',
+    ShowLessAsc = 'showLess_ASC',
+    ShowLessDesc = 'showLess_DESC',
+    ShowMoreAsc = 'showMore_ASC',
+    ShowMoreDesc = 'showMore_DESC',
+    ShowAsc = 'show_ASC',
+    ShowDesc = 'show_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    TrackOrderAsc = 'trackOrder_ASC',
+    TrackOrderDesc = 'trackOrder_DESC',
+}
+
 /** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataConfigurableTexts) */
 export type DataConfigurableTexts = Entry &
     _Node & {
@@ -1767,7 +3924,6 @@ export type DataConfigurableTexts = Entry &
         showLess?: Maybe<Scalars['String']['output']>;
         showMore?: Maybe<Scalars['String']['output']>;
         sys: Sys;
-        today?: Maybe<Scalars['String']['output']>;
         yesterday?: Maybe<Scalars['String']['output']>;
     };
 
@@ -1843,11 +3999,6 @@ export type DataConfigurableTextsShowLessArgs = {
 
 /** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataConfigurableTexts) */
 export type DataConfigurableTextsShowMoreArgs = {
-    locale?: InputMaybe<Scalars['String']['input']>;
-};
-
-/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataConfigurableTexts) */
-export type DataConfigurableTextsTodayArgs = {
     locale?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -1966,13 +4117,6 @@ export type DataConfigurableTextsFilter = {
     show_not_contains?: InputMaybe<Scalars['String']['input']>;
     show_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     sys?: InputMaybe<SysFilter>;
-    today?: InputMaybe<Scalars['String']['input']>;
-    today_contains?: InputMaybe<Scalars['String']['input']>;
-    today_exists?: InputMaybe<Scalars['Boolean']['input']>;
-    today_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-    today_not?: InputMaybe<Scalars['String']['input']>;
-    today_not_contains?: InputMaybe<Scalars['String']['input']>;
-    today_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     yesterday?: InputMaybe<Scalars['String']['input']>;
     yesterday_contains?: InputMaybe<Scalars['String']['input']>;
     yesterday_exists?: InputMaybe<Scalars['Boolean']['input']>;
@@ -2056,10 +4200,309 @@ export enum DataConfigurableTextsOrder {
     SysPublishedAtDesc = 'sys_publishedAt_DESC',
     SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
     SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    YesterdayAsc = 'yesterday_ASC',
+    YesterdayDesc = 'yesterday_DESC',
+}
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataDates) */
+export type DataDates = Entry &
+    _Node & {
+        _id: Scalars['ID']['output'];
+        contentfulMetadata: ContentfulMetadata;
+        linkedFrom?: Maybe<DataDatesLinkingCollections>;
+        sys: Sys;
+        today?: Maybe<Scalars['String']['output']>;
+        yesterday?: Maybe<Scalars['String']['output']>;
+    };
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataDates) */
+export type DataDatesLinkedFromArgs = {
+    allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataDates) */
+export type DataDatesTodayArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataDates) */
+export type DataDatesYesterdayArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type DataDatesCollection = {
+    items: Array<Maybe<DataDates>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export type DataDatesFilter = {
+    AND?: InputMaybe<Array<InputMaybe<DataDatesFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<DataDatesFilter>>>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    sys?: InputMaybe<SysFilter>;
+    today?: InputMaybe<Scalars['String']['input']>;
+    today_contains?: InputMaybe<Scalars['String']['input']>;
+    today_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    today_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    today_not?: InputMaybe<Scalars['String']['input']>;
+    today_not_contains?: InputMaybe<Scalars['String']['input']>;
+    today_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    yesterday?: InputMaybe<Scalars['String']['input']>;
+    yesterday_contains?: InputMaybe<Scalars['String']['input']>;
+    yesterday_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    yesterday_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    yesterday_not?: InputMaybe<Scalars['String']['input']>;
+    yesterday_not_contains?: InputMaybe<Scalars['String']['input']>;
+    yesterday_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type DataDatesLinkingCollections = {
+    configurableTextsCollection?: Maybe<ConfigurableTextsCollection>;
+    entryCollection?: Maybe<EntryCollection>;
+};
+
+export type DataDatesLinkingCollectionsConfigurableTextsCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<DataDatesLinkingCollectionsConfigurableTextsCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type DataDatesLinkingCollectionsEntryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum DataDatesLinkingCollectionsConfigurableTextsCollectionOrder {
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum DataDatesOrder {
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
     TodayAsc = 'today_ASC',
     TodayDesc = 'today_DESC',
     YesterdayAsc = 'yesterday_ASC',
     YesterdayDesc = 'yesterday_DESC',
+}
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataErrors) */
+export type DataErrors = Entry &
+    _Node & {
+        _id: Scalars['ID']['output'];
+        contentfulMetadata: ContentfulMetadata;
+        linkedFrom?: Maybe<DataErrorsLinkingCollections>;
+        name?: Maybe<Scalars['String']['output']>;
+        requestError?: Maybe<ComponentMessageSimple>;
+        sys: Sys;
+    };
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataErrors) */
+export type DataErrorsLinkedFromArgs = {
+    allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataErrors) */
+export type DataErrorsNameArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataErrors) */
+export type DataErrorsRequestErrorArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    where?: InputMaybe<ComponentMessageSimpleFilter>;
+};
+
+export type DataErrorsCollection = {
+    items: Array<Maybe<DataErrors>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export type DataErrorsFilter = {
+    AND?: InputMaybe<Array<InputMaybe<DataErrorsFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<DataErrorsFilter>>>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    name?: InputMaybe<Scalars['String']['input']>;
+    name_contains?: InputMaybe<Scalars['String']['input']>;
+    name_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    name_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    name_not?: InputMaybe<Scalars['String']['input']>;
+    name_not_contains?: InputMaybe<Scalars['String']['input']>;
+    name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    requestError?: InputMaybe<CfComponentMessageSimpleNestedFilter>;
+    requestError_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    sys?: InputMaybe<SysFilter>;
+};
+
+export type DataErrorsLinkingCollections = {
+    configurableTextsCollection?: Maybe<ConfigurableTextsCollection>;
+    entryCollection?: Maybe<EntryCollection>;
+};
+
+export type DataErrorsLinkingCollectionsConfigurableTextsCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<DataErrorsLinkingCollectionsConfigurableTextsCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type DataErrorsLinkingCollectionsEntryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum DataErrorsLinkingCollectionsConfigurableTextsCollectionOrder {
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum DataErrorsOrder {
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataValidation) */
+export type DataValidation = Entry &
+    _Node & {
+        _id: Scalars['ID']['output'];
+        contentfulMetadata: ContentfulMetadata;
+        isOptional?: Maybe<Scalars['String']['output']>;
+        isRequired?: Maybe<Scalars['String']['output']>;
+        linkedFrom?: Maybe<DataValidationLinkingCollections>;
+        sys: Sys;
+    };
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataValidation) */
+export type DataValidationIsOptionalArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataValidation) */
+export type DataValidationIsRequiredArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/dataValidation) */
+export type DataValidationLinkedFromArgs = {
+    allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type DataValidationCollection = {
+    items: Array<Maybe<DataValidation>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export type DataValidationFilter = {
+    AND?: InputMaybe<Array<InputMaybe<DataValidationFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<DataValidationFilter>>>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    isOptional?: InputMaybe<Scalars['String']['input']>;
+    isOptional_contains?: InputMaybe<Scalars['String']['input']>;
+    isOptional_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    isOptional_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    isOptional_not?: InputMaybe<Scalars['String']['input']>;
+    isOptional_not_contains?: InputMaybe<Scalars['String']['input']>;
+    isOptional_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    isRequired?: InputMaybe<Scalars['String']['input']>;
+    isRequired_contains?: InputMaybe<Scalars['String']['input']>;
+    isRequired_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    isRequired_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    isRequired_not?: InputMaybe<Scalars['String']['input']>;
+    isRequired_not_contains?: InputMaybe<Scalars['String']['input']>;
+    isRequired_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    sys?: InputMaybe<SysFilter>;
+};
+
+export type DataValidationLinkingCollections = {
+    configurableTextsCollection?: Maybe<ConfigurableTextsCollection>;
+    entryCollection?: Maybe<EntryCollection>;
+};
+
+export type DataValidationLinkingCollectionsConfigurableTextsCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<DataValidationLinkingCollectionsConfigurableTextsCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type DataValidationLinkingCollectionsEntryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum DataValidationLinkingCollectionsConfigurableTextsCollectionOrder {
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum DataValidationOrder {
+    IsOptionalAsc = 'isOptional_ASC',
+    IsOptionalDesc = 'isOptional_DESC',
+    IsRequiredAsc = 'isRequired_ASC',
+    IsRequiredDesc = 'isRequired_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
 export type Entry = {
@@ -2269,9 +4712,54 @@ export type PageFilter = {
 };
 
 export type PageLinkingCollections = {
+    articleCollection?: Maybe<ArticleCollection>;
+    blockArticleListCollection?: Maybe<BlockArticleListCollection>;
+    blockCategoryCollection?: Maybe<BlockCategoryCollection>;
+    blockCategoryListCollection?: Maybe<BlockCategoryListCollection>;
+    componentCategoryCollection?: Maybe<ComponentCategoryCollection>;
     componentLinkCollection?: Maybe<ComponentLinkCollection>;
     entryCollection?: Maybe<EntryCollection>;
     pageCollection?: Maybe<PageCollection>;
+};
+
+export type PageLinkingCollectionsArticleCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<PageLinkingCollectionsArticleCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type PageLinkingCollectionsBlockArticleListCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<PageLinkingCollectionsBlockArticleListCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type PageLinkingCollectionsBlockCategoryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<PageLinkingCollectionsBlockCategoryCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type PageLinkingCollectionsBlockCategoryListCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<PageLinkingCollectionsBlockCategoryListCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type PageLinkingCollectionsComponentCategoryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<PageLinkingCollectionsComponentCategoryCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type PageLinkingCollectionsComponentLinkCollectionArgs = {
@@ -2297,7 +4785,80 @@ export type PageLinkingCollectionsPageCollectionArgs = {
     skip?: InputMaybe<Scalars['Int']['input']>;
 };
 
+export enum PageLinkingCollectionsArticleCollectionOrder {
+    SlugAsc = 'slug_ASC',
+    SlugDesc = 'slug_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageLinkingCollectionsBlockArticleListCollectionOrder {
+    ArticlesToShowAsc = 'articlesToShow_ASC',
+    ArticlesToShowDesc = 'articlesToShow_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    TitleAsc = 'title_ASC',
+    TitleDesc = 'title_DESC',
+}
+
+export enum PageLinkingCollectionsBlockCategoryCollectionOrder {
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageLinkingCollectionsBlockCategoryListCollectionOrder {
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    TitleAsc = 'title_ASC',
+    TitleDesc = 'title_DESC',
+}
+
+export enum PageLinkingCollectionsComponentCategoryCollectionOrder {
+    IconAsc = 'icon_ASC',
+    IconDesc = 'icon_DESC',
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SlugAsc = 'slug_ASC',
+    SlugDesc = 'slug_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
 export enum PageLinkingCollectionsComponentLinkCollectionOrder {
+    IconAsc = 'icon_ASC',
+    IconDesc = 'icon_DESC',
     LabelAsc = 'label_ASC',
     LabelDesc = 'label_DESC',
     SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
@@ -2424,6 +4985,8 @@ export type PageOneColumnTemplateMainSlotCollection = {
 };
 
 export enum PageOneColumnTemplateMainSlotCollectionOrder {
+    BackgroundAsc = 'background_ASC',
+    BackgroundDesc = 'background_DESC',
     NameAsc = 'name_ASC',
     NameDesc = 'name_DESC',
     SpacingAsc = 'spacing_ASC',
@@ -2436,6 +4999,8 @@ export enum PageOneColumnTemplateMainSlotCollectionOrder {
     SysPublishedAtDesc = 'sys_publishedAt_DESC',
     SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
     SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    VariantAsc = 'variant_ASC',
+    VariantDesc = 'variant_DESC',
 }
 
 export enum PageOneColumnTemplateOrder {
@@ -2472,6 +5037,7 @@ export type PageSeo = Entry &
         _id: Scalars['ID']['output'];
         contentfulMetadata: ContentfulMetadata;
         description?: Maybe<Scalars['String']['output']>;
+        image?: Maybe<Asset>;
         keywords?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
         linkedFrom?: Maybe<PageSeoLinkingCollections>;
         noFollow?: Maybe<Scalars['Boolean']['output']>;
@@ -2483,6 +5049,12 @@ export type PageSeo = Entry &
 /** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/pageSeo) */
 export type PageSeoDescriptionArgs = {
     locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/pageSeo) */
+export type PageSeoImageArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/pageSeo) */
@@ -2528,6 +5100,7 @@ export type PageSeoFilter = {
     description_not?: InputMaybe<Scalars['String']['input']>;
     description_not_contains?: InputMaybe<Scalars['String']['input']>;
     description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    image_exists?: InputMaybe<Scalars['Boolean']['input']>;
     keywords_contains_all?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     keywords_contains_none?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     keywords_contains_some?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -2549,8 +5122,17 @@ export type PageSeoFilter = {
 };
 
 export type PageSeoLinkingCollections = {
+    articleCollection?: Maybe<ArticleCollection>;
     entryCollection?: Maybe<EntryCollection>;
     pageCollection?: Maybe<PageCollection>;
+};
+
+export type PageSeoLinkingCollectionsArticleCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<PageSeoLinkingCollectionsArticleCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type PageSeoLinkingCollectionsEntryCollectionArgs = {
@@ -2567,6 +5149,19 @@ export type PageSeoLinkingCollectionsPageCollectionArgs = {
     preview?: InputMaybe<Scalars['Boolean']['input']>;
     skip?: InputMaybe<Scalars['Int']['input']>;
 };
+
+export enum PageSeoLinkingCollectionsArticleCollectionOrder {
+    SlugAsc = 'slug_ASC',
+    SlugDesc = 'slug_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
 
 export enum PageSeoLinkingCollectionsPageCollectionOrder {
     HasOwnTitleAsc = 'hasOwnTitle_ASC',
@@ -2603,16 +5198,34 @@ export enum PageSeoOrder {
 export type Query = {
     _node?: Maybe<_Node>;
     _nodes: Array<Maybe<_Node>>;
+    article?: Maybe<Article>;
+    articleCollection?: Maybe<ArticleCollection>;
     asset?: Maybe<Asset>;
     assetCollection?: Maybe<AssetCollection>;
+    author?: Maybe<Author>;
+    authorCollection?: Maybe<AuthorCollection>;
     block?: Maybe<Block>;
+    blockArticleList?: Maybe<BlockArticleList>;
+    blockArticleListCollection?: Maybe<BlockArticleListCollection>;
+    blockCategory?: Maybe<BlockCategory>;
+    blockCategoryCollection?: Maybe<BlockCategoryCollection>;
+    blockCategoryList?: Maybe<BlockCategoryList>;
+    blockCategoryListCollection?: Maybe<BlockCategoryListCollection>;
     blockCollection?: Maybe<BlockCollection>;
     blockFaq?: Maybe<BlockFaq>;
     blockFaqCollection?: Maybe<BlockFaqCollection>;
+    blockQuickLinks?: Maybe<BlockQuickLinks>;
+    blockQuickLinksCollection?: Maybe<BlockQuickLinksCollection>;
     blockTicketList?: Maybe<BlockTicketList>;
     blockTicketListCollection?: Maybe<BlockTicketListCollection>;
+    componentArticle?: Maybe<ComponentArticle>;
+    componentArticleCollection?: Maybe<ComponentArticleCollection>;
+    componentArticleSection?: Maybe<ComponentArticleSection>;
+    componentArticleSectionCollection?: Maybe<ComponentArticleSectionCollection>;
     componentBanner?: Maybe<ComponentBanner>;
     componentBannerCollection?: Maybe<ComponentBannerCollection>;
+    componentCategory?: Maybe<ComponentCategory>;
+    componentCategoryCollection?: Maybe<ComponentCategoryCollection>;
     componentFaqItem?: Maybe<ComponentFaqItem>;
     componentFaqItemCollection?: Maybe<ComponentFaqItemCollection>;
     componentFieldMapping?: Maybe<ComponentFieldMapping>;
@@ -2621,6 +5234,8 @@ export type Query = {
     componentKeyValueCollection?: Maybe<ComponentKeyValueCollection>;
     componentLink?: Maybe<ComponentLink>;
     componentLinkCollection?: Maybe<ComponentLinkCollection>;
+    componentMessageSimple?: Maybe<ComponentMessageSimple>;
+    componentMessageSimpleCollection?: Maybe<ComponentMessageSimpleCollection>;
     componentNoResult?: Maybe<ComponentNoResult>;
     componentNoResultCollection?: Maybe<ComponentNoResultCollection>;
     componentPagination?: Maybe<ComponentPagination>;
@@ -2629,8 +5244,18 @@ export type Query = {
     componentTableCollection?: Maybe<ComponentTableCollection>;
     componentTableColumn?: Maybe<ComponentTableColumn>;
     componentTableColumnCollection?: Maybe<ComponentTableColumnCollection>;
+    configurableTexts?: Maybe<ConfigurableTexts>;
+    configurableTextsCollection?: Maybe<ConfigurableTextsCollection>;
+    dataActions?: Maybe<DataActions>;
+    dataActionsCollection?: Maybe<DataActionsCollection>;
     dataConfigurableTexts?: Maybe<DataConfigurableTexts>;
     dataConfigurableTextsCollection?: Maybe<DataConfigurableTextsCollection>;
+    dataDates?: Maybe<DataDates>;
+    dataDatesCollection?: Maybe<DataDatesCollection>;
+    dataErrors?: Maybe<DataErrors>;
+    dataErrorsCollection?: Maybe<DataErrorsCollection>;
+    dataValidation?: Maybe<DataValidation>;
+    dataValidationCollection?: Maybe<DataValidationCollection>;
     entryCollection?: Maybe<EntryCollection>;
     page?: Maybe<Page>;
     pageCollection?: Maybe<PageCollection>;
@@ -2638,6 +5263,8 @@ export type Query = {
     pageOneColumnTemplateCollection?: Maybe<PageOneColumnTemplateCollection>;
     pageSeo?: Maybe<PageSeo>;
     pageSeoCollection?: Maybe<PageSeoCollection>;
+    theme?: Maybe<Theme>;
+    themeCollection?: Maybe<ThemeCollection>;
 };
 
 export type Query_NodeArgs = {
@@ -2650,6 +5277,21 @@ export type Query_NodesArgs = {
     ids: Array<Scalars['ID']['input']>;
     locale?: InputMaybe<Scalars['String']['input']>;
     preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type QueryArticleArgs = {
+    id: Scalars['String']['input'];
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type QueryArticleCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<ArticleOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<ArticleFilter>;
 };
 
 export type QueryAssetArgs = {
@@ -2667,10 +5309,70 @@ export type QueryAssetCollectionArgs = {
     where?: InputMaybe<AssetFilter>;
 };
 
+export type QueryAuthorArgs = {
+    id: Scalars['String']['input'];
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type QueryAuthorCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<AuthorOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<AuthorFilter>;
+};
+
 export type QueryBlockArgs = {
     id: Scalars['String']['input'];
     locale?: InputMaybe<Scalars['String']['input']>;
     preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type QueryBlockArticleListArgs = {
+    id: Scalars['String']['input'];
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type QueryBlockArticleListCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<BlockArticleListOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<BlockArticleListFilter>;
+};
+
+export type QueryBlockCategoryArgs = {
+    id: Scalars['String']['input'];
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type QueryBlockCategoryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<BlockCategoryOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<BlockCategoryFilter>;
+};
+
+export type QueryBlockCategoryListArgs = {
+    id: Scalars['String']['input'];
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type QueryBlockCategoryListCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<BlockCategoryListOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<BlockCategoryListFilter>;
 };
 
 export type QueryBlockCollectionArgs = {
@@ -2697,6 +5399,21 @@ export type QueryBlockFaqCollectionArgs = {
     where?: InputMaybe<BlockFaqFilter>;
 };
 
+export type QueryBlockQuickLinksArgs = {
+    id: Scalars['String']['input'];
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type QueryBlockQuickLinksCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<BlockQuickLinksOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<BlockQuickLinksFilter>;
+};
+
 export type QueryBlockTicketListArgs = {
     id: Scalars['String']['input'];
     locale?: InputMaybe<Scalars['String']['input']>;
@@ -2712,6 +5429,36 @@ export type QueryBlockTicketListCollectionArgs = {
     where?: InputMaybe<BlockTicketListFilter>;
 };
 
+export type QueryComponentArticleArgs = {
+    id: Scalars['String']['input'];
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type QueryComponentArticleCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<ComponentArticleOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<ComponentArticleFilter>;
+};
+
+export type QueryComponentArticleSectionArgs = {
+    id: Scalars['String']['input'];
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type QueryComponentArticleSectionCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<ComponentArticleSectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<ComponentArticleSectionFilter>;
+};
+
 export type QueryComponentBannerArgs = {
     id: Scalars['String']['input'];
     locale?: InputMaybe<Scalars['String']['input']>;
@@ -2725,6 +5472,21 @@ export type QueryComponentBannerCollectionArgs = {
     preview?: InputMaybe<Scalars['Boolean']['input']>;
     skip?: InputMaybe<Scalars['Int']['input']>;
     where?: InputMaybe<ComponentBannerFilter>;
+};
+
+export type QueryComponentCategoryArgs = {
+    id: Scalars['String']['input'];
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type QueryComponentCategoryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<ComponentCategoryOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<ComponentCategoryFilter>;
 };
 
 export type QueryComponentFaqItemArgs = {
@@ -2787,6 +5549,21 @@ export type QueryComponentLinkCollectionArgs = {
     where?: InputMaybe<ComponentLinkFilter>;
 };
 
+export type QueryComponentMessageSimpleArgs = {
+    id: Scalars['String']['input'];
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type QueryComponentMessageSimpleCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<ComponentMessageSimpleOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<ComponentMessageSimpleFilter>;
+};
+
 export type QueryComponentNoResultArgs = {
     id: Scalars['String']['input'];
     locale?: InputMaybe<Scalars['String']['input']>;
@@ -2847,6 +5624,36 @@ export type QueryComponentTableColumnCollectionArgs = {
     where?: InputMaybe<ComponentTableColumnFilter>;
 };
 
+export type QueryConfigurableTextsArgs = {
+    id: Scalars['String']['input'];
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type QueryConfigurableTextsCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<ConfigurableTextsOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<ConfigurableTextsFilter>;
+};
+
+export type QueryDataActionsArgs = {
+    id: Scalars['String']['input'];
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type QueryDataActionsCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<DataActionsOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<DataActionsFilter>;
+};
+
 export type QueryDataConfigurableTextsArgs = {
     id: Scalars['String']['input'];
     locale?: InputMaybe<Scalars['String']['input']>;
@@ -2860,6 +5667,51 @@ export type QueryDataConfigurableTextsCollectionArgs = {
     preview?: InputMaybe<Scalars['Boolean']['input']>;
     skip?: InputMaybe<Scalars['Int']['input']>;
     where?: InputMaybe<DataConfigurableTextsFilter>;
+};
+
+export type QueryDataDatesArgs = {
+    id: Scalars['String']['input'];
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type QueryDataDatesCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<DataDatesOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<DataDatesFilter>;
+};
+
+export type QueryDataErrorsArgs = {
+    id: Scalars['String']['input'];
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type QueryDataErrorsCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<DataErrorsOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<DataErrorsFilter>;
+};
+
+export type QueryDataValidationArgs = {
+    id: Scalars['String']['input'];
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type QueryDataValidationCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<DataValidationOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<DataValidationFilter>;
 };
 
 export type QueryEntryCollectionArgs = {
@@ -2914,6 +5766,21 @@ export type QueryPageSeoCollectionArgs = {
     preview?: InputMaybe<Scalars['Boolean']['input']>;
     skip?: InputMaybe<Scalars['Int']['input']>;
     where?: InputMaybe<PageSeoFilter>;
+};
+
+export type QueryThemeArgs = {
+    id: Scalars['String']['input'];
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type QueryThemeCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<ThemeOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<ThemeFilter>;
 };
 
 export type Sys = {
@@ -2972,6 +5839,107 @@ export type TaxonomyConcept = {
     id?: Maybe<Scalars['String']['output']>;
 };
 
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/theme) */
+export type Theme = Entry &
+    _Node & {
+        _id: Scalars['ID']['output'];
+        contentfulMetadata: ContentfulMetadata;
+        linkedFrom?: Maybe<ThemeLinkingCollections>;
+        logo?: Maybe<Asset>;
+        name?: Maybe<Scalars['String']['output']>;
+        sys: Sys;
+    };
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/theme) */
+export type ThemeLinkedFromArgs = {
+    allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/theme) */
+export type ThemeLogoArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/theme) */
+export type ThemeNameArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ThemeCollection = {
+    items: Array<Maybe<Theme>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export type ThemeFilter = {
+    AND?: InputMaybe<Array<InputMaybe<ThemeFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<ThemeFilter>>>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    logo_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    name?: InputMaybe<Scalars['String']['input']>;
+    name_contains?: InputMaybe<Scalars['String']['input']>;
+    name_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    name_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    name_not?: InputMaybe<Scalars['String']['input']>;
+    name_not_contains?: InputMaybe<Scalars['String']['input']>;
+    name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    sys?: InputMaybe<SysFilter>;
+};
+
+export type ThemeLinkingCollections = {
+    blockCollection?: Maybe<BlockCollection>;
+    entryCollection?: Maybe<EntryCollection>;
+};
+
+export type ThemeLinkingCollectionsBlockCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<ThemeLinkingCollectionsBlockCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type ThemeLinkingCollectionsEntryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum ThemeLinkingCollectionsBlockCollectionOrder {
+    BackgroundAsc = 'background_ASC',
+    BackgroundDesc = 'background_DESC',
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SpacingAsc = 'spacing_ASC',
+    SpacingDesc = 'spacing_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    VariantAsc = 'variant_ASC',
+    VariantDesc = 'variant_DESC',
+}
+
+export enum ThemeOrder {
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
 export type TimelineFilterInput = {
     /** Preview content starting from a given release date */
     release_lte?: InputMaybe<Scalars['String']['input']>;
@@ -2983,9 +5951,55 @@ export type _Node = {
     _id: Scalars['ID']['output'];
 };
 
+export type CfArticleNestedFilter = {
+    AND?: InputMaybe<Array<InputMaybe<CfArticleNestedFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<CfArticleNestedFilter>>>;
+    content_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    parent_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    seo_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    slug?: InputMaybe<Scalars['String']['input']>;
+    slug_contains?: InputMaybe<Scalars['String']['input']>;
+    slug_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    slug_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    slug_not?: InputMaybe<Scalars['String']['input']>;
+    slug_not_contains?: InputMaybe<Scalars['String']['input']>;
+    slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    sys?: InputMaybe<SysFilter>;
+};
+
+export type CfAuthorNestedFilter = {
+    AND?: InputMaybe<Array<InputMaybe<CfAuthorNestedFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<CfAuthorNestedFilter>>>;
+    avatar_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    name?: InputMaybe<Scalars['String']['input']>;
+    name_contains?: InputMaybe<Scalars['String']['input']>;
+    name_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    name_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    name_not?: InputMaybe<Scalars['String']['input']>;
+    name_not_contains?: InputMaybe<Scalars['String']['input']>;
+    name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    position?: InputMaybe<Scalars['String']['input']>;
+    position_contains?: InputMaybe<Scalars['String']['input']>;
+    position_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    position_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    position_not?: InputMaybe<Scalars['String']['input']>;
+    position_not_contains?: InputMaybe<Scalars['String']['input']>;
+    position_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    sys?: InputMaybe<SysFilter>;
+};
+
 export type CfBlockNestedFilter = {
     AND?: InputMaybe<Array<InputMaybe<CfBlockNestedFilter>>>;
     OR?: InputMaybe<Array<InputMaybe<CfBlockNestedFilter>>>;
+    background?: InputMaybe<Scalars['String']['input']>;
+    background_contains?: InputMaybe<Scalars['String']['input']>;
+    background_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    background_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    background_not?: InputMaybe<Scalars['String']['input']>;
+    background_not_contains?: InputMaybe<Scalars['String']['input']>;
+    background_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     content_exists?: InputMaybe<Scalars['Boolean']['input']>;
     contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
     name?: InputMaybe<Scalars['String']['input']>;
@@ -3003,6 +6017,52 @@ export type CfBlockNestedFilter = {
     spacing_not_contains?: InputMaybe<Scalars['String']['input']>;
     spacing_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     sys?: InputMaybe<SysFilter>;
+    theme_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    variant?: InputMaybe<Scalars['String']['input']>;
+    variant_contains?: InputMaybe<Scalars['String']['input']>;
+    variant_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    variant_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    variant_not?: InputMaybe<Scalars['String']['input']>;
+    variant_not_contains?: InputMaybe<Scalars['String']['input']>;
+    variant_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type CfComponentArticleNestedFilter = {
+    AND?: InputMaybe<Array<InputMaybe<CfComponentArticleNestedFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<CfComponentArticleNestedFilter>>>;
+    author_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    category_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    name?: InputMaybe<Scalars['String']['input']>;
+    name_contains?: InputMaybe<Scalars['String']['input']>;
+    name_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    name_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    name_not?: InputMaybe<Scalars['String']['input']>;
+    name_not_contains?: InputMaybe<Scalars['String']['input']>;
+    name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    sectionsCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    sys?: InputMaybe<SysFilter>;
+};
+
+export type CfComponentArticleSectionNestedFilter = {
+    AND?: InputMaybe<Array<InputMaybe<CfComponentArticleSectionNestedFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<CfComponentArticleSectionNestedFilter>>>;
+    content?: InputMaybe<Scalars['String']['input']>;
+    content_contains?: InputMaybe<Scalars['String']['input']>;
+    content_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    content_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    content_not?: InputMaybe<Scalars['String']['input']>;
+    content_not_contains?: InputMaybe<Scalars['String']['input']>;
+    content_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    sys?: InputMaybe<SysFilter>;
+    title?: InputMaybe<Scalars['String']['input']>;
+    title_contains?: InputMaybe<Scalars['String']['input']>;
+    title_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    title_not?: InputMaybe<Scalars['String']['input']>;
+    title_not_contains?: InputMaybe<Scalars['String']['input']>;
+    title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type CfComponentBannerNestedFilter = {
@@ -3025,6 +6085,43 @@ export type CfComponentBannerNestedFilter = {
     title_not?: InputMaybe<Scalars['String']['input']>;
     title_not_contains?: InputMaybe<Scalars['String']['input']>;
     title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type CfComponentCategoryNestedFilter = {
+    AND?: InputMaybe<Array<InputMaybe<CfComponentCategoryNestedFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<CfComponentCategoryNestedFilter>>>;
+    componentsCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    description?: InputMaybe<Scalars['String']['input']>;
+    description_contains?: InputMaybe<Scalars['String']['input']>;
+    description_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    description_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    description_not?: InputMaybe<Scalars['String']['input']>;
+    description_not_contains?: InputMaybe<Scalars['String']['input']>;
+    description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    icon?: InputMaybe<Scalars['String']['input']>;
+    icon_contains?: InputMaybe<Scalars['String']['input']>;
+    icon_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    icon_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    icon_not?: InputMaybe<Scalars['String']['input']>;
+    icon_not_contains?: InputMaybe<Scalars['String']['input']>;
+    icon_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    name?: InputMaybe<Scalars['String']['input']>;
+    name_contains?: InputMaybe<Scalars['String']['input']>;
+    name_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    name_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    name_not?: InputMaybe<Scalars['String']['input']>;
+    name_not_contains?: InputMaybe<Scalars['String']['input']>;
+    name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    parent_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    slug?: InputMaybe<Scalars['String']['input']>;
+    slug_contains?: InputMaybe<Scalars['String']['input']>;
+    slug_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    slug_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    slug_not?: InputMaybe<Scalars['String']['input']>;
+    slug_not_contains?: InputMaybe<Scalars['String']['input']>;
+    slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    sys?: InputMaybe<SysFilter>;
 };
 
 export type CfComponentFaqItemNestedFilter = {
@@ -3088,6 +6185,13 @@ export type CfComponentLinkNestedFilter = {
     AND?: InputMaybe<Array<InputMaybe<CfComponentLinkNestedFilter>>>;
     OR?: InputMaybe<Array<InputMaybe<CfComponentLinkNestedFilter>>>;
     contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    icon?: InputMaybe<Scalars['String']['input']>;
+    icon_contains?: InputMaybe<Scalars['String']['input']>;
+    icon_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    icon_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    icon_not?: InputMaybe<Scalars['String']['input']>;
+    icon_not_contains?: InputMaybe<Scalars['String']['input']>;
+    icon_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     label?: InputMaybe<Scalars['String']['input']>;
     label_contains?: InputMaybe<Scalars['String']['input']>;
     label_exists?: InputMaybe<Scalars['Boolean']['input']>;
@@ -3104,6 +6208,27 @@ export type CfComponentLinkNestedFilter = {
     url_not?: InputMaybe<Scalars['String']['input']>;
     url_not_contains?: InputMaybe<Scalars['String']['input']>;
     url_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type CfComponentMessageSimpleNestedFilter = {
+    AND?: InputMaybe<Array<InputMaybe<CfComponentMessageSimpleNestedFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<CfComponentMessageSimpleNestedFilter>>>;
+    content?: InputMaybe<Scalars['String']['input']>;
+    content_contains?: InputMaybe<Scalars['String']['input']>;
+    content_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    content_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    content_not?: InputMaybe<Scalars['String']['input']>;
+    content_not_contains?: InputMaybe<Scalars['String']['input']>;
+    content_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    sys?: InputMaybe<SysFilter>;
+    title?: InputMaybe<Scalars['String']['input']>;
+    title_contains?: InputMaybe<Scalars['String']['input']>;
+    title_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    title_not?: InputMaybe<Scalars['String']['input']>;
+    title_not_contains?: InputMaybe<Scalars['String']['input']>;
+    title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type CfComponentNoResultNestedFilter = {
@@ -3214,6 +6339,181 @@ export type CfComponentTableNestedFilter = {
     sys?: InputMaybe<SysFilter>;
 };
 
+export type CfDataActionsNestedFilter = {
+    AND?: InputMaybe<Array<InputMaybe<CfDataActionsNestedFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<CfDataActionsNestedFilter>>>;
+    apply?: InputMaybe<Scalars['String']['input']>;
+    apply_contains?: InputMaybe<Scalars['String']['input']>;
+    apply_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    apply_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    apply_not?: InputMaybe<Scalars['String']['input']>;
+    apply_not_contains?: InputMaybe<Scalars['String']['input']>;
+    apply_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    cancel?: InputMaybe<Scalars['String']['input']>;
+    cancel_contains?: InputMaybe<Scalars['String']['input']>;
+    cancel_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    cancel_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    cancel_not?: InputMaybe<Scalars['String']['input']>;
+    cancel_not_contains?: InputMaybe<Scalars['String']['input']>;
+    cancel_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    clear?: InputMaybe<Scalars['String']['input']>;
+    clear_contains?: InputMaybe<Scalars['String']['input']>;
+    clear_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    clear_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    clear_not?: InputMaybe<Scalars['String']['input']>;
+    clear_not_contains?: InputMaybe<Scalars['String']['input']>;
+    clear_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    clickToSelect?: InputMaybe<Scalars['String']['input']>;
+    clickToSelect_contains?: InputMaybe<Scalars['String']['input']>;
+    clickToSelect_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    clickToSelect_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    clickToSelect_not?: InputMaybe<Scalars['String']['input']>;
+    clickToSelect_not_contains?: InputMaybe<Scalars['String']['input']>;
+    clickToSelect_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    close?: InputMaybe<Scalars['String']['input']>;
+    close_contains?: InputMaybe<Scalars['String']['input']>;
+    close_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    close_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    close_not?: InputMaybe<Scalars['String']['input']>;
+    close_not_contains?: InputMaybe<Scalars['String']['input']>;
+    close_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    delete?: InputMaybe<Scalars['String']['input']>;
+    delete_contains?: InputMaybe<Scalars['String']['input']>;
+    delete_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    delete_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    delete_not?: InputMaybe<Scalars['String']['input']>;
+    delete_not_contains?: InputMaybe<Scalars['String']['input']>;
+    delete_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    details?: InputMaybe<Scalars['String']['input']>;
+    details_contains?: InputMaybe<Scalars['String']['input']>;
+    details_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    details_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    details_not?: InputMaybe<Scalars['String']['input']>;
+    details_not_contains?: InputMaybe<Scalars['String']['input']>;
+    details_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    edit?: InputMaybe<Scalars['String']['input']>;
+    edit_contains?: InputMaybe<Scalars['String']['input']>;
+    edit_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    edit_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    edit_not?: InputMaybe<Scalars['String']['input']>;
+    edit_not_contains?: InputMaybe<Scalars['String']['input']>;
+    edit_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    hide?: InputMaybe<Scalars['String']['input']>;
+    hide_contains?: InputMaybe<Scalars['String']['input']>;
+    hide_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    hide_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    hide_not?: InputMaybe<Scalars['String']['input']>;
+    hide_not_contains?: InputMaybe<Scalars['String']['input']>;
+    hide_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    logIn?: InputMaybe<Scalars['String']['input']>;
+    logIn_contains?: InputMaybe<Scalars['String']['input']>;
+    logIn_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    logIn_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    logIn_not?: InputMaybe<Scalars['String']['input']>;
+    logIn_not_contains?: InputMaybe<Scalars['String']['input']>;
+    logIn_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    logOut?: InputMaybe<Scalars['String']['input']>;
+    logOut_contains?: InputMaybe<Scalars['String']['input']>;
+    logOut_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    logOut_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    logOut_not?: InputMaybe<Scalars['String']['input']>;
+    logOut_not_contains?: InputMaybe<Scalars['String']['input']>;
+    logOut_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    off?: InputMaybe<Scalars['String']['input']>;
+    off_contains?: InputMaybe<Scalars['String']['input']>;
+    off_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    off_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    off_not?: InputMaybe<Scalars['String']['input']>;
+    off_not_contains?: InputMaybe<Scalars['String']['input']>;
+    off_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    on?: InputMaybe<Scalars['String']['input']>;
+    on_contains?: InputMaybe<Scalars['String']['input']>;
+    on_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    on_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    on_not?: InputMaybe<Scalars['String']['input']>;
+    on_not_contains?: InputMaybe<Scalars['String']['input']>;
+    on_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    payOnline?: InputMaybe<Scalars['String']['input']>;
+    payOnline_contains?: InputMaybe<Scalars['String']['input']>;
+    payOnline_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    payOnline_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    payOnline_not?: InputMaybe<Scalars['String']['input']>;
+    payOnline_not_contains?: InputMaybe<Scalars['String']['input']>;
+    payOnline_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    renew?: InputMaybe<Scalars['String']['input']>;
+    renew_contains?: InputMaybe<Scalars['String']['input']>;
+    renew_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    renew_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    renew_not?: InputMaybe<Scalars['String']['input']>;
+    renew_not_contains?: InputMaybe<Scalars['String']['input']>;
+    renew_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    reorder?: InputMaybe<Scalars['String']['input']>;
+    reorder_contains?: InputMaybe<Scalars['String']['input']>;
+    reorder_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    reorder_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    reorder_not?: InputMaybe<Scalars['String']['input']>;
+    reorder_not_contains?: InputMaybe<Scalars['String']['input']>;
+    reorder_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    save?: InputMaybe<Scalars['String']['input']>;
+    save_contains?: InputMaybe<Scalars['String']['input']>;
+    save_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    save_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    save_not?: InputMaybe<Scalars['String']['input']>;
+    save_not_contains?: InputMaybe<Scalars['String']['input']>;
+    save_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    seeAllArticles?: InputMaybe<Scalars['String']['input']>;
+    seeAllArticles_contains?: InputMaybe<Scalars['String']['input']>;
+    seeAllArticles_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    seeAllArticles_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    seeAllArticles_not?: InputMaybe<Scalars['String']['input']>;
+    seeAllArticles_not_contains?: InputMaybe<Scalars['String']['input']>;
+    seeAllArticles_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    settings?: InputMaybe<Scalars['String']['input']>;
+    settings_contains?: InputMaybe<Scalars['String']['input']>;
+    settings_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    settings_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    settings_not?: InputMaybe<Scalars['String']['input']>;
+    settings_not_contains?: InputMaybe<Scalars['String']['input']>;
+    settings_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    show?: InputMaybe<Scalars['String']['input']>;
+    showAllArticles?: InputMaybe<Scalars['String']['input']>;
+    showAllArticles_contains?: InputMaybe<Scalars['String']['input']>;
+    showAllArticles_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    showAllArticles_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    showAllArticles_not?: InputMaybe<Scalars['String']['input']>;
+    showAllArticles_not_contains?: InputMaybe<Scalars['String']['input']>;
+    showAllArticles_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    showLess?: InputMaybe<Scalars['String']['input']>;
+    showLess_contains?: InputMaybe<Scalars['String']['input']>;
+    showLess_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    showLess_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    showLess_not?: InputMaybe<Scalars['String']['input']>;
+    showLess_not_contains?: InputMaybe<Scalars['String']['input']>;
+    showLess_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    showMore?: InputMaybe<Scalars['String']['input']>;
+    showMore_contains?: InputMaybe<Scalars['String']['input']>;
+    showMore_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    showMore_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    showMore_not?: InputMaybe<Scalars['String']['input']>;
+    showMore_not_contains?: InputMaybe<Scalars['String']['input']>;
+    showMore_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    show_contains?: InputMaybe<Scalars['String']['input']>;
+    show_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    show_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    show_not?: InputMaybe<Scalars['String']['input']>;
+    show_not_contains?: InputMaybe<Scalars['String']['input']>;
+    show_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    sys?: InputMaybe<SysFilter>;
+    trackOrder?: InputMaybe<Scalars['String']['input']>;
+    trackOrder_contains?: InputMaybe<Scalars['String']['input']>;
+    trackOrder_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    trackOrder_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    trackOrder_not?: InputMaybe<Scalars['String']['input']>;
+    trackOrder_not_contains?: InputMaybe<Scalars['String']['input']>;
+    trackOrder_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
 export type CfDataConfigurableTextsNestedFilter = {
     AND?: InputMaybe<Array<InputMaybe<CfDataConfigurableTextsNestedFilter>>>;
     OR?: InputMaybe<Array<InputMaybe<CfDataConfigurableTextsNestedFilter>>>;
@@ -3317,6 +6617,20 @@ export type CfDataConfigurableTextsNestedFilter = {
     show_not_contains?: InputMaybe<Scalars['String']['input']>;
     show_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     sys?: InputMaybe<SysFilter>;
+    yesterday?: InputMaybe<Scalars['String']['input']>;
+    yesterday_contains?: InputMaybe<Scalars['String']['input']>;
+    yesterday_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    yesterday_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    yesterday_not?: InputMaybe<Scalars['String']['input']>;
+    yesterday_not_contains?: InputMaybe<Scalars['String']['input']>;
+    yesterday_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type CfDataDatesNestedFilter = {
+    AND?: InputMaybe<Array<InputMaybe<CfDataDatesNestedFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<CfDataDatesNestedFilter>>>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    sys?: InputMaybe<SysFilter>;
     today?: InputMaybe<Scalars['String']['input']>;
     today_contains?: InputMaybe<Scalars['String']['input']>;
     today_exists?: InputMaybe<Scalars['Boolean']['input']>;
@@ -3331,6 +6645,42 @@ export type CfDataConfigurableTextsNestedFilter = {
     yesterday_not?: InputMaybe<Scalars['String']['input']>;
     yesterday_not_contains?: InputMaybe<Scalars['String']['input']>;
     yesterday_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type CfDataErrorsNestedFilter = {
+    AND?: InputMaybe<Array<InputMaybe<CfDataErrorsNestedFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<CfDataErrorsNestedFilter>>>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    name?: InputMaybe<Scalars['String']['input']>;
+    name_contains?: InputMaybe<Scalars['String']['input']>;
+    name_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    name_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    name_not?: InputMaybe<Scalars['String']['input']>;
+    name_not_contains?: InputMaybe<Scalars['String']['input']>;
+    name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    requestError_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    sys?: InputMaybe<SysFilter>;
+};
+
+export type CfDataValidationNestedFilter = {
+    AND?: InputMaybe<Array<InputMaybe<CfDataValidationNestedFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<CfDataValidationNestedFilter>>>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    isOptional?: InputMaybe<Scalars['String']['input']>;
+    isOptional_contains?: InputMaybe<Scalars['String']['input']>;
+    isOptional_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    isOptional_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    isOptional_not?: InputMaybe<Scalars['String']['input']>;
+    isOptional_not_contains?: InputMaybe<Scalars['String']['input']>;
+    isOptional_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    isRequired?: InputMaybe<Scalars['String']['input']>;
+    isRequired_contains?: InputMaybe<Scalars['String']['input']>;
+    isRequired_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    isRequired_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    isRequired_not?: InputMaybe<Scalars['String']['input']>;
+    isRequired_not_contains?: InputMaybe<Scalars['String']['input']>;
+    isRequired_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    sys?: InputMaybe<SysFilter>;
 };
 
 export type CfPageNestedFilter = {
@@ -3379,6 +6729,7 @@ export type CfPageSeoNestedFilter = {
     description_not?: InputMaybe<Scalars['String']['input']>;
     description_not_contains?: InputMaybe<Scalars['String']['input']>;
     description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    image_exists?: InputMaybe<Scalars['Boolean']['input']>;
     keywords_contains_all?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     keywords_contains_none?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     keywords_contains_some?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -3389,6 +6740,35 @@ export type CfPageSeoNestedFilter = {
     noIndex?: InputMaybe<Scalars['Boolean']['input']>;
     noIndex_exists?: InputMaybe<Scalars['Boolean']['input']>;
     noIndex_not?: InputMaybe<Scalars['Boolean']['input']>;
+    sys?: InputMaybe<SysFilter>;
+    title?: InputMaybe<Scalars['String']['input']>;
+    title_contains?: InputMaybe<Scalars['String']['input']>;
+    title_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    title_not?: InputMaybe<Scalars['String']['input']>;
+    title_not_contains?: InputMaybe<Scalars['String']['input']>;
+    title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type CfThemeNestedFilter = {
+    AND?: InputMaybe<Array<InputMaybe<CfThemeNestedFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<CfThemeNestedFilter>>>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    logo_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    name?: InputMaybe<Scalars['String']['input']>;
+    name_contains?: InputMaybe<Scalars['String']['input']>;
+    name_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    name_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    name_not?: InputMaybe<Scalars['String']['input']>;
+    name_not_contains?: InputMaybe<Scalars['String']['input']>;
+    name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    sys?: InputMaybe<SysFilter>;
+};
+
+export type CfcomponentsMultiTypeNestedFilter = {
+    AND?: InputMaybe<Array<InputMaybe<CfcomponentsMultiTypeNestedFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<CfcomponentsMultiTypeNestedFilter>>>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
     sys?: InputMaybe<SysFilter>;
     title?: InputMaybe<Scalars['String']['input']>;
     title_contains?: InputMaybe<Scalars['String']['input']>;
@@ -3472,10 +6852,56 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping of union types */
 export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
     BlockContent:
+        | (Omit<BlockArticleList, 'articlesCollection' | 'category' | 'linkedFrom' | 'parent'> & {
+              articlesCollection?: Maybe<_RefType['BlockArticleListArticlesCollection']>;
+              category?: Maybe<_RefType['ComponentCategory']>;
+              linkedFrom?: Maybe<_RefType['BlockArticleListLinkingCollections']>;
+              parent?: Maybe<_RefType['Page']>;
+          })
+        | (Omit<BlockCategory, 'category' | 'linkedFrom' | 'parent'> & {
+              category?: Maybe<_RefType['ComponentCategory']>;
+              linkedFrom?: Maybe<_RefType['BlockCategoryLinkingCollections']>;
+              parent?: Maybe<_RefType['Page']>;
+          })
+        | (Omit<BlockCategoryList, 'categoriesCollection' | 'linkedFrom' | 'parent'> & {
+              categoriesCollection?: Maybe<_RefType['BlockCategoryListCategoriesCollection']>;
+              linkedFrom?: Maybe<_RefType['BlockCategoryListLinkingCollections']>;
+              parent?: Maybe<_RefType['Page']>;
+          })
         | (Omit<BlockFaq, 'banner' | 'itemsCollection' | 'linkedFrom'> & {
               banner?: Maybe<_RefType['ComponentBanner']>;
               itemsCollection?: Maybe<_RefType['BlockFaqItemsCollection']>;
               linkedFrom?: Maybe<_RefType['BlockFaqLinkingCollections']>;
+          })
+        | (Omit<BlockQuickLinks, 'itemsCollection' | 'linkedFrom'> & {
+              itemsCollection?: Maybe<_RefType['BlockQuickLinksItemsCollection']>;
+              linkedFrom?: Maybe<_RefType['BlockQuickLinksLinkingCollections']>;
+          })
+        | (Omit<
+              BlockTicketList,
+              'fieldsCollection' | 'labels' | 'linkedFrom' | 'noResults' | 'pagination' | 'table'
+          > & {
+              fieldsCollection?: Maybe<_RefType['BlockTicketListFieldsCollection']>;
+              labels?: Maybe<_RefType['DataConfigurableTexts']>;
+              linkedFrom?: Maybe<_RefType['BlockTicketListLinkingCollections']>;
+              noResults?: Maybe<_RefType['ComponentNoResult']>;
+              pagination?: Maybe<_RefType['ComponentPagination']>;
+              table?: Maybe<_RefType['ComponentTable']>;
+          });
+    ComponentCategoryComponentsItem:
+        | (Omit<BlockCategoryList, 'categoriesCollection' | 'linkedFrom' | 'parent'> & {
+              categoriesCollection?: Maybe<_RefType['BlockCategoryListCategoriesCollection']>;
+              linkedFrom?: Maybe<_RefType['BlockCategoryListLinkingCollections']>;
+              parent?: Maybe<_RefType['Page']>;
+          })
+        | (Omit<BlockFaq, 'banner' | 'itemsCollection' | 'linkedFrom'> & {
+              banner?: Maybe<_RefType['ComponentBanner']>;
+              itemsCollection?: Maybe<_RefType['BlockFaqItemsCollection']>;
+              linkedFrom?: Maybe<_RefType['BlockFaqLinkingCollections']>;
+          })
+        | (Omit<BlockQuickLinks, 'itemsCollection' | 'linkedFrom'> & {
+              itemsCollection?: Maybe<_RefType['BlockQuickLinksItemsCollection']>;
+              linkedFrom?: Maybe<_RefType['BlockQuickLinksLinkingCollections']>;
           })
         | (Omit<
               BlockTicketList,
@@ -3493,14 +6919,45 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
 /** Mapping of interface types */
 export type ResolversInterfaceTypes<_RefType extends Record<string, unknown>> = {
     Entry:
-        | (Omit<Block, 'content' | 'linkedFrom'> & {
+        | (Omit<Article, 'content' | 'linkedFrom' | 'parent' | 'seo'> & {
+              content?: Maybe<_RefType['ComponentArticle']>;
+              linkedFrom?: Maybe<_RefType['ArticleLinkingCollections']>;
+              parent?: Maybe<_RefType['Page']>;
+              seo?: Maybe<_RefType['PageSeo']>;
+          })
+        | (Omit<Author, 'avatar' | 'linkedFrom'> & {
+              avatar?: Maybe<_RefType['Asset']>;
+              linkedFrom?: Maybe<_RefType['AuthorLinkingCollections']>;
+          })
+        | (Omit<Block, 'content' | 'linkedFrom' | 'theme'> & {
               content?: Maybe<_RefType['BlockContent']>;
               linkedFrom?: Maybe<_RefType['BlockLinkingCollections']>;
+              theme?: Maybe<_RefType['Theme']>;
+          })
+        | (Omit<BlockArticleList, 'articlesCollection' | 'category' | 'linkedFrom' | 'parent'> & {
+              articlesCollection?: Maybe<_RefType['BlockArticleListArticlesCollection']>;
+              category?: Maybe<_RefType['ComponentCategory']>;
+              linkedFrom?: Maybe<_RefType['BlockArticleListLinkingCollections']>;
+              parent?: Maybe<_RefType['Page']>;
+          })
+        | (Omit<BlockCategory, 'category' | 'linkedFrom' | 'parent'> & {
+              category?: Maybe<_RefType['ComponentCategory']>;
+              linkedFrom?: Maybe<_RefType['BlockCategoryLinkingCollections']>;
+              parent?: Maybe<_RefType['Page']>;
+          })
+        | (Omit<BlockCategoryList, 'categoriesCollection' | 'linkedFrom' | 'parent'> & {
+              categoriesCollection?: Maybe<_RefType['BlockCategoryListCategoriesCollection']>;
+              linkedFrom?: Maybe<_RefType['BlockCategoryListLinkingCollections']>;
+              parent?: Maybe<_RefType['Page']>;
           })
         | (Omit<BlockFaq, 'banner' | 'itemsCollection' | 'linkedFrom'> & {
               banner?: Maybe<_RefType['ComponentBanner']>;
               itemsCollection?: Maybe<_RefType['BlockFaqItemsCollection']>;
               linkedFrom?: Maybe<_RefType['BlockFaqLinkingCollections']>;
+          })
+        | (Omit<BlockQuickLinks, 'itemsCollection' | 'linkedFrom'> & {
+              itemsCollection?: Maybe<_RefType['BlockQuickLinksItemsCollection']>;
+              linkedFrom?: Maybe<_RefType['BlockQuickLinksLinkingCollections']>;
           })
         | (Omit<
               BlockTicketList,
@@ -3513,9 +6970,23 @@ export type ResolversInterfaceTypes<_RefType extends Record<string, unknown>> = 
               pagination?: Maybe<_RefType['ComponentPagination']>;
               table?: Maybe<_RefType['ComponentTable']>;
           })
+        | (Omit<ComponentArticle, 'author' | 'category' | 'linkedFrom' | 'sectionsCollection'> & {
+              author?: Maybe<_RefType['Author']>;
+              category?: Maybe<_RefType['ComponentCategory']>;
+              linkedFrom?: Maybe<_RefType['ComponentArticleLinkingCollections']>;
+              sectionsCollection?: Maybe<_RefType['ComponentArticleSectionsCollection']>;
+          })
+        | (Omit<ComponentArticleSection, 'linkedFrom'> & {
+              linkedFrom?: Maybe<_RefType['ComponentArticleSectionLinkingCollections']>;
+          })
         | (Omit<ComponentBanner, 'link' | 'linkedFrom'> & {
               link?: Maybe<_RefType['ComponentLink']>;
               linkedFrom?: Maybe<_RefType['ComponentBannerLinkingCollections']>;
+          })
+        | (Omit<ComponentCategory, 'componentsCollection' | 'linkedFrom' | 'parent'> & {
+              componentsCollection?: Maybe<_RefType['ComponentCategoryComponentsCollection']>;
+              linkedFrom?: Maybe<_RefType['ComponentCategoryLinkingCollections']>;
+              parent?: Maybe<_RefType['Page']>;
           })
         | (Omit<ComponentFaqItem, 'linkedFrom'> & {
               linkedFrom?: Maybe<_RefType['ComponentFaqItemLinkingCollections']>;
@@ -3531,6 +7002,9 @@ export type ResolversInterfaceTypes<_RefType extends Record<string, unknown>> = 
               linkedFrom?: Maybe<_RefType['ComponentLinkLinkingCollections']>;
               page?: Maybe<_RefType['Page']>;
           })
+        | (Omit<ComponentMessageSimple, 'linkedFrom'> & {
+              linkedFrom?: Maybe<_RefType['ComponentMessageSimpleLinkingCollections']>;
+          })
         | (Omit<ComponentNoResult, 'linkedFrom'> & {
               linkedFrom?: Maybe<_RefType['ComponentNoResultLinkingCollections']>;
           })
@@ -3544,9 +7018,20 @@ export type ResolversInterfaceTypes<_RefType extends Record<string, unknown>> = 
         | (Omit<ComponentTableColumn, 'linkedFrom'> & {
               linkedFrom?: Maybe<_RefType['ComponentTableColumnLinkingCollections']>;
           })
+        | (Omit<ConfigurableTexts, 'actions' | 'dates' | 'errors' | 'linkedFrom' | 'validation'> & {
+              actions?: Maybe<_RefType['DataActions']>;
+              dates?: Maybe<_RefType['DataDates']>;
+              errors?: Maybe<_RefType['DataErrors']>;
+              linkedFrom?: Maybe<_RefType['ConfigurableTextsLinkingCollections']>;
+              validation?: Maybe<_RefType['DataValidation']>;
+          })
+        | (Omit<DataActions, 'linkedFrom'> & { linkedFrom?: Maybe<_RefType['DataActionsLinkingCollections']> })
         | (Omit<DataConfigurableTexts, 'linkedFrom'> & {
               linkedFrom?: Maybe<_RefType['DataConfigurableTextsLinkingCollections']>;
           })
+        | (Omit<DataDates, 'linkedFrom'> & { linkedFrom?: Maybe<_RefType['DataDatesLinkingCollections']> })
+        | (Omit<DataErrors, 'linkedFrom'> & { linkedFrom?: Maybe<_RefType['DataErrorsLinkingCollections']> })
+        | (Omit<DataValidation, 'linkedFrom'> & { linkedFrom?: Maybe<_RefType['DataValidationLinkingCollections']> })
         | (Omit<Page, 'linkedFrom' | 'parent' | 'seo' | 'template'> & {
               linkedFrom?: Maybe<_RefType['PageLinkingCollections']>;
               parent?: Maybe<_RefType['Page']>;
@@ -3557,16 +7042,54 @@ export type ResolversInterfaceTypes<_RefType extends Record<string, unknown>> = 
               linkedFrom?: Maybe<_RefType['PageOneColumnTemplateLinkingCollections']>;
               mainSlotCollection?: Maybe<_RefType['PageOneColumnTemplateMainSlotCollection']>;
           })
-        | (Omit<PageSeo, 'linkedFrom'> & { linkedFrom?: Maybe<_RefType['PageSeoLinkingCollections']> });
+        | (Omit<PageSeo, 'image' | 'linkedFrom'> & {
+              image?: Maybe<_RefType['Asset']>;
+              linkedFrom?: Maybe<_RefType['PageSeoLinkingCollections']>;
+          })
+        | (Omit<Theme, 'linkedFrom' | 'logo'> & {
+              linkedFrom?: Maybe<_RefType['ThemeLinkingCollections']>;
+              logo?: Maybe<_RefType['Asset']>;
+          });
     _Node:
-        | (Omit<Block, 'content' | 'linkedFrom'> & {
+        | (Omit<Article, 'content' | 'linkedFrom' | 'parent' | 'seo'> & {
+              content?: Maybe<_RefType['ComponentArticle']>;
+              linkedFrom?: Maybe<_RefType['ArticleLinkingCollections']>;
+              parent?: Maybe<_RefType['Page']>;
+              seo?: Maybe<_RefType['PageSeo']>;
+          })
+        | (Omit<Author, 'avatar' | 'linkedFrom'> & {
+              avatar?: Maybe<_RefType['Asset']>;
+              linkedFrom?: Maybe<_RefType['AuthorLinkingCollections']>;
+          })
+        | (Omit<Block, 'content' | 'linkedFrom' | 'theme'> & {
               content?: Maybe<_RefType['BlockContent']>;
               linkedFrom?: Maybe<_RefType['BlockLinkingCollections']>;
+              theme?: Maybe<_RefType['Theme']>;
+          })
+        | (Omit<BlockArticleList, 'articlesCollection' | 'category' | 'linkedFrom' | 'parent'> & {
+              articlesCollection?: Maybe<_RefType['BlockArticleListArticlesCollection']>;
+              category?: Maybe<_RefType['ComponentCategory']>;
+              linkedFrom?: Maybe<_RefType['BlockArticleListLinkingCollections']>;
+              parent?: Maybe<_RefType['Page']>;
+          })
+        | (Omit<BlockCategory, 'category' | 'linkedFrom' | 'parent'> & {
+              category?: Maybe<_RefType['ComponentCategory']>;
+              linkedFrom?: Maybe<_RefType['BlockCategoryLinkingCollections']>;
+              parent?: Maybe<_RefType['Page']>;
+          })
+        | (Omit<BlockCategoryList, 'categoriesCollection' | 'linkedFrom' | 'parent'> & {
+              categoriesCollection?: Maybe<_RefType['BlockCategoryListCategoriesCollection']>;
+              linkedFrom?: Maybe<_RefType['BlockCategoryListLinkingCollections']>;
+              parent?: Maybe<_RefType['Page']>;
           })
         | (Omit<BlockFaq, 'banner' | 'itemsCollection' | 'linkedFrom'> & {
               banner?: Maybe<_RefType['ComponentBanner']>;
               itemsCollection?: Maybe<_RefType['BlockFaqItemsCollection']>;
               linkedFrom?: Maybe<_RefType['BlockFaqLinkingCollections']>;
+          })
+        | (Omit<BlockQuickLinks, 'itemsCollection' | 'linkedFrom'> & {
+              itemsCollection?: Maybe<_RefType['BlockQuickLinksItemsCollection']>;
+              linkedFrom?: Maybe<_RefType['BlockQuickLinksLinkingCollections']>;
           })
         | (Omit<
               BlockTicketList,
@@ -3579,9 +7102,23 @@ export type ResolversInterfaceTypes<_RefType extends Record<string, unknown>> = 
               pagination?: Maybe<_RefType['ComponentPagination']>;
               table?: Maybe<_RefType['ComponentTable']>;
           })
+        | (Omit<ComponentArticle, 'author' | 'category' | 'linkedFrom' | 'sectionsCollection'> & {
+              author?: Maybe<_RefType['Author']>;
+              category?: Maybe<_RefType['ComponentCategory']>;
+              linkedFrom?: Maybe<_RefType['ComponentArticleLinkingCollections']>;
+              sectionsCollection?: Maybe<_RefType['ComponentArticleSectionsCollection']>;
+          })
+        | (Omit<ComponentArticleSection, 'linkedFrom'> & {
+              linkedFrom?: Maybe<_RefType['ComponentArticleSectionLinkingCollections']>;
+          })
         | (Omit<ComponentBanner, 'link' | 'linkedFrom'> & {
               link?: Maybe<_RefType['ComponentLink']>;
               linkedFrom?: Maybe<_RefType['ComponentBannerLinkingCollections']>;
+          })
+        | (Omit<ComponentCategory, 'componentsCollection' | 'linkedFrom' | 'parent'> & {
+              componentsCollection?: Maybe<_RefType['ComponentCategoryComponentsCollection']>;
+              linkedFrom?: Maybe<_RefType['ComponentCategoryLinkingCollections']>;
+              parent?: Maybe<_RefType['Page']>;
           })
         | (Omit<ComponentFaqItem, 'linkedFrom'> & {
               linkedFrom?: Maybe<_RefType['ComponentFaqItemLinkingCollections']>;
@@ -3597,6 +7134,9 @@ export type ResolversInterfaceTypes<_RefType extends Record<string, unknown>> = 
               linkedFrom?: Maybe<_RefType['ComponentLinkLinkingCollections']>;
               page?: Maybe<_RefType['Page']>;
           })
+        | (Omit<ComponentMessageSimple, 'linkedFrom'> & {
+              linkedFrom?: Maybe<_RefType['ComponentMessageSimpleLinkingCollections']>;
+          })
         | (Omit<ComponentNoResult, 'linkedFrom'> & {
               linkedFrom?: Maybe<_RefType['ComponentNoResultLinkingCollections']>;
           })
@@ -3610,9 +7150,20 @@ export type ResolversInterfaceTypes<_RefType extends Record<string, unknown>> = 
         | (Omit<ComponentTableColumn, 'linkedFrom'> & {
               linkedFrom?: Maybe<_RefType['ComponentTableColumnLinkingCollections']>;
           })
+        | (Omit<ConfigurableTexts, 'actions' | 'dates' | 'errors' | 'linkedFrom' | 'validation'> & {
+              actions?: Maybe<_RefType['DataActions']>;
+              dates?: Maybe<_RefType['DataDates']>;
+              errors?: Maybe<_RefType['DataErrors']>;
+              linkedFrom?: Maybe<_RefType['ConfigurableTextsLinkingCollections']>;
+              validation?: Maybe<_RefType['DataValidation']>;
+          })
+        | (Omit<DataActions, 'linkedFrom'> & { linkedFrom?: Maybe<_RefType['DataActionsLinkingCollections']> })
         | (Omit<DataConfigurableTexts, 'linkedFrom'> & {
               linkedFrom?: Maybe<_RefType['DataConfigurableTextsLinkingCollections']>;
           })
+        | (Omit<DataDates, 'linkedFrom'> & { linkedFrom?: Maybe<_RefType['DataDatesLinkingCollections']> })
+        | (Omit<DataErrors, 'linkedFrom'> & { linkedFrom?: Maybe<_RefType['DataErrorsLinkingCollections']> })
+        | (Omit<DataValidation, 'linkedFrom'> & { linkedFrom?: Maybe<_RefType['DataValidationLinkingCollections']> })
         | (Omit<Page, 'linkedFrom' | 'parent' | 'seo' | 'template'> & {
               linkedFrom?: Maybe<_RefType['PageLinkingCollections']>;
               parent?: Maybe<_RefType['Page']>;
@@ -3623,11 +7174,38 @@ export type ResolversInterfaceTypes<_RefType extends Record<string, unknown>> = 
               linkedFrom?: Maybe<_RefType['PageOneColumnTemplateLinkingCollections']>;
               mainSlotCollection?: Maybe<_RefType['PageOneColumnTemplateMainSlotCollection']>;
           })
-        | (Omit<PageSeo, 'linkedFrom'> & { linkedFrom?: Maybe<_RefType['PageSeoLinkingCollections']> });
+        | (Omit<PageSeo, 'image' | 'linkedFrom'> & {
+              image?: Maybe<_RefType['Asset']>;
+              linkedFrom?: Maybe<_RefType['PageSeoLinkingCollections']>;
+          })
+        | (Omit<Theme, 'linkedFrom' | 'logo'> & {
+              linkedFrom?: Maybe<_RefType['ThemeLinkingCollections']>;
+              logo?: Maybe<_RefType['Asset']>;
+          });
 };
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
+    Article: ResolverTypeWrapper<
+        Omit<Article, 'content' | 'linkedFrom' | 'parent' | 'seo'> & {
+            content?: Maybe<ResolversTypes['ComponentArticle']>;
+            linkedFrom?: Maybe<ResolversTypes['ArticleLinkingCollections']>;
+            parent?: Maybe<ResolversTypes['Page']>;
+            seo?: Maybe<ResolversTypes['PageSeo']>;
+        }
+    >;
+    ArticleCollection: ResolverTypeWrapper<
+        Omit<ArticleCollection, 'items'> & { items: Array<Maybe<ResolversTypes['Article']>> }
+    >;
+    ArticleFilter: ArticleFilter;
+    ArticleLinkingCollections: ResolverTypeWrapper<
+        Omit<ArticleLinkingCollections, 'blockArticleListCollection' | 'entryCollection'> & {
+            blockArticleListCollection?: Maybe<ResolversTypes['BlockArticleListCollection']>;
+            entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
+        }
+    >;
+    ArticleLinkingCollectionsBlockArticleListCollectionOrder: ArticleLinkingCollectionsBlockArticleListCollectionOrder;
+    ArticleOrder: ArticleOrder;
     Asset: ResolverTypeWrapper<
         Omit<Asset, 'linkedFrom'> & { linkedFrom?: Maybe<ResolversTypes['AssetLinkingCollections']> }
     >;
@@ -3636,17 +7214,114 @@ export type ResolversTypes = {
     >;
     AssetFilter: AssetFilter;
     AssetLinkingCollections: ResolverTypeWrapper<
-        Omit<AssetLinkingCollections, 'entryCollection'> & {
+        Omit<
+            AssetLinkingCollections,
+            'authorCollection' | 'entryCollection' | 'pageSeoCollection' | 'themeCollection'
+        > & {
+            authorCollection?: Maybe<ResolversTypes['AuthorCollection']>;
             entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
+            pageSeoCollection?: Maybe<ResolversTypes['PageSeoCollection']>;
+            themeCollection?: Maybe<ResolversTypes['ThemeCollection']>;
         }
     >;
     AssetOrder: AssetOrder;
-    Block: ResolverTypeWrapper<
-        Omit<Block, 'content' | 'linkedFrom'> & {
-            content?: Maybe<ResolversTypes['BlockContent']>;
-            linkedFrom?: Maybe<ResolversTypes['BlockLinkingCollections']>;
+    Author: ResolverTypeWrapper<
+        Omit<Author, 'avatar' | 'linkedFrom'> & {
+            avatar?: Maybe<ResolversTypes['Asset']>;
+            linkedFrom?: Maybe<ResolversTypes['AuthorLinkingCollections']>;
         }
     >;
+    AuthorCollection: ResolverTypeWrapper<
+        Omit<AuthorCollection, 'items'> & { items: Array<Maybe<ResolversTypes['Author']>> }
+    >;
+    AuthorFilter: AuthorFilter;
+    AuthorLinkingCollections: ResolverTypeWrapper<
+        Omit<AuthorLinkingCollections, 'entryCollection'> & {
+            entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
+        }
+    >;
+    AuthorLinkingCollectionsComponentArticleCollectionOrder: AuthorLinkingCollectionsComponentArticleCollectionOrder;
+    AuthorOrder: AuthorOrder;
+    Block: ResolverTypeWrapper<
+        Omit<Block, 'content' | 'linkedFrom' | 'theme'> & {
+            content?: Maybe<ResolversTypes['BlockContent']>;
+            linkedFrom?: Maybe<ResolversTypes['BlockLinkingCollections']>;
+            theme?: Maybe<ResolversTypes['Theme']>;
+        }
+    >;
+    BlockArticleList: ResolverTypeWrapper<
+        Omit<BlockArticleList, 'articlesCollection' | 'category' | 'linkedFrom' | 'parent'> & {
+            articlesCollection?: Maybe<ResolversTypes['BlockArticleListArticlesCollection']>;
+            category?: Maybe<ResolversTypes['ComponentCategory']>;
+            linkedFrom?: Maybe<ResolversTypes['BlockArticleListLinkingCollections']>;
+            parent?: Maybe<ResolversTypes['Page']>;
+        }
+    >;
+    BlockArticleListArticlesCollection: ResolverTypeWrapper<
+        Omit<BlockArticleListArticlesCollection, 'items'> & { items: Array<Maybe<ResolversTypes['Article']>> }
+    >;
+    BlockArticleListArticlesCollectionOrder: BlockArticleListArticlesCollectionOrder;
+    BlockArticleListCollection: ResolverTypeWrapper<
+        Omit<BlockArticleListCollection, 'items'> & { items: Array<Maybe<ResolversTypes['BlockArticleList']>> }
+    >;
+    BlockArticleListFilter: BlockArticleListFilter;
+    BlockArticleListLinkingCollections: ResolverTypeWrapper<
+        Omit<BlockArticleListLinkingCollections, 'blockCollection' | 'entryCollection'> & {
+            blockCollection?: Maybe<ResolversTypes['BlockCollection']>;
+            entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
+        }
+    >;
+    BlockArticleListLinkingCollectionsBlockCollectionOrder: BlockArticleListLinkingCollectionsBlockCollectionOrder;
+    BlockArticleListOrder: BlockArticleListOrder;
+    BlockCategory: ResolverTypeWrapper<
+        Omit<BlockCategory, 'category' | 'linkedFrom' | 'parent'> & {
+            category?: Maybe<ResolversTypes['ComponentCategory']>;
+            linkedFrom?: Maybe<ResolversTypes['BlockCategoryLinkingCollections']>;
+            parent?: Maybe<ResolversTypes['Page']>;
+        }
+    >;
+    BlockCategoryCollection: ResolverTypeWrapper<
+        Omit<BlockCategoryCollection, 'items'> & { items: Array<Maybe<ResolversTypes['BlockCategory']>> }
+    >;
+    BlockCategoryFilter: BlockCategoryFilter;
+    BlockCategoryLinkingCollections: ResolverTypeWrapper<
+        Omit<BlockCategoryLinkingCollections, 'blockCollection' | 'entryCollection'> & {
+            blockCollection?: Maybe<ResolversTypes['BlockCollection']>;
+            entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
+        }
+    >;
+    BlockCategoryLinkingCollectionsBlockCollectionOrder: BlockCategoryLinkingCollectionsBlockCollectionOrder;
+    BlockCategoryList: ResolverTypeWrapper<
+        Omit<BlockCategoryList, 'categoriesCollection' | 'linkedFrom' | 'parent'> & {
+            categoriesCollection?: Maybe<ResolversTypes['BlockCategoryListCategoriesCollection']>;
+            linkedFrom?: Maybe<ResolversTypes['BlockCategoryListLinkingCollections']>;
+            parent?: Maybe<ResolversTypes['Page']>;
+        }
+    >;
+    BlockCategoryListCategoriesCollection: ResolverTypeWrapper<
+        Omit<BlockCategoryListCategoriesCollection, 'items'> & {
+            items: Array<Maybe<ResolversTypes['ComponentCategory']>>;
+        }
+    >;
+    BlockCategoryListCategoriesCollectionOrder: BlockCategoryListCategoriesCollectionOrder;
+    BlockCategoryListCollection: ResolverTypeWrapper<
+        Omit<BlockCategoryListCollection, 'items'> & { items: Array<Maybe<ResolversTypes['BlockCategoryList']>> }
+    >;
+    BlockCategoryListFilter: BlockCategoryListFilter;
+    BlockCategoryListLinkingCollections: ResolverTypeWrapper<
+        Omit<
+            BlockCategoryListLinkingCollections,
+            'blockCollection' | 'componentCategoryCollection' | 'entryCollection'
+        > & {
+            blockCollection?: Maybe<ResolversTypes['BlockCollection']>;
+            componentCategoryCollection?: Maybe<ResolversTypes['ComponentCategoryCollection']>;
+            entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
+        }
+    >;
+    BlockCategoryListLinkingCollectionsBlockCollectionOrder: BlockCategoryListLinkingCollectionsBlockCollectionOrder;
+    BlockCategoryListLinkingCollectionsComponentCategoryCollectionOrder: BlockCategoryListLinkingCollectionsComponentCategoryCollectionOrder;
+    BlockCategoryListOrder: BlockCategoryListOrder;
+    BlockCategoryOrder: BlockCategoryOrder;
     BlockCollection: ResolverTypeWrapper<
         Omit<BlockCollection, 'items'> & { items: Array<Maybe<ResolversTypes['Block']>> }
     >;
@@ -3667,12 +7342,14 @@ export type ResolversTypes = {
     >;
     BlockFaqItemsCollectionOrder: BlockFaqItemsCollectionOrder;
     BlockFaqLinkingCollections: ResolverTypeWrapper<
-        Omit<BlockFaqLinkingCollections, 'blockCollection' | 'entryCollection'> & {
+        Omit<BlockFaqLinkingCollections, 'blockCollection' | 'componentCategoryCollection' | 'entryCollection'> & {
             blockCollection?: Maybe<ResolversTypes['BlockCollection']>;
+            componentCategoryCollection?: Maybe<ResolversTypes['ComponentCategoryCollection']>;
             entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
         }
     >;
     BlockFaqLinkingCollectionsBlockCollectionOrder: BlockFaqLinkingCollectionsBlockCollectionOrder;
+    BlockFaqLinkingCollectionsComponentCategoryCollectionOrder: BlockFaqLinkingCollectionsComponentCategoryCollectionOrder;
     BlockFaqOrder: BlockFaqOrder;
     BlockFilter: BlockFilter;
     BlockLinkingCollections: ResolverTypeWrapper<
@@ -3683,6 +7360,33 @@ export type ResolversTypes = {
     >;
     BlockLinkingCollectionsPageOneColumnTemplateCollectionOrder: BlockLinkingCollectionsPageOneColumnTemplateCollectionOrder;
     BlockOrder: BlockOrder;
+    BlockQuickLinks: ResolverTypeWrapper<
+        Omit<BlockQuickLinks, 'itemsCollection' | 'linkedFrom'> & {
+            itemsCollection?: Maybe<ResolversTypes['BlockQuickLinksItemsCollection']>;
+            linkedFrom?: Maybe<ResolversTypes['BlockQuickLinksLinkingCollections']>;
+        }
+    >;
+    BlockQuickLinksCollection: ResolverTypeWrapper<
+        Omit<BlockQuickLinksCollection, 'items'> & { items: Array<Maybe<ResolversTypes['BlockQuickLinks']>> }
+    >;
+    BlockQuickLinksFilter: BlockQuickLinksFilter;
+    BlockQuickLinksItemsCollection: ResolverTypeWrapper<
+        Omit<BlockQuickLinksItemsCollection, 'items'> & { items: Array<Maybe<ResolversTypes['ComponentLink']>> }
+    >;
+    BlockQuickLinksItemsCollectionOrder: BlockQuickLinksItemsCollectionOrder;
+    BlockQuickLinksLinkingCollections: ResolverTypeWrapper<
+        Omit<
+            BlockQuickLinksLinkingCollections,
+            'blockCollection' | 'componentCategoryCollection' | 'entryCollection'
+        > & {
+            blockCollection?: Maybe<ResolversTypes['BlockCollection']>;
+            componentCategoryCollection?: Maybe<ResolversTypes['ComponentCategoryCollection']>;
+            entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
+        }
+    >;
+    BlockQuickLinksLinkingCollectionsBlockCollectionOrder: BlockQuickLinksLinkingCollectionsBlockCollectionOrder;
+    BlockQuickLinksLinkingCollectionsComponentCategoryCollectionOrder: BlockQuickLinksLinkingCollectionsComponentCategoryCollectionOrder;
+    BlockQuickLinksOrder: BlockQuickLinksOrder;
     BlockTicketList: ResolverTypeWrapper<
         Omit<BlockTicketList, 'fieldsCollection' | 'labels' | 'linkedFrom' | 'noResults' | 'pagination' | 'table'> & {
             fieldsCollection?: Maybe<ResolversTypes['BlockTicketListFieldsCollection']>;
@@ -3704,14 +7408,63 @@ export type ResolversTypes = {
     BlockTicketListFieldsCollectionOrder: BlockTicketListFieldsCollectionOrder;
     BlockTicketListFilter: BlockTicketListFilter;
     BlockTicketListLinkingCollections: ResolverTypeWrapper<
-        Omit<BlockTicketListLinkingCollections, 'blockCollection' | 'entryCollection'> & {
+        Omit<
+            BlockTicketListLinkingCollections,
+            'blockCollection' | 'componentCategoryCollection' | 'entryCollection'
+        > & {
             blockCollection?: Maybe<ResolversTypes['BlockCollection']>;
+            componentCategoryCollection?: Maybe<ResolversTypes['ComponentCategoryCollection']>;
             entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
         }
     >;
     BlockTicketListLinkingCollectionsBlockCollectionOrder: BlockTicketListLinkingCollectionsBlockCollectionOrder;
+    BlockTicketListLinkingCollectionsComponentCategoryCollectionOrder: BlockTicketListLinkingCollectionsComponentCategoryCollectionOrder;
     BlockTicketListOrder: BlockTicketListOrder;
     Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
+    ComponentArticle: ResolverTypeWrapper<
+        Omit<ComponentArticle, 'author' | 'category' | 'linkedFrom' | 'sectionsCollection'> & {
+            author?: Maybe<ResolversTypes['Author']>;
+            category?: Maybe<ResolversTypes['ComponentCategory']>;
+            linkedFrom?: Maybe<ResolversTypes['ComponentArticleLinkingCollections']>;
+            sectionsCollection?: Maybe<ResolversTypes['ComponentArticleSectionsCollection']>;
+        }
+    >;
+    ComponentArticleCollection: ResolverTypeWrapper<
+        Omit<ComponentArticleCollection, 'items'> & { items: Array<Maybe<ResolversTypes['ComponentArticle']>> }
+    >;
+    ComponentArticleFilter: ComponentArticleFilter;
+    ComponentArticleLinkingCollections: ResolverTypeWrapper<
+        Omit<ComponentArticleLinkingCollections, 'articleCollection' | 'entryCollection'> & {
+            articleCollection?: Maybe<ResolversTypes['ArticleCollection']>;
+            entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
+        }
+    >;
+    ComponentArticleLinkingCollectionsArticleCollectionOrder: ComponentArticleLinkingCollectionsArticleCollectionOrder;
+    ComponentArticleOrder: ComponentArticleOrder;
+    ComponentArticleSection: ResolverTypeWrapper<
+        Omit<ComponentArticleSection, 'linkedFrom'> & {
+            linkedFrom?: Maybe<ResolversTypes['ComponentArticleSectionLinkingCollections']>;
+        }
+    >;
+    ComponentArticleSectionCollection: ResolverTypeWrapper<
+        Omit<ComponentArticleSectionCollection, 'items'> & {
+            items: Array<Maybe<ResolversTypes['ComponentArticleSection']>>;
+        }
+    >;
+    ComponentArticleSectionFilter: ComponentArticleSectionFilter;
+    ComponentArticleSectionLinkingCollections: ResolverTypeWrapper<
+        Omit<ComponentArticleSectionLinkingCollections, 'entryCollection'> & {
+            entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
+        }
+    >;
+    ComponentArticleSectionLinkingCollectionsComponentArticleCollectionOrder: ComponentArticleSectionLinkingCollectionsComponentArticleCollectionOrder;
+    ComponentArticleSectionOrder: ComponentArticleSectionOrder;
+    ComponentArticleSectionsCollection: ResolverTypeWrapper<
+        Omit<ComponentArticleSectionsCollection, 'items'> & {
+            items: Array<Maybe<ResolversTypes['ComponentArticleSection']>>;
+        }
+    >;
+    ComponentArticleSectionsCollectionOrder: ComponentArticleSectionsCollectionOrder;
     ComponentBanner: ResolverTypeWrapper<
         Omit<ComponentBanner, 'link' | 'linkedFrom'> & {
             link?: Maybe<ResolversTypes['ComponentLink']>;
@@ -3730,6 +7483,42 @@ export type ResolversTypes = {
     >;
     ComponentBannerLinkingCollectionsBlockFaqCollectionOrder: ComponentBannerLinkingCollectionsBlockFaqCollectionOrder;
     ComponentBannerOrder: ComponentBannerOrder;
+    ComponentCategory: ResolverTypeWrapper<
+        Omit<ComponentCategory, 'componentsCollection' | 'linkedFrom' | 'parent'> & {
+            componentsCollection?: Maybe<ResolversTypes['ComponentCategoryComponentsCollection']>;
+            linkedFrom?: Maybe<ResolversTypes['ComponentCategoryLinkingCollections']>;
+            parent?: Maybe<ResolversTypes['Page']>;
+        }
+    >;
+    ComponentCategoryCollection: ResolverTypeWrapper<
+        Omit<ComponentCategoryCollection, 'items'> & { items: Array<Maybe<ResolversTypes['ComponentCategory']>> }
+    >;
+    ComponentCategoryComponentsCollection: ResolverTypeWrapper<
+        Omit<ComponentCategoryComponentsCollection, 'items'> & {
+            items: Array<Maybe<ResolversTypes['ComponentCategoryComponentsItem']>>;
+        }
+    >;
+    ComponentCategoryComponentsFilter: ComponentCategoryComponentsFilter;
+    ComponentCategoryComponentsItem: ResolverTypeWrapper<
+        ResolversUnionTypes<ResolversTypes>['ComponentCategoryComponentsItem']
+    >;
+    ComponentCategoryFilter: ComponentCategoryFilter;
+    ComponentCategoryLinkingCollections: ResolverTypeWrapper<
+        Omit<
+            ComponentCategoryLinkingCollections,
+            'blockArticleListCollection' | 'blockCategoryCollection' | 'blockCategoryListCollection' | 'entryCollection'
+        > & {
+            blockArticleListCollection?: Maybe<ResolversTypes['BlockArticleListCollection']>;
+            blockCategoryCollection?: Maybe<ResolversTypes['BlockCategoryCollection']>;
+            blockCategoryListCollection?: Maybe<ResolversTypes['BlockCategoryListCollection']>;
+            entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
+        }
+    >;
+    ComponentCategoryLinkingCollectionsBlockArticleListCollectionOrder: ComponentCategoryLinkingCollectionsBlockArticleListCollectionOrder;
+    ComponentCategoryLinkingCollectionsBlockCategoryCollectionOrder: ComponentCategoryLinkingCollectionsBlockCategoryCollectionOrder;
+    ComponentCategoryLinkingCollectionsBlockCategoryListCollectionOrder: ComponentCategoryLinkingCollectionsBlockCategoryListCollectionOrder;
+    ComponentCategoryLinkingCollectionsComponentArticleCollectionOrder: ComponentCategoryLinkingCollectionsComponentArticleCollectionOrder;
+    ComponentCategoryOrder: ComponentCategoryOrder;
     ComponentFaqItem: ResolverTypeWrapper<
         Omit<ComponentFaqItem, 'linkedFrom'> & {
             linkedFrom?: Maybe<ResolversTypes['ComponentFaqItemLinkingCollections']>;
@@ -3801,13 +7590,33 @@ export type ResolversTypes = {
     >;
     ComponentLinkFilter: ComponentLinkFilter;
     ComponentLinkLinkingCollections: ResolverTypeWrapper<
-        Omit<ComponentLinkLinkingCollections, 'componentBannerCollection' | 'entryCollection'> & {
+        Omit<
+            ComponentLinkLinkingCollections,
+            'blockQuickLinksCollection' | 'componentBannerCollection' | 'entryCollection'
+        > & {
+            blockQuickLinksCollection?: Maybe<ResolversTypes['BlockQuickLinksCollection']>;
             componentBannerCollection?: Maybe<ResolversTypes['ComponentBannerCollection']>;
             entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
         }
     >;
+    ComponentLinkLinkingCollectionsBlockQuickLinksCollectionOrder: ComponentLinkLinkingCollectionsBlockQuickLinksCollectionOrder;
     ComponentLinkLinkingCollectionsComponentBannerCollectionOrder: ComponentLinkLinkingCollectionsComponentBannerCollectionOrder;
     ComponentLinkOrder: ComponentLinkOrder;
+    ComponentMessageSimple: ResolverTypeWrapper<
+        Omit<ComponentMessageSimple, 'linkedFrom'> & {
+            linkedFrom?: Maybe<ResolversTypes['ComponentMessageSimpleLinkingCollections']>;
+        }
+    >;
+    ComponentMessageSimpleCollection: ResolverTypeWrapper<ComponentMessageSimpleCollection>;
+    ComponentMessageSimpleFilter: ComponentMessageSimpleFilter;
+    ComponentMessageSimpleLinkingCollections: ResolverTypeWrapper<
+        Omit<ComponentMessageSimpleLinkingCollections, 'dataErrorsCollection' | 'entryCollection'> & {
+            dataErrorsCollection?: Maybe<ResolversTypes['DataErrorsCollection']>;
+            entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
+        }
+    >;
+    ComponentMessageSimpleLinkingCollectionsDataErrorsCollectionOrder: ComponentMessageSimpleLinkingCollectionsDataErrorsCollectionOrder;
+    ComponentMessageSimpleOrder: ComponentMessageSimpleOrder;
     ComponentNoResult: ResolverTypeWrapper<
         Omit<ComponentNoResult, 'linkedFrom'> & {
             linkedFrom?: Maybe<ResolversTypes['ComponentNoResultLinkingCollections']>;
@@ -3881,12 +7690,46 @@ export type ResolversTypes = {
     >;
     ComponentTableLinkingCollectionsBlockTicketListCollectionOrder: ComponentTableLinkingCollectionsBlockTicketListCollectionOrder;
     ComponentTableOrder: ComponentTableOrder;
+    ConfigurableTexts: ResolverTypeWrapper<
+        Omit<ConfigurableTexts, 'actions' | 'dates' | 'errors' | 'linkedFrom' | 'validation'> & {
+            actions?: Maybe<ResolversTypes['DataActions']>;
+            dates?: Maybe<ResolversTypes['DataDates']>;
+            errors?: Maybe<ResolversTypes['DataErrors']>;
+            linkedFrom?: Maybe<ResolversTypes['ConfigurableTextsLinkingCollections']>;
+            validation?: Maybe<ResolversTypes['DataValidation']>;
+        }
+    >;
+    ConfigurableTextsCollection: ResolverTypeWrapper<
+        Omit<ConfigurableTextsCollection, 'items'> & { items: Array<Maybe<ResolversTypes['ConfigurableTexts']>> }
+    >;
+    ConfigurableTextsFilter: ConfigurableTextsFilter;
+    ConfigurableTextsLinkingCollections: ResolverTypeWrapper<
+        Omit<ConfigurableTextsLinkingCollections, 'entryCollection'> & {
+            entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
+        }
+    >;
+    ConfigurableTextsOrder: ConfigurableTextsOrder;
     ContentfulMetadata: ResolverTypeWrapper<ContentfulMetadata>;
     ContentfulMetadataConceptsDescendantsFilter: ContentfulMetadataConceptsDescendantsFilter;
     ContentfulMetadataConceptsFilter: ContentfulMetadataConceptsFilter;
     ContentfulMetadataFilter: ContentfulMetadataFilter;
     ContentfulMetadataTagsFilter: ContentfulMetadataTagsFilter;
     ContentfulTag: ResolverTypeWrapper<ContentfulTag>;
+    DataActions: ResolverTypeWrapper<
+        Omit<DataActions, 'linkedFrom'> & { linkedFrom?: Maybe<ResolversTypes['DataActionsLinkingCollections']> }
+    >;
+    DataActionsCollection: ResolverTypeWrapper<
+        Omit<DataActionsCollection, 'items'> & { items: Array<Maybe<ResolversTypes['DataActions']>> }
+    >;
+    DataActionsFilter: DataActionsFilter;
+    DataActionsLinkingCollections: ResolverTypeWrapper<
+        Omit<DataActionsLinkingCollections, 'configurableTextsCollection' | 'entryCollection'> & {
+            configurableTextsCollection?: Maybe<ResolversTypes['ConfigurableTextsCollection']>;
+            entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
+        }
+    >;
+    DataActionsLinkingCollectionsConfigurableTextsCollectionOrder: DataActionsLinkingCollectionsConfigurableTextsCollectionOrder;
+    DataActionsOrder: DataActionsOrder;
     DataConfigurableTexts: ResolverTypeWrapper<
         Omit<DataConfigurableTexts, 'linkedFrom'> & {
             linkedFrom?: Maybe<ResolversTypes['DataConfigurableTextsLinkingCollections']>;
@@ -3906,6 +7749,51 @@ export type ResolversTypes = {
     >;
     DataConfigurableTextsLinkingCollectionsBlockTicketListCollectionOrder: DataConfigurableTextsLinkingCollectionsBlockTicketListCollectionOrder;
     DataConfigurableTextsOrder: DataConfigurableTextsOrder;
+    DataDates: ResolverTypeWrapper<
+        Omit<DataDates, 'linkedFrom'> & { linkedFrom?: Maybe<ResolversTypes['DataDatesLinkingCollections']> }
+    >;
+    DataDatesCollection: ResolverTypeWrapper<
+        Omit<DataDatesCollection, 'items'> & { items: Array<Maybe<ResolversTypes['DataDates']>> }
+    >;
+    DataDatesFilter: DataDatesFilter;
+    DataDatesLinkingCollections: ResolverTypeWrapper<
+        Omit<DataDatesLinkingCollections, 'configurableTextsCollection' | 'entryCollection'> & {
+            configurableTextsCollection?: Maybe<ResolversTypes['ConfigurableTextsCollection']>;
+            entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
+        }
+    >;
+    DataDatesLinkingCollectionsConfigurableTextsCollectionOrder: DataDatesLinkingCollectionsConfigurableTextsCollectionOrder;
+    DataDatesOrder: DataDatesOrder;
+    DataErrors: ResolverTypeWrapper<
+        Omit<DataErrors, 'linkedFrom'> & { linkedFrom?: Maybe<ResolversTypes['DataErrorsLinkingCollections']> }
+    >;
+    DataErrorsCollection: ResolverTypeWrapper<
+        Omit<DataErrorsCollection, 'items'> & { items: Array<Maybe<ResolversTypes['DataErrors']>> }
+    >;
+    DataErrorsFilter: DataErrorsFilter;
+    DataErrorsLinkingCollections: ResolverTypeWrapper<
+        Omit<DataErrorsLinkingCollections, 'configurableTextsCollection' | 'entryCollection'> & {
+            configurableTextsCollection?: Maybe<ResolversTypes['ConfigurableTextsCollection']>;
+            entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
+        }
+    >;
+    DataErrorsLinkingCollectionsConfigurableTextsCollectionOrder: DataErrorsLinkingCollectionsConfigurableTextsCollectionOrder;
+    DataErrorsOrder: DataErrorsOrder;
+    DataValidation: ResolverTypeWrapper<
+        Omit<DataValidation, 'linkedFrom'> & { linkedFrom?: Maybe<ResolversTypes['DataValidationLinkingCollections']> }
+    >;
+    DataValidationCollection: ResolverTypeWrapper<
+        Omit<DataValidationCollection, 'items'> & { items: Array<Maybe<ResolversTypes['DataValidation']>> }
+    >;
+    DataValidationFilter: DataValidationFilter;
+    DataValidationLinkingCollections: ResolverTypeWrapper<
+        Omit<DataValidationLinkingCollections, 'configurableTextsCollection' | 'entryCollection'> & {
+            configurableTextsCollection?: Maybe<ResolversTypes['ConfigurableTextsCollection']>;
+            entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
+        }
+    >;
+    DataValidationLinkingCollectionsConfigurableTextsCollectionOrder: DataValidationLinkingCollectionsConfigurableTextsCollectionOrder;
+    DataValidationOrder: DataValidationOrder;
     DateTime: ResolverTypeWrapper<Scalars['DateTime']['output']>;
     Dimension: ResolverTypeWrapper<Scalars['Dimension']['output']>;
     Entry: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>['Entry']>;
@@ -3936,12 +7824,32 @@ export type ResolversTypes = {
     >;
     PageFilter: PageFilter;
     PageLinkingCollections: ResolverTypeWrapper<
-        Omit<PageLinkingCollections, 'componentLinkCollection' | 'entryCollection' | 'pageCollection'> & {
+        Omit<
+            PageLinkingCollections,
+            | 'articleCollection'
+            | 'blockArticleListCollection'
+            | 'blockCategoryCollection'
+            | 'blockCategoryListCollection'
+            | 'componentCategoryCollection'
+            | 'componentLinkCollection'
+            | 'entryCollection'
+            | 'pageCollection'
+        > & {
+            articleCollection?: Maybe<ResolversTypes['ArticleCollection']>;
+            blockArticleListCollection?: Maybe<ResolversTypes['BlockArticleListCollection']>;
+            blockCategoryCollection?: Maybe<ResolversTypes['BlockCategoryCollection']>;
+            blockCategoryListCollection?: Maybe<ResolversTypes['BlockCategoryListCollection']>;
+            componentCategoryCollection?: Maybe<ResolversTypes['ComponentCategoryCollection']>;
             componentLinkCollection?: Maybe<ResolversTypes['ComponentLinkCollection']>;
             entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
             pageCollection?: Maybe<ResolversTypes['PageCollection']>;
         }
     >;
+    PageLinkingCollectionsArticleCollectionOrder: PageLinkingCollectionsArticleCollectionOrder;
+    PageLinkingCollectionsBlockArticleListCollectionOrder: PageLinkingCollectionsBlockArticleListCollectionOrder;
+    PageLinkingCollectionsBlockCategoryCollectionOrder: PageLinkingCollectionsBlockCategoryCollectionOrder;
+    PageLinkingCollectionsBlockCategoryListCollectionOrder: PageLinkingCollectionsBlockCategoryListCollectionOrder;
+    PageLinkingCollectionsComponentCategoryCollectionOrder: PageLinkingCollectionsComponentCategoryCollectionOrder;
     PageLinkingCollectionsComponentLinkCollectionOrder: PageLinkingCollectionsComponentLinkCollectionOrder;
     PageLinkingCollectionsPageCollectionOrder: PageLinkingCollectionsPageCollectionOrder;
     PageOneColumnTemplate: ResolverTypeWrapper<
@@ -3970,18 +7878,23 @@ export type ResolversTypes = {
     PageOneColumnTemplateOrder: PageOneColumnTemplateOrder;
     PageOrder: PageOrder;
     PageSeo: ResolverTypeWrapper<
-        Omit<PageSeo, 'linkedFrom'> & { linkedFrom?: Maybe<ResolversTypes['PageSeoLinkingCollections']> }
+        Omit<PageSeo, 'image' | 'linkedFrom'> & {
+            image?: Maybe<ResolversTypes['Asset']>;
+            linkedFrom?: Maybe<ResolversTypes['PageSeoLinkingCollections']>;
+        }
     >;
     PageSeoCollection: ResolverTypeWrapper<
         Omit<PageSeoCollection, 'items'> & { items: Array<Maybe<ResolversTypes['PageSeo']>> }
     >;
     PageSeoFilter: PageSeoFilter;
     PageSeoLinkingCollections: ResolverTypeWrapper<
-        Omit<PageSeoLinkingCollections, 'entryCollection' | 'pageCollection'> & {
+        Omit<PageSeoLinkingCollections, 'articleCollection' | 'entryCollection' | 'pageCollection'> & {
+            articleCollection?: Maybe<ResolversTypes['ArticleCollection']>;
             entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
             pageCollection?: Maybe<ResolversTypes['PageCollection']>;
         }
     >;
+    PageSeoLinkingCollectionsArticleCollectionOrder: PageSeoLinkingCollectionsArticleCollectionOrder;
     PageSeoLinkingCollectionsPageCollectionOrder: PageSeoLinkingCollectionsPageCollectionOrder;
     PageSeoOrder: PageSeoOrder;
     Quality: ResolverTypeWrapper<Scalars['Quality']['output']>;
@@ -3990,35 +7903,146 @@ export type ResolversTypes = {
     Sys: ResolverTypeWrapper<Sys>;
     SysFilter: SysFilter;
     TaxonomyConcept: ResolverTypeWrapper<TaxonomyConcept>;
+    Theme: ResolverTypeWrapper<
+        Omit<Theme, 'linkedFrom' | 'logo'> & {
+            linkedFrom?: Maybe<ResolversTypes['ThemeLinkingCollections']>;
+            logo?: Maybe<ResolversTypes['Asset']>;
+        }
+    >;
+    ThemeCollection: ResolverTypeWrapper<
+        Omit<ThemeCollection, 'items'> & { items: Array<Maybe<ResolversTypes['Theme']>> }
+    >;
+    ThemeFilter: ThemeFilter;
+    ThemeLinkingCollections: ResolverTypeWrapper<
+        Omit<ThemeLinkingCollections, 'blockCollection' | 'entryCollection'> & {
+            blockCollection?: Maybe<ResolversTypes['BlockCollection']>;
+            entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
+        }
+    >;
+    ThemeLinkingCollectionsBlockCollectionOrder: ThemeLinkingCollectionsBlockCollectionOrder;
+    ThemeOrder: ThemeOrder;
     TimelineFilterInput: TimelineFilterInput;
     _Node: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>['_Node']>;
+    cfArticleNestedFilter: CfArticleNestedFilter;
+    cfAuthorNestedFilter: CfAuthorNestedFilter;
     cfBlockNestedFilter: CfBlockNestedFilter;
+    cfComponentArticleNestedFilter: CfComponentArticleNestedFilter;
+    cfComponentArticleSectionNestedFilter: CfComponentArticleSectionNestedFilter;
     cfComponentBannerNestedFilter: CfComponentBannerNestedFilter;
+    cfComponentCategoryNestedFilter: CfComponentCategoryNestedFilter;
     cfComponentFaqItemNestedFilter: CfComponentFaqItemNestedFilter;
     cfComponentFieldMappingNestedFilter: CfComponentFieldMappingNestedFilter;
     cfComponentKeyValueNestedFilter: CfComponentKeyValueNestedFilter;
     cfComponentLinkNestedFilter: CfComponentLinkNestedFilter;
+    cfComponentMessageSimpleNestedFilter: CfComponentMessageSimpleNestedFilter;
     cfComponentNoResultNestedFilter: CfComponentNoResultNestedFilter;
     cfComponentPaginationNestedFilter: CfComponentPaginationNestedFilter;
     cfComponentTableColumnNestedFilter: CfComponentTableColumnNestedFilter;
     cfComponentTableNestedFilter: CfComponentTableNestedFilter;
+    cfDataActionsNestedFilter: CfDataActionsNestedFilter;
     cfDataConfigurableTextsNestedFilter: CfDataConfigurableTextsNestedFilter;
+    cfDataDatesNestedFilter: CfDataDatesNestedFilter;
+    cfDataErrorsNestedFilter: CfDataErrorsNestedFilter;
+    cfDataValidationNestedFilter: CfDataValidationNestedFilter;
     cfPageNestedFilter: CfPageNestedFilter;
     cfPageOneColumnTemplateNestedFilter: CfPageOneColumnTemplateNestedFilter;
     cfPageSeoNestedFilter: CfPageSeoNestedFilter;
+    cfThemeNestedFilter: CfThemeNestedFilter;
+    cfcomponentsMultiTypeNestedFilter: CfcomponentsMultiTypeNestedFilter;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
+    Article: Omit<Article, 'content' | 'linkedFrom' | 'parent' | 'seo'> & {
+        content?: Maybe<ResolversParentTypes['ComponentArticle']>;
+        linkedFrom?: Maybe<ResolversParentTypes['ArticleLinkingCollections']>;
+        parent?: Maybe<ResolversParentTypes['Page']>;
+        seo?: Maybe<ResolversParentTypes['PageSeo']>;
+    };
+    ArticleCollection: Omit<ArticleCollection, 'items'> & { items: Array<Maybe<ResolversParentTypes['Article']>> };
+    ArticleFilter: ArticleFilter;
+    ArticleLinkingCollections: Omit<ArticleLinkingCollections, 'blockArticleListCollection' | 'entryCollection'> & {
+        blockArticleListCollection?: Maybe<ResolversParentTypes['BlockArticleListCollection']>;
+        entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
+    };
     Asset: Omit<Asset, 'linkedFrom'> & { linkedFrom?: Maybe<ResolversParentTypes['AssetLinkingCollections']> };
     AssetCollection: Omit<AssetCollection, 'items'> & { items: Array<Maybe<ResolversParentTypes['Asset']>> };
     AssetFilter: AssetFilter;
-    AssetLinkingCollections: Omit<AssetLinkingCollections, 'entryCollection'> & {
+    AssetLinkingCollections: Omit<
+        AssetLinkingCollections,
+        'authorCollection' | 'entryCollection' | 'pageSeoCollection' | 'themeCollection'
+    > & {
+        authorCollection?: Maybe<ResolversParentTypes['AuthorCollection']>;
+        entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
+        pageSeoCollection?: Maybe<ResolversParentTypes['PageSeoCollection']>;
+        themeCollection?: Maybe<ResolversParentTypes['ThemeCollection']>;
+    };
+    Author: Omit<Author, 'avatar' | 'linkedFrom'> & {
+        avatar?: Maybe<ResolversParentTypes['Asset']>;
+        linkedFrom?: Maybe<ResolversParentTypes['AuthorLinkingCollections']>;
+    };
+    AuthorCollection: Omit<AuthorCollection, 'items'> & { items: Array<Maybe<ResolversParentTypes['Author']>> };
+    AuthorFilter: AuthorFilter;
+    AuthorLinkingCollections: Omit<AuthorLinkingCollections, 'entryCollection'> & {
         entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
     };
-    Block: Omit<Block, 'content' | 'linkedFrom'> & {
+    Block: Omit<Block, 'content' | 'linkedFrom' | 'theme'> & {
         content?: Maybe<ResolversParentTypes['BlockContent']>;
         linkedFrom?: Maybe<ResolversParentTypes['BlockLinkingCollections']>;
+        theme?: Maybe<ResolversParentTypes['Theme']>;
+    };
+    BlockArticleList: Omit<BlockArticleList, 'articlesCollection' | 'category' | 'linkedFrom' | 'parent'> & {
+        articlesCollection?: Maybe<ResolversParentTypes['BlockArticleListArticlesCollection']>;
+        category?: Maybe<ResolversParentTypes['ComponentCategory']>;
+        linkedFrom?: Maybe<ResolversParentTypes['BlockArticleListLinkingCollections']>;
+        parent?: Maybe<ResolversParentTypes['Page']>;
+    };
+    BlockArticleListArticlesCollection: Omit<BlockArticleListArticlesCollection, 'items'> & {
+        items: Array<Maybe<ResolversParentTypes['Article']>>;
+    };
+    BlockArticleListCollection: Omit<BlockArticleListCollection, 'items'> & {
+        items: Array<Maybe<ResolversParentTypes['BlockArticleList']>>;
+    };
+    BlockArticleListFilter: BlockArticleListFilter;
+    BlockArticleListLinkingCollections: Omit<
+        BlockArticleListLinkingCollections,
+        'blockCollection' | 'entryCollection'
+    > & {
+        blockCollection?: Maybe<ResolversParentTypes['BlockCollection']>;
+        entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
+    };
+    BlockCategory: Omit<BlockCategory, 'category' | 'linkedFrom' | 'parent'> & {
+        category?: Maybe<ResolversParentTypes['ComponentCategory']>;
+        linkedFrom?: Maybe<ResolversParentTypes['BlockCategoryLinkingCollections']>;
+        parent?: Maybe<ResolversParentTypes['Page']>;
+    };
+    BlockCategoryCollection: Omit<BlockCategoryCollection, 'items'> & {
+        items: Array<Maybe<ResolversParentTypes['BlockCategory']>>;
+    };
+    BlockCategoryFilter: BlockCategoryFilter;
+    BlockCategoryLinkingCollections: Omit<BlockCategoryLinkingCollections, 'blockCollection' | 'entryCollection'> & {
+        blockCollection?: Maybe<ResolversParentTypes['BlockCollection']>;
+        entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
+    };
+    BlockCategoryList: Omit<BlockCategoryList, 'categoriesCollection' | 'linkedFrom' | 'parent'> & {
+        categoriesCollection?: Maybe<ResolversParentTypes['BlockCategoryListCategoriesCollection']>;
+        linkedFrom?: Maybe<ResolversParentTypes['BlockCategoryListLinkingCollections']>;
+        parent?: Maybe<ResolversParentTypes['Page']>;
+    };
+    BlockCategoryListCategoriesCollection: Omit<BlockCategoryListCategoriesCollection, 'items'> & {
+        items: Array<Maybe<ResolversParentTypes['ComponentCategory']>>;
+    };
+    BlockCategoryListCollection: Omit<BlockCategoryListCollection, 'items'> & {
+        items: Array<Maybe<ResolversParentTypes['BlockCategoryList']>>;
+    };
+    BlockCategoryListFilter: BlockCategoryListFilter;
+    BlockCategoryListLinkingCollections: Omit<
+        BlockCategoryListLinkingCollections,
+        'blockCollection' | 'componentCategoryCollection' | 'entryCollection'
+    > & {
+        blockCollection?: Maybe<ResolversParentTypes['BlockCollection']>;
+        componentCategoryCollection?: Maybe<ResolversParentTypes['ComponentCategoryCollection']>;
+        entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
     };
     BlockCollection: Omit<BlockCollection, 'items'> & { items: Array<Maybe<ResolversParentTypes['Block']>> };
     BlockContent: ResolversUnionTypes<ResolversParentTypes>['BlockContent'];
@@ -4032,14 +8056,37 @@ export type ResolversParentTypes = {
     BlockFaqItemsCollection: Omit<BlockFaqItemsCollection, 'items'> & {
         items: Array<Maybe<ResolversParentTypes['ComponentFaqItem']>>;
     };
-    BlockFaqLinkingCollections: Omit<BlockFaqLinkingCollections, 'blockCollection' | 'entryCollection'> & {
+    BlockFaqLinkingCollections: Omit<
+        BlockFaqLinkingCollections,
+        'blockCollection' | 'componentCategoryCollection' | 'entryCollection'
+    > & {
         blockCollection?: Maybe<ResolversParentTypes['BlockCollection']>;
+        componentCategoryCollection?: Maybe<ResolversParentTypes['ComponentCategoryCollection']>;
         entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
     };
     BlockFilter: BlockFilter;
     BlockLinkingCollections: Omit<BlockLinkingCollections, 'entryCollection' | 'pageOneColumnTemplateCollection'> & {
         entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
         pageOneColumnTemplateCollection?: Maybe<ResolversParentTypes['PageOneColumnTemplateCollection']>;
+    };
+    BlockQuickLinks: Omit<BlockQuickLinks, 'itemsCollection' | 'linkedFrom'> & {
+        itemsCollection?: Maybe<ResolversParentTypes['BlockQuickLinksItemsCollection']>;
+        linkedFrom?: Maybe<ResolversParentTypes['BlockQuickLinksLinkingCollections']>;
+    };
+    BlockQuickLinksCollection: Omit<BlockQuickLinksCollection, 'items'> & {
+        items: Array<Maybe<ResolversParentTypes['BlockQuickLinks']>>;
+    };
+    BlockQuickLinksFilter: BlockQuickLinksFilter;
+    BlockQuickLinksItemsCollection: Omit<BlockQuickLinksItemsCollection, 'items'> & {
+        items: Array<Maybe<ResolversParentTypes['ComponentLink']>>;
+    };
+    BlockQuickLinksLinkingCollections: Omit<
+        BlockQuickLinksLinkingCollections,
+        'blockCollection' | 'componentCategoryCollection' | 'entryCollection'
+    > & {
+        blockCollection?: Maybe<ResolversParentTypes['BlockCollection']>;
+        componentCategoryCollection?: Maybe<ResolversParentTypes['ComponentCategoryCollection']>;
+        entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
     };
     BlockTicketList: Omit<
         BlockTicketList,
@@ -4061,12 +8108,43 @@ export type ResolversParentTypes = {
     BlockTicketListFilter: BlockTicketListFilter;
     BlockTicketListLinkingCollections: Omit<
         BlockTicketListLinkingCollections,
-        'blockCollection' | 'entryCollection'
+        'blockCollection' | 'componentCategoryCollection' | 'entryCollection'
     > & {
         blockCollection?: Maybe<ResolversParentTypes['BlockCollection']>;
+        componentCategoryCollection?: Maybe<ResolversParentTypes['ComponentCategoryCollection']>;
         entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
     };
     Boolean: Scalars['Boolean']['output'];
+    ComponentArticle: Omit<ComponentArticle, 'author' | 'category' | 'linkedFrom' | 'sectionsCollection'> & {
+        author?: Maybe<ResolversParentTypes['Author']>;
+        category?: Maybe<ResolversParentTypes['ComponentCategory']>;
+        linkedFrom?: Maybe<ResolversParentTypes['ComponentArticleLinkingCollections']>;
+        sectionsCollection?: Maybe<ResolversParentTypes['ComponentArticleSectionsCollection']>;
+    };
+    ComponentArticleCollection: Omit<ComponentArticleCollection, 'items'> & {
+        items: Array<Maybe<ResolversParentTypes['ComponentArticle']>>;
+    };
+    ComponentArticleFilter: ComponentArticleFilter;
+    ComponentArticleLinkingCollections: Omit<
+        ComponentArticleLinkingCollections,
+        'articleCollection' | 'entryCollection'
+    > & {
+        articleCollection?: Maybe<ResolversParentTypes['ArticleCollection']>;
+        entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
+    };
+    ComponentArticleSection: Omit<ComponentArticleSection, 'linkedFrom'> & {
+        linkedFrom?: Maybe<ResolversParentTypes['ComponentArticleSectionLinkingCollections']>;
+    };
+    ComponentArticleSectionCollection: Omit<ComponentArticleSectionCollection, 'items'> & {
+        items: Array<Maybe<ResolversParentTypes['ComponentArticleSection']>>;
+    };
+    ComponentArticleSectionFilter: ComponentArticleSectionFilter;
+    ComponentArticleSectionLinkingCollections: Omit<ComponentArticleSectionLinkingCollections, 'entryCollection'> & {
+        entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
+    };
+    ComponentArticleSectionsCollection: Omit<ComponentArticleSectionsCollection, 'items'> & {
+        items: Array<Maybe<ResolversParentTypes['ComponentArticleSection']>>;
+    };
     ComponentBanner: Omit<ComponentBanner, 'link' | 'linkedFrom'> & {
         link?: Maybe<ResolversParentTypes['ComponentLink']>;
         linkedFrom?: Maybe<ResolversParentTypes['ComponentBannerLinkingCollections']>;
@@ -4080,6 +8158,29 @@ export type ResolversParentTypes = {
         'blockFaqCollection' | 'entryCollection'
     > & {
         blockFaqCollection?: Maybe<ResolversParentTypes['BlockFaqCollection']>;
+        entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
+    };
+    ComponentCategory: Omit<ComponentCategory, 'componentsCollection' | 'linkedFrom' | 'parent'> & {
+        componentsCollection?: Maybe<ResolversParentTypes['ComponentCategoryComponentsCollection']>;
+        linkedFrom?: Maybe<ResolversParentTypes['ComponentCategoryLinkingCollections']>;
+        parent?: Maybe<ResolversParentTypes['Page']>;
+    };
+    ComponentCategoryCollection: Omit<ComponentCategoryCollection, 'items'> & {
+        items: Array<Maybe<ResolversParentTypes['ComponentCategory']>>;
+    };
+    ComponentCategoryComponentsCollection: Omit<ComponentCategoryComponentsCollection, 'items'> & {
+        items: Array<Maybe<ResolversParentTypes['ComponentCategoryComponentsItem']>>;
+    };
+    ComponentCategoryComponentsFilter: ComponentCategoryComponentsFilter;
+    ComponentCategoryComponentsItem: ResolversUnionTypes<ResolversParentTypes>['ComponentCategoryComponentsItem'];
+    ComponentCategoryFilter: ComponentCategoryFilter;
+    ComponentCategoryLinkingCollections: Omit<
+        ComponentCategoryLinkingCollections,
+        'blockArticleListCollection' | 'blockCategoryCollection' | 'blockCategoryListCollection' | 'entryCollection'
+    > & {
+        blockArticleListCollection?: Maybe<ResolversParentTypes['BlockArticleListCollection']>;
+        blockCategoryCollection?: Maybe<ResolversParentTypes['BlockCategoryCollection']>;
+        blockCategoryListCollection?: Maybe<ResolversParentTypes['BlockCategoryListCollection']>;
         entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
     };
     ComponentFaqItem: Omit<ComponentFaqItem, 'linkedFrom'> & {
@@ -4138,9 +8239,22 @@ export type ResolversParentTypes = {
     ComponentLinkFilter: ComponentLinkFilter;
     ComponentLinkLinkingCollections: Omit<
         ComponentLinkLinkingCollections,
-        'componentBannerCollection' | 'entryCollection'
+        'blockQuickLinksCollection' | 'componentBannerCollection' | 'entryCollection'
     > & {
+        blockQuickLinksCollection?: Maybe<ResolversParentTypes['BlockQuickLinksCollection']>;
         componentBannerCollection?: Maybe<ResolversParentTypes['ComponentBannerCollection']>;
+        entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
+    };
+    ComponentMessageSimple: Omit<ComponentMessageSimple, 'linkedFrom'> & {
+        linkedFrom?: Maybe<ResolversParentTypes['ComponentMessageSimpleLinkingCollections']>;
+    };
+    ComponentMessageSimpleCollection: ComponentMessageSimpleCollection;
+    ComponentMessageSimpleFilter: ComponentMessageSimpleFilter;
+    ComponentMessageSimpleLinkingCollections: Omit<
+        ComponentMessageSimpleLinkingCollections,
+        'dataErrorsCollection' | 'entryCollection'
+    > & {
+        dataErrorsCollection?: Maybe<ResolversParentTypes['DataErrorsCollection']>;
         entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
     };
     ComponentNoResult: Omit<ComponentNoResult, 'linkedFrom'> & {
@@ -4203,12 +8317,40 @@ export type ResolversParentTypes = {
         blockTicketListCollection?: Maybe<ResolversParentTypes['BlockTicketListCollection']>;
         entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
     };
+    ConfigurableTexts: Omit<ConfigurableTexts, 'actions' | 'dates' | 'errors' | 'linkedFrom' | 'validation'> & {
+        actions?: Maybe<ResolversParentTypes['DataActions']>;
+        dates?: Maybe<ResolversParentTypes['DataDates']>;
+        errors?: Maybe<ResolversParentTypes['DataErrors']>;
+        linkedFrom?: Maybe<ResolversParentTypes['ConfigurableTextsLinkingCollections']>;
+        validation?: Maybe<ResolversParentTypes['DataValidation']>;
+    };
+    ConfigurableTextsCollection: Omit<ConfigurableTextsCollection, 'items'> & {
+        items: Array<Maybe<ResolversParentTypes['ConfigurableTexts']>>;
+    };
+    ConfigurableTextsFilter: ConfigurableTextsFilter;
+    ConfigurableTextsLinkingCollections: Omit<ConfigurableTextsLinkingCollections, 'entryCollection'> & {
+        entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
+    };
     ContentfulMetadata: ContentfulMetadata;
     ContentfulMetadataConceptsDescendantsFilter: ContentfulMetadataConceptsDescendantsFilter;
     ContentfulMetadataConceptsFilter: ContentfulMetadataConceptsFilter;
     ContentfulMetadataFilter: ContentfulMetadataFilter;
     ContentfulMetadataTagsFilter: ContentfulMetadataTagsFilter;
     ContentfulTag: ContentfulTag;
+    DataActions: Omit<DataActions, 'linkedFrom'> & {
+        linkedFrom?: Maybe<ResolversParentTypes['DataActionsLinkingCollections']>;
+    };
+    DataActionsCollection: Omit<DataActionsCollection, 'items'> & {
+        items: Array<Maybe<ResolversParentTypes['DataActions']>>;
+    };
+    DataActionsFilter: DataActionsFilter;
+    DataActionsLinkingCollections: Omit<
+        DataActionsLinkingCollections,
+        'configurableTextsCollection' | 'entryCollection'
+    > & {
+        configurableTextsCollection?: Maybe<ResolversParentTypes['ConfigurableTextsCollection']>;
+        entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
+    };
     DataConfigurableTexts: Omit<DataConfigurableTexts, 'linkedFrom'> & {
         linkedFrom?: Maybe<ResolversParentTypes['DataConfigurableTextsLinkingCollections']>;
     };
@@ -4221,6 +8363,48 @@ export type ResolversParentTypes = {
         'blockTicketListCollection' | 'entryCollection'
     > & {
         blockTicketListCollection?: Maybe<ResolversParentTypes['BlockTicketListCollection']>;
+        entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
+    };
+    DataDates: Omit<DataDates, 'linkedFrom'> & {
+        linkedFrom?: Maybe<ResolversParentTypes['DataDatesLinkingCollections']>;
+    };
+    DataDatesCollection: Omit<DataDatesCollection, 'items'> & {
+        items: Array<Maybe<ResolversParentTypes['DataDates']>>;
+    };
+    DataDatesFilter: DataDatesFilter;
+    DataDatesLinkingCollections: Omit<
+        DataDatesLinkingCollections,
+        'configurableTextsCollection' | 'entryCollection'
+    > & {
+        configurableTextsCollection?: Maybe<ResolversParentTypes['ConfigurableTextsCollection']>;
+        entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
+    };
+    DataErrors: Omit<DataErrors, 'linkedFrom'> & {
+        linkedFrom?: Maybe<ResolversParentTypes['DataErrorsLinkingCollections']>;
+    };
+    DataErrorsCollection: Omit<DataErrorsCollection, 'items'> & {
+        items: Array<Maybe<ResolversParentTypes['DataErrors']>>;
+    };
+    DataErrorsFilter: DataErrorsFilter;
+    DataErrorsLinkingCollections: Omit<
+        DataErrorsLinkingCollections,
+        'configurableTextsCollection' | 'entryCollection'
+    > & {
+        configurableTextsCollection?: Maybe<ResolversParentTypes['ConfigurableTextsCollection']>;
+        entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
+    };
+    DataValidation: Omit<DataValidation, 'linkedFrom'> & {
+        linkedFrom?: Maybe<ResolversParentTypes['DataValidationLinkingCollections']>;
+    };
+    DataValidationCollection: Omit<DataValidationCollection, 'items'> & {
+        items: Array<Maybe<ResolversParentTypes['DataValidation']>>;
+    };
+    DataValidationFilter: DataValidationFilter;
+    DataValidationLinkingCollections: Omit<
+        DataValidationLinkingCollections,
+        'configurableTextsCollection' | 'entryCollection'
+    > & {
+        configurableTextsCollection?: Maybe<ResolversParentTypes['ConfigurableTextsCollection']>;
         entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
     };
     DateTime: Scalars['DateTime']['output'];
@@ -4244,8 +8428,20 @@ export type ResolversParentTypes = {
     PageFilter: PageFilter;
     PageLinkingCollections: Omit<
         PageLinkingCollections,
-        'componentLinkCollection' | 'entryCollection' | 'pageCollection'
+        | 'articleCollection'
+        | 'blockArticleListCollection'
+        | 'blockCategoryCollection'
+        | 'blockCategoryListCollection'
+        | 'componentCategoryCollection'
+        | 'componentLinkCollection'
+        | 'entryCollection'
+        | 'pageCollection'
     > & {
+        articleCollection?: Maybe<ResolversParentTypes['ArticleCollection']>;
+        blockArticleListCollection?: Maybe<ResolversParentTypes['BlockArticleListCollection']>;
+        blockCategoryCollection?: Maybe<ResolversParentTypes['BlockCategoryCollection']>;
+        blockCategoryListCollection?: Maybe<ResolversParentTypes['BlockCategoryListCollection']>;
+        componentCategoryCollection?: Maybe<ResolversParentTypes['ComponentCategoryCollection']>;
         componentLinkCollection?: Maybe<ResolversParentTypes['ComponentLinkCollection']>;
         entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
         pageCollection?: Maybe<ResolversParentTypes['PageCollection']>;
@@ -4268,10 +8464,17 @@ export type ResolversParentTypes = {
     PageOneColumnTemplateMainSlotCollection: Omit<PageOneColumnTemplateMainSlotCollection, 'items'> & {
         items: Array<Maybe<ResolversParentTypes['Block']>>;
     };
-    PageSeo: Omit<PageSeo, 'linkedFrom'> & { linkedFrom?: Maybe<ResolversParentTypes['PageSeoLinkingCollections']> };
+    PageSeo: Omit<PageSeo, 'image' | 'linkedFrom'> & {
+        image?: Maybe<ResolversParentTypes['Asset']>;
+        linkedFrom?: Maybe<ResolversParentTypes['PageSeoLinkingCollections']>;
+    };
     PageSeoCollection: Omit<PageSeoCollection, 'items'> & { items: Array<Maybe<ResolversParentTypes['PageSeo']>> };
     PageSeoFilter: PageSeoFilter;
-    PageSeoLinkingCollections: Omit<PageSeoLinkingCollections, 'entryCollection' | 'pageCollection'> & {
+    PageSeoLinkingCollections: Omit<
+        PageSeoLinkingCollections,
+        'articleCollection' | 'entryCollection' | 'pageCollection'
+    > & {
+        articleCollection?: Maybe<ResolversParentTypes['ArticleCollection']>;
         entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
         pageCollection?: Maybe<ResolversParentTypes['PageCollection']>;
     };
@@ -4281,22 +8484,44 @@ export type ResolversParentTypes = {
     Sys: Sys;
     SysFilter: SysFilter;
     TaxonomyConcept: TaxonomyConcept;
+    Theme: Omit<Theme, 'linkedFrom' | 'logo'> & {
+        linkedFrom?: Maybe<ResolversParentTypes['ThemeLinkingCollections']>;
+        logo?: Maybe<ResolversParentTypes['Asset']>;
+    };
+    ThemeCollection: Omit<ThemeCollection, 'items'> & { items: Array<Maybe<ResolversParentTypes['Theme']>> };
+    ThemeFilter: ThemeFilter;
+    ThemeLinkingCollections: Omit<ThemeLinkingCollections, 'blockCollection' | 'entryCollection'> & {
+        blockCollection?: Maybe<ResolversParentTypes['BlockCollection']>;
+        entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
+    };
     TimelineFilterInput: TimelineFilterInput;
     _Node: ResolversInterfaceTypes<ResolversParentTypes>['_Node'];
+    cfArticleNestedFilter: CfArticleNestedFilter;
+    cfAuthorNestedFilter: CfAuthorNestedFilter;
     cfBlockNestedFilter: CfBlockNestedFilter;
+    cfComponentArticleNestedFilter: CfComponentArticleNestedFilter;
+    cfComponentArticleSectionNestedFilter: CfComponentArticleSectionNestedFilter;
     cfComponentBannerNestedFilter: CfComponentBannerNestedFilter;
+    cfComponentCategoryNestedFilter: CfComponentCategoryNestedFilter;
     cfComponentFaqItemNestedFilter: CfComponentFaqItemNestedFilter;
     cfComponentFieldMappingNestedFilter: CfComponentFieldMappingNestedFilter;
     cfComponentKeyValueNestedFilter: CfComponentKeyValueNestedFilter;
     cfComponentLinkNestedFilter: CfComponentLinkNestedFilter;
+    cfComponentMessageSimpleNestedFilter: CfComponentMessageSimpleNestedFilter;
     cfComponentNoResultNestedFilter: CfComponentNoResultNestedFilter;
     cfComponentPaginationNestedFilter: CfComponentPaginationNestedFilter;
     cfComponentTableColumnNestedFilter: CfComponentTableColumnNestedFilter;
     cfComponentTableNestedFilter: CfComponentTableNestedFilter;
+    cfDataActionsNestedFilter: CfDataActionsNestedFilter;
     cfDataConfigurableTextsNestedFilter: CfDataConfigurableTextsNestedFilter;
+    cfDataDatesNestedFilter: CfDataDatesNestedFilter;
+    cfDataErrorsNestedFilter: CfDataErrorsNestedFilter;
+    cfDataValidationNestedFilter: CfDataValidationNestedFilter;
     cfPageNestedFilter: CfPageNestedFilter;
     cfPageOneColumnTemplateNestedFilter: CfPageOneColumnTemplateNestedFilter;
     cfPageSeoNestedFilter: CfPageSeoNestedFilter;
+    cfThemeNestedFilter: CfThemeNestedFilter;
+    cfcomponentsMultiTypeNestedFilter: CfcomponentsMultiTypeNestedFilter;
 };
 
 export type ContentSourceMapsDirectiveArgs = {};
@@ -4387,6 +8612,57 @@ export type TypeIdentifierDirectiveResolver<
     Args = TypeIdentifierDirectiveArgs,
 > = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
+export type ArticleResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['Article'] = ResolversParentTypes['Article'],
+> = {
+    _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    content?: Resolver<Maybe<ResolversTypes['ComponentArticle']>, ParentType, ContextType, Partial<ArticleContentArgs>>;
+    contentfulMetadata?: Resolver<ResolversTypes['ContentfulMetadata'], ParentType, ContextType>;
+    linkedFrom?: Resolver<
+        Maybe<ResolversTypes['ArticleLinkingCollections']>,
+        ParentType,
+        ContextType,
+        Partial<ArticleLinkedFromArgs>
+    >;
+    parent?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType, Partial<ArticleParentArgs>>;
+    seo?: Resolver<Maybe<ResolversTypes['PageSeo']>, ParentType, ContextType, Partial<ArticleSeoArgs>>;
+    slug?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<ArticleSlugArgs>>;
+    sys?: Resolver<ResolversTypes['Sys'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ArticleCollectionResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['ArticleCollection'] = ResolversParentTypes['ArticleCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['Article']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ArticleLinkingCollectionsResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ArticleLinkingCollections'] = ResolversParentTypes['ArticleLinkingCollections'],
+> = {
+    blockArticleListCollection?: Resolver<
+        Maybe<ResolversTypes['BlockArticleListCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ArticleLinkingCollectionsBlockArticleListCollectionArgs, 'limit' | 'skip'>
+    >;
+    entryCollection?: Resolver<
+        Maybe<ResolversTypes['EntryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ArticleLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
+    >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type AssetResolvers<
     ContextType = any,
     ParentType extends ResolversParentTypes['Asset'] = ResolversParentTypes['Asset'],
@@ -4426,11 +8702,79 @@ export type AssetLinkingCollectionsResolvers<
     ParentType extends
         ResolversParentTypes['AssetLinkingCollections'] = ResolversParentTypes['AssetLinkingCollections'],
 > = {
+    authorCollection?: Resolver<
+        Maybe<ResolversTypes['AuthorCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<AssetLinkingCollectionsAuthorCollectionArgs, 'limit' | 'skip'>
+    >;
     entryCollection?: Resolver<
         Maybe<ResolversTypes['EntryCollection']>,
         ParentType,
         ContextType,
         RequireFields<AssetLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
+    >;
+    pageSeoCollection?: Resolver<
+        Maybe<ResolversTypes['PageSeoCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<AssetLinkingCollectionsPageSeoCollectionArgs, 'limit' | 'skip'>
+    >;
+    themeCollection?: Resolver<
+        Maybe<ResolversTypes['ThemeCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<AssetLinkingCollectionsThemeCollectionArgs, 'limit' | 'skip'>
+    >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type AuthorResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['Author'] = ResolversParentTypes['Author'],
+> = {
+    _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    avatar?: Resolver<Maybe<ResolversTypes['Asset']>, ParentType, ContextType, Partial<AuthorAvatarArgs>>;
+    contentfulMetadata?: Resolver<ResolversTypes['ContentfulMetadata'], ParentType, ContextType>;
+    linkedFrom?: Resolver<
+        Maybe<ResolversTypes['AuthorLinkingCollections']>,
+        ParentType,
+        ContextType,
+        Partial<AuthorLinkedFromArgs>
+    >;
+    name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<AuthorNameArgs>>;
+    position?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<AuthorPositionArgs>>;
+    sys?: Resolver<ResolversTypes['Sys'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type AuthorCollectionResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['AuthorCollection'] = ResolversParentTypes['AuthorCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['Author']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type AuthorLinkingCollectionsResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['AuthorLinkingCollections'] = ResolversParentTypes['AuthorLinkingCollections'],
+> = {
+    componentArticleCollection?: Resolver<
+        Maybe<ResolversTypes['ComponentArticleCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<AuthorLinkingCollectionsComponentArticleCollectionArgs, 'limit' | 'skip'>
+    >;
+    entryCollection?: Resolver<
+        Maybe<ResolversTypes['EntryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<AuthorLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -4440,6 +8784,7 @@ export type BlockResolvers<
     ParentType extends ResolversParentTypes['Block'] = ResolversParentTypes['Block'],
 > = {
     _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    background?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<BlockBackgroundArgs>>;
     content?: Resolver<Maybe<ResolversTypes['BlockContent']>, ParentType, ContextType, Partial<BlockContentArgs>>;
     contentfulMetadata?: Resolver<ResolversTypes['ContentfulMetadata'], ParentType, ContextType>;
     linkedFrom?: Resolver<
@@ -4451,6 +8796,230 @@ export type BlockResolvers<
     name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<BlockNameArgs>>;
     spacing?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<BlockSpacingArgs>>;
     sys?: Resolver<ResolversTypes['Sys'], ParentType, ContextType>;
+    theme?: Resolver<Maybe<ResolversTypes['Theme']>, ParentType, ContextType, Partial<BlockThemeArgs>>;
+    variant?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<BlockVariantArgs>>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type BlockArticleListResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['BlockArticleList'] = ResolversParentTypes['BlockArticleList'],
+> = {
+    _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    articlesCollection?: Resolver<
+        Maybe<ResolversTypes['BlockArticleListArticlesCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<BlockArticleListArticlesCollectionArgs, 'limit' | 'skip'>
+    >;
+    articlesToShow?: Resolver<
+        Maybe<ResolversTypes['Int']>,
+        ParentType,
+        ContextType,
+        Partial<BlockArticleListArticlesToShowArgs>
+    >;
+    category?: Resolver<
+        Maybe<ResolversTypes['ComponentCategory']>,
+        ParentType,
+        ContextType,
+        Partial<BlockArticleListCategoryArgs>
+    >;
+    contentfulMetadata?: Resolver<ResolversTypes['ContentfulMetadata'], ParentType, ContextType>;
+    description?: Resolver<
+        Maybe<ResolversTypes['String']>,
+        ParentType,
+        ContextType,
+        Partial<BlockArticleListDescriptionArgs>
+    >;
+    linkedFrom?: Resolver<
+        Maybe<ResolversTypes['BlockArticleListLinkingCollections']>,
+        ParentType,
+        ContextType,
+        Partial<BlockArticleListLinkedFromArgs>
+    >;
+    parent?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType, Partial<BlockArticleListParentArgs>>;
+    sys?: Resolver<ResolversTypes['Sys'], ParentType, ContextType>;
+    title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<BlockArticleListTitleArgs>>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type BlockArticleListArticlesCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['BlockArticleListArticlesCollection'] = ResolversParentTypes['BlockArticleListArticlesCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['Article']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type BlockArticleListCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['BlockArticleListCollection'] = ResolversParentTypes['BlockArticleListCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['BlockArticleList']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type BlockArticleListLinkingCollectionsResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['BlockArticleListLinkingCollections'] = ResolversParentTypes['BlockArticleListLinkingCollections'],
+> = {
+    blockCollection?: Resolver<
+        Maybe<ResolversTypes['BlockCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<BlockArticleListLinkingCollectionsBlockCollectionArgs, 'limit' | 'skip'>
+    >;
+    entryCollection?: Resolver<
+        Maybe<ResolversTypes['EntryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<BlockArticleListLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
+    >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type BlockCategoryResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['BlockCategory'] = ResolversParentTypes['BlockCategory'],
+> = {
+    _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    category?: Resolver<
+        Maybe<ResolversTypes['ComponentCategory']>,
+        ParentType,
+        ContextType,
+        Partial<BlockCategoryCategoryArgs>
+    >;
+    contentfulMetadata?: Resolver<ResolversTypes['ContentfulMetadata'], ParentType, ContextType>;
+    linkedFrom?: Resolver<
+        Maybe<ResolversTypes['BlockCategoryLinkingCollections']>,
+        ParentType,
+        ContextType,
+        Partial<BlockCategoryLinkedFromArgs>
+    >;
+    name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<BlockCategoryNameArgs>>;
+    parent?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType, Partial<BlockCategoryParentArgs>>;
+    sys?: Resolver<ResolversTypes['Sys'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type BlockCategoryCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['BlockCategoryCollection'] = ResolversParentTypes['BlockCategoryCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['BlockCategory']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type BlockCategoryLinkingCollectionsResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['BlockCategoryLinkingCollections'] = ResolversParentTypes['BlockCategoryLinkingCollections'],
+> = {
+    blockCollection?: Resolver<
+        Maybe<ResolversTypes['BlockCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<BlockCategoryLinkingCollectionsBlockCollectionArgs, 'limit' | 'skip'>
+    >;
+    entryCollection?: Resolver<
+        Maybe<ResolversTypes['EntryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<BlockCategoryLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
+    >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type BlockCategoryListResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['BlockCategoryList'] = ResolversParentTypes['BlockCategoryList'],
+> = {
+    _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    categoriesCollection?: Resolver<
+        Maybe<ResolversTypes['BlockCategoryListCategoriesCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<BlockCategoryListCategoriesCollectionArgs, 'limit' | 'skip'>
+    >;
+    contentfulMetadata?: Resolver<ResolversTypes['ContentfulMetadata'], ParentType, ContextType>;
+    description?: Resolver<
+        Maybe<ResolversTypes['String']>,
+        ParentType,
+        ContextType,
+        Partial<BlockCategoryListDescriptionArgs>
+    >;
+    linkedFrom?: Resolver<
+        Maybe<ResolversTypes['BlockCategoryListLinkingCollections']>,
+        ParentType,
+        ContextType,
+        Partial<BlockCategoryListLinkedFromArgs>
+    >;
+    parent?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType, Partial<BlockCategoryListParentArgs>>;
+    sys?: Resolver<ResolversTypes['Sys'], ParentType, ContextType>;
+    title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<BlockCategoryListTitleArgs>>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type BlockCategoryListCategoriesCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['BlockCategoryListCategoriesCollection'] = ResolversParentTypes['BlockCategoryListCategoriesCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['ComponentCategory']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type BlockCategoryListCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['BlockCategoryListCollection'] = ResolversParentTypes['BlockCategoryListCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['BlockCategoryList']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type BlockCategoryListLinkingCollectionsResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['BlockCategoryListLinkingCollections'] = ResolversParentTypes['BlockCategoryListLinkingCollections'],
+> = {
+    blockCollection?: Resolver<
+        Maybe<ResolversTypes['BlockCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<BlockCategoryListLinkingCollectionsBlockCollectionArgs, 'limit' | 'skip'>
+    >;
+    componentCategoryCollection?: Resolver<
+        Maybe<ResolversTypes['ComponentCategoryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<BlockCategoryListLinkingCollectionsComponentCategoryCollectionArgs, 'limit' | 'skip'>
+    >;
+    entryCollection?: Resolver<
+        Maybe<ResolversTypes['EntryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<BlockCategoryListLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
+    >;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -4469,7 +9038,11 @@ export type BlockContentResolvers<
     ContextType = any,
     ParentType extends ResolversParentTypes['BlockContent'] = ResolversParentTypes['BlockContent'],
 > = {
-    __resolveType: TypeResolveFn<'BlockFaq' | 'BlockTicketList', ParentType, ContextType>;
+    __resolveType: TypeResolveFn<
+        'BlockArticleList' | 'BlockCategory' | 'BlockCategoryList' | 'BlockFaq' | 'BlockQuickLinks' | 'BlockTicketList',
+        ParentType,
+        ContextType
+    >;
 };
 
 export type BlockFaqResolvers<
@@ -4531,6 +9104,12 @@ export type BlockFaqLinkingCollectionsResolvers<
         ContextType,
         RequireFields<BlockFaqLinkingCollectionsBlockCollectionArgs, 'limit' | 'skip'>
     >;
+    componentCategoryCollection?: Resolver<
+        Maybe<ResolversTypes['ComponentCategoryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<BlockFaqLinkingCollectionsComponentCategoryCollectionArgs, 'limit' | 'skip'>
+    >;
     entryCollection?: Resolver<
         Maybe<ResolversTypes['EntryCollection']>,
         ParentType,
@@ -4556,6 +9135,85 @@ export type BlockLinkingCollectionsResolvers<
         ParentType,
         ContextType,
         RequireFields<BlockLinkingCollectionsPageOneColumnTemplateCollectionArgs, 'limit' | 'skip'>
+    >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type BlockQuickLinksResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['BlockQuickLinks'] = ResolversParentTypes['BlockQuickLinks'],
+> = {
+    _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    contentfulMetadata?: Resolver<ResolversTypes['ContentfulMetadata'], ParentType, ContextType>;
+    description?: Resolver<
+        Maybe<ResolversTypes['String']>,
+        ParentType,
+        ContextType,
+        Partial<BlockQuickLinksDescriptionArgs>
+    >;
+    itemsCollection?: Resolver<
+        Maybe<ResolversTypes['BlockQuickLinksItemsCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<BlockQuickLinksItemsCollectionArgs, 'limit' | 'skip'>
+    >;
+    linkedFrom?: Resolver<
+        Maybe<ResolversTypes['BlockQuickLinksLinkingCollections']>,
+        ParentType,
+        ContextType,
+        Partial<BlockQuickLinksLinkedFromArgs>
+    >;
+    sys?: Resolver<ResolversTypes['Sys'], ParentType, ContextType>;
+    title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<BlockQuickLinksTitleArgs>>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type BlockQuickLinksCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['BlockQuickLinksCollection'] = ResolversParentTypes['BlockQuickLinksCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['BlockQuickLinks']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type BlockQuickLinksItemsCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['BlockQuickLinksItemsCollection'] = ResolversParentTypes['BlockQuickLinksItemsCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['ComponentLink']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type BlockQuickLinksLinkingCollectionsResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['BlockQuickLinksLinkingCollections'] = ResolversParentTypes['BlockQuickLinksLinkingCollections'],
+> = {
+    blockCollection?: Resolver<
+        Maybe<ResolversTypes['BlockCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<BlockQuickLinksLinkingCollectionsBlockCollectionArgs, 'limit' | 'skip'>
+    >;
+    componentCategoryCollection?: Resolver<
+        Maybe<ResolversTypes['ComponentCategoryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<BlockQuickLinksLinkingCollectionsComponentCategoryCollectionArgs, 'limit' | 'skip'>
+    >;
+    entryCollection?: Resolver<
+        Maybe<ResolversTypes['EntryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<BlockQuickLinksLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -4649,12 +9307,153 @@ export type BlockTicketListLinkingCollectionsResolvers<
         ContextType,
         RequireFields<BlockTicketListLinkingCollectionsBlockCollectionArgs, 'limit' | 'skip'>
     >;
+    componentCategoryCollection?: Resolver<
+        Maybe<ResolversTypes['ComponentCategoryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<BlockTicketListLinkingCollectionsComponentCategoryCollectionArgs, 'limit' | 'skip'>
+    >;
     entryCollection?: Resolver<
         Maybe<ResolversTypes['EntryCollection']>,
         ParentType,
         ContextType,
         RequireFields<BlockTicketListLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentArticleResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['ComponentArticle'] = ResolversParentTypes['ComponentArticle'],
+> = {
+    _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    author?: Resolver<Maybe<ResolversTypes['Author']>, ParentType, ContextType, Partial<ComponentArticleAuthorArgs>>;
+    category?: Resolver<
+        Maybe<ResolversTypes['ComponentCategory']>,
+        ParentType,
+        ContextType,
+        Partial<ComponentArticleCategoryArgs>
+    >;
+    contentfulMetadata?: Resolver<ResolversTypes['ContentfulMetadata'], ParentType, ContextType>;
+    linkedFrom?: Resolver<
+        Maybe<ResolversTypes['ComponentArticleLinkingCollections']>,
+        ParentType,
+        ContextType,
+        Partial<ComponentArticleLinkedFromArgs>
+    >;
+    name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<ComponentArticleNameArgs>>;
+    sectionsCollection?: Resolver<
+        Maybe<ResolversTypes['ComponentArticleSectionsCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentArticleSectionsCollectionArgs, 'limit' | 'skip'>
+    >;
+    sys?: Resolver<ResolversTypes['Sys'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentArticleCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentArticleCollection'] = ResolversParentTypes['ComponentArticleCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['ComponentArticle']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentArticleLinkingCollectionsResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentArticleLinkingCollections'] = ResolversParentTypes['ComponentArticleLinkingCollections'],
+> = {
+    articleCollection?: Resolver<
+        Maybe<ResolversTypes['ArticleCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentArticleLinkingCollectionsArticleCollectionArgs, 'limit' | 'skip'>
+    >;
+    entryCollection?: Resolver<
+        Maybe<ResolversTypes['EntryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentArticleLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
+    >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentArticleSectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentArticleSection'] = ResolversParentTypes['ComponentArticleSection'],
+> = {
+    _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    content?: Resolver<
+        Maybe<ResolversTypes['String']>,
+        ParentType,
+        ContextType,
+        Partial<ComponentArticleSectionContentArgs>
+    >;
+    contentfulMetadata?: Resolver<ResolversTypes['ContentfulMetadata'], ParentType, ContextType>;
+    linkedFrom?: Resolver<
+        Maybe<ResolversTypes['ComponentArticleSectionLinkingCollections']>,
+        ParentType,
+        ContextType,
+        Partial<ComponentArticleSectionLinkedFromArgs>
+    >;
+    sys?: Resolver<ResolversTypes['Sys'], ParentType, ContextType>;
+    title?: Resolver<
+        Maybe<ResolversTypes['String']>,
+        ParentType,
+        ContextType,
+        Partial<ComponentArticleSectionTitleArgs>
+    >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentArticleSectionCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentArticleSectionCollection'] = ResolversParentTypes['ComponentArticleSectionCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['ComponentArticleSection']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentArticleSectionLinkingCollectionsResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentArticleSectionLinkingCollections'] = ResolversParentTypes['ComponentArticleSectionLinkingCollections'],
+> = {
+    componentArticleCollection?: Resolver<
+        Maybe<ResolversTypes['ComponentArticleCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentArticleSectionLinkingCollectionsComponentArticleCollectionArgs, 'limit' | 'skip'>
+    >;
+    entryCollection?: Resolver<
+        Maybe<ResolversTypes['EntryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentArticleSectionLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
+    >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentArticleSectionsCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentArticleSectionsCollection'] = ResolversParentTypes['ComponentArticleSectionsCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['ComponentArticleSection']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -4710,6 +9509,112 @@ export type ComponentBannerLinkingCollectionsResolvers<
         ParentType,
         ContextType,
         RequireFields<ComponentBannerLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
+    >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentCategoryResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['ComponentCategory'] = ResolversParentTypes['ComponentCategory'],
+> = {
+    _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    componentsCollection?: Resolver<
+        Maybe<ResolversTypes['ComponentCategoryComponentsCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentCategoryComponentsCollectionArgs, 'limit' | 'skip'>
+    >;
+    contentfulMetadata?: Resolver<ResolversTypes['ContentfulMetadata'], ParentType, ContextType>;
+    description?: Resolver<
+        Maybe<ResolversTypes['String']>,
+        ParentType,
+        ContextType,
+        Partial<ComponentCategoryDescriptionArgs>
+    >;
+    icon?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<ComponentCategoryIconArgs>>;
+    linkedFrom?: Resolver<
+        Maybe<ResolversTypes['ComponentCategoryLinkingCollections']>,
+        ParentType,
+        ContextType,
+        Partial<ComponentCategoryLinkedFromArgs>
+    >;
+    name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<ComponentCategoryNameArgs>>;
+    parent?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType, Partial<ComponentCategoryParentArgs>>;
+    slug?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<ComponentCategorySlugArgs>>;
+    sys?: Resolver<ResolversTypes['Sys'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentCategoryCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentCategoryCollection'] = ResolversParentTypes['ComponentCategoryCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['ComponentCategory']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentCategoryComponentsCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentCategoryComponentsCollection'] = ResolversParentTypes['ComponentCategoryComponentsCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['ComponentCategoryComponentsItem']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentCategoryComponentsItemResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentCategoryComponentsItem'] = ResolversParentTypes['ComponentCategoryComponentsItem'],
+> = {
+    __resolveType: TypeResolveFn<
+        'BlockCategoryList' | 'BlockFaq' | 'BlockQuickLinks' | 'BlockTicketList',
+        ParentType,
+        ContextType
+    >;
+};
+
+export type ComponentCategoryLinkingCollectionsResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentCategoryLinkingCollections'] = ResolversParentTypes['ComponentCategoryLinkingCollections'],
+> = {
+    blockArticleListCollection?: Resolver<
+        Maybe<ResolversTypes['BlockArticleListCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentCategoryLinkingCollectionsBlockArticleListCollectionArgs, 'limit' | 'skip'>
+    >;
+    blockCategoryCollection?: Resolver<
+        Maybe<ResolversTypes['BlockCategoryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentCategoryLinkingCollectionsBlockCategoryCollectionArgs, 'limit' | 'skip'>
+    >;
+    blockCategoryListCollection?: Resolver<
+        Maybe<ResolversTypes['BlockCategoryListCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentCategoryLinkingCollectionsBlockCategoryListCollectionArgs, 'limit' | 'skip'>
+    >;
+    componentArticleCollection?: Resolver<
+        Maybe<ResolversTypes['ComponentArticleCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentCategoryLinkingCollectionsComponentArticleCollectionArgs, 'limit' | 'skip'>
+    >;
+    entryCollection?: Resolver<
+        Maybe<ResolversTypes['EntryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentCategoryLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -4887,6 +9792,7 @@ export type ComponentLinkResolvers<
 > = {
     _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     contentfulMetadata?: Resolver<ResolversTypes['ContentfulMetadata'], ParentType, ContextType>;
+    icon?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<ComponentLinkIconArgs>>;
     label?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<ComponentLinkLabelArgs>>;
     linkedFrom?: Resolver<
         Maybe<ResolversTypes['ComponentLinkLinkingCollections']>,
@@ -4917,6 +9823,12 @@ export type ComponentLinkLinkingCollectionsResolvers<
     ParentType extends
         ResolversParentTypes['ComponentLinkLinkingCollections'] = ResolversParentTypes['ComponentLinkLinkingCollections'],
 > = {
+    blockQuickLinksCollection?: Resolver<
+        Maybe<ResolversTypes['BlockQuickLinksCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentLinkLinkingCollectionsBlockQuickLinksCollectionArgs, 'limit' | 'skip'>
+    >;
     componentBannerCollection?: Resolver<
         Maybe<ResolversTypes['ComponentBannerCollection']>,
         ParentType,
@@ -4928,6 +9840,66 @@ export type ComponentLinkLinkingCollectionsResolvers<
         ParentType,
         ContextType,
         RequireFields<ComponentLinkLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
+    >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentMessageSimpleResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['ComponentMessageSimple'] = ResolversParentTypes['ComponentMessageSimple'],
+> = {
+    _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    content?: Resolver<
+        Maybe<ResolversTypes['String']>,
+        ParentType,
+        ContextType,
+        Partial<ComponentMessageSimpleContentArgs>
+    >;
+    contentfulMetadata?: Resolver<ResolversTypes['ContentfulMetadata'], ParentType, ContextType>;
+    linkedFrom?: Resolver<
+        Maybe<ResolversTypes['ComponentMessageSimpleLinkingCollections']>,
+        ParentType,
+        ContextType,
+        Partial<ComponentMessageSimpleLinkedFromArgs>
+    >;
+    sys?: Resolver<ResolversTypes['Sys'], ParentType, ContextType>;
+    title?: Resolver<
+        Maybe<ResolversTypes['String']>,
+        ParentType,
+        ContextType,
+        Partial<ComponentMessageSimpleTitleArgs>
+    >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentMessageSimpleCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentMessageSimpleCollection'] = ResolversParentTypes['ComponentMessageSimpleCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['ComponentMessageSimple']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentMessageSimpleLinkingCollectionsResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentMessageSimpleLinkingCollections'] = ResolversParentTypes['ComponentMessageSimpleLinkingCollections'],
+> = {
+    dataErrorsCollection?: Resolver<
+        Maybe<ResolversTypes['DataErrorsCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentMessageSimpleLinkingCollectionsDataErrorsCollectionArgs, 'limit' | 'skip'>
+    >;
+    entryCollection?: Resolver<
+        Maybe<ResolversTypes['EntryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentMessageSimpleLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -5188,6 +10160,68 @@ export type ComponentTableLinkingCollectionsResolvers<
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type ConfigurableTextsResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['ConfigurableTexts'] = ResolversParentTypes['ConfigurableTexts'],
+> = {
+    _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    actions?: Resolver<
+        Maybe<ResolversTypes['DataActions']>,
+        ParentType,
+        ContextType,
+        Partial<ConfigurableTextsActionsArgs>
+    >;
+    contentfulMetadata?: Resolver<ResolversTypes['ContentfulMetadata'], ParentType, ContextType>;
+    dates?: Resolver<Maybe<ResolversTypes['DataDates']>, ParentType, ContextType, Partial<ConfigurableTextsDatesArgs>>;
+    errors?: Resolver<
+        Maybe<ResolversTypes['DataErrors']>,
+        ParentType,
+        ContextType,
+        Partial<ConfigurableTextsErrorsArgs>
+    >;
+    linkedFrom?: Resolver<
+        Maybe<ResolversTypes['ConfigurableTextsLinkingCollections']>,
+        ParentType,
+        ContextType,
+        Partial<ConfigurableTextsLinkedFromArgs>
+    >;
+    name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<ConfigurableTextsNameArgs>>;
+    sys?: Resolver<ResolversTypes['Sys'], ParentType, ContextType>;
+    validation?: Resolver<
+        Maybe<ResolversTypes['DataValidation']>,
+        ParentType,
+        ContextType,
+        Partial<ConfigurableTextsValidationArgs>
+    >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ConfigurableTextsCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ConfigurableTextsCollection'] = ResolversParentTypes['ConfigurableTextsCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['ConfigurableTexts']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ConfigurableTextsLinkingCollectionsResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ConfigurableTextsLinkingCollections'] = ResolversParentTypes['ConfigurableTextsLinkingCollections'],
+> = {
+    entryCollection?: Resolver<
+        Maybe<ResolversTypes['EntryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ConfigurableTextsLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
+    >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type ContentfulMetadataResolvers<
     ContextType = any,
     ParentType extends ResolversParentTypes['ContentfulMetadata'] = ResolversParentTypes['ContentfulMetadata'],
@@ -5203,6 +10237,92 @@ export type ContentfulTagResolvers<
 > = {
     id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type DataActionsResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['DataActions'] = ResolversParentTypes['DataActions'],
+> = {
+    _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    apply?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<DataActionsApplyArgs>>;
+    cancel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<DataActionsCancelArgs>>;
+    clear?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<DataActionsClearArgs>>;
+    clickToSelect?: Resolver<
+        Maybe<ResolversTypes['String']>,
+        ParentType,
+        ContextType,
+        Partial<DataActionsClickToSelectArgs>
+    >;
+    close?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<DataActionsCloseArgs>>;
+    contentfulMetadata?: Resolver<ResolversTypes['ContentfulMetadata'], ParentType, ContextType>;
+    delete?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<DataActionsDeleteArgs>>;
+    details?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<DataActionsDetailsArgs>>;
+    edit?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<DataActionsEditArgs>>;
+    hide?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<DataActionsHideArgs>>;
+    linkedFrom?: Resolver<
+        Maybe<ResolversTypes['DataActionsLinkingCollections']>,
+        ParentType,
+        ContextType,
+        Partial<DataActionsLinkedFromArgs>
+    >;
+    logIn?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<DataActionsLogInArgs>>;
+    logOut?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<DataActionsLogOutArgs>>;
+    off?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<DataActionsOffArgs>>;
+    on?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<DataActionsOnArgs>>;
+    payOnline?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<DataActionsPayOnlineArgs>>;
+    renew?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<DataActionsRenewArgs>>;
+    reorder?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<DataActionsReorderArgs>>;
+    save?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<DataActionsSaveArgs>>;
+    seeAllArticles?: Resolver<
+        Maybe<ResolversTypes['String']>,
+        ParentType,
+        ContextType,
+        Partial<DataActionsSeeAllArticlesArgs>
+    >;
+    settings?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<DataActionsSettingsArgs>>;
+    show?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<DataActionsShowArgs>>;
+    showAllArticles?: Resolver<
+        Maybe<ResolversTypes['String']>,
+        ParentType,
+        ContextType,
+        Partial<DataActionsShowAllArticlesArgs>
+    >;
+    showLess?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<DataActionsShowLessArgs>>;
+    showMore?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<DataActionsShowMoreArgs>>;
+    sys?: Resolver<ResolversTypes['Sys'], ParentType, ContextType>;
+    trackOrder?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<DataActionsTrackOrderArgs>>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type DataActionsCollectionResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['DataActionsCollection'] = ResolversParentTypes['DataActionsCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['DataActions']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type DataActionsLinkingCollectionsResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['DataActionsLinkingCollections'] = ResolversParentTypes['DataActionsLinkingCollections'],
+> = {
+    configurableTextsCollection?: Resolver<
+        Maybe<ResolversTypes['ConfigurableTextsCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<DataActionsLinkingCollectionsConfigurableTextsCollectionArgs, 'limit' | 'skip'>
+    >;
+    entryCollection?: Resolver<
+        Maybe<ResolversTypes['EntryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<DataActionsLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
+    >;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -5263,7 +10383,6 @@ export type DataConfigurableTextsResolvers<
         Partial<DataConfigurableTextsShowMoreArgs>
     >;
     sys?: Resolver<ResolversTypes['Sys'], ParentType, ContextType>;
-    today?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<DataConfigurableTextsTodayArgs>>;
     yesterday?: Resolver<
         Maybe<ResolversTypes['String']>,
         ParentType,
@@ -5305,6 +10424,169 @@ export type DataConfigurableTextsLinkingCollectionsResolvers<
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type DataDatesResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['DataDates'] = ResolversParentTypes['DataDates'],
+> = {
+    _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    contentfulMetadata?: Resolver<ResolversTypes['ContentfulMetadata'], ParentType, ContextType>;
+    linkedFrom?: Resolver<
+        Maybe<ResolversTypes['DataDatesLinkingCollections']>,
+        ParentType,
+        ContextType,
+        Partial<DataDatesLinkedFromArgs>
+    >;
+    sys?: Resolver<ResolversTypes['Sys'], ParentType, ContextType>;
+    today?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<DataDatesTodayArgs>>;
+    yesterday?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<DataDatesYesterdayArgs>>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type DataDatesCollectionResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['DataDatesCollection'] = ResolversParentTypes['DataDatesCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['DataDates']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type DataDatesLinkingCollectionsResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['DataDatesLinkingCollections'] = ResolversParentTypes['DataDatesLinkingCollections'],
+> = {
+    configurableTextsCollection?: Resolver<
+        Maybe<ResolversTypes['ConfigurableTextsCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<DataDatesLinkingCollectionsConfigurableTextsCollectionArgs, 'limit' | 'skip'>
+    >;
+    entryCollection?: Resolver<
+        Maybe<ResolversTypes['EntryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<DataDatesLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
+    >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type DataErrorsResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['DataErrors'] = ResolversParentTypes['DataErrors'],
+> = {
+    _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    contentfulMetadata?: Resolver<ResolversTypes['ContentfulMetadata'], ParentType, ContextType>;
+    linkedFrom?: Resolver<
+        Maybe<ResolversTypes['DataErrorsLinkingCollections']>,
+        ParentType,
+        ContextType,
+        Partial<DataErrorsLinkedFromArgs>
+    >;
+    name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<DataErrorsNameArgs>>;
+    requestError?: Resolver<
+        Maybe<ResolversTypes['ComponentMessageSimple']>,
+        ParentType,
+        ContextType,
+        Partial<DataErrorsRequestErrorArgs>
+    >;
+    sys?: Resolver<ResolversTypes['Sys'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type DataErrorsCollectionResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['DataErrorsCollection'] = ResolversParentTypes['DataErrorsCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['DataErrors']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type DataErrorsLinkingCollectionsResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['DataErrorsLinkingCollections'] = ResolversParentTypes['DataErrorsLinkingCollections'],
+> = {
+    configurableTextsCollection?: Resolver<
+        Maybe<ResolversTypes['ConfigurableTextsCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<DataErrorsLinkingCollectionsConfigurableTextsCollectionArgs, 'limit' | 'skip'>
+    >;
+    entryCollection?: Resolver<
+        Maybe<ResolversTypes['EntryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<DataErrorsLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
+    >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type DataValidationResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['DataValidation'] = ResolversParentTypes['DataValidation'],
+> = {
+    _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    contentfulMetadata?: Resolver<ResolversTypes['ContentfulMetadata'], ParentType, ContextType>;
+    isOptional?: Resolver<
+        Maybe<ResolversTypes['String']>,
+        ParentType,
+        ContextType,
+        Partial<DataValidationIsOptionalArgs>
+    >;
+    isRequired?: Resolver<
+        Maybe<ResolversTypes['String']>,
+        ParentType,
+        ContextType,
+        Partial<DataValidationIsRequiredArgs>
+    >;
+    linkedFrom?: Resolver<
+        Maybe<ResolversTypes['DataValidationLinkingCollections']>,
+        ParentType,
+        ContextType,
+        Partial<DataValidationLinkedFromArgs>
+    >;
+    sys?: Resolver<ResolversTypes['Sys'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type DataValidationCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['DataValidationCollection'] = ResolversParentTypes['DataValidationCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['DataValidation']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type DataValidationLinkingCollectionsResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['DataValidationLinkingCollections'] = ResolversParentTypes['DataValidationLinkingCollections'],
+> = {
+    configurableTextsCollection?: Resolver<
+        Maybe<ResolversTypes['ConfigurableTextsCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<DataValidationLinkingCollectionsConfigurableTextsCollectionArgs, 'limit' | 'skip'>
+    >;
+    entryCollection?: Resolver<
+        Maybe<ResolversTypes['EntryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<DataValidationLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
+    >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {
     name: 'DateTime';
 }
@@ -5318,22 +10600,38 @@ export type EntryResolvers<
     ParentType extends ResolversParentTypes['Entry'] = ResolversParentTypes['Entry'],
 > = {
     __resolveType: TypeResolveFn<
+        | 'Article'
+        | 'Author'
         | 'Block'
+        | 'BlockArticleList'
+        | 'BlockCategory'
+        | 'BlockCategoryList'
         | 'BlockFaq'
+        | 'BlockQuickLinks'
         | 'BlockTicketList'
+        | 'ComponentArticle'
+        | 'ComponentArticleSection'
         | 'ComponentBanner'
+        | 'ComponentCategory'
         | 'ComponentFaqItem'
         | 'ComponentFieldMapping'
         | 'ComponentKeyValue'
         | 'ComponentLink'
+        | 'ComponentMessageSimple'
         | 'ComponentNoResult'
         | 'ComponentPagination'
         | 'ComponentTable'
         | 'ComponentTableColumn'
+        | 'ConfigurableTexts'
+        | 'DataActions'
         | 'DataConfigurableTexts'
+        | 'DataDates'
+        | 'DataErrors'
+        | 'DataValidation'
         | 'Page'
         | 'PageOneColumnTemplate'
-        | 'PageSeo',
+        | 'PageSeo'
+        | 'Theme',
         ParentType,
         ContextType
     >;
@@ -5401,6 +10699,36 @@ export type PageLinkingCollectionsResolvers<
     ContextType = any,
     ParentType extends ResolversParentTypes['PageLinkingCollections'] = ResolversParentTypes['PageLinkingCollections'],
 > = {
+    articleCollection?: Resolver<
+        Maybe<ResolversTypes['ArticleCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<PageLinkingCollectionsArticleCollectionArgs, 'limit' | 'skip'>
+    >;
+    blockArticleListCollection?: Resolver<
+        Maybe<ResolversTypes['BlockArticleListCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<PageLinkingCollectionsBlockArticleListCollectionArgs, 'limit' | 'skip'>
+    >;
+    blockCategoryCollection?: Resolver<
+        Maybe<ResolversTypes['BlockCategoryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<PageLinkingCollectionsBlockCategoryCollectionArgs, 'limit' | 'skip'>
+    >;
+    blockCategoryListCollection?: Resolver<
+        Maybe<ResolversTypes['BlockCategoryListCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<PageLinkingCollectionsBlockCategoryListCollectionArgs, 'limit' | 'skip'>
+    >;
+    componentCategoryCollection?: Resolver<
+        Maybe<ResolversTypes['ComponentCategoryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<PageLinkingCollectionsComponentCategoryCollectionArgs, 'limit' | 'skip'>
+    >;
     componentLinkCollection?: Resolver<
         Maybe<ResolversTypes['ComponentLinkCollection']>,
         ParentType,
@@ -5496,6 +10824,7 @@ export type PageSeoResolvers<
     _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     contentfulMetadata?: Resolver<ResolversTypes['ContentfulMetadata'], ParentType, ContextType>;
     description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<PageSeoDescriptionArgs>>;
+    image?: Resolver<Maybe<ResolversTypes['Asset']>, ParentType, ContextType, Partial<PageSeoImageArgs>>;
     keywords?: Resolver<
         Maybe<Array<Maybe<ResolversTypes['String']>>>,
         ParentType,
@@ -5531,6 +10860,12 @@ export type PageSeoLinkingCollectionsResolvers<
     ParentType extends
         ResolversParentTypes['PageSeoLinkingCollections'] = ResolversParentTypes['PageSeoLinkingCollections'],
 > = {
+    articleCollection?: Resolver<
+        Maybe<ResolversTypes['ArticleCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<PageSeoLinkingCollectionsArticleCollectionArgs, 'limit' | 'skip'>
+    >;
     entryCollection?: Resolver<
         Maybe<ResolversTypes['EntryCollection']>,
         ParentType,
@@ -5561,6 +10896,18 @@ export type QueryResolvers<
         ContextType,
         RequireFields<Query_NodesArgs, 'ids'>
     >;
+    article?: Resolver<
+        Maybe<ResolversTypes['Article']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryArticleArgs, 'id'>
+    >;
+    articleCollection?: Resolver<
+        Maybe<ResolversTypes['ArticleCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryArticleCollectionArgs, 'limit' | 'skip'>
+    >;
     asset?: Resolver<Maybe<ResolversTypes['Asset']>, ParentType, ContextType, RequireFields<QueryAssetArgs, 'id'>>;
     assetCollection?: Resolver<
         Maybe<ResolversTypes['AssetCollection']>,
@@ -5568,7 +10915,50 @@ export type QueryResolvers<
         ContextType,
         RequireFields<QueryAssetCollectionArgs, 'limit' | 'skip'>
     >;
+    author?: Resolver<Maybe<ResolversTypes['Author']>, ParentType, ContextType, RequireFields<QueryAuthorArgs, 'id'>>;
+    authorCollection?: Resolver<
+        Maybe<ResolversTypes['AuthorCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryAuthorCollectionArgs, 'limit' | 'skip'>
+    >;
     block?: Resolver<Maybe<ResolversTypes['Block']>, ParentType, ContextType, RequireFields<QueryBlockArgs, 'id'>>;
+    blockArticleList?: Resolver<
+        Maybe<ResolversTypes['BlockArticleList']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryBlockArticleListArgs, 'id'>
+    >;
+    blockArticleListCollection?: Resolver<
+        Maybe<ResolversTypes['BlockArticleListCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryBlockArticleListCollectionArgs, 'limit' | 'skip'>
+    >;
+    blockCategory?: Resolver<
+        Maybe<ResolversTypes['BlockCategory']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryBlockCategoryArgs, 'id'>
+    >;
+    blockCategoryCollection?: Resolver<
+        Maybe<ResolversTypes['BlockCategoryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryBlockCategoryCollectionArgs, 'limit' | 'skip'>
+    >;
+    blockCategoryList?: Resolver<
+        Maybe<ResolversTypes['BlockCategoryList']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryBlockCategoryListArgs, 'id'>
+    >;
+    blockCategoryListCollection?: Resolver<
+        Maybe<ResolversTypes['BlockCategoryListCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryBlockCategoryListCollectionArgs, 'limit' | 'skip'>
+    >;
     blockCollection?: Resolver<
         Maybe<ResolversTypes['BlockCollection']>,
         ParentType,
@@ -5587,6 +10977,18 @@ export type QueryResolvers<
         ContextType,
         RequireFields<QueryBlockFaqCollectionArgs, 'limit' | 'skip'>
     >;
+    blockQuickLinks?: Resolver<
+        Maybe<ResolversTypes['BlockQuickLinks']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryBlockQuickLinksArgs, 'id'>
+    >;
+    blockQuickLinksCollection?: Resolver<
+        Maybe<ResolversTypes['BlockQuickLinksCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryBlockQuickLinksCollectionArgs, 'limit' | 'skip'>
+    >;
     blockTicketList?: Resolver<
         Maybe<ResolversTypes['BlockTicketList']>,
         ParentType,
@@ -5599,6 +11001,30 @@ export type QueryResolvers<
         ContextType,
         RequireFields<QueryBlockTicketListCollectionArgs, 'limit' | 'skip'>
     >;
+    componentArticle?: Resolver<
+        Maybe<ResolversTypes['ComponentArticle']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryComponentArticleArgs, 'id'>
+    >;
+    componentArticleCollection?: Resolver<
+        Maybe<ResolversTypes['ComponentArticleCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryComponentArticleCollectionArgs, 'limit' | 'skip'>
+    >;
+    componentArticleSection?: Resolver<
+        Maybe<ResolversTypes['ComponentArticleSection']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryComponentArticleSectionArgs, 'id'>
+    >;
+    componentArticleSectionCollection?: Resolver<
+        Maybe<ResolversTypes['ComponentArticleSectionCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryComponentArticleSectionCollectionArgs, 'limit' | 'skip'>
+    >;
     componentBanner?: Resolver<
         Maybe<ResolversTypes['ComponentBanner']>,
         ParentType,
@@ -5610,6 +11036,18 @@ export type QueryResolvers<
         ParentType,
         ContextType,
         RequireFields<QueryComponentBannerCollectionArgs, 'limit' | 'skip'>
+    >;
+    componentCategory?: Resolver<
+        Maybe<ResolversTypes['ComponentCategory']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryComponentCategoryArgs, 'id'>
+    >;
+    componentCategoryCollection?: Resolver<
+        Maybe<ResolversTypes['ComponentCategoryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryComponentCategoryCollectionArgs, 'limit' | 'skip'>
     >;
     componentFaqItem?: Resolver<
         Maybe<ResolversTypes['ComponentFaqItem']>,
@@ -5659,6 +11097,18 @@ export type QueryResolvers<
         ContextType,
         RequireFields<QueryComponentLinkCollectionArgs, 'limit' | 'skip'>
     >;
+    componentMessageSimple?: Resolver<
+        Maybe<ResolversTypes['ComponentMessageSimple']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryComponentMessageSimpleArgs, 'id'>
+    >;
+    componentMessageSimpleCollection?: Resolver<
+        Maybe<ResolversTypes['ComponentMessageSimpleCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryComponentMessageSimpleCollectionArgs, 'limit' | 'skip'>
+    >;
     componentNoResult?: Resolver<
         Maybe<ResolversTypes['ComponentNoResult']>,
         ParentType,
@@ -5707,6 +11157,30 @@ export type QueryResolvers<
         ContextType,
         RequireFields<QueryComponentTableColumnCollectionArgs, 'limit' | 'skip'>
     >;
+    configurableTexts?: Resolver<
+        Maybe<ResolversTypes['ConfigurableTexts']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryConfigurableTextsArgs, 'id'>
+    >;
+    configurableTextsCollection?: Resolver<
+        Maybe<ResolversTypes['ConfigurableTextsCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryConfigurableTextsCollectionArgs, 'limit' | 'skip'>
+    >;
+    dataActions?: Resolver<
+        Maybe<ResolversTypes['DataActions']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryDataActionsArgs, 'id'>
+    >;
+    dataActionsCollection?: Resolver<
+        Maybe<ResolversTypes['DataActionsCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryDataActionsCollectionArgs, 'limit' | 'skip'>
+    >;
     dataConfigurableTexts?: Resolver<
         Maybe<ResolversTypes['DataConfigurableTexts']>,
         ParentType,
@@ -5718,6 +11192,42 @@ export type QueryResolvers<
         ParentType,
         ContextType,
         RequireFields<QueryDataConfigurableTextsCollectionArgs, 'limit' | 'skip'>
+    >;
+    dataDates?: Resolver<
+        Maybe<ResolversTypes['DataDates']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryDataDatesArgs, 'id'>
+    >;
+    dataDatesCollection?: Resolver<
+        Maybe<ResolversTypes['DataDatesCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryDataDatesCollectionArgs, 'limit' | 'skip'>
+    >;
+    dataErrors?: Resolver<
+        Maybe<ResolversTypes['DataErrors']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryDataErrorsArgs, 'id'>
+    >;
+    dataErrorsCollection?: Resolver<
+        Maybe<ResolversTypes['DataErrorsCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryDataErrorsCollectionArgs, 'limit' | 'skip'>
+    >;
+    dataValidation?: Resolver<
+        Maybe<ResolversTypes['DataValidation']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryDataValidationArgs, 'id'>
+    >;
+    dataValidationCollection?: Resolver<
+        Maybe<ResolversTypes['DataValidationCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryDataValidationCollectionArgs, 'limit' | 'skip'>
     >;
     entryCollection?: Resolver<
         Maybe<ResolversTypes['EntryCollection']>,
@@ -5756,6 +11266,13 @@ export type QueryResolvers<
         ContextType,
         RequireFields<QueryPageSeoCollectionArgs, 'limit' | 'skip'>
     >;
+    theme?: Resolver<Maybe<ResolversTypes['Theme']>, ParentType, ContextType, RequireFields<QueryThemeArgs, 'id'>>;
+    themeCollection?: Resolver<
+        Maybe<ResolversTypes['ThemeCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryThemeCollectionArgs, 'limit' | 'skip'>
+    >;
 };
 
 export type SysResolvers<
@@ -5780,27 +11297,92 @@ export type TaxonomyConceptResolvers<
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type ThemeResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['Theme'] = ResolversParentTypes['Theme'],
+> = {
+    _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    contentfulMetadata?: Resolver<ResolversTypes['ContentfulMetadata'], ParentType, ContextType>;
+    linkedFrom?: Resolver<
+        Maybe<ResolversTypes['ThemeLinkingCollections']>,
+        ParentType,
+        ContextType,
+        Partial<ThemeLinkedFromArgs>
+    >;
+    logo?: Resolver<Maybe<ResolversTypes['Asset']>, ParentType, ContextType, Partial<ThemeLogoArgs>>;
+    name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<ThemeNameArgs>>;
+    sys?: Resolver<ResolversTypes['Sys'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ThemeCollectionResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['ThemeCollection'] = ResolversParentTypes['ThemeCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['Theme']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ThemeLinkingCollectionsResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ThemeLinkingCollections'] = ResolversParentTypes['ThemeLinkingCollections'],
+> = {
+    blockCollection?: Resolver<
+        Maybe<ResolversTypes['BlockCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ThemeLinkingCollectionsBlockCollectionArgs, 'limit' | 'skip'>
+    >;
+    entryCollection?: Resolver<
+        Maybe<ResolversTypes['EntryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ThemeLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
+    >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type _NodeResolvers<
     ContextType = any,
     ParentType extends ResolversParentTypes['_Node'] = ResolversParentTypes['_Node'],
 > = {
     __resolveType: TypeResolveFn<
+        | 'Article'
+        | 'Author'
         | 'Block'
+        | 'BlockArticleList'
+        | 'BlockCategory'
+        | 'BlockCategoryList'
         | 'BlockFaq'
+        | 'BlockQuickLinks'
         | 'BlockTicketList'
+        | 'ComponentArticle'
+        | 'ComponentArticleSection'
         | 'ComponentBanner'
+        | 'ComponentCategory'
         | 'ComponentFaqItem'
         | 'ComponentFieldMapping'
         | 'ComponentKeyValue'
         | 'ComponentLink'
+        | 'ComponentMessageSimple'
         | 'ComponentNoResult'
         | 'ComponentPagination'
         | 'ComponentTable'
         | 'ComponentTableColumn'
+        | 'ConfigurableTexts'
+        | 'DataActions'
         | 'DataConfigurableTexts'
+        | 'DataDates'
+        | 'DataErrors'
+        | 'DataValidation'
         | 'Page'
         | 'PageOneColumnTemplate'
-        | 'PageSeo',
+        | 'PageSeo'
+        | 'Theme',
         ParentType,
         ContextType
     >;
@@ -5808,10 +11390,27 @@ export type _NodeResolvers<
 };
 
 export type Resolvers<ContextType = any> = {
+    Article?: ArticleResolvers<ContextType>;
+    ArticleCollection?: ArticleCollectionResolvers<ContextType>;
+    ArticleLinkingCollections?: ArticleLinkingCollectionsResolvers<ContextType>;
     Asset?: AssetResolvers<ContextType>;
     AssetCollection?: AssetCollectionResolvers<ContextType>;
     AssetLinkingCollections?: AssetLinkingCollectionsResolvers<ContextType>;
+    Author?: AuthorResolvers<ContextType>;
+    AuthorCollection?: AuthorCollectionResolvers<ContextType>;
+    AuthorLinkingCollections?: AuthorLinkingCollectionsResolvers<ContextType>;
     Block?: BlockResolvers<ContextType>;
+    BlockArticleList?: BlockArticleListResolvers<ContextType>;
+    BlockArticleListArticlesCollection?: BlockArticleListArticlesCollectionResolvers<ContextType>;
+    BlockArticleListCollection?: BlockArticleListCollectionResolvers<ContextType>;
+    BlockArticleListLinkingCollections?: BlockArticleListLinkingCollectionsResolvers<ContextType>;
+    BlockCategory?: BlockCategoryResolvers<ContextType>;
+    BlockCategoryCollection?: BlockCategoryCollectionResolvers<ContextType>;
+    BlockCategoryLinkingCollections?: BlockCategoryLinkingCollectionsResolvers<ContextType>;
+    BlockCategoryList?: BlockCategoryListResolvers<ContextType>;
+    BlockCategoryListCategoriesCollection?: BlockCategoryListCategoriesCollectionResolvers<ContextType>;
+    BlockCategoryListCollection?: BlockCategoryListCollectionResolvers<ContextType>;
+    BlockCategoryListLinkingCollections?: BlockCategoryListLinkingCollectionsResolvers<ContextType>;
     BlockCollection?: BlockCollectionResolvers<ContextType>;
     BlockContent?: BlockContentResolvers<ContextType>;
     BlockFaq?: BlockFaqResolvers<ContextType>;
@@ -5819,13 +11418,29 @@ export type Resolvers<ContextType = any> = {
     BlockFaqItemsCollection?: BlockFaqItemsCollectionResolvers<ContextType>;
     BlockFaqLinkingCollections?: BlockFaqLinkingCollectionsResolvers<ContextType>;
     BlockLinkingCollections?: BlockLinkingCollectionsResolvers<ContextType>;
+    BlockQuickLinks?: BlockQuickLinksResolvers<ContextType>;
+    BlockQuickLinksCollection?: BlockQuickLinksCollectionResolvers<ContextType>;
+    BlockQuickLinksItemsCollection?: BlockQuickLinksItemsCollectionResolvers<ContextType>;
+    BlockQuickLinksLinkingCollections?: BlockQuickLinksLinkingCollectionsResolvers<ContextType>;
     BlockTicketList?: BlockTicketListResolvers<ContextType>;
     BlockTicketListCollection?: BlockTicketListCollectionResolvers<ContextType>;
     BlockTicketListFieldsCollection?: BlockTicketListFieldsCollectionResolvers<ContextType>;
     BlockTicketListLinkingCollections?: BlockTicketListLinkingCollectionsResolvers<ContextType>;
+    ComponentArticle?: ComponentArticleResolvers<ContextType>;
+    ComponentArticleCollection?: ComponentArticleCollectionResolvers<ContextType>;
+    ComponentArticleLinkingCollections?: ComponentArticleLinkingCollectionsResolvers<ContextType>;
+    ComponentArticleSection?: ComponentArticleSectionResolvers<ContextType>;
+    ComponentArticleSectionCollection?: ComponentArticleSectionCollectionResolvers<ContextType>;
+    ComponentArticleSectionLinkingCollections?: ComponentArticleSectionLinkingCollectionsResolvers<ContextType>;
+    ComponentArticleSectionsCollection?: ComponentArticleSectionsCollectionResolvers<ContextType>;
     ComponentBanner?: ComponentBannerResolvers<ContextType>;
     ComponentBannerCollection?: ComponentBannerCollectionResolvers<ContextType>;
     ComponentBannerLinkingCollections?: ComponentBannerLinkingCollectionsResolvers<ContextType>;
+    ComponentCategory?: ComponentCategoryResolvers<ContextType>;
+    ComponentCategoryCollection?: ComponentCategoryCollectionResolvers<ContextType>;
+    ComponentCategoryComponentsCollection?: ComponentCategoryComponentsCollectionResolvers<ContextType>;
+    ComponentCategoryComponentsItem?: ComponentCategoryComponentsItemResolvers<ContextType>;
+    ComponentCategoryLinkingCollections?: ComponentCategoryLinkingCollectionsResolvers<ContextType>;
     ComponentFaqItem?: ComponentFaqItemResolvers<ContextType>;
     ComponentFaqItemCollection?: ComponentFaqItemCollectionResolvers<ContextType>;
     ComponentFaqItemLinkingCollections?: ComponentFaqItemLinkingCollectionsResolvers<ContextType>;
@@ -5839,6 +11454,9 @@ export type Resolvers<ContextType = any> = {
     ComponentLink?: ComponentLinkResolvers<ContextType>;
     ComponentLinkCollection?: ComponentLinkCollectionResolvers<ContextType>;
     ComponentLinkLinkingCollections?: ComponentLinkLinkingCollectionsResolvers<ContextType>;
+    ComponentMessageSimple?: ComponentMessageSimpleResolvers<ContextType>;
+    ComponentMessageSimpleCollection?: ComponentMessageSimpleCollectionResolvers<ContextType>;
+    ComponentMessageSimpleLinkingCollections?: ComponentMessageSimpleLinkingCollectionsResolvers<ContextType>;
     ComponentNoResult?: ComponentNoResultResolvers<ContextType>;
     ComponentNoResultCollection?: ComponentNoResultCollectionResolvers<ContextType>;
     ComponentNoResultLinkingCollections?: ComponentNoResultLinkingCollectionsResolvers<ContextType>;
@@ -5852,11 +11470,26 @@ export type Resolvers<ContextType = any> = {
     ComponentTableColumnLinkingCollections?: ComponentTableColumnLinkingCollectionsResolvers<ContextType>;
     ComponentTableColumnsCollection?: ComponentTableColumnsCollectionResolvers<ContextType>;
     ComponentTableLinkingCollections?: ComponentTableLinkingCollectionsResolvers<ContextType>;
+    ConfigurableTexts?: ConfigurableTextsResolvers<ContextType>;
+    ConfigurableTextsCollection?: ConfigurableTextsCollectionResolvers<ContextType>;
+    ConfigurableTextsLinkingCollections?: ConfigurableTextsLinkingCollectionsResolvers<ContextType>;
     ContentfulMetadata?: ContentfulMetadataResolvers<ContextType>;
     ContentfulTag?: ContentfulTagResolvers<ContextType>;
+    DataActions?: DataActionsResolvers<ContextType>;
+    DataActionsCollection?: DataActionsCollectionResolvers<ContextType>;
+    DataActionsLinkingCollections?: DataActionsLinkingCollectionsResolvers<ContextType>;
     DataConfigurableTexts?: DataConfigurableTextsResolvers<ContextType>;
     DataConfigurableTextsCollection?: DataConfigurableTextsCollectionResolvers<ContextType>;
     DataConfigurableTextsLinkingCollections?: DataConfigurableTextsLinkingCollectionsResolvers<ContextType>;
+    DataDates?: DataDatesResolvers<ContextType>;
+    DataDatesCollection?: DataDatesCollectionResolvers<ContextType>;
+    DataDatesLinkingCollections?: DataDatesLinkingCollectionsResolvers<ContextType>;
+    DataErrors?: DataErrorsResolvers<ContextType>;
+    DataErrorsCollection?: DataErrorsCollectionResolvers<ContextType>;
+    DataErrorsLinkingCollections?: DataErrorsLinkingCollectionsResolvers<ContextType>;
+    DataValidation?: DataValidationResolvers<ContextType>;
+    DataValidationCollection?: DataValidationCollectionResolvers<ContextType>;
+    DataValidationLinkingCollections?: DataValidationLinkingCollectionsResolvers<ContextType>;
     DateTime?: GraphQLScalarType;
     Dimension?: GraphQLScalarType;
     Entry?: EntryResolvers<ContextType>;
@@ -5877,6 +11510,9 @@ export type Resolvers<ContextType = any> = {
     Query?: QueryResolvers<ContextType>;
     Sys?: SysResolvers<ContextType>;
     TaxonomyConcept?: TaxonomyConceptResolvers<ContextType>;
+    Theme?: ThemeResolvers<ContextType>;
+    ThemeCollection?: ThemeCollectionResolvers<ContextType>;
+    ThemeLinkingCollections?: ThemeLinkingCollectionsResolvers<ContextType>;
     _Node?: _NodeResolvers<ContextType>;
 };
 
@@ -5894,7 +11530,40 @@ export type DirectiveResolvers<ContextType = any> = {
 export type ComponentFragment = {
     __typename: 'Block';
     spacing?: string;
+    background?: string;
+    variant?: string;
     content?:
+        | {
+              __typename: 'BlockArticleList';
+              title?: string;
+              description?: string;
+              articlesToShow?: number;
+              sys: { id: string };
+              category?: { slug?: string };
+              articlesCollection?: { items: Array<{ slug?: string }> };
+              parent?: { slug?: string };
+          }
+        | {
+              __typename: 'BlockCategory';
+              sys: { id: string };
+              category?: {
+                  name?: string;
+                  slug?: string;
+                  description?: string;
+                  icon?: string;
+                  sys: { id: string };
+                  parent?: { slug?: string };
+              };
+              parent?: { slug?: string };
+          }
+        | {
+              __typename: 'BlockCategoryList';
+              title?: string;
+              description?: string;
+              sys: { id: string };
+              categoriesCollection?: { items: Array<{ slug?: string }> };
+              parent?: { slug?: string };
+          }
         | {
               __typename: 'BlockFaq';
               title?: string;
@@ -5906,6 +11575,21 @@ export type ComponentFragment = {
                   description?: string;
                   sys: { id: string };
                   link?: { label?: string; url?: string };
+              };
+          }
+        | {
+              __typename: 'BlockQuickLinks';
+              title?: string;
+              description?: string;
+              sys: { id: string };
+              itemsCollection?: {
+                  items: Array<{
+                      label?: string;
+                      url?: string;
+                      icon?: string;
+                      sys: { id: string };
+                      page?: { slug?: string; seo?: { title?: string; description?: string } };
+                  }>;
               };
           }
         | {
@@ -5938,13 +11622,23 @@ export type ComponentFragment = {
               noResults?: { title?: string; description?: string; sys: { id: string } };
           };
     sys: { id: string };
+    theme?: { name?: string };
 };
 
 export type ComponentBaseFragment = {
     __typename: 'Block';
     spacing?: string;
+    background?: string;
+    variant?: string;
     sys: { id: string };
-    content?: { __typename: 'BlockFaq' } | { __typename: 'BlockTicketList' };
+    content?:
+        | { __typename: 'BlockArticleList' }
+        | { __typename: 'BlockCategory' }
+        | { __typename: 'BlockCategoryList' }
+        | { __typename: 'BlockFaq' }
+        | { __typename: 'BlockQuickLinks' }
+        | { __typename: 'BlockTicketList' };
+    theme?: { name?: string };
 };
 
 export type PageFragment = {
@@ -5963,14 +11657,57 @@ export type PageFragment = {
             items: Array<{
                 __typename: 'Block';
                 spacing?: string;
+                background?: string;
+                variant?: string;
                 sys: { id: string };
-                content?: { __typename: 'BlockFaq' } | { __typename: 'BlockTicketList' };
+                content?:
+                    | { __typename: 'BlockArticleList' }
+                    | { __typename: 'BlockCategory' }
+                    | { __typename: 'BlockCategoryList' }
+                    | { __typename: 'BlockFaq' }
+                    | { __typename: 'BlockQuickLinks' }
+                    | { __typename: 'BlockTicketList' };
+                theme?: { name?: string };
             }>;
         };
     };
 };
 
 export type SysFragment = { id: string };
+
+export type ArticleListComponentFragment = {
+    __typename: 'BlockArticleList';
+    title?: string;
+    description?: string;
+    articlesToShow?: number;
+    sys: { id: string };
+    category?: { slug?: string };
+    articlesCollection?: { items: Array<{ slug?: string }> };
+    parent?: { slug?: string };
+};
+
+export type CategoryComponentFragment = {
+    __typename: 'BlockCategory';
+    sys: { id: string };
+    category?: {
+        name?: string;
+        slug?: string;
+        description?: string;
+        icon?: string;
+        sys: { id: string };
+        parent?: { slug?: string };
+    };
+    parent?: { slug?: string };
+};
+
+export type CategoryListComponentFragment = {
+    __typename: 'BlockCategoryList';
+    title?: string;
+    description?: string;
+    sys: { id: string };
+    categoriesCollection?: { items: Array<{ slug?: string }> };
+    parent?: { slug?: string };
+};
 
 export type FaqComponentFragment = {
     __typename: 'BlockFaq';
@@ -5979,6 +11716,22 @@ export type FaqComponentFragment = {
     sys: { id: string };
     itemsCollection?: { items: Array<{ title?: string; content?: string; sys: { id: string } }> };
     banner?: { title?: string; description?: string; sys: { id: string }; link?: { label?: string; url?: string } };
+};
+
+export type QuickLinksComponentFragment = {
+    __typename: 'BlockQuickLinks';
+    title?: string;
+    description?: string;
+    sys: { id: string };
+    itemsCollection?: {
+        items: Array<{
+            label?: string;
+            url?: string;
+            icon?: string;
+            sys: { id: string };
+            page?: { slug?: string; seo?: { title?: string; description?: string } };
+        }>;
+    };
 };
 
 export type TicketListComponentFragment = {
@@ -6018,6 +11771,15 @@ export type BannerFragment = {
     link?: { label?: string; url?: string };
 };
 
+export type CategoryFragment = {
+    name?: string;
+    slug?: string;
+    description?: string;
+    icon?: string;
+    sys: { id: string };
+    parent?: { slug?: string };
+};
+
 export type FieldMappingFragment = {
     name?: string;
     sys: { id: string };
@@ -6027,6 +11789,7 @@ export type FieldMappingFragment = {
 export type LinkFragment = {
     label?: string;
     url?: string;
+    icon?: string;
     sys: { id: string };
     page?: { slug?: string; seo?: { title?: string; description?: string } };
 };
@@ -6055,7 +11818,12 @@ export type TableFragment = {
     columnsCollection?: { items: Array<{ title?: string; field?: string; sys: { id: string } }> };
 };
 
-export type LayoutSectionFragment = { spacing?: string };
+export type LayoutSectionFragment = {
+    spacing?: string;
+    background?: string;
+    variant?: string;
+    theme?: { name?: string };
+};
 
 export type OneColumnTemplateFragment = {
     __typename: 'PageOneColumnTemplate';
@@ -6063,8 +11831,17 @@ export type OneColumnTemplateFragment = {
         items: Array<{
             __typename: 'Block';
             spacing?: string;
+            background?: string;
+            variant?: string;
             sys: { id: string };
-            content?: { __typename: 'BlockFaq' } | { __typename: 'BlockTicketList' };
+            content?:
+                | { __typename: 'BlockArticleList' }
+                | { __typename: 'BlockCategory' }
+                | { __typename: 'BlockCategoryList' }
+                | { __typename: 'BlockFaq' }
+                | { __typename: 'BlockQuickLinks' }
+                | { __typename: 'BlockTicketList' };
+            theme?: { name?: string };
         }>;
     };
 };
@@ -6079,7 +11856,40 @@ export type GetComponentQuery = {
     block?: {
         __typename: 'Block';
         spacing?: string;
+        background?: string;
+        variant?: string;
         content?:
+            | {
+                  __typename: 'BlockArticleList';
+                  title?: string;
+                  description?: string;
+                  articlesToShow?: number;
+                  sys: { id: string };
+                  category?: { slug?: string };
+                  articlesCollection?: { items: Array<{ slug?: string }> };
+                  parent?: { slug?: string };
+              }
+            | {
+                  __typename: 'BlockCategory';
+                  sys: { id: string };
+                  category?: {
+                      name?: string;
+                      slug?: string;
+                      description?: string;
+                      icon?: string;
+                      sys: { id: string };
+                      parent?: { slug?: string };
+                  };
+                  parent?: { slug?: string };
+              }
+            | {
+                  __typename: 'BlockCategoryList';
+                  title?: string;
+                  description?: string;
+                  sys: { id: string };
+                  categoriesCollection?: { items: Array<{ slug?: string }> };
+                  parent?: { slug?: string };
+              }
             | {
                   __typename: 'BlockFaq';
                   title?: string;
@@ -6091,6 +11901,21 @@ export type GetComponentQuery = {
                       description?: string;
                       sys: { id: string };
                       link?: { label?: string; url?: string };
+                  };
+              }
+            | {
+                  __typename: 'BlockQuickLinks';
+                  title?: string;
+                  description?: string;
+                  sys: { id: string };
+                  itemsCollection?: {
+                      items: Array<{
+                          label?: string;
+                          url?: string;
+                          icon?: string;
+                          sys: { id: string };
+                          page?: { slug?: string; seo?: { title?: string; description?: string } };
+                      }>;
                   };
               }
             | {
@@ -6123,6 +11948,35 @@ export type GetComponentQuery = {
                   noResults?: { title?: string; description?: string; sys: { id: string } };
               };
         sys: { id: string };
+        theme?: { name?: string };
+    };
+    configurableTexts?: {
+        items: Array<{
+            dates?: { today?: string; yesterday?: string };
+            actions?: {
+                showMore?: string;
+                showLess?: string;
+                show?: string;
+                hide?: string;
+                edit?: string;
+                save?: string;
+                cancel?: string;
+                delete?: string;
+                logOut?: string;
+                settings?: string;
+                renew?: string;
+                details?: string;
+                reorder?: string;
+                clickToSelect?: string;
+                payOnline?: string;
+                close?: string;
+                trackOrder?: string;
+                showAllArticles?: string;
+                on?: string;
+                off?: string;
+            };
+            errors?: { requestError?: { title?: string; content?: string } };
+        }>;
     };
 };
 
@@ -6160,8 +12014,17 @@ export type GetPageQuery = {
                     items: Array<{
                         __typename: 'Block';
                         spacing?: string;
+                        background?: string;
+                        variant?: string;
                         sys: { id: string };
-                        content?: { __typename: 'BlockFaq' } | { __typename: 'BlockTicketList' };
+                        content?:
+                            | { __typename: 'BlockArticleList' }
+                            | { __typename: 'BlockCategory' }
+                            | { __typename: 'BlockCategoryList' }
+                            | { __typename: 'BlockFaq' }
+                            | { __typename: 'BlockQuickLinks' }
+                            | { __typename: 'BlockTicketList' };
+                        theme?: { name?: string };
                     }>;
                 };
             };
@@ -6202,8 +12065,17 @@ export type GetPagesQuery = {
                     items: Array<{
                         __typename: 'Block';
                         spacing?: string;
+                        background?: string;
+                        variant?: string;
                         sys: { id: string };
-                        content?: { __typename: 'BlockFaq' } | { __typename: 'BlockTicketList' };
+                        content?:
+                            | { __typename: 'BlockArticleList' }
+                            | { __typename: 'BlockCategory' }
+                            | { __typename: 'BlockCategoryList' }
+                            | { __typename: 'BlockFaq' }
+                            | { __typename: 'BlockQuickLinks' }
+                            | { __typename: 'BlockTicketList' };
+                        theme?: { name?: string };
                     }>;
                 };
             };
@@ -6219,6 +12091,11 @@ export const SysFragmentDoc = gql`
 export const LayoutSectionFragmentDoc = gql`
     fragment LayoutSection on Block {
         spacing
+        background
+        variant
+        theme {
+            name
+        }
     }
 `;
 export const ComponentBaseFragmentDoc = gql`
@@ -6358,6 +12235,114 @@ export const TicketListComponentFragmentDoc = gql`
     ${TableFragmentDoc}
     ${PaginationFragmentDoc}
 `;
+export const LinkFragmentDoc = gql`
+    fragment Link on ComponentLink {
+        sys {
+            ...Sys
+        }
+        label
+        url
+        page {
+            slug
+            seo {
+                title
+                description
+            }
+        }
+        icon
+    }
+    ${SysFragmentDoc}
+`;
+export const QuickLinksComponentFragmentDoc = gql`
+    fragment QuickLinksComponent on BlockQuickLinks {
+        __typename
+        sys {
+            ...Sys
+        }
+        title
+        description
+        itemsCollection {
+            items {
+                ...Link
+            }
+        }
+    }
+    ${SysFragmentDoc}
+    ${LinkFragmentDoc}
+`;
+export const CategoryListComponentFragmentDoc = gql`
+    fragment CategoryListComponent on BlockCategoryList {
+        __typename
+        sys {
+            ...Sys
+        }
+        title
+        description
+        categoriesCollection {
+            items {
+                slug
+            }
+        }
+        parent {
+            slug
+        }
+    }
+    ${SysFragmentDoc}
+`;
+export const CategoryFragmentDoc = gql`
+    fragment Category on ComponentCategory {
+        sys {
+            ...Sys
+        }
+        name
+        slug
+        description
+        icon
+        parent {
+            slug
+        }
+    }
+    ${SysFragmentDoc}
+`;
+export const CategoryComponentFragmentDoc = gql`
+    fragment CategoryComponent on BlockCategory {
+        __typename
+        sys {
+            ...Sys
+        }
+        category {
+            ...Category
+        }
+        parent {
+            slug
+        }
+    }
+    ${SysFragmentDoc}
+    ${CategoryFragmentDoc}
+`;
+export const ArticleListComponentFragmentDoc = gql`
+    fragment ArticleListComponent on BlockArticleList {
+        __typename
+        sys {
+            ...Sys
+        }
+        title
+        description
+        category {
+            slug
+        }
+        articlesCollection {
+            items {
+                slug
+            }
+        }
+        articlesToShow
+        parent {
+            slug
+        }
+    }
+    ${SysFragmentDoc}
+`;
 export const ComponentFragmentDoc = gql`
     fragment Component on Block {
         ...ComponentBase
@@ -6369,11 +12354,27 @@ export const ComponentFragmentDoc = gql`
             ... on BlockTicketList {
                 ...TicketListComponent
             }
+            ... on BlockQuickLinks {
+                ...QuickLinksComponent
+            }
+            ... on BlockCategoryList {
+                ...CategoryListComponent
+            }
+            ... on BlockCategory {
+                ...CategoryComponent
+            }
+            ... on BlockArticleList {
+                ...ArticleListComponent
+            }
         }
     }
     ${ComponentBaseFragmentDoc}
     ${FaqComponentFragmentDoc}
     ${TicketListComponentFragmentDoc}
+    ${QuickLinksComponentFragmentDoc}
+    ${CategoryListComponentFragmentDoc}
+    ${CategoryComponentFragmentDoc}
+    ${ArticleListComponentFragmentDoc}
 `;
 export const SeoFragmentDoc = gql`
     fragment Seo on PageSeo {
@@ -6439,27 +12440,46 @@ export const PageFragmentDoc = gql`
     ${SeoFragmentDoc}
     ${OneColumnTemplateFragmentDoc}
 `;
-export const LinkFragmentDoc = gql`
-    fragment Link on ComponentLink {
-        sys {
-            ...Sys
-        }
-        label
-        url
-        page {
-            slug
-            seo {
-                title
-                description
-            }
-        }
-    }
-    ${SysFragmentDoc}
-`;
 export const GetComponentDocument = gql`
     query getComponent($id: String!, $locale: String!, $preview: Boolean) {
         block(id: $id, locale: $locale, preview: $preview) {
             ...Component
+        }
+        configurableTexts: configurableTextsCollection(locale: $locale, limit: 1, skip: 0, preview: $preview) {
+            items {
+                dates {
+                    today
+                    yesterday
+                }
+                actions {
+                    showMore
+                    showLess
+                    show
+                    hide
+                    edit
+                    save
+                    cancel
+                    delete
+                    logOut
+                    settings
+                    renew
+                    details
+                    reorder
+                    clickToSelect
+                    payOnline
+                    close
+                    trackOrder
+                    showAllArticles
+                    on
+                    off
+                }
+                errors {
+                    requestError {
+                        title
+                        content
+                    }
+                }
+            }
         }
     }
     ${ComponentFragmentDoc}

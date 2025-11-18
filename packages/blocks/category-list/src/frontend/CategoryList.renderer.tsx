@@ -4,14 +4,14 @@ import React, { Suspense } from 'react';
 import { Loading } from '@o2s/ui/components/Loading';
 
 import { CategoryList } from './CategoryList.server';
-import { CategoryListRendererProps } from './CategoryList.types';
+import { CategoryListProps } from './CategoryList.types';
 
-export const CategoryListRenderer: React.FC<CategoryListRendererProps> = ({
+export const CategoryListRenderer: React.FC<CategoryListProps> = ({
     id,
     accessToken,
-    slug,
     routing,
     hasPriority,
+    isDraftModeEnabled,
 }) => {
     const locale = useLocale();
     return (
@@ -45,6 +45,7 @@ export const CategoryListRenderer: React.FC<CategoryListRendererProps> = ({
                 locale={locale}
                 routing={routing}
                 hasPriority={hasPriority}
+                isDraftModeEnabled={isDraftModeEnabled}
             />
         </Suspense>
     );

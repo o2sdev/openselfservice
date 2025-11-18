@@ -3,7 +3,7 @@
     "version": "1.10.0",
     "private": true,
     "scripts": {
-        "dev1": "next dev --turbopack",
+        "dev:http": "next dev --turbopack",
         "dev": "next dev --turbopack --experimental-https",
         "build": "next build",
         "postbuild": "cp -r public .next/standalone/apps/frontend && cp -r .next/static .next/standalone/apps/frontend/.next/",

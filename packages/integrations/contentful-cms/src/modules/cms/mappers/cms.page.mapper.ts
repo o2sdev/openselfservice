@@ -492,13 +492,12 @@ const mapSlot = (slot?: ComponentBaseFragment[]): CMS.Model.Page.SlotBlock[] => 
     }, [] as CMS.Model.Page.SlotBlock[]);
 };
 
-const mapLayout = ({ spacing }: ComponentBaseFragment): CMS.Model.Page.LayoutSection => {
+const mapLayout = ({ spacing, background, variant, theme }: ComponentBaseFragment): CMS.Model.Page.LayoutSection => {
     return {
         spacing: spacing as CMS.Model.Page.LayoutSection['spacing'],
-        // TODO: add the rest of the layout properties
-        // background: background,
-        // variant: variant,
-        // theme: theme?.name,
+        background: background as CMS.Model.Page.LayoutSection['background'],
+        variant: variant as CMS.Model.Page.LayoutSection['variant'],
+        theme: theme as CMS.Model.Page.LayoutSection['theme'],
     };
 };
 
@@ -509,5 +508,11 @@ const mapComponent = (component: ComponentBaseFragment) => {
             return 'FaqBlock';
         case 'BlockTicketList':
             return 'TicketListBlock';
+        case 'BlockQuickLinks':
+            return 'QuickLinksBlock';
+        case 'BlockCategoryList':
+            return 'CategoryListBlock';
+        case 'BlockArticleList':
+            return 'ArticleListBlock';
     }
 };
