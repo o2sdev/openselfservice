@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Link from '@docusaurus/Link';
+
 import { H3 } from '../Typography';
 
 interface IntegrationBadgeProps {
@@ -10,7 +12,7 @@ interface IntegrationBadgeProps {
 const IntegrationBadge: React.FC<IntegrationBadgeProps> = ({ icon, name }) => {
     return (
         <div className="flex gap-2.5 items-center justify-center px-0 py-0.5 rounded-full">
-            <div className="relative w-5 h-5 flex-shrink-0">
+            <div className="relative w-5 h-5 shrink-0">
                 <img alt={`${name} logo`} className="block max-w-none w-full h-full" src={icon} />
             </div>
             <div className="font-normal leading-[1.4] text-sm text-white whitespace-nowrap">{name}</div>
@@ -59,12 +61,12 @@ export function DXPIntegrationsSection() {
             <div className="flex flex-col gap-8 items-start justify-start w-full">
                 {/* Header */}
                 <div className="flex flex-col sm:flex-row items-start justify-between w-full gap-4">
-                    <H3 className="font-semibold leading-[1.5] text-2xl text-white w-full">
+                    <H3 className="font-semibold leading-normal text-2xl text-white w-full">
                         Extend with existing Open Self Service features
                     </H3>
-                    <a href="/docs/integrations" className="button flex-shrink-0">
+                    <Link href="/docs/integrations" className="button shrink-0">
                         See all integrations
-                    </a>
+                    </Link>
                 </div>
 
                 {/* Integration Badges */}
