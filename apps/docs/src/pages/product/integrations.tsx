@@ -236,7 +236,6 @@ export default function ProductIntegrations() {
             <div className={styles.linearGradient}>
                 <div style={{ overflow: 'hidden' }}>
                     <div className={styles.gradientWrapper}>
-                        {/* TODO: add new gradient circle here */}
                         <div className={styles.gradientCircleBlue} />
                         <main className={styles.mainContentWrapper}>
                             <HeroBannerSection
