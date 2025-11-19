@@ -24,6 +24,10 @@ export const PAGE_NOTIFICATION_LIST_EN: CMS.Model.Page.Page = {
         slots: {
             main: [
                 {
+                    __typename: 'NotificationSummaryBlock',
+                    id: 'notification-summary-1',
+                },
+                {
                     __typename: 'NotificationListBlock',
                     id: 'notification-list-1',
                 },
@@ -62,6 +66,10 @@ export const PAGE_NOTIFICATION_LIST_DE: CMS.Model.Page.Page = {
         slots: {
             main: [
                 {
+                    __typename: 'NotificationSummaryBlock',
+                    id: 'notification-summary-1',
+                },
+                {
                     __typename: 'NotificationListBlock',
                     id: 'notification-list-1',
                 },
@@ -99,6 +107,10 @@ export const PAGE_NOTIFICATION_LIST_PL: CMS.Model.Page.Page = {
         __typename: 'OneColumnTemplate',
         slots: {
             main: [
+                {
+                    __typename: 'NotificationSummaryBlock',
+                    id: 'notification-summary-1',
+                },
                 {
                     __typename: 'NotificationListBlock',
                     id: 'notification-list-1',
