@@ -1,6 +1,6 @@
 import { Field, FieldProps, FormikValues } from 'formik';
 import { Search } from 'lucide-react';
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import ScrollContainer from 'react-indiana-drag-scroll';
 import { debounce } from 'throttle-debounce';
 
@@ -21,17 +21,6 @@ export const FilterItem = <T, S extends FormikValues>({
     labels,
 }: Readonly<FilterItemProps<T, S>>) => {
     const allWasClickedRef = useRef(false);
-
-    const submitFormRef = useRef(submitForm);
-    const isLeadingRef = useRef(isLeading);
-
-    useEffect(() => {
-        submitFormRef.current = submitForm;
-    }, [submitForm]);
-
-    useEffect(() => {
-        isLeadingRef.current = isLeading;
-    }, [isLeading]);
 
     const onTextFilterChange = debounce(500, async () => {
         await submitForm();
