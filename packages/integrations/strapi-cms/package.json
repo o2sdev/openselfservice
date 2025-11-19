@@ -20,8 +20,8 @@
         "@o2s/framework": "*",
         "@o2s/utils.logger": "*",
         "flatted": "^3.3.3",
-        "graphql": "16.11.0",
-        "graphql-request": "7.3.1",
+        "graphql": "16.12.0",
+        "graphql-request": "7.3.4",
         "graphql-tag": "2.12.6"
     },
     "devDependencies": {
@@ -36,7 +36,7 @@
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "concurrently": "^9.2.1",
-        "eslint": "^9.38.0",
+        "eslint": "^9.39.1",
         "prettier": "^3.6.2",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"
