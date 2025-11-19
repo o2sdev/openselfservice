@@ -204,7 +204,12 @@ When the API harmonization layer provides **semantic variants** (e.g., `'CRITICA
 - Expose only necessary, well-typed exports
 - **Never use `any` type** - use specific types with union narrowing
 - Prefer functional programming over class-based approaches
+
+**Comments & Documentation:**
 - All comments must be in English
+- Prefer self-documenting code - only add comments to explain **why**, not **what**
+- Avoid trivial comments and excessive `@example` blocks in JSDoc - only include examples for complex public APIs or non-trivial usage scenarios
+- Inline comments should explain non-obvious decisions, workarounds, or important context
 
 **TypeScript:**
 
