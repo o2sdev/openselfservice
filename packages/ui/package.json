@@ -63,7 +63,7 @@
         "date-fns": "^4.1.0",
         "lucide-react": "^0.554.0",
         "react-day-picker": "^9.11.1",
-        "markdown-to-jsx": "^7.7.17",
+        "markdown-to-jsx": "^8.0.0",
         "react-indiana-drag-scroll": "^2.2.1",
         "recharts": "^2.15.4",
         "tailwind-merge": "^3.4.0",
