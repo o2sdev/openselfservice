@@ -49,6 +49,14 @@ const MOCK_INVOICE_LIST_BLOCK_EN: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
         removeFilters: 'Remove filters ({active})',
         items: [
             {
+                __typename: 'FilterText',
+                id: 'search',
+                label: 'Search',
+                placeholder: 'Search by Number',
+                isLeading: true,
+                isLabelHidden: true,
+            },
+            {
                 __typename: 'FilterSelect',
                 id: 'sort',
                 label: 'Sort',
@@ -165,6 +173,14 @@ const MOCK_INVOICE_LIST_BLOCK_DE: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
         removeFilters: 'Filter entfernen ({active})',
         items: [
             {
+                __typename: 'FilterText',
+                id: 'search',
+                label: 'Suchen',
+                placeholder: 'Suche nach Nummer',
+                isLeading: true,
+                isLabelHidden: true,
+            },
+            {
                 __typename: 'FilterSelect',
                 id: 'sort',
                 label: 'Sortieren',
@@ -280,6 +296,14 @@ const MOCK_INVOICE_LIST_BLOCK_PL: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
         close: 'Zamknij filtry',
         removeFilters: 'Usuń filtry ({active})',
         items: [
+            {
+                __typename: 'FilterText',
+                id: 'search',
+                label: 'Szukaj',
+                placeholder: 'Szukaj po numerze',
+                isLeading: true,
+                isLabelHidden: true,
+            },
             {
                 __typename: 'FilterSelect',
                 id: 'sort',
