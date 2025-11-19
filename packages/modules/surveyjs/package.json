@@ -27,7 +27,7 @@
         "@o2s/utils.frontend": "*",
         "@o2s/configs.integrations": "*",
         "survey-core": "^2.3.15",
-        "survey-react-ui": "^2.3.15"
+        "survey-react-ui": "^2.3.16"
     },
     "devDependencies": {
         "dotenv-cli": "^11.0.0",
