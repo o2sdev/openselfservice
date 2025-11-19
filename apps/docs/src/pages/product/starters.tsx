@@ -54,7 +54,7 @@ const digitalPortalStarter: StarterInfoSectionProps = {
         { link: 'https://storybook-dxp.openselfservice.com/?path=/docs', label: 'Storybook', target: '_blank' },
         { link: 'https://github.com/o2sdev/dxp-starter-kit', label: 'GitHub', target: '_blank' },
     ],
-    mainTitle: 'Digital Portal Starter',
+    mainTitle: 'Digital Experience Portal Starter',
     description: (
         <>
             Start with a flexible foundation for content-rich, customer-supportive platforms. Our ready-to-use frontend
@@ -62,7 +62,7 @@ const digitalPortalStarter: StarterInfoSectionProps = {
             self-service-oriented.
         </>
     ),
-    cliCommand: 'npx create-o2s-app@latest my-dxp-app',
+    cliCommand: 'npx create-dxp-app@latest my-dxp-app',
     accordionItems: [
         {
             title: 'Feature list',

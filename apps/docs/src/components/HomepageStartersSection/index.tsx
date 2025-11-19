@@ -18,7 +18,7 @@ const STARTERS: HoverCardProps[] = [
         },
     },
     {
-        title: 'Digital Portal Starter',
+        title: 'Digital Experience Portal Starter',
         description:
             'Headless CMS-powered content portal with knowledge base features. Great for public help centers, marketing sites, and scalable experience platforms.',
         href: '/product/starters#digital-portal-starter',

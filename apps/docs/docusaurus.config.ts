@@ -380,7 +380,7 @@ const config: Config = {
                           ],
                           linkMore: {
                               title: 'Community',
-                              label: 'see more →',
+                              label: 'Join Discord →',
                               href: 'https://discord.gg/4R568nZgsT',
                               background: '/img/navbar/community-bg-img.png',
                           },
