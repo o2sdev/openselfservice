@@ -84,6 +84,7 @@ export type InputWithLabelProps = InputProps & {
     requiredLabel?: string;
     optionalLabel?: string;
     labelWrapperClassName?: string;
+    isLabelHidden?: boolean;
 };
 
 export type InputWithLabelOwnProps = InputWithLabelProps & { ref?: React.Ref<HTMLInputElement> };
@@ -100,6 +101,7 @@ const InputWithLabel = ({
     optionalLabel = '',
     requiredLabel = '',
     labelWrapperClassName,
+    isLabelHidden = false,
     ref,
     ...props
 }: InputWithLabelOwnProps) => {
@@ -120,16 +122,20 @@ const InputWithLabel = ({
         return null;
     };
 
+    const ariaLabel = isLabelHidden && typeof label === 'string' ? label : props['aria-label'];
+
     return (
         <div className="grid gap-2">
-            <div className={cn('flex items-center justify-between gap-2', labelWrapperClassName)}>
-                <Label htmlFor={inputId} className={cn(labelClassName, hasError && 'text-destructive')}>
-                    <span className="pr-2">{label}</span>
-                    {renderAdditionalLabel()}
-                </Label>
-                {labelAdornment}
-            </div>
-            <Input id={inputId} ref={ref} {...props} className={className} hasError={hasError} />
+            {!isLabelHidden && (
+                <div className={cn('flex items-center justify-between gap-2', labelWrapperClassName)}>
+                    <Label htmlFor={inputId} className={cn(labelClassName, hasError && 'text-destructive')}>
+                        <span className="pr-2">{label}</span>
+                        {renderAdditionalLabel()}
+                    </Label>
+                    {labelAdornment}
+                </div>
+            )}
+            <Input id={inputId} ref={ref} {...props} aria-label={ariaLabel} className={className} hasError={hasError} />
             {children}
         </div>
     );
