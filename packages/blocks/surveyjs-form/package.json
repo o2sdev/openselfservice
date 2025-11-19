@@ -29,7 +29,7 @@
         "@o2s/modules.surveyjs": "*"
     },
     "devDependencies": {
-        "dotenv-cli": "^10.0.0",
+        "dotenv-cli": "^11.0.0",
         "@o2s/eslint-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
@@ -37,7 +37,7 @@
         "eslint": "^9.39.1",
         "prettier": "^3.6.2",
         "survey-core": "^2.3.15",
-        "survey-react-ui": "^2.3.15",
+        "survey-react-ui": "^2.3.16",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"
     },

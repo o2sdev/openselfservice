@@ -29,7 +29,7 @@
         "throttle-debounce": "^5.0.2"
     },
     "devDependencies": {
-        "dotenv-cli": "^10.0.0",
+        "dotenv-cli": "^11.0.0",
         "@o2s/eslint-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
