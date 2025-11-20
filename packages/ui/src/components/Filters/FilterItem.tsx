@@ -1,9 +1,12 @@
 import { Field, FieldProps, FormikValues } from 'formik';
+import { Search } from 'lucide-react';
 import React, { useRef } from 'react';
 import ScrollContainer from 'react-indiana-drag-scroll';
+import { debounce } from 'throttle-debounce';
 
 import { cn } from '@o2s/ui/lib/utils';
 
+import { InputWithLabel } from '@o2s/ui/elements/input';
 import { Label } from '@o2s/ui/elements/label';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@o2s/ui/elements/select';
 import { ToggleGroup, ToggleGroupItem } from '@o2s/ui/elements/toggle-group';
@@ -18,6 +21,10 @@ export const FilterItem = <T, S extends FormikValues>({
     labels,
 }: Readonly<FilterItemProps<T, S>>) => {
     const allWasClickedRef = useRef(false);
+
+    const onTextFilterChange = debounce(500, async () => {
+        await submitForm();
+    });
 
     switch (item.__typename) {
         case 'FilterToggleGroup':
@@ -68,11 +75,7 @@ export const FilterItem = <T, S extends FormikValues>({
                                                 isSelected && isNextSelected ? 'rounded-r-none' : '',
                                             )}
                                             onClick={() => {
-                                                if (option.value === 'ALL') {
-                                                    allWasClickedRef.current = true;
-                                                } else {
-                                                    allWasClickedRef.current = false;
-                                                }
+                                                allWasClickedRef.current = option.value === 'ALL';
                                             }}
                                         >
                                             {option.label}
@@ -134,7 +137,7 @@ export const FilterItem = <T, S extends FormikValues>({
                 <Field name={item.id}>
                     {({ field }: FieldProps<string>) => {
                         return (
-                            <>
+                            <div className="grid gap-2">
                                 <Label htmlFor={field.name}>{item.label}</Label>
                                 <Select
                                     value={field.value}
@@ -162,6 +165,36 @@ export const FilterItem = <T, S extends FormikValues>({
                                         </SelectGroup>
                                     </SelectContent>
                                 </Select>
+                            </div>
+                        );
+                    }}
+                </Field>
+            );
+        case 'FilterText':
+            return (
+                <Field name={item.id}>
+                    {({ field }: FieldProps<string>) => {
+                        return (
+                            <>
+                                <InputWithLabel
+                                    id={field.name}
+                                    type="text"
+                                    value={field.value || ''}
+                                    placeholder={item.placeholder}
+                                    label={item.label}
+                                    isLabelHidden={item.isLabelHidden}
+                                    adornment={<Search className="h-4 w-4" />}
+                                    adornmentProps={{
+                                        behavior: 'prepend',
+                                    }}
+                                    onChange={async (e) => {
+                                        const newValue = e.target.value;
+                                        await setFieldValue(field.name, newValue);
+                                        if (isLeading) {
+                                            onTextFilterChange();
+                                        }
+                                    }}
+                                />
                             </>
                         );
                     }}

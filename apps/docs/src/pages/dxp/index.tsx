@@ -134,7 +134,7 @@ export default function DXPStarter(): ReactNode {
                                 secondaryButton={{
                                     text: 'See on GitHub',
                                     url: '"https://github.com/o2sdev/dxp-starter-kit"',
-                                    iconLeft: <GithubIcon className="[&>*]:stroke-current" />,
+                                    iconLeft: <GithubIcon className="*:stroke-current" />,
                                     target: 'blank',
                                 }}
                             />
