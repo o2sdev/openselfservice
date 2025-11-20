@@ -1,5 +1,5 @@
 import { Field, FieldProps, FormikValues } from 'formik';
-import { Search } from 'lucide-react';
+import { LayoutGrid, List, Search } from 'lucide-react';
 import React, { useRef } from 'react';
 import ScrollContainer from 'react-indiana-drag-scroll';
 import { debounce } from 'throttle-debounce';
@@ -200,6 +200,27 @@ export const FilterItem = <T, S extends FormikValues>({
                     }}
                 </Field>
             );
+        case 'FilterViewModeToggle':
+            return (
+                <ToggleGroup
+                    type="single"
+                    variant="solid"
+                    value={item.value}
+                    onValueChange={(value) => {
+                        if (value === 'list' || value === 'grid') {
+                            item.onChange!(value);
+                        }
+                    }}
+                >
+                    <ToggleGroupItem value="list" aria-label="List view">
+                        <List className="h-4 w-4" />
+                    </ToggleGroupItem>
+                    <ToggleGroupItem value="grid" aria-label="Grid view">
+                        <LayoutGrid className="h-4 w-4" />
+                    </ToggleGroupItem>
+                </ToggleGroup>
+            );
+
         default:
             return null;
     }

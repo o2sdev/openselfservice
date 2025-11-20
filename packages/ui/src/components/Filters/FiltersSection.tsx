@@ -41,7 +41,6 @@ export const FiltersSection = <T, S extends FormikValues>({
                     initialValues={initialValues}
                     onSubmit={onSubmit}
                     onReset={onReset}
-                    hasLeadingItem={hasLeadingItem}
                     labels={labels}
                 />
             </FiltersContextProvider>

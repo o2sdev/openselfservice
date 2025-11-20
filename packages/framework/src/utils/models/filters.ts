@@ -9,7 +9,12 @@ export class Filters<T> {
     items!: FilterItem<T & { sort: string; search: string }>[];
 }
 
-export type FilterItem<T> = FilterSelect<T> | FilterDateRange<T> | FilterToggleGroup<T> | FilterText<T>;
+export type FilterItem<T> =
+    | FilterSelect<T>
+    | FilterDateRange<T>
+    | FilterToggleGroup<T>
+    | FilterText<T>
+    | FilterViewModeToggle<T>;
 
 export class Filter<T> {
     id!: keyof T;
@@ -51,4 +56,10 @@ export class FilterText<T> extends Filter<T> {
     __typename!: 'FilterText';
     isLabelHidden?: boolean;
     placeholder?: string;
+}
+
+export class FilterViewModeToggle<T> extends Filter<T> {
+    __typename!: 'FilterViewModeToggle';
+    value?: 'list' | 'grid';
+    onChange?: (value: 'list' | 'grid') => void;
 }
