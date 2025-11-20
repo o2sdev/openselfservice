@@ -71,7 +71,7 @@
         "xmlbuilder2": "^4.0.0"
     },
     "devDependencies": {
-        "@nestjs/cli": "^11.0.10",
+        "@nestjs/cli": "^11.0.12",
         "@nestjs/schematics": "^11.0.9",
         "@nestjs/testing": "^11.1.9",
         "@o2s/eslint-config": "*",
