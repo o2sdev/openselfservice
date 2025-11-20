@@ -78,7 +78,7 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
 
 @Module({
     imports: [
-        HttpModule,
+        HttpModule.register({ global: true }),
         LoggerModule,
         ConfigModule.forRoot({
             isGlobal: true,
