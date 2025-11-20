@@ -1,6 +1,8 @@
 import clsx from 'clsx';
 import React, { type ReactNode } from 'react';
 
+import Link from '@docusaurus/Link';
+
 import CircleCheckIcon from '@site/src/assets/icons/circle-check.svg';
 
 import { CopyCommandButton } from '../CopyCommandButton';
@@ -96,7 +98,7 @@ export function HeroBannerSection({
                         {mainLink && (
                             <>
                                 <div className={clsx('sm:flex gap-2 space-y-4 w-full', !heroImage && 'justify-center')}>
-                                    <a
+                                    <Link
                                         className={clsx('button', cliCommand && 'w-1/2')}
                                         href={mainLink.url}
                                         target={mainLink.target}
@@ -104,10 +106,10 @@ export function HeroBannerSection({
                                         {mainLink.iconLeft}
                                         {mainLink.text}
                                         {mainLink.iconRight}
-                                    </a>
+                                    </Link>
 
                                     {secondaryLink && (
-                                        <a
+                                        <Link
                                             href={secondaryLink.url}
                                             className={clsx('button button-ultra', cliCommand && 'w-1/2')}
                                             target={secondaryLink.target}
@@ -118,11 +120,11 @@ export function HeroBannerSection({
                                                 {secondaryLink.text}
                                                 {secondaryLink.iconRight}
                                             </span>
-                                        </a>
+                                        </Link>
                                     )}
 
                                     {tertiaryLink && (
-                                        <a
+                                        <Link
                                             href={tertiaryLink.url}
                                             className={clsx('button button-special', cliCommand && 'w-1/2')}
                                             target={tertiaryLink.target}
@@ -133,7 +135,7 @@ export function HeroBannerSection({
                                                 {tertiaryLink.text}
                                                 {tertiaryLink.iconRight}
                                             </span>
-                                        </a>
+                                        </Link>
                                     )}
                                 </div>
                             </>
