@@ -51,7 +51,7 @@
         "dotenv": "^17.2.3",
         "fs-extra": "^11.3.2",
         "husky": "^9.1.7",
-        "lint-staged": "^16.2.6",
+        "lint-staged": "^16.2.7",
         "playwright": "^1.56.1",
         "prettier": "^3.6.2",
         "simple-git": "^3.30.0",
