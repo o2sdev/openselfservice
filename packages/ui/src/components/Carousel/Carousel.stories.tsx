@@ -18,9 +18,9 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // Sample slide content
-const SampleSlide = ({ number, color }: { number: number; color: string }) => (
+const SampleSlide = ({ number }: { number: number }) => (
     <div
-        className={`flex items-center justify-center h-64 rounded-lg text-white text-2xl font-bold ${color}`}
+        className="flex items-center justify-center h-64 rounded-lg border-2 border-gray-300 text-gray-700 text-2xl font-bold bg-white"
         style={{ minHeight: '256px' }}
     >
         Slide {number}
@@ -30,11 +30,11 @@ const SampleSlide = ({ number, color }: { number: number; color: string }) => (
 export const Default: Story = {
     args: {
         slides: [
-            <SampleSlide key="1" number={1} color="bg-blue-500" />,
-            <SampleSlide key="2" number={2} color="bg-green-500" />,
-            <SampleSlide key="3" number={3} color="bg-purple-500" />,
-            <SampleSlide key="4" number={4} color="bg-red-500" />,
-            <SampleSlide key="5" number={5} color="bg-yellow-500" />,
+            <SampleSlide key="1" number={1} />,
+            <SampleSlide key="2" number={2} />,
+            <SampleSlide key="3" number={3} />,
+            <SampleSlide key="4" number={4} />,
+            <SampleSlide key="5" number={5} />,
         ],
         showNavigation: true,
         showPagination: true,
@@ -44,9 +44,9 @@ export const Default: Story = {
 export const WithoutNavigation: Story = {
     args: {
         slides: [
-            <SampleSlide key="1" number={1} color="bg-blue-500" />,
-            <SampleSlide key="2" number={2} color="bg-green-500" />,
-            <SampleSlide key="3" number={3} color="bg-purple-500" />,
+            <SampleSlide key="1" number={1} />,
+            <SampleSlide key="2" number={2} />,
+            <SampleSlide key="3" number={3} />,
         ],
         showNavigation: false,
         showPagination: true,
@@ -56,9 +56,9 @@ export const WithoutNavigation: Story = {
 export const WithoutPagination: Story = {
     args: {
         slides: [
-            <SampleSlide key="1" number={1} color="bg-blue-500" />,
-            <SampleSlide key="2" number={2} color="bg-green-500" />,
-            <SampleSlide key="3" number={3} color="bg-purple-500" />,
+            <SampleSlide key="1" number={1} />,
+            <SampleSlide key="2" number={2} />,
+            <SampleSlide key="3" number={3} />,
         ],
         showNavigation: true,
         showPagination: false,
@@ -68,12 +68,12 @@ export const WithoutPagination: Story = {
 export const MultipleSlidesPerView: Story = {
     args: {
         slides: [
-            <SampleSlide key="1" number={1} color="bg-blue-500" />,
-            <SampleSlide key="2" number={2} color="bg-green-500" />,
-            <SampleSlide key="3" number={3} color="bg-purple-500" />,
-            <SampleSlide key="4" number={4} color="bg-red-500" />,
-            <SampleSlide key="5" number={5} color="bg-yellow-500" />,
-            <SampleSlide key="6" number={6} color="bg-pink-500" />,
+            <SampleSlide key="1" number={1} />,
+            <SampleSlide key="2" number={2} />,
+            <SampleSlide key="3" number={3} />,
+            <SampleSlide key="4" number={4} />,
+            <SampleSlide key="5" number={5} />,
+            <SampleSlide key="6" number={6} />,
         ],
         slidesPerView: 3,
         spaceBetween: 20,
@@ -85,11 +85,11 @@ export const MultipleSlidesPerView: Story = {
 export const Responsive: Story = {
     args: {
         slides: [
-            <SampleSlide key="1" number={1} color="bg-blue-500" />,
-            <SampleSlide key="2" number={2} color="bg-green-500" />,
-            <SampleSlide key="3" number={3} color="bg-purple-500" />,
-            <SampleSlide key="4" number={4} color="bg-red-500" />,
-            <SampleSlide key="5" number={5} color="bg-yellow-500" />,
+            <SampleSlide key="1" number={1} />,
+            <SampleSlide key="2" number={2} />,
+            <SampleSlide key="3" number={3} />,
+            <SampleSlide key="4" number={4} />,
+            <SampleSlide key="5" number={5} />,
         ],
         slidesPerView: 1,
         spaceBetween: 20,
@@ -115,10 +115,10 @@ export const Responsive: Story = {
 export const WithAutoplay: Story = {
     args: {
         slides: [
-            <SampleSlide key="1" number={1} color="bg-blue-500" />,
-            <SampleSlide key="2" number={2} color="bg-green-500" />,
-            <SampleSlide key="3" number={3} color="bg-purple-500" />,
-            <SampleSlide key="4" number={4} color="bg-red-500" />,
+            <SampleSlide key="1" number={1} />,
+            <SampleSlide key="2" number={2} />,
+            <SampleSlide key="3" number={3} />,
+            <SampleSlide key="4" number={4} />,
         ],
         modules: [Autoplay],
         autoplay: {
@@ -133,9 +133,9 @@ export const WithAutoplay: Story = {
 export const Loop: Story = {
     args: {
         slides: [
-            <SampleSlide key="1" number={1} color="bg-blue-500" />,
-            <SampleSlide key="2" number={2} color="bg-green-500" />,
-            <SampleSlide key="3" number={3} color="bg-purple-500" />,
+            <SampleSlide key="1" number={1} />,
+            <SampleSlide key="2" number={2} />,
+            <SampleSlide key="3" number={3} />,
         ],
         loop: true,
         showNavigation: true,
@@ -146,10 +146,10 @@ export const Loop: Story = {
 export const WithStartingSlideIndex: Story = {
     args: {
         slides: [
-            <SampleSlide key="1" number={1} color="bg-blue-500" />,
-            <SampleSlide key="2" number={2} color="bg-green-500" />,
-            <SampleSlide key="3" number={3} color="bg-purple-500" />,
-            <SampleSlide key="4" number={4} color="bg-red-500" />,
+            <SampleSlide key="1" number={1} />,
+            <SampleSlide key="2" number={2} />,
+            <SampleSlide key="3" number={3} />,
+            <SampleSlide key="4" number={4} />,
         ],
         startingSlideIndex: 2,
         showNavigation: true,
@@ -160,12 +160,12 @@ export const WithStartingSlideIndex: Story = {
 export const WithNoSwipingSelector: Story = {
     args: {
         slides: [
-            <div key="1" className="p-8 bg-blue-500 text-white rounded-lg">
+            <div key="1" className="p-8 border-2 border-gray-300 rounded-lg bg-white">
                 <h3 className="text-xl mb-4">Slide with form</h3>
                 <input type="text" placeholder="Try to swipe while typing..." className="w-full p-2 rounded" />
             </div>,
-            <SampleSlide key="2" number={2} color="bg-green-500" />,
-            <SampleSlide key="3" number={3} color="bg-purple-500" />,
+            <SampleSlide key="2" number={2} />,
+            <SampleSlide key="3" number={3} />,
         ],
         noSwipingSelector: 'input, textarea',
         showNavigation: true,
