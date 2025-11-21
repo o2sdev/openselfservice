@@ -1,261 +1,58 @@
-import { Auth, CMS } from '@o2s/framework/modules';
+import { NotFoundException } from '@nestjs/common';
 
-const MOCK_HEADER_LOGON_EN: CMS.Model.Header.Header = {
-    id: 'fqj6nnyk4irqq5b7rnc4ogsj',
-    title: 'MOCK_HEADER_LOGON_EN',
-    logo: {
-        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/logo.svg',
-        alt: 'Logo',
-        width: 92,
-        height: 24,
-    },
-    languageSwitcherLabel: 'Language',
-    mobileMenuLabel: {
-        open: 'Open menu',
-        close: 'Close Menu',
-    },
-    userInfo: {
-        url: '/user-account',
-        label: 'User Profile',
-    },
-    items: [
-        {
-            __typename: 'NavigationGroup',
-            title: 'Customer Portal',
-            items: [
-                {
-                    __typename: 'NavigationItem',
-                    label: 'Dashboard',
-                    url: '/',
-                    permissions: [Auth.Constants.Roles.ORG_USER],
-                },
-                {
-                    __typename: 'NavigationItem',
-                    label: 'Cases',
-                    url: '/cases',
-                    permissions: [Auth.Constants.Roles.ORG_USER],
-                },
-                {
-                    __typename: 'NavigationItem',
-                    label: 'Invoices',
-                    url: '/invoices',
-                    permissions: [Auth.Constants.Roles.ORG_USER],
-                },
-                {
-                    __typename: 'NavigationItem',
-                    label: 'Notifications',
-                    url: '/notifications',
-                    permissions: [Auth.Constants.Roles.ORG_USER],
-                },
-                {
-                    __typename: 'NavigationItem',
-                    label: 'Services',
-                    url: '/services',
-                    permissions: [Auth.Constants.Roles.ORG_USER],
-                },
-                {
-                    __typename: 'NavigationItem',
-                    label: 'Orders',
-                    url: '/orders',
-                    permissions: [Auth.Constants.Roles.ORG_USER],
-                },
-            ],
-        },
-        {
-            __typename: 'NavigationGroup',
-            title: 'Help & Support',
-            items: [
-                {
-                    __typename: 'NavigationItem',
-                    label: 'Welcome Hub',
-                    url: '/help-and-support',
-                },
-            ],
-        },
-    ],
-    notification: {
-        url: '/notifications',
-        label: 'Notifications',
-    },
-    contextSwitcher: {
-        closeLabel: 'Close',
-        showContextSwitcher: true,
-    },
-};
-const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
-    id: 'fqj6nnyk4irqq5b7rnc4ogsj',
-    title: 'MOCK_HEADER_LOGON_DE',
-    logo: {
-        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/logo.svg',
-        alt: 'Logo',
-        width: 92,
-        height: 24,
-    },
-    languageSwitcherLabel: 'Sprache',
-    mobileMenuLabel: {
-        open: 'Menü öffnen',
-        close: 'Menü schließen',
-    },
-    userInfo: {
-        url: '/user-account',
-        label: 'Benutzerprofil',
-    },
-    items: [
-        {
-            __typename: 'NavigationGroup',
-            title: 'Kunden Portal',
-            items: [
-                {
-                    __typename: 'NavigationItem',
-                    label: 'Startseite',
-                    url: '/',
-                    permissions: [Auth.Constants.Roles.ORG_USER],
-                },
-                {
-                    __typename: 'NavigationItem',
-                    label: 'Fälle',
-                    url: '/faelle',
-                    permissions: [Auth.Constants.Roles.ORG_USER],
-                },
-                {
-                    __typename: 'NavigationItem',
-                    label: 'Rechnungen',
-                    url: '/rechnungen',
-                    permissions: [Auth.Constants.Roles.ORG_USER],
-                },
-                {
-                    __typename: 'NavigationItem',
-                    label: 'Benachrichtigungen',
-                    url: '/benachrichtigungen',
-                    permissions: [Auth.Constants.Roles.ORG_USER],
-                },
-                {
-                    __typename: 'NavigationItem',
-                    label: 'Dienstleistungen',
-                    url: '/dienstleistungen',
-                    permissions: [Auth.Constants.Roles.ORG_USER],
-                },
-                {
-                    __typename: 'NavigationItem',
-                    label: 'Bestellungen',
-                    url: '/bestellungen',
-                    permissions: [Auth.Constants.Roles.ORG_USER],
-                },
-            ],
-        },
-        {
-            __typename: 'NavigationGroup',
-            title: 'Hilfe & Support',
-            items: [
-                {
-                    __typename: 'NavigationItem',
-                    label: 'Willkommen Hub',
-                    url: '/hilfe-und-support',
-                },
-            ],
-        },
-    ],
-    notification: {
-        url: '/benachrichtigungen',
-        label: 'Benachrichtigungen',
-    },
-    contextSwitcher: {
-        closeLabel: 'Schließen',
-        showContextSwitcher: true,
-    },
-};
-const MOCK_HEADER_LOGON_PL: CMS.Model.Header.Header = {
-    id: 'fqj6nnyk4irqq5b7rnc4ogsj',
-    title: 'MOCK_HEADER_LOGON_PL',
-    logo: {
-        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/logo.svg',
-        alt: 'Logo',
-        width: 92,
-        height: 24,
-    },
-    languageSwitcherLabel: 'Język',
-    mobileMenuLabel: {
-        open: 'Otwórz menu',
-        close: 'Zamknij menu',
-    },
-    userInfo: {
-        url: '/konto-uzytkownika',
-        label: 'Profil użytkownika',
-    },
-    items: [
-        {
-            __typename: 'NavigationGroup',
-            title: 'Portal klienta',
-            items: [
-                {
-                    __typename: 'NavigationItem',
-                    label: 'Strona główna',
-                    url: '/',
-                    permissions: [Auth.Constants.Roles.ORG_USER],
-                },
-                {
-                    __typename: 'NavigationItem',
-                    label: 'Zgłoszenia',
-                    url: '/zgloszenia',
-                    permissions: [Auth.Constants.Roles.ORG_USER],
-                },
-                {
-                    __typename: 'NavigationItem',
-                    label: 'Rachunki',
-                    url: '/rachunki',
-                    permissions: [Auth.Constants.Roles.ORG_USER],
-                },
-                {
-                    __typename: 'NavigationItem',
-                    label: 'Powiadomienia',
-                    url: '/powiadomienia',
-                    permissions: [Auth.Constants.Roles.ORG_USER],
-                },
-                {
-                    __typename: 'NavigationItem',
-                    label: 'Usługi',
-                    url: '/uslugi',
-                    permissions: [Auth.Constants.Roles.ORG_USER],
-                },
-                {
-                    __typename: 'NavigationItem',
-                    label: 'Zamówienia',
-                    url: '/zamowienia',
-                    permissions: [Auth.Constants.Roles.ORG_USER],
-                },
-            ],
-        },
-        {
-            __typename: 'NavigationGroup',
-            title: 'Pomoc & Wsparcie',
-            items: [
-                {
-                    __typename: 'NavigationItem',
-                    label: 'Centrum powitalne',
-                    url: '/pomoc-i-wsparcie',
-                },
-            ],
-        },
-    ],
-    notification: {
-        url: '/powiadomienia',
-        label: 'Powiadomienia',
-    },
-    contextSwitcher: {
-        closeLabel: 'Zamknij',
-        showContextSwitcher: true,
-    },
-};
+import { CMS } from '@o2s/framework/modules';
 
-export const mapHeader = (id: string, locale: string): CMS.Model.Header.Header => {
-    const headerList = [MOCK_HEADER_LOGON_EN, MOCK_HEADER_LOGON_DE, MOCK_HEADER_LOGON_PL];
+import { GetHeaderQuery } from '@/generated/contentful';
 
-    const header = headerList
-        .filter((header) => header.title?.endsWith(locale.toUpperCase()))
-        .find((header) => header.id === id);
+import { mapMedia } from './cms.media.mapper';
+import { mapNavigationGroup } from './cms.navigation-group.mapper';
+import { mapNavigationItem } from './cms.navigation-item.mapper';
 
-    if (!header) {
-        return MOCK_HEADER_LOGON_EN;
+export const mapHeader = (data: GetHeaderQuery, baseURL?: string): CMS.Model.Header.Header => {
+    const component = data.headerCollection?.items?.[0];
+    const configurableTexts = data.configurableTexts?.items?.[0];
+
+    if (!component) {
+        throw new NotFoundException();
     }
-    return header;
+
+    return {
+        id: component.sys.id,
+        title: component.title,
+        logo: mapMedia(component.logo, baseURL),
+        userInfo:
+            component.userInfo?.slug && component.userInfo?.seo?.title
+                ? {
+                      url: component.userInfo.slug,
+                      label: component.userInfo.seo.title,
+                  }
+                : undefined,
+        items:
+            component.itemsCollection?.items
+                ?.filter((item) => item !== null)
+                .map((item) => {
+                    if (item.__typename === 'ComponentNavigationGroup') {
+                        return mapNavigationGroup(item);
+                    } else if (item.__typename === 'ComponentNavigationItem') {
+                        return mapNavigationItem(item);
+                    }
+                    throw new NotFoundException();
+                }) || [],
+        notification:
+            component.notification?.slug && component.notification?.seo?.title
+                ? {
+                      url: component.notification.slug,
+                      label: component.notification.seo.title,
+                  }
+                : undefined,
+        languageSwitcherLabel: component.languageSwitcherLabel || '',
+        mobileMenuLabel: {
+            open: component.openMobileMenuLabel || '',
+            close: component.closeMobileMenuLabel || '',
+        },
+        contextSwitcher: {
+            showContextSwitcher: component.showContextSwitcher || false,
+            closeLabel: configurableTexts?.actions?.close || '',
+        },
+    };
 };

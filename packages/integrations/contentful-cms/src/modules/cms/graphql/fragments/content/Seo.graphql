@@ -4,4 +4,7 @@ fragment Seo on PageSeo {
     noFollow
     description
     keywords
+    image {
+        ...Media
+    }
 }

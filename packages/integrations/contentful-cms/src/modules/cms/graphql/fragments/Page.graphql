@@ -32,5 +32,9 @@ fragment Page on Page {
         ... on PageOneColumnTemplate {
             ...OneColumnTemplate
         }
+        ... on PageTwoColumnTemplate {
+            ...TwoColumnTemplate
+        }
     }
+    permissions
 }

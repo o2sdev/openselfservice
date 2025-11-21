@@ -1,11 +1,14 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { parse, stringify } from 'flatted';
-import { Observable, forkJoin, from, map, mergeMap, of } from 'rxjs';
+import { Observable, catchError, forkJoin, from, map, mergeMap, of, throwError } from 'rxjs';
 
 import { CMS, Cache } from '@o2s/framework/modules';
 
+import { GetPagesQuery } from '@/generated/contentful';
+
 import { GraphqlService } from '@/modules/graphql/graphql.service';
+import { RestDeliveryService } from '@/modules/rest-delivery/delivery.service';
 
 import { mapArticleListBlock } from './mappers/blocks/cms.article-list.mapper';
 import { mapArticleSearchBlock } from './mappers/blocks/cms.article-search.mapper';
@@ -38,21 +41,119 @@ import { mapHeader } from './mappers/cms.header.mapper';
 import { mapLoginPage } from './mappers/cms.login-page.mapper';
 import { mapNotFoundPage } from './mappers/cms.not-found-page.mapper';
 import { mapOrganizationList } from './mappers/cms.organization-list.mapper';
-import { getAllPages, getAlternativePages, mapMockPage, mapPage } from './mappers/cms.page.mapper';
+import { mapPage } from './mappers/cms.page.mapper';
 import { mapSurvey } from './mappers/cms.survey.mapper';
+
+type GraphQLErrorResponse = {
+    response?: {
+        status?: number;
+        data?: {
+            errors?: Array<{ message?: string }>;
+            message?: string;
+        };
+    };
+    status?: number;
+    message?: string;
+};
+
+/**
+ * Converts preview parameter to boolean.
+ * Handles cases where preview might be a string ('true'/'false') or boolean.
+ */
+function toBooleanPreview(preview?: boolean | string): boolean {
+    if (typeof preview === 'boolean') {
+        return preview;
+    }
+    if (typeof preview === 'string') {
+        return preview.toLowerCase() === 'true';
+    }
+    return false;
+}
 
 @Injectable()
 export class CmsService implements CMS.Service {
     constructor(
         private readonly graphqlService: GraphqlService,
+        private readonly restDeliveryService: RestDeliveryService,
         private readonly config: ConfigService,
         private readonly cacheService: Cache.Service,
     ) {}
 
+    /**
+     * Universal error handler for Contentful GraphQL errors
+     * @param error - The error object from GraphQL request
+     * @param context - Optional context information (id, locale, resourceType)
+     * @returns Observable that throws appropriate NestJS exception
+     */
+    private handleContentfulError<T>(
+        error: unknown,
+        context?: {
+            id?: string;
+            slug?: string;
+            locale?: string;
+            resourceType?: string;
+            returnEmptyArray?: boolean;
+        },
+    ): Observable<T> {
+        const errorWithResponse = error as GraphQLErrorResponse;
+        const status = errorWithResponse.response?.status || errorWithResponse.status;
+        const errorMessage = errorWithResponse.message || 'Unknown error';
+
+        // Check if it's a GraphQL error from Contentful
+        if (status === 400 || errorMessage.includes('GraphQL Error')) {
+            // Extract error details from GraphQL response
+            const errorResponse = errorWithResponse.response?.data;
+            const errorDetails =
+                errorResponse?.errors?.[0]?.message ||
+                errorResponse?.message ||
+                errorMessage ||
+                `${context?.resourceType || 'Resource'} may not exist or query is invalid.`;
+
+            // Check if it's a validation error or missing content
+            const isNotFound =
+                errorDetails.includes('not found') ||
+                errorDetails.includes('does not exist') ||
+                errorDetails.includes('Cannot query field') ||
+                errorDetails.includes('Unknown field') ||
+                errorDetails.includes('not available');
+
+            // Build error message
+            const parts: string[] = [];
+            if (context?.resourceType) {
+                parts.push(`${context.resourceType}`);
+            }
+            if (context?.id) {
+                parts.push(`with id ${context.id}`);
+            }
+            if (context?.slug) {
+                parts.push(`with slug ${context.slug}`);
+            }
+            if (context?.locale) {
+                parts.push(`for locale ${context.locale}`);
+            }
+            const resourceInfo = parts.length > 0 ? `${parts.join(' ')} ` : '';
+
+            const fullMessage = `GraphQL error: ${resourceInfo}not found in Contentful. ${errorDetails}${
+                isNotFound && !context?.returnEmptyArray
+                    ? ' Try using preview: true if the resource is unpublished.'
+                    : ''
+            }`;
+
+            // Return empty array if requested, otherwise throw NotFoundException
+            if (context?.returnEmptyArray) {
+                return of([] as unknown as T);
+            }
+
+            return throwError(() => new NotFoundException(fullMessage));
+        }
+
+        // For other errors, re-throw as is
+        return throwError(() => error);
+    }
+
     private getBlock = (options: CMS.Request.GetCmsEntryParams) => {
         const key = `component-${options.id}-${options.locale}`;
-        // @ts-expect-error we are missing transforming string from query param back to boolean
-        const isPreview = options.preview === 'true';
+        const isPreview = toBooleanPreview(options.preview);
 
         return from(this.cacheService.get(key)).pipe(
             mergeMap((cachedBlock) => {
@@ -70,7 +171,9 @@ export class CmsService implements CMS.Service {
                     map(([component]) => {
                         const configurableTexts = component?.data.configurableTexts?.items?.[0];
                         if (!component?.data.block?.content || !configurableTexts) {
-                            throw new NotFoundException();
+                            throw new NotFoundException(
+                                `Block with id ${options.id} not found or has no content for locale ${options.locale}`,
+                            );
                         }
                         const data = {
                             ...component.data.block.content,
@@ -79,6 +182,13 @@ export class CmsService implements CMS.Service {
                         this.cacheService.set(key, stringify(data));
                         return { ...data, isPreview };
                     }),
+                    catchError((error) =>
+                        this.handleContentfulError(error, {
+                            id: options.id,
+                            locale: options.locale,
+                            resourceType: 'Block',
+                        }),
+                    ),
                 );
             }),
         );
@@ -110,18 +220,77 @@ export class CmsService implements CMS.Service {
     }
 
     getAppConfig(options: CMS.Request.GetCmsAppConfigParams) {
-        return of(mapAppConfig(options.locale, options.referrer));
+        const key = `app-config-${options.locale}`;
+        const isPreview = toBooleanPreview(options.preview);
+
+        return this.getCachedBlock(key, () => {
+            const appConfig = this.graphqlService.getAppConfig({
+                locale: options.locale,
+                preview: isPreview,
+            });
+
+            const locales = from(this.restDeliveryService.getLocales());
+
+            return forkJoin([appConfig, locales]).pipe(
+                map(([appConfig, locales]) => {
+                    if (!appConfig?.data) {
+                        throw new NotFoundException(
+                            `AppConfig query failed for locale: ${options.locale}. GraphQL response is empty.`,
+                        );
+                    }
+                    return mapAppConfig(appConfig.data, locales);
+                }),
+                catchError((error) =>
+                    this.handleContentfulError<CMS.Model.AppConfig.AppConfig>(error, {
+                        locale: options.locale,
+                        resourceType: 'AppConfig',
+                    }),
+                ),
+            );
+        });
     }
 
     getPage(options: CMS.Request.GetCmsPageParams) {
         const key = `page-${options.slug}-${options.locale}`;
-        // @ts-expect-error we are missing transforming string from query param back to boolean
-        const isPreview = options.preview === 'true';
+        const isPreview = toBooleanPreview(options.preview);
 
-        // TODO: remove this once we have a full implementation of the page mapper
-        if (options.slug !== '/cases' && options.slug !== '/') {
-            return of(mapMockPage(options.slug, options.locale));
-        }
+        return this.getCachedBlock(key, () => {
+            const page = this.graphqlService.getPage({
+                slug: options.slug,
+                locale: options.locale,
+                preview: isPreview,
+            });
+
+            return forkJoin([page]).pipe(
+                map(([page]) => {
+                    if (!page?.data?.pageCollection?.items?.length) {
+                        throw new NotFoundException();
+                    }
+                    const pageData = page.data.pageCollection.items.find((page) => {
+                        const pattern = new RegExp(`^${page.slug}$`, 'i');
+                        return pattern.test(options.slug);
+                    });
+
+                    if (!pageData) {
+                        throw new NotFoundException();
+                    }
+
+                    return mapPage(pageData);
+                }),
+                catchError((error) =>
+                    this.handleContentfulError<CMS.Model.Page.Page | undefined>(error, {
+                        locale: options.locale,
+                        resourceType: 'Page',
+                        id: options.slug,
+                    }),
+                ),
+            );
+        });
+    }
+
+    getPages(options: CMS.Request.GetCmsPagesParams) {
+        const key = `pages-${options.locale}`;
+        const isPreview = toBooleanPreview(options.preview);
 
         return this.getCachedBlock(key, () => {
             const pages = this.graphqlService.getPages({
@@ -132,30 +301,80 @@ export class CmsService implements CMS.Service {
             return forkJoin([pages]).pipe(
                 map(([pages]) => {
                     if (!pages?.data?.pageCollection?.items?.length) {
-                        throw new NotFoundException();
+                        return [];
                     }
 
-                    const page = pages.data.pageCollection.items.find((page) => {
-                        const pattern = new RegExp(`^${page.slug}$`, 'i');
-                        return pattern.test(options.slug);
-                    });
-
-                    if (!page) {
-                        throw new NotFoundException();
-                    }
-
-                    return mapPage(page);
+                    return pages.data.pageCollection.items.map((page) => mapPage(page));
                 }),
+                catchError((error) =>
+                    this.handleContentfulError<CMS.Model.Page.Page[]>(error, {
+                        locale: options.locale,
+                        resourceType: 'Pages',
+                        returnEmptyArray: true,
+                    }),
+                ),
             );
         });
     }
 
-    getPages(options: CMS.Request.GetCmsPagesParams) {
-        return of(getAllPages(options.locale));
-    }
-
     getAlternativePages(options: CMS.Request.GetCmsAlternativePagesParams) {
-        return of(getAlternativePages(options.id, options.slug, options.locale));
+        const key = `alternative-pages-${options.id}-${options.locale}`;
+        const isPreview = toBooleanPreview(options.preview);
+
+        return this.getCachedBlock(key, () => {
+            const locales = from(this.restDeliveryService.getLocales());
+
+            return forkJoin([locales]).pipe(
+                mergeMap(([locales]) => {
+                    if (!locales || !Array.isArray(locales) || locales.length === 0) {
+                        return of([] as CMS.Model.Page.Page[]);
+                    }
+
+                    const supportedLocales = locales.map((locale) => locale.value);
+
+                    if (!supportedLocales || supportedLocales.length === 0) {
+                        return of([] as CMS.Model.Page.Page[]);
+                    }
+
+                    const pageRequests = supportedLocales.map((locale: string) =>
+                        from(
+                            this.graphqlService.getPages({
+                                locale,
+                                preview: isPreview,
+                            }),
+                        ),
+                    );
+
+                    return forkJoin<Array<{ data: GetPagesQuery }>>(pageRequests).pipe(
+                        map((pagesResults) => {
+                            const alternativePages: CMS.Model.Page.Page[] = [];
+
+                            pagesResults.forEach((pagesResult: { data: GetPagesQuery }) => {
+                                if (pagesResult?.data?.pageCollection?.items) {
+                                    const matchingPage = pagesResult.data.pageCollection.items.find(
+                                        (page: { sys: { id: string } }) => page.sys.id === options.id,
+                                    );
+
+                                    if (matchingPage) {
+                                        alternativePages.push(mapPage(matchingPage));
+                                    }
+                                }
+                            });
+
+                            return alternativePages.filter((page) => page.locale !== options.locale);
+                        }),
+                    );
+                }),
+                catchError((error) =>
+                    this.handleContentfulError<CMS.Model.Page.Page[]>(error, {
+                        id: options.id,
+                        locale: options.locale,
+                        resourceType: 'Alternative pages',
+                        returnEmptyArray: true,
+                    }),
+                ),
+            );
+        });
     }
 
     getLoginPage(options: CMS.Request.GetCmsLoginPageParams) {
@@ -167,11 +386,61 @@ export class CmsService implements CMS.Service {
     }
 
     getHeader(options: CMS.Request.GetCmsHeaderParams) {
-        return of(mapHeader(options.id, options.locale));
+        const key = `header-${options.id}-${options.locale}`;
+        const isPreview = toBooleanPreview(options.preview);
+
+        return this.getCachedBlock(key, () => {
+            const header = this.graphqlService.getHeader({
+                id: options.id,
+                locale: options.locale,
+                preview: isPreview,
+            });
+
+            return forkJoin([header]).pipe(
+                map(([header]) => {
+                    if (!header?.data.headerCollection?.items?.[0]) {
+                        throw new NotFoundException();
+                    }
+                    return mapHeader(header.data, undefined);
+                }),
+                catchError((error) =>
+                    this.handleContentfulError<CMS.Model.Header.Header>(error, {
+                        id: options.id,
+                        locale: options.locale,
+                        resourceType: 'Header',
+                    }),
+                ),
+            );
+        });
     }
 
     getFooter(options: CMS.Request.GetCmsFooterParams) {
-        return of(mapFooter(options.locale));
+        const key = `footer-${options.id}-${options.locale}`;
+        const isPreview = toBooleanPreview(options.preview);
+
+        return this.getCachedBlock(key, () => {
+            const footer = this.graphqlService.getFooter({
+                id: options.id,
+                locale: options.locale,
+                preview: isPreview,
+            });
+
+            return forkJoin([footer]).pipe(
+                map(([footer]) => {
+                    if (!footer?.data.footerCollection?.items?.[0]) {
+                        throw new NotFoundException();
+                    }
+                    return mapFooter(footer.data, undefined);
+                }),
+                catchError((error) =>
+                    this.handleContentfulError<CMS.Model.Footer.Footer>(error, {
+                        id: options.id,
+                        locale: options.locale,
+                        resourceType: 'Footer',
+                    }),
+                ),
+            );
+        });
     }
 
     getFaqBlock(options: CMS.Request.GetCmsEntryParams) {

@@ -2,8 +2,15 @@ import { NotFoundException } from '@nestjs/common';
 
 import { CMS, Models } from '@o2s/framework/modules';
 
-import { ComponentBaseFragment, OneColumnTemplateFragment, PageFragment, SeoFragment } from '@/generated/contentful';
+import {
+    ComponentBaseFragment,
+    OneColumnTemplateFragment,
+    PageFragment,
+    SeoFragment,
+    TwoColumnTemplateFragment,
+} from '@/generated/contentful';
 
+import { mapRoles } from './cms.roles.mapper';
 import {
     PAGE_ACCESSORIES_DE,
     PAGE_ACCESSORIES_EN,
@@ -405,6 +412,7 @@ export const mapPage = (entryPage: PageFragment): CMS.Model.Page.Page => {
     return {
         id: entryPage.sys.id,
         slug: entryPage.slug || '',
+        permissions: mapRoles(entryPage.permissions),
         locale: entryPage.sys.locale || process.env.DEFAULT_LOCALE!,
         template: template,
         updatedAt: entryPage.sys.publishedAt,
@@ -441,12 +449,18 @@ const mapSeo = (seo?: SeoFragment): Models.SEO.Page => {
         noFollow: seo.noFollow ?? false,
         description: seo.description ?? '',
         keywords: seo.keywords || [],
-        // TODO: implement image
-        // image: seo?.image,
+        image: seo.image
+            ? {
+                  url: seo.image.url || '',
+                  alt: seo.image.description || '',
+                  width: seo.image.width || undefined,
+                  height: seo.image.height || undefined,
+              }
+            : undefined,
     };
 };
 
-const mapTemplate = (template?: OneColumnTemplateFragment): CMS.Model.Page.PageTemplate => {
+const mapTemplate = (template?: OneColumnTemplateFragment | TwoColumnTemplateFragment): CMS.Model.Page.PageTemplate => {
     if (!template) throw new NotFoundException();
 
     switch (template.__typename) {
@@ -457,17 +471,16 @@ const mapTemplate = (template?: OneColumnTemplateFragment): CMS.Model.Page.PageT
                     main: mapSlot(template.mainSlotCollection?.items),
                 },
             };
-        // TODO: add two column template
-        // case 'pageTwoColumnTemplate':
-        //     return {
-        //         __typename: 'TwoColumnTemplate',
-        //         slots: {
-        //             top: mapSlot(template.topSlot),
-        //             left: mapSlot(template.leftSlot),
-        //             right: mapSlot(template.rightSlot),
-        //             bottom: mapSlot(template.bottomSlot),
-        //         },
-        //     };
+        case 'PageTwoColumnTemplate':
+            return {
+                __typename: 'TwoColumnTemplate',
+                slots: {
+                    top: mapSlot(template.topSlotCollection?.items),
+                    left: mapSlot(template.leftSlotCollection?.items),
+                    right: mapSlot(template.rightSlotCollection?.items),
+                    bottom: mapSlot(template.bottomSlotCollection?.items),
+                },
+            };
     }
 };
 

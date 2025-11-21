@@ -13,7 +13,6 @@
                 "CF_PREVIEW_TOKEN",
                 "CF_SPACE_ID",
                 "CF_ENV",
-                "CF_MANAGEMENT_TOKEN",
                 "DEFAULT_LOCALE"
             ]
         },
@@ -27,7 +26,6 @@
                 "CF_PREVIEW_TOKEN",
                 "CF_SPACE_ID",
                 "CF_ENV",
-                "CF_MANAGEMENT_TOKEN",
                 "DEFAULT_LOCALE"
             ]
         }

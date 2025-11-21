@@ -1,4 +1,4 @@
-fragment LayoutSection on  Block {
+fragment LayoutSection on Block {
     spacing
     background
     variant

@@ -24,9 +24,146 @@ export type Scalars = {
     DateTime: { input: any; output: any };
     Dimension: { input: any; output: any };
     HexColor: { input: any; output: any };
-    JSON: { input: any; output: any };
     Quality: { input: any; output: any };
 };
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/appConfig) */
+export type AppConfig = Entry &
+    _Node & {
+        _id: Scalars['ID']['output'];
+        contentfulMetadata: ContentfulMetadata;
+        linkedFrom?: Maybe<AppConfigLinkingCollections>;
+        name?: Maybe<Scalars['String']['output']>;
+        signedInFooter?: Maybe<Footer>;
+        signedInHeader?: Maybe<Header>;
+        signedOutFooter?: Maybe<Footer>;
+        signedOutHeader?: Maybe<Header>;
+        sys: Sys;
+        themesCollection?: Maybe<AppConfigThemesCollection>;
+    };
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/appConfig) */
+export type AppConfigLinkedFromArgs = {
+    allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/appConfig) */
+export type AppConfigNameArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/appConfig) */
+export type AppConfigSignedInFooterArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    where?: InputMaybe<FooterFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/appConfig) */
+export type AppConfigSignedInHeaderArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    where?: InputMaybe<HeaderFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/appConfig) */
+export type AppConfigSignedOutFooterArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    where?: InputMaybe<FooterFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/appConfig) */
+export type AppConfigSignedOutHeaderArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    where?: InputMaybe<HeaderFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/appConfig) */
+export type AppConfigThemesCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<AppConfigThemesCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<ThemeFilter>;
+};
+
+export type AppConfigCollection = {
+    items: Array<Maybe<AppConfig>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export type AppConfigFilter = {
+    AND?: InputMaybe<Array<InputMaybe<AppConfigFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<AppConfigFilter>>>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    name?: InputMaybe<Scalars['String']['input']>;
+    name_contains?: InputMaybe<Scalars['String']['input']>;
+    name_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    name_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    name_not?: InputMaybe<Scalars['String']['input']>;
+    name_not_contains?: InputMaybe<Scalars['String']['input']>;
+    name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    signedInFooter?: InputMaybe<CfFooterNestedFilter>;
+    signedInFooter_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    signedInHeader?: InputMaybe<CfHeaderNestedFilter>;
+    signedInHeader_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    signedOutFooter?: InputMaybe<CfFooterNestedFilter>;
+    signedOutFooter_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    signedOutHeader?: InputMaybe<CfHeaderNestedFilter>;
+    signedOutHeader_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    sys?: InputMaybe<SysFilter>;
+    themes?: InputMaybe<CfThemeNestedFilter>;
+    themesCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type AppConfigLinkingCollections = {
+    entryCollection?: Maybe<EntryCollection>;
+};
+
+export type AppConfigLinkingCollectionsEntryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum AppConfigOrder {
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export type AppConfigThemesCollection = {
+    items: Array<Maybe<Theme>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export enum AppConfigThemesCollectionOrder {
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
 
 /** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/article) */
 export type Article = Entry &
@@ -287,6 +424,8 @@ export type AssetFilter = {
 export type AssetLinkingCollections = {
     authorCollection?: Maybe<AuthorCollection>;
     entryCollection?: Maybe<EntryCollection>;
+    footerCollection?: Maybe<FooterCollection>;
+    headerCollection?: Maybe<HeaderCollection>;
     pageSeoCollection?: Maybe<PageSeoCollection>;
     themeCollection?: Maybe<ThemeCollection>;
 };
@@ -299,6 +438,20 @@ export type AssetLinkingCollectionsAuthorCollectionArgs = {
 };
 
 export type AssetLinkingCollectionsEntryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type AssetLinkingCollectionsFooterCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type AssetLinkingCollectionsHeaderCollectionArgs = {
     limit?: InputMaybe<Scalars['Int']['input']>;
     locale?: InputMaybe<Scalars['String']['input']>;
     preview?: InputMaybe<Scalars['Boolean']['input']>;
@@ -1206,6 +1359,7 @@ export type BlockFilter = {
 export type BlockLinkingCollections = {
     entryCollection?: Maybe<EntryCollection>;
     pageOneColumnTemplateCollection?: Maybe<PageOneColumnTemplateCollection>;
+    pageTwoColumnTemplateCollection?: Maybe<PageTwoColumnTemplateCollection>;
 };
 
 export type BlockLinkingCollectionsEntryCollectionArgs = {
@@ -1223,7 +1377,28 @@ export type BlockLinkingCollectionsPageOneColumnTemplateCollectionArgs = {
     skip?: InputMaybe<Scalars['Int']['input']>;
 };
 
+export type BlockLinkingCollectionsPageTwoColumnTemplateCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<BlockLinkingCollectionsPageTwoColumnTemplateCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
 export enum BlockLinkingCollectionsPageOneColumnTemplateCollectionOrder {
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    TitleAsc = 'title_ASC',
+    TitleDesc = 'title_DESC',
+}
+
+export enum BlockLinkingCollectionsPageTwoColumnTemplateCollectionOrder {
     SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
     SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
     SysIdAsc = 'sys_id_ASC',
@@ -2824,6 +2999,376 @@ export enum ComponentMessageSimpleOrder {
     TitleDesc = 'title_DESC',
 }
 
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentNavigationGroup) */
+export type ComponentNavigationGroup = Entry &
+    _Node & {
+        _id: Scalars['ID']['output'];
+        contentfulMetadata: ContentfulMetadata;
+        itemsCollection?: Maybe<ComponentNavigationGroupItemsCollection>;
+        linkedFrom?: Maybe<ComponentNavigationGroupLinkingCollections>;
+        page?: Maybe<Page>;
+        sys: Sys;
+        title?: Maybe<Scalars['String']['output']>;
+        url?: Maybe<Scalars['String']['output']>;
+    };
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentNavigationGroup) */
+export type ComponentNavigationGroupItemsCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<ComponentNavigationGroupItemsCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<ComponentNavigationItemFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentNavigationGroup) */
+export type ComponentNavigationGroupLinkedFromArgs = {
+    allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentNavigationGroup) */
+export type ComponentNavigationGroupPageArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    where?: InputMaybe<PageFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentNavigationGroup) */
+export type ComponentNavigationGroupTitleArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentNavigationGroup) */
+export type ComponentNavigationGroupUrlArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ComponentNavigationGroupCollection = {
+    items: Array<Maybe<ComponentNavigationGroup>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export type ComponentNavigationGroupFilter = {
+    AND?: InputMaybe<Array<InputMaybe<ComponentNavigationGroupFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<ComponentNavigationGroupFilter>>>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    items?: InputMaybe<CfComponentNavigationItemNestedFilter>;
+    itemsCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    page?: InputMaybe<CfPageNestedFilter>;
+    page_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    sys?: InputMaybe<SysFilter>;
+    title?: InputMaybe<Scalars['String']['input']>;
+    title_contains?: InputMaybe<Scalars['String']['input']>;
+    title_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    title_not?: InputMaybe<Scalars['String']['input']>;
+    title_not_contains?: InputMaybe<Scalars['String']['input']>;
+    title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    url?: InputMaybe<Scalars['String']['input']>;
+    url_contains?: InputMaybe<Scalars['String']['input']>;
+    url_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    url_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    url_not?: InputMaybe<Scalars['String']['input']>;
+    url_not_contains?: InputMaybe<Scalars['String']['input']>;
+    url_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ComponentNavigationGroupItemsCollection = {
+    items: Array<Maybe<ComponentNavigationItem>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export enum ComponentNavigationGroupItemsCollectionOrder {
+    LabelAsc = 'label_ASC',
+    LabelDesc = 'label_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    UrlAsc = 'url_ASC',
+    UrlDesc = 'url_DESC',
+}
+
+export type ComponentNavigationGroupLinkingCollections = {
+    entryCollection?: Maybe<EntryCollection>;
+    footerCollection?: Maybe<FooterCollection>;
+    headerCollection?: Maybe<HeaderCollection>;
+};
+
+export type ComponentNavigationGroupLinkingCollectionsEntryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type ComponentNavigationGroupLinkingCollectionsFooterCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<ComponentNavigationGroupLinkingCollectionsFooterCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type ComponentNavigationGroupLinkingCollectionsHeaderCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<ComponentNavigationGroupLinkingCollectionsHeaderCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum ComponentNavigationGroupLinkingCollectionsFooterCollectionOrder {
+    CopyrightAsc = 'copyright_ASC',
+    CopyrightDesc = 'copyright_DESC',
+    LogoLabelAsc = 'logoLabel_ASC',
+    LogoLabelDesc = 'logoLabel_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    TitleAsc = 'title_ASC',
+    TitleDesc = 'title_DESC',
+}
+
+export enum ComponentNavigationGroupLinkingCollectionsHeaderCollectionOrder {
+    CloseMobileMenuLabelAsc = 'closeMobileMenuLabel_ASC',
+    CloseMobileMenuLabelDesc = 'closeMobileMenuLabel_DESC',
+    LanguageSwitcherLabelAsc = 'languageSwitcherLabel_ASC',
+    LanguageSwitcherLabelDesc = 'languageSwitcherLabel_DESC',
+    LogoLabelAsc = 'logoLabel_ASC',
+    LogoLabelDesc = 'logoLabel_DESC',
+    OpenMobileMenuLabelAsc = 'openMobileMenuLabel_ASC',
+    OpenMobileMenuLabelDesc = 'openMobileMenuLabel_DESC',
+    ShowContextSwitcherAsc = 'showContextSwitcher_ASC',
+    ShowContextSwitcherDesc = 'showContextSwitcher_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    TitleAsc = 'title_ASC',
+    TitleDesc = 'title_DESC',
+}
+
+export enum ComponentNavigationGroupOrder {
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    TitleAsc = 'title_ASC',
+    TitleDesc = 'title_DESC',
+    UrlAsc = 'url_ASC',
+    UrlDesc = 'url_DESC',
+}
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentNavigationItem) */
+export type ComponentNavigationItem = Entry &
+    _Node & {
+        _id: Scalars['ID']['output'];
+        contentfulMetadata: ContentfulMetadata;
+        description?: Maybe<Scalars['String']['output']>;
+        label?: Maybe<Scalars['String']['output']>;
+        linkedFrom?: Maybe<ComponentNavigationItemLinkingCollections>;
+        page?: Maybe<Page>;
+        sys: Sys;
+        url?: Maybe<Scalars['String']['output']>;
+    };
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentNavigationItem) */
+export type ComponentNavigationItemDescriptionArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentNavigationItem) */
+export type ComponentNavigationItemLabelArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentNavigationItem) */
+export type ComponentNavigationItemLinkedFromArgs = {
+    allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentNavigationItem) */
+export type ComponentNavigationItemPageArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    where?: InputMaybe<PageFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentNavigationItem) */
+export type ComponentNavigationItemUrlArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ComponentNavigationItemCollection = {
+    items: Array<Maybe<ComponentNavigationItem>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export type ComponentNavigationItemFilter = {
+    AND?: InputMaybe<Array<InputMaybe<ComponentNavigationItemFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<ComponentNavigationItemFilter>>>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    description?: InputMaybe<Scalars['String']['input']>;
+    description_contains?: InputMaybe<Scalars['String']['input']>;
+    description_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    description_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    description_not?: InputMaybe<Scalars['String']['input']>;
+    description_not_contains?: InputMaybe<Scalars['String']['input']>;
+    description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    label?: InputMaybe<Scalars['String']['input']>;
+    label_contains?: InputMaybe<Scalars['String']['input']>;
+    label_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    label_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    label_not?: InputMaybe<Scalars['String']['input']>;
+    label_not_contains?: InputMaybe<Scalars['String']['input']>;
+    label_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    page?: InputMaybe<CfPageNestedFilter>;
+    page_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    sys?: InputMaybe<SysFilter>;
+    url?: InputMaybe<Scalars['String']['input']>;
+    url_contains?: InputMaybe<Scalars['String']['input']>;
+    url_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    url_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    url_not?: InputMaybe<Scalars['String']['input']>;
+    url_not_contains?: InputMaybe<Scalars['String']['input']>;
+    url_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ComponentNavigationItemLinkingCollections = {
+    componentNavigationGroupCollection?: Maybe<ComponentNavigationGroupCollection>;
+    entryCollection?: Maybe<EntryCollection>;
+    footerCollection?: Maybe<FooterCollection>;
+    headerCollection?: Maybe<HeaderCollection>;
+};
+
+export type ComponentNavigationItemLinkingCollectionsComponentNavigationGroupCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<
+        Array<InputMaybe<ComponentNavigationItemLinkingCollectionsComponentNavigationGroupCollectionOrder>>
+    >;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type ComponentNavigationItemLinkingCollectionsEntryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type ComponentNavigationItemLinkingCollectionsFooterCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<ComponentNavigationItemLinkingCollectionsFooterCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type ComponentNavigationItemLinkingCollectionsHeaderCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<ComponentNavigationItemLinkingCollectionsHeaderCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum ComponentNavigationItemLinkingCollectionsComponentNavigationGroupCollectionOrder {
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    TitleAsc = 'title_ASC',
+    TitleDesc = 'title_DESC',
+    UrlAsc = 'url_ASC',
+    UrlDesc = 'url_DESC',
+}
+
+export enum ComponentNavigationItemLinkingCollectionsFooterCollectionOrder {
+    CopyrightAsc = 'copyright_ASC',
+    CopyrightDesc = 'copyright_DESC',
+    LogoLabelAsc = 'logoLabel_ASC',
+    LogoLabelDesc = 'logoLabel_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    TitleAsc = 'title_ASC',
+    TitleDesc = 'title_DESC',
+}
+
+export enum ComponentNavigationItemLinkingCollectionsHeaderCollectionOrder {
+    CloseMobileMenuLabelAsc = 'closeMobileMenuLabel_ASC',
+    CloseMobileMenuLabelDesc = 'closeMobileMenuLabel_DESC',
+    LanguageSwitcherLabelAsc = 'languageSwitcherLabel_ASC',
+    LanguageSwitcherLabelDesc = 'languageSwitcherLabel_DESC',
+    LogoLabelAsc = 'logoLabel_ASC',
+    LogoLabelDesc = 'logoLabel_DESC',
+    OpenMobileMenuLabelAsc = 'openMobileMenuLabel_ASC',
+    OpenMobileMenuLabelDesc = 'openMobileMenuLabel_DESC',
+    ShowContextSwitcherAsc = 'showContextSwitcher_ASC',
+    ShowContextSwitcherDesc = 'showContextSwitcher_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    TitleAsc = 'title_ASC',
+    TitleDesc = 'title_DESC',
+}
+
+export enum ComponentNavigationItemOrder {
+    LabelAsc = 'label_ASC',
+    LabelDesc = 'label_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    UrlAsc = 'url_ASC',
+    UrlDesc = 'url_DESC',
+}
+
 /** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentNoResult) */
 export type ComponentNoResult = Entry &
     _Node & {
@@ -3071,6 +3616,56 @@ export enum ComponentPaginationOrder {
     PreviousLabelDesc = 'previousLabel_DESC',
     SelectPageLabelAsc = 'selectPageLabel_ASC',
     SelectPageLabelDesc = 'selectPageLabel_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentRoles) */
+export type ComponentRoles = Entry &
+    _Node & {
+        _id: Scalars['ID']['output'];
+        contentfulMetadata: ContentfulMetadata;
+        linkedFrom?: Maybe<ComponentRolesLinkingCollections>;
+        sys: Sys;
+    };
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/componentRoles) */
+export type ComponentRolesLinkedFromArgs = {
+    allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ComponentRolesCollection = {
+    items: Array<Maybe<ComponentRoles>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export type ComponentRolesFilter = {
+    AND?: InputMaybe<Array<InputMaybe<ComponentRolesFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<ComponentRolesFilter>>>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    sys?: InputMaybe<SysFilter>;
+};
+
+export type ComponentRolesLinkingCollections = {
+    entryCollection?: Maybe<EntryCollection>;
+};
+
+export type ComponentRolesLinkingCollectionsEntryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum ComponentRolesOrder {
     SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
     SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
     SysIdAsc = 'sys_id_ASC',
@@ -4535,6 +5130,389 @@ export enum EntryOrder {
     SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/footer) */
+export type Footer = Entry &
+    _Node & {
+        _id: Scalars['ID']['output'];
+        contentfulMetadata: ContentfulMetadata;
+        copyright?: Maybe<Scalars['String']['output']>;
+        itemsCollection?: Maybe<FooterItemsCollection>;
+        linkedFrom?: Maybe<FooterLinkingCollections>;
+        logo?: Maybe<Asset>;
+        logoLabel?: Maybe<Scalars['String']['output']>;
+        sys: Sys;
+        title?: Maybe<Scalars['String']['output']>;
+    };
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/footer) */
+export type FooterCopyrightArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/footer) */
+export type FooterItemsCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<FooterItemsFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/footer) */
+export type FooterLinkedFromArgs = {
+    allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/footer) */
+export type FooterLogoArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/footer) */
+export type FooterLogoLabelArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/footer) */
+export type FooterTitleArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type FooterCollection = {
+    items: Array<Maybe<Footer>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export type FooterFilter = {
+    AND?: InputMaybe<Array<InputMaybe<FooterFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<FooterFilter>>>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    copyright?: InputMaybe<Scalars['String']['input']>;
+    copyright_contains?: InputMaybe<Scalars['String']['input']>;
+    copyright_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    copyright_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    copyright_not?: InputMaybe<Scalars['String']['input']>;
+    copyright_not_contains?: InputMaybe<Scalars['String']['input']>;
+    copyright_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    items?: InputMaybe<CfitemsMultiTypeNestedFilter>;
+    itemsCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    logoLabel?: InputMaybe<Scalars['String']['input']>;
+    logoLabel_contains?: InputMaybe<Scalars['String']['input']>;
+    logoLabel_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    logoLabel_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    logoLabel_not?: InputMaybe<Scalars['String']['input']>;
+    logoLabel_not_contains?: InputMaybe<Scalars['String']['input']>;
+    logoLabel_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    logo_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    sys?: InputMaybe<SysFilter>;
+    title?: InputMaybe<Scalars['String']['input']>;
+    title_contains?: InputMaybe<Scalars['String']['input']>;
+    title_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    title_not?: InputMaybe<Scalars['String']['input']>;
+    title_not_contains?: InputMaybe<Scalars['String']['input']>;
+    title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type FooterItemsCollection = {
+    items: Array<Maybe<FooterItemsItem>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export type FooterItemsFilter = {
+    AND?: InputMaybe<Array<InputMaybe<FooterItemsFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<FooterItemsFilter>>>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    page_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    sys?: InputMaybe<SysFilter>;
+    url?: InputMaybe<Scalars['String']['input']>;
+    url_contains?: InputMaybe<Scalars['String']['input']>;
+    url_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    url_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    url_not?: InputMaybe<Scalars['String']['input']>;
+    url_not_contains?: InputMaybe<Scalars['String']['input']>;
+    url_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type FooterItemsItem = ComponentNavigationGroup | ComponentNavigationItem;
+
+export type FooterLinkingCollections = {
+    appConfigCollection?: Maybe<AppConfigCollection>;
+    entryCollection?: Maybe<EntryCollection>;
+};
+
+export type FooterLinkingCollectionsAppConfigCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<FooterLinkingCollectionsAppConfigCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type FooterLinkingCollectionsEntryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum FooterLinkingCollectionsAppConfigCollectionOrder {
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum FooterOrder {
+    CopyrightAsc = 'copyright_ASC',
+    CopyrightDesc = 'copyright_DESC',
+    LogoLabelAsc = 'logoLabel_ASC',
+    LogoLabelDesc = 'logoLabel_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    TitleAsc = 'title_ASC',
+    TitleDesc = 'title_DESC',
+}
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/header) */
+export type Header = Entry &
+    _Node & {
+        _id: Scalars['ID']['output'];
+        closeMobileMenuLabel?: Maybe<Scalars['String']['output']>;
+        contentfulMetadata: ContentfulMetadata;
+        itemsCollection?: Maybe<HeaderItemsCollection>;
+        languageSwitcherLabel?: Maybe<Scalars['String']['output']>;
+        linkedFrom?: Maybe<HeaderLinkingCollections>;
+        logo?: Maybe<Asset>;
+        logoLabel?: Maybe<Scalars['String']['output']>;
+        notification?: Maybe<Page>;
+        openMobileMenuLabel?: Maybe<Scalars['String']['output']>;
+        showContextSwitcher?: Maybe<Scalars['Boolean']['output']>;
+        sys: Sys;
+        title?: Maybe<Scalars['String']['output']>;
+        userInfo?: Maybe<Page>;
+    };
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/header) */
+export type HeaderCloseMobileMenuLabelArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/header) */
+export type HeaderItemsCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<HeaderItemsFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/header) */
+export type HeaderLanguageSwitcherLabelArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/header) */
+export type HeaderLinkedFromArgs = {
+    allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/header) */
+export type HeaderLogoArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/header) */
+export type HeaderLogoLabelArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/header) */
+export type HeaderNotificationArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    where?: InputMaybe<PageFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/header) */
+export type HeaderOpenMobileMenuLabelArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/header) */
+export type HeaderShowContextSwitcherArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/header) */
+export type HeaderTitleArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/header) */
+export type HeaderUserInfoArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    where?: InputMaybe<PageFilter>;
+};
+
+export type HeaderCollection = {
+    items: Array<Maybe<Header>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export type HeaderFilter = {
+    AND?: InputMaybe<Array<InputMaybe<HeaderFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<HeaderFilter>>>;
+    closeMobileMenuLabel?: InputMaybe<Scalars['String']['input']>;
+    closeMobileMenuLabel_contains?: InputMaybe<Scalars['String']['input']>;
+    closeMobileMenuLabel_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    closeMobileMenuLabel_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    closeMobileMenuLabel_not?: InputMaybe<Scalars['String']['input']>;
+    closeMobileMenuLabel_not_contains?: InputMaybe<Scalars['String']['input']>;
+    closeMobileMenuLabel_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    items?: InputMaybe<CfitemsMultiTypeNestedFilter>;
+    itemsCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    languageSwitcherLabel?: InputMaybe<Scalars['String']['input']>;
+    languageSwitcherLabel_contains?: InputMaybe<Scalars['String']['input']>;
+    languageSwitcherLabel_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    languageSwitcherLabel_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    languageSwitcherLabel_not?: InputMaybe<Scalars['String']['input']>;
+    languageSwitcherLabel_not_contains?: InputMaybe<Scalars['String']['input']>;
+    languageSwitcherLabel_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    logoLabel?: InputMaybe<Scalars['String']['input']>;
+    logoLabel_contains?: InputMaybe<Scalars['String']['input']>;
+    logoLabel_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    logoLabel_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    logoLabel_not?: InputMaybe<Scalars['String']['input']>;
+    logoLabel_not_contains?: InputMaybe<Scalars['String']['input']>;
+    logoLabel_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    logo_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    notification?: InputMaybe<CfPageNestedFilter>;
+    notification_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    openMobileMenuLabel?: InputMaybe<Scalars['String']['input']>;
+    openMobileMenuLabel_contains?: InputMaybe<Scalars['String']['input']>;
+    openMobileMenuLabel_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    openMobileMenuLabel_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    openMobileMenuLabel_not?: InputMaybe<Scalars['String']['input']>;
+    openMobileMenuLabel_not_contains?: InputMaybe<Scalars['String']['input']>;
+    openMobileMenuLabel_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    showContextSwitcher?: InputMaybe<Scalars['Boolean']['input']>;
+    showContextSwitcher_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    showContextSwitcher_not?: InputMaybe<Scalars['Boolean']['input']>;
+    sys?: InputMaybe<SysFilter>;
+    title?: InputMaybe<Scalars['String']['input']>;
+    title_contains?: InputMaybe<Scalars['String']['input']>;
+    title_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    title_not?: InputMaybe<Scalars['String']['input']>;
+    title_not_contains?: InputMaybe<Scalars['String']['input']>;
+    title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    userInfo?: InputMaybe<CfPageNestedFilter>;
+    userInfo_exists?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type HeaderItemsCollection = {
+    items: Array<Maybe<HeaderItemsItem>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export type HeaderItemsFilter = {
+    AND?: InputMaybe<Array<InputMaybe<HeaderItemsFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<HeaderItemsFilter>>>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    page_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    sys?: InputMaybe<SysFilter>;
+    url?: InputMaybe<Scalars['String']['input']>;
+    url_contains?: InputMaybe<Scalars['String']['input']>;
+    url_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    url_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    url_not?: InputMaybe<Scalars['String']['input']>;
+    url_not_contains?: InputMaybe<Scalars['String']['input']>;
+    url_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type HeaderItemsItem = ComponentNavigationGroup | ComponentNavigationItem;
+
+export type HeaderLinkingCollections = {
+    appConfigCollection?: Maybe<AppConfigCollection>;
+    entryCollection?: Maybe<EntryCollection>;
+};
+
+export type HeaderLinkingCollectionsAppConfigCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<HeaderLinkingCollectionsAppConfigCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type HeaderLinkingCollectionsEntryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum HeaderLinkingCollectionsAppConfigCollectionOrder {
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum HeaderOrder {
+    CloseMobileMenuLabelAsc = 'closeMobileMenuLabel_ASC',
+    CloseMobileMenuLabelDesc = 'closeMobileMenuLabel_DESC',
+    LanguageSwitcherLabelAsc = 'languageSwitcherLabel_ASC',
+    LanguageSwitcherLabelDesc = 'languageSwitcherLabel_DESC',
+    LogoLabelAsc = 'logoLabel_ASC',
+    LogoLabelDesc = 'logoLabel_DESC',
+    OpenMobileMenuLabelAsc = 'openMobileMenuLabel_ASC',
+    OpenMobileMenuLabelDesc = 'openMobileMenuLabel_DESC',
+    ShowContextSwitcherAsc = 'showContextSwitcher_ASC',
+    ShowContextSwitcherDesc = 'showContextSwitcher_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    TitleAsc = 'title_ASC',
+    TitleDesc = 'title_DESC',
+}
+
 export enum ImageFormat {
     /** AVIF image format. */
     Avif = 'AVIF',
@@ -4639,10 +5617,11 @@ export type Page = Entry &
         hasOwnTitle?: Maybe<Scalars['Boolean']['output']>;
         linkedFrom?: Maybe<PageLinkingCollections>;
         parent?: Maybe<Page>;
+        permissions?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
         seo?: Maybe<PageSeo>;
         slug?: Maybe<Scalars['String']['output']>;
         sys: Sys;
-        template?: Maybe<PageOneColumnTemplate>;
+        template?: Maybe<PageTemplate>;
     };
 
 /** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/page) */
@@ -4663,6 +5642,11 @@ export type PageParentArgs = {
 };
 
 /** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/page) */
+export type PagePermissionsArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/page) */
 export type PageSeoArgs = {
     locale?: InputMaybe<Scalars['String']['input']>;
     preview?: InputMaybe<Scalars['Boolean']['input']>;
@@ -4678,7 +5662,6 @@ export type PageSlugArgs = {
 export type PageTemplateArgs = {
     locale?: InputMaybe<Scalars['String']['input']>;
     preview?: InputMaybe<Scalars['Boolean']['input']>;
-    where?: InputMaybe<PageOneColumnTemplateFilter>;
 };
 
 export type PageCollection = {
@@ -4697,6 +5680,10 @@ export type PageFilter = {
     hasOwnTitle_not?: InputMaybe<Scalars['Boolean']['input']>;
     parent?: InputMaybe<CfPageNestedFilter>;
     parent_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    permissions_contains_all?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    permissions_contains_none?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    permissions_contains_some?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    permissions_exists?: InputMaybe<Scalars['Boolean']['input']>;
     seo?: InputMaybe<CfPageSeoNestedFilter>;
     seo_exists?: InputMaybe<Scalars['Boolean']['input']>;
     slug?: InputMaybe<Scalars['String']['input']>;
@@ -4707,7 +5694,6 @@ export type PageFilter = {
     slug_not_contains?: InputMaybe<Scalars['String']['input']>;
     slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     sys?: InputMaybe<SysFilter>;
-    template?: InputMaybe<CfPageOneColumnTemplateNestedFilter>;
     template_exists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
@@ -4718,7 +5704,10 @@ export type PageLinkingCollections = {
     blockCategoryListCollection?: Maybe<BlockCategoryListCollection>;
     componentCategoryCollection?: Maybe<ComponentCategoryCollection>;
     componentLinkCollection?: Maybe<ComponentLinkCollection>;
+    componentNavigationGroupCollection?: Maybe<ComponentNavigationGroupCollection>;
+    componentNavigationItemCollection?: Maybe<ComponentNavigationItemCollection>;
     entryCollection?: Maybe<EntryCollection>;
+    headerCollection?: Maybe<HeaderCollection>;
     pageCollection?: Maybe<PageCollection>;
 };
 
@@ -4770,9 +5759,33 @@ export type PageLinkingCollectionsComponentLinkCollectionArgs = {
     skip?: InputMaybe<Scalars['Int']['input']>;
 };
 
+export type PageLinkingCollectionsComponentNavigationGroupCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<PageLinkingCollectionsComponentNavigationGroupCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type PageLinkingCollectionsComponentNavigationItemCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<PageLinkingCollectionsComponentNavigationItemCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
 export type PageLinkingCollectionsEntryCollectionArgs = {
     limit?: InputMaybe<Scalars['Int']['input']>;
     locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type PageLinkingCollectionsHeaderCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<PageLinkingCollectionsHeaderCollectionOrder>>>;
     preview?: InputMaybe<Scalars['Boolean']['input']>;
     skip?: InputMaybe<Scalars['Int']['input']>;
 };
@@ -4871,6 +5884,59 @@ export enum PageLinkingCollectionsComponentLinkCollectionOrder {
     SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
     UrlAsc = 'url_ASC',
     UrlDesc = 'url_DESC',
+}
+
+export enum PageLinkingCollectionsComponentNavigationGroupCollectionOrder {
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    TitleAsc = 'title_ASC',
+    TitleDesc = 'title_DESC',
+    UrlAsc = 'url_ASC',
+    UrlDesc = 'url_DESC',
+}
+
+export enum PageLinkingCollectionsComponentNavigationItemCollectionOrder {
+    LabelAsc = 'label_ASC',
+    LabelDesc = 'label_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    UrlAsc = 'url_ASC',
+    UrlDesc = 'url_DESC',
+}
+
+export enum PageLinkingCollectionsHeaderCollectionOrder {
+    CloseMobileMenuLabelAsc = 'closeMobileMenuLabel_ASC',
+    CloseMobileMenuLabelDesc = 'closeMobileMenuLabel_DESC',
+    LanguageSwitcherLabelAsc = 'languageSwitcherLabel_ASC',
+    LanguageSwitcherLabelDesc = 'languageSwitcherLabel_DESC',
+    LogoLabelAsc = 'logoLabel_ASC',
+    LogoLabelDesc = 'logoLabel_DESC',
+    OpenMobileMenuLabelAsc = 'openMobileMenuLabel_ASC',
+    OpenMobileMenuLabelDesc = 'openMobileMenuLabel_DESC',
+    ShowContextSwitcherAsc = 'showContextSwitcher_ASC',
+    ShowContextSwitcherDesc = 'showContextSwitcher_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    TitleAsc = 'title_ASC',
+    TitleDesc = 'title_DESC',
 }
 
 export enum PageLinkingCollectionsPageCollectionOrder {
@@ -5195,9 +6261,258 @@ export enum PageSeoOrder {
     TitleDesc = 'title_DESC',
 }
 
+export type PageTemplate = PageOneColumnTemplate | PageTwoColumnTemplate;
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/pageTwoColumnTemplate) */
+export type PageTwoColumnTemplate = Entry &
+    _Node & {
+        _id: Scalars['ID']['output'];
+        bottomSlotCollection?: Maybe<PageTwoColumnTemplateBottomSlotCollection>;
+        contentfulMetadata: ContentfulMetadata;
+        leftSlotCollection?: Maybe<PageTwoColumnTemplateLeftSlotCollection>;
+        linkedFrom?: Maybe<PageTwoColumnTemplateLinkingCollections>;
+        rightSlotCollection?: Maybe<PageTwoColumnTemplateRightSlotCollection>;
+        sys: Sys;
+        title?: Maybe<Scalars['String']['output']>;
+        topSlotCollection?: Maybe<PageTwoColumnTemplateTopSlotCollection>;
+    };
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/pageTwoColumnTemplate) */
+export type PageTwoColumnTemplateBottomSlotCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<PageTwoColumnTemplateBottomSlotCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<BlockFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/pageTwoColumnTemplate) */
+export type PageTwoColumnTemplateLeftSlotCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<PageTwoColumnTemplateLeftSlotCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<BlockFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/pageTwoColumnTemplate) */
+export type PageTwoColumnTemplateLinkedFromArgs = {
+    allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/pageTwoColumnTemplate) */
+export type PageTwoColumnTemplateRightSlotCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<PageTwoColumnTemplateRightSlotCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<BlockFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/pageTwoColumnTemplate) */
+export type PageTwoColumnTemplateTitleArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/x7lexi1yira0/content_types/pageTwoColumnTemplate) */
+export type PageTwoColumnTemplateTopSlotCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<PageTwoColumnTemplateTopSlotCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<BlockFilter>;
+};
+
+export type PageTwoColumnTemplateBottomSlotCollection = {
+    items: Array<Maybe<Block>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export enum PageTwoColumnTemplateBottomSlotCollectionOrder {
+    BackgroundAsc = 'background_ASC',
+    BackgroundDesc = 'background_DESC',
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SpacingAsc = 'spacing_ASC',
+    SpacingDesc = 'spacing_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    VariantAsc = 'variant_ASC',
+    VariantDesc = 'variant_DESC',
+}
+
+export type PageTwoColumnTemplateCollection = {
+    items: Array<Maybe<PageTwoColumnTemplate>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export type PageTwoColumnTemplateFilter = {
+    AND?: InputMaybe<Array<InputMaybe<PageTwoColumnTemplateFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<PageTwoColumnTemplateFilter>>>;
+    bottomSlot?: InputMaybe<CfBlockNestedFilter>;
+    bottomSlotCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    leftSlot?: InputMaybe<CfBlockNestedFilter>;
+    leftSlotCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    rightSlot?: InputMaybe<CfBlockNestedFilter>;
+    rightSlotCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    sys?: InputMaybe<SysFilter>;
+    title?: InputMaybe<Scalars['String']['input']>;
+    title_contains?: InputMaybe<Scalars['String']['input']>;
+    title_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    title_not?: InputMaybe<Scalars['String']['input']>;
+    title_not_contains?: InputMaybe<Scalars['String']['input']>;
+    title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    topSlot?: InputMaybe<CfBlockNestedFilter>;
+    topSlotCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type PageTwoColumnTemplateLeftSlotCollection = {
+    items: Array<Maybe<Block>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export enum PageTwoColumnTemplateLeftSlotCollectionOrder {
+    BackgroundAsc = 'background_ASC',
+    BackgroundDesc = 'background_DESC',
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SpacingAsc = 'spacing_ASC',
+    SpacingDesc = 'spacing_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    VariantAsc = 'variant_ASC',
+    VariantDesc = 'variant_DESC',
+}
+
+export type PageTwoColumnTemplateLinkingCollections = {
+    entryCollection?: Maybe<EntryCollection>;
+    pageCollection?: Maybe<PageCollection>;
+};
+
+export type PageTwoColumnTemplateLinkingCollectionsEntryCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type PageTwoColumnTemplateLinkingCollectionsPageCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<PageTwoColumnTemplateLinkingCollectionsPageCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum PageTwoColumnTemplateLinkingCollectionsPageCollectionOrder {
+    HasOwnTitleAsc = 'hasOwnTitle_ASC',
+    HasOwnTitleDesc = 'hasOwnTitle_DESC',
+    SlugAsc = 'slug_ASC',
+    SlugDesc = 'slug_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
+export enum PageTwoColumnTemplateOrder {
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    TitleAsc = 'title_ASC',
+    TitleDesc = 'title_DESC',
+}
+
+export type PageTwoColumnTemplateRightSlotCollection = {
+    items: Array<Maybe<Block>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export enum PageTwoColumnTemplateRightSlotCollectionOrder {
+    BackgroundAsc = 'background_ASC',
+    BackgroundDesc = 'background_DESC',
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SpacingAsc = 'spacing_ASC',
+    SpacingDesc = 'spacing_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    VariantAsc = 'variant_ASC',
+    VariantDesc = 'variant_DESC',
+}
+
+export type PageTwoColumnTemplateTopSlotCollection = {
+    items: Array<Maybe<Block>>;
+    limit: Scalars['Int']['output'];
+    skip: Scalars['Int']['output'];
+    total: Scalars['Int']['output'];
+};
+
+export enum PageTwoColumnTemplateTopSlotCollectionOrder {
+    BackgroundAsc = 'background_ASC',
+    BackgroundDesc = 'background_DESC',
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SpacingAsc = 'spacing_ASC',
+    SpacingDesc = 'spacing_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+    VariantAsc = 'variant_ASC',
+    VariantDesc = 'variant_DESC',
+}
+
 export type Query = {
     _node?: Maybe<_Node>;
     _nodes: Array<Maybe<_Node>>;
+    appConfig?: Maybe<AppConfig>;
+    appConfigCollection?: Maybe<AppConfigCollection>;
     article?: Maybe<Article>;
     articleCollection?: Maybe<ArticleCollection>;
     asset?: Maybe<Asset>;
@@ -5236,10 +6551,16 @@ export type Query = {
     componentLinkCollection?: Maybe<ComponentLinkCollection>;
     componentMessageSimple?: Maybe<ComponentMessageSimple>;
     componentMessageSimpleCollection?: Maybe<ComponentMessageSimpleCollection>;
+    componentNavigationGroup?: Maybe<ComponentNavigationGroup>;
+    componentNavigationGroupCollection?: Maybe<ComponentNavigationGroupCollection>;
+    componentNavigationItem?: Maybe<ComponentNavigationItem>;
+    componentNavigationItemCollection?: Maybe<ComponentNavigationItemCollection>;
     componentNoResult?: Maybe<ComponentNoResult>;
     componentNoResultCollection?: Maybe<ComponentNoResultCollection>;
     componentPagination?: Maybe<ComponentPagination>;
     componentPaginationCollection?: Maybe<ComponentPaginationCollection>;
+    componentRoles?: Maybe<ComponentRoles>;
+    componentRolesCollection?: Maybe<ComponentRolesCollection>;
     componentTable?: Maybe<ComponentTable>;
     componentTableCollection?: Maybe<ComponentTableCollection>;
     componentTableColumn?: Maybe<ComponentTableColumn>;
@@ -5257,12 +6578,18 @@ export type Query = {
     dataValidation?: Maybe<DataValidation>;
     dataValidationCollection?: Maybe<DataValidationCollection>;
     entryCollection?: Maybe<EntryCollection>;
+    footer?: Maybe<Footer>;
+    footerCollection?: Maybe<FooterCollection>;
+    header?: Maybe<Header>;
+    headerCollection?: Maybe<HeaderCollection>;
     page?: Maybe<Page>;
     pageCollection?: Maybe<PageCollection>;
     pageOneColumnTemplate?: Maybe<PageOneColumnTemplate>;
     pageOneColumnTemplateCollection?: Maybe<PageOneColumnTemplateCollection>;
     pageSeo?: Maybe<PageSeo>;
     pageSeoCollection?: Maybe<PageSeoCollection>;
+    pageTwoColumnTemplate?: Maybe<PageTwoColumnTemplate>;
+    pageTwoColumnTemplateCollection?: Maybe<PageTwoColumnTemplateCollection>;
     theme?: Maybe<Theme>;
     themeCollection?: Maybe<ThemeCollection>;
 };
@@ -5277,6 +6604,21 @@ export type Query_NodesArgs = {
     ids: Array<Scalars['ID']['input']>;
     locale?: InputMaybe<Scalars['String']['input']>;
     preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type QueryAppConfigArgs = {
+    id: Scalars['String']['input'];
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type QueryAppConfigCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<AppConfigOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<AppConfigFilter>;
 };
 
 export type QueryArticleArgs = {
@@ -5564,6 +6906,36 @@ export type QueryComponentMessageSimpleCollectionArgs = {
     where?: InputMaybe<ComponentMessageSimpleFilter>;
 };
 
+export type QueryComponentNavigationGroupArgs = {
+    id: Scalars['String']['input'];
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type QueryComponentNavigationGroupCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<ComponentNavigationGroupOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<ComponentNavigationGroupFilter>;
+};
+
+export type QueryComponentNavigationItemArgs = {
+    id: Scalars['String']['input'];
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type QueryComponentNavigationItemCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<ComponentNavigationItemOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<ComponentNavigationItemFilter>;
+};
+
 export type QueryComponentNoResultArgs = {
     id: Scalars['String']['input'];
     locale?: InputMaybe<Scalars['String']['input']>;
@@ -5592,6 +6964,21 @@ export type QueryComponentPaginationCollectionArgs = {
     preview?: InputMaybe<Scalars['Boolean']['input']>;
     skip?: InputMaybe<Scalars['Int']['input']>;
     where?: InputMaybe<ComponentPaginationFilter>;
+};
+
+export type QueryComponentRolesArgs = {
+    id: Scalars['String']['input'];
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type QueryComponentRolesCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<ComponentRolesOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<ComponentRolesFilter>;
 };
 
 export type QueryComponentTableArgs = {
@@ -5723,6 +7110,36 @@ export type QueryEntryCollectionArgs = {
     where?: InputMaybe<EntryFilter>;
 };
 
+export type QueryFooterArgs = {
+    id: Scalars['String']['input'];
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type QueryFooterCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<FooterOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<FooterFilter>;
+};
+
+export type QueryHeaderArgs = {
+    id: Scalars['String']['input'];
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type QueryHeaderCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<HeaderOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<HeaderFilter>;
+};
+
 export type QueryPageArgs = {
     id: Scalars['String']['input'];
     locale?: InputMaybe<Scalars['String']['input']>;
@@ -5766,6 +7183,21 @@ export type QueryPageSeoCollectionArgs = {
     preview?: InputMaybe<Scalars['Boolean']['input']>;
     skip?: InputMaybe<Scalars['Int']['input']>;
     where?: InputMaybe<PageSeoFilter>;
+};
+
+export type QueryPageTwoColumnTemplateArgs = {
+    id: Scalars['String']['input'];
+    locale?: InputMaybe<Scalars['String']['input']>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type QueryPageTwoColumnTemplateCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<PageTwoColumnTemplateOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
+    where?: InputMaybe<PageTwoColumnTemplateFilter>;
 };
 
 export type QueryThemeArgs = {
@@ -5889,8 +7321,17 @@ export type ThemeFilter = {
 };
 
 export type ThemeLinkingCollections = {
+    appConfigCollection?: Maybe<AppConfigCollection>;
     blockCollection?: Maybe<BlockCollection>;
     entryCollection?: Maybe<EntryCollection>;
+};
+
+export type ThemeLinkingCollectionsAppConfigCollectionArgs = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+    order?: InputMaybe<Array<InputMaybe<ThemeLinkingCollectionsAppConfigCollectionOrder>>>;
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+    skip?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type ThemeLinkingCollectionsBlockCollectionArgs = {
@@ -5907,6 +7348,19 @@ export type ThemeLinkingCollectionsEntryCollectionArgs = {
     preview?: InputMaybe<Scalars['Boolean']['input']>;
     skip?: InputMaybe<Scalars['Int']['input']>;
 };
+
+export enum ThemeLinkingCollectionsAppConfigCollectionOrder {
+    NameAsc = 'name_ASC',
+    NameDesc = 'name_DESC',
+    SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+    SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+    SysIdAsc = 'sys_id_ASC',
+    SysIdDesc = 'sys_id_DESC',
+    SysPublishedAtAsc = 'sys_publishedAt_ASC',
+    SysPublishedAtDesc = 'sys_publishedAt_DESC',
+    SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+    SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
 
 export enum ThemeLinkingCollectionsBlockCollectionOrder {
     BackgroundAsc = 'background_ASC',
@@ -6229,6 +7683,35 @@ export type CfComponentMessageSimpleNestedFilter = {
     title_not?: InputMaybe<Scalars['String']['input']>;
     title_not_contains?: InputMaybe<Scalars['String']['input']>;
     title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type CfComponentNavigationItemNestedFilter = {
+    AND?: InputMaybe<Array<InputMaybe<CfComponentNavigationItemNestedFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<CfComponentNavigationItemNestedFilter>>>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    description?: InputMaybe<Scalars['String']['input']>;
+    description_contains?: InputMaybe<Scalars['String']['input']>;
+    description_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    description_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    description_not?: InputMaybe<Scalars['String']['input']>;
+    description_not_contains?: InputMaybe<Scalars['String']['input']>;
+    description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    label?: InputMaybe<Scalars['String']['input']>;
+    label_contains?: InputMaybe<Scalars['String']['input']>;
+    label_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    label_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    label_not?: InputMaybe<Scalars['String']['input']>;
+    label_not_contains?: InputMaybe<Scalars['String']['input']>;
+    label_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    page_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    sys?: InputMaybe<SysFilter>;
+    url?: InputMaybe<Scalars['String']['input']>;
+    url_contains?: InputMaybe<Scalars['String']['input']>;
+    url_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    url_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    url_not?: InputMaybe<Scalars['String']['input']>;
+    url_not_contains?: InputMaybe<Scalars['String']['input']>;
+    url_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type CfComponentNoResultNestedFilter = {
@@ -6683,6 +8166,85 @@ export type CfDataValidationNestedFilter = {
     sys?: InputMaybe<SysFilter>;
 };
 
+export type CfFooterNestedFilter = {
+    AND?: InputMaybe<Array<InputMaybe<CfFooterNestedFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<CfFooterNestedFilter>>>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    copyright?: InputMaybe<Scalars['String']['input']>;
+    copyright_contains?: InputMaybe<Scalars['String']['input']>;
+    copyright_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    copyright_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    copyright_not?: InputMaybe<Scalars['String']['input']>;
+    copyright_not_contains?: InputMaybe<Scalars['String']['input']>;
+    copyright_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    itemsCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    logoLabel?: InputMaybe<Scalars['String']['input']>;
+    logoLabel_contains?: InputMaybe<Scalars['String']['input']>;
+    logoLabel_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    logoLabel_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    logoLabel_not?: InputMaybe<Scalars['String']['input']>;
+    logoLabel_not_contains?: InputMaybe<Scalars['String']['input']>;
+    logoLabel_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    logo_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    sys?: InputMaybe<SysFilter>;
+    title?: InputMaybe<Scalars['String']['input']>;
+    title_contains?: InputMaybe<Scalars['String']['input']>;
+    title_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    title_not?: InputMaybe<Scalars['String']['input']>;
+    title_not_contains?: InputMaybe<Scalars['String']['input']>;
+    title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type CfHeaderNestedFilter = {
+    AND?: InputMaybe<Array<InputMaybe<CfHeaderNestedFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<CfHeaderNestedFilter>>>;
+    closeMobileMenuLabel?: InputMaybe<Scalars['String']['input']>;
+    closeMobileMenuLabel_contains?: InputMaybe<Scalars['String']['input']>;
+    closeMobileMenuLabel_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    closeMobileMenuLabel_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    closeMobileMenuLabel_not?: InputMaybe<Scalars['String']['input']>;
+    closeMobileMenuLabel_not_contains?: InputMaybe<Scalars['String']['input']>;
+    closeMobileMenuLabel_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    itemsCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    languageSwitcherLabel?: InputMaybe<Scalars['String']['input']>;
+    languageSwitcherLabel_contains?: InputMaybe<Scalars['String']['input']>;
+    languageSwitcherLabel_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    languageSwitcherLabel_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    languageSwitcherLabel_not?: InputMaybe<Scalars['String']['input']>;
+    languageSwitcherLabel_not_contains?: InputMaybe<Scalars['String']['input']>;
+    languageSwitcherLabel_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    logoLabel?: InputMaybe<Scalars['String']['input']>;
+    logoLabel_contains?: InputMaybe<Scalars['String']['input']>;
+    logoLabel_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    logoLabel_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    logoLabel_not?: InputMaybe<Scalars['String']['input']>;
+    logoLabel_not_contains?: InputMaybe<Scalars['String']['input']>;
+    logoLabel_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    logo_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    notification_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    openMobileMenuLabel?: InputMaybe<Scalars['String']['input']>;
+    openMobileMenuLabel_contains?: InputMaybe<Scalars['String']['input']>;
+    openMobileMenuLabel_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    openMobileMenuLabel_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    openMobileMenuLabel_not?: InputMaybe<Scalars['String']['input']>;
+    openMobileMenuLabel_not_contains?: InputMaybe<Scalars['String']['input']>;
+    openMobileMenuLabel_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    showContextSwitcher?: InputMaybe<Scalars['Boolean']['input']>;
+    showContextSwitcher_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    showContextSwitcher_not?: InputMaybe<Scalars['Boolean']['input']>;
+    sys?: InputMaybe<SysFilter>;
+    title?: InputMaybe<Scalars['String']['input']>;
+    title_contains?: InputMaybe<Scalars['String']['input']>;
+    title_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    title_not?: InputMaybe<Scalars['String']['input']>;
+    title_not_contains?: InputMaybe<Scalars['String']['input']>;
+    title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    userInfo_exists?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 export type CfPageNestedFilter = {
     AND?: InputMaybe<Array<InputMaybe<CfPageNestedFilter>>>;
     OR?: InputMaybe<Array<InputMaybe<CfPageNestedFilter>>>;
@@ -6691,6 +8253,10 @@ export type CfPageNestedFilter = {
     hasOwnTitle_exists?: InputMaybe<Scalars['Boolean']['input']>;
     hasOwnTitle_not?: InputMaybe<Scalars['Boolean']['input']>;
     parent_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    permissions_contains_all?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    permissions_contains_none?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    permissions_contains_some?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    permissions_exists?: InputMaybe<Scalars['Boolean']['input']>;
     seo_exists?: InputMaybe<Scalars['Boolean']['input']>;
     slug?: InputMaybe<Scalars['String']['input']>;
     slug_contains?: InputMaybe<Scalars['String']['input']>;
@@ -6701,21 +8267,6 @@ export type CfPageNestedFilter = {
     slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     sys?: InputMaybe<SysFilter>;
     template_exists?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-export type CfPageOneColumnTemplateNestedFilter = {
-    AND?: InputMaybe<Array<InputMaybe<CfPageOneColumnTemplateNestedFilter>>>;
-    OR?: InputMaybe<Array<InputMaybe<CfPageOneColumnTemplateNestedFilter>>>;
-    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
-    mainSlotCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
-    sys?: InputMaybe<SysFilter>;
-    title?: InputMaybe<Scalars['String']['input']>;
-    title_contains?: InputMaybe<Scalars['String']['input']>;
-    title_exists?: InputMaybe<Scalars['Boolean']['input']>;
-    title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-    title_not?: InputMaybe<Scalars['String']['input']>;
-    title_not_contains?: InputMaybe<Scalars['String']['input']>;
-    title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type CfPageSeoNestedFilter = {
@@ -6777,6 +8328,21 @@ export type CfcomponentsMultiTypeNestedFilter = {
     title_not?: InputMaybe<Scalars['String']['input']>;
     title_not_contains?: InputMaybe<Scalars['String']['input']>;
     title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type CfitemsMultiTypeNestedFilter = {
+    AND?: InputMaybe<Array<InputMaybe<CfitemsMultiTypeNestedFilter>>>;
+    OR?: InputMaybe<Array<InputMaybe<CfitemsMultiTypeNestedFilter>>>;
+    contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+    page_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    sys?: InputMaybe<SysFilter>;
+    url?: InputMaybe<Scalars['String']['input']>;
+    url_contains?: InputMaybe<Scalars['String']['input']>;
+    url_exists?: InputMaybe<Scalars['Boolean']['input']>;
+    url_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    url_not?: InputMaybe<Scalars['String']['input']>;
+    url_not_contains?: InputMaybe<Scalars['String']['input']>;
+    url_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -6914,11 +8480,62 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
               pagination?: Maybe<_RefType['ComponentPagination']>;
               table?: Maybe<_RefType['ComponentTable']>;
           });
+    FooterItemsItem:
+        | (Omit<ComponentNavigationGroup, 'itemsCollection' | 'linkedFrom' | 'page'> & {
+              itemsCollection?: Maybe<_RefType['ComponentNavigationGroupItemsCollection']>;
+              linkedFrom?: Maybe<_RefType['ComponentNavigationGroupLinkingCollections']>;
+              page?: Maybe<_RefType['Page']>;
+          })
+        | (Omit<ComponentNavigationItem, 'linkedFrom' | 'page'> & {
+              linkedFrom?: Maybe<_RefType['ComponentNavigationItemLinkingCollections']>;
+              page?: Maybe<_RefType['Page']>;
+          });
+    HeaderItemsItem:
+        | (Omit<ComponentNavigationGroup, 'itemsCollection' | 'linkedFrom' | 'page'> & {
+              itemsCollection?: Maybe<_RefType['ComponentNavigationGroupItemsCollection']>;
+              linkedFrom?: Maybe<_RefType['ComponentNavigationGroupLinkingCollections']>;
+              page?: Maybe<_RefType['Page']>;
+          })
+        | (Omit<ComponentNavigationItem, 'linkedFrom' | 'page'> & {
+              linkedFrom?: Maybe<_RefType['ComponentNavigationItemLinkingCollections']>;
+              page?: Maybe<_RefType['Page']>;
+          });
+    PageTemplate:
+        | (Omit<PageOneColumnTemplate, 'linkedFrom' | 'mainSlotCollection'> & {
+              linkedFrom?: Maybe<_RefType['PageOneColumnTemplateLinkingCollections']>;
+              mainSlotCollection?: Maybe<_RefType['PageOneColumnTemplateMainSlotCollection']>;
+          })
+        | (Omit<
+              PageTwoColumnTemplate,
+              'bottomSlotCollection' | 'leftSlotCollection' | 'linkedFrom' | 'rightSlotCollection' | 'topSlotCollection'
+          > & {
+              bottomSlotCollection?: Maybe<_RefType['PageTwoColumnTemplateBottomSlotCollection']>;
+              leftSlotCollection?: Maybe<_RefType['PageTwoColumnTemplateLeftSlotCollection']>;
+              linkedFrom?: Maybe<_RefType['PageTwoColumnTemplateLinkingCollections']>;
+              rightSlotCollection?: Maybe<_RefType['PageTwoColumnTemplateRightSlotCollection']>;
+              topSlotCollection?: Maybe<_RefType['PageTwoColumnTemplateTopSlotCollection']>;
+          });
 };
 
 /** Mapping of interface types */
 export type ResolversInterfaceTypes<_RefType extends Record<string, unknown>> = {
     Entry:
+        | (Omit<
+              AppConfig,
+              | 'linkedFrom'
+              | 'signedInFooter'
+              | 'signedInHeader'
+              | 'signedOutFooter'
+              | 'signedOutHeader'
+              | 'themesCollection'
+          > & {
+              linkedFrom?: Maybe<_RefType['AppConfigLinkingCollections']>;
+              signedInFooter?: Maybe<_RefType['Footer']>;
+              signedInHeader?: Maybe<_RefType['Header']>;
+              signedOutFooter?: Maybe<_RefType['Footer']>;
+              signedOutHeader?: Maybe<_RefType['Header']>;
+              themesCollection?: Maybe<_RefType['AppConfigThemesCollection']>;
+          })
         | (Omit<Article, 'content' | 'linkedFrom' | 'parent' | 'seo'> & {
               content?: Maybe<_RefType['ComponentArticle']>;
               linkedFrom?: Maybe<_RefType['ArticleLinkingCollections']>;
@@ -7005,12 +8622,22 @@ export type ResolversInterfaceTypes<_RefType extends Record<string, unknown>> = 
         | (Omit<ComponentMessageSimple, 'linkedFrom'> & {
               linkedFrom?: Maybe<_RefType['ComponentMessageSimpleLinkingCollections']>;
           })
+        | (Omit<ComponentNavigationGroup, 'itemsCollection' | 'linkedFrom' | 'page'> & {
+              itemsCollection?: Maybe<_RefType['ComponentNavigationGroupItemsCollection']>;
+              linkedFrom?: Maybe<_RefType['ComponentNavigationGroupLinkingCollections']>;
+              page?: Maybe<_RefType['Page']>;
+          })
+        | (Omit<ComponentNavigationItem, 'linkedFrom' | 'page'> & {
+              linkedFrom?: Maybe<_RefType['ComponentNavigationItemLinkingCollections']>;
+              page?: Maybe<_RefType['Page']>;
+          })
         | (Omit<ComponentNoResult, 'linkedFrom'> & {
               linkedFrom?: Maybe<_RefType['ComponentNoResultLinkingCollections']>;
           })
         | (Omit<ComponentPagination, 'linkedFrom'> & {
               linkedFrom?: Maybe<_RefType['ComponentPaginationLinkingCollections']>;
           })
+        | (Omit<ComponentRoles, 'linkedFrom'> & { linkedFrom?: Maybe<_RefType['ComponentRolesLinkingCollections']> })
         | (Omit<ComponentTable, 'columnsCollection' | 'linkedFrom'> & {
               columnsCollection?: Maybe<_RefType['ComponentTableColumnsCollection']>;
               linkedFrom?: Maybe<_RefType['ComponentTableLinkingCollections']>;
@@ -7032,11 +8659,23 @@ export type ResolversInterfaceTypes<_RefType extends Record<string, unknown>> = 
         | (Omit<DataDates, 'linkedFrom'> & { linkedFrom?: Maybe<_RefType['DataDatesLinkingCollections']> })
         | (Omit<DataErrors, 'linkedFrom'> & { linkedFrom?: Maybe<_RefType['DataErrorsLinkingCollections']> })
         | (Omit<DataValidation, 'linkedFrom'> & { linkedFrom?: Maybe<_RefType['DataValidationLinkingCollections']> })
+        | (Omit<Footer, 'itemsCollection' | 'linkedFrom' | 'logo'> & {
+              itemsCollection?: Maybe<_RefType['FooterItemsCollection']>;
+              linkedFrom?: Maybe<_RefType['FooterLinkingCollections']>;
+              logo?: Maybe<_RefType['Asset']>;
+          })
+        | (Omit<Header, 'itemsCollection' | 'linkedFrom' | 'logo' | 'notification' | 'userInfo'> & {
+              itemsCollection?: Maybe<_RefType['HeaderItemsCollection']>;
+              linkedFrom?: Maybe<_RefType['HeaderLinkingCollections']>;
+              logo?: Maybe<_RefType['Asset']>;
+              notification?: Maybe<_RefType['Page']>;
+              userInfo?: Maybe<_RefType['Page']>;
+          })
         | (Omit<Page, 'linkedFrom' | 'parent' | 'seo' | 'template'> & {
               linkedFrom?: Maybe<_RefType['PageLinkingCollections']>;
               parent?: Maybe<_RefType['Page']>;
               seo?: Maybe<_RefType['PageSeo']>;
-              template?: Maybe<_RefType['PageOneColumnTemplate']>;
+              template?: Maybe<_RefType['PageTemplate']>;
           })
         | (Omit<PageOneColumnTemplate, 'linkedFrom' | 'mainSlotCollection'> & {
               linkedFrom?: Maybe<_RefType['PageOneColumnTemplateLinkingCollections']>;
@@ -7045,12 +8684,38 @@ export type ResolversInterfaceTypes<_RefType extends Record<string, unknown>> = 
         | (Omit<PageSeo, 'image' | 'linkedFrom'> & {
               image?: Maybe<_RefType['Asset']>;
               linkedFrom?: Maybe<_RefType['PageSeoLinkingCollections']>;
+          })
+        | (Omit<
+              PageTwoColumnTemplate,
+              'bottomSlotCollection' | 'leftSlotCollection' | 'linkedFrom' | 'rightSlotCollection' | 'topSlotCollection'
+          > & {
+              bottomSlotCollection?: Maybe<_RefType['PageTwoColumnTemplateBottomSlotCollection']>;
+              leftSlotCollection?: Maybe<_RefType['PageTwoColumnTemplateLeftSlotCollection']>;
+              linkedFrom?: Maybe<_RefType['PageTwoColumnTemplateLinkingCollections']>;
+              rightSlotCollection?: Maybe<_RefType['PageTwoColumnTemplateRightSlotCollection']>;
+              topSlotCollection?: Maybe<_RefType['PageTwoColumnTemplateTopSlotCollection']>;
           })
         | (Omit<Theme, 'linkedFrom' | 'logo'> & {
               linkedFrom?: Maybe<_RefType['ThemeLinkingCollections']>;
               logo?: Maybe<_RefType['Asset']>;
           });
     _Node:
+        | (Omit<
+              AppConfig,
+              | 'linkedFrom'
+              | 'signedInFooter'
+              | 'signedInHeader'
+              | 'signedOutFooter'
+              | 'signedOutHeader'
+              | 'themesCollection'
+          > & {
+              linkedFrom?: Maybe<_RefType['AppConfigLinkingCollections']>;
+              signedInFooter?: Maybe<_RefType['Footer']>;
+              signedInHeader?: Maybe<_RefType['Header']>;
+              signedOutFooter?: Maybe<_RefType['Footer']>;
+              signedOutHeader?: Maybe<_RefType['Header']>;
+              themesCollection?: Maybe<_RefType['AppConfigThemesCollection']>;
+          })
         | (Omit<Article, 'content' | 'linkedFrom' | 'parent' | 'seo'> & {
               content?: Maybe<_RefType['ComponentArticle']>;
               linkedFrom?: Maybe<_RefType['ArticleLinkingCollections']>;
@@ -7137,12 +8802,22 @@ export type ResolversInterfaceTypes<_RefType extends Record<string, unknown>> = 
         | (Omit<ComponentMessageSimple, 'linkedFrom'> & {
               linkedFrom?: Maybe<_RefType['ComponentMessageSimpleLinkingCollections']>;
           })
+        | (Omit<ComponentNavigationGroup, 'itemsCollection' | 'linkedFrom' | 'page'> & {
+              itemsCollection?: Maybe<_RefType['ComponentNavigationGroupItemsCollection']>;
+              linkedFrom?: Maybe<_RefType['ComponentNavigationGroupLinkingCollections']>;
+              page?: Maybe<_RefType['Page']>;
+          })
+        | (Omit<ComponentNavigationItem, 'linkedFrom' | 'page'> & {
+              linkedFrom?: Maybe<_RefType['ComponentNavigationItemLinkingCollections']>;
+              page?: Maybe<_RefType['Page']>;
+          })
         | (Omit<ComponentNoResult, 'linkedFrom'> & {
               linkedFrom?: Maybe<_RefType['ComponentNoResultLinkingCollections']>;
           })
         | (Omit<ComponentPagination, 'linkedFrom'> & {
               linkedFrom?: Maybe<_RefType['ComponentPaginationLinkingCollections']>;
           })
+        | (Omit<ComponentRoles, 'linkedFrom'> & { linkedFrom?: Maybe<_RefType['ComponentRolesLinkingCollections']> })
         | (Omit<ComponentTable, 'columnsCollection' | 'linkedFrom'> & {
               columnsCollection?: Maybe<_RefType['ComponentTableColumnsCollection']>;
               linkedFrom?: Maybe<_RefType['ComponentTableLinkingCollections']>;
@@ -7164,11 +8839,23 @@ export type ResolversInterfaceTypes<_RefType extends Record<string, unknown>> = 
         | (Omit<DataDates, 'linkedFrom'> & { linkedFrom?: Maybe<_RefType['DataDatesLinkingCollections']> })
         | (Omit<DataErrors, 'linkedFrom'> & { linkedFrom?: Maybe<_RefType['DataErrorsLinkingCollections']> })
         | (Omit<DataValidation, 'linkedFrom'> & { linkedFrom?: Maybe<_RefType['DataValidationLinkingCollections']> })
+        | (Omit<Footer, 'itemsCollection' | 'linkedFrom' | 'logo'> & {
+              itemsCollection?: Maybe<_RefType['FooterItemsCollection']>;
+              linkedFrom?: Maybe<_RefType['FooterLinkingCollections']>;
+              logo?: Maybe<_RefType['Asset']>;
+          })
+        | (Omit<Header, 'itemsCollection' | 'linkedFrom' | 'logo' | 'notification' | 'userInfo'> & {
+              itemsCollection?: Maybe<_RefType['HeaderItemsCollection']>;
+              linkedFrom?: Maybe<_RefType['HeaderLinkingCollections']>;
+              logo?: Maybe<_RefType['Asset']>;
+              notification?: Maybe<_RefType['Page']>;
+              userInfo?: Maybe<_RefType['Page']>;
+          })
         | (Omit<Page, 'linkedFrom' | 'parent' | 'seo' | 'template'> & {
               linkedFrom?: Maybe<_RefType['PageLinkingCollections']>;
               parent?: Maybe<_RefType['Page']>;
               seo?: Maybe<_RefType['PageSeo']>;
-              template?: Maybe<_RefType['PageOneColumnTemplate']>;
+              template?: Maybe<_RefType['PageTemplate']>;
           })
         | (Omit<PageOneColumnTemplate, 'linkedFrom' | 'mainSlotCollection'> & {
               linkedFrom?: Maybe<_RefType['PageOneColumnTemplateLinkingCollections']>;
@@ -7177,6 +8864,16 @@ export type ResolversInterfaceTypes<_RefType extends Record<string, unknown>> = 
         | (Omit<PageSeo, 'image' | 'linkedFrom'> & {
               image?: Maybe<_RefType['Asset']>;
               linkedFrom?: Maybe<_RefType['PageSeoLinkingCollections']>;
+          })
+        | (Omit<
+              PageTwoColumnTemplate,
+              'bottomSlotCollection' | 'leftSlotCollection' | 'linkedFrom' | 'rightSlotCollection' | 'topSlotCollection'
+          > & {
+              bottomSlotCollection?: Maybe<_RefType['PageTwoColumnTemplateBottomSlotCollection']>;
+              leftSlotCollection?: Maybe<_RefType['PageTwoColumnTemplateLeftSlotCollection']>;
+              linkedFrom?: Maybe<_RefType['PageTwoColumnTemplateLinkingCollections']>;
+              rightSlotCollection?: Maybe<_RefType['PageTwoColumnTemplateRightSlotCollection']>;
+              topSlotCollection?: Maybe<_RefType['PageTwoColumnTemplateTopSlotCollection']>;
           })
         | (Omit<Theme, 'linkedFrom' | 'logo'> & {
               linkedFrom?: Maybe<_RefType['ThemeLinkingCollections']>;
@@ -7186,6 +8883,38 @@ export type ResolversInterfaceTypes<_RefType extends Record<string, unknown>> = 
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
+    AppConfig: ResolverTypeWrapper<
+        Omit<
+            AppConfig,
+            | 'linkedFrom'
+            | 'signedInFooter'
+            | 'signedInHeader'
+            | 'signedOutFooter'
+            | 'signedOutHeader'
+            | 'themesCollection'
+        > & {
+            linkedFrom?: Maybe<ResolversTypes['AppConfigLinkingCollections']>;
+            signedInFooter?: Maybe<ResolversTypes['Footer']>;
+            signedInHeader?: Maybe<ResolversTypes['Header']>;
+            signedOutFooter?: Maybe<ResolversTypes['Footer']>;
+            signedOutHeader?: Maybe<ResolversTypes['Header']>;
+            themesCollection?: Maybe<ResolversTypes['AppConfigThemesCollection']>;
+        }
+    >;
+    AppConfigCollection: ResolverTypeWrapper<
+        Omit<AppConfigCollection, 'items'> & { items: Array<Maybe<ResolversTypes['AppConfig']>> }
+    >;
+    AppConfigFilter: AppConfigFilter;
+    AppConfigLinkingCollections: ResolverTypeWrapper<
+        Omit<AppConfigLinkingCollections, 'entryCollection'> & {
+            entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
+        }
+    >;
+    AppConfigOrder: AppConfigOrder;
+    AppConfigThemesCollection: ResolverTypeWrapper<
+        Omit<AppConfigThemesCollection, 'items'> & { items: Array<Maybe<ResolversTypes['Theme']>> }
+    >;
+    AppConfigThemesCollectionOrder: AppConfigThemesCollectionOrder;
     Article: ResolverTypeWrapper<
         Omit<Article, 'content' | 'linkedFrom' | 'parent' | 'seo'> & {
             content?: Maybe<ResolversTypes['ComponentArticle']>;
@@ -7216,10 +8945,17 @@ export type ResolversTypes = {
     AssetLinkingCollections: ResolverTypeWrapper<
         Omit<
             AssetLinkingCollections,
-            'authorCollection' | 'entryCollection' | 'pageSeoCollection' | 'themeCollection'
+            | 'authorCollection'
+            | 'entryCollection'
+            | 'footerCollection'
+            | 'headerCollection'
+            | 'pageSeoCollection'
+            | 'themeCollection'
         > & {
             authorCollection?: Maybe<ResolversTypes['AuthorCollection']>;
             entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
+            footerCollection?: Maybe<ResolversTypes['FooterCollection']>;
+            headerCollection?: Maybe<ResolversTypes['HeaderCollection']>;
             pageSeoCollection?: Maybe<ResolversTypes['PageSeoCollection']>;
             themeCollection?: Maybe<ResolversTypes['ThemeCollection']>;
         }
@@ -7236,7 +8972,8 @@ export type ResolversTypes = {
     >;
     AuthorFilter: AuthorFilter;
     AuthorLinkingCollections: ResolverTypeWrapper<
-        Omit<AuthorLinkingCollections, 'entryCollection'> & {
+        Omit<AuthorLinkingCollections, 'componentArticleCollection' | 'entryCollection'> & {
+            componentArticleCollection?: Maybe<ResolversTypes['ComponentArticleCollection']>;
             entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
         }
     >;
@@ -7353,12 +9090,17 @@ export type ResolversTypes = {
     BlockFaqOrder: BlockFaqOrder;
     BlockFilter: BlockFilter;
     BlockLinkingCollections: ResolverTypeWrapper<
-        Omit<BlockLinkingCollections, 'entryCollection' | 'pageOneColumnTemplateCollection'> & {
+        Omit<
+            BlockLinkingCollections,
+            'entryCollection' | 'pageOneColumnTemplateCollection' | 'pageTwoColumnTemplateCollection'
+        > & {
             entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
             pageOneColumnTemplateCollection?: Maybe<ResolversTypes['PageOneColumnTemplateCollection']>;
+            pageTwoColumnTemplateCollection?: Maybe<ResolversTypes['PageTwoColumnTemplateCollection']>;
         }
     >;
     BlockLinkingCollectionsPageOneColumnTemplateCollectionOrder: BlockLinkingCollectionsPageOneColumnTemplateCollectionOrder;
+    BlockLinkingCollectionsPageTwoColumnTemplateCollectionOrder: BlockLinkingCollectionsPageTwoColumnTemplateCollectionOrder;
     BlockOrder: BlockOrder;
     BlockQuickLinks: ResolverTypeWrapper<
         Omit<BlockQuickLinks, 'itemsCollection' | 'linkedFrom'> & {
@@ -7453,7 +9195,8 @@ export type ResolversTypes = {
     >;
     ComponentArticleSectionFilter: ComponentArticleSectionFilter;
     ComponentArticleSectionLinkingCollections: ResolverTypeWrapper<
-        Omit<ComponentArticleSectionLinkingCollections, 'entryCollection'> & {
+        Omit<ComponentArticleSectionLinkingCollections, 'componentArticleCollection' | 'entryCollection'> & {
+            componentArticleCollection?: Maybe<ResolversTypes['ComponentArticleCollection']>;
             entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
         }
     >;
@@ -7506,11 +9249,16 @@ export type ResolversTypes = {
     ComponentCategoryLinkingCollections: ResolverTypeWrapper<
         Omit<
             ComponentCategoryLinkingCollections,
-            'blockArticleListCollection' | 'blockCategoryCollection' | 'blockCategoryListCollection' | 'entryCollection'
+            | 'blockArticleListCollection'
+            | 'blockCategoryCollection'
+            | 'blockCategoryListCollection'
+            | 'componentArticleCollection'
+            | 'entryCollection'
         > & {
             blockArticleListCollection?: Maybe<ResolversTypes['BlockArticleListCollection']>;
             blockCategoryCollection?: Maybe<ResolversTypes['BlockCategoryCollection']>;
             blockCategoryListCollection?: Maybe<ResolversTypes['BlockCategoryListCollection']>;
+            componentArticleCollection?: Maybe<ResolversTypes['ComponentArticleCollection']>;
             entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
         }
     >;
@@ -7617,6 +9365,65 @@ export type ResolversTypes = {
     >;
     ComponentMessageSimpleLinkingCollectionsDataErrorsCollectionOrder: ComponentMessageSimpleLinkingCollectionsDataErrorsCollectionOrder;
     ComponentMessageSimpleOrder: ComponentMessageSimpleOrder;
+    ComponentNavigationGroup: ResolverTypeWrapper<
+        Omit<ComponentNavigationGroup, 'itemsCollection' | 'linkedFrom' | 'page'> & {
+            itemsCollection?: Maybe<ResolversTypes['ComponentNavigationGroupItemsCollection']>;
+            linkedFrom?: Maybe<ResolversTypes['ComponentNavigationGroupLinkingCollections']>;
+            page?: Maybe<ResolversTypes['Page']>;
+        }
+    >;
+    ComponentNavigationGroupCollection: ResolverTypeWrapper<
+        Omit<ComponentNavigationGroupCollection, 'items'> & {
+            items: Array<Maybe<ResolversTypes['ComponentNavigationGroup']>>;
+        }
+    >;
+    ComponentNavigationGroupFilter: ComponentNavigationGroupFilter;
+    ComponentNavigationGroupItemsCollection: ResolverTypeWrapper<
+        Omit<ComponentNavigationGroupItemsCollection, 'items'> & {
+            items: Array<Maybe<ResolversTypes['ComponentNavigationItem']>>;
+        }
+    >;
+    ComponentNavigationGroupItemsCollectionOrder: ComponentNavigationGroupItemsCollectionOrder;
+    ComponentNavigationGroupLinkingCollections: ResolverTypeWrapper<
+        Omit<
+            ComponentNavigationGroupLinkingCollections,
+            'entryCollection' | 'footerCollection' | 'headerCollection'
+        > & {
+            entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
+            footerCollection?: Maybe<ResolversTypes['FooterCollection']>;
+            headerCollection?: Maybe<ResolversTypes['HeaderCollection']>;
+        }
+    >;
+    ComponentNavigationGroupLinkingCollectionsFooterCollectionOrder: ComponentNavigationGroupLinkingCollectionsFooterCollectionOrder;
+    ComponentNavigationGroupLinkingCollectionsHeaderCollectionOrder: ComponentNavigationGroupLinkingCollectionsHeaderCollectionOrder;
+    ComponentNavigationGroupOrder: ComponentNavigationGroupOrder;
+    ComponentNavigationItem: ResolverTypeWrapper<
+        Omit<ComponentNavigationItem, 'linkedFrom' | 'page'> & {
+            linkedFrom?: Maybe<ResolversTypes['ComponentNavigationItemLinkingCollections']>;
+            page?: Maybe<ResolversTypes['Page']>;
+        }
+    >;
+    ComponentNavigationItemCollection: ResolverTypeWrapper<
+        Omit<ComponentNavigationItemCollection, 'items'> & {
+            items: Array<Maybe<ResolversTypes['ComponentNavigationItem']>>;
+        }
+    >;
+    ComponentNavigationItemFilter: ComponentNavigationItemFilter;
+    ComponentNavigationItemLinkingCollections: ResolverTypeWrapper<
+        Omit<
+            ComponentNavigationItemLinkingCollections,
+            'componentNavigationGroupCollection' | 'entryCollection' | 'footerCollection' | 'headerCollection'
+        > & {
+            componentNavigationGroupCollection?: Maybe<ResolversTypes['ComponentNavigationGroupCollection']>;
+            entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
+            footerCollection?: Maybe<ResolversTypes['FooterCollection']>;
+            headerCollection?: Maybe<ResolversTypes['HeaderCollection']>;
+        }
+    >;
+    ComponentNavigationItemLinkingCollectionsComponentNavigationGroupCollectionOrder: ComponentNavigationItemLinkingCollectionsComponentNavigationGroupCollectionOrder;
+    ComponentNavigationItemLinkingCollectionsFooterCollectionOrder: ComponentNavigationItemLinkingCollectionsFooterCollectionOrder;
+    ComponentNavigationItemLinkingCollectionsHeaderCollectionOrder: ComponentNavigationItemLinkingCollectionsHeaderCollectionOrder;
+    ComponentNavigationItemOrder: ComponentNavigationItemOrder;
     ComponentNoResult: ResolverTypeWrapper<
         Omit<ComponentNoResult, 'linkedFrom'> & {
             linkedFrom?: Maybe<ResolversTypes['ComponentNoResultLinkingCollections']>;
@@ -7651,6 +9458,19 @@ export type ResolversTypes = {
     >;
     ComponentPaginationLinkingCollectionsBlockTicketListCollectionOrder: ComponentPaginationLinkingCollectionsBlockTicketListCollectionOrder;
     ComponentPaginationOrder: ComponentPaginationOrder;
+    ComponentRoles: ResolverTypeWrapper<
+        Omit<ComponentRoles, 'linkedFrom'> & { linkedFrom?: Maybe<ResolversTypes['ComponentRolesLinkingCollections']> }
+    >;
+    ComponentRolesCollection: ResolverTypeWrapper<
+        Omit<ComponentRolesCollection, 'items'> & { items: Array<Maybe<ResolversTypes['ComponentRoles']>> }
+    >;
+    ComponentRolesFilter: ComponentRolesFilter;
+    ComponentRolesLinkingCollections: ResolverTypeWrapper<
+        Omit<ComponentRolesLinkingCollections, 'entryCollection'> & {
+            entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
+        }
+    >;
+    ComponentRolesOrder: ComponentRolesOrder;
     ComponentTable: ResolverTypeWrapper<
         Omit<ComponentTable, 'columnsCollection' | 'linkedFrom'> & {
             columnsCollection?: Maybe<ResolversTypes['ComponentTableColumnsCollection']>;
@@ -7803,6 +9623,56 @@ export type ResolversTypes = {
     EntryFilter: EntryFilter;
     EntryOrder: EntryOrder;
     Float: ResolverTypeWrapper<Scalars['Float']['output']>;
+    Footer: ResolverTypeWrapper<
+        Omit<Footer, 'itemsCollection' | 'linkedFrom' | 'logo'> & {
+            itemsCollection?: Maybe<ResolversTypes['FooterItemsCollection']>;
+            linkedFrom?: Maybe<ResolversTypes['FooterLinkingCollections']>;
+            logo?: Maybe<ResolversTypes['Asset']>;
+        }
+    >;
+    FooterCollection: ResolverTypeWrapper<
+        Omit<FooterCollection, 'items'> & { items: Array<Maybe<ResolversTypes['Footer']>> }
+    >;
+    FooterFilter: FooterFilter;
+    FooterItemsCollection: ResolverTypeWrapper<
+        Omit<FooterItemsCollection, 'items'> & { items: Array<Maybe<ResolversTypes['FooterItemsItem']>> }
+    >;
+    FooterItemsFilter: FooterItemsFilter;
+    FooterItemsItem: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['FooterItemsItem']>;
+    FooterLinkingCollections: ResolverTypeWrapper<
+        Omit<FooterLinkingCollections, 'appConfigCollection' | 'entryCollection'> & {
+            appConfigCollection?: Maybe<ResolversTypes['AppConfigCollection']>;
+            entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
+        }
+    >;
+    FooterLinkingCollectionsAppConfigCollectionOrder: FooterLinkingCollectionsAppConfigCollectionOrder;
+    FooterOrder: FooterOrder;
+    Header: ResolverTypeWrapper<
+        Omit<Header, 'itemsCollection' | 'linkedFrom' | 'logo' | 'notification' | 'userInfo'> & {
+            itemsCollection?: Maybe<ResolversTypes['HeaderItemsCollection']>;
+            linkedFrom?: Maybe<ResolversTypes['HeaderLinkingCollections']>;
+            logo?: Maybe<ResolversTypes['Asset']>;
+            notification?: Maybe<ResolversTypes['Page']>;
+            userInfo?: Maybe<ResolversTypes['Page']>;
+        }
+    >;
+    HeaderCollection: ResolverTypeWrapper<
+        Omit<HeaderCollection, 'items'> & { items: Array<Maybe<ResolversTypes['Header']>> }
+    >;
+    HeaderFilter: HeaderFilter;
+    HeaderItemsCollection: ResolverTypeWrapper<
+        Omit<HeaderItemsCollection, 'items'> & { items: Array<Maybe<ResolversTypes['HeaderItemsItem']>> }
+    >;
+    HeaderItemsFilter: HeaderItemsFilter;
+    HeaderItemsItem: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['HeaderItemsItem']>;
+    HeaderLinkingCollections: ResolverTypeWrapper<
+        Omit<HeaderLinkingCollections, 'appConfigCollection' | 'entryCollection'> & {
+            appConfigCollection?: Maybe<ResolversTypes['AppConfigCollection']>;
+            entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
+        }
+    >;
+    HeaderLinkingCollectionsAppConfigCollectionOrder: HeaderLinkingCollectionsAppConfigCollectionOrder;
+    HeaderOrder: HeaderOrder;
     HexColor: ResolverTypeWrapper<Scalars['HexColor']['output']>;
     ID: ResolverTypeWrapper<Scalars['ID']['output']>;
     ImageFormat: ImageFormat;
@@ -7810,13 +9680,12 @@ export type ResolversTypes = {
     ImageResizeStrategy: ImageResizeStrategy;
     ImageTransformOptions: ImageTransformOptions;
     Int: ResolverTypeWrapper<Scalars['Int']['output']>;
-    JSON: ResolverTypeWrapper<Scalars['JSON']['output']>;
     Page: ResolverTypeWrapper<
         Omit<Page, 'linkedFrom' | 'parent' | 'seo' | 'template'> & {
             linkedFrom?: Maybe<ResolversTypes['PageLinkingCollections']>;
             parent?: Maybe<ResolversTypes['Page']>;
             seo?: Maybe<ResolversTypes['PageSeo']>;
-            template?: Maybe<ResolversTypes['PageOneColumnTemplate']>;
+            template?: Maybe<ResolversTypes['PageTemplate']>;
         }
     >;
     PageCollection: ResolverTypeWrapper<
@@ -7832,8 +9701,10 @@ export type ResolversTypes = {
             | 'blockCategoryListCollection'
             | 'componentCategoryCollection'
             | 'componentLinkCollection'
+            | 'componentNavigationGroupCollection'
+            | 'componentNavigationItemCollection'
             | 'entryCollection'
-            | 'pageCollection'
+            | 'headerCollection'
         > & {
             articleCollection?: Maybe<ResolversTypes['ArticleCollection']>;
             blockArticleListCollection?: Maybe<ResolversTypes['BlockArticleListCollection']>;
@@ -7841,8 +9712,10 @@ export type ResolversTypes = {
             blockCategoryListCollection?: Maybe<ResolversTypes['BlockCategoryListCollection']>;
             componentCategoryCollection?: Maybe<ResolversTypes['ComponentCategoryCollection']>;
             componentLinkCollection?: Maybe<ResolversTypes['ComponentLinkCollection']>;
+            componentNavigationGroupCollection?: Maybe<ResolversTypes['ComponentNavigationGroupCollection']>;
+            componentNavigationItemCollection?: Maybe<ResolversTypes['ComponentNavigationItemCollection']>;
             entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
-            pageCollection?: Maybe<ResolversTypes['PageCollection']>;
+            headerCollection?: Maybe<ResolversTypes['HeaderCollection']>;
         }
     >;
     PageLinkingCollectionsArticleCollectionOrder: PageLinkingCollectionsArticleCollectionOrder;
@@ -7851,6 +9724,9 @@ export type ResolversTypes = {
     PageLinkingCollectionsBlockCategoryListCollectionOrder: PageLinkingCollectionsBlockCategoryListCollectionOrder;
     PageLinkingCollectionsComponentCategoryCollectionOrder: PageLinkingCollectionsComponentCategoryCollectionOrder;
     PageLinkingCollectionsComponentLinkCollectionOrder: PageLinkingCollectionsComponentLinkCollectionOrder;
+    PageLinkingCollectionsComponentNavigationGroupCollectionOrder: PageLinkingCollectionsComponentNavigationGroupCollectionOrder;
+    PageLinkingCollectionsComponentNavigationItemCollectionOrder: PageLinkingCollectionsComponentNavigationItemCollectionOrder;
+    PageLinkingCollectionsHeaderCollectionOrder: PageLinkingCollectionsHeaderCollectionOrder;
     PageLinkingCollectionsPageCollectionOrder: PageLinkingCollectionsPageCollectionOrder;
     PageOneColumnTemplate: ResolverTypeWrapper<
         Omit<PageOneColumnTemplate, 'linkedFrom' | 'mainSlotCollection'> & {
@@ -7865,9 +9741,8 @@ export type ResolversTypes = {
     >;
     PageOneColumnTemplateFilter: PageOneColumnTemplateFilter;
     PageOneColumnTemplateLinkingCollections: ResolverTypeWrapper<
-        Omit<PageOneColumnTemplateLinkingCollections, 'entryCollection' | 'pageCollection'> & {
+        Omit<PageOneColumnTemplateLinkingCollections, 'entryCollection'> & {
             entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
-            pageCollection?: Maybe<ResolversTypes['PageCollection']>;
         }
     >;
     PageOneColumnTemplateLinkingCollectionsPageCollectionOrder: PageOneColumnTemplateLinkingCollectionsPageCollectionOrder;
@@ -7888,15 +9763,56 @@ export type ResolversTypes = {
     >;
     PageSeoFilter: PageSeoFilter;
     PageSeoLinkingCollections: ResolverTypeWrapper<
-        Omit<PageSeoLinkingCollections, 'articleCollection' | 'entryCollection' | 'pageCollection'> & {
+        Omit<PageSeoLinkingCollections, 'articleCollection' | 'entryCollection'> & {
             articleCollection?: Maybe<ResolversTypes['ArticleCollection']>;
             entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
-            pageCollection?: Maybe<ResolversTypes['PageCollection']>;
         }
     >;
     PageSeoLinkingCollectionsArticleCollectionOrder: PageSeoLinkingCollectionsArticleCollectionOrder;
     PageSeoLinkingCollectionsPageCollectionOrder: PageSeoLinkingCollectionsPageCollectionOrder;
     PageSeoOrder: PageSeoOrder;
+    PageTemplate: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['PageTemplate']>;
+    PageTwoColumnTemplate: ResolverTypeWrapper<
+        Omit<
+            PageTwoColumnTemplate,
+            'bottomSlotCollection' | 'leftSlotCollection' | 'linkedFrom' | 'rightSlotCollection' | 'topSlotCollection'
+        > & {
+            bottomSlotCollection?: Maybe<ResolversTypes['PageTwoColumnTemplateBottomSlotCollection']>;
+            leftSlotCollection?: Maybe<ResolversTypes['PageTwoColumnTemplateLeftSlotCollection']>;
+            linkedFrom?: Maybe<ResolversTypes['PageTwoColumnTemplateLinkingCollections']>;
+            rightSlotCollection?: Maybe<ResolversTypes['PageTwoColumnTemplateRightSlotCollection']>;
+            topSlotCollection?: Maybe<ResolversTypes['PageTwoColumnTemplateTopSlotCollection']>;
+        }
+    >;
+    PageTwoColumnTemplateBottomSlotCollection: ResolverTypeWrapper<
+        Omit<PageTwoColumnTemplateBottomSlotCollection, 'items'> & { items: Array<Maybe<ResolversTypes['Block']>> }
+    >;
+    PageTwoColumnTemplateBottomSlotCollectionOrder: PageTwoColumnTemplateBottomSlotCollectionOrder;
+    PageTwoColumnTemplateCollection: ResolverTypeWrapper<
+        Omit<PageTwoColumnTemplateCollection, 'items'> & {
+            items: Array<Maybe<ResolversTypes['PageTwoColumnTemplate']>>;
+        }
+    >;
+    PageTwoColumnTemplateFilter: PageTwoColumnTemplateFilter;
+    PageTwoColumnTemplateLeftSlotCollection: ResolverTypeWrapper<
+        Omit<PageTwoColumnTemplateLeftSlotCollection, 'items'> & { items: Array<Maybe<ResolversTypes['Block']>> }
+    >;
+    PageTwoColumnTemplateLeftSlotCollectionOrder: PageTwoColumnTemplateLeftSlotCollectionOrder;
+    PageTwoColumnTemplateLinkingCollections: ResolverTypeWrapper<
+        Omit<PageTwoColumnTemplateLinkingCollections, 'entryCollection'> & {
+            entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
+        }
+    >;
+    PageTwoColumnTemplateLinkingCollectionsPageCollectionOrder: PageTwoColumnTemplateLinkingCollectionsPageCollectionOrder;
+    PageTwoColumnTemplateOrder: PageTwoColumnTemplateOrder;
+    PageTwoColumnTemplateRightSlotCollection: ResolverTypeWrapper<
+        Omit<PageTwoColumnTemplateRightSlotCollection, 'items'> & { items: Array<Maybe<ResolversTypes['Block']>> }
+    >;
+    PageTwoColumnTemplateRightSlotCollectionOrder: PageTwoColumnTemplateRightSlotCollectionOrder;
+    PageTwoColumnTemplateTopSlotCollection: ResolverTypeWrapper<
+        Omit<PageTwoColumnTemplateTopSlotCollection, 'items'> & { items: Array<Maybe<ResolversTypes['Block']>> }
+    >;
+    PageTwoColumnTemplateTopSlotCollectionOrder: PageTwoColumnTemplateTopSlotCollectionOrder;
     Quality: ResolverTypeWrapper<Scalars['Quality']['output']>;
     Query: ResolverTypeWrapper<{}>;
     String: ResolverTypeWrapper<Scalars['String']['output']>;
@@ -7914,11 +9830,13 @@ export type ResolversTypes = {
     >;
     ThemeFilter: ThemeFilter;
     ThemeLinkingCollections: ResolverTypeWrapper<
-        Omit<ThemeLinkingCollections, 'blockCollection' | 'entryCollection'> & {
+        Omit<ThemeLinkingCollections, 'appConfigCollection' | 'blockCollection' | 'entryCollection'> & {
+            appConfigCollection?: Maybe<ResolversTypes['AppConfigCollection']>;
             blockCollection?: Maybe<ResolversTypes['BlockCollection']>;
             entryCollection?: Maybe<ResolversTypes['EntryCollection']>;
         }
     >;
+    ThemeLinkingCollectionsAppConfigCollectionOrder: ThemeLinkingCollectionsAppConfigCollectionOrder;
     ThemeLinkingCollectionsBlockCollectionOrder: ThemeLinkingCollectionsBlockCollectionOrder;
     ThemeOrder: ThemeOrder;
     TimelineFilterInput: TimelineFilterInput;
@@ -7935,6 +9853,7 @@ export type ResolversTypes = {
     cfComponentKeyValueNestedFilter: CfComponentKeyValueNestedFilter;
     cfComponentLinkNestedFilter: CfComponentLinkNestedFilter;
     cfComponentMessageSimpleNestedFilter: CfComponentMessageSimpleNestedFilter;
+    cfComponentNavigationItemNestedFilter: CfComponentNavigationItemNestedFilter;
     cfComponentNoResultNestedFilter: CfComponentNoResultNestedFilter;
     cfComponentPaginationNestedFilter: CfComponentPaginationNestedFilter;
     cfComponentTableColumnNestedFilter: CfComponentTableColumnNestedFilter;
@@ -7944,15 +9863,38 @@ export type ResolversTypes = {
     cfDataDatesNestedFilter: CfDataDatesNestedFilter;
     cfDataErrorsNestedFilter: CfDataErrorsNestedFilter;
     cfDataValidationNestedFilter: CfDataValidationNestedFilter;
+    cfFooterNestedFilter: CfFooterNestedFilter;
+    cfHeaderNestedFilter: CfHeaderNestedFilter;
     cfPageNestedFilter: CfPageNestedFilter;
-    cfPageOneColumnTemplateNestedFilter: CfPageOneColumnTemplateNestedFilter;
     cfPageSeoNestedFilter: CfPageSeoNestedFilter;
     cfThemeNestedFilter: CfThemeNestedFilter;
     cfcomponentsMultiTypeNestedFilter: CfcomponentsMultiTypeNestedFilter;
+    cfitemsMultiTypeNestedFilter: CfitemsMultiTypeNestedFilter;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
+    AppConfig: Omit<
+        AppConfig,
+        'linkedFrom' | 'signedInFooter' | 'signedInHeader' | 'signedOutFooter' | 'signedOutHeader' | 'themesCollection'
+    > & {
+        linkedFrom?: Maybe<ResolversParentTypes['AppConfigLinkingCollections']>;
+        signedInFooter?: Maybe<ResolversParentTypes['Footer']>;
+        signedInHeader?: Maybe<ResolversParentTypes['Header']>;
+        signedOutFooter?: Maybe<ResolversParentTypes['Footer']>;
+        signedOutHeader?: Maybe<ResolversParentTypes['Header']>;
+        themesCollection?: Maybe<ResolversParentTypes['AppConfigThemesCollection']>;
+    };
+    AppConfigCollection: Omit<AppConfigCollection, 'items'> & {
+        items: Array<Maybe<ResolversParentTypes['AppConfig']>>;
+    };
+    AppConfigFilter: AppConfigFilter;
+    AppConfigLinkingCollections: Omit<AppConfigLinkingCollections, 'entryCollection'> & {
+        entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
+    };
+    AppConfigThemesCollection: Omit<AppConfigThemesCollection, 'items'> & {
+        items: Array<Maybe<ResolversParentTypes['Theme']>>;
+    };
     Article: Omit<Article, 'content' | 'linkedFrom' | 'parent' | 'seo'> & {
         content?: Maybe<ResolversParentTypes['ComponentArticle']>;
         linkedFrom?: Maybe<ResolversParentTypes['ArticleLinkingCollections']>;
@@ -7970,10 +9912,17 @@ export type ResolversParentTypes = {
     AssetFilter: AssetFilter;
     AssetLinkingCollections: Omit<
         AssetLinkingCollections,
-        'authorCollection' | 'entryCollection' | 'pageSeoCollection' | 'themeCollection'
+        | 'authorCollection'
+        | 'entryCollection'
+        | 'footerCollection'
+        | 'headerCollection'
+        | 'pageSeoCollection'
+        | 'themeCollection'
     > & {
         authorCollection?: Maybe<ResolversParentTypes['AuthorCollection']>;
         entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
+        footerCollection?: Maybe<ResolversParentTypes['FooterCollection']>;
+        headerCollection?: Maybe<ResolversParentTypes['HeaderCollection']>;
         pageSeoCollection?: Maybe<ResolversParentTypes['PageSeoCollection']>;
         themeCollection?: Maybe<ResolversParentTypes['ThemeCollection']>;
     };
@@ -7983,7 +9932,8 @@ export type ResolversParentTypes = {
     };
     AuthorCollection: Omit<AuthorCollection, 'items'> & { items: Array<Maybe<ResolversParentTypes['Author']>> };
     AuthorFilter: AuthorFilter;
-    AuthorLinkingCollections: Omit<AuthorLinkingCollections, 'entryCollection'> & {
+    AuthorLinkingCollections: Omit<AuthorLinkingCollections, 'componentArticleCollection' | 'entryCollection'> & {
+        componentArticleCollection?: Maybe<ResolversParentTypes['ComponentArticleCollection']>;
         entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
     };
     Block: Omit<Block, 'content' | 'linkedFrom' | 'theme'> & {
@@ -8065,9 +10015,13 @@ export type ResolversParentTypes = {
         entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
     };
     BlockFilter: BlockFilter;
-    BlockLinkingCollections: Omit<BlockLinkingCollections, 'entryCollection' | 'pageOneColumnTemplateCollection'> & {
+    BlockLinkingCollections: Omit<
+        BlockLinkingCollections,
+        'entryCollection' | 'pageOneColumnTemplateCollection' | 'pageTwoColumnTemplateCollection'
+    > & {
         entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
         pageOneColumnTemplateCollection?: Maybe<ResolversParentTypes['PageOneColumnTemplateCollection']>;
+        pageTwoColumnTemplateCollection?: Maybe<ResolversParentTypes['PageTwoColumnTemplateCollection']>;
     };
     BlockQuickLinks: Omit<BlockQuickLinks, 'itemsCollection' | 'linkedFrom'> & {
         itemsCollection?: Maybe<ResolversParentTypes['BlockQuickLinksItemsCollection']>;
@@ -8139,7 +10093,11 @@ export type ResolversParentTypes = {
         items: Array<Maybe<ResolversParentTypes['ComponentArticleSection']>>;
     };
     ComponentArticleSectionFilter: ComponentArticleSectionFilter;
-    ComponentArticleSectionLinkingCollections: Omit<ComponentArticleSectionLinkingCollections, 'entryCollection'> & {
+    ComponentArticleSectionLinkingCollections: Omit<
+        ComponentArticleSectionLinkingCollections,
+        'componentArticleCollection' | 'entryCollection'
+    > & {
+        componentArticleCollection?: Maybe<ResolversParentTypes['ComponentArticleCollection']>;
         entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
     };
     ComponentArticleSectionsCollection: Omit<ComponentArticleSectionsCollection, 'items'> & {
@@ -8176,11 +10134,16 @@ export type ResolversParentTypes = {
     ComponentCategoryFilter: ComponentCategoryFilter;
     ComponentCategoryLinkingCollections: Omit<
         ComponentCategoryLinkingCollections,
-        'blockArticleListCollection' | 'blockCategoryCollection' | 'blockCategoryListCollection' | 'entryCollection'
+        | 'blockArticleListCollection'
+        | 'blockCategoryCollection'
+        | 'blockCategoryListCollection'
+        | 'componentArticleCollection'
+        | 'entryCollection'
     > & {
         blockArticleListCollection?: Maybe<ResolversParentTypes['BlockArticleListCollection']>;
         blockCategoryCollection?: Maybe<ResolversParentTypes['BlockCategoryCollection']>;
         blockCategoryListCollection?: Maybe<ResolversParentTypes['BlockCategoryListCollection']>;
+        componentArticleCollection?: Maybe<ResolversParentTypes['ComponentArticleCollection']>;
         entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
     };
     ComponentFaqItem: Omit<ComponentFaqItem, 'linkedFrom'> & {
@@ -8257,6 +10220,43 @@ export type ResolversParentTypes = {
         dataErrorsCollection?: Maybe<ResolversParentTypes['DataErrorsCollection']>;
         entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
     };
+    ComponentNavigationGroup: Omit<ComponentNavigationGroup, 'itemsCollection' | 'linkedFrom' | 'page'> & {
+        itemsCollection?: Maybe<ResolversParentTypes['ComponentNavigationGroupItemsCollection']>;
+        linkedFrom?: Maybe<ResolversParentTypes['ComponentNavigationGroupLinkingCollections']>;
+        page?: Maybe<ResolversParentTypes['Page']>;
+    };
+    ComponentNavigationGroupCollection: Omit<ComponentNavigationGroupCollection, 'items'> & {
+        items: Array<Maybe<ResolversParentTypes['ComponentNavigationGroup']>>;
+    };
+    ComponentNavigationGroupFilter: ComponentNavigationGroupFilter;
+    ComponentNavigationGroupItemsCollection: Omit<ComponentNavigationGroupItemsCollection, 'items'> & {
+        items: Array<Maybe<ResolversParentTypes['ComponentNavigationItem']>>;
+    };
+    ComponentNavigationGroupLinkingCollections: Omit<
+        ComponentNavigationGroupLinkingCollections,
+        'entryCollection' | 'footerCollection' | 'headerCollection'
+    > & {
+        entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
+        footerCollection?: Maybe<ResolversParentTypes['FooterCollection']>;
+        headerCollection?: Maybe<ResolversParentTypes['HeaderCollection']>;
+    };
+    ComponentNavigationItem: Omit<ComponentNavigationItem, 'linkedFrom' | 'page'> & {
+        linkedFrom?: Maybe<ResolversParentTypes['ComponentNavigationItemLinkingCollections']>;
+        page?: Maybe<ResolversParentTypes['Page']>;
+    };
+    ComponentNavigationItemCollection: Omit<ComponentNavigationItemCollection, 'items'> & {
+        items: Array<Maybe<ResolversParentTypes['ComponentNavigationItem']>>;
+    };
+    ComponentNavigationItemFilter: ComponentNavigationItemFilter;
+    ComponentNavigationItemLinkingCollections: Omit<
+        ComponentNavigationItemLinkingCollections,
+        'componentNavigationGroupCollection' | 'entryCollection' | 'footerCollection' | 'headerCollection'
+    > & {
+        componentNavigationGroupCollection?: Maybe<ResolversParentTypes['ComponentNavigationGroupCollection']>;
+        entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
+        footerCollection?: Maybe<ResolversParentTypes['FooterCollection']>;
+        headerCollection?: Maybe<ResolversParentTypes['HeaderCollection']>;
+    };
     ComponentNoResult: Omit<ComponentNoResult, 'linkedFrom'> & {
         linkedFrom?: Maybe<ResolversParentTypes['ComponentNoResultLinkingCollections']>;
     };
@@ -8283,6 +10283,16 @@ export type ResolversParentTypes = {
         'blockTicketListCollection' | 'entryCollection'
     > & {
         blockTicketListCollection?: Maybe<ResolversParentTypes['BlockTicketListCollection']>;
+        entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
+    };
+    ComponentRoles: Omit<ComponentRoles, 'linkedFrom'> & {
+        linkedFrom?: Maybe<ResolversParentTypes['ComponentRolesLinkingCollections']>;
+    };
+    ComponentRolesCollection: Omit<ComponentRolesCollection, 'items'> & {
+        items: Array<Maybe<ResolversParentTypes['ComponentRoles']>>;
+    };
+    ComponentRolesFilter: ComponentRolesFilter;
+    ComponentRolesLinkingCollections: Omit<ComponentRolesLinkingCollections, 'entryCollection'> & {
         entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
     };
     ComponentTable: Omit<ComponentTable, 'columnsCollection' | 'linkedFrom'> & {
@@ -8413,16 +10423,49 @@ export type ResolversParentTypes = {
     EntryCollection: Omit<EntryCollection, 'items'> & { items: Array<Maybe<ResolversParentTypes['Entry']>> };
     EntryFilter: EntryFilter;
     Float: Scalars['Float']['output'];
+    Footer: Omit<Footer, 'itemsCollection' | 'linkedFrom' | 'logo'> & {
+        itemsCollection?: Maybe<ResolversParentTypes['FooterItemsCollection']>;
+        linkedFrom?: Maybe<ResolversParentTypes['FooterLinkingCollections']>;
+        logo?: Maybe<ResolversParentTypes['Asset']>;
+    };
+    FooterCollection: Omit<FooterCollection, 'items'> & { items: Array<Maybe<ResolversParentTypes['Footer']>> };
+    FooterFilter: FooterFilter;
+    FooterItemsCollection: Omit<FooterItemsCollection, 'items'> & {
+        items: Array<Maybe<ResolversParentTypes['FooterItemsItem']>>;
+    };
+    FooterItemsFilter: FooterItemsFilter;
+    FooterItemsItem: ResolversUnionTypes<ResolversParentTypes>['FooterItemsItem'];
+    FooterLinkingCollections: Omit<FooterLinkingCollections, 'appConfigCollection' | 'entryCollection'> & {
+        appConfigCollection?: Maybe<ResolversParentTypes['AppConfigCollection']>;
+        entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
+    };
+    Header: Omit<Header, 'itemsCollection' | 'linkedFrom' | 'logo' | 'notification' | 'userInfo'> & {
+        itemsCollection?: Maybe<ResolversParentTypes['HeaderItemsCollection']>;
+        linkedFrom?: Maybe<ResolversParentTypes['HeaderLinkingCollections']>;
+        logo?: Maybe<ResolversParentTypes['Asset']>;
+        notification?: Maybe<ResolversParentTypes['Page']>;
+        userInfo?: Maybe<ResolversParentTypes['Page']>;
+    };
+    HeaderCollection: Omit<HeaderCollection, 'items'> & { items: Array<Maybe<ResolversParentTypes['Header']>> };
+    HeaderFilter: HeaderFilter;
+    HeaderItemsCollection: Omit<HeaderItemsCollection, 'items'> & {
+        items: Array<Maybe<ResolversParentTypes['HeaderItemsItem']>>;
+    };
+    HeaderItemsFilter: HeaderItemsFilter;
+    HeaderItemsItem: ResolversUnionTypes<ResolversParentTypes>['HeaderItemsItem'];
+    HeaderLinkingCollections: Omit<HeaderLinkingCollections, 'appConfigCollection' | 'entryCollection'> & {
+        appConfigCollection?: Maybe<ResolversParentTypes['AppConfigCollection']>;
+        entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
+    };
     HexColor: Scalars['HexColor']['output'];
     ID: Scalars['ID']['output'];
     ImageTransformOptions: ImageTransformOptions;
     Int: Scalars['Int']['output'];
-    JSON: Scalars['JSON']['output'];
     Page: Omit<Page, 'linkedFrom' | 'parent' | 'seo' | 'template'> & {
         linkedFrom?: Maybe<ResolversParentTypes['PageLinkingCollections']>;
         parent?: Maybe<ResolversParentTypes['Page']>;
         seo?: Maybe<ResolversParentTypes['PageSeo']>;
-        template?: Maybe<ResolversParentTypes['PageOneColumnTemplate']>;
+        template?: Maybe<ResolversParentTypes['PageTemplate']>;
     };
     PageCollection: Omit<PageCollection, 'items'> & { items: Array<Maybe<ResolversParentTypes['Page']>> };
     PageFilter: PageFilter;
@@ -8434,8 +10477,10 @@ export type ResolversParentTypes = {
         | 'blockCategoryListCollection'
         | 'componentCategoryCollection'
         | 'componentLinkCollection'
+        | 'componentNavigationGroupCollection'
+        | 'componentNavigationItemCollection'
         | 'entryCollection'
-        | 'pageCollection'
+        | 'headerCollection'
     > & {
         articleCollection?: Maybe<ResolversParentTypes['ArticleCollection']>;
         blockArticleListCollection?: Maybe<ResolversParentTypes['BlockArticleListCollection']>;
@@ -8443,8 +10488,10 @@ export type ResolversParentTypes = {
         blockCategoryListCollection?: Maybe<ResolversParentTypes['BlockCategoryListCollection']>;
         componentCategoryCollection?: Maybe<ResolversParentTypes['ComponentCategoryCollection']>;
         componentLinkCollection?: Maybe<ResolversParentTypes['ComponentLinkCollection']>;
+        componentNavigationGroupCollection?: Maybe<ResolversParentTypes['ComponentNavigationGroupCollection']>;
+        componentNavigationItemCollection?: Maybe<ResolversParentTypes['ComponentNavigationItemCollection']>;
         entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
-        pageCollection?: Maybe<ResolversParentTypes['PageCollection']>;
+        headerCollection?: Maybe<ResolversParentTypes['HeaderCollection']>;
     };
     PageOneColumnTemplate: Omit<PageOneColumnTemplate, 'linkedFrom' | 'mainSlotCollection'> & {
         linkedFrom?: Maybe<ResolversParentTypes['PageOneColumnTemplateLinkingCollections']>;
@@ -8454,12 +10501,8 @@ export type ResolversParentTypes = {
         items: Array<Maybe<ResolversParentTypes['PageOneColumnTemplate']>>;
     };
     PageOneColumnTemplateFilter: PageOneColumnTemplateFilter;
-    PageOneColumnTemplateLinkingCollections: Omit<
-        PageOneColumnTemplateLinkingCollections,
-        'entryCollection' | 'pageCollection'
-    > & {
+    PageOneColumnTemplateLinkingCollections: Omit<PageOneColumnTemplateLinkingCollections, 'entryCollection'> & {
         entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
-        pageCollection?: Maybe<ResolversParentTypes['PageCollection']>;
     };
     PageOneColumnTemplateMainSlotCollection: Omit<PageOneColumnTemplateMainSlotCollection, 'items'> & {
         items: Array<Maybe<ResolversParentTypes['Block']>>;
@@ -8470,13 +10513,39 @@ export type ResolversParentTypes = {
     };
     PageSeoCollection: Omit<PageSeoCollection, 'items'> & { items: Array<Maybe<ResolversParentTypes['PageSeo']>> };
     PageSeoFilter: PageSeoFilter;
-    PageSeoLinkingCollections: Omit<
-        PageSeoLinkingCollections,
-        'articleCollection' | 'entryCollection' | 'pageCollection'
-    > & {
+    PageSeoLinkingCollections: Omit<PageSeoLinkingCollections, 'articleCollection' | 'entryCollection'> & {
         articleCollection?: Maybe<ResolversParentTypes['ArticleCollection']>;
         entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
-        pageCollection?: Maybe<ResolversParentTypes['PageCollection']>;
+    };
+    PageTemplate: ResolversUnionTypes<ResolversParentTypes>['PageTemplate'];
+    PageTwoColumnTemplate: Omit<
+        PageTwoColumnTemplate,
+        'bottomSlotCollection' | 'leftSlotCollection' | 'linkedFrom' | 'rightSlotCollection' | 'topSlotCollection'
+    > & {
+        bottomSlotCollection?: Maybe<ResolversParentTypes['PageTwoColumnTemplateBottomSlotCollection']>;
+        leftSlotCollection?: Maybe<ResolversParentTypes['PageTwoColumnTemplateLeftSlotCollection']>;
+        linkedFrom?: Maybe<ResolversParentTypes['PageTwoColumnTemplateLinkingCollections']>;
+        rightSlotCollection?: Maybe<ResolversParentTypes['PageTwoColumnTemplateRightSlotCollection']>;
+        topSlotCollection?: Maybe<ResolversParentTypes['PageTwoColumnTemplateTopSlotCollection']>;
+    };
+    PageTwoColumnTemplateBottomSlotCollection: Omit<PageTwoColumnTemplateBottomSlotCollection, 'items'> & {
+        items: Array<Maybe<ResolversParentTypes['Block']>>;
+    };
+    PageTwoColumnTemplateCollection: Omit<PageTwoColumnTemplateCollection, 'items'> & {
+        items: Array<Maybe<ResolversParentTypes['PageTwoColumnTemplate']>>;
+    };
+    PageTwoColumnTemplateFilter: PageTwoColumnTemplateFilter;
+    PageTwoColumnTemplateLeftSlotCollection: Omit<PageTwoColumnTemplateLeftSlotCollection, 'items'> & {
+        items: Array<Maybe<ResolversParentTypes['Block']>>;
+    };
+    PageTwoColumnTemplateLinkingCollections: Omit<PageTwoColumnTemplateLinkingCollections, 'entryCollection'> & {
+        entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
+    };
+    PageTwoColumnTemplateRightSlotCollection: Omit<PageTwoColumnTemplateRightSlotCollection, 'items'> & {
+        items: Array<Maybe<ResolversParentTypes['Block']>>;
+    };
+    PageTwoColumnTemplateTopSlotCollection: Omit<PageTwoColumnTemplateTopSlotCollection, 'items'> & {
+        items: Array<Maybe<ResolversParentTypes['Block']>>;
     };
     Quality: Scalars['Quality']['output'];
     Query: {};
@@ -8490,7 +10559,11 @@ export type ResolversParentTypes = {
     };
     ThemeCollection: Omit<ThemeCollection, 'items'> & { items: Array<Maybe<ResolversParentTypes['Theme']>> };
     ThemeFilter: ThemeFilter;
-    ThemeLinkingCollections: Omit<ThemeLinkingCollections, 'blockCollection' | 'entryCollection'> & {
+    ThemeLinkingCollections: Omit<
+        ThemeLinkingCollections,
+        'appConfigCollection' | 'blockCollection' | 'entryCollection'
+    > & {
+        appConfigCollection?: Maybe<ResolversParentTypes['AppConfigCollection']>;
         blockCollection?: Maybe<ResolversParentTypes['BlockCollection']>;
         entryCollection?: Maybe<ResolversParentTypes['EntryCollection']>;
     };
@@ -8508,6 +10581,7 @@ export type ResolversParentTypes = {
     cfComponentKeyValueNestedFilter: CfComponentKeyValueNestedFilter;
     cfComponentLinkNestedFilter: CfComponentLinkNestedFilter;
     cfComponentMessageSimpleNestedFilter: CfComponentMessageSimpleNestedFilter;
+    cfComponentNavigationItemNestedFilter: CfComponentNavigationItemNestedFilter;
     cfComponentNoResultNestedFilter: CfComponentNoResultNestedFilter;
     cfComponentPaginationNestedFilter: CfComponentPaginationNestedFilter;
     cfComponentTableColumnNestedFilter: CfComponentTableColumnNestedFilter;
@@ -8517,11 +10591,13 @@ export type ResolversParentTypes = {
     cfDataDatesNestedFilter: CfDataDatesNestedFilter;
     cfDataErrorsNestedFilter: CfDataErrorsNestedFilter;
     cfDataValidationNestedFilter: CfDataValidationNestedFilter;
+    cfFooterNestedFilter: CfFooterNestedFilter;
+    cfHeaderNestedFilter: CfHeaderNestedFilter;
     cfPageNestedFilter: CfPageNestedFilter;
-    cfPageOneColumnTemplateNestedFilter: CfPageOneColumnTemplateNestedFilter;
     cfPageSeoNestedFilter: CfPageSeoNestedFilter;
     cfThemeNestedFilter: CfThemeNestedFilter;
     cfcomponentsMultiTypeNestedFilter: CfcomponentsMultiTypeNestedFilter;
+    cfitemsMultiTypeNestedFilter: CfitemsMultiTypeNestedFilter;
 };
 
 export type ContentSourceMapsDirectiveArgs = {};
@@ -8531,63 +10607,6 @@ export type ContentSourceMapsDirectiveResolver<
     Parent,
     ContextType = any,
     Args = ContentSourceMapsDirectiveArgs,
-> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
-
-export type ContentfulSchemaMetadataDirectiveArgs = {
-    contentTypePublishedCounters?: Maybe<Scalars['JSON']['input']>;
-};
-
-export type ContentfulSchemaMetadataDirectiveResolver<
-    Result,
-    Parent,
-    ContextType = any,
-    Args = ContentfulSchemaMetadataDirectiveArgs,
-> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
-
-export type DelegatedResourceLinkDirectiveArgs = {
-    contentTypeId?: Maybe<Scalars['String']['input']>;
-    field?: Maybe<Scalars['JSON']['input']>;
-};
-
-export type DelegatedResourceLinkDirectiveResolver<
-    Result,
-    Parent,
-    ContextType = any,
-    Args = DelegatedResourceLinkDirectiveArgs,
-> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
-
-export type EnumMapperDirectiveArgs = {
-    value?: Maybe<Scalars['JSON']['input']>;
-};
-
-export type EnumMapperDirectiveResolver<
-    Result,
-    Parent,
-    ContextType = any,
-    Args = EnumMapperDirectiveArgs,
-> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
-
-export type FeatureFlagDirectiveArgs = {
-    featureName?: Maybe<Scalars['String']['input']>;
-};
-
-export type FeatureFlagDirectiveResolver<
-    Result,
-    Parent,
-    ContextType = any,
-    Args = FeatureFlagDirectiveArgs,
-> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
-
-export type FieldResolverDirectiveArgs = {
-    data?: Maybe<Scalars['JSON']['input']>;
-    kind?: Maybe<Scalars['String']['input']>;
-};
-
-export type FieldResolverDirectiveResolver<
-    Result,
-    Parent,
-    ContextType = any,
-    Args = FieldResolverDirectiveArgs,
 > = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export type TimelineDirectiveArgs = {
@@ -8601,16 +10620,89 @@ export type TimelineDirectiveResolver<
     Args = TimelineDirectiveArgs,
 > = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
-export type TypeIdentifierDirectiveArgs = {
-    contentTypeId?: Maybe<Scalars['String']['input']>;
+export type AppConfigResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['AppConfig'] = ResolversParentTypes['AppConfig'],
+> = {
+    _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    contentfulMetadata?: Resolver<ResolversTypes['ContentfulMetadata'], ParentType, ContextType>;
+    linkedFrom?: Resolver<
+        Maybe<ResolversTypes['AppConfigLinkingCollections']>,
+        ParentType,
+        ContextType,
+        Partial<AppConfigLinkedFromArgs>
+    >;
+    name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<AppConfigNameArgs>>;
+    signedInFooter?: Resolver<
+        Maybe<ResolversTypes['Footer']>,
+        ParentType,
+        ContextType,
+        Partial<AppConfigSignedInFooterArgs>
+    >;
+    signedInHeader?: Resolver<
+        Maybe<ResolversTypes['Header']>,
+        ParentType,
+        ContextType,
+        Partial<AppConfigSignedInHeaderArgs>
+    >;
+    signedOutFooter?: Resolver<
+        Maybe<ResolversTypes['Footer']>,
+        ParentType,
+        ContextType,
+        Partial<AppConfigSignedOutFooterArgs>
+    >;
+    signedOutHeader?: Resolver<
+        Maybe<ResolversTypes['Header']>,
+        ParentType,
+        ContextType,
+        Partial<AppConfigSignedOutHeaderArgs>
+    >;
+    sys?: Resolver<ResolversTypes['Sys'], ParentType, ContextType>;
+    themesCollection?: Resolver<
+        Maybe<ResolversTypes['AppConfigThemesCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<AppConfigThemesCollectionArgs, 'limit' | 'skip'>
+    >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type TypeIdentifierDirectiveResolver<
-    Result,
-    Parent,
+export type AppConfigCollectionResolvers<
     ContextType = any,
-    Args = TypeIdentifierDirectiveArgs,
-> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
+    ParentType extends ResolversParentTypes['AppConfigCollection'] = ResolversParentTypes['AppConfigCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['AppConfig']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type AppConfigLinkingCollectionsResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['AppConfigLinkingCollections'] = ResolversParentTypes['AppConfigLinkingCollections'],
+> = {
+    entryCollection?: Resolver<
+        Maybe<ResolversTypes['EntryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<AppConfigLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
+    >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type AppConfigThemesCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['AppConfigThemesCollection'] = ResolversParentTypes['AppConfigThemesCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['Theme']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
 
 export type ArticleResolvers<
     ContextType = any,
@@ -8713,6 +10805,18 @@ export type AssetLinkingCollectionsResolvers<
         ParentType,
         ContextType,
         RequireFields<AssetLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
+    >;
+    footerCollection?: Resolver<
+        Maybe<ResolversTypes['FooterCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<AssetLinkingCollectionsFooterCollectionArgs, 'limit' | 'skip'>
+    >;
+    headerCollection?: Resolver<
+        Maybe<ResolversTypes['HeaderCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<AssetLinkingCollectionsHeaderCollectionArgs, 'limit' | 'skip'>
     >;
     pageSeoCollection?: Resolver<
         Maybe<ResolversTypes['PageSeoCollection']>,
@@ -9135,6 +11239,12 @@ export type BlockLinkingCollectionsResolvers<
         ParentType,
         ContextType,
         RequireFields<BlockLinkingCollectionsPageOneColumnTemplateCollectionArgs, 'limit' | 'skip'>
+    >;
+    pageTwoColumnTemplateCollection?: Resolver<
+        Maybe<ResolversTypes['PageTwoColumnTemplateCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<BlockLinkingCollectionsPageTwoColumnTemplateCollectionArgs, 'limit' | 'skip'>
     >;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -9904,6 +12014,162 @@ export type ComponentMessageSimpleLinkingCollectionsResolvers<
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type ComponentNavigationGroupResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentNavigationGroup'] = ResolversParentTypes['ComponentNavigationGroup'],
+> = {
+    _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    contentfulMetadata?: Resolver<ResolversTypes['ContentfulMetadata'], ParentType, ContextType>;
+    itemsCollection?: Resolver<
+        Maybe<ResolversTypes['ComponentNavigationGroupItemsCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentNavigationGroupItemsCollectionArgs, 'limit' | 'skip'>
+    >;
+    linkedFrom?: Resolver<
+        Maybe<ResolversTypes['ComponentNavigationGroupLinkingCollections']>,
+        ParentType,
+        ContextType,
+        Partial<ComponentNavigationGroupLinkedFromArgs>
+    >;
+    page?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType, Partial<ComponentNavigationGroupPageArgs>>;
+    sys?: Resolver<ResolversTypes['Sys'], ParentType, ContextType>;
+    title?: Resolver<
+        Maybe<ResolversTypes['String']>,
+        ParentType,
+        ContextType,
+        Partial<ComponentNavigationGroupTitleArgs>
+    >;
+    url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<ComponentNavigationGroupUrlArgs>>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentNavigationGroupCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentNavigationGroupCollection'] = ResolversParentTypes['ComponentNavigationGroupCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['ComponentNavigationGroup']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentNavigationGroupItemsCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentNavigationGroupItemsCollection'] = ResolversParentTypes['ComponentNavigationGroupItemsCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['ComponentNavigationItem']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentNavigationGroupLinkingCollectionsResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentNavigationGroupLinkingCollections'] = ResolversParentTypes['ComponentNavigationGroupLinkingCollections'],
+> = {
+    entryCollection?: Resolver<
+        Maybe<ResolversTypes['EntryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentNavigationGroupLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
+    >;
+    footerCollection?: Resolver<
+        Maybe<ResolversTypes['FooterCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentNavigationGroupLinkingCollectionsFooterCollectionArgs, 'limit' | 'skip'>
+    >;
+    headerCollection?: Resolver<
+        Maybe<ResolversTypes['HeaderCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentNavigationGroupLinkingCollectionsHeaderCollectionArgs, 'limit' | 'skip'>
+    >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentNavigationItemResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentNavigationItem'] = ResolversParentTypes['ComponentNavigationItem'],
+> = {
+    _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    contentfulMetadata?: Resolver<ResolversTypes['ContentfulMetadata'], ParentType, ContextType>;
+    description?: Resolver<
+        Maybe<ResolversTypes['String']>,
+        ParentType,
+        ContextType,
+        Partial<ComponentNavigationItemDescriptionArgs>
+    >;
+    label?: Resolver<
+        Maybe<ResolversTypes['String']>,
+        ParentType,
+        ContextType,
+        Partial<ComponentNavigationItemLabelArgs>
+    >;
+    linkedFrom?: Resolver<
+        Maybe<ResolversTypes['ComponentNavigationItemLinkingCollections']>,
+        ParentType,
+        ContextType,
+        Partial<ComponentNavigationItemLinkedFromArgs>
+    >;
+    page?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType, Partial<ComponentNavigationItemPageArgs>>;
+    sys?: Resolver<ResolversTypes['Sys'], ParentType, ContextType>;
+    url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<ComponentNavigationItemUrlArgs>>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentNavigationItemCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentNavigationItemCollection'] = ResolversParentTypes['ComponentNavigationItemCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['ComponentNavigationItem']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentNavigationItemLinkingCollectionsResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentNavigationItemLinkingCollections'] = ResolversParentTypes['ComponentNavigationItemLinkingCollections'],
+> = {
+    componentNavigationGroupCollection?: Resolver<
+        Maybe<ResolversTypes['ComponentNavigationGroupCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentNavigationItemLinkingCollectionsComponentNavigationGroupCollectionArgs, 'limit' | 'skip'>
+    >;
+    entryCollection?: Resolver<
+        Maybe<ResolversTypes['EntryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentNavigationItemLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
+    >;
+    footerCollection?: Resolver<
+        Maybe<ResolversTypes['FooterCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentNavigationItemLinkingCollectionsFooterCollectionArgs, 'limit' | 'skip'>
+    >;
+    headerCollection?: Resolver<
+        Maybe<ResolversTypes['HeaderCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentNavigationItemLinkingCollectionsHeaderCollectionArgs, 'limit' | 'skip'>
+    >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type ComponentNoResultResolvers<
     ContextType = any,
     ParentType extends ResolversParentTypes['ComponentNoResult'] = ResolversParentTypes['ComponentNoResult'],
@@ -10028,6 +12294,48 @@ export type ComponentPaginationLinkingCollectionsResolvers<
         ParentType,
         ContextType,
         RequireFields<ComponentPaginationLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
+    >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentRolesResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['ComponentRoles'] = ResolversParentTypes['ComponentRoles'],
+> = {
+    _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    contentfulMetadata?: Resolver<ResolversTypes['ContentfulMetadata'], ParentType, ContextType>;
+    linkedFrom?: Resolver<
+        Maybe<ResolversTypes['ComponentRolesLinkingCollections']>,
+        ParentType,
+        ContextType,
+        Partial<ComponentRolesLinkedFromArgs>
+    >;
+    sys?: Resolver<ResolversTypes['Sys'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentRolesCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentRolesCollection'] = ResolversParentTypes['ComponentRolesCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['ComponentRoles']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ComponentRolesLinkingCollectionsResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['ComponentRolesLinkingCollections'] = ResolversParentTypes['ComponentRolesLinkingCollections'],
+> = {
+    entryCollection?: Resolver<
+        Maybe<ResolversTypes['EntryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ComponentRolesLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -10600,6 +12908,7 @@ export type EntryResolvers<
     ParentType extends ResolversParentTypes['Entry'] = ResolversParentTypes['Entry'],
 > = {
     __resolveType: TypeResolveFn<
+        | 'AppConfig'
         | 'Article'
         | 'Author'
         | 'Block'
@@ -10618,8 +12927,11 @@ export type EntryResolvers<
         | 'ComponentKeyValue'
         | 'ComponentLink'
         | 'ComponentMessageSimple'
+        | 'ComponentNavigationGroup'
+        | 'ComponentNavigationItem'
         | 'ComponentNoResult'
         | 'ComponentPagination'
+        | 'ComponentRoles'
         | 'ComponentTable'
         | 'ComponentTableColumn'
         | 'ConfigurableTexts'
@@ -10628,9 +12940,12 @@ export type EntryResolvers<
         | 'DataDates'
         | 'DataErrors'
         | 'DataValidation'
+        | 'Footer'
+        | 'Header'
         | 'Page'
         | 'PageOneColumnTemplate'
         | 'PageSeo'
+        | 'PageTwoColumnTemplate'
         | 'Theme',
         ParentType,
         ContextType
@@ -10650,12 +12965,183 @@ export type EntryCollectionResolvers<
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type FooterResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['Footer'] = ResolversParentTypes['Footer'],
+> = {
+    _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    contentfulMetadata?: Resolver<ResolversTypes['ContentfulMetadata'], ParentType, ContextType>;
+    copyright?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<FooterCopyrightArgs>>;
+    itemsCollection?: Resolver<
+        Maybe<ResolversTypes['FooterItemsCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<FooterItemsCollectionArgs, 'limit' | 'skip'>
+    >;
+    linkedFrom?: Resolver<
+        Maybe<ResolversTypes['FooterLinkingCollections']>,
+        ParentType,
+        ContextType,
+        Partial<FooterLinkedFromArgs>
+    >;
+    logo?: Resolver<Maybe<ResolversTypes['Asset']>, ParentType, ContextType, Partial<FooterLogoArgs>>;
+    logoLabel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<FooterLogoLabelArgs>>;
+    sys?: Resolver<ResolversTypes['Sys'], ParentType, ContextType>;
+    title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<FooterTitleArgs>>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type FooterCollectionResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['FooterCollection'] = ResolversParentTypes['FooterCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['Footer']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type FooterItemsCollectionResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['FooterItemsCollection'] = ResolversParentTypes['FooterItemsCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['FooterItemsItem']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type FooterItemsItemResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['FooterItemsItem'] = ResolversParentTypes['FooterItemsItem'],
+> = {
+    __resolveType: TypeResolveFn<'ComponentNavigationGroup' | 'ComponentNavigationItem', ParentType, ContextType>;
+};
+
+export type FooterLinkingCollectionsResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['FooterLinkingCollections'] = ResolversParentTypes['FooterLinkingCollections'],
+> = {
+    appConfigCollection?: Resolver<
+        Maybe<ResolversTypes['AppConfigCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<FooterLinkingCollectionsAppConfigCollectionArgs, 'limit' | 'skip'>
+    >;
+    entryCollection?: Resolver<
+        Maybe<ResolversTypes['EntryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<FooterLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
+    >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type HeaderResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['Header'] = ResolversParentTypes['Header'],
+> = {
+    _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    closeMobileMenuLabel?: Resolver<
+        Maybe<ResolversTypes['String']>,
+        ParentType,
+        ContextType,
+        Partial<HeaderCloseMobileMenuLabelArgs>
+    >;
+    contentfulMetadata?: Resolver<ResolversTypes['ContentfulMetadata'], ParentType, ContextType>;
+    itemsCollection?: Resolver<
+        Maybe<ResolversTypes['HeaderItemsCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<HeaderItemsCollectionArgs, 'limit' | 'skip'>
+    >;
+    languageSwitcherLabel?: Resolver<
+        Maybe<ResolversTypes['String']>,
+        ParentType,
+        ContextType,
+        Partial<HeaderLanguageSwitcherLabelArgs>
+    >;
+    linkedFrom?: Resolver<
+        Maybe<ResolversTypes['HeaderLinkingCollections']>,
+        ParentType,
+        ContextType,
+        Partial<HeaderLinkedFromArgs>
+    >;
+    logo?: Resolver<Maybe<ResolversTypes['Asset']>, ParentType, ContextType, Partial<HeaderLogoArgs>>;
+    logoLabel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<HeaderLogoLabelArgs>>;
+    notification?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType, Partial<HeaderNotificationArgs>>;
+    openMobileMenuLabel?: Resolver<
+        Maybe<ResolversTypes['String']>,
+        ParentType,
+        ContextType,
+        Partial<HeaderOpenMobileMenuLabelArgs>
+    >;
+    showContextSwitcher?: Resolver<
+        Maybe<ResolversTypes['Boolean']>,
+        ParentType,
+        ContextType,
+        Partial<HeaderShowContextSwitcherArgs>
+    >;
+    sys?: Resolver<ResolversTypes['Sys'], ParentType, ContextType>;
+    title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<HeaderTitleArgs>>;
+    userInfo?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType, Partial<HeaderUserInfoArgs>>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type HeaderCollectionResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['HeaderCollection'] = ResolversParentTypes['HeaderCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['Header']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type HeaderItemsCollectionResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['HeaderItemsCollection'] = ResolversParentTypes['HeaderItemsCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['HeaderItemsItem']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type HeaderItemsItemResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['HeaderItemsItem'] = ResolversParentTypes['HeaderItemsItem'],
+> = {
+    __resolveType: TypeResolveFn<'ComponentNavigationGroup' | 'ComponentNavigationItem', ParentType, ContextType>;
+};
+
+export type HeaderLinkingCollectionsResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['HeaderLinkingCollections'] = ResolversParentTypes['HeaderLinkingCollections'],
+> = {
+    appConfigCollection?: Resolver<
+        Maybe<ResolversTypes['AppConfigCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<HeaderLinkingCollectionsAppConfigCollectionArgs, 'limit' | 'skip'>
+    >;
+    entryCollection?: Resolver<
+        Maybe<ResolversTypes['EntryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<HeaderLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
+    >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export interface HexColorScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['HexColor'], any> {
     name: 'HexColor';
-}
-
-export interface JsonScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['JSON'], any> {
-    name: 'JSON';
 }
 
 export type PageResolvers<
@@ -10672,15 +13158,16 @@ export type PageResolvers<
         Partial<PageLinkedFromArgs>
     >;
     parent?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType, Partial<PageParentArgs>>;
+    permissions?: Resolver<
+        Maybe<Array<Maybe<ResolversTypes['String']>>>,
+        ParentType,
+        ContextType,
+        Partial<PagePermissionsArgs>
+    >;
     seo?: Resolver<Maybe<ResolversTypes['PageSeo']>, ParentType, ContextType, Partial<PageSeoArgs>>;
     slug?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<PageSlugArgs>>;
     sys?: Resolver<ResolversTypes['Sys'], ParentType, ContextType>;
-    template?: Resolver<
-        Maybe<ResolversTypes['PageOneColumnTemplate']>,
-        ParentType,
-        ContextType,
-        Partial<PageTemplateArgs>
-    >;
+    template?: Resolver<Maybe<ResolversTypes['PageTemplate']>, ParentType, ContextType, Partial<PageTemplateArgs>>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -10735,11 +13222,29 @@ export type PageLinkingCollectionsResolvers<
         ContextType,
         RequireFields<PageLinkingCollectionsComponentLinkCollectionArgs, 'limit' | 'skip'>
     >;
+    componentNavigationGroupCollection?: Resolver<
+        Maybe<ResolversTypes['ComponentNavigationGroupCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<PageLinkingCollectionsComponentNavigationGroupCollectionArgs, 'limit' | 'skip'>
+    >;
+    componentNavigationItemCollection?: Resolver<
+        Maybe<ResolversTypes['ComponentNavigationItemCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<PageLinkingCollectionsComponentNavigationItemCollectionArgs, 'limit' | 'skip'>
+    >;
     entryCollection?: Resolver<
         Maybe<ResolversTypes['EntryCollection']>,
         ParentType,
         ContextType,
         RequireFields<PageLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
+    >;
+    headerCollection?: Resolver<
+        Maybe<ResolversTypes['HeaderCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<PageLinkingCollectionsHeaderCollectionArgs, 'limit' | 'skip'>
     >;
     pageCollection?: Resolver<
         Maybe<ResolversTypes['PageCollection']>,
@@ -10881,6 +13386,134 @@ export type PageSeoLinkingCollectionsResolvers<
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type PageTemplateResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['PageTemplate'] = ResolversParentTypes['PageTemplate'],
+> = {
+    __resolveType: TypeResolveFn<'PageOneColumnTemplate' | 'PageTwoColumnTemplate', ParentType, ContextType>;
+};
+
+export type PageTwoColumnTemplateResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes['PageTwoColumnTemplate'] = ResolversParentTypes['PageTwoColumnTemplate'],
+> = {
+    _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    bottomSlotCollection?: Resolver<
+        Maybe<ResolversTypes['PageTwoColumnTemplateBottomSlotCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<PageTwoColumnTemplateBottomSlotCollectionArgs, 'limit' | 'skip'>
+    >;
+    contentfulMetadata?: Resolver<ResolversTypes['ContentfulMetadata'], ParentType, ContextType>;
+    leftSlotCollection?: Resolver<
+        Maybe<ResolversTypes['PageTwoColumnTemplateLeftSlotCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<PageTwoColumnTemplateLeftSlotCollectionArgs, 'limit' | 'skip'>
+    >;
+    linkedFrom?: Resolver<
+        Maybe<ResolversTypes['PageTwoColumnTemplateLinkingCollections']>,
+        ParentType,
+        ContextType,
+        Partial<PageTwoColumnTemplateLinkedFromArgs>
+    >;
+    rightSlotCollection?: Resolver<
+        Maybe<ResolversTypes['PageTwoColumnTemplateRightSlotCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<PageTwoColumnTemplateRightSlotCollectionArgs, 'limit' | 'skip'>
+    >;
+    sys?: Resolver<ResolversTypes['Sys'], ParentType, ContextType>;
+    title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<PageTwoColumnTemplateTitleArgs>>;
+    topSlotCollection?: Resolver<
+        Maybe<ResolversTypes['PageTwoColumnTemplateTopSlotCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<PageTwoColumnTemplateTopSlotCollectionArgs, 'limit' | 'skip'>
+    >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PageTwoColumnTemplateBottomSlotCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['PageTwoColumnTemplateBottomSlotCollection'] = ResolversParentTypes['PageTwoColumnTemplateBottomSlotCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['Block']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PageTwoColumnTemplateCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['PageTwoColumnTemplateCollection'] = ResolversParentTypes['PageTwoColumnTemplateCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['PageTwoColumnTemplate']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PageTwoColumnTemplateLeftSlotCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['PageTwoColumnTemplateLeftSlotCollection'] = ResolversParentTypes['PageTwoColumnTemplateLeftSlotCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['Block']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PageTwoColumnTemplateLinkingCollectionsResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['PageTwoColumnTemplateLinkingCollections'] = ResolversParentTypes['PageTwoColumnTemplateLinkingCollections'],
+> = {
+    entryCollection?: Resolver<
+        Maybe<ResolversTypes['EntryCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<PageTwoColumnTemplateLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
+    >;
+    pageCollection?: Resolver<
+        Maybe<ResolversTypes['PageCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<PageTwoColumnTemplateLinkingCollectionsPageCollectionArgs, 'limit' | 'skip'>
+    >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PageTwoColumnTemplateRightSlotCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['PageTwoColumnTemplateRightSlotCollection'] = ResolversParentTypes['PageTwoColumnTemplateRightSlotCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['Block']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PageTwoColumnTemplateTopSlotCollectionResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['PageTwoColumnTemplateTopSlotCollection'] = ResolversParentTypes['PageTwoColumnTemplateTopSlotCollection'],
+> = {
+    items?: Resolver<Array<Maybe<ResolversTypes['Block']>>, ParentType, ContextType>;
+    limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export interface QualityScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Quality'], any> {
     name: 'Quality';
 }
@@ -10895,6 +13528,18 @@ export type QueryResolvers<
         ParentType,
         ContextType,
         RequireFields<Query_NodesArgs, 'ids'>
+    >;
+    appConfig?: Resolver<
+        Maybe<ResolversTypes['AppConfig']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryAppConfigArgs, 'id'>
+    >;
+    appConfigCollection?: Resolver<
+        Maybe<ResolversTypes['AppConfigCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryAppConfigCollectionArgs, 'limit' | 'skip'>
     >;
     article?: Resolver<
         Maybe<ResolversTypes['Article']>,
@@ -11109,6 +13754,30 @@ export type QueryResolvers<
         ContextType,
         RequireFields<QueryComponentMessageSimpleCollectionArgs, 'limit' | 'skip'>
     >;
+    componentNavigationGroup?: Resolver<
+        Maybe<ResolversTypes['ComponentNavigationGroup']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryComponentNavigationGroupArgs, 'id'>
+    >;
+    componentNavigationGroupCollection?: Resolver<
+        Maybe<ResolversTypes['ComponentNavigationGroupCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryComponentNavigationGroupCollectionArgs, 'limit' | 'skip'>
+    >;
+    componentNavigationItem?: Resolver<
+        Maybe<ResolversTypes['ComponentNavigationItem']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryComponentNavigationItemArgs, 'id'>
+    >;
+    componentNavigationItemCollection?: Resolver<
+        Maybe<ResolversTypes['ComponentNavigationItemCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryComponentNavigationItemCollectionArgs, 'limit' | 'skip'>
+    >;
     componentNoResult?: Resolver<
         Maybe<ResolversTypes['ComponentNoResult']>,
         ParentType,
@@ -11132,6 +13801,18 @@ export type QueryResolvers<
         ParentType,
         ContextType,
         RequireFields<QueryComponentPaginationCollectionArgs, 'limit' | 'skip'>
+    >;
+    componentRoles?: Resolver<
+        Maybe<ResolversTypes['ComponentRoles']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryComponentRolesArgs, 'id'>
+    >;
+    componentRolesCollection?: Resolver<
+        Maybe<ResolversTypes['ComponentRolesCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryComponentRolesCollectionArgs, 'limit' | 'skip'>
     >;
     componentTable?: Resolver<
         Maybe<ResolversTypes['ComponentTable']>,
@@ -11235,6 +13916,20 @@ export type QueryResolvers<
         ContextType,
         RequireFields<QueryEntryCollectionArgs, 'limit' | 'skip'>
     >;
+    footer?: Resolver<Maybe<ResolversTypes['Footer']>, ParentType, ContextType, RequireFields<QueryFooterArgs, 'id'>>;
+    footerCollection?: Resolver<
+        Maybe<ResolversTypes['FooterCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryFooterCollectionArgs, 'limit' | 'skip'>
+    >;
+    header?: Resolver<Maybe<ResolversTypes['Header']>, ParentType, ContextType, RequireFields<QueryHeaderArgs, 'id'>>;
+    headerCollection?: Resolver<
+        Maybe<ResolversTypes['HeaderCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryHeaderCollectionArgs, 'limit' | 'skip'>
+    >;
     page?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType, RequireFields<QueryPageArgs, 'id'>>;
     pageCollection?: Resolver<
         Maybe<ResolversTypes['PageCollection']>,
@@ -11265,6 +13960,18 @@ export type QueryResolvers<
         ParentType,
         ContextType,
         RequireFields<QueryPageSeoCollectionArgs, 'limit' | 'skip'>
+    >;
+    pageTwoColumnTemplate?: Resolver<
+        Maybe<ResolversTypes['PageTwoColumnTemplate']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryPageTwoColumnTemplateArgs, 'id'>
+    >;
+    pageTwoColumnTemplateCollection?: Resolver<
+        Maybe<ResolversTypes['PageTwoColumnTemplateCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<QueryPageTwoColumnTemplateCollectionArgs, 'limit' | 'skip'>
     >;
     theme?: Resolver<Maybe<ResolversTypes['Theme']>, ParentType, ContextType, RequireFields<QueryThemeArgs, 'id'>>;
     themeCollection?: Resolver<
@@ -11331,6 +14038,12 @@ export type ThemeLinkingCollectionsResolvers<
     ParentType extends
         ResolversParentTypes['ThemeLinkingCollections'] = ResolversParentTypes['ThemeLinkingCollections'],
 > = {
+    appConfigCollection?: Resolver<
+        Maybe<ResolversTypes['AppConfigCollection']>,
+        ParentType,
+        ContextType,
+        RequireFields<ThemeLinkingCollectionsAppConfigCollectionArgs, 'limit' | 'skip'>
+    >;
     blockCollection?: Resolver<
         Maybe<ResolversTypes['BlockCollection']>,
         ParentType,
@@ -11351,6 +14064,7 @@ export type _NodeResolvers<
     ParentType extends ResolversParentTypes['_Node'] = ResolversParentTypes['_Node'],
 > = {
     __resolveType: TypeResolveFn<
+        | 'AppConfig'
         | 'Article'
         | 'Author'
         | 'Block'
@@ -11369,8 +14083,11 @@ export type _NodeResolvers<
         | 'ComponentKeyValue'
         | 'ComponentLink'
         | 'ComponentMessageSimple'
+        | 'ComponentNavigationGroup'
+        | 'ComponentNavigationItem'
         | 'ComponentNoResult'
         | 'ComponentPagination'
+        | 'ComponentRoles'
         | 'ComponentTable'
         | 'ComponentTableColumn'
         | 'ConfigurableTexts'
@@ -11379,9 +14096,12 @@ export type _NodeResolvers<
         | 'DataDates'
         | 'DataErrors'
         | 'DataValidation'
+        | 'Footer'
+        | 'Header'
         | 'Page'
         | 'PageOneColumnTemplate'
         | 'PageSeo'
+        | 'PageTwoColumnTemplate'
         | 'Theme',
         ParentType,
         ContextType
@@ -11390,6 +14110,10 @@ export type _NodeResolvers<
 };
 
 export type Resolvers<ContextType = any> = {
+    AppConfig?: AppConfigResolvers<ContextType>;
+    AppConfigCollection?: AppConfigCollectionResolvers<ContextType>;
+    AppConfigLinkingCollections?: AppConfigLinkingCollectionsResolvers<ContextType>;
+    AppConfigThemesCollection?: AppConfigThemesCollectionResolvers<ContextType>;
     Article?: ArticleResolvers<ContextType>;
     ArticleCollection?: ArticleCollectionResolvers<ContextType>;
     ArticleLinkingCollections?: ArticleLinkingCollectionsResolvers<ContextType>;
@@ -11457,12 +14181,22 @@ export type Resolvers<ContextType = any> = {
     ComponentMessageSimple?: ComponentMessageSimpleResolvers<ContextType>;
     ComponentMessageSimpleCollection?: ComponentMessageSimpleCollectionResolvers<ContextType>;
     ComponentMessageSimpleLinkingCollections?: ComponentMessageSimpleLinkingCollectionsResolvers<ContextType>;
+    ComponentNavigationGroup?: ComponentNavigationGroupResolvers<ContextType>;
+    ComponentNavigationGroupCollection?: ComponentNavigationGroupCollectionResolvers<ContextType>;
+    ComponentNavigationGroupItemsCollection?: ComponentNavigationGroupItemsCollectionResolvers<ContextType>;
+    ComponentNavigationGroupLinkingCollections?: ComponentNavigationGroupLinkingCollectionsResolvers<ContextType>;
+    ComponentNavigationItem?: ComponentNavigationItemResolvers<ContextType>;
+    ComponentNavigationItemCollection?: ComponentNavigationItemCollectionResolvers<ContextType>;
+    ComponentNavigationItemLinkingCollections?: ComponentNavigationItemLinkingCollectionsResolvers<ContextType>;
     ComponentNoResult?: ComponentNoResultResolvers<ContextType>;
     ComponentNoResultCollection?: ComponentNoResultCollectionResolvers<ContextType>;
     ComponentNoResultLinkingCollections?: ComponentNoResultLinkingCollectionsResolvers<ContextType>;
     ComponentPagination?: ComponentPaginationResolvers<ContextType>;
     ComponentPaginationCollection?: ComponentPaginationCollectionResolvers<ContextType>;
     ComponentPaginationLinkingCollections?: ComponentPaginationLinkingCollectionsResolvers<ContextType>;
+    ComponentRoles?: ComponentRolesResolvers<ContextType>;
+    ComponentRolesCollection?: ComponentRolesCollectionResolvers<ContextType>;
+    ComponentRolesLinkingCollections?: ComponentRolesLinkingCollectionsResolvers<ContextType>;
     ComponentTable?: ComponentTableResolvers<ContextType>;
     ComponentTableCollection?: ComponentTableCollectionResolvers<ContextType>;
     ComponentTableColumn?: ComponentTableColumnResolvers<ContextType>;
@@ -11494,8 +14228,17 @@ export type Resolvers<ContextType = any> = {
     Dimension?: GraphQLScalarType;
     Entry?: EntryResolvers<ContextType>;
     EntryCollection?: EntryCollectionResolvers<ContextType>;
+    Footer?: FooterResolvers<ContextType>;
+    FooterCollection?: FooterCollectionResolvers<ContextType>;
+    FooterItemsCollection?: FooterItemsCollectionResolvers<ContextType>;
+    FooterItemsItem?: FooterItemsItemResolvers<ContextType>;
+    FooterLinkingCollections?: FooterLinkingCollectionsResolvers<ContextType>;
+    Header?: HeaderResolvers<ContextType>;
+    HeaderCollection?: HeaderCollectionResolvers<ContextType>;
+    HeaderItemsCollection?: HeaderItemsCollectionResolvers<ContextType>;
+    HeaderItemsItem?: HeaderItemsItemResolvers<ContextType>;
+    HeaderLinkingCollections?: HeaderLinkingCollectionsResolvers<ContextType>;
     HexColor?: GraphQLScalarType;
-    JSON?: GraphQLScalarType;
     Page?: PageResolvers<ContextType>;
     PageCollection?: PageCollectionResolvers<ContextType>;
     PageLinkingCollections?: PageLinkingCollectionsResolvers<ContextType>;
@@ -11506,6 +14249,14 @@ export type Resolvers<ContextType = any> = {
     PageSeo?: PageSeoResolvers<ContextType>;
     PageSeoCollection?: PageSeoCollectionResolvers<ContextType>;
     PageSeoLinkingCollections?: PageSeoLinkingCollectionsResolvers<ContextType>;
+    PageTemplate?: PageTemplateResolvers<ContextType>;
+    PageTwoColumnTemplate?: PageTwoColumnTemplateResolvers<ContextType>;
+    PageTwoColumnTemplateBottomSlotCollection?: PageTwoColumnTemplateBottomSlotCollectionResolvers<ContextType>;
+    PageTwoColumnTemplateCollection?: PageTwoColumnTemplateCollectionResolvers<ContextType>;
+    PageTwoColumnTemplateLeftSlotCollection?: PageTwoColumnTemplateLeftSlotCollectionResolvers<ContextType>;
+    PageTwoColumnTemplateLinkingCollections?: PageTwoColumnTemplateLinkingCollectionsResolvers<ContextType>;
+    PageTwoColumnTemplateRightSlotCollection?: PageTwoColumnTemplateRightSlotCollectionResolvers<ContextType>;
+    PageTwoColumnTemplateTopSlotCollection?: PageTwoColumnTemplateTopSlotCollectionResolvers<ContextType>;
     Quality?: GraphQLScalarType;
     Query?: QueryResolvers<ContextType>;
     Sys?: SysResolvers<ContextType>;
@@ -11518,13 +14269,19 @@ export type Resolvers<ContextType = any> = {
 
 export type DirectiveResolvers<ContextType = any> = {
     contentSourceMaps?: ContentSourceMapsDirectiveResolver<any, any, ContextType>;
-    contentfulSchemaMetadata?: ContentfulSchemaMetadataDirectiveResolver<any, any, ContextType>;
-    delegatedResourceLink?: DelegatedResourceLinkDirectiveResolver<any, any, ContextType>;
-    enumMapper?: EnumMapperDirectiveResolver<any, any, ContextType>;
-    featureFlag?: FeatureFlagDirectiveResolver<any, any, ContextType>;
-    fieldResolver?: FieldResolverDirectiveResolver<any, any, ContextType>;
     timeline?: TimelineDirectiveResolver<any, any, ContextType>;
-    typeIdentifier?: TypeIdentifierDirectiveResolver<any, any, ContextType>;
+};
+
+export type AppConfigFragment = {
+    sys: { id: string };
+    signedInHeader?: { sys: { id: string } };
+    signedInFooter?: { sys: { id: string } };
+    themesCollection?: {
+        items: Array<{
+            name?: string;
+            logo?: { url?: string; title?: string; width?: number; height?: number; description?: string };
+        }>;
+    };
 };
 
 export type ComponentFragment = {
@@ -11641,36 +14398,189 @@ export type ComponentBaseFragment = {
     theme?: { name?: string };
 };
 
+export type FooterFragment = {
+    title?: string;
+    copyright?: string;
+    logoLabel?: string;
+    sys: { id: string };
+    logo?: { url?: string; title?: string; width?: number; height?: number; description?: string };
+    itemsCollection?: {
+        items: Array<
+            | {
+                  __typename: 'ComponentNavigationGroup';
+                  title?: string;
+                  url?: string;
+                  itemsCollection?: {
+                      items: Array<{
+                          __typename: 'ComponentNavigationItem';
+                          label?: string;
+                          url?: string;
+                          description?: string;
+                          page?: { slug?: string; seo?: { title?: string } };
+                      }>;
+                  };
+                  page?: { slug?: string; seo?: { title?: string } };
+              }
+            | {
+                  __typename: 'ComponentNavigationItem';
+                  label?: string;
+                  url?: string;
+                  description?: string;
+                  page?: { slug?: string; seo?: { title?: string } };
+              }
+        >;
+    };
+};
+
+export type HeaderFragment = {
+    title?: string;
+    showContextSwitcher?: boolean;
+    languageSwitcherLabel?: string;
+    openMobileMenuLabel?: string;
+    closeMobileMenuLabel?: string;
+    logoLabel?: string;
+    sys: { id: string };
+    logo?: { url?: string; title?: string; width?: number; height?: number; description?: string };
+    itemsCollection?: {
+        items: Array<
+            | {
+                  __typename: 'ComponentNavigationGroup';
+                  title?: string;
+                  url?: string;
+                  itemsCollection?: {
+                      items: Array<{
+                          __typename: 'ComponentNavigationItem';
+                          label?: string;
+                          url?: string;
+                          description?: string;
+                          page?: { slug?: string; seo?: { title?: string } };
+                      }>;
+                  };
+                  page?: { slug?: string; seo?: { title?: string } };
+              }
+            | {
+                  __typename: 'ComponentNavigationItem';
+                  label?: string;
+                  url?: string;
+                  description?: string;
+                  page?: { slug?: string; seo?: { title?: string } };
+              }
+        >;
+    };
+    notification?: { slug?: string; seo?: { title?: string } };
+    userInfo?: { slug?: string; seo?: { title?: string } };
+};
+
 export type PageFragment = {
     slug?: string;
     hasOwnTitle?: boolean;
+    permissions?: Array<string>;
     sys: { locale?: string; publishedAt?: any; id: string };
-    seo?: { title?: string; noIndex?: boolean; noFollow?: boolean; description?: string; keywords?: Array<string> };
+    seo?: {
+        title?: string;
+        noIndex?: boolean;
+        noFollow?: boolean;
+        description?: string;
+        keywords?: Array<string>;
+        image?: { url?: string; title?: string; width?: number; height?: number; description?: string };
+    };
     parent?: {
         slug?: string;
         seo?: { title?: string };
         parent?: { slug?: string; seo?: { title?: string }; parent?: { slug?: string; seo?: { title?: string } } };
     };
-    template?: {
-        __typename: 'PageOneColumnTemplate';
-        mainSlotCollection?: {
-            items: Array<{
-                __typename: 'Block';
-                spacing?: string;
-                background?: string;
-                variant?: string;
-                sys: { id: string };
-                content?:
-                    | { __typename: 'BlockArticleList' }
-                    | { __typename: 'BlockCategory' }
-                    | { __typename: 'BlockCategoryList' }
-                    | { __typename: 'BlockFaq' }
-                    | { __typename: 'BlockQuickLinks' }
-                    | { __typename: 'BlockTicketList' };
-                theme?: { name?: string };
-            }>;
-        };
-    };
+    template?:
+        | {
+              __typename: 'PageOneColumnTemplate';
+              mainSlotCollection?: {
+                  items: Array<{
+                      __typename: 'Block';
+                      spacing?: string;
+                      background?: string;
+                      variant?: string;
+                      sys: { id: string };
+                      content?:
+                          | { __typename: 'BlockArticleList' }
+                          | { __typename: 'BlockCategory' }
+                          | { __typename: 'BlockCategoryList' }
+                          | { __typename: 'BlockFaq' }
+                          | { __typename: 'BlockQuickLinks' }
+                          | { __typename: 'BlockTicketList' };
+                      theme?: { name?: string };
+                  }>;
+              };
+          }
+        | {
+              __typename: 'PageTwoColumnTemplate';
+              topSlotCollection?: {
+                  items: Array<{
+                      __typename: 'Block';
+                      spacing?: string;
+                      background?: string;
+                      variant?: string;
+                      sys: { id: string };
+                      content?:
+                          | { __typename: 'BlockArticleList' }
+                          | { __typename: 'BlockCategory' }
+                          | { __typename: 'BlockCategoryList' }
+                          | { __typename: 'BlockFaq' }
+                          | { __typename: 'BlockQuickLinks' }
+                          | { __typename: 'BlockTicketList' };
+                      theme?: { name?: string };
+                  }>;
+              };
+              leftSlotCollection?: {
+                  items: Array<{
+                      __typename: 'Block';
+                      spacing?: string;
+                      background?: string;
+                      variant?: string;
+                      sys: { id: string };
+                      content?:
+                          | { __typename: 'BlockArticleList' }
+                          | { __typename: 'BlockCategory' }
+                          | { __typename: 'BlockCategoryList' }
+                          | { __typename: 'BlockFaq' }
+                          | { __typename: 'BlockQuickLinks' }
+                          | { __typename: 'BlockTicketList' };
+                      theme?: { name?: string };
+                  }>;
+              };
+              rightSlotCollection?: {
+                  items: Array<{
+                      __typename: 'Block';
+                      spacing?: string;
+                      background?: string;
+                      variant?: string;
+                      sys: { id: string };
+                      content?:
+                          | { __typename: 'BlockArticleList' }
+                          | { __typename: 'BlockCategory' }
+                          | { __typename: 'BlockCategoryList' }
+                          | { __typename: 'BlockFaq' }
+                          | { __typename: 'BlockQuickLinks' }
+                          | { __typename: 'BlockTicketList' };
+                      theme?: { name?: string };
+                  }>;
+              };
+              bottomSlotCollection?: {
+                  items: Array<{
+                      __typename: 'Block';
+                      spacing?: string;
+                      background?: string;
+                      variant?: string;
+                      sys: { id: string };
+                      content?:
+                          | { __typename: 'BlockArticleList' }
+                          | { __typename: 'BlockCategory' }
+                          | { __typename: 'BlockCategoryList' }
+                          | { __typename: 'BlockFaq' }
+                          | { __typename: 'BlockQuickLinks' }
+                          | { __typename: 'BlockTicketList' };
+                      theme?: { name?: string };
+                  }>;
+              };
+          };
 };
 
 export type SysFragment = { id: string };
@@ -11794,6 +14704,32 @@ export type LinkFragment = {
     page?: { slug?: string; seo?: { title?: string; description?: string } };
 };
 
+export type MediaFragment = { url?: string; title?: string; width?: number; height?: number; description?: string };
+
+export type NavigationGroupFragment = {
+    __typename: 'ComponentNavigationGroup';
+    title?: string;
+    url?: string;
+    itemsCollection?: {
+        items: Array<{
+            __typename: 'ComponentNavigationItem';
+            label?: string;
+            url?: string;
+            description?: string;
+            page?: { slug?: string; seo?: { title?: string } };
+        }>;
+    };
+    page?: { slug?: string; seo?: { title?: string } };
+};
+
+export type NavigationItemFragment = {
+    __typename: 'ComponentNavigationItem';
+    label?: string;
+    url?: string;
+    description?: string;
+    page?: { slug?: string; seo?: { title?: string } };
+};
+
 export type PaginationFragment = {
     description?: string;
     previousLabel?: string;
@@ -11809,6 +14745,7 @@ export type SeoFragment = {
     noFollow?: boolean;
     description?: string;
     keywords?: Array<string>;
+    image?: { url?: string; title?: string; width?: number; height?: number; description?: string };
 };
 
 export type TableFragment = {
@@ -11842,6 +14779,119 @@ export type OneColumnTemplateFragment = {
                 | { __typename: 'BlockQuickLinks' }
                 | { __typename: 'BlockTicketList' };
             theme?: { name?: string };
+        }>;
+    };
+};
+
+export type TwoColumnTemplateFragment = {
+    __typename: 'PageTwoColumnTemplate';
+    topSlotCollection?: {
+        items: Array<{
+            __typename: 'Block';
+            spacing?: string;
+            background?: string;
+            variant?: string;
+            sys: { id: string };
+            content?:
+                | { __typename: 'BlockArticleList' }
+                | { __typename: 'BlockCategory' }
+                | { __typename: 'BlockCategoryList' }
+                | { __typename: 'BlockFaq' }
+                | { __typename: 'BlockQuickLinks' }
+                | { __typename: 'BlockTicketList' };
+            theme?: { name?: string };
+        }>;
+    };
+    leftSlotCollection?: {
+        items: Array<{
+            __typename: 'Block';
+            spacing?: string;
+            background?: string;
+            variant?: string;
+            sys: { id: string };
+            content?:
+                | { __typename: 'BlockArticleList' }
+                | { __typename: 'BlockCategory' }
+                | { __typename: 'BlockCategoryList' }
+                | { __typename: 'BlockFaq' }
+                | { __typename: 'BlockQuickLinks' }
+                | { __typename: 'BlockTicketList' };
+            theme?: { name?: string };
+        }>;
+    };
+    rightSlotCollection?: {
+        items: Array<{
+            __typename: 'Block';
+            spacing?: string;
+            background?: string;
+            variant?: string;
+            sys: { id: string };
+            content?:
+                | { __typename: 'BlockArticleList' }
+                | { __typename: 'BlockCategory' }
+                | { __typename: 'BlockCategoryList' }
+                | { __typename: 'BlockFaq' }
+                | { __typename: 'BlockQuickLinks' }
+                | { __typename: 'BlockTicketList' };
+            theme?: { name?: string };
+        }>;
+    };
+    bottomSlotCollection?: {
+        items: Array<{
+            __typename: 'Block';
+            spacing?: string;
+            background?: string;
+            variant?: string;
+            sys: { id: string };
+            content?:
+                | { __typename: 'BlockArticleList' }
+                | { __typename: 'BlockCategory' }
+                | { __typename: 'BlockCategoryList' }
+                | { __typename: 'BlockFaq' }
+                | { __typename: 'BlockQuickLinks' }
+                | { __typename: 'BlockTicketList' };
+            theme?: { name?: string };
+        }>;
+    };
+};
+
+export type GetAppConfigQueryVariables = Exact<{
+    locale: Scalars['String']['input'];
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+}>;
+
+export type GetAppConfigQuery = {
+    appConfigCollection?: {
+        items: Array<{
+            sys: { id: string };
+            signedInHeader?: { sys: { id: string } };
+            signedInFooter?: { sys: { id: string } };
+            themesCollection?: {
+                items: Array<{
+                    name?: string;
+                    logo?: { url?: string; title?: string; width?: number; height?: number; description?: string };
+                }>;
+            };
+        }>;
+    };
+    configurableTexts?: {
+        items: Array<{
+            errors?: { requestError?: { title?: string; content?: string } };
+            dates?: { today?: string; yesterday?: string };
+            actions?: {
+                showMore?: string;
+                showLess?: string;
+                show?: string;
+                hide?: string;
+                edit?: string;
+                save?: string;
+                cancel?: string;
+                delete?: string;
+                logOut?: string;
+                settings?: string;
+                renew?: string;
+                details?: string;
+            };
         }>;
     };
 };
@@ -11980,6 +15030,100 @@ export type GetComponentQuery = {
     };
 };
 
+export type GetFooterQueryVariables = Exact<{
+    id: Scalars['String']['input'];
+    locale: Scalars['String']['input'];
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+}>;
+
+export type GetFooterQuery = {
+    footerCollection?: {
+        items: Array<{
+            title?: string;
+            copyright?: string;
+            logoLabel?: string;
+            sys: { id: string };
+            logo?: { url?: string; title?: string; width?: number; height?: number; description?: string };
+            itemsCollection?: {
+                items: Array<
+                    | {
+                          __typename: 'ComponentNavigationGroup';
+                          title?: string;
+                          url?: string;
+                          itemsCollection?: {
+                              items: Array<{
+                                  __typename: 'ComponentNavigationItem';
+                                  label?: string;
+                                  url?: string;
+                                  description?: string;
+                                  page?: { slug?: string; seo?: { title?: string } };
+                              }>;
+                          };
+                          page?: { slug?: string; seo?: { title?: string } };
+                      }
+                    | {
+                          __typename: 'ComponentNavigationItem';
+                          label?: string;
+                          url?: string;
+                          description?: string;
+                          page?: { slug?: string; seo?: { title?: string } };
+                      }
+                >;
+            };
+        }>;
+    };
+};
+
+export type GetHeaderQueryVariables = Exact<{
+    id: Scalars['String']['input'];
+    locale: Scalars['String']['input'];
+    preview?: InputMaybe<Scalars['Boolean']['input']>;
+}>;
+
+export type GetHeaderQuery = {
+    headerCollection?: {
+        items: Array<{
+            title?: string;
+            showContextSwitcher?: boolean;
+            languageSwitcherLabel?: string;
+            openMobileMenuLabel?: string;
+            closeMobileMenuLabel?: string;
+            logoLabel?: string;
+            sys: { id: string };
+            logo?: { url?: string; title?: string; width?: number; height?: number; description?: string };
+            itemsCollection?: {
+                items: Array<
+                    | {
+                          __typename: 'ComponentNavigationGroup';
+                          title?: string;
+                          url?: string;
+                          itemsCollection?: {
+                              items: Array<{
+                                  __typename: 'ComponentNavigationItem';
+                                  label?: string;
+                                  url?: string;
+                                  description?: string;
+                                  page?: { slug?: string; seo?: { title?: string } };
+                              }>;
+                          };
+                          page?: { slug?: string; seo?: { title?: string } };
+                      }
+                    | {
+                          __typename: 'ComponentNavigationItem';
+                          label?: string;
+                          url?: string;
+                          description?: string;
+                          page?: { slug?: string; seo?: { title?: string } };
+                      }
+                >;
+            };
+            notification?: { slug?: string; seo?: { title?: string } };
+            userInfo?: { slug?: string; seo?: { title?: string } };
+        }>;
+    };
+    configurableTexts?: { items: Array<{ actions?: { close?: string } }> };
+};
+
 export type GetPageQueryVariables = Exact<{
     slug: Scalars['String']['input'];
     locale: Scalars['String']['input'];
@@ -11991,6 +15135,7 @@ export type GetPageQuery = {
         items: Array<{
             slug?: string;
             hasOwnTitle?: boolean;
+            permissions?: Array<string>;
             sys: { locale?: string; publishedAt?: any; id: string };
             seo?: {
                 title?: string;
@@ -11998,6 +15143,7 @@ export type GetPageQuery = {
                 noFollow?: boolean;
                 description?: string;
                 keywords?: Array<string>;
+                image?: { url?: string; title?: string; width?: number; height?: number; description?: string };
             };
             parent?: {
                 slug?: string;
@@ -12008,26 +15154,98 @@ export type GetPageQuery = {
                     parent?: { slug?: string; seo?: { title?: string } };
                 };
             };
-            template?: {
-                __typename: 'PageOneColumnTemplate';
-                mainSlotCollection?: {
-                    items: Array<{
-                        __typename: 'Block';
-                        spacing?: string;
-                        background?: string;
-                        variant?: string;
-                        sys: { id: string };
-                        content?:
-                            | { __typename: 'BlockArticleList' }
-                            | { __typename: 'BlockCategory' }
-                            | { __typename: 'BlockCategoryList' }
-                            | { __typename: 'BlockFaq' }
-                            | { __typename: 'BlockQuickLinks' }
-                            | { __typename: 'BlockTicketList' };
-                        theme?: { name?: string };
-                    }>;
-                };
-            };
+            template?:
+                | {
+                      __typename: 'PageOneColumnTemplate';
+                      mainSlotCollection?: {
+                          items: Array<{
+                              __typename: 'Block';
+                              spacing?: string;
+                              background?: string;
+                              variant?: string;
+                              sys: { id: string };
+                              content?:
+                                  | { __typename: 'BlockArticleList' }
+                                  | { __typename: 'BlockCategory' }
+                                  | { __typename: 'BlockCategoryList' }
+                                  | { __typename: 'BlockFaq' }
+                                  | { __typename: 'BlockQuickLinks' }
+                                  | { __typename: 'BlockTicketList' };
+                              theme?: { name?: string };
+                          }>;
+                      };
+                  }
+                | {
+                      __typename: 'PageTwoColumnTemplate';
+                      topSlotCollection?: {
+                          items: Array<{
+                              __typename: 'Block';
+                              spacing?: string;
+                              background?: string;
+                              variant?: string;
+                              sys: { id: string };
+                              content?:
+                                  | { __typename: 'BlockArticleList' }
+                                  | { __typename: 'BlockCategory' }
+                                  | { __typename: 'BlockCategoryList' }
+                                  | { __typename: 'BlockFaq' }
+                                  | { __typename: 'BlockQuickLinks' }
+                                  | { __typename: 'BlockTicketList' };
+                              theme?: { name?: string };
+                          }>;
+                      };
+                      leftSlotCollection?: {
+                          items: Array<{
+                              __typename: 'Block';
+                              spacing?: string;
+                              background?: string;
+                              variant?: string;
+                              sys: { id: string };
+                              content?:
+                                  | { __typename: 'BlockArticleList' }
+                                  | { __typename: 'BlockCategory' }
+                                  | { __typename: 'BlockCategoryList' }
+                                  | { __typename: 'BlockFaq' }
+                                  | { __typename: 'BlockQuickLinks' }
+                                  | { __typename: 'BlockTicketList' };
+                              theme?: { name?: string };
+                          }>;
+                      };
+                      rightSlotCollection?: {
+                          items: Array<{
+                              __typename: 'Block';
+                              spacing?: string;
+                              background?: string;
+                              variant?: string;
+                              sys: { id: string };
+                              content?:
+                                  | { __typename: 'BlockArticleList' }
+                                  | { __typename: 'BlockCategory' }
+                                  | { __typename: 'BlockCategoryList' }
+                                  | { __typename: 'BlockFaq' }
+                                  | { __typename: 'BlockQuickLinks' }
+                                  | { __typename: 'BlockTicketList' };
+                              theme?: { name?: string };
+                          }>;
+                      };
+                      bottomSlotCollection?: {
+                          items: Array<{
+                              __typename: 'Block';
+                              spacing?: string;
+                              background?: string;
+                              variant?: string;
+                              sys: { id: string };
+                              content?:
+                                  | { __typename: 'BlockArticleList' }
+                                  | { __typename: 'BlockCategory' }
+                                  | { __typename: 'BlockCategoryList' }
+                                  | { __typename: 'BlockFaq' }
+                                  | { __typename: 'BlockQuickLinks' }
+                                  | { __typename: 'BlockTicketList' };
+                              theme?: { name?: string };
+                          }>;
+                      };
+                  };
         }>;
     };
 };
@@ -12042,6 +15260,7 @@ export type GetPagesQuery = {
         items: Array<{
             slug?: string;
             hasOwnTitle?: boolean;
+            permissions?: Array<string>;
             sys: { locale?: string; publishedAt?: any; id: string };
             seo?: {
                 title?: string;
@@ -12049,6 +15268,7 @@ export type GetPagesQuery = {
                 noFollow?: boolean;
                 description?: string;
                 keywords?: Array<string>;
+                image?: { url?: string; title?: string; width?: number; height?: number; description?: string };
             };
             parent?: {
                 slug?: string;
@@ -12059,26 +15279,98 @@ export type GetPagesQuery = {
                     parent?: { slug?: string; seo?: { title?: string } };
                 };
             };
-            template?: {
-                __typename: 'PageOneColumnTemplate';
-                mainSlotCollection?: {
-                    items: Array<{
-                        __typename: 'Block';
-                        spacing?: string;
-                        background?: string;
-                        variant?: string;
-                        sys: { id: string };
-                        content?:
-                            | { __typename: 'BlockArticleList' }
-                            | { __typename: 'BlockCategory' }
-                            | { __typename: 'BlockCategoryList' }
-                            | { __typename: 'BlockFaq' }
-                            | { __typename: 'BlockQuickLinks' }
-                            | { __typename: 'BlockTicketList' };
-                        theme?: { name?: string };
-                    }>;
-                };
-            };
+            template?:
+                | {
+                      __typename: 'PageOneColumnTemplate';
+                      mainSlotCollection?: {
+                          items: Array<{
+                              __typename: 'Block';
+                              spacing?: string;
+                              background?: string;
+                              variant?: string;
+                              sys: { id: string };
+                              content?:
+                                  | { __typename: 'BlockArticleList' }
+                                  | { __typename: 'BlockCategory' }
+                                  | { __typename: 'BlockCategoryList' }
+                                  | { __typename: 'BlockFaq' }
+                                  | { __typename: 'BlockQuickLinks' }
+                                  | { __typename: 'BlockTicketList' };
+                              theme?: { name?: string };
+                          }>;
+                      };
+                  }
+                | {
+                      __typename: 'PageTwoColumnTemplate';
+                      topSlotCollection?: {
+                          items: Array<{
+                              __typename: 'Block';
+                              spacing?: string;
+                              background?: string;
+                              variant?: string;
+                              sys: { id: string };
+                              content?:
+                                  | { __typename: 'BlockArticleList' }
+                                  | { __typename: 'BlockCategory' }
+                                  | { __typename: 'BlockCategoryList' }
+                                  | { __typename: 'BlockFaq' }
+                                  | { __typename: 'BlockQuickLinks' }
+                                  | { __typename: 'BlockTicketList' };
+                              theme?: { name?: string };
+                          }>;
+                      };
+                      leftSlotCollection?: {
+                          items: Array<{
+                              __typename: 'Block';
+                              spacing?: string;
+                              background?: string;
+                              variant?: string;
+                              sys: { id: string };
+                              content?:
+                                  | { __typename: 'BlockArticleList' }
+                                  | { __typename: 'BlockCategory' }
+                                  | { __typename: 'BlockCategoryList' }
+                                  | { __typename: 'BlockFaq' }
+                                  | { __typename: 'BlockQuickLinks' }
+                                  | { __typename: 'BlockTicketList' };
+                              theme?: { name?: string };
+                          }>;
+                      };
+                      rightSlotCollection?: {
+                          items: Array<{
+                              __typename: 'Block';
+                              spacing?: string;
+                              background?: string;
+                              variant?: string;
+                              sys: { id: string };
+                              content?:
+                                  | { __typename: 'BlockArticleList' }
+                                  | { __typename: 'BlockCategory' }
+                                  | { __typename: 'BlockCategoryList' }
+                                  | { __typename: 'BlockFaq' }
+                                  | { __typename: 'BlockQuickLinks' }
+                                  | { __typename: 'BlockTicketList' };
+                              theme?: { name?: string };
+                          }>;
+                      };
+                      bottomSlotCollection?: {
+                          items: Array<{
+                              __typename: 'Block';
+                              spacing?: string;
+                              background?: string;
+                              variant?: string;
+                              sys: { id: string };
+                              content?:
+                                  | { __typename: 'BlockArticleList' }
+                                  | { __typename: 'BlockCategory' }
+                                  | { __typename: 'BlockCategoryList' }
+                                  | { __typename: 'BlockFaq' }
+                                  | { __typename: 'BlockQuickLinks' }
+                                  | { __typename: 'BlockTicketList' };
+                              theme?: { name?: string };
+                          }>;
+                      };
+                  };
         }>;
     };
 };
@@ -12087,6 +15379,42 @@ export const SysFragmentDoc = gql`
     fragment Sys on Sys {
         id
     }
+`;
+export const MediaFragmentDoc = gql`
+    fragment Media on Asset {
+        url
+        title
+        width
+        height
+        description
+    }
+`;
+export const AppConfigFragmentDoc = gql`
+    fragment AppConfig on AppConfig {
+        sys {
+            ...Sys
+        }
+        signedInHeader {
+            sys {
+                ...Sys
+            }
+        }
+        signedInFooter {
+            sys {
+                ...Sys
+            }
+        }
+        themesCollection {
+            items {
+                name
+                logo {
+                    ...Media
+                }
+            }
+        }
+    }
+    ${SysFragmentDoc}
+    ${MediaFragmentDoc}
 `;
 export const LayoutSectionFragmentDoc = gql`
     fragment LayoutSection on Block {
@@ -12376,6 +15704,110 @@ export const ComponentFragmentDoc = gql`
     ${CategoryComponentFragmentDoc}
     ${ArticleListComponentFragmentDoc}
 `;
+export const NavigationItemFragmentDoc = gql`
+    fragment NavigationItem on ComponentNavigationItem {
+        __typename
+        label
+        url
+        description
+        page {
+            slug
+            seo {
+                title
+            }
+        }
+    }
+`;
+export const NavigationGroupFragmentDoc = gql`
+    fragment NavigationGroup on ComponentNavigationGroup {
+        __typename
+        title
+        itemsCollection {
+            items {
+                ... on ComponentNavigationItem {
+                    ...NavigationItem
+                }
+            }
+        }
+        url
+        page {
+            slug
+            seo {
+                title
+            }
+        }
+    }
+    ${NavigationItemFragmentDoc}
+`;
+export const FooterFragmentDoc = gql`
+    fragment Footer on Footer {
+        sys {
+            ...Sys
+        }
+        title
+        logo {
+            ...Media
+        }
+        itemsCollection {
+            items {
+                ... on ComponentNavigationGroup {
+                    ...NavigationGroup
+                }
+                ... on ComponentNavigationItem {
+                    ...NavigationItem
+                }
+            }
+        }
+        copyright
+        logoLabel
+    }
+    ${SysFragmentDoc}
+    ${MediaFragmentDoc}
+    ${NavigationGroupFragmentDoc}
+    ${NavigationItemFragmentDoc}
+`;
+export const HeaderFragmentDoc = gql`
+    fragment Header on Header {
+        sys {
+            ...Sys
+        }
+        title
+        logo {
+            ...Media
+        }
+        itemsCollection {
+            items {
+                ... on ComponentNavigationGroup {
+                    ...NavigationGroup
+                }
+                ... on ComponentNavigationItem {
+                    ...NavigationItem
+                }
+            }
+        }
+        notification {
+            slug
+            seo {
+                title
+            }
+        }
+        showContextSwitcher
+        languageSwitcherLabel
+        userInfo {
+            slug
+            seo {
+                title
+            }
+        }
+        openMobileMenuLabel
+        closeMobileMenuLabel
+        logoLabel
+    }
+    ${SysFragmentDoc}
+    ${MediaFragmentDoc}
+    ${NavigationGroupFragmentDoc}
+    ${NavigationItemFragmentDoc}
+`;
 export const SeoFragmentDoc = gql`
     fragment Seo on PageSeo {
         title
@@ -12383,12 +15815,54 @@ export const SeoFragmentDoc = gql`
         noFollow
         description
         keywords
+        image {
+            ...Media
+        }
     }
+    ${MediaFragmentDoc}
 `;
 export const OneColumnTemplateFragmentDoc = gql`
     fragment OneColumnTemplate on PageOneColumnTemplate {
         __typename
         mainSlotCollection {
+            items {
+                __typename
+                ... on Block {
+                    ...ComponentBase
+                }
+            }
+        }
+    }
+    ${ComponentBaseFragmentDoc}
+`;
+export const TwoColumnTemplateFragmentDoc = gql`
+    fragment TwoColumnTemplate on PageTwoColumnTemplate {
+        __typename
+        topSlotCollection {
+            items {
+                __typename
+                ... on Block {
+                    ...ComponentBase
+                }
+            }
+        }
+        leftSlotCollection {
+            items {
+                __typename
+                ... on Block {
+                    ...ComponentBase
+                }
+            }
+        }
+        rightSlotCollection {
+            items {
+                __typename
+                ... on Block {
+                    ...ComponentBase
+                }
+            }
+        }
+        bottomSlotCollection {
             items {
                 __typename
                 ... on Block {
@@ -12434,11 +15908,54 @@ export const PageFragmentDoc = gql`
             ... on PageOneColumnTemplate {
                 ...OneColumnTemplate
             }
+            ... on PageTwoColumnTemplate {
+                ...TwoColumnTemplate
+            }
         }
+        permissions
     }
     ${SysFragmentDoc}
     ${SeoFragmentDoc}
     ${OneColumnTemplateFragmentDoc}
+    ${TwoColumnTemplateFragmentDoc}
+`;
+export const GetAppConfigDocument = gql`
+    query getAppConfig($locale: String!, $preview: Boolean) {
+        appConfigCollection(locale: $locale, limit: 1, preview: $preview) {
+            items {
+                ...AppConfig
+            }
+        }
+        configurableTexts: configurableTextsCollection(locale: $locale, limit: 1, skip: 0, preview: $preview) {
+            items {
+                errors {
+                    requestError {
+                        title
+                        content
+                    }
+                }
+                dates {
+                    today
+                    yesterday
+                }
+                actions {
+                    showMore
+                    showLess
+                    show
+                    hide
+                    edit
+                    save
+                    cancel
+                    delete
+                    logOut
+                    settings
+                    renew
+                    details
+                }
+            }
+        }
+    }
+    ${AppConfigFragmentDoc}
 `;
 export const GetComponentDocument = gql`
     query getComponent($id: String!, $locale: String!, $preview: Boolean) {
@@ -12484,6 +16001,33 @@ export const GetComponentDocument = gql`
     }
     ${ComponentFragmentDoc}
 `;
+export const GetFooterDocument = gql`
+    query getFooter($id: String!, $locale: String!, $preview: Boolean) {
+        footerCollection(where: { sys: { id: $id } }, locale: $locale, limit: 1, preview: $preview) {
+            items {
+                ...Footer
+            }
+        }
+    }
+    ${FooterFragmentDoc}
+`;
+export const GetHeaderDocument = gql`
+    query getHeader($id: String!, $locale: String!, $preview: Boolean) {
+        headerCollection(where: { sys: { id: $id } }, locale: $locale, limit: 1, preview: $preview) {
+            items {
+                ...Header
+            }
+        }
+        configurableTexts: configurableTextsCollection(locale: $locale, limit: 1, skip: 0, preview: $preview) {
+            items {
+                actions {
+                    close
+                }
+            }
+        }
+    }
+    ${HeaderFragmentDoc}
+`;
 export const GetPageDocument = gql`
     query getPage($slug: String!, $locale: String!, $preview: Boolean) {
         pageCollection(locale: $locale, where: { slug: $slug }, limit: 1, preview: $preview) {
@@ -12513,11 +16057,35 @@ export type SdkFunctionWrapper = <T>(
 ) => Promise<T>;
 
 const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationType, _variables) => action();
+const GetAppConfigDocumentString = print(GetAppConfigDocument);
 const GetComponentDocumentString = print(GetComponentDocument);
+const GetFooterDocumentString = print(GetFooterDocument);
+const GetHeaderDocumentString = print(GetHeaderDocument);
 const GetPageDocumentString = print(GetPageDocument);
 const GetPagesDocumentString = print(GetPagesDocument);
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
     return {
+        getAppConfig(
+            variables: GetAppConfigQueryVariables,
+            requestHeaders?: GraphQLClientRequestHeaders,
+        ): Promise<{
+            data: GetAppConfigQuery;
+            errors?: GraphQLError[];
+            extensions?: any;
+            headers: Headers;
+            status: number;
+        }> {
+            return withWrapper(
+                (wrappedRequestHeaders) =>
+                    client.rawRequest<GetAppConfigQuery>(GetAppConfigDocumentString, variables, {
+                        ...requestHeaders,
+                        ...wrappedRequestHeaders,
+                    }),
+                'getAppConfig',
+                'query',
+                variables,
+            );
+        },
         getComponent(
             variables: GetComponentQueryVariables,
             requestHeaders?: GraphQLClientRequestHeaders,
@@ -12535,6 +16103,48 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
                         ...wrappedRequestHeaders,
                     }),
                 'getComponent',
+                'query',
+                variables,
+            );
+        },
+        getFooter(
+            variables: GetFooterQueryVariables,
+            requestHeaders?: GraphQLClientRequestHeaders,
+        ): Promise<{
+            data: GetFooterQuery;
+            errors?: GraphQLError[];
+            extensions?: any;
+            headers: Headers;
+            status: number;
+        }> {
+            return withWrapper(
+                (wrappedRequestHeaders) =>
+                    client.rawRequest<GetFooterQuery>(GetFooterDocumentString, variables, {
+                        ...requestHeaders,
+                        ...wrappedRequestHeaders,
+                    }),
+                'getFooter',
+                'query',
+                variables,
+            );
+        },
+        getHeader(
+            variables: GetHeaderQueryVariables,
+            requestHeaders?: GraphQLClientRequestHeaders,
+        ): Promise<{
+            data: GetHeaderQuery;
+            errors?: GraphQLError[];
+            extensions?: any;
+            headers: Headers;
+            status: number;
+        }> {
+            return withWrapper(
+                (wrappedRequestHeaders) =>
+                    client.rawRequest<GetHeaderQuery>(GetHeaderDocumentString, variables, {
+                        ...requestHeaders,
+                        ...wrappedRequestHeaders,
+                    }),
+                'getHeader',
                 'query',
                 variables,
             );

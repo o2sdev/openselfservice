@@ -1,6 +1,7 @@
 import { ApiConfig, Cache } from '@o2s/framework/modules';
 
 import { GraphqlModule } from '@/modules/graphql/graphql.module';
+import { RestDeliveryModule } from '@/modules/rest-delivery/delivery.module';
 
 import { Service as CmsService } from './modules/cms';
 
@@ -10,6 +11,6 @@ export const Config: Partial<ApiConfig['integrations']> = {
     cms: {
         name: 'contentful-cms',
         service: CmsService,
-        imports: [GraphqlModule, Cache.Module],
+        imports: [GraphqlModule, RestDeliveryModule, Cache.Module],
     },
 };

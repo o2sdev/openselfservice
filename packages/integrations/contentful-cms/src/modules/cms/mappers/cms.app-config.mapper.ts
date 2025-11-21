@@ -1,182 +1,63 @@
+import { NotFoundException } from '@nestjs/common';
+
 import { CMS } from '@o2s/framework/modules';
 
-const APP_CONFIG_EN: CMS.Model.AppConfig.AppConfig = {
-    locales: [
-        {
-            value: 'en',
-            label: 'EN',
-        },
-        {
-            value: 'de',
-            label: 'DE',
-        },
-        {
-            value: 'pl',
-            label: 'PL',
-        },
-    ],
-    header: 'fqj6nnyk4irqq5b7rnc4ogsj',
-    footer: 'footer-1',
-    labels: {
-        errors: {
-            requestError: {
-                title: 'Uh oh! Something went wrong.',
-                content: 'There was a problem with your request.',
-            },
-        },
-        dates: {
-            today: 'Today',
-            yesterday: 'Yesterday',
-        },
-        actions: {
-            showMore: 'Show more',
-            showLess: 'Show less',
-            show: 'Show',
-            hide: 'Hide',
-            edit: 'Edit',
-            save: 'Save',
-            cancel: 'Cancel',
-            delete: 'Delete',
-            logOut: 'Log out',
-            settings: 'Settings',
-            renew: 'Renew',
-            details: 'Details',
-        },
-    },
-    themes: {
-        default: {
-            name: 'default',
-            logo: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/logo.svg',
-                alt: 'Logo',
-                width: 92,
-                height: 24,
-            },
-        },
-    },
-};
+import { GetAppConfigQuery } from '@/generated/contentful';
 
-const APP_CONFIG_DE: CMS.Model.AppConfig.AppConfig = {
-    locales: [
-        {
-            value: 'en',
-            label: 'EN',
-        },
-        {
-            value: 'de',
-            label: 'DE',
-        },
-        {
-            value: 'pl',
-            label: 'PL',
-        },
-    ],
-    header: 'fqj6nnyk4irqq5b7rnc4ogsj',
-    footer: 'footer-1',
-    labels: {
-        errors: {
-            requestError: {
-                title: 'Ups! Etwas ist schief gelaufen.',
-                content: 'Es gab ein Problem mit Ihrer Anfrage.',
-            },
-        },
-        dates: {
-            today: 'Heute',
-            yesterday: 'Gestern',
-        },
-        actions: {
-            showMore: 'Mehr anzeigen',
-            showLess: 'Weniger anzeigen',
-            show: 'Anzeigen',
-            hide: 'Verstecken',
-            edit: 'Bearbeiten',
-            save: 'Speichern',
-            cancel: 'Abbrechen',
-            delete: 'Löschen',
-            logOut: 'Abmelden',
-            settings: 'Einstellungen',
-            renew: 'Erneuern',
-            details: 'Details',
-        },
-    },
-    themes: {
-        default: {
-            name: 'default',
-            logo: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/logo.svg',
-                alt: 'Logo',
-                width: 92,
-                height: 24,
-            },
-        },
-    },
-};
+import { mapMedia } from './cms.media.mapper';
 
-const APP_CONFIG_PL: CMS.Model.AppConfig.AppConfig = {
-    locales: [
-        {
-            value: 'en',
-            label: 'EN',
-        },
-        {
-            value: 'de',
-            label: 'DE',
-        },
-        {
-            value: 'pl',
-            label: 'PL',
-        },
-    ],
-    header: 'fqj6nnyk4irqq5b7rnc4ogsj',
-    footer: 'footer-1',
-    labels: {
-        errors: {
-            requestError: {
-                title: 'Ups! Coś poszło nie tak.',
-                content: 'Wystąpił problem z Twoim żądaniem.',
-            },
-        },
-        dates: {
-            today: 'Dzisiaj',
-            yesterday: 'Wczoraj',
-        },
-        actions: {
-            showMore: 'Pokaż więcej',
-            showLess: 'Pokaż mniej',
-            show: 'Rozwiń',
-            hide: 'Zwiń',
-            edit: 'Edytuj',
-            save: 'Zapisz',
-            cancel: 'Cofnij',
-            delete: 'Usuń',
-            logOut: 'Wyloguj',
-            settings: 'Ustawienia',
-            renew: 'Odnów',
-            details: 'Szczegóły',
-        },
-    },
-    themes: {
-        default: {
-            name: 'default',
-            logo: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/logo.svg',
-                alt: 'Logo',
-                width: 92,
-                height: 24,
-            },
-        },
-    },
-};
+export const mapAppConfig = (
+    data: GetAppConfigQuery,
+    locales: Array<{ value: string; label: string }> = [],
+    baseUrl?: string,
+): CMS.Model.AppConfig.AppConfig => {
+    const appConfig = data.appConfigCollection?.items?.[0];
+    const configurableTexts = data.configurableTexts?.items?.[0];
 
-export const mapAppConfig = (locale: string, _referrer?: string): CMS.Model.AppConfig.AppConfig => {
-    switch (locale) {
-        case 'en':
-            return APP_CONFIG_EN;
-        case 'de':
-            return APP_CONFIG_DE;
-        case 'pl':
-            return APP_CONFIG_PL;
+    if (!appConfig || !configurableTexts) {
+        throw new NotFoundException('AppConfig not found in Contentful.');
     }
 
-    return APP_CONFIG_EN;
+    return {
+        locales,
+        header: appConfig.signedInHeader?.sys.id,
+        footer: appConfig.signedInFooter?.sys.id,
+        labels: {
+            errors: {
+                requestError: {
+                    title: configurableTexts.errors?.requestError?.title || '',
+                    content: configurableTexts.errors?.requestError?.content,
+                },
+            },
+            dates: {
+                today: configurableTexts.dates?.today || '',
+                yesterday: configurableTexts.dates?.yesterday || '',
+            },
+            actions: {
+                showMore: configurableTexts.actions?.showMore || '',
+                showLess: configurableTexts.actions?.showLess || '',
+                show: configurableTexts.actions?.show || '',
+                hide: configurableTexts.actions?.hide || '',
+                edit: configurableTexts.actions?.edit || '',
+                save: configurableTexts.actions?.save || '',
+                cancel: configurableTexts.actions?.cancel || '',
+                delete: configurableTexts.actions?.delete || '',
+                logOut: configurableTexts.actions?.logOut || '',
+                settings: configurableTexts.actions?.settings || '',
+                renew: configurableTexts.actions?.renew || '',
+                details: configurableTexts.actions?.details || '',
+            },
+        },
+        themes:
+            appConfig.themesCollection?.items.reduce((prev, theme) => {
+                if (!theme.name) return prev;
+                return {
+                    ...prev,
+                    [theme.name]: {
+                        name: theme.name,
+                        logo: mapMedia(theme.logo, baseUrl),
+                    },
+                };
+            }, {} as CMS.Model.AppConfig.Themes) || {},
+    };
 };

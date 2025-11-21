@@ -21,6 +21,7 @@
         "@contentful/live-preview": "^4.6.52",
         "@o2s/framework": "*",
         "@o2s/utils.logger": "*",
+        "contentful": "^11.0.0",
         "flatted": "^3.3.3",
         "graphql": "16.11.0",
         "graphql-request": "7.3.0",
