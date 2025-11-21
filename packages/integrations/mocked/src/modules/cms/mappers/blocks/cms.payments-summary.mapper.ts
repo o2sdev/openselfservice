@@ -24,10 +24,20 @@ const MOCK_PAYMENTS_SUMMARY_BLOCK_EN: CMS.Model.PaymentsSummaryBlock.PaymentsSum
         },
         icon: 'CreditCard',
     },
+    chart: {
+        title: '6-months history',
+        topSegment: 'Overdue',
+        middleSegment: 'To be paid',
+        bottomSegment: 'Paid',
+        total: 'Total',
+        monthsToShow: 6,
+        showChart: true,
+    },
 };
 
 const MOCK_PAYMENTS_SUMMARY_BLOCK_PL: CMS.Model.PaymentsSummaryBlock.PaymentsSummaryBlock = {
     id: 'payments-summary-1',
+    layout: 'horizontal',
     overdue: {
         title: 'Zaległe',
         message: '{days} dni po terminie',
@@ -54,6 +64,7 @@ const MOCK_PAYMENTS_SUMMARY_BLOCK_PL: CMS.Model.PaymentsSummaryBlock.PaymentsSum
 
 const MOCK_PAYMENTS_SUMMARY_BLOCK_DE: CMS.Model.PaymentsSummaryBlock.PaymentsSummaryBlock = {
     id: 'payments-summary-1',
+    layout: 'vertical',
     overdue: {
         title: 'Überfällig',
         message: '{days} Tage überfällig',

@@ -74,7 +74,7 @@ const INTEGRATION_SECTIONS: Array<{
             },
             {
                 name: 'Zendesk',
-                status: 'planned',
+                status: 'available',
                 description: 'External ticketing and support knowledge base system.',
                 icon: <ZendeskIcon />,
             },
