@@ -326,12 +326,7 @@ We've also created a wrapper around the Contentful Live Preview SDK that abstrac
 
 It's important to note that live preview functionality varies significantly between different headless CMSes. This variation adds complexity when building a CMS-agnostic architecture, as each system may require a different integration approach.
 
-Some CMSes, like Contentful, use a data attributes approach. In this model:
-
-- The CMS provides an SDK that adds special data attributes to DOM elements
-- These attributes create a connection between rendered content and the corresponding content in the CMS
-- When a content editor clicks on an element in the preview, the SDK uses these attributes to identify which field to edit in the CMS interface
-- Changes made in the CMS are pushed to the preview in real-time through WebSockets or similar technologies
+Some CMSes, like Contentful, use a data attributes approach. In this model, the CMS provides an SDK that adds special data attributes to DOM elements. These attributes create a connection between rendered content and the corresponding content in the CMS. When a content editor clicks on an element in the preview, the SDK uses these attributes to identify which field to edit in the CMS interface. Changes made in the CMS are pushed to the preview in real-time through WebSockets or similar technologies.
 
 Besides Contentful, other CMSes that use variations of this approach include:
 
@@ -339,10 +334,7 @@ Besides Contentful, other CMSes that use variations of this approach include:
 - **Kontent.ai** which uses a similar approach with its Web Spotlight feature
 - **DatoCMS** with its Visual Editor that uses data attributes for field highlighting
 
-Other CMSes take a different approach using content source maps with steganography (stega):
-
-- Content source maps are metadata that map rendered content back to its source in the CMS, similar to how source maps work in JavaScript
-- Stega (steganography) embeds invisible metadata within the content itself, often using techniques like invisible Unicode characters or subtle CSS variations
+Other CMSes take a different approach using content source maps with steganography (stega). Content source maps are metadata that map rendered content back to its source in the CMS, similar to how source maps work in JavaScript. Stega (steganography) embeds invisible metadata within the content itself, often using techniques like invisible Unicode characters or subtle CSS variations.
 
 Examples of CMSes using these approaches include:
 
@@ -352,6 +344,12 @@ Examples of CMSes using these approaches include:
 - **Strapi** uses content source maps for its preview functionality as documented in their official documentation
 
 Each approach has its trade-offs. Data attributes are more explicit but can add DOM clutter, while stega approaches are more elegant but potentially more fragile. Understanding these differences is crucial when designing a CMS-agnostic architecture that needs to support live preview across multiple systems.
+
+While content source maps and stega approaches offer elegant solutions for direct integrations, they present significant challenges for architectures with API composition layers like ours. The transformation process in our composition layer can corrupt or disconnect the embedded metadata that stega relies on, as our normalization restructures content and breaks the carefully crafted patterns of invisible characters.
+
+Our architecture requires bidirectional mapping between our normalized data model and the CMS's original structure, whereas content source maps typically assume a more direct relationship without an intermediate transformation layer. Additionally, our asynchronous processing pipeline, which often combines multiple API calls, conflicts with stega's assumption of a direct, synchronous relationship between CMS and rendered content.
+
+This led us to favor Contentful's explicit data attributes approach, which proved more resilient with our API composition layer and made it easier to maintain connections between transformed data and original Contentful entries.
 
 ### Metadata
 
