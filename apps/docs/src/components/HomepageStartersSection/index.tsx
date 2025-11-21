@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Link from '@docusaurus/Link';
+
 import { HoverCard, HoverCardProps } from '../HoverCard';
 import { Body, H2 } from '../Typography';
 
@@ -57,9 +59,9 @@ export const HomepageStartersSection: React.FC = () => {
                 ))}
             </div>
 
-            <a href="/product/starters" className="button">
+            <Link href="/product/starters" className="button">
                 View all starters
-            </a>
+            </Link>
         </section>
     );
 };
