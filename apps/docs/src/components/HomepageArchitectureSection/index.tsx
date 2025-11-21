@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 import { Body, H2 } from '../Typography';
@@ -21,9 +22,9 @@ export function HomepageArchitectureSection() {
                         for building modern customer-facing platforms. Each layer is designed to be independently
                         developed, extended or replaced — giving full control over how the frontend evolves.
                     </Body>
-                    <a href={'/docs/overview/architecture'} className="button w-fit" rel="noopener">
-                        <span className="label flex items-center justify-center gap-2">Learn more</span>
-                    </a>
+                    <Link href={'/docs/overview/architecture'} className="button w-fit" rel="noopener">
+                        Learn more
+                    </Link>
                 </div>
             </div>
             <div className="mt-14 w-full flex justify-center">

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Link from '@docusaurus/Link';
+
 import ArrowRight from '@site/src/assets/icons/ArrowRight.svg';
 
 import { Body, H3 } from '../Typography';
@@ -69,7 +71,7 @@ export const HoverCard: React.FC<HoverCardProps> = ({
     };
 
     return href ? (
-        <a
+        <Link
             href={href}
             className={
                 cardWrapperClasses +
@@ -77,7 +79,7 @@ export const HoverCard: React.FC<HoverCardProps> = ({
             }
         >
             {cardContent()}
-        </a>
+        </Link>
     ) : (
         <div className={cardWrapperClasses}>{cardContent()}</div>
     );

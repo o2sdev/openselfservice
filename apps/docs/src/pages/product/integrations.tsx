@@ -26,7 +26,6 @@ import Layout from '@theme/Layout';
 
 import styles from './product.module.scss';
 
-// TODO: add links to docs for each integration
 const INTEGRATION_SECTIONS: Array<{
     title: string;
     description: string;
@@ -35,6 +34,7 @@ const INTEGRATION_SECTIONS: Array<{
         status: 'available' | 'planned' | 'internal';
         description: string;
         icon: React.ReactNode;
+        link?: string;
     }>;
 }> = [
     {
@@ -47,12 +47,14 @@ const INTEGRATION_SECTIONS: Array<{
                 status: 'available',
                 description: 'Headless CMS used for content, layouts, KB, and more.',
                 icon: <StrapiIcon />,
+                link: '/docs/integrations/cms/strapi/overview',
             },
             {
                 name: 'Contentful',
                 status: 'available',
                 description: 'CMS for multi-language content and marketing blocks.',
                 icon: <ContentfulIcon />,
+                link: '/contact',
             },
             {
                 name: 'Storyblok',
@@ -71,6 +73,7 @@ const INTEGRATION_SECTIONS: Array<{
                 status: 'available',
                 description: 'Advanced survey and form engine for ticket submission.',
                 icon: <SurveyJSIcon />,
+                link: '/docs/integrations/forms/surveyjs',
             },
             {
                 name: 'Zendesk',
@@ -95,6 +98,7 @@ const INTEGRATION_SECTIONS: Array<{
                 status: 'internal',
                 description: 'ERP integration for billing, orders and document summaries.',
                 icon: <SAPIcon />,
+                link: '/contact',
             },
             {
                 name: 'Kill Bill',
@@ -113,12 +117,14 @@ const INTEGRATION_SECTIONS: Array<{
                 status: 'available',
                 description: 'Authentication adapter supporting OAuth and custom providers.',
                 icon: <AuthJsIcon />,
+                link: '/docs/main-components/frontend-app/authentication',
             },
             {
                 name: 'Keycloak',
                 status: 'internal',
                 description: 'Enterprise IAM for SSO, user management and OpenID flows.',
                 icon: <KeycloakIcon />,
+                link: '/contact',
             },
         ],
     },
@@ -131,6 +137,7 @@ const INTEGRATION_SECTIONS: Array<{
                 status: 'available',
                 description: 'Used to model and manage article-based support knowledge base.',
                 icon: <StrapiIcon />,
+                link: '/docs/integrations/cms/strapi/overview',
             },
             {
                 name: 'Salesforce Service Cloud',
@@ -157,12 +164,14 @@ const INTEGRATION_SECTIONS: Array<{
                 description:
                     'Open-source composable commerce engine. Currently provides product & asset information in O2S.',
                 icon: <MedusaIcon />,
+                link: '/docs/integrations/commerce/medusa-js',
             },
             {
                 name: 'SAP S/4 Hana',
                 status: 'internal',
                 description: 'Used for order, billing, product and asset data integration.',
                 icon: <SAPIcon />,
+                link: '/contact',
             },
             {
                 name: 'OroCommerce',
@@ -187,12 +196,14 @@ const INTEGRATION_SECTIONS: Array<{
                 status: 'available',
                 description: 'Used to manage in-app notification content and metadata.',
                 icon: <StrapiIcon />,
+                link: '/docs/integrations/cms/strapi/overview',
             },
             {
                 name: 'Notification API',
                 status: 'internal',
                 description: 'Our proprietary API for sending multi-channel notifications.',
                 icon: <O2SIcon />,
+                link: '/contact',
             },
             // { name: 'novu.co notification API', status: 'planned', description: 'Notification engine for multi-channel delivery and tracking.', icon: <BanGreenTileIcon /> },
         ],
@@ -206,6 +217,7 @@ const INTEGRATION_SECTIONS: Array<{
                 status: 'available',
                 description: 'Used for full-text and faceted search across content and articles.',
                 icon: <AlgoliaIcon />,
+                link: '/docs/integrations/search/algolia',
             },
             {
                 name: 'Personalisation API',
@@ -225,6 +237,7 @@ const INTEGRATION_SECTIONS: Array<{
                 status: 'available',
                 description: 'Used for caching, session storage and notification delivery.',
                 icon: <RedisIcon />,
+                link: '/docs/integrations/cache/redis',
             },
         ],
     },
