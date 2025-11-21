@@ -34,7 +34,7 @@
         "prism-react-renderer": "^2.4.1",
         "react": "^19.2.0",
         "react-dom": "^19.2.0",
-        "sass": "^1.94.1",
+        "sass": "^1.94.2",
         "vanilla-cookieconsent": "^3.1.0"
     },
     "devDependencies": {
