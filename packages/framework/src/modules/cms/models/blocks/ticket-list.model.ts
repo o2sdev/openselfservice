@@ -9,7 +9,7 @@ export class TicketListBlock extends Block.Block {
     table!: DataTable.DataTable<Ticket>;
     fieldMapping!: Mapping.Mapping<Ticket>;
     pagination?: Pagination.Pagination;
-    filters?: Filters.Filters<Ticket & { sort?: string }>;
+    filters?: Filters.Filters<Ticket & { sort?: string; viewMode?: 'list' | 'grid' }>;
     noResults!: {
         title: string;
         description?: string;
@@ -22,4 +22,10 @@ export class TicketListBlock extends Block.Block {
     };
     detailsUrl!: string;
     forms?: Link[];
+    slots?: {
+        top?: string;
+        left?: string;
+        right?: string;
+        bottom?: string;
+    };
 }

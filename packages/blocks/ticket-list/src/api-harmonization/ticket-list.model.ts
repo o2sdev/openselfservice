@@ -24,6 +24,12 @@ export class TicketListBlock extends ApiModels.Block.Block {
         showMore: string;
         clickToSelect: string;
     };
+    slots?: {
+        top?: string;
+        left?: string;
+        right?: string;
+        bottom?: string;
+    };
 }
 
 export class Ticket {
