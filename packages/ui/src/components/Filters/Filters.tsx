@@ -16,7 +16,7 @@ import { useFiltersContext } from './FiltersContext';
 
 function separateLeadingItem<T>(items: Models.Filters.FilterItem<T>[]) {
     let leadingItem: Models.Filters.FilterItem<T> | undefined;
-    let viewModeToggle: Models.Filters.FilterViewModeToggle<T> | undefined;
+    let viewModeToggle: Models.Filters.FilterViewModeToggle | undefined;
     const filteredItems: Models.Filters.FilterItem<T>[] = [];
 
     for (const item of items) {

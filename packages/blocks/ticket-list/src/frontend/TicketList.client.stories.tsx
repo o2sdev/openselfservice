@@ -55,6 +55,11 @@ export const Default: Story = {
                 label: 'Details',
             },
         },
+        slots: {
+            left: 'id',
+            right: 'status',
+            bottom: 'updatedAt',
+        },
         pagination: {
             limit: 10,
             legend: 'of {totalPages} pages',
@@ -207,6 +212,11 @@ export const Default: Story = {
                     to: {
                         label: 'To',
                     },
+                },
+                {
+                    __typename: 'FilterViewModeToggle',
+                    id: 'viewMode',
+                    value: 'grid',
                 },
             ],
         },

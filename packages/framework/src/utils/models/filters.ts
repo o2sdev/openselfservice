@@ -14,7 +14,7 @@ export type FilterItem<T> =
     | FilterDateRange<T>
     | FilterToggleGroup<T>
     | FilterText<T>
-    | FilterViewModeToggle<T>;
+    | FilterViewModeToggle;
 
 export class Filter<T> {
     id!: keyof T;
@@ -58,8 +58,9 @@ export class FilterText<T> extends Filter<T> {
     placeholder?: string;
 }
 
-export class FilterViewModeToggle<T> extends Filter<T> {
+export class FilterViewModeToggle {
     __typename!: 'FilterViewModeToggle';
+    id!: 'viewMode';
     value?: 'list' | 'grid';
     onChange?: (value: 'list' | 'grid') => void;
 }
