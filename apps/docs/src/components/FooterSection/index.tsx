@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Link from '@docusaurus/Link';
+
 import { Body, H2 } from '../Typography';
 
 export interface FooterSectionProps {
@@ -32,16 +34,16 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ title, description
 
             {/* Buttons */}
             {(primaryButton || secondaryButton) && (
-                <div className="flex flex-col md:flex-row gap-2 items-start justify-center">
+                <div className="flex flex-col md:flex-row gap-2 justify-center">
                     {primaryButton && (
-                        <a href={primaryButton.url} className="button" target={primaryButton.target} rel="noopener">
+                        <Link href={primaryButton.url} className="button" target={primaryButton.target} rel="noopener">
                             {primaryButton.iconLeft}
                             {primaryButton.text}
                             {primaryButton.iconRight}
-                        </a>
+                        </Link>
                     )}
                     {secondaryButton && (
-                        <a
+                        <Link
                             href={secondaryButton.url}
                             className="button button-ultra"
                             target={secondaryButton.target}
@@ -52,7 +54,7 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ title, description
                                 {secondaryButton.text}
                                 {secondaryButton.iconRight}
                             </span>
-                        </a>
+                        </Link>
                     )}
                 </div>
             )}

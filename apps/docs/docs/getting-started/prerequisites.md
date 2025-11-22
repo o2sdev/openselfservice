@@ -5,7 +5,7 @@ sidebar_position: 100
 # Pre-requisites
 
 The main requirements for the O2S are:
-- Node.js v22+
+- Node.js v24+
 - npm v10+
 
 To check which versions you are using, you can run the following commands:

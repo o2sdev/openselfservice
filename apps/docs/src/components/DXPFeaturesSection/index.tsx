@@ -89,9 +89,9 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
             </div>
 
             {/* Button */}
-            <a href={buttonUrl} className="button">
-                {buttonText}
-            </a>
+            {/*<a href={buttonUrl} className="button">*/}
+            {/*    {buttonText}*/}
+            {/*</a>*/}
         </Card>
     );
 };
@@ -100,7 +100,8 @@ export function DXPFeaturesSection() {
     return (
         <div className="flex flex-col items-start justify-start w-full">
             <H2 className="font-semibold leading-[1.2] text-3xl text-white w-full">
-                What does the <span className="text-highlighted">DXP Starter offer?</span>
+                <span className="text-highlighted">What you get</span>
+                <span className="text-white">{' with every starter'}</span>
             </H2>
 
             <div className="flex flex-col gap-8 items-start justify-start w-full">

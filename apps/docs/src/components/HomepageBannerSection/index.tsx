@@ -40,11 +40,11 @@ export function HomepageBannerSection() {
                                 style={{ justifyContent: 'space-between' }}
                                 onClick={handleCopyClick}
                             >
-                                <TerminalIcon className="h-5 w-5 mr-2 flex-shrink-0" />
+                                <TerminalIcon className="h-5 w-5 mr-2 shrink-0" />
                                 <span className="flex-1 text-left ml-2 mr-2 whitespace-nowrap overflow-hidden text-ellipsis">
                                     npx create-o2s-app
                                 </span>
-                                <span className="relative ml-2 h-5 w-5 flex-shrink-0">
+                                <span className="relative ml-2 h-5 w-5 shrink-0">
                                     <CopyIcon
                                         className={`absolute inset-0 h-5 w-5 transition-opacity duration-200 ${copied ? 'opacity-0' : 'opacity-100'}`}
                                         style={{ pointerEvents: 'none' }}
