@@ -8,6 +8,7 @@ export interface QuickLinksProps {
     locale: string;
     routing: ReturnType<typeof defineRouting>;
     hasPriority?: boolean;
+    isDraftModeEnabled?: boolean;
 }
 
 export type QuickLinksPureProps = QuickLinksProps & Model.QuickLinksBlock;

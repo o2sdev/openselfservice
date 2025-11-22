@@ -1,0 +1,19 @@
+fragment NavigationGroup on ComponentNavigationGroup {
+    __typename
+    title
+    itemsCollection {
+        items {
+            ... on ComponentNavigationItem {
+                ...NavigationItem
+            }
+        }
+    }
+    url
+    page {
+        slug
+        seo {
+            title
+        }
+    }
+}
+

@@ -7,4 +7,5 @@ export class QuickLinksBlock extends Models.Block.Block {
     title?: CMS.Model.QuickLinksBlock.QuickLinksBlock['title'];
     description?: CMS.Model.QuickLinksBlock.QuickLinksBlock['description'];
     items!: CMS.Model.QuickLinksBlock.QuickLinksBlock['items'];
+    meta?: CMS.Model.QuickLinksBlock.QuickLinksBlock['meta'];
 }

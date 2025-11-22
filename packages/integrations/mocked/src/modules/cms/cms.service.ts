@@ -5,6 +5,7 @@ import { CMS } from '@o2s/framework/modules';
 
 import { mapArticleListBlock } from './mappers/blocks/cms.article-list.mapper';
 import { mapArticleSearchBlock } from './mappers/blocks/cms.article-search.mapper';
+import { mapCategoryListBlock } from './mappers/blocks/cms.category-list.mapper';
 import { mapFaqBlock } from './mappers/blocks/cms.faq.mapper';
 import { mapFeaturedServiceListBlock } from './mappers/blocks/cms.featured-service-list.mapper';
 import { mapInvoiceDetailsBlock } from './mappers/blocks/cms.invoice-details.mapper';
@@ -26,7 +27,6 @@ import { mapTicketListBlock } from './mappers/blocks/cms.ticket-list.mapper';
 import { mapTicketRecentBlock } from './mappers/blocks/cms.ticket-recent.mapper';
 import { mapUserAccountBlock } from './mappers/blocks/cms.user-account.mapper';
 import { mapAppConfig } from './mappers/cms.app-config.mapper';
-import { mapCategoryListBlock } from './mappers/cms.category-list.mapper';
 import { mapCategoryBlock } from './mappers/cms.category.mapper';
 import { mapFooter } from './mappers/cms.footer.mapper';
 import { mapHeader } from './mappers/cms.header.mapper';

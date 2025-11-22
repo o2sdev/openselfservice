@@ -2,6 +2,14 @@ import { Models } from '@o2s/utils.frontend';
 
 import { DynamicIconProps } from '../../DynamicIcon';
 
+export interface InformativeCardMeta {
+    __id: string;
+    title?: string;
+    description?: string;
+    url?: string;
+    icon?: string;
+}
+
 export interface InformativeCardProps {
     href?: string;
     icon?: Icon;
@@ -9,6 +17,7 @@ export interface InformativeCardProps {
     description?: string;
     lineClamp?: number;
     LinkComponent: Models.Link.LinkComponent;
+    meta?: InformativeCardMeta;
 }
 
 interface Icon {

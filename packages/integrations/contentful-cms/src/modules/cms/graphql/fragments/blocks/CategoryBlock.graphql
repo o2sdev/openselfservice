@@ -1,0 +1,12 @@
+fragment CategoryComponent on BlockCategory {
+    __typename
+    sys {
+        ...Sys
+    }
+    category {
+        ...Category
+    }
+    parent {
+        slug
+    }
+}

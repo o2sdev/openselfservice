@@ -8,6 +8,7 @@ export interface ArticleListProps {
     locale: string;
     routing: ReturnType<typeof defineRouting>;
     hasPriority?: boolean;
+    isDraftModeEnabled?: boolean;
 }
 
 export type ArticleListPureProps = ArticleListProps & Model.ArticleListBlock;

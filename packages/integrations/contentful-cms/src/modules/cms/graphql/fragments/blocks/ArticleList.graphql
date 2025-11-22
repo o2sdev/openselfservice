@@ -1,0 +1,21 @@
+fragment ArticleListComponent on BlockArticleList {
+    __typename
+    sys {
+        ...Sys
+    }
+    title
+    description
+    category {
+        slug
+    }
+    articlesCollection {
+        items {
+            slug
+        }
+    }
+    articlesToShow
+    parent {
+        slug
+    }
+}
+

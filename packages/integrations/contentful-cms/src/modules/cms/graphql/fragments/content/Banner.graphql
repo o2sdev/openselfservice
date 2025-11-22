@@ -1,0 +1,11 @@
+fragment Banner on ComponentBanner {
+    sys {
+        ...Sys
+    }
+    title
+    description
+    link {
+        label
+        url
+    }
+}

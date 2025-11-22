@@ -32,6 +32,76 @@ export const nextAuthResult = NextAuth({
             // Handle sign out
         },
     },
+    cookies: {
+        sessionToken: {
+            name: `authjs.session-token`,
+            options: {
+                httpOnly: true,
+                sameSite: 'none',
+                path: '/',
+                secure: true,
+            },
+        },
+        callbackUrl: {
+            name: `authjs.callback-url`,
+            options: {
+                httpOnly: true,
+                sameSite: 'none',
+                path: '/',
+                secure: true,
+            },
+        },
+        csrfToken: {
+            // Default to __Host- for CSRF token for additional protection if using useSecureCookies
+            // NB: The `__Host-` prefix is stricter than the `__Secure-` prefix.
+            name: `authjs.csrf-token`,
+            options: {
+                httpOnly: true,
+                sameSite: 'none',
+                path: '/',
+                secure: true,
+            },
+        },
+        pkceCodeVerifier: {
+            name: `authjs.pkce.code_verifier`,
+            options: {
+                httpOnly: true,
+                sameSite: 'none',
+                path: '/',
+                secure: true,
+                maxAge: 60 * 15, // 15 minutes in seconds
+            },
+        },
+        state: {
+            name: `authjs.state`,
+            options: {
+                httpOnly: true,
+                sameSite: 'none',
+                path: '/',
+                secure: true,
+                maxAge: 60 * 15, // 15 minutes in seconds
+            },
+        },
+        nonce: {
+            name: `authjs.nonce`,
+            options: {
+                httpOnly: true,
+                sameSite: 'none',
+                path: '/',
+                secure: true,
+            },
+        },
+        webauthnChallenge: {
+            name: `authjs.challenge`,
+            options: {
+                httpOnly: true,
+                sameSite: 'none',
+                path: '/',
+                secure: true,
+                maxAge: 60 * 15, // 15 minutes in seconds
+            },
+        },
+    },
 });
 
 export const { handlers, signIn, signOut } = nextAuthResult;

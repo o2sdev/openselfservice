@@ -13,27 +13,30 @@ export const TicketListServer: React.FC<TicketListProps> = async ({
     locale,
     routing,
     hasPriority,
+    isDraftModeEnabled,
 }) => {
+    let data;
     try {
-        const data = await sdk.blocks.getTicketList(
+        data = await sdk.blocks.getTicketList(
             {
                 id,
+                preview: isDraftModeEnabled,
             },
             { 'x-locale': locale },
             accessToken,
         );
-
-        return (
-            <TicketListDynamic
-                {...data}
-                id={id}
-                accessToken={accessToken}
-                locale={locale}
-                routing={routing}
-                hasPriority={hasPriority}
-            />
-        );
     } catch (_error) {
         return null;
     }
+
+    return (
+        <TicketListDynamic
+            {...data}
+            id={id}
+            accessToken={accessToken}
+            locale={locale}
+            routing={routing}
+            hasPriority={hasPriority}
+        />
+    );
 };

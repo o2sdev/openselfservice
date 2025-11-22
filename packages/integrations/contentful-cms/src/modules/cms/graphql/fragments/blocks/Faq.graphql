@@ -1,0 +1,22 @@
+fragment FaqComponent on BlockFaq {
+    __typename
+    sys {
+        ...Sys
+    }
+    title
+    subtitle
+    itemsCollection {
+        items {
+            sys {
+                ...Sys
+            }
+            title
+            content
+        }
+    }
+    banner {
+        ... on ComponentBanner {
+            ...Banner
+        }
+    }
+}

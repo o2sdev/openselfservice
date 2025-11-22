@@ -1,0 +1,35 @@
+fragment Component on Block {
+    ...ComponentBase
+    content {
+        __typename
+        ... on BlockFaq {
+            ...FaqComponent
+        }
+        ... on BlockTicketList {
+            ...TicketListComponent
+        }
+        ... on BlockQuickLinks {
+            ...QuickLinksComponent
+        }
+        ... on BlockCategoryList {
+            ...CategoryListComponent
+        }
+        ... on BlockCategory {
+            ...CategoryComponent
+        }
+        ... on BlockArticleList {
+            ...ArticleListComponent
+        }
+    }
+}
+
+fragment ComponentBase on Block {
+    __typename
+    sys {
+        ...Sys
+    }
+    ...LayoutSection
+    content {
+        __typename
+    }
+}

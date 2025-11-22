@@ -1,0 +1,15 @@
+fragment Link on ComponentLink {
+    sys {
+        ...Sys
+    }
+    label
+    url
+    page {
+        slug
+        seo {
+            title
+            description
+        }
+    }
+    icon
+}

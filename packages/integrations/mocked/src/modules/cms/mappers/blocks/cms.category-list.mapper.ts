@@ -1,6 +1,6 @@
 import { CMS } from '@o2s/framework/modules';
 
-const MOCK_ARTICLE_LIST_BLOCK_EN: CMS.Model.CategoryListBlock.CategoryListBlock = {
+const MOCK_CATEGORY_LIST_BLOCK_EN: CMS.Model.CategoryListBlock.CategoryListBlock = {
     id: 'category-list-1',
     title: 'Browse by categories',
     description: 'Explore our help topics organized by category to find the information you need quickly and easily.',
@@ -9,7 +9,7 @@ const MOCK_ARTICLE_LIST_BLOCK_EN: CMS.Model.CategoryListBlock.CategoryListBlock 
         slug: '/help-and-support',
     },
 };
-const MOCK_ARTICLE_LIST_BLOCK_DE: CMS.Model.CategoryListBlock.CategoryListBlock = {
+const MOCK_CATEGORY_LIST_BLOCK_DE: CMS.Model.CategoryListBlock.CategoryListBlock = {
     id: 'category-list-1',
     title: 'Nach Kategorien durchsuchen',
     description:
@@ -19,7 +19,7 @@ const MOCK_ARTICLE_LIST_BLOCK_DE: CMS.Model.CategoryListBlock.CategoryListBlock 
         slug: '/hilfe-und-support',
     },
 };
-const MOCK_ARTICLE_LIST_BLOCK_PL: CMS.Model.CategoryListBlock.CategoryListBlock = {
+const MOCK_CATEGORY_LIST_BLOCK_PL: CMS.Model.CategoryListBlock.CategoryListBlock = {
     id: 'category-list-1',
     title: 'Przeglądaj według kategorii',
     description:
@@ -34,16 +34,16 @@ export const mapCategoryListBlock = (locale: string): CMS.Model.CategoryListBloc
     switch (locale) {
         case 'de':
             return {
-                ...MOCK_ARTICLE_LIST_BLOCK_DE,
+                ...MOCK_CATEGORY_LIST_BLOCK_DE,
             };
         case 'pl':
             return {
-                ...MOCK_ARTICLE_LIST_BLOCK_PL,
+                ...MOCK_CATEGORY_LIST_BLOCK_PL,
             };
         case 'en':
         default:
             return {
-                ...MOCK_ARTICLE_LIST_BLOCK_EN,
+                ...MOCK_CATEGORY_LIST_BLOCK_EN,
             };
     }
 };

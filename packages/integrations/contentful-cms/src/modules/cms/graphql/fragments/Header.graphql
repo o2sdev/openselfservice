@@ -1,0 +1,38 @@
+fragment Header on Header {
+    sys {
+        ...Sys
+    }
+    title
+    logo {
+        ...Media
+    }
+    itemsCollection {
+        items {
+            ... on ComponentNavigationGroup {
+                ...NavigationGroup
+            }
+            ... on ComponentNavigationItem {
+                ...NavigationItem
+            }
+        }
+    }
+    notification {
+        slug
+        seo {
+            title
+        }
+    }
+    showContextSwitcher
+    languageSwitcherLabel
+    userInfo {
+        slug
+        seo {
+            title
+        }
+    }
+    openMobileMenuLabel
+    closeMobileMenuLabel
+    logoLabel
+    
+}
+

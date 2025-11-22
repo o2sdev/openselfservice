@@ -8,10 +8,7 @@ export interface CategoryListProps {
     locale: string;
     routing: ReturnType<typeof defineRouting>;
     hasPriority?: boolean;
+    isDraftModeEnabled?: boolean;
 }
 
 export type CategoryListPureProps = CategoryListProps & Model.CategoryListBlock;
-
-export interface CategoryListRendererProps extends CategoryListProps {
-    slug: string[];
-}

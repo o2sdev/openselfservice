@@ -1,0 +1,16 @@
+fragment CategoryListComponent on BlockCategoryList {
+    __typename
+    sys {
+        ...Sys
+    }
+    title
+    description
+    categoriesCollection {
+        items {
+            slug
+        }
+    }
+    parent {
+        slug
+    }
+}

@@ -8,6 +8,7 @@ export interface FaqProps {
     locale: string;
     routing: ReturnType<typeof defineRouting>;
     hasPriority?: boolean;
+    isDraftModeEnabled?: boolean;
 }
 
 export type FaqPureProps = FaqProps & Model.FaqBlock;
