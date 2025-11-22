@@ -305,5 +305,5 @@ Each approach has its trade-offs:
 
 ## Additional resources
 
-For a detailed implementation story and technical deep-dive, see our blog article: [Integrating Contentful with Live Preview into composable apps](../../../../blog/integrating-contentful-with-live-preview-into-composable-apps).
+For a detailed implementation story and technical deep-dive, see our blog article: [Integrating Contentful with Live Preview into composable apps](../../../../blog/articles/integrating-contentful-with-live-preview-into-composable-apps).
 
