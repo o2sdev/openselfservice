@@ -24,11 +24,13 @@ hide_table_of_contents: false
 
 # Integrating Contentful with Live Preview into composable apps
 
-In the world of modern web development, composable architectures have become increasingly popular. These architectures allow developers to build applications by combining independent, best-of-breed services rather than relying on monolithic solutions. One key component in many composable architectures is a headless CMS, which provides content management capabilities without dictating how that content is presented.
+In the world of modern web development, composable architectures are becoming increasingly popular. These architectures allow developers to build applications by combining independent services - both backend and frontend related - rather than relying on monolithic solutions. One key component in many composable architectures is a headless CMS, which provides content management capabilities without dictating how that content is presented.
+
+> TODO: intro graphic
 
 At [**Open Self Service**](https://www.openselfservice.com/), we've integrated Contentful as our next headless CMS, following our successful implementation with Strapi. This transition highlights a key strength of our composable architecture and the data normalization approach that Open Self Service is built on – replacing API services (which a headless CMS essentially is) becomes a relatively straightforward process that requires no changes to the frontend application. This decoupling between the frontend and backend services is a fundamental principle of our architecture.
 
-In this article, we'll explore how we implemented the Contentful integration, with a particular focus on the Live Preview feature, which allows content editors to see their changes in real-time.
+We'll explore here how we implemented the Contentful integration, with a particular focus on the Live Preview feature, which allows content editors to see their changes in real-time.
 
 <!--truncate-->
 
@@ -37,55 +39,10 @@ In this article, we'll explore how we implemented the Contentful integration, wi
 When integrating with Contentful, we chose to use their GraphQL API rather than the REST API. GraphQL offers several advantages for our use case:
 
 1. We can request exactly the data we need, reducing over-fetching and improving performance.
-2. The GraphQL schema provides clear documentation of available data and helps catch errors at build time.
+2. The GraphQL schema provides clear documentation of available data and helps catch errors at build time with TypeScript data models.
 3. We can fetch complex, nested data structures in a single request.
 
-Our implementation uses the `graphql-request` library to create GraphQL clients for both the Contentful Delivery API (for published content) and Preview API (for draft content):
-
-```typescript
-@Injectable()
-export class GraphqlService {
-    private readonly deliveryClient: GraphQLClient;
-    private readonly previewClient: GraphQLClient;
-    private readonly deliverySdk: Sdk;
-    private readonly previewSdk: Sdk;
-
-    constructor(private readonly config: ConfigService) {
-        const baseUrl = `https://graphql.contentful.com/content/v1/spaces/${process.env.CF_SPACE_ID}/environments/${process.env.CF_ENV}`;
-
-        // Delivery API client (for published content)
-        this.deliveryClient = new GraphQLClient(baseUrl, {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${process.env.CF_TOKEN}`,
-            },
-        });
-
-        // Preview API client (for draft/unpublished content)
-        this.previewClient = new GraphQLClient(baseUrl, {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${process.env.CF_PREVIEW_TOKEN}`,
-            },
-        });
-
-        this.deliverySdk = getSdk(this.deliveryClient);
-        this.previewSdk = getSdk(this.previewClient);
-    }
-
-    private getSdk(preview?: boolean | null): Sdk {
-        return preview === true ? this.previewSdk : this.deliverySdk;
-    }
-
-    public getPage(params: GetPageQueryVariables) {
-        return this.getSdk(params.preview).getPage(params);
-    }
-
-    // Other methods for fetching different content types
-}
-```
-
-We use GraphQL code generation (via `graphql-codegen`) to create type-safe queries and a strongly typed SDK. This approach ensures that our queries are valid and that we get proper TypeScript types for the responses:
+We use GraphQL code generation (via [graphql-codegen](https://the-guild.dev/graphql/codegen)) to create type-safe queries and a strongly typed SDK. This approach ensures that our queries are valid and that we get proper TypeScript types for the responses:
 
 ```typescript
 import { CodegenConfig } from '@graphql-codegen/cli';
@@ -108,12 +65,11 @@ export default config;
 
 This configuration:
 
-1. Fetches the schema directly from Contentful's GraphQL API.
+1. Fetches the schema directly from Contentful's GraphQL API and saves it locally for IDE/tooling support.
 2. Looks for GraphQL documents (queries, mutations, fragments) in all `.graphql` files.
-3. Generates TypeScript types and an SDK in `generated/contentful.ts`.
-4. Also generates a schema JSON file for IDE/tooling support.
+3. Generates TypeScript data model and an SDK in `generated/contentful.ts`.
 
-The generated code includes TypeScript types for all Contentful content models, as well as SDK methods for executing GraphQL operations:
+The generated code includes types for all Contentful content models, as well as SDK methods for executing GraphQL operations:
 
 ```typescript
 // Example of a GraphQL query defined in a .graphql file
@@ -159,7 +115,7 @@ export type GetPageQuery = {
 };
 ```
 
-The SDK uses these code fragments to provide a strongly typed function for executing the query:
+The SDK uses these code fragments to provide strongly typed functions for executing the queries, while using [graphql-request library](https://www.npmjs.com/package/graphql-request) to create GraphQL client.
 
 ```typescript
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
@@ -177,7 +133,7 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
 }
 ```
 
-In our application, we use this generated SDK to create a service that handles both published and draft content:
+In our application, we use this generated SDK to create a [NestJS](https://nestjs.com/) service that uses both the Contentful Delivery API (for published content) and Preview API (for draft content).:
 
 ```typescript
 @Injectable()
@@ -213,7 +169,7 @@ export class GraphqlService {
 }
 ```
 
-By combining GraphQL with code generation, we've created a robust and developer-friendly data fetching system. The generated TypeScript types ensure complete type safety throughout our application, eliminating runtime errors related to data structure mismatches.
+By combining GraphQL with code generation, we've created a robust and developer-friendly data fetching system. The generated TypeScript data model ensures complete type safety throughout our application, eliminating runtime errors related to data structure mismatches.
 
 This implementation also provides compile-time validation of our GraphQL operations, catching potential errors before they reach production. Perhaps most importantly for content editors, our implementation enables seamless switching between published and draft content, creating a smooth workflow between content creation and preview.
 
@@ -222,6 +178,8 @@ This implementation also provides compile-time validation of our GraphQL operati
 Our approach to content type modeling in Contentful is centered around flexibility and reusability. We've designed our content types to be composable, allowing content editors to build pages by combining different components.
 
 The core of our content model is the Page content type, which represents a single page in our application. Each page has a template, which defines the layout of the page, and slots, which contain the components that make up the page content.
+
+> TODO: screen from CF of Page content type
 
 Here's how we map a Contentful page to our application's data model:
 
@@ -242,7 +200,7 @@ export function mapPage(entryPage: PageFragment): CMS.Model.Page.Page {
 }
 ```
 
-We also have mappers for specific content blocks, such as FAQs, which transform Contentful data into our application's data model. These mappers use the generated fragment types to ensure type safety:
+We have also prepared mappers for specific content blocks, such as FAQs, which transform Contentful data into our application's data model. These mappers use the generated fragment types to ensure type safety:
 
 ```typescript
 // First, we define the GraphQL fragment for the FAQ component
@@ -320,6 +278,8 @@ One of the most powerful features of Contentful is Live Preview, which allows co
 
 To address these challenges, we've added metadata to our mapped data structures, including Contentful entry IDs and field names, to enable the Live Preview SDK to map changes back to the original Contentful fields. This metadata is only included in the response while the app is run in preview/draft mode (so when using Live Preview) so that there would be no unnecessary data for regular users.
 
+> TODO: live preview screen
+
 We've also created a wrapper around the Contentful Live Preview SDK that abstracts away Contentful-specific details, making it easier to potentially support other CMSs in the future.
 
 ### Live Preview approaches across headless CMSes
@@ -334,7 +294,7 @@ Besides Contentful, other CMSes that use variations of this approach include:
 - **Kontent.ai** which uses a similar approach with its Web Spotlight feature
 - **DatoCMS** with its Visual Editor that uses data attributes for field highlighting
 
-Other CMSes take a different approach using content source maps with steganography (stega). Content source maps are metadata that map rendered content back to its source in the CMS, similar to how source maps work in JavaScript. Stega (steganography) embeds invisible metadata within the content itself, often using techniques like invisible Unicode characters or subtle CSS variations.
+Other CMSes take a different approach using content source maps with steganography. Content source maps are metadata that map rendered content back to its source in the CMS, similar to how source maps work in JavaScript. Stega (steganography) embeds invisible metadata within the content itself, often using techniques like invisible Unicode characters or subtle CSS variations.
 
 Examples of CMSes using these approaches include:
 
@@ -347,7 +307,7 @@ Each approach has its trade-offs. Data attributes are more explicit but can add 
 
 While content source maps and stega approaches offer elegant solutions for direct integrations, they present significant challenges for architectures with API composition layers like ours. The transformation process in our composition layer can corrupt or disconnect the embedded metadata that stega relies on, as our normalization restructures content and breaks the carefully crafted patterns of invisible characters.
 
-Our architecture requires bidirectional mapping between our normalized data model and the CMS's original structure, whereas content source maps typically assume a more direct relationship without an intermediate transformation layer. Additionally, our asynchronous processing pipeline, which often combines multiple API calls, conflicts with stega's assumption of a direct, synchronous relationship between CMS and rendered content.
+Our architecture requires mapping between our normalized data model and the CMS's original structure, whereas content source maps typically assume a more direct relationship without an intermediate transformation layer. Additionally, our data aggregation and transformation process, which often combines multiple API calls, conflicts with stega's assumption of a direct, synchronous relationship between CMS and rendered content.
 
 This led us to favor Contentful's explicit data attributes approach, which proved more resilient with our API composition layer and made it easier to maintain connections between transformed data and original Contentful entries.
 
@@ -362,8 +322,6 @@ The metadata is a crucial part of our Live Preview implementation. It serves as 
 3. For complex components with nested content (like FAQ items), the metadata maintains the hierarchical structure, ensuring that edits to nested content are properly tracked.
 
 The metadata is only included when the application is in preview mode, ensuring that regular users don't receive unnecessary data.
-
-It works with our `useInspector` hook to generate the necessary attributes for the Live Preview inspector, enabling content editors to click on elements in the preview to edit them directly.
 
 Here's how we add metadata to our mapped data structures:
 
@@ -436,8 +394,6 @@ Here's an example of what the metadata object looks like for a FAQ component at 
 Our Live Preview implementation uses Contentful's Live Preview SDK, which provides React components and hooks for enabling Live Preview in our application:
 
 ```tsx
-'use client';
-
 import { ContentfulLivePreviewInitConfig } from '@contentful/live-preview';
 import { ContentfulLivePreviewProvider } from '@contentful/live-preview/react';
 import React, { ReactNode } from 'react';
@@ -447,21 +403,15 @@ interface LivePreviewProviderProps extends Omit<ContentfulLivePreviewInitConfig,
 }
 
 export function LivePreviewProvider({ children, ...props }: LivePreviewProviderProps) {
-    return React.createElement(ContentfulLivePreviewProvider, props, children);
+    return <ContentfulLivePreviewProvider {...props}>{children}</ContentfulLivePreviewProvider>
 }
 ```
 
 We also created a custom hook to make it easier to use the Live Preview inspector mode in our components. It uses the metadata to create HTML attributes that the Contentful Live Preview SDK can use to highlight and edit the content. When a content editor clicks on the title in the preview, they're taken directly to the corresponding field in the Contentful editor.
 
 ```typescript
-/**
- * Hook that returns a function to automatically get inspector attributes from meta object
- * This is the recommended way to use inspector mode in components
- *
- * @example
- * const inspector = useInspector();
- * <div {...inspector(meta, 'title')}>Title</div>
- */
+import { useContentfulInspectorMode } from '@contentful/live-preview/react';
+
 export const useInspector = () => {
     const inspectorProps = useContentfulInspectorMode();
 
@@ -470,10 +420,10 @@ export const useInspector = () => {
 
         const attributes = inspectorProps({
             entryId: data.__id,
-            fieldId: data[name] as unknown as string,
+            fieldId: data[name],
         });
 
-        return attributes as DataAttribute;
+        return attributes;
     };
 };
 ```

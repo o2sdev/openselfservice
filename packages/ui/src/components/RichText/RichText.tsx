@@ -243,11 +243,10 @@ export const RichText: FC<Readonly<RichTextProps>> = ({
                 forceBlock: true,
                 overrides,
             }}
-            {...rest}
         >
             {content}
         </Markdown>
     );
 
-    return <div>{markdown}</div>;
+    return <div {...rest}>{markdown}</div>;
 };
