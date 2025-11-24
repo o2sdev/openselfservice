@@ -9,9 +9,31 @@ Open Self Service (O2S) is an open-source framework for building composable cust
 **Tech Stack:**
 
 - Frontend: Next.js 15 (App Router), React 19, Tailwind CSS 4, next-intl, next-auth
-- API Harmonization: NestJS 11, TypeScript
+- Backend / API Harmonization: NestJS 11, TypeScript
 - Monorepo: Turborepo with npm workspaces
 - Node: >=22 (specified in package.json engines)
+
+### Typical solution types and CMS role
+
+O2S is primarily used for customer self-service and post-sale experience applications rather than generic marketing websites. Typical solution types include:
+
+- B2B and B2C customer self-service portals (with emphasis on B2B scenarios).
+- Knowledge bases and self-service content portals that help customers understand products and resolve issues on their own.
+- Service and maintenance process applications (e.g., managing servicing of industrial or construction machines).
+- Portals for managing a fleet or portfolio of purchased products for a given B2B customer (e.g., leased vehicles or machines).
+- Warranty and claims management applications (submitting claims, validating/accepting/rejecting, tracking resolutions such as parts shipment or on-site repair).
+- Product catalog and configuration experiences.
+- Asset management systems with views of owned assets and management and spare parts ordering capabilities.
+- Large platforms that combine self-service, product knowledge, and e-commerce flows, including marketing content where relevant.
+
+In this context, CMS integrations in O2S are not only about delivering marketing content. CMSs are used as tools to:
+
+- Configure and manage the structure of the frontend (navigation, portal pages, and layout).
+- Control which blocks/components are rendered on specific pages and in what order.
+- Configure props and variants for individual components and blocks.
+- Coordinate content and configuration for complex self-service flows across multiple pages.
+
+When describing O2S, make it clear that CMS integrations help teams manage both **content and frontend configuration**, which is why CMSs are valuable even in highly transactional or service-oriented portals.
 
 ## Development Commands
 
@@ -169,6 +191,21 @@ Integrations are adapters that implement framework interfaces for specific backe
 - `@o2s/integrations.mocked` - Mock data for development
 
 Integrations are configured in `@o2s/configs.integrations` and wired up via `AppConfig`.
+
+#### 7. Architecture language & terminology
+
+To keep descriptions of O2S architecture consistent (in code, docs, and marketing), use the following terminology:
+
+- **External systems**: Strapi, Contentful, Zendesk, Redis, Algolia, Medusa, etc. These are third-party or custom backend services that O2S connects to.
+- **Integrations**: Packages under `@o2s/integrations.*` that connect O2S to external systems and implement the required framework interfaces for a given domain (e.g., CMS, Tickets, Search).
+- **Adapters**: The role that integrations play from the framework point of view – they adapt external systems to the normalized O2S data models and module contracts.
+- **Modules**: Domain modules in `@o2s/framework` (Users, Organizations, Tickets, CMS, etc.) that define normalized types and behavior.
+- **Blocks**: Feature-level building blocks that combine backend logic, frontend components, and an SDK client into reusable units.
+
+Important naming rules for assistants:
+
+- Never call external systems themselves "adapters". Instead, say that the **integration acts as an adapter** behind O2S for a given domain.
+- Prefer formulations like: "the Contentful integration acts as a CMS adapter behind O2S" rather than "Contentful becomes an adapter in O2S".
 
 #### 5. Frontend Application
 

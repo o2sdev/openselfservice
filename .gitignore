@@ -32,7 +32,7 @@ yarn-error.log*
 # IDEs
 .idea
 .vscode
-.cursor
+#.cursor
 
 # Local history
 .lh
