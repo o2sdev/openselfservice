@@ -23,6 +23,7 @@ export class InvoiceListBlock extends ApiModels.Block.Block {
     };
     downloadFileName?: string;
     downloadButtonAriaDescription?: string;
+    initialFilters?: Partial<Invoices.Model.Invoice & { sort?: string }>;
 }
 
 export class Invoice {

@@ -20,4 +20,5 @@ export class InvoiceListBlock extends Block.Block {
         clickToSelect: string;
     };
     downloadButtonAriaDescription?: string;
+    initialFilters?: Partial<Invoice & { sort?: string }>;
 }

@@ -25,6 +25,7 @@ export class InvoiceListService {
             concatMap(([cms]) => {
                 return this.invoiceService
                     .getInvoiceList({
+                        ...(cms.initialFilters || {}),
                         ...query,
                         limit: cms.pagination?.limit || query.limit,
                     })
