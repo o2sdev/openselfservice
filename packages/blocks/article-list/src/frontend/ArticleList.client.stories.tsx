@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import { expect, within } from '@storybook/test';
 
 import { ArticleListPure } from './ArticleList.client';
 
@@ -169,5 +170,23 @@ export const Default: Story = {
         accessToken:
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmFuZSBEb2UiLCJlbWFpbCI6ImphbmVAZXhhbXBsZS5jb20iLCJyb2xlIjoic2VsZnNlcnZpY2Vfb3JnX2FkbWluIiwiY3VzdG9tZXIiOnsiaWQiOiJjdXN0LTAwMSIsInJvbGVzIjpbInNlbGZzZXJ2aWNlX29yZ191c2VyIiwic2VsZnNlcnZpY2Vfb3JnX3VzZXIiLCJzZWxmc2VydmljZV9vcmdfYWRtaW4iXSwibmFtZSI6IkFjbWUgQ29ycG9yYXRpb24ifSwiaWF0IjoxNzU2MzA4NTk1fQ.h3meFqpRjcnUwt2mGCuznazlWExkarqYZ2oNKHEgYzE',
         locale: 'en',
+    },
+    play: async ({ canvasElement }) => {
+        const canvas = within(canvasElement);
+
+        // Test 1: Verify the main title is rendered
+        const title = canvas.getByText('Explore How-To Guides');
+        await expect(title).toBeInTheDocument();
+
+        // Test 2: Verify all 4 articles are rendered by their titles
+        const article1 = canvas.getByText('Managing Your PowerPro Tools Online');
+        const article2 = canvas.getByText('PowerPro Tool Certification Program');
+        const article3 = canvas.getByText('Understanding Your PowerPro Warranty');
+        const article4 = canvas.getByText('Preventive Maintenance Guide for PowerPro Tools');
+
+        await expect(article1).toBeInTheDocument();
+        await expect(article2).toBeInTheDocument();
+        await expect(article3).toBeInTheDocument();
+        await expect(article4).toBeInTheDocument();
     },
 };

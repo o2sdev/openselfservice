@@ -22,7 +22,12 @@ const config: StorybookConfig = {
         '../packages/blocks/**/src/frontend/**/*.stories.@(js|jsx|mjs|ts|tsx)',
         '../packages/ui/**/*.stories.@(js|jsx|mjs|ts|tsx)',
     ],
-    addons: ['@storybook/addon-docs', '@storybook/addon-a11y', '@storybook/addon-themes'],
+    addons: [
+        '@storybook/addon-docs',
+        '@storybook/addon-a11y',
+        '@storybook/addon-themes',
+        '@storybook/addon-vitest'
+    ],
     framework: {
         name: '@storybook/nextjs-vite',
         options: {},
