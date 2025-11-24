@@ -64,5 +64,5 @@ Cached entries are [stringified](https://www.npmjs.com/package/flatted) and save
 
 ## Additional resources
 
-For a detailed implementation story and technical deep-dive, see our blog article: [Integrating Contentful with Live Preview into composable apps](../../../../blog/articles/integrating-contentful-with-live-preview-into-composable-apps/index.md).
+For a detailed implementation story and technical deep-dive, see our blog article: [Integrating Contentful with Live Preview into composable apps](/blog/integrating-contentful-with-live-preview-into-composable-apps).
 
