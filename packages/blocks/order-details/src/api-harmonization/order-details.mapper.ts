@@ -33,16 +33,16 @@ export const mapOrderDetails = (
                 value: order.id,
             },
             subtotal: {
-                title: cms.totalValue.title,
-                icon: cms.totalValue.icon,
+                title: cms.totalValue?.title || '',
+                icon: cms.totalValue?.icon,
                 label: Utils.Price.checkNegativeValue(order.subtotal || { value: 0, currency }).value.toString(),
-                description: format(cms.totalValue.message || '', {
+                description: format(cms.totalValue?.message || '', {
                     value: order.items.total,
                 }),
                 value: order.subtotal,
             },
             createdAt: {
-                title: cms.createdOrderAt.title,
+                title: cms.createdOrderAt?.title || '',
                 label: Utils.Date.formatDateRelative(
                     order.createdAt,
                     locale,
@@ -50,12 +50,12 @@ export const mapOrderDetails = (
                     cms.labels.yesterday,
                     timezone,
                 ),
-                icon: cms.createdOrderAt.icon,
+                icon: cms.createdOrderAt?.icon,
                 description: Utils.Date.formatTime(order.createdAt, locale, timezone),
                 value: order.createdAt,
             },
             paymentDueDate: {
-                title: cms.paymentDueDate.title,
+                title: cms.paymentDueDate?.title || '',
                 label: order.paymentDueDate
                     ? Utils.Date.formatDateRelative(
                           order.paymentDueDate,
@@ -65,41 +65,41 @@ export const mapOrderDetails = (
                           timezone,
                       )
                     : '-',
-                icon: cms.paymentDueDate.icon,
+                icon: cms.paymentDueDate?.icon,
                 description: order.documents?.[0]?.id
-                    ? format(cms.paymentDueDate.message || '', {
+                    ? format(cms.paymentDueDate?.message || '', {
                           value: order.documents?.[0]?.id,
                       })
-                    : cms.paymentDueDate.altMessage,
+                    : cms.paymentDueDate?.altMessage,
                 value: order.paymentDueDate,
             },
             overdue: {
-                title: cms.overdue.title,
-                icon: cms.overdue.icon,
+                title: cms.overdue?.title || '',
+                icon: cms.overdue?.icon,
                 label: Utils.Price.checkNegativeValue({ value: overdueAmount, currency }).value.toString(),
                 description: isOverdue
-                    ? format(cms.overdue.message || '', {
+                    ? format(cms.overdue?.message || '', {
                           days: overdueDays,
                       })
-                    : cms.overdue.altMessage,
+                    : cms.overdue?.altMessage,
                 value: { value: Utils.Price.checkNegativeValue({ value: overdueAmount, currency }).value, currency },
                 isOverdue,
             },
             status: {
-                title: cms.orderStatus.title,
-                icon: cms.orderStatus.icon,
+                title: cms.orderStatus?.title || '',
+                icon: cms.orderStatus?.icon,
                 label: cms.fieldMapping.status?.[order.status] || order.status,
                 value: order.status,
                 statusLadder: cms.statusLadder,
             },
             customerComment: {
-                title: cms.customerComment.title,
-                icon: cms.customerComment.icon,
+                title: cms.customerComment?.title || '',
+                icon: cms.customerComment?.icon,
                 value: order.customerComment,
                 link: {
-                    label: cms.customerComment.link?.label,
-                    icon: cms.customerComment.link?.icon,
-                    url: cms.customerComment.link?.url,
+                    label: cms.customerComment?.link?.label,
+                    icon: cms.customerComment?.link?.icon,
+                    url: cms.customerComment?.link?.url,
                 },
             },
         },

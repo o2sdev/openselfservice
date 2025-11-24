@@ -1,0 +1,15 @@
+<svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="0.5" y="8.5" width="41" height="41" rx="4.5" stroke="#4C5CE5"/>
+<rect x="7" y="14.7568" width="12" height="12" rx="2" fill="#16182B" fill-opacity="0.8"/>
+<rect x="7" y="14.7568" width="12" height="12" rx="2" fill="#4C5CE5"/>
+<rect x="23" y="14.7568" width="12" height="12" rx="2" fill="#16182B" fill-opacity="0.8"/>
+<rect x="23" y="14.7568" width="12" height="12" rx="2" fill="#4C5CE5"/>
+<rect x="7" y="30.7568" width="12" height="12" rx="2" stroke="#4C5CE5" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<rect x="23" y="30.7568" width="12" height="12" rx="2" fill="#16182B" fill-opacity="0.8"/>
+<rect x="23" y="30.7568" width="12" height="12" rx="2" fill="#4C5CE5"/>
+<foreignObject x="12" y="-3" width="41" height="41"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(1.5px);clip-path:url(#bgblur_0_2997_2559_clip_path);height:100%;width:100%"></div></foreignObject><rect data-figma-bg-blur-radius="3" x="15" width="35" height="35" rx="5" fill="#4C5CE5" fill-opacity="0.45"/>
+<path d="M41.2502 25.25L37.3085 21.3083M39.4167 16.0833C39.4167 20.1334 36.1334 23.4167 32.0833 23.4167C28.0332 23.4167 24.75 20.1334 24.75 16.0833C24.75 12.0332 28.0332 8.75 32.0833 8.75C36.1334 8.75 39.4167 12.0332 39.4167 16.0833Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+<defs>
+<clipPath id="bgblur_0_2997_2559_clip_path" transform="translate(-12 3)"><rect x="15" width="35" height="35" rx="5"/>
+</clipPath></defs>
+</svg>

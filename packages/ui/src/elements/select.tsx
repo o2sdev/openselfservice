@@ -36,9 +36,14 @@ export interface SelectTriggerProps
 
 type SelectTriggerOwnProps = SelectTriggerProps & {
     ref?: React.Ref<React.ComponentRef<typeof SelectPrimitive.Trigger>>;
+    hasError?: boolean;
 };
-const SelectTrigger = ({ variant, className, children, ref, ...props }: SelectTriggerOwnProps) => (
-    <SelectPrimitive.Trigger ref={ref} className={cn(selectVariants({ variant, className }))} {...props}>
+const SelectTrigger = ({ variant, className, children, hasError, ref, ...props }: SelectTriggerOwnProps) => (
+    <SelectPrimitive.Trigger
+        ref={ref}
+        className={cn(selectVariants({ variant, className }), hasError && 'border-destructive focus:ring-destructive')}
+        {...props}
+    >
         {children}
         <SelectPrimitive.Icon asChild>
             <ChevronDown className="h-4 w-4 opacity-50" />
@@ -154,19 +159,55 @@ interface SelectWithTitleProps {
     disabled?: boolean;
     required?: boolean;
     children: React.ReactNode;
+    hasError?: boolean;
+    description?: string;
+    errorMessage?: string;
+    isRequired?: boolean;
+    requiredLabel?: string;
+    optionalLabel?: string;
 }
 
 type SelectWithTitleOwnProps = SelectWithTitleProps & { ref?: React.Ref<HTMLDivElement> };
-const SelectWithTitle = ({ label, labelClassName, children, id, ref, ...props }: SelectWithTitleOwnProps) => {
+const SelectWithTitle = ({
+    label,
+    labelClassName,
+    children,
+    id,
+    hasError,
+    description,
+    errorMessage,
+    isRequired,
+    optionalLabel = '',
+    requiredLabel = '',
+    ref,
+    ...props
+}: SelectWithTitleOwnProps) => {
     const generatedId = React.useId();
     const selectId = id || generatedId;
 
+    const renderAdditionalLabel = () => {
+        if (props.disabled) return null;
+
+        if (optionalLabel && !isRequired) {
+            return <span className="font-normal text-sm">({optionalLabel})</span>;
+        }
+
+        if (requiredLabel && isRequired) {
+            return <span className="font-normal text-sm">({requiredLabel})</span>;
+        }
+
+        return null;
+    };
+
     return (
         <div className="grid gap-2" ref={ref}>
-            <Label htmlFor={selectId} className={labelClassName}>
-                {label}
+            <Label htmlFor={selectId} className={cn(labelClassName, hasError && 'text-destructive')}>
+                <span className="pr-2">{label}</span>
+                {renderAdditionalLabel()}
             </Label>
             <Select {...props}>{children}</Select>
+            {description && <p className="text-sm text-muted-foreground">{description}</p>}
+            {hasError && errorMessage && <p className="text-sm text-destructive">{errorMessage}</p>}
         </div>
     );
 };
