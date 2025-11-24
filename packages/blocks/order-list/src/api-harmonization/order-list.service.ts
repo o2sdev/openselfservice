@@ -26,6 +26,7 @@ export class OrderListService {
                 return this.orderService
                     .getOrderList(
                         {
+                            ...(cms.initialFilters || {}),
                             ...query,
                             limit: query.limit || cms.pagination?.limit || 1,
                             offset: query.offset || 0,
