@@ -30,6 +30,8 @@ Use git commands to analyze changes:
 - List all files that differ between current branch and `main`
 - Categorize changes: added, modified, deleted, renamed
 
+> ⚠️ If the file list is very long, `git diff --name-status main...` can be interrupted by the pager or terminal buffer limits. Save the output to a file (`git --no-pager diff --name-status main... > diff-name-status.txt`) or filter by directories (for example, `git diff --name-status main... apps/frontend`) to keep the full changeset for further analysis.
+
 **B) Get Diff Statistics:**
 
 - Count lines added/removed
