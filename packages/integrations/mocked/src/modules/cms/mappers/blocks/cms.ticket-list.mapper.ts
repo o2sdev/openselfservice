@@ -151,6 +151,11 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
         clickToSelect: 'Click to select',
     },
     detailsUrl: '/cases/{id}',
+    initialFilters: {
+        status: 'OPEN',
+        topic: 'TOOL_REPAIR',
+        sort: 'updatedAt_ASC',
+    },
 };
 
 const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
@@ -306,6 +311,11 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
         clickToSelect: 'Klicken Sie, um auszuwählen',
     },
     detailsUrl: '/faelle/{id}',
+    initialFilters: {
+        status: 'OPEN',
+        type: 'URGENT',
+        sort: 'updatedAt_ASC',
+    },
 };
 
 const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
@@ -462,6 +472,12 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
         clickToSelect: 'Kliknij, aby wybrać',
     },
     detailsUrl: '/zgloszenia/{id}',
+    initialFilters: {
+        status: 'IN_PROGRESS',
+        topic: 'SOFTWARE_SUPPORT',
+        type: 'STANDARD',
+        sort: 'topic_ASC',
+    },
 };
 
 export const mapTicketListBlock = (locale: string): CMS.Model.TicketListBlock.TicketListBlock => {
