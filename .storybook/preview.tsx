@@ -1,8 +1,8 @@
 import React from 'react';
 import { NextIntlClientProvider } from 'next-intl';
-import type { Preview } from '@storybook/nextjs';
-import { createRouter } from '@storybook/nextjs/router.mock';
-import { createNavigation } from '@storybook/nextjs/navigation.mock';
+import type { Preview } from '@storybook/nextjs-vite';
+import { createRouter } from '@storybook/nextjs-vite/router.mock';
+import { createNavigation } from '@storybook/nextjs-vite/navigation.mock';
 import { withThemeByClassName } from '@storybook/addon-themes';
 
 import { GlobalProvider } from '@o2s/ui/providers/GlobalProvider';

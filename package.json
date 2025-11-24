@@ -42,12 +42,13 @@
         "@storybook/addon-a11y": "^10.0.8",
         "@storybook/addon-docs": "^10.0.8",
         "@storybook/addon-themes": "^10.0.8",
-        "@storybook/nextjs": "^10.0.8",
+        "@storybook/nextjs-vite": "^10.0.8",
         "@turbo/gen": "^2.6.1",
         "@types/cli-progress": "^3.11.6",
         "@types/fs-extra": "^11.0.4",
         "@types/prompts": "^2.4.9",
         "@types/unzipper": "^0.10.11",
+        "@vitejs/plugin-react": "^5.1.1",
         "dotenv": "^17.2.3",
         "fs-extra": "^11.3.2",
         "husky": "^9.1.7",
@@ -58,7 +59,10 @@
         "storybook": "^10.0.8",
         "syncpack": "^14.0.0-alpha.27",
         "turbo": "^2.6.1",
-        "typescript": "5.9.3"
+        "typescript": "5.9.3",
+        "vite": "^7.2.4",
+        "vite-plugin-svgr": "^4.5.0",
+        "vite-tsconfig-paths": "^5.1.4"
     },
     "dependencies": {
         "@changesets/cli": "^2.29.7",
