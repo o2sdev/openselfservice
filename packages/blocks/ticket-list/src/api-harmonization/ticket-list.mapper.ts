@@ -26,6 +26,7 @@ export const mapTicketList = (
         },
         forms: cms.forms,
         labels: cms.labels,
+        initialFilters: cms.initialFilters,
         meta: cms.meta,
     };
 };

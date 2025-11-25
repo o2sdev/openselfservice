@@ -25,8 +25,11 @@ export class InvoiceListService {
             concatMap(([cms]) => {
                 return this.invoiceService
                     .getInvoiceList({
+                        ...(cms.initialFilters || {}),
                         ...query,
-                        limit: cms.pagination?.limit || query.limit,
+                        limit: query.limit || cms.pagination?.limit || 1,
+                        offset: query.offset || 0,
+                        locale: headers['x-locale'],
                     })
                     .pipe(
                         map((invoices) =>

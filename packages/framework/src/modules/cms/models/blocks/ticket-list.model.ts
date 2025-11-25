@@ -22,6 +22,7 @@ export class TicketListBlock extends Block.Block<Meta> {
     };
     detailsUrl!: string;
     forms?: Link[];
+    initialFilters?: Partial<Ticket & { sort?: string }>;
 }
 
 export class Meta {
