@@ -1,4 +1,6 @@
-import { CMS, Notifications } from '@o2s/configs.integrations';
+import { CMS } from '@o2s/configs.integrations';
+
+import { Notifications } from '@o2s/framework/modules';
 
 import { NotificationSummaryBlock, NotificationSummaryInfoCard } from './notification-summary.model';
 
@@ -12,47 +14,32 @@ export const mapNotificationSummary = (
             acc[notification.priority] = (acc[notification.priority] || 0) + 1;
             return acc;
         },
-        {} as Record<'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL', number>,
+        {} as Record<Notifications.Model.NotificationPriority, number>,
     );
 
     const infoCards: NotificationSummaryInfoCard[] = [];
 
-    if (cms.critical) {
-        infoCards.push({
-            title: cms.critical.title,
-            icon: cms.critical.icon,
-            value: priorityCounts.CRITICAL || 0,
-            description: cms.critical.message,
-            variant: 'CRITICAL',
-        });
-    }
-    if (cms.high) {
-        infoCards.push({
-            title: cms.high.title,
-            icon: cms.high.icon,
-            value: priorityCounts.HIGH || 0,
-            description: cms.high.message,
-            variant: 'HIGH',
-        });
-    }
-    if (cms.medium) {
-        infoCards.push({
-            title: cms.medium.title,
-            icon: cms.medium.icon,
-            value: priorityCounts.MEDIUM || 0,
-            description: cms.medium.message,
-            variant: 'MEDIUM',
-        });
-    }
-    if (cms.low) {
-        infoCards.push({
-            title: cms.low.title,
-            icon: cms.low.icon,
-            value: priorityCounts.LOW || 0,
-            description: cms.low.message,
-            variant: 'LOW',
-        });
-    }
+    const priorities = ['CRITICAL', 'HIGH', 'MEDIUM', 'LOW'] as Notifications.Model.NotificationPriority[];
+
+    priorities.forEach((priority) => {
+        const cmsPriorityData =
+            cms[
+                priority.toLowerCase() as keyof Pick<
+                    CMS.Model.NotificationSummaryBlock.NotificationSummaryBlock,
+                    'low' | 'critical' | 'high' | 'medium'
+                >
+            ];
+
+        if (cmsPriorityData) {
+            infoCards.push({
+                title: cmsPriorityData.title,
+                icon: cmsPriorityData.icon,
+                value: priorityCounts[priority] || 0,
+                description: cmsPriorityData.message,
+                variant: priority,
+            });
+        }
+    });
 
     return {
         __typename: 'NotificationSummaryBlock',

@@ -43,7 +43,7 @@
         "@storybook/addon-docs": "^9.1.16",
         "@storybook/addon-themes": "^9.1.16",
         "@storybook/nextjs": "^9.1.16",
-        "@turbo/gen": "^2.5.8",
+        "@turbo/gen": "^2.6.1",
         "@types/cli-progress": "^3.11.6",
         "@types/fs-extra": "^11.0.4",
         "@types/prompts": "^2.4.9",
@@ -54,10 +54,10 @@
         "lint-staged": "^16.2.6",
         "playwright": "^1.56.1",
         "prettier": "^3.6.2",
-        "simple-git": "^3.28.0",
+        "simple-git": "^3.30.0",
         "storybook": "^9.1.16",
-        "syncpack": "^14.0.0-alpha.23",
-        "turbo": "^2.5.8",
+        "syncpack": "^14.0.0-alpha.27",
+        "turbo": "^2.6.1",
         "typescript": "5.9.3"
     },
     "dependencies": {
