@@ -26,13 +26,14 @@ hide_table_of_contents: false
 
 In the world of modern web development, composable architectures are becoming increasingly popular. These architectures allow developers to build applications by combining independent services - both backend and frontend related - rather than relying on monolithic solutions. One key component in many composable architectures is a headless CMS, which provides content management capabilities without dictating how that content is presented.
 
-> TODO: intro graphic
-
-At [**Open Self Service**](https://www.openselfservice.com/), we've integrated Contentful as our next headless CMS, following our successful implementation with Strapi. This transition highlights a key strength of our composable architecture and the data normalization approach that Open Self Service is built on – replacing API services (which a headless CMS essentially is) becomes a relatively straightforward process that requires no changes to the frontend application. This decoupling between the frontend and backend services is a fundamental principle of our architecture.
-
-We'll explore here how we implemented the Contentful integration, with a particular focus on the Live Preview feature, which allows content editors to see their changes in real-time.
+![contentful in composable apps](contentful-intro.png)
 
 <!--truncate-->
+
+At [**Open Self Service**](https://www.openselfservice.com/), we've integrated Contentful as our next headless CMS, following our successful implementation with Strapi. This transition highlights key strength of our composable architecture, and the data normalization approach that Open Self Service is built on – replacing API services (which a headless CMS essentially is) becomes a relatively straightforward process that requires no changes to the frontend application. This decoupling between the frontend and backend services is a fundamental principle of our architecture.
+
+
+We'll explore here how we implemented the Contentful integration, with a particular focus on the Live Preview feature, which allows content editors to see their changes in real-time.
 
 ## GraphQL Implementation
 
@@ -179,7 +180,7 @@ Our approach to content type modeling in Contentful is centered around flexibili
 
 The core of our content model is the Page content type, which represents a single page in our application. Each page has a template, which defines the layout of the page, and slots, which contain the components that make up the page content.
 
-> TODO: screen from CF of Page content type
+![page content type in contentful](page-content-type.png)
 
 Here's how we map a Contentful page to our application's data model:
 
@@ -278,7 +279,7 @@ One of the most powerful features of Contentful is Live Preview, which allows co
 
 To address these challenges, we've added metadata to our mapped data structures, including Contentful entry IDs and field names, to enable the Live Preview SDK to map changes back to the original Contentful fields. This metadata is only included in the response while the app is run in preview/draft mode (so when using Live Preview) so that there would be no unnecessary data for regular users.
 
-> TODO: live preview screen
+![live preview in Contentful](live-preview-1.png)
 
 We've also created a wrapper around the Contentful Live Preview SDK that abstracts away Contentful-specific details, making it easier to potentially support other CMSs in the future.
 
@@ -447,7 +448,7 @@ const FaqItem = ({ item, meta }) => {
 
 The most significant innovation in our implementation was the metadata pattern we developed to bridge our normalized data model with Contentful's structure. This pattern was essential for Live Preview functionality to work with our composable architecture, maintaining context about the origin of data while enabling real-time content editing.
 
-We faced a fundamental challenge: how to leverage Contentful's powerful Live Preview capabilities while maintaining our CMS-agnostic architecture. Our solution—thin abstraction layers combined with the metadata pattern showed us that pragmatic integration sometimes outweighs architectural purity.
+We faced a fundamental challenge: how to leverage Contentful's powerful Live Preview capabilities while maintaining our CMS-agnostic architecture. Our thin abstraction layers combined with the metadata pattern showed us that pragmatic integration sometimes outweighs architectural purity.
 
 Our API layer transforms Contentful's raw data into a normalized format that our frontend components expect. For Live Preview to work, we needed to maintain bidirectional mapping between these transformed structures and their original Contentful counterparts, which required careful tracking of entry IDs and field names throughout the transformation process.
 
