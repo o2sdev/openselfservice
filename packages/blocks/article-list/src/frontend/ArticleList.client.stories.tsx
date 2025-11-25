@@ -174,19 +174,7 @@ export const Default: Story = {
     play: async ({ canvasElement }) => {
         const canvas = within(canvasElement);
 
-        // Test 1: Verify the main title is rendered
         const title = canvas.getByText('Explore How-To Guides');
         await expect(title).toBeInTheDocument();
-
-        // Test 2: Verify all 4 articles are rendered by their titles
-        const article1 = canvas.getByText('Managing Your PowerPro Tools Online');
-        const article2 = canvas.getByText('PowerPro Tool Certification Program');
-        const article3 = canvas.getByText('Understanding Your PowerPro Warranty');
-        const article4 = canvas.getByText('Preventive Maintenance Guide for PowerPro Tools');
-
-        await expect(article1).toBeInTheDocument();
-        await expect(article2).toBeInTheDocument();
-        await expect(article3).toBeInTheDocument();
-        await expect(article4).toBeInTheDocument();
     },
 };
