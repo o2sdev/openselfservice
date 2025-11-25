@@ -18,6 +18,8 @@ The project became one of the first large-scale composable portal implementation
 
 ![o2s-orange tmb.jpg](o2s-orange%20tmb.jpg)
 
+<!--truncate-->
+
 ## Why Orange Energia needed a composable digital portal
 
 As a fast-growing energy provider supporting both consumers and businesses, Orange Energia faced challenges common in the sector. Growing customer expectations demanded full visibility into contracts, usage, invoices, and service requests. There was increasing pressure to reduce cost-to-serve through automation and self-service. Without an existing digital self-service portal, most interactions still flowed through call centers and manual back-office workflows, and the volume of requests and manual work performed by service teams continued to grow.
