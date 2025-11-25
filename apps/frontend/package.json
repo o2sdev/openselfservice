@@ -6,7 +6,7 @@
         "dev": "next dev --turbopack",
         "dev:https": "next dev --turbopack --experimental-https",
         "build": "next build",
-        "postbuild": "cp -r public .next/standalone/apps/frontend && cp -r .next/static .next/standalone/apps/frontend/.next/",
+        "postbuild": "shx cp -r public .next/standalone/apps/frontend && shx cp -r .next/static .next/standalone/apps/frontend/.next/",
         "start": "node .next/standalone/apps/frontend/server.js",
         "lint": "tsc --noEmit && next lint",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\"",
@@ -78,6 +78,7 @@
         "postcss": "^8.5.6",
         "prettier": "^3.6.2",
         "sass": "^1.94.2",
+        "shx": "^0.3.4",
         "tailwindcss": "^4.1.17",
         "tsx": "^4.20.6",
         "typescript": "^5.9.3"
