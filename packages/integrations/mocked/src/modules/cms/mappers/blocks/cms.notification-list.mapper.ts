@@ -117,11 +117,6 @@ const MOCK_NOTIFICATION_LIST_BLOCK_EN: CMS.Model.NotificationListBlock.Notificat
             },
         ],
     },
-    initialFilters: {
-        status: 'UNVIEWED',
-        priority: 'HIGH',
-        sort: 'createdAt_DESC',
-    },
     noResults: {
         title: 'No notifications found',
         description: 'There are no notifications matching your criteria',
@@ -251,11 +246,6 @@ const MOCK_NOTIFICATION_LIST_BLOCK_DE: CMS.Model.NotificationListBlock.Notificat
             },
         ],
     },
-    initialFilters: {
-        status: 'VIEWED',
-        priority: 'MEDIUM',
-        sort: 'createdAt_ASC',
-    },
     noResults: {
         title: 'Keine Benachrichtigungen gefunden',
         description: 'Es gibt keine Benachrichtigungen, die Ihren Kriterien entsprechen',
@@ -384,11 +374,6 @@ const MOCK_NOTIFICATION_LIST_BLOCK_PL: CMS.Model.NotificationListBlock.Notificat
                 },
             },
         ],
-    },
-    initialFilters: {
-        status: 'READ',
-        priority: 'LOW',
-        type: 'GENERAL_NOTIFICATION',
     },
     noResults: {
         title: 'Nie znaleziono powiadomień',

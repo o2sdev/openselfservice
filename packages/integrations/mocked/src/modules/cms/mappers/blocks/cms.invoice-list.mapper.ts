@@ -111,10 +111,6 @@ const MOCK_INVOICE_LIST_BLOCK_EN: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
             },
         ],
     },
-    initialFilters: {
-        paymentStatus: 'PAYMENT_DUE',
-        sort: 'paymentDueDate_ASC',
-    },
     noResults: {
         title: 'No Invoices Found',
         description: 'There are no invoices matching your criteria',
@@ -239,10 +235,6 @@ const MOCK_INVOICE_LIST_BLOCK_DE: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
             },
         ],
     },
-    initialFilters: {
-        paymentStatus: 'PAYMENT_COMPLETE',
-        sort: 'paymentDueDate_DESC',
-    },
     noResults: {
         title: 'Keine Rechnungen gefunden',
         description: 'Es wurden keine Rechnungen gefunden, die Ihren Kriterien entsprechen',
@@ -366,10 +358,6 @@ const MOCK_INVOICE_LIST_BLOCK_PL: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
                 },
             },
         ],
-    },
-    initialFilters: {
-        paymentStatus: 'PAYMENT_PAST_DUE',
-        sort: 'totalAmountDue_DESC',
     },
     noResults: {
         title: 'Nie znaleziono faktur',

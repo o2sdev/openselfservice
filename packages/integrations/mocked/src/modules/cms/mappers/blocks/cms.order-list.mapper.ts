@@ -91,10 +91,6 @@ const MOCK_ORDER_LIST_BLOCK_EN: CMS.Model.OrderListBlock.OrderListBlock = {
             },
         ],
     },
-    initialFilters: {
-        status: 'COMPLETED',
-        sort: 'createdAt_DESC',
-    },
     noResults: {
         title: "So far, there's nothing here",
         description: '',
@@ -200,10 +196,6 @@ const MOCK_ORDER_LIST_BLOCK_DE: CMS.Model.OrderListBlock.OrderListBlock = {
             },
         ],
     },
-    initialFilters: {
-        status: 'PENDING',
-        sort: 'id_ASC',
-    },
     noResults: {
         title: 'Bisher gibt es hier nichts',
         description: '',
@@ -308,10 +300,6 @@ const MOCK_ORDER_LIST_BLOCK_PL: CMS.Model.OrderListBlock.OrderListBlock = {
                 },
             },
         ],
-    },
-    initialFilters: {
-        status: 'SHIPPED',
-        sort: 'subtotal_DESC',
     },
     noResults: {
         title: 'Jak dotąd nie ma tu nic',
