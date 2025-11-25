@@ -24,6 +24,7 @@ export class TicketListBlock extends ApiModels.Block.Block {
         showMore: string;
         clickToSelect: string;
     };
+    initialFilters?: Partial<Tickets.Model.Ticket & { sort?: string }>;
 }
 
 export class Ticket {

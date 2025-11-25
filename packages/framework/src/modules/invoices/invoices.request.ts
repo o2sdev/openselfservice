@@ -12,4 +12,5 @@ export class GetInvoiceListQuery extends PaginationQuery {
     dateTo?: Date;
     sort?: string;
     search?: string;
+    locale?: string;
 }

@@ -39,6 +39,7 @@ export const mapOrderListBlock = (data: GetComponentQuery): CMS.Model.OrderListB
                 },
                 reorderLabel: component.reorderLabel,
                 detailsUrl: component.detailsURL as string,
+                initialFilters: undefined, // TODO: add initial filters field in CMS
             };
     }
 

@@ -25,6 +25,7 @@ export class TicketListService {
             concatMap(([cms]) => {
                 return this.ticketService
                     .getTicketList({
+                        ...(cms.initialFilters || {}),
                         ...query,
                         limit: query.limit || cms.pagination?.limit || 1,
                         offset: query.offset || 0,

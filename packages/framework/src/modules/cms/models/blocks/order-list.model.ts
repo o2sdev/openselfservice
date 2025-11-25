@@ -21,4 +21,5 @@ export class OrderListBlock extends Block.Block {
     };
     reorderLabel?: string;
     detailsUrl!: string;
+    initialFilters?: Partial<Order & { sort?: string }>;
 }

@@ -22,4 +22,5 @@ export class TicketListBlock extends Block.Block {
     };
     detailsUrl!: string;
     forms?: Link[];
+    initialFilters?: Partial<Ticket & { sort?: string }>;
 }
