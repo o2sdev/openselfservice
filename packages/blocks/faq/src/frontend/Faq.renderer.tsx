@@ -7,7 +7,13 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { Faq } from './Faq.server';
 import { FaqRendererProps } from './Faq.types';
 
-export const FaqRenderer: React.FC<FaqRendererProps> = ({ id, accessToken, routing, hasPriority }) => {
+export const FaqRenderer: React.FC<FaqRendererProps> = ({
+    id,
+    accessToken,
+    routing,
+    hasPriority,
+    isDraftModeEnabled,
+}) => {
     const locale = useLocale();
 
     return (
@@ -19,7 +25,14 @@ export const FaqRenderer: React.FC<FaqRendererProps> = ({ id, accessToken, routi
                 </Container>
             }
         >
-            <Faq id={id} accessToken={accessToken} locale={locale} routing={routing} hasPriority={hasPriority} />
+            <Faq
+                id={id}
+                accessToken={accessToken}
+                locale={locale}
+                routing={routing}
+                hasPriority={hasPriority}
+                isDraftModeEnabled={isDraftModeEnabled}
+            />
         </Suspense>
     );
 };

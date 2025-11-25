@@ -4,7 +4,8 @@
     "private": true,
     "license": "MIT",
     "exports": {
-        ".": "./dist/src/models/index.js"
+        ".": "./dist/src/models/index.js",
+        "./live-preview": "./dist/src/models/live-preview.js"
     },
     "files": [
         "dist"

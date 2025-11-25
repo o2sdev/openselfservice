@@ -7,4 +7,5 @@ export class CategoryListBlock extends ApiModels.Block.Block {
     title!: CMS.Model.CategoryListBlock.CategoryListBlock['title'];
     description?: CMS.Model.CategoryListBlock.CategoryListBlock['description'];
     items!: Articles.Model.Category[];
+    meta?: CMS.Model.CategoryListBlock.CategoryListBlock['meta'];
 }

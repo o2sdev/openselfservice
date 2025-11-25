@@ -10,4 +10,5 @@ export class ArticleListBlock extends ApiModels.Block.Block {
     description!: CMS.Model.ArticleListBlock.ArticleListBlock['description'];
     categoryLink?: Models.Link.Link;
     items!: Articles.Model.Articles;
+    meta?: CMS.Model.ArticleListBlock.ArticleListBlock['meta'];
 }

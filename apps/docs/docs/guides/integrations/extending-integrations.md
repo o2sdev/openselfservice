@@ -126,7 +126,7 @@ export class NotificationsController extends Notifications.Controller {
 You can follow the instructions from the [Switching integrations chapter](./switching-integrations.md) to replace the package used for the notifications with `@o2s/integrations.extended-notifications`. This then can allow you to
 
 - use the new field in mappers that use notifications:
-```typescript title="apps/api-harmonization/src/blocks/notification-list/notification-list.mapper.ts"
+```typescript title="packages/blocks/notification-list/src/api-harmonization/notification-list.mapper.ts"
 export const mapNotification = (notification: Notifications.Model.Notification): Notification => {
     return {
         id: notification.id,
@@ -136,7 +136,7 @@ export const mapNotification = (notification: Notifications.Model.Notification):
 };
 ```
 - use the new method in other services:
-```typescript title="apps/api-harmonization/src/blocks/notification-details/notification-details.service.ts"
+```typescript title="packages/blocks/notification-details/src/api-harmonization/notification-details.service.ts"
     getNotificationDetailsBlock(...): Observable<NotificationDetailsBlock> {
     const cms = this.cmsService.getNotificationDetailsBlock({ ...query, locale: headers['x-locale'] });
     const notification = this.notificationService.getLatestCriticalNotification(); // usage of the new method
