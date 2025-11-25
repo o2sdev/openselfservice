@@ -48,11 +48,6 @@ This metadata is used for versioning, publishing workflow, and cache invalidatio
 
 The content type for the templates is based on a simple system of slots that define some predefined location within the frontend app. The available templates are highly configurable and tailored to UI needs.
 
-Currently supported templates:
-
-- **OneColumnTemplate** - a single column layout with top, main, and bottom slots
-- **TwoColumnTemplate** - a two-column layout with top, left, right, and bottom slots
-
 Each slot is a reference field to a Block content type, where multiple instances can be placed (so, in other words, a single slot can accept multiple blocks through a collection reference).
 
 Unlike Strapi's dynamic zones, Contentful uses linked entry references. This means blocks are stored as separate entries and referenced by their entry ID, allowing for better reusability and content management.
@@ -67,43 +62,3 @@ To solve this issue, we've introduced a Block content type that represents a sin
 
 - a name mostly for internal use by the editors to identify each instance, e.g. "FAQ about the tickets" and "FAQ about the invoices",
 - content that's a reference to specific block content types (like BlockFaq, BlockTicketList, etc.).
-
-### Block variants
-
-Currently implemented block types include:
-
-- **BlockFaq** - FAQ component with title, subtitle, and accordion items
-- **BlockTicketList** - Ticket list with table configuration and field mappings
-- **BlockQuickLinks** - Quick links navigation component
-- **BlockCategory** - Category display component
-- **BlockCategoryList** - Category list component
-- **BlockArticleList** - Article list component
-
-Each block type has its own specific fields and configuration options. For example, the FAQ component consists of:
-
-- title and subtitle text fields
-- items collection (linked entries to ComponentFaqItem)
-- optional banner component
-
-While the FAQ component is quite simple and on the frontend renders only the static content from the CMS, it doesn't mean that only such components can be defined within Contentful. Another component example is the Ticket List, which on the frontend renders a table with the user's tickets. This one is more complex - aside from the title, it also handles:
-
-- fields that use a generic component that allows mapping fields in the API data model to more user-friendly labels (ComponentFieldMapping),
-- a table configuration that defines which columns should be displayed on the frontend (ComponentTable),
-- pagination settings (ComponentPagination).
-
-## Entry references vs dynamic zones
-
-A key difference between Contentful and Strapi is how they handle component composition:
-
-- **Strapi** uses dynamic zones, where components are embedded directly within the parent entry
-- **Contentful** uses entry references (linked entries), where components are stored as separate entries and referenced by ID
-
-This approach in Contentful provides several advantages:
-
-- Better content reusability (the same block can be referenced from multiple pages)
-- Easier content management (blocks can be edited independently)
-- Better performance (blocks can be cached separately)
-- More flexible content modeling (blocks can have their own relationships)
-
-However, it also requires more complex queries to resolve all referenced content, which is handled automatically by the integration's GraphQL queries.
-

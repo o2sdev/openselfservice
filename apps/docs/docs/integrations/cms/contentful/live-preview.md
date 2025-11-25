@@ -248,46 +248,6 @@ export const mapFaqBlock = ({
 };
 ```
 
-## Comparison with other CMS approaches
-
-Live Preview functionality varies significantly between different headless CMSes. This variation adds complexity when building a CMS-agnostic architecture.
-
-### Data attributes approach
-
-Some CMSes, including Contentful, use a data attributes approach:
-
-- The CMS provides an SDK that adds special data attributes to DOM elements
-- These attributes create a connection between rendered content and the corresponding content in the CMS
-- When a content editor clicks on an element in the preview, the SDK uses these attributes to identify which field to edit
-- Changes made in the CMS are pushed to the preview in real-time through WebSockets or similar technologies
-
-**CMSes using this approach:**
-- **Contentful** - Uses data attributes with Live Preview SDK
-- **Prismic** - Uses data attributes for its preview functionality with Slice Machine
-- **Kontent.ai** - Uses a similar approach with its Web Spotlight feature
-- **DatoCMS** - Uses data attributes with its Visual Editor
-
-### Content source maps with stega
-
-Other CMSes take a different approach using content source maps with steganography (stega):
-
-- Content source maps are metadata that map rendered content back to its source in the CMS, similar to how source maps work in JavaScript
-- Stega (steganography) embeds invisible metadata within the content itself, often using techniques like invisible Unicode characters or subtle CSS variations
-
-**CMSes using this approach:**
-- **Sanity.io** - Offers both approaches: traditional data attributes with its "Presentation Tool" and a newer stega-based approach with its "Visual Editing" feature
-- **Storyblok** - Uses a source mapping approach for its Visual Editor
-- **Builder.io** - Embeds metadata in the content for its visual editing experience
-- **Strapi** - Uses content source maps for its preview functionality
-
-### Trade-offs
-
-Each approach has its trade-offs:
-
-- **Data attributes** are more explicit but can add DOM clutter
-- **Stega approaches** are more elegant but potentially more fragile
-- Understanding these differences is crucial when designing a CMS-agnostic architecture that needs to support live preview across multiple systems
-
 ## Best practices
 
 1. **Only include metadata in preview mode** - Metadata should only be included when `isPreview` is `true` to avoid unnecessary data for regular users
@@ -301,7 +261,7 @@ Each approach has its trade-offs:
 1. **CMS-specific implementation** - The current implementation is specific to Contentful and would need to be adapted for other CMSes
 2. **Metadata overhead** - While metadata is only included in preview mode, it does add some overhead to the data structure
 3. **Complex nested structures** - Very complex nested structures may require careful metadata mapping
-4. **Real-time updates** - Live updates depend on WebSocket connections and may have latency in some network conditions
+4. **Real-time updates** - Live updates are currently not supported due to a different content structure on the frontend compared to the one returned from Contentful
 
 ## Additional resources
 

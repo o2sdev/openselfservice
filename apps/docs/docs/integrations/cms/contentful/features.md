@@ -1,31 +1,32 @@
 ---
-sidebar_position: 600
+sidebar_position: 50
 ---
 
 # Features
 
 This document provides an overview of features supported by the Contentful CMS integration.
 
-## Features support table
+## Overview
 
-| Feature                    | Status | Notes                                                                 |
-|----------------------------|--------|-----------------------------------------------------------------------|
-| Live Preview               | ✅     | Supported with LivePreviewProvider and metadata pattern                |
-| GraphQL API                | ✅     | Primary API for all content operations                                |
-| REST Delivery API           | ✅     | Used for specific operations like retrieving locales via getLocales  |
-| Preview API                | ✅     | Supported for draft/unpublished content                              |
-| Content Localization       | ✅     | Full multi-locale support                                            |
-| Multi-environment          | ✅     | Supported via CF_ENV environment variable                            |
-| Permissions/Roles          | ⚠️     | Partially supported - permissions field exists on Page, but full RBAC not implemented |
-| Themes/Layouts             | ✅     | Supported via OneColumn and TwoColumn templates                       |
-| Media Management           | ✅     | Supported via ComponentMedia content type                             |
-| SEO Metadata               | ✅     | Supported via PageSeo component                                      |
-| Field Mapping              | ✅     | Supported via ComponentFieldMapping for custom labels                 |
-| Table Configuration        | ✅     | Supported via ComponentTable for data table setup                    |
-| Pagination                 | ✅     | Supported via ComponentPagination                                    |
-| Cache Integration          | ✅     | Full cache support for optimized performance                         |
-| Code Generation            | ✅     | TypeScript types and SDK generated from GraphQL schema via graphql-codegen |
-| Type Safety                | ✅     | Full TypeScript type safety from GraphQL schema                      |
+| Feature              | Status | Notes                                                                                 |
+|----------------------| ------ |---------------------------------------------------------------------------------------|
+| GraphQL API          | ✅     | Primary API for all content operations                                                |
+| REST Delivery API    | ✅     | Used for specific operations like retrieving locales via getLocales                   |
+| Preview API          | ✅     | Supported for draft/unpublished content                                               |
+| Content Localization | ✅     | Full multi-locale support                                                             |
+| Multi-environment    | ✅     | Supported via CF_ENV environment variable                                             |
+| Permissions/Roles    | ⚠️     | Partially supported - permissions field exists on Page, but full RBAC not implemented |
+| Live Preview         | ✅     | Supported with LivePreviewProvider and metadata pattern                               |
+| Live updates         | ❌     | Not supported                                                                         |
+| Themes/Layouts       | ✅     | Supported via OneColumn and TwoColumn templates                                       |
+| Media Management     | ✅     | Supported via ComponentMedia content type                                             |
+| SEO Metadata         | ✅     | Supported via PageSeo component                                                       |
+| Field Mapping        | ✅     | Supported via ComponentFieldMapping for custom labels                                 |
+| Table Configuration  | ✅     | Supported via ComponentTable for data table setup                                     |
+| Pagination           | ✅     | Supported via ComponentPagination                                                     |
+| Cache Integration    | ✅     | Full cache support for optimized performance                                          |
+| Code Generation      | ✅     | TypeScript types and SDK generated from GraphQL schema via graphql-codegen            |
+| Type Safety          | ✅     | Full TypeScript type safety from GraphQL schema                                       |
 
 ## Feature details
 
@@ -152,4 +153,3 @@ TypeScript types and SDK methods are automatically generated from GraphQL querie
 ### Type Safety
 
 Full TypeScript type safety is provided through generated types from the GraphQL schema, ensuring compile-time validation. For detailed information, see the [GraphQL documentation](./graphql.md#type-safety-benefits).
-
