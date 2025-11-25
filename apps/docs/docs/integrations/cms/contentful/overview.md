@@ -6,22 +6,46 @@ sidebar_position: 100
 
 This integration provides a full integration with [Contentful CMS](https://www.contentful.com/).
 
-## Requirements
+## Installation
 
-To use it, you must install it into the API Harmonization server by running:
+First, install the Contentful integration package:
 
 ```shell
 npm install @o2s/integrations.contentful-cms --workspace=@o2s/api
 ```
 
-This integration relies upon the following environmental variables:
+## Environment variables
 
-| name              | type   | description                                    |
-|-------------------|--------|------------------------------------------------|
-| CF_SPACE_ID       | string | the Contentful space ID                       |
-| CF_ENV             | string | the Contentful environment ID                  |
-| CF_TOKEN           | string | the Contentful delivery API token             |
-| CF_PREVIEW_TOKEN   | string | the Contentful preview API token (optional, for Live Preview) |
+Configure the following environment variables in your API Harmonization server:
+
+| name             | type   | description                                       | required                       |
+| ---------------- | ------ | ------------------------------------------------- | ------------------------------ |
+| CF_SPACE_ID      | string | the Contentful space ID                           | yes                            |
+| CF_ENV           | string | the Contentful environment ID (default: `master`) | yes                            |
+| CF_TOKEN         | string | the Contentful delivery API token                 | yes                            |
+| CF_PREVIEW_TOKEN | string | the Contentful preview API token                  | no (required for Live Preview) |
+
+You can obtain these values from your Contentful space settings:
+
+1. **Space ID**: Found in your Contentful space settings under "General"
+2. **Environment ID**: Usually `master` for production, or create custom environments
+3. **Delivery API token**: Create in Contentful under "Settings" → "API keys" → "Content delivery / preview tokens"
+4. **Preview API token**: Create in Contentful under "Settings" → "API keys" → "Content preview tokens"
+
+## Content model import
+
+To start, go to our resource repository where you can find the instructions on how to import the content model into your own Contentful space. Depending on which starter you use, this is one of:
+
+- [**Open Self Service** resources](https://github.com/o2sdev/openselfservice-resources/tree/main/packages/cms/contentful/o2s)
+- [**DXP Starter Kit** resources](https://github.com/o2sdev/openselfservice-resources/tree/main/packages/cms/contentful/dxp)
+
+## Code generation
+
+After setting up your Contentful space and configuring the environment variables, you need to generate TypeScript types from your GraphQL schema. Run:
+
+```shell
+npm run generate
+```
 
 ## Supported modules
 
@@ -65,4 +89,3 @@ Cached entries are [stringified](https://www.npmjs.com/package/flatted) and save
 ## Additional resources
 
 For a detailed implementation story and technical deep-dive, see our blog article: [Integrating Contentful with Live Preview into composable apps](/blog/integrating-contentful-with-live-preview-into-composable-apps).
-
