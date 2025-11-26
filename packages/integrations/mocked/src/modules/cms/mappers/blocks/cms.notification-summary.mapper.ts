@@ -2,80 +2,107 @@ import { CMS } from '@o2s/framework/modules';
 
 const MOCK_NOTIFICATION_SUMMARY_BLOCK_EN: CMS.Model.NotificationSummaryBlock.NotificationSummaryBlock = {
     id: 'notification-summary-1',
-    title: 'Notification Summary',
     layout: 'horizontal',
-    high: {
-        title: 'High Priority',
-        icon: 'AlertCircle',
-        message: 'High priority notifications',
-    },
-    medium: {
-        title: 'Medium Priority',
-        icon: 'AlertCircle',
-        message: 'Medium priority notifications',
-    },
-    low: {
-        title: 'Low Priority',
-        icon: 'AlertCircle',
-        message: 'Low priority notifications',
-    },
-    critical: {
-        title: 'Critical Priority',
-        icon: 'AlertCircle',
-        message: 'Critical priority notifications',
-    },
+    infoCards: [
+        {
+            title: 'Critical Priority',
+            icon: 'AlertCircle',
+            description: 'Critical priority notifications',
+            variant: 'CRITICAL',
+            value: 0,
+        },
+        {
+            title: 'High Priority',
+            icon: 'AlertCircle',
+            description: 'High priority notifications',
+            variant: 'HIGH',
+            value: 0,
+        },
+        {
+            title: 'Medium Priority',
+            icon: 'AlertCircle',
+            description: 'Medium priority notifications',
+            variant: 'MEDIUM',
+            value: 0,
+        },
+        {
+            title: 'Low Priority',
+            icon: 'AlertCircle',
+            description: 'Low priority notifications',
+            variant: 'LOW',
+            value: 0,
+        },
+    ],
 };
 
 const MOCK_NOTIFICATION_SUMMARY_BLOCK_DE: CMS.Model.NotificationSummaryBlock.NotificationSummaryBlock = {
     id: 'notification-summary-1',
-    title: 'Benachrichtigungssumme',
     layout: 'horizontal',
-    high: {
-        title: 'Hohe Priorität',
-        icon: 'AlertCircle',
-        message: 'Benachrichtigungen mit hoher Priorität',
-    },
-    medium: {
-        title: 'Mittlere Priorität',
-        icon: 'AlertCircle',
-        message: 'Benachrichtigungen mit mittlerer Priorität',
-    },
-    low: {
-        title: 'Niedrige Priorität',
-        icon: 'AlertCircle',
-        message: 'Benachrichtigungen mit niedriger Priorität',
-    },
-    critical: {
-        title: 'Kritische Priorität',
-        icon: 'AlertCircle',
-        message: 'Benachrichtigungen mit kritischer Priorität',
-    },
+    infoCards: [
+        {
+            title: 'Kritische Priorität',
+            icon: 'AlertCircle',
+            description: 'Benachrichtigungen mit kritischer Priorität',
+            variant: 'CRITICAL',
+            value: 0,
+        },
+        {
+            title: 'Hohe Priorität',
+            icon: 'AlertCircle',
+            description: 'Benachrichtigungen mit hoher Priorität',
+            variant: 'HIGH',
+            value: 0,
+        },
+        {
+            title: 'Mittlere Priorität',
+            icon: 'AlertCircle',
+            description: 'Benachrichtigungen mit mittlerer Priorität',
+            variant: 'MEDIUM',
+            value: 0,
+        },
+        {
+            title: 'Niedrige Priorität',
+            icon: 'AlertCircle',
+            description: 'Benachrichtigungen mit niedriger Priorität',
+            variant: 'LOW',
+            value: 0,
+        },
+    ],
 };
 
 const MOCK_NOTIFICATION_SUMMARY_BLOCK_PL: CMS.Model.NotificationSummaryBlock.NotificationSummaryBlock = {
     id: 'notification-summary-1',
-    title: 'Suma powiadomień',
     layout: 'horizontal',
-    high: {
-        title: 'Wysoki priorytet',
-        icon: 'AlertCircle',
-        message: 'Powiadomienia o wysokim priorytecie',
-    },
-    medium: {
-        title: 'Średni priorytet',
-        icon: 'AlertCircle',
-        message: 'Powiadomienia o średnim priorytecie',
-    },
-    low: {
-        title: 'Niski priorytet',
-        icon: 'AlertCircle',
-        message: 'Powiadomienia o niskim priorytecie',
-    },
-    critical: {
-        title: 'Krytyczny priorytet',
-        icon: 'AlertCircle',
-        message: 'Powiadomienia o krytycznym priorytecie',
-    },
+    infoCards: [
+        {
+            title: 'Krytyczny priorytet',
+            icon: 'AlertCircle',
+            description: 'Powiadomienia o krytycznym priorytecie',
+            variant: 'CRITICAL',
+            value: 0,
+        },
+        {
+            title: 'Wysoki priorytet',
+            icon: 'AlertCircle',
+            description: 'Powiadomienia o wysokim priorytecie',
+            variant: 'HIGH',
+            value: 0,
+        },
+        {
+            title: 'Średni priorytet',
+            icon: 'AlertCircle',
+            description: 'Powiadomienia o średnim priorytecie',
+            variant: 'MEDIUM',
+            value: 0,
+        },
+        {
+            title: 'Niski priorytet',
+            icon: 'AlertCircle',
+            description: 'Powiadomienia o niskim priorytecie',
+            variant: 'LOW',
+            value: 0,
+        },
+    ],
 };
 
 export const mapNotificationSummaryBlock = (

@@ -17,29 +17,13 @@ export const mapNotificationSummary = (
         {} as Record<Notifications.Model.NotificationPriority, number>,
     );
 
-    const infoCards: NotificationSummaryInfoCard[] = [];
-
-    const priorities = ['CRITICAL', 'HIGH', 'MEDIUM', 'LOW'] as Notifications.Model.NotificationPriority[];
-
-    priorities.forEach((priority) => {
-        const cmsPriorityData =
-            cms[
-                priority.toLowerCase() as keyof Pick<
-                    CMS.Model.NotificationSummaryBlock.NotificationSummaryBlock,
-                    'low' | 'critical' | 'high' | 'medium'
-                >
-            ];
-
-        if (cmsPriorityData) {
-            infoCards.push({
-                title: cmsPriorityData.title,
-                icon: cmsPriorityData.icon,
-                value: priorityCounts[priority] || 0,
-                description: cmsPriorityData.message,
-                variant: priority,
-            });
-        }
-    });
+    const infoCards: NotificationSummaryInfoCard[] = cms.infoCards.map((card) => ({
+        title: card.title,
+        icon: card.icon,
+        value: priorityCounts[card.variant] ?? card.value,
+        description: card.description,
+        variant: card.variant,
+    }));
 
     return {
         __typename: 'NotificationSummaryBlock',

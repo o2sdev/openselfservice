@@ -1,10 +1,16 @@
-import { Block, InfoCard } from '@/utils/models';
+import { NotificationPriority } from '@/modules/notifications/notifications.model';
+
+import { Block } from '@/utils/models';
+
+export class NotificationSummaryInfoCard {
+    title!: string;
+    icon?: string;
+    value!: number;
+    description?: string;
+    variant!: NotificationPriority;
+}
 
 export class NotificationSummaryBlock extends Block.Block {
-    title?: string;
-    high?: InfoCard.InfoCard;
-    medium?: InfoCard.InfoCard;
-    low?: InfoCard.InfoCard;
-    critical?: InfoCard.InfoCard;
     layout?: 'vertical' | 'horizontal';
+    infoCards!: NotificationSummaryInfoCard[];
 }
