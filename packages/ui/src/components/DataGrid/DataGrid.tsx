@@ -74,22 +74,14 @@ export function DataGrid<T extends Record<string, any>>({
     const bottomColumn = findColumnById(slots?.bottom);
 
     // Get body columns (exclude columns used in slots)
-    const getBodyColumns = (): DataListColumnConfig<T>[] => {
-        const slotIds = [slots?.top, slots?.left, slots?.right, slots?.bottom].filter(Boolean) as string[];
-        return columns.filter((col) => !slotIds.includes(String(col.id)));
-    };
+    const slotIds = [slots?.top, slots?.left, slots?.right, slots?.bottom].filter(Boolean) as string[];
+    const bodyColumns = columns.filter((col) => !slotIds.includes(String(col.id)));
 
     return (
         <div className={gridClasses}>
             {data.map((item, index) => {
                 const rowKey = rowKeyExtractor(item, index);
                 const rowClassName = getRowClassName ? getRowClassName(item) : undefined;
-                const bodyColumns = getBodyColumns();
-
-                // Split body columns into two groups for two-column layout
-                const midPoint = Math.ceil(bodyColumns.length / 2);
-                const leftColumns = bodyColumns.slice(0, midPoint);
-                const rightColumns = bodyColumns.slice(midPoint);
 
                 return (
                     <Card key={rowKey} className={cn('flex flex-col', rowClassName)}>
@@ -138,45 +130,23 @@ export function DataGrid<T extends Record<string, any>>({
 
                         <CardContent className="flex-1 pb-3">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div className="flex flex-col gap-3">
-                                    {leftColumns.map((column) => {
-                                        const value = item[column.id];
-                                        const cellContent = renderCell(value as Record<string, unknown>, item, column);
+                                {bodyColumns.map((column) => {
+                                    const value = item[column.id];
+                                    const cellContent = renderCell(value as Record<string, unknown>, item, column);
 
-                                        if (!cellContent) {
-                                            return null;
-                                        }
+                                    if (cellContent == null) {
+                                        return null;
+                                    }
 
-                                        return (
-                                            <div key={String(column.id)} className="flex flex-col gap-1">
-                                                <Typography variant="small" className="text-muted-foreground">
-                                                    {column.title}
-                                                </Typography>
-                                                <div className="text-sm font-medium">{cellContent}</div>
-                                            </div>
-                                        );
-                                    })}
-                                </div>
-
-                                <div className="flex flex-col gap-3">
-                                    {rightColumns.map((column) => {
-                                        const value = item[column.id];
-                                        const cellContent = renderCell(value as Record<string, unknown>, item, column);
-
-                                        if (!cellContent) {
-                                            return null;
-                                        }
-
-                                        return (
-                                            <div key={String(column.id)} className="flex flex-col gap-1">
-                                                <Typography variant="small" className="text-muted-foreground">
-                                                    {column.title}
-                                                </Typography>
-                                                <div className="text-sm font-medium">{cellContent}</div>
-                                            </div>
-                                        );
-                                    })}
-                                </div>
+                                    return (
+                                        <div key={String(column.id)} className="flex flex-col gap-1">
+                                            <Typography variant="small" className="text-muted-foreground">
+                                                {column.title}
+                                            </Typography>
+                                            <div className="text-sm font-medium">{cellContent}</div>
+                                        </div>
+                                    );
+                                })}
                             </div>
                         </CardContent>
 
