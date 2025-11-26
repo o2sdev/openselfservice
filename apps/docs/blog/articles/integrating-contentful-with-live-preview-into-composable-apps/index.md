@@ -295,20 +295,7 @@ It's important to note that live preview functionality varies significantly betw
 
 Some CMSes, like Contentful, use an approach with explicit connection between the app and the CMS editor. In this model, the CMS provides an SDK that adds special data attributes to DOM elements. These attributes create a connection between rendered content and the corresponding content in the CMS. When a content editor clicks on an element in the preview, the SDK uses these attributes to identify which field to edit in the CMS interface. Changes made in the CMS are pushed to the preview in real-time through WebSockets or similar technologies.
 
-Besides Contentful, other CMSes that use variations of this approach include:
-
-- **Prismic** uses data attributes for its preview functionality with its Slice Machine
-- **Kontent.ai** which uses a similar approach with its Web Spotlight feature
-- **DatoCMS** with its Visual Editor that uses data attributes for field highlighting
-
 Other CMSes take a different approach using content [source maps with steganography](https://www.sanity.io/docs/visual-editing/stega#fad3406bd530). Content source maps are metadata that map rendered content back to its source in the CMS, similar to how source maps work in JavaScript. Stega (steganography) embeds invisible metadata within the content itself, often using techniques like invisible Unicode characters or subtle CSS variations.
-
-Examples of CMSes using these approaches include:
-
-- **Sanity.io** offers both approaches: traditional data attributes with its "Presentation Tool" and a newer stega-based approach with its "Visual Editing" feature
-- **Storyblok** uses a source mapping approach for its Visual Editor
-- **Builder.io** embeds metadata in the content for its visual editing experience
-- **Strapi** uses content source maps for its preview functionality as documented in their official documentation
 
 Each approach has its trade-offs. Data attributes are more explicit but can add DOM clutter, while stega approaches are more elegant but potentially more fragile. Understanding these differences is crucial when designing a CMS-agnostic architecture that needs to support live preview across multiple systems.
 
