@@ -37,3 +37,4 @@ export * as BentoGridBlock from './models/blocks/bento-grid.model';
 export * as CtaSectionBlock from './models/blocks/cta-section.model';
 export * as DocumentListBlock from './models/blocks/document-list.model';
 export * as FeatureSectionBlock from './models/blocks/feature-section.model';
+export * as FeatureSectionGridBlock from './models/blocks/feature-section-grid.model';
