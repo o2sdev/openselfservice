@@ -3,6 +3,7 @@
     "version": "0.1.0",
     "private": false,
     "license": "MIT",
+    "description": "Contentful CMS integration with GraphQL API and live preview support",
     "exports": {
         "./integration": "./dist/src/integration.js",
         "./live-preview": "./dist/src/modules/cms/live-preview/index.js"

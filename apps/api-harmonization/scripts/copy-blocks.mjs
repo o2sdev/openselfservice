@@ -14,7 +14,10 @@ const API_HARMONIZATION_DIST = path.join(__dirname, '../dist/packages/blocks');
 const BLOCK_DIST_PATTERN = 'dist/api-harmonization/api-harmonization';
 
 /**
- * Copies files from block dist to api-harmonization dist
+ * Copies files from block dist to api-harmonization dist.
+ * Only copies files that are newer than existing targets or don't exist.
+ *
+ * @param {string} blockName - Name of the block to copy
  * @returns {boolean} true if files were copied, false otherwise
  */
 function copyBlockFiles(blockName) {
@@ -22,45 +25,48 @@ function copyBlockFiles(blockName) {
     const blockDistDir = path.join(blockDir, BLOCK_DIST_PATTERN);
     const targetDir = path.join(API_HARMONIZATION_DIST, blockName, 'src/api-harmonization');
 
-    // Check if block has dist
     if (!fs.existsSync(blockDistDir)) {
         return false;
     }
 
-    // Create target directory if it doesn't exist
     if (!fs.existsSync(targetDir)) {
         fs.mkdirSync(targetDir, { recursive: true });
     }
 
-    // Check if files need to be copied (compare timestamps)
-    let needsCopy = false;
-    const files = fs.readdirSync(blockDistDir);
+    const distFiles = fs.readdirSync(blockDistDir);
     let copiedCount = 0;
+    let hasChanges = false;
 
-    files.forEach((file) => {
-        const sourceFile = path.join(blockDistDir, file);
-        const targetFile = path.join(targetDir, file);
+    distFiles.forEach((fileName) => {
+        const sourceFilePath = path.join(blockDistDir, fileName);
+        const targetFilePath = path.join(targetDir, fileName);
 
-        // Check if it's a file (not a directory)
-        if (fs.statSync(sourceFile).isFile()) {
-            // Copy if target doesn't exist or source is newer
-            if (!fs.existsSync(targetFile) || fs.statSync(sourceFile).mtimeMs > fs.statSync(targetFile).mtimeMs) {
-                fs.copyFileSync(sourceFile, targetFile);
-                copiedCount++;
-                needsCopy = true;
-            }
+        if (!fs.statSync(sourceFilePath).isFile()) {
+            return;
+        }
+
+        const shouldCopy =
+            !fs.existsSync(targetFilePath) || fs.statSync(sourceFilePath).mtimeMs > fs.statSync(targetFilePath).mtimeMs;
+
+        if (shouldCopy) {
+            fs.copyFileSync(sourceFilePath, targetFilePath);
+            copiedCount++;
+            hasChanges = true;
         }
     });
 
-    if (needsCopy) {
+    if (hasChanges) {
         console.log(`✅ Copied ${copiedCount} files from block ${blockName}`);
     }
 
-    return needsCopy;
+    return hasChanges;
 }
 
 /**
- * Builds a specific block
+ * Builds a specific block by running npm build command.
+ *
+ * @param {string} blockName - Name of the block to build
+ * @throws {Error} If build fails
  */
 function buildBlock(blockName) {
     const blockDir = path.join(BLOCKS_DIR, blockName);
@@ -85,56 +91,84 @@ function buildBlock(blockName) {
 }
 
 /**
- * Checks if block needs to be rebuilt (compares source file timestamps with dist)
+ * Finds the latest modification time of TypeScript files in a directory recursively.
+ *
+ * @param {string} directoryPath - Directory to scan
+ * @returns {number} Latest modification time in milliseconds, or 0 if no files found
+ */
+function findLatestSourceFileTime(directoryPath) {
+    let latestTime = 0;
+
+    function scanDirectory(currentDir) {
+        const directoryItems = fs.readdirSync(currentDir);
+
+        directoryItems.forEach((itemName) => {
+            const itemPath = path.join(currentDir, itemName);
+            const itemStats = fs.statSync(itemPath);
+
+            if (itemStats.isDirectory()) {
+                scanDirectory(itemPath);
+            } else if (itemName.endsWith('.ts')) {
+                latestTime = Math.max(latestTime, itemStats.mtimeMs);
+            }
+        });
+    }
+
+    scanDirectory(directoryPath);
+    return latestTime;
+}
+
+/**
+ * Finds the latest modification time of files in dist directory.
+ *
+ * @param {string} distDirectoryPath - Dist directory to scan
+ * @returns {number} Latest modification time in milliseconds, or 0 if no files found
+ */
+function findLatestDistFileTime(distDirectoryPath) {
+    if (!fs.existsSync(distDirectoryPath)) {
+        return 0;
+    }
+
+    let latestTime = 0;
+    const distFiles = fs.readdirSync(distDirectoryPath);
+
+    distFiles.forEach((fileName) => {
+        const filePath = path.join(distDirectoryPath, fileName);
+        if (fs.statSync(filePath).isFile()) {
+            latestTime = Math.max(latestTime, fs.statSync(filePath).mtimeMs);
+        }
+    });
+
+    return latestTime;
+}
+
+/**
+ * Determines if a block needs to be rebuilt by comparing source and dist timestamps.
+ *
+ * @param {string} blockName - Name of the block to check
+ * @returns {boolean} true if rebuild is needed, false otherwise
  */
 function needsRebuild(blockName) {
     const blockDir = path.join(BLOCKS_DIR, blockName);
     const blockDistDir = path.join(blockDir, BLOCK_DIST_PATTERN);
     const sourceDir = path.join(blockDir, 'src/api-harmonization');
 
-    // If dist doesn't exist, need to build
     if (!fs.existsSync(blockDistDir)) {
         return true;
     }
 
-    // If source doesn't exist, skip
     if (!fs.existsSync(sourceDir)) {
         return false;
     }
 
-    // Check timestamp of latest source file
-    let latestSourceTime = 0;
-    function checkDir(dir) {
-        const items = fs.readdirSync(dir);
-        items.forEach((item) => {
-            const itemPath = path.join(dir, item);
-            const stat = fs.statSync(itemPath);
-            if (stat.isDirectory()) {
-                checkDir(itemPath);
-            } else if (item.endsWith('.ts')) {
-                latestSourceTime = Math.max(latestSourceTime, stat.mtimeMs);
-            }
-        });
-    }
-    checkDir(sourceDir);
-
-    // Check timestamp of latest file in dist
-    let latestDistTime = 0;
-    if (fs.existsSync(blockDistDir)) {
-        const distFiles = fs.readdirSync(blockDistDir);
-        distFiles.forEach((file) => {
-            const filePath = path.join(blockDistDir, file);
-            if (fs.statSync(filePath).isFile()) {
-                latestDistTime = Math.max(latestDistTime, fs.statSync(filePath).mtimeMs);
-            }
-        });
-    }
+    const latestSourceTime = findLatestSourceFileTime(sourceDir);
+    const latestDistTime = findLatestDistFileTime(blockDistDir);
 
     return latestSourceTime > latestDistTime;
 }
 
 /**
- * Copies all blocks
+ * Processes all blocks: rebuilds if needed and copies files to api-harmonization dist.
  */
 function copyAllBlocks() {
     if (!fs.existsSync(BLOCKS_DIR)) {
@@ -142,51 +176,29 @@ function copyAllBlocks() {
         return;
     }
 
-    const blocks = fs.readdirSync(BLOCKS_DIR).filter((item) => {
-        const itemPath = path.join(BLOCKS_DIR, item);
+    const blockDirectories = fs.readdirSync(BLOCKS_DIR).filter((itemName) => {
+        const itemPath = path.join(BLOCKS_DIR, itemName);
         return fs.statSync(itemPath).isDirectory();
     });
 
-    let processedCount = 0;
-
-    blocks.forEach((blockName) => {
+    blockDirectories.forEach((blockName) => {
         try {
-            let wasProcessed = false;
-
-            // Check if block needs to be rebuilt
             if (needsRebuild(blockName)) {
                 buildBlock(blockName);
-                wasProcessed = true;
             }
 
-            // Copy files (even if no rebuild, dist might be newer)
-            const filesCopied = copyBlockFiles(blockName);
-            if (filesCopied) {
-                wasProcessed = true;
-            }
-
-            // Only log if something was actually processed
-            if (wasProcessed) {
-                processedCount++;
-            }
+            copyBlockFiles(blockName);
         } catch (error) {
             console.error(`❌ Error processing block ${blockName}:`, error.message);
         }
     });
-
-    if (processedCount === 0) {
-        // Silent - no changes detected
-    }
 }
 
-// If run with argument (block name), copy only that block
-const blockName = process.argv[2];
+const blockNameArgument = process.argv[2];
 
-if (blockName) {
-    // Build and copy only specific block
-    buildBlock(blockName);
-    copyBlockFiles(blockName);
+if (blockNameArgument) {
+    buildBlock(blockNameArgument);
+    copyBlockFiles(blockNameArgument);
 } else {
-    // Copy all blocks
     copyAllBlocks();
 }

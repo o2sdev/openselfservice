@@ -3,6 +3,7 @@
     "version": "1.3.0",
     "private": false,
     "license": "MIT",
+    "description": "Algolia Search integration for full-text search capabilities",
     "exports": {
         "./integration": "./dist/integration.js"
     },

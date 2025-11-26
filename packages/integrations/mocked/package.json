@@ -3,6 +3,7 @@
     "version": "1.12.0",
     "private": false,
     "license": "MIT",
+    "description": "Local integration with mocked data for development and testing",
     "exports": {
         "./integration": "./dist/integration.js",
         "./sdk": "./dist/sdk/index.js",

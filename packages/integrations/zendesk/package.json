@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": false,
   "license": "MIT",
+  "description": "Zendesk integration for customer support ticket management",
   "exports": {
     "./integration": "./dist/src/integration.js"
   },

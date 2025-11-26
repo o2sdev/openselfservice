@@ -3,6 +3,7 @@
     "version": "2.6.3",
     "private": false,
     "license": "MIT",
+    "description": "Strapi CMS integration with GraphQL API for content management",
     "exports": {
         "./integration": "./dist/src/integration.js"
     },

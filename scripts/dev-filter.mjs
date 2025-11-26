@@ -1,174 +1,189 @@
 #!/usr/bin/env node
 
 /**
- * Helper script for building Turbo filter for dev packages
+ * Builds Turbo filter for dev packages with interactive integration selection.
+ * Dynamically discovers integrations from packages/integrations directory.
+ *
  * Usage:
- *   npm run dev                    - interactive wizard
- *   INTEGRATIONS=mocked npm run dev - directly with environment variable
+ *   npm run dev                    - runs with mocked integration (default)
+ *   npm run dev:select             - shows interactive wizard for integration selection
+ *   INTEGRATIONS=mocked,algolia npm run dev - directly specify integrations via env var
  */
 
 import { spawn } from 'child_process';
 import prompts from 'prompts';
-import { readFileSync } from 'fs';
+import { readFileSync, readdirSync, statSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const rootDir = join(__dirname, '..');
+const integrationsDir = join(rootDir, 'packages/integrations');
 
-// Default to mocked only
-const defaultIntegrations = ['mocked'];
-
-// Map integration names to their package paths and display names
-const integrationConfig = {
-    mocked: {
-        path: 'packages/integrations/mocked',
-        title: 'Mocked',
-        fallbackDescription: 'Local integration with mocked data (always selected)'
-    },
-    algolia: {
-        path: 'packages/integrations/algolia',
-        title: 'Algolia',
-        fallbackDescription: 'Integration with Algolia Search'
-    },
-    medusajs: {
-        path: 'packages/integrations/medusajs',
-        title: 'MedusaJS',
-        fallbackDescription: 'Integration with MedusaJS e-commerce'
-    },
-    redis: {
-        path: 'packages/integrations/redis',
-        title: 'Redis',
-        fallbackDescription: 'Integration with Redis cache'
-    },
-    'strapi-cms': {
-        path: 'packages/integrations/strapi-cms',
-        title: 'Strapi CMS',
-        fallbackDescription: 'Integration with Strapi CMS'
-    },
-    zendesk: {
-        path: 'packages/integrations/zendesk',
-        title: 'Zendesk',
-        fallbackDescription: 'Integration with Zendesk support'
-    }
-};
+const DEFAULT_INTEGRATIONS = ['mocked'];
 
 /**
- * Load description from package.json for an integration
+ * Converts package name or directory name to display title.
+ * Examples: '@o2s/integrations.contentful-cms' -> 'Contentful CMS', 'strapi-cms' -> 'Strapi CMS'
  */
-function getIntegrationDescription(integrationKey) {
-    const config = integrationConfig[integrationKey];
-    if (!config) {
-        return 'Integration description not available';
-    }
-
-    try {
-        const packageJsonPath = join(rootDir, config.path, 'package.json');
-        const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf-8'));
-        
-        // Try to get description from package.json
-        if (packageJson.description) {
-            return packageJson.description;
-        }
-        
-        // Fallback to default description
-        return config.fallbackDescription;
-    } catch (error) {
-        // If file doesn't exist or can't be read, use fallback
-        return config.fallbackDescription;
-    }
+function formatTitle(packageName, directoryName) {
+    const packageNameMatch = packageName.match(/@o2s\/integrations\.(.+)/);
+    const nameToFormat = packageNameMatch ? packageNameMatch[1] : directoryName;
+    
+    return nameToFormat
+        .split('-')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
 }
 
 /**
- * Build available integrations list with descriptions from package.json
+ * Discovers all integrations from packages/integrations directory.
+ * Reads package.json for each integration to extract metadata.
+ *
+ * @returns {Object} Object containing integrations metadata and name mapping
  */
-function getAvailableIntegrations() {
-    return Object.entries(integrationConfig).map(([value, config]) => {
-        const description = getIntegrationDescription(value);
-        const isMocked = value === 'mocked';
+function discoverIntegrations() {
+    const integrations = {};
+    const integrationMap = {};
+    
+    try {
+        const directoryEntries = readdirSync(integrationsDir);
+        
+        for (const entry of directoryEntries) {
+            const integrationPath = join(integrationsDir, entry);
+            
+            if (!statSync(integrationPath).isDirectory()) {
+                continue;
+            }
+            
+            const packageJsonPath = join(integrationPath, 'package.json');
+            try {
+                const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf-8'));
+                const packageName = packageJson.name;
+                
+                if (!packageName || !packageName.startsWith('@o2s/integrations.')) {
+                    continue;
+                }
+                
+                const integrationKey = entry;
+                const description = packageJson.description || 
+                    `Integration with ${formatTitle(packageName, entry)}`;
+                
+                integrations[integrationKey] = {
+                    key: integrationKey,
+                    packageName: packageName,
+                    title: formatTitle(packageName, entry),
+                    description: description,
+                    path: `packages/integrations/${entry}`
+                };
+                
+                integrationMap[integrationKey] = packageName;
+                
+                if (integrationKey.includes('-cms')) {
+                    const alias = integrationKey.replace('-cms', '');
+                    integrationMap[alias] = packageName;
+                }
+                
+            } catch (error) {
+                console.warn(`⚠️  Skipping ${entry}: ${error.message}`);
+                continue;
+            }
+        }
+    } catch (error) {
+        console.error(`❌ Error scanning integrations directory: ${error.message}`);
+        process.exit(1);
+    }
+    
+    return { integrations, integrationMap };
+}
+
+/**
+ * Builds available integrations list for interactive wizard.
+ * Excludes mocked from the list as it's always included automatically.
+ * Sorts remaining integrations alphabetically.
+ */
+function getAvailableIntegrations(integrationsData) {
+    const { integrations } = integrationsData;
+    
+    const integrationKeys = Object.keys(integrations)
+        .filter(integrationKey => integrationKey !== 'mocked')
+        .sort((firstKey, secondKey) => firstKey.localeCompare(secondKey));
+    
+    return integrationKeys.map(integrationKey => {
+        const integration = integrations[integrationKey];
         
         return {
-            title: config.title,
-            value: value,
-            description: description,
-            selected: isMocked,
+            title: integration.title,
+            value: integrationKey,
+            description: integration.description,
+            selected: false,
             disabled: false
         };
     });
 }
 
+function ensureMockedIncluded(selectedIntegrations) {
+    if (!selectedIntegrations.includes('mocked')) {
+        return ['mocked', ...selectedIntegrations];
+    }
+    
+    const mockedIndex = selectedIntegrations.indexOf('mocked');
+    if (mockedIndex > 0) {
+        const reordered = [...selectedIntegrations];
+        reordered.splice(mockedIndex, 1);
+        reordered.unshift('mocked');
+        return reordered;
+    }
+    
+    return selectedIntegrations;
+}
+
+async function promptForIntegrations(integrationsData) {
+    const availableIntegrations = getAvailableIntegrations(integrationsData);
+
+    const response = await prompts({
+        type: 'multiselect',
+        name: 'integrations',
+        message: 'Select additional integrations to run (mocked is always included):',
+        choices: availableIntegrations,
+        initial: 0,
+        hint: '- Space: select/deselect, Enter: confirm',
+        instructions: false
+    });
+
+    if (!response.integrations || response.integrations.length === 0) {
+        console.log('\n❌ Cancelled. Running with default integration (mocked)...');
+        return DEFAULT_INTEGRATIONS;
+    }
+
+    return ensureMockedIncluded(response.integrations);
+}
+
 async function main() {
-    // Get integrations from environment variable or arguments
-    const integrationsEnv = process.env.INTEGRATIONS;
-    const integrationsArg = process.argv[2]?.replace(/^--integrations=/, '');
-    const skipWizard = integrationsEnv || integrationsArg || process.env.SKIP_WIZARD === 'true';
+    const integrationsData = discoverIntegrations();
+    const { integrations, integrationMap } = integrationsData;
+    
+    const integrationsFromEnv = process.env.INTEGRATIONS;
+    const integrationsFromArg = process.argv[2]?.replace(/^--integrations=/, '');
+    const shouldSkipWizard = integrationsFromEnv || integrationsFromArg || process.env.SKIP_WIZARD === 'true';
 
-    let integrations = defaultIntegrations;
+    let selectedIntegrations = DEFAULT_INTEGRATIONS;
 
-    // If environment variable or argument exists, use them (skip wizard)
-    if (integrationsArg) {
-        const selected = integrationsArg.split(/[+,]/).map(i => i.trim()).filter(Boolean);
-        // Always ensure mocked is included
-        integrations = selected.includes('mocked') ? selected : ['mocked', ...selected];
-    } else if (integrationsEnv) {
-        const selected = integrationsEnv.split(/[+,]/).map(i => i.trim()).filter(Boolean);
-        // Always ensure mocked is included
-        integrations = selected.includes('mocked') ? selected : ['mocked', ...selected];
-    } else if (!skipWizard) {
-        // Show interactive wizard only if no environment variable and TTY is available
-        const showWizard = process.stdout.isTTY && process.stdin.isTTY;
+    if (integrationsFromArg) {
+        const parsedIntegrations = integrationsFromArg.split(/[+,]/).map(integration => integration.trim()).filter(Boolean);
+        selectedIntegrations = ensureMockedIncluded(parsedIntegrations);
+    } else if (integrationsFromEnv) {
+        const parsedIntegrations = integrationsFromEnv.split(/[+,]/).map(integration => integration.trim()).filter(Boolean);
+        selectedIntegrations = ensureMockedIncluded(parsedIntegrations);
+    } else if (!shouldSkipWizard) {
+        const isInteractiveTerminal = process.stdout.isTTY && process.stdin.isTTY;
         
-        if (showWizard) {
-            // Load integrations with descriptions from package.json
-            const availableIntegrations = getAvailableIntegrations();
-            
-            // Create custom choices with mocked always selected and marked as always selected
-            const customChoices = availableIntegrations.map((choice) => {
-                if (choice.value === 'mocked') {
-                    return {
-                        ...choice,
-                        title: 'Mocked (always selected)',
-                        selected: true,
-                        disabled: false
-                    };
-                }
-                return choice;
-            });
-
-            // Show wizard with checkboxes
-            const response = await prompts({
-                type: 'multiselect',
-                name: 'integrations',
-                message: 'Select integrations to run:',
-                choices: customChoices,
-                initial: 0, // Default to first selection (mocked)
-                hint: '- Space: select/deselect, Enter: confirm',
-                instructions: false
-            });
-
-            // If user cancelled (Ctrl+C), exit
-            if (!response.integrations || response.integrations.length === 0) {
-                console.log('\n❌ Cancelled. Running with default integration (mocked)...');
-                integrations = defaultIntegrations;
-            } else {
-                // Always ensure mocked is included (even if user tried to deselect it)
-                // This ensures mocked is always selected regardless of user interaction
-                if (!response.integrations.includes('mocked')) {
-                    response.integrations.unshift('mocked');
-                }
-                // Ensure mocked is always first in the list
-                const mockedIndex = response.integrations.indexOf('mocked');
-                if (mockedIndex > 0) {
-                    response.integrations.splice(mockedIndex, 1);
-                    response.integrations.unshift('mocked');
-                }
-                integrations = response.integrations;
-            }
+        if (isInteractiveTerminal) {
+            selectedIntegrations = await promptForIntegrations(integrationsData);
         }
     }
 
-    // Always include base packages (apps, utils, framework, configs, modules)
     const basePackages = [
         '@o2s/api-harmonization',
         '@o2s/frontend',
@@ -181,43 +196,35 @@ async function main() {
         '@o2s/modules.surveyjs'
     ];
 
-    // Map integration names to full package names
-    const integrationMap = {
-        mocked: '@o2s/integrations.mocked',
-        algolia: '@o2s/integrations.algolia',
-        medusajs: '@o2s/integrations.medusajs',
-        redis: '@o2s/integrations.redis',
-        'strapi-cms': '@o2s/integrations.strapi-cms',
-        strapi: '@o2s/integrations.strapi-cms', // alias for strapi-cms
-        zendesk: '@o2s/integrations.zendesk'
-    };
+    const integrationPackages = selectedIntegrations
+        .map(integrationKey => {
+            const packageName = integrationMap[integrationKey.toLowerCase()];
+            if (!packageName) {
+                const availableKeys = Object.keys(integrationMap).join(', ');
+                console.warn(`⚠️  Unknown integration: ${integrationKey}. Available: ${availableKeys}`);
+                return null;
+            }
+            return packageName;
+        })
+        .filter(Boolean);
 
-    // Convert integration names to full package names
-    const integrationPackages = integrations.map(int => {
-        const packageName = integrationMap[int.toLowerCase()];
-        if (!packageName) {
-            console.warn(`⚠️  Unknown integration: ${int}. Available: ${Object.keys(integrationMap).join(', ')}`);
-            return null;
-        }
-        return packageName;
-    }).filter(Boolean);
-
-    // Combine all packages
     const allPackages = [...basePackages, ...integrationPackages];
 
-    // Display information about selected integrations
+    const selectedIntegrationTitles = selectedIntegrations.map(integrationKey => {
+        const integration = integrations[integrationKey];
+        return integration ? integration.title : integrationKey.charAt(0).toUpperCase() + integrationKey.slice(1);
+    });
+
     console.log('\n' + '='.repeat(60));
     console.log('🚀 Starting dev environment');
     console.log('='.repeat(60));
-    console.log(`📦 Selected integrations: ${integrations.map(i => i.charAt(0).toUpperCase() + i.slice(1)).join(', ')}`);
+    console.log(`📦 Selected integrations: ${selectedIntegrationTitles.join(', ')}`);
     console.log(`🔧 Total packages: ${allPackages.length}`);
     console.log('='.repeat(60) + '\n');
 
-    // Build Turbo filter arguments
-    // Turbo requires multiple --filter flags for multiple packages
     const turboArgs = ['dev', '--no-cache'];
-    allPackages.forEach(pkg => {
-        turboArgs.push('--filter', pkg);
+    allPackages.forEach(packageName => {
+        turboArgs.push('--filter', packageName);
     });
     const turboProcess = spawn('turbo', turboArgs, {
         stdio: 'inherit',

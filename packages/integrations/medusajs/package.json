@@ -3,6 +3,7 @@
   "version": "1.6.0",
   "private": false,
   "license": "MIT",
+  "description": "MedusaJS e-commerce integration for order and product management",
   "exports": {
     "./integration": "./dist/integration.js"
   },
