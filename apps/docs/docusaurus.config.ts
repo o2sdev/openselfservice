@@ -396,6 +396,11 @@ const config: Config = {
                                   className: 'dropdown__link--icon dropdown__link--icon-blog',
                               },
                               {
+                                  label: 'Case studies',
+                                  to: '/blog/tags/case-studies',
+                                  className: 'dropdown__link--icon dropdown__link--icon-case',
+                              },
+                              {
                                   label: 'Roadmap',
                                   href: 'https://github.com/orgs/o2sdev/projects/2',
                                   className: 'dropdown__link--icon dropdown__link--icon-roadmap',
