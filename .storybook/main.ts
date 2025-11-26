@@ -5,6 +5,7 @@ import * as dotenv from 'dotenv';
 import { mergeConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import 'storybook/test'
 
 const env: {
     NEXT_PUBLIC_API_URL?: string;

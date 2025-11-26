@@ -1,0 +1,8 @@
+schema: ./graphql.schema.json
+extensions:
+    endpoints:
+        Default GraphQL Endpoint:
+            url: https://graphql.contentful.com/content/v1/spaces/${CF_SPACE_ID}/environments/${CF_ENV}?access_token=${CF_TOKEN}
+            headers:
+                user-agent: JS GraphQL
+            introspect: false

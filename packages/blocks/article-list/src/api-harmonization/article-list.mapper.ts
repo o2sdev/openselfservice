@@ -25,6 +25,7 @@ export const mapArticleList = (
             ...articles,
             data: articles.data.map((article) => mapArticle(article, cms, locale)),
         },
+        meta: cms.meta,
     };
 };
 

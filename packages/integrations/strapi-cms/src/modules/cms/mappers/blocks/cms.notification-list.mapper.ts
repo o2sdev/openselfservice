@@ -39,6 +39,7 @@ export const mapNotificationListBlock = (
                     clickToSelect: configurableTexts.actions.clickToSelect,
                 },
                 detailsUrl: component.detailsURL as string,
+                initialFilters: undefined, // TODO: add initial filters field in CMS
             };
     }
 

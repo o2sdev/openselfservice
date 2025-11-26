@@ -1,0 +1,12 @@
+fragment Category on ComponentCategory {
+    sys {
+        ...Sys
+    }
+    name 
+    slug
+    description
+    icon
+    parent {
+        slug
+    }
+}

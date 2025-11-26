@@ -19,4 +19,5 @@ export class NotificationListBlock extends Block.Block {
         clickToSelect: string;
     };
     detailsUrl!: string;
+    initialFilters?: Partial<Notification & { sort?: string }>;
 }

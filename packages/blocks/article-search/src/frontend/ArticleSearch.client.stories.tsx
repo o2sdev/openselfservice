@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import 'storybook/test';
 
 import { ArticleSearchPure } from './ArticleSearch.client';
 
@@ -13,17 +14,12 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
     play: async ({ canvas, userEvent }) => {
-        // @ts-expect-error for some reason TS treats `canvas` as HTML canvas instead of Storybook's canvas
-        const searchInput = canvas.getByRole('combobox', {
-            selector: 'input',
-        });
+        const searchInput = canvas.getByRole('combobox');
 
         const user = userEvent.setup({
             delay: 100,
         });
-        await user.type(searchInput, 'power', {
-            delay: 100,
-        });
+        await user.type(searchInput, 'power');
     },
     args: {
         id: 'article-search-1',
