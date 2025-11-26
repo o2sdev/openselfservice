@@ -12,6 +12,7 @@ import { mapFaqBlock } from './mappers/blocks/cms.faq.mapper';
 import { mapFeatureSectionGridBlock } from './mappers/blocks/cms.feature-section-grid.mapper';
 import { mapFeatureSectionBlock } from './mappers/blocks/cms.feature-section.mapper';
 import { mapFeaturedServiceListBlock } from './mappers/blocks/cms.featured-service-list.mapper';
+import { mapHeroSectionBlock } from './mappers/blocks/cms.hero-section.mapper';
 import { mapInvoiceDetailsBlock } from './mappers/blocks/cms.invoice-details.mapper';
 import { mapInvoiceListBlock } from './mappers/blocks/cms.invoice-list.mapper';
 import { mapNotificationDetailsBlock } from './mappers/blocks/cms.notification-details.mapper';
@@ -211,5 +212,9 @@ export class CmsService implements CMS.Service {
 
     getFeatureSectionGridBlock(options: CMS.Request.GetCmsEntryParams) {
         return of(mapFeatureSectionGridBlock(options)).pipe(responseDelay());
+    }
+
+    getHeroSectionBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapHeroSectionBlock(options)).pipe(responseDelay());
     }
 }
