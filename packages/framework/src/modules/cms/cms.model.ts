@@ -39,3 +39,4 @@ export * as DocumentListBlock from './models/blocks/document-list.model';
 export * as FeatureSectionBlock from './models/blocks/feature-section.model';
 export * as FeatureSectionGridBlock from './models/blocks/feature-section-grid.model';
 export * as HeroSectionBlock from './models/blocks/hero-section.model';
+export * as MediaSectionBlock from './models/blocks/media-section.model';
