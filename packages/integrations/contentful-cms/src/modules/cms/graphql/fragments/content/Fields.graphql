@@ -1,0 +1,15 @@
+fragment FieldMapping on ComponentFieldMapping {
+    sys {
+        ...Sys
+    }
+    name
+    valuesCollection {
+        items {
+            sys {
+                ...Sys
+            }
+            key
+            value
+        }
+    }
+}

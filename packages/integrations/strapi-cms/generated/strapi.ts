@@ -10961,6 +10961,7 @@ export type GetComponentQuery = {
                   chartTitle: string;
                   chartPreviousPeriodLabel: string;
                   chartCurrentPeriodLabel: string;
+                  showChart?: boolean;
                   ranges?: Array<{
                       id: string;
                       label: string;

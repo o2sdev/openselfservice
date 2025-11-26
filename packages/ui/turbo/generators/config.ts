@@ -13,8 +13,23 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
         actions: [
             {
                 type: 'add',
-                path: 'src/components/{{kebabCase name}}.tsx',
+                path: 'src/components/{{pascalCase name}}/{{pascalCase name}}.tsx',
                 templateFile: 'templates/component.hbs',
+            },
+            {
+                type: 'add',
+                path: 'src/components/{{pascalCase name}}/{{pascalCase name}}.types.ts',
+                templateFile: 'templates/types.hbs',
+            },
+            {
+                type: 'add',
+                path: 'src/components/{{pascalCase name}}/{{pascalCase name}}.stories.tsx',
+                templateFile: 'templates/stories.hbs',
+            },
+            {
+                type: 'add',
+                path: 'src/components/{{pascalCase name}}/index.ts',
+                templateFile: 'templates/index.hbs',
             },
         ],
     });

@@ -1,0 +1,41 @@
+query getComponent($id: String!, $locale: String!, $preview: Boolean) {
+    block(id: $id, locale: $locale, preview: $preview) {
+        ...Component
+    }
+    configurableTexts: configurableTextsCollection(locale: $locale, limit: 1, skip: 0, preview: $preview) {
+        items {
+            dates {
+                today
+                yesterday
+            }
+            actions {
+                showMore
+                showLess
+                show
+                hide
+                edit
+                save
+                cancel
+                delete
+                logOut
+                settings
+                renew
+                details
+                reorder
+                clickToSelect
+                payOnline
+                close
+                trackOrder
+                showAllArticles
+                on
+                off
+            }
+            errors {
+                requestError {
+                    title
+                    content
+                }
+            }
+        }
+    }
+}

@@ -20,6 +20,10 @@ backend:
 performance:
     label: 'Performance'
 
+case-studies:
+    label: 'Case studies'
+    description: 'Real-world case studies of composable frontends and self-service portals built with Open Self Service and our MACH-based stack.'
+
 ai:
     label: 'AI'
 

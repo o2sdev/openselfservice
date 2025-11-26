@@ -28,6 +28,7 @@ import * as TicketSummary from '@o2s/blocks.ticket-summary/frontend';
 import * as UserAccount from '@o2s/blocks.user-account/frontend';
 // BLOCK IMPORT
 import { getLocale } from 'next-intl/server';
+import { draftMode } from 'next/headers';
 import React from 'react';
 
 import { CMS } from '@o2s/framework/modules';
@@ -48,11 +49,13 @@ interface BlockProps {
     userId: string | undefined;
     routing: typeof routing;
     hasPriority?: boolean;
+    isDraftModeEnabled?: boolean;
 }
 
 export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: string[]) => {
     const session = await auth();
     const locale = await getLocale();
+    const { isEnabled: isDraftModeEnabled } = await draftMode();
 
     return blocks.map((block, index) => {
         // decides whether the block is above the fold,
@@ -67,6 +70,7 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[], slug: str
             userId: session?.user?.id,
             routing: routing,
             hasPriority,
+            isDraftModeEnabled: isDraftModeEnabled,
         };
 
         return (

@@ -7,7 +7,8 @@
         "./integration": "./dist/integration.js",
         "./sdk": "./dist/sdk/index.js",
         "./auth": "./dist/auth/index.js",
-        "./auth.updateOrganization": "./dist/auth/auth.updateOrganization.js"
+        "./auth.updateOrganization": "./dist/auth/auth.updateOrganization.js",
+        "./live-preview": "./dist/modules/cms/live-preview/index.js"
     },
     "files": [
         "dist",
@@ -32,7 +33,7 @@
         "@auth/prisma-adapter": "^2.11.1",
         "@prisma/client": "^6.19.0",
         "bcryptjs": "^3.0.3",
-        "dotenv-cli": "^10.0.0",
+        "dotenv-cli": "^11.0.0",
         "jsonwebtoken": "^9.0.2",
         "prisma": "^6.19.0",
         "@o2s/framework": "*",

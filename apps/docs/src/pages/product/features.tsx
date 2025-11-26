@@ -1,6 +1,8 @@
 import clsx from 'clsx';
 import React from 'react';
 
+import Link from '@docusaurus/Link';
+
 import ArrowLeftRightGreenTileIcon from '@site/src/assets/icons/ArrowLeftRightGreenTile.svg';
 import BanGreenTileIcon from '@site/src/assets/icons/BanGreenTile.svg';
 import BlocksPurpleTileIcon from '@site/src/assets/icons/BlocksPurpleTile.svg';
@@ -345,15 +347,15 @@ export default function ProductFeatures() {
                                                 Use built-in functional blocks to speed up development and add essential
                                                 customer-support features.
                                             </Body>
-                                            <a
-                                                href={'/docs/main-components/blocks'}
+                                            <Link
+                                                href="/docs/main-components/blocks"
                                                 className="button w-fit"
                                                 rel="noopener"
                                             >
                                                 <span className="label flex items-center justify-center gap-2">
                                                     Learn more about Blocks
                                                 </span>
-                                            </a>
+                                            </Link>
                                         </div>
                                     </div>
                                     {functionalBlocks.map((block, blockIndex) => (
@@ -374,8 +376,8 @@ export default function ProductFeatures() {
                                 title="Want to connect your own APIs?"
                                 description={
                                     <>
-                                        Go to the <a href="/product/integrations">Integrations</a> page to learn more
-                                        about supported services and how to add your own.
+                                        Go to the <Link href="/product/integrations">Integrations</Link> page to learn
+                                        more about supported services and how to add your own.
                                     </>
                                 }
                                 primaryButton={{

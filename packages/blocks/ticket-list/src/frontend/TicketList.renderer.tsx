@@ -6,7 +6,13 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { TicketListServer } from './TicketList.server';
 import { TicketListRendererProps } from './TicketList.types';
 
-export const TicketListRenderer: React.FC<TicketListRendererProps> = ({ id, accessToken, routing, hasPriority }) => {
+export const TicketListRenderer: React.FC<TicketListRendererProps> = ({
+    id,
+    accessToken,
+    routing,
+    hasPriority,
+    isDraftModeEnabled,
+}) => {
     const locale = useLocale();
 
     return (
@@ -24,6 +30,7 @@ export const TicketListRenderer: React.FC<TicketListRendererProps> = ({ id, acce
                 locale={locale}
                 routing={routing}
                 hasPriority={hasPriority}
+                isDraftModeEnabled={isDraftModeEnabled}
             />
         </Suspense>
     );

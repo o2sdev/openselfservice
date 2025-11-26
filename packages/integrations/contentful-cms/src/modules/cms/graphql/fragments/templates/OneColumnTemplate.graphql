@@ -1,0 +1,11 @@
+fragment OneColumnTemplate on PageOneColumnTemplate {
+    __typename
+    mainSlotCollection {
+        items {
+            __typename
+            ... on Block {
+                ...ComponentBase
+            }
+        }
+    }
+}
