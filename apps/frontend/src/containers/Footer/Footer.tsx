@@ -25,6 +25,157 @@ import { Link as NextLink } from '@/i18n';
 
 import { FooterProps } from './Footer.types';
 
+const DesktopNavigationLink = ({
+    href,
+    children,
+    className,
+    active,
+    locale,
+    navigationItemClass,
+}: {
+    href: string;
+    children: React.ReactNode;
+    className?: string;
+    active?: boolean;
+    locale: string;
+    navigationItemClass: string;
+}) => {
+    return (
+        <NavigationMenuLink asChild active={active}>
+            <NextLink href={href} locale={locale} className={cn(navigationItemClass, className)}>
+                {children}
+            </NextLink>
+        </NavigationMenuLink>
+    );
+};
+
+const DesktopNavigationItem = ({
+    item,
+    className,
+    active,
+    locale,
+    navigationItemClass,
+}: {
+    item: Models.Navigation.NavigationItem;
+    className?: string;
+    active?: boolean;
+    locale: string;
+    navigationItemClass: string;
+}) => {
+    return (
+        <NavigationMenuItem key={item.url}>
+            <DesktopNavigationLink
+                href={item.url ?? '/'}
+                className={className}
+                active={active}
+                locale={locale}
+                navigationItemClass={navigationItemClass}
+            >
+                {item.label}
+            </DesktopNavigationLink>
+        </NavigationMenuItem>
+    );
+};
+
+const AccordionItemTemplate = ({
+    item,
+    tag,
+    children,
+    mobileNavigationItemClass,
+}: {
+    item: Models.Navigation.NavigationGroup;
+    tag: keyof JSX.IntrinsicElements;
+    children: React.ReactNode;
+    mobileNavigationItemClass: string;
+}) => {
+    return (
+        <AccordionItem value={item.title} className="border-none">
+            <AccordionTrigger className={mobileNavigationItemClass} tag={tag}>
+                {item.title}
+            </AccordionTrigger>
+            <AccordionContent className="p-0">{children}</AccordionContent>
+        </AccordionItem>
+    );
+};
+
+const MobileNavigationItem = ({
+    item,
+    locale,
+    mobileNavigationItemClass,
+}: {
+    item: Models.Navigation.NavigationItem;
+    locale: string;
+    mobileNavigationItemClass: string;
+}) => {
+    return (
+        <li key={item.label} className="w-full list-none">
+            <Link asChild>
+                <NextLink href={item.url ?? '/'} locale={locale} className={mobileNavigationItemClass}>
+                    {item.label}
+                </NextLink>
+            </Link>
+        </li>
+    );
+};
+
+const NavigationGroup = ({
+    item,
+    locale,
+    mobileNavigationItemClass,
+}: {
+    item: Models.Navigation.NavigationGroup;
+    locale: string;
+    mobileNavigationItemClass: string;
+}) => {
+    return (
+        <AccordionItemTemplate item={item} tag="h3" mobileNavigationItemClass={mobileNavigationItemClass}>
+            <ul className="flex flex-col items-start gap-2 w-full pt-2 pl-3">
+                {item.items.map((item) => {
+                    switch (item.__typename) {
+                        case 'NavigationItem':
+                            return (
+                                <MobileNavigationItem
+                                    item={item}
+                                    key={item.label}
+                                    locale={locale}
+                                    mobileNavigationItemClass={mobileNavigationItemClass}
+                                />
+                            );
+                        case 'NavigationGroup':
+                            return (
+                                <li key={item.title} className="w-full list-none">
+                                    <Accordion type="multiple" className="flex flex-col gap-2">
+                                        <AccordionItemTemplate
+                                            item={item}
+                                            tag="h4"
+                                            mobileNavigationItemClass={mobileNavigationItemClass}
+                                        >
+                                            <ul className="flex flex-col items-start gap-2 w-full pt-2 pl-3">
+                                                {item.items.map((item) => {
+                                                    if (item.__typename !== 'NavigationItem') {
+                                                        return null;
+                                                    }
+                                                    return (
+                                                        <MobileNavigationItem
+                                                            item={item}
+                                                            key={item.label}
+                                                            locale={locale}
+                                                            mobileNavigationItemClass={mobileNavigationItemClass}
+                                                        />
+                                                    );
+                                                })}
+                                            </ul>
+                                        </AccordionItemTemplate>
+                                    </Accordion>
+                                </li>
+                            );
+                    }
+                })}
+            </ul>
+        </AccordionItemTemplate>
+    );
+};
+
 export const Footer: React.FC<FooterProps> = ({ data }) => {
     const locale = useLocale();
 
@@ -46,107 +197,6 @@ export const Footer: React.FC<FooterProps> = ({ data }) => {
         }
 
         return '/';
-    };
-
-    const DesktopNavigationLink = ({
-        href,
-        children,
-        className,
-        active,
-    }: {
-        href: string;
-        children: React.ReactNode;
-        className?: string;
-        active?: boolean;
-    }) => {
-        return (
-            <NavigationMenuLink asChild active={active}>
-                <NextLink href={href} locale={locale} className={cn(navigationItemClass, className)}>
-                    {children}
-                </NextLink>
-            </NavigationMenuLink>
-        );
-    };
-
-    const DesktopNavigationItem = ({
-        item,
-        className,
-        active,
-    }: {
-        item: Models.Navigation.NavigationItem;
-        className?: string;
-        active?: boolean;
-    }) => {
-        return (
-            <NavigationMenuItem key={item.url}>
-                <DesktopNavigationLink href={item.url ?? '/'} className={className} active={active}>
-                    {item.label}
-                </DesktopNavigationLink>
-            </NavigationMenuItem>
-        );
-    };
-
-    const AccordionItemTemplate = ({
-        item,
-        tag,
-        children,
-    }: {
-        item: Models.Navigation.NavigationGroup;
-        tag: keyof JSX.IntrinsicElements;
-        children: React.ReactNode;
-    }) => {
-        return (
-            <AccordionItem value={item.title} className="border-none">
-                <AccordionTrigger className={mobileNavigationItemClass} tag={tag}>
-                    {item.title}
-                </AccordionTrigger>
-                <AccordionContent className="p-0">{children}</AccordionContent>
-            </AccordionItem>
-        );
-    };
-
-    const MobileNavigationItem = ({ item }: { item: Models.Navigation.NavigationItem }) => {
-        return (
-            <li key={item.label} className="w-full list-none">
-                <Link asChild>
-                    <NextLink href={item.url ?? '/'} locale={locale} className={mobileNavigationItemClass}>
-                        {item.label}
-                    </NextLink>
-                </Link>
-            </li>
-        );
-    };
-
-    const NavigationGroup = ({ item }: { item: Models.Navigation.NavigationGroup }) => {
-        return (
-            <AccordionItemTemplate item={item} tag="h3">
-                <ul className="flex flex-col items-start gap-2 w-full pt-2 pl-3">
-                    {item.items.map((item) => {
-                        switch (item.__typename) {
-                            case 'NavigationItem':
-                                return <MobileNavigationItem item={item} key={item.label} />;
-                            case 'NavigationGroup':
-                                return (
-                                    <li key={item.title} className="w-full list-none">
-                                        <Accordion type="multiple" className="flex flex-col gap-2">
-                                            <AccordionItemTemplate item={item} tag="h4">
-                                                <ul className="flex flex-col items-start gap-2 w-full pt-2 pl-3">
-                                                    {item.items.map((item) => {
-                                                        if (item.__typename !== 'NavigationItem') {
-                                                            return null;
-                                                        }
-                                                        return <MobileNavigationItem item={item} key={item.label} />;
-                                                    })}
-                                                </ul>
-                                            </AccordionItemTemplate>
-                                        </Accordion>
-                                    </li>
-                                );
-                        }
-                    })}
-                </ul>
-            </AccordionItemTemplate>
-        );
     };
 
     return (
@@ -175,7 +225,14 @@ export const Footer: React.FC<FooterProps> = ({ data }) => {
                             {data.items.map((item) => {
                                 switch (item.__typename) {
                                     case 'NavigationItem':
-                                        return <DesktopNavigationItem item={item} key={item.label} />;
+                                        return (
+                                            <DesktopNavigationItem
+                                                item={item}
+                                                key={item.label}
+                                                locale={locale}
+                                                navigationItemClass={navigationItemClass}
+                                            />
+                                        );
                                     case 'NavigationGroup':
                                         return (
                                             <DesktopNavigationItem
@@ -186,6 +243,8 @@ export const Footer: React.FC<FooterProps> = ({ data }) => {
                                                 }}
                                                 key={item.title}
                                                 active={false}
+                                                locale={locale}
+                                                navigationItemClass={navigationItemClass}
                                             />
                                         );
                                 }
@@ -197,14 +256,32 @@ export const Footer: React.FC<FooterProps> = ({ data }) => {
             <Separator />
             <div className="w-full m-auto max-w-7xl flex flex-col md:hidden">
                 <Accordion type="multiple" className="flex flex-col gap-2 p-2">
-                    <AccordionItemTemplate item={data as unknown as Models.Navigation.NavigationGroup} tag="h2">
+                    <AccordionItemTemplate
+                        item={data as unknown as Models.Navigation.NavigationGroup}
+                        tag="h2"
+                        mobileNavigationItemClass={mobileNavigationItemClass}
+                    >
                         <Accordion type="multiple" className="flex flex-col gap-2 pt-2 pl-3">
                             {data.items.map((item) => {
                                 switch (item.__typename) {
                                     case 'NavigationItem':
-                                        return <MobileNavigationItem item={item} key={item.label} />;
+                                        return (
+                                            <MobileNavigationItem
+                                                item={item}
+                                                key={item.label}
+                                                locale={locale}
+                                                mobileNavigationItemClass={mobileNavigationItemClass}
+                                            />
+                                        );
                                     case 'NavigationGroup':
-                                        return <NavigationGroup item={item} key={item.title} />;
+                                        return (
+                                            <NavigationGroup
+                                                item={item}
+                                                key={item.title}
+                                                locale={locale}
+                                                mobileNavigationItemClass={mobileNavigationItemClass}
+                                            />
+                                        );
                                 }
                             })}
                         </Accordion>

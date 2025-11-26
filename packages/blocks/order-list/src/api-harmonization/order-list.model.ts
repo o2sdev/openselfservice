@@ -24,6 +24,7 @@ export class OrderListBlock extends ApiModels.Block.Block {
         clickToSelect: string;
     };
     reorderLabel?: string;
+    initialFilters?: Partial<Orders.Model.Order & { sort?: string }>;
 }
 
 export class Order {

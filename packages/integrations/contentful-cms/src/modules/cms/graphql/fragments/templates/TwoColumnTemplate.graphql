@@ -1,0 +1,35 @@
+fragment TwoColumnTemplate on PageTwoColumnTemplate {
+    __typename
+    topSlotCollection {
+        items {
+            __typename
+            ... on Block {
+                ...ComponentBase
+            }   
+        }
+    }
+    leftSlotCollection {
+        items {
+            __typename
+            ... on Block {
+                ...ComponentBase
+            }
+        }
+    }
+    rightSlotCollection {
+        items {
+            __typename
+            ... on Block {
+                ...ComponentBase
+            }
+        }
+    }
+    bottomSlotCollection {
+        items {
+            __typename
+            ... on Block {
+                ...ComponentBase
+            }
+        }
+    }
+}

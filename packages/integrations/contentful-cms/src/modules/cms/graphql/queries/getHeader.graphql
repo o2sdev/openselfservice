@@ -1,0 +1,15 @@
+query getHeader($id: String!, $locale: String!, $preview: Boolean) {
+    headerCollection(where: { sys: { id: $id } }, locale: $locale, limit: 1, preview: $preview) {
+        items {
+            ...Header
+        }
+    }
+    configurableTexts: configurableTextsCollection(locale: $locale, limit: 1, skip: 0, preview: $preview) {
+        items {
+            actions {
+                close
+            }
+        }
+    }
+}
+

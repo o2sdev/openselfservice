@@ -12,3 +12,17 @@ export class DataTableActions {
     title!: string;
     label?: string;
 }
+
+export class DataTableMeta {
+    __id!: string;
+    columns!: {
+        __id: string;
+        id: string;
+        title: string;
+    }[];
+    actions?: {
+        __id: string;
+        title: string;
+        label: string;
+    };
+}
