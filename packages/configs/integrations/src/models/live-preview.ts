@@ -1,1 +1,1 @@
-export * as LivePreview from '@o2s/integrations.contentful-cms/live-preview';
+export * as LivePreview from '@o2s/integrations.mocked/live-preview';

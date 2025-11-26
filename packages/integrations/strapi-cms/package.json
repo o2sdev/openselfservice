@@ -4,7 +4,8 @@
     "private": false,
     "license": "MIT",
     "exports": {
-        "./integration": "./dist/src/integration.js"
+        "./integration": "./dist/src/integration.js",
+        "./live-preview": "./dist/src/modules/cms/live-preview/index.js"
     },
     "files": [
         "dist"

@@ -3,8 +3,8 @@
     "version": "1.10.0",
     "private": true,
     "scripts": {
-        "dev:http": "next dev --turbopack",
-        "dev": "next dev --turbopack --experimental-https",
+        "dev": "next dev --turbopack",
+        "dev:https": "next dev --turbopack --experimental-https",
         "build": "next build",
         "postbuild": "cp -r public .next/standalone/apps/frontend && cp -r .next/static .next/standalone/apps/frontend/.next/",
         "start": "node .next/standalone/apps/frontend/server.js",
