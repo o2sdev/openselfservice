@@ -5,6 +5,7 @@ import { CMS } from '@o2s/framework/modules';
 
 import { mapArticleListBlock } from './mappers/blocks/cms.article-list.mapper';
 import { mapArticleSearchBlock } from './mappers/blocks/cms.article-search.mapper';
+import { mapBentoGridBlock } from './mappers/blocks/cms.bento-grid.mapper';
 import { mapFaqBlock } from './mappers/blocks/cms.faq.mapper';
 import { mapFeaturedServiceListBlock } from './mappers/blocks/cms.featured-service-list.mapper';
 import { mapInvoiceDetailsBlock } from './mappers/blocks/cms.invoice-details.mapper';
@@ -186,5 +187,9 @@ export class CmsService implements CMS.Service {
 
     getFeaturedServiceListBlock(options: CMS.Request.GetCmsEntryParams) {
         return of(mapFeaturedServiceListBlock(options.locale)).pipe(responseDelay());
+    }
+
+    getBentoGridBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapBentoGridBlock(options)).pipe(responseDelay());
     }
 }

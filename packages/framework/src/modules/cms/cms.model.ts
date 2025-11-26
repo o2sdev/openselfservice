@@ -33,3 +33,4 @@ export * as CategoryListBlock from './models/blocks/category-list.model';
 export * as QuickLinksBlock from './models/blocks/quick-links.model';
 export * as ArticleSearchBlock from './models/blocks/article-search.model';
 export * as FeaturedServiceListBlock from './models/blocks/featured-service-list.model';
+export * as BentoGridBlock from './models/blocks/bento-grid.model';
