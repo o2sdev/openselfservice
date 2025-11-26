@@ -7,7 +7,8 @@
         "./integration": "./dist/integration.js",
         "./sdk": "./dist/sdk/index.js",
         "./auth": "./dist/auth/index.js",
-        "./auth.updateOrganization": "./dist/auth/auth.updateOrganization.js"
+        "./auth.updateOrganization": "./dist/auth/auth.updateOrganization.js",
+        "./live-preview": "./dist/modules/cms/live-preview/index.js"
     },
     "files": [
         "dist",
