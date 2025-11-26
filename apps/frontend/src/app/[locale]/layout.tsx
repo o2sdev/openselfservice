@@ -1,7 +1,9 @@
+import { LivePreview } from '@o2s/configs.integrations/live-preview';
 import { SessionProvider } from 'next-auth/react';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { Inter } from 'next/font/google';
+import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
 import React from 'react';
 
@@ -28,6 +30,7 @@ interface Props {
 
 export default async function RootLayout({ children, params }: Props) {
     const session = await auth();
+    const { isEnabled: isDraftModeEnabled } = await draftMode();
 
     const { locale } = await params;
 
@@ -40,20 +43,26 @@ export default async function RootLayout({ children, params }: Props) {
     const messages = await getMessages();
 
     return (
-        <html lang={locale} className={`${inter.variable} antialiased`}>
-            <head>
-                <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
-                <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
-                <link rel="shortcut icon" href="/favicon/favicon.ico" />
-                <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-                <meta name="apple-mobile-web-app-title" content="Open Self Service" />
-            </head>
-            {/*@see https://github.com/nextauthjs/next-auth/issues/9504#issuecomment-2516665386*/}
-            <SessionProvider key={session?.user?.id} session={session} refetchOnWindowFocus={false}>
-                <NextIntlClientProvider messages={messages}>
-                    <TooltipProvider>{children}</TooltipProvider>
-                </NextIntlClientProvider>
-            </SessionProvider>
-        </html>
+        <LivePreview.Provider
+            locale={locale}
+            enableInspectorMode={isDraftModeEnabled}
+            enableLiveUpdates={isDraftModeEnabled}
+        >
+            <html lang={locale} className={`${inter.variable} antialiased`}>
+                <head>
+                    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+                    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+                    <link rel="shortcut icon" href="/favicon/favicon.ico" />
+                    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+                    <meta name="apple-mobile-web-app-title" content="Open Self Service" />
+                </head>
+                {/*@see https://github.com/nextauthjs/next-auth/issues/9504#issuecomment-2516665386*/}
+                <SessionProvider key={session?.user?.id} session={session} refetchOnWindowFocus={false}>
+                    <NextIntlClientProvider messages={messages}>
+                        <TooltipProvider>{children}</TooltipProvider>
+                    </NextIntlClientProvider>
+                </SessionProvider>
+            </html>
+        </LivePreview.Provider>
     );
 }

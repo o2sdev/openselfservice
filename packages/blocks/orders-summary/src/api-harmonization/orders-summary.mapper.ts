@@ -61,9 +61,11 @@ export const mapOrdersSummary = (
             title: cms.chart.title,
             data: getChartData(ordersPrevious, ordersCurrent, range, diff, locale),
             legend: cms.chart.legend,
+            showChart: cms.chart.showChart,
         },
         noResults: cms.noResults,
         ranges: cms.ranges,
+        layout: cms.layout,
     };
 };
 

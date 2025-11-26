@@ -1,6 +1,9 @@
 import clsx from 'clsx';
 import React from 'react';
 
+import Link from '@docusaurus/Link';
+
+import ArrowRightIcon from '@site/src/assets/icons/ArrowRight.svg';
 import RefreshCwIcon from '@site/src/assets/icons/RefreshCw.svg';
 import CircleCheckIcon from '@site/src/assets/icons/circle-check.svg';
 import Badge from '@site/src/components/Badge';
@@ -14,6 +17,7 @@ export interface IntegrationsBlocksProps {
         description: string;
         status: 'available' | 'planned' | 'internal';
         icon?: React.ReactNode;
+        link?: string;
     }[];
 }
 
@@ -58,25 +62,52 @@ export function IntegrationsBlocks({ title, description, integrations }: Integra
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {integrations.map((integration, integrationIndex) => {
                     const statusConfig = getStatusConfig(integration.status);
-                    return (
-                        <div
-                            key={integrationIndex}
-                            className={clsx('card-base p-6! flex flex-col gap-[30px] h-full', statusConfig.cardBgClass)}
-                        >
-                            <div className="flex gap-6">
+                    const isLinkable = !!integration.link;
+
+                    const cardContent = (
+                        <>
+                            <div className="flex gap-6 relative z-10">
                                 <div>{integration.icon}</div>
                                 <div className="flex flex-col gap-2.5">
                                     <H3 className="mb-0!">{integration.name}</H3>
                                     <BodySmall className="mb-0!">{integration.description}</BodySmall>
                                 </div>
                             </div>
-                            <div className="w-fit mt-auto">
+                            <div className="w-full mt-auto flex items-center justify-between relative z-10">
                                 <Badge
                                     title={statusConfig.title}
                                     variant={statusConfig.variant}
                                     icon={statusConfig.icon}
                                 />
+                                {isLinkable && <ArrowRightIcon className="w-4 h-4 *:stroke-white shrink-0" />}
                             </div>
+                        </>
+                    );
+
+                    const cardClassName = clsx(
+                        'card-base p-6! flex flex-col gap-[30px] h-full relative text-white!',
+                        statusConfig.cardBgClass,
+                        isLinkable &&
+                            'before:content-[""] before:absolute before:inset-0 before:rounded-md before:bg-black/20 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-200 before:pointer-events-none',
+                    );
+
+                    const linkClassName = clsx(
+                        cardClassName,
+                        'no-underline! hover:no-underline! focus:no-underline!',
+                        'focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2 focus-visible:outline',
+                    );
+
+                    if (isLinkable && integration.link) {
+                        return (
+                            <Link key={integrationIndex} to={integration.link} className={linkClassName}>
+                                {cardContent}
+                            </Link>
+                        );
+                    }
+
+                    return (
+                        <div key={integrationIndex} className={cardClassName}>
+                            {cardContent}
                         </div>
                     );
                 })}

@@ -40,6 +40,7 @@ export const mapTicketListBlock = (data: GetComponentQuery): CMS.Model.TicketLis
                     clickToSelect: configurableTexts.actions.clickToSelect,
                 },
                 detailsUrl: component.detailsURL as string,
+                initialFilters: undefined, // TODO: add initial filters field in CMS
             };
     }
 

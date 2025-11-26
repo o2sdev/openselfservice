@@ -38,6 +38,7 @@ export const mapInvoiceListBlock = (data: GetComponentQuery): CMS.Model.InvoiceL
                 table: mapTable(component.table),
                 downloadFileName: component.downloadFileName,
                 downloadButtonAriaDescription: component.downloadButtonAriaDescription,
+                initialFilters: undefined, // TODO: add initial filters field in CMS
             };
     }
 

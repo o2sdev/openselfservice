@@ -12,6 +12,10 @@ export const DynamicIcon: React.FC<DynamicIconProps> = ({
     className,
     strokeWidth = 2,
 }) => {
+    if (!name) {
+        return null;
+    }
+
     const iconName = toKebabCase(name) as IconName;
 
     if (!(iconName in dynamicIconImports)) {

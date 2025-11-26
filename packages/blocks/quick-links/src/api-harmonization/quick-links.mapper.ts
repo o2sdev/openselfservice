@@ -9,5 +9,6 @@ export const mapQuickLinks = (cms: CMS.Model.QuickLinksBlock.QuickLinksBlock, _l
         title: cms.title,
         description: cms.description,
         items: cms.items,
+        meta: cms.meta,
     };
 };

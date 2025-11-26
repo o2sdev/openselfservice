@@ -1,0 +1,36 @@
+query getAppConfig($locale: String!, $preview: Boolean) {
+    appConfigCollection(locale: $locale, limit: 1, preview: $preview) {
+        items {
+            ...AppConfig
+        }
+    }
+    configurableTexts: configurableTextsCollection(locale: $locale, limit: 1, skip: 0, preview: $preview) {
+        items {
+            errors {
+                requestError {
+                    title
+                    content
+                }
+            }
+            dates {
+                today
+                yesterday
+            }
+            actions {
+                showMore
+                showLess
+                show
+                hide
+                edit
+                save
+                cancel
+                delete
+                logOut
+                settings
+                renew
+                details
+            }
+        }
+    }
+}
+

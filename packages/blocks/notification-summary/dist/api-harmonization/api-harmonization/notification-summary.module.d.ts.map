@@ -1,0 +1,1 @@
+{"version":3,"file":"notification-summary.module.d.ts","sourceRoot":"","sources":["../../../src/api-harmonization/notification-summary.module.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,aAAa,EAAU,MAAM,gBAAgB,CAAC;AAGvD,OAAO,KAAK,SAAS,MAAM,wBAAwB,CAAC;AAKpD,qBACa,8BAA8B;IACvC,MAAM,CAAC,QAAQ,CAAC,OAAO,EAAE,SAAS,CAAC,SAAS,GAAG,aAAa;CAkB/D"}

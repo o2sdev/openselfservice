@@ -343,10 +343,10 @@ export default function ProductStarters() {
                                 }
                             />
                             <div className="flex flex-col gap-y-40 pb-40">
-                                <section id="customer-portal-starter" className="px-4">
+                                <section id="customer-portal-starter" className="px-4 scroll-m-24">
                                     <StarterInfoSection {...customerPortalStarter} />
                                 </section>
-                                <section id="digital-portal-starter" className="px-4">
+                                <section id="digital-portal-starter" className="px-4 scroll-m-24">
                                     <StarterInfoSection {...digitalPortalStarter} />
                                 </section>
                                 <section className="px-4">

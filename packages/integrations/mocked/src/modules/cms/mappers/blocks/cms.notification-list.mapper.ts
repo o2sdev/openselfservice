@@ -98,10 +98,10 @@ const MOCK_NOTIFICATION_LIST_BLOCK_EN: CMS.Model.NotificationListBlock.Notificat
                 label: 'Priority',
                 allowMultiple: true,
                 options: [
-                    { label: 'Low Priority', value: 'low' },
-                    { label: 'Medium Priority', value: 'medium' },
-                    { label: 'High Priority', value: 'high' },
-                    { label: 'Critical Priority', value: 'critical' },
+                    { label: 'Low Priority', value: 'LOW' },
+                    { label: 'Medium Priority', value: 'MEDIUM' },
+                    { label: 'High Priority', value: 'HIGH' },
+                    { label: 'Critical Priority', value: 'CRITICAL' },
                 ],
             },
             {

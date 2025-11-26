@@ -4,4 +4,5 @@ export class GetArticleListBlockQuery implements Omit<CMS.Request.GetCmsEntryPar
     id!: string;
     offset?: number;
     limit?: number;
+    preview?: boolean;
 }

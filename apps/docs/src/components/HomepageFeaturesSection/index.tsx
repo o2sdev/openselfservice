@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Link from '@docusaurus/Link';
+
 import BlocksIcon from '@site/src/assets/icons/Blocks.svg';
 import UserIcon from '@site/src/assets/icons/CircleUser.svg';
 import FileSearchIcon from '@site/src/assets/icons/FileSearch.svg';
@@ -123,9 +125,9 @@ export function HomepageFeaturesSection() {
             {/*    </div>*/}
             {/*</div>*/}
 
-            <a href="/product/features" className="button">
+            <Link href="/product/features" className="button">
                 Explore full feature set
-            </a>
+            </Link>
         </section>
     );
 }

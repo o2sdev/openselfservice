@@ -25,6 +25,7 @@ export class NotificationListService {
             concatMap(([cms]) => {
                 return this.notificationService
                     .getNotificationList({
+                        ...(cms.initialFilters || {}),
                         ...query,
                         limit: query.limit || cms.pagination?.limit || 1,
                         offset: query.offset || 0,

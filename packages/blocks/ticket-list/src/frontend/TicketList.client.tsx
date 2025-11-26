@@ -1,5 +1,6 @@
 'use client';
 
+import { LivePreview } from '@o2s/configs.integrations/live-preview';
 import { ArrowRight } from 'lucide-react';
 import { createNavigation } from 'next-intl/navigation';
 import React, { useState, useTransition } from 'react';
@@ -25,8 +26,9 @@ import { sdk } from '../sdk';
 
 import { TicketListPureProps } from './TicketList.types';
 
-export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessToken, routing, ...component }) => {
+export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessToken, routing, meta, ...component }) => {
     const { Link: LinkComponent } = createNavigation(routing);
+    const inspector = LivePreview.useInspector();
 
     const initialFilters: Request.GetTicketListBlockQuery = {
         id: component.id,
@@ -93,7 +95,6 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                 };
         }
     }) as DataListColumnConfig<Model.Ticket>[];
-
     const actions = data.table.actions
         ? {
               ...data.table.actions,
@@ -126,7 +127,7 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                 <div className="flex flex-col gap-6">
                     <div className="w-full flex gap-4 flex-col md:flex-row justify-between">
                         <Typography variant="h1" asChild>
-                            <h1>{data.title}</h1>
+                            <h1 {...inspector(meta, 'title')}>{data.title}</h1>
                         </Typography>
 
                         {data.forms && (
