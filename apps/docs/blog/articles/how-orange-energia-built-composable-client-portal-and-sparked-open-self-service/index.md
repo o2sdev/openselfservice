@@ -16,7 +16,7 @@ Orange Energia — one of the most innovative energy providers in Poland — too
 
 The project became one of the first large-scale composable portal implementations in the Polish energy sector. **It also played a crucial role in shaping the components and architectural assumptions that later evolved into Open Self Service** — our ready-to-deploy, modular frontend for digital self-service.
 
-![o2s-orange tmb.jpg](o2s-orange%20tmb.jpg)
+![Orange Energia customer service application screens](o2s-orange%20tmb.jpg)
 
 <!--truncate-->
 
@@ -35,9 +35,9 @@ To achieve this, we built the solution on Hycom's internal accelerator, **Enyu**
 
 ## What is Enyu and why it mattered
 
-![enyu-desktop.jpg](enyu-desktop.jpg)
+![Self-service for utilities](enyu-desktop.png)
 
-Enyu, our composable, cloud-ready accelerator, was created for building self-service portals across regulated industries like energy, utilities, and telco. It offered a headless, API-first architecture with ready-made UI components for self-service, reusable business modules such as billing, contracts, and notifications. The framework enabled decoupling frontends from backend systems and provided a strong integration layer for different APIs.
+**[Enyu](https://hycom.digital/solutions/enyu-self-service-portal-for-energy-and-utilities), our composable, cloud-ready accelerator**, was created for building self-service portals across regulated industries like energy, utilities, and telco. It offered a headless, API-first architecture with ready-made UI components for self-service, reusable business modules such as billing, contracts, and notifications. The framework enabled decoupling frontends from backend systems and provided a strong integration layer for different APIs.
 
 It was designed for organizations that needed fast delivery without compromising scalability or future-proof design. For Orange Energia, this meant we could build a highly customized client portal — while reusing modular components and delivering in shorter cycles than classic enterprise projects. Many of the capabilities required in the project — including billing, contracts, notifications, and identity management — came directly from Enyu's standard module set, which we configured and extended instead of designing a completely new architecture from scratch.
 
@@ -47,19 +47,19 @@ Leveraging Enyu's modules, the new portal was designed as a **single point of ac
 
 ### Customer data & account overview
 
-![Orange-Customer data.jpg](Orange-Customer%20data.jpg)
+![Customer data & account overview - application screen](Orange-Customer%20data.jpg)
 
 The portal provides comprehensive profile and contract information, including agreements, tariff plans, and meter details. Customers can view and manage up-to-date contact and billing preferences in one place, as well as configure selected personalized services available for their contracts.
 
 ### Billing & payments
 
-![Orange-Billing.jpg](Orange-Billing.jpg)
+![Billing - application screen](Orange-Billing.jpg)
 
 Customers have full access to invoices and settlements with downloadable documents in multiple formats. The system displays payment statuses and reminders, along with a clear history of charges and adjustments.
 
 ### Energy usage & analytics
 
-![Orange-Energy usage.jpg](Orange-Energy%20usage.jpg)
+![Energy usage - application screen](Orange-Energy%20usage.jpg)
 
 The portal includes consumption charts with historical comparison, supporting multi-meter and multi-location scenarios. Integration with metering systems enables near-real-time updates, giving customers immediate insight into their energy consumption patterns.
 
@@ -79,7 +79,7 @@ All of this was delivered with a modern, intuitive UI accessible across devices 
 
 ## Why composable architecture made the difference
 
-![oe-composable.jpg](oe-composable.jpg)
+![Orange Energia architecture diagram](oe-composable.jpg)
 
 The strategic decision to build Orange Energia's portal in a composable model brought benefits that go far beyond the initial MVP.
 
@@ -280,7 +280,7 @@ The result is a framework that inherits the battle-tested patterns from Orange E
 
 ## Summary
 
-![orange-tmb2.jpg](orange-tmb2.jpg)
+![Orange Energia app on a mobile device](orange-tmb2.jpg)
 
 The Orange Energia portal project shows how a well-executed composable approach can transform digital self-service in energy and utilities. Customers gained transparency, access, and control over their energy services. The organization reduced operational effort and manual workload, freeing service teams to focus on higher-value interactions. Technology teams gained a flexible, scalable foundation for next-generation digital services. The outcomes influenced the evolution of **Open Self Service** — built on real experience and proven components.
 
