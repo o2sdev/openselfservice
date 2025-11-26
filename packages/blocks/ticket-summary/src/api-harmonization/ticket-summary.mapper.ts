@@ -12,38 +12,16 @@ export const mapTicketSummary = (
             acc[ticket.status] = (acc[ticket.status] || 0) + 1;
             return acc;
         },
-        {} as Record<'OPEN' | 'IN_PROGRESS' | 'CLOSED', number>,
+        {} as Record<Tickets.Model.TicketStatus, number>,
     );
 
-    const infoCards: TicketSummaryInfoCard[] = [];
-
-    if (cms.open) {
-        infoCards.push({
-            title: cms.open.title,
-            icon: cms.open.icon,
-            value: statusCounts.OPEN || 0,
-            description: cms.open.message,
-            variant: 'OPEN',
-        });
-    }
-    if (cms.inProgress) {
-        infoCards.push({
-            title: cms.inProgress.title,
-            icon: cms.inProgress.icon,
-            value: statusCounts.IN_PROGRESS || 0,
-            description: cms.inProgress.message,
-            variant: 'IN_PROGRESS',
-        });
-    }
-    if (cms.closed) {
-        infoCards.push({
-            title: cms.closed.title,
-            icon: cms.closed.icon,
-            value: statusCounts.CLOSED || 0,
-            description: cms.closed.message,
-            variant: 'CLOSED',
-        });
-    }
+    const infoCards: TicketSummaryInfoCard[] = cms.infoCards.map((card) => ({
+        title: card.title,
+        icon: card.icon,
+        value: card.variant ? (statusCounts[card.variant] ?? card.value) : card.value,
+        description: card.description,
+        variant: card.variant,
+    }));
 
     return {
         __typename: 'TicketSummaryBlock',

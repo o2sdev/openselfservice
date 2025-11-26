@@ -1,9 +1,16 @@
-import { Block, InfoCard } from '@/utils/models';
+import { TicketStatus } from '@/modules/tickets/tickets.model';
+
+import { Block } from '@/utils/models';
+
+export class TicketSummaryInfoCard {
+    title!: string;
+    icon?: string;
+    value!: number;
+    description?: string;
+    variant?: TicketStatus;
+}
 
 export class TicketSummaryBlock extends Block.Block {
-    title?: string;
-    open?: InfoCard.InfoCard;
-    inProgress?: InfoCard.InfoCard;
-    closed?: InfoCard.InfoCard;
     layout?: 'vertical' | 'horizontal';
+    infoCards!: TicketSummaryInfoCard[];
 }
