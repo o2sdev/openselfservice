@@ -9,6 +9,7 @@ import { mapBentoGridBlock } from './mappers/blocks/cms.bento-grid.mapper';
 import { mapCtaSectionBlock } from './mappers/blocks/cms.cta-section.mapper';
 import { mapDocumentListBlock } from './mappers/blocks/cms.document-list.mapper';
 import { mapFaqBlock } from './mappers/blocks/cms.faq.mapper';
+import { mapFeatureSectionBlock } from './mappers/blocks/cms.feature-section.mapper';
 import { mapFeaturedServiceListBlock } from './mappers/blocks/cms.featured-service-list.mapper';
 import { mapInvoiceDetailsBlock } from './mappers/blocks/cms.invoice-details.mapper';
 import { mapInvoiceListBlock } from './mappers/blocks/cms.invoice-list.mapper';
@@ -201,5 +202,9 @@ export class CmsService implements CMS.Service {
 
     getDocumentListBlock(_options: CMS.Request.GetCmsEntryParams) {
         return of(mapDocumentListBlock(_options.locale)).pipe(responseDelay());
+    }
+
+    getFeatureSectionBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapFeatureSectionBlock(options)).pipe(responseDelay());
     }
 }
