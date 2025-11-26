@@ -208,7 +208,7 @@ export const FilterItem = <T, S extends FormikValues>({
                     value={item.value}
                     onValueChange={(value) => {
                         if (value === 'list' || value === 'grid') {
-                            item.onChange!(value);
+                            item.onChange?.(value);
                         }
                     }}
                 >

@@ -72,7 +72,7 @@ export function renderCell<T>(
             const linkDisplayField = column.displayField || 'label';
             const linkLabel =
                 typeof value === 'object' && value !== null ? String(value[linkDisplayField]) : String(value);
-            const _href = column.config?.hrefKey ? String(item[column.config.hrefKey]) : '#';
+            const href = column.config?.hrefKey ? String(item[column.config.hrefKey]) : '#';
             const linkVariant = column.config?.variant ? column.config.variant : 'link';
             const linkClassName = column.config?.className
                 ? column.config.className
@@ -80,7 +80,7 @@ export function renderCell<T>(
 
             if (linkVariant === 'link') {
                 return (
-                    <Link asChild>
+                    <Link href={href} asChild>
                         <Button variant="link" className={linkClassName}>
                             {linkLabel}
                         </Button>
