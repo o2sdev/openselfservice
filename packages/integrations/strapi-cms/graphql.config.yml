@@ -1,4 +1,5 @@
 schema: ./graphql.schema.json
+documents: ./src/**/*.graphql
 extensions:
     endpoints:
         Default GraphQL Endpoint:
