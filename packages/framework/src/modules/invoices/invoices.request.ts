@@ -1,5 +1,6 @@
+import { PaginationQuery } from '../../utils/models/pagination';
+
 import { InvoiceType, PaymentStatusType } from './invoices.model';
-import { PaginationQuery } from '@/utils/models/pagination';
 
 export class GetInvoiceParams {
     id!: string;

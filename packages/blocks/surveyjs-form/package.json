@@ -5,16 +5,20 @@
     "license": "MIT",
     "description": "A block displaying a SurveyJS-based form that can be submitted.",
     "exports": {
-        "./api-harmonization": "./dist/api-harmonization/api-harmonization/index.js",
-        "./frontend": "./dist/frontend/frontend/index.js",
-        "./sdk": "./dist/sdk/sdk/index.js",
-        "./client": "./dist/api-harmonization/api-harmonization/surveyjs.client.js"
+        "./api-harmonization": {
+            "types": "./src/api-harmonization/index.ts",
+            "import": "./dist/api-harmonization/api-harmonization/index.js",
+            "require": "./dist/api-harmonization/api-harmonization/index.js"
+        },
+        "./frontend": "./src/frontend/index.ts",
+        "./sdk": "./src/sdk/index.ts",
+        "./client": {
+            "types": "./src/api-harmonization/surveyjs-form.client.ts",
+            "import": "./dist/api-harmonization/api-harmonization/surveyjs-form.client.js",
+            "require": "./dist/api-harmonization/api-harmonization/surveyjs-form.client.js"
+        }
     },
-    "files": [
-        "dist"
-    ],
     "scripts": {
-        "dev": "tsc --build tsconfig.json  && (concurrently \"tsc --build tsconfig.json -w\" \"tsc-alias -w\")",
         "build": "tsc --build tsconfig.json && tsc-alias",
         "lint": "tsc --noEmit && eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
@@ -54,5 +58,21 @@
         "rxjs": "^7",
         "next": "^15.4.7",
         "next-intl": "^4.1.0"
+    },
+    "typesVersions": {
+        "*": {
+            "api-harmonization": [
+                "src/api-harmonization/index.ts"
+            ],
+            "frontend": [
+                "src/frontend/index.ts"
+            ],
+            "sdk": [
+                "src/sdk/index.ts"
+            ],
+            "client": [
+                "src/api-harmonization/surveyjs-form.client.ts"
+            ]
+        }
     }
 }

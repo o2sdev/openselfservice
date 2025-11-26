@@ -1,0 +1,18 @@
+{
+    "watch": [
+        "src",
+        "../../packages/blocks/**/*.ts"
+    ],
+    "ext": "ts,json",
+    "ignore": [
+        "src/**/*.spec.ts",
+        "node_modules",
+        "../../packages/blocks/*/src/frontend/**",
+        "../../packages/blocks/*/dist/**"
+    ],
+    "env": {
+        "TS_NODE_CACHE": "false",
+        "NODE_OPTIONS": "--no-warnings"
+    },
+    "exec": "node scripts/dev-wrapper.mjs"
+}

@@ -1,6 +1,7 @@
+import { PaginationQuery } from '../../utils/models/pagination';
+
 import { PaymentStatus } from './orders.model';
 import { OrderStatus } from './orders.model';
-import { PaginationQuery } from '@/utils/models/pagination';
 
 export class GetOrderParams {
     id!: string;

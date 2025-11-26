@@ -1,5 +1,6 @@
+import { PaginationQuery } from '../../utils/models/pagination';
+
 import { NotificationPriority, NotificationStatus } from './notifications.model';
-import { PaginationQuery } from '@/utils/models/pagination';
 
 export class GetNotificationParams {
     id!: string;

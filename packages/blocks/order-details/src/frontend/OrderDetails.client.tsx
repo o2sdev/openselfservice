@@ -170,7 +170,9 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
                 <div className="flex gap-4 lg:gap-16 flex-col lg:flex-row flex-wrap lg:flex-nowrap justify-between">
                     <div className="flex flex-col sm:flex-row gap-4 sm:items-start">
                         <Typography variant="h1" asChild>
-                            <h1>{data.order.id.value}</h1>
+                            <div className="flex flex-row gap-2">
+                                <h1>{data.order.id.value}</h1>
+                            </div>
                         </Typography>
 
                         {data.order.status.value && (

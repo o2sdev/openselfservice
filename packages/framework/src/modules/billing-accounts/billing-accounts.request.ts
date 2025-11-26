@@ -1,4 +1,4 @@
-import { PaginationQuery } from '@/utils/models/pagination';
+import { PaginationQuery } from '../../utils/models/pagination';
 
 export class GetBillingAccountsListQuery extends PaginationQuery {
     status?: string;

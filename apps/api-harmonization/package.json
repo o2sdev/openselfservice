@@ -11,10 +11,13 @@
         "./modules/*": "./src/modules/*.ts"
     },
     "scripts": {
-        "dev": "cross-env NODE_ENV=development nest start --watch",
-        "debug": "nest start --debug --watch",
+        "dev": "cross-env NODE_ENV=development nodemon",
+        "debug": "cross-env NODE_ENV=development nest start --debug --watch --exec \"node -r tsconfig-paths/register -r ts-node/register src/main.ts\"",
+        "prebuild": "npm run copy-blocks",
         "build": "nest build",
-        "start": "node dist/main",
+        "copy-blocks": "node scripts/copy-blocks.mjs",
+        "predev": "npm run copy-blocks",
+        "start": "node dist/apps/api-harmonization/src/main",
         "lint": "tsc --noEmit && eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
         "format": "prettier --write \"src/**/*.ts\"",
         "generate:component": "turbo gen api-component"
@@ -94,6 +97,7 @@
         "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-prettier": "^5.5.4",
         "jest": "^30.2.0",
+        "nodemon": "^3.1.11",
         "prettier": "^3.6.2",
         "source-map-support": "^0.5.21",
         "supertest": "^7.1.4",

@@ -6,6 +6,13 @@
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
         "paths": {
+            "@o2s/blocks.*/api-harmonization": [
+                "../../packages/blocks/*/src/api-harmonization/index.ts"
+            ],
+            "@o2s/blocks.*/sdk": [
+                "../../packages/blocks/*/src/sdk/index.ts"
+            ],
+
             "@o2s/api-harmonization/models/*": ["./src/models/*"],
             "@o2s/api-harmonization/blocks": ["./src/blocks"],
             "@o2s/api-harmonization/blocks/*": ["./src/blocks/*"],
@@ -15,6 +22,11 @@
             "@o2s/api-harmonization/utils": ["./src/utils"],
             "@o2s/api-harmonization/utils/*": ["./src/utils/*"],
             "@o2s/api-harmonization/lib/*": ["./src/hooks/*"]
-        }
+        },
+        "skipLibCheck": true
+    },
+    "ts-node": {
+        "transpileOnly": true,
+        "require": ["tsconfig-paths/register", "ts-node/register"]
     }
 }

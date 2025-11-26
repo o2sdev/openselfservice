@@ -3,7 +3,9 @@
     "private": true,
     "scripts": {
         "prepare": "husky",
-        "dev": "turbo dev --no-cache",
+        "dev": "cross-env INTEGRATIONS=mocked node scripts/dev-filter.mjs",
+        "dev:select": "node scripts/dev-filter.mjs",
+        "dev:all": "turbo dev --no-cache",
         "build": "turbo build",
         "start": "turbo start",
         "format": "turbo format",
