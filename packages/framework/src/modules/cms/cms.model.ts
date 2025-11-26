@@ -35,3 +35,4 @@ export * as ArticleSearchBlock from './models/blocks/article-search.model';
 export * as FeaturedServiceListBlock from './models/blocks/featured-service-list.model';
 export * as BentoGridBlock from './models/blocks/bento-grid.model';
 export * as CtaSectionBlock from './models/blocks/cta-section.model';
+export * as DocumentListBlock from './models/blocks/document-list.model';
