@@ -1,6 +1,6 @@
 ---
-slug: how-we-built-composable-client-portal-for-orange-energia-that-became-open-self-service
-title: 'How we built a composable client portal for Orange Energia that became the foundation for Open Self Service'
+slug: how-composable-client-portal-for-orange-energia-became-foundation-for-open-self-service
+title: 'How a composable client portal for Orange Energia became the foundation for Open Self Service'
 date: 2025-11-26
 tags: [case-studies]
 authors: [jan.jagoda, marcin.krasowski]
@@ -31,13 +31,13 @@ Orange Energia wanted a portal that would:
 - support future expansion without risky rebuilds,
 - and enable quick delivery cycles instead of long monolithic releases.
 
-To achieve this, we built the solution on Hycom's internal accelerator, **Enyu**.
+To achieve this, the solution was built on Hycom's internal accelerator, **Enyu**.
 
 ## What is Enyu and why it mattered
 
 ![Self-service for utilities](enyu-desktop.png)
 
-**[Enyu](https://hycom.digital/solutions/enyu-self-service-portal-for-energy-and-utilities), our composable, cloud-ready accelerator**, was created for building self-service portals across regulated industries like energy, utilities, and telco. It offered a headless, API-first architecture with ready-made UI components for self-service, reusable business modules such as billing, contracts, and notifications. The framework enabled decoupling frontends from backend systems and provided a strong integration layer for different APIs.
+**[Enyu](https://hycom.digital/solutions/enyu-self-service-portal-for-energy-and-utilities), a composable, cloud-ready accelerator**, was created for building self-service portals across regulated industries like energy, utilities, and telco. It offered a headless, API-first architecture with ready-made UI components for self-service, reusable business modules such as billing, contracts, and notifications. The framework enabled decoupling frontends from backend systems and provided a strong integration layer for different APIs.
 
 It was designed for organizations that needed fast delivery without compromising scalability or future-proof design. For Orange Energia, this meant we could build a highly customized client portal — while reusing modular components and delivering in shorter cycles than classic enterprise projects. Many of the capabilities required in the project — including billing, contracts, notifications, and identity management — came directly from Enyu's standard module set, which we configured and extended instead of designing a completely new architecture from scratch.
 
@@ -79,7 +79,7 @@ All of this was delivered with a modern, intuitive UI accessible across devices 
 
 ## Why composable architecture made the difference
 
-![Orange Energia architecture diagram](oe-composable.jpg)
+![Orange Energia architecture diagram](oe-arch.png)
 
 The strategic decision to build Orange Energia's portal in a composable model brought benefits that go far beyond the initial MVP.
 
@@ -95,7 +95,7 @@ The strategic decision to build Orange Energia's portal in a composable model br
 
 ## How Orange Energia's technical challenges shaped Open Self Service
 
-Building a composable portal for Orange Energia on top of our accelerator required solving several technical challenges that directly influenced how we designed Open Self Service. From content modeling constraints to enterprise security requirements, each decision helped us refine the platform-level patterns we had defined for our stack and confirm which of them actually work in production.
+Building a composable portal for Orange Energia on top of Hycom's accelerator required solving several technical challenges that directly influenced how we designed Open Self Service. From content modeling constraints to enterprise security requirements, each decision helped refine the platform-level patterns defined for this stack and confirmed which of them actually work in production.
 
 ### Content modeling and CMS flexibility
 
