@@ -42,7 +42,7 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({
 
     // Extract initial viewMode from filters if available
     const initialViewMode =
-        component.filters?.items.find((item) => item.__typename === 'FilterViewModeToggle')?.value || 'list';
+        component.filters?.items?.find((item) => item.__typename === 'FilterViewModeToggle')?.value || 'list';
 
     const [data, setData] = useState<Model.NotificationListBlock>(component);
     const [filters, setFilters] = useState(initialFilters);

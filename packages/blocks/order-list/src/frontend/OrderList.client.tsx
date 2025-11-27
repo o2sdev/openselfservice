@@ -39,9 +39,10 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
 
     const initialData = component.orders.data;
 
-    // Extract initial viewMode from filters if available
-    const initialViewMode =
-        component.filters?.items.find((item) => item.__typename === 'FilterViewModeToggle')?.value || 'list';
+    const initialViewMode: 'list' | 'grid' = (() => {
+        const value = component.filters?.items?.find((item) => item.__typename === 'FilterViewModeToggle')?.value;
+        return value === 'grid' ? 'grid' : 'list';
+    })();
 
     const [data, setData] = useState<Model.OrderListBlock>(component);
     const [filters, setFilters] = useState(initialFilters);
