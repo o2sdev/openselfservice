@@ -8,9 +8,8 @@ import React, { useState, useTransition } from 'react';
 import { Mappings } from '@o2s/utils.frontend';
 
 import { ActionList } from '@o2s/ui/components/ActionList';
-import { DataGrid } from '@o2s/ui/components/DataGrid';
-import { DataList } from '@o2s/ui/components/DataList';
 import type { DataListColumnConfig } from '@o2s/ui/components/DataList';
+import { DataView } from '@o2s/ui/components/DataView';
 import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
 import { FiltersSection } from '@o2s/ui/components/Filters';
 import { NoResults } from '@o2s/ui/components/NoResults';
@@ -183,16 +182,13 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                     <LoadingOverlay isActive={isPending}>
                         {data.tickets.data.length ? (
                             <div className="flex flex-col gap-6">
-                                {viewMode === 'grid' ? (
-                                    <DataGrid
-                                        data={data.tickets.data}
-                                        columns={columns}
-                                        actions={actions}
-                                        slots={data.slots}
-                                    />
-                                ) : (
-                                    <DataList data={data.tickets.data} columns={columns} actions={actions} />
-                                )}
+                                <DataView
+                                    viewMode={viewMode}
+                                    data={data.tickets.data}
+                                    columns={columns}
+                                    actions={actions}
+                                    slots={data.slots}
+                                />
 
                                 {data.pagination && (
                                     <Pagination
