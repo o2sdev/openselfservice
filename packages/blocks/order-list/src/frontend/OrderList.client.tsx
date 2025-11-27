@@ -6,8 +6,8 @@ import React, { useState, useTransition } from 'react';
 
 import { Mappings } from '@o2s/utils.frontend';
 
-import { DataList } from '@o2s/ui/components/DataList';
 import type { DataListColumnConfig } from '@o2s/ui/components/DataList';
+import { DataView } from '@o2s/ui/components/DataView';
 import { FiltersSection } from '@o2s/ui/components/Filters';
 import { NoResults } from '@o2s/ui/components/NoResults';
 import { Pagination } from '@o2s/ui/components/Pagination';
@@ -39,8 +39,13 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
 
     const initialData = component.orders.data;
 
+    // Extract initial viewMode from filters if available
+    const initialViewMode =
+        component.filters?.items.find((item) => item.__typename === 'FilterViewModeToggle')?.value || 'list';
+
     const [data, setData] = useState<Model.OrderListBlock>(component);
     const [filters, setFilters] = useState(initialFilters);
+    const [viewMode, setViewMode] = useState<'list' | 'grid'>(initialViewMode);
 
     const [isPending, startTransition] = useTransition();
 
@@ -146,7 +151,23 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
                     <FiltersSection
                         title={data.subtitle}
                         initialFilters={initialFilters}
-                        filters={data.filters}
+                        filters={
+                            data.filters
+                                ? {
+                                      ...data.filters,
+                                      items: data.filters.items.map((item) => {
+                                          if (item.__typename === 'FilterViewModeToggle') {
+                                              return {
+                                                  ...item,
+                                                  value: viewMode,
+                                                  onChange: setViewMode,
+                                              };
+                                          }
+                                          return item;
+                                      }),
+                                  }
+                                : undefined
+                        }
                         initialValues={filters}
                         onSubmit={handleFilter}
                         onReset={handleReset}
@@ -155,11 +176,12 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
                     <LoadingOverlay isActive={isPending}>
                         {data.orders.data.length ? (
                             <div className="flex flex-col gap-6">
-                                <DataList
+                                <DataView
+                                    viewMode={viewMode}
                                     data={data.orders.data}
-                                    getRowKey={(order) => order.id.value}
                                     columns={columns}
                                     actions={actions}
+                                    cardHeaderSlots={data.cardHeaderSlots}
                                 />
 
                                 {data.pagination && (

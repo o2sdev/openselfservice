@@ -149,7 +149,7 @@ export const BasicGrid: Story = {
     args: {
         data: sampleTickets as Record<string, unknown>[],
         columns: ticketColumns as DataListColumnConfig<Record<string, unknown>>[],
-        slots: {
+        cardHeaderSlots: {
             left: 'id',
             right: 'status',
             bottom: 'updatedAt',
@@ -161,7 +161,7 @@ export const WithActions: Story = {
     args: {
         data: sampleTickets as Record<string, unknown>[],
         columns: ticketColumns as DataListColumnConfig<Record<string, unknown>>[],
-        slots: {
+        cardHeaderSlots: {
             left: 'id',
             right: 'status',
             bottom: 'updatedAt',
@@ -182,7 +182,7 @@ export const CustomColumnCount: Story = {
     args: {
         data: sampleTickets as Record<string, unknown>[],
         columns: ticketColumns as DataListColumnConfig<Record<string, unknown>>[],
-        slots: {
+        cardHeaderSlots: {
             left: 'id',
             right: 'status',
             bottom: 'updatedAt',
@@ -208,7 +208,7 @@ export const WithTopSlot: Story = {
     args: {
         data: sampleTickets as Record<string, unknown>[],
         columns: ticketColumns as DataListColumnConfig<Record<string, unknown>>[],
-        slots: {
+        cardHeaderSlots: {
             top: 'topic',
             left: 'id',
             right: 'status',
@@ -237,7 +237,7 @@ export const WithMultipleActions: Story = {
     args: {
         data: sampleTickets as Record<string, unknown>[],
         columns: ticketColumns as DataListColumnConfig<Record<string, unknown>>[],
-        slots: {
+        cardHeaderSlots: {
             left: 'id',
             right: 'status',
             bottom: 'updatedAt',

@@ -115,6 +115,11 @@ const MOCK_NOTIFICATION_LIST_BLOCK_EN: CMS.Model.NotificationListBlock.Notificat
                     label: 'To',
                 },
             },
+            {
+                __typename: 'FilterViewModeToggle',
+                id: 'viewMode',
+                value: 'list',
+            },
         ],
     },
     noResults: {
@@ -127,6 +132,11 @@ const MOCK_NOTIFICATION_LIST_BLOCK_EN: CMS.Model.NotificationListBlock.Notificat
         clickToSelect: 'Click to select',
     },
     detailsUrl: '/notifications/:id',
+    cardHeaderSlots: {
+        left: 'title',
+        right: 'status',
+        bottom: 'createdAt',
+    },
 };
 
 const MOCK_NOTIFICATION_LIST_BLOCK_DE: CMS.Model.NotificationListBlock.NotificationListBlock = {
@@ -244,6 +254,11 @@ const MOCK_NOTIFICATION_LIST_BLOCK_DE: CMS.Model.NotificationListBlock.Notificat
                     label: 'Bis',
                 },
             },
+            {
+                __typename: 'FilterViewModeToggle',
+                id: 'viewMode',
+                value: 'list',
+            },
         ],
     },
     noResults: {
@@ -256,6 +271,11 @@ const MOCK_NOTIFICATION_LIST_BLOCK_DE: CMS.Model.NotificationListBlock.Notificat
         clickToSelect: 'Klicken Sie, um auszuwählen',
     },
     detailsUrl: '/benachrichtigungen/:id',
+    cardHeaderSlots: {
+        left: 'title',
+        right: 'priority',
+        bottom: 'createdAt',
+    },
 };
 
 const MOCK_NOTIFICATION_LIST_BLOCK_PL: CMS.Model.NotificationListBlock.NotificationListBlock = {
@@ -373,6 +393,11 @@ const MOCK_NOTIFICATION_LIST_BLOCK_PL: CMS.Model.NotificationListBlock.Notificat
                     label: 'Do',
                 },
             },
+            {
+                __typename: 'FilterViewModeToggle',
+                id: 'viewMode',
+                value: 'list',
+            },
         ],
     },
     noResults: {
@@ -385,6 +410,11 @@ const MOCK_NOTIFICATION_LIST_BLOCK_PL: CMS.Model.NotificationListBlock.Notificat
         clickToSelect: 'Kliknij, aby wybrać',
     },
     detailsUrl: '/powiadomienia/:id',
+    cardHeaderSlots: {
+        left: 'title',
+        right: 'priority',
+        bottom: 'createdAt',
+    },
 };
 
 export const mapNotificationListBlock = (locale: string): CMS.Model.NotificationListBlock.NotificationListBlock => {

@@ -8,14 +8,14 @@ import { DataViewProps } from './DataView.types';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const DataView = <T extends Record<string, any>>({
     viewMode,
-    slots,
+    cardHeaderSlots,
     columnsCount,
     ...props
 }: DataViewProps<T>) => {
     return (
         <>
             {viewMode === 'grid' ? (
-                <DataGrid {...props} slots={slots} columnsCount={columnsCount} />
+                <DataGrid {...props} cardHeaderSlots={cardHeaderSlots} columnsCount={columnsCount} />
             ) : (
                 <DataList {...props} />
             )}

@@ -2,7 +2,7 @@ import { DataListActionsConfig, DataListColumnConfig } from '../DataList/DataLis
 
 export interface DataViewProps<T> {
     viewMode: 'grid' | 'list';
-    slots?: {
+    cardHeaderSlots?: {
         top?: string;
         left?: string;
         right?: string;

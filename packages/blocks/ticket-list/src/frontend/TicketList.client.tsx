@@ -187,7 +187,7 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                                     data={data.tickets.data}
                                     columns={columns}
                                     actions={actions}
-                                    slots={data.slots}
+                                    cardHeaderSlots={data.cardHeaderSlots}
                                 />
 
                                 {data.pagination && (

@@ -28,7 +28,7 @@ export const mapTicketList = (
         labels: cms.labels,
         initialFilters: cms.initialFilters,
         meta: cms.meta,
-        slots: cms.slots,
+        cardHeaderSlots: cms.cardHeaderSlots,
     };
 };
 

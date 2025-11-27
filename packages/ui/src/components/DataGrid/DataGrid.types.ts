@@ -43,9 +43,9 @@ export interface DataGridProps<T> {
     actions?: DataListActionsConfig<T>;
 
     /**
-     * Optional slots configuration
+     * Optional card header slots configuration for positioning columns in the card header
      */
-    slots?: {
+    cardHeaderSlots?: {
         top?: string;
         left?: string;
         right?: string;

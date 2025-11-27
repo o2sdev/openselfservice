@@ -133,7 +133,7 @@ export const GridView: Story = {
         viewMode: 'grid',
         data: sampleTickets as Record<string, unknown>[],
         columns: ticketColumns as DataListColumnConfig<Record<string, unknown>>[],
-        slots: {
+        cardHeaderSlots: {
             left: 'id',
             right: 'status',
             bottom: 'updatedAt',

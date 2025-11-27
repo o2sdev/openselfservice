@@ -36,7 +36,7 @@ export function DataGrid<T extends Record<string, any>>({
     data,
     columns,
     actions,
-    slots,
+    cardHeaderSlots,
     getRowKey,
     className,
     getRowClassName,
@@ -62,12 +62,17 @@ export function DataGrid<T extends Record<string, any>>({
         return columns.find((col) => col.id === id);
     };
 
-    const topColumn = findColumnById(slots?.top);
-    const leftColumn = findColumnById(slots?.left);
-    const rightColumn = findColumnById(slots?.right);
-    const bottomColumn = findColumnById(slots?.bottom);
+    const topColumn = findColumnById(cardHeaderSlots?.top);
+    const leftColumn = findColumnById(cardHeaderSlots?.left);
+    const rightColumn = findColumnById(cardHeaderSlots?.right);
+    const bottomColumn = findColumnById(cardHeaderSlots?.bottom);
 
-    const slotIds = [slots?.top, slots?.left, slots?.right, slots?.bottom].filter(Boolean) as string[];
+    const slotIds = [
+        cardHeaderSlots?.top,
+        cardHeaderSlots?.left,
+        cardHeaderSlots?.right,
+        cardHeaderSlots?.bottom,
+    ].filter(Boolean) as string[];
     const bodyColumns = columns.filter((col) => !slotIds.includes(String(col.id)));
 
     return (

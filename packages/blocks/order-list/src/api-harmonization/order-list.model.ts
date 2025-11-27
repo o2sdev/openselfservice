@@ -25,6 +25,12 @@ export class OrderListBlock extends ApiModels.Block.Block {
     };
     reorderLabel?: string;
     initialFilters?: Partial<Orders.Model.Order & { sort?: string }>;
+    cardHeaderSlots?: {
+        top?: string;
+        left?: string;
+        right?: string;
+        bottom?: string;
+    };
 }
 
 export class Order {

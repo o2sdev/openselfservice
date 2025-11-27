@@ -55,7 +55,7 @@ export const Default: Story = {
                 label: 'Details',
             },
         },
-        slots: {
+        cardHeaderSlots: {
             left: 'id',
             right: 'status',
             bottom: 'updatedAt',

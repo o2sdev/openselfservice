@@ -33,7 +33,7 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
             label: 'Details',
         },
     },
-    slots: {
+    cardHeaderSlots: {
         left: 'topic',
         right: 'status',
         bottom: 'updatedAt',
@@ -196,7 +196,7 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
             label: 'Details',
         },
     },
-    slots: {
+    cardHeaderSlots: {
         left: 'topic',
         right: 'status',
         bottom: 'updatedAt',
@@ -362,7 +362,7 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
             label: 'Szczegóły',
         },
     },
-    slots: {
+    cardHeaderSlots: {
         left: 'topic',
         right: 'status',
         bottom: 'updatedAt',

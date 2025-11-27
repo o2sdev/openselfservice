@@ -22,7 +22,7 @@ export class TicketListBlock extends Block.Block<Meta> {
     };
     detailsUrl!: string;
     forms?: Link[];
-    slots?: {
+    cardHeaderSlots?: {
         top?: string;
         left?: string;
         right?: string;
