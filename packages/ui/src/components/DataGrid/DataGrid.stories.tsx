@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Download, Eye } from 'lucide-react';
+import { ArrowRight, Download } from 'lucide-react';
 
 import { Button } from '@o2s/ui/elements/button';
 
@@ -169,8 +169,8 @@ export const WithActions: Story = {
         actions: {
             title: '',
             render: (_item) => (
-                <Button variant="tertiary" className="flex items-center gap-2">
-                    <Eye className="h-4 w-4" />
+                <Button asChild variant="link" className="flex items-center gap-2">
+                    <ArrowRight className="h-4 w-4" />
                     View Details
                 </Button>
             ),
@@ -195,8 +195,8 @@ export const CustomColumnCount: Story = {
         actions: {
             title: '',
             render: (_item) => (
-                <Button variant="tertiary" className="flex items-center gap-2">
-                    <Eye className="h-4 w-4" />
+                <Button asChild variant="link" className="flex items-center gap-2">
+                    <ArrowRight className="h-4 w-4" />
                     View Details
                 </Button>
             ),
@@ -217,8 +217,8 @@ export const WithTopSlot: Story = {
         actions: {
             title: '',
             render: (_item) => (
-                <Button variant="tertiary" className="flex items-center gap-2">
-                    <Eye className="h-4 w-4" />
+                <Button asChild variant="link" className="flex items-center gap-2">
+                    <ArrowRight className="h-4 w-4" />
                     View Details
                 </Button>
             ),
@@ -247,7 +247,7 @@ export const WithMultipleActions: Story = {
             render: (_item) => (
                 <div className="flex gap-2 w-full">
                     <Button variant="tertiary" className="w-full flex items-center gap-2">
-                        <Eye className="h-4 w-4" />
+                        <ArrowRight className="h-4 w-4" />
                         View Details
                     </Button>
                     <Button variant="outline" className="w-full flex items-center gap-2">

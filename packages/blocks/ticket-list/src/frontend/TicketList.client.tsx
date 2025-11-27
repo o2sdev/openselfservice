@@ -99,16 +99,6 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
         ? {
               ...data.table.actions,
               render: (ticket: Model.Ticket) => {
-                  if (viewMode === 'grid') {
-                      return (
-                          <Button asChild variant="tertiary" className="flex items-center gap-2">
-                              <LinkComponent href={ticket.detailsUrl}>
-                                  <ArrowRight className="h-4 w-4" />
-                                  {data.table.actions!.label}
-                              </LinkComponent>
-                          </Button>
-                      );
-                  }
                   return (
                       <Button asChild variant="link">
                           <LinkComponent href={ticket.detailsUrl} className="flex items-center justify-end gap-2">
