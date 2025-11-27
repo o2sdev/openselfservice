@@ -191,7 +191,7 @@ const MOCK_PRODUCT_LIST_BLOCK_DE: CMS.Model.ProductListBlock.ProductListBlock = 
                     { label: 'Messung', value: 'MEASUREMENT' },
                     { label: 'Cloud', value: 'CLOUD' },
                     { label: 'Support', value: 'SUPPORT' },
-                    { label: 'Subskryption', value: 'SUBSCRIPTION' },
+                    { label: 'Abonnement', value: 'SUBSCRIPTION' },
                     { label: 'Garantie', value: 'WARRANTY' },
                     { label: 'Wartung', value: 'MAINTENANCE' },
                     { label: 'Training', value: 'TRAINING' },
