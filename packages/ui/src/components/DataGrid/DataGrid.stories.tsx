@@ -64,7 +64,7 @@ const sampleTickets: Ticket[] = [
         },
         serviceman: { label: 'Mike Johnson', value: 'mike-johnson', avatar: 'MJ' },
         location: { label: 'Los Angeles, 456 Oak Avenue', value: 'los-angeles' },
-        completionDate: { label: '', value: '' },
+        completionDate: { label: '28.10.2025', value: '2025-10-28' },
         detailsUrl: '/tickets/SR-12346',
     },
     {
@@ -78,9 +78,9 @@ const sampleTickets: Ticket[] = [
             label: 'Cooling system issues. Temperature exceeds norms.',
             value: 'cooling-issue',
         },
-        serviceman: { label: '', value: '', avatar: '' },
+        serviceman: { label: 'Mike Johnson', value: 'mike-johnson', avatar: 'MJ' },
         location: { label: 'Chicago, 789 Elm Street', value: 'chicago' },
-        completionDate: { label: '', value: '' },
+        completionDate: { label: '27.10.2025', value: '2025-10-27' },
         detailsUrl: '/tickets/SR-12347',
     },
 ];
@@ -169,7 +169,7 @@ export const WithActions: Story = {
         actions: {
             title: '',
             render: (_item) => (
-                <Button asChild variant="link" className="flex items-center gap-2">
+                <Button variant="link" className="flex items-center gap-2">
                     <ArrowRight className="h-4 w-4" />
                     View Details
                 </Button>
@@ -195,7 +195,7 @@ export const CustomColumnCount: Story = {
         actions: {
             title: '',
             render: (_item) => (
-                <Button asChild variant="link" className="flex items-center gap-2">
+                <Button variant="link" className="flex items-center gap-2">
                     <ArrowRight className="h-4 w-4" />
                     View Details
                 </Button>
@@ -217,7 +217,7 @@ export const WithTopSlot: Story = {
         actions: {
             title: '',
             render: (_item) => (
-                <Button asChild variant="link" className="flex items-center gap-2">
+                <Button variant="link" className="flex items-center gap-2">
                     <ArrowRight className="h-4 w-4" />
                     View Details
                 </Button>
