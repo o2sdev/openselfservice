@@ -1,0 +1,22 @@
+fragment Footer on Footer {
+    sys {
+        ...Sys
+    }
+    title
+    logo {
+        ...Media
+    }
+    itemsCollection {
+        items {
+            ... on ComponentNavigationGroup {
+                ...NavigationGroup
+            }
+            ... on ComponentNavigationItem {
+                ...NavigationItem
+            }
+        }
+    }
+    copyright
+    logoLabel
+}
+

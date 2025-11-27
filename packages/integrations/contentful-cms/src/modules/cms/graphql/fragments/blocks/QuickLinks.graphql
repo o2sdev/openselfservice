@@ -1,0 +1,13 @@
+fragment QuickLinksComponent on BlockQuickLinks {
+    __typename
+    sys {
+        ...Sys
+    }
+    title
+    description
+    itemsCollection {
+        items {
+            ...Link
+        }
+    }
+}
