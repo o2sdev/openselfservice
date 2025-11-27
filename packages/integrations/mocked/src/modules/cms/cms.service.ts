@@ -23,6 +23,7 @@ import { mapOrderListBlock } from './mappers/blocks/cms.order-list.mapper';
 import { mapOrdersSummaryBlock } from './mappers/blocks/cms.orders-summary.mapper';
 import { mapPaymentsHistoryBlock } from './mappers/blocks/cms.payments-history.mapper';
 import { mapPaymentsSummaryBlock } from './mappers/blocks/cms.payments-summary.mapper';
+import { mapPricingSectionBlock } from './mappers/blocks/cms.pricing-section.mapper';
 import { mapResourceDetailsBlock } from './mappers/blocks/cms.resource-details.mapper';
 import { mapResourceListBlock } from './mappers/blocks/cms.resource-list.mapper';
 import { mapServiceDetailsBlock } from './mappers/blocks/cms.service-details.mapper';
@@ -221,5 +222,9 @@ export class CmsService implements CMS.Service {
 
     getMediaSectionBlock(options: CMS.Request.GetCmsEntryParams) {
         return of(mapMediaSectionBlock(options)).pipe(responseDelay());
+    }
+
+    getPricingSectionBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapPricingSectionBlock(options)).pipe(responseDelay());
     }
 }
