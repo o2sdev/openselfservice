@@ -1,41 +1,17 @@
-import { Product, Products } from '@/modules/products/products.model';
+import { Product } from '@/modules/products/products.model';
 
-import { Block, DataTable, Filters, Pagination } from '@/utils/models';
-
-type ProductKeys = keyof Product | string | '__typename';
-
-type ProductTableColumn = Omit<DataTable.DataTableColumn<Product>, 'id'> & {
-    id: ProductKeys;
-};
-
-type ProductDataTable = Omit<DataTable.DataTable<Product>, 'columns'> & {
-    columns: ProductTableColumn[];
-};
-
-type ProductFilterSelect = Omit<Filters.FilterSelect<Product>, 'id'> & {
-    id: ProductKeys;
-};
-
-type ProductFilterDateRange = Omit<Filters.FilterDateRange<Product>, 'id'> & {
-    id: ProductKeys;
-};
-
-type ProductFilterItem = ProductFilterSelect | ProductFilterDateRange;
-
-type ProductFilters = Omit<Filters.Filters<Product>, 'items'> & {
-    items: ProductFilterItem[];
-};
+import { Block, DataTable, Filters, Mapping, Pagination } from '@/utils/models';
 
 export class ProductListBlock extends Block.Block {
     title!: string;
     subtitle?: string;
-    products!: Products;
-    table!: ProductDataTable;
+    table!: DataTable.DataTable<Product>;
+    fieldMapping!: Mapping.Mapping<Product>;
     pagination?: Pagination.Pagination;
-    filters?: ProductFilters;
+    filters?: Filters.Filters<Product & { sort?: string }>;
     noResults!: {
         title: string;
-        description: string;
+        description?: string;
     };
     labels!: {
         clickToSelect: string;

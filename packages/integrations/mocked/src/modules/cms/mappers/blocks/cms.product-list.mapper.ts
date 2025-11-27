@@ -5,9 +5,23 @@ const MOCK_PRODUCT_LIST_BLOCK_EN: CMS.Model.ProductListBlock.ProductListBlock = 
     title: 'Products',
     subtitle: 'Browse our product catalog',
     detailsLabel: 'View Details',
-    products: {
-        data: [],
-        total: 0,
+    fieldMapping: {
+        type: {
+            PHYSICAL: 'Physical',
+            VIRTUAL: 'Virtual',
+        },
+        category: {
+            SOFTWARE: 'Software',
+            TOOLS: 'Tools',
+            HARDWARE: 'Hardware',
+            MEASUREMENT: 'Measurement',
+            CLOUD: 'Cloud',
+            SUPPORT: 'Support',
+            SUBSCRIPTION: 'Subscription',
+            WARRANTY: 'Warranty',
+            MAINTENANCE: 'Maintenance',
+            TRAINING: 'Training',
+        },
     },
     table: {
         columns: [
@@ -96,9 +110,23 @@ const MOCK_PRODUCT_LIST_BLOCK_DE: CMS.Model.ProductListBlock.ProductListBlock = 
     title: 'Produkte',
     subtitle: 'Durchsuchen Sie unseren Produktkatalog',
     detailsLabel: 'Details anzeigen',
-    products: {
-        data: [],
-        total: 0,
+    fieldMapping: {
+        type: {
+            PHYSICAL: 'Physikalisch',
+            VIRTUAL: 'Virtuell',
+        },
+        category: {
+            SOFTWARE: 'Software',
+            TOOLS: 'Werkzeuge',
+            HARDWARE: 'Hardware',
+            MEASUREMENT: 'Messung',
+            CLOUD: 'Cloud',
+            SUPPORT: 'Support',
+            SUBSCRIPTION: 'Abonnement',
+            WARRANTY: 'Garantie',
+            MAINTENANCE: 'Wartung',
+            TRAINING: 'Schulung',
+        },
     },
     table: {
         columns: [
@@ -187,9 +215,23 @@ const MOCK_PRODUCT_LIST_BLOCK_PL: CMS.Model.ProductListBlock.ProductListBlock = 
     title: 'Produkty',
     subtitle: 'Przeglądaj nasz katalog produktów',
     detailsLabel: 'Zobacz szczegóły',
-    products: {
-        data: [],
-        total: 0,
+    fieldMapping: {
+        type: {
+            PHYSICAL: 'Fizyczny',
+            VIRTUAL: 'Wirtualny',
+        },
+        category: {
+            SOFTWARE: 'Oprogramowanie',
+            TOOLS: 'Narzędzia',
+            HARDWARE: 'Sprzęt',
+            MEASUREMENT: 'Pomiar',
+            CLOUD: 'Chmura',
+            SUPPORT: 'Wsparcie',
+            SUBSCRIPTION: 'Subskrypcja',
+            WARRANTY: 'Gwarancja',
+            MAINTENANCE: 'Konserwacja',
+            TRAINING: 'Szkolenie',
+        },
     },
     table: {
         columns: [

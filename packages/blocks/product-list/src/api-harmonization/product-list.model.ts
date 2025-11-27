@@ -16,6 +16,7 @@ export class ProductListBlock extends ApiModels.Block.Block {
         total: number;
     };
     table!: Models.DataTable.DataTable<ProductItem>;
+    fieldMapping!: Models.Mapping.Mapping<Products.Model.Product>;
     noResults!: {
         title: string;
         description?: string;

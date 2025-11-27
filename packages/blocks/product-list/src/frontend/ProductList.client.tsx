@@ -157,7 +157,7 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
                                     </ul>
                                 ) : (
                                     <div className="w-full overflow-x-auto">
-                                        <DataList<Model.Product>
+                                        <DataList
                                             data={data.products.data}
                                             columns={columns}
                                             actions={actions}

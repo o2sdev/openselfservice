@@ -16,16 +16,19 @@ export const mapProductList = (
         pagination: cms.pagination,
         filters: cms.filters as unknown as ProductListBlock['filters'],
         table: cms.table as unknown as ProductListBlock['table'],
+        fieldMapping: cms.fieldMapping,
         noResults: cms.noResults,
         labels: cms.labels,
         products: {
             total: products.total,
-            data: products.data.map((product) => mapProduct(product)),
+            data: products.data.map((product) => mapProduct(product, cms)),
         },
     };
 };
 
-const mapProduct = (product: Products.Model.Product): ProductItem => {
+const mapProduct = (product: Products.Model.Product, cms: CMS.Model.ProductListBlock.ProductListBlock): ProductItem => {
+    const { type, category } = cms.fieldMapping;
+
     return {
         __typename: 'ProductItem',
         id: product.id,
@@ -36,11 +39,11 @@ const mapProduct = (product: Products.Model.Product): ProductItem => {
         detailsUrl: product.link,
         type: {
             value: product.type,
-            label: product.type,
+            label: type?.[product.type] || product.type,
         },
         category: {
             value: product.category,
-            label: product.category,
+            label: category?.[product.category] || product.category,
         },
         price: product.price,
         image: product.image,
