@@ -133,8 +133,9 @@ const MOCK_NOTIFICATION_LIST_BLOCK_EN: CMS.Model.NotificationListBlock.Notificat
     },
     detailsUrl: '/notifications/:id',
     cardHeaderSlots: {
+        top: 'status',
         left: 'title',
-        right: 'status',
+        right: 'priority',
         bottom: 'createdAt',
     },
 };
@@ -272,6 +273,7 @@ const MOCK_NOTIFICATION_LIST_BLOCK_DE: CMS.Model.NotificationListBlock.Notificat
     },
     detailsUrl: '/benachrichtigungen/:id',
     cardHeaderSlots: {
+        top: 'status',
         left: 'title',
         right: 'priority',
         bottom: 'createdAt',
@@ -411,6 +413,7 @@ const MOCK_NOTIFICATION_LIST_BLOCK_PL: CMS.Model.NotificationListBlock.Notificat
     },
     detailsUrl: '/powiadomienia/:id',
     cardHeaderSlots: {
+        top: 'status',
         left: 'title',
         right: 'priority',
         bottom: 'createdAt',
