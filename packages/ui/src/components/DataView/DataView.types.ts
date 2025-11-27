@@ -1,4 +1,4 @@
-import { DataListActionsConfig, DataListColumnConfig } from '@o2s/ui/components/DataList/DataList.types';
+import { DataListActionsConfig, DataListColumnConfig } from '../DataList/DataList.types';
 
 export interface DataViewProps<T> {
     viewMode: 'grid' | 'list';
