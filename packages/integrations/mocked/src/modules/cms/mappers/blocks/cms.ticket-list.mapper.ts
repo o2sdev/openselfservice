@@ -34,7 +34,7 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
         },
     },
     slots: {
-        left: 'id',
+        left: 'topic',
         right: 'status',
         bottom: 'updatedAt',
     },
@@ -146,7 +146,7 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
             {
                 __typename: 'FilterViewModeToggle',
                 id: 'viewMode',
-                value: 'grid',
+                value: 'list',
             },
         ],
     },
@@ -197,7 +197,7 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
         },
     },
     slots: {
-        left: 'id',
+        left: 'topic',
         right: 'status',
         bottom: 'updatedAt',
     },
@@ -311,7 +311,7 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
             {
                 __typename: 'FilterViewModeToggle',
                 id: 'viewMode',
-                value: 'grid',
+                value: 'list',
             },
         ],
     },
@@ -363,7 +363,7 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
         },
     },
     slots: {
-        left: 'id',
+        left: 'topic',
         right: 'status',
         bottom: 'updatedAt',
     },
@@ -477,7 +477,7 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
             {
                 __typename: 'FilterViewModeToggle',
                 id: 'viewMode',
-                value: 'grid',
+                value: 'list',
             },
         ],
     },
