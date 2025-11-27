@@ -115,7 +115,7 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
     const actions = data.table.actions
         ? {
               ...data.table.actions,
-              cellClassName: 'py-0 w-[180px]',
+              cellClassName: viewMode === 'list' ? 'py-0 w-[180px]' : undefined,
               render: (order: Model.Order) => (
                   <div className="flex items-center">
                       <Button asChild variant="link">
