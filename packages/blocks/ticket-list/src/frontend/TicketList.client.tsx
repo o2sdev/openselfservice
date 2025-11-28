@@ -65,8 +65,13 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
             case 'topic':
                 return {
                     ...column,
-                    type: 'text',
+                    type: 'custom',
                     cellClassName: 'max-w-[200px] lg:max-w-md',
+                    render: (_value: unknown, ticket: Model.Ticket) => (
+                        <Button asChild variant="link" size="none">
+                            <LinkComponent href={ticket.detailsUrl}>{ticket.topic.label}</LinkComponent>
+                        </Button>
+                    ),
                 };
             case 'status':
                 return {
