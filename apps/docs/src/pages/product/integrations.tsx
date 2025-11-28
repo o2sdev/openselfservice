@@ -31,7 +31,7 @@ const INTEGRATION_SECTIONS: Array<{
     description: string;
     integrations: Array<{
         name: string;
-        status: 'available' | 'planned' | 'internal';
+        status: 'available' | 'planned' | 'enterprise';
         description: string;
         icon: React.ReactNode;
         link?: string;
@@ -54,7 +54,7 @@ const INTEGRATION_SECTIONS: Array<{
                 status: 'available',
                 description: 'CMS for multi-language content and marketing blocks.',
                 icon: <ContentfulIcon />,
-                link: '/contact',
+                link: '/docs/integrations/cms/contentful/overview',
             },
             {
                 name: 'Storyblok',
@@ -80,6 +80,7 @@ const INTEGRATION_SECTIONS: Array<{
                 status: 'available',
                 description: 'External ticketing and support knowledge base system.',
                 icon: <ZendeskIcon />,
+                link: '/docs/integrations/tickets/zendesk/overview',
             },
             {
                 name: 'Salesforce Service Cloud',
@@ -95,7 +96,7 @@ const INTEGRATION_SECTIONS: Array<{
         integrations: [
             {
                 name: 'SAP S/4 Hana',
-                status: 'internal',
+                status: 'enterprise',
                 description: 'ERP integration for billing, orders and document summaries.',
                 icon: <SAPIcon />,
                 link: '/contact',
@@ -121,7 +122,7 @@ const INTEGRATION_SECTIONS: Array<{
             },
             {
                 name: 'Keycloak',
-                status: 'internal',
+                status: 'enterprise',
                 description: 'Enterprise IAM for SSO, user management and OpenID flows.',
                 icon: <KeycloakIcon />,
                 link: '/contact',
@@ -168,7 +169,7 @@ const INTEGRATION_SECTIONS: Array<{
             },
             {
                 name: 'SAP S/4 Hana',
-                status: 'internal',
+                status: 'enterprise',
                 description: 'Used for order, billing, product and asset data integration.',
                 icon: <SAPIcon />,
                 link: '/contact',
@@ -200,7 +201,7 @@ const INTEGRATION_SECTIONS: Array<{
             },
             {
                 name: 'Notification API',
-                status: 'internal',
+                status: 'enterprise',
                 description: 'Our proprietary API for sending multi-channel notifications.',
                 icon: <O2SIcon />,
                 link: '/contact',
