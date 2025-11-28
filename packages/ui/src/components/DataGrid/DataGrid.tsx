@@ -135,7 +135,9 @@ export function DataGrid<T extends Record<string, any>>({
                         </CardContent>
 
                         {actions && (
-                            <CardFooter className={cn('pt-0 flex flex-col gap-4 items-end', actions.cellClassName)}>
+                            <CardFooter
+                                className={cn('pt-0 pb-3 flex flex-col gap-3 items-end', actions.cellClassName)}
+                            >
                                 <Separator />
                                 {actions.render ? actions.render(item) : null}
                             </CardFooter>

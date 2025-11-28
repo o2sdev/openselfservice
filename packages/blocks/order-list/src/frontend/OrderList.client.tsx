@@ -77,6 +77,9 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
                     cellClassName: 'py-0',
                     render: (value: unknown, order: Model.Order) => {
                         const idValue = value as { label: string };
+                        if (viewMode === 'grid') {
+                            return idValue.label;
+                        }
                         return (
                             <Button asChild variant="link">
                                 <LinkComponent href={order.detailsUrl}>{idValue.label}</LinkComponent>
