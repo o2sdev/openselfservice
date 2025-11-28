@@ -3,8 +3,8 @@
     "private": true,
     "scripts": {
         "prepare": "husky",
-        "predev": "turbo build -F=!{./apps/*} -F=!{./packages/cli/*}",
         "dev": "turbo watch dev",
+        "predev": "turbo build -F=!{./apps/*} -F=!{./packages/cli/*}",
         "build": "turbo build",
         "start": "turbo start",
         "format": "turbo format",
