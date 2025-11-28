@@ -37,6 +37,7 @@ const nextConfig: NextConfig = {
         silenceDeprecations: ['legacy-js-api'],
     },
     experimental: {
+        turbopackFileSystemCacheForDev: true,
         // dynamicIO: true,
         // cacheLife: {
         //     render: {
