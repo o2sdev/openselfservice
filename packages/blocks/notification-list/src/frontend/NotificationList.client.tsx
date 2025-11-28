@@ -79,9 +79,12 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({
             case 'title':
                 return {
                     ...column,
-                    type: 'text',
+                    type: 'custom',
                     cellClassName: (notification: Model.Notification) =>
                         cn('max-w-[200px] lg:max-w-md', notification.status.value === 'UNVIEWED' && 'font-semibold'),
+                    render: (_value: unknown, notification: Model.Notification) => (
+                        <LinkComponent href={notification.detailsUrl}>{notification.title}</LinkComponent>
+                    ),
                 };
             case 'type':
                 return {
