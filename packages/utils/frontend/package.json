@@ -12,8 +12,7 @@
         "dist"
     ],
     "scripts": {
-        "dev": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")",
-        "build": "tsc && tsc-alias",
+        "build": "tsc --preserveWatchOutput && tsc-alias",
         "lint": "tsc --noEmit && eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
         "format": "prettier --write \"src/**/*.ts\""
     },

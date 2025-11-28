@@ -9,7 +9,7 @@
     },
     "scripts": {
         "create-o2s-app": "ts-node ./src/index.ts",
-        "build": "tsc && tsc-alias",
+        "build": "tsc --preserveWatchOutput && tsc-alias",
         "lint": "tsc --noEmit && eslint . --max-warnings 0",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },

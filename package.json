@@ -3,7 +3,8 @@
     "private": true,
     "scripts": {
         "prepare": "husky",
-        "dev": "turbo dev --no-cache",
+        "predev": "turbo build -F=!{./apps/*} -F=!{./packages/cli/*}",
+        "dev": "turbo watch dev",
         "build": "turbo build",
         "start": "turbo start",
         "format": "turbo format",
@@ -20,7 +21,8 @@
         "find-missing-deps": "turbo boundaries",
         "storybook": "storybook dev -p 6006",
         "build-storybook": "npm run build && storybook build",
-        "clean": "npm exec --workspaces -- npx rimraf node_modules dist .next .turbo && npx rimraf node_modules dist .next .turbo"
+        "clean": "npm exec --workspaces -- npx rimraf node_modules dist .next .turbo && npx rimraf node_modules dist .next .turbo",
+        "clean:output": "npm exec --workspaces -- npx rimraf dist .next .turbo && npx rimraf dist .next .turbo"
     },
     "engines": {
         "node": ">=22"

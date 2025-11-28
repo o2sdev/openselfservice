@@ -3,7 +3,7 @@
         "//"
     ],
     "tasks": {
-        "start": {
+        "dev": {
             "env": [
                 "NODE_ENV",
                 "ANALYZE",
@@ -23,13 +23,23 @@
                 "CF_PREVIEW_SECRET"
             ]
         },
-        "dev": {
+        "start": {
             "env": [
-                "CF_PREVIEW_SECRET"
-            ]
-        },
-        "build": {
-            "env": [
+                "NODE_ENV",
+                "ANALYZE",
+                "NEXT_PUBLIC_LOG_LEVEL",
+                "NEXT_PUBLIC_LOG_COLORS_ENABLED",
+                "NEXT_PUBLIC_LOG_FORMAT",
+                "NEXT_PUBLIC_BASE_URL",
+                "NEXT_PUBLIC_API_URL",
+                "NEXT_PUBLIC_API_URL_INTERNAL",
+                "GITHUB_CLIENT_ID",
+                "GITHUB_CLIENT_SECRET",
+                "AUTH_SECRET",
+                "AUTH_TRUST_HOST",
+                "AUTH_GOOGLE_ID",
+                "AUTH_DEFAULT_USER_ROLE",
+                "AUTH_DATABASE_URL",
                 "CF_PREVIEW_SECRET"
             ]
         }

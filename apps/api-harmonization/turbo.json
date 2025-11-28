@@ -4,8 +4,39 @@
     ],
     "tasks": {
         "dev": {
-            "dependsOn": [
-                "build"
+            "env": [
+                "NODE_ENV",
+                "PORT",
+                "API_PREFIX",
+                "LOG_LEVEL",
+                "LOG_COLORS_ENABLED",
+                "LOG_FORMAT",
+                "DEFAULT_LOCALE",
+                "DEFAULT_CURRENCY",
+                "DEFAULT_PRODUCT_UNIT",
+                "SUPPORTED_CURRENCIES",
+                "SUPPORTED_LOCALES",
+                "FRONT_BASE_URLS",
+                "MOCKED_INTEGRATION_DELAYS_ENABLED",
+                "CMS_STRAPI_BASE_URL",
+                "CACHE_ENABLED",
+                "CACHE_TTL",
+                "CACHE_CACHE_REDIS_HOST",
+                "CACHE_REDIS_PORT",
+                "CACHE_REDIS_PASS",
+                "ALGOLIA_APP_ID",
+                "ALGOLIA_API_KEY",
+                "MEDUSAJS_BASE_URL",
+                "MEDUSAJS_PUBLISHABLE_API_KEY",
+                "MEDUSAJS_ADMIN_API_KEY",
+                "SEARCH_ARTICLES_INDEX_NAME",
+                "TELEMETRY_DISABLED",
+                "TELEMETRY_BASE_URL",
+                "CF_TOKEN",
+                "CF_PREVIEW_TOKEN",
+                "CF_SPACE_ID",
+                "CF_ENV",
+                "CF_MANAGEMENT_TOKEN"
             ]
         },
         "start": {
