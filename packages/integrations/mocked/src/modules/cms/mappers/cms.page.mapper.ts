@@ -36,6 +36,7 @@ import {
 } from './mocks/pages/notification-list.page';
 import { PAGE_ORDER_DETAILS_DE, PAGE_ORDER_DETAILS_EN, PAGE_ORDER_DETAILS_PL } from './mocks/pages/order-details.page';
 import { PAGE_ORDER_LIST_DE, PAGE_ORDER_LIST_EN, PAGE_ORDER_LIST_PL } from './mocks/pages/order-list.page';
+import { PAGE_PRODUCT_LIST_DE, PAGE_PRODUCT_LIST_EN, PAGE_PRODUCT_LIST_PL } from './mocks/pages/product-list.page';
 import {
     PAGE_SERVICE_DETAILS_DE,
     PAGE_SERVICE_DETAILS_EN,
@@ -141,6 +142,13 @@ export const mapPage = (slug: string, locale: string): CMS.Model.Page.Page | und
             return PAGE_SERVICE_LIST_DE;
         case '/uslugi':
             return PAGE_SERVICE_LIST_PL;
+
+        case '/products':
+            return PAGE_PRODUCT_LIST_EN;
+        case '/produkte':
+            return PAGE_PRODUCT_LIST_DE;
+        case '/produkty':
+            return PAGE_PRODUCT_LIST_PL;
 
         case slug.match(/\/services\/.+/)?.[0]:
             return {
@@ -267,6 +275,7 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_USER_ACCOUNT_PL,
                 PAGE_SERVICE_LIST_PL,
                 PAGE_SERVICE_DETAILS_PL,
+                PAGE_PRODUCT_LIST_PL,
                 PAGE_CONTACT_US_PL,
                 PAGE_COMPLAINT_FORM_PL,
                 PAGE_REQUEST_DEVICE_MAINTENANCE_PL,
@@ -288,6 +297,7 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_USER_ACCOUNT_DE,
                 PAGE_SERVICE_LIST_DE,
                 PAGE_SERVICE_DETAILS_DE,
+                PAGE_PRODUCT_LIST_DE,
                 PAGE_CONTACT_US_DE,
                 PAGE_COMPLAINT_FORM_DE,
                 PAGE_REQUEST_DEVICE_MAINTENANCE_DE,
@@ -309,6 +319,7 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_USER_ACCOUNT_EN,
                 PAGE_SERVICE_LIST_EN,
                 PAGE_SERVICE_DETAILS_EN,
+                PAGE_PRODUCT_LIST_EN,
                 PAGE_CONTACT_US_EN,
                 PAGE_COMPLAINT_FORM_EN,
                 PAGE_REQUEST_DEVICE_MAINTENANCE_EN,
@@ -334,6 +345,7 @@ export const getAlternativePages = (id: string, slug: string, locale: string): C
         PAGE_INVOICE_LIST_PL,
         PAGE_USER_ACCOUNT_PL,
         PAGE_SERVICE_LIST_PL,
+        PAGE_PRODUCT_LIST_PL,
         PAGE_DASHBOARD_DE,
         PAGE_TICKET_LIST_DE,
         PAGE_TICKET_DETAILS_DE,
@@ -342,6 +354,7 @@ export const getAlternativePages = (id: string, slug: string, locale: string): C
         PAGE_INVOICE_LIST_DE,
         PAGE_USER_ACCOUNT_DE,
         PAGE_SERVICE_LIST_DE,
+        PAGE_PRODUCT_LIST_DE,
         PAGE_DASHBOARD_EN,
         PAGE_TICKET_LIST_EN,
         PAGE_TICKET_DETAILS_EN,
@@ -350,6 +363,7 @@ export const getAlternativePages = (id: string, slug: string, locale: string): C
         PAGE_INVOICE_LIST_EN,
         PAGE_USER_ACCOUNT_EN,
         PAGE_SERVICE_LIST_EN,
+        PAGE_PRODUCT_LIST_EN,
         PAGE_SERVICE_DETAILS_EN,
         PAGE_SERVICE_DETAILS_DE,
         PAGE_SERVICE_DETAILS_PL,
