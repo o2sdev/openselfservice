@@ -17,7 +17,7 @@ npm run storybook
 This will start the Storybook development server on `http://localhost:6006` by default.
 
 :::info
-Make sure all dependencies are installed before running Storybook. If you encounter any issues, try running `npm install` first.
+Make sure all dependencies are installed before running Storybook. If you encounter any issues, try running `npm install` first. You may also need to build the packages first by running `npm run build` or `npm run dev` to ensure all dependencies are properly compiled.
 :::
 
 ## Building Storybook
@@ -64,7 +64,7 @@ Storybook includes several useful addons:
 
 ## Creating New Stories
 
-To add a new story for a component, create a file with the `.stories.tsx` or `.stories.ts` extension in the same directory as your component. Storybook will automatically discover and include it.
+To add a new story for a component, create a file with the `.stories.tsx` extension in the same directory as your component. Storybook will automatically discover and include it.
 
 Example story structure:
 
