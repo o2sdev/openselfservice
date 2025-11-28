@@ -1,5 +1,23 @@
 # @o2s/ui
 
+## 1.5.0
+
+### Minor Changes
+
+- 0d1b8cc: Added Live Preview support in blocks
+- 485731c: enhance Checkbox, Select and Input components with error support
+- 51b17ed: Adding new Carousel component
+- 3da2e69: Added search functionality to invoice list filters
+
+### Patch Changes
+
+- 8ac0de9: added missing dependencies
+- Updated dependencies [0d1b8cc]
+- Updated dependencies [8ac0de9]
+- Updated dependencies [ac245c5]
+- Updated dependencies [3da2e69]
+    - @o2s/framework@1.12.0
+
 ## 1.4.0
 
 ### Minor Changes
@@ -40,7 +58,6 @@
 ### Minor Changes
 
 - 027ed39: featuredServiceListBlock - list of available services
-
     - added new UI componetnt from Shadcn - Switch,
     - extended ProductCard with action property,
     - implemented model and mock for FeatureServiceListBlock,
@@ -51,7 +68,6 @@
 ### Minor Changes
 
 - f015c2b: New block ArticleSearch - Input field with suggestions to find appropriate article.
-
     - added new UI component - Command,
     - added new articles mock,
     - added mock for ArticleSearchBlock,
@@ -70,7 +86,6 @@
 
 - 05eea01: chore: update dependencies
 - 44653fb: feat: orderDetails page implemented
-
     - added new UI component: InfoCard,
     - used InfoCard in PaymentsSummaryBlock, OrdersSummary and OrderDetails,
     - fixed ordersSummaryBlock integration with strapi,
@@ -82,7 +97,6 @@
 ### Minor Changes
 
 - 2e4f22d: feat: add scrollable toggle group filter with multiple selection
-
     - Add scroll container for toggle group filter in overlay view
     - Implement multiple selection version for toggle group filter
     - Add support for horizontal scrolling in filter items
@@ -95,14 +109,12 @@
 - 30f3524: added `OrdersSummary` block and reworked mocked orders to return random orders instead of them being hardcoded
 - 8b93cbf: feat: Integrated SurveyJS
 - 30f3524: feat: implemented orderListBlock
-
     - new page /orders,
     - added strapi integration for page /orders
     - new UI dropdown-menu component
 
 - 8b93cbf: feat: implement surveyJS forms
 - bb46536: feat: cases submission
-
     - new component DynamicIcon - for loading icons dinamicly,
     - new component ActionLinks - for showing button list with dropdown-menu,
     - new pages: /contact-us, /submit-complaint, /request-device-maintenance,

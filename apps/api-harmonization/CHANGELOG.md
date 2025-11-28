@@ -1,5 +1,41 @@
 # @o2s/api-harmonization
 
+## 1.11.0
+
+### Minor Changes
+
+- 0d1b8cc: Added Live Preview support in blocks
+- 0d1b8cc: feat: added contentful integration
+
+### Patch Changes
+
+- 8ac0de9: added missing dependencies
+- b519464: updated dependencies
+- 38f7825: added healthchecks
+- Updated dependencies [0d1b8cc]
+- Updated dependencies [8ac0de9]
+- Updated dependencies [ac245c5]
+- Updated dependencies [b57d151]
+- Updated dependencies [b519464]
+- Updated dependencies [b1c47e8]
+- Updated dependencies [3da2e69]
+- Updated dependencies [d3bf68c]
+    - @o2s/blocks.category-list@1.2.0
+    - @o2s/blocks.article-list@1.2.0
+    - @o2s/blocks.quick-links@1.2.0
+    - @o2s/blocks.ticket-list@1.2.0
+    - @o2s/blocks.article@1.2.0
+    - @o2s/blocks.faq@1.2.0
+    - @o2s/framework@1.12.0
+    - @o2s/blocks.article-search@1.1.1
+    - @o2s/utils.logger@1.1.1
+    - @o2s/blocks.notification-list@1.2.0
+    - @o2s/blocks.invoice-list@1.2.0
+    - @o2s/integrations.mocked@1.13.0
+    - @o2s/blocks.order-list@1.2.0
+    - @o2s/blocks.category@1.1.1
+    - @o2s/configs.integrations@0.1.1
+
 ## 1.10.0
 
 ### Minor Changes
@@ -215,7 +251,6 @@
 ### Minor Changes
 
 - 6949717: feat: updated resource integration - added product to the Resource model
-
     - updated service-list and service-details blocks,
     - added sorting and filters to mocks,
 
@@ -231,7 +266,6 @@
 ### Minor Changes
 
 - 027ed39: featuredServiceListBlock - list of available services
-
     - added new UI componetnt from Shadcn - Switch,
     - extended ProductCard with action property,
     - implemented model and mock for FeatureServiceListBlock,
@@ -262,7 +296,6 @@
 ### Minor Changes
 
 - 1ee5be1: feat: aligned buttons - used ActionList component with dropdown menu
-
     - used ActionList in the OrderDetailBlock to display buttons,
     - updated the mock and strapi - now an action is a Link,
     - used the format method from the string-template to inject a value into a string,
@@ -278,12 +311,10 @@
 ### Minor Changes
 
 - 565b63d: feat: fixed pagination issue in articleList
-
     - added new mocked articles
     - implemented new additionalLink in ArticleList
 
 - 5d16edf: orderDetails fixes:
-
     - order model update - product is required now,
     - filtering moved to order mapper,
     - PayOnline button visible only when the order is overdue,
@@ -291,7 +322,6 @@
 - 6225c14: remodeled how articles are kept in Strapi in order to suppport indexing them by search engines (e.g. Algolia) by separating them into their own content type
 - 61d4f2f: Added integration of services and assets with MedusaJS
 - f015c2b: New block ArticleSearch - Input field with suggestions to find appropriate article.
-
     - added new UI component - Command,
     - added new articles mock,
     - added mock for ArticleSearchBlock,
@@ -327,7 +357,6 @@
 
 - 05eea01: chore: update dependencies
 - 44653fb: feat: orderDetails page implemented
-
     - added new UI component: InfoCard,
     - used InfoCard in PaymentsSummaryBlock, OrdersSummary and OrderDetails,
     - fixed ordersSummaryBlock integration with strapi,
@@ -377,14 +406,12 @@
 - 30f3524: added `OrdersSummary` block and reworked mocked orders to return random orders instead of them being hardcoded
 - 8b93cbf: feat: Integrated SurveyJS
 - 8d92afc: Help center pages and subpages implemented:
-
     - Added new UI components InformativeCard, BlogCard, Author, ContentSection
     - Styled blocks, Article, Article List, Category, Category List
     - Added pagination to Category block
     - Made changes to mocks and models
 
 - 30f3524: feat: implemented orderListBlock
-
     - new page /orders,
     - added strapi integration for page /orders
     - new UI dropdown-menu component
@@ -393,7 +420,6 @@
 - 6d63cb1: feat: added surveyJS module
 - ba125d6: Added orders module
 - bb46536: feat: cases submission
-
     - new component DynamicIcon - for loading icons dinamicly,
     - new component ActionLinks - for showing button list with dropdown-menu,
     - new pages: /contact-us, /submit-complaint, /request-device-maintenance,
