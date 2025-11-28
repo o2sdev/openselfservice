@@ -8,7 +8,7 @@ export class NotificationListBlock extends Block.Block {
     table!: DataTable.DataTable<Notification>;
     fieldMapping!: Mapping.Mapping<Notification>;
     pagination?: Pagination.Pagination;
-    filters?: Filters.Filters<Notification>;
+    filters?: Filters.Filters<Notification & { sort?: string; viewMode?: 'list' | 'grid' }>;
     noResults!: {
         title: string;
         description?: string;
@@ -20,4 +20,10 @@ export class NotificationListBlock extends Block.Block {
     };
     detailsUrl!: string;
     initialFilters?: Partial<Notification & { sort?: string }>;
+    cardHeaderSlots?: {
+        top?: string;
+        left?: string;
+        right?: string;
+        bottom?: string;
+    };
 }

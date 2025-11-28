@@ -89,6 +89,11 @@ const MOCK_ORDER_LIST_BLOCK_EN: CMS.Model.OrderListBlock.OrderListBlock = {
                     label: 'To',
                 },
             },
+            {
+                __typename: 'FilterViewModeToggle',
+                id: 'viewMode',
+                value: 'list',
+            },
         ],
     },
     noResults: {
@@ -103,6 +108,11 @@ const MOCK_ORDER_LIST_BLOCK_EN: CMS.Model.OrderListBlock.OrderListBlock = {
     },
     reorderLabel: 'Reorder',
     detailsUrl: '/orders/{id}',
+    cardHeaderSlots: {
+        left: 'id',
+        right: 'status',
+        bottom: 'createdAt',
+    },
 };
 
 const MOCK_ORDER_LIST_BLOCK_DE: CMS.Model.OrderListBlock.OrderListBlock = {
@@ -194,6 +204,11 @@ const MOCK_ORDER_LIST_BLOCK_DE: CMS.Model.OrderListBlock.OrderListBlock = {
                     label: 'Bis',
                 },
             },
+            {
+                __typename: 'FilterViewModeToggle',
+                id: 'viewMode',
+                value: 'list',
+            },
         ],
     },
     noResults: {
@@ -208,6 +223,11 @@ const MOCK_ORDER_LIST_BLOCK_DE: CMS.Model.OrderListBlock.OrderListBlock = {
     },
     reorderLabel: 'Erneut bestellen',
     detailsUrl: '/bestellungen/{id}',
+    cardHeaderSlots: {
+        left: 'id',
+        right: 'status',
+        bottom: 'createdAt',
+    },
 };
 
 const MOCK_ORDER_LIST_BLOCK_PL: CMS.Model.OrderListBlock.OrderListBlock = {
@@ -299,6 +319,11 @@ const MOCK_ORDER_LIST_BLOCK_PL: CMS.Model.OrderListBlock.OrderListBlock = {
                     label: 'Do',
                 },
             },
+            {
+                __typename: 'FilterViewModeToggle',
+                id: 'viewMode',
+                value: 'list',
+            },
         ],
     },
     noResults: {
@@ -313,6 +338,11 @@ const MOCK_ORDER_LIST_BLOCK_PL: CMS.Model.OrderListBlock.OrderListBlock = {
     },
     reorderLabel: 'Zamów ponownie',
     detailsUrl: '/zamowienia/{id}',
+    cardHeaderSlots: {
+        left: 'id',
+        right: 'status',
+        bottom: 'createdAt',
+    },
 };
 
 export const mapOrderListBlock = (locale: string): CMS.Model.OrderListBlock.OrderListBlock => {

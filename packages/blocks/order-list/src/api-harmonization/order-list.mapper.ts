@@ -27,6 +27,7 @@ export const mapOrderList = (
         labels: cms.labels,
         reorderLabel: cms.reorderLabel,
         initialFilters: cms.initialFilters,
+        cardHeaderSlots: cms.cardHeaderSlots,
     };
 };
 

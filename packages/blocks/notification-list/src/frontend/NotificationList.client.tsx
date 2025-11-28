@@ -8,8 +8,8 @@ import { Mappings } from '@o2s/utils.frontend';
 
 import { cn } from '@o2s/ui/lib/utils';
 
-import { DataList } from '@o2s/ui/components/DataList';
 import type { DataListColumnConfig } from '@o2s/ui/components/DataList';
+import { DataView } from '@o2s/ui/components/DataView';
 import { FiltersSection } from '@o2s/ui/components/Filters';
 import { NoResults } from '@o2s/ui/components/NoResults';
 import { Pagination } from '@o2s/ui/components/Pagination';
@@ -39,8 +39,14 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({
     };
 
     const initialData = component.notifications.data;
+
+    // Extract initial viewMode from filters if available
+    const initialViewMode =
+        component.filters?.items?.find((item) => item.__typename === 'FilterViewModeToggle')?.value || 'list';
+
     const [data, setData] = useState<Model.NotificationListBlock>(component);
     const [filters, setFilters] = useState(initialFilters);
+    const [viewMode, setViewMode] = useState<'list' | 'grid'>(initialViewMode);
     const [isPending, startTransition] = useTransition();
 
     const handleFilter = (data: Partial<Request.GetNotificationListBlockQuery>) => {
@@ -135,7 +141,23 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({
                     <FiltersSection
                         title={data.subtitle}
                         initialFilters={initialFilters}
-                        filters={data.filters}
+                        filters={
+                            data.filters
+                                ? {
+                                      ...data.filters,
+                                      items: data.filters.items.map((item) => {
+                                          if (item.__typename === 'FilterViewModeToggle') {
+                                              return {
+                                                  ...item,
+                                                  value: viewMode,
+                                                  onChange: setViewMode,
+                                              };
+                                          }
+                                          return item;
+                                      }),
+                                  }
+                                : undefined
+                        }
                         initialValues={filters}
                         onSubmit={handleFilter}
                         onReset={handleReset}
@@ -144,14 +166,12 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({
                     <LoadingOverlay isActive={isPending}>
                         {data.notifications.data.length ? (
                             <div className="flex flex-col gap-6">
-                                <DataList
+                                <DataView
+                                    viewMode={viewMode}
                                     data={data.notifications.data}
-                                    getRowKey={(notification) => notification.id}
-                                    getRowClassName={(notification) => {
-                                        return notification.status.value === 'UNVIEWED' ? '' : '';
-                                    }}
                                     columns={columns}
                                     actions={actions}
+                                    cardHeaderSlots={data.cardHeaderSlots}
                                 />
 
                                 {data.pagination && (
