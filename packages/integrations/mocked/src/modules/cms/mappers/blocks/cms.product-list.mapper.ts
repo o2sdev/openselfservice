@@ -298,7 +298,7 @@ const MOCK_PRODUCT_LIST_BLOCK_PL: CMS.Model.ProductListBlock.ProductListBlock = 
                     { label: 'Wsparcie', value: 'SUPPORT' },
                     { label: 'Subskrypcja', value: 'SUBSCRIPTION' },
                     { label: 'Gwarancja', value: 'WARRANTY' },
-                    { label: 'Utrzymanie', value: 'MAINTENANCE' },
+                    { label: 'Konserwacja', value: 'MAINTENANCE' },
                     { label: 'Szkolenie', value: 'TRAINING' },
                 ],
             },
