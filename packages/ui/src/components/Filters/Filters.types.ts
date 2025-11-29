@@ -7,6 +7,7 @@ export interface FiltersProps<T, S> {
     onSubmit: (filters: Partial<S>) => void;
     onReset: () => void;
     hasLeadingItem?: boolean;
+    variant?: 'drawer' | 'inline';
     labels?: {
         clickToSelect?: string;
     };
