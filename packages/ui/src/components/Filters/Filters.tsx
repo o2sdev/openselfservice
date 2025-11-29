@@ -72,10 +72,10 @@ export const Filters = <T, S extends FormikValues>({
                     {({ submitForm, setFieldValue }) => (
                         <Form>
                             <div className="flex flex-col gap-4">
-                                {/* Filters container */}
-                                <div className="flex flex-wrap gap-4">
-                                    {filteredItems.map((item) => (
-                                        <div key={String(item.id)} className="flex-shrink-0">
+                                {/* Filters container - grid layout for desktop, full-width rows for mobile */}
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                                    {items.map((item) => (
+                                        <div key={String(item.id)} className="w-full">
                                             <FilterItem
                                                 item={item}
                                                 setFieldValue={setFieldValue}
@@ -85,12 +85,19 @@ export const Filters = <T, S extends FormikValues>({
                                         </div>
                                     ))}
                                 </div>
-                                {/* Action buttons */}
-                                <div className="flex gap-4">
-                                    <Button type="button" variant="secondary" onClick={handleReset}>
+                                {/* Action buttons - right-aligned on desktop, stretched on mobile */}
+                                <div className="flex flex-col sm:flex-row gap-4 sm:justify-end">
+                                    <Button
+                                        type="button"
+                                        variant="secondary"
+                                        onClick={handleReset}
+                                        className="w-full sm:w-auto sm:max-w-[50%]"
+                                    >
                                         {reset}
                                     </Button>
-                                    <Button type="submit">{submit}</Button>
+                                    <Button type="submit" className="w-full sm:w-auto sm:max-w-[50%]">
+                                        {submit}
+                                    </Button>
                                 </div>
                             </div>
                         </Form>
