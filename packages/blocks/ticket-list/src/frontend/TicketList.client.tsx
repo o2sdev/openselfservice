@@ -68,7 +68,7 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                     type: 'custom',
                     cellClassName: 'max-w-[200px] lg:max-w-md',
                     render: (_value: unknown, ticket: Model.Ticket) => (
-                        <Button asChild variant="link" size="none">
+                        <Button asChild variant="link" size="none" className="truncate block text-left">
                             <LinkComponent href={ticket.detailsUrl}>{ticket.topic.label}</LinkComponent>
                         </Button>
                     ),

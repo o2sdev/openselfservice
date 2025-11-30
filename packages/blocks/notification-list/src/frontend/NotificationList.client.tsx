@@ -82,7 +82,7 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({
                     type: 'custom',
                     cellClassName: 'max-w-[200px] lg:max-w-md',
                     render: (_value: unknown, notification: Model.Notification) => (
-                        <Button asChild variant="link" size="none">
+                        <Button asChild variant="link" size="none" className="truncate block text-left">
                             <LinkComponent href={notification.detailsUrl}>{notification.title}</LinkComponent>
                         </Button>
                     ),
