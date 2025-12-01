@@ -1,4 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/nextjs';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import { expect } from 'storybook/test';
 
 import { ArticleListPure } from './ArticleList.client';
 
@@ -169,5 +170,9 @@ export const Default: Story = {
         accessToken:
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmFuZSBEb2UiLCJlbWFpbCI6ImphbmVAZXhhbXBsZS5jb20iLCJyb2xlIjoic2VsZnNlcnZpY2Vfb3JnX2FkbWluIiwiY3VzdG9tZXIiOnsiaWQiOiJjdXN0LTAwMSIsInJvbGVzIjpbInNlbGZzZXJ2aWNlX29yZ191c2VyIiwic2VsZnNlcnZpY2Vfb3JnX3VzZXIiLCJzZWxmc2VydmljZV9vcmdfYWRtaW4iXSwibmFtZSI6IkFjbWUgQ29ycG9yYXRpb24ifSwiaWF0IjoxNzU2MzA4NTk1fQ.h3meFqpRjcnUwt2mGCuznazlWExkarqYZ2oNKHEgYzE',
         locale: 'en',
+    },
+    play: async ({ canvas }) => {
+        const title = canvas.getByText('Explore How-To Guides');
+        await expect(title).toBeInTheDocument();
     },
 };
