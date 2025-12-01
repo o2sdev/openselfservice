@@ -58,7 +58,9 @@ const config: StorybookConfig = {
                 }),
             ],
             define: {
-                'process.env': JSON.stringify(env),
+                process: {
+                    env: env,
+                },
             },
             optimizeDeps: {
                 include: ['@o2s/framework/modules', '@o2s/framework/sdk'],
