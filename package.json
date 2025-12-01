@@ -19,7 +19,8 @@
         "update-deps": "npx npm-check-updates --format group --workspaces --interactive",
         "find-missing-deps": "turbo boundaries",
         "storybook": "storybook dev -p 6006",
-        "build-storybook": "npm run build && storybook build",
+        "prebuild-storybook": "turbo build -F=!{./apps/*} -F=!{./packages/cli/*}",
+        "build-storybook": "storybook build",
         "test:storybook": "vitest --project=storybook",
         "clean": "npm exec --workspaces -- npx rimraf node_modules dist .next .turbo && npx rimraf node_modules dist .next .turbo"
     },
