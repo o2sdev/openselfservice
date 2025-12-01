@@ -265,5 +265,5 @@ export const mapFaqBlock = ({
 
 ## Additional resources
 
-For a detailed implementation story and technical deep-dive, see our blog article: [Integrating Contentful with Live Preview into composable apps](/blog/integrating-contentful-with-live-preview-into-composable-apps).
+For a detailed implementation story and technical deep-dive, see our blog article: [Integrating Contentful with Live Preview into composable Next.js apps](/blog/integrating-contentful-with-live-preview-into-composable-nextjs-apps).
 
