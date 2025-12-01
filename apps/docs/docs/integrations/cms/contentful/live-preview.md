@@ -80,17 +80,17 @@ The `LivePreviewProvider` is a React component that wraps your application and e
 First, wrap your application with the `LivePreviewProvider`:
 
 ```tsx
-import { LivePreviewProvider } from '@o2s/integrations.contentful-cms';
+import { LivePreview } from '@o2s/configs.integrations/live-preview';
 
 function App() {
     return (
-        <LivePreviewProvider
+        <LivePreview.Provider
             locale="en"
             enableInspectorMode={true}
             enableLiveUpdates={true}
         >
             {/* Your app content */}
-        </LivePreviewProvider>
+        </LivePreview.Provider>
     );
 }
 ```
@@ -115,10 +115,10 @@ The `useInspector` hook is a custom hook that simplifies using Live Preview insp
 ### Usage
 
 ```tsx
-import { useInspector } from '@o2s/integrations.contentful-cms';
+import { LivePreview } from '@o2s/configs.integrations/live-preview';
 
 function FaqItem({ item, meta }) {
-    const inspector = useInspector();
+    const inspector = LivePreview.useInspector();
 
     return (
         <div className="faq-item">
@@ -147,20 +147,20 @@ When a content editor clicks on an element with these attributes, they're taken 
 ```tsx
 'use client';
 
-import { LivePreviewProvider } from '@o2s/integrations.contentful-cms';
+import { LivePreview } from '@o2s/configs.integrations/live-preview';
 import { useLocale } from 'next-intl';
 
 export function Providers({ children }: { children: React.ReactNode }) {
     const locale = useLocale();
 
     return (
-        <LivePreviewProvider
+        <LivePreview.Provider
             locale={locale}
             enableInspectorMode={true}
             enableLiveUpdates={true}
         >
             {children}
-        </LivePreviewProvider>
+        </LivePreview.Provider>
     );
 }
 ```
@@ -170,7 +170,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
 ```tsx
 'use client';
 
-import { useInspector } from '@o2s/integrations.contentful-cms';
+import { LivePreview } from '@o2s/configs.integrations/live-preview';
 
 interface FaqBlockProps {
     title?: string;
@@ -185,7 +185,7 @@ interface FaqBlockProps {
 }
 
 export function FaqBlock({ title, subtitle, items, meta }: FaqBlockProps) {
-    const inspector = useInspector();
+    const inspector = LivePreview.useInspector();
 
     return (
         <div>
@@ -265,5 +265,5 @@ export const mapFaqBlock = ({
 
 ## Additional resources
 
-For a detailed implementation story and technical deep-dive, see our blog article: [Integrating Contentful with Live Preview into composable apps](/blog/integrating-contentful-with-live-preview-into-composable-apps).
+For a detailed implementation story and technical deep-dive, see our blog article: [Integrating Contentful with Live Preview into composable Next.js apps](/blog/integrating-contentful-with-live-preview-into-composable-nextjs-apps).
 

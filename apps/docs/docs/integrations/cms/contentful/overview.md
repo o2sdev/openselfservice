@@ -11,7 +11,7 @@ This integration provides a full integration with [Contentful CMS](https://www.c
 First, install the Contentful integration package:
 
 ```shell
-npm install @o2s/integrations.contentful-cms --workspace=@o2s/api
+npm install @o2s/integrations.contentful-cms --workspace=@o2s/configs.integrations --workspace=@o2s/frontend
 ```
 
 ## Environment variables
@@ -34,10 +34,9 @@ You can obtain these values from your Contentful space settings:
 
 ## Content model import
 
-To start, go to our resource repository where you can find the instructions on how to import the content model into your own Contentful space. Depending on which starter you use, this is one of:
+To start, go to our resource repository where you can find the instructions on how to import the content model into your own Contentful space:
 
 - [**Open Self Service** resources](https://github.com/o2sdev/openselfservice-resources/tree/main/packages/cms/contentful/o2s)
-- [**DXP Starter Kit** resources](https://github.com/o2sdev/openselfservice-resources/tree/main/packages/cms/contentful/dxp)
 
 ## Code generation
 
@@ -88,4 +87,4 @@ Cached entries are [stringified](https://www.npmjs.com/package/flatted) and save
 
 ## Additional resources
 
-For a detailed implementation story and technical deep-dive, see our blog article: [Integrating Contentful with Live Preview into composable apps](/blog/integrating-contentful-with-live-preview-into-composable-apps).
+For a detailed implementation story and technical deep-dive, see our blog article: [Integrating Contentful with Live Preview into composable Next.js apps](/blog/integrating-contentful-with-live-preview-into-composable-nextjs-apps).

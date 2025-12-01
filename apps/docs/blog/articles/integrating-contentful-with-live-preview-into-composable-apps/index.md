@@ -1,6 +1,6 @@
 ---
-slug: integrating-contentful-with-live-preview-into-composable-apps
-title: 'Integrating Contentful with Live Preview into composable apps'
+slug: integrating-contentful-with-live-preview-into-composable-nextjs-apps
+title: 'Integrating Contentful with Live Preview into composable Next.js apps'
 description: 'How we implemented a flexible Contentful integration with Live Preview support in our composable architecture'
 keywords:
     [
@@ -16,7 +16,7 @@ keywords:
         'react',
     ]
 date: 2025-11-26
-tags: [tech, contentful]
+tags: [tech, cms]
 authors: [marcin.krasowski]
 toc_max_heading_level: 3
 hide_table_of_contents: false
