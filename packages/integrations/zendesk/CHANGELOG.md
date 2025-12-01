@@ -1,15 +1,13 @@
-# @o2s/integrations.contentful-cms
+# @o2s/integrations.zendesk
 
-## 0.2.0
+## 2.0.0
 
-### Minor Changes
+### Major Changes
 
-- 0d1b8cc: Added Live Preview support in blocks
-- 0d1b8cc: feat: added contentful integration
+- 4542ea1: added a new integration with Zendesk in the area of retrievieng user tickets
 
 ### Patch Changes
 
-- b1c47e8: added mising live preview components to mocked and Strapi integrations
 - Updated dependencies [0d1b8cc]
 - Updated dependencies [8ac0de9]
 - Updated dependencies [ac245c5]
