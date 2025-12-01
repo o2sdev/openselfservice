@@ -2,10 +2,14 @@ import type { StorybookConfig } from '@storybook/nextjs-vite';
 import tailwindcss from '@tailwindcss/postcss';
 import react from '@vitejs/plugin-react';
 import * as dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { mergeConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
 import tsconfigPaths from 'vite-tsconfig-paths';
-import 'storybook/test'
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const env: {
     NEXT_PUBLIC_API_URL?: string;
@@ -23,12 +27,7 @@ const config: StorybookConfig = {
         '../packages/blocks/**/src/frontend/**/*.stories.@(js|jsx|mjs|ts|tsx)',
         '../packages/ui/**/*.stories.@(js|jsx|mjs|ts|tsx)',
     ],
-    addons: [
-        '@storybook/addon-docs',
-        '@storybook/addon-a11y',
-        '@storybook/addon-themes',
-        '@storybook/addon-vitest'
-    ],
+    addons: ['@storybook/addon-docs', '@storybook/addon-a11y', '@storybook/addon-themes', '@storybook/addon-vitest'],
     framework: {
         name: '@storybook/nextjs-vite',
         options: {},
@@ -66,6 +65,11 @@ const config: StorybookConfig = {
             },
             resolve: {
                 conditions: ['import', 'module', 'browser', 'default'],
+                alias: {
+                    '@o2s/configs.integrations/live-preview': path.resolve(__dirname, './mocks/live-preview.mock.ts'),
+                    '@o2s/framework/sdk': path.resolve(__dirname, '../packages/framework/src/sdk.ts'),
+                    '@o2s/framework/modules': path.resolve(__dirname, '../packages/framework/src/index.ts'),
+                },
             },
             ssr: {
                 noExternal: ['@o2s/**'],

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import 'storybook/test';
+import { expect } from 'storybook/test';
 
 import { ArticleSearchPure } from './ArticleSearch.client';
 
@@ -15,7 +15,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
     play: async ({ canvas, userEvent }) => {
         const searchInput = canvas.getByRole('combobox');
-
+        await expect(searchInput).toBeInTheDocument();
         const user = userEvent.setup({
             delay: 100,
         });
