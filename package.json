@@ -9,7 +9,6 @@
         "format": "turbo format",
         "lint": "turbo lint",
         "test": "turbo test",
-        "test:storybook": "vitest --project=storybook",
         "generate": "turbo gen",
         "eject-block": "ts-node ./scripts/cli.ts eject-block",
         "docs": "turbo start --filter=@o2s/docs",
@@ -21,6 +20,7 @@
         "find-missing-deps": "turbo boundaries",
         "storybook": "storybook dev -p 6006",
         "build-storybook": "npm run build && storybook build",
+        "test:storybook": "vitest --project=storybook",
         "clean": "npm exec --workspaces -- npx rimraf node_modules dist .next .turbo && npx rimraf node_modules dist .next .turbo"
     },
     "engines": {
