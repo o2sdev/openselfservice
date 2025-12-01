@@ -16,6 +16,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@o2s
 import { Typography } from '@o2s/ui/elements/typography';
 
 import { Link as NextLink, usePathname } from '@/i18n';
+import { LOGIN_PATH, routing } from '@/i18n/routing';
 
 import { MobileNavigationProps } from './MobileNavigation.types';
 
@@ -28,8 +29,23 @@ export function MobileNavigation({
     items,
     title,
     mobileMenuLabel,
+    isSignedIn,
 }: MobileNavigationProps) {
     const pathname = usePathname();
+
+    // Check if we're on login page
+    const loginPaths = routing.pathnames[LOGIN_PATH];
+    const normalizedPathname = pathname?.split('?')[0] || '';
+    const isLoginPage =
+        normalizedPathname === LOGIN_PATH ||
+        normalizedPathname.startsWith(`${LOGIN_PATH}/`) ||
+        (loginPaths &&
+            Object.values(loginPaths).some(
+                (loginPath) => normalizedPathname === loginPath || normalizedPathname.startsWith(`${loginPath}/`),
+            ));
+
+    // Show sign in button if user is not signed in and not on login page
+    const showSignInButton = !isSignedIn && !isLoginPage;
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -108,6 +124,13 @@ export function MobileNavigation({
 
                 {/* Right Section */}
                 <div className="flex gap-4">
+                    {/* Sign In Button */}
+                    {showSignInButton && (
+                        <Button asChild variant="tertiary">
+                            <NextLink href={LOGIN_PATH}>TODO: Add sign in labels</NextLink>
+                        </Button>
+                    )}
+
                     {/* Notification Button */}
                     {notificationSlot}
 

@@ -9,4 +9,5 @@ export interface DesktopNavigationProps {
     notificationSlot?: ReactNode;
     userSlot?: ReactNode;
     items: CMS.Model.Header.Header['items'];
+    isSignedIn?: boolean;
 }

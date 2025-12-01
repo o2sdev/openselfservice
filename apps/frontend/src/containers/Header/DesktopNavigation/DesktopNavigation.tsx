@@ -6,6 +6,7 @@ import { Models } from '@o2s/framework/modules';
 
 import { cn } from '@o2s/ui/lib/utils';
 
+import { Button } from '@o2s/ui/elements/button';
 import {
     NavigationMenu,
     NavigationMenuContent,
@@ -19,6 +20,7 @@ import { Separator } from '@o2s/ui/elements/separator';
 import { Typography } from '@o2s/ui/elements/typography';
 
 import { Link as NextLink, usePathname } from '@/i18n';
+import { LOGIN_PATH, routing } from '@/i18n/routing';
 
 import { DesktopNavigationProps } from './DesktopNavigation.types';
 
@@ -29,8 +31,23 @@ export function DesktopNavigation({
     notificationSlot,
     userSlot,
     items,
+    isSignedIn,
 }: DesktopNavigationProps) {
     const pathname = usePathname();
+
+    // Check if we're on login page
+    const loginPaths = routing.pathnames[LOGIN_PATH];
+    const normalizedPathname = pathname?.split('?')[0] || '';
+    const isLoginPage =
+        normalizedPathname === LOGIN_PATH ||
+        normalizedPathname.startsWith(`${LOGIN_PATH}/`) ||
+        (loginPaths &&
+            Object.values(loginPaths).some(
+                (loginPath) => normalizedPathname === loginPath || normalizedPathname.startsWith(`${loginPath}/`),
+            ));
+
+    // Show sign in button if user is not signed in and not on login page
+    const showSignInButton = !isSignedIn && !isLoginPage;
 
     const activeNavigationGroup = items.find((item) => {
         if (item.__typename === 'NavigationGroup') {
@@ -173,6 +190,13 @@ export function DesktopNavigation({
 
                         {/* Language Selector */}
                         {localeSlot}
+
+                        {/* Sign In Button */}
+                        {showSignInButton && (
+                            <Button asChild variant="tertiary">
+                                <NextLink href={LOGIN_PATH}>TODO: Add sign in labels</NextLink>
+                            </Button>
+                        )}
 
                         {/* Notification Button */}
                         {notificationSlot}

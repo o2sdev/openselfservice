@@ -82,6 +82,7 @@ export const Header: React.FC<HeaderProps> = ({ data, alternativeUrls, children 
                         notificationSlot={NotificationSlot}
                         userSlot={UserSlot}
                         items={data.items}
+                        isSignedIn={isSignedIn}
                     />
                 </div>
                 <div className="md:hidden">
@@ -94,6 +95,7 @@ export const Header: React.FC<HeaderProps> = ({ data, alternativeUrls, children 
                         items={data.items}
                         title={data.title}
                         mobileMenuLabel={data.mobileMenuLabel}
+                        isSignedIn={isSignedIn}
                     />
                 </div>
             </>
