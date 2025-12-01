@@ -11,7 +11,7 @@ This integration provides a full integration with [Contentful CMS](https://www.c
 First, install the Contentful integration package:
 
 ```shell
-npm install @o2s/integrations.contentful-cms --workspace=@o2s/api
+npm install @o2s/integrations.contentful-cms --workspace=@o2s/configs.integrations --workspace=@o2s/frontend
 ```
 
 ## Environment variables
