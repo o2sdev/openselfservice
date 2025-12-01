@@ -20,7 +20,7 @@
         "jwt-decode": "^4.0.0",
         "winston": "^3.18.3",
         "axios": "^1.13.2",
-        "express": "5.1.0"
+        "express": "5.2.0"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",
