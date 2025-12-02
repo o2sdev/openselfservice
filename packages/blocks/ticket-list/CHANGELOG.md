@@ -1,5 +1,27 @@
 # @o2s/blocks.ticket-list
 
+## 1.2.0
+
+### Minor Changes
+
+- 0d1b8cc: Added Live Preview support in blocks
+- ac245c5: adding initial filters support to list blocks
+
+### Patch Changes
+
+- Updated dependencies [0d1b8cc]
+- Updated dependencies [8ac0de9]
+- Updated dependencies [ac245c5]
+- Updated dependencies [485731c]
+- Updated dependencies [51b17ed]
+- Updated dependencies [b519464]
+- Updated dependencies [b1c47e8]
+- Updated dependencies [3da2e69]
+  - @o2s/framework@1.12.0
+  - @o2s/ui@1.5.0
+  - @o2s/utils.logger@1.1.1
+  - @o2s/configs.integrations@0.1.1
+
 ## 1.1.0
 
 ### Minor Changes

@@ -1,0 +1,8 @@
+query getFooter($id: String!, $locale: String!, $preview: Boolean) {
+    footerCollection(where: { sys: { id: $id } }, locale: $locale, limit: 1, preview: $preview) {
+        items {
+            ...Footer
+        }
+    }
+}
+

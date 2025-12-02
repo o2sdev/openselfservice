@@ -254,7 +254,18 @@ const config: Config = {
     markdown: {
         mermaid: true,
     },
-    plugins: [tailwindPlugin, '@docusaurus/theme-mermaid', 'docusaurus-plugin-image-zoom', 'docusaurus-plugin-sass'],
+    plugins: [
+        tailwindPlugin,
+        '@docusaurus/theme-mermaid',
+        'docusaurus-plugin-image-zoom',
+        'docusaurus-plugin-sass',
+        [
+            '@docusaurus/plugin-google-tag-manager',
+            {
+                containerId: 'GTM-MFNWVRP6',
+            },
+        ],
+    ],
     presets: [
         [
             'classic',
@@ -326,26 +337,53 @@ const config: Config = {
                 : [
                       {
                           type: 'dropdown',
+                          label: 'Product',
+                          position: 'left',
+                          items: [
+                              {
+                                  label: 'Features',
+                                  to: 'product/features',
+                                  className: 'dropdown__link--icon dropdown__link--icon-features',
+                              },
+                              {
+                                  label: 'Starters',
+                                  to: 'product/starters',
+                                  className: 'dropdown__link--icon dropdown__link--icon-starters',
+                              },
+                              {
+                                  label: 'Integrations',
+                                  to: 'product/integrations',
+                                  className: 'dropdown__link--icon dropdown__link--icon-integrations',
+                              },
+                          ],
+                      },
+                      {
+                          type: 'dropdown',
                           label: 'Developers',
                           position: 'left',
                           items: [
                               {
                                   label: 'Documentation',
                                   to: '/docs',
-                              },
-                              {
-                                  label: 'Community',
-                                  href: 'https://discord.gg/4R568nZgsT',
-                              },
-                              {
-                                  label: 'Changelog',
-                                  to: '/blog/tags/releases',
+                                  className: 'dropdown__link--icon dropdown__link--icon-documentation',
                               },
                               {
                                   label: 'Github',
                                   href: 'https://github.com/o2sdev/openselfservice',
+                                  className: 'dropdown__link--icon dropdown__link--icon-github',
+                              },
+                              {
+                                  label: 'Changelog',
+                                  to: '/blog/tags/releases',
+                                  className: 'dropdown__link--icon dropdown__link--icon-changelog',
                               },
                           ],
+                          linkMore: {
+                              title: 'Community',
+                              label: 'Join Discord →',
+                              href: 'https://discord.gg/4R568nZgsT',
+                              background: '/img/navbar/community-bg-img.png',
+                          },
                       },
                       {
                           type: 'dropdown',
@@ -355,10 +393,17 @@ const config: Config = {
                               {
                                   label: 'Blog',
                                   to: '/blog',
+                                  className: 'dropdown__link--icon dropdown__link--icon-blog',
+                              },
+                              {
+                                  label: 'Case studies',
+                                  to: '/blog/tags/case-studies',
+                                  className: 'dropdown__link--icon dropdown__link--icon-case',
                               },
                               {
                                   label: 'Roadmap',
                                   href: 'https://github.com/orgs/o2sdev/projects/2',
+                                  className: 'dropdown__link--icon dropdown__link--icon-roadmap',
                               },
                           ],
                       },
@@ -370,23 +415,24 @@ const config: Config = {
                               {
                                   label: 'For developers',
                                   to: '/support/developers',
+                                  className: 'dropdown__link--icon dropdown__link--icon-dev',
                               },
                               {
                                   label: 'Enterprise support',
                                   to: '/support/enterprise',
+                                  className: 'dropdown__link--icon dropdown__link--icon-support',
                               },
                               {
                                   label: 'Contact us',
                                   to: '/contact',
+                                  className: 'dropdown__link--icon dropdown__link--icon-contact',
                               },
                           ],
                       },
                       {
                           label: 'Partners',
                           to: '/partners',
-                          position: 'left',
                       },
-
                       {
                           type: 'search',
                           position: 'right',
@@ -402,12 +448,6 @@ const config: Config = {
                           label: 'Contact us',
                           position: 'right',
                           className: 'button button-tertiary',
-                      },
-                      {
-                          to: '/dxp',
-                          label: 'DXP Starter',
-                          position: 'right',
-                          className: 'button button-primary',
                       },
                   ],
         },

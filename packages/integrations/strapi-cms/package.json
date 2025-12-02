@@ -1,10 +1,11 @@
 {
     "name": "@o2s/integrations.strapi-cms",
-    "version": "2.6.3",
+    "version": "2.7.0",
     "private": false,
     "license": "MIT",
     "exports": {
-        "./integration": "./dist/src/integration.js"
+        "./integration": "./dist/src/integration.js",
+        "./live-preview": "./dist/src/modules/cms/live-preview/index.js"
     },
     "files": [
         "dist"
@@ -20,30 +21,30 @@
         "@o2s/framework": "*",
         "@o2s/utils.logger": "*",
         "flatted": "^3.3.3",
-        "graphql": "16.11.0",
-        "graphql-request": "7.2.0",
+        "graphql": "16.12.0",
+        "graphql-request": "7.3.4",
         "graphql-tag": "2.12.6"
     },
     "devDependencies": {
         "@graphql-codegen/add": "^5.0.3",
-        "@graphql-codegen/cli": "^5.0.6",
+        "@graphql-codegen/cli": "^5.0.7",
         "@graphql-codegen/introspection": "^4.0.3",
         "@graphql-codegen/typescript": "^4.1.6",
-        "@graphql-codegen/typescript-graphql-request": "^6.2.0",
+        "@graphql-codegen/typescript-graphql-request": "^6.3.0",
         "@graphql-codegen/typescript-operations": "^4.6.1",
-        "@graphql-codegen/typescript-resolvers": "^4.5.1",
+        "@graphql-codegen/typescript-resolvers": "^4.5.2",
         "@o2s/eslint-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
-        "concurrently": "^9.1.2",
-        "eslint": "^9.27.0",
-        "prettier": "^3.5.3",
+        "concurrently": "^9.2.1",
+        "eslint": "^9.39.1",
+        "prettier": "^3.6.2",
         "tsc-alias": "^1.8.16",
-        "typescript": "^5.8.3"
+        "typescript": "^5.9.3"
     },
     "peerDependencies": {
-        "@nestjs/axios": "^4",
-        "@nestjs/common": "^11",
+        "@nestjs/axios": "^4.0.1",
+        "@nestjs/common": "^11.0.16",
         "@nestjs/config": "^4.0.2",
         "@nestjs/core": "^11",
         "rxjs": "^7"

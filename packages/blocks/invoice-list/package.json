@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.invoice-list",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "private": false,
     "license": "MIT",
     "description": "A block for displaying and managing invoice list.",
@@ -28,15 +28,15 @@
         "@o2s/configs.integrations": "*"
     },
     "devDependencies": {
-        "dotenv-cli": "^8.0.0",
+        "dotenv-cli": "^11.0.0",
         "@o2s/eslint-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
-        "concurrently": "^9.1.2",
-        "eslint": "^9.27.0",
-        "prettier": "^3.5.3",
+        "concurrently": "^9.2.1",
+        "eslint": "^9.39.1",
+        "prettier": "^3.6.2",
         "tsc-alias": "^1.8.16",
-        "typescript": "^5.8.3"
+        "typescript": "^5.9.3"
     },
     "peerDependencies": {
         "@types/react": "^19",
@@ -44,12 +44,12 @@
         "react": "^19",
         "react-dom": "^19",
         "tailwindcss": "^4",
-        "@nestjs/axios": "^4",
-        "@nestjs/common": "^11",
+        "@nestjs/axios": "^4.0.1",
+        "@nestjs/common": "^11.0.16",
         "@nestjs/config": "^4.0.2",
         "@nestjs/core": "^11",
         "rxjs": "^7",
-        "next": "^15.3.2",
+        "next": "^15.4.7",
         "next-intl": "^4.1.0"
     }
 }

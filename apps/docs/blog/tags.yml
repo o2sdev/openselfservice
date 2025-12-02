@@ -20,6 +20,16 @@ backend:
 performance:
     label: 'Performance'
 
+cms:
+    label: 'Headless CMS'
+
+case-studies:
+    label: 'Case studies'
+    description: 'Real-world case studies of composable frontends and self-service portals built with Open Self Service and our MACH-based stack.'
+
+ai:
+    label: 'AI'
+
 # An empty tag definition is also valid
 # Other attributes will be inferred from the key
 emptyTag:

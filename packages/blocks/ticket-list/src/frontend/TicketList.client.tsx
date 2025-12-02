@@ -1,5 +1,6 @@
 'use client';
 
+import { LivePreview } from '@o2s/configs.integrations/live-preview';
 import { ArrowRight } from 'lucide-react';
 import { createNavigation } from 'next-intl/navigation';
 import React, { useState, useTransition } from 'react';
@@ -7,16 +8,16 @@ import React, { useState, useTransition } from 'react';
 import { Mappings } from '@o2s/utils.frontend';
 
 import { ActionList } from '@o2s/ui/components/ActionList';
+import type { DataListColumnConfig } from '@o2s/ui/components/DataList';
+import { DataList } from '@o2s/ui/components/DataList';
 import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
 import { FiltersSection } from '@o2s/ui/components/Filters';
 import { NoResults } from '@o2s/ui/components/NoResults';
 import { Pagination } from '@o2s/ui/components/Pagination';
 
-import { Badge } from '@o2s/ui/elements/badge';
 import { Button } from '@o2s/ui/elements/button';
 import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
 import { Separator } from '@o2s/ui/elements/separator';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@o2s/ui/elements/table';
 import { Typography } from '@o2s/ui/elements/typography';
 
 import { Model, Request } from '../api-harmonization/ticket-list.client';
@@ -24,8 +25,9 @@ import { sdk } from '../sdk';
 
 import { TicketListPureProps } from './TicketList.types';
 
-export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessToken, routing, ...component }) => {
+export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessToken, routing, meta, ...component }) => {
     const { Link: LinkComponent } = createNavigation(routing);
+    const inspector = LivePreview.useInspector();
 
     const initialFilters: Request.GetTicketListBlockQuery = {
         id: component.id,
@@ -57,13 +59,57 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
         });
     };
 
+    // Define columns configuration outside JSX for better readability
+    const columns = data.table.columns.map((column) => {
+        switch (column.id) {
+            case 'topic':
+                return {
+                    ...column,
+                    type: 'text',
+                    cellClassName: 'max-w-[200px] lg:max-w-md',
+                };
+            case 'status':
+                return {
+                    ...column,
+                    type: 'badge',
+                    variant: (value: string) =>
+                        Mappings.TicketBadge.ticketBadgeVariants[
+                            value as keyof typeof Mappings.TicketBadge.ticketBadgeVariants
+                        ],
+                };
+            case 'updatedAt':
+                return {
+                    ...column,
+                    type: 'date',
+                };
+            default:
+                return {
+                    ...column,
+                    type: 'text',
+                };
+        }
+    }) as DataListColumnConfig<Model.Ticket>[];
+    const actions = data.table.actions
+        ? {
+              ...data.table.actions,
+              render: (ticket: Model.Ticket) => (
+                  <Button asChild variant="link">
+                      <LinkComponent href={ticket.detailsUrl} className="flex items-center justify-end gap-2">
+                          <ArrowRight className="h-4 w-4" />
+                          {data.table.actions!.label}
+                      </LinkComponent>
+                  </Button>
+              ),
+          }
+        : undefined;
+
     return (
         <div className="w-full">
             {initialData.length > 0 ? (
                 <div className="flex flex-col gap-6">
                     <div className="w-full flex gap-4 flex-col md:flex-row justify-between">
                         <Typography variant="h1" asChild>
-                            <h1>{data.title}</h1>
+                            <h1 {...inspector(meta, 'title')}>{data.title}</h1>
                         </Typography>
 
                         {data.forms && (
@@ -113,94 +159,7 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                     <LoadingOverlay isActive={isPending}>
                         {data.tickets.data.length ? (
                             <div className="flex flex-col gap-6">
-                                <Table>
-                                    <TableHeader>
-                                        <TableRow>
-                                            {data.table.columns.map((column) => (
-                                                <TableHead
-                                                    key={column.id}
-                                                    className="py-3 px-4 text-sm font-medium text-muted-foreground"
-                                                >
-                                                    {column.title}
-                                                </TableHead>
-                                            ))}
-                                            {data.table.actions && (
-                                                <TableHead className="py-3 px-4 text-sm font-medium text-muted-foreground">
-                                                    {data.table.actions.title}
-                                                </TableHead>
-                                            )}
-                                        </TableRow>
-                                    </TableHeader>
-                                    <TableBody>
-                                        {data.tickets.data.map((ticket) => (
-                                            <TableRow key={ticket.id}>
-                                                {data.table.columns.map((column) => {
-                                                    switch (column.id) {
-                                                        case 'topic':
-                                                            return (
-                                                                <TableCell
-                                                                    key={column.id}
-                                                                    className="truncate whitespace-nowrap flex-initial max-w-[200px] lg:max-w-md"
-                                                                >
-                                                                    {ticket[column.id].label}
-                                                                </TableCell>
-                                                            );
-                                                        case 'type':
-                                                            return (
-                                                                <TableCell
-                                                                    key={column.id}
-                                                                    className="flex-initial whitespace-nowrap"
-                                                                >
-                                                                    {ticket[column.id].label}
-                                                                </TableCell>
-                                                            );
-                                                        case 'status':
-                                                            return (
-                                                                <TableCell
-                                                                    key={column.id}
-                                                                    className="flex-initial whitespace-nowrap"
-                                                                >
-                                                                    <Badge
-                                                                        variant={
-                                                                            Mappings.TicketBadge.ticketBadgeVariants[
-                                                                                ticket[column.id].value
-                                                                            ]
-                                                                        }
-                                                                    >
-                                                                        {ticket[column.id].label}
-                                                                    </Badge>
-                                                                </TableCell>
-                                                            );
-                                                        case 'updatedAt':
-                                                            return (
-                                                                <TableCell
-                                                                    key={column.id}
-                                                                    className="flex-initial whitespace-nowrap"
-                                                                >
-                                                                    {ticket[column.id]}
-                                                                </TableCell>
-                                                            );
-                                                        default:
-                                                            return null;
-                                                    }
-                                                })}
-                                                {data.table.actions && (
-                                                    <TableCell className="py-0">
-                                                        <Button asChild variant="link">
-                                                            <LinkComponent
-                                                                href={ticket.detailsUrl}
-                                                                className="flex items-center justify-end gap-2"
-                                                            >
-                                                                <ArrowRight className="h-4 w-4" />
-                                                                {data.table.actions.label}
-                                                            </LinkComponent>
-                                                        </Button>
-                                                    </TableCell>
-                                                )}
-                                            </TableRow>
-                                        ))}
-                                    </TableBody>
-                                </Table>
+                                <DataList data={data.tickets.data} columns={columns} actions={actions} />
 
                                 {data.pagination && (
                                     <Pagination

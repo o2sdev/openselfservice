@@ -19,6 +19,7 @@ export class NotificationListBlock extends ApiModels.Block.Block {
         data: Notification[];
         total: Notifications.Model.Notifications['total'];
     };
+    initialFilters?: Partial<Notifications.Model.Notification & { sort?: string }>;
 }
 
 export class Notification {

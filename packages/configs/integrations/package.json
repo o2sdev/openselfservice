@@ -1,10 +1,11 @@
 {
     "name": "@o2s/configs.integrations",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "private": true,
     "license": "MIT",
     "exports": {
-        ".": "./dist/src/models/index.js"
+        ".": "./dist/src/models/index.js",
+        "./live-preview": "./dist/src/models/live-preview.js"
     },
     "files": [
         "dist"
@@ -16,18 +17,17 @@
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
-        "@o2s/framework": "^1.11.2",
-        "@o2s/integrations.mocked": "^1.12.0",
-        "@o2s/integrations.strapi-cms": "^2.6.3"
+        "@o2s/framework": "^1.12.0",
+        "@o2s/integrations.mocked": "^1.13.0"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
-        "concurrently": "^9.1.2",
-        "eslint": "^9.27.0",
-        "prettier": "^3.5.3",
+        "concurrently": "^9.2.1",
+        "eslint": "^9.39.1",
+        "prettier": "^3.6.2",
         "tsc-alias": "^1.8.16",
-        "typescript": "^5.8.3"
+        "typescript": "^5.9.3"
     }
 }

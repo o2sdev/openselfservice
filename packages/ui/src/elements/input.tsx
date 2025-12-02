@@ -9,8 +9,11 @@ type AdornmentPropsWithBehavior = { behavior: 'append' | 'prepend' };
 type AdornmentComponent = React.ReactNode;
 
 export type InputProps<T extends AdornmentComponent = AdornmentComponent> =
-    React.InputHTMLAttributes<HTMLInputElement> &
-        (
+    React.InputHTMLAttributes<HTMLInputElement> & {
+        hasError?: boolean;
+        readOnly?: boolean;
+        children?: React.ReactNode;
+    } & (
             | {
                   adornment?: T;
                   adornmentProps?: T extends AdornmentComponent ? AdornmentPropsWithBehavior : never;
@@ -18,9 +21,21 @@ export type InputProps<T extends AdornmentComponent = AdornmentComponent> =
             | never
         );
 
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
-    ({ className, type, adornment, adornmentProps, ...props }, ref) => {
-        return (
+export type InputOwnProps = InputProps & { ref?: React.Ref<HTMLInputElement> };
+
+const Input = ({
+    className,
+    type,
+    adornment,
+    adornmentProps,
+    hasError,
+    readOnly = false,
+    children,
+    ref,
+    ...props
+}: InputOwnProps) => {
+    return (
+        <div className="grid gap-2">
             <div className={cn('relative')}>
                 {adornment && adornmentProps?.behavior === 'prepend' && (
                     <div
@@ -37,9 +52,12 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                         'flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
                         adornmentProps?.behavior === 'prepend' && 'pl-12',
                         adornmentProps?.behavior === 'append' && 'pr-12',
+                        hasError && 'border-destructive focus-visible:ring-destructive',
+                        readOnly && 'cursor-not-allowed text-muted-foreground',
                         className,
                     )}
                     ref={ref}
+                    readOnly={readOnly}
                     {...props}
                 />
                 {adornment && adornmentProps?.behavior === 'append' && (
@@ -52,31 +70,93 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                     </div>
                 )}
             </div>
-        );
-    },
-);
-Input.displayName = 'Input';
+            {children}
+        </div>
+    );
+};
 
 export type InputWithLabelProps = InputProps & {
     label: string | React.ReactNode;
+    labelAdornment?: React.ReactNode;
     labelClassName?: string;
+    children?: React.ReactNode;
+    isRequired?: boolean;
+    requiredLabel?: string;
+    optionalLabel?: string;
+    labelWrapperClassName?: string;
+    isLabelHidden?: boolean;
 };
 
-const InputWithLabel = React.forwardRef<HTMLInputElement, InputWithLabelProps>(
-    ({ label, className, labelClassName, id, ...props }, ref) => {
-        const generatedId = React.useId();
-        const inputId = id || generatedId;
+export type InputWithLabelOwnProps = InputWithLabelProps & { ref?: React.Ref<HTMLInputElement> };
 
+const InputWithLabel = ({
+    label,
+    labelAdornment,
+    className,
+    labelClassName,
+    id,
+    children,
+    hasError,
+    isRequired = false,
+    optionalLabel = '',
+    requiredLabel = '',
+    labelWrapperClassName,
+    isLabelHidden = false,
+    ref,
+    ...props
+}: InputWithLabelOwnProps) => {
+    const generatedId = React.useId();
+    const inputId = id || generatedId;
+
+    const renderAdditionalLabel = () => {
+        if (props.disabled || props.readOnly) return null;
+
+        if (optionalLabel && !isRequired) {
+            return <span className="font-normal text-sm">({optionalLabel})</span>;
+        }
+
+        if (requiredLabel && isRequired) {
+            return <span className="font-normal text-sm">({requiredLabel})</span>;
+        }
+
+        return null;
+    };
+
+    const ariaLabel = isLabelHidden && typeof label === 'string' ? label : props['aria-label'];
+
+    return (
+        <div className="grid gap-2">
+            {!isLabelHidden && (
+                <div className={cn('flex items-center justify-between gap-2', labelWrapperClassName)}>
+                    <Label htmlFor={inputId} className={cn(labelClassName, hasError && 'text-destructive')}>
+                        <span className="pr-2">{label}</span>
+                        {renderAdditionalLabel()}
+                    </Label>
+                    {labelAdornment}
+                </div>
+            )}
+            <Input id={inputId} ref={ref} {...props} aria-label={ariaLabel} className={className} hasError={hasError} />
+            {children}
+        </div>
+    );
+};
+
+export type InputWithDetailsProps = Readonly<
+    InputWithLabelProps & {
+        caption?: string;
+        errorMessage?: string;
+    }
+>;
+
+const InputWithDetails = React.forwardRef<HTMLInputElement, InputWithDetailsProps>(
+    ({ caption, errorMessage, ...props }, ref) => {
         return (
-            <div className="grid gap-2">
-                <Label htmlFor={inputId} className={labelClassName}>
-                    {label}
-                </Label>
-                <Input id={inputId} ref={ref} {...props} className={className} />
-            </div>
+            <InputWithLabel {...props} ref={ref}>
+                {errorMessage && props.hasError && <p className="text-sm text-destructive">{errorMessage}</p>}
+                {caption && <p className="text-sm text-muted-foreground">{caption}</p>}
+            </InputWithLabel>
         );
     },
 );
-InputWithLabel.displayName = 'InputWithLabel';
 
-export { Input, InputWithLabel };
+export { Input, InputWithLabel, InputWithDetails };

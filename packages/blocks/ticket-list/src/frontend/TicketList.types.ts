@@ -8,6 +8,7 @@ export interface TicketListProps {
     locale: string;
     routing: ReturnType<typeof defineRouting>;
     hasPriority?: boolean;
+    isDraftModeEnabled?: boolean;
 }
 
 export type TicketListPureProps = TicketListProps & Model.TicketListBlock;

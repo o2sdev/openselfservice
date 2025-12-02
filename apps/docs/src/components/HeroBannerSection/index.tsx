@@ -1,15 +1,21 @@
 import clsx from 'clsx';
-import React, { type ReactNode, useState } from 'react';
+import React, { type ReactNode } from 'react';
+
+import Link from '@docusaurus/Link';
 
 import CircleCheckIcon from '@site/src/assets/icons/circle-check.svg';
-import CopyIcon from '@site/src/assets/icons/copy.svg';
-import TerminalIcon from '@site/src/assets/icons/terminal.svg';
 
+import { CopyCommandButton } from '../CopyCommandButton';
 import { H1 } from '../Typography';
 
 interface HeroBannerSectionProps {
     heading?: ReactNode;
     description: ReactNode | ReactNode[];
+    containerWidth?: 'wide' | 'narrow'; // wide = 842px, narrow = 688px
+    badge?: {
+        text: string;
+        icon?: ReactNode;
+    };
     cliCommand?: string;
     mainLink?: {
         text: string;
@@ -42,32 +48,44 @@ interface HeroBannerSectionProps {
 export function HeroBannerSection({
     heading,
     description,
+    badge,
     cliCommand,
     mainLink,
     secondaryLink,
     tertiaryLink,
     heroImage,
     isDXPage = false,
+    containerWidth = 'wide',
 }: HeroBannerSectionProps) {
-    const [copied, setCopied] = useState(false);
-
-    const handleCopyClick = () => {
-        navigator.clipboard.writeText(cliCommand);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 1000);
-    };
-
     return (
         <div className="relative min-h-[calc(100vh-64px)] flex items-center">
             <div className={clsx('container grid items-center', heroImage ? 'md:grid-cols-2' : 'text-center')}>
-                <div className={clsx(heroImage ? 'lg:w-[560px]' : 'lg:w-[842px] m-auto')}>
+                <div
+                    className={clsx(
+                        heroImage
+                            ? 'lg:w-[555px]'
+                            : containerWidth === 'wide'
+                              ? 'lg:w-[842px] m-auto'
+                              : 'lg:w-[688px] m-auto',
+                    )}
+                >
+                    {badge && (
+                        <div className="flex justify-center mb-12">
+                            <div className="bg-white/10 border border-white rounded-full px-4 py-2 h-10 flex items-center justify-center gap-2">
+                                {badge.icon && (
+                                    <span className="w-6 h-6 flex items-center justify-center">{badge.icon}</span>
+                                )}
+                                <span className="text-white text-sm font-medium leading-[1.3]">{badge.text}</span>
+                            </div>
+                        </div>
+                    )}
                     {heading && <H1 className="mt-12 md:mt-0">{heading}</H1>}
 
                     {Array.isArray(description) ? (
-                        <ul className="space-y-2 !ml-0 !p-0 list-none">
+                        <ul className="space-y-2 ml-0! p-0! list-none">
                             {description.map((item, index) => (
                                 <li key={index} className="flex items-start gap-2">
-                                    <CircleCheckIcon className="h-5 w-5 flex-shrink-0 mt-0.5" />
+                                    <CircleCheckIcon className="h-5 w-5 shrink-0 mt-0.5" />
                                     <span>{item}</span>
                                 </li>
                             ))}
@@ -76,35 +94,11 @@ export function HeroBannerSection({
                         description
                     )}
                     <div className={clsx('mt-16 space-y-4 md:max-w-[415px]', !heroImage && 'm-auto')}>
-                        {cliCommand && (
-                            <div className="flex flex-col gap-4">
-                                <button
-                                    type="button"
-                                    className="button button-copy w-full font-mono text-base flex items-center px-3 py-2"
-                                    style={{ justifyContent: 'space-between' }}
-                                    onClick={handleCopyClick}
-                                >
-                                    <TerminalIcon className="h-5 w-5 mr-2 flex-shrink-0" />
-                                    <span className="flex-1 text-left ml-2 mr-2 whitespace-nowrap overflow-hidden text-ellipsis">
-                                        {cliCommand}
-                                    </span>
-                                    <span className="relative ml-2 h-5 w-5 flex-shrink-0">
-                                        <CopyIcon
-                                            className={`absolute inset-0 h-5 w-5 transition-opacity duration-200 ${copied ? 'opacity-0' : 'opacity-100'}`}
-                                            style={{ pointerEvents: 'none' }}
-                                        />
-                                        <CircleCheckIcon
-                                            className={`absolute inset-0 h-5 w-5 transition-opacity duration-200 ${copied ? 'opacity-100' : 'opacity-0'}`}
-                                            style={{ pointerEvents: 'none' }}
-                                        />
-                                    </span>
-                                </button>
-                            </div>
-                        )}
+                        {cliCommand && <CopyCommandButton command={cliCommand} />}
                         {mainLink && (
                             <>
                                 <div className={clsx('sm:flex gap-2 space-y-4 w-full', !heroImage && 'justify-center')}>
-                                    <a
+                                    <Link
                                         className={clsx('button', cliCommand && 'w-1/2')}
                                         href={mainLink.url}
                                         target={mainLink.target}
@@ -112,10 +106,10 @@ export function HeroBannerSection({
                                         {mainLink.iconLeft}
                                         {mainLink.text}
                                         {mainLink.iconRight}
-                                    </a>
+                                    </Link>
 
                                     {secondaryLink && (
-                                        <a
+                                        <Link
                                             href={secondaryLink.url}
                                             className={clsx('button button-ultra', cliCommand && 'w-1/2')}
                                             target={secondaryLink.target}
@@ -126,11 +120,11 @@ export function HeroBannerSection({
                                                 {secondaryLink.text}
                                                 {secondaryLink.iconRight}
                                             </span>
-                                        </a>
+                                        </Link>
                                     )}
 
                                     {tertiaryLink && (
-                                        <a
+                                        <Link
                                             href={tertiaryLink.url}
                                             className={clsx('button button-special', cliCommand && 'w-1/2')}
                                             target={tertiaryLink.target}
@@ -141,7 +135,7 @@ export function HeroBannerSection({
                                                 {tertiaryLink.text}
                                                 {tertiaryLink.iconRight}
                                             </span>
-                                        </a>
+                                        </Link>
                                     )}
                                 </div>
                             </>
@@ -154,7 +148,7 @@ export function HeroBannerSection({
                         <img
                             src={heroImage.url}
                             alt={heroImage.alt}
-                            className={`w-full relative h-auto  origin-left origin-center z-[-1] ${
+                            className={`w-full relative h-auto origin-left origin-center z-[-1] ${
                                 isDXPage ? `hidden md:block mt-20 ml-[-250px] scale-[2.6] z-10` : 'scale-[2]'
                             }`}
                         />

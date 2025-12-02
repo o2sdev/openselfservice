@@ -16,8 +16,8 @@
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
   },
   "dependencies": {
-    "@medusajs/js-sdk": "^2.8.2",
-    "@medusajs/types": "^2.8.2",
+    "@medusajs/js-sdk": "^2.11.3",
+    "@medusajs/types": "^2.11.3",
     "@o2s/framework": "*",
     "@o2s/utils.logger": "*"
   },
@@ -25,15 +25,15 @@
     "@o2s/eslint-config": "*",
     "@o2s/prettier-config": "*",
     "@o2s/typescript-config": "*",
-    "concurrently": "^9.1.2",
-    "eslint": "^9.27.0",
-    "prettier": "^3.5.3",
+    "concurrently": "^9.2.1",
+    "eslint": "^9.39.1",
+    "prettier": "^3.6.2",
     "tsc-alias": "^1.8.16",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.3"
   },
   "peerDependencies": {
-    "@nestjs/axios": "^4",
-    "@nestjs/common": "^11",
+    "@nestjs/axios": "^4.0.1",
+    "@nestjs/common": "^11.0.16",
     "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^11",
     "rxjs": "^7"

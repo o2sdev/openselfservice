@@ -13,5 +13,6 @@ export const mapCategoryList = (
         title: cms.title,
         description: cms.description,
         items: categories,
+        meta: cms.meta,
     };
 };

@@ -1,0 +1,22 @@
+<svg width="47" height="48" viewBox="-1 0 49 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 7715">
+<g id="Vector">
+<path d="M0 13C0 10.2386 2.18261 8 4.875 8H34.125C36.8174 8 39 10.2386 39 13V43C39 45.7614 36.8174 48 34.125 48H4.875C2.18261 48 0 45.7614 0 43V13Z" stroke="#4C5CE5" stroke-width="1" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+</g>
+<foreignObject x="0.666016" y="1" width="45" height="46"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(1.5px);clip-path:url(#bgblur_0_3677_2414_clip_path);height:100%;width:100%"></div></foreignObject><path id="Vector_2" data-figma-bg-blur-radius="3" d="M3.66602 9C3.66602 6.23858 5.84863 4 8.54102 4H37.791C40.4834 4 42.666 6.23858 42.666 9V39C42.666 41.7614 40.4834 44 37.791 44H8.54102C5.84863 44 3.66602 41.7614 3.66602 39V9Z" fill="#4C5CE5" fill-opacity="0.45"/>
+<g id="Vector_3">
+<mask id="path-3-inside-2_3677_2414" fill="white">
+<path d="M7.66602 5C7.66602 2.23858 9.84863 0 12.541 0H41.791C44.4834 0 46.666 2.23858 46.666 5V35C46.666 37.7614 44.4834 40 41.791 40H12.541C9.84863 40 7.66602 37.7614 7.66602 35V5Z"/>
+</mask>
+<path d="M7.66602 5C7.66602 2.23858 9.84863 0 12.541 0H41.791C44.4834 0 46.666 2.23858 46.666 5V35C46.666 37.7614 44.4834 40 41.791 40H12.541C9.84863 40 7.66602 37.7614 7.66602 35V5Z" fill="#4C5CE5" stroke="#4C5CE5" stroke-opacity="0.4" stroke-width="2" mask="url(#path-3-inside-2_3677_2414)"/>
+</g>
+<path id="Vector 462" d="M16.666 3H11.666V7.5" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector 463" d="M37.666 35.5L42.666 35.5L42.666 31" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="Icon / Text">
+<path id="Vector_4" d="M31.8327 15.0835H20.166M35.166 20.0835H20.166M30.2493 25.0001H20.166" stroke="white" stroke-opacity="0.52" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+<defs>
+<clipPath id="bgblur_0_3677_2414_clip_path" transform="translate(-0.666016 -1)"><path d="M3.66602 9C3.66602 6.23858 5.84863 4 8.54102 4H37.791C40.4834 4 42.666 6.23858 42.666 9V39C42.666 41.7614 40.4834 44 37.791 44H8.54102C5.84863 44 3.66602 41.7614 3.66602 39V9Z"/>
+</clipPath></defs>
+</svg>
