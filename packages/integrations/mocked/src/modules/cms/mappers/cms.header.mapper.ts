@@ -14,6 +14,7 @@ const MOCK_HEADER_LOGON_EN: CMS.Model.Header.Header = {
         open: 'Open menu',
         close: 'Close Menu',
     },
+    signInLabel: 'Sign in',
     userInfo: {
         url: '/user-account',
         label: 'User Profile',
@@ -96,6 +97,7 @@ const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
         open: 'Menü öffnen',
         close: 'Menü schließen',
     },
+    signInLabel: 'Anmelden',
     userInfo: {
         url: '/user-account',
         label: 'Benutzerprofil',
@@ -178,6 +180,7 @@ const MOCK_HEADER_LOGON_PL: CMS.Model.Header.Header = {
         open: 'Otwórz menu',
         close: 'Zamknij menu',
     },
+    signInLabel: 'Zaloguj się',
     userInfo: {
         url: '/konto-uzytkownika',
         label: 'Profil użytkownika',

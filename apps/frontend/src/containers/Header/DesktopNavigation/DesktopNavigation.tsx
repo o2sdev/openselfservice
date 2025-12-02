@@ -31,23 +31,20 @@ export function DesktopNavigation({
     notificationSlot,
     userSlot,
     items,
+    signInLabel,
     isSignedIn,
 }: DesktopNavigationProps) {
     const pathname = usePathname();
 
     // Check if we're on login page
-    const loginPaths = routing.pathnames[LOGIN_PATH];
     const normalizedPathname = pathname?.split('?')[0] || '';
-    const isLoginPage =
-        normalizedPathname === LOGIN_PATH ||
-        normalizedPathname.startsWith(`${LOGIN_PATH}/`) ||
-        (loginPaths &&
-            Object.values(loginPaths).some(
-                (loginPath) => normalizedPathname === loginPath || normalizedPathname.startsWith(`${loginPath}/`),
-            ));
+    const loginPaths = [LOGIN_PATH, ...Object.values(routing.pathnames[LOGIN_PATH] || {})];
+    const isLoginPage = loginPaths.some(
+        (loginPath) => normalizedPathname === loginPath || normalizedPathname.startsWith(`${loginPath}/`),
+    );
 
-    // Show sign in button if user is not signed in and not on login page
-    const showSignInButton = !isSignedIn && !isLoginPage;
+    // Show sign in button if user is not signed in, not on login page, and signInLabel is available
+    const showSignInButton = !isSignedIn && !isLoginPage && signInLabel;
 
     const activeNavigationGroup = items.find((item) => {
         if (item.__typename === 'NavigationGroup') {
@@ -194,7 +191,7 @@ export function DesktopNavigation({
                         {/* Sign In Button */}
                         {showSignInButton && (
                             <Button asChild variant="tertiary">
-                                <NextLink href={LOGIN_PATH}>TODO: Add sign in labels</NextLink>
+                                <NextLink href={LOGIN_PATH}>{signInLabel}</NextLink>
                             </Button>
                         )}
 
