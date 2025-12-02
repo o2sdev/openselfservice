@@ -6,7 +6,7 @@ interface BadgeListProps {
     badges: { title: string; icon?: string | null }[];
 }
 
-const BadgeList: React.FC<BadgeListProps> = ({ badges }) => (
+const BadgeList = ({ badges }: BadgeListProps) => (
     <ul className="list-none flex flex-wrap gap-2.5 m-0! p-0!">
         {badges.map((badge, index) => (
             <li key={index} className="">

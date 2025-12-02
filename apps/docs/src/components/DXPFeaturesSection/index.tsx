@@ -55,14 +55,7 @@ const features: Array<FeatureCardProps> = [
     },
 ];
 
-const FeatureCard: React.FC<FeatureCardProps> = ({
-    title,
-    icon,
-    features,
-    buttonText,
-    buttonUrl,
-    borderColor = 'blue',
-}) => {
+const FeatureCard = ({ title, icon, features, buttonText, buttonUrl, borderColor = 'blue' }: FeatureCardProps) => {
     return (
         <Card borderColor={borderColor}>
             {/* Header */}

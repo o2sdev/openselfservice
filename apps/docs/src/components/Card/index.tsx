@@ -7,7 +7,7 @@ interface CardProps {
     gap?: string;
 }
 
-const Card: React.FC<CardProps> = ({ children, borderColor = 'blue', className = '', gap = 'gap-[30px]' }) => {
+const Card = ({ children, borderColor = 'blue', className = '', gap = 'gap-[30px]' }: CardProps) => {
     const getBorderClass = () => {
         if (borderColor === 'gradient') return 'card-gradient-border';
         if (borderColor === 'blue') return 'card-base card-solid-border card-border-blue';

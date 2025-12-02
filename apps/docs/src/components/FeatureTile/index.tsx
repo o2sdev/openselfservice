@@ -11,7 +11,7 @@ export interface FeatureTileProps {
     badge?: string;
 }
 
-export const FeatureTile: React.FC<FeatureTileProps> = ({ icon, title, description, badge }) => {
+export const FeatureTile = ({ icon, title, description, badge }: FeatureTileProps) => {
     return (
         <div className={clsx('card-base')}>
             <div className="flex justify-between p-6 w-full h-full">
@@ -39,7 +39,7 @@ export interface FeatureTileListProps {
     features: FeatureTileProps[];
 }
 
-export const FeatureTileList: React.FC<FeatureTileListProps> = ({ title, features }) => {
+export const FeatureTileList = ({ title, features }: FeatureTileListProps) => {
     return (
         <div className="flex flex-col gap-4 flex-1">
             <H3 className="mb-0!">{title}</H3>

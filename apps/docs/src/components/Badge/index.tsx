@@ -24,7 +24,7 @@ const getVariantClasses = (variant: BadgeProps['variant']): string => {
     }
 };
 
-const Badge: React.FC<BadgeProps> = ({ title, icon, variant = 'primary' }) => (
+const Badge = ({ title, icon, variant = 'primary' }: BadgeProps) => (
     <div
         className={clsx(
             'flex items-center justify-center gap-2.5 px-2.5 py-0.5 rounded-full',

@@ -19,15 +19,7 @@ export interface HoverCardProps {
     };
 }
 
-export const HoverCard: React.FC<HoverCardProps> = ({
-    title,
-    description,
-    href,
-    gradient,
-    badge,
-    ctaLabel,
-    backgroundImage,
-}) => {
+export const HoverCard = ({ title, description, href, gradient, badge, ctaLabel, backgroundImage }: HoverCardProps) => {
     const cardWrapperClasses = 'relative group block rounded-lg transition-all duration-200';
 
     const cardContent = () => {

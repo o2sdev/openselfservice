@@ -19,7 +19,7 @@ export interface AccordionProps {
     className?: string;
 }
 
-const AccordionRoot: React.FC<AccordionProps> = ({ items, type = 'single', defaultValue, className }) => {
+const AccordionRoot = ({ items, type = 'single', defaultValue, className }: AccordionProps) => {
     if (type === 'single') {
         return (
             <AccordionPrimitive.Root
@@ -54,11 +54,7 @@ const AccordionRoot: React.FC<AccordionProps> = ({ items, type = 'single', defau
     );
 };
 
-const AccordionItem: React.FC<{
-    children: ReactNode;
-    value: string;
-    className?: string;
-}> = ({ children, value, className }) => {
+const AccordionItem = ({ children, value, className }: { children: ReactNode; value: string; className?: string }) => {
     return (
         <AccordionPrimitive.Item value={value} className={clsx('border-b border-white w-full', className)}>
             {children}
@@ -66,10 +62,7 @@ const AccordionItem: React.FC<{
     );
 };
 
-const AccordionTrigger: React.FC<{
-    children: ReactNode;
-    className?: string;
-}> = ({ children, className }) => {
+const AccordionTrigger = ({ children, className }: { children: ReactNode; className?: string }) => {
     return (
         <AccordionPrimitive.Trigger
             className={clsx(
@@ -84,10 +77,7 @@ const AccordionTrigger: React.FC<{
     );
 };
 
-const AccordionContent: React.FC<{
-    children: ReactNode;
-    className?: string;
-}> = ({ children, className }) => {
+const AccordionContent = ({ children, className }: { children: ReactNode; className?: string }) => {
     return (
         <AccordionPrimitive.Content className={clsx(styles.accordionContent, className)}>
             <div className="pb-4 pt-0">{children}</div>

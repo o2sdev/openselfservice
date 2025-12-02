@@ -72,15 +72,7 @@ type HubspotFormProps = {
     consents?: HubspotConsent[];
 };
 
-const HubspotForm: React.FC<HubspotFormProps> = ({
-    portalId,
-    formId,
-    title,
-    description,
-    pageName,
-    fields,
-    consents = [],
-}) => {
+const HubspotForm = ({ portalId, formId, title, description, pageName, fields, consents = [] }: HubspotFormProps) => {
     const [values, setValues] = useState<Record<string, string | string[]>>(() => {
         const initial: Record<string, string> = {};
         fields.forEach((f) => (initial[f.name] = ''));

@@ -12,7 +12,7 @@ interface UseCaseCardProps {
     title: string;
 }
 
-const UseCaseCard: React.FC<UseCaseCardProps> = ({ icon, title }) => {
+const UseCaseCard = ({ icon, title }: UseCaseCardProps) => {
     return (
         <div className="flex flex-col gap-2 items-start justify-start rounded-lg shadow-sm">
             <div className="flex-shrink-0">

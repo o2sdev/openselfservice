@@ -26,7 +26,7 @@ export interface BenefitCardProps {
     borderColor?: 'gradient' | 'blue' | 'green' | 'light' | 'transparent';
 }
 
-export const BenefitCard: React.FC<BenefitCardProps> = ({
+export const BenefitCard = ({
     team,
     icon,
     iconPosition = 'right',
@@ -34,7 +34,7 @@ export const BenefitCard: React.FC<BenefitCardProps> = ({
     description,
     link,
     borderColor = 'blue',
-}) => {
+}: BenefitCardProps) => {
     return (
         <Card borderColor={borderColor} gap={team ? 'gap-2' : 'gap-6'}>
             {team && (
@@ -78,7 +78,7 @@ export const BenefitCard: React.FC<BenefitCardProps> = ({
     );
 };
 
-export const BenefitsSection: React.FC<BenefitsSectionProps> = ({ title, description, benefits }) => {
+export const BenefitsSection = ({ title, description, benefits }: BenefitsSectionProps) => {
     return (
         <div className="flex flex-col items-start justify-start w-full gap-20">
             <div className="flex flex-col gap-6">

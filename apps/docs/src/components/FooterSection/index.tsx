@@ -23,7 +23,7 @@ export interface FooterSectionProps {
     };
 }
 
-export const FooterSection: React.FC<FooterSectionProps> = ({ title, description, primaryButton, secondaryButton }) => {
+export const FooterSection = ({ title, description, primaryButton, secondaryButton }: FooterSectionProps) => {
     return (
         <div className="flex flex-col gap-12 items-center justify-start w-full">
             {/* Text Content */}
