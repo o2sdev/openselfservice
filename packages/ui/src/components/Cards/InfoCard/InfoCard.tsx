@@ -29,7 +29,7 @@ export const InfoCard: React.FC<Readonly<InfoCardProps>> = ({ title, value, desc
                             description
                         )}
                     </div>
-                    <div className="w-full sm:w-fit mt-2">{button}</div>
+                    {button && <div className="w-full sm:w-fit mt-2">{button}</div>}
                 </div>
             </div>
         </Card>
