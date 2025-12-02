@@ -10,7 +10,7 @@ const _imageLoader: ImageLoader = ({ src, width, quality }) => {
     return `${src}?w=${width}&q=${quality || 99}&fm=webp`;
 };
 
-export const Image: React.FC<ImageProps> = ({ src, alt, width, height, quality = 90, fill, priority, ...rest }) => {
+export const Image = ({ src, alt, width, height, quality = 90, fill, priority, ...rest }: ImageProps) => {
     if ((width && height) || fill) {
         return (
             <NextImage

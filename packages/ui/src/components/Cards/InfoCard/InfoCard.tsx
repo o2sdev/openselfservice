@@ -10,7 +10,7 @@ import { Typography } from '@o2s/ui/elements/typography';
 
 import { InfoCardProps } from './InfoCard.types';
 
-export const InfoCard: React.FC<Readonly<InfoCardProps>> = ({ title, value, description, icon, button, className }) => {
+export const InfoCard = ({ title, value, description, icon, button, className }: Readonly<InfoCardProps>) => {
     return (
         <Card className={cn('h-full w-full', className)}>
             <div className="p-6 flex flex-col gap-2 h-full">

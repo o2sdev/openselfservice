@@ -13,13 +13,7 @@ import { ChartTooltip as CustomTooltip } from '../ChartTooltip';
 
 import { StackedBarChartProps } from './StackedBarChart.types';
 
-export const StackedBarChart: React.FC<StackedBarChartProps> = ({
-    chartData,
-    labels,
-    unit,
-    tooltipType,
-    maxBarSize = 80,
-}) => {
+export const StackedBarChart = ({ chartData, labels, unit, tooltipType, maxBarSize = 80 }: StackedBarChartProps) => {
     const chartConfig = {
         topSegment: {
             color: 'var(--destructive)',

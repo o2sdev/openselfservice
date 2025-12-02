@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 
 import { RichText } from '@o2s/ui/components/RichText';
 
@@ -7,7 +7,7 @@ import { Typography } from '@o2s/ui/elements/typography';
 
 import { ErrorPageProps } from './ErrorPage.types';
 
-export const ErrorPage: FC<ErrorPageProps> = ({ errorType, title, description, link, LinkComponent }) => {
+export const ErrorPage = ({ errorType, title, description, link, LinkComponent }: ErrorPageProps) => {
     return (
         <div className="w-full h-full flex flex-col justify-center items-center gap-6 my-24">
             <Typography variant="subtitle">{errorType}</Typography>

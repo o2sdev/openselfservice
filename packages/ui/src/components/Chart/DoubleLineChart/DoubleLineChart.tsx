@@ -8,7 +8,7 @@ import { ChartTooltip as CustomTooltip } from '../ChartTooltip';
 
 import { DoubleLineChartProps } from './DoubleLineChart.types';
 
-export const DoubleLineChart: React.FC<DoubleLineChartProps> = ({ chartData, legend, tooltipType }) => {
+export const DoubleLineChart = ({ chartData, legend, tooltipType }: DoubleLineChartProps) => {
     const chartConfig = {
         prev: {
             stroke: 'var(--chart-2)',

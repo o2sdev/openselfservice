@@ -11,7 +11,7 @@ import { cn } from '@o2s/ui/lib/utils';
 
 import { CarouselProps } from './Carousel.types';
 
-export const Carousel: React.FC<Readonly<CarouselProps>> = ({
+export const Carousel = ({
     slides,
     className,
     showNavigation = true,
@@ -20,7 +20,7 @@ export const Carousel: React.FC<Readonly<CarouselProps>> = ({
     startingSlideIndex = 0,
     noSwipingSelector,
     ...swiperProps
-}) => {
+}: Readonly<CarouselProps>) => {
     const allModules = [
         A11y,
         Keyboard,

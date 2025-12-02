@@ -14,13 +14,13 @@ import {
 
 import { ActionListProps } from './ActionList.types';
 
-export const ActionList: React.FC<Readonly<ActionListProps>> = ({
+export const ActionList = ({
     className,
     showMoreLabel,
     visibleActions,
     dropdownActions,
     triggerVariant = 'outline',
-}) => {
+}: Readonly<ActionListProps>) => {
     if (!visibleActions.length && !dropdownActions.length) {
         return null;
     }

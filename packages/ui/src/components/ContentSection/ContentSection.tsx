@@ -10,14 +10,14 @@ import { Typography } from '@o2s/ui/elements/typography';
 
 import { ContentSectionProps } from './ContentSection.types';
 
-export const ContentSection: React.FC<Readonly<ContentSectionProps>> = ({
+export const ContentSection = ({
     title,
     description,
     categoryLink,
     children,
     LinkComponent,
     meta,
-}) => {
+}: Readonly<ContentSectionProps>) => {
     const inspector = LivePreview.useInspector();
 
     return (

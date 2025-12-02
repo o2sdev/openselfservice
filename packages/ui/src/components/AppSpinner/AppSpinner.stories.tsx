@@ -6,7 +6,7 @@ import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
 import { AppSpinner } from './AppSpinner';
 
 // Wrapper component to control the spinner visibility through props
-const AppSpinnerWrapper: React.FC<{ isVisible: boolean }> = ({ isVisible }) => {
+const AppSpinnerWrapper = ({ isVisible }: { isVisible: boolean }) => {
     const { spinner } = useGlobalContext();
 
     useEffect(() => {

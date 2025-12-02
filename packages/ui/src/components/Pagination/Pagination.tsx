@@ -14,7 +14,7 @@ import { Typography } from '@o2s/ui/elements/typography';
 
 import { PaginationProps } from './Pagination.types';
 
-export const Pagination: React.FC<PaginationProps> = ({
+export const Pagination = ({
     disabled,
     total,
     offset,
@@ -24,7 +24,7 @@ export const Pagination: React.FC<PaginationProps> = ({
     legend,
     limit,
     selectPage,
-}) => {
+}: PaginationProps) => {
     const currentPage = offset / limit + 1;
     const totalPages = Math.ceil(total / limit);
 

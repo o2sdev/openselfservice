@@ -4,12 +4,17 @@ import React, { useState } from 'react';
 import { Pagination } from './Pagination';
 
 // Wrapper component to handle state for the pagination
-const PaginationWrapper: React.FC<{
+const PaginationWrapper = ({
+    total,
+    limit,
+    initialOffset = 0,
+    disabled = false,
+}: {
     total: number;
     limit: number;
     initialOffset?: number;
     disabled?: boolean;
-}> = ({ total, limit, initialOffset = 0, disabled = false }) => {
+}) => {
     const [offset, setOffset] = useState(initialOffset);
 
     const handlePageChange = (page: number) => {

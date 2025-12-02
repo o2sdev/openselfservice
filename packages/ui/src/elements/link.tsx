@@ -8,7 +8,7 @@ export interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement>
     asChild?: boolean;
 }
 
-const Link: React.FC<LinkProps> = ({ className, variant = 'link', asChild = false, ...restProps }) => {
+const Link = ({ className, variant = 'link', asChild = false, ...restProps }: LinkProps) => {
     const Comp = asChild ? Slot : 'a';
     return (
         <Comp

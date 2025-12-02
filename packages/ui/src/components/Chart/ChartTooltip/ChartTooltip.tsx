@@ -7,7 +7,7 @@ import { Typography } from '@o2s/ui/elements/typography';
 
 import { ChartTooltipProps } from './ChartTooltip.types';
 
-export const ChartTooltip: React.FC<ChartTooltipProps> = ({ type = 'number', active, payload }) => {
+export const ChartTooltip = ({ type = 'number', active, payload }: ChartTooltipProps) => {
     if (!active || !payload?.length) {
         return null;
     }

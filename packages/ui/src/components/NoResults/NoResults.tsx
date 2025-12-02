@@ -7,7 +7,7 @@ import { Typography } from '@o2s/ui/elements/typography';
 
 import { NoResultsProps } from './NoResults.types';
 
-export const NoResults: React.FC<NoResultsProps> = ({ title, description }) => {
+export const NoResults = ({ title, description }: NoResultsProps) => {
     return (
         <div className="flex flex-col items-center gap-6">
             <div className="p-3 border rounded-lg border-gray-200">
