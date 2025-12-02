@@ -92,7 +92,7 @@ const handleError = (error: unknown, labels: Labels) => {
     return error instanceof Error ? error.message : 'Unknown error';
 };
 
-export const Survey: React.FC<SurveyProps> = ({ code, labels, locale, accessToken }) => {
+export const Survey = ({ code, labels, locale, accessToken }: SurveyProps) => {
     const [state, dispatch] = useActionState((prevState: SurveyState, action: SurveyAction) => {
         switch (action.type) {
             case 'LOAD':

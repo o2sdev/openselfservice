@@ -1,10 +1,10 @@
-import React, { FC } from 'react';
+import React from 'react';
 
 import { Typography } from '@o2s/ui/elements/typography';
 
 import { FieldsetProps } from './Fieldset.types';
 
-export const Fieldset: FC<FieldsetProps> = ({ legend, children, optionalLabel }) => {
+export const Fieldset = ({ legend, children, optionalLabel }: FieldsetProps) => {
     return (
         <fieldset className={'border-0 m-0 p-0'}>
             <legend className={'items-center gap-2 hidden'}>
