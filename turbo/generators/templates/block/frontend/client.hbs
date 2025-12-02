@@ -5,7 +5,7 @@ import React from 'react';
 
 import { {{ pascalCase name }}PureProps } from './{{ pascalCase name }}.types';
 
-export const {{ pascalCase name }}Pure: React.FC<{{ pascalCase name }}PureProps> = ({ locale, accessToken, routing, ...component }) => {
+export const {{ pascalCase name }}Pure = ({ locale, accessToken, routing, ...component }: {{ pascalCase name }}PureProps) => {
     const { Link: LinkComponent } = createNavigation(routing);
 
     return (
