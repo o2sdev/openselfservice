@@ -1,6 +1,6 @@
 {
     "name": "@o2s/frontend",
-    "version": "1.10.0",
+    "version": "1.11.0",
     "private": true,
     "scripts": {
         "dev": "next dev --turbopack",
@@ -25,6 +25,7 @@
         "@o2s/blocks.invoice-list": "*",
         "@o2s/blocks.notification-details": "*",
         "@o2s/blocks.notification-list": "*",
+        "@o2s/blocks.notification-summary": "*",
         "@o2s/blocks.order-details": "*",
         "@o2s/blocks.order-list": "*",
         "@o2s/blocks.orders-summary": "*",
@@ -37,6 +38,7 @@
         "@o2s/blocks.ticket-details": "*",
         "@o2s/blocks.ticket-list": "*",
         "@o2s/blocks.ticket-recent": "*",
+        "@o2s/blocks.ticket-summary": "*",
         "@o2s/blocks.user-account": "*",
         "@o2s/framework": "*",
         "@o2s/integrations.mocked": "*",
@@ -70,7 +72,7 @@
         "@turbo/gen": "^2.6.1",
         "@types/bcryptjs": "^3.0.0",
         "@types/node": "^24.10.1",
-        "@types/react": "^19.2.6",
+        "@types/react": "^19.2.7",
         "@types/react-autosuggest": "^10.1.11",
         "@types/react-dom": "^19.2.3",
         "dotenv": "^17.2.3",

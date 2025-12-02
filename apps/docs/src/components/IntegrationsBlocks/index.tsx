@@ -15,13 +15,13 @@ export interface IntegrationsBlocksProps {
     integrations: {
         name: string;
         description: string;
-        status: 'available' | 'planned' | 'internal';
+        status: 'available' | 'planned' | 'enterprise';
         icon?: React.ReactNode;
         link?: string;
     }[];
 }
 
-const getStatusConfig = (status: 'available' | 'planned' | 'internal') => {
+const getStatusConfig = (status: 'available' | 'planned' | 'enterprise') => {
     switch (status) {
         case 'available':
             return {
@@ -37,9 +37,9 @@ const getStatusConfig = (status: 'available' | 'planned' | 'internal') => {
                 icon: <RefreshCwIcon className="w-4 h-4 *:stroke-white" />,
                 cardBgClass: 'card-base-bg',
             };
-        case 'internal':
+        case 'enterprise':
             return {
-                title: 'Internal',
+                title: 'Enterprise',
                 variant: 'private' as const,
                 icon: <CircleCheckIcon className="w-4 h-4 *:stroke-white" />,
                 cardBgClass: 'bg-violet!',
