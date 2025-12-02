@@ -51,7 +51,7 @@
         "@o2s/blocks.user-account": "^1.1.0",
         "@o2s/configs.integrations": "*",
         "@o2s/framework": "^1.12.0",
-        "@o2s/integrations.mocked": "^1.13.0",
+        "@o2s/integrations.mocked": "^1.13.1",
         "@o2s/modules.surveyjs": "^0.2.1",
         "@o2s/telemetry": "^1.1.0",
         "@o2s/utils.api-harmonization": "^0.1.1",

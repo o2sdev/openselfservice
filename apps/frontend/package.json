@@ -39,7 +39,7 @@
         "@o2s/blocks.ticket-recent": "^1.1.0",
         "@o2s/blocks.user-account": "^1.1.0",
         "@o2s/framework": "^1.12.0",
-        "@o2s/integrations.mocked": "^1.13.0",
+        "@o2s/integrations.mocked": "^1.13.1",
         "@o2s/ui": "*",
         "@o2s/utils.api-harmonization": "^0.1.1",
         "@o2s/utils.frontend": "^0.1.2",
