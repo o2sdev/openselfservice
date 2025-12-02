@@ -7,14 +7,14 @@ import { QuickLinksProps } from './QuickLinks.types';
 
 export const QuickLinksDynamic = dynamic(() => import('./QuickLinks.client').then((module) => module.QuickLinksPure));
 
-export const QuickLinks: React.FC<QuickLinksProps> = async ({
+export const QuickLinks = async ({
     id,
     accessToken,
     locale,
     routing,
     hasPriority,
     isDraftModeEnabled,
-}) => {
+}: QuickLinksProps) => {
     let data;
     try {
         data = await sdk.blocks.getQuickLinks(

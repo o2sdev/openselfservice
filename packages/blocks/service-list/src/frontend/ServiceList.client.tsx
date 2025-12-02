@@ -17,7 +17,7 @@ import { sdk } from '../sdk';
 
 import { ServiceListPureProps } from './ServiceList.types';
 
-export const ServiceListPure: React.FC<ServiceListPureProps> = ({ locale, accessToken, routing, ...component }) => {
+export const ServiceListPure = ({ locale, accessToken, routing, ...component }: ServiceListPureProps) => {
     const initialFilters = {
         id: component.id,
         offset: 0,

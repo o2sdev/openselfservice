@@ -9,14 +9,14 @@ export const TicketDetailsDynamic = dynamic(() =>
     import('./TicketDetails.client').then((module) => module.TicketDetailsPure),
 );
 
-export const TicketDetails: React.FC<TicketDetailsProps> = async ({
+export const TicketDetails = async ({
     id,
     ticketId,
     accessToken,
     locale,
     routing,
     hasPriority,
-}) => {
+}: TicketDetailsProps) => {
     try {
         const data = await sdk.blocks.getTicketDetails(
             {

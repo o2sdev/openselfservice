@@ -24,12 +24,7 @@ import { sdk } from '../sdk';
 
 import { NotificationListPureProps } from './NotificationList.types';
 
-export const NotificationListPure: React.FC<NotificationListPureProps> = ({
-    locale,
-    accessToken,
-    routing,
-    ...component
-}) => {
+export const NotificationListPure = ({ locale, accessToken, routing, ...component }: NotificationListPureProps) => {
     const { Link: LinkComponent } = createNavigation(routing);
 
     const initialFilters: Request.GetNotificationListBlockQuery = {

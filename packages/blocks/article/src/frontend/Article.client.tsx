@@ -12,7 +12,7 @@ import { Typography } from '@o2s/ui/elements/typography';
 
 import { ArticlePureProps } from './Article.types';
 
-export const ArticlePure: React.FC<Readonly<ArticlePureProps>> = ({ hasPriority, ...component }) => {
+export const ArticlePure = ({ hasPriority, ...component }: Readonly<ArticlePureProps>) => {
     const {
         data: { author, createdAt, sections },
     } = component;

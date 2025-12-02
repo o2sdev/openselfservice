@@ -18,7 +18,7 @@ import { sdk } from '../sdk';
 
 import { CategoryPureProps } from './Category.types';
 
-export const CategoryPure: React.FC<CategoryPureProps> = ({
+export const CategoryPure = ({
     slug,
     locale,
     accessToken,
@@ -26,7 +26,7 @@ export const CategoryPure: React.FC<CategoryPureProps> = ({
     blocks,
     hasPriority,
     ...component
-}) => {
+}: CategoryPureProps) => {
     const { Link: LinkComponent } = createNavigation(routing);
 
     const initialArticles: Request.GetCategoryBlockArticlesQuery = {

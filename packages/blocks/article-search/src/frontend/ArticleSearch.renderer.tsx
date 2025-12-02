@@ -7,12 +7,7 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { ArticleSearch } from './ArticleSearch.server';
 import { ArticleSearchRendererProps } from './ArticleSearch.types';
 
-export const ArticleSearchRenderer: React.FC<ArticleSearchRendererProps> = ({
-    id,
-    accessToken,
-    routing,
-    hasPriority,
-}) => {
+export const ArticleSearchRenderer = ({ id, accessToken, routing, hasPriority }: ArticleSearchRendererProps) => {
     const locale = useLocale();
     return (
         <Suspense

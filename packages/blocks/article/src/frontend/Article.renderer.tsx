@@ -7,7 +7,7 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { Article } from './Article.server';
 import { ArticleRendererProps } from './Article.types';
 
-export const ArticleRenderer: React.FC<ArticleRendererProps> = ({ id, slug, accessToken, routing, hasPriority }) => {
+export const ArticleRenderer = ({ id, slug, accessToken, routing, hasPriority }: ArticleRendererProps) => {
     const locale = useLocale();
 
     return (

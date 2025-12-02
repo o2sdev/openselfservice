@@ -36,16 +36,17 @@ import { sdk } from '../sdk';
 
 import { OrderDetailsPureProps } from './OrderDetails.types';
 
-const ProgressBar: React.FC<
-    Readonly<{
-        currentStatus: {
-            title: string;
-            label: string;
-            value: Orders.Model.OrderStatus;
-        };
-        statusLadder?: string[];
-    }>
-> = ({ currentStatus, statusLadder }) => {
+const ProgressBar = ({
+    currentStatus,
+    statusLadder,
+}: Readonly<{
+    currentStatus: {
+        title: string;
+        label: string;
+        value: Orders.Model.OrderStatus;
+    };
+    statusLadder?: string[];
+}>) => {
     const value = Mappings.StatusOrder.statusMap.find((item) => item.id === currentStatus.value)?.value || 0;
     const badge = Mappings.StatusOrder.statusMap.find((item) => item.id === currentStatus.value)?.badge || 'outline';
     const previousStatuses = statusLadder?.slice(0, -1);
@@ -91,13 +92,13 @@ const ProgressBar: React.FC<
     );
 };
 
-export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
+export const OrderDetailsPure = ({
     locale,
     accessToken,
     orderId,
     routing,
     ...component
-}) => {
+}: Readonly<OrderDetailsPureProps>) => {
     const { Link: LinkComponent } = createNavigation(routing);
 
     const initialFilters: Request.GetOrderDetailsBlockQuery = {

@@ -9,12 +9,7 @@ import { ContentSection } from '@o2s/ui/components/ContentSection';
 
 import { ArticleListPureProps } from './ArticleList.types';
 
-export const ArticleListPure: React.FC<Readonly<ArticleListPureProps>> = ({
-    routing,
-    hasPriority,
-    meta,
-    ...component
-}) => {
+export const ArticleListPure = ({ routing, hasPriority, meta, ...component }: Readonly<ArticleListPureProps>) => {
     const { Link: LinkComponent } = createNavigation(routing);
     const inspector = LivePreview.useInspector();
 

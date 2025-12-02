@@ -7,13 +7,7 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { Faq } from './Faq.server';
 import { FaqRendererProps } from './Faq.types';
 
-export const FaqRenderer: React.FC<FaqRendererProps> = ({
-    id,
-    accessToken,
-    routing,
-    hasPriority,
-    isDraftModeEnabled,
-}) => {
+export const FaqRenderer = ({ id, accessToken, routing, hasPriority, isDraftModeEnabled }: FaqRendererProps) => {
     const locale = useLocale();
 
     return (

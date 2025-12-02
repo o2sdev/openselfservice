@@ -9,14 +9,14 @@ export const ArticleListDynamic = dynamic(() =>
     import('./ArticleList.client').then((module) => module.ArticleListPure),
 );
 
-export const ArticleList: React.FC<ArticleListProps> = async ({
+export const ArticleList = async ({
     id,
     accessToken,
     locale,
     routing,
     hasPriority,
     isDraftModeEnabled,
-}) => {
+}: ArticleListProps) => {
     try {
         const data = await sdk.blocks.getArticleList(
             {

@@ -6,12 +6,7 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { PaymentsSummary } from './PaymentsSummary.server';
 import { PaymentsSummaryRendererProps } from './PaymentsSummary.types';
 
-export const PaymentsSummaryRenderer: React.FC<PaymentsSummaryRendererProps> = ({
-    id,
-    accessToken,
-    routing,
-    hasPriority,
-}) => {
+export const PaymentsSummaryRenderer = ({ id, accessToken, routing, hasPriority }: PaymentsSummaryRendererProps) => {
     const locale = useLocale();
 
     return (

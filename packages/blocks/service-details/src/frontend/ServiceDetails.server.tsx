@@ -9,14 +9,14 @@ export const ServiceDetailsDynamic = dynamic(() =>
     import('./ServiceDetails.client').then((module) => module.ServiceDetailsPure),
 );
 
-export const ServiceDetails: React.FC<ServiceDetailsProps> = async ({
+export const ServiceDetails = async ({
     id,
     serviceId,
     accessToken,
     locale,
     routing,
     hasPriority,
-}) => {
+}: ServiceDetailsProps) => {
     try {
         const data = await sdk.blocks.getServiceDetails(
             {

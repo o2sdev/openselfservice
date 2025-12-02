@@ -6,12 +6,7 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { OrdersSummary } from './OrdersSummary.server';
 import { OrdersSummaryRendererProps } from './OrdersSummary.types';
 
-export const OrdersSummaryRenderer: React.FC<OrdersSummaryRendererProps> = ({
-    id,
-    accessToken,
-    routing,
-    hasPriority,
-}) => {
+export const OrdersSummaryRenderer = ({ id, accessToken, routing, hasPriority }: OrdersSummaryRendererProps) => {
     const locale = useLocale();
 
     return (

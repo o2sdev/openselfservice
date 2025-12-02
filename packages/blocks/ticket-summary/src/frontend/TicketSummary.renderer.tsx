@@ -6,7 +6,7 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { TicketSummary } from './TicketSummary.server';
 import { TicketSummaryRendererProps } from './TicketSummary.types';
 
-export const TicketSummaryRenderer: React.FC<TicketSummaryRendererProps> = ({ id, accessToken, routing }) => {
+export const TicketSummaryRenderer = ({ id, accessToken, routing }: TicketSummaryRendererProps) => {
     const locale = useLocale();
 
     return (

@@ -10,13 +10,13 @@ import { DynamicIconProps } from '@o2s/ui/components/DynamicIcon';
 
 import { CategoryListPureProps } from './CategoryList.types';
 
-export const CategoryListPure: React.FC<Readonly<CategoryListPureProps>> = ({
+export const CategoryListPure = ({
     locale,
     accessToken,
     routing,
     meta,
     ...component
-}) => {
+}: Readonly<CategoryListPureProps>) => {
     const { Link: LinkComponent } = createNavigation(routing);
     const inspector = LivePreview.useInspector();
 

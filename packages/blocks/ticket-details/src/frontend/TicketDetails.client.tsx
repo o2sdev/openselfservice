@@ -17,12 +17,7 @@ import { Typography } from '@o2s/ui/elements/typography';
 
 import { TicketDetailsPureProps } from './TicketDetails.types';
 
-export const TicketDetailsPure: React.FC<Readonly<TicketDetailsPureProps>> = ({
-    locale,
-    accessToken,
-    routing,
-    ...component
-}) => {
+export const TicketDetailsPure = ({ locale, accessToken, routing, ...component }: Readonly<TicketDetailsPureProps>) => {
     const { data: ticket } = component;
     return (
         <div className="w-full">

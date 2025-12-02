@@ -14,7 +14,7 @@ import { Typography } from '@o2s/ui/elements/typography';
 
 import { TicketSummaryPureProps } from './TicketSummary.types';
 
-export const TicketSummaryPure: React.FC<TicketSummaryPureProps> = ({ ...component }) => {
+export const TicketSummaryPure = ({ ...component }: TicketSummaryPureProps) => {
     const { infoCards, layout } = component;
 
     if (!infoCards || infoCards.length === 0) {

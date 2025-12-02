@@ -15,7 +15,7 @@ import { sdk } from '../sdk';
 
 import { NotificationDetailsPureProps } from './NotificationDetails.types';
 
-export const NotificationDetailsPure: React.FC<NotificationDetailsPureProps> = ({ locale, ...component }) => {
+export const NotificationDetailsPure = ({ locale, ...component }: NotificationDetailsPureProps) => {
     const { data: notification } = component;
 
     useEffect(() => {

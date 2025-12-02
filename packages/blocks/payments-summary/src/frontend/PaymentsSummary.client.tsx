@@ -22,7 +22,7 @@ const StackedBarChart = dynamic(() =>
     import('@o2s/ui/components/Chart/StackedBarChart').then((module) => module.StackedBarChart),
 );
 
-export const PaymentsSummaryPure: React.FC<PaymentsSummaryPureProps> = ({ routing, ...component }) => {
+export const PaymentsSummaryPure = ({ routing, ...component }: PaymentsSummaryPureProps) => {
     const { overdue, toBePaid, layout, chart } = component;
 
     const t = useTranslations();

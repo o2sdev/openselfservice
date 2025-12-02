@@ -14,7 +14,7 @@ import { Typography } from '@o2s/ui/elements/typography';
 
 import { TicketRecentPureProps } from './TicketRecent.types';
 
-export const TicketRecentPure: React.FC<TicketRecentPureProps> = ({ locale, accessToken, routing, ...component }) => {
+export const TicketRecentPure = ({ locale, accessToken, routing, ...component }: TicketRecentPureProps) => {
     const { title, tickets, noResults, details } = component;
 
     const { Link: LinkComponent } = createNavigation(routing);

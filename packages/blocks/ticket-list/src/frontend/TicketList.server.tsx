@@ -7,14 +7,14 @@ import { TicketListProps } from './TicketList.types';
 
 export const TicketListDynamic = dynamic(() => import('./TicketList.client').then((module) => module.TicketListPure));
 
-export const TicketListServer: React.FC<TicketListProps> = async ({
+export const TicketListServer = async ({
     id,
     accessToken,
     locale,
     routing,
     hasPriority,
     isDraftModeEnabled,
-}) => {
+}: TicketListProps) => {
     let data;
     try {
         data = await sdk.blocks.getTicketList(

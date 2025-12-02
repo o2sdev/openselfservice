@@ -28,7 +28,7 @@ import { sdk } from '../sdk';
 
 import { OrderListPureProps } from './OrderList.types';
 
-export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToken, routing, ...component }) => {
+export const OrderListPure = ({ locale, accessToken, routing, ...component }: OrderListPureProps) => {
     const { Link: LinkComponent } = createNavigation(routing);
 
     const initialFilters: Request.GetOrderListBlockQuery = {

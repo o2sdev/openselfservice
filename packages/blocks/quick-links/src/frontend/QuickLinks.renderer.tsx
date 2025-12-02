@@ -7,13 +7,13 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { QuickLinks } from './QuickLinks.server';
 import { QuickLinksRendererProps } from './QuickLinks.types';
 
-export const QuickLinksRenderer: React.FC<QuickLinksRendererProps> = ({
+export const QuickLinksRenderer = ({
     id,
     accessToken,
     routing,
     hasPriority,
     isDraftModeEnabled,
-}) => {
+}: QuickLinksRendererProps) => {
     const locale = useLocale();
 
     return (

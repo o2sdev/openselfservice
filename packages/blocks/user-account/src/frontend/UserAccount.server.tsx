@@ -9,7 +9,7 @@ export const UserAccountDynamic = dynamic(() =>
     import('./UserAccount.client').then((module) => module.UserAccountPure),
 );
 
-export const UserAccount: React.FC<UserAccountProps> = async ({
+export const UserAccount = async ({
     id,
     accessToken,
     locale,
@@ -17,7 +17,7 @@ export const UserAccount: React.FC<UserAccountProps> = async ({
     userId,
     onSignOut,
     hasPriority,
-}) => {
+}: UserAccountProps) => {
     if (!userId) {
         return null;
     }

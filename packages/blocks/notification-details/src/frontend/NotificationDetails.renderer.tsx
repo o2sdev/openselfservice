@@ -7,13 +7,7 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { NotificationDetails } from './NotificationDetails.server';
 import { FaqRendererProps } from './NotificationDetails.types';
 
-export const NotificationDetailsRenderer: React.FC<FaqRendererProps> = ({
-    slug,
-    id,
-    accessToken,
-    routing,
-    hasPriority,
-}) => {
+export const NotificationDetailsRenderer = ({ slug, id, accessToken, routing, hasPriority }: FaqRendererProps) => {
     const locale = useLocale();
 
     if (!slug[1]) {

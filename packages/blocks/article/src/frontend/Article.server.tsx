@@ -7,7 +7,7 @@ import { ArticleProps } from './Article.types';
 
 export const ArticleDynamic = dynamic(() => import('./Article.client').then((module) => module.ArticlePure));
 
-export const Article: React.FC<ArticleProps> = async ({ slug, accessToken, locale, routing, hasPriority }) => {
+export const Article = async ({ slug, accessToken, locale, routing, hasPriority }: ArticleProps) => {
     try {
         const data = await sdk.blocks.getArticle(
             {

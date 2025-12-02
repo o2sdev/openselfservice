@@ -6,12 +6,7 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { NotificationListServer } from './NotificationList.server';
 import { NotificationListRendererProps } from './NotificationList.types';
 
-export const NotificationListRenderer: React.FC<NotificationListRendererProps> = ({
-    id,
-    accessToken,
-    routing,
-    hasPriority,
-}) => {
+export const NotificationListRenderer = ({ id, accessToken, routing, hasPriority }: NotificationListRendererProps) => {
     const locale = useLocale();
 
     return (

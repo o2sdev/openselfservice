@@ -9,7 +9,7 @@ export const NotificationSummaryDynamic = dynamic(() =>
     import('./NotificationSummary.client').then((module) => module.NotificationSummaryPure),
 );
 
-export const NotificationSummary: React.FC<NotificationSummaryProps> = async ({ id, accessToken, locale, routing }) => {
+export const NotificationSummary = async ({ id, accessToken, locale, routing }: NotificationSummaryProps) => {
     try {
         const data = await sdk.blocks.getNotificationSummary(
             {

@@ -10,14 +10,7 @@ export const OrderDetailsDynamic = dynamic(() =>
     import('./OrderDetails.client').then((module) => module.OrderDetailsPure),
 );
 
-export const OrderDetails: React.FC<OrderDetailsProps> = async ({
-    id,
-    orderId,
-    accessToken,
-    locale,
-    routing,
-    hasPriority,
-}) => {
+export const OrderDetails = async ({ id, orderId, accessToken, locale, routing, hasPriority }: OrderDetailsProps) => {
     try {
         const data = await sdk.blocks.getOrderDetails(
             {

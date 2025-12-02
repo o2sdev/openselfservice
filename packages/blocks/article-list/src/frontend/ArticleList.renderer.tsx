@@ -6,13 +6,13 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { ArticleList } from './ArticleList.server';
 import { ArticleListRendererProps } from './ArticleList.types';
 
-export const ArticleListRenderer: React.FC<ArticleListRendererProps> = ({
+export const ArticleListRenderer = ({
     id,
     accessToken,
     routing,
     hasPriority,
     isDraftModeEnabled,
-}) => {
+}: ArticleListRendererProps) => {
     const locale = useLocale();
     return (
         <Suspense

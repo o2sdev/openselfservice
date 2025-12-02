@@ -9,13 +9,7 @@ export const ArticleSearchDynamic = dynamic(() =>
     import('./ArticleSearch.client').then((module) => module.ArticleSearchPure),
 );
 
-export const ArticleSearch: React.FC<ArticleSearchProps> = async ({
-    id,
-    accessToken,
-    locale,
-    routing,
-    hasPriority,
-}) => {
+export const ArticleSearch = async ({ id, accessToken, locale, routing, hasPriority }: ArticleSearchProps) => {
     try {
         const data = await sdk.blocks.getArticleSearch(
             {

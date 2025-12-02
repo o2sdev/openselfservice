@@ -9,7 +9,7 @@ export const ServiceListDynamic = dynamic(() =>
     import('./ServiceList.client').then((module) => module.ServiceListPure),
 );
 
-export const ServiceList: React.FC<ServiceListProps> = async ({ id, accessToken, locale, routing, hasPriority }) => {
+export const ServiceList = async ({ id, accessToken, locale, routing, hasPriority }: ServiceListProps) => {
     try {
         const data = await sdk.blocks.getServiceList(
             {
