@@ -18,7 +18,7 @@ import { sdk } from '@/api/sdk';
 import { Content } from './Content/Content';
 import { ContextSwitcherProps } from './ContextSwitcher.types';
 
-export const ContextSwitcher: React.FC<ContextSwitcherProps> = ({ data }) => {
+export const ContextSwitcher = ({ data }: ContextSwitcherProps) => {
     const session = useSession();
     const locale = useLocale();
 

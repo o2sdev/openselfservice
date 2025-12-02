@@ -20,7 +20,7 @@ import { MobileNavigation } from './MobileNavigation/MobileNavigation';
 import { NotificationInfo } from './NotificationInfo/NotificationInfo';
 import { UserInfo } from './UserInfo/UserInfo';
 
-export const Header: React.FC<HeaderProps> = ({ data, alternativeUrls, children }) => {
+export const Header = ({ data, alternativeUrls, children }: HeaderProps) => {
     const session = useSession();
     const isSignedIn = !!session.data?.user;
 

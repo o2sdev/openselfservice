@@ -13,7 +13,7 @@ import { usePathname, useRouter } from '@/i18n';
 
 import { ToolbarProps } from './Toolbar.types';
 
-export const LocaleSwitcher: React.FC<ToolbarProps> = ({ label, alternativeUrls }) => {
+export const LocaleSwitcher = ({ label, alternativeUrls }: ToolbarProps) => {
     const pathname = usePathname();
     const searchParams = useSearchParams();
     const router = useRouter();
