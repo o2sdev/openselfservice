@@ -1,5 +1,11 @@
 # @o2s/integrations.mocked
 
+## 1.13.1
+
+### Patch Changes
+
+- c189d2b: changed file extension from tsx to ts to properly prod dist files
+
 ## 1.13.0
 
 ### Minor Changes
