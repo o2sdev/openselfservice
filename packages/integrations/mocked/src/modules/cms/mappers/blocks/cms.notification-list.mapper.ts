@@ -98,10 +98,10 @@ const MOCK_NOTIFICATION_LIST_BLOCK_EN: CMS.Model.NotificationListBlock.Notificat
                 label: 'Priority',
                 allowMultiple: true,
                 options: [
-                    { label: 'Low Priority', value: 'low' },
-                    { label: 'Medium Priority', value: 'medium' },
-                    { label: 'High Priority', value: 'high' },
-                    { label: 'Critical Priority', value: 'critical' },
+                    { label: 'Low Priority', value: 'LOW' },
+                    { label: 'Medium Priority', value: 'MEDIUM' },
+                    { label: 'High Priority', value: 'HIGH' },
+                    { label: 'Critical Priority', value: 'CRITICAL' },
                 ],
             },
             {
@@ -115,6 +115,11 @@ const MOCK_NOTIFICATION_LIST_BLOCK_EN: CMS.Model.NotificationListBlock.Notificat
                     label: 'To',
                 },
             },
+            {
+                __typename: 'FilterViewModeToggle',
+                id: 'viewMode',
+                value: 'list',
+            },
         ],
     },
     noResults: {
@@ -127,6 +132,12 @@ const MOCK_NOTIFICATION_LIST_BLOCK_EN: CMS.Model.NotificationListBlock.Notificat
         clickToSelect: 'Click to select',
     },
     detailsUrl: '/notifications/:id',
+    cardHeaderSlots: {
+        top: 'status',
+        left: 'title',
+        right: 'priority',
+        bottom: 'createdAt',
+    },
 };
 
 const MOCK_NOTIFICATION_LIST_BLOCK_DE: CMS.Model.NotificationListBlock.NotificationListBlock = {
@@ -244,6 +255,11 @@ const MOCK_NOTIFICATION_LIST_BLOCK_DE: CMS.Model.NotificationListBlock.Notificat
                     label: 'Bis',
                 },
             },
+            {
+                __typename: 'FilterViewModeToggle',
+                id: 'viewMode',
+                value: 'list',
+            },
         ],
     },
     noResults: {
@@ -256,6 +272,12 @@ const MOCK_NOTIFICATION_LIST_BLOCK_DE: CMS.Model.NotificationListBlock.Notificat
         clickToSelect: 'Klicken Sie, um auszuwählen',
     },
     detailsUrl: '/benachrichtigungen/:id',
+    cardHeaderSlots: {
+        top: 'status',
+        left: 'title',
+        right: 'priority',
+        bottom: 'createdAt',
+    },
 };
 
 const MOCK_NOTIFICATION_LIST_BLOCK_PL: CMS.Model.NotificationListBlock.NotificationListBlock = {
@@ -373,6 +395,11 @@ const MOCK_NOTIFICATION_LIST_BLOCK_PL: CMS.Model.NotificationListBlock.Notificat
                     label: 'Do',
                 },
             },
+            {
+                __typename: 'FilterViewModeToggle',
+                id: 'viewMode',
+                value: 'list',
+            },
         ],
     },
     noResults: {
@@ -385,6 +412,12 @@ const MOCK_NOTIFICATION_LIST_BLOCK_PL: CMS.Model.NotificationListBlock.Notificat
         clickToSelect: 'Kliknij, aby wybrać',
     },
     detailsUrl: '/powiadomienia/:id',
+    cardHeaderSlots: {
+        top: 'status',
+        left: 'title',
+        right: 'priority',
+        bottom: 'createdAt',
+    },
 };
 
 export const mapNotificationListBlock = (locale: string): CMS.Model.NotificationListBlock.NotificationListBlock => {

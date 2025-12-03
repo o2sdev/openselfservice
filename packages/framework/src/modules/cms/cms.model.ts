@@ -34,3 +34,6 @@ export * as QuickLinksBlock from './models/blocks/quick-links.model';
 export * as ArticleSearchBlock from './models/blocks/article-search.model';
 export * as FeaturedServiceListBlock from './models/blocks/featured-service-list.model';
 export * as ProductListBlock from './models/blocks/product-list.model';
+export * as NotificationSummaryBlock from './models/blocks/notification-summary.model';
+export * as TicketSummaryBlock from './models/blocks/ticket-summary.model';
+// BLOCK IMPORT

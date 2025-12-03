@@ -1,6 +1,6 @@
 {
     "name": "@o2s/api-harmonization",
-    "version": "1.10.0",
+    "version": "1.11.0",
     "description": "",
     "author": "",
     "private": true,
@@ -36,6 +36,7 @@
         "@o2s/blocks.invoice-list": "*",
         "@o2s/blocks.notification-details": "*",
         "@o2s/blocks.notification-list": "*",
+        "@o2s/blocks.notification-summary": "*",
         "@o2s/blocks.order-details": "*",
         "@o2s/blocks.order-list": "*",
         "@o2s/blocks.orders-summary": "*",
@@ -48,6 +49,7 @@
         "@o2s/blocks.ticket-details": "*",
         "@o2s/blocks.ticket-list": "*",
         "@o2s/blocks.ticket-recent": "*",
+        "@o2s/blocks.ticket-summary": "*",
         "@o2s/blocks.user-account": "*",
         "@o2s/configs.integrations": "*",
         "@o2s/framework": "*",
@@ -71,7 +73,7 @@
         "xmlbuilder2": "^4.0.0"
     },
     "devDependencies": {
-        "@nestjs/cli": "^11.0.12",
+        "@nestjs/cli": "^11.0.14",
         "@nestjs/schematics": "^11.0.9",
         "@nestjs/testing": "^11.1.9",
         "@o2s/eslint-config": "*",

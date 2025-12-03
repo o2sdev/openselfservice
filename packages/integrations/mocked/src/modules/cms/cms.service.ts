@@ -5,12 +5,14 @@ import { CMS } from '@o2s/framework/modules';
 
 import { mapArticleListBlock } from './mappers/blocks/cms.article-list.mapper';
 import { mapArticleSearchBlock } from './mappers/blocks/cms.article-search.mapper';
+import { mapCategoryListBlock } from './mappers/blocks/cms.category-list.mapper';
 import { mapFaqBlock } from './mappers/blocks/cms.faq.mapper';
 import { mapFeaturedServiceListBlock } from './mappers/blocks/cms.featured-service-list.mapper';
 import { mapInvoiceDetailsBlock } from './mappers/blocks/cms.invoice-details.mapper';
 import { mapInvoiceListBlock } from './mappers/blocks/cms.invoice-list.mapper';
 import { mapNotificationDetailsBlock } from './mappers/blocks/cms.notification-details.mapper';
 import { mapNotificationListBlock } from './mappers/blocks/cms.notification-list.mapper';
+import { mapNotificationSummaryBlock } from './mappers/blocks/cms.notification-summary.mapper';
 import { mapOrderDetailsBlock } from './mappers/blocks/cms.order-details.mapper';
 import { mapOrderListBlock } from './mappers/blocks/cms.order-list.mapper';
 import { mapOrdersSummaryBlock } from './mappers/blocks/cms.orders-summary.mapper';
@@ -25,9 +27,9 @@ import { mapSurveyJsBlock } from './mappers/blocks/cms.surveyjs-block.mapper';
 import { mapTicketDetailsBlock } from './mappers/blocks/cms.ticket-details.mapper';
 import { mapTicketListBlock } from './mappers/blocks/cms.ticket-list.mapper';
 import { mapTicketRecentBlock } from './mappers/blocks/cms.ticket-recent.mapper';
+import { mapTicketSummaryBlock } from './mappers/blocks/cms.ticket-summary.mapper';
 import { mapUserAccountBlock } from './mappers/blocks/cms.user-account.mapper';
 import { mapAppConfig } from './mappers/cms.app-config.mapper';
-import { mapCategoryListBlock } from './mappers/cms.category-list.mapper';
 import { mapCategoryBlock } from './mappers/cms.category.mapper';
 import { mapFooter } from './mappers/cms.footer.mapper';
 import { mapHeader } from './mappers/cms.header.mapper';
@@ -99,6 +101,10 @@ export class CmsService implements CMS.Service {
 
     getNotificationDetailsBlock(_options: CMS.Request.GetCmsEntryParams) {
         return of(mapNotificationDetailsBlock(_options.locale)).pipe(responseDelay());
+    }
+
+    getNotificationSummaryBlock(_options: CMS.Request.GetCmsEntryParams) {
+        return of(mapNotificationSummaryBlock(_options.locale)).pipe(responseDelay());
     }
 
     getInvoiceListBlock(options: CMS.Request.GetCmsEntryParams) {
@@ -191,5 +197,9 @@ export class CmsService implements CMS.Service {
 
     getProductListBlock(options: CMS.Request.GetCmsEntryParams) {
         return of(mapProductListBlock(options.locale)).pipe(responseDelay());
+    }
+
+    getTicketSummaryBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapTicketSummaryBlock(options.locale)).pipe(responseDelay());
     }
 }

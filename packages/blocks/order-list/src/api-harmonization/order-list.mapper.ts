@@ -26,6 +26,8 @@ export const mapOrderList = (
         pagination: cms.pagination,
         labels: cms.labels,
         reorderLabel: cms.reorderLabel,
+        initialFilters: cms.initialFilters,
+        cardHeaderSlots: cms.cardHeaderSlots,
     };
 };
 

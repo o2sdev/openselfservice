@@ -27,6 +27,8 @@ export const mapInvoiceList = (
         },
         downloadFileName: cms.downloadFileName,
         downloadButtonAriaDescription: cms.downloadButtonAriaDescription,
+        initialFilters: cms.initialFilters,
+        cardHeaderSlots: cms.cardHeaderSlots,
     };
 };
 

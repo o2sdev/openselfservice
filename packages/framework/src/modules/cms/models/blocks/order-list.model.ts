@@ -8,7 +8,7 @@ export class OrderListBlock extends Block.Block {
     table!: DataTable.DataTable<Order>;
     fieldMapping!: Mapping.Mapping<Order>;
     pagination?: Pagination.Pagination;
-    filters?: Filters.Filters<Order & { sort?: string }>;
+    filters?: Filters.Filters<Order & { sort?: string; viewMode?: 'list' | 'grid' }>;
     noResults!: {
         title: string;
         description?: string;
@@ -21,4 +21,11 @@ export class OrderListBlock extends Block.Block {
     };
     reorderLabel?: string;
     detailsUrl!: string;
+    initialFilters?: Partial<Order & { sort?: string }>;
+    cardHeaderSlots?: {
+        top?: string;
+        left?: string;
+        right?: string;
+        bottom?: string;
+    };
 }

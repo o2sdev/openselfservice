@@ -8,7 +8,7 @@ export class InvoiceListBlock extends Block.Block {
     tableTitle?: string;
     table!: DataTable.DataTable<Invoice>;
     pagination?: Pagination.Pagination;
-    filters?: Filters.Filters<Invoice>;
+    filters?: Filters.Filters<Invoice & { sort?: string; viewMode?: 'list' | 'grid' }>;
     noResults!: {
         title: string;
         description?: string;
@@ -20,4 +20,11 @@ export class InvoiceListBlock extends Block.Block {
         clickToSelect: string;
     };
     downloadButtonAriaDescription?: string;
+    initialFilters?: Partial<Invoice & { sort?: string }>;
+    cardHeaderSlots?: {
+        top?: string;
+        left?: string;
+        right?: string;
+        bottom?: string;
+    };
 }

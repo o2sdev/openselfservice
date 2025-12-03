@@ -6,4 +6,5 @@ export class GetTicketListBlockQuery
     id!: string;
     offset?: number;
     limit?: number;
+    preview?: boolean;
 }

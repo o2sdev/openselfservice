@@ -1,0 +1,24 @@
+fragment AppConfig on AppConfig {
+    sys {
+        ...Sys
+    }
+    signedInHeader {
+        sys {
+            ...Sys
+        }
+    }
+    signedInFooter {
+        sys {
+            ...Sys
+        }
+    }
+    themesCollection {
+        items {
+            name
+            logo {
+                ...Media
+            }
+        }
+    }
+}
+

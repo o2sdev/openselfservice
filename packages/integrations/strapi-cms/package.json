@@ -1,10 +1,11 @@
 {
     "name": "@o2s/integrations.strapi-cms",
-    "version": "2.6.3",
+    "version": "2.7.0",
     "private": false,
     "license": "MIT",
     "exports": {
-        "./integration": "./dist/src/integration.js"
+        "./integration": "./dist/src/integration.js",
+        "./live-preview": "./dist/src/modules/cms/live-preview/index.js"
     },
     "files": [
         "dist"
