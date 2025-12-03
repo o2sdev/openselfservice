@@ -13,8 +13,8 @@
     ],
     "scripts": {
         "build": "tsc --preserveWatchOutput && tsc-alias",
-        "lint": "tsc --noEmit && eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-        "format": "prettier --write \"src/**/*.ts\""
+        "lint": "tsc --noEmit && eslint \"{src,apps,libs,test}/**/*.{ts,tsx}\" --fix",
+        "format": "prettier --write \"src/**/*.{ts,tsx}\""
     },
     "dependencies": {
         "@o2s/framework": "*"

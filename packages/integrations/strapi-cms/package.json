@@ -14,7 +14,7 @@
         "build": "tsc --preserveWatchOutput && tsc-alias",
         "lint": "tsc --noEmit && eslint . --max-warnings 0",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\"",
-        "generate": "graphql-codegen && prettier --write \"generated/**/*.ts\""
+        "generate": "graphql-codegen && prettier --write \"generated/**/*.{ts,tsx}\""
     },
     "dependencies": {
         "@o2s/framework": "*",
