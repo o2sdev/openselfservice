@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
     output: 'standalone',
     images: {
         // deviceSizes: [430, 828, 1200, 2048, 3840],
-        qualities:[75, 90],
+        qualities: [75, 90],
         remotePatterns: [
             {
                 protocol: 'https',
