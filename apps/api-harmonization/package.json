@@ -11,7 +11,7 @@
         "./modules/*": "./src/modules/*.ts"
     },
     "scripts": {
-        "dev": "cross-env NODE_ENV=development nest start --watch --preserveWatchOutput  --exec \"node --watch\"",
+        "dev": "cross-env NODE_ENV=development nest start --watch --preserveWatchOutput",
         "debug": "nest start --debug --watch --preserveWatchOutput",
         "build": "nest build",
         "start": "node dist/main",

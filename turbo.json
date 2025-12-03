@@ -1,6 +1,6 @@
 {
     "$schema": "https://turbo.build/schema.json",
-    "ui": "stream",
+    "ui": "tui",
     "concurrency": "10",
     "tasks": {
         "init": {},
@@ -33,26 +33,6 @@
         "format": {
             "dependsOn": [
                 "^format"
-            ]
-        },
-        "predev": {
-            "cache": true
-        },
-        "dev": {
-            "cache": false,
-            "persistent": true,
-            "inputs": [
-                "$TURBO_DEFAULT$",
-                ".env*"
-            ],
-            "outputs": [
-                "dist/**",
-                "build/**",
-                ".next/**",
-                "!.next/cache/**"
-            ],
-            "dependsOn": [
-                "^build"
             ]
         },
         "start": {

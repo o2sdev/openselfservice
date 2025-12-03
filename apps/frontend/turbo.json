@@ -3,7 +3,17 @@
         "//"
     ],
     "tasks": {
+        "build": {
+            "dependsOn": [
+                "@o2s/api-harmonization#build"
+            ]
+        },
         "dev": {
+            "cache": false,
+            "persistent": true,
+            "dependsOn": [
+                "^build"
+            ],
             "env": [
                 "NODE_ENV",
                 "ANALYZE",

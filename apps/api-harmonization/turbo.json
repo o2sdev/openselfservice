@@ -4,6 +4,11 @@
     ],
     "tasks": {
         "dev": {
+            "cache": false,
+            "persistent": true,
+            "dependsOn": [
+                "^build"
+            ],
             "env": [
                 "NODE_ENV",
                 "PORT",

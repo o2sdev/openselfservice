@@ -14,7 +14,6 @@
     },
     "dependencies": {
         "@contentful/live-preview": "^4.6.52",
-        "@o2s/api-harmonization": "*",
         "@o2s/blocks.article": "*",
         "@o2s/blocks.article-list": "*",
         "@o2s/blocks.article-search": "*",
