@@ -9,7 +9,7 @@
         "build": "next build",
         "postbuild": "cp -r public .next/standalone/apps/frontend && cp -r .next/static .next/standalone/apps/frontend/.next/",
         "start": "node .next/standalone/apps/frontend/server.js",
-        "lint": "tsc --noEmit && next lint",
+        "lint": "tsc --noEmit && eslint .",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\"",
         "generate:component": "turbo gen web-component"
     },
