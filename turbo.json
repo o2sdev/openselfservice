@@ -1,7 +1,7 @@
 {
     "$schema": "https://turbo.build/schema.json",
-    "ui": "tui",
-    "concurrency": "10",
+    "ui": "stream",
+    "concurrency": "5",
     "tasks": {
         "init": {},
         "build": {

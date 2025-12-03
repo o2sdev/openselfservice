@@ -4,6 +4,7 @@
     "private": true,
     "scripts": {
         "dev": "next dev --turbopack",
+        "predev": "shx rm -f .next/dev/lock",
         "dev:https": "next dev --turbopack --experimental-https",
         "build": "next build",
         "postbuild": "cp -r public .next/standalone/apps/frontend && cp -r .next/static .next/standalone/apps/frontend/.next/",
