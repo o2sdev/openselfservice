@@ -4,6 +4,8 @@ import { createNavigation } from 'next-intl/navigation';
 import React, { useState, useTransition } from 'react';
 import { debounce } from 'throttle-debounce';
 
+import { toast } from '@o2s/ui/hooks/use-toast';
+
 import { Autocomplete } from '@o2s/ui/components/Autocomplete';
 import { Container } from '@o2s/ui/components/Container';
 
@@ -31,12 +33,27 @@ export const ArticleSearchPure: React.FC<ArticleSearchPureProps> = ({
 
     const getSuggestions = debounce(300, async (value: string) => {
         startTransition(async () => {
-            const result = await sdk.blocks.searchArticles(
-                { query: value, limit: 5, offset: 0, category },
-                { 'x-locale': locale },
-                accessToken,
-            );
-            if (result.articles) setSuggestions(result.articles);
+            try {
+                const result = await sdk.blocks.searchArticles(
+                    { query: value, limit: 5, offset: 0, category },
+                    { 'x-locale': locale },
+                    accessToken,
+                );
+                if (result.articles) {
+                    setSuggestions(result.articles);
+                } else {
+                    setSuggestions([]);
+                }
+            } catch (_error) {
+                // comment: show toast instead of breaking Storybook when backend is unavailable
+                toast({
+                    variant: 'destructive',
+                    title: 'Unable to fetch search results',
+                    description: 'Start the api-harmonization service and refresh Storybook.',
+                    duration: 60000,
+                });
+                setSuggestions([]);
+            }
         });
     });
 
