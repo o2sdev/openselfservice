@@ -179,6 +179,11 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
             },
             {
                 type: 'add',
+                path: 'packages/blocks/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.service.spec.ts',
+                templateFile: 'templates/block/api-harmonization/service.spec.hbs',
+            },
+            {
+                type: 'add',
                 path: 'packages/blocks/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.module.ts',
                 templateFile: 'templates/block/api-harmonization/module.hbs',
             },
@@ -201,7 +206,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                 type: 'modify',
                 path: 'apps/api-harmonization/src/app.module.ts',
                 pattern: /(\/\/ BLOCK IMPORT)/g,
-                template: `import * as {{pascalCase name}} from '@dxp/blocks.{{kebabCase name}}/api-harmonization';\n// BLOCK IMPORT`,
+                template: `import * as {{pascalCase name}} from '@o2s/blocks.{{kebabCase name}}/api-harmonization';\n// BLOCK IMPORT`,
             },
             {
                 type: 'modify',
@@ -213,7 +218,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                 type: 'modify',
                 path: 'apps/api-harmonization/src/modules/page/page.model.ts',
                 pattern: /(\/\/ BLOCK IMPORT)/g,
-                template: `import * as {{pascalCase name}} from '@dxp/blocks.{{kebabCase name}}/api-harmonization';\n// BLOCK IMPORT`,
+                template: `import * as {{pascalCase name}} from '@o2s/blocks.{{kebabCase name}}/api-harmonization';\n// BLOCK IMPORT`,
             },
             {
                 type: 'modify',
@@ -252,7 +257,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                 type: 'modify',
                 path: 'apps/frontend/src/blocks/renderBlocks.tsx',
                 pattern: /(\/\/ BLOCK IMPORT)/g,
-                template: `import * as {{pascalCase name}} from '@dxp/blocks.{{kebabCase name}}/frontend';\n// BLOCK IMPORT`,
+                template: `import * as {{pascalCase name}} from '@o2s/blocks.{{kebabCase name}}/frontend';\n// BLOCK IMPORT`,
             },
             {
                 type: 'modify',
@@ -271,6 +276,11 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                 type: 'add',
                 path: 'packages/blocks/{{kebabCase name}}/src/sdk/{{kebabCase name}}.ts',
                 templateFile: 'templates/block/sdk/block.hbs',
+            },
+            {
+                type: 'add',
+                path: 'packages/blocks/{{kebabCase name}}/src/sdk/{{kebabCase name}}.spec.ts',
+                templateFile: 'templates/block/sdk/block.spec.hbs',
             },
 
             // CONFIG
@@ -298,6 +308,11 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                 type: 'add',
                 path: 'packages/blocks/{{kebabCase name}}/package.json',
                 templateFile: 'templates/block/package.hbs',
+            },
+            {
+                type: 'add',
+                path: 'packages/blocks/{{kebabCase name}}/vitest.config.mjs',
+                templateFile: 'templates/block/vitestConfig.hbs',
             },
             {
                 type: 'add',
