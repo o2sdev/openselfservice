@@ -43,7 +43,8 @@ const AvatarImage = ({ className, alt = '', ref, ...props }: AvatarImageProps) =
 );
 
 export interface AvatarFallbackProps
-    extends React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>, VariantProps<typeof avatarVariants> {
+    extends React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>,
+        VariantProps<typeof avatarVariants> {
     name: string;
 }
 
