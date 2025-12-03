@@ -7,7 +7,7 @@ import { OrderListProps } from './OrderList.types';
 
 export const OrderListDynamic = dynamic(() => import('./OrderList.client').then((module) => module.OrderListPure));
 
-export const OrderList: React.FC<OrderListProps> = async ({ id, accessToken, locale, routing, hasPriority }) => {
+export const OrderList = async ({ id, accessToken, locale, routing, hasPriority }: OrderListProps) => {
     try {
         const data = await sdk.blocks.getOrderList(
             {

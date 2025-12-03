@@ -11,7 +11,7 @@ export interface PaymentsHistoryRendererProps {
     hasPriority?: boolean;
 }
 
-export const PaymentsHistoryRenderer: React.FC<PaymentsHistoryRendererProps> = ({ id, accessToken, hasPriority }) => {
+export const PaymentsHistoryRenderer = ({ id, accessToken, hasPriority }: PaymentsHistoryRendererProps) => {
     const locale = useLocale();
 
     return (

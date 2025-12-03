@@ -7,14 +7,14 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { UserAccount } from './UserAccount.server';
 import { UserAccountRendererProps } from './UserAccount.types';
 
-export const UserAccountRenderer: React.FC<UserAccountRendererProps> = ({
+export const UserAccountRenderer = ({
     id,
     accessToken,
     routing,
     userId,
     onSignOut,
     hasPriority,
-}) => {
+}: UserAccountRendererProps) => {
     const locale = useLocale();
 
     if (!userId) {

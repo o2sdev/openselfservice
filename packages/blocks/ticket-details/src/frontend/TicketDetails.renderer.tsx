@@ -7,13 +7,7 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { TicketDetails } from './TicketDetails.server';
 import { TicketDetailsRendererProps } from './TicketDetails.types';
 
-export const TicketDetailsRenderer: React.FC<TicketDetailsRendererProps> = ({
-    slug,
-    id,
-    accessToken,
-    routing,
-    hasPriority,
-}) => {
+export const TicketDetailsRenderer = ({ slug, id, accessToken, routing, hasPriority }: TicketDetailsRendererProps) => {
     const locale = useLocale();
 
     if (!slug[1]) {

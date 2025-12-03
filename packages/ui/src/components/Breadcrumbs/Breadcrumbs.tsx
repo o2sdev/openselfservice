@@ -13,7 +13,7 @@ import { Link } from '@o2s/ui/elements/link';
 
 import { BreadcrumbsProps } from './Breadcrumbs.types';
 
-export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ breadcrumbs, LinkComponent }) => {
+export const Breadcrumbs = ({ breadcrumbs, LinkComponent }: BreadcrumbsProps) => {
     if (!breadcrumbs?.length) return null;
 
     return (

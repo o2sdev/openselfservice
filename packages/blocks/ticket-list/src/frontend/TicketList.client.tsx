@@ -25,7 +25,7 @@ import { sdk } from '../sdk';
 
 import { TicketListPureProps } from './TicketList.types';
 
-export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessToken, routing, meta, ...component }) => {
+export const TicketListPure = ({ locale, accessToken, routing, meta, ...component }: TicketListPureProps) => {
     const { Link: LinkComponent } = createNavigation(routing);
     const inspector = LivePreview.useInspector();
 

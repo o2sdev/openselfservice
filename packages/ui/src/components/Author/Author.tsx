@@ -5,7 +5,7 @@ import { Typography } from '@o2s/ui/elements/typography';
 
 import { AuthorProps } from './Author.types';
 
-export const Author: React.FC<Readonly<AuthorProps>> = ({ name, avatar, position }) => {
+export const Author = ({ name, avatar, position }: Readonly<AuthorProps>) => {
     return (
         <div className="flex items-center gap-2">
             <Avatar>

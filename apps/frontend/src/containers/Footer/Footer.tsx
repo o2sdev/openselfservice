@@ -176,7 +176,7 @@ const NavigationGroup = ({
     );
 };
 
-export const Footer: React.FC<FooterProps> = ({ data }) => {
+export const Footer = ({ data }: FooterProps) => {
     const locale = useLocale();
 
     const navigationItemClass = cn(navigationMenuTriggerStyle());

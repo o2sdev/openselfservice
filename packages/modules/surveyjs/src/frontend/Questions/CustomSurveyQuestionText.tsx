@@ -45,7 +45,7 @@ interface CustomSurveyQuestionTextProps {
     };
 }
 
-const CustomSurveyQuestionText: React.FC<CustomSurveyQuestionTextProps> = (props) => {
+const CustomSurveyQuestionText = (props: CustomSurveyQuestionTextProps) => {
     const [open, setOpen] = useState(false);
     const locale = useLocale();
     const question = props.question;

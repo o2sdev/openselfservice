@@ -13,7 +13,7 @@ import { Typography } from '@o2s/ui/elements/typography';
 
 import { FaqPureProps } from './Faq.types';
 
-export const FaqPure: React.FC<FaqPureProps> = ({ locale, accessToken, routing, ...component }) => {
+export const FaqPure = ({ locale, accessToken, routing, ...component }: FaqPureProps) => {
     const { Link: LinkComponent } = createNavigation(routing);
     const inspector = LivePreview.useInspector();
 

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { AuthLayoutProps } from './AuthLayout.types';
 
-export const AuthLayout: React.FC<AuthLayoutProps> = ({ layout = 'main-side', toolbar, children }) => {
+export const AuthLayout = ({ layout = 'main-side', toolbar, children }: AuthLayoutProps) => {
     const main = (
         <div className="flex flex-col md:max-w-[50%] w-full p-4">
             <div className="flex flex-col justify-center items-center md:h-full">

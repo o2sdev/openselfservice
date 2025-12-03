@@ -9,14 +9,14 @@ export const CategoryListDynamic = dynamic(() =>
     import('./CategoryList.client').then((module) => module.CategoryListPure),
 );
 
-export const CategoryList: React.FC<CategoryListProps> = async ({
+export const CategoryList = async ({
     id,
     accessToken,
     locale,
     routing,
     hasPriority,
     isDraftModeEnabled,
-}) => {
+}: CategoryListProps) => {
     let data;
     try {
         data = await sdk.blocks.getCategoryList(

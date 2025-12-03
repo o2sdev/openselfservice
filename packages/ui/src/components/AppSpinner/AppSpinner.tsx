@@ -6,7 +6,7 @@ import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
 
 import { Spinner } from '@o2s/ui/elements/spinner';
 
-export const AppSpinner: React.FC = () => {
+export const AppSpinner = () => {
     const { spinner } = useGlobalContext();
 
     if (!spinner.isVisible) {

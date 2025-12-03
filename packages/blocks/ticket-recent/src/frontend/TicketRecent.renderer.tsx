@@ -7,12 +7,7 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { TicketRecent } from './TicketRecent.server';
 import { TicketRecentRendererProps } from './TicketRecent.types';
 
-export const TicketRecentRenderer: React.FC<TicketRecentRendererProps> = ({
-    id,
-    accessToken,
-    routing,
-    hasPriority,
-}) => {
+export const TicketRecentRenderer = ({ id, accessToken, routing, hasPriority }: TicketRecentRendererProps) => {
     const locale = useLocale();
 
     return (

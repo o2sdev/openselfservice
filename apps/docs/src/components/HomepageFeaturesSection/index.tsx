@@ -17,7 +17,7 @@ interface FeatureItemProps {
     textClassName?: string;
 }
 
-const FeatureItem: React.FC<FeatureItemProps> = ({ text, icon, textClassName = '' }) => (
+const FeatureItem = ({ text, icon, textClassName = '' }: FeatureItemProps) => (
     <div className="flex gap-4 items-start">
         <div className="flex items-center pt-0.5 shrink-0">{icon}</div>
         <Body className={`mb-0! text-base leading-6 ${textClassName}`}>{text}</Body>
@@ -29,7 +29,7 @@ interface BuildingBlockCardProps {
     icon: React.ReactNode;
 }
 
-const BuildingBlockCard: React.FC<BuildingBlockCardProps> = ({ title, icon }) => (
+const BuildingBlockCard = ({ title, icon }: BuildingBlockCardProps) => (
     <div className="flex flex-col gap-2 items-start">
         <div className="flex items-center mb-2 [&_svg_path]:stroke-(--color-highlighted)">{icon}</div>
         <H4 className="mb-0! leading-7!">{title}</H4>

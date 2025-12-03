@@ -11,7 +11,7 @@ import { Typography } from '@o2s/ui/elements/typography';
 
 import { SurveyJsFormPureProps } from './SurveyJs.types';
 
-export const SurveyJsPure: React.FC<SurveyJsFormPureProps> = ({ locale, accessToken, ...component }) => {
+export const SurveyJsPure = ({ locale, accessToken, ...component }: SurveyJsFormPureProps) => {
     const { labels } = useGlobalContext();
 
     const { code, title } = component;

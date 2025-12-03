@@ -6,11 +6,7 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { NotificationSummary } from './NotificationSummary.server';
 import { NotificationSummaryRendererProps } from './NotificationSummary.types';
 
-export const NotificationSummaryRenderer: React.FC<NotificationSummaryRendererProps> = ({
-    id,
-    accessToken,
-    routing,
-}) => {
+export const NotificationSummaryRenderer = ({ id, accessToken, routing }: NotificationSummaryRendererProps) => {
     const locale = useLocale();
 
     return (

@@ -4,7 +4,7 @@ import { Skeleton } from '@o2s/ui/elements/skeleton';
 
 import { LoadingProps } from './Loading.types';
 
-export const Loading: React.FC<LoadingProps> = ({ bars = 2, variant = 'component' }) => {
+export const Loading = ({ bars = 2, variant = 'component' }: LoadingProps) => {
     switch (variant) {
         case 'post':
             return (

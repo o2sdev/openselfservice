@@ -31,7 +31,7 @@ export interface GuidesSectionProps {
     info?: GuideInfo;
 }
 
-export const GuidesSection: React.FC<GuidesSectionProps> = ({ title, guides, info }) => {
+export const GuidesSection = ({ title, guides, info }: GuidesSectionProps) => {
     return (
         <div className="flex flex-col items-start justify-start w-full">
             {title && <H2 className="text-3xl text-white w-full">{title}</H2>}

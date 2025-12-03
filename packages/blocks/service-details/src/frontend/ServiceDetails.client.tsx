@@ -19,7 +19,7 @@ import { Typography } from '@o2s/ui/elements/typography';
 
 import { ServiceDetailsPureProps } from './ServiceDetails.types';
 
-export const ServiceDetailsPure: React.FC<ServiceDetailsPureProps> = ({ ...component }) => {
+export const ServiceDetailsPure = ({ ...component }: ServiceDetailsPureProps) => {
     const { data: service } = component;
 
     const t = useTranslations();

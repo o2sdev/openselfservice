@@ -18,7 +18,7 @@ import { LinkList } from '../../LinkList';
 
 import { FeatureItemProps, PricingCardProps } from './PricingCard.types';
 
-export const FeatureItem: React.FC<FeatureItemProps> = ({ title, description, icon }) => {
+export const FeatureItem = ({ title, description, icon }: FeatureItemProps) => {
     return (
         <div className="flex flex-row gap-3 w-full justify-between">
             <div className="flex flex-row gap-3">
@@ -48,7 +48,7 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({ title, description, ic
     );
 };
 
-export const PricingCard: React.FC<Readonly<PricingCardProps>> = (props) => {
+export const PricingCard = (props: Readonly<PricingCardProps>) => {
     const { title, description, image, price, isPromoted, tags, links, featureListTitle, featureList, LinkComponent } =
         props;
 

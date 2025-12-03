@@ -39,14 +39,14 @@ const containerBackgroundVariants = cva('w-full', {
     },
 });
 
-export const Container: React.FC<ContainerProps> = ({
+export const Container = ({
     variant = 'full',
     children,
     className,
     spacing = 'none',
     background = 'none',
     theme,
-}) => {
+}: ContainerProps) => {
     let finalTheme = theme;
     if (theme) {
         finalTheme = `theme-${theme}`;

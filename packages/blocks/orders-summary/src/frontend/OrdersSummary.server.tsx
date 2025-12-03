@@ -11,13 +11,7 @@ export const OrdersSummaryDynamic = dynamic(() =>
     import('./OrdersSummary.client').then((module) => module.OrdersSummaryPure),
 );
 
-export const OrdersSummary: React.FC<OrdersSummaryProps> = async ({
-    id,
-    accessToken,
-    locale,
-    routing,
-    hasPriority,
-}) => {
+export const OrdersSummary = async ({ id, accessToken, locale, routing, hasPriority }: OrdersSummaryProps) => {
     try {
         const data = await sdk.blocks.getOrdersSummary(
             {

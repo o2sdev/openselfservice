@@ -10,13 +10,7 @@ import { DynamicIconProps } from '@o2s/ui/components/DynamicIcon';
 
 import { QuickLinksPureProps } from './QuickLinks.types';
 
-export const QuickLinksPure: React.FC<Readonly<QuickLinksPureProps>> = ({
-    locale,
-    accessToken,
-    routing,
-    meta,
-    ...component
-}) => {
+export const QuickLinksPure = ({ locale, accessToken, routing, meta, ...component }: Readonly<QuickLinksPureProps>) => {
     const { Link: LinkComponent } = createNavigation(routing);
     const inspector = LivePreview.useInspector();
 

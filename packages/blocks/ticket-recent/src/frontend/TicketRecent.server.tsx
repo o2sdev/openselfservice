@@ -9,7 +9,7 @@ export const TicketRecentDynamic = dynamic(() =>
     import('./TicketRecent.client').then((module) => module.TicketRecentPure),
 );
 
-export const TicketRecent: React.FC<TicketRecentProps> = async ({ id, accessToken, locale, routing, hasPriority }) => {
+export const TicketRecent = async ({ id, accessToken, locale, routing, hasPriority }: TicketRecentProps) => {
     try {
         const data = await sdk.blocks.getTicketRecent(
             {

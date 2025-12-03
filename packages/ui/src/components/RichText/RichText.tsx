@@ -1,6 +1,6 @@
 import Markdown, { MarkdownToJSX } from 'markdown-to-jsx';
 import NextLink, { LinkProps } from 'next/link';
-import React, { FC, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
@@ -9,7 +9,7 @@ import { Typography, TypographyProps } from '@o2s/ui/elements/typography';
 
 import { RichTextProps } from './RichText.types';
 
-const LinkComp: FC<Readonly<LinkProps & { children: ReactNode; className?: string }>> = ({ children, ...props }) => {
+const LinkComp = ({ children, ...props }: Readonly<LinkProps & { children: ReactNode; className?: string }>) => {
     const { className, ...rest } = props;
     return (
         <Link className={className} asChild>
@@ -18,10 +18,7 @@ const LinkComp: FC<Readonly<LinkProps & { children: ReactNode; className?: strin
     );
 };
 
-const TypographyComp: FC<Readonly<TypographyProps & { children: ReactNode; tag: string }>> = ({
-    children,
-    ...props
-}) => {
+const TypographyComp = ({ children, ...props }: Readonly<TypographyProps & { children: ReactNode; tag: string }>) => {
     const Tag = props.tag || 'p';
     return (
         <Typography variant={props.variant} asChild>
@@ -30,14 +27,12 @@ const TypographyComp: FC<Readonly<TypographyProps & { children: ReactNode; tag: 
     );
 };
 
-const TdComp: FC<Readonly<TypographyProps & { children: ReactNode }>> = ({
+const TdComp = ({
     children,
+    'data-highlighted': dataHighlighted,
     ...props
-}: {
-    children: ReactNode;
-    'data-highlighted'?: boolean;
-}) => {
-    const variant = props['data-highlighted'] ? 'tableCellHighlighted' : 'tableCell';
+}: Readonly<TypographyProps & { children: ReactNode; 'data-highlighted'?: boolean }>) => {
+    const variant = dataHighlighted ? 'tableCellHighlighted' : 'tableCell';
     return (
         <TypographyComp variant={variant} tag="td" {...props}>
             {children}
@@ -45,13 +40,13 @@ const TdComp: FC<Readonly<TypographyProps & { children: ReactNode }>> = ({
     );
 };
 
-export const RichText: FC<Readonly<RichTextProps>> = ({
+export const RichText = ({
     content,
     baseFontSize = 'body',
     className,
     startingHeadingLevel = 1,
     ...rest
-}) => {
+}: Readonly<RichTextProps>) => {
     if (!content) {
         return null;
     }

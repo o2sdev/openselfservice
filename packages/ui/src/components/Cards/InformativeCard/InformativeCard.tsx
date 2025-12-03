@@ -11,13 +11,7 @@ import { RichText } from '../../RichText';
 
 import { InformativeCardProps } from './InformativeCard.types';
 
-const InformativeCardContent: React.FC<Readonly<InformativeCardProps>> = ({
-    icon,
-    title,
-    description,
-    href,
-    lineClamp = 7,
-}) => {
+const InformativeCardContent = ({ icon, title, description, href, lineClamp = 7 }: Readonly<InformativeCardProps>) => {
     if (!icon && !title && !description) {
         return null;
     }
@@ -55,7 +49,7 @@ const InformativeCardContent: React.FC<Readonly<InformativeCardProps>> = ({
     );
 };
 
-export const InformativeCard: React.FC<Readonly<InformativeCardProps>> = (props) => {
+export const InformativeCard = (props: Readonly<InformativeCardProps>) => {
     const LinkComponent = props.LinkComponent;
 
     if (props.href) {

@@ -4,7 +4,7 @@ import { renderBlocks } from '@/blocks/renderBlocks';
 
 import { TwoColumnTemplateProps } from './TwoColumnTemplate.types';
 
-export const TwoColumnTemplate: React.FC<TwoColumnTemplateProps> = async ({ slug, data }) => {
+export const TwoColumnTemplate = async ({ slug, data }: TwoColumnTemplateProps) => {
     return (
         <div className="flex flex-col gap-8 w-full">
             <div className="flex flex-col gap-8 items-center sm:items-start w-full">

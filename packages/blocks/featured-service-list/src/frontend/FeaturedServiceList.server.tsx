@@ -9,13 +9,13 @@ export const FeaturedServiceListDynamic = dynamic(() =>
     import('./FeaturedServiceList.client').then((module) => module.FeaturedServiceListPure),
 );
 
-export const FeaturedServiceList: React.FC<FeaturedServiceListProps> = async ({
+export const FeaturedServiceList = async ({
     id,
     accessToken,
     locale,
     routing,
     hasPriority,
-}) => {
+}: FeaturedServiceListProps) => {
     try {
         const data = await sdk.blocks.getFeaturedServiceList(
             {

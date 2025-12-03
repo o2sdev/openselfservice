@@ -13,7 +13,7 @@ import { Typography } from '@o2s/ui/elements/typography';
 
 import { ProductCardProps } from './ProductCard.types';
 
-export const ProductCard: React.FC<ProductCardProps> = ({
+export const ProductCard = ({
     title,
     description,
     price,
@@ -23,7 +23,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     link,
     action,
     LinkComponent,
-}) => {
+}: ProductCardProps) => {
     return (
         <div className={cn('flex flex-col bg-card rounded-lg border border-border shadow-sm relative w-full h-full')}>
             {/* Image section */}

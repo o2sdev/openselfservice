@@ -14,7 +14,7 @@ import { Typography } from '@o2s/ui/elements/typography';
 
 import { NotificationSummaryPureProps } from './NotificationSummary.types';
 
-export const NotificationSummaryPure: React.FC<NotificationSummaryPureProps> = ({ ...component }) => {
+export const NotificationSummaryPure = ({ ...component }: NotificationSummaryPureProps) => {
     const { infoCards, layout } = component;
 
     if (!infoCards || infoCards.length === 0) {

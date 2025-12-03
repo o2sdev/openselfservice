@@ -25,7 +25,7 @@ const DoubleLineChart = dynamic(
     {},
 );
 
-const Trend: React.FC<Readonly<{ value?: number }>> = ({ value }) => {
+const Trend = ({ value }: Readonly<{ value?: number }>) => {
     const locale = useLocale();
 
     if (!value) {
@@ -48,11 +48,7 @@ const Trend: React.FC<Readonly<{ value?: number }>> = ({ value }) => {
     );
 };
 
-export const OrdersSummaryPure: React.FC<Readonly<OrdersSummaryPureProps>> = ({
-    locale,
-    accessToken,
-    ...component
-}) => {
+export const OrdersSummaryPure = ({ locale, accessToken, ...component }: Readonly<OrdersSummaryPureProps>) => {
     const initialFilters: Request.GetOrdersSummaryBlockQuery = {
         id: component.id,
         dateFrom: dayjs().subtract(6, 'months').toISOString(),

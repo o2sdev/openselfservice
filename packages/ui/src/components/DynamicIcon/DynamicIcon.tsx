@@ -5,13 +5,13 @@ import { DynamicIconProps } from './DynamicIcon.types';
 
 const toKebabCase = (str: string) => str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
 
-export const DynamicIcon: React.FC<DynamicIconProps> = ({
+export const DynamicIcon = ({
     name,
     size = 24,
     color = 'currentColor',
     className,
     strokeWidth = 2,
-}) => {
+}: DynamicIconProps) => {
     if (!name) {
         return null;
     }

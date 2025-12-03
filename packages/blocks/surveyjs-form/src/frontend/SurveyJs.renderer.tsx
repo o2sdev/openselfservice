@@ -7,7 +7,7 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { SurveyJsServer } from './SurveyJs.server';
 import { SurveyJsFormRendererProps } from './SurveyJs.types';
 
-export const SurveyJsRenderer: React.FC<SurveyJsFormRendererProps> = ({ id, accessToken, routing, hasPriority }) => {
+export const SurveyJsRenderer = ({ id, accessToken, routing, hasPriority }: SurveyJsFormRendererProps) => {
     const locale = useLocale();
 
     return (

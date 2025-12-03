@@ -12,7 +12,7 @@ interface SubscribeSectionProps {
     formId: string;
 }
 
-export const SubscribeSection: React.FC<SubscribeSectionProps> = ({ portalId, formId }) => {
+export const SubscribeSection = ({ portalId, formId }: SubscribeSectionProps) => {
     const [email, setEmail] = useState('');
     const [emailContactConsent, setEmailContactConsent] = useState(false);
     const [status, setStatus] = useState<{ type: 'success' | 'error' | null; message: string }>({

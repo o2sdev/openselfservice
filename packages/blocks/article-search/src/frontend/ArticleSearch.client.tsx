@@ -14,7 +14,7 @@ import { sdk } from '../sdk';
 
 import { ArticleSearchPureProps } from './ArticleSearch.types';
 
-export const ArticleSearchPure: React.FC<ArticleSearchPureProps> = ({
+export const ArticleSearchPure = ({
     title,
     inputLabel,
     noResults,
@@ -22,7 +22,7 @@ export const ArticleSearchPure: React.FC<ArticleSearchPureProps> = ({
     accessToken,
     locale,
     routing,
-}) => {
+}: ArticleSearchPureProps) => {
     const { useRouter } = createNavigation(routing);
     const router = useRouter();
 

@@ -6,13 +6,13 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { CategoryList } from './CategoryList.server';
 import { CategoryListProps } from './CategoryList.types';
 
-export const CategoryListRenderer: React.FC<CategoryListProps> = ({
+export const CategoryListRenderer = ({
     id,
     accessToken,
     routing,
     hasPriority,
     isDraftModeEnabled,
-}) => {
+}: CategoryListProps) => {
     const locale = useLocale();
     return (
         <Suspense

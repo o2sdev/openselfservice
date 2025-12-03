@@ -6,13 +6,7 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { OrderDetails } from './OrderDetails.server';
 import { OrderDetailsRendererProps } from './OrderDetails.types';
 
-export const OrderDetailsRenderer: React.FC<OrderDetailsRendererProps> = ({
-    slug,
-    id,
-    accessToken,
-    routing,
-    hasPriority,
-}) => {
+export const OrderDetailsRenderer = ({ slug, id, accessToken, routing, hasPriority }: OrderDetailsRendererProps) => {
     const locale = useLocale();
 
     if (!slug[1]) {

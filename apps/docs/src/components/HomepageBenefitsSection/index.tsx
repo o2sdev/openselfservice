@@ -11,7 +11,7 @@ interface BenefitProps {
     reverse?: boolean;
 }
 
-const Benefit: React.FC<BenefitProps> = ({ title, description, image }) => (
+const Benefit = ({ title, description, image }: BenefitProps) => (
     <div>
         <div className="mb-6">{image}</div>
         <div>

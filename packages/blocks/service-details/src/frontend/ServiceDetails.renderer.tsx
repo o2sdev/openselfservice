@@ -7,13 +7,13 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { ServiceDetails } from './ServiceDetails.server';
 import { ServiceDetailsRendererProps } from './ServiceDetails.types';
 
-export const ServiceDetailsRenderer: React.FC<ServiceDetailsRendererProps> = ({
+export const ServiceDetailsRenderer = ({
     slug,
     id,
     accessToken,
     routing,
     hasPriority,
-}) => {
+}: ServiceDetailsRendererProps) => {
     const locale = useLocale();
 
     if (!slug[1]) {

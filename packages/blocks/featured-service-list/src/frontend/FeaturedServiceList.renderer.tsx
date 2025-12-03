@@ -7,13 +7,7 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { FeaturedServiceList } from './FeaturedServiceList.server';
 import { FeaturedServiceListRendererProps } from './FeaturedServiceList.types';
 
-export const Renderer: React.FC<FeaturedServiceListRendererProps> = ({
-    id,
-    accessToken,
-    slug,
-    routing,
-    hasPriority,
-}) => {
+export const Renderer = ({ id, accessToken, slug, routing, hasPriority }: FeaturedServiceListRendererProps) => {
     const locale = useLocale();
 
     return (

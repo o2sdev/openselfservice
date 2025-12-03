@@ -14,7 +14,7 @@ import { Typography } from '@o2s/ui/elements/typography';
 
 import { FeaturedServiceListPureProps } from './FeaturedServiceList.types';
 
-export const FeaturedServiceListPure: React.FC<FeaturedServiceListPureProps> = ({ routing, ...component }) => {
+export const FeaturedServiceListPure = ({ routing, ...component }: FeaturedServiceListPureProps) => {
     const t = useTranslations();
     const { Link: LinkComponent } = createNavigation(routing);
 

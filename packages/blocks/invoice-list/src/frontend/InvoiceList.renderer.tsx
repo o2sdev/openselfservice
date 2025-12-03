@@ -7,7 +7,7 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { InvoiceListServer } from './InvoiceList.server';
 import { InvoiceListRendererProps } from './InvoiceList.types';
 
-export const InvoiceListRenderer: React.FC<InvoiceListRendererProps> = ({ id, accessToken, routing, hasPriority }) => {
+export const InvoiceListRenderer = ({ id, accessToken, routing, hasPriority }: InvoiceListRendererProps) => {
     const locale = useLocale();
 
     return (

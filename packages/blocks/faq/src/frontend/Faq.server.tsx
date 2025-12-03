@@ -7,14 +7,7 @@ import { FaqProps } from './Faq.types';
 
 export const FaqDynamic = dynamic(() => import('./Faq.client').then((module) => module.FaqPure));
 
-export const Faq: React.FC<FaqProps> = async ({
-    id,
-    accessToken,
-    locale,
-    routing,
-    hasPriority,
-    isDraftModeEnabled,
-}) => {
+export const Faq = async ({ id, accessToken, locale, routing, hasPriority, isDraftModeEnabled }: FaqProps) => {
     try {
         const data = await sdk.blocks.getFaq(
             {

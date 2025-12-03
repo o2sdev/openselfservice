@@ -28,7 +28,7 @@ const MAX_USERNAME_CHARS = 64;
 const MIN_PASSWORD_CHARS = 4;
 const MAX_PASSWORD_CHARS = 64;
 
-export const SignInForm: React.FC<SignInFormProps> = ({ providers, labels, onSignIn }) => {
+export const SignInForm = ({ providers, labels, onSignIn }: SignInFormProps) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [error, setError] = useState<AuthError | null>(null);

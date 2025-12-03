@@ -7,7 +7,7 @@ import { Typography } from '@o2s/ui/elements/typography';
 
 import { BlogCardProps } from './BlogCard.types';
 
-export const BlogCard: React.FC<Readonly<BlogCardProps>> = ({
+export const BlogCard = ({
     title,
     lead,
     image,
@@ -17,7 +17,7 @@ export const BlogCard: React.FC<Readonly<BlogCardProps>> = ({
     categoryTitle,
     LinkComponent,
     priority,
-}) => {
+}: Readonly<BlogCardProps>) => {
     return (
         <LinkComponent
             href={url}

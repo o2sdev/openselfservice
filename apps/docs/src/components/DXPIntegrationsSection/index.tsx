@@ -9,7 +9,7 @@ interface IntegrationBadgeProps {
     name: string;
 }
 
-const IntegrationBadge: React.FC<IntegrationBadgeProps> = ({ icon, name }) => {
+const IntegrationBadge = ({ icon, name }: IntegrationBadgeProps) => {
     return (
         <div className="flex gap-2.5 items-center justify-center px-0 py-0.5 rounded-full">
             <div className="relative w-5 h-5 shrink-0">

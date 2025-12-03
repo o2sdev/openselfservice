@@ -12,7 +12,7 @@ import { Typography } from '@o2s/ui/elements/typography';
 
 import { FeatureCardProps } from './FeatureCard.types';
 
-export const FeatureCardContent: React.FC<FeatureCardProps> = ({ title, description, image, link, LinkComponent }) => {
+export const FeatureCardContent = ({ title, description, image, link, LinkComponent }: FeatureCardProps) => {
     return (
         <div className="flex flex-col relative rounded-lg bg-card w-full h-full border border-border hover:border-primary transition-all duration-300">
             <div className="p-6 md:p-8 flex flex-col gap-2 flex-1">
@@ -50,7 +50,7 @@ export const FeatureCardContent: React.FC<FeatureCardProps> = ({ title, descript
     );
 };
 
-export const FeatureCard: React.FC<Readonly<FeatureCardProps>> = (props) => {
+export const FeatureCard = (props: Readonly<FeatureCardProps>) => {
     const router = useRouter();
 
     return (

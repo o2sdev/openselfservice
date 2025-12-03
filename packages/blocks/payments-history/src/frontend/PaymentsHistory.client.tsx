@@ -12,7 +12,7 @@ const StackedBarChart = dynamic(() =>
     import('@o2s/ui/components/Chart/StackedBarChart').then((module) => module.StackedBarChart),
 );
 
-export const PaymentsHistoryPure: React.FC<PaymentsHistoryPureProps> = ({ ...component }) => {
+export const PaymentsHistoryPure = ({ ...component }: PaymentsHistoryPureProps) => {
     const { chartData, labels, title, currency } = component;
 
     return (

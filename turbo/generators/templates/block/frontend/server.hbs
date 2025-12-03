@@ -10,7 +10,7 @@ export const {{ pascalCase name }}Dynamic = dynamic(() =>
     import('./{{ pascalCase name }}.client').then((module) => module.{{ pascalCase name }}Pure),
 );
 
-export const {{ pascalCase name }}: React.FC<{{ pascalCase name }}Props> = async ({ id, accessToken, locale, routing }) => {
+export const {{ pascalCase name }} = async ({ id, accessToken, locale, routing }: {{ pascalCase name }}Props) => {
     try {
         const data = await sdk.blocks.get{{ pascalCase name }}(
             {

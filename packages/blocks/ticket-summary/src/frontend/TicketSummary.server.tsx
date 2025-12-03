@@ -9,7 +9,7 @@ export const TicketSummaryDynamic = dynamic(() =>
     import('./TicketSummary.client').then((module) => module.TicketSummaryPure),
 );
 
-export const TicketSummary: React.FC<TicketSummaryProps> = async ({ id, accessToken, locale, routing }) => {
+export const TicketSummary = async ({ id, accessToken, locale, routing }: TicketSummaryProps) => {
     try {
         const data = await sdk.blocks.getTicketSummary(
             {

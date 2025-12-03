@@ -7,7 +7,7 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { {{ pascalCase name }} } from './{{ pascalCase name }}.server';
 import { {{ pascalCase name }}RendererProps } from './{{ pascalCase name }}.types';
 
-export const {{ pascalCase name }}Renderer: React.FC<{{ pascalCase name }}RendererProps> = ({ id, accessToken, routing }) => {
+export const {{ pascalCase name }}Renderer = ({ id, accessToken, routing }: {{ pascalCase name }}RendererProps) => {
     const locale = useLocale();
 
     return (

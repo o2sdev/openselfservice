@@ -25,7 +25,7 @@ import { sdk } from '../sdk';
 
 import { InvoiceListPureProps } from './InvoiceList.types';
 
-export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, accessToken, routing, ...component }) => {
+export const InvoiceListPure = ({ locale, accessToken, routing, ...component }: InvoiceListPureProps) => {
     const { labels } = useGlobalContext();
 
     const initialFilters: Request.GetInvoiceListBlockQuery = {

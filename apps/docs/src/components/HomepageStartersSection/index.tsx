@@ -41,7 +41,7 @@ const STARTERS: HoverCardProps[] = [
     },
 ];
 
-export const HomepageStartersSection: React.FC = () => {
+export const HomepageStartersSection = () => {
     return (
         <section className="px-4 flex flex-col items-center gap-y-20">
             <div className="flex flex-col gap-6 items-center text-center">

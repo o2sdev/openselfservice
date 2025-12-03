@@ -10,7 +10,7 @@ export interface ClientsSectionProps {
     clients: Client[];
 }
 
-export const ClientsSection: React.FC<ClientsSectionProps> = ({ lead, clients }) => {
+export const ClientsSection = ({ lead, clients }: ClientsSectionProps) => {
     return (
         <div className="flex flex-col gap-16 items-start justify-start w-full">
             {lead && <div className="text-white max-w-[700px] m-auto! text-center">{lead}</div>}
