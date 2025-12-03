@@ -12,6 +12,10 @@ export async function GET(request: NextRequest) {
         return new Response('Missing parameters', { status: 400 });
     }
 
+    if (!process.env.CF_PREVIEW_SECRET) {
+        throw new Error('CF_PREVIEW_SECRET environment variable is required.');
+    }
+
     if (secret !== process.env.CF_PREVIEW_SECRET) {
         return new Response('Invalid token', { status: 401 });
     }

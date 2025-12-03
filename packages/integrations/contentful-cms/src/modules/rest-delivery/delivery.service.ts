@@ -8,9 +8,13 @@ export class RestDeliveryService {
     private readonly contentfulDeliveryClient: ReturnType<typeof createClient>;
 
     constructor(private readonly config: ConfigService) {
-        const spaceId = this.config.get<string>('CF_SPACE_ID') || process.env.CF_SPACE_ID!;
-        const environmentId = this.config.get<string>('CF_ENV') || process.env.CF_ENV!;
-        const deliveryToken = this.config.get<string>('CF_TOKEN') || process.env.CF_TOKEN!;
+        const spaceId = this.config.get<string>('CF_SPACE_ID') || process.env.CF_SPACE_ID;
+        const environmentId = this.config.get<string>('CF_ENV') || process.env.CF_ENV;
+        const deliveryToken = this.config.get<string>('CF_TOKEN') || process.env.CF_TOKEN;
+
+        if (!spaceId || !environmentId || !deliveryToken) {
+            throw new Error('CF_SPACE_ID, CF_ENV and CF_TOKEN are required for Contentful delivery.');
+        }
 
         this.contentfulDeliveryClient = createClient({
             space: spaceId,

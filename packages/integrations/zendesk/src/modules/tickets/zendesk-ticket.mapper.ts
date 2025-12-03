@@ -31,6 +31,11 @@ export function mapTicketToModel(
 
     if (ticket.custom_fields) {
         const topicFieldId = Number(process.env.ZENDESK_TOPIC_FIELD_ID || 0);
+
+        if (!topicFieldId) {
+            throw new Error('ZENDESK_TOPIC_FIELD_ID is required when ticket.custom_fields are present.');
+        }
+
         ticket.custom_fields.forEach((field) => {
             if (field.value !== null && field.value !== undefined) {
                 if (topicFieldId && field.id === topicFieldId) {

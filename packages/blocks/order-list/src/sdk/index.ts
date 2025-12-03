@@ -10,8 +10,12 @@ const API_URL =
     (typeof window === 'undefined' ? process.env.NEXT_PUBLIC_API_URL_INTERNAL : process.env.NEXT_PUBLIC_API_URL) ||
     process.env.NEXT_PUBLIC_API_URL;
 
+if (!API_URL) {
+    throw new Error('API_URL is required. Please set NEXT_PUBLIC_API_URL or NEXT_PUBLIC_API_URL_INTERNAL.');
+}
+
 const internalSdk = getSdk({
-    apiUrl: API_URL!,
+    apiUrl: API_URL,
     logger: {
         // @ts-expect-error missing types
         level: process.env.NEXT_PUBLIC_LOG_LEVEL,

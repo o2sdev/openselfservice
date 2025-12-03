@@ -22,8 +22,16 @@ export class GraphqlService {
     private readonly previewSdk: Sdk;
 
     constructor(private readonly config: ConfigService) {
-        const baseUrl = `https://graphql.contentful.com/content/v1/spaces/${process.env.CF_SPACE_ID}/environments/${process.env.CF_ENV}`;
+        const spaceId = this.config.get<string>('CF_SPACE_ID') || process.env.CF_SPACE_ID;
+        const environmentId = this.config.get<string>('CF_ENV') || process.env.CF_ENV;
         const deliveryToken = this.config.get<string>('CF_TOKEN') || process.env.CF_TOKEN;
+        const previewToken = this.config.get<string>('CF_PREVIEW_TOKEN') || process.env.CF_PREVIEW_TOKEN;
+
+        if (!spaceId || !environmentId || !deliveryToken || !previewToken) {
+            throw new Error('CF_SPACE_ID, CF_ENV, CF_TOKEN and CF_PREVIEW_TOKEN are required for Contentful GraphQL.');
+        }
+
+        const baseUrl = `https://graphql.contentful.com/content/v1/spaces/${spaceId}/environments/${environmentId}`;
 
         // Delivery API client (for published content)
         this.deliveryClient = new GraphQLClient(baseUrl, {
@@ -37,7 +45,7 @@ export class GraphqlService {
         this.previewClient = new GraphQLClient(baseUrl, {
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${process.env.CF_PREVIEW_TOKEN}`,
+                Authorization: `Bearer ${previewToken}`,
             },
         });
 
