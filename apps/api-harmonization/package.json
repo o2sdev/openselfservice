@@ -61,7 +61,7 @@
         "@o2s/utils.frontend": "*",
         "@o2s/utils.logger": "*",
         "compression": "^1.8.1",
-        "cookie": "^1.0.2",
+        "cookie": "^1.1.1",
         "cookie-parser": "^1.4.7",
         "dayjs": "^1.11.19",
         "helmet": "^8.1.0",
