@@ -1,5 +1,40 @@
 # @o2s/integrations.strapi-cms
 
+## 2.8.0
+
+### Minor Changes
+
+- 1653b74: fix: update FilterItem and renderCell components for improved functionality and code clarity
+
+### Patch Changes
+
+- 0354126: reworked turbo dev task to optimize CPU/RAM usage
+- Updated dependencies [2c780d5]
+- Updated dependencies [1653b74]
+- Updated dependencies [c27726a]
+- Updated dependencies [2c780d5]
+- Updated dependencies [0354126]
+- Updated dependencies [1653b74]
+    - @o2s/framework@1.13.0
+    - @o2s/utils.logger@1.1.2
+
+## 2.7.0
+
+### Minor Changes
+
+- ac245c5: adding initial filters support to list blocks
+
+### Patch Changes
+
+- b1c47e8: added mising live preview components to mocked and Strapi integrations
+- Updated dependencies [0d1b8cc]
+- Updated dependencies [8ac0de9]
+- Updated dependencies [ac245c5]
+- Updated dependencies [b519464]
+- Updated dependencies [3da2e69]
+    - @o2s/framework@1.12.0
+    - @o2s/utils.logger@1.1.1
+
 ## 2.6.3
 
 ### Patch Changes
@@ -74,7 +109,6 @@
 ### Minor Changes
 
 - 027ed39: featuredServiceListBlock - list of available services
-
     - added new UI componetnt from Shadcn - Switch,
     - extended ProductCard with action property,
     - implemented model and mock for FeatureServiceListBlock,
@@ -98,7 +132,6 @@
 ### Minor Changes
 
 - 1ee5be1: feat: aligned buttons - used ActionList component with dropdown menu
-
     - used ActionList in the OrderDetailBlock to display buttons,
     - updated the mock and strapi - now an action is a Link,
     - used the format method from the string-template to inject a value into a string,
@@ -113,13 +146,11 @@
 ### Minor Changes
 
 - 565b63d: feat: fixed pagination issue in articleList
-
     - added new mocked articles
     - implemented new additionalLink in ArticleList
 
 - 6225c14: remodeled how articles are kept in Strapi in order to suppport indexing them by search engines (e.g. Algolia) by separating them into their own content type
 - f015c2b: New block ArticleSearch - Input field with suggestions to find appropriate article.
-
     - added new UI component - Command,
     - added new articles mock,
     - added mock for ArticleSearchBlock,
@@ -160,7 +191,6 @@
 
 - 05eea01: chore: update dependencies
 - 44653fb: feat: orderDetails page implemented
-
     - added new UI component: InfoCard,
     - used InfoCard in PaymentsSummaryBlock, OrdersSummary and OrderDetails,
     - fixed ordersSummaryBlock integration with strapi,
@@ -205,7 +235,6 @@
 - 8d92afc: added Strapi integration for `CategoryList` block
 - 8d92afc: added Strapi integration for `Category` block
 - 30f3524: feat: implemented orderListBlock
-
     - new page /orders,
     - added strapi integration for page /orders
     - new UI dropdown-menu component
@@ -215,7 +244,6 @@
 - 8d92afc: added Strapi integration for `ArticleList` block
 - 6d63cb1: feat: added surveyJS module
 - bb46536: feat: cases submission
-
     - new component DynamicIcon - for loading icons dinamicly,
     - new component ActionLinks - for showing button list with dropdown-menu,
     - new pages: /contact-us, /submit-complaint, /request-device-maintenance,

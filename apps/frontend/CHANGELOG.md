@@ -1,5 +1,93 @@
 # @o2s/frontend
 
+## 1.12.0
+
+### Minor Changes
+
+- 2c780d5: add NotificationSummary and TicketSummary blocks
+- 1653b74: fix: update FilterItem and renderCell components for improved functionality and code clarity
+- c27726a: added a new Product List block with list/tile form of presentation
+- 2c780d5: conditionally render button in InfoCard for improved layout
+
+### Patch Changes
+
+- 0354126: reworked turbo dev task to optimize CPU/RAM usage
+- Updated dependencies [2c780d5]
+- Updated dependencies [1653b74]
+- Updated dependencies [c27726a]
+- Updated dependencies [2c780d5]
+- Updated dependencies [0354126]
+- Updated dependencies [1653b74]
+    - @o2s/blocks.notification-summary@1.0.0
+    - @o2s/blocks.ticket-summary@1.0.0
+    - @o2s/integrations.mocked@1.14.0
+    - @o2s/framework@1.13.0
+    - @o2s/blocks.ticket-list@1.3.0
+    - @o2s/ui@1.6.0
+    - @o2s/utils.frontend@0.2.0
+    - @o2s/blocks.featured-service-list@1.1.1
+    - @o2s/blocks.notification-details@1.1.1
+    - @o2s/blocks.notification-list@1.2.1
+    - @o2s/blocks.payments-history@1.1.1
+    - @o2s/blocks.payments-summary@1.1.1
+    - @o2s/utils.api-harmonization@0.1.2
+    - @o2s/blocks.service-details@1.1.1
+    - @o2s/blocks.article-search@1.1.2
+    - @o2s/blocks.orders-summary@1.1.1
+    - @o2s/blocks.ticket-details@1.1.1
+    - @o2s/blocks.category-list@1.2.1
+    - @o2s/blocks.order-details@1.1.1
+    - @o2s/blocks.surveyjs-form@1.1.1
+    - @o2s/blocks.ticket-recent@1.1.1
+    - @o2s/blocks.article-list@1.2.1
+    - @o2s/blocks.invoice-list@1.2.1
+    - @o2s/blocks.service-list@1.1.1
+    - @o2s/blocks.user-account@1.1.1
+    - @o2s/blocks.quick-links@1.2.1
+    - @o2s/blocks.order-list@1.2.1
+    - @o2s/blocks.category@1.1.2
+    - @o2s/blocks.article@1.2.1
+    - @o2s/blocks.faq@1.2.1
+
+## 1.11.0
+
+### Minor Changes
+
+- 0d1b8cc: Added Live Preview support in blocks
+
+### Patch Changes
+
+- 8ac0de9: added missing dependencies
+- b519464: updated dependencies
+- 38f7825: added healthchecks
+- Updated dependencies [0d1b8cc]
+- Updated dependencies [8ac0de9]
+- Updated dependencies [ac245c5]
+- Updated dependencies [b57d151]
+- Updated dependencies [485731c]
+- Updated dependencies [51b17ed]
+- Updated dependencies [b519464]
+- Updated dependencies [b1c47e8]
+- Updated dependencies [0d1b8cc]
+- Updated dependencies [38f7825]
+- Updated dependencies [3da2e69]
+- Updated dependencies [d3bf68c]
+    - @o2s/blocks.category-list@1.2.0
+    - @o2s/blocks.article-list@1.2.0
+    - @o2s/blocks.quick-links@1.2.0
+    - @o2s/blocks.ticket-list@1.2.0
+    - @o2s/blocks.article@1.2.0
+    - @o2s/api-harmonization@1.11.0
+    - @o2s/blocks.faq@1.2.0
+    - @o2s/framework@1.12.0
+    - @o2s/ui@1.5.0
+    - @o2s/blocks.article-search@1.1.1
+    - @o2s/blocks.notification-list@1.2.0
+    - @o2s/blocks.invoice-list@1.2.0
+    - @o2s/integrations.mocked@1.13.0
+    - @o2s/blocks.order-list@1.2.0
+    - @o2s/blocks.category@1.1.1
+
 ## 1.10.0
 
 ### Minor Changes
@@ -174,7 +262,6 @@
 ### Minor Changes
 
 - 2a0475c: feat: update products, resources mocks, InfoCard - layout fix
-
     - updated model for GetRelatedProductListParams - renamed id and variantId to inform that we need to provide product data as params,
     - added natural data to products and resources mocks,
     - added sorting and filtering to products.mapper.ts,
@@ -205,7 +292,6 @@
 ### Minor Changes
 
 - 027ed39: featuredServiceListBlock - list of available services
-
     - added new UI componetnt from Shadcn - Switch,
     - extended ProductCard with action property,
     - implemented model and mock for FeatureServiceListBlock,
@@ -239,7 +325,6 @@
 ### Minor Changes
 
 - 1ee5be1: feat: aligned buttons - used ActionList component with dropdown menu
-
     - used ActionList in the OrderDetailBlock to display buttons,
     - updated the mock and strapi - now an action is a Link,
     - used the format method from the string-template to inject a value into a string,
@@ -255,19 +340,16 @@
 ### Minor Changes
 
 - 565b63d: feat: fixed pagination issue in articleList
-
     - added new mocked articles
     - implemented new additionalLink in ArticleList
 
 - 5d16edf: orderDetails fixes:
-
     - order model update - product is required now,
     - filtering moved to order mapper,
     - PayOnline button visible only when the order is overdue,
 
 - 61d4f2f: Added integration of services and assets with MedusaJS
 - f015c2b: New block ArticleSearch - Input field with suggestions to find appropriate article.
-
     - added new UI component - Command,
     - added new articles mock,
     - added mock for ArticleSearchBlock,
@@ -327,7 +409,6 @@
 - 05eea01: chore: update dependencies
 - 1200a28: feat: update dashboard mock
 - 44653fb: feat: orderDetails page implemented
-
     - added new UI component: InfoCard,
     - used InfoCard in PaymentsSummaryBlock, OrdersSummary and OrderDetails,
     - fixed ordersSummaryBlock integration with strapi,
@@ -372,7 +453,6 @@
 ### Minor Changes
 
 - 2e4f22d: feat: add scrollable toggle group filter with multiple selection
-
     - Add scroll container for toggle group filter in overlay view
     - Implement multiple selection version for toggle group filter
     - Add support for horizontal scrolling in filter items
@@ -389,14 +469,12 @@
 - 9a33c13: Add Tooltip to TicketRecent component.
 - 8b93cbf: feat: Integrated SurveyJS
 - 8d92afc: Help center pages and subpages implemented:
-
     - Added new UI components InformativeCard, BlogCard, Author, ContentSection
     - Styled blocks, Article, Article List, Category, Category List
     - Added pagination to Category block
     - Made changes to mocks and models
 
 - 30f3524: feat: implemented orderListBlock
-
     - new page /orders,
     - added strapi integration for page /orders
     - new UI dropdown-menu component
@@ -406,7 +484,6 @@
 - 84b9002: modified `OrdersSummary` to make range filters optional
 - 2f05843: Moved link to whole row in recent tickets
 - bb46536: feat: cases submission
-
     - new component DynamicIcon - for loading icons dinamicly,
     - new component ActionLinks - for showing button list with dropdown-menu,
     - new pages: /contact-us, /submit-complaint, /request-device-maintenance,

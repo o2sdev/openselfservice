@@ -9,7 +9,7 @@ import { Mappings } from '@o2s/utils.frontend';
 
 import { ActionList } from '@o2s/ui/components/ActionList';
 import type { DataListColumnConfig } from '@o2s/ui/components/DataList';
-import { DataList } from '@o2s/ui/components/DataList';
+import { DataView } from '@o2s/ui/components/DataView';
 import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
 import { FiltersSection } from '@o2s/ui/components/Filters';
 import { NoResults } from '@o2s/ui/components/NoResults';
@@ -37,8 +37,13 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
 
     const initialData = component.tickets.data;
 
+    // Extract initial viewMode from filters if available
+    const initialViewMode =
+        component.filters?.items.find((item) => item.__typename === 'FilterViewModeToggle')?.value || 'list';
+
     const [data, setData] = useState<Model.TicketListBlock>(component);
     const [filters, setFilters] = useState(initialFilters);
+    const [viewMode, setViewMode] = useState<'list' | 'grid'>(initialViewMode);
 
     const [isPending, startTransition] = useTransition();
 
@@ -92,14 +97,16 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
     const actions = data.table.actions
         ? {
               ...data.table.actions,
-              render: (ticket: Model.Ticket) => (
-                  <Button asChild variant="link">
-                      <LinkComponent href={ticket.detailsUrl} className="flex items-center justify-end gap-2">
-                          <ArrowRight className="h-4 w-4" />
-                          {data.table.actions!.label}
-                      </LinkComponent>
-                  </Button>
-              ),
+              render: (ticket: Model.Ticket) => {
+                  return (
+                      <Button asChild variant="link">
+                          <LinkComponent href={ticket.detailsUrl} className="flex items-center justify-end gap-2">
+                              <ArrowRight className="h-4 w-4" />
+                              {data.table.actions!.label}
+                          </LinkComponent>
+                      </Button>
+                  );
+              },
           }
         : undefined;
 
@@ -147,7 +154,23 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                     <FiltersSection
                         title={data.subtitle}
                         initialFilters={initialFilters}
-                        filters={data.filters}
+                        filters={
+                            data.filters
+                                ? {
+                                      ...data.filters,
+                                      items: data.filters.items.map((item) => {
+                                          if (item.__typename === 'FilterViewModeToggle') {
+                                              return {
+                                                  ...item,
+                                                  value: viewMode,
+                                                  onChange: setViewMode,
+                                              };
+                                          }
+                                          return item;
+                                      }),
+                                  }
+                                : undefined
+                        }
                         initialValues={filters}
                         onSubmit={handleFilter}
                         onReset={handleReset}
@@ -159,7 +182,13 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                     <LoadingOverlay isActive={isPending}>
                         {data.tickets.data.length ? (
                             <div className="flex flex-col gap-6">
-                                <DataList data={data.tickets.data} columns={columns} actions={actions} />
+                                <DataView
+                                    viewMode={viewMode}
+                                    data={data.tickets.data}
+                                    columns={columns}
+                                    actions={actions}
+                                    cardHeaderSlots={data.cardHeaderSlots}
+                                />
 
                                 {data.pagination && (
                                     <Pagination

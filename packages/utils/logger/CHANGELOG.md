@@ -1,5 +1,18 @@
 # @o2s/utils.logger
 
+## 1.1.2
+
+### Patch Changes
+
+- 0354126: reworked turbo dev task to optimize CPU/RAM usage
+
+## 1.1.1
+
+### Patch Changes
+
+- 8ac0de9: added missing dependencies
+- b519464: updated dependencies
+
 ## 1.1.0
 
 ### Minor Changes

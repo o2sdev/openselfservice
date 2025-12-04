@@ -1,6 +1,6 @@
 {
     "name": "@o2s/utils.api-harmonization",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "",
     "author": "",
     "private": false,
@@ -12,10 +12,9 @@
         "dist"
     ],
     "scripts": {
-        "dev": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")",
-        "build": "tsc && tsc-alias",
-        "lint": "tsc --noEmit && eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-        "format": "prettier --write \"src/**/*.ts\""
+        "build": "tsc --preserveWatchOutput && tsc-alias",
+        "lint": "tsc --noEmit && eslint \"{src,apps,libs,test}/**/*.{ts,tsx}\" --fix",
+        "format": "prettier --write \"src/**/*.{ts,tsx}\""
     },
     "dependencies": {
         "@o2s/framework": "*"

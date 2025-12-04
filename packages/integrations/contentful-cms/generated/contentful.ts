@@ -8725,9 +8725,12 @@ export type ResolverTypeWrapper<T> = Promise<T> | T;
 export type ResolverWithResolve<TResult, TParent, TContext, TArgs> = {
     resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
 };
-export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> =
-    | ResolverFn<TResult, TParent, TContext, TArgs>
-    | ResolverWithResolve<TResult, TParent, TContext, TArgs>;
+export type Resolver<
+    TResult,
+    TParent = Record<PropertyKey, never>,
+    TContext = Record<PropertyKey, never>,
+    TArgs = Record<PropertyKey, never>,
+> = ResolverFn<TResult, TParent, TContext, TArgs> | ResolverWithResolve<TResult, TParent, TContext, TArgs>;
 
 export type ResolverFn<TResult, TParent, TContext, TArgs> = (
     parent: TParent,
@@ -8764,17 +8767,23 @@ export type SubscriptionObject<TResult, TKey extends string, TParent, TContext, 
     | SubscriptionSubscriberObject<TResult, TKey, TParent, TContext, TArgs>
     | SubscriptionResolverObject<TResult, TParent, TContext, TArgs>;
 
-export type SubscriptionResolver<TResult, TKey extends string, TParent = {}, TContext = {}, TArgs = {}> =
+export type SubscriptionResolver<
+    TResult,
+    TKey extends string,
+    TParent = Record<PropertyKey, never>,
+    TContext = Record<PropertyKey, never>,
+    TArgs = Record<PropertyKey, never>,
+> =
     | ((...args: any[]) => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>)
     | SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>;
 
-export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
+export type TypeResolveFn<TTypes, TParent = Record<PropertyKey, never>, TContext = Record<PropertyKey, never>> = (
     parent: TParent,
     context: TContext,
     info: GraphQLResolveInfo,
 ) => Maybe<TTypes> | Promise<Maybe<TTypes>>;
 
-export type IsTypeOfResolverFn<T = {}, TContext = {}> = (
+export type IsTypeOfResolverFn<T = Record<PropertyKey, never>, TContext = Record<PropertyKey, never>> = (
     obj: T,
     context: TContext,
     info: GraphQLResolveInfo,
@@ -8782,7 +8791,12 @@ export type IsTypeOfResolverFn<T = {}, TContext = {}> = (
 
 export type NextResolverFn<T> = () => Promise<T>;
 
-export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs = {}> = (
+export type DirectiveResolverFn<
+    TResult = Record<PropertyKey, never>,
+    TParent = Record<PropertyKey, never>,
+    TContext = Record<PropertyKey, never>,
+    TArgs = Record<PropertyKey, never>,
+> = (
     next: NextResolverFn<TResult>,
     parent: TParent,
     args: TArgs,
@@ -10189,7 +10203,7 @@ export type ResolversTypes = {
     >;
     PageTwoColumnTemplateTopSlotCollectionOrder: PageTwoColumnTemplateTopSlotCollectionOrder;
     Quality: ResolverTypeWrapper<Scalars['Quality']['output']>;
-    Query: ResolverTypeWrapper<{}>;
+    Query: ResolverTypeWrapper<Record<PropertyKey, never>>;
     String: ResolverTypeWrapper<Scalars['String']['output']>;
     Sys: ResolverTypeWrapper<Sys>;
     SysFilter: SysFilter;
@@ -10923,7 +10937,7 @@ export type ResolversParentTypes = {
         items: Array<Maybe<ResolversParentTypes['Block']>>;
     };
     Quality: Scalars['Quality']['output'];
-    Query: {};
+    Query: Record<PropertyKey, never>;
     String: Scalars['String']['output'];
     Sys: Sys;
     SysFilter: SysFilter;
@@ -11050,7 +11064,6 @@ export type AppConfigCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type AppConfigLinkingCollectionsResolvers<
@@ -11064,7 +11077,6 @@ export type AppConfigLinkingCollectionsResolvers<
         ContextType,
         RequireFields<AppConfigLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type AppConfigThemesCollectionResolvers<
@@ -11076,7 +11088,6 @@ export type AppConfigThemesCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ArticleResolvers<
@@ -11107,7 +11118,6 @@ export type ArticleCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ArticleLinkingCollectionsResolvers<
@@ -11127,7 +11137,6 @@ export type ArticleLinkingCollectionsResolvers<
         ContextType,
         RequireFields<ArticleLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type AssetResolvers<
@@ -11150,7 +11159,6 @@ export type AssetResolvers<
     title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<AssetTitleArgs>>;
     url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<AssetUrlArgs>>;
     width?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType, Partial<AssetWidthArgs>>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type AssetCollectionResolvers<
@@ -11161,7 +11169,6 @@ export type AssetCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type AssetLinkingCollectionsResolvers<
@@ -11205,7 +11212,6 @@ export type AssetLinkingCollectionsResolvers<
         ContextType,
         RequireFields<AssetLinkingCollectionsThemeCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type AuthorResolvers<
@@ -11235,7 +11241,6 @@ export type AuthorCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type AuthorLinkingCollectionsResolvers<
@@ -11255,7 +11260,6 @@ export type AuthorLinkingCollectionsResolvers<
         ContextType,
         RequireFields<AuthorLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type BlockResolvers<
@@ -11331,7 +11335,6 @@ export type BlockArticleListArticlesCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type BlockArticleListCollectionResolvers<
@@ -11343,7 +11346,6 @@ export type BlockArticleListCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type BlockArticleListLinkingCollectionsResolvers<
@@ -11363,7 +11365,6 @@ export type BlockArticleListLinkingCollectionsResolvers<
         ContextType,
         RequireFields<BlockArticleListLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type BlockCategoryResolvers<
@@ -11399,7 +11400,6 @@ export type BlockCategoryCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type BlockCategoryLinkingCollectionsResolvers<
@@ -11419,7 +11419,6 @@ export type BlockCategoryLinkingCollectionsResolvers<
         ContextType,
         RequireFields<BlockCategoryLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type BlockCategoryListResolvers<
@@ -11461,7 +11460,6 @@ export type BlockCategoryListCategoriesCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type BlockCategoryListCollectionResolvers<
@@ -11473,7 +11471,6 @@ export type BlockCategoryListCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type BlockCategoryListLinkingCollectionsResolvers<
@@ -11499,7 +11496,6 @@ export type BlockCategoryListLinkingCollectionsResolvers<
         ContextType,
         RequireFields<BlockCategoryListLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type BlockCollectionResolvers<
@@ -11510,7 +11506,6 @@ export type BlockCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type BlockContentResolvers<
@@ -11557,7 +11552,6 @@ export type BlockFaqCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type BlockFaqItemsCollectionResolvers<
@@ -11569,7 +11563,6 @@ export type BlockFaqItemsCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type BlockFaqLinkingCollectionsResolvers<
@@ -11595,7 +11588,6 @@ export type BlockFaqLinkingCollectionsResolvers<
         ContextType,
         RequireFields<BlockFaqLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type BlockLinkingCollectionsResolvers<
@@ -11621,7 +11613,6 @@ export type BlockLinkingCollectionsResolvers<
         ContextType,
         RequireFields<BlockLinkingCollectionsPageTwoColumnTemplateCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type BlockQuickLinksResolvers<
@@ -11662,7 +11653,6 @@ export type BlockQuickLinksCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type BlockQuickLinksItemsCollectionResolvers<
@@ -11674,7 +11664,6 @@ export type BlockQuickLinksItemsCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type BlockQuickLinksLinkingCollectionsResolvers<
@@ -11700,7 +11689,6 @@ export type BlockQuickLinksLinkingCollectionsResolvers<
         ContextType,
         RequireFields<BlockQuickLinksLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type BlockTicketListResolvers<
@@ -11766,7 +11754,6 @@ export type BlockTicketListCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type BlockTicketListFieldsCollectionResolvers<
@@ -11778,7 +11765,6 @@ export type BlockTicketListFieldsCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type BlockTicketListLinkingCollectionsResolvers<
@@ -11804,7 +11790,6 @@ export type BlockTicketListLinkingCollectionsResolvers<
         ContextType,
         RequireFields<BlockTicketListLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentArticleResolvers<
@@ -11846,7 +11831,6 @@ export type ComponentArticleCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentArticleLinkingCollectionsResolvers<
@@ -11866,7 +11850,6 @@ export type ComponentArticleLinkingCollectionsResolvers<
         ContextType,
         RequireFields<ComponentArticleLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentArticleSectionResolvers<
@@ -11907,7 +11890,6 @@ export type ComponentArticleSectionCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentArticleSectionLinkingCollectionsResolvers<
@@ -11927,7 +11909,6 @@ export type ComponentArticleSectionLinkingCollectionsResolvers<
         ContextType,
         RequireFields<ComponentArticleSectionLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentArticleSectionsCollectionResolvers<
@@ -11939,7 +11920,6 @@ export type ComponentArticleSectionsCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentBannerResolvers<
@@ -11975,7 +11955,6 @@ export type ComponentBannerCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentBannerLinkingCollectionsResolvers<
@@ -11995,7 +11974,6 @@ export type ComponentBannerLinkingCollectionsResolvers<
         ContextType,
         RequireFields<ComponentBannerLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentCategoryResolvers<
@@ -12039,7 +12017,6 @@ export type ComponentCategoryCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentCategoryComponentsCollectionResolvers<
@@ -12051,7 +12028,6 @@ export type ComponentCategoryComponentsCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentCategoryComponentsItemResolvers<
@@ -12101,7 +12077,6 @@ export type ComponentCategoryLinkingCollectionsResolvers<
         ContextType,
         RequireFields<ComponentCategoryLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentFaqItemResolvers<
@@ -12131,7 +12106,6 @@ export type ComponentFaqItemCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentFaqItemLinkingCollectionsResolvers<
@@ -12151,7 +12125,6 @@ export type ComponentFaqItemLinkingCollectionsResolvers<
         ContextType,
         RequireFields<ComponentFaqItemLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentFieldMappingResolvers<
@@ -12186,7 +12159,6 @@ export type ComponentFieldMappingCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentFieldMappingLinkingCollectionsResolvers<
@@ -12206,7 +12178,6 @@ export type ComponentFieldMappingLinkingCollectionsResolvers<
         ContextType,
         RequireFields<ComponentFieldMappingLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentFieldMappingValuesCollectionResolvers<
@@ -12218,7 +12189,6 @@ export type ComponentFieldMappingValuesCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentKeyValueResolvers<
@@ -12248,7 +12218,6 @@ export type ComponentKeyValueCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentKeyValueLinkingCollectionsResolvers<
@@ -12268,7 +12237,6 @@ export type ComponentKeyValueLinkingCollectionsResolvers<
         ContextType,
         RequireFields<ComponentKeyValueLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentLinkResolvers<
@@ -12300,7 +12268,6 @@ export type ComponentLinkCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentLinkLinkingCollectionsResolvers<
@@ -12326,7 +12293,6 @@ export type ComponentLinkLinkingCollectionsResolvers<
         ContextType,
         RequireFields<ComponentLinkLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentMessageSimpleResolvers<
@@ -12366,7 +12332,6 @@ export type ComponentMessageSimpleCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentMessageSimpleLinkingCollectionsResolvers<
@@ -12386,7 +12351,6 @@ export type ComponentMessageSimpleLinkingCollectionsResolvers<
         ContextType,
         RequireFields<ComponentMessageSimpleLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentNavigationGroupResolvers<
@@ -12429,7 +12393,6 @@ export type ComponentNavigationGroupCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentNavigationGroupItemsCollectionResolvers<
@@ -12441,7 +12404,6 @@ export type ComponentNavigationGroupItemsCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentNavigationGroupLinkingCollectionsResolvers<
@@ -12467,7 +12429,6 @@ export type ComponentNavigationGroupLinkingCollectionsResolvers<
         ContextType,
         RequireFields<ComponentNavigationGroupLinkingCollectionsHeaderCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentNavigationItemResolvers<
@@ -12510,7 +12471,6 @@ export type ComponentNavigationItemCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentNavigationItemLinkingCollectionsResolvers<
@@ -12542,7 +12502,6 @@ export type ComponentNavigationItemLinkingCollectionsResolvers<
         ContextType,
         RequireFields<ComponentNavigationItemLinkingCollectionsHeaderCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentNoResultResolvers<
@@ -12577,7 +12536,6 @@ export type ComponentNoResultCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentNoResultLinkingCollectionsResolvers<
@@ -12597,7 +12555,6 @@ export type ComponentNoResultLinkingCollectionsResolvers<
         ContextType,
         RequireFields<ComponentNoResultLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentPaginationResolvers<
@@ -12650,7 +12607,6 @@ export type ComponentPaginationCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentPaginationLinkingCollectionsResolvers<
@@ -12670,7 +12626,6 @@ export type ComponentPaginationLinkingCollectionsResolvers<
         ContextType,
         RequireFields<ComponentPaginationLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentRolesResolvers<
@@ -12698,7 +12653,6 @@ export type ComponentRolesCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentRolesLinkingCollectionsResolvers<
@@ -12712,7 +12666,6 @@ export type ComponentRolesLinkingCollectionsResolvers<
         ContextType,
         RequireFields<ComponentRolesLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentTableResolvers<
@@ -12758,7 +12711,6 @@ export type ComponentTableCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentTableColumnResolvers<
@@ -12788,7 +12740,6 @@ export type ComponentTableColumnCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentTableColumnLinkingCollectionsResolvers<
@@ -12808,7 +12759,6 @@ export type ComponentTableColumnLinkingCollectionsResolvers<
         ContextType,
         RequireFields<ComponentTableColumnLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentTableColumnsCollectionResolvers<
@@ -12820,7 +12770,6 @@ export type ComponentTableColumnsCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentTableLinkingCollectionsResolvers<
@@ -12840,7 +12789,6 @@ export type ComponentTableLinkingCollectionsResolvers<
         ContextType,
         RequireFields<ComponentTableLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ConfigurableTextsResolvers<
@@ -12888,7 +12836,6 @@ export type ConfigurableTextsCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ConfigurableTextsLinkingCollectionsResolvers<
@@ -12902,7 +12849,6 @@ export type ConfigurableTextsLinkingCollectionsResolvers<
         ContextType,
         RequireFields<ConfigurableTextsLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ContentfulMetadataResolvers<
@@ -12911,7 +12857,6 @@ export type ContentfulMetadataResolvers<
 > = {
     concepts?: Resolver<Array<Maybe<ResolversTypes['TaxonomyConcept']>>, ParentType, ContextType>;
     tags?: Resolver<Array<Maybe<ResolversTypes['ContentfulTag']>>, ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ContentfulTagResolvers<
@@ -12920,7 +12865,6 @@ export type ContentfulTagResolvers<
 > = {
     id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type DataActionsResolvers<
@@ -12986,7 +12930,6 @@ export type DataActionsCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type DataActionsLinkingCollectionsResolvers<
@@ -13006,7 +12949,6 @@ export type DataActionsLinkingCollectionsResolvers<
         ContextType,
         RequireFields<DataActionsLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type DataConfigurableTextsResolvers<
@@ -13084,7 +13026,6 @@ export type DataConfigurableTextsCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type DataConfigurableTextsLinkingCollectionsResolvers<
@@ -13104,7 +13045,6 @@ export type DataConfigurableTextsLinkingCollectionsResolvers<
         ContextType,
         RequireFields<DataConfigurableTextsLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type DataDatesResolvers<
@@ -13133,7 +13073,6 @@ export type DataDatesCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type DataDatesLinkingCollectionsResolvers<
@@ -13153,7 +13092,6 @@ export type DataDatesLinkingCollectionsResolvers<
         ContextType,
         RequireFields<DataDatesLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type DataErrorsResolvers<
@@ -13187,7 +13125,6 @@ export type DataErrorsCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type DataErrorsLinkingCollectionsResolvers<
@@ -13207,7 +13144,6 @@ export type DataErrorsLinkingCollectionsResolvers<
         ContextType,
         RequireFields<DataErrorsLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type DataValidationResolvers<
@@ -13247,7 +13183,6 @@ export type DataValidationCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type DataValidationLinkingCollectionsResolvers<
@@ -13267,7 +13202,6 @@ export type DataValidationLinkingCollectionsResolvers<
         ContextType,
         RequireFields<DataValidationLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {
@@ -13325,8 +13259,6 @@ export type EntryResolvers<
         ParentType,
         ContextType
     >;
-    contentfulMetadata?: Resolver<ResolversTypes['ContentfulMetadata'], ParentType, ContextType>;
-    sys?: Resolver<ResolversTypes['Sys'], ParentType, ContextType>;
 };
 
 export type EntryCollectionResolvers<
@@ -13337,7 +13269,6 @@ export type EntryCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type FooterResolvers<
@@ -13374,7 +13305,6 @@ export type FooterCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type FooterItemsCollectionResolvers<
@@ -13385,7 +13315,6 @@ export type FooterItemsCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type FooterItemsItemResolvers<
@@ -13412,7 +13341,6 @@ export type FooterLinkingCollectionsResolvers<
         ContextType,
         RequireFields<FooterLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type HeaderResolvers<
@@ -13474,7 +13402,6 @@ export type HeaderCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type HeaderItemsCollectionResolvers<
@@ -13485,7 +13412,6 @@ export type HeaderItemsCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type HeaderItemsItemResolvers<
@@ -13512,7 +13438,6 @@ export type HeaderLinkingCollectionsResolvers<
         ContextType,
         RequireFields<HeaderLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export interface HexColorScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['HexColor'], any> {
@@ -13554,7 +13479,6 @@ export type PageCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type PageLinkingCollectionsResolvers<
@@ -13627,7 +13551,6 @@ export type PageLinkingCollectionsResolvers<
         ContextType,
         RequireFields<PageLinkingCollectionsPageCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type PageOneColumnTemplateResolvers<
@@ -13662,7 +13585,6 @@ export type PageOneColumnTemplateCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type PageOneColumnTemplateLinkingCollectionsResolvers<
@@ -13682,7 +13604,6 @@ export type PageOneColumnTemplateLinkingCollectionsResolvers<
         ContextType,
         RequireFields<PageOneColumnTemplateLinkingCollectionsPageCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type PageOneColumnTemplateMainSlotCollectionResolvers<
@@ -13694,7 +13615,6 @@ export type PageOneColumnTemplateMainSlotCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type PageSeoResolvers<
@@ -13732,7 +13652,6 @@ export type PageSeoCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type PageSeoLinkingCollectionsResolvers<
@@ -13758,7 +13677,6 @@ export type PageSeoLinkingCollectionsResolvers<
         ContextType,
         RequireFields<PageSeoLinkingCollectionsPageCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type PageTemplateResolvers<
@@ -13818,7 +13736,6 @@ export type PageTwoColumnTemplateBottomSlotCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type PageTwoColumnTemplateCollectionResolvers<
@@ -13830,7 +13747,6 @@ export type PageTwoColumnTemplateCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type PageTwoColumnTemplateLeftSlotCollectionResolvers<
@@ -13842,7 +13758,6 @@ export type PageTwoColumnTemplateLeftSlotCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type PageTwoColumnTemplateLinkingCollectionsResolvers<
@@ -13862,7 +13777,6 @@ export type PageTwoColumnTemplateLinkingCollectionsResolvers<
         ContextType,
         RequireFields<PageTwoColumnTemplateLinkingCollectionsPageCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type PageTwoColumnTemplateRightSlotCollectionResolvers<
@@ -13874,7 +13788,6 @@ export type PageTwoColumnTemplateRightSlotCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type PageTwoColumnTemplateTopSlotCollectionResolvers<
@@ -13886,7 +13799,6 @@ export type PageTwoColumnTemplateTopSlotCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export interface QualityScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Quality'], any> {
@@ -14368,7 +14280,6 @@ export type SysResolvers<
     publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
     publishedVersion?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
     spaceId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type TaxonomyConceptResolvers<
@@ -14376,7 +14287,6 @@ export type TaxonomyConceptResolvers<
     ParentType extends ResolversParentTypes['TaxonomyConcept'] = ResolversParentTypes['TaxonomyConcept'],
 > = {
     id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ThemeResolvers<
@@ -14405,7 +14315,6 @@ export type ThemeCollectionResolvers<
     limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     skip?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ThemeLinkingCollectionsResolvers<
@@ -14431,7 +14340,6 @@ export type ThemeLinkingCollectionsResolvers<
         ContextType,
         RequireFields<ThemeLinkingCollectionsEntryCollectionArgs, 'limit' | 'skip'>
     >;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type _NodeResolvers<
@@ -14481,7 +14389,6 @@ export type _NodeResolvers<
         ParentType,
         ContextType
     >;
-    _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = any> = {

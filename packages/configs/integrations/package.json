@@ -1,6 +1,6 @@
 {
     "name": "@o2s/configs.integrations",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "private": true,
     "license": "MIT",
     "exports": {
@@ -11,16 +11,13 @@
         "dist"
     ],
     "scripts": {
-        "dev": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")",
-        "build": "tsc && tsc-alias",
-        "lint": "tsc --noEmit && eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+        "build": "tsc --preserveWatchOutput && tsc-alias",
+        "lint": "tsc --noEmit && eslint \"{src,apps,libs,test}/**/*.{ts,tsx}\" --fix",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
         "@o2s/framework": "*",
-        "@o2s/integrations.mocked": "*",
-        "@o2s/integrations.strapi-cms": "*",
-        "@o2s/integrations.zendesk": "*"
+        "@o2s/integrations.mocked": "*"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",

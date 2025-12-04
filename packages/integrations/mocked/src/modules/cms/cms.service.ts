@@ -19,11 +19,13 @@ import { mapInvoiceListBlock } from './mappers/blocks/cms.invoice-list.mapper';
 import { mapMediaSectionBlock } from './mappers/blocks/cms.media-section.mapper';
 import { mapNotificationDetailsBlock } from './mappers/blocks/cms.notification-details.mapper';
 import { mapNotificationListBlock } from './mappers/blocks/cms.notification-list.mapper';
+import { mapNotificationSummaryBlock } from './mappers/blocks/cms.notification-summary.mapper';
 import { mapOrderDetailsBlock } from './mappers/blocks/cms.order-details.mapper';
 import { mapOrderListBlock } from './mappers/blocks/cms.order-list.mapper';
 import { mapOrdersSummaryBlock } from './mappers/blocks/cms.orders-summary.mapper';
 import { mapPaymentsHistoryBlock } from './mappers/blocks/cms.payments-history.mapper';
 import { mapPaymentsSummaryBlock } from './mappers/blocks/cms.payments-summary.mapper';
+import { mapProductListBlock } from './mappers/blocks/cms.product-list.mapper';
 import { mapPricingSectionBlock } from './mappers/blocks/cms.pricing-section.mapper';
 import { mapResourceDetailsBlock } from './mappers/blocks/cms.resource-details.mapper';
 import { mapResourceListBlock } from './mappers/blocks/cms.resource-list.mapper';
@@ -33,6 +35,7 @@ import { mapSurveyJsBlock } from './mappers/blocks/cms.surveyjs-block.mapper';
 import { mapTicketDetailsBlock } from './mappers/blocks/cms.ticket-details.mapper';
 import { mapTicketListBlock } from './mappers/blocks/cms.ticket-list.mapper';
 import { mapTicketRecentBlock } from './mappers/blocks/cms.ticket-recent.mapper';
+import { mapTicketSummaryBlock } from './mappers/blocks/cms.ticket-summary.mapper';
 import { mapUserAccountBlock } from './mappers/blocks/cms.user-account.mapper';
 import { mapAppConfig } from './mappers/cms.app-config.mapper';
 import { mapCategoryBlock } from './mappers/cms.category.mapper';
@@ -106,6 +109,10 @@ export class CmsService implements CMS.Service {
 
     getNotificationDetailsBlock(_options: CMS.Request.GetCmsEntryParams) {
         return of(mapNotificationDetailsBlock(_options.locale)).pipe(responseDelay());
+    }
+
+    getNotificationSummaryBlock(_options: CMS.Request.GetCmsEntryParams) {
+        return of(mapNotificationSummaryBlock(_options.locale)).pipe(responseDelay());
     }
 
     getInvoiceListBlock(options: CMS.Request.GetCmsEntryParams) {
@@ -194,6 +201,14 @@ export class CmsService implements CMS.Service {
 
     getFeaturedServiceListBlock(options: CMS.Request.GetCmsEntryParams) {
         return of(mapFeaturedServiceListBlock(options.locale)).pipe(responseDelay());
+    }
+
+    getProductListBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapProductListBlock(options.locale)).pipe(responseDelay());
+    }
+
+    getTicketSummaryBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapTicketSummaryBlock(options.locale)).pipe(responseDelay());
     }
 
     getBentoGridBlock(options: CMS.Request.GetCmsEntryParams) {

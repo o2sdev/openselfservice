@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.article-list",
-    "version": "1.1.0",
+    "version": "1.2.1",
     "private": false,
     "license": "MIT",
     "description": "Block for displaying a list of articles.",
@@ -14,9 +14,8 @@
         "dist"
     ],
     "scripts": {
-        "dev": "tsc --build tsconfig.json  && (concurrently \"tsc --build tsconfig.json -w\" \"tsc-alias -w\")",
-        "build": "tsc --build tsconfig.json && tsc-alias",
-        "lint": "tsc --noEmit && eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+        "build": "tsc --build tsconfig.json --preserveWatchOutput && tsc-alias",
+        "lint": "tsc --noEmit && eslint \"{src,apps,libs,test}/**/*.{ts,tsx}\" --fix",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
@@ -49,7 +48,7 @@
         "@nestjs/config": "^4.0.2",
         "@nestjs/core": "^11",
         "rxjs": "^7",
-        "next": "^15.4.7",
+        "next": "^16.0.5",
         "next-intl": "^4.1.0"
     }
 }

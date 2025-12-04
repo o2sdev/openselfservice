@@ -1,6 +1,6 @@
 {
     "name": "@o2s/integrations.contentful-cms",
-    "version": "0.1.0",
+    "version": "0.3.0",
     "private": false,
     "license": "MIT",
     "exports": {
@@ -11,11 +11,10 @@
         "dist"
     ],
     "scripts": {
-        "dev": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")",
-        "build": "tsc && tsc-alias",
+        "build": "tsc --preserveWatchOutput && tsc-alias",
         "lint": "tsc --noEmit && eslint . --max-warnings 0",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\"",
-        "generate": "graphql-codegen && prettier --write \"generated/**/*.ts\""
+        "generate": "graphql-codegen && prettier --write \"generated/**/*.{ts,tsx}\""
     },
     "dependencies": {
         "@contentful/live-preview": "^4.6.52",
@@ -28,13 +27,13 @@
         "graphql-tag": "2.12.6"
     },
     "devDependencies": {
-        "@graphql-codegen/add": "^5.0.3",
-        "@graphql-codegen/cli": "^5.0.7",
-        "@graphql-codegen/introspection": "^4.0.3",
-        "@graphql-codegen/typescript": "^4.1.6",
+        "@graphql-codegen/add": "^6.0.0",
+        "@graphql-codegen/cli": "^6.1.0",
+        "@graphql-codegen/introspection": "^5.0.0",
+        "@graphql-codegen/typescript": "^5.0.6",
         "@graphql-codegen/typescript-graphql-request": "^6.3.0",
-        "@graphql-codegen/typescript-operations": "^4.6.1",
-        "@graphql-codegen/typescript-resolvers": "^4.5.2",
+        "@graphql-codegen/typescript-operations": "^5.0.6",
+        "@graphql-codegen/typescript-resolvers": "^5.1.4",
         "@o2s/eslint-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",

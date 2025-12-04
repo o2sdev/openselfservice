@@ -109,6 +109,11 @@ const MOCK_INVOICE_LIST_BLOCK_EN: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
                     label: 'To',
                 },
             },
+            {
+                __typename: 'FilterViewModeToggle',
+                id: 'viewMode',
+                value: 'list',
+            },
         ],
     },
     noResults: {
@@ -122,6 +127,11 @@ const MOCK_INVOICE_LIST_BLOCK_EN: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
     },
     downloadFileName: 'invoice-{id}.pdf',
     downloadButtonAriaDescription: 'Download invoice {id}',
+    cardHeaderSlots: {
+        left: 'id',
+        right: 'paymentStatus',
+        bottom: 'paymentDueDate',
+    },
 };
 
 const MOCK_INVOICE_LIST_BLOCK_DE: CMS.Model.InvoiceListBlock.InvoiceListBlock = {
@@ -233,6 +243,11 @@ const MOCK_INVOICE_LIST_BLOCK_DE: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
                     label: 'Bis',
                 },
             },
+            {
+                __typename: 'FilterViewModeToggle',
+                id: 'viewMode',
+                value: 'list',
+            },
         ],
     },
     noResults: {
@@ -246,6 +261,11 @@ const MOCK_INVOICE_LIST_BLOCK_DE: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
     },
     downloadFileName: 'rechnung-{id}.pdf',
     downloadButtonAriaDescription: 'Rechnung {id} herunterladen',
+    cardHeaderSlots: {
+        left: 'id',
+        right: 'paymentStatus',
+        bottom: 'paymentDueDate',
+    },
 };
 
 const MOCK_INVOICE_LIST_BLOCK_PL: CMS.Model.InvoiceListBlock.InvoiceListBlock = {
@@ -357,6 +377,11 @@ const MOCK_INVOICE_LIST_BLOCK_PL: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
                     label: 'Do',
                 },
             },
+            {
+                __typename: 'FilterViewModeToggle',
+                id: 'viewMode',
+                value: 'list',
+            },
         ],
     },
     noResults: {
@@ -370,6 +395,11 @@ const MOCK_INVOICE_LIST_BLOCK_PL: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
     },
     downloadFileName: 'faktura-{id}.pdf',
     downloadButtonAriaDescription: 'Pobierz fakturę {id}',
+    cardHeaderSlots: {
+        left: 'id',
+        right: 'paymentStatus',
+        bottom: 'paymentDueDate',
+    },
 };
 
 export const mapInvoiceListBlock = (locale: string): CMS.Model.InvoiceListBlock.InvoiceListBlock => {
