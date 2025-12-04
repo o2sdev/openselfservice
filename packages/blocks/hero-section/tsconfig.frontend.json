@@ -1,0 +1,23 @@
+{
+    "extends": "@o2s/typescript-config/frontend.json",
+    "compilerOptions": {
+        "outDir": "./dist/frontend",
+        "rootDir": "./src",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "composite": true,
+        "declaration": true,
+        "declarationMap": true,
+        "noEmit": false,
+        "jsx": "react",
+        "baseUrl": "./src/frontend"
+    },
+    "include": [
+        "src/frontend",
+        "src/api-harmonization/hero-section.url.ts",
+        "src/api-harmonization/hero-section.client.ts",
+        "src/api-harmonization/hero-section.model.ts",
+        "src/api-harmonization/hero-section.request.ts",
+        "src/sdk"
+    ]
+}
