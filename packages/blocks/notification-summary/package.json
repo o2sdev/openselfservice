@@ -14,7 +14,6 @@
         "dist"
     ],
     "scripts": {
-        "dev": "tsc --build tsconfig.json  && (concurrently \"tsc --build tsconfig.json -w\" \"tsc-alias -w\")",
         "build": "tsc --build tsconfig.json && tsc-alias",
         "lint": "tsc --noEmit && eslint \"{src,apps,libs,test}/**/*.{ts,tsx}\" --fix",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
