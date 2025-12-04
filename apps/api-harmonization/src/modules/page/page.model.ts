@@ -16,6 +16,7 @@ import * as OrderList from '@o2s/blocks.order-list/api-harmonization';
 import * as OrdersSummary from '@o2s/blocks.orders-summary/api-harmonization';
 import * as PaymentsHistory from '@o2s/blocks.payments-history/api-harmonization';
 import * as PaymentsSummary from '@o2s/blocks.payments-summary/api-harmonization';
+import * as ProductList from '@o2s/blocks.product-list/api-harmonization';
 import * as QuickLinks from '@o2s/blocks.quick-links/api-harmonization';
 import * as ServiceDetails from '@o2s/blocks.service-details/api-harmonization';
 import * as ServiceList from '@o2s/blocks.service-list/api-harmonization';
@@ -77,6 +78,7 @@ export class PageData {
 
 export type Blocks =
     // BLOCK REGISTER
+    | ProductList.Model.ProductListBlock['__typename']
     | TicketSummary.Model.TicketSummaryBlock['__typename']
     | NotificationSummary.Model.NotificationSummaryBlock['__typename']
     | ArticleList.Model.ArticleListBlock['__typename']

@@ -7,7 +7,7 @@
         "predev": "shx rm -f .next/dev/lock",
         "dev:https": "next dev --turbopack --experimental-https",
         "build": "next build",
-        "postbuild": "cp -r public .next/standalone/apps/frontend && cp -r .next/static .next/standalone/apps/frontend/.next/",
+        "postbuild": "shx cp -r public .next/standalone/apps/frontend && shx cp -r .next/static .next/standalone/apps/frontend/.next/",
         "start": "node .next/standalone/apps/frontend/server.js",
         "lint": "tsc --noEmit && eslint \"{src,apps,libs,test}/**/*.{ts,tsx}\" --fix",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\"",
