@@ -25,6 +25,7 @@ export const mapNotificationList = (
             data: notifications.data.map((notification) => mapNotification(notification, cms, locale, timezone)),
         },
         initialFilters: cms.initialFilters,
+        cardHeaderSlots: cms.cardHeaderSlots,
     };
 };
 

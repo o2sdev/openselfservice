@@ -1,5 +1,23 @@
 # @o2s/integrations.contentful-cms
 
+## 0.3.0
+
+### Minor Changes
+
+- 1653b74: fix: update FilterItem and renderCell components for improved functionality and code clarity
+
+### Patch Changes
+
+- 0354126: reworked turbo dev task to optimize CPU/RAM usage
+- Updated dependencies [2c780d5]
+- Updated dependencies [1653b74]
+- Updated dependencies [c27726a]
+- Updated dependencies [2c780d5]
+- Updated dependencies [0354126]
+- Updated dependencies [1653b74]
+    - @o2s/framework@1.13.0
+    - @o2s/utils.logger@1.1.2
+
 ## 0.2.0
 
 ### Minor Changes

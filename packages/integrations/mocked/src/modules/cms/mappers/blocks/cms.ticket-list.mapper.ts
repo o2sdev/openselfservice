@@ -33,6 +33,11 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
             label: 'Details',
         },
     },
+    cardHeaderSlots: {
+        left: 'topic',
+        right: 'status',
+        bottom: 'updatedAt',
+    },
     fieldMapping: {
         topic: {
             TOOL_REPAIR: 'Tool Repair',
@@ -138,6 +143,11 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
                     label: 'To',
                 },
             },
+            {
+                __typename: 'FilterViewModeToggle',
+                id: 'viewMode',
+                value: 'list',
+            },
         ],
     },
     noResults: {
@@ -185,6 +195,11 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
             title: 'Aktion',
             label: 'Details',
         },
+    },
+    cardHeaderSlots: {
+        left: 'topic',
+        right: 'status',
+        bottom: 'updatedAt',
     },
     fieldMapping: {
         topic: {
@@ -293,6 +308,11 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
                     label: 'Bis',
                 },
             },
+            {
+                __typename: 'FilterViewModeToggle',
+                id: 'viewMode',
+                value: 'list',
+            },
         ],
     },
     noResults: {
@@ -341,6 +361,11 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
             title: 'Akcja',
             label: 'Szczegóły',
         },
+    },
+    cardHeaderSlots: {
+        left: 'topic',
+        right: 'status',
+        bottom: 'updatedAt',
     },
     fieldMapping: {
         topic: {
@@ -448,6 +473,11 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
                 to: {
                     label: 'Do',
                 },
+            },
+            {
+                __typename: 'FilterViewModeToggle',
+                id: 'viewMode',
+                value: 'list',
             },
         ],
     },
