@@ -3,6 +3,8 @@
 import { createNavigation } from 'next-intl/navigation';
 import React, { useState, useTransition } from 'react';
 
+import { toast } from '@o2s/ui/hooks/use-toast';
+
 import { BlogCard } from '@o2s/ui/components/Cards/BlogCard';
 import { Container } from '@o2s/ui/components/Container';
 import { ContentSection } from '@o2s/ui/components/ContentSection';
@@ -42,11 +44,19 @@ export const CategoryPure: React.FC<CategoryPureProps> = ({
 
     const handlePagination = (data: Partial<Request.GetCategoryBlockArticlesQuery>) => {
         startTransition(async () => {
-            const newArticles = { ...articles, ...data };
-            const newData = await sdk.blocks.getCategoryArticles(newArticles, { 'x-locale': locale }, accessToken);
+            try {
+                const newArticles = { ...articles, ...data };
+                const newData = await sdk.blocks.getCategoryArticles(newArticles, { 'x-locale': locale }, accessToken);
 
-            setArticles(newArticles);
-            setData(newData);
+                setArticles(newArticles);
+                setData(newData);
+            } catch (_error) {
+                toast({
+                    variant: 'destructive',
+                    title: 'Unable to load category articles',
+                    description: 'Start the api-harmonization service and refresh Storybook.',
+                });
+            }
         });
     };
 

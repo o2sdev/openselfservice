@@ -45,7 +45,6 @@ export const ArticleSearchPure: React.FC<ArticleSearchPureProps> = ({
                     setSuggestions([]);
                 }
             } catch (_error) {
-                // comment: show toast instead of breaking Storybook when backend is unavailable
                 toast({
                     variant: 'destructive',
                     title: 'Unable to fetch search results',

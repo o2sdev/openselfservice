@@ -5,6 +5,8 @@ import React, { useState, useTransition } from 'react';
 
 import { Mappings } from '@o2s/utils.frontend';
 
+import { toast } from '@o2s/ui/hooks/use-toast';
+
 import { ProductCard, ProductCardBadge } from '@o2s/ui/components/Cards/ProductCard';
 import { FiltersSection } from '@o2s/ui/components/Filters';
 import { NoResults } from '@o2s/ui/components/NoResults';
@@ -31,18 +33,34 @@ export const ServiceListPure: React.FC<ServiceListPureProps> = ({ locale, access
 
     const handleFilter = (data: Partial<typeof initialFilters>) => {
         startTransition(async () => {
-            const newFilters = { ...filters, ...data };
-            const newData = await sdk.blocks.getServiceList(newFilters, { 'x-locale': locale }, accessToken);
-            setFilters(newFilters);
-            setData(newData);
+            try {
+                const newFilters = { ...filters, ...data };
+                const newData = await sdk.blocks.getServiceList(newFilters, { 'x-locale': locale }, accessToken);
+                setFilters(newFilters);
+                setData(newData);
+            } catch (_error) {
+                toast({
+                    variant: 'destructive',
+                    title: 'Unable to load services',
+                    description: 'Start the api-harmonization service and refresh Storybook.',
+                });
+            }
         });
     };
 
     const handleReset = () => {
         startTransition(async () => {
-            const newData = await sdk.blocks.getServiceList(initialFilters, { 'x-locale': locale }, accessToken);
-            setFilters(initialFilters);
-            setData(newData);
+            try {
+                const newData = await sdk.blocks.getServiceList(initialFilters, { 'x-locale': locale }, accessToken);
+                setFilters(initialFilters);
+                setData(newData);
+            } catch (_error) {
+                toast({
+                    variant: 'destructive',
+                    title: 'Unable to reset services filters',
+                    description: 'Start the api-harmonization service and refresh Storybook.',
+                });
+            }
         });
     };
 

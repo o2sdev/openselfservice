@@ -11,6 +11,8 @@ import { Orders } from '@o2s/framework/modules';
 
 import { cn } from '@o2s/ui/lib/utils';
 
+import { toast } from '@o2s/ui/hooks/use-toast';
+
 import { ActionList } from '@o2s/ui/components/ActionList';
 import { InfoCard } from '@o2s/ui/components/Cards/InfoCard';
 import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
@@ -116,32 +118,48 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
 
     const handleFilter = (data: Partial<any>) => {
         startTransition(async () => {
-            const newFilters = { ...filters, ...data };
-            const newData = await sdk.blocks.getOrderDetails(
-                {
-                    id: orderId,
-                },
-                newFilters,
-                { 'x-locale': locale },
-                accessToken,
-            );
-            setFilters(newFilters);
-            setItems(newData.productList.products.data);
+            try {
+                const newFilters = { ...filters, ...data };
+                const newData = await sdk.blocks.getOrderDetails(
+                    {
+                        id: orderId,
+                    },
+                    newFilters,
+                    { 'x-locale': locale },
+                    accessToken,
+                );
+                setFilters(newFilters);
+                setItems(newData.productList.products.data);
+            } catch (_error) {
+                toast({
+                    variant: 'destructive',
+                    title: 'Unable to load order details',
+                    description: 'Start the api-harmonization service and refresh Storybook.',
+                });
+            }
         });
     };
 
     const handleReset = () => {
         startTransition(async () => {
-            const newData = await sdk.blocks.getOrderDetails(
-                {
-                    id: orderId,
-                },
-                initialFilters,
-                { 'x-locale': locale },
-                accessToken,
-            );
-            setFilters(initialFilters);
-            setItems(newData.productList.products.data);
+            try {
+                const newData = await sdk.blocks.getOrderDetails(
+                    {
+                        id: orderId,
+                    },
+                    initialFilters,
+                    { 'x-locale': locale },
+                    accessToken,
+                );
+                setFilters(initialFilters);
+                setItems(newData.productList.products.data);
+            } catch (_error) {
+                toast({
+                    variant: 'destructive',
+                    title: 'Unable to reset order details filters',
+                    description: 'Start the api-harmonization service and refresh Storybook.',
+                });
+            }
         });
     };
 

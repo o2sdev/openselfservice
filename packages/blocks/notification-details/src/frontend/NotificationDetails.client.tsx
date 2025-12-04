@@ -4,6 +4,8 @@ import React, { useEffect } from 'react';
 
 import { Mappings } from '@o2s/utils.frontend';
 
+import { toast } from '@o2s/ui/hooks/use-toast';
+
 import { Container } from '@o2s/ui/components/Container';
 import { RichText } from '@o2s/ui/components/RichText';
 
@@ -20,14 +22,22 @@ export const NotificationDetailsPure: React.FC<NotificationDetailsPureProps> = (
 
     useEffect(() => {
         const markAsViewed = async () => {
-            await sdk.blocks.markNotificationAs(
-                {
-                    id: component.id,
-                    status: 'VIEWED',
-                },
-                { 'x-locale': locale },
-                component.accessToken,
-            );
+            try {
+                await sdk.blocks.markNotificationAs(
+                    {
+                        id: component.id,
+                        status: 'VIEWED',
+                    },
+                    { 'x-locale': locale },
+                    component.accessToken,
+                );
+            } catch (_error) {
+                toast({
+                    variant: 'destructive',
+                    title: 'Unable to mark notification as viewed',
+                    description: 'Start the api-harmonization service and refresh Storybook.',
+                });
+            }
         };
 
         if (notification.status.value === 'UNVIEWED') {

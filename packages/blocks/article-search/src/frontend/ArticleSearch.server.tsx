@@ -4,7 +4,6 @@ import React from 'react';
 import { sdk } from '../sdk';
 
 import { ArticleSearchProps } from './ArticleSearch.types';
-import { ArticleSearchError } from './ArticleSearchError';
 
 export const ArticleSearchDynamic = dynamic(() =>
     import('./ArticleSearch.client').then((module) => module.ArticleSearchPure),
@@ -25,6 +24,7 @@ export const ArticleSearch: React.FC<ArticleSearchProps> = async ({
             { 'x-locale': locale },
             accessToken,
         );
+
         return (
             <ArticleSearchDynamic
                 {...data}
@@ -36,6 +36,6 @@ export const ArticleSearch: React.FC<ArticleSearchProps> = async ({
             />
         );
     } catch (_error) {
-        return <ArticleSearchError />;
+        return null;
     }
 };

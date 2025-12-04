@@ -48,20 +48,36 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
 
     const handleFilter = (data: Partial<Request.GetInvoiceListBlockQuery>) => {
         startTransition(async () => {
-            const newFilters = { ...filters, ...data };
-            const newData = await sdk.blocks.getInvoiceList(newFilters, { 'x-locale': locale }, accessToken);
+            try {
+                const newFilters = { ...filters, ...data };
+                const newData = await sdk.blocks.getInvoiceList(newFilters, { 'x-locale': locale }, accessToken);
 
-            setFilters(newFilters);
-            setData(newData);
+                setFilters(newFilters);
+                setData(newData);
+            } catch (_error) {
+                toast({
+                    variant: 'destructive',
+                    title: 'Unable to load invoices',
+                    description: 'Start the api-harmonization service and refresh Storybook.',
+                });
+            }
         });
     };
 
     const handleReset = () => {
         startTransition(async () => {
-            const newData = await sdk.blocks.getInvoiceList(initialFilters, { 'x-locale': locale }, accessToken);
+            try {
+                const newData = await sdk.blocks.getInvoiceList(initialFilters, { 'x-locale': locale }, accessToken);
 
-            setFilters(initialFilters);
-            setData(newData);
+                setFilters(initialFilters);
+                setData(newData);
+            } catch (_error) {
+                toast({
+                    variant: 'destructive',
+                    title: 'Unable to reset invoice filters',
+                    description: 'Start the api-harmonization service and refresh Storybook.',
+                });
+            }
         });
     };
 

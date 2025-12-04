@@ -7,6 +7,8 @@ import React, { useState, useTransition } from 'react';
 
 import { Mappings } from '@o2s/utils.frontend';
 
+import { toast } from '@o2s/ui/hooks/use-toast';
+
 import { ActionList } from '@o2s/ui/components/ActionList';
 import type { DataListColumnConfig } from '@o2s/ui/components/DataList';
 import { DataView } from '@o2s/ui/components/DataView';
@@ -49,18 +51,34 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
 
     const handleFilter = (data: Partial<Request.GetTicketListBlockQuery>) => {
         startTransition(async () => {
-            const newFilters = { ...filters, ...data };
-            const newData = await sdk.blocks.getTicketList(newFilters, { 'x-locale': locale }, accessToken);
-            setFilters(newFilters);
-            setData(newData);
+            try {
+                const newFilters = { ...filters, ...data };
+                const newData = await sdk.blocks.getTicketList(newFilters, { 'x-locale': locale }, accessToken);
+                setFilters(newFilters);
+                setData(newData);
+            } catch (_error) {
+                toast({
+                    variant: 'destructive',
+                    title: 'Unable to load tickets',
+                    description: 'Start the api-harmonization service and refresh Storybook.',
+                });
+            }
         });
     };
 
     const handleReset = () => {
         startTransition(async () => {
-            const newData = await sdk.blocks.getTicketList(initialFilters, { 'x-locale': locale }, accessToken);
-            setFilters(initialFilters);
-            setData(newData);
+            try {
+                const newData = await sdk.blocks.getTicketList(initialFilters, { 'x-locale': locale }, accessToken);
+                setFilters(initialFilters);
+                setData(newData);
+            } catch (_error) {
+                toast({
+                    variant: 'destructive',
+                    title: 'Unable to reset tickets filters',
+                    description: 'Start the api-harmonization service and refresh Storybook.',
+                });
+            }
         });
     };
 
