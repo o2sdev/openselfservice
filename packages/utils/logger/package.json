@@ -1,6 +1,6 @@
 {
     "name": "@o2s/utils.logger",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "private": false,
     "license": "MIT",
     "exports": {
@@ -11,8 +11,7 @@
         "dist"
     ],
     "scripts": {
-        "dev": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")",
-        "build": "tsc && tsc-alias",
+        "build": "tsc --preserveWatchOutput && tsc-alias",
         "lint": "tsc --noEmit && eslint . --max-warnings 0",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
@@ -20,7 +19,7 @@
         "jwt-decode": "^4.0.0",
         "winston": "^3.18.3",
         "axios": "^1.13.2",
-        "express": "5.1.0"
+        "express": "5.2.0"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",

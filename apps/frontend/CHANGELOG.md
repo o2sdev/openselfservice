@@ -1,5 +1,54 @@
 # @o2s/frontend
 
+## 1.12.0
+
+### Minor Changes
+
+- 2c780d5: add NotificationSummary and TicketSummary blocks
+- 1653b74: fix: update FilterItem and renderCell components for improved functionality and code clarity
+- c27726a: added a new Product List block with list/tile form of presentation
+- 2c780d5: conditionally render button in InfoCard for improved layout
+
+### Patch Changes
+
+- 0354126: reworked turbo dev task to optimize CPU/RAM usage
+- Updated dependencies [2c780d5]
+- Updated dependencies [1653b74]
+- Updated dependencies [c27726a]
+- Updated dependencies [2c780d5]
+- Updated dependencies [0354126]
+- Updated dependencies [1653b74]
+    - @o2s/blocks.notification-summary@1.0.0
+    - @o2s/blocks.ticket-summary@1.0.0
+    - @o2s/integrations.mocked@1.14.0
+    - @o2s/framework@1.13.0
+    - @o2s/blocks.ticket-list@1.3.0
+    - @o2s/ui@1.6.0
+    - @o2s/utils.frontend@0.2.0
+    - @o2s/blocks.featured-service-list@1.1.1
+    - @o2s/blocks.notification-details@1.1.1
+    - @o2s/blocks.notification-list@1.2.1
+    - @o2s/blocks.payments-history@1.1.1
+    - @o2s/blocks.payments-summary@1.1.1
+    - @o2s/utils.api-harmonization@0.1.2
+    - @o2s/blocks.service-details@1.1.1
+    - @o2s/blocks.article-search@1.1.2
+    - @o2s/blocks.orders-summary@1.1.1
+    - @o2s/blocks.ticket-details@1.1.1
+    - @o2s/blocks.category-list@1.2.1
+    - @o2s/blocks.order-details@1.1.1
+    - @o2s/blocks.surveyjs-form@1.1.1
+    - @o2s/blocks.ticket-recent@1.1.1
+    - @o2s/blocks.article-list@1.2.1
+    - @o2s/blocks.invoice-list@1.2.1
+    - @o2s/blocks.service-list@1.1.1
+    - @o2s/blocks.user-account@1.1.1
+    - @o2s/blocks.quick-links@1.2.1
+    - @o2s/blocks.order-list@1.2.1
+    - @o2s/blocks.category@1.1.2
+    - @o2s/blocks.article@1.2.1
+    - @o2s/blocks.faq@1.2.1
+
 ## 1.11.0
 
 ### Minor Changes

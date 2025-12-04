@@ -10,11 +10,13 @@ import * as FeaturedServiceList from '@o2s/blocks.featured-service-list/api-harm
 import * as BlockInvoiceList from '@o2s/blocks.invoice-list/api-harmonization';
 import * as NotificationDetails from '@o2s/blocks.notification-details/api-harmonization';
 import * as NotificationList from '@o2s/blocks.notification-list/api-harmonization';
+import * as NotificationSummary from '@o2s/blocks.notification-summary/api-harmonization';
 import * as OrderDetails from '@o2s/blocks.order-details/api-harmonization';
 import * as OrderList from '@o2s/blocks.order-list/api-harmonization';
 import * as OrdersSummary from '@o2s/blocks.orders-summary/api-harmonization';
 import * as PaymentsHistory from '@o2s/blocks.payments-history/api-harmonization';
 import * as PaymentsSummary from '@o2s/blocks.payments-summary/api-harmonization';
+import * as ProductList from '@o2s/blocks.product-list/api-harmonization';
 import * as QuickLinks from '@o2s/blocks.quick-links/api-harmonization';
 import * as ServiceDetails from '@o2s/blocks.service-details/api-harmonization';
 import * as ServiceList from '@o2s/blocks.service-list/api-harmonization';
@@ -22,7 +24,10 @@ import * as Surveyjs from '@o2s/blocks.surveyjs-form/api-harmonization';
 import * as TicketDetails from '@o2s/blocks.ticket-details/api-harmonization';
 import * as TicketList from '@o2s/blocks.ticket-list/api-harmonization';
 import * as TicketRecent from '@o2s/blocks.ticket-recent/api-harmonization';
+import * as TicketSummary from '@o2s/blocks.ticket-summary/api-harmonization';
 import * as UserAccount from '@o2s/blocks.user-account/api-harmonization';
+
+// BLOCK IMPORT
 
 export class Init {
     locales!: {
@@ -73,6 +78,9 @@ export class PageData {
 
 export type Blocks =
     // BLOCK REGISTER
+    | ProductList.Model.ProductListBlock['__typename']
+    | TicketSummary.Model.TicketSummaryBlock['__typename']
+    | NotificationSummary.Model.NotificationSummaryBlock['__typename']
     | ArticleList.Model.ArticleListBlock['__typename']
     | Category.Model.CategoryBlock['__typename']
     | Article.Model.ArticleBlock['__typename']
