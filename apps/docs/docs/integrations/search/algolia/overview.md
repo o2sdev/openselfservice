@@ -47,3 +47,4 @@ For detailed instructions, see the [How to set up](./how-to-setup.md) guide.
 
 The integration uses the official [Algoliasearch](https://www.npmjs.com/package/algoliasearch) client version `^5.44.0`.
 
+

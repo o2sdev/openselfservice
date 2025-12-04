@@ -19,7 +19,7 @@ export interface StarterInfoSectionImage {
 }
 
 export interface StarterInfoSectionProps {
-    links: StarterInfoSectionLink[];
+    otherLinks: StarterInfoSectionLink[];
     mainLink: StarterInfoSectionLink;
     secondaryLink?: StarterInfoSectionLink;
     mainTitle: string;
@@ -32,7 +32,7 @@ export interface StarterInfoSectionProps {
 }
 
 export function StarterInfoSection({
-    links,
+    otherLinks,
     mainLink,
     secondaryLink,
     mainTitle,
@@ -65,7 +65,7 @@ export function StarterInfoSection({
                             {secondaryLink && (
                                 <Link
                                     href={secondaryLink.link}
-                                    className={clsx('button button-ultra', cliCommand && 'sm:w-1/2')}
+                                    className={clsx('button button-tertiary', cliCommand && 'sm:w-1/2')}
                                     target={secondaryLink.target}
                                     rel="noopener"
                                 >
@@ -78,7 +78,7 @@ export function StarterInfoSection({
                     )}
                 </div>
                 <div className="flex flex-wrap gap-x-12 gap-y-2">
-                    {links.map((linkItem) => (
+                    {otherLinks.map((linkItem) => (
                         <a
                             key={linkItem.label}
                             href={linkItem.link}
