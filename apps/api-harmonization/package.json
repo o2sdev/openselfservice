@@ -42,6 +42,7 @@
         "@o2s/blocks.orders-summary": "*",
         "@o2s/blocks.payments-history": "*",
         "@o2s/blocks.payments-summary": "*",
+        "@o2s/blocks.product-list": "*",
         "@o2s/blocks.quick-links": "*",
         "@o2s/blocks.service-details": "*",
         "@o2s/blocks.service-list": "*",
