@@ -1,6 +1,7 @@
 'use client';
 
 import { Menu, X } from 'lucide-react';
+import { useSession } from 'next-auth/react';
 import React, { useEffect, useState } from 'react';
 
 import { Models } from '@o2s/framework/modules';
@@ -16,7 +17,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@o2s
 import { Typography } from '@o2s/ui/elements/typography';
 
 import { Link as NextLink, usePathname } from '@/i18n';
-import { LOGIN_PATH, routing } from '@/i18n/routing';
+import { LOGIN_PATH } from '@/i18n/routing';
 
 import { MobileNavigationProps } from './MobileNavigation.types';
 
@@ -30,19 +31,14 @@ export function MobileNavigation({
     title,
     mobileMenuLabel,
     signInLabel,
-    isSignedIn,
+    shouldIncludeSignInButton = true,
 }: MobileNavigationProps) {
+    const session = useSession();
+    const isSignedIn = !!session.data?.user;
     const pathname = usePathname();
 
-    // Check if we're on login page
-    const normalizedPathname = pathname?.split('?')[0] || '';
-    const loginPaths = [LOGIN_PATH, ...Object.values(routing.pathnames[LOGIN_PATH] || {})];
-    const isLoginPage = loginPaths.some(
-        (loginPath) => normalizedPathname === loginPath || normalizedPathname.startsWith(`${loginPath}/`),
-    );
-
-    // Show sign in button if user is not signed in, not on login page, and signInLabel is available
-    const showSignInButton = !isSignedIn && !isLoginPage && signInLabel;
+    // Show sign in button if user is not signed in, container allows it, and signInLabel is available
+    const showSignInButton = shouldIncludeSignInButton && !isSignedIn && signInLabel;
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 

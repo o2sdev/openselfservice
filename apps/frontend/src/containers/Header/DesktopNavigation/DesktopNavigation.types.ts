@@ -10,5 +10,5 @@ export interface DesktopNavigationProps {
     userSlot?: ReactNode;
     items: CMS.Model.Header.Header['items'];
     signInLabel?: CMS.Model.Header.Header['signInLabel'];
-    isSignedIn?: boolean;
+    shouldIncludeSignInButton?: boolean;
 }

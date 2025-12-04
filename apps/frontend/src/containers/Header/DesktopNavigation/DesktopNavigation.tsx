@@ -1,5 +1,6 @@
 'use client';
 
+import { useSession } from 'next-auth/react';
 import React from 'react';
 
 import { Models } from '@o2s/framework/modules';
@@ -20,7 +21,7 @@ import { Separator } from '@o2s/ui/elements/separator';
 import { Typography } from '@o2s/ui/elements/typography';
 
 import { Link as NextLink, usePathname } from '@/i18n';
-import { LOGIN_PATH, routing } from '@/i18n/routing';
+import { LOGIN_PATH } from '@/i18n/routing';
 
 import { DesktopNavigationProps } from './DesktopNavigation.types';
 
@@ -32,19 +33,14 @@ export function DesktopNavigation({
     userSlot,
     items,
     signInLabel,
-    isSignedIn,
+    shouldIncludeSignInButton = true,
 }: DesktopNavigationProps) {
+    const session = useSession();
+    const isSignedIn = !!session.data?.user;
     const pathname = usePathname();
 
-    // Check if we're on login page
-    const normalizedPathname = pathname?.split('?')[0] || '';
-    const loginPaths = [LOGIN_PATH, ...Object.values(routing.pathnames[LOGIN_PATH] || {})];
-    const isLoginPage = loginPaths.some(
-        (loginPath) => normalizedPathname === loginPath || normalizedPathname.startsWith(`${loginPath}/`),
-    );
-
-    // Show sign in button if user is not signed in, not on login page, and signInLabel is available
-    const showSignInButton = !isSignedIn && !isLoginPage && signInLabel;
+    // Show sign in button if user is not signed in, container allows it, and signInLabel is available
+    const showSignInButton = shouldIncludeSignInButton && !isSignedIn && signInLabel;
 
     const activeNavigationGroup = items.find((item) => {
         if (item.__typename === 'NavigationGroup') {

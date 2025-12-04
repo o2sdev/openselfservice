@@ -12,5 +12,5 @@ export interface MobileNavigationProps {
     title?: CMS.Model.Header.Header['title'];
     mobileMenuLabel: CMS.Model.Header.Header['mobileMenuLabel'];
     signInLabel?: CMS.Model.Header.Header['signInLabel'];
-    isSignedIn?: boolean;
+    shouldIncludeSignInButton?: boolean;
 }
