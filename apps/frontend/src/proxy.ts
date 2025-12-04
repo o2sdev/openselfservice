@@ -5,7 +5,7 @@ import { routing } from '@/i18n';
 
 const intlMiddleware = createMiddleware(routing);
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
     // Apply the internationalization middleware
     const response = intlMiddleware(request);
 
