@@ -1,6 +1,6 @@
 {
     "name": "@o2s/framework",
-    "version": "1.12.0",
+    "version": "1.13.0",
     "private": false,
     "license": "MIT",
     "exports": {
@@ -11,8 +11,7 @@
         "dist"
     ],
     "scripts": {
-        "dev": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")",
-        "build": "tsc && tsc-alias",
+        "build": "tsc --preserveWatchOutput && tsc-alias",
         "lint": "tsc --noEmit && eslint . --ignore-pattern .eslintrc.js --max-warnings 0",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\"",
         "generate:component": "turbo gen core-component"
@@ -29,7 +28,7 @@
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "@types/express": "^5.0.5",
-        "@turbo/gen": "^2.6.1",
+        "@turbo/gen": "^2.6.2",
         "@types/qs": "^6.14.0",
         "concurrently": "^9.2.1",
         "eslint": "^9.39.1",

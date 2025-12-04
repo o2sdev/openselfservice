@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.notification-summary",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "private": false,
     "license": "MIT",
     "description": "Displays a dynamic NotificationSummary showing notification counts grouped by priority.",
@@ -16,7 +16,7 @@
     "scripts": {
         "dev": "tsc --build tsconfig.json  && (concurrently \"tsc --build tsconfig.json -w\" \"tsc-alias -w\")",
         "build": "tsc --build tsconfig.json && tsc-alias",
-        "lint": "tsc --noEmit && eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+        "lint": "tsc --noEmit && eslint \"{src,apps,libs,test}/**/*.{ts,tsx}\" --fix",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
@@ -49,7 +49,7 @@
         "@nestjs/config": "^4.0.2",
         "@nestjs/core": "^11",
         "rxjs": "^7",
-        "next": "^15.3.2",
+        "next": "^16.0.5",
         "next-intl": "^4.1.0"
     }
 }
