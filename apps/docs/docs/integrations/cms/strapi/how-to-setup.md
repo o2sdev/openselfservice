@@ -18,6 +18,60 @@ npm install @o2s/integrations.strapi-cms --workspace=@o2s/api
 
 This command installs the integration package in the API workspace, ensuring that all necessary dependencies are available where they're needed.
 
+## Configuration
+
+After installing the package, you need to configure the integration in the `@o2s/configs.integrations` package. This tells the framework to use Strapi CMS instead of the default mocked integration.
+
+### Step 1: Update the CMS integration config
+
+Open the file `packages/configs/integrations/src/models/cms.ts` and replace the import:
+
+**Before (using mocked integration):**
+
+```typescript
+import { Config, Integration } from '@o2s/integrations.mocked/integration';
+```
+
+**After (using Strapi CMS integration):**
+
+```typescript
+import { Config, Integration } from '@o2s/integrations.strapi-cms/integration';
+```
+
+The complete file should look like this:
+
+```typescript
+import { Config, Integration } from '@o2s/integrations.strapi-cms/integration';
+
+import { ApiConfig } from '@o2s/framework/modules';
+
+export const CmsIntegrationConfig: ApiConfig['integrations']['cms'] = Config.cms!;
+
+export import Service = Integration.CMS.Service;
+export import Request = Integration.CMS.Request;
+export import Model = Integration.CMS.Model;
+```
+
+### Step 2: Update the Articles integration config (if using articles)
+
+If you plan to use articles functionality, you also need to update `packages/configs/integrations/src/models/articles.ts`:
+
+```typescript
+import { Config, Integration } from '@o2s/integrations.strapi-cms/integration';
+
+import { ApiConfig } from '@o2s/framework/modules';
+
+export const ArticlesIntegrationConfig: ApiConfig['integrations']['articles'] = Config.articles!;
+
+export import Service = Integration.Articles.Service;
+export import Request = Integration.Articles.Request;
+export import Model = Integration.Articles.Model;
+```
+
+### Step 3: Verify AppConfig
+
+The `AppConfig` in `apps/api-harmonization/src/app.config.ts` should already reference the integration configs. You don't need to modify this file - it automatically uses the configuration from `@o2s/configs.integrations`.
+
 ## Set env variables
 
 After installing the package, you need to configure environment variables that will be used by the API Harmonization server to connect to your Strapi instance. These variables are essential for authentication and API communication.
