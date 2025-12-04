@@ -9,7 +9,7 @@
         "build": "next build",
         "postbuild": "shx cp -r public .next/standalone/apps/frontend && shx cp -r .next/static .next/standalone/apps/frontend/.next/",
         "start": "node .next/standalone/apps/frontend/server.js",
-        "lint": "tsc --noEmit && eslint \"{src,apps,libs,test}/**/*.{ts,tsx}\" --fix",
+        "lint": "tsc --noEmit && eslint \"src/**/*.{ts,tsx}\" --fix --max-warnings=0",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\"",
         "generate:component": "turbo gen web-component"
     },
@@ -66,6 +66,7 @@
     "devDependencies": {
         "@next/bundle-analyzer": "16.0.7",
         "@o2s/eslint-config": "*",
+        "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "@svgr/webpack": "^8.1.0",
@@ -84,7 +85,7 @@
         "sass": "^1.94.2",
         "shx": "^0.4.0",
         "tailwindcss": "^4.1.17",
-        "tsx": "^4.20.6",
+        "tsx": "^4.21.0",
         "typescript": "^5.9.3"
     },
     "overrides": {
