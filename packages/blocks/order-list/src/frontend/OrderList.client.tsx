@@ -8,6 +8,8 @@ import { Mappings } from '@o2s/utils.frontend';
 
 import { toast } from '@o2s/ui/hooks/use-toast';
 
+import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
+
 import type { DataListColumnConfig } from '@o2s/ui/components/DataList';
 import { DataView } from '@o2s/ui/components/DataView';
 import { FiltersSection } from '@o2s/ui/components/Filters';
@@ -32,6 +34,7 @@ import { OrderListPureProps } from './OrderList.types';
 
 export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToken, routing, ...component }) => {
     const { Link: LinkComponent } = createNavigation(routing);
+    const { labels } = useGlobalContext();
 
     const initialFilters: Request.GetOrderListBlockQuery = {
         id: component.id,
@@ -62,8 +65,8 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
             } catch (_error) {
                 toast({
                     variant: 'destructive',
-                    title: 'Unable to load orders',
-                    description: 'Start the api-harmonization service and refresh Storybook.',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
                 });
             }
         });
@@ -78,8 +81,8 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
             } catch (_error) {
                 toast({
                     variant: 'destructive',
-                    title: 'Unable to reset orders filters',
-                    description: 'Start the api-harmonization service and refresh Storybook.',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
                 });
             }
         });

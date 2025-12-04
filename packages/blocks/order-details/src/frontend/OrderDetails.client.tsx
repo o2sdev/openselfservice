@@ -13,6 +13,8 @@ import { cn } from '@o2s/ui/lib/utils';
 
 import { toast } from '@o2s/ui/hooks/use-toast';
 
+import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
+
 import { ActionList } from '@o2s/ui/components/ActionList';
 import { InfoCard } from '@o2s/ui/components/Cards/InfoCard';
 import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
@@ -101,6 +103,7 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
     ...component
 }) => {
     const { Link: LinkComponent } = createNavigation(routing);
+    const { labels } = useGlobalContext();
 
     const initialFilters: Request.GetOrderDetailsBlockQuery = {
         id: component.id,
@@ -133,8 +136,8 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
             } catch (_error) {
                 toast({
                     variant: 'destructive',
-                    title: 'Unable to load order details',
-                    description: 'Start the api-harmonization service and refresh Storybook.',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
                 });
             }
         });
@@ -156,8 +159,8 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
             } catch (_error) {
                 toast({
                     variant: 'destructive',
-                    title: 'Unable to reset order details filters',
-                    description: 'Start the api-harmonization service and refresh Storybook.',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
                 });
             }
         });

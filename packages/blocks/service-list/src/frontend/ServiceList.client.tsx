@@ -7,6 +7,8 @@ import { Mappings } from '@o2s/utils.frontend';
 
 import { toast } from '@o2s/ui/hooks/use-toast';
 
+import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
+
 import { ProductCard, ProductCardBadge } from '@o2s/ui/components/Cards/ProductCard';
 import { FiltersSection } from '@o2s/ui/components/Filters';
 import { NoResults } from '@o2s/ui/components/NoResults';
@@ -30,6 +32,7 @@ export const ServiceListPure: React.FC<ServiceListPureProps> = ({ locale, access
     const [data, setData] = useState(component);
     const [filters, setFilters] = useState(initialFilters);
     const [isPending, startTransition] = useTransition();
+    const { labels } = useGlobalContext();
 
     const handleFilter = (data: Partial<typeof initialFilters>) => {
         startTransition(async () => {
@@ -41,8 +44,8 @@ export const ServiceListPure: React.FC<ServiceListPureProps> = ({ locale, access
             } catch (_error) {
                 toast({
                     variant: 'destructive',
-                    title: 'Unable to load services',
-                    description: 'Start the api-harmonization service and refresh Storybook.',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
                 });
             }
         });
@@ -57,8 +60,8 @@ export const ServiceListPure: React.FC<ServiceListPureProps> = ({ locale, access
             } catch (_error) {
                 toast({
                     variant: 'destructive',
-                    title: 'Unable to reset services filters',
-                    description: 'Start the api-harmonization service and refresh Storybook.',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
                 });
             }
         });

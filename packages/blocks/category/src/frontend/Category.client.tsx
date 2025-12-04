@@ -5,6 +5,8 @@ import React, { useState, useTransition } from 'react';
 
 import { toast } from '@o2s/ui/hooks/use-toast';
 
+import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
+
 import { BlogCard } from '@o2s/ui/components/Cards/BlogCard';
 import { Container } from '@o2s/ui/components/Container';
 import { ContentSection } from '@o2s/ui/components/ContentSection';
@@ -30,6 +32,7 @@ export const CategoryPure: React.FC<CategoryPureProps> = ({
     ...component
 }) => {
     const { Link: LinkComponent } = createNavigation(routing);
+    const { labels } = useGlobalContext();
 
     const initialArticles: Request.GetCategoryBlockArticlesQuery = {
         id: component.id,
@@ -53,8 +56,8 @@ export const CategoryPure: React.FC<CategoryPureProps> = ({
             } catch (_error) {
                 toast({
                     variant: 'destructive',
-                    title: 'Unable to load category articles',
-                    description: 'Start the api-harmonization service and refresh Storybook.',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
                 });
             }
         });

@@ -57,8 +57,8 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
             } catch (_error) {
                 toast({
                     variant: 'destructive',
-                    title: 'Unable to load invoices',
-                    description: 'Start the api-harmonization service and refresh Storybook.',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
                 });
             }
         });
@@ -74,8 +74,8 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
             } catch (_error) {
                 toast({
                     variant: 'destructive',
-                    title: 'Unable to reset invoice filters',
-                    description: 'Start the api-harmonization service and refresh Storybook.',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
                 });
             }
         });

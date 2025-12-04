@@ -9,6 +9,8 @@ import { cn } from '@o2s/ui/lib/utils';
 
 import { toast } from '@o2s/ui/hooks/use-toast';
 
+import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
+
 import { InfoCard } from '@o2s/ui/components/Cards/InfoCard';
 import { Price } from '@o2s/ui/components/Price';
 
@@ -55,6 +57,7 @@ export const OrdersSummaryPure: React.FC<Readonly<OrdersSummaryPureProps>> = ({
     accessToken,
     ...component
 }) => {
+    const { labels } = useGlobalContext();
     const initialFilters: Request.GetOrdersSummaryBlockQuery = {
         id: component.id,
         dateFrom: dayjs().subtract(6, 'months').toISOString(),
@@ -103,8 +106,8 @@ export const OrdersSummaryPure: React.FC<Readonly<OrdersSummaryPureProps>> = ({
             } catch (_error) {
                 toast({
                     variant: 'destructive',
-                    title: 'Unable to load orders summary',
-                    description: 'Start the api-harmonization service and refresh Storybook.',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
                 });
             }
         });

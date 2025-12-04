@@ -6,6 +6,8 @@ import { debounce } from 'throttle-debounce';
 
 import { toast } from '@o2s/ui/hooks/use-toast';
 
+import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
+
 import { Autocomplete } from '@o2s/ui/components/Autocomplete';
 import { Container } from '@o2s/ui/components/Container';
 
@@ -27,6 +29,7 @@ export const ArticleSearchPure: React.FC<ArticleSearchPureProps> = ({
 }) => {
     const { useRouter } = createNavigation(routing);
     const router = useRouter();
+    const { labels } = useGlobalContext();
 
     const [suggestions, setSuggestions] = useState<Model.ArticleList['articles']>([]);
     const [isPending, startTransition] = useTransition();
@@ -47,8 +50,8 @@ export const ArticleSearchPure: React.FC<ArticleSearchPureProps> = ({
             } catch (_error) {
                 toast({
                     variant: 'destructive',
-                    title: 'Unable to fetch search results',
-                    description: 'Start the api-harmonization service and refresh Storybook.',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
                     duration: 60000,
                 });
                 setSuggestions([]);

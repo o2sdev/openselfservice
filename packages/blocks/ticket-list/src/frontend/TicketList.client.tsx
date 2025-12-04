@@ -9,6 +9,8 @@ import { Mappings } from '@o2s/utils.frontend';
 
 import { toast } from '@o2s/ui/hooks/use-toast';
 
+import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
+
 import { ActionList } from '@o2s/ui/components/ActionList';
 import type { DataListColumnConfig } from '@o2s/ui/components/DataList';
 import { DataView } from '@o2s/ui/components/DataView';
@@ -30,6 +32,7 @@ import { TicketListPureProps } from './TicketList.types';
 export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessToken, routing, meta, ...component }) => {
     const { Link: LinkComponent } = createNavigation(routing);
     const inspector = LivePreview.useInspector();
+    const { labels } = useGlobalContext();
 
     const initialFilters: Request.GetTicketListBlockQuery = {
         id: component.id,
@@ -59,8 +62,8 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
             } catch (_error) {
                 toast({
                     variant: 'destructive',
-                    title: 'Unable to load tickets',
-                    description: 'Start the api-harmonization service and refresh Storybook.',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
                 });
             }
         });
@@ -75,8 +78,8 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
             } catch (_error) {
                 toast({
                     variant: 'destructive',
-                    title: 'Unable to reset tickets filters',
-                    description: 'Start the api-harmonization service and refresh Storybook.',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
                 });
             }
         });

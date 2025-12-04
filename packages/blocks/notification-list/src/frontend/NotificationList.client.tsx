@@ -10,6 +10,8 @@ import { cn } from '@o2s/ui/lib/utils';
 
 import { toast } from '@o2s/ui/hooks/use-toast';
 
+import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
+
 import type { DataListColumnConfig } from '@o2s/ui/components/DataList';
 import { DataView } from '@o2s/ui/components/DataView';
 import { FiltersSection } from '@o2s/ui/components/Filters';
@@ -33,6 +35,7 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({
     ...component
 }) => {
     const { Link: LinkComponent } = createNavigation(routing);
+    const { labels } = useGlobalContext();
 
     const initialFilters: Request.GetNotificationListBlockQuery = {
         id: component.id,
@@ -62,8 +65,8 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({
             } catch (_error) {
                 toast({
                     variant: 'destructive',
-                    title: 'Unable to load notifications',
-                    description: 'Start the api-harmonization service and refresh Storybook.',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
                 });
             }
         });
@@ -83,8 +86,8 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({
             } catch (_error) {
                 toast({
                     variant: 'destructive',
-                    title: 'Unable to reset notifications filters',
-                    description: 'Start the api-harmonization service and refresh Storybook.',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
                 });
             }
         });
