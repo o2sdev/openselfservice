@@ -27,7 +27,7 @@
     "engines": {
         "node": ">=22"
     },
-    "packageManager": "npm@11.6.3",
+    "packageManager": "npm@11.6.4",
     "workspaces": [
         "apps/*",
         "packages/*",
@@ -60,7 +60,7 @@
         "rimraf": "^6.1.2",
         "simple-git": "^3.30.0",
         "storybook": "^10.0.8",
-        "syncpack": "^14.0.0-alpha.27",
+        "syncpack": "^14.0.0-alpha.29",
         "turbo": "^2.6.1",
         "typescript": "5.9.3"
     },
