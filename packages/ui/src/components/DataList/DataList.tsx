@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Checkbox } from '../../elements/checkbox';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../elements/table';
 import { renderCell } from '../../lib/renderCell';
 import { cn } from '../../lib/utils';
@@ -17,6 +18,9 @@ export function DataList<T extends Record<string, any>>({
     getRowKey,
     className,
     getRowClassName,
+    enableRowSelection = false,
+    selectedRows,
+    onSelectionChange,
 }: DataListProps<T>) {
     // Default row key extractor
     const defaultGetRowKey = (item: T, index: number) => {
@@ -28,10 +32,49 @@ export function DataList<T extends Record<string, any>>({
 
     const rowKeyExtractor = getRowKey || defaultGetRowKey;
 
+    // Row selection handlers
+    const handleSelectAll = (checked: boolean) => {
+        if (!onSelectionChange) return;
+
+        if (checked) {
+            const allKeys = new Set(data.map((item, index) => rowKeyExtractor(item, index)));
+            onSelectionChange(allKeys);
+        } else {
+            onSelectionChange(new Set());
+        }
+    };
+
+    const handleRowSelect = (rowKey: string | number, checked: boolean) => {
+        if (!onSelectionChange || !selectedRows) return;
+
+        const newSelected = new Set(selectedRows);
+        if (checked) {
+            newSelected.add(rowKey);
+        } else {
+            newSelected.delete(rowKey);
+        }
+        onSelectionChange(newSelected);
+    };
+
+    // Calculate selection state
+    const allRowKeys = data.map((item, index) => rowKeyExtractor(item, index));
+    const selectedCount = selectedRows?.size || 0;
+    const allSelected = enableRowSelection && data.length > 0 && selectedCount === allRowKeys.length;
+    const someSelected = enableRowSelection && selectedCount > 0 && selectedCount < allRowKeys.length;
+
     return (
         <Table className={className}>
             <TableHeader>
                 <TableRow>
+                    {enableRowSelection && (
+                        <TableHead className="w-12 py-3 px-4">
+                            <Checkbox
+                                checked={allSelected ? true : someSelected ? 'indeterminate' : false}
+                                onCheckedChange={handleSelectAll}
+                                aria-label="Select all"
+                            />
+                        </TableHead>
+                    )}
                     {columns.map((column) => (
                         <TableHead
                             key={String(column.id)}
@@ -54,9 +97,19 @@ export function DataList<T extends Record<string, any>>({
                 {data.map((item, index) => {
                     const rowKey = rowKeyExtractor(item, index);
                     const rowClassName = getRowClassName ? getRowClassName(item) : undefined;
+                    const isRowSelected = enableRowSelection && selectedRows?.has(rowKey);
 
                     return (
                         <TableRow key={rowKey} className={rowClassName}>
+                            {enableRowSelection && (
+                                <TableCell className="w-12 py-3 px-4">
+                                    <Checkbox
+                                        checked={isRowSelected}
+                                        onCheckedChange={(checked) => handleRowSelect(rowKey, !!checked)}
+                                        aria-label="Select row"
+                                    />
+                                </TableCell>
+                            )}
                             {columns.map((column) => {
                                 const value = item[column.id];
                                 const cellContent = renderCell(value, item, column);

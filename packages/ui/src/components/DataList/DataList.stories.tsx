@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import React, { useState } from 'react';
 
 import { DataList } from './DataList';
 import type { DataListColumnConfig } from './DataList.types';
@@ -208,5 +209,30 @@ export const WithCustomStyling: Story = {
             cellClassName: 'py-4',
         })) as DataListColumnConfig<Record<string, unknown>>[],
         className: 'border-2 border-gray-300',
+    },
+};
+
+export const WithRowSelection: Story = {
+    render: () => {
+        const Component = () => {
+            const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
+
+            return (
+                <div className="space-y-4">
+                    <div className="text-sm text-muted-foreground">
+                        {selectedRows.size} of {sampleTickets.length} row(s) selected.
+                    </div>
+                    <DataList
+                        data={sampleTickets as Record<string, unknown>[]}
+                        columns={ticketColumns as DataListColumnConfig<Record<string, unknown>>[]}
+                        enableRowSelection={true}
+                        selectedRows={selectedRows}
+                        onSelectionChange={setSelectedRows}
+                    />
+                </div>
+            );
+        };
+
+        return <Component />;
     },
 };

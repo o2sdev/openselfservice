@@ -10,6 +10,9 @@ export const DataView = <T extends Record<string, any>>({
     viewMode,
     cardHeaderSlots,
     columnsCount,
+    enableRowSelection,
+    selectedRows,
+    onSelectionChange,
     ...props
 }: DataViewProps<T>) => {
     return (
@@ -17,7 +20,12 @@ export const DataView = <T extends Record<string, any>>({
             {viewMode === 'grid' ? (
                 <DataGrid {...props} cardHeaderSlots={cardHeaderSlots} columnsCount={columnsCount} />
             ) : (
-                <DataList {...props} />
+                <DataList
+                    {...props}
+                    enableRowSelection={enableRowSelection}
+                    selectedRows={selectedRows}
+                    onSelectionChange={onSelectionChange}
+                />
             )}
         </>
     );
