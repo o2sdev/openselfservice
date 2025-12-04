@@ -1,6 +1,6 @@
 {
     "name": "@o2s/frontend",
-    "version": "1.11.0",
+    "version": "1.12.0",
     "private": true,
     "scripts": {
         "dev": "next dev --turbopack",
@@ -9,7 +9,7 @@
         "build": "next build",
         "postbuild": "shx cp -r public .next/standalone/apps/frontend && shx cp -r .next/static .next/standalone/apps/frontend/.next/",
         "start": "node .next/standalone/apps/frontend/server.js",
-        "lint": "tsc --noEmit && eslint \"{src,apps,libs,test}/**/*.{ts,tsx}\" --fix",
+        "lint": "tsc --noEmit && eslint \"src/**/*.{ts,tsx}\" --fix --max-warnings=0",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\"",
         "generate:component": "turbo gen web-component"
     },
@@ -31,6 +31,7 @@
         "@o2s/blocks.orders-summary": "*",
         "@o2s/blocks.payments-history": "*",
         "@o2s/blocks.payments-summary": "*",
+        "@o2s/blocks.product-list": "*",
         "@o2s/blocks.quick-links": "*",
         "@o2s/blocks.service-details": "*",
         "@o2s/blocks.service-list": "*",
@@ -63,13 +64,14 @@
         "zod": "^4.1.12"
     },
     "devDependencies": {
-        "@next/bundle-analyzer": "16.0.5",
+        "@next/bundle-analyzer": "16.0.7",
         "@o2s/eslint-config": "*",
+        "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "@svgr/webpack": "^8.1.0",
         "@trivago/prettier-plugin-sort-imports": "^6.0.0",
-        "@turbo/gen": "^2.6.1",
+        "@turbo/gen": "^2.6.2",
         "@types/bcryptjs": "^3.0.0",
         "@types/node": "^24.10.1",
         "@types/react": "19.2.7",
@@ -77,13 +79,13 @@
         "@types/react-dom": "19.2.3",
         "dotenv": "^17.2.3",
         "eslint": "^9.39.1",
-        "eslint-config-next": "16.0.5",
+        "eslint-config-next": "16.0.7",
         "postcss": "^8.5.6",
         "prettier": "^3.6.2",
         "sass": "^1.94.2",
         "shx": "^0.4.0",
         "tailwindcss": "^4.1.17",
-        "tsx": "^4.20.6",
+        "tsx": "^4.21.0",
         "typescript": "^5.9.3"
     },
     "overrides": {

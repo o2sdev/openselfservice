@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.service-list",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "private": false,
     "license": "MIT",
     "description": "A block displaying a list of services.",
@@ -15,7 +15,7 @@
     ],
     "scripts": {
         "build": "tsc --build tsconfig.json --preserveWatchOutput && tsc-alias",
-        "lint": "tsc --noEmit && eslint \"{src,apps,libs,test}/**/*.{ts,tsx}\" --fix",
+        "lint": "tsc --noEmit && eslint \"src/**/*.{ts,tsx}\" --fix --max-warnings=0",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
@@ -29,6 +29,7 @@
     "devDependencies": {
         "dotenv-cli": "^11.0.0",
         "@o2s/eslint-config": "*",
+        "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "concurrently": "^9.2.1",

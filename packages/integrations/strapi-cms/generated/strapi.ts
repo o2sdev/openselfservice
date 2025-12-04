@@ -3853,9 +3853,12 @@ export type ResolverTypeWrapper<T> = Promise<T> | T;
 export type ResolverWithResolve<TResult, TParent, TContext, TArgs> = {
     resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
 };
-export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> =
-    | ResolverFn<TResult, TParent, TContext, TArgs>
-    | ResolverWithResolve<TResult, TParent, TContext, TArgs>;
+export type Resolver<
+    TResult,
+    TParent = Record<PropertyKey, never>,
+    TContext = Record<PropertyKey, never>,
+    TArgs = Record<PropertyKey, never>,
+> = ResolverFn<TResult, TParent, TContext, TArgs> | ResolverWithResolve<TResult, TParent, TContext, TArgs>;
 
 export type ResolverFn<TResult, TParent, TContext, TArgs> = (
     parent: TParent,
@@ -3892,17 +3895,23 @@ export type SubscriptionObject<TResult, TKey extends string, TParent, TContext, 
     | SubscriptionSubscriberObject<TResult, TKey, TParent, TContext, TArgs>
     | SubscriptionResolverObject<TResult, TParent, TContext, TArgs>;
 
-export type SubscriptionResolver<TResult, TKey extends string, TParent = {}, TContext = {}, TArgs = {}> =
+export type SubscriptionResolver<
+    TResult,
+    TKey extends string,
+    TParent = Record<PropertyKey, never>,
+    TContext = Record<PropertyKey, never>,
+    TArgs = Record<PropertyKey, never>,
+> =
     | ((...args: any[]) => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>)
     | SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>;
 
-export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
+export type TypeResolveFn<TTypes, TParent = Record<PropertyKey, never>, TContext = Record<PropertyKey, never>> = (
     parent: TParent,
     context: TContext,
     info: GraphQLResolveInfo,
 ) => Maybe<TTypes> | Promise<Maybe<TTypes>>;
 
-export type IsTypeOfResolverFn<T = {}, TContext = {}> = (
+export type IsTypeOfResolverFn<T = Record<PropertyKey, never>, TContext = Record<PropertyKey, never>> = (
     obj: T,
     context: TContext,
     info: GraphQLResolveInfo,
@@ -3910,7 +3919,12 @@ export type IsTypeOfResolverFn<T = {}, TContext = {}> = (
 
 export type NextResolverFn<T> = () => Promise<T>;
 
-export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs = {}> = (
+export type DirectiveResolverFn<
+    TResult = Record<PropertyKey, never>,
+    TParent = Record<PropertyKey, never>,
+    TContext = Record<PropertyKey, never>,
+    TArgs = Record<PropertyKey, never>,
+> = (
     next: NextResolverFn<TResult>,
     parent: TParent,
     args: TArgs,
@@ -4787,7 +4801,7 @@ export type ResolversTypes = {
     MappingEntityResponseCollection: ResolverTypeWrapper<MappingEntityResponseCollection>;
     MappingFiltersInput: MappingFiltersInput;
     MappingInput: MappingInput;
-    Mutation: ResolverTypeWrapper<{}>;
+    Mutation: ResolverTypeWrapper<Record<PropertyKey, never>>;
     NotFoundPage: ResolverTypeWrapper<
         Omit<NotFoundPage, 'localizations' | 'localizations_connection' | 'page'> & {
             localizations: Array<Maybe<ResolversTypes['NotFoundPage']>>;
@@ -4826,7 +4840,7 @@ export type ResolversTypes = {
     Pagination: ResolverTypeWrapper<Pagination>;
     PaginationArg: PaginationArg;
     PublicationStatus: PublicationStatus;
-    Query: ResolverTypeWrapper<{}>;
+    Query: ResolverTypeWrapper<Record<PropertyKey, never>>;
     ResetPasswordPage: ResolverTypeWrapper<
         Omit<ResetPasswordPage, 'SEO' | 'image' | 'localizations' | 'localizations_connection'> & {
             SEO: ResolversTypes['ComponentSeoSeo'];
@@ -5319,7 +5333,7 @@ export type ResolversParentTypes = {
     MappingEntityResponseCollection: MappingEntityResponseCollection;
     MappingFiltersInput: MappingFiltersInput;
     MappingInput: MappingInput;
-    Mutation: {};
+    Mutation: Record<PropertyKey, never>;
     NotFoundPage: Omit<NotFoundPage, 'localizations' | 'localizations_connection' | 'page'> & {
         localizations: Array<Maybe<ResolversParentTypes['NotFoundPage']>>;
         localizations_connection?: Maybe<ResolversParentTypes['NotFoundPageRelationResponseCollection']>;
@@ -5356,7 +5370,7 @@ export type ResolversParentTypes = {
     PageTemplateDynamicZoneInput: Scalars['PageTemplateDynamicZoneInput']['output'];
     Pagination: Pagination;
     PaginationArg: PaginationArg;
-    Query: {};
+    Query: Record<PropertyKey, never>;
     ResetPasswordPage: Omit<ResetPasswordPage, 'SEO' | 'image' | 'localizations' | 'localizations_connection'> & {
         SEO: ResolversParentTypes['ComponentSeoSeo'];
         image: ResolversParentTypes['UploadFile'];
@@ -5471,7 +5485,6 @@ export type AppConfigRelationResponseCollectionResolvers<
         ResolversParentTypes['AppConfigRelationResponseCollection'] = ResolversParentTypes['AppConfigRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['AppConfig']>, ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ArticleResolvers<
@@ -5510,7 +5523,6 @@ export type ArticleEntityResponseCollectionResolvers<
 > = {
     nodes?: Resolver<Array<ResolversTypes['Article']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ArticleRelationResponseCollectionResolvers<
@@ -5519,7 +5531,6 @@ export type ArticleRelationResponseCollectionResolvers<
         ResolversParentTypes['ArticleRelationResponseCollection'] = ResolversParentTypes['ArticleRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['Article']>, ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type AuthorResolvers<
@@ -5567,7 +5578,6 @@ export type AuthorEntityResponseCollectionResolvers<
 > = {
     nodes?: Resolver<Array<ResolversTypes['Author']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type AuthorRelationResponseCollectionResolvers<
@@ -5576,7 +5586,6 @@ export type AuthorRelationResponseCollectionResolvers<
         ResolversParentTypes['AuthorRelationResponseCollection'] = ResolversParentTypes['AuthorRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['Author']>, ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type CategoryResolvers<
@@ -5627,7 +5636,6 @@ export type CategoryEntityResponseCollectionResolvers<
 > = {
     nodes?: Resolver<Array<ResolversTypes['Category']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type CategoryRelationResponseCollectionResolvers<
@@ -5636,7 +5644,6 @@ export type CategoryRelationResponseCollectionResolvers<
         ResolversParentTypes['CategoryRelationResponseCollection'] = ResolversParentTypes['CategoryRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['Category']>, ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentResolvers<
@@ -6575,7 +6582,6 @@ export type ComponentEntityResponseCollectionResolvers<
 > = {
     nodes?: Resolver<Array<ResolversTypes['Component']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentLabelsActionsResolvers<
@@ -6645,7 +6651,6 @@ export type ComponentRelationResponseCollectionResolvers<
         ResolversParentTypes['ComponentRelationResponseCollection'] = ResolversParentTypes['ComponentRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['Component']>, ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ComponentSeoMetadataResolvers<
@@ -6793,7 +6798,6 @@ export type ConfigurableTextsRelationResponseCollectionResolvers<
         ResolversParentTypes['ConfigurableTextsRelationResponseCollection'] = ResolversParentTypes['ConfigurableTextsRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['ConfigurableTexts']>, ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type CreateAccountPageResolvers<
@@ -6846,7 +6850,6 @@ export type CreateAccountPageRelationResponseCollectionResolvers<
         ResolversParentTypes['CreateAccountPageRelationResponseCollection'] = ResolversParentTypes['CreateAccountPageRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['CreateAccountPage']>, ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type CreateNewPasswordPageResolvers<
@@ -6881,7 +6884,6 @@ export type CreateNewPasswordPageRelationResponseCollectionResolvers<
         ResolversParentTypes['CreateNewPasswordPageRelationResponseCollection'] = ResolversParentTypes['CreateNewPasswordPageRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['CreateNewPasswordPage']>, ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {
@@ -6893,7 +6895,6 @@ export type DeleteMutationResponseResolvers<
     ParentType extends ResolversParentTypes['DeleteMutationResponse'] = ResolversParentTypes['DeleteMutationResponse'],
 > = {
     documentId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ErrorResolvers<
@@ -6938,7 +6939,6 @@ export type FilterItemEntityResponseCollectionResolvers<
 > = {
     nodes?: Resolver<Array<ResolversTypes['FilterItem']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type FilterItemFieldDynamicZoneResolvers<
@@ -6964,7 +6964,6 @@ export type FilterItemRelationResponseCollectionResolvers<
         ResolversParentTypes['FilterItemRelationResponseCollection'] = ResolversParentTypes['FilterItemRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['FilterItem']>, ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type FooterResolvers<
@@ -7002,7 +7001,6 @@ export type FooterEntityResponseCollectionResolvers<
 > = {
     nodes?: Resolver<Array<ResolversTypes['Footer']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type FooterItemsDynamicZoneResolvers<
@@ -7027,7 +7025,6 @@ export type FooterRelationResponseCollectionResolvers<
         ResolversParentTypes['FooterRelationResponseCollection'] = ResolversParentTypes['FooterRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['Footer']>, ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type GenericMorphResolvers<
@@ -7168,7 +7165,6 @@ export type HeaderEntityResponseCollectionResolvers<
 > = {
     nodes?: Resolver<Array<ResolversTypes['Header']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type HeaderItemsDynamicZoneResolvers<
@@ -7193,7 +7189,6 @@ export type HeaderRelationResponseCollectionResolvers<
         ResolversParentTypes['HeaderRelationResponseCollection'] = ResolversParentTypes['HeaderRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['Header']>, ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type I18NLocaleResolvers<
@@ -7220,7 +7215,6 @@ export type I18NLocaleEntityResponseCollectionResolvers<
 > = {
     nodes?: Resolver<Array<ResolversTypes['I18NLocale']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export interface JsonScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['JSON'], any> {
@@ -7265,7 +7259,6 @@ export type LoginPageRelationResponseCollectionResolvers<
         ResolversParentTypes['LoginPageRelationResponseCollection'] = ResolversParentTypes['LoginPageRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['LoginPage']>, ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type MappingResolvers<
@@ -7288,7 +7281,6 @@ export type MappingEntityResponseCollectionResolvers<
 > = {
     nodes?: Resolver<Array<ResolversTypes['Mapping']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type MutationResolvers<
@@ -7776,7 +7768,6 @@ export type NotFoundPageRelationResponseCollectionResolvers<
         ResolversParentTypes['NotFoundPageRelationResponseCollection'] = ResolversParentTypes['NotFoundPageRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['NotFoundPage']>, ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type OrganizationListResolvers<
@@ -7805,7 +7796,6 @@ export type OrganizationListRelationResponseCollectionResolvers<
         ResolversParentTypes['OrganizationListRelationResponseCollection'] = ResolversParentTypes['OrganizationListRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['OrganizationList']>, ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type PageResolvers<
@@ -7847,7 +7837,6 @@ export type PageEntityResponseCollectionResolvers<
 > = {
     nodes?: Resolver<Array<ResolversTypes['Page']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type PageRelationResponseCollectionResolvers<
@@ -7856,7 +7845,6 @@ export type PageRelationResponseCollectionResolvers<
         ResolversParentTypes['PageRelationResponseCollection'] = ResolversParentTypes['PageRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['Page']>, ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type PageTemplateDynamicZoneResolvers<
@@ -7884,7 +7872,6 @@ export type PaginationResolvers<
     pageCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     pageSize?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
     total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type QueryResolvers<
@@ -8315,7 +8302,6 @@ export type ResetPasswordPageRelationResponseCollectionResolvers<
         ResolversParentTypes['ResetPasswordPageRelationResponseCollection'] = ResolversParentTypes['ResetPasswordPageRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['ResetPasswordPage']>, ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ReviewWorkflowsWorkflowResolvers<
@@ -8352,7 +8338,6 @@ export type ReviewWorkflowsWorkflowEntityResponseCollectionResolvers<
 > = {
     nodes?: Resolver<Array<ResolversTypes['ReviewWorkflowsWorkflow']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ReviewWorkflowsWorkflowStageResolvers<
@@ -8377,7 +8362,6 @@ export type ReviewWorkflowsWorkflowStageEntityResponseCollectionResolvers<
 > = {
     nodes?: Resolver<Array<ResolversTypes['ReviewWorkflowsWorkflowStage']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ReviewWorkflowsWorkflowStageRelationResponseCollectionResolvers<
@@ -8386,7 +8370,6 @@ export type ReviewWorkflowsWorkflowStageRelationResponseCollectionResolvers<
         ResolversParentTypes['ReviewWorkflowsWorkflowStageRelationResponseCollection'] = ResolversParentTypes['ReviewWorkflowsWorkflowStageRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['ReviewWorkflowsWorkflowStage']>, ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type SurveyJsFormResolvers<
@@ -8413,7 +8396,6 @@ export type SurveyJsFormEntityResponseCollectionResolvers<
 > = {
     nodes?: Resolver<Array<ResolversTypes['SurveyJsForm']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ThemeResolvers<
@@ -8436,7 +8418,6 @@ export type ThemeEntityResponseCollectionResolvers<
 > = {
     nodes?: Resolver<Array<ResolversTypes['Theme']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ThemeRelationResponseCollectionResolvers<
@@ -8445,7 +8426,6 @@ export type ThemeRelationResponseCollectionResolvers<
         ResolversParentTypes['ThemeRelationResponseCollection'] = ResolversParentTypes['ThemeRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['Theme']>, ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type TranslateBatchTranslateJobResolvers<
@@ -8475,7 +8455,6 @@ export type TranslateBatchTranslateJobEntityResponseCollectionResolvers<
 > = {
     nodes?: Resolver<Array<ResolversTypes['TranslateBatchTranslateJob']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type TranslateUpdatedEntryResolvers<
@@ -8499,7 +8478,6 @@ export type TranslateUpdatedEntryEntityResponseCollectionResolvers<
 > = {
     nodes?: Resolver<Array<ResolversTypes['TranslateUpdatedEntry']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type UploadFileResolvers<
@@ -8535,7 +8513,6 @@ export type UploadFileEntityResponseCollectionResolvers<
 > = {
     nodes?: Resolver<Array<ResolversTypes['UploadFile']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type UploadFileRelationResponseCollectionResolvers<
@@ -8544,7 +8521,6 @@ export type UploadFileRelationResponseCollectionResolvers<
         ResolversParentTypes['UploadFileRelationResponseCollection'] = ResolversParentTypes['UploadFileRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['UploadFile']>, ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type UsersPermissionsCreateRolePayloadResolvers<
@@ -8553,7 +8529,6 @@ export type UsersPermissionsCreateRolePayloadResolvers<
         ResolversParentTypes['UsersPermissionsCreateRolePayload'] = ResolversParentTypes['UsersPermissionsCreateRolePayload'],
 > = {
     ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type UsersPermissionsDeleteRolePayloadResolvers<
@@ -8562,7 +8537,6 @@ export type UsersPermissionsDeleteRolePayloadResolvers<
         ResolversParentTypes['UsersPermissionsDeleteRolePayload'] = ResolversParentTypes['UsersPermissionsDeleteRolePayload'],
 > = {
     ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type UsersPermissionsLoginPayloadResolvers<
@@ -8572,7 +8546,6 @@ export type UsersPermissionsLoginPayloadResolvers<
 > = {
     jwt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     user?: Resolver<ResolversTypes['UsersPermissionsMe'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type UsersPermissionsMeResolvers<
@@ -8586,7 +8559,6 @@ export type UsersPermissionsMeResolvers<
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     role?: Resolver<Maybe<ResolversTypes['UsersPermissionsMeRole']>, ParentType, ContextType>;
     username?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type UsersPermissionsMeRoleResolvers<
@@ -8597,7 +8569,6 @@ export type UsersPermissionsMeRoleResolvers<
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type UsersPermissionsPasswordPayloadResolvers<
@@ -8606,7 +8577,6 @@ export type UsersPermissionsPasswordPayloadResolvers<
         ResolversParentTypes['UsersPermissionsPasswordPayload'] = ResolversParentTypes['UsersPermissionsPasswordPayload'],
 > = {
     ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type UsersPermissionsPermissionResolvers<
@@ -8629,7 +8599,6 @@ export type UsersPermissionsPermissionRelationResponseCollectionResolvers<
         ResolversParentTypes['UsersPermissionsPermissionRelationResponseCollection'] = ResolversParentTypes['UsersPermissionsPermissionRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['UsersPermissionsPermission']>, ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type UsersPermissionsRoleResolvers<
@@ -8677,7 +8646,6 @@ export type UsersPermissionsRoleEntityResponseCollectionResolvers<
 > = {
     nodes?: Resolver<Array<ResolversTypes['UsersPermissionsRole']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type UsersPermissionsUpdateRolePayloadResolvers<
@@ -8686,7 +8654,6 @@ export type UsersPermissionsUpdateRolePayloadResolvers<
         ResolversParentTypes['UsersPermissionsUpdateRolePayload'] = ResolversParentTypes['UsersPermissionsUpdateRolePayload'],
 > = {
     ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type UsersPermissionsUserResolvers<
@@ -8712,7 +8679,6 @@ export type UsersPermissionsUserEntityResponseResolvers<
         ResolversParentTypes['UsersPermissionsUserEntityResponse'] = ResolversParentTypes['UsersPermissionsUserEntityResponse'],
 > = {
     data?: Resolver<Maybe<ResolversTypes['UsersPermissionsUser']>, ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type UsersPermissionsUserEntityResponseCollectionResolvers<
@@ -8722,7 +8688,6 @@ export type UsersPermissionsUserEntityResponseCollectionResolvers<
 > = {
     nodes?: Resolver<Array<ResolversTypes['UsersPermissionsUser']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type UsersPermissionsUserRelationResponseCollectionResolvers<
@@ -8731,7 +8696,6 @@ export type UsersPermissionsUserRelationResponseCollectionResolvers<
         ResolversParentTypes['UsersPermissionsUserRelationResponseCollection'] = ResolversParentTypes['UsersPermissionsUserRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['UsersPermissionsUser']>, ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = any> = {
@@ -9175,7 +9139,7 @@ export type FooterFragment = {
               description?: string;
               page?: { slug: string; permissions?: { __typename: 'ComponentSeoUserRoles'; roles?: any } };
           }
-        | {}
+        | Record<PropertyKey, never>
     >;
 };
 
@@ -9208,7 +9172,7 @@ export type HeaderFragment = {
               description?: string;
               page?: { slug: string; permissions?: { __typename: 'ComponentSeoUserRoles'; roles?: any } };
           }
-        | {}
+        | Record<PropertyKey, never>
     >;
     notification?: { slug: string; SEO: { title: string } };
     userInfo?: { slug: string; SEO: { title: string } };
@@ -10961,7 +10925,6 @@ export type GetComponentQuery = {
                   chartTitle: string;
                   chartPreviousPeriodLabel: string;
                   chartCurrentPeriodLabel: string;
-                  showChart?: boolean;
                   ranges?: Array<{
                       id: string;
                       label: string;
@@ -11273,7 +11236,7 @@ export type GetFooterQuery = {
                   description?: string;
                   page?: { slug: string; permissions?: { __typename: 'ComponentSeoUserRoles'; roles?: any } };
               }
-            | {}
+            | Record<PropertyKey, never>
         >;
     };
 };
@@ -11313,7 +11276,7 @@ export type GetHeaderQuery = {
                   description?: string;
                   page?: { slug: string; permissions?: { __typename: 'ComponentSeoUserRoles'; roles?: any } };
               }
-            | {}
+            | Record<PropertyKey, never>
         >;
         notification?: { slug: string; SEO: { title: string } };
         userInfo?: { slug: string; SEO: { title: string } };

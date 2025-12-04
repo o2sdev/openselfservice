@@ -1,6 +1,6 @@
 {
     "name": "@o2s/integrations.strapi-cms",
-    "version": "2.7.0",
+    "version": "2.8.0",
     "private": false,
     "license": "MIT",
     "exports": {
@@ -25,14 +25,15 @@
         "graphql-tag": "2.12.6"
     },
     "devDependencies": {
-        "@graphql-codegen/add": "^5.0.3",
-        "@graphql-codegen/cli": "^5.0.7",
-        "@graphql-codegen/introspection": "^4.0.3",
-        "@graphql-codegen/typescript": "^4.1.6",
+        "@graphql-codegen/add": "^6.0.0",
+        "@graphql-codegen/cli": "^6.1.0",
+        "@graphql-codegen/introspection": "^5.0.0",
+        "@graphql-codegen/typescript": "^5.0.6",
         "@graphql-codegen/typescript-graphql-request": "^6.3.0",
-        "@graphql-codegen/typescript-operations": "^4.6.1",
-        "@graphql-codegen/typescript-resolvers": "^4.5.2",
+        "@graphql-codegen/typescript-operations": "^5.0.6",
+        "@graphql-codegen/typescript-resolvers": "^5.1.4",
         "@o2s/eslint-config": "*",
+        "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "concurrently": "^9.2.1",

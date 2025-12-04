@@ -1,6 +1,6 @@
 {
     "name": "@o2s/integrations.mocked",
-    "version": "1.13.1",
+    "version": "1.14.0",
     "private": false,
     "license": "MIT",
     "exports": {
@@ -41,6 +41,7 @@
     "devDependencies": {
         "@types/jsonwebtoken": "^9.0.10",
         "@o2s/eslint-config": "*",
+        "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "@o2s/telemetry": "*",

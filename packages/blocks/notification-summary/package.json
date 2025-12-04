@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.notification-summary",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "private": false,
     "license": "MIT",
     "description": "Displays a dynamic NotificationSummary showing notification counts grouped by priority.",
@@ -14,9 +14,8 @@
         "dist"
     ],
     "scripts": {
-        "dev": "tsc --build tsconfig.json  && (concurrently \"tsc --build tsconfig.json -w\" \"tsc-alias -w\")",
         "build": "tsc --build tsconfig.json && tsc-alias",
-        "lint": "tsc --noEmit && eslint \"{src,apps,libs,test}/**/*.{ts,tsx}\" --fix",
+        "lint": "tsc --noEmit && eslint \"src/**/*.{ts,tsx}\" --fix --max-warnings=0",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
@@ -28,15 +27,16 @@
         "@o2s/configs.integrations": "*"
     },
     "devDependencies": {
-        "dotenv-cli": "^8.0.0",
+        "dotenv-cli": "^11.0.0",
         "@o2s/eslint-config": "*",
+        "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "concurrently": "^9.1.2",
         "eslint": "^9.27.0",
         "prettier": "^3.5.3",
         "tsc-alias": "^1.8.16",
-        "typescript": "^5.8.3"
+        "typescript": "^5.9.3"
     },
     "peerDependencies": {
         "@types/react": "^19",
