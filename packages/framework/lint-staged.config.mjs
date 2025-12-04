@@ -1,4 +1,3 @@
-export default {
-    '*.{js,jsx,ts,tsx,css,scss}': ['npm run format --'],
-    '*.{js,jsx,ts,tsx}': ['npm run lint --'],
-};
+import { config } from '@o2s/lint-staged-config/base';
+
+export default config;

@@ -78,6 +78,7 @@
         "@nestjs/schematics": "^11.0.9",
         "@nestjs/testing": "^11.1.9",
         "@o2s/eslint-config": "*",
+        "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "@swc/cli": "^0.7.9",

@@ -1,4 +1,3 @@
-export default {
-    '*.{js,jsx,ts,tsx,css,scss}': ['prettier --write'],
-    '*.{js,jsx,ts,tsx}': ['eslint "{src,apps,libs,test}/**/*.{ts,tsx}" --fix'],
-};
+import { config } from '@o2s/lint-staged-config/base';
+
+export default config;
