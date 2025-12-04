@@ -8,7 +8,7 @@
         "start": "turbo start",
         "format": "turbo format",
         "lint": "turbo lint",
-        "test": "turbo test &  vitest --project=storybook",
+        "test": "turbo test & vitest --project=storybook",
         "generate": "turbo gen",
         "eject-block": "ts-node ./scripts/cli.ts eject-block",
         "docs": "turbo start --filter=@o2s/docs",
