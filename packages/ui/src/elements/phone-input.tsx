@@ -9,13 +9,9 @@ import {
 } from 'libphonenumber-js/core';
 import React, { useCallback, useMemo } from 'react';
 
-import { InputWithDetails, InputWithDetailsProps } from './input';
+import { InputWithDetails } from './input';
 import { phoneInputMetadata } from './phone-input-metadata';
 import { PhoneInputProps } from './phone-input.types';
-
-const InputWrapper = (props: InputWithDetailsProps) => {
-    return <InputWithDetails {...props} />;
-};
 
 export const formatPhoneNumber = (value: string, country?: CountryCode): string => {
     if (!value) {
@@ -111,12 +107,11 @@ export const PhoneInput: React.FC<PhoneInputProps> = ({
             format={format}
             parse={parsePhoneNumberCharacter}
             // @ts-expect-error - InputFormat types expect basic input props, but InputWithDetails requires additional props (label, hasError, etc.)
-            inputComponent={InputWrapper}
+            inputComponent={InputWithDetails}
             {...props}
             value={formattedPhone}
             onPaste={handlePaste}
-            // @ts-expect-error - InputFormat's onChange type is an impossible intersection of ChangeEventHandler & (value?: string) => void
-            onChange={handleChange}
+            onChange={(event) => handleChange(typeof event === 'string' ? event : event?.target.value)}
             type="tel"
             inputMode="tel"
             hasError={hasError || (formattedPhone.length > 0 && !isValid)}

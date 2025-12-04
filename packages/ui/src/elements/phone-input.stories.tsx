@@ -8,6 +8,9 @@ const meta = {
     title: 'Elements/PhoneInput',
     component: PhoneInput,
     tags: ['autodocs'],
+    args: {
+        onChange: () => {},
+    },
     argTypes: {
         defaultCountry: {
             control: 'select',
@@ -47,9 +50,6 @@ export const Default: Story = {
         label: 'Phone Number',
         placeholder: 'Enter phone number',
         defaultCountry: 'PL',
-        onChange: (value: string, isValid: boolean) => {
-            console.log('Phone changed:', value, 'Valid:', isValid);
-        },
     },
     render: (args) => <PhoneInputWrapper {...args} initialValue="" />,
 };
@@ -60,9 +60,6 @@ export const WithPolishNumber: Story = {
         placeholder: 'Enter Polish phone number',
         defaultCountry: 'PL',
         caption: 'Format: +48 XXX XXX XXX',
-        onChange: (value: string, isValid: boolean) => {
-            console.log('Phone changed:', value, 'Valid:', isValid);
-        },
     },
     render: (args) => <PhoneInputWrapper {...args} initialValue="500500500" />,
 };
@@ -73,9 +70,6 @@ export const WithGermanNumber: Story = {
         placeholder: 'Enter German phone number',
         defaultCountry: 'DE',
         caption: 'Format: +49 XXX XXXXXXX',
-        onChange: (value: string, isValid: boolean) => {
-            console.log('Phone changed:', value, 'Valid:', isValid);
-        },
     },
     render: (args) => <PhoneInputWrapper {...args} initialValue="15012345678" />,
 };
@@ -86,9 +80,6 @@ export const WithBritishNumber: Story = {
         placeholder: 'Enter British phone number',
         defaultCountry: 'GB',
         caption: 'Format: +44 XXXX XXXXXX',
-        onChange: (value: string, isValid: boolean) => {
-            console.log('Phone changed:', value, 'Valid:', isValid);
-        },
     },
     render: (args) => <PhoneInputWrapper {...args} initialValue="7400123456" />,
 };
@@ -120,9 +111,6 @@ export const WithValidation: Story = {
         caption: 'The input will show validation errors for invalid numbers',
         isRequired: true,
         requiredLabel: 'required',
-        onChange: (value: string, isValid: boolean) => {
-            console.log('Phone changed:', value, 'Valid:', isValid);
-        },
     },
     render: (args) => <WithValidationWrapper {...args} />,
 };
@@ -133,9 +121,6 @@ export const Disabled: Story = {
         placeholder: 'Enter phone number',
         defaultCountry: 'PL',
         disabled: true,
-        onChange: (value: string, isValid: boolean) => {
-            console.log('Phone changed:', value, 'Valid:', isValid);
-        },
     },
     render: (args) => <PhoneInputWrapper {...args} initialValue="+48 500 500 500" />,
 };
@@ -147,9 +132,6 @@ export const WithError: Story = {
         defaultCountry: 'PL',
         hasError: true,
         errorMessage: 'This field is required',
-        onChange: (value: string, isValid: boolean) => {
-            console.log('Phone changed:', value, 'Valid:', isValid);
-        },
     },
     render: (args) => <PhoneInputWrapper {...args} initialValue="" />,
 };
