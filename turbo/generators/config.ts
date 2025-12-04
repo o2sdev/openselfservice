@@ -277,11 +277,6 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                 path: 'packages/blocks/{{kebabCase name}}/src/sdk/{{kebabCase name}}.ts',
                 templateFile: 'templates/block/sdk/block.hbs',
             },
-            {
-                type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/sdk/{{kebabCase name}}.spec.ts',
-                templateFile: 'templates/block/sdk/block.spec.hbs',
-            },
 
             // CONFIG
             {
