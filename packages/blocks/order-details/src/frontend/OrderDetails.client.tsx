@@ -119,7 +119,7 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
 
     const [isPending, startTransition] = useTransition();
 
-    const handleFilter = (data: Partial<any>) => {
+    const handleFilter = (data: Partial<Request.GetOrderDetailsBlockQuery>) => {
         startTransition(async () => {
             try {
                 const newFilters = { ...filters, ...data };
