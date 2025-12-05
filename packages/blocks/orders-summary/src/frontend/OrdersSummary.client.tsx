@@ -146,7 +146,10 @@ export const OrdersSummaryPure: React.FC<Readonly<OrdersSummaryPureProps>> = ({
                     </div>
 
                     <div
-                        className={cn('w-full flex gap-6', data.chart.showChart ? 'flex-col lg:flex-row' : 'flex-col')}
+                        className={cn(
+                            'w-full grid gap-6',
+                            data.chart.showChart ? 'grid-cols-1 lg:grid-cols-2' : 'grid-cols-1',
+                        )}
                     >
                         {data.chart.showChart ? (
                             <>
