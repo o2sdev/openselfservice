@@ -57,7 +57,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                             </ul>
                         )}
 
-                        <RichText content={description} className="text-muted-foreground" />
+                        <RichText
+                            content={description}
+                            className="text-muted-foreground line-clamp-3 overflow-ellipsis"
+                        />
                     </div>
                 </div>
 

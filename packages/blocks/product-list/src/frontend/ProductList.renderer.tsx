@@ -1,7 +1,6 @@
 import { useLocale } from 'next-intl';
 import React, { Suspense } from 'react';
 
-import { Container } from '@o2s/ui/components/Container';
 import { Loading } from '@o2s/ui/components/Loading';
 
 import { ProductList } from './ProductList.server';
@@ -14,12 +13,9 @@ export const ProductListRenderer: React.FC<ProductListRendererProps> = ({ id, ac
         <Suspense
             key={id}
             fallback={
-                <>
-                    <Loading bars={1} />
-                    <Container variant="narrow">
-                        <Loading bars={8} />
-                    </Container>
-                </>
+                <div className="w-full flex flex-col gap-6">
+                    <Loading bars={[30, 23]} />
+                </div>
             }
         >
             <ProductList id={id} accessToken={accessToken} locale={locale} routing={routing} />
