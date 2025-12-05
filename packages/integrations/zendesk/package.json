@@ -1,6 +1,6 @@
 {
   "name": "@o2s/integrations.zendesk",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "private": false,
   "license": "MIT",
   "exports": {
@@ -12,7 +12,7 @@
   "scripts": {
     "prepare": "npm run fetch-oas && npm run generate-types",
     "build": "tsc --preserveWatchOutput && tsc-alias",
-    "lint": "tsc --noEmit && eslint ./src --max-warnings 0",
+    "lint": "tsc --noEmit && eslint ./src --max-warnings=0",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\"",
     "fetch-oas": "tsx scripts/oas/fetch-zendesk-oas.ts",
     "generate-types": "tsx scripts/oas/generate-zendesk-types.ts"
@@ -32,7 +32,7 @@
     "@o2s/typescript-config": "*",
     "concurrently": "^9.2.1",
     "eslint": "^9.39.1",
-    "prettier": "^3.6.2",
+    "prettier": "^3.7.4",
     "tsc-alias": "^1.8.16",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"

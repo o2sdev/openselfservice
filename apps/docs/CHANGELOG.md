@@ -1,5 +1,11 @@
 # @o2s/docs
 
+## 1.5.1
+
+### Patch Changes
+
+- 221dc2c: fix: added missing Eslint command to list-staged
+
 ## 1.5.0
 
 ### Minor Changes

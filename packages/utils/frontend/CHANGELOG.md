@@ -1,5 +1,14 @@
 # @o2s/utils.frontend
 
+## 0.2.1
+
+### Patch Changes
+
+- 221dc2c: fix: added missing Eslint command to list-staged
+- Updated dependencies [db5b381]
+- Updated dependencies [c2d9438]
+    - @o2s/framework@1.14.0
+
 ## 0.2.0
 
 ### Minor Changes

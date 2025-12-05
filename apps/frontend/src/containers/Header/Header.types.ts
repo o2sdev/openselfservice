@@ -8,4 +8,5 @@ export interface HeaderProps {
     alternativeUrls?: {
         [key: string]: string;
     };
+    shouldIncludeSignInButton?: boolean;
 }

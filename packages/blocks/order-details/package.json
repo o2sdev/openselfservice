@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.order-details",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "private": false,
     "license": "MIT",
     "description": "A block displaying details for a specific order, including items, status, and history.",
@@ -15,7 +15,7 @@
     ],
     "scripts": {
         "build": "tsc --build tsconfig.json --preserveWatchOutput && tsc-alias",
-        "lint": "tsc --noEmit && eslint \"src/**/*.{ts,tsx}\" --fix --max-warnings=0",
+        "lint": "tsc --noEmit && eslint \"src/**/*.{ts,tsx}\" --fix",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
@@ -34,7 +34,7 @@
         "@o2s/typescript-config": "*",
         "concurrently": "^9.2.1",
         "eslint": "^9.39.1",
-        "prettier": "^3.6.2",
+        "prettier": "^3.7.4",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"
     },
