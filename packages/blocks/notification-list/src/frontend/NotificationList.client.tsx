@@ -8,6 +8,10 @@ import { Mappings } from '@o2s/utils.frontend';
 
 import { cn } from '@o2s/ui/lib/utils';
 
+import { toast } from '@o2s/ui/hooks/use-toast';
+
+import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
+
 import type { DataListColumnConfig } from '@o2s/ui/components/DataList';
 import { DataView } from '@o2s/ui/components/DataView';
 import { FiltersSection } from '@o2s/ui/components/Filters';
@@ -31,6 +35,7 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({
     ...component
 }) => {
     const { Link: LinkComponent } = createNavigation(routing);
+    const { labels } = useGlobalContext();
 
     const initialFilters: Request.GetNotificationListBlockQuery = {
         id: component.id,
@@ -51,20 +56,40 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({
 
     const handleFilter = (data: Partial<Request.GetNotificationListBlockQuery>) => {
         startTransition(async () => {
-            const newFilters = { ...filters, ...data };
-            const newData = await sdk.blocks.getNotificationList(newFilters, { 'x-locale': locale }, accessToken);
+            try {
+                const newFilters = { ...filters, ...data };
+                const newData = await sdk.blocks.getNotificationList(newFilters, { 'x-locale': locale }, accessToken);
 
-            setFilters(newFilters);
-            setData(newData);
+                setFilters(newFilters);
+                setData(newData);
+            } catch (_error) {
+                toast({
+                    variant: 'destructive',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
+                });
+            }
         });
     };
 
     const handleReset = () => {
         startTransition(async () => {
-            const newData = await sdk.blocks.getNotificationList(initialFilters, { 'x-locale': locale }, accessToken);
+            try {
+                const newData = await sdk.blocks.getNotificationList(
+                    initialFilters,
+                    { 'x-locale': locale },
+                    accessToken,
+                );
 
-            setFilters(initialFilters);
-            setData(newData);
+                setFilters(initialFilters);
+                setData(newData);
+            } catch (_error) {
+                toast({
+                    variant: 'destructive',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
+                });
+            }
         });
     };
 
