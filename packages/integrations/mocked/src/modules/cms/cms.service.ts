@@ -5,11 +5,18 @@ import { CMS } from '@o2s/framework/modules';
 
 import { mapArticleListBlock } from './mappers/blocks/cms.article-list.mapper';
 import { mapArticleSearchBlock } from './mappers/blocks/cms.article-search.mapper';
+import { mapBentoGridBlock } from './mappers/blocks/cms.bento-grid.mapper';
 import { mapCategoryListBlock } from './mappers/blocks/cms.category-list.mapper';
+import { mapCtaSectionBlock } from './mappers/blocks/cms.cta-section.mapper';
+import { mapDocumentListBlock } from './mappers/blocks/cms.document-list.mapper';
 import { mapFaqBlock } from './mappers/blocks/cms.faq.mapper';
+import { mapFeatureSectionGridBlock } from './mappers/blocks/cms.feature-section-grid.mapper';
+import { mapFeatureSectionBlock } from './mappers/blocks/cms.feature-section.mapper';
 import { mapFeaturedServiceListBlock } from './mappers/blocks/cms.featured-service-list.mapper';
+import { mapHeroSectionBlock } from './mappers/blocks/cms.hero-section.mapper';
 import { mapInvoiceDetailsBlock } from './mappers/blocks/cms.invoice-details.mapper';
 import { mapInvoiceListBlock } from './mappers/blocks/cms.invoice-list.mapper';
+import { mapMediaSectionBlock } from './mappers/blocks/cms.media-section.mapper';
 import { mapNotificationDetailsBlock } from './mappers/blocks/cms.notification-details.mapper';
 import { mapNotificationListBlock } from './mappers/blocks/cms.notification-list.mapper';
 import { mapNotificationSummaryBlock } from './mappers/blocks/cms.notification-summary.mapper';
@@ -18,6 +25,8 @@ import { mapOrderListBlock } from './mappers/blocks/cms.order-list.mapper';
 import { mapOrdersSummaryBlock } from './mappers/blocks/cms.orders-summary.mapper';
 import { mapPaymentsHistoryBlock } from './mappers/blocks/cms.payments-history.mapper';
 import { mapPaymentsSummaryBlock } from './mappers/blocks/cms.payments-summary.mapper';
+import { mapPricingSectionBlock } from './mappers/blocks/cms.pricing-section.mapper';
+import { mapProductListBlock } from './mappers/blocks/cms.product-list.mapper';
 import { mapResourceDetailsBlock } from './mappers/blocks/cms.resource-details.mapper';
 import { mapResourceListBlock } from './mappers/blocks/cms.resource-list.mapper';
 import { mapServiceDetailsBlock } from './mappers/blocks/cms.service-details.mapper';
@@ -131,7 +140,7 @@ export class CmsService implements CMS.Service {
     }
 
     getPaymentsSummaryBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapPaymentsSummaryBlock(options.locale)).pipe(responseDelay());
+        return of(mapPaymentsSummaryBlock(options.id, options.locale)).pipe(responseDelay());
     }
 
     getPaymentsHistoryBlock(options: CMS.Request.GetCmsEntryParams) {
@@ -194,7 +203,43 @@ export class CmsService implements CMS.Service {
         return of(mapFeaturedServiceListBlock(options.locale)).pipe(responseDelay());
     }
 
+    getProductListBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapProductListBlock(options.locale)).pipe(responseDelay());
+    }
+
     getTicketSummaryBlock(options: CMS.Request.GetCmsEntryParams) {
         return of(mapTicketSummaryBlock(options.locale)).pipe(responseDelay());
+    }
+
+    getBentoGridBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapBentoGridBlock(options)).pipe(responseDelay());
+    }
+
+    getCtaSectionBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapCtaSectionBlock(options)).pipe(responseDelay());
+    }
+
+    getDocumentListBlock(_options: CMS.Request.GetCmsEntryParams) {
+        return of(mapDocumentListBlock(_options.locale)).pipe(responseDelay());
+    }
+
+    getFeatureSectionBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapFeatureSectionBlock(options)).pipe(responseDelay());
+    }
+
+    getFeatureSectionGridBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapFeatureSectionGridBlock(options)).pipe(responseDelay());
+    }
+
+    getHeroSectionBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapHeroSectionBlock(options)).pipe(responseDelay());
+    }
+
+    getMediaSectionBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapMediaSectionBlock(options)).pipe(responseDelay());
+    }
+
+    getPricingSectionBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapPricingSectionBlock(options)).pipe(responseDelay());
     }
 }

@@ -1,6 +1,6 @@
 {
     "name": "@o2s/integrations.mocked",
-    "version": "1.13.1",
+    "version": "1.15.0",
     "private": false,
     "license": "MIT",
     "exports": {
@@ -18,10 +18,9 @@
     "scripts": {
         "prepare": "npx prisma generate && dotenv -e .env.local -- prisma migrate deploy && dotenv -e .env.local -- prisma db seed",
         "postinstall": "npx prisma generate",
-        "dev": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")",
-        "build": "dotenv -e .env.local -- prisma migrate deploy && tsc && tsc-alias",
+        "build": "dotenv -e .env.local -- prisma migrate deploy && tsc --preserveWatchOutput && tsc-alias",
         "postbuild": "shx cp -r src/modules/invoices/resources dist/modules/invoices/",
-        "lint": "tsc --noEmit && eslint . --max-warnings 0",
+        "lint": "tsc --noEmit && eslint . --max-warnings=0",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\"",
         "seed": "dotenv -e .env.local -- tsx prisma/seed.ts"
     },
@@ -34,7 +33,7 @@
         "@prisma/client": "^6.19.0",
         "bcryptjs": "^3.0.3",
         "dotenv-cli": "^11.0.0",
-        "jsonwebtoken": "^9.0.2",
+        "jsonwebtoken": "^9.0.3",
         "prisma": "^6.19.0",
         "@o2s/framework": "*",
         "@o2s/utils.logger": "*"
@@ -42,12 +41,13 @@
     "devDependencies": {
         "@types/jsonwebtoken": "^9.0.10",
         "@o2s/eslint-config": "*",
+        "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "@o2s/telemetry": "*",
         "concurrently": "^9.2.1",
         "eslint": "^9.39.1",
-        "prettier": "^3.6.2",
+        "prettier": "^3.7.4",
         "shx": "^0.4.0",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"

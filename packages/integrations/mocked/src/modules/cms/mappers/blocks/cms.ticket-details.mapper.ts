@@ -74,7 +74,7 @@ const MOCK_TICKET_DETAILS_BLOCK_PL: CMS.Model.TicketDetailsBlock.TicketDetailsBl
             LOW_PRIORITY: 'Niski priorytet',
         },
         status: {
-            OPEN: 'W trakcie rozpatrywania',
+            OPEN: 'W rozpatrzeniu',
             CLOSED: 'Rozwiązane',
             IN_PROGRESS: 'Nowa odpowiedź',
         },

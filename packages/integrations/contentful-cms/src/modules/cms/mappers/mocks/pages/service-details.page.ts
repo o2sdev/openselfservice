@@ -1,7 +1,7 @@
 import { Auth, CMS } from '@o2s/framework/modules';
 
 export const PAGE_SERVICE_DETAILS_EN: CMS.Model.Page.Page = {
-    id: '3',
+    id: '15',
     slug: '/services/(.+)',
     locale: 'en',
     seo: {
@@ -49,7 +49,7 @@ export const PAGE_SERVICE_DETAILS_EN: CMS.Model.Page.Page = {
 };
 
 export const PAGE_SERVICE_DETAILS_DE: CMS.Model.Page.Page = {
-    id: '3',
+    id: '15',
     slug: '/dienstleistungen/(.+)',
     locale: 'de',
     seo: {
@@ -97,7 +97,7 @@ export const PAGE_SERVICE_DETAILS_DE: CMS.Model.Page.Page = {
 };
 
 export const PAGE_SERVICE_DETAILS_PL: CMS.Model.Page.Page = {
-    id: '3',
+    id: '15',
     slug: '/uslugi/(.+)',
     locale: 'pl',
     seo: {

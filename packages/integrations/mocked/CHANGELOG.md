@@ -1,5 +1,44 @@
 # @o2s/integrations.mocked
 
+## 1.15.0
+
+### Minor Changes
+
+- db5b381: fixing various bugs related with blocks and ui components, adding sign-in button in navigation
+- c2d9438: added new blocks from dxp-starter-kit app
+
+### Patch Changes
+
+- 221dc2c: fix: added missing Eslint command to list-staged
+- 235f706: changed mocks for a better page structure
+- Updated dependencies [221dc2c]
+- Updated dependencies [db5b381]
+- Updated dependencies [c2d9438]
+    - @o2s/utils.logger@1.1.3
+    - @o2s/framework@1.14.0
+
+## 1.14.0
+
+### Minor Changes
+
+- 2c780d5: add NotificationSummary and TicketSummary blocks
+- 1653b74: fix: update FilterItem and renderCell components for improved functionality and code clarity
+- c27726a: added a new Product List block with list/tile form of presentation
+- 2c780d5: conditionally render button in InfoCard for improved layout
+- 1653b74: feat(ui): tile version of data lists
+
+### Patch Changes
+
+- 0354126: reworked turbo dev task to optimize CPU/RAM usage
+- Updated dependencies [2c780d5]
+- Updated dependencies [1653b74]
+- Updated dependencies [c27726a]
+- Updated dependencies [2c780d5]
+- Updated dependencies [0354126]
+- Updated dependencies [1653b74]
+    - @o2s/framework@1.13.0
+    - @o2s/utils.logger@1.1.2
+
 ## 1.13.1
 
 ### Patch Changes

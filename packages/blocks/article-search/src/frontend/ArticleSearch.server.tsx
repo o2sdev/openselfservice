@@ -24,6 +24,7 @@ export const ArticleSearch: React.FC<ArticleSearchProps> = async ({
             { 'x-locale': locale },
             accessToken,
         );
+
         return (
             <ArticleSearchDynamic
                 {...data}

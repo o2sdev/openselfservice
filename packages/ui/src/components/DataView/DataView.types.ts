@@ -1,4 +1,4 @@
-import { DataListActionsConfig, DataListColumnConfig } from '../DataList/DataList.types';
+import { DataListActionsConfig, DataListColumnConfig, DataListProps } from '../DataList';
 
 export interface DataViewProps<T> {
     viewMode: 'grid' | 'list';
@@ -16,4 +16,5 @@ export interface DataViewProps<T> {
     data: T[];
     columns: DataListColumnConfig<T>[];
     actions?: DataListActionsConfig<T>;
+    getRowKey?: DataListProps<T>['getRowKey'];
 }

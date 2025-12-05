@@ -40,6 +40,7 @@ import * as OrderList from '@o2s/blocks.order-list/api-harmonization';
 import * as OrdersSummary from '@o2s/blocks.orders-summary/api-harmonization';
 import * as PaymentsHistory from '@o2s/blocks.payments-history/api-harmonization';
 import * as PaymentsSummary from '@o2s/blocks.payments-summary/api-harmonization';
+import * as ProductList from '@o2s/blocks.product-list/api-harmonization';
 import * as QuickLinks from '@o2s/blocks.quick-links/api-harmonization';
 import * as ServiceDetails from '@o2s/blocks.service-details/api-harmonization';
 import * as ServiceList from '@o2s/blocks.service-list/api-harmonization';
@@ -136,6 +137,7 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
         ArticleSearch.Module.register(AppConfig),
         FeaturedServiceList.Module.register(AppConfig),
         ArticleList.Module.register(AppConfig),
+        ProductList.Module.register(AppConfig),
         NotificationSummary.Module.register(AppConfig),
         TicketSummary.Module.register(AppConfig),
         // BLOCK REGISTER

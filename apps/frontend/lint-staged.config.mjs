@@ -1,7 +1,3 @@
-const buildEslintCommand = (filenames) =>
-    `next lint --fix --file ${filenames.join(' --file ')}`;
+import { config } from '@o2s/lint-staged-config/base';
 
-export default {
-    '*.{js,jsx,ts,tsx,css,scss}': ['prettier --write'],
-    '*.{js,jsx,ts,tsx}': [buildEslintCommand],
-};
+export default config;
