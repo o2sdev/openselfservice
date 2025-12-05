@@ -16,6 +16,7 @@ export interface DataViewProps<T> {
     data: T[];
     columns: DataListColumnConfig<T>[];
     actions?: DataListActionsConfig<T>;
+    getRowKey?: (item: T, index: number) => string | number;
     enableRowSelection?: boolean;
     selectedRows?: Set<string | number>;
     onSelectionChange?: (selected: Set<string | number>) => void;

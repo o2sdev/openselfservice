@@ -44,6 +44,7 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
     const [data, setData] = useState(component);
     const [filters, setFilters] = useState(initialFilters);
     const [viewMode, setViewMode] = useState<'list' | 'grid'>(initialViewMode);
+    const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
     const [isPending, startTransition] = useTransition();
 
     const handleFilter = (data: Partial<Request.GetInvoiceListBlockQuery>) => {
@@ -53,6 +54,7 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
 
             setFilters(newFilters);
             setData(newData);
+            setSelectedRows(new Set());
         });
     };
 
@@ -62,6 +64,7 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
 
             setFilters(initialFilters);
             setData(newData);
+            setSelectedRows(new Set());
         });
     };
 
@@ -179,6 +182,10 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
                                         columns={columns}
                                         actions={actions}
                                         cardHeaderSlots={data.cardHeaderSlots}
+                                        enableRowSelection={component.enableRowSelection}
+                                        selectedRows={selectedRows}
+                                        onSelectionChange={setSelectedRows}
+                                        getRowKey={(item) => item.id}
                                     />
 
                                     {data.pagination && (

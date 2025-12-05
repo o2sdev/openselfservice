@@ -8,6 +8,7 @@ export interface InvoiceListProps {
     locale: string;
     routing: ReturnType<typeof defineRouting>;
     hasPriority?: boolean;
+    enableRowSelection?: boolean;
 }
 
 export type InvoiceListPureProps = InvoiceListProps & Model.InvoiceListBlock;

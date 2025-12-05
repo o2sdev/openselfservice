@@ -47,6 +47,7 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
     const [data, setData] = useState<Model.OrderListBlock>(component);
     const [filters, setFilters] = useState(initialFilters);
     const [viewMode, setViewMode] = useState<'list' | 'grid'>(initialViewMode);
+    const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
 
     const [isPending, startTransition] = useTransition();
 
@@ -56,6 +57,7 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
             const newData = await sdk.blocks.getOrderList(newFilters, { 'x-locale': locale }, accessToken);
             setFilters(newFilters);
             setData(newData);
+            setSelectedRows(new Set());
         });
     };
 
@@ -64,6 +66,7 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
             const newData = await sdk.blocks.getOrderList(initialFilters, { 'x-locale': locale }, accessToken);
             setFilters(initialFilters);
             setData(newData);
+            setSelectedRows(new Set());
         });
     };
 
@@ -186,6 +189,10 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
                                     columns={columns}
                                     actions={actions}
                                     cardHeaderSlots={data.cardHeaderSlots}
+                                    enableRowSelection={component.enableRowSelection}
+                                    selectedRows={selectedRows}
+                                    onSelectionChange={setSelectedRows}
+                                    getRowKey={(item) => item.id.value}
                                 />
 
                                 {data.pagination && (
