@@ -3,6 +3,7 @@
     --foreground: hsl(225 9% 9%);
     --card: hsl(220 13% 95%);
     --card-foreground: hsl(240 10% 4%);
+    --card-light: hsl(220 13.04% 95.49%);
     --popover: hsl(0 0% 100%);
     --popover-foreground: hsl(240 10% 4%);
     --primary: hsl(228 66% 50%);
@@ -60,9 +61,10 @@
 
 .theme-dark {
     --background: hsl(226 57% 21%);
-    --foreground: hsl(0 0% 98%);
+    --foreground: #fafafa;
     --card: hsl(224 64% 33%);
     --card-foreground: hsl(0 0% 98%);
+    --card-light: hsl(220 13.04% 95.49%);
     --popover: hsl(240 10% 4%);
     --popover-foreground: hsl(0 0% 98%);
     --primary: hsl(214 100% 97%);

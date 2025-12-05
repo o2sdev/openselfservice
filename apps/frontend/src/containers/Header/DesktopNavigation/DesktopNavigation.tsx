@@ -1,11 +1,13 @@
 'use client';
 
+import { useSession } from 'next-auth/react';
 import React from 'react';
 
 import { Models } from '@o2s/framework/modules';
 
 import { cn } from '@o2s/ui/lib/utils';
 
+import { Button } from '@o2s/ui/elements/button';
 import {
     NavigationMenu,
     NavigationMenuContent,
@@ -19,6 +21,7 @@ import { Separator } from '@o2s/ui/elements/separator';
 import { Typography } from '@o2s/ui/elements/typography';
 
 import { Link as NextLink, usePathname } from '@/i18n';
+import { LOGIN_PATH } from '@/i18n/routing';
 
 import { DesktopNavigationProps } from './DesktopNavigation.types';
 
@@ -29,8 +32,15 @@ export function DesktopNavigation({
     notificationSlot,
     userSlot,
     items,
+    signInLabel,
+    shouldIncludeSignInButton = true,
 }: DesktopNavigationProps) {
+    const session = useSession();
+    const isSignedIn = !!session.data?.user;
     const pathname = usePathname();
+
+    // Show sign in button if user is not signed in, container allows it, and signInLabel is available
+    const showSignInButton = shouldIncludeSignInButton && !isSignedIn && signInLabel;
 
     const activeNavigationGroup = items.find((item) => {
         if (item.__typename === 'NavigationGroup') {
@@ -173,6 +183,13 @@ export function DesktopNavigation({
 
                         {/* Language Selector */}
                         {localeSlot}
+
+                        {/* Sign In Button */}
+                        {showSignInButton && (
+                            <Button asChild variant="tertiary">
+                                <NextLink href={LOGIN_PATH}>{signInLabel}</NextLink>
+                            </Button>
+                        )}
 
                         {/* Notification Button */}
                         {notificationSlot}

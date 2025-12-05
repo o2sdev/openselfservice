@@ -6,9 +6,12 @@ import { cn } from '@o2s/ui/lib/utils';
 
 import { toggleVariants } from '@o2s/ui/elements/toggle';
 
-const ToggleGroupContext = React.createContext<VariantProps<typeof toggleVariants>>({
+const ToggleGroupContext = React.createContext<
+    VariantProps<typeof toggleVariants> & { currentValue?: string | string[] }
+>({
     size: 'default',
     variant: 'default',
+    currentValue: undefined,
 });
 
 const toggleGroupVariants = cva('flex items-center justify-center gap-1', {
@@ -28,6 +31,7 @@ type ToggleGroupProps = React.ComponentPropsWithoutRef<typeof ToggleGroupPrimiti
     VariantProps<typeof toggleVariants> & { ref?: React.Ref<React.ComponentRef<typeof ToggleGroupPrimitive.Root>> };
 const ToggleGroup = ({ className, variant, size, children, ref, ...props }: ToggleGroupProps) => {
     const context = React.useContext(ToggleGroupContext);
+    const currentValue = 'value' in props ? props.value : undefined;
 
     return (
         <ToggleGroupPrimitive.Root
@@ -40,31 +44,56 @@ const ToggleGroup = ({ className, variant, size, children, ref, ...props }: Togg
             )}
             {...props}
         >
-            <ToggleGroupContext.Provider value={{ variant, size }}>{children}</ToggleGroupContext.Provider>
+            <ToggleGroupContext.Provider value={{ variant, size, currentValue }}>
+                {children}
+            </ToggleGroupContext.Provider>
         </ToggleGroupPrimitive.Root>
     );
 };
 
 type ToggleGroupItemProps = React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Item> &
-    VariantProps<typeof toggleVariants> & { ref?: React.Ref<React.ComponentRef<typeof ToggleGroupPrimitive.Item>> };
-const ToggleGroupItem = ({ className, children, variant, size, ref, ...props }: ToggleGroupItemProps) => {
-    const context = React.useContext(ToggleGroupContext);
+    VariantProps<typeof toggleVariants> & {
+        ref?: React.Ref<React.ComponentRef<typeof ToggleGroupPrimitive.Item>>;
+        activeIcon?: React.ReactNode;
+        iconPosition?: 'left' | 'right';
+    };
+const ToggleGroupItem = React.forwardRef<React.ComponentRef<typeof ToggleGroupPrimitive.Item>, ToggleGroupItemProps>(
+    ({ className, children, variant, size, activeIcon, value, iconPosition = 'left', ...props }, ref) => {
+        const context = React.useContext(ToggleGroupContext);
 
-    return (
-        <ToggleGroupPrimitive.Item
-            ref={ref}
-            className={cn(
-                toggleVariants({
-                    variant: context.variant || variant,
-                    size: context.size || size,
-                }),
-                className,
-            )}
-            {...props}
-        >
-            {children}
-        </ToggleGroupPrimitive.Item>
-    );
-};
+        // Check if this item is active by comparing its value with the current value from ToggleGroup
+        const isActive =
+            context.currentValue !== undefined &&
+            value !== undefined &&
+            (Array.isArray(context.currentValue)
+                ? context.currentValue.includes(value)
+                : context.currentValue === value);
+
+        const iconElement =
+            activeIcon && isActive ? <span className="inline-flex items-center">{activeIcon}</span> : null;
+
+        return (
+            <ToggleGroupPrimitive.Item
+                ref={ref}
+                className={cn(
+                    toggleVariants({
+                        variant: context.variant || variant,
+                        size: context.size || size,
+                    }),
+                    className,
+                )}
+                value={value}
+                {...props}
+            >
+                <span className="flex items-center gap-2">
+                    {iconPosition === 'left' && iconElement}
+                    {children}
+                    {iconPosition === 'right' && iconElement}
+                </span>
+            </ToggleGroupPrimitive.Item>
+        );
+    },
+);
+ToggleGroupItem.displayName = 'ToggleGroupItem';
 
 export { ToggleGroup, ToggleGroupItem };

@@ -1,6 +1,7 @@
 'use client';
 
 import dayjs from 'dayjs';
+import { Check } from 'lucide-react';
 import { useLocale } from 'next-intl';
 import dynamic from 'next/dynamic';
 import React, { useState, useTransition } from 'react';
@@ -118,7 +119,11 @@ export const OrdersSummaryPure: React.FC<Readonly<OrdersSummaryPureProps>> = ({
                                     onValueChange={handleFilter}
                                 >
                                     {component.ranges.map((range) => (
-                                        <ToggleGroupItem key={range.value} value={`${range.value}-${range.type}`}>
+                                        <ToggleGroupItem
+                                            key={range.value}
+                                            value={`${range.value}-${range.type}`}
+                                            activeIcon={<Check className="h-4 w-4" />}
+                                        >
                                             {range.label}
                                         </ToggleGroupItem>
                                     ))}
