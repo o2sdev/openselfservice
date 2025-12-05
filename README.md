@@ -13,6 +13,7 @@ Its flexibility allows for many customizations and lets you build various types 
 - **Next.js Frontend Starter** – Robust Next.js-based frontend including basic customer portal pages and content management capabilities.
 - **API Harmonization Server** – **Integration layer** for data aggregation, orchestration and normalization. Provides vendor lock-in safeness and better maintainability.
 - **TypeScript SDK** – Easily interact with the Harmonization Server in the frontend app or any web, mobile, other TS-based apps.
+- **Pre-built Blocks** – 25+ ready-to-use UI blocks with backend logic and SDK clients. Self-contained, reusable components for common features.
 - **Pre-built Integrations** – Ready integrations so that you can set up your solution faster.
 - **Extensibility** – Customize UI components, add new pages, add new API integrations, adapt to your needs.
 
@@ -53,11 +54,20 @@ O2S follows a **monorepo structure** using **Turborepo** for managing apps and i
 
 ```sh
 /apps
-  /frontend             # Next.js frontend
+  /frontend             # Next.js frontend application
   /api-harmonization    # API Harmonization Server (NestJS)
+  /docs                 # Documentation site (Docusaurus)
 
 /packages
-  /ui    # UI component library (shadcn/ui, Tailwind)
+  /blocks/*             # Reusable UI blocks (25+ blocks)
+  /framework            # Core framework modules & SDK
+  /integrations/*       # Integration adapters (Strapi, Contentful, Redis, Algolia, Medusa, Zendesk, mocked)
+  /modules/*            # Feature modules (e.g., surveyjs)
+  /ui                   # Base UI component library (shadcn/ui + Tailwind)
+  /utils/*              # Utility packages
+  /configs/*            # Shared configurations
+  /cli/*                # CLI tools (create-o2s-app)
+  /telemetry            # Telemetry package
 ```
 
 For a detailed breakdown, visit **[Project structure](https://www.openselfservice.com/docs/getting-started/project-structure)**.
@@ -65,19 +75,28 @@ For a detailed breakdown, visit **[Project structure](https://www.openselfservic
 ## 🖥️ Demo app
 [![O2S Demo](apps/docs/static/img/o2s-gh-demo.png)](https://demo.openselfservice.com)
 
+## 🧩 Blocks
+
+O2S includes **25+ pre-built blocks** - self-contained, reusable UI components that represent specific features or page sections. Each block includes backend logic (NestJS), frontend component (React), and SDK client.
+
+Examples: article, article-list, ticket-list, order-details, invoice-list, user-account, and more.
+
+For details, visit **[Blocks documentation](https://www.openselfservice.com/docs/main-components/blocks)**.
+
 ## 🔌 Available Integrations
 
 O2S includes pre-built integrations and allows you to extend functionality as needed.
 
 | Integration type/area | Status                                                                                                                                   |
 |-----------------------|------------------------------------------------------------------------------------------------------------------------------------------|
-| **CMS**               | ✅ **StrapiCMS** - available<br/> 🔄 **Contentful** - in progress                                                                         |
+| **CMS**               | ✅ **StrapiCMS** - available<br/> ✅ **Contentful** - available                                                                         |
 | **IAM**               | ✅ **Auth.js** - available<br/> ✅ **Keycloak** - available (not part of O2S, contact us for details)                                      |
 | **Cache**             | ✅ **Redis** - available                                                                                                                  |
 | **Search**            | ✅ **Algolia** - available                                                                                                                |
-| **CRM**               | ✅ **SurveyJS** - ticket submission handling<br/> 🔄 **other CRM solutions** - planned                                                    |
+| **CRM**               | ✅ **Zendesk** - available (tickets)<br/> ✅ **SurveyJS** - ticket submission handling<br/> 🔄 **other CRM solutions** - planned                                                    |
 | **ERP**               | ✅ **Medusa** - via Medusa plugin adding ERP-like features<br/>🔄 **SAP S/4HANA** - In progress (not part of O2S, contact us for details) |
 | **Commerce**          | 🔄 **Medusa** - in progress (basic product information, other areas TBD)                                                                 |
+| **Development**       | ✅ **Mocked** - available (for local development and testing)                                                                           |
 
 
 ## 🔥 Why Open Self Service?
