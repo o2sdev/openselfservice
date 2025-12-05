@@ -1,5 +1,15 @@
 # @o2s/blocks.orders-summary
 
+## 1.2.1
+
+### Patch Changes
+
+- 0775ad9: aligned inner tiles to have equal heights
+- Updated dependencies [abd3b41]
+- Updated dependencies [be6f80b]
+- Updated dependencies [f999bb1]
+  - @o2s/ui@1.7.1
+
 ## 1.2.0
 
 ### Minor Changes

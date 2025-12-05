@@ -1,5 +1,13 @@
 # @o2s/ui
 
+## 1.7.1
+
+### Patch Changes
+
+- abd3b41: added missing `getRowKey` prop that is passed down to inner components
+- be6f80b: fixed incorrect price mapping
+- f999bb1: extended `Collapsible` component with an option to define whether it's open by default
+
 ## 1.7.0
 
 ### Minor Changes
