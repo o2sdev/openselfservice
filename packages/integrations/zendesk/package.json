@@ -12,7 +12,7 @@
   "scripts": {
     "prepare": "npm run fetch-oas && npm run generate-types",
     "build": "tsc --preserveWatchOutput && tsc-alias",
-    "lint": "tsc --noEmit && eslint ./src --max-warnings 0",
+    "lint": "tsc --noEmit && eslint ./src --max-warnings=0",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\"",
     "fetch-oas": "tsx scripts/oas/fetch-zendesk-oas.ts",
     "generate-types": "tsx scripts/oas/generate-zendesk-types.ts"

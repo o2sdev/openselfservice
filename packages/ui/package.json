@@ -14,7 +14,7 @@
         "./components/*": "./src/components/*/index.ts"
     },
     "scripts": {
-        "lint": "tsc --noEmit && eslint . --max-warnings 0",
+        "lint": "tsc --noEmit && eslint . --max-warnings=0",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\"",
         "generate:component": "turbo gen react-component",
         "generate:component:shadcn": "npx shadcn@latest add"

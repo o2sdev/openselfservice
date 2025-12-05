@@ -20,7 +20,7 @@
         "postinstall": "npx prisma generate",
         "build": "dotenv -e .env.local -- prisma migrate deploy && tsc --preserveWatchOutput && tsc-alias",
         "postbuild": "shx cp -r src/modules/invoices/resources dist/modules/invoices/",
-        "lint": "tsc --noEmit && eslint . --max-warnings 0",
+        "lint": "tsc --noEmit && eslint . --max-warnings=0",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\"",
         "seed": "dotenv -e .env.local -- tsx prisma/seed.ts"
     },
