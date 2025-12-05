@@ -66,7 +66,7 @@ export const PhoneInput: React.FC<PhoneInputProps> = ({
 
             if (inputValue && inputValue.length > 1 && inputValue[0] !== '+') {
                 text = `+${callingCode} ${text}`;
-                template = `+${callingCode} xxx`;
+                template = `+${callingCode} ${template}`;
             }
 
             return {
