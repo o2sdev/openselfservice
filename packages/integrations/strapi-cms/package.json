@@ -1,6 +1,6 @@
 {
     "name": "@o2s/integrations.strapi-cms",
-    "version": "2.8.0",
+    "version": "2.9.0",
     "private": false,
     "license": "MIT",
     "exports": {

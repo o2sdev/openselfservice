@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.ticket-summary",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "private": false,
     "license": "MIT",
     "description": "Displays a dynamic TicketSummary showing ticket counts grouped by status.",
