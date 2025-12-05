@@ -4,7 +4,16 @@ sidebar_position: 100
 
 # Contentful CMS
 
-This integration provides a full integration with [Contentful CMS](https://www.contentful.com/).
+This integration provides a full integration with [Contentful CMS](https://www.contentful.com/), enabling comprehensive content management capabilities for your application. The integration supports content management, page management, and content localization, allowing you to create and manage multilingual content with ease. Additionally, Contentful integration includes built-in support for Live Preview, enabling content editors to see their changes in real-time as they edit content in the Contentful web app.
+
+## In this section
+
+- [How to set up](./how-to-setup.md) - Step-by-step guide for setting up the Contentful CMS integration
+- [Features](./features.md) - Overview of features supported by the Contentful CMS integration
+- [Supported blocks](./blocks.md) - Implementation status of all blocks available in the O2S framework
+- [Content model](./content-model.md) - Structure and organization of the Contentful content model
+- [GraphQL integration](./graphql.md) - Detailed information about GraphQL integration, code generation, and query structure
+- [Live Preview](./live-preview.md) - Implementation details, setup, and usage of Live Preview functionality
 
 ## Installation
 
@@ -45,45 +54,6 @@ After setting up your Contentful space and configuring the environment variables
 ```shell
 npm run generate
 ```
-
-## Supported modules
-
-This integration handles the following base modules from the framework:
-
-- cms
-
-## Dependencies
-
-This integration relies on the following base modules from the framework:
-
-- cache
-
-## GraphQL integration
-
-To connect with Contentful, the [GraphQL API](https://www.contentful.com/developers/docs/references/graphql/) is used as the primary API. For this purpose, a dedicated [GraphqlService](https://github.com/o2sdev/openselfservice/blob/main/packages/integrations/contentful-cms/src/modules/graphql/graphql.service.ts) is used that relies on:
-
-- [graphql-request](https://www.npmjs.com/package/graphql-request) package as a GraphQL client,
-- [graphql-codegen](https://the-guild.dev/graphql/codegen) for TypeScript code generation, based on GraphQL schema and queries.
-
-The integration uses a dual SDK approach with separate clients for published content (Delivery API) and draft content (Preview API), allowing seamless switching between published and draft content based on the `preview` parameter.
-
-For more details about GraphQL integration, code generation, and query structure, see the [GraphQL documentation](./graphql.md).
-
-## REST Delivery API
-
-The integration also uses Contentful's REST Delivery API for specific operations that are not available through GraphQL, such as retrieving locale information via the `getLocales` method.
-
-## Live Preview
-
-Contentful integration includes built-in support for Live Preview, which allows content editors to see their changes in real-time. The implementation uses a metadata pattern to bridge the gap between our normalized data model and Contentful's content structure.
-
-For detailed information about Live Preview implementation, setup, and usage, see the [Live Preview documentation](./live-preview.md).
-
-## Cache integration
-
-In order to allow further optimizations, the `cache` module is used for caching retrieved CMS entries (as long as caching is enabled globally).
-
-Cached entries are [stringified](https://www.npmjs.com/package/flatted) and saved using the `{id}-{locale}` key to make them fully unique within the caching service.
 
 ## Additional resources
 

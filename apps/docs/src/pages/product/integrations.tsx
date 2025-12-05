@@ -218,7 +218,7 @@ const INTEGRATION_SECTIONS: Array<{
                 status: 'available',
                 description: 'Used for full-text and faceted search across content and articles.',
                 icon: <AlgoliaIcon />,
-                link: '/docs/integrations/search/algolia',
+                link: '/docs/integrations/search/algolia/overview',
             },
             {
                 name: 'Personalisation API',
