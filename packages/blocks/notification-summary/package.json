@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.notification-summary",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "private": false,
     "license": "MIT",
     "description": "Displays a dynamic NotificationSummary showing notification counts grouped by priority.",

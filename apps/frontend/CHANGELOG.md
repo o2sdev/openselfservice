@@ -1,5 +1,52 @@
 # @o2s/frontend
 
+## 1.13.0
+
+### Minor Changes
+
+- db5b381: fixing various bugs related with blocks and ui components, adding sign-in button in navigation
+
+### Patch Changes
+
+- 221dc2c: fix: added missing Eslint command to list-staged
+- Updated dependencies [221dc2c]
+- Updated dependencies [235f706]
+- Updated dependencies [db5b381]
+- Updated dependencies [235f706]
+- Updated dependencies [c2d9438]
+- Updated dependencies [ec8794c]
+    - @o2s/blocks.featured-service-list@1.1.2
+    - @o2s/blocks.notification-details@1.2.0
+    - @o2s/blocks.notification-summary@1.0.1
+    - @o2s/blocks.notification-list@1.3.0
+    - @o2s/blocks.payments-history@1.1.2
+    - @o2s/blocks.payments-summary@1.1.2
+    - @o2s/utils.api-harmonization@0.1.3
+    - @o2s/blocks.service-details@1.1.2
+    - @o2s/blocks.article-search@1.2.0
+    - @o2s/blocks.orders-summary@1.2.0
+    - @o2s/blocks.ticket-details@1.2.0
+    - @o2s/blocks.ticket-summary@1.0.1
+    - @o2s/blocks.category-list@1.2.2
+    - @o2s/blocks.order-details@1.2.0
+    - @o2s/blocks.surveyjs-form@1.1.2
+    - @o2s/blocks.ticket-recent@1.1.2
+    - @o2s/blocks.article-list@1.2.2
+    - @o2s/blocks.invoice-list@1.3.0
+    - @o2s/blocks.product-list@0.1.1
+    - @o2s/blocks.service-list@1.2.0
+    - @o2s/blocks.user-account@1.1.2
+    - @o2s/integrations.mocked@1.15.0
+    - @o2s/blocks.quick-links@1.2.2
+    - @o2s/blocks.ticket-list@1.4.0
+    - @o2s/blocks.order-list@1.3.0
+    - @o2s/blocks.category@1.2.0
+    - @o2s/blocks.article@1.2.2
+    - @o2s/utils.frontend@0.2.1
+    - @o2s/blocks.faq@1.2.2
+    - @o2s/ui@1.7.0
+    - @o2s/framework@1.14.0
+
 ## 1.12.0
 
 ### Minor Changes

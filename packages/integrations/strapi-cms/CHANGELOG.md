@@ -1,5 +1,21 @@
 # @o2s/integrations.strapi-cms
 
+## 2.9.0
+
+### Minor Changes
+
+- db5b381: fixing various bugs related with blocks and ui components, adding sign-in button in navigation
+
+### Patch Changes
+
+- e60720e: fix: removed nonexisting fields from CMS query and rebuilt generated files
+- 221dc2c: fix: added missing Eslint command to list-staged
+- Updated dependencies [221dc2c]
+- Updated dependencies [db5b381]
+- Updated dependencies [c2d9438]
+    - @o2s/utils.logger@1.1.3
+    - @o2s/framework@1.14.0
+
 ## 2.8.0
 
 ### Minor Changes
