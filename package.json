@@ -41,10 +41,10 @@
     "devDependencies": {
         "@commitlint/cli": "^20.2.0",
         "@commitlint/config-conventional": "^20.2.0",
-        "@storybook/addon-a11y": "^10.0.8",
-        "@storybook/addon-docs": "^10.0.8",
-        "@storybook/addon-themes": "^10.0.8",
-        "@storybook/nextjs": "^10.0.8",
+        "@storybook/addon-a11y": "^10.1.4",
+        "@storybook/addon-docs": "^10.1.4",
+        "@storybook/addon-themes": "^10.1.4",
+        "@storybook/nextjs": "^10.1.4",
         "@turbo/gen": "^2.6.3",
         "@types/cli-progress": "^3.11.6",
         "@types/fs-extra": "^11.0.4",
@@ -59,7 +59,7 @@
         "prettier": "^3.7.4",
         "rimraf": "^6.1.2",
         "simple-git": "^3.30.0",
-        "storybook": "^10.0.8",
+        "storybook": "^10.1.4",
         "syncpack": "^14.0.0-alpha.29",
         "turbo": "^2.6.3",
         "typescript": "5.9.3"
