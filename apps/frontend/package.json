@@ -14,7 +14,7 @@
         "generate:component": "turbo gen web-component"
     },
     "dependencies": {
-        "@contentful/live-preview": "^4.6.52",
+        "@contentful/live-preview": "^4.7.0",
         "@o2s/blocks.article": "*",
         "@o2s/blocks.article-list": "*",
         "@o2s/blocks.article-search": "*",
