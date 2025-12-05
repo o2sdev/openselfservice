@@ -1,5 +1,11 @@
 # @o2s/utils.logger
 
+## 1.1.3
+
+### Patch Changes
+
+- 221dc2c: fix: added missing Eslint command to list-staged
+
 ## 1.1.2
 
 ### Patch Changes

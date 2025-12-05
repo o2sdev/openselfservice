@@ -26,7 +26,7 @@ export const PAGE_DASHBOARD_PL: CMS.Model.Page.Page = {
             left: [
                 {
                     __typename: 'PaymentsSummaryBlock',
-                    id: 'payments-summary-1',
+                    id: 'payments-summary-2',
                 },
             ],
             right: [
@@ -81,7 +81,7 @@ export const PAGE_DASHBOARD_EN: CMS.Model.Page.Page = {
             left: [
                 {
                     __typename: 'PaymentsSummaryBlock',
-                    id: 'payments-summary-1',
+                    id: 'payments-summary-2',
                 },
             ],
             right: [
@@ -136,7 +136,7 @@ export const PAGE_DASHBOARD_DE: CMS.Model.Page.Page = {
             left: [
                 {
                     __typename: 'PaymentsSummaryBlock',
-                    id: 'payments-summary-1',
+                    id: 'payments-summary-2',
                 },
             ],
             right: [

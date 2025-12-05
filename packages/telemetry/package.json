@@ -1,6 +1,6 @@
 {
     "name": "@o2s/telemetry",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "private": false,
     "license": "MIT",
     "main": "./dist/index.js",
@@ -10,7 +10,7 @@
     "scripts": {
         "postinstall": "node dist/postinstall.js || true",
         "build": "tsc --preserveWatchOutput && tsc-alias",
-        "lint": "tsc --noEmit && eslint . --max-warnings 0",
+        "lint": "tsc --noEmit && eslint . --max-warnings=0",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
@@ -28,7 +28,7 @@
         "@o2s/typescript-config": "*",
         "@types/configstore": "^6.0.2",
         "eslint": "^9.39.1",
-        "prettier": "^3.6.2",
+        "prettier": "^3.7.4",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"
     }

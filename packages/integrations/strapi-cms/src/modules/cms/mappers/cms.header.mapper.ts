@@ -41,6 +41,7 @@ export const mapHeader = (data: GetHeaderQuery, baseURL?: string): CMS.Model.Hea
                   }
                 : undefined,
         languageSwitcherLabel: component.languageSwitcherLabel,
+        signInLabel: undefined, // TODO: add signInLabel field in CMS
         mobileMenuLabel: {
             open: component.openMobileMenuLabel,
             close: component.closeMobileMenuLabel,

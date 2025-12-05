@@ -3,12 +3,13 @@ import { defineRouting } from 'next-intl/routing';
 
 export const DEFAULT_LOCALE = process.env.NEXT_PUBLIC_DEFAULT_LOCALE as string;
 export const SUPPORTED_LOCALES = process.env.NEXT_PUBLIC_SUPPORTED_LOCALES?.split(',') ?? [];
+export const LOGIN_PATH = '/login';
 
 export const routing = defineRouting({
     locales: SUPPORTED_LOCALES,
     defaultLocale: DEFAULT_LOCALE,
     pathnames: {
-        '/login': {
+        [LOGIN_PATH]: {
             en: '/sign-in',
             de: '/einloggen',
             pl: '/logowanie',

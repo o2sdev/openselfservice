@@ -42,8 +42,7 @@ const typographyVariants = cva('', {
 });
 
 export interface TypographyProps
-    extends React.HTMLAttributes<HTMLParagraphElement>,
-        VariantProps<typeof typographyVariants> {
+    extends React.HTMLAttributes<HTMLParagraphElement>, VariantProps<typeof typographyVariants> {
     asChild?: boolean;
     ref?: React.Ref<HTMLParagraphElement>;
 }

@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.hero-section",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "private": false,
     "license": "MIT",
     "description": "A simple block displaying static content in the form of an HeroSection.",
@@ -27,13 +27,13 @@
         "@o2s/configs.integrations": "*"
     },
     "devDependencies": {
-        "dotenv-cli": "^10.0.0",
+        "dotenv-cli": "^11.0.0",
         "@o2s/eslint-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "concurrently": "^9.2.1",
-        "eslint": "^9.37.0",
-        "prettier": "^3.6.2",
+        "eslint": "^9.39.1",
+        "prettier": "^3.7.4",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"
     },
