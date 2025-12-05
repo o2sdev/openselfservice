@@ -12,7 +12,7 @@
     ],
     "scripts": {
         "build": "tsc --preserveWatchOutput && tsc-alias",
-        "lint": "tsc --noEmit && eslint . --max-warnings 0",
+        "lint": "tsc --noEmit && eslint . --max-warnings=0",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\"",
         "generate": "graphql-codegen && prettier --write \"generated/**/*.{ts,tsx}\""
     },
@@ -23,7 +23,7 @@
         "contentful": "^11.0.0",
         "flatted": "^3.3.3",
         "graphql": "16.12.0",
-        "graphql-request": "7.3.4",
+        "graphql-request": "7.3.5",
         "graphql-tag": "2.12.6"
     },
     "devDependencies": {
@@ -35,11 +35,12 @@
         "@graphql-codegen/typescript-operations": "^5.0.6",
         "@graphql-codegen/typescript-resolvers": "^5.1.4",
         "@o2s/eslint-config": "*",
+        "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "concurrently": "^9.2.1",
         "eslint": "^9.39.1",
-        "prettier": "^3.6.2",
+        "prettier": "^3.7.4",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"
     },

@@ -60,6 +60,7 @@
 
     --color-card: var(--card);
     --color-card-foreground: var(--card-foreground);
+    --color-card-light: var(--card-light);
 
     --color-navbar-foreground: var(--navbar-foreground);
     --color-navbar-background: var(--navbar-background);

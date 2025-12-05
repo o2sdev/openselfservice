@@ -5,6 +5,7 @@ import { Models as FrontendModels } from '@o2s/utils.frontend';
 export type PricingCardProps = {
     image?: Models.Media.Media;
     title: string;
+    titleType?: 'h2' | 'h3' | 'h4';
     description?: string;
     price?: Models.Price.Price;
     tags?: Models.Badge.Badge[];
@@ -14,6 +15,7 @@ export type PricingCardProps = {
     featureListTitle?: string;
     featureList?: Models.FeatureItem.FeatureItem[];
     LinkComponent: FrontendModels.Link.LinkComponent;
+    hasPriority?: boolean;
 };
 
 export type FeatureItemProps = Models.FeatureItem.FeatureItem;

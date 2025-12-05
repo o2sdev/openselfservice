@@ -15,7 +15,7 @@
     ],
     "scripts": {
         "build": "tsc --build tsconfig.json --preserveWatchOutput && tsc-alias",
-        "lint": "tsc --noEmit && eslint \"{src,apps,libs,test}/**/*.{ts,tsx}\" --fix",
+        "lint": "tsc --noEmit && eslint \"src/**/*.{ts,tsx}\" --fix",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
@@ -30,13 +30,14 @@
     "devDependencies": {
         "dotenv-cli": "^11.0.0",
         "@o2s/eslint-config": "*",
+        "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "concurrently": "^9.2.1",
         "eslint": "^9.39.1",
-        "prettier": "^3.6.2",
-        "survey-core": "^2.3.16",
-        "survey-react-ui": "^2.3.16",
+        "prettier": "^3.7.4",
+        "survey-core": "^2.4.1",
+        "survey-react-ui": "^2.4.1",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"
     },
