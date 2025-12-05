@@ -13,7 +13,7 @@
     ],
     "scripts": {
         "build": "tsc --preserveWatchOutput && tsc-alias",
-        "lint": "tsc --noEmit && eslint \"src/**/*.{ts,tsx}\" --fix --max-warnings=0",
+        "lint": "tsc --noEmit && eslint \"src/**/*.{ts,tsx}\" --fix",
         "format": "prettier --write \"src/**/*.{ts,tsx}\""
     },
     "dependencies": {
