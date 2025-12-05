@@ -17,7 +17,7 @@ export const PAGE_TICKET_LIST_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    hasOwnTitle: true,
+    hasOwnTitle: false,
     permissions: [Auth.Constants.Roles.ORG_USER],
     template: {
         __typename: 'OneColumnTemplate',
@@ -59,7 +59,7 @@ export const PAGE_TICKET_LIST_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    hasOwnTitle: true,
+    hasOwnTitle: false,
     permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
     template: {
         __typename: 'OneColumnTemplate',
@@ -101,7 +101,7 @@ export const PAGE_TICKET_LIST_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    hasOwnTitle: true,
+    hasOwnTitle: false,
     permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
     template: {
         __typename: 'OneColumnTemplate',

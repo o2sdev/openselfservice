@@ -140,7 +140,7 @@ export class CmsService implements CMS.Service {
     }
 
     getPaymentsSummaryBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of(mapPaymentsSummaryBlock(options.locale)).pipe(responseDelay());
+        return of(mapPaymentsSummaryBlock(options.id, options.locale)).pipe(responseDelay());
     }
 
     getPaymentsHistoryBlock(options: CMS.Request.GetCmsEntryParams) {

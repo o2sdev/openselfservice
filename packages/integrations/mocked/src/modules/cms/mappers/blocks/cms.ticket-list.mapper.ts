@@ -2,8 +2,7 @@ import { CMS } from '@o2s/framework/modules';
 
 const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
     id: 'ticket-list-1',
-    title: 'Cases',
-    subtitle: 'Your recent cases',
+    title: 'Your recent cases',
     forms: [
         {
             label: 'Submit complaint',
@@ -165,8 +164,7 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
 
 const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
     id: 'ticket-list-1',
-    title: 'Fallübersicht',
-    subtitle: 'Ihre neuesten Fälle',
+    title: 'Ihre neuesten Fälle',
     forms: [
         {
             label: 'Beschwerde einreichen',
@@ -330,8 +328,7 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
 
 const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
     id: 'ticket-list-1',
-    title: 'Zgłoszenia',
-    subtitle: 'Twoje ostatnie zgłoszenia',
+    title: 'Twoje ostatnie zgłoszenia',
     forms: [
         {
             label: 'Zgłoś błąd',

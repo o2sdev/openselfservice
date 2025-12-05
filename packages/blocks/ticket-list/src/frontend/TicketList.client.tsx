@@ -141,8 +141,8 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
             {initialData.length > 0 ? (
                 <div className="flex flex-col gap-6">
                     <div className="w-full flex gap-4 flex-col md:flex-row justify-between">
-                        <Typography variant="h1" asChild>
-                            <h1 {...inspector(meta, 'title')}>{data.title}</h1>
+                        <Typography variant="h2" asChild>
+                            <h2 {...inspector(meta, 'title')}>{data.title}</h2>
                         </Typography>
 
                         {data.forms && (
