@@ -6,6 +6,10 @@ import React, { useState, useTransition } from 'react';
 
 import { Mappings } from '@o2s/utils.frontend';
 
+import { toast } from '@o2s/ui/hooks/use-toast';
+
+import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
+
 import type { DataListColumnConfig } from '@o2s/ui/components/DataList';
 import { DataView } from '@o2s/ui/components/DataView';
 import { FiltersSection } from '@o2s/ui/components/Filters';
@@ -30,6 +34,7 @@ import { OrderListPureProps } from './OrderList.types';
 
 export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToken, routing, ...component }) => {
     const { Link: LinkComponent } = createNavigation(routing);
+    const { labels } = useGlobalContext();
 
     const initialFilters: Request.GetOrderListBlockQuery = {
         id: component.id,
@@ -53,20 +58,37 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
 
     const handleFilter = (data: Partial<Request.GetOrderListBlockQuery>) => {
         startTransition(async () => {
-            const newFilters = { ...filters, ...data };
-            const newData = await sdk.blocks.getOrderList(newFilters, { 'x-locale': locale }, accessToken);
-            setFilters(newFilters);
-            setData(newData);
-            setSelectedRows(new Set());
+            try {
+                const newFilters = { ...filters, ...data };
+                const newData = await sdk.blocks.getOrderList(newFilters, { 'x-locale': locale }, accessToken);
+
+                setFilters(newFilters);
+                setData(newData);
+                setSelectedRows(new Set());
+            } catch (_error) {
+                toast({
+                    variant: 'destructive',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
+                });
+            }
         });
     };
 
     const handleReset = () => {
         startTransition(async () => {
-            const newData = await sdk.blocks.getOrderList(initialFilters, { 'x-locale': locale }, accessToken);
-            setFilters(initialFilters);
-            setData(newData);
-            setSelectedRows(new Set());
+            try {
+                const newData = await sdk.blocks.getOrderList(initialFilters, { 'x-locale': locale }, accessToken);
+                setFilters(initialFilters);
+                setData(newData);
+                setSelectedRows(new Set());
+            } catch (_error) {
+                toast({
+                    variant: 'destructive',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
+                });
+            }
         });
     };
 

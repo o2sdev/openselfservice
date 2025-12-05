@@ -1,5 +1,13 @@
 # create-o2s-app
 
+## 1.1.4
+
+### Patch Changes
+
+- 221dc2c: fix: added missing Eslint command to list-staged
+- Updated dependencies [221dc2c]
+    - @o2s/telemetry@1.1.2
+
 ## 1.1.3
 
 ### Patch Changes

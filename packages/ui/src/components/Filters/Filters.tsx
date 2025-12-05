@@ -94,7 +94,7 @@ export const Filters = <T, S extends FormikValues>({
                                     />
                                 )}
                             </div>
-                            <div className="flex gap-4 flex-col w-full sm:flex-row md:w-auto">
+                            <div className="flex gap-4 flex-col-reverse w-full sm:flex-row md:w-auto">
                                 {activeFilters > 0 && (
                                     <Button variant="outline" onClick={handleReset} className="gap-0">
                                         <X className="h-4 w-4 mr-2" />

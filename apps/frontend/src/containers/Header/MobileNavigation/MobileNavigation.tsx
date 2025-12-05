@@ -1,6 +1,7 @@
 'use client';
 
 import { Menu, X } from 'lucide-react';
+import { useSession } from 'next-auth/react';
 import React, { useEffect, useState } from 'react';
 
 import { Models } from '@o2s/framework/modules';
@@ -16,6 +17,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@o2s
 import { Typography } from '@o2s/ui/elements/typography';
 
 import { Link as NextLink, usePathname } from '@/i18n';
+import { LOGIN_PATH } from '@/i18n/routing';
 
 import { MobileNavigationProps } from './MobileNavigation.types';
 
@@ -28,8 +30,15 @@ export function MobileNavigation({
     items,
     title,
     mobileMenuLabel,
+    signInLabel,
+    shouldIncludeSignInButton = true,
 }: MobileNavigationProps) {
+    const session = useSession();
+    const isSignedIn = !!session.data?.user;
     const pathname = usePathname();
+
+    // Show sign in button if user is not signed in, container allows it, and signInLabel is available
+    const showSignInButton = shouldIncludeSignInButton && !isSignedIn && signInLabel;
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -108,6 +117,13 @@ export function MobileNavigation({
 
                 {/* Right Section */}
                 <div className="flex gap-4">
+                    {/* Sign In Button */}
+                    {showSignInButton && (
+                        <Button asChild variant="tertiary">
+                            <NextLink href={LOGIN_PATH}>{signInLabel}</NextLink>
+                        </Button>
+                    )}
+
                     {/* Notification Button */}
                     {notificationSlot}
 

@@ -7,6 +7,10 @@ import React, { useState, useTransition } from 'react';
 
 import { Mappings } from '@o2s/utils.frontend';
 
+import { toast } from '@o2s/ui/hooks/use-toast';
+
+import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
+
 import { ActionList } from '@o2s/ui/components/ActionList';
 import type { DataListColumnConfig } from '@o2s/ui/components/DataList';
 import { DataView } from '@o2s/ui/components/DataView';
@@ -28,6 +32,7 @@ import { TicketListPureProps } from './TicketList.types';
 export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessToken, routing, meta, ...component }) => {
     const { Link: LinkComponent } = createNavigation(routing);
     const inspector = LivePreview.useInspector();
+    const { labels } = useGlobalContext();
 
     const initialFilters: Request.GetTicketListBlockQuery = {
         id: component.id,
@@ -50,20 +55,36 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
 
     const handleFilter = (data: Partial<Request.GetTicketListBlockQuery>) => {
         startTransition(async () => {
-            const newFilters = { ...filters, ...data };
-            const newData = await sdk.blocks.getTicketList(newFilters, { 'x-locale': locale }, accessToken);
-            setFilters(newFilters);
-            setData(newData);
-            setSelectedRows(new Set());
+            try {
+                const newFilters = { ...filters, ...data };
+                const newData = await sdk.blocks.getTicketList(newFilters, { 'x-locale': locale }, accessToken);
+                setFilters(newFilters);
+                setData(newData);
+                setSelectedRows(new Set());
+            } catch (_error) {
+                toast({
+                    variant: 'destructive',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
+                });
+            }
         });
     };
 
     const handleReset = () => {
         startTransition(async () => {
-            const newData = await sdk.blocks.getTicketList(initialFilters, { 'x-locale': locale }, accessToken);
-            setFilters(initialFilters);
-            setData(newData);
-            setSelectedRows(new Set());
+            try {
+                const newData = await sdk.blocks.getTicketList(initialFilters, { 'x-locale': locale }, accessToken);
+                setFilters(initialFilters);
+                setData(newData);
+                setSelectedRows(new Set());
+            } catch (_error) {
+                toast({
+                    variant: 'destructive',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
+                });
+            }
         });
     };
 
@@ -73,8 +94,13 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
             case 'topic':
                 return {
                     ...column,
-                    type: 'text',
+                    type: 'custom',
                     cellClassName: 'max-w-[200px] lg:max-w-md',
+                    render: (_value: unknown, ticket: Model.Ticket) => (
+                        <Button asChild variant="link" size="none" className="truncate block text-left">
+                            <LinkComponent href={ticket.detailsUrl}>{ticket.topic.label}</LinkComponent>
+                        </Button>
+                    ),
                 };
             case 'status':
                 return {
@@ -118,8 +144,8 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
             {initialData.length > 0 ? (
                 <div className="flex flex-col gap-6">
                     <div className="w-full flex gap-4 flex-col md:flex-row justify-between">
-                        <Typography variant="h1" asChild>
-                            <h1 {...inspector(meta, 'title')}>{data.title}</h1>
+                        <Typography variant="h2" asChild>
+                            <h2 {...inspector(meta, 'title')}>{data.title}</h2>
                         </Typography>
 
                         {data.forms && (

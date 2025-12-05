@@ -1,5 +1,22 @@
 # @o2s/integrations.mocked
 
+## 1.15.0
+
+### Minor Changes
+
+- db5b381: fixing various bugs related with blocks and ui components, adding sign-in button in navigation
+- c2d9438: added new blocks from dxp-starter-kit app
+
+### Patch Changes
+
+- 221dc2c: fix: added missing Eslint command to list-staged
+- 235f706: changed mocks for a better page structure
+- Updated dependencies [221dc2c]
+- Updated dependencies [db5b381]
+- Updated dependencies [c2d9438]
+    - @o2s/utils.logger@1.1.3
+    - @o2s/framework@1.14.0
+
 ## 1.14.0
 
 ### Minor Changes

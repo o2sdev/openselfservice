@@ -1,5 +1,17 @@
 # @o2s/framework
 
+## 1.14.0
+
+### Minor Changes
+
+- db5b381: fixing various bugs related with blocks and ui components, adding sign-in button in navigation
+- c2d9438: added new blocks from dxp-starter-kit app
+
+### Patch Changes
+
+- Updated dependencies [221dc2c]
+    - @o2s/utils.logger@1.1.3
+
 ## 1.13.0
 
 ### Minor Changes

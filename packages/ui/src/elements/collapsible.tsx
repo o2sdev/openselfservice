@@ -1,13 +1,23 @@
 import * as CollapsiblePrimitive from '@radix-ui/react-collapsible';
+import { cx } from 'class-variance-authority';
 import * as React from 'react';
 
 const Collapsible = CollapsiblePrimitive.Root;
 
 const CollapsibleTrigger = CollapsiblePrimitive.CollapsibleTrigger;
 
-const CollapsibleContent = (props: React.ComponentPropsWithoutRef<typeof CollapsiblePrimitive.CollapsibleContent>) => (
+export interface CollapsibleContentProps extends React.ComponentPropsWithoutRef<
+    typeof CollapsiblePrimitive.CollapsibleContent
+> {
+    defaultOpen?: boolean;
+}
+
+const CollapsibleContent = ({ defaultOpen, ...props }: CollapsibleContentProps) => (
     <CollapsiblePrimitive.CollapsibleContent
-        className="overflow-hidden transition-all data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down"
+        className={cx(
+            'overflow-hidden transition-all data-[state=closed]:animate-collapsible-up',
+            !defaultOpen && 'data-[state=open]:animate-collapsible-down',
+        )}
         {...props}
     />
 );

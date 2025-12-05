@@ -1,6 +1,6 @@
 {
     "name": "@o2s/utils.frontend",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "description": "",
     "author": "",
     "private": false,
@@ -13,7 +13,7 @@
     ],
     "scripts": {
         "build": "tsc --preserveWatchOutput && tsc-alias",
-        "lint": "tsc --noEmit && eslint \"src/**/*.{ts,tsx}\" --fix --max-warnings=0",
+        "lint": "tsc --noEmit && eslint \"src/**/*.{ts,tsx}\" --fix",
         "format": "prettier --write \"src/**/*.{ts,tsx}\""
     },
     "dependencies": {
@@ -26,7 +26,7 @@
         "@o2s/typescript-config": "*",
         "concurrently": "^9.2.1",
         "eslint": "^9.39.1",
-        "prettier": "^3.6.2",
+        "prettier": "^3.7.4",
         "react-string-replace": "^1.1.1",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"

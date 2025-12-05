@@ -1,11 +1,16 @@
 'use client';
 
 import dayjs from 'dayjs';
+import { Check } from 'lucide-react';
 import { useLocale } from 'next-intl';
 import dynamic from 'next/dynamic';
 import React, { useState, useTransition } from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
+
+import { toast } from '@o2s/ui/hooks/use-toast';
+
+import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
 
 import { InfoCard } from '@o2s/ui/components/Cards/InfoCard';
 import { Price } from '@o2s/ui/components/Price';
@@ -53,6 +58,7 @@ export const OrdersSummaryPure: React.FC<Readonly<OrdersSummaryPureProps>> = ({
     accessToken,
     ...component
 }) => {
+    const { labels } = useGlobalContext();
     const initialFilters: Request.GetOrdersSummaryBlockQuery = {
         id: component.id,
         dateFrom: dayjs().subtract(6, 'months').toISOString(),
@@ -70,32 +76,40 @@ export const OrdersSummaryPure: React.FC<Readonly<OrdersSummaryPureProps>> = ({
 
     const handleFilter = (value: string) => {
         startTransition(async () => {
-            let dateFrom: string;
-            const dateTo = dayjs().toISOString();
+            try {
+                let dateFrom: string;
+                const dateTo = dayjs().toISOString();
 
-            const parts = value.split('-');
-            const range = Number(parts[0]!);
-            const type = parts[1]! as Request.GetOrdersSummaryBlockQuery['range'];
+                const parts = value.split('-');
+                const range = Number(parts[0]!);
+                const type = parts[1]! as Request.GetOrdersSummaryBlockQuery['range'];
 
-            switch (type) {
-                case 'day':
-                    dateFrom = dayjs().subtract(range, 'days').toISOString();
-                    break;
-                case 'week':
-                    dateFrom = dayjs().subtract(range, 'days').toISOString();
-                    break;
-                default:
-                    dateFrom = dayjs().subtract(range, 'months').toISOString();
-                    break;
-            }
+                switch (type) {
+                    case 'day':
+                        dateFrom = dayjs().subtract(range, 'days').toISOString();
+                        break;
+                    case 'week':
+                        dateFrom = dayjs().subtract(range, 'days').toISOString();
+                        break;
+                    default:
+                        dateFrom = dayjs().subtract(range, 'months').toISOString();
+                        break;
+                }
 
-            const newFilters = { ...filters, dateFrom, dateTo, range: type };
-            const newData = await sdk.blocks.getOrdersSummary(newFilters, { 'x-locale': locale }, accessToken);
-            setFilters(newFilters);
-            setData(newData);
+                const newFilters = { ...filters, dateFrom, dateTo, range: type };
+                const newData = await sdk.blocks.getOrdersSummary(newFilters, { 'x-locale': locale }, accessToken);
+                setFilters(newFilters);
+                setData(newData);
 
-            if (component.ranges) {
-                setRange(component.ranges.find((item) => item.value === range && item.type === type)!);
+                if (component.ranges) {
+                    setRange(component.ranges.find((item) => item.value === range && item.type === type)!);
+                }
+            } catch (_error) {
+                toast({
+                    variant: 'destructive',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
+                });
             }
         });
     };
@@ -118,7 +132,11 @@ export const OrdersSummaryPure: React.FC<Readonly<OrdersSummaryPureProps>> = ({
                                     onValueChange={handleFilter}
                                 >
                                     {component.ranges.map((range) => (
-                                        <ToggleGroupItem key={range.value} value={`${range.value}-${range.type}`}>
+                                        <ToggleGroupItem
+                                            key={range.value}
+                                            value={`${range.value}-${range.type}`}
+                                            activeIcon={<Check className="h-4 w-4" />}
+                                        >
                                             {range.label}
                                         </ToggleGroupItem>
                                     ))}
