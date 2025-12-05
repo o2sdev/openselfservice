@@ -33,7 +33,7 @@
         "@prisma/client": "^6.19.0",
         "bcryptjs": "^3.0.3",
         "dotenv-cli": "^11.0.0",
-        "jsonwebtoken": "^9.0.2",
+        "jsonwebtoken": "^9.0.3",
         "prisma": "^6.19.0",
         "@o2s/framework": "*",
         "@o2s/utils.logger": "*"
