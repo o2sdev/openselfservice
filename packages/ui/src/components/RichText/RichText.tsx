@@ -9,6 +9,25 @@ import { Typography, TypographyProps } from '@o2s/ui/elements/typography';
 
 import { RichTextProps } from './RichText.types';
 
+/**
+ * Detects if content is HTML or Markdown format.
+ * HTML is detected by presence of HTML tags (e.g., <p>, <ul>, <div>, etc.).
+ * Markdown is detected by presence of markdown syntax (e.g., #, -, *, etc.) without HTML tags.
+ */
+export const detectContentFormat = (content: string): 'html' | 'markdown' => {
+    if (!content) return 'markdown';
+
+    // Check for HTML tags (common block and inline elements)
+    const htmlTagPattern = /<\/?[a-z][a-z0-9]*\b[^>]*>/i;
+    const hasHtmlTags = htmlTagPattern.test(content);
+
+    if (hasHtmlTags) {
+        return 'html';
+    }
+
+    return 'markdown';
+};
+
 const LinkComp: FC<Readonly<LinkProps & { children: ReactNode; className?: string }>> = ({ children, ...props }) => {
     const { className, ...rest } = props;
     return (
@@ -54,6 +73,14 @@ export const RichText: FC<Readonly<RichTextProps>> = ({
 }) => {
     if (!content) {
         return null;
+    }
+
+    // Detect content format and preprocess if needed
+    const format = detectContentFormat(content);
+
+    // If HTML, render directly without Markdown parsing
+    if (format === 'html') {
+        return <div {...rest} className={className} dangerouslySetInnerHTML={{ __html: content }} />;
     }
 
     const baseFontSizeClass = baseFontSize === 'body' ? 'text-base md:text-base' : 'text-sm md:text-sm';
@@ -248,5 +275,9 @@ export const RichText: FC<Readonly<RichTextProps>> = ({
         </Markdown>
     );
 
-    return <div {...rest}>{markdown}</div>;
+    return (
+        <div {...rest} className={className}>
+            {markdown}
+        </div>
+    );
 };
