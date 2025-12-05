@@ -9,7 +9,7 @@
         "build": "next build",
         "postbuild": "shx cp -r public .next/standalone/apps/frontend && shx cp -r .next/static .next/standalone/apps/frontend/.next/",
         "start": "node .next/standalone/apps/frontend/server.js",
-        "lint": "tsc --noEmit && eslint \"{src}/**/*.{ts,tsx}\" --fix --max-warnings=0",
+        "lint": "tsc --noEmit && eslint \"src/**/*.{ts,tsx}\" --fix",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\"",
         "generate:component": "turbo gen web-component"
     },
@@ -81,7 +81,7 @@
         "eslint": "^9.39.1",
         "eslint-config-next": "16.0.7",
         "postcss": "^8.5.6",
-        "prettier": "^3.6.2",
+        "prettier": "^3.7.4",
         "sass": "^1.94.2",
         "shx": "^0.4.0",
         "tailwindcss": "^4.1.17",

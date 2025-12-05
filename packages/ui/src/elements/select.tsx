@@ -31,8 +31,7 @@ const SelectGroup = SelectPrimitive.Group;
 const SelectValue = SelectPrimitive.Value;
 
 export interface SelectTriggerProps
-    extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>,
-        VariantProps<typeof selectVariants> {}
+    extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>, VariantProps<typeof selectVariants> {}
 
 type SelectTriggerOwnProps = SelectTriggerProps & {
     ref?: React.Ref<React.ComponentRef<typeof SelectPrimitive.Trigger>>;
