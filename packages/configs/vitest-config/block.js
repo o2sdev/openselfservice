@@ -9,6 +9,7 @@ export const config = defineConfig({
         root: "./",
         include: ["src/api-harmonization/**/*.spec.ts"],
         environment: "node",
+        passWithNoTests: true,
         exclude: [
             "**/node_modules/**",
             "**/dist/**",
