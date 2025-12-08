@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import { DataListActionsConfig, DataListColumnConfig } from '../DataList/DataList.types';
 
 export interface DataViewProps<T> {
@@ -20,4 +22,6 @@ export interface DataViewProps<T> {
     enableRowSelection?: boolean;
     selectedRows?: Set<string | number>;
     onSelectionChange?: (selected: Set<string | number>) => void;
+    bulkActions?: (selectedItems: T[], selectedCount: number) => ReactNode;
+    bulkActionsLabel?: (count: number) => string;
 }

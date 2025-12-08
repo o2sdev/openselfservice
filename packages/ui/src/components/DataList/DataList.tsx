@@ -36,12 +36,18 @@ export function DataList<T extends Record<string, any>>({
     const handleSelectAll = (checked: boolean) => {
         if (!onSelectionChange) return;
 
+        const allKeysOnCurrentPage = new Set(data.map((item, index) => rowKeyExtractor(item, index)));
+        const currentSelected = new Set(selectedRows || []);
+
         if (checked) {
-            const allKeys = new Set(data.map((item, index) => rowKeyExtractor(item, index)));
-            onSelectionChange(allKeys);
+            // Add all keys from current page to existing selection
+            allKeysOnCurrentPage.forEach((key) => currentSelected.add(key));
         } else {
-            onSelectionChange(new Set());
+            // Remove only keys from current page from selection
+            allKeysOnCurrentPage.forEach((key) => currentSelected.delete(key));
         }
+
+        onSelectionChange(currentSelected);
     };
 
     const handleRowSelect = (rowKey: string | number, checked: boolean) => {
@@ -58,9 +64,11 @@ export function DataList<T extends Record<string, any>>({
 
     // Calculate selection state
     const allRowKeys = data.map((item, index) => rowKeyExtractor(item, index));
-    const selectedCount = selectedRows?.size || 0;
-    const allSelected = enableRowSelection && data.length > 0 && selectedCount === allRowKeys.length;
-    const someSelected = enableRowSelection && selectedCount > 0 && selectedCount < allRowKeys.length;
+    // Count only selected items on current page
+    const selectedOnCurrentPage = allRowKeys.filter((key) => selectedRows?.has(key)).length;
+    const allSelected =
+        enableRowSelection && data.length > 0 && selectedOnCurrentPage === allRowKeys.length && allRowKeys.length > 0;
+    const someSelected = enableRowSelection && selectedOnCurrentPage > 0 && selectedOnCurrentPage < allRowKeys.length;
 
     return (
         <Table className={className}>

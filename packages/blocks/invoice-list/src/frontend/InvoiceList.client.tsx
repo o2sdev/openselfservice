@@ -55,7 +55,6 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
 
                 setFilters(newFilters);
                 setData(newData);
-                setSelectedRows(new Set());
             } catch (_error) {
                 toast({
                     variant: 'destructive',
@@ -95,6 +94,39 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
                 description: labels.errors.requestError.content,
             });
         }
+    };
+
+    const handleBulkDownload = async (selectedInvoices: Model.Invoice[]) => {
+        if (selectedInvoices.length === 0) return;
+
+        startTransition(async () => {
+            try {
+                // Download invoices sequentially to avoid overwhelming the server
+                for (const invoice of selectedInvoices) {
+                    try {
+                        const response = await sdk.blocks.getInvoicePdf(
+                            invoice.id,
+                            { 'x-locale': locale },
+                            accessToken,
+                        );
+                        Utils.DownloadFile.downloadFile(
+                            response,
+                            data.downloadFileName?.replace('{id}', invoice.id) || `invoice-${invoice.id}.pdf`,
+                        );
+                        // Small delay between downloads
+                        await new Promise((resolve) => setTimeout(resolve, 100));
+                    } catch (error) {
+                        console.error(`Failed to download invoice ${invoice.id}:`, error);
+                    }
+                }
+            } catch (_error) {
+                toast({
+                    variant: 'destructive',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
+                });
+            }
+        });
     };
 
     // Define columns configuration outside JSX for better readability
@@ -159,6 +191,8 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
           }
         : undefined;
 
+    component.enableRowSelection = true; // TODO: remove this after testing
+
     return (
         <div className="w-full">
             {initialData.length > 0 ? (
@@ -202,6 +236,22 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
                                         selectedRows={selectedRows}
                                         onSelectionChange={setSelectedRows}
                                         getRowKey={(item) => item.id}
+                                        bulkActions={
+                                            component.enableRowSelection
+                                                ? (selectedItems) => (
+                                                      <Button
+                                                          variant="default"
+                                                          size="sm"
+                                                          onClick={() => handleBulkDownload(selectedItems)}
+                                                          disabled={isPending}
+                                                      >
+                                                          <Download className="mr-2 h-4 w-4" />
+                                                          Download selected
+                                                      </Button>
+                                                  )
+                                                : undefined
+                                        }
+                                        bulkActionsLabel={(count) => `${count} item(s) selected`}
                                     />
 
                                     {data.pagination && (
