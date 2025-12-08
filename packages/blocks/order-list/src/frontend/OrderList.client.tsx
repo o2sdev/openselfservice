@@ -207,6 +207,7 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
                                     columns={columns}
                                     actions={actions}
                                     cardHeaderSlots={data.cardHeaderSlots}
+                                    getRowKey={(item) => item.id.value}
                                 />
 
                                 {data.pagination && (

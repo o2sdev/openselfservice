@@ -56,7 +56,7 @@ export function renderCell<T>(
 
         case 'price': {
             if (typeof value === 'object' && value !== null && 'value' in value) {
-                const priceValue = value as { value: number; currency?: string };
+                const priceValue = value.value as { value: number; currency?: string };
                 const currency = (
                     column.config?.currencyKey ? String(item[column.config.currencyKey]) : priceValue.currency || 'USD'
                 ) as 'USD' | 'EUR' | 'GBP' | 'PLN';

@@ -1,5 +1,15 @@
 # @o2s/blocks.order-list
 
+## 1.3.1
+
+### Patch Changes
+
+- abd3b41: added missing `getRowKey` mapper
+- Updated dependencies [abd3b41]
+- Updated dependencies [be6f80b]
+- Updated dependencies [f999bb1]
+  - @o2s/ui@1.7.1
+
 ## 1.3.0
 
 ### Minor Changes
