@@ -119,6 +119,26 @@ export interface DataListActionsConfig<T = unknown> extends DataTableActions {
 }
 
 /**
+ * Bulk action configuration for row selection actions
+ */
+export interface BulkAction<T> {
+    /**
+     * Label text for the action button
+     */
+    label: string;
+
+    /**
+     * Button variant - first action should use 'primary', others 'secondary'
+     */
+    variant?: 'primary' | 'secondary';
+
+    /**
+     * Callback invoked when action is triggered with selected rows
+     */
+    onAction: (selectedRows: T[]) => void;
+}
+
+/**
  * Props for DataList component
  */
 export interface DataListProps<T> {
@@ -136,6 +156,11 @@ export interface DataListProps<T> {
      * Optional actions configuration
      */
     actions?: DataListActionsConfig<T>;
+
+    /**
+     * Optional bulk actions for row selection
+     */
+    bulkActions?: BulkAction<T>[];
 
     /**
      * Optional row key extractor

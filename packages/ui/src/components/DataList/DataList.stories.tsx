@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
 
 import { DataList } from './DataList';
 import type { DataListColumnConfig } from './DataList.types';
@@ -208,5 +209,164 @@ export const WithCustomStyling: Story = {
             cellClassName: 'py-4',
         })) as DataListColumnConfig<Record<string, unknown>>[],
         className: 'border-2 border-gray-300',
+    },
+};
+
+// Sample data for bulk actions stories - using invoices for customer self-service portal context
+type Invoice = {
+    id: string;
+    invoiceNumber: string;
+    date: string;
+    status: { label: string; value: string };
+    total: { value: number; currency: string };
+};
+
+const sampleInvoices: Invoice[] = [
+    {
+        id: '1',
+        invoiceNumber: 'INV-2024-001',
+        date: '2024-01-15',
+        status: { label: 'Paid', value: 'paid' },
+        total: { value: 1250.0, currency: 'USD' },
+    },
+    {
+        id: '2',
+        invoiceNumber: 'INV-2024-002',
+        date: '2024-01-20',
+        status: { label: 'Pending', value: 'pending' },
+        total: { value: 875.5, currency: 'USD' },
+    },
+    {
+        id: '3',
+        invoiceNumber: 'INV-2024-003',
+        date: '2024-02-01',
+        status: { label: 'Paid', value: 'paid' },
+        total: { value: 2100.0, currency: 'USD' },
+    },
+    {
+        id: '4',
+        invoiceNumber: 'INV-2024-004',
+        date: '2024-02-10',
+        status: { label: 'Overdue', value: 'overdue' },
+        total: { value: 450.75, currency: 'USD' },
+    },
+    {
+        id: '5',
+        invoiceNumber: 'INV-2024-005',
+        date: '2024-02-15',
+        status: { label: 'Pending', value: 'pending' },
+        total: { value: 3200.0, currency: 'USD' },
+    },
+];
+
+const invoiceColumns: DataListColumnConfig<Invoice>[] = [
+    {
+        id: 'invoiceNumber',
+        title: 'Invoice Number',
+        type: 'text',
+    },
+    {
+        id: 'date',
+        title: 'Date',
+        type: 'date',
+    },
+    {
+        id: 'status',
+        title: 'Status',
+        type: 'badge',
+        variant: (value: string) => {
+            switch (value) {
+                case 'paid':
+                    return 'default';
+                case 'pending':
+                    return 'secondary';
+                case 'overdue':
+                    return 'destructive';
+                default:
+                    return 'outline';
+            }
+        },
+    },
+    {
+        id: 'total',
+        title: 'Amount',
+        type: 'price',
+        headerClassName: 'text-right',
+        cellClassName: 'text-right',
+    },
+];
+
+/**
+ * Basic bulk actions example with a single action button.
+ * Select rows using checkboxes to see the action bar appear.
+ */
+export const WithBulkActionsBasic: Story = {
+    args: {
+        data: sampleInvoices as Record<string, unknown>[],
+        columns: invoiceColumns as DataListColumnConfig<Record<string, unknown>>[],
+        bulkActions: [
+            {
+                label: 'Download PDFs',
+                variant: 'primary',
+                onAction: (selectedRows: Record<string, unknown>[]) => {
+                    alert(
+                        `Download action triggered for ${selectedRows.length} invoice(s):\n${selectedRows.map((row) => row.invoiceNumber).join(', ')}`,
+                    );
+                },
+            },
+        ],
+    },
+};
+
+/**
+ * Multiple bulk actions with different button variants.
+ * The first action uses the primary variant, subsequent actions use secondary.
+ * Select rows to test multiple actions.
+ */
+export const WithMultipleBulkActions: Story = {
+    args: {
+        data: sampleInvoices as Record<string, unknown>[],
+        columns: invoiceColumns as DataListColumnConfig<Record<string, unknown>>[],
+        bulkActions: [
+            {
+                label: 'Download PDFs',
+                variant: 'primary',
+                onAction: (selectedRows: Record<string, unknown>[]) => {
+                    alert(
+                        `Download triggered for ${selectedRows.length} invoice(s):\n${selectedRows.map((row) => row.invoiceNumber).join(', ')}`,
+                    );
+                },
+            },
+            {
+                label: 'Export to CSV',
+                variant: 'secondary',
+                onAction: (selectedRows: Record<string, unknown>[]) => {
+                    alert(
+                        `Export triggered for ${selectedRows.length} invoice(s):\n${selectedRows.map((row) => row.invoiceNumber).join(', ')}`,
+                    );
+                },
+            },
+            {
+                label: 'Mark as Paid',
+                variant: 'secondary',
+                onAction: (selectedRows: Record<string, unknown>[]) => {
+                    alert(
+                        `Mark as paid triggered for ${selectedRows.length} invoice(s):\n${selectedRows.map((row) => row.invoiceNumber).join(', ')}`,
+                    );
+                },
+            },
+        ],
+    },
+};
+
+/**
+ * Demonstrates backward compatibility - DataList without bulkActions prop
+ * works exactly as before with no bulk selection features.
+ */
+export const WithoutBulkActions: Story = {
+    args: {
+        data: sampleInvoices as Record<string, unknown>[],
+        columns: invoiceColumns as DataListColumnConfig<Record<string, unknown>>[],
+        // No bulkActions prop - component works as before
     },
 };

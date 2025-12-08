@@ -1,2 +1,8 @@
 export { DataList } from './DataList';
-export type { DataListProps, DataListColumnConfig, DataListActionsConfig, ColumnType } from './DataList.types';
+export type {
+    DataListProps,
+    DataListColumnConfig,
+    DataListActionsConfig,
+    BulkAction,
+    ColumnType,
+} from './DataList.types';

@@ -55,15 +55,9 @@ export function renderCell<T>(
         }
 
         case 'price': {
-            if (typeof value === 'object' && value !== null && 'value' in value) {
-                const priceValue = value.value as { value: number; currency?: string };
-                const currency = (
-                    column.config?.currencyKey ? String(item[column.config.currencyKey]) : priceValue.currency || 'USD'
-                ) as 'USD' | 'EUR' | 'GBP' | 'PLN';
-                return <Price price={{ value: priceValue.value, currency }} />;
-            }
-            if (typeof value === 'object' && value !== null) {
-                return <Price price={value as unknown as { value: number; currency: 'USD' | 'EUR' | 'GBP' | 'PLN' }} />;
+            // Check if value is already a proper Price object { value: number; currency: Currency }
+            if (typeof value === 'object' && value !== null && 'value' in value && 'currency' in value) {
+                return <Price price={value as { value: number; currency: 'USD' | 'EUR' | 'GBP' | 'PLN' }} />;
             }
             return null;
         }
