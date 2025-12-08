@@ -63,6 +63,8 @@
         "clsx": "^2.1.1",
         "cmdk": "^1.1.1",
         "date-fns": "^4.1.0",
+        "input-format": "^0.3.14",
+        "libphonenumber-js": "^1.12.31",
         "lucide-react": "^0.556.0",
         "markdown-to-jsx": "^8.0.0",
         "react-day-picker": "^9.11.3",
