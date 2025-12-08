@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.faq",
-    "version": "1.1.0",
+    "version": "1.2.2",
     "private": false,
     "license": "MIT",
     "description": "A simple block displaying static content in the form of an FAQ.",
@@ -14,10 +14,9 @@
         "dist"
     ],
     "scripts": {
-        "dev": "tsc --build tsconfig.json  && (concurrently \"tsc --build tsconfig.json -w\" \"tsc-alias -w\")",
-        "build": "tsc --build tsconfig.json && tsc-alias",
+        "build": "tsc --build tsconfig.json --preserveWatchOutput && tsc-alias",
         "test": "vitest run",
-        "lint": "tsc --noEmit && eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+        "lint": "tsc --noEmit && eslint \"src/**/*.{ts,tsx}\" --fix",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
@@ -31,12 +30,13 @@
     "devDependencies": {
         "dotenv-cli": "^11.0.0",
         "@o2s/eslint-config": "*",
+        "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "@o2s/vitest-config": "*",
         "concurrently": "^9.2.1",
         "eslint": "^9.39.1",
-        "prettier": "^3.6.2",
+        "prettier": "^3.7.4",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"
     },
@@ -51,7 +51,7 @@
         "@nestjs/config": "^4.0.2",
         "@nestjs/core": "^11",
         "rxjs": "^7",
-        "next": "^15.4.7",
+        "next": "^16.0.5",
         "next-intl": "^4.1.0"
     }
 }

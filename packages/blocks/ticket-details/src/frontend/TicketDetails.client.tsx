@@ -135,7 +135,7 @@ export const TicketDetailsPure: React.FC<Readonly<TicketDetailsPureProps>> = ({
                                                     position={attachment.date}
                                                 />
 
-                                                <div className="flex items-center py-2 px-4 gap-2 border rounded-lg shadow-sm">
+                                                <div className="flex items-center py-2 px-4 gap-2 border rounded-lg shadow-sm bg-card-light">
                                                     <LinkIcon className="w-4 h-4" />
 
                                                     <div className="flex flex-col gap-1 flex-1">

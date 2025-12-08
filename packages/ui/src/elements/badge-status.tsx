@@ -19,8 +19,7 @@ const badgeStatusVariants = cva(
 );
 
 export interface BadgeStatusProps
-    extends React.HTMLAttributes<HTMLDivElement>,
-        VariantProps<typeof badgeStatusVariants> {}
+    extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof badgeStatusVariants> {}
 
 function BadgeStatus({ className, variant, ...props }: BadgeStatusProps) {
     return <div className={cn(badgeStatusVariants({ variant }), className)} {...props} />;

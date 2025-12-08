@@ -1,6 +1,6 @@
 ---
-slug: integrating-contentful-with-live-preview-into-composable-apps
-title: 'Integrating Contentful with Live Preview into composable apps'
+slug: integrating-contentful-with-live-preview-into-composable-nextjs-apps
+title: 'Integrating Contentful with Live Preview into composable Next.js apps'
 description: 'How we implemented a flexible Contentful integration with Live Preview support in our composable architecture'
 keywords:
     [
@@ -15,22 +15,20 @@ keywords:
         'nextjs',
         'react',
     ]
-date: 2025-10-15
-tags: [tech, contentful]
+date: 2025-11-26
+tags: [tech, cms]
 authors: [marcin.krasowski]
 toc_max_heading_level: 3
 hide_table_of_contents: false
 ---
 
-# Integrating Contentful with Live Preview into composable apps
-
-In the world of modern web development, composable architectures are becoming increasingly popular. These architectures allow developers to build applications by combining independent services - both backend and frontend related - rather than relying on monolithic solutions. One key component in many composable architectures is a headless CMS, which provides content management capabilities without dictating how that content is presented.
+In the world of modern web development, composable architectures are becoming increasingly popular. These architectures allow developers to build applications by combining independent services rather than relying on monolithic solutions. One key component in many composable architectures is a headless CMS, which provides content management capabilities without dictating how that content is presented.
 
 ![contentful in composable apps](contentful-intro.png)
 
 <!--truncate-->
 
-At [**Open Self Service**](https://www.openselfservice.com/), we've integrated Contentful as our next headless CMS, following our successful implementation with Strapi. This transition highlights key strength of our composable architecture, and the data normalization approach that Open Self Service is built on – replacing API services (which a headless CMS essentially is) becomes a relatively straightforward process that requires no changes to the frontend application. This decoupling between the frontend and backend services is a fundamental principle of our architecture.
+At [**Open Self Service**](https://www.openselfservice.com/), we've integrated Contentful as our next headless CMS, following our successful [**implementation with Strapi**](../building-composable-frontends-with-strapi-and-nextjs/index.md). This transition highlights key strength of composable architecture, and the data normalization approach that Open Self Service is built on. Replacing API services (which a headless CMS essentially is) becomes a relatively straightforward process that requires no changes to the frontend application, though it requires some upfront work in terms of creating a module that integrates that new service. This decoupling between the frontend and backend services is a fundamental principle of our architecture.
 
 
 We'll explore here how we implemented the Contentful integration, with a particular focus on the Live Preview feature, which allows content editors to see their changes in real-time.
@@ -172,7 +170,15 @@ export class GraphqlService {
 
 By combining GraphQL with code generation, we've created a robust and developer-friendly data fetching system. The generated TypeScript data model ensures complete type safety throughout our application, eliminating runtime errors related to data structure mismatches.
 
-This implementation also provides compile-time validation of our GraphQL operations, catching potential errors before they reach production. Perhaps most importantly for content editors, our implementation enables seamless switching between published and draft content, creating a smooth workflow between content creation and preview.
+This implementation also provides compile-time validation of our GraphQL operations, catching potential errors before they reach production, together with IDE code completion both when writing queries:
+
+![IDE code completion](ide-code-completion-1.png)
+
+and also when using generated types directly in the code:
+
+![IDE code completion](ide-code-completion-2.png)
+
+Perhaps most importantly for content editors, our implementation enables seamless switching between published and draft content, creating a smooth workflow between content creation and preview.
 
 ## Content Type Modeling
 
@@ -277,7 +283,7 @@ One of the most powerful features of Contentful is Live Preview, which allows co
 
 3. Our mappers transform Contentful data into our application's data model, which can make it difficult to map changes back to the original Contentful fields for Live Preview.
 
-To address these challenges, we've added metadata to our mapped data structures, including Contentful entry IDs and field names, to enable the Live Preview SDK to map changes back to the original Contentful fields. This metadata is only included in the response while the app is run in preview/draft mode (so when using Live Preview) so that there would be no unnecessary data for regular users.
+To address these challenges, we've added metadata to our mapped data structures, including Contentful entry IDs and field names, to enable the Live Preview SDK to map changes back to the original Contentful fields. This metadata is only included in the response while the app is run in preview/draft mode so that there would be no unnecessary data for regular users.
 
 ![live preview in Contentful](live-preview-1.png)
 
@@ -285,24 +291,11 @@ We've also created a wrapper around the Contentful Live Preview SDK that abstrac
 
 ### Live Preview approaches across headless CMSes
 
-It's important to note that live preview functionality varies significantly between different headless CMSes. This variation adds complexity when building a CMS-agnostic architecture, as each system may require a different integration approach.
+It's important to note that live preview functionality varies significantly between different headless CMSes. This makes building a CMS-agnostic architecture a bit more challenging, as each system may require a different integration approach.
 
-Some CMSes, like Contentful, use a data attributes approach. In this model, the CMS provides an SDK that adds special data attributes to DOM elements. These attributes create a connection between rendered content and the corresponding content in the CMS. When a content editor clicks on an element in the preview, the SDK uses these attributes to identify which field to edit in the CMS interface. Changes made in the CMS are pushed to the preview in real-time through WebSockets or similar technologies.
+Some CMSes, like Contentful, use an approach with explicit connection between the app and the CMS editor. In this model, the CMS provides an SDK that adds special data attributes to DOM elements. These attributes create a connection between rendered content and the corresponding content in the CMS. When a content editor clicks on an element in the preview, the SDK uses these attributes to identify which field to edit in the CMS interface. Changes made in the CMS are pushed to the preview in real-time through WebSockets or similar technologies.
 
-Besides Contentful, other CMSes that use variations of this approach include:
-
-- **Prismic** uses data attributes for its preview functionality with its Slice Machine
-- **Kontent.ai** which uses a similar approach with its Web Spotlight feature
-- **DatoCMS** with its Visual Editor that uses data attributes for field highlighting
-
-Other CMSes take a different approach using content source maps with steganography. Content source maps are metadata that map rendered content back to its source in the CMS, similar to how source maps work in JavaScript. Stega (steganography) embeds invisible metadata within the content itself, often using techniques like invisible Unicode characters or subtle CSS variations.
-
-Examples of CMSes using these approaches include:
-
-- **Sanity.io** offers both approaches: traditional data attributes with its "Presentation Tool" and a newer stega-based approach with its "Visual Editing" feature
-- **Storyblok** uses a source mapping approach for its Visual Editor
-- **Builder.io** embeds metadata in the content for its visual editing experience
-- **Strapi** uses content source maps for its preview functionality as documented in their official documentation
+Other CMSes take a different approach using content [source maps with steganography](https://www.sanity.io/docs/visual-editing/stega#fad3406bd530). Content source maps are metadata that map rendered content back to its source in the CMS, similar to how source maps work in JavaScript. Stega (steganography) embeds invisible metadata within the content itself, often using techniques like invisible Unicode characters or subtle CSS variations.
 
 Each approach has its trade-offs. Data attributes are more explicit but can add DOM clutter, while stega approaches are more elegant but potentially more fragile. Understanding these differences is crucial when designing a CMS-agnostic architecture that needs to support live preview across multiple systems.
 
@@ -454,9 +447,8 @@ Our API layer transforms Contentful's raw data into a normalized format that our
 
 The composition layer processes data asynchronously, potentially combining multiple API calls. This created timing challenges for Live Preview, which expects near-instantaneous updates. We had to implement optimistic UI updates and sophisticated caching strategies to maintain a responsive editing experience.
 
-For features providing significant value to content editors, like Live Preview, we found that direct integration with careful abstraction boundaries was the right approach. The key was making these decisions consciously rather than dogmatically adhering to architectural principles.
+For features providing significant value to content editors, like Live Preview, we found that direct integration with careful abstraction boundaries was the right approach. The key was making these decisions consciously rather than strictly adhering to architectural principles.
 
 If you're implementing Contentful or another headless CMS in a composable architecture, we hope these insights provide valuable guidance for your own integration journey.
 
-- [**Open Self Service website**](https://www.openselfservice.com)
-- [**GitHub repository**](https://github.com/openselfservice/openselfservice)
+Hit us on [**Discord**](https://discord.gg/4R568nZgsT) if you have any questions or would like to get some more details. If you're interested in our project, visit [**our website**](https://www.openselfservice.com) where you can find more info about Open Self Service.

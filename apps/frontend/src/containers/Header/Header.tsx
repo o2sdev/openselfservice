@@ -20,7 +20,12 @@ import { MobileNavigation } from './MobileNavigation/MobileNavigation';
 import { NotificationInfo } from './NotificationInfo/NotificationInfo';
 import { UserInfo } from './UserInfo/UserInfo';
 
-export const Header: React.FC<HeaderProps> = ({ data, alternativeUrls, children }) => {
+export const Header: React.FC<HeaderProps> = ({
+    data,
+    alternativeUrls,
+    children,
+    shouldIncludeSignInButton = true,
+}) => {
     const session = useSession();
     const isSignedIn = !!session.data?.user;
 
@@ -82,6 +87,8 @@ export const Header: React.FC<HeaderProps> = ({ data, alternativeUrls, children 
                         notificationSlot={NotificationSlot}
                         userSlot={UserSlot}
                         items={data.items}
+                        signInLabel={data.signInLabel}
+                        shouldIncludeSignInButton={shouldIncludeSignInButton}
                     />
                 </div>
                 <div className="md:hidden">
@@ -94,6 +101,8 @@ export const Header: React.FC<HeaderProps> = ({ data, alternativeUrls, children 
                         items={data.items}
                         title={data.title}
                         mobileMenuLabel={data.mobileMenuLabel}
+                        signInLabel={data.signInLabel}
+                        shouldIncludeSignInButton={shouldIncludeSignInButton}
                     />
                 </div>
             </>

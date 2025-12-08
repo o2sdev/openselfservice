@@ -16,17 +16,20 @@ import { useFiltersContext } from './FiltersContext';
 
 function separateLeadingItem<T>(items: Models.Filters.FilterItem<T>[]) {
     let leadingItem: Models.Filters.FilterItem<T> | undefined;
+    let viewModeToggle: Models.Filters.FilterViewModeToggle | undefined;
     const filteredItems: Models.Filters.FilterItem<T>[] = [];
 
     for (const item of items) {
-        if (item.isLeading === true && leadingItem === undefined) {
+        if (item.__typename === 'FilterViewModeToggle') {
+            viewModeToggle = item;
+        } else if (item.isLeading === true && leadingItem === undefined) {
             leadingItem = item;
         } else {
             filteredItems.push(item);
         }
     }
 
-    return { leadingItem, filteredItems };
+    return { leadingItem, viewModeToggle, filteredItems };
 }
 
 export const Filters = <T, S extends FormikValues>({
@@ -34,7 +37,6 @@ export const Filters = <T, S extends FormikValues>({
     initialValues,
     onSubmit,
     onReset,
-    hasLeadingItem,
     labels,
 }: Readonly<FiltersProps<T, S>>) => {
     const [filtersOpen, setFiltersOpen] = useState(false);
@@ -46,9 +48,7 @@ export const Filters = <T, S extends FormikValues>({
 
     const { label, title, description, submit, reset, items, removeFilters } = filters;
 
-    const { leadingItem, filteredItems } = hasLeadingItem
-        ? separateLeadingItem(items)
-        : { leadingItem: undefined, filteredItems: items };
+    const { leadingItem, viewModeToggle, filteredItems } = separateLeadingItem(items);
 
     const handleReset = (e: React.MouseEvent) => {
         e.preventDefault();
@@ -70,20 +70,31 @@ export const Filters = <T, S extends FormikValues>({
                 {({ submitForm, setFieldValue }) => (
                     <>
                         <div className="flex flex-col justify-between items-center w-full gap-6 md:flex-row">
-                            {leadingItem !== undefined && (
-                                <div className="w-full md:w-auto overflow-hidden rounded-md">
-                                    <ScrollContainer className="scroll-container flex whitespace-nowrap w-full items-center gap-4">
-                                        <FilterItem
-                                            item={leadingItem}
-                                            submitForm={submitForm}
-                                            setFieldValue={setFieldValue}
-                                            isLeading={true}
-                                            labels={labels}
-                                        />
-                                    </ScrollContainer>
-                                </div>
-                            )}
-                            <div className="flex gap-4 flex-col w-full sm:flex-row md:w-auto">
+                            <div className="flex items-center gap-4 w-full md:w-auto">
+                                {leadingItem && (
+                                    <div className="overflow-hidden rounded-md">
+                                        <ScrollContainer className="scroll-container flex whitespace-nowrap items-center gap-4">
+                                            <FilterItem
+                                                key={String(leadingItem.id)}
+                                                item={leadingItem}
+                                                submitForm={submitForm}
+                                                setFieldValue={setFieldValue}
+                                                isLeading={true}
+                                                labels={labels}
+                                            />
+                                        </ScrollContainer>
+                                    </div>
+                                )}
+                                {viewModeToggle && (
+                                    <FilterItem
+                                        item={viewModeToggle}
+                                        submitForm={submitForm}
+                                        setFieldValue={setFieldValue}
+                                        labels={labels}
+                                    />
+                                )}
+                            </div>
+                            <div className="flex gap-4 flex-col-reverse w-full sm:flex-row md:w-auto">
                                 {activeFilters > 0 && (
                                     <Button variant="outline" onClick={handleReset} className="gap-0">
                                         <X className="h-4 w-4 mr-2" />

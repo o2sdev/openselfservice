@@ -1,6 +1,6 @@
 {
     "name": "@o2s/integrations.algolia",
-    "version": "1.3.0",
+    "version": "1.3.2",
     "private": false,
     "license": "MIT",
     "exports": {
@@ -10,23 +10,23 @@
         "dist"
     ],
     "scripts": {
-        "dev": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")",
-        "build": "tsc && tsc-alias",
-        "lint": "tsc --noEmit && eslint . --max-warnings 0",
+        "build": "tsc --preserveWatchOutput && tsc-alias",
+        "lint": "tsc --noEmit && eslint . --max-warnings=0",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
         "@o2s/framework": "*",
         "@o2s/utils.logger": "*",
-        "algoliasearch": "^5.44.0"
+        "algoliasearch": "^5.46.0"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",
+        "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "concurrently": "^9.2.1",
         "eslint": "^9.39.1",
-        "prettier": "^3.6.2",
+        "prettier": "^3.7.4",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"
     },

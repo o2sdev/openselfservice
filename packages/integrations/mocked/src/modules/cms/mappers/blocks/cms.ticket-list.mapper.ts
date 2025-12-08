@@ -2,8 +2,7 @@ import { CMS } from '@o2s/framework/modules';
 
 const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
     id: 'ticket-list-1',
-    title: 'Cases',
-    subtitle: 'Your recent cases',
+    title: 'Your recent cases',
     forms: [
         {
             label: 'Submit complaint',
@@ -32,6 +31,11 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
             title: 'Action',
             label: 'Details',
         },
+    },
+    cardHeaderSlots: {
+        left: 'topic',
+        right: 'status',
+        bottom: 'updatedAt',
     },
     fieldMapping: {
         topic: {
@@ -138,6 +142,11 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
                     label: 'To',
                 },
             },
+            {
+                __typename: 'FilterViewModeToggle',
+                id: 'viewMode',
+                value: 'list',
+            },
         ],
     },
     noResults: {
@@ -155,8 +164,7 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
 
 const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
     id: 'ticket-list-1',
-    title: 'Fallübersicht',
-    subtitle: 'Ihre neuesten Fälle',
+    title: 'Ihre neuesten Fälle',
     forms: [
         {
             label: 'Beschwerde einreichen',
@@ -185,6 +193,11 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
             title: 'Aktion',
             label: 'Details',
         },
+    },
+    cardHeaderSlots: {
+        left: 'topic',
+        right: 'status',
+        bottom: 'updatedAt',
     },
     fieldMapping: {
         topic: {
@@ -293,6 +306,11 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
                     label: 'Bis',
                 },
             },
+            {
+                __typename: 'FilterViewModeToggle',
+                id: 'viewMode',
+                value: 'list',
+            },
         ],
     },
     noResults: {
@@ -310,8 +328,7 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
 
 const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
     id: 'ticket-list-1',
-    title: 'Zgłoszenia',
-    subtitle: 'Twoje ostatnie zgłoszenia',
+    title: 'Twoje ostatnie zgłoszenia',
     forms: [
         {
             label: 'Zgłoś błąd',
@@ -341,6 +358,11 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
             title: 'Akcja',
             label: 'Szczegóły',
         },
+    },
+    cardHeaderSlots: {
+        left: 'topic',
+        right: 'status',
+        bottom: 'updatedAt',
     },
     fieldMapping: {
         topic: {
@@ -448,6 +470,11 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
                 to: {
                     label: 'Do',
                 },
+            },
+            {
+                __typename: 'FilterViewModeToggle',
+                id: 'viewMode',
+                value: 'list',
             },
         ],
     },

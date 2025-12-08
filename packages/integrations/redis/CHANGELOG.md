@@ -1,5 +1,30 @@
 # @o2s/integrations.redis
 
+## 1.1.2
+
+### Patch Changes
+
+- 221dc2c: fix: added missing Eslint command to list-staged
+- Updated dependencies [221dc2c]
+- Updated dependencies [db5b381]
+- Updated dependencies [c2d9438]
+    - @o2s/utils.logger@1.1.3
+    - @o2s/framework@1.14.0
+
+## 1.1.1
+
+### Patch Changes
+
+- 0354126: reworked turbo dev task to optimize CPU/RAM usage
+- Updated dependencies [2c780d5]
+- Updated dependencies [1653b74]
+- Updated dependencies [c27726a]
+- Updated dependencies [2c780d5]
+- Updated dependencies [0354126]
+- Updated dependencies [1653b74]
+    - @o2s/framework@1.13.0
+    - @o2s/utils.logger@1.1.2
+
 ## 1.1.0
 
 ### Minor Changes

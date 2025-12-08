@@ -33,3 +33,15 @@ export * as CategoryListBlock from './models/blocks/category-list.model';
 export * as QuickLinksBlock from './models/blocks/quick-links.model';
 export * as ArticleSearchBlock from './models/blocks/article-search.model';
 export * as FeaturedServiceListBlock from './models/blocks/featured-service-list.model';
+export * as ProductListBlock from './models/blocks/product-list.model';
+export * as NotificationSummaryBlock from './models/blocks/notification-summary.model';
+export * as TicketSummaryBlock from './models/blocks/ticket-summary.model';
+export * as BentoGridBlock from './models/blocks/bento-grid.model';
+export * as CtaSectionBlock from './models/blocks/cta-section.model';
+export * as DocumentListBlock from './models/blocks/document-list.model';
+export * as FeatureSectionBlock from './models/blocks/feature-section.model';
+export * as FeatureSectionGridBlock from './models/blocks/feature-section-grid.model';
+export * as HeroSectionBlock from './models/blocks/hero-section.model';
+export * as MediaSectionBlock from './models/blocks/media-section.model';
+export * as PricingSectionBlock from './models/blocks/pricing-section.model';
+// BLOCK IMPORT

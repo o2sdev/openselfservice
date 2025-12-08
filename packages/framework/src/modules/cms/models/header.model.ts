@@ -14,6 +14,7 @@ export class Header {
         open: string;
         close: string;
     };
+    signInLabel?: string;
     contextSwitcher!: ContextSwitcher;
     items!: (NavigationGroup | NavigationItem)[];
     userInfo?: {

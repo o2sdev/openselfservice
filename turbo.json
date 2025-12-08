@@ -1,10 +1,11 @@
 {
     "$schema": "https://turbo.build/schema.json",
     "ui": "stream",
-    "concurrency": "100",
+    "concurrency": "5",
     "tasks": {
         "init": {},
         "build": {
+            "cache": true,
             "dependsOn": [
                 "^build"
             ],
@@ -32,13 +33,6 @@
         "format": {
             "dependsOn": [
                 "^format"
-            ]
-        },
-        "dev": {
-            "cache": false,
-            "persistent": true,
-            "dependsOn": [
-                "^build"
             ]
         },
         "start": {
