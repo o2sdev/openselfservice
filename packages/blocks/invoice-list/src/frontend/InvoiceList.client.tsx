@@ -1,6 +1,8 @@
 'use client';
 
+import { IntlMessageFormat } from 'intl-messageformat';
 import { Download } from 'lucide-react';
+import { useLocale } from 'next-intl';
 import React, { useState, useTransition } from 'react';
 
 import { Mappings, Utils } from '@o2s/utils.frontend';
@@ -27,6 +29,7 @@ import { InvoiceListPureProps } from './InvoiceList.types';
 
 export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, accessToken, routing, ...component }) => {
     const { labels } = useGlobalContext();
+    const currentLocale = useLocale();
 
     const initialFilters: Request.GetInvoiceListBlockQuery = {
         id: component.id,
@@ -96,27 +99,23 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
         }
     };
 
-    const handleBulkDownload = async (selectedInvoices: Model.Invoice[]) => {
-        if (selectedInvoices.length === 0) return;
+    const handleBulkDownload = async (selectedInvoiceIds: string[]) => {
+        if (selectedInvoiceIds.length === 0) return;
 
         startTransition(async () => {
             try {
                 // Download invoices sequentially to avoid overwhelming the server
-                for (const invoice of selectedInvoices) {
+                for (const invoiceId of selectedInvoiceIds) {
                     try {
-                        const response = await sdk.blocks.getInvoicePdf(
-                            invoice.id,
-                            { 'x-locale': locale },
-                            accessToken,
-                        );
+                        const response = await sdk.blocks.getInvoicePdf(invoiceId, { 'x-locale': locale }, accessToken);
                         Utils.DownloadFile.downloadFile(
                             response,
-                            data.downloadFileName?.replace('{id}', invoice.id) || `invoice-${invoice.id}.pdf`,
+                            data.downloadFileName?.replace('{id}', invoiceId) || `invoice-${invoiceId}.pdf`,
                         );
                         // Small delay between downloads
                         await new Promise((resolve) => setTimeout(resolve, 100));
                     } catch (error) {
-                        console.error(`Failed to download invoice ${invoice.id}:`, error);
+                        console.error(`Failed to download invoice ${invoiceId}:`, error);
                     }
                 }
             } catch (_error) {
@@ -191,7 +190,26 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
           }
         : undefined;
 
-    component.enableRowSelection = true; // TODO: remove this after testing
+    const bulkActions =
+        component.enableRowSelection && component.downloadAllButtonLabel
+            ? (selectedItems: Model.Invoice[]) => (
+                  <Button
+                      size="sm"
+                      onClick={() => handleBulkDownload(selectedItems.map((item) => item.id))}
+                      disabled={isPending}
+                  >
+                      <Download className="mr-2 h-4 w-4" />
+                      {component.downloadAllButtonLabel}
+                  </Button>
+              )
+            : undefined;
+
+    const bulkActionsLabel = component.bulkActionsLabel
+        ? (count: number) => {
+              const msg = new IntlMessageFormat(component.bulkActionsLabel!, currentLocale);
+              return String(msg.format({ count }));
+          }
+        : undefined;
 
     return (
         <div className="w-full">
@@ -236,22 +254,8 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
                                         selectedRows={selectedRows}
                                         onSelectionChange={setSelectedRows}
                                         getRowKey={(item) => item.id}
-                                        bulkActions={
-                                            component.enableRowSelection
-                                                ? (selectedItems) => (
-                                                      <Button
-                                                          variant="default"
-                                                          size="sm"
-                                                          onClick={() => handleBulkDownload(selectedItems)}
-                                                          disabled={isPending}
-                                                      >
-                                                          <Download className="mr-2 h-4 w-4" />
-                                                          Download selected
-                                                      </Button>
-                                                  )
-                                                : undefined
-                                        }
-                                        bulkActionsLabel={(count) => `${count} item(s) selected`}
+                                        bulkActions={bulkActions}
+                                        bulkActionsLabel={bulkActionsLabel}
                                     />
 
                                     {data.pagination && (
