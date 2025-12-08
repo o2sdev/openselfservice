@@ -104,7 +104,6 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
 
         startTransition(async () => {
             try {
-                // Download invoices sequentially to avoid overwhelming the server
                 for (const invoiceId of selectedInvoiceIds) {
                     try {
                         const response = await sdk.blocks.getInvoicePdf(invoiceId, { 'x-locale': locale }, accessToken);
@@ -112,7 +111,6 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
                             response,
                             data.downloadFileName?.replace('{id}', invoiceId) || `invoice-${invoiceId}.pdf`,
                         );
-                        // Small delay between downloads
                         await new Promise((resolve) => setTimeout(resolve, 100));
                     } catch (error) {
                         console.error(`Failed to download invoice ${invoiceId}:`, error);
@@ -192,16 +190,15 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
 
     const bulkActions =
         component.enableRowSelection && component.downloadAllButtonLabel
-            ? (selectedItems: Model.Invoice[]) => (
-                  <Button
-                      size="sm"
-                      onClick={() => handleBulkDownload(selectedItems.map((item) => item.id))}
-                      disabled={isPending}
-                  >
-                      <Download className="mr-2 h-4 w-4" />
-                      {component.downloadAllButtonLabel}
-                  </Button>
-              )
+            ? (selectedRowKeys: Set<string | number>) => {
+                  const selectedIds = Array.from(selectedRowKeys) as string[];
+                  return (
+                      <Button size="sm" onClick={() => handleBulkDownload(selectedIds)} disabled={isPending}>
+                          <Download className="mr-2 h-4 w-4" />
+                          {component.downloadAllButtonLabel}
+                      </Button>
+                  );
+              }
             : undefined;
 
     const bulkActionsLabel = component.bulkActionsLabel

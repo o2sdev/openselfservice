@@ -22,6 +22,6 @@ export interface DataViewProps<T> {
     enableRowSelection?: boolean;
     selectedRows?: Set<string | number>;
     onSelectionChange?: (selected: Set<string | number>) => void;
-    bulkActions?: (selectedItems: T[], selectedCount: number) => ReactNode;
+    bulkActions?: (selectedRowKeys: Set<string | number>) => ReactNode;
     bulkActionsLabel?: (count: number) => string;
 }

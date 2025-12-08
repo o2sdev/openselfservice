@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import { DataGrid } from '@o2s/ui/components/DataGrid';
 import { DataList } from '@o2s/ui/components/DataList';
@@ -19,38 +19,17 @@ export const DataView = <T extends Record<string, any>>({
     getRowKey,
     ...props
 }: DataViewProps<T>) => {
-    // Map selected row keys to full item objects
-    const selectedItems = useMemo(() => {
-        if (!selectedRows || selectedRows.size === 0 || !bulkActions) {
-            return [];
-        }
-
-        const defaultGetRowKey = (item: T, index: number) => {
-            if ('id' in item) {
-                return String(item.id);
-            }
-            return index;
-        };
-
-        const rowKeyExtractor = getRowKey || defaultGetRowKey;
-
-        return data.filter((item, index) => {
-            const key = rowKeyExtractor(item, index);
-            return selectedRows.has(key);
-        });
-    }, [selectedRows, data, getRowKey, bulkActions]);
-
     const selectedCount = selectedRows?.size || 0;
     const showBulkActions = enableRowSelection && bulkActions && selectedCount > 0 && viewMode !== 'grid';
 
     return (
         <>
-            {showBulkActions && (
+            {showBulkActions && selectedRows && bulkActions && (
                 <div className="flex items-center justify-between gap-4 rounded-md border bg-muted/50 p-4">
                     {bulkActionsLabel && (
                         <span className="text-sm text-muted-foreground">{bulkActionsLabel(selectedCount)}</span>
                     )}
-                    <div className="flex items-center gap-2">{bulkActions(selectedItems, selectedCount)}</div>
+                    <div className="flex items-center gap-2">{bulkActions(selectedRows)}</div>
                 </div>
             )}
             {viewMode === 'grid' ? (
