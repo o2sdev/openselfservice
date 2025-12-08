@@ -20,11 +20,12 @@ export const DataView = <T extends Record<string, any>>({
     ...props
 }: DataViewProps<T>) => {
     const selectedCount = selectedRows?.size || 0;
-    const showBulkActions = enableRowSelection && bulkActions && selectedCount > 0 && viewMode !== 'grid';
+    const showBulkActions =
+        enableRowSelection && bulkActions && selectedRows && selectedCount > 0 && viewMode !== 'grid';
 
     return (
         <>
-            {showBulkActions && selectedRows && bulkActions && (
+            {showBulkActions && (
                 <div className="flex items-center justify-between gap-4 rounded-md border bg-muted/50 p-4">
                     {bulkActionsLabel && (
                         <span className="text-sm text-muted-foreground">{bulkActionsLabel(selectedCount)}</span>

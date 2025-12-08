@@ -188,18 +188,17 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
           }
         : undefined;
 
-    const bulkActions =
-        component.enableRowSelection && component.downloadAllButtonLabel
-            ? (selectedRowKeys: Set<string | number>) => {
-                  const selectedIds = Array.from(selectedRowKeys) as string[];
-                  return (
-                      <Button size="sm" onClick={() => handleBulkDownload(selectedIds)} disabled={isPending}>
-                          <Download className="mr-2 h-4 w-4" />
-                          {component.downloadAllButtonLabel}
-                      </Button>
-                  );
-              }
-            : undefined;
+    const bulkActions = component.downloadAllButtonLabel
+        ? (selectedRowKeys: Set<string | number>) => {
+              const selectedIds = Array.from(selectedRowKeys).map(String);
+              return (
+                  <Button size="sm" onClick={() => handleBulkDownload(selectedIds)} disabled={isPending}>
+                      <Download className="mr-2 h-4 w-4" />
+                      {component.downloadAllButtonLabel}
+                  </Button>
+              );
+          }
+        : undefined;
 
     const bulkActionsLabel = component.bulkActionsLabel
         ? (count: number) => {
