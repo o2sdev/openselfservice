@@ -1,3 +1,4 @@
+import DOMPurify from 'dompurify';
 import Markdown, { MarkdownToJSX } from 'markdown-to-jsx';
 import NextLink, { LinkProps } from 'next/link';
 import React, { FC, ReactNode } from 'react';
@@ -12,7 +13,6 @@ import { RichTextProps } from './RichText.types';
 /**
  * Detects if content is HTML or Markdown format.
  * HTML is detected by presence of HTML tags (e.g., <p>, <ul>, <div>, etc.).
- * Markdown is detected by presence of markdown syntax (e.g., #, -, *, etc.) without HTML tags.
  */
 export const detectContentFormat = (content: string): 'html' | 'markdown' => {
     if (!content) return 'markdown';
@@ -80,7 +80,9 @@ export const RichText: FC<Readonly<RichTextProps>> = ({
 
     // If HTML, render directly without Markdown parsing
     if (format === 'html') {
-        return <div {...rest} className={className} dangerouslySetInnerHTML={{ __html: content }} />;
+        return (
+            <div {...rest} className={className} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }} />
+        );
     }
 
     const baseFontSizeClass = baseFontSize === 'body' ? 'text-base md:text-base' : 'text-sm md:text-sm';
