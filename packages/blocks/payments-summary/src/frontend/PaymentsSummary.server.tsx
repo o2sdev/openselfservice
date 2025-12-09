@@ -16,8 +16,9 @@ export const PaymentsSummary: React.FC<PaymentsSummaryProps> = async ({
     routing,
     hasPriority,
 }) => {
+    let data;
     try {
-        const data = await sdk.blocks.getPaymentsSummary(
+        data = await sdk.blocks.getPaymentsSummary(
             {
                 id,
                 limit: 1000,
@@ -26,18 +27,18 @@ export const PaymentsSummary: React.FC<PaymentsSummaryProps> = async ({
             { 'x-locale': locale },
             accessToken,
         );
-
-        return (
-            <PaymentsSummaryDynamic
-                {...data}
-                id={id}
-                accessToken={accessToken}
-                locale={locale}
-                routing={routing}
-                hasPriority={hasPriority}
-            />
-        );
     } catch (_error) {
         return null;
     }
+
+    return (
+        <PaymentsSummaryDynamic
+            {...data}
+            id={id}
+            accessToken={accessToken}
+            locale={locale}
+            routing={routing}
+            hasPriority={hasPriority}
+        />
+    );
 };

@@ -10,18 +10,19 @@ export const MediaSectionDynamic = dynamic(() =>
 );
 
 export const MediaSection: React.FC<MediaSectionProps> = async ({ id, accessToken, locale, routing }) => {
+    let data;
     try {
-        const data = await sdk.blocks.getMediaSection(
+        data = await sdk.blocks.getMediaSection(
             {
                 id,
             },
             { 'x-locale': locale },
             accessToken,
         );
-
-        return <MediaSectionDynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />;
     } catch (error) {
         console.error('Error fetching MediaSection block', error);
         return null;
     }
+
+    return <MediaSectionDynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />;
 };

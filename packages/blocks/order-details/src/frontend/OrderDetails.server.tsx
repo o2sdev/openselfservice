@@ -18,8 +18,9 @@ export const OrderDetails: React.FC<OrderDetailsProps> = async ({
     routing,
     hasPriority,
 }) => {
+    let data;
     try {
-        const data = await sdk.blocks.getOrderDetails(
+        data = await sdk.blocks.getOrderDetails(
             {
                 id: orderId,
             },
@@ -29,19 +30,19 @@ export const OrderDetails: React.FC<OrderDetailsProps> = async ({
             { 'x-locale': locale },
             accessToken,
         );
-
-        return (
-            <OrderDetailsDynamic
-                {...data}
-                id={id}
-                orderId={orderId}
-                accessToken={accessToken}
-                locale={locale}
-                routing={routing}
-                hasPriority={hasPriority}
-            />
-        );
     } catch (_error) {
         return null;
     }
+
+    return (
+        <OrderDetailsDynamic
+            {...data}
+            id={id}
+            orderId={orderId}
+            accessToken={accessToken}
+            locale={locale}
+            routing={routing}
+            hasPriority={hasPriority}
+        />
+    );
 };

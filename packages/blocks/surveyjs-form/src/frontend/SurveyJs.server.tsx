@@ -14,26 +14,27 @@ export const SurveyJsServer: React.FC<SurveyJsFormProps> = async ({
     routing,
     hasPriority,
 }) => {
+    let data;
     try {
-        const data = await sdk.blocks.getSurveyjsBlock(
+        data = await sdk.blocks.getSurveyjsBlock(
             {
                 id,
             },
             { 'x-locale': locale },
             accessToken,
         );
-
-        return (
-            <SurveyJsDynamic
-                {...data}
-                id={id}
-                accessToken={accessToken}
-                locale={locale}
-                routing={routing}
-                hasPriority={hasPriority}
-            />
-        );
     } catch (_error) {
         return null;
     }
+
+    return (
+        <SurveyJsDynamic
+            {...data}
+            id={id}
+            accessToken={accessToken}
+            locale={locale}
+            routing={routing}
+            hasPriority={hasPriority}
+        />
+    );
 };

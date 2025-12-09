@@ -8,26 +8,27 @@ import { OrderListProps } from './OrderList.types';
 export const OrderListDynamic = dynamic(() => import('./OrderList.client').then((module) => module.OrderListPure));
 
 export const OrderList: React.FC<OrderListProps> = async ({ id, accessToken, locale, routing, hasPriority }) => {
+    let data;
     try {
-        const data = await sdk.blocks.getOrderList(
+        data = await sdk.blocks.getOrderList(
             {
                 id,
             },
             { 'x-locale': locale },
             accessToken,
         );
-
-        return (
-            <OrderListDynamic
-                {...data}
-                id={id}
-                accessToken={accessToken}
-                locale={locale}
-                routing={routing}
-                hasPriority={hasPriority}
-            />
-        );
     } catch (_error) {
         return null;
     }
+
+    return (
+        <OrderListDynamic
+            {...data}
+            id={id}
+            accessToken={accessToken}
+            locale={locale}
+            routing={routing}
+            hasPriority={hasPriority}
+        />
+    );
 };

@@ -10,8 +10,9 @@ export const PaymentsHistoryDynamic = dynamic(() =>
 );
 
 export const PaymentsHistory: React.FC<PaymentsHistoryProps> = async ({ id, accessToken, locale, hasPriority }) => {
+    let data;
     try {
-        const data = await sdk.blocks.getPaymentsHistory(
+        data = await sdk.blocks.getPaymentsHistory(
             {
                 id,
                 offset: 0,
@@ -20,17 +21,11 @@ export const PaymentsHistory: React.FC<PaymentsHistoryProps> = async ({ id, acce
             { 'x-locale': locale },
             accessToken,
         );
-
-        return (
-            <PaymentsHistoryDynamic
-                {...data}
-                id={id}
-                accessToken={accessToken}
-                locale={locale}
-                hasPriority={hasPriority}
-            />
-        );
     } catch (_error) {
         return null;
     }
+
+    return (
+        <PaymentsHistoryDynamic {...data} id={id} accessToken={accessToken} locale={locale} hasPriority={hasPriority} />
+    );
 };

@@ -17,8 +17,9 @@ export const TicketDetails: React.FC<TicketDetailsProps> = async ({
     routing,
     hasPriority,
 }) => {
+    let data;
     try {
-        const data = await sdk.blocks.getTicketDetails(
+        data = await sdk.blocks.getTicketDetails(
             {
                 id: ticketId,
             },
@@ -28,19 +29,19 @@ export const TicketDetails: React.FC<TicketDetailsProps> = async ({
             { 'x-locale': locale },
             accessToken,
         );
-
-        return (
-            <TicketDetailsDynamic
-                {...data}
-                id={id}
-                ticketId={ticketId}
-                accessToken={accessToken}
-                locale={locale}
-                routing={routing}
-                hasPriority={hasPriority}
-            />
-        );
     } catch (_error) {
         return null;
     }
+
+    return (
+        <TicketDetailsDynamic
+            {...data}
+            id={id}
+            ticketId={ticketId}
+            accessToken={accessToken}
+            locale={locale}
+            routing={routing}
+            hasPriority={hasPriority}
+        />
+    );
 };

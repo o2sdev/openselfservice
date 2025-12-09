@@ -17,8 +17,9 @@ export const ServiceDetails: React.FC<ServiceDetailsProps> = async ({
     routing,
     hasPriority,
 }) => {
+    let data;
     try {
-        const data = await sdk.blocks.getServiceDetails(
+        data = await sdk.blocks.getServiceDetails(
             {
                 id: serviceId,
             },
@@ -28,19 +29,19 @@ export const ServiceDetails: React.FC<ServiceDetailsProps> = async ({
             { 'x-locale': locale },
             accessToken,
         );
-
-        return (
-            <ServiceDetailsDynamic
-                {...data}
-                serviceId={serviceId}
-                id={id}
-                accessToken={accessToken}
-                locale={locale}
-                routing={routing}
-                hasPriority={hasPriority}
-            />
-        );
     } catch (_error) {
         return null;
     }
+
+    return (
+        <ServiceDetailsDynamic
+            {...data}
+            serviceId={serviceId}
+            id={id}
+            accessToken={accessToken}
+            locale={locale}
+            routing={routing}
+            hasPriority={hasPriority}
+        />
+    );
 };

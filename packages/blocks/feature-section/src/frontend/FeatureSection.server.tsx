@@ -10,18 +10,19 @@ export const FeatureSectionDynamic = dynamic(() =>
 );
 
 export const FeatureSection: React.FC<FeatureSectionProps> = async ({ id, accessToken, locale, routing }) => {
+    let data;
     try {
-        const data = await sdk.blocks.getFeatureSection(
+        data = await sdk.blocks.getFeatureSection(
             {
                 id,
             },
             { 'x-locale': locale },
             accessToken,
         );
-
-        return <FeatureSectionDynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />;
     } catch (error) {
         console.error('Error fetching FeatureSection block', error);
         return null;
     }
+
+    return <FeatureSectionDynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />;
 };

@@ -18,8 +18,9 @@ export const OrdersSummary: React.FC<OrdersSummaryProps> = async ({
     routing,
     hasPriority,
 }) => {
+    let data;
     try {
-        const data = await sdk.blocks.getOrdersSummary(
+        data = await sdk.blocks.getOrdersSummary(
             {
                 id,
                 dateFrom: dayjs().subtract(6, 'months').toISOString(),
@@ -29,19 +30,19 @@ export const OrdersSummary: React.FC<OrdersSummaryProps> = async ({
             { 'x-locale': locale },
             accessToken,
         );
-
-        return (
-            <OrdersSummaryDynamic
-                {...data}
-                id={id}
-                accessToken={accessToken}
-                locale={locale}
-                routing={routing}
-                hasPriority={hasPriority}
-            />
-        );
     } catch (_error) {
         console.error(_error);
         return null;
     }
+
+    return (
+        <OrdersSummaryDynamic
+            {...data}
+            id={id}
+            accessToken={accessToken}
+            locale={locale}
+            routing={routing}
+            hasPriority={hasPriority}
+        />
+    );
 };

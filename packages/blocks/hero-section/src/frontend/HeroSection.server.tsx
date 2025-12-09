@@ -10,27 +10,28 @@ export const HeroSectionDynamic = dynamic(() =>
 );
 
 export const HeroSection: React.FC<HeroSectionProps> = async ({ id, accessToken, locale, routing, hasPriority }) => {
+    let data;
     try {
-        const data = await sdk.blocks.getHeroSection(
+        data = await sdk.blocks.getHeroSection(
             {
                 id,
             },
             { 'x-locale': locale },
             accessToken,
         );
-
-        return (
-            <HeroSectionDynamic
-                {...data}
-                id={id}
-                accessToken={accessToken}
-                locale={locale}
-                routing={routing}
-                hasPriority={hasPriority}
-            />
-        );
     } catch (error) {
         console.error('Error fetching HeroSection block', error);
         return null;
     }
+
+    return (
+        <HeroSectionDynamic
+            {...data}
+            id={id}
+            accessToken={accessToken}
+            locale={locale}
+            routing={routing}
+            hasPriority={hasPriority}
+        />
+    );
 };

@@ -22,8 +22,9 @@ export const UserAccount: React.FC<UserAccountProps> = async ({
         return null;
     }
 
+    let data;
     try {
-        const data = await sdk.blocks.getUserAccount(
+        data = await sdk.blocks.getUserAccount(
             {
                 id,
                 userId,
@@ -31,20 +32,20 @@ export const UserAccount: React.FC<UserAccountProps> = async ({
             { 'x-locale': locale },
             accessToken,
         );
-
-        return (
-            <UserAccountDynamic
-                {...data}
-                id={id}
-                accessToken={accessToken}
-                locale={locale}
-                routing={routing}
-                userId={userId}
-                onSignOut={onSignOut}
-                hasPriority={hasPriority}
-            />
-        );
     } catch (_error) {
         return null;
     }
+
+    return (
+        <UserAccountDynamic
+            {...data}
+            id={id}
+            accessToken={accessToken}
+            locale={locale}
+            routing={routing}
+            userId={userId}
+            onSignOut={onSignOut}
+            hasPriority={hasPriority}
+        />
+    );
 };

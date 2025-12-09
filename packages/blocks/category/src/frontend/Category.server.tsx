@@ -17,29 +17,30 @@ export const Category: React.FC<CategoryProps> = async ({
     renderBlocks,
     hasPriority,
 }) => {
+    let data;
     try {
-        const data = await sdk.blocks.getCategory(
+        data = await sdk.blocks.getCategory(
             {
                 id,
             },
             { 'x-locale': locale },
             accessToken,
         );
-
-        return (
-            <CategoryDynamic
-                {...data}
-                id={id}
-                slug={slug}
-                accessToken={accessToken}
-                locale={locale}
-                routing={routing}
-                blocks={<CategoryBlocks renderBlocks={renderBlocks} components={data.components} slug={slug} />}
-                renderBlocks={renderBlocks}
-                hasPriority={hasPriority}
-            />
-        );
     } catch (_error) {
         return null;
     }
+
+    return (
+        <CategoryDynamic
+            {...data}
+            id={id}
+            slug={slug}
+            accessToken={accessToken}
+            locale={locale}
+            routing={routing}
+            blocks={<CategoryBlocks renderBlocks={renderBlocks} components={data.components} slug={slug} />}
+            renderBlocks={renderBlocks}
+            hasPriority={hasPriority}
+        />
+    );
 };

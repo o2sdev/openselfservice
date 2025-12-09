@@ -17,8 +17,9 @@ export const ArticleList: React.FC<ArticleListProps> = async ({
     hasPriority,
     isDraftModeEnabled,
 }) => {
+    let data;
     try {
-        const data = await sdk.blocks.getArticleList(
+        data = await sdk.blocks.getArticleList(
             {
                 id,
                 preview: isDraftModeEnabled,
@@ -26,17 +27,18 @@ export const ArticleList: React.FC<ArticleListProps> = async ({
             { 'x-locale': locale },
             accessToken,
         );
-        return (
-            <ArticleListDynamic
-                {...data}
-                id={id}
-                accessToken={accessToken}
-                locale={locale}
-                routing={routing}
-                hasPriority={hasPriority}
-            />
-        );
     } catch (_error) {
         return null;
     }
+
+    return (
+        <ArticleListDynamic
+            {...data}
+            id={id}
+            accessToken={accessToken}
+            locale={locale}
+            routing={routing}
+            hasPriority={hasPriority}
+        />
+    );
 };

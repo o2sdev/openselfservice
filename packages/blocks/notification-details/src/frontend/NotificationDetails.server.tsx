@@ -17,8 +17,9 @@ export const NotificationDetails: React.FC<NotificationDetailsProps> = async ({
     routing,
     hasPriority,
 }) => {
+    let data;
     try {
-        const data = await sdk.blocks.getNotificationDetails(
+        data = await sdk.blocks.getNotificationDetails(
             {
                 id: notificationId,
             },
@@ -28,19 +29,19 @@ export const NotificationDetails: React.FC<NotificationDetailsProps> = async ({
             { 'x-locale': locale },
             accessToken,
         );
-
-        return (
-            <NotificationDetailsDynamic
-                notificationId={notificationId}
-                {...data}
-                id={id}
-                accessToken={accessToken}
-                locale={locale}
-                routing={routing}
-                hasPriority={hasPriority}
-            />
-        );
     } catch (_error) {
         return null;
     }
+
+    return (
+        <NotificationDetailsDynamic
+            notificationId={notificationId}
+            {...data}
+            id={id}
+            accessToken={accessToken}
+            locale={locale}
+            routing={routing}
+            hasPriority={hasPriority}
+        />
+    );
 };
