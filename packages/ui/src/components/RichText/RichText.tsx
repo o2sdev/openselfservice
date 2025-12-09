@@ -248,9 +248,5 @@ export const RichText: FC<Readonly<RichTextProps>> = ({
         </Markdown>
     );
 
-    return (
-        <div {...rest} className={className}>
-            {markdown}
-        </div>
-    );
+    return <div {...rest}>{markdown}</div>;
 };
