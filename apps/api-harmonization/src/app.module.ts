@@ -34,11 +34,13 @@ import * as FeaturedServiceList from '@o2s/blocks.featured-service-list/api-harm
 import * as InvoiceList from '@o2s/blocks.invoice-list/api-harmonization';
 import * as NotificationDetails from '@o2s/blocks.notification-details/api-harmonization';
 import * as NotificationList from '@o2s/blocks.notification-list/api-harmonization';
+import * as NotificationSummary from '@o2s/blocks.notification-summary/api-harmonization';
 import * as OrderDetails from '@o2s/blocks.order-details/api-harmonization';
 import * as OrderList from '@o2s/blocks.order-list/api-harmonization';
 import * as OrdersSummary from '@o2s/blocks.orders-summary/api-harmonization';
 import * as PaymentsHistory from '@o2s/blocks.payments-history/api-harmonization';
 import * as PaymentsSummary from '@o2s/blocks.payments-summary/api-harmonization';
+import * as ProductList from '@o2s/blocks.product-list/api-harmonization';
 import * as QuickLinks from '@o2s/blocks.quick-links/api-harmonization';
 import * as ServiceDetails from '@o2s/blocks.service-details/api-harmonization';
 import * as ServiceList from '@o2s/blocks.service-list/api-harmonization';
@@ -46,11 +48,13 @@ import * as SurveyJsForm from '@o2s/blocks.surveyjs-form/api-harmonization';
 import * as TicketDetails from '@o2s/blocks.ticket-details/api-harmonization';
 import * as TicketList from '@o2s/blocks.ticket-list/api-harmonization';
 import * as TicketRecent from '@o2s/blocks.ticket-recent/api-harmonization';
+import * as TicketSummary from '@o2s/blocks.ticket-summary/api-harmonization';
 import * as UserAccount from '@o2s/blocks.user-account/api-harmonization';
+
+// BLOCK IMPORT
 
 import { configuration } from '@o2s/api-harmonization/config/configuration';
 
-// BLOCK IMPORT
 import { AppConfig } from './app.config';
 import { AppService } from './app.service';
 import { ContextHeadersMiddleware } from './middleware/context-headers.middleware';
@@ -133,6 +137,9 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
         ArticleSearch.Module.register(AppConfig),
         FeaturedServiceList.Module.register(AppConfig),
         ArticleList.Module.register(AppConfig),
+        ProductList.Module.register(AppConfig),
+        NotificationSummary.Module.register(AppConfig),
+        TicketSummary.Module.register(AppConfig),
         // BLOCK REGISTER
     ],
     providers: [

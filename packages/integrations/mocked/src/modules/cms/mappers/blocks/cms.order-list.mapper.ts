@@ -75,6 +75,8 @@ const MOCK_ORDER_LIST_BLOCK_EN: CMS.Model.OrderListBlock.OrderListBlock = {
                     { label: 'Delivered', value: 'DELIVERED' },
                     { label: 'Returned', value: 'RETURNED' },
                     { label: 'Training Request', value: 'TRAINING_REQUEST' },
+                    { label: 'Requires Action', value: 'REQUIRES_ACTION' },
+                    { label: 'Archived', value: 'ARCHIVED' },
                     { label: 'Unknown', value: 'UNKNOWN' },
                 ],
             },
@@ -88,6 +90,11 @@ const MOCK_ORDER_LIST_BLOCK_EN: CMS.Model.OrderListBlock.OrderListBlock = {
                 to: {
                     label: 'To',
                 },
+            },
+            {
+                __typename: 'FilterViewModeToggle',
+                id: 'viewMode',
+                value: 'list',
             },
         ],
     },
@@ -103,6 +110,11 @@ const MOCK_ORDER_LIST_BLOCK_EN: CMS.Model.OrderListBlock.OrderListBlock = {
     },
     reorderLabel: 'Reorder',
     detailsUrl: '/orders/{id}',
+    cardHeaderSlots: {
+        left: 'id',
+        right: 'status',
+        bottom: 'createdAt',
+    },
 };
 
 const MOCK_ORDER_LIST_BLOCK_DE: CMS.Model.OrderListBlock.OrderListBlock = {
@@ -180,6 +192,8 @@ const MOCK_ORDER_LIST_BLOCK_DE: CMS.Model.OrderListBlock.OrderListBlock = {
                     { label: 'Geliefert', value: 'DELIVERED' },
                     { label: 'Zurückgegeben', value: 'RETURNED' },
                     { label: 'Schulungsanfrage', value: 'TRAINING_REQUEST' },
+                    { label: 'Aktion erforderlich', value: 'REQUIRES_ACTION' },
+                    { label: 'Archiviert', value: 'ARCHIVED' },
                     { label: 'Unbekannt', value: 'UNKNOWN' },
                 ],
             },
@@ -193,6 +207,11 @@ const MOCK_ORDER_LIST_BLOCK_DE: CMS.Model.OrderListBlock.OrderListBlock = {
                 to: {
                     label: 'Bis',
                 },
+            },
+            {
+                __typename: 'FilterViewModeToggle',
+                id: 'viewMode',
+                value: 'list',
             },
         ],
     },
@@ -208,6 +227,11 @@ const MOCK_ORDER_LIST_BLOCK_DE: CMS.Model.OrderListBlock.OrderListBlock = {
     },
     reorderLabel: 'Erneut bestellen',
     detailsUrl: '/bestellungen/{id}',
+    cardHeaderSlots: {
+        left: 'id',
+        right: 'status',
+        bottom: 'createdAt',
+    },
 };
 
 const MOCK_ORDER_LIST_BLOCK_PL: CMS.Model.OrderListBlock.OrderListBlock = {
@@ -285,6 +309,8 @@ const MOCK_ORDER_LIST_BLOCK_PL: CMS.Model.OrderListBlock.OrderListBlock = {
                     { label: 'Dostarczone', value: 'DELIVERED' },
                     { label: 'Zwrócone', value: 'RETURNED' },
                     { label: 'Wniosek o szkolenie', value: 'TRAINING_REQUEST' },
+                    { label: 'Akcja wymagana', value: 'REQUIRES_ACTION' },
+                    { label: 'Archiwum', value: 'ARCHIVED' },
                     { label: 'Nieznany', value: 'UNKNOWN' },
                 ],
             },
@@ -298,6 +324,11 @@ const MOCK_ORDER_LIST_BLOCK_PL: CMS.Model.OrderListBlock.OrderListBlock = {
                 to: {
                     label: 'Do',
                 },
+            },
+            {
+                __typename: 'FilterViewModeToggle',
+                id: 'viewMode',
+                value: 'list',
             },
         ],
     },
@@ -313,6 +344,11 @@ const MOCK_ORDER_LIST_BLOCK_PL: CMS.Model.OrderListBlock.OrderListBlock = {
     },
     reorderLabel: 'Zamów ponownie',
     detailsUrl: '/zamowienia/{id}',
+    cardHeaderSlots: {
+        left: 'id',
+        right: 'status',
+        bottom: 'createdAt',
+    },
 };
 
 export const mapOrderListBlock = (locale: string): CMS.Model.OrderListBlock.OrderListBlock => {

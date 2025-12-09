@@ -21,7 +21,7 @@ export const FiltersSection = <T, S extends FormikValues>({
     variant,
     labels,
 }: Readonly<FiltersSectionProps<T, S>>) => {
-    const hasLeadingItem = filters?.items.some((item) => item.isLeading === true);
+    const hasLeadingItem = filters?.items.some((item) => 'isLeading' in item && item.isLeading === true);
 
     return (
         <div

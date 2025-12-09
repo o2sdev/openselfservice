@@ -1,5 +1,35 @@
 # @o2s/docs
 
+## 1.5.1
+
+### Patch Changes
+
+- 221dc2c: fix: added missing Eslint command to list-staged
+
+## 1.5.0
+
+### Minor Changes
+
+- 1653b74: fix: update FilterItem and renderCell components for improved functionality and code clarity
+
+### Patch Changes
+
+- 0354126: reworked turbo dev task to optimize CPU/RAM usage
+
+## 1.4.0
+
+### Minor Changes
+
+- 0d1b8cc: Added comprehensive documentation for Contentful CMS integration:
+    - Overview and requirements
+    - Getting started guide with installation and configuration
+    - Content model documentation (Page, Template, Block types)
+    - Content types reference
+    - GraphQL integration details with code generation
+    - Live Preview implementation with metadata pattern
+    - Features support table
+    - Blocks implementation status table
+
 ## 1.3.0
 
 ### Minor Changes

@@ -9,8 +9,8 @@ import { toast } from '@o2s/ui/hooks/use-toast';
 
 import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
 
-import { DataList } from '@o2s/ui/components/DataList';
 import type { DataListColumnConfig } from '@o2s/ui/components/DataList';
+import { DataView } from '@o2s/ui/components/DataView';
 import { FiltersSection } from '@o2s/ui/components/Filters';
 import { NoResults } from '@o2s/ui/components/NoResults';
 import { Pagination } from '@o2s/ui/components/Pagination';
@@ -36,26 +36,48 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
     };
 
     const initialData = component.invoices.data;
+
+    // Extract initial viewMode from filters if available
+    const initialViewMode =
+        component.filters?.items?.find((item) => item.__typename === 'FilterViewModeToggle')?.value || 'list';
+
     const [data, setData] = useState(component);
     const [filters, setFilters] = useState(initialFilters);
+    const [viewMode, setViewMode] = useState<'list' | 'grid'>(initialViewMode);
     const [isPending, startTransition] = useTransition();
 
     const handleFilter = (data: Partial<Request.GetInvoiceListBlockQuery>) => {
         startTransition(async () => {
-            const newFilters = { ...filters, ...data };
-            const newData = await sdk.blocks.getInvoiceList(newFilters, { 'x-locale': locale }, accessToken);
+            try {
+                const newFilters = { ...filters, ...data };
+                const newData = await sdk.blocks.getInvoiceList(newFilters, { 'x-locale': locale }, accessToken);
 
-            setFilters(newFilters);
-            setData(newData);
+                setFilters(newFilters);
+                setData(newData);
+            } catch (_error) {
+                toast({
+                    variant: 'destructive',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
+                });
+            }
         });
     };
 
     const handleReset = () => {
         startTransition(async () => {
-            const newData = await sdk.blocks.getInvoiceList(initialFilters, { 'x-locale': locale }, accessToken);
+            try {
+                const newData = await sdk.blocks.getInvoiceList(initialFilters, { 'x-locale': locale }, accessToken);
 
-            setFilters(initialFilters);
-            setData(newData);
+                setFilters(initialFilters);
+                setData(newData);
+            } catch (_error) {
+                toast({
+                    variant: 'destructive',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
+                });
+            }
         });
     };
 
@@ -142,7 +164,23 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
                         <FiltersSection
                             title={data.table.title}
                             initialFilters={initialFilters}
-                            filters={data.filters}
+                            filters={
+                                data.filters
+                                    ? {
+                                          ...data.filters,
+                                          items: data.filters.items.map((item) => {
+                                              if (item.__typename === 'FilterViewModeToggle') {
+                                                  return {
+                                                      ...item,
+                                                      value: viewMode,
+                                                      onChange: setViewMode,
+                                                  };
+                                              }
+                                              return item;
+                                          }),
+                                      }
+                                    : undefined
+                            }
                             initialValues={filters}
                             onSubmit={handleFilter}
                             onReset={handleReset}
@@ -151,11 +189,12 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
                         <LoadingOverlay isActive={isPending}>
                             {data.invoices.data.length ? (
                                 <div className="flex flex-col gap-6">
-                                    <DataList
+                                    <DataView
+                                        viewMode={viewMode}
                                         data={data.invoices.data}
-                                        getRowKey={(invoice) => invoice.id}
                                         columns={columns}
                                         actions={actions}
+                                        cardHeaderSlots={data.cardHeaderSlots}
                                     />
 
                                     {data.pagination && (

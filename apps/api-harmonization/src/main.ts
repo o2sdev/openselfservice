@@ -1,5 +1,6 @@
 import { LogLevel } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { NestExpressApplication } from '@nestjs/platform-express';
 import * as telemetry from '@o2s/telemetry';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
@@ -18,7 +19,7 @@ async function bootstrap() {
         logLevels.push('verbose');
     }
 
-    const app = await NestFactory.create(AppModule, {
+    const app = await NestFactory.create<NestExpressApplication>(AppModule, {
         logger: logLevels,
     });
 
@@ -49,6 +50,7 @@ async function bootstrap() {
     app.use(helmet());
     app.use(cookieParser());
     app.use(compression());
+    app.set('query parser', 'extended');
 
     app.enableShutdownHooks();
 

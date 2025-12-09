@@ -1,5 +1,30 @@
 # @o2s/integrations.medusajs
 
+## 1.6.2
+
+### Patch Changes
+
+- 221dc2c: fix: added missing Eslint command to list-staged
+- Updated dependencies [221dc2c]
+- Updated dependencies [db5b381]
+- Updated dependencies [c2d9438]
+    - @o2s/utils.logger@1.1.3
+    - @o2s/framework@1.14.0
+
+## 1.6.1
+
+### Patch Changes
+
+- 0354126: reworked turbo dev task to optimize CPU/RAM usage
+- Updated dependencies [2c780d5]
+- Updated dependencies [1653b74]
+- Updated dependencies [c27726a]
+- Updated dependencies [2c780d5]
+- Updated dependencies [0354126]
+- Updated dependencies [1653b74]
+    - @o2s/framework@1.13.0
+    - @o2s/utils.logger@1.1.2
+
 ## 1.6.0
 
 ### Minor Changes
@@ -32,7 +57,6 @@
 ### Minor Changes
 
 - 2a0475c: feat: update products, resources mocks, InfoCard - layout fix
-
     - updated model for GetRelatedProductListParams - renamed id and variantId to inform that we need to provide product data as params,
     - added natural data to products and resources mocks,
     - added sorting and filtering to products.mapper.ts,
@@ -48,7 +72,6 @@
 ### Minor Changes
 
 - 6949717: feat: updated resource integration - added product to the Resource model
-
     - updated service-list and service-details blocks,
     - added sorting and filters to mocks,
 
@@ -89,7 +112,6 @@
 ### Minor Changes
 
 - 5d16edf: orderDetails fixes:
-
     - order model update - product is required now,
     - filtering moved to order mapper,
     - PayOnline button visible only when the order is overdue,
@@ -124,7 +146,6 @@
 
 - 05eea01: chore: update dependencies
 - 44653fb: feat: orderDetails page implemented
-
     - added new UI component: InfoCard,
     - used InfoCard in PaymentsSummaryBlock, OrdersSummary and OrderDetails,
     - fixed ordersSummaryBlock integration with strapi,

@@ -6,7 +6,6 @@ fragment OrdersSummaryComponent on ComponentComponentsOrdersSummary {
     chartTitle
     chartPreviousPeriodLabel
     chartCurrentPeriodLabel
-    showChart
     ranges {
         id
         label
@@ -27,5 +26,5 @@ fragment OrdersSummaryComponent on ComponentComponentsOrdersSummary {
     averageNumber {
         ...InformationCard
     }
-    
+
 }

@@ -8,8 +8,12 @@ import { Mappings } from '@o2s/utils.frontend';
 
 import { cn } from '@o2s/ui/lib/utils';
 
-import { DataList } from '@o2s/ui/components/DataList';
+import { toast } from '@o2s/ui/hooks/use-toast';
+
+import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
+
 import type { DataListColumnConfig } from '@o2s/ui/components/DataList';
+import { DataView } from '@o2s/ui/components/DataView';
 import { FiltersSection } from '@o2s/ui/components/Filters';
 import { NoResults } from '@o2s/ui/components/NoResults';
 import { Pagination } from '@o2s/ui/components/Pagination';
@@ -31,6 +35,7 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({
     ...component
 }) => {
     const { Link: LinkComponent } = createNavigation(routing);
+    const { labels } = useGlobalContext();
 
     const initialFilters: Request.GetNotificationListBlockQuery = {
         id: component.id,
@@ -39,26 +44,52 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({
     };
 
     const initialData = component.notifications.data;
+
+    // Extract initial viewMode from filters if available
+    const initialViewMode =
+        component.filters?.items?.find((item) => item.__typename === 'FilterViewModeToggle')?.value || 'list';
+
     const [data, setData] = useState<Model.NotificationListBlock>(component);
     const [filters, setFilters] = useState(initialFilters);
+    const [viewMode, setViewMode] = useState<'list' | 'grid'>(initialViewMode);
     const [isPending, startTransition] = useTransition();
 
     const handleFilter = (data: Partial<Request.GetNotificationListBlockQuery>) => {
         startTransition(async () => {
-            const newFilters = { ...filters, ...data };
-            const newData = await sdk.blocks.getNotificationList(newFilters, { 'x-locale': locale }, accessToken);
+            try {
+                const newFilters = { ...filters, ...data };
+                const newData = await sdk.blocks.getNotificationList(newFilters, { 'x-locale': locale }, accessToken);
 
-            setFilters(newFilters);
-            setData(newData);
+                setFilters(newFilters);
+                setData(newData);
+            } catch (_error) {
+                toast({
+                    variant: 'destructive',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
+                });
+            }
         });
     };
 
     const handleReset = () => {
         startTransition(async () => {
-            const newData = await sdk.blocks.getNotificationList(initialFilters, { 'x-locale': locale }, accessToken);
+            try {
+                const newData = await sdk.blocks.getNotificationList(
+                    initialFilters,
+                    { 'x-locale': locale },
+                    accessToken,
+                );
 
-            setFilters(initialFilters);
-            setData(newData);
+                setFilters(initialFilters);
+                setData(newData);
+            } catch (_error) {
+                toast({
+                    variant: 'destructive',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
+                });
+            }
         });
     };
 
@@ -79,9 +110,13 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({
             case 'title':
                 return {
                     ...column,
-                    type: 'text',
-                    cellClassName: (notification: Model.Notification) =>
-                        cn('max-w-[200px] lg:max-w-md', notification.status.value === 'UNVIEWED' && 'font-semibold'),
+                    type: 'custom',
+                    cellClassName: 'max-w-[200px] lg:max-w-md',
+                    render: (_value: unknown, notification: Model.Notification) => (
+                        <Button asChild variant="link" size="none" className="truncate block text-left">
+                            <LinkComponent href={notification.detailsUrl}>{notification.title}</LinkComponent>
+                        </Button>
+                    ),
                 };
             case 'type':
                 return {
@@ -135,7 +170,23 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({
                     <FiltersSection
                         title={data.subtitle}
                         initialFilters={initialFilters}
-                        filters={data.filters}
+                        filters={
+                            data.filters
+                                ? {
+                                      ...data.filters,
+                                      items: data.filters.items.map((item) => {
+                                          if (item.__typename === 'FilterViewModeToggle') {
+                                              return {
+                                                  ...item,
+                                                  value: viewMode,
+                                                  onChange: setViewMode,
+                                              };
+                                          }
+                                          return item;
+                                      }),
+                                  }
+                                : undefined
+                        }
                         initialValues={filters}
                         onSubmit={handleFilter}
                         onReset={handleReset}
@@ -144,14 +195,12 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({
                     <LoadingOverlay isActive={isPending}>
                         {data.notifications.data.length ? (
                             <div className="flex flex-col gap-6">
-                                <DataList
+                                <DataView
+                                    viewMode={viewMode}
                                     data={data.notifications.data}
-                                    getRowKey={(notification) => notification.id}
-                                    getRowClassName={(notification) => {
-                                        return notification.status.value === 'UNVIEWED' ? '' : '';
-                                    }}
                                     columns={columns}
                                     actions={actions}
+                                    cardHeaderSlots={data.cardHeaderSlots}
                                 />
 
                                 {data.pagination && (

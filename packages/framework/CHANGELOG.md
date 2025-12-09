@@ -1,5 +1,48 @@
 # @o2s/framework
 
+## 1.14.0
+
+### Minor Changes
+
+- db5b381: fixing various bugs related with blocks and ui components, adding sign-in button in navigation
+- c2d9438: added new blocks from dxp-starter-kit app
+
+### Patch Changes
+
+- Updated dependencies [221dc2c]
+    - @o2s/utils.logger@1.1.3
+
+## 1.13.0
+
+### Minor Changes
+
+- 2c780d5: add NotificationSummary and TicketSummary blocks
+- 1653b74: fix: update FilterItem and renderCell components for improved functionality and code clarity
+- c27726a: added a new Product List block with list/tile form of presentation
+- 2c780d5: conditionally render button in InfoCard for improved layout
+- 1653b74: feat(ui): tile version of data lists
+
+### Patch Changes
+
+- 0354126: reworked turbo dev task to optimize CPU/RAM usage
+- Updated dependencies [0354126]
+    - @o2s/utils.logger@1.1.2
+
+## 1.12.0
+
+### Minor Changes
+
+- 0d1b8cc: Added Live Preview support in blocks
+- ac245c5: adding initial filters support to list blocks
+- 3da2e69: Added search functionality to invoice list filters
+
+### Patch Changes
+
+- 8ac0de9: added missing dependencies
+- Updated dependencies [8ac0de9]
+- Updated dependencies [b519464]
+    - @o2s/utils.logger@1.1.1
+
 ## 1.11.2
 
 ### Patch Changes
@@ -54,14 +97,12 @@
 ### Minor Changes
 
 - fb09383: Organizations module:
-
     - Extending the Organization model with taxId
     - Adding taxId to OrganizationsListQuery and adding CheckMembershipParams class for membership validation
     - Adding GET /membership/:orgId/:userId endpoint to check user membership and implementing checkMembership method in OrganizationController
     - Adding abstract checkMembership method to OrganizationService to support membership verification operations with boolean return type.
 
     Users module:
-
     - Extending the User model with username and adding an export of User type
     - Adding GetUsersQuery class to support optional username filtering
     - Adding getUsers method to UserService
@@ -89,7 +130,6 @@
 ### Minor Changes
 
 - 2a0475c: feat: update products, resources mocks, InfoCard - layout fix
-
     - updated model for GetRelatedProductListParams - renamed id and variantId to inform that we need to provide product data as params,
     - added natural data to products and resources mocks,
     - added sorting and filtering to products.mapper.ts,
@@ -106,7 +146,6 @@
 ### Minor Changes
 
 - 6949717: feat: updated resource integration - added product to the Resource model
-
     - updated service-list and service-details blocks,
     - added sorting and filters to mocks,
 
@@ -115,7 +154,6 @@
 ### Minor Changes
 
 - 027ed39: featuredServiceListBlock - list of available services
-
     - added new UI componetnt from Shadcn - Switch,
     - extended ProductCard with action property,
     - implemented model and mock for FeatureServiceListBlock,
@@ -138,7 +176,6 @@
 ### Minor Changes
 
 - 1ee5be1: feat: aligned buttons - used ActionList component with dropdown menu
-
     - used ActionList in the OrderDetailBlock to display buttons,
     - updated the mock and strapi - now an action is a Link,
     - used the format method from the string-template to inject a value into a string,
@@ -148,19 +185,16 @@
 ### Minor Changes
 
 - 565b63d: feat: fixed pagination issue in articleList
-
     - added new mocked articles
     - implemented new additionalLink in ArticleList
 
 - 5d16edf: orderDetails fixes:
-
     - order model update - product is required now,
     - filtering moved to order mapper,
     - PayOnline button visible only when the order is overdue,
 
 - 61d4f2f: Added integration of services and assets with MedusaJS
 - f015c2b: New block ArticleSearch - Input field with suggestions to find appropriate article.
-
     - added new UI component - Command,
     - added new articles mock,
     - added mock for ArticleSearchBlock,
@@ -179,7 +213,6 @@
 
 - 05eea01: chore: update dependencies
 - 44653fb: feat: orderDetails page implemented
-
     - added new UI component: InfoCard,
     - used InfoCard in PaymentsSummaryBlock, OrdersSummary and OrderDetails,
     - fixed ordersSummaryBlock integration with strapi,
@@ -203,7 +236,6 @@
 ### Minor Changes
 
 - 2e4f22d: feat: add scrollable toggle group filter with multiple selection
-
     - Add scroll container for toggle group filter in overlay view
     - Implement multiple selection version for toggle group filter
     - Add support for horizontal scrolling in filter items
@@ -217,7 +249,6 @@
 - 30f3524: added `OrdersSummary` block and reworked mocked orders to return random orders instead of them being hardcoded
 - 8b93cbf: feat: Integrated SurveyJS
 - 30f3524: feat: implemented orderListBlock
-
     - new page /orders,
     - added strapi integration for page /orders
     - new UI dropdown-menu component
@@ -227,7 +258,6 @@
 - 6d63cb1: feat: added surveyJS module
 - ba125d6: Added orders module
 - bb46536: feat: cases submission
-
     - new component DynamicIcon - for loading icons dinamicly,
     - new component ActionLinks - for showing button list with dropdown-menu,
     - new pages: /contact-us, /submit-complaint, /request-device-maintenance,

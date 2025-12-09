@@ -19,7 +19,7 @@ function separateLeadingItem<T>(items: Models.Filters.FilterItem<T>[]) {
     const filteredItems: Models.Filters.FilterItem<T>[] = [];
 
     for (const item of items) {
-        if (item.isLeading === true && leadingItem === undefined) {
+        if ('isLeading' in item && item.isLeading === true && leadingItem === undefined) {
             leadingItem = item;
         } else {
             filteredItems.push(item);

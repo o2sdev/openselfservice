@@ -6,8 +6,12 @@ import React, { useState, useTransition } from 'react';
 
 import { Mappings } from '@o2s/utils.frontend';
 
-import { DataList } from '@o2s/ui/components/DataList';
+import { toast } from '@o2s/ui/hooks/use-toast';
+
+import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
+
 import type { DataListColumnConfig } from '@o2s/ui/components/DataList';
+import { DataView } from '@o2s/ui/components/DataView';
 import { FiltersSection } from '@o2s/ui/components/Filters';
 import { NoResults } from '@o2s/ui/components/NoResults';
 import { Pagination } from '@o2s/ui/components/Pagination';
@@ -30,6 +34,7 @@ import { OrderListPureProps } from './OrderList.types';
 
 export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToken, routing, ...component }) => {
     const { Link: LinkComponent } = createNavigation(routing);
+    const { labels } = useGlobalContext();
 
     const initialFilters: Request.GetOrderListBlockQuery = {
         id: component.id,
@@ -39,25 +44,47 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
 
     const initialData = component.orders.data;
 
+    const initialViewMode: 'list' | 'grid' = (() => {
+        const value = component.filters?.items?.find((item) => item.__typename === 'FilterViewModeToggle')?.value;
+        return value === 'grid' ? 'grid' : 'list';
+    })();
+
     const [data, setData] = useState<Model.OrderListBlock>(component);
     const [filters, setFilters] = useState(initialFilters);
+    const [viewMode, setViewMode] = useState<'list' | 'grid'>(initialViewMode);
 
     const [isPending, startTransition] = useTransition();
 
     const handleFilter = (data: Partial<Request.GetOrderListBlockQuery>) => {
         startTransition(async () => {
-            const newFilters = { ...filters, ...data };
-            const newData = await sdk.blocks.getOrderList(newFilters, { 'x-locale': locale }, accessToken);
-            setFilters(newFilters);
-            setData(newData);
+            try {
+                const newFilters = { ...filters, ...data };
+                const newData = await sdk.blocks.getOrderList(newFilters, { 'x-locale': locale }, accessToken);
+                setFilters(newFilters);
+                setData(newData);
+            } catch (_error) {
+                toast({
+                    variant: 'destructive',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
+                });
+            }
         });
     };
 
     const handleReset = () => {
         startTransition(async () => {
-            const newData = await sdk.blocks.getOrderList(initialFilters, { 'x-locale': locale }, accessToken);
-            setFilters(initialFilters);
-            setData(newData);
+            try {
+                const newData = await sdk.blocks.getOrderList(initialFilters, { 'x-locale': locale }, accessToken);
+                setFilters(initialFilters);
+                setData(newData);
+            } catch (_error) {
+                toast({
+                    variant: 'destructive',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
+                });
+            }
         });
     };
 
@@ -71,6 +98,9 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
                     cellClassName: 'py-0',
                     render: (value: unknown, order: Model.Order) => {
                         const idValue = value as { label: string };
+                        if (viewMode === 'grid') {
+                            return idValue.label;
+                        }
                         return (
                             <Button asChild variant="link">
                                 <LinkComponent href={order.detailsUrl}>{idValue.label}</LinkComponent>
@@ -110,7 +140,7 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
     const actions = data.table.actions
         ? {
               ...data.table.actions,
-              cellClassName: 'py-0 w-[180px]',
+              cellClassName: viewMode === 'list' ? 'py-0 w-[180px]' : undefined,
               render: (order: Model.Order) => (
                   <div className="flex items-center">
                       <Button asChild variant="link">
@@ -146,7 +176,23 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
                     <FiltersSection
                         title={data.subtitle}
                         initialFilters={initialFilters}
-                        filters={data.filters}
+                        filters={
+                            data.filters
+                                ? {
+                                      ...data.filters,
+                                      items: data.filters.items.map((item) => {
+                                          if (item.__typename === 'FilterViewModeToggle') {
+                                              return {
+                                                  ...item,
+                                                  value: viewMode,
+                                                  onChange: setViewMode,
+                                              };
+                                          }
+                                          return item;
+                                      }),
+                                  }
+                                : undefined
+                        }
                         initialValues={filters}
                         onSubmit={handleFilter}
                         onReset={handleReset}
@@ -155,11 +201,13 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
                     <LoadingOverlay isActive={isPending}>
                         {data.orders.data.length ? (
                             <div className="flex flex-col gap-6">
-                                <DataList
+                                <DataView
+                                    viewMode={viewMode}
                                     data={data.orders.data}
-                                    getRowKey={(order) => order.id.value}
                                     columns={columns}
                                     actions={actions}
+                                    cardHeaderSlots={data.cardHeaderSlots}
+                                    getRowKey={(item) => item.id.value}
                                 />
 
                                 {data.pagination && (
