@@ -1,2 +1,2 @@
-export { RichText, detectContentFormat } from './RichText';
+export { RichText } from './RichText';
 export type { RichTextProps } from './RichText.types';
