@@ -24,7 +24,7 @@ Digital transformation in agriculture is rarely just about “putting a shop onl
 
 From the beginning, the web applications were designed with future channels in mind. System's architecture was shaped so that it could later support additional ways of accessing the platform — including mobile — without duplicating business logic or rebuilding the entire stack.
 
-The project started before [our later work with Orange Energia](../how-orange-energia-built-composable-client-portal-and-sparked-open-self-service), and the cooperation with Osadkowski continues to this day. Many of the patterns tested here later influenced how we think about composable frontends and how we designed Open Self Service as an open-source framework for this kind of solution.
+The project started before [our later work with Orange Energia](../how-orange-energia-built-composable-client-portal-and-sparked-open-self-service/index.md), and the cooperation with Osadkowski continues to this day. Many of the patterns tested here later influenced how we think about composable frontends and how we designed Open Self Service as an open-source framework for this kind of solution.
 
 This case study looks at the project as a whole: the business context, the architectural choices, the practical challenges and trade-offs we encountered, and the lessons that shaped later work — including Open Self Service. A separate, more technical deep dive will revisit these challenges in detail and illustrate the concrete conclusions we drew from them.
 Not here for the business story? You can [skip directly to the technical architecture overview](#technical-architecture-overview).
