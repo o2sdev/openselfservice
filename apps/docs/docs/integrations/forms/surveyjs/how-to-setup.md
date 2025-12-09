@@ -84,7 +84,7 @@ The SurveyJS module integrates with your CMS (e.g., Strapi) to retrieve survey m
 | `postId` | string | Yes | The SurveyJS post ID for form submissions |
 | `surveyType` | string | Yes | Type of survey (typically `"survey"`) |
 | `submitDestination` | string[] | Yes | Array of submission destinations (e.g., `["surveyjs"]`) |
-| `requiredRoles` | string[] | Yes* | Array of roles required to submit the survey. Can be empty array `[]` for public surveys |
+| `requiredRoles` | string[] | Yes* | Array of roles required to submit the survey. It can be an empty array `[]` for public surveys |
 
 \* `requiredRoles` is required but can be an empty array for public surveys that don't require authentication.
 

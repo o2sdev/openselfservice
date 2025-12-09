@@ -43,7 +43,7 @@ All operations are no-ops when `CACHE_ENABLED=false` or Redis is unavailable.
 
 CMS integrations cache content using consistent key patterns:
 
-```
+```text
 component-{id}-{locale}
 page-{id}-{locale}
 app-config-{locale}

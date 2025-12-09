@@ -118,17 +118,17 @@ See the plugin repository for installation instructions: [medusa-plugin-assets-s
 
 The integration uses the official Medusa.js SDK for most operations, combined with direct HTTP calls for custom endpoints provided by the Assets & Services plugin. All API calls are authenticated using a combination of publishable API key and admin API key.
 
-```
+```text
 ┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐
 │   O2S Frontend  │────▶│  API Harmonizer  │────▶│  Medusa Server  │
 └─────────────────┘     └──────────────────┘     └─────────────────┘
-                               │                         │
-                               │ Medusa.js SDK           │ Admin API
-                               │ HTTP Client             │ Store API
-                               ▼                         ▼
-                        ┌──────────────────┐     ┌─────────────────┐
-                        │ Orders/Products  │     │ Assets/Services │
-                        │    (native)      │     │   (plugin)      │
-                        └──────────────────┘     └─────────────────┘
+                             │                         │
+                             │ Medusa.js SDK           │ Admin API
+                             │ HTTP Client             │ Store API
+                             ▼                         ▼
+                      ┌──────────────────┐     ┌─────────────────┐
+                      │ Orders/Products  │     │ Assets/Services │
+                      │    (native)      │     │   (plugin)      │
+                      └──────────────────┘     └─────────────────┘
 ```
 

@@ -84,6 +84,7 @@ export function StarterInfoSection({
                             href={linkItem.link}
                             className="text-white! underline! hover:no-underline! text-sm font-medium"
                             target={linkItem.target}
+                            rel={linkItem.target === '_blank' ? 'noopener noreferrer' : undefined}
                         >
                             {linkItem.label}
                         </a>

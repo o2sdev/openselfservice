@@ -4,7 +4,7 @@ sidebar_position: 150
 
 # How to set up
 
-This guide will walk you through setting up the Contentful CMS integration in your Open Self Service application.
+This guide will walk you through setting up the Contentful CMS integration in your Open Self-Service application.
 
 ## Install
 
@@ -98,14 +98,14 @@ Make sure to set these variables in your environment configuration file (e.g., `
 
 Before you can start using the integration, you need to import the content model structure into your Contentful space. The content model defines the structure of your content types, including Pages, Templates, and Blocks that will be used in your application.
 
-The content model includes predefined content types that are compatible with the Open Self Service framework, such as:
+The content model includes predefined content types that are compatible with the Open Self-Service framework, such as:
 - Page content types for managing routes
 - Template content types for defining page layouts
 - Block content types for reusable content components
 
 To import the content model, go to our resource repository where you can find detailed instructions and the content model definitions:
 
-- [**Open Self Service** resources](https://github.com/o2sdev/openselfservice-resources/tree/main/packages/cms/contentful/o2s)
+- [**Open Self-Service** resources](https://github.com/o2sdev/openselfservice-resources/tree/main/packages/cms/contentful/o2s)
 
 Follow the instructions in the repository to import the content model into your Contentful space. This will set up all the necessary content types and their relationships that the integration expects to work with.
 

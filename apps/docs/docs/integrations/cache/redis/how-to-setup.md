@@ -103,7 +103,7 @@ CACHE_REDIS_PASS=REDIS_PASS
 
 Start the API Harmonization server. Successful connection logs:
 
-```
+```log
 [REDIS] Successfully connected to redis
 ```
 
