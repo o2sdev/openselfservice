@@ -5,6 +5,7 @@ export class GetProductListQuery extends PaginationQuery {
     type?: ProductType;
     category?: string;
     locale?: string;
+    sort?: string;
 }
 
 export class GetProductParams {
