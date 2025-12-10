@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/nextjs';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { AlertCircle, HelpCircle, Info } from 'lucide-react';
 import React from 'react';
 

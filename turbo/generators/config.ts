@@ -179,6 +179,11 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
             },
             {
                 type: 'add',
+                path: 'packages/blocks/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.service.spec.ts',
+                templateFile: 'templates/block/api-harmonization/service.spec.hbs',
+            },
+            {
+                type: 'add',
                 path: 'packages/blocks/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.module.ts',
                 templateFile: 'templates/block/api-harmonization/module.hbs',
             },
@@ -298,6 +303,11 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                 type: 'add',
                 path: 'packages/blocks/{{kebabCase name}}/package.json',
                 templateFile: 'templates/block/package.hbs',
+            },
+            {
+                type: 'add',
+                path: 'packages/blocks/{{kebabCase name}}/vitest.config.mjs',
+                templateFile: 'templates/block/vitestConfig.hbs',
             },
             {
                 type: 'add',

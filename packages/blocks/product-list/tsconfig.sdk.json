@@ -12,6 +12,7 @@
     },
     "include": [
         "src/sdk",
+        "src/api-harmonization/product-list.url.ts",
         "src/api-harmonization/product-list.client.ts",
         "src/api-harmonization/product-list.model.ts",
         "src/api-harmonization/product-list.request.ts"

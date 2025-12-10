@@ -1,0 +1,38 @@
+import { Test, TestingModule } from '@nestjs/testing';
+import { CMS } from '@o2s/configs.integrations';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+
+import { {{pascalCase name}}Service } from './{{kebabCase name}}.service';
+
+describe('{{pascalCase name}}Service', () => {
+    let service: {{pascalCase name}}Service;
+    let cmsService: CMS.Service;
+
+    beforeEach(async () => {
+        const module: TestingModule = await Test.createTestingModule({
+            providers: [
+                {{pascalCase name}}Service,
+                {
+                    provide: CMS.Service,
+                    useValue: {
+                        get{{pascalCase name}}Block: vi.fn().mockReturnValue({
+                            title: 'Test Block',
+                        }),
+                    },
+                },
+            ],
+        }).compile();
+
+        service = module.get<{{pascalCase name}}Service>({{pascalCase name}}Service);
+        cmsService = module.get<CMS.Service>(CMS.Service);
+    });
+
+    it('should be defined', () => {
+        expect(service).toBeDefined();
+    });
+
+    it('should have cmsService injected', () => {
+        expect(cmsService).toBeDefined();
+    });
+});
+

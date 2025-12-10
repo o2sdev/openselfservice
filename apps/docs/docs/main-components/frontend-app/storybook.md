@@ -69,7 +69,7 @@ To add a new story for a component, create a file with the `.stories.tsx` extens
 Example story structure:
 
 ```typescript
-import type { Meta, StoryObj } from '@storybook/nextjs';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
 import { YourComponent } from './YourComponent';
 

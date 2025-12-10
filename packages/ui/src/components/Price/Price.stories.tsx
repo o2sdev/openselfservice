@@ -1,5 +1,5 @@
 import { Models } from '@o2s/framework/modules';
-import type { Meta, StoryObj } from '@storybook/nextjs';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
 // Create a mock version of the Price component that doesn't rely on hooks
 const Price = ({ price }: { price?: Models.Price.Price }) => {

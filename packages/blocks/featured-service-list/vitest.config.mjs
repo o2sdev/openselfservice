@@ -1,0 +1,4 @@
+import { config } from "@o2s/vitest-config/block";
+
+export default config;
+
