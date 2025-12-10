@@ -1,5 +1,11 @@
 # @o2s/ui
 
+## 1.8.0
+
+### Minor Changes
+
+- 5947ca4: added an `inline` variant to the `Filters` component that renders filters immediately, instead of in a draawer component
+
 ## 1.7.1
 
 ### Patch Changes
