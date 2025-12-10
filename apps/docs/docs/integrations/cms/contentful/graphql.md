@@ -250,16 +250,6 @@ When `preview` is `true`, the Preview SDK is used, allowing access to draft cont
 
 This approach enables seamless switching between published and draft content without requiring separate API calls or manual SDK selection.
 
-## Type safety benefits
-
-The code generation approach provides several benefits:
-
-1. **Compile-time validation** - GraphQL queries are validated at build time against the Contentful schema
-2. **Type safety** - All query variables and return types are strongly typed
-3. **IntelliSense support** - Full autocomplete support in IDEs
-4. **Refactoring safety** - Changes to the schema or queries are caught at compile time
-5. **Documentation** - The generated types serve as documentation of available fields and operations
-
 ## Example usage
 
 Here's a complete example of how a query is defined and used:

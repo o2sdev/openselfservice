@@ -26,7 +26,7 @@ For a full list of available blocks, together with their configuration, variants
 
 Each block has its own CMS content type defined so that composing pages using blocks is quite straightforward. To use them in your own CMS, take a look into our CMS integrations, where we have prepared ready-to-use exports:
 
-- resources for [Strapi CMS](../../integrations/cms/strapi/getting-started.md)
+- resources for [Strapi CMS](../../integrations/cms/strapi/how-to-setup.md)
 
 ## Storybook
 

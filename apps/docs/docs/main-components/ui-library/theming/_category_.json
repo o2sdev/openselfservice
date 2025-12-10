@@ -1,0 +1,8 @@
+{
+    "label": "Theming",
+    "position": 200,
+    "link": {
+        "type": "doc",
+        "id": "main-components/ui-library/theming/index"
+    }
+}

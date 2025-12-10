@@ -28,7 +28,7 @@ A **NestJS-based backend layer** that aggregates, normalizes, and orchestrates d
 A collection of **pre-designed UI components** built with **shadcn/ui** and **Tailwind CSS**, offering reusable elements for a modern, cohesive frontend experience.
 
 ### Learn more:
-- **[Theming](./ui-library/theming.md)** – Customize the appearance of UI components to match your brand.
+- **[Theming](./ui-library/theming/index.md)** – Customize the appearance of UI components to match your brand.
 
 
 ## [SDK](./guides/sdk)
