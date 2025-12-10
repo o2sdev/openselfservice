@@ -139,7 +139,7 @@ The same mindset informs how Open Self Service is designed: integrations are exp
 
 ### Hybrid mobile app: extending one frontend to multiple channels
 
-Although the primary entry point today is the web portal, Osadkowski is also planning to introduce a hybrid mobile application. Instead of building a separate native frontend, it is planned to wrap the existing Next.js application in a WebView-based shell and connect it to the BFF. This approach reuses the same UI components, routing and domain models across browser, PWA and native mobile touchpoints.
+Although the primary entry point today is the web portal, Osadkowski is also planning to introduce a hybrid mobile application. Instead of building a separate native frontend, it is planned to wrap the existing React.js application in a WebView-based shell and connect it to the BFF. This approach reuses the same UI components, routing and domain models across browser, PWA and native mobile touchpoints.
 
 ![Osadkowski app on a mobile device](osadkowski-case-1.png)
 
