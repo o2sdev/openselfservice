@@ -60,7 +60,7 @@
         "rimraf": "^6.1.2",
         "simple-git": "^3.30.0",
         "storybook": "^10.1.4",
-        "syncpack": "^14.0.0-alpha.29",
+        "syncpack": "^14.0.0-alpha.32",
         "turbo": "^2.6.3",
         "typescript": "5.9.3"
     },
