@@ -52,6 +52,7 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({
     const [data, setData] = useState<Model.NotificationListBlock>(component);
     const [filters, setFilters] = useState(initialFilters);
     const [viewMode, setViewMode] = useState<'list' | 'grid'>(initialViewMode);
+    const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
     const [isPending, startTransition] = useTransition();
 
     const handleFilter = (data: Partial<Request.GetNotificationListBlockQuery>) => {
@@ -62,6 +63,7 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({
 
                 setFilters(newFilters);
                 setData(newData);
+                setSelectedRows(new Set());
             } catch (_error) {
                 toast({
                     variant: 'destructive',
@@ -83,6 +85,7 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({
 
                 setFilters(initialFilters);
                 setData(newData);
+                setSelectedRows(new Set());
             } catch (_error) {
                 toast({
                     variant: 'destructive',
@@ -201,6 +204,10 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({
                                     columns={columns}
                                     actions={actions}
                                     cardHeaderSlots={data.cardHeaderSlots}
+                                    enableRowSelection={component.enableRowSelection}
+                                    selectedRows={selectedRows}
+                                    onSelectionChange={setSelectedRows}
+                                    getRowKey={(item) => item.id}
                                 />
 
                                 {data.pagination && (

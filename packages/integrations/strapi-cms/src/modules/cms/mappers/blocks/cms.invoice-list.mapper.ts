@@ -39,6 +39,9 @@ export const mapInvoiceListBlock = (data: GetComponentQuery): CMS.Model.InvoiceL
                 downloadFileName: component.downloadFileName,
                 downloadButtonAriaDescription: component.downloadButtonAriaDescription,
                 initialFilters: undefined, // TODO: add initial filters field in CMS
+                enableRowSelection: undefined, // TODO: add enableRowSelection field in CMS
+                bulkActionsLabel: undefined, // TODO: add bulkActionsLabel field in CMS
+                downloadAllButtonLabel: undefined, // TODO: add downloadAllButtonLabel field in CMS
             };
     }
 

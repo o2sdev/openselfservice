@@ -7,6 +7,7 @@ export interface ProductListProps {
     accessToken?: string;
     locale: string;
     routing: ReturnType<typeof defineRouting>;
+    enableRowSelection?: boolean;
 }
 
 export type ProductListPureProps = ProductListProps & Model.ProductListBlock;

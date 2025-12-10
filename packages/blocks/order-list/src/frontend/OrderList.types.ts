@@ -8,6 +8,7 @@ export interface OrderListProps {
     locale: string;
     routing: ReturnType<typeof defineRouting>;
     hasPriority?: boolean;
+    enableRowSelection?: boolean;
 }
 
 export interface OrderListRendererProps extends Omit<OrderListProps, ''> {

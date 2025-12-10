@@ -8,6 +8,7 @@ export interface NotificationListProps {
     locale: string;
     routing: ReturnType<typeof defineRouting>;
     hasPriority?: boolean;
+    enableRowSelection?: boolean;
 }
 
 export type NotificationListPureProps = NotificationListProps & Model.NotificationListBlock;

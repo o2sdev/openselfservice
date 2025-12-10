@@ -9,6 +9,7 @@ export interface TicketListProps {
     routing: ReturnType<typeof defineRouting>;
     hasPriority?: boolean;
     isDraftModeEnabled?: boolean;
+    enableRowSelection?: boolean;
 }
 
 export type TicketListPureProps = TicketListProps & Model.TicketListBlock;

@@ -151,4 +151,19 @@ export interface DataListProps<T> {
      * Optional row className function
      */
     getRowClassName?: (item: T) => string;
+
+    /**
+     * Enable row selection with checkboxes
+     */
+    enableRowSelection?: boolean;
+
+    /**
+     * Set of selected row keys (controlled mode)
+     */
+    selectedRows?: Set<string | number>;
+
+    /**
+     * Callback when selection changes
+     */
+    onSelectionChange?: (selected: Set<string | number>) => void;
 }

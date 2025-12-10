@@ -29,6 +29,9 @@ export const mapInvoiceList = (
         downloadButtonAriaDescription: cms.downloadButtonAriaDescription,
         initialFilters: cms.initialFilters,
         cardHeaderSlots: cms.cardHeaderSlots,
+        enableRowSelection: cms.enableRowSelection,
+        bulkActionsLabel: cms.bulkActionsLabel,
+        downloadAllButtonLabel: cms.downloadAllButtonLabel,
     };
 };
 

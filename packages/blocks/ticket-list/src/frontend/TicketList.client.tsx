@@ -49,6 +49,7 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
     const [data, setData] = useState<Model.TicketListBlock>(component);
     const [filters, setFilters] = useState(initialFilters);
     const [viewMode, setViewMode] = useState<'list' | 'grid'>(initialViewMode);
+    const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
 
     const [isPending, startTransition] = useTransition();
 
@@ -59,6 +60,7 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                 const newData = await sdk.blocks.getTicketList(newFilters, { 'x-locale': locale }, accessToken);
                 setFilters(newFilters);
                 setData(newData);
+                setSelectedRows(new Set());
             } catch (_error) {
                 toast({
                     variant: 'destructive',
@@ -75,6 +77,7 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                 const newData = await sdk.blocks.getTicketList(initialFilters, { 'x-locale': locale }, accessToken);
                 setFilters(initialFilters);
                 setData(newData);
+                setSelectedRows(new Set());
             } catch (_error) {
                 toast({
                     variant: 'destructive',
@@ -214,6 +217,10 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                                     columns={columns}
                                     actions={actions}
                                     cardHeaderSlots={data.cardHeaderSlots}
+                                    enableRowSelection={component.enableRowSelection}
+                                    selectedRows={selectedRows}
+                                    onSelectionChange={setSelectedRows}
+                                    getRowKey={(item) => item.id}
                                 />
 
                                 {data.pagination && (
