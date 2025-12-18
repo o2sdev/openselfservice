@@ -16,7 +16,6 @@ export const DataView = <T extends Record<string, any>>({
     bulkActions,
     bulkActionsLabel,
     data,
-    getRowKey,
     ...props
 }: DataViewProps<T>) => {
     const selectedCount = selectedRows?.size || 0;
