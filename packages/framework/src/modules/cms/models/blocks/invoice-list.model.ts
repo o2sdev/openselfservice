@@ -27,4 +27,7 @@ export class InvoiceListBlock extends Block.Block {
         right?: string;
         bottom?: string;
     };
+    enableRowSelection?: boolean;
+    bulkActionsLabel?: string;
+    downloadAllButtonLabel?: string;
 }

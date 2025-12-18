@@ -2,12 +2,13 @@ import React from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
+import { DataListColumnConfig } from '@o2s/ui/components/DataList';
+
 import { Card, CardContent, CardFooter, CardHeader } from '@o2s/ui/elements/card';
 import { Separator } from '@o2s/ui/elements/separator';
 import { Typography } from '@o2s/ui/elements/typography';
 
 import { renderCell } from '../../lib/renderCell';
-import { DataListColumnConfig } from '../DataList/DataList.types';
 
 import { DataGridProps } from './DataGrid.types';
 

@@ -35,6 +35,7 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
     const [filters, setFilters] = useState(initialFilters);
     const [isPending, startTransition] = useTransition();
     const [viewMode, setViewMode] = useState<ViewMode>('grid');
+    const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
 
     const handleFilter = (data: Partial<typeof initialFilters>) => {
         startTransition(async () => {
@@ -42,6 +43,7 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
             const newData = await sdk.blocks.getProductList(newFilters, { 'x-locale': locale }, accessToken);
             setFilters(newFilters);
             setData(newData);
+            setSelectedRows(new Set());
         });
     };
 
@@ -50,6 +52,7 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
             const newData = await sdk.blocks.getProductList(initialFilters, { 'x-locale': locale }, accessToken);
             setFilters(initialFilters);
             setData(newData);
+            setSelectedRows(new Set());
         });
     };
 
@@ -162,6 +165,9 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
                                             columns={columns}
                                             actions={actions}
                                             getRowKey={(item) => item.id}
+                                            enableRowSelection={component.enableRowSelection}
+                                            selectedRows={selectedRows}
+                                            onSelectionChange={setSelectedRows}
                                         />
                                     </div>
                                 )}
