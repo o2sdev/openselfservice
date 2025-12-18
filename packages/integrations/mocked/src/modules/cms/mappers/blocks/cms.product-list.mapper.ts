@@ -6,10 +6,6 @@ const MOCK_PRODUCT_LIST_BLOCK_EN: CMS.Model.ProductListBlock.ProductListBlock = 
     subtitle: 'Browse our product catalog',
     detailsLabel: 'View Details',
     fieldMapping: {
-        type: {
-            PHYSICAL: 'Physical',
-            VIRTUAL: 'Virtual',
-        },
         category: {
             SOFTWARE: 'Software',
             TOOLS: 'Tools',
@@ -66,16 +62,6 @@ const MOCK_PRODUCT_LIST_BLOCK_EN: CMS.Model.ProductListBlock.ProductListBlock = 
             },
             {
                 __typename: 'FilterSelect',
-                id: 'type',
-                label: 'Product Type',
-                allowMultiple: true,
-                options: [
-                    { label: 'Physical', value: 'PHYSICAL' },
-                    { label: 'Virtual', value: 'VIRTUAL' },
-                ],
-            },
-            {
-                __typename: 'FilterSelect',
                 id: 'category',
                 label: 'Category',
                 allowMultiple: true,
@@ -111,10 +97,6 @@ const MOCK_PRODUCT_LIST_BLOCK_DE: CMS.Model.ProductListBlock.ProductListBlock = 
     subtitle: 'Durchsuchen Sie unseren Produktkatalog',
     detailsLabel: 'Details anzeigen',
     fieldMapping: {
-        type: {
-            PHYSICAL: 'Physikalisch',
-            VIRTUAL: 'Virtuell',
-        },
         category: {
             SOFTWARE: 'Software',
             TOOLS: 'Werkzeuge',
@@ -171,16 +153,6 @@ const MOCK_PRODUCT_LIST_BLOCK_DE: CMS.Model.ProductListBlock.ProductListBlock = 
             },
             {
                 __typename: 'FilterSelect',
-                id: 'type',
-                label: 'Produkttyp',
-                allowMultiple: true,
-                options: [
-                    { label: 'Physikalisch', value: 'PHYSICAL' },
-                    { label: 'Virtuell', value: 'VIRTUAL' },
-                ],
-            },
-            {
-                __typename: 'FilterSelect',
                 id: 'category',
                 label: 'Kategorie',
                 allowMultiple: true,
@@ -216,10 +188,6 @@ const MOCK_PRODUCT_LIST_BLOCK_PL: CMS.Model.ProductListBlock.ProductListBlock = 
     subtitle: 'Przeglądaj nasz katalog produktów',
     detailsLabel: 'Zobacz szczegóły',
     fieldMapping: {
-        type: {
-            PHYSICAL: 'Fizyczny',
-            VIRTUAL: 'Wirtualny',
-        },
         category: {
             SOFTWARE: 'Oprogramowanie',
             TOOLS: 'Narzędzia',
@@ -272,16 +240,6 @@ const MOCK_PRODUCT_LIST_BLOCK_PL: CMS.Model.ProductListBlock.ProductListBlock = 
                     { label: 'Nazwa malejąco', value: 'name_DESC' },
                     { label: 'Cena rosnąco', value: 'price_ASC' },
                     { label: 'Cena malejąco', value: 'price_DESC' },
-                ],
-            },
-            {
-                __typename: 'FilterSelect',
-                id: 'type',
-                label: 'Typ Produktu',
-                allowMultiple: true,
-                options: [
-                    { label: 'Fizyczny', value: 'PHYSICAL' },
-                    { label: 'Wirtualny', value: 'VIRTUAL' },
                 ],
             },
             {
