@@ -3,12 +3,6 @@ import React from 'react';
 import RefreshCwIcon from '@site/src/assets/icons/RefreshCw.svg';
 import RocketIcon from '@site/src/assets/icons/Rocket.svg';
 import CircleCheckIcon from '@site/src/assets/icons/circle-check.svg';
-import BadgeIcon from '@site/src/assets/icons/o2s-icon-badge.svg';
-import ContactIcon from '@site/src/assets/icons/o2s-icon-contact.svg';
-import LoopIcon from '@site/src/assets/icons/o2s-icon-loop.svg';
-import RoadmapIcon from '@site/src/assets/icons/o2s-icon-roadmap.svg';
-import SupportIcon from '@site/src/assets/icons/o2s-icon-support.svg';
-import { type BenefitCardProps, BenefitsSection } from '@site/src/components/BenefitsSection';
 import { DXPFeaturesSection } from '@site/src/components/DXPFeaturesSection';
 import { FooterSection } from '@site/src/components/FooterSection';
 import { HeroBannerSection } from '@site/src/components/HeroBannerSection';
@@ -19,33 +13,33 @@ import Layout from '@theme/Layout';
 
 import styles from './product.module.scss';
 
-const benefits: Array<BenefitCardProps> = [
-    {
-        icon: <SupportIcon className="w-[50px] h-[50px]" />,
-        title: 'Theming with Tailwind',
-        borderColor: 'transparent',
-    },
-    {
-        icon: <ContactIcon className="w-[50px] h-[50px]" />,
-        title: 'Override or extend components',
-        borderColor: 'transparent',
-    },
-    {
-        icon: <LoopIcon className="w-[50px] h-[50px]" />,
-        title: 'Add custom blocks (frontend + BFF logic)',
-        borderColor: 'transparent',
-    },
-    {
-        icon: <RoadmapIcon className="w-[50px] h-[50px]" />,
-        title: 'CMS schema and layout control',
-        borderColor: 'transparent',
-    },
-    {
-        icon: <BadgeIcon className="w-[50px] h-[50px]" />,
-        title: 'Lighthouse 90+ scores (Performance, SEO, A11y)',
-        borderColor: 'transparent',
-    },
-];
+// const benefits: Array<BenefitCardProps> = [
+//     {
+//         icon: <SupportIcon className="w-[50px] h-[50px]" />,
+//         title: 'Theming with Tailwind',
+//         borderColor: 'transparent',
+//     },
+//     {
+//         icon: <ContactIcon className="w-[50px] h-[50px]" />,
+//         title: 'Override or extend components',
+//         borderColor: 'transparent',
+//     },
+//     {
+//         icon: <LoopIcon className="w-[50px] h-[50px]" />,
+//         title: 'Add custom blocks (frontend + BFF logic)',
+//         borderColor: 'transparent',
+//     },
+//     {
+//         icon: <RoadmapIcon className="w-[50px] h-[50px]" />,
+//         title: 'CMS schema and layout control',
+//         borderColor: 'transparent',
+//     },
+//     {
+//         icon: <BadgeIcon className="w-[50px] h-[50px]" />,
+//         title: 'Lighthouse 90+ scores (Performance, SEO, A11y)',
+//         borderColor: 'transparent',
+//     },
+// ];
 
 const digitalPortalStarter: StarterInfoSectionProps = {
     links: [

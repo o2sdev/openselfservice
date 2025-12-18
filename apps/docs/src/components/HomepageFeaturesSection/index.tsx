@@ -2,14 +2,9 @@ import React from 'react';
 
 import Link from '@docusaurus/Link';
 
-import BlocksIcon from '@site/src/assets/icons/Blocks.svg';
-import UserIcon from '@site/src/assets/icons/CircleUser.svg';
-import FileSearchIcon from '@site/src/assets/icons/FileSearch.svg';
-import TicketIcon from '@site/src/assets/icons/TicketX.svg';
-import WalletIcon from '@site/src/assets/icons/Wallet.svg';
 import CircleCheckIcon from '@site/src/assets/icons/circle-check.svg';
 
-import { Body, H2, H3, H4 } from '../Typography';
+import { Body, H2, H3 } from '../Typography';
 
 interface FeatureItemProps {
     text: string;
@@ -21,18 +16,6 @@ const FeatureItem: React.FC<FeatureItemProps> = ({ text, icon, textClassName = '
     <div className="flex gap-4 items-start">
         <div className="flex items-center pt-0.5 shrink-0">{icon}</div>
         <Body className={`mb-0! text-base leading-6 ${textClassName}`}>{text}</Body>
-    </div>
-);
-
-interface BuildingBlockCardProps {
-    title: string;
-    icon: React.ReactNode;
-}
-
-const BuildingBlockCard: React.FC<BuildingBlockCardProps> = ({ title, icon }) => (
-    <div className="flex flex-col gap-2 items-start">
-        <div className="flex items-center mb-2 [&_svg_path]:stroke-(--color-highlighted)">{icon}</div>
-        <H4 className="mb-0! leading-7!">{title}</H4>
     </div>
 );
 
@@ -51,29 +34,6 @@ export function HomepageFeaturesSection() {
         'From support apps to enterprise CX platforms',
         'Vendor independent frontend',
         'UX optimized for efficient customer self-service',
-    ];
-
-    const buildingBlocks = [
-        {
-            title: 'User authentication & profile management',
-            icon: <UserIcon className="h-5 w-5" />,
-        },
-        {
-            title: 'Ticketing and customer support workflows',
-            icon: <TicketIcon className="h-5 w-5" />,
-        },
-        {
-            title: 'Payments, invoices, orders',
-            icon: <WalletIcon className="h-5 w-5" />,
-        },
-        {
-            title: 'Knowledge base and content search',
-            icon: <FileSearchIcon className="h-5 w-5" />,
-        },
-        {
-            title: 'CMS-powered landing pages and sections',
-            icon: <BlocksIcon className="h-5 w-5" />,
-        },
     ];
 
     return (

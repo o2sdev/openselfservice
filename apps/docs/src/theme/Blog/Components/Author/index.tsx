@@ -4,7 +4,6 @@ import React, { type ReactNode } from 'react';
 import Link, { type Props as LinkProps } from '@docusaurus/Link';
 
 import type { Props } from '@theme/Blog/Components/Author';
-import AuthorSocials from '@theme/Blog/Components/Author/Socials';
 import Heading from '@theme/Heading';
 
 import styles from './styles.module.css';

@@ -70,7 +70,7 @@ const WaitlistForm = ({ inputId }) => {
                 });
                 setIsSubmitting(false);
             }
-        } catch (error) {
+        } catch (_error) {
             setStatus({
                 type: 'error',
                 message: 'An unexpected error occurred. Please try again.',

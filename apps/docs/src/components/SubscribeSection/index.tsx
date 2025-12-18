@@ -97,7 +97,7 @@ export const SubscribeSection: React.FC<SubscribeSectionProps> = ({ portalId, fo
                 url.searchParams.append('success', 'false');
                 window.history.replaceState(null, null, url);
             }
-        } catch (error) {
+        } catch (_error) {
             setStatus({
                 type: 'error',
                 message: 'An unexpected error occurred. Please try again later.',
