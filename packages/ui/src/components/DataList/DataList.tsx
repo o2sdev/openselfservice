@@ -64,9 +64,12 @@ export function DataList<T extends Record<string, any>>({
     };
 
     // Calculate selection state
-    const allRowKeys = data.map((item, index) => rowKeyExtractor(item, index));
+    const allRowKeys = useMemo(() => data.map((item, index) => rowKeyExtractor(item, index)), [data, rowKeyExtractor]);
     // Count only selected items on current page
-    const selectedOnCurrentPage = allRowKeys.filter((key) => selectedRows?.has(key)).length;
+    const selectedOnCurrentPage = useMemo(
+        () => allRowKeys.filter((key) => selectedRows?.has(key)).length,
+        [allRowKeys, selectedRows],
+    );
     const allSelected =
         enableRowSelection && data.length > 0 && selectedOnCurrentPage === allRowKeys.length && allRowKeys.length > 0;
     const someSelected = enableRowSelection && selectedOnCurrentPage > 0 && selectedOnCurrentPage < allRowKeys.length;
