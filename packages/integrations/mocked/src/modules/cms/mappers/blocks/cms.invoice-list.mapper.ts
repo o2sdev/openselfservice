@@ -132,6 +132,9 @@ const MOCK_INVOICE_LIST_BLOCK_EN: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
         right: 'paymentStatus',
         bottom: 'paymentDueDate',
     },
+    enableRowSelection: true,
+    bulkActionsLabel: '{count, plural, one {# item selected} other {# items selected}}',
+    downloadAllButtonLabel: 'Download selected',
 };
 
 const MOCK_INVOICE_LIST_BLOCK_DE: CMS.Model.InvoiceListBlock.InvoiceListBlock = {
@@ -266,6 +269,9 @@ const MOCK_INVOICE_LIST_BLOCK_DE: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
         right: 'paymentStatus',
         bottom: 'paymentDueDate',
     },
+    enableRowSelection: true,
+    bulkActionsLabel: '{count, plural, one {# Element ausgewählt} other {# Elemente ausgewählt}}',
+    downloadAllButtonLabel: 'Ausgewählte herunterladen',
 };
 
 const MOCK_INVOICE_LIST_BLOCK_PL: CMS.Model.InvoiceListBlock.InvoiceListBlock = {
@@ -400,6 +406,10 @@ const MOCK_INVOICE_LIST_BLOCK_PL: CMS.Model.InvoiceListBlock.InvoiceListBlock = 
         right: 'paymentStatus',
         bottom: 'paymentDueDate',
     },
+    enableRowSelection: true,
+    bulkActionsLabel:
+        '{count, plural, one {Wybrano # element} few {Wybrano # elementy} many {Wybrano # elementów} other {Wybrano # elementów}}',
+    downloadAllButtonLabel: 'Pobierz zaznaczone',
 };
 
 export const mapInvoiceListBlock = (locale: string): CMS.Model.InvoiceListBlock.InvoiceListBlock => {

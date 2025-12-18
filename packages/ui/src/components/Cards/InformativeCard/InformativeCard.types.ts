@@ -1,6 +1,6 @@
 import { Models } from '@o2s/utils.frontend';
 
-import { DynamicIconProps } from '../../DynamicIcon';
+import { DynamicIconProps } from '@o2s/ui/components/DynamicIcon';
 
 export interface InformativeCardMeta {
     __id: string;

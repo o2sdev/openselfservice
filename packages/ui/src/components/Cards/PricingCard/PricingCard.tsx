@@ -6,6 +6,7 @@ import { cn } from '@o2s/ui/lib/utils';
 
 import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
 import { Image } from '@o2s/ui/components/Image';
+import { LinkList } from '@o2s/ui/components/LinkList';
 import { Price } from '@o2s/ui/components/Price';
 import { RichText } from '@o2s/ui/components/RichText';
 import { TooltipHover } from '@o2s/ui/components/TooltipHover';
@@ -13,8 +14,6 @@ import { TooltipHover } from '@o2s/ui/components/TooltipHover';
 import { Badge } from '@o2s/ui/elements/badge';
 import { Button } from '@o2s/ui/elements/button';
 import { Typography } from '@o2s/ui/elements/typography';
-
-import { LinkList } from '../../LinkList';
 
 import { FeatureItemProps, PricingCardProps } from './PricingCard.types';
 
