@@ -1,13 +1,12 @@
 import React from 'react';
 
+import { DataListColumnConfig } from '@o2s/ui/components/DataList';
 import { Price } from '@o2s/ui/components/Price';
 
 import { Badge } from '@o2s/ui/elements/badge';
 import { BadgeStatus } from '@o2s/ui/elements/badge-status';
 import { Button } from '@o2s/ui/elements/button';
 import { Link } from '@o2s/ui/elements/link';
-
-import { DataListColumnConfig } from '../components/DataList/DataList.types';
 
 /**
  * Default cell renderer based on column type

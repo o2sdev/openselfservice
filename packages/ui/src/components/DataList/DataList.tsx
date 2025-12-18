@@ -1,10 +1,11 @@
 import React, { useMemo } from 'react';
 
-import { renderCell } from '@o2s/ui/lib/renderCell';
 import { cn } from '@o2s/ui/lib/utils';
 
 import { Checkbox } from '@o2s/ui/elements/checkbox';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@o2s/ui/elements/table';
+
+import { renderCell } from '../../lib/renderCell';
 
 import { DataListProps } from './DataList.types';
 
@@ -52,9 +53,9 @@ export function DataList<T extends Record<string, any>>({
     };
 
     const handleRowSelect = (rowKey: string | number, checked: boolean) => {
-        if (!onSelectionChange || !selectedRows) return;
+        if (!onSelectionChange) return;
 
-        const newSelected = new Set(selectedRows);
+        const newSelected = new Set(selectedRows || []);
         if (checked) {
             newSelected.add(rowKey);
         } else {
