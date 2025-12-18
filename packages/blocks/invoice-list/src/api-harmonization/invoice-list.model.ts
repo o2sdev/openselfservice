@@ -50,10 +50,6 @@ export class Invoice {
         value: Invoices.Model.Invoice['paymentDueDate'];
         displayValue: string;
     };
-    totalAmountDue!: {
-        value: Invoices.Model.Invoice['totalAmountDue']['value'];
-    };
-    totalNetAmountDue!: {
-        value: Invoices.Model.Invoice['totalNetAmountDue']['value'];
-    };
+    totalAmountDue!: Invoices.Model.Invoice['totalAmountDue'];
+    totalNetAmountDue!: Invoices.Model.Invoice['totalNetAmountDue'];
 }
