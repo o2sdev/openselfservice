@@ -1,6 +1,8 @@
 'use client';
 
+import { IntlMessageFormat } from 'intl-messageformat';
 import { Download } from 'lucide-react';
+import { useLocale } from 'next-intl';
 import React, { useState, useTransition } from 'react';
 
 import { Mappings, Utils } from '@o2s/utils.frontend';
@@ -27,6 +29,7 @@ import { InvoiceListPureProps } from './InvoiceList.types';
 
 export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, accessToken, routing, ...component }) => {
     const { labels } = useGlobalContext();
+    const currentLocale = useLocale();
 
     const initialFilters: Request.GetInvoiceListBlockQuery = {
         id: component.id,
@@ -44,6 +47,7 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
     const [data, setData] = useState(component);
     const [filters, setFilters] = useState(initialFilters);
     const [viewMode, setViewMode] = useState<'list' | 'grid'>(initialViewMode);
+    const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
     const [isPending, startTransition] = useTransition();
 
     const handleFilter = (data: Partial<Request.GetInvoiceListBlockQuery>) => {
@@ -71,6 +75,7 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
 
                 setFilters(initialFilters);
                 setData(newData);
+                setSelectedRows(new Set());
             } catch (_error) {
                 toast({
                     variant: 'destructive',
@@ -92,6 +97,33 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
                 description: labels.errors.requestError.content,
             });
         }
+    };
+
+    const handleBulkDownload = async (selectedInvoiceIds: string[]) => {
+        if (selectedInvoiceIds.length === 0) return;
+
+        startTransition(async () => {
+            try {
+                for (const invoiceId of selectedInvoiceIds) {
+                    try {
+                        const response = await sdk.blocks.getInvoicePdf(invoiceId, { 'x-locale': locale }, accessToken);
+                        Utils.DownloadFile.downloadFile(
+                            response,
+                            data.downloadFileName?.replace('{id}', invoiceId) || `invoice-${invoiceId}.pdf`,
+                        );
+                        await new Promise((resolve) => setTimeout(resolve, 100));
+                    } catch (error) {
+                        console.error(`Failed to download invoice ${invoiceId}:`, error);
+                    }
+                }
+            } catch (_error) {
+                toast({
+                    variant: 'destructive',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
+                });
+            }
+        });
     };
 
     // Define columns configuration outside JSX for better readability
@@ -156,6 +188,25 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
           }
         : undefined;
 
+    const bulkActions = component.downloadAllButtonLabel
+        ? (selectedRowKeys: Set<string | number>) => {
+              const selectedIds = Array.from(selectedRowKeys).map(String);
+              return (
+                  <Button size="sm" onClick={() => handleBulkDownload(selectedIds)} disabled={isPending}>
+                      <Download className="mr-2 h-4 w-4" />
+                      {component.downloadAllButtonLabel}
+                  </Button>
+              );
+          }
+        : undefined;
+
+    const bulkActionsLabel = component.bulkActionsLabel
+        ? (count: number) => {
+              const msg = new IntlMessageFormat(component.bulkActionsLabel!, currentLocale);
+              return String(msg.format({ count }));
+          }
+        : undefined;
+
     return (
         <div className="w-full">
             {initialData.length > 0 ? (
@@ -195,6 +246,12 @@ export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, access
                                         columns={columns}
                                         actions={actions}
                                         cardHeaderSlots={data.cardHeaderSlots}
+                                        enableRowSelection={component.enableRowSelection}
+                                        selectedRows={selectedRows}
+                                        onSelectionChange={setSelectedRows}
+                                        getRowKey={(item) => item.id}
+                                        bulkActions={bulkActions}
+                                        bulkActionsLabel={bulkActionsLabel}
                                     />
 
                                     {data.pagination && (
