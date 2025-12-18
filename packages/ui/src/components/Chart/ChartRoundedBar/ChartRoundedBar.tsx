@@ -1,9 +1,11 @@
 import React, { FC } from 'react';
-import { Props } from 'recharts/types/cartesian/Bar';
+import { Bar } from 'recharts';
 
 import { ChartRoundedBarProps } from './ChartRoundedBar.types';
 
-export const ChartRoundedBar: FC<Props & ChartRoundedBarProps> = (props) => {
+type BarProps = React.ComponentProps<typeof Bar>;
+
+export const ChartRoundedBar: FC<BarProps & ChartRoundedBarProps> = (props) => {
     const {
         x: xString,
         y: yString,
