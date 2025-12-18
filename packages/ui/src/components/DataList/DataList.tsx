@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
-import { Checkbox } from '../../elements/checkbox';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../elements/table';
-import { renderCell } from '../../lib/renderCell';
-import { cn } from '../../lib/utils';
+import { renderCell } from '@o2s/ui/lib/renderCell';
+import { cn } from '@o2s/ui/lib/utils';
+
+import { Checkbox } from '@o2s/ui/elements/checkbox';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@o2s/ui/elements/table';
 
 import { DataListProps } from './DataList.types';
 

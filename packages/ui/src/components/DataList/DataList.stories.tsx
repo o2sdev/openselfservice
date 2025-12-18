@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Download, Trash2 } from 'lucide-react';
 import React, { useState } from 'react';
 
-import { Button } from '../../elements/button';
+import { Button } from '@o2s/ui/elements/button';
 
 import { DataList } from './DataList';
 import type { DataListColumnConfig } from './DataList.types';

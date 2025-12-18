@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ArrowRight, Download } from 'lucide-react';
 
-import { Button } from '@o2s/ui/elements/button';
+import type { DataListColumnConfig } from '@o2s/ui/components/DataList';
 
-import type { DataListColumnConfig } from '../DataList/DataList.types';
+import { Button } from '@o2s/ui/elements/button';
 
 import { DataGrid } from './DataGrid';
 import type { DataGridProps } from './DataGrid.types';
