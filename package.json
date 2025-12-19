@@ -83,8 +83,5 @@
         "commander": "^14.0.2",
         "prompts": "^2.4.2",
         "unzipper": "^0.12.3"
-    },
-    "overrides": {
-        "better-sqlite3": "^12.5.0"
     }
 }
