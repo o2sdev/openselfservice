@@ -59,8 +59,8 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
     title,
     icon,
     features,
-    buttonText,
-    buttonUrl,
+    // buttonText,
+    // buttonUrl,
     borderColor = 'blue',
 }) => {
     return (

@@ -1,7 +1,5 @@
 import React, { ReactNode } from 'react';
 
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-
 import GithubIcon from '@site/src/assets/icons/github.svg';
 import { BenefitCardProps, BenefitsSection } from '@site/src/components/BenefitsSection';
 import { DXPArchitectureSection } from '@site/src/components/DXPArchitectureSection';
@@ -42,8 +40,6 @@ const benefits: Array<BenefitCardProps> = [
 ];
 
 export default function DXPStarter(): ReactNode {
-    const { siteConfig } = useDocusaurusContext();
-
     return (
         <div className="dxp-page">
             <Layout title="DXP Frontend Starter - Open Self Service">

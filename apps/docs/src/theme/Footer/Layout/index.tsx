@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import React, { type ReactNode } from 'react';
-import FooterJoinTheWhitelistSection from 'src/components/HomepageJoinTheWaitlistSection';
 
 import type { Props } from '@theme/Footer/Layout';
 

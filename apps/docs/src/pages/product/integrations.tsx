@@ -268,8 +268,8 @@ export default function ProductIntegrations() {
                                     <>
                                         <Body>
                                             Open Self Service is composable by design. We believe in backend-agnostic
-                                            architecture. That's why every integration is decoupled and modular — so you
-                                            can swap or extend data sources without rebuilding your frontend.
+                                            architecture. That&apos;s why every integration is decoupled and modular —
+                                            so you can swap or extend data sources without rebuilding your frontend.
                                         </Body>
                                         <BodyBold className="mb-0!">
                                             Below is a list of available and upcoming integrations.

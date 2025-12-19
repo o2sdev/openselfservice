@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import type { Model } from '../api-harmonization/notification-details.client';
 import { sdk } from '../sdk';
 
 import { NotificationDetailsProps } from './NotificationDetails.types';
@@ -17,8 +18,9 @@ export const NotificationDetails: React.FC<NotificationDetailsProps> = async ({
     routing,
     hasPriority,
 }) => {
+    let data: Model.NotificationDetailsBlock;
     try {
-        const data = await sdk.blocks.getNotificationDetails(
+        data = await sdk.blocks.getNotificationDetails(
             {
                 id: notificationId,
             },
@@ -28,19 +30,19 @@ export const NotificationDetails: React.FC<NotificationDetailsProps> = async ({
             { 'x-locale': locale },
             accessToken,
         );
-
-        return (
-            <NotificationDetailsDynamic
-                notificationId={notificationId}
-                {...data}
-                id={id}
-                accessToken={accessToken}
-                locale={locale}
-                routing={routing}
-                hasPriority={hasPriority}
-            />
-        );
     } catch (_error) {
         return null;
     }
+
+    return (
+        <NotificationDetailsDynamic
+            notificationId={notificationId}
+            {...data}
+            id={id}
+            accessToken={accessToken}
+            locale={locale}
+            routing={routing}
+            hasPriority={hasPriority}
+        />
+    );
 };

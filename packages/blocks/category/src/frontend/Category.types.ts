@@ -3,7 +3,7 @@ import React from 'react';
 
 import { CMS } from '@o2s/framework/modules';
 
-import { Model } from '../api-harmonization/category.client';
+import type { Model } from '../api-harmonization/category.client';
 
 export interface CategoryProps {
     id: string;

@@ -1,6 +1,6 @@
 import { defineRouting } from 'next-intl/routing';
 
-import { Model } from '../api-harmonization/invoice-list.client';
+import type { Model } from '../api-harmonization/invoice-list.client';
 
 export interface InvoiceListProps {
     id: string;

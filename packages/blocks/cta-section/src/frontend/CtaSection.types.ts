@@ -1,6 +1,6 @@
 import { defineRouting } from 'next-intl/routing';
 
-import { Model } from '../api-harmonization/cta-section.client';
+import type { Model } from '../api-harmonization/cta-section.client';
 
 export interface CtaSectionProps {
     id: string;

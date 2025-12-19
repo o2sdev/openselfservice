@@ -1,6 +1,6 @@
 import { defineRouting } from 'next-intl/routing';
 
-import { Model } from '../api-harmonization/quick-links.client';
+import type { Model } from '../api-harmonization/quick-links.client';
 
 export interface QuickLinksProps {
     id: string;

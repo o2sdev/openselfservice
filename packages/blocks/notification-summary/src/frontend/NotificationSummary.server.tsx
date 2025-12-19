@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import type { Model } from '../api-harmonization/notification-summary.client';
 import { sdk } from '../sdk';
 
 import { NotificationSummaryProps } from './NotificationSummary.types';
@@ -10,20 +11,19 @@ export const NotificationSummaryDynamic = dynamic(() =>
 );
 
 export const NotificationSummary: React.FC<NotificationSummaryProps> = async ({ id, accessToken, locale, routing }) => {
+    let data: Model.NotificationSummaryBlock;
     try {
-        const data = await sdk.blocks.getNotificationSummary(
+        data = await sdk.blocks.getNotificationSummary(
             {
                 id,
             },
             { 'x-locale': locale },
             accessToken,
         );
-
-        return (
-            <NotificationSummaryDynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />
-        );
     } catch (error) {
         console.error('Error fetching NotificationSummary block', error);
         return null;
     }
+
+    return <NotificationSummaryDynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />;
 };
