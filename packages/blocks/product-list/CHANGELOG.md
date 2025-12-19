@@ -1,5 +1,24 @@
 # @o2s/blocks.product-list
 
+## 0.2.0
+
+### Minor Changes
+
+- e78c11a: feat: Added sorting support for products in mocked integration
+  - Added sorting functionality to `mapProducts` and `mapRelatedProducts` in mocked integration
+  - Supports sorting by name and price in ascending/descending order (format: `name_ASC`, `name_DESC`, `price_ASC`, `price_DESC`)
+  - Sorting is applied to filtered product lists before returning results
+
+### Patch Changes
+
+- Updated dependencies [5947ca4]
+- Updated dependencies [e78c11a]
+- Updated dependencies [d197b89]
+- Updated dependencies [d197b89]
+  - @o2s/ui@1.8.0
+  - @o2s/configs.integrations@0.3.0
+  - @o2s/framework@1.15.0
+
 ## 0.1.1
 
 ### Patch Changes

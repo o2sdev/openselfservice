@@ -1,5 +1,20 @@
 # @o2s/configs.integrations
 
+## 0.3.0
+
+### Minor Changes
+
+- e78c11a: feat: Added sorting support for products in mocked integration
+    - Added sorting functionality to `mapProducts` and `mapRelatedProducts` in mocked integration
+    - Supports sorting by name and price in ascending/descending order (format: `name_ASC`, `name_DESC`, `price_ASC`, `price_DESC`)
+    - Sorting is applied to filtered product lists before returning results
+
+### Patch Changes
+
+- Updated dependencies [e78c11a]
+    - @o2s/integrations.mocked@1.16.0
+    - @o2s/framework@1.15.0
+
 ## 0.2.1
 
 ### Patch Changes

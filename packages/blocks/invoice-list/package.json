@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.invoice-list",
-    "version": "1.3.0",
+    "version": "1.3.1",
     "private": false,
     "license": "MIT",
     "description": "A block for displaying and managing invoice list.",
