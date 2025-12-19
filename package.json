@@ -2,6 +2,7 @@
     "name": "o2s",
     "private": true,
     "scripts": {
+        "postinstall": "npx playwright install --with-deps chromium",
         "prepare": "husky",
         "dev": "turbo watch dev",
         "predev": "turbo build -F=!{./apps/*} -F=!{./packages/cli/*}",
@@ -9,7 +10,7 @@
         "start": "turbo start",
         "format": "turbo format",
         "lint": "turbo lint",
-        "test": "turbo test && vitest --project=storybook",
+        "test": "turbo test && vitest run --project=storybook",
         "generate": "turbo gen",
         "eject-block": "ts-node ./scripts/cli.ts eject-block",
         "docs": "turbo start --filter=@o2s/docs",
