@@ -16,7 +16,7 @@ import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
 import { Separator } from '@o2s/ui/elements/separator';
 import { ToggleGroup, ToggleGroupItem } from '@o2s/ui/elements/toggle-group';
 
-import { Model } from '../api-harmonization/product-list.client';
+import type { Model } from '../api-harmonization/product-list.client';
 import { sdk } from '../sdk';
 
 import { ProductListPureProps } from './ProductList.types';

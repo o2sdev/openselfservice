@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-import { Model } from '../api-harmonization/bento-grid.client';
+import type { Model } from '../api-harmonization/bento-grid.client';
 import { sdk } from '../sdk';
 
 import { BentoGridProps } from './BentoGrid.types';

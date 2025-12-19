@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-import { Model } from '../api-harmonization/quick-links.client';
+import type { Model } from '../api-harmonization/quick-links.client';
 import { sdk } from '../sdk';
 
 import { QuickLinksProps } from './QuickLinks.types';

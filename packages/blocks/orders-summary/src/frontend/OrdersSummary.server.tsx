@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-import { Model } from '../api-harmonization/orders-summary.client';
+import type { Model } from '../api-harmonization/orders-summary.client';
 import { Request } from '../api-harmonization/orders-summary.client';
 import { sdk } from '../sdk';
 

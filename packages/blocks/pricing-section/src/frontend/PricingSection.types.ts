@@ -1,6 +1,6 @@
 import { defineRouting } from 'next-intl/routing';
 
-import { Model } from '../api-harmonization/pricing-section.client';
+import type { Model } from '../api-harmonization/pricing-section.client';
 
 export interface PricingSectionProps {
     id: string;

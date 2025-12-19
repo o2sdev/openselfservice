@@ -1,6 +1,6 @@
 import { defineRouting } from 'next-intl/routing';
 
-import { Model } from '../api-harmonization/payments-summary.client';
+import type { Model } from '../api-harmonization/payments-summary.client';
 
 export interface PaymentsSummaryProps {
     id: string;

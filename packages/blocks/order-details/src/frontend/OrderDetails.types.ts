@@ -1,6 +1,6 @@
 import { defineRouting } from 'next-intl/routing';
 
-import { Model } from '../api-harmonization/order-details.client';
+import type { Model } from '../api-harmonization/order-details.client';
 
 export interface OrderDetailsProps {
     id: string;

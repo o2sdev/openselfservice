@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-import { Model } from '../api-harmonization/product-list.client';
+import type { Model } from '../api-harmonization/product-list.client';
 import { sdk } from '../sdk';
 
 import { ProductListProps } from './ProductList.types';

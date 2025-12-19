@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-import { Model } from '../api-harmonization/notification-list.client';
+import type { Model } from '../api-harmonization/notification-list.client';
 import { sdk } from '../sdk';
 
 import { NotificationListProps } from './NotificationList.types';

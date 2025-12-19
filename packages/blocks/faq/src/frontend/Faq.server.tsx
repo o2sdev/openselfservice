@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-import { Model } from '../api-harmonization/faq.client';
+import type { Model } from '../api-harmonization/faq.client';
 import { sdk } from '../sdk';
 
 import { FaqProps } from './Faq.types';

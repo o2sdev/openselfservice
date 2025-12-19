@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-import { Model } from '../api-harmonization/hero-section.client';
+import type { Model } from '../api-harmonization/hero-section.client';
 import { sdk } from '../sdk';
 
 import { HeroSectionProps } from './HeroSection.types';

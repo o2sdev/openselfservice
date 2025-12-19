@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-import { Model } from '../api-harmonization/article-search.client';
+import type { Model } from '../api-harmonization/article-search.client';
 import { sdk } from '../sdk';
 
 import { ArticleSearchProps } from './ArticleSearch.types';

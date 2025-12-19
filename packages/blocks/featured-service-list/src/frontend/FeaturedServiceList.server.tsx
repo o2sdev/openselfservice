@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-import { Model } from '../api-harmonization/featured-service-list.client';
+import type { Model } from '../api-harmonization/featured-service-list.client';
 import { sdk } from '../sdk';
 
 import { FeaturedServiceListProps } from './FeaturedServiceList.types';

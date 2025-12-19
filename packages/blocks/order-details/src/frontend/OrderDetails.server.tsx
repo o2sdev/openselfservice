@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-import { Model } from '../api-harmonization/order-details.client';
+import type { Model } from '../api-harmonization/order-details.client';
 import { Request } from '../api-harmonization/order-details.client';
 import { sdk } from '../sdk';
 

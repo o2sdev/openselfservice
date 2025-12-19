@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-import { Model } from '../api-harmonization/payments-history.client';
+import type { Model } from '../api-harmonization/payments-history.client';
 import { sdk } from '../sdk';
 
 import { PaymentsHistoryProps } from './PaymentsHistory.types';

@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-import { Model } from '../api-harmonization/surveyjs.client';
+import type { Model } from '../api-harmonization/surveyjs.client';
 import { sdk } from '../sdk';
 
 import { SurveyJsFormProps } from './SurveyJs.types';

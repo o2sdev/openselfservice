@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-import { Model } from '../api-harmonization/ticket-recent.client';
+import type { Model } from '../api-harmonization/ticket-recent.client';
 import { sdk } from '../sdk';
 
 import { TicketRecentProps } from './TicketRecent.types';

@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-import { Model } from '../api-harmonization/category-list.client';
+import type { Model } from '../api-harmonization/category-list.client';
 import { sdk } from '../sdk';
 
 import { CategoryListProps } from './CategoryList.types';

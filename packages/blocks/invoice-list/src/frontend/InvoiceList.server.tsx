@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-import { Model } from '../api-harmonization/invoice-list.client';
+import type { Model } from '../api-harmonization/invoice-list.client';
 import { sdk } from '../sdk';
 
 import { InvoiceListProps } from './InvoiceList.types';

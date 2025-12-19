@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-import { Model } from '../api-harmonization/media-section.client';
+import type { Model } from '../api-harmonization/media-section.client';
 import { sdk } from '../sdk';
 
 import { MediaSectionProps } from './MediaSection.types';
