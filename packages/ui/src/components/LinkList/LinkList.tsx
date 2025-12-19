@@ -2,9 +2,9 @@ import React from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
-import { Link } from '@o2s/ui/elements/link';
+import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
 
-import { DynamicIcon } from '../DynamicIcon';
+import { Link } from '@o2s/ui/elements/link';
 
 import { LinkListProps } from './LinkList.types';
 

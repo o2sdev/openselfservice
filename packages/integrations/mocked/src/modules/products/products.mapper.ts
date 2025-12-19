@@ -342,6 +342,7 @@ export const mapProduct = (id: string): Products.Model.Product => {
 };
 
 export const mapProducts = (options: Products.Request.GetProductListQuery): Products.Model.Products => {
+    const { sort } = options;
     const filteredProducts = MOCK_PRODUCTS.filter((product) => {
         if (options.type && product.type !== options.type) {
             return false;
@@ -352,9 +353,36 @@ export const mapProducts = (options: Products.Request.GetProductListQuery): Prod
         return true;
     });
 
+    const data = [...filteredProducts];
+
+    if (sort) {
+        const [field, order] = sort.split('_');
+        const isAscending = order === 'ASC';
+
+        data.sort((a, b) => {
+            const aValue = a[field as keyof Products.Model.Product];
+            const bValue = b[field as keyof Products.Model.Product];
+
+            if (field === 'name') {
+                const aField = a.name;
+                const bField = b.name;
+                return isAscending ? aField.localeCompare(bField) : bField.localeCompare(aField);
+            } else if (field === 'price') {
+                const aPrice = a.price.value;
+                const bPrice = b.price.value;
+                return isAscending ? aPrice - bPrice : bPrice - aPrice;
+            } else if (typeof aValue === 'string' && typeof bValue === 'string') {
+                return isAscending ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+            } else if (typeof aValue === 'number' && typeof bValue === 'number') {
+                return isAscending ? aValue - bValue : bValue - aValue;
+            }
+            return 0;
+        });
+    }
+
     return {
-        data: filteredProducts,
-        total: filteredProducts.length,
+        data: data,
+        total: data.length,
     };
 };
 
