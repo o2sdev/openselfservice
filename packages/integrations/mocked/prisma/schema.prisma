@@ -1,5 +1,7 @@
 datasource db {
-    provider = "sqlite"
+    provider  = "sqlite"
+    url       = env("AUTH_DATABASE_URL")
+    directUrl = env("AUTH_DATABASE_URL")
 }
 
 generator client {

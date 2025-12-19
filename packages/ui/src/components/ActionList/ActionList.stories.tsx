@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/nextjs';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
 import { Button } from '@o2s/ui/elements/button';
 import { Link } from '@o2s/ui/elements/link';

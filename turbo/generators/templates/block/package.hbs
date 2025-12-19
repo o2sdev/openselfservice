@@ -15,6 +15,8 @@
     ],
     "scripts": {
         "build": "tsc --build tsconfig.json --preserveWatchOutput && tsc-alias",
+        "test": "vitest run",
+        "test:watch": "vitest",
         "lint": "tsc --noEmit && eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
@@ -32,6 +34,7 @@
         "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
+        "@o2s/vitest-config": "*",
         "concurrently": "^9.2.1",
         "eslint": "^9.39.1",
         "prettier": "^3.6.2",
