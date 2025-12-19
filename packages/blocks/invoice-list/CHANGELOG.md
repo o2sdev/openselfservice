@@ -1,5 +1,18 @@
 # @o2s/blocks.invoice-list
 
+## 1.3.1
+
+### Patch Changes
+
+- d197b89: fixed incorrect price rendering in `DataView` component
+- Updated dependencies [5947ca4]
+- Updated dependencies [e78c11a]
+- Updated dependencies [d197b89]
+- Updated dependencies [d197b89]
+  - @o2s/ui@1.8.0
+  - @o2s/configs.integrations@0.3.0
+  - @o2s/framework@1.15.0
+
 ## 1.3.0
 
 ### Minor Changes
