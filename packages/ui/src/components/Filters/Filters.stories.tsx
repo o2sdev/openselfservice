@@ -1,5 +1,5 @@
 import { Models } from '@o2s/framework/modules';
-import type { Meta, StoryObj } from '@storybook/nextjs';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { FormikValues } from 'formik';
 import React, { useState } from 'react';
 

@@ -2,7 +2,21 @@
 slug: leveraging-ai-to-speed-up-ui-documentation-in-storybook
 title: 'Leveraging AI to speed up UI documentation in Storybook'
 description: 'How we used AI to transform days of tedious component documentation into a comprehensive Storybook library in just hours'
-keywords: ['storybook', 'ai', 'documentation', 'component library', 'react', 'automation', 'developer productivity', 'nextjs', 'design system', 'ui', 'cursor', 'junie']
+keywords:
+    [
+        'storybook',
+        'ai',
+        'documentation',
+        'component library',
+        'react',
+        'automation',
+        'developer productivity',
+        'nextjs',
+        'design system',
+        'ui',
+        'cursor',
+        'junie',
+    ]
 date: 2025-10-15
 tags: [tech, ai]
 authors: [marcin.krasowski]
@@ -144,7 +158,7 @@ const config: StorybookConfig = {
 With the environment set up, we created our first story for the Button component:
 
 ```tsx
-import type { Meta, StoryObj } from '@storybook/nextjs';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
 import { Button } from './button';
 
@@ -409,6 +423,7 @@ As for Junie vs Cursor, we felt that **Cursor was overall better** for this task
 The stories themselves were pretty much a **similar quality in both cases**, however. Both tools needed further prompts to accommodate the outcome to our needs, but neither was particularly better nor worse at it. The human verification and fixing was, still very much required, of course, as it will be probably quite some time until the results are good enough that no supervision is a must.
 
 Looking back at the whole task, we would have done a few things a bit differently:
+
 - creating rules files (both for Cursor and for Junie) would probably be beneficial, as they might have encouraged the AI to stick to our requirements (e.g. to rely on args instead of creating multiple stories),
 - but probably even with explicit rules, we would try to process the components in smaller bulks, as the AI clearly struggles with large inputs; even though it would have required more involvement from our side, at the end the total dedicated time would probably be quite similar.
 

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/nextjs';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
 import { NotificationDetailsPure } from './NotificationDetails.client';
 
@@ -40,9 +40,10 @@ export const Default: Story = {
                 label: 'Ticket update',
             },
             status: {
-                value: 'UNVIEWED',
+                // TODO: set to VIEWED to avoid firing API call in tests
+                value: 'VIEWED',
                 title: 'Status',
-                label: 'Not viewed',
+                label: 'Viewed',
             },
             priority: {
                 value: 'HIGH',
