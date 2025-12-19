@@ -1,13 +1,12 @@
 import React from 'react';
 
+import { DataListColumnConfig } from '@o2s/ui/components/DataList';
 import { Price } from '@o2s/ui/components/Price';
 
 import { Badge } from '@o2s/ui/elements/badge';
 import { BadgeStatus } from '@o2s/ui/elements/badge-status';
 import { Button } from '@o2s/ui/elements/button';
 import { Link } from '@o2s/ui/elements/link';
-
-import { DataListColumnConfig } from '../components/DataList/DataList.types';
 
 /**
  * Default cell renderer based on column type
@@ -56,7 +55,7 @@ export function renderCell<T>(
 
         case 'price': {
             if (typeof value === 'object' && value !== null && 'value' in value) {
-                const priceValue = value.value as { value: number; currency?: string };
+                const priceValue = value as { value: number; currency?: string };
                 const currency = (
                     column.config?.currencyKey ? String(item[column.config.currencyKey]) : priceValue.currency || 'USD'
                 ) as 'USD' | 'EUR' | 'GBP' | 'PLN';

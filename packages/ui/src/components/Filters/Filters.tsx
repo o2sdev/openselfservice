@@ -16,20 +16,17 @@ import { useFiltersContext } from './FiltersContext';
 
 function separateLeadingItem<T>(items: Models.Filters.FilterItem<T>[]) {
     let leadingItem: Models.Filters.FilterItem<T> | undefined;
-    let viewModeToggle: Models.Filters.FilterViewModeToggle | undefined;
     const filteredItems: Models.Filters.FilterItem<T>[] = [];
 
     for (const item of items) {
-        if (item.__typename === 'FilterViewModeToggle') {
-            viewModeToggle = item;
-        } else if (item.isLeading === true && leadingItem === undefined) {
+        if ('isLeading' in item && item.isLeading === true && leadingItem === undefined) {
             leadingItem = item;
         } else {
             filteredItems.push(item);
         }
     }
 
-    return { leadingItem, viewModeToggle, filteredItems };
+    return { leadingItem, filteredItems };
 }
 
 export const Filters = <T, S extends FormikValues>({
@@ -37,6 +34,8 @@ export const Filters = <T, S extends FormikValues>({
     initialValues,
     onSubmit,
     onReset,
+    hasLeadingItem,
+    variant = 'drawer',
     labels,
 }: Readonly<FiltersProps<T, S>>) => {
     const [filtersOpen, setFiltersOpen] = useState(false);
@@ -48,7 +47,9 @@ export const Filters = <T, S extends FormikValues>({
 
     const { label, title, description, submit, reset, items, removeFilters } = filters;
 
-    const { leadingItem, viewModeToggle, filteredItems } = separateLeadingItem(items);
+    const { leadingItem, filteredItems } = hasLeadingItem
+        ? separateLeadingItem(items)
+        : { leadingItem: undefined, filteredItems: items };
 
     const handleReset = (e: React.MouseEvent) => {
         e.preventDefault();
@@ -56,6 +57,57 @@ export const Filters = <T, S extends FormikValues>({
         onReset();
     };
 
+    // Inline variant: render filters directly without drawer
+    if (variant === 'inline') {
+        return (
+            <div className="w-full">
+                <Formik<S>
+                    initialValues={initialValues}
+                    enableReinitialize={true}
+                    onSubmit={(values) => {
+                        countActiveFilters(values);
+                        onSubmit(values);
+                    }}
+                >
+                    {({ submitForm, setFieldValue }) => (
+                        <Form>
+                            <div className="flex flex-col gap-4">
+                                {/* Filters container - grid layout for desktop, full-width rows for mobile */}
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                                    {items.map((item) => (
+                                        <div key={String(item.id)} className="w-full">
+                                            <FilterItem
+                                                item={item}
+                                                setFieldValue={setFieldValue}
+                                                submitForm={submitForm}
+                                                labels={labels}
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+                                {/* Action buttons - right-aligned on desktop, stretched on mobile */}
+                                <div className="flex flex-col sm:flex-row gap-4 sm:justify-end">
+                                    <Button
+                                        type="button"
+                                        variant="secondary"
+                                        onClick={handleReset}
+                                        className="w-full sm:w-auto sm:max-w-[50%]"
+                                    >
+                                        {reset}
+                                    </Button>
+                                    <Button type="submit" className="w-full sm:w-auto sm:max-w-[50%]">
+                                        {submit}
+                                    </Button>
+                                </div>
+                            </div>
+                        </Form>
+                    )}
+                </Formik>
+            </div>
+        );
+    }
+
+    // Drawer variant: original implementation
     return (
         <div className={cn(leadingItem ? 'w-full' : 'w-full sm:w-auto')}>
             <Formik<S>
@@ -70,31 +122,20 @@ export const Filters = <T, S extends FormikValues>({
                 {({ submitForm, setFieldValue }) => (
                     <>
                         <div className="flex flex-col justify-between items-center w-full gap-6 md:flex-row">
-                            <div className="flex items-center gap-4 w-full md:w-auto">
-                                {leadingItem && (
-                                    <div className="overflow-hidden rounded-md">
-                                        <ScrollContainer className="scroll-container flex whitespace-nowrap items-center gap-4">
-                                            <FilterItem
-                                                key={String(leadingItem.id)}
-                                                item={leadingItem}
-                                                submitForm={submitForm}
-                                                setFieldValue={setFieldValue}
-                                                isLeading={true}
-                                                labels={labels}
-                                            />
-                                        </ScrollContainer>
-                                    </div>
-                                )}
-                                {viewModeToggle && (
-                                    <FilterItem
-                                        item={viewModeToggle}
-                                        submitForm={submitForm}
-                                        setFieldValue={setFieldValue}
-                                        labels={labels}
-                                    />
-                                )}
-                            </div>
-                            <div className="flex gap-4 flex-col-reverse w-full sm:flex-row md:w-auto">
+                            {leadingItem !== undefined && (
+                                <div className="w-full md:w-auto overflow-hidden rounded-md">
+                                    <ScrollContainer className="scroll-container flex whitespace-nowrap w-full items-center gap-4">
+                                        <FilterItem
+                                            item={leadingItem}
+                                            submitForm={submitForm}
+                                            setFieldValue={setFieldValue}
+                                            isLeading={true}
+                                            labels={labels}
+                                        />
+                                    </ScrollContainer>
+                                </div>
+                            )}
+                            <div className="flex gap-4 flex-col w-full sm:flex-row md:w-auto">
                                 {activeFilters > 0 && (
                                     <Button variant="outline" onClick={handleReset} className="gap-0">
                                         <X className="h-4 w-4 mr-2" />

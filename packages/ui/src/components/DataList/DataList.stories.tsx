@@ -1,4 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { Download, Trash2 } from 'lucide-react';
+import React, { useState } from 'react';
+
+import { Button } from '@o2s/ui/elements/button';
 
 import { DataList } from './DataList';
 import type { DataListColumnConfig } from './DataList.types';
@@ -208,5 +212,80 @@ export const WithCustomStyling: Story = {
             cellClassName: 'py-4',
         })) as DataListColumnConfig<Record<string, unknown>>[],
         className: 'border-2 border-gray-300',
+    },
+};
+
+export const WithRowSelection: Story = {
+    render: () => {
+        const Component = () => {
+            const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
+
+            return (
+                <div className="space-y-4">
+                    <div className="text-sm text-muted-foreground">
+                        {selectedRows.size} of {sampleTickets.length} row(s) selected.
+                    </div>
+                    <DataList
+                        data={sampleTickets as Record<string, unknown>[]}
+                        columns={ticketColumns as DataListColumnConfig<Record<string, unknown>>[]}
+                        enableRowSelection={true}
+                        selectedRows={selectedRows}
+                        onSelectionChange={setSelectedRows}
+                    />
+                </div>
+            );
+        };
+
+        return <Component />;
+    },
+};
+
+export const WithRowSelectionAndBulkActions: Story = {
+    render: () => {
+        const Component = () => {
+            const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
+
+            const selectedItems = sampleTickets.filter((ticket, index) => selectedRows.has(ticket.id || index));
+
+            const handleBulkDelete = () => {
+                console.log('Deleting tickets:', selectedItems);
+                setSelectedRows(new Set());
+            };
+
+            const handleBulkExport = () => {
+                console.log('Exporting tickets:', selectedItems);
+            };
+
+            return (
+                <div className="space-y-4">
+                    {selectedRows.size > 0 && (
+                        <div className="flex items-center justify-between gap-4 rounded-md border bg-muted/50 p-4">
+                            <span className="text-sm text-muted-foreground">
+                                {selectedRows.size} {selectedRows.size === 1 ? 'ticket' : 'tickets'} selected
+                            </span>
+                            <div className="flex items-center gap-2">
+                                <Button variant="outline" size="sm" onClick={handleBulkExport}>
+                                    <Download className="mr-2 h-4 w-4" />
+                                    Export
+                                </Button>
+                                <Button variant="destructive" size="sm" onClick={handleBulkDelete}>
+                                    <Trash2 className="mr-2 h-4 w-4" />
+                                    Delete
+                                </Button>
+                            </div>
+                        </div>
+                    )}
+                    <DataList
+                        data={sampleTickets as Record<string, unknown>[]}
+                        columns={ticketColumns as DataListColumnConfig<Record<string, unknown>>[]}
+                        enableRowSelection={true}
+                        selectedRows={selectedRows}
+                        onSelectionChange={setSelectedRows}
+                    />
+                </div>
+            );
+        };
+
+        return <Component />;
     },
 };

@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../elements/table';
+import { cn } from '@o2s/ui/lib/utils';
+
+import { Checkbox } from '@o2s/ui/elements/checkbox';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@o2s/ui/elements/table';
+
 import { renderCell } from '../../lib/renderCell';
-import { cn } from '../../lib/utils';
 
 import { DataListProps } from './DataList.types';
 
@@ -17,6 +20,9 @@ export function DataList<T extends Record<string, any>>({
     getRowKey,
     className,
     getRowClassName,
+    enableRowSelection = false,
+    selectedRows,
+    onSelectionChange,
 }: DataListProps<T>) {
     // Default row key extractor
     const defaultGetRowKey = (item: T, index: number) => {
@@ -28,10 +34,60 @@ export function DataList<T extends Record<string, any>>({
 
     const rowKeyExtractor = getRowKey || defaultGetRowKey;
 
+    // Row selection handlers
+    const handleSelectAll = (checked: boolean) => {
+        if (!onSelectionChange) return;
+
+        const allKeysOnCurrentPage = new Set(data.map((item, index) => rowKeyExtractor(item, index)));
+        const currentSelected = new Set(selectedRows || []);
+
+        if (checked) {
+            // Add all keys from current page to existing selection
+            allKeysOnCurrentPage.forEach((key) => currentSelected.add(key));
+        } else {
+            // Remove only keys from current page from selection
+            allKeysOnCurrentPage.forEach((key) => currentSelected.delete(key));
+        }
+
+        onSelectionChange(currentSelected);
+    };
+
+    const handleRowSelect = (rowKey: string | number, checked: boolean) => {
+        if (!onSelectionChange) return;
+
+        const newSelected = new Set(selectedRows || []);
+        if (checked) {
+            newSelected.add(rowKey);
+        } else {
+            newSelected.delete(rowKey);
+        }
+        onSelectionChange(newSelected);
+    };
+
+    // Calculate selection state
+    const allRowKeys = useMemo(() => data.map((item, index) => rowKeyExtractor(item, index)), [data, rowKeyExtractor]);
+    // Count only selected items on current page
+    const selectedOnCurrentPage = useMemo(
+        () => allRowKeys.filter((key) => selectedRows?.has(key)).length,
+        [allRowKeys, selectedRows],
+    );
+    const allSelected =
+        enableRowSelection && data.length > 0 && selectedOnCurrentPage === allRowKeys.length && allRowKeys.length > 0;
+    const someSelected = enableRowSelection && selectedOnCurrentPage > 0 && selectedOnCurrentPage < allRowKeys.length;
+
     return (
         <Table className={className}>
             <TableHeader>
                 <TableRow>
+                    {enableRowSelection && (
+                        <TableHead className="w-12 py-3 px-4">
+                            <Checkbox
+                                checked={allSelected ? true : someSelected ? 'indeterminate' : false}
+                                onCheckedChange={handleSelectAll}
+                                aria-label="Select all"
+                            />
+                        </TableHead>
+                    )}
                     {columns.map((column) => (
                         <TableHead
                             key={String(column.id)}
@@ -54,9 +110,19 @@ export function DataList<T extends Record<string, any>>({
                 {data.map((item, index) => {
                     const rowKey = rowKeyExtractor(item, index);
                     const rowClassName = getRowClassName ? getRowClassName(item) : undefined;
+                    const isRowSelected = enableRowSelection && selectedRows?.has(rowKey);
 
                     return (
                         <TableRow key={rowKey} className={rowClassName}>
+                            {enableRowSelection && (
+                                <TableCell className="w-12 py-3 px-4">
+                                    <Checkbox
+                                        checked={isRowSelected}
+                                        onCheckedChange={(checked) => handleRowSelect(rowKey, !!checked)}
+                                        aria-label="Select row"
+                                    />
+                                </TableCell>
+                            )}
                             {columns.map((column) => {
                                 const value = item[column.id];
                                 const cellContent = renderCell(value, item, column);

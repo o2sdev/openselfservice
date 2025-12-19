@@ -175,9 +175,11 @@ export const Default: Story = {
                     },
                     totalAmountDue: {
                         value: 1250.5,
+                        currency: 'EUR',
                     },
                     totalNetAmountDue: {
                         value: 1016.67,
+                        currency: 'EUR',
                     },
                     paymentDueDate: {
                         displayValue: '07/15/2024',
@@ -197,9 +199,11 @@ export const Default: Story = {
                     },
                     totalAmountDue: {
                         value: 3450.75,
+                        currency: 'EUR',
                     },
                     totalNetAmountDue: {
                         value: 2805.49,
+                        currency: 'EUR',
                     },
                     paymentDueDate: {
                         displayValue: '06/10/2024',
@@ -219,9 +223,11 @@ export const Default: Story = {
                     },
                     totalAmountDue: {
                         value: 780.25,
+                        currency: 'EUR',
                     },
                     totalNetAmountDue: {
                         value: 634.35,
+                        currency: 'EUR',
                     },
                     paymentDueDate: {
                         displayValue: '07/05/2024',
@@ -241,9 +247,11 @@ export const Default: Story = {
                     },
                     totalAmountDue: {
                         value: 0,
+                        currency: 'EUR',
                     },
                     totalNetAmountDue: {
                         value: 0,
+                        currency: 'EUR',
                     },
                     paymentDueDate: {
                         displayValue: '05/20/2024',
@@ -263,9 +271,11 @@ export const Default: Story = {
                     },
                     totalAmountDue: {
                         value: 5670.3,
+                        currency: 'EUR',
                     },
                     totalNetAmountDue: {
                         value: 4610,
+                        currency: 'EUR',
                     },
                     paymentDueDate: {
                         displayValue: '06/15/2024',
