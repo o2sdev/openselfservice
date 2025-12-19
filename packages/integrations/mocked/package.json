@@ -16,8 +16,8 @@
         ".env.local"
     ],
     "scripts": {
-        "prepare": "npx prisma generate && dotenv -e .env.local -- prisma migrate deploy && dotenv -e .env.local -- prisma db seed",
-        "postinstall": "npx prisma generate",
+        "prepare": "dotenv -e .env.local -- npx prisma generate && dotenv -e .env.local -- prisma migrate deploy && dotenv -e .env.local -- prisma db seed",
+        "postinstall": "dotenv -e .env.local -- npx prisma generate",
         "build": "dotenv -e .env.local -- prisma migrate deploy && tsc --preserveWatchOutput && tsc-alias",
         "postbuild": "shx cp -r src/modules/invoices/resources dist/modules/invoices/",
         "lint": "tsc --noEmit && eslint . --max-warnings=0",
@@ -30,7 +30,9 @@
     },
     "dependencies": {
         "@auth/prisma-adapter": "^2.11.1",
+        "@prisma/adapter-better-sqlite3": "^7.2.0",
         "@prisma/client": "^7.2.0",
+        "better-sqlite3": "^12.5.0",
         "bcryptjs": "^3.0.3",
         "dotenv-cli": "^11.0.0",
         "jsonwebtoken": "^9.0.3",
