@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import { Model } from '../api-harmonization/payments-summary.client';
 import { sdk } from '../sdk';
 
 import { PaymentsSummaryProps } from './PaymentsSummary.types';
@@ -16,7 +17,7 @@ export const PaymentsSummary: React.FC<PaymentsSummaryProps> = async ({
     routing,
     hasPriority,
 }) => {
-    let data;
+    let data: Model.PaymentsSummaryBlock;
     try {
         data = await sdk.blocks.getPaymentsSummary(
             {

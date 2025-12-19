@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import { Model } from '../api-harmonization/notification-summary.client';
 import { sdk } from '../sdk';
 
 import { NotificationSummaryProps } from './NotificationSummary.types';
@@ -10,7 +11,7 @@ export const NotificationSummaryDynamic = dynamic(() =>
 );
 
 export const NotificationSummary: React.FC<NotificationSummaryProps> = async ({ id, accessToken, locale, routing }) => {
-    let data;
+    let data: Model.NotificationSummaryBlock;
     try {
         data = await sdk.blocks.getNotificationSummary(
             {

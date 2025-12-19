@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import { Model } from '../api-harmonization/cta-section.client';
 import { sdk } from '../sdk';
 
 import { CtaSectionProps } from './CtaSection.types';
@@ -8,7 +9,7 @@ import { CtaSectionProps } from './CtaSection.types';
 export const CtaSectionDynamic = dynamic(() => import('./CtaSection.client').then((module) => module.CtaSectionPure));
 
 export const CtaSection: React.FC<CtaSectionProps> = async ({ id, accessToken, locale, routing }) => {
-    let data;
+    let data: Model.CtaSectionBlock;
     try {
         data = await sdk.blocks.getCtaSection(
             {

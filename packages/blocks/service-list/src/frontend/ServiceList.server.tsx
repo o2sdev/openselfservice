@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import { Model } from '../api-harmonization/service-list.client';
 import { sdk } from '../sdk';
 
 import { ServiceListProps } from './ServiceList.types';
@@ -10,7 +11,7 @@ export const ServiceListDynamic = dynamic(() =>
 );
 
 export const ServiceList: React.FC<ServiceListProps> = async ({ id, accessToken, locale, routing, hasPriority }) => {
-    let data;
+    let data: Model.ServiceListBlock;
     try {
         data = await sdk.blocks.getServiceList(
             {

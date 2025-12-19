@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import { Model } from '../api-harmonization/orders-summary.client';
 import { Request } from '../api-harmonization/orders-summary.client';
 import { sdk } from '../sdk';
 
@@ -18,7 +19,7 @@ export const OrdersSummary: React.FC<OrdersSummaryProps> = async ({
     routing,
     hasPriority,
 }) => {
-    let data;
+    let data: Model.OrdersSummaryBlock;
     try {
         data = await sdk.blocks.getOrdersSummary(
             {

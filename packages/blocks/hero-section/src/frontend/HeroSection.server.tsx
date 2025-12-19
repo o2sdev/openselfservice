@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import { Model } from '../api-harmonization/hero-section.client';
 import { sdk } from '../sdk';
 
 import { HeroSectionProps } from './HeroSection.types';
@@ -10,7 +11,7 @@ export const HeroSectionDynamic = dynamic(() =>
 );
 
 export const HeroSection: React.FC<HeroSectionProps> = async ({ id, accessToken, locale, routing, hasPriority }) => {
-    let data;
+    let data: Model.HeroSectionBlock;
     try {
         data = await sdk.blocks.getHeroSection(
             {

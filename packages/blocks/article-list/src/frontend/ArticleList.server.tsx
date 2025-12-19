@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import { Model } from '../api-harmonization/article-list.client';
 import { sdk } from '../sdk';
 
 import { ArticleListProps } from './ArticleList.types';
@@ -17,7 +18,7 @@ export const ArticleList: React.FC<ArticleListProps> = async ({
     hasPriority,
     isDraftModeEnabled,
 }) => {
-    let data;
+    let data: Model.ArticleListBlock;
     try {
         data = await sdk.blocks.getArticleList(
             {

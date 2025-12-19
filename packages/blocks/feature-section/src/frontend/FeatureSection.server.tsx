@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import { Model } from '../api-harmonization/feature-section.client';
 import { sdk } from '../sdk';
 
 import { FeatureSectionProps } from './FeatureSection.types';
@@ -10,7 +11,7 @@ export const FeatureSectionDynamic = dynamic(() =>
 );
 
 export const FeatureSection: React.FC<FeatureSectionProps> = async ({ id, accessToken, locale, routing }) => {
-    let data;
+    let data: Model.FeatureSectionBlock;
     try {
         data = await sdk.blocks.getFeatureSection(
             {

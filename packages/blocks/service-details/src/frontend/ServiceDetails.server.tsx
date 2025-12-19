@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import { Model } from '../api-harmonization/service-details.client';
 import { sdk } from '../sdk';
 
 import { ServiceDetailsProps } from './ServiceDetails.types';
@@ -17,7 +18,7 @@ export const ServiceDetails: React.FC<ServiceDetailsProps> = async ({
     routing,
     hasPriority,
 }) => {
-    let data;
+    let data: Model.ServiceDetailsBlock;
     try {
         data = await sdk.blocks.getServiceDetails(
             {

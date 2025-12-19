@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import { Model } from '../api-harmonization/article-search.client';
 import { sdk } from '../sdk';
 
 import { ArticleSearchProps } from './ArticleSearch.types';
@@ -16,7 +17,7 @@ export const ArticleSearch: React.FC<ArticleSearchProps> = async ({
     routing,
     hasPriority,
 }) => {
-    let data;
+    let data: Model.ArticleSearchBlock;
     try {
         data = await sdk.blocks.getArticleSearch(
             {

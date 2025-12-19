@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import { Model } from '../api-harmonization/ticket-details.client';
 import { sdk } from '../sdk';
 
 import { TicketDetailsProps } from './TicketDetails.types';
@@ -17,7 +18,7 @@ export const TicketDetails: React.FC<TicketDetailsProps> = async ({
     routing,
     hasPriority,
 }) => {
-    let data;
+    let data: Model.TicketDetailsBlock;
     try {
         data = await sdk.blocks.getTicketDetails(
             {

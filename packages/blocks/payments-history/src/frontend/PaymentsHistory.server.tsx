@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import { Model } from '../api-harmonization/payments-history.client';
 import { sdk } from '../sdk';
 
 import { PaymentsHistoryProps } from './PaymentsHistory.types';
@@ -10,7 +11,7 @@ export const PaymentsHistoryDynamic = dynamic(() =>
 );
 
 export const PaymentsHistory: React.FC<PaymentsHistoryProps> = async ({ id, accessToken, locale, hasPriority }) => {
-    let data;
+    let data: Model.PaymentsHistoryBlock;
     try {
         data = await sdk.blocks.getPaymentsHistory(
             {

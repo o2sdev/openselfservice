@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import { Model } from '../api-harmonization/feature-section-grid.client';
 import { sdk } from '../sdk';
 
 import { FeatureSectionGridProps } from './FeatureSectionGrid.types';
@@ -10,7 +11,7 @@ export const FeatureSectionGridDynamic = dynamic(() =>
 );
 
 export const FeatureSectionGrid: React.FC<FeatureSectionGridProps> = async ({ id, accessToken, locale, routing }) => {
-    let data;
+    let data: Model.FeatureSectionGridBlock;
     try {
         data = await sdk.blocks.getFeatureSectionGrid(
             {

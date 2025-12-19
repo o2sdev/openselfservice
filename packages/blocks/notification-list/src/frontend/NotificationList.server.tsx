@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import { Model } from '../api-harmonization/notification-list.client';
 import { sdk } from '../sdk';
 
 import { NotificationListProps } from './NotificationList.types';
@@ -16,7 +17,7 @@ export const NotificationListServer: React.FC<NotificationListProps> = async ({
     routing,
     hasPriority,
 }) => {
-    let data;
+    let data: Model.NotificationListBlock;
     try {
         data = await sdk.blocks.getNotificationList(
             {

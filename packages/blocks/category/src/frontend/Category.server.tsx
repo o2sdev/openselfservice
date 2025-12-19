@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import { Model } from '../api-harmonization/category.client';
 import { sdk } from '../sdk';
 
 import { CategoryProps } from './Category.types';
@@ -17,7 +18,7 @@ export const Category: React.FC<CategoryProps> = async ({
     renderBlocks,
     hasPriority,
 }) => {
-    let data;
+    let data: Model.CategoryBlock;
     try {
         data = await sdk.blocks.getCategory(
             {

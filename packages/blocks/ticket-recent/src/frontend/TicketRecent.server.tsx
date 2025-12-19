@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import { Model } from '../api-harmonization/ticket-recent.client';
 import { sdk } from '../sdk';
 
 import { TicketRecentProps } from './TicketRecent.types';
@@ -10,7 +11,7 @@ export const TicketRecentDynamic = dynamic(() =>
 );
 
 export const TicketRecent: React.FC<TicketRecentProps> = async ({ id, accessToken, locale, routing, hasPriority }) => {
-    let data;
+    let data: Model.TicketRecentBlock;
     try {
         data = await sdk.blocks.getTicketRecent(
             {

@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import { Model } from '../api-harmonization/media-section.client';
 import { sdk } from '../sdk';
 
 import { MediaSectionProps } from './MediaSection.types';
@@ -10,7 +11,7 @@ export const MediaSectionDynamic = dynamic(() =>
 );
 
 export const MediaSection: React.FC<MediaSectionProps> = async ({ id, accessToken, locale, routing }) => {
-    let data;
+    let data: Model.MediaSectionBlock;
     try {
         data = await sdk.blocks.getMediaSection(
             {

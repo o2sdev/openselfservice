@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import { Model } from '../api-harmonization/featured-service-list.client';
 import { sdk } from '../sdk';
 
 import { FeaturedServiceListProps } from './FeaturedServiceList.types';
@@ -16,7 +17,7 @@ export const FeaturedServiceList: React.FC<FeaturedServiceListProps> = async ({
     routing,
     hasPriority,
 }) => {
-    let data;
+    let data: Model.FeaturedServiceListBlock;
     try {
         data = await sdk.blocks.getFeaturedServiceList(
             {

@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import { Model } from '../api-harmonization/faq.client';
 import { sdk } from '../sdk';
 
 import { FaqProps } from './Faq.types';
@@ -15,7 +16,7 @@ export const Faq: React.FC<FaqProps> = async ({
     hasPriority,
     isDraftModeEnabled,
 }) => {
-    let data;
+    let data: Model.FaqBlock;
     try {
         data = await sdk.blocks.getFaq(
             {

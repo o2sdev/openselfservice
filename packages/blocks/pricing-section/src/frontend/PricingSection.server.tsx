@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import { Model } from '../api-harmonization/pricing-section.client';
 import { sdk } from '../sdk';
 
 import { PricingSectionProps } from './PricingSection.types';
@@ -16,7 +17,7 @@ export const PricingSection: React.FC<PricingSectionProps> = async ({
     routing,
     hasPriority,
 }) => {
-    let data;
+    let data: Model.PricingSectionBlock;
     try {
         data = await sdk.blocks.getPricingSection(
             {

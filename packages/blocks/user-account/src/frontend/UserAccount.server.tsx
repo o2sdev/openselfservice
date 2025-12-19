@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import { Model } from '../api-harmonization/user-account.client';
 import { sdk } from '../sdk';
 
 import { UserAccountProps } from './UserAccount.types';
@@ -22,7 +23,7 @@ export const UserAccount: React.FC<UserAccountProps> = async ({
         return null;
     }
 
-    let data;
+    let data: Model.UserAccountBlock;
     try {
         data = await sdk.blocks.getUserAccount(
             {
