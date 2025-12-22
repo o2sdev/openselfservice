@@ -35,7 +35,14 @@ Each theme is defined as a CSS class with the `theme-` prefix:
 
 ### Default Theme
 
-The default theme is defined in the `:root` selector:
+The default theme is defined in the `:root` selector.
+
+:::info Learn More
+O2S uses the shadcn/ui theming approach with CSS variables. For more information:
+
+- [shadcn/ui Theming Documentation](https://ui.shadcn.com/docs/theming) - explains the CSS variable approach and color system
+- [Tailwind CSS - Using CSS Variables](https://tailwindcss.com/docs/customizing-colors#using-css-variables) - how to integrate CSS variables with Tailwind
+  :::
 
 ```1:59:packages/ui/src/theme.css
 :root {
