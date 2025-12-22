@@ -24,7 +24,7 @@ items={[
 { title: 'Contentful CMS', description: 'CMS for multi-language content and marketing blocks.', href: '/docs/integrations/cms/contentful/overview' },
 { title: 'Redis Cache', description: 'High-performance caching with Redis to be used with our API Harmonization server.', href: '/docs/integrations/cache/redis' },
 { title: 'Medusa Commerce', description: 'Initial integration, currently provides basic product data.', href: '/docs/integrations/commerce/medusa-js' },
-{ title: 'Algolia Search', description: 'The AI search platform, used for knowledge base search.', href: '/docs/integrations/search/algolia' },
+{ title: 'Algolia Search', description: 'The AI search platform, used for knowledge base search.', href: '/docs/integrations/search/algolia/overview' },
 { title: 'SurveyJS Forms', description: 'Dynamic form creation and ticket submission. Used as a default engine for our ticket submission handling.', href: '/docs/integrations/forms/surveyjs' },
 { title: 'Zendesk', description: 'External ticketing and support knowledge base system.', href: '/docs/integrations/tickets/zendesk/overview' },
 { title: 'Auth.js', description: 'Authentication adapter supporting OAuth and custom providers.', href: '/docs/main-components/frontend-app/authentication' },
