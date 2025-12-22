@@ -29,17 +29,7 @@ services:
 
 ### Local installation
 
-**macOS:**
-
-```shell
-brew install redis && brew services start redis
-```
-
-**Linux:**
-
-```shell
-sudo apt-get install redis-server && sudo systemctl start redis-server
-```
+For local installation instructions, refer to the [official Redis installation guide](https://redis.io/docs/latest/operate/oss_and_stack/install/archive/install-redis/).
 
 ### Production
 
