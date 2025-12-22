@@ -76,12 +76,12 @@ The `AppConfig` in `apps/api-harmonization/src/app.config.ts` should already ref
 
 Configure the following environment variables in your API Harmonization server:
 
-| Name                         | Type   | Description                                                           | Required |
-|------------------------------|--------|-----------------------------------------------------------------------|----------|
-| MEDUSAJS_BASE_URL            | string | The base URL pointing to the domain hosting your Medusa instance      | yes      |
-| MEDUSAJS_PUBLISHABLE_API_KEY | string | The publishable API key for storefront operations                     | yes      |
-| MEDUSAJS_ADMIN_API_KEY       | string | The admin user's API key for administrative operations                | yes      |
-| DEFAULT_CURRENCY             | string | The default currency code (e.g., `EUR`, `USD`, `PLN`)                 | yes      |
+| Name                         | Type   | Description                                                      | Required |
+| ---------------------------- | ------ | ---------------------------------------------------------------- | -------- |
+| MEDUSAJS_BASE_URL            | string | The base URL pointing to the domain hosting your Medusa instance | yes      |
+| MEDUSAJS_PUBLISHABLE_API_KEY | string | The publishable API key for storefront operations                | yes      |
+| MEDUSAJS_ADMIN_API_KEY       | string | The admin user's API key for administrative operations           | yes      |
+| DEFAULT_CURRENCY             | string | The default currency code (e.g., `EUR`, `USD`, `PLN`)            | yes      |
 
 You can obtain these values from your Medusa Admin Panel:
 
@@ -95,11 +95,11 @@ For more details about authentication setup, see the official [Medusa.js SDK doc
 
 The integration implements three core modules from the O2S framework:
 
-| Module     | Description                                              | Plugin Required |
-|------------|----------------------------------------------------------|-----------------|
-| Orders     | Order management and history                             | No              |
-| Products   | Product catalog and variants                             | No              |
-| Resources  | Assets and service instances management                  | Yes             |
+| Module    | Description                             | Plugin Required |
+| --------- | --------------------------------------- | --------------- |
+| Orders    | Order management and history            | No              |
+| Products  | Product catalog and variants            | No              |
+| Resources | Assets and service instances management | Yes             |
 
 ## Dependencies
 
@@ -113,9 +113,6 @@ To use the **Resources** module (Assets & Services), you must install our custom
 
 See the plugin repository for installation instructions: [medusa-plugin-assets-services](https://github.com/o2sdev/medusa-plugin-assets-services)
 :::
-
-## Architecture
-
 The integration uses the official Medusa.js SDK for most operations, combined with direct HTTP calls for custom endpoints provided by the Assets & Services plugin. All API calls are authenticated using a combination of publishable API key and admin API key.
 
 ```text
@@ -131,4 +128,3 @@ The integration uses the official Medusa.js SDK for most operations, combined wi
                       │    (native)      │     │   (plugin)      │
                       └──────────────────┘     └─────────────────┘
 ```
-
