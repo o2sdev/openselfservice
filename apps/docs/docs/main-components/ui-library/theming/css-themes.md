@@ -10,7 +10,7 @@ Themes are defined in the `packages/ui/src/theme.css` file using CSS variables i
 
 The main file with theme definitions is located at:
 
-```
+```text
 packages/ui/src/theme.css
 ```
 
