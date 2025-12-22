@@ -87,8 +87,15 @@ Each question type has custom React components for consistent UI styling.
 
 Flexible submission handling:
 
-- **Multiple destinations**: Configure where submissions are sent (currently supports SurveyJS backend)
-- **Extensible architecture**: Easy to add new submission destinations (email, database, third-party services)
+- **Current target**: Currently, the only submission target is the SurveyJS backend service
+- **Extensible architecture**: The submission system can be extended to support multiple destinations:
+    - Backend APIs (REST, GraphQL)
+    - Message brokers (e.g., RabbitMQ)
+    - Workflow tools (e.g., N8n)
+    - Email services
+    - Database storage
+    - Third-party services
+- **CMS configuration**: The submission target can be configured via CMS, allowing different forms to submit to different destinations
 - **Submission validation**: Server-side validation before submission
 - **Error handling**: Comprehensive error handling with detailed error messages
 - **Partial submissions**: Support for saving partial form data (if configured)
