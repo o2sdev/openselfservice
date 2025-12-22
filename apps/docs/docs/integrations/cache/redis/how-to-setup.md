@@ -12,33 +12,31 @@ npm install @o2s/integrations.redis --workspace=@o2s/api
 
 ## Set up Redis instance
 
-### Docker (recommended)
+You need to set up your own Redis instance. For detailed installation and setup instructions, refer to the [official Redis documentation](https://redis.io/docs/).
 
-Using the project's `docker-compose.yml`:
+### Docker
 
-```shell
-docker-compose up -d redis
-```
-
-Or create a new container:
+You can run Redis using Docker by creating a `docker-compose.yml` file:
 
 ```yaml
 services:
-  redis:
-    image: redis:latest
-    ports:
-      - "6379:6379"
-    command: redis-server --requirepass REDIS_PASS
+    redis:
+        image: redis:latest
+        ports:
+            - '6379:6379'
+        command: redis-server --requirepass REDIS_PASS
 ```
 
 ### Local installation
 
 **macOS:**
+
 ```shell
 brew install redis && brew services start redis
 ```
 
 **Linux:**
+
 ```shell
 sudo apt-get install redis-server && sudo systemctl start redis-server
 ```
@@ -116,8 +114,8 @@ redis-cli -h localhost -p 6379 -a REDIS_PASS ping
 
 ## Troubleshooting
 
-| Problem | Solution |
-|---------|----------|
-| Cannot connect | Verify Redis is running: `redis-cli ping` |
-| Authentication failed | Check `CACHE_REDIS_PASS` matches Redis password |
-| Cache returns undefined | Verify `CACHE_ENABLED=true` |
+| Problem                 | Solution                                        |
+| ----------------------- | ----------------------------------------------- |
+| Cannot connect          | Verify Redis is running: `redis-cli ping`       |
+| Authentication failed   | Check `CACHE_REDIS_PASS` matches Redis password |
+| Cache returns undefined | Verify `CACHE_ENABLED=true`                     |
