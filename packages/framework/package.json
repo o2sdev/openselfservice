@@ -3,9 +3,16 @@
     "version": "1.14.0",
     "private": false,
     "license": "MIT",
+    "type": "commonjs",
     "exports": {
-        "./modules": "./dist/src/index.js",
-        "./sdk": "./dist/src/sdk.js"
+        "./modules": {
+            "import": "./dist/src/index.js",
+            "require": "./dist/src/index.js"
+        },
+        "./sdk": {
+            "import": "./dist/src/sdk.js",
+            "require": "./dist/src/sdk.js"
+        }
     },
     "files": [
         "dist"

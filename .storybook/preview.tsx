@@ -1,8 +1,8 @@
 import React from 'react';
 import { NextIntlClientProvider } from 'next-intl';
-import type { Preview } from '@storybook/nextjs';
-import { createRouter } from '@storybook/nextjs/router.mock';
-import { createNavigation } from '@storybook/nextjs/navigation.mock';
+import type { Preview } from '@storybook/nextjs-vite';
+import { createRouter } from '@storybook/nextjs-vite/router.mock';
+import { createNavigation } from '@storybook/nextjs-vite/navigation.mock';
 import { withThemeByClassName } from '@storybook/addon-themes';
 
 import { GlobalProvider } from '@o2s/ui/providers/GlobalProvider';
@@ -20,12 +20,22 @@ createNavigation({});
 
 const preview: Preview = {
   parameters: {
-    controls: {
-      matchers: {
-       color: /(background|color)$/i,
-       date: /Date$/i,
+      nextjs: {
+          appDirectory: true,
       },
-    },
+      controls: {
+        matchers: {
+         color: /(background|color)$/i,
+         date: /Date$/i,
+        },
+      },
+
+      a11y: {
+          // 'todo' - show a11y violations in the test UI only
+          // 'error' - fail CI on a11y violations
+          // 'off' - skip a11y checks entirely
+          test: 'todo'
+      }
   },
     decorators: [
         withThemeByClassName({
