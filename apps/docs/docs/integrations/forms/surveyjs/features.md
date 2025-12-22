@@ -8,26 +8,27 @@ This document provides an overview of features supported by the SurveyJS integra
 
 ## Overview
 
-| Feature                                    | Status | Notes                                                                      |
-|--------------------------------------------|--------|----------------------------------------------------------------------------|
-| [Dynamic Form Creation](#dynamic-form-creation) | ✅     | Forms created from JSON schemas stored in SurveyJS service                |
-| [Form Validation](#form-validation)       | ✅     | Client-side and server-side validation                                    |
-| [Conditional Logic](#conditional-logic)    | ✅     | Questions can be shown/hidden based on conditions                          |
-| [Multi-page Surveys](#multi-page-surveys)  | ✅     | Support for surveys with multiple pages                                   |
-| [Question Types](#question-types)          | ✅     | Multiple question types supported                                         |
-| [Form Submission](#form-submission)        | ✅     | Flexible submission handling with multiple destinations                   |
-| [Role-based Authorization](#role-based-authorization) | ✅     | Access control based on user roles                                        |
-| [CMS Integration](#cms-integration)        | ✅     | Integration with CMS (Strapi) for survey metadata                        |
-| [Localization](#localization)              | ✅     | Multi-language support via locale prop                                    |
-| [Custom UI Components](#custom-ui-components) | ✅     | Custom React components for question types                               |
-| [Block Integration](#block-integration)    | ✅     | Integration with `@o2s/blocks.surveyjs-form` block                      |
-| [Ticket System Integration](#ticket-system-integration) | ✅     | Can be used for ticket submission forms                                   |
+| Feature                                                 | Status | Notes                                                      |
+| ------------------------------------------------------- | ------ | ---------------------------------------------------------- |
+| [Dynamic Form Creation](#dynamic-form-creation)         | ✅     | Forms created from JSON schemas stored in SurveyJS service |
+| [Form Validation](#form-validation)                     | ✅     | Client-side and server-side validation                     |
+| [Conditional Logic](#conditional-logic)                 | ✅     | Questions can be shown/hidden based on conditions          |
+| [Multi-page Surveys](#multi-page-surveys)               | ✅     | Support for surveys with multiple pages                    |
+| [Question Types](#question-types)                       | ✅     | Multiple question types supported                          |
+| [Form Submission](#form-submission)                     | ✅     | Flexible submission handling with multiple destinations    |
+| [Role-based Authorization](#role-based-authorization)   | ✅     | Access control based on user roles                         |
+| [CMS Integration](#cms-integration)                     | ✅     | Integration with CMS (Strapi) for survey metadata          |
+| [Localization](#localization)                           | ✅     | Multi-language support via locale prop                     |
+| [Custom UI Components](#custom-ui-components)           | ✅     | Custom React components for question types                 |
+| [Block Integration](#block-integration)                 | ✅     | Integration with `@o2s/blocks.surveyjs-form` block         |
+| [Ticket System Integration](#ticket-system-integration) | 📋     | Planned feature for ticket submission forms                |
 
 ## Feature details
 
 ### Dynamic Form Creation {#dynamic-form-creation}
 
 Forms are created dynamically based on JSON schemas retrieved from the SurveyJS service. The schema defines:
+
 - Survey structure (pages, questions, panels)
 - Question types and configurations
 - Validation rules
@@ -49,6 +50,7 @@ The integration provides comprehensive validation:
 ### Conditional Logic {#conditional-logic}
 
 Questions and pages can be conditionally shown or hidden based on:
+
 - Answers to previous questions
 - Expression-based conditions
 - Visibility rules (`visibleIf`, `enableIf`)
@@ -57,6 +59,7 @@ Questions and pages can be conditionally shown or hidden based on:
 ### Multi-page Surveys {#multi-page-surveys}
 
 Support for surveys with multiple pages:
+
 - Page navigation controls
 - Progress indicators
 - Page-specific validation
@@ -145,10 +148,13 @@ Integration with the `@o2s/blocks.surveyjs-form` block:
 
 ### Ticket System Integration {#ticket-system-integration}
 
-The SurveyJS module can be used for ticket submission:
+:::info Planned
+This is a planned feature and is not yet implemented.
+:::
+
+The SurveyJS module is planned to support ticket submission:
 
 - **Ticket forms**: Create dynamic ticket submission forms
 - **Form validation**: Validate ticket data before submission
 - **Integration**: Can be integrated with ticket systems (e.g., Zendesk)
 - **Custom workflows**: Configure custom submission workflows
-
