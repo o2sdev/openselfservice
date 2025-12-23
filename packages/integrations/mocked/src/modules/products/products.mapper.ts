@@ -319,6 +319,91 @@ const MOCK_PRODUCT_11: Products.Model.Product = {
     ],
 };
 
+const MOCK_PRODUCT_12: Products.Model.Product = {
+    id: 'PRD-015',
+    sku: 'PREMIUM-XL-2000',
+    name: 'Premium Industrial Machine XL-2000',
+    description:
+        '<p>The <strong>XL-2000</strong> is a state-of-the-art industrial machine designed for maximum efficiency and durability. With advanced automation features and energy-saving technology, this machine is perfect for modern manufacturing facilities.</p><p>Key highlights include precision engineering, easy maintenance access, and compliance with international safety standards.</p>',
+    shortDescription: 'State-of-the-art industrial machine with advanced automation and energy-saving technology',
+    subtitle: 'Industrial Equipment • Manufacturing Solutions',
+    image: {
+        url: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1200',
+        width: 1200,
+        height: 800,
+        alt: 'Premium Industrial Machine XL-2000',
+    },
+    images: [
+        {
+            url: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1200',
+            alt: 'Industrial Machine Front View',
+            width: 1200,
+            height: 800,
+        },
+        {
+            url: 'https://images.unsplash.com/photo-1565043666747-69f6646db940?w=1200',
+            alt: 'Industrial Machine Side View',
+            width: 1200,
+            height: 800,
+        },
+        {
+            url: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=1200',
+            alt: 'Industrial Machine Control Panel',
+            width: 1200,
+            height: 800,
+        },
+    ],
+    price: {
+        value: 125000,
+        currency: 'USD',
+    },
+    link: 'https://example.com/products/xl-2000',
+    type: 'PHYSICAL',
+    category: 'TOOLS',
+    tags: [
+        {
+            label: 'New',
+            variant: 'secondary',
+        },
+        {
+            label: 'Bestseller',
+            variant: 'default',
+        },
+    ],
+    keySpecs: [
+        { value: '2024', icon: 'Calendar' },
+        { value: 'New', icon: 'CheckCircle' },
+        { value: 'Electric', icon: 'Fuel' },
+        { value: 'Automatic', icon: 'Settings' },
+    ],
+    detailedSpecs: [
+        { label: 'Engine Power', value: '150 kW' },
+        { label: 'Max Speed', value: '2800 RPM' },
+        { label: 'Operating Voltage', value: '380-480V' },
+        { label: 'Dimensions', value: '2500 x 1800 x 2200 mm' },
+        { label: 'Weight', value: '3500 kg' },
+        { label: 'Energy Efficiency', value: 'Class A++' },
+        { label: 'Noise Level', value: '65 dB' },
+        { label: 'Operating Temperature', value: '-10°C to +40°C' },
+        { label: 'Protection Rating', value: 'IP54' },
+        { label: 'Certification', value: 'CE, ISO 9001' },
+    ],
+    equipment: [
+        'Advanced touch-screen control panel',
+        'Automated safety shutdown system',
+        'Emergency stop button',
+        'LED task lighting',
+        'Vibration dampening system',
+        'Remote monitoring capability',
+        'Preventive maintenance alerts',
+        'Tool storage compartment',
+        'Adjustable work height',
+        'Energy consumption meter',
+    ],
+    location: 'Chicago, IL',
+    offerNumber: 'OF-2024-XL2000-001',
+};
+
 const MOCK_PRODUCTS = [
     MOCK_PRODUCT_1,
     MOCK_PRODUCT_2,
@@ -331,6 +416,7 @@ const MOCK_PRODUCTS = [
     MOCK_PRODUCT_9,
     MOCK_PRODUCT_10,
     MOCK_PRODUCT_11,
+    MOCK_PRODUCT_12,
 ];
 
 export const mapProduct = (id: string): Products.Model.Product => {
