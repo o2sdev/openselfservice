@@ -17,6 +17,7 @@ import * as OrderList from '@o2s/blocks.order-list/frontend';
 import * as OrdersSummary from '@o2s/blocks.orders-summary/frontend';
 import * as PaymentsHistory from '@o2s/blocks.payments-history/frontend';
 import * as PaymentsSummary from '@o2s/blocks.payments-summary/frontend';
+import * as ProductDetails from '@o2s/blocks.product-details/frontend';
 import * as ProductList from '@o2s/blocks.product-list/frontend';
 import * as QuickLinks from '@o2s/blocks.quick-links/frontend';
 import * as ServiceDetails from '@o2s/blocks.service-details/frontend';
@@ -142,6 +143,8 @@ const renderBlock = (typename: string, blockProps: BlockProps) => {
             return <NotificationSummary.Renderer {...blockProps} />;
         case 'TicketSummaryBlock':
             return <TicketSummary.Renderer {...blockProps} />;
+        case 'ProductDetailsBlock':
+            return <ProductDetails.Renderer {...blockProps} />;
         // BLOCK REGISTER
         default:
             return null;
