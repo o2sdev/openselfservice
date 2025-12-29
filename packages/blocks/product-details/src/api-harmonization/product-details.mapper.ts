@@ -20,7 +20,6 @@ export const mapProductDetails = (
             })) || [],
         keySpecs: product.keySpecs || [],
         detailedSpecs: product.detailedSpecs || [],
-        equipment: product.equipment || [],
     };
 
     return {
@@ -42,22 +41,24 @@ export const mapProductDetails = (
 const getLabels = (locale: string): Model.Labels => {
     const defaultLabels: Model.Labels = {
         actionButtonLabel: 'Request Quote',
-        equipmentTitle: 'Equipment',
         specificationsTitle: 'Specifications',
         descriptionTitle: 'Description',
         recommendedOffersTitle: 'You Might Also Like',
         downloadLabel: 'Download Brochure',
+        priceLabel: 'Price',
+        offerLabel: 'Offer',
     };
 
     const labelsMap: Record<string, Model.Labels> = {
         en: defaultLabels,
         pl: {
             actionButtonLabel: 'Zapytaj o ofertę',
-            equipmentTitle: 'Wyposażenie',
             specificationsTitle: 'Specyfikacja',
             descriptionTitle: 'Opis',
             recommendedOffersTitle: 'Popularne oferty',
             downloadLabel: 'Pobierz broszurę',
+            priceLabel: 'Cena',
+            offerLabel: 'Oferta',
         },
     };
 

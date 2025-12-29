@@ -388,18 +388,6 @@ const MOCK_PRODUCT_12: Products.Model.Product = {
         { label: 'Protection Rating', value: 'IP54' },
         { label: 'Certification', value: 'CE, ISO 9001' },
     ],
-    equipment: [
-        'Advanced touch-screen control panel',
-        'Automated safety shutdown system',
-        'Emergency stop button',
-        'LED task lighting',
-        'Vibration dampening system',
-        'Remote monitoring capability',
-        'Preventive maintenance alerts',
-        'Tool storage compartment',
-        'Adjustable work height',
-        'Energy consumption meter',
-    ],
     location: 'Chicago, IL',
     offerNumber: 'OF-2024-XL2000-001',
 };

@@ -114,38 +114,6 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                         </div>
                     )}
 
-                    {/* Equipment List */}
-                    {((product.equipment && product.equipment.length > 0) || product.equipmentHtml) && (
-                        <div className="flex flex-col gap-4">
-                            <Typography variant="h2" asChild>
-                                <h2>{labels.equipmentTitle}</h2>
-                            </Typography>
-
-                            {/* Option 1: Array of strings */}
-                            {product.equipment && product.equipment.length > 0 && !product.equipmentHtml && (
-                                <ul className="columns-1 md:columns-2 gap-x-6 space-y-2">
-                                    {product.equipment.map((item, index) => (
-                                        <li key={index} className="flex items-start gap-2 break-inside-avoid">
-                                            <DynamicIcon
-                                                name="Check"
-                                                size={20}
-                                                className="text-primary shrink-0 mt-0.5"
-                                            />
-                                            <Typography>{item}</Typography>
-                                        </li>
-                                    ))}
-                                </ul>
-                            )}
-
-                            {/* Option 2: HTML from CMS */}
-                            {product.equipmentHtml && (
-                                <div className="columns-1 md:columns-2 gap-x-6">
-                                    <RichText content={product.equipmentHtml} />
-                                </div>
-                            )}
-                        </div>
-                    )}
-
                     <Separator />
 
                     {/* Detailed Specifications Grid */}
@@ -176,7 +144,9 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                                 {product.offerNumber && (
                                     <div className="flex items-center gap-2">
                                         <DynamicIcon name="FileText" size={20} className="text-muted-foreground" />
-                                        <Typography>Offer: {product.offerNumber}</Typography>
+                                        <Typography>
+                                            {labels.offerLabel}: {product.offerNumber}
+                                        </Typography>
                                     </div>
                                 )}
                                 {product.location && (
@@ -218,7 +188,7 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
 
                         {/* Price */}
                         <div className="flex flex-col gap-1 items-end">
-                            <Typography className="text-muted-foreground">Price</Typography>
+                            <Typography className="text-muted-foreground">{labels.priceLabel}</Typography>
                             <Typography variant="h2" className="text-primary whitespace-nowrap">
                                 <Price price={product.price} />
                             </Typography>
@@ -283,7 +253,7 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                     <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-background border-t border-border p-4 shadow-lg z-50">
                         <div className="flex flex-col gap-2 max-w-7xl ml-auto mr-4">
                             <div className="flex items-center justify-end gap-2 mb-2">
-                                <Typography className="text-muted-foreground">Price</Typography>
+                                <Typography className="text-muted-foreground">{labels.priceLabel}</Typography>
                                 <Typography variant="large" className="font-bold text-primary">
                                     <Price price={product.price} />
                                 </Typography>

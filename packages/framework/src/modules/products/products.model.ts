@@ -36,8 +36,6 @@ export class Product {
     }[];
     keySpecs?: KeySpecItem[];
     detailedSpecs?: DetailedSpec[];
-    equipment?: string[];
-    equipmentHtml?: string;
     location?: string;
     offerNumber?: string;
 }

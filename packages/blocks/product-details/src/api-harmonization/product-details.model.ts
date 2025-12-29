@@ -37,9 +37,10 @@ export namespace Model {
         actionButtonLabel?: string;
         downloadLabel?: string;
         recommendedOffersTitle?: string;
-        equipmentTitle: string;
         specificationsTitle: string;
         descriptionTitle: string;
+        priceLabel: string;
+        offerLabel: string;
     };
 
     export type ProductDetailsBlock = ApiModels.Block.Block & {
