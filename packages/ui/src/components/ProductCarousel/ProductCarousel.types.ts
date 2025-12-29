@@ -1,4 +1,5 @@
 import { Models } from '@o2s/framework/modules';
+import React from 'react';
 
 import { Models as FrontendModels } from '@o2s/utils.frontend';
 
@@ -7,10 +8,12 @@ import { CarouselProps } from '@o2s/ui/components/Carousel';
 export interface ProductCarouselProps {
     products: ProductSummaryItem[];
     title?: string;
-    variant?: 'personalized' | 'category-based';
+    description?: Models.RichText.RichText;
+    action?: React.ReactNode;
     LinkComponent: FrontendModels.Link.LinkComponent;
     carouselConfig?: Partial<CarouselProps>;
     detailsLabel: string;
+    carouselClassName?: string;
 }
 
 export interface ProductSummaryItem {

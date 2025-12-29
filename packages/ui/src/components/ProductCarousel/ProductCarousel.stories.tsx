@@ -3,6 +3,8 @@ import React from 'react';
 
 import { Models as FrontendModels } from '@o2s/utils.frontend';
 
+import { Button } from '@o2s/ui/elements/button';
+
 import { ProductCarousel } from './ProductCarousel';
 import { ProductSummaryItem } from './ProductCarousel.types';
 
@@ -147,20 +149,27 @@ export const Default: Story = {
     },
 };
 
-export const WithoutTitle: Story = {
+export const WithDescription: Story = {
     args: {
         products: sampleProducts,
+        title: 'You Might Also Like',
+        description: '<p>Check out these carefully selected products that complement your choice.</p>',
         LinkComponent: MockLinkComponent,
         detailsLabel: 'View Details',
     },
 };
 
-export const PersonalizedVariant: Story = {
+export const WithAction: Story = {
     args: {
         products: sampleProducts,
-        title: 'Rekomendowane oferty',
-        variant: 'personalized',
+        title: 'Popular Products',
+        description: '<p>Discover our most popular items chosen by customers like you.</p>',
+        action: (
+            <Button variant="secondary" onClick={() => console.log('View all clicked')}>
+                View All Products
+            </Button>
+        ),
         LinkComponent: MockLinkComponent,
-        detailsLabel: 'Zobacz szczegóły',
+        detailsLabel: 'View Details',
     },
 };
