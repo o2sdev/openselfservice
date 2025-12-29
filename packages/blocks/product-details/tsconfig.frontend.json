@@ -17,6 +17,7 @@
         "src/api-harmonization/product-details.client.ts",
         "src/api-harmonization/product-details.model.ts",
         "src/api-harmonization/product-details.request.ts",
+        "src/api-harmonization/product-details.url.ts",
         "src/sdk"
     ]
 }

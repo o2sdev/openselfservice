@@ -1,16 +1,19 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Products } from '@o2s/configs.integrations';
+import { CMS, Products } from '@o2s/configs.integrations';
 import { Observable, forkJoin, map } from 'rxjs';
 
 import { Models } from '@o2s/utils.api-harmonization';
 
-import { Request } from './product-details.client';
 import { mapProductDetails } from './product-details.mapper';
-import { Model } from './product-details.model';
+import * as Model from './product-details.model';
+import * as Request from './product-details.request';
 
 @Injectable()
 export class ProductDetailsService {
-    constructor(private readonly productsService: Products.Service) {}
+    constructor(
+        private readonly cmsService: CMS.Service,
+        private readonly productsService: Products.Service,
+    ) {}
 
     getProductDetails(
         id: string,
@@ -19,6 +22,10 @@ export class ProductDetailsService {
     ): Observable<Model.ProductDetailsBlock> {
         const locale = query.locale || headers['x-locale'] || 'en';
 
+        const cms = this.cmsService.getProductDetailsBlock({
+            id: query.id,
+            locale,
+        });
         const product = this.productsService.getProduct({
             id,
             locale,
@@ -31,8 +38,8 @@ export class ProductDetailsService {
                 locale,
             });
 
-            return forkJoin([product, popularOffers]).pipe(
-                map(([product, popularOffers]) => {
+            return forkJoin([cms, product, popularOffers]).pipe(
+                map(([cms, product, popularOffers]) => {
                     if (!product) {
                         throw new NotFoundException();
                     }
@@ -54,18 +61,18 @@ export class ProductDetailsService {
                             })),
                         }));
 
-                    return mapProductDetails(product, filteredOffers, locale);
+                    return mapProductDetails(product, filteredOffers, cms);
                 }),
             );
         }
 
-        return product.pipe(
-            map((product) => {
+        return forkJoin([cms, product]).pipe(
+            map(([cms, product]) => {
                 if (!product) {
                     throw new NotFoundException();
                 }
 
-                return mapProductDetails(product, undefined, locale);
+                return mapProductDetails(product, undefined, cms);
             }),
         );
     }

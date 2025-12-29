@@ -1,21 +1,26 @@
-import { Controller, Get, Headers, Param, Query, Req } from '@nestjs/common';
-import { Observable } from 'rxjs';
+import { Controller, Get, Headers, Param, Query, UseInterceptors } from '@nestjs/common';
 
 import { Models } from '@o2s/utils.api-harmonization';
+import { LoggerService } from '@o2s/utils.logger';
 
-import type { Request, Response } from './product-details.client';
+import { Auth } from '@o2s/framework/modules';
+
+import { URL } from './';
+import type { GetProductDetailsBlockQuery } from './product-details.request';
 import { ProductDetailsService } from './product-details.service';
 
-@Controller('blocks/product-details')
+@Controller(URL)
+@UseInterceptors(LoggerService)
 export class ProductDetailsController {
-    constructor(private readonly productDetailsService: ProductDetailsService) {}
+    constructor(protected readonly service: ProductDetailsService) {}
 
     @Get(':id')
+    @Auth.Decorators.Roles({ roles: [] })
     getProductDetails(
         @Param('id') id: string,
-        @Query() query: Request.GetProductDetailsBlockQuery,
+        @Query() query: GetProductDetailsBlockQuery,
         @Headers() headers: Models.Headers.AppHeaders,
-    ): Observable<Response.GetProductDetailsBlockResponse> {
-        return this.productDetailsService.getProductDetails(id, query, headers);
+    ) {
+        return this.service.getProductDetails(id, query, headers);
     }
 }

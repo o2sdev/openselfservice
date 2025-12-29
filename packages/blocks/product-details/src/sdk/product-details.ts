@@ -3,9 +3,7 @@ import { Utils } from '@o2s/utils.frontend';
 
 import { Sdk } from '@o2s/framework/sdk';
 
-import { Model, Request } from '../api-harmonization/product-details.client';
-
-const API_URL = '/blocks/product-details';
+import { Model, Request, URL } from '../api-harmonization/product-details.client';
 
 export const productDetails = (sdk: Sdk) => ({
     blocks: {
@@ -17,7 +15,7 @@ export const productDetails = (sdk: Sdk) => ({
         ): Promise<Model.ProductDetailsBlock> =>
             sdk.makeRequest({
                 method: 'get',
-                url: `${API_URL}/${params.id}`,
+                url: `${URL}/${params.id}`,
                 headers: {
                     ...Utils.Headers.getApiHeaders(),
                     ...headers,

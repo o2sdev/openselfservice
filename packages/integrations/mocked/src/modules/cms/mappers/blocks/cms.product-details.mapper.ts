@@ -1,0 +1,53 @@
+import { CMS } from '@o2s/framework/modules';
+
+const MOCK_PRODUCT_DETAILS_BLOCK_EN: CMS.Model.ProductDetailsBlock.ProductDetailsBlock = {
+    id: 'product-details-1',
+    labels: {
+        actionButtonLabel: 'Request Quote',
+        specificationsTitle: 'Specifications',
+        descriptionTitle: 'Description',
+        recommendedOffersTitle: 'You Might Also Like',
+        downloadLabel: 'Download Brochure',
+        priceLabel: 'Price',
+        offerLabel: 'Offer',
+    },
+};
+
+const MOCK_PRODUCT_DETAILS_BLOCK_DE: CMS.Model.ProductDetailsBlock.ProductDetailsBlock = {
+    id: 'product-details-1',
+    labels: {
+        actionButtonLabel: 'Angebot anfordern',
+        specificationsTitle: 'Spezifikationen',
+        descriptionTitle: 'Beschreibung',
+        recommendedOffersTitle: 'Das könnte Ihnen auch gefallen',
+        downloadLabel: 'Broschüre herunterladen',
+        priceLabel: 'Preis',
+        offerLabel: 'Angebot',
+    },
+};
+
+const MOCK_PRODUCT_DETAILS_BLOCK_PL: CMS.Model.ProductDetailsBlock.ProductDetailsBlock = {
+    id: 'product-details-1',
+    labels: {
+        actionButtonLabel: 'Zapytaj o ofertę',
+        specificationsTitle: 'Specyfikacja',
+        descriptionTitle: 'Opis',
+        recommendedOffersTitle: 'Popularne oferty',
+        downloadLabel: 'Pobierz broszurę',
+        priceLabel: 'Cena',
+        offerLabel: 'Oferta',
+    },
+};
+
+export const mapProductDetailsBlock = (locale: string): CMS.Model.ProductDetailsBlock.ProductDetailsBlock => {
+    switch (locale) {
+        case 'en':
+            return MOCK_PRODUCT_DETAILS_BLOCK_EN;
+        case 'de':
+            return MOCK_PRODUCT_DETAILS_BLOCK_DE;
+        case 'pl':
+            return MOCK_PRODUCT_DETAILS_BLOCK_PL;
+        default:
+            return MOCK_PRODUCT_DETAILS_BLOCK_EN;
+    }
+};

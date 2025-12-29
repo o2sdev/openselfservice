@@ -1,18 +1,4 @@
-import type { Model } from './product-details.model';
+export { URL } from './product-details.url';
 
-export namespace Request {
-    export type GetProductDetailsBlockParams = {
-        id: string;
-    };
-
-    export type GetProductDetailsBlockQuery = {
-        locale?: string;
-        includePopularOffers?: boolean;
-    };
-}
-
-export namespace Response {
-    export type GetProductDetailsBlockResponse = Model.ProductDetailsBlock;
-}
-
-export type { Model };
+export * as Model from './product-details.model';
+export * as Request from './product-details.request';

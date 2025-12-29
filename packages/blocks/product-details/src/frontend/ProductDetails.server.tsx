@@ -11,6 +11,7 @@ export const ProductDetailsDynamic = dynamic(() =>
 
 export const ProductDetails: React.FC<ProductDetailsProps> = async ({
     id,
+    cmsBlockId = 'product-details-1',
     locale,
     routing,
     includePopularOffers,
@@ -19,7 +20,7 @@ export const ProductDetails: React.FC<ProductDetailsProps> = async ({
     try {
         const data = await sdk.blocks.getProductDetails(
             { id },
-            { locale, includePopularOffers },
+            { id: cmsBlockId, locale, includePopularOffers },
             { 'x-locale': locale },
         );
 

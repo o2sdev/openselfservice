@@ -1,2 +1,9 @@
-// Request types are now in product-details.client.ts
-export {};
+export type GetProductDetailsBlockParams = {
+    id: string;
+};
+
+export type GetProductDetailsBlockQuery = {
+    id: string;
+    locale?: string;
+    includePopularOffers?: boolean;
+};
