@@ -28,9 +28,6 @@ export const ProductGallery: React.FC<Readonly<ProductGalleryProps>> = ({
 }) => {
     const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
     const [mainSwiper, setMainSwiper] = useState<SwiperType | null>(null);
-    const [isHoveringGallery, setIsHoveringGallery] = useState(false);
-    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-    const [activeIndexBeforeHover, setActiveIndexBeforeHover] = useState<number>(0);
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
     const [lightboxInitialSlide, setLightboxInitialSlide] = useState(0);
     const [lightboxThumbsSwiper, setLightboxThumbsSwiper] = useState<SwiperType | null>(null);
@@ -45,18 +42,7 @@ export const ProductGallery: React.FC<Readonly<ProductGalleryProps>> = ({
 
     const handleThumbnailHover = (index: number) => {
         if (mainSwiper) {
-            if (hoveredIndex === null) {
-                setActiveIndexBeforeHover(mainSwiper.activeIndex);
-            }
-            setHoveredIndex(index);
             mainSwiper.slideTo(index, 0);
-        }
-    };
-
-    const handleThumbnailLeave = () => {
-        if (mainSwiper && hoveredIndex !== null) {
-            mainSwiper.slideTo(activeIndexBeforeHover, 0);
-            setHoveredIndex(null);
         }
     };
 
@@ -94,21 +80,13 @@ export const ProductGallery: React.FC<Readonly<ProductGalleryProps>> = ({
     return (
         <div className={cn('w-full flex flex-col gap-2', className)}>
             {/* Main Gallery */}
-            <div
-                className="group relative"
-                onMouseEnter={() => setIsHoveringGallery(true)}
-                onMouseLeave={() => setIsHoveringGallery(false)}
-            >
+            <div className="group relative">
                 <Swiper
                     className={cn(
                         'w-full rounded-lg overflow-hidden',
                         showNavigation &&
                             showThumbnails &&
-                            '[&_.swiper-button-next]:opacity-0 [&_.swiper-button-prev]:opacity-0 [&_.swiper-button-next]:transition-opacity [&_.swiper-button-prev]:transition-opacity',
-                        showNavigation &&
-                            showThumbnails &&
-                            isHoveringGallery &&
-                            '[&_.swiper-button-next]:opacity-100 [&_.swiper-button-prev]:opacity-100',
+                            '[&_.swiper-button-next]:opacity-0 [&_.swiper-button-prev]:opacity-0 [&_.swiper-button-next]:transition-opacity [&_.swiper-button-prev]:transition-opacity group-hover:[&_.swiper-button-next]:opacity-100 group-hover:[&_.swiper-button-prev]:opacity-100',
                     )}
                     modules={mainModules}
                     keyboard={{ enabled: true, onlyInViewport: true }}
@@ -120,11 +98,6 @@ export const ProductGallery: React.FC<Readonly<ProductGalleryProps>> = ({
                         swiper: showThumbnails && thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
                     }}
                     onSwiper={setMainSwiper}
-                    onSlideChange={(swiper) => {
-                        if (hoveredIndex === null) {
-                            setActiveIndexBeforeHover(swiper.activeIndex);
-                        }
-                    }}
                     {...swiperProps}
                 >
                     {images.map((image, index) => (
@@ -149,7 +122,7 @@ export const ProductGallery: React.FC<Readonly<ProductGalleryProps>> = ({
 
             {/* Thumbnail Gallery */}
             {showThumbnails && images.length > 1 && (
-                <div onMouseLeave={handleThumbnailLeave} className="flex justify-center">
+                <div className="flex justify-center">
                     <Swiper
                         modules={[Thumbs]}
                         onSwiper={setThumbsSwiper}
