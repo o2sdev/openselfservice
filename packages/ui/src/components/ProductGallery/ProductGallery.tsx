@@ -1,7 +1,7 @@
 'use client';
 
 import { X } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import type { Swiper as SwiperType } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -31,24 +31,26 @@ export const ProductGallery: React.FC<Readonly<ProductGalleryProps>> = ({
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
     const [lightboxInitialSlide, setLightboxInitialSlide] = useState(0);
     const [lightboxThumbsSwiper, setLightboxThumbsSwiper] = useState<SwiperType | null>(null);
+    const [lightboxMainSwiper, setLightboxMainSwiper] = useState<SwiperType | null>(null);
 
-    const mainModules = [
-        A11y,
-        Keyboard,
-        ...(showNavigation ? [Navigation] : []),
-        ...(showPagination ? [Pagination] : []),
-        Thumbs,
-    ];
+    const mainModules = useMemo(
+        () => [
+            A11y,
+            Keyboard,
+            ...(showNavigation ? [Navigation] : []),
+            ...(showPagination ? [Pagination] : []),
+            Thumbs,
+        ],
+        [showNavigation, showPagination],
+    );
 
-    const handleThumbnailHover = (index: number) => {
-        if (mainSwiper) {
-            mainSwiper.slideTo(index, 0);
-        }
+    const handleThumbnailHover = (index: number, swiperInstance: SwiperType | null) => {
+        swiperInstance?.slideToLoop(index, 0);
     };
 
-    const handleImageClick = () => {
+    const handleOpenLightbox = () => {
         if (mainSwiper) {
-            setLightboxInitialSlide(mainSwiper.activeIndex);
+            setLightboxInitialSlide(mainSwiper.realIndex);
         }
         setIsLightboxOpen(true);
     };
@@ -77,6 +79,11 @@ export const ProductGallery: React.FC<Readonly<ProductGalleryProps>> = ({
         };
     }, [isLightboxOpen]);
 
+    // Return null if no images
+    if (!images || images.length === 0) {
+        return null;
+    }
+
     return (
         <div className={cn('w-full flex flex-col gap-2', className)}>
             {/* Main Gallery */}
@@ -95,7 +102,7 @@ export const ProductGallery: React.FC<Readonly<ProductGalleryProps>> = ({
                     speed={speed}
                     loop={true}
                     thumbs={{
-                        swiper: showThumbnails && thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
+                        swiper: showThumbnails && thumbsSwiper && !thumbsSwiper?.destroyed ? thumbsSwiper : null,
                     }}
                     onSwiper={setMainSwiper}
                     {...swiperProps}
@@ -104,7 +111,7 @@ export const ProductGallery: React.FC<Readonly<ProductGalleryProps>> = ({
                         <SwiperSlide key={index}>
                             <div
                                 className="relative w-full h-[400px] md:h-[500px] cursor-pointer"
-                                onClick={handleImageClick}
+                                onClick={handleOpenLightbox}
                             >
                                 <Image
                                     src={image.url}
@@ -134,11 +141,12 @@ export const ProductGallery: React.FC<Readonly<ProductGalleryProps>> = ({
                         {images.map((image, index) => (
                             <SwiperSlide
                                 key={index}
-                                className="!w-auto border-b-2 border-transparent [&.swiper-slide-thumb-active]:border-primary"
+                                className="w-auto! border-b-2 border-transparent [&.swiper-slide-thumb-active]:border-primary"
                             >
                                 <div
                                     className="relative w-[60px] h-[60px] md:w-[80px] md:h-[80px] cursor-pointer"
-                                    onMouseEnter={() => handleThumbnailHover(index)}
+                                    onMouseEnter={() => handleThumbnailHover(index, mainSwiper)}
+                                    onClick={handleOpenLightbox}
                                 >
                                     <Image
                                         src={image.url}
@@ -180,9 +188,10 @@ export const ProductGallery: React.FC<Readonly<ProductGalleryProps>> = ({
                             speed={speed}
                             loop={true}
                             initialSlide={lightboxInitialSlide}
+                            onSwiper={setLightboxMainSwiper}
                             thumbs={{
                                 swiper:
-                                    lightboxThumbsSwiper && !lightboxThumbsSwiper.destroyed
+                                    lightboxThumbsSwiper && !lightboxThumbsSwiper?.destroyed
                                         ? lightboxThumbsSwiper
                                         : null,
                             }}
@@ -216,9 +225,12 @@ export const ProductGallery: React.FC<Readonly<ProductGalleryProps>> = ({
                                     {images.map((image, index) => (
                                         <SwiperSlide
                                             key={index}
-                                            className="!w-auto border-b-2 border-transparent [&.swiper-slide-thumb-active]:border-primary"
+                                            className="w-auto! border-b-2 border-transparent [&.swiper-slide-thumb-active]:border-primary"
                                         >
-                                            <div className="relative w-[60px] h-[60px] md:w-[80px] md:h-[80px] cursor-pointer">
+                                            <div
+                                                className="relative w-[60px] h-[60px] md:w-[80px] md:h-[80px] cursor-pointer"
+                                                onMouseEnter={() => handleThumbnailHover(index, lightboxMainSwiper)}
+                                            >
                                                 <Image
                                                     src={image.url}
                                                     alt={image.alt}
