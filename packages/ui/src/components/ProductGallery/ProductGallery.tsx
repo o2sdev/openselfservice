@@ -1,7 +1,7 @@
 'use client';
 
 import { X } from 'lucide-react';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import type { Swiper as SwiperType } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -48,36 +48,36 @@ export const ProductGallery: React.FC<Readonly<ProductGalleryProps>> = ({
         swiperInstance?.slideToLoop(index, 0);
     };
 
-    const handleOpenLightbox = () => {
+    const handleOpenLightbox = useCallback(() => {
         if (mainSwiper) {
             setLightboxInitialSlide(mainSwiper.realIndex);
         }
         setIsLightboxOpen(true);
-    };
+    }, [mainSwiper]);
 
-    const handleCloseLightbox = () => {
+    const handleCloseLightbox = useCallback(() => {
         setIsLightboxOpen(false);
-    };
+    }, []);
 
     // Handle ESC key to close lightbox
     useEffect(() => {
+        if (!isLightboxOpen) return;
+
         const handleEscKey = (event: KeyboardEvent) => {
-            if (event.key === 'Escape' && isLightboxOpen) {
+            if (event.key === 'Escape') {
                 handleCloseLightbox();
             }
         };
 
-        if (isLightboxOpen) {
-            document.addEventListener('keydown', handleEscKey);
-            // Prevent body scroll when lightbox is open
-            document.body.style.overflow = 'hidden';
-        }
+        document.addEventListener('keydown', handleEscKey);
+        // Prevent body scroll when lightbox is open
+        document.body.style.overflow = 'hidden';
 
         return () => {
             document.removeEventListener('keydown', handleEscKey);
             document.body.style.overflow = '';
         };
-    }, [isLightboxOpen]);
+    }, [isLightboxOpen, handleCloseLightbox]);
 
     // Return null if no images
     if (!images || images.length === 0) {
