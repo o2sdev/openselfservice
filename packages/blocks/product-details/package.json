@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "private": false,
     "license": "MIT",
-    "description": "A block for displaying comprehensive product information including title, images, price, descriptio.",
+    "description": "A block for displaying comprehensive product information including title, images, price, description.",
     "exports": {
         "./api-harmonization": "./dist/api-harmonization/api-harmonization/index.js",
         "./frontend": "./dist/frontend/frontend/index.js",
