@@ -38,9 +38,7 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                         hasPriority={hasPriority}
                     />
                     <div className="flex flex-col gap-4 lg:hidden">
-                        <Typography variant="h1" asChild>
-                            {product.name}
-                        </Typography>
+                        <Typography variant="h1">{product.name}</Typography>
                         {product.subtitle && (
                             <Typography variant="large" className="text-muted-foreground">
                                 {product.subtitle}
@@ -137,9 +135,7 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                 <div className="hidden lg:block lg:col-span-1">
                     <div className="sticky top-6 flex flex-col gap-4 p-6 bg-card rounded-lg border border-border">
                         <div className="hidden lg:flex flex-col gap-2">
-                            <Typography variant="h1" asChild>
-                                {product.name}
-                            </Typography>
+                            <Typography variant="h1">{product.name}</Typography>
                             {product.subtitle && (
                                 <Typography variant="large" className="text-muted-foreground">
                                     {product.subtitle}
