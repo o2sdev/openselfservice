@@ -3,10 +3,9 @@
 import { createNavigation } from 'next-intl/navigation';
 import React from 'react';
 
-import { Carousel } from '@o2s/ui/components/Carousel';
 import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
-import { Image } from '@o2s/ui/components/Image';
 import { Price } from '@o2s/ui/components/Price';
+import { ProductGallery } from '@o2s/ui/components/ProductGallery';
 import { RichText } from '@o2s/ui/components/RichText';
 
 import { Badge } from '@o2s/ui/elements/badge';
@@ -25,39 +24,18 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
     const { Link: LinkComponent } = createNavigation(routing);
     const { product, popularOffers, labels, actionButton } = component;
 
-    // Image carousel slides
-    const carouselSlides = product.images.map((image, index) => (
-        <div key={index} className="relative w-full h-[400px] md:h-[500px]">
-            <Image
-                src={image.url}
-                alt={image.alt}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 1200px"
-                priority={hasPriority && index === 0}
-            />
-        </div>
-    ));
-
-    // Key specs from product data
     const keySpecs = product.keySpecs ?? [];
 
     return (
         <div className="w-full flex flex-col gap-8 md:gap-12">
-            {/* Product Header & Info Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                {/* Left Column: Product Info */}
                 <div className="lg:col-span-2 flex flex-col gap-6">
-                    {/* Image Carousel */}
-                    <div className="w-full">
-                        <Carousel
-                            slides={carouselSlides}
-                            showNavigation={true}
-                            showPagination={true}
-                            className="rounded-lg overflow-hidden"
-                        />
-                    </div>
-                    {/* Title & Badges (visible on mobile, hidden on desktop) */}
+                    <ProductGallery
+                        images={product.images}
+                        showNavigation={true}
+                        showThumbnails={false}
+                        hasPriority={hasPriority}
+                    />
                     <div className="flex flex-col gap-4 lg:hidden">
                         <Typography variant="h1" asChild>
                             <h1>{product.name}</h1>
@@ -68,7 +46,6 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                             </Typography>
                         )}
 
-                        {/* Badges */}
                         {product.badges && product.badges.length > 0 && (
                             <div className="flex flex-wrap gap-2">
                                 {product.badges.map((badge, index) => (
@@ -82,7 +59,6 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
 
                     <Separator className="lg:hidden" />
 
-                    {/* Key Specs Icons */}
                     {keySpecs.length > 0 && (
                         <>
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -104,7 +80,6 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                         </>
                     )}
 
-                    {/* Description */}
                     {product.description && (
                         <div className="flex flex-col gap-4">
                             <Typography variant="h2" asChild>
@@ -116,7 +91,6 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
 
                     <Separator />
 
-                    {/* Detailed Specifications Grid */}
                     {product.detailedSpecs && product.detailedSpecs.length > 0 && (
                         <div className="flex flex-col gap-4">
                             <Typography variant="h2" asChild>
@@ -136,7 +110,6 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                         </div>
                     )}
 
-                    {/* Metadata */}
                     {(product.offerNumber || product.location) && (
                         <>
                             <Separator />
@@ -160,10 +133,8 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                     )}
                 </div>
 
-                {/* Right Column: Title, Badges, Price & CTA */}
                 <div className="hidden lg:block lg:col-span-1">
                     <div className="sticky top-6 flex flex-col gap-4 p-6 bg-card rounded-lg border border-border">
-                        {/* Title (visible on desktop only) */}
                         <div className="hidden lg:flex flex-col gap-2">
                             <Typography variant="h1" asChild>
                                 <h1>{product.name}</h1>
@@ -175,7 +146,6 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                             )}
                         </div>
 
-                        {/* Badges (visible on desktop only) */}
                         {product.badges && product.badges.length > 0 && (
                             <div className="hidden lg:flex flex-wrap gap-2">
                                 {product.badges.map((badge, index) => (
@@ -186,7 +156,6 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                             </div>
                         )}
 
-                        {/* Price */}
                         <div className="flex flex-col gap-1 items-end">
                             <Typography className="text-muted-foreground">{labels.priceLabel}</Typography>
                             <Typography variant="h2" className="text-primary whitespace-nowrap">
@@ -194,7 +163,6 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                             </Typography>
                         </div>
 
-                        {/* CTA Button */}
                         {actionButton && (
                             <>
                                 <Separator />
@@ -233,7 +201,6 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                 </div>
             </div>
 
-            {/* Popular Offers Section */}
             {popularOffers && popularOffers.length > 0 && (
                 <>
                     <Separator className="my-4" />
@@ -247,7 +214,6 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                 </>
             )}
 
-            {/* Mobile Sticky CTA Footer */}
             {actionButton && (
                 <>
                     <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-background border-t border-border p-4 shadow-lg z-50">
@@ -280,7 +246,6 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                         </div>
                     </div>
 
-                    {/* Spacer for mobile sticky footer */}
                     <div className="lg:hidden h-32" />
                 </>
             )}
