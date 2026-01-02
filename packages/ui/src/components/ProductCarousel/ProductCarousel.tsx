@@ -19,7 +19,7 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({
     action,
     LinkComponent,
     carouselConfig,
-    detailsLabel,
+    linkDetailsLabel,
     carouselClassName,
 }) => {
     if (!products || products.length === 0) {
@@ -52,7 +52,7 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({
                             image={product.image}
                             tags={product.badges?.slice(0, 2)}
                             link={{
-                                label: detailsLabel,
+                                label: linkDetailsLabel || '',
                                 url: product.link,
                             }}
                             LinkComponent={LinkComponent}

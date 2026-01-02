@@ -25,6 +25,7 @@ export const mapProductDetails = (
         specificationsTitle: cms.labels.specificationsTitle,
         descriptionTitle: cms.labels.descriptionTitle,
         recommendedOffersTitle: cms.labels.recommendedOffersTitle,
+        recommendedOffersDetailsLabel: cms.labels.recommendedOffersDetailsLabel,
         downloadLabel: cms.labels.downloadLabel,
         priceLabel: cms.labels.priceLabel,
         offerLabel: cms.labels.offerLabel,

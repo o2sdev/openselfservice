@@ -12,7 +12,7 @@ export interface ProductCarouselProps {
     action?: React.ReactNode;
     LinkComponent: FrontendModels.Link.LinkComponent;
     carouselConfig?: Partial<CarouselProps>;
-    detailsLabel: string;
+    linkDetailsLabel?: string;
     carouselClassName?: string;
 }
 

@@ -145,7 +145,7 @@ export const Default: Story = {
         products: sampleProducts,
         title: 'Recommended Products',
         LinkComponent: MockLinkComponent,
-        detailsLabel: 'View Details',
+        linkDetailsLabel: 'View Details',
     },
 };
 
@@ -155,7 +155,7 @@ export const WithDescription: Story = {
         title: 'You Might Also Like',
         description: '<p>Check out these carefully selected products that complement your choice.</p>',
         LinkComponent: MockLinkComponent,
-        detailsLabel: 'View Details',
+        linkDetailsLabel: 'View Details',
     },
 };
 
@@ -170,6 +170,6 @@ export const WithAction: Story = {
             </Button>
         ),
         LinkComponent: MockLinkComponent,
-        detailsLabel: 'View Details',
+        linkDetailsLabel: 'View Details',
     },
 };

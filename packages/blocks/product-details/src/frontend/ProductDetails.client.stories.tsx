@@ -158,138 +158,13 @@ export const Default: Story = {
                 link: 'https://example.com/products/sfc-22-a',
                 badges: [{ label: 'New', variant: 'secondary' }],
             },
-        ],
-        actionButton: {
-            label: 'Request Quote',
-            variant: 'default',
-            icon: 'MessageCircle',
-            onClick: () => {
-                console.log('Action button clicked');
-            },
-        },
-        labels: {
-            specificationsTitle: 'Specifications',
-            descriptionTitle: 'Description',
-            recommendedOffersTitle: 'You Might Also Like',
-            downloadLabel: 'Download Brochure',
-            priceLabel: 'Price',
-            offerLabel: 'Offer',
-        },
-        hasPriority: false,
-    },
-};
-
-export const WithDiscount: Story = {
-    args: {
-        ...Default.args,
-        id: 'PRD-010',
-        product: {
-            id: 'PRD-010',
-            sku: 'ABC-12345-S-BL',
-            name: 'PrecisionPro Calibration™ – Ensuring Accuracy for Industrial Equipment',
-            description:
-                '<ul><li>ISO-Certified Calibration</li><li>On-Site & Remote Services</li><li>Detailed Reports</li></ul>',
-            shortDescription:
-                '<ul><li>ISO-Certified Calibration</li><li>On-Site & Remote Services</li><li>Detailed Reports</li></ul>',
-            image: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-calibration.jpg',
-                width: 640,
-                height: 656,
-                alt: 'PrecisionPro Calibration™ – Ensuring Accuracy for Industrial Equipment',
-            },
-            images: [
-                {
-                    url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-calibration.jpg',
-                    alt: 'PrecisionPro Calibration™ – Ensuring Accuracy for Industrial Equipment',
-                    width: 640,
-                    height: 656,
-                },
-            ],
-            price: {
-                value: 19.99,
-                currency: 'USD',
-            },
-            link: 'https://example.com/services/training',
-            type: 'VIRTUAL',
-            category: 'TRAINING',
-            tags: [
-                {
-                    label: 'Promo',
-                    variant: 'destructive',
-                },
-                {
-                    label: 'New',
-                    variant: 'secondary',
-                },
-            ],
-            badges: [
-                { label: 'Promo', variant: 'destructive' },
-                { label: 'New', variant: 'secondary' },
-            ],
-        },
-        popularOffers: undefined,
-    },
-};
-
-export const PolishLocale: Story = {
-    args: {
-        ...Default.args,
-        locale: 'pl',
-        routing: {
-            locales: ['en', 'pl'],
-            defaultLocale: 'pl',
-            pathnames: {
-                '/products/[id]': {
-                    en: '/products/[id]',
-                    pl: '/produkty/[id]',
-                },
-            },
-        },
-        product: {
-            id: 'PRD-004',
-            sku: 'ABC-12345-S-BL',
-            name: 'Rotary Hammer',
-            description: 'Professional heavy-duty hammer drill for concrete and masonry',
-            shortDescription: 'Professional heavy-duty hammer drill for concrete and masonry',
-            image: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
-                width: 640,
-                height: 656,
-                alt: 'Rotary Hammer',
-            },
-            images: [
-                {
-                    url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
-                    alt: 'Rotary Hammer',
-                    width: 640,
-                    height: 656,
-                },
-            ],
-            price: {
-                value: 100,
-                currency: 'USD',
-            },
-            link: 'https://example.com/products/te-70-atc-avr',
-            type: 'PHYSICAL',
-            category: 'TOOLS',
-            tags: [
-                {
-                    label: 'New',
-                    variant: 'secondary',
-                },
-            ],
-            badges: [{ label: 'New', variant: 'secondary' }],
-            keySpecs: [],
-            detailedSpecs: [],
-        },
-        popularOffers: [
             {
-                id: 'PRD-005',
-                name: 'Cordless Angle Grinder',
-                description: 'Cordless angle grinder with 22V battery platform',
+                id: 'PRD-008',
+                name: 'Professional Calibration',
+                description: 'Professional calibration service for industrial equipment',
                 image: {
                     url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-charger.jpg',
-                    alt: 'Cordless Angle Grinder',
+                    alt: 'Professional Calibration Service',
                     width: 640,
                     height: 656,
                 },
@@ -303,106 +178,25 @@ export const PolishLocale: Story = {
                     { label: 'Promo', variant: 'destructive' },
                 ],
             },
-            {
-                id: 'PRD-006',
-                name: 'Laser Measurement',
-                description: 'Laser measurement device for distance measurements',
-                image: {
-                    url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
-                    alt: 'Laser Measurement',
-                    width: 640,
-                    height: 656,
-                },
-                price: {
-                    value: 100,
-                    currency: 'USD',
-                },
-                link: 'https://example.com/products/pd-s',
-                badges: [{ label: 'New', variant: 'secondary' }],
-            },
         ],
         actionButton: {
-            label: 'Zapytaj o ofertę',
+            label: 'Request Quote',
             variant: 'default',
             icon: 'MessageCircle',
             onClick: () => {
-                console.log('Przycisk akcji kliknięty');
+                console.log('Action button clicked');
             },
         },
         labels: {
-            specificationsTitle: 'Specyfikacja',
-            descriptionTitle: 'Opis',
-            recommendedOffersTitle: 'Popularne oferty',
-            downloadLabel: 'Pobierz broszurę',
-            priceLabel: 'Cena',
-            offerLabel: 'Oferta',
+            specificationsTitle: 'Specifications',
+            descriptionTitle: 'Description',
+            recommendedOffersTitle: 'You Might Also Like',
+            recommendedOffersDetailsLabel: 'Details',
+            downloadLabel: 'Download Brochure',
+            priceLabel: 'Price',
+            offerLabel: 'Offer',
         },
-    },
-};
-
-export const WithoutPopularOffers: Story = {
-    args: {
-        ...Default.args,
-        popularOffers: undefined,
-    },
-};
-
-export const MinimalProduct: Story = {
-    args: {
-        ...Default.args,
-        id: 'PRD-012',
-        product: {
-            id: 'PRD-012',
-            sku: 'ABC-12345-S-BL',
-            name: 'WeldGuard Safety™ – Protective Solutions for Welding Environments',
-            description:
-                '<ul><li>Advanced Fume Extraction</li><li>Heat-Resistant PPE</li><li>Safety Compliance Checks</li></ul>',
-            shortDescription:
-                '<ul><li>Advanced Fume Extraction</li><li>Heat-Resistant PPE</li><li>Safety Compliance Checks</li></ul>',
-            image: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-welding.jpg',
-                width: 640,
-                height: 656,
-                alt: 'WeldGuard Safety™ – Protective Solutions for Welding Environments',
-            },
-            images: [
-                {
-                    url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-welding.jpg',
-                    alt: 'WeldGuard Safety™ – Protective Solutions for Welding Environments',
-                    width: 640,
-                    height: 656,
-                },
-            ],
-            price: {
-                value: 10,
-                currency: 'USD',
-            },
-            link: 'https://example.com/services/weldguard-safety',
-            type: 'VIRTUAL',
-            category: 'SAFETY',
-            tags: [
-                {
-                    label: 'New',
-                    variant: 'secondary',
-                },
-            ],
-            badges: [{ label: 'New', variant: 'secondary' }],
-            keySpecs: [],
-            detailedSpecs: [],
-        },
-        popularOffers: undefined,
-    },
-};
-
-export const WithLinkButton: Story = {
-    args: {
-        ...Default.args,
-        actionButton: {
-            label: 'View More Details',
-            variant: 'default',
-            icon: 'ExternalLink',
-            href: '/products/PRD-004/details',
-        },
+        hasPriority: false,
     },
 };
 

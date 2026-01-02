@@ -5,6 +5,7 @@ import React from 'react';
 
 import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
 import { Price } from '@o2s/ui/components/Price';
+import { ProductCarousel } from '@o2s/ui/components/ProductCarousel';
 import { ProductGallery } from '@o2s/ui/components/ProductGallery';
 import { RichText } from '@o2s/ui/components/RichText';
 
@@ -204,13 +205,13 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
             {popularOffers && popularOffers.length > 0 && (
                 <>
                     <Separator className="my-4" />
-                    <div className="flex flex-col gap-6">
-                        <Typography variant="h2" asChild>
-                            <h2>{labels.recommendedOffersTitle}</h2>
-                        </Typography>
-
-                        <h3>TODO: Recommended products</h3>
-                    </div>
+                    <ProductCarousel
+                        products={popularOffers}
+                        title={labels.recommendedOffersTitle}
+                        LinkComponent={LinkComponent}
+                        linkDetailsLabel={labels.recommendedOffersDetailsLabel}
+                        carouselConfig={{ loop: true }}
+                    />
                 </>
             )}
 
