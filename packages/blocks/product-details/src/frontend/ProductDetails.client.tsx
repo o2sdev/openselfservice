@@ -217,7 +217,7 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
 
             {actionButton && (
                 <>
-                    <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-background border-t border-border p-4 shadow-lg z-50">
+                    <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-background border-t border-border p-4 shadow-lg z-100">
                         <div className="flex flex-col gap-2 max-w-7xl ml-auto mr-4">
                             <div className="flex items-center justify-end gap-2 mb-2">
                                 <Typography className="text-muted-foreground">{labels.priceLabel}</Typography>
