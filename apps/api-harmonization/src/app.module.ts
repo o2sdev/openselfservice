@@ -141,7 +141,7 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
         ProductList.Module.register(AppConfig),
         NotificationSummary.Module.register(AppConfig),
         TicketSummary.Module.register(AppConfig),
-        ProductDetails.ProductDetailsModule,
+        ProductDetails.Module.register(AppConfig),
         // BLOCK REGISTER
     ],
     providers: [
