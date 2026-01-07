@@ -67,6 +67,69 @@ Mapping from Strapi to the application model happens in:
 3. Select a theme from the list of available themes
 4. Save and publish the block
 
+## Contentful
+
+### Adding a Theme in Contentful
+
+1. Go to **Content model** in Contentful
+2. Find the **AppConfig** content type
+3. In the **Themes** field (reference, many) add a new entry of type **Theme**
+4. Fill in the fields:
+   - **Name** – theme name (e.g., `dark`, `corporate`)
+   - **Logo** (optional) – select asset with the logo
+5. Save and publish changes
+
+### Structure in Contentful
+
+Themes are stored as a reference collection in the `AppConfig` content type:
+
+```typescript
+appConfig {
+  themesCollection {
+    items {
+      name  // e.g., "dark"
+      logo  // Asset (optional)
+    }
+  }
+}
+```
+
+Mapping from Contentful to the application model happens in:
+
+```51:61:packages/integrations/contentful-cms/src/modules/cms/mappers/cms.app-config.mapper.ts
+        themes:
+            appConfig.themesCollection?.items.reduce((prev, theme) => {
+                if (!theme.name) return prev;
+                return {
+                    ...prev,
+                    [theme.name]: {
+                        name: theme.name,
+                        logo: mapMedia(theme.logo, baseUrl),
+                    },
+                };
+            }, {} as CMS.Model.AppConfig.Themes) || {},
+```
+
+### Assigning Theme to Block
+
+1. Open a block in Contentful
+2. In the **Layout** section, find the **Theme** field
+3. Select a theme from the list of available themes
+4. Save and publish the block
+
+The theme is mapped from the block's layout section:
+
+```508:515:packages/integrations/contentful-cms/src/modules/cms/mappers/cms.page.mapper.ts
+const mapLayout = ({ spacing, background, variant, theme }: ComponentBaseFragment): CMS.Model.Page.LayoutSection => {
+    return {
+        spacing: spacing as CMS.Model.Page.LayoutSection['spacing'],
+        background: background as CMS.Model.Page.LayoutSection['background'],
+        variant: variant as CMS.Model.Page.LayoutSection['variant'],
+        theme: theme as CMS.Model.Page.LayoutSection['theme'],
+    };
+};
+```
+
 ## Important Notes
 
 ### Theme Name

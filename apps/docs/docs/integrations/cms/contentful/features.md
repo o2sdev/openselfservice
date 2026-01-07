@@ -148,7 +148,7 @@ TypeScript types and SDK methods are automatically generated from GraphQL querie
 
 ### Type Safety {#type-safety}
 
-Full TypeScript type safety is provided through generated types from the GraphQL schema, ensuring compile-time validation. For detailed information, see the [GraphQL documentation](./graphql.md#type-safety-benefits).
+Full TypeScript type safety is provided through generated types from the GraphQL schema, ensuring compile-time validation. For detailed information, see the [GraphQL documentation](./graphql.md#code-generation).
 
 ### Permissions/Roles {#permissionsroles}
 

@@ -12,20 +12,7 @@ npm install @o2s/integrations.redis --workspace=@o2s/api
 
 ## Set up Redis instance
 
-You need to set up your own Redis instance. For detailed installation and setup instructions, refer to the [official Redis documentation](https://redis.io/docs/).
-
-### Docker
-
-You can run Redis using Docker by creating a `docker-compose.yml` file:
-
-```yaml
-services:
-    redis:
-        image: redis:latest
-        ports:
-            - '6379:6379'
-        command: redis-server --requirepass REDIS_PASS
-```
+You need to set up your own Redis instance. We do not provide a Docker configuration for Redis. For detailed installation and setup instructions, refer to the [official Redis documentation](https://redis.io/docs/).
 
 ### Local installation
 
