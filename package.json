@@ -67,7 +67,7 @@
         "rimraf": "^6.1.2",
         "simple-git": "^3.30.0",
         "storybook": "^10.1.11",
-        "syncpack": "^14.0.0-alpha.29",
+        "syncpack": "^14.0.0-alpha.34",
         "turbo": "^2.7.2",
         "typescript": "5.9.3",
         "unplugin-swc": "^1.5.9",
