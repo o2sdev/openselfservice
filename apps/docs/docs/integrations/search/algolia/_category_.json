@@ -1,0 +1,10 @@
+{
+    "label": "Algolia",
+    "position": 100,
+    "link": {
+        "type": "doc",
+        "id": "integrations/search/algolia/overview"
+    }
+}
+
+

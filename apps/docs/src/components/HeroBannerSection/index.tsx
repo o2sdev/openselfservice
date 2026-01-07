@@ -99,7 +99,7 @@ export function HeroBannerSection({
                             <>
                                 <div className={clsx('sm:flex gap-2 space-y-4 w-full', !heroImage && 'justify-center')}>
                                     <Link
-                                        className={clsx('button', cliCommand && 'w-1/2')}
+                                        className={clsx('button', cliCommand && 'sm:w-1/2')}
                                         href={mainLink.url}
                                         target={mainLink.target}
                                     >
@@ -111,7 +111,7 @@ export function HeroBannerSection({
                                     {secondaryLink && (
                                         <Link
                                             href={secondaryLink.url}
-                                            className={clsx('button button-ultra', cliCommand && 'w-1/2')}
+                                            className={clsx('button button-ultra', cliCommand && 'sm:w-1/2')}
                                             target={secondaryLink.target}
                                             rel="noopener"
                                         >
@@ -126,7 +126,7 @@ export function HeroBannerSection({
                                     {tertiaryLink && (
                                         <Link
                                             href={tertiaryLink.url}
-                                            className={clsx('button button-special', cliCommand && 'w-1/2')}
+                                            className={clsx('button button-special', cliCommand && 'sm:w-1/2')}
                                             target={tertiaryLink.target}
                                             rel="noopener"
                                         >
@@ -148,7 +148,7 @@ export function HeroBannerSection({
                         <img
                             src={heroImage.url}
                             alt={heroImage.alt}
-                            className={`w-full relative h-auto origin-left origin-center z-[-1] ${
+                            className={`w-full relative h-auto origin-center z-[-1] ${
                                 isDXPage ? `hidden md:block mt-20 ml-[-250px] scale-[2.6] z-10` : 'scale-[2]'
                             }`}
                         />

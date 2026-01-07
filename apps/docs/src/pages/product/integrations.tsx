@@ -73,7 +73,7 @@ const INTEGRATION_SECTIONS: Array<{
                 status: 'available',
                 description: 'Advanced survey and form engine for ticket submission.',
                 icon: <SurveyJSIcon />,
-                link: '/docs/integrations/forms/surveyjs',
+                link: '/docs/integrations/forms/surveyjs/overview',
             },
             {
                 name: 'Zendesk',
@@ -165,7 +165,7 @@ const INTEGRATION_SECTIONS: Array<{
                 description:
                     'Open-source composable commerce engine. Currently provides product & asset information in O2S.',
                 icon: <MedusaIcon />,
-                link: '/docs/integrations/commerce/medusa-js',
+                link: '/docs/integrations/commerce/medusa-js/overview',
             },
             {
                 name: 'SAP S/4 Hana',
@@ -218,7 +218,7 @@ const INTEGRATION_SECTIONS: Array<{
                 status: 'available',
                 description: 'Used for full-text and faceted search across content and articles.',
                 icon: <AlgoliaIcon />,
-                link: '/docs/integrations/search/algolia',
+                link: '/docs/integrations/search/algolia/overview',
             },
             {
                 name: 'Personalisation API',
@@ -238,7 +238,7 @@ const INTEGRATION_SECTIONS: Array<{
                 status: 'available',
                 description: 'Used for caching, session storage and notification delivery.',
                 icon: <RedisIcon />,
-                link: '/docs/integrations/cache/redis',
+                link: '/docs/integrations/cache/redis/overview',
             },
         ],
     },

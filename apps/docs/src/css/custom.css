@@ -556,13 +556,14 @@ aside:not(.theme-doc-sidebar-container) {
     display: inline-block;
     margin-left: 0.5rem;
     position: relative;
-    width: 14px;
-    height: 8px;
+    width: 12px;
+    height: 6px;
     background: url('../../src/assets/icons/ChevronDown.svg') no-repeat;
+    background-size: contain;
     top: 0;
     transform: none;
     transform-origin: center;
-    transition: transform 0.1s ease-in-out;
+    transition: transform 0.2s ease-in-out;
 }
 
 .dropdown:hover > .navbar__link:after {
@@ -1437,4 +1438,126 @@ footer a {
 
 label {
     cursor: pointer;
+}
+
+.markdown {
+    overflow-x: visible;
+}
+
+.markdown table {
+    display: inline-block;
+    overflow-x: auto;
+    overflow-y: visible;
+    width: fit-content;
+    max-width: 100%;
+    margin: 1.5rem 0;
+    border-top-left-radius: 0.375rem;
+    border-top-right-radius: 0.375rem;
+    border-bottom-left-radius: 0.375rem;
+    border-bottom-right-radius: 0.375rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    -webkit-overflow-scrolling: touch;
+    background-color: transparent;
+    position: relative;
+    isolation: isolate;
+}
+
+.markdown table thead {
+    display: table-header-group;
+}
+
+.markdown table tbody {
+    display: table-row-group;
+}
+
+.markdown table tr {
+    display: table-row;
+}
+
+.markdown table td,
+.markdown table th {
+    display: table-cell;
+}
+
+.markdown table thead,
+.markdown table tbody {
+    width: auto;
+    min-width: max-content;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.markdown table td {
+    border-top: none;
+    border-bottom: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.markdown table td:first-child {
+    border-left: none;
+}
+
+.markdown table td:last-child {
+    border-right: none;
+}
+
+.markdown table thead tr {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+}
+
+.markdown table thead th {
+    border-top: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+    border-bottom: 1px solid rgba(255, 255, 255, 1);
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    color: var(--ifm-font-color-base);
+}
+
+.markdown table thead th:first-child {
+    border-top-left-radius: 0.375rem;
+    border-left: none;
+}
+
+.markdown table thead th:last-child {
+    border-top-right-radius: 0.375rem;
+    border-right: none;
+}
+
+.markdown table thead th:not(:last-child) {
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.markdown table tbody tr {
+    background-color: rgba(255, 255, 255, 0.03);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    border-bottom: none;
+    transition: background-color 0.2s ease;
+}
+
+.markdown table tbody tr:first-child {
+    border-top: none;
+}
+
+.markdown table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.06);
+}
+
+.markdown table tbody td {
+    padding: 0.75rem 1rem;
+}
+
+.markdown table tbody td:first-child {
+    padding-left: 1rem;
+}
+
+.markdown table tbody td:last-child {
+    padding-right: 1rem;
 }

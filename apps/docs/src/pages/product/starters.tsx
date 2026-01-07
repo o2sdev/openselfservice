@@ -48,10 +48,14 @@ const benefits: Array<BenefitCardProps> = [
 ];
 
 const digitalPortalStarter: StarterInfoSectionProps = {
-    links: [
-        { link: 'https://demo-dxp.openselfservice.com/', label: 'Live Demo', target: '_blank' },
-        { link: '/docs/app-starters/dxp/overview', label: 'Docs' },
-        { link: 'https://storybook-dxp.openselfservice.com/?path=/docs', label: 'Storybook', target: '_blank' },
+    mainLink: { link: 'https://demo-dxp.openselfservice.com/', label: 'See live demo', target: '_blank' },
+    secondaryLink: {
+        link: 'https://storybook-dxp.openselfservice.com/?path=/docs',
+        label: 'View Storybook',
+        target: '_blank',
+    },
+    otherLinks: [
+        { link: '/docs/app-starters/dxp/overview', label: 'Docs', target: '_blank' },
         { link: 'https://github.com/o2sdev/dxp-starter-kit', label: 'GitHub', target: '_blank' },
     ],
     mainTitle: 'Digital Experience Portal Starter',
@@ -168,15 +172,15 @@ const digitalPortalStarter: StarterInfoSectionProps = {
 };
 
 const customerPortalStarter: StarterInfoSectionProps = {
-    links: [
-        { link: 'https://demo.openselfservice.com/', label: 'Live Demo', target: '_blank' },
+    mainLink: { link: 'https://demo.openselfservice.com/', label: 'See live demo', target: '_blank' },
+    secondaryLink: {
+        link: 'https://storybook-o2s.openselfservice.com/?path=/docs',
+        label: 'View Storybook',
+        target: '_blank',
+    },
+    otherLinks: [
+        { link: '/docs/app-starters/o2s/overview', label: 'Docs', target: '_blank' },
         { link: 'https://github.com/o2sdev/openselfservice', label: 'GitHub', target: '_blank' },
-        { link: '/docs/app-starters/o2s/overview', label: 'Docs' },
-        {
-            link: 'https://storybook-o2s.openselfservice.com/?path=/docs',
-            label: 'Storybook',
-            target: '_blank',
-        },
     ],
     mainTitle: 'Customer Portal Starter',
     description: (
