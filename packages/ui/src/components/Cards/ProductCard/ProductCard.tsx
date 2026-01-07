@@ -27,8 +27,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     return (
         <div className={cn('flex flex-col bg-card rounded-lg border border-border shadow-sm relative w-full h-full')}>
             {/* Image section */}
-            <div className="relative overflow-hidden h-[180px] flex-shrink-0 rounded-t-lg">
-                {image?.url && image?.alt && (
+            {image?.url && image?.alt && (
+                <div className="relative overflow-hidden h-[180px] shrink-0 rounded-t-lg">
                     <Image
                         src={image.url}
                         alt={image.alt}
@@ -37,8 +37,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                         className="object-cover object-center"
                         priority={image.priority}
                     />
-                )}
-            </div>
+                </div>
+            )}
             <div className="p-6 flex flex-col gap-6 h-full">
                 {/* Content section */}
                 <div className="flex flex-col h-full">
@@ -48,7 +48,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                         </Typography>
 
                         {tags && tags.length > 0 && (
-                            <ul className="flex flex-wrap gap-2 absolute top-[165px] left-6">
+                            <ul
+                                className={cn(
+                                    'flex flex-wrap gap-2',
+                                    image?.url && image?.alt && 'absolute top-[165px] left-6',
+                                )}
+                            >
                                 {tags.map((tag) => (
                                     <li key={tag.label}>
                                         <Badge variant={tag.variant}>{tag.label}</Badge>
@@ -67,26 +72,32 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 <Separator />
 
                 {/* Footer section */}
-                <div className="flex items-start sm:items-center justify-between gap-4 sm:flex-row flex-col w-full">
-                    <Typography variant="highlightedSmall" className="w-full">
-                        <Price price={price} />
-                    </Typography>
+                <div className="flex items-start sm:items-center justify-between gap-6 sm:flex-row flex-col w-full">
+                    <div className="flex flex-row gap-2 w-full sm:justify-start justify-between items-center">
+                        <Typography variant="highlightedSmall" className="shrink-0">
+                            <Price price={price} />
+                        </Typography>
 
-                    <div className="flex sm:items-center gap-4 sm:flex-row flex-col w-full justify-end">
                         {status && (
-                            <Badge key={status.label} variant={status.variant} className="w-fit">
-                                {status.label}
-                            </Badge>
-                        )}
-
-                        {action}
-
-                        {link && (
-                            <Link asChild variant="primary" size="default">
-                                <LinkComponent href={link.url}>{link.label}</LinkComponent>
-                            </Link>
+                            <div className="">
+                                <Badge key={status.label} variant={status.variant} className="w-fit">
+                                    {status.label}
+                                </Badge>
+                            </div>
                         )}
                     </div>
+
+                    {(action || link) && (
+                        <div className="flex sm:items-center gap-4 sm:flex-row flex-col w-full justify-end">
+                            {action}
+
+                            {link && (
+                                <Link asChild variant="primary" size="default">
+                                    <LinkComponent href={link.url}>{link.label}</LinkComponent>
+                                </Link>
+                            )}
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

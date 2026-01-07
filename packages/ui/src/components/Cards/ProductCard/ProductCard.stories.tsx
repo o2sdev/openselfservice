@@ -120,6 +120,14 @@ export const WithoutAction: Story = {
     },
 };
 
+export const WithoutActionAndLink: Story = {
+    args: {
+        ...Default.args,
+        action: undefined,
+        link: undefined,
+    },
+};
+
 export const WithCustomAction: Story = {
     args: {
         ...Default.args,
