@@ -23,7 +23,7 @@ export const ProductGallery: React.FC<Readonly<ProductGalleryProps>> = ({
     showThumbnails = true,
     showPagination = false,
     speed = 300,
-    hasPriority = false,
+    shouldPreloadGallery = false,
     ...swiperProps
 }) => {
     const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
@@ -119,7 +119,7 @@ export const ProductGallery: React.FC<Readonly<ProductGalleryProps>> = ({
                                     fill
                                     className="object-cover"
                                     sizes="(max-width: 768px) 100vw, 1200px"
-                                    preload={hasPriority && index === 0}
+                                    preload={shouldPreloadGallery && index === 0}
                                 />
                             </div>
                         </SwiperSlide>

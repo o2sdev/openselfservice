@@ -35,7 +35,7 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                         images={product.images}
                         showNavigation={true}
                         showThumbnails={false}
-                        hasPriority={hasPriority}
+                        shouldPreloadGallery={hasPriority}
                     />
                     <div className="flex flex-col gap-4 lg:hidden">
                         <Typography variant="h1">{product.name}</Typography>

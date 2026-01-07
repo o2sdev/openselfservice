@@ -12,5 +12,5 @@ export interface ProductGalleryProps extends Omit<SwiperProps, 'children'> {
     showThumbnails?: boolean;
     showPagination?: boolean;
     speed?: number;
-    hasPriority?: boolean;
+    shouldPreloadGallery?: boolean;
 }
