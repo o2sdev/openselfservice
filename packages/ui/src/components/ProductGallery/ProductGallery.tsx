@@ -119,7 +119,7 @@ export const ProductGallery: React.FC<Readonly<ProductGalleryProps>> = ({
                                     fill
                                     className="object-cover"
                                     sizes="(max-width: 768px) 100vw, 1200px"
-                                    priority={hasPriority && index === 0}
+                                    preload={hasPriority && index === 0}
                                 />
                             </div>
                         </SwiperSlide>

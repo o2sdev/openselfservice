@@ -30,49 +30,36 @@ export class ProductDetailsService {
             id,
             locale,
         });
+        const popularOffers = this.productsService.getProductList({
+            limit: 4,
+            offset: 0,
+            locale,
+        });
 
-        if (query.includePopularOffers) {
-            const popularOffers = this.productsService.getProductList({
-                limit: 4,
-                offset: 0,
-                locale,
-            });
-
-            return forkJoin([cms, product, popularOffers]).pipe(
-                map(([cms, product, popularOffers]) => {
-                    if (!product) {
-                        throw new NotFoundException();
-                    }
-
-                    // Filter out current product from popular offers
-                    const filteredOffers: Model.ProductSummary[] = popularOffers.data
-                        .filter((offer) => offer.id !== id && offer.image)
-                        .slice(0, 4)
-                        .map((offer) => ({
-                            id: offer.id,
-                            name: offer.name,
-                            description: offer.shortDescription,
-                            image: offer.image!,
-                            price: offer.price,
-                            link: offer.link,
-                            badges: offer.tags?.map((tag) => ({
-                                label: tag.label,
-                                variant: tag.variant as Model.Badge['variant'],
-                            })),
-                        }));
-
-                    return mapProductDetails(product, filteredOffers, cms);
-                }),
-            );
-        }
-
-        return forkJoin([cms, product]).pipe(
-            map(([cms, product]) => {
+        return forkJoin([cms, product, popularOffers]).pipe(
+            map(([cms, product, popularOffers]) => {
                 if (!product) {
                     throw new NotFoundException();
                 }
 
-                return mapProductDetails(product, undefined, cms);
+                // Filter out current product from popular offers
+                const filteredOffers: Model.ProductSummary[] = popularOffers.data
+                    .filter((offer) => offer.id !== id && offer.image)
+                    .slice(0, 4)
+                    .map((offer) => ({
+                        id: offer.id,
+                        name: offer.name,
+                        description: offer.shortDescription,
+                        image: offer.image!,
+                        price: offer.price,
+                        link: offer.link,
+                        badges: offer.tags?.map((tag) => ({
+                            label: tag.label,
+                            variant: tag.variant as Model.Badge['variant'],
+                        })),
+                    }));
+
+                return mapProductDetails(product, filteredOffers, cms);
             }),
         );
     }

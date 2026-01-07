@@ -11,7 +11,6 @@ export const ProductDetailsRenderer: React.FC<ProductDetailsRendererProps> = ({
     id,
     routing,
     locale: propLocale,
-    includePopularOffers,
     hasPriority,
 }) => {
     const localeFromHook = useLocale();
@@ -29,13 +28,7 @@ export const ProductDetailsRenderer: React.FC<ProductDetailsRendererProps> = ({
                 </>
             }
         >
-            <ProductDetails
-                id={id}
-                locale={locale}
-                routing={routing}
-                includePopularOffers={includePopularOffers}
-                hasPriority={hasPriority}
-            />
+            <ProductDetails id={id} locale={locale} routing={routing} hasPriority={hasPriority} />
         </Suspense>
     );
 };

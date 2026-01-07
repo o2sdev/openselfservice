@@ -5,5 +5,4 @@ export type GetProductDetailsBlockParams = {
 export type GetProductDetailsBlockQuery = {
     id: string;
     locale?: string;
-    includePopularOffers?: boolean;
 };

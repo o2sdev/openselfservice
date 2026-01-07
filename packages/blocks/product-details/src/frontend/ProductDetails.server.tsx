@@ -14,21 +14,12 @@ export const ProductDetails: React.FC<ProductDetailsProps> = async ({
     cmsBlockId = 'product-details-1',
     locale,
     routing,
-    includePopularOffers,
     hasPriority,
 }) => {
     try {
-        const data = await sdk.blocks.getProductDetails(
-            { id },
-            { id: cmsBlockId, locale, includePopularOffers },
-            { 'x-locale': locale },
-        );
+        const data = await sdk.blocks.getProductDetails({ id }, { id: cmsBlockId, locale }, { 'x-locale': locale });
 
-        return (
-            <Suspense fallback={<div>Loading...</div>}>
-                <ProductDetailsDynamic {...data} id={id} locale={locale} routing={routing} hasPriority={hasPriority} />
-            </Suspense>
-        );
+        return <ProductDetailsDynamic {...data} id={id} locale={locale} routing={routing} hasPriority={hasPriority} />;
     } catch (error) {
         console.error('Error fetching ProductDetails block', error);
         return null;

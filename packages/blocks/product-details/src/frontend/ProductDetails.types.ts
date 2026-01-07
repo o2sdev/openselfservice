@@ -7,7 +7,6 @@ export interface ProductDetailsProps {
     cmsBlockId?: string;
     locale: string;
     routing: ReturnType<typeof defineRouting>;
-    includePopularOffers?: boolean;
     hasPriority?: boolean;
 }
 
@@ -18,6 +17,5 @@ export type ProductDetailsRendererProps = {
     cmsBlockId?: string;
     routing: ReturnType<typeof defineRouting>;
     locale?: string;
-    includePopularOffers?: boolean;
     hasPriority?: boolean;
 };
