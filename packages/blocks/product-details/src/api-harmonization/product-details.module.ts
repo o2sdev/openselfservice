@@ -1,5 +1,5 @@
 import { DynamicModule, Module } from '@nestjs/common';
-import { Products } from '@o2s/configs.integrations';
+import { CMS, Products } from '@o2s/configs.integrations';
 
 import * as Framework from '@o2s/framework/modules';
 
@@ -13,6 +13,10 @@ export class ProductDetailsBlockModule {
             module: ProductDetailsBlockModule,
             providers: [
                 ProductDetailsService,
+                {
+                    provide: CMS.Service,
+                    useExisting: Framework.CMS.Service,
+                },
                 {
                     provide: Products.Service,
                     useExisting: Framework.Products.Service,
