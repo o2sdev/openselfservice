@@ -1,6 +1,6 @@
 import { defineRouting } from 'next-intl/routing';
 
-import { Model } from '../api-harmonization/document-list.client';
+import type { Model } from '../api-harmonization/document-list.client';
 
 export interface DocumentListProps {
     id: string;

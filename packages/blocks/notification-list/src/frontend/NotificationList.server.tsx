@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import type { Model } from '../api-harmonization/notification-list.client';
 import { sdk } from '../sdk';
 
 import { NotificationListProps } from './NotificationList.types';
@@ -16,26 +17,27 @@ export const NotificationListServer: React.FC<NotificationListProps> = async ({
     routing,
     hasPriority,
 }) => {
+    let data: Model.NotificationListBlock;
     try {
-        const data = await sdk.blocks.getNotificationList(
+        data = await sdk.blocks.getNotificationList(
             {
                 id,
             },
             { 'x-locale': locale },
             accessToken,
         );
-
-        return (
-            <NotificationListDynamic
-                {...data}
-                id={id}
-                accessToken={accessToken}
-                locale={locale}
-                routing={routing}
-                hasPriority={hasPriority}
-            />
-        );
     } catch (_error) {
         return null;
     }
+
+    return (
+        <NotificationListDynamic
+            {...data}
+            id={id}
+            accessToken={accessToken}
+            locale={locale}
+            routing={routing}
+            hasPriority={hasPriority}
+        />
+    );
 };

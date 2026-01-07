@@ -1,6 +1,6 @@
 import { defineRouting } from 'next-intl/routing';
 
-import { Model } from '../api-harmonization/ticket-list.client';
+import type { Model } from '../api-harmonization/ticket-list.client';
 
 export interface TicketListProps {
     id: string;

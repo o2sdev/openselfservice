@@ -1,6 +1,6 @@
 import { defineRouting } from 'next-intl/routing';
 
-import { Model } from '../api-harmonization/notification-summary.client';
+import type { Model } from '../api-harmonization/notification-summary.client';
 
 export interface NotificationSummaryProps {
     id: string;

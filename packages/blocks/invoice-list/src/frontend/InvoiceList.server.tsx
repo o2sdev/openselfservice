@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import type { Model } from '../api-harmonization/invoice-list.client';
 import { sdk } from '../sdk';
 
 import { InvoiceListProps } from './InvoiceList.types';
@@ -16,26 +17,27 @@ export const InvoiceListServer: React.FC<InvoiceListProps> = async ({
     routing,
     hasPriority,
 }) => {
+    let data: Model.InvoiceListBlock;
     try {
-        const data = await sdk.blocks.getInvoiceList(
+        data = await sdk.blocks.getInvoiceList(
             {
                 id,
             },
             { 'x-locale': locale },
             accessToken,
         );
-
-        return (
-            <InvoiceListDynamic
-                {...data}
-                id={id}
-                accessToken={accessToken}
-                locale={locale}
-                routing={routing}
-                hasPriority={hasPriority}
-            />
-        );
     } catch (_error) {
         return null;
     }
+
+    return (
+        <InvoiceListDynamic
+            {...data}
+            id={id}
+            accessToken={accessToken}
+            locale={locale}
+            routing={routing}
+            hasPriority={hasPriority}
+        />
+    );
 };

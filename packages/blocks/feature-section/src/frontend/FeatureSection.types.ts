@@ -1,6 +1,6 @@
 import { defineRouting } from 'next-intl/routing';
 
-import { Model } from '../api-harmonization/feature-section.client';
+import type { Model } from '../api-harmonization/feature-section.client';
 
 export interface FeatureSectionProps {
     id: string;

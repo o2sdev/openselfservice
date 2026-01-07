@@ -4,7 +4,6 @@ import React, { type ReactNode } from 'react';
 import { translate } from '@docusaurus/Translate';
 import { useBlogPost } from '@docusaurus/plugin-content-blog/client';
 
-import type { Props } from '@theme/BlogPostItem/Header/Info';
 import TagsListInline from '@theme/TagsListInline';
 
 import styles from './styles.module.css';

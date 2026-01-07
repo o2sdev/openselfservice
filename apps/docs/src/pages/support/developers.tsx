@@ -1,7 +1,5 @@
 import React, { ReactNode } from 'react';
 
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-
 import Icon_Discord2 from '@site/src/assets/icons/Discord2.svg';
 import Icon_FolderOpenDot from '@site/src/assets/icons/FolderOpenDot.svg';
 import Icon_Github2 from '@site/src/assets/icons/Github2.svg';
@@ -88,8 +86,6 @@ const offer: Array<BenefitCardProps> = [
 ];
 
 export default function SupportStandard(): ReactNode {
-    const { siteConfig } = useDocusaurusContext();
-
     return (
         <div className="dxp-page">
             <Layout title="Support">

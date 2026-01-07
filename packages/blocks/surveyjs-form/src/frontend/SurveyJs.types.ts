@@ -1,6 +1,6 @@
 import { defineRouting } from 'next-intl/routing';
 
-import { Model } from '../api-harmonization/surveyjs.client';
+import type { Model } from '../api-harmonization/surveyjs.client';
 
 export interface SurveyJsFormProps {
     id: string;

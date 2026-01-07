@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import type { Model } from '../api-harmonization/featured-service-list.client';
 import { sdk } from '../sdk';
 
 import { FeaturedServiceListProps } from './FeaturedServiceList.types';
@@ -16,26 +17,27 @@ export const FeaturedServiceList: React.FC<FeaturedServiceListProps> = async ({
     routing,
     hasPriority,
 }) => {
+    let data: Model.FeaturedServiceListBlock;
     try {
-        const data = await sdk.blocks.getFeaturedServiceList(
+        data = await sdk.blocks.getFeaturedServiceList(
             {
                 id,
             },
             { 'x-locale': locale },
             accessToken,
         );
-
-        return (
-            <FeaturedServiceListDynamic
-                {...data}
-                id={id}
-                accessToken={accessToken}
-                locale={locale}
-                routing={routing}
-                hasPriority={hasPriority}
-            />
-        );
     } catch (_error) {
         return null;
     }
+
+    return (
+        <FeaturedServiceListDynamic
+            {...data}
+            id={id}
+            accessToken={accessToken}
+            locale={locale}
+            routing={routing}
+            hasPriority={hasPriority}
+        />
+    );
 };

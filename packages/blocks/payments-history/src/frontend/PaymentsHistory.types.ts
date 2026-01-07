@@ -1,4 +1,4 @@
-import { Model } from '../api-harmonization/payments-history.client';
+import type { Model } from '../api-harmonization/payments-history.client';
 
 export interface PaymentsHistoryProps {
     id: string;

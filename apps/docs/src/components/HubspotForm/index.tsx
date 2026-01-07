@@ -222,7 +222,7 @@ const HubspotForm: React.FC<HubspotFormProps> = ({
                 url.searchParams.append('success', 'false');
                 window.history.replaceState(null, null, url);
             }
-        } catch (error) {
+        } catch (_error) {
             setStatus({ type: 'error', message: 'An unexpected error occurred. Please try again later.' });
             setIsSubmitting(false);
 

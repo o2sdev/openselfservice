@@ -32,7 +32,7 @@ export default function HomepageJoinTheWaitlistSection(): ReactNode {
                 <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm pt-16 md:pt-40">
                     <div className="text-left flex items-center gap-2">
                         Made by{' '}
-                        <a href="https://hycom.digital" target="_blank" aria-label="Hycom">
+                        <a href="https://hycom.digital" target="_blank" aria-label="Hycom" rel="noreferrer">
                             <img src="/img/logos/hycom.svg" alt="hycom logo" />
                         </a>
                     </div>
@@ -42,6 +42,7 @@ export default function HomepageJoinTheWaitlistSection(): ReactNode {
                             className="text-white! underline"
                             href="https://hycom.digital/privacy-policy"
                             target="_blank"
+                            rel="noreferrer"
                         >
                             Privacy Policy
                         </a>{' '}

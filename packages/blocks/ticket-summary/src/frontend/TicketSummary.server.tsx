@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import type { Model } from '../api-harmonization/ticket-summary.client';
 import { sdk } from '../sdk';
 
 import { TicketSummaryProps } from './TicketSummary.types';
@@ -10,18 +11,19 @@ export const TicketSummaryDynamic = dynamic(() =>
 );
 
 export const TicketSummary: React.FC<TicketSummaryProps> = async ({ id, accessToken, locale, routing }) => {
+    let data: Model.TicketSummaryBlock;
     try {
-        const data = await sdk.blocks.getTicketSummary(
+        data = await sdk.blocks.getTicketSummary(
             {
                 id,
             },
             { 'x-locale': locale },
             accessToken,
         );
-
-        return <TicketSummaryDynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />;
     } catch (error) {
         console.error('Error fetching TicketSummary block', error);
         return null;
     }
+
+    return <TicketSummaryDynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />;
 };
