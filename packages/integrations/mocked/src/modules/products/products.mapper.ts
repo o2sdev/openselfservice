@@ -389,7 +389,6 @@ const MOCK_PRODUCT_12: Products.Model.Product = {
         { label: 'Certification', value: 'CE, ISO 9001' },
     ],
     location: 'Chicago, IL',
-    offerNumber: 'OF-2024-XL2000-001',
 };
 
 const MOCK_PRODUCTS = [

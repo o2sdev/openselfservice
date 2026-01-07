@@ -109,15 +109,15 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                         </div>
                     )}
 
-                    {(product.offerNumber || product.location) && (
+                    {(product.sku || product.location) && (
                         <>
                             <Separator />
                             <div className="flex items-center gap-6 flex-wrap">
-                                {product.offerNumber && (
+                                {product.sku && (
                                     <div className="flex items-center gap-2">
                                         <DynamicIcon name="FileText" size={20} className="text-muted-foreground" />
                                         <Typography>
-                                            {labels.offerLabel}: {product.offerNumber}
+                                            {labels.offerLabel}: {product.sku}
                                         </Typography>
                                     </div>
                                 )}

@@ -37,7 +37,6 @@ export class Product {
     keySpecs?: KeySpecItem[];
     detailedSpecs?: DetailedSpec[];
     location?: string;
-    offerNumber?: string;
 }
 
 export type Products = Pagination.Paginated<Product>;
