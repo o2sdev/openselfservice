@@ -30,7 +30,7 @@
         "@types/eslint": "^9.6.1",
         "@types/node": "^24.10.4",
         "@types/throttle-debounce": "^5.0.2",
-        "eslint": "^9.39.1",
+        "eslint": "^9.39.2",
         "formik": "^2.4.9",
         "prettier": "^3.7.4",
         "sass": "^1.94.2",
