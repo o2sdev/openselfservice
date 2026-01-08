@@ -16,7 +16,7 @@ const MOCK_PRODUCT_1: Products.Model.Product = {
         value: 100,
         currency: 'USD',
     },
-    link: 'https://example.com/products/te-70-atc-avr',
+    link: '/products/PRD-004',
     type: 'PHYSICAL',
     category: 'TOOLS',
     tags: [
@@ -43,7 +43,7 @@ const MOCK_PRODUCT_2: Products.Model.Product = {
         value: 199.99,
         currency: 'USD',
     },
-    link: 'https://example.com/products/ag-125-a22',
+    link: '/products/PRD-005',
     type: 'PHYSICAL',
     category: 'TOOLS',
     tags: [
@@ -74,7 +74,7 @@ const MOCK_PRODUCT_3: Products.Model.Product = {
         value: 100,
         currency: 'USD',
     },
-    link: 'https://example.com/products/pd-s',
+    link: '/products/PRD-006',
     type: 'PHYSICAL',
     category: 'MEASUREMENT',
     tags: [
@@ -101,7 +101,7 @@ const MOCK_PRODUCT_4: Products.Model.Product = {
         value: 100,
         currency: 'USD',
     },
-    link: 'https://example.com/products/sfc-22-a',
+    link: '/products/PRD-007',
     type: 'PHYSICAL',
     category: 'TOOLS',
     tags: [
@@ -128,7 +128,7 @@ const MOCK_PRODUCT_5: Products.Model.Product = {
         value: 39.99,
         currency: 'USD',
     },
-    link: 'https://example.com/products/profis-engineering',
+    link: '/products/PRD-008',
     type: 'VIRTUAL',
     category: 'SOFTWARE',
     tags: [
@@ -157,7 +157,7 @@ const MOCK_PRODUCT_6: Products.Model.Product = {
         value: 79.83,
         currency: 'USD',
     },
-    link: 'https://example.com/services/rentpro-industrial',
+    link: '/products/PRD-009',
     type: 'VIRTUAL',
     category: 'RENTAL',
     tags: [
@@ -186,7 +186,7 @@ const MOCK_PRODUCT_7: Products.Model.Product = {
         value: 19.99,
         currency: 'USD',
     },
-    link: 'https://example.com/services/training',
+    link: '/products/PRD-010',
     type: 'VIRTUAL',
     category: 'TRAINING',
     tags: [
@@ -218,7 +218,7 @@ const MOCK_PRODUCT_8: Products.Model.Product = {
         value: 79.83,
         currency: 'EUR',
     },
-    link: 'https://example.com/services/powercharge-solutions',
+    link: '/products/PRD-011',
     type: 'VIRTUAL',
     category: 'MAINTENANCE',
     tags: [
@@ -251,7 +251,7 @@ const MOCK_PRODUCT_9: Products.Model.Product = {
         value: 10,
         currency: 'USD',
     },
-    link: 'https://example.com/services/weldguard-safety',
+    link: '/products/PRD-012',
     type: 'VIRTUAL',
     category: 'SAFETY',
     tags: [
@@ -280,7 +280,7 @@ const MOCK_PRODUCT_10: Products.Model.Product = {
         value: 19.99,
         currency: 'USD',
     },
-    link: 'https://example.com/services/maxflow-air-systems',
+    link: '/products/PRD-013',
     type: 'VIRTUAL',
     category: 'MAINTENANCE',
     tags: [
@@ -308,7 +308,7 @@ const MOCK_PRODUCT_11: Products.Model.Product = {
         value: 19.99,
         currency: 'EUR',
     },
-    link: 'https://example.com/services/rapidfix-repair',
+    link: '/products/PRD-014',
     type: 'VIRTUAL',
     category: 'MAINTENANCE',
     tags: [
@@ -328,26 +328,26 @@ const MOCK_PRODUCT_12: Products.Model.Product = {
     shortDescription: 'State-of-the-art industrial machine with advanced automation and energy-saving technology',
     subtitle: 'Industrial Equipment • Manufacturing Solutions',
     image: {
-        url: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1200',
+        url: 'https://picsum.photos/1200/800',
         width: 1200,
         height: 800,
         alt: 'Premium Industrial Machine XL-2000',
     },
     images: [
         {
-            url: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1200',
+            url: 'https://picsum.photos/1200/800?random=1',
             alt: 'Industrial Machine Front View',
             width: 1200,
             height: 800,
         },
         {
-            url: 'https://images.unsplash.com/photo-1565043666747-69f6646db940?w=1200',
+            url: 'https://picsum.photos/1200/800?random=2',
             alt: 'Industrial Machine Side View',
             width: 1200,
             height: 800,
         },
         {
-            url: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=1200',
+            url: 'https://picsum.photos/1200/800?random=3',
             alt: 'Industrial Machine Control Panel',
             width: 1200,
             height: 800,
@@ -357,7 +357,7 @@ const MOCK_PRODUCT_12: Products.Model.Product = {
         value: 125000,
         currency: 'USD',
     },
-    link: 'https://example.com/products/xl-2000',
+    link: '/products/PRD-015',
     type: 'PHYSICAL',
     category: 'TOOLS',
     tags: [

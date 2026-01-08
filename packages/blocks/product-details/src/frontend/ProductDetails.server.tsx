@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import React, { Suspense } from 'react';
+import React from 'react';
 
 import { sdk } from '../sdk';
 
@@ -11,15 +11,24 @@ export const ProductDetailsDynamic = dynamic(() =>
 
 export const ProductDetails: React.FC<ProductDetailsProps> = async ({
     id,
-    cmsBlockId = 'product-details-1',
+    productId,
     locale,
     routing,
     hasPriority,
 }) => {
     try {
-        const data = await sdk.blocks.getProductDetails({ id }, { id: cmsBlockId, locale }, { 'x-locale': locale });
+        const data = await sdk.blocks.getProductDetails({ id: productId }, { id, locale }, { 'x-locale': locale });
 
-        return <ProductDetailsDynamic {...data} id={id} locale={locale} routing={routing} hasPriority={hasPriority} />;
+        return (
+            <ProductDetailsDynamic
+                {...data}
+                id={id}
+                productId={productId}
+                locale={locale}
+                routing={routing}
+                hasPriority={hasPriority}
+            />
+        );
     } catch (error) {
         console.error('Error fetching ProductDetails block', error);
         return null;

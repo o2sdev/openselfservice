@@ -14,7 +14,8 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
     args: {
         __typename: 'ProductDetailsBlock',
-        id: 'PRD-015',
+        id: 'product-details-1',
+        productId: 'PRD-015',
         locale: 'en',
         routing: {
             locales: ['en', 'pl'],
@@ -36,26 +37,26 @@ export const Default: Story = {
                 'State-of-the-art industrial machine with advanced automation and energy-saving technology',
             subtitle: 'Industrial Equipment • Manufacturing Solutions',
             image: {
-                url: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1200',
+                url: 'https://picsum.photos/1200/800',
                 width: 1200,
                 height: 800,
                 alt: 'Premium Industrial Machine XL-2000',
             },
             images: [
                 {
-                    url: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1200',
+                    url: 'https://picsum.photos/1200/800?random=1',
                     alt: 'Industrial Machine Front View',
                     width: 1200,
                     height: 800,
                 },
                 {
-                    url: 'https://images.unsplash.com/photo-1565043666747-69f6646db940?w=1200',
+                    url: 'https://picsum.photos/1200/800?random=2',
                     alt: 'Industrial Machine Side View',
                     width: 1200,
                     height: 800,
                 },
                 {
-                    url: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=1200',
+                    url: 'https://picsum.photos/1200/800?random=3',
                     alt: 'Industrial Machine Control Panel',
                     width: 1200,
                     height: 800,
@@ -102,82 +103,6 @@ export const Default: Story = {
             ],
             location: 'Chicago, IL',
         },
-        popularOffers: [
-            {
-                id: 'PRD-005',
-                name: 'Cordless Angle Grinder',
-                description: 'Cordless angle grinder with 22V battery platform',
-                image: {
-                    url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-charger.jpg',
-                    alt: 'Cordless Angle Grinder',
-                    width: 640,
-                    height: 656,
-                },
-                price: {
-                    value: 199.99,
-                    currency: 'USD',
-                },
-                link: 'https://example.com/products/ag-125-a22',
-                badges: [
-                    { label: 'New', variant: 'secondary' },
-                    { label: 'Promo', variant: 'destructive' },
-                ],
-            },
-            {
-                id: 'PRD-006',
-                name: 'Laser Measurement',
-                description: 'Laser measurement device for distance measurements',
-                image: {
-                    url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
-                    alt: 'Laser Measurement',
-                    width: 640,
-                    height: 656,
-                },
-                price: {
-                    value: 100,
-                    currency: 'USD',
-                },
-                link: 'https://example.com/products/pd-s',
-                badges: [{ label: 'New', variant: 'secondary' }],
-            },
-            {
-                id: 'PRD-007',
-                name: 'Cordless Drill Driver',
-                description: 'Cordless drill driver with 22V battery platform',
-                image: {
-                    url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
-                    alt: 'Cordless Drill Driver',
-                    width: 640,
-                    height: 656,
-                },
-                price: {
-                    value: 100,
-                    currency: 'USD',
-                },
-                link: 'https://example.com/products/sfc-22-a',
-                badges: [{ label: 'New', variant: 'secondary' }],
-            },
-            {
-                id: 'PRD-008',
-                name: 'Professional Calibration',
-                description: 'Professional calibration service for industrial equipment',
-                image: {
-                    url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-charger.jpg',
-                    alt: 'Professional Calibration Service',
-                    width: 640,
-                    height: 656,
-                },
-                price: {
-                    value: 199.99,
-                    currency: 'USD',
-                },
-                link: 'https://example.com/products/ag-125-a22',
-                badges: [
-                    { label: 'New', variant: 'secondary' },
-                    { label: 'Promo', variant: 'destructive' },
-                ],
-            },
-        ],
         actionButton: {
             label: 'Request Quote',
             variant: 'default',
@@ -189,8 +114,6 @@ export const Default: Story = {
         labels: {
             specificationsTitle: 'Specifications',
             descriptionTitle: 'Description',
-            recommendedOffersTitle: 'You Might Also Like',
-            recommendedOffersDetailsLabel: 'Details',
             downloadLabel: 'Download Brochure',
             priceLabel: 'Price',
             offerLabel: 'Offer',

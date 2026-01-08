@@ -5,7 +5,6 @@ import React from 'react';
 
 import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
 import { Price } from '@o2s/ui/components/Price';
-import { ProductCarousel } from '@o2s/ui/components/ProductCarousel';
 import { ProductGallery } from '@o2s/ui/components/ProductGallery';
 import { RichText } from '@o2s/ui/components/RichText';
 
@@ -23,7 +22,7 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
     ...component
 }) => {
     const { Link: LinkComponent } = createNavigation(routing);
-    const { product, popularOffers, labels, actionButton } = component;
+    const { product, labels, actionButton } = component;
 
     const keySpecs = product.keySpecs ?? [];
 
@@ -197,19 +196,6 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                     </div>
                 </div>
             </div>
-
-            {popularOffers && popularOffers.length > 0 && (
-                <>
-                    <Separator className="my-4" />
-                    <ProductCarousel
-                        products={popularOffers}
-                        title={labels.recommendedOffersTitle}
-                        LinkComponent={LinkComponent}
-                        linkDetailsLabel={labels.recommendedOffersDetailsLabel}
-                        carouselConfig={{ loop: true }}
-                    />
-                </>
-            )}
 
             {actionButton && (
                 <>

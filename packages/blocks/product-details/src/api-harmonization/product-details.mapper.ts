@@ -4,7 +4,6 @@ import * as Model from './product-details.model';
 
 export const mapProductDetails = (
     product: Products.Model.Product,
-    popularOffers: Model.ProductSummary[] | undefined,
     cms: CMS.Model.ProductDetailsBlock.ProductDetailsBlock,
 ): Model.ProductDetailsBlock => {
     // Map Products.Model.Product to Model.Product
@@ -24,8 +23,6 @@ export const mapProductDetails = (
         actionButtonLabel: cms.labels.actionButtonLabel,
         specificationsTitle: cms.labels.specificationsTitle,
         descriptionTitle: cms.labels.descriptionTitle,
-        recommendedOffersTitle: cms.labels.recommendedOffersTitle,
-        recommendedOffersDetailsLabel: cms.labels.recommendedOffersDetailsLabel,
         downloadLabel: cms.labels.downloadLabel,
         priceLabel: cms.labels.priceLabel,
         offerLabel: cms.labels.offerLabel,
@@ -35,7 +32,6 @@ export const mapProductDetails = (
         __typename: 'ProductDetailsBlock',
         id: product.id,
         product: mappedProduct,
-        popularOffers,
         actionButton: labels.actionButtonLabel
             ? {
                   label: labels.actionButtonLabel,

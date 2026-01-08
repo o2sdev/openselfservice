@@ -14,16 +14,6 @@ export type Product = Products.Model.Product & {
         | (Products.Model.Product['image'] extends undefined ? never : [Products.Model.Product['image']]);
 };
 
-export type ProductSummary = {
-    id: string;
-    name: string;
-    description?: string;
-    image: Products.Model.Product['image'];
-    price: Products.Model.Product['price'];
-    link: string;
-    badges?: Badge[];
-};
-
 export type ActionButton = {
     label: string;
     onClick?: () => void;
@@ -35,8 +25,6 @@ export type ActionButton = {
 export type Labels = {
     actionButtonLabel?: string;
     downloadLabel?: string;
-    recommendedOffersTitle?: string;
-    recommendedOffersDetailsLabel?: string;
     specificationsTitle: string;
     descriptionTitle: string;
     priceLabel: string;
@@ -46,7 +34,6 @@ export type Labels = {
 export type ProductDetailsBlock = ApiModels.Block.Block & {
     __typename: 'ProductDetailsBlock';
     product: Product;
-    popularOffers?: ProductSummary[];
     actionButton?: ActionButton;
     labels: Labels;
 };

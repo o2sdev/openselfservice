@@ -45,4 +45,5 @@ export * as HeroSectionBlock from './models/blocks/hero-section.model';
 export * as MediaSectionBlock from './models/blocks/media-section.model';
 export * as PricingSectionBlock from './models/blocks/pricing-section.model';
 export * as ProductDetailsBlock from './models/blocks/product-details.model';
+export * as RecommendedProductsBlock from './models/blocks/recommended-products.model';
 // BLOCK IMPORT

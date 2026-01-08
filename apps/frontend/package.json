@@ -34,6 +34,7 @@
         "@o2s/blocks.product-details": "*",
         "@o2s/blocks.product-list": "*",
         "@o2s/blocks.quick-links": "*",
+        "@o2s/blocks.recommended-products": "*",
         "@o2s/blocks.service-details": "*",
         "@o2s/blocks.service-list": "*",
         "@o2s/blocks.surveyjs-form": "*",

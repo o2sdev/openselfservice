@@ -28,6 +28,7 @@ import { mapPaymentsSummaryBlock } from './mappers/blocks/cms.payments-summary.m
 import { mapProductDetailsBlock } from './mappers/blocks/cms.product-details.mapper';
 import { mapProductListBlock } from './mappers/blocks/cms.product-list.mapper';
 import { mapQuickLinksBlock } from './mappers/blocks/cms.quick-links.mapper';
+import { mapRecommendedProductsBlock } from './mappers/blocks/cms.recommended-products.mapper';
 import { mapResourceDetailsBlock } from './mappers/blocks/cms.resource-details.mapper';
 import { mapResourceListBlock } from './mappers/blocks/cms.resource-list.mapper';
 import { mapServiceDetailsBlock } from './mappers/blocks/cms.service-details.mapper';
@@ -564,5 +565,9 @@ export class CmsService implements CMS.Service {
 
     getProductDetailsBlock(options: CMS.Request.GetCmsEntryParams) {
         return of(mapProductDetailsBlock(options.locale));
+    }
+
+    getRecommendedProductsBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapRecommendedProductsBlock(options.locale));
     }
 }

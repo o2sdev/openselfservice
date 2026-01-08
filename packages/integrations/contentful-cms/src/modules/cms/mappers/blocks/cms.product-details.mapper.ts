@@ -9,8 +9,6 @@ export const mapProductDetailsBlock = (_locale: string): CMS.Model.ProductDetail
             actionButtonLabel: 'Request Quote',
             specificationsTitle: 'Specifications',
             descriptionTitle: 'Description',
-            recommendedOffersTitle: 'You Might Also Like',
-            recommendedOffersDetailsLabel: 'Details',
             downloadLabel: 'Download Brochure',
             priceLabel: 'Price',
             offerLabel: 'Offer',

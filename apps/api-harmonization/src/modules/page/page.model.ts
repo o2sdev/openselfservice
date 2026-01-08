@@ -19,6 +19,7 @@ import * as PaymentsSummary from '@o2s/blocks.payments-summary/api-harmonization
 import * as ProductDetails from '@o2s/blocks.product-details/api-harmonization';
 import * as ProductList from '@o2s/blocks.product-list/api-harmonization';
 import * as QuickLinks from '@o2s/blocks.quick-links/api-harmonization';
+import * as RecommendedProducts from '@o2s/blocks.recommended-products/api-harmonization';
 import * as ServiceDetails from '@o2s/blocks.service-details/api-harmonization';
 import * as ServiceList from '@o2s/blocks.service-list/api-harmonization';
 import * as Surveyjs from '@o2s/blocks.surveyjs-form/api-harmonization';
@@ -79,6 +80,7 @@ export class PageData {
 
 export type Blocks =
     // BLOCK REGISTER
+    | RecommendedProducts.Model.RecommendedProductsBlock['__typename']
     | ProductDetails.Model.ProductDetailsBlock['__typename']
     | ProductList.Model.ProductListBlock['__typename']
     | TicketSummary.Model.TicketSummaryBlock['__typename']

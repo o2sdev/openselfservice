@@ -4,22 +4,22 @@ import React, { Suspense } from 'react';
 import { Container } from '@o2s/ui/components/Container';
 import { Loading } from '@o2s/ui/components/Loading';
 
-import { ProductDetails } from './ProductDetails.server';
-import { ProductDetailsRendererProps } from './ProductDetails.types';
+import { RecommendedProducts } from './RecommendedProducts.server';
+import { RecommendedProductsRendererProps } from './RecommendedProducts.types';
 
-export const ProductDetailsRenderer: React.FC<ProductDetailsRendererProps> = ({
+export const RecommendedProductsRenderer: React.FC<RecommendedProductsRendererProps> = ({
     id,
     slug,
+    excludeProductId,
+    limit,
     routing,
     locale: propLocale,
-    hasPriority,
 }) => {
     const localeFromHook = useLocale();
     const locale = propLocale || localeFromHook;
 
-    if (!slug[1]) {
-        return null;
-    }
+    // Extract productId from slug if not provided explicitly
+    const productIdToExclude = excludeProductId || slug[1];
 
     return (
         <Suspense
@@ -33,7 +33,13 @@ export const ProductDetailsRenderer: React.FC<ProductDetailsRendererProps> = ({
                 </>
             }
         >
-            <ProductDetails id={id} productId={slug[1]} locale={locale} routing={routing} hasPriority={hasPriority} />
+            <RecommendedProducts
+                id={id}
+                excludeProductId={productIdToExclude}
+                limit={limit}
+                locale={locale}
+                routing={routing}
+            />
         </Suspense>
     );
 };

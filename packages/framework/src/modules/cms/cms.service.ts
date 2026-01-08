@@ -136,4 +136,8 @@ export abstract class CmsService {
     abstract getProductDetailsBlock(
         options: CMS.Request.GetCmsEntryParams,
     ): Observable<CMS.Model.ProductDetailsBlock.ProductDetailsBlock>;
+
+    abstract getRecommendedProductsBlock(
+        options: CMS.Request.GetCmsEntryParams,
+    ): Observable<CMS.Model.RecommendedProductsBlock.RecommendedProductsBlock>;
 }

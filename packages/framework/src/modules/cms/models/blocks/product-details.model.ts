@@ -3,8 +3,6 @@ import { Block } from '@/utils/models';
 export type Labels = {
     actionButtonLabel?: string;
     downloadLabel?: string;
-    recommendedOffersTitle?: string;
-    recommendedOffersDetailsLabel?: string;
     specificationsTitle: string;
     descriptionTitle: string;
     priceLabel: string;

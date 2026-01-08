@@ -4,7 +4,7 @@ import * as Client from '../api-harmonization/product-details.client';
 
 export interface ProductDetailsProps {
     id: string;
-    cmsBlockId?: string;
+    productId: string;
     locale: string;
     routing: ReturnType<typeof defineRouting>;
     hasPriority?: boolean;
@@ -12,10 +12,6 @@ export interface ProductDetailsProps {
 
 export type ProductDetailsPureProps = ProductDetailsProps & Client.Model.ProductDetailsBlock;
 
-export type ProductDetailsRendererProps = {
-    id: string;
-    cmsBlockId?: string;
-    routing: ReturnType<typeof defineRouting>;
-    locale?: string;
-    hasPriority?: boolean;
+export type ProductDetailsRendererProps = Omit<ProductDetailsProps, 'productId'> & {
+    slug: string[];
 };
