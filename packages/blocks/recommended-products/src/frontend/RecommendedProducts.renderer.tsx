@@ -9,7 +9,6 @@ import { RecommendedProductsRendererProps } from './RecommendedProducts.types';
 
 export const RecommendedProductsRenderer: React.FC<RecommendedProductsRendererProps> = ({
     id,
-    slug,
     excludeProductId,
     limit,
     routing,
@@ -17,9 +16,6 @@ export const RecommendedProductsRenderer: React.FC<RecommendedProductsRendererPr
 }) => {
     const localeFromHook = useLocale();
     const locale = propLocale || localeFromHook;
-
-    // Extract productId from slug if not provided explicitly
-    const productIdToExclude = excludeProductId || slug[1];
 
     return (
         <Suspense
@@ -35,7 +31,7 @@ export const RecommendedProductsRenderer: React.FC<RecommendedProductsRendererPr
         >
             <RecommendedProducts
                 id={id}
-                excludeProductId={productIdToExclude}
+                excludeProductId={excludeProductId}
                 limit={limit}
                 locale={locale}
                 routing={routing}
