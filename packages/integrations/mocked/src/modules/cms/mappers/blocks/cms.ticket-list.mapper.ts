@@ -121,14 +121,27 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
                 ],
             },
             {
-                __typename: 'FilterSelect',
+                __typename: 'FilterToggleGroup',
                 id: 'type',
                 label: 'Case type',
-                allowMultiple: false,
+                allowMultiple: true,
+                isLeading: false,
                 options: [
                     { label: 'Urgent', value: 'URGENT' },
                     { label: 'Standard', value: 'STANDARD' },
                     { label: 'Low Priority', value: 'LOW_PRIORITY' },
+                ],
+            },
+            {
+                __typename: 'FilterSelect',
+                id: 'priority',
+                label: 'Priority',
+                allowMultiple: false,
+                isLeading: false,
+                options: [
+                    { label: 'High', value: 'HIGH' },
+                    { label: 'Medium', value: 'MEDIUM' },
+                    { label: 'Low', value: 'LOW' },
                 ],
             },
             {
@@ -158,6 +171,9 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
         yesterday: 'Yesterday',
         showMore: 'Show more',
         clickToSelect: 'Click to select',
+        showMoreFilters: 'Show more filters',
+        hideMoreFilters: 'Hide more filters',
+        noActiveFilters: 'No active filters',
     },
     detailsUrl: '/cases/{id}',
 };
@@ -238,11 +254,23 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
         removeFilters: 'Filter entfernen ({active})',
         items: [
             {
+                __typename: 'FilterToggleGroup',
+                id: 'status',
+                label: 'Status',
+                allowMultiple: true,
+                isLeading: true,
+                options: [
+                    { label: 'Alle', value: 'ALL' },
+                    { label: 'In Bearbeitung', value: 'OPEN' },
+                    { label: 'Gelöst', value: 'CLOSED' },
+                    { label: 'Neue Antwort', value: 'IN_PROGRESS' },
+                ],
+            },
+            {
                 __typename: 'FilterSelect',
                 id: 'sort',
                 label: 'Sortieren nach',
                 allowMultiple: false,
-                isLeading: true,
                 options: [
                     { label: 'Thema aufsteigend', value: 'topic_ASC' },
                     { label: 'Thema absteigend', value: 'topic_DESC' },
@@ -255,23 +283,10 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
                 ],
             },
             {
-                __typename: 'FilterToggleGroup',
-                id: 'status',
-                label: 'Status',
-                allowMultiple: false,
-                isLeading: false,
-                options: [
-                    { label: 'Alle', value: 'ALL' },
-                    { label: 'In Bearbeitung', value: 'OPEN' },
-                    { label: 'Gelöst', value: 'CLOSED' },
-                    { label: 'Neue Antwort', value: 'IN_PROGRESS' },
-                ],
-            },
-            {
                 __typename: 'FilterSelect',
                 id: 'topic',
                 label: 'Thema',
-                allowMultiple: true,
+                allowMultiple: false,
                 isLeading: false,
                 options: [
                     { label: 'Alle', value: 'ALL' },
@@ -285,14 +300,27 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
                 ],
             },
             {
-                __typename: 'FilterSelect',
+                __typename: 'FilterToggleGroup',
                 id: 'type',
                 label: 'Falltyp',
-                allowMultiple: false,
+                allowMultiple: true,
+                isLeading: false,
                 options: [
                     { label: 'Dringend', value: 'URGENT' },
                     { label: 'Standard', value: 'STANDARD' },
                     { label: 'Niedrige Priorität', value: 'LOW_PRIORITY' },
+                ],
+            },
+            {
+                __typename: 'FilterSelect',
+                id: 'priority',
+                label: 'Priorität',
+                allowMultiple: false,
+                isLeading: false,
+                options: [
+                    { label: 'Hoch', value: 'HIGH' },
+                    { label: 'Mittel', value: 'MEDIUM' },
+                    { label: 'Niedrig', value: 'LOW' },
                 ],
             },
             {
@@ -322,6 +350,9 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
         yesterday: 'Gestern',
         showMore: 'Mehr anzeigen',
         clickToSelect: 'Klicken Sie, um auszuwählen',
+        showMoreFilters: 'Mehr Filter anzeigen',
+        hideMoreFilters: 'Weniger Filter anzeigen',
+        noActiveFilters: 'Keine aktiven Filter',
     },
     detailsUrl: '/faelle/{id}',
 };
@@ -404,6 +435,19 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
         removeFilters: 'Usuń filtry ({active})',
         items: [
             {
+                __typename: 'FilterToggleGroup',
+                id: 'status',
+                label: 'Status',
+                allowMultiple: true,
+                isLeading: true,
+                options: [
+                    { label: 'Wszystko', value: 'ALL' },
+                    { label: 'W rozpatrzeniu', value: 'OPEN' },
+                    { label: 'Rozwiązane', value: 'CLOSED' },
+                    { label: 'Nowa odpowiedź', value: 'IN_PROGRESS' },
+                ],
+            },
+            {
                 __typename: 'FilterSelect',
                 id: 'sort',
                 label: 'Sortuj według',
@@ -417,19 +461,6 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
                     { label: 'Status malejąco', value: 'status_DESC' },
                     { label: 'Aktualizacja rosnąco', value: 'updatedAt_ASC' },
                     { label: 'Aktualizacja malejąco', value: 'updatedAt_DESC' },
-                ],
-            },
-            {
-                __typename: 'FilterToggleGroup',
-                id: 'status',
-                label: 'Status',
-                allowMultiple: false,
-                isLeading: true,
-                options: [
-                    { label: 'Wszystko', value: 'ALL' },
-                    { label: 'W rozpatrzeniu', value: 'OPEN' },
-                    { label: 'Rozwiązane', value: 'CLOSED' },
-                    { label: 'Nowa odpowiedź', value: 'IN_PROGRESS' },
                 ],
             },
             {
@@ -450,14 +481,27 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
                 ],
             },
             {
-                __typename: 'FilterSelect',
+                __typename: 'FilterToggleGroup',
                 id: 'type',
                 label: 'Typ zgłoszenia',
-                allowMultiple: false,
+                allowMultiple: true,
+                isLeading: false,
                 options: [
                     { label: 'Pilne', value: 'URGENT' },
                     { label: 'Standardowe', value: 'STANDARD' },
                     { label: 'Niski priorytet', value: 'LOW_PRIORITY' },
+                ],
+            },
+            {
+                __typename: 'FilterSelect',
+                id: 'priority',
+                label: 'Priorytet',
+                allowMultiple: false,
+                isLeading: false,
+                options: [
+                    { label: 'Wysoki', value: 'HIGH' },
+                    { label: 'Średni', value: 'MEDIUM' },
+                    { label: 'Niski', value: 'LOW' },
                 ],
             },
             {
@@ -487,6 +531,9 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
         yesterday: 'Wczoraj',
         showMore: 'Pokaż więcej',
         clickToSelect: 'Kliknij, aby wybrać',
+        showMoreFilters: 'Pokaż więcej filtrów',
+        hideMoreFilters: 'Ukryj więcej filtrów',
+        noActiveFilters: 'Brak aktywnych filtrów',
     },
     detailsUrl: '/zgloszenia/{id}',
 };

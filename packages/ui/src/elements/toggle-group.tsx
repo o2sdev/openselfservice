@@ -4,6 +4,7 @@ import * as React from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
+import { Label } from '@o2s/ui/elements/label';
 import { toggleVariants } from '@o2s/ui/elements/toggle';
 
 const ToggleGroupContext = React.createContext<
@@ -19,7 +20,7 @@ const toggleGroupVariants = cva('flex items-center justify-center gap-1', {
         variant: {
             default: 'bg-transparent',
             outline: 'bg-transparent',
-            solid: 'rounded-sm bg-muted p-1 gap-0',
+            solid: 'rounded-md bg-muted/40 p-0.5 gap-0',
         },
     },
     defaultVariants: {
@@ -96,4 +97,28 @@ const ToggleGroupItem = React.forwardRef<React.ComponentRef<typeof ToggleGroupPr
 );
 ToggleGroupItem.displayName = 'ToggleGroupItem';
 
-export { ToggleGroup, ToggleGroupItem };
+type ToggleGroupWithLabelProps = ToggleGroupProps & {
+    label: string | React.ReactNode;
+    labelClassName?: string;
+    isLabelHidden?: boolean;
+};
+
+const ToggleGroupWithLabel = ({
+    className,
+    label,
+    labelClassName,
+    isLabelHidden,
+    children,
+    ...props
+}: ToggleGroupWithLabelProps) => {
+    return (
+        <div className="grid gap-2">
+            <Label className={cn(labelClassName, isLabelHidden && 'sr-only')}>{label}</Label>
+            <ToggleGroup {...props} className={className}>
+                {children}
+            </ToggleGroup>
+        </div>
+    );
+};
+
+export { ToggleGroup, ToggleGroupItem, ToggleGroupWithLabel };
