@@ -20,14 +20,12 @@ export class RecommendedProductsService {
         headers: Models.Headers.AppHeaders,
     ): Observable<Model.RecommendedProductsBlock> {
         const locale = headers['x-locale'] || 'en';
-        const limit = query.limit || 4;
 
         const cms = this.cmsService.getRecommendedProductsBlock({
             id: query.id,
             locale,
         });
         const products = this.productsService.getProductList({
-            limit,
             offset: 0,
             locale,
         });
@@ -42,7 +40,6 @@ export class RecommendedProductsService {
                         }
                         return product.image;
                     })
-                    .slice(0, limit)
                     .map((product: Products.Model.Product) => ({
                         id: product.id,
                         name: product.name,
