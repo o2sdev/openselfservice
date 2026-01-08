@@ -54,7 +54,7 @@
         "@types/fs-extra": "^11.0.4",
         "@types/prompts": "^2.4.9",
         "@types/unzipper": "^0.10.11",
-        "@vitejs/plugin-react": "^5.1.1",
+        "@vitejs/plugin-react": "^5.1.2",
         "@vitest/browser-playwright": "^4.0.14",
         "@vitest/coverage-v8": "^4.0.14",
         "dotenv": "^17.2.3",
