@@ -74,7 +74,7 @@
         "reflect-metadata": "^0.2.2",
         "rxjs": "^7.8.2",
         "string-template": "^1.0.0",
-        "winston": "^3.18.3",
+        "winston": "^3.19.0",
         "xmlbuilder2": "^4.0.3"
     },
     "devDependencies": {

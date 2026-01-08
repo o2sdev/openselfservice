@@ -28,7 +28,7 @@
         "logform": "2.7.0",
         "ofetch": "^1.5.1",
         "qs": "^6.14.1",
-        "winston": "^3.18.3"
+        "winston": "^3.19.0"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",
