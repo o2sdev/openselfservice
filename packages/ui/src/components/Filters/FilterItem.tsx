@@ -110,16 +110,7 @@ export const FilterItem = <T, S extends FormikValues>({
                         const currentValue =
                             !field.value && item.options.some((option) => option.value === 'ALL') ? 'ALL' : field.value;
 
-                        return isLeading ? (
-                            <ToggleGroup
-                                type="single"
-                                variant="solid"
-                                value={currentValue}
-                                onValueChange={handleValueChange}
-                            >
-                                {toggleGroupItems}
-                            </ToggleGroup>
-                        ) : (
+                        return (
                             <ToggleGroupWithLabel
                                 type="single"
                                 variant="solid"
