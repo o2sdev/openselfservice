@@ -4,6 +4,7 @@ import * as React from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
+import { Label } from '@o2s/ui/elements/label';
 import { toggleVariants } from '@o2s/ui/elements/toggle';
 
 const ToggleGroupContext = React.createContext<
@@ -14,18 +15,21 @@ const ToggleGroupContext = React.createContext<
     currentValue: undefined,
 });
 
-const toggleGroupVariants = cva('flex items-center justify-center gap-1', {
-    variants: {
-        variant: {
-            default: 'bg-transparent',
-            outline: 'bg-transparent',
-            solid: 'rounded-sm bg-muted p-1 gap-0',
+const toggleGroupVariants = cva(
+    'flex items-center justify-center gap-1 [&_[data-state=on]+[data-state=on]]:rounded-l-none [&_[data-state=on]:has(+[data-state=on])]:rounded-r-none',
+    {
+        variants: {
+            variant: {
+                default: 'bg-transparent',
+                outline: 'bg-transparent',
+                solid: 'rounded-md bg-muted/40 p-0.5 gap-0',
+            },
+        },
+        defaultVariants: {
+            variant: 'default',
         },
     },
-    defaultVariants: {
-        variant: 'default',
-    },
-});
+);
 
 type ToggleGroupProps = React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> &
     VariantProps<typeof toggleVariants> & { ref?: React.Ref<React.ComponentRef<typeof ToggleGroupPrimitive.Root>> };
@@ -96,4 +100,28 @@ const ToggleGroupItem = React.forwardRef<React.ComponentRef<typeof ToggleGroupPr
 );
 ToggleGroupItem.displayName = 'ToggleGroupItem';
 
-export { ToggleGroup, ToggleGroupItem };
+type ToggleGroupWithLabelProps = ToggleGroupProps & {
+    label: string | React.ReactNode;
+    labelClassName?: string;
+    isLabelHidden?: boolean;
+};
+
+const ToggleGroupWithLabel = ({
+    className,
+    label,
+    labelClassName,
+    isLabelHidden,
+    children,
+    ...props
+}: ToggleGroupWithLabelProps) => {
+    return (
+        <div className="grid gap-2">
+            <Label className={cn(labelClassName, isLabelHidden && 'sr-only')}>{label}</Label>
+            <ToggleGroup {...props} className={className}>
+                {children}
+            </ToggleGroup>
+        </div>
+    );
+};
+
+export { ToggleGroup, ToggleGroupItem, ToggleGroupWithLabel };

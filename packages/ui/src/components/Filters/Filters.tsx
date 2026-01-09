@@ -1,18 +1,28 @@
 import { Models } from '@o2s/framework/modules';
-import { Form, Formik, FormikValues } from 'formik';
+import { Form, Formik, FormikProps, FormikValues } from 'formik';
 import { ListFilter, X } from 'lucide-react';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import ScrollContainer from 'react-indiana-drag-scroll';
 import reactStringReplace from 'react-string-replace';
 
 import { cn } from '@o2s/ui/lib/utils';
 
+import { Badge } from '@o2s/ui/elements/badge';
 import { Button } from '@o2s/ui/elements/button';
+import { Separator } from '@o2s/ui/elements/separator';
 import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle } from '@o2s/ui/elements/sheet';
+import { Typography } from '@o2s/ui/elements/typography';
 
 import { FilterItem } from './FilterItem';
-import { FiltersProps } from './Filters.types';
+import { FilterLabels, FiltersProps } from './Filters.types';
 import { useFiltersContext } from './FiltersContext';
+
+const SUPPORTED_FILTER_TYPES = ['FilterToggleGroup', 'FilterSelect', 'FilterText'] as const;
+const SKIP_FILTER_KEYS = ['offset', 'limit', 'id', 'viewMode'] as const;
+
+const ANIMATION_BASE_DURATION_MS = 300;
+const ANIMATION_STAGGER_IN_MS = 50;
+const ANIMATION_STAGGER_OUT_MS = 30;
 
 function separateLeadingItem<T>(items: Models.Filters.FilterItem<T>[]) {
     let leadingItem: Models.Filters.FilterItem<T> | undefined;
@@ -29,6 +39,293 @@ function separateLeadingItem<T>(items: Models.Filters.FilterItem<T>[]) {
     return { leadingItem, filteredItems };
 }
 
+function separateLeadingItems<T>(items: Models.Filters.FilterItem<T>[]) {
+    const leadingItems: Models.Filters.FilterItem<T>[] = [];
+    const otherItems: Models.Filters.FilterItem<T>[] = [];
+
+    items.forEach((item) => {
+        if (!(SUPPORTED_FILTER_TYPES as readonly string[]).includes(item.__typename)) {
+            return;
+        }
+
+        if ('isLeading' in item && item.isLeading === true) {
+            leadingItems.push(item);
+        } else {
+            otherItems.push(item);
+        }
+    });
+
+    return { leadingItems, otherItems };
+}
+
+interface ActiveFilterBadge {
+    id: string;
+    label: string;
+    value: string | string[];
+    displayValue: string;
+}
+
+function arraysEqual<T>(a: T[], b: T[]): boolean {
+    if (a.length !== b.length) return false;
+    const sortedA = [...a].sort();
+    const sortedB = [...b].sort();
+    return sortedA.every((val, index) => val === sortedB[index]);
+}
+
+function getFilterResetValue<T>(filterItem: Models.Filters.FilterItem<T> | undefined): string | string[] {
+    if (!filterItem) return '';
+
+    switch (filterItem.__typename) {
+        case 'FilterToggleGroup':
+            return filterItem.allowMultiple ? [] : '';
+        case 'FilterSelect':
+        case 'FilterText':
+        default:
+            return '';
+    }
+}
+
+function getActiveFilterBadges<T, S extends FormikValues>(
+    values: S,
+    initialFilters: S,
+    items: Models.Filters.FilterItem<T>[],
+): ActiveFilterBadge[] {
+    const badges: ActiveFilterBadge[] = [];
+
+    for (const key in values) {
+        if (SKIP_FILTER_KEYS.includes(key as (typeof SKIP_FILTER_KEYS)[number])) {
+            continue;
+        }
+
+        const currentValue = values[key];
+        const initialValue = initialFilters[key];
+
+        if (currentValue === '' || currentValue === null || currentValue === undefined) {
+            continue;
+        }
+
+        if (Array.isArray(currentValue) && currentValue.length === 0) {
+            continue;
+        }
+
+        let hasChanged = false;
+        if (Array.isArray(currentValue) && Array.isArray(initialValue)) {
+            hasChanged = !arraysEqual(currentValue, initialValue);
+        } else {
+            hasChanged = currentValue !== initialValue;
+        }
+
+        if (hasChanged) {
+            const item = items.find((i) => String(i.id) === key);
+            if (!item) continue;
+
+            let displayValue = '';
+
+            if (item.__typename === 'FilterSelect' || item.__typename === 'FilterToggleGroup') {
+                if (Array.isArray(currentValue)) {
+                    const optionLabels = currentValue
+                        .map((val: string) => {
+                            const option = item.options.find((opt) => opt.value === val);
+                            return option ? option.label : val;
+                        })
+                        .filter(Boolean);
+                    displayValue = optionLabels.join(', ');
+                } else {
+                    const option = item.options.find((opt) => opt.value === String(currentValue));
+                    displayValue = option ? option.label : String(currentValue);
+                }
+            } else if (item.__typename === 'FilterText') {
+                displayValue = String(currentValue);
+            } else {
+                displayValue = String(currentValue);
+            }
+
+            const itemLabel = 'label' in item ? item.label : key;
+
+            badges.push({
+                id: key,
+                label: itemLabel,
+                value: currentValue,
+                displayValue,
+            });
+        }
+    }
+
+    return badges;
+}
+
+interface InlineFiltersContentProps<T, S extends FormikValues> {
+    submitForm: FormikProps<S>['submitForm'];
+    setFieldValue: FormikProps<S>['setFieldValue'];
+    values: FormikProps<S>['values'];
+    items: Models.Filters.FilterItem<T>[];
+    initialFilters: Record<string, unknown>;
+    labels?: FilterLabels;
+    isExpanded: boolean;
+    setIsExpanded: (value: boolean) => void;
+    onResetFilters: (e: React.MouseEvent) => void;
+}
+
+function InlineFiltersContent<T, S extends FormikValues>({
+    submitForm,
+    setFieldValue,
+    values,
+    items,
+    initialFilters,
+    labels,
+    isExpanded,
+    setIsExpanded,
+    onResetFilters,
+}: InlineFiltersContentProps<T, S>) {
+    const { leadingItems, otherItems } = useMemo(() => separateLeadingItems(items), [items]);
+    const [shouldRender, setShouldRender] = useState(isExpanded);
+    const [isAnimatingIn, setIsAnimatingIn] = useState(false);
+    const [isAnimatingOut, setIsAnimatingOut] = useState(false);
+    const prevExpandedRef = React.useRef(isExpanded);
+
+    React.useEffect(() => {
+        const prevExpanded = prevExpandedRef.current;
+        prevExpandedRef.current = isExpanded;
+
+        if (isExpanded === prevExpanded) return;
+
+        if (isExpanded) {
+            setIsAnimatingIn(true);
+            setShouldRender(true);
+            const animationDuration = ANIMATION_BASE_DURATION_MS + otherItems.length * ANIMATION_STAGGER_IN_MS;
+            const timer = setTimeout(() => setIsAnimatingIn(false), animationDuration);
+            return () => clearTimeout(timer);
+        }
+
+        setIsAnimatingOut(true);
+        const animationDuration = ANIMATION_BASE_DURATION_MS + otherItems.length * ANIMATION_STAGGER_OUT_MS;
+        const timer = setTimeout(() => {
+            setShouldRender(false);
+            setIsAnimatingOut(false);
+        }, animationDuration);
+        return () => clearTimeout(timer);
+    }, [isExpanded, otherItems.length]);
+
+    const activeFilterBadges = useMemo(
+        () => getActiveFilterBadges(values, initialFilters as S, items),
+        [values, initialFilters, items],
+    );
+
+    const handleRemoveFilter = async (filterId: string) => {
+        const filterItem = items.find((i) => String(i.id) === filterId);
+        const resetValue = initialFilters[filterId] ?? getFilterResetValue(filterItem);
+
+        await setFieldValue(filterId, resetValue);
+        await submitForm();
+    };
+
+    return (
+        <Form>
+            <div className="flex flex-col gap-4">
+                <div className="flex flex-wrap gap-4 items-end">
+                    {leadingItems.map((item) => (
+                        <div key={String(item.id)} className="flex-shrink-0 w-full md:w-auto overflow-hidden">
+                            <ScrollContainer className="scroll-container flex whitespace-nowrap w-full items-center gap-4">
+                                <FilterItem
+                                    item={item}
+                                    setFieldValue={setFieldValue}
+                                    submitForm={submitForm}
+                                    isLeading={true}
+                                    labels={labels}
+                                    isInlineVariant={true}
+                                />
+                            </ScrollContainer>
+                        </div>
+                    ))}
+                    {shouldRender &&
+                        otherItems.map((item, index) => (
+                            <div
+                                key={String(item.id)}
+                                className={cn(
+                                    'flex-shrink-0',
+                                    item.__typename === 'FilterSelect' && 'w-full sm:w-[250px]',
+                                    isAnimatingIn && 'animate-in fade-in-0 slide-in-from-top-2',
+                                    isAnimatingOut && 'animate-out fade-out-0 slide-out-to-top-2',
+                                )}
+                                style={{
+                                    animationDelay: isAnimatingIn
+                                        ? `${index * ANIMATION_STAGGER_IN_MS}ms`
+                                        : isAnimatingOut
+                                          ? `${(otherItems.length - 1 - index) * ANIMATION_STAGGER_OUT_MS}ms`
+                                          : undefined,
+                                    animationFillMode: isAnimatingIn
+                                        ? 'backwards'
+                                        : isAnimatingOut
+                                          ? 'forwards'
+                                          : undefined,
+                                }}
+                            >
+                                <FilterItem
+                                    item={item}
+                                    setFieldValue={setFieldValue}
+                                    submitForm={submitForm}
+                                    isLeading={false}
+                                    labels={labels}
+                                    isInlineVariant={true}
+                                />
+                            </div>
+                        ))}
+                    {otherItems.length > 0 && (
+                        <Button
+                            type="button"
+                            variant="link"
+                            className="flex-shrink-0"
+                            onClick={() => setIsExpanded(!isExpanded)}
+                        >
+                            {isExpanded
+                                ? labels?.hideMoreFilters || 'Hide more filters'
+                                : labels?.showMoreFilters || 'Show more filters'}
+                        </Button>
+                    )}
+                </div>
+
+                {activeFilterBadges.length > 0 && (
+                    <>
+                        <Separator />
+                        <div className="flex flex-wrap gap-2 items-center">
+                            {activeFilterBadges.map((badge) => (
+                                <Badge
+                                    key={badge.id}
+                                    variant="outline"
+                                    className="flex items-center gap-2 pr-0.5 py-0.5 font-normal"
+                                >
+                                    <Typography variant="small" className="truncate max-w-[200px]">
+                                        {badge.label}: {badge.displayValue}
+                                    </Typography>
+                                    <Button
+                                        type="button"
+                                        variant="ghost"
+                                        size="icon"
+                                        className="text-muted-foreground rounded-full hover:bg-muted/80 !w-6 !h-6 transition-colors"
+                                        onClick={() => handleRemoveFilter(badge.id)}
+                                        aria-label={
+                                            labels?.removeFilterAriaLabel
+                                                ? `${labels.removeFilterAriaLabel} ${badge.label}`
+                                                : `Remove ${badge.label} filter`
+                                        }
+                                    >
+                                        <X className="h-4 w-4" />
+                                    </Button>
+                                </Badge>
+                            ))}
+                            {activeFilterBadges.length > 1 && (
+                                <Button type="button" variant="link" onClick={onResetFilters}>
+                                    {labels?.clearAllFilters || 'Clear all filters'}
+                                </Button>
+                            )}
+                        </div>
+                    </>
+                )}
+            </div>
+        </Form>
+    );
+}
+
 export const Filters = <T, S extends FormikValues>({
     filters,
     initialValues,
@@ -39,6 +336,7 @@ export const Filters = <T, S extends FormikValues>({
     labels,
 }: Readonly<FiltersProps<T, S>>) => {
     const [filtersOpen, setFiltersOpen] = useState(false);
+    const [isInlineExpanded, setIsInlineExpanded] = useState(false);
     const { activeFilters, countActiveFilters, initialFilters } = useFiltersContext();
 
     if (!filters) {
@@ -57,7 +355,6 @@ export const Filters = <T, S extends FormikValues>({
         onReset();
     };
 
-    // Inline variant: render filters directly without drawer
     if (variant === 'inline') {
         return (
             <div className="w-full">
@@ -69,45 +366,24 @@ export const Filters = <T, S extends FormikValues>({
                         onSubmit(values);
                     }}
                 >
-                    {({ submitForm, setFieldValue }) => (
-                        <Form>
-                            <div className="flex flex-col gap-4">
-                                {/* Filters container - grid layout for desktop, full-width rows for mobile */}
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                                    {items.map((item) => (
-                                        <div key={String(item.id)} className="w-full">
-                                            <FilterItem
-                                                item={item}
-                                                setFieldValue={setFieldValue}
-                                                submitForm={submitForm}
-                                                labels={labels}
-                                            />
-                                        </div>
-                                    ))}
-                                </div>
-                                {/* Action buttons - right-aligned on desktop, stretched on mobile */}
-                                <div className="flex flex-col sm:flex-row gap-4 sm:justify-end">
-                                    <Button
-                                        type="button"
-                                        variant="secondary"
-                                        onClick={handleReset}
-                                        className="w-full sm:w-auto sm:max-w-[50%]"
-                                    >
-                                        {reset}
-                                    </Button>
-                                    <Button type="submit" className="w-full sm:w-auto sm:max-w-[50%]">
-                                        {submit}
-                                    </Button>
-                                </div>
-                            </div>
-                        </Form>
+                    {({ submitForm, setFieldValue, values }) => (
+                        <InlineFiltersContent<T, S>
+                            submitForm={submitForm}
+                            setFieldValue={setFieldValue}
+                            values={values}
+                            items={items as Models.Filters.FilterItem<T>[]}
+                            initialFilters={initialFilters}
+                            labels={labels}
+                            isExpanded={isInlineExpanded}
+                            setIsExpanded={setIsInlineExpanded}
+                            onResetFilters={handleReset}
+                        />
                     )}
                 </Formik>
             </div>
         );
     }
 
-    // Drawer variant: original implementation
     return (
         <div className={cn(leadingItem ? 'w-full' : 'w-full sm:w-auto')}>
             <Formik<S>
@@ -131,6 +407,7 @@ export const Filters = <T, S extends FormikValues>({
                                             setFieldValue={setFieldValue}
                                             isLeading={true}
                                             labels={labels}
+                                            isInlineVariant={false}
                                         />
                                     </ScrollContainer>
                                 </div>

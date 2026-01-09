@@ -9,7 +9,9 @@ export class TicketListBlock extends Block.Block<Meta> {
     table!: DataTable.DataTable<Ticket>;
     fieldMapping!: Mapping.Mapping<Ticket>;
     pagination?: Pagination.Pagination;
-    filters?: Filters.Filters<Ticket & { sort?: string; viewMode?: 'list' | 'grid' }>;
+    filters?: Filters.Filters<
+        Ticket & { sort?: string; viewMode?: 'list' | 'grid'; search?: string; priority?: string }
+    >;
     noResults!: {
         title: string;
         description?: string;
@@ -19,6 +21,9 @@ export class TicketListBlock extends Block.Block<Meta> {
         yesterday: string;
         showMore: string;
         clickToSelect: string;
+        showMoreFilters?: string;
+        hideMoreFilters?: string;
+        noActiveFilters?: string;
     };
     detailsUrl!: string;
     forms?: Link[];
@@ -37,8 +42,6 @@ export class Meta {
     subtitle!: string;
     table!: DataTable.DataTableMeta;
     fieldMapping!: Mapping.MappingMeta<Ticket>;
-    // pagination!: string;
-    // filters!: string;
     noResults!: {
         __id: string;
         title: string;
@@ -50,7 +53,9 @@ export class Meta {
         yesterday: string;
         showMore: string;
         clickToSelect: string;
+        showMoreFilters?: string;
+        hideMoreFilters?: string;
+        noActiveFilters?: string;
     };
     detailsUrl!: string;
-    // forms!: string;
 }
