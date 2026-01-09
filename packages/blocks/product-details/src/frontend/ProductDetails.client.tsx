@@ -45,13 +45,13 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                         )}
 
                         {product.badges && product.badges.length > 0 && (
-                            <div className="flex flex-wrap gap-2">
+                            <ul className="flex flex-wrap gap-2 list-none">
                                 {product.badges.map((badge, index) => (
-                                    <Badge key={index} variant={badge.variant}>
-                                        {badge.label}
-                                    </Badge>
+                                    <li key={index}>
+                                        <Badge variant={badge.variant}>{badge.label}</Badge>
+                                    </li>
                                 ))}
-                            </div>
+                            </ul>
                         )}
                     </div>
 
@@ -59,9 +59,9 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
 
                     {keySpecs.length > 0 && (
                         <>
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <ul className="grid grid-cols-2 md:grid-cols-4 gap-4 list-none">
                                 {keySpecs.map((spec, index) => (
-                                    <div
+                                    <li
                                         key={index}
                                         className="flex flex-col items-center gap-2 p-4 bg-muted/50 rounded-lg"
                                     >
@@ -71,9 +71,9 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                                         {spec.value && (
                                             <Typography className="text-center font-medium">{spec.value}</Typography>
                                         )}
-                                    </div>
+                                    </li>
                                 ))}
-                            </div>
+                            </ul>
                             <Separator />
                         </>
                     )}
@@ -94,17 +94,17 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                             <Typography variant="h2" asChild>
                                 <h2>{labels.specificationsTitle}</h2>
                             </Typography>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-none">
                                 {product.detailedSpecs.map((spec, index) => (
-                                    <div
+                                    <li
                                         key={index}
                                         className="flex justify-between items-center py-3 px-4 bg-muted/30 rounded-md"
                                     >
                                         <Typography className="text-muted-foreground">{spec.label}</Typography>
                                         <Typography className="font-medium">{spec.value}</Typography>
-                                    </div>
+                                    </li>
                                 ))}
-                            </div>
+                            </ul>
                         </div>
                     )}
 
@@ -143,13 +143,13 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                         </div>
 
                         {product.badges && product.badges.length > 0 && (
-                            <div className="hidden lg:flex flex-wrap gap-2">
+                            <ul className="hidden lg:flex flex-wrap gap-2 list-none">
                                 {product.badges.map((badge, index) => (
-                                    <Badge key={index} variant={badge.variant}>
-                                        {badge.label}
-                                    </Badge>
+                                    <li key={index}>
+                                        <Badge variant={badge.variant}>{badge.label}</Badge>
+                                    </li>
                                 ))}
-                            </div>
+                            </ul>
                         )}
 
                         <div className="flex flex-col gap-1 items-end">
