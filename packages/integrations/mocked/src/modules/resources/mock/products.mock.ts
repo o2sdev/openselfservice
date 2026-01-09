@@ -32,7 +32,7 @@ export const MOCK_PRODUCTS: Products.Model.Product[] = [
             value: 100,
             currency: 'USD',
         },
-        link: 'https://example.com/products/te-70-atc-avr',
+        link: '/products/PRD-004',
         type: 'PHYSICAL',
         category: 'TOOLS',
         tags: [
@@ -67,7 +67,7 @@ export const MOCK_PRODUCTS: Products.Model.Product[] = [
             value: 199.99,
             currency: 'USD',
         },
-        link: 'https://example.com/products/ag-125-a22',
+        link: '/products/PRD-005',
         type: 'PHYSICAL',
         category: 'TOOLS',
         tags: [
@@ -112,7 +112,7 @@ export const MOCK_PRODUCTS: Products.Model.Product[] = [
             value: 100,
             currency: 'USD',
         },
-        link: 'https://example.com/products/pd-s',
+        link: '/products/PRD-006',
         type: 'PHYSICAL',
         category: 'MEASUREMENT',
         tags: [
@@ -153,7 +153,7 @@ export const MOCK_PRODUCTS: Products.Model.Product[] = [
             value: 100,
             currency: 'USD',
         },
-        link: 'https://example.com/products/sfc-22-a',
+        link: '/products/PRD-007',
         type: 'PHYSICAL',
         category: 'TOOLS',
         tags: [
@@ -179,7 +179,7 @@ export const MOCK_PRODUCTS: Products.Model.Product[] = [
             value: 39.99,
             currency: 'USD',
         },
-        link: 'https://example.com/products/profis-engineering',
+        link: '/products/PRD-008',
         type: 'VIRTUAL',
         category: 'SOFTWARE',
         tags: [
@@ -207,7 +207,7 @@ export const MOCK_PRODUCTS: Products.Model.Product[] = [
             value: 79.83,
             currency: 'USD',
         },
-        link: 'https://example.com/services/rentpro-industrial',
+        link: '/products/PRD-009',
         type: 'VIRTUAL',
         category: 'RENTAL',
         tags: [
@@ -235,7 +235,7 @@ export const MOCK_PRODUCTS: Products.Model.Product[] = [
             value: 19.99,
             currency: 'USD',
         },
-        link: 'https://example.com/services/training',
+        link: '/products/PRD-010',
         type: 'VIRTUAL',
         category: 'TRAINING',
         tags: [
@@ -266,7 +266,7 @@ export const MOCK_PRODUCTS: Products.Model.Product[] = [
             value: 79.83,
             currency: 'EUR',
         },
-        link: 'https://example.com/services/powercharge-solutions',
+        link: '/products/PRD-011',
         type: 'VIRTUAL',
         category: 'MAINTENANCE',
         tags: [
@@ -298,7 +298,7 @@ export const MOCK_PRODUCTS: Products.Model.Product[] = [
             value: 10,
             currency: 'USD',
         },
-        link: 'https://example.com/services/weldguard-safety',
+        link: '/products/PRD-012',
         type: 'VIRTUAL',
         category: 'SAFETY',
         tags: [
@@ -326,7 +326,7 @@ export const MOCK_PRODUCTS: Products.Model.Product[] = [
             value: 19.99,
             currency: 'USD',
         },
-        link: 'https://example.com/services/maxflow-air-systems',
+        link: '/products/PRD-013',
         type: 'VIRTUAL',
         category: 'MAINTENANCE',
         tags: [
@@ -353,7 +353,7 @@ export const MOCK_PRODUCTS: Products.Model.Product[] = [
             value: 19.99,
             currency: 'EUR',
         },
-        link: 'https://example.com/services/rapidfix-repair',
+        link: '/products/PRD-014',
         type: 'VIRTUAL',
         category: 'MAINTENANCE',
         tags: [

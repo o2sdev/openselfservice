@@ -36,6 +36,11 @@ import {
 } from './mocks/pages/notification-list.page';
 import { PAGE_ORDER_DETAILS_DE, PAGE_ORDER_DETAILS_EN, PAGE_ORDER_DETAILS_PL } from './mocks/pages/order-details.page';
 import { PAGE_ORDER_LIST_DE, PAGE_ORDER_LIST_EN, PAGE_ORDER_LIST_PL } from './mocks/pages/order-list.page';
+import {
+    PAGE_PRODUCT_DETAILS_DE,
+    PAGE_PRODUCT_DETAILS_EN,
+    PAGE_PRODUCT_DETAILS_PL,
+} from './mocks/pages/product-details.page';
 import { PAGE_PRODUCT_LIST_DE, PAGE_PRODUCT_LIST_EN, PAGE_PRODUCT_LIST_PL } from './mocks/pages/product-list.page';
 import {
     PAGE_SERVICE_DETAILS_DE,
@@ -149,6 +154,25 @@ export const mapPage = (slug: string, locale: string): CMS.Model.Page.Page | und
             return PAGE_PRODUCT_LIST_DE;
         case '/produkty':
             return PAGE_PRODUCT_LIST_PL;
+
+        case slug.match(/\/products\/.+/)?.[0]:
+            return {
+                ...PAGE_PRODUCT_DETAILS_EN,
+                slug: `/products/${slug.match(/(.+)\/(.+)/)?.[2]}`,
+                updatedAt: '2025-01-01',
+            };
+        case slug.match(/\/produkte\/.+/)?.[0]:
+            return {
+                ...PAGE_PRODUCT_DETAILS_DE,
+                slug: `/produkte/${slug.match(/(.+)\/(.+)/)?.[2]}`,
+                updatedAt: '2025-01-01',
+            };
+        case slug.match(/\/produkty\/.+/)?.[0]:
+            return {
+                ...PAGE_PRODUCT_DETAILS_PL,
+                slug: `/produkty/${slug.match(/(.+)\/(.+)/)?.[2]}`,
+                updatedAt: '2025-01-01',
+            };
 
         case slug.match(/\/services\/.+/)?.[0]:
             return {
@@ -276,6 +300,7 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_SERVICE_LIST_PL,
                 PAGE_SERVICE_DETAILS_PL,
                 PAGE_PRODUCT_LIST_PL,
+                PAGE_PRODUCT_DETAILS_PL,
                 PAGE_CONTACT_US_PL,
                 PAGE_COMPLAINT_FORM_PL,
                 PAGE_REQUEST_DEVICE_MAINTENANCE_PL,
@@ -298,6 +323,7 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_SERVICE_LIST_DE,
                 PAGE_SERVICE_DETAILS_DE,
                 PAGE_PRODUCT_LIST_DE,
+                PAGE_PRODUCT_DETAILS_DE,
                 PAGE_CONTACT_US_DE,
                 PAGE_COMPLAINT_FORM_DE,
                 PAGE_REQUEST_DEVICE_MAINTENANCE_DE,
@@ -320,6 +346,7 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_SERVICE_LIST_EN,
                 PAGE_SERVICE_DETAILS_EN,
                 PAGE_PRODUCT_LIST_EN,
+                PAGE_PRODUCT_DETAILS_EN,
                 PAGE_CONTACT_US_EN,
                 PAGE_COMPLAINT_FORM_EN,
                 PAGE_REQUEST_DEVICE_MAINTENANCE_EN,
