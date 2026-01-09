@@ -1,6 +1,6 @@
 import { Field, FieldProps, FormikValues } from 'formik';
 import { LayoutGrid, List, Search } from 'lucide-react';
-import React, { useMemo, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import ScrollContainer from 'react-indiana-drag-scroll';
 import { debounce } from 'throttle-debounce';
 
@@ -26,6 +26,12 @@ export const FilterItem = <T, S extends FormikValues>({
     const allWasClickedRef = useRef(false);
 
     const debouncedSubmit = useMemo(() => debounce(TEXT_FILTER_DEBOUNCE_MS, () => submitForm()), [submitForm]);
+
+    useEffect(() => {
+        return () => {
+            debouncedSubmit.cancel();
+        };
+    }, [debouncedSubmit]);
 
     switch (item.__typename) {
         case 'FilterToggleGroup':
