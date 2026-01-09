@@ -1,6 +1,6 @@
 import { Field, FieldProps, FormikValues } from 'formik';
 import { LayoutGrid, List, Search } from 'lucide-react';
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import ScrollContainer from 'react-indiana-drag-scroll';
 import { debounce } from 'throttle-debounce';
 
@@ -23,8 +23,6 @@ export const FilterItem = <T, S extends FormikValues>({
     labels,
     isInlineVariant,
 }: Readonly<FilterItemProps<T, S>>) => {
-    const allWasClickedRef = useRef(false);
-
     const debouncedSubmit = useMemo(() => debounce(TEXT_FILTER_DEBOUNCE_MS, () => submitForm()), [submitForm]);
 
     useEffect(() => {
@@ -50,9 +48,6 @@ export const FilterItem = <T, S extends FormikValues>({
                                     key={option.value}
                                     value={option.value}
                                     className="min-w-[98px] rounded-sm h-9"
-                                    onClick={() => {
-                                        allWasClickedRef.current = option.value === 'ALL';
-                                    }}
                                 >
                                     {option.label}
                                 </ToggleGroupItem>
@@ -62,9 +57,11 @@ export const FilterItem = <T, S extends FormikValues>({
                         const handleValueChange = async (value: string[]) => {
                             let newValue: string[];
 
-                            if (allWasClickedRef.current) {
+                            const hadSelections = (field.value?.length ?? 0) > 0;
+                            const includesAll = value.includes('ALL');
+
+                            if (includesAll && hadSelections) {
                                 newValue = [];
-                                allWasClickedRef.current = false;
                             } else {
                                 newValue = value.filter((v) => v !== 'ALL');
                             }
