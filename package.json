@@ -55,8 +55,8 @@
         "@types/prompts": "^2.4.9",
         "@types/unzipper": "^0.10.11",
         "@vitejs/plugin-react": "^5.1.2",
-        "@vitest/browser-playwright": "^4.0.14",
-        "@vitest/coverage-v8": "^4.0.14",
+        "@vitest/browser-playwright": "^4.0.16",
+        "@vitest/coverage-v8": "^4.0.16",
         "dotenv": "^17.2.3",
         "fs-extra": "^11.3.2",
         "husky": "^9.1.7",
@@ -74,7 +74,7 @@
         "vite": "^7.2.4",
         "vite-plugin-svgr": "^4.5.0",
         "vite-tsconfig-paths": "^5.1.4",
-        "vitest": "^4.0.14"
+        "vitest": "^4.0.16"
     },
     "dependencies": {
         "@changesets/cli": "^2.29.8",
