@@ -45,7 +45,6 @@ export const FilterItem = <T, S extends FormikValues>({
                                 : field.value || [];
 
                         const toggleGroupItems = item.options.map((option, index) => {
-                            const isSelected = currentValue.includes(option.value);
                             const prevOption = item.options[index - 1];
                             const nextOption = item.options[index + 1];
                             const isPrevSelected = prevOption ? currentValue.includes(prevOption.value) : false;
@@ -57,8 +56,8 @@ export const FilterItem = <T, S extends FormikValues>({
                                     value={option.value}
                                     className={cn(
                                         'min-w-[98px] rounded-sm h-9',
-                                        isSelected && isPrevSelected ? 'rounded-l-none' : '',
-                                        isSelected && isNextSelected ? 'rounded-r-none' : '',
+                                        isPrevSelected ? 'rounded-l-none' : '',
+                                        isNextSelected ? 'rounded-r-none' : '',
                                     )}
                                     onClick={() => {
                                         allWasClickedRef.current = option.value === 'ALL';
@@ -85,7 +84,7 @@ export const FilterItem = <T, S extends FormikValues>({
                             }
                         };
 
-                        return isInlineVariant ? (
+                        return (
                             <ToggleGroupWithLabel
                                 type="multiple"
                                 variant="solid"
@@ -97,15 +96,6 @@ export const FilterItem = <T, S extends FormikValues>({
                                     {toggleGroupItems}
                                 </ScrollContainer>
                             </ToggleGroupWithLabel>
-                        ) : (
-                            <ToggleGroup
-                                type="multiple"
-                                variant="solid"
-                                value={currentValue}
-                                onValueChange={handleValueChange}
-                            >
-                                {toggleGroupItems}
-                            </ToggleGroup>
                         );
                     }}
                 </Field>

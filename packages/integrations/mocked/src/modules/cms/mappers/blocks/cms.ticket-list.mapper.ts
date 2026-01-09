@@ -121,7 +121,7 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
                 ],
             },
             {
-                __typename: 'FilterToggleGroup',
+                __typename: 'FilterSelect',
                 id: 'type',
                 label: 'Case type',
                 allowMultiple: true,
@@ -300,7 +300,7 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
                 ],
             },
             {
-                __typename: 'FilterToggleGroup',
+                __typename: 'FilterSelect',
                 id: 'type',
                 label: 'Falltyp',
                 allowMultiple: true,
@@ -481,7 +481,7 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
                 ],
             },
             {
-                __typename: 'FilterToggleGroup',
+                __typename: 'FilterSelect',
                 id: 'type',
                 label: 'Typ zgłoszenia',
                 allowMultiple: true,
