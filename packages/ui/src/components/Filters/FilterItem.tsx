@@ -44,21 +44,12 @@ export const FilterItem = <T, S extends FormikValues>({
                                 ? ['ALL']
                                 : field.value || [];
 
-                        const toggleGroupItems = item.options.map((option, index) => {
-                            const prevOption = item.options[index - 1];
-                            const nextOption = item.options[index + 1];
-                            const isPrevSelected = prevOption ? currentValue.includes(prevOption.value) : false;
-                            const isNextSelected = nextOption ? currentValue.includes(nextOption.value) : false;
-
+                        const toggleGroupItems = item.options.map((option) => {
                             return (
                                 <ToggleGroupItem
                                     key={option.value}
                                     value={option.value}
-                                    className={cn(
-                                        'min-w-[98px] rounded-sm h-9',
-                                        isPrevSelected ? 'rounded-l-none' : '',
-                                        isNextSelected ? 'rounded-r-none' : '',
-                                    )}
+                                    className="min-w-[98px] rounded-sm h-9"
                                     onClick={() => {
                                         allWasClickedRef.current = option.value === 'ALL';
                                     }}

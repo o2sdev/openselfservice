@@ -15,18 +15,21 @@ const ToggleGroupContext = React.createContext<
     currentValue: undefined,
 });
 
-const toggleGroupVariants = cva('flex items-center justify-center gap-1', {
-    variants: {
-        variant: {
-            default: 'bg-transparent',
-            outline: 'bg-transparent',
-            solid: 'rounded-md bg-muted/40 p-0.5 gap-0',
+const toggleGroupVariants = cva(
+    'flex items-center justify-center gap-1 [&_[data-state=on]+[data-state=on]]:rounded-l-none [&_[data-state=on]:has(+[data-state=on])]:rounded-r-none',
+    {
+        variants: {
+            variant: {
+                default: 'bg-transparent',
+                outline: 'bg-transparent',
+                solid: 'rounded-md bg-muted/40 p-0.5 gap-0',
+            },
+        },
+        defaultVariants: {
+            variant: 'default',
         },
     },
-    defaultVariants: {
-        variant: 'default',
-    },
-});
+);
 
 type ToggleGroupProps = React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> &
     VariantProps<typeof toggleVariants> & { ref?: React.Ref<React.ComponentRef<typeof ToggleGroupPrimitive.Root>> };
