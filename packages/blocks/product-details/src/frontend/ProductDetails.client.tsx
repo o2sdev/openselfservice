@@ -24,7 +24,7 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
     const { Link: LinkComponent } = createNavigation(routing);
     const { product, labels, actionButton } = component;
 
-    const keySpecs = product.keySpecs ?? [];
+    const keySpecs = product && product.keySpecs ? product.keySpecs : [];
 
     return (
         <div className="w-full flex flex-col gap-8 md:gap-12">

@@ -51,10 +51,14 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({
                             price={product.price}
                             image={product.image}
                             tags={product.badges?.slice(0, 2)}
-                            link={{
-                                label: linkDetailsLabel || '',
-                                url: product.link,
-                            }}
+                            link={
+                                linkDetailsLabel
+                                    ? {
+                                          label: linkDetailsLabel,
+                                          url: product.link,
+                                      }
+                                    : undefined
+                            }
                             LinkComponent={LinkComponent}
                         />
                     </div>
