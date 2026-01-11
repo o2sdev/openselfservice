@@ -163,33 +163,19 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                             <>
                                 <Separator />
                                 <div className="flex flex-col gap-3">
-                                    {actionButton.href ? (
-                                        <Button
-                                            variant={actionButton.variant || 'default'}
-                                            size="lg"
-                                            className="w-full"
-                                            asChild
-                                        >
-                                            <LinkComponent href={actionButton.href}>
-                                                {actionButton.icon && (
-                                                    <DynamicIcon name={actionButton.icon} size={20} className="mr-2" />
-                                                )}
-                                                {actionButton.label}
-                                            </LinkComponent>
-                                        </Button>
-                                    ) : (
-                                        <Button
-                                            variant={actionButton.variant || 'default'}
-                                            size="lg"
-                                            className="w-full"
-                                            onClick={actionButton.onClick}
-                                        >
+                                    <Button
+                                        variant={actionButton.variant || 'default'}
+                                        size="lg"
+                                        className="w-full"
+                                        asChild
+                                    >
+                                        <LinkComponent href={actionButton.href}>
                                             {actionButton.icon && (
                                                 <DynamicIcon name={actionButton.icon} size={20} className="mr-2" />
                                             )}
                                             {actionButton.label}
-                                        </Button>
-                                    )}
+                                        </LinkComponent>
+                                    </Button>
                                 </div>
                             </>
                         )}
@@ -207,25 +193,14 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                                     <Price price={product.price} />
                                 </Typography>
                             </div>
-                            {actionButton.href ? (
-                                <Button
-                                    variant={actionButton.variant || 'default'}
-                                    size="default"
-                                    className="w-full"
-                                    asChild
-                                >
-                                    <LinkComponent href={actionButton.href}>{actionButton.label}</LinkComponent>
-                                </Button>
-                            ) : (
-                                <Button
-                                    variant={actionButton.variant || 'default'}
-                                    size="default"
-                                    className="w-full"
-                                    onClick={actionButton.onClick}
-                                >
-                                    {actionButton.label}
-                                </Button>
-                            )}
+                            <Button
+                                variant={actionButton.variant || 'default'}
+                                size="default"
+                                className="w-full"
+                                asChild
+                            >
+                                <LinkComponent href={actionButton.href}>{actionButton.label}</LinkComponent>
+                            </Button>
                         </div>
                     </div>
 

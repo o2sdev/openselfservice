@@ -16,8 +16,7 @@ export type Product = Products.Model.Product & {
 
 export type ActionButton = {
     label: string;
-    onClick?: () => void;
-    href?: string;
+    href: string;
     variant?: 'default' | 'secondary' | 'destructive' | 'outline';
     icon?: string;
 };

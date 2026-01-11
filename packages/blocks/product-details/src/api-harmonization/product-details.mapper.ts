@@ -32,13 +32,15 @@ export const mapProductDetails = (
         __typename: 'ProductDetailsBlock',
         id: product.id,
         product: mappedProduct,
-        actionButton: labels.actionButtonLabel
-            ? {
-                  label: labels.actionButtonLabel,
-                  variant: 'default',
-                  icon: 'MessageCircle',
-              }
-            : undefined,
+        actionButton:
+            labels.actionButtonLabel && product.link
+                ? {
+                      label: labels.actionButtonLabel,
+                      href: product.link,
+                      variant: 'default',
+                      icon: 'MessageCircle',
+                  }
+                : undefined,
         labels,
     };
 };

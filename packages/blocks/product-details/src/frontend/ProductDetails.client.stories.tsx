@@ -105,11 +105,9 @@ export const Default: Story = {
         },
         actionButton: {
             label: 'Request Quote',
+            href: 'https://example.com/products/xl-2000',
             variant: 'default',
             icon: 'MessageCircle',
-            onClick: () => {
-                console.log('Action button clicked');
-            },
         },
         labels: {
             specificationsTitle: 'Specifications',
@@ -127,11 +125,9 @@ export const WithSecondaryButton: Story = {
         ...Default.args,
         actionButton: {
             label: 'Add to Cart',
+            href: 'https://example.com/products/xl-2000',
             variant: 'secondary',
             icon: 'ShoppingCart',
-            onClick: () => {
-                console.log('Add to cart clicked');
-            },
         },
     },
 };
