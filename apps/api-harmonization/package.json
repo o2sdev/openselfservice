@@ -25,10 +25,10 @@
     },
     "dependencies": {
         "@nestjs/axios": "^4.0.1",
-        "@nestjs/common": "^11.1.9",
+        "@nestjs/common": "^11.1.11",
         "@nestjs/config": "^4.0.2",
-        "@nestjs/core": "^11.1.9",
-        "@nestjs/platform-express": "^11.1.9",
+        "@nestjs/core": "^11.1.11",
+        "@nestjs/platform-express": "^11.1.11",
         "@nestjs/terminus": "^11.0.0",
         "@o2s/blocks.article": "*",
         "@o2s/blocks.article-list": "*",
@@ -80,7 +80,7 @@
     "devDependencies": {
         "@nestjs/cli": "^11.0.14",
         "@nestjs/schematics": "^11.0.9",
-        "@nestjs/testing": "^11.1.9",
+        "@nestjs/testing": "^11.1.11",
         "@o2s/eslint-config": "*",
         "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
