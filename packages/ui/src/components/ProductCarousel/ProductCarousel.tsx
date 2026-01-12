@@ -44,7 +44,7 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({
             {/* Carousel */}
             <Carousel
                 slides={products.map((product) => (
-                    <div key={product.id} className="h-full mb-12">
+                    <div key={product.id} className="flex h-full pb-12">
                         <ProductCard
                             title={product.name}
                             description={product.description}
@@ -68,7 +68,7 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({
                 showNavigation={true}
                 showPagination={true}
                 className={cn(
-                    '[&_.swiper-slide]:h-auto [&_.swiper-pagination]:bottom-0 [&_.swiper-pagination-bullet]:bg-primary [&_.swiper-pagination-bullet-active]:bg-primary [&_.swiper-pagination-bullet]:opacity-100 [&_.swiper-pagination-bullet]:w-2.5 [&_.swiper-pagination-bullet]:h-2.5',
+                    '[&_.swiper-wrapper]:flex! [&_.swiper-wrapper]:items-stretch! [&_.swiper-slide]:h-auto! [&_.swiper-pagination]:bottom-0 [&_.swiper-pagination-bullet]:bg-primary [&_.swiper-pagination-bullet-active]:bg-primary [&_.swiper-pagination-bullet]:opacity-100 [&_.swiper-pagination-bullet]:w-2.5 [&_.swiper-pagination-bullet]:h-2.5',
                     carouselClassName,
                 )}
                 breakpoints={{

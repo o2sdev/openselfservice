@@ -27,7 +27,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     return (
         <div className={cn('flex flex-col bg-card rounded-lg border border-border shadow-sm relative w-full h-full')}>
             {/* Image section */}
-            <div className="relative overflow-hidden h-[180px] flex-shrink-0 rounded-t-lg">
+            <div className="relative overflow-hidden h-[180px] shrink-0 rounded-t-lg">
                 {image?.url && image?.alt && (
                     <Image
                         src={image.url}
@@ -41,7 +41,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             </div>
             <div className="p-6 flex flex-col gap-6 h-full">
                 {/* Content section */}
-                <div className="flex flex-col h-full">
+                <div className="flex flex-col flex-1">
                     <div className="flex flex-col gap-4">
                         <Typography variant="highlightedSmall" className="line-clamp-2">
                             {title}
