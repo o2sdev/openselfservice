@@ -1,4 +1,4 @@
-import { Auth, CMS } from '@o2s/framework/modules';
+import { CMS } from '@o2s/framework/modules';
 
 export const PAGE_DASHBOARD_PL: CMS.Model.Page.Page = {
     slug: '/',
@@ -17,7 +17,7 @@ export const PAGE_DASHBOARD_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.PROSPECT, Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
+    permissions: [{ resource: 'page:dashboard', actions: ['view'] }],
     hasOwnTitle: false,
     template: {
         __typename: 'TwoColumnTemplate',
@@ -26,7 +26,7 @@ export const PAGE_DASHBOARD_PL: CMS.Model.Page.Page = {
             left: [
                 {
                     __typename: 'PaymentsSummaryBlock',
-                    id: 'payments-summary-1',
+                    id: 'payments-summary-2',
                 },
             ],
             right: [
@@ -72,7 +72,7 @@ export const PAGE_DASHBOARD_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.PROSPECT, Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
+    permissions: [{ resource: 'page:dashboard', actions: ['view'] }],
     hasOwnTitle: false,
     template: {
         __typename: 'TwoColumnTemplate',
@@ -81,7 +81,7 @@ export const PAGE_DASHBOARD_EN: CMS.Model.Page.Page = {
             left: [
                 {
                     __typename: 'PaymentsSummaryBlock',
-                    id: 'payments-summary-1',
+                    id: 'payments-summary-2',
                 },
             ],
             right: [
@@ -127,7 +127,7 @@ export const PAGE_DASHBOARD_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.PROSPECT, Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
+    permissions: [{ resource: 'page:dashboard', actions: ['view'] }],
     hasOwnTitle: false,
     template: {
         __typename: 'TwoColumnTemplate',
@@ -136,7 +136,7 @@ export const PAGE_DASHBOARD_DE: CMS.Model.Page.Page = {
             left: [
                 {
                     __typename: 'PaymentsSummaryBlock',
-                    id: 'payments-summary-1',
+                    id: 'payments-summary-2',
                 },
             ],
             right: [

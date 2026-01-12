@@ -1,4 +1,4 @@
-import { Auth, CMS } from '@o2s/framework/modules';
+import { CMS } from '@o2s/framework/modules';
 
 export const PAGE_INVOICE_LIST_EN: CMS.Model.Page.Page = {
     id: '5',
@@ -17,24 +17,19 @@ export const PAGE_INVOICE_LIST_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
+    permissions: [{ resource: 'page:invoices', actions: ['view'] }],
     hasOwnTitle: false,
     template: {
         __typename: 'TwoColumnTemplate',
         slots: {
-            top: [],
-            left: [
+            top: [
                 {
                     __typename: 'PaymentsSummaryBlock',
                     id: 'payments-summary-1',
                 },
             ],
-            right: [
-                {
-                    __typename: 'PaymentsHistoryBlock',
-                    id: 'payments-history-1',
-                },
-            ],
+            left: [],
+            right: [],
             bottom: [
                 {
                     __typename: 'InvoiceListBlock',
@@ -68,24 +63,19 @@ export const PAGE_INVOICE_LIST_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
+    permissions: [{ resource: 'page:invoices', actions: ['view'] }],
     hasOwnTitle: false,
     template: {
         __typename: 'TwoColumnTemplate',
         slots: {
-            top: [],
-            left: [
+            top: [
                 {
                     __typename: 'PaymentsSummaryBlock',
                     id: 'payments-summary-1',
                 },
             ],
-            right: [
-                {
-                    __typename: 'PaymentsHistoryBlock',
-                    id: 'payments-history-1',
-                },
-            ],
+            left: [],
+            right: [],
             bottom: [
                 {
                     __typename: 'InvoiceListBlock',
@@ -119,24 +109,19 @@ export const PAGE_INVOICE_LIST_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
+    permissions: [{ resource: 'page:invoices', actions: ['view'] }],
     hasOwnTitle: false,
     template: {
         __typename: 'TwoColumnTemplate',
         slots: {
-            top: [],
-            left: [
+            top: [
                 {
                     __typename: 'PaymentsSummaryBlock',
                     id: 'payments-summary-1',
                 },
             ],
-            right: [
-                {
-                    __typename: 'PaymentsHistoryBlock',
-                    id: 'payments-history-1',
-                },
-            ],
+            left: [],
+            right: [],
             bottom: [
                 {
                     __typename: 'InvoiceListBlock',

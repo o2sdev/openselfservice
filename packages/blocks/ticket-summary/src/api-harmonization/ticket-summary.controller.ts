@@ -15,7 +15,7 @@ export class TicketSummaryController {
     constructor(protected readonly service: TicketSummaryService) {}
 
     @Get()
-    @Auth.Decorators.Roles({ roles: [] })
+    @Auth.Decorators.Permissions({ resource: 'tickets', actions: ['view'] })
     getTicketSummaryBlock(@Headers() headers: Models.Headers.AppHeaders, @Query() query: GetTicketSummaryBlockQuery) {
         return this.service.getTicketSummaryBlock(query, headers);
     }

@@ -8,3 +8,5 @@ export enum RoleMatchingMode {
     ALL = 'all',
     ANY = 'any',
 }
+
+export type Permission = string;

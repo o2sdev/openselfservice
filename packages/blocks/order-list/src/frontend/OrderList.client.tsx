@@ -35,6 +35,7 @@ import { OrderListPureProps } from './OrderList.types';
 export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToken, routing, ...component }) => {
     const { Link: LinkComponent } = createNavigation(routing);
     const { labels } = useGlobalContext();
+    const { permissions } = component;
 
     const initialFilters: Request.GetOrderListBlockQuery = {
         id: component.id,
@@ -55,6 +56,11 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
     const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
 
     const [isPending, startTransition] = useTransition();
+
+    // Check view permission - if not allowed, don't render
+    if (!permissions?.view) {
+        return null;
+    }
 
     const handleFilter = (data: Partial<Request.GetOrderListBlockQuery>) => {
         startTransition(async () => {

@@ -15,7 +15,12 @@ import { Typography } from '@o2s/ui/elements/typography';
 import { TicketSummaryPureProps } from './TicketSummary.types';
 
 export const TicketSummaryPure: React.FC<TicketSummaryPureProps> = ({ ...component }) => {
-    const { infoCards, layout } = component;
+    const { infoCards, layout, permissions } = component;
+
+    // Check view permission - if not allowed, don't render
+    if (!permissions?.view) {
+        return null;
+    }
 
     if (!infoCards || infoCards.length === 0) {
         return null;

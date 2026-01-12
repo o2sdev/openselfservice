@@ -13,6 +13,10 @@ export class PaymentsHistoryBlock extends ApiModels.Block.Block {
     };
     currency!: Models.Price.Currency;
     chartData!: BarData[];
+    permissions?: {
+        view: boolean;
+        pay: boolean;
+    };
 }
 
 export class BarData {

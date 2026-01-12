@@ -4,6 +4,8 @@ import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
 import { Models } from '@o2s/utils.api-harmonization';
 
+import { Auth } from '@o2s/framework/modules';
+
 import { mapNotificationList } from './notification-list.mapper';
 import { NotificationListBlock } from './notification-list.model';
 import { GetNotificationListBlockQuery } from './notification-list.request';
@@ -13,6 +15,7 @@ export class NotificationListService {
     constructor(
         private readonly cmsService: CMS.Service,
         private readonly notificationService: Notifications.Service,
+        private readonly permissionsService: Auth.Permissions.Service,
     ) {}
 
     getNotificationListBlock(
@@ -32,14 +35,38 @@ export class NotificationListService {
                         locale: headers['x-locale'],
                     })
                     .pipe(
-                        map((notifications) =>
-                            mapNotificationList(
+                        map((notifications) => {
+                            const result = mapNotificationList(
                                 notifications,
                                 cms,
                                 headers['x-locale'],
                                 headers['x-client-timezone'] || '',
-                            ),
-                        ),
+                            );
+
+                            // Extract permissions using ACL service
+                            if (headers.authorization) {
+                                const permissions = this.permissionsService.checkResourceActions(
+                                    headers.authorization,
+                                    'notifications',
+                                    ['view', 'mark_read', 'delete'],
+                                );
+
+                                result.permissions = {
+                                    view: permissions.view ?? false,
+                                    mark_read: permissions.mark_read ?? false,
+                                    delete: permissions.delete ?? false,
+                                };
+                            } else {
+                                // Default to allowing view if no authorization token
+                                result.permissions = {
+                                    view: true,
+                                    mark_read: false,
+                                    delete: false,
+                                };
+                            }
+
+                            return result;
+                        }),
                     );
             }),
         );

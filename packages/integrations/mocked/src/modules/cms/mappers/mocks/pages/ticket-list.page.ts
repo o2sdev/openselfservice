@@ -1,4 +1,4 @@
-import { Auth, CMS } from '@o2s/framework/modules';
+import { CMS } from '@o2s/framework/modules';
 
 export const PAGE_TICKET_LIST_EN: CMS.Model.Page.Page = {
     id: '2',
@@ -18,7 +18,7 @@ export const PAGE_TICKET_LIST_EN: CMS.Model.Page.Page = {
         },
     },
     hasOwnTitle: false,
-    permissions: [Auth.Constants.Roles.ORG_USER],
+    permissions: [{ resource: 'page:tickets', actions: ['view'] }],
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
@@ -60,7 +60,7 @@ export const PAGE_TICKET_LIST_DE: CMS.Model.Page.Page = {
         },
     },
     hasOwnTitle: false,
-    permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
+    permissions: [{ resource: 'page:tickets', actions: ['view'] }],
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
@@ -102,7 +102,7 @@ export const PAGE_TICKET_LIST_PL: CMS.Model.Page.Page = {
         },
     },
     hasOwnTitle: false,
-    permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
+    permissions: [{ resource: 'page:tickets', actions: ['view'] }],
     template: {
         __typename: 'OneColumnTemplate',
         slots: {

@@ -23,16 +23,24 @@ const StackedBarChart = dynamic(() =>
 );
 
 export const PaymentsSummaryPure: React.FC<PaymentsSummaryPureProps> = ({ routing, ...component }) => {
-    const { overdue, toBePaid, layout, chart } = component;
+    const { overdue, toBePaid, layout, chart, permissions } = component;
 
     const t = useTranslations();
 
     // If navigation is needed, use createNavigation(routing) as in other blocks
     // const { Link: LinkComponent } = createNavigation(routing);
 
+    // Check view permission - if not allowed, don't render
+    if (!permissions?.view) {
+        return null;
+    }
+
     if (!overdue && !toBePaid && !chart?.showChart) {
         return null;
     }
+
+    // Check if user has pay permission
+    const canPay = permissions?.pay ?? false;
 
     const showChart = chart?.showChart ?? false;
     const cardsOuterLayout = layout === 'horizontal' ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1';
@@ -73,7 +81,8 @@ export const PaymentsSummaryPure: React.FC<PaymentsSummaryPureProps> = ({ routin
                                 }
                                 button={
                                     overdue.isOverdue &&
-                                    overdue.link && (
+                                    overdue.link &&
+                                    canPay && (
                                         <TooltipHover
                                             trigger={(setIsOpen) => (
                                                 <Button
@@ -106,7 +115,8 @@ export const PaymentsSummaryPure: React.FC<PaymentsSummaryPureProps> = ({ routin
                                 icon={toBePaid.icon}
                                 button={
                                     toBePaid.value.value > 0 &&
-                                    toBePaid.link && (
+                                    toBePaid.link &&
+                                    canPay && (
                                         <TooltipHover
                                             trigger={(setIsOpen) => (
                                                 <Button
@@ -128,7 +138,7 @@ export const PaymentsSummaryPure: React.FC<PaymentsSummaryPureProps> = ({ routin
                             />
                         )}
                     </div>
-                    {chart && (
+                    {chart && permissions?.view && (
                         <Card className="h-full w-full">
                             <div className="p-6 flex flex-col gap-6">
                                 {chart.title && <Typography variant="subtitle">{chart.title}</Typography>}
@@ -171,7 +181,8 @@ export const PaymentsSummaryPure: React.FC<PaymentsSummaryPureProps> = ({ routin
                             }
                             button={
                                 overdue.isOverdue &&
-                                overdue.link && (
+                                overdue.link &&
+                                canPay && (
                                     <TooltipHover
                                         trigger={(setIsOpen) => (
                                             <Button
@@ -204,7 +215,8 @@ export const PaymentsSummaryPure: React.FC<PaymentsSummaryPureProps> = ({ routin
                             icon={toBePaid.icon}
                             button={
                                 toBePaid.value.value > 0 &&
-                                toBePaid.link && (
+                                toBePaid.link &&
+                                canPay && (
                                     <TooltipHover
                                         trigger={(setIsOpen) => (
                                             <Button

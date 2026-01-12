@@ -15,7 +15,7 @@ export class ServiceListController {
     constructor(protected readonly service: ServiceListService) {}
 
     @Get()
-    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN] })
+    @Auth.Decorators.Permissions({ resource: 'services', actions: ['view'] })
     getServiceListBlock(@Headers() headers: ApiModels.Headers.AppHeaders, @Query() query: GetServiceListBlockQuery) {
         return this.service.getServiceListBlock(query, headers);
     }

@@ -5,7 +5,7 @@ import { Observable, forkJoin, map } from 'rxjs';
 
 import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 
-import { Models } from '@o2s/framework/modules';
+import { Auth, Models } from '@o2s/framework/modules';
 
 import { mapPaymentsSummary } from './payments-summary.mapper';
 import { PaymentsSummaryBlock } from './payments-summary.model';
@@ -19,6 +19,7 @@ export class PaymentsSummaryService {
         private readonly cmsService: CMS.Service,
         private readonly invoiceService: Invoices.Service,
         private readonly configService: ConfigService,
+        private readonly permissionsService: Auth.Permissions.Service,
     ) {
         this.defaultCurrency = this.configService.get('DEFAULT_CURRENCY') || 'EUR';
     }
@@ -31,7 +32,31 @@ export class PaymentsSummaryService {
         const invoices = this.invoiceService.getInvoiceList(query);
 
         return forkJoin([invoices, cms]).pipe(
-            map(([invoices, cms]) => mapPaymentsSummary(cms, invoices, headers['x-locale'], this.defaultCurrency)),
+            map(([invoices, cms]) => {
+                const result = mapPaymentsSummary(cms, invoices, headers['x-locale'], this.defaultCurrency);
+
+                // Extract permissions using ACL service
+                if (headers.authorization) {
+                    const permissions = this.permissionsService.checkResourceActions(
+                        headers.authorization,
+                        'invoices',
+                        ['view', 'pay'],
+                    );
+
+                    result.permissions = {
+                        view: permissions.view ?? false,
+                        pay: permissions.pay ?? false,
+                    };
+                } else {
+                    // Default to allowing view if no authorization token
+                    result.permissions = {
+                        view: true,
+                        pay: false,
+                    };
+                }
+
+                return result;
+            }),
         );
     }
 }

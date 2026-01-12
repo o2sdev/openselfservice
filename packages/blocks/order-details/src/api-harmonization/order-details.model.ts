@@ -31,6 +31,12 @@ export class OrderDetailsBlock extends ApiModels.Block.Block {
     reorderLabel?: string;
     trackOrderLabel?: string;
     payOnlineLabel?: string;
+    permissions?: {
+        view: boolean;
+        edit: boolean;
+        cancel: boolean;
+        track: boolean;
+    };
 }
 
 export class Order {

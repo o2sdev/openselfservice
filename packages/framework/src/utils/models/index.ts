@@ -6,6 +6,9 @@ export * as DataTable from './data-table';
 export * as Mapping from './mapping';
 export * as Customer from './customer';
 export * as Address from './address';
+export * as Permission from './permission';
+export * as OrganizationMembership from './roles';
+/** @deprecated Use OrganizationMembership instead */
 export * as UserCustomerRole from './roles';
 export * as Price from './price';
 export * as Unit from './unit';

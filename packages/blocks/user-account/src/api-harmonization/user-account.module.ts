@@ -1,5 +1,5 @@
 import { DynamicModule, Module } from '@nestjs/common';
-import { CMS, Users } from '@o2s/configs.integrations';
+import { Auth, CMS, Users } from '@o2s/configs.integrations';
 
 import * as Framework from '@o2s/framework/modules';
 
@@ -20,6 +20,10 @@ export class UserAccountBlockModule {
                 {
                     provide: Users.Service,
                     useExisting: Framework.Users.Service,
+                },
+                {
+                    provide: Auth.Permissions,
+                    useExisting: Framework.Auth.Permissions.Service,
                 },
             ],
             controllers: [UserAccountController],

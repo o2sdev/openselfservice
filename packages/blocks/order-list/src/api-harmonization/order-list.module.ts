@@ -1,6 +1,6 @@
 import { HttpModule } from '@nestjs/axios';
 import { DynamicModule, Module } from '@nestjs/common';
-import { CMS, Orders } from '@o2s/configs.integrations';
+import { Auth, CMS, Orders } from '@o2s/configs.integrations';
 
 import * as Framework from '@o2s/framework/modules';
 
@@ -21,6 +21,10 @@ export class OrderListBlockModule {
                 {
                     provide: Orders.Service,
                     useExisting: Framework.Orders.Service,
+                },
+                {
+                    provide: Auth.Permissions,
+                    useExisting: Framework.Auth.Permissions.Service,
                 },
             ],
             controllers: [OrderListController],

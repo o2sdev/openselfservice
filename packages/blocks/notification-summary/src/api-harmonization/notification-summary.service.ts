@@ -4,6 +4,8 @@ import { Observable, forkJoin, map } from 'rxjs';
 
 import { Models } from '@o2s/utils.api-harmonization';
 
+import { Auth } from '@o2s/framework/modules';
+
 import { mapNotificationSummary } from './notification-summary.mapper';
 import { NotificationSummaryBlock } from './notification-summary.model';
 import { GetNotificationSummaryBlockQuery } from './notification-summary.request';
@@ -13,6 +15,7 @@ export class NotificationSummaryService {
     constructor(
         private readonly cmsService: CMS.Service,
         private readonly notificationService: Notifications.Service,
+        private readonly permissionsService: Auth.Permissions.Service,
     ) {}
 
     getNotificationSummaryBlock(
@@ -27,7 +30,31 @@ export class NotificationSummaryService {
         });
 
         return forkJoin([notifications, cms]).pipe(
-            map(([notifications, cms]) => mapNotificationSummary(cms, notifications, headers['x-locale'])),
+            map(([notifications, cms]) => {
+                const result = mapNotificationSummary(cms, notifications, headers['x-locale']);
+
+                // Extract permissions using ACL service
+                if (headers.authorization) {
+                    const permissions = this.permissionsService.checkResourceActions(
+                        headers.authorization,
+                        'notifications',
+                        ['view', 'mark_read'],
+                    );
+
+                    result.permissions = {
+                        view: permissions.view ?? false,
+                        mark_read: permissions.mark_read ?? false,
+                    };
+                } else {
+                    // Default to allowing view if no authorization token
+                    result.permissions = {
+                        view: true,
+                        mark_read: false,
+                    };
+                }
+
+                return result;
+            }),
         );
     }
 }

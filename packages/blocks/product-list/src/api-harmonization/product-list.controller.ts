@@ -15,7 +15,7 @@ export class ProductListController {
     constructor(protected readonly service: ProductListService) {}
 
     @Get()
-    @Auth.Decorators.Roles({ roles: [] })
+    @Auth.Decorators.Permissions({ resource: 'products', actions: ['view'] })
     getProductListBlock(@Headers() headers: Models.Headers.AppHeaders, @Query() query: GetProductListBlockQuery) {
         return this.service.getProductListBlock(query, headers);
     }

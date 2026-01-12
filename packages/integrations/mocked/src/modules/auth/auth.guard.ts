@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 
 import { LoggerService } from '@o2s/utils.logger';
 
-import { Auth } from '@o2s/framework/modules';
+import { Auth, Models } from '@o2s/framework/modules';
 
 import { Jwt } from './auth.model';
 
@@ -35,28 +35,27 @@ export class RolesGuard implements Auth.Guard {
             return false;
         }
 
-        const userRoles = this.getUserRoles(decodedToken);
+        const userPermissions = this.extractPermissionsAsStrings(decodedToken);
 
         this.logger.debug(roleMatchingMode, 'Role matching mode');
-        this.logger.debug(userRoles.join(','), 'User roles');
+        this.logger.debug(userPermissions.join(','), 'User permissions');
         this.logger.debug(requiredRoles.join(','), 'Required roles');
 
         return roleMatchingMode === Auth.Constants.RoleMatchingMode.ALL
-            ? requiredRoles.every((role) => userRoles.includes(role))
-            : requiredRoles.some((role) => userRoles.includes(role));
+            ? requiredRoles.every((role) => userPermissions.includes(role))
+            : requiredRoles.some((role) => userPermissions.includes(role));
     }
 
-    private getUserRoles(decodedToken: Jwt): string[] {
-        const userRoles: string[] = [];
+    /**
+     * Extracts permissions as flat strings for role matching.
+     * Converts Permission[] to strings like "invoices:view", "users:edit"
+     */
+    private extractPermissionsAsStrings(decodedToken: Jwt): string[] {
+        const permissions = decodedToken?.permissions || decodedToken?.customer?.permissions || [];
+        return this.flattenPermissions(permissions);
+    }
 
-        if (decodedToken?.role) {
-            userRoles.push(decodedToken.role);
-        }
-
-        if (Array.isArray(decodedToken?.customer?.roles)) {
-            userRoles.push(...decodedToken.customer.roles);
-        }
-
-        return userRoles;
+    private flattenPermissions(permissions: Models.Permission.Permission[]): string[] {
+        return permissions.flatMap((p) => p.actions.map((action) => `${p.resource}:${action}`));
     }
 }

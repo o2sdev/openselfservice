@@ -13,4 +13,8 @@ export class NotificationSummaryBlock extends Models.Block.Block {
     __typename!: 'NotificationSummaryBlock';
     layout?: 'vertical' | 'horizontal';
     infoCards!: NotificationSummaryInfoCard[];
+    permissions?: {
+        view: boolean;
+        mark_read: boolean;
+    };
 }

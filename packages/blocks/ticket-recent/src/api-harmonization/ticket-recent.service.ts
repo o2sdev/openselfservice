@@ -4,6 +4,8 @@ import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
 import { Models } from '@o2s/utils.api-harmonization';
 
+import { Auth } from '@o2s/framework/modules';
+
 import { mapTicketRecent } from './ticket-recent.mapper';
 import { TicketRecentBlock } from './ticket-recent.model';
 import { GetTicketRecentBlockQuery } from './ticket-recent.request';
@@ -13,6 +15,7 @@ export class TicketRecentService {
     constructor(
         private readonly cmsService: CMS.Service,
         private readonly ticketsService: Tickets.Service,
+        private readonly permissionsService: Auth.Permissions.Service,
     ) {}
 
     getTicketRecentBlock(
@@ -26,9 +29,36 @@ export class TicketRecentService {
                 return this.ticketsService
                     .getTicketList({ ...query, limit: cms.limit, locale: headers['x-locale'] })
                     .pipe(
-                        map((tickets) =>
-                            mapTicketRecent(cms, tickets, headers['x-locale'], headers['x-client-timezone'] || ''),
-                        ),
+                        map((tickets) => {
+                            const result = mapTicketRecent(
+                                cms,
+                                tickets,
+                                headers['x-locale'],
+                                headers['x-client-timezone'] || '',
+                            );
+
+                            // Extract permissions using ACL service
+                            if (headers.authorization) {
+                                const permissions = this.permissionsService.checkResourceActions(
+                                    headers.authorization,
+                                    'tickets',
+                                    ['view', 'create'],
+                                );
+
+                                result.permissions = {
+                                    view: permissions.view ?? false,
+                                    create: permissions.create ?? false,
+                                };
+                            } else {
+                                // Default to allowing view if no authorization token
+                                result.permissions = {
+                                    view: true,
+                                    create: false,
+                                };
+                            }
+
+                            return result;
+                        }),
                     );
             }),
         );

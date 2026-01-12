@@ -1,6 +1,6 @@
 import { Articles, CMS } from '@o2s/configs.integrations';
 
-import { Auth } from '@o2s/framework/modules';
+import { Models } from '@o2s/framework/modules';
 
 import { getHasAccess } from '@o2s/api-harmonization/utils/permissions';
 
@@ -145,7 +145,7 @@ export const mapInit = (
     footer: CMS.Model.Footer.Footer,
     labels: CMS.Model.AppConfig.Labels,
     themes: CMS.Model.AppConfig.Themes,
-    roles: Auth.Constants.Roles[],
+    userPermissions: Models.Permission.Permission[],
 ): Init => {
     return {
         locales,
@@ -153,12 +153,14 @@ export const mapInit = (
             header: {
                 ...header,
                 items: header.items
-                    .filter((item) => getHasAccess(item.permissions, roles))
+                    .filter((item) => getHasAccess(item.permissions, userPermissions))
                     .map((item) => {
                         if (item.__typename === 'NavigationGroup') {
                             return {
                                 ...item,
-                                items: item.items.filter((childItem) => getHasAccess(childItem.permissions, roles)),
+                                items: item.items.filter((childItem) =>
+                                    getHasAccess(childItem.permissions, userPermissions),
+                                ),
                             };
                         }
                         return item;
@@ -167,12 +169,14 @@ export const mapInit = (
             footer: {
                 ...footer,
                 items: footer.items
-                    .filter((item) => getHasAccess(item.permissions, roles))
+                    .filter((item) => getHasAccess(item.permissions, userPermissions))
                     .map((item) => {
                         if (item.__typename === 'NavigationGroup') {
                             return {
                                 ...item,
-                                items: item.items.filter((childItem) => getHasAccess(childItem.permissions, roles)),
+                                items: item.items.filter((childItem) =>
+                                    getHasAccess(childItem.permissions, userPermissions),
+                                ),
                             };
                         }
                         return item;

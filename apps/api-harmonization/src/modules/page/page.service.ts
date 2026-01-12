@@ -47,7 +47,7 @@ export class PageService {
     }
 
     getInit(query: GetInitQuery, headers: Models.Headers.AppHeaders): Observable<Init> {
-        const userRoles = this.authService.extractUserRoles(headers['authorization']);
+        const userPermissions = this.authService.getPermissions(headers['authorization']);
 
         return this.cmsService.getAppConfig({ referrer: query.referrer, locale: headers['x-locale'] }).pipe(
             switchMap((appConfig) => {
@@ -69,7 +69,7 @@ export class PageService {
                             footer,
                             appConfig.labels,
                             appConfig.themes,
-                            userRoles,
+                            userPermissions,
                         );
                     }),
                 );
@@ -80,7 +80,7 @@ export class PageService {
     getPage(query: GetPageQuery, headers: Models.Headers.AppHeaders): Observable<Page | NotFound> {
         const page = this.cmsService.getPage({ slug: query.slug, locale: headers['x-locale'] });
 
-        const userRoles = this.authService.extractUserRoles(headers['authorization']);
+        const userPermissions = this.authService.getPermissions(headers['authorization']);
 
         return forkJoin([page]).pipe(
             concatMap(([page]) => {
@@ -91,14 +91,16 @@ export class PageService {
                                 throw new NotFoundException();
                             }
 
-                            checkPermissions(article.permissions, userRoles);
+                            checkPermissions(article.permissions, userPermissions);
 
                             return this.processArticle(article, query, headers);
                         }),
                     );
                 }
 
-                checkPermissions(page.permissions, userRoles);
+                console.log({ user: userPermissions, page: page.permissions });
+
+                checkPermissions(page.permissions, userPermissions);
 
                 return this.processPage(page, query, headers);
             }),

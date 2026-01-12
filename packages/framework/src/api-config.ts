@@ -102,6 +102,9 @@ export interface ApiConfig {
             name: string;
             service: typeof Auth.Service;
             imports?: Type[];
+            permissions?: {
+                service: typeof Auth.Permissions.Service;
+            };
         };
     };
 }

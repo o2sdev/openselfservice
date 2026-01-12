@@ -22,6 +22,8 @@ import { sdk } from '../sdk';
 import { ServiceListPureProps } from './ServiceList.types';
 
 export const ServiceListPure: React.FC<ServiceListPureProps> = ({ locale, accessToken, routing, ...component }) => {
+    const { permissions } = component;
+
     const initialFilters = {
         id: component.id,
         offset: 0,
@@ -33,6 +35,11 @@ export const ServiceListPure: React.FC<ServiceListPureProps> = ({ locale, access
     const [filters, setFilters] = useState(initialFilters);
     const [isPending, startTransition] = useTransition();
     const { labels } = useGlobalContext();
+
+    // Check view permission - if not allowed, don't render
+    if (!permissions?.view) {
+        return null;
+    }
 
     const handleFilter = (data: Partial<typeof initialFilters>) => {
         startTransition(async () => {

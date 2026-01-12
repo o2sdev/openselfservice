@@ -33,6 +33,12 @@ export class InvoiceListBlock extends ApiModels.Block.Block {
     enableRowSelection?: boolean;
     bulkActionsLabel?: string;
     downloadAllButtonLabel?: string;
+    permissions?: {
+        view: boolean;
+        create: boolean;
+        pay: boolean;
+        delete: boolean;
+    };
 }
 
 export class Invoice {

@@ -1,5 +1,4 @@
-import { Users } from '@o2s/framework/modules';
-import { Models } from '@o2s/framework/modules';
+import { Models, Users } from '@o2s/framework/modules';
 
 import { RequestMethod } from '../sdk';
 

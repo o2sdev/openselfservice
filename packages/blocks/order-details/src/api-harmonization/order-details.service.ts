@@ -5,6 +5,8 @@ import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
 import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 
+import { Auth } from '@o2s/framework/modules';
+
 import { mapOrderDetails } from './order-details.mapper';
 import { OrderDetailsBlock } from './order-details.model';
 import { GetOrderDetailsBlockParams, GetOrderDetailsBlockQuery } from './order-details.request';
@@ -17,6 +19,7 @@ export class OrderDetailsService {
         private readonly cmsService: CMS.Service,
         private readonly orderService: Orders.Service,
         private readonly configService: ConfigService,
+        private readonly permissionsService: Auth.Permissions.Service,
     ) {
         this.defaultProductUnit = this.configService.get('DEFAULT_PRODUCT_UNIT') || 'PCS';
     }
@@ -45,13 +48,39 @@ export class OrderDetailsService {
                             if (!order) {
                                 throw new NotFoundException();
                             }
-                            return mapOrderDetails(
+                            const result = mapOrderDetails(
                                 cms,
                                 order,
                                 headers['x-locale'],
                                 headers['x-client-timezone'] || '',
                                 this.defaultProductUnit,
                             );
+
+                            // Extract permissions using ACL service
+                            if (headers.authorization) {
+                                const permissions = this.permissionsService.checkResourceActions(
+                                    headers.authorization,
+                                    'orders',
+                                    ['view', 'edit', 'cancel', 'track'],
+                                );
+
+                                result.permissions = {
+                                    view: permissions.view ?? false,
+                                    edit: permissions.edit ?? false,
+                                    cancel: permissions.cancel ?? false,
+                                    track: permissions.track ?? false,
+                                };
+                            } else {
+                                // Default to allowing view if no authorization token
+                                result.permissions = {
+                                    view: true,
+                                    edit: false,
+                                    cancel: false,
+                                    track: false,
+                                };
+                            }
+
+                            return result;
                         }),
                     );
             }),

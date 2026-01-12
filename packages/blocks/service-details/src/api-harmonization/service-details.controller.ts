@@ -15,7 +15,7 @@ export class ServiceDetailsController {
     constructor(protected readonly service: ServiceDetailsService) {}
 
     @Get(':id')
-    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN] })
+    @Auth.Decorators.Permissions({ resource: 'services', actions: ['view'] })
     getServiceDetailsBlock(
         @Headers() headers: ApiModels.Headers.AppHeaders,
         @Query() query: GetServiceDetailsBlockQuery,

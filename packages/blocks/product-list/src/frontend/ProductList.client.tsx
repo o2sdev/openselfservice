@@ -24,6 +24,8 @@ import { ProductListPureProps } from './ProductList.types';
 type ViewMode = 'grid' | 'table';
 
 export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, accessToken, routing, ...component }) => {
+    const { permissions } = component;
+
     const initialFilters = {
         id: component.id,
         offset: 0,
@@ -36,6 +38,11 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
     const [isPending, startTransition] = useTransition();
     const [viewMode, setViewMode] = useState<ViewMode>('grid');
     const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
+
+    // Check view permission - if not allowed, don't render
+    if (!permissions?.view) {
+        return null;
+    }
 
     const handleFilter = (data: Partial<typeof initialFilters>) => {
         startTransition(async () => {

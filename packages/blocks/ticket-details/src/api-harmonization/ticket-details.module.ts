@@ -1,17 +1,31 @@
 import { DynamicModule, Module } from '@nestjs/common';
-import { CMS, Tickets } from '@o2s/configs.integrations';
+import { Auth, CMS, Tickets } from '@o2s/configs.integrations';
 
-import { ApiConfig } from '@o2s/framework/modules';
+import * as Framework from '@o2s/framework/modules';
 
 import { TicketDetailsController } from './ticket-details.controller';
 import { TicketDetailsService } from './ticket-details.service';
 
 @Module({})
 export class TicketDetailsBlockModule {
-    static register(_config: ApiConfig): DynamicModule {
+    static register(_config: Framework.ApiConfig): DynamicModule {
         return {
             module: TicketDetailsBlockModule,
-            providers: [TicketDetailsService, CMS.Service, Tickets.Service],
+            providers: [
+                TicketDetailsService,
+                {
+                    provide: CMS.Service,
+                    useExisting: Framework.CMS.Service,
+                },
+                {
+                    provide: Tickets.Service,
+                    useExisting: Framework.Tickets.Service,
+                },
+                {
+                    provide: Auth.Permissions,
+                    useExisting: Framework.Auth.Permissions.Service,
+                },
+            ],
             controllers: [TicketDetailsController],
             exports: [TicketDetailsService],
         };

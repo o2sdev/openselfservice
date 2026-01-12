@@ -1,5 +1,5 @@
 import { DynamicModule, Module } from '@nestjs/common';
-import { CMS, Invoices } from '@o2s/configs.integrations';
+import { Auth, CMS, Invoices } from '@o2s/configs.integrations';
 
 import * as Framework from '@o2s/framework/modules';
 
@@ -20,6 +20,10 @@ export class PaymentsHistoryBlockModule {
                 {
                     provide: Invoices.Service,
                     useExisting: Framework.Invoices.Service,
+                },
+                {
+                    provide: Auth.Permissions,
+                    useExisting: Framework.Auth.Permissions.Service,
                 },
             ],
             controllers: [PaymentsHistoryController],

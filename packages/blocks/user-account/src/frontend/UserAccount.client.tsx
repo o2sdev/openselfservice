@@ -14,9 +14,15 @@ import { Typography } from '@o2s/ui/elements/typography';
 import { UserAccountPureProps } from './UserAccount.types';
 
 export const UserAccountPure: React.FC<UserAccountPureProps> = (component) => {
-    const { fields, labels, basicInformationTitle, basicInformationDescription, user, title, onSignOut } = component;
+    const { fields, labels, basicInformationTitle, basicInformationDescription, user, title, onSignOut, permissions } =
+        component;
 
     const t = useTranslations();
+
+    // Check view permission - if not allowed, don't render
+    if (!permissions?.view) {
+        return null;
+    }
 
     return (
         <div className="w-full">

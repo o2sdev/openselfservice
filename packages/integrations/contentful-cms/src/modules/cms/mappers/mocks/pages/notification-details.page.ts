@@ -1,4 +1,4 @@
-import { Auth, CMS } from '@o2s/framework/modules';
+import { CMS } from '@o2s/framework/modules';
 
 export const PAGE_NOTIFICATION_DETAILS_EN: CMS.Model.Page.Page = {
     id: '6',
@@ -17,7 +17,7 @@ export const PAGE_NOTIFICATION_DETAILS_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
+    permissions: [{ resource: 'page:notifications', actions: ['view'] }],
     hasOwnTitle: true,
     parent: {
         slug: '/notifications',
@@ -61,7 +61,7 @@ export const PAGE_NOTIFICATION_DETAILS_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
+    permissions: [{ resource: 'page:notifications', actions: ['view'] }],
     hasOwnTitle: true,
     parent: {
         slug: '/benachrichtigungen',
@@ -105,7 +105,7 @@ export const PAGE_NOTIFICATION_DETAILS_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
+    permissions: [{ resource: 'page:notifications', actions: ['view'] }],
     hasOwnTitle: true,
     parent: {
         slug: '/powiadomienia',

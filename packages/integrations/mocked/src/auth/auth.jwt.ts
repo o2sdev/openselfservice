@@ -20,11 +20,9 @@ type JwtCallbackParams = {
 export const jwtCallback = async (
     getCustomer: (id: string | undefined, accessToken: string) => Promise<Models.Customer.Customer>,
     { token, user, trigger, session }: JwtCallbackParams,
-    defaultRole: string,
 ): Promise<JWT | null> => {
     // Sign in so we fetch customer data and save it on token
     if (trigger === 'signIn') {
-        token.role = user.role || defaultRole;
         token.id = user.id;
         await updateCustomerToken(getCustomer, token, user?.defaultCustomerId);
     }
@@ -52,11 +50,15 @@ async function updateCustomerToken(
         const customer = await getCustomer(customerId, accessToken);
 
         if (customer) {
+            // Permissions come directly from the organization
+            const permissions = customer.permissions ?? [];
+
             token.customer = {
                 id: customer.id,
-                roles: customer?.roles?.map((role) => role.roles).flat() ?? [],
                 name: customer?.name ?? '',
+                permissions,
             };
+            token.permissions = permissions;
         }
     } catch (_error) {
         throw new Error('Error fetching customer data');
@@ -68,12 +70,12 @@ function signUserToken(token: JWT): string {
         {
             name: token.name,
             email: token.email,
-            role: token.role,
+            permissions: token.permissions,
             customer: token?.customer
                 ? {
                       id: token.customer.id,
-                      roles: token.customer.roles,
                       name: token.customer.name,
+                      permissions: token.customer.permissions,
                   }
                 : undefined,
         },

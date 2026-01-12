@@ -5,6 +5,12 @@ import { Models } from '@o2s/utils.api-harmonization';
 export class TicketDetailsBlock extends Models.Block.Block {
     __typename!: 'TicketDetailsBlock';
     data!: Ticket;
+    permissions?: {
+        view: boolean;
+        edit: boolean;
+        close: boolean;
+        reopen: boolean;
+    };
 }
 
 export class Ticket {

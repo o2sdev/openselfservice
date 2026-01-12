@@ -1,7 +1,7 @@
 import { ApiConfig, Auth, Search } from '@o2s/framework/modules';
 
 import { Service as ArticlesService } from './modules/articles';
-import { Service as AuthService } from './modules/auth';
+import { Service as AuthService, PermissionsService } from './modules/auth';
 import { Service as BillingAccountsService } from './modules/billing-accounts';
 import { Service as CacheService } from './modules/cache';
 import { Service as CmsService } from './modules/cms';
@@ -76,5 +76,8 @@ export const Config: Partial<ApiConfig['integrations']> = {
     auth: {
         name: 'mocked',
         service: AuthService,
+        permissions: {
+            service: PermissionsService,
+        },
     },
 };

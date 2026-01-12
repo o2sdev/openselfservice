@@ -1,4 +1,4 @@
-import { Auth } from '@o2s/framework/modules';
+import { Models } from '@o2s/framework/modules';
 
 import { Media, Pagination } from '@/utils/models';
 
@@ -42,7 +42,8 @@ export class Article {
     };
     author?: Author;
     sections!: ArticleSection[];
-    permissions?: Auth.Constants.Roles[];
+    /** Normalized permissions required to view this article (e.g., [{resource: 'article:knowledge-base', actions: ['view']}]) */
+    permissions?: Models.Permission.Permission[];
     theme?: string;
 }
 

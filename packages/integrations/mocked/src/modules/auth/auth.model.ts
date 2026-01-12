@@ -1,9 +1,10 @@
-import { Auth } from '@o2s/framework/modules';
+import { Auth, Models } from '@o2s/framework/modules';
 
 export interface Jwt extends Auth.Model.Jwt {
-    role: string;
+    permissions?: Models.Permission.Permission[];
     customer?: {
         id: string;
-        roles: string[];
+        name: string;
+        permissions: Models.Permission.Permission[];
     };
 }

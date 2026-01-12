@@ -15,7 +15,12 @@ import { Typography } from '@o2s/ui/elements/typography';
 import { TicketRecentPureProps } from './TicketRecent.types';
 
 export const TicketRecentPure: React.FC<TicketRecentPureProps> = ({ locale, accessToken, routing, ...component }) => {
-    const { title, tickets, noResults, details } = component;
+    const { title, tickets, noResults, details, permissions } = component;
+
+    // Check view permission - if not allowed, don't render
+    if (!permissions?.view) {
+        return null;
+    }
 
     const { Link: LinkComponent } = createNavigation(routing);
 

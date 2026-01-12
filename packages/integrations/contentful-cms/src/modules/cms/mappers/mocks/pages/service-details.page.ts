@@ -1,4 +1,4 @@
-import { Auth, CMS } from '@o2s/framework/modules';
+import { CMS } from '@o2s/framework/modules';
 
 export const PAGE_SERVICE_DETAILS_EN: CMS.Model.Page.Page = {
     id: '15',
@@ -17,7 +17,7 @@ export const PAGE_SERVICE_DETAILS_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
+    permissions: [{ resource: 'page:services', actions: ['view'] }],
     hasOwnTitle: true,
     parent: {
         slug: '/services',
@@ -65,7 +65,7 @@ export const PAGE_SERVICE_DETAILS_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
+    permissions: [{ resource: 'page:services', actions: ['view'] }],
     hasOwnTitle: true,
     parent: {
         slug: '/dienstleistungen',
@@ -113,7 +113,7 @@ export const PAGE_SERVICE_DETAILS_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
+    permissions: [{ resource: 'page:services', actions: ['view'] }],
     hasOwnTitle: true,
     parent: {
         slug: '/uslugi',

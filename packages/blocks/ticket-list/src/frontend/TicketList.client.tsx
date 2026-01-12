@@ -33,6 +33,7 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
     const { Link: LinkComponent } = createNavigation(routing);
     const inspector = LivePreview.useInspector();
     const { labels } = useGlobalContext();
+    const { permissions } = component;
 
     const initialFilters: Request.GetTicketListBlockQuery = {
         id: component.id,
@@ -52,6 +53,11 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
     const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
 
     const [isPending, startTransition] = useTransition();
+
+    // Check view permission - if not allowed, don't render
+    if (!permissions?.view) {
+        return null;
+    }
 
     const handleFilter = (data: Partial<Request.GetTicketListBlockQuery>) => {
         startTransition(async () => {

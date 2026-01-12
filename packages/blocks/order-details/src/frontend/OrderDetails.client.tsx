@@ -104,6 +104,7 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
 }) => {
     const { Link: LinkComponent } = createNavigation(routing);
     const { labels } = useGlobalContext();
+    const { permissions } = component;
 
     const initialFilters: Request.GetOrderDetailsBlockQuery = {
         id: component.id,
@@ -118,6 +119,11 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
     const [filters, setFilters] = useState(initialFilters);
 
     const [isPending, startTransition] = useTransition();
+
+    // Check view permission - if not allowed, don't render
+    if (!permissions?.view) {
+        return null;
+    }
 
     const handleFilter = (data: Partial<Request.GetOrderDetailsBlockQuery>) => {
         startTransition(async () => {

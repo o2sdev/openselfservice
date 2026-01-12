@@ -4,6 +4,8 @@ import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
 import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 
+import { Auth } from '@o2s/framework/modules';
+
 import { mapServiceList } from './service-list.mapper';
 import { ServiceListBlock } from './service-list.model';
 import { GetServiceListBlockQuery } from './service-list.request';
@@ -13,6 +15,7 @@ export class ServiceListService {
     constructor(
         private readonly cmsService: CMS.Service,
         private readonly resourceService: Resources.Service,
+        private readonly permissionsService: Auth.Permissions.Service,
     ) {}
 
     getServiceListBlock(
@@ -37,9 +40,34 @@ export class ServiceListService {
                         headers['authorization'] || '',
                     )
                     .pipe(
-                        map((services) =>
-                            mapServiceList(services, cms, headers['x-locale'], headers['x-client-timezone'] || ''),
-                        ),
+                        map((services) => {
+                            const result = mapServiceList(
+                                services,
+                                cms,
+                                headers['x-locale'],
+                                headers['x-client-timezone'] || '',
+                            );
+
+                            // Extract permissions using ACL service
+                            if (headers.authorization) {
+                                const permissions = this.permissionsService.checkResourceActions(
+                                    headers.authorization,
+                                    'services',
+                                    ['view'],
+                                );
+
+                                result.permissions = {
+                                    view: permissions.view ?? false,
+                                };
+                            } else {
+                                // Default to allowing view if no authorization token
+                                result.permissions = {
+                                    view: true,
+                                };
+                            }
+
+                            return result;
+                        }),
                     );
             }),
         );

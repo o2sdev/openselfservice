@@ -1,27 +1,23 @@
-import { Auth, Users } from '@o2s/framework/modules';
+import { Users } from '@o2s/framework/modules';
 
+import { mapCustomer } from './customers.mapper';
+
+// Users belong to organizations. Permissions come from the organization, not the user.
+// The isAdmin flag indicates if the user has admin privileges within that organization.
 const MOCK_USER_1: Users.Model.User = {
     id: 'user-100',
     username: 'john@example.com',
     email: 'john@example.com',
     firstName: 'John',
     lastName: 'Adams',
-    roles: [
+    organizations: [
         {
-            customer: {
-                id: 'cust-001',
-                name: 'Acme Corporation',
-                clientType: 'B2B',
-            },
-            roles: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
+            customer: mapCustomer('cust-002')!, // Tech Solutions - user permissions (view + pay)
+            isAdmin: false,
         },
         {
-            customer: {
-                id: 'cust-002',
-                name: 'Retail Customer Ltd',
-                clientType: 'B2C',
-            },
-            roles: [Auth.Constants.Roles.ORG_USER],
+            customer: mapCustomer('cust-003')!, // Digital Services - readonly (view only)
+            isAdmin: false,
         },
     ],
     customers: [],
@@ -33,22 +29,14 @@ const MOCK_USER_2: Users.Model.User = {
     email: 'jane@example.com',
     firstName: 'Jane',
     lastName: 'Doe',
-    roles: [
+    organizations: [
         {
-            customer: {
-                id: 'cust-003',
-                name: 'Tech Solutions Inc',
-                clientType: 'B2B',
-            },
-            roles: [Auth.Constants.Roles.ORG_USER],
+            customer: mapCustomer('cust-001')!, // Acme Corp - admin permissions (full access)
+            isAdmin: true,
         },
         {
-            customer: {
-                id: 'cust-004',
-                name: 'Digital Services GmbH',
-                clientType: 'B2B',
-            },
-            roles: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
+            customer: mapCustomer('cust-002')!, // Tech Solutions - user permissions (view + pay)
+            isAdmin: false,
         },
     ],
     customers: [],
@@ -60,7 +48,7 @@ const MOCK_USER_3: Users.Model.User = {
     email: 'bob.wilson@example.com',
     firstName: 'Bob',
     lastName: 'Wilson',
-    roles: [],
+    organizations: [],
     customers: [],
 };
 
@@ -70,7 +58,12 @@ const MOCK_USER_4: Users.Model.User = {
     email: 'lyon@example.com',
     firstName: 'Lyon',
     lastName: 'Gaultier',
-    roles: [],
+    organizations: [
+        {
+            customer: mapCustomer('cust-003')!, // Digital Services - readonly (view only)
+            isAdmin: false,
+        },
+    ],
     customers: [],
 };
 

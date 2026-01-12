@@ -41,6 +41,10 @@ export class PaymentsSummaryBlock extends ApiModels.Block.Block {
         showChart?: boolean;
         monthsToShow?: number;
     };
+    permissions?: {
+        view: boolean;
+        pay: boolean;
+    };
 }
 
 export class BarData {

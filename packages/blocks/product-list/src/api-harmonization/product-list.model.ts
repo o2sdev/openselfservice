@@ -26,6 +26,9 @@ export class ProductListBlock extends ApiModels.Block.Block {
         gridView: string;
         tableView: string;
     };
+    permissions?: {
+        view: boolean;
+    };
 }
 
 export type ProductList = {

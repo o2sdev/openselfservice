@@ -59,6 +59,8 @@ export const OrdersSummaryPure: React.FC<Readonly<OrdersSummaryPureProps>> = ({
     ...component
 }) => {
     const { labels } = useGlobalContext();
+    const { permissions } = component;
+
     const initialFilters: Request.GetOrdersSummaryBlockQuery = {
         id: component.id,
         dateFrom: dayjs().subtract(6, 'months').toISOString(),
@@ -71,6 +73,11 @@ export const OrdersSummaryPure: React.FC<Readonly<OrdersSummaryPureProps>> = ({
     const [filters, setFilters] = useState(initialFilters);
 
     const [isPending, startTransition] = useTransition();
+
+    // Check view permission - if not allowed, don't render
+    if (!permissions?.view) {
+        return null;
+    }
 
     const cardsLayout = component.layout === 'horizontal' ? 'flex-col md:flex-row' : 'flex-col';
 

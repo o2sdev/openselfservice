@@ -1,4 +1,4 @@
-import { Auth, CMS } from '@o2s/framework/modules';
+import { CMS } from '@o2s/framework/modules';
 
 export const PAGE_TICKET_LIST_EN: CMS.Model.Page.Page = {
     id: '2',
@@ -17,12 +17,16 @@ export const PAGE_TICKET_LIST_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    hasOwnTitle: true,
-    permissions: [Auth.Constants.Roles.ORG_USER],
+    hasOwnTitle: false,
+    permissions: [{ resource: 'page:tickets', actions: ['view'] }],
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
             main: [
+                {
+                    __typename: 'TicketSummaryBlock',
+                    id: 'ticket-summary-1',
+                },
                 {
                     __typename: 'TicketListBlock',
                     id: 'ticket-list-1',
@@ -55,12 +59,16 @@ export const PAGE_TICKET_LIST_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    hasOwnTitle: true,
-    permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
+    hasOwnTitle: false,
+    permissions: [{ resource: 'page:tickets', actions: ['view'] }],
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
             main: [
+                {
+                    __typename: 'TicketSummaryBlock',
+                    id: 'ticket-summary-1',
+                },
                 {
                     __typename: 'TicketListBlock',
                     id: 'ticket-list-1',
@@ -93,12 +101,16 @@ export const PAGE_TICKET_LIST_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    hasOwnTitle: true,
-    permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
+    hasOwnTitle: false,
+    permissions: [{ resource: 'page:tickets', actions: ['view'] }],
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
             main: [
+                {
+                    __typename: 'TicketSummaryBlock',
+                    id: 'ticket-summary-1',
+                },
                 {
                     __typename: 'TicketListBlock',
                     id: 'ticket-list-1',

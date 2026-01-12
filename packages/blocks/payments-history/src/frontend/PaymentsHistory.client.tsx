@@ -13,7 +13,12 @@ const StackedBarChart = dynamic(() =>
 );
 
 export const PaymentsHistoryPure: React.FC<PaymentsHistoryPureProps> = ({ ...component }) => {
-    const { chartData, labels, title, currency } = component;
+    const { chartData, labels, title, currency, permissions } = component;
+
+    // Check view permission - if not allowed, don't render
+    if (!permissions?.view) {
+        return null;
+    }
 
     return (
         <Card className="h-full w-full">
