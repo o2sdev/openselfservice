@@ -1,6 +1,8 @@
 'use client';
 
-import React from 'react';
+import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
+import React, { useRef, useState } from 'react';
+import { Swiper as SwiperType } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -8,6 +10,8 @@ import { A11y, Keyboard, Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { cn } from '@o2s/ui/lib/utils';
+
+import { Button } from '@o2s/ui/elements/button';
 
 import { CarouselProps } from './Carousel.types';
 
@@ -21,6 +25,11 @@ export const Carousel: React.FC<Readonly<CarouselProps>> = ({
     noSwipingSelector,
     ...swiperProps
 }) => {
+    const swiperRef = useRef<SwiperType>(null);
+
+    const [index, setIndex] = useState(0);
+    const [isEnd, setIsEnd] = useState(false);
+
     const allModules = [
         A11y,
         Keyboard,
@@ -30,19 +39,64 @@ export const Carousel: React.FC<Readonly<CarouselProps>> = ({
     ];
 
     return (
-        <Swiper
-            className={cn('w-full', className)}
-            modules={allModules}
-            keyboard={{ enabled: true, onlyInViewport: true }}
-            navigation={showNavigation}
-            pagination={showPagination ? { clickable: true } : false}
-            initialSlide={startingSlideIndex}
-            noSwipingSelector={noSwipingSelector}
-            {...swiperProps}
-        >
-            {slides.map((slide, index) => (
-                <SwiperSlide key={index}>{slide}</SwiperSlide>
-            ))}
-        </Swiper>
+        <div className="relative">
+            <Swiper
+                className={cn('w-full', className)}
+                modules={allModules}
+                onBeforeInit={(swiper) => {
+                    swiperRef.current = swiper;
+                }}
+                keyboard={{ enabled: true, onlyInViewport: true }}
+                navigation={false}
+                pagination={showPagination ? { clickable: true } : false}
+                initialSlide={startingSlideIndex}
+                noSwipingSelector={noSwipingSelector}
+                {...swiperProps}
+            >
+                {slides.map((slide, index) => (
+                    <SwiperSlide key={index} className="!h-auto">
+                        {slide}
+                    </SwiperSlide>
+                ))}
+            </Swiper>
+
+            {showNavigation && (
+                <div className="flex items-center gap-8 lg:justify-start justify-center">
+                    <Button
+                        variant="outline"
+                        size="icon"
+                        className="rounded-full absolute z-1 top-2/4 !-translate-y-8 -left-5"
+                        disabled={index === 0}
+                        onClick={() => {
+                            if (swiperRef.current) {
+                                swiperRef.current?.slidePrev();
+
+                                setIndex(swiperRef.current?.realIndex);
+                                setIsEnd(swiperRef.current?.isEnd);
+                            }
+                        }}
+                    >
+                        <ArrowLeftIcon />
+                    </Button>
+
+                    <Button
+                        variant="outline"
+                        size="icon"
+                        className="rounded-full absolute z-1 top-2/4 !-translate-y-8 -right-5"
+                        disabled={isEnd}
+                        onClick={() => {
+                            if (swiperRef.current) {
+                                swiperRef.current?.slideNext();
+
+                                setIndex(swiperRef.current?.realIndex);
+                                setIsEnd(swiperRef.current?.isEnd);
+                            }
+                        }}
+                    >
+                        <ArrowRightIcon />
+                    </Button>
+                </div>
+            )}
+        </div>
     );
 };
