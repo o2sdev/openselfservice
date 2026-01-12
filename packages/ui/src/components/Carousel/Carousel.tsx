@@ -25,7 +25,7 @@ export const Carousel: React.FC<Readonly<CarouselProps>> = ({
     noSwipingSelector,
     ...swiperProps
 }) => {
-    const swiperRef = useRef<SwiperType>(null);
+    const swiperRef = useRef<SwiperType | null>(null);
 
     const [index, setIndex] = useState(startingSlideIndex);
     const [isEnd, setIsEnd] = useState(false);
