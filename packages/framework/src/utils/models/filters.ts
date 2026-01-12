@@ -34,6 +34,7 @@ export class FilterSelect<T> extends Filter<T> {
 export class FilterToggleGroup<T> extends Filter<T> {
     __typename!: 'FilterToggleGroup';
     allowMultiple!: boolean;
+    isLabelHidden?: boolean;
     options!: {
         value: string;
         label: string;
