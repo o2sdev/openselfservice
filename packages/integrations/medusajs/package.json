@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@medusajs/js-sdk": "^2.12.5",
-    "@medusajs/types": "^2.12.1",
+    "@medusajs/types": "^2.12.5",
     "@o2s/framework": "*",
     "@o2s/utils.logger": "*"
   },
