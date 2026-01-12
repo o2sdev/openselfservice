@@ -18,5 +18,7 @@ export class GetTicketListQuery extends PaginationQuery {
     dateFrom?: Date;
     dateTo?: Date;
     sort?: string;
+    search?: string;
+    priority?: string;
     locale?: string;
 }

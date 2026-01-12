@@ -86,7 +86,7 @@ If you decide to customize the shadcn/ui components, upgrading manually is recom
 
 ## Global
 
-See the [next chapter](./theming.md) for more information about the global CSS file, and how to use it.
+See the [next chapter](./theming/index.md) for more information about the global CSS file, and how to use it.
 
 ## Configs
 

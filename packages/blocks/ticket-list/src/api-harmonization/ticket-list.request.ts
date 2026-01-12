@@ -7,4 +7,6 @@ export class GetTicketListBlockQuery
     offset?: number;
     limit?: number;
     preview?: boolean;
+    search?: string;
+    priority?: string;
 }

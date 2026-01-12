@@ -1,5 +1,5 @@
 ---
-sidebar_position: 50
+sidebar_position: 200
 ---
 
 # Features
@@ -10,39 +10,33 @@ This document provides an overview of features supported by the Contentful CMS i
 
 | Feature              | Status | Notes                                                                                 |
 |----------------------| ------ |---------------------------------------------------------------------------------------|
-| GraphQL API          | ✅     | Primary API for all content operations                                                |
-| REST Delivery API    | ✅     | Used for specific operations like retrieving locales via getLocales                   |
-| Preview API          | ✅     | Supported for draft/unpublished content                                               |
-| Content Localization | ✅     | Full multi-locale support                                                             |
-| Multi-environment    | ✅     | Supported via CF_ENV environment variable                                             |
-| Permissions/Roles    | ⚠️     | Partially supported - permissions field exists on Page, but full RBAC not implemented |
-| Live Preview         | ✅     | Supported with LivePreviewProvider and metadata pattern                               |
-| Live updates         | ❌     | Not supported                                                                         |
-| Themes/Layouts       | ✅     | Supported via OneColumn and TwoColumn templates                                       |
-| Media Management     | ✅     | Supported via ComponentMedia content type                                             |
-| SEO Metadata         | ✅     | Supported via PageSeo component                                                       |
-| Field Mapping        | ✅     | Supported via ComponentFieldMapping for custom labels                                 |
-| Table Configuration  | ✅     | Supported via ComponentTable for data table setup                                     |
-| Pagination           | ✅     | Supported via ComponentPagination                                                     |
-| Cache Integration    | ✅     | Full cache support for optimized performance                                          |
-| Code Generation      | ✅     | TypeScript types and SDK generated from GraphQL schema via graphql-codegen            |
-| Type Safety          | ✅     | Full TypeScript type safety from GraphQL schema                                       |
+| [GraphQL API](#graphql-api)          | ✅     | Primary API for all content operations                                                |
+| [REST Delivery API](#rest-delivery-api)    | ✅     | Used for specific operations like retrieving locales via getLocales                   |
+| [Preview API](#preview-api)          | ✅     | Supported for draft/unpublished content                                               |
+| [Content Localization](#content-localization) | ✅     | Full multi-locale support                                                             |
+| [Multi-environment](#multi-environment)    | ✅     | Supported via CF_ENV environment variable                                             |
+| [Live Preview](#live-preview)         | ✅     | Supported with LivePreviewProvider and metadata pattern                               |
+| [Themes/Layouts](#themeslayouts)       | ✅     | Supported via OneColumn and TwoColumn templates                                       |
+| [Media Management](#media-management)     | ✅     | Supported via ComponentMedia content type                                             |
+| [SEO Metadata](#seo-metadata)         | ✅     | Supported via PageSeo component                                                       |
+| [Field Mapping](#field-mapping)        | ✅     | Supported via ComponentFieldMapping for custom labels                                 |
+| [Table Configuration](#table-configuration)  | ✅     | Supported via ComponentTable for data table setup                                     |
+| [Pagination](#pagination)           | ✅     | Supported via ComponentPagination                                                     |
+| [Cache Integration](#cache-integration)    | ✅     | Full cache support for optimized performance                                          |
+| [Code Generation](#code-generation)      | ✅     | TypeScript types and SDK generated from GraphQL schema via graphql-codegen            |
+| [Type Safety](#type-safety)          | ✅     | Full TypeScript type safety from GraphQL schema                                       |
+| [Permissions/Roles](#permissionsroles)    | ⚠️     | Partially supported - permissions field exists on Page, but full RBAC not implemented |
+| [Live updates](#live-updates)         | ❌     | Not supported                                                                         |
 
 ## Feature details
 
-### Live Preview
-
-Live Preview allows content editors to see their changes in real-time as they edit content in Contentful. The implementation uses a metadata pattern to bridge the gap between our normalized data model and Contentful's structure.
-
-For detailed information, see the [Live Preview documentation](./live-preview.md).
-
-### GraphQL API
+### GraphQL API {#graphql-api}
 
 GraphQL is the primary API for all content operations, providing type-safe queries, efficient data fetching, and automatic SDK generation.
 
 For detailed information, see the [GraphQL documentation](./graphql.md).
 
-### REST Delivery API
+### REST Delivery API {#rest-delivery-api}
 
 The REST Delivery API is used for specific operations that are not available through GraphQL, such as:
 
@@ -50,7 +44,7 @@ The REST Delivery API is used for specific operations that are not available thr
 
 The REST API client is available through `RestDeliveryService` and uses the Contentful JavaScript SDK.
 
-### Preview API
+### Preview API {#preview-api}
 
 The Preview API allows access to draft and unpublished content. It works alongside the Delivery API:
 
@@ -59,7 +53,7 @@ The Preview API allows access to draft and unpublished content. It works alongsi
 
 The integration automatically switches between APIs based on the `preview` parameter in queries.
 
-### Content Localization
+### Content Localization {#content-localization}
 
 Contentful supports multiple locales out of the box. The integration:
 
@@ -68,7 +62,7 @@ Contentful supports multiple locales out of the box. The integration:
 - Handles locale-specific slugs for pages
 - Maintains locale context throughout the data flow
 
-### Multi-environment
+### Multi-environment {#multi-environment}
 
 Contentful supports multiple environments (e.g., `master`, `staging`, `development`). The integration:
 
@@ -76,11 +70,13 @@ Contentful supports multiple environments (e.g., `master`, `staging`, `developme
 - Supports environment-specific content
 - Allows separate content models per environment
 
-### Permissions/Roles
+### Live Preview {#live-preview}
 
-The Page content type includes a `permissions` field that can store permission strings. However, full role-based access control (RBAC) is not currently implemented in the integration. The permissions field is available in the data model but requires custom implementation for enforcement.
+Live Preview allows content editors to see their changes in real-time as they edit content in Contentful. The implementation uses a metadata pattern to bridge the gap between our normalized data model and Contentful's structure.
 
-### Themes/Layouts
+For detailed information, see the [Live Preview documentation](./live-preview.md).
+
+### Themes/Layouts {#themeslayouts}
 
 Page layouts are defined through Template content types:
 
@@ -89,7 +85,7 @@ Page layouts are defined through Template content types:
 
 Templates can be extended with additional layout variants as needed.
 
-### Media Management
+### Media Management {#media-management}
 
 Media assets are managed through Contentful's Asset API and accessed via the `ComponentMedia` content type:
 
@@ -97,7 +93,7 @@ Media assets are managed through Contentful's Asset API and accessed via the `Co
 - Responsive image support
 - Asset metadata (alt text, title, description)
 
-### SEO Metadata
+### SEO Metadata {#seo-metadata}
 
 SEO metadata is managed through the `ComponentSeo` content type, which includes:
 
@@ -107,7 +103,7 @@ SEO metadata is managed through the `ComponentSeo` content type, which includes:
 - Open Graph image
 - Additional SEO fields
 
-### Field Mapping
+### Field Mapping {#field-mapping}
 
 Field mapping allows customizing labels for API field values. This is useful for:
 
@@ -117,7 +113,7 @@ Field mapping allows customizing labels for API field values. This is useful for
 
 Implemented via `ComponentFieldMapping` and `ComponentKeyValue` content types.
 
-### Table Configuration
+### Table Configuration {#table-configuration}
 
 Table configuration allows defining which columns to display and how to display them. This is useful for:
 
@@ -127,7 +123,7 @@ Table configuration allows defining which columns to display and how to display 
 
 Implemented via `ComponentTable` content type.
 
-### Pagination
+### Pagination {#pagination}
 
 Pagination is supported through the `ComponentPagination` content type, which allows:
 
@@ -135,7 +131,7 @@ Pagination is supported through the `ComponentPagination` content type, which al
 - Enabling/disabling pagination controls
 - Custom pagination settings per block
 
-### Cache Integration
+### Cache Integration {#cache-integration}
 
 The integration uses the framework's cache module for:
 
@@ -146,10 +142,18 @@ The integration uses the framework's cache module for:
 
 Cached entries are stored using `{id}-{locale}` keys to ensure uniqueness.
 
-### Code Generation
+### Code Generation {#code-generation}
 
 TypeScript types and SDK methods are automatically generated from GraphQL queries using `graphql-codegen`. For detailed information, see the [GraphQL documentation](./graphql.md#code-generation).
 
-### Type Safety
+### Type Safety {#type-safety}
 
-Full TypeScript type safety is provided through generated types from the GraphQL schema, ensuring compile-time validation. For detailed information, see the [GraphQL documentation](./graphql.md#type-safety-benefits).
+Full TypeScript type safety is provided through generated types from the GraphQL schema, ensuring compile-time validation. For detailed information, see the [GraphQL documentation](./graphql.md#code-generation).
+
+### Permissions/Roles {#permissionsroles}
+
+The Page content type includes a `permissions` field that can store permission strings. However, full role-based access control (RBAC) is not currently implemented in the integration. The permissions field is available in the data model but requires custom implementation for enforcement.
+
+### Live updates {#live-updates}
+
+Live updates are currently not supported. The integration does not provide real-time content synchronization when content is updated in Contentful. Content changes require a page refresh or cache invalidation to be visible.
