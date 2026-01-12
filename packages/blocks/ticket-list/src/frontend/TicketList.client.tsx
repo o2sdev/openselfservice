@@ -90,30 +90,23 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
         });
     };
 
-    const actions: Action[] = [
+    const variantConfig: Array<{ variant: Action['variant']; className: string }> = [
+        { variant: 'default', className: 'no-underline hover:no-underline' },
+        { variant: 'secondary', className: 'no-underline hover:no-underline flex-1' },
         {
-            label: data.forms?.[0]?.label,
-            icon: data.forms?.[0]?.icon,
-            url: data.forms?.[0]?.url || '',
-            variant: 'default',
-            className: 'no-underline hover:no-underline',
-        },
-        {
-            label: data.forms?.[1]?.label,
-            icon: data.forms?.[1]?.icon,
-            url: data.forms?.[1]?.url || '',
-            variant: 'secondary',
-            className: 'no-underline hover:no-underline flex-1',
-        },
-        {
-            label: data.forms?.[2]?.label,
-            icon: data.forms?.[2]?.icon,
-            url: data.forms?.[2]?.url || '',
             variant: 'ghost',
             className:
                 'flex items-center gap-2 !no-underline hover:!no-underline cursor-pointer h-8 w-full justify-start',
         },
     ];
+
+    const actions: Action[] = (data.forms ?? []).map((form, index) => ({
+        label: form.label,
+        icon: form.icon,
+        url: form.url || '',
+        variant: variantConfig[index]?.variant ?? 'default',
+        className: variantConfig[index]?.className ?? '',
+    }));
 
     // Define columns configuration outside JSX for better readability
     const columns = data.table.columns.map((column) => {
@@ -177,22 +170,21 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
 
                         {data.forms && (
                             <ActionList
-                                actions={actions.map(
-                                    (action) =>
-                                        action.label && (
-                                            <Button
-                                                asChild
-                                                variant={action.variant}
-                                                key={action.label}
-                                                className={action.className}
-                                            >
-                                                <LinkComponent href={action.url}>
-                                                    {action.icon && <DynamicIcon name={action.icon} size={16} />}
-                                                    {action.label}
-                                                </LinkComponent>
-                                            </Button>
-                                        ),
-                                )}
+                                actions={actions
+                                    .filter((action) => action.label)
+                                    .map((action, index) => (
+                                        <Button
+                                            asChild
+                                            variant={action.variant}
+                                            key={`${action.label}-${index}`}
+                                            className={action.className}
+                                        >
+                                            <LinkComponent href={action.url}>
+                                                {action.icon && <DynamicIcon name={action.icon} size={16} />}
+                                                {action.label}
+                                            </LinkComponent>
+                                        </Button>
+                                    ))}
                                 showMoreLabel={data.labels.showMore}
                             />
                         )}

@@ -27,7 +27,7 @@ export const Carousel: React.FC<Readonly<CarouselProps>> = ({
 }) => {
     const swiperRef = useRef<SwiperType>(null);
 
-    const [index, setIndex] = useState(0);
+    const [index, setIndex] = useState(startingSlideIndex);
     const [isEnd, setIsEnd] = useState(false);
 
     const allModules = [
@@ -45,6 +45,14 @@ export const Carousel: React.FC<Readonly<CarouselProps>> = ({
                 modules={allModules}
                 onBeforeInit={(swiper) => {
                     swiperRef.current = swiper;
+                }}
+                onInit={(swiper) => {
+                    setIndex(swiper.realIndex);
+                    setIsEnd(swiper.isEnd);
+                }}
+                onSlideChange={(swiper) => {
+                    setIndex(swiper.realIndex);
+                    setIsEnd(swiper.isEnd);
                 }}
                 keyboard={{ enabled: true, onlyInViewport: true }}
                 navigation={false}
@@ -65,15 +73,10 @@ export const Carousel: React.FC<Readonly<CarouselProps>> = ({
                     <Button
                         variant="outline"
                         size="icon"
-                        className="rounded-full absolute z-1 top-2/4 !-translate-y-8 -left-5"
+                        className="rounded-full absolute z-10 top-2/4 !-translate-y-8 -left-5"
                         disabled={index === 0}
                         onClick={() => {
-                            if (swiperRef.current) {
-                                swiperRef.current?.slidePrev();
-
-                                setIndex(swiperRef.current?.realIndex);
-                                setIsEnd(swiperRef.current?.isEnd);
-                            }
+                            swiperRef.current?.slidePrev();
                         }}
                     >
                         <ArrowLeftIcon />
@@ -82,15 +85,10 @@ export const Carousel: React.FC<Readonly<CarouselProps>> = ({
                     <Button
                         variant="outline"
                         size="icon"
-                        className="rounded-full absolute z-1 top-2/4 !-translate-y-8 -right-5"
+                        className="rounded-full absolute z-10 top-2/4 !-translate-y-8 -right-5"
                         disabled={isEnd}
                         onClick={() => {
-                            if (swiperRef.current) {
-                                swiperRef.current?.slideNext();
-
-                                setIndex(swiperRef.current?.realIndex);
-                                setIsEnd(swiperRef.current?.isEnd);
-                            }
+                            swiperRef.current?.slideNext();
                         }}
                     >
                         <ArrowRightIcon />

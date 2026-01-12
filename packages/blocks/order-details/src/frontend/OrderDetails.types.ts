@@ -21,8 +21,6 @@ export interface OrderDetailsRendererProps extends Omit<OrderDetailsProps, 'orde
 }
 
 export type Action = {
-    label?: string;
-    icon?: string;
     variant: VariantProps<typeof baseVariant>['variant'];
     className?: string;
-};
+} & ({ label: string; icon?: string } | { label?: string; icon: string });

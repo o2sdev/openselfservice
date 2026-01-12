@@ -4,7 +4,7 @@ import { cn } from '@o2s/ui/lib/utils';
 
 import { MoreActionsMenu } from '@o2s/ui/components/MoreActionsMenu';
 
-import { ActionListProps } from './ActionList.types';
+import type { ActionListProps } from './ActionList.types';
 
 export const ActionList: React.FC<Readonly<ActionListProps>> = ({
     className,

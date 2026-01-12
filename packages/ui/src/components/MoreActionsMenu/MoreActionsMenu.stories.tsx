@@ -60,7 +60,7 @@ export const TwoActions: Story = {
 export const WithDifferentVariant: Story = {
     args: {
         showMoreLabel: 'Show more actions',
-        triggerVariant: 'destructive',
+        triggerVariant: 'ghost',
         triggerIcon: 'MoreVertical',
         actions: [
             <Link key="primary" variant="primary">

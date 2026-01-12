@@ -10,7 +10,7 @@ import {
     DropdownMenuTrigger,
 } from '@o2s/ui/elements/dropdown-menu';
 
-import { MoreActionsMenuProps } from './MoreActionsMenu.types';
+import type { MoreActionsMenuProps } from './MoreActionsMenu.types';
 
 export const MoreActionsMenu: React.FC<Readonly<MoreActionsMenuProps>> = ({
     className,

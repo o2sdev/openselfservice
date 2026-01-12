@@ -22,9 +22,7 @@ export type TicketListRendererProps = Omit<TicketListProps, ''> & {
 };
 
 export type Action = {
-    label?: string;
-    icon?: string;
     url: string;
     variant: VariantProps<typeof baseVariant>['variant'];
     className?: string;
-};
+} & ({ label: string; icon?: string } | { label?: string; icon: string });

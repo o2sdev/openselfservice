@@ -211,25 +211,24 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
                     <div className="flex flex-row justify-end">
                         <div className="flex flex-col gap-4 sm:flex-row sm:items-center w-full sm:w-auto">
                             <ActionList
-                                actions={actions.map(
-                                    (action) =>
-                                        action.label && (
-                                            <TooltipHover
-                                                key={action.label}
-                                                trigger={(setIsOpen) => (
-                                                    <Button
-                                                        variant={action.variant}
-                                                        onClick={() => setIsOpen(true)}
-                                                        className={action.className}
-                                                    >
-                                                        {action.icon && <DynamicIcon name={action.icon} size={16} />}
-                                                        {action.label}
-                                                    </Button>
-                                                )}
-                                                content={<p>{t('general.comingSoon')}</p>}
-                                            />
-                                        ),
-                                )}
+                                actions={actions
+                                    .filter((action) => action.label)
+                                    .map((action, index) => (
+                                        <TooltipHover
+                                            key={`${action.label}-${index}`}
+                                            trigger={(setIsOpen) => (
+                                                <Button
+                                                    variant={action.variant}
+                                                    onClick={() => setIsOpen(true)}
+                                                    className={action.className}
+                                                >
+                                                    {action.icon && <DynamicIcon name={action.icon} size={16} />}
+                                                    {action.label}
+                                                </Button>
+                                            )}
+                                            content={<p>{t('general.comingSoon')}</p>}
+                                        />
+                                    ))}
                                 showMoreLabel={data.labels.showMore}
                             />
                         </div>
