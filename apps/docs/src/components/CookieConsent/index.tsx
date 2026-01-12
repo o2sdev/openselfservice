@@ -4,7 +4,7 @@ import 'vanilla-cookieconsent/dist/cookieconsent.css';
 
 import pluginConfig from '@site/src/components/CookieConsent/config';
 
-import styles from '../../css/cookie-consent.css';
+// import styles from '../../css/cookie-consent.css';
 
 const CookieConsentComponent = () => {
     useEffect(() => {

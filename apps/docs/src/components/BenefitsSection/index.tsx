@@ -29,7 +29,6 @@ export interface BenefitCardProps {
 export const BenefitCard: React.FC<BenefitCardProps> = ({
     team,
     icon,
-    iconPosition = 'right',
     title,
     description,
     link,

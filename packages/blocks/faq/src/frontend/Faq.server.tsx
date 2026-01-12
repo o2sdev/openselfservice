@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import type { Model } from '../api-harmonization/faq.client';
 import { sdk } from '../sdk';
 
 import { FaqProps } from './Faq.types';
@@ -15,8 +16,9 @@ export const Faq: React.FC<FaqProps> = async ({
     hasPriority,
     isDraftModeEnabled,
 }) => {
+    let data: Model.FaqBlock;
     try {
-        const data = await sdk.blocks.getFaq(
+        data = await sdk.blocks.getFaq(
             {
                 id,
                 preview: isDraftModeEnabled,
@@ -24,18 +26,18 @@ export const Faq: React.FC<FaqProps> = async ({
             { 'x-locale': locale },
             accessToken,
         );
-
-        return (
-            <FaqDynamic
-                {...data}
-                id={id}
-                accessToken={accessToken}
-                locale={locale}
-                routing={routing}
-                hasPriority={hasPriority}
-            />
-        );
     } catch (_error) {
         return null;
     }
+
+    return (
+        <FaqDynamic
+            {...data}
+            id={id}
+            accessToken={accessToken}
+            locale={locale}
+            routing={routing}
+            hasPriority={hasPriority}
+        />
+    );
 };

@@ -1,7 +1,6 @@
 import { useLocale } from 'next-intl';
 import React, { Suspense } from 'react';
 
-import { Container } from '@o2s/ui/components/Container';
 import { Loading } from '@o2s/ui/components/Loading';
 
 import { TicketRecent } from './TicketRecent.server';

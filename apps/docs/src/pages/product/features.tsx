@@ -286,8 +286,8 @@ export default function ProductFeatures() {
                                 }
                                 description={
                                     <Body>
-                                        Here's a breakdown of what the framework enables — both for business outcomes
-                                        and developer experience.
+                                        Here&apos;s a breakdown of what the framework enables — both for business
+                                        outcomes and developer experience.
                                     </Body>
                                 }
                             />
