@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
 import { Button } from '@o2s/ui/elements/button';
-import { Link } from '@o2s/ui/elements/link';
 
 import { ActionList } from './ActionList';
 
@@ -26,18 +25,12 @@ export const Default: Story = {
             <Button key="secondary" variant="secondary">
                 Secondary Action
             </Button>,
-            <Link key="primary" variant="primary">
-                Primary Action
-            </Link>,
-            <Link key="secondary" variant="secondary">
-                Secondary Action
-            </Link>,
-            <Link key="tertiary1" variant="outline">
+            <Button key="tertiary1" variant="outline">
                 Tertiary Action 1
-            </Link>,
-            <Link key="tertiary2" variant="ghost">
+            </Button>,
+            <Button key="tertiary2" variant="ghost">
                 Tertiary Action 2
-            </Link>,
+            </Button>,
         ],
     },
 };
@@ -78,18 +71,12 @@ export const WithDifferentVariant: Story = {
             <Button key="secondary" variant="secondary">
                 Secondary Action
             </Button>,
-            <Link key="primary" variant="primary">
-                Primary Action
-            </Link>,
-            <Link key="secondary" variant="secondary">
-                Secondary Action
-            </Link>,
-            <Link key="tertiary1" variant="outline">
+            <Button key="tertiary1" variant="outline">
                 Tertiary Action 1
-            </Link>,
-            <Link key="tertiary2" variant="ghost">
+            </Button>,
+            <Button key="tertiary2" variant="ghost">
                 Tertiary Action 2
-            </Link>,
+            </Button>,
         ],
     },
 };

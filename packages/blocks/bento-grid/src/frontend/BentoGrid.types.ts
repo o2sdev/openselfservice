@@ -1,6 +1,6 @@
 import { defineRouting } from 'next-intl/routing';
 
-import { Model } from '../api-harmonization/bento-grid.client';
+import type { Model } from '../api-harmonization/bento-grid.client';
 
 export interface BentoGridProps {
     id: string;

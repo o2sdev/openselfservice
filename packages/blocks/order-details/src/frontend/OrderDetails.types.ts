@@ -3,7 +3,7 @@ import { defineRouting } from 'next-intl/routing';
 
 import { baseVariant } from '@o2s/ui/lib/utils';
 
-import { Model } from '../api-harmonization/order-details.client';
+import type { Model } from '../api-harmonization/order-details.client';
 
 export interface OrderDetailsProps {
     id: string;

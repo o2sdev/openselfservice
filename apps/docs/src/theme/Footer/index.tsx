@@ -1,6 +1,5 @@
 import React, { type ReactNode } from 'react';
 
-import { useLocation } from '@docusaurus/router';
 import { useThemeConfig } from '@docusaurus/theme-common';
 
 import FooterCopyright from '@theme/Footer/Copyright';
@@ -10,11 +9,6 @@ import FooterLogo from '@theme/Footer/Logo';
 
 function Footer(): ReactNode {
     const { footer } = useThemeConfig();
-    const location = useLocation();
-
-    // if (!footer || location.pathname === '/') {
-    //     return null;
-    // }
 
     const { copyright, links, logo, style } = footer;
 

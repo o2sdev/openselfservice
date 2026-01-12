@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import type { Model } from '../api-harmonization/article-search.client';
 import { sdk } from '../sdk';
 
 import { ArticleSearchProps } from './ArticleSearch.types';
@@ -16,26 +17,27 @@ export const ArticleSearch: React.FC<ArticleSearchProps> = async ({
     routing,
     hasPriority,
 }) => {
+    let data: Model.ArticleSearchBlock;
     try {
-        const data = await sdk.blocks.getArticleSearch(
+        data = await sdk.blocks.getArticleSearch(
             {
                 id,
             },
             { 'x-locale': locale },
             accessToken,
         );
-
-        return (
-            <ArticleSearchDynamic
-                {...data}
-                id={id}
-                accessToken={accessToken}
-                locale={locale}
-                routing={routing}
-                hasPriority={hasPriority}
-            />
-        );
     } catch (_error) {
         return null;
     }
+
+    return (
+        <ArticleSearchDynamic
+            {...data}
+            id={id}
+            accessToken={accessToken}
+            locale={locale}
+            routing={routing}
+            hasPriority={hasPriority}
+        />
+    );
 };

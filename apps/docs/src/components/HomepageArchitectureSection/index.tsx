@@ -1,12 +1,10 @@
 import React from 'react';
 
 import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 import { Body, H2 } from '../Typography';
 
 export function HomepageArchitectureSection() {
-    const { siteConfig } = useDocusaurusContext();
     return (
         <section className="px-4 flex flex-col items-center">
             <div className="grid md:grid-cols-2 gap-14 md:gap-14">

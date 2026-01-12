@@ -1,6 +1,6 @@
 import { Field, FieldProps, FormikValues } from 'formik';
 import { LayoutGrid, List, Search } from 'lucide-react';
-import React, { useRef } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import ScrollContainer from 'react-indiana-drag-scroll';
 import { debounce } from 'throttle-debounce';
 
@@ -9,9 +9,11 @@ import { cn } from '@o2s/ui/lib/utils';
 import { InputWithLabel } from '@o2s/ui/elements/input';
 import { Label } from '@o2s/ui/elements/label';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@o2s/ui/elements/select';
-import { ToggleGroup, ToggleGroupItem } from '@o2s/ui/elements/toggle-group';
+import { ToggleGroup, ToggleGroupItem, ToggleGroupWithLabel } from '@o2s/ui/elements/toggle-group';
 
 import { FilterItemProps } from './Filters.types';
+
+const TEXT_FILTER_DEBOUNCE_MS = 1000;
 
 export const FilterItem = <T, S extends FormikValues>({
     item,
@@ -19,12 +21,15 @@ export const FilterItem = <T, S extends FormikValues>({
     setFieldValue,
     isLeading,
     labels,
+    isInlineVariant,
 }: Readonly<FilterItemProps<T, S>>) => {
-    const allWasClickedRef = useRef(false);
+    const debouncedSubmit = useMemo(() => debounce(TEXT_FILTER_DEBOUNCE_MS, () => submitForm()), [submitForm]);
 
-    const onTextFilterChange = debounce(500, async () => {
-        await submitForm();
-    });
+    useEffect(() => {
+        return () => {
+            debouncedSubmit.cancel();
+        };
+    }, [debouncedSubmit]);
 
     switch (item.__typename) {
         case 'FilterToggleGroup':
@@ -35,99 +40,85 @@ export const FilterItem = <T, S extends FormikValues>({
                             (!field.value || field.value.length === 0) &&
                             item.options.some((option) => option.value === 'ALL')
                                 ? ['ALL']
-                                : field.value;
+                                : field.value || [];
 
-                        const toggleGroup = (
-                            <ToggleGroup
+                        const toggleGroupItems = item.options.map((option) => {
+                            return (
+                                <ToggleGroupItem
+                                    key={option.value}
+                                    value={option.value}
+                                    className="min-w-[98px] rounded-sm h-9"
+                                >
+                                    {option.label}
+                                </ToggleGroupItem>
+                            );
+                        });
+
+                        const handleValueChange = async (value: string[]) => {
+                            let newValue: string[];
+
+                            const hadSelections = (field.value?.length ?? 0) > 0;
+                            const includesAll = value.includes('ALL');
+
+                            if (includesAll && hadSelections) {
+                                newValue = [];
+                            } else {
+                                newValue = value.filter((v) => v !== 'ALL');
+                            }
+
+                            await setFieldValue(field.name, newValue);
+                            if (isLeading || isInlineVariant) {
+                                await submitForm();
+                            }
+                        };
+
+                        return (
+                            <ToggleGroupWithLabel
                                 type="multiple"
                                 variant="solid"
                                 value={currentValue}
-                                onValueChange={async (value: string[]) => {
-                                    let newValue: string[];
-
-                                    if (allWasClickedRef.current) {
-                                        newValue = [];
-                                        allWasClickedRef.current = false;
-                                    } else {
-                                        newValue = value.filter((v) => v !== 'ALL');
-                                    }
-
-                                    await setFieldValue(field.name, newValue);
-                                    if (isLeading) {
-                                        await submitForm();
-                                    }
-                                }}
+                                onValueChange={handleValueChange}
+                                label={item.label}
                             >
-                                {item.options.map((option, index) => {
-                                    const isSelected = currentValue.includes(option.value);
-                                    const prevOption = item.options[index - 1];
-                                    const nextOption = item.options[index + 1];
-                                    const isPrevSelected = prevOption ? currentValue.includes(prevOption.value) : false;
-                                    const isNextSelected = nextOption ? currentValue.includes(nextOption.value) : false;
-
-                                    return (
-                                        <ToggleGroupItem
-                                            key={option.value}
-                                            value={option.value}
-                                            className={cn(
-                                                'min-w-[98px]',
-                                                isSelected && isPrevSelected ? 'rounded-l-none' : '',
-                                                isSelected && isNextSelected ? 'rounded-r-none' : '',
-                                            )}
-                                            onClick={() => {
-                                                allWasClickedRef.current = option.value === 'ALL';
-                                            }}
-                                        >
-                                            {option.label}
-                                        </ToggleGroupItem>
-                                    );
-                                })}
-                            </ToggleGroup>
-                        );
-
-                        return isLeading ? (
-                            toggleGroup
-                        ) : (
-                            <ScrollContainer className="scroll-container flex whitespace-nowrap w-full">
-                                {toggleGroup}
-                            </ScrollContainer>
+                                <ScrollContainer className="scroll-container flex whitespace-nowrap w-full">
+                                    {toggleGroupItems}
+                                </ScrollContainer>
+                            </ToggleGroupWithLabel>
                         );
                     }}
                 </Field>
             ) : (
                 <Field name={item.id}>
                     {({ field }: FieldProps<string>) => {
-                        const toggleGroup = (
-                            <ToggleGroup
+                        const toggleGroupItems = item.options.map((option) => (
+                            <ToggleGroupItem key={option.value} value={option.value} className="min-w-[98px]">
+                                {option.label}
+                            </ToggleGroupItem>
+                        ));
+
+                        const handleValueChange = async (value: string) => {
+                            const newValue = value === 'ALL' ? '' : value;
+                            await setFieldValue(field.name, newValue);
+                            if (isLeading || isInlineVariant) {
+                                await submitForm();
+                            }
+                        };
+
+                        const currentValue =
+                            !field.value && item.options.some((option) => option.value === 'ALL') ? 'ALL' : field.value;
+
+                        return (
+                            <ToggleGroupWithLabel
                                 type="single"
                                 variant="solid"
-                                value={
-                                    !field.value && item.options.some((option) => option.value === 'ALL')
-                                        ? 'ALL'
-                                        : field.value
-                                }
-                                onValueChange={async (value: string) => {
-                                    const newValue = value === 'ALL' ? '' : value;
-                                    await setFieldValue(field.name, newValue);
-                                    if (isLeading) {
-                                        await submitForm();
-                                    }
-                                }}
+                                value={currentValue}
+                                onValueChange={handleValueChange}
+                                label={item.label}
                             >
-                                {item.options.map((option) => (
-                                    <ToggleGroupItem key={option.value} value={option.value} className="min-w-[98px]">
-                                        {option.label}
-                                    </ToggleGroupItem>
-                                ))}
-                            </ToggleGroup>
-                        );
-
-                        return isLeading ? (
-                            toggleGroup
-                        ) : (
-                            <ScrollContainer className="scroll-container flex whitespace-nowrap w-full">
-                                {toggleGroup}
-                            </ScrollContainer>
+                                <ScrollContainer className="scroll-container flex whitespace-nowrap w-full">
+                                    {toggleGroupItems}
+                                </ScrollContainer>
+                            </ToggleGroupWithLabel>
                         );
                     }}
                 </Field>
@@ -144,7 +135,7 @@ export const FilterItem = <T, S extends FormikValues>({
                                     onValueChange={async (value) => {
                                         const newValue = value === ' ' ? '' : value;
                                         await setFieldValue(field.name, newValue);
-                                        if (isLeading) {
+                                        if (isLeading || isInlineVariant) {
                                             await submitForm();
                                         }
                                     }}
@@ -188,11 +179,8 @@ export const FilterItem = <T, S extends FormikValues>({
                                         behavior: 'prepend',
                                     }}
                                     onChange={async (e) => {
-                                        const newValue = e.target.value;
-                                        await setFieldValue(field.name, newValue);
-                                        if (isLeading) {
-                                            onTextFilterChange();
-                                        }
+                                        await setFieldValue(field.name, e.target.value);
+                                        debouncedSubmit();
                                     }}
                                 />
                             </>
