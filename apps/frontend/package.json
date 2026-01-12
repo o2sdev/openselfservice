@@ -55,9 +55,9 @@
         "next-auth": "^5.0.0-beta.30",
         "next-compose-plugins": "^2.2.1",
         "next-intl": "^4.5.8",
-        "react": "19.2.1",
+        "react": "19.2.3",
         "react-autosuggest": "^10.1.0",
-        "react-dom": "19.2.1",
+        "react-dom": "19.2.3",
         "react-string-replace": "^1.1.1",
         "string-template": "^1.0.0",
         "yup": "^1.7.1",
@@ -74,7 +74,7 @@
         "@turbo/gen": "^2.6.3",
         "@types/bcryptjs": "^3.0.0",
         "@types/node": "^24.10.7",
-        "@types/react": "19.2.7",
+        "@types/react": "19.2.8",
         "@types/react-autosuggest": "^10.1.11",
         "@types/react-dom": "19.2.3",
         "dotenv": "^17.2.3",
@@ -89,7 +89,7 @@
         "typescript": "^5.9.3"
     },
     "overrides": {
-        "@types/react": "19.2.7",
+        "@types/react": "19.2.8",
         "@types/react-dom": "19.2.3"
     }
 }
