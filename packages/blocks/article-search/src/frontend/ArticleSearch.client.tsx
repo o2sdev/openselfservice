@@ -13,7 +13,7 @@ import { Container } from '@o2s/ui/components/Container';
 
 import { Typography } from '@o2s/ui/elements/typography';
 
-import { Model } from '../api-harmonization/article-search.client';
+import type { Model } from '../api-harmonization/article-search.client';
 import { sdk } from '../sdk';
 
 import { ArticleSearchPureProps } from './ArticleSearch.types';

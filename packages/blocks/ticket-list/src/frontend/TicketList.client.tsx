@@ -39,6 +39,8 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
         id: component.id,
         offset: 0,
         limit: component.pagination?.limit || 5,
+        search: '',
+        priority: '',
     };
 
     const initialData = component.tickets.data;
@@ -209,8 +211,12 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                         initialValues={filters}
                         onSubmit={handleFilter}
                         onReset={handleReset}
+                        variant="inline"
                         labels={{
                             clickToSelect: data.labels.clickToSelect,
+                            showMoreFilters: data.labels.showMoreFilters,
+                            hideMoreFilters: data.labels.hideMoreFilters,
+                            noActiveFilters: data.labels.noActiveFilters,
                         }}
                     />
 

@@ -1,6 +1,6 @@
 import { defineRouting } from 'next-intl/routing';
 
-import { Model } from '../api-harmonization/faq.client';
+import type { Model } from '../api-harmonization/faq.client';
 
 export interface FaqProps {
     id: string;

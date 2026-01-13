@@ -339,7 +339,7 @@ describe('payments-history.mapper', () => {
                 total: 1,
                 data: [
                     createMockInvoice({
-                        paymentStatus: 'PAYMENT_DECLINED' as any,
+                        paymentStatus: 'PAYMENT_DECLINED',
                         totalAmountDue: { value: 100, currency: 'USD' },
                         issuedDate: oneMonthAgo.toISOString(),
                     }),

@@ -1,6 +1,6 @@
 import { defineRouting } from 'next-intl/routing';
 
-import { Model } from '../api-harmonization/media-section.client';
+import type { Model } from '../api-harmonization/media-section.client';
 
 export interface MediaSectionProps {
     id: string;

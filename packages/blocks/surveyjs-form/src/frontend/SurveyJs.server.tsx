@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import type { Model } from '../api-harmonization/surveyjs.client';
 import { sdk } from '../sdk';
 
 import { SurveyJsFormProps } from './SurveyJs.types';
@@ -14,26 +15,27 @@ export const SurveyJsServer: React.FC<SurveyJsFormProps> = async ({
     routing,
     hasPriority,
 }) => {
+    let data: Model.SurveyjsBlock;
     try {
-        const data = await sdk.blocks.getSurveyjsBlock(
+        data = await sdk.blocks.getSurveyjsBlock(
             {
                 id,
             },
             { 'x-locale': locale },
             accessToken,
         );
-
-        return (
-            <SurveyJsDynamic
-                {...data}
-                id={id}
-                accessToken={accessToken}
-                locale={locale}
-                routing={routing}
-                hasPriority={hasPriority}
-            />
-        );
     } catch (_error) {
         return null;
     }
+
+    return (
+        <SurveyJsDynamic
+            {...data}
+            id={id}
+            accessToken={accessToken}
+            locale={locale}
+            routing={routing}
+            hasPriority={hasPriority}
+        />
+    );
 };

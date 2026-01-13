@@ -2,7 +2,7 @@ import { NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 import { Articles, Auth as AuthIntegration, CMS } from '@o2s/configs.integrations';
-import { firstValueFrom, of, throwError } from 'rxjs';
+import { firstValueFrom, of } from 'rxjs';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { Auth } from '@o2s/framework/modules';
@@ -14,7 +14,6 @@ describe('PageService', () => {
     let cmsService: CMS.Service;
     let articlesService: Articles.Service;
     let authService: AuthIntegration.Service;
-    let configService: ConfigService;
 
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
@@ -57,7 +56,6 @@ describe('PageService', () => {
         cmsService = module.get<CMS.Service>(CMS.Service);
         articlesService = module.get<Articles.Service>(Articles.Service);
         authService = module.get<AuthIntegration.Service>(AuthIntegration.Service);
-        configService = module.get<ConfigService>(ConfigService);
     });
 
     it('should be defined', () => {
@@ -88,8 +86,10 @@ describe('PageService', () => {
                 breadcrumbs: [],
             };
 
-            vi.spyOn(cmsService, 'getPage').mockReturnValue(of(mockPage as any));
-            vi.spyOn(cmsService, 'getAlternativePages').mockReturnValue(of([mockPage as any]));
+            vi.spyOn(cmsService, 'getPage').mockReturnValue(of(mockPage as unknown as CMS.Model.Page.Page));
+            vi.spyOn(cmsService, 'getAlternativePages').mockReturnValue(
+                of([mockPage as unknown as CMS.Model.Page.Page]),
+            );
 
             const result = await firstValueFrom(service.getPage(mockQuery, mockHeaders));
 
@@ -110,8 +110,12 @@ describe('PageService', () => {
             const mockCategory = { id: 'cat-1', title: 'Test Category' };
 
             vi.spyOn(cmsService, 'getPage').mockReturnValue(of(undefined));
-            vi.spyOn(articlesService, 'getArticle').mockReturnValue(of(mockArticle as any));
-            vi.spyOn(articlesService, 'getCategory').mockReturnValue(of(mockCategory as any));
+            vi.spyOn(articlesService, 'getArticle').mockReturnValue(
+                of(mockArticle as unknown as Articles.Model.Article),
+            );
+            vi.spyOn(articlesService, 'getCategory').mockReturnValue(
+                of(mockCategory as unknown as Articles.Model.Category),
+            );
 
             const result = await firstValueFrom(service.getPage(mockQuery, mockHeaders));
 
@@ -149,8 +153,10 @@ describe('PageService', () => {
                 breadcrumbs: [],
             };
 
-            vi.spyOn(cmsService, 'getPage').mockReturnValue(of(mockPage as any));
-            vi.spyOn(cmsService, 'getAlternativePages').mockReturnValue(of([mockPage as any]));
+            vi.spyOn(cmsService, 'getPage').mockReturnValue(of(mockPage as unknown as CMS.Model.Page.Page));
+            vi.spyOn(cmsService, 'getAlternativePages').mockReturnValue(
+                of([mockPage as unknown as CMS.Model.Page.Page]),
+            );
             vi.spyOn(authService, 'extractUserRoles').mockReturnValue([
                 Auth.Constants.Roles.ORG_ADMIN,
                 Auth.Constants.Roles.ORG_USER,
@@ -183,9 +189,11 @@ describe('PageService', () => {
                 items: [],
             };
 
-            vi.spyOn(cmsService, 'getAppConfig').mockReturnValue(of(mockAppConfig as any));
-            vi.spyOn(cmsService, 'getHeader').mockReturnValue(of(mockHeader as any));
-            vi.spyOn(cmsService, 'getFooter').mockReturnValue(of(mockFooter as any));
+            vi.spyOn(cmsService, 'getAppConfig').mockReturnValue(
+                of(mockAppConfig as unknown as CMS.Model.AppConfig.AppConfig),
+            );
+            vi.spyOn(cmsService, 'getHeader').mockReturnValue(of(mockHeader as unknown as CMS.Model.Header.Header));
+            vi.spyOn(cmsService, 'getFooter').mockReturnValue(of(mockFooter as unknown as CMS.Model.Footer.Footer));
 
             const result = await firstValueFrom(service.getInit(mockQuery, mockHeaders));
 
