@@ -33,6 +33,7 @@ export const Carousel: React.FC<Readonly<CarouselProps>> = ({
 
     const [index, setIndex] = useState(startingSlideIndex);
     const [isEnd, setIsEnd] = useState(false);
+    const [loop, setLoop] = useState(swiperProps.loop ?? false);
 
     const allModules = [
         A11y,
@@ -51,12 +52,19 @@ export const Carousel: React.FC<Readonly<CarouselProps>> = ({
                     swiperRef.current = swiper;
                 }}
                 onInit={(swiper) => {
+                    const loopMode = swiperProps.loop ?? swiper.params.loop ?? false;
+                    setLoop(loopMode);
                     setIndex(swiper.realIndex);
-                    setIsEnd(swiper.isEnd);
+                    if (!loopMode) {
+                        setIsEnd(swiper.isEnd);
+                    }
                 }}
                 onSlideChange={(swiper) => {
                     setIndex(swiper.realIndex);
-                    setIsEnd(swiper.isEnd);
+                    const loopMode = swiperProps.loop ?? swiper.params.loop ?? false;
+                    if (!loopMode) {
+                        setIsEnd(swiper.isEnd);
+                    }
                 }}
                 keyboard={{ enabled: true, onlyInViewport: true }}
                 navigation={false}
@@ -66,7 +74,7 @@ export const Carousel: React.FC<Readonly<CarouselProps>> = ({
                 {...swiperProps}
             >
                 {slides.map((slide, index) => (
-                    <SwiperSlide key={index} className="!h-auto shadow-lg">
+                    <SwiperSlide key={index} className="!h-auto">
                         {slide}
                     </SwiperSlide>
                 ))}
@@ -78,7 +86,7 @@ export const Carousel: React.FC<Readonly<CarouselProps>> = ({
                         variant="outline"
                         size="icon"
                         className="rounded-full"
-                        disabled={index === 0}
+                        disabled={index === 0 && !loop}
                         aria-label={labels.previous}
                         onClick={() => {
                             swiperRef.current?.slidePrev();
@@ -91,7 +99,7 @@ export const Carousel: React.FC<Readonly<CarouselProps>> = ({
                         variant="outline"
                         size="icon"
                         className="rounded-full"
-                        disabled={isEnd}
+                        disabled={isEnd && !loop}
                         aria-label={labels.next}
                         onClick={() => {
                             swiperRef.current?.slideNext();
