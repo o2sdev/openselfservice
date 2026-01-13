@@ -174,7 +174,7 @@ const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
                 {
                     __typename: 'NavigationItem',
                     label: 'Shop',
-                    url: '/products',
+                    url: '/produkte',
                 },
             ],
         },
