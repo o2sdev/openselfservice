@@ -90,6 +90,7 @@ const CustomSurveyQuestionText: React.FC<CustomSurveyQuestionTextProps> = (props
                             initialFocus
                             id={question.inputId}
                             onSelect={(value) => {
+                                // eslint-disable-next-line react-hooks/immutability
                                 question.value = value?.toISOString() || null;
                                 setOpen(false);
                             }}
@@ -110,6 +111,7 @@ const CustomSurveyQuestionText: React.FC<CustomSurveyQuestionTextProps> = (props
             placeholder={question.placeholder}
             disabled={question.isDisplayMode}
             onChange={(event) => {
+                // eslint-disable-next-line react-hooks/immutability
                 question.value = event.target.value;
             }}
             aria-invalid={!!question.errors?.length}

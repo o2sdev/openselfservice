@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import type { Model } from '../api-harmonization/quick-links.client';
 import { sdk } from '../sdk';
 
 import { QuickLinksProps } from './QuickLinks.types';
@@ -15,7 +16,7 @@ export const QuickLinks: React.FC<QuickLinksProps> = async ({
     hasPriority,
     isDraftModeEnabled,
 }) => {
-    let data;
+    let data: Model.QuickLinksBlock;
     try {
         data = await sdk.blocks.getQuickLinks(
             {

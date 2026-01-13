@@ -19,19 +19,19 @@
   },
   "dependencies": {
     "@nestjs/axios": "^4.0.1",
-    "@nestjs/common": "^11.1.9",
+    "@nestjs/common": "^11.1.11",
     "@o2s/framework": "*",
     "@o2s/utils.logger": "*",
     "axios": "^1.13.2",
     "rxjs": "^7.8.2"
   },
   "devDependencies": {
-    "@hey-api/openapi-ts": "^0.88.0",
+    "@hey-api/openapi-ts": "^0.90.3",
     "@o2s/eslint-config": "*",
     "@o2s/prettier-config": "*",
     "@o2s/typescript-config": "*",
     "concurrently": "^9.2.1",
-    "eslint": "^9.39.1",
+    "eslint": "^9.39.2",
     "prettier": "^3.7.4",
     "tsc-alias": "^1.8.16",
     "tsx": "^4.21.0",

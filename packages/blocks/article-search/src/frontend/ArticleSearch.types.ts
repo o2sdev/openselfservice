@@ -1,6 +1,6 @@
 import { defineRouting } from 'next-intl/routing';
 
-import { Model } from '../api-harmonization/article-search.client';
+import type { Model } from '../api-harmonization/article-search.client';
 
 export interface ArticleSearchProps {
     id: string;

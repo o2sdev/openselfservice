@@ -13,7 +13,7 @@
         "write-translations": "docusaurus write-translations",
         "write-heading-ids": "docusaurus write-heading-ids",
         "typecheck": "tsc",
-        "lint": "tsc --noEmit",
+        "lint": "tsc --noEmit && eslint \"src/**/*.{ts,tsx}\" --fix --max-warnings=0",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
@@ -32,8 +32,8 @@
         "docusaurus-plugin-sass": "^0.2.6",
         "framer-motion": "^12.23.25",
         "prism-react-renderer": "^2.4.1",
-        "react": "^19.2.1",
-        "react-dom": "^19.2.1",
+        "react": "^19.2.3",
+        "react-dom": "^19.2.3",
         "sass": "^1.94.2",
         "vanilla-cookieconsent": "^3.1.0"
     },
@@ -45,12 +45,12 @@
         "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
-        "@tailwindcss/postcss": "^4.1.17",
-        "@trivago/prettier-plugin-sort-imports": "^6.0.0",
-        "autoprefixer": "^10.4.22",
+        "@tailwindcss/postcss": "^4.1.18",
+        "@trivago/prettier-plugin-sort-imports": "^6.0.2",
+        "autoprefixer": "^10.4.23",
         "postcss": "^8.5.6",
         "prettier": "^3.7.4",
-        "tailwindcss": "^4.1.17",
+        "tailwindcss": "^4.1.18",
         "typescript": "5.9.3"
     },
     "browserslist": {

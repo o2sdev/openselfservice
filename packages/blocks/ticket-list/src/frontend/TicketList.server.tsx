@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import type { Model } from '../api-harmonization/ticket-list.client';
 import { sdk } from '../sdk';
 
 import { TicketListProps } from './TicketList.types';
@@ -15,7 +16,7 @@ export const TicketListServer: React.FC<TicketListProps> = async ({
     hasPriority,
     isDraftModeEnabled,
 }) => {
-    let data;
+    let data: Model.TicketListBlock;
     try {
         data = await sdk.blocks.getTicketList(
             {

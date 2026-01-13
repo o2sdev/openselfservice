@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import type { Model } from '../api-harmonization/user-account.client';
 import { sdk } from '../sdk';
 
 import { UserAccountProps } from './UserAccount.types';
@@ -22,8 +23,9 @@ export const UserAccount: React.FC<UserAccountProps> = async ({
         return null;
     }
 
+    let data: Model.UserAccountBlock;
     try {
-        const data = await sdk.blocks.getUserAccount(
+        data = await sdk.blocks.getUserAccount(
             {
                 id,
                 userId,
@@ -31,20 +33,20 @@ export const UserAccount: React.FC<UserAccountProps> = async ({
             { 'x-locale': locale },
             accessToken,
         );
-
-        return (
-            <UserAccountDynamic
-                {...data}
-                id={id}
-                accessToken={accessToken}
-                locale={locale}
-                routing={routing}
-                userId={userId}
-                onSignOut={onSignOut}
-                hasPriority={hasPriority}
-            />
-        );
     } catch (_error) {
         return null;
     }
+
+    return (
+        <UserAccountDynamic
+            {...data}
+            id={id}
+            accessToken={accessToken}
+            locale={locale}
+            routing={routing}
+            userId={userId}
+            onSignOut={onSignOut}
+            hasPriority={hasPriority}
+        />
+    );
 };

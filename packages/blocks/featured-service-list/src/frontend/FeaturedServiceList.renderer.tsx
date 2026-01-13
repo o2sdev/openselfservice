@@ -1,5 +1,4 @@
 import { useLocale } from 'next-intl';
-import { createNavigation } from 'next-intl/navigation';
 import React, { Suspense } from 'react';
 
 import { Loading } from '@o2s/ui/components/Loading';
@@ -7,13 +6,7 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { FeaturedServiceList } from './FeaturedServiceList.server';
 import { FeaturedServiceListRendererProps } from './FeaturedServiceList.types';
 
-export const Renderer: React.FC<FeaturedServiceListRendererProps> = ({
-    id,
-    accessToken,
-    slug,
-    routing,
-    hasPriority,
-}) => {
+export const Renderer: React.FC<FeaturedServiceListRendererProps> = ({ id, accessToken, routing, hasPriority }) => {
     const locale = useLocale();
 
     return (
