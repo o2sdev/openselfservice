@@ -8,4 +8,8 @@ export interface CarouselProps extends Omit<SwiperProps, 'children'> {
     showPagination?: boolean;
     startingSlideIndex?: number;
     noSwipingSelector?: string;
+    labels?: {
+        previous?: string;
+        next?: string;
+    };
 }

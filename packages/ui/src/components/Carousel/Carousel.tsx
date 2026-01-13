@@ -23,6 +23,10 @@ export const Carousel: React.FC<Readonly<CarouselProps>> = ({
     modules = [],
     startingSlideIndex = 0,
     noSwipingSelector,
+    labels = {
+        previous: 'Previous slide',
+        next: 'Next slide',
+    },
     ...swiperProps
 }) => {
     const swiperRef = useRef<SwiperType>(null);
@@ -62,19 +66,20 @@ export const Carousel: React.FC<Readonly<CarouselProps>> = ({
                 {...swiperProps}
             >
                 {slides.map((slide, index) => (
-                    <SwiperSlide key={index} className="!h-auto">
+                    <SwiperSlide key={index} className="!h-auto shadow-lg">
                         {slide}
                     </SwiperSlide>
                 ))}
             </Swiper>
 
             {showNavigation && (
-                <div className="flex items-center gap-8 lg:justify-start justify-center">
+                <div className="absolute z-10 left-0 right-0 top-2/4 -translate-y-8 flex items-center justify-between px-2">
                     <Button
                         variant="outline"
                         size="icon"
-                        className="rounded-full absolute z-10 top-2/4 !-translate-y-8 -left-5"
+                        className="rounded-full"
                         disabled={index === 0}
+                        aria-label={labels.previous}
                         onClick={() => {
                             swiperRef.current?.slidePrev();
                         }}
@@ -85,8 +90,9 @@ export const Carousel: React.FC<Readonly<CarouselProps>> = ({
                     <Button
                         variant="outline"
                         size="icon"
-                        className="rounded-full absolute z-10 top-2/4 !-translate-y-8 -right-5"
+                        className="rounded-full"
                         disabled={isEnd}
+                        aria-label={labels.next}
                         onClick={() => {
                             swiperRef.current?.slideNext();
                         }}
