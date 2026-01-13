@@ -62,7 +62,7 @@ export const InformativeCard: React.FC<Readonly<InformativeCardProps>> = (props)
             <LinkComponent
                 href={props.href}
                 aria-label={props.title}
-                className="flex flex-grow text-foreground hover:border-primary rounded-lg bg-card border border-border w-full h-full items-start"
+                className="flex flex-grow text-foreground rounded-lg bg-card border border-card-border hover:border-primary w-full h-full items-start"
             >
                 <InformativeCardContent {...props} />
             </LinkComponent>
