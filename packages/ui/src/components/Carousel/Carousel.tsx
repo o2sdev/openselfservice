@@ -48,6 +48,7 @@ export const Carousel: React.FC<Readonly<CarouselProps>> = ({
             <Swiper
                 className={cn('w-full', className)}
                 modules={allModules}
+                {...swiperProps}
                 onBeforeInit={(swiper) => {
                     swiperRef.current = swiper;
                 }}
@@ -71,7 +72,6 @@ export const Carousel: React.FC<Readonly<CarouselProps>> = ({
                 pagination={showPagination ? { clickable: true } : false}
                 initialSlide={startingSlideIndex}
                 noSwipingSelector={noSwipingSelector}
-                {...swiperProps}
             >
                 {slides.map((slide, index) => (
                     <SwiperSlide key={index} className="!h-auto">
