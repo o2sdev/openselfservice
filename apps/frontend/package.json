@@ -71,7 +71,7 @@
         "@o2s/typescript-config": "*",
         "@svgr/webpack": "^8.1.0",
         "@trivago/prettier-plugin-sort-imports": "^6.0.2",
-        "@turbo/gen": "^2.6.3",
+        "@turbo/gen": "^2.7.4",
         "@types/bcryptjs": "^3.0.0",
         "@types/node": "^24.10.7",
         "@types/react": "19.2.8",
