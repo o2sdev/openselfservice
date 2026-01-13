@@ -203,8 +203,6 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                             </Button>
                         </div>
                     </div>
-
-                    <div className="lg:hidden h-32" />
                 </>
             )}
         </div>

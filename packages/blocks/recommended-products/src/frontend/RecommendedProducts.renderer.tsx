@@ -20,12 +20,9 @@ export const RecommendedProductsRenderer: React.FC<RecommendedProductsRendererPr
         <Suspense
             key={id}
             fallback={
-                <>
-                    <Loading bars={1} />
-                    <Container variant="narrow">
-                        <Loading bars={8} />
-                    </Container>
-                </>
+                <Container variant="full">
+                    <Loading bars={10} />
+                </Container>
             }
         >
             <RecommendedProducts id={id} excludeProductId={excludeProductId} locale={locale} routing={routing} />
