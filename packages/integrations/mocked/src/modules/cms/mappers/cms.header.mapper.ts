@@ -73,6 +73,17 @@ const MOCK_HEADER_LOGON_EN: CMS.Model.Header.Header = {
                 },
             ],
         },
+        {
+            __typename: 'NavigationGroup',
+            title: 'Shop',
+            items: [
+                {
+                    __typename: 'NavigationItem',
+                    label: 'Shop',
+                    url: '/products',
+                },
+            ],
+        },
     ],
     notification: {
         url: '/notifications',
@@ -156,6 +167,17 @@ const MOCK_HEADER_LOGON_DE: CMS.Model.Header.Header = {
                 },
             ],
         },
+        {
+            __typename: 'NavigationGroup',
+            title: 'Shop',
+            items: [
+                {
+                    __typename: 'NavigationItem',
+                    label: 'Shop',
+                    url: '/produkte',
+                },
+            ],
+        },
     ],
     notification: {
         url: '/benachrichtigungen',
@@ -236,6 +258,17 @@ const MOCK_HEADER_LOGON_PL: CMS.Model.Header.Header = {
                     __typename: 'NavigationItem',
                     label: 'Centrum powitalne',
                     url: '/pomoc-i-wsparcie',
+                },
+            ],
+        },
+        {
+            __typename: 'NavigationGroup',
+            title: 'Sklep',
+            items: [
+                {
+                    __typename: 'NavigationItem',
+                    label: 'Sklep',
+                    url: '/produkty',
                 },
             ],
         },

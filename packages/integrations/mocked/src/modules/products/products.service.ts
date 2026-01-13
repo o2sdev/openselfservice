@@ -13,7 +13,7 @@ export class ProductsService implements Products.Service {
     }
 
     getProduct(params: Products.Request.GetProductParams): Observable<Products.Model.Product> {
-        return of(mapProduct(params.id)).pipe(responseDelay());
+        return of(mapProduct(params.id, params.locale)).pipe(responseDelay());
     }
 
     getRelatedProductList(params: Products.Request.GetRelatedProductListParams): Observable<Products.Model.Products> {

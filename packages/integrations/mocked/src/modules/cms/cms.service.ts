@@ -26,7 +26,9 @@ import { mapOrdersSummaryBlock } from './mappers/blocks/cms.orders-summary.mappe
 import { mapPaymentsHistoryBlock } from './mappers/blocks/cms.payments-history.mapper';
 import { mapPaymentsSummaryBlock } from './mappers/blocks/cms.payments-summary.mapper';
 import { mapPricingSectionBlock } from './mappers/blocks/cms.pricing-section.mapper';
+import { mapProductDetailsBlock } from './mappers/blocks/cms.product-details.mapper';
 import { mapProductListBlock } from './mappers/blocks/cms.product-list.mapper';
+import { mapRecommendedProductsBlock } from './mappers/blocks/cms.recommended-products.mapper';
 import { mapResourceDetailsBlock } from './mappers/blocks/cms.resource-details.mapper';
 import { mapResourceListBlock } from './mappers/blocks/cms.resource-list.mapper';
 import { mapServiceDetailsBlock } from './mappers/blocks/cms.service-details.mapper';
@@ -205,6 +207,14 @@ export class CmsService implements CMS.Service {
 
     getProductListBlock(options: CMS.Request.GetCmsEntryParams) {
         return of(mapProductListBlock(options.locale)).pipe(responseDelay());
+    }
+
+    getProductDetailsBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapProductDetailsBlock(options.locale)).pipe(responseDelay());
+    }
+
+    getRecommendedProductsBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapRecommendedProductsBlock(options.locale)).pipe(responseDelay());
     }
 
     getTicketSummaryBlock(options: CMS.Request.GetCmsEntryParams) {

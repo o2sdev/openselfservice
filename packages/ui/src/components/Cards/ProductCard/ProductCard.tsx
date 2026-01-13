@@ -41,7 +41,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             )}
             <div className="p-6 flex flex-col gap-6 h-full">
                 {/* Content section */}
-                <div className="flex flex-col h-full">
+                <div className="flex flex-col flex-1">
                     <div className="flex flex-col gap-4">
                         <Typography variant="highlightedSmall" className="line-clamp-2">
                             {title}
