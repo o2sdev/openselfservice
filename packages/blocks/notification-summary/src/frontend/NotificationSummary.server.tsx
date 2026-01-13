@@ -25,5 +25,10 @@ export const NotificationSummary: React.FC<NotificationSummaryProps> = async ({ 
         return null;
     }
 
+    // Check view permission - if not allowed, don't render
+    if (!data.permissions?.view) {
+        return null;
+    }
+
     return <NotificationSummaryDynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />;
 };

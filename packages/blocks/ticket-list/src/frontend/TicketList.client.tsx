@@ -56,11 +56,6 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
 
     const [isPending, startTransition] = useTransition();
 
-    // Check view permission - if not allowed, don't render
-    if (!permissions?.view) {
-        return null;
-    }
-
     const handleFilter = (data: Partial<Request.GetTicketListBlockQuery>) => {
         startTransition(async () => {
             try {

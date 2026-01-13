@@ -74,11 +74,6 @@ export const OrdersSummaryPure: React.FC<Readonly<OrdersSummaryPureProps>> = ({
 
     const [isPending, startTransition] = useTransition();
 
-    // Check view permission - if not allowed, don't render
-    if (!permissions?.view) {
-        return null;
-    }
-
     const cardsLayout = component.layout === 'horizontal' ? 'flex-col md:flex-row' : 'flex-col';
 
     const handleFilter = (value: string) => {

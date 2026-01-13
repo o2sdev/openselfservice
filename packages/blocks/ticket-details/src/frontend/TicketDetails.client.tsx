@@ -23,12 +23,7 @@ export const TicketDetailsPure: React.FC<Readonly<TicketDetailsPureProps>> = ({
     routing,
     ...component
 }) => {
-    const { data: ticket, permissions } = component;
-
-    // Check view permission - if not allowed, don't render
-    if (!permissions?.view) {
-        return null;
-    }
+    const { data: ticket } = component;
 
     return (
         <div className="w-full">

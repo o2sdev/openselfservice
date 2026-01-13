@@ -36,11 +36,6 @@ export const ServiceListPure: React.FC<ServiceListPureProps> = ({ locale, access
     const [isPending, startTransition] = useTransition();
     const { labels } = useGlobalContext();
 
-    // Check view permission - if not allowed, don't render
-    if (!permissions?.view) {
-        return null;
-    }
-
     const handleFilter = (data: Partial<typeof initialFilters>) => {
         startTransition(async () => {
             try {

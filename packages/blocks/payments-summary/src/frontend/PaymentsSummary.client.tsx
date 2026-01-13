@@ -30,11 +30,6 @@ export const PaymentsSummaryPure: React.FC<PaymentsSummaryPureProps> = ({ routin
     // If navigation is needed, use createNavigation(routing) as in other blocks
     // const { Link: LinkComponent } = createNavigation(routing);
 
-    // Check view permission - if not allowed, don't render
-    if (!permissions?.view) {
-        return null;
-    }
-
     if (!overdue && !toBePaid && !chart?.showChart) {
         return null;
     }

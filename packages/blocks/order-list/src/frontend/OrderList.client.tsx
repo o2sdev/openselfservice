@@ -57,11 +57,6 @@ export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToke
 
     const [isPending, startTransition] = useTransition();
 
-    // Check view permission - if not allowed, don't render
-    if (!permissions?.view) {
-        return null;
-    }
-
     const handleFilter = (data: Partial<Request.GetOrderListBlockQuery>) => {
         startTransition(async () => {
             try {

@@ -19,11 +19,6 @@ export const UserAccountPure: React.FC<UserAccountPureProps> = (component) => {
 
     const t = useTranslations();
 
-    // Check view permission - if not allowed, don't render
-    if (!permissions?.view) {
-        return null;
-    }
-
     return (
         <div className="w-full">
             <div className="flex flex-col gap-6">

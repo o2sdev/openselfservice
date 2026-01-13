@@ -56,11 +56,6 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({
     const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
     const [isPending, startTransition] = useTransition();
 
-    // Check view permission - if not allowed, don't render
-    if (!permissions?.view) {
-        return null;
-    }
-
     const handleFilter = (data: Partial<Request.GetNotificationListBlockQuery>) => {
         startTransition(async () => {
             try {
