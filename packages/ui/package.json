@@ -28,7 +28,7 @@
         "@trivago/prettier-plugin-sort-imports": "^6.0.2",
         "@turbo/gen": "^2.7.4",
         "@types/eslint": "^9.6.1",
-        "@types/node": "^24.10.7",
+        "@types/node": "^24.10.8",
         "@types/throttle-debounce": "^5.0.2",
         "eslint": "^9.39.2",
         "formik": "^2.4.9",
