@@ -23,7 +23,11 @@ const ORG_USER_PERMISSIONS: Auth.Model.Permission[] = [
     { resource: 'products', actions: ['view'] },
 ];
 
-const PROSPECT_PERMISSIONS: Auth.Model.Permission[] = [{ resource: 'notifications', actions: ['view'] }];
+const PROSPECT_PERMISSIONS: Auth.Model.Permission[] = [
+    { resource: 'settings', actions: ['view', 'edit'] },
+    { resource: 'notifications', actions: ['view'] },
+    { resource: 'products', actions: ['view'] },
+];
 
 const MOCK_CUSTOMER_1: Models.Customer.Customer = {
     id: 'cust-001',
