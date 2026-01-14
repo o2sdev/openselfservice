@@ -1,11 +1,10 @@
-import { Models } from '@o2s/framework/modules';
+import * as Auth from '@/modules/auth';
 
 export class NavigationGroup {
     __typename!: 'NavigationGroup';
     title!: string;
     items!: (NavigationItem | NavigationGroup)[];
-    /** Normalized permissions required to view this navigation item (e.g., [{resource: 'page:dashboard', actions: ['view']}]) */
-    permissions?: Models.Permission.Permission[];
+    roles?: Auth.Model.Role[];
     url?: string;
 }
 
@@ -14,6 +13,5 @@ export class NavigationItem {
     url?: string;
     label!: string;
     description?: string;
-    /** Normalized permissions required to view this navigation item (e.g., [{resource: 'page:dashboard', actions: ['view']}]) */
-    permissions?: Models.Permission.Permission[];
+    roles?: Auth.Model.Role[];
 }

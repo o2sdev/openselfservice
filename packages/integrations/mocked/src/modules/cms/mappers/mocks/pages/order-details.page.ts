@@ -1,5 +1,7 @@
 import { CMS } from '@o2s/framework/modules';
 
+import { Roles } from '@/utils/roles';
+
 export const PAGE_ORDER_DETAILS_EN: CMS.Model.Page.Page = {
     id: '14',
     slug: '/orders/(.+)',
@@ -17,7 +19,7 @@ export const PAGE_ORDER_DETAILS_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [{ resource: 'page:orders', actions: ['view'] }],
+    roles: [Roles.ORG_USER, Roles.ORG_ADMIN],
     hasOwnTitle: true,
     parent: {
         slug: '/orders',
@@ -57,7 +59,7 @@ export const PAGE_ORDER_DETAILS_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [{ resource: 'page:orders', actions: ['view'] }],
+    roles: [Roles.ORG_USER, Roles.ORG_ADMIN],
     hasOwnTitle: true,
     parent: {
         slug: '/bestellungen',
@@ -97,7 +99,7 @@ export const PAGE_ORDER_DETAILS_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [{ resource: 'page:orders', actions: ['view'] }],
+    roles: [Roles.ORG_USER, Roles.ORG_ADMIN],
     hasOwnTitle: true,
     parent: {
         slug: '/zamowienia',

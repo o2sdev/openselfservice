@@ -68,7 +68,7 @@ export class SurveyjsService {
     public submitSurvey(payload: SurveyJsSubmitPayload, authorization?: string): Observable<void> {
         return this.cmsService.getSurvey({ code: payload.code }).pipe(
             switchMap((survey) => {
-                const decodedToken = authorization ? Utils.Auth.decodeAuthorizationToken(authorization) : undefined;
+                const decodedToken = authorization ? Utils.Auth.decodeToken(authorization) : undefined;
                 if (!this.hasAccess(survey.requiredRoles, decodedToken)) {
                     this.logger.info('User does not have access to survey');
                     throw new UnauthorizedException('User does not have access to survey');

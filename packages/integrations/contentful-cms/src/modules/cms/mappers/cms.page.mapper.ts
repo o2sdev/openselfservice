@@ -10,6 +10,7 @@ import {
     TwoColumnTemplateFragment,
 } from '@/generated/contentful';
 
+import { mapRoles } from './cms.roles.mapper';
 import {
     PAGE_ACCESSORIES_DE,
     PAGE_ACCESSORIES_EN,
@@ -411,8 +412,7 @@ export const mapPage = (entryPage: PageFragment): CMS.Model.Page.Page => {
     return {
         id: entryPage.sys.id,
         slug: entryPage.slug || '',
-        // TODO: map permissions
-        // permissions: mapRoles(entryPage.permissions),
+        roles: mapRoles(entryPage.permissions).map((r) => r),
         locale: entryPage.sys.locale || process.env.DEFAULT_LOCALE!,
         template: template,
         updatedAt: entryPage.sys.publishedAt,

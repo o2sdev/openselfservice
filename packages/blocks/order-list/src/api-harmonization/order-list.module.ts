@@ -23,8 +23,8 @@ export class OrderListBlockModule {
                     useExisting: Framework.Orders.Service,
                 },
                 {
-                    provide: Auth.Permissions,
-                    useExisting: Framework.Auth.Permissions.Service,
+                    provide: Auth.Service,
+                    useExisting: Framework.Auth.Service,
                 },
             ],
             controllers: [OrderListController],

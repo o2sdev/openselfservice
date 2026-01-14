@@ -1,5 +1,7 @@
 import { CMS } from '@o2s/framework/modules';
 
+import { Roles } from '@/utils/roles';
+
 export const PAGE_NOTIFICATION_DETAILS_EN: CMS.Model.Page.Page = {
     id: '6',
     slug: '/notifications/(.+)',
@@ -17,7 +19,7 @@ export const PAGE_NOTIFICATION_DETAILS_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [{ resource: 'page:notifications', actions: ['view'] }],
+    roles: [Roles.PROSPECT, Roles.ORG_USER, Roles.ORG_ADMIN],
     hasOwnTitle: true,
     parent: {
         slug: '/notifications',
@@ -61,7 +63,7 @@ export const PAGE_NOTIFICATION_DETAILS_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [{ resource: 'page:notifications', actions: ['view'] }],
+    roles: [Roles.PROSPECT, Roles.ORG_USER, Roles.ORG_ADMIN],
     hasOwnTitle: true,
     parent: {
         slug: '/benachrichtigungen',
@@ -105,7 +107,7 @@ export const PAGE_NOTIFICATION_DETAILS_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [{ resource: 'page:notifications', actions: ['view'] }],
+    roles: [Roles.PROSPECT, Roles.ORG_USER, Roles.ORG_ADMIN],
     hasOwnTitle: true,
     parent: {
         slug: '/powiadomienia',

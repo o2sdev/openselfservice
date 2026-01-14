@@ -1,5 +1,4 @@
 export * as Decorators from './auth.decorators';
-export * as Constants from './auth.constants';
 export * as Model from './auth.model';
 export * as Permissions from './permissions';
 

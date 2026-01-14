@@ -35,7 +35,6 @@ import { OrderListPureProps } from './OrderList.types';
 export const OrderListPure: React.FC<OrderListPureProps> = ({ locale, accessToken, routing, ...component }) => {
     const { Link: LinkComponent } = createNavigation(routing);
     const { labels } = useGlobalContext();
-    const { permissions } = component;
 
     const initialFilters: Request.GetOrderListBlockQuery = {
         id: component.id,

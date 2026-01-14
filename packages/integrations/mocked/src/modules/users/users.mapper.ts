@@ -2,7 +2,7 @@ import { Users } from '@o2s/framework/modules';
 
 import { mapCustomer } from './customers.mapper';
 
-// Users belong to organizations. Permissions come from the organization, not the user.
+// Users belong to customers. Permissions come from the organization, not the user.
 // The isAdmin flag indicates if the user has admin privileges within that organization.
 const MOCK_USER_1: Users.Model.User = {
     id: 'user-100',
@@ -10,17 +10,10 @@ const MOCK_USER_1: Users.Model.User = {
     email: 'john@example.com',
     firstName: 'John',
     lastName: 'Adams',
-    organizations: [
-        {
-            customer: mapCustomer('cust-002')!, // Tech Solutions - user permissions (view + pay)
-            isAdmin: false,
-        },
-        {
-            customer: mapCustomer('cust-003')!, // Digital Services - readonly (view only)
-            isAdmin: false,
-        },
+    customers: [
+        mapCustomer('cust-002')!, // Tech Solutions - user permissions (view + pay)
+        mapCustomer('cust-003')!, // Digital Services - readonly (view only)
     ],
-    customers: [],
 };
 
 const MOCK_USER_2: Users.Model.User = {
@@ -29,17 +22,10 @@ const MOCK_USER_2: Users.Model.User = {
     email: 'jane@example.com',
     firstName: 'Jane',
     lastName: 'Doe',
-    organizations: [
-        {
-            customer: mapCustomer('cust-001')!, // Acme Corp - admin permissions (full access)
-            isAdmin: true,
-        },
-        {
-            customer: mapCustomer('cust-002')!, // Tech Solutions - user permissions (view + pay)
-            isAdmin: false,
-        },
+    customers: [
+        mapCustomer('cust-001')!, // Acme Corp - admin permissions (full access)
+        mapCustomer('cust-002')!, // Tech Solutions - user permissions (view + pay)
     ],
-    customers: [],
 };
 
 const MOCK_USER_3: Users.Model.User = {
@@ -48,7 +34,6 @@ const MOCK_USER_3: Users.Model.User = {
     email: 'bob.wilson@example.com',
     firstName: 'Bob',
     lastName: 'Wilson',
-    organizations: [],
     customers: [],
 };
 
@@ -58,13 +43,9 @@ const MOCK_USER_4: Users.Model.User = {
     email: 'lyon@example.com',
     firstName: 'Lyon',
     lastName: 'Gaultier',
-    organizations: [
-        {
-            customer: mapCustomer('cust-003')!, // Digital Services - readonly (view only)
-            isAdmin: false,
-        },
+    customers: [
+        mapCustomer('cust-003')!, // Digital Services - readonly (view only)
     ],
-    customers: [],
 };
 
 export const MOCK_USERS = [MOCK_USER_1, MOCK_USER_2, MOCK_USER_3, MOCK_USER_4];

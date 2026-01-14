@@ -104,7 +104,6 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
 }) => {
     const { Link: LinkComponent } = createNavigation(routing);
     const { labels } = useGlobalContext();
-    const { permissions } = component;
 
     const initialFilters: Request.GetOrderDetailsBlockQuery = {
         id: component.id,

@@ -52,13 +52,16 @@ async function updateCustomerToken(
         if (customer) {
             // Permissions come directly from the organization
             const permissions = customer.permissions ?? [];
+            const roles = customer?.roles ?? [];
 
             token.customer = {
                 id: customer.id,
                 name: customer?.name ?? '',
+                roles,
                 permissions,
             };
             token.permissions = permissions;
+            token.roles = roles;
         }
     } catch (_error) {
         throw new Error('Error fetching customer data');
@@ -71,11 +74,13 @@ function signUserToken(token: JWT): string {
             name: token.name,
             email: token.email,
             permissions: token.permissions,
+            roles: token.roles,
             customer: token?.customer
                 ? {
                       id: token.customer.id,
                       name: token.customer.name,
                       permissions: token.customer.permissions,
+                      roles: token.customer.roles,
                   }
                 : undefined,
         },

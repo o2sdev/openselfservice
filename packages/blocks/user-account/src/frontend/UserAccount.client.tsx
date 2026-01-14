@@ -14,8 +14,7 @@ import { Typography } from '@o2s/ui/elements/typography';
 import { UserAccountPureProps } from './UserAccount.types';
 
 export const UserAccountPure: React.FC<UserAccountPureProps> = (component) => {
-    const { fields, labels, basicInformationTitle, basicInformationDescription, user, title, onSignOut, permissions } =
-        component;
+    const { fields, labels, basicInformationTitle, basicInformationDescription, user, title, onSignOut } = component;
 
     const t = useTranslations();
 

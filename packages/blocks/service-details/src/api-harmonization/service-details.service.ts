@@ -15,7 +15,7 @@ export class ServiceDetailsService {
     constructor(
         private readonly cmsService: CMS.Service,
         private readonly resourceService: Resources.Service,
-        private readonly permissionsService: Auth.Permissions.Service,
+        private readonly authService: Auth.Service,
     ) {}
 
     getServiceDetailsBlock(
@@ -32,11 +32,7 @@ export class ServiceDetailsService {
 
                 // Extract permissions using ACL service
                 if (headers.authorization) {
-                    const permissions = this.permissionsService.checkResourceActions(
-                        headers.authorization,
-                        'services',
-                        ['view'],
-                    );
+                    const permissions = this.authService.canPerformActions(headers.authorization, 'services', ['view']);
 
                     result.permissions = {
                         view: permissions.view ?? false,

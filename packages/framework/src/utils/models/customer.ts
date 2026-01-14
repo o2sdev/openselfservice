@@ -1,16 +1,13 @@
+import * as Auth from '@/modules/auth';
 import { BillingAccount } from '@/modules/billing-accounts/billing-accounts.model';
 
 import { Party } from './party';
-import { Permission } from './permission';
-import { UserCustomerRole } from './roles';
 
 export class Customer extends Party {
     clientType?: ClientType;
     parentOrgId?: string;
-    /** Normalized permissions for this organization */
-    permissions?: Permission[];
-    /** @deprecated Use permissions instead */
-    roles?: UserCustomerRole[];
+    roles?: Auth.Model.Role[];
+    permissions?: Auth.Model.Permission[];
     billingAccounts?: BillingAccount[];
 }
 

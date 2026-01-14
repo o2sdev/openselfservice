@@ -19,7 +19,7 @@ export class OrderDetailsService {
         private readonly cmsService: CMS.Service,
         private readonly orderService: Orders.Service,
         private readonly configService: ConfigService,
-        private readonly permissionsService: Auth.Permissions.Service,
+        private readonly authService: Auth.Service,
     ) {
         this.defaultProductUnit = this.configService.get('DEFAULT_PRODUCT_UNIT') || 'PCS';
     }
@@ -58,7 +58,7 @@ export class OrderDetailsService {
 
                             // Extract permissions using ACL service
                             if (headers.authorization) {
-                                const permissions = this.permissionsService.checkResourceActions(
+                                const permissions = this.authService.canPerformActions(
                                     headers.authorization,
                                     'orders',
                                     ['view', 'edit', 'cancel', 'track'],

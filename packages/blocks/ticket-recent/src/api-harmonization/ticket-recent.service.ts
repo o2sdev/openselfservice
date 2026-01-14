@@ -15,7 +15,7 @@ export class TicketRecentService {
     constructor(
         private readonly cmsService: CMS.Service,
         private readonly ticketsService: Tickets.Service,
-        private readonly permissionsService: Auth.Permissions.Service,
+        private readonly authService: Auth.Service,
     ) {}
 
     getTicketRecentBlock(
@@ -39,7 +39,7 @@ export class TicketRecentService {
 
                             // Extract permissions using ACL service
                             if (headers.authorization) {
-                                const permissions = this.permissionsService.checkResourceActions(
+                                const permissions = this.authService.canPerformActions(
                                     headers.authorization,
                                     'tickets',
                                     ['view', 'create'],

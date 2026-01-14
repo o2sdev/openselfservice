@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 
 import { LoggerService } from '@o2s/utils.logger';
 
-import { Auth, Models } from '@o2s/framework/modules';
+import { Auth } from '@o2s/framework/modules';
 
 import { Jwt } from './auth.model';
 
@@ -25,7 +25,7 @@ export class RolesGuard implements Auth.Guard {
             return true;
         }
 
-        const roleMatchingMode = roleMetadata.mode || Auth.Constants.RoleMatchingMode.ANY;
+        const MatchingMode = roleMetadata.mode || Auth.Model.MatchingMode.ANY;
 
         const request = context.switchToHttp().getRequest();
         const accessToken = request.headers['authorization']?.replace('Bearer ', '');
@@ -37,11 +37,11 @@ export class RolesGuard implements Auth.Guard {
 
         const userPermissions = this.extractPermissionsAsStrings(decodedToken);
 
-        this.logger.debug(roleMatchingMode, 'Role matching mode');
+        this.logger.debug(MatchingMode, 'Role matching mode');
         this.logger.debug(userPermissions.join(','), 'User permissions');
         this.logger.debug(requiredRoles.join(','), 'Required roles');
 
-        return roleMatchingMode === Auth.Constants.RoleMatchingMode.ALL
+        return MatchingMode === Auth.Model.MatchingMode.ALL
             ? requiredRoles.every((role) => userPermissions.includes(role))
             : requiredRoles.some((role) => userPermissions.includes(role));
     }
@@ -55,7 +55,7 @@ export class RolesGuard implements Auth.Guard {
         return this.flattenPermissions(permissions);
     }
 
-    private flattenPermissions(permissions: Models.Permission.Permission[]): string[] {
+    private flattenPermissions(permissions: Auth.Model.Permission[]): string[] {
         return permissions.flatMap((p) => p.actions.map((action) => `${p.resource}:${action}`));
     }
 }

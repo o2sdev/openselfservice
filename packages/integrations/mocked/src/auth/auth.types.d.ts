@@ -1,6 +1,6 @@
 import { DefaultSession } from 'next-auth';
 
-import { Models } from '@o2s/framework/modules';
+import { Auth } from '@o2s/framework/modules';
 
 export * from 'next-auth';
 declare module 'next-auth' {
@@ -10,7 +10,8 @@ declare module 'next-auth' {
             customer?: {
                 id: string;
                 name: string;
-                permissions: Models.Permission.Permission[];
+                permissions: Auth.Model.Permission[];
+                roles?: string[];
             };
         } & DefaultSession['user'];
         error?: 'RefreshTokenError';
@@ -27,11 +28,13 @@ declare module 'next-auth/jwt' {
     interface JWT {
         accessToken: string;
         accessTokenExpires: number;
-        permissions?: Models.Permission.Permission[];
+        permissions?: Auth.Model.Permission[];
+        roles?: string[];
         customer?: {
             id: string;
             name: string;
-            permissions: Models.Permission.Permission[];
+            permissions: Auth.Model.Permission[];
+            roles?: string[];
         };
     }
 }

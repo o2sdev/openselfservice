@@ -1,5 +1,7 @@
 import { CMS } from '@o2s/framework/modules';
 
+import { Roles } from '@/utils/roles';
+
 export const PAGE_PRODUCT_LIST_EN: CMS.Model.Page.Page = {
     id: '20',
     slug: '/products',
@@ -19,7 +21,7 @@ export const PAGE_PRODUCT_LIST_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [{ resource: 'page:products', actions: ['view'] }],
+    roles: [Roles.ORG_USER, Roles.ORG_ADMIN],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',
@@ -53,7 +55,7 @@ export const PAGE_PRODUCT_LIST_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [{ resource: 'page:products', actions: ['view'] }],
+    roles: [Roles.ORG_USER, Roles.ORG_ADMIN],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',
@@ -87,7 +89,7 @@ export const PAGE_PRODUCT_LIST_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [{ resource: 'page:products', actions: ['view'] }],
+    roles: [Roles.ORG_USER, Roles.ORG_ADMIN],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',

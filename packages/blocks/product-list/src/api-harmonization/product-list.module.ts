@@ -23,8 +23,8 @@ export class ProductListBlockModule {
                     useExisting: Framework.Products.Service,
                 },
                 {
-                    provide: Auth.Permissions,
-                    useExisting: Framework.Auth.Permissions.Service,
+                    provide: Auth.Service,
+                    useExisting: Framework.Auth.Service,
                 },
             ],
             controllers: [ProductListController],

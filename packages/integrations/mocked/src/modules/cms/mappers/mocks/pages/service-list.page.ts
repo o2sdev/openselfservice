@@ -1,5 +1,7 @@
 import { CMS } from '@o2s/framework/modules';
 
+import { Roles } from '@/utils/roles';
+
 export const PAGE_SERVICE_LIST_EN: CMS.Model.Page.Page = {
     id: '8',
     slug: '/services',
@@ -17,7 +19,7 @@ export const PAGE_SERVICE_LIST_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [{ resource: 'page:services', actions: ['view'] }],
+    roles: [Roles.ORG_USER, Roles.ORG_ADMIN],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',
@@ -59,7 +61,7 @@ export const PAGE_SERVICE_LIST_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [{ resource: 'page:services', actions: ['view'] }],
+    roles: [Roles.ORG_USER, Roles.ORG_ADMIN],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',
@@ -101,7 +103,7 @@ export const PAGE_SERVICE_LIST_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [{ resource: 'page:services', actions: ['view'] }],
+    roles: [Roles.ORG_USER, Roles.ORG_ADMIN],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',

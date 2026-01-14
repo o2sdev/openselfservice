@@ -19,7 +19,7 @@ export class PaymentsSummaryService {
         private readonly cmsService: CMS.Service,
         private readonly invoiceService: Invoices.Service,
         private readonly configService: ConfigService,
-        private readonly permissionsService: Auth.Permissions.Service,
+        private readonly authService: Auth.Service,
     ) {
         this.defaultCurrency = this.configService.get('DEFAULT_CURRENCY') || 'EUR';
     }
@@ -37,11 +37,10 @@ export class PaymentsSummaryService {
 
                 // Extract permissions using ACL service
                 if (headers.authorization) {
-                    const permissions = this.permissionsService.checkResourceActions(
-                        headers.authorization,
-                        'invoices',
-                        ['view', 'pay'],
-                    );
+                    const permissions = this.authService.canPerformActions(headers.authorization, 'invoices', [
+                        'view',
+                        'pay',
+                    ]);
 
                     result.permissions = {
                         view: permissions.view ?? false,

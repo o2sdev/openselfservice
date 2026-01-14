@@ -21,8 +21,8 @@ export class Page {
             };
         };
     };
-    /** Normalized permissions required to view this page (e.g., [{resource: 'page:dashboard', actions: ['view']}]) */
-    permissions?: Models.Permission.Permission[];
+    /** Role-based access control (e.g., ['ORG_USER', 'ORG_ADMIN']) */
+    roles?: string[];
     theme?: string;
 }
 

@@ -1,8 +1,6 @@
 import { Articles, CMS } from '@o2s/configs.integrations';
 
-import { Models } from '@o2s/framework/modules';
-
-import { getHasAccess } from '@o2s/api-harmonization/utils/permissions';
+import { Auth } from '@o2s/framework/modules';
 
 import { Breadcrumb, Init, Page } from './page.model';
 
@@ -145,7 +143,7 @@ export const mapInit = (
     footer: CMS.Model.Footer.Footer,
     labels: CMS.Model.AppConfig.Labels,
     themes: CMS.Model.AppConfig.Themes,
-    userPermissions: Models.Permission.Permission[],
+    userRoles: string[],
 ): Init => {
     return {
         locales,
@@ -153,13 +151,13 @@ export const mapInit = (
             header: {
                 ...header,
                 items: header.items
-                    .filter((item) => getHasAccess(item.permissions, userPermissions))
+                    .filter((item) => Auth.Service.hasRole(item.roles, userRoles))
                     .map((item) => {
                         if (item.__typename === 'NavigationGroup') {
                             return {
                                 ...item,
                                 items: item.items.filter((childItem) =>
-                                    getHasAccess(childItem.permissions, userPermissions),
+                                    Auth.Service.hasRole(childItem.roles, userRoles),
                                 ),
                             };
                         }
@@ -169,13 +167,13 @@ export const mapInit = (
             footer: {
                 ...footer,
                 items: footer.items
-                    .filter((item) => getHasAccess(item.permissions, userPermissions))
+                    .filter((item) => Auth.Service.hasRole(item.roles, userRoles))
                     .map((item) => {
                         if (item.__typename === 'NavigationGroup') {
                             return {
                                 ...item,
                                 items: item.items.filter((childItem) =>
-                                    getHasAccess(childItem.permissions, userPermissions),
+                                    Auth.Service.hasRole(childItem.roles, userRoles),
                                 ),
                             };
                         }

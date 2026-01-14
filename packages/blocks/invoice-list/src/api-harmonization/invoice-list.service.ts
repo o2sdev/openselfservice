@@ -15,7 +15,7 @@ export class InvoiceListService {
     constructor(
         private readonly cmsService: CMS.Service,
         private readonly invoiceService: Invoices.Service,
-        private readonly permissionsService: Auth.Permissions.Service,
+        private readonly authService: Auth.Service,
     ) {}
 
     getInvoiceListBlock(
@@ -45,7 +45,7 @@ export class InvoiceListService {
 
                             // Extract permissions using ACL service
                             if (headers.authorization) {
-                                const permissions = this.permissionsService.checkResourceActions(
+                                const permissions = this.authService.canPerformActions(
                                     headers.authorization,
                                     'invoices',
                                     ['view', 'create', 'pay', 'delete'],

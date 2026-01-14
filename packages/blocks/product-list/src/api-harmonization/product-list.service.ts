@@ -15,7 +15,7 @@ export class ProductListService {
     constructor(
         private readonly cmsService: CMS.Service,
         private readonly productsService: Products.Service,
-        private readonly permissionsService: Auth.Permissions.Service,
+        private readonly authService: Auth.Service,
     ) {}
 
     getProductListBlock(
@@ -41,7 +41,7 @@ export class ProductListService {
 
                             // Extract permissions using ACL service
                             if (headers.authorization) {
-                                const permissions = this.permissionsService.checkResourceActions(
+                                const permissions = this.authService.canPerformActions(
                                     headers.authorization,
                                     'products',
                                     ['view'],

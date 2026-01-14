@@ -15,7 +15,7 @@ export class OrganizationsController {
     constructor(protected readonly service: OrganizationsService) {}
 
     @Get()
-    // @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN] })
+    @Auth.Decorators.Roles({ roles: [] })
     getCustomers(@Headers() headers: Models.Headers.AppHeaders, @Query() query: GetCustomersQuery) {
         return this.service.getCustomers(query, headers);
     }

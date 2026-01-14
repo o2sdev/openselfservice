@@ -10,7 +10,7 @@ export const mapArticlesFromSearch = (
         (hit): Articles.Model.Article => ({
             id: hit.documentId,
             slug: hit.slug,
-            permissions: [],
+            roles: [],
             createdAt: hit.updatedAt,
             updatedAt: hit.updatedAt,
             title: hit.SEO.title,

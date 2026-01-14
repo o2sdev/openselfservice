@@ -15,7 +15,7 @@ export class OrderListService {
     constructor(
         private readonly cmsService: CMS.Service,
         private readonly orderService: Orders.Service,
-        private readonly permissionsService: Auth.Permissions.Service,
+        private readonly authService: Auth.Service,
     ) {}
 
     getOrderListBlock(
@@ -48,7 +48,7 @@ export class OrderListService {
 
                             // Extract permissions using ACL service
                             if (headers.authorization) {
-                                const permissions = this.permissionsService.checkResourceActions(
+                                const permissions = this.authService.canPerformActions(
                                     headers.authorization,
                                     'orders',
                                     ['view', 'create', 'cancel', 'track'],

@@ -1,4 +1,4 @@
-import { Models } from '@o2s/framework/modules';
+import { Auth } from '@o2s/framework/modules';
 
 /**
  * Maps external IAM permission strings to internal Permission format.
@@ -44,17 +44,6 @@ const permissionMappings: Record<string, { resource: string; action: string }> =
     'services:view': { resource: 'services', action: 'view' },
     // Products permissions
     'products:view': { resource: 'products', action: 'view' },
-    // Page access permissions (resource format: page:{pageName})
-    'page:dashboard:view': { resource: 'page:dashboard', action: 'view' },
-    'page:invoices:view': { resource: 'page:invoices', action: 'view' },
-    'page:orders:view': { resource: 'page:orders', action: 'view' },
-    'page:tickets:view': { resource: 'page:tickets', action: 'view' },
-    'page:notifications:view': { resource: 'page:notifications', action: 'view' },
-    'page:services:view': { resource: 'page:services', action: 'view' },
-    'page:products:view': { resource: 'page:products', action: 'view' },
-    'page:knowledge-base:view': { resource: 'page:knowledge-base', action: 'view' },
-    'page:user-account:view': { resource: 'page:user-account', action: 'view' },
-    'page:surveys:view': { resource: 'page:surveys', action: 'view' },
 };
 
 /**
@@ -62,7 +51,7 @@ const permissionMappings: Record<string, { resource: string; action: string }> =
  * @param scopeString - External scope string (e.g., "invoices:view invoices:pay")
  * @returns Normalized Permission array grouped by resource
  */
-export const mapFromScopeString = (scopeString?: string): Models.Permission.Permission[] => {
+export const mapFromScopeString = (scopeString?: string): Auth.Model.Permission[] => {
     if (!scopeString) {
         return [];
     }
@@ -92,7 +81,7 @@ export const mapFromScopeString = (scopeString?: string): Models.Permission.Perm
  * @param permissions - Normalized Permission array
  * @returns Space-separated scope string in "resource:action" format
  */
-export const mapToScopeString = (permissions?: Models.Permission.Permission[]): string => {
+export const mapToScopeString = (permissions?: Auth.Model.Permission[]): string => {
     if (!permissions || permissions.length === 0) {
         return '';
     }

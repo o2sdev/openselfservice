@@ -30,7 +30,6 @@ import { InvoiceListPureProps } from './InvoiceList.types';
 export const InvoiceListPure: React.FC<InvoiceListPureProps> = ({ locale, accessToken, routing, ...component }) => {
     const { labels } = useGlobalContext();
     const currentLocale = useLocale();
-    const { permissions } = component;
 
     const initialFilters: Request.GetInvoiceListBlockQuery = {
         id: component.id,

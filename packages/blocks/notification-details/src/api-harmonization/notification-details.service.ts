@@ -19,7 +19,7 @@ export class NotificationDetailsService {
     constructor(
         private readonly cmsService: CMS.Service,
         private readonly notificationService: Notifications.Service,
-        private readonly permissionsService: Auth.Permissions.Service,
+        private readonly authService: Auth.Service,
     ) {}
 
     getNotificationDetailsBlock(
@@ -45,11 +45,11 @@ export class NotificationDetailsService {
 
                 // Extract permissions using ACL service
                 if (headers.authorization) {
-                    const permissions = this.permissionsService.checkResourceActions(
-                        headers.authorization,
-                        'notifications',
-                        ['view', 'mark_read', 'delete'],
-                    );
+                    const permissions = this.authService.canPerformActions(headers.authorization, 'notifications', [
+                        'view',
+                        'mark_read',
+                        'delete',
+                    ]);
 
                     result.permissions = {
                         view: permissions.view ?? false,

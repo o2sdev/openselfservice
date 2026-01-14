@@ -1,5 +1,7 @@
 import { CMS } from '@o2s/framework/modules';
 
+import { Roles } from '@/utils/roles';
+
 export const PAGE_INVOICE_LIST_EN: CMS.Model.Page.Page = {
     id: '5',
     slug: '/invoices',
@@ -17,7 +19,7 @@ export const PAGE_INVOICE_LIST_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [{ resource: 'page:invoices', actions: ['view'] }],
+    roles: [Roles.ORG_USER, Roles.ORG_ADMIN],
     hasOwnTitle: false,
     template: {
         __typename: 'TwoColumnTemplate',
@@ -63,7 +65,7 @@ export const PAGE_INVOICE_LIST_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [{ resource: 'page:invoices', actions: ['view'] }],
+    roles: [Roles.ORG_USER, Roles.ORG_ADMIN],
     hasOwnTitle: false,
     template: {
         __typename: 'TwoColumnTemplate',
@@ -109,7 +111,7 @@ export const PAGE_INVOICE_LIST_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [{ resource: 'page:invoices', actions: ['view'] }],
+    roles: [Roles.ORG_USER, Roles.ORG_ADMIN],
     hasOwnTitle: false,
     template: {
         __typename: 'TwoColumnTemplate',

@@ -36,7 +36,6 @@ export const NotificationListPure: React.FC<NotificationListPureProps> = ({
 }) => {
     const { Link: LinkComponent } = createNavigation(routing);
     const { labels } = useGlobalContext();
-    const { permissions } = component;
 
     const initialFilters: Request.GetNotificationListBlockQuery = {
         id: component.id,

@@ -15,7 +15,7 @@ export class UserAccountService {
     constructor(
         private readonly cmsService: CMS.Service,
         private readonly usersService: Users.Service,
-        private readonly permissionsService: Auth.Permissions.Service,
+        private readonly authService: Auth.Service,
     ) {}
 
     getUserAccountBlock(
@@ -30,7 +30,7 @@ export class UserAccountService {
 
                 // Extract permissions using ACL service
                 if (headers.authorization) {
-                    const permissions = this.permissionsService.checkResourceActions(headers.authorization, 'users', [
+                    const permissions = this.authService.canPerformActions(headers.authorization, 'users', [
                         'view',
                         'edit',
                     ]);

@@ -33,7 +33,6 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
     const { Link: LinkComponent } = createNavigation(routing);
     const inspector = LivePreview.useInspector();
     const { labels } = useGlobalContext();
-    const { permissions } = component;
 
     const initialFilters: Request.GetTicketListBlockQuery = {
         id: component.id,

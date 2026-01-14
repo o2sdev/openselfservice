@@ -1,5 +1,7 @@
 import { CMS } from '@o2s/framework/modules';
 
+import { Roles } from '@/utils/roles';
+
 export const PAGE_DASHBOARD_PL: CMS.Model.Page.Page = {
     slug: '/',
     id: '1',
@@ -17,7 +19,7 @@ export const PAGE_DASHBOARD_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [{ resource: 'page:dashboard', actions: ['view'] }],
+    roles: [Roles.PROSPECT, Roles.ORG_USER, Roles.ORG_ADMIN],
     hasOwnTitle: false,
     template: {
         __typename: 'TwoColumnTemplate',
@@ -72,7 +74,7 @@ export const PAGE_DASHBOARD_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [{ resource: 'page:dashboard', actions: ['view'] }],
+    roles: [Roles.PROSPECT, Roles.ORG_USER, Roles.ORG_ADMIN],
     hasOwnTitle: false,
     template: {
         __typename: 'TwoColumnTemplate',
@@ -127,7 +129,7 @@ export const PAGE_DASHBOARD_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [{ resource: 'page:dashboard', actions: ['view'] }],
+    roles: [Roles.PROSPECT, Roles.ORG_USER, Roles.ORG_ADMIN],
     hasOwnTitle: false,
     template: {
         __typename: 'TwoColumnTemplate',

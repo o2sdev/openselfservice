@@ -1,11 +1,8 @@
-import { Models } from '@o2s/framework/modules';
+import { Auth, Models } from '@o2s/framework/modules';
 
-// Organization permissions using the normalized Permission format
-// This structure is IAM-agnostic and can be populated from any identity provider
+import { Roles } from '@/utils/roles';
 
-/** Full admin permissions - all CRUD operations, custom actions, and all pages */
-const ADMIN_PERMISSIONS: Models.Permission.Permission[] = [
-    // Data permissions
+const ORG_ADMIN_PERMISSIONS: Auth.Model.Permission[] = [
     { resource: 'invoices', actions: ['view', 'create', 'edit', 'delete', 'pay'] },
     { resource: 'users', actions: ['view', 'create', 'edit', 'delete'] },
     { resource: 'settings', actions: ['view', 'edit'] },
@@ -14,22 +11,9 @@ const ADMIN_PERMISSIONS: Models.Permission.Permission[] = [
     { resource: 'tickets', actions: ['view', 'create', 'edit', 'close', 'reopen', 'delete'] },
     { resource: 'services', actions: ['view'] },
     { resource: 'products', actions: ['view'] },
-    // Page access - admins can view all pages
-    { resource: 'page:dashboard', actions: ['view'] },
-    { resource: 'page:invoices', actions: ['view'] },
-    { resource: 'page:orders', actions: ['view'] },
-    { resource: 'page:tickets', actions: ['view'] },
-    { resource: 'page:notifications', actions: ['view'] },
-    { resource: 'page:services', actions: ['view'] },
-    { resource: 'page:products', actions: ['view'] },
-    { resource: 'page:knowledge-base', actions: ['view'] },
-    { resource: 'page:user-account', actions: ['view'] },
-    { resource: 'page:surveys', actions: ['view'] },
 ];
 
-/** Standard user permissions - view and limited actions, most pages */
-const USER_PERMISSIONS: Models.Permission.Permission[] = [
-    // Data permissions
+const ORG_USER_PERMISSIONS: Auth.Model.Permission[] = [
     { resource: 'invoices', actions: ['view'] },
     { resource: 'users', actions: ['view'] },
     { resource: 'notifications', actions: ['view', 'mark_read'] },
@@ -37,29 +21,9 @@ const USER_PERMISSIONS: Models.Permission.Permission[] = [
     { resource: 'tickets', actions: ['view', 'create'] },
     { resource: 'services', actions: ['view'] },
     { resource: 'products', actions: ['view'] },
-    // Page access - users can view all pages
-    { resource: 'page:dashboard', actions: ['view'] },
-    { resource: 'page:invoices', actions: ['view'] },
-    { resource: 'page:orders', actions: ['view'] },
-    { resource: 'page:tickets', actions: ['view'] },
-    { resource: 'page:notifications', actions: ['view'] },
-    { resource: 'page:services', actions: ['view'] },
-    { resource: 'page:products', actions: ['view'] },
-    { resource: 'page:knowledge-base', actions: ['view'] },
-    { resource: 'page:user-account', actions: ['view'] },
-    { resource: 'page:surveys', actions: ['view'] },
 ];
 
-/** Read-only permissions - limited page access */
-const READONLY_PERMISSIONS: Models.Permission.Permission[] = [
-    // Data permissions
-    { resource: 'notifications', actions: ['view'] },
-    // Page access - readonly users have limited pages
-    { resource: 'page:dashboard', actions: ['view'] },
-    { resource: 'page:notifications', actions: ['view'] },
-    { resource: 'page:knowledge-base', actions: ['view'] },
-    { resource: 'page:user-account', actions: ['view'] },
-];
+const PROSPECT_PERMISSIONS: Auth.Model.Permission[] = [{ resource: 'notifications', actions: ['view'] }];
 
 const MOCK_CUSTOMER_1: Models.Customer.Customer = {
     id: 'cust-001',
@@ -75,7 +39,8 @@ const MOCK_CUSTOMER_1: Models.Customer.Customer = {
         city: 'New York',
         postalCode: '10013',
     },
-    permissions: ADMIN_PERMISSIONS,
+    roles: [Roles.ORG_USER, Roles.ORG_ADMIN],
+    permissions: ORG_ADMIN_PERMISSIONS,
     parentOrgId: 'org-001',
 };
 
@@ -93,7 +58,8 @@ const MOCK_CUSTOMER_2: Models.Customer.Customer = {
         city: 'New York',
         postalCode: '11211',
     },
-    permissions: USER_PERMISSIONS,
+    roles: [Roles.ORG_USER],
+    permissions: ORG_USER_PERMISSIONS,
     parentOrgId: 'org-002',
 };
 
@@ -111,7 +77,8 @@ const MOCK_CUSTOMER_3: Models.Customer.Customer = {
         city: 'Mountain View',
         postalCode: '94041',
     },
-    permissions: READONLY_PERMISSIONS,
+    roles: [Roles.PROSPECT],
+    permissions: PROSPECT_PERMISSIONS,
     parentOrgId: 'org-003',
 };
 

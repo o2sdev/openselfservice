@@ -1,5 +1,3 @@
-import { Models } from '@o2s/framework/modules';
-
 import { Media, Pagination } from '@/utils/models';
 
 export class Category {
@@ -42,8 +40,8 @@ export class Article {
     };
     author?: Author;
     sections!: ArticleSection[];
-    /** Normalized permissions required to view this article (e.g., [{resource: 'article:knowledge-base', actions: ['view']}]) */
-    permissions?: Models.Permission.Permission[];
+    /** Role-based access control */
+    roles?: string[];
     theme?: string;
 }
 

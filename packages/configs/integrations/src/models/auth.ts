@@ -5,6 +5,5 @@ import { ApiConfig } from '@o2s/framework/modules';
 export const AuthIntegrationConfig: ApiConfig['integrations']['auth'] = Config.auth!;
 
 export import Service = Integration.Auth.Service;
-export import Permissions = Integration.Auth.PermissionsService;
 export import Model = Integration.Auth.Model;
 export import Guard = Integration.Auth.Guard;

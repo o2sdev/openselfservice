@@ -24,8 +24,6 @@ import { ProductListPureProps } from './ProductList.types';
 type ViewMode = 'grid' | 'table';
 
 export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, accessToken, routing, ...component }) => {
-    const { permissions } = component;
-
     const initialFilters = {
         id: component.id,
         offset: 0,

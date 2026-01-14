@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import jwt from 'jsonwebtoken';
 
-import { Auth, Models } from '@o2s/framework/modules';
+import { Auth } from '@o2s/framework/modules';
 
 import { Jwt } from './auth.model';
 
@@ -11,62 +11,74 @@ export class AuthService extends Auth.Service {
         super();
     }
 
-    decodeAuthorizationToken(token: string): Jwt {
+    async verifyToken(token: string): Promise<Jwt> {
         const accessToken = token.replace('Bearer ', '');
-        return jwt.decode(accessToken) as Jwt;
+
+        try {
+            // For development: verify with simple secret
+            return jwt.verify(accessToken, process.env.AUTH_JWT_SECRET || 'secret') as Jwt;
+        } catch (error) {
+            if (error instanceof jwt.TokenExpiredError) {
+                throw new UnauthorizedException('Token expired');
+            }
+            if (error instanceof jwt.JsonWebTokenError) {
+                throw new UnauthorizedException('Invalid token');
+            }
+            throw new UnauthorizedException('Token verification failed');
+        }
     }
 
-    getCustomerId(token: string | Jwt): string | undefined {
-        let decodedToken: Jwt;
-        if (typeof token === 'string') {
-            decodedToken = this.decodeAuthorizationToken(token);
-        } else {
-            decodedToken = token;
-        }
+    async isTokenRevoked(_jti: string): Promise<boolean> {
+        // Mocked implementation: no revocation support
+        // Production would check Redis/database or call IAM introspection
+        return false;
+    }
 
+    getCustomerId(token: string): string | undefined {
+        // Decode directly - already verified by guard
+        const decodedToken = jwt.decode(token.replace('Bearer ', '')) as Jwt;
         return decodedToken.customer?.id;
     }
 
-    extractUserRoles(token?: string | Jwt): Auth.Constants.Roles[] {
+    getUserRoles(token?: string | Jwt): Auth.Model.Role[] {
         if (!token) {
             return [];
         }
 
         let decodedToken: Jwt;
         if (typeof token === 'string') {
-            decodedToken = this.decodeAuthorizationToken(token);
+            // Decode directly - already verified by guard
+            decodedToken = jwt.decode(token.replace('Bearer ', '')) as Jwt;
         } else {
             decodedToken = token;
         }
 
-        // Extract permissions and convert to role strings for legacy compatibility
-        const permissions = decodedToken?.permissions || decodedToken?.customer?.permissions || [];
-        const permissionStrings = this.flattenPermissions(permissions);
-
-        // Filter to only return valid Auth.Constants.Roles values
-        const validRoles = Object.values(Auth.Constants.Roles) as string[];
-        return permissionStrings.filter((item) => validRoles.includes(item)) as Auth.Constants.Roles[];
+        // Roles are now stored directly in the JWT token
+        return decodedToken?.roles || decodedToken?.customer?.roles || [];
     }
 
-    /**
-     * Get all permissions from the token
-     */
-    getPermissions(token?: string | Jwt): Models.Permission.Permission[] {
-        if (!token) {
-            return [];
-        }
-
+    getPermissions(token: string | Auth.Model.Jwt): Auth.Model.Permission[] {
         let decodedToken: Jwt;
+
         if (typeof token === 'string') {
-            decodedToken = this.decodeAuthorizationToken(token);
+            // Decode directly - already verified by guard
+            decodedToken = jwt.decode(token.replace('Bearer ', '')) as Jwt;
         } else {
-            decodedToken = token;
+            decodedToken = token as Jwt;
         }
 
+        // Permissions are now stored directly as Permission[] in the JWT
         return decodedToken?.permissions || decodedToken?.customer?.permissions || [];
     }
 
-    private flattenPermissions(permissions: Models.Permission.Permission[]): string[] {
-        return permissions.flatMap((p) => p.actions.map((action) => `${p.resource}:${action}`));
+    hasPermission(token: string | Auth.Model.Jwt, resource: string, action: string): boolean {
+        const permissions = this.getPermissions(token);
+        const resourcePermissions = permissions.find((p) => p.resource === resource);
+
+        if (!resourcePermissions) {
+            return false;
+        }
+
+        return resourcePermissions.actions.includes(action);
     }
 }

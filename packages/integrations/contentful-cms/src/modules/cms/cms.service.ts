@@ -198,7 +198,6 @@ export class CmsService implements CMS.Service {
         return from(this.cacheService.get(key)).pipe(
             mergeMap((cachedData) => {
                 if (cachedData) {
-                    console.log('cachedData', cachedData);
                     return of(parse(cachedData));
                 }
                 return getData().pipe(

@@ -16,7 +16,7 @@ export class OrdersSummaryService {
     constructor(
         private readonly cmsService: CMS.Service,
         private readonly orderService: Orders.Service,
-        private readonly permissionsService: Auth.Permissions.Service,
+        private readonly authService: Auth.Service,
     ) {}
 
     getOrdersSummaryBlock(
@@ -64,7 +64,7 @@ export class OrdersSummaryService {
 
                 // Extract permissions using ACL service
                 if (headers.authorization) {
-                    const permissions = this.permissionsService.checkResourceActions(headers.authorization, 'orders', [
+                    const permissions = this.authService.canPerformActions(headers.authorization, 'orders', [
                         'view',
                         'create',
                     ]);

@@ -3,10 +3,3 @@ export enum Roles {
     ORG_USER = 'selfservice_org_user',
     ORG_ADMIN = 'selfservice_org_admin',
 }
-
-export enum RoleMatchingMode {
-    ALL = 'all',
-    ANY = 'any',
-}
-
-export type Permission = string;

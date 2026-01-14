@@ -22,8 +22,8 @@ export class PaymentsSummaryBlockModule {
                     useExisting: Framework.Invoices.Service,
                 },
                 {
-                    provide: Auth.Permissions,
-                    useExisting: Framework.Auth.Permissions.Service,
+                    provide: Auth.Service,
+                    useExisting: Framework.Auth.Service,
                 },
             ],
             controllers: [PaymentsSummaryController],

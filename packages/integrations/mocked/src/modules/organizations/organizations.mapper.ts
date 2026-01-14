@@ -91,8 +91,8 @@ export const mapOrganizationsForUser = (
         if (decoded?.email) {
             // Find user by email and get their organization customer IDs
             const user = MOCK_USERS.find((u) => u.email === decoded.email);
-            if (user?.organizations) {
-                const userCustomerIds = user.organizations.map((org) => org.customer.id);
+            if (user?.customers) {
+                const userCustomerIds = user.customers.map((customer) => customer.id);
                 // Filter organizations that contain any of the user's customers
                 userOrganizations = MOCK_ORGANIZATIONS.filter((org) =>
                     org.customers.some((customer) => userCustomerIds.includes(customer.id)),
@@ -128,6 +128,6 @@ export const checkMembership = (orgId: string, userId: string): boolean => {
     }
 
     // Check if user has this organization in their memberships
-    const userCustomerIds = user.organizations?.map((membership) => membership.customer.id) || [];
+    const userCustomerIds = user.customers?.map((customer) => customer.id) || [];
     return org.customers.some((customer) => userCustomerIds.includes(customer.id));
 };
