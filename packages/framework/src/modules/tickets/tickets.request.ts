@@ -9,6 +9,7 @@ export class GetTicketParams {
 export class PostTicketBody {
     title!: string;
     description!: string;
+    topic!: string;
 }
 
 export class GetTicketListQuery extends PaginationQuery {

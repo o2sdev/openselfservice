@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, NotImplementedException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Observable, catchError, firstValueFrom, from, map, of, switchMap, throwError } from 'rxjs';
 
 import { Tickets, Users } from '@o2s/framework/modules';
@@ -9,8 +9,10 @@ import {
     type TicketCommentObject,
     type TicketObject,
     type UserObject,
+    createTicket,
     listSearchResults,
     listTicketComments,
+    searchUsers,
     showTicket,
     showUser,
 } from '@/generated/zendesk';
@@ -159,8 +161,97 @@ export class ZendeskTicketService extends Tickets.Service {
         );
     }
 
-    createTicket(_data: Tickets.Request.PostTicketBody, _authorization?: string): Observable<Tickets.Model.Ticket> {
-        return throwError(() => new NotImplementedException('Creating tickets in Zendesk is not implemented'));
+    createTicket(data: Tickets.Request.PostTicketBody, authorization?: string): Observable<Tickets.Model.Ticket> {
+        // Validate input data
+        if (!data.title || !data.description || !data.topic) {
+            return throwError(() => new Error('Title, description and topic are required'));
+        }
+
+        return this.usersService.getCurrentUser(authorization).pipe(
+            switchMap((user) => {
+                if (!user?.email) {
+                    return throwError(() => new NotFoundException('User email not found'));
+                }
+
+                // Find corresponding Zendesk user by email so that requester/submitter match the logged-in portal user
+                return this.findZendeskUserByEmail(user.email).pipe(
+                    switchMap((zendeskUser) => {
+                        const topicFieldId = Number(process.env.ZENDESK_TOPIC_FIELD_ID || 0);
+                        const customFields: Array<{ id: number; value: string }> = [];
+
+                        // Add topic as custom field if provided and ZENDESK_TOPIC_FIELD_ID is configured
+                        if (data.topic && topicFieldId) {
+                            customFields.push({
+                                id: topicFieldId,
+                                value: data.topic,
+                            });
+                        }
+
+                        return from(
+                            createTicket({
+                                body: {
+                                    ticket: {
+                                        subject: data.title,
+                                        comment: {
+                                            body: data.description,
+                                        },
+                                        ...(zendeskUser?.id && {
+                                            requester_id: zendeskUser.id,
+                                            submitter_id: zendeskUser.id,
+                                        }),
+                                        // Add custom fields if any (e.g., topic)
+                                        // Note: Zendesk API accepts {id, value} structure for custom_fields
+                                        // TypeScript types require full CustomFieldObject, but API accepts simpler structure
+                                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                                        ...(customFields.length > 0 && { custom_fields: customFields as any }),
+                                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                                    } as any,
+                                },
+                            }),
+                        ).pipe(
+                            switchMap((response) => {
+                                if (!response.data?.ticket) {
+                                    return throwError(() => new Error('Failed to create ticket in Zendesk'));
+                                }
+
+                                const createdTicket = response.data.ticket;
+
+                                // Fetch ticket comments to ensure complete data
+                                return this.fetchTicketComments(createdTicket.id!.toString()).pipe(
+                                    switchMap((comments) => {
+                                        // Get unique author IDs from comments
+                                        const authorIds = [
+                                            ...new Set(comments.map((c) => c.author_id).filter(Boolean)),
+                                        ] as number[];
+
+                                        if (authorIds.length === 0) {
+                                            return of(mapTicketToModel(createdTicket, comments));
+                                        }
+
+                                        // Fetch all comment authors
+                                        return from(
+                                            Promise.all(authorIds.map((id) => firstValueFrom(this.fetchUser(id)))),
+                                        ).pipe(
+                                            map((authors) => {
+                                                const authorMap = new Map(
+                                                    authors.filter((a) => a !== undefined).map((a) => [a!.id!, a!]),
+                                                );
+                                                return mapTicketToModel(createdTicket, comments, authorMap);
+                                            }),
+                                        );
+                                    }),
+                                );
+                            }),
+                            catchError((error) => {
+                                return throwError(
+                                    () => new Error(`Failed to create ticket: ${error.message || error}`),
+                                );
+                            }),
+                        );
+                    }),
+                );
+            }),
+        );
     }
 
     private fetchTicket(id: string): Observable<ZendeskTicket> {
@@ -236,6 +327,27 @@ export class ZendeskTicketService extends Tickets.Service {
             }),
             catchError((error) => {
                 return throwError(() => new Error(`Failed to fetch user: ${error.message || error}`));
+            }),
+        );
+    }
+
+    private findZendeskUserByEmail(email: string): Observable<ZendeskUser | undefined> {
+        return from(
+            searchUsers({
+                query: {
+                    query: email,
+                },
+            }),
+        ).pipe(
+            map((response) => {
+                // Search for exact email match
+                const users = response.data?.users || [];
+                const matchedUser = users.find((u) => u.email === email);
+                return matchedUser;
+            }),
+            catchError(() => {
+                // If search fails, return undefined (ticket will be created without requester/submitter ids)
+                return of(undefined);
             }),
         );
     }
