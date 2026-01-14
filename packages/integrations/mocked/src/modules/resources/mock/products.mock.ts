@@ -3224,6 +3224,1129 @@ const MOCK_PRODUCT_17_DE: Products.Model.Product = {
     ],
 };
 
+// Product 18 (PRD-021): Engineering Software (VIRTUAL)
+const MOCK_PRODUCT_18_EN: Products.Model.Product = {
+    id: 'PRD-021',
+    sku: 'SW-ENG-2024',
+    name: 'Engineering Software',
+    description:
+        '<p><strong>Engineering Software</strong> is a comprehensive solution for construction engineering calculations and design analysis. This advanced software suite provides engineers and architects with powerful tools for structural analysis, load calculations, and compliance verification.</p><h3>Comprehensive Calculation Tools</h3><p>The software includes modules for structural analysis, material calculations, and code compliance checking. With support for multiple international building codes, it ensures your designs meet regulatory requirements.</p><p>Key features include:</p><ul><li>Structural analysis and design calculations</li><li>Load analysis for various construction materials</li><li>Code compliance verification (IBC, Eurocode, etc.)</li><li>3D modeling and visualization capabilities</li></ul><h3>User Interface and Workflow</h3><p>The intuitive interface streamlines the design process, while automated calculations reduce manual errors. The software generates detailed reports and documentation for project submissions and client presentations.</p>',
+    shortDescription: 'Advanced software for construction engineering calculations',
+    subtitle: 'Software Solutions • Engineering Tools',
+    image: {
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
+        width: 800,
+        height: 800,
+        alt: 'Engineering Software',
+    },
+    images: [
+        {
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
+            alt: 'Engineering Software',
+            width: 800,
+            height: 800,
+        },
+    ],
+    price: {
+        value: 39.99,
+        currency: 'USD',
+    },
+    link: '/products/PRD-021',
+    type: 'VIRTUAL',
+    category: 'SOFTWARE',
+    tags: [
+        {
+            label: 'New',
+            variant: 'secondary',
+        },
+    ],
+    keySpecs: [
+        { value: '2024', icon: 'Calendar' },
+        { value: 'Cloud', icon: 'Cloud' },
+        { value: 'Multi-User', icon: 'Users' },
+    ],
+    detailedSpecs: [
+        { label: 'Platform', value: 'Windows, macOS, Linux' },
+        { label: 'License Type', value: 'Annual Subscription' },
+        { label: 'Max Users', value: 'Unlimited' },
+        { label: 'Supported Codes', value: 'IBC, Eurocode, AS/NZS' },
+        { label: 'Cloud Storage', value: '100 GB included' },
+        { label: 'Support', value: '24/7 Email & Chat' },
+        { label: 'Updates', value: 'Included' },
+        { label: 'Training', value: 'Online courses included' },
+    ],
+};
+
+const MOCK_PRODUCT_18_PL: Products.Model.Product = {
+    id: 'PRD-021',
+    sku: 'SW-ENG-2024',
+    name: 'Oprogramowanie Inżynierskie',
+    description:
+        '<p><strong>Oprogramowanie Inżynierskie</strong> to kompleksowe rozwiązanie do obliczeń inżynierskich budowlanych i analizy projektowej. Ten zaawansowany pakiet oprogramowania zapewnia inżynierom i architektom potężne narzędzia do analizy konstrukcyjnej, obliczeń obciążeń i weryfikacji zgodności.</p><h3>Kompleksowe Narzędzia Obliczeniowe</h3><p>Oprogramowanie zawiera moduły do analizy konstrukcyjnej, obliczeń materiałowych i sprawdzania zgodności z normami. Dzięki wsparciu dla wielu międzynarodowych norm budowlanych, zapewnia, że Twoje projekty spełniają wymagania regulacyjne.</p><p>Kluczowe funkcje obejmują:</p><ul><li>Analizę konstrukcyjną i obliczenia projektowe</li><li>Analizę obciążeń dla różnych materiałów budowlanych</li><li>Weryfikację zgodności z normami (IBC, Eurocode, itp.)</li><li>Możliwości modelowania 3D i wizualizacji</li></ul><h3>Interfejs Użytkownika i Przepływ Pracy</h3><p>Intuicyjny interfejs usprawnia proces projektowania, podczas gdy zautomatyzowane obliczenia zmniejszają błędy ręczne. Oprogramowanie generuje szczegółowe raporty i dokumentację dla zgłoszeń projektowych i prezentacji klientów.</p>',
+    shortDescription: 'Zaawansowane oprogramowanie do obliczeń inżynierskich budowlanych',
+    subtitle: 'Rozwiązania Oprogramowania • Narzędzia Inżynierskie',
+    image: {
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
+        width: 800,
+        height: 800,
+        alt: 'Oprogramowanie Inżynierskie',
+    },
+    images: [
+        {
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
+            alt: 'Oprogramowanie Inżynierskie',
+            width: 800,
+            height: 800,
+        },
+    ],
+    price: {
+        value: 159.99,
+        currency: 'PLN',
+    },
+    link: '/produkty/PRD-021',
+    type: 'VIRTUAL',
+    category: 'SOFTWARE',
+    tags: [
+        {
+            label: 'Nowość',
+            variant: 'secondary',
+        },
+    ],
+    keySpecs: [
+        { value: '2024', icon: 'Calendar' },
+        { value: 'Chmura', icon: 'Cloud' },
+        { value: 'Wieloużytkownik', icon: 'Users' },
+    ],
+    detailedSpecs: [
+        { label: 'Platforma', value: 'Windows, macOS, Linux' },
+        { label: 'Typ Licencji', value: 'Subskrypcja Roczna' },
+        { label: 'Maks. Użytkowników', value: 'Nieograniczona' },
+        { label: 'Obsługiwane Normy', value: 'IBC, Eurocode, AS/NZS' },
+        { label: 'Przechowywanie w Chmurze', value: '100 GB w zestawie' },
+        { label: 'Wsparcie', value: '24/7 Email i Czat' },
+        { label: 'Aktualizacje', value: 'W zestawie' },
+        { label: 'Szkolenia', value: 'Kursy online w zestawie' },
+    ],
+};
+
+const MOCK_PRODUCT_18_DE: Products.Model.Product = {
+    id: 'PRD-021',
+    sku: 'SW-ENG-2024',
+    name: 'Ingenieurssoftware',
+    description:
+        '<p>Die <strong>Ingenieurssoftware</strong> ist eine umfassende Lösung für Bauingenieurberechnungen und Designanalyse. Diese fortschrittliche Software-Suite bietet Ingenieuren und Architekten leistungsstarke Tools für Strukturanalyse, Lastberechnungen und Compliance-Überprüfung.</p><h3>Umfassende Berechnungstools</h3><p>Die Software enthält Module für Strukturanalyse, Materialberechnungen und Code-Compliance-Prüfung. Mit Unterstützung für mehrere internationale Bauvorschriften stellt sie sicher, dass Ihre Entwürfe den regulatorischen Anforderungen entsprechen.</p><p>Wichtige Funktionen:</p><ul><li>Strukturanalyse und Designberechnungen</li><li>Lastanalyse für verschiedene Baumaterialien</li><li>Code-Compliance-Überprüfung (IBC, Eurocode, etc.)</li><li>3D-Modellierung und Visualisierungsfunktionen</li></ul><h3>Benutzeroberfläche und Workflow</h3><p>Die intuitive Benutzeroberfläche optimiert den Designprozess, während automatisierte Berechnungen manuelle Fehler reduzieren. Die Software generiert detaillierte Berichte und Dokumentation für Projekteinreichungen und Kundenpräsentationen.</p>',
+    shortDescription: 'Fortschrittliche Software für Bauingenieurberechnungen',
+    subtitle: 'Software-Lösungen • Ingenieurwerkzeuge',
+    image: {
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
+        width: 800,
+        height: 800,
+        alt: 'Ingenieurssoftware',
+    },
+    images: [
+        {
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
+            alt: 'Ingenieurssoftware',
+            width: 800,
+            height: 800,
+        },
+    ],
+    price: {
+        value: 39.99,
+        currency: 'USD',
+    },
+    link: '/produkte/PRD-021',
+    type: 'VIRTUAL',
+    category: 'SOFTWARE',
+    tags: [
+        {
+            label: 'Neu',
+            variant: 'secondary',
+        },
+    ],
+    keySpecs: [
+        { value: '2024', icon: 'Calendar' },
+        { value: 'Cloud', icon: 'Cloud' },
+        { value: 'Multi-User', icon: 'Users' },
+    ],
+    detailedSpecs: [
+        { label: 'Plattform', value: 'Windows, macOS, Linux' },
+        { label: 'Lizenztyp', value: 'Jahresabonnement' },
+        { label: 'Max. Benutzer', value: 'Unbegrenzt' },
+        { label: 'Unterstützte Codes', value: 'IBC, Eurocode, AS/NZS' },
+        { label: 'Cloud-Speicher', value: '100 GB enthalten' },
+        { label: 'Support', value: '24/7 E-Mail & Chat' },
+        { label: 'Updates', value: 'Enthalten' },
+        { label: 'Schulung', value: 'Online-Kurse enthalten' },
+    ],
+};
+
+// Product 19 (PRD-022): RentPro Industrial (VIRTUAL)
+const MOCK_PRODUCT_19_EN: Products.Model.Product = {
+    id: 'PRD-022',
+    sku: 'RENT-PRO-IND',
+    name: 'RentPro Industrial™ – Flexible Equipment Rental Solutions',
+    description:
+        '<p><strong>RentPro Industrial™</strong> provides comprehensive equipment rental solutions for construction, manufacturing, and industrial operations. Our flexible rental programs are designed to meet your project needs, whether you require equipment for a day, a month, or longer.</p><h3>Flexible Rental Terms</h3><p>Choose from short-term daily rentals for quick projects or long-term monthly contracts for extended operations. All rental agreements include full maintenance and technical support to ensure your equipment operates at peak performance.</p><p>Key features include:</p><ul><li>Short & Long-Term Rentals</li><li>Wide Equipment Selection</li><li>Maintenance & Support Included</li><li>Flexible delivery and pickup options</li><li>24/7 technical support hotline</li></ul><h3>Equipment Selection</h3><p>Our extensive inventory includes power tools, heavy machinery, measurement equipment, and specialized industrial tools. All equipment is regularly maintained and inspected to meet safety standards.</p>',
+    shortDescription: 'Flexible equipment rental solutions with maintenance and support included',
+    subtitle: 'Equipment Rental • Industrial Solutions',
+    image: {
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-rental.jpg',
+        width: 800,
+        height: 800,
+        alt: 'RentPro Industrial™ – Flexible Equipment Rental Solutions',
+    },
+    images: [
+        {
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-rental.jpg',
+            alt: 'RentPro Industrial™ – Flexible Equipment Rental Solutions',
+            width: 800,
+            height: 800,
+        },
+    ],
+    price: {
+        value: 79.83,
+        currency: 'USD',
+    },
+    link: '/products/PRD-022',
+    type: 'VIRTUAL',
+    category: 'RENTAL',
+    tags: [
+        {
+            label: 'New',
+            variant: 'secondary',
+        },
+    ],
+    keySpecs: [
+        { value: 'Flexible', icon: 'Calendar' },
+        { value: '24/7 Support', icon: 'Headphones' },
+        { value: 'Maintenance', icon: 'Wrench' },
+    ],
+    detailedSpecs: [
+        { label: 'Rental Period', value: 'Daily, Weekly, Monthly' },
+        { label: 'Equipment Categories', value: '50+ categories' },
+        { label: 'Delivery Service', value: 'Available' },
+        { label: 'Support Hours', value: '24/7' },
+        { label: 'Maintenance', value: 'Included' },
+        { label: 'Insurance', value: 'Optional coverage' },
+        { label: 'Minimum Rental', value: '1 day' },
+        { label: 'Payment Terms', value: 'Net 30 available' },
+    ],
+};
+
+const MOCK_PRODUCT_19_PL: Products.Model.Product = {
+    id: 'PRD-022',
+    sku: 'RENT-PRO-IND',
+    name: 'RentPro Industrial™ – Elastyczne Rozwiązania Wynajmu Sprzętu',
+    description:
+        '<p><strong>RentPro Industrial™</strong> zapewnia kompleksowe rozwiązania wynajmu sprzętu dla budownictwa, produkcji i operacji przemysłowych. Nasze elastyczne programy wynajmu są zaprojektowane, aby spełnić potrzeby Twojego projektu, niezależnie od tego, czy potrzebujesz sprzętu na dzień, miesiąc lub dłużej.</p><h3>Elastyczne Warunki Wynajmu</h3><p>Wybierz z krótkoterminowych dziennych wynajmów dla szybkich projektów lub długoterminowych miesięcznych umów dla rozszerzonych operacji. Wszystkie umowy wynajmu obejmują pełną konserwację i wsparcie techniczne, aby zapewnić, że Twój sprzęt działa z maksymalną wydajnością.</p><p>Kluczowe funkcje obejmują:</p><ul><li>Wynajmy Krótko- i Długoterminowe</li><li>Szeroki Wybór Sprzętu</li><li>Konserwacja i Wsparcie W Zestawie</li><li>Elastyczne opcje dostawy i odbioru</li><li>Całodobowa linia wsparcia technicznego</li></ul><h3>Wybór Sprzętu</h3><p>Nasz rozległy asortyment obejmuje narzędzia elektryczne, ciężkie maszyny, sprzęt pomiarowy i specjalistyczne narzędzia przemysłowe. Wszystki sprzęt jest regularnie konserwowany i sprawdzany, aby spełnić standardy bezpieczeństwa.</p>',
+    shortDescription: 'Elastyczne rozwiązania wynajmu sprzętu z konserwacją i wsparciem w zestawie',
+    subtitle: 'Wynajem Sprzętu • Rozwiązania Przemysłowe',
+    image: {
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-rental.jpg',
+        width: 800,
+        height: 800,
+        alt: 'RentPro Industrial™ – Elastyczne Rozwiązania Wynajmu Sprzętu',
+    },
+    images: [
+        {
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-rental.jpg',
+            alt: 'RentPro Industrial™ – Elastyczne Rozwiązania Wynajmu Sprzętu',
+            width: 800,
+            height: 800,
+        },
+    ],
+    price: {
+        value: 319.99,
+        currency: 'PLN',
+    },
+    link: '/produkty/PRD-022',
+    type: 'VIRTUAL',
+    category: 'RENTAL',
+    tags: [
+        {
+            label: 'Nowość',
+            variant: 'secondary',
+        },
+    ],
+    keySpecs: [
+        { value: 'Elastyczne', icon: 'Calendar' },
+        { value: 'Wsparcie 24/7', icon: 'Headphones' },
+        { value: 'Konserwacja', icon: 'Wrench' },
+    ],
+    detailedSpecs: [
+        { label: 'Okres Wynajmu', value: 'Dzienny, Tygodniowy, Miesięczny' },
+        { label: 'Kategorie Sprzętu', value: '50+ kategorii' },
+        { label: 'Usługa Dostawy', value: 'Dostępna' },
+        { label: 'Godziny Wsparcia', value: '24/7' },
+        { label: 'Konserwacja', value: 'W Zestawie' },
+        { label: 'Ubezpieczenie', value: 'Opcjonalne ubezpieczenie' },
+        { label: 'Minimalny Wynajem', value: '1 dzień' },
+        { label: 'Warunki Płatności', value: 'Netto 30 dostępne' },
+    ],
+};
+
+const MOCK_PRODUCT_19_DE: Products.Model.Product = {
+    id: 'PRD-022',
+    sku: 'RENT-PRO-IND',
+    name: 'RentPro Industrial™ – Flexible Gerätevermietungslösungen',
+    description:
+        '<p><strong>RentPro Industrial™</strong> bietet umfassende Gerätevermietungslösungen für Bau, Fertigung und Industrie. Unsere flexiblen Mietprogramme sind darauf ausgelegt, Ihren Projektbedarf zu erfüllen, unabhängig davon, ob Sie Geräte für einen Tag, einen Monat oder länger benötigen.</p><h3>Flexible Mietbedingungen</h3><p>Wählen Sie aus kurzfristigen Tagesmieten für schnelle Projekte oder langfristigen Monatsverträgen für erweiterte Operationen. Alle Mietverträge umfassen vollständige Wartung und technischen Support, um sicherzustellen, dass Ihre Geräte mit Spitzenleistung arbeiten.</p><p>Wichtige Funktionen:</p><ul><li>Kurz- & Langzeitmieten</li><li>Breite Geräteauswahl</li><li>Wartung & Support enthalten</li><li>Flexible Liefer- und Abholoptionen</li><li>24/7 technische Support-Hotline</li></ul><h3>Geräteauswahl</h3><p>Unser umfangreiches Inventar umfasst Elektrowerkzeuge, schwere Maschinen, Messgeräte und spezialisierte Industrietools. Alle Geräte werden regelmäßig gewartet und inspiziert, um Sicherheitsstandards zu erfüllen.</p>',
+    shortDescription: 'Flexible Gerätevermietungslösungen mit Wartung und Support',
+    subtitle: 'Gerätevermietung • Industrielle Lösungen',
+    image: {
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-rental.jpg',
+        width: 800,
+        height: 800,
+        alt: 'RentPro Industrial™ – Flexible Gerätevermietungslösungen',
+    },
+    images: [
+        {
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-rental.jpg',
+            alt: 'RentPro Industrial™ – Flexible Gerätevermietungslösungen',
+            width: 800,
+            height: 800,
+        },
+    ],
+    price: {
+        value: 79.83,
+        currency: 'USD',
+    },
+    link: '/produkte/PRD-022',
+    type: 'VIRTUAL',
+    category: 'RENTAL',
+    tags: [
+        {
+            label: 'Neu',
+            variant: 'secondary',
+        },
+    ],
+    keySpecs: [
+        { value: 'Flexibel', icon: 'Calendar' },
+        { value: '24/7 Support', icon: 'Headphones' },
+        { value: 'Wartung', icon: 'Wrench' },
+    ],
+    detailedSpecs: [
+        { label: 'Mietdauer', value: 'Täglich, Wöchentlich, Monatlich' },
+        { label: 'Gerätekategorien', value: '50+ Kategorien' },
+        { label: 'Lieferdienst', value: 'Verfügbar' },
+        { label: 'Supportzeiten', value: '24/7' },
+        { label: 'Wartung', value: 'Enthalten' },
+        { label: 'Versicherung', value: 'Optionale Abdeckung' },
+        { label: 'Mindestmiete', value: '1 Tag' },
+        { label: 'Zahlungsbedingungen', value: 'Netto 30 verfügbar' },
+    ],
+};
+
+// Product 20 (PRD-023): PrecisionPro Calibration (VIRTUAL)
+const MOCK_PRODUCT_20_EN: Products.Model.Product = {
+    id: 'PRD-023',
+    sku: 'CAL-PRO-ISO',
+    name: 'PrecisionPro Calibration™ – Ensuring Accuracy for Industrial Equipment',
+    description:
+        '<p><strong>PrecisionPro Calibration™</strong> provides ISO-certified calibration services to ensure your industrial equipment maintains optimal accuracy and performance. Our certified technicians use traceable standards to deliver precise calibration results that meet international quality standards.</p><h3>ISO-Certified Services</h3><p>All calibration services are performed according to ISO/IEC 17025 standards, ensuring traceability and compliance with quality management requirements. Our calibration certificates are recognized worldwide and include detailed measurement data.</p><p>Key features include:</p><ul><li>ISO-Certified Calibration</li><li>On-Site & Remote Services</li><li>Detailed Reports</li><li>Traceable to national standards</li><li>Fast turnaround times</li></ul><h3>Service Options</h3><p>Choose from on-site calibration at your facility or send your equipment to our certified laboratory. Both options include comprehensive documentation and calibration certificates for your records.</p>',
+    shortDescription: 'ISO-certified calibration services for industrial equipment',
+    subtitle: 'Calibration Services • Quality Assurance',
+    image: {
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-calibration.jpg',
+        width: 800,
+        height: 800,
+        alt: 'PrecisionPro Calibration™ – Ensuring Accuracy for Industrial Equipment',
+    },
+    images: [
+        {
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-calibration.jpg',
+            alt: 'PrecisionPro Calibration™ – Ensuring Accuracy for Industrial Equipment',
+            width: 800,
+            height: 800,
+        },
+    ],
+    price: {
+        value: 19.99,
+        currency: 'USD',
+    },
+    link: '/products/PRD-023',
+    type: 'VIRTUAL',
+    category: 'TRAINING',
+    tags: [
+        {
+            label: 'Promo',
+            variant: 'destructive',
+        },
+        {
+            label: 'New',
+            variant: 'secondary',
+        },
+    ],
+    keySpecs: [
+        { value: 'ISO 17025', icon: 'Award' },
+        { value: 'On-Site', icon: 'MapPin' },
+        { value: 'Certified', icon: 'CheckCircle' },
+    ],
+    detailedSpecs: [
+        { label: 'Certification', value: 'ISO/IEC 17025' },
+        { label: 'Traceability', value: 'NIST, PTB' },
+        { label: 'Service Type', value: 'On-Site & Lab' },
+        { label: 'Turnaround Time', value: '24-48 hours' },
+        { label: 'Certificate Validity', value: '12 months' },
+        { label: 'Equipment Types', value: 'All industrial equipment' },
+        { label: 'Documentation', value: 'Digital & Paper' },
+        { label: 'Support', value: 'Technical consultation included' },
+    ],
+};
+
+const MOCK_PRODUCT_20_PL: Products.Model.Product = {
+    id: 'PRD-023',
+    sku: 'CAL-PRO-ISO',
+    name: 'PrecisionPro Kalibracja™ – Zapewnianie Dokładności dla Sprzętu Przemysłowego',
+    description:
+        '<p><strong>PrecisionPro Kalibracja™</strong> zapewnia usługi kalibracji certyfikowane ISO, aby zapewnić, że Twój sprzęt przemysłowy utrzymuje optymalną dokładność i wydajność. Nasi certyfikowani technicy używają standardów śledzonych, aby dostarczyć precyzyjne wyniki kalibracji, które spełniają międzynarodowe standardy jakości.</p><h3>Usługi Certyfikowane ISO</h3><p>Wszystkie usługi kalibracji są wykonywane zgodnie ze standardami ISO/IEC 17025, zapewniając śledzalność i zgodność z wymaganiami zarządzania jakością. Nasze certyfikaty kalibracji są uznawane na całym świecie i zawierają szczegółowe dane pomiarowe.</p><p>Kluczowe funkcje obejmują:</p><ul><li>Kalibracja Certyfikowana ISO</li><li>Usługi Na Miejscu i Zdalne</li><li>Szczegółowe Raporty</li><li>Śledzalne do standardów krajowych</li><li>Szybkie czasy realizacji</li></ul><h3>Opcje Usług</h3><p>Wybierz z kalibracji na miejscu w Twoim zakładzie lub wyślij swój sprzęt do naszego certyfikowanego laboratorium. Obie opcje obejmują kompleksową dokumentację i certyfikaty kalibracji dla Twoich zapisów.</p>',
+    shortDescription: 'Usługi kalibracji certyfikowane ISO dla sprzętu przemysłowego',
+    subtitle: 'Usługi Kalibracji • Zapewnienie Jakości',
+    image: {
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-calibration.jpg',
+        width: 800,
+        height: 800,
+        alt: 'PrecisionPro Kalibracja™ – Zapewnianie Dokładności dla Sprzętu Przemysłowego',
+    },
+    images: [
+        {
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-calibration.jpg',
+            alt: 'PrecisionPro Kalibracja™ – Zapewnianie Dokładności dla Sprzętu Przemysłowego',
+            width: 800,
+            height: 800,
+        },
+    ],
+    price: {
+        value: 79.99,
+        currency: 'PLN',
+    },
+    link: '/produkty/PRD-023',
+    type: 'VIRTUAL',
+    category: 'TRAINING',
+    tags: [
+        {
+            label: 'Promocja',
+            variant: 'destructive',
+        },
+        {
+            label: 'Nowość',
+            variant: 'secondary',
+        },
+    ],
+    keySpecs: [
+        { value: 'ISO 17025', icon: 'Award' },
+        { value: 'Na Miejscu', icon: 'MapPin' },
+        { value: 'Certyfikowane', icon: 'CheckCircle' },
+    ],
+    detailedSpecs: [
+        { label: 'Certyfikacja', value: 'ISO/IEC 17025' },
+        { label: 'Śledzalność', value: 'NIST, PTB' },
+        { label: 'Typ Usługi', value: 'Na Miejscu i Laboratorium' },
+        { label: 'Czas Realizacji', value: '24-48 godzin' },
+        { label: 'Ważność Certyfikatu', value: '12 miesięcy' },
+        { label: 'Typy Sprzętu', value: 'Wszystki sprzęt przemysłowy' },
+        { label: 'Dokumentacja', value: 'Cyfrowa i Papierowa' },
+        { label: 'Wsparcie', value: 'Konsultacja techniczna w zestawie' },
+    ],
+};
+
+const MOCK_PRODUCT_20_DE: Products.Model.Product = {
+    id: 'PRD-023',
+    sku: 'CAL-PRO-ISO',
+    name: 'PrecisionPro Kalibrierung™ – Gewährleistung der Genauigkeit für Industrieausrüstung',
+    description:
+        '<p><strong>PrecisionPro Kalibrierung™</strong> bietet ISO-zertifizierte Kalibrierungsdienste, um sicherzustellen, dass Ihre Industrieausrüstung optimale Genauigkeit und Leistung beibehält. Unsere zertifizierten Techniker verwenden rückverfolgbare Standards, um präzise Kalibrierungsergebnisse zu liefern, die internationalen Qualitätsstandards entsprechen.</p><h3>ISO-zertifizierte Dienste</h3><p>Alle Kalibrierungsdienste werden gemäß ISO/IEC 17025-Standards durchgeführt, um Rückverfolgbarkeit und Einhaltung der Qualitätsmanagementanforderungen sicherzustellen. Unsere Kalibrierungszertifikate sind weltweit anerkannt und enthalten detaillierte Messdaten.</p><p>Wichtige Funktionen:</p><ul><li>ISO-zertifizierte Kalibrierung</li><li>Vor-Ort- & Remote-Dienste</li><li>Detaillierte Berichte</li><li>Rückverfolgbar zu nationalen Standards</li><li>Schnelle Bearbeitungszeiten</li></ul><h3>Serviceoptionen</h3><p>Wählen Sie zwischen Vor-Ort-Kalibrierung in Ihrer Einrichtung oder senden Sie Ihre Ausrüstung an unser zertifiziertes Labor. Beide Optionen umfassen umfassende Dokumentation und Kalibrierungszertifikate für Ihre Aufzeichnungen.</p>',
+    shortDescription: 'ISO-zertifizierte Kalibrierungsdienste für Industrieausrüstung',
+    subtitle: 'Kalibrierungsdienste • Qualitätssicherung',
+    image: {
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-calibration.jpg',
+        width: 800,
+        height: 800,
+        alt: 'PrecisionPro Kalibrierung™ – Gewährleistung der Genauigkeit für Industrieausrüstung',
+    },
+    images: [
+        {
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-calibration.jpg',
+            alt: 'PrecisionPro Kalibrierung™ – Gewährleistung der Genauigkeit für Industrieausrüstung',
+            width: 800,
+            height: 800,
+        },
+    ],
+    price: {
+        value: 19.99,
+        currency: 'USD',
+    },
+    link: '/produkte/PRD-023',
+    type: 'VIRTUAL',
+    category: 'TRAINING',
+    tags: [
+        {
+            label: 'Aktion',
+            variant: 'destructive',
+        },
+        {
+            label: 'Neu',
+            variant: 'secondary',
+        },
+    ],
+    keySpecs: [
+        { value: 'ISO 17025', icon: 'Award' },
+        { value: 'Vor Ort', icon: 'MapPin' },
+        { value: 'Zertifiziert', icon: 'CheckCircle' },
+    ],
+    detailedSpecs: [
+        { label: 'Zertifizierung', value: 'ISO/IEC 17025' },
+        { label: 'Rückverfolgbarkeit', value: 'NIST, PTB' },
+        { label: 'Servicetyp', value: 'Vor Ort & Labor' },
+        { label: 'Bearbeitungszeit', value: '24-48 Stunden' },
+        { label: 'Zertifikatsgültigkeit', value: '12 Monate' },
+        { label: 'Ausrüstungstypen', value: 'Alle Industrieausrüstung' },
+        { label: 'Dokumentation', value: 'Digital & Papier' },
+        { label: 'Support', value: 'Technische Beratung enthalten' },
+    ],
+};
+
+// Product 21 (PRD-024): PowerCharge Solutions (VIRTUAL)
+const MOCK_PRODUCT_21_EN: Products.Model.Product = {
+    id: 'PRD-024',
+    sku: 'BAT-MGMT-PRO',
+    name: 'PowerCharge Solutions™ – Battery & Charger Management for Manufacturing',
+    description:
+        '<p><strong>PowerCharge Solutions™</strong> offers comprehensive battery and charger management services for manufacturing operations. Our program ensures optimal battery performance, extends equipment uptime, and provides sustainable disposal solutions.</p><h3>Smart Diagnostics and Monitoring</h3><p>Our advanced diagnostic tools monitor battery health in real-time, identifying potential issues before they cause equipment downtime. The system provides detailed analytics and recommendations for optimal battery usage patterns.</p><p>Key features include:</p><ul><li>Smart Diagnostics</li><li>Sustainable Recycling</li><li>On-Demand Replacements</li><li>Battery health monitoring</li><li>Predictive maintenance alerts</li></ul><h3>Sustainability and Recycling</h3><p>We handle the complete lifecycle of your batteries, from initial deployment to end-of-life recycling. Our certified recycling program ensures environmentally responsible disposal while recovering valuable materials.</p>',
+    shortDescription: 'Comprehensive battery and charger management with smart diagnostics',
+    subtitle: 'Battery Management • Maintenance Services',
+    image: {
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-charger.jpg',
+        width: 800,
+        height: 800,
+        alt: 'PowerCharge Solutions™ – Battery & Charger Management for Manufacturing',
+    },
+    images: [
+        {
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-charger.jpg',
+            alt: 'PowerCharge Solutions™ – Battery & Charger Management for Manufacturing',
+            width: 800,
+            height: 800,
+        },
+    ],
+    price: {
+        value: 79.83,
+        currency: 'EUR',
+    },
+    link: '/products/PRD-024',
+    type: 'VIRTUAL',
+    category: 'MAINTENANCE',
+    tags: [
+        {
+            label: 'Promo',
+            variant: 'destructive',
+        },
+        {
+            label: 'New',
+            variant: 'secondary',
+        },
+    ],
+    keySpecs: [
+        { value: 'Smart', icon: 'Zap' },
+        { value: 'Recycling', icon: 'Recycle' },
+        { value: '24/7', icon: 'Clock' },
+    ],
+    detailedSpecs: [
+        { label: 'Battery Types', value: 'All industrial batteries' },
+        { label: 'Diagnostic Frequency', value: 'Real-time monitoring' },
+        { label: 'Replacement Time', value: '24-48 hours' },
+        { label: 'Recycling Program', value: 'Certified & Compliant' },
+        { label: 'Support', value: '24/7 technical support' },
+        { label: 'Reporting', value: 'Monthly analytics dashboard' },
+        { label: 'Warranty', value: '12 months on replacements' },
+        { label: 'Coverage', value: 'Nationwide service' },
+    ],
+};
+
+const MOCK_PRODUCT_21_PL: Products.Model.Product = {
+    id: 'PRD-024',
+    sku: 'BAT-MGMT-PRO',
+    name: 'PowerCharge Solutions™ – Zarządzanie Akumulatorami i Ładowarkami dla Produkcji',
+    description:
+        '<p><strong>PowerCharge Solutions™</strong> oferuje kompleksowe usługi zarządzania akumulatorami i ładowarkami dla operacji produkcyjnych. Nasz program zapewnia optymalną wydajność akumulatorów, wydłuża czas pracy sprzętu i zapewnia zrównoważone rozwiązania utylizacji.</p><h3>Inteligentna Diagnostyka i Monitorowanie</h3><p>Nasze zaawansowane narzędzia diagnostyczne monitorują stan zdrowia akumulatorów w czasie rzeczywistym, identyfikując potencjalne problemy, zanim spowodują przestoje sprzętu. System zapewnia szczegółowe analityki i rekomendacje dla optymalnych wzorców użytkowania akumulatorów.</p><p>Kluczowe funkcje obejmują:</p><ul><li>Inteligentna Diagnostyka</li><li>Zrównoważony Recykling</li><li>Wymiany Na Żądanie</li><li>Monitorowanie stanu zdrowia akumulatorów</li><li>Alerty predykcyjnej konserwacji</li></ul><h3>Zrównoważony Rozwój i Recykling</h3><p>Obsługujemy pełny cykl życia Twoich akumulatorów, od początkowego wdrożenia do recyklingu na końcu życia. Nasz certyfikowany program recyklingu zapewnia odpowiedzialną ekologicznie utylizację, jednocześnie odzyskując cenne materiały.</p>',
+    shortDescription: 'Kompleksowe zarządzanie akumulatorami i ładowarkami z inteligentną diagnostyką',
+    subtitle: 'Zarządzanie Akumulatorami • Usługi Konserwacji',
+    image: {
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-charger.jpg',
+        width: 800,
+        height: 800,
+        alt: 'PowerCharge Solutions™ – Zarządzanie Akumulatorami i Ładowarkami dla Produkcji',
+    },
+    images: [
+        {
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-charger.jpg',
+            alt: 'PowerCharge Solutions™ – Zarządzanie Akumulatorami i Ładowarkami dla Produkcji',
+            width: 800,
+            height: 800,
+        },
+    ],
+    price: {
+        value: 319.99,
+        currency: 'PLN',
+    },
+    link: '/produkty/PRD-024',
+    type: 'VIRTUAL',
+    category: 'MAINTENANCE',
+    tags: [
+        {
+            label: 'Promocja',
+            variant: 'destructive',
+        },
+        {
+            label: 'Nowość',
+            variant: 'secondary',
+        },
+    ],
+    keySpecs: [
+        { value: 'Inteligentne', icon: 'Zap' },
+        { value: 'Recykling', icon: 'Recycle' },
+        { value: '24/7', icon: 'Clock' },
+    ],
+    detailedSpecs: [
+        { label: 'Typy Akumulatorów', value: 'Wszystkie akumulatory przemysłowe' },
+        { label: 'Częstotliwość Diagnostyki', value: 'Monitorowanie w czasie rzeczywistym' },
+        { label: 'Czas Wymiany', value: '24-48 godzin' },
+        { label: 'Program Recyklingu', value: 'Certyfikowany i Zgodny' },
+        { label: 'Wsparcie', value: 'Wsparcie techniczne 24/7' },
+        { label: 'Raportowanie', value: 'Miesięczny panel analityczny' },
+        { label: 'Gwarancja', value: '12 miesięcy na wymiany' },
+        { label: 'Zasięg', value: 'Usługa ogólnokrajowa' },
+    ],
+};
+
+const MOCK_PRODUCT_21_DE: Products.Model.Product = {
+    id: 'PRD-024',
+    sku: 'BAT-MGMT-PRO',
+    name: 'PowerCharge Solutions™ – Batterie- und Ladegerätemanagement für die Fertigung',
+    description:
+        '<p><strong>PowerCharge Solutions™</strong> bietet umfassende Batterie- und Ladegerätemanagementdienste für Fertigungsbetriebe. Unser Programm gewährleistet optimale Batterieleistung, verlängert die Betriebszeit der Ausrüstung und bietet nachhaltige Entsorgungslösungen.</p><h3>Intelligente Diagnostik und Überwachung</h3><p>Unsere fortschrittlichen Diagnosetools überwachen den Batteriezustand in Echtzeit und identifizieren potenzielle Probleme, bevor sie Ausrüstungsausfälle verursachen. Das System bietet detaillierte Analysen und Empfehlungen für optimale Batterienutzungsmuster.</p><p>Wichtige Funktionen:</p><ul><li>Intelligente Diagnostik</li><li>Nachhaltiges Recycling</li><li>Auf Anfrage Ersetzungen</li><li>Batteriegesundheitsüberwachung</li><li>Prädiktive Wartungsalarme</li></ul><h3>Nachhaltigkeit und Recycling</h3><p>Wir kümmern uns um den vollständigen Lebenszyklus Ihrer Batterien, von der ersten Bereitstellung bis zum End-of-Life-Recycling. Unser zertifiziertes Recyclingprogramm gewährleistet umweltgerechte Entsorgung und gleichzeitig die Rückgewinnung wertvoller Materialien.</p>',
+    shortDescription: 'Umfassendes Batterie- und Ladegerätemanagement mit intelligenter Diagnostik',
+    subtitle: 'Batteriemanagement • Wartungsdienste',
+    image: {
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-charger.jpg',
+        width: 800,
+        height: 800,
+        alt: 'PowerCharge Solutions™ – Batterie- und Ladegerätemanagement für die Fertigung',
+    },
+    images: [
+        {
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-charger.jpg',
+            alt: 'PowerCharge Solutions™ – Batterie- und Ladegerätemanagement für die Fertigung',
+            width: 800,
+            height: 800,
+        },
+    ],
+    price: {
+        value: 79.83,
+        currency: 'EUR',
+    },
+    link: '/produkte/PRD-024',
+    type: 'VIRTUAL',
+    category: 'MAINTENANCE',
+    tags: [
+        {
+            label: 'Aktion',
+            variant: 'destructive',
+        },
+        {
+            label: 'Neu',
+            variant: 'secondary',
+        },
+    ],
+    keySpecs: [
+        { value: 'Intelligent', icon: 'Zap' },
+        { value: 'Recycling', icon: 'Recycle' },
+        { value: '24/7', icon: 'Clock' },
+    ],
+    detailedSpecs: [
+        { label: 'Batterietypen', value: 'Alle Industriebatterien' },
+        { label: 'Diagnosefrequenz', value: 'Echtzeitüberwachung' },
+        { label: 'Ersatzzeit', value: '24-48 Stunden' },
+        { label: 'Recyclingprogramm', value: 'Zertifiziert & Konform' },
+        { label: 'Support', value: '24/7 technischer Support' },
+        { label: 'Berichterstattung', value: 'Monatliches Analytics-Dashboard' },
+        { label: 'Garantie', value: '12 Monate auf Ersatzteile' },
+        { label: 'Abdeckung', value: 'Bundesweiter Service' },
+    ],
+};
+
+// Product 22 (PRD-025): WeldGuard Safety (VIRTUAL)
+const MOCK_PRODUCT_22_EN: Products.Model.Product = {
+    id: 'PRD-025',
+    sku: 'SAF-WELD-PRO',
+    name: 'WeldGuard Safety™ – Protective Solutions for Welding Environments',
+    description:
+        '<p><strong>WeldGuard Safety™</strong> provides comprehensive safety solutions for welding operations, protecting workers from fumes, heat, and radiation hazards. Our integrated approach combines advanced extraction systems, personal protective equipment, and compliance verification.</p><h3>Advanced Fume Extraction</h3><p>Our high-efficiency fume extraction systems remove harmful welding fumes at the source, maintaining clean air quality in the workspace. The systems are designed for various welding processes and can be customized to your facility layout.</p><p>Key features include:</p><ul><li>Advanced Fume Extraction</li><li>Heat-Resistant PPE</li><li>Safety Compliance Checks</li><li>Source capture technology</li><li>Air quality monitoring</li></ul><h3>Personal Protective Equipment</h3><p>We provide certified heat-resistant personal protective equipment including welding helmets, protective clothing, and respiratory protection. All equipment meets or exceeds OSHA and international safety standards.</p>',
+    shortDescription: 'Comprehensive safety solutions for welding environments',
+    subtitle: 'Safety Solutions • Welding Protection',
+    image: {
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-welding.jpg',
+        width: 800,
+        height: 800,
+        alt: 'WeldGuard Safety™ – Protective Solutions for Welding Environments',
+    },
+    images: [
+        {
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-welding.jpg',
+            alt: 'WeldGuard Safety™ – Protective Solutions for Welding Environments',
+            width: 800,
+            height: 800,
+        },
+    ],
+    price: {
+        value: 10,
+        currency: 'USD',
+    },
+    link: '/products/PRD-025',
+    type: 'VIRTUAL',
+    category: 'SAFETY',
+    tags: [
+        {
+            label: 'New',
+            variant: 'secondary',
+        },
+    ],
+    keySpecs: [
+        { value: 'OSHA', icon: 'Shield' },
+        { value: 'Certified', icon: 'Award' },
+        { value: 'Complete', icon: 'CheckCircle' },
+    ],
+    detailedSpecs: [
+        { label: 'Fume Extraction', value: 'Source capture system' },
+        { label: 'Air Flow Rate', value: 'Up to 2000 CFM' },
+        { label: 'PPE Certification', value: 'ANSI, EN standards' },
+        { label: 'Compliance', value: 'OSHA, NIOSH' },
+        { label: 'Installation', value: 'Professional installation included' },
+        { label: 'Maintenance', value: 'Scheduled service plans' },
+        { label: 'Training', value: 'Safety training included' },
+        { label: 'Support', value: '24/7 technical support' },
+    ],
+};
+
+const MOCK_PRODUCT_22_PL: Products.Model.Product = {
+    id: 'PRD-025',
+    sku: 'SAF-WELD-PRO',
+    name: 'WeldGuard Safety™ – Rozwiązania Ochronne dla Środowisk Spawalniczych',
+    description:
+        '<p><strong>WeldGuard Safety™</strong> zapewnia kompleksowe rozwiązania bezpieczeństwa dla operacji spawalniczych, chroniąc pracowników przed oparami, ciepłem i zagrożeniami promieniowaniem. Nasze zintegrowane podejście łączy zaawansowane systemy odpylania, osobiste wyposażenie ochronne i weryfikację zgodności.</p><h3>Zaawansowane Odpylanie Oparów</h3><p>Nasze wysokowydajne systemy odpylania oparów usuwają szkodliwe opary spawalnicze u źródła, utrzymując czystą jakość powietrza w przestrzeni roboczej. Systemy są zaprojektowane dla różnych procesów spawalniczych i mogą być dostosowane do układu Twojego zakładu.</p><p>Kluczowe funkcje obejmują:</p><ul><li>Zaawansowane Odpylanie Oparów</li><li>Odzież Ochronna Odporna Na Ciepło</li><li>Kontrole Zgodności Bezpieczeństwa</li><li>Technologia przechwytywania u źródła</li><li>Monitorowanie jakości powietrza</li></ul><h3>Osobiste Wyposażenie Ochronne</h3><p>Zapewniamy certyfikowane osobiste wyposażenie ochronne odporne na ciepło, w tym hełmy spawalnicze, odzież ochronną i ochronę dróg oddechowych. Wszystki sprzęt spełnia lub przekracza standardy OSHA i międzynarodowe standardy bezpieczeństwa.</p>',
+    shortDescription: 'Kompleksowe rozwiązania bezpieczeństwa dla środowisk spawalniczych',
+    subtitle: 'Rozwiązania Bezpieczeństwa • Ochrona Spawalnicza',
+    image: {
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-welding.jpg',
+        width: 800,
+        height: 800,
+        alt: 'WeldGuard Safety™ – Rozwiązania Ochronne dla Środowisk Spawalniczych',
+    },
+    images: [
+        {
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-welding.jpg',
+            alt: 'WeldGuard Safety™ – Rozwiązania Ochronne dla Środowisk Spawalniczych',
+            width: 800,
+            height: 800,
+        },
+    ],
+    price: {
+        value: 40,
+        currency: 'PLN',
+    },
+    link: '/produkty/PRD-025',
+    type: 'VIRTUAL',
+    category: 'SAFETY',
+    tags: [
+        {
+            label: 'Nowość',
+            variant: 'secondary',
+        },
+    ],
+    keySpecs: [
+        { value: 'OSHA', icon: 'Shield' },
+        { value: 'Certyfikowane', icon: 'Award' },
+        { value: 'Kompletne', icon: 'CheckCircle' },
+    ],
+    detailedSpecs: [
+        { label: 'Odpylanie Oparów', value: 'System przechwytywania u źródła' },
+        { label: 'Przepływ Powietrza', value: 'Do 2000 CFM' },
+        { label: 'Certyfikacja OSO', value: 'Standardy ANSI, EN' },
+        { label: 'Zgodność', value: 'OSHA, NIOSH' },
+        { label: 'Instalacja', value: 'Profesjonalna instalacja w zestawie' },
+        { label: 'Konserwacja', value: 'Planowane plany serwisowe' },
+        { label: 'Szkolenia', value: 'Szkolenia bezpieczeństwa w zestawie' },
+        { label: 'Wsparcie', value: 'Wsparcie techniczne 24/7' },
+    ],
+};
+
+const MOCK_PRODUCT_22_DE: Products.Model.Product = {
+    id: 'PRD-025',
+    sku: 'SAF-WELD-PRO',
+    name: 'WeldGuard Safety™ – Schutzlösungen für Schweißumgebungen',
+    description:
+        '<p><strong>WeldGuard Safety™</strong> bietet umfassende Sicherheitslösungen für Schweißarbeiten und schützt Arbeiter vor Dämpfen, Hitze und Strahlungsgefahren. Unser integrierter Ansatz kombiniert fortschrittliche Absaugsysteme, persönliche Schutzausrüstung und Compliance-Überprüfung.</p><h3>Fortschrittliche Rauchabsaugung</h3><p>Unsere hocheffizienten Rauchabsaugsysteme entfernen schädliche Schweißdämpfe an der Quelle und erhalten die Luftqualität im Arbeitsbereich. Die Systeme sind für verschiedene Schweißprozesse konzipiert und können an Ihre Anlagenlayout angepasst werden.</p><p>Wichtige Funktionen:</p><ul><li>Fortschrittliche Rauchabsaugung</li><li>Hitzebeständige PSA</li><li>Sicherheits-Compliance-Prüfungen</li><li>Quellenerfassungstechnologie</li><li>Luftqualitätsüberwachung</li></ul><h3>Persönliche Schutzausrüstung</h3><p>Wir bieten zertifizierte hitzebeständige persönliche Schutzausrüstung, einschließlich Schweißhelme, Schutzkleidung und Atemschutz. Alle Ausrüstung erfüllt oder übertrifft OSHA- und internationale Sicherheitsstandards.</p>',
+    shortDescription: 'Umfassende Sicherheitslösungen für Schweißumgebungen',
+    subtitle: 'Sicherheitslösungen • Schweißschutz',
+    image: {
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-welding.jpg',
+        width: 800,
+        height: 800,
+        alt: 'WeldGuard Safety™ – Schutzlösungen für Schweißumgebungen',
+    },
+    images: [
+        {
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-welding.jpg',
+            alt: 'WeldGuard Safety™ – Schutzlösungen für Schweißumgebungen',
+            width: 800,
+            height: 800,
+        },
+    ],
+    price: {
+        value: 10,
+        currency: 'USD',
+    },
+    link: '/produkte/PRD-025',
+    type: 'VIRTUAL',
+    category: 'SAFETY',
+    tags: [
+        {
+            label: 'Neu',
+            variant: 'secondary',
+        },
+    ],
+    keySpecs: [
+        { value: 'OSHA', icon: 'Shield' },
+        { value: 'Zertifiziert', icon: 'Award' },
+        { value: 'Vollständig', icon: 'CheckCircle' },
+    ],
+    detailedSpecs: [
+        { label: 'Rauchabsaugung', value: 'Quellenerfassungssystem' },
+        { label: 'Luftstromrate', value: 'Bis zu 2000 CFM' },
+        { label: 'PSA-Zertifizierung', value: 'ANSI, EN Standards' },
+        { label: 'Compliance', value: 'OSHA, NIOSH' },
+        { label: 'Installation', value: 'Professionelle Installation enthalten' },
+        { label: 'Wartung', value: 'Geplante Servicepläne' },
+        { label: 'Schulung', value: 'Sicherheitsschulung enthalten' },
+        { label: 'Support', value: '24/7 technischer Support' },
+    ],
+};
+
+// Product 23 (PRD-026): MaxFlow Air Systems (VIRTUAL)
+const MOCK_PRODUCT_23_EN: Products.Model.Product = {
+    id: 'PRD-026',
+    sku: 'AIR-SYS-PRO',
+    name: 'MaxFlow Air Systems™ – Industrial Pneumatics Maintenance & Optimization',
+    description:
+        '<p><strong>MaxFlow Air Systems™</strong> specializes in industrial pneumatics maintenance and optimization, helping facilities reduce energy costs while improving system reliability. Our comprehensive approach includes energy audits, custom solutions, and preventative maintenance programs.</p><h3>Energy Efficiency Audits</h3><p>Our certified technicians perform detailed energy audits of your compressed air systems, identifying leaks, inefficiencies, and optimization opportunities. The audit includes pressure mapping, flow analysis, and energy consumption measurement.</p><p>Key features include:</p><ul><li>Energy Efficiency Audits</li><li>Custom Airflow Solutions</li><li>Preventative Maintenance</li><li>Leak detection and repair</li><li>System optimization recommendations</li></ul><h3>Custom Solutions</h3><p>Based on audit findings, we design and implement custom airflow solutions tailored to your specific needs. This includes compressor upgrades, piping optimization, and control system improvements to maximize efficiency.</p>',
+    shortDescription: 'Industrial pneumatics maintenance and energy optimization services',
+    subtitle: 'Pneumatics Services • Energy Optimization',
+    image: {
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-air.jpg',
+        width: 800,
+        height: 800,
+        alt: 'MaxFlow Air Systems™ – Industrial Pneumatics Maintenance & Optimization',
+    },
+    images: [
+        {
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-air.jpg',
+            alt: 'MaxFlow Air Systems™ – Industrial Pneumatics Maintenance & Optimization',
+            width: 800,
+            height: 800,
+        },
+    ],
+    price: {
+        value: 19.99,
+        currency: 'USD',
+    },
+    link: '/products/PRD-026',
+    type: 'VIRTUAL',
+    category: 'MAINTENANCE',
+    tags: [
+        {
+            label: 'New',
+            variant: 'secondary',
+        },
+    ],
+    keySpecs: [
+        { value: 'Energy', icon: 'Zap' },
+        { value: 'Optimization', icon: 'TrendingUp' },
+        { value: 'Maintenance', icon: 'Wrench' },
+    ],
+    detailedSpecs: [
+        { label: 'Audit Duration', value: '1-3 days' },
+        { label: 'Energy Savings', value: 'Up to 30% reduction' },
+        { label: 'System Types', value: 'All compressed air systems' },
+        { label: 'Maintenance Frequency', value: 'Monthly, Quarterly, Annual' },
+        { label: 'Response Time', value: '24-48 hours' },
+        { label: 'Certification', value: 'ISO 9001 certified' },
+        { label: 'Reporting', value: 'Detailed audit reports' },
+        { label: 'Support', value: '24/7 emergency service' },
+    ],
+};
+
+const MOCK_PRODUCT_23_PL: Products.Model.Product = {
+    id: 'PRD-026',
+    sku: 'AIR-SYS-PRO',
+    name: 'MaxFlow Air Systems™ – Konserwacja i Optymalizacja Pneumatyki Przemysłowej',
+    description:
+        '<p><strong>MaxFlow Air Systems™</strong> specjalizuje się w konserwacji i optymalizacji pneumatyki przemysłowej, pomagając zakładom zmniejszyć koszty energii przy jednoczesnym poprawieniu niezawodności systemu. Nasze kompleksowe podejście obejmuje audyty energetyczne, niestandardowe rozwiązania i programy prewencyjnej konserwacji.</p><h3>Audyty Efektywności Energetycznej</h3><p>Nasi certyfikowani technicy wykonują szczegółowe audyty energetyczne Twoich systemów sprężonego powietrza, identyfikując wycieki, nieefektywności i możliwości optymalizacji. Audyt obejmuje mapowanie ciśnienia, analizę przepływu i pomiar zużycia energii.</p><p>Kluczowe funkcje obejmują:</p><ul><li>Audyty Efektywności Energetycznej</li><li>Niestandardowe Rozwiązania Przepływu Powietrza</li><li>Konserwacja Prewencyjna</li><li>Wykrywanie i naprawa wycieków</li><li>Rekomendacje optymalizacji systemu</li></ul><h3>Niestandardowe Rozwiązania</h3><p>Na podstawie wyników audytu projektujemy i wdrażamy niestandardowe rozwiązania przepływu powietrza dostosowane do Twoich specyficznych potrzeb. Obejmuje to modernizacje sprężarek, optymalizację rurociągów i ulepszenia systemów sterowania, aby zmaksymalizować efektywność.</p>',
+    shortDescription: 'Usługi konserwacji pneumatyki przemysłowej i optymalizacji energii',
+    subtitle: 'Usługi Pneumatyki • Optymalizacja Energii',
+    image: {
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-air.jpg',
+        width: 800,
+        height: 800,
+        alt: 'MaxFlow Air Systems™ – Konserwacja i Optymalizacja Pneumatyki Przemysłowej',
+    },
+    images: [
+        {
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-air.jpg',
+            alt: 'MaxFlow Air Systems™ – Konserwacja i Optymalizacja Pneumatyki Przemysłowej',
+            width: 800,
+            height: 800,
+        },
+    ],
+    price: {
+        value: 79.99,
+        currency: 'PLN',
+    },
+    link: '/produkty/PRD-026',
+    type: 'VIRTUAL',
+    category: 'MAINTENANCE',
+    tags: [
+        {
+            label: 'Nowość',
+            variant: 'secondary',
+        },
+    ],
+    keySpecs: [
+        { value: 'Energia', icon: 'Zap' },
+        { value: 'Optymalizacja', icon: 'TrendingUp' },
+        { value: 'Konserwacja', icon: 'Wrench' },
+    ],
+    detailedSpecs: [
+        { label: 'Czas Trwania Audytu', value: '1-3 dni' },
+        { label: 'Oszczędności Energii', value: 'Do 30% redukcji' },
+        { label: 'Typy Systemów', value: 'Wszystkie systemy sprężonego powietrza' },
+        { label: 'Częstotliwość Konserwacji', value: 'Miesięczna, Kwartalna, Roczna' },
+        { label: 'Czas Reakcji', value: '24-48 godzin' },
+        { label: 'Certyfikacja', value: 'Certyfikowane ISO 9001' },
+        { label: 'Raportowanie', value: 'Szczegółowe raporty audytowe' },
+        { label: 'Wsparcie', value: 'Usługa awaryjna 24/7' },
+    ],
+};
+
+const MOCK_PRODUCT_23_DE: Products.Model.Product = {
+    id: 'PRD-026',
+    sku: 'AIR-SYS-PRO',
+    name: 'MaxFlow Air Systems™ – Industrie-Pneumatikwartung & Optimierung',
+    description:
+        '<p><strong>MaxFlow Air Systems™</strong> spezialisiert sich auf Industrie-Pneumatikwartung und Optimierung und hilft Einrichtungen, Energiekosten zu senken und gleichzeitig die Systemzuverlässigkeit zu verbessern. Unser umfassender Ansatz umfasst Energieaudits, maßgeschneiderte Lösungen und präventive Wartungsprogramme.</p><h3>Energieeffizienz-Audits</h3><p>Unsere zertifizierten Techniker führen detaillierte Energieaudits Ihrer Druckluftsysteme durch und identifizieren Lecks, Ineffizienzen und Optimierungsmöglichkeiten. Das Audit umfasst Druckkartierung, Durchflussanalyse und Energieverbrauchsmessung.</p><p>Wichtige Funktionen:</p><ul><li>Energieeffizienz-Audits</li><li>Maßgeschneiderte Luftstromlösungen</li><li>Präventive Wartung</li><li>Leckerkennung und -reparatur</li><li>Systemoptimierungsempfehlungen</li></ul><h3>Maßgeschneiderte Lösungen</h3><p>Basierend auf Audit-Ergebnissen entwerfen und implementieren wir maßgeschneiderte Luftstromlösungen, die auf Ihre spezifischen Bedürfnisse zugeschnitten sind. Dies umfasst Kompressor-Upgrades, Rohrleitungsoptimierung und Steuerungssystemverbesserungen zur Maximierung der Effizienz.</p>',
+    shortDescription: 'Industrie-Pneumatikwartung und Energieoptimierungsdienste',
+    subtitle: 'Pneumatikdienste • Energieoptimierung',
+    image: {
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-air.jpg',
+        width: 800,
+        height: 800,
+        alt: 'MaxFlow Air Systems™ – Industrie-Pneumatikwartung & Optimierung',
+    },
+    images: [
+        {
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-air.jpg',
+            alt: 'MaxFlow Air Systems™ – Industrie-Pneumatikwartung & Optimierung',
+            width: 800,
+            height: 800,
+        },
+    ],
+    price: {
+        value: 19.99,
+        currency: 'USD',
+    },
+    link: '/produkte/PRD-026',
+    type: 'VIRTUAL',
+    category: 'MAINTENANCE',
+    tags: [
+        {
+            label: 'Neu',
+            variant: 'secondary',
+        },
+    ],
+    keySpecs: [
+        { value: 'Energie', icon: 'Zap' },
+        { value: 'Optimierung', icon: 'TrendingUp' },
+        { value: 'Wartung', icon: 'Wrench' },
+    ],
+    detailedSpecs: [
+        { label: 'Auditdauer', value: '1-3 Tage' },
+        { label: 'Energieeinsparungen', value: 'Bis zu 30% Reduzierung' },
+        { label: 'Systemtypen', value: 'Alle Druckluftsysteme' },
+        { label: 'Wartungshäufigkeit', value: 'Monatlich, Vierteljährlich, Jährlich' },
+        { label: 'Reaktionszeit', value: '24-48 Stunden' },
+        { label: 'Zertifizierung', value: 'ISO 9001 zertifiziert' },
+        { label: 'Berichterstattung', value: 'Detaillierte Auditberichte' },
+        { label: 'Support', value: '24/7 Notdienst' },
+    ],
+};
+
+// Product 24 (PRD-027): RapidFix Repair (VIRTUAL)
+const MOCK_PRODUCT_24_EN: Products.Model.Product = {
+    id: 'PRD-027',
+    sku: 'REP-RAPID-PRO',
+    name: 'RapidFix Repair™ – Fast & Reliable Industrial Tool Repairs',
+    description:
+        '<p><strong>RapidFix Repair™</strong> provides fast and reliable repair services for industrial tools and equipment. Our certified technicians use genuine parts and manufacturer-approved procedures to restore your tools to optimal working condition.</p><h3>Express Repair Service</h3><p>Our express repair service ensures minimal downtime for your critical equipment. Most repairs are completed within 24-48 hours, with priority service available for urgent cases. We provide loaner equipment when available to keep your operations running.</p><p>Key features include:</p><ul><li>Express Repairs</li><li>Genuine Parts</li><li>Warranty Protection</li><li>24-48 hour turnaround</li><li>Loaner equipment program</li></ul><h3>Quality Assurance</h3><p>All repairs are performed by certified technicians using genuine manufacturer parts. Every repair includes a comprehensive quality check and comes with a warranty covering both parts and labor.</p>',
+    shortDescription: 'Fast and reliable industrial tool repair service with genuine parts',
+    subtitle: 'Repair Services • Tool Maintenance',
+    image: {
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-repair.jpg',
+        width: 800,
+        height: 800,
+        alt: 'RapidFix Repair™ – Fast & Reliable Industrial Tool Repairs',
+    },
+    images: [
+        {
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-repair.jpg',
+            alt: 'RapidFix Repair™ – Fast & Reliable Industrial Tool Repairs',
+            width: 800,
+            height: 800,
+        },
+    ],
+    price: {
+        value: 19.99,
+        currency: 'EUR',
+    },
+    link: '/products/PRD-027',
+    type: 'VIRTUAL',
+    category: 'MAINTENANCE',
+    tags: [
+        {
+            label: 'New',
+            variant: 'secondary',
+        },
+    ],
+    keySpecs: [
+        { value: 'Express', icon: 'Clock' },
+        { value: 'Genuine', icon: 'CheckCircle' },
+        { value: 'Warranty', icon: 'Shield' },
+    ],
+    detailedSpecs: [
+        { label: 'Turnaround Time', value: '24-48 hours' },
+        { label: 'Parts', value: 'Genuine manufacturer parts' },
+        { label: 'Warranty', value: '90 days parts & labor' },
+        { label: 'Tool Types', value: 'All industrial tools' },
+        { label: 'Service Type', value: 'On-Site & Service Center' },
+        { label: 'Loaner Equipment', value: 'Available' },
+        { label: 'Certification', value: 'Manufacturer certified' },
+        { label: 'Support', value: '24/7 service hotline' },
+    ],
+};
+
+const MOCK_PRODUCT_24_PL: Products.Model.Product = {
+    id: 'PRD-027',
+    sku: 'REP-RAPID-PRO',
+    name: 'RapidFix Repair™ – Szybkie i Niezawodne Naprawy Narzędzi Przemysłowych',
+    description:
+        '<p><strong>RapidFix Repair™</strong> zapewnia szybkie i niezawodne usługi naprawy dla narzędzi i sprzętu przemysłowego. Nasi certyfikowani technicy używają oryginalnych części i procedur zatwierdzonych przez producenta, aby przywrócić Twoje narzędzia do optymalnego stanu roboczego.</p><h3>Ekspresowa Usługa Naprawy</h3><p>Nasza ekspresowa usługa naprawy zapewnia minimalne przestoje dla Twojego krytycznego sprzętu. Większość napraw jest ukończona w ciągu 24-48 godzin, z priorytetową usługą dostępną dla pilnych przypadków. Zapewniamy sprzęt zastępczy, gdy jest dostępny, aby utrzymać Twoje operacje w ruchu.</p><p>Kluczowe funkcje obejmują:</p><ul><li>Naprawy Ekspresowe</li><li>Oryginalne Części</li><li>Ochrona Gwarancyjna</li><li>24-48 godzinny czas realizacji</li><li>Program sprzętu zastępczego</li></ul><h3>Zapewnienie Jakości</h3><p>Wszystkie naprawy są wykonywane przez certyfikowanych techników używających oryginalnych części producenta. Każda naprawa obejmuje kompleksową kontrolę jakości i jest objęta gwarancją obejmującą zarówno części, jak i robociznę.</p>',
+    shortDescription: 'Szybka i niezawodna usługa naprawy narzędzi przemysłowych z oryginalnymi częściami',
+    subtitle: 'Usługi Naprawy • Konserwacja Narzędzi',
+    image: {
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-repair.jpg',
+        width: 800,
+        height: 800,
+        alt: 'RapidFix Repair™ – Szybkie i Niezawodne Naprawy Narzędzi Przemysłowych',
+    },
+    images: [
+        {
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-repair.jpg',
+            alt: 'RapidFix Repair™ – Szybkie i Niezawodne Naprawy Narzędzi Przemysłowych',
+            width: 800,
+            height: 800,
+        },
+    ],
+    price: {
+        value: 79.99,
+        currency: 'PLN',
+    },
+    link: '/produkty/PRD-027',
+    type: 'VIRTUAL',
+    category: 'MAINTENANCE',
+    tags: [
+        {
+            label: 'Nowość',
+            variant: 'secondary',
+        },
+    ],
+    keySpecs: [
+        { value: 'Ekspresowe', icon: 'Clock' },
+        { value: 'Oryginalne', icon: 'CheckCircle' },
+        { value: 'Gwarancja', icon: 'Shield' },
+    ],
+    detailedSpecs: [
+        { label: 'Czas Realizacji', value: '24-48 godzin' },
+        { label: 'Części', value: 'Oryginalne części producenta' },
+        { label: 'Gwarancja', value: '90 dni części i robocizna' },
+        { label: 'Typy Narzędzi', value: 'Wszystkie narzędzia przemysłowe' },
+        { label: 'Typ Usługi', value: 'Na Miejscu i Centrum Serwisowe' },
+        { label: 'Sprzęt Zastępczy', value: 'Dostępny' },
+        { label: 'Certyfikacja', value: 'Certyfikowane przez producenta' },
+        { label: 'Wsparcie', value: 'Linia serwisowa 24/7' },
+    ],
+};
+
+const MOCK_PRODUCT_24_DE: Products.Model.Product = {
+    id: 'PRD-027',
+    sku: 'REP-RAPID-PRO',
+    name: 'RapidFix Repair™ – Schnelle & Zuverlässige Industrietool-Reparaturen',
+    description:
+        '<p><strong>RapidFix Repair™</strong> bietet schnelle und zuverlässige Reparaturservices für Industrietools und Ausrüstung. Unsere zertifizierten Techniker verwenden Originalteile und herstellergenehmigte Verfahren, um Ihre Tools in optimalen Arbeitszustand zu versetzen.</p><h3>Express-Reparaturservice</h3><p>Unser Express-Reparaturservice gewährleistet minimale Ausfallzeiten für Ihre kritische Ausrüstung. Die meisten Reparaturen werden innerhalb von 24-48 Stunden abgeschlossen, mit Prioritätsservice für dringende Fälle. Wir stellen Leihgeräte zur Verfügung, wenn verfügbar, um Ihre Betriebe am Laufen zu halten.</p><p>Wichtige Funktionen:</p><ul><li>Express-Reparaturen</li><li>Originalteile</li><li>Garantieschutz</li><li>24-48 Stunden Bearbeitungszeit</li><li>Leihgeräteprogramm</li></ul><h3>Qualitätssicherung</h3><p>Alle Reparaturen werden von zertifizierten Technikern mit Original-Herstellerteilen durchgeführt. Jede Reparatur umfasst eine umfassende Qualitätsprüfung und wird mit einer Garantie geliefert, die sowohl Teile als auch Arbeitszeit abdeckt.</p>',
+    shortDescription: 'Schneller und zuverlässiger Industrietool-Reparaturservice mit Originalteilen',
+    subtitle: 'Reparaturservices • Tool-Wartung',
+    image: {
+        url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-repair.jpg',
+        width: 800,
+        height: 800,
+        alt: 'RapidFix Repair™ – Schnelle & Zuverlässige Industrietool-Reparaturen',
+    },
+    images: [
+        {
+            url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/services-repair.jpg',
+            alt: 'RapidFix Repair™ – Schnelle & Zuverlässige Industrietool-Reparaturen',
+            width: 800,
+            height: 800,
+        },
+    ],
+    price: {
+        value: 19.99,
+        currency: 'EUR',
+    },
+    link: '/produkte/PRD-027',
+    type: 'VIRTUAL',
+    category: 'MAINTENANCE',
+    tags: [
+        {
+            label: 'Neu',
+            variant: 'secondary',
+        },
+    ],
+    keySpecs: [
+        { value: 'Express', icon: 'Clock' },
+        { value: 'Original', icon: 'CheckCircle' },
+        { value: 'Garantie', icon: 'Shield' },
+    ],
+    detailedSpecs: [
+        { label: 'Bearbeitungszeit', value: '24-48 Stunden' },
+        { label: 'Teile', value: 'Original-Herstellerteile' },
+        { label: 'Garantie', value: '90 Tage Teile & Arbeitszeit' },
+        { label: 'Tooltypen', value: 'Alle Industrietools' },
+        { label: 'Servicetyp', value: 'Vor Ort & Servicecenter' },
+        { label: 'Leihgeräte', value: 'Verfügbar' },
+        { label: 'Zertifizierung', value: 'Herstellergenehmigt' },
+        { label: 'Support', value: '24/7 Service-Hotline' },
+    ],
+};
+
 // Export localized product arrays
 export const MOCK_PRODUCTS_EN: Products.Model.Product[] = [
     MOCK_PRODUCT_1_EN,
@@ -3243,6 +4366,13 @@ export const MOCK_PRODUCTS_EN: Products.Model.Product[] = [
     MOCK_PRODUCT_15_EN,
     MOCK_PRODUCT_16_EN,
     MOCK_PRODUCT_17_EN,
+    MOCK_PRODUCT_18_EN,
+    MOCK_PRODUCT_19_EN,
+    MOCK_PRODUCT_20_EN,
+    MOCK_PRODUCT_21_EN,
+    MOCK_PRODUCT_22_EN,
+    MOCK_PRODUCT_23_EN,
+    MOCK_PRODUCT_24_EN,
 ];
 
 export const MOCK_PRODUCTS_PL: Products.Model.Product[] = [
@@ -3263,6 +4393,13 @@ export const MOCK_PRODUCTS_PL: Products.Model.Product[] = [
     MOCK_PRODUCT_15_PL,
     MOCK_PRODUCT_16_PL,
     MOCK_PRODUCT_17_PL,
+    MOCK_PRODUCT_18_PL,
+    MOCK_PRODUCT_19_PL,
+    MOCK_PRODUCT_20_PL,
+    MOCK_PRODUCT_21_PL,
+    MOCK_PRODUCT_22_PL,
+    MOCK_PRODUCT_23_PL,
+    MOCK_PRODUCT_24_PL,
 ];
 
 export const MOCK_PRODUCTS_DE: Products.Model.Product[] = [
@@ -3283,6 +4420,13 @@ export const MOCK_PRODUCTS_DE: Products.Model.Product[] = [
     MOCK_PRODUCT_15_DE,
     MOCK_PRODUCT_16_DE,
     MOCK_PRODUCT_17_DE,
+    MOCK_PRODUCT_18_DE,
+    MOCK_PRODUCT_19_DE,
+    MOCK_PRODUCT_20_DE,
+    MOCK_PRODUCT_21_DE,
+    MOCK_PRODUCT_22_DE,
+    MOCK_PRODUCT_23_DE,
+    MOCK_PRODUCT_24_DE,
 ];
 
 // Default export for backward compatibility (not used, but kept for reference)
