@@ -9,7 +9,5 @@ export interface ChartTooltipProps extends TooltipProps<ValueType, NameType> {
         value?: number | string;
         color?: string;
         unit?: string;
-        dataKey?: string;
-        payload?: unknown;
     }>;
 }

@@ -27,7 +27,7 @@ import { Typography } from '@o2s/ui/elements/typography';
 import { Model, Request } from '../api-harmonization/ticket-list.client';
 import { sdk } from '../sdk';
 
-import { TicketListPureProps } from './TicketList.types';
+import { Action, TicketListPureProps } from './TicketList.types';
 
 export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessToken, routing, meta, ...component }) => {
     const { Link: LinkComponent } = createNavigation(routing);
@@ -90,6 +90,24 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
         });
     };
 
+    const variantConfig: Array<{ variant: Action['variant']; className: string }> = [
+        { variant: 'default', className: 'no-underline hover:no-underline' },
+        { variant: 'secondary', className: 'no-underline hover:no-underline flex-1' },
+        {
+            variant: 'ghost',
+            className:
+                'flex items-center gap-2 !no-underline hover:!no-underline cursor-pointer h-8 w-full justify-start',
+        },
+    ];
+
+    const actions: Action[] = (data.forms ?? []).map((form, index) => ({
+        label: form.label,
+        icon: form.icon,
+        url: form.url || '',
+        variant: variantConfig[index]?.variant ?? 'default',
+        className: variantConfig[index]?.className ?? '',
+    }));
+
     // Define columns configuration outside JSX for better readability
     const columns = data.table.columns.map((column) => {
         switch (column.id) {
@@ -125,7 +143,7 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                 };
         }
     }) as DataListColumnConfig<Model.Ticket>[];
-    const actions = data.table.actions
+    const tableActions = data.table.actions
         ? {
               ...data.table.actions,
               render: (ticket: Model.Ticket) => {
@@ -152,29 +170,21 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
 
                         {data.forms && (
                             <ActionList
-                                visibleActions={data.forms.slice(0, 2).map((form, index) => (
-                                    <Button
-                                        asChild
-                                        variant={index === 0 ? 'default' : 'secondary'}
-                                        key={form.label}
-                                        className="no-underline hover:no-underline"
-                                    >
-                                        <LinkComponent href={form.url}>
-                                            {form.icon && <DynamicIcon name={form.icon} size={16} />}
-                                            {form.label}
-                                        </LinkComponent>
-                                    </Button>
-                                ))}
-                                dropdownActions={data.forms.slice(2).map((form) => (
-                                    <LinkComponent
-                                        href={form.url}
-                                        key={form.label}
-                                        className="flex items-center gap-2 !no-underline hover:!no-underline cursor-pointer"
-                                    >
-                                        {form.icon && <DynamicIcon name={form.icon} size={16} />}
-                                        {form.label}
-                                    </LinkComponent>
-                                ))}
+                                actions={actions
+                                    .filter((action) => action.label)
+                                    .map((action, index) => (
+                                        <Button
+                                            asChild
+                                            variant={action.variant}
+                                            key={`${action.label}-${index}`}
+                                            className={action.className}
+                                        >
+                                            <LinkComponent href={action.url}>
+                                                {action.icon && <DynamicIcon name={action.icon} size={16} />}
+                                                {action.label}
+                                            </LinkComponent>
+                                        </Button>
+                                    ))}
                                 showMoreLabel={data.labels.showMore}
                             />
                         )}
@@ -221,7 +231,7 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                                     viewMode={viewMode}
                                     data={data.tickets.data}
                                     columns={columns}
-                                    actions={actions}
+                                    actions={tableActions}
                                     cardHeaderSlots={data.cardHeaderSlots}
                                     enableRowSelection={component.enableRowSelection}
                                     selectedRows={selectedRows}

@@ -30,7 +30,7 @@
     "engines": {
         "node": ">=22"
     },
-    "packageManager": "npm@11.6.4",
+    "packageManager": "npm@11.7.0",
     "workspaces": [
         "apps/*",
         "packages/*",
@@ -49,7 +49,7 @@
         "@storybook/addon-themes": "^10.1.11",
         "@storybook/addon-vitest": "^10.1.11",
         "@storybook/nextjs-vite": "^10.1.11",
-        "@turbo/gen": "^2.6.3",
+        "@turbo/gen": "^2.7.4",
         "@types/cli-progress": "^3.11.6",
         "@types/fs-extra": "^11.0.4",
         "@types/prompts": "^2.4.9",
@@ -68,7 +68,7 @@
         "simple-git": "^3.30.0",
         "storybook": "^10.1.11",
         "syncpack": "^14.0.0-canary.1",
-        "turbo": "^2.7.2",
+        "turbo": "^2.7.4",
         "typescript": "5.9.3",
         "unplugin-swc": "^1.5.9",
         "vite": "^7.3.1",
