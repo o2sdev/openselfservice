@@ -31,7 +31,10 @@ export const mapProductListBlock = (_locale: string): CMS.Model.ProductListBlock
         labels: {
             clickToSelect: 'Click to select',
             gridView: 'Grid view',
-            tableView: 'Table view',
+            listView: 'List view',
+            showMoreFilters: 'Show more filters',
+            hideMoreFilters: 'Hide more filters',
+            noActiveFilters: 'No active filters',
         },
     };
 };

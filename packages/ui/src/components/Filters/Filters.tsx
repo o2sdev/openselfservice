@@ -17,7 +17,7 @@ import { FilterItem } from './FilterItem';
 import { FilterLabels, FiltersProps } from './Filters.types';
 import { useFiltersContext } from './FiltersContext';
 
-const SUPPORTED_FILTER_TYPES = ['FilterToggleGroup', 'FilterSelect', 'FilterText'] as const;
+const SUPPORTED_FILTER_TYPES = ['FilterToggleGroup', 'FilterSelect', 'FilterText', 'FilterViewModeToggle'] as const;
 const SKIP_FILTER_KEYS = ['offset', 'limit', 'id', 'viewMode'] as const;
 
 const ANIMATION_BASE_DURATION_MS = 300;
