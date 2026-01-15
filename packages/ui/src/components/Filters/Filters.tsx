@@ -20,10 +20,6 @@ import { useFiltersContext } from './FiltersContext';
 const SUPPORTED_FILTER_TYPES = ['FilterToggleGroup', 'FilterSelect', 'FilterText', 'FilterViewModeToggle'] as const;
 const SKIP_FILTER_KEYS = ['offset', 'limit', 'id', 'viewMode'] as const;
 
-const ANIMATION_BASE_DURATION_MS = 300;
-const ANIMATION_STAGGER_IN_MS = 50;
-const ANIMATION_STAGGER_OUT_MS = 30;
-
 function separateLeadingItem<T>(items: Models.Filters.FilterItem<T>[]) {
     let leadingItem: Models.Filters.FilterItem<T> | undefined;
     const filteredItems: Models.Filters.FilterItem<T>[] = [];
@@ -178,33 +174,6 @@ function InlineFiltersContent<T, S extends FormikValues>({
     onResetFilters,
 }: InlineFiltersContentProps<T, S>) {
     const { leadingItems, otherItems } = useMemo(() => separateLeadingItems(items), [items]);
-    const [shouldRender, setShouldRender] = useState(isExpanded);
-    const [isAnimatingIn, setIsAnimatingIn] = useState(false);
-    const [isAnimatingOut, setIsAnimatingOut] = useState(false);
-    const prevExpandedRef = React.useRef(isExpanded);
-
-    React.useEffect(() => {
-        const prevExpanded = prevExpandedRef.current;
-        prevExpandedRef.current = isExpanded;
-
-        if (isExpanded === prevExpanded) return;
-
-        if (isExpanded) {
-            setIsAnimatingIn(true);
-            setShouldRender(true);
-            const animationDuration = ANIMATION_BASE_DURATION_MS + otherItems.length * ANIMATION_STAGGER_IN_MS;
-            const timer = setTimeout(() => setIsAnimatingIn(false), animationDuration);
-            return () => clearTimeout(timer);
-        }
-
-        setIsAnimatingOut(true);
-        const animationDuration = ANIMATION_BASE_DURATION_MS + otherItems.length * ANIMATION_STAGGER_OUT_MS;
-        const timer = setTimeout(() => {
-            setShouldRender(false);
-            setIsAnimatingOut(false);
-        }, animationDuration);
-        return () => clearTimeout(timer);
-    }, [isExpanded, otherItems.length]);
 
     const activeFilterBadges = useMemo(
         () => getActiveFilterBadges(values, initialFilters as S, items),
@@ -237,28 +206,14 @@ function InlineFiltersContent<T, S extends FormikValues>({
                             </ScrollContainer>
                         </div>
                     ))}
-                    {shouldRender &&
-                        otherItems.map((item, index) => (
+                    {isExpanded &&
+                        otherItems.map((item) => (
                             <div
                                 key={String(item.id)}
                                 className={cn(
                                     'flex-shrink-0',
                                     item.__typename === 'FilterSelect' && 'w-full sm:w-[250px]',
-                                    isAnimatingIn && 'animate-in fade-in-0 slide-in-from-top-2',
-                                    isAnimatingOut && 'animate-out fade-out-0 slide-out-to-top-2',
                                 )}
-                                style={{
-                                    animationDelay: isAnimatingIn
-                                        ? `${index * ANIMATION_STAGGER_IN_MS}ms`
-                                        : isAnimatingOut
-                                          ? `${(otherItems.length - 1 - index) * ANIMATION_STAGGER_OUT_MS}ms`
-                                          : undefined,
-                                    animationFillMode: isAnimatingIn
-                                        ? 'backwards'
-                                        : isAnimatingOut
-                                          ? 'forwards'
-                                          : undefined,
-                                }}
                             >
                                 <FilterItem
                                     item={item}
