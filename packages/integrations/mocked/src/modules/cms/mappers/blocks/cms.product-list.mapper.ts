@@ -2,7 +2,7 @@ import { CMS } from '@o2s/framework/modules';
 
 const MOCK_PRODUCT_LIST_BLOCK_EN: CMS.Model.ProductListBlock.ProductListBlock = {
     id: 'product-list-1',
-    title: 'Products',
+    title: 'Products in Catalog',
     subtitle: 'Browse our product catalog',
     detailsLabel: 'View Details',
     fieldMapping: {
@@ -104,7 +104,7 @@ const MOCK_PRODUCT_LIST_BLOCK_EN: CMS.Model.ProductListBlock.ProductListBlock = 
 
 const MOCK_PRODUCT_LIST_BLOCK_DE: CMS.Model.ProductListBlock.ProductListBlock = {
     id: 'product-list-1',
-    title: 'Produkte',
+    title: 'Produkte im Katalog',
     subtitle: 'Durchsuchen Sie unseren Produktkatalog',
     detailsLabel: 'Details anzeigen',
     fieldMapping: {
@@ -206,7 +206,7 @@ const MOCK_PRODUCT_LIST_BLOCK_DE: CMS.Model.ProductListBlock.ProductListBlock = 
 
 const MOCK_PRODUCT_LIST_BLOCK_PL: CMS.Model.ProductListBlock.ProductListBlock = {
     id: 'product-list-1',
-    title: 'Produkty',
+    title: 'Katalog produktów',
     subtitle: 'Przeglądaj nasz katalog produktów',
     detailsLabel: 'Zobacz szczegóły',
     fieldMapping: {

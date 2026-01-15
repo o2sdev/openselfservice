@@ -22,7 +22,7 @@ export const PAGE_PRODUCT_DETAILS_EN: CMS.Model.Page.Page = {
     parent: {
         slug: '/products',
         seo: {
-            title: 'Products',
+            title: 'Products in Catalog',
         },
     },
     template: {
@@ -66,7 +66,7 @@ export const PAGE_PRODUCT_DETAILS_DE: CMS.Model.Page.Page = {
     parent: {
         slug: '/produkte',
         seo: {
-            title: 'Produkte',
+            title: 'Produkte im Katalog',
         },
     },
     template: {
@@ -110,7 +110,7 @@ export const PAGE_PRODUCT_DETAILS_PL: CMS.Model.Page.Page = {
     parent: {
         slug: '/produkty',
         seo: {
-            title: 'Produkty',
+            title: 'Katalog produktów',
         },
     },
     template: {
