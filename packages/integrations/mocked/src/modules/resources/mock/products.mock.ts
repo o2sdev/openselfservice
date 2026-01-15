@@ -45,6 +45,7 @@ const MOCK_PRODUCT_1_EN: Products.Model.Product = {
         { value: '1200W', icon: 'Zap' },
         { value: '3.2J Impact', icon: 'Hammer' },
         { value: 'AVS', icon: 'Shield' },
+        { value: '4.2kg', icon: 'Weight' },
     ],
     detailedSpecs: [
         { label: 'Impact Energy', value: '3.2 J' },
@@ -107,6 +108,7 @@ const MOCK_PRODUCT_1_PL: Products.Model.Product = {
         { value: '1200W', icon: 'Zap' },
         { value: '3.2J Uderzenie', icon: 'Hammer' },
         { value: 'AVS', icon: 'Shield' },
+        { value: '4,2kg', icon: 'Weight' },
     ],
     detailedSpecs: [
         { label: 'Energia Uderzenia', value: '3,2 J' },
@@ -169,6 +171,7 @@ const MOCK_PRODUCT_1_DE: Products.Model.Product = {
         { value: '1200W', icon: 'Zap' },
         { value: '3.2J Schlag', icon: 'Hammer' },
         { value: 'AVS', icon: 'Shield' },
+        { value: '4,2kg', icon: 'Weight' },
     ],
     detailedSpecs: [
         { label: 'Schlagenergie', value: '3,2 J' },
@@ -235,6 +238,7 @@ const MOCK_PRODUCT_2_EN: Products.Model.Product = {
         { value: '22V MAX', icon: 'Battery' },
         { value: '10,000 RPM', icon: 'Gauge' },
         { value: 'Brushless', icon: 'Zap' },
+        { value: '125mm Disc', icon: 'Disc' },
     ],
     detailedSpecs: [
         { label: 'Disc Size', value: '125mm (5")' },
@@ -288,6 +292,7 @@ const MOCK_PRODUCT_2_PL: Products.Model.Product = {
         { value: '22V MAX', icon: 'Battery' },
         { value: '10 000 RPM', icon: 'Gauge' },
         { value: 'Bezszczotkowy', icon: 'Zap' },
+        { value: 'Tarcza 125mm', icon: 'Disc' },
     ],
     detailedSpecs: [
         { label: 'Rozmiar Tarczy', value: '125mm (5")' },
@@ -354,6 +359,7 @@ const MOCK_PRODUCT_2_DE: Products.Model.Product = {
         { value: '22V MAX', icon: 'Battery' },
         { value: '10.000 U/min', icon: 'Gauge' },
         { value: 'Bürstenlos', icon: 'Zap' },
+        { value: '125mm Scheibe', icon: 'Disc' },
     ],
     detailedSpecs: [
         { label: 'Scheibengröße', value: '125mm (5")' },
@@ -402,6 +408,7 @@ const MOCK_PRODUCT_3_EN: Products.Model.Product = {
         { value: '100m Range', icon: 'Maximize' },
         { value: '±1.5mm', icon: 'Target' },
         { value: 'IP54', icon: 'Shield' },
+        { value: 'Bluetooth', icon: 'Bluetooth' },
     ],
     detailedSpecs: [
         { label: 'Measurement Range', value: '0.05 - 100 m' },
@@ -465,6 +472,7 @@ const MOCK_PRODUCT_3_PL: Products.Model.Product = {
         { value: 'Zakres 100m', icon: 'Maximize' },
         { value: '±1,5mm', icon: 'Target' },
         { value: 'IP54', icon: 'Shield' },
+        { value: 'Bluetooth', icon: 'Bluetooth' },
     ],
     detailedSpecs: [
         { label: 'Zakres Pomiarowy', value: '0,05 - 100 m' },
@@ -514,6 +522,7 @@ const MOCK_PRODUCT_3_DE: Products.Model.Product = {
         { value: '100m Reichweite', icon: 'Maximize' },
         { value: '±1,5mm', icon: 'Target' },
         { value: 'IP54', icon: 'Shield' },
+        { value: 'Bluetooth', icon: 'Bluetooth' },
     ],
     detailedSpecs: [
         { label: 'Messbereich', value: '0,05 - 100 m' },
@@ -583,6 +592,7 @@ const MOCK_PRODUCT_4_EN: Products.Model.Product = {
         { value: '22V MAX', icon: 'Battery' },
         { value: '65 Nm', icon: 'Gauge' },
         { value: 'Brushless', icon: 'Zap' },
+        { value: '13mm Chuck', icon: 'Circle' },
     ],
     detailedSpecs: [
         { label: 'Chuck Size', value: '13mm (1/2")' },
@@ -651,6 +661,7 @@ const MOCK_PRODUCT_4_PL: Products.Model.Product = {
         { value: '22V MAX', icon: 'Battery' },
         { value: '65 Nm', icon: 'Gauge' },
         { value: 'Bezszczotkowy', icon: 'Zap' },
+        { value: 'Uchwyt 13mm', icon: 'Circle' },
     ],
     detailedSpecs: [
         { label: 'Rozmiar Uchwytu', value: '13mm (1/2")' },
@@ -719,6 +730,7 @@ const MOCK_PRODUCT_4_DE: Products.Model.Product = {
         { value: '22V MAX', icon: 'Battery' },
         { value: '65 Nm', icon: 'Gauge' },
         { value: 'Bürstenlos', icon: 'Zap' },
+        { value: '13mm Spannfutter', icon: 'Circle' },
     ],
     detailedSpecs: [
         { label: 'Spannfuttergröße', value: '13mm (1/2")' },
@@ -781,6 +793,7 @@ const MOCK_PRODUCT_5_EN: Products.Model.Product = {
         { value: '2000W', icon: 'Zap' },
         { value: '5.5J Impact', icon: 'Hammer' },
         { value: 'VRS', icon: 'Shield' },
+        { value: 'SDS-Max', icon: 'Wrench' },
     ],
     detailedSpecs: [
         { label: 'Input Power', value: '2000 W' },
@@ -830,6 +843,7 @@ const MOCK_PRODUCT_5_PL: Products.Model.Product = {
         { value: '2000W', icon: 'Zap' },
         { value: '5,5J Uderzenie', icon: 'Hammer' },
         { value: 'VRS', icon: 'Shield' },
+        { value: 'SDS-Max', icon: 'Wrench' },
     ],
     detailedSpecs: [
         { label: 'Moc Wejściowa', value: '2000 W' },
@@ -893,6 +907,7 @@ const MOCK_PRODUCT_5_DE: Products.Model.Product = {
         { value: '2000W', icon: 'Zap' },
         { value: '5,5J Schlag', icon: 'Hammer' },
         { value: 'VRS', icon: 'Shield' },
+        { value: 'SDS-Max', icon: 'Wrench' },
     ],
     detailedSpecs: [
         { label: 'Eingangsleistung', value: '2000 W' },
@@ -956,6 +971,7 @@ const MOCK_PRODUCT_6_EN: Products.Model.Product = {
         { value: '2400W', icon: 'Zap' },
         { value: '235mm Blade', icon: 'Disc' },
         { value: 'Laser Guide', icon: 'Target' },
+        { value: '70mm Cut', icon: 'Move' },
     ],
     detailedSpecs: [
         { label: 'Input Power', value: '2400 W' },
@@ -1025,6 +1041,7 @@ const MOCK_PRODUCT_6_PL: Products.Model.Product = {
         { value: '2400W', icon: 'Zap' },
         { value: 'Tarcza 235mm', icon: 'Disc' },
         { value: 'Prowadnica Laserowa', icon: 'Target' },
+        { value: 'Cięcie 70mm', icon: 'Move' },
     ],
     detailedSpecs: [
         { label: 'Moc Wejściowa', value: '2400 W' },
@@ -1094,6 +1111,7 @@ const MOCK_PRODUCT_6_DE: Products.Model.Product = {
         { value: '2400W', icon: 'Zap' },
         { value: '235mm Sägeblatt', icon: 'Disc' },
         { value: 'Laserführung', icon: 'Target' },
+        { value: '70mm Schnitt', icon: 'Move' },
     ],
     detailedSpecs: [
         { label: 'Eingangsleistung', value: '2400 W' },
@@ -1167,6 +1185,7 @@ const MOCK_PRODUCT_7_EN: Products.Model.Product = {
         { value: '22V MAX', icon: 'Battery' },
         { value: '3000 SPM', icon: 'Gauge' },
         { value: 'Brushless', icon: 'Zap' },
+        { value: '26mm Stroke', icon: 'Move' },
     ],
     detailedSpecs: [
         { label: 'Battery Voltage', value: '22V MAX' },
@@ -1240,6 +1259,7 @@ const MOCK_PRODUCT_7_PL: Products.Model.Product = {
         { value: '22V MAX', icon: 'Battery' },
         { value: '3000 SPM', icon: 'Gauge' },
         { value: 'Bezszczotkowy', icon: 'Zap' },
+        { value: 'Skok 26mm', icon: 'Move' },
     ],
     detailedSpecs: [
         { label: 'Napięcie Akumulatora', value: '22V MAX' },
@@ -1307,6 +1327,7 @@ const MOCK_PRODUCT_7_DE: Products.Model.Product = {
         { value: '22V MAX', icon: 'Battery' },
         { value: '3000 SPM', icon: 'Gauge' },
         { value: 'Bürstenlos', icon: 'Zap' },
+        { value: '26mm Hublänge', icon: 'Move' },
     ],
     detailedSpecs: [
         { label: 'Akkuspannung', value: '22V MAX' },
@@ -1374,6 +1395,7 @@ const MOCK_PRODUCT_8_EN: Products.Model.Product = {
         { value: '1800W', icon: 'Zap' },
         { value: '12000 OPM', icon: 'Gauge' },
         { value: '99% Dust', icon: 'Filter' },
+        { value: '150mm Pad', icon: 'Circle' },
     ],
     detailedSpecs: [
         { label: 'Input Power', value: '1800 W' },
@@ -1441,6 +1463,7 @@ const MOCK_PRODUCT_8_PL: Products.Model.Product = {
         { value: '1800W', icon: 'Zap' },
         { value: '12000 OPM', icon: 'Gauge' },
         { value: '99% Pyłu', icon: 'Filter' },
+        { value: 'Pad 150mm', icon: 'Circle' },
     ],
     detailedSpecs: [
         { label: 'Moc Wejściowa', value: '1800 W' },
@@ -1508,6 +1531,7 @@ const MOCK_PRODUCT_8_DE: Products.Model.Product = {
         { value: '1800W', icon: 'Zap' },
         { value: '12000 OPM', icon: 'Gauge' },
         { value: '99% Staub', icon: 'Filter' },
+        { value: '150mm Pad', icon: 'Circle' },
     ],
     detailedSpecs: [
         { label: 'Eingangsleistung', value: '1800 W' },
@@ -1572,6 +1596,7 @@ const MOCK_PRODUCT_9_EN: Products.Model.Product = {
         { value: '22V MAX', icon: 'Battery' },
         { value: '22,000 OPM', icon: 'Gauge' },
         { value: 'Universal Fit', icon: 'Wrench' },
+        { value: '3.2° Angle', icon: 'Move' },
     ],
     detailedSpecs: [
         { label: 'Battery Voltage', value: '22V MAX' },
@@ -1622,6 +1647,7 @@ const MOCK_PRODUCT_9_PL: Products.Model.Product = {
         { value: '22V MAX', icon: 'Battery' },
         { value: '22 000 OPM', icon: 'Gauge' },
         { value: 'Uniwersalne', icon: 'Wrench' },
+        { value: 'Kąt 3,2°', icon: 'Move' },
     ],
     detailedSpecs: [
         { label: 'Napięcie Akumulatora', value: '22V MAX' },
@@ -1686,6 +1712,7 @@ const MOCK_PRODUCT_9_DE: Products.Model.Product = {
         { value: '22V MAX', icon: 'Battery' },
         { value: '22.000 OPM', icon: 'Gauge' },
         { value: 'Universell', icon: 'Wrench' },
+        { value: '3,2° Winkel', icon: 'Move' },
     ],
     detailedSpecs: [
         { label: 'Akkuspannung', value: '22V MAX' },
@@ -1749,6 +1776,7 @@ const MOCK_PRODUCT_10_EN: Products.Model.Product = {
         { value: '8.5 HP', icon: 'Zap' },
         { value: '50L Tank', icon: 'Package' },
         { value: '10 Bar', icon: 'Gauge' },
+        { value: '360 L/min', icon: 'Wind' },
     ],
     detailedSpecs: [
         { label: 'Motor Power', value: '8.5 HP (6.3 kW)' },
@@ -1798,6 +1826,7 @@ const MOCK_PRODUCT_10_PL: Products.Model.Product = {
         { value: '8,5 KM', icon: 'Zap' },
         { value: 'Zbiornik 50L', icon: 'Package' },
         { value: '10 Bar', icon: 'Gauge' },
+        { value: '360 L/min', icon: 'Wind' },
     ],
     detailedSpecs: [
         { label: 'Moc Silnika', value: '8,5 KM (6,3 kW)' },
@@ -1861,6 +1890,7 @@ const MOCK_PRODUCT_10_DE: Products.Model.Product = {
         { value: '8,5 PS', icon: 'Zap' },
         { value: '50L Tank', icon: 'Package' },
         { value: '10 Bar', icon: 'Gauge' },
+        { value: '360 L/min', icon: 'Wind' },
     ],
     detailedSpecs: [
         { label: 'Motorleistung', value: '8,5 PS (6,3 kW)' },
@@ -1924,6 +1954,7 @@ const MOCK_PRODUCT_11_EN: Products.Model.Product = {
         { value: '22V MAX', icon: 'Battery' },
         { value: '650 Nm', icon: 'Gauge' },
         { value: 'Brushless', icon: 'Zap' },
+        { value: '1/2" Drive', icon: 'Wrench' },
     ],
     detailedSpecs: [
         { label: 'Battery Voltage', value: '22V MAX' },
@@ -1973,6 +2004,7 @@ const MOCK_PRODUCT_11_PL: Products.Model.Product = {
         { value: '22V MAX', icon: 'Battery' },
         { value: '650 Nm', icon: 'Gauge' },
         { value: 'Bezszczotkowy', icon: 'Zap' },
+        { value: 'Napęd 1/2"', icon: 'Wrench' },
     ],
     detailedSpecs: [
         { label: 'Napięcie Akumulatora', value: '22V MAX' },
@@ -2036,6 +2068,7 @@ const MOCK_PRODUCT_11_DE: Products.Model.Product = {
         { value: '22V MAX', icon: 'Battery' },
         { value: '650 Nm', icon: 'Gauge' },
         { value: 'Bürstenlos', icon: 'Zap' },
+        { value: '1/2" Antrieb', icon: 'Wrench' },
     ],
     detailedSpecs: [
         { label: 'Akkuspannung', value: '22V MAX' },
@@ -2115,6 +2148,7 @@ const MOCK_PRODUCT_12_EN: Products.Model.Product = {
         { value: '3-Axis CNC', icon: 'Settings' },
         { value: '24,000 RPM', icon: 'Gauge' },
         { value: 'Siemens', icon: 'Cpu' },
+        { value: '24 Tools', icon: 'Wrench' },
     ],
     detailedSpecs: [
         { label: 'Control System', value: 'Siemens 840D CNC' },
@@ -2201,6 +2235,7 @@ const MOCK_PRODUCT_12_PL: Products.Model.Product = {
         { value: '3-Osiowa CNC', icon: 'Settings' },
         { value: '24 000 RPM', icon: 'Gauge' },
         { value: 'Siemens', icon: 'Cpu' },
+        { value: '24 Narzędzia', icon: 'Wrench' },
     ],
     detailedSpecs: [
         { label: 'System Sterowania', value: 'Siemens 840D CNC' },
@@ -2287,6 +2322,7 @@ const MOCK_PRODUCT_12_DE: Products.Model.Product = {
         { value: '3-Achsen-CNC', icon: 'Settings' },
         { value: '24.000 U/min', icon: 'Gauge' },
         { value: 'Siemens', icon: 'Cpu' },
+        { value: '24 Werkzeuge', icon: 'Wrench' },
     ],
     detailedSpecs: [
         { label: 'Steuerungssystem', value: 'Siemens 840D CNC' },
@@ -2358,6 +2394,7 @@ const MOCK_PRODUCT_13_EN: Products.Model.Product = {
         { value: '22V MAX', icon: 'Battery' },
         { value: '16-25K RPM', icon: 'Gauge' },
         { value: 'Brushless', icon: 'Zap' },
+        { value: 'Variable', icon: 'Settings' },
     ],
     detailedSpecs: [
         { label: 'Motor Type', value: 'Brushless' },
@@ -2421,6 +2458,7 @@ const MOCK_PRODUCT_13_PL: Products.Model.Product = {
         { value: '22V MAX', icon: 'Battery' },
         { value: '16-25K RPM', icon: 'Gauge' },
         { value: 'Bezszczotkowy', icon: 'Zap' },
+        { value: 'Zmienne', icon: 'Settings' },
     ],
     detailedSpecs: [
         { label: 'Typ Silnika', value: 'Bezszczotkowy' },
@@ -2483,6 +2521,7 @@ const MOCK_PRODUCT_13_DE: Products.Model.Product = {
         { value: '22V MAX', icon: 'Battery' },
         { value: '16-25K RPM', icon: 'Gauge' },
         { value: 'Bürstenlos', icon: 'Zap' },
+        { value: 'Variabel', icon: 'Settings' },
     ],
     detailedSpecs: [
         { label: 'Motortyp', value: 'Bürstenlos' },
@@ -2532,6 +2571,7 @@ const MOCK_PRODUCT_14_EN: Products.Model.Product = {
         { value: '22V MAX', icon: 'Battery' },
         { value: '19K RPM', icon: 'Gauge' },
         { value: '3.2mm', icon: 'Maximize' },
+        { value: 'Brushless', icon: 'Zap' },
     ],
     detailedSpecs: [
         { label: 'Motor Type', value: 'Brushless' },
@@ -2594,6 +2634,7 @@ const MOCK_PRODUCT_14_PL: Products.Model.Product = {
         { value: '22V MAX', icon: 'Battery' },
         { value: '19K RPM', icon: 'Gauge' },
         { value: '3,2mm', icon: 'Maximize' },
+        { value: 'Bezszczotkowy', icon: 'Zap' },
     ],
     detailedSpecs: [
         { label: 'Typ Silnika', value: 'Bezszczotkowy' },
@@ -2642,6 +2683,7 @@ const MOCK_PRODUCT_14_DE: Products.Model.Product = {
         { value: '22V MAX', icon: 'Battery' },
         { value: '19K RPM', icon: 'Gauge' },
         { value: '3,2mm', icon: 'Maximize' },
+        { value: 'Bürstenlos', icon: 'Zap' },
     ],
     detailedSpecs: [
         { label: 'Motortyp', value: 'Bürstenlos' },
@@ -2711,6 +2753,7 @@ const MOCK_PRODUCT_15_EN: Products.Model.Product = {
         { value: '3.15 HP', icon: 'Zap' },
         { value: '315mm', icon: 'Maximize' },
         { value: '830mm', icon: 'Gauge' },
+        { value: 'Variable', icon: 'Settings' },
     ],
     detailedSpecs: [
         { label: 'Motor Power', value: '3.15 HP (2350W)' },
@@ -2779,6 +2822,7 @@ const MOCK_PRODUCT_15_PL: Products.Model.Product = {
         { value: '3,15 KM', icon: 'Zap' },
         { value: '315mm', icon: 'Maximize' },
         { value: '830mm', icon: 'Gauge' },
+        { value: 'Zmienne', icon: 'Settings' },
     ],
     detailedSpecs: [
         { label: 'Moc Silnika', value: '3,15 KM (2350W)' },
@@ -2847,6 +2891,7 @@ const MOCK_PRODUCT_15_DE: Products.Model.Product = {
         { value: '3,15 PS', icon: 'Zap' },
         { value: '315mm', icon: 'Maximize' },
         { value: '830mm', icon: 'Gauge' },
+        { value: 'Variabel', icon: 'Settings' },
     ],
     detailedSpecs: [
         { label: 'Motorleistung', value: '3,15 PS (2350W)' },
@@ -2910,6 +2955,7 @@ const MOCK_PRODUCT_16_EN: Products.Model.Product = {
         { value: '200A', icon: 'Zap' },
         { value: 'Multi-Process', icon: 'Settings' },
         { value: '60% Duty', icon: 'Gauge' },
+        { value: 'Digital', icon: 'Cpu' },
     ],
     detailedSpecs: [
         { label: 'Output Current', value: '200A max' },
@@ -2972,6 +3018,7 @@ const MOCK_PRODUCT_16_PL: Products.Model.Product = {
         { value: '200A', icon: 'Zap' },
         { value: 'Wieloprocesowa', icon: 'Settings' },
         { value: '60% Cykl', icon: 'Gauge' },
+        { value: 'Cyfrowa', icon: 'Cpu' },
     ],
     detailedSpecs: [
         { label: 'Prąd Wyjściowy', value: '200A max' },
@@ -3034,6 +3081,7 @@ const MOCK_PRODUCT_16_DE: Products.Model.Product = {
         { value: '200A', icon: 'Zap' },
         { value: 'Mehrprozess', icon: 'Settings' },
         { value: '60% ED', icon: 'Gauge' },
+        { value: 'Digital', icon: 'Cpu' },
     ],
     detailedSpecs: [
         { label: 'Ausgangsstrom', value: '200A max' },
@@ -3097,6 +3145,7 @@ const MOCK_PRODUCT_17_EN: Products.Model.Product = {
         { value: '5500W', icon: 'Zap' },
         { value: '6000W Surge', icon: 'Gauge' },
         { value: '10h Runtime', icon: 'Battery' },
+        { value: 'Inverter', icon: 'Cpu' },
     ],
     detailedSpecs: [
         { label: 'Running Power', value: '5500W' },
@@ -3145,6 +3194,7 @@ const MOCK_PRODUCT_17_PL: Products.Model.Product = {
         { value: '5500W', icon: 'Zap' },
         { value: '6000W Szczyt', icon: 'Gauge' },
         { value: '10h Czas', icon: 'Battery' },
+        { value: 'Inwerter', icon: 'Cpu' },
     ],
     detailedSpecs: [
         { label: 'Moc Ciągła', value: '5500W' },
@@ -3207,6 +3257,7 @@ const MOCK_PRODUCT_17_DE: Products.Model.Product = {
         { value: '5500W', icon: 'Zap' },
         { value: '6000W Spitze', icon: 'Gauge' },
         { value: '10h Laufzeit', icon: 'Battery' },
+        { value: 'Inverter', icon: 'Cpu' },
     ],
     detailedSpecs: [
         { label: 'Dauerleistung', value: '5500W' },
@@ -3264,6 +3315,7 @@ const MOCK_PRODUCT_18_EN: Products.Model.Product = {
         { value: '2024', icon: 'Calendar' },
         { value: 'Cloud', icon: 'Cloud' },
         { value: 'Multi-User', icon: 'Users' },
+        { value: 'Updates', icon: 'Download' },
     ],
     detailedSpecs: [
         { label: 'Platform', value: 'Windows, macOS, Linux' },
@@ -3316,6 +3368,7 @@ const MOCK_PRODUCT_18_PL: Products.Model.Product = {
         { value: '2024', icon: 'Calendar' },
         { value: 'Chmura', icon: 'Cloud' },
         { value: 'Wieloużytkownik', icon: 'Users' },
+        { value: 'Aktualizacje', icon: 'Download' },
     ],
     detailedSpecs: [
         { label: 'Platforma', value: 'Windows, macOS, Linux' },
@@ -3368,6 +3421,7 @@ const MOCK_PRODUCT_18_DE: Products.Model.Product = {
         { value: '2024', icon: 'Calendar' },
         { value: 'Cloud', icon: 'Cloud' },
         { value: 'Multi-User', icon: 'Users' },
+        { value: 'Updates', icon: 'Download' },
     ],
     detailedSpecs: [
         { label: 'Plattform', value: 'Windows, macOS, Linux' },
@@ -3421,6 +3475,7 @@ const MOCK_PRODUCT_19_EN: Products.Model.Product = {
         { value: 'Flexible', icon: 'Calendar' },
         { value: '24/7 Support', icon: 'Headphones' },
         { value: 'Maintenance', icon: 'Wrench' },
+        { value: 'Priority', icon: 'Star' },
     ],
     detailedSpecs: [
         { label: 'Rental Period', value: 'Daily, Weekly, Monthly' },
@@ -3473,6 +3528,7 @@ const MOCK_PRODUCT_19_PL: Products.Model.Product = {
         { value: 'Elastyczne', icon: 'Calendar' },
         { value: 'Wsparcie 24/7', icon: 'Headphones' },
         { value: 'Konserwacja', icon: 'Wrench' },
+        { value: 'Priorytet', icon: 'Star' },
     ],
     detailedSpecs: [
         { label: 'Okres Wynajmu', value: 'Dzienny, Tygodniowy, Miesięczny' },
@@ -3525,6 +3581,7 @@ const MOCK_PRODUCT_19_DE: Products.Model.Product = {
         { value: 'Flexibel', icon: 'Calendar' },
         { value: '24/7 Support', icon: 'Headphones' },
         { value: 'Wartung', icon: 'Wrench' },
+        { value: 'Priorität', icon: 'Star' },
     ],
     detailedSpecs: [
         { label: 'Mietdauer', value: 'Täglich, Wöchentlich, Monatlich' },
@@ -3582,6 +3639,7 @@ const MOCK_PRODUCT_20_EN: Products.Model.Product = {
         { value: 'ISO 17025', icon: 'Award' },
         { value: 'On-Site', icon: 'MapPin' },
         { value: 'Certified', icon: 'CheckCircle' },
+        { value: 'Report', icon: 'FileText' },
     ],
     detailedSpecs: [
         { label: 'Certification', value: 'ISO/IEC 17025' },
@@ -3638,6 +3696,7 @@ const MOCK_PRODUCT_20_PL: Products.Model.Product = {
         { value: 'ISO 17025', icon: 'Award' },
         { value: 'Na Miejscu', icon: 'MapPin' },
         { value: 'Certyfikowane', icon: 'CheckCircle' },
+        { value: 'Raport', icon: 'FileText' },
     ],
     detailedSpecs: [
         { label: 'Certyfikacja', value: 'ISO/IEC 17025' },
@@ -3694,6 +3753,7 @@ const MOCK_PRODUCT_20_DE: Products.Model.Product = {
         { value: 'ISO 17025', icon: 'Award' },
         { value: 'Vor Ort', icon: 'MapPin' },
         { value: 'Zertifiziert', icon: 'CheckCircle' },
+        { value: 'Bericht', icon: 'FileText' },
     ],
     detailedSpecs: [
         { label: 'Zertifizierung', value: 'ISO/IEC 17025' },
@@ -3751,6 +3811,7 @@ const MOCK_PRODUCT_21_EN: Products.Model.Product = {
         { value: 'Smart', icon: 'Zap' },
         { value: 'Recycling', icon: 'Recycle' },
         { value: '24/7', icon: 'Clock' },
+        { value: 'Eco', icon: 'Leaf' },
     ],
     detailedSpecs: [
         { label: 'Battery Types', value: 'All industrial batteries' },
@@ -3807,6 +3868,7 @@ const MOCK_PRODUCT_21_PL: Products.Model.Product = {
         { value: 'Inteligentne', icon: 'Zap' },
         { value: 'Recykling', icon: 'Recycle' },
         { value: '24/7', icon: 'Clock' },
+        { value: 'Eko', icon: 'Leaf' },
     ],
     detailedSpecs: [
         { label: 'Typy Akumulatorów', value: 'Wszystkie akumulatory przemysłowe' },
@@ -3863,6 +3925,7 @@ const MOCK_PRODUCT_21_DE: Products.Model.Product = {
         { value: 'Intelligent', icon: 'Zap' },
         { value: 'Recycling', icon: 'Recycle' },
         { value: '24/7', icon: 'Clock' },
+        { value: 'Öko', icon: 'Leaf' },
     ],
     detailedSpecs: [
         { label: 'Batterietypen', value: 'Alle Industriebatterien' },
@@ -3916,6 +3979,7 @@ const MOCK_PRODUCT_22_EN: Products.Model.Product = {
         { value: 'OSHA', icon: 'Shield' },
         { value: 'Certified', icon: 'Award' },
         { value: 'Complete', icon: 'CheckCircle' },
+        { value: 'Online', icon: 'Monitor' },
     ],
     detailedSpecs: [
         { label: 'Fume Extraction', value: 'Source capture system' },
@@ -3968,6 +4032,7 @@ const MOCK_PRODUCT_22_PL: Products.Model.Product = {
         { value: 'OSHA', icon: 'Shield' },
         { value: 'Certyfikowane', icon: 'Award' },
         { value: 'Kompletne', icon: 'CheckCircle' },
+        { value: 'Online', icon: 'Monitor' },
     ],
     detailedSpecs: [
         { label: 'Odpylanie Oparów', value: 'System przechwytywania u źródła' },
@@ -4020,6 +4085,7 @@ const MOCK_PRODUCT_22_DE: Products.Model.Product = {
         { value: 'OSHA', icon: 'Shield' },
         { value: 'Zertifiziert', icon: 'Award' },
         { value: 'Vollständig', icon: 'CheckCircle' },
+        { value: 'Online', icon: 'Monitor' },
     ],
     detailedSpecs: [
         { label: 'Rauchabsaugung', value: 'Quellenerfassungssystem' },
@@ -4073,6 +4139,7 @@ const MOCK_PRODUCT_23_EN: Products.Model.Product = {
         { value: 'Energy', icon: 'Zap' },
         { value: 'Optimization', icon: 'TrendingUp' },
         { value: 'Maintenance', icon: 'Wrench' },
+        { value: 'Analytics', icon: 'BarChart' },
     ],
     detailedSpecs: [
         { label: 'Audit Duration', value: '1-3 days' },
@@ -4125,6 +4192,7 @@ const MOCK_PRODUCT_23_PL: Products.Model.Product = {
         { value: 'Energia', icon: 'Zap' },
         { value: 'Optymalizacja', icon: 'TrendingUp' },
         { value: 'Konserwacja', icon: 'Wrench' },
+        { value: 'Analityka', icon: 'BarChart' },
     ],
     detailedSpecs: [
         { label: 'Czas Trwania Audytu', value: '1-3 dni' },
@@ -4177,6 +4245,7 @@ const MOCK_PRODUCT_23_DE: Products.Model.Product = {
         { value: 'Energie', icon: 'Zap' },
         { value: 'Optimierung', icon: 'TrendingUp' },
         { value: 'Wartung', icon: 'Wrench' },
+        { value: 'Analytik', icon: 'BarChart' },
     ],
     detailedSpecs: [
         { label: 'Auditdauer', value: '1-3 Tage' },
@@ -4230,6 +4299,7 @@ const MOCK_PRODUCT_24_EN: Products.Model.Product = {
         { value: 'Express', icon: 'Clock' },
         { value: 'Genuine', icon: 'CheckCircle' },
         { value: 'Warranty', icon: 'Shield' },
+        { value: 'Tracked', icon: 'Package' },
     ],
     detailedSpecs: [
         { label: 'Turnaround Time', value: '24-48 hours' },
@@ -4282,6 +4352,7 @@ const MOCK_PRODUCT_24_PL: Products.Model.Product = {
         { value: 'Ekspresowe', icon: 'Clock' },
         { value: 'Oryginalne', icon: 'CheckCircle' },
         { value: 'Gwarancja', icon: 'Shield' },
+        { value: 'Śledzone', icon: 'Package' },
     ],
     detailedSpecs: [
         { label: 'Czas Realizacji', value: '24-48 godzin' },
@@ -4334,6 +4405,7 @@ const MOCK_PRODUCT_24_DE: Products.Model.Product = {
         { value: 'Express', icon: 'Clock' },
         { value: 'Original', icon: 'CheckCircle' },
         { value: 'Garantie', icon: 'Shield' },
+        { value: 'Verfolgt', icon: 'Package' },
     ],
     detailedSpecs: [
         { label: 'Bearbeitungszeit', value: '24-48 Stunden' },
