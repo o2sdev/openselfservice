@@ -63,7 +63,7 @@
         "react-string-replace": "^1.1.1",
         "string-template": "^1.0.0",
         "yup": "^1.7.1",
-        "zod": "^4.1.13"
+        "zod": "^4.3.5"
     },
     "devDependencies": {
         "@next/bundle-analyzer": "16.0.7",
