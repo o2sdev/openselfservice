@@ -193,17 +193,18 @@ function InlineFiltersContent<T, S extends FormikValues>({
             <div className="flex flex-col gap-4">
                 <div className="flex flex-wrap gap-4 items-end">
                     {leadingItems.map((item) => (
-                        <div key={String(item.id)} className="flex-shrink-0 w-full md:w-auto overflow-hidden">
-                            <ScrollContainer className="scroll-container flex whitespace-nowrap w-full items-center gap-4">
-                                <FilterItem
-                                    item={item}
-                                    setFieldValue={setFieldValue}
-                                    submitForm={submitForm}
-                                    isLeading={true}
-                                    labels={labels}
-                                    isInlineVariant={true}
-                                />
-                            </ScrollContainer>
+                        <div
+                            key={String(item.id)}
+                            className={cn('shrink-0', item.__typename === 'FilterSelect' && 'w-full sm:w-[250px]')}
+                        >
+                            <FilterItem
+                                item={item}
+                                setFieldValue={setFieldValue}
+                                submitForm={submitForm}
+                                isLeading={true}
+                                labels={labels}
+                                isInlineVariant={true}
+                            />
                         </div>
                     ))}
                     {isExpanded &&
