@@ -199,6 +199,12 @@ export class ZendeskTicketService extends Tickets.Service {
                                 const topicFieldId = Number(process.env.ZENDESK_TOPIC_FIELD_ID || 0);
                                 const customFields: Array<{ id: number; value: string }> = [];
 
+                                if (data.topic && !topicFieldId) {
+                                    return throwError(
+                                        () => new Error('ZENDESK_TOPIC_FIELD_ID is required to persist ticket topic'),
+                                    );
+                                }
+
                                 // Add topic as custom field if provided and ZENDESK_TOPIC_FIELD_ID is configured
                                 if (data.topic && topicFieldId) {
                                     customFields.push({
@@ -368,9 +374,10 @@ export class ZendeskTicketService extends Tickets.Service {
             }),
         ).pipe(
             map((response) => {
-                // Search for exact email match
+                // Search for exact email match (case-insensitive)
                 const users = response.data?.users || [];
-                const matchedUser = users.find((u) => u.email === email);
+                const normalizedEmail = email.toLowerCase();
+                const matchedUser = users.find((u) => u.email?.toLowerCase() === normalizedEmail);
                 return matchedUser;
             }),
             catchError(() => {
