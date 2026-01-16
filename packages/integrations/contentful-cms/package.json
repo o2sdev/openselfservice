@@ -20,10 +20,10 @@
         "@contentful/live-preview": "^4.9.0",
         "@o2s/framework": "*",
         "@o2s/utils.logger": "*",
-        "contentful": "^11.9.0",
+        "contentful": "^11.10.2",
         "flatted": "^3.3.3",
         "graphql": "16.12.0",
-        "graphql-request": "7.3.5",
+        "graphql-request": "7.4.0",
         "graphql-tag": "2.12.6"
     },
     "devDependencies": {

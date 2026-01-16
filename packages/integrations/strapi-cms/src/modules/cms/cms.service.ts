@@ -27,7 +27,10 @@ import { mapOrderListBlock } from './mappers/blocks/cms.order-list.mapper';
 import { mapOrdersSummaryBlock } from './mappers/blocks/cms.orders-summary.mapper';
 import { mapPaymentsHistoryBlock } from './mappers/blocks/cms.payments-history.mapper';
 import { mapPaymentsSummaryBlock } from './mappers/blocks/cms.payments-summary.mapper';
+import { mapProductDetailsBlock } from './mappers/blocks/cms.product-details.mapper';
+import { mapProductListBlock } from './mappers/blocks/cms.product-list.mapper';
 import { mapQuickLinksBlock } from './mappers/blocks/cms.quick-links.mapper';
+import { mapRecommendedProductsBlock } from './mappers/blocks/cms.recommended-products.mapper';
 import { mapResourceDetailsBlock } from './mappers/blocks/cms.resource-details.mapper';
 import { mapResourceListBlock } from './mappers/blocks/cms.resource-list.mapper';
 import { mapServiceDetailsBlock } from './mappers/blocks/cms.service-details.mapper';
@@ -443,5 +446,17 @@ export class CmsService implements CMS.Service {
     getArticleSearchBlock(options: CMS.Request.GetCmsEntryParams) {
         const key = `article-search-component-${options.id}-${options.locale}`;
         return this.getCachedBlock(key, () => this.getBlock(options).pipe(map(mapArticleSearchBlock)));
+    }
+
+    getProductListBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapProductListBlock(options.locale));
+    }
+
+    getProductDetailsBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapProductDetailsBlock(options.locale));
+    }
+
+    getRecommendedProductsBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of(mapRecommendedProductsBlock(options.locale));
     }
 }

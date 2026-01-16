@@ -64,4 +64,5 @@ export class FilterViewModeToggle {
     id!: 'viewMode';
     value?: 'list' | 'grid';
     onChange?: (value: 'list' | 'grid') => void;
+    isLeading?: boolean;
 }

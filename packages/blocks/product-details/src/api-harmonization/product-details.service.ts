@@ -1,0 +1,44 @@
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { CMS, Products } from '@o2s/configs.integrations';
+import { Observable, forkJoin, map } from 'rxjs';
+
+import { Models } from '@o2s/utils.api-harmonization';
+
+import { mapProductDetails } from './product-details.mapper';
+import * as Model from './product-details.model';
+import * as Request from './product-details.request';
+
+@Injectable()
+export class ProductDetailsService {
+    constructor(
+        private readonly cmsService: CMS.Service,
+        private readonly productsService: Products.Service,
+    ) {}
+
+    getProductDetails(
+        id: string,
+        query: Request.GetProductDetailsBlockQuery,
+        headers: Models.Headers.AppHeaders,
+    ): Observable<Model.ProductDetailsBlock> {
+        const locale = query.locale || headers['x-locale'] || 'en';
+
+        const cms = this.cmsService.getProductDetailsBlock({
+            id: query.id,
+            locale,
+        });
+        const product = this.productsService.getProduct({
+            id,
+            locale,
+        });
+
+        return forkJoin([cms, product]).pipe(
+            map(([cms, product]) => {
+                if (!product) {
+                    throw new NotFoundException();
+                }
+
+                return mapProductDetails(product, cms);
+            }),
+        );
+    }
+}
