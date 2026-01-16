@@ -216,6 +216,8 @@ export class ZendeskTicketService extends Tickets.Service {
                                                     body: data.description,
                                                     ...(uploadTokens.length > 0 && { uploads: uploadTokens }),
                                                 },
+                                                ...(data.priority && { priority: data.priority }),
+                                                ...(data.type && { type: data.type }),
                                                 ...(zendeskUser?.id && {
                                                     requester_id: zendeskUser.id,
                                                     submitter_id: zendeskUser.id,
