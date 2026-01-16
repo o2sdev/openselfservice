@@ -6,10 +6,17 @@ export class GetTicketParams {
     locale?: string;
 }
 
+export class TicketAttachmentInput {
+    filename!: string;
+    content!: string; // base64 encoded content
+    contentType!: string; // e.g., 'application/pdf'
+}
+
 export class PostTicketBody {
     title!: string;
     description!: string;
     topic!: string;
+    attachments?: TicketAttachmentInput[];
 }
 
 export class GetTicketListQuery extends PaginationQuery {

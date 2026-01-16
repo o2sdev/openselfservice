@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Observable, catchError, firstValueFrom, from, map, of, switchMap, throwError } from 'rxjs';
+import axios from 'axios';
+import { Observable, catchError, firstValueFrom, forkJoin, from, map, of, switchMap, throwError } from 'rxjs';
 
 import { Tickets, Users } from '@o2s/framework/modules';
 
@@ -33,19 +34,22 @@ interface ZendeskSearchQuery {
 
 @Injectable()
 export class ZendeskTicketService extends Tickets.Service {
+    private readonly baseUrl: string;
+    private readonly authToken: string;
+
     constructor(private readonly usersService: Users.Service) {
         super();
 
-        const baseUrl = process.env.ZENDESK_API_URL;
-        const token = process.env.ZENDESK_API_TOKEN;
+        this.baseUrl = process.env.ZENDESK_API_URL!;
+        this.authToken = process.env.ZENDESK_API_TOKEN!;
 
-        if (!baseUrl || !token) {
+        if (!this.baseUrl || !this.authToken) {
             throw new Error('Missing required environment variables: ZENDESK_API_URL and ZENDESK_API_TOKEN');
         }
 
         client.setConfig({
-            baseUrl,
-            headers: { Authorization: `Basic ${token}` },
+            baseUrl: this.baseUrl,
+            headers: { Authorization: `Basic ${this.authToken}` },
         });
     }
 
@@ -173,82 +177,104 @@ export class ZendeskTicketService extends Tickets.Service {
                     return throwError(() => new NotFoundException('User email not found'));
                 }
 
+                // Upload attachments first if they exist
+                const uploadTokens =
+                    data.attachments && data.attachments.length > 0
+                        ? forkJoin(
+                              data.attachments.map((attachment) =>
+                                  this.uploadAttachment(
+                                      attachment.filename,
+                                      Buffer.from(attachment.content, 'base64'),
+                                      attachment.contentType,
+                                  ),
+                              ),
+                          )
+                        : of([]);
+
                 // Find corresponding Zendesk user by email so that requester/submitter match the logged-in portal user
-                return this.findZendeskUserByEmail(user.email).pipe(
-                    switchMap((zendeskUser) => {
-                        const topicFieldId = Number(process.env.ZENDESK_TOPIC_FIELD_ID || 0);
-                        const customFields: Array<{ id: number; value: string }> = [];
+                return uploadTokens.pipe(
+                    switchMap((uploadTokens) =>
+                        this.findZendeskUserByEmail(user.email!).pipe(
+                            switchMap((zendeskUser) => {
+                                const topicFieldId = Number(process.env.ZENDESK_TOPIC_FIELD_ID || 0);
+                                const customFields: Array<{ id: number; value: string }> = [];
 
-                        // Add topic as custom field if provided and ZENDESK_TOPIC_FIELD_ID is configured
-                        if (data.topic && topicFieldId) {
-                            customFields.push({
-                                id: topicFieldId,
-                                value: data.topic,
-                            });
-                        }
-
-                        return from(
-                            createTicket({
-                                body: {
-                                    ticket: {
-                                        subject: data.title,
-                                        comment: {
-                                            body: data.description,
-                                        },
-                                        ...(zendeskUser?.id && {
-                                            requester_id: zendeskUser.id,
-                                            submitter_id: zendeskUser.id,
-                                        }),
-                                        // Add custom fields if any (e.g., topic)
-                                        // Note: Zendesk API accepts {id, value} structure for custom_fields
-                                        // TypeScript types require full CustomFieldObject, but API accepts simpler structure
-                                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                                        ...(customFields.length > 0 && { custom_fields: customFields as any }),
-                                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                                    } as any,
-                                },
-                            }),
-                        ).pipe(
-                            switchMap((response) => {
-                                if (!response.data?.ticket) {
-                                    return throwError(() => new Error('Failed to create ticket in Zendesk'));
+                                // Add topic as custom field if provided and ZENDESK_TOPIC_FIELD_ID is configured
+                                if (data.topic && topicFieldId) {
+                                    customFields.push({
+                                        id: topicFieldId,
+                                        value: data.topic,
+                                    });
                                 }
 
-                                const createdTicket = response.data.ticket;
-
-                                // Fetch ticket comments to ensure complete data
-                                return this.fetchTicketComments(createdTicket.id!.toString()).pipe(
-                                    switchMap((comments) => {
-                                        // Get unique author IDs from comments
-                                        const authorIds = [
-                                            ...new Set(comments.map((c) => c.author_id).filter(Boolean)),
-                                        ] as number[];
-
-                                        if (authorIds.length === 0) {
-                                            return of(mapTicketToModel(createdTicket, comments));
+                                return from(
+                                    createTicket({
+                                        body: {
+                                            ticket: {
+                                                subject: data.title,
+                                                comment: {
+                                                    body: data.description,
+                                                    ...(uploadTokens.length > 0 && { uploads: uploadTokens }),
+                                                },
+                                                ...(zendeskUser?.id && {
+                                                    requester_id: zendeskUser.id,
+                                                    submitter_id: zendeskUser.id,
+                                                }),
+                                                // Add custom fields if any (e.g., topic)
+                                                // Note: Zendesk API accepts {id, value} structure for custom_fields
+                                                // TypeScript types require full CustomFieldObject, but API accepts simpler structure
+                                                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                                                ...(customFields.length > 0 && { custom_fields: customFields as any }),
+                                            },
+                                        },
+                                    }),
+                                ).pipe(
+                                    switchMap((response) => {
+                                        if (!response.data?.ticket) {
+                                            return throwError(() => new Error('Failed to create ticket in Zendesk'));
                                         }
 
-                                        // Fetch all comment authors
-                                        return from(
-                                            Promise.all(authorIds.map((id) => firstValueFrom(this.fetchUser(id)))),
-                                        ).pipe(
-                                            map((authors) => {
-                                                const authorMap = new Map(
-                                                    authors.filter((a) => a !== undefined).map((a) => [a!.id!, a!]),
+                                        const createdTicket = response.data.ticket;
+
+                                        // Fetch ticket comments to ensure complete data
+                                        return this.fetchTicketComments(createdTicket.id!.toString()).pipe(
+                                            switchMap((comments) => {
+                                                // Get unique author IDs from comments
+                                                const authorIds = [
+                                                    ...new Set(comments.map((c) => c.author_id).filter(Boolean)),
+                                                ] as number[];
+
+                                                if (authorIds.length === 0) {
+                                                    return of(mapTicketToModel(createdTicket, comments));
+                                                }
+
+                                                // Fetch all comment authors
+                                                return from(
+                                                    Promise.all(
+                                                        authorIds.map((id) => firstValueFrom(this.fetchUser(id))),
+                                                    ),
+                                                ).pipe(
+                                                    map((authors) => {
+                                                        const authorMap = new Map(
+                                                            authors
+                                                                .filter((a) => a !== undefined)
+                                                                .map((a) => [a!.id!, a!]),
+                                                        );
+                                                        return mapTicketToModel(createdTicket, comments, authorMap);
+                                                    }),
                                                 );
-                                                return mapTicketToModel(createdTicket, comments, authorMap);
                                             }),
+                                        );
+                                    }),
+                                    catchError((error) => {
+                                        return throwError(
+                                            () => new Error(`Failed to create ticket: ${error.message || error}`),
                                         );
                                     }),
                                 );
                             }),
-                            catchError((error) => {
-                                return throwError(
-                                    () => new Error(`Failed to create ticket: ${error.message || error}`),
-                                );
-                            }),
-                        );
-                    }),
+                        ),
+                    ),
                 );
             }),
         );
@@ -348,6 +374,44 @@ export class ZendeskTicketService extends Tickets.Service {
             catchError(() => {
                 // If search fails, return undefined (ticket will be created without requester/submitter ids)
                 return of(undefined);
+            }),
+        );
+    }
+
+    /**
+     * Uploads an attachment to Zendesk using direct HTTP request.
+     * The generated SDK doesn't handle binary uploads properly, so we use axios directly.
+     *
+     * @param filename - Name of the file to upload
+     * @param content - Binary content of the file as Buffer
+     * @param contentType - MIME type of the file (e.g., 'application/pdf')
+     * @returns Observable with the upload token from Zendesk API
+     */
+    private uploadAttachment(filename: string, content: Buffer, contentType: string): Observable<string> {
+        const uploadUrl = `${this.baseUrl}/api/v2/uploads?filename=${encodeURIComponent(filename)}`;
+
+        return from(
+            axios.post(uploadUrl, content, {
+                headers: {
+                    Authorization: `Basic ${this.authToken}`,
+                    'Content-Type': contentType,
+                },
+                responseType: 'json',
+            }),
+        ).pipe(
+            map((response) => {
+                if (!response.data?.upload?.token) {
+                    throw new Error('Upload token not received from Zendesk API');
+                }
+                return response.data.upload.token;
+            }),
+            catchError((error) => {
+                const errorMessage =
+                    error.response?.data?.error?.description ||
+                    error.response?.data?.description ||
+                    error.message ||
+                    'Unknown error during file upload';
+                return throwError(() => new Error(`Failed to upload attachment: ${errorMessage}`));
             }),
         );
     }
