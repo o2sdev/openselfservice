@@ -21,27 +21,27 @@ The following table shows the implementation status of all blocks available in t
 | faq                   | ✅     | BlockFaq          | Fully implemented |
 | quick-links           | ✅     | BlockQuickLinks   | Fully implemented |
 | ticket-list           | ✅     | BlockTicketList   | Fully implemented |
-| category              | ✅     | BlockCategory     | Returns mock data |
-| article-search        | ✅     | -                 | Returns mock data |
-| featured-service-list | ✅     | -                 | Returns mock data |
-| invoice-details       | ✅     | -                 | Returns mock data |
-| invoice-list          | ✅     | -                 | Returns mock data |
-| notification-details  | ✅     | -                 | Returns mock data |
-| notification-list     | ✅     | -                 | Returns mock data |
-| order-details         | ✅     | -                 | Returns mock data |
-| order-list            | ✅     | -                 | Returns mock data |
-| orders-summary        | ✅     | -                 | Returns mock data |
-| payments-history      | ✅     | -                 | Returns mock data |
-| payments-summary      | ✅     | -                 | Returns mock data |
-| product-details       | ✅     | -                 | Returns mock data |
-| product-list          | ✅     | -                 | Returns mock data |
-| recommended-products  | ✅     | -                 | Returns mock data |
-| service-details       | ✅     | -                 | Returns mock data |
-| service-list          | ✅     | -                 | Returns mock data |
-| surveyjs-form         | ✅     | -                 | Returns mock data |
-| ticket-details        | ✅     | -                 | Returns mock data |
-| ticket-recent         | ✅     | -                 | Returns mock data |
-| user-account          | ✅     | -                 | Returns mock data |
+| category              | ❌     | -                 | Not implemented   |
+| article-search        | ❌     | -                 | Not implemented   |
+| featured-service-list | ❌     | -                 | Not implemented   |
+| invoice-details       | ❌     | -                 | Not implemented   |
+| invoice-list          | ❌     | -                 | Not implemented   |
+| notification-details  | ❌     | -                 | Not implemented   |
+| notification-list     | ❌     | -                 | Not implemented   |
+| order-details         | ❌     | -                 | Not implemented   |
+| order-list            | ❌     | -                 | Not implemented   |
+| orders-summary        | ❌     | -                 | Not implemented   |
+| payments-history      | ❌     | -                 | Not implemented   |
+| payments-summary      | ❌     | -                 | Not implemented   |
+| product-details       | ❌     | -                 | Not implemented   |
+| product-list          | ❌     | -                 | Not implemented   |
+| recommended-products  | ❌     | -                 | Not implemented   |
+| service-details       | ❌     | -                 | Not implemented   |
+| service-list          | ❌     | -                 | Not implemented   |
+| surveyjs-form         | ❌     | -                 | Not implemented   |
+| ticket-details        | ❌     | -                 | Not implemented   |
+| ticket-recent         | ❌     | -                 | Not implemented   |
+| user-account          | ❌     | -                 | Not implemented   |
 | article               | ❌     | -                 | Not implemented   |
 | bento-grid            | ❌     | -                 | Not implemented   |
 | cta-section           | ❌     | -                 | Not implemented   |

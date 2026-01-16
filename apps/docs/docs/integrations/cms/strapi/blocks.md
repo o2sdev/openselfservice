@@ -26,7 +26,6 @@ The following table shows the implementation status of all blocks available in t
 | faq                   | ✅     | ComponentComponentsFaq                 | Fully implemented |
 | featured-service-list | ✅     | ComponentComponentsFeaturedServiceList | Fully implemented |
 | invoice-list          | ✅     | ComponentComponentsInvoiceList         | Fully implemented |
-| notification-details  | ✅     | ComponentComponentsNotificationDetails | Returns mock data |
 | notification-list     | ✅     | ComponentComponentsNotificationList    | Fully implemented |
 | order-details         | ✅     | ComponentComponentsOrderDetails        | Fully implemented |
 | order-list            | ✅     | ComponentComponentsOrderList           | Fully implemented |
@@ -41,9 +40,9 @@ The following table shows the implementation status of all blocks available in t
 | ticket-list           | ✅     | ComponentComponentsTicketList          | Fully implemented |
 | ticket-recent         | ✅     | ComponentComponentsTicketRecent        | Fully implemented |
 | user-account          | ✅     | ComponentComponentsUserAccount         | Fully implemented |
-| product-details       | ✅     | -                                      | Returns mock data |
-| product-list          | ✅     | -                                      | Returns mock data |
-| recommended-products  | ✅     | -                                      | Returns mock data |
+| product-details       | ❌     | -                                      | Not implemented   |
+| product-list          | ❌     | -                                      | Not implemented   |
+| recommended-products  | ❌     | -                                      | Not implemented   |
 | bento-grid            | ❌     | -                                      | Not implemented   |
 | cta-section           | ❌     | -                                      | Not implemented   |
 | document-list         | ❌     | -                                      | Not implemented   |
@@ -52,6 +51,7 @@ The following table shows the implementation status of all blocks available in t
 | hero-section          | ❌     | -                                      | Not implemented   |
 | media-section         | ❌     | -                                      | Not implemented   |
 | notification-summary  | ❌     | -                                      | Not implemented   |
+| notification-details  | ❌     | -                                      | Not implemented   |
 | pricing-section       | ❌     | -                                      | Not implemented   |
 | ticket-summary        | ❌     | -                                      | Not implemented   |
 
