@@ -1,4 +1,4 @@
-import { Auth, CMS } from '@o2s/framework/modules';
+import { CMS } from '@o2s/framework/modules';
 
 export const PAGE_PRODUCT_DETAILS_EN: CMS.Model.Page.Page = {
     id: '21',
@@ -17,12 +17,12 @@ export const PAGE_PRODUCT_DETAILS_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
+    permissions: [],
     hasOwnTitle: true,
     parent: {
         slug: '/products',
         seo: {
-            title: 'Products',
+            title: 'Products in Catalog',
         },
     },
     template: {
@@ -61,12 +61,12 @@ export const PAGE_PRODUCT_DETAILS_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
+    permissions: [],
     hasOwnTitle: true,
     parent: {
         slug: '/produkte',
         seo: {
-            title: 'Produkte',
+            title: 'Produkte im Katalog',
         },
     },
     template: {
@@ -105,12 +105,12 @@ export const PAGE_PRODUCT_DETAILS_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
+    permissions: [],
     hasOwnTitle: true,
     parent: {
         slug: '/produkty',
         seo: {
-            title: 'Produkty',
+            title: 'Katalog produktów',
         },
     },
     template: {

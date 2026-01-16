@@ -267,7 +267,7 @@ const MOCK_HEADER_LOGON_PL: CMS.Model.Header.Header = {
             items: [
                 {
                     __typename: 'NavigationItem',
-                    label: 'Sklep',
+                    label: 'Katalog produktów',
                     url: '/produkty',
                 },
             ],
