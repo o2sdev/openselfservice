@@ -12,16 +12,13 @@ export class TicketAttachmentInput {
     contentType!: string; // e.g., 'application/pdf'
 }
 
-export type TicketPriority = 'urgent' | 'high' | 'normal' | 'low';
-export type TicketType = 'question' | 'problem' | 'incident' | 'task';
-
 export class PostTicketBody {
     title!: string;
     description!: string;
     topic!: string;
     attachments?: TicketAttachmentInput[];
-    priority?: TicketPriority;
-    type?: TicketType;
+    priority?: string;
+    type?: string;
 }
 
 export class GetTicketListQuery extends PaginationQuery {

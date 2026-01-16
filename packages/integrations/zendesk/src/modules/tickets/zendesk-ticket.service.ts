@@ -1,5 +1,5 @@
+import { HttpService } from '@nestjs/axios';
 import { Injectable, NotFoundException } from '@nestjs/common';
-import axios from 'axios';
 import { Observable, catchError, firstValueFrom, forkJoin, from, map, of, switchMap, throwError } from 'rxjs';
 
 import { Tickets, Users } from '@o2s/framework/modules';
@@ -9,6 +9,7 @@ import {
     type SearchResultObject,
     type TicketCommentObject,
     type TicketObject,
+    type TicketUpdateInputWritable,
     type UserObject,
     createTicket,
     listSearchResults,
@@ -37,7 +38,10 @@ export class ZendeskTicketService extends Tickets.Service {
     private readonly baseUrl: string;
     private readonly authToken: string;
 
-    constructor(private readonly usersService: Users.Service) {
+    constructor(
+        private readonly usersService: Users.Service,
+        private readonly httpClient: HttpService,
+    ) {
         super();
 
         this.baseUrl = process.env.ZENDESK_API_URL!;
@@ -222,8 +226,12 @@ export class ZendeskTicketService extends Tickets.Service {
                                                     body: data.description,
                                                     ...(uploadTokens.length > 0 && { uploads: uploadTokens }),
                                                 },
-                                                ...(data.priority && { priority: data.priority }),
-                                                ...(data.type && { type: data.type }),
+                                                ...(data.priority && {
+                                                    priority: data.priority as TicketUpdateInputWritable['priority'],
+                                                }),
+                                                ...(data.type && {
+                                                    type: data.type as TicketUpdateInputWritable['type'],
+                                                }),
                                                 ...(zendeskUser?.id && {
                                                     requester_id: zendeskUser.id,
                                                     submitter_id: zendeskUser.id,
@@ -389,7 +397,7 @@ export class ZendeskTicketService extends Tickets.Service {
 
     /**
      * Uploads an attachment to Zendesk using direct HTTP request.
-     * The generated SDK doesn't handle binary uploads properly, so we use axios directly.
+     * The generated SDK doesn't handle binary uploads properly, so we use HttpService directly.
      *
      * @param filename - Name of the file to upload
      * @param content - Binary content of the file as Buffer
@@ -399,29 +407,28 @@ export class ZendeskTicketService extends Tickets.Service {
     private uploadAttachment(filename: string, content: Buffer, contentType: string): Observable<string> {
         const uploadUrl = `${this.baseUrl}/api/v2/uploads?filename=${encodeURIComponent(filename)}`;
 
-        return from(
-            axios.post(uploadUrl, content, {
+        return this.httpClient
+            .post(uploadUrl, content, {
                 headers: {
                     Authorization: `Basic ${this.authToken}`,
                     'Content-Type': contentType,
                 },
-                responseType: 'json',
-            }),
-        ).pipe(
-            map((response) => {
-                if (!response.data?.upload?.token) {
-                    throw new Error('Upload token not received from Zendesk API');
-                }
-                return response.data.upload.token;
-            }),
-            catchError((error) => {
-                const errorMessage =
-                    error.response?.data?.error?.description ||
-                    error.response?.data?.description ||
-                    error.message ||
-                    'Unknown error during file upload';
-                return throwError(() => new Error(`Failed to upload attachment: ${errorMessage}`));
-            }),
-        );
+            })
+            .pipe(
+                map((response) => {
+                    if (!response.data?.upload?.token) {
+                        throw new Error('Upload token not received from Zendesk API');
+                    }
+                    return response.data.upload.token;
+                }),
+                catchError((error) => {
+                    const errorMessage =
+                        error.response?.data?.error?.description ||
+                        error.response?.data?.description ||
+                        error.message ||
+                        'Unknown error during file upload';
+                    return throwError(() => new Error(`Failed to upload attachment: ${errorMessage}`));
+                }),
+            );
     }
 }
