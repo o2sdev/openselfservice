@@ -54,7 +54,6 @@ import * as TicketSummary from '@o2s/blocks.ticket-summary/api-harmonization';
 import * as UserAccount from '@o2s/blocks.user-account/api-harmonization';
 
 // BLOCK IMPORT
-
 import { configuration } from '@o2s/api-harmonization/config/configuration';
 
 import { AppConfig } from './app.config';
@@ -150,8 +149,15 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
         AppService,
         {
             provide: APP_GUARD,
-            useFactory: (reflector: Reflector, logger: LoggerService) => new Auth.Guard(reflector, logger),
-            inject: [Reflector, LoggerService],
+            useFactory: (reflector: Reflector, logger: LoggerService, authService: AuthModule.Service) =>
+                new Auth.Guards.RolesGuard(reflector, logger, authService),
+            inject: [Reflector, LoggerService, AuthModule.Service],
+        },
+        {
+            provide: APP_GUARD,
+            useFactory: (reflector: Reflector, logger: LoggerService, authService: AuthModule.Service) =>
+                new Auth.Guards.PermissionsGuard(reflector, logger, authService),
+            inject: [Reflector, LoggerService, AuthModule.Service],
         },
     ],
 })

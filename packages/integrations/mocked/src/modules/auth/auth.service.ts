@@ -30,7 +30,6 @@ export class AuthService extends Auth.Service {
 
     async isTokenRevoked(_jti: string): Promise<boolean> {
         // Mocked implementation: no revocation support
-        // Production would check Redis/database or call IAM introspection
         return false;
     }
 
@@ -57,7 +56,7 @@ export class AuthService extends Auth.Service {
         return decodedToken?.roles || decodedToken?.customer?.roles || [];
     }
 
-    getPermissions(token: string | Auth.Model.Jwt): Auth.Model.Permission[] {
+    getPermissions(token: string | Auth.Model.Jwt): Auth.Model.Permissions {
         let decodedToken: Jwt;
 
         if (typeof token === 'string') {
@@ -68,12 +67,12 @@ export class AuthService extends Auth.Service {
         }
 
         // Permissions are now stored directly as Permission[] in the JWT
-        return decodedToken?.permissions || decodedToken?.customer?.permissions || [];
+        return decodedToken?.customer?.permissions || decodedToken.permissions || {};
     }
 
     hasPermission(token: string | Auth.Model.Jwt, resource: string, action: string): boolean {
         const permissions = this.getPermissions(token);
-        const resourcePermissions = permissions.find((p) => p.resource === resource);
+        const resourcePermissions = permissions[resource];
 
         if (!resourcePermissions) {
             return false;

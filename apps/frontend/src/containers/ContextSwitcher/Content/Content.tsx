@@ -2,6 +2,8 @@ import { Field, FieldProps, Form, Formik } from 'formik';
 import { useSession } from 'next-auth/react';
 import { object as YupObject, string as YupString } from 'yup';
 
+import { Utils } from '@o2s/utils.frontend';
+
 import { toast } from '@o2s/ui/hooks/use-toast';
 
 import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
@@ -94,7 +96,22 @@ export const Content = ({ data }: ContentProps) => {
                                                     <Label htmlFor={item.id} className="flex flex-col gap-1">
                                                         <Typography variant="body">{item.name}</Typography>
                                                         <Typography variant="small" className="text-muted-foreground">
-                                                            {`${item.address?.country}, ${item.address?.city}, ${item.address?.district} - (${item.id})`}
+                                                            {Utils.StringReplace.reactStringReplace(
+                                                                `{country}{city}{district}{id}`,
+
+                                                                {
+                                                                    country: item.address?.country
+                                                                        ? `${item.address?.country}, `
+                                                                        : undefined,
+                                                                    city: item.address?.city
+                                                                        ? `${item.address?.city}, `
+                                                                        : undefined,
+                                                                    district: item.address?.district
+                                                                        ? `${item.address?.district}, `
+                                                                        : undefined,
+                                                                    id: item.id,
+                                                                },
+                                                            )}
                                                         </Typography>
                                                     </Label>
                                                 </div>

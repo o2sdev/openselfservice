@@ -7,7 +7,7 @@ export class Customer extends Party {
     clientType?: ClientType;
     parentOrgId?: string;
     roles?: Auth.Model.Role[];
-    permissions?: Auth.Model.Permission[];
+    permissions?: Auth.Model.Permissions;
     billingAccounts?: BillingAccount[];
 }
 

@@ -1,7 +1,6 @@
-import { CustomDecorator, SetMetadata, UseGuards, applyDecorators } from '@nestjs/common';
+import { CustomDecorator, SetMetadata } from '@nestjs/common';
 
 import { MatchingMode } from './auth.model';
-import { PermissionsGuard } from './permissions/permissions.guard';
 
 export interface RoleDecorator {
     roles: string[];
@@ -11,13 +10,13 @@ export interface RoleDecorator {
 export interface PermissionsDecorator {
     resource: string;
     actions: string[];
-    mode?: 'any' | 'all';
+    mode?: MatchingMode;
 }
 
-export const Roles = (roleMetadata: RoleDecorator): CustomDecorator<string> => {
-    return SetMetadata('roles', roleMetadata);
+export const Roles = (metadata: RoleDecorator): CustomDecorator => {
+    return SetMetadata('roles', metadata);
 };
 
-export const Permissions = (permissionsMetadata: PermissionsDecorator): ReturnType<typeof applyDecorators> => {
-    return applyDecorators(SetMetadata('permissions', permissionsMetadata), UseGuards(PermissionsGuard));
+export const Permissions = (metadata: PermissionsDecorator): CustomDecorator => {
+    return SetMetadata('permissions', metadata);
 };

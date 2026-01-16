@@ -23,14 +23,15 @@ export class UserAccountService {
         headers: ApiModels.Headers.AppHeaders,
     ): Observable<UserAccountBlock> {
         const cms = this.cmsService.getUserAccountBlock({ id: query.id, locale: headers['x-locale'] });
-        const user = this.usersService.getUser({ id: query.userId });
+        const user = this.usersService.getUser({ id: query.userId }, headers.authorization);
+
         return forkJoin([cms, user]).pipe(
             map(([cms, user]) => {
                 const result = mapUserAccount(cms, headers['x-locale'], user);
 
                 // Extract permissions using ACL service
                 if (headers.authorization) {
-                    const permissions = this.authService.canPerformActions(headers.authorization, 'users', [
+                    const permissions = this.authService.canPerformActions(headers.authorization, 'settings', [
                         'view',
                         'edit',
                     ]);

@@ -10,7 +10,7 @@ declare module 'next-auth' {
             customer?: {
                 id: string;
                 name: string;
-                permissions: Auth.Model.Permission[];
+                permissions: Auth.Model.Permissions;
                 roles?: string[];
             };
         } & DefaultSession['user'];
@@ -28,13 +28,13 @@ declare module 'next-auth/jwt' {
     interface JWT {
         accessToken: string;
         accessTokenExpires: number;
-        permissions?: Auth.Model.Permission[];
         roles?: string[];
+        permissions?: Auth.Model.Permissions;
         customer?: {
             id: string;
             name: string;
-            permissions: Auth.Model.Permission[];
             roles?: string[];
+            permissions: Auth.Model.Permissions;
         };
     }
 }

@@ -15,7 +15,7 @@ export class UserAccountController {
     constructor(protected readonly service: UserAccountService) {}
 
     @Get()
-    @Auth.Decorators.Permissions({ resource: 'users', actions: ['view'] })
+    @Auth.Decorators.Permissions({ resource: 'settings', actions: ['view'] })
     getUserAccountBlock(@Headers() headers: ApiModels.Headers.AppHeaders, @Query() query: GetUserAccountBlockQuery) {
         return this.service.getUserAccountBlock(query, headers);
     }

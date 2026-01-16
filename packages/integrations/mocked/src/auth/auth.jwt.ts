@@ -51,7 +51,7 @@ async function updateCustomerToken(
 
         if (customer) {
             // Permissions come directly from the organization
-            const permissions = customer.permissions ?? [];
+            const permissions = customer.permissions ?? {};
             const roles = customer?.roles ?? [];
 
             token.customer = {

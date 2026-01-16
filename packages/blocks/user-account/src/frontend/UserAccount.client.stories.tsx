@@ -105,6 +105,7 @@ export const Default: Story = {
             email: 'jane@example.com',
             firstName: 'Jane',
             lastName: 'Doe',
+            status: 'ACTIVE',
             customers: [],
         },
         title: 'User Account',

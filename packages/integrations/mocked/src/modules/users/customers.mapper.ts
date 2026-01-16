@@ -2,32 +2,32 @@ import { Auth, Models } from '@o2s/framework/modules';
 
 import { Roles } from '@/utils/roles';
 
-const ORG_ADMIN_PERMISSIONS: Auth.Model.Permission[] = [
-    { resource: 'invoices', actions: ['view', 'create', 'edit', 'delete', 'pay'] },
-    { resource: 'users', actions: ['view', 'create', 'edit', 'delete'] },
-    { resource: 'settings', actions: ['view', 'edit'] },
-    { resource: 'notifications', actions: ['view', 'mark_read', 'delete'] },
-    { resource: 'orders', actions: ['view', 'create', 'edit', 'cancel', 'track'] },
-    { resource: 'tickets', actions: ['view', 'create', 'edit', 'close', 'reopen', 'delete'] },
-    { resource: 'services', actions: ['view'] },
-    { resource: 'products', actions: ['view'] },
-];
+const ORG_ADMIN_PERMISSIONS: Auth.Model.Permissions = {
+    users: { resource: 'users', actions: ['view', 'create', 'edit', 'delete'] },
+    settings: { resource: 'settings', actions: ['view', 'edit'] },
+    invoices: { resource: 'invoices', actions: ['view', 'create', 'edit', 'delete', 'pay'] },
+    notifications: { resource: 'notifications', actions: ['view', 'mark_read', 'delete'] },
+    orders: { resource: 'orders', actions: ['view', 'create', 'edit', 'cancel', 'track'] },
+    tickets: { resource: 'tickets', actions: ['view', 'create', 'edit', 'close', 'reopen', 'delete'] },
+    services: { resource: 'services', actions: ['view'] },
+    products: { resource: 'products', actions: ['view'] },
+};
 
-const ORG_USER_PERMISSIONS: Auth.Model.Permission[] = [
-    { resource: 'invoices', actions: ['view'] },
-    { resource: 'users', actions: ['view'] },
-    { resource: 'notifications', actions: ['view', 'mark_read'] },
-    { resource: 'orders', actions: ['view', 'create', 'track'] },
-    { resource: 'tickets', actions: ['view', 'create'] },
-    { resource: 'services', actions: ['view'] },
-    { resource: 'products', actions: ['view'] },
-];
+const ORG_USER_PERMISSIONS: Auth.Model.Permissions = {
+    settings: { resource: 'settings', actions: ['view', 'edit'] },
+    invoices: { resource: 'invoices', actions: ['view'] },
+    notifications: { resource: 'notifications', actions: ['view', 'mark_read'] },
+    orders: { resource: 'orders', actions: ['view', 'create', 'track'] },
+    tickets: { resource: 'tickets', actions: ['view', 'create'] },
+    services: { resource: 'services', actions: ['view'] },
+    products: { resource: 'products', actions: ['view'] },
+};
 
-const PROSPECT_PERMISSIONS: Auth.Model.Permission[] = [
-    { resource: 'settings', actions: ['view', 'edit'] },
-    { resource: 'notifications', actions: ['view'] },
-    { resource: 'products', actions: ['view'] },
-];
+const PROSPECT_PERMISSIONS: Auth.Model.Permissions = {
+    settings: { resource: 'settings', actions: ['view', 'edit'] },
+    notifications: { resource: 'notifications', actions: ['view'] },
+    products: { resource: 'products', actions: ['view'] },
+};
 
 const MOCK_CUSTOMER_1: Models.Customer.Customer = {
     id: 'cust-001',

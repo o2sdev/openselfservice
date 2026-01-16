@@ -52,7 +52,7 @@ export abstract class AuthService {
      * @param token - JWT token string or decoded JWT object
      * @returns Array of normalized permissions
      */
-    abstract getPermissions(token: string | Auth.Model.Jwt): Auth.Model.Permission[];
+    abstract getPermissions(token: string | Auth.Model.Jwt): Auth.Model.Permissions;
 
     /**
      * Check if user has permission for a specific resource and action

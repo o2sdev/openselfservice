@@ -1,6 +1,6 @@
 import { CMS, Organizations } from '@o2s/configs.integrations';
 
-import { Models, Organizations as OrganizationModule } from '@o2s/framework/modules';
+import { Models } from '@o2s/framework/modules';
 
 import { CustomerList } from './organizations.model';
 
@@ -24,7 +24,7 @@ const mapCustomers = (organizations: Organizations.Model.Organization[]): Models
             acc.push(...organization.children, organization);
         }
         return acc;
-    }, [] as OrganizationModule.Model.Organization[]);
+    }, organizations);
 
     return organizationList
         .map((organization) => organization.customers)

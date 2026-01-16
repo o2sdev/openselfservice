@@ -14,6 +14,10 @@ export interface Permission {
     actions: string[];
 }
 
+export type Permissions = {
+    [key: string]: Permission;
+};
+
 export const CommonActions = {
     VIEW: 'view',
     CREATE: 'create',
