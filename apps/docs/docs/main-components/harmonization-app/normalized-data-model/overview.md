@@ -14,6 +14,7 @@ This section will give you an overview on:
 We will cover every module that is currently supported within the O2S:
 
 - [Organization](./core-model-organization.md) - fetch user's data within their organization hierarchy,
+- [Products](./core-model-products.md) - fetch product catalog data, variants, and related products,
 - [Tickets](./core-model-tickets.md) - fetch and submit user tickets, which can cover a variety of cases,
 - [Financial](./core-model-financial.md) - fetch user's invoices, and handle their payment,
 
