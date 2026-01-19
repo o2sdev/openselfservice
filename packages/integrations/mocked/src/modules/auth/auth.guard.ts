@@ -29,16 +29,30 @@ export class RolesGuard implements Auth.Guards.RoleGuard {
         const MatchingMode = roleMetadata.mode || Auth.Model.MatchingMode.ANY;
 
         const request = context.switchToHttp().getRequest();
-        const accessToken = request.headers['authorization']?.replace('Bearer ', '');
-        const decodedToken = jwt.decode(accessToken) as Jwt | null;
+        const authHeader = request.headers['authorization'];
 
-        if (!decodedToken) {
-            return false;
+        if (!authHeader) {
+            throw new UnauthorizedException('Missing authorization token');
         }
 
-        const userRoles = this.extractPermissionsAsStrings(decodedToken);
+        // Verify token (signature, expiration, standard claims)
+        let verifiedToken: Jwt;
+        try {
+            verifiedToken = await this.authService.verifyToken(authHeader);
+        } catch (_error) {
+            // Don't expose verification details to client
+            throw new UnauthorizedException('Invalid or expired token');
+        }
 
-        console.log('role guard', decodedToken, { requiredRoles, userRoles });
+        // Check if token is revoked
+        if (verifiedToken.jti) {
+            const isRevoked = await this.authService.isTokenRevoked(verifiedToken.jti);
+            if (isRevoked) {
+                throw new UnauthorizedException('Token has been revoked');
+            }
+        }
+
+        const userRoles = this.authService.getUserRoles(verifiedToken);
 
         this.logger.debug(MatchingMode, 'Role matching mode');
         this.logger.debug(userRoles.join(','), 'User roles');
@@ -47,21 +61,6 @@ export class RolesGuard implements Auth.Guards.RoleGuard {
         return MatchingMode === Auth.Model.MatchingMode.ALL
             ? requiredRoles.every((role) => userRoles.includes(role))
             : requiredRoles.some((role) => userRoles.includes(role));
-    }
-
-    /**
-     * Extracts permissions as flat strings for role matching.
-     * Converts Permission[] to strings like "invoices:view", "users:edit"
-     */
-    private extractPermissionsAsStrings(decodedToken: Jwt): string[] {
-        const permissions = decodedToken?.customer?.permissions || decodedToken?.permissions || {};
-        return this.flattenPermissions(permissions);
-    }
-
-    private flattenPermissions(permissions: Auth.Model.Permissions): string[] {
-        return Object.entries(permissions).flatMap(([resource, permission]) =>
-            permission.actions.map((action) => `${resource}:${action}`),
-        );
     }
 }
 
@@ -111,7 +110,9 @@ export class PermissionsGuard implements Auth.Guards.PermissionGuard {
         // Validate permissions based on mode
         const { resource, actions, mode = 'all' } = permissionsMetadata;
 
-        console.log('permissions guard', verifiedToken, { resource, actions }, verifiedToken.permissions);
+        this.logger.debug(mode, 'Permission matching mode');
+        this.logger.debug(this.authService.getPermissions(verifiedToken), 'User permissions');
+        this.logger.debug({ resource, actions }, 'Required permissions');
 
         if (mode === 'all') {
             // User must have ALL specified actions

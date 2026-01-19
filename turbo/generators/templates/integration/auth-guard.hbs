@@ -109,7 +109,9 @@ export class PermissionsGuard implements Auth.Guards.PermissionGuard {
         // Validate permissions based on mode
         const { resource, actions, mode = 'all' } = permissionsMetadata;
 
-        this.logger.debug('permissions guard', verifiedToken, { resource, actions }, verifiedToken.permissions);
+        this.logger.debug(mode, 'Permission matching mode');
+        this.logger.debug(this.authService.getPermissions(verifiedToken), 'User permissions');
+        this.logger.debug({ resource, actions }, 'Required permissions');
 
         if (mode === 'all') {
             // User must have ALL specified actions
