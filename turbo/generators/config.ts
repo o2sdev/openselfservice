@@ -89,57 +89,113 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
             }
 
             modules.forEach((module) => {
-                actions.push(
-                    {
-                        type: 'add',
-                        path: `packages/integrations/{{kebabCase name}}/src/modules/{{kebabCase module}}/index.ts`,
-                        templateFile: 'templates/integration/module-index.hbs',
-                        data: { module },
-                    },
-                    {
-                        type: 'add',
-                        path: `packages/integrations/{{kebabCase name}}/src/modules/{{kebabCase module}}/{{kebabCase module}}.service.ts`,
-                        templateFile: 'templates/integration/service.hbs',
-                        data: { module },
-                    },
-                    {
-                        type: 'add',
-                        path: `packages/integrations/{{kebabCase name}}/src/modules/{{kebabCase module}}/{{kebabCase module}}.controller.ts`,
-                        templateFile: 'templates/integration/controller.hbs',
-                        data: { module },
-                    },
-                    {
-                        type: 'add',
-                        path: `packages/integrations/{{kebabCase name}}/src/modules/{{kebabCase module}}/mappers/index.ts`,
-                        templateFile: 'templates/integration/mappers-index.hbs',
-                        data: { module },
-                    },
-                    {
-                        type: 'modify',
-                        path: 'packages/integrations/{{kebabCase name}}/src/modules/index.ts',
-                        pattern: /(\/\/ MODULE_EXPORTS)/g,
-                        templateFile: 'templates/integration/modules-index.hbs',
-                        data: { module },
-                    },
-                    {
-                        type: 'modify',
-                        path: 'packages/integrations/{{kebabCase name}}/src/integration.ts',
-                        pattern: /(\/\/ MODULE_IMPORTS)/g,
-                        template:
-                            "import { Service as {{ pascalCase module }}Service } from './modules/{{kebabCase module}}';\n// MODULE_IMPORTS",
-                        data: { module },
-                    },
-                    {
-                        type: 'modify',
-                        path: 'packages/integrations/{{kebabCase name}}/src/integration.ts',
-                        pattern: /(\/\/ MODULE_EXPORTS)/g,
-                        template:
-                            '    {{ camelCase module }}: {\n' +
-                            '        service: {{ pascalCase module }}Service,\n' +
-                            '    },\n// MODULE_EXPORTS',
-                        data: { module },
-                    },
-                );
+                if (module === 'auth') {
+                    // Auth module has special structure: no controller, no mappers, but has guards and model
+                    actions.push(
+                        {
+                            type: 'add',
+                            path: `packages/integrations/{{kebabCase name}}/src/modules/{{kebabCase module}}/index.ts`,
+                            templateFile: 'templates/integration/auth-module-index.hbs',
+                            data: { module },
+                        },
+                        {
+                            type: 'add',
+                            path: `packages/integrations/{{kebabCase name}}/src/modules/{{kebabCase module}}/auth.service.ts`,
+                            templateFile: 'templates/integration/auth-service.hbs',
+                            data: { module },
+                        },
+                        {
+                            type: 'add',
+                            path: `packages/integrations/{{kebabCase name}}/src/modules/{{kebabCase module}}/auth.guard.ts`,
+                            templateFile: 'templates/integration/auth-guard.hbs',
+                            data: { module },
+                        },
+                        {
+                            type: 'add',
+                            path: `packages/integrations/{{kebabCase name}}/src/modules/{{kebabCase module}}/auth.model.ts`,
+                            templateFile: 'templates/integration/auth-model.hbs',
+                            data: { module },
+                        },
+                        {
+                            type: 'modify',
+                            path: 'packages/integrations/{{kebabCase name}}/src/modules/index.ts',
+                            pattern: /(\/\/ MODULE_EXPORTS)/g,
+                            templateFile: 'templates/integration/modules-index.hbs',
+                            data: { module },
+                        },
+                        {
+                            type: 'modify',
+                            path: 'packages/integrations/{{kebabCase name}}/src/integration.ts',
+                            pattern: /(\/\/ MODULE_IMPORTS)/g,
+                            template:
+                                "import { Service as {{ pascalCase module }}Service } from './modules/{{kebabCase module}}';\n// MODULE_IMPORTS",
+                            data: { module },
+                        },
+                        {
+                            type: 'modify',
+                            path: 'packages/integrations/{{kebabCase name}}/src/integration.ts',
+                            pattern: /(\/\/ MODULE_EXPORTS)/g,
+                            template:
+                                '    {{ camelCase module }}: {\n' +
+                                '        service: {{ pascalCase module }}Service,\n' +
+                                '    },\n// MODULE_EXPORTS',
+                            data: { module },
+                        },
+                    );
+                } else {
+                    // Standard module structure
+                    actions.push(
+                        {
+                            type: 'add',
+                            path: `packages/integrations/{{kebabCase name}}/src/modules/{{kebabCase module}}/index.ts`,
+                            templateFile: 'templates/integration/module-index.hbs',
+                            data: { module },
+                        },
+                        {
+                            type: 'add',
+                            path: `packages/integrations/{{kebabCase name}}/src/modules/{{kebabCase module}}/{{kebabCase module}}.service.ts`,
+                            templateFile: 'templates/integration/service.hbs',
+                            data: { module },
+                        },
+                        {
+                            type: 'add',
+                            path: `packages/integrations/{{kebabCase name}}/src/modules/{{kebabCase module}}/{{kebabCase module}}.controller.ts`,
+                            templateFile: 'templates/integration/controller.hbs',
+                            data: { module },
+                        },
+                        {
+                            type: 'add',
+                            path: `packages/integrations/{{kebabCase name}}/src/modules/{{kebabCase module}}/mappers/index.ts`,
+                            templateFile: 'templates/integration/mappers-index.hbs',
+                            data: { module },
+                        },
+                        {
+                            type: 'modify',
+                            path: 'packages/integrations/{{kebabCase name}}/src/modules/index.ts',
+                            pattern: /(\/\/ MODULE_EXPORTS)/g,
+                            templateFile: 'templates/integration/modules-index.hbs',
+                            data: { module },
+                        },
+                        {
+                            type: 'modify',
+                            path: 'packages/integrations/{{kebabCase name}}/src/integration.ts',
+                            pattern: /(\/\/ MODULE_IMPORTS)/g,
+                            template:
+                                "import { Service as {{ pascalCase module }}Service } from './modules/{{kebabCase module}}';\n// MODULE_IMPORTS",
+                            data: { module },
+                        },
+                        {
+                            type: 'modify',
+                            path: 'packages/integrations/{{kebabCase name}}/src/integration.ts',
+                            pattern: /(\/\/ MODULE_EXPORTS)/g,
+                            template:
+                                '    {{ camelCase module }}: {\n' +
+                                '        service: {{ pascalCase module }}Service,\n' +
+                                '    },\n// MODULE_EXPORTS',
+                            data: { module },
+                        },
+                    );
+                }
             });
 
             return actions;

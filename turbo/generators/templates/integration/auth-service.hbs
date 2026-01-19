@@ -1,0 +1,59 @@
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+
+import { Auth } from '@o2s/framework/modules';
+
+import { Jwt } from './auth.model';
+
+@Injectable()
+export class AuthService extends Auth.Service {
+    constructor() {
+        super();
+    }
+
+    async verifyToken(token: string): Promise<Jwt> {
+        // TODO: Implement token verification logic for your IAM system
+        // This should verify the token signature, expiration, and standard OIDC claims
+        throw new UnauthorizedException('Token verification not implemented');
+    }
+
+    async isTokenRevoked(_jti: string): Promise<boolean> {
+        // TODO: Implement token revocation checking if supported by your IAM system
+        // Return true if token is revoked, false otherwise
+        return false;
+    }
+
+    getCustomerId(token: string): string | undefined {
+        // TODO: Extract customer/organization ID from token
+        // This should return the ID of the organization/customer the user is currently accessing
+        return undefined;
+    }
+
+    getUserRoles(token?: string | Jwt): Auth.Model.Role[] {
+        // TODO: Extract user roles from token
+        // Roles should be organization/customer-level roles (e.g., ['ORG_USER', 'ORG_ADMIN'])
+        // If roles are not in the token, you may need to fetch them asynchronously from your IAM system
+        if (!token) {
+            return [];
+        }
+        return [];
+    }
+
+    getPermissions(token: string | Auth.Model.Jwt): Auth.Model.Permissions {
+        // TODO: Extract permissions from token
+        // Permissions should be organized by resource: { resource: { actions: ['view', 'edit'] } }
+        // If permissions are not in the token, you may need to fetch them asynchronously from your IAM system
+        return {};
+    }
+
+    hasPermission(token: string | Auth.Model.Jwt, resource: string, action: string): boolean {
+        // TODO: Check if user has specific permission for resource and action
+        const permissions = this.getPermissions(token);
+        const resourcePermissions = permissions[resource];
+
+        if (!resourcePermissions) {
+            return false;
+        }
+
+        return resourcePermissions.actions.includes(action);
+    }
+}

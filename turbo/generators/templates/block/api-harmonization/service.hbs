@@ -3,6 +3,8 @@ import { Models } from '@o2s/utils.api-harmonization';
 import { Injectable } from '@nestjs/common';
 import { Observable, forkJoin, map } from 'rxjs';
 
+import { Auth } from '@o2s/framework/modules';
+
 import { map{{ pascalCase name }} } from './{{ kebabCase name }}.mapper';
 import { {{ pascalCase name }}Block } from './{{ kebabCase name }}.model';
 import { Get{{ pascalCase name }}BlockQuery } from './{{ kebabCase name }}.request';
@@ -11,6 +13,8 @@ import { Get{{ pascalCase name }}BlockQuery } from './{{ kebabCase name }}.reque
 export class {{ pascalCase name }}Service {
     constructor(
         private readonly cmsService: CMS.Service,
+        // Optional: Inject Auth.Service when you need to add permission flags to the response
+        // private readonly authService: Auth.Service,
     ) {}
 
     get{{ pascalCase name }}Block(
@@ -19,6 +23,29 @@ export class {{ pascalCase name }}Service {
     ): Observable<{{ pascalCase name }}Block> {
         const cms = this.cmsService.get{{ pascalCase name }}Block({ ...query, locale: headers['x-locale'] });
 
-        return forkJoin([cms]).pipe(map(([cms]) => map{{ pascalCase name }}(cms, headers['x-locale'])));
+        return forkJoin([cms]).pipe(
+            map(([cms]) => {
+                const result = map{{ pascalCase name }}(cms, headers['x-locale']);
+
+                // Optional: Add permission flags to the response
+                // if (headers.authorization) {
+                //     const permissions = this.authService.canPerformActions(headers.authorization, 'resource-name', [
+                //         'view',
+                //         'edit',
+                //     ]);
+                //     result.permissions = {
+                //         view: permissions.view ?? false,
+                //         edit: permissions.edit ?? false,
+                //     };
+                // } else {
+                //     result.permissions = {
+                //         view: true,
+                //         edit: false,
+                //     };
+                // }
+
+                return result;
+            }),
+        );
     }
 }
