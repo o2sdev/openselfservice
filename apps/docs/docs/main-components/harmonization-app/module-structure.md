@@ -44,7 +44,6 @@ They usually represent either:
 - larger pieces of the frontend app, like whole pages (with titles, SEO metadata and used template),
 - more utility-like entities that do not have to be rendered on the frontend at all, like routing information (e.g. for sitemaps) or some general configuration data (e.g. available locales).
 
-
 ### Module
 
 [A module](https://docs.nestjs.com/modules) is used to configure the dependencies of that module, including the framework modules that provide the data:

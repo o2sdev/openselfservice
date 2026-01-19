@@ -7,6 +7,7 @@ sidebar_position: 500
 Here we provide an overview of how O2S is organized within a **monorepo** setup. It explains how different packages and applications interact, how Turborepo is used for managing dependencies, and how external integrations fit into the system.
 
 This section covers:
+
 - **Monorepo architecture** and how O2S leverages Turborepo.
 - **Core packages** including the UI library and API modules.
 - **Applications** such as the Next.js frontend and API Harmonization server.
@@ -27,13 +28,15 @@ Check the [official documentation](https://turbo.build/repo/docs/crafting-your-r
 O2S leverages Turborepo by simplifying the process of running, building and linting every sub-package - this can easily be done by running scripts form the root-level `package.json`.
 
 :::tip
+
 - You can find out more about running tasks in the [official docs](https://turbo.build/repo/docs/crafting-your-repository/running-tasks)
 - To lean how O2S can be run, check the [Running the project chapter](./running-locally.md)
-:::
+  :::
 
 ### Packages
 
 The packages can be either:
+
 - internal ones (used only within the monorepo),
 - publishable, for cases when you want them to be accessible to other projects.
 
@@ -49,8 +52,8 @@ When using the `create-o2s-app` there are two apps created:
 
 - `apps/api-harmonization` - the API Harmonization server built on Nest.js, responsible for aggregations of data from different integrations,
 - `apps/frontend` - the Next.js frontend app, responsible for rendering the views in the browser
-  - dependent on `packages/ui` for base UI components,
-  - dependent on `apps/api-harmonization` for harmonized data model for components that aggregate data from integrations.
+    - dependent on `packages/ui` for base UI components,
+    - dependent on `apps/api-harmonization` for harmonized data model for components that aggregate data from integrations.
 
 :::tip
 You can learn more about each of these packages by checking the [Main components chapter](../main-components/overview.md).
@@ -67,7 +70,6 @@ Defines the base modules that can be plugged into the `api-harmonization` applic
 :::tip
 You can learn more about SDK in the [dedicated chapter](../guides/sdk.md).
 :::
-
 
 ### @o2s/integrations.\*
 

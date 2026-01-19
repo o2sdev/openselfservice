@@ -23,7 +23,7 @@ A model for the page is the most important one, as it defines:
 
 The roles field allows content editors to configure which user roles can access the page. This gives content editors flexibility to control page access without requiring code changes. When a page is requested, the API Harmonization server checks if the user has at least one of the required roles. If no roles are specified, the page is publicly accessible.
 
-Pages can also use permission-based access control via decorators in addition to CMS-configured roles. For more details on how roles and permissions work together, see the [authentication documentation](../../main-components/harmonization-app/authentication.md).
+Pages can also use permission-based access control via decorators in addition to CMS-configured roles. For more details on how roles and permissions work together, see the [authentication documentation](../../../main-components/harmonization-app/authentication.md).
 
 ### Resolving pages
 

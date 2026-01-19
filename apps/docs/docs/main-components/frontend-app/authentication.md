@@ -35,32 +35,32 @@ The main authentication configuration is defined in `auth.ts`. The callbacks sho
 
 ```typescript title="example authentication configuration (integration-specific)"
 export const nextAuthResult = NextAuth({
-  adapter: PrismaAdapter(prisma),
-  providers: providers,  // Configured by your IAM integration
-  session: {
-    strategy: 'jwt',
-    maxAge: 30 * 24 * 60 * 60, // 30 days
-  },
-  callbacks: {
-    jwt: async (params) => {
-      // Integration-specific: handles token from your IAM system
-      return jwtCallback(params);
+    adapter: PrismaAdapter(prisma),
+    providers: providers, // Configured by your IAM integration
+    session: {
+        strategy: 'jwt',
+        maxAge: 30 * 24 * 60 * 60, // 30 days
     },
-    session: async ({ session, token }) => {
-      // Integration-specific: extracts data from IAM token
-      if (session.user) {
-        session.user.role = token?.role;
-        session.user.id = token?.id as string;
-        session.user.customer = token?.customer;
-        session.accessToken = token.accessToken;  // Token from IAM system
-      }
-      return session;
+    callbacks: {
+        jwt: async (params) => {
+            // Integration-specific: handles token from your IAM system
+            return jwtCallback(params);
+        },
+        session: async ({ session, token }) => {
+            // Integration-specific: extracts data from IAM token
+            if (session.user) {
+                session.user.role = token?.role;
+                session.user.id = token?.id as string;
+                session.user.customer = token?.customer;
+                session.accessToken = token.accessToken; // Token from IAM system
+            }
+            return session;
+        },
     },
-  },
-  pages: {
-    signIn: '/login',
-    error: '/error',
-  }
+    pages: {
+        signIn: '/login',
+        error: '/error',
+    },
 });
 ```
 
@@ -72,30 +72,30 @@ Providers are configured in `auth.providers.ts`. The example below shows Credent
 
 ```typescript title="example provider configuration"
 export const providers: Provider[] = [
-  Credentials({
-    credentials: {
-      username: { label: 'Username', placeholder: 'admin', type: 'text' },
-      password: { label: 'Password', placeholder: 'admin', type: 'password' },
-    },
-    authorize: async (credentials) => {
-      // Validate and authenticate user
-    }
-  }),
-  GitHub({
-    clientId: process.env.GITHUB_CLIENT_ID,
-    clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    profile(profile) {
-      return {
-        id: profile.id.toString(),
-        email: profile.email,
-        role: 'selfservice_user',
-        name: profile.name ?? profile.login,
-      };
-    },
-  }),
-  // You can add other providers like Google, Facebook, etc.
-  // Google({ ... }),
-  // Facebook({ ... }),
+    Credentials({
+        credentials: {
+            username: { label: 'Username', placeholder: 'admin', type: 'text' },
+            password: { label: 'Password', placeholder: 'admin', type: 'password' },
+        },
+        authorize: async (credentials) => {
+            // Validate and authenticate user
+        },
+    }),
+    GitHub({
+        clientId: process.env.GITHUB_CLIENT_ID,
+        clientSecret: process.env.GITHUB_CLIENT_SECRET,
+        profile(profile) {
+            return {
+                id: profile.id.toString(),
+                email: profile.email,
+                role: 'selfservice_user',
+                name: profile.name ?? profile.login,
+            };
+        },
+    }),
+    // You can add other providers like Google, Facebook, etc.
+    // Google({ ... }),
+    // Facebook({ ... }),
 ];
 ```
 
@@ -115,31 +115,31 @@ Users can authenticate with email and password. Passwords are hashed using bcryp
 
 ```typescript
 authorize: async (credentials) => {
-  try {
-    const { username, password } = await signInSchema.parseAsync(credentials);
+    try {
+        const { username, password } = await signInSchema.parseAsync(credentials);
 
-    const user = await prisma.user.findUnique({
-      where: { email: username },
-    });
-    if (!user || !user.password) {
-      throw new Error('Invalid credentials');
+        const user = await prisma.user.findUnique({
+            where: { email: username },
+        });
+        if (!user || !user.password) {
+            throw new Error('Invalid credentials');
+        }
+
+        const isValidPassword = await compare(password, user.password);
+
+        if (!isValidPassword) {
+            throw new Error('Invalid credentials');
+        }
+
+        return user as User;
+    } catch (error) {
+        if (error instanceof ZodError) {
+            throw new Error('Validation error');
+        } else {
+            throw new Error('Authentication error');
+        }
     }
-
-    const isValidPassword = await compare(password, user.password);
-
-    if (!isValidPassword) {
-      throw new Error('Invalid credentials');
-    }
-
-    return user as User;
-  } catch (error) {
-    if (error instanceof ZodError) {
-      throw new Error('Validation error');
-    } else {
-      throw new Error('Authentication error');
-    }
-  }
-}
+};
 ```
 
 ### OAuth Authentication
@@ -148,17 +148,17 @@ The following example shows GitHub OAuth authentication, but you can use any OAu
 
 ```typescript
 GitHub({
-  clientId: process.env.GITHUB_CLIENT_ID,
-  clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  profile(profile) {
-    return {
-      id: profile.id.toString(),
-      email: profile.email,
-      role: 'selfservice_user',
-      name: profile.name ?? profile.login,
-    };
-  },
-})
+    clientId: process.env.GITHUB_CLIENT_ID,
+    clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    profile(profile) {
+        return {
+            id: profile.id.toString(),
+            email: profile.email,
+            role: 'selfservice_user',
+            name: profile.name ?? profile.login,
+        };
+    },
+});
 ```
 
 ## API Harmonization server integration
@@ -167,9 +167,9 @@ The frontend communicates with the API Harmonization server using JWT tokens. Wh
 
 ```typescript
 const data = await sdk.blocks.getPaymentsSummary(
-  { id },
-  { 'x-locale': locale },
-  accessToken  // Bearer token sent in Authorization header
+    { id },
+    { 'x-locale': locale },
+    accessToken, // Bearer token sent in Authorization header
 );
 ```
 
@@ -185,14 +185,14 @@ The following example shows how the mocked integration handles tokens in the `au
 
 ```typescript title="example session callback (integration-specific)"
 session: async ({ session, token }) => {
-  if (session.user) {
-    session.user.role = token?.role;
-    session.user.id = token?.id as string;
-    session.user.customer = token?.customer;
-    session.accessToken = token.accessToken;  // Token from IAM system
-  }
-  return session;
-}
+    if (session.user) {
+        session.user.role = token?.role;
+        session.user.id = token?.id as string;
+        session.user.customer = token?.customer;
+        session.accessToken = token.accessToken; // Token from IAM system
+    }
+    return session;
+};
 ```
 
 The JWT token structure depends on what your IAM system provides. Typically, it includes:
@@ -287,6 +287,7 @@ async function updateCustomerToken(
 ```
 
 This allows users to:
+
 - Have a default customer/organization context
 - Switch between multiple customer accounts they have access to
 - Have different roles and permissions for different organizations (e.g., admin in one, regular user in another)
@@ -313,13 +314,13 @@ Use the `auth()` function to protect routes:
 import { auth } from '@/auth';
 
 export default async function ProtectedPage() {
-  const session = await auth();
+    const session = await auth();
 
-  if (!session) {
-    redirect('/login');
-  }
+    if (!session) {
+        redirect('/login');
+    }
 
-  // Render protected content
+    // Render protected content
 }
 ```
 
@@ -329,7 +330,7 @@ Check user roles to control access to features:
 
 ```typescript
 if (session?.user?.role === 'selfservice_admin') {
-  // Show admin features
+    // Show admin features
 }
 ```
 
@@ -393,6 +394,7 @@ export const PaymentsSummaryPure: React.FC<PaymentsSummaryPureProps> = ({ permis
 ```
 
 This pattern allows you to:
+
 - Hide entire blocks if the user doesn't have view permission
 - Show or hide specific features (like buttons or charts) based on action permissions
 - Provide a better user experience by only showing options the user can actually use
@@ -406,7 +408,7 @@ To implement customer switching:
 ```typescript
 // Update session with new customer context
 await update({
-  customerId: selectedCustomerId,
+    customerId: selectedCustomerId,
 });
 ```
 

@@ -51,7 +51,6 @@ For example, the FAQ component (that uses Strapi’s component type) consists of
 
 ![content-model-faq.png](../../../../blog/articles/building-composable-frontends-with-strapi-and-nextjs/content-model-faq.png)
 
-
 While the FAQ component is quite simple and on the frontend renders only the static content from the CMS, it doesn’t mean that only such components can be defined within Strapi.
 Another component example is the Invoice List, which on the frontend renders a table with the user’s invoices:
 
@@ -61,9 +60,9 @@ This one is a bit more complex - aside from the title, it also handles:
 
 - fields that use a generic component that allowed us to map fields in the API data model to more user-friendly labels, e.g.:
 
-  ![content-model-field-mapping.png](../../../../blog/articles/building-composable-frontends-with-strapi-and-nextjs/content-model-field-mapping.png)
+    ![content-model-field-mapping.png](../../../../blog/articles/building-composable-frontends-with-strapi-and-nextjs/content-model-field-mapping.png)
 
-  where the keys exactly match the union types in the Invoice model:
+    where the keys exactly match the union types in the Invoice model:
 
     ```typescript
     export class Invoice {
@@ -76,4 +75,4 @@ This one is a bit more complex - aside from the title, it also handles:
 
 - a table that defines which columns should be displayed on the frontend for the invoice table:
 
-  ![content-model-table.png](../../../../blog/articles/building-composable-frontends-with-strapi-and-nextjs/content-model-table.png)
+    ![content-model-table.png](../../../../blog/articles/building-composable-frontends-with-strapi-and-nextjs/content-model-table.png)

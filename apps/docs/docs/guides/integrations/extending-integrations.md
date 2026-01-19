@@ -104,6 +104,7 @@ export class NotificationsService extends MockedIntegration.Notifications.Servic
 Even though the `getLatestCriticalNotification` is available to use in other modules (like in a block that aggregates data), you can still make it available directly via en endpoint.
 
 In order to do that, you need to create a new controller inside your module:
+
 ```typescript title="notifications.controller.ts"
 import { Notifications } from '@o2s/framework/modules';
 import { NotificationsService } from './notifications.service';
@@ -126,6 +127,7 @@ export class NotificationsController extends Notifications.Controller {
 You can follow the instructions from the [Switching integrations chapter](./switching-integrations.md) to replace the package used for the notifications with `@o2s/integrations.extended-notifications`. This then can allow you to
 
 - use the new field in mappers that use notifications:
+
 ```typescript title="packages/blocks/notification-list/src/api-harmonization/notification-list.mapper.ts"
 export const mapNotification = (notification: Notifications.Model.Notification): Notification => {
     return {
@@ -135,7 +137,9 @@ export const mapNotification = (notification: Notifications.Model.Notification):
     };
 };
 ```
+
 - use the new method in other services:
+
 ```typescript title="packages/blocks/notification-details/src/api-harmonization/notification-details.service.ts"
     getNotificationDetailsBlock(...): Observable<NotificationDetailsBlock> {
     const cms = this.cmsService.getNotificationDetailsBlock({ ...query, locale: headers['x-locale'] });

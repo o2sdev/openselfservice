@@ -15,6 +15,7 @@ The authentication system is built around JWT tokens. Importantly, roles and per
 Both pages and blocks can use role-based access control, permission-based access control, or a combination of both, depending on your security requirements.
 
 The system is designed to work with any IAM provider. Roles and permissions can be retrieved in two ways:
+
 - **From the JWT token** - If your IAM system includes roles and permissions in the access token, they can be extracted directly
 - **Asynchronously from another API** - If roles and permissions are not present in the access token, they can be fetched asynchronously from your IAM system or another API endpoint
 
@@ -83,7 +84,10 @@ Pages have a `roles` field that can be set in the CMS. When a page is requested,
 
 ```typescript title="page role checking in page.service.ts"
 const userRoles = this.authService.getUserRoles(headers['authorization']);
-Auth.Service.requireRoles(page.roles, userRoles.map((r) => r));
+Auth.Service.requireRoles(
+    page.roles,
+    userRoles.map((r) => r),
+);
 ```
 
 The roles checked are those associated with the user's current organization/customer context. If the user doesn't have the required role in their current organization, an `UnauthorizedException` is thrown. If no roles are specified on the page, it's publicly accessible.
@@ -119,6 +123,7 @@ Permissions follow a `resource:action` pattern:
 - Action: The operation being performed (e.g., `view`, `create`, `edit`, `delete`, `pay`)
 
 Common actions are defined in `Auth.Model.CommonActions`:
+
 - `VIEW` - Read access
 - `CREATE` - Create new resources
 - `EDIT` - Modify existing resources
@@ -180,7 +185,7 @@ providers: [
             new Auth.Guards.PermissionsGuard(reflector, logger, authService),
         inject: [Reflector, LoggerService, AuthModule.Service],
     },
-]
+];
 ```
 
 ### How guards work
@@ -334,11 +339,7 @@ The service populates these flags using `canPerformActions()`:
 
 ```typescript title="populating permission flags"
 if (headers.authorization) {
-    const permissions = this.authService.canPerformActions(
-        headers.authorization,
-        'invoices',
-        ['view', 'pay']
-    );
+    const permissions = this.authService.canPerformActions(headers.authorization, 'invoices', ['view', 'pay']);
     result.permissions = {
         view: permissions.view ?? false,
         pay: permissions.pay ?? false,
@@ -353,11 +354,13 @@ The frontend can use these permission flags to conditionally render blocks and f
 Since roles and permissions are kept at the organization/customer level rather than per user, the same user can have different access levels in different organizations. This enables more granular access control and supports complex multi-tenant scenarios.
 
 For example:
+
 - A user might be an `ORG_ADMIN` in Organization A, giving them full access to invoices, orders, and settings
 - The same user might only be an `ORG_USER` in Organization B, with limited permissions like `invoices:view` but not `invoices:pay`
 - When the user switches between organizations, their roles and permissions change automatically based on their relationship with each organization
 
 This approach allows you to:
+
 - Support users who belong to multiple organizations with different access levels
 - Implement fine-grained access control that varies by organization
 - Ensure users only see and can only perform actions appropriate to their role in the current organization
@@ -383,6 +386,7 @@ For more details on multi-organization access control and when to use roles vs p
 Each integration must implement the abstract `AuthService` class. The mocked integration provides a reference implementation, but remember it's for quick-start purposes only and not production-grade.
 
 For production, implement an integration that:
+
 - Verifies tokens according to your IAM system's requirements
 - Retrieves roles and permissions - either extracts them from tokens if your IAM includes them, or fetches them asynchronously from another API if not
 - Handles token revocation if your IAM supports it

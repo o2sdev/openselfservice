@@ -26,7 +26,7 @@ The Zendesk integration provides:
 The following table shows which methods from the base TicketService are currently supported by the Zendesk integration:
 
 | Method        | Description                                       | Supported   |
-| ------------- | ------------------------------------------------- |-------------|
+| ------------- | ------------------------------------------------- | ----------- |
 | getTicket     | Retrieve a single ticket by ID                    | ✓           |
 | getTicketList | Retrieve a list of tickets with filtering options | ✓           |
 | createTicket  | Create a new ticket                               | ✗ (planned) |
@@ -101,26 +101,26 @@ The integration maps Zendesk ticket data to the standard ticket model with the f
 
 ### Field Mapping
 
-| Zendesk Field        | Normalized Field | Notes                                    |
-| -------------------- |------------------|------------------------------------------|
-| id                   | id               | Converted to string                      |
-| created_at           | createdAt        | ISO date string                          |
-| updated_at           | updatedAt        | ISO date string                          |
-| priority             | type             | Converted to uppercase (default: NORMAL) |
-| status               | status           | Mapped according to status mapping       |
-| subject              | properties       | Added as property with id 'subject'      |
-| description          | properties       | Added as property with id 'description'  |
+| Zendesk Field        | Normalized Field | Notes                                                                                    |
+| -------------------- | ---------------- | ---------------------------------------------------------------------------------------- |
+| id                   | id               | Converted to string                                                                      |
+| created_at           | createdAt        | ISO date string                                                                          |
+| updated_at           | updatedAt        | ISO date string                                                                          |
+| priority             | type             | Converted to uppercase (default: NORMAL)                                                 |
+| status               | status           | Mapped according to status mapping                                                       |
+| subject              | properties       | Added as property with id 'subject'                                                      |
+| description          | properties       | Added as property with id 'description'                                                  |
 | custom_fields        | properties       | Each field added with id pattern 'custom_field_X' where X is the Zendesk custom field ID |
-| comments             | comments         | Mapped with author information           |
-| comments.attachments | attachments      | Extracted from comments                  |
+| comments             | comments         | Mapped with author information                                                           |
+| comments.attachments | attachments      | Extracted from comments                                                                  |
 
 ### Status Mapping
 
-| Zendesk Status | Normalized Status | Notes                |
-| -------------- | ----------------- |----------------------|
-| closed, solved | CLOSED            | Ticket is resolved   |
-| pending, hold  | IN_PROGRESS       | Ticket is being worked on |
-| new, open      | OPEN              | Default status       |
+| Zendesk Status | Normalized Status | Notes                         |
+| -------------- | ----------------- | ----------------------------- |
+| closed, solved | CLOSED            | Ticket is resolved            |
+| pending, hold  | IN_PROGRESS       | Ticket is being worked on     |
+| new, open      | OPEN              | Default status                |
 | (other)        | OPEN              | Fallback for unknown statuses |
 
 ### Topic Handling
@@ -157,10 +157,10 @@ When processing comments and attachments:
 Attachments are extracted from ticket comments (not from the main ticket object):
 
 - Each attachment includes:
-  - File name, URL, and size
-  - Author information from the parent comment
-  - Creation date from the parent comment
-  - ARIA label for accessibility
+    - File name, URL, and size
+    - Author information from the parent comment
+    - Creation date from the parent comment
+    - ARIA label for accessibility
 
 ## Query Building and Filtering
 
@@ -168,21 +168,22 @@ The integration converts framework filter parameters to Zendesk Search API queri
 
 ### Parameter Mapping
 
-| Framework Parameter | Zendesk Search Query | Notes                                    |
-|---------------------|----------------------|------------------------------------------|
-| status              | `status:{value}`     | Converted to lowercase                   |
-| type                | `priority:{value}`   | Note: maps to priority, not type        |
-| topic               | `tag:{value}`        | Maps to Zendesk tags                     |
-| dateFrom            | `created>={iso_date}` | Converted to ISO format                  |
-| dateTo              | `created<={iso_date}` | Converted to ISO format                  |
-| offset              | `page`               | Calculated as `Math.floor(offset / limit) + 1` |
-| limit               | `per_page`           | Default: 10                              |
+| Framework Parameter | Zendesk Search Query  | Notes                                          |
+| ------------------- | --------------------- | ---------------------------------------------- |
+| status              | `status:{value}`      | Converted to lowercase                         |
+| type                | `priority:{value}`    | Note: maps to priority, not type               |
+| topic               | `tag:{value}`         | Maps to Zendesk tags                           |
+| dateFrom            | `created>={iso_date}` | Converted to ISO format                        |
+| dateTo              | `created<={iso_date}` | Converted to ISO format                        |
+| offset              | `page`                | Calculated as `Math.floor(offset / limit) + 1` |
+| limit               | `per_page`            | Default: 10                                    |
 
 ### Base Query
 
 All queries start with: `type:ticket requester:{user_email}`
 
 This ensures that:
+
 - Only tickets are returned (not other Zendesk objects)
 - Users can only see tickets where they are the requester
 
@@ -211,4 +212,3 @@ The integration implements the following security measures:
 - **Requester matching**: Users can only access tickets where their email matches the requester email
 - **No cross-user access**: Tickets are filtered at the API level using Zendesk Search API
 - **Token-based authentication**: Uses Base64-encoded API token for Zendesk API access
-

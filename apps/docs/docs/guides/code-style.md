@@ -28,6 +28,7 @@ module.exports = {
 For formatting, [prettier](https://prettier.io/) is used to ensure code consistency. It uses a base config defined in `packages/configs/prettier-config/base.mjs` which is then extended by configs for each application or package.
 
 It's worth to mention that [Prettier plugin sort imports](https://github.com/trivago/prettier-plugin-sort-imports) is used to make the order of imports both more consistent, and also more readable by sorting and grouping them together. For example, for the `ui` package the imports are sorted using the following rules:
+
 ```js
 importOrder: [
     '@o2s/ui/lib',

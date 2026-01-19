@@ -102,6 +102,7 @@ export class TicketsSummaryController {
 ```
 
 When to use roles vs permissions:
+
 - Roles: Often configured via CMS for pages, simpler access control. Use when you need broad access decisions.
 - Permissions: Protect specific resources, can be extracted from organization roles (IAM-dependent). Use when you need fine-grained control over what users can do with specific resources.
 

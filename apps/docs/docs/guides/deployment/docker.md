@@ -34,19 +34,19 @@ This will:
 The `docker-compose.yml` includes sane defaults. Adjust as needed (especially external API keys).
 
 - Frontend (Next.js):
-  - `NEXT_PUBLIC_BASE_URL` (e.g. `http://localhost:3000`)
-  - `NEXT_PUBLIC_API_URL` (public API URL, e.g. `http://localhost:3001/api`)
-  - `NEXT_PUBLIC_API_URL_INTERNAL` (internal container URL, e.g. `http://api-harmonization:3001/api`)
-  - `NEXT_PUBLIC_DEFAULT_LOCALE`, `NEXT_PUBLIC_SUPPORTED_LOCALES`
-  - Optional logging: `NEXT_PUBLIC_LOG_LEVEL`, `NEXT_PUBLIC_LOG_FORMAT`, `NEXT_PUBLIC_LOG_COLORS_ENABLED`
-  - Auth (optional): `AUTH_SECRET`, `AUTH_TRUST_HOST`, `AUTH_GITHUB_ID`, `AUTH_GITHUB_SECRET`, `AUTH_GOOGLE_ID`, `AUTH_GOOGLE_SECRET`, `AUTH_DATABASE_URL`, `AUTH_DEFAULT_USER_ROLE`
+    - `NEXT_PUBLIC_BASE_URL` (e.g. `http://localhost:3000`)
+    - `NEXT_PUBLIC_API_URL` (public API URL, e.g. `http://localhost:3001/api`)
+    - `NEXT_PUBLIC_API_URL_INTERNAL` (internal container URL, e.g. `http://api-harmonization:3001/api`)
+    - `NEXT_PUBLIC_DEFAULT_LOCALE`, `NEXT_PUBLIC_SUPPORTED_LOCALES`
+    - Optional logging: `NEXT_PUBLIC_LOG_LEVEL`, `NEXT_PUBLIC_LOG_FORMAT`, `NEXT_PUBLIC_LOG_COLORS_ENABLED`
+    - Auth (optional): `AUTH_SECRET`, `AUTH_TRUST_HOST`, `AUTH_GITHUB_ID`, `AUTH_GITHUB_SECRET`, `AUTH_GOOGLE_ID`, `AUTH_GOOGLE_SECRET`, `AUTH_DATABASE_URL`, `AUTH_DEFAULT_USER_ROLE`
 
 - API (NestJS):
-  - `PORT` (e.g. `3001`)
-  - `API_PREFIX` (e.g. `api`)
-  - `FRONT_BASE_URLS` (comma-separated, e.g. `http://localhost:3000`)
-  - Optional logging: `LOG_LEVEL`, `LOG_FORMAT`, `LOG_COLORS_ENABLED`
-  - Integrations: see `/docs/integrations` for provider-specific variables (e.g. `CMS_STRAPI_BASE_URL`, `ALGOLIA_*`, `MEDUSAJS_*`, `CACHE_*`, etc.)
+    - `PORT` (e.g. `3001`)
+    - `API_PREFIX` (e.g. `api`)
+    - `FRONT_BASE_URLS` (comma-separated, e.g. `http://localhost:3000`)
+    - Optional logging: `LOG_LEVEL`, `LOG_FORMAT`, `LOG_COLORS_ENABLED`
+    - Integrations: see `/docs/integrations` for provider-specific variables (e.g. `CMS_STRAPI_BASE_URL`, `ALGOLIA_*`, `MEDUSAJS_*`, `CACHE_*`, etc.)
 
 ## Useful commands
 
@@ -88,5 +88,3 @@ See the repository for maintained examples:
 
 - `apps/frontend/Dockerfile`
 - `apps/api-harmonization/Dockerfile`
-
-

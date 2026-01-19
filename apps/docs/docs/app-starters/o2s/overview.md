@@ -15,6 +15,7 @@ npx create-o2s-app@latest my-customer-portal
 ```
 
 This command will:
+
 - Download the latest O2S Customer Portal starter
 - Install all dependencies
 - Set up the project structure with mocked integrations
@@ -38,5 +39,3 @@ This command will:
 After creating your project, follow the [Getting Started](../../getting-started/overview.md) guide to run and customize your application.
 
 For detailed customization options, see the [Customization](../../guides/customization.md) section.
-
-
