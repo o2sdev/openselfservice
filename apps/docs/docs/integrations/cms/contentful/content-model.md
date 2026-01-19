@@ -19,7 +19,11 @@ A model for the page is the most important one, as it defines:
 - the slug for the page, which is matched against the URL in the browser, and which is a localized text field (which means that the page can have different slugs in each language),
 - the template for the page that stores the components' definitions for that page, and which is a reference to a Template content type,
 - SEO metadata for the page,
-- optional permissions field for access control.
+- optional roles field for access control.
+
+The roles field allows content editors to configure which user roles can access the page. This gives content editors flexibility to control page access without requiring code changes. When a page is requested, the API Harmonization server checks if the user has at least one of the required roles. If no roles are specified, the page is publicly accessible.
+
+Pages can also use permission-based access control via decorators in addition to CMS-configured roles. For more details on how roles and permissions work together, see the [authentication documentation](../../main-components/harmonization-app/authentication.md).
 
 ### Resolving pages
 

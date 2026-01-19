@@ -14,4 +14,5 @@ without affecting the UI layer. The server is built using **NestJS** and provide
 ## Learn more
 
 - **[Module structure](./module-structure.md)** – how we define different parts of the Harmonization server and how they are organized
+- **[Authentication](./authentication.md)** – role and permission-based access control for pages and blocks
 - **[Normalized data model](./normalized-data-model)** – documentation of entities in the normalized data model, including types and available methods for interacting with it

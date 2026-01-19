@@ -135,7 +135,9 @@ Full TypeScript type safety is provided through generated types from the GraphQL
 
 ### Permissions/Roles {#permissionsroles}
 
-Role-based content access control is fully supported in the Strapi integration. The `permissions` field on Pages, Articles, and Navigation Items allows content editors to restrict access based on user roles.
+Role-based content access control is fully supported in the Strapi integration. The `roles` field on Pages, Articles, and Navigation Items allows content editors to restrict access based on user roles.
+
+This gives content editors flexibility to control page access without requiring code changes. When a page is requested, the API Harmonization server checks if the user has at least one of the required roles. If the user doesn't have the required role, access is denied.
 
 Supported roles:
 - `prospect` - Maps to `PROSPECT` role
@@ -143,6 +145,8 @@ Supported roles:
 - `admin` - Maps to `ORG_ADMIN` role
 
 The roles are defined in Strapi via `ComponentSeoUserRoles` and mapped to the framework's authentication constants, enabling seamless integration with the frontend's access control system.
+
+Pages can also use permission-based access control via decorators in addition to CMS-configured roles. For more details on how roles and permissions work together, see the [authentication documentation](../../main-components/harmonization-app/authentication.md).
 
 ### Survey Forms {#survey-forms}
 
