@@ -47,15 +47,10 @@ export function DesktopNavigation({
             return item.items
                 .filter((item) => item.__typename === 'NavigationItem')
                 .some((item) => {
-                    if (pathname !== '/') {
-                        return item.url !== '/' && item.url && pathname.startsWith(item.url);
-                    }
-
-                    return item.url && pathname.startsWith(item.url);
+                    return item.url && pathname === item.url;
                 });
         }
-
-        return item.url && pathname.includes(item.url);
+        return false;
     });
 
     const navigationItemClass = cn(navigationMenuTriggerStyle());
