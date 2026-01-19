@@ -6,6 +6,8 @@ sidebar_position: 200
 
 The API Harmonization server implements a flexible authentication and authorization system that supports both role-based and permission-based access control. This allows you to secure endpoints at different levels, from entire pages down to specific features within blocks.
 
+For an overview of authentication across the entire O2S framework, see the [authentication overview](../../overview/authentication.md).
+
 ## Overview
 
 The authentication system is built around JWT tokens. Importantly, roles and permissions are kept at the organization/customer level, not per user. This allows for more granular access control since one user can belong to different organizations and their access level can vary (e.g., they can be an admin in one organization and a regular user in another).
@@ -362,23 +364,7 @@ This approach allows you to:
 
 When checking roles or permissions, the system always uses the values associated with the user's current organization/customer context. These values can be retrieved from the JWT token (if provided by your IAM) or fetched asynchronously from another API if not present in the token.
 
-## When to use roles vs permissions
-
-Both pages and blocks can use both role-based and permission-based access control. Here's when to use each:
-
-**Use roles when:**
-- You need simple, high-level access control
-- Access is configured in the CMS (for pages)
-- You're grouping users into broad categories
-- The access decision is straightforward (e.g., "admin only")
-
-**Use permissions when:**
-- You need to protect specific resources
-- Access depends on what the user can do with a resource
-- Permissions come from organization roles in your IAM system
-- You need fine-grained control over actions (view, edit, delete, etc.)
-
-You can also combine both: use roles for broad access control and permissions for resource-specific protection.
+For more details on multi-organization access control and when to use roles vs permissions, see the [authentication overview](../../overview/authentication.md).
 
 ## Best practices
 

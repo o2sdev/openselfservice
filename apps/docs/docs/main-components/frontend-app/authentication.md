@@ -4,7 +4,7 @@ sidebar_position: 400
 
 # Authentication
 
-This document covers authentication in the frontend app, which uses NextAuth.js for session management. For information about authentication and authorization in the API Harmonization server (role and permission-based access control), see the [API Harmonization authentication documentation](../harmonization-app/authentication.md).
+This document covers authentication in the frontend app, which uses NextAuth.js for session management. For an overview of authentication across the entire O2S framework, see the [authentication overview](../../overview/authentication.md). For information about authentication and authorization in the API Harmonization server, see the [API Harmonization authentication documentation](../harmonization-app/authentication.md).
 
 ## Overview
 
@@ -206,7 +206,9 @@ The exact structure and how tokens are processed depends on your specific IAM in
 
 ## User Roles and Permissions
 
-The application implements role-based access control. Importantly, roles and permissions are kept at the organization/customer level, not per user. This allows for more granular access control since one user can belong to different organizations and their access level can vary (e.g., they can be an admin in one organization and a regular user in another).
+The application implements role-based access control. For an overview of how roles and permissions work across O2S, see the [authentication overview](../../overview/authentication.md).
+
+Roles and permissions are kept at the organization/customer level, not per user. This allows for more granular access control since one user can belong to different organizations and their access level can vary (e.g., they can be an admin in one organization and a regular user in another).
 
 Roles and permissions can be retrieved in two ways:
 
@@ -247,11 +249,7 @@ async function updateCustomerToken(
 }
 ```
 
-The API Harmonization server uses these organization-level roles and permissions to control access to pages and blocks. Permissions are used for fine-grained access control to specific resources and actions.
-
-When a user switches between organizations, their roles and permissions change automatically based on their relationship with each organization.
-
-For information on how roles and permissions are enforced in the API Harmonization server, see the [API Harmonization authentication documentation](../harmonization-app/authentication.md).
+The API Harmonization server uses these organization-level roles and permissions to control access to pages and blocks. For information on how roles and permissions are enforced in the API Harmonization server, see the [API Harmonization authentication documentation](../harmonization-app/authentication.md).
 
 ## Customer Context
 
