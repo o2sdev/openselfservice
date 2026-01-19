@@ -2,4 +2,4 @@
 '@o2s/frontend': patch
 ---
 
-fix(frontend): use exact URL match for active navigation group detection
+fix(frontend): improve URL match for active navigation group detection
