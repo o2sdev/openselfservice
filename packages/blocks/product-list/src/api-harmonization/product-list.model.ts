@@ -24,7 +24,10 @@ export class ProductListBlock extends ApiModels.Block.Block {
     labels!: {
         clickToSelect: string;
         gridView: string;
-        tableView: string;
+        listView: string;
+        showMoreFilters: string;
+        hideMoreFilters: string;
+        noActiveFilters: string;
     };
     permissions?: {
         view: boolean;

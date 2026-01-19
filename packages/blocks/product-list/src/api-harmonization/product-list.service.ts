@@ -31,7 +31,7 @@ export class ProductListService {
                         ...query,
                         limit: query.limit || cms.pagination?.limit || 12,
                         offset: query.offset || 0,
-                        type: query.type as Products.Model.ProductType,
+                        type: 'PHYSICAL' as Products.Model.ProductType,
                         category: query.category,
                         locale: headers['x-locale'],
                     })

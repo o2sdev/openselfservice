@@ -37,7 +37,6 @@ const MOCK_PAYMENTS_SUMMARY_BLOCK_1_EN: CMS.Model.PaymentsSummaryBlock.PaymentsS
 
 const MOCK_PAYMENTS_SUMMARY_BLOCK_1_PL: CMS.Model.PaymentsSummaryBlock.PaymentsSummaryBlock = {
     id: 'payments-summary-1',
-    layout: 'horizontal',
     overdue: {
         title: 'Zaległe',
         message: '{days} dni po terminie',
@@ -59,6 +58,15 @@ const MOCK_PAYMENTS_SUMMARY_BLOCK_1_PL: CMS.Model.PaymentsSummaryBlock.PaymentsS
             url: '',
         },
         icon: 'CreditCard',
+    },
+    chart: {
+        title: 'Historia 6-miesięczna',
+        topSegment: 'Zaległe',
+        middleSegment: 'Do zapłaty',
+        bottomSegment: 'Zapłacone',
+        total: 'Suma',
+        monthsToShow: 6,
+        showChart: true,
     },
 };
 
@@ -87,6 +95,15 @@ const MOCK_PAYMENTS_SUMMARY_BLOCK_1_DE: CMS.Model.PaymentsSummaryBlock.PaymentsS
         },
         icon: 'CreditCard',
     },
+    chart: {
+        title: '6-Monats-Historie',
+        topSegment: 'Überfällig',
+        middleSegment: 'Zu bezahlen',
+        bottomSegment: 'Bezahlt',
+        total: 'Gesamt',
+        monthsToShow: 6,
+        showChart: true,
+    },
 };
 const MOCK_PAYMENTS_SUMMARY_BLOCK_2_EN: CMS.Model.PaymentsSummaryBlock.PaymentsSummaryBlock = {
     ...MOCK_PAYMENTS_SUMMARY_BLOCK_1_EN,
@@ -97,7 +114,6 @@ const MOCK_PAYMENTS_SUMMARY_BLOCK_2_EN: CMS.Model.PaymentsSummaryBlock.PaymentsS
 const MOCK_PAYMENTS_SUMMARY_BLOCK_2_PL: CMS.Model.PaymentsSummaryBlock.PaymentsSummaryBlock = {
     ...MOCK_PAYMENTS_SUMMARY_BLOCK_1_PL,
     id: 'payments-summary-2',
-    layout: 'horizontal',
     chart: undefined,
 };
 
