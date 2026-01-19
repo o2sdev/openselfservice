@@ -5,6 +5,11 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
     title: 'Your recent cases',
     forms: [
         {
+            label: 'Create ticket',
+            url: '/create-ticket',
+            icon: 'Plus',
+        },
+        {
             label: 'Submit complaint',
             url: '/submit-complaint',
             icon: 'MessageSquareWarning',
@@ -182,6 +187,11 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
     id: 'ticket-list-1',
     title: 'Ihre neuesten Fälle',
     forms: [
+        {
+            label: 'Ticket erstellen',
+            url: '/erstelle-ticket',
+            icon: 'Plus',
+        },
         {
             label: 'Beschwerde einreichen',
             url: '/submit-complaint',
@@ -361,6 +371,11 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
     id: 'ticket-list-1',
     title: 'Twoje ostatnie zgłoszenia',
     forms: [
+        {
+            label: 'Utwórz zgłoszenie',
+            url: '/utworz-zgloszenie',
+            icon: 'Plus',
+        },
         {
             label: 'Zgłoś błąd',
             url: '/submit-complaint',

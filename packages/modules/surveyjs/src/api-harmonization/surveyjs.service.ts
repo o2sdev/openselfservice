@@ -11,9 +11,9 @@ import { SurveyModel } from 'survey-core';
 import { Utils } from '@o2s/utils.api-harmonization';
 import { LoggerService } from '@o2s/utils.logger';
 
-import { Auth, CMS } from '@o2s/framework/modules';
+import { Auth, CMS, Tickets } from '@o2s/framework/modules';
 
-import { mapSurveyJS, mapSurveyJsRequest } from './surveyjs.mapper';
+import { mapSurveyJS, mapSurveyJsRequest, mapSurveyToTicket } from './surveyjs.mapper';
 import { SurveyJSLibraryJsonSchema, SurveyJs, SurveyResult } from './surveyjs.model';
 import { SurveyJsQuery, SurveyJsSubmitPayload } from './surveyjs.request';
 
@@ -25,6 +25,7 @@ export class SurveyjsService {
         protected httpClient: HttpService,
         private readonly config: ConfigService,
         private readonly cmsService: CMS.Service,
+        private readonly ticketsService: Tickets.Service,
         @Inject(LoggerService) protected readonly logger: LoggerService,
     ) {
         this.surveyjsHost = this.config.get('API_SURVEYJS_BASE_URL') || '';
@@ -89,6 +90,9 @@ export class SurveyjsService {
                                         this.submitToSurveyJs(payload.surveyPayload, survey.postId, userEmail),
                                     );
                                     break;
+                                case 'tickets':
+                                    submissions.push(this.submitToTickets(payload.surveyPayload, authorization));
+                                    break;
                             }
                         }
 
@@ -127,6 +131,26 @@ export class SurveyjsService {
                 throw new BadRequestException('Error occurred while submitting survey.');
             }),
         );
+    }
+
+    private submitToTickets(surveyPayload: SurveyResult, authorization?: string): Observable<void> {
+        try {
+            const ticketData = mapSurveyToTicket(surveyPayload);
+
+            return this.ticketsService.createTicket(ticketData, authorization).pipe(
+                map(() => {
+                    this.logger.info('Ticket created successfully from survey', 'SURVEYJS');
+                    return undefined;
+                }),
+                catchError((error) => {
+                    this.logger.error(`Error occurred while creating ticket from survey: ${error.message}`, 'SURVEYJS');
+                    throw new BadRequestException('Error occurred while creating ticket from survey.');
+                }),
+            );
+        } catch (error) {
+            this.logger.error(`Error mapping survey to ticket: ${(error as Error).message}`, 'SURVEYJS');
+            throw new BadRequestException('Invalid survey data for ticket creation.');
+        }
     }
 
     private hasAccess(requiredRoles: string[], decodedToken?: Auth.Model.Jwt | undefined): boolean {

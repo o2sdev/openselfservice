@@ -54,23 +54,41 @@ const MOCK_SURVEYJS_BLOCK_3_DE: CMS.Model.SurveyJsBlock.SurveyJsBlock = {
     code: 'request-device-maintenance',
 };
 
+const MOCK_SURVEYJS_BLOCK_4_EN: CMS.Model.SurveyJsBlock.SurveyJsBlock = {
+    id: 'survey-4',
+    title: 'Create ticket',
+    code: 'create-ticket',
+};
+
+const MOCK_SURVEYJS_BLOCK_4_PL: CMS.Model.SurveyJsBlock.SurveyJsBlock = {
+    id: 'survey-4',
+    title: 'Utwórz zgłoszenie',
+    code: 'create-ticket',
+};
+
+const MOCK_SURVEYJS_BLOCK_4_DE: CMS.Model.SurveyJsBlock.SurveyJsBlock = {
+    id: 'survey-4',
+    title: 'Ticket erstellen',
+    code: 'create-ticket',
+};
+
 export const mapSurveyJsBlock = (locale: string, id: string): CMS.Model.SurveyJsBlock.SurveyJsBlock => {
     switch (locale) {
         case 'en':
             return (
-                [MOCK_SURVEYJS_BLOCK_1_EN, MOCK_SURVEYJS_BLOCK_2_EN, MOCK_SURVEYJS_BLOCK_3_EN].find(
+                [MOCK_SURVEYJS_BLOCK_1_EN, MOCK_SURVEYJS_BLOCK_2_EN, MOCK_SURVEYJS_BLOCK_3_EN, MOCK_SURVEYJS_BLOCK_4_EN].find(
                     (block) => block.id === id,
                 ) || MOCK_SURVEYJS_BLOCK_1_EN
             );
         case 'de':
             return (
-                [MOCK_SURVEYJS_BLOCK_1_DE, MOCK_SURVEYJS_BLOCK_2_DE, MOCK_SURVEYJS_BLOCK_3_DE].find(
+                [MOCK_SURVEYJS_BLOCK_1_DE, MOCK_SURVEYJS_BLOCK_2_DE, MOCK_SURVEYJS_BLOCK_3_DE, MOCK_SURVEYJS_BLOCK_4_DE].find(
                     (block) => block.id === id,
                 ) || MOCK_SURVEYJS_BLOCK_1_DE
             );
         case 'pl':
             return (
-                [MOCK_SURVEYJS_BLOCK_1_PL, MOCK_SURVEYJS_BLOCK_2_PL, MOCK_SURVEYJS_BLOCK_3_PL].find(
+                [MOCK_SURVEYJS_BLOCK_1_PL, MOCK_SURVEYJS_BLOCK_2_PL, MOCK_SURVEYJS_BLOCK_3_PL, MOCK_SURVEYJS_BLOCK_4_PL].find(
                     (block) => block.id === id,
                 ) || MOCK_SURVEYJS_BLOCK_1_PL
             );

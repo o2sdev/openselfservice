@@ -27,7 +27,16 @@ const MOCK_SURVEY_3: CMS.Model.Survey.Survey = {
     postId: '17931fe3-2492-408c-8f91-8fc062606604',
 };
 
-const MOCK_SURVEYS = [MOCK_SURVEY_1, MOCK_SURVEY_2, MOCK_SURVEY_3];
+const MOCK_SURVEY_4: CMS.Model.Survey.Survey = {
+    code: 'create-ticket',
+    surveyId: 'bf251bfa-8f6a-4e2b-a79c-554e3d45ec41',
+    surveyType: 'survey',
+    submitDestination: ['tickets'],
+    requiredRoles: ['selfservice_org_user'],
+    postId: 'f6798232-c45b-4378-9fe5-838bdc12ca88',
+};
+
+const MOCK_SURVEYS = [MOCK_SURVEY_1, MOCK_SURVEY_2, MOCK_SURVEY_3, MOCK_SURVEY_4];
 
 export const mapSurvey = (code: string): CMS.Model.Survey.Survey => {
     return MOCK_SURVEYS.find((survey) => survey.code === code) ?? MOCK_SURVEY_1;

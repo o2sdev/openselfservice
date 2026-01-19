@@ -1,4 +1,4 @@
-import { CMS } from '@o2s/framework/modules';
+import { Auth, CMS } from '@o2s/framework/modules';
 
 export const PAGE_CONTACT_US_EN: CMS.Model.Page.Page = {
     id: '9',
@@ -298,6 +298,108 @@ export const PAGE_REQUEST_DEVICE_MAINTENANCE_PL: CMS.Model.Page.Page = {
                 {
                     __typename: 'SurveyJsBlock',
                     id: 'survey-3',
+                },
+            ],
+        },
+    },
+    updatedAt: '2025-01-01',
+    createdAt: '2025-01-01',
+};
+
+export const PAGE_CREATE_TICKET_EN: CMS.Model.Page.Page = {
+    id: '13',
+    slug: '/create-ticket',
+    locale: 'en',
+    seo: {
+        noIndex: false,
+        noFollow: false,
+        title: 'Create ticket',
+        description: 'Create a new support ticket',
+        keywords: ['ticket', 'support', 'create'],
+        image: {
+            url: 'https://picsum.photos/150',
+            width: 150,
+            height: 150,
+            alt: 'Placeholder',
+        },
+    },
+    permissions: [Auth.Constants.Roles.ORG_USER],
+    hasOwnTitle: false,
+    template: {
+        __typename: 'OneColumnTemplate',
+        slots: {
+            main: [
+                {
+                    __typename: 'SurveyJsBlock',
+                    id: 'survey-4',
+                },
+            ],
+        },
+    },
+    updatedAt: '2025-01-01',
+    createdAt: '2025-01-01',
+};
+
+export const PAGE_CREATE_TICKET_DE: CMS.Model.Page.Page = {
+    id: '13',
+    slug: '/erstelle-ticket',
+    locale: 'de',
+    seo: {
+        noIndex: false,
+        noFollow: false,
+        title: 'Ticket erstellen',
+        description: 'Erstellen Sie ein neues Support-Ticket',
+        keywords: ['ticket', 'support', 'erstellen'],
+        image: {
+            url: 'https://picsum.photos/150',
+            width: 150,
+            height: 150,
+            alt: 'Placeholder',
+        },
+    },
+    permissions: [Auth.Constants.Roles.ORG_USER],
+    hasOwnTitle: false,
+    template: {
+        __typename: 'OneColumnTemplate',
+        slots: {
+            main: [
+                {
+                    __typename: 'SurveyJsBlock',
+                    id: 'survey-4',
+                },
+            ],
+        },
+    },
+    updatedAt: '2025-01-01',
+    createdAt: '2025-01-01',
+};
+
+export const PAGE_CREATE_TICKET_PL: CMS.Model.Page.Page = {
+    id: '13',
+    slug: '/utworz-zgloszenie',
+    locale: 'pl',
+    seo: {
+        noIndex: false,
+        noFollow: false,
+        title: 'Utwórz zgłoszenie',
+        description: 'Utwórz nowe zgłoszenie wsparcia',
+        keywords: ['zgłoszenie', 'wsparcie', 'utworz'],
+        image: {
+            url: 'https://picsum.photos/150',
+            width: 150,
+            height: 150,
+            alt: 'Placeholder',
+        },
+    },
+    permissions: [Auth.Constants.Roles.ORG_USER],
+    hasOwnTitle: false,
+    template: {
+        __typename: 'OneColumnTemplate',
+        slots: {
+            main: [
+                {
+                    __typename: 'SurveyJsBlock',
+                    id: 'survey-4',
                 },
             ],
         },

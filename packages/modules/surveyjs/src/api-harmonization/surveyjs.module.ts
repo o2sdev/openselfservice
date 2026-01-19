@@ -3,7 +3,7 @@ import { DynamicModule, Module, Type } from '@nestjs/common';
 
 import { LoggerModule } from '@o2s/utils.logger';
 
-import { ApiConfig, CMS } from '@o2s/framework/modules';
+import { ApiConfig, CMS, Tickets } from '@o2s/framework/modules';
 
 import { SurveyjsController } from './surveyjs.controller';
 import { SurveyjsService } from './surveyjs.service';
@@ -12,6 +12,7 @@ import { SurveyjsService } from './surveyjs.service';
 export class SurveyjsModule {
     static register(config: ApiConfig): DynamicModule {
         const cmsService = config.integrations.cms.service;
+        const ticketsService = config.integrations.tickets?.service;
         return {
             module: SurveyjsModule,
             imports: [LoggerModule, HttpModule],
@@ -21,6 +22,14 @@ export class SurveyjsModule {
                     provide: CMS.Service,
                     useClass: cmsService as Type,
                 },
+                ...(ticketsService
+                    ? [
+                          {
+                              provide: Tickets.Service,
+                              useClass: ticketsService as Type,
+                          },
+                      ]
+                    : []),
             ],
             controllers: [SurveyjsController],
             exports: [SurveyjsService],

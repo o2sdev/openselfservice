@@ -55,6 +55,9 @@ import {
     PAGE_CONTACT_US_DE,
     PAGE_CONTACT_US_EN,
     PAGE_CONTACT_US_PL,
+    PAGE_CREATE_TICKET_DE,
+    PAGE_CREATE_TICKET_EN,
+    PAGE_CREATE_TICKET_PL,
     PAGE_REQUEST_DEVICE_MAINTENANCE_DE,
     PAGE_REQUEST_DEVICE_MAINTENANCE_EN,
     PAGE_REQUEST_DEVICE_MAINTENANCE_PL,
@@ -238,6 +241,13 @@ export const mapPage = (slug: string, locale: string): CMS.Model.Page.Page | und
             return PAGE_REQUEST_DEVICE_MAINTENANCE_DE;
         case '/zglos-naprawe-urzadzenia':
             return PAGE_REQUEST_DEVICE_MAINTENANCE_PL;
+
+        case '/create-ticket':
+            return PAGE_CREATE_TICKET_EN;
+        case '/erstelle-ticket':
+            return PAGE_CREATE_TICKET_DE;
+        case '/utworz-zgloszenie':
+            return PAGE_CREATE_TICKET_PL;
 
         case '/help-and-support':
             return PAGE_HELP_AND_SUPPORT_EN;
