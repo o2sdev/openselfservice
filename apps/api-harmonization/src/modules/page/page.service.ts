@@ -67,7 +67,7 @@ export class PageService {
                             footer,
                             appConfig.labels,
                             appConfig.themes,
-                            userRoles.map((r) => r),
+                            userRoles,
                         );
                     }),
                 );
@@ -88,20 +88,14 @@ export class PageService {
                                 throw new NotFoundException();
                             }
 
-                            Auth.Service.requireRoles(
-                                article.roles,
-                                userRoles.map((r) => r),
-                            );
+                            Auth.Service.requireRoles(article.roles, userRoles);
 
                             return this.processArticle(article, query, headers);
                         }),
                     );
                 }
 
-                Auth.Service.requireRoles(
-                    page.roles,
-                    userRoles.map((r) => r),
-                );
+                Auth.Service.requireRoles(page.roles, userRoles);
 
                 return this.processPage(page, query, headers);
             }),
