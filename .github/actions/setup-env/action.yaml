@@ -1,6 +1,6 @@
 name: Prepare environment
 
-description: 'Sets up Node.js environment, installs dependencies, and installs Playwright browsers'
+description: 'Sets up Node.js environment and installs dependencies with caching'
 
 inputs:
     repo-token:
@@ -15,18 +15,23 @@ runs:
               node-version: 24
               cache: 'npm'
 
+        - name: Cache node_modules
+          id: cache-node-modules
+          uses: actions/cache@v4
+          with:
+              path: |
+                  node_modules
+                  **/node_modules
+              key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+              restore-keys: |
+                  ${{ runner.os }}-node-modules-
+
         - name: Install Packages
           shell: bash
           run: |
               set -e
+              # npm ci will be faster if node_modules exists from cache
+              # It will still verify integrity and install any missing packages
               npm ci
-          env:
-              CI: true
-
-        - name: Install Playwright Browsers
-          shell: bash
-          run: |
-              set -e
-              npx playwright install --with-deps
           env:
               CI: true

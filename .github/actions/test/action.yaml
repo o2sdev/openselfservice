@@ -1,6 +1,6 @@
 name: Test
 
-description: 'Checkout code, setup environment, download build artifacts, and run tests'
+description: 'Checkout code, setup environment, install Playwright browsers, restore build outputs from cache, and run tests'
 
 inputs:
     repo-token:
@@ -19,15 +19,31 @@ runs:
           with:
               fetch-depth: ${{ inputs.fetch-depth }}
 
+        - name: Restore build outputs from cache
+          uses: actions/cache@v4
+          with:
+              path: |
+                  **/dist/**
+                  **/build/**
+                  **/.next/**
+                  !**/node_modules/**
+              key: ${{ runner.os }}-build-${{ github.sha }}-${{ hashFiles('**/package-lock.json', '**/tsconfig.json', '**/turbo.json') }}
+              restore-keys: |
+                  ${{ runner.os }}-build-${{ github.sha }}-
+                  ${{ runner.os }}-build-
+
         - name: Prepare Environment
           uses: ./.github/actions/setup-env
           with:
               repo-token: ${{ inputs.repo-token }}
 
-        - name: Download build artifacts
-          uses: actions/download-artifact@v4
-          with:
-              name: build-artifacts
+        - name: Install Playwright Browsers
+          shell: bash
+          run: |
+              set -e
+              npx playwright install --with-deps
+          env:
+              CI: true
 
         - name: Test
           shell: bash
