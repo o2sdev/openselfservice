@@ -4,10 +4,9 @@ import React from 'react';
 import { cn } from '@o2s/ui/lib/utils';
 
 import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
+import { RichText } from '@o2s/ui/components/RichText';
 
 import { Typography } from '@o2s/ui/elements/typography';
-
-import { RichText } from '../../RichText';
 
 import { InformativeCardProps } from './InformativeCard.types';
 
@@ -63,7 +62,7 @@ export const InformativeCard: React.FC<Readonly<InformativeCardProps>> = (props)
             <LinkComponent
                 href={props.href}
                 aria-label={props.title}
-                className="flex flex-grow text-foreground hover:border-primary rounded-lg bg-card border border-border w-full h-full items-start"
+                className="flex flex-grow text-foreground rounded-lg bg-card border border-card-border hover:border-primary w-full h-full items-start"
             >
                 <InformativeCardContent {...props} />
             </LinkComponent>

@@ -1,6 +1,6 @@
 import { CMS } from '@o2s/framework/modules';
 
-const MOCK_PAYMENTS_SUMMARY_BLOCK_EN: CMS.Model.PaymentsSummaryBlock.PaymentsSummaryBlock = {
+const MOCK_PAYMENTS_SUMMARY_BLOCK_1_EN: CMS.Model.PaymentsSummaryBlock.PaymentsSummaryBlock = {
     id: 'payments-summary-1',
     overdue: {
         title: 'Overdue',
@@ -35,9 +35,8 @@ const MOCK_PAYMENTS_SUMMARY_BLOCK_EN: CMS.Model.PaymentsSummaryBlock.PaymentsSum
     },
 };
 
-const MOCK_PAYMENTS_SUMMARY_BLOCK_PL: CMS.Model.PaymentsSummaryBlock.PaymentsSummaryBlock = {
+const MOCK_PAYMENTS_SUMMARY_BLOCK_1_PL: CMS.Model.PaymentsSummaryBlock.PaymentsSummaryBlock = {
     id: 'payments-summary-1',
-    layout: 'horizontal',
     overdue: {
         title: 'Zaległe',
         message: '{days} dni po terminie',
@@ -60,9 +59,18 @@ const MOCK_PAYMENTS_SUMMARY_BLOCK_PL: CMS.Model.PaymentsSummaryBlock.PaymentsSum
         },
         icon: 'CreditCard',
     },
+    chart: {
+        title: 'Historia 6-miesięczna',
+        topSegment: 'Zaległe',
+        middleSegment: 'Do zapłaty',
+        bottomSegment: 'Zapłacone',
+        total: 'Suma',
+        monthsToShow: 6,
+        showChart: true,
+    },
 };
 
-const MOCK_PAYMENTS_SUMMARY_BLOCK_DE: CMS.Model.PaymentsSummaryBlock.PaymentsSummaryBlock = {
+const MOCK_PAYMENTS_SUMMARY_BLOCK_1_DE: CMS.Model.PaymentsSummaryBlock.PaymentsSummaryBlock = {
     id: 'payments-summary-1',
     layout: 'vertical',
     overdue: {
@@ -87,15 +95,44 @@ const MOCK_PAYMENTS_SUMMARY_BLOCK_DE: CMS.Model.PaymentsSummaryBlock.PaymentsSum
         },
         icon: 'CreditCard',
     },
+    chart: {
+        title: '6-Monats-Historie',
+        topSegment: 'Überfällig',
+        middleSegment: 'Zu bezahlen',
+        bottomSegment: 'Bezahlt',
+        total: 'Gesamt',
+        monthsToShow: 6,
+        showChart: true,
+    },
+};
+const MOCK_PAYMENTS_SUMMARY_BLOCK_2_EN: CMS.Model.PaymentsSummaryBlock.PaymentsSummaryBlock = {
+    ...MOCK_PAYMENTS_SUMMARY_BLOCK_1_EN,
+    id: 'payments-summary-2',
+    chart: undefined,
 };
 
-export const mapPaymentsSummaryBlock = (locale: string): CMS.Model.PaymentsSummaryBlock.PaymentsSummaryBlock => {
+const MOCK_PAYMENTS_SUMMARY_BLOCK_2_PL: CMS.Model.PaymentsSummaryBlock.PaymentsSummaryBlock = {
+    ...MOCK_PAYMENTS_SUMMARY_BLOCK_1_PL,
+    id: 'payments-summary-2',
+    chart: undefined,
+};
+
+const MOCK_PAYMENTS_SUMMARY_BLOCK_2_DE: CMS.Model.PaymentsSummaryBlock.PaymentsSummaryBlock = {
+    ...MOCK_PAYMENTS_SUMMARY_BLOCK_1_DE,
+    id: 'payments-summary-2',
+    chart: undefined,
+};
+
+export const mapPaymentsSummaryBlock = (
+    id: string,
+    locale: string,
+): CMS.Model.PaymentsSummaryBlock.PaymentsSummaryBlock => {
     switch (locale) {
         case 'pl':
-            return MOCK_PAYMENTS_SUMMARY_BLOCK_PL;
+            return [MOCK_PAYMENTS_SUMMARY_BLOCK_1_PL, MOCK_PAYMENTS_SUMMARY_BLOCK_2_PL].find((mock) => mock.id === id)!;
         case 'de':
-            return MOCK_PAYMENTS_SUMMARY_BLOCK_DE;
+            return [MOCK_PAYMENTS_SUMMARY_BLOCK_1_DE, MOCK_PAYMENTS_SUMMARY_BLOCK_2_DE].find((mock) => mock.id === id)!;
         default:
-            return MOCK_PAYMENTS_SUMMARY_BLOCK_EN;
+            return [MOCK_PAYMENTS_SUMMARY_BLOCK_1_EN, MOCK_PAYMENTS_SUMMARY_BLOCK_2_EN].find((mock) => mock.id === id)!;
     }
 };

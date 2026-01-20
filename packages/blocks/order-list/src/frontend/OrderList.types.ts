@@ -1,6 +1,6 @@
 import { defineRouting } from 'next-intl/routing';
 
-import { Model } from '../api-harmonization/order-list.client';
+import type { Model } from '../api-harmonization/order-list.client';
 
 export interface OrderListProps {
     id: string;
@@ -8,6 +8,7 @@ export interface OrderListProps {
     locale: string;
     routing: ReturnType<typeof defineRouting>;
     hasPriority?: boolean;
+    enableRowSelection?: boolean;
 }
 
 export interface OrderListRendererProps extends Omit<OrderListProps, ''> {

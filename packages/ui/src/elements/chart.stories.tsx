@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/nextjs';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import {
     Bar,
     BarChart as BarChartComponent,
@@ -65,8 +65,8 @@ export const LineChart: Story = {
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="name" />
                     <YAxis />
-                    <Tooltip content={<ChartTooltipContent />} />
-                    <Legend content={<ChartLegendContent />} />
+                    <Tooltip content={<ChartTooltipContent active={false} payload={[]} />} />
+                    <Legend content={<ChartLegendContent payload={[]} />} />
                     <Line type="monotone" dataKey="sales" stroke="#8884d8" activeDot={{ r: 8 }} />
                     <Line type="monotone" dataKey="revenue" stroke="#82ca9d" />
                 </LineChartComponent>
@@ -87,8 +87,8 @@ export const BarChart: Story = {
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="name" />
                     <YAxis />
-                    <Tooltip content={<ChartTooltipContent />} />
-                    <Legend content={<ChartLegendContent />} />
+                    <Tooltip content={<ChartTooltipContent active={false} payload={[]} />} />
+                    <Legend content={<ChartLegendContent payload={[]} />} />
                     <Bar dataKey="sales" fill="#8884d8" />
                     <Bar dataKey="revenue" fill="#82ca9d" />
                 </BarChartComponent>

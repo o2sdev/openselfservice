@@ -1,6 +1,6 @@
 import { defineRouting } from 'next-intl/routing';
 
-import { Model } from '../api-harmonization/notification-list.client';
+import type { Model } from '../api-harmonization/notification-list.client';
 
 export interface NotificationListProps {
     id: string;
@@ -8,6 +8,7 @@ export interface NotificationListProps {
     locale: string;
     routing: ReturnType<typeof defineRouting>;
     hasPriority?: boolean;
+    enableRowSelection?: boolean;
 }
 
 export type NotificationListPureProps = NotificationListProps & Model.NotificationListBlock;

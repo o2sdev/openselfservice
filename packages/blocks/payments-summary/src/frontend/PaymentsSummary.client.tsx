@@ -35,13 +35,14 @@ export const PaymentsSummaryPure: React.FC<PaymentsSummaryPureProps> = ({ routin
     }
 
     const showChart = chart?.showChart ?? false;
-    const cardsLayout = layout === 'horizontal' ? 'flex-col md:flex-row' : 'flex-col';
+    const cardsOuterLayout = layout === 'horizontal' ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1';
+    const cardsInnerLayout = layout === 'horizontal' ? 'flex-col md:flex-row' : 'flex-col';
 
     return (
-        <div className={cn('w-full flex gap-6', showChart ? 'flex-col lg:flex-row' : cardsLayout)}>
+        <div className={cn('w-full grid gap-6', showChart ? 'grid-cols-1 lg:grid-cols-2' : cardsOuterLayout)}>
             {showChart ? (
                 <>
-                    <div className={cn('w-full flex gap-6', cardsLayout)}>
+                    <div className={cn('w-full flex gap-6', cardsInnerLayout)}>
                         {overdue && (
                             <InfoCard
                                 title={overdue.title}

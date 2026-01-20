@@ -1,5 +1,5 @@
 import { Models } from '@o2s/framework/modules';
-import type { Meta, StoryObj } from '@storybook/nextjs';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { FormikValues } from 'formik';
 import React, { useState } from 'react';
 
@@ -277,5 +277,106 @@ export const WithSearchLeading: Story = {
             search: '',
         },
         hasLeadingItem: true,
+    },
+};
+
+export const InlineVariant: Story = {
+    args: {
+        filters: basicFilters,
+        initialValues: {
+            category: '',
+            price: '',
+            rating: [],
+            sort: 'relevance',
+            search: '',
+        },
+        hasLeadingItem: false,
+    },
+    render: ({ filters, initialValues }) => {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        const [currentFilters, setCurrentFilters] = useState<typeof initialValues>(initialValues);
+
+        const handleSubmit = (values: Partial<typeof initialValues>) => {
+            console.log('Filters submitted:', values);
+            setCurrentFilters({
+                ...currentFilters,
+                ...values,
+            });
+        };
+
+        const handleReset = () => {
+            console.log('Filters reset');
+            setCurrentFilters(initialValues);
+        };
+
+        return (
+            <div className="space-y-4">
+                <FiltersContextProvider initialFilters={initialValues}>
+                    <div className="p-4 border rounded-md mb-4">
+                        <h3 className="text-sm font-semibold mb-2">Current Filters:</h3>
+                        <pre className="text-xs bg-gray-100 p-2 rounded">{JSON.stringify(currentFilters, null, 2)}</pre>
+                    </div>
+
+                    <Filters
+                        filters={filters}
+                        initialValues={initialValues}
+                        onSubmit={handleSubmit}
+                        onReset={handleReset}
+                        hasLeadingItem={false}
+                        variant="inline"
+                        labels={{ clickToSelect: 'Select an option' }}
+                    />
+                </FiltersContextProvider>
+            </div>
+        );
+    },
+};
+
+export const InlineVariantWithSection: Story = {
+    args: {
+        filters: basicFilters,
+        initialValues: {
+            category: '',
+            price: '',
+            rating: [],
+            sort: 'relevance',
+            search: '',
+        },
+        hasLeadingItem: false,
+    },
+    render: ({ filters, initialValues }) => {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        const [currentFilters, setCurrentFilters] = useState<typeof initialValues>(initialValues);
+
+        const handleSubmit = (values: Partial<typeof initialValues>) => {
+            console.log('Filters submitted:', values);
+            setCurrentFilters({
+                ...currentFilters,
+                ...values,
+            });
+        };
+
+        const handleReset = () => {
+            console.log('Filters reset');
+            setCurrentFilters(initialValues);
+        };
+
+        return (
+            <div className="space-y-4">
+                <FiltersSection
+                    title="Filter Products (Inline)"
+                    initialFilters={initialValues}
+                    filters={filters}
+                    initialValues={initialValues}
+                    onSubmit={handleSubmit}
+                    onReset={handleReset}
+                    variant="inline"
+                />
+                <div className="p-4 border rounded-md mb-4">
+                    <h3 className="text-sm font-semibold mb-2">Current Filters:</h3>
+                    <pre className="text-xs bg-gray-100 p-2 rounded">{JSON.stringify(currentFilters, null, 2)}</pre>
+                </div>
+            </div>
+        );
     },
 };

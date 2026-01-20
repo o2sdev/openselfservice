@@ -1,19 +1,20 @@
-import type { Meta, StoryObj } from '@storybook/nextjs';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import React from 'react';
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
-import { Props as BarProps } from 'recharts/types/cartesian/Bar';
 
 import { ChartRoundedBar } from './ChartRoundedBar';
 import { ChartRoundedBarProps } from './ChartRoundedBar.types';
 
-const meta = {
+type BarProps = React.ComponentProps<typeof Bar>;
+
+const meta: Meta<typeof ChartRoundedBar> = {
     title: 'Components/Chart/ChartRoundedBar',
     component: ChartRoundedBar,
     tags: ['autodocs'],
     parameters: {
         layout: 'centered',
     },
-} satisfies Meta<typeof ChartRoundedBar>;
+};
 
 export default meta;
 
@@ -71,13 +72,11 @@ const ChartRoundedBarExample = ({ data }: { data: ChartRoundedBarProps[] }) => {
 };
 
 export const Default: Story = {
-    // @ts-expect-error args are not needed as there is a render function
     args: {},
     render: () => <ChartRoundedBarExample data={sampleChartData} />,
 };
 
 export const WithSingleSegment: Story = {
-    // @ts-expect-error args are not needed as there is a render function
     args: {},
     render: () => (
         <ChartRoundedBarExample
@@ -109,7 +108,6 @@ export const WithSingleSegment: Story = {
 };
 
 export const WithZeroValues: Story = {
-    // @ts-expect-error args are not needed as there is a render function
     args: {},
     render: () => (
         <ChartRoundedBarExample

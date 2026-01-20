@@ -1,5 +1,35 @@
 # @o2s/configs.integrations
 
+## 0.3.0
+
+### Minor Changes
+
+- e11b23a: resolving linter errors
+- e78c11a: feat: Added sorting support for products in mocked integration
+    - Added sorting functionality to `mapProducts` and `mapRelatedProducts` in mocked integration
+    - Supports sorting by name and price in ascending/descending order (format: `name_ASC`, `name_DESC`, `price_ASC`, `price_DESC`)
+    - Sorting is applied to filtered product lists before returning results
+
+### Patch Changes
+
+- e11b23a: reworked data fetching a little to overcome ESlint warnings
+- Updated dependencies [e78c11a]
+- Updated dependencies [79b7c87]
+    - @o2s/integrations.mocked@1.16.0
+    - @o2s/framework@1.15.0
+
+## 0.2.1
+
+### Patch Changes
+
+- 221dc2c: fix: added missing Eslint command to list-staged
+- Updated dependencies [221dc2c]
+- Updated dependencies [235f706]
+- Updated dependencies [db5b381]
+- Updated dependencies [c2d9438]
+    - @o2s/integrations.mocked@1.15.0
+    - @o2s/framework@1.14.0
+
 ## 0.2.0
 
 ### Minor Changes

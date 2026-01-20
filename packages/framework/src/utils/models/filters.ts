@@ -34,6 +34,7 @@ export class FilterSelect<T> extends Filter<T> {
 export class FilterToggleGroup<T> extends Filter<T> {
     __typename!: 'FilterToggleGroup';
     allowMultiple!: boolean;
+    isLabelHidden?: boolean;
     options!: {
         value: string;
         label: string;
@@ -63,4 +64,5 @@ export class FilterViewModeToggle {
     id!: 'viewMode';
     value?: 'list' | 'grid';
     onChange?: (value: 'list' | 'grid') => void;
+    isLeading?: boolean;
 }

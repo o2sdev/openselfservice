@@ -1,5 +1,5 @@
 import { Models } from '@o2s/framework/modules';
-import type { Meta, StoryObj } from '@storybook/nextjs';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import React from 'react';
 
 import { Models as FrontendModels } from '@o2s/utils.frontend';
@@ -117,6 +117,14 @@ export const WithoutAction: Story = {
     args: {
         ...Default.args,
         action: undefined,
+    },
+};
+
+export const WithoutActionAndLink: Story = {
+    args: {
+        ...Default.args,
+        action: undefined,
+        link: undefined,
     },
 };
 

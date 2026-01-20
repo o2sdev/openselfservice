@@ -1,6 +1,6 @@
 {
     "name": "@o2s/integrations.mocked",
-    "version": "1.14.0",
+    "version": "1.16.0",
     "private": false,
     "license": "MIT",
     "exports": {
@@ -20,7 +20,7 @@
         "postinstall": "npx prisma generate",
         "build": "dotenv -e .env.local -- prisma migrate deploy && tsc --preserveWatchOutput && tsc-alias",
         "postbuild": "shx cp -r src/modules/invoices/resources dist/modules/invoices/",
-        "lint": "tsc --noEmit && eslint . --max-warnings 0",
+        "lint": "tsc --noEmit && eslint . --max-warnings=0",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\"",
         "seed": "dotenv -e .env.local -- tsx prisma/seed.ts"
     },
@@ -30,23 +30,24 @@
     },
     "dependencies": {
         "@auth/prisma-adapter": "^2.11.1",
-        "@prisma/client": "^6.19.0",
+        "@o2s/framework": "*",
+        "@o2s/utils.logger": "*",
+        "@prisma/client": "^6.19.2",
         "bcryptjs": "^3.0.3",
         "dotenv-cli": "^11.0.0",
-        "jsonwebtoken": "^9.0.2",
-        "prisma": "^6.19.0",
-        "@o2s/framework": "*",
-        "@o2s/utils.logger": "*"
+        "jsonwebtoken": "^9.0.3",
+        "prisma": "^6.19.2"
     },
     "devDependencies": {
-        "@types/jsonwebtoken": "^9.0.10",
         "@o2s/eslint-config": "*",
+        "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
-        "@o2s/typescript-config": "*",
         "@o2s/telemetry": "*",
+        "@o2s/typescript-config": "*",
+        "@types/jsonwebtoken": "^9.0.10",
         "concurrently": "^9.2.1",
-        "eslint": "^9.39.1",
-        "prettier": "^3.6.2",
+        "eslint": "^9.39.2",
+        "prettier": "^3.7.4",
         "shx": "^0.4.0",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"
@@ -56,8 +57,8 @@
         "@nestjs/common": "^11.0.16",
         "@nestjs/config": "^4.0.2",
         "@nestjs/core": "^11",
-        "rxjs": "^7",
         "next-auth": "^5.0.0-beta.30",
+        "rxjs": "^7",
         "zod": "^3.25.4 || ^4.0.0"
     }
 }

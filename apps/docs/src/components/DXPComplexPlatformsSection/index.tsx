@@ -28,7 +28,7 @@ export function DXPComplexPlatformsSection() {
                     <p className="leading-6">
                         <span>While this architecture is more complex than a direct CMS integration, </span>
                         <span className="font-bold">
-                            it's future-proof and scalable — perfect when you know your project will grow.
+                            it&apos;s future-proof and scalable — perfect when you know your project will grow.
                         </span>
                     </p>
                 </Body>

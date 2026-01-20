@@ -60,6 +60,7 @@
 
     --color-card: var(--card);
     --color-card-foreground: var(--card-foreground);
+    --color-card-light: var(--card-light);
 
     --color-navbar-foreground: var(--navbar-foreground);
     --color-navbar-background: var(--navbar-background);
@@ -134,6 +135,28 @@
         to {
             height: 0;
         }
+    }
+}
+
+@keyframes filterFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes filterFadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-8px);
     }
 }
 

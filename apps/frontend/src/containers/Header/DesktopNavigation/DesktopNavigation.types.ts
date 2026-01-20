@@ -9,4 +9,6 @@ export interface DesktopNavigationProps {
     notificationSlot?: ReactNode;
     userSlot?: ReactNode;
     items: CMS.Model.Header.Header['items'];
+    signInLabel?: CMS.Model.Header.Header['signInLabel'];
+    shouldIncludeSignInButton?: boolean;
 }

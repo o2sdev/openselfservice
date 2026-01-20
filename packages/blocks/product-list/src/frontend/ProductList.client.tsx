@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight, LayoutGrid, Table as TableIcon } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { createNavigation } from 'next-intl/navigation';
 import React, { useState, useTransition } from 'react';
 
@@ -14,16 +14,15 @@ import { Pagination } from '@o2s/ui/components/Pagination';
 import { Button } from '@o2s/ui/elements/button';
 import { LoadingOverlay } from '@o2s/ui/elements/loading-overlay';
 import { Separator } from '@o2s/ui/elements/separator';
-import { ToggleGroup, ToggleGroupItem } from '@o2s/ui/elements/toggle-group';
 
-import { Model } from '../api-harmonization/product-list.client';
+import type { Model } from '../api-harmonization/product-list.client';
 import { sdk } from '../sdk';
 
 import { ProductListPureProps } from './ProductList.types';
 
-type ViewMode = 'grid' | 'table';
-
 export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, accessToken, routing, ...component }) => {
+    const { Link: LinkComponent } = createNavigation(routing);
+
     const initialFilters = {
         id: component.id,
         offset: 0,
@@ -31,10 +30,16 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
     };
 
     const initialData = component.products.data;
+
+    const initialViewMode =
+        component.filters?.items.find((item) => item.__typename === 'FilterViewModeToggle')?.value || 'grid';
+
     const [data, setData] = useState(component);
     const [filters, setFilters] = useState(initialFilters);
+    const [viewMode, setViewMode] = useState<'grid' | 'list'>(initialViewMode);
+    const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
+
     const [isPending, startTransition] = useTransition();
-    const [viewMode, setViewMode] = useState<ViewMode>('grid');
 
     const handleFilter = (data: Partial<typeof initialFilters>) => {
         startTransition(async () => {
@@ -42,6 +47,7 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
             const newData = await sdk.blocks.getProductList(newFilters, { 'x-locale': locale }, accessToken);
             setFilters(newFilters);
             setData(newData);
+            setSelectedRows(new Set());
         });
     };
 
@@ -50,10 +56,9 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
             const newData = await sdk.blocks.getProductList(initialFilters, { 'x-locale': locale }, accessToken);
             setFilters(initialFilters);
             setData(newData);
+            setSelectedRows(new Set());
         });
     };
-
-    const { Link: LinkComponent } = createNavigation(routing);
 
     // Define table columns configuration
     const columns = data.table.columns.map((column) => {
@@ -101,41 +106,54 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
         <div className="w-full">
             {initialData.length > 0 ? (
                 <div className="flex flex-col gap-6">
-                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                        <FiltersSection
-                            title={data.subtitle}
-                            initialFilters={initialFilters}
-                            filters={data.filters}
-                            initialValues={filters}
-                            onSubmit={handleFilter}
-                            onReset={handleReset}
-                            labels={{
-                                clickToSelect: data.labels.clickToSelect,
-                            }}
-                        />
-
-                        <ToggleGroup
-                            type="single"
-                            value={viewMode}
-                            onValueChange={(value) => value && setViewMode(value as ViewMode)}
-                            variant="solid"
-                            className="flex-shrink-0"
-                        >
-                            <ToggleGroupItem value="grid" aria-label={data.labels.gridView}>
-                                <LayoutGrid className="h-4 w-4" />
-                                <span className="sr-only sm:not-sr-only">{data.labels.gridView}</span>
-                            </ToggleGroupItem>
-                            <ToggleGroupItem value="table" aria-label={data.labels.tableView}>
-                                <TableIcon className="h-4 w-4" />
-                                <span className="sr-only sm:not-sr-only">{data.labels.tableView}</span>
-                            </ToggleGroupItem>
-                        </ToggleGroup>
-                    </div>
+                    <FiltersSection
+                        title={data.subtitle}
+                        initialFilters={initialFilters}
+                        filters={
+                            data.filters
+                                ? {
+                                      ...data.filters,
+                                      items: data.filters.items.map((item) => {
+                                          if (item.__typename === 'FilterViewModeToggle') {
+                                              return {
+                                                  ...item,
+                                                  value: viewMode,
+                                                  onChange: setViewMode,
+                                              };
+                                          }
+                                          return item;
+                                      }),
+                                  }
+                                : undefined
+                        }
+                        initialValues={filters}
+                        onSubmit={handleFilter}
+                        onReset={handleReset}
+                        variant="inline"
+                        labels={{
+                            clickToSelect: data.labels.clickToSelect,
+                            showMoreFilters: data.labels.showMoreFilters,
+                            hideMoreFilters: data.labels.hideMoreFilters,
+                            noActiveFilters: data.labels.noActiveFilters,
+                        }}
+                    />
 
                     <LoadingOverlay isActive={isPending}>
                         {data.products.data.length ? (
                             <div className="flex flex-col gap-6">
-                                {viewMode === 'grid' ? (
+                                {viewMode === 'list' ? (
+                                    <div className="w-full overflow-x-auto">
+                                        <DataList
+                                            data={data.products.data}
+                                            columns={columns}
+                                            actions={actions}
+                                            getRowKey={(item) => item.id}
+                                            enableRowSelection={component.enableRowSelection}
+                                            selectedRows={selectedRows}
+                                            onSelectionChange={setSelectedRows}
+                                        />
+                                    </div>
+                                ) : (
                                     <ul className="grid gap-6 w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                                         {data.products.data.map((product) => (
                                             <li key={product.id}>
@@ -155,15 +173,6 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
                                             </li>
                                         ))}
                                     </ul>
-                                ) : (
-                                    <div className="w-full overflow-x-auto">
-                                        <DataList
-                                            data={data.products.data}
-                                            columns={columns}
-                                            actions={actions}
-                                            getRowKey={(item) => item.id}
-                                        />
-                                    </div>
                                 )}
 
                                 {data.pagination && (

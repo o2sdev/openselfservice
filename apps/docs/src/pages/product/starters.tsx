@@ -3,12 +3,6 @@ import React from 'react';
 import RefreshCwIcon from '@site/src/assets/icons/RefreshCw.svg';
 import RocketIcon from '@site/src/assets/icons/Rocket.svg';
 import CircleCheckIcon from '@site/src/assets/icons/circle-check.svg';
-import BadgeIcon from '@site/src/assets/icons/o2s-icon-badge.svg';
-import ContactIcon from '@site/src/assets/icons/o2s-icon-contact.svg';
-import LoopIcon from '@site/src/assets/icons/o2s-icon-loop.svg';
-import RoadmapIcon from '@site/src/assets/icons/o2s-icon-roadmap.svg';
-import SupportIcon from '@site/src/assets/icons/o2s-icon-support.svg';
-import { type BenefitCardProps, BenefitsSection } from '@site/src/components/BenefitsSection';
 import { DXPFeaturesSection } from '@site/src/components/DXPFeaturesSection';
 import { FooterSection } from '@site/src/components/FooterSection';
 import { HeroBannerSection } from '@site/src/components/HeroBannerSection';
@@ -19,39 +13,43 @@ import Layout from '@theme/Layout';
 
 import styles from './product.module.scss';
 
-const benefits: Array<BenefitCardProps> = [
-    {
-        icon: <SupportIcon className="w-[50px] h-[50px]" />,
-        title: 'Theming with Tailwind',
-        borderColor: 'transparent',
-    },
-    {
-        icon: <ContactIcon className="w-[50px] h-[50px]" />,
-        title: 'Override or extend components',
-        borderColor: 'transparent',
-    },
-    {
-        icon: <LoopIcon className="w-[50px] h-[50px]" />,
-        title: 'Add custom blocks (frontend + BFF logic)',
-        borderColor: 'transparent',
-    },
-    {
-        icon: <RoadmapIcon className="w-[50px] h-[50px]" />,
-        title: 'CMS schema and layout control',
-        borderColor: 'transparent',
-    },
-    {
-        icon: <BadgeIcon className="w-[50px] h-[50px]" />,
-        title: 'Lighthouse 90+ scores (Performance, SEO, A11y)',
-        borderColor: 'transparent',
-    },
-];
+// const benefits: Array<BenefitCardProps> = [
+//     {
+//         icon: <SupportIcon className="w-[50px] h-[50px]" />,
+//         title: 'Theming with Tailwind',
+//         borderColor: 'transparent',
+//     },
+//     {
+//         icon: <ContactIcon className="w-[50px] h-[50px]" />,
+//         title: 'Override or extend components',
+//         borderColor: 'transparent',
+//     },
+//     {
+//         icon: <LoopIcon className="w-[50px] h-[50px]" />,
+//         title: 'Add custom blocks (frontend + BFF logic)',
+//         borderColor: 'transparent',
+//     },
+//     {
+//         icon: <RoadmapIcon className="w-[50px] h-[50px]" />,
+//         title: 'CMS schema and layout control',
+//         borderColor: 'transparent',
+//     },
+//     {
+//         icon: <BadgeIcon className="w-[50px] h-[50px]" />,
+//         title: 'Lighthouse 90+ scores (Performance, SEO, A11y)',
+//         borderColor: 'transparent',
+//     },
+// ];
 
 const digitalPortalStarter: StarterInfoSectionProps = {
-    links: [
-        { link: 'https://demo-dxp.openselfservice.com/', label: 'Live Demo', target: '_blank' },
-        { link: '/docs/app-starters/dxp/overview', label: 'Docs' },
-        { link: 'https://storybook-dxp.openselfservice.com/?path=/docs', label: 'Storybook', target: '_blank' },
+    mainLink: { link: 'https://demo-dxp.openselfservice.com/', label: 'See live demo', target: '_blank' },
+    secondaryLink: {
+        link: 'https://storybook-dxp.openselfservice.com/?path=/docs',
+        label: 'View Storybook',
+        target: '_blank',
+    },
+    otherLinks: [
+        { link: '/docs/app-starters/dxp/overview', label: 'Docs', target: '_blank' },
         { link: 'https://github.com/o2sdev/dxp-starter-kit', label: 'GitHub', target: '_blank' },
     ],
     mainTitle: 'Digital Experience Portal Starter',
@@ -168,15 +166,15 @@ const digitalPortalStarter: StarterInfoSectionProps = {
 };
 
 const customerPortalStarter: StarterInfoSectionProps = {
-    links: [
-        { link: 'https://demo.openselfservice.com/', label: 'Live Demo', target: '_blank' },
+    mainLink: { link: 'https://demo.openselfservice.com/', label: 'See live demo', target: '_blank' },
+    secondaryLink: {
+        link: 'https://storybook-o2s.openselfservice.com/?path=/docs',
+        label: 'View Storybook',
+        target: '_blank',
+    },
+    otherLinks: [
+        { link: '/docs/app-starters/o2s/overview', label: 'Docs', target: '_blank' },
         { link: 'https://github.com/o2sdev/openselfservice', label: 'GitHub', target: '_blank' },
-        { link: '/docs/app-starters/o2s/overview', label: 'Docs' },
-        {
-            link: 'https://storybook-o2s.openselfservice.com/?path=/docs',
-            label: 'Storybook',
-            target: '_blank',
-        },
     ],
     mainTitle: 'Customer Portal Starter',
     description: (

@@ -1,5 +1,28 @@
 # @o2s/framework
 
+## 1.15.0
+
+### Minor Changes
+
+- e78c11a: feat: Added sorting support for products in mocked integration
+    - Added sorting functionality to `mapProducts` and `mapRelatedProducts` in mocked integration
+    - Supports sorting by name and price in ascending/descending order (format: `name_ASC`, `name_DESC`, `price_ASC`, `price_DESC`)
+    - Sorting is applied to filtered product lists before returning results
+
+- 79b7c87: add inline filters variant with expandable sections
+
+## 1.14.0
+
+### Minor Changes
+
+- db5b381: fixing various bugs related with blocks and ui components, adding sign-in button in navigation
+- c2d9438: added new blocks from dxp-starter-kit app
+
+### Patch Changes
+
+- Updated dependencies [221dc2c]
+    - @o2s/utils.logger@1.1.3
+
 ## 1.13.0
 
 ### Minor Changes

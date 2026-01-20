@@ -4,6 +4,10 @@ import React, { useEffect } from 'react';
 
 import { Mappings } from '@o2s/utils.frontend';
 
+import { toast } from '@o2s/ui/hooks/use-toast';
+
+import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
+
 import { Container } from '@o2s/ui/components/Container';
 import { RichText } from '@o2s/ui/components/RichText';
 
@@ -17,23 +21,39 @@ import { NotificationDetailsPureProps } from './NotificationDetails.types';
 
 export const NotificationDetailsPure: React.FC<NotificationDetailsPureProps> = ({ locale, ...component }) => {
     const { data: notification } = component;
+    const { labels } = useGlobalContext();
 
     useEffect(() => {
         const markAsViewed = async () => {
-            await sdk.blocks.markNotificationAs(
-                {
-                    id: component.id,
-                    status: 'VIEWED',
-                },
-                { 'x-locale': locale },
-                component.accessToken,
-            );
+            try {
+                await sdk.blocks.markNotificationAs(
+                    {
+                        id: component.id,
+                        status: 'VIEWED',
+                    },
+                    { 'x-locale': locale },
+                    component.accessToken,
+                );
+            } catch (_error) {
+                toast({
+                    variant: 'destructive',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
+                });
+            }
         };
 
         if (notification.status.value === 'UNVIEWED') {
             markAsViewed();
         }
-    }, [component.accessToken, component.id, locale, notification.status.value]);
+    }, [
+        component.accessToken,
+        component.id,
+        labels.errors.requestError.content,
+        labels.errors.requestError.title,
+        locale,
+        notification.status.value,
+    ]);
 
     return (
         <div className="w-full">

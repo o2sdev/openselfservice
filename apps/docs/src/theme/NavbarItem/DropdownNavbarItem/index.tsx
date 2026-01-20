@@ -40,7 +40,7 @@ function DropdownNavbarItemDesktop({
     items,
     position,
     className,
-    onClick,
+    onClick: _onClick,
     linkMore,
     ...props
 }: DesktopOrMobileNavBarItemPropsExpanded) {
@@ -121,7 +121,7 @@ function DropdownNavbarItemDesktop({
 function DropdownNavbarItemMobile({
     items,
     className,
-    position, // Need to destructure position from props so that it doesn't get passed on.
+    position: _position, // Need to destructure position from props so that it doesn't get passed on.
     onClick,
     ...props
 }: DesktopOrMobileNavBarItemProps) {

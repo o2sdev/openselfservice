@@ -7,6 +7,10 @@ import React, { useState, useTransition } from 'react';
 
 import { Mappings } from '@o2s/utils.frontend';
 
+import { toast } from '@o2s/ui/hooks/use-toast';
+
+import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
+
 import { ActionList } from '@o2s/ui/components/ActionList';
 import type { DataListColumnConfig } from '@o2s/ui/components/DataList';
 import { DataView } from '@o2s/ui/components/DataView';
@@ -23,16 +27,19 @@ import { Typography } from '@o2s/ui/elements/typography';
 import { Model, Request } from '../api-harmonization/ticket-list.client';
 import { sdk } from '../sdk';
 
-import { TicketListPureProps } from './TicketList.types';
+import { Action, TicketListPureProps } from './TicketList.types';
 
 export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessToken, routing, meta, ...component }) => {
     const { Link: LinkComponent } = createNavigation(routing);
     const inspector = LivePreview.useInspector();
+    const { labels } = useGlobalContext();
 
     const initialFilters: Request.GetTicketListBlockQuery = {
         id: component.id,
         offset: 0,
         limit: component.pagination?.limit || 5,
+        search: '',
+        priority: '',
     };
 
     const initialData = component.tickets.data;
@@ -44,25 +51,62 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
     const [data, setData] = useState<Model.TicketListBlock>(component);
     const [filters, setFilters] = useState(initialFilters);
     const [viewMode, setViewMode] = useState<'list' | 'grid'>(initialViewMode);
+    const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
 
     const [isPending, startTransition] = useTransition();
 
     const handleFilter = (data: Partial<Request.GetTicketListBlockQuery>) => {
         startTransition(async () => {
-            const newFilters = { ...filters, ...data };
-            const newData = await sdk.blocks.getTicketList(newFilters, { 'x-locale': locale }, accessToken);
-            setFilters(newFilters);
-            setData(newData);
+            try {
+                const newFilters = { ...filters, ...data };
+                const newData = await sdk.blocks.getTicketList(newFilters, { 'x-locale': locale }, accessToken);
+                setFilters(newFilters);
+                setData(newData);
+                setSelectedRows(new Set());
+            } catch (_error) {
+                toast({
+                    variant: 'destructive',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
+                });
+            }
         });
     };
 
     const handleReset = () => {
         startTransition(async () => {
-            const newData = await sdk.blocks.getTicketList(initialFilters, { 'x-locale': locale }, accessToken);
-            setFilters(initialFilters);
-            setData(newData);
+            try {
+                const newData = await sdk.blocks.getTicketList(initialFilters, { 'x-locale': locale }, accessToken);
+                setFilters(initialFilters);
+                setData(newData);
+                setSelectedRows(new Set());
+            } catch (_error) {
+                toast({
+                    variant: 'destructive',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
+                });
+            }
         });
     };
+
+    const variantConfig: Array<{ variant: Action['variant']; className: string }> = [
+        { variant: 'default', className: 'no-underline hover:no-underline' },
+        { variant: 'secondary', className: 'no-underline hover:no-underline flex-1' },
+        {
+            variant: 'ghost',
+            className:
+                'flex items-center gap-2 !no-underline hover:!no-underline cursor-pointer h-8 w-full justify-start',
+        },
+    ];
+
+    const actions: Action[] = (data.forms ?? []).map((form, index) => ({
+        label: form.label,
+        icon: form.icon,
+        url: form.url || '',
+        variant: variantConfig[index]?.variant ?? 'default',
+        className: variantConfig[index]?.className ?? '',
+    }));
 
     // Define columns configuration outside JSX for better readability
     const columns = data.table.columns.map((column) => {
@@ -70,8 +114,13 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
             case 'topic':
                 return {
                     ...column,
-                    type: 'text',
+                    type: 'custom',
                     cellClassName: 'max-w-[200px] lg:max-w-md',
+                    render: (_value: unknown, ticket: Model.Ticket) => (
+                        <Button asChild variant="link" size="none" className="truncate block text-left">
+                            <LinkComponent href={ticket.detailsUrl}>{ticket.topic.label}</LinkComponent>
+                        </Button>
+                    ),
                 };
             case 'status':
                 return {
@@ -94,7 +143,7 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                 };
         }
     }) as DataListColumnConfig<Model.Ticket>[];
-    const actions = data.table.actions
+    const tableActions = data.table.actions
         ? {
               ...data.table.actions,
               render: (ticket: Model.Ticket) => {
@@ -115,35 +164,27 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
             {initialData.length > 0 ? (
                 <div className="flex flex-col gap-6">
                     <div className="w-full flex gap-4 flex-col md:flex-row justify-between">
-                        <Typography variant="h1" asChild>
-                            <h1 {...inspector(meta, 'title')}>{data.title}</h1>
+                        <Typography variant="h2" asChild>
+                            <h2 {...inspector(meta, 'title')}>{data.title}</h2>
                         </Typography>
 
                         {data.forms && (
                             <ActionList
-                                visibleActions={data.forms.slice(0, 2).map((form, index) => (
-                                    <Button
-                                        asChild
-                                        variant={index === 0 ? 'default' : 'secondary'}
-                                        key={form.label}
-                                        className="no-underline hover:no-underline"
-                                    >
-                                        <LinkComponent href={form.url}>
-                                            {form.icon && <DynamicIcon name={form.icon} size={16} />}
-                                            {form.label}
-                                        </LinkComponent>
-                                    </Button>
-                                ))}
-                                dropdownActions={data.forms.slice(2).map((form) => (
-                                    <LinkComponent
-                                        href={form.url}
-                                        key={form.label}
-                                        className="flex items-center gap-2 !no-underline hover:!no-underline cursor-pointer"
-                                    >
-                                        {form.icon && <DynamicIcon name={form.icon} size={16} />}
-                                        {form.label}
-                                    </LinkComponent>
-                                ))}
+                                actions={actions
+                                    .filter((action) => action.label)
+                                    .map((action, index) => (
+                                        <Button
+                                            asChild
+                                            variant={action.variant}
+                                            key={`${action.label}-${index}`}
+                                            className={action.className}
+                                        >
+                                            <LinkComponent href={action.url}>
+                                                {action.icon && <DynamicIcon name={action.icon} size={16} />}
+                                                {action.label}
+                                            </LinkComponent>
+                                        </Button>
+                                    ))}
                                 showMoreLabel={data.labels.showMore}
                             />
                         )}
@@ -174,8 +215,12 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                         initialValues={filters}
                         onSubmit={handleFilter}
                         onReset={handleReset}
+                        variant="inline"
                         labels={{
                             clickToSelect: data.labels.clickToSelect,
+                            showMoreFilters: data.labels.showMoreFilters,
+                            hideMoreFilters: data.labels.hideMoreFilters,
+                            noActiveFilters: data.labels.noActiveFilters,
                         }}
                     />
 
@@ -186,8 +231,12 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                                     viewMode={viewMode}
                                     data={data.tickets.data}
                                     columns={columns}
-                                    actions={actions}
+                                    actions={tableActions}
                                     cardHeaderSlots={data.cardHeaderSlots}
+                                    enableRowSelection={component.enableRowSelection}
+                                    selectedRows={selectedRows}
+                                    onSelectionChange={setSelectedRows}
+                                    getRowKey={(item) => item.id}
                                 />
 
                                 {data.pagination && (

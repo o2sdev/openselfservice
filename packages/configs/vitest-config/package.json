@@ -1,0 +1,13 @@
+{
+    "name": "@o2s/vitest-config",
+    "version": "1.0.0",
+    "private": true,
+    "type": "module",
+    "exports": {
+        "./block": "./block.js"
+    },
+    "devDependencies": {
+        "vitest": "^4.0.17",
+        "unplugin-swc": "^1.5.9"
+    }
+}

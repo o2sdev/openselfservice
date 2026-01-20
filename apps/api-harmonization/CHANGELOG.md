@@ -1,5 +1,99 @@
 # @o2s/api-harmonization
 
+## 1.13.0
+
+### Minor Changes
+
+- e11b23a: resolving linter errors
+
+### Patch Changes
+
+- Updated dependencies [e11b23a]
+- Updated dependencies [e78c11a]
+- Updated dependencies [79b7c87]
+- Updated dependencies [e11b23a]
+- Updated dependencies [d197b89]
+- Updated dependencies [cd483b7]
+    - @o2s/blocks.featured-service-list@1.2.0
+    - @o2s/blocks.notification-details@1.3.0
+    - @o2s/blocks.notification-summary@1.1.0
+    - @o2s/blocks.notification-list@1.4.0
+    - @o2s/blocks.payments-history@1.2.0
+    - @o2s/blocks.payments-summary@1.2.0
+    - @o2s/utils.api-harmonization@0.2.0
+    - @o2s/blocks.service-details@1.2.0
+    - @o2s/blocks.article-search@1.3.0
+    - @o2s/blocks.orders-summary@1.3.0
+    - @o2s/blocks.ticket-details@1.3.0
+    - @o2s/blocks.ticket-summary@1.1.0
+    - @o2s/blocks.category-list@1.3.0
+    - @o2s/blocks.order-details@1.3.0
+    - @o2s/blocks.surveyjs-form@1.2.0
+    - @o2s/blocks.ticket-recent@1.2.0
+    - @o2s/configs.integrations@0.3.0
+    - @o2s/blocks.article-list@1.3.0
+    - @o2s/blocks.invoice-list@1.4.0
+    - @o2s/blocks.product-list@0.2.0
+    - @o2s/blocks.service-list@1.3.0
+    - @o2s/blocks.user-account@1.2.0
+    - @o2s/blocks.quick-links@1.3.0
+    - @o2s/blocks.ticket-list@1.5.0
+    - @o2s/blocks.order-list@1.4.0
+    - @o2s/modules.surveyjs@0.3.0
+    - @o2s/blocks.category@1.3.0
+    - @o2s/blocks.article@1.3.0
+    - @o2s/utils.frontend@0.3.0
+    - @o2s/blocks.faq@1.3.0
+    - @o2s/integrations.mocked@1.16.0
+    - @o2s/framework@1.15.0
+
+## 1.12.1
+
+### Patch Changes
+
+- 694c1e6: chore(api-harmonization): restored Express extended parser
+- 221dc2c: fix: added missing Eslint command to list-staged
+- Updated dependencies [221dc2c]
+- Updated dependencies [235f706]
+- Updated dependencies [db5b381]
+- Updated dependencies [235f706]
+- Updated dependencies [c2d9438]
+- Updated dependencies [ec8794c]
+    - @o2s/blocks.featured-service-list@1.1.2
+    - @o2s/blocks.notification-details@1.2.0
+    - @o2s/blocks.notification-summary@1.0.1
+    - @o2s/blocks.notification-list@1.3.0
+    - @o2s/blocks.payments-history@1.1.2
+    - @o2s/blocks.payments-summary@1.1.2
+    - @o2s/utils.api-harmonization@0.1.3
+    - @o2s/blocks.service-details@1.1.2
+    - @o2s/blocks.article-search@1.2.0
+    - @o2s/blocks.orders-summary@1.2.0
+    - @o2s/blocks.ticket-details@1.2.0
+    - @o2s/blocks.ticket-summary@1.0.1
+    - @o2s/blocks.category-list@1.2.2
+    - @o2s/blocks.order-details@1.2.0
+    - @o2s/blocks.surveyjs-form@1.1.2
+    - @o2s/blocks.ticket-recent@1.1.2
+    - @o2s/configs.integrations@0.2.1
+    - @o2s/blocks.article-list@1.2.2
+    - @o2s/blocks.invoice-list@1.3.0
+    - @o2s/blocks.product-list@0.1.1
+    - @o2s/blocks.service-list@1.2.0
+    - @o2s/blocks.user-account@1.1.2
+    - @o2s/integrations.mocked@1.15.0
+    - @o2s/blocks.quick-links@1.2.2
+    - @o2s/blocks.ticket-list@1.4.0
+    - @o2s/blocks.order-list@1.3.0
+    - @o2s/modules.surveyjs@0.2.3
+    - @o2s/blocks.category@1.2.0
+    - @o2s/blocks.article@1.2.2
+    - @o2s/utils.frontend@0.2.1
+    - @o2s/utils.logger@1.1.3
+    - @o2s/blocks.faq@1.2.2
+    - @o2s/telemetry@1.1.2
+    - @o2s/framework@1.14.0
+
 ## 1.12.0
 
 ### Minor Changes

@@ -6,6 +6,7 @@ import { cn } from '@o2s/ui/lib/utils';
 
 import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
 import { Image } from '@o2s/ui/components/Image';
+import { LinkList } from '@o2s/ui/components/LinkList';
 import { Price } from '@o2s/ui/components/Price';
 import { RichText } from '@o2s/ui/components/RichText';
 import { TooltipHover } from '@o2s/ui/components/TooltipHover';
@@ -13,8 +14,6 @@ import { TooltipHover } from '@o2s/ui/components/TooltipHover';
 import { Badge } from '@o2s/ui/elements/badge';
 import { Button } from '@o2s/ui/elements/button';
 import { Typography } from '@o2s/ui/elements/typography';
-
-import { LinkList } from '../../LinkList';
 
 import { FeatureItemProps, PricingCardProps } from './PricingCard.types';
 
@@ -49,8 +48,20 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({ title, description, ic
 };
 
 export const PricingCard: React.FC<Readonly<PricingCardProps>> = (props) => {
-    const { title, description, image, price, isPromoted, tags, links, featureListTitle, featureList, LinkComponent } =
-        props;
+    const {
+        title,
+        titleType: TitleTag = 'h3',
+        description,
+        image,
+        price,
+        isPromoted,
+        tags,
+        links,
+        featureListTitle,
+        featureList,
+        LinkComponent,
+        hasPriority,
+    } = props;
 
     return (
         <div
@@ -68,6 +79,7 @@ export const PricingCard: React.FC<Readonly<PricingCardProps>> = (props) => {
                             width={image.width}
                             height={image.height}
                             className="object-cover object-center w-full h-full"
+                            priority={hasPriority}
                         />
                     </div>
                 )}
@@ -76,7 +88,7 @@ export const PricingCard: React.FC<Readonly<PricingCardProps>> = (props) => {
                     <div className="flex flex-col gap-3">
                         {title && (
                             <Typography variant="highlightedSmall" asChild className={cn(isPromoted && 'text-primary')}>
-                                <h3>{title}</h3>
+                                <TitleTag>{title}</TitleTag>
                             </Typography>
                         )}
 

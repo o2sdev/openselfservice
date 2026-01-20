@@ -16,7 +16,7 @@ export const ChartTooltip: React.FC<ChartTooltipProps> = ({ type = 'number', act
         <div className="rounded-md bg-background p-2 border">
             <div className="flex flex-col gap-2">
                 {payload
-                    .map((item, index) => (
+                    ?.map((item, index) => (
                         <div key={`${item.name}-${index}`} className="flex flex-row justify-between gap-2">
                             <div className="flex items-center gap-2">
                                 <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg">

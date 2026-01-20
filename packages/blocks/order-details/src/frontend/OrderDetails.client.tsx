@@ -11,6 +11,10 @@ import { Orders } from '@o2s/framework/modules';
 
 import { cn } from '@o2s/ui/lib/utils';
 
+import { toast } from '@o2s/ui/hooks/use-toast';
+
+import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
+
 import { ActionList } from '@o2s/ui/components/ActionList';
 import { InfoCard } from '@o2s/ui/components/Cards/InfoCard';
 import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
@@ -34,7 +38,7 @@ import { Typography } from '@o2s/ui/elements/typography';
 import { Model, Request } from '../api-harmonization/order-details.client';
 import { sdk } from '../sdk';
 
-import { OrderDetailsPureProps } from './OrderDetails.types';
+import { Action, OrderDetailsPureProps } from './OrderDetails.types';
 
 const ProgressBar: React.FC<
     Readonly<{
@@ -99,6 +103,7 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
     ...component
 }) => {
     const { Link: LinkComponent } = createNavigation(routing);
+    const { labels } = useGlobalContext();
 
     const initialFilters: Request.GetOrderDetailsBlockQuery = {
         id: component.id,
@@ -114,53 +119,74 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
 
     const [isPending, startTransition] = useTransition();
 
-    const handleFilter = (data: Partial<any>) => {
+    const handleFilter = (data: Partial<Request.GetOrderDetailsBlockQuery>) => {
         startTransition(async () => {
-            const newFilters = { ...filters, ...data };
-            const newData = await sdk.blocks.getOrderDetails(
-                {
-                    id: orderId,
-                },
-                newFilters,
-                { 'x-locale': locale },
-                accessToken,
-            );
-            setFilters(newFilters);
-            setItems(newData.productList.products.data);
+            try {
+                const newFilters = { ...filters, ...data };
+                const newData = await sdk.blocks.getOrderDetails(
+                    {
+                        id: orderId,
+                    },
+                    newFilters,
+                    { 'x-locale': locale },
+                    accessToken,
+                );
+                setFilters(newFilters);
+                setItems(newData.productList.products.data);
+            } catch (_error) {
+                toast({
+                    variant: 'destructive',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
+                });
+            }
         });
     };
 
     const handleReset = () => {
         startTransition(async () => {
-            const newData = await sdk.blocks.getOrderDetails(
-                {
-                    id: orderId,
-                },
-                initialFilters,
-                { 'x-locale': locale },
-                accessToken,
-            );
-            setFilters(initialFilters);
-            setItems(newData.productList.products.data);
+            try {
+                const newData = await sdk.blocks.getOrderDetails(
+                    {
+                        id: orderId,
+                    },
+                    initialFilters,
+                    { 'x-locale': locale },
+                    accessToken,
+                );
+                setFilters(initialFilters);
+                setItems(newData.productList.products.data);
+            } catch (_error) {
+                toast({
+                    variant: 'destructive',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
+                });
+            }
         });
     };
 
-    const buttons = [
+    const actionsDefinition: Action[] = [
         {
             label: data.payOnlineLabel,
             icon: 'ArrowUpRight',
+            variant: 'destructive',
         },
         {
             label: data.reorderLabel,
             icon: 'IterationCw',
+            variant: data.order.overdue.isOverdue ? 'secondary' : 'default',
+            className: data.order.overdue.isOverdue ? 'flex-1' : '',
         },
         {
             label: data.trackOrderLabel,
             icon: 'Truck',
+            variant: data.order.overdue.isOverdue ? 'ghost' : 'secondary',
+            className: data.order.overdue.isOverdue ? 'w-full justify-start h-8' : 'flex-1',
         },
     ];
 
-    const actions = data.order.overdue.isOverdue ? buttons : buttons.slice(1);
+    const actions = data.order.overdue.isOverdue ? actionsDefinition : actionsDefinition.slice(1);
 
     const t = useTranslations();
 
@@ -185,49 +211,24 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
                     <div className="flex flex-row justify-end">
                         <div className="flex flex-col gap-4 sm:flex-row sm:items-center w-full sm:w-auto">
                             <ActionList
-                                visibleActions={[
-                                    <TooltipHover
-                                        key={actions[0]?.label}
-                                        trigger={(setIsOpen) => (
-                                            <Button
-                                                variant={data.order.overdue.isOverdue ? 'destructive' : 'default'}
-                                                onClick={() => setIsOpen(true)}
-                                            >
-                                                {actions[0]?.icon && <DynamicIcon name={actions[0].icon} size={16} />}
-                                                {actions[0]?.label}
-                                            </Button>
-                                        )}
-                                        content={<p>{t('general.comingSoon')}</p>}
-                                    />,
-                                    <TooltipHover
-                                        key={actions[1]?.label}
-                                        trigger={(setIsOpen) => (
-                                            <Button variant={'secondary'} onClick={() => setIsOpen(true)}>
-                                                {actions[1]?.icon && <DynamicIcon name={actions[1].icon} size={16} />}
-                                                {actions[1]?.label}
-                                            </Button>
-                                        )}
-                                        content={<p>{t('general.comingSoon')}</p>}
-                                    />,
-                                ]}
-                                dropdownActions={actions.slice(2).map((action) => (
-                                    <TooltipHover
-                                        key={action.label}
-                                        trigger={(setIsOpen) => (
-                                            <Button
-                                                variant="ghost"
-                                                size="sm"
-                                                disabled
-                                                className="w-full justify-start h-8"
-                                                onClick={() => setIsOpen(true)}
-                                            >
-                                                {action.icon && <DynamicIcon name={action.icon} size={16} />}
-                                                {action.label}
-                                            </Button>
-                                        )}
-                                        content={<p>{t('general.comingSoon')}</p>}
-                                    />
-                                ))}
+                                actions={actions
+                                    .filter((action) => action.label)
+                                    .map((action, index) => (
+                                        <TooltipHover
+                                            key={`${action.label}-${index}`}
+                                            trigger={(setIsOpen) => (
+                                                <Button
+                                                    variant={action.variant}
+                                                    onClick={() => setIsOpen(true)}
+                                                    className={action.className}
+                                                >
+                                                    {action.icon && <DynamicIcon name={action.icon} size={16} />}
+                                                    {action.label}
+                                                </Button>
+                                            )}
+                                            content={<p>{t('general.comingSoon')}</p>}
+                                        />
+                                    ))}
                                 showMoreLabel={data.labels.showMore}
                             />
                         </div>

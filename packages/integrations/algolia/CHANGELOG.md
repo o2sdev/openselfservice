@@ -1,5 +1,16 @@
 # @o2s/integrations.algolia
 
+## 1.3.2
+
+### Patch Changes
+
+- 221dc2c: fix: added missing Eslint command to list-staged
+- Updated dependencies [221dc2c]
+- Updated dependencies [db5b381]
+- Updated dependencies [c2d9438]
+    - @o2s/utils.logger@1.1.3
+    - @o2s/framework@1.14.0
+
 ## 1.3.1
 
 ### Patch Changes

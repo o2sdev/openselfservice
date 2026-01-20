@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/nextjs';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
 import { ProductListPure } from './ProductList.client';
 
@@ -84,6 +84,7 @@ export const Default: Story = {
                     id: 'sort',
                     label: 'Sort by',
                     allowMultiple: false,
+                    isLeading: true,
                     options: [
                         { label: 'Name ascending', value: 'name_ASC' },
                         { label: 'Name descending', value: 'name_DESC' },
@@ -96,6 +97,7 @@ export const Default: Story = {
                     id: 'type',
                     label: 'Product Type',
                     allowMultiple: true,
+                    isLeading: false,
                     options: [
                         { label: 'Physical', value: 'PHYSICAL' },
                         { label: 'Virtual', value: 'VIRTUAL' },
@@ -106,6 +108,7 @@ export const Default: Story = {
                     id: 'category',
                     label: 'Category',
                     allowMultiple: true,
+                    isLeading: true,
                     options: [
                         { label: 'Software', value: 'SOFTWARE' },
                         { label: 'Tools', value: 'TOOLS' },
@@ -119,6 +122,12 @@ export const Default: Story = {
                         { label: 'Training', value: 'TRAINING' },
                     ],
                 },
+                {
+                    __typename: 'FilterViewModeToggle',
+                    id: 'viewMode',
+                    value: 'grid',
+                    isLeading: true,
+                },
             ],
         },
         noResults: {
@@ -128,7 +137,10 @@ export const Default: Story = {
         labels: {
             clickToSelect: 'Click to select',
             gridView: 'Grid view',
-            tableView: 'Table view',
+            listView: 'List view',
+            showMoreFilters: 'Show more filters',
+            hideMoreFilters: 'Hide more filters',
+            noActiveFilters: 'No active filters',
         },
         products: {
             total: 6,

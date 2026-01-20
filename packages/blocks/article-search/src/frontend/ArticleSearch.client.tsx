@@ -4,12 +4,16 @@ import { createNavigation } from 'next-intl/navigation';
 import React, { useState, useTransition } from 'react';
 import { debounce } from 'throttle-debounce';
 
+import { toast } from '@o2s/ui/hooks/use-toast';
+
+import { useGlobalContext } from '@o2s/ui/providers/GlobalProvider';
+
 import { Autocomplete } from '@o2s/ui/components/Autocomplete';
 import { Container } from '@o2s/ui/components/Container';
 
 import { Typography } from '@o2s/ui/elements/typography';
 
-import { Model } from '../api-harmonization/article-search.client';
+import type { Model } from '../api-harmonization/article-search.client';
 import { sdk } from '../sdk';
 
 import { ArticleSearchPureProps } from './ArticleSearch.types';
@@ -25,18 +29,33 @@ export const ArticleSearchPure: React.FC<ArticleSearchPureProps> = ({
 }) => {
     const { useRouter } = createNavigation(routing);
     const router = useRouter();
+    const { labels } = useGlobalContext();
 
     const [suggestions, setSuggestions] = useState<Model.ArticleList['articles']>([]);
     const [isPending, startTransition] = useTransition();
 
     const getSuggestions = debounce(300, async (value: string) => {
         startTransition(async () => {
-            const result = await sdk.blocks.searchArticles(
-                { query: value, limit: 5, offset: 0, category },
-                { 'x-locale': locale },
-                accessToken,
-            );
-            if (result.articles) setSuggestions(result.articles);
+            try {
+                const result = await sdk.blocks.searchArticles(
+                    { query: value, limit: 5, offset: 0, category },
+                    { 'x-locale': locale },
+                    accessToken,
+                );
+                if (result.articles) {
+                    setSuggestions(result.articles);
+                } else {
+                    setSuggestions([]);
+                }
+            } catch (_error) {
+                toast({
+                    variant: 'destructive',
+                    title: labels.errors.requestError.title,
+                    description: labels.errors.requestError.content,
+                    duration: 60000,
+                });
+                setSuggestions([]);
+            }
         });
     });
 

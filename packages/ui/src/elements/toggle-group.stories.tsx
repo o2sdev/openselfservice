@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/nextjs';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { AlignCenter, AlignLeft, AlignRight } from 'lucide-react';
 
 import { ToggleGroup, ToggleGroupItem } from './toggle-group';

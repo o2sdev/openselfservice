@@ -1,6 +1,6 @@
 {
     "name": "@o2s/modules.surveyjs",
-    "version": "0.2.2",
+    "version": "0.3.0",
     "private": false,
     "license": "MIT",
     "description": "A module that handles fetching, rendering ans submitting SurveyJS-based forms.",
@@ -15,7 +15,7 @@
     ],
     "scripts": {
         "build": "tsc --build tsconfig.json --preserveWatchOutput && tsc-alias",
-        "lint": "tsc --noEmit && eslint \"{src,apps,libs,test}/**/*.{ts,tsx}\" --fix",
+        "lint": "tsc --noEmit && eslint \"src/**/*.{ts,tsx}\" --fix --max-warnings=0",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
@@ -25,17 +25,18 @@
         "@o2s/utils.api-harmonization": "*",
         "@o2s/utils.frontend": "*",
         "@o2s/configs.integrations": "*",
-        "survey-core": "^2.3.16",
-        "survey-react-ui": "^2.3.16"
+        "survey-core": "^2.5.5",
+        "survey-react-ui": "^2.5.5"
     },
     "devDependencies": {
         "dotenv-cli": "^11.0.0",
         "@o2s/eslint-config": "*",
+        "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
         "concurrently": "^9.2.1",
-        "eslint": "^9.39.1",
-        "prettier": "^3.6.2",
+        "eslint": "^9.39.2",
+        "prettier": "^3.7.4",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"
     },

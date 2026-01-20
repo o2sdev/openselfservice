@@ -1,7 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/nextjs';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
 import { Button } from '@o2s/ui/elements/button';
-import { Link } from '@o2s/ui/elements/link';
 
 import { ActionList } from './ActionList';
 
@@ -19,7 +18,7 @@ export const Default: Story = {
     args: {
         showMoreLabel: 'Show more actions',
         triggerVariant: 'outline',
-        visibleActions: [
+        actions: [
             <Button key="primary" variant="primary">
                 Primary Action
             </Button>,
@@ -33,35 +32,16 @@ export const Default: Story = {
                 Tertiary Action 2
             </Button>,
         ],
-        dropdownActions: [
-            <Link key="primary" variant="primary">
-                Primary Action
-            </Link>,
-            <Link key="secondary" variant="secondary">
-                Secondary Action
-            </Link>,
-            <Link key="tertiary1" variant="outline">
-                Tertiary Action 1
-            </Link>,
-            <Link key="tertiary2" variant="ghost">
-                Tertiary Action 2
-            </Link>,
-        ],
     },
 };
 
 export const SingleAction: Story = {
     args: {
         showMoreLabel: 'Show more actions',
-        visibleActions: [
+        actions: [
             <Button key="primary" variant="primary">
                 Single Action
             </Button>,
-        ],
-        dropdownActions: [
-            <Link key="primary" variant="primary">
-                Single Action
-            </Link>,
         ],
     },
 };
@@ -69,21 +49,13 @@ export const SingleAction: Story = {
 export const TwoActions: Story = {
     args: {
         showMoreLabel: 'Show more actions',
-        visibleActions: [
+        actions: [
             <Button key="primary" variant="primary">
                 Primary Action
             </Button>,
             <Button key="secondary" variant="secondary">
                 Secondary Action
             </Button>,
-        ],
-        dropdownActions: [
-            <Link key="primary" variant="primary">
-                Primary Action
-            </Link>,
-            <Link key="secondary" variant="secondary">
-                Secondary Action
-            </Link>,
         ],
     },
 };
@@ -92,8 +64,8 @@ export const WithDifferentVariant: Story = {
     args: {
         showMoreLabel: 'Show more actions',
         triggerVariant: 'destructive',
-        visibleActions: [
-            <Button key="primary" variant="primary">
+        actions: [
+            <Button key="primary" variant="destructive">
                 Primary Action
             </Button>,
             <Button key="secondary" variant="secondary">
@@ -105,20 +77,6 @@ export const WithDifferentVariant: Story = {
             <Button key="tertiary2" variant="ghost">
                 Tertiary Action 2
             </Button>,
-        ],
-        dropdownActions: [
-            <Link key="primary" variant="primary">
-                Primary Action
-            </Link>,
-            <Link key="secondary" variant="secondary">
-                Secondary Action
-            </Link>,
-            <Link key="tertiary1" variant="outline">
-                Tertiary Action 1
-            </Link>,
-            <Link key="tertiary2" variant="ghost">
-                Tertiary Action 2
-            </Link>,
         ],
     },
 };
