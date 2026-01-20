@@ -1,5 +1,24 @@
 # @o2s/ui
 
+## 1.8.0
+
+### Minor Changes
+
+- 5947ca4: added an `inline` variant to the `Filters` component that renders filters immediately, instead of in a draawer component
+- 8f39c25: feat: enhance ProductCard component with new layout adjustments
+- 79b7c87: add inline filters variant with expandable sections
+- cd483b7: - add MoreActionsMenu component and refactor ActionList
+    - migrate OrderDetails and TicketList to unified ActionList API
+    - improve breadcrumbs visibility and card border styling
+
+### Patch Changes
+
+- d197b89: fixed incorrect price rendering in `DataView` component
+- d197b89: removed unnecessary prop destructuring
+- Updated dependencies [e78c11a]
+- Updated dependencies [79b7c87]
+    - @o2s/framework@1.15.0
+
 ## 1.7.1
 
 ### Patch Changes
