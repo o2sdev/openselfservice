@@ -1,6 +1,5 @@
 import { ExecutionContext, Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import jwt from 'jsonwebtoken';
 
 import { LoggerService } from '@o2s/utils.logger';
 
