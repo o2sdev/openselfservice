@@ -1,0 +1,54 @@
+name: Deploy Docs
+
+# Deploys the docs app to Vercel production when a docs-vX.X.X tag is pushed
+# This workflow is triggered by tags matching the pattern docs-v*.*.*
+
+permissions:
+    actions: write
+    contents: read
+    deployments: write
+
+env:
+    VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+    VERCEL_PROJECT_ID: ${{ secrets.VERCEL_DOCS_PROJECT_ID }}
+
+on:
+    push:
+        tags:
+            - 'docs-v*.*.*'
+
+concurrency:
+    group: deploy-docs-${{ github.ref }}
+    cancel-in-progress: false
+
+jobs:
+    parse-docs-tag:
+        runs-on: ubuntu-latest
+        outputs:
+            version: ${{ steps.extract-version.outputs.version }}
+        steps:
+            - name: Extract version from tag
+              id: extract-version
+              run: |
+                  # Extract version from docs-vX.X.X format (e.g., docs-v1.2.3 -> 1.2.3)
+                  TAG="${GITHUB_REF#refs/tags/}"
+                  VERSION="${TAG#docs-v}"
+                  echo "version=$VERSION" >> $GITHUB_OUTPUT
+                  echo "Deploying docs version: $VERSION"
+
+    deploy-docs:
+        runs-on: ubuntu-latest
+        needs: parse-docs-tag
+        steps:
+            - name: Deploy Docs to Vercel Production
+              uses: ./.github/actions/deploy-docs
+              timeout-minutes: 20
+              with:
+                  repo-token: ${{ secrets.GITHUB_TOKEN }}
+                  vercel-token: ${{ secrets.VERCEL_ACCESS_TOKEN }}
+                  vercel-project-id: ${{ secrets.VERCEL_DOCS_PROJECT_ID }}
+                  environment: production
+                  fetch-depth: '1'
+                  run-quality-checks: 'false'
+                  build-args: '--prod'
+                  deploy-args: '--prod'

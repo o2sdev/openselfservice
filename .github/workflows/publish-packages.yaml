@@ -1,0 +1,73 @@
+name: Publish Packages
+
+# Publishes npm packages to the registry using Changesets
+# This workflow runs on pushes to the main branch and handles versioning and publishing
+
+permissions:
+    contents: write
+    packages: write
+    pull-requests: write
+
+env:
+    TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+    TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+
+on:
+    push:
+        branches:
+            - main
+
+concurrency:
+    group: publish-packages-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    skip-duplicate-check:
+        runs-on: ubuntu-latest
+        outputs:
+            should_skip: ${{ steps.skip_check.outputs.should_skip }}
+        steps:
+            - id: skip_check
+              uses: fkirc/skip-duplicate-actions@v5
+              with:
+                  concurrent_skipping: 'outdated_runs'
+                  cancel_others: 'true'
+
+    publish-packages:
+        runs-on: ubuntu-latest
+        needs: skip-duplicate-check
+        if: needs.skip-duplicate-check.outputs.should_skip != 'true'
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            - name: Prepare Environment
+              uses: ./.github/actions/setup-env
+              timeout-minutes: 10
+              with:
+                  repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Code Quality
+              uses: ./.github/actions/quality
+              timeout-minutes: 15
+
+            - name: Configure npm registry
+              run: |
+                  cat << EOF > "$HOME/.npmrc"
+                  @o2s:registry=https://registry.npmjs.org
+                  //registry.npmjs.org/:_authToken=$NPM_TOKEN
+                  EOF
+              env:
+                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+            - name: Create Release Pull Request or Publish to npm
+              id: changesets
+              uses: changesets/action@v1
+              with:
+                  publish: npm run release
+                  commit: 'feat(changeset): version packages'
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

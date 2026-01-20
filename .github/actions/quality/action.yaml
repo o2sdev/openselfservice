@@ -1,16 +1,24 @@
 name: Quality
 
+description: 'Runs build, lint, and test checks to ensure code quality'
+
 runs:
     using: 'composite'
     steps:
         - name: Build
           shell: bash
-          run: npm run build
+          run: |
+              set -e
+              npm run build
 
         - name: Lint
           shell: bash
-          run: npm run lint
+          run: |
+              set -e
+              npm run lint
 
         - name: Test
           shell: bash
-          run: npm run test
+          run: |
+              set -e
+              npm run test

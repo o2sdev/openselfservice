@@ -1,0 +1,51 @@
+name: Determine changed packages
+
+description: 'Determines which packages have changed using Turborepo. Returns JSON output with changed packages information.'
+
+inputs:
+    event-name:
+        description: 'GitHub event name (pull_request or push)'
+        required: true
+    base-sha:
+        description: 'Base SHA for pull requests (github.event.pull_request.base.sha)'
+        required: false
+        default: ''
+    fetch-depth:
+        description: 'Git fetch depth for checkout (0 for full history, required for turbo)'
+        required: false
+        default: '0'
+
+outputs:
+    package_changed:
+        description: 'JSON string containing changed packages information from turbo dry-run'
+        value: ${{ steps.changeset.outputs.result }}
+
+runs:
+    using: 'composite'
+    steps:
+        - name: Checkout code
+          uses: actions/checkout@v6
+          with:
+              # We set fetch-depth to 0 so referenced commits are available for turbo
+              # This is required for turbo to detect changes properly
+              fetch-depth: ${{ inputs.fetch-depth }}
+
+        - name: Determine changed packages
+          id: changeset
+          shell: bash
+          env:
+              # The turbo filter varies depending on if we're using this in a PR or on a push to a branch
+              # For PRs, we use github.event.pull_request.base.sha to see which packages changed since that SHA
+              # For branch pushes/merges, we reference HEAD^ to determine the previous HEAD
+              # See: https://stackoverflow.com/a/61861763/2379922
+              TURBO_REF_FILTER: ${{ inputs.event-name == 'pull_request' && inputs.base-sha || 'HEAD^' }}
+          run: |
+              set -e
+              # 1. We need the 'output' of a turbo dry-run to get a json with all affected packages
+              # 2. The multi line json string is wrapped in EOF delimiters to make GHA happy
+              #    See: https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#multiline-strings
+              # 3. We specify the .github/ folder as a dependency. If workflows changed, we use that to mean
+              #    everything has changes pending... to force redeploys
+              echo 'result<<CHANGESET_DELIMITER' >> $GITHUB_OUTPUT
+              echo "$(npx -y turbo build --dry-run=json --filter=...[$TURBO_REF_FILTER])" >> $GITHUB_OUTPUT
+              echo 'CHANGESET_DELIMITER' >> $GITHUB_OUTPUT

@@ -1,5 +1,7 @@
 name: Prepare environment
 
+description: 'Sets up Node.js environment, installs dependencies, and installs Playwright browsers'
+
 inputs:
     repo-token:
         description: 'Token to access the repo'
@@ -15,12 +17,16 @@ runs:
 
         - name: Install Packages
           shell: bash
-          run: npm ci
+          run: |
+              set -e
+              npm ci
           env:
               CI: true
 
         - name: Install Playwright Browsers
           shell: bash
-          run: npx playwright install --with-deps
+          run: |
+              set -e
+              npx playwright install --with-deps
           env:
               CI: true
