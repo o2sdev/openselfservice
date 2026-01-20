@@ -188,7 +188,7 @@ export class ZendeskTicketService extends Tickets.Service {
                               data.attachments.map((attachment) =>
                                   this.uploadAttachment(
                                       attachment.filename,
-                                      Buffer.from(attachment.content, 'base64'),
+                                      attachment.content,
                                       attachment.contentType,
                                   ),
                               ),
