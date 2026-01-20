@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.product-list",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "private": false,
     "license": "MIT",
     "description": "A block for displaying and filtering a list of products with grid and table views.",
