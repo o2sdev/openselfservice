@@ -11,7 +11,8 @@ Deploys the docs app to Vercel production environment.
 
 **Jobs:**
 - `parse-docs-tag`: Extracts version from tag
-- `deploy-docs`: Builds and deploys docs app to Vercel production
+- `quality-checks`: Runs code quality checks (build, lint, test) - must pass before deployment
+- `deploy-docs`: Builds and deploys docs app to Vercel production (only runs after quality checks pass)
 
 **Required Secrets:**
 - `VERCEL_ACCESS_TOKEN`: Vercel API token
@@ -25,7 +26,8 @@ Publishes npm packages to the registry using Changesets.
 
 **Jobs:**
 - `skip-duplicate-check`: Prevents duplicate workflow runs
-- `publish-packages`: Runs quality checks and publishes packages via Changesets
+- `quality-checks`: Runs code quality checks (build, lint, test) - must pass before publishing
+- `publish-packages`: Publishes packages via Changesets (only runs after quality checks pass)
 
 **Required Secrets:**
 - `NPM_TOKEN`: npm authentication token
@@ -44,7 +46,8 @@ Deploys preview environments for the docs app on pull requests.
 **Jobs:**
 - `skip-duplicate-check`: Prevents duplicate workflow runs
 - `changed-packages`: Determines which packages changed (composite action)
-- `deploy-docs-preview`: Deploys docs preview if docs package changed
+- `quality-checks`: Runs code quality checks (build, lint, test) - always runs regardless of changes
+- `deploy-docs-preview`: Deploys docs preview if docs package changed (only runs after quality checks pass)
 
 **Required Secrets:**
 - `VERCEL_ACCESS_TOKEN`: Vercel API token

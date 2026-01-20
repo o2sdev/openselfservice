@@ -54,9 +54,29 @@ jobs:
                   base-sha: ${{ github.event.pull_request.base.sha }}
                   fetch-depth: '0'
 
+    code-quality:
+        needs: skip-duplicate-check
+        if: needs.skip-duplicate-check.outputs.should_skip != 'true'
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v6
+              with:
+                  fetch-depth: 0
+
+            - name: Prepare Environment
+              uses: ./.github/actions/setup-env
+              timeout-minutes: 10
+              with:
+                  repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Code Quality
+              uses: ./.github/actions/quality
+              timeout-minutes: 15
+
     deploy-docs-preview:
         runs-on: ubuntu-latest
-        needs: [skip-duplicate-check, changed-packages]
+        needs: [skip-duplicate-check, changed-packages, code-quality]
         if: |
             needs.skip-duplicate-check.outputs.should_skip != 'true' &&
             contains(toJson(fromJson(needs.changed-packages.outputs.package_changed).packages), 'docs')
@@ -70,6 +90,6 @@ jobs:
                   vercel-project-id: ${{ secrets.VERCEL_DOCS_PROJECT_ID }}
                   environment: preview
                   fetch-depth: '0'
-                  run-quality-checks: 'true'
+                  run-quality-checks: 'false'
                   build-args: ''
                   deploy-args: ''

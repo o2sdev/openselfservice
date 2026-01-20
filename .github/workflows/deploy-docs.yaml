@@ -36,10 +36,34 @@ jobs:
                   echo "version=$VERSION" >> $GITHUB_OUTPUT
                   echo "Deploying docs version: $VERSION"
 
+    quality-checks:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v6
+              with:
+                  fetch-depth: 0
+
+            - name: Prepare Environment
+              uses: ./.github/actions/setup-env
+              timeout-minutes: 10
+              with:
+                  repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Code Quality
+              uses: ./.github/actions/quality
+              timeout-minutes: 15
+
     deploy-docs:
         runs-on: ubuntu-latest
-        needs: parse-docs-tag
+        needs: [parse-docs-tag, quality-checks]
         steps:
+            - name: Checkout repository
+              uses: actions/checkout@v6
+              with:
+                  # Minimal checkout just to make the action file available
+                  fetch-depth: 1
+
             - name: Deploy Docs to Vercel Production
               uses: ./.github/actions/deploy-docs
               timeout-minutes: 20
