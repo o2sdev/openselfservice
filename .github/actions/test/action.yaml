@@ -1,6 +1,6 @@
-name: Build
+name: Test
 
-description: 'Checkout code, setup environment, build project, and upload build artifacts'
+description: 'Checkout code, setup environment, download build artifacts, and run tests'
 
 inputs:
     repo-token:
@@ -24,18 +24,13 @@ runs:
           with:
               repo-token: ${{ inputs.repo-token }}
 
-        - name: Build
+        - name: Download build artifacts
+          uses: actions/download-artifact@v4
+          with:
+              name: build-artifacts
+
+        - name: Test
           shell: bash
           run: |
               set -e
-              npm run build
-
-        - name: Upload build artifacts
-          uses: actions/upload-artifact@v4
-          with:
-              name: build-artifacts
-              path: |
-                  **/dist/**
-                  **/build/**
-                  **/.next/**
-              retention-days: 1
+              npm run test

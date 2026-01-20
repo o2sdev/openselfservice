@@ -11,23 +11,27 @@ Deploys the docs app to Vercel production environment.
 
 **Jobs:**
 - `parse-docs-tag`: Extracts version from tag
-- `quality-checks`: Runs code quality checks (build, lint, test) - must pass before deployment
-- `deploy-docs`: Builds and deploys docs app to Vercel production (only runs after quality checks pass)
+- `build`: Builds the project and uploads build artifacts (dist, build, .next directories)
+- `lint`: Lints the code - depends on `build` job and downloads build artifacts
+- `test`: Runs tests - depends on `build` job and downloads build artifacts
+- `deploy-docs`: Builds and deploys docs app to Vercel production (only runs after all quality checks pass)
 
 **Required Secrets:**
 - `VERCEL_ACCESS_TOKEN`: Vercel API token
 - `VERCEL_ORG_ID`: Vercel organization ID
 - `VERCEL_DOCS_PROJECT_ID`: Vercel project ID for docs app
 
-### `publish-packages.yaml`
+### `release.yaml`
 Publishes npm packages to the registry using Changesets.
 
 **Trigger:** Push to `main` branch
 
 **Jobs:**
 - `skip-duplicate-check`: Prevents duplicate workflow runs
-- `quality-checks`: Runs code quality checks (build, lint, test) - must pass before publishing
-- `publish-packages`: Publishes packages via Changesets (only runs after quality checks pass)
+- `build`: Builds the project and uploads build artifacts (dist, build, .next directories)
+- `lint`: Lints the code - depends on `build` job and downloads build artifacts
+- `test`: Runs tests - depends on `build` job and downloads build artifacts
+- `publish-packages`: Publishes packages via Changesets (only runs after all quality checks pass)
 
 **Required Secrets:**
 - `NPM_TOKEN`: npm authentication token
@@ -38,16 +42,18 @@ Publishes npm packages to the registry using Changesets.
 **Required Variables:**
 - `TURBO_TEAM`: Turborepo team name (if using remote caching)
 
-### `preview.yaml`
-Deploys preview environments for the docs app on pull requests.
+### `pull-request.yaml`
+Runs code quality checks (build, lint, test) on pull requests and optionally deploys docs preview.
 
 **Trigger:** Pull request events (`opened`, `synchronize`)
 
 **Jobs:**
 - `skip-duplicate-check`: Prevents duplicate workflow runs
 - `changed-packages`: Determines which packages changed (composite action)
-- `quality-checks`: Runs code quality checks (build, lint, test) - always runs regardless of changes
-- `deploy-docs-preview`: Deploys docs preview if docs package changed (only runs after quality checks pass)
+- `build`: Builds the project and uploads build artifacts (dist, build, .next directories) - always runs on PRs
+- `lint`: Lints the code - depends on `build` job and downloads build artifacts - always runs on PRs
+- `test`: Runs tests - depends on `build` job and downloads build artifacts - always runs on PRs
+- `deploy-docs-preview`: Deploys docs preview to Vercel if docs package changed (only runs after all quality checks pass)
 
 **Required Secrets:**
 - `VERCEL_ACCESS_TOKEN`: Vercel API token
@@ -80,15 +86,45 @@ Sets up Node.js environment, installs dependencies, and Playwright browsers.
 - Dependency installation via `npm ci`
 - Playwright browser installation
 
-### `quality`
-Runs code quality checks (build, lint, test).
+### `build`
+Runs the build process: checkout, setup environment, build project, and upload build artifacts.
 
-**No inputs required**
+**Inputs:**
+- `repo-token` (required): GitHub token for repository access
+- `fetch-depth` (optional): Git fetch depth for checkout (default: `0`)
 
 **Steps:**
-- Build: `npm run build`
-- Lint: `npm run lint`
-- Test: `npm run test`
+- Checks out code
+- Prepares environment (Node.js, dependencies, Playwright)
+- Builds project: `npm run build`
+- Uploads build artifacts (dist, build, .next directories)
+
+### `lint`
+Runs lint checks: checkout, setup environment, download build artifacts, and lint.
+
+**Inputs:**
+- `repo-token` (required): GitHub token for repository access
+- `fetch-depth` (optional): Git fetch depth for checkout (default: `0`)
+
+**Steps:**
+- Checks out code
+- Prepares environment (Node.js, dependencies, Playwright)
+- Downloads build artifacts
+- Lints code: `npm run lint`
+
+### `test`
+Runs tests: checkout, setup environment, download build artifacts, and test.
+
+**Inputs:**
+- `repo-token` (required): GitHub token for repository access
+- `fetch-depth` (optional): Git fetch depth for checkout (default: `0`)
+
+**Steps:**
+- Checks out code
+- Prepares environment (Node.js, dependencies, Playwright)
+- Downloads build artifacts
+- Runs tests: `npm run test`
+
 
 ### `changed-packages`
 Determines which packages have changed using Turborepo.
@@ -122,7 +158,7 @@ Unified action for deploying to Vercel (supports both production and preview env
 - Deploys prebuilt project to Vercel
 
 ### `deploy-docs`
-Complete workflow for deploying docs app: checkout, setup environment, optionally run quality checks, and deploy to Vercel.
+Complete workflow for deploying docs app: checkout, setup environment, and deploy to Vercel.
 
 **Inputs:**
 - `repo-token` (required): GitHub token for repository access
@@ -130,23 +166,15 @@ Complete workflow for deploying docs app: checkout, setup environment, optionall
 - `vercel-project-id` (required): Vercel project ID for docs app
 - `environment` (required): Vercel environment (`production` or `preview`)
 - `fetch-depth` (optional): Git fetch depth for checkout (`0` for full history, `1` for shallow, default: `1`)
-- `run-quality-checks` (optional): Whether to run quality checks before deployment (default: `false`)
 - `build-args` (optional): Additional arguments for Vercel build command
 - `deploy-args` (optional): Additional arguments for Vercel deploy command
 
 **Steps:**
 - Checks out code
 - Prepares environment (Node.js, dependencies, Playwright)
-- Optionally runs quality checks
 - Deploys to Vercel using `deploy-vercel` action
 
-**Note:** This action consolidates the common deployment workflow used by both production and preview deployments.
-
-### `build` (Legacy)
-Legacy action for deploying to Vercel production. Consider using `deploy-vercel` instead.
-
-### `preview` (Legacy)
-Legacy action for deploying to Vercel preview. Consider using `deploy-vercel` instead.
+**Note:** This action consolidates the common deployment workflow used by both production and preview deployments. Quality checks are run separately as dedicated jobs before deployment.
 
 ## Best Practices
 
