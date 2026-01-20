@@ -54,10 +54,10 @@ import * as TicketSummary from '@o2s/blocks.ticket-summary/api-harmonization';
 import * as UserAccount from '@o2s/blocks.user-account/api-harmonization';
 
 // BLOCK IMPORT
-import { configuration } from '@o2s/api-harmonization/config/configuration';
 
 import { AppConfig } from './app.config';
 import { AppService } from './app.service';
+import { configuration } from './config/configuration';
 import { ContextHeadersMiddleware } from './middleware/context-headers.middleware';
 import { HealthModule } from './modules/health/health.module';
 import { LoginPageModule } from './modules/login-page/login-page.module';
