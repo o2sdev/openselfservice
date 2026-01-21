@@ -15,27 +15,8 @@ runs:
               node-version: 24
               cache: 'npm'
 
-        - name: Restore install outputs from cache
-          uses: actions/cache/restore@v4
-          with:
-              path: |
-                  **/node_modules/**
-                  **/generated/**
-              key: ${{ runner.os }}-install-${{ github.sha }}
-
         - name: Install Packages
-          if: steps.cache-install.outputs.cache-hit != 'true'
           shell: bash
           run: npm ci
           env:
               CI: true
-
-        - name: Save install output to cache
-          id: cache-install
-          uses: actions/cache/save@v4
-          if: always()
-          with:
-              path: |
-                  **/node_modules/**
-                  **/generated/**
-              key: ${{ runner.os }}-install-${{ github.sha }}
