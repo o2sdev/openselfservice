@@ -33,7 +33,7 @@ runs:
 
         - name: Save install output to cache
           uses: actions/cache/save@v4
-          if: steps.cache-install.outputs.cache-hit != 'true'
+          if: always()
           with:
               path: |
                   **/node_modules/**
