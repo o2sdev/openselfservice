@@ -27,3 +27,13 @@ runs:
         - name: Build
           shell: bash
           run: npm run build
+
+        - name: Save build outputs to cache
+          uses: actions/cache/save@v4
+          if: always()
+          with:
+              path: |
+                  **/dist/**
+                  **/build/**
+                  !**/node_modules/**
+              key: ${{ runner.os }}-build-${{ github.sha }}

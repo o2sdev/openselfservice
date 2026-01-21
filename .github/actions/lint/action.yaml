@@ -24,11 +24,14 @@ runs:
           with:
               repo-token: ${{ inputs.repo-token }}
 
-        - name: Build
-          uses: ./.github/actions/build
+        - name: Restore build outputs from cache
+          uses: actions/cache/restore@v4
           with:
-              repo-token: ${{ secrets.GITHUB_TOKEN }}
-              fetch-depth: '0'
+              path: |
+                  **/dist/**
+                  **/build/**
+                  !**/node_modules/**
+              key: ${{ runner.os }}-build-${{ github.sha }}
 
         - name: Lint
           shell: bash
