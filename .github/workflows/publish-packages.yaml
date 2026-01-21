@@ -1,4 +1,4 @@
-name: Release
+name: Publish Packages
 
 # Publishes npm packages to the registry using Changesets
 # This workflow runs on pushes to the main branch and handles versioning and publishing
@@ -18,7 +18,7 @@ on:
             - main
 
 concurrency:
-    group: release-${{ github.ref }}
+    group: publish-packages-${{ github.ref }}
     cancel-in-progress: true
 
 jobs:
@@ -33,60 +33,29 @@ jobs:
                   concurrent_skipping: 'outdated_runs'
                   cancel_others: 'true'
 
-    build:
+    quality-checks:
         needs: skip-duplicate-check
         if: needs.skip-duplicate-check.outputs.should_skip != 'true'
         runs-on: ubuntu-latest
         steps:
-            - name: Checkout repository
+            - name: Checkout code
               uses: actions/checkout@v6
               with:
-                  # Minimal checkout just to make the action file available
-                  fetch-depth: 1
+                  fetch-depth: 0
 
-            - name: Build
-              uses: ./.github/actions/build
+            - name: Prepare Environment
+              uses: ./.github/actions/setup-env
+              timeout-minutes: 10
               with:
                   repo-token: ${{ secrets.GITHUB_TOKEN }}
-                  fetch-depth: '0'
 
-    lint:
-        needs: [skip-duplicate-check, build]
-        if: needs.skip-duplicate-check.outputs.should_skip != 'true'
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v6
-              with:
-                  # Minimal checkout just to make the action file available
-                  fetch-depth: 1
-
-            - name: Lint
-              uses: ./.github/actions/lint
-              with:
-                  repo-token: ${{ secrets.GITHUB_TOKEN }}
-                  fetch-depth: '0'
-
-    test:
-        needs: [skip-duplicate-check, build]
-        if: needs.skip-duplicate-check.outputs.should_skip != 'true'
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v6
-              with:
-                  # Minimal checkout just to make the action file available
-                  fetch-depth: 1
-
-            - name: Test
-              uses: ./.github/actions/test
-              with:
-                  repo-token: ${{ secrets.GITHUB_TOKEN }}
-                  fetch-depth: '0'
+            - name: Code Quality
+              uses: ./.github/actions/quality
+              timeout-minutes: 15
 
     publish-packages:
         runs-on: ubuntu-latest
-        needs: [skip-duplicate-check, build, lint, test]
+        needs: [skip-duplicate-check, quality-checks]
         if: needs.skip-duplicate-check.outputs.should_skip != 'true'
         steps:
             - name: Checkout code

@@ -1,6 +1,6 @@
 name: Deploy Docs
 
-description: 'Complete workflow for deploying docs app: checkout, setup environment, and deploy to Vercel'
+description: 'Complete workflow for deploying docs app: checkout, setup environment, optionally run quality checks, and deploy to Vercel'
 
 inputs:
     repo-token:
@@ -19,6 +19,10 @@ inputs:
         description: 'Git fetch depth for checkout (0 for full history, 1 for shallow)'
         required: false
         default: '1'
+    run-quality-checks:
+        description: 'Whether to run quality checks before deployment'
+        required: false
+        default: 'false'
     build-args:
         description: 'Additional arguments for Vercel build command'
         required: false
@@ -40,6 +44,10 @@ runs:
           uses: ./.github/actions/setup-env
           with:
               repo-token: ${{ inputs.repo-token }}
+
+        - name: Code Quality
+          if: inputs.run-quality-checks == 'true'
+          uses: ./.github/actions/quality
 
         - name: Deploy to Vercel
           env:
