@@ -33,6 +33,7 @@ runs:
                   **/dist/**
                   **/build/**
                   **/.next/**
+                  **/generated/**
                   !**/node_modules/**
               key: ${{ runner.os }}-build-${{ github.sha }}-${{ hashFiles('**/package-lock.json', '**/tsconfig.json', '**/turbo.json') }}
               restore-keys: |
