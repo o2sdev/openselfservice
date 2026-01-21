@@ -33,10 +33,7 @@ runs:
                   **/build/**
                   **/generated/**
                   !**/node_modules/**
-              key: ${{ runner.os }}-build-${{ github.sha }}-${{ hashFiles('**/package-lock.json', '**/tsconfig.json', '**/turbo.json') }}
-              restore-keys: |
-                  ${{ runner.os }}-build-${{ github.sha }}-
-                  ${{ runner.os }}-build-
+              key: ${{ runner.os }}-build-${{ github.sha }}
 
         - name: Build
           shell: bash
@@ -54,4 +51,4 @@ runs:
                   **/build/**
                   **/generated/**
                   !**/node_modules/**
-              key: ${{ runner.os }}-build-${{ github.sha }}-${{ hashFiles('**/package-lock.json', '**/tsconfig.json', '**/turbo.json') }}
+              key: ${{ runner.os }}-build-${{ github.sha }}
