@@ -29,8 +29,10 @@ runs:
           uses: actions/cache/restore@v4
           with:
               path: |
+                  **/.turbo/**
                   **/dist/**
                   **/build/**
+                  **/.next/**
                   **/generated/**
                   !**/node_modules/**
               key: ${{ runner.os }}-build-${{ github.sha }}-${{ hashFiles('**/package-lock.json', '**/tsconfig.json', '**/turbo.json') }}
@@ -50,8 +52,10 @@ runs:
           if: always()
           with:
               path: |
+                  **/.turbo/**
                   **/dist/**
                   **/build/**
+                  **/.next/**
                   **/generated/**
                   !**/node_modules/**
               key: ${{ runner.os }}-build-${{ github.sha }}-${{ hashFiles('**/package-lock.json', '**/tsconfig.json', '**/turbo.json') }}
