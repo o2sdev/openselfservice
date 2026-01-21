@@ -19,16 +19,10 @@ runs:
           with:
               fetch-depth: ${{ inputs.fetch-depth }}
 
-        - name: Prepare Environment
-          uses: ./.github/actions/setup-env
-          with:
-              repo-token: ${{ inputs.repo-token }}
-
         - name: Restore build outputs from cache
-          uses: actions/cache/restore@v4
+          uses: actions/cache@v4
           with:
               path: |
-                  **/.turbo/**
                   **/dist/**
                   **/build/**
                   **/.next/**
@@ -37,6 +31,11 @@ runs:
               restore-keys: |
                   ${{ runner.os }}-build-${{ github.sha }}-
                   ${{ runner.os }}-build-
+
+        - name: Prepare Environment
+          uses: ./.github/actions/setup-env
+          with:
+              repo-token: ${{ inputs.repo-token }}
 
         - name: Lint
           shell: bash

@@ -19,17 +19,11 @@ runs:
           with:
               fetch-depth: ${{ inputs.fetch-depth }}
 
-        - name: Prepare Environment
-          uses: ./.github/actions/setup-env
-          with:
-              repo-token: ${{ inputs.repo-token }}
-
         - name: Restore build outputs from cache
           id: cache-build
-          uses: actions/cache/restore@v4
+          uses: actions/cache@v4
           with:
               path: |
-                  **/.turbo/**
                   **/dist/**
                   **/build/**
                   **/.next/**
@@ -39,21 +33,14 @@ runs:
                   ${{ runner.os }}-build-${{ github.sha }}-
                   ${{ runner.os }}-build-
 
+        - name: Prepare Environment
+          uses: ./.github/actions/setup-env
+          with:
+              repo-token: ${{ inputs.repo-token }}
+
         - name: Build
           shell: bash
           run: |
               set -e
               # Build will be faster if cache hit (Turborepo handles its own caching)
               npm run build
-
-        - name: Save build outputs to cache
-          uses: actions/cache/save@v4
-          if: always()
-          with:
-              path: |
-                  **/.turbo/**
-                  **/dist/**
-                  **/build/**
-                  **/.next/**
-                  !**/node_modules/**
-              key: ${{ runner.os }}-build-${{ github.sha }}-${{ hashFiles('**/package-lock.json', '**/tsconfig.json', '**/turbo.json') }}

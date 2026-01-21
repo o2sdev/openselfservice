@@ -15,9 +15,9 @@ runs:
               node-version: 24
               cache: 'npm'
 
-        - name: Restore node_modules from cache
+        - name: Cache node_modules
           id: cache-node-modules
-          uses: actions/cache/restore@v4
+          uses: actions/cache@v4
           with:
               path: |
                   node_modules
@@ -35,12 +35,3 @@ runs:
               npm ci
           env:
               CI: true
-
-        - name: Save node_modules to cache
-          uses: actions/cache/save@v4
-          if: always()
-          with:
-              path: |
-                  node_modules
-                  **/node_modules
-              key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
