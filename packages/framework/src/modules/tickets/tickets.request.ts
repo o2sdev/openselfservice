@@ -8,7 +8,7 @@ export class GetTicketParams {
 
 export class TicketAttachmentInput {
     filename!: string;
-    content!: string; // base64 encoded content
+    content!: Buffer;
     contentType!: string; // e.g., 'application/pdf'
 }
 
