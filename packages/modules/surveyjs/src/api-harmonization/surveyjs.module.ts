@@ -12,7 +12,7 @@ import { SurveyjsService } from './surveyjs.service';
 export class SurveyjsModule {
     static register(config: ApiConfig): DynamicModule {
         const cmsService = config.integrations.cms.service;
-        const ticketsService = config.integrations.tickets?.service;
+        const ticketsService = config.integrations.tickets.service;
         return {
             module: SurveyjsModule,
             imports: [LoggerModule, HttpModule],
@@ -22,14 +22,10 @@ export class SurveyjsModule {
                     provide: CMS.Service,
                     useClass: cmsService as Type,
                 },
-                ...(ticketsService
-                    ? [
-                          {
-                              provide: Tickets.Service,
-                              useClass: ticketsService as Type,
-                          },
-                      ]
-                    : []),
+                {
+                    provide: Tickets.Service,
+                    useClass: ticketsService as Type,
+                },
             ],
             controllers: [SurveyjsController],
             exports: [SurveyjsService],
