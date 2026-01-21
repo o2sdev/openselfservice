@@ -16,7 +16,6 @@ runs:
               cache: 'npm'
 
         - name: Restore install outputs from cache
-          id: cache-install
           uses: actions/cache/restore@v4
           with:
               path: |
@@ -32,6 +31,7 @@ runs:
               CI: true
 
         - name: Save install output to cache
+          id: cache-install
           uses: actions/cache/save@v4
           if: always()
           with:
