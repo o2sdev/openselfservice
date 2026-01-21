@@ -27,17 +27,18 @@ runs:
                   ${{ runner.os }}-node-modules-
 
         - name: Install Packages
-          if: steps.cache-node-modules.outputs.cache-hit != 'true'
           shell: bash
           run: |
               set -e
+              # npm ci will be faster if node_modules exists from cache
+              # It will still verify integrity and install any missing packages
               npm ci
           env:
               CI: true
 
         - name: Save node_modules to cache
-          if: steps.cache-node-modules.outputs.cache-hit != 'true'
           uses: actions/cache/save@v4
+          if: always()
           with:
               path: |
                   node_modules
