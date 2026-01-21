@@ -66,15 +66,48 @@ export class SurveyjsService {
         );
     }
 
-    public submitSurvey(payload: SurveyJsSubmitPayload, authorization?: string): Observable<void> {
-        return this.cmsService.getSurvey({ code: payload.code }).pipe(
+    /**
+     * Unified submit survey method that handles both JSON and multipart/form-data submissions.
+     *
+     * @param payload - Survey payload (JSON format) or form data (multipart format)
+     * @param authorization - Authorization token
+     * @param files - Optional array of Multer files (for multipart/form-data submissions)
+     */
+    public submitSurvey(
+        payload: SurveyJsSubmitPayload | (Record<string, string> & { code: string }),
+        authorization?: string,
+        files?: Express.Multer.File[],
+    ): Observable<void> {
+        // Detect submission format
+        const isMultipartSubmission = files && files.length > 0;
+        const code = payload.code;
+
+        return this.cmsService.getSurvey({ code }).pipe(
             switchMap((survey) => {
                 const decodedToken = authorization ? Utils.Auth.decodeAuthorizationToken(authorization) : undefined;
                 if (!this.hasAccess(survey.requiredRoles, decodedToken)) {
                     this.logger.info('User does not have access to survey');
                     throw new UnauthorizedException('User does not have access to survey');
                 }
-                return this.validateSurvey(survey.code, payload.surveyPayload).pipe(
+
+                // For multipart submissions with files going to tickets - handle directly
+                if (isMultipartSubmission && survey.submitDestination.includes('tickets')) {
+                    return this.handleMultipartTicketSubmission(
+                        payload as Record<string, string>,
+                        files,
+                        authorization,
+                    );
+                }
+
+                // For JSON submissions - validate payload format
+                if (!('surveyPayload' in payload)) {
+                    throw new BadRequestException('Invalid payload format for JSON submission');
+                }
+
+                const jsonPayload = payload as SurveyJsSubmitPayload;
+                const surveyPayload = jsonPayload.surveyPayload;
+
+                return this.validateSurvey(code, surveyPayload).pipe(
                     concatMap((validationResult) => {
                         if (!validationResult) {
                             this.logger.error('Survey payload is not valid.');
@@ -86,18 +119,16 @@ export class SurveyjsService {
                         for (const destination of survey.submitDestination) {
                             switch (destination) {
                                 case 'surveyjs':
-                                    submissions.push(
-                                        this.submitToSurveyJs(payload.surveyPayload, survey.postId, userEmail),
-                                    );
+                                    submissions.push(this.submitToSurveyJs(surveyPayload, survey.postId, userEmail));
                                     break;
                                 case 'tickets':
-                                    submissions.push(this.submitToTickets(payload.surveyPayload, authorization));
+                                    submissions.push(this.submitToTickets(surveyPayload, authorization));
                                     break;
                             }
                         }
 
                         if (!submissions.length) {
-                            this.logger.info(`No submit destinations specified for survey with code ${payload.code}`);
+                            this.logger.info(`No submit destinations specified for survey with code ${code}`);
                             return of(undefined);
                         }
 
@@ -129,6 +160,41 @@ export class SurveyjsService {
             catchError((error) => {
                 this.logger.error(`Error occurred while submitting survey: ${error.message}`);
                 throw new BadRequestException('Error occurred while submitting survey.');
+            }),
+        );
+    }
+
+    private handleMultipartTicketSubmission(
+        formData: Record<string, string>,
+        files: Express.Multer.File[],
+        authorization?: string,
+    ): Observable<void> {
+        const { code, ...surveyData } = formData;
+
+        // Convert Multer files to TicketAttachmentInput format
+        const attachments = files.map((file) => ({
+            filename: file.originalname,
+            content: file.buffer,
+            contentType: file.mimetype,
+        }));
+
+        const ticketData: Tickets.Request.PostTicketBody = {
+            title: surveyData.title || '',
+            description: surveyData.description || '',
+            topic: surveyData.topic || '',
+            priority: surveyData.priority,
+            type: surveyData.type,
+            attachments,
+        };
+
+        return this.ticketsService.createTicket(ticketData, authorization).pipe(
+            map(() => {
+                this.logger.info('Ticket created successfully from survey with files', 'SURVEYJS');
+                return undefined;
+            }),
+            catchError((error) => {
+                this.logger.error(`Error occurred while creating ticket from survey: ${error.message}`, 'SURVEYJS');
+                throw new BadRequestException('Error occurred while creating ticket from survey.');
             }),
         );
     }

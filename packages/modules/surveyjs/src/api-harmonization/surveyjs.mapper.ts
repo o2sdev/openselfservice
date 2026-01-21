@@ -79,35 +79,30 @@ const mapData = (element: Panelbase): Panelbase => {
     };
 };
 
-/**
- * Maps Survey.js form payload to Ticket creation data.
- * 
- * Survey.js returns files in format: { name: string, type: string (MIME), content: string (base64) }
- * 
- * Expected Survey.js configuration (after fix):
- * - topic: value = "TOOL_REPAIR" (uppercase) - maps to custom field in Zendesk
- * - priority: value = "urgent" (lowercase) - Zendesk API format
- * - type: value = "problem" (lowercase) - Zendesk API format
- */
 export const mapSurveyToTicket = (surveyPayload: SurveyResult): Tickets.Request.PostTicketBody => {
     // Map attachments from Survey.js format to Tickets format
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const attachments = surveyPayload.attachments
         ? (Array.isArray(surveyPayload.attachments) ? surveyPayload.attachments : [surveyPayload.attachments])
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              .map((file: any) => ({
-                  filename: file.name,
-                  content: file.content, // base64 encoded
-                  contentType: file.type, // MIME type
-              }))
+              .map((file: any) => {
+                  // Convert base64 string to Buffer
+                  // Survey.js may include data URI prefix (data:image/png;base64,...)
+                  const base64Data = file.content.includes(',') ? file.content.split(',')[1] : file.content;
+
+                  return {
+                      filename: file.name,
+                      content: Buffer.from(base64Data, 'base64'),
+                      contentType: file.type, // MIME type
+                  };
+              })
         : undefined;
 
     return {
         title: surveyPayload.title as string,
         description: surveyPayload.description as string,
-        topic: surveyPayload.topic as string, // TOOL_REPAIR, FLEET_EXCHANGE, etc. (uppercase)
-        priority: surveyPayload.priority as string | undefined, // urgent, high, normal, low (lowercase - Zendesk API)
-        type: surveyPayload.type as string | undefined, // problem, incident, question, task (lowercase - Zendesk API)
+        topic: surveyPayload.topic as string,
+        priority: surveyPayload.priority as string | undefined,
+        type: surveyPayload.type as string | undefined,
         attachments,
     };
 };
