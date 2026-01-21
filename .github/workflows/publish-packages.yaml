@@ -33,13 +33,13 @@ jobs:
                   concurrent_skipping: 'outdated_runs'
                   cancel_others: 'true'
 
-    quality-checks:
+    publish-packages:
+        runs-on: ubuntu-latest
         needs: skip-duplicate-check
         if: needs.skip-duplicate-check.outputs.should_skip != 'true'
-        runs-on: ubuntu-latest
         steps:
             - name: Checkout code
-              uses: actions/checkout@v6
+              uses: actions/checkout@v4
               with:
                   fetch-depth: 0
 
@@ -52,22 +52,6 @@ jobs:
             - name: Code Quality
               uses: ./.github/actions/quality
               timeout-minutes: 15
-
-    publish-packages:
-        runs-on: ubuntu-latest
-        needs: [skip-duplicate-check, quality-checks]
-        if: needs.skip-duplicate-check.outputs.should_skip != 'true'
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v6
-              with:
-                  fetch-depth: 0
-
-            - name: Prepare Environment
-              uses: ./.github/actions/setup-env
-              timeout-minutes: 10
-              with:
-                  repo-token: ${{ secrets.GITHUB_TOKEN }}
 
             - name: Configure npm registry
               run: |
