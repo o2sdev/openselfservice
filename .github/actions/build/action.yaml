@@ -24,6 +24,28 @@ runs:
           with:
               repo-token: ${{ inputs.repo-token }}
 
+        - name: Restore build outputs from cache
+          id: cache-build
+          uses: actions/cache/restore@v4
+          with:
+              path: |
+                  **/dist/**
+                  **/build/**
+                  **/generated/**
+                  !**/node_modules/**
+              key: ${{ runner.os }}-build-${{ github.sha }}
+
         - name: Build
           shell: bash
           run: npm run build
+
+        - name: Save build outputs to cache
+          uses: actions/cache/save@v4
+          if: always()
+          with:
+              path: |
+                  **/dist/**
+                  **/build/**
+                  **/generated/**
+                  !**/node_modules/**
+              key: ${{ runner.os }}-build-${{ github.sha }}
