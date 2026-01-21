@@ -17,6 +17,8 @@ runs:
 
         - name: Install Packages
           shell: bash
-          run: npm ci
+          run: |
+              set -e
+              npm ci
           env:
               CI: true

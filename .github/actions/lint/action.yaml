@@ -36,4 +36,6 @@ runs:
 
         - name: Lint
           shell: bash
-          run: npm run lint
+          run: |
+              set -e
+              npm run lint

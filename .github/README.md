@@ -194,6 +194,7 @@ Complete workflow for deploying docs app: checkout, setup environment, and deplo
 - Only necessary permissions are granted
 
 ### Error Handling
+- All bash scripts use `set -e` to exit on error
 - Timeouts are set for long-running steps
 - Quality checks must pass before deployments
 

@@ -40,6 +40,7 @@ runs:
               # See: https://stackoverflow.com/a/61861763/2379922
               TURBO_REF_FILTER: ${{ inputs.event-name == 'pull_request' && inputs.base-sha || 'HEAD^' }}
           run: |
+              set -e
               # 1. We need the 'output' of a turbo dry-run to get a json with all affected packages
               # 2. The multi line json string is wrapped in EOF delimiters to make GHA happy
               #    See: https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#multiline-strings

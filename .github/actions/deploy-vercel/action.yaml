@@ -24,11 +24,14 @@ runs:
     steps:
         - name: Install Vercel CLI
           shell: bash
-          run: npm i --global vercel
+          run: |
+              set -e
+              npm i --global vercel
 
         - name: Pull environment variables from Vercel
           shell: bash
           run: |
+              set -e
               if [ "${{ inputs.environment }}" = "production" ]; then
                   vercel pull --environment=production --token=${{ inputs.vercel-token }}
               else
@@ -38,6 +41,7 @@ runs:
         - name: Build project locally
           shell: bash
           run: |
+              set -e
               if [ -n "${{ inputs.build-args }}" ]; then
                   vercel build ${{ inputs.build-args }}
               else
@@ -47,6 +51,7 @@ runs:
         - name: Deploy prebuilt project to Vercel
           shell: bash
           run: |
+              set -e
               if [ -n "${{ inputs.deploy-args }}" ]; then
                   vercel deploy --prebuilt ${{ inputs.deploy-args }} --token=${{ inputs.vercel-token }}
               else
