@@ -1,24 +1,24 @@
-name: Release
+name: PR Quality Checks and Preview
 
-# Publishes npm packages to the registry using Changesets
-# This workflow runs on pushes to the main branch and handles versioning and publishing
+# Runs code quality checks (build, lint, test) on pull requests
+# Additionally deploys docs preview to Vercel if docs package changed
 
 permissions:
-    contents: write
-    packages: write
+    actions: write
+    contents: read
+    checks: read
     pull-requests: write
+    deployments: write
 
 env:
-    TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-    TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+    VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
 
 on:
-    push:
-        branches:
-            - main
+    pull_request:
+        types: [opened, synchronize]
 
 concurrency:
-    group: release-${{ github.ref }}
+    group: pr-quality-checks-${{ github.event.pull_request.number }}
     cancel-in-progress: true
 
 jobs:
@@ -32,6 +32,27 @@ jobs:
               with:
                   concurrent_skipping: 'outdated_runs'
                   cancel_others: 'true'
+
+    changed-packages:
+        needs: skip-duplicate-check
+        if: needs.skip-duplicate-check.outputs.should_skip != 'true'
+        runs-on: ubuntu-latest
+        outputs:
+            package_changed: ${{ steps.determine-changes.outputs.package_changed }}
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v6
+              with:
+                  # Minimal checkout just to make the action file available
+                  fetch-depth: 1
+
+            - name: Determine which packages changed
+              id: determine-changes
+              uses: ./.github/actions/changed-packages
+              with:
+                  event-name: ${{ github.event_name }}
+                  base-sha: ${{ github.event.pull_request.base.sha }}
+                  fetch-depth: '0'
 
     build:
         needs: skip-duplicate-check
@@ -84,37 +105,27 @@ jobs:
                   repo-token: ${{ secrets.GITHUB_TOKEN }}
                   fetch-depth: '0'
 
-    publish-packages:
+    deploy-docs-preview:
         runs-on: ubuntu-latest
-        needs: [skip-duplicate-check, build, lint, test]
-        if: needs.skip-duplicate-check.outputs.should_skip != 'true'
+        needs: [skip-duplicate-check, changed-packages, build, lint, test]
+        if: |
+            needs.skip-duplicate-check.outputs.should_skip != 'true' &&
+            contains(toJson(fromJson(needs.changed-packages.outputs.package_changed).packages), 'docs')
         steps:
-            - name: Checkout code
+            - name: Checkout repository
               uses: actions/checkout@v6
               with:
-                  fetch-depth: 0
+                  # Minimal checkout just to make the action file available
+                  fetch-depth: 1
 
-            - name: Prepare Environment
-              uses: ./.github/actions/setup-env
-              timeout-minutes: 10
+            - name: Deploy Docs Preview to Vercel
+              uses: ./.github/actions/deploy-docs
+              timeout-minutes: 20
               with:
                   repo-token: ${{ secrets.GITHUB_TOKEN }}
-
-            - name: Configure npm registry
-              run: |
-                  cat << EOF > "$HOME/.npmrc"
-                  @o2s:registry=https://registry.npmjs.org
-                  //registry.npmjs.org/:_authToken=$NPM_TOKEN
-                  EOF
-              env:
-                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-            - name: Create Release Pull Request or Publish to npm
-              id: changesets
-              uses: changesets/action@v1
-              with:
-                  publish: npm run release
-                  commit: 'feat(changeset): version packages'
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+                  vercel-token: ${{ secrets.VERCEL_ACCESS_TOKEN }}
+                  vercel-project-id: ${{ secrets.VERCEL_DOCS_PROJECT_ID }}
+                  environment: preview
+                  fetch-depth: '0'
+                  build-args: ''
+                  deploy-args: ''
