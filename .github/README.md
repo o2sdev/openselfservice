@@ -8,8 +8,8 @@ This directory contains GitHub Actions workflows and composite actions for the O
 ```mermaid
 graph TD
     A[PR Opened/Synchronized] --> B[skip-duplicate-check]
-    B -->|Skip if duplicate| C[changed-packages]
-    B -->|Skip if duplicate| D[build]
+    B --> C[changed-packages]
+    B --> D[build]
     C --> E{docs package changed?}
     D --> F[lint]
     D --> G[test]
@@ -48,11 +48,9 @@ graph TD
 ```mermaid
 graph TD
     A[Push to main] --> B[skip-duplicate-check]
-    B -->|Skip if duplicate| C[build]
-    B -->|Skip if duplicate| D[lint]
-    B -->|Skip if duplicate| E[test]
-    C --> D
-    C --> E
+    B --> C[build]
+    C --> D[lint]
+    C --> E[test]
     D --> F[publish-packages]
     E --> F
     F --> G{Packages to publish?}
