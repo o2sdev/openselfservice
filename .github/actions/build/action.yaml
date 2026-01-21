@@ -35,5 +35,7 @@ runs:
               path: |
                   **/dist/**
                   **/build/**
+                  **/.next/**
+                  **/next-env.d.ts
                   !**/node_modules/**
               key: ${{ runner.os }}-build-${{ github.sha }}
