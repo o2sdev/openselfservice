@@ -40,12 +40,6 @@ jobs:
         outputs:
             package_changed: ${{ steps.determine-changes.outputs.package_changed }}
         steps:
-            - name: Checkout repository
-              uses: actions/checkout@v6
-              with:
-                  # Minimal checkout just to make the action file available
-                  fetch-depth: 1
-
             - name: Determine which packages changed
               id: determine-changes
               uses: ./.github/actions/changed-packages
