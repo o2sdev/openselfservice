@@ -66,21 +66,8 @@ export class SurveyjsService {
         );
     }
 
-    /**
-     * Unified submit survey method that handles both JSON and multipart/form-data submissions.
-     *
-     * @param payload - Survey payload (JSON format) or form data (multipart format)
-     * @param authorization - Authorization token
-     * @param files - Optional array of Multer files (for multipart/form-data submissions)
-     */
-    public submitSurvey(
-        payload: SurveyJsSubmitPayload | (Record<string, string> & { code: string }),
-        authorization?: string,
-        files?: Express.Multer.File[],
-    ): Observable<void> {
-        // Detect submission format
-        const isMultipartSubmission = files && files.length > 0;
-        const code = payload.code;
+    public submitSurvey(payload: SurveyJsSubmitPayload, authorization?: string): Observable<void> {
+        const { code, surveyPayload } = payload;
 
         return this.cmsService.getSurvey({ code }).pipe(
             switchMap((survey) => {
@@ -89,23 +76,6 @@ export class SurveyjsService {
                     this.logger.info('User does not have access to survey');
                     throw new UnauthorizedException('User does not have access to survey');
                 }
-
-                // For multipart submissions with files going to tickets - handle directly
-                if (isMultipartSubmission && survey.submitDestination.includes('tickets')) {
-                    return this.handleMultipartTicketSubmission(
-                        payload as Record<string, string>,
-                        files,
-                        authorization,
-                    );
-                }
-
-                // For JSON submissions - validate payload format
-                if (!('surveyPayload' in payload)) {
-                    throw new BadRequestException('Invalid payload format for JSON submission');
-                }
-
-                const jsonPayload = payload as SurveyJsSubmitPayload;
-                const surveyPayload = jsonPayload.surveyPayload;
 
                 return this.validateSurvey(code, surveyPayload).pipe(
                     concatMap((validationResult) => {
@@ -160,49 +130,6 @@ export class SurveyjsService {
             catchError((error) => {
                 this.logger.error(`Error occurred while submitting survey: ${error.message}`);
                 throw new BadRequestException('Error occurred while submitting survey.');
-            }),
-        );
-    }
-
-    private handleMultipartTicketSubmission(
-        formData: Record<string, string>,
-        files: Express.Multer.File[],
-        authorization?: string,
-    ): Observable<void> {
-        const { code, ...surveyData } = formData;
-
-        // Validate required fields for ticket creation
-        if (!surveyData.title || !surveyData.description || !surveyData.topic) {
-            this.logger.error(
-                'Missing required fields for ticket creation: title, description, and topic are required',
-            );
-            throw new BadRequestException('Title, description, and topic are required to create a ticket');
-        }
-
-        // Convert Multer files to TicketAttachmentInput format
-        const attachments = files.map((file) => ({
-            filename: file.originalname,
-            content: file.buffer,
-            contentType: file.mimetype,
-        }));
-
-        const ticketData: Tickets.Request.PostTicketBody = {
-            title: surveyData.title,
-            description: surveyData.description,
-            topic: surveyData.topic,
-            priority: surveyData.priority,
-            type: surveyData.type,
-            attachments,
-        };
-
-        return this.ticketsService.createTicket(ticketData, authorization).pipe(
-            map(() => {
-                this.logger.info('Ticket created successfully from survey with files', 'SURVEYJS');
-                return undefined;
-            }),
-            catchError((error) => {
-                this.logger.error(`Error occurred while creating ticket from survey: ${error.message}`, 'SURVEYJS');
-                throw new BadRequestException('Error occurred while creating ticket from survey.');
             }),
         );
     }

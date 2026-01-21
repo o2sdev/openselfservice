@@ -110,66 +110,14 @@ export const Survey: React.FC<SurveyProps> = ({ code, labels, locale, accessToke
         const handleSubmit = async (data: Model.SurveyResult) => {
             startTransition(async () => {
                 try {
-                    // Detect file fields from survey schema
-                    const fileFieldNames = new Set<string>();
-
-                    if (state.model) {
-                        state.model.getAllQuestions().forEach((question) => {
-                            if (question.getType() === 'file') {
-                                fileFieldNames.add(question.name);
-                            }
-                        });
-                    }
-
-                    // Separate files from regular data based on schema
-                    const files: File[] = [];
-                    const cleanedData: Record<string, unknown> = {};
-
-                    for (const [key, value] of Object.entries(data)) {
-                        if (fileFieldNames.has(key) && value) {
-                            // This is a file field - convert Survey.js format to File objects
-                            const attachments = Array.isArray(value) ? value : [value];
-
-                            for (const attachment of attachments) {
-                                if (attachment && typeof attachment === 'object' && 'content' in attachment) {
-                                    // Decode base64 to Blob
-                                    const base64Data = attachment.content.split(',')[1] || attachment.content;
-                                    const byteCharacters = atob(base64Data);
-                                    const byteNumbers = new Array(byteCharacters.length);
-                                    for (let i = 0; i < byteCharacters.length; i++) {
-                                        byteNumbers[i] = byteCharacters.charCodeAt(i);
-                                    }
-                                    const byteArray = new Uint8Array(byteNumbers);
-                                    const blob = new Blob([byteArray], { type: attachment.type });
-                                    const file = new File([blob], attachment.name, { type: attachment.type });
-                                    files.push(file);
-                                }
-                            }
-                        } else {
-                            // Regular field - include in cleaned data
-                            cleanedData[key] = value;
-                        }
-                    }
-
-                    // Use multipart/form-data if files were detected
-                    if (files.length > 0) {
-                        await sdk.modules.submitSurvey(
-                            { code, ...cleanedData } as Record<string, string> & { code: string },
-                            { 'x-locale': locale },
-                            accessToken,
-                            files,
-                        );
-                    } else {
-                        // Use regular JSON submission for forms without files
-                        await sdk.modules.submitSurvey(
-                            {
-                                code,
-                                surveyPayload: data,
-                            },
-                            { 'x-locale': locale },
-                            accessToken,
-                        );
-                    }
+                    await sdk.modules.submitSurvey(
+                        {
+                            code,
+                            surveyPayload: data,
+                        },
+                        { 'x-locale': locale },
+                        accessToken,
+                    );
                 } catch (error) {
                     handleError(error, labels);
                 }
@@ -203,7 +151,6 @@ export const Survey: React.FC<SurveyProps> = ({ code, labels, locale, accessToke
         };
 
         loadSurvey();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch, code, locale, accessToken, labels]);
 
     return (
