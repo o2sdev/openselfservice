@@ -37,10 +37,7 @@ runs:
 
         - name: Build
           shell: bash
-          run: |
-              set -e
-              # Build will be faster if cache hit (Turborepo handles its own caching)
-              npm run build
+          run: npm run build
 
         - name: Save build outputs to cache
           uses: actions/cache/save@v4

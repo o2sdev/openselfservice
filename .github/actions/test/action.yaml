@@ -36,14 +36,10 @@ runs:
 
         - name: Install Playwright Browsers
           shell: bash
-          run: |
-              set -e
-              npx playwright install --with-deps
+          run: npx playwright install --with-deps
           env:
               CI: true
 
         - name: Test
           shell: bash
-          run: |
-              set -e
-              npm run test
+          run: npm run test
