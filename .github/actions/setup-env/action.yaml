@@ -22,7 +22,6 @@ runs:
               path: |
                   node_modules
                   **/node_modules
-                  **/generated/**
               key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
               restore-keys: |
                   ${{ runner.os }}-node-modules-
@@ -43,5 +42,4 @@ runs:
               path: |
                   node_modules
                   **/node_modules
-                  **/generated/**
               key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
