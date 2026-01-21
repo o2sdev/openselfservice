@@ -1,16 +1,14 @@
 name: Build package
 
-description: 'Builds and deploys a package to Vercel production environment'
-
 inputs:
     vercel-token:
-        description: 'Token to access Vercel'
+        description: 'Token to access the vercel'
         required: true
     pull-env-args:
-        description: 'Arguments to pull environment variables from Vercel'
+        description: 'Arguments to pull env from vercel'
         required: true
     build-env-args:
-        description: 'Arguments for Vercel build command'
+        description: 'Arguments to build env'
         required: true
 
 runs:
@@ -18,24 +16,16 @@ runs:
     steps:
         - name: Install Vercel CLI
           shell: bash
-          run: |
-              set -e
-              npm i --global vercel
+          run: npm i --global vercel
 
-        - name: Pull environment variables from Vercel
+        - name: Get Env
           shell: bash
-          run: |
-              set -e
-              vercel pull ${{ inputs.pull-env-args }} --token=${{ inputs.vercel-token }}
+          run: vercel pull ${{ inputs.pull-env-args }} --token=${{ inputs.vercel-token }}
 
-        - name: Build project locally
+        - name: Vercel build local
           shell: bash
-          run: |
-              set -e
-              vercel build ${{ inputs.build-env-args }}
+          run: vercel build ${{ inputs.build-env-args }}
 
-        - name: Deploy prebuilt project to Vercel
+        - name: Deploy Prebuilt to Vercel
           shell: bash
-          run: |
-              set -e
-              vercel deploy --prebuilt ${{ inputs.build-env-args }} --token=${{ inputs.vercel-token }}
+          run: vercel deploy --prebuilt ${{ inputs.build-env-args }} --token=${{ inputs.vercel-token }}

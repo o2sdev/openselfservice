@@ -1,19 +1,17 @@
 name: Build preview
 
-description: 'Builds and deploys a preview environment to Vercel'
-
 inputs:
     vercel-token:
-        description: 'Token to access Vercel'
+        description: 'Token to access the vercel'
         required: true
     github-token:
-        description: 'Token to access GitHub (for PR comments)'
+        description: 'Token to access the github'
         required: true
     vercel-org-id:
-        description: 'Vercel organization ID'
+        description: 'Vercel org id'
         required: true
     vercel-project-id:
-        description: 'Vercel project ID to deploy'
+        description: 'Vercel project id to deploy'
         required: true
     vercel-project-name:
         description: 'Vercel project name to deploy'
@@ -24,24 +22,27 @@ runs:
     steps:
         - name: Install Vercel CLI
           shell: bash
-          run: |
-              set -e
-              npm i --global vercel
+          run: npm i --global vercel
 
-        - name: Pull environment variables from Vercel
+        - name: Get Env
           shell: bash
-          run: |
-              set -e
-              vercel pull --environment=preview --token=${{ inputs.vercel-token }}
+          run: vercel pull --environment=preview --token=${{ inputs.vercel-token }}
 
-        - name: Build project locally
+        - name: Vercel build local
           shell: bash
-          run: |
-              set -e
-              vercel build
+          run: vercel build
 
-        - name: Deploy prebuilt project to Vercel
+#        - name: Deploy
+#          uses: amondnet/vercel-action@v25
+#          with:
+#              vercel-token: ${{ inputs.vercel-token}} # Required
+#              github-token: ${{ inputs.github-token }} #Optional
+#              vercel-args: "--prebuilt"
+#              vercel-org-id: ${{ inputs.vercel-org-id}} #Required
+#              vercel-project-id: ${{ inputs.vercel-project-id }} #Required
+#              vercel-project-name: ${{ inputs.vercel-project-name }}
+#              vercel-version: 30.2.0
+
+        - name: Deploy Prebuilt to Vercel
           shell: bash
-          run: |
-              set -e
-              vercel deploy --prebuilt --token=${{ inputs.vercel-token }}
+          run: vercel deploy --prebuilt --token=${{ inputs.vercel-token }}

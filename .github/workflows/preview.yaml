@@ -1,8 +1,4 @@
-name: Deploy Docs Preview
-
-# Deploys preview environments for the docs app on pull requests
-# This workflow runs on PR events and deploys to Vercel preview environment
-
+name: Preview Deployment
 permissions:
     actions: write
     contents: read
@@ -14,15 +10,14 @@ env:
     VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
 
 on:
+    push:
+        branches:
+            - main
     pull_request:
         types: [opened, synchronize]
 
-concurrency:
-    group: deploy-docs-preview-${{ github.event.pull_request.number }}
-    cancel-in-progress: true
-
 jobs:
-    skip-duplicate-check:
+    pre_job:
         runs-on: ubuntu-latest
         outputs:
             should_skip: ${{ steps.skip_check.outputs.should_skip }}
@@ -30,40 +25,47 @@ jobs:
             - id: skip_check
               uses: fkirc/skip-duplicate-actions@v5
               with:
+                  # All of these options are optional, so you can remove them if you are happy with the defaults
                   concurrent_skipping: 'outdated_runs'
+                  # paths_ignore: '["**/README.md", "**/ag-guideline.md", "**/docs/**", ".github/**"]'
                   cancel_others: 'true'
 
     changed-packages:
-        needs: skip-duplicate-check
-        if: needs.skip-duplicate-check.outputs.should_skip != 'true'
-        runs-on: ubuntu-latest
-        outputs:
-            package_changed: ${{ steps.determine-changes.outputs.package_changed }}
-        steps:
-            - name: Determine which packages changed
-              id: determine-changes
-              uses: ./.github/actions/changed-packages
-              with:
-                  event-name: ${{ github.event_name }}
-                  base-sha: ${{ github.event.pull_request.base.sha }}
-                  fetch-depth: '0'
+        needs: pre_job
+        if: needs.pre_job.outputs.should_skip != 'true'
+        name: Determine which apps changed
+        uses: ./.github/workflows/changed-packages.yaml
 
-    deploy-docs-preview:
+    deploy-preview:
         runs-on: ubuntu-latest
-        needs: [skip-duplicate-check, changed-packages]
-        if: |
-            needs.skip-duplicate-check.outputs.should_skip != 'true' &&
-            contains(toJson(fromJson(needs.changed-packages.outputs.package_changed).packages), 'docs')
+        needs: [pre_job, changed-packages]
+        if: needs.pre_job.outputs.should_skip != 'true'
         steps:
-            - name: Deploy Docs Preview to Vercel
-              uses: ./.github/actions/deploy-docs
-              timeout-minutes: 20
+            - name: Checkout code
+              uses: actions/checkout@v6
+              with:
+                  fetch-depth: 2
+                  ref: ${{ needs.check-app.outputs.branch }}
+
+            - name: Prepare Environment
+              uses: ./.github/actions/setup-env
+              timeout-minutes: 10
               with:
                   repo-token: ${{ secrets.GITHUB_TOKEN }}
-                  vercel-token: ${{ secrets.VERCEL_ACCESS_TOKEN }}
-                  vercel-project-id: ${{ secrets.VERCEL_DOCS_PROJECT_ID }}
-                  environment: preview
-                  fetch-depth: '0'
-                  run-quality-checks: 'true'
-                  build-args: ''
-                  deploy-args: ''
+
+            - name: Code Quality
+              uses: ./.github/actions/quality
+              timeout-minutes: 10
+
+            - name: Deploy docs
+              if: contains(toJson(fromJson(needs.changed-packages.outputs.package_changed).packages), 'docs') && always()
+              env:
+                  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_DOCS_PROJECT_ID }}
+              uses: ./.github/actions/preview
+              timeout-minutes: 10
+              with:
+                  vercel-token: ${{ secrets.VERCEL_ACCESS_TOKEN }} # Required
+                  github-token: ${{ secrets.GITHUB_TOKEN }} #Optional
+                  vercel-org-id: ${{ secrets.VERCEL_ORG_ID}} #Required
+                  vercel-project-id: ${{ secrets.VERCEL_DOCS_PROJECT_ID }} #Required
+                  vercel-project-name: 'docs'

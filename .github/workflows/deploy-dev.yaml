@@ -1,0 +1,95 @@
+name: Release packages
+permissions:
+    actions: write
+    contents: write
+    packages: write
+    checks: read
+    pull-requests: write
+    deployments: write
+
+env:
+    TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+    TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    pre_job:
+        runs-on: ubuntu-latest
+        outputs:
+            should_skip: ${{ steps.skip_check.outputs.should_skip }}
+        steps:
+            - id: skip_check
+              uses: fkirc/skip-duplicate-actions@v5
+              with:
+                  # All of these options are optional, so you can remove them if you are happy with the defaults
+                  concurrent_skipping: 'outdated_runs'
+                  # paths_ignore: '["**/README.md", ".github/**"]'
+                  cancel_others: 'true'
+
+    release-packages:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v6
+              with:
+                  fetch-depth: 2
+                  ref: ${{ needs.check-app.outputs.branch }}
+
+            - name: Prepare Environment
+              uses: ./.github/actions/setup-env
+              timeout-minutes: 10
+              with:
+                  repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Code Quality
+              uses: ./.github/actions/quality
+              timeout-minutes: 10
+
+            - name: Creating .npmrc
+              run: |
+                  cat << EOF > "$HOME/.npmrc"
+                    @o2s:registry=https://registry.npmjs.org
+                    //registry.npmjs.org/:_authToken=$NPM_TOKEN
+                  EOF
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+            - name: Create Release Pull Request or Publish to npm
+              id: changesets
+              uses: changesets/action@v1
+              with:
+                  publish: npm run release
+                  commit: 'feat(changeset): version packages'
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+#            - name: Checkout code
+#              if: steps.changesets.outputs.published == 'true'
+#              uses: actions/checkout@v3
+#              with:
+#                  ref: create-o2s-app/base
+#
+#            - name: Reset branch
+#              if: steps.changesets.outputs.published == 'true'
+#              run: |
+#                  git fetch origin main:main
+#                  git reset --hard main
+#
+#            - name: Update api-harmonization dependencies
+#              if: steps.changesets.outputs.published == 'true'
+#              run: npm install @o2s/framework@latest @o2s/utils.logger@latest @o2s/integrations.mocked --workspace=@o2s/api-harmonization
+#
+#            - name: Create create-o2s-app Pull Request
+#              id: cpr
+#              uses: peter-evans/create-pull-request@v7
+#              if: steps.changesets.outputs.published == 'true'
+#              with:
+#                  commit-message: 'feat(create-o2s-app): update dependencies'
+#                  branch: create-o2s-app/patch
+#                  delete-branch: true
+#                  title: 'Update dependencies in create-o2s-app'
