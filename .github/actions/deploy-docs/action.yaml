@@ -9,6 +9,9 @@ inputs:
     vercel-token:
         description: 'Token to access Vercel'
         required: true
+    vercel-org-id:
+        description: 'Vercel Organization ID'
+        required: true
     vercel-project-id:
         description: 'Vercel project ID for docs app'
         required: true
@@ -43,10 +46,13 @@ runs:
 
         - name: Deploy to Vercel
           env:
+              VERCEL_ORG_ID: ${{ inputs.vercel-org-id }}
               VERCEL_PROJECT_ID: ${{ inputs.vercel-project-id }}
           uses: ./.github/actions/deploy-vercel
           with:
               vercel-token: ${{ inputs.vercel-token }}
+              vercel-org-id: ${{ inputs.vercel-org-id }}
+              vercel-project-id: ${{ inputs.vercel-project-id }}
               environment: ${{ inputs.environment }}
               build-args: ${{ inputs.build-args }}
               deploy-args: ${{ inputs.deploy-args }}

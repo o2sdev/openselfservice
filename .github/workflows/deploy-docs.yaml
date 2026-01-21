@@ -99,6 +99,7 @@ jobs:
               with:
                   repo-token: ${{ secrets.GITHUB_TOKEN }}
                   vercel-token: ${{ secrets.VERCEL_ACCESS_TOKEN }}
+                  vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
                   vercel-project-id: ${{ secrets.VERCEL_DOCS_PROJECT_ID }}
                   environment: production
                   fetch-depth: '1'

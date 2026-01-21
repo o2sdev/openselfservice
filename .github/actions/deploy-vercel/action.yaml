@@ -6,6 +6,12 @@ inputs:
     vercel-token:
         description: 'Token to access Vercel'
         required: true
+    vercel-org-id:
+        description: 'Vercel Organization ID'
+        required: true
+    vercel-project-id:
+        description: 'Vercel Project ID'
+        required: true
     environment:
         description: 'Vercel environment (production or preview)'
         required: true
@@ -28,6 +34,9 @@ runs:
 
         - name: Pull environment variables from Vercel
           shell: bash
+          env:
+              VERCEL_ORG_ID: ${{ inputs.vercel-org-id }}
+              VERCEL_PROJECT_ID: ${{ inputs.vercel-project-id }}
           run: |
               if [ "${{ inputs.environment }}" = "production" ]; then
                   vercel pull --environment=production --token=${{ inputs.vercel-token }}

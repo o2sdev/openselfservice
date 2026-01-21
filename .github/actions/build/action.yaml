@@ -30,7 +30,7 @@ runs:
 
         - name: Save build outputs to cache
           uses: actions/cache/save@v4
-          if: always()
+          if: success()
           with:
               path: |
                   **/dist/**
