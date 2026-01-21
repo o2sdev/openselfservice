@@ -46,9 +46,11 @@ runs:
 
         - name: Build project locally
           shell: bash
+          env:
+              BUILD_ARGS: ${{ inputs.build-args }}
           run: |
-              if [ -n "${{ inputs.build-args }}" ]; then
-                  vercel build ${{ inputs.build-args }}
+              if [ -n "$BUILD_ARGS" ]; then
+                  vercel build $BUILD_ARGS
               else
                   vercel build
               fi
