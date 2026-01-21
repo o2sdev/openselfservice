@@ -79,6 +79,10 @@ const mapData = (element: Panelbase): Panelbase => {
     };
 };
 
+/**
+ * Maps Survey.js payload to ticket creation format.
+ * Note: Caller must validate that title, description, and topic are non-empty before calling this function.
+ */
 export const mapSurveyToTicket = (surveyPayload: SurveyResult): Tickets.Request.PostTicketBody => {
     // Map attachments from Survey.js format to Tickets format
     const attachments = surveyPayload.attachments

@@ -171,6 +171,14 @@ export class SurveyjsService {
     ): Observable<void> {
         const { code, ...surveyData } = formData;
 
+        // Validate required fields for ticket creation
+        if (!surveyData.title || !surveyData.description || !surveyData.topic) {
+            this.logger.error(
+                'Missing required fields for ticket creation: title, description, and topic are required',
+            );
+            throw new BadRequestException('Title, description, and topic are required to create a ticket');
+        }
+
         // Convert Multer files to TicketAttachmentInput format
         const attachments = files.map((file) => ({
             filename: file.originalname,
@@ -179,9 +187,9 @@ export class SurveyjsService {
         }));
 
         const ticketData: Tickets.Request.PostTicketBody = {
-            title: surveyData.title || '',
-            description: surveyData.description || '',
-            topic: surveyData.topic || '',
+            title: surveyData.title,
+            description: surveyData.description,
+            topic: surveyData.topic,
             priority: surveyData.priority,
             type: surveyData.type,
             attachments,
@@ -201,6 +209,14 @@ export class SurveyjsService {
 
     private submitToTickets(surveyPayload: SurveyResult, authorization?: string): Observable<void> {
         try {
+            // Validate required fields before mapping
+            if (!surveyPayload.title || !surveyPayload.description || !surveyPayload.topic) {
+                this.logger.error(
+                    'Missing required fields for ticket creation: title, description, and topic are required',
+                );
+                throw new BadRequestException('Title, description, and topic are required to create a ticket');
+            }
+
             const ticketData = mapSurveyToTicket(surveyPayload);
 
             return this.ticketsService.createTicket(ticketData, authorization).pipe(
