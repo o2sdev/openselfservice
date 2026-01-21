@@ -1,5 +1,17 @@
 # @o2s/utils.frontend
 
+## 0.3.0
+
+### Minor Changes
+
+- e11b23a: resolving linter errors
+
+### Patch Changes
+
+- Updated dependencies [e78c11a]
+- Updated dependencies [79b7c87]
+    - @o2s/framework@1.15.0
+
 ## 0.2.1
 
 ### Patch Changes

@@ -7,6 +7,15 @@ marcin.krasowski:
   socials:
     github: marcinkrasowski
 
+michal.nowak:
+  name: Michał Nowak
+  title: Frontend Engineer @ O2S
+  url: https://github.com/michnowak
+  image_url: https://avatars.githubusercontent.com/u/49277278?v=4
+  page: true
+  socials:
+    github: michnowak
+
 lukasz.kurasinski:
     name: Łukasz Kurasiński
     title: Frontend Architect @ Hycom

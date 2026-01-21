@@ -1,6 +1,6 @@
 {
     "name": "@o2s/framework",
-    "version": "1.14.0",
+    "version": "1.15.0",
     "private": false,
     "license": "MIT",
     "type": "commonjs",
