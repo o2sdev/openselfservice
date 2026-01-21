@@ -1,5 +1,32 @@
 # @o2s/blocks.order-details
 
+## 1.3.0
+
+### Minor Changes
+
+- e11b23a: resolving linter errors
+- cd483b7: - add MoreActionsMenu component and refactor ActionList
+  - migrate OrderDetails and TicketList to unified ActionList API
+  - improve breadcrumbs visibility and card border styling
+
+### Patch Changes
+
+- e11b23a: reworked data fetching a little to overcome ESlint warnings
+- Updated dependencies [5947ca4]
+- Updated dependencies [e11b23a]
+- Updated dependencies [e78c11a]
+- Updated dependencies [8f39c25]
+- Updated dependencies [79b7c87]
+- Updated dependencies [e11b23a]
+- Updated dependencies [d197b89]
+- Updated dependencies [cd483b7]
+- Updated dependencies [d197b89]
+  - @o2s/ui@1.8.0
+  - @o2s/utils.api-harmonization@0.2.0
+  - @o2s/configs.integrations@0.3.0
+  - @o2s/utils.frontend@0.3.0
+  - @o2s/framework@1.15.0
+
 ## 1.2.0
 
 ### Minor Changes
