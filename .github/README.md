@@ -11,9 +11,9 @@ Deploys the docs app to Vercel production environment.
 
 **Jobs:**
 - `parse-docs-tag`: Extracts version from tag
-- `build`: Builds the project and caches build outputs (dist, build, .next directories)
-- `lint`: Lints the code - depends on `build` job and restores build outputs from cache
-- `test`: Runs tests - depends on `build` job and restores build outputs from cache
+- `build`: Builds the project and uploads build artifacts (dist, build, .next directories)
+- `lint`: Lints the code - depends on `build` job and downloads build artifacts
+- `test`: Runs tests - depends on `build` job and downloads build artifacts
 - `deploy-docs`: Builds and deploys docs app to Vercel production (only runs after all quality checks pass)
 
 **Required Secrets:**
@@ -28,9 +28,9 @@ Publishes npm packages to the registry using Changesets.
 
 **Jobs:**
 - `skip-duplicate-check`: Prevents duplicate workflow runs
-- `build`: Builds the project and caches build outputs (dist, build, .next directories)
-- `lint`: Lints the code - depends on `build` job and restores build outputs from cache
-- `test`: Runs tests - depends on `build` job and restores build outputs from cache
+- `build`: Builds the project and uploads build artifacts (dist, build, .next directories)
+- `lint`: Lints the code - depends on `build` job and downloads build artifacts
+- `test`: Runs tests - depends on `build` job and downloads build artifacts
 - `publish-packages`: Publishes packages via Changesets (only runs after all quality checks pass)
 
 **Required Secrets:**
@@ -50,9 +50,9 @@ Runs code quality checks (build, lint, test) on pull requests and optionally dep
 **Jobs:**
 - `skip-duplicate-check`: Prevents duplicate workflow runs
 - `changed-packages`: Determines which packages changed (composite action)
-- `build`: Builds the project and caches build outputs (dist, build, .next directories) - always runs on PRs
-- `lint`: Lints the code - depends on `build` job and restores build outputs from cache - always runs on PRs
-- `test`: Runs tests - depends on `build` job and restores build outputs from cache - always runs on PRs
+- `build`: Builds the project and uploads build artifacts (dist, build, .next directories) - always runs on PRs
+- `lint`: Lints the code - depends on `build` job and downloads build artifacts - always runs on PRs
+- `test`: Runs tests - depends on `build` job and downloads build artifacts - always runs on PRs
 - `deploy-docs-preview`: Deploys docs preview to Vercel if docs package changed (only runs after all quality checks pass)
 
 **Required Secrets:**
@@ -76,7 +76,7 @@ Composite action that determines which packages have changed using Turborepo.
 ## Composite Actions
 
 ### `setup-env`
-Sets up Node.js environment and installs dependencies.
+Sets up Node.js environment, installs dependencies, and Playwright browsers.
 
 **Inputs:**
 - `repo-token` (required): GitHub token for repository access
@@ -84,9 +84,10 @@ Sets up Node.js environment and installs dependencies.
 **Features:**
 - Node.js 24 setup with npm caching
 - Dependency installation via `npm ci`
+- Playwright browser installation
 
 ### `build`
-Runs the build process: checkout, setup environment, build project, and cache build outputs.
+Runs the build process: checkout, setup environment, build project, and upload build artifacts.
 
 **Inputs:**
 - `repo-token` (required): GitHub token for repository access
@@ -94,12 +95,12 @@ Runs the build process: checkout, setup environment, build project, and cache bu
 
 **Steps:**
 - Checks out code
-- Prepares environment (Node.js, dependencies)
-- Caches build outputs (dist, build, .next directories)
-- Builds project: `npm run build` (Turborepo handles its own caching)
+- Prepares environment (Node.js, dependencies, Playwright)
+- Builds project: `npm run build`
+- Uploads build artifacts (dist, build, .next directories)
 
 ### `lint`
-Runs lint checks: checkout, setup environment, restore build outputs from cache, and lint.
+Runs lint checks: checkout, setup environment, download build artifacts, and lint.
 
 **Inputs:**
 - `repo-token` (required): GitHub token for repository access
@@ -107,12 +108,12 @@ Runs lint checks: checkout, setup environment, restore build outputs from cache,
 
 **Steps:**
 - Checks out code
-- Prepares environment (Node.js, dependencies)
-- Restores build outputs from cache
+- Prepares environment (Node.js, dependencies, Playwright)
+- Downloads build artifacts
 - Lints code: `npm run lint`
 
 ### `test`
-Runs tests: checkout, setup environment, install Playwright browsers, restore build outputs from cache, and test.
+Runs tests: checkout, setup environment, download build artifacts, and test.
 
 **Inputs:**
 - `repo-token` (required): GitHub token for repository access
@@ -120,8 +121,7 @@ Runs tests: checkout, setup environment, install Playwright browsers, restore bu
 
 **Steps:**
 - Checks out code
-- Prepares environment (Node.js, dependencies)
-- Installs Playwright browsers (required for Storybook tests)
+- Prepares environment (Node.js, dependencies, Playwright)
 - Downloads build artifacts
 - Runs tests: `npm run test`
 

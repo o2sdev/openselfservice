@@ -1,6 +1,6 @@
 name: Build
 
-description: 'Checkout code, setup environment, build project, and cache build outputs'
+description: 'Checkout code, setup environment, build project, and upload build artifacts'
 
 inputs:
     repo-token:
@@ -19,20 +19,6 @@ runs:
           with:
               fetch-depth: ${{ inputs.fetch-depth }}
 
-        - name: Restore build outputs from cache
-          id: cache-build
-          uses: actions/cache@v4
-          with:
-              path: |
-                  **/dist/**
-                  **/build/**
-                  **/.next/**
-                  !**/node_modules/**
-              key: ${{ runner.os }}-build-${{ github.sha }}-${{ hashFiles('**/package-lock.json', '**/tsconfig.json', '**/turbo.json') }}
-              restore-keys: |
-                  ${{ runner.os }}-build-${{ github.sha }}-
-                  ${{ runner.os }}-build-
-
         - name: Prepare Environment
           uses: ./.github/actions/setup-env
           with:
@@ -42,5 +28,14 @@ runs:
           shell: bash
           run: |
               set -e
-              # Build will be faster if cache hit (Turborepo handles its own caching)
               npm run build
+
+        - name: Upload build artifacts
+          uses: actions/upload-artifact@v4
+          with:
+              name: build-artifacts
+              path: |
+                  **/dist/**
+                  **/build/**
+                  **/.next/**
+              retention-days: 1
