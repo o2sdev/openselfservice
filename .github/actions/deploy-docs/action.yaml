@@ -1,0 +1,58 @@
+name: Deploy Docs
+
+description: 'Complete workflow for deploying docs app: checkout, setup environment, and deploy to Vercel'
+
+inputs:
+    repo-token:
+        description: 'Token to access the repository'
+        required: true
+    vercel-token:
+        description: 'Token to access Vercel'
+        required: true
+    vercel-org-id:
+        description: 'Vercel Organization ID'
+        required: true
+    vercel-project-id:
+        description: 'Vercel project ID for docs app'
+        required: true
+    environment:
+        description: 'Vercel environment (production or preview)'
+        required: true
+    fetch-depth:
+        description: 'Git fetch depth for checkout (0 for full history, 1 for shallow)'
+        required: false
+        default: '1'
+    build-args:
+        description: 'Additional arguments for Vercel build command'
+        required: false
+        default: ''
+    deploy-args:
+        description: 'Additional arguments for Vercel deploy command'
+        required: false
+        default: ''
+
+runs:
+    using: "composite"
+    steps:
+        - name: Checkout code
+          uses: actions/checkout@v6
+          with:
+              fetch-depth: ${{ inputs.fetch-depth }}
+
+        - name: Prepare Environment
+          uses: ./.github/actions/setup-env
+          with:
+              repo-token: ${{ inputs.repo-token }}
+
+        - name: Deploy to Vercel
+          env:
+              VERCEL_ORG_ID: ${{ inputs.vercel-org-id }}
+              VERCEL_PROJECT_ID: ${{ inputs.vercel-project-id }}
+          uses: ./.github/actions/deploy-vercel
+          with:
+              vercel-token: ${{ inputs.vercel-token }}
+              vercel-org-id: ${{ inputs.vercel-org-id }}
+              vercel-project-id: ${{ inputs.vercel-project-id }}
+              environment: ${{ inputs.environment }}
+              build-args: ${{ inputs.build-args }}
+              deploy-args: ${{ inputs.deploy-args }}
