@@ -52,7 +52,7 @@
         "date-fns": "^4.1.0",
         "dotenv-cli": "^11.0.0",
         "formik": "^2.4.9",
-        "markdown-to-jsx": "^9.6.0",
+        "markdown-to-jsx": "^9.6.1",
         "next": "16.1.4",
         "next-auth": "^5.0.0-beta.30",
         "next-compose-plugins": "^2.2.1",
