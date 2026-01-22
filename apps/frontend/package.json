@@ -76,7 +76,7 @@
         "@turbo/gen": "^2.7.4",
         "@types/bcryptjs": "^3.0.0",
         "@types/node": "^24.10.8",
-        "@types/react": "19.2.8",
+        "@types/react": "19.2.9",
         "@types/react-autosuggest": "^10.1.11",
         "@types/react-dom": "19.2.3",
         "dotenv": "^17.2.3",
@@ -91,7 +91,7 @@
         "typescript": "^5.9.3"
     },
     "overrides": {
-        "@types/react": "19.2.8",
+        "@types/react": "19.2.9",
         "@types/react-dom": "19.2.3"
     }
 }
