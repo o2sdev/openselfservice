@@ -4,6 +4,7 @@ import { Roles } from '@/utils/roles';
 
 const ORG_ADMIN_PERMISSIONS: Auth.Model.Permissions = {
     users: { resource: 'users', actions: ['view', 'create', 'edit', 'delete'] },
+    organizations: { resource: 'organizations', actions: ['view', 'create', 'edit', 'delete'] },
     settings: { resource: 'settings', actions: ['view', 'edit'] },
     invoices: { resource: 'invoices', actions: ['view', 'create', 'edit', 'delete', 'pay'] },
     notifications: { resource: 'notifications', actions: ['view', 'mark_read', 'delete'] },
@@ -14,6 +15,7 @@ const ORG_ADMIN_PERMISSIONS: Auth.Model.Permissions = {
 };
 
 const ORG_USER_PERMISSIONS: Auth.Model.Permissions = {
+    organizations: { resource: 'organizations', actions: ['view'] },
     settings: { resource: 'settings', actions: ['view', 'edit'] },
     invoices: { resource: 'invoices', actions: ['view'] },
     notifications: { resource: 'notifications', actions: ['view', 'mark_read'] },

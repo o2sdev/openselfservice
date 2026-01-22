@@ -25,23 +25,22 @@ const mapCustomers = (organizations: Organizations.Model.Organization[]): Models
         .sort((a, b) => a.name.localeCompare(b.name));
 };
 
-const flattenOrganizations = (orgs: Organizations.Model.Organization[]): Organizations.Model.Organization[] => {
-    const seen = new Set<string>();
-
+const flattenOrganizations = (
+    orgs: Organizations.Model.Organization[],
+    seen: Set<string> = new Set<string>(),
+): Organizations.Model.Organization[] => {
     return orgs.reduce<Organizations.Model.Organization[]>((acc, org) => {
-        if (!seen.has(org.id)) {
-            seen.add(org.id);
-            acc.push(org);
+        if (seen.has(org.id)) {
+            return acc;
         }
+
+        seen.add(org.id);
+        acc.push(org);
+
         if (org.children && org.children.length > 0) {
-            const childOrgs = flattenOrganizations(org.children);
-            childOrgs.forEach((childOrg) => {
-                if (!seen.has(childOrg.id)) {
-                    seen.add(childOrg.id);
-                    acc.push(childOrg);
-                }
-            });
+            acc.push(...flattenOrganizations(org.children, seen));
         }
+
         return acc;
     }, []);
 };
