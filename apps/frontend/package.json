@@ -60,7 +60,7 @@
         "react": "19.2.3",
         "react-autosuggest": "^10.1.0",
         "react-dom": "19.2.3",
-        "react-string-replace": "^1.1.1",
+        "react-string-replace": "^2.0.1",
         "string-template": "^1.0.0",
         "yup": "^1.7.1",
         "zod": "^4.3.5"
