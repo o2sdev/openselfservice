@@ -26,8 +26,8 @@
         "@o2s/typescript-config": "*",
         "concurrently": "^9.2.1",
         "eslint": "^9.39.2",
-        "prettier": "^3.7.4",
-        "react-string-replace": "^1.1.1",
+        "prettier": "^3.8.1",
+        "react-string-replace": "^2.0.1",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"
     },
