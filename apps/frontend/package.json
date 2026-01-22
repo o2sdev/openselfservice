@@ -53,7 +53,7 @@
         "dotenv-cli": "^11.0.0",
         "formik": "^2.4.9",
         "markdown-to-jsx": "^9.6.0",
-        "next": "16.1.2",
+        "next": "16.1.4",
         "next-auth": "^5.0.0-beta.30",
         "next-compose-plugins": "^2.2.1",
         "next-intl": "^4.7.0",
@@ -66,7 +66,7 @@
         "zod": "^4.3.5"
     },
     "devDependencies": {
-        "@next/bundle-analyzer": "16.1.2",
+        "@next/bundle-analyzer": "16.1.4",
         "@o2s/eslint-config": "*",
         "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
@@ -81,7 +81,7 @@
         "@types/react-dom": "19.2.3",
         "dotenv": "^17.2.3",
         "eslint": "^9.39.2",
-        "eslint-config-next": "16.1.2",
+        "eslint-config-next": "16.1.4",
         "postcss": "^8.5.6",
         "prettier": "^3.8.1",
         "sass": "^1.97.3",
