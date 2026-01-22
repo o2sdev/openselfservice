@@ -81,12 +81,18 @@ const mapData = (element: Panelbase): Panelbase => {
 
 /**
  * Maps Survey.js payload to ticket creation format.
- * Note: Caller must validate that title, description, and topic are non-empty before calling this function.
+ * Extracts standard fields (title, description, ticketFormId, attachments) and passes
+ * all other fields as customFields to be mapped by ZendeskFieldMapper.
+ *
+ * Note: Caller must validate that title, description, and ticketFormId are non-empty before calling this function.
  */
 export const mapSurveyToTicket = (surveyPayload: SurveyResult): Tickets.Request.PostTicketBody => {
+    // Extract standard fields
+    const { title, description, ticketFormId, attachments, ...customFields } = surveyPayload;
+
     // Map attachments from Survey.js format to Tickets format
-    const attachments = surveyPayload.attachments
-        ? (Array.isArray(surveyPayload.attachments) ? surveyPayload.attachments : [surveyPayload.attachments])
+    const mappedAttachments = attachments
+        ? (Array.isArray(attachments) ? attachments : [attachments])
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               .map((file: any) => {
                   // Convert base64 string to Buffer
@@ -102,11 +108,10 @@ export const mapSurveyToTicket = (surveyPayload: SurveyResult): Tickets.Request.
         : undefined;
 
     return {
-        title: surveyPayload.title as string,
-        description: surveyPayload.description as string,
-        topic: surveyPayload.topic as string,
-        priority: surveyPayload.priority as string | undefined,
-        type: surveyPayload.type as string | undefined,
-        attachments,
+        title: title as string,
+        description: description as string,
+        ticketFormId: ticketFormId as number,
+        attachments: mappedAttachments,
+        customFields,
     };
 };

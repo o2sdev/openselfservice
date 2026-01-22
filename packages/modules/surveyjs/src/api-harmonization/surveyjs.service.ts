@@ -137,11 +137,11 @@ export class SurveyjsService {
     private submitToTickets(surveyPayload: SurveyResult, authorization?: string): Observable<void> {
         try {
             // Validate required fields before mapping
-            if (!surveyPayload.title || !surveyPayload.description || !surveyPayload.topic) {
+            if (!surveyPayload.title || !surveyPayload.description || !surveyPayload.ticketFormId) {
                 this.logger.error(
-                    'Missing required fields for ticket creation: title, description, and topic are required',
+                    'Missing required fields for ticket creation: title, description, and ticketFormId are required',
                 );
-                throw new BadRequestException('Title, description, and topic are required to create a ticket');
+                throw new BadRequestException('Title, description, and ticketFormId are required to create a ticket');
             }
 
             const ticketData = mapSurveyToTicket(surveyPayload);

@@ -9,7 +9,6 @@ import {
     type SearchResultObject,
     type TicketCommentObject,
     type TicketObject,
-    type TicketUpdateInputWritable,
     type UserObject,
     createTicket,
     listSearchResults,
@@ -20,6 +19,7 @@ import {
 } from '@/generated/zendesk';
 import { client } from '@/generated/zendesk/client.gen';
 
+import { ZendeskFieldMapper } from './zendesk-field.mapper';
 import { mapTicketToModel } from './zendesk-ticket.mapper';
 
 type ZendeskTicket = TicketObject;
@@ -171,8 +171,8 @@ export class ZendeskTicketService extends Tickets.Service {
 
     createTicket(data: Tickets.Request.PostTicketBody, authorization?: string): Observable<Tickets.Model.Ticket> {
         // Validate input data
-        if (!data.title || !data.description || !data.topic) {
-            return throwError(() => new BadRequestException('Title, description and topic are required'));
+        if (!data.title || !data.description || !data.ticketFormId) {
+            return throwError(() => new BadRequestException('Title, description and ticketFormId are required'));
         }
 
         return this.usersService.getCurrentUser(authorization).pipe(
@@ -200,22 +200,8 @@ export class ZendeskTicketService extends Tickets.Service {
                     switchMap((uploadTokens) =>
                         this.findZendeskUserByEmail(user.email!).pipe(
                             switchMap((zendeskUser) => {
-                                const topicFieldId = Number(process.env.ZENDESK_TOPIC_FIELD_ID || 0);
-                                const customFields: Array<{ id: number; value: string }> = [];
-
-                                if (data.topic && !topicFieldId) {
-                                    return throwError(
-                                        () => new Error('ZENDESK_TOPIC_FIELD_ID is required to persist ticket topic'),
-                                    );
-                                }
-
-                                // Add topic as custom field if provided and ZENDESK_TOPIC_FIELD_ID is configured
-                                if (data.topic && topicFieldId) {
-                                    customFields.push({
-                                        id: topicFieldId,
-                                        value: data.topic,
-                                    });
-                                }
+                                // Map custom fields from Survey.js to Zendesk format using field mapper
+                                const customFields = ZendeskFieldMapper.toCustomFields(data.customFields || {});
 
                                 return from(
                                     createTicket({
@@ -226,17 +212,12 @@ export class ZendeskTicketService extends Tickets.Service {
                                                     body: data.description,
                                                     ...(uploadTokens.length > 0 && { uploads: uploadTokens }),
                                                 },
-                                                ...(data.priority && {
-                                                    priority: data.priority as TicketUpdateInputWritable['priority'],
-                                                }),
-                                                ...(data.type && {
-                                                    type: data.type as TicketUpdateInputWritable['type'],
-                                                }),
+                                                ticket_form_id: data.ticketFormId,
                                                 ...(zendeskUser?.id && {
                                                     requester_id: zendeskUser.id,
                                                     submitter_id: zendeskUser.id,
                                                 }),
-                                                // Add custom fields if any (e.g., topic)
+                                                // Add custom fields if any
                                                 // Note: Zendesk API accepts {id, value} structure for custom_fields
                                                 // TypeScript types require full CustomFieldObject, but API accepts simpler structure
                                                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
