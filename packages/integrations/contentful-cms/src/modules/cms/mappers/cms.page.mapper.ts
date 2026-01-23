@@ -60,9 +60,6 @@ import {
     PAGE_CONTACT_US_DE,
     PAGE_CONTACT_US_EN,
     PAGE_CONTACT_US_PL,
-    PAGE_CREATE_TICKET_DE,
-    PAGE_CREATE_TICKET_EN,
-    PAGE_CREATE_TICKET_PL,
     PAGE_REQUEST_DEVICE_MAINTENANCE_DE,
     PAGE_REQUEST_DEVICE_MAINTENANCE_EN,
     PAGE_REQUEST_DEVICE_MAINTENANCE_PL,
@@ -221,13 +218,6 @@ export const mapMockPage = (slug: string, locale: string): CMS.Model.Page.Page |
         case '/zglos-naprawe-urzadzenia':
             return PAGE_REQUEST_DEVICE_MAINTENANCE_PL;
 
-        case '/create-ticket':
-            return PAGE_CREATE_TICKET_EN;
-        case '/erstelle-ticket':
-            return PAGE_CREATE_TICKET_DE;
-        case '/utworz-zgloszenie':
-            return PAGE_CREATE_TICKET_PL;
-
         case '/help-and-support':
             return PAGE_HELP_AND_SUPPORT_EN;
         case '/hilfe-und-support':
@@ -291,7 +281,6 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_CONTACT_US_PL,
                 PAGE_COMPLAINT_FORM_PL,
                 PAGE_REQUEST_DEVICE_MAINTENANCE_PL,
-                PAGE_CREATE_TICKET_PL,
                 PAGE_ORDER_LIST_PL,
                 PAGE_ORDER_DETAILS_PL,
                 PAGE_WARRANTY_AND_REPAIR_PL,
@@ -313,7 +302,6 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_CONTACT_US_DE,
                 PAGE_COMPLAINT_FORM_DE,
                 PAGE_REQUEST_DEVICE_MAINTENANCE_DE,
-                PAGE_CREATE_TICKET_DE,
                 PAGE_ORDER_LIST_DE,
                 PAGE_ORDER_DETAILS_DE,
                 PAGE_WARRANTY_AND_REPAIR_DE,
@@ -335,7 +323,6 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_CONTACT_US_EN,
                 PAGE_COMPLAINT_FORM_EN,
                 PAGE_REQUEST_DEVICE_MAINTENANCE_EN,
-                PAGE_CREATE_TICKET_EN,
                 PAGE_ORDER_LIST_EN,
                 PAGE_ORDER_DETAILS_EN,
                 PAGE_WARRANTY_AND_REPAIR_EN,
@@ -386,9 +373,6 @@ export const getAlternativePages = (id: string, slug: string, locale: string): C
         PAGE_REQUEST_DEVICE_MAINTENANCE_EN,
         PAGE_REQUEST_DEVICE_MAINTENANCE_DE,
         PAGE_REQUEST_DEVICE_MAINTENANCE_PL,
-        PAGE_CREATE_TICKET_EN,
-        PAGE_CREATE_TICKET_DE,
-        PAGE_CREATE_TICKET_PL,
         PAGE_ORDER_LIST_EN,
         PAGE_ORDER_LIST_DE,
         PAGE_ORDER_LIST_PL,
