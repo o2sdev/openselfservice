@@ -15,8 +15,8 @@ export class AuthService extends Auth.Service {
         const accessToken = token.replace('Bearer ', '');
 
         try {
-            // For development: verify with simple secret
-            return jwt.verify(accessToken, process.env.AUTH_JWT_SECRET || 'secret') as Jwt;
+            // For development: verify with a simple secret
+            return jwt.verify(accessToken, process.env.AUTH_JWT_SECRET!) as Jwt;
         } catch (error) {
             if (error instanceof jwt.TokenExpiredError) {
                 throw new UnauthorizedException('Token expired');
@@ -33,51 +33,26 @@ export class AuthService extends Auth.Service {
         return false;
     }
 
-    getCustomerId(token: string): string | undefined {
+    getCustomerId(token: string | Jwt): string | undefined {
         // Decode directly - already verified by guard
-        const decodedToken = jwt.decode(token.replace('Bearer ', '')) as Jwt;
+        const decodedToken = typeof token === 'string' ? (jwt.decode(token.replace('Bearer ', '')) as Jwt) : token;
+
         return decodedToken.customer?.id;
     }
 
-    getUserRoles(token?: string | Jwt): Auth.Model.Role[] {
-        if (!token) {
-            return [];
-        }
+    getRoles(token?: string | Jwt): Auth.Model.Role[] {
+        // Decode directly - already verified by guard
+        const decodedToken = typeof token === 'string' ? (jwt.decode(token.replace('Bearer ', '')) as Jwt) : token;
 
-        let decodedToken: Jwt;
-        if (typeof token === 'string') {
-            // Decode directly - already verified by guard
-            decodedToken = jwt.decode(token.replace('Bearer ', '')) as Jwt;
-        } else {
-            decodedToken = token;
-        }
-
-        // Roles are now stored directly in the JWT token
-        return decodedToken?.roles || decodedToken?.customer?.roles || [];
+        // Roles are stored directly in the JWT token
+        return decodedToken?.customer?.roles || decodedToken?.roles || [];
     }
 
     getPermissions(token: string | Auth.Model.Jwt): Auth.Model.Permissions {
-        let decodedToken: Jwt;
+        // Decode directly - already verified by guard
+        const decodedToken = typeof token === 'string' ? (jwt.decode(token.replace('Bearer ', '')) as Jwt) : token;
 
-        if (typeof token === 'string') {
-            // Decode directly - already verified by guard
-            decodedToken = jwt.decode(token.replace('Bearer ', '')) as Jwt;
-        } else {
-            decodedToken = token as Jwt;
-        }
-
-        // Permissions are now stored directly as Permission[] in the JWT
+        // Permissions are stored directly in the JWT token
         return decodedToken?.customer?.permissions || decodedToken.permissions || {};
-    }
-
-    hasPermission(token: string | Auth.Model.Jwt, resource: string, action: string): boolean {
-        const permissions = this.getPermissions(token);
-        const resourcePermissions = permissions[resource];
-
-        if (!resourcePermissions) {
-            return false;
-        }
-
-        return resourcePermissions.actions.includes(action);
     }
 }

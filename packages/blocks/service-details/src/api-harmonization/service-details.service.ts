@@ -37,11 +37,6 @@ export class ServiceDetailsService {
                     result.permissions = {
                         view: permissions.view ?? false,
                     };
-                } else {
-                    // Default to allowing view if no authorization token
-                    result.permissions = {
-                        view: true,
-                    };
                 }
 
                 return result;

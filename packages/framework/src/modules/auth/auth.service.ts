@@ -38,14 +38,35 @@ export abstract class AuthService {
      * @param token - JWT token string
      * @returns Customer ID if present, undefined otherwise
      */
-    abstract getCustomerId(token: string): string | undefined;
+    abstract getCustomerId(token: string | Auth.Model.Jwt): string | undefined;
 
     /**
      * Gets user roles from a JWT token
      * @param token - JWT token string or decoded JWT object
      * @returns Array of user roles (e.g., ['ORG_USER', 'ORG_ADMIN'])
      */
-    abstract getUserRoles(token?: string | Auth.Model.Jwt): Auth.Model.Role[];
+    abstract getRoles(token?: string | Auth.Model.Jwt): Auth.Model.Role[];
+
+    /**
+     * Checks whether user has at least one of the specified roles.
+     * @param requiredRoles - Array of role strings (e.g., ['ORG_USER', 'ORG_ADMIN'])
+     * @param userRoles - User's roles from JWT (Auth.Model.Role[])
+     * @returns true if user has at least one required role
+     */
+    static hasRole(requiredRoles?: string[], userRoles?: string[]): boolean {
+        // No roles required = public access
+        if (!requiredRoles || requiredRoles.length === 0) {
+            return true;
+        }
+
+        // Roles required but user has none
+        if (!userRoles || userRoles.length === 0) {
+            return false;
+        }
+
+        // Check if user has at least one required role
+        return requiredRoles.some((role) => userRoles.includes(role));
+    }
 
     /**
      * Gets permissions from a JWT token
@@ -56,12 +77,20 @@ export abstract class AuthService {
 
     /**
      * Check if user has permission for a specific resource and action
-     * @param token - JWT token string or decoded JWT object
+     * @param permissions - All user permissions
      * @param resource - Resource name (e.g., 'payments', 'invoices')
      * @param action - Action name (e.g., 'view', 'create', 'edit', 'delete', 'pay')
      * @returns true if user has permission, false otherwise
      */
-    abstract hasPermission(token: string | Auth.Model.Jwt, resource: string, action: string): boolean;
+    hasPermission(permissions: Auth.Model.Permissions, resource: string, action: string): boolean {
+        const resourcePermissions = permissions[resource];
+
+        if (!resourcePermissions) {
+            return false;
+        }
+
+        return resourcePermissions.actions.includes(action);
+    }
 
     /**
      * Checks if user can perform multiple actions on a resource and returns a map of action -> boolean
@@ -72,9 +101,11 @@ export abstract class AuthService {
      * @returns Object mapping action names to boolean values indicating if user can perform each action
      */
     canPerformActions(token: string | Auth.Model.Jwt, resource: string, actions: string[]): Record<string, boolean> {
+        const permissions = this.getPermissions(token);
+
         return actions.reduce(
             (acc, action) => {
-                acc[action] = this.hasPermission(token, resource, action);
+                acc[action] = this.hasPermission(permissions, resource, action);
                 return acc;
             },
             {} as Record<string, boolean>,
@@ -103,26 +134,5 @@ export abstract class AuthService {
         if (!hasRole) {
             throw new UnauthorizedException();
         }
-    }
-
-    /**
-     * Checks whether user has at least one of the specified roles.
-     * @param requiredRoles - Array of role strings (e.g., ['ORG_USER', 'ORG_ADMIN'])
-     * @param userRoles - User's roles from JWT (Auth.Model.Role[])
-     * @returns true if user has at least one required role
-     */
-    static hasRole(requiredRoles?: string[], userRoles?: string[]): boolean {
-        // No roles required = public access
-        if (!requiredRoles || requiredRoles.length === 0) {
-            return true;
-        }
-
-        // Roles required but user has none
-        if (!userRoles || userRoles.length === 0) {
-            return false;
-        }
-
-        // Check if user has at least one required role
-        return requiredRoles.some((role) => userRoles.includes(role));
     }
 }

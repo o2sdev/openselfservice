@@ -35,12 +35,15 @@ export class RolesGuard implements Auth.Guards.RoleGuard {
         }
 
         // Verify token (signature, expiration, standard claims)
-        let verifiedToken: Jwt;
-        try {
-            verifiedToken = await this.authService.verifyToken(authHeader);
-        } catch (_error) {
-            // Don't expose verification details to client
-            throw new UnauthorizedException('Invalid or expired token');
+        let verifiedToken: Jwt = request.headers['x-decoded-token'];
+        if (!verifiedToken) {
+            try {
+                verifiedToken = await this.authService.verifyToken(authHeader);
+                request.headers['x-decoded-token'] = verifiedToken;
+            } catch (_error) {
+                // Don't expose verification details to client
+                throw new UnauthorizedException('Invalid or expired token');
+            }
         }
 
         // Check if token is revoked
@@ -51,7 +54,7 @@ export class RolesGuard implements Auth.Guards.RoleGuard {
             }
         }
 
-        const userRoles = this.authService.getUserRoles(verifiedToken);
+        const userRoles = this.authService.getRoles(verifiedToken);
 
         this.logger.debug(MatchingMode, 'Role matching mode');
         this.logger.debug(userRoles.join(','), 'User roles');
@@ -90,12 +93,15 @@ export class PermissionsGuard implements Auth.Guards.PermissionGuard {
         }
 
         // Verify token (signature, expiration, standard claims)
-        let verifiedToken: Jwt;
-        try {
-            verifiedToken = await this.authService.verifyToken(authHeader);
-        } catch (_error) {
-            // Don't expose verification details to client
-            throw new UnauthorizedException('Invalid or expired token');
+        let verifiedToken: Jwt = request.headers['x-decoded-token'];
+        if (!verifiedToken) {
+            try {
+                verifiedToken = await this.authService.verifyToken(authHeader);
+                request.headers['x-decoded-token'] = verifiedToken;
+            } catch (_error) {
+                // Don't expose verification details to client
+                throw new UnauthorizedException('Invalid or expired token');
+            }
         }
 
         // Check if token is revoked
@@ -108,21 +114,22 @@ export class PermissionsGuard implements Auth.Guards.PermissionGuard {
 
         // Validate permissions based on mode
         const { resource, actions, mode = 'all' } = permissionsMetadata;
+        const permissions = this.authService.getPermissions(verifiedToken);
 
         this.logger.debug(mode, 'Permission matching mode');
-        this.logger.debug(this.authService.getPermissions(verifiedToken), 'User permissions');
+        this.logger.debug(permissions, 'User permissions');
         this.logger.debug({ resource, actions }, 'Required permissions');
 
         if (mode === 'all') {
             // User must have ALL specified actions
-            const hasAll = actions.every((action) => this.authService.hasPermission(verifiedToken, resource, action));
+            const hasAll = actions.every((action) => this.authService.hasPermission(permissions, resource, action));
 
             if (!hasAll) {
                 throw new UnauthorizedException(`Missing required permissions: ${resource}:${actions.join(',')}`);
             }
         } else {
             // User must have AT LEAST ONE action
-            const hasAny = actions.some((action) => this.authService.hasPermission(verifiedToken, resource, action));
+            const hasAny = actions.some((action) => this.authService.hasPermission(permissions, resource, action));
 
             if (!hasAny) {
                 throw new UnauthorizedException(`Missing at least one permission: ${resource}:${actions.join(',')}`);

@@ -44,12 +44,6 @@ export class NotificationSummaryService {
                         view: permissions.view ?? false,
                         mark_read: permissions.mark_read ?? false,
                     };
-                } else {
-                    // Default to allowing view if no authorization token
-                    result.permissions = {
-                        view: true,
-                        mark_read: false,
-                    };
                 }
 
                 return result;

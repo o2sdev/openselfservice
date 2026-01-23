@@ -56,13 +56,6 @@ export class TicketListService {
                                     create: permissions.create ?? false,
                                     delete: permissions.delete ?? false,
                                 };
-                            } else {
-                                // Default to allowing view if no authorization token
-                                result.permissions = {
-                                    view: true,
-                                    create: false,
-                                    delete: false,
-                                };
                             }
 
                             return result;

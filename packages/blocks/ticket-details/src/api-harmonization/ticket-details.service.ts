@@ -49,14 +49,6 @@ export class TicketDetailsService {
                         close: permissions.close ?? false,
                         reopen: permissions.reopen ?? false,
                     };
-                } else {
-                    // Default to allowing view if no authorization token
-                    result.permissions = {
-                        view: true,
-                        edit: false,
-                        close: false,
-                        reopen: false,
-                    };
                 }
 
                 return result;

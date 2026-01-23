@@ -22,13 +22,13 @@ export class AuthService extends Auth.Service {
         return false;
     }
 
-    getCustomerId(token: string): string | undefined {
+    getCustomerId(token: string | Jwt)): string | undefined {
         // TODO: Extract customer/organization ID from token
         // This should return the ID of the organization/customer the user is currently accessing
         return undefined;
     }
 
-    getUserRoles(token?: string | Jwt): Auth.Model.Role[] {
+    getRoles(token?: string | Jwt): Auth.Model.Role[] {
         // TODO: Extract user roles from token
         // Roles should be organization/customer-level roles (e.g., ['ORG_USER', 'ORG_ADMIN'])
         // If roles are not in the token, you may need to fetch them asynchronously from your IAM system
@@ -43,17 +43,5 @@ export class AuthService extends Auth.Service {
         // Permissions should be organized by resource: { resource: { actions: ['view', 'edit'] } }
         // If permissions are not in the token, you may need to fetch them asynchronously from your IAM system
         return {};
-    }
-
-    hasPermission(token: string | Auth.Model.Jwt, resource: string, action: string): boolean {
-        // TODO: Check if user has specific permission for resource and action
-        const permissions = this.getPermissions(token);
-        const resourcePermissions = permissions[resource];
-
-        if (!resourcePermissions) {
-            return false;
-        }
-
-        return resourcePermissions.actions.includes(action);
     }
 }

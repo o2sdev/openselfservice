@@ -57,14 +57,6 @@ export class InvoiceListService {
                                     pay: permissions.pay ?? false,
                                     delete: permissions.delete ?? false,
                                 };
-                            } else {
-                                // Default to allowing view if no authorization token
-                                result.permissions = {
-                                    view: true,
-                                    create: false,
-                                    pay: false,
-                                    delete: false,
-                                };
                             }
 
                             return result;

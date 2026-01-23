@@ -15,7 +15,7 @@ export class PaymentsSummaryController {
     constructor(protected readonly service: PaymentsSummaryService) {}
 
     @Get()
-    @Auth.Decorators.Roles({ roles: [] })
+    @Auth.Decorators.Roles({ roles: ['selfservice_org_user'] })
     @Auth.Decorators.Permissions({ resource: 'invoices', actions: ['view'] })
     getPaymentsSummaryBlock(
         @Headers() headers: Models.Headers.AppHeaders,

@@ -45,7 +45,7 @@ export class PageService {
     }
 
     getInit(query: GetInitQuery, headers: Models.Headers.AppHeaders): Observable<Init> {
-        const userRoles = this.authService.getUserRoles(headers['authorization']);
+        const userRoles = this.authService.getRoles(headers['authorization']);
 
         return this.cmsService.getAppConfig({ referrer: query.referrer, locale: headers['x-locale'] }).pipe(
             switchMap((appConfig) => {
@@ -77,7 +77,7 @@ export class PageService {
 
     getPage(query: GetPageQuery, headers: Models.Headers.AppHeaders): Observable<Page | NotFound> {
         const page = this.cmsService.getPage({ slug: query.slug, locale: headers['x-locale'] });
-        const userRoles = this.authService.getUserRoles(headers['authorization']);
+        const userRoles = this.authService.getRoles(headers['authorization']);
 
         return forkJoin([page]).pipe(
             concatMap(([page]) => {

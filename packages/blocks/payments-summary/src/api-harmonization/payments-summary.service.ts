@@ -46,12 +46,6 @@ export class PaymentsSummaryService {
                         view: permissions.view ?? false,
                         pay: permissions.pay ?? false,
                     };
-                } else {
-                    // Default to allowing view if no authorization token
-                    result.permissions = {
-                        view: true,
-                        pay: false,
-                    };
                 }
 
                 return result;

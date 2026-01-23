@@ -60,14 +60,6 @@ export class OrderListService {
                                     cancel: permissions.cancel ?? false,
                                     track: permissions.track ?? false,
                                 };
-                            } else {
-                                // Default to allowing view if no authorization token
-                                result.permissions = {
-                                    view: true,
-                                    create: false,
-                                    cancel: false,
-                                    track: false,
-                                };
                             }
 
                             return result;

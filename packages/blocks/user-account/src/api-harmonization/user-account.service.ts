@@ -40,12 +40,6 @@ export class UserAccountService {
                         view: permissions.view ?? false,
                         edit: permissions.edit ?? false,
                     };
-                } else {
-                    // Default to allowing view if no authorization token
-                    result.permissions = {
-                        view: true,
-                        edit: false,
-                    };
                 }
 
                 return result;

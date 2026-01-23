@@ -56,13 +56,6 @@ export class NotificationDetailsService {
                         mark_read: permissions.mark_read ?? false,
                         delete: permissions.delete ?? false,
                     };
-                } else {
-                    // Default to allowing view if no authorization token
-                    result.permissions = {
-                        view: true,
-                        mark_read: false,
-                        delete: false,
-                    };
                 }
 
                 return result;

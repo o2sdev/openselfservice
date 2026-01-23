@@ -84,6 +84,6 @@ function signUserToken(token: JWT): string {
                   }
                 : undefined,
         },
-        'secret',
+        process.env.AUTH_JWT_SECRET!,
     );
 }

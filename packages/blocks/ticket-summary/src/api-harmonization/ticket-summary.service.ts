@@ -44,12 +44,6 @@ export class TicketSummaryService {
                         view: permissions.view ?? false,
                         create: permissions.create ?? false,
                     };
-                } else {
-                    // Default to allowing view if no authorization token
-                    result.permissions = {
-                        view: true,
-                        create: false,
-                    };
                 }
 
                 return result;

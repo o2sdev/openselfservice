@@ -44,7 +44,7 @@ describe('PageService', () => {
                 {
                     provide: AuthIntegration.Service,
                     useValue: {
-                        getUserRoles: vi.fn().mockReturnValue([]),
+                        getRoles: vi.fn().mockReturnValue([]),
                     },
                 },
             ],
@@ -155,11 +155,11 @@ describe('PageService', () => {
             vi.spyOn(cmsService, 'getAlternativePages').mockReturnValue(
                 of([mockPage as unknown as CMS.Model.Page.Page]),
             );
-            vi.spyOn(authService, 'getUserRoles').mockReturnValue(['selfservice_org_admin', 'selfservice_org_user']);
+            vi.spyOn(authService, 'getRoles').mockReturnValue(['selfservice_org_admin', 'selfservice_org_user']);
 
             await firstValueFrom(service.getPage(mockQuery, mockHeaders));
 
-            expect(authService.getUserRoles).toHaveBeenCalledWith('Bearer token');
+            expect(authService.getRoles).toHaveBeenCalledWith('Bearer token');
         });
     });
 

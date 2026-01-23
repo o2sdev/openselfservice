@@ -83,7 +83,7 @@ One of the key features is that role-based access for pages can be configured di
 Pages have a `roles` field that can be set in the CMS. When a page is requested, the system checks if the user has at least one of the required roles for their current organization:
 
 ```typescript title="page role checking in page.service.ts"
-const userRoles = this.authService.getUserRoles(headers['authorization']);
+const userRoles = this.authService.getRoles(headers['authorization']);
 Auth.Service.requireRoles(
     page.roles,
     userRoles.map((r) => r),
@@ -203,14 +203,14 @@ If no decorators are present, the endpoint is publicly accessible.
 The `AuthService` is an abstract class that each integration must implement. It provides methods for:
 
 - `verifyToken()`: Verifies token signature, expiration, and standard OIDC claims
-- `getUserRoles()`: Retrieves organization-level user roles - can extract from token if present, or fetch asynchronously from an API if not (roles for the current organization/customer context)
+- `getRoles()`: Retrieves organization-level user roles - can extract from token if present, or fetch asynchronously from an API if not (roles for the current organization/customer context)
 - `getPermissions()`: Retrieves organization-level permissions - can extract from token if present, or fetch asynchronously from an API if not (permissions for the current organization/customer context)
 - `hasPermission()`: Checks if a user has a specific permission in their current organization
 - `canPerformActions()`: Checks multiple actions at once, returning a map of action -> boolean (for the current organization)
 - `isTokenRevoked()`: Checks if a token has been revoked (can be no-op if not supported)
 - `getCustomerId()`: Extracts customer ID for multi-tenant scenarios
 
-Note that `getUserRoles()` and `getPermissions()` return roles and permissions for the user's current organization/customer context, not global user roles. When a user switches organizations, these methods will return different values. The implementation can retrieve these values from the JWT token (if provided by your IAM) or fetch them asynchronously from another API endpoint.
+Note that `getRoles()` and `getPermissions()` return roles and permissions for the user's current organization/customer context, not global user roles. When a user switches organizations, these methods will return different values. The implementation can retrieve these values from the JWT token (if provided by your IAM) or fetch them asynchronously from another API endpoint.
 
 ### Using canPerformActions in services
 
@@ -278,7 +278,7 @@ When a page is requested, the `PageService` checks if the user has the required 
 getPage(query: GetPageQuery, headers: Models.Headers.AppHeaders): Observable<Page | NotFound> {
     const page = this.cmsService.getPage({ slug: query.slug, locale: headers['x-locale'] });
     // Gets roles for the user's current organization/customer context
-    const userRoles = this.authService.getUserRoles(headers['authorization']);
+    const userRoles = this.authService.getRoles(headers['authorization']);
 
     return forkJoin([page]).pipe(
         concatMap(([page]) => {
