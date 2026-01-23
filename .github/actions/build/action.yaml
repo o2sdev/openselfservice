@@ -29,7 +29,7 @@ runs:
           run: npm run build
 
         - name: Save build outputs to cache
-          uses: actions/cache/save@v4
+          uses: actions/cache/save@v5
           if: success()
           with:
               path: |

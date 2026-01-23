@@ -17,7 +17,7 @@ runs:
 
         - name: Restore install outputs from cache
           id: cache-install
-          uses: actions/cache/restore@v4
+          uses: actions/cache/restore@v5
           with:
               path: |
                   **/node_modules/**
@@ -32,7 +32,7 @@ runs:
               CI: true
 
         - name: Save install output to cache
-          uses: actions/cache/save@v4
+          uses: actions/cache/save@v5
           if: steps.cache-install.outputs.cache-hit != 'true'
           with:
               path: |
