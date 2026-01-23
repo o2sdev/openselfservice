@@ -4,13 +4,10 @@ import { defineConfig } from 'vitest/config';
 
 export const config = defineConfig({
     test: {
-        name: 'api',
         globals: true,
-        root: './',
-        include: ['src/api-harmonization/**/*.spec.ts'],
         environment: 'node',
         passWithNoTests: true,
-        exclude: ['**/node_modules/**', '**/dist/**', '**/.{idea,git,cache,output,temp}/**'],
+        include: ['src/**/*.spec.ts'],
     },
     plugins: [
         swc.vite({

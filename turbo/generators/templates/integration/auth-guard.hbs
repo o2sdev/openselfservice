@@ -39,7 +39,7 @@ export class RolesGuard implements Auth.Guards.RoleGuard {
         if (!verifiedToken) {
             try {
                 verifiedToken = await this.authService.verifyToken(authHeader);
-                request.headers['x-decoded-token'] = verifiedToken;
+                request['x-decoded-token'] = verifiedToken;
             } catch (_error) {
                 // Don't expose verification details to client
                 throw new UnauthorizedException('Invalid or expired token');
@@ -97,7 +97,7 @@ export class PermissionsGuard implements Auth.Guards.PermissionGuard {
         if (!verifiedToken) {
             try {
                 verifiedToken = await this.authService.verifyToken(authHeader);
-                request.headers['x-decoded-token'] = verifiedToken;
+                request['x-decoded-token'] = verifiedToken;
             } catch (_error) {
                 // Don't expose verification details to client
                 throw new UnauthorizedException('Invalid or expired token');

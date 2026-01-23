@@ -80,6 +80,11 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                     path: 'packages/integrations/{{kebabCase name}}/src/modules/index.ts',
                     template: '// MODULE_EXPORTS',
                 },
+                {
+                    type: 'add',
+                    path: 'packages/integrations/{{kebabCase name}}/vitest.config.mjs',
+                    templateFile: 'templates/integrations/vitestConfig.hbs',
+                },
             ];
 
             const modules = data?.modules as string[];

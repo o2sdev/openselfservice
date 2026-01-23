@@ -35,17 +35,16 @@ export class RolesGuard implements Auth.Guards.RoleGuard {
         }
 
         // Verify token (signature, expiration, standard claims)
-        let verifiedToken: Jwt = request.headers['x-decoded-token'];
+        let verifiedToken: Jwt = request['x-decoded-token'];
         if (!verifiedToken) {
             try {
                 verifiedToken = await this.authService.verifyToken(authHeader);
-                request.headers['x-decoded-token'] = verifiedToken;
+                request['x-decoded-token'] = verifiedToken;
             } catch (_error) {
                 // Don't expose verification details to client
                 throw new UnauthorizedException('Invalid or expired token');
             }
         }
-
         // Check if token is revoked
         if (verifiedToken.jti) {
             const isRevoked = await this.authService.isTokenRevoked(verifiedToken.jti);
@@ -93,11 +92,11 @@ export class PermissionsGuard implements Auth.Guards.PermissionGuard {
         }
 
         // Verify token (signature, expiration, standard claims)
-        let verifiedToken: Jwt = request.headers['x-decoded-token'];
+        let verifiedToken: Jwt = request['x-decoded-token'];
         if (!verifiedToken) {
             try {
                 verifiedToken = await this.authService.verifyToken(authHeader);
-                request.headers['x-decoded-token'] = verifiedToken;
+                request['x-decoded-token'] = verifiedToken;
             } catch (_error) {
                 // Don't expose verification details to client
                 throw new UnauthorizedException('Invalid or expired token');

@@ -48,27 +48,6 @@ export abstract class AuthService {
     abstract getRoles(token?: string | Auth.Model.Jwt): Auth.Model.Role[];
 
     /**
-     * Checks whether user has at least one of the specified roles.
-     * @param requiredRoles - Array of role strings (e.g., ['ORG_USER', 'ORG_ADMIN'])
-     * @param userRoles - User's roles from JWT (Auth.Model.Role[])
-     * @returns true if user has at least one required role
-     */
-    static hasRole(requiredRoles?: string[], userRoles?: string[]): boolean {
-        // No roles required = public access
-        if (!requiredRoles || requiredRoles.length === 0) {
-            return true;
-        }
-
-        // Roles required but user has none
-        if (!userRoles || userRoles.length === 0) {
-            return false;
-        }
-
-        // Check if user has at least one required role
-        return requiredRoles.some((role) => userRoles.includes(role));
-    }
-
-    /**
      * Gets permissions from a JWT token
      * @param token - JWT token string or decoded JWT object
      * @returns Array of normalized permissions
@@ -134,5 +113,26 @@ export abstract class AuthService {
         if (!hasRole) {
             throw new UnauthorizedException();
         }
+    }
+
+    /**
+     * Checks whether user has at least one of the specified roles.
+     * @param requiredRoles - Array of role strings (e.g., ['ORG_USER', 'ORG_ADMIN'])
+     * @param userRoles - User's roles from JWT (Auth.Model.Role[])
+     * @returns true if user has at least one required role
+     */
+    static hasRole(requiredRoles?: string[], userRoles?: string[]): boolean {
+        // No roles required = public access
+        if (!requiredRoles || requiredRoles.length === 0) {
+            return true;
+        }
+
+        // Roles required but user has none
+        if (!userRoles || userRoles.length === 0) {
+            return false;
+        }
+
+        // Check if user has at least one required role
+        return requiredRoles.some((role) => userRoles.includes(role));
     }
 }
