@@ -18,12 +18,64 @@ export interface ZendeskCustomField {
  * 3. Include the field in Survey.js form with matching name
  */
 export class ZendeskFieldMapper {
-    // Static mapping of Survey.js field names to Zendesk custom field IDs from environment variables
-    private static readonly fieldMap: Record<string, number | undefined> = {
-        topic: process.env.ZENDESK_TOPIC_FIELD_ID ? Number(process.env.ZENDESK_TOPIC_FIELD_ID) : undefined,
-        // Add more field mappings here as needed
-        // example: priority: process.env.ZENDESK_PRIORITY_FIELD_ID ? Number(process.env.ZENDESK_PRIORITY_FIELD_ID) : undefined,
-    };
+    /**
+     * Gets the field map dynamically from environment variables.
+     * Using a getter ensures environment variables are read at runtime, not during module initialization.
+     */
+    private static get fieldMap(): Record<string, number | undefined> {
+        return {
+            machineName: process.env.ZENDESK_DEVICE_NAME_FIELD_ID
+                ? Number(process.env.ZENDESK_DEVICE_NAME_FIELD_ID)
+                : undefined,
+            serialNumber: process.env.ZENDESK_SERIAL_NUMBER_FIELD_ID
+                ? Number(process.env.ZENDESK_SERIAL_NUMBER_FIELD_ID)
+                : undefined,
+            maintenanceType: process.env.ZENDESK_MAINTENANCE_TYPE_FIELD_ID
+                ? Number(process.env.ZENDESK_MAINTENANCE_TYPE_FIELD_ID)
+                : undefined,
+            preferredDate: process.env.ZENDESK_MAINTENANCE_PREFERRED_DATE_FIELD_ID
+                ? Number(process.env.ZENDESK_MAINTENANCE_PREFERRED_DATE_FIELD_ID)
+                : undefined,
+            additionalNotes: process.env.ZENDESK_ADDITIONAL_NOTES_FIELD_ID
+                ? Number(process.env.ZENDESK_ADDITIONAL_NOTES_FIELD_ID)
+                : undefined,
+            contactInformation: process.env.ZENDESK_CONTACT_FIELD_ID
+                ? Number(process.env.ZENDESK_CONTACT_FIELD_ID)
+                : undefined,
+
+            issueDate: process.env.ZENDESK_ISSUE_DATE_FIELD_ID
+                ? Number(process.env.ZENDESK_ISSUE_DATE_FIELD_ID)
+                : undefined,
+            organizationName: process.env.ZENDESK_COMPANY_NAME_FIELD_ID
+                ? Number(process.env.ZENDESK_COMPANY_NAME_FIELD_ID)
+                : undefined,
+            firstName: process.env.ZENDESK_FIRST_NAME_FIELD_ID
+                ? Number(process.env.ZENDESK_FIRST_NAME_FIELD_ID)
+                : undefined,
+            lastName: process.env.ZENDESK_LAST_NAME_FIELD_ID
+                ? Number(process.env.ZENDESK_LAST_NAME_FIELD_ID)
+                : undefined,
+            email: process.env.ZENDESK_EMAIL_FIELD_ID ? Number(process.env.ZENDESK_EMAIL_FIELD_ID) : undefined,
+            phone: process.env.ZENDESK_PHONE_FIELD_ID ? Number(process.env.ZENDESK_PHONE_FIELD_ID) : undefined,
+            invoiceNumber: process.env.ZENDESK_INVOICE_NUMBER_FIELD_ID
+                ? Number(process.env.ZENDESK_INVOICE_NUMBER_FIELD_ID)
+                : undefined,
+
+            address: process.env.ZENDESK_ADDRESS_FIELD_ID ? Number(process.env.ZENDESK_ADDRESS_FIELD_ID) : undefined,
+            topic: process.env.ZENDESK_TOPIC_FIELD_ID ? Number(process.env.ZENDESK_TOPIC_FIELD_ID) : undefined,
+            inquiryType: process.env.ZENDESK_INQUIRY_TYPE_FIELD_ID
+                ? Number(process.env.ZENDESK_INQUIRY_TYPE_FIELD_ID)
+                : undefined,
+            productCategory: process.env.ZENDESK_PRODUCT_CATEGORY_FIELD_ID
+                ? Number(process.env.ZENDESK_PRODUCT_CATEGORY_FIELD_ID)
+                : undefined,
+            preferredContactMethod: process.env.ZENDESK_PREFERRED_CONTACT_METHOD_FIELD_ID
+                ? Number(process.env.ZENDESK_PREFERRED_CONTACT_METHOD_FIELD_ID)
+                : undefined,
+            // Add more field mappings here as needed
+            // example: priority: process.env.ZENDESK_PRIORITY_FIELD_ID ? Number(process.env.ZENDESK_PRIORITY_FIELD_ID) : undefined,
+        };
+    }
 
     /**
      * Converts a record of field values to Zendesk custom fields format.
@@ -54,6 +106,7 @@ export class ZendeskFieldMapper {
 
             // Validate and convert value to supported types
             const validatedValue = this.validateAndConvertValue(fieldValue);
+
             if (validatedValue !== null) {
                 customFields.push({
                     id: fieldId,
@@ -68,13 +121,23 @@ export class ZendeskFieldMapper {
     /**
      * Validates and converts field value to Zendesk-supported types.
      * Zendesk API accepts: string, number, boolean
+     * Date fields must be in YYYY-MM-DD format
      *
      * @param value - The value to validate and convert
      * @returns Validated value or null if invalid
      */
     private static validateAndConvertValue(value: unknown): string | number | boolean | null {
-        // Handle primitives directly
-        if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+        // Handle primitives
+        if (typeof value === 'number' || typeof value === 'boolean') {
+            return value;
+        }
+
+        if (typeof value === 'string') {
+            // Convert date strings to YYYY-MM-DD format for date fields
+            if (/\d{4}-\d{2}-\d{2}/.test(value)) {
+                const date = new Date(value);
+                return isNaN(date.getTime()) ? value : (date.toISOString().split('T')[0] ?? value);
+            }
             return value;
         }
 
