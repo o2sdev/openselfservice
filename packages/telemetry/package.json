@@ -15,7 +15,7 @@
     },
     "dependencies": {
         "ci-info": "^4.3.1",
-        "configstore": "^7.1.0",
+        "configstore": "^8.0.0",
         "boxen": "^8.0.1",
         "is-docker": "^4.0.0",
         "ts-node": "^10.9.2",
