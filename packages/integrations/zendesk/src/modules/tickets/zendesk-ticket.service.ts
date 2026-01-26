@@ -171,7 +171,7 @@ export class ZendeskTicketService extends Tickets.Service {
 
     createTicket(data: Tickets.Request.PostTicketBody, authorization?: string): Observable<Tickets.Model.Ticket> {
         // Validate input data
-        if (!data.title || !data.description || !data.ticketFormId) {
+        if (!data.description || !data.ticketFormId) {
             return throwError(() => new BadRequestException('Title, description and ticketFormId are required'));
         }
 

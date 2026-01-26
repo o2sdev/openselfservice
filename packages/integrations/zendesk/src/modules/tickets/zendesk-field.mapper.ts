@@ -72,8 +72,16 @@ export class ZendeskFieldMapper {
             preferredContactMethod: process.env.ZENDESK_PREFERRED_CONTACT_METHOD_FIELD_ID
                 ? Number(process.env.ZENDESK_PREFERRED_CONTACT_METHOD_FIELD_ID)
                 : undefined,
-            // Add more field mappings here as needed
-            // example: priority: process.env.ZENDESK_PRIORITY_FIELD_ID ? Number(process.env.ZENDESK_PRIORITY_FIELD_ID) : undefined,
+            termsAcceptance: process.env.ZENDESK_TERMS_ACCEPTANCE_FIELD_ID
+                ? Number(process.env.ZENDESK_TERMS_ACCEPTANCE_FIELD_ID)
+                : undefined,
+            newsletterConsent: process.env.ZENDESK_NEWSLETTER_CONSENT_FIELD_ID
+                ? Number(process.env.ZENDESK_NEWSLETTER_CONSENT_FIELD_ID)
+                : undefined,
+            marketingConsent: process.env.ZENDESK_MARKETING_CONSENT_FIELD_ID
+                ? Number(process.env.ZENDESK_MARKETING_CONSENT_FIELD_ID)
+                : undefined,
+            // Add more custom fields mappings here as needed
         };
     }
 
