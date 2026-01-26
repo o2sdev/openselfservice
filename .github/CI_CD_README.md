@@ -18,13 +18,15 @@ graph TD
     G --> H
     E -->|Yes| H
     E -->|No| I[End]
-    H --> J[Deploy to Vercel Preview]
+    H --> J[Prepare Environment]
+    J --> K[Deploy to Vercel Preview]
 
     style B fill:#e1f5ff
     style D fill:#fff4e1
     style F fill:#fff4e1
     style G fill:#fff4e1
     style H fill:#e8f5e9
+    style J fill:#e1f5ff
 ```
 
 ### Deploy Docs Workflow
@@ -35,15 +37,16 @@ graph TD
     A --> C[build]
     C --> D[lint]
     C --> E[test]
-    B --> F[deploy-docs]
-    D --> F
-    E --> F
-    F --> G[Deploy to Vercel Production]
+    B --> F[Prepare Environment]
+    D --> G[Deploy to Vercel Production]
+    E --> G
+    F --> G
 
     style C fill:#fff4e1
     style D fill:#fff4e1
     style E fill:#fff4e1
-    style F fill:#e8f5e9
+    style F fill:#e1f5ff
+    style G fill:#e8f5e9
 ```
 
 ### Release Workflow
@@ -97,7 +100,7 @@ Deploys the docs app to Vercel production environment.
 - `build`: Builds the project and caches build outputs (dist, build, .next directories, next-env.d.ts)
 - `lint`: Lints the code - depends on `build` job and restores build outputs from cache
 - `test`: Runs tests - depends on `build` job and restores build outputs from cache
-- `deploy-docs`: Builds and deploys docs app to Vercel production (only runs after all quality checks pass)
+- `deploy-docs`: Prepares environment and deploys docs app to Vercel production using the `deploy-vercel` action (only runs after all quality checks pass)
 
 **Required Secrets:**
 
@@ -253,28 +256,13 @@ Unified action for deploying to Vercel (supports both production and preview env
 - Pulls environment variables from Vercel (based on environment)
 - Builds project locally
 - Deploys prebuilt project to Vercel
+- Captures and outputs the deployment URL
 
-### `deploy-docs`
+**Outputs:**
 
-Complete workflow for deploying docs app: checkout, setup environment, and deploy to Vercel.
+- `deployment-url`: The URL of the deployed project
 
-**Inputs:**
 
-- `repo-token` (required): GitHub token for repository access
-- `vercel-token` (required): Vercel API token
-- `vercel-project-id` (required): Vercel project ID for docs app
-- `environment` (required): Vercel environment (`production` or `preview`)
-- `fetch-depth` (optional): Git fetch depth for checkout (`0` for full history, `1` for shallow, default: `1`)
-- `build-args` (optional): Additional arguments for Vercel build command
-- `deploy-args` (optional): Additional arguments for Vercel deploy command
-
-**Steps:**
-
-- Checks out code
-- Prepares environment (Node.js, dependencies) - restores `node_modules` from cache if available
-- Deploys to Vercel using `deploy-vercel` action
-
-**Note:** This action consolidates the common deployment workflow used by both production and preview deployments. Quality checks are run separately as dedicated jobs before deployment.
 
 ## Best Practices
 

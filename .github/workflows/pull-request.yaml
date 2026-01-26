@@ -111,22 +111,28 @@ jobs:
         if: |
             needs.skip-duplicate-check.outputs.should_skip != 'true' &&
             contains(toJson(fromJson(needs.changed-packages.outputs.package_changed).packages), 'docs')
+        environment:
+            name: preview
+            url: ${{ steps.deploy.outputs.deployment-url }}
         steps:
             - name: Checkout repository
               uses: actions/checkout@v6
               with:
-                  # Minimal checkout just to make the action file available
-                  fetch-depth: 1
+                  fetch-depth: 0
 
-            - name: Deploy Docs Preview to Vercel
-              uses: ./.github/actions/deploy-docs
-              timeout-minutes: 20
+            - name: Prepare Environment
+              uses: ./.github/actions/setup-env
               with:
                   repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Deploy to Vercel
+              id: deploy
+              uses: ./.github/actions/deploy-vercel
+              timeout-minutes: 20
+              with:
                   vercel-token: ${{ secrets.VERCEL_ACCESS_TOKEN }}
                   vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
                   vercel-project-id: ${{ secrets.VERCEL_DOCS_PROJECT_ID }}
                   environment: preview
-                  fetch-depth: '0'
                   build-args: ''
                   deploy-args: ''

@@ -25,6 +25,11 @@ inputs:
         required: false
         default: ''
 
+outputs:
+    deployment-url:
+        description: 'The URL of the deployed project'
+        value: ${{ steps.deploy.outputs.url }}
+
 runs:
     using: "composite"
     steps:
@@ -56,10 +61,12 @@ runs:
               fi
 
         - name: Deploy prebuilt project to Vercel
+          id: deploy
           shell: bash
           run: |
               if [ -n "${{ inputs.deploy-args }}" ]; then
-                  vercel deploy --prebuilt ${{ inputs.deploy-args }} --token=${{ inputs.vercel-token }}
+                  URL=$(vercel deploy --prebuilt ${{ inputs.deploy-args }} --token=${{ inputs.vercel-token }})
               else
-                  vercel deploy --prebuilt --token=${{ inputs.vercel-token }}
+                  URL=$(vercel deploy --prebuilt --token=${{ inputs.vercel-token }})
               fi
+              echo "url=$URL" >> $GITHUB_OUTPUT
