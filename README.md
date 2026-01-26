@@ -28,23 +28,36 @@ To set up a new O2S project, use the `create-o2s-app` starter and follow the ins
 ```sh
 npx create-o2s-app my-project
 cd my-project
-npm run dev
+npm run watch:deps
+npm run watch:apps
 ```
 
 ## 🔧 Running the Project
 
-To start all services in **development mode**, use:
+To start all services in **development mode**, it is recommended to run two separate commands (ideally in separate terminal windows):
 
-```sh
-npm run dev
-```
+1. **Watch dependencies** – Automatically rebuilds internal packages when they change:
+   ```sh
+   npm run watch:deps
+   ```
+2. **Watch applications** – Starts the main applications with hot-reloading:
+   ```sh
+   npm run watch:apps
+   ```
 
-To run individual components:
+> [!IMPORTANT]
+> The `npm run dev` script is now **deprecated** and will be removed in future versions. Please use `watch:deps` and `watch:apps` instead to ensure a smoother development experience.
+
+To run individual components (useful for debugging one app at a time), you can still use:
 
 ```sh
 cd apps/api-harmonization && npm run dev  # Start API Harmonization Server
 cd apps/frontend && npm run dev  # Start Next.js Frontend
 ```
+
+> [!NOTE]
+> When running components individually, remember to run `npm run watch:deps` from the root if you are making changes to shared packages.
+
 
 For more details, check the **[Running the project](https://www.openselfservice.com/docs/getting-started/running-locally)** guide.
 
