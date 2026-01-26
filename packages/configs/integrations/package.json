@@ -1,6 +1,6 @@
 {
     "name": "@o2s/configs.integrations",
-    "version": "0.2.1",
+    "version": "0.3.0",
     "private": true,
     "license": "MIT",
     "exports": {
@@ -26,7 +26,7 @@
         "@o2s/typescript-config": "*",
         "concurrently": "^9.2.1",
         "eslint": "^9.39.2",
-        "prettier": "^3.7.4",
+        "prettier": "^3.8.1",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"
     }

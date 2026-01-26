@@ -1,0 +1,132 @@
+name: PR Quality Checks and Preview
+
+# Runs code quality checks (build, lint, test) on pull requests
+# Additionally deploys docs preview to Vercel if docs package changed
+
+permissions:
+    actions: write
+    contents: read
+    checks: read
+    pull-requests: write
+    deployments: write
+
+env:
+    VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+
+on:
+    pull_request:
+        types: [opened, synchronize]
+
+concurrency:
+    group: pr-quality-checks-${{ github.event.pull_request.number }}
+    cancel-in-progress: true
+
+jobs:
+    skip-duplicate-check:
+        runs-on: ubuntu-latest
+        outputs:
+            should_skip: ${{ steps.skip_check.outputs.should_skip }}
+        steps:
+            - id: skip_check
+              uses: fkirc/skip-duplicate-actions@v5
+              with:
+                  concurrent_skipping: 'outdated_runs'
+                  cancel_others: 'true'
+
+    changed-packages:
+        needs: skip-duplicate-check
+        if: needs.skip-duplicate-check.outputs.should_skip != 'true'
+        runs-on: ubuntu-latest
+        outputs:
+            package_changed: ${{ steps.determine-changes.outputs.package_changed }}
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v6
+              with:
+                  # Minimal checkout just to make the action file available
+                  fetch-depth: 1
+
+            - name: Determine which packages changed
+              id: determine-changes
+              uses: ./.github/actions/changed-packages
+              with:
+                  event-name: ${{ github.event_name }}
+                  base-sha: ${{ github.event.pull_request.base.sha }}
+                  fetch-depth: '0'
+
+    build:
+        needs: skip-duplicate-check
+        if: needs.skip-duplicate-check.outputs.should_skip != 'true'
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v6
+              with:
+                  # Minimal checkout just to make the action file available
+                  fetch-depth: 1
+
+            - name: Build
+              uses: ./.github/actions/build
+              with:
+                  repo-token: ${{ secrets.GITHUB_TOKEN }}
+                  fetch-depth: '0'
+
+    lint:
+        needs: [skip-duplicate-check, build]
+        if: needs.skip-duplicate-check.outputs.should_skip != 'true'
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v6
+              with:
+                  # Minimal checkout just to make the action file available
+                  fetch-depth: 1
+
+            - name: Lint
+              uses: ./.github/actions/lint
+              with:
+                  repo-token: ${{ secrets.GITHUB_TOKEN }}
+                  fetch-depth: '0'
+
+    test:
+        needs: [skip-duplicate-check, build]
+        if: needs.skip-duplicate-check.outputs.should_skip != 'true'
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v6
+              with:
+                  # Minimal checkout just to make the action file available
+                  fetch-depth: 1
+
+            - name: Test
+              uses: ./.github/actions/test
+              with:
+                  repo-token: ${{ secrets.GITHUB_TOKEN }}
+                  fetch-depth: '0'
+
+    deploy-docs-preview:
+        runs-on: ubuntu-latest
+        needs: [skip-duplicate-check, changed-packages, build, lint, test]
+        if: |
+            needs.skip-duplicate-check.outputs.should_skip != 'true' &&
+            contains(toJson(fromJson(needs.changed-packages.outputs.package_changed).packages), 'docs')
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v6
+              with:
+                  # Minimal checkout just to make the action file available
+                  fetch-depth: 1
+
+            - name: Deploy Docs Preview to Vercel
+              uses: ./.github/actions/deploy-docs
+              timeout-minutes: 20
+              with:
+                  repo-token: ${{ secrets.GITHUB_TOKEN }}
+                  vercel-token: ${{ secrets.VERCEL_ACCESS_TOKEN }}
+                  vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+                  vercel-project-id: ${{ secrets.VERCEL_DOCS_PROJECT_ID }}
+                  environment: preview
+                  fetch-depth: '0'
+                  build-args: ''
+                  deploy-args: ''

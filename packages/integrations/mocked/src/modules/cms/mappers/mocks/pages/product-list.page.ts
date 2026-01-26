@@ -1,4 +1,4 @@
-import { Auth, CMS } from '@o2s/framework/modules';
+import { CMS } from '@o2s/framework/modules';
 
 export const PAGE_PRODUCT_LIST_EN: CMS.Model.Page.Page = {
     id: '20',
@@ -9,7 +9,7 @@ export const PAGE_PRODUCT_LIST_EN: CMS.Model.Page.Page = {
     seo: {
         noIndex: false,
         noFollow: false,
-        title: 'Products',
+        title: 'Products in Catalog',
         description: 'Browse our product catalog',
         keywords: [],
         image: {
@@ -19,7 +19,7 @@ export const PAGE_PRODUCT_LIST_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
+    permissions: [],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',
@@ -43,7 +43,7 @@ export const PAGE_PRODUCT_LIST_DE: CMS.Model.Page.Page = {
     seo: {
         noIndex: false,
         noFollow: false,
-        title: 'Produkte',
+        title: 'Produkte im Katalog',
         description: 'Durchsuchen Sie unseren Produktkatalog',
         keywords: [],
         image: {
@@ -53,7 +53,7 @@ export const PAGE_PRODUCT_LIST_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
+    permissions: [],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',
@@ -77,7 +77,7 @@ export const PAGE_PRODUCT_LIST_PL: CMS.Model.Page.Page = {
     seo: {
         noIndex: false,
         noFollow: false,
-        title: 'Produkty',
+        title: 'Katalog produktów',
         description: 'Przeglądaj nasz katalog produktów',
         keywords: [],
         image: {
@@ -87,7 +87,7 @@ export const PAGE_PRODUCT_LIST_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
+    permissions: [],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',

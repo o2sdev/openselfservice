@@ -1,0 +1,46 @@
+name: Test
+
+description: 'Checkout code, setup environment, install Playwright browsers, restore build outputs from cache, and run tests'
+
+inputs:
+    repo-token:
+        description: 'Token to access the repository'
+        required: true
+    fetch-depth:
+        description: 'Git fetch depth for checkout'
+        required: false
+        default: '0'
+
+runs:
+    using: 'composite'
+    steps:
+        - name: Checkout code
+          uses: actions/checkout@v6
+          with:
+              fetch-depth: ${{ inputs.fetch-depth }}
+
+        - name: Prepare Environment
+          uses: ./.github/actions/setup-env
+          with:
+              repo-token: ${{ inputs.repo-token }}
+
+        - name: Restore build outputs from cache
+          uses: actions/cache/restore@v4
+          with:
+              path: |
+                  **/dist/**
+                  **/build/**
+                  **/.next/**
+                  **/next-env.d.ts
+                  !**/node_modules/**
+              key: ${{ runner.os }}-build-${{ github.sha }}
+
+        - name: Install Playwright Browsers
+          shell: bash
+          run: npx playwright install --with-deps
+          env:
+              CI: true
+
+        - name: Test
+          shell: bash
+          run: npm run test

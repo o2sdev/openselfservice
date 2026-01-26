@@ -1,12 +1,13 @@
 'use client';
 
-import { createNavigation } from 'next-intl/navigation';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 
 import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
 import { Price } from '@o2s/ui/components/Price';
 import { ProductGallery } from '@o2s/ui/components/ProductGallery';
 import { RichText } from '@o2s/ui/components/RichText';
+import { TooltipHover } from '@o2s/ui/components/TooltipHover';
 
 import { Badge } from '@o2s/ui/elements/badge';
 import { Button } from '@o2s/ui/elements/button';
@@ -21,8 +22,8 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
     hasPriority,
     ...component
 }) => {
-    const { Link: LinkComponent } = createNavigation(routing);
     const { product, labels, actionButton } = component;
+    const t = useTranslations();
 
     const keySpecs = product && product.keySpecs ? product.keySpecs : [];
 
@@ -163,19 +164,22 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                             <>
                                 <Separator />
                                 <div className="flex flex-col gap-3">
-                                    <Button
-                                        variant={actionButton.variant || 'default'}
-                                        size="lg"
-                                        className="w-full"
-                                        asChild
-                                    >
-                                        <LinkComponent href={actionButton.href}>
-                                            {actionButton.icon && (
-                                                <DynamicIcon name={actionButton.icon} size={20} className="mr-2" />
-                                            )}
-                                            {actionButton.label}
-                                        </LinkComponent>
-                                    </Button>
+                                    <TooltipHover
+                                        trigger={(setIsOpen) => (
+                                            <Button
+                                                variant={actionButton.variant || 'default'}
+                                                size="lg"
+                                                className="w-full"
+                                                onClick={() => setIsOpen(true)}
+                                            >
+                                                {actionButton.icon && (
+                                                    <DynamicIcon name={actionButton.icon} size={20} className="mr-2" />
+                                                )}
+                                                {actionButton.label}
+                                            </Button>
+                                        )}
+                                        content={<p>{t('general.comingSoon')}</p>}
+                                    />
                                 </div>
                             </>
                         )}
@@ -193,14 +197,19 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                                     <Price price={product.price} />
                                 </Typography>
                             </div>
-                            <Button
-                                variant={actionButton.variant || 'default'}
-                                size="default"
-                                className="w-full"
-                                asChild
-                            >
-                                <LinkComponent href={actionButton.href}>{actionButton.label}</LinkComponent>
-                            </Button>
+                            <TooltipHover
+                                trigger={(setIsOpen) => (
+                                    <Button
+                                        variant={actionButton.variant || 'default'}
+                                        size="default"
+                                        className="w-full"
+                                        onClick={() => setIsOpen(true)}
+                                    >
+                                        {actionButton.label}
+                                    </Button>
+                                )}
+                                content={<p>{t('general.comingSoon')}</p>}
+                            />
                         </div>
                     </div>
                 </>

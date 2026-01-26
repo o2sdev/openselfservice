@@ -20,7 +20,7 @@ export const mapProduct = (id: string, locale?: string): Products.Model.Product 
 };
 
 export const mapProducts = (options: Products.Request.GetProductListQuery): Products.Model.Products => {
-    const { sort, locale } = options;
+    const { sort, locale, offset = 0, limit = 12 } = options;
 
     let productsSource = MOCK_PRODUCTS_EN;
     if (locale === 'pl') {
@@ -67,7 +67,7 @@ export const mapProducts = (options: Products.Request.GetProductListQuery): Prod
     }
 
     return {
-        data: data,
+        data: data.slice(offset, Number(offset) + Number(limit)),
         total: data.length,
     };
 };
@@ -119,7 +119,7 @@ export const mapRelatedProducts = (options: Products.Request.GetRelatedProductLi
     }
 
     return {
-        data: data.slice(Number(offset), Number(offset) + Number(limit)),
+        data: data.slice(offset, Number(offset) + Number(limit)),
         total: data.length,
     };
 };

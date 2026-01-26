@@ -2,7 +2,7 @@ import { CMS } from '@o2s/framework/modules';
 
 const MOCK_PRODUCT_LIST_BLOCK_EN: CMS.Model.ProductListBlock.ProductListBlock = {
     id: 'product-list-1',
-    title: 'Products',
+    title: 'Products in Catalog',
     subtitle: 'Browse our product catalog',
     detailsLabel: 'View Details',
     fieldMapping: {
@@ -53,6 +53,7 @@ const MOCK_PRODUCT_LIST_BLOCK_EN: CMS.Model.ProductListBlock.ProductListBlock = 
                 id: 'sort',
                 label: 'Sort by',
                 allowMultiple: false,
+                isLeading: true,
                 options: [
                     { label: 'Name ascending', value: 'name_ASC' },
                     { label: 'Name descending', value: 'name_DESC' },
@@ -65,6 +66,7 @@ const MOCK_PRODUCT_LIST_BLOCK_EN: CMS.Model.ProductListBlock.ProductListBlock = 
                 id: 'category',
                 label: 'Category',
                 allowMultiple: true,
+                isLeading: true,
                 options: [
                     { label: 'Software', value: 'SOFTWARE' },
                     { label: 'Tools', value: 'TOOLS' },
@@ -78,6 +80,12 @@ const MOCK_PRODUCT_LIST_BLOCK_EN: CMS.Model.ProductListBlock.ProductListBlock = 
                     { label: 'Training', value: 'TRAINING' },
                 ],
             },
+            {
+                __typename: 'FilterViewModeToggle',
+                id: 'viewMode',
+                value: 'grid',
+                isLeading: true,
+            },
         ],
     },
     noResults: {
@@ -87,13 +95,16 @@ const MOCK_PRODUCT_LIST_BLOCK_EN: CMS.Model.ProductListBlock.ProductListBlock = 
     labels: {
         clickToSelect: 'Click to select',
         gridView: 'Grid view',
-        tableView: 'Table view',
+        listView: 'List view',
+        showMoreFilters: 'Show more filters',
+        hideMoreFilters: 'Hide more filters',
+        noActiveFilters: 'No active filters',
     },
 };
 
 const MOCK_PRODUCT_LIST_BLOCK_DE: CMS.Model.ProductListBlock.ProductListBlock = {
     id: 'product-list-1',
-    title: 'Produkte',
+    title: 'Produkte im Katalog',
     subtitle: 'Durchsuchen Sie unseren Produktkatalog',
     detailsLabel: 'Details anzeigen',
     fieldMapping: {
@@ -144,6 +155,7 @@ const MOCK_PRODUCT_LIST_BLOCK_DE: CMS.Model.ProductListBlock.ProductListBlock = 
                 id: 'sort',
                 label: 'Sortieren nach',
                 allowMultiple: false,
+                isLeading: true,
                 options: [
                     { label: 'Name aufsteigend', value: 'name_ASC' },
                     { label: 'Name absteigend', value: 'name_DESC' },
@@ -156,6 +168,7 @@ const MOCK_PRODUCT_LIST_BLOCK_DE: CMS.Model.ProductListBlock.ProductListBlock = 
                 id: 'category',
                 label: 'Kategorie',
                 allowMultiple: true,
+                isLeading: true,
                 options: [
                     { label: 'Software', value: 'SOFTWARE' },
                     { label: 'Werkzeuge', value: 'TOOLS' },
@@ -169,6 +182,12 @@ const MOCK_PRODUCT_LIST_BLOCK_DE: CMS.Model.ProductListBlock.ProductListBlock = 
                     { label: 'Training', value: 'TRAINING' },
                 ],
             },
+            {
+                __typename: 'FilterViewModeToggle',
+                id: 'viewMode',
+                value: 'grid',
+                isLeading: true,
+            },
         ],
     },
     noResults: {
@@ -178,13 +197,16 @@ const MOCK_PRODUCT_LIST_BLOCK_DE: CMS.Model.ProductListBlock.ProductListBlock = 
     labels: {
         clickToSelect: 'Klicken Sie, um auszuwählen',
         gridView: 'Rasteransicht',
-        tableView: 'Tabellenansicht',
+        listView: 'Listenansicht',
+        showMoreFilters: 'Mehr Filter anzeigen',
+        hideMoreFilters: 'Mehr Filter ausblenden',
+        noActiveFilters: 'Keine aktiven Filter',
     },
 };
 
 const MOCK_PRODUCT_LIST_BLOCK_PL: CMS.Model.ProductListBlock.ProductListBlock = {
     id: 'product-list-1',
-    title: 'Produkty',
+    title: 'Katalog produktów',
     subtitle: 'Przeglądaj nasz katalog produktów',
     detailsLabel: 'Zobacz szczegóły',
     fieldMapping: {
@@ -235,6 +257,7 @@ const MOCK_PRODUCT_LIST_BLOCK_PL: CMS.Model.ProductListBlock.ProductListBlock = 
                 id: 'sort',
                 label: 'Sortuj według',
                 allowMultiple: false,
+                isLeading: true,
                 options: [
                     { label: 'Nazwa rosnąco', value: 'name_ASC' },
                     { label: 'Nazwa malejąco', value: 'name_DESC' },
@@ -247,6 +270,7 @@ const MOCK_PRODUCT_LIST_BLOCK_PL: CMS.Model.ProductListBlock.ProductListBlock = 
                 id: 'category',
                 label: 'Kategoria',
                 allowMultiple: true,
+                isLeading: true,
                 options: [
                     { label: 'Oprogramowanie', value: 'SOFTWARE' },
                     { label: 'Narzędzia', value: 'TOOLS' },
@@ -260,6 +284,12 @@ const MOCK_PRODUCT_LIST_BLOCK_PL: CMS.Model.ProductListBlock.ProductListBlock = 
                     { label: 'Szkolenie', value: 'TRAINING' },
                 ],
             },
+            {
+                __typename: 'FilterViewModeToggle',
+                id: 'viewMode',
+                value: 'grid',
+                isLeading: true,
+            },
         ],
     },
     noResults: {
@@ -269,7 +299,10 @@ const MOCK_PRODUCT_LIST_BLOCK_PL: CMS.Model.ProductListBlock.ProductListBlock = 
     labels: {
         clickToSelect: 'Kliknij, aby wybrać',
         gridView: 'Widok siatki',
-        tableView: 'Widok tabeli',
+        listView: 'Widok listy',
+        showMoreFilters: 'Pokaż więcej filtrów',
+        hideMoreFilters: 'Ukryj więcej filtrów',
+        noActiveFilters: 'Brak aktywnych filtrów',
     },
 };
 
