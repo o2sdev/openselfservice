@@ -148,7 +148,7 @@ export function HeroBannerSection({
                         <img
                             src={heroImage.url}
                             alt={heroImage.alt}
-                            className={`w-full relative h-auto origin-center z-[-1] ${
+                            className={`w-full relative h-auto origin-left z-[-1] ${
                                 isDXPage ? `hidden md:block mt-20 ml-[-250px] scale-[2.6] z-10` : 'scale-[2]'
                             }`}
                         />

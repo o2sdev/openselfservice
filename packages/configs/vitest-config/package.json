@@ -8,7 +8,7 @@
         "./api": "./api.js"
     },
     "devDependencies": {
-        "vitest": "^4.0.17",
+        "vitest": "^4.0.18",
         "unplugin-swc": "^1.5.9"
     }
 }
