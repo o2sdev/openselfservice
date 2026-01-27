@@ -113,7 +113,7 @@ jobs:
         needs: [skip-duplicate-check, changed-packages, build, lint, test]
         if: |
             needs.skip-duplicate-check.outputs.should_skip != 'true' &&
-            contains(toJson(fromJson(needs.changed-packages.outputs.package_changed).packages), 'docs')
+            contains(toJson(fromJson(needs.changed-packages.outputs.package_changed).packages), '@o2s/docs')
         environment:
             name: docs-preview
             url: ${{ steps.deploy-docs.outputs.deployment-url }}

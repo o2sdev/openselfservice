@@ -58,7 +58,7 @@ runs:
           env:
               TURBO_REF_FILTER: ${{ inputs.event-name == 'pull_request' && inputs.base-sha || 'HEAD^' }}
           run: |
-              STORYBOOK_CHANGES=$(git diff --name-only $TURBO_REF_FILTER | grep -E "\.stories\.tsx$|^.storybook/" || true)
+              STORYBOOK_CHANGES=$(git diff --name-only $TURBO_REF_FILTER | grep -E "\.stories\.tsx$|^.storybook/|^packages/blocks/.*\.client\.tsx$|^packages/ui/src/.*\.tsx$" || true)
               
               if [ -n "$STORYBOOK_CHANGES" ]; then
                   echo "stories_changed=true" >> $GITHUB_OUTPUT
