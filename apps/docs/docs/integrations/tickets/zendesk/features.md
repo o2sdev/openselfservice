@@ -106,7 +106,6 @@ The integration maps Zendesk ticket data to the standard ticket model with the f
 | id                   | id               | Converted to string                      |
 | created_at           | createdAt        | ISO date string                          |
 | updated_at           | updatedAt        | ISO date string                          |
-| priority             | type             | Converted to uppercase (default: NORMAL) |
 | status               | status           | Mapped according to status mapping       |
 | subject              | properties       | Added as property with id 'subject'      |
 | description          | properties       | Added as property with id 'description'  |
@@ -183,13 +182,54 @@ To add support for a new custom field:
    }
    ```
 
+### Topic Field Mapping
+
+The `topic` field is automatically set during ticket creation based on the `ticketFormId` provided in the ticket data. This ensures consistent categorization across different form types.
+
+**How it works:**
+
+When creating a ticket via the Zendesk integration:
+
+1. The system compares the `ticketFormId` with configured environment variables:
+   - `ZENDESK_CONTACT_FORM_ID` → topic value: `CONTACT_US`
+   - `ZENDESK_COMPLAINT_FORM_ID` → topic value: `COMPLAINT`
+   - `ZENDESK_REQUEST_DEVICE_MAINTENANCE_FORM_ID` → topic value: `REQUEST_DEVICE_MAINTENANCE`
+
+2. The matching topic value is automatically added to the ticket's custom fields
+
+3. The topic is then stored in Zendesk using the `ZENDESK_TOPIC_FIELD_ID` custom field
+
+**Example:**
+
+```typescript
+// Survey.js sends ticketFormId
+{
+  ticketFormId: 33406700504221,  // Matches ZENDESK_CONTACT_FORM_ID
+  customFields: { ... }
+}
+
+// Service automatically adds topic
+{
+  ticketFormId: 33406700504221,
+  customFields: {
+    topic: 'CONTACT_US',  // Automatically set
+    ...
+  }
+}
+```
+
+**Important**: If the `ticketFormId` doesn't match any configured form ID, the ticket creation will fail with a `BadRequestException`. This ensures that all tickets are properly categorized.
+
+**Supported topic values:**
+- `CONTACT_US` - General contact inquiries
+- `COMPLAINT` - Customer complaints
+- `REQUEST_DEVICE_MAINTENANCE` - Device maintenance requests
+
 ### Default Values and Fallbacks
 
 The integration handles missing data with the following defaults:
 
 - **Status**: `OPEN` (if status is unknown or missing)
-- **Topic**: `GENERAL` (if topic field is not configured or not found)
-- **Type**: `NORMAL` (if priority is missing, converted from Zendesk priority)
 - **Empty strings**: Used for missing string values (subject, description, etc.)
 - **Comments**: `undefined` if no comments exist (not an empty array)
 - **Attachments**: `undefined` if no attachments exist (not an empty array)
@@ -223,7 +263,6 @@ The integration converts framework filter parameters to Zendesk Search API queri
 | Framework Parameter | Zendesk Search Query | Notes                                    |
 |---------------------|----------------------|------------------------------------------|
 | status              | `status:{value}`     | Converted to lowercase                   |
-| type                | `priority:{value}`   | Note: maps to priority, not type        |
 | topic               | `tag:{value}`        | Maps to Zendesk tags                     |
 | dateFrom            | `created>={iso_date}` | Converted to ISO format                  |
 | dateTo              | `created<={iso_date}` | Converted to ISO format                  |

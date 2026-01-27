@@ -72,7 +72,6 @@ getTicketList(
 | offset    | number       | Number of items to skip           |
 | limit     | number       | Maximum number of items to return |
 | topic     | string       | Filter by ticket topic            |
-| type      | string       | Filter by ticket type             |
 | status    | TicketStatus | Filter by ticket status           |
 | dateFrom  | Date         | Filter by creation date (from)    |
 | dateTo    | Date         | Filter by creation date (to)      |
