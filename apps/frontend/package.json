@@ -73,7 +73,7 @@
         "@o2s/typescript-config": "*",
         "@svgr/webpack": "^8.1.0",
         "@trivago/prettier-plugin-sort-imports": "^6.0.2",
-        "@turbo/gen": "^2.7.5",
+        "@turbo/gen": "^2.7.6",
         "@types/node": "^24.10.9",
         "@types/react": "19.2.9",
         "@types/react-autosuggest": "^10.1.11",
