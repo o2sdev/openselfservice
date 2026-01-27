@@ -41,6 +41,7 @@ jobs:
         runs-on: ubuntu-latest
         outputs:
             package_changed: ${{ steps.determine-changes.outputs.package_changed }}
+            stories_changed: ${{ steps.determine-changes.outputs.stories_changed }}
         steps:
             - name: Checkout repository
               uses: actions/checkout@v6
