@@ -86,6 +86,22 @@ export class ZendeskFieldMapper {
     }
 
     /**
+     * Gets the field key (name) by its Zendesk field ID.
+     * Used for reverse mapping when reading tickets from Zendesk.
+     *
+     * @param fieldId - Zendesk custom field ID
+     * @returns Field key (e.g., 'machineName', 'serialNumber') or undefined if not found
+     */
+    static getFieldKeyById(fieldId: number): string | undefined {
+        for (const [key, id] of Object.entries(this.fieldMap)) {
+            if (id === fieldId) {
+                return key;
+            }
+        }
+        return undefined;
+    }
+
+    /**
      * Converts a record of field values to Zendesk custom fields format.
      * Only includes fields that:
      * - Have a mapping in fieldMap
