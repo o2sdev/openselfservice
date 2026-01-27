@@ -2,6 +2,8 @@ import { Tickets } from '@o2s/framework/modules';
 
 import { type TicketCommentObject, type TicketObject, type UserObject } from '@/generated/zendesk';
 
+import { ZendeskFieldMapper } from './zendesk-field.mapper';
+
 type ZendeskTicket = TicketObject;
 
 export function mapTicketToModel(
@@ -23,21 +25,31 @@ export function mapTicketToModel(
             status = 'OPEN';
     }
 
-    let topic = 'GENERAL';
+    // Determine topic from custom field if configured
+    let topic: string = 'GENERAL';
+    const topicFieldId = process.env.ZENDESK_TOPIC_FIELD_ID ? Number(process.env.ZENDESK_TOPIC_FIELD_ID) : undefined;
+
+    if (topicFieldId && ticket.custom_fields) {
+        const topicField = ticket.custom_fields.find((field) => field.id === topicFieldId);
+        if (topicField?.value) {
+            topic = String(topicField.value).toUpperCase();
+        }
+    }
+
     const properties: Tickets.Model.TicketProperty[] = [
         { id: 'subject', value: ticket.subject || '' },
         { id: 'description', value: ticket.description || '' },
     ];
 
+    // Map custom fields to properties using readable names from ZendeskFieldMapper
     if (ticket.custom_fields) {
-        const topicFieldId = Number(process.env.ZENDESK_TOPIC_FIELD_ID || 0);
         ticket.custom_fields.forEach((field) => {
             if (field.value !== null && field.value !== undefined) {
-                if (topicFieldId && field.id === topicFieldId) {
-                    topic = String(field.value).toUpperCase();
-                } else {
+                const fieldKey = ZendeskFieldMapper.getFieldKeyById(field.id!);
+
+                if (fieldKey) {
                     properties.push({
-                        id: `custom_field_${field.id}`,
+                        id: fieldKey,
                         value: String(field.value),
                     });
                 }
@@ -82,7 +94,6 @@ export function mapTicketToModel(
         createdAt: ticket.created_at || '',
         updatedAt: ticket.updated_at || '',
         topic,
-        type: (ticket.priority || 'NORMAL').toUpperCase(),
         status,
         properties,
         comments: mappedComments.length > 0 ? mappedComments : undefined,
