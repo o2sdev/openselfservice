@@ -6,6 +6,9 @@
             "env": [
                 "ZENDESK_API_URL",
                 "ZENDESK_API_TOKEN",
+                "ZENDESK_CONTACT_FORM_ID",
+                "ZENDESK_COMPLAINT_FORM_ID",
+                "ZENDESK_REQUEST_DEVICE_MAINTENANCE_FORM_ID",
                 "ZENDESK_TOPIC_FIELD_ID",
                 "ZENDESK_DEVICE_NAME_FIELD_ID",
                 "ZENDESK_SERIAL_NUMBER_FIELD_ID",
@@ -34,6 +37,9 @@
             "env": [
                 "ZENDESK_API_URL",
                 "ZENDESK_API_TOKEN",
+                "ZENDESK_CONTACT_FORM_ID",
+                "ZENDESK_COMPLAINT_FORM_ID",
+                "ZENDESK_REQUEST_DEVICE_MAINTENANCE_FORM_ID",
                 "ZENDESK_TOPIC_FIELD_ID",
                 "ZENDESK_DEVICE_NAME_FIELD_ID",
                 "ZENDESK_SERIAL_NUMBER_FIELD_ID",
