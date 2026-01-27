@@ -19,6 +19,9 @@ outputs:
     package_changed:
         description: 'JSON string containing changed packages information from turbo dry-run'
         value: ${{ steps.changeset.outputs.result }}
+    stories_changed:
+        description: 'True if any storybook files or config changed'
+        value: ${{ steps.changeset.outputs.stories_changed }}
 
 runs:
     using: 'composite'
@@ -48,3 +51,9 @@ runs:
               echo 'result<<CHANGESET_DELIMITER' >> $GITHUB_OUTPUT
               echo "$(npx -y turbo build --dry-run=json --filter=...[$TURBO_REF_FILTER])" >> $GITHUB_OUTPUT
               echo 'CHANGESET_DELIMITER' >> $GITHUB_OUTPUT
+
+              if git diff --name-only $TURBO_REF_FILTER | grep -qE "\.stories\.tsx$|^.storybook/"; then
+                  echo "stories_changed=true" >> $GITHUB_OUTPUT
+              else
+                  echo "stories_changed=false" >> $GITHUB_OUTPUT
+              fi

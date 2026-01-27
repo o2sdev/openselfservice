@@ -12,6 +12,7 @@ graph TD
     B --> C[changed-packages]
     B --> D[build]
     C --> E{docs package changed?}
+    C --> L{stories changed?}
     D --> F[lint]
     D --> G[test]
     F --> H[deploy-docs-preview]
@@ -19,14 +20,23 @@ graph TD
     E -->|Yes| H
     E -->|No| I[End]
     H --> J[Prepare Environment]
-    J --> K[Deploy to Vercel Preview]
+    J --> K[Deploy Docs to Vercel Preview]
+    
+    L -->|Yes| M[deploy-storybook-preview]
+    D --> M
+    F --> M
+    G --> M
+    M --> N[Prepare Environment]
+    N --> O[Deploy Storybook to Vercel Preview]
 
     style B fill:#e1f5ff
     style D fill:#fff4e1
     style F fill:#fff4e1
     style G fill:#fff4e1
     style H fill:#e8f5e9
+    style M fill:#e8f5e9
     style J fill:#e1f5ff
+    style N fill:#e1f5ff
 ```
 
 ### Deploy Docs Workflow
@@ -38,15 +48,23 @@ graph TD
     C --> D[lint]
     C --> E[test]
     B --> F[Prepare Environment]
-    D --> G[Deploy to Vercel Production]
+    D --> G[Deploy Docs to Vercel Production]
     E --> G
     F --> G
+    
+    B --> H[Prepare Environment]
+    D --> I[Deploy Storybook to Vercel Production]
+    E --> I
+    F --> I
+    H --> I
 
     style C fill:#fff4e1
     style D fill:#fff4e1
     style E fill:#fff4e1
     style F fill:#e1f5ff
+    style H fill:#e1f5ff
     style G fill:#e8f5e9
+    style I fill:#e8f5e9
 ```
 
 ### Release Workflow
@@ -90,23 +108,25 @@ graph LR
 
 ### `deploy-docs.yaml`
 
-Deploys the docs app to Vercel production environment.
+Deploys the docs app and Storybook to Vercel production.
 
 **Trigger:** Push tag matching `docs-v*.*.*` pattern (e.g., `docs-v1.2.3`)
 
 **Jobs:**
 
 - `parse-docs-tag`: Extracts version from tag
-- `build`: Builds the project and caches build outputs (dist, build, .next directories, next-env.d.ts)
-- `lint`: Lints the code - depends on `build` job and restores build outputs from cache
-- `test`: Runs tests - depends on `build` job and restores build outputs from cache
-- `deploy-docs`: Prepares environment and deploys docs app to Vercel production using the `deploy-vercel` action (only runs after all quality checks pass)
+- `build`: Builds the project and caches build outputs
+- `lint`: Lints the code
+- `test`: Runs tests
+- `deploy-docs`: Deploys docs app to Vercel (environment: `docs-production`)
+- `deploy-storybook`: Deploys storybook to Vercel (environment: `storybook-production`)
 
 **Required Secrets:**
 
 - `VERCEL_ACCESS_TOKEN`: Vercel API token
 - `VERCEL_ORG_ID`: Vercel organization ID
 - `VERCEL_DOCS_PROJECT_ID`: Vercel project ID for docs app
+- `VERCEL_STORYBOOK_PROJECT_ID`: Vercel project ID for storybook
 
 ### `release.yaml`
 
@@ -117,41 +137,43 @@ Publishes npm packages to the registry using Changesets.
 **Jobs:**
 
 - `skip-duplicate-check`: Prevents duplicate workflow runs
-- `build`: Builds the project and caches build outputs (dist, build, .next directories, next-env.d.ts)
-- `lint`: Lints the code - depends on `build` job and restores build outputs from cache
-- `test`: Runs tests - depends on `build` job and restores build outputs from cache
-- `publish-packages`: Publishes packages via Changesets (only runs after all quality checks pass)
+- `build`: Builds the project and caches build outputs
+- `lint`: Lints the code
+- `test`: Runs tests
+- `publish-packages`: Publishes packages via Changesets
 
 **Required Secrets:**
 
 - `NPM_TOKEN`: npm authentication token
 - `GITHUB_TOKEN`: GitHub token (automatically provided)
-- `TURBO_TOKEN`: Turborepo token (optional, for remote caching)
+- `TURBO_TOKEN`: Turborepo token (optional)
 
 **Required Variables:**
 
-- `TURBO_TEAM`: Turborepo team name (if using remote caching)
+- `TURBO_TEAM`: Turborepo team name
 
 ### `pull-request.yaml`
 
-Runs code quality checks (build, lint, test) on pull requests and optionally deploys docs preview.
+Runs code quality checks on PRs and deploys preview environments.
 
 **Trigger:** Pull request events (`opened`, `synchronize`)
 
 **Jobs:**
 
 - `skip-duplicate-check`: Prevents duplicate workflow runs
-- `changed-packages`: Determines which packages changed (composite action)
-- `build`: Builds the project and caches build outputs (dist, build, .next directories, next-env.d.ts) - always runs on PRs
-- `lint`: Lints the code - depends on `build` job and restores build outputs from cache - always runs on PRs
-- `test`: Runs tests - depends on `build` job and restores build outputs from cache - always runs on PRs
-- `deploy-docs-preview`: Deploys docs preview to Vercel if docs package changed (only runs after all quality checks pass)
+- `changed-packages`: Determines which packages/stories changed
+- `build`: Builds the project
+- `lint`: Lints the code
+- `test`: Runs tests
+- `deploy-docs-preview`: Deploys docs preview if docs package changed (environment: `docs-preview`)
+- `deploy-storybook-preview`: Deploys storybook preview if stories changed (environment: `storybook-preview`)
 
 **Required Secrets:**
 
 - `VERCEL_ACCESS_TOKEN`: Vercel API token
 - `VERCEL_ORG_ID`: Vercel organization ID
 - `VERCEL_DOCS_PROJECT_ID`: Vercel project ID for docs app
+- `VERCEL_STORYBOOK_PROJECT_ID`: Vercel project ID for storybook
 
 ## Composite Actions
 
@@ -163,81 +185,26 @@ Sets up Node.js environment and installs dependencies with caching.
 
 - `repo-token` (required): GitHub token for repository access
 
-**Features:**
-
-- Node.js 24 setup with npm caching via `actions/setup-node@v6`
-- Caches `node_modules` and `generated` directories (cache key based on commit SHA)
-- Only installs dependencies via `npm ci` if cache miss occurs
-- Saves cache only if installation was performed
-
 ### `build`
 
 Runs the build process: checkout, setup environment, build project, and cache build outputs.
 
-**Inputs:**
-
-- `repo-token` (required): GitHub token for repository access
-- `fetch-depth` (optional): Git fetch depth for checkout (default: `0`)
-
-**Steps:**
-
-- Checks out code
-- Prepares environment (Node.js, dependencies) - restores `node_modules` from cache if available
-- Builds project: `npm run build` (Turborepo handles its own caching)
-- Saves build outputs to cache: `dist`, `build`, `.next` directories, and `next-env.d.ts` (cache key based on commit SHA)
-
 ### `lint`
 
-Runs lint checks: checkout, setup environment, restore build outputs from cache, and lint.
-
-**Inputs:**
-
-- `repo-token` (required): GitHub token for repository access
-- `fetch-depth` (optional): Git fetch depth for checkout (default: `0`)
-
-**Steps:**
-
-- Checks out code
-- Prepares environment (Node.js, dependencies) - restores `node_modules` from cache if available
-- Restores build outputs from cache: `dist`, `build`, `.next` directories, and `next-env.d.ts` (cache key based on commit SHA)
-- Lints code: `npm run lint`
+Runs lint checks: checkout, setup environment, restore build outputs, and lint.
 
 ### `test`
 
-Runs tests: checkout, setup environment, install Playwright browsers, restore build outputs from cache, and test.
-
-**Inputs:**
-
-- `repo-token` (required): GitHub token for repository access
-- `fetch-depth` (optional): Git fetch depth for checkout (default: `0`)
-
-**Steps:**
-
-- Checks out code
-- Prepares environment (Node.js, dependencies) - restores `node_modules` from cache if available
-- Restores build outputs from cache: `dist`, `build`, `.next` directories, and `next-env.d.ts` (cache key based on commit SHA)
-- Installs Playwright browsers (required for Storybook tests)
-- Runs tests: `npm run test`
+Runs tests: checkout, setup environment, install Playwright, restore build outputs, and test.
 
 ### `changed-packages`
 
-Determines which packages have changed using Turborepo.
-
-**Inputs:**
-
-- `event-name` (required): GitHub event name (`pull_request` or `push`)
-- `base-sha` (optional): Base SHA for pull requests (default: empty)
-- `fetch-depth` (optional): Git fetch depth for checkout (default: `0`)
+Determines which packages have changed using Turborepo and detects Storybook changes.
 
 **Outputs:**
 
-- `package_changed`: JSON string containing changed packages information from turbo dry-run
-
-**Steps:**
-
-- Checks out code with full history
-- Runs `turbo build --dry-run=json` to determine changed packages
-- Outputs JSON result for use in workflow conditions
+- `package_changed`: JSON string containing changed packages information
+- `stories_changed`: `true` if any `*.stories.tsx` or `.storybook/` files changed
 
 ### `deploy-vercel`
 

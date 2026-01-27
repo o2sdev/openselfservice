@@ -143,7 +143,8 @@ jobs:
         runs-on: ubuntu-latest
         needs: [skip-duplicate-check, changed-packages, build, lint, test]
         if: |
-            needs.skip-duplicate-check.outputs.should_skip != 'true'
+            needs.skip-duplicate-check.outputs.should_skip != 'true' &&
+            needs.changed-packages.outputs.stories_changed == 'true'
         environment:
             name: storybook-preview
             url: ${{ steps.deploy-storybook.outputs.deployment-url }}
