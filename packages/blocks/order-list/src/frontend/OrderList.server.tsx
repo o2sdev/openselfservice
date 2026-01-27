@@ -22,6 +22,11 @@ export const OrderList: React.FC<OrderListProps> = async ({ id, accessToken, loc
         return null;
     }
 
+    // Check view permission - if not allowed, don't render
+    if (!data.permissions?.view) {
+        return null;
+    }
+
     return (
         <OrderListDynamic
             {...data}

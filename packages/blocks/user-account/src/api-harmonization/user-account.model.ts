@@ -18,4 +18,8 @@ export class UserAccountBlock extends ApiModels.Block.Block {
         delete: string;
         logOut: string;
     };
+    permissions?: {
+        view: boolean;
+        edit: boolean;
+    };
 }

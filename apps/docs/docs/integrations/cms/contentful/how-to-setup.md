@@ -99,6 +99,7 @@ Make sure to set these variables in your environment configuration file (e.g., `
 Before you can start using the integration, you need to import the content model structure into your Contentful space. The content model defines the structure of your content types, including Pages, Templates, and Blocks that will be used in your application.
 
 The content model includes predefined content types that are compatible with the Open Self-Service framework, such as:
+
 - Page content types for managing routes
 - Template content types for defining page layouts
 - Block content types for reusable content components
@@ -122,6 +123,7 @@ npm run generate
 ```
 
 This command will:
+
 - Connect to your Contentful space using the configured environment variables
 - Introspect the GraphQL schema from Contentful
 - Generate TypeScript types for all content models
@@ -129,4 +131,3 @@ This command will:
 - Output the generated code to `./generated/contentful.ts`
 
 The generated types ensure compile-time validation of your queries and provide full type safety when working with Contentful content in your application. For more details about code generation, query structure, and how to use the generated SDK, see the [GraphQL integration documentation](./graphql.md).
-

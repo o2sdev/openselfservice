@@ -1,6 +1,6 @@
 import { CMS, Organizations } from '@o2s/configs.integrations';
 
-import { Models, Organizations as OrganizationModule } from '@o2s/framework/modules';
+import { Models } from '@o2s/framework/modules';
 
 import { CustomerList } from './organizations.model';
 
@@ -19,15 +19,28 @@ export const mapCustomerList = (
 };
 
 const mapCustomers = (organizations: Organizations.Model.Organization[]): Models.Customer.Customer[] => {
-    const organizationList = organizations.reduce((acc, organization) => {
-        if (organization.children.length > 0) {
-            acc.push(...organization.children, organization);
-        }
-        return acc;
-    }, [] as OrganizationModule.Model.Organization[]);
-
-    return organizationList
+    return flattenOrganizations(organizations)
         .map((organization) => organization.customers)
         .reduce((acc, curr) => [...acc, ...curr], [])
         .sort((a, b) => a.name.localeCompare(b.name));
+};
+
+const flattenOrganizations = (
+    orgs: Organizations.Model.Organization[],
+    seen: Set<string> = new Set<string>(),
+): Organizations.Model.Organization[] => {
+    return orgs.reduce<Organizations.Model.Organization[]>((acc, org) => {
+        if (seen.has(org.id)) {
+            return acc;
+        }
+
+        seen.add(org.id);
+        acc.push(org);
+
+        if (org.children && org.children.length > 0) {
+            acc.push(...flattenOrganizations(org.children, seen));
+        }
+
+        return acc;
+    }, []);
 };

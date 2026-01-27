@@ -12,5 +12,3 @@ Get started:
 
 - Docker: See [Deploy with Docker](./docker)
 - Vercel: See [Deploy on Vercel](./vercel)
-
-

@@ -9,6 +9,7 @@ The theming system in O2S allows for dynamic management of the application's app
 ## Overview
 
 The theming system is based on:
+
 - **CSS definitions** in `packages/ui/src/theme.css` - where colors and styles are defined for each theme
 - **CMS configuration** - where themes are registered and assigned to pages/blocks
 - **Component application** - where themes are dynamically applied based on data from CMS

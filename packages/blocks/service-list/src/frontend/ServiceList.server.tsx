@@ -24,6 +24,11 @@ export const ServiceList: React.FC<ServiceListProps> = async ({ id, accessToken,
         return null;
     }
 
+    // Check view permission - if not allowed, don't render
+    if (!data.permissions?.view) {
+        return null;
+    }
+
     return (
         <ServiceListDynamic
             {...data}

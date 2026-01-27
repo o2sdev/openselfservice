@@ -24,6 +24,11 @@ export const TicketRecent: React.FC<TicketRecentProps> = async ({ id, accessToke
         return null;
     }
 
+    // Check view permission - if not allowed, don't render
+    if (!data.permissions?.view) {
+        return null;
+    }
+
     return (
         <TicketRecentDynamic
             {...data}

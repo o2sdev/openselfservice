@@ -4,6 +4,8 @@ import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
 import { Models } from '@o2s/utils.api-harmonization';
 
+import { Auth } from '@o2s/framework/modules';
+
 import { mapInvoiceList } from './invoice-list.mapper';
 import { InvoiceListBlock } from './invoice-list.model';
 import { GetInvoiceListBlockQuery } from './invoice-list.request';
@@ -13,6 +15,7 @@ export class InvoiceListService {
     constructor(
         private readonly cmsService: CMS.Service,
         private readonly invoiceService: Invoices.Service,
+        private readonly authService: Auth.Service,
     ) {}
 
     getInvoiceListBlock(
@@ -32,9 +35,32 @@ export class InvoiceListService {
                         locale: headers['x-locale'],
                     })
                     .pipe(
-                        map((invoices) =>
-                            mapInvoiceList(invoices, cms, headers['x-locale'], headers['x-client-timezone'] || ''),
-                        ),
+                        map((invoices) => {
+                            const result = mapInvoiceList(
+                                invoices,
+                                cms,
+                                headers['x-locale'],
+                                headers['x-client-timezone'] || '',
+                            );
+
+                            // Extract permissions using ACL service
+                            if (headers.authorization) {
+                                const permissions = this.authService.canPerformActions(
+                                    headers.authorization,
+                                    'invoices',
+                                    ['view', 'create', 'pay', 'delete'],
+                                );
+
+                                result.permissions = {
+                                    view: permissions.view ?? false,
+                                    create: permissions.create ?? false,
+                                    pay: permissions.pay ?? false,
+                                    delete: permissions.delete ?? false,
+                                };
+                            }
+
+                            return result;
+                        }),
                     );
             }),
         );

@@ -5,8 +5,6 @@ import { Articles, Auth as AuthIntegration, CMS } from '@o2s/configs.integration
 import { firstValueFrom, of } from 'rxjs';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { Auth } from '@o2s/framework/modules';
-
 import { PageService } from './page.service';
 
 describe('PageService', () => {
@@ -46,7 +44,7 @@ describe('PageService', () => {
                 {
                     provide: AuthIntegration.Service,
                     useValue: {
-                        extractUserRoles: vi.fn().mockReturnValue([]),
+                        getRoles: vi.fn().mockReturnValue([]),
                     },
                 },
             ],
@@ -157,14 +155,11 @@ describe('PageService', () => {
             vi.spyOn(cmsService, 'getAlternativePages').mockReturnValue(
                 of([mockPage as unknown as CMS.Model.Page.Page]),
             );
-            vi.spyOn(authService, 'extractUserRoles').mockReturnValue([
-                Auth.Constants.Roles.ORG_ADMIN,
-                Auth.Constants.Roles.ORG_USER,
-            ]);
+            vi.spyOn(authService, 'getRoles').mockReturnValue(['selfservice_org_admin', 'selfservice_org_user']);
 
             await firstValueFrom(service.getPage(mockQuery, mockHeaders));
 
-            expect(authService.extractUserRoles).toHaveBeenCalledWith('Bearer token');
+            expect(authService.getRoles).toHaveBeenCalledWith('Bearer token');
         });
     });
 

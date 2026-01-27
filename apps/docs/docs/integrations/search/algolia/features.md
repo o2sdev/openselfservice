@@ -67,7 +67,7 @@ Full-text search across indexed content. The query string is passed directly to 
 
 ```typescript
 {
-  query: "getting started"
+    query: 'getting started';
 }
 ```
 
@@ -77,13 +77,14 @@ Filters results by locale using Algolia facet filters. The locale is converted t
 
 ```typescript
 {
-  locale: "en"
+    locale: 'en';
 }
 ```
 
 ### Exact matching (`exact`)
 
 Filters by exact field values using Algolia facet filters. Supports:
+
 - Single values: `{ category: "guides" }`
 - Array values: `{ tags: ["javascript", "typescript"] }` (creates multiple filters)
 
@@ -118,6 +119,7 @@ Filters numeric or date fields by range using Algolia numeric filters. Supports 
 ### Pagination (`pagination`)
 
 Controls result pagination. The integration converts `offset` to Algolia's `page` parameter:
+
 - `limit`: Number of results per page
 - `offset`: Starting position (converted to page number)
 
@@ -138,6 +140,7 @@ Controls result pagination. The integration converts `offset` to Algolia's `page
 Sorts results by field. **Important:** Only the first sort configuration is used, and it modifies the index name.
 
 **Index name modification:**
+
 - Original: `articles`
 - With sort: `{ field: "publishedAt", order: "desc" }`
 - Modified: `articles_publishedAt_desc`
@@ -146,12 +149,12 @@ This means you need separate Algolia indexes for each sort configuration.
 
 ```typescript
 {
-  sort: [
-    {
-      field: "publishedAt",
-      order: "desc"
-    }
-  ]
+    sort: [
+        {
+            field: 'publishedAt',
+            order: 'desc',
+        },
+    ];
 }
 ```
 
@@ -171,6 +174,7 @@ The integration automatically adds `facets: ['*']` to all search queries. This e
 ### Logging
 
 The integration logs at debug level:
+
 - Original search payload
 - Transformed Algolia query
 
@@ -182,27 +186,27 @@ When using `searchArticles()`, the integration expects articles in Algolia to fo
 
 ```typescript
 type SearchEngineArticleModel = {
-  id: string;
-  documentId: string;
-  slug: string;
-  locale?: string;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-  SEO: {
-    title: string;
-    noIndex: boolean;
-    noFollow: boolean;
-    description: string;
-    keywords?: Array<{ keyword: string }>;
-    image?: {
-      url: string;
-      alternativeText?: string;
-      width?: number;
-      height?: number;
-      name: string;
+    id: string;
+    documentId: string;
+    slug: string;
+    locale?: string;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+    SEO: {
+        title: string;
+        noIndex: boolean;
+        noFollow: boolean;
+        description: string;
+        keywords?: Array<{ keyword: string }>;
+        image?: {
+            url: string;
+            alternativeText?: string;
+            width?: number;
+            height?: number;
+            name: string;
+        };
     };
-  };
 };
 ```
 
@@ -210,17 +214,17 @@ type SearchEngineArticleModel = {
 
 The `searchArticles()` method maps fields as follows:
 
-| Article Model Field | Source Field | Notes |
-|---------------------|--------------|-------|
-| `id` | `documentId` | Uses documentId as the article ID |
-| `slug` | `slug` | Direct mapping |
-| `title` | `SEO.title` | From SEO object |
-| `lead` | `SEO.description` | From SEO object |
-| `createdAt` | `updatedAt` | Uses updatedAt for both |
-| `updatedAt` | `updatedAt` | Uses updatedAt for both |
-| `permissions` | - | Initialized as empty array |
-| `tags` | - | Initialized as empty array |
-| `sections` | - | Initialized as empty array |
+| Article Model Field | Source Field      | Notes                             |
+| ------------------- | ----------------- | --------------------------------- |
+| `id`                | `documentId`      | Uses documentId as the article ID |
+| `slug`              | `slug`            | Direct mapping                    |
+| `title`             | `SEO.title`       | From SEO object                   |
+| `lead`              | `SEO.description` | From SEO object                   |
+| `createdAt`         | `updatedAt`       | Uses updatedAt for both           |
+| `updatedAt`         | `updatedAt`       | Uses updatedAt for both           |
+| `permissions`       | -                 | Initialized as empty array        |
+| `tags`              | -                 | Initialized as empty array        |
+| `sections`          | -                 | Initialized as empty array        |
 
 **Note:** The mapper uses `updatedAt` for both `createdAt` and `updatedAt` fields, and initializes `permissions`, `tags`, and `sections` as empty arrays.
 

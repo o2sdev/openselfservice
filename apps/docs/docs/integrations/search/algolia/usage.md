@@ -18,9 +18,9 @@ Performs a search query against a specified Algolia index.
 
 **Query parameters:**
 
-| parameter | type   | description                    | required |
-|-----------|--------|--------------------------------|----------|
-| index     | `string` | Name of the Algolia index      | yes      |
+| parameter | type     | description               | required |
+| --------- | -------- | ------------------------- | -------- |
+| index     | `string` | Name of the Algolia index | yes      |
 
 **Request body:**
 
@@ -49,14 +49,14 @@ curl -X GET "http://localhost:3000/search?index=articles" \
 
 The `SearchPayload` class defines the structure for search queries. All fields are optional and can be combined.
 
-| field      | type                                                      | description                                                                 |
-|------------|-----------------------------------------------------------|-----------------------------------------------------------------------------|
-| query      | `string`                                                  | Text search query                                                           |
-| locale     | `string`                                                  | Filter results by locale (e.g., "en", "pl")                                 |
-| exact      | `Record<string, string \| number \| boolean \| null \| object \| array>` | Exact match filters (converted to Algolia facet filters)                    |
+| field      | type                                                                                                       | description                                                                     |
+| ---------- | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| query      | `string`                                                                                                   | Text search query                                                               |
+| locale     | `string`                                                                                                   | Filter results by locale (e.g., "en", "pl")                                     |
+| exact      | `Record<string, string \| number \| boolean \| null \| object \| array>`                                   | Exact match filters (converted to Algolia facet filters)                        |
 | range      | `Record<string, { min?: string \| number \| Date \| boolean; max?: string \| number \| Date \| boolean }>` | Range filters for numeric or date fields (converted to Algolia numeric filters) |
-| pagination | `{ offset?: number; limit?: number }`                    | Pagination parameters                                                        |
-| sort       | `Array<{ field: string; order: 'asc' \| 'desc' }>`       | Sort configuration (only first element used, modifies index name)          |
+| pagination | `{ offset?: number; limit?: number }`                                                                      | Pagination parameters                                                           |
+| sort       | `Array<{ field: string; order: 'asc' \| 'desc' }>`                                                         | Sort configuration (only first element used, modifies index name)               |
 
 **Note:** The `exists`, `notExists`, and `filter` fields from `SearchPayload` are not implemented in the Algolia integration.
 
@@ -66,7 +66,7 @@ The `SearchPayload` class defines the structure for search queries. All fields a
 
 ```json
 {
-  "query": "getting started"
+    "query": "getting started"
 }
 ```
 
@@ -74,8 +74,8 @@ The `SearchPayload` class defines the structure for search queries. All fields a
 
 ```json
 {
-  "query": "documentation",
-  "locale": "en"
+    "query": "documentation",
+    "locale": "en"
 }
 ```
 
@@ -83,12 +83,12 @@ The `SearchPayload` class defines the structure for search queries. All fields a
 
 ```json
 {
-  "query": "tutorial",
-  "exact": {
-    "category": "guides",
-    "status": "published",
-    "tags": ["javascript", "typescript"]
-  }
+    "query": "tutorial",
+    "exact": {
+        "category": "guides",
+        "status": "published",
+        "tags": ["javascript", "typescript"]
+    }
 }
 ```
 
@@ -96,15 +96,15 @@ The `SearchPayload` class defines the structure for search queries. All fields a
 
 ```json
 {
-  "range": {
-    "price": {
-      "min": 500,
-      "max": 2000
-    },
-    "publishedAt": {
-      "min": "2024-01-01"
+    "range": {
+        "price": {
+            "min": 500,
+            "max": 2000
+        },
+        "publishedAt": {
+            "min": "2024-01-01"
+        }
     }
-  }
 }
 ```
 
@@ -112,10 +112,10 @@ The `SearchPayload` class defines the structure for search queries. All fields a
 
 ```json
 {
-  "pagination": {
-    "limit": 20,
-    "offset": 40
-  }
+    "pagination": {
+        "limit": 20,
+        "offset": 40
+    }
 }
 ```
 
@@ -123,12 +123,12 @@ The `SearchPayload` class defines the structure for search queries. All fields a
 
 ```json
 {
-  "sort": [
-    {
-      "field": "publishedAt",
-      "order": "desc"
-    }
-  ]
+    "sort": [
+        {
+            "field": "publishedAt",
+            "order": "desc"
+        }
+    ]
 }
 ```
 
@@ -138,13 +138,13 @@ The `SearchPayload` class defines the structure for search queries. All fields a
 
 The `SearchResult<T>` class defines the structure of search responses.
 
-| field            | type       | description                                    |
-|------------------|------------|------------------------------------------------|
-| hits             | `T[]`      | Array of search results matching the query     |
-| total            | `number`   | Total number of matching results                |
-| page             | `number`   | Current page number (if pagination is used)    |
-| nbPages          | `number`   | Total number of pages (if pagination is used)  |
-| processingTimeMS | `number`   | Query processing time in milliseconds          |
+| field            | type     | description                                   |
+| ---------------- | -------- | --------------------------------------------- |
+| hits             | `T[]`    | Array of search results matching the query    |
+| total            | `number` | Total number of matching results              |
+| page             | `number` | Current page number (if pagination is used)   |
+| nbPages          | `number` | Total number of pages (if pagination is used) |
+| processingTimeMS | `number` | Query processing time in milliseconds         |
 
 ## Usage examples
 
@@ -170,18 +170,18 @@ import { sdk } from '@o2s/framework/sdk';
 import { sdk } from '@o2s/blocks.article-search/sdk';
 
 const results = await sdk.blocks.searchArticles(
-  {
-    query: 'getting started',
-    limit: 10,
-    offset: 0,
-    category: 'guides', // Optional: filters by category
-  },
-  { 'x-locale': 'en' }
+    {
+        query: 'getting started',
+        limit: 10,
+        offset: 0,
+        category: 'guides', // Optional: filters by category
+    },
+    { 'x-locale': 'en' },
 );
 
 console.log(`Found ${results.total} articles`);
-results.articles.forEach(article => {
-  console.log(`- ${article.title}`);
+results.articles.forEach((article) => {
+    console.log(`- ${article.title}`);
 });
 ```
 
@@ -193,35 +193,35 @@ results.articles.forEach(article => {
 import { sdk } from '@o2s/framework/sdk';
 
 const results = await sdk.makeRequest<SearchResult<Product>>({
-  method: 'get',
-  url: '/search',
-  params: { index: 'products' },
-  data: {
-    query: 'laptop',
-    locale: 'en',
-    exact: {
-      status: 'available',
+    method: 'get',
+    url: '/search',
+    params: { index: 'products' },
+    data: {
+        query: 'laptop',
+        locale: 'en',
+        exact: {
+            status: 'available',
+        },
+        range: {
+            price: {
+                min: 500,
+                max: 2000,
+            },
+        },
+        pagination: {
+            limit: 20,
+            offset: 0,
+        },
     },
-    range: {
-      price: {
-        min: 500,
-        max: 2000,
-      },
+    headers: {
+        'Content-Type': 'application/json',
+        'x-locale': 'en',
     },
-    pagination: {
-      limit: 20,
-      offset: 0,
-    },
-  },
-  headers: {
-    'Content-Type': 'application/json',
-    'x-locale': 'en',
-  },
 });
 
 console.log(`Found ${results.total} results`);
-results.hits.forEach(hit => {
-  console.log(hit);
+results.hits.forEach((hit) => {
+    console.log(hit);
 });
 ```
 
@@ -308,14 +308,16 @@ const ArticleSearch = ({ locale }: { locale: string }) => {
 **Error:** Logged as: `Algolia index with name {indexName} not found, please check your environment variables`
 
 **Behavior:** Returns an empty result set:
+
 ```json
 {
-  "hits": [],
-  "total": 0
+    "hits": [],
+    "total": 0
 }
 ```
 
-**Solution:** 
+**Solution:**
+
 - Verify the index name is correct
 - Ensure the index exists in your Algolia dashboard
 - Check that your API key has read access to the index
@@ -346,6 +348,7 @@ The integration converts `offset` to Algolia's `page` parameter:
 - Example: `offset: 40, limit: 20` → `page: 2`
 
 To get page 3 with 10 items per page:
+
 ```typescript
 {
   pagination: {

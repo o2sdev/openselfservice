@@ -1,6 +1,5 @@
-import { ExecutionContext, Inject, Injectable } from '@nestjs/common';
+import { ExecutionContext, Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import jwt from 'jsonwebtoken';
 
 import { LoggerService } from '@o2s/utils.logger';
 
@@ -9,10 +8,11 @@ import { Auth } from '@o2s/framework/modules';
 import { Jwt } from './auth.model';
 
 @Injectable()
-export class RolesGuard implements Auth.Guard {
+export class RolesGuard implements Auth.Guards.RoleGuard {
     constructor(
         private readonly reflector: Reflector,
         @Inject(LoggerService) private readonly logger: LoggerService,
+        @Inject(Auth.Service) private readonly authService: Auth.Service,
     ) {}
 
     async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -25,38 +25,116 @@ export class RolesGuard implements Auth.Guard {
             return true;
         }
 
-        const roleMatchingMode = roleMetadata.mode || Auth.Constants.RoleMatchingMode.ANY;
+        const MatchingMode = roleMetadata.mode || Auth.Model.MatchingMode.ANY;
 
         const request = context.switchToHttp().getRequest();
-        const accessToken = request.headers['authorization']?.replace('Bearer ', '');
-        const decodedToken = jwt.decode(accessToken) as Jwt | null;
+        const authHeader = request.headers['authorization'];
 
-        if (!decodedToken) {
-            return false;
+        if (!authHeader) {
+            throw new UnauthorizedException('Missing authorization token');
         }
 
-        const userRoles = this.getUserRoles(decodedToken);
+        // Verify token (signature, expiration, standard claims)
+        let verifiedToken: Jwt = request['x-decoded-token'];
+        if (!verifiedToken) {
+            try {
+                verifiedToken = await this.authService.verifyToken(authHeader);
+                request['x-decoded-token'] = verifiedToken;
+            } catch (_error) {
+                // Don't expose verification details to client
+                throw new UnauthorizedException('Invalid or expired token');
+            }
+        }
+        // Check if token is revoked
+        if (verifiedToken.jti) {
+            const isRevoked = await this.authService.isTokenRevoked(verifiedToken.jti);
+            if (isRevoked) {
+                throw new UnauthorizedException('Token has been revoked');
+            }
+        }
 
-        this.logger.debug(roleMatchingMode, 'Role matching mode');
+        const userRoles = this.authService.getRoles(verifiedToken);
+
+        this.logger.debug(MatchingMode, 'Role matching mode');
         this.logger.debug(userRoles.join(','), 'User roles');
         this.logger.debug(requiredRoles.join(','), 'Required roles');
 
-        return roleMatchingMode === Auth.Constants.RoleMatchingMode.ALL
+        return MatchingMode === Auth.Model.MatchingMode.ALL
             ? requiredRoles.every((role) => userRoles.includes(role))
             : requiredRoles.some((role) => userRoles.includes(role));
     }
+}
 
-    private getUserRoles(decodedToken: Jwt): string[] {
-        const userRoles: string[] = [];
+@Injectable()
+export class PermissionsGuard implements Auth.Guards.PermissionGuard {
+    constructor(
+        private readonly reflector: Reflector,
+        @Inject(LoggerService) private readonly logger: LoggerService,
+        @Inject(Auth.Service) private readonly authService: Auth.Service,
+    ) {}
 
-        if (decodedToken?.role) {
-            userRoles.push(decodedToken.role);
+    async canActivate(context: ExecutionContext): Promise<boolean> {
+        const permissionsMetadata = this.reflector.getAllAndMerge<Auth.Decorators.PermissionsDecorator>('permissions', [
+            context.getClass(),
+            context.getHandler(),
+        ]);
+
+        // No permissions metadata = public endpoint
+        if (!permissionsMetadata || !permissionsMetadata.resource || !permissionsMetadata.actions?.length) {
+            return true;
         }
 
-        if (Array.isArray(decodedToken?.customer?.roles)) {
-            userRoles.push(...decodedToken.customer.roles);
+        const request = context.switchToHttp().getRequest();
+        const authHeader = request.headers['authorization'];
+
+        if (!authHeader) {
+            throw new UnauthorizedException('Missing authorization token');
         }
 
-        return userRoles;
+        // Verify token (signature, expiration, standard claims)
+        let verifiedToken: Jwt = request['x-decoded-token'];
+        if (!verifiedToken) {
+            try {
+                verifiedToken = await this.authService.verifyToken(authHeader);
+                request['x-decoded-token'] = verifiedToken;
+            } catch (_error) {
+                // Don't expose verification details to client
+                throw new UnauthorizedException('Invalid or expired token');
+            }
+        }
+
+        // Check if token is revoked
+        if (verifiedToken.jti) {
+            const isRevoked = await this.authService.isTokenRevoked(verifiedToken.jti);
+            if (isRevoked) {
+                throw new UnauthorizedException('Token has been revoked');
+            }
+        }
+
+        // Validate permissions based on mode
+        const { resource, actions, mode = 'all' } = permissionsMetadata;
+        const permissions = this.authService.getPermissions(verifiedToken);
+
+        this.logger.debug(mode, 'Permission matching mode');
+        this.logger.debug(permissions, 'User permissions');
+        this.logger.debug({ resource, actions }, 'Required permissions');
+
+        if (mode === 'all') {
+            // User must have ALL specified actions
+            const hasAll = actions.every((action) => this.authService.hasPermission(permissions, resource, action));
+
+            if (!hasAll) {
+                throw new UnauthorizedException(`Missing required permissions: ${resource}:${actions.join(',')}`);
+            }
+        } else {
+            // User must have AT LEAST ONE action
+            const hasAny = actions.some((action) => this.authService.hasPermission(permissions, resource, action));
+
+            if (!hasAny) {
+                throw new UnauthorizedException(`Missing at least one permission: ${resource}:${actions.join(',')}`);
+            }
+        }
+
+        return true;
     }
 }

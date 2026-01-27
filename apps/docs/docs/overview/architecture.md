@@ -8,7 +8,6 @@ Open Self Service is built with modular components that work together to provide
 
 ---
 
-
 ## O2S's components
 
 The application is based on two main components:
@@ -27,6 +26,7 @@ Both of these applications are further supplemented by several other packages:
 ![high-level-architecture.svg](high-level-architecture.svg)
 
 ---
+
 ## Important architectural concepts
 
 ### Data normalization

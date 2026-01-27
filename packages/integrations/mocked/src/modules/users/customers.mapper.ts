@@ -1,5 +1,36 @@
 import { Auth, Models } from '@o2s/framework/modules';
 
+import { Roles } from '@/utils/roles';
+
+const ORG_ADMIN_PERMISSIONS: Auth.Model.Permissions = {
+    users: { resource: 'users', actions: ['view', 'create', 'edit', 'delete'] },
+    organizations: { resource: 'organizations', actions: ['view', 'create', 'edit', 'delete'] },
+    settings: { resource: 'settings', actions: ['view', 'edit'] },
+    invoices: { resource: 'invoices', actions: ['view', 'create', 'edit', 'delete', 'pay'] },
+    notifications: { resource: 'notifications', actions: ['view', 'mark_read', 'delete'] },
+    orders: { resource: 'orders', actions: ['view', 'create', 'edit', 'cancel', 'track'] },
+    tickets: { resource: 'tickets', actions: ['view', 'create', 'edit', 'close', 'reopen', 'delete'] },
+    services: { resource: 'services', actions: ['view'] },
+    products: { resource: 'products', actions: ['view'] },
+};
+
+const ORG_USER_PERMISSIONS: Auth.Model.Permissions = {
+    organizations: { resource: 'organizations', actions: ['view'] },
+    settings: { resource: 'settings', actions: ['view', 'edit'] },
+    invoices: { resource: 'invoices', actions: ['view'] },
+    notifications: { resource: 'notifications', actions: ['view', 'mark_read'] },
+    orders: { resource: 'orders', actions: ['view', 'create', 'track'] },
+    tickets: { resource: 'tickets', actions: ['view', 'create'] },
+    services: { resource: 'services', actions: ['view'] },
+    products: { resource: 'products', actions: ['view'] },
+};
+
+const PROSPECT_PERMISSIONS: Auth.Model.Permissions = {
+    settings: { resource: 'settings', actions: ['view', 'edit'] },
+    notifications: { resource: 'notifications', actions: ['view'] },
+    products: { resource: 'products', actions: ['view'] },
+};
+
 const MOCK_CUSTOMER_1: Models.Customer.Customer = {
     id: 'cust-001',
     name: 'Acme Corporation',
@@ -14,14 +45,8 @@ const MOCK_CUSTOMER_1: Models.Customer.Customer = {
         city: 'New York',
         postalCode: '10013',
     },
-    roles: [
-        {
-            roles: [Auth.Constants.Roles.ORG_USER],
-        },
-        {
-            roles: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
-        },
-    ],
+    roles: [Roles.ORG_USER, Roles.ORG_ADMIN],
+    permissions: ORG_ADMIN_PERMISSIONS,
     parentOrgId: 'org-001',
 };
 
@@ -39,11 +64,8 @@ const MOCK_CUSTOMER_2: Models.Customer.Customer = {
         city: 'New York',
         postalCode: '11211',
     },
-    roles: [
-        {
-            roles: [Auth.Constants.Roles.ORG_USER],
-        },
-    ],
+    roles: [Roles.ORG_USER],
+    permissions: ORG_USER_PERMISSIONS,
     parentOrgId: 'org-002',
 };
 
@@ -61,11 +83,8 @@ const MOCK_CUSTOMER_3: Models.Customer.Customer = {
         city: 'Mountain View',
         postalCode: '94041',
     },
-    roles: [
-        {
-            roles: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
-        },
-    ],
+    roles: [Roles.PROSPECT],
+    permissions: PROSPECT_PERMISSIONS,
     parentOrgId: 'org-003',
 };
 

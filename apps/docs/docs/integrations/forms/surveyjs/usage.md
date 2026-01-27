@@ -58,6 +58,7 @@ In your CMS (e.g., Strapi):
 ### Step 4: That's it!
 
 The block automatically handles everything:
+
 - Fetches survey metadata from CMS
 - Loads the survey schema from SurveyJS service
 - Renders the form with proper styling
@@ -99,6 +100,7 @@ function ContactForm() {
 - **accessToken** (string, optional) - Authentication token if required
 
 The component internally uses the SDK to:
+
 - Fetch the survey schema from `/surveyjs?code=<code>` (where `<code>` is the survey code)
 - Submit form data to `/surveyjs` POST endpoint
 
@@ -148,7 +150,7 @@ For TypeScript development, here are the main types:
 
 ```typescript
 class SurveyJs {
-  schema: SurveyJSLibraryJsonSchema;
+    schema: SurveyJSLibraryJsonSchema;
 }
 ```
 
@@ -156,7 +158,7 @@ class SurveyJs {
 
 ```typescript
 class SurveyJsQuery {
-  code: string;
+    code: string;
 }
 ```
 
@@ -164,8 +166,8 @@ class SurveyJsQuery {
 
 ```typescript
 class SurveyJsSubmitPayload {
-  code: string;
-  surveyPayload: SurveyResult;
+    code: string;
+    surveyPayload: SurveyResult;
 }
 ```
 
@@ -173,7 +175,7 @@ class SurveyJsSubmitPayload {
 
 ```typescript
 class SurveyResult {
-  [question: string]: unknown;
+    [question: string]: unknown;
 }
 ```
 
@@ -220,4 +222,3 @@ sequenceDiagram
     API->>SurveyJS: Submit data
     SurveyJS-->>Frontend: Success
 ```
-

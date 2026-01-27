@@ -4,6 +4,8 @@ import { Observable, forkJoin, map } from 'rxjs';
 
 import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 
+import { Auth } from '@o2s/framework/modules';
+
 import { mapServiceDetails } from './service-details.mapper';
 import { ServiceDetailsBlock } from './service-details.model';
 import { GetServiceDetailsBlockParams, GetServiceDetailsBlockQuery } from './service-details.request';
@@ -13,6 +15,7 @@ export class ServiceDetailsService {
     constructor(
         private readonly cmsService: CMS.Service,
         private readonly resourceService: Resources.Service,
+        private readonly authService: Auth.Service,
     ) {}
 
     getServiceDetailsBlock(
@@ -24,9 +27,20 @@ export class ServiceDetailsService {
         const service = this.resourceService.getService({ ...params, locale: headers['x-locale'] });
 
         return forkJoin([cms, service]).pipe(
-            map(([cms, service]) =>
-                mapServiceDetails(cms, service, headers['x-locale'], headers['x-client-timezone'] || ''),
-            ),
+            map(([cms, service]) => {
+                const result = mapServiceDetails(cms, service, headers['x-locale'], headers['x-client-timezone'] || '');
+
+                // Extract permissions using ACL service
+                if (headers.authorization) {
+                    const permissions = this.authService.canPerformActions(headers.authorization, 'services', ['view']);
+
+                    result.permissions = {
+                        view: permissions.view ?? false,
+                    };
+                }
+
+                return result;
+            }),
         );
     }
 }

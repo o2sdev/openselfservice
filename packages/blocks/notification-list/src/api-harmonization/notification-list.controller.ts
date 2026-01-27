@@ -15,7 +15,7 @@ export class NotificationListController {
     constructor(protected readonly service: NotificationListService) {}
 
     @Get()
-    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN] })
+    @Auth.Decorators.Permissions({ resource: 'notifications', actions: ['view'] })
     getNotificationListBlock(
         @Headers() headers: Models.Headers.AppHeaders,
         @Query() query: GetNotificationListBlockQuery,

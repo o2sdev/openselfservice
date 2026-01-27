@@ -6,7 +6,6 @@ export * as DataTable from './data-table';
 export * as Mapping from './mapping';
 export * as Customer from './customer';
 export * as Address from './address';
-export * as UserCustomerRole from './roles';
 export * as Price from './price';
 export * as Unit from './unit';
 export * as FormField from './form-field';

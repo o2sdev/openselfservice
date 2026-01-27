@@ -39,7 +39,7 @@ export const Default: Story = {
                 {
                     id: 'art-001',
                     slug: '/help-and-support/warranty-and-repair/managing-your-powerpro-tools-online',
-                    permissions: [],
+                    roles: [],
                     createdAt: '05/12/2023',
                     updatedAt: '06/15/2023',
                     title: 'Managing Your PowerPro Tools Online',
@@ -71,7 +71,7 @@ export const Default: Story = {
                 {
                     id: 'art-011',
                     slug: '/help-and-support/warranty-and-repair/powerpro-tool-certification-program',
-                    permissions: [],
+                    roles: [],
                     createdAt: '09/12/2023',
                     updatedAt: '09/12/2023',
                     title: 'PowerPro Tool Certification Program',
@@ -103,7 +103,7 @@ export const Default: Story = {
                 {
                     id: 'art-004',
                     slug: '/help-and-support/warranty-and-repair/understanding-powerpro-warranty',
-                    permissions: [],
+                    roles: [],
                     createdAt: '06/24/2023',
                     updatedAt: '08/15/2023',
                     title: 'Understanding Your PowerPro Warranty',
@@ -135,7 +135,7 @@ export const Default: Story = {
                 {
                     id: 'art-012',
                     slug: '/help-and-support/warranty-and-repair/preventive-maintenance-guide',
-                    permissions: [],
+                    roles: [],
                     createdAt: '08/20/2023',
                     updatedAt: '09/05/2023',
                     title: 'Preventive Maintenance Guide for PowerPro Tools',

@@ -1,4 +1,6 @@
-import { Auth, CMS } from '@o2s/framework/modules';
+import { CMS } from '@o2s/framework/modules';
+
+import { Roles } from '@/utils/roles';
 
 export const PAGE_NOTIFICATION_LIST_EN: CMS.Model.Page.Page = {
     id: '4',
@@ -17,12 +19,16 @@ export const PAGE_NOTIFICATION_LIST_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
+    roles: [Roles.ORG_USER, Roles.ORG_ADMIN],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
             main: [
+                {
+                    __typename: 'NotificationSummaryBlock',
+                    id: 'notification-summary-1',
+                },
                 {
                     __typename: 'NotificationListBlock',
                     id: 'notification-list-1',
@@ -55,12 +61,16 @@ export const PAGE_NOTIFICATION_LIST_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
+    roles: [Roles.ORG_USER, Roles.ORG_ADMIN],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
             main: [
+                {
+                    __typename: 'NotificationSummaryBlock',
+                    id: 'notification-summary-1',
+                },
                 {
                     __typename: 'NotificationListBlock',
                     id: 'notification-list-1',
@@ -93,12 +103,16 @@ export const PAGE_NOTIFICATION_LIST_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
+    roles: [Roles.ORG_USER, Roles.ORG_ADMIN],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
             main: [
+                {
+                    __typename: 'NotificationSummaryBlock',
+                    id: 'notification-summary-1',
+                },
                 {
                     __typename: 'NotificationListBlock',
                     id: 'notification-list-1',

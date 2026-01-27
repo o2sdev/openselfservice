@@ -19,6 +19,7 @@
     ],
     "scripts": {
         "build": "tsc --preserveWatchOutput && tsc-alias",
+        "test": "vitest run",
         "lint": "tsc --noEmit && eslint . --ignore-pattern .eslintrc.js --max-warnings=0",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\"",
         "generate:component": "turbo gen core-component"
@@ -35,6 +36,7 @@
         "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
+        "@o2s/vitest-config": "*",
         "@types/express": "^5.0.6",
         "@turbo/gen": "^2.7.6",
         "@types/qs": "^6.14.0",

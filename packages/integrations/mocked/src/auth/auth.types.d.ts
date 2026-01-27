@@ -1,22 +1,23 @@
 import { DefaultSession } from 'next-auth';
 
+import { Auth } from '@o2s/framework/modules';
+
 export * from 'next-auth';
 declare module 'next-auth' {
     interface Session extends DefaultSession {
         accessToken: string;
         user?: {
-            role?: string;
             customer?: {
                 id: string;
-                roles: string[];
                 name: string;
+                permissions: Auth.Model.Permissions;
+                roles?: string[];
             };
         } & DefaultSession['user'];
         error?: 'RefreshTokenError';
     }
 
     interface User {
-        role?: string;
         defaultCustomerId?: string;
         accessToken?: string;
     }
@@ -27,11 +28,13 @@ declare module 'next-auth/jwt' {
     interface JWT {
         accessToken: string;
         accessTokenExpires: number;
-        role?: string;
+        roles?: string[];
+        permissions?: Auth.Model.Permissions;
         customer?: {
             id: string;
-            roles: string[];
             name: string;
+            roles?: string[];
+            permissions: Auth.Model.Permissions;
         };
     }
 }

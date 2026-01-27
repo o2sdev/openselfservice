@@ -5,8 +5,7 @@ import { ConfigService } from '@nestjs/config';
 import { parse, stringify } from 'flatted';
 import { Observable, concatMap, forkJoin, from, map, mergeMap, of } from 'rxjs';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Auth, CMS, Cache, Models } from '@o2s/framework/modules';
+import { CMS, Cache } from '@o2s/framework/modules';
 
 import { PageFragment } from '@/generated/strapi';
 
@@ -169,7 +168,7 @@ export class CmsService implements CMS.Service {
         );
     }
 
-    getAlternativePages(options: CMS.Request.GetCmsAlternativePagesParams) {
+    getAlternativePages(options: CMS.Request.GetCmsAlternativePagesParams): Observable<CMS.Model.Page.Page[]> {
         const locales = this.graphqlService.getLocales();
 
         return forkJoin([locales]).pipe(

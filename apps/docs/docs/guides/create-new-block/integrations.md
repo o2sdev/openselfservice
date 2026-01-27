@@ -180,9 +180,7 @@ export const mapTicketSummaryBlock = (data: typeof MOCK): TicketsSummaryBlock.Ti
     };
 };
 
-const mapFields = <T>(
-    data: (typeof MOCK)['fieldMapping'],
-): TicketsSummaryBlock.TicketsSummaryBlock['fieldMapping'] => {
+const mapFields = <T>(data: (typeof MOCK)['fieldMapping']): TicketsSummaryBlock.TicketsSummaryBlock['fieldMapping'] => {
     return data.reduce(
         (acc, field) => ({
             ...acc,

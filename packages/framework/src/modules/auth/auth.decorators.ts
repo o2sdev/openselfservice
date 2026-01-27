@@ -1,12 +1,22 @@
 import { CustomDecorator, SetMetadata } from '@nestjs/common';
 
-import { RoleMatchingMode } from './auth.constants';
+import { MatchingMode } from './auth.model';
 
 export interface RoleDecorator {
     roles: string[];
-    mode?: RoleMatchingMode;
+    mode?: MatchingMode;
 }
 
-export const Roles = (roleMetadata: RoleDecorator): CustomDecorator<string> => {
-    return SetMetadata('roles', roleMetadata);
+export interface PermissionsDecorator {
+    resource: string;
+    actions: string[];
+    mode?: MatchingMode;
+}
+
+export const Roles = (metadata: RoleDecorator): CustomDecorator => {
+    return SetMetadata('roles', metadata);
+};
+
+export const Permissions = (metadata: PermissionsDecorator): CustomDecorator => {
+    return SetMetadata('permissions', metadata);
 };
