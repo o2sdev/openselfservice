@@ -134,6 +134,7 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
         showMoreFilters: 'Show more filters',
         hideMoreFilters: 'Hide more filters',
         noActiveFilters: 'No active filters',
+        ticketId: 'Ticket ID',
     },
     detailsUrl: '/cases/{id}',
 };
@@ -272,6 +273,7 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
         showMoreFilters: 'Mehr Filter anzeigen',
         hideMoreFilters: 'Weniger Filter anzeigen',
         noActiveFilters: 'Keine aktiven Filter',
+        ticketId: 'Fall-ID',
     },
     detailsUrl: '/faelle/{id}',
 };
@@ -411,6 +413,7 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
         clickToSelect: 'Kliknij, aby wybrać',
         showMoreFilters: 'Pokaż więcej filtrów',
         hideMoreFilters: 'Ukryj więcej filtrów',
+        ticketId: 'ID zgłoszenia',
         noActiveFilters: 'Brak aktywnych filtrów',
     },
     detailsUrl: '/zgloszenia/{id}',

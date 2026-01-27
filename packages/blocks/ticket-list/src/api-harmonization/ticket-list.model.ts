@@ -26,6 +26,7 @@ export class TicketListBlock extends ApiModels.Block.Block {
         showMoreFilters?: string;
         hideMoreFilters?: string;
         noActiveFilters?: string;
+        ticketId?: string;
     };
     initialFilters?: Partial<Tickets.Model.Ticket & { sort?: string }>;
     meta?: CMS.Model.TicketListBlock.TicketListBlock['meta'];
