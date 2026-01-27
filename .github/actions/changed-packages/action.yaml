@@ -21,7 +21,7 @@ outputs:
         value: ${{ steps.changeset.outputs.result }}
     stories_changed:
         description: 'True if any storybook files or config changed'
-        value: ${{ steps.changeset.outputs.stories_changed }}
+        value: ${{ steps.storybook.outputs.stories_changed }}
 
 runs:
     using: 'composite'
@@ -37,23 +37,35 @@ runs:
           id: changeset
           shell: bash
           env:
-              # The turbo filter varies depending on if we're using this in a PR or on a push to a branch
-              # For PRs, we use github.event.pull_request.base.sha to see which packages changed since that SHA
-              # For branch pushes/merges, we reference HEAD^ to determine the previous HEAD
-              # See: https://stackoverflow.com/a/61861763/2379922
               TURBO_REF_FILTER: ${{ inputs.event-name == 'pull_request' && inputs.base-sha || 'HEAD^' }}
           run: |
-              # 1. We need the 'output' of a turbo dry-run to get a json with all affected packages
-              # 2. The multi line json string is wrapped in EOF delimiters to make GHA happy
-              #    See: https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#multiline-strings
-              # 3. We specify the .github/ folder as a dependency. If workflows changed, we use that to mean
-              #    everything has changes pending... to force redeploys
+              # Get turbo dry-run output
+              TURBO_OUTPUT=$(npx -y turbo build --dry-run=json --filter=...[$TURBO_REF_FILTER])
+              
+              # Set output for the action
               echo 'result<<CHANGESET_DELIMITER' >> $GITHUB_OUTPUT
-              echo "$(npx -y turbo build --dry-run=json --filter=...[$TURBO_REF_FILTER])" >> $GITHUB_OUTPUT
+              echo "$TURBO_OUTPUT" >> $GITHUB_OUTPUT
               echo 'CHANGESET_DELIMITER' >> $GITHUB_OUTPUT
 
-              if git diff --name-only $TURBO_REF_FILTER | grep -qE "\.stories\.tsx$|^.storybook/"; then
+              # Debug logging
+              echo "### Changed Packages (Turborepo) ###"
+              echo "$TURBO_OUTPUT" | jq -r '.packages[]' || echo "No packages changed or jq error"
+              echo "####################################"
+
+        - name: Determine storybook changes
+          id: storybook
+          shell: bash
+          env:
+              TURBO_REF_FILTER: ${{ inputs.event-name == 'pull_request' && inputs.base-sha || 'HEAD^' }}
+          run: |
+              STORYBOOK_CHANGES=$(git diff --name-only $TURBO_REF_FILTER | grep -E "\.stories\.tsx$|^.storybook/" || true)
+              
+              if [ -n "$STORYBOOK_CHANGES" ]; then
                   echo "stories_changed=true" >> $GITHUB_OUTPUT
+                  echo "### Storybook changes detected ###"
+                  echo "$STORYBOOK_CHANGES"
+                  echo "##################################"
               else
                   echo "stories_changed=false" >> $GITHUB_OUTPUT
+                  echo "No storybook changes detected."
               fi
