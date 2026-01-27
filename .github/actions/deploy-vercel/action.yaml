@@ -53,6 +53,8 @@ runs:
           shell: bash
           env:
               BUILD_ARGS: ${{ inputs.build-args }}
+              VERCEL_ORG_ID: ${{ inputs.vercel-org-id }}
+              VERCEL_PROJECT_ID: ${{ inputs.vercel-project-id }}
           run: |
               if [ -n "$BUILD_ARGS" ]; then
                   vercel build $BUILD_ARGS
@@ -63,6 +65,9 @@ runs:
         - name: Deploy prebuilt project to Vercel
           id: deploy
           shell: bash
+          env:
+              VERCEL_ORG_ID: ${{ inputs.vercel-org-id }}
+              VERCEL_PROJECT_ID: ${{ inputs.vercel-project-id }}
           run: |
               if [ -n "${{ inputs.deploy-args }}" ]; then
                   URL=$(vercel deploy --prebuilt ${{ inputs.deploy-args }} --token=${{ inputs.vercel-token }})
