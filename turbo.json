@@ -7,7 +7,6 @@
             "cache": false,
             "outputLogs": "full",
             "persistent": true,
-            "dependsOn": ["^build"],
             "inputs": ["$TURBO_DEFAULT$", ".env*"]
         },
         "build": {
