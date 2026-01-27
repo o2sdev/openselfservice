@@ -110,7 +110,7 @@ The integration maps Zendesk ticket data to the standard ticket model with the f
 | status               | status           | Mapped according to status mapping       |
 | subject              | properties       | Added as property with id 'subject'      |
 | description          | properties       | Added as property with id 'description'  |
-| custom_fields        | properties       | Each field added with id pattern 'custom_field_X' where X is the Zendesk custom field ID |
+| custom_fields        | properties       | Mapped using `ZendeskFieldMapper` to readable names (see Custom Fields section below) |
 | comments             | comments         | Mapped with author information           |
 | comments.attachments | attachments      | Extracted from comments                  |
 
@@ -123,13 +123,65 @@ The integration maps Zendesk ticket data to the standard ticket model with the f
 | new, open      | OPEN              | Default status       |
 | (other)        | OPEN              | Fallback for unknown statuses |
 
-### Topic Handling
 
-The integration can map a custom field to the ticket topic:
+### Custom Fields Mapping
 
-1. Set the `ZENDESK_TOPIC_FIELD_ID` environment variable to the ID of the custom field
-2. The value of this field will be used as the ticket topic (converted to uppercase)
-3. If not set or field not found, the default topic is "GENERAL"
+Custom fields from Zendesk are mapped to readable names using the `ZendeskFieldMapper`. This provides a consistent, maintainable way to work with custom fields throughout the application.
+
+**How it works:**
+
+1. **Field Mapping Configuration**: Custom fields are defined in `ZendeskFieldMapper` with readable names and environment variable IDs:
+   ```typescript
+   // In zendesk-field.mapper.ts
+   fieldMap = {
+       machineName: process.env.ZENDESK_DEVICE_NAME_FIELD_ID,
+       serialNumber: process.env.ZENDESK_SERIAL_NUMBER_FIELD_ID,
+       maintenanceType: process.env.ZENDESK_MAINTENANCE_TYPE_FIELD_ID,
+       // ... more fields
+   }
+   ```
+
+2. **Reading Tickets**: When a ticket is retrieved from Zendesk, custom fields are automatically mapped to their readable names:
+   - Custom field with ID `123456` → `machineName` (if configured in `ZendeskFieldMapper`)
+   - Only fields with mappings in `ZendeskFieldMapper` are included
+   - Fields without mappings are skipped
+
+3. **CMS Integration**: To display custom fields in ticket details, add mappings in CMS:
+   ```typescript
+   // In CMS mapper (e.g., mocked, contentful, strapi)
+   properties: {
+       // ... standard fields
+       machineName: 'Machine Name',
+       serialNumber: 'Serial Number',
+   }
+   ```
+
+**Adding a new custom field:**
+
+To add support for a new custom field:
+
+1. **Add environment variable**:
+   ```
+   ZENDESK_NEW_FIELD_ID=789012
+   ```
+
+2. **Add to ZendeskFieldMapper** in `zendesk-field.mapper.ts`:
+   ```typescript
+   fieldMap = {
+       // ... existing fields
+       newField: process.env.ZENDESK_NEW_FIELD_ID 
+           ? Number(process.env.ZENDESK_NEW_FIELD_ID) 
+           : undefined,
+   }
+   ```
+
+3. **Add CMS mappings** for all supported locales (in mocked, contentful, strapi mappers):
+   ```typescript
+   properties: {
+       // ... existing fields
+       newField: 'New Field Label',  // Add for each locale
+   }
+   ```
 
 ### Default Values and Fallbacks
 
