@@ -1,8 +1,12 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+To start the development server for the frontend application, it's recommended to run the following command from the **root of the monorepo**:
 
-First, run the development server:
+```bash
+npm run watch:apps
+```
+
+Alternatively, you can run the development server directly in this directory:
 
 ```bash
 npm run dev
@@ -13,6 +17,10 @@ pnpm dev
 # or
 bun dev
 ```
+
+> [!NOTE]
+> Running `npm run dev` inside this directory only starts the Next.js server. If you need to watch for changes in local dependencies (packages), run `npm run watch:deps` from the root directory.
+
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 

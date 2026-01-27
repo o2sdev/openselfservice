@@ -3,8 +3,10 @@
     "private": true,
     "scripts": {
         "prepare": "husky",
-        "dev": "turbo watch dev",
         "predev": "turbo build -F=!{./apps/*} -F=!{./packages/cli/*}",
+        "dev": "turbo watch dev -F={./apps/*}",
+        "watch:apps": "turbo run dev -F={./apps/*}",
+        "watch:deps": "turbo watch build -F=!{./apps/*}",
         "build": "turbo build",
         "start": "turbo start",
         "format": "turbo format",
