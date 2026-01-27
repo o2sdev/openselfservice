@@ -34,11 +34,15 @@ export const mapTicket = (
             title: cms.properties?.topic as string,
             value: ticket.topic,
         },
-        type: {
-            label: cms.fieldMapping.type?.[ticket.type] || ticket.type,
-            title: cms.properties?.type as string,
-            value: ticket.type,
-        },
+        ...(ticket.type && cms.properties?.type && cms.fieldMapping.type
+            ? {
+                  type: {
+                      label: cms.fieldMapping.type[ticket.type] || ticket.type,
+                      title: cms.properties.type as string,
+                      value: ticket.type,
+                  },
+              }
+            : {}),
         status: {
             label: cms.fieldMapping.status?.[ticket.status] || ticket.status,
             title: cms.properties?.status as string,
