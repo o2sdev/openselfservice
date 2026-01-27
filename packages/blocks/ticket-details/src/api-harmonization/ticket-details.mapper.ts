@@ -57,11 +57,18 @@ export const mapTicket = (
                     return prev;
                 }
 
+                // Check if there's a fieldMapping for this property to translate the value
+                const fieldMapping = cms.fieldMapping[property.id as keyof typeof cms.fieldMapping];
+                const mappedValue =
+                    fieldMapping && typeof fieldMapping === 'object'
+                        ? (fieldMapping as Record<string, string>)[property.value] || property.value
+                        : property.value;
+
                 return [
                     ...prev,
                     {
                         id: property.id,
-                        value: property.value,
+                        value: mappedValue,
                         label: field,
                     },
                 ];
