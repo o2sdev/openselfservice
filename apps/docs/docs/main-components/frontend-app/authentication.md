@@ -306,33 +306,116 @@ export const { GET, POST } = handlers;
 
 ## Implementation Guidelines
 
-### Securing Routes
+### Securing routes
 
-Use the `auth()` function to protect routes:
+The application uses different strategies to protect routes depending on the component type (Server vs. Client) and the specific requirements of the page.
 
-```typescript
-import { auth } from '@/auth';
+#### Server components
+
+In Server Components, use the `auth()` function to retrieve the current session. If the session is missing, you can redirect the user to the login page.
+
+```typescript title="protecting a Server Component"
+import { auth, signIn } from '@/auth';
 
 export default async function ProtectedPage() {
     const session = await auth();
 
     if (!session) {
-        redirect('/login');
+        // Option 1: Trigger sign-in flow
+        return await signIn();
+        
+        // Option 2: Redirect to login page
+        // redirect('/login');
     }
 
     // Render protected content
 }
 ```
 
-### Role-Based Access Control
+#### Handling authentication errors
 
-Check user roles to control access to features:
+When making API calls via the SDK, you should handle authentication errors (like `401 Unauthorized` or token expiration). If the SDK returns a `401`, it usually means the session has expired or the token is invalid.
+
+```typescript title="handling 401 and token errors"
+try {
+    const data = await sdk.modules.getPage({ slug }, {}, session?.accessToken);
+} catch (error) {
+    if (error?.status === 401) {
+        if (!session?.user) {
+            // User is not logged in, trigger sign-in
+            return await signIn();
+        } else {
+            // User is logged in but unauthorized for this page
+            notFound();
+        }
+    }
+}
+```
+
+Additionally, if the session contains a `RefreshTokenError`, you should force the user to re-authenticate:
+
+```typescript
+if (session?.error === 'RefreshTokenError') {
+    return await signIn();
+}
+```
+
+#### Client components
+
+In Client Components, use the `useSession` hook. Note that `useSession` provides a `status` field (`loading`, `authenticated`, `unauthenticated`) which you can use to protect the UI.
+
+```typescript title="protecting a Client Component"
+'use client';
+import { useSession } from 'next-auth/react';
+
+export default function ClientPage() {
+    const { data: session, status } = useSession();
+
+    if (status === 'loading') return <Spinner />;
+    if (status === 'unauthenticated') return <RedirectToLogin />;
+
+    return <div>Welcome, {session.user.name}</div>;
+}
+```
+
+### Role-based access control
+
+O2S supports role-based access control (RBAC) at both the user level and the organization (customer) level.
+
+#### User-level roles
+
+The `session` object includes a top-level `role` for the user, which typically represents their global system role.
 
 ```typescript
 if (session?.user?.role === 'selfservice_admin') {
-    // Show admin features
+    // Show global admin features
 }
 ```
+
+#### Organization-level roles
+
+In B2B scenarios, a user might have different roles depending on the current customer context. These are stored within the `customer` object in the session.
+
+```typescript
+const orgRoles = session?.user?.customer?.roles || [];
+
+if (orgRoles.includes('organization_manager')) {
+    // Show features specific to organization managers
+}
+```
+
+#### Granular permissions
+
+While roles provide a broad check, O2S encourages using **permission-based access control** for specific features and blocks. Permissions are typically part of the data returned by the SDK for a specific block or module.
+
+```typescript
+// Example: Checking a specific permission within a block
+if (blockData.permissions?.canEdit) {
+    return <EditButton />;
+}
+```
+
+For more details on how the API Harmonization server determines these permissions based on the user's roles, see the [API Harmonization authentication documentation](../harmonization-app/authentication.md).
 
 ### Permission-based access control in blocks
 
@@ -401,34 +484,98 @@ This pattern allows you to:
 
 The permission flags come from the API Harmonization server, which checks the user's permissions from their JWT token. For more details on how permissions are checked and enforced, see the [API Harmonization authentication documentation](../harmonization-app/authentication.md).
 
-### Customer Context Switching
+### Customer context switching
 
-To implement customer switching:
+For B2B scenarios, users can be associated with multiple customer accounts (organizations) and switch between them. To implement this in the frontend, you should use the `updateOrganization` facade.
 
-```typescript
-// Update session with new customer context
-await update({
-    customerId: selectedCustomerId,
-});
+Instead of calling session updates directly in your components, O2S provides a facade in `src/auth/auth.organizations.ts`. This allows the UI to remain decoupled from the specific IAM implementation being used.
+
+```typescript title="triggering context switch (client-side)"
+import { updateOrganization } from '@/auth/auth.organizations';
+
+const handleSwitch = async (customer: Models.Customer.Customer) => {
+    // This call triggers the integration-specific update logic
+    await updateOrganization(session, customer);
+};
 ```
 
-## Extending Authentication
+The `updateOrganization` utility is a wrapper around the current IAM integration's implementation. For example, in the mocked integration, it is located at `packages/integrations/mocked/src/auth/auth.updateOrganization.ts`.
 
-### Adding New Providers
+A typical implementation follows these steps:
 
-To add a new authentication provider:
+1. Update user context by making an API call to your IAM or backend to update the user's active organization.
+2. Use `session.update()` to refresh the NextAuth session with the new roles and permissions.
+3. Refresh app state which usually involves a `window.location.reload()` or a redirect to ensure all hooks and SDK instances are re-initialized with the new context.
 
-1. Install the required package
-2. Add provider configuration to `auth.providers.ts`
-3. Update UI to include the new sign-in option
+```typescript title="example implementation (from mocked integration)"
+export async function updateOrganization(session: ReturnType<typeof useSession>, customer: Models.Customer.Customer) {
+    // 1. Update session with new customer data
+    await session.update({
+        customer,
+    });
 
-### Custom User Data
+    // 2. Refresh to apply changes across the application
+    window.location.reload();
+}
+```
 
-To store additional user data:
+In a production environment with a real IAM system, this function might first perform an asynchronous request to exchange the current token for one scoped to the selected organization before updating the session.
 
-1. Extend the Prisma User model
-2. Update the JWT and Session type definitions
-3. Modify the JWT callback to include the additional data
+The following example is inspired by the `ContextSwitcher` component, showing how to handle the organization selection:
+
+```typescript title="ContextSwitcher selection logic"
+import { updateOrganization } from '@/auth/auth.organizations';
+
+const onSubmit = async (values: ContextSwitcherFormValues) => {
+    spinner.toggle(true);
+
+    try {
+        const customer = data.items.find((item) => item.id === values.customer);
+        if (!customer) {
+            throw new Error('No customer found');
+        }
+
+        // Use the facade to handle the update
+        await updateOrganization(session, customer);
+    } catch (error) {
+        console.error('Failed to update organization:', error);
+    } finally {
+        spinner.toggle(false);
+    }
+};
+```
+
+### Adding new providers
+
+O2S supports any authentication provider compatible with [Auth.js](https://authjs.dev/reference/core/providers).
+
+Standard OAuth providers (like GitHub, Google, Azure AD) or the Credentials provider are included in the `next-auth` package. You can then add the new provider to the `providers` array in `apps/frontend/src/auth/auth.providers.ts`. The application automatically processes this array to generate the login UI.
+
+```typescript title="apps/frontend/src/auth/auth.providers.ts"
+import Google from 'next-auth/providers/google';
+
+export const providers: Provider[] = [
+    // ...existing providers
+    Google({
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        profile(profile) {
+            return {
+                id: profile.sub,
+                email: profile.email,
+                name: profile.name,
+                role: process.env.AUTH_DEFAULT_USER_ROLE, // Assign default O2S role
+            };
+        },
+    }),
+];
+```
+
+The login page uses the `providerMap` (defined in the same file) to dynamically render sign-in buttons for all configured OAuth providers. Once added to the `providers` array, the new option will automatically appear on the `/login` page (unless it is a `credentials` provider which is handled separately).
+
+#### Delegating the login page
+
+It is also possible to completely delegate the login page to your IAM system (e.g., use login pages provided directly by Keycloak or Azure AD). To do this, simply configure `auth.providers.ts` to **NOT** include the `Credentials` provider. When no `Credentials` provider is present, you can configure your application to redirect users directly to the IAM's login page instead of using the O2S built-in login screen.
 
 ## References
 
