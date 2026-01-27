@@ -129,10 +129,6 @@ export class ZendeskTicketService extends Tickets.Service {
                     searchQuery += ` status:${options.status.toLowerCase()}`;
                 }
 
-                if (options.type) {
-                    searchQuery += ` priority:${options.type.toLowerCase()}`;
-                }
-
                 if (options.topic) {
                     searchQuery += ` tag:${options.topic.toLowerCase()}`;
                 }
@@ -200,8 +196,47 @@ export class ZendeskTicketService extends Tickets.Service {
                     switchMap((uploadTokens) =>
                         this.findZendeskUserByEmail(user.email!).pipe(
                             switchMap((zendeskUser) => {
+                                // Map ticketFormId to topic value
+                                // Ensure ticketFormId is a number for comparison
+                                const ticketFormIdNum =
+                                    typeof data.ticketFormId === 'string'
+                                        ? Number(data.ticketFormId)
+                                        : data.ticketFormId;
+
+                                let topicValue: string;
+                                const contactFormId = process.env.ZENDESK_CONTACT_FORM_ID
+                                    ? Number(process.env.ZENDESK_CONTACT_FORM_ID)
+                                    : undefined;
+                                const complaintFormId = process.env.ZENDESK_COMPLAINT_FORM_ID
+                                    ? Number(process.env.ZENDESK_COMPLAINT_FORM_ID)
+                                    : undefined;
+                                const deviceMaintenanceFormId = process.env.ZENDESK_REQUEST_DEVICE_MAINTENANCE_FORM_ID
+                                    ? Number(process.env.ZENDESK_REQUEST_DEVICE_MAINTENANCE_FORM_ID)
+                                    : undefined;
+
+                                if (ticketFormIdNum === contactFormId) {
+                                    topicValue = 'CONTACT_US';
+                                } else if (ticketFormIdNum === complaintFormId) {
+                                    topicValue = 'COMPLAINT';
+                                } else if (ticketFormIdNum === deviceMaintenanceFormId) {
+                                    topicValue = 'REQUEST_DEVICE_MAINTENANCE';
+                                } else {
+                                    return throwError(
+                                        () =>
+                                            new BadRequestException(
+                                                `Invalid ticketFormId: ${data.ticketFormId}. Must match one of the configured form IDs.`,
+                                            ),
+                                    );
+                                }
+
+                                // Add topic to customFields before mapping
+                                const customFieldsWithTopic = {
+                                    ...(data.customFields || {}),
+                                    topic: topicValue,
+                                };
+
                                 // Map custom fields from Survey.js to Zendesk format using field mapper
-                                const customFields = ZendeskFieldMapper.toCustomFields(data.customFields || {});
+                                const customFields = ZendeskFieldMapper.toCustomFields(customFieldsWithTopic);
 
                                 return from(
                                     createTicket({
