@@ -3,7 +3,27 @@ slug: ensuring-high-frontend-performance-in-composable-nextjs-apps
 title: Ensuring high frontend performance in composable Next.js apps
 description: Learn proven strategies for optimizing frontend performance in composable Next.js applications. Discover server components, streaming, caching, and Core Web Vitals optimization techniques for enterprise-grade apps.
 image: ./lighthouse-2.png
-keywords: ['Next.js performance', 'composable architecture', 'frontend optimization', 'server components', 'Core Web Vitals', 'Lighthouse', 'React Suspense', 'streaming', 'performance optimization', 'enterprise frontend', 'API composition', 'caching strategies', 'image optimization', 'bundle splitting', 'FCP', 'LCP', 'CLS', 'TBT']
+keywords:
+    [
+        'Next.js performance',
+        'composable architecture',
+        'frontend optimization',
+        'server components',
+        'Core Web Vitals',
+        'Lighthouse',
+        'React Suspense',
+        'streaming',
+        'performance optimization',
+        'enterprise frontend',
+        'API composition',
+        'caching strategies',
+        'image optimization',
+        'bundle splitting',
+        'FCP',
+        'LCP',
+        'CLS',
+        'TBT',
+    ]
 date: 2025-10-06
 tags: [tech, performance]
 authors: [marcin.krasowski]
@@ -387,13 +407,15 @@ The `sizes` prop can be defined accordingly with media queries that match the ap
 This will generate all the `srcset` accordingly so that the browser downloads the version that the closely matches the current viewport:
 
 ```html
-<img  alt="" src="/_next/image?url=public/hero.png&amp;w=3840"
+<img
+    alt=""
+    src="/_next/image?url=public/hero.png&amp;w=3840"
     sizes="(max-width: 64rem): 100vw, 50vw"
     srcset="
-        /_next/image?url=public/hero.png&amp;w=384 384w,
-        /_next/image?url=public/hero.png&amp;w=640 640w,
-        /_next/image?url=public/hero.png&amp;w=750 750w,
-        /_next/image?url=public/hero.png&amp;w=828 828w,
+        /_next/image?url=public/hero.png&amp;w=384   384w,
+        /_next/image?url=public/hero.png&amp;w=640   640w,
+        /_next/image?url=public/hero.png&amp;w=750   750w,
+        /_next/image?url=public/hero.png&amp;w=828   828w,
         /_next/image?url=public/hero.png&amp;w=1080 1080w,
         /_next/image?url=public/hero.png&amp;w=1200 1200w,
         /_next/image?url=public/hero.png&amp;w=1920 1920w,
@@ -406,7 +428,7 @@ This will generate all the `srcset` accordingly so that the browser downloads th
 This output is based on [deviceSizes config](https://nextjs.org/docs/app/api-reference/components/image#devicesizes) that you can also adjust to your own needs. For example, you might want to narrow down the list of possible viewports if your app is very image-heavy to simply save on the amount of HTML generated:
 
 ```typescript
-deviceSizes: [430, 828, 1200, 2048, 3840]
+deviceSizes: [430, 828, 1200, 2048, 3840];
 ```
 
 At the end it's quite critical to monitor LCP and preloads in Lighthouse and check if it's possible to adjust the `priority` if you see that lazy loading:

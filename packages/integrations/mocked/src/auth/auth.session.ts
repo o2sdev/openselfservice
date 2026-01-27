@@ -19,7 +19,6 @@ type SessionCallbackParams = ({
 
 export const sessionCallback = async ({ token, session }: SessionCallbackParams): Promise<DefaultSession | Session> => {
     if (session.user) {
-        session.user.role = token?.role;
         session.user.id = token?.id as string;
         session.user.customer = token?.customer;
         session.accessToken = token.accessToken;

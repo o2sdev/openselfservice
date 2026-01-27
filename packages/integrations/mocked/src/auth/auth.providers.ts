@@ -35,7 +35,6 @@ const credentialsCallback = async (
             name: user.name,
             email: user.email,
             defaultCustomerId: user.defaultCustomerId || undefined,
-            role: user.role,
         };
     } catch (error) {
         if (error instanceof ZodError) {

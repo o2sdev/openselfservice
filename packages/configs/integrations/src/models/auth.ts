@@ -6,4 +6,4 @@ export const AuthIntegrationConfig: ApiConfig['integrations']['auth'] = Config.a
 
 export import Service = Integration.Auth.Service;
 export import Model = Integration.Auth.Model;
-export import Guard = Integration.Auth.Guard;
+export import Guards = Integration.Auth.Guards;

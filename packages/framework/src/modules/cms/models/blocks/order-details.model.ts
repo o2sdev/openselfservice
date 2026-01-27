@@ -1,8 +1,7 @@
 import { Order, OrderItem } from '@/modules/orders/orders.model';
 import { Product } from '@/modules/products/products.model';
 
-import { Block, DataTable, Filters, Mapping, Pagination } from '@/utils/models';
-import { InfoCard } from '@/utils/models';
+import { Block, DataTable, Filters, InfoCard, Mapping, Pagination } from '@/utils/models';
 
 export class OrderDetailsBlock extends Block.Block {
     title?: string;

@@ -25,5 +25,10 @@ export const TicketSummary: React.FC<TicketSummaryProps> = async ({ id, accessTo
         return null;
     }
 
+    // Check view permission - if not allowed, don't render
+    if (!data.permissions?.view) {
+        return null;
+    }
+
     return <TicketSummaryDynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />;
 };

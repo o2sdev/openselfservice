@@ -24,6 +24,7 @@ export const TicketDetailsPure: React.FC<Readonly<TicketDetailsPureProps>> = ({
     ...component
 }) => {
     const { data: ticket } = component;
+
     return (
         <div className="w-full">
             <div className="flex flex-col gap-6">

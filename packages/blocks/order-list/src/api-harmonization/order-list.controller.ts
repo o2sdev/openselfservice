@@ -15,7 +15,7 @@ export class OrderListController {
     constructor(protected readonly service: OrderListService) {}
 
     @Get()
-    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN] })
+    @Auth.Decorators.Permissions({ resource: 'orders', actions: ['view'] })
     getOrderListBlock(@Headers() headers: ApiModels.Headers.AppHeaders, @Query() query: GetOrderListBlockQuery) {
         return this.service.getOrderListBlock(query, headers);
     }

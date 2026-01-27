@@ -33,4 +33,3 @@ Each block has its own CMS content type defined so that composing pages using bl
 <div class="iframe-container">
     <iframe src="https://openselfservice-storybook.vercel.app/?full=0&shortcuts=false&panel=false" class="iframe"></iframe>
 </div>
-

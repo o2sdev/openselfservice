@@ -17,7 +17,6 @@ model User {
     password          String?
     emailVerified     DateTime?
     image             String?
-    role              Role      @default(selfservice_user)
     accounts          Account[]
     sessions          Session[]
     defaultCustomerId String?
@@ -47,11 +46,4 @@ model Session {
     userId       String
     expires      DateTime
     user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-enum Role {
-    selfservice_user
-    selfservice_prospect
-    selfservice_org_user
-    selfservice_org_admin
 }

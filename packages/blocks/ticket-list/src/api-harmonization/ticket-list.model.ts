@@ -35,6 +35,11 @@ export class TicketListBlock extends ApiModels.Block.Block {
         right?: string;
         bottom?: string;
     };
+    permissions?: {
+        view: boolean;
+        create: boolean;
+        delete: boolean;
+    };
 }
 
 export class Ticket {

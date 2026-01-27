@@ -23,17 +23,17 @@ You can create a new block within the `api-harmonization` app by using `block` g
 1. Create a new package in the `packages/blocks` directory.
 2. Inside this new folder, it will create all the necessary files that compose a block:
     1. API Harmonization part with
-       - module,
-       - controller,
-       - service,
-       - mapper,
-       - model and request.
+        - module,
+        - controller,
+        - service,
+        - mapper,
+        - model and request.
     2. Frontend app part with
-       - server component,
-       - client component,
-       - renderer,
-       - typings,
-       - API methods,
+        - server component,
+        - client component,
+        - renderer,
+        - typings,
+        - API methods,
     3. SDK part.
 
 ---

@@ -19,6 +19,9 @@ export class ServiceListBlock extends ApiModels.Block.Block {
         title: string;
         description?: string;
     };
+    permissions?: {
+        view: boolean;
+    };
 }
 
 export type Services = {

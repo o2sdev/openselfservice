@@ -105,26 +105,6 @@ export const Default: Story = {
             email: 'jane@example.com',
             firstName: 'Jane',
             lastName: 'Doe',
-            roles: [
-                {
-                    customer: {
-                        id: 'cust-003',
-                        name: 'Tech Solutions Inc',
-                        clientType: 'B2B',
-                    },
-                    // @ts-expect-error it's a valid value, but it expects to use an enum here
-                    roles: ['selfservice_org_user'],
-                },
-                {
-                    customer: {
-                        id: 'cust-004',
-                        name: 'Digital Services GmbH',
-                        clientType: 'B2B',
-                    },
-                    // @ts-expect-error it's a valid value, but it expects to use an enum here
-                    roles: ['selfservice_org_user', 'selfservice_org_admin'],
-                },
-            ],
             customers: [],
         },
         title: 'User Account',

@@ -18,7 +18,7 @@ export const Default: Story = {
         data: {
             id: 'art-001',
             slug: '/help-and-support/warranty-and-repair/managing-your-powerpro-tools-online',
-            permissions: [],
+            roles: [],
             createdAt: '05/12/2023',
             updatedAt: '06/15/2023',
             title: 'Managing Your PowerPro Tools Online',

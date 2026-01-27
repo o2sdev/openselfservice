@@ -3,40 +3,38 @@
     "ui": "stream",
     "concurrency": "5",
     "tasks": {
-        "init": {},
+        "dev": {
+            "cache": false,
+            "outputLogs": "full",
+            "persistent": true,
+            "dependsOn": ["^build"],
+            "inputs": ["$TURBO_DEFAULT$", ".env*"]
+        },
         "build": {
             "cache": true,
-            "dependsOn": [
-                "^build"
-            ],
-            "inputs": [
-                "$TURBO_DEFAULT$",
-                ".env*"
-            ],
-            "outputs": [
-                "dist/**",
-                "build/**",
-                ".next/**",
-                "!.next/cache/**"
-            ]
+            "outputLogs": "new-only",
+            "dependsOn": ["^build"],
+            "inputs": ["$TURBO_DEFAULT$", ".env*"],
+            "outputs": ["dist/**", "build/**", ".next/**", "!.next/cache/**"]
         },
         "lint": {
-            "dependsOn": [
-                "^lint"
-            ]
+            "cache": true,
+            "outputLogs": "new-only",
+            "dependsOn": ["^lint"]
         },
         "test": {
-            "dependsOn": [
-                "^test"
-            ]
+            "cache": true,
+            "outputLogs": "new-only",
+            "dependsOn": ["^test"]
         },
         "format": {
-            "dependsOn": [
-                "^format"
-            ]
+            "cache": true,
+            "outputLogs": "new-only",
+            "dependsOn": ["^format"]
         },
         "start": {
             "cache": false,
+            "outputLogs": "full",
             "persistent": true
         }
     }

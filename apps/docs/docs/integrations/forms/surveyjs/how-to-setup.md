@@ -24,15 +24,15 @@ After installing the package, you need to configure environment variables that w
 
 Configure the following environment variables in your API Harmonization server:
 
-| name                   | type   | description                                    | required | default |
-|------------------------|--------|------------------------------------------------|----------|---------|
-| API_SURVEYJS_BASE_URL  | string | the base URL pointing to the SurveyJS service  | yes      | -       |
+| name                  | type   | description                                   | required | default |
+| --------------------- | ------ | --------------------------------------------- | -------- | ------- |
+| API_SURVEYJS_BASE_URL | string | the base URL pointing to the SurveyJS service | yes      | -       |
 
 You can obtain this value from your SurveyJS instance:
 
 1. **Base URL**: The URL where your SurveyJS server is running
-   - For local development: `http://localhost:3000` (or your local SurveyJS server URL)
-   - For production: Your deployed SurveyJS instance URL (e.g., `https://api.surveyjs.io`)
+    - For local development: `http://localhost:3000` (or your local SurveyJS server URL)
+    - For production: Your deployed SurveyJS instance URL (e.g., `https://api.surveyjs.io`)
 
 Make sure to set this variable in your environment configuration file (e.g., `.env`) or your deployment platform's environment variable settings.
 
@@ -63,7 +63,8 @@ import { AppConfig } from './app.config';
 export class AppModule {}
 ```
 
-**Note:** 
+**Note:**
+
 - The `SurveyJs` module provides the core functionality for fetching and submitting surveys
 - The `SurveyJsForm` block enables rendering surveys through CMS blocks
 - Both are required if you want to use surveys via CMS blocks
@@ -77,26 +78,27 @@ The SurveyJS module integrates with your CMS (e.g., Strapi) to retrieve survey m
 1. **Configure your CMS integration**: Ensure your CMS integration (Strapi, Contentful, etc.) is properly configured in `AppConfig`
 2. **Create survey entries in CMS**: Create survey entries in your CMS with the following required fields:
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `code` | string | Yes | Unique identifier for the survey (e.g., `"contact-form"`) |
-| `surveyId` | string | Yes | The SurveyJS survey ID from your SurveyJS service |
-| `postId` | string | Yes | The SurveyJS post ID for form submissions |
-| `surveyType` | string | Yes | Type of survey (typically `"survey"`) |
-| `submitDestination` | string[] | Yes | Array of submission destinations (e.g., `["surveyjs"]`) |
-| `requiredRoles` | string[] | Yes* | Array of roles required to submit the survey. It can be an empty array `[]` for public surveys |
+| Field               | Type     | Required | Description                                                                                    |
+| ------------------- | -------- | -------- | ---------------------------------------------------------------------------------------------- |
+| `code`              | string   | Yes      | Unique identifier for the survey (e.g., `"contact-form"`)                                      |
+| `surveyId`          | string   | Yes      | The SurveyJS survey ID from your SurveyJS service                                              |
+| `postId`            | string   | Yes      | The SurveyJS post ID for form submissions                                                      |
+| `surveyType`        | string   | Yes      | Type of survey (typically `"survey"`)                                                          |
+| `submitDestination` | string[] | Yes      | Array of submission destinations (e.g., `["surveyjs"]`)                                        |
+| `requiredRoles`     | string[] | Yes\*    | Array of roles required to submit the survey. It can be an empty array `[]` for public surveys |
 
 \* `requiredRoles` is required but can be an empty array for public surveys that don't require authentication.
 
 **Example CMS entry:**
+
 ```json
 {
-  "code": "contact-form",
-  "surveyId": "72c90a02-6bfe-4e83-ba48-01f11752c234",
-  "postId": "a91349b1-0c4c-4b7a-b712-91f04a1e6e99",
-  "surveyType": "survey",
-  "submitDestination": ["surveyjs"],
-  "requiredRoles": []
+    "code": "contact-form",
+    "surveyId": "72c90a02-6bfe-4e83-ba48-01f11752c234",
+    "postId": "a91349b1-0c4c-4b7a-b712-91f04a1e6e99",
+    "surveyType": "survey",
+    "submitDestination": ["surveyjs"],
+    "requiredRoles": []
 }
 ```
 
@@ -114,11 +116,10 @@ You can verify the installation by:
 
 ## Troubleshooting
 
-| Problem | Solution |
-|---------|----------|
-| Module not found | Verify the package is installed: `npm list @o2s/modules.surveyjs` |
-| Cannot connect to SurveyJS | Check `API_SURVEYJS_BASE_URL` is set correctly |
-| Survey not found | Verify the survey code exists in your CMS and has a valid `surveyId` |
-| Authorization errors | Check that `requiredRoles` in CMS matches user roles |
-| Frontend import errors | Ensure the package is installed in the frontend workspace |
-
+| Problem                    | Solution                                                             |
+| -------------------------- | -------------------------------------------------------------------- |
+| Module not found           | Verify the package is installed: `npm list @o2s/modules.surveyjs`    |
+| Cannot connect to SurveyJS | Check `API_SURVEYJS_BASE_URL` is set correctly                       |
+| Survey not found           | Verify the survey code exists in your CMS and has a valid `surveyId` |
+| Authorization errors       | Check that `requiredRoles` in CMS matches user roles                 |
+| Frontend import errors     | Ensure the package is installed in the frontend workspace            |

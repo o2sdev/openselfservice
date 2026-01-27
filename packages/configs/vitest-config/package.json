@@ -4,7 +4,8 @@
     "private": true,
     "type": "module",
     "exports": {
-        "./block": "./block.js"
+        "./block": "./block.js",
+        "./api": "./api.js"
     },
     "devDependencies": {
         "vitest": "^4.0.18",

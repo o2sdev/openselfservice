@@ -5,6 +5,9 @@ import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 export class ServiceDetailsBlock extends ApiModels.Block.Block {
     __typename!: 'ServiceDetailsBlock';
     data!: Service;
+    permissions?: {
+        view: boolean;
+    };
 }
 
 export class Service {

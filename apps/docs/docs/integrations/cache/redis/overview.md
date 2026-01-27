@@ -20,13 +20,13 @@ npm install @o2s/integrations.redis --workspace=@o2s/api
 
 ## Environment variables
 
-| name             | type    | description                         | required | default |
-|------------------|---------|-------------------------------------|----------|---------|
-| CACHE_ENABLED    | boolean | enables/disables cache              | no       | false   |
-| CACHE_TTL        | number  | key expiration time (seconds)       | no       | 300     |
-| CACHE_REDIS_HOST | string  | Redis host                          | yes      | -       |
-| CACHE_REDIS_PORT | number  | Redis port                          | yes      | -       |
-| CACHE_REDIS_PASS | string  | Redis password                      | no       | -       |
+| name             | type    | description                   | required | default |
+| ---------------- | ------- | ----------------------------- | -------- | ------- |
+| CACHE_ENABLED    | boolean | enables/disables cache        | no       | false   |
+| CACHE_TTL        | number  | key expiration time (seconds) | no       | 300     |
+| CACHE_REDIS_HOST | string  | Redis host                    | yes      | -       |
+| CACHE_REDIS_PORT | number  | Redis port                    | yes      | -       |
+| CACHE_REDIS_PASS | string  | Redis password                | no       | -       |
 
 ## Quick start
 

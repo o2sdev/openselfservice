@@ -14,7 +14,7 @@
         "write-heading-ids": "docusaurus write-heading-ids",
         "typecheck": "tsc",
         "lint": "tsc --noEmit && eslint \"src/**/*.{ts,tsx}\" --fix --max-warnings=0",
-        "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
+        "format": "prettier --write \"{src,docs,blog}/**/*.{js,jsx,ts,tsx,css,scss,json,md}\""
     },
     "dependencies": {
         "@docusaurus/core": "3.9.2",

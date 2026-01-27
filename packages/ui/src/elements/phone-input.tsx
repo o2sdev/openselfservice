@@ -28,7 +28,7 @@ export const formatPhoneNumber = (value: string, country?: CountryCode): string 
     const phoneNumber = asYouType.getNumber();
     const isPossible = asYouType.isPossible();
 
-    return isPossible ? phoneNumber?.formatInternational({ v2: true }) || value : value;
+    return isPossible ? phoneNumber?.formatInternational() || value : value;
 };
 
 export const checkIsValidPhoneNumber = (value: string): boolean => {

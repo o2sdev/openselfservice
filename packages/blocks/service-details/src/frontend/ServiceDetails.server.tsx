@@ -34,6 +34,11 @@ export const ServiceDetails: React.FC<ServiceDetailsProps> = async ({
         return null;
     }
 
+    // Check view permission - if not allowed, don't render
+    if (!data.permissions?.view) {
+        return null;
+    }
+
     return (
         <ServiceDetailsDynamic
             {...data}

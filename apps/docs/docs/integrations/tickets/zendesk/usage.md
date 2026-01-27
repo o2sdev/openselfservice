@@ -18,15 +18,15 @@ Retrieve a list of tickets with optional filtering.
 
 **Query Parameters:**
 
-| Parameter | Type   | Description                                    | Required |
-|-----------|--------|------------------------------------------------|----------|
+| Parameter | Type   | Description                                         | Required |
+| --------- | ------ | --------------------------------------------------- | -------- |
 | status    | string | Filter by ticket status (OPEN, IN_PROGRESS, CLOSED) | No       |
-| type      | string | Filter by ticket type/priority                 | No       |
-| topic     | string | Filter by ticket topic                         | No       |
-| dateFrom  | string | Filter tickets created from this date (ISO format) | No   |
-| dateTo    | string | Filter tickets created until this date (ISO format) | No     |
-| offset    | number | Pagination offset                              | No       |
-| limit     | number | Number of tickets per page (default: 10)       | No       |
+| type      | string | Filter by ticket type/priority                      | No       |
+| topic     | string | Filter by ticket topic                              | No       |
+| dateFrom  | string | Filter tickets created from this date (ISO format)  | No       |
+| dateTo    | string | Filter tickets created until this date (ISO format) | No       |
+| offset    | number | Pagination offset                                   | No       |
+| limit     | number | Number of tickets per page (default: 10)            | No       |
 
 **Example Request:**
 
@@ -38,38 +38,38 @@ GET /tickets?status=OPEN&limit=20&offset=0
 
 ```json
 {
-  "total": 42,
-  "data": [
-    {
-      "id": "12345",
-      "createdAt": "2024-01-15T10:30:00Z",
-      "updatedAt": "2024-01-16T14:20:00Z",
-      "topic": "BILLING",
-      "type": "HIGH",
-      "status": "OPEN",
-      "properties": [
+    "total": 42,
+    "data": [
         {
-          "id": "subject",
-          "value": "Billing question about invoice #1234"
-        },
-        {
-          "id": "description",
-          "value": "I have a question about my recent invoice..."
+            "id": "12345",
+            "createdAt": "2024-01-15T10:30:00Z",
+            "updatedAt": "2024-01-16T14:20:00Z",
+            "topic": "BILLING",
+            "type": "HIGH",
+            "status": "OPEN",
+            "properties": [
+                {
+                    "id": "subject",
+                    "value": "Billing question about invoice #1234"
+                },
+                {
+                    "id": "description",
+                    "value": "I have a question about my recent invoice..."
+                }
+            ],
+            "comments": [
+                {
+                    "author": {
+                        "name": "John Doe",
+                        "email": "john@example.com"
+                    },
+                    "date": "2024-01-15T10:30:00Z",
+                    "content": "Initial ticket description"
+                }
+            ],
+            "attachments": []
         }
-      ],
-      "comments": [
-        {
-          "author": {
-            "name": "John Doe",
-            "email": "john@example.com"
-          },
-          "date": "2024-01-15T10:30:00Z",
-          "content": "Initial ticket description"
-        }
-      ],
-      "attachments": []
-    }
-  ]
+    ]
 }
 ```
 
@@ -81,9 +81,9 @@ Retrieve a specific ticket by ID with full details including comments and attach
 
 **Path Parameters:**
 
-| Parameter | Type   | Description           | Required |
-|-----------|--------|-----------------------|----------|
-| id        | string | The ticket ID         | Yes      |
+| Parameter | Type   | Description   | Required |
+| --------- | ------ | ------------- | -------- |
+| id        | string | The ticket ID | Yes      |
 
 **Example Request:**
 
@@ -95,57 +95,57 @@ GET /tickets/12345
 
 ```json
 {
-  "id": "12345",
-  "createdAt": "2024-01-15T10:30:00Z",
-  "updatedAt": "2024-01-16T14:20:00Z",
-  "topic": "BILLING",
-  "type": "HIGH",
-  "status": "OPEN",
-  "properties": [
-    {
-      "id": "subject",
-      "value": "Billing question about invoice #1234"
-    },
-    {
-      "id": "description",
-      "value": "I have a question about my recent invoice..."
-    },
-    {
-      "id": "custom_field_123456",
-      "value": "Some custom field value"
-    }
-  ],
-  "comments": [
-    {
-      "author": {
-        "name": "John Doe",
-        "email": "john@example.com"
-      },
-      "date": "2024-01-15T10:30:00Z",
-      "content": "Initial ticket description"
-    },
-    {
-      "author": {
-        "name": "Support Agent",
-        "email": "support@company.com"
-      },
-      "date": "2024-01-16T14:20:00Z",
-      "content": "Thank you for contacting us. We're looking into this..."
-    }
-  ],
-  "attachments": [
-    {
-      "name": "invoice.pdf",
-      "url": "https://zendesk.com/attachments/invoice.pdf",
-      "size": 245760,
-      "author": {
-        "name": "John Doe",
-        "email": "john@example.com"
-      },
-      "date": "2024-01-15T10:30:00Z",
-      "ariaLabel": "invoice.pdf"
-    }
-  ]
+    "id": "12345",
+    "createdAt": "2024-01-15T10:30:00Z",
+    "updatedAt": "2024-01-16T14:20:00Z",
+    "topic": "BILLING",
+    "type": "HIGH",
+    "status": "OPEN",
+    "properties": [
+        {
+            "id": "subject",
+            "value": "Billing question about invoice #1234"
+        },
+        {
+            "id": "description",
+            "value": "I have a question about my recent invoice..."
+        },
+        {
+            "id": "custom_field_123456",
+            "value": "Some custom field value"
+        }
+    ],
+    "comments": [
+        {
+            "author": {
+                "name": "John Doe",
+                "email": "john@example.com"
+            },
+            "date": "2024-01-15T10:30:00Z",
+            "content": "Initial ticket description"
+        },
+        {
+            "author": {
+                "name": "Support Agent",
+                "email": "support@company.com"
+            },
+            "date": "2024-01-16T14:20:00Z",
+            "content": "Thank you for contacting us. We're looking into this..."
+        }
+    ],
+    "attachments": [
+        {
+            "name": "invoice.pdf",
+            "url": "https://zendesk.com/attachments/invoice.pdf",
+            "size": 245760,
+            "author": {
+                "name": "John Doe",
+                "email": "john@example.com"
+            },
+            "date": "2024-01-15T10:30:00Z",
+            "ariaLabel": "invoice.pdf"
+        }
+    ]
 }
 ```
 
@@ -160,6 +160,7 @@ Authorization: Bearer {your_auth_token}
 ```
 
 The integration:
+
 1. Extracts the user from the authorization token
 2. Validates that the user has an email address
 3. Filters tickets to only show those where the user's email matches the ticket requester's email
@@ -175,6 +176,7 @@ The integration ensures that users can only access their own tickets:
 **Example:**
 
 If user `john@example.com` is authenticated:
+
 - ✅ Can see tickets where requester email is `john@example.com`
 - ❌ Cannot see tickets where requester email is `jane@example.com`
 - ❌ Returns `undefined` (404) if trying to access a ticket by ID that doesn't belong to them
@@ -251,12 +253,13 @@ GET /tickets?limit=25&offset=50
 
 ```json
 {
-  "statusCode": 404,
-  "message": "User email not found"
+    "statusCode": 404,
+    "message": "User email not found"
 }
 ```
 
 This occurs when:
+
 - The user is not authenticated
 - The authenticated user doesn't have an email address
 
@@ -265,6 +268,7 @@ This occurs when:
 **Status:** `200 OK` (returns `undefined` in response body)
 
 The integration returns `undefined` (not an error) when:
+
 - The ticket ID doesn't exist
 - The ticket exists but doesn't belong to the authenticated user
 - The ticket has no requester_id
@@ -277,12 +281,13 @@ The integration returns `undefined` (not an error) when:
 
 ```json
 {
-  "statusCode": 500,
-  "message": "Failed to fetch tickets: {error details}"
+    "statusCode": 500,
+    "message": "Failed to fetch tickets: {error details}"
 }
 ```
 
 This occurs when:
+
 - Zendesk API is unavailable
 - Network errors occur
 - Invalid API credentials
@@ -296,8 +301,8 @@ Always check if the response is `undefined` before accessing ticket properties:
 ```typescript
 const ticket = await getTicket(id);
 if (!ticket) {
-  // Handle ticket not found or access denied
-  return;
+    // Handle ticket not found or access denied
+    return;
 }
 // Use ticket safely
 ```
@@ -308,14 +313,14 @@ For large ticket lists, always use pagination:
 
 ```typescript
 const tickets = await getTicketList({
-  limit: 20,
-  offset: 0
+    limit: 20,
+    offset: 0,
 });
 
 // Load more tickets
 const moreTickets = await getTicketList({
-  limit: 20,
-  offset: 20
+    limit: 20,
+    offset: 20,
 });
 ```
 
@@ -339,9 +344,9 @@ The integration uses fallbacks for missing data, but always handle edge cases:
 ```typescript
 const ticket = await getTicket(id);
 if (ticket) {
-  const subject = ticket.properties.find(p => p.id === 'subject')?.value || 'No subject';
-  const comments = ticket.comments || [];
-  const attachments = ticket.attachments || [];
+    const subject = ticket.properties.find((p) => p.id === 'subject')?.value || 'No subject';
+    const comments = ticket.comments || [];
+    const attachments = ticket.attachments || [];
 }
 ```
 
@@ -354,7 +359,7 @@ Consider caching ticket lists to reduce API calls:
 const cacheKey = `tickets:${userEmail}:${status}`;
 const cached = await cache.get(cacheKey);
 if (cached) {
-  return cached;
+    return cached;
 }
 
 const tickets = await getTicketList({ status });
@@ -370,8 +375,8 @@ import { sdk } from '@/api/sdk';
 
 // Get ticket list
 const tickets = await sdk.tickets.getTicketList({
-  status: 'OPEN',
-  limit: 20
+    status: 'OPEN',
+    limit: 20,
 });
 
 // Get single ticket
@@ -379,8 +384,8 @@ const ticket = await sdk.tickets.getTicket({ id: '12345' });
 ```
 
 The SDK automatically handles:
+
 - Authentication headers
 - Error handling
 - Response normalization
 - Type safety
-

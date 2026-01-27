@@ -1,5 +1,5 @@
 import { DynamicModule, Module } from '@nestjs/common';
-import { CMS, Notifications } from '@o2s/configs.integrations';
+import { Auth, CMS, Notifications } from '@o2s/configs.integrations';
 
 import * as Framework from '@o2s/framework/modules';
 
@@ -20,6 +20,10 @@ export class NotificationListBlockModule {
                 {
                     provide: Notifications.Service,
                     useExisting: Framework.Notifications.Service,
+                },
+                {
+                    provide: Auth.Service,
+                    useExisting: Framework.Auth.Service,
                 },
             ],
             controllers: [NotificationListController],

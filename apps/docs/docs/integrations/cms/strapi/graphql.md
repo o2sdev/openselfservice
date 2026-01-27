@@ -40,12 +40,7 @@ const config: CodegenConfig = {
     verbose: true,
     generates: {
         'generated/strapi.ts': {
-            plugins: [
-                'typescript',
-                'typescript-resolvers',
-                'typescript-operations',
-                'typescript-graphql-request',
-            ],
+            plugins: ['typescript', 'typescript-resolvers', 'typescript-operations', 'typescript-graphql-request'],
             config: {
                 skipTypename: true,
                 rawRequest: true,
@@ -61,6 +56,7 @@ const config: CodegenConfig = {
 ```
 
 **TypeScript plugins used:**
+
 - `typescript` - Generates base TypeScript types from the GraphQL schema
 - `typescript-resolvers` - Generates resolver types
 - `typescript-operations` - Generates types for queries, mutations, and fragments
@@ -87,22 +83,22 @@ public getComponent(params: GetComponentQueryVariables) {
 
 The `GraphqlService` offers several methods that can be used to retrieve data from the CMS:
 
-| Method | Description |
-|--------|-------------|
-| `getAppConfig` | Retrieves the application configuration |
-| `getLocales` | Retrieves all available locales |
-| `getPage` | Retrieves a single page by slug and locale |
-| `getPages` | Retrieves all pages for a given locale |
-| `getLoginPage` | Retrieves the login page content |
-| `getNotFoundPage` | Retrieves the 404 page content |
-| `getHeader` | Retrieves the header configuration |
-| `getFooter` | Retrieves the footer configuration |
-| `getComponent` | Retrieves a single component by ID and locale |
-| `getOrganizationList` | Retrieves the organization list |
-| `getSurvey` | Retrieves a survey by code |
-| `getCategories` | Retrieves categories for articles |
-| `getArticle` | Retrieves a single article |
-| `getArticles` | Retrieves multiple articles |
+| Method                | Description                                   |
+| --------------------- | --------------------------------------------- |
+| `getAppConfig`        | Retrieves the application configuration       |
+| `getLocales`          | Retrieves all available locales               |
+| `getPage`             | Retrieves a single page by slug and locale    |
+| `getPages`            | Retrieves all pages for a given locale        |
+| `getLoginPage`        | Retrieves the login page content              |
+| `getNotFoundPage`     | Retrieves the 404 page content                |
+| `getHeader`           | Retrieves the header configuration            |
+| `getFooter`           | Retrieves the footer configuration            |
+| `getComponent`        | Retrieves a single component by ID and locale |
+| `getOrganizationList` | Retrieves the organization list               |
+| `getSurvey`           | Retrieves a survey by code                    |
+| `getCategories`       | Retrieves categories for articles             |
+| `getArticle`          | Retrieves a single article                    |
+| `getArticles`         | Retrieves multiple articles                   |
 
 ## Resolving pages
 
@@ -294,4 +290,3 @@ The GraphQL integration relies on:
 
 - [graphql-request](https://www.npmjs.com/package/graphql-request) - Minimal GraphQL client for making requests
 - [graphql-codegen](https://the-guild.dev/graphql/codegen) - Code generation from GraphQL schema and queries
-

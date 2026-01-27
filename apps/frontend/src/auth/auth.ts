@@ -4,7 +4,7 @@ import { Adapter, DefaultAuthProvider, jwtCallback, sessionCallback } from './au
 import { providers } from './auth.providers';
 
 export const nextAuthResult = NextAuth({
-    debug: true,
+    debug: false,
     adapter: Adapter,
     providers: providers,
     session: {

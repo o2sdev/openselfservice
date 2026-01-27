@@ -178,5 +178,6 @@ export const FaqRenderer: React.FC<FaqRendererProps> = ({ id, accessToken }) => 
 ## SDK
 
 The SDK part is a thin slice of the the [general SDK used globally](../../guides/sdk.md). Each block declares and returns its own instance of the SDK, that is used both:
+
 - internally with the block (including server and client compoennts),
 - externally by other frontend apps in cases when you'd like to completely take over the rendering, and re-use only the normalized and aggregated data.

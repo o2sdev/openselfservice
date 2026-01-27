@@ -79,14 +79,14 @@ After installing the package, you need to configure environment variables that w
 Configure the following environment variables in your API Harmonization server:
 
 | name                | type   | description                                            | required |
-|---------------------|--------|--------------------------------------------------------|----------|
+| ------------------- | ------ | ------------------------------------------------------ | -------- |
 | CMS_STRAPI_BASE_URL | string | the base URL pointing to the domain hosting Strapi CMS | yes      |
 
 You can obtain this value from your Strapi instance:
 
 1. **Base URL**: The URL where your Strapi server is running
-   - For local development: `http://localhost:1337`
-   - For production: Your deployed Strapi instance URL (e.g., `https://cms.yourdomain.com`)
+    - For local development: `http://localhost:1337`
+    - For production: Your deployed Strapi instance URL (e.g., `https://cms.yourdomain.com`)
 
 Make sure to set this variable in your environment configuration file (e.g., `.env`) or your deployment platform's environment variable settings.
 
@@ -95,6 +95,7 @@ Make sure to set this variable in your environment configuration file (e.g., `.e
 Before you can start using the integration, you need to import the content model structure into your Strapi instance. The content model defines the structure of your content types, including Pages, Templates, and Blocks that will be used in your application.
 
 The content model includes predefined content types that are compatible with the Open Self Service framework, such as:
+
 - Page content types for managing routes
 - Template content types for defining page layouts
 - Block content types for reusable content components
@@ -127,6 +128,7 @@ This command requires that the `CMS_STRAPI_BASE_URL` environment variable is set
 :::
 
 This command will:
+
 - Connect to your Strapi instance using the configured environment variables
 - Introspect the GraphQL schema from Strapi
 - Generate TypeScript types for all content models
@@ -134,4 +136,3 @@ This command will:
 - Output the generated code to `./generated/strapi.ts`
 
 The generated types ensure compile-time validation of your queries and provide full type safety when working with Strapi content in your application. For more details about code generation, query structure, and how to use the generated SDK, see the [GraphQL integration documentation](./graphql.md).
-
