@@ -12,7 +12,8 @@ permissions:
 
 env:
     VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-    VERCEL_PROJECT_ID: ${{ secrets.VERCEL_DOCS_PROJECT_ID }}
+    VERCEL_DOCS_PROJECT_ID: ${{ secrets.VERCEL_DOCS_PROJECT_ID }}
+    VERCEL_STORYBOOK_PROJECT_ID: ${{ secrets.VERCEL_STORYBOOK_PROJECT_ID }}
 
 on:
     pull_request:
@@ -113,8 +114,8 @@ jobs:
             needs.skip-duplicate-check.outputs.should_skip != 'true' &&
             contains(toJson(fromJson(needs.changed-packages.outputs.package_changed).packages), 'docs')
         environment:
-            name: preview
-            url: ${{ steps.deploy.outputs.deployment-url }}
+            name: docs-preview
+            url: ${{ steps.deploy-docs.outputs.deployment-url }}
         steps:
             - name: Checkout repository
               uses: actions/checkout@v6
@@ -126,14 +127,45 @@ jobs:
               with:
                   repo-token: ${{ secrets.GITHUB_TOKEN }}
 
-            - name: Deploy to Vercel
-              id: deploy
+            - name: Deploy Docs to Vercel
+              id: deploy-docs
               uses: ./.github/actions/deploy-vercel
               timeout-minutes: 20
               with:
                   vercel-token: ${{ secrets.VERCEL_ACCESS_TOKEN }}
-                  vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-                  vercel-project-id: ${{ secrets.VERCEL_DOCS_PROJECT_ID }}
+                  vercel-org-id: ${{ env.VERCEL_ORG_ID }}
+                  vercel-project-id: ${{ env.VERCEL_DOCS_PROJECT_ID }}
+                  environment: preview
+                  build-args: ''
+                  deploy-args: ''
+
+    deploy-storybook-preview:
+        runs-on: ubuntu-latest
+        needs: [skip-duplicate-check, changed-packages, build, lint, test]
+        if: |
+            needs.skip-duplicate-check.outputs.should_skip != 'true'
+        environment:
+            name: storybook-preview
+            url: ${{ steps.deploy-storybook.outputs.deployment-url }}
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v6
+              with:
+                  fetch-depth: 0
+
+            - name: Prepare Environment
+              uses: ./.github/actions/setup-env
+              with:
+                  repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Deploy Storybook to Vercel
+              id: deploy-storybook
+              uses: ./.github/actions/deploy-vercel
+              timeout-minutes: 20
+              with:
+                  vercel-token: ${{ secrets.VERCEL_ACCESS_TOKEN }}
+                  vercel-org-id: ${{ env.VERCEL_ORG_ID }}
+                  vercel-project-id: ${{ env.VERCEL_STORYBOOK_PROJECT_ID }}
                   environment: preview
                   build-args: ''
                   deploy-args: ''
