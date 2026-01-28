@@ -90,6 +90,9 @@ export const mapSurveyToTicket = (surveyPayload: SurveyResult): Tickets.Request.
     // Extract standard fields
     const { title, description, ticketFormId, attachments, ...customFields } = surveyPayload;
 
+    // Ensure ticketFormId is a number (Survey.js may send it as string)
+    const ticketFormIdNum = typeof ticketFormId === 'string' ? Number(ticketFormId) : (ticketFormId as number);
+
     // Map attachments from Survey.js format to Tickets format
     const mappedAttachments = attachments
         ? (Array.isArray(attachments) ? attachments : [attachments])
@@ -118,7 +121,7 @@ export const mapSurveyToTicket = (surveyPayload: SurveyResult): Tickets.Request.
     return {
         title: title as string,
         description: description as string,
-        ticketFormId: ticketFormId as number,
+        ticketFormId: ticketFormIdNum,
         attachments: finalAttachments,
         customFields,
     };

@@ -197,12 +197,6 @@ export class ZendeskTicketService extends Tickets.Service {
                         this.findZendeskUserByEmail(user.email!).pipe(
                             switchMap((zendeskUser) => {
                                 // Map ticketFormId to topic value
-                                // Ensure ticketFormId is a number for comparison
-                                const ticketFormIdNum =
-                                    typeof data.ticketFormId === 'string'
-                                        ? Number(data.ticketFormId)
-                                        : data.ticketFormId;
-
                                 let topicValue: string;
                                 const contactFormId = process.env.ZENDESK_CONTACT_FORM_ID
                                     ? Number(process.env.ZENDESK_CONTACT_FORM_ID)
@@ -214,11 +208,11 @@ export class ZendeskTicketService extends Tickets.Service {
                                     ? Number(process.env.ZENDESK_REQUEST_DEVICE_MAINTENANCE_FORM_ID)
                                     : undefined;
 
-                                if (ticketFormIdNum === contactFormId) {
+                                if (data.ticketFormId === contactFormId) {
                                     topicValue = 'CONTACT_US';
-                                } else if (ticketFormIdNum === complaintFormId) {
+                                } else if (data.ticketFormId === complaintFormId) {
                                     topicValue = 'COMPLAINT';
-                                } else if (ticketFormIdNum === deviceMaintenanceFormId) {
+                                } else if (data.ticketFormId === deviceMaintenanceFormId) {
                                     topicValue = 'REQUEST_DEVICE_MAINTENANCE';
                                 } else {
                                     return throwError(
