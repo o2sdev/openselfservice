@@ -44,7 +44,7 @@ export class Ticket {
         value: Tickets.Model.Ticket['topic'];
         label: string;
     };
-    type!: {
+    type?: {
         value: Tickets.Model.Ticket['type'];
         label: string;
     };
