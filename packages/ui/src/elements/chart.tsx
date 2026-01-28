@@ -1,3 +1,5 @@
+'use client';
+
 import * as React from 'react';
 import * as RechartsPrimitive from 'recharts';
 
@@ -38,8 +40,14 @@ type ChartContainerProps = React.ComponentProps<'div'> & {
     ref?: React.Ref<HTMLDivElement>;
 };
 const ChartContainer = ({ id, className, children, config, ref, ...props }: ChartContainerProps) => {
-    const uniqueId = React.useId();
-    const chartId = `chart-${id || uniqueId.replace(/:/g, '')}`;
+    const generatedId = React.useId();
+    const [chartId, setChartId] = React.useState(() => `chart-${id || 'loading'}`);
+
+    React.useEffect(() => {
+        if (!id) {
+            setChartId(`chart-${generatedId.replace(/:/g, '')}`);
+        }
+    }, [id, generatedId]);
 
     return (
         <ChartContext.Provider value={{ config }}>

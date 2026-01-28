@@ -1,8 +1,7 @@
 import React from 'react';
-import { Bar, BarChart, CartesianGrid, LabelList, TooltipProps, XAxis } from 'recharts';
-import { Props as BarProps } from 'recharts/types/cartesian/Bar';
+import { Bar, BarChart, BarShapeProps, CartesianGrid, LabelList, TooltipProps, XAxis } from 'recharts';
 import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
-import { Props } from 'recharts/types/component/Label';
+import { Props as LabelProps } from 'recharts/types/component/Label';
 
 import { Price } from '@o2s/ui/components/Price';
 
@@ -67,7 +66,12 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
                         name={labels.bottomSegment}
                         fill={chartConfig.bottomSegment.color}
                         stroke={chartConfig.bottomSegment.stroke}
-                        shape={(props: BarProps) => <ChartRoundedBar {...(props as BarProps & ChartRoundedBarProps)} />}
+                        shape={(props: BarShapeProps) => (
+                            <ChartRoundedBar
+                                {...(props as BarShapeProps & ChartRoundedBarProps)}
+                                dataKey="bottomSegment"
+                            />
+                        )}
                         unit={unit}
                     />
                     <Bar
@@ -76,7 +80,12 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
                         name={labels.middleSegment}
                         fill={chartConfig.middleSegment.color}
                         stroke={chartConfig.middleSegment.stroke}
-                        shape={(props: BarProps) => <ChartRoundedBar {...(props as BarProps & ChartRoundedBarProps)} />}
+                        shape={(props: BarShapeProps) => (
+                            <ChartRoundedBar
+                                {...(props as BarShapeProps & ChartRoundedBarProps)}
+                                dataKey="middleSegment"
+                            />
+                        )}
                         unit={unit}
                     />
                     <Bar
@@ -85,7 +94,12 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
                         name={labels.topSegment}
                         fill={chartConfig.topSegment.color}
                         stroke={chartConfig.topSegment.stroke}
-                        shape={(props: BarProps) => <ChartRoundedBar {...(props as BarProps & ChartRoundedBarProps)} />}
+                        shape={(props: BarShapeProps) => (
+                            <ChartRoundedBar
+                                {...(props as BarShapeProps & ChartRoundedBarProps)}
+                                dataKey="topSegment"
+                            />
+                        )}
                         unit={unit}
                     >
                         <LabelList
@@ -93,7 +107,7 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
                             position="top"
                             fill="var(--foreground)"
                             fontSize={12}
-                            content={(props: Props) => {
+                            content={(props: LabelProps) => {
                                 const { x: xString, y: yString, width: widthString, value: valueString, fill } = props;
                                 const x = Number(xString);
                                 const y = Number(yString);
