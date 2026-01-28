@@ -30,7 +30,6 @@ In the world of modern web development, composable architectures are becoming in
 
 At [**Open Self Service**](https://www.openselfservice.com/), we've integrated Contentful as our next headless CMS, following our successful [**implementation with Strapi**](../building-composable-frontends-with-strapi-and-nextjs/index.md). This transition highlights key strength of composable architecture, and the data normalization approach that Open Self Service is built on. Replacing API services (which a headless CMS essentially is) becomes a relatively straightforward process that requires no changes to the frontend application, though it requires some upfront work in terms of creating a module that integrates that new service. This decoupling between the frontend and backend services is a fundamental principle of our architecture.
 
-
 We'll explore here how we implemented the Contentful integration, with a particular focus on the Live Preview feature, which allows content editors to see their changes in real-time.
 
 ## GraphQL Implementation
@@ -397,7 +396,7 @@ interface LivePreviewProviderProps extends Omit<ContentfulLivePreviewInitConfig,
 }
 
 export function LivePreviewProvider({ children, ...props }: LivePreviewProviderProps) {
-    return <ContentfulLivePreviewProvider {...props}>{children}</ContentfulLivePreviewProvider>
+    return <ContentfulLivePreviewProvider {...props}>{children}</ContentfulLivePreviewProvider>;
 }
 ```
 

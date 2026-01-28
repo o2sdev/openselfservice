@@ -20,6 +20,7 @@ In this post, we’re sharing what we’ve shipped so far, what’s currently in
 After release, we’ve focused on early stability, initial fixes, and kicked off development of upcoming core features. You can track all updates on our [GitHub Releases page](https://github.com/o2sdev/openselfservice/releases).
 
 **Recent updates include:**
+
 - Initial bugfixes in UI
 - Technical improvements to frontend app, its UX, harmonization server app, integrations and SDK
 - Preparations for new features that are coming in the next weeks

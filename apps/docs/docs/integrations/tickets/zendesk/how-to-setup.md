@@ -64,17 +64,17 @@ After configuring the integration, you need to set up environment variables that
 
 Configure the following environment variables in your API Harmonization server:
 
-| name                | type   | description                                                                    | required | default |
-|---------------------|--------|--------------------------------------------------------------------------------|----------|---------|
-| ZENDESK_API_URL     | string | Your Zendesk API URL (e.g., `https://your-subdomain.zendesk.com/api/v2`)      | yes      | -       |
-| ZENDESK_API_TOKEN   | string | Base64-encoded authentication token                                            | yes      | -       |
-| ZENDESK_TOPIC_FIELD_ID | number | ID of the custom field that contains the ticket topic (optional)            | no       | -       |
+| name                   | type   | description                                                              | required | default |
+| ---------------------- | ------ | ------------------------------------------------------------------------ | -------- | ------- |
+| ZENDESK_API_URL        | string | Your Zendesk API URL (e.g., `https://your-subdomain.zendesk.com/api/v2`) | yes      | -       |
+| ZENDESK_API_TOKEN      | string | Base64-encoded authentication token                                      | yes      | -       |
+| ZENDESK_TOPIC_FIELD_ID | number | ID of the custom field that contains the ticket topic (optional)         | no       | -       |
 
 **Important notes:**
 
 - The `ZENDESK_API_TOKEN` should be a Base64-encoded string of `email/token:api_token` where:
-  - `email/token` is the email address of the Zendesk admin account or "token"
-  - `api_token` is the API token generated in the Zendesk admin interface
+    - `email/token` is the email address of the Zendesk admin account or "token"
+    - `api_token` is the API token generated in the Zendesk admin interface
 - You can obtain your API token from your [Zendesk admin settings](https://support.zendesk.com/hc/en-us/articles/4408843597850)
 - The API URL should point to your Zendesk instance's API v2 endpoint
 
@@ -82,13 +82,13 @@ Configure the following environment variables in your API Harmonization server:
 
 1. **Get your Zendesk subdomain**: Your API URL will be `https://{your-subdomain}.zendesk.com/api/v2`
 2. **Generate an API token**:
-   - Go to your Zendesk admin interface
-   - Navigate to **Admin** > **Apps and integrations** > **APIs** > **Zendesk API**
-   - Click **Add API token**
-   - Copy the generated token
+    - Go to your Zendesk admin interface
+    - Navigate to **Admin** > **Apps and integrations** > **APIs** > **Zendesk API**
+    - Click **Add API token**
+    - Copy the generated token
 3. **Create Base64-encoded token**:
-   - Format: `{email}:{api_token}` or `token:{api_token}`
-   - Encode to Base64 (you can use online tools or command line: `echo -n "email:token" | base64`)
+    - Format: `{email}:{api_token}` or `token:{api_token}`
+    - Encode to Base64 (you can use online tools or command line: `echo -n "email:token" | base64`)
 
 ### Example `.env` configuration
 
@@ -114,25 +114,25 @@ These modules are automatically imported when you configure the integration, but
 After completing the installation and configuration steps:
 
 1. **Rebuild the configs package** (if needed):
-   ```shell
-   npm run build --workspace=@o2s/configs.integrations
-   ```
+
+    ```shell
+    npm run build --workspace=@o2s/configs.integrations
+    ```
 
 2. **Start the API Harmonization server**. The Zendesk integration should be registered and the ticket controller should be available at `/tickets`.
 
 3. **Verify the installation** by:
-   - Checking server logs for successful module registration
-   - Testing the endpoint: `GET /tickets` (should return tickets or empty list if no tickets exist)
-   - Verifying that authentication is working correctly
+    - Checking server logs for successful module registration
+    - Testing the endpoint: `GET /tickets` (should return tickets or empty list if no tickets exist)
+    - Verifying that authentication is working correctly
 
 ## Troubleshooting
 
-| Problem | Solution |
-|---------|----------|
-| Module not found | Verify the package is installed: `npm list @o2s/integrations.zendesk` |
-| Cannot connect to Zendesk | Check `ZENDESK_API_URL` is set correctly and points to `/api/v2` |
-| Authentication failed | Verify `ZENDESK_API_TOKEN` is Base64-encoded correctly and matches your Zendesk credentials |
-| Missing required environment variables | Ensure both `ZENDESK_API_URL` and `ZENDESK_API_TOKEN` are set |
-| Users module not found | Ensure the Users integration is configured in your application |
-| 404 errors when fetching tickets | Verify the API URL is correct and your Zendesk instance is accessible |
-
+| Problem                                | Solution                                                                                    |
+| -------------------------------------- | ------------------------------------------------------------------------------------------- |
+| Module not found                       | Verify the package is installed: `npm list @o2s/integrations.zendesk`                       |
+| Cannot connect to Zendesk              | Check `ZENDESK_API_URL` is set correctly and points to `/api/v2`                            |
+| Authentication failed                  | Verify `ZENDESK_API_TOKEN` is Base64-encoded correctly and matches your Zendesk credentials |
+| Missing required environment variables | Ensure both `ZENDESK_API_URL` and `ZENDESK_API_TOKEN` are set                               |
+| Users module not found                 | Ensure the Users integration is configured in your application                              |
+| 404 errors when fetching tickets       | Verify the API URL is correct and your Zendesk instance is accessible                       |

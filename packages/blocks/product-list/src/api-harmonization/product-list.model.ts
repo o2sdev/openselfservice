@@ -29,6 +29,9 @@ export class ProductListBlock extends ApiModels.Block.Block {
         hideMoreFilters: string;
         noActiveFilters: string;
     };
+    permissions?: {
+        view: boolean;
+    };
 }
 
 export type ProductList = {

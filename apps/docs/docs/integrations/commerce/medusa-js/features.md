@@ -8,20 +8,20 @@ This document provides an overview of features supported by the Medusa.js integr
 
 ## Overview
 
-| Feature                                          | Status | Notes                                           |
-|--------------------------------------------------|--------|-------------------------------------------------|
-| [Order Management](#order-management)            | ✅     | Complete order history and details              |
-| [Product Catalog](#product-catalog)              | ✅     | Product browsing with variants                  |
-| [Product Recommendations](#product-recommendations) | ✅  | Related products ([requires plugin](#plugin-architecture))    |
-| [Asset Management](#asset-management)            | ✅     | Customer assets with warranty tracking ([requires plugin](#plugin-architecture)) |
-| [Service Subscriptions](#service-subscriptions)  | ✅     | Service contracts and billing ([requires plugin](#plugin-architecture)) |
-| [Service Discovery](#service-discovery)          | ✅     | Compatible and featured services ([requires plugin](#plugin-architecture)) |
-| [Multi-currency Support](#multi-currency-support)| ✅     | Configurable currency handling                  |
-| [Customer Authentication](#customer-authentication) | ✅  | JWT-based customer context                      |
-| [Pagination](#pagination)                        | ✅     | Consistent pagination across all lists          |
-| [Admin API Integration](#admin-api-integration)  | ✅     | Uses Medusa Admin API for extended capabilities |
-| [Plugin Architecture](#plugin-architecture)      | ✅     | Extensible via custom Medusa plugins            |
-| [Purchase/Activation](#purchaseactivation)       | ❌     | Not implemented                                 |
+| Feature                                             | Status | Notes                                                                            |
+| --------------------------------------------------- | ------ | -------------------------------------------------------------------------------- |
+| [Order Management](#order-management)               | ✅     | Complete order history and details                                               |
+| [Product Catalog](#product-catalog)                 | ✅     | Product browsing with variants                                                   |
+| [Product Recommendations](#product-recommendations) | ✅     | Related products ([requires plugin](#plugin-architecture))                       |
+| [Asset Management](#asset-management)               | ✅     | Customer assets with warranty tracking ([requires plugin](#plugin-architecture)) |
+| [Service Subscriptions](#service-subscriptions)     | ✅     | Service contracts and billing ([requires plugin](#plugin-architecture))          |
+| [Service Discovery](#service-discovery)             | ✅     | Compatible and featured services ([requires plugin](#plugin-architecture))       |
+| [Multi-currency Support](#multi-currency-support)   | ✅     | Configurable currency handling                                                   |
+| [Customer Authentication](#customer-authentication) | ✅     | JWT-based customer context                                                       |
+| [Pagination](#pagination)                           | ✅     | Consistent pagination across all lists                                           |
+| [Admin API Integration](#admin-api-integration)     | ✅     | Uses Medusa Admin API for extended capabilities                                  |
+| [Plugin Architecture](#plugin-architecture)         | ✅     | Extensible via custom Medusa plugins                                             |
+| [Purchase/Activation](#purchaseactivation)          | ❌     | Not implemented                                                                  |
 
 ## Feature Details
 
@@ -142,6 +142,7 @@ The integration supports extensibility through Medusa's plugin system:
 - Seamless integration with Medusa Admin Panel for content management
 
 The [medusa-plugin-assets-services](https://github.com/o2sdev/medusa-plugin-assets-services) plugin extends Medusa with:
+
 - Asset entity for tracking customer equipment
 - Service Instance entity for subscription management
 - Product reference relationships

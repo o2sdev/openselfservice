@@ -3,11 +3,11 @@
     "tasks": {
         "dev": {
             "dependsOn": ["@o2s/utils.logger#build", "@o2s/framework#build"],
-            "env": ["MOCKED_INTEGRATION_DELAYS_ENABLED", "NODE_ENV", "AUTH_DATABASE_URL"]
+            "env": ["MOCKED_INTEGRATION_DELAYS_ENABLED", "NODE_ENV", "AUTH_DATABASE_URL", "AUTH_JWT_SECRET"]
         },
         "build": {
             "dependsOn": ["@o2s/utils.logger#build", "@o2s/framework#build"],
-            "env": ["MOCKED_INTEGRATION_DELAYS_ENABLED", "NODE_ENV", "AUTH_DATABASE_URL"]
+            "env": ["MOCKED_INTEGRATION_DELAYS_ENABLED", "NODE_ENV", "AUTH_DATABASE_URL", "AUTH_JWT_SECRET"]
         }
     }
 }

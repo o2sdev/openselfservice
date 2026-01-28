@@ -14,5 +14,3 @@ items={[
 { title: 'DXP Frontend Starter', description: 'Starter for knowledge/marketing portals evolving to DXP.', href: '/docs/app-starters/dxp/overview' },
 ]}
 />
-
-

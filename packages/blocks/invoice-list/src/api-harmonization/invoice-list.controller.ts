@@ -17,13 +17,13 @@ export class InvoiceListController {
     constructor(protected readonly service: InvoiceListService) {}
 
     @Get()
-    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN] })
+    @Auth.Decorators.Permissions({ resource: 'invoices', actions: ['view'] })
     getInvoiceListBlock(@Headers() headers: Models.Headers.AppHeaders, @Query() query: GetInvoiceListBlockQuery) {
         return this.service.getInvoiceListBlock(query, headers);
     }
 
     @Get(':id/pdf')
-    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN] })
+    @Auth.Decorators.Permissions({ resource: 'invoices', actions: ['view'] })
     getInvoicePdf(@Param('id') id: string, @Res() res: Response): Observable<void> {
         return this.service.getInvoicePdf(id).pipe(
             map((pdf) => {

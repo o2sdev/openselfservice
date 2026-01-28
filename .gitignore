@@ -41,3 +41,5 @@ agent-os
 # Storybook
 *storybook.log
 storybook-static
+
+dist

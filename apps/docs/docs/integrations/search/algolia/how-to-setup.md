@@ -62,10 +62,10 @@ After configuring the integration, you need to set up environment variables that
 
 Configure the following environment variables in your API Harmonization server:
 
-| name           | type   | description                                    | required | default |
-|----------------|--------|------------------------------------------------|----------|---------|
-| ALGOLIA_APP_ID | string | Your Algolia application ID                    | yes      | -       |
-| ALGOLIA_API_KEY| string | Your Algolia API key with search permissions   | yes      | -       |
+| name            | type   | description                                  | required | default |
+| --------------- | ------ | -------------------------------------------- | -------- | ------- |
+| ALGOLIA_APP_ID  | string | Your Algolia application ID                  | yes      | -       |
+| ALGOLIA_API_KEY | string | Your Algolia API key with search permissions | yes      | -       |
 
 **Important notes:**
 
@@ -77,20 +77,20 @@ Configure the following environment variables in your API Harmonization server:
 
 Other integrations (such as CMS integrations) may use the following variable for article indexing:
 
-| name                      | type   | description                                    | required | default |
-|---------------------------|--------|------------------------------------------------|----------|---------|
-| SEARCH_ARTICLES_INDEX_NAME| string | Name of the Algolia index for articles         | no       | -       |
+| name                       | type   | description                            | required | default |
+| -------------------------- | ------ | -------------------------------------- | -------- | ------- |
+| SEARCH_ARTICLES_INDEX_NAME | string | Name of the Algolia index for articles | no       | -       |
 
 ### Obtaining your Algolia credentials
 
 1. **Create an Algolia account**: If you don't have one, [sign up for Algolia](https://www.algolia.com/)
-2. **Get your Application ID**: 
-   - Go to your [Algolia dashboard](https://www.algolia.com/manage/api-keys/)
-   - Your Application ID is displayed at the top of the page
+2. **Get your Application ID**:
+    - Go to your [Algolia dashboard](https://www.algolia.com/manage/api-keys/)
+    - Your Application ID is displayed at the top of the page
 3. **Create a Search-Only API Key**:
-   - In the API Keys section, create a new key with **search** permissions only
-   - Copy the generated API key
-   - **Important**: Never use an admin key with write permissions in your application
+    - In the API Keys section, create a new key with **search** permissions only
+    - Copy the generated API key
+    - **Important**: Never use an admin key with write permissions in your application
 
 ### Example `.env` configuration
 
@@ -113,6 +113,7 @@ Before you can use the integration, you need to set up indexes in your Algolia d
 **Note**: If you plan to use sorting, you'll need to create separate indexes for each sort configuration. The integration appends `_{field}_{order}` to the index name when sorting is specified.
 
 For example:
+
 - Base index: `articles`
 - With sort by `publishedAt` descending: `articles_publishedAt_desc`
 
@@ -121,27 +122,28 @@ For example:
 After completing the installation and configuration steps:
 
 1. **Rebuild the configs package** (if needed):
-   ```shell
-   npm run build --workspace=@o2s/configs.integrations
-   ```
+
+    ```shell
+    npm run build --workspace=@o2s/configs.integrations
+    ```
 
 2. **Start the API Harmonization server**. The Algolia integration should be registered and the search controller should be available at `/search`.
 
 3. **Verify the installation** by:
-   - Checking server logs for successful integration registration (should show Algolia service initialization)
-   - Testing the endpoint: `GET /search?index={your-index-name}` (should return results or error if not configured)
-   - Verifying that environment variables are correctly loaded (check for any errors about missing `ALGOLIA_APP_ID` or `ALGOLIA_API_KEY`)
+    - Checking server logs for successful integration registration (should show Algolia service initialization)
+    - Testing the endpoint: `GET /search?index={your-index-name}` (should return results or error if not configured)
+    - Verifying that environment variables are correctly loaded (check for any errors about missing `ALGOLIA_APP_ID` or `ALGOLIA_API_KEY`)
 
 ## Troubleshooting
 
-| Problem | Solution |
-|---------|----------|
-| Module not found | Verify the package is installed: `npm list @o2s/integrations.algolia` |
-| Cannot connect to Algolia | Check `ALGOLIA_APP_ID` and `ALGOLIA_API_KEY` are set correctly |
-| Index not found (404) | Verify the index name exists in your Algolia dashboard |
-| Authorization errors | Check that your API key has read access to the index |
-| Missing environment variables | Ensure both `ALGOLIA_APP_ID` and `ALGOLIA_API_KEY` are set in your `.env` file |
-| Integration not working | Verify that the import in `packages/configs/integrations/src/models/search.ts` points to `@o2s/integrations.algolia/integration` |
+| Problem                       | Solution                                                                                                                         |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Module not found              | Verify the package is installed: `npm list @o2s/integrations.algolia`                                                            |
+| Cannot connect to Algolia     | Check `ALGOLIA_APP_ID` and `ALGOLIA_API_KEY` are set correctly                                                                   |
+| Index not found (404)         | Verify the index name exists in your Algolia dashboard                                                                           |
+| Authorization errors          | Check that your API key has read access to the index                                                                             |
+| Missing environment variables | Ensure both `ALGOLIA_APP_ID` and `ALGOLIA_API_KEY` are set in your `.env` file                                                   |
+| Integration not working       | Verify that the import in `packages/configs/integrations/src/models/search.ts` points to `@o2s/integrations.algolia/integration` |
 
 ## Next steps
 

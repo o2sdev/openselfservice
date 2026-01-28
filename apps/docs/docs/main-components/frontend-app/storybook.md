@@ -17,7 +17,7 @@ npm run storybook
 This will start the Storybook development server on `http://localhost:6006` by default.
 
 :::info
-Make sure all dependencies are installed before running Storybook. If you encounter any issues, try running `npm install` first. You may also need to build the packages first by running `npm run build` or `npm run dev` to ensure all dependencies are properly compiled.
+Make sure all dependencies are installed before running Storybook. If you encounter any issues, try running `npm install` first. You may also need to build the packages first by running `npm run build` or the watch scripts (`npm run watch:deps` and `npm run watch:apps`) to ensure all dependencies are properly compiled.
 :::
 
 ## Building Storybook

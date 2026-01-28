@@ -26,7 +26,7 @@ The Zendesk integration provides:
 The following table shows which methods from the base TicketService are currently supported by the Zendesk integration:
 
 | Method        | Description                                       | Supported   |
-| ------------- | ------------------------------------------------- |-------------|
+| ------------- | ------------------------------------------------- | ----------- |
 | getTicket     | Retrieve a single ticket by ID                    | ✓           |
 | getTicketList | Retrieve a list of tickets with filtering options | ✓           |
 | createTicket  | Create a new ticket                               | ✗ (planned) |
@@ -115,11 +115,11 @@ The integration maps Zendesk ticket data to the standard ticket model with the f
 
 ### Status Mapping
 
-| Zendesk Status | Normalized Status | Notes                |
-| -------------- | ----------------- |----------------------|
-| closed, solved | CLOSED            | Ticket is resolved   |
-| pending, hold  | IN_PROGRESS       | Ticket is being worked on |
-| new, open      | OPEN              | Default status       |
+| Zendesk Status | Normalized Status | Notes                         |
+| -------------- | ----------------- | ----------------------------- |
+| closed, solved | CLOSED            | Ticket is resolved            |
+| pending, hold  | IN_PROGRESS       | Ticket is being worked on     |
+| new, open      | OPEN              | Default status                |
 | (other)        | OPEN              | Fallback for unknown statuses |
 
 
@@ -249,10 +249,10 @@ When processing comments and attachments:
 Attachments are extracted from ticket comments (not from the main ticket object):
 
 - Each attachment includes:
-  - File name, URL, and size
-  - Author information from the parent comment
-  - Creation date from the parent comment
-  - ARIA label for accessibility
+    - File name, URL, and size
+    - Author information from the parent comment
+    - Creation date from the parent comment
+    - ARIA label for accessibility
 
 ## Query Building and Filtering
 
@@ -274,6 +274,7 @@ The integration converts framework filter parameters to Zendesk Search API queri
 All queries start with: `type:ticket requester:{user_email}`
 
 This ensures that:
+
 - Only tickets are returned (not other Zendesk objects)
 - Users can only see tickets where they are the requester
 
@@ -302,4 +303,3 @@ The integration implements the following security measures:
 - **Requester matching**: Users can only access tickets where their email matches the requester email
 - **No cross-user access**: Tickets are filtered at the API level using Zendesk Search API
 - **Token-based authentication**: Uses Base64-encoded API token for Zendesk API access
-

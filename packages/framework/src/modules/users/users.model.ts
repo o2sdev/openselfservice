@@ -1,5 +1,3 @@
-import { UserCustomerRole } from '../../utils/models/roles';
-
 import { Customer } from '@/utils/models/customer';
 import { Paginated } from '@/utils/models/pagination';
 
@@ -9,8 +7,7 @@ export class User {
     email!: string;
     firstName?: string;
     lastName?: string;
-    roles!: UserCustomerRole[];
-    customers!: Customer[];
+    customers?: Customer[];
 }
 
 export type Users = Paginated<User>;

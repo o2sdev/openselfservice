@@ -65,7 +65,6 @@ In our frontend app Medusa is the data source for the Orders, Services and Asset
 
 ![Orders history](open-self-service-orders-medusa.png)
 
-
 ## Technical details
 
 The Medusa plugin was build using the standard approach outlined in [Medusa's plugin creation documentation](https://docs.medusajs.com/learn/fundamentals/plugins/create).
@@ -82,6 +81,7 @@ You can find both:
 ## What’s next?
 
 We’re planning to extend this integration further:
+
 - Add handling of **Product** endpoints (simple product catalogue)
 - Potentially, somewhere in future cover even more endpoints and add more commerce features to the frontend app so that O2S could be used like a full sales and customr support solution.
 

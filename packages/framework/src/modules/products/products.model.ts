@@ -1,5 +1,4 @@
-import { Pagination, Price } from '@/utils/models';
-import { Media } from '@/utils/models';
+import { Media, Pagination, Price } from '@/utils/models';
 
 export type ProductType = 'PHYSICAL' | 'VIRTUAL';
 

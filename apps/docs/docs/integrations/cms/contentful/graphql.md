@@ -38,12 +38,7 @@ const config: CodegenConfig = {
     documents: './src/**/*.graphql',
     generates: {
         'generated/contentful.ts': {
-            plugins: [
-                'typescript',
-                'typescript-resolvers',
-                'typescript-operations',
-                'typescript-graphql-request',
-            ],
+            plugins: ['typescript', 'typescript-resolvers', 'typescript-operations', 'typescript-graphql-request'],
             config: {
                 skipTypename: true,
                 rawRequest: true,
@@ -59,6 +54,7 @@ const config: CodegenConfig = {
 ```
 
 **TypeScript plugins used:**
+
 - `typescript` - Generates base TypeScript types from the GraphQL schema
 - `typescript-resolvers` - Generates resolver types
 - `typescript-operations` - Generates types for queries, mutations, and fragments
@@ -293,4 +289,3 @@ const result = await this.graphqlService.getPage({
 ```
 
 The result is fully typed, providing autocomplete and type checking for all fields.
-

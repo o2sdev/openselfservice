@@ -17,7 +17,7 @@ export const PAGE_PRODUCT_DETAILS_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [],
+    roles: [],
     hasOwnTitle: true,
     parent: {
         slug: '/products',
@@ -61,7 +61,7 @@ export const PAGE_PRODUCT_DETAILS_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [],
+    roles: [],
     hasOwnTitle: true,
     parent: {
         slug: '/produkte',
@@ -105,7 +105,7 @@ export const PAGE_PRODUCT_DETAILS_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [],
+    roles: [],
     hasOwnTitle: true,
     parent: {
         slug: '/produkty',

@@ -15,7 +15,7 @@ export class NotificationSummaryController {
     constructor(protected readonly service: NotificationSummaryService) {}
 
     @Get()
-    @Auth.Decorators.Roles({ roles: [] })
+    @Auth.Decorators.Permissions({ resource: 'notifications', actions: ['view'] })
     getNotificationSummaryBlock(
         @Headers() headers: Models.Headers.AppHeaders,
         @Query() query: GetNotificationSummaryBlockQuery,

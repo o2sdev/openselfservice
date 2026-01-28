@@ -37,6 +37,11 @@ export const UserAccount: React.FC<UserAccountProps> = async ({
         return null;
     }
 
+    // Check view permission - if not allowed, don't render
+    if (!data.permissions?.view) {
+        return null;
+    }
+
     return (
         <UserAccountDynamic
             {...data}

@@ -2,7 +2,26 @@
 slug: building-composable-frontends-with-strapi-and-nextjs
 title: 'Building composable frontends with Strapi and Next.js'
 description: 'Learn how to build composable frontends using Strapi CMS and Next.js. Discover dynamic content modeling, reusable UI blocks, flexible layouts, and scalable component architecture for modern web applications.'
-keywords: ['Strapi CMS', 'Next.js', 'composable frontend', 'headless CMS', 'content modeling', 'dynamic layouts', 'reusable components', 'UI blocks', 'content management', 'frontend architecture', 'component composition', 'page builder', 'content modeling', 'API integration', 'React components', 'TypeScript', 'frontend framework']
+keywords:
+    [
+        'Strapi CMS',
+        'Next.js',
+        'composable frontend',
+        'headless CMS',
+        'content modeling',
+        'dynamic layouts',
+        'reusable components',
+        'UI blocks',
+        'content management',
+        'frontend architecture',
+        'component composition',
+        'page builder',
+        'content modeling',
+        'API integration',
+        'React components',
+        'TypeScript',
+        'frontend framework',
+    ]
 date: 2025-03-28
 tags: [tech, integrations]
 authors: [marcin.krasowski]
@@ -31,7 +50,7 @@ keeping it under control, without giving complete freedom (which could potential
 
 Of course, our approach may not fully align with the latest trends around visual editors and giving total design freedom, but in our experience, it’s a solid compromise that works well for many real-world use cases.
 
-To illustrate our approach, throughout the article we will use an exemplary page from our application  - the list of invoices. It displays user's invoices, together with a quick summary of payment balance and history:
+To illustrate our approach, throughout the article we will use an exemplary page from our application - the list of invoices. It displays user's invoices, together with a quick summary of payment balance and history:
 
 ![example-web-page.png](example-web-page.png)
 
@@ -121,7 +140,6 @@ This one is a bit more complex - aside from the title, it also handles:
 - a table that defines which columns should be displayed on the frontend for the invoice table:
 
     ![content-model-table.png](content-model-table.png)
-
 
 ## App architecture
 

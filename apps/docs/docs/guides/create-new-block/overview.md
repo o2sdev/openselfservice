@@ -1,6 +1,6 @@
 ---
 sidebar_position: 000
-slug: "/guides/create-new-block"
+slug: '/guides/create-new-block'
 ---
 
 # Create a new block

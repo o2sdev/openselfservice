@@ -4,7 +4,7 @@ export const MOCK_ARTICLE3_EN: Articles.Model.Article[] = [
     {
         id: 'art-004',
         slug: '/help-and-support/accessories/essential-powerpro-tool-accessories',
-        permissions: [],
+        roles: [],
         createdAt: '2023-08-20T11:30:00Z',
         updatedAt: '2023-09-30T15:45:00Z',
         title: 'Essential PowerPro Tool Accessories',
@@ -313,7 +313,7 @@ export const MOCK_ARTICLE3_DE: Articles.Model.Article[] = [
     {
         id: 'art-004',
         slug: '/hilfe-und-support/zubehor/wesentliches-powerpro-werkzeugzubehor',
-        permissions: [],
+        roles: [],
         createdAt: '2023-08-20T11:30:00Z',
         updatedAt: '2023-09-30T15:45:00Z',
         title: 'Wesentliches PowerPro-Werkzeugzubehör',
@@ -622,7 +622,7 @@ export const MOCK_ARTICLE3_PL: Articles.Model.Article[] = [
     {
         id: 'art-004',
         slug: '/pomoc-i-wsparcie/akcesoria/niezbedne-akcesoria-do-narzedzi-powerpro',
-        permissions: [],
+        roles: [],
         createdAt: '2023-08-20T11:30:00Z',
         updatedAt: '2023-09-30T15:45:00Z',
         title: 'Niezbędne akcesoria do narzędzi PowerPro',

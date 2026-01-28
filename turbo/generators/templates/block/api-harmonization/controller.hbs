@@ -16,6 +16,8 @@ export class {{pascalCase name}}Controller {
 
     @Get()
     @Auth.Decorators.Roles({ roles: [] })
+    // Optional: Add permission-based access control
+    // @Auth.Decorators.Permissions({ resource: 'resource-name', actions: ['view'] })
     get{{pascalCase name}}Block(@Headers() headers: Models.Headers.AppHeaders, @Query() query: Get{{pascalCase name }}BlockQuery) {
         return this.service.get{{pascalCase name}}Block(query, headers);
     }

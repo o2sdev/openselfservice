@@ -26,6 +26,11 @@ export const PaymentsHistory: React.FC<PaymentsHistoryProps> = async ({ id, acce
         return null;
     }
 
+    // Check view permission - if not allowed, don't render
+    if (!data.permissions?.view) {
+        return null;
+    }
+
     return (
         <PaymentsHistoryDynamic {...data} id={id} accessToken={accessToken} locale={locale} hasPriority={hasPriority} />
     );

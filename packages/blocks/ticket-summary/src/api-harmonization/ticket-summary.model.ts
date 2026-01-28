@@ -12,4 +12,8 @@ export class TicketSummaryBlock extends Models.Block.Block {
     __typename!: 'TicketSummaryBlock';
     layout?: 'vertical' | 'horizontal';
     infoCards!: TicketSummaryInfoCard[];
+    permissions?: {
+        view: boolean;
+        create: boolean;
+    };
 }

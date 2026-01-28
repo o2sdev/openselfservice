@@ -3,15 +3,16 @@ import { Observable, of } from 'rxjs';
 
 import { Organizations } from '@o2s/framework/modules';
 
-import { checkMembership, mapOrganization, mapOrganizations } from './organizations.mapper';
+import { checkMembership, mapOrganization, mapOrganizationsForUser } from './organizations.mapper';
 import { responseDelay } from '@/utils/delay';
 
 @Injectable()
 export class OrganizationsService implements Organizations.Service {
     getOrganizationList(
         options: Organizations.Request.OrganizationsListQuery,
+        authorization?: string,
     ): Observable<Organizations.Model.Organizations | undefined> {
-        return of(mapOrganizations(options)).pipe(responseDelay());
+        return of(mapOrganizationsForUser(options, authorization)).pipe(responseDelay());
     }
 
     getOrganization(

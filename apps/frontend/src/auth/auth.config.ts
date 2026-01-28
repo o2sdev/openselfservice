@@ -8,8 +8,6 @@ import * as Auth from '@o2s/integrations.mocked/auth';
 
 import { sdk } from '@/api/sdk';
 
-const DEFAULT_ROLE = process.env.AUTH_DEFAULT_USER_ROLE!;
-
 type JwtCallbackParams = {
     token: JWT;
     user: User | AdapterUser;
@@ -47,7 +45,7 @@ export const jwtCallback = async (params: JwtCallbackParams): Promise<JWT | null
             : await sdk.users.getDefaultCustomerForCurrentUser(accessToken);
     };
 
-    return Auth.jwtCallback(getCustomer, params, DEFAULT_ROLE);
+    return Auth.jwtCallback(getCustomer, params);
 };
 
 export const sessionCallback = async (params: SessionCallbackParams): Promise<DefaultSession | Session> => {
