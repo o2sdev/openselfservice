@@ -63,6 +63,18 @@ const MOCK_TICKET_DETAILS_BLOCK_EN: CMS.Model.TicketDetailsBlock.TicketDetailsBl
             preventive_maintenance: 'Preventive Maintenance',
             corrective_maintenance: 'Corrective Maintenance',
         },
+        termsAcceptance: {
+            true: 'Yes',
+            false: 'No',
+        },
+        newsletterConsent: {
+            true: 'Yes',
+            false: 'No',
+        },
+        marketingConsent: {
+            true: 'Yes',
+            false: 'No',
+        },
     },
     labels: {
         showMore: 'Show case details',
@@ -135,6 +147,18 @@ const MOCK_TICKET_DETAILS_BLOCK_PL: CMS.Model.TicketDetailsBlock.TicketDetailsBl
             preventive_maintenance: 'Konserwacja zapobiegawcza',
             corrective_maintenance: 'Konserwacja naprawcza',
         },
+        termsAcceptance: {
+            true: 'Tak',
+            false: 'Nie',
+        },
+        newsletterConsent: {
+            true: 'Tak',
+            false: 'Nie',
+        },
+        marketingConsent: {
+            true: 'Tak',
+            false: 'Nie',
+        },
     },
     labels: {
         showMore: 'Pokaż szczegóły zgłoszenia',
@@ -206,6 +230,18 @@ const MOCK_TICKET_DETAILS_BLOCK_DE: CMS.Model.TicketDetailsBlock.TicketDetailsBl
             scheduled_maintenance: 'Planmäßige Wartung',
             preventive_maintenance: 'Vorbeugende Wartung',
             corrective_maintenance: 'Korrigierende Wartung',
+        },
+        termsAcceptance: {
+            true: 'Ja',
+            false: 'Nein',
+        },
+        newsletterConsent: {
+            true: 'Ja',
+            false: 'Nein',
+        },
+        marketingConsent: {
+            true: 'Ja',
+            false: 'Nein',
         },
     },
     labels: {
