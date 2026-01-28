@@ -160,7 +160,7 @@ Custom fields from Zendesk are mapped to readable names using the `ZendeskFieldM
 To add support for a new custom field:
 
 1. **Add environment variable**:
-   ```
+   ```env
    ZENDESK_NEW_FIELD_ID=789012
    ```
 
