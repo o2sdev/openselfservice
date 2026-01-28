@@ -26,14 +26,21 @@ export function mapTicketToModel(
     }
 
     // Determine topic from custom field if configured
-    let topic: string = 'GENERAL';
     const topicFieldId = process.env.ZENDESK_TOPIC_FIELD_ID ? Number(process.env.ZENDESK_TOPIC_FIELD_ID) : undefined;
 
+    let topic: string | undefined;
     if (topicFieldId && ticket.custom_fields) {
         const topicField = ticket.custom_fields.find((field) => field.id === topicFieldId);
         if (topicField?.value) {
             topic = String(topicField.value).toUpperCase();
         }
+    }
+
+    if (!topic) {
+        throw new Error(
+            `Topic field not found or empty for ticket ${ticket.id}. ` +
+                `Ensure ZENDESK_TOPIC_FIELD_ID is configured and ticket has a topic value.`,
+        );
     }
 
     const properties: Tickets.Model.TicketProperty[] = [
