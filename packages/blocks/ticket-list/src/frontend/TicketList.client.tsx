@@ -121,9 +121,11 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                             <Button asChild variant="link" size="none" className="truncate block text-left h-auto p-0">
                                 <LinkComponent href={ticket.detailsUrl}>{ticket.topic.label}</LinkComponent>
                             </Button>
-                            <Typography variant="small" className="text-xs text-muted-foreground">
-                                {data.labels.ticketId}: {ticket.id}
-                            </Typography>
+                            {data.labels.ticketId && (
+                                <Typography variant="small" className="text-xs text-muted-foreground">
+                                    {data.labels.ticketId}: {ticket.id}
+                                </Typography>
+                            )}
                         </div>
                     ),
                 };
