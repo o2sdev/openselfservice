@@ -130,7 +130,7 @@ export class ZendeskTicketService extends Tickets.Service {
                 }
 
                 if (options.topic) {
-                    searchQuery += ` tag:${options.topic.toLowerCase()}`;
+                    searchQuery += ` tags:${options.topic.toLowerCase()}`;
                 }
 
                 if (options.dateFrom) {
