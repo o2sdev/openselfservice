@@ -98,7 +98,6 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
                 allowMultiple: false,
                 isLeading: false,
                 options: [
-                    { label: 'All', value: 'ALL' },
                     { label: 'Contact Form', value: 'CONTACT_US' },
                     { label: 'Device Maintenance', value: 'REQUEST_DEVICE_MAINTENANCE' },
                     { label: 'Complaint', value: 'COMPLAINT' },
@@ -237,7 +236,6 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
                 allowMultiple: false,
                 isLeading: false,
                 options: [
-                    { label: 'Alle', value: 'ALL' },
                     { label: 'Kontaktformular', value: 'CONTACT_US' },
                     { label: 'Gerätewartung', value: 'REQUEST_DEVICE_MAINTENANCE' },
                     { label: 'Beschwerde', value: 'COMPLAINT' },
@@ -378,7 +376,6 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
                 allowMultiple: false,
                 isLeading: false,
                 options: [
-                    { label: 'Wszystko', value: 'ALL' },
                     { label: 'Formularz kontaktowy', value: 'CONTACT_US' },
                     { label: 'Konserwacja urządzenia', value: 'REQUEST_DEVICE_MAINTENANCE' },
                     { label: 'Reklamacja', value: 'COMPLAINT' },

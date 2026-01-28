@@ -63,6 +63,10 @@ const MOCK_TICKET_DETAILS_BLOCK_EN: CMS.Model.TicketDetailsBlock.TicketDetailsBl
             preventive_maintenance: 'Preventive Maintenance',
             corrective_maintenance: 'Corrective Maintenance',
         },
+        preferredContactMethod: {
+            phone: 'Phone',
+            email: 'Email',
+        },
         termsAcceptance: {
             true: 'Yes',
             false: 'No',
@@ -147,6 +151,10 @@ const MOCK_TICKET_DETAILS_BLOCK_PL: CMS.Model.TicketDetailsBlock.TicketDetailsBl
             preventive_maintenance: 'Konserwacja zapobiegawcza',
             corrective_maintenance: 'Konserwacja naprawcza',
         },
+        preferredContactMethod: {
+            phone: 'Telefon',
+            email: 'Email',
+        },
         termsAcceptance: {
             true: 'Tak',
             false: 'Nie',
@@ -230,6 +238,10 @@ const MOCK_TICKET_DETAILS_BLOCK_DE: CMS.Model.TicketDetailsBlock.TicketDetailsBl
             scheduled_maintenance: 'Planmäßige Wartung',
             preventive_maintenance: 'Vorbeugende Wartung',
             corrective_maintenance: 'Korrigierende Wartung',
+        },
+        preferredContactMethod: {
+            phone: 'Telefon',
+            email: 'E-Mail',
         },
         termsAcceptance: {
             true: 'Ja',

@@ -23,7 +23,7 @@ export class PostTicketBody {
 export class GetTicketListQuery extends PaginationQuery {
     topic?: string;
     type?: string;
-    status?: TicketStatus;
+    status?: TicketStatus | TicketStatus[];
     dateFrom?: Date;
     dateTo?: Date;
     sort?: string;

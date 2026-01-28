@@ -125,8 +125,33 @@ export class ZendeskTicketService extends Tickets.Service {
 
                 let searchQuery = `type:ticket requester:${user.email}`;
 
+                // Map internal status values to Zendesk status values (reverse of zendesk-ticket.mapper.ts)
                 if (options.status) {
-                    searchQuery += ` status:${options.status.toLowerCase()}`;
+                    const statusArray = Array.isArray(options.status) ? options.status : [options.status];
+                    const zendeskStatuses: string[] = [];
+
+                    statusArray.forEach((internalStatus) => {
+                        switch (internalStatus) {
+                            case 'CLOSED':
+                                // Map to both 'solved' and 'closed'
+                                zendeskStatuses.push('solved', 'closed');
+                                break;
+                            case 'IN_PROGRESS':
+                                // Map to both 'pending' and 'hold'
+                                zendeskStatuses.push('pending', 'hold');
+                                break;
+                            case 'OPEN':
+                                // Map to both 'new' and 'open'
+                                zendeskStatuses.push('new', 'open');
+                                break;
+                        }
+                    });
+
+                    // Add all Zendesk statuses to query
+                    if (zendeskStatuses.length > 0) {
+                        const statusQuery = zendeskStatuses.map((s) => `status:${s}`).join(' ');
+                        searchQuery += ` ${statusQuery}`;
+                    }
                 }
 
                 if (options.topic) {
