@@ -22,7 +22,7 @@
     "@nestjs/common": "^11.1.12",
     "@o2s/framework": "*",
     "@o2s/utils.logger": "*",
-    "axios": "^1.13.2",
+    "axios": "^1.13.4",
     "rxjs": "^7.8.2"
   },
   "devDependencies": {
