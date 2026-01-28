@@ -42,21 +42,29 @@ export function DesktopNavigation({
     // Show sign in button if user is not signed in, container allows it, and signInLabel is available
     const showSignInButton = shouldIncludeSignInButton && !isSignedIn && signInLabel;
 
-    const activeNavigationGroup = items.find((item) => {
-        if (item.__typename === 'NavigationGroup') {
-            return item.items
-                .filter((item) => item.__typename === 'NavigationItem')
-                .some((item) => {
-                    if (pathname !== '/') {
-                        return item.url !== '/' && item.url && pathname.startsWith(item.url);
-                    }
+    const activeNavigationGroup = items
+        .filter((item): item is Models.Navigation.NavigationGroup => item.__typename === 'NavigationGroup')
+        .map((group) => {
+            const navigationItems = group.items.filter(
+                (item): item is Models.Navigation.NavigationItem => item.__typename === 'NavigationItem',
+            );
 
-                    return item.url && pathname.startsWith(item.url);
-                });
-        }
+            const bestScore = Math.max(
+                ...navigationItems.map((item) => {
+                    if (!item.url) return 0;
+                    // Exact match gets highest priority
+                    if (pathname === item.url) return item.url.length + 1000;
+                    // Subpath match
+                    if (pathname.startsWith(item.url + '/')) return item.url.length;
+                    return 0;
+                }),
+                0,
+            );
 
-        return item.url && pathname.includes(item.url);
-    });
+            return { group, score: bestScore };
+        })
+        .filter((result) => result.score > 0)
+        .sort((a, b) => b.score - a.score)[0]?.group;
 
     const navigationItemClass = cn(navigationMenuTriggerStyle());
 
