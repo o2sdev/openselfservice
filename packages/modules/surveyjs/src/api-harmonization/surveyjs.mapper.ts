@@ -94,6 +94,11 @@ export const mapSurveyToTicket = (surveyPayload: SurveyResult): Tickets.Request.
     const mappedAttachments = attachments
         ? (Array.isArray(attachments) ? attachments : [attachments])
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              .filter((file: any) => {
+                  // Guard against invalid attachments to prevent runtime errors
+                  return file && typeof file.content === 'string' && file.name;
+              })
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               .map((file: any) => {
                   // Convert base64 string to Buffer
                   // Survey.js may include data URI prefix (data:image/png;base64,...)
@@ -107,11 +112,14 @@ export const mapSurveyToTicket = (surveyPayload: SurveyResult): Tickets.Request.
               })
         : undefined;
 
+    // Convert empty array to undefined for cleaner API
+    const finalAttachments = mappedAttachments && mappedAttachments.length > 0 ? mappedAttachments : undefined;
+
     return {
         title: title as string,
         description: description as string,
         ticketFormId: ticketFormId as number,
-        attachments: mappedAttachments,
+        attachments: finalAttachments,
         customFields,
     };
 };
