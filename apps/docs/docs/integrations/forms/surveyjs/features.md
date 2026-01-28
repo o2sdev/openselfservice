@@ -21,7 +21,7 @@ This document provides an overview of features supported by the SurveyJS integra
 | [Localization](#localization)                           | ✅     | Multi-language support via locale prop                     |
 | [Custom UI Components](#custom-ui-components)           | ✅     | Custom React components for question types                 |
 | [Block Integration](#block-integration)                 | ✅     | Integration with `@o2s/blocks.surveyjs-form` block         |
-| [Ticket System Integration](#ticket-system-integration) | 📋     | Planned feature for ticket submission forms                |
+| [Ticket System Integration](#ticket-system-integration) | ✅     | Submit surveys as tickets to ticket systems                |
 
 ## Feature details
 
@@ -155,13 +155,11 @@ Integration with the `@o2s/blocks.surveyjs-form` block:
 
 ### Ticket System Integration {#ticket-system-integration}
 
-:::info Planned
-This is a planned feature and is not yet implemented.
-:::
+The SurveyJS module supports ticket submission through the `submitDestination` configuration:
 
-The SurveyJS module is planned to support ticket submission:
+- **Ticket forms**: Create dynamic ticket submission forms using SurveyJS schemas
+- **Form validation**: Automatic validation of required fields (`description`, `ticketFormId`)
+- **Integration**: Works with ticket systems implementing the framework's Tickets service (e.g., Zendesk)
+- **Custom workflows**: Configure submission destinations in CMS via `submitDestination: ['tickets']`
 
-- **Ticket forms**: Create dynamic ticket submission forms
-- **Form validation**: Validate ticket data before submission
-- **Integration**: Can be integrated with ticket systems (e.g., Zendesk)
-- **Custom workflows**: Configure custom submission workflows
+Required survey fields for ticket submission: `description` (string) and `ticketFormId` (number).

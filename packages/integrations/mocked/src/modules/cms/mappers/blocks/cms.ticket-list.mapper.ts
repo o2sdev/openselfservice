@@ -22,8 +22,7 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
     ],
     table: {
         columns: [
-            { id: 'topic', title: 'Topic' },
-            { id: 'type', title: 'Case type' },
+            { id: 'topic', title: 'Case Type' },
             { id: 'status', title: 'Status' },
             { id: 'updatedAt', title: 'Date' },
         ],
@@ -39,18 +38,9 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
     },
     fieldMapping: {
         topic: {
-            TOOL_REPAIR: 'Tool Repair',
-            FLEET_EXCHANGE: 'Fleet Exchange',
-            CALIBRATION: 'Calibration',
-            THEFT_REPORT: 'Theft Report',
-            SOFTWARE_SUPPORT: 'Software Support',
-            RENTAL_REQUEST: 'Rental Request',
-            TRAINING_REQUEST: 'Training Request',
-        },
-        type: {
-            URGENT: 'Urgent',
-            STANDARD: 'Standard',
-            LOW_PRIORITY: 'Low Priority',
+            CONTACT_US: 'Contact Form',
+            REQUEST_DEVICE_MAINTENANCE: 'Device Maintenance',
+            COMPLAINT: 'Complaint',
         },
         status: {
             OPEN: 'Under consideration',
@@ -93,10 +83,8 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
                 label: 'Sort by',
                 allowMultiple: false,
                 options: [
-                    { label: 'Topic (ascending)', value: 'topic_ASC' },
-                    { label: 'Topic (descending)', value: 'topic_DESC' },
-                    { label: 'Type (ascending)', value: 'type_ASC' },
-                    { label: 'Type (descending)', value: 'type_DESC' },
+                    { label: 'Case Type (ascending)', value: 'topic_ASC' },
+                    { label: 'Case Type (descending)', value: 'topic_DESC' },
                     { label: 'Status (ascending)', value: 'status_ASC' },
                     { label: 'Status (descending)', value: 'status_DESC' },
                     { label: 'Updated (ascending)', value: 'updatedAt_ASC' },
@@ -106,42 +94,13 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
             {
                 __typename: 'FilterSelect',
                 id: 'topic',
-                label: 'Topic',
+                label: 'Case Type',
                 allowMultiple: false,
                 isLeading: false,
                 options: [
-                    { label: 'All', value: 'ALL' },
-                    { label: 'Tool Repair', value: 'TOOL_REPAIR' },
-                    { label: 'Fleet Exchange', value: 'FLEET_EXCHANGE' },
-                    { label: 'Calibration', value: 'CALIBRATION' },
-                    { label: 'Theft Report', value: 'THEFT_REPORT' },
-                    { label: 'Software Support', value: 'SOFTWARE_SUPPORT' },
-                    { label: 'Rental Request', value: 'RENTAL_REQUEST' },
-                    { label: 'Training Request', value: 'TRAINING_REQUEST' },
-                ],
-            },
-            {
-                __typename: 'FilterSelect',
-                id: 'type',
-                label: 'Case type',
-                allowMultiple: true,
-                isLeading: false,
-                options: [
-                    { label: 'Urgent', value: 'URGENT' },
-                    { label: 'Standard', value: 'STANDARD' },
-                    { label: 'Low Priority', value: 'LOW_PRIORITY' },
-                ],
-            },
-            {
-                __typename: 'FilterSelect',
-                id: 'priority',
-                label: 'Priority',
-                allowMultiple: false,
-                isLeading: false,
-                options: [
-                    { label: 'High', value: 'HIGH' },
-                    { label: 'Medium', value: 'MEDIUM' },
-                    { label: 'Low', value: 'LOW' },
+                    { label: 'Contact Form', value: 'CONTACT_US' },
+                    { label: 'Device Maintenance', value: 'REQUEST_DEVICE_MAINTENANCE' },
+                    { label: 'Complaint', value: 'COMPLAINT' },
                 ],
             },
             {
@@ -174,6 +133,7 @@ const MOCK_TICKET_LIST_BLOCK_EN: CMS.Model.TicketListBlock.TicketListBlock = {
         showMoreFilters: 'Show more filters',
         hideMoreFilters: 'Hide more filters',
         noActiveFilters: 'No active filters',
+        ticketId: 'Ticket ID',
     },
     detailsUrl: '/cases/{id}',
 };
@@ -200,8 +160,7 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
     ],
     table: {
         columns: [
-            { id: 'topic', title: 'Thema' },
-            { id: 'type', title: 'Falltyp' },
+            { id: 'topic', title: 'Falltyp' },
             { id: 'status', title: 'Status' },
             { id: 'updatedAt', title: 'Datum' },
         ],
@@ -217,19 +176,9 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
     },
     fieldMapping: {
         topic: {
-            ALL: 'Alle',
-            TOOL_REPAIR: 'Werkzeugreparatur',
-            FLEET_EXCHANGE: 'Flottenaustausch',
-            CALIBRATION: 'Kalibrierung',
-            THEFT_REPORT: 'Diebstahlmeldung',
-            SOFTWARE_SUPPORT: 'Software-Support',
-            RENTAL_REQUEST: 'Mietanfrage',
-            TRAINING_REQUEST: 'Schulungsanfrage',
-        },
-        type: {
-            URGENT: 'Dringend',
-            STANDARD: 'Standard',
-            LOW_PRIORITY: 'Niedrige Priorität',
+            CONTACT_US: 'Kontaktformular',
+            REQUEST_DEVICE_MAINTENANCE: 'Gerätewartung',
+            COMPLAINT: 'Beschwerde',
         },
         status: {
             OPEN: 'In Bearbeitung',
@@ -272,10 +221,8 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
                 label: 'Sortieren nach',
                 allowMultiple: false,
                 options: [
-                    { label: 'Thema aufsteigend', value: 'topic_ASC' },
-                    { label: 'Thema absteigend', value: 'topic_DESC' },
-                    { label: 'Typ aufsteigend', value: 'type_ASC' },
-                    { label: 'Typ absteigend', value: 'type_DESC' },
+                    { label: 'Falltyp aufsteigend', value: 'topic_ASC' },
+                    { label: 'Falltyp absteigend', value: 'topic_DESC' },
                     { label: 'Status aufsteigend', value: 'status_ASC' },
                     { label: 'Status absteigend', value: 'status_DESC' },
                     { label: 'Aktualisiert aufsteigend', value: 'updatedAt_ASC' },
@@ -285,42 +232,13 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
             {
                 __typename: 'FilterSelect',
                 id: 'topic',
-                label: 'Thema',
-                allowMultiple: false,
-                isLeading: false,
-                options: [
-                    { label: 'Alle', value: 'ALL' },
-                    { label: 'Werkzeugreparatur', value: 'TOOL_REPAIR' },
-                    { label: 'Flottenaustausch', value: 'FLEET_EXCHANGE' },
-                    { label: 'Kalibrierung', value: 'CALIBRATION' },
-                    { label: 'Diebstahlmeldung', value: 'THEFT_REPORT' },
-                    { label: 'Software-Support', value: 'SOFTWARE_SUPPORT' },
-                    { label: 'Mietanfrage', value: 'RENTAL_REQUEST' },
-                    { label: 'Schulungsanfrage', value: 'TRAINING_REQUEST' },
-                ],
-            },
-            {
-                __typename: 'FilterSelect',
-                id: 'type',
                 label: 'Falltyp',
-                allowMultiple: true,
-                isLeading: false,
-                options: [
-                    { label: 'Dringend', value: 'URGENT' },
-                    { label: 'Standard', value: 'STANDARD' },
-                    { label: 'Niedrige Priorität', value: 'LOW_PRIORITY' },
-                ],
-            },
-            {
-                __typename: 'FilterSelect',
-                id: 'priority',
-                label: 'Priorität',
                 allowMultiple: false,
                 isLeading: false,
                 options: [
-                    { label: 'Hoch', value: 'HIGH' },
-                    { label: 'Mittel', value: 'MEDIUM' },
-                    { label: 'Niedrig', value: 'LOW' },
+                    { label: 'Kontaktformular', value: 'CONTACT_US' },
+                    { label: 'Gerätewartung', value: 'REQUEST_DEVICE_MAINTENANCE' },
+                    { label: 'Beschwerde', value: 'COMPLAINT' },
                 ],
             },
             {
@@ -353,6 +271,7 @@ const MOCK_TICKET_LIST_BLOCK_DE: CMS.Model.TicketListBlock.TicketListBlock = {
         showMoreFilters: 'Mehr Filter anzeigen',
         hideMoreFilters: 'Weniger Filter anzeigen',
         noActiveFilters: 'Keine aktiven Filter',
+        ticketId: 'Fall-ID',
     },
     detailsUrl: '/faelle/{id}',
 };
@@ -380,10 +299,9 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
 
     table: {
         columns: [
-            { id: 'topic', title: 'Temat' },
-            { id: 'type', title: 'Typ zgłoszenia' },
+            { id: 'topic', title: 'Typ zgłoszenia' },
             { id: 'status', title: 'Status' },
-            { id: 'updatedAt', title: 'Data' },
+            { id: 'updatedAt', title: 'Data aktualizacji' },
         ],
         actions: {
             title: 'Akcja',
@@ -397,19 +315,9 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
     },
     fieldMapping: {
         topic: {
-            ALL: 'Wszystko',
-            TOOL_REPAIR: 'Naprawa narzędzi',
-            FLEET_EXCHANGE: 'Wymiana floty',
-            CALIBRATION: 'Kalibracja',
-            THEFT_REPORT: 'Zgłoszenie kradzieży',
-            SOFTWARE_SUPPORT: 'Wsparcie oprogramowania',
-            RENTAL_REQUEST: 'Wniosek o wynajem',
-            TRAINING_REQUEST: 'Wniosek o szkolenie',
-        },
-        type: {
-            URGENT: 'Pilne',
-            STANDARD: 'Standardowe',
-            LOW_PRIORITY: 'Niski priorytet',
+            CONTACT_US: 'Formularz kontaktowy',
+            REQUEST_DEVICE_MAINTENANCE: 'Konserwacja urządzenia',
+            COMPLAINT: 'Reklamacja',
         },
         status: {
             OPEN: 'W rozpatrzeniu',
@@ -453,10 +361,8 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
                 label: 'Sortuj według',
                 allowMultiple: false,
                 options: [
-                    { label: 'Temat rosnąco', value: 'topic_ASC' },
-                    { label: 'Temat malejąco', value: 'topic_DESC' },
-                    { label: 'Typ rosnąco', value: 'type_ASC' },
-                    { label: 'Typ malejąco', value: 'type_DESC' },
+                    { label: 'Typ zgłoszenia rosnąco', value: 'topic_ASC' },
+                    { label: 'Typ zgłoszenia malejąco', value: 'topic_DESC' },
                     { label: 'Status rosnąco', value: 'status_ASC' },
                     { label: 'Status malejąco', value: 'status_DESC' },
                     { label: 'Aktualizacja rosnąco', value: 'updatedAt_ASC' },
@@ -466,42 +372,13 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
             {
                 __typename: 'FilterSelect',
                 id: 'topic',
-                label: 'Temat',
-                allowMultiple: false,
-                isLeading: false,
-                options: [
-                    { label: 'Wszystko', value: 'ALL' },
-                    { label: 'Naprawa narzędzi', value: 'TOOL_REPAIR' },
-                    { label: 'Wymiana floty', value: 'FLEET_EXCHANGE' },
-                    { label: 'Kalibracja', value: 'CALIBRATION' },
-                    { label: 'Zgłoszenie kradzieży', value: 'THEFT_REPORT' },
-                    { label: 'Wsparcie oprogramowania', value: 'SOFTWARE_SUPPORT' },
-                    { label: 'Wniosek o wynajem', value: 'RENTAL_REQUEST' },
-                    { label: 'Wniosek o szkolenie', value: 'TRAINING_REQUEST' },
-                ],
-            },
-            {
-                __typename: 'FilterSelect',
-                id: 'type',
                 label: 'Typ zgłoszenia',
-                allowMultiple: true,
-                isLeading: false,
-                options: [
-                    { label: 'Pilne', value: 'URGENT' },
-                    { label: 'Standardowe', value: 'STANDARD' },
-                    { label: 'Niski priorytet', value: 'LOW_PRIORITY' },
-                ],
-            },
-            {
-                __typename: 'FilterSelect',
-                id: 'priority',
-                label: 'Priorytet',
                 allowMultiple: false,
                 isLeading: false,
                 options: [
-                    { label: 'Wysoki', value: 'HIGH' },
-                    { label: 'Średni', value: 'MEDIUM' },
-                    { label: 'Niski', value: 'LOW' },
+                    { label: 'Formularz kontaktowy', value: 'CONTACT_US' },
+                    { label: 'Konserwacja urządzenia', value: 'REQUEST_DEVICE_MAINTENANCE' },
+                    { label: 'Reklamacja', value: 'COMPLAINT' },
                 ],
             },
             {
@@ -533,6 +410,7 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
         clickToSelect: 'Kliknij, aby wybrać',
         showMoreFilters: 'Pokaż więcej filtrów',
         hideMoreFilters: 'Ukryj więcej filtrów',
+        ticketId: 'ID zgłoszenia',
         noActiveFilters: 'Brak aktywnych filtrów',
     },
     detailsUrl: '/zgloszenia/{id}',

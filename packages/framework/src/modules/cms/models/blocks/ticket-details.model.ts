@@ -9,7 +9,11 @@ export class TicketDetailsBlock extends Block.Block {
     properties?: {
         [key: string]: string;
     };
-    fieldMapping!: Mapping.Mapping<Ticket>;
+    fieldMapping!: Mapping.Mapping<Ticket> & {
+        [key: string]: {
+            [key: string]: string;
+        };
+    };
     labels!: {
         showMore: string;
         showLess: string;

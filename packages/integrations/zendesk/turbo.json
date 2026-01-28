@@ -3,11 +3,65 @@
     "tasks": {
         "dev": {
             "dependsOn": ["@o2s/utils.logger#build", "@o2s/framework#build"],
-            "env": ["ZENDESK_API_URL", "ZENDESK_API_TOKEN", "ZENDESK_TOPIC_FIELD_ID"]
+            "env": [
+                "ZENDESK_API_URL",
+                "ZENDESK_API_TOKEN",
+                "ZENDESK_CONTACT_FORM_ID",
+                "ZENDESK_COMPLAINT_FORM_ID",
+                "ZENDESK_REQUEST_DEVICE_MAINTENANCE_FORM_ID",
+                "ZENDESK_TOPIC_FIELD_ID",
+                "ZENDESK_DEVICE_NAME_FIELD_ID",
+                "ZENDESK_SERIAL_NUMBER_FIELD_ID",
+                "ZENDESK_MAINTENANCE_TYPE_FIELD_ID",
+                "ZENDESK_MAINTENANCE_PREFERRED_DATE_FIELD_ID",
+                "ZENDESK_ADDITIONAL_NOTES_FIELD_ID",
+                "ZENDESK_CONTACT_FIELD_ID",
+                "ZENDESK_ISSUE_DATE_FIELD_ID",
+                "ZENDESK_COMPANY_NAME_FIELD_ID",
+                "ZENDESK_FIRST_NAME_FIELD_ID",
+                "ZENDESK_LAST_NAME_FIELD_ID",
+                "ZENDESK_EMAIL_FIELD_ID",
+                "ZENDESK_PHONE_FIELD_ID",
+                "ZENDESK_INVOICE_NUMBER_FIELD_ID",
+                "ZENDESK_ADDRESS_FIELD_ID",
+                "ZENDESK_INQUIRY_TYPE_FIELD_ID",
+                "ZENDESK_PRODUCT_CATEGORY_FIELD_ID",
+                "ZENDESK_PREFERRED_CONTACT_METHOD_FIELD_ID",
+                "ZENDESK_TERMS_ACCEPTANCE_FIELD_ID",
+                "ZENDESK_NEWSLETTER_CONSENT_FIELD_ID",
+                "ZENDESK_MARKETING_CONSENT_FIELD_ID"
+            ]
         },
         "build": {
             "dependsOn": ["@o2s/utils.logger#build", "@o2s/framework#build"],
-            "env": ["ZENDESK_API_URL", "ZENDESK_API_TOKEN", "ZENDESK_TOPIC_FIELD_ID"]
+            "env": [
+                "ZENDESK_API_URL",
+                "ZENDESK_API_TOKEN",
+                "ZENDESK_CONTACT_FORM_ID",
+                "ZENDESK_COMPLAINT_FORM_ID",
+                "ZENDESK_REQUEST_DEVICE_MAINTENANCE_FORM_ID",
+                "ZENDESK_TOPIC_FIELD_ID",
+                "ZENDESK_DEVICE_NAME_FIELD_ID",
+                "ZENDESK_SERIAL_NUMBER_FIELD_ID",
+                "ZENDESK_MAINTENANCE_TYPE_FIELD_ID",
+                "ZENDESK_MAINTENANCE_PREFERRED_DATE_FIELD_ID",
+                "ZENDESK_ADDITIONAL_NOTES_FIELD_ID",
+                "ZENDESK_CONTACT_FIELD_ID",
+                "ZENDESK_ISSUE_DATE_FIELD_ID",
+                "ZENDESK_COMPANY_NAME_FIELD_ID",
+                "ZENDESK_FIRST_NAME_FIELD_ID",
+                "ZENDESK_LAST_NAME_FIELD_ID",
+                "ZENDESK_EMAIL_FIELD_ID",
+                "ZENDESK_PHONE_FIELD_ID",
+                "ZENDESK_INVOICE_NUMBER_FIELD_ID",
+                "ZENDESK_ADDRESS_FIELD_ID",
+                "ZENDESK_INQUIRY_TYPE_FIELD_ID",
+                "ZENDESK_PRODUCT_CATEGORY_FIELD_ID",
+                "ZENDESK_PREFERRED_CONTACT_METHOD_FIELD_ID",
+                "ZENDESK_TERMS_ACCEPTANCE_FIELD_ID",
+                "ZENDESK_NEWSLETTER_CONSENT_FIELD_ID",
+                "ZENDESK_MARKETING_CONSENT_FIELD_ID"
+            ]
         }
     }
 }

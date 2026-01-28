@@ -9,8 +9,7 @@ const MOCK_TICKET_1_EN: Tickets.Model.Ticket = {
     id: 'EL-465-920-678',
     createdAt: dateToday.toISOString(),
     updatedAt: dateToday.toISOString(),
-    topic: 'TOOL_REPAIR',
-    type: 'URGENT',
+    topic: 'REQUEST_DEVICE_MAINTENANCE',
     status: 'OPEN',
     attachments: [
         {
@@ -64,8 +63,7 @@ const MOCK_TICKET_2_EN: Tickets.Model.Ticket = {
     id: 'EL-465-920-677',
     createdAt: dateYesterday.toISOString(),
     updatedAt: dateYesterday.toISOString(),
-    topic: 'FLEET_EXCHANGE',
-    type: 'STANDARD',
+    topic: 'CONTACT_US',
     status: 'CLOSED',
     properties: [
         {
@@ -120,8 +118,7 @@ const MOCK_TICKET_3_EN: Tickets.Model.Ticket = {
     id: 'EL-465-920-676',
     createdAt: '2024-12-12T10:00:00',
     updatedAt: '2024-12-14T16:00:00',
-    topic: 'CALIBRATION',
-    type: 'STANDARD',
+    topic: 'COMPLAINT',
     status: 'IN_PROGRESS',
     properties: [
         {
@@ -184,8 +181,7 @@ const MOCK_TICKET_4_EN: Tickets.Model.Ticket = {
     id: 'EL-465-920-675',
     createdAt: '2024-12-10T10:00:00',
     updatedAt: '2024-12-12T16:00:00',
-    topic: 'THEFT_REPORT',
-    type: 'URGENT',
+    topic: 'CONTACT_US',
     status: 'OPEN',
     properties: [
         {
@@ -215,8 +211,7 @@ const MOCK_TICKET_5_EN: Tickets.Model.Ticket = {
     id: 'EL-465-920-674',
     createdAt: '2024-12-10T10:00:00',
     updatedAt: '2024-12-12T16:00:00',
-    topic: 'SOFTWARE_SUPPORT',
-    type: 'STANDARD',
+    topic: 'COMPLAINT',
     status: 'OPEN',
     properties: [
         {
@@ -280,8 +275,7 @@ const MOCK_TICKET_1_PL: Tickets.Model.Ticket = {
     id: 'EL-465-920-678',
     createdAt: dateToday.toISOString(),
     updatedAt: dateToday.toISOString(),
-    topic: 'TOOL_REPAIR',
-    type: 'URGENT',
+    topic: 'REQUEST_DEVICE_MAINTENANCE',
     status: 'OPEN',
     attachments: [
         {
@@ -335,8 +329,7 @@ const MOCK_TICKET_2_PL: Tickets.Model.Ticket = {
     id: 'EL-465-920-677',
     createdAt: dateYesterday.toISOString(),
     updatedAt: dateYesterday.toISOString(),
-    topic: 'FLEET_EXCHANGE',
-    type: 'STANDARD',
+    topic: 'CONTACT_US',
     status: 'CLOSED',
     properties: [
         {
@@ -398,8 +391,7 @@ const MOCK_TICKET_3_PL: Tickets.Model.Ticket = {
     id: 'EL-465-920-676',
     createdAt: '2024-12-12T10:00:00',
     updatedAt: '2024-12-14T16:00:00',
-    topic: 'CALIBRATION',
-    type: 'STANDARD',
+    topic: 'COMPLAINT',
     status: 'IN_PROGRESS',
     properties: [
         {
@@ -462,8 +454,7 @@ const MOCK_TICKET_4_PL: Tickets.Model.Ticket = {
     id: 'EL-465-920-675',
     createdAt: '2024-12-10T10:00:00',
     updatedAt: '2024-12-12T16:00:00',
-    topic: 'THEFT_REPORT',
-    type: 'URGENT',
+    topic: 'CONTACT_US',
     status: 'OPEN',
     properties: [
         {
@@ -493,8 +484,7 @@ const MOCK_TICKET_5_PL: Tickets.Model.Ticket = {
     id: 'EL-465-920-674',
     createdAt: '2024-12-10T10:00:00',
     updatedAt: '2024-12-12T16:00:00',
-    topic: 'SOFTWARE_SUPPORT',
-    type: 'STANDARD',
+    topic: 'COMPLAINT',
     status: 'OPEN',
     properties: [
         {
@@ -558,8 +548,7 @@ const MOCK_TICKET_1_DE: Tickets.Model.Ticket = {
     id: 'EL-465-920-678',
     createdAt: dateToday.toISOString(),
     updatedAt: dateToday.toISOString(),
-    topic: 'TOOL_REPAIR',
-    type: 'URGENT',
+    topic: 'REQUEST_DEVICE_MAINTENANCE',
     status: 'OPEN',
     attachments: [
         {
@@ -613,8 +602,8 @@ const MOCK_TICKET_2_DE: Tickets.Model.Ticket = {
     id: 'EL-465-920-677',
     createdAt: dateYesterday.toISOString(),
     updatedAt: dateYesterday.toISOString(),
-    topic: 'FLEET_EXCHANGE',
-    type: 'STANDARD',
+    topic: 'CONTACT_US',
+    type: 'NORMAL',
     status: 'CLOSED',
     properties: [
         {
@@ -676,8 +665,7 @@ const MOCK_TICKET_3_DE: Tickets.Model.Ticket = {
     id: 'EL-465-920-676',
     createdAt: '2024-12-12T10:00:00',
     updatedAt: '2024-12-14T16:00:00',
-    topic: 'CALIBRATION',
-    type: 'STANDARD',
+    topic: 'COMPLAINT',
     status: 'IN_PROGRESS',
     properties: [
         {
@@ -740,7 +728,7 @@ const MOCK_TICKET_4_DE: Tickets.Model.Ticket = {
     id: 'EL-465-920-675',
     createdAt: '2024-12-10T10:00:00',
     updatedAt: '2024-12-12T16:00:00',
-    topic: 'THEFT_REPORT',
+    topic: 'CONTACT_US',
     type: 'URGENT',
     status: 'OPEN',
     properties: [
@@ -771,8 +759,7 @@ const MOCK_TICKET_5_DE: Tickets.Model.Ticket = {
     id: 'EL-465-920-674',
     createdAt: '2024-12-10T10:00:00',
     updatedAt: '2024-12-12T16:00:00',
-    topic: 'SOFTWARE_SUPPORT',
-    type: 'STANDARD',
+    topic: 'COMPLAINT',
     status: 'OPEN',
     properties: [
         {
@@ -834,24 +821,16 @@ Lassen Sie uns wissen, wenn Sie weitere Unterstützung benötigen.
 
 const generateRandomTicketsPL = (): Tickets.Model.Ticket[] => {
     return Array.from({ length: 100 }, (_, index) => {
-        const ticketType = ['URGENT', 'STANDARD', 'LOW_PRIORITY'][Math.floor(Math.random() * 3)] as string;
         const status = ['OPEN', 'CLOSED', 'IN_PROGRESS'][Math.floor(Math.random() * 3)] as Tickets.Model.TicketStatus;
-        const topic = [
-            'TOOL_REPAIR',
-            'FLEET_EXCHANGE',
-            'CALIBRATION',
-            'THEFT_REPORT',
-            'SOFTWARE_SUPPORT',
-            'RENTAL_REQUEST',
-            'TRAINING_REQUEST',
-        ][Math.floor(Math.random() * 7)] as string;
+        const topic = ['CONTACT_US', 'REQUEST_DEVICE_MAINTENANCE', 'COMPLAINT'][
+            Math.floor(Math.random() * 3)
+        ] as string;
 
         return {
             id: `EL-465-920-${573 - index}`,
             createdAt: new Date(2024, 11, Math.floor(Math.random() * 31) + 1).toISOString(),
             updatedAt: new Date(2024, 11, Math.floor(Math.random() * 31) + 1).toISOString(),
             topic,
-            type: ticketType,
             status,
             properties: [
                 {
@@ -912,24 +891,16 @@ const generateRandomTicketsPL = (): Tickets.Model.Ticket[] => {
 
 const generateRandomTicketsDE = (): Tickets.Model.Ticket[] => {
     return Array.from({ length: 100 }, (_, index) => {
-        const ticketType = ['URGENT', 'STANDARD', 'LOW_PRIORITY'][Math.floor(Math.random() * 3)] as string;
         const status = ['OPEN', 'CLOSED', 'IN_PROGRESS'][Math.floor(Math.random() * 3)] as Tickets.Model.TicketStatus;
-        const topic = [
-            'TOOL_REPAIR',
-            'FLEET_EXCHANGE',
-            'CALIBRATION',
-            'THEFT_REPORT',
-            'SOFTWARE_SUPPORT',
-            'RENTAL_REQUEST',
-            'TRAINING_REQUEST',
-        ][Math.floor(Math.random() * 7)] as string;
+        const topic = ['CONTACT_US', 'REQUEST_DEVICE_MAINTENANCE', 'COMPLAINT'][
+            Math.floor(Math.random() * 3)
+        ] as string;
 
         return {
             id: `EL-465-920-${573 - index}`,
             createdAt: new Date(2024, 11, Math.floor(Math.random() * 31) + 1).toISOString(),
             updatedAt: new Date(2024, 11, Math.floor(Math.random() * 31) + 1).toISOString(),
             topic,
-            type: ticketType,
             status,
             properties: [
                 {
@@ -990,24 +961,16 @@ const generateRandomTicketsDE = (): Tickets.Model.Ticket[] => {
 
 const generateRandomTicketsEN = (): Tickets.Model.Ticket[] => {
     return Array.from({ length: 100 }, (_, index) => {
-        const ticketType = ['URGENT', 'STANDARD', 'LOW_PRIORITY'][Math.floor(Math.random() * 3)] as string;
         const status = ['OPEN', 'CLOSED', 'IN_PROGRESS'][Math.floor(Math.random() * 3)] as Tickets.Model.TicketStatus;
-        const topic = [
-            'TOOL_REPAIR',
-            'FLEET_EXCHANGE',
-            'CALIBRATION',
-            'THEFT_REPORT',
-            'SOFTWARE_SUPPORT',
-            'RENTAL_REQUEST',
-            'TRAINING_REQUEST',
-        ][Math.floor(Math.random() * 7)] as string;
+        const topic = ['CONTACT_US', 'REQUEST_DEVICE_MAINTENANCE', 'COMPLAINT'][
+            Math.floor(Math.random() * 3)
+        ] as string;
 
         return {
             id: `EL-465-920-${573 - index}`,
             createdAt: new Date(2024, 11, Math.floor(Math.random() * 31) + 1).toISOString(),
             updatedAt: new Date(2024, 11, Math.floor(Math.random() * 31) + 1).toISOString(),
             topic,
-            type: ticketType,
             status,
             properties: [
                 {

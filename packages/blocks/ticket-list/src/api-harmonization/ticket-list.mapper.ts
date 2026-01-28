@@ -44,10 +44,12 @@ export const mapTicket = (
             label: cms.fieldMapping.topic?.[ticket.topic] || ticket.topic,
             value: ticket.topic,
         },
-        type: {
-            label: cms.fieldMapping.type?.[ticket.type] || ticket.type,
-            value: ticket.type,
-        },
+        type: ticket.type
+            ? {
+                  label: cms.fieldMapping.type?.[ticket.type] || ticket.type,
+                  value: ticket.type,
+              }
+            : undefined,
         status: {
             label: cms.fieldMapping.status?.[ticket.status] || ticket.status,
             value: ticket.status,

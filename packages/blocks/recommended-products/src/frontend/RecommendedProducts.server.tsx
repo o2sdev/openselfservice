@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import type { Model } from '../api-harmonization/recommended-products.client';
 import { sdk } from '../sdk';
 
 import { RecommendedProductsProps } from './RecommendedProducts.types';
@@ -15,26 +16,27 @@ export const RecommendedProducts: React.FC<RecommendedProductsProps> = async ({
     locale,
     routing,
 }) => {
+    let data: Model.RecommendedProductsBlock;
     try {
-        const data = await sdk.blocks.getRecommendedProducts(
+        data = await sdk.blocks.getRecommendedProducts(
             { id },
             {
                 excludeProductId,
             },
             { 'x-locale': locale },
         );
-
-        return (
-            <RecommendedProductsDynamic
-                {...data}
-                id={id}
-                excludeProductId={excludeProductId}
-                locale={locale}
-                routing={routing}
-            />
-        );
     } catch (error) {
         console.error('Error fetching RecommendedProducts block', error);
         return null;
     }
+
+    return (
+        <RecommendedProductsDynamic
+            {...data}
+            id={id}
+            excludeProductId={excludeProductId}
+            locale={locale}
+            routing={routing}
+        />
+    );
 };

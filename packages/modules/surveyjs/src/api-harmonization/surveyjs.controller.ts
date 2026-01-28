@@ -18,7 +18,7 @@ export class SurveyjsController {
     }
 
     @Post()
-    submitSurvey(@Body() payload: SurveyJsSubmitPayload, @Headers() headers: ApiModels.Headers.AppHeaders) {
-        return this.surveyjsService.submitSurvey(payload, headers['authorization']);
+    submitSurvey(@Body() body: SurveyJsSubmitPayload, @Headers() headers: ApiModels.Headers.AppHeaders) {
+        return this.surveyjsService.submitSurvey(body, headers['authorization']);
     }
 }

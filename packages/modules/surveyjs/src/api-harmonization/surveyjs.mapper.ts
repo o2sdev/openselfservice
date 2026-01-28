@@ -1,3 +1,5 @@
+import { Tickets } from '@o2s/framework/modules';
+
 import { Page, Panelbase, SurveyJSLibraryJsonSchema, SurveyJs, SurveyJsRequest, SurveyResult } from './surveyjs.model';
 
 export const mapSurveyJsRequest = (
@@ -74,5 +76,48 @@ const mapData = (element: Panelbase): Panelbase => {
         choicesLazyLoadPageSize: 5,
         renderAs: `${element.type}-o2s`,
         itemComponent: getItemComponent(element.type as string, element.itemComponent),
+    };
+};
+
+export const mapSurveyToTicket = (surveyPayload: SurveyResult): Tickets.Request.PostTicketBody => {
+    const { title, description, ticketFormId, attachments, ...fields } = surveyPayload;
+
+    // Ensure type is a number (Survey.js may send it as string)
+    const ticketFormIdNum = typeof ticketFormId === 'string' ? Number(ticketFormId) : (ticketFormId as number);
+    if (!Number.isFinite(ticketFormIdNum)) {
+        throw new Error('Invalid ticketFormId: must be a valid number');
+    }
+
+    // Map attachments from Survey.js format to Tickets format
+    const mappedAttachments = attachments
+        ? (Array.isArray(attachments) ? attachments : [attachments])
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              .filter((file: any) => {
+                  // Guard against invalid attachments to prevent runtime errors
+                  return file && typeof file.content === 'string' && file.name;
+              })
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              .map((file: any) => {
+                  // Convert base64 string to Buffer
+                  // Survey.js may include data URI prefix (data:image/png;base64,...)
+                  const base64Data = file.content.includes(',') ? file.content.split(',')[1] : file.content;
+
+                  return {
+                      filename: file.name,
+                      content: Buffer.from(base64Data, 'base64'),
+                      contentType: file.type, // MIME type
+                  };
+              })
+        : undefined;
+
+    // Convert empty array to undefined for cleaner API
+    const finalAttachments = mappedAttachments && mappedAttachments.length > 0 ? mappedAttachments : undefined;
+
+    return {
+        title: title as string | undefined,
+        description: description as string | undefined,
+        type: ticketFormIdNum,
+        attachments: finalAttachments,
+        fields,
     };
 };

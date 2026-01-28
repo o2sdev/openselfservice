@@ -24,7 +24,7 @@ export class Ticket {
         title: string;
         label: string;
     };
-    type!: {
+    type?: {
         value: Tickets.Model.Ticket['type'];
         title: string;
         label: string;

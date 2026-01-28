@@ -23,7 +23,7 @@ export class Ticket {
     topic!: {
         value: Tickets.Model.Ticket['topic'];
     };
-    type!: {
+    type?: {
         value: Tickets.Model.Ticket['type'];
     };
     status!: {

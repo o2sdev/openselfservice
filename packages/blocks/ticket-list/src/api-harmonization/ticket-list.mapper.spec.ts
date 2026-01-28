@@ -85,8 +85,8 @@ describe('ticket-list.mapper', () => {
 
             expect(result.topic.label).toBe('Network Problem');
             expect(result.topic.value).toBe('NETWORK');
-            expect(result.type.label).toBe('Incident Report');
-            expect(result.type.value).toBe('INCIDENT');
+            expect(result.type?.label).toBe('Incident Report');
+            expect(result.type?.value).toBe('INCIDENT');
             expect(result.status.label).toBe('Open Ticket');
             expect(result.status.value).toBe('OPEN');
         });
@@ -104,8 +104,19 @@ describe('ticket-list.mapper', () => {
             const result = mapTicket(ticket, cms, 'en', 'UTC');
 
             expect(result.topic.label).toBe('UNKNOWN_TOPIC');
-            expect(result.type.label).toBe('UNKNOWN_TYPE');
+            expect(result.type?.label).toBe('UNKNOWN_TYPE');
             expect(result.status.label).toBe('UNKNOWN_STATUS');
+        });
+
+        it('should handle undefined type', () => {
+            const ticket = createMockTicket({ type: undefined });
+            const cms = createMockCms();
+
+            const result = mapTicket(ticket, cms, 'en', 'UTC');
+
+            expect(result.type).toBeUndefined();
+            expect(result.topic).toBeDefined();
+            expect(result.status).toBeDefined();
         });
     });
 

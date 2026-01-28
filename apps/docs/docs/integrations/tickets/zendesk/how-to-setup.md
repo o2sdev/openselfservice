@@ -64,11 +64,34 @@ After configuring the integration, you need to set up environment variables that
 
 Configure the following environment variables in your API Harmonization server:
 
-| name                   | type   | description                                                              | required | default |
-| ---------------------- | ------ | ------------------------------------------------------------------------ | -------- | ------- |
-| ZENDESK_API_URL        | string | Your Zendesk API URL (e.g., `https://your-subdomain.zendesk.com/api/v2`) | yes      | -       |
-| ZENDESK_API_TOKEN      | string | Base64-encoded authentication token                                      | yes      | -       |
-| ZENDESK_TOPIC_FIELD_ID | number | ID of the custom field that contains the ticket topic (optional)         | no       | -       |
+| name                                        | type   | description                                                              | required | default |
+| ------------------------------------------- | ------ | ------------------------------------------------------------------------ | -------- | ------- |
+| ZENDESK_API_URL                             | string | Your Zendesk API URL (e.g., `https://your-subdomain.zendesk.com/api/v2`) | yes      | -       |
+| ZENDESK_API_TOKEN                           | string | Base64-encoded authentication token                                      | yes      | -       |
+| ZENDESK_TOPIC_FIELD_ID                      | number | Custom field ID for ticket topic                                         | yes      | -       |
+| ZENDESK_CONTACT_FORM_ID                     | number | Ticket form ID for contact inquiries                                     | yes     | -       |
+| ZENDESK_COMPLAINT_FORM_ID                   | number | Ticket form ID for complaints                                            | yes     | -       |
+| ZENDESK_REQUEST_DEVICE_MAINTENANCE_FORM_ID  | number | Ticket form ID for device maintenance requests                           | yes     | -       |
+| ZENDESK_DEVICE_NAME_FIELD_ID                | number | Custom field ID for device/machine name                                  | yes      | -       |
+| ZENDESK_SERIAL_NUMBER_FIELD_ID              | number | Custom field ID for serial number                                        | yes      | -       |
+| ZENDESK_MAINTENANCE_TYPE_FIELD_ID           | number | Custom field ID for maintenance type                                     | yes      | -       |
+| ZENDESK_MAINTENANCE_PREFERRED_DATE_FIELD_ID | number | Custom field ID for preferred maintenance date                           | yes      | -       |
+| ZENDESK_ADDITIONAL_NOTES_FIELD_ID           | number | Custom field ID for additional notes                                     | yes      | -       |
+| ZENDESK_CONTACT_FIELD_ID                    | number | Custom field ID for contact information                                  | yes      | -       |
+| ZENDESK_ISSUE_DATE_FIELD_ID                 | number | Custom field ID for issue date                                           | yes      | -       |
+| ZENDESK_COMPANY_NAME_FIELD_ID               | number | Custom field ID for company/organization name                            | yes      | -       |
+| ZENDESK_FIRST_NAME_FIELD_ID                 | number | Custom field ID for first name                                           | yes      | -       |
+| ZENDESK_LAST_NAME_FIELD_ID                  | number | Custom field ID for last name                                            | yes      | -       |
+| ZENDESK_EMAIL_FIELD_ID                      | number | Custom field ID for email address                                        | yes      | -       |
+| ZENDESK_PHONE_FIELD_ID                      | number | Custom field ID for phone number                                         | yes      | -       |
+| ZENDESK_INVOICE_NUMBER_FIELD_ID             | number | Custom field ID for invoice number                                       | yes      | -       |
+| ZENDESK_ADDRESS_FIELD_ID                    | number | Custom field ID for address                                              | yes      | -       |
+| ZENDESK_INQUIRY_TYPE_FIELD_ID               | number | Custom field ID for inquiry type                                         | yes      | -       |
+| ZENDESK_PRODUCT_CATEGORY_FIELD_ID           | number | Custom field ID for product category                                     | yes      | -       |
+| ZENDESK_PREFERRED_CONTACT_METHOD_FIELD_ID   | number | Custom field ID for preferred contact method                             | yes      | -       |
+| ZENDESK_TERMS_ACCEPTANCE_FIELD_ID           | number | Custom field ID for terms acceptance                                     | yes      | -       |
+| ZENDESK_NEWSLETTER_CONSENT_FIELD_ID         | number | Custom field ID for newsletter consent                                   | yes      | -       |
+| ZENDESK_MARKETING_CONSENT_FIELD_ID          | number | Custom field ID for marketing consent                                    | yes      | -       |
 
 **Important notes:**
 
@@ -95,7 +118,34 @@ Configure the following environment variables in your API Harmonization server:
 ```env
 ZENDESK_API_URL=https://your-subdomain.zendesk.com/api/v2
 ZENDESK_API_TOKEN=base64_encoded_token_here
+
+# Form IDs
+ZENDESK_CONTACT_FORM_ID=789012
+ZENDESK_COMPLAINT_FORM_ID=345678
+ZENDESK_REQUEST_DEVICE_MAINTENANCE_FORM_ID=901234
+
+# Custom field mappings for forms
 ZENDESK_TOPIC_FIELD_ID=123456
+ZENDESK_DEVICE_NAME_FIELD_ID=111111
+ZENDESK_SERIAL_NUMBER_FIELD_ID=222222
+ZENDESK_MAINTENANCE_TYPE_FIELD_ID=333333
+ZENDESK_MAINTENANCE_PREFERRED_DATE_FIELD_ID=444444
+ZENDESK_ADDITIONAL_NOTES_FIELD_ID=555555
+ZENDESK_CONTACT_FIELD_ID=666666
+ZENDESK_ISSUE_DATE_FIELD_ID=777777
+ZENDESK_COMPANY_NAME_FIELD_ID=888888
+ZENDESK_FIRST_NAME_FIELD_ID=999999
+ZENDESK_LAST_NAME_FIELD_ID=101010
+ZENDESK_EMAIL_FIELD_ID=111111
+ZENDESK_PHONE_FIELD_ID=121212
+ZENDESK_INVOICE_NUMBER_FIELD_ID=131313
+ZENDESK_ADDRESS_FIELD_ID=141414
+ZENDESK_INQUIRY_TYPE_FIELD_ID=151515
+ZENDESK_PRODUCT_CATEGORY_FIELD_ID=161616
+ZENDESK_PREFERRED_CONTACT_METHOD_FIELD_ID=171717
+ZENDESK_TERMS_ACCEPTANCE_FIELD_ID=181818
+ZENDESK_NEWSLETTER_CONSENT_FIELD_ID=191919
+ZENDESK_MARKETING_CONSENT_FIELD_ID=202020
 ```
 
 Make sure to set these variables in your environment configuration file (e.g., `.env`) or your deployment platform's environment variable settings.

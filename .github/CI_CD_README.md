@@ -11,6 +11,9 @@ graph TD
     A[PR Opened/Synchronized] --> B[skip-duplicate-check]
     B --> C[changed-packages]
     B --> D[build]
+    C --> O{Requires Changeset?}
+    O -->|Yes| P[check-changeset]
+    O -->|No| I[End]
     C --> E{docs package changed?}
     C --> L{stories changed?}
     D --> F[lint]
@@ -18,7 +21,7 @@ graph TD
     F --> H[deploy-docs-preview]
     G --> H
     E -->|Yes| H
-    E -->|No| I[End]
+    E -->|No| I
     H --> J[Prepare Environment]
     J --> K[Deploy Docs to Vercel Preview]
     
@@ -162,6 +165,7 @@ Runs code quality checks on PRs and deploys preview environments.
 
 - `skip-duplicate-check`: Prevents duplicate workflow runs
 - `changed-packages`: Determines which packages/stories changed
+- `check-changeset`: Checks if a changeset exists when required packages are modified
 - `build`: Builds the project
 - `lint`: Lints the code
 - `test`: Runs tests
@@ -205,6 +209,7 @@ Determines which packages have changed using Turborepo and detects Storybook cha
 
 - `package_changed`: JSON string containing changed packages information
 - `stories_changed`: `true` if any `*.stories.tsx` or `.storybook/` files changed
+- `requires_changeset`: `true` if changes require a changeset (framework/integrations/modules/blocks)
 
 ### `deploy-vercel`
 

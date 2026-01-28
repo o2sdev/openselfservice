@@ -36,9 +36,11 @@ export const mapTicket = (
         topic: {
             value: ticket.topic,
         },
-        type: {
-            value: ticket.type,
-        },
+        type: ticket.type
+            ? {
+                  value: ticket.type,
+              }
+            : undefined,
         status: {
             value: ticket.status,
         },

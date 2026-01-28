@@ -24,6 +24,7 @@ export class TicketListBlock extends Block.Block<Meta> {
         showMoreFilters?: string;
         hideMoreFilters?: string;
         noActiveFilters?: string;
+        ticketId?: string;
     };
     detailsUrl!: string;
     forms?: Link[];
@@ -56,6 +57,7 @@ export class Meta {
         showMoreFilters?: string;
         hideMoreFilters?: string;
         noActiveFilters?: string;
+        ticketId?: string;
     };
     detailsUrl!: string;
 }

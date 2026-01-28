@@ -22,6 +22,9 @@ outputs:
     stories_changed:
         description: 'True if any storybook files or config changed'
         value: ${{ steps.storybook.outputs.stories_changed }}
+    requires_changeset:
+        description: 'True if changes require a changeset (framework/integrations/modules/blocks)'
+        value: ${{ steps.changeset-required.outputs.requires_changeset }}
 
 runs:
     using: 'composite'
@@ -68,4 +71,23 @@ runs:
               else
                   echo "stories_changed=false" >> $GITHUB_OUTPUT
                   echo "No storybook changes detected."
+              fi
+
+        - name: Determine if changeset is required
+          id: changeset-required
+          shell: bash
+          env:
+              TURBO_REF_FILTER: ${{ inputs.event-name == 'pull_request' && inputs.base-sha || 'HEAD^' }}
+          run: |
+              # Check if changes involve framework, integrations, modules, or blocks
+              CHANGESET_REQUIRED_FILES=$(git diff --name-only $TURBO_REF_FILTER | grep -E "^packages/(framework|integrations|modules|blocks)/" || true)
+
+              if [ -n "$CHANGESET_REQUIRED_FILES" ]; then
+                  echo "requires_changeset=true" >> $GITHUB_OUTPUT
+                  echo "### Changes requiring changeset detected ###"
+                  echo "$CHANGESET_REQUIRED_FILES"
+                  echo "############################################"
+              else
+                  echo "requires_changeset=false" >> $GITHUB_OUTPUT
+                  echo "No changes requiring changeset detected."
               fi

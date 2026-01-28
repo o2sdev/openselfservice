@@ -5,7 +5,7 @@ export class Ticket {
     createdAt!: string;
     updatedAt!: string;
     topic!: string;
-    type!: string;
+    type?: string;
     status!: TicketStatus;
     properties!: TicketProperty[];
     attachments?: TicketAttachment[];

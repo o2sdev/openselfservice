@@ -43,7 +43,7 @@ First, create a survey entry in your CMS (e.g., Strapi) with the following requi
 - **surveyId** - SurveyJS survey ID from your SurveyJS service
 - **postId** - SurveyJS post ID for submissions
 - **surveyType** - Type of survey (typically `"survey"`)
-- **submitDestination** - Array of destinations (e.g., `["surveyjs"]`)
+- **submitDestination** - Array of destinations: `["surveyjs"]` for SurveyJS backend, `["tickets"]` for ticket system
 - **requiredRoles** - Array of required roles (can be empty `[]` for public surveys)
 
 ### Step 3: Add block to page in CMS
@@ -67,6 +67,8 @@ The block automatically handles everything:
 - Supports localization
 
 No frontend code changes are needed - the form will be automatically rendered on the page.
+
+**Ticket submission:** To submit surveys as tickets, set `submitDestination: ["tickets"]` and ensure your survey includes `description` (string) and `ticketFormId` (number) fields.
 
 ## Direct component usage (advanced)
 
