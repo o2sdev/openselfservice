@@ -69,7 +69,7 @@
         "markdown-to-jsx": "^9.6.1",
         "react-day-picker": "^9.13.0",
         "react-indiana-drag-scroll": "^2.2.1",
-        "recharts": "^3.6.0",
+        "recharts": "^3.7.0",
         "swiper": "^12.0.3",
         "tailwind-merge": "^3.4.0",
         "tailwindcss-animate": "^1.0.7",
