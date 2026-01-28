@@ -303,7 +303,7 @@ const MOCK_TICKET_LIST_BLOCK_PL: CMS.Model.TicketListBlock.TicketListBlock = {
         columns: [
             { id: 'topic', title: 'Typ zgłoszenia' },
             { id: 'status', title: 'Status' },
-            { id: 'updatedAt', title: 'Data utworzenia' },
+            { id: 'updatedAt', title: 'Data aktualizacji' },
         ],
         actions: {
             title: 'Akcja',
