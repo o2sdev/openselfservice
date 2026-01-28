@@ -19,7 +19,7 @@ import {
 } from '@/generated/zendesk';
 import { client } from '@/generated/zendesk/client.gen';
 
-import { ZendeskFieldMapper } from './zendesk-field.mapper';
+import { toCustomFields } from './zendesk-field.mapper';
 import { mapTicketToModel } from './zendesk-ticket.mapper';
 
 type ZendeskTicket = TicketObject;
@@ -231,7 +231,22 @@ export class ZendeskTicketService extends Tickets.Service {
                                 };
 
                                 // Map fields to Zendesk custom fields format using field mapper
-                                const customFields = ZendeskFieldMapper.toCustomFields(fieldsWithTopic);
+                                const customFields = toCustomFields(fieldsWithTopic);
+
+                                // Validate that topic custom field was successfully mapped
+                                // This ensures ZENDESK_TOPIC_FIELD_ID is configured and prevents creating tickets
+                                // that cannot be read back (mapTicketToModel requires topic field)
+                                const topicFieldId = process.env.ZENDESK_TOPIC_FIELD_ID
+                                    ? Number(process.env.ZENDESK_TOPIC_FIELD_ID)
+                                    : undefined;
+                                if (!topicFieldId || !customFields.some((f) => f.id === topicFieldId)) {
+                                    return throwError(
+                                        () =>
+                                            new InternalServerErrorException(
+                                                'ZENDESK_TOPIC_FIELD_ID is required to map topic.',
+                                            ),
+                                    );
+                                }
 
                                 return from(
                                     createTicket({
@@ -380,9 +395,13 @@ export class ZendeskTicketService extends Tickets.Service {
                 const matchedUser = users.find((u) => u.email?.toLowerCase() === normalizedEmail);
                 return matchedUser;
             }),
-            catchError(() => {
-                // If search fails, return undefined (ticket will be created without requester/submitter ids)
-                return of(undefined);
+            catchError((error) => {
+                // Treat 404 as "user not found" (return undefined so ticket is created without requester/submitter ids)
+                if (error?.status === 404 || error?.message?.includes('404')) {
+                    return of(undefined);
+                }
+                // Propagate other errors (network, auth, rate-limit, etc.)
+                return throwError(() => new Error(`Failed to search users: ${error.message || error}`));
             }),
         );
     }

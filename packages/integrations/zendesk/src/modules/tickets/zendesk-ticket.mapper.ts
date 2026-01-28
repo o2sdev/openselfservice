@@ -2,7 +2,7 @@ import { Tickets } from '@o2s/framework/modules';
 
 import { type TicketCommentObject, type TicketObject, type UserObject } from '@/generated/zendesk';
 
-import { ZendeskFieldMapper } from './zendesk-field.mapper';
+import { getFieldKeyById } from './zendesk-field.mapper';
 
 type ZendeskTicket = TicketObject;
 
@@ -52,9 +52,11 @@ export function mapTicketToModel(
     if (ticket.custom_fields) {
         ticket.custom_fields.forEach((field) => {
             if (field.value !== null && field.value !== undefined) {
-                const fieldKey = ZendeskFieldMapper.getFieldKeyById(field.id!);
+                const fieldKey = getFieldKeyById(field.id!);
 
-                if (fieldKey) {
+                // Skip 'topic' field as it's already set as top-level property from custom_fields
+                // to avoid duplicate/conflicting entries
+                if (fieldKey && fieldKey.toLowerCase() !== 'topic') {
                     properties.push({
                         id: fieldKey,
                         value: String(field.value),
