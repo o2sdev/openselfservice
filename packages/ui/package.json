@@ -70,7 +70,7 @@
         "react-day-picker": "^9.13.0",
         "react-indiana-drag-scroll": "^2.2.1",
         "recharts": "^3.7.0",
-        "swiper": "^12.0.3",
+        "swiper": "^12.1.0",
         "tailwind-merge": "^3.4.0",
         "tailwindcss-animate": "^1.0.7",
         "throttle-debounce": "^5.0.2"
