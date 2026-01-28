@@ -116,10 +116,13 @@ createTicket(
 
 #### Body Parameters
 
-| Parameter   | Type   | Description                       |
-| ----------- | ------ | --------------------------------- |
-| title       | string | Title or subject of the ticket    |
-| description | string | Detailed description of the issue |
+| Parameter   | Type                      | Required | Description                                                    |
+| ----------- | ------------------------- | -------- | -------------------------------------------------------------- |
+| title       | string                    | No       | Title or subject of the ticket                                 |
+| description | string                    | No       | Detailed description of the issue                             |
+| type        | number                    | No       | Ticket type identifier (e.g., form ID in ticket systems)       |
+| attachments | TicketAttachmentInput[]   | No       | Array of file attachments                                      |
+| fields      | Record<string, unknown>   | No       | Additional custom fields specific to the integration           |
 
 #### Returns
 

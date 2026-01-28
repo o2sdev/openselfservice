@@ -184,41 +184,41 @@ To add support for a new custom field:
 
 ### Topic Field Mapping
 
-The `topic` field is automatically set during ticket creation based on the `ticketFormId` provided in the ticket data. This ensures consistent categorization across different form types.
+The `topic` field is automatically set during ticket creation based on the `type` field provided in the ticket data. This ensures consistent categorization across different form types.
 
 **How it works:**
 
 When creating a ticket via the Zendesk integration:
 
-1. The system compares the `ticketFormId` with configured environment variables:
+1. The system compares the `type` (ticket form ID) with configured environment variables:
    - `ZENDESK_CONTACT_FORM_ID` → topic value: `CONTACT_US`
    - `ZENDESK_COMPLAINT_FORM_ID` → topic value: `COMPLAINT`
    - `ZENDESK_REQUEST_DEVICE_MAINTENANCE_FORM_ID` → topic value: `REQUEST_DEVICE_MAINTENANCE`
 
-2. The matching topic value is automatically added to the ticket's custom fields
+2. The matching topic value is automatically added to the ticket's fields
 
 3. The topic is then stored in Zendesk using the `ZENDESK_TOPIC_FIELD_ID` custom field
 
 **Example:**
 
 ```typescript
-// Survey.js sends ticketFormId
+// Survey.js sends type (ticket form ID)
 {
-  ticketFormId: 33406700504221,  // Matches ZENDESK_CONTACT_FORM_ID
-  customFields: { ... }
+  type: 33406700504221,  // Matches ZENDESK_CONTACT_FORM_ID
+  fields: { ... }
 }
 
 // Service automatically adds topic
 {
-  ticketFormId: 33406700504221,
-  customFields: {
+  type: 33406700504221,
+  fields: {
     topic: 'CONTACT_US',  // Automatically set
     ...
   }
 }
 ```
 
-**Important**: If the `ticketFormId` doesn't match any configured form ID, the ticket creation will fail with a `BadRequestException`. This ensures that all tickets are properly categorized.
+**Important**: If the `type` doesn't match any configured form ID, the ticket creation will fail with a `BadRequestException`. This ensures that all tickets are properly categorized.
 
 **Supported topic values:**
 - `CONTACT_US` - General contact inquiries

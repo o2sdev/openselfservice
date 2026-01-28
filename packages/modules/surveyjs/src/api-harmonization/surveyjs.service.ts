@@ -138,10 +138,8 @@ export class SurveyjsService {
         try {
             // Validate required fields before mapping
             if (!surveyPayload.description || !surveyPayload.ticketFormId) {
-                this.logger.error(
-                    'Missing required fields for ticket creation: title, description, and ticketFormId are required',
-                );
-                throw new BadRequestException('Title, description, and ticketFormId are required to create a ticket');
+                this.logger.error('Missing required fields for ticket creation: description and type are required');
+                throw new BadRequestException('Description and type are required to create a ticket');
             }
 
             const ticketData = mapSurveyToTicket(surveyPayload);

@@ -13,11 +13,11 @@ export class TicketAttachmentInput {
 }
 
 export class PostTicketBody {
-    title!: string;
-    description!: string;
-    ticketFormId!: number;
+    title?: string;
+    description?: string;
+    type?: number;
     attachments?: TicketAttachmentInput[];
-    customFields?: Record<string, unknown>;
+    fields?: Record<string, unknown>;
 }
 
 export class GetTicketListQuery extends PaginationQuery {

@@ -167,8 +167,9 @@ export class ZendeskTicketService extends Tickets.Service {
 
     createTicket(data: Tickets.Request.PostTicketBody, authorization?: string): Observable<Tickets.Model.Ticket> {
         // Validate input data
-        if (!data.description || !data.ticketFormId) {
-            return throwError(() => new BadRequestException('Title, description and ticketFormId are required'));
+        // Note: subject (title) is optional in Zendesk API, but description (as first comment body) and type (ticket form ID) are required
+        if (!data.description || !data.type) {
+            return throwError(() => new BadRequestException('Description and type are required'));
         }
 
         return this.usersService.getCurrentUser(authorization).pipe(
@@ -196,7 +197,7 @@ export class ZendeskTicketService extends Tickets.Service {
                     switchMap((uploadTokens) =>
                         this.findZendeskUserByEmail(user.email!).pipe(
                             switchMap((zendeskUser) => {
-                                // Map ticketFormId to topic value
+                                // Map type (ticket form ID) to topic value
                                 let topicValue: string;
                                 const contactFormId = process.env.ZENDESK_CONTACT_FORM_ID
                                     ? Number(process.env.ZENDESK_CONTACT_FORM_ID)
@@ -208,40 +209,41 @@ export class ZendeskTicketService extends Tickets.Service {
                                     ? Number(process.env.ZENDESK_REQUEST_DEVICE_MAINTENANCE_FORM_ID)
                                     : undefined;
 
-                                if (data.ticketFormId === contactFormId) {
+                                if (data.type === contactFormId) {
                                     topicValue = 'CONTACT_US';
-                                } else if (data.ticketFormId === complaintFormId) {
+                                } else if (data.type === complaintFormId) {
                                     topicValue = 'COMPLAINT';
-                                } else if (data.ticketFormId === deviceMaintenanceFormId) {
+                                } else if (data.type === deviceMaintenanceFormId) {
                                     topicValue = 'REQUEST_DEVICE_MAINTENANCE';
                                 } else {
                                     return throwError(
                                         () =>
                                             new BadRequestException(
-                                                `Invalid ticketFormId: ${data.ticketFormId}. Must match one of the configured form IDs.`,
+                                                `Invalid type: ${data.type}. Must match one of the configured form IDs.`,
                                             ),
                                     );
                                 }
 
-                                // Add topic to customFields before mapping
-                                const customFieldsWithTopic = {
-                                    ...(data.customFields || {}),
+                                // Add topic to fields before mapping
+                                const fieldsWithTopic = {
+                                    ...(data.fields || {}),
                                     topic: topicValue,
                                 };
 
-                                // Map custom fields from Survey.js to Zendesk format using field mapper
-                                const customFields = ZendeskFieldMapper.toCustomFields(customFieldsWithTopic);
+                                // Map fields to Zendesk custom fields format using field mapper
+                                const customFields = ZendeskFieldMapper.toCustomFields(fieldsWithTopic);
 
                                 return from(
                                     createTicket({
                                         body: {
                                             ticket: {
-                                                subject: data.title,
+                                                // Subject is optional in Zendesk API
+                                                ...(data.title && { subject: data.title }),
                                                 comment: {
                                                     body: data.description,
                                                     ...(uploadTokens.length > 0 && { uploads: uploadTokens }),
                                                 },
-                                                ticket_form_id: data.ticketFormId,
+                                                ticket_form_id: data.type,
                                                 ...(zendeskUser?.id && {
                                                     requester_id: zendeskUser.id,
                                                     submitter_id: zendeskUser.id,
