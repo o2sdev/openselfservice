@@ -95,14 +95,33 @@ export const getFieldKeyById = (fieldId: number): string | undefined => {
 };
 
 /**
+ * Checks if a field name represents a consent/checkbox field.
+ * These fields expect array values from SurveyJS that need to be converted to boolean.
+ * Only checks fields that have configured environment variables.
+ *
+ * @param fieldName - The name of the field to check
+ * @returns true if field is a consent field with configured env variable
+ */
+const isConsentField = (fieldName: string): boolean => {
+    const consentFieldMap: Record<string, string | undefined> = {
+        termsAcceptance: process.env.ZENDESK_TERMS_ACCEPTANCE_FIELD_ID,
+        newsletterConsent: process.env.ZENDESK_NEWSLETTER_CONSENT_FIELD_ID,
+        marketingConsent: process.env.ZENDESK_MARKETING_CONSENT_FIELD_ID,
+    };
+
+    return fieldName in consentFieldMap && !!consentFieldMap[fieldName];
+};
+
+/**
  * Validates and converts field value to Zendesk-supported types.
  * Zendesk API accepts: string, number, boolean
  * Date fields must be in YYYY-MM-DD format
  *
+ * @param fieldName - The name of the field being converted
  * @param value - The value to validate and convert
  * @returns Validated value or null if invalid
  */
-const validateAndConvertValue = (value: unknown): string | number | boolean | null => {
+const validateAndConvertValue = (fieldName: string, value: unknown): string | number | boolean | null => {
     // Handle primitives
     if (typeof value === 'number' || typeof value === 'boolean') {
         return value;
@@ -117,8 +136,26 @@ const validateAndConvertValue = (value: unknown): string | number | boolean | nu
         return value;
     }
 
-    // Convert arrays and objects to JSON strings
-    if (Array.isArray(value) || (typeof value === 'object' && value !== null)) {
+    // Handle arrays ONLY for consent fields - SurveyJS sends checkbox values as arrays
+    if (Array.isArray(value)) {
+        if (isConsentField(fieldName)) {
+            // For consent checkbox fields: non-empty array = true, empty array = false
+            // SurveyJS checkbox values: ['accepted'], ['subscribed'], etc.
+            if (value.length > 0) {
+                return true;
+            }
+            return false;
+        }
+        // For non-consent array fields, convert to JSON string
+        try {
+            return JSON.stringify(value);
+        } catch {
+            return null;
+        }
+    }
+
+    // Convert objects to JSON strings
+    if (typeof value === 'object' && value !== null) {
         try {
             return JSON.stringify(value);
         } catch {
@@ -159,7 +196,7 @@ export const toCustomFields = (data: Record<string, unknown>): ZendeskCustomFiel
         }
 
         // Validate and convert value to supported types
-        const validatedValue = validateAndConvertValue(fieldValue);
+        const validatedValue = validateAndConvertValue(fieldName, fieldValue);
 
         if (validatedValue !== null) {
             customFields.push({

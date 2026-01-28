@@ -48,6 +48,19 @@ export function mapTicketToModel(
         { id: 'description', value: ticket.description || '' },
     ];
 
+    // Get consent field IDs from environment variables
+    const consentFieldIds = [
+        process.env.ZENDESK_TERMS_ACCEPTANCE_FIELD_ID ? Number(process.env.ZENDESK_TERMS_ACCEPTANCE_FIELD_ID) : null,
+        process.env.ZENDESK_NEWSLETTER_CONSENT_FIELD_ID
+            ? Number(process.env.ZENDESK_NEWSLETTER_CONSENT_FIELD_ID)
+            : null,
+        process.env.ZENDESK_MARKETING_CONSENT_FIELD_ID ? Number(process.env.ZENDESK_MARKETING_CONSENT_FIELD_ID) : null,
+    ].filter((id): id is number => id !== null);
+
+    // Check if this is CONTACT_US form by comparing ticket_form_id
+    const contactFormId = process.env.ZENDESK_CONTACT_FORM_ID ? Number(process.env.ZENDESK_CONTACT_FORM_ID) : undefined;
+    const isContactUsForm = ticket.ticket_form_id === contactFormId;
+
     // Map custom fields to properties using readable names from ZendeskFieldMapper
     if (ticket.custom_fields) {
         ticket.custom_fields.forEach((field) => {
@@ -57,6 +70,15 @@ export function mapTicketToModel(
                 // Skip 'topic' field as it's already set as top-level property from custom_fields
                 // to avoid duplicate/conflicting entries
                 if (fieldKey && fieldKey.toLowerCase() !== 'topic') {
+                    // For CONTACT_US form: show consent fields even if false
+                    // For other forms: skip boolean fields with false value (unchecked checkboxes)
+                    const isConsentField = consentFieldIds.includes(field.id!);
+                    if (typeof field.value === 'boolean' && field.value === false) {
+                        if (!isContactUsForm || !isConsentField) {
+                            return;
+                        }
+                    }
+
                     properties.push({
                         id: fieldKey,
                         value: String(field.value),
