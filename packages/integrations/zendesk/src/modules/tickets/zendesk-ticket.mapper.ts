@@ -59,7 +59,7 @@ export function mapTicketToModel(
 
     // Check if this is CONTACT_US form by comparing ticket_form_id
     const contactFormId = process.env.ZENDESK_CONTACT_FORM_ID ? Number(process.env.ZENDESK_CONTACT_FORM_ID) : undefined;
-    const isContactUsForm = ticket.ticket_form_id === contactFormId;
+    const isContactUsForm = contactFormId !== undefined && ticket.ticket_form_id === contactFormId;
 
     // Map custom fields to properties using readable names from ZendeskFieldMapper
     if (ticket.custom_fields) {
