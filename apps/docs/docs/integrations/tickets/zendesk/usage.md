@@ -149,6 +149,63 @@ GET /tickets/12345
 }
 ```
 
+### Create Ticket
+
+Create a new ticket with attachments and custom fields.
+
+**Endpoint:** `POST /tickets`
+
+**Body Parameters:**
+
+| Parameter   | Type                    | Required | Description                                    |
+| ----------- | ----------------------- | -------- | ---------------------------------------------- |
+| title       | string                  | No       | Subject of the ticket                          |
+| description | string                  | Yes      | Detailed description (first comment body)      |
+| type        | number                  | Yes      | Ticket form ID (must match configured form ID) |
+| attachments | TicketAttachmentInput[] | No       | Array of file attachments                      |
+| fields      | object                  | No       | Custom fields for the ticket                   |
+
+**Example Request:**
+
+```bash
+POST /tickets
+Authorization: Bearer {token}
+Content-Type: application/json
+
+{
+    "title": "Device maintenance request",
+    "description": "My device needs servicing",
+    "type": 789012,
+    "fields": {
+        "machineName": "Device-001",
+        "maintenanceType": "Repair"
+    }
+}
+```
+
+**Example Response:**
+
+```json
+{
+    "id": "54321",
+    "createdAt": "2024-01-20T10:00:00Z",
+    "updatedAt": "2024-01-20T10:00:00Z",
+    "topic": "CONTACT_US",
+    "type": "NORMAL",
+    "status": "OPEN",
+    "properties": [
+        {
+            "id": "subject",
+            "value": "Device maintenance request"
+        },
+        {
+            "id": "description",
+            "value": "My device needs servicing"
+        }
+    ]
+}
+```
+
 ## Authentication
 
 All ticket endpoints require authentication. The integration uses the `Authorization` header to identify the current user.

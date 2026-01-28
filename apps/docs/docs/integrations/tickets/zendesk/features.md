@@ -16,6 +16,7 @@ The Zendesk integration provides:
 
 - **Viewing individual tickets** - Retrieve full ticket details including comments and attachments
 - **Listing tickets** - Get a list of tickets with filtering options (status, type, topic, date range)
+- **Creating tickets** - Create new tickets with attachments and custom fields
 - **Access to ticket comments** - View conversation history for each ticket
 - **Attachment handling** - Access attachments from ticket comments
 - **User-specific ticket access** - Users can only see their own tickets (matched by email)
@@ -25,11 +26,11 @@ The Zendesk integration provides:
 
 The following table shows which methods from the base TicketService are currently supported by the Zendesk integration:
 
-| Method        | Description                                       | Supported   |
-| ------------- | ------------------------------------------------- | ----------- |
-| getTicket     | Retrieve a single ticket by ID                    | ✓           |
-| getTicketList | Retrieve a list of tickets with filtering options | ✓           |
-| createTicket  | Create a new ticket                               | ✗ (planned) |
+| Method        | Description                                       | Supported |
+| ------------- | ------------------------------------------------- | --------- |
+| getTicket     | Retrieve a single ticket by ID                    | ✓         |
+| getTicketList | Retrieve a list of tickets with filtering options | ✓         |
+| createTicket  | Create a new ticket                               | ✓         |
 
 ## Module Structure
 
