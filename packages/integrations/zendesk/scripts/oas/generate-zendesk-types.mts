@@ -1,13 +1,16 @@
 import { createClient } from '@hey-api/openapi-ts';
 import { existsSync, mkdirSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const currentDir = dirname(fileURLToPath(import.meta.url));
 
 async function generateZendeskTypes(): Promise<void> {
-    const oasPath = resolve(__dirname, '../oas/oas.yaml');
+    const oasPath = resolve(currentDir, '../oas/oas.yaml');
     if (!existsSync(oasPath)) {
         throw new Error(`OAS file not found at ${oasPath}. Run 'npm run fetch-oas' first.`);
     }
-    const outputDirPath = resolve(__dirname, '../../generated/zendesk');
+    const outputDirPath = resolve(currentDir, '../../generated/zendesk');
 
     try {
         mkdirSync(outputDirPath, { recursive: true });
