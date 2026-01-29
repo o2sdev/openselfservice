@@ -22,7 +22,7 @@
         "@docusaurus/plugin-google-tag-manager": "^3.9.2",
         "@docusaurus/preset-classic": "3.9.2",
         "@docusaurus/theme-mermaid": "3.9.2",
-        "@easyops-cn/docusaurus-search-local": "^0.52.2",
+        "@easyops-cn/docusaurus-search-local": "^0.52.3",
         "@mdx-js/react": "^3.1.1",
         "@radix-ui/react-accordion": "^1.2.12",
         "@vercel/analytics": "^1.6.1",
