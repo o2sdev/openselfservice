@@ -117,9 +117,16 @@ export const TicketListPure: React.FC<TicketListPureProps> = ({ locale, accessTo
                     type: 'custom',
                     cellClassName: 'max-w-[200px] lg:max-w-md',
                     render: (_value: unknown, ticket: Model.Ticket) => (
-                        <Button asChild variant="link" size="none" className="truncate block text-left">
-                            <LinkComponent href={ticket.detailsUrl}>{ticket.topic.label}</LinkComponent>
-                        </Button>
+                        <div className="flex flex-col gap-0.5">
+                            <Button asChild variant="link" size="none" className="truncate block text-left h-auto p-0">
+                                <LinkComponent href={ticket.detailsUrl}>{ticket.topic.label}</LinkComponent>
+                            </Button>
+                            {data.labels.ticketId && (
+                                <Typography variant="small" className="text-xs text-muted-foreground">
+                                    {data.labels.ticketId}: {ticket.id}
+                                </Typography>
+                            )}
+                        </div>
                     ),
                 };
             case 'status':

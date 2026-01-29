@@ -72,7 +72,6 @@ getTicketList(
 | offset    | number       | Number of items to skip           |
 | limit     | number       | Maximum number of items to return |
 | topic     | string       | Filter by ticket topic            |
-| type      | string       | Filter by ticket type             |
 | status    | TicketStatus | Filter by ticket status           |
 | dateFrom  | Date         | Filter by creation date (from)    |
 | dateTo    | Date         | Filter by creation date (to)      |
@@ -117,10 +116,19 @@ createTicket(
 
 #### Body Parameters
 
-| Parameter   | Type   | Description                       |
-| ----------- | ------ | --------------------------------- |
-| title       | string | Title or subject of the ticket    |
-| description | string | Detailed description of the issue |
+| Parameter   | Type                    | Required | Description                                                  |
+| ----------- | ----------------------- | -------- | ------------------------------------------------------------ |
+| title       | string                  | No       | Title or subject of the ticket                               |
+| description | string                  | No       | Detailed description of the issue                            |
+| type        | number                  | No       | Ticket type identifier (e.g., form ID in ticket systems)     |
+| attachments | TicketAttachmentInput[] | No       | Array of file attachments                                    |
+| fields      | object                  | No       | Additional custom fields specific to the integration         |
+
+> **Note**: While `description` and `type` are marked as optional in the core model, certain integrations require these fields:
+> - **Zendesk**: Requires both `description` (string) and `type` (number, ticket form ID)
+> - **SurveyJS**: Requires `description` (string) and `ticketFormId` (number, mapped to `type`)
+>
+> Implementers should check the specific integration documentation for required fields before implementing ticket creation.
 
 #### Returns
 

@@ -36,6 +36,7 @@ export const mapTicketListBlock = ({
                     yesterday: 'Yesterday',
                     showMore: 'Show more',
                     clickToSelect: 'Click to select',
+                    ticketId: 'Ticket ID',
                 },
                 detailsUrl: data.detailsUrl || '',
                 meta: isPreview
@@ -59,6 +60,7 @@ export const mapTicketListBlock = ({
                               yesterday: 'yesterday',
                               showMore: 'showMore',
                               clickToSelect: 'clickToSelect',
+                              ticketId: 'ticketId',
                           },
                           detailsUrl: 'detailsUrl',
                       }

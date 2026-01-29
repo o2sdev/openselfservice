@@ -33,20 +33,17 @@ export const surveyjs = (sdk: Sdk) => ({
             params: Request.SurveyJsSubmitPayload,
             headers: ApiModels.Headers.AppHeaders,
             authorization?: string,
-        ): Promise<void> =>
-            sdk.makeRequest({
+        ): Promise<void> => {
+            return sdk.makeRequest({
                 method: 'post',
                 url: API_URL,
                 headers: {
                     ...Utils.Headers.getApiHeaders(),
                     ...headers,
-                    ...(authorization
-                        ? {
-                              Authorization: `Bearer ${authorization}`,
-                          }
-                        : {}),
+                    ...(authorization ? { Authorization: `Bearer ${authorization}` } : {}),
                 },
                 data: params,
-            }),
+            });
+        },
     },
 });

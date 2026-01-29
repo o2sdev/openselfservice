@@ -28,7 +28,7 @@ export const TicketDetailsPure: React.FC<Readonly<TicketDetailsPureProps>> = ({
     return (
         <div className="w-full">
             <div className="flex flex-col gap-6">
-                <div className="flex gap-2 sm:gap-4 flex-col sm:flex-row flex-wrap">
+                <div className="flex gap-2 sm:gap-4 flex-col sm:flex-row flex-wrap items-center">
                     <Typography variant="h1" asChild>
                         <h1>{ticket.topic.label}</h1>
                     </Typography>
@@ -51,14 +51,6 @@ export const TicketDetailsPure: React.FC<Readonly<TicketDetailsPureProps>> = ({
                         <Separator className="mt-6" />
 
                         <ul className="flex flex-col">
-                            <TextItem title={ticket.type.title} tag="li">
-                                <RichText
-                                    content={ticket.type.label}
-                                    baseFontSize="small"
-                                    className="text-muted-foreground"
-                                />
-                            </TextItem>
-
                             <TextItem title={ticket.id.title} tag="li">
                                 <RichText
                                     content={ticket.id.label}

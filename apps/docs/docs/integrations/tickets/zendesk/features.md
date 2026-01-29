@@ -16,6 +16,7 @@ The Zendesk integration provides:
 
 - **Viewing individual tickets** - Retrieve full ticket details including comments and attachments
 - **Listing tickets** - Get a list of tickets with filtering options (status, type, topic, date range)
+- **Creating tickets** - Create new tickets with attachments and custom fields
 - **Access to ticket comments** - View conversation history for each ticket
 - **Attachment handling** - Access attachments from ticket comments
 - **User-specific ticket access** - Users can only see their own tickets (matched by email)
@@ -25,11 +26,11 @@ The Zendesk integration provides:
 
 The following table shows which methods from the base TicketService are currently supported by the Zendesk integration:
 
-| Method        | Description                                       | Supported   |
-| ------------- | ------------------------------------------------- | ----------- |
-| getTicket     | Retrieve a single ticket by ID                    | ✓           |
-| getTicketList | Retrieve a list of tickets with filtering options | ✓           |
-| createTicket  | Create a new ticket                               | ✗ (planned) |
+| Method        | Description                                       | Supported |
+| ------------- | ------------------------------------------------- | --------- |
+| getTicket     | Retrieve a single ticket by ID                    | ✓         |
+| getTicketList | Retrieve a list of tickets with filtering options | ✓         |
+| createTicket  | Create a new ticket                               | ✓         |
 
 ## Module Structure
 
@@ -101,18 +102,17 @@ The integration maps Zendesk ticket data to the standard ticket model with the f
 
 ### Field Mapping
 
-| Zendesk Field        | Normalized Field | Notes                                                                                    |
-| -------------------- | ---------------- | ---------------------------------------------------------------------------------------- |
-| id                   | id               | Converted to string                                                                      |
-| created_at           | createdAt        | ISO date string                                                                          |
-| updated_at           | updatedAt        | ISO date string                                                                          |
-| priority             | type             | Converted to uppercase (default: NORMAL)                                                 |
-| status               | status           | Mapped according to status mapping                                                       |
-| subject              | properties       | Added as property with id 'subject'                                                      |
-| description          | properties       | Added as property with id 'description'                                                  |
-| custom_fields        | properties       | Each field added with id pattern 'custom_field_X' where X is the Zendesk custom field ID |
-| comments             | comments         | Mapped with author information                                                           |
-| comments.attachments | attachments      | Extracted from comments                                                                  |
+| Zendesk Field        | Normalized Field | Notes                                    |
+| -------------------- |------------------|------------------------------------------|
+| id                   | id               | Converted to string                      |
+| created_at           | createdAt        | ISO date string                          |
+| updated_at           | updatedAt        | ISO date string                          |
+| status               | status           | Mapped according to status mapping       |
+| subject              | properties       | Added as property with id 'subject'      |
+| description          | properties       | Added as property with id 'description'  |
+| custom_fields        | properties       | Mapped using `ZendeskFieldMapper` to readable names (see Custom Fields section below) |
+| comments             | comments         | Mapped with author information           |
+| comments.attachments | attachments      | Extracted from comments                  |
 
 ### Status Mapping
 
@@ -123,21 +123,114 @@ The integration maps Zendesk ticket data to the standard ticket model with the f
 | new, open      | OPEN              | Default status                |
 | (other)        | OPEN              | Fallback for unknown statuses |
 
-### Topic Handling
 
-The integration can map a custom field to the ticket topic:
+### Custom Fields Mapping
 
-1. Set the `ZENDESK_TOPIC_FIELD_ID` environment variable to the ID of the custom field
-2. The value of this field will be used as the ticket topic (converted to uppercase)
-3. If not set or field not found, the default topic is "GENERAL"
+Custom fields from Zendesk are mapped to readable names using the `ZendeskFieldMapper`. This provides a consistent, maintainable way to work with custom fields throughout the application.
+
+**How it works:**
+
+1. **Field Mapping Configuration**: Custom fields are defined in `ZendeskFieldMapper` with readable names and environment variable IDs:
+   ```typescript
+   // In zendesk-field.mapper.ts
+   fieldMap = {
+       machineName: process.env.ZENDESK_DEVICE_NAME_FIELD_ID,
+       serialNumber: process.env.ZENDESK_SERIAL_NUMBER_FIELD_ID,
+       maintenanceType: process.env.ZENDESK_MAINTENANCE_TYPE_FIELD_ID,
+       // ... more fields
+   }
+   ```
+
+2. **Reading Tickets**: When a ticket is retrieved from Zendesk, custom fields are automatically mapped to their readable names:
+   - Custom field with ID `123456` → `machineName` (if configured in `ZendeskFieldMapper`)
+   - Only fields with mappings in `ZendeskFieldMapper` are included
+   - Fields without mappings are skipped
+
+3. **CMS Integration**: To display custom fields in ticket details, add mappings in CMS:
+   ```typescript
+   // In CMS mapper (e.g., mocked, contentful, strapi)
+   properties: {
+       // ... standard fields
+       machineName: 'Machine Name',
+       serialNumber: 'Serial Number',
+   }
+   ```
+
+**Adding a new custom field:**
+
+To add support for a new custom field:
+
+1. **Add environment variable**:
+   ```env
+   ZENDESK_NEW_FIELD_ID=789012
+   ```
+
+2. **Add to ZendeskFieldMapper** in `zendesk-field.mapper.ts`:
+   ```typescript
+   fieldMap = {
+       // ... existing fields
+       newField: process.env.ZENDESK_NEW_FIELD_ID 
+           ? Number(process.env.ZENDESK_NEW_FIELD_ID) 
+           : undefined,
+   }
+   ```
+
+3. **Add CMS mappings** for all supported locales (in mocked, contentful, strapi mappers):
+   ```typescript
+   properties: {
+       // ... existing fields
+       newField: 'New Field Label',  // Add for each locale
+   }
+   ```
+
+### Topic Field Mapping
+
+The `topic` field is automatically set during ticket creation based on the `type` field provided in the ticket data. This ensures consistent categorization across different form types.
+
+**How it works:**
+
+When creating a ticket via the Zendesk integration:
+
+1. The system compares the `type` (ticket form ID) with configured environment variables:
+   - `ZENDESK_CONTACT_FORM_ID` → topic value: `CONTACT_US`
+   - `ZENDESK_COMPLAINT_FORM_ID` → topic value: `COMPLAINT`
+   - `ZENDESK_REQUEST_DEVICE_MAINTENANCE_FORM_ID` → topic value: `REQUEST_DEVICE_MAINTENANCE`
+
+2. The matching topic value is automatically added to the ticket's fields
+
+3. The topic is then stored in Zendesk using the `ZENDESK_TOPIC_FIELD_ID` custom field
+
+**Example:**
+
+```typescript
+// Survey.js sends type (ticket form ID)
+{
+  type: 33406700504221,  // Matches ZENDESK_CONTACT_FORM_ID
+  fields: { ... }
+}
+
+// Service automatically adds topic
+{
+  type: 33406700504221,
+  fields: {
+    topic: 'CONTACT_US',  // Automatically set
+    ...
+  }
+}
+```
+
+**Important**: If the `type` doesn't match any configured form ID, the ticket creation will fail with a `BadRequestException`. This ensures that all tickets are properly categorized.
+
+**Supported topic values:**
+- `CONTACT_US` - General contact inquiries
+- `COMPLAINT` - Customer complaints
+- `REQUEST_DEVICE_MAINTENANCE` - Device maintenance requests
 
 ### Default Values and Fallbacks
 
 The integration handles missing data with the following defaults:
 
 - **Status**: `OPEN` (if status is unknown or missing)
-- **Topic**: `GENERAL` (if topic field is not configured or not found)
-- **Type**: `NORMAL` (if priority is missing, converted from Zendesk priority)
 - **Empty strings**: Used for missing string values (subject, description, etc.)
 - **Comments**: `undefined` if no comments exist (not an empty array)
 - **Attachments**: `undefined` if no attachments exist (not an empty array)
@@ -168,15 +261,14 @@ The integration converts framework filter parameters to Zendesk Search API queri
 
 ### Parameter Mapping
 
-| Framework Parameter | Zendesk Search Query  | Notes                                          |
-| ------------------- | --------------------- | ---------------------------------------------- |
-| status              | `status:{value}`      | Converted to lowercase                         |
-| type                | `priority:{value}`    | Note: maps to priority, not type               |
-| topic               | `tag:{value}`         | Maps to Zendesk tags                           |
-| dateFrom            | `created>={iso_date}` | Converted to ISO format                        |
-| dateTo              | `created<={iso_date}` | Converted to ISO format                        |
-| offset              | `page`                | Calculated as `Math.floor(offset / limit) + 1` |
-| limit               | `per_page`            | Default: 10                                    |
+| Framework Parameter | Zendesk Search Query | Notes                                    |
+|---------------------|----------------------|------------------------------------------|
+| status              | `status:{value}`     | Converted to lowercase                   |
+| topic               | `tag:{value}`        | Maps to Zendesk tags                     |
+| dateFrom            | `created>={iso_date}` | Converted to ISO format                  |
+| dateTo              | `created<={iso_date}` | Converted to ISO format                  |
+| offset              | `page`               | Calculated as `Math.floor(offset / limit) + 1` |
+| limit               | `per_page`           | Default: 10                              |
 
 ### Base Query
 
