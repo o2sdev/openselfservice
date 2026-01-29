@@ -1,6 +1,6 @@
 {
     "name": "@o2s/telemetry",
-    "version": "1.1.2",
+    "version": "1.2.0",
     "private": false,
     "license": "MIT",
     "main": "./dist/index.js",
@@ -15,7 +15,7 @@
     },
     "dependencies": {
         "ci-info": "^4.3.1",
-        "configstore": "^7.1.0",
+        "configstore": "^8.0.0",
         "boxen": "^8.0.1",
         "is-docker": "^4.0.0",
         "ts-node": "^10.9.2",
@@ -28,7 +28,7 @@
         "@o2s/typescript-config": "*",
         "@types/configstore": "^6.0.2",
         "eslint": "^9.39.2",
-        "prettier": "^3.7.4",
+        "prettier": "^3.8.1",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"
     }

@@ -1,31 +1,35 @@
-import { PrismaClient, Role } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 import { hash } from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
 async function main() {
+    // Users no longer have roles - permissions come from their organization/customer
+    // Customer permissions defined in customers.mapper.ts:
+    // - cust-001 (Acme Corporation): ADMIN_PERMISSIONS (full access)
+    // - cust-002 (Tech Solutions Inc): USER_PERMISSIONS (view + pay)
+    // - cust-003 (Digital Services GmbH): READONLY_PERMISSIONS (view only)
     const users = [
         {
             id: 'admin-1',
             name: 'Jane Doe',
             email: 'jane@example.com',
             password: await hash('admin', 10),
-            role: Role.selfservice_org_admin,
-            defaultCustomerId: 'cust-001',
+            defaultCustomerId: 'cust-001', // Acme Corp - full admin permissions
         },
         {
             id: 'user-100',
             name: 'John Adams',
             email: 'john@example.com',
             password: await hash('user', 10),
-            role: Role.selfservice_org_user,
+            defaultCustomerId: 'cust-002', // Tech Solutions - user permissions (view + pay)
         },
         {
             id: 'user-101',
             name: 'Lyon Gaultier',
             email: 'lyon@example.com',
             password: await hash('user', 10),
-            role: Role.selfservice_org_user,
+            defaultCustomerId: 'cust-003', // Digital Services - readonly permissions (view only)
         },
     ];
 

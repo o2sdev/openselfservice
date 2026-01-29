@@ -23,8 +23,8 @@ The theme name is crucial – it must exactly match the CSS class name defined i
 2. Find the **AppConfig** content type
 3. In the **Themes** field (relation) add a new entry of type **Theme**
 4. Fill in the fields:
-   - **Name** – theme name (e.g., `dark`, `corporate`)
-   - **Logo** (optional) – select media with the logo
+    - **Name** – theme name (e.g., `dark`, `corporate`)
+    - **Logo** (optional) – select media with the logo
 5. Save changes
 
 ### Structure in Strapi
@@ -75,8 +75,8 @@ Mapping from Strapi to the application model happens in:
 2. Find the **AppConfig** content type
 3. In the **Themes** field (reference, many) add a new entry of type **Theme**
 4. Fill in the fields:
-   - **Name** – theme name (e.g., `dark`, `corporate`)
-   - **Logo** (optional) – select asset with the logo
+    - **Name** – theme name (e.g., `dark`, `corporate`)
+    - **Logo** (optional) – select asset with the logo
 5. Save and publish changes
 
 ### Structure in Contentful

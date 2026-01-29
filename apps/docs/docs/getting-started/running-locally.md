@@ -20,17 +20,23 @@ Follow these instructions to set up your development environment and start worki
 
 There are two main ways of working with O2S - either running every package with one command, or running each package separately.
 
-To quickly get started, you can just run the following command at the root level of the project:
+To quickly get started, it is recommended to run two separate commands (ideally in separate terminal windows):
 
-```shell
-npm run dev
-```
+1. **Watch dependencies** – Automatically rebuilds internal packages when they change:
+   ```sh
+   npm run watch:deps
+   ```
+2. **Watch applications** – Starts the main applications with hot-reloading:
+   ```sh
+   npm run watch:apps
+   ```
 
-This will leverage [Turborepo task runners](https://turbo.build/repo/docs/crafting-your-repository/running-tasks) and automatically run the `dev` script inside every package.
-
-:::info
-This is the recommended way when you just want to start development, as it automatically watches every package and, if necessary, rebuilds the dependencies.
+:::important
+The `npm run dev` script is now **deprecated** and will be removed in future versions. Please use the granular `watch:deps` and `watch:apps` scripts instead.
 :::
+
+This will leverage [Turborepo task runners](https://turbo.build/repo/docs/crafting-your-repository/running-tasks) and ensure that both your applications and their internal dependencies are correctly watched and rebuilt during development.
+
 
 ---
 

@@ -4,6 +4,8 @@ import { Observable, forkJoin, map } from 'rxjs';
 
 import { Models } from '@o2s/utils.api-harmonization';
 
+import { Auth } from '@o2s/framework/modules';
+
 import { mapNotificationDetails } from './notification-details.mapper';
 import { NotificationDetailsBlock } from './notification-details.model';
 import {
@@ -17,6 +19,7 @@ export class NotificationDetailsService {
     constructor(
         private readonly cmsService: CMS.Service,
         private readonly notificationService: Notifications.Service,
+        private readonly authService: Auth.Service,
     ) {}
 
     getNotificationDetailsBlock(
@@ -33,12 +36,29 @@ export class NotificationDetailsService {
                     throw new NotFoundException();
                 }
 
-                return mapNotificationDetails(
+                const result = mapNotificationDetails(
                     notification,
                     cms,
                     headers['x-locale'],
                     headers['x-client-timezone'] || '',
                 );
+
+                // Extract permissions using ACL service
+                if (headers.authorization) {
+                    const permissions = this.authService.canPerformActions(headers.authorization, 'notifications', [
+                        'view',
+                        'mark_read',
+                        'delete',
+                    ]);
+
+                    result.permissions = {
+                        view: permissions.view ?? false,
+                        mark_read: permissions.mark_read ?? false,
+                        delete: permissions.delete ?? false,
+                    };
+                }
+
+                return result;
             }),
         );
     }

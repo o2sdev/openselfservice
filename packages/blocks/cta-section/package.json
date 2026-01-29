@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.cta-section",
-    "version": "0.3.0",
+    "version": "0.5.0",
     "private": false,
     "license": "MIT",
     "description": "A simple block displaying static content in the form of an CtaSection.",
@@ -35,7 +35,7 @@
         "@o2s/vitest-config": "*",
         "concurrently": "^9.2.1",
         "eslint": "^9.39.2",
-        "prettier": "^3.7.4",
+        "prettier": "^3.8.1",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"
     },

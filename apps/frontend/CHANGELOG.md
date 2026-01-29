@@ -1,5 +1,119 @@
 # @o2s/frontend
 
+## 1.15.0
+
+### Minor Changes
+
+- 72391c1: ### Authorization & PBAC Implementation
+
+    This release introduces a comprehensive Policy-Based Access Control system interlaced with Role-Based Access Control.
+
+    #### Framework & Core
+    - **`@o2s/framework` (AuthService)**: Enhanced with abstract permission logic (`getPermissions`, `hasPermission`), role checks (`hasRole`, `requireRoles`), and action batching (`canPerformActions`).
+    - **`@o2s/api-harmonization`**: Implemented global `RolesGuard` and `PermissionsGuard` in `AppModule`.
+    - **`@o2s/utils.api-harmonization`**: Added `extractUserRolesFromJwt` to unify role extraction from different JWT claims.
+
+    #### Features
+    - **Decorators**: New `@Auth.Decorators.Permissions({ resource, actions })` for securing controllers.
+    - **Data Filtering**: Mappers (e.g., `page.mapper.ts`) now filter UI elements (header/footer navigation) based on user roles.
+
+    This provides granular control over resource access and UI visibility based on user roles and permissions.
+
+### Patch Changes
+
+- Updated dependencies [1a5a22d]
+- Updated dependencies [72391c1]
+    - @o2s/blocks.ticket-details@1.4.0
+    - @o2s/blocks.ticket-recent@1.3.0
+    - @o2s/integrations.mocked@1.17.0
+    - @o2s/blocks.ticket-list@1.6.0
+    - @o2s/framework@1.16.0
+    - @o2s/blocks.featured-service-list@1.3.0
+    - @o2s/blocks.notification-details@1.4.0
+    - @o2s/blocks.notification-summary@1.2.0
+    - @o2s/blocks.notification-list@1.5.0
+    - @o2s/blocks.payments-history@1.3.0
+    - @o2s/blocks.payments-summary@1.3.0
+    - @o2s/utils.api-harmonization@0.3.0
+    - @o2s/blocks.product-details@0.1.0
+    - @o2s/blocks.service-details@1.3.0
+    - @o2s/blocks.orders-summary@1.4.0
+    - @o2s/blocks.ticket-summary@1.2.0
+    - @o2s/blocks.order-details@1.4.0
+    - @o2s/blocks.article-list@1.4.0
+    - @o2s/blocks.invoice-list@1.5.0
+    - @o2s/blocks.product-list@0.3.0
+    - @o2s/blocks.service-list@1.4.0
+    - @o2s/blocks.user-account@1.3.0
+    - @o2s/blocks.order-list@1.5.0
+    - @o2s/blocks.category@1.4.0
+    - @o2s/blocks.article@1.4.0
+    - @o2s/blocks.article-search@1.4.0
+    - @o2s/blocks.bento-grid@0.5.0
+    - @o2s/blocks.category-list@1.4.0
+    - @o2s/blocks.cta-section@0.5.0
+    - @o2s/blocks.document-list@0.5.0
+    - @o2s/blocks.faq@1.4.0
+    - @o2s/blocks.feature-section@0.5.0
+    - @o2s/blocks.feature-section-grid@0.4.0
+    - @o2s/blocks.hero-section@0.5.0
+    - @o2s/blocks.media-section@0.5.0
+    - @o2s/blocks.pricing-section@0.5.0
+    - @o2s/blocks.quick-links@1.4.0
+    - @o2s/blocks.recommended-products@0.1.0
+    - @o2s/blocks.surveyjs-form@1.3.0
+    - @o2s/ui@1.9.0
+    - @o2s/utils.frontend@0.4.0
+
+## 1.14.0
+
+### Minor Changes
+
+- e11b23a: resolving linter errors
+
+### Patch Changes
+
+- Updated dependencies [5947ca4]
+- Updated dependencies [e11b23a]
+- Updated dependencies [e78c11a]
+- Updated dependencies [8f39c25]
+- Updated dependencies [79b7c87]
+- Updated dependencies [e11b23a]
+- Updated dependencies [d197b89]
+- Updated dependencies [cd483b7]
+- Updated dependencies [d197b89]
+    - @o2s/ui@1.8.0
+    - @o2s/blocks.featured-service-list@1.2.0
+    - @o2s/blocks.notification-details@1.3.0
+    - @o2s/blocks.notification-summary@1.1.0
+    - @o2s/blocks.notification-list@1.4.0
+    - @o2s/blocks.payments-history@1.2.0
+    - @o2s/blocks.payments-summary@1.2.0
+    - @o2s/utils.api-harmonization@0.2.0
+    - @o2s/blocks.service-details@1.2.0
+    - @o2s/blocks.article-search@1.3.0
+    - @o2s/blocks.orders-summary@1.3.0
+    - @o2s/blocks.ticket-details@1.3.0
+    - @o2s/blocks.ticket-summary@1.1.0
+    - @o2s/blocks.category-list@1.3.0
+    - @o2s/blocks.order-details@1.3.0
+    - @o2s/blocks.surveyjs-form@1.2.0
+    - @o2s/blocks.ticket-recent@1.2.0
+    - @o2s/blocks.article-list@1.3.0
+    - @o2s/blocks.invoice-list@1.4.0
+    - @o2s/blocks.product-list@0.2.0
+    - @o2s/blocks.service-list@1.3.0
+    - @o2s/blocks.user-account@1.2.0
+    - @o2s/blocks.quick-links@1.3.0
+    - @o2s/blocks.ticket-list@1.5.0
+    - @o2s/blocks.order-list@1.4.0
+    - @o2s/blocks.category@1.3.0
+    - @o2s/blocks.article@1.3.0
+    - @o2s/utils.frontend@0.3.0
+    - @o2s/blocks.faq@1.3.0
+    - @o2s/integrations.mocked@1.16.0
+    - @o2s/framework@1.15.0
+
 ## 1.13.0
 
 ### Minor Changes

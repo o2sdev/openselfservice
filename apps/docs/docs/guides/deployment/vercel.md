@@ -7,14 +7,14 @@ This section covers deploying the Next.js `frontend` app to Vercel. The NestJS A
 
 ## Project settings
 
-1) Import the GitHub repository into Vercel.
-2) In Project Settings → General:
-   - Root Directory: `apps/frontend`
-   - Framework Preset: Next.js
-3) In Project Settings → Build & Development Settings:
-   - Install Command: `npm ci` (Vercel default is OK)
-   - Build Command (monorepo with Turborepo): `npx turbo run build --filter=frontend`
-   - Output Directory: (handled by Next.js)
+1. Import the GitHub repository into Vercel.
+2. In Project Settings → General:
+    - Root Directory: `apps/frontend`
+    - Framework Preset: Next.js
+3. In Project Settings → Build & Development Settings:
+    - Install Command: `npm ci` (Vercel default is OK)
+    - Build Command (monorepo with Turborepo): `npx turbo run build --filter=frontend`
+    - Output Directory: (handled by Next.js)
 
 ## Environment variables
 
@@ -37,8 +37,6 @@ Add these variables in Project Settings → Environment Variables for Preview an
 
 After the first deployment:
 
-1) Visit the Vercel URL (`NEXT_PUBLIC_BASE_URL`) and confirm app loads.
-2) Verify client→API requests target `NEXT_PUBLIC_API_URL` and succeed (200s).
-3) Confirm i18n defaults via `NEXT_PUBLIC_DEFAULT_LOCALE` and `NEXT_PUBLIC_SUPPORTED_LOCALES`.
-
-
+1. Visit the Vercel URL (`NEXT_PUBLIC_BASE_URL`) and confirm app loads.
+2. Verify client→API requests target `NEXT_PUBLIC_API_URL` and succeed (200s).
+3. Confirm i18n defaults via `NEXT_PUBLIC_DEFAULT_LOCALE` and `NEXT_PUBLIC_SUPPORTED_LOCALES`.

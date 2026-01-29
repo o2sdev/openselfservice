@@ -1,9 +1,23 @@
 ---
 slug: rethinking-frontend-architecture-for-composable
-title: 	Rethinking frontend architecture - from enterprise pain points to composable frontends you can use too
+title: Rethinking frontend architecture - from enterprise pain points to composable frontends you can use too
 description: Discover how we moved beyond enterprise frontend pain points to build a composable DXP and customer portal starters with Next.js — scalable, modular, and open-source.
 image: ./o2s-arch-article-front.jpeg
-keywords: [enterprise frontend, composable architecture, next.js starter, composable DXP, digital experience platform, Next.js DXP, customer self-service portals, dxp contentful, dxp strapi, AEM Next.js, Liferay Next.js, Magnolia Next.js]
+keywords:
+    [
+        enterprise frontend,
+        composable architecture,
+        next.js starter,
+        composable DXP,
+        digital experience platform,
+        Next.js DXP,
+        customer self-service portals,
+        dxp contentful,
+        dxp strapi,
+        AEM Next.js,
+        Liferay Next.js,
+        Magnolia Next.js,
+    ]
 date: 2025-09-15
 tags: [tech, frontend]
 authors: [jan.jagoda]
@@ -12,7 +26,6 @@ authors: [jan.jagoda]
 Over the past few years, we’ve worked on many large-scale solutions. E-commerce applications, customer support portals,
 B2B service hubs - all combining content, integrations (PIM, search, e-commerce, ERP, IAM, custom APIs) and user-facing functionality,
 where delivering strong user and customer experience has always been a key priority.
-
 
 Many of those platforms were built on top of enterprise products. These provided headless backend APIs and, in some cases,
 their own frontend layer as well.

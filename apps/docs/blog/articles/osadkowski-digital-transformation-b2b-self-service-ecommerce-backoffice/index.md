@@ -72,6 +72,7 @@ The result is a set of focused applications that share the same foundation, whic
 ### Three bounded contexts on the same composable stack
 
 At its core, the solution consists of three bounded contexts that all follow the same composable shape: a React frontend, a backend-for-frontend (BFF) layer and a set of microservices and external systems behind it.
+
 <!-- The same stack is now being extended to a hybrid mobile app that reuses the self-service and commerce frontends inside a WebView shell and talks to the BFF in exactly the same way as the browser-based clients. -->
 
 - **Self-service portal** focuses on exposing existing data and processes from multiple backend systems (such as CRM, billing or contracts). Its BFF primarily aggregates responses from several services and exposes them through a single API, which keeps integrations manageable and helps avoid over-fetching on the frontend.
@@ -164,12 +165,10 @@ From a product and architecture perspective, Osadkowski influenced several ideas
 Open Self Service packages these lessons into a reusable, open-source framework for building customer and partner portals, self-service applications and B2B e-commerce frontends.
 
 The composable patterns validated in the project help teams start with a sustainable architecture from day one, instead of recreating the same foundation from scratch on every project. They also reinforce several concrete design choices in O2S:
+
 - domain-focused BFFs,
 - a pragmatic monorepo approach to shared components,
 - CMS-driven configuration of frontend structure,
 - and an architecture that naturally extends to additional channels such as hybrid mobile apps.
 
 If you want to see how these patterns look in an open-source implementation, you can explore Open Self Service — its features, architecture and code — starting from the [**website**](https://www.openselfservice.com/features), [**docs**](https://www.openselfservice.com/docs) and [**GitHub repo**](https://github.com/o2sdev/openselfservice).
-
-
-

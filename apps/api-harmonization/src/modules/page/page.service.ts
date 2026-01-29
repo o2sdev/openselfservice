@@ -5,8 +5,6 @@ import { Observable, concatMap, forkJoin, map, of, switchMap } from 'rxjs';
 
 import { Models } from '@o2s/utils.api-harmonization';
 
-import { checkPermissions } from '@o2s/api-harmonization/utils/permissions';
-
 import { mapArticle, mapInit, mapPage } from './page.mapper';
 import { Init, NotFound, Page } from './page.model';
 import { GetInitQuery, GetPageQuery } from './page.request';
@@ -47,7 +45,7 @@ export class PageService {
     }
 
     getInit(query: GetInitQuery, headers: Models.Headers.AppHeaders): Observable<Init> {
-        const userRoles = this.authService.extractUserRoles(headers['authorization']);
+        const userRoles = this.authService.getRoles(headers['authorization']);
 
         return this.cmsService.getAppConfig({ referrer: query.referrer, locale: headers['x-locale'] }).pipe(
             switchMap((appConfig) => {
@@ -79,8 +77,7 @@ export class PageService {
 
     getPage(query: GetPageQuery, headers: Models.Headers.AppHeaders): Observable<Page | NotFound> {
         const page = this.cmsService.getPage({ slug: query.slug, locale: headers['x-locale'] });
-
-        const userRoles = this.authService.extractUserRoles(headers['authorization']);
+        const userRoles = this.authService.getRoles(headers['authorization']);
 
         return forkJoin([page]).pipe(
             concatMap(([page]) => {
@@ -91,14 +88,14 @@ export class PageService {
                                 throw new NotFoundException();
                             }
 
-                            checkPermissions(article.permissions, userRoles);
+                            Auth.Service.requireRoles(article.roles, userRoles);
 
                             return this.processArticle(article, query, headers);
                         }),
                     );
                 }
 
-                checkPermissions(page.permissions, userRoles);
+                Auth.Service.requireRoles(page.roles, userRoles);
 
                 return this.processPage(page, query, headers);
             }),

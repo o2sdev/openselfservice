@@ -5,6 +5,8 @@ import { Observable, forkJoin, map } from 'rxjs';
 
 import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 
+import { Auth } from '@o2s/framework/modules';
+
 import { mapOrdersSummary } from './orders-summary.mapper';
 import { OrdersSummaryBlock } from './orders-summary.model';
 import { GetOrdersSummaryBlockQuery } from './orders-summary.request';
@@ -14,6 +16,7 @@ export class OrdersSummaryService {
     constructor(
         private readonly cmsService: CMS.Service,
         private readonly orderService: Orders.Service,
+        private readonly authService: Auth.Service,
     ) {}
 
     getOrdersSummaryBlock(
@@ -49,9 +52,31 @@ export class OrdersSummaryService {
         );
 
         return forkJoin([cms, ordersCurrent, ordersPrevious]).pipe(
-            map(([cms, ordersCurrent, ordersPrevious]) =>
-                mapOrdersSummary(cms, ordersCurrent, ordersPrevious, query.range, diff, headers['x-locale']),
-            ),
+            map(([cms, ordersCurrent, ordersPrevious]) => {
+                const result = mapOrdersSummary(
+                    cms,
+                    ordersCurrent,
+                    ordersPrevious,
+                    query.range,
+                    diff,
+                    headers['x-locale'],
+                );
+
+                // Extract permissions using ACL service
+                if (headers.authorization) {
+                    const permissions = this.authService.canPerformActions(headers.authorization, 'orders', [
+                        'view',
+                        'create',
+                    ]);
+
+                    result.permissions = {
+                        view: permissions.view ?? false,
+                        create: permissions.create ?? false,
+                    };
+                }
+
+                return result;
+            }),
         );
     }
 }

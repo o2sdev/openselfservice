@@ -44,7 +44,6 @@ They usually represent either:
 - larger pieces of the frontend app, like whole pages (with titles, SEO metadata and used template),
 - more utility-like entities that do not have to be rendered on the frontend at all, like routing information (e.g. for sitemaps) or some general configuration data (e.g. available locales).
 
-
 ### Module
 
 [A module](https://docs.nestjs.com/modules) is used to configure the dependencies of that module, including the framework modules that provide the data:
@@ -82,6 +81,34 @@ export class TicketListController {
     }
 }
 ```
+
+#### Securing controllers with authentication
+
+You can secure controller endpoints using role-based or permission-based access control decorators. Both `@Roles()` and `@Permissions()` can be used together on the same endpoint if needed:
+
+```typescript title="protecting an endpoint with roles and permissions"
+import { Auth } from '@o2s/framework/modules';
+
+@Controller(URL)
+@UseInterceptors(LoggerService)
+export class PaymentsSummaryController {
+    constructor(protected readonly service: PaymentsSummaryService) {}
+
+    @Get()
+    @Auth.Decorators.Roles({ roles: [] })
+    @Auth.Decorators.Permissions({ resource: 'invoices', actions: ['view'] })
+    getPaymentsSummaryBlock(
+        @Headers() headers: AppHeaders,
+        @Query() query: GetPaymentsSummaryBlockQuery
+    ) {
+        return this.service.getPaymentsSummaryBlock(query, headers);
+    }
+}
+```
+
+The `@Roles()` decorator checks if the user has at least one of the specified roles (or all roles if `mode: MatchingMode.ALL` is used). The `@Permissions()` decorator checks if the user has the required permissions for the specified resource and actions.
+
+If no decorators are present, the endpoint is publicly accessible. For more details on authentication and authorization, see the [authentication documentation](./authentication.md).
 
 ### Service
 

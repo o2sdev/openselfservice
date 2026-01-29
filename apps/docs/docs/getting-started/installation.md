@@ -11,6 +11,7 @@ The best way to get started with Open Self Service is to create an application u
 We offer two starter templates to choose from:
 
 ### O2S Customer Portal starter
+
 For building customer self-service applications and portals:
 
 ```shell
@@ -18,6 +19,7 @@ npx create-o2s-app@latest my-customer-portal
 ```
 
 ### DXP Frontend Starter
+
 For building knowledge bases, marketing portals, and Digital Experience Platforms:
 
 ```shell
@@ -25,6 +27,7 @@ npx create-dxp-app@latest my-dxp-portal
 ```
 
 Both starters will automatically:
+
 - Download the latest template
 - Install all dependencies
 - Set up the project structure

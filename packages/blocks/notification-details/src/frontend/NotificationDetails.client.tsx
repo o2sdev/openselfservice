@@ -22,6 +22,7 @@ import { NotificationDetailsPureProps } from './NotificationDetails.types';
 export const NotificationDetailsPure: React.FC<NotificationDetailsPureProps> = ({ locale, ...component }) => {
     const { data: notification } = component;
     const { labels } = useGlobalContext();
+    const { permissions } = component;
 
     useEffect(() => {
         const markAsViewed = async () => {
@@ -43,7 +44,7 @@ export const NotificationDetailsPure: React.FC<NotificationDetailsPureProps> = (
             }
         };
 
-        if (notification.status.value === 'UNVIEWED') {
+        if (permissions?.mark_read && notification.status.value === 'UNVIEWED') {
             markAsViewed();
         }
     }, [
@@ -53,6 +54,7 @@ export const NotificationDetailsPure: React.FC<NotificationDetailsPureProps> = (
         labels.errors.requestError.title,
         locale,
         notification.status.value,
+        permissions?.mark_read,
     ]);
 
     return (

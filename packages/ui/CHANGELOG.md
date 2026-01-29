@@ -1,5 +1,49 @@
 # @o2s/ui
 
+## 1.9.0
+
+### Minor Changes
+
+- 72391c1: ### Authorization & PBAC Implementation
+
+    This release introduces a comprehensive Policy-Based Access Control system interlaced with Role-Based Access Control.
+
+    #### Framework & Core
+    - **`@o2s/framework` (AuthService)**: Enhanced with abstract permission logic (`getPermissions`, `hasPermission`), role checks (`hasRole`, `requireRoles`), and action batching (`canPerformActions`).
+    - **`@o2s/api-harmonization`**: Implemented global `RolesGuard` and `PermissionsGuard` in `AppModule`.
+    - **`@o2s/utils.api-harmonization`**: Added `extractUserRolesFromJwt` to unify role extraction from different JWT claims.
+
+    #### Features
+    - **Decorators**: New `@Auth.Decorators.Permissions({ resource, actions })` for securing controllers.
+    - **Data Filtering**: Mappers (e.g., `page.mapper.ts`) now filter UI elements (header/footer navigation) based on user roles.
+
+    This provides granular control over resource access and UI visibility based on user roles and permissions.
+
+### Patch Changes
+
+- Updated dependencies [1a5a22d]
+- Updated dependencies [72391c1]
+    - @o2s/framework@1.16.0
+
+## 1.8.0
+
+### Minor Changes
+
+- 5947ca4: added an `inline` variant to the `Filters` component that renders filters immediately, instead of in a draawer component
+- 8f39c25: feat: enhance ProductCard component with new layout adjustments
+- 79b7c87: add inline filters variant with expandable sections
+- cd483b7: - add MoreActionsMenu component and refactor ActionList
+    - migrate OrderDetails and TicketList to unified ActionList API
+    - improve breadcrumbs visibility and card border styling
+
+### Patch Changes
+
+- d197b89: fixed incorrect price rendering in `DataView` component
+- d197b89: removed unnecessary prop destructuring
+- Updated dependencies [e78c11a]
+- Updated dependencies [79b7c87]
+    - @o2s/framework@1.15.0
+
 ## 1.7.1
 
 ### Patch Changes

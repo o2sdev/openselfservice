@@ -13,7 +13,8 @@
                 "CF_PREVIEW_TOKEN",
                 "CF_SPACE_ID",
                 "CF_ENV",
-                "DEFAULT_LOCALE"
+                "DEFAULT_LOCALE",
+                "MOCKED_INTEGRATION_DELAYS_ENABLED"
             ]
         },
         "build": {
@@ -26,7 +27,8 @@
                 "CF_PREVIEW_TOKEN",
                 "CF_SPACE_ID",
                 "CF_ENV",
-                "DEFAULT_LOCALE"
+                "DEFAULT_LOCALE",
+                "MOCKED_INTEGRATION_DELAYS_ENABLED"
             ]
         }
     }

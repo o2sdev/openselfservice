@@ -17,11 +17,15 @@ export class OrganizationsService {
 
     getCustomers(query: GetCustomersQuery, headers: Models.Headers.AppHeaders): Observable<CustomerList> {
         const cms = this.cmsService.getOrganizationList({ locale: headers['x-locale'] });
-        const organizations = this.organizationsService.getOrganizationList({
-            ...query,
-            limit: query.limit || 1000,
-            offset: query.offset || 0,
-        });
+        // Pass authorization token to filter organizations by current user
+        const organizations = this.organizationsService.getOrganizationList(
+            {
+                ...query,
+                limit: query.limit || 1000,
+                offset: query.offset || 0,
+            },
+            headers.authorization,
+        );
 
         return forkJoin([organizations, cms]).pipe(
             map(([organizations, cms]) => {

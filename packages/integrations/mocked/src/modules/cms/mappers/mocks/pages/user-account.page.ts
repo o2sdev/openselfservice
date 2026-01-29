@@ -1,4 +1,6 @@
-import { Auth, CMS } from '@o2s/framework/modules';
+import { CMS } from '@o2s/framework/modules';
+
+import { Roles } from '@/utils/roles';
 
 export const PAGE_USER_ACCOUNT_EN: CMS.Model.Page.Page = {
     id: '7',
@@ -17,7 +19,7 @@ export const PAGE_USER_ACCOUNT_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.PROSPECT, Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
+    roles: [Roles.PROSPECT, Roles.ORG_USER, Roles.ORG_ADMIN],
     hasOwnTitle: true,
     template: {
         __typename: 'OneColumnTemplate',
@@ -51,7 +53,7 @@ export const PAGE_USER_ACCOUNT_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.PROSPECT, Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
+    roles: [Roles.PROSPECT, Roles.ORG_USER, Roles.ORG_ADMIN],
     hasOwnTitle: true,
     template: {
         __typename: 'OneColumnTemplate',
@@ -85,7 +87,7 @@ export const PAGE_USER_ACCOUNT_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [Auth.Constants.Roles.PROSPECT, Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN],
+    roles: [Roles.PROSPECT, Roles.ORG_USER, Roles.ORG_ADMIN],
     hasOwnTitle: true,
     template: {
         __typename: 'OneColumnTemplate',

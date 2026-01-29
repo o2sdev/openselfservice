@@ -19,7 +19,7 @@ export class NotificationDetailsController {
     constructor(protected readonly service: NotificationDetailsService) {}
 
     @Get(':id')
-    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN] })
+    @Auth.Decorators.Permissions({ resource: 'notifications', actions: ['view'] })
     getNotificationDetailsBlock(
         @Headers() headers: Models.Headers.AppHeaders,
         @Query() query: GetNotificationDetailsBlockQuery,
@@ -29,7 +29,7 @@ export class NotificationDetailsController {
     }
 
     @Post()
-    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN] })
+    @Auth.Decorators.Permissions({ resource: 'notifications', actions: ['mark_read'] })
     markNotificationAs(@Body() body: MarkNotificationAsBlockBody) {
         return this.service.markNotificationAs(body);
     }

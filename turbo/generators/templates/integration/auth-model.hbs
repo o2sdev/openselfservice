@@ -1,0 +1,14 @@
+import { Auth } from '@o2s/framework/modules';
+
+export interface Jwt extends Auth.Model.Jwt {
+    // TODO: Extend with IAM-specific token fields
+    // Add fields that your IAM system includes in the JWT token
+    permissions?: Auth.Model.Permissions;
+    roles?: string[];
+    customer?: {
+        id: string;
+        name: string;
+        roles?: string[];
+        permissions: Auth.Model.Permissions;
+    };
+}

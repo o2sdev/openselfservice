@@ -1,0 +1,93 @@
+name: Determine changed packages
+
+description: 'Determines which packages have changed using Turborepo. Returns JSON output with changed packages information.'
+
+inputs:
+    event-name:
+        description: 'GitHub event name (pull_request or push)'
+        required: true
+    base-sha:
+        description: 'Base SHA for pull requests (github.event.pull_request.base.sha)'
+        required: false
+        default: ''
+    fetch-depth:
+        description: 'Git fetch depth for checkout (0 for full history, required for turbo)'
+        required: false
+        default: '0'
+
+outputs:
+    package_changed:
+        description: 'JSON string containing changed packages information from turbo dry-run'
+        value: ${{ steps.changeset.outputs.result }}
+    stories_changed:
+        description: 'True if any storybook files or config changed'
+        value: ${{ steps.storybook.outputs.stories_changed }}
+    requires_changeset:
+        description: 'True if changes require a changeset (framework/integrations/modules/blocks)'
+        value: ${{ steps.changeset-required.outputs.requires_changeset }}
+
+runs:
+    using: 'composite'
+    steps:
+        - name: Checkout code
+          uses: actions/checkout@v6
+          with:
+              # We set fetch-depth to 0 so referenced commits are available for turbo
+              # This is required for turbo to detect changes properly
+              fetch-depth: ${{ inputs.fetch-depth }}
+
+        - name: Determine changed packages
+          id: changeset
+          shell: bash
+          env:
+              TURBO_REF_FILTER: ${{ inputs.event-name == 'pull_request' && inputs.base-sha || 'HEAD^' }}
+          run: |
+              # Get turbo dry-run output
+              TURBO_OUTPUT=$(npx -y turbo build --dry-run=json --filter=...[$TURBO_REF_FILTER])
+              
+              # Set output for the action
+              echo 'result<<CHANGESET_DELIMITER' >> $GITHUB_OUTPUT
+              echo "$TURBO_OUTPUT" >> $GITHUB_OUTPUT
+              echo 'CHANGESET_DELIMITER' >> $GITHUB_OUTPUT
+
+              # Debug logging
+              echo "### Changed Packages (Turborepo) ###"
+              echo "$TURBO_OUTPUT" | jq -r '.packages[]' || echo "No packages changed or jq error"
+              echo "####################################"
+
+        - name: Determine storybook changes
+          id: storybook
+          shell: bash
+          env:
+              TURBO_REF_FILTER: ${{ inputs.event-name == 'pull_request' && inputs.base-sha || 'HEAD^' }}
+          run: |
+              STORYBOOK_CHANGES=$(git diff --name-only $TURBO_REF_FILTER | grep -E "\.stories\.tsx$|^.storybook/|^packages/blocks/.*\.client\.tsx$|^packages/ui/src/.*\.tsx$" || true)
+              
+              if [ -n "$STORYBOOK_CHANGES" ]; then
+                  echo "stories_changed=true" >> $GITHUB_OUTPUT
+                  echo "### Storybook changes detected ###"
+                  echo "$STORYBOOK_CHANGES"
+                  echo "##################################"
+              else
+                  echo "stories_changed=false" >> $GITHUB_OUTPUT
+                  echo "No storybook changes detected."
+              fi
+
+        - name: Determine if changeset is required
+          id: changeset-required
+          shell: bash
+          env:
+              TURBO_REF_FILTER: ${{ inputs.event-name == 'pull_request' && inputs.base-sha || 'HEAD^' }}
+          run: |
+              # Check if changes involve framework, integrations, modules, or blocks
+              CHANGESET_REQUIRED_FILES=$(git diff --name-only $TURBO_REF_FILTER | grep -E "^packages/(framework|integrations|modules|blocks)/" || true)
+
+              if [ -n "$CHANGESET_REQUIRED_FILES" ]; then
+                  echo "requires_changeset=true" >> $GITHUB_OUTPUT
+                  echo "### Changes requiring changeset detected ###"
+                  echo "$CHANGESET_REQUIRED_FILES"
+                  echo "############################################"
+              else
+                  echo "requires_changeset=false" >> $GITHUB_OUTPUT
+                  echo "No changes requiring changeset detected."
+              fi

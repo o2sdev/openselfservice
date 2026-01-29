@@ -17,6 +17,7 @@ npx create-dxp-app@latest my-dxp-portal
 ```
 
 This command will:
+
 - Download the latest DXP Frontend Starter
 - Install all dependencies
 - Set up the project structure optimized for content management
@@ -34,14 +35,12 @@ This command will:
 ## Documentation
 
 All Blocks that you can use are documented in our Storybook:
+
 - **[Blocks and content model](./blocks.md)** - Docs on our DXP Blocks and CMS content types
 - **[DXP Starter Storybook](http://storybook-dxp.openselfservice.com)** - Complete documentation of all our DXP Blocks in Storybook
-
 
 ## Next steps
 
 After creating your project, follow the [Getting Started](../../getting-started/overview.md) guide to run and customize your application.
 
 For detailed customization options, see the [Customization](../../guides/customization.md) section.
-
-

@@ -6,7 +6,6 @@ CREATE TABLE "User" (
     "password" TEXT,
     "emailVerified" DATETIME,
     "image" TEXT,
-    "role" TEXT NOT NULL DEFAULT 'selfservice_org_user',
     "defaultCustomerId" TEXT
 );
 

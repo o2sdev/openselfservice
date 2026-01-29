@@ -10,6 +10,10 @@ export class TicketRecentBlock extends Models.Block.Block {
     tickets!: {
         data: Ticket[];
     };
+    permissions?: {
+        view: boolean;
+        create: boolean;
+    };
 }
 
 export class Ticket {
@@ -19,7 +23,7 @@ export class Ticket {
     topic!: {
         value: Tickets.Model.Ticket['topic'];
     };
-    type!: {
+    type?: {
         value: Tickets.Model.Ticket['type'];
     };
     status!: {

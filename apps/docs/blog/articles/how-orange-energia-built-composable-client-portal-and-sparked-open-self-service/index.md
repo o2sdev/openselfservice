@@ -115,7 +115,6 @@ Orange Energia's security team had strict requirements across multiple areas of 
 
 One of these areas was the firewall support: it needed exact API specifications to allow known traffic patterns while blocking anything that didn't match documented schemas. This meant we needed complete OpenAPI definitions for our Backend for Frontend (BFF) layer, including precise field formats, data types, and validation rules. Working through these constraints together gave us a much clearer view of how security requirements shape architecture and delivery processes.
 
-
 Initially, our BFF implementation used TypeScript interfaces. However, NestJS decorators for generating OpenAPI schemas only work with classes, not interfaces. We refactored the codebase to use classes instead, enabling automatic OpenAPI schema generation from our NestJS controllers and DTOs.
 
 To make this approach practical at scale, we defined DTO classes using `@ApiProperty` decorators and backed them with a shared set of reusable patterns. This avoided copying the same regular expressions and constraints across dozens of classes:
@@ -152,47 +151,47 @@ The `PATTERNS` namespace centralized all OpenAPI and validation metadata — inc
 
 ```ts
 export namespace PATTERNS {
-  export const EMAIL = {
-    pattern:
-      "^[a-zA-Z0-9!#$%&'*+\\/=?^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%&'*+\\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$",
-    minLength: 5,
-    maxLength: 320,
-    description: 'Email',
-    example: 'john.smith@mail.com',
-  };
+    export const EMAIL = {
+        pattern:
+            "^[a-zA-Z0-9!#$%&'*+\\/=?^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%&'*+\\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$",
+        minLength: 5,
+        maxLength: 320,
+        description: 'Email',
+        example: 'john.smith@mail.com',
+    };
 
-  export const PHONE = {
-    pattern: '^\\+?\\d{1,4}?[-.\\s]?\\(?\\d{1,3}?\\)?[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,9}$',
-    minLength: 1,
-    maxLength: 50,
-    description: 'Phone number',
-    example: '+48 500 500 500',
-  };
+    export const PHONE = {
+        pattern: '^\\+?\\d{1,4}?[-.\\s]?\\(?\\d{1,3}?\\)?[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,9}$',
+        minLength: 1,
+        maxLength: 50,
+        description: 'Phone number',
+        example: '+48 500 500 500',
+    };
 
-  export const NAME = {
-    pattern: '^([a-zA-Z0-9À-ÖØ-öø-ǿ \\xA0\\.\\,\\-\\/\\{\\}\\_\\:])*$',
-    minLength: 1,
-    maxLength: 256,
-  };
+    export const NAME = {
+        pattern: '^([a-zA-Z0-9À-ÖØ-öø-ǿ \\xA0\\.\\,\\-\\/\\{\\}\\_\\:])*$',
+        minLength: 1,
+        maxLength: 256,
+    };
 
-  export const LANG_CODE = {
-    pattern: '^[a-zA-Z]{2}$',
-    minLength: 2,
-    maxLength: 2,
-    description: 'Language code',
-    example: 'EN',
-  };
+    export const LANG_CODE = {
+        pattern: '^[a-zA-Z]{2}$',
+        minLength: 2,
+        maxLength: 2,
+        description: 'Language code',
+        example: 'EN',
+    };
 
-  export const CUSTOMER = {
-    type: 'string',
-    pattern: '^\\d+$',
-    minLength: 1,
-    maxLength: 10,
-    description: 'Customer ID',
-    example: '2000015',
-  };
+    export const CUSTOMER = {
+        type: 'string',
+        pattern: '^\\d+$',
+        minLength: 1,
+        maxLength: 10,
+        description: 'Customer ID',
+        example: '2000015',
+    };
 
-  // ... more reusable patterns
+    // ... more reusable patterns
 }
 ```
 
@@ -200,26 +199,24 @@ To catch security compliance issues earlier, we built a custom validator that te
 
 ```json
 {
-  "type": "INVALID_REQUEST",
-  "data": [
-    {
-      "name": "id",
-      "value": [
-        "12345"
-      ],
-      "errors": [
+    "type": "INVALID_REQUEST",
+    "data": [
         {
-          "instancePath": "/0",
-          "schemaPath": "#/items/type",
-          "keyword": "type",
-          "params": {
-            "type": "integer"
-          },
-          "message": "must be integer"
+            "name": "id",
+            "value": ["12345"],
+            "errors": [
+                {
+                    "instancePath": "/0",
+                    "schemaPath": "#/items/type",
+                    "keyword": "type",
+                    "params": {
+                        "type": "integer"
+                    },
+                    "message": "must be integer"
+                }
+            ]
         }
-      ]
-    }
-  ]
+    ]
 }
 ```
 
@@ -229,20 +226,19 @@ These experiences led to standardizing security practices in O2S. We configure r
 import { createClient } from '@hey-api/openapi-ts';
 
 const generate = async () => {
-  await createClient({
-    input: './oas.yaml',
-    output: './generated/zendesk',
-    plugins: [
-      {
-        name: '@hey-api/client-axios',
-      },
-    ],
-  });
+    await createClient({
+        input: './oas.yaml',
+        output: './generated/zendesk',
+        plugins: [
+            {
+                name: '@hey-api/client-axios',
+            },
+        ],
+    });
 };
 
 generate();
 ```
-
 
 ### Frontend architecture and state management
 
@@ -266,7 +262,7 @@ In Orange Energia we used Keycloak for authentication. To maintain visual consis
 
 We used [Keycloakify](https://www.keycloakify.dev/) — a library that provides React components for Keycloak integration. It allows embedding a React application that communicates with Keycloak and renders forms using existing UI components and styles. This approach is still used in O2S for Keycloak integrations.
 
-The project also implemented user impersonation that can be triggered from a Backoffice application. Administrators can sign in as another user and perform actions in their name  to troubleshoot issues or test user experiences. This required careful token management — generating impersonated tokens in the admin panel, storing them in cookies accessible on the main domain, and handling token substitution in next-auth. All impersonation actions were logged for audit purposes. While this specific implementation may not be needed in every deployment, the experience informed how we think about flexible authentication patterns in O2S.
+The project also implemented user impersonation that can be triggered from a Backoffice application. Administrators can sign in as another user and perform actions in their name to troubleshoot issues or test user experiences. This required careful token management — generating impersonated tokens in the admin panel, storing them in cookies accessible on the main domain, and handling token substitution in next-auth. All impersonation actions were logged for audit purposes. While this specific implementation may not be needed in every deployment, the experience informed how we think about flexible authentication patterns in O2S.
 
 ### Key learnings for Open Self Service
 
@@ -291,4 +287,3 @@ Want to learn more about composable architecture for customer portals?
 - [Open Self Service website](https://www.openselfservice.com)
 - [Documentation](https://www.openselfservice.com/docs)
 - [GitHub repo](https://github.com/o2sdev/openselfservice)
-

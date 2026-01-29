@@ -1,8 +1,8 @@
 {
-  "label": "Main components",
-  "position": 300,
-  "link": {
-      "type": "doc",
-      "id": "overview"
-  }
+    "label": "Main components",
+    "position": 300,
+    "link": {
+        "type": "doc",
+        "id": "overview"
+    }
 }

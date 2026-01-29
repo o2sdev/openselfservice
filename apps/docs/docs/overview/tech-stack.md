@@ -82,6 +82,7 @@ While Nest.js is a very thorough backend framework, we use only a smaller set of
 - role-based access.
 
 ### [RxJS](https://rxjs.dev/)
+
 Because JavaScript operations to fetch data are asynchronous, and in order to provide all necessary data for the frontend it's required to query multiple APIs, there needs to be a way to manage requests to:
 
 - run several requests in parallel and wait untill all are resolved,

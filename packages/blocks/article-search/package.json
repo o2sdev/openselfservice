@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.article-search",
-    "version": "1.2.0",
+    "version": "1.4.0",
     "private": false,
     "license": "MIT",
     "description": "Block for searching articles.",
@@ -37,7 +37,7 @@
         "@o2s/vitest-config": "*",
         "concurrently": "^9.2.1",
         "eslint": "^9.39.2",
-        "prettier": "^3.7.4",
+        "prettier": "^3.8.1",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"
     },

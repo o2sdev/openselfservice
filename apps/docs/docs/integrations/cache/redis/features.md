@@ -6,14 +6,14 @@ sidebar_position: 200
 
 ## Overview
 
-| Feature | Status | Notes |
-|---------|--------|-------|
-| Cache Operations | ✅ | get, set, del |
-| TTL Management | ✅ | Automatic key expiration |
-| Conditional Caching | ✅ | Toggle via CACHE_ENABLED |
-| Error Handling | ✅ | Graceful fallback on failures |
-| Framework Integration | ✅ | Implements Cache.Service |
-| CMS Integration | ✅ | Used by Strapi/Contentful |
+| Feature               | Status | Notes                         |
+| --------------------- | ------ | ----------------------------- |
+| Cache Operations      | ✅     | get, set, del                 |
+| TTL Management        | ✅     | Automatic key expiration      |
+| Conditional Caching   | ✅     | Toggle via CACHE_ENABLED      |
+| Error Handling        | ✅     | Graceful fallback on failures |
+| Framework Integration | ✅     | Implements Cache.Service      |
+| CMS Integration       | ✅     | Used by Strapi/Contentful     |
 
 ## Cache operations
 
@@ -50,6 +50,7 @@ app-config-{locale}
 ```
 
 Cache flow:
+
 1. Check cache for content
 2. If cached → return immediately
 3. If not cached → fetch from CMS API → store in cache → return

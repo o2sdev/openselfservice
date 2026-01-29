@@ -32,6 +32,11 @@ export const PaymentsSummary: React.FC<PaymentsSummaryProps> = async ({
         return null;
     }
 
+    // Check view permission - if not allowed, don't render
+    if (!data.permissions?.view) {
+        return null;
+    }
+
     return (
         <PaymentsSummaryDynamic
             {...data}

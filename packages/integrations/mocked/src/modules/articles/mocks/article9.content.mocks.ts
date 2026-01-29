@@ -592,7 +592,7 @@ export const MOCK_ARTICLE9_EN: Articles.Model.Article[] = [
     {
         id: 'art-009',
         slug: '/help-and-support/safety/safety-and-maintenance-guide-for-powerpro-tools',
-        permissions: [],
+        roles: [],
         createdAt: '2023-03-20T10:15:00Z',
         updatedAt: '2023-06-05T16:30:00Z',
         title: 'Safety and Maintenance Guide for PowerPro Tools',
@@ -657,7 +657,7 @@ export const MOCK_ARTICLE9_DE: Articles.Model.Article[] = [
     {
         id: 'art-009',
         slug: '/hilfe-und-support/sicherheit/sicherheits-und-wartungsleitfaden-fur-powerpro-werkzeuge',
-        permissions: [],
+        roles: [],
         createdAt: '2023-03-20T10:15:00Z',
         updatedAt: '2023-06-05T16:30:00Z',
         title: 'Sicherheits- und Wartungsleitfaden für PowerPro-Werkzeuge',
@@ -723,7 +723,7 @@ export const MOCK_ARTICLE9_PL: Articles.Model.Article[] = [
     {
         id: 'art-009',
         slug: '/pomoc-i-wsparcie/bezpieczenstwo/przewodnik-bezpieczenstwa-i-konserwacji-narzedzi-powerpro',
-        permissions: [],
+        roles: [],
         createdAt: '2023-03-20T10:15:00Z',
         updatedAt: '2023-06-05T16:30:00Z',
         title: 'Przewodnik bezpieczeństwa i konserwacji narzędzi PowerPro',

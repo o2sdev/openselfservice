@@ -1,6 +1,6 @@
 {
     "name": "@o2s/docs",
-    "version": "1.5.1",
+    "version": "1.7.0",
     "private": true,
     "scripts": {
         "docusaurus": "docusaurus",
@@ -14,7 +14,7 @@
         "write-heading-ids": "docusaurus write-heading-ids",
         "typecheck": "tsc",
         "lint": "tsc --noEmit && eslint \"src/**/*.{ts,tsx}\" --fix --max-warnings=0",
-        "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
+        "format": "prettier --write \"{src,docs,blog}/**/*.{js,jsx,ts,tsx,css,scss,json,md}\""
     },
     "dependencies": {
         "@docusaurus/core": "3.9.2",
@@ -22,7 +22,7 @@
         "@docusaurus/plugin-google-tag-manager": "^3.9.2",
         "@docusaurus/preset-classic": "3.9.2",
         "@docusaurus/theme-mermaid": "3.9.2",
-        "@easyops-cn/docusaurus-search-local": "^0.52.2",
+        "@easyops-cn/docusaurus-search-local": "^0.52.3",
         "@mdx-js/react": "^3.1.1",
         "@radix-ui/react-accordion": "^1.2.12",
         "@vercel/analytics": "^1.6.1",
@@ -30,11 +30,11 @@
         "clsx": "^2.1.1",
         "docusaurus-plugin-image-zoom": "^3.0.1",
         "docusaurus-plugin-sass": "^0.2.6",
-        "framer-motion": "^12.26.2",
+        "framer-motion": "^12.29.2",
         "prism-react-renderer": "^2.4.1",
-        "react": "^19.2.3",
-        "react-dom": "^19.2.3",
-        "sass": "^1.97.2",
+        "react": "^19.2.4",
+        "react-dom": "^19.2.4",
+        "sass": "^1.97.3",
         "vanilla-cookieconsent": "^3.1.0"
     },
     "devDependencies": {
@@ -49,7 +49,7 @@
         "@trivago/prettier-plugin-sort-imports": "^6.0.2",
         "autoprefixer": "^10.4.23",
         "postcss": "^8.5.6",
-        "prettier": "^3.7.4",
+        "prettier": "^3.8.1",
         "tailwindcss": "^4.1.18",
         "typescript": "5.9.3"
     },

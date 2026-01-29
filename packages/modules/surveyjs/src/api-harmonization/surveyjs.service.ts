@@ -11,9 +11,9 @@ import { SurveyModel } from 'survey-core';
 import { Utils } from '@o2s/utils.api-harmonization';
 import { LoggerService } from '@o2s/utils.logger';
 
-import { Auth, CMS } from '@o2s/framework/modules';
+import { Auth, CMS, Tickets } from '@o2s/framework/modules';
 
-import { mapSurveyJS, mapSurveyJsRequest } from './surveyjs.mapper';
+import { mapSurveyJS, mapSurveyJsRequest, mapSurveyToTicket } from './surveyjs.mapper';
 import { SurveyJSLibraryJsonSchema, SurveyJs, SurveyResult } from './surveyjs.model';
 import { SurveyJsQuery, SurveyJsSubmitPayload } from './surveyjs.request';
 
@@ -25,6 +25,7 @@ export class SurveyjsService {
         protected httpClient: HttpService,
         private readonly config: ConfigService,
         private readonly cmsService: CMS.Service,
+        private readonly ticketsService: Tickets.Service,
         @Inject(LoggerService) protected readonly logger: LoggerService,
     ) {
         this.surveyjsHost = this.config.get('API_SURVEYJS_BASE_URL') || '';
@@ -66,14 +67,17 @@ export class SurveyjsService {
     }
 
     public submitSurvey(payload: SurveyJsSubmitPayload, authorization?: string): Observable<void> {
-        return this.cmsService.getSurvey({ code: payload.code }).pipe(
+        const { code, surveyPayload } = payload;
+
+        return this.cmsService.getSurvey({ code }).pipe(
             switchMap((survey) => {
-                const decodedToken = authorization ? Utils.Auth.decodeAuthorizationToken(authorization) : undefined;
+                const decodedToken = authorization ? Utils.Auth.decodeToken(authorization) : undefined;
                 if (!this.hasAccess(survey.requiredRoles, decodedToken)) {
                     this.logger.info('User does not have access to survey');
                     throw new UnauthorizedException('User does not have access to survey');
                 }
-                return this.validateSurvey(survey.code, payload.surveyPayload).pipe(
+
+                return this.validateSurvey(code, surveyPayload).pipe(
                     concatMap((validationResult) => {
                         if (!validationResult) {
                             this.logger.error('Survey payload is not valid.');
@@ -85,15 +89,16 @@ export class SurveyjsService {
                         for (const destination of survey.submitDestination) {
                             switch (destination) {
                                 case 'surveyjs':
-                                    submissions.push(
-                                        this.submitToSurveyJs(payload.surveyPayload, survey.postId, userEmail),
-                                    );
+                                    submissions.push(this.submitToSurveyJs(surveyPayload, survey.postId, userEmail));
+                                    break;
+                                case 'tickets':
+                                    submissions.push(this.submitToTickets(surveyPayload, authorization));
                                     break;
                             }
                         }
 
                         if (!submissions.length) {
-                            this.logger.info(`No submit destinations specified for survey with code ${payload.code}`);
+                            this.logger.info(`No submit destinations specified for survey with code ${code}`);
                             return of(undefined);
                         }
 
@@ -127,6 +132,32 @@ export class SurveyjsService {
                 throw new BadRequestException('Error occurred while submitting survey.');
             }),
         );
+    }
+
+    private submitToTickets(surveyPayload: SurveyResult, authorization?: string): Observable<void> {
+        try {
+            // Validate required fields before mapping
+            if (!surveyPayload.description || !surveyPayload.ticketFormId) {
+                this.logger.error('Missing required fields for ticket creation: description and type are required');
+                throw new BadRequestException('Description and type are required to create a ticket');
+            }
+
+            const ticketData = mapSurveyToTicket(surveyPayload);
+
+            return this.ticketsService.createTicket(ticketData, authorization).pipe(
+                map(() => {
+                    this.logger.info('Ticket created successfully from survey', 'SURVEYJS');
+                    return undefined;
+                }),
+                catchError((error) => {
+                    this.logger.error(`Error occurred while creating ticket from survey: ${error.message}`, 'SURVEYJS');
+                    throw new BadRequestException('Error occurred while creating ticket from survey.');
+                }),
+            );
+        } catch (error) {
+            this.logger.error(`Error mapping survey to ticket: ${(error as Error).message}`, 'SURVEYJS');
+            throw new BadRequestException('Invalid survey data for ticket creation.');
+        }
     }
 
     private hasAccess(requiredRoles: string[], decodedToken?: Auth.Model.Jwt | undefined): boolean {

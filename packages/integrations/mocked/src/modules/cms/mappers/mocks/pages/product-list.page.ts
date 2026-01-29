@@ -19,7 +19,7 @@ export const PAGE_PRODUCT_LIST_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [],
+    roles: [],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',
@@ -53,7 +53,7 @@ export const PAGE_PRODUCT_LIST_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [],
+    roles: [],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',
@@ -87,7 +87,7 @@ export const PAGE_PRODUCT_LIST_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    permissions: [],
+    roles: [],
     hasOwnTitle: false,
     template: {
         __typename: 'OneColumnTemplate',
