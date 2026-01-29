@@ -8,6 +8,8 @@ import {
     type CategoryObject,
     type SectionObject,
     listArticles,
+    listArticlesByCategoryWithLocale,
+    listCategories,
     showArticle,
     showCategory,
     showSection,
@@ -17,7 +19,7 @@ import { showUser } from '@/generated/zendesk';
 import type { UserObject } from '@/generated/zendesk';
 import { client as ticketingClient } from '@/generated/zendesk/client.gen';
 
-import { mapArticle, mapArticles, mapCategory } from './zendesk-article.mapper';
+import { mapArticle, mapArticles, mapCategories, mapCategory } from './zendesk-article.mapper';
 
 type ZendeskArticle = ArticleObject;
 type ZendeskCategory = CategoryObject;
@@ -87,7 +89,18 @@ export class ZendeskArticleService extends Articles.Service {
 
                 // Fetch category/section if available
                 const categoryOrSection$ = article.section_id
-                    ? this.fetchSection(article.section_id, zendeskLocale).pipe(catchError(() => of(undefined)))
+                    ? this.fetchSection(article.section_id, zendeskLocale).pipe(
+                          switchMap((section) => {
+                              if (!section || !section.category_id) {
+                                  return of(undefined);
+                              }
+                              // Fetch category from section
+                              return this.fetchCategory(section.category_id, zendeskLocale).pipe(
+                                  catchError(() => of(undefined)),
+                              );
+                          }),
+                          catchError(() => of(undefined)),
+                      )
                     : of(undefined);
 
                 // Fetch author if available
@@ -96,8 +109,8 @@ export class ZendeskArticleService extends Articles.Service {
                     : of(undefined);
 
                 return from(Promise.all([firstValueFrom(categoryOrSection$), firstValueFrom(author$)])).pipe(
-                    map(([categoryOrSection, author]) => {
-                        return mapArticle(article, categoryOrSection, author);
+                    map(([category, author]) => {
+                        return mapArticle(article, category, author);
                     }),
                 );
             }),
@@ -113,17 +126,38 @@ export class ZendeskArticleService extends Articles.Service {
     getArticleList(options: Articles.Request.GetArticleListQuery): Observable<Articles.Model.Articles> {
         // Map locale to Zendesk format (locale is required)
         const zendeskLocale = mapLocaleToZendesk(options.locale);
-        const queryOptions = {
-            ...options,
-            locale: zendeskLocale,
-        };
 
-        return this.fetchArticles(queryOptions).pipe(
-            map((response) => {
-                const articles = response.articles || [];
-                // Zendesk doesn't provide total count in the response, so we use articles.length
-                // In a real scenario, you might need to make additional requests to get the total
-                return mapArticles(articles, articles.length);
+        // If category filter is provided, resolve it to numeric ID (if it's a slug) and fetch category
+        const categoryFilter$ = options.category
+            ? this.resolveCategoryId(options.category, zendeskLocale).pipe(
+                  switchMap((categoryId) => {
+                      if (!categoryId) {
+                          return of({ categoryId: undefined, category: undefined });
+                      }
+                      return this.fetchCategory(categoryId, zendeskLocale).pipe(
+                          map((category) => ({ categoryId, category })),
+                          catchError(() => of({ categoryId, category: undefined })),
+                      );
+                  }),
+              )
+            : of({ categoryId: undefined, category: undefined });
+
+        return categoryFilter$.pipe(
+            switchMap(({ categoryId, category }) => {
+                const queryOptions = {
+                    ...options,
+                    locale: zendeskLocale,
+                    category: categoryId ? categoryId.toString() : undefined,
+                };
+
+                return this.fetchArticles(queryOptions).pipe(
+                    map((response) => {
+                        const articles = response.articles || [];
+                        // Zendesk doesn't provide total count in the response, so we use articles.length
+                        // In a real scenario, you might need to make additional requests to get the total
+                        return mapArticles(articles, articles.length, category);
+                    }),
+                );
             }),
             catchError((error) => {
                 return throwError(() => new Error(`Failed to fetch articles: ${error.message || error}`));
@@ -132,36 +166,89 @@ export class ZendeskArticleService extends Articles.Service {
     }
 
     getCategory(options: Articles.Request.GetCategoryParams): Observable<Articles.Model.Category> {
+        const zendeskLocale = mapLocaleToZendesk(options.locale);
         const categoryId = Number(options.id);
-        if (isNaN(categoryId)) {
-            return throwError(() => new NotFoundException(`Invalid category ID: ${options.id}`));
+
+        // If options.id is a numeric ID, fetch directly
+        if (!isNaN(categoryId)) {
+            return this.fetchCategory(categoryId, zendeskLocale).pipe(
+                map((category) => {
+                    if (!category) {
+                        throw new NotFoundException(`Category not found: ${options.id}`);
+                    }
+                    return mapCategory(category);
+                }),
+                catchError((error) => {
+                    if (error?.status === 404 || error?.message?.includes('404')) {
+                        return throwError(() => new NotFoundException(`Category not found: ${options.id}`));
+                    }
+                    return throwError(() => error);
+                }),
+            );
         }
 
-        const zendeskLocale = mapLocaleToZendesk(options.locale);
+        // If options.id is a slug, fetch all categories and find by slug
+        return this.fetchCategories(zendeskLocale).pipe(
+            map((categories) => {
+                const category = categories.find((cat) => {
+                    const mapped = mapCategory(cat);
+                    return mapped.slug === options.id || mapped.id === options.id;
+                });
 
-        return this.fetchCategory(categoryId, zendeskLocale).pipe(
-            map((category) => {
                 if (!category) {
                     throw new NotFoundException(`Category not found: ${options.id}`);
                 }
+
                 return mapCategory(category);
             }),
             catchError((error) => {
-                if (error?.status === 404 || error?.message?.includes('404')) {
-                    return throwError(() => new NotFoundException(`Category not found: ${options.id}`));
+                if (error instanceof NotFoundException) {
+                    return throwError(() => error);
                 }
-                return throwError(() => error);
+                return throwError(() => new NotFoundException(`Category not found: ${options.id}`));
             }),
         );
     }
 
-    getCategoryList(_options: Articles.Request.GetCategoryListQuery): Observable<Articles.Model.Categories> {
-        // TODO: Implement category list fetching
-        // For now, return empty list
-        return of({
-            data: [],
-            total: 0,
-        });
+    getCategoryList(options: Articles.Request.GetCategoryListQuery): Observable<Articles.Model.Categories> {
+        const zendeskLocale = mapLocaleToZendesk(options.locale);
+
+        const queryParams: Record<string, unknown> = {};
+
+        // Map framework sort options to Zendesk API
+        if (options.sort?.field) {
+            queryParams.sort_by = options.sort.field;
+        }
+        if (options.sort?.order) {
+            queryParams.sort_order = options.sort.order;
+        }
+
+        // Pagination
+        if (options.limit) {
+            queryParams.per_page = options.limit;
+        }
+        if (options.offset) {
+            queryParams.page = Math.floor(options.offset / (options.limit || 10)) + 1;
+        }
+
+        return from(
+            listCategories({
+                path: {
+                    locale: zendeskLocale,
+                },
+                query: queryParams,
+            }),
+        ).pipe(
+            map((response) => {
+                const categories = response.data?.categories || [];
+                // Zendesk doesn't provide total count in the response, so we use categories.length
+                // In a real scenario, you might need to make additional requests to get the total
+                return mapCategories(categories, categories.length);
+            }),
+            catchError((error) => {
+                return throwError(() => new Error(`Failed to fetch categories: ${error.message || error}`));
+            }),
+        );
     }
 
     searchArticles(options: Articles.Request.SearchArticlesBody): Observable<Articles.Model.Articles> {
@@ -172,10 +259,17 @@ export class ZendeskArticleService extends Articles.Service {
 
     /**
      * Extract article ID from slug
-     * Slug format can be: "12345" or "12345-article-title"
+     * Slug format can be:
+     * - "12345" or "12345-article-title"
+     * - "/help-and-support/category-slug/12345-article-title" (full path)
      */
-    private extractArticleIdFromSlug(slug: string): number | null {
-        const match = slug.match(/^(\d+)/);
+    private extractArticleIdFromSlug(slug: string | undefined): number | null {
+        if (!slug) {
+            return null;
+        }
+        // Extract ID from full path or simple slug
+        // Match: number at the start or number after last slash
+        const match = slug.match(/(?:^|\/)(\d+)/);
         if (match) {
             return Number(match[1]);
         }
@@ -203,6 +297,27 @@ export class ZendeskArticleService extends Articles.Service {
         );
     }
 
+    private resolveCategoryId(categoryIdOrSlug: string, locale: string): Observable<number | undefined> {
+        // If it's already a numeric ID, return it
+        const numericId = Number(categoryIdOrSlug);
+        if (!isNaN(numericId)) {
+            return of(numericId);
+        }
+
+        // Otherwise, it's a slug - fetch all categories and find by slug
+        return this.fetchCategories(locale).pipe(
+            map((categories) => {
+                for (const category of categories) {
+                    const mapped = mapCategory(category);
+                    if (mapped.slug === categoryIdOrSlug || mapped.id === categoryIdOrSlug) {
+                        return category.id;
+                    }
+                }
+                return undefined;
+            }),
+        );
+    }
+
     private fetchArticles(options: Articles.Request.GetArticleListQuery): Observable<{ articles: ZendeskArticle[] }> {
         const queryParams: Record<string, unknown> = {};
 
@@ -222,14 +337,26 @@ export class ZendeskArticleService extends Articles.Service {
             queryParams.page = Math.floor(options.offset / (options.limit || 10)) + 1;
         }
 
-        return from(
-            listArticles({
-                path: {
-                    locale: options.locale,
-                },
-                query: queryParams,
-            }),
-        ).pipe(
+        // If category filter is provided and it's a numeric ID, use category-specific endpoint
+        const categoryId = options.category ? Number(options.category) : null;
+        const useCategoryEndpoint = categoryId && !isNaN(categoryId);
+
+        const apiCall = useCategoryEndpoint
+            ? listArticlesByCategoryWithLocale({
+                  path: {
+                      locale: options.locale,
+                      category_id: categoryId,
+                  },
+                  query: queryParams,
+              })
+            : listArticles({
+                  path: {
+                      locale: options.locale,
+                  },
+                  query: queryParams,
+              });
+
+        return from(apiCall).pipe(
             map((response) => {
                 // Response structure: { data: { articles: [...] } }
                 // But response.data might be the ArticlesResponse directly
@@ -292,6 +419,23 @@ export class ZendeskArticleService extends Articles.Service {
             }),
             catchError((error) => {
                 return throwError(() => new Error(`Failed to fetch category: ${error.message || error}`));
+            }),
+        );
+    }
+
+    private fetchCategories(locale: string): Observable<ZendeskCategory[]> {
+        return from(
+            listCategories({
+                path: {
+                    locale,
+                },
+            }),
+        ).pipe(
+            map((response) => {
+                return response.data?.categories || [];
+            }),
+            catchError((error) => {
+                return throwError(() => new Error(`Failed to fetch categories: ${error.message || error}`));
             }),
         );
     }

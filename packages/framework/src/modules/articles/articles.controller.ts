@@ -10,18 +10,28 @@ import { ArticlesService } from './articles.service';
 export class ArticleController {
     constructor(protected readonly articleService: ArticlesService) {}
 
-    @Get(':id')
-    getArticle(@Param() params: Request.GetArticleParams) {
-        return this.articleService.getArticle(params);
+    @Get('/categories')
+    getCategoryList(@Query() query: Request.GetCategoryListQuery) {
+        return this.articleService.getCategoryList(query);
     }
 
-    @Get()
-    getArticleList(@Query() query: Request.GetArticleListQuery) {
-        return this.articleService.getArticleList(query);
+    @Get('/categories/:id')
+    getCategory(@Param('id') id: string, @Query('locale') locale: string) {
+        return this.articleService.getCategory({ id, locale });
     }
 
     @Get('/search')
     searchArticles(@Body() body: Request.SearchArticlesBody) {
         return this.articleService.searchArticles(body);
+    }
+
+    @Get(':id')
+    getArticle(@Param('id') id: string, @Query('locale') locale: string) {
+        return this.articleService.getArticle({ slug: id, locale });
+    }
+
+    @Get()
+    getArticleList(@Query() query: Request.GetArticleListQuery) {
+        return this.articleService.getArticleList(query);
     }
 }
