@@ -42,28 +42,51 @@ export function DesktopNavigation({
     // Show sign in button if user is not signed in, container allows it, and signInLabel is available
     const showSignInButton = shouldIncludeSignInButton && !isSignedIn && signInLabel;
 
+    // Recursive function to calculate the best score for a navigation group
+    const calculateGroupBestScore = (
+        groupItems: (Models.Navigation.NavigationItem | Models.Navigation.NavigationGroup)[],
+    ): number => {
+        let bestScore = 0;
+
+        for (const groupItem of groupItems) {
+            if (groupItem.__typename === 'NavigationItem') {
+                // Calculate score for NavigationItem
+                if (!groupItem.url) continue;
+
+                let score = 0;
+                if (pathname === groupItem.url) {
+                    score = groupItem.url.length + 1000;
+                } else if (
+                    groupItem.url === '/'
+                        ? pathname.startsWith('/')
+                        : pathname.startsWith(groupItem.url.replace(/\/$/, '') + '/')
+                ) {
+                    score = groupItem.url.length;
+                }
+
+                if (score > bestScore) {
+                    bestScore = score;
+                }
+            } else if (groupItem.__typename === 'NavigationGroup') {
+                // Recursively calculate score for nested NavigationGroup
+                const nestedScore = calculateGroupBestScore(groupItem.items);
+                if (nestedScore > bestScore) {
+                    bestScore = nestedScore;
+                }
+            }
+        }
+
+        return bestScore;
+    };
+
     const activeNavigationGroup = items.reduce<{
         group: Models.Navigation.NavigationGroup;
         score: number;
     } | null>((best, item) => {
         if (item.__typename !== 'NavigationGroup') return best;
 
-        // Calculate best score for this group in a single pass
-        let groupBestScore = 0;
-        for (const groupItem of item.items) {
-            if (groupItem.__typename !== 'NavigationItem' || !groupItem.url) continue;
-
-            let score = 0;
-            if (pathname === groupItem.url) {
-                score = groupItem.url.length + 1000;
-            } else if (pathname.startsWith(groupItem.url + '/')) {
-                score = groupItem.url.length;
-            }
-
-            if (score > groupBestScore) {
-                groupBestScore = score;
-            }
-        }
+        // Calculate best score for this group recursively (including nested groups)
+        const groupBestScore = calculateGroupBestScore(item.items);
 
         if (groupBestScore === 0) return best;
 
