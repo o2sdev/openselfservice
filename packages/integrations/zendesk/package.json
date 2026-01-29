@@ -15,7 +15,7 @@
     "lint": "tsc --noEmit && eslint ./src --max-warnings=0",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\"",
     "fetch-oas": "tsx scripts/oas/fetch-zendesk-oas.ts",
-    "generate-types": "tsx scripts/oas/generate-zendesk-types.ts"
+    "generate-types": "tsx scripts/oas/generate-zendesk-types.mts"
   },
   "dependencies": {
     "@nestjs/axios": "^4.0.1",
@@ -26,7 +26,7 @@
     "rxjs": "^7.8.2"
   },
   "devDependencies": {
-    "@hey-api/openapi-ts": "^0.90.10",
+    "@hey-api/openapi-ts": "^0.91.0",
     "@o2s/eslint-config": "*",
     "@o2s/prettier-config": "*",
     "@o2s/typescript-config": "*",
