@@ -61,7 +61,7 @@
         "dotenv-cli": "^11.0.0",
         "formik": "^2.4.9",
         "markdown-to-jsx": "^9.6.1",
-        "next": "16.1.4",
+        "next": "16.1.6",
         "next-auth": "^5.0.0-beta.30",
         "next-compose-plugins": "^2.2.1",
         "next-intl": "^4.8.0",

@@ -47,6 +47,10 @@
         "@nestjs/common": "^11.0.16",
         "@nestjs/config": "^4.0.2",
         "@nestjs/core": "^11",
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
+        "react": "^19",
+        "react-dom": "^19",
         "rxjs": "^7"
     }
 }
