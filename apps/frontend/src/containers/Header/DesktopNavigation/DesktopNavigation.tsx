@@ -42,29 +42,37 @@ export function DesktopNavigation({
     // Show sign in button if user is not signed in, container allows it, and signInLabel is available
     const showSignInButton = shouldIncludeSignInButton && !isSignedIn && signInLabel;
 
-    const activeNavigationGroup = items
-        .filter((item): item is Models.Navigation.NavigationGroup => item.__typename === 'NavigationGroup')
-        .map((group) => {
-            const navigationItems = group.items.filter(
-                (item): item is Models.Navigation.NavigationItem => item.__typename === 'NavigationItem',
-            );
+    const activeNavigationGroup = items.reduce<{
+        group: Models.Navigation.NavigationGroup;
+        score: number;
+    } | null>((best, item) => {
+        if (item.__typename !== 'NavigationGroup') return best;
 
-            const bestScore = Math.max(
-                ...navigationItems.map((item) => {
-                    if (!item.url) return 0;
-                    // Exact match gets highest priority
-                    if (pathname === item.url) return item.url.length + 1000;
-                    // Subpath match
-                    if (pathname.startsWith(item.url + '/')) return item.url.length;
-                    return 0;
-                }),
-                0,
-            );
+        // Calculate best score for this group in a single pass
+        let groupBestScore = 0;
+        for (const groupItem of item.items) {
+            if (groupItem.__typename !== 'NavigationItem' || !groupItem.url) continue;
 
-            return { group, score: bestScore };
-        })
-        .filter((result) => result.score > 0)
-        .sort((a, b) => b.score - a.score)[0]?.group;
+            let score = 0;
+            if (pathname === groupItem.url) {
+                score = groupItem.url.length + 1000;
+            } else if (pathname.startsWith(groupItem.url + '/')) {
+                score = groupItem.url.length;
+            }
+
+            if (score > groupBestScore) {
+                groupBestScore = score;
+            }
+        }
+
+        if (groupBestScore === 0) return best;
+
+        if (!best || groupBestScore > best.score) {
+            return { group: item, score: groupBestScore };
+        }
+
+        return best;
+    }, null)?.group;
 
     const navigationItemClass = cn(navigationMenuTriggerStyle());
 
