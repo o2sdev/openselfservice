@@ -25,9 +25,10 @@ Open Self Service simplifies this process, allowing for a more plug-and-play app
 ## Main components
 
 :::info
-* To see the overview of components that O2S consists of go to **[Main components](../main-components/overview.md)** page.
-* Go to the **[architecture](./architecture)** chapter for detailed description of O2S's architecture.
-:::
+
+- To see the overview of components that O2S consists of go to **[Main components](../main-components/overview.md)** page.
+- Go to the **[architecture](./architecture)** chapter for detailed description of O2S's architecture.
+  :::
 
 ---
 
@@ -38,6 +39,7 @@ Open Self Service simplifies this process, allowing for a more plug-and-play app
 Open Self Service is built on composable architecture principles, allowing you to integrate and orchestrate multiple APIs seamlessly. By decoupling frontend and backend, O2S ensures flexibility, scalability, and independence from vendor lock-in.
 
 **Enabled by:**
+
 - **API Harmonization Server**: Aggregates, normalizes, and orchestrates data from headless APIs into a unified model.
 - **Next.js frontend**: Built with shadcn/ui, Tailwind, and managed via headless CMS for flexibility and customization.
 - **SDK**: Simplifies data fetching across web, mobile, and chatbots, allowing you to connect any frontend to the harmonized APIs.
@@ -49,22 +51,26 @@ Open Self Service is built on composable architecture principles, allowing you t
 With a modern stack of tools developers know and love, Open Self Service speeds up implementation and ensures a great developer experience.
 
 **Enabled by:**
+
 - **Modern tech stack**: Built with Next.js, React, TypeScript, and NestJS.
 - **Pre-built integrations**: Includes connectors for CMS (e.g., Strapi), search engines, and authentication (NextAuth). Our key concept for O2S's roadmap is to add more integrations.
 - **Customizable components**: Every component of the solution can be tailored or extended to fit specific project needs.
 
 :::tip
+
 - We have a separate chapter describing our [Tech stack](./tech-stack).
 - You can read more on integrations [here](../integrations).
 - Customization related stuff can be mainly found in the [Guides](../guides).
-:::
+  :::
 
 ---
 
 ### Future-proof architecture
+
 O2S is designed to evolve with your needs. Replace APIs, scale systems, and modernize your application without breaking frontend logic.
 
 **Enabled by:**
+
 - Decoupled architecture with a harmonized data layer.
 - Modular design, allowing components and services to be added or replaced easily.
 
@@ -75,18 +81,23 @@ O2S is designed to evolve with your needs. Replace APIs, scale systems, and mode
 Open Self Service empowers you to build a wide range of customer-facing applications, including:
 
 ### Customer portals
+
 Allow users to manage their accounts, services, invoices, and more with a modular, API-driven frontend.
 
 ### Support dashboards
+
 Integrate ticketing systems, notifications, and customer data from CRM and support APIs like Zendesk or Kustomer.
 
 ### Service request management
+
 Let customers create, manage, and track cases or service requests effortlessly.
 
 ### Knowledge bases
+
 Build searchable, category-based help centers integrated with a headless CMS like Strapi or Contentful.
 
 ### Multi-channel apps
+
 Use the O2S SDK to extend your frontend capabilities to mobile apps, chatbots, and other touchpoints.
 
 ---
@@ -94,12 +105,15 @@ Use the O2S SDK to extend your frontend capabilities to mobile apps, chatbots, a
 ## Why choose Open Self Service
 
 ### Simplify complex integrations
+
 O2S removes the burden of managing multiple APIs by harmonizing data and providing a unified API layer.
 
 ### Accelerate development
+
 Get started quickly with our Next.js boilerplate app, modular UI components, and pre-built integrations.
 
 ### Build for the future
+
 Decouple your frontend from backend systems to enable easy modernization, scalability, and flexibility.
 
 ---

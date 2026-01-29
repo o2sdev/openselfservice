@@ -6,15 +6,24 @@ export class GetTicketParams {
     locale?: string;
 }
 
+export class TicketAttachmentInput {
+    filename!: string;
+    content!: Buffer;
+    contentType!: string; // e.g., 'application/pdf'
+}
+
 export class PostTicketBody {
-    title!: string;
-    description!: string;
+    title?: string;
+    description?: string;
+    type?: number;
+    attachments?: TicketAttachmentInput[];
+    fields?: Record<string, unknown>;
 }
 
 export class GetTicketListQuery extends PaginationQuery {
     topic?: string;
     type?: string;
-    status?: TicketStatus;
+    status?: TicketStatus | TicketStatus[];
     dateFrom?: Date;
     dateTo?: Date;
     sort?: string;

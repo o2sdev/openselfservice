@@ -38,6 +38,10 @@ export class OrdersSummaryBlock extends ApiModels.Block.Block {
     ranges!: CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock['ranges'];
     layout?: 'vertical' | 'horizontal';
     noResults!: CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock['noResults'];
+    permissions?: {
+        view: boolean;
+        create: boolean;
+    };
 }
 
 export class ChartData {

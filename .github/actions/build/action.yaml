@@ -1,31 +1,41 @@
-name: Build package
+name: Build
+
+description: 'Checkout code, setup environment, build project, and cache build outputs'
 
 inputs:
-    vercel-token:
-        description: 'Token to access the vercel'
+    repo-token:
+        description: 'Token to access the repository'
         required: true
-    pull-env-args:
-        description: 'Arguments to pull env from vercel'
-        required: true
-    build-env-args:
-        description: 'Arguments to build env'
-        required: true
+    fetch-depth:
+        description: 'Git fetch depth for checkout'
+        required: false
+        default: '0'
 
 runs:
-    using: "composite"
+    using: 'composite'
     steps:
-        - name: Install Vercel CLI
-          shell: bash
-          run: npm i --global vercel
+        - name: Checkout code
+          uses: actions/checkout@v6
+          with:
+              fetch-depth: ${{ inputs.fetch-depth }}
 
-        - name: Get Env
-          shell: bash
-          run: vercel pull ${{ inputs.pull-env-args }} --token=${{ inputs.vercel-token }}
+        - name: Prepare Environment
+          uses: ./.github/actions/setup-env
+          with:
+              repo-token: ${{ inputs.repo-token }}
 
-        - name: Vercel build local
+        - name: Build
           shell: bash
-          run: vercel build ${{ inputs.build-env-args }}
+          run: npm run build
 
-        - name: Deploy Prebuilt to Vercel
-          shell: bash
-          run: vercel deploy --prebuilt ${{ inputs.build-env-args }} --token=${{ inputs.vercel-token }}
+        - name: Save build outputs to cache
+          uses: actions/cache/save@v5
+          if: success()
+          with:
+              path: |
+                  **/dist/**
+                  **/build/**
+                  **/.next/**
+                  **/next-env.d.ts
+                  !**/node_modules/**
+              key: ${{ runner.os }}-build-${{ github.sha }}

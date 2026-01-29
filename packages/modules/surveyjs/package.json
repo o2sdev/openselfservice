@@ -1,6 +1,6 @@
 {
     "name": "@o2s/modules.surveyjs",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "private": false,
     "license": "MIT",
     "description": "A module that handles fetching, rendering ans submitting SurveyJS-based forms.",
@@ -25,8 +25,8 @@
         "@o2s/utils.api-harmonization": "*",
         "@o2s/utils.frontend": "*",
         "@o2s/configs.integrations": "*",
-        "survey-core": "^2.5.5",
-        "survey-react-ui": "^2.5.5"
+        "survey-core": "^2.5.8",
+        "survey-react-ui": "^2.5.8"
     },
     "devDependencies": {
         "dotenv-cli": "^11.0.0",
@@ -36,7 +36,7 @@
         "@o2s/typescript-config": "*",
         "concurrently": "^9.2.1",
         "eslint": "^9.39.2",
-        "prettier": "^3.7.4",
+        "prettier": "^3.8.1",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"
     },

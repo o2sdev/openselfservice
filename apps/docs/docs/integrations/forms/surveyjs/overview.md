@@ -24,9 +24,9 @@ npm install @o2s/modules.surveyjs --workspace=@o2s/api --workspace=@o2s/frontend
 
 Configure the following environment variables in your API Harmonization server:
 
-| name                   | type   | description                                    | required |
-|------------------------|--------|------------------------------------------------|----------|
-| API_SURVEYJS_BASE_URL  | string | the base URL pointing to the SurveyJS service  | yes      |
+| name                  | type   | description                                   | required |
+| --------------------- | ------ | --------------------------------------------- | -------- |
+| API_SURVEYJS_BASE_URL | string | the base URL pointing to the SurveyJS service | yes      |
 
 You can obtain this value from your SurveyJS instance settings - it should be the URL where your SurveyJS server is running (e.g., `https://api.surveyjs.io` for production or `http://localhost:3000` for local development).
 
@@ -35,19 +35,19 @@ You can obtain this value from your SurveyJS instance settings - it should be th
 The SurveyJS module is structured into three main parts:
 
 1. **API Harmonization**: Server-side integration that provides:
-   - Controllers for handling HTTP requests
-   - Services for business logic
-   - Data models and mappers
-   - Form submission and validation
+    - Controllers for handling HTTP requests
+    - Services for business logic
+    - Data models and mappers
+    - Form submission and validation
 
 2. **Frontend**: Client-side integration that provides:
-   - React components for rendering surveys
-   - Form elements and question types
-   - Submission handling
+    - React components for rendering surveys
+    - Form elements and question types
+    - Submission handling
 
 3. **SDK**: Software development kit that provides:
-   - Helper functions for working with SurveyJS
-   - Integration utilities
+    - Helper functions for working with SurveyJS
+    - Integration utilities
 
 ## Quick start
 
@@ -57,4 +57,3 @@ The SurveyJS module is structured into three main parts:
 4. Use the `Survey` component in your frontend application
 
 For detailed instructions, see the [How to set up](./how-to-setup.md) guide.
-

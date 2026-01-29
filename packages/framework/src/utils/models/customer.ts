@@ -1,12 +1,13 @@
+import * as Auth from '@/modules/auth';
 import { BillingAccount } from '@/modules/billing-accounts/billing-accounts.model';
 
 import { Party } from './party';
-import { UserCustomerRole } from './roles';
 
 export class Customer extends Party {
     clientType?: ClientType;
     parentOrgId?: string;
-    roles?: UserCustomerRole[];
+    roles?: Auth.Model.Role[];
+    permissions?: Auth.Model.Permissions;
     billingAccounts?: BillingAccount[];
 }
 

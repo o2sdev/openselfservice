@@ -1,11 +1,9 @@
 import React, { FC } from 'react';
-import { Bar } from 'recharts';
+import { BarShapeProps } from 'recharts';
 
 import { ChartRoundedBarProps } from './ChartRoundedBar.types';
 
-type BarProps = React.ComponentProps<typeof Bar>;
-
-export const ChartRoundedBar: FC<BarProps & ChartRoundedBarProps> = (props) => {
+export const ChartRoundedBar: FC<BarShapeProps & ChartRoundedBarProps & { dataKey?: string | number }> = (props) => {
     const {
         x: xString,
         y: yString,

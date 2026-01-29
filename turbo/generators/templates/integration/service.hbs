@@ -2,7 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { Observable } from 'rxjs';
 
 import { {{pascalCase module}} } from '@o2s/framework/modules';
+// Optional: Import Auth when you need to inject Auth.Service for permission checking
+// import { Auth } from '@o2s/framework/modules';
 
 @Injectable()
 export class {{pascalCase module}}Service implements {{pascalCase module}}.Service  {
+    // Optional: Inject Auth.Service when you need to check permissions or add permission flags
+    // constructor(
+    //     private readonly authService: Auth.Service,
+    // ) {}
 }

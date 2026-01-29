@@ -15,7 +15,7 @@ export class TicketDetailsController {
     constructor(protected readonly service: TicketDetailsService) {}
 
     @Get(':id')
-    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN] })
+    @Auth.Decorators.Permissions({ resource: 'tickets', actions: ['view'] })
     getTicketDetailsBlock(
         @Headers() headers: Models.Headers.AppHeaders,
         @Query() query: GetTicketDetailsBlockQuery,

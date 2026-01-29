@@ -4,6 +4,6 @@
         "paths": {},
         "outDir": "./dist"
     },
-    "include": ["src"],
+    "include": ["scripts", "turbo"],
     "exclude": ["node_modules", "dist"]
 }

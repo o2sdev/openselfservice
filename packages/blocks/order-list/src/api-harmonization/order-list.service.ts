@@ -4,6 +4,8 @@ import { Observable, concatMap, forkJoin, map } from 'rxjs';
 
 import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 
+import { Auth } from '@o2s/framework/modules';
+
 import { mapOrderList } from './order-list.mapper';
 import { OrderListBlock } from './order-list.model';
 import { GetOrderListBlockQuery } from './order-list.request';
@@ -13,6 +15,7 @@ export class OrderListService {
     constructor(
         private readonly cmsService: CMS.Service,
         private readonly orderService: Orders.Service,
+        private readonly authService: Auth.Service,
     ) {}
 
     getOrderListBlock(
@@ -35,9 +38,32 @@ export class OrderListService {
                         headers['authorization'],
                     )
                     .pipe(
-                        map((orders) =>
-                            mapOrderList(orders, cms, headers['x-locale'], headers['x-client-timezone'] || ''),
-                        ),
+                        map((orders) => {
+                            const result = mapOrderList(
+                                orders,
+                                cms,
+                                headers['x-locale'],
+                                headers['x-client-timezone'] || '',
+                            );
+
+                            // Extract permissions using ACL service
+                            if (headers.authorization) {
+                                const permissions = this.authService.canPerformActions(
+                                    headers.authorization,
+                                    'orders',
+                                    ['view', 'create', 'cancel', 'track'],
+                                );
+
+                                result.permissions = {
+                                    view: permissions.view ?? false,
+                                    create: permissions.create ?? false,
+                                    cancel: permissions.cancel ?? false,
+                                    track: permissions.track ?? false,
+                                };
+                            }
+
+                            return result;
+                        }),
                     );
             }),
         );

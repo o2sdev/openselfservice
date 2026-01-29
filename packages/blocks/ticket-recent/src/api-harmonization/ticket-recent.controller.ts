@@ -15,7 +15,7 @@ export class TicketRecentController {
     constructor(protected readonly service: TicketRecentService) {}
 
     @Get()
-    @Auth.Decorators.Roles({ roles: [Auth.Constants.Roles.ORG_USER, Auth.Constants.Roles.ORG_ADMIN] })
+    @Auth.Decorators.Permissions({ resource: 'tickets', actions: ['view'] })
     getTicketRecentBlock(@Headers() headers: Models.Headers.AppHeaders, @Query() query: GetTicketRecentBlockQuery) {
         return this.service.getTicketRecentBlock(query, headers);
     }

@@ -1,10 +1,10 @@
-import { Auth } from '@o2s/framework/modules';
+import * as Auth from '@/modules/auth';
 
 export class NavigationGroup {
     __typename!: 'NavigationGroup';
     title!: string;
     items!: (NavigationItem | NavigationGroup)[];
-    permissions?: Auth.Constants.Roles[];
+    roles?: Auth.Model.Role[];
     url?: string;
 }
 
@@ -13,5 +13,5 @@ export class NavigationItem {
     url?: string;
     label!: string;
     description?: string;
-    permissions?: Auth.Constants.Roles[];
+    roles?: Auth.Model.Role[];
 }

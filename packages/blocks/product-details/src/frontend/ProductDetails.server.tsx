@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import type { Model } from '../api-harmonization/product-details.client';
 import { sdk } from '../sdk';
 
 import { ProductDetailsProps } from './ProductDetails.types';
@@ -16,21 +17,22 @@ export const ProductDetails: React.FC<ProductDetailsProps> = async ({
     routing,
     hasPriority,
 }) => {
+    let data: Model.ProductDetailsBlock;
     try {
-        const data = await sdk.blocks.getProductDetails({ id: productId }, { id, locale }, { 'x-locale': locale });
-
-        return (
-            <ProductDetailsDynamic
-                {...data}
-                id={id}
-                productId={productId}
-                locale={locale}
-                routing={routing}
-                hasPriority={hasPriority}
-            />
-        );
+        data = await sdk.blocks.getProductDetails({ id: productId }, { id, locale }, { 'x-locale': locale });
     } catch (error) {
         console.error('Error fetching ProductDetails block', error);
         return null;
     }
+
+    return (
+        <ProductDetailsDynamic
+            {...data}
+            id={id}
+            productId={productId}
+            locale={locale}
+            routing={routing}
+            hasPriority={hasPriority}
+        />
+    );
 };

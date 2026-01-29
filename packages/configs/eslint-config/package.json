@@ -1,6 +1,6 @@
 {
     "name": "@o2s/eslint-config",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "private": true,
     "type": "module",
     "exports": {
@@ -12,17 +12,17 @@
     },
     "devDependencies": {
         "@eslint/js": "^9.39.2",
-        "@next/eslint-plugin-next": "^16.1.2",
-        "@typescript-eslint/eslint-plugin": "^8.53.0",
-        "@typescript-eslint/parser": "^8.53.0",
+        "@next/eslint-plugin-next": "^16.1.6",
+        "@typescript-eslint/eslint-plugin": "^8.54.0",
+        "@typescript-eslint/parser": "^8.54.0",
         "eslint-config-prettier": "^10.1.8",
-        "eslint-config-turbo": "^2.7.4",
+        "eslint-config-turbo": "^2.8.0",
         "eslint-plugin-only-warn": "^1.1.0",
         "eslint-plugin-react": "^7.37.5",
         "eslint-plugin-react-hooks": "^7.0.1",
-        "eslint-plugin-turbo": "^2.7.4",
-        "globals": "^17.0.0",
+        "eslint-plugin-turbo": "^2.8.0",
+        "globals": "^17.2.0",
         "typescript": "5.9.3",
-        "typescript-eslint": "^8.53.0"
+        "typescript-eslint": "^8.54.0"
     }
 }

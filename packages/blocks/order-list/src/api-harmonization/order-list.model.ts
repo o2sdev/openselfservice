@@ -31,6 +31,12 @@ export class OrderListBlock extends ApiModels.Block.Block {
         right?: string;
         bottom?: string;
     };
+    permissions?: {
+        view: boolean;
+        create: boolean;
+        cancel: boolean;
+        track: boolean;
+    };
 }
 
 export class Order {

@@ -8,25 +8,25 @@ This document provides an overview of features supported by the Contentful CMS i
 
 ## Overview
 
-| Feature              | Status | Notes                                                                                 |
-|----------------------| ------ |---------------------------------------------------------------------------------------|
-| [GraphQL API](#graphql-api)          | ✅     | Primary API for all content operations                                                |
-| [REST Delivery API](#rest-delivery-api)    | ✅     | Used for specific operations like retrieving locales via getLocales                   |
-| [Preview API](#preview-api)          | ✅     | Supported for draft/unpublished content                                               |
+| Feature                                       | Status | Notes                                                                                 |
+| --------------------------------------------- | ------ | ------------------------------------------------------------------------------------- |
+| [GraphQL API](#graphql-api)                   | ✅     | Primary API for all content operations                                                |
+| [REST Delivery API](#rest-delivery-api)       | ✅     | Used for specific operations like retrieving locales via getLocales                   |
+| [Preview API](#preview-api)                   | ✅     | Supported for draft/unpublished content                                               |
 | [Content Localization](#content-localization) | ✅     | Full multi-locale support                                                             |
-| [Multi-environment](#multi-environment)    | ✅     | Supported via CF_ENV environment variable                                             |
-| [Live Preview](#live-preview)         | ✅     | Supported with LivePreviewProvider and metadata pattern                               |
-| [Themes/Layouts](#themeslayouts)       | ✅     | Supported via OneColumn and TwoColumn templates                                       |
-| [Media Management](#media-management)     | ✅     | Supported via ComponentMedia content type                                             |
-| [SEO Metadata](#seo-metadata)         | ✅     | Supported via PageSeo component                                                       |
-| [Field Mapping](#field-mapping)        | ✅     | Supported via ComponentFieldMapping for custom labels                                 |
-| [Table Configuration](#table-configuration)  | ✅     | Supported via ComponentTable for data table setup                                     |
-| [Pagination](#pagination)           | ✅     | Supported via ComponentPagination                                                     |
-| [Cache Integration](#cache-integration)    | ✅     | Full cache support for optimized performance                                          |
-| [Code Generation](#code-generation)      | ✅     | TypeScript types and SDK generated from GraphQL schema via graphql-codegen            |
-| [Type Safety](#type-safety)          | ✅     | Full TypeScript type safety from GraphQL schema                                       |
-| [Permissions/Roles](#permissionsroles)    | ⚠️     | Partially supported - permissions field exists on Page, but full RBAC not implemented |
-| [Live updates](#live-updates)         | ❌     | Not supported                                                                         |
+| [Multi-environment](#multi-environment)       | ✅     | Supported via CF_ENV environment variable                                             |
+| [Live Preview](#live-preview)                 | ✅     | Supported with LivePreviewProvider and metadata pattern                               |
+| [Themes/Layouts](#themeslayouts)              | ✅     | Supported via OneColumn and TwoColumn templates                                       |
+| [Media Management](#media-management)         | ✅     | Supported via ComponentMedia content type                                             |
+| [SEO Metadata](#seo-metadata)                 | ✅     | Supported via PageSeo component                                                       |
+| [Field Mapping](#field-mapping)               | ✅     | Supported via ComponentFieldMapping for custom labels                                 |
+| [Table Configuration](#table-configuration)   | ✅     | Supported via ComponentTable for data table setup                                     |
+| [Pagination](#pagination)                     | ✅     | Supported via ComponentPagination                                                     |
+| [Cache Integration](#cache-integration)       | ✅     | Full cache support for optimized performance                                          |
+| [Code Generation](#code-generation)           | ✅     | TypeScript types and SDK generated from GraphQL schema via graphql-codegen            |
+| [Type Safety](#type-safety)                   | ✅     | Full TypeScript type safety from GraphQL schema                                       |
+| [Permissions/Roles](#permissionsroles)        | ⚠️     | Partially supported - permissions field exists on Page, but full RBAC not implemented |
+| [Live updates](#live-updates)                 | ❌     | Not supported                                                                         |
 
 ## Feature details
 

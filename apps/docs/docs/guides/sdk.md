@@ -8,6 +8,7 @@ The SDK in O2S provides a **developer-friendly way** to interact with the API Ha
 It abstracts complex API requests and ensures **type-safe, structured data retrieval** in different modules.
 
 This chapter covers:
+
 - How to **initialize and use the SDK** in your application.
 - How to **extend the SDK** to support additional APIs.
 - How to **override SDK methods** to customize behavior.
@@ -52,8 +53,9 @@ Out of the box, the SDK provides methods for the modules available in the `@o2s/
 To do that, you can use the `extendSdk` method and override the defaults:
 
 ```typescript
-import { extendSdk, getSdk } from '@o2s/framework/sdk';
 import { Notifications } from '@o2s/integrations.mocked/sdk';
+
+import { extendSdk, getSdk } from '@o2s/framework/sdk';
 
 const internalSdk = getSdk({
     apiUrl: '...',

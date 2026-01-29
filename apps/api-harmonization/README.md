@@ -32,18 +32,25 @@
 $ npm install
 ```
 
-## Compile and run the project
+To start the development server for the API Harmonization application, it's recommended to run the following command from the **root of the monorepo**:
+
+```bash
+npm run watch:apps
+```
+
+Alternatively, you can run the development server directly in this directory:
 
 ```bash
 # development
 $ npm run start
 
 # watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+$ npm run dev
 ```
+
+> [!NOTE]
+> Running `npm run dev` inside this directory only starts the NestJS server. If you need to watch for changes in local dependencies (packages), run `npm run watch:deps` from the root directory.
+
 
 ## Run tests
 

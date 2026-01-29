@@ -9,7 +9,6 @@ While there are only two applications, they are internally split into several sm
 
 This flow can be visualised on a high level like this:
 
-
 <figure>
 
 ![data-flow.svg](data-flow.svg)
@@ -18,14 +17,11 @@ This flow can be visualised on a high level like this:
 
 </figure>
 
-
-
 ## Frontend app
 
 When users enter any page within the O2S through the browser, the server-side rendering process is started.
 The first thing that happens is that a [catch-all segment](https://nextjs.org/docs/pages/building-your-application/routing/dynamic-routes#optional-catch-all-segments) of Next.js's Dynamic Routing mechanism is triggered.
 It intercepts every URL and looks up whether there is a page definition in the CMS under that URL.
-
 
 <figure>
 
@@ -35,8 +31,8 @@ It intercepts every URL and looks up whether there is a page definition in the C
 
 </figure>
 
-
 ### Detailed explanation of Frontend app's data flow
+
 1. A call to the API Harmonization server occurs for the page.
     ```typescript
     const { data } = await sdk.modules.getPage({ slug, locale });

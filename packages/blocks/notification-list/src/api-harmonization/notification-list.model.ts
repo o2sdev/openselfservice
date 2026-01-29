@@ -26,6 +26,11 @@ export class NotificationListBlock extends ApiModels.Block.Block {
         right?: string;
         bottom?: string;
     };
+    permissions?: {
+        view: boolean;
+        mark_read: boolean;
+        delete: boolean;
+    };
 }
 
 export class Notification {

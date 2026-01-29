@@ -67,6 +67,7 @@ The metadata object maps our internal property names to Contentful field names:
 - Property names (like `title`, `subtitle`) - Map to Contentful field names (as strings)
 
 When a content editor clicks on an element in the preview, the Live Preview SDK uses this metadata to:
+
 1. Identify which Contentful entry to edit (using `__id`)
 2. Identify which field to edit (using the field name mapping)
 3. Open the correct field in the Contentful editor
@@ -84,11 +85,7 @@ import { LivePreview } from '@o2s/configs.integrations/live-preview';
 
 function App() {
     return (
-        <LivePreview.Provider
-            locale="en"
-            enableInspectorMode={true}
-            enableLiveUpdates={true}
-        >
+        <LivePreview.Provider locale="en" enableInspectorMode={true} enableLiveUpdates={true}>
             {/* Your app content */}
         </LivePreview.Provider>
     );
@@ -154,11 +151,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
     const locale = useLocale();
 
     return (
-        <LivePreview.Provider
-            locale={locale}
-            enableInspectorMode={true}
-            enableLiveUpdates={true}
-        >
+        <LivePreview.Provider locale={locale} enableInspectorMode={true} enableLiveUpdates={true}>
             {children}
         </LivePreview.Provider>
     );
@@ -194,12 +187,8 @@ export function FaqBlock({ title, subtitle, items, meta }: FaqBlockProps) {
             <div>
                 {items.map((item, index) => (
                     <div key={index}>
-                        <h3 {...inspector(meta?.items?.[index], 'title')}>
-                            {item.title}
-                        </h3>
-                        <div {...inspector(meta?.items?.[index], 'content')}>
-                            {item.content}
-                        </div>
+                        <h3 {...inspector(meta?.items?.[index], 'title')}>{item.title}</h3>
+                        <div {...inspector(meta?.items?.[index], 'content')}>{item.content}</div>
                     </div>
                 ))}
             </div>
@@ -266,4 +255,3 @@ export const mapFaqBlock = ({
 ## Additional resources
 
 For a detailed implementation story and technical deep-dive, see our blog article: [Integrating Contentful with Live Preview into composable Next.js apps](/blog/integrating-contentful-with-live-preview-into-composable-nextjs-apps).
-

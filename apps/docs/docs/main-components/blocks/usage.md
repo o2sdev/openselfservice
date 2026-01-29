@@ -56,7 +56,6 @@ With both places being added, the block is now fully included in the API Harmoni
 
 The only place that needs to be aware of the new block is the function responsible for rendering of blocks that is kept within the `apps/frontend/src/blocks/renderBlocks.tsx` file.
 
-
 ```typescript jsx
 import * as Faq from '@o2s/blocks.faq/frontend';
 

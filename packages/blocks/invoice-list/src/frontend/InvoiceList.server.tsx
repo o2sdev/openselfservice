@@ -30,6 +30,11 @@ export const InvoiceListServer: React.FC<InvoiceListProps> = async ({
         return null;
     }
 
+    // Check view permission - if not allowed, don't render
+    if (!data.permissions?.view) {
+        return null;
+    }
+
     return (
         <InvoiceListDynamic
             {...data}

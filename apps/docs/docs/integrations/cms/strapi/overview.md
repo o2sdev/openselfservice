@@ -27,7 +27,7 @@ npm install @o2s/integrations.strapi-cms --workspace=@o2s/api
 Configure the following environment variables in your API Harmonization server:
 
 | name                | type   | description                                            |
-|---------------------|--------|--------------------------------------------------------|
+| ------------------- | ------ | ------------------------------------------------------ |
 | CMS_STRAPI_BASE_URL | string | the base URL pointing to the domain hosting Strapi CMS |
 
 You can obtain this value from your Strapi instance settings - it should be the URL where your Strapi server is running (e.g., `http://localhost:1337` for local development).

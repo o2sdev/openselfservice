@@ -64,17 +64,40 @@ After configuring the integration, you need to set up environment variables that
 
 Configure the following environment variables in your API Harmonization server:
 
-| name                | type   | description                                                                    | required | default |
-|---------------------|--------|--------------------------------------------------------------------------------|----------|---------|
-| ZENDESK_API_URL     | string | Your Zendesk API URL (e.g., `https://your-subdomain.zendesk.com/api/v2`)      | yes      | -       |
-| ZENDESK_API_TOKEN   | string | Base64-encoded authentication token                                            | yes      | -       |
-| ZENDESK_TOPIC_FIELD_ID | number | ID of the custom field that contains the ticket topic (optional)            | no       | -       |
+| name                                        | type   | description                                                              | required | default |
+| ------------------------------------------- | ------ | ------------------------------------------------------------------------ | -------- | ------- |
+| ZENDESK_API_URL                             | string | Your Zendesk API URL (e.g., `https://your-subdomain.zendesk.com/api/v2`) | yes      | -       |
+| ZENDESK_API_TOKEN                           | string | Base64-encoded authentication token                                      | yes      | -       |
+| ZENDESK_TOPIC_FIELD_ID                      | number | Custom field ID for ticket topic                                         | yes      | -       |
+| ZENDESK_CONTACT_FORM_ID                     | number | Ticket form ID for contact inquiries                                     | yes     | -       |
+| ZENDESK_COMPLAINT_FORM_ID                   | number | Ticket form ID for complaints                                            | yes     | -       |
+| ZENDESK_REQUEST_DEVICE_MAINTENANCE_FORM_ID  | number | Ticket form ID for device maintenance requests                           | yes     | -       |
+| ZENDESK_DEVICE_NAME_FIELD_ID                | number | Custom field ID for device/machine name                                  | yes      | -       |
+| ZENDESK_SERIAL_NUMBER_FIELD_ID              | number | Custom field ID for serial number                                        | yes      | -       |
+| ZENDESK_MAINTENANCE_TYPE_FIELD_ID           | number | Custom field ID for maintenance type                                     | yes      | -       |
+| ZENDESK_MAINTENANCE_PREFERRED_DATE_FIELD_ID | number | Custom field ID for preferred maintenance date                           | yes      | -       |
+| ZENDESK_ADDITIONAL_NOTES_FIELD_ID           | number | Custom field ID for additional notes                                     | yes      | -       |
+| ZENDESK_CONTACT_FIELD_ID                    | number | Custom field ID for contact information                                  | yes      | -       |
+| ZENDESK_ISSUE_DATE_FIELD_ID                 | number | Custom field ID for issue date                                           | yes      | -       |
+| ZENDESK_COMPANY_NAME_FIELD_ID               | number | Custom field ID for company/organization name                            | yes      | -       |
+| ZENDESK_FIRST_NAME_FIELD_ID                 | number | Custom field ID for first name                                           | yes      | -       |
+| ZENDESK_LAST_NAME_FIELD_ID                  | number | Custom field ID for last name                                            | yes      | -       |
+| ZENDESK_EMAIL_FIELD_ID                      | number | Custom field ID for email address                                        | yes      | -       |
+| ZENDESK_PHONE_FIELD_ID                      | number | Custom field ID for phone number                                         | yes      | -       |
+| ZENDESK_INVOICE_NUMBER_FIELD_ID             | number | Custom field ID for invoice number                                       | yes      | -       |
+| ZENDESK_ADDRESS_FIELD_ID                    | number | Custom field ID for address                                              | yes      | -       |
+| ZENDESK_INQUIRY_TYPE_FIELD_ID               | number | Custom field ID for inquiry type                                         | yes      | -       |
+| ZENDESK_PRODUCT_CATEGORY_FIELD_ID           | number | Custom field ID for product category                                     | yes      | -       |
+| ZENDESK_PREFERRED_CONTACT_METHOD_FIELD_ID   | number | Custom field ID for preferred contact method                             | yes      | -       |
+| ZENDESK_TERMS_ACCEPTANCE_FIELD_ID           | number | Custom field ID for terms acceptance                                     | yes      | -       |
+| ZENDESK_NEWSLETTER_CONSENT_FIELD_ID         | number | Custom field ID for newsletter consent                                   | yes      | -       |
+| ZENDESK_MARKETING_CONSENT_FIELD_ID          | number | Custom field ID for marketing consent                                    | yes      | -       |
 
 **Important notes:**
 
 - The `ZENDESK_API_TOKEN` should be a Base64-encoded string of `email/token:api_token` where:
-  - `email/token` is the email address of the Zendesk admin account or "token"
-  - `api_token` is the API token generated in the Zendesk admin interface
+    - `email/token` is the email address of the Zendesk admin account or "token"
+    - `api_token` is the API token generated in the Zendesk admin interface
 - You can obtain your API token from your [Zendesk admin settings](https://support.zendesk.com/hc/en-us/articles/4408843597850)
 - The API URL should point to your Zendesk instance's API v2 endpoint
 
@@ -82,20 +105,47 @@ Configure the following environment variables in your API Harmonization server:
 
 1. **Get your Zendesk subdomain**: Your API URL will be `https://{your-subdomain}.zendesk.com/api/v2`
 2. **Generate an API token**:
-   - Go to your Zendesk admin interface
-   - Navigate to **Admin** > **Apps and integrations** > **APIs** > **Zendesk API**
-   - Click **Add API token**
-   - Copy the generated token
+    - Go to your Zendesk admin interface
+    - Navigate to **Admin** > **Apps and integrations** > **APIs** > **Zendesk API**
+    - Click **Add API token**
+    - Copy the generated token
 3. **Create Base64-encoded token**:
-   - Format: `{email}:{api_token}` or `token:{api_token}`
-   - Encode to Base64 (you can use online tools or command line: `echo -n "email:token" | base64`)
+    - Format: `{email}:{api_token}` or `token:{api_token}`
+    - Encode to Base64 (you can use online tools or command line: `echo -n "email:token" | base64`)
 
 ### Example `.env` configuration
 
 ```env
 ZENDESK_API_URL=https://your-subdomain.zendesk.com/api/v2
 ZENDESK_API_TOKEN=base64_encoded_token_here
+
+# Form IDs
+ZENDESK_CONTACT_FORM_ID=789012
+ZENDESK_COMPLAINT_FORM_ID=345678
+ZENDESK_REQUEST_DEVICE_MAINTENANCE_FORM_ID=901234
+
+# Custom field mappings for forms
 ZENDESK_TOPIC_FIELD_ID=123456
+ZENDESK_DEVICE_NAME_FIELD_ID=111111
+ZENDESK_SERIAL_NUMBER_FIELD_ID=222222
+ZENDESK_MAINTENANCE_TYPE_FIELD_ID=333333
+ZENDESK_MAINTENANCE_PREFERRED_DATE_FIELD_ID=444444
+ZENDESK_ADDITIONAL_NOTES_FIELD_ID=555555
+ZENDESK_CONTACT_FIELD_ID=666666
+ZENDESK_ISSUE_DATE_FIELD_ID=777777
+ZENDESK_COMPANY_NAME_FIELD_ID=888888
+ZENDESK_FIRST_NAME_FIELD_ID=999999
+ZENDESK_LAST_NAME_FIELD_ID=101010
+ZENDESK_EMAIL_FIELD_ID=111111
+ZENDESK_PHONE_FIELD_ID=121212
+ZENDESK_INVOICE_NUMBER_FIELD_ID=131313
+ZENDESK_ADDRESS_FIELD_ID=141414
+ZENDESK_INQUIRY_TYPE_FIELD_ID=151515
+ZENDESK_PRODUCT_CATEGORY_FIELD_ID=161616
+ZENDESK_PREFERRED_CONTACT_METHOD_FIELD_ID=171717
+ZENDESK_TERMS_ACCEPTANCE_FIELD_ID=181818
+ZENDESK_NEWSLETTER_CONSENT_FIELD_ID=191919
+ZENDESK_MARKETING_CONSENT_FIELD_ID=202020
 ```
 
 Make sure to set these variables in your environment configuration file (e.g., `.env`) or your deployment platform's environment variable settings.
@@ -114,25 +164,25 @@ These modules are automatically imported when you configure the integration, but
 After completing the installation and configuration steps:
 
 1. **Rebuild the configs package** (if needed):
-   ```shell
-   npm run build --workspace=@o2s/configs.integrations
-   ```
+
+    ```shell
+    npm run build --workspace=@o2s/configs.integrations
+    ```
 
 2. **Start the API Harmonization server**. The Zendesk integration should be registered and the ticket controller should be available at `/tickets`.
 
 3. **Verify the installation** by:
-   - Checking server logs for successful module registration
-   - Testing the endpoint: `GET /tickets` (should return tickets or empty list if no tickets exist)
-   - Verifying that authentication is working correctly
+    - Checking server logs for successful module registration
+    - Testing the endpoint: `GET /tickets` (should return tickets or empty list if no tickets exist)
+    - Verifying that authentication is working correctly
 
 ## Troubleshooting
 
-| Problem | Solution |
-|---------|----------|
-| Module not found | Verify the package is installed: `npm list @o2s/integrations.zendesk` |
-| Cannot connect to Zendesk | Check `ZENDESK_API_URL` is set correctly and points to `/api/v2` |
-| Authentication failed | Verify `ZENDESK_API_TOKEN` is Base64-encoded correctly and matches your Zendesk credentials |
-| Missing required environment variables | Ensure both `ZENDESK_API_URL` and `ZENDESK_API_TOKEN` are set |
-| Users module not found | Ensure the Users integration is configured in your application |
-| 404 errors when fetching tickets | Verify the API URL is correct and your Zendesk instance is accessible |
-
+| Problem                                | Solution                                                                                    |
+| -------------------------------------- | ------------------------------------------------------------------------------------------- |
+| Module not found                       | Verify the package is installed: `npm list @o2s/integrations.zendesk`                       |
+| Cannot connect to Zendesk              | Check `ZENDESK_API_URL` is set correctly and points to `/api/v2`                            |
+| Authentication failed                  | Verify `ZENDESK_API_TOKEN` is Base64-encoded correctly and matches your Zendesk credentials |
+| Missing required environment variables | Ensure both `ZENDESK_API_URL` and `ZENDESK_API_TOKEN` are set                               |
+| Users module not found                 | Ensure the Users integration is configured in your application                              |
+| 404 errors when fetching tickets       | Verify the API URL is correct and your Zendesk instance is accessible                       |

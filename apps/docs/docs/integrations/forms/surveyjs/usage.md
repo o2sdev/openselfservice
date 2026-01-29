@@ -43,7 +43,7 @@ First, create a survey entry in your CMS (e.g., Strapi) with the following requi
 - **surveyId** - SurveyJS survey ID from your SurveyJS service
 - **postId** - SurveyJS post ID for submissions
 - **surveyType** - Type of survey (typically `"survey"`)
-- **submitDestination** - Array of destinations (e.g., `["surveyjs"]`)
+- **submitDestination** - Array of destinations: `["surveyjs"]` for SurveyJS backend, `["tickets"]` for ticket system
 - **requiredRoles** - Array of required roles (can be empty `[]` for public surveys)
 
 ### Step 3: Add block to page in CMS
@@ -58,6 +58,7 @@ In your CMS (e.g., Strapi):
 ### Step 4: That's it!
 
 The block automatically handles everything:
+
 - Fetches survey metadata from CMS
 - Loads the survey schema from SurveyJS service
 - Renders the form with proper styling
@@ -66,6 +67,8 @@ The block automatically handles everything:
 - Supports localization
 
 No frontend code changes are needed - the form will be automatically rendered on the page.
+
+**Ticket submission:** To submit surveys as tickets, set `submitDestination: ["tickets"]` and ensure your survey includes `description` (string) and `ticketFormId` (number) fields.
 
 ## Direct component usage (advanced)
 
@@ -99,6 +102,7 @@ function ContactForm() {
 - **accessToken** (string, optional) - Authentication token if required
 
 The component internally uses the SDK to:
+
 - Fetch the survey schema from `/surveyjs?code=<code>` (where `<code>` is the survey code)
 - Submit form data to `/surveyjs` POST endpoint
 
@@ -148,7 +152,7 @@ For TypeScript development, here are the main types:
 
 ```typescript
 class SurveyJs {
-  schema: SurveyJSLibraryJsonSchema;
+    schema: SurveyJSLibraryJsonSchema;
 }
 ```
 
@@ -156,7 +160,7 @@ class SurveyJs {
 
 ```typescript
 class SurveyJsQuery {
-  code: string;
+    code: string;
 }
 ```
 
@@ -164,8 +168,8 @@ class SurveyJsQuery {
 
 ```typescript
 class SurveyJsSubmitPayload {
-  code: string;
-  surveyPayload: SurveyResult;
+    code: string;
+    surveyPayload: SurveyResult;
 }
 ```
 
@@ -173,7 +177,7 @@ class SurveyJsSubmitPayload {
 
 ```typescript
 class SurveyResult {
-  [question: string]: unknown;
+    [question: string]: unknown;
 }
 ```
 
@@ -220,4 +224,3 @@ sequenceDiagram
     API->>SurveyJS: Submit data
     SurveyJS-->>Frontend: Success
 ```
-

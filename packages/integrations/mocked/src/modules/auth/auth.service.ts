@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import jwt from 'jsonwebtoken';
 
 import { Auth } from '@o2s/framework/modules';
@@ -6,45 +6,53 @@ import { Auth } from '@o2s/framework/modules';
 import { Jwt } from './auth.model';
 
 @Injectable()
-export class AuthService implements Auth.Service {
-    decodeAuthorizationToken(token: string): Jwt {
+export class AuthService extends Auth.Service {
+    constructor() {
+        super();
+    }
+
+    async verifyToken(token: string): Promise<Jwt> {
         const accessToken = token.replace('Bearer ', '');
-        return jwt.decode(accessToken) as Jwt;
+
+        try {
+            // For development: verify with a simple secret
+            return jwt.verify(accessToken, process.env.AUTH_JWT_SECRET!) as Jwt;
+        } catch (error) {
+            if (error instanceof jwt.TokenExpiredError) {
+                throw new UnauthorizedException('Token expired');
+            }
+            if (error instanceof jwt.JsonWebTokenError) {
+                throw new UnauthorizedException('Invalid token');
+            }
+            throw new UnauthorizedException('Token verification failed');
+        }
+    }
+
+    async isTokenRevoked(_jti: string): Promise<boolean> {
+        // Mocked implementation: no revocation support
+        return false;
     }
 
     getCustomerId(token: string | Jwt): string | undefined {
-        let decodedToken: Jwt;
-        if (typeof token === 'string') {
-            decodedToken = this.decodeAuthorizationToken(token);
-        } else {
-            decodedToken = token;
-        }
+        // Decode directly - already verified by guard
+        const decodedToken = typeof token === 'string' ? (jwt.decode(token.replace('Bearer ', '')) as Jwt) : token;
 
         return decodedToken.customer?.id;
     }
 
-    extractUserRoles(token?: string | Jwt): Auth.Constants.Roles[] {
-        if (!token) {
-            return [];
-        }
+    getRoles(token?: string | Jwt): Auth.Model.Role[] {
+        // Decode directly - already verified by guard
+        const decodedToken = typeof token === 'string' ? (jwt.decode(token.replace('Bearer ', '')) as Jwt) : token;
 
-        let decodedToken: Jwt;
-        if (typeof token === 'string') {
-            decodedToken = this.decodeAuthorizationToken(token);
-        } else {
-            decodedToken = token;
-        }
+        // Roles are stored directly in the JWT token
+        return decodedToken?.customer?.roles || decodedToken?.roles || [];
+    }
 
-        const userRoles: string[] = [];
+    getPermissions(token: string | Auth.Model.Jwt): Auth.Model.Permissions {
+        // Decode directly - already verified by guard
+        const decodedToken = typeof token === 'string' ? (jwt.decode(token.replace('Bearer ', '')) as Jwt) : token;
 
-        if (decodedToken?.role) {
-            userRoles.push(decodedToken.role);
-        }
-
-        if (Array.isArray(decodedToken?.customer?.roles)) {
-            userRoles.push(...decodedToken.customer.roles);
-        }
-
-        return userRoles as Auth.Constants.Roles[];
+        // Permissions are stored directly in the JWT token
+        return decodedToken?.customer?.permissions || decodedToken.permissions || {};
     }
 }

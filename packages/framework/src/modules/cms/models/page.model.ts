@@ -1,4 +1,4 @@
-import { Auth, Models } from '@o2s/framework/modules';
+import { Models } from '@o2s/framework/modules';
 
 export class Page {
     id!: string;
@@ -21,7 +21,8 @@ export class Page {
             };
         };
     };
-    permissions?: Auth.Constants.Roles[];
+    /** Role-based access control (e.g., ['ORG_USER', 'ORG_ADMIN']) */
+    roles?: string[];
     theme?: string;
 }
 

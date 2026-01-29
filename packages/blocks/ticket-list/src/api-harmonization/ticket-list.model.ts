@@ -26,6 +26,7 @@ export class TicketListBlock extends ApiModels.Block.Block {
         showMoreFilters?: string;
         hideMoreFilters?: string;
         noActiveFilters?: string;
+        ticketId?: string;
     };
     initialFilters?: Partial<Tickets.Model.Ticket & { sort?: string }>;
     meta?: CMS.Model.TicketListBlock.TicketListBlock['meta'];
@@ -35,6 +36,11 @@ export class TicketListBlock extends ApiModels.Block.Block {
         right?: string;
         bottom?: string;
     };
+    permissions?: {
+        view: boolean;
+        create: boolean;
+        delete: boolean;
+    };
 }
 
 export class Ticket {
@@ -43,7 +49,7 @@ export class Ticket {
         value: Tickets.Model.Ticket['topic'];
         label: string;
     };
-    type!: {
+    type?: {
         value: Tickets.Model.Ticket['type'];
         label: string;
     };

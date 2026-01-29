@@ -23,15 +23,15 @@ The standard pattern used throughout the framework:
 ```typescript
 async getData(id: string): Promise<Data> {
     const key = `data-${id}`;
-    
+
     const cached = await this.cacheService.get(key);
     if (cached) {
         return JSON.parse(cached);
     }
-    
+
     const data = await this.fetchFromSource(id);
     await this.cacheService.set(key, JSON.stringify(data));
-    
+
     return data;
 }
 ```
@@ -46,7 +46,7 @@ private getCachedData<T>(key: string, fetchData: () => Observable<T>): Observabl
     return from(this.cacheService.get(key)).pipe(
         mergeMap((cached) => {
             if (cached) return of(JSON.parse(cached));
-            
+
             return fetchData().pipe(
                 map((data) => {
                     this.cacheService.set(key, JSON.stringify(data));
@@ -62,16 +62,13 @@ private getCachedData<T>(key: string, fetchData: () => Observable<T>): Observabl
 
 ```typescript
 // CMS content
-`component-${id}-${locale}`
-`page-${id}-${locale}`
-`app-config-${locale}`
-
+`component-${id}-${locale}``page-${id}-${locale}``app-config-${locale}`
 // Custom data
-`user-${userId}-profile`
-`product-${productId}-details`
+`user-${userId}-profile``product-${productId}-details`;
 ```
 
 **Conventions:**
+
 - Use hyphens as separators
 - Include identifiers (ID, locale)
 - Use descriptive prefixes

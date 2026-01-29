@@ -40,3 +40,5 @@ yarn-error.log*
 # Storybook
 *storybook.log
 storybook-static
+
+dist
