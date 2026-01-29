@@ -22,7 +22,7 @@ import DocLinkTiles from '@site/src/components/DocLinkTiles';
 items={[
 { title: 'Strapi CMS', description: 'Headless CMS integration for content & page management.', href: '/docs/integrations/cms/strapi/overview' },
 { title: 'Contentful CMS', description: 'CMS for multi-language content and marketing blocks.', href: '/docs/integrations/cms/contentful/overview' },
-{ title: 'Redis Cache', description: 'High-performance caching with Redis to be used with our API Harmonization server.', href: '/docs/integrations/cache/redis' },
+{ title: 'Redis Cache', description: 'High-performance caching with Redis to be used with our API Harmonization server.', href: '/docs/integrations/cache/redis/overview' },
 { title: 'Medusa Commerce', description: 'Initial integration, currently provides basic product data.', href: '/docs/integrations/commerce/medusa-js/overview' },
 { title: 'Algolia Search', description: 'The AI search platform, used for knowledge base search.', href: '/docs/integrations/search/algolia/overview' },
 { title: 'SurveyJS Forms', description: 'Dynamic form creation and ticket submission. Used as a default engine for our ticket submission handling.', href: '/docs/integrations/forms/surveyjs/overview' },
