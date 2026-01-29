@@ -87,8 +87,10 @@ Each question type has custom React components for consistent UI styling.
 
 Flexible submission handling:
 
-- **Current target**: Currently, the only submission target is the SurveyJS backend service
-- **Extensible architecture**: The submission system can be extended to support multiple destinations:
+- **Submission destinations**: Forms can be submitted to multiple destinations configured via the `submitDestination` setting:
+    - **SurveyJS backend service**: Default submission target for standard survey responses
+    - **Ticket systems**: When `submitDestination` includes `'tickets'`, submissions are routed to the framework's Tickets service (e.g., Zendesk integration)
+- **Extensible architecture**: The submission system can be extended to support additional destinations:
     - Backend APIs (REST, GraphQL)
     - Message brokers (e.g., RabbitMQ)
     - Workflow tools (e.g., N8n)

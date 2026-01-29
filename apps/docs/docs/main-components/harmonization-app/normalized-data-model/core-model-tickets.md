@@ -124,6 +124,12 @@ createTicket(
 | attachments | TicketAttachmentInput[] | No       | Array of file attachments                                    |
 | fields      | object                  | No       | Additional custom fields specific to the integration         |
 
+> **Note**: While `description` and `type` are marked as optional in the core model, certain integrations require these fields:
+> - **Zendesk**: Requires both `description` (string) and `type` (number, ticket form ID)
+> - **SurveyJS**: Requires `description` (string) and `ticketFormId` (number, mapped to `type`)
+>
+> Implementers should check the specific integration documentation for required fields before implementing ticket creation.
+
 #### Returns
 
 An Observable that emits the created ticket.
