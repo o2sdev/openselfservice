@@ -1,5 +1,74 @@
 # @o2s/api-harmonization
 
+## 1.14.0
+
+### Minor Changes
+
+- 1a5a22d: Added ticket creation functionality to the Zendesk integration. Users can now create tickets via POST /tickets with attachments and custom fields. Added custom field mapping from Survey.js format to Zendesk custom fields via new zendesk-field.mapper. Updated table columns on TicketList component to display: ticket type (topic), status, and last updated date. Added display of custom field values from ticket properties on TicketDetails. Updated mapper mocks in cms
+- 72391c1: ### Authorization & PBAC Implementation
+
+    This release introduces a comprehensive Policy-Based Access Control system interlaced with Role-Based Access Control.
+
+    #### Framework & Core
+    - **`@o2s/framework` (AuthService)**: Enhanced with abstract permission logic (`getPermissions`, `hasPermission`), role checks (`hasRole`, `requireRoles`), and action batching (`canPerformActions`).
+    - **`@o2s/api-harmonization`**: Implemented global `RolesGuard` and `PermissionsGuard` in `AppModule`.
+    - **`@o2s/utils.api-harmonization`**: Added `extractUserRolesFromJwt` to unify role extraction from different JWT claims.
+
+    #### Features
+    - **Decorators**: New `@Auth.Decorators.Permissions({ resource, actions })` for securing controllers.
+    - **Data Filtering**: Mappers (e.g., `page.mapper.ts`) now filter UI elements (header/footer navigation) based on user roles.
+
+    This provides granular control over resource access and UI visibility based on user roles and permissions.
+
+### Patch Changes
+
+- Updated dependencies [1a5a22d]
+- Updated dependencies [72391c1]
+    - @o2s/blocks.ticket-details@1.4.0
+    - @o2s/blocks.ticket-recent@1.3.0
+    - @o2s/integrations.mocked@1.17.0
+    - @o2s/blocks.ticket-list@1.6.0
+    - @o2s/modules.surveyjs@0.4.0
+    - @o2s/framework@1.16.0
+    - @o2s/blocks.featured-service-list@1.3.0
+    - @o2s/blocks.notification-details@1.4.0
+    - @o2s/blocks.notification-summary@1.2.0
+    - @o2s/blocks.notification-list@1.5.0
+    - @o2s/blocks.payments-history@1.3.0
+    - @o2s/blocks.payments-summary@1.3.0
+    - @o2s/utils.api-harmonization@0.3.0
+    - @o2s/blocks.product-details@0.1.0
+    - @o2s/blocks.service-details@1.3.0
+    - @o2s/blocks.orders-summary@1.4.0
+    - @o2s/blocks.ticket-summary@1.2.0
+    - @o2s/blocks.order-details@1.4.0
+    - @o2s/configs.integrations@0.4.0
+    - @o2s/blocks.article-list@1.4.0
+    - @o2s/blocks.invoice-list@1.5.0
+    - @o2s/blocks.product-list@0.3.0
+    - @o2s/blocks.service-list@1.4.0
+    - @o2s/blocks.user-account@1.3.0
+    - @o2s/blocks.order-list@1.5.0
+    - @o2s/blocks.category@1.4.0
+    - @o2s/blocks.article@1.4.0
+    - @o2s/blocks.article-search@1.4.0
+    - @o2s/blocks.bento-grid@0.5.0
+    - @o2s/blocks.category-list@1.4.0
+    - @o2s/blocks.cta-section@0.5.0
+    - @o2s/blocks.document-list@0.5.0
+    - @o2s/blocks.faq@1.4.0
+    - @o2s/blocks.feature-section@0.5.0
+    - @o2s/blocks.feature-section-grid@0.4.0
+    - @o2s/blocks.hero-section@0.5.0
+    - @o2s/blocks.media-section@0.5.0
+    - @o2s/blocks.pricing-section@0.5.0
+    - @o2s/blocks.quick-links@1.4.0
+    - @o2s/blocks.recommended-products@0.1.0
+    - @o2s/blocks.surveyjs-form@1.3.0
+    - @o2s/telemetry@1.2.0
+    - @o2s/utils.frontend@0.4.0
+    - @o2s/utils.logger@1.2.0
+
 ## 1.13.0
 
 ### Minor Changes
