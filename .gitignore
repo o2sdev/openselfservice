@@ -45,4 +45,11 @@ CLAUDE.md
 *storybook.log
 storybook-static
 
+# Dist folders
 dist
+
+# AI rules
+.claude
+AGENTS.md
+CLAUDE.md
+agent-os
