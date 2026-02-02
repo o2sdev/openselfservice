@@ -27,11 +27,6 @@ runs:
               token: ${{ inputs.repo-token }}
               ref: ${{ inputs.pr-branch }}
 
-        - name: Prepare Environment
-          uses: ./.github/actions/setup-env
-          with:
-              repo-token: ${{ inputs.repo-token }}
-
         - name: Detect modified package.json files and create changesets
           shell: bash
           env:
@@ -120,8 +115,8 @@ runs:
                       continue
                   fi
                   
-                  # Process the package.json
-                  process_package_json "$package_json"
+                  # Process the package.json (ignore return code - function returns 1 for skipped packages)
+                  process_package_json "$package_json" || true
                   
               done <<< "$MODIFIED_PACKAGE_JSONS"
 
