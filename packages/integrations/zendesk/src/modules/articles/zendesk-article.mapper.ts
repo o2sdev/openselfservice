@@ -1,12 +1,18 @@
 import { Articles } from '@o2s/framework/modules';
 
-import { type ArticleObject, type CategoryObject, type SectionObject } from '@/generated/help-center';
+import {
+    type ArticleAttachmentObject,
+    type ArticleObject,
+    type CategoryObject,
+    type SectionObject,
+} from '@/generated/help-center';
 import type { UserObject } from '@/generated/zendesk';
 
 type ZendeskArticle = ArticleObject;
 type ZendeskCategory = CategoryObject;
 type ZendeskSection = SectionObject;
 type ZendeskUser = UserObject;
+type ZendeskAttachment = ArticleAttachmentObject;
 
 /**
  * Extract slug from Zendesk article HTML URL
@@ -92,35 +98,57 @@ function extractLeadFromBody(body: string | undefined, maxLength = 300): string 
 }
 
 /**
- * Parse HTML body into article sections
- * For now, we'll create a single text section with the HTML content
- * TODO: Parse HTML into structured sections (Text/Image) in future iterations
+ * Parse HTML body into article sections with attachments
+ * Creates text section for HTML body and image sections for inline attachments
  */
 function parseBodyIntoSections(
     body: string | undefined,
     articleId: number,
     createdAt: string,
     updatedAt: string,
+    attachments: ZendeskAttachment[] = [],
 ): Articles.Model.ArticleSection[] {
-    if (!body) {
-        return [];
-    }
+    const sections: Articles.Model.ArticleSection[] = [];
 
-    return [
-        {
-            id: `section-${articleId}`,
+    // Add main text section with HTML body
+    if (body) {
+        sections.push({
+            id: `section-text-${articleId}`,
             __typename: 'ArticleSectionText',
             createdAt,
             updatedAt,
             content: body,
-        },
-    ];
+        });
+    }
+
+    // Add image sections for inline attachments
+    // Filter only image attachments that are inline
+    const imageAttachments = attachments.filter(
+        (att) => att.inline && att.content_type?.startsWith('image/') && att.content_url,
+    );
+
+    imageAttachments.forEach((attachment, index) => {
+        sections.push({
+            id: `section-image-${articleId}-${index}`,
+            __typename: 'ArticleSectionImage',
+            createdAt: attachment.created_at || createdAt,
+            updatedAt: attachment.updated_at || updatedAt,
+            image: {
+                url: attachment.content_url!,
+                alt: attachment.file_name || `Image ${index + 1}`,
+            },
+            caption: attachment.file_name,
+        });
+    });
+
+    return sections;
 }
 
 export function mapArticle(
     article: ZendeskArticle,
     category?: ZendeskCategory | ZendeskSection,
     author?: ZendeskUser,
+    attachments: ZendeskAttachment[] = [],
 ): Articles.Model.Article {
     const articleSlug = extractSlugFromUrl(article.html_url, article.id);
     const basePath = '/help-and-support'; // Base path for help center articles
@@ -139,8 +167,43 @@ export function mapArticle(
         article.id!,
         article.created_at || '',
         article.updated_at || '',
+        attachments,
     );
     const lead = extractLeadFromBody(article.body);
+
+    // Extract featured image and thumbnail from attachments
+    const nonInlineImages = attachments.filter(
+        (att) => !att.inline && att.content_type?.startsWith('image/') && att.content_url,
+    );
+    const inlineImages = attachments.filter(
+        (att) => att.inline && att.content_type?.startsWith('image/') && att.content_url,
+    );
+
+    // Featured image: first non-inline, fallback to first inline
+    const featuredImage = nonInlineImages[0]
+        ? {
+              url: nonInlineImages[0].content_url!,
+              alt: nonInlineImages[0].file_name || article.title || 'Article image',
+          }
+        : inlineImages[0]
+          ? {
+                url: inlineImages[0].content_url!,
+                alt: inlineImages[0].file_name || article.title || 'Article image',
+            }
+          : undefined;
+
+    // Thumbnail: first inline (most common case), fallback to first non-inline
+    const thumbnail = inlineImages[0]
+        ? {
+              url: inlineImages[0].content_url!,
+              alt: inlineImages[0].file_name || article.title || 'Article thumbnail',
+          }
+        : nonInlineImages[0]
+          ? {
+                url: nonInlineImages[0].content_url!,
+                alt: nonInlineImages[0].file_name || article.title || 'Article thumbnail',
+            }
+          : undefined;
 
     return {
         id: article.id?.toString() || '',
@@ -150,6 +213,8 @@ export function mapArticle(
         title: article.title || '',
         lead,
         tags: article.label_names || [],
+        image: featuredImage,
+        thumbnail,
         category: category
             ? {
                   id: (category.id ?? 0).toString(),
@@ -170,16 +235,53 @@ export function mapArticles(
     articles: ZendeskArticle[],
     total: number,
     category?: ZendeskCategory,
+    attachmentsArray: ZendeskAttachment[][] = [],
 ): Articles.Model.Articles {
     const categorySlug = category ? mapCategory(category).slug : undefined;
     const basePath = '/help-and-support'; // Base path for help center articles
 
     return {
-        data: articles.map((article) => {
+        data: articles.map((article, index) => {
             const articleSlug = extractSlugFromUrl(article.html_url, article.id);
             // Build full slug: /help-and-support/{category-slug}/{article-slug}
             const fullSlug = categorySlug ? `${basePath}/${categorySlug}/${articleSlug}` : articleSlug;
             const lead = extractLeadFromBody(article.body);
+
+            // Get attachments for this article
+            const attachments = attachmentsArray[index] || [];
+            const inlineImages = attachments.filter(
+                (att) => att.inline && att.content_type?.startsWith('image/') && att.content_url,
+            );
+            const nonInlineImages = attachments.filter(
+                (att) => !att.inline && att.content_type?.startsWith('image/') && att.content_url,
+            );
+
+            // Use first inline as thumbnail, fallback to first non-inline
+            const thumbnail = inlineImages[0]
+                ? {
+                      url: inlineImages[0].content_url!,
+                      alt: inlineImages[0].file_name || article.title || 'Article thumbnail',
+                  }
+                : nonInlineImages[0]
+                  ? {
+                        url: nonInlineImages[0].content_url!,
+                        alt: nonInlineImages[0].file_name || article.title || 'Article thumbnail',
+                    }
+                  : undefined;
+
+            // Use first non-inline as image, fallback to first inline
+            const image = nonInlineImages[0]
+                ? {
+                      url: nonInlineImages[0].content_url!,
+                      alt: nonInlineImages[0].file_name || article.title || 'Article image',
+                  }
+                : inlineImages[0]
+                  ? {
+                        url: inlineImages[0].content_url!,
+                        alt: inlineImages[0].file_name || article.title || 'Article image',
+                    }
+                  : undefined;
+
             return {
                 id: article.id?.toString() || '',
                 slug: fullSlug,
@@ -188,6 +290,8 @@ export function mapArticles(
                 title: article.title || '',
                 lead,
                 tags: article.label_names || [],
+                thumbnail,
+                image,
             };
         }),
         total,

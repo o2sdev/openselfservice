@@ -4,9 +4,11 @@ import { Observable, catchError, firstValueFrom, from, map, of, switchMap, throw
 import { Articles } from '@o2s/framework/modules';
 
 import {
+    type ArticleAttachmentObject,
     type ArticleObject,
     type CategoryObject,
     type SectionObject,
+    listArticleAttachmentsWithLocale,
     listArticles,
     listArticlesByCategoryWithLocale,
     listCategories,
@@ -24,6 +26,7 @@ import { mapArticle, mapArticles, mapCategories, mapCategory } from './zendesk-a
 type ZendeskArticle = ArticleObject;
 type ZendeskCategory = CategoryObject;
 type ZendeskSection = SectionObject;
+type ZendeskAttachment = ArticleAttachmentObject;
 
 /**
  * Map application locale (en, de, pl) to Zendesk Help Center locale format (en-us, de-de, pl-pl)
@@ -108,9 +111,20 @@ export class ZendeskArticleService extends Articles.Service {
                     ? this.fetchUser(article.author_id).pipe(catchError(() => of(undefined)))
                     : of(undefined);
 
-                return from(Promise.all([firstValueFrom(categoryOrSection$), firstValueFrom(author$)])).pipe(
-                    map(([category, author]) => {
-                        return mapArticle(article, category, author);
+                // Fetch attachments (images)
+                const attachments$ = this.fetchArticleAttachments(articleId, zendeskLocale).pipe(
+                    catchError(() => of([])),
+                );
+
+                return from(
+                    Promise.all([
+                        firstValueFrom(categoryOrSection$),
+                        firstValueFrom(author$),
+                        firstValueFrom(attachments$),
+                    ]),
+                ).pipe(
+                    map(([category, author, attachments]) => {
+                        return mapArticle(article, category, author, attachments);
                     }),
                 );
             }),
@@ -151,11 +165,23 @@ export class ZendeskArticleService extends Articles.Service {
                 };
 
                 return this.fetchArticles(queryOptions).pipe(
-                    map((response) => {
+                    switchMap((response) => {
                         const articles = response.articles || [];
-                        // Zendesk doesn't provide total count in the response, so we use articles.length
-                        // In a real scenario, you might need to make additional requests to get the total
-                        return mapArticles(articles, articles.length, category);
+
+                        // Fetch attachments for all articles in parallel
+                        const attachmentsPromises = articles.map((article) =>
+                            firstValueFrom(
+                                this.fetchArticleAttachments(article.id!, zendeskLocale).pipe(catchError(() => of([]))),
+                            ),
+                        );
+
+                        return from(Promise.all(attachmentsPromises)).pipe(
+                            map((attachmentsArray) => {
+                                // Zendesk doesn't provide total count in the response, so we use articles.length
+                                // In a real scenario, you might need to make additional requests to get the total
+                                return mapArticles(articles, articles.length, category, attachmentsArray);
+                            }),
+                        );
                     }),
                 );
             }),
@@ -479,6 +505,25 @@ export class ZendeskArticleService extends Articles.Service {
             catchError(() => {
                 // If user fetch fails, return undefined (non-critical)
                 return of(undefined);
+            }),
+        );
+    }
+
+    private fetchArticleAttachments(articleId: number, locale: string): Observable<ZendeskAttachment[]> {
+        return from(
+            listArticleAttachmentsWithLocale({
+                path: {
+                    article_id: articleId,
+                    locale,
+                },
+            }),
+        ).pipe(
+            map((response) => {
+                return response.data?.article_attachments || [];
+            }),
+            catchError(() => {
+                // If attachments fetch fails, return empty array (non-critical)
+                return of([]);
             }),
         );
     }
