@@ -14,7 +14,7 @@
         "generate:component": "turbo gen web-component"
     },
     "dependencies": {
-        "@contentful/live-preview": "^4.9.1",
+        "@contentful/live-preview": "^4.9.2",
         "@o2s/blocks.article": "*",
         "@o2s/blocks.article-list": "*",
         "@o2s/blocks.article-search": "*",
@@ -64,7 +64,7 @@
         "next": "16.1.6",
         "next-auth": "^5.0.0-beta.30",
         "next-compose-plugins": "^2.2.1",
-        "next-intl": "^4.8.1",
+        "next-intl": "^4.8.2",
         "react": "19.2.4",
         "react-autosuggest": "^10.1.0",
         "react-dom": "19.2.4",
@@ -81,7 +81,7 @@
         "@o2s/typescript-config": "*",
         "@svgr/webpack": "^8.1.0",
         "@trivago/prettier-plugin-sort-imports": "^6.0.2",
-        "@turbo/gen": "^2.8.0",
+        "@turbo/gen": "^2.8.1",
         "@types/node": "^24.10.9",
         "@types/react": "19.2.10",
         "@types/react-autosuggest": "^10.1.11",
