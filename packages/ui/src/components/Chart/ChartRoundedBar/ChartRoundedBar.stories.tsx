@@ -1,11 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import React from 'react';
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, BarShapeProps, CartesianGrid, XAxis, YAxis } from 'recharts';
 
 import { ChartRoundedBar } from './ChartRoundedBar';
 import { ChartRoundedBarProps } from './ChartRoundedBar.types';
-
-type BarProps = React.ComponentProps<typeof Bar>;
 
 const meta: Meta<typeof ChartRoundedBar> = {
     title: 'Components/Chart/ChartRoundedBar',
@@ -55,17 +53,23 @@ const ChartRoundedBarExample = ({ data }: { data: ChartRoundedBarProps[] }) => {
             <Bar
                 dataKey="topSegment"
                 fill="var(--chart-1)"
-                shape={(props: BarProps) => <ChartRoundedBar {...(props as BarProps & ChartRoundedBarProps)} />}
+                shape={(props: BarShapeProps) => (
+                    <ChartRoundedBar {...(props as BarShapeProps & ChartRoundedBarProps)} dataKey="topSegment" />
+                )}
             />
             <Bar
                 dataKey="middleSegment"
                 fill="var(--chart-2)"
-                shape={(props: BarProps) => <ChartRoundedBar {...(props as BarProps & ChartRoundedBarProps)} />}
+                shape={(props: BarShapeProps) => (
+                    <ChartRoundedBar {...(props as BarShapeProps & ChartRoundedBarProps)} dataKey="middleSegment" />
+                )}
             />
             <Bar
                 dataKey="bottomSegment"
                 fill="var(--chart-3)"
-                shape={(props: BarProps) => <ChartRoundedBar {...(props as BarProps & ChartRoundedBarProps)} />}
+                shape={(props: BarShapeProps) => (
+                    <ChartRoundedBar {...(props as BarShapeProps & ChartRoundedBarProps)} dataKey="bottomSegment" />
+                )}
             />
         </BarChart>
     );

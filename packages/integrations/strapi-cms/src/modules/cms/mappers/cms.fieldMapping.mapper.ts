@@ -2,7 +2,9 @@ import { Models } from '@o2s/framework/modules';
 
 import { FieldMappingFragment } from '@/generated/strapi';
 
-export const mapFields = <T>(component: FieldMappingFragment[]): Models.Mapping.Mapping<T> => {
+export const mapFields = <T>(
+    component: FieldMappingFragment[],
+): Models.Mapping.Mapping<T> & { [key: string]: { [key: string]: string } } => {
     return component.reduce(
         (acc, field) => ({
             ...acc,
@@ -14,6 +16,6 @@ export const mapFields = <T>(component: FieldMappingFragment[]): Models.Mapping.
                 {} as { [key: string]: string },
             ),
         }),
-        {} as Models.Mapping.Mapping<T>,
+        {} as Models.Mapping.Mapping<T> & { [key: string]: { [key: string]: string } },
     );
 };

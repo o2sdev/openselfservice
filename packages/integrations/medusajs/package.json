@@ -1,6 +1,6 @@
 {
     "name": "@o2s/integrations.medusajs",
-    "version": "1.6.2",
+    "version": "1.7.0",
     "private": false,
     "license": "MIT",
     "exports": {
@@ -16,7 +16,7 @@
     },
     "dependencies": {
         "@medusajs/js-sdk": "^2.13.1",
-    "@medusajs/types": "^2.13.1",
+        "@medusajs/types": "^2.13.1",
         "@o2s/framework": "*",
         "@o2s/utils.logger": "*"
     },

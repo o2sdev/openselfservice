@@ -1,6 +1,6 @@
 {
     "name": "@o2s/integrations.contentful-cms",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "private": false,
     "license": "MIT",
     "exports": {
@@ -17,7 +17,7 @@
         "generate": "graphql-codegen && prettier --write \"generated/**/*.{ts,tsx}\""
     },
     "dependencies": {
-        "@contentful/live-preview": "^4.9.1",
+        "@contentful/live-preview": "^4.9.2",
         "@o2s/framework": "*",
         "@o2s/utils.logger": "*",
         "contentful": "^11.10.3",
@@ -49,6 +49,10 @@
         "@nestjs/common": "^11.0.16",
         "@nestjs/config": "^4.0.2",
         "@nestjs/core": "^11",
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
+        "react": "^19",
+        "react-dom": "^19",
         "rxjs": "^7"
     }
 }

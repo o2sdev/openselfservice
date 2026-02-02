@@ -1,6 +1,6 @@
 {
     "name": "@o2s/integrations.mocked",
-    "version": "1.16.0",
+    "version": "1.17.0",
     "private": false,
     "license": "MIT",
     "exports": {
@@ -49,17 +49,23 @@
         "@types/jsonwebtoken": "^9.0.10",
         "concurrently": "^9.2.1",
         "eslint": "^9.39.2",
+        "express": "5.2.1",
         "prettier": "^3.8.1",
         "shx": "^0.4.0",
         "tsc-alias": "^1.8.16",
-        "typescript": "^5.9.3"
+        "typescript": "^5.9.3",
+        "vitest": "^4.0.18"
     },
     "peerDependencies": {
         "@nestjs/axios": "^4.0.1",
         "@nestjs/common": "^11.0.16",
         "@nestjs/config": "^4.0.2",
         "@nestjs/core": "^11",
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
         "next-auth": "^5.0.0-beta.30",
+        "react": "^19",
+        "react-dom": "^19",
         "rxjs": "^7",
         "zod": "^3.25.4 || ^4.0.0"
     }

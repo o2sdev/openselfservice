@@ -5,7 +5,7 @@ name: PR Quality Checks and Preview
 
 permissions:
     actions: write
-    contents: read
+    contents: write
     checks: read
     pull-requests: write
     deployments: write
@@ -42,6 +42,7 @@ jobs:
         outputs:
             package_changed: ${{ steps.determine-changes.outputs.package_changed }}
             stories_changed: ${{ steps.determine-changes.outputs.stories_changed }}
+            requires_changeset: ${{ steps.determine-changes.outputs.requires_changeset }}
         steps:
             - name: Checkout repository
               uses: actions/checkout@v6
@@ -56,6 +57,45 @@ jobs:
                   event-name: ${{ github.event_name }}
                   base-sha: ${{ github.event.pull_request.base.sha }}
                   fetch-depth: '0'
+
+    create-renovate-changeset:
+        needs: [skip-duplicate-check, changed-packages]
+        if: |
+            needs.skip-duplicate-check.outputs.should_skip != 'true' &&
+            github.event.pull_request.user.login == 'renovate[bot]'
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v6
+              with:
+                  # Minimal checkout just to make the action file available
+                  fetch-depth: 1
+
+            - name: Create Dependency Changeset
+              uses: ./.github/actions/create-dependency-changeset
+              with:
+                  base-sha: ${{ github.event.pull_request.base.sha }}
+                  pr-branch: ${{ github.event.pull_request.head.ref }}
+                  repo-token: ${{ secrets.GITHUB_TOKEN }}
+                  fetch-depth: '0'
+
+    check-changeset:
+        needs: [skip-duplicate-check, changed-packages]
+        if: |
+            needs.skip-duplicate-check.outputs.should_skip != 'true' &&
+            needs.changed-packages.outputs.requires_changeset == 'true' &&
+            github.event.pull_request.user.login != 'renovate[bot]'
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v6
+              with:
+                  fetch-depth: 1
+
+            - name: Check for changeset
+              uses: ./.github/actions/check-changeset
+              with:
+                  base-sha: ${{ github.event.pull_request.base.sha }}
 
     build:
         needs: skip-duplicate-check
