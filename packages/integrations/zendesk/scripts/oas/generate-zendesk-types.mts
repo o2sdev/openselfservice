@@ -1,6 +1,9 @@
 import { createClient } from '@hey-api/openapi-ts';
 import { existsSync, mkdirSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const currentDir = dirname(fileURLToPath(import.meta.url));
 
 interface TypeGenConfig {
     oasPath: string;
@@ -10,13 +13,13 @@ interface TypeGenConfig {
 
 const typeGenConfigs: TypeGenConfig[] = [
     {
-        oasPath: resolve(__dirname, '../oas/oas.yaml'),
-        outputDirPath: resolve(__dirname, '../../generated/zendesk'),
+        oasPath: resolve(currentDir, '../oas/oas.yaml'),
+        outputDirPath: resolve(currentDir, '../../generated/zendesk'),
         name: 'Zendesk Ticketing API',
     },
     {
-        oasPath: resolve(__dirname, '../oas/help-center-oas.yaml'),
-        outputDirPath: resolve(__dirname, '../../generated/help-center'),
+        oasPath: resolve(currentDir, '../oas/help-center-oas.yaml'),
+        outputDirPath: resolve(currentDir, '../../generated/help-center'),
         name: 'Zendesk Help Center API',
     },
 ];
