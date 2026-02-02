@@ -9,6 +9,10 @@ const dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(file
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
     test: {
+        coverage: {
+            enabled: true,
+            provider: 'v8', // or 'istanbul'
+        },
         projects: [
             {
                 extends: true,

@@ -22,7 +22,7 @@
             "dependsOn": ["^lint"]
         },
         "test": {
-            "cache": true,
+            "cache": false,
             "outputLogs": "new-only",
             "dependsOn": ["^test"]
         },

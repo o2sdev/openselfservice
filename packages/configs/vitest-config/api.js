@@ -8,6 +8,10 @@ export const config = defineConfig({
         environment: 'node',
         passWithNoTests: true,
         include: ['src/**/*.spec.ts'],
+        coverage: {
+            enabled: true,
+            provider: 'v8', // or 'istanbul'
+        },
     },
     plugins: [
         swc.vite({

@@ -44,3 +44,44 @@ runs:
         - name: Test
           shell: bash
           run: npm run test
+
+        - name: Collect coverage
+          shell: bash
+          run: npx turbo run collect-json-reports --filter=@o2s/vitest-config
+
+        - name: Check for coverage
+          id: check-coverage
+          shell: bash
+          run: |
+              if ls packages/configs/vitest-config/coverage/raw/*.json 1>/dev/null 2>&1; then
+                echo "has_coverage=true" >> $GITHUB_OUTPUT
+              else
+                echo "has_coverage=false" >> $GITHUB_OUTPUT
+              fi
+
+        - name: Merge coverage and generate report
+          if: steps.check-coverage.outputs.has_coverage == 'true'
+          shell: bash
+          run: npx turbo run merge-json-reports report --filter=@o2s/vitest-config
+
+        - name: Report summary
+          if: steps.check-coverage.outputs.has_coverage == 'true'
+          shell: bash
+          run: npm run report:summary --workspace=@o2s/vitest-config
+
+        - name: Upload coverage report
+          if: steps.check-coverage.outputs.has_coverage == 'true'
+          uses: actions/upload-artifact@v4
+          with:
+              name: coverage-report
+              path: packages/configs/vitest-config/coverage/report
+              retention-days: 14
+
+        - name: Vitest coverage report
+          if: steps.check-coverage.outputs.has_coverage == 'true'
+          uses: davelosert/vitest-coverage-report-action@v2
+          with:
+              working-directory: packages/configs/vitest-config
+              json-summary-path: coverage/coverage-summary.json
+              json-final-path: coverage/merged/merged-coverage.json
+              github-token: ${{ inputs.repo-token }}
