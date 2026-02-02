@@ -5,7 +5,7 @@ name: PR Quality Checks and Preview
 
 permissions:
     actions: write
-    contents: read
+    contents: write
     checks: read
     pull-requests: write
     deployments: write
@@ -58,11 +58,33 @@ jobs:
                   base-sha: ${{ github.event.pull_request.base.sha }}
                   fetch-depth: '0'
 
+    create-renovate-changeset:
+        needs: [skip-duplicate-check, changed-packages]
+        if: |
+            needs.skip-duplicate-check.outputs.should_skip != 'true' &&
+            github.event.pull_request.user.login == 'renovate[bot]'
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v6
+              with:
+                  # Minimal checkout just to make the action file available
+                  fetch-depth: 1
+
+            - name: Create Dependency Changeset
+              uses: ./.github/actions/create-dependency-changeset
+              with:
+                  base-sha: ${{ github.event.pull_request.base.sha }}
+                  pr-branch: ${{ github.event.pull_request.head.ref }}
+                  repo-token: ${{ secrets.GITHUB_TOKEN }}
+                  fetch-depth: '0'
+
     check-changeset:
         needs: [skip-duplicate-check, changed-packages]
         if: |
             needs.skip-duplicate-check.outputs.should_skip != 'true' &&
-            needs.changed-packages.outputs.requires_changeset == 'true'
+            needs.changed-packages.outputs.requires_changeset == 'true' &&
+            github.event.pull_request.user.login != 'renovate[bot]'
         runs-on: ubuntu-latest
         steps:
             - name: Checkout repository
@@ -77,7 +99,7 @@ jobs:
               run: |
                   # Check if any .md file in .changeset (excluding README.md) has been modified/added in this PR
                   CHANGESET_DIFF=$(git diff --name-only $BASE_SHA | grep -E "^\.changeset/.*\.md$" | grep -v "README.md" || true)
-                  
+
                   if [ -z "$CHANGESET_DIFF" ]; then
                       echo "::error::No changeset found in this PR! You modified packages in framework, integrations, modules, or blocks."
                       echo "::error::Please run 'npm run changeset' to add a changeset describing your changes."
