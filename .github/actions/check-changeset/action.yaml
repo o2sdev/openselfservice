@@ -1,0 +1,34 @@
+name: Check Changeset
+
+description: 'Verify that a changeset exists when packages in framework, integrations, modules, or blocks were modified'
+
+inputs:
+    base-sha:
+        description: 'Base SHA of the PR to diff against'
+        required: true
+
+runs:
+    using: 'composite'
+    steps:
+        - name: Checkout repository
+          uses: actions/checkout@v6
+          with:
+              fetch-depth: 0
+
+        - name: Check for changeset
+          shell: bash
+          env:
+              BASE_SHA: ${{ inputs.base-sha }}
+          run: |
+              # Check if any .md file in .changeset (excluding README.md) was ADDED in commits on this PR branch.
+              # Uses --first-parent to ignore changesets brought in by merging main (e.g. when syncing the branch).
+              CHANGESET_DIFF=$(git log --first-parent $BASE_SHA..HEAD --name-only --pretty=format: --diff-filter=A -- .changeset/ | grep -E "^\.changeset/.*\.md$" | grep -v "README.md" | sort -u || true)
+
+              if [ -z "$CHANGESET_DIFF" ]; then
+                  echo "::error::No changeset found in this PR! You modified packages in framework, integrations, modules, or blocks."
+                  echo "::error::Please run 'npm run changeset' to add a changeset describing your changes."
+                  exit 1
+              else
+                  echo "Changeset found in PR:"
+                  echo "$CHANGESET_DIFF"
+              fi

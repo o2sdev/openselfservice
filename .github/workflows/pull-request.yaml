@@ -90,24 +90,12 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v6
               with:
-                  fetch-depth: 0
+                  fetch-depth: 1
 
             - name: Check for changeset
-              shell: bash
-              env:
-                  BASE_SHA: ${{ github.event.pull_request.base.sha }}
-              run: |
-                  # Check if any .md file in .changeset (excluding README.md) has been modified/added in this PR
-                  CHANGESET_DIFF=$(git diff --name-only $BASE_SHA | grep -E "^\.changeset/.*\.md$" | grep -v "README.md" || true)
-
-                  if [ -z "$CHANGESET_DIFF" ]; then
-                      echo "::error::No changeset found in this PR! You modified packages in framework, integrations, modules, or blocks."
-                      echo "::error::Please run 'npm run changeset' to add a changeset describing your changes."
-                      exit 1
-                  else
-                      echo "Changeset found in PR:"
-                      echo "$CHANGESET_DIFF"
-                  fi
+              uses: ./.github/actions/check-changeset
+              with:
+                  base-sha: ${{ github.event.pull_request.base.sha }}
 
     build:
         needs: skip-duplicate-check
