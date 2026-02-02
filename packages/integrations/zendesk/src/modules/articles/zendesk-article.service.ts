@@ -296,18 +296,19 @@ export class ZendeskArticleService extends Articles.Service {
      * Slug format can be:
      * - "12345" or "12345-article-title"
      * - "/help-and-support/category-slug/12345-article-title" (full path)
+     * Article ID is always in the last path segment (category ID may appear in earlier segments).
      */
     private extractArticleIdFromSlug(slug: string | undefined): number | null {
         if (!slug) {
             return null;
         }
-        // Extract ID from full path or simple slug
-        // Match: number at the start or number after last slash
-        const match = slug.match(/(?:^|\/)(\d+)/);
-        if (match) {
-            return Number(match[1]);
+        const segments = slug.split('/').filter(Boolean);
+        const last = segments[segments.length - 1];
+        if (!last) {
+            return null;
         }
-        return null;
+        const match = last.match(/^(\d+)/);
+        return match ? Number(match[1]) : null;
     }
 
     private fetchArticle(articleId: number, locale: string): Observable<ZendeskArticle | undefined> {
@@ -392,29 +393,13 @@ export class ZendeskArticleService extends Articles.Service {
 
         return from(apiCall).pipe(
             map((response) => {
-                // Response structure: { data: { articles: [...] } }
-                // But response.data might be the ArticlesResponse directly
                 let articles: ZendeskArticle[] = [];
 
-                // Log response for debugging
-                console.log('Zendesk Articles API Response:', {
-                    hasData: !!response.data,
-                    dataKeys: response.data ? Object.keys(response.data) : [],
-                    dataType: typeof response.data,
-                    isArray: Array.isArray(response.data),
-                });
-
                 if (response.data) {
-                    // Check if response.data has articles property
                     if ('articles' in response.data && Array.isArray(response.data.articles)) {
                         articles = response.data.articles;
-                    }
-                    // Check if response.data is the articles array directly (unlikely but possible)
-                    else if (Array.isArray(response.data)) {
+                    } else if (Array.isArray(response.data)) {
                         articles = response.data;
-                    } else {
-                        // Log unexpected structure
-                        console.warn('Unexpected response structure:', response.data);
                     }
                 }
 
@@ -423,14 +408,6 @@ export class ZendeskArticleService extends Articles.Service {
                 };
             }),
             catchError((error) => {
-                // Log the actual error for debugging
-                console.error('Zendesk Articles API Error:', {
-                    error,
-                    response: error.response,
-                    status: error.status,
-                    message: error.message,
-                    data: error.data,
-                });
                 return throwError(() => new Error(`Failed to fetch articles: ${error.message || error}`));
             }),
         );

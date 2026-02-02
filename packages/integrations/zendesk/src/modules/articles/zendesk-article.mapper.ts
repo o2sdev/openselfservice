@@ -14,6 +14,9 @@ type ZendeskSection = SectionObject;
 type ZendeskUser = UserObject;
 type ZendeskAttachment = ArticleAttachmentObject;
 
+/** Base path for help center articles (full slug prefix for category and article URLs) */
+const HELP_AND_SUPPORT_BASE_PATH = '/help-and-support';
+
 /**
  * Extract avatar URL from Zendesk user object
  * Handles both photo.content_url and remote_photo_url
@@ -171,15 +174,14 @@ export function mapArticle(
     attachments: ZendeskAttachment[] = [],
 ): Articles.Model.Article {
     const articleSlug = extractSlugFromUrl(article.html_url, article.id);
-    const basePath = '/help-and-support'; // Base path for help center articles
 
-    // Build full slug with category if available
+    // Build full slug with category if available (category.slug is already full path)
     // Check if category is ZendeskCategory (has no category_id property) vs ZendeskSection (has category_id)
     let fullSlug = articleSlug;
     if (category && !('category_id' in category)) {
         // category is ZendeskCategory (not ZendeskSection)
         const categorySlug = mapCategory(category as ZendeskCategory).slug;
-        fullSlug = `${basePath}/${categorySlug}/${articleSlug}`;
+        fullSlug = `${categorySlug}/${articleSlug}`;
     }
 
     const sections = parseBodyIntoSections(
@@ -269,13 +271,12 @@ export function mapArticles(
     authorsArray: (ZendeskUser | undefined)[] = [],
 ): Articles.Model.Articles {
     const categorySlug = category ? mapCategory(category).slug : undefined;
-    const basePath = '/help-and-support'; // Base path for help center articles
 
     return {
         data: articles.map((article, index) => {
             const articleSlug = extractSlugFromUrl(article.html_url, article.id);
-            // Build full slug: /help-and-support/{category-slug}/{article-slug}
-            const fullSlug = categorySlug ? `${basePath}/${categorySlug}/${articleSlug}` : articleSlug;
+            // Build full slug: /help-and-support/{category-slug}/{article-slug} (categorySlug is already full path)
+            const fullSlug = categorySlug ? `${categorySlug}/${articleSlug}` : articleSlug;
             const lead = extractLeadFromBody(article.body);
 
             // Get attachments for this article
@@ -349,7 +350,8 @@ export function mapArticles(
 }
 
 export function mapCategory(category: ZendeskCategory): Articles.Model.Category {
-    const slug = extractCategorySlugFromUrl(category.html_url, category.id);
+    const segment = extractCategorySlugFromUrl(category.html_url, category.id);
+    const slug = `${HELP_AND_SUPPORT_BASE_PATH}/${segment}`;
     return {
         id: category.id?.toString() || '',
         slug,

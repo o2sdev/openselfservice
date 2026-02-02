@@ -420,6 +420,112 @@ const MOCK_TROUBLESHOOTING_BLOCK_PL: CMS.Model.CategoryBlock.CategoryBlock = {
     },
 };
 
+// Zendesk category blocks (Warranty & Repair – categoryId 33553543097245)
+const MOCK_ZENDESK_WARRANTY_BLOCK_EN: CMS.Model.CategoryBlock.CategoryBlock = {
+    id: '33553543097245',
+    categoryId: '33553543097245',
+    componentsPosition: 'bottom',
+    components: [],
+    parent: { slug: '/help-and-support' },
+    labels: { today: 'Today', yesterday: 'Yesterday' },
+    title: '',
+    description: '',
+    pagination: {
+        limit: 6,
+        legend: 'of {totalPages} pages',
+        prev: 'Previous',
+        next: 'Next',
+        selectPage: 'Select page',
+    },
+};
+const MOCK_ZENDESK_WARRANTY_BLOCK_DE: CMS.Model.CategoryBlock.CategoryBlock = {
+    id: '33553543097245',
+    categoryId: '33553543097245',
+    componentsPosition: 'bottom',
+    components: [],
+    parent: { slug: '/hilfe-und-support' },
+    labels: { today: 'Heute', yesterday: 'Gestern' },
+    title: '',
+    description: '',
+    pagination: {
+        limit: 6,
+        legend: 'von {totalPages} Seiten',
+        prev: 'Zurück',
+        next: 'Weiter',
+        selectPage: 'Seite auswählen',
+    },
+};
+const MOCK_ZENDESK_WARRANTY_BLOCK_PL: CMS.Model.CategoryBlock.CategoryBlock = {
+    id: '33553543097245',
+    categoryId: '33553543097245',
+    componentsPosition: 'bottom',
+    components: [],
+    parent: { slug: '/pomoc-i-wsparcie' },
+    labels: { today: 'Dzisiaj', yesterday: 'Wczoraj' },
+    title: '',
+    description: '',
+    pagination: {
+        limit: 6,
+        legend: 'z {totalPages} stron',
+        prev: 'Poprzednia',
+        next: 'Następna',
+        selectPage: 'Wybierz stronę',
+    },
+};
+
+// Zendesk category blocks (Maintenance – categoryId 31170054759453)
+const MOCK_ZENDESK_MAINTENANCE_BLOCK_EN: CMS.Model.CategoryBlock.CategoryBlock = {
+    id: '31170054759453',
+    categoryId: '31170054759453',
+    componentsPosition: 'bottom',
+    components: [],
+    parent: { slug: '/help-and-support' },
+    labels: { today: 'Today', yesterday: 'Yesterday' },
+    title: '',
+    description: '',
+    pagination: {
+        limit: 6,
+        legend: 'of {totalPages} pages',
+        prev: 'Previous',
+        next: 'Next',
+        selectPage: 'Select page',
+    },
+};
+const MOCK_ZENDESK_MAINTENANCE_BLOCK_DE: CMS.Model.CategoryBlock.CategoryBlock = {
+    id: '31170054759453',
+    categoryId: '31170054759453',
+    componentsPosition: 'bottom',
+    components: [],
+    parent: { slug: '/hilfe-und-support' },
+    labels: { today: 'Heute', yesterday: 'Gestern' },
+    title: '',
+    description: '',
+    pagination: {
+        limit: 6,
+        legend: 'von {totalPages} Seiten',
+        prev: 'Zurück',
+        next: 'Weiter',
+        selectPage: 'Seite auswählen',
+    },
+};
+const MOCK_ZENDESK_MAINTENANCE_BLOCK_PL: CMS.Model.CategoryBlock.CategoryBlock = {
+    id: '31170054759453',
+    categoryId: '31170054759453',
+    componentsPosition: 'bottom',
+    components: [],
+    parent: { slug: '/pomoc-i-wsparcie' },
+    labels: { today: 'Dzisiaj', yesterday: 'Wczoraj' },
+    title: '',
+    description: '',
+    pagination: {
+        limit: 6,
+        legend: 'z {totalPages} stron',
+        prev: 'Poprzednia',
+        next: 'Następna',
+        selectPage: 'Wybierz stronę',
+    },
+};
+
 export const mapCategoryBlock = (id: string, locale: string): CMS.Model.CategoryBlock.CategoryBlock => {
     switch (id) {
         case 'category-1':
@@ -461,6 +567,22 @@ export const mapCategoryBlock = (id: string, locale: string): CMS.Model.Category
                 return MOCK_TROUBLESHOOTING_BLOCK_PL;
             } else {
                 return MOCK_TROUBLESHOOTING_BLOCK_EN;
+            }
+        case '33553543097245':
+            if (locale === 'de') {
+                return MOCK_ZENDESK_WARRANTY_BLOCK_DE;
+            } else if (locale === 'pl') {
+                return MOCK_ZENDESK_WARRANTY_BLOCK_PL;
+            } else {
+                return MOCK_ZENDESK_WARRANTY_BLOCK_EN;
+            }
+        case '31170054759453':
+            if (locale === 'de') {
+                return MOCK_ZENDESK_MAINTENANCE_BLOCK_DE;
+            } else if (locale === 'pl') {
+                return MOCK_ZENDESK_MAINTENANCE_BLOCK_PL;
+            } else {
+                return MOCK_ZENDESK_MAINTENANCE_BLOCK_EN;
             }
         default:
             throw new NotFoundException();
