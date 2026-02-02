@@ -10,6 +10,7 @@
         "dist"
     ],
     "scripts": {
+        "test": "vitest run",
         "build": "tsc --preserveWatchOutput && tsc-alias",
         "lint": "tsc --noEmit && eslint . --max-warnings=0",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
@@ -24,11 +25,13 @@
         "@o2s/lint-staged-config": "*",
         "@o2s/prettier-config": "*",
         "@o2s/typescript-config": "*",
+        "@o2s/vitest-config": "*",
         "concurrently": "^9.2.1",
         "eslint": "^9.39.2",
         "prettier": "^3.8.1",
         "tsc-alias": "^1.8.16",
-        "typescript": "^5.9.3"
+        "typescript": "^5.9.3",
+        "vitest": "^4.0.18"
     },
     "peerDependencies": {
         "@nestjs/axios": "^4.0.1",
