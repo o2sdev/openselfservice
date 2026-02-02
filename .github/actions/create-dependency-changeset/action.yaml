@@ -1,0 +1,149 @@
+name: Create Dependency Changeset
+
+description: 'Automatically creates changeset files for dependency update PRs'
+
+inputs:
+    base-sha:
+        description: 'Base SHA for pull requests (github.event.pull_request.base.sha)'
+        required: true
+    pr-branch:
+        description: 'PR branch name to commit changeset to (github.event.pull_request.head.ref)'
+        required: true
+    repo-token:
+        description: 'GitHub token with write permissions'
+        required: true
+    fetch-depth:
+        description: 'Git fetch depth for checkout'
+        required: false
+        default: '0'
+
+runs:
+    using: 'composite'
+    steps:
+        - name: Checkout repository
+          uses: actions/checkout@v6
+          with:
+              fetch-depth: ${{ inputs.fetch-depth }}
+              token: ${{ inputs.repo-token }}
+              ref: ${{ inputs.pr-branch }}
+
+        - name: Prepare Environment
+          uses: ./.github/actions/setup-env
+          with:
+              repo-token: ${{ inputs.repo-token }}
+
+        - name: Detect modified package.json files and create changesets
+          shell: bash
+          env:
+              BASE_SHA: ${{ inputs.base-sha }}
+              PR_BRANCH: ${{ inputs.pr-branch }}
+          run: |
+              # Find all modified package.json files (excluding root)
+              MODIFIED_PACKAGE_JSONS=$(git diff --name-only $BASE_SHA | grep -E "^packages/.*/package\.json$|^apps/.*/package\.json$" || true)
+              
+              if [ -z "$MODIFIED_PACKAGE_JSONS" ]; then
+                  echo "No package.json files modified in packages or apps directories."
+                  exit 0
+              fi
+              
+              echo "Found modified package.json files:"
+              echo "$MODIFIED_PACKAGE_JSONS"
+              
+              # Array to store packages that need changesets
+              declare -a PACKAGES_TO_CHANGESET
+              
+              # Process each modified package.json
+              while IFS= read -r package_json; do
+                  if [ -z "$package_json" ]; then
+                      continue
+                  fi
+                  
+                  # Skip if package.json doesn't exist (was deleted)
+                  if [ ! -f "$package_json" ]; then
+                      echo "Skipping deleted file: $package_json"
+                      continue
+                  fi
+                  
+                  # Extract package name and check if it's publishable
+                  PACKAGE_NAME=$(jq -r '.name // empty' "$package_json")
+                  IS_PRIVATE=$(jq -r '.private // false' "$package_json")
+                  
+                  if [ -z "$PACKAGE_NAME" ]; then
+                      echo "Skipping $package_json: no package name found"
+                      continue
+                  fi
+                  
+                  # Skip private packages and apps (they don't need changesets)
+                  if [ "$IS_PRIVATE" = "true" ]; then
+                      echo "Skipping private package: $PACKAGE_NAME"
+                      continue
+                  fi
+                  
+                  # Check if dependencies actually changed (not just formatting)
+                  DEPENDENCIES_CHANGED=$(git diff $BASE_SHA -- "$package_json" | grep -E "^[\+\-].*\"(dependencies|devDependencies|peerDependencies)" || true)
+                  
+                  if [ -z "$DEPENDENCIES_CHANGED" ]; then
+                      echo "Skipping $PACKAGE_NAME: no dependency changes detected"
+                      continue
+                  fi
+                  
+                  echo "Package $PACKAGE_NAME needs a changeset"
+                  PACKAGES_TO_CHANGESET+=("$PACKAGE_NAME")
+                  
+              done <<< "$MODIFIED_PACKAGE_JSONS"
+              
+              if [ ${#PACKAGES_TO_CHANGESET[@]} -eq 0 ]; then
+                  echo "No publishable packages with dependency updates found."
+                  exit 0
+              fi
+              
+              # Generate changeset filename (adjective-noun format)
+              ADJECTIVES=("breezy" "swift" "calm" "bright" "gentle" "quick" "smooth" "clear" "fresh" "bold")
+              NOUNS=("humans" "robots" "tigers" "eagles" "wolves" "bears" "lions" "sharks" "hawks" "foxes")
+              
+              RANDOM_ADJ=${ADJECTIVES[$RANDOM % ${#ADJECTIVES[@]}]}
+              RANDOM_NOUN=${NOUNS[$RANDOM % ${#NOUNS[@]}]}
+              CHANGESET_FILENAME=".changeset/${RANDOM_ADJ}-${RANDOM_NOUN}.md"
+              
+              # Check if changeset already exists, generate new name if needed
+              while [ -f "$CHANGESET_FILENAME" ]; do
+                  RANDOM_ADJ=${ADJECTIVES[$RANDOM % ${#ADJECTIVES[@]}]}
+                  RANDOM_NOUN=${NOUNS[$RANDOM % ${#NOUNS[@]}]}
+                  CHANGESET_FILENAME=".changeset/${RANDOM_ADJ}-${RANDOM_NOUN}.md"
+              done
+              
+              # Create changeset file with all affected packages
+              {
+                  echo "---"
+                  for pkg in "${PACKAGES_TO_CHANGESET[@]}"; do
+                      echo "'$pkg': patch"
+                  done
+                  echo "---"
+                  echo ""
+                  echo "chore(deps): update dependencies"
+              } > "$CHANGESET_FILENAME"
+              
+              echo "Created changeset: $CHANGESET_FILENAME"
+              echo "Packages included:"
+              for pkg in "${PACKAGES_TO_CHANGESET[@]}"; do
+                  echo "  - $pkg"
+              done
+              
+              # Configure git
+              git config user.name "github-actions[bot]"
+              git config user.email "github-actions[bot]@users.noreply.github.com"
+              
+              # Stage the changeset file
+              git add "$CHANGESET_FILENAME"
+              
+              # Check if there are changes to commit
+              if git diff --cached --quiet; then
+                  echo "No changes to commit (changeset may already exist)."
+                  exit 0
+              fi
+              
+              # Commit and push changeset
+              git commit -m "chore(changeset): add changeset for dependency updates"
+              git push origin "$PR_BRANCH"
+              
+              echo "Successfully created and pushed changeset for dependency updates"
