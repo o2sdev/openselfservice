@@ -16,10 +16,6 @@ inputs:
         description: 'Git fetch depth for checkout'
         required: false
         default: '0'
-    changed-packages-json:
-        description: 'JSON output from changed-packages action (optional, falls back to manual detection)'
-        required: false
-        default: ''
 
 runs:
     using: 'composite'
@@ -41,158 +37,93 @@ runs:
           env:
               BASE_SHA: ${{ inputs.base-sha }}
               PR_BRANCH: ${{ inputs.pr-branch }}
-              CHANGED_PACKAGES_JSON: ${{ inputs.changed-packages-json }}
           run: |
               # Array to store packages that need changesets
               declare -a PACKAGES_TO_CHANGESET
-
-              # Function to find package.json path from package name
-              find_package_json_path() {
-                  local package_name=$1
-                  # Enable nullglob so unmatched globs don't expand to literal strings
-                  shopt -s nullglob
-                  # Search in all workspace directories
-                  for dir in apps/* packages/* packages/configs/* packages/integrations/* packages/utils/* packages/cli/* packages/blocks/* packages/modules/*; do
-                      if [ -d "$dir" ] && [ -f "$dir/package.json" ]; then
-                          local pkg_name=$(jq -r '.name // empty' "$dir/package.json")
-                          if [ "$pkg_name" = "$package_name" ]; then
-                              shopt -u nullglob
-                              echo "$dir/package.json"
-                              return 0
-                          fi
-                      fi
-                  done
-                  shopt -u nullglob
-                  return 1
-              }
-
+              
               # Function to process a package.json file
               process_package_json() {
                   local package_json=$1
-
+                  
                   if [ -z "$package_json" ] || [ ! -f "$package_json" ]; then
                       return 1
                   fi
-
+                  
                   # Extract package name and check if it's publishable
                   local PACKAGE_NAME=$(jq -r '.name // empty' "$package_json")
                   local IS_PRIVATE=$(jq -r '.private // false' "$package_json")
-
+                  
                   if [ -z "$PACKAGE_NAME" ]; then
                       echo "Skipping $package_json: no package name found"
                       return 1
                   fi
-
+                  
                   # Skip private packages and apps (they don't need changesets)
                   if [ "$IS_PRIVATE" = "true" ]; then
                       echo "Skipping private package: $PACKAGE_NAME"
                       return 1
                   fi
-
+                  
                   # Check if dependencies actually changed (not just formatting)
                   # Get the diff output
                   local DIFF_OUTPUT=$(git diff $BASE_SHA -- "$package_json" || true)
-
+                  
                   if [ -z "$DIFF_OUTPUT" ]; then
                       echo "Warning: No diff output for $package_json (file may not exist in base commit)"
                       return 1
                   fi
-
+                  
                   # Check for changes to dependency field names (dependencies, devDependencies, etc.)
                   # Pattern matches lines starting with + or - that contain dependency field names
                   local DEPENDENCIES_CHANGED=$(echo "$DIFF_OUTPUT" | grep -E "^[\+\-].*\"(dependencies|devDependencies|peerDependencies|optionalDependencies|bundledDependencies)" || true)
-
+                  
                   # If no field name changes, check for changes to individual dependency entries
                   # Look for added/removed lines that look like dependency entries:
                   # - Start with + or - (git diff markers)
-                  # - Have indentation (spaces or tabs)
                   # - Contain a quoted string followed by colon (package name: version)
                   # This matches lines like: -        "package-name": "^1.0.0",
                   if [ -z "$DEPENDENCIES_CHANGED" ]; then
                       # More flexible pattern: any line with + or - that has quotes, colon, and looks like a dependency entry
                       DEPENDENCIES_CHANGED=$(echo "$DIFF_OUTPUT" | grep -E "^[\+\-].*\"[^\"]+\"[[:space:]]*:[[:space:]]*" || true)
                   fi
-
+                  
                   if [ -z "$DEPENDENCIES_CHANGED" ]; then
                       echo "Skipping $PACKAGE_NAME: no dependency changes detected"
                       return 1
                   fi
-
+                  
                   echo "Package $PACKAGE_NAME needs a changeset"
                   PACKAGES_TO_CHANGESET+=("$PACKAGE_NAME")
                   return 0
               }
-
-              # Use changed-packages output if available, otherwise fall back to manual detection
-              if [ -n "$CHANGED_PACKAGES_JSON" ] && [ "$CHANGED_PACKAGES_JSON" != "" ]; then
-                  echo "Using changed-packages output from Turborepo"
-
-                  # Extract package names from JSON
-                  CHANGED_PACKAGE_NAMES=$(echo "$CHANGED_PACKAGES_JSON" | jq -r '.packages[]? // empty' 2>/dev/null || echo "")
-
-                  if [ -z "$CHANGED_PACKAGE_NAMES" ]; then
-                      echo "No packages found in changed-packages output."
-                      exit 0
-                  fi
-
-                  echo "Found changed packages from Turborepo:"
-                  echo "$CHANGED_PACKAGE_NAMES"
-
-                  # Process each changed package
-                  while IFS= read -r package_name; do
-                      if [ -z "$package_name" ]; then
-                          continue
-                      fi
-
-                      # Find package.json path for this package
-                      package_json_path=$(find_package_json_path "$package_name")
-
-                      if [ -z "$package_json_path" ]; then
-                          echo "Warning: Could not find package.json for $package_name"
-                          continue
-                      fi
-
-                      # Check if this package.json was actually modified
-                      if ! git diff --name-only $BASE_SHA | grep -q "^$package_json_path$"; then
-                          echo "Skipping $package_name: package.json not modified (package changed due to other files)"
-                          continue
-                      fi
-
-                      # Process the package.json
-                      process_package_json "$package_json_path"
-
-                  done <<< "$CHANGED_PACKAGE_NAMES"
-              else
-                  echo "Using manual detection (changed-packages output not provided)"
-
-                  # Find all modified package.json files (excluding root)
-                  MODIFIED_PACKAGE_JSONS=$(git diff --name-only $BASE_SHA | grep -E "^packages/.*/package\.json$|^apps/.*/package\.json$" || true)
-
-                  if [ -z "$MODIFIED_PACKAGE_JSONS" ]; then
-                      echo "No package.json files modified in packages or apps directories."
-                      exit 0
-                  fi
-
-                  echo "Found modified package.json files:"
-                  echo "$MODIFIED_PACKAGE_JSONS"
-
-                  # Process each modified package.json
-                  while IFS= read -r package_json; do
-                      if [ -z "$package_json" ]; then
-                          continue
-                      fi
-
-                      # Skip if package.json doesn't exist (was deleted)
-                      if [ ! -f "$package_json" ]; then
-                          echo "Skipping deleted file: $package_json"
-                          continue
-                      fi
-
-                      # Process the package.json
-                      process_package_json "$package_json"
-
-                  done <<< "$MODIFIED_PACKAGE_JSONS"
+              
+              # Find all modified package.json files (excluding root)
+              MODIFIED_PACKAGE_JSONS=$(git diff --name-only $BASE_SHA | grep -E "^packages/.*/package\.json$|^apps/.*/package\.json$" || true)
+              
+              if [ -z "$MODIFIED_PACKAGE_JSONS" ]; then
+                  echo "No package.json files modified in packages or apps directories."
+                  exit 0
               fi
+              
+              echo "Found modified package.json files:"
+              echo "$MODIFIED_PACKAGE_JSONS"
+              
+              # Process each modified package.json
+              while IFS= read -r package_json; do
+                  if [ -z "$package_json" ]; then
+                      continue
+                  fi
+                  
+                  # Skip if package.json doesn't exist (was deleted)
+                  if [ ! -f "$package_json" ]; then
+                      echo "Skipping deleted file: $package_json"
+                      continue
+                  fi
+                  
+                  # Process the package.json
+                  process_package_json "$package_json"
+                  
+              done <<< "$MODIFIED_PACKAGE_JSONS"
 
               if [ ${#PACKAGES_TO_CHANGESET[@]} -eq 0 ]; then
                   echo "No publishable packages with dependency updates found."

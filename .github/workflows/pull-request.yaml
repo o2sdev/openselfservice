@@ -78,7 +78,6 @@ jobs:
                   pr-branch: ${{ github.event.pull_request.head.ref }}
                   repo-token: ${{ secrets.GITHUB_TOKEN }}
                   fetch-depth: '0'
-                  changed-packages-json: ${{ needs.changed-packages.outputs.package_changed }}
 
     check-changeset:
         needs: [skip-duplicate-check, changed-packages]
