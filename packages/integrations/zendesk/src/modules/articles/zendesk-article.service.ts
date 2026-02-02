@@ -168,18 +168,26 @@ export class ZendeskArticleService extends Articles.Service {
                     switchMap((response) => {
                         const articles = response.articles || [];
 
-                        // Fetch attachments for all articles in parallel
+                        // Fetch attachments and authors for all articles in parallel
                         const attachmentsPromises = articles.map((article) =>
                             firstValueFrom(
                                 this.fetchArticleAttachments(article.id!, zendeskLocale).pipe(catchError(() => of([]))),
                             ),
                         );
 
-                        return from(Promise.all(attachmentsPromises)).pipe(
-                            map((attachmentsArray) => {
+                        const authorsPromises = articles.map((article) =>
+                            article.author_id
+                                ? firstValueFrom(
+                                      this.fetchUser(article.author_id).pipe(catchError(() => of(undefined))),
+                                  )
+                                : Promise.resolve(undefined),
+                        );
+
+                        return from(Promise.all([Promise.all(attachmentsPromises), Promise.all(authorsPromises)])).pipe(
+                            map(([attachmentsArray, authorsArray]) => {
                                 // Zendesk doesn't provide total count in the response, so we use articles.length
                                 // In a real scenario, you might need to make additional requests to get the total
-                                return mapArticles(articles, articles.length, category, attachmentsArray);
+                                return mapArticles(articles, articles.length, category, attachmentsArray, authorsArray);
                             }),
                         );
                     }),

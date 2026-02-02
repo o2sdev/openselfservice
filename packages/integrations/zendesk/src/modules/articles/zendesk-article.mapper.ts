@@ -15,6 +15,26 @@ type ZendeskUser = UserObject;
 type ZendeskAttachment = ArticleAttachmentObject;
 
 /**
+ * Extract avatar URL from Zendesk user object
+ * Handles both photo.content_url and remote_photo_url
+ */
+function getAvatarUrl(author: ZendeskUser): string | undefined {
+    // photo is typed as { [key: string]: unknown } in Zendesk API
+    const photoUrl = author.photo && 'content_url' in author.photo ? author.photo.content_url : undefined;
+    if (typeof photoUrl === 'string') {
+        return photoUrl;
+    }
+
+    // remote_photo_url is only available in UserForAdmin
+    if ('remote_photo_url' in author) {
+        const url = author.remote_photo_url as unknown;
+        return typeof url === 'string' ? url : undefined;
+    }
+
+    return undefined;
+}
+
+/**
  * Extract slug from Zendesk article HTML URL
  * Example: https://company.zendesk.com/hc/en-us/articles/12345-Article-Title
  * Returns: "12345-article-title" or just the ID as fallback
@@ -225,6 +245,16 @@ export function mapArticle(
             ? {
                   name: author.name || '',
                   email: author.email,
+                  position: author.role,
+                  avatar: (() => {
+                      const photoUrl = getAvatarUrl(author);
+                      return photoUrl
+                          ? {
+                                url: photoUrl,
+                                alt: author.name || '',
+                            }
+                          : undefined;
+                  })(),
               }
             : undefined,
         sections,
@@ -236,6 +266,7 @@ export function mapArticles(
     total: number,
     category?: ZendeskCategory,
     attachmentsArray: ZendeskAttachment[][] = [],
+    authorsArray: (ZendeskUser | undefined)[] = [],
 ): Articles.Model.Articles {
     const categorySlug = category ? mapCategory(category).slug : undefined;
     const basePath = '/help-and-support'; // Base path for help center articles
@@ -282,6 +313,9 @@ export function mapArticles(
                     }
                   : undefined;
 
+            // Get author for this article
+            const author = authorsArray[index];
+
             return {
                 id: article.id?.toString() || '',
                 slug: fullSlug,
@@ -292,6 +326,22 @@ export function mapArticles(
                 tags: article.label_names || [],
                 thumbnail,
                 image,
+                author: author
+                    ? {
+                          name: author.name || '',
+                          email: author.email,
+                          position: author.role,
+                          avatar: (() => {
+                              const photoUrl = getAvatarUrl(author);
+                              return photoUrl
+                                  ? {
+                                        url: photoUrl,
+                                        alt: author.name || '',
+                                    }
+                                  : undefined;
+                          })(),
+                      }
+                    : undefined,
             };
         }),
         total,
