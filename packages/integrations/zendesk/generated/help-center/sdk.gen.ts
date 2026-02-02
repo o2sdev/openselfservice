@@ -635,7 +635,7 @@ export const updateTopicSubscription = <ThrowOnError extends boolean = false>(op
 });
 
 /**
- * List Comments by User
+ * List Post Comments by User
  *
  * Lists all comments on a specific post or all the comments created by a specific user.
  * When listing comments by specific user, the comments of the user making the request
@@ -773,7 +773,7 @@ export const requestUserImageUpload = <ThrowOnError extends boolean = false>(opt
 });
 
 /**
- * List Articles
+ * List Articles by Locale
  */
 export const listArticles = <ThrowOnError extends boolean = false>(options: Options<ListArticlesData, ThrowOnError>) => (options.client ?? client).get<ListArticlesResponses, unknown, ThrowOnError>({
     security: [{ scheme: 'basic', type: 'http' }],
@@ -782,7 +782,7 @@ export const listArticles = <ThrowOnError extends boolean = false>(options: Opti
 });
 
 /**
- * Archive Article
+ * Archive Article by Locale
  *
  * Archives the article. You can restore the article using the Help Center user interface. See [Viewing and restoring archived articles](https://support.zendesk.com/hc/en-us/articles/235721587).
  *
@@ -798,7 +798,7 @@ export const archiveArticle = <ThrowOnError extends boolean = false>(options: Op
 });
 
 /**
- * Show Article
+ * Show Article by Locale
  *
  * Shows the properties of an article.
  *
@@ -831,7 +831,7 @@ export const showArticle = <ThrowOnError extends boolean = false>(options: Optio
 });
 
 /**
- * Update Article
+ * Update Article by Locale
  */
 export const updateArticle = <ThrowOnError extends boolean = false>(options: Options<UpdateArticleData, ThrowOnError>) => (options.client ?? client).put<UpdateArticleResponses, unknown, ThrowOnError>({
     security: [{ scheme: 'basic', type: 'http' }],
@@ -840,7 +840,7 @@ export const updateArticle = <ThrowOnError extends boolean = false>(options: Opt
 });
 
 /**
- * List Article Attachments
+ * List Article Attachments by Locale
  *
  * Lists all the article's attachments.
  *
@@ -865,7 +865,7 @@ export const listArticleAttachmentsWithLocale = <ThrowOnError extends boolean = 
 });
 
 /**
- * List Article Block Attachments
+ * List Article Block Attachments by Locale
  *
  * Lists all the article's block attachments. Block attachments are those that are not inline.
  *
@@ -882,7 +882,7 @@ export const listBlockArticleAttachmentsWithLocale = <ThrowOnError extends boole
 });
 
 /**
- * List Article Inline Attachments
+ * List Article Inline Attachments by Locale
  *
  * Lists all the article's inline attachments.
  *
@@ -899,7 +899,7 @@ export const listInlineArticleAttachmentsWithLocale = <ThrowOnError extends bool
 });
 
 /**
- * Associate Attachments in Bulk to Article
+ * Associate Attachments in Bulk to Article by Locale
  *
  * You can associate attachments in bulk to only one article at a time,
  * with a maximum of 20 attachments per request.
@@ -918,7 +918,7 @@ export const bulkAttachmentsArticles = <ThrowOnError extends boolean = false>(op
 });
 
 /**
- * List Comments
+ * List Article Comments by Locale
  *
  * Lists the comments created by a specific user, or all comments made by all users on
  * a specific article.
@@ -976,7 +976,7 @@ export const createArticleComment = <ThrowOnError extends boolean = false>(optio
 });
 
 /**
- * Delete Comment
+ * Delete Article Comment by Locale
  *
  * #### Allowed for
  *
@@ -991,7 +991,7 @@ export const deleteComment = <ThrowOnError extends boolean = false>(options: Opt
 });
 
 /**
- * Show Comment
+ * Show Article Comment by Locale
  *
  * Shows the properties of the specified comment.
  *
@@ -1009,7 +1009,7 @@ export const showComment = <ThrowOnError extends boolean = false>(options: Optio
 });
 
 /**
- * Update Comment
+ * Update Article Comment by Locale
  *
  * #### Allowed for
  *
@@ -1024,7 +1024,7 @@ export const updateComment = <ThrowOnError extends boolean = false>(options: Opt
 });
 
 /**
- * List Article Comment Votes
+ * List Article Comment Votes by Locale
  *
  * Lists all votes cast by all users for a given [article comment](/api-reference/help_center/help-center-api/article_comments/).
  *
@@ -1049,7 +1049,7 @@ export const listArticleCommentVotesWithLocale = <ThrowOnError extends boolean =
 });
 
 /**
- * List Article Labels
+ * List Article Labels by Locale
  *
  * Lists all the labels in a given article.
  *
@@ -1072,7 +1072,7 @@ export const listArticleLabels = <ThrowOnError extends boolean = false>(options:
 });
 
 /**
- * Create Label
+ * Create Label by Locale
  *
  * #### Allowed for
  *
@@ -1086,7 +1086,7 @@ export const createArticleLabel = <ThrowOnError extends boolean = false>(options
 });
 
 /**
- * Delete Label from Article
+ * Delete Label from Article by Locale
  *
  * Removes the label from the specified article's list of labels.
  *
@@ -1102,7 +1102,7 @@ export const deleteArticleLabel = <ThrowOnError extends boolean = false>(options
 });
 
 /**
- * Update Article Source Locale
+ * Update Article Source Locale by Locale
  *
  * Updates the article's `source_locale` property. The source locale is the main language of the article. When you delete the article in the source locale, you delete all the article's translations.
  *
@@ -1122,7 +1122,7 @@ export const updateArticleSourceLocale = <ThrowOnError extends boolean = false>(
 });
 
 /**
- * List Article Subscriptions
+ * List Article Subscriptions by Locale
  *
  * Lists the subscriptions to a given article.
  *
@@ -1163,7 +1163,7 @@ export const listArticleSubscriptions = <ThrowOnError extends boolean = false>(o
 });
 
 /**
- * Create Article Subscription
+ * Create Article Subscription by Locale
  *
  * Creates a subscription to a given [article](/api-reference/help_center/help-center-api/articles).
  *
@@ -1183,7 +1183,7 @@ export const createArticleSubscription = <ThrowOnError extends boolean = false>(
 });
 
 /**
- * Delete Article Subscription
+ * Delete Article Subscription by Locale
  *
  * Removes the specified subscription from the specified [article](/api-reference/help_center/help-center-api/articles).
  *
@@ -1199,7 +1199,7 @@ export const deleteArticleSubscription = <ThrowOnError extends boolean = false>(
 });
 
 /**
- * Show Article Subscription
+ * Show Article Subscription by Locale
  *
  * **Note**: `{/locale}` is an optional parameter for admins and agents. End users and anonymous users must provide the parameter.
  *
@@ -1243,7 +1243,7 @@ export const createArticleUpVote = <ThrowOnError extends boolean = false>(option
 });
 
 /**
- * List Article Votes
+ * List Article Votes by Locale
  *
  * Lists all votes cast by all users for a given article.
  *
@@ -1268,7 +1268,7 @@ export const listArticleVotesWithLocale = <ThrowOnError extends boolean = false>
 });
 
 /**
- * List Categories
+ * List Categories by Locale
  *
  * **Note**: `{/locale}` is an optional parameter for admins and agents. End users and anonymous users must provide the parameter.
  *
@@ -1328,7 +1328,7 @@ export const listCategories = <ThrowOnError extends boolean = false>(options: Op
 });
 
 /**
- * Create Category
+ * Create Category by Locale
  *
  * You must specify a category name and locale. The locale can be omitted if it's specified
  * in the URL. Optionally, you can specify multiple [translations](/api-reference/help_center/help-center-api/translations) for
@@ -1346,7 +1346,7 @@ export const createCategory = <ThrowOnError extends boolean = false>(options: Op
 });
 
 /**
- * Delete Category
+ * Delete Category by Locale
  *
  * **WARNING: Every section and all articles in the category will also be deleted.**
  *
@@ -1362,7 +1362,7 @@ export const deleteCategory = <ThrowOnError extends boolean = false>(options: Op
 });
 
 /**
- * Show Category
+ * Show Category by Locale
  *
  * **Note**: `{/locale}` is an optional parameter for admins and agents. End users and anonymous users must provide the parameter.
  *
@@ -1389,7 +1389,7 @@ export const showCategory = <ThrowOnError extends boolean = false>(options: Opti
 });
 
 /**
- * Update Category
+ * Update Category by Locale
  *
  * These endpoints only update category-level metadata such as the sorting position.
  * They don't update category translations.
@@ -1406,7 +1406,7 @@ export const updateCategory = <ThrowOnError extends boolean = false>(options: Op
 });
 
 /**
- * List Articles in Category
+ * List Articles in Category by Locale
  */
 export const listArticlesByCategoryWithLocale = <ThrowOnError extends boolean = false>(options: Options<ListArticlesByCategoryWithLocaleData, ThrowOnError>) => (options.client ?? client).get<ListArticlesByCategoryWithLocaleResponses, unknown, ThrowOnError>({
     security: [{ scheme: 'basic', type: 'http' }],
@@ -1415,7 +1415,7 @@ export const listArticlesByCategoryWithLocale = <ThrowOnError extends boolean = 
 });
 
 /**
- * List Sections
+ * List Sections in Category by Locale
  *
  * Lists all the sections in Help Center or in a specific [category](/api-reference/help_center/help-center-api/categories).
  *
@@ -1499,7 +1499,7 @@ export const createSection = <ThrowOnError extends boolean = false>(options: Opt
 });
 
 /**
- * Update Category Source Locale
+ * Update Category Source Locale by Locale
  *
  * The endpoint updates the category `source_locale` property
  *
@@ -1515,7 +1515,7 @@ export const updateCategorySourceLocale = <ThrowOnError extends boolean = false>
 });
 
 /**
- * List Sections
+ * List Sections by Locale
  *
  * Lists all the sections in Help Center or in a specific [category](/api-reference/help_center/help-center-api/categories).
  *
@@ -1579,7 +1579,7 @@ export const listSections = <ThrowOnError extends boolean = false>(options: Opti
 });
 
 /**
- * Delete Section
+ * Delete Section by Locale
  *
  * **WARNING: All articles in the section will also be deleted.**
  *
@@ -1595,7 +1595,7 @@ export const deleteSection = <ThrowOnError extends boolean = false>(options: Opt
 });
 
 /**
- * Show Section
+ * Show Section by Locale
  *
  * **Note**: `{/locale}` is an optional parameter for admins and agents. End users and anonymous users must provide the parameter.
  *
@@ -1623,7 +1623,7 @@ export const showSection = <ThrowOnError extends boolean = false>(options: Optio
 });
 
 /**
- * Update Section
+ * Update Section by Locale
  *
  * Update section. This endpoint updates section-level data, specifically:
  *
@@ -1653,7 +1653,7 @@ export const updateSection = <ThrowOnError extends boolean = false>(options: Opt
 });
 
 /**
- * List Articles
+ * List Articles in Section by Locale
  */
 export const listArticlesBySectionWithLocale = <ThrowOnError extends boolean = false>(options: Options<ListArticlesBySectionWithLocaleData, ThrowOnError>) => (options.client ?? client).get<ListArticlesBySectionWithLocaleResponses, unknown, ThrowOnError>({
     security: [{ scheme: 'basic', type: 'http' }],
@@ -1675,7 +1675,7 @@ export const createArticle = <ThrowOnError extends boolean = false>(options: Opt
 });
 
 /**
- * Update Section Source Locale
+ * Update Section Source Locale by Locale
  *
  * This endpoint lets you set a section's source language to something other
  * than the default language of your Help Center. For example, if the default language
@@ -1694,7 +1694,7 @@ export const updateSectionSourceLocale = <ThrowOnError extends boolean = false>(
 });
 
 /**
- * List Section Subscriptions
+ * List Section Subscriptions by Locale
  *
  * Lists the subscriptions to a given [section](/api-reference/help_center/help-center-api/sections).
  *
@@ -1734,7 +1734,7 @@ export const listSectionSubscriptions = <ThrowOnError extends boolean = false>(o
 });
 
 /**
- * Create Section Subscription
+ * Create Section Subscription by Locale
  *
  * Creates a subscription to a given [section](/api-reference/help_center/help-center-api/sections).
  *
@@ -1754,7 +1754,7 @@ export const createSectionSubscription = <ThrowOnError extends boolean = false>(
 });
 
 /**
- * Delete Section Subscription
+ * Delete Section Subscription by Locale
  *
  * Removes the specified subscription from the specified [section](/api-reference/help_center/help-center-api/sections).
  *
@@ -1770,7 +1770,7 @@ export const deleteSectionSubscription = <ThrowOnError extends boolean = false>(
 });
 
 /**
- * Show Section Subscription
+ * Show Section Subscription by Locale
  *
  * **Note**: `{/locale}` is an optional parameter for admins and agents. End users and anonymous users must provide the parameter.
  *
@@ -1911,7 +1911,7 @@ export const createArticleAttachment = <ThrowOnError extends boolean = false>(op
 });
 
 /**
- * Show Article Attachment
+ * Show Article Attachment in Article
  *
  * Shows the properties of the specified attachment.
  *
@@ -2969,7 +2969,7 @@ export const listMissingTranslationsByCategory = <ThrowOnError extends boolean =
 });
 
 /**
- * List Posts
+ * List Posts (legacy)
  */
 export const listPostsInternal = <ThrowOnError extends boolean = false>(options?: Options<ListPostsInternalData, ThrowOnError>) => (options?.client ?? client).get<ListPostsInternalResponses, unknown, ThrowOnError>({
     security: [{ scheme: 'basic', type: 'http' }],
@@ -2978,7 +2978,7 @@ export const listPostsInternal = <ThrowOnError extends boolean = false>(options?
 });
 
 /**
- * Delete Post
+ * Delete Post (legacy)
  *
  * #### Allowed for
  *
@@ -2993,7 +2993,7 @@ export const deletePostInternal = <ThrowOnError extends boolean = false>(options
 });
 
 /**
- * Show Post
+ * Show Post (legacy)
  *
  * Gets information about a given post.
  *
@@ -3017,7 +3017,7 @@ export const showPostInternal = <ThrowOnError extends boolean = false>(options: 
 });
 
 /**
- * Update Post
+ * Update Post (legacy)
  *
  * #### Allowed for
  *
@@ -3091,7 +3091,7 @@ export const updatePostCommentInternal = <ThrowOnError extends boolean = false>(
 });
 
 /**
- * List Posts in Topic
+ * List Posts in Topic (legacy)
  */
 export const listPostsByTopicInternal = <ThrowOnError extends boolean = false>(options: Options<ListPostsByTopicInternalData, ThrowOnError>) => (options.client ?? client).get<ListPostsByTopicInternalResponses, unknown, ThrowOnError>({
     security: [{ scheme: 'basic', type: 'http' }],
@@ -3100,7 +3100,7 @@ export const listPostsByTopicInternal = <ThrowOnError extends boolean = false>(o
 });
 
 /**
- * List Posts by User
+ * List Posts by User (legacy)
  */
 export const listPostsByUserInternal = <ThrowOnError extends boolean = false>(options: Options<ListPostsByUserInternalData, ThrowOnError>) => (options.client ?? client).get<ListPostsByUserInternalResponses, unknown, ThrowOnError>({
     security: [{ scheme: 'basic', type: 'http' }],
@@ -3793,7 +3793,7 @@ export const listArticlesByUser = <ThrowOnError extends boolean = false>(options
 });
 
 /**
- * List Comments by User
+ * List Article Comments by User
  *
  * Lists the comments created by a specific user.
  *
@@ -3922,7 +3922,7 @@ export const listUserSubscriptionsByUserId = <ThrowOnError extends boolean = fal
 });
 
 /**
- * List Votes
+ * List Votes by User
  *
  * Lists all votes cast by a given user, or all votes cast by all users for a given article, article comment, post, or post comment.
  *
@@ -3949,7 +3949,7 @@ export const listUserVotes = <ThrowOnError extends boolean = false>(options: Opt
 });
 
 /**
- * List Votes
+ * List All Votes
  *
  * Lists all votes.
  *
@@ -4013,10 +4013,16 @@ export const showVote = <ThrowOnError extends boolean = false>(options: Options<
 });
 
 /**
- * Generates answer for the provided query and contents
+ * Generate Answer for Help Center
  *
- * Generates an answer for the provided query and contents. The contents can be a list of articles, community posts, or external contents.
- * The response will include the generated answer and the source of the information used to generate it.
+ * Generates an answer for end-user search queries in Help Center. Accepts encrypted content references and returns a generated answer with source attribution.
+ *
+ * The endpoint is accessible to anonymous and authenticated end users. Queries must be at least 2 words (except for certain CJK languages). Returns up to 3 source contents used to generate the answer.
+ *
+ * #### Allowed for
+ *
+ * * Anonymous users
+ * * End users
  *
  */
 export const generativeAnswersHelpCenter = <ThrowOnError extends boolean = false>(options: Options<GenerativeAnswersHelpCenterData, ThrowOnError>) => (options.client ?? client).post<GenerativeAnswersHelpCenterResponses, GenerativeAnswersHelpCenterErrors, ThrowOnError>({
@@ -4042,10 +4048,16 @@ export const generativeAnswersFeedback = <ThrowOnError extends boolean = false>(
 });
 
 /**
- * Generates answer for the provided query and contents
+ * Generate Answer for Knowledge
  *
- * Generates an answer for the provided query and contents. The contents can be a list of articles, community posts, or external contents.
- * The response will include the generated answer and the source of the information used to generate it.
+ * Generates an answer for agents using Knowledge in the ticket workspace. Accepts a structured request with ticket context and content references, returning an answer localized to the ticket requester's language.
+ *
+ * The endpoint validates content references and returns only the cited source content. Used by the Agent Workspace for knowledge-assisted ticket responses.
+ *
+ * #### Allowed for
+ *
+ * * Agents
+ * * Help Center managers
  *
  */
 export const generativeAnswersKnowledge = <ThrowOnError extends boolean = false>(options: Options<GenerativeAnswersKnowledgeData, ThrowOnError>) => (options.client ?? client).post<GenerativeAnswersKnowledgeResponses, GenerativeAnswersKnowledgeErrors, ThrowOnError>({
