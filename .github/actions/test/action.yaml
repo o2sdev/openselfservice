@@ -82,6 +82,7 @@ runs:
           uses: davelosert/vitest-coverage-report-action@v2
           with:
               working-directory: packages/configs/vitest-config
+              vite-config-path: api.js
               json-summary-path: coverage/coverage-summary.json
               json-final-path: coverage/merged/merged-coverage.json
               github-token: ${{ inputs.repo-token }}

@@ -11,7 +11,8 @@ export default defineConfig({
     test: {
         coverage: {
             enabled: true,
-            provider: 'v8', // or 'istanbul'
+            provider: 'v8',
+            reporter: ['text-summary', 'html', 'json-summary', 'json'],
         },
         projects: [
             {

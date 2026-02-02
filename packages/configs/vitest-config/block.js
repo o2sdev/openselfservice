@@ -13,7 +13,8 @@ export const config = defineConfig({
         exclude: ['**/node_modules/**', '**/dist/**', '**/.{idea,git,cache,output,temp}/**'],
         coverage: {
             enabled: true,
-            provider: 'v8', // or 'istanbul'
+            provider: 'v8',
+            reporter: ['text-summary', 'html', 'json-summary', 'json'],
         },
     },
     plugins: [
