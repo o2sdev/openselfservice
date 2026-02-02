@@ -543,7 +543,7 @@ export const PAGE_ZENDESK_WARRANTY_AND_REPAIR_EN: CMS.Model.Page.Page = {
 export const PAGE_ZENDESK_WARRANTY_AND_REPAIR_DE: CMS.Model.Page.Page = {
     ...ZENDESK_CATEGORY_PAGE_BASE,
     id: '33553543097245',
-    slug: '/help-and-support/33553543097245-Garantie-und-Reparatur',
+    slug: '/hilfe-und-support/33553543097245-Garantie-und-Reparatur',
     locale: 'de',
     seo: {
         noIndex: false,
@@ -564,7 +564,7 @@ export const PAGE_ZENDESK_WARRANTY_AND_REPAIR_DE: CMS.Model.Page.Page = {
 export const PAGE_ZENDESK_WARRANTY_AND_REPAIR_PL: CMS.Model.Page.Page = {
     ...ZENDESK_CATEGORY_PAGE_BASE,
     id: '33553543097245',
-    slug: '/help-and-support/33553543097245-Gwarancja-i-Naprawa',
+    slug: '/pomoc-i-wsparcie/33553543097245-Gwarancja-i-Naprawa',
     locale: 'pl',
     seo: {
         noIndex: false,
@@ -606,7 +606,7 @@ export const PAGE_ZENDESK_MAINTENANCE_EN: CMS.Model.Page.Page = {
 export const PAGE_ZENDESK_MAINTENANCE_DE: CMS.Model.Page.Page = {
     ...ZENDESK_CATEGORY_PAGE_BASE,
     id: '31170054759453',
-    slug: '/help-and-support/31170054759453-Wartung',
+    slug: '/hilfe-und-support/31170054759453-Wartung',
     locale: 'de',
     seo: {
         noIndex: false,
@@ -627,7 +627,7 @@ export const PAGE_ZENDESK_MAINTENANCE_DE: CMS.Model.Page.Page = {
 export const PAGE_ZENDESK_MAINTENANCE_PL: CMS.Model.Page.Page = {
     ...ZENDESK_CATEGORY_PAGE_BASE,
     id: '31170054759453',
-    slug: '/help-and-support/31170054759453-Konserwacja',
+    slug: '/pomoc-i-wsparcie/31170054759453-Konserwacja',
     locale: 'pl',
     seo: {
         noIndex: false,

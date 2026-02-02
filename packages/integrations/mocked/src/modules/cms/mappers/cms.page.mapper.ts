@@ -287,20 +287,18 @@ export const mapPage = (slug: string, locale: string): CMS.Model.Page.Page | und
         case '/pomoc-i-wsparcie/rozwiązywanie-problemów':
             return PAGE_TROUBLESHOOTING_PL;
 
-        // Zendesk category pages
         case '/help-and-support/33553543097245-Warranty-and-Repair':
             return PAGE_ZENDESK_WARRANTY_AND_REPAIR_EN;
-        case '/help-and-support/33553543097245-Garantie-und-Reparatur':
-            return PAGE_ZENDESK_WARRANTY_AND_REPAIR_DE;
-        case '/help-and-support/33553543097245-Gwarancja-i-Naprawa':
-            return PAGE_ZENDESK_WARRANTY_AND_REPAIR_PL;
         case '/help-and-support/31170054759453-Maintenance':
             return PAGE_ZENDESK_MAINTENANCE_EN;
-        case '/help-and-support/31170054759453-Wartung':
+        case '/hilfe-und-support/33553543097245-Garantie-und-Reparatur':
+            return PAGE_ZENDESK_WARRANTY_AND_REPAIR_DE;
+        case '/hilfe-und-support/31170054759453-Wartung':
             return PAGE_ZENDESK_MAINTENANCE_DE;
-        case '/help-and-support/31170054759453-Konserwacja':
+        case '/pomoc-i-wsparcie/33553543097245-Gwarancja-i-Naprawa':
+            return PAGE_ZENDESK_WARRANTY_AND_REPAIR_PL;
+        case '/pomoc-i-wsparcie/31170054759453-Konserwacja':
             return PAGE_ZENDESK_MAINTENANCE_PL;
-
         default:
             return undefined;
     }

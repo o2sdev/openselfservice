@@ -14,8 +14,20 @@ type ZendeskSection = SectionObject;
 type ZendeskUser = UserObject;
 type ZendeskAttachment = ArticleAttachmentObject;
 
-/** Base path for help center articles (full slug prefix for category and article URLs) */
-const HELP_AND_SUPPORT_BASE_PATH = '/help-and-support';
+/**
+ * Base path for help center (full slug prefix for category and article URLs) per locale.
+ * Must match CMS/navigation URLs so breadcrumbs and links stay locale-consistent.
+ */
+const HELP_AND_SUPPORT_BASE_PATH_BY_LOCALE: Record<string, string> = {
+    en: '/help-and-support',
+    de: '/hilfe-und-support',
+    pl: '/pomoc-i-wsparcie',
+};
+
+function getHelpAndSupportBasePath(locale: string): string {
+    const normalized = locale.toLowerCase().split('-')[0] ?? 'en';
+    return HELP_AND_SUPPORT_BASE_PATH_BY_LOCALE[normalized] ?? '/help-and-support';
+}
 
 /**
  * Extract avatar URL from Zendesk user object
@@ -169,6 +181,7 @@ function parseBodyIntoSections(
 
 export function mapArticle(
     article: ZendeskArticle,
+    locale: string,
     category?: ZendeskCategory | ZendeskSection,
     author?: ZendeskUser,
     attachments: ZendeskAttachment[] = [],
@@ -180,7 +193,7 @@ export function mapArticle(
     let fullSlug = articleSlug;
     if (category && !('category_id' in category)) {
         // category is ZendeskCategory (not ZendeskSection)
-        const categorySlug = mapCategory(category as ZendeskCategory).slug;
+        const categorySlug = mapCategory(category as ZendeskCategory, locale).slug;
         fullSlug = `${categorySlug}/${articleSlug}`;
     }
 
@@ -266,11 +279,12 @@ export function mapArticle(
 export function mapArticles(
     articles: ZendeskArticle[],
     total: number,
+    locale: string,
     category?: ZendeskCategory,
     attachmentsArray: ZendeskAttachment[][] = [],
     authorsArray: (ZendeskUser | undefined)[] = [],
 ): Articles.Model.Articles {
-    const categorySlug = category ? mapCategory(category).slug : undefined;
+    const categorySlug = category ? mapCategory(category, locale).slug : undefined;
 
     return {
         data: articles.map((article, index) => {
@@ -349,9 +363,10 @@ export function mapArticles(
     };
 }
 
-export function mapCategory(category: ZendeskCategory): Articles.Model.Category {
+export function mapCategory(category: ZendeskCategory, locale: string): Articles.Model.Category {
     const segment = extractCategorySlugFromUrl(category.html_url, category.id);
-    const slug = `${HELP_AND_SUPPORT_BASE_PATH}/${segment}`;
+    const basePath = getHelpAndSupportBasePath(locale);
+    const slug = `${basePath}/${segment}`;
     return {
         id: category.id?.toString() || '',
         slug,
@@ -362,9 +377,9 @@ export function mapCategory(category: ZendeskCategory): Articles.Model.Category 
     };
 }
 
-export function mapCategories(categories: ZendeskCategory[], total: number): Articles.Model.Categories {
+export function mapCategories(categories: ZendeskCategory[], total: number, locale: string): Articles.Model.Categories {
     return {
-        data: categories.map((category) => mapCategory(category)),
+        data: categories.map((category) => mapCategory(category, locale)),
         total,
     };
 }

@@ -124,7 +124,7 @@ export class ZendeskArticleService extends Articles.Service {
                     ]),
                 ).pipe(
                     map(([category, author, attachments]) => {
-                        return mapArticle(article, category, author, attachments);
+                        return mapArticle(article, options.locale, category, author, attachments);
                     }),
                 );
             }),
@@ -143,7 +143,7 @@ export class ZendeskArticleService extends Articles.Service {
 
         // If category filter is provided, resolve it to numeric ID (if it's a slug) and fetch category
         const categoryFilter$ = options.category
-            ? this.resolveCategoryId(options.category, zendeskLocale).pipe(
+            ? this.resolveCategoryId(options.category, zendeskLocale, options.locale).pipe(
                   switchMap((categoryId) => {
                       if (!categoryId) {
                           return of({ categoryId: undefined, category: undefined });
@@ -187,7 +187,14 @@ export class ZendeskArticleService extends Articles.Service {
                             map(([attachmentsArray, authorsArray]) => {
                                 // Zendesk doesn't provide total count in the response, so we use articles.length
                                 // In a real scenario, you might need to make additional requests to get the total
-                                return mapArticles(articles, articles.length, category, attachmentsArray, authorsArray);
+                                return mapArticles(
+                                    articles,
+                                    articles.length,
+                                    options.locale,
+                                    category,
+                                    attachmentsArray,
+                                    authorsArray,
+                                );
                             }),
                         );
                     }),
@@ -210,7 +217,7 @@ export class ZendeskArticleService extends Articles.Service {
                     if (!category) {
                         throw new NotFoundException(`Category not found: ${options.id}`);
                     }
-                    return mapCategory(category);
+                    return mapCategory(category, options.locale);
                 }),
                 catchError((error) => {
                     if (error?.status === 404 || error?.message?.includes('404')) {
@@ -225,7 +232,7 @@ export class ZendeskArticleService extends Articles.Service {
         return this.fetchCategories(zendeskLocale).pipe(
             map((categories) => {
                 const category = categories.find((cat) => {
-                    const mapped = mapCategory(cat);
+                    const mapped = mapCategory(cat, options.locale);
                     return mapped.slug === options.id || mapped.id === options.id;
                 });
 
@@ -233,7 +240,7 @@ export class ZendeskArticleService extends Articles.Service {
                     throw new NotFoundException(`Category not found: ${options.id}`);
                 }
 
-                return mapCategory(category);
+                return mapCategory(category, options.locale);
             }),
             catchError((error) => {
                 if (error instanceof NotFoundException) {
@@ -277,7 +284,7 @@ export class ZendeskArticleService extends Articles.Service {
                 const categories = response.data?.categories || [];
                 // Zendesk doesn't provide total count in the response, so we use categories.length
                 // In a real scenario, you might need to make additional requests to get the total
-                return mapCategories(categories, categories.length);
+                return mapCategories(categories, categories.length, options.locale);
             }),
             catchError((error) => {
                 return throwError(() => new Error(`Failed to fetch categories: ${error.message || error}`));
@@ -332,18 +339,22 @@ export class ZendeskArticleService extends Articles.Service {
         );
     }
 
-    private resolveCategoryId(categoryIdOrSlug: string, locale: string): Observable<number | undefined> {
+    private resolveCategoryId(
+        categoryIdOrSlug: string,
+        zendeskLocale: string,
+        applicationLocale: string,
+    ): Observable<number | undefined> {
         // If it's already a numeric ID, return it
         const numericId = Number(categoryIdOrSlug);
         if (!isNaN(numericId)) {
             return of(numericId);
         }
 
-        // Otherwise, it's a slug - fetch all categories and find by slug
-        return this.fetchCategories(locale).pipe(
+        // Otherwise, it's a slug - fetch all categories and find by slug (using application locale for slug comparison)
+        return this.fetchCategories(zendeskLocale).pipe(
             map((categories) => {
                 for (const category of categories) {
-                    const mapped = mapCategory(category);
+                    const mapped = mapCategory(category, applicationLocale);
                     if (mapped.slug === categoryIdOrSlug || mapped.id === categoryIdOrSlug) {
                         return category.id;
                     }
