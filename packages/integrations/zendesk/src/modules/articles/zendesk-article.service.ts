@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Observable, catchError, firstValueFrom, forkJoin, from, map, of, switchMap, throwError } from 'rxjs';
+import { Observable, catchError, forkJoin, from, map, of, switchMap, throwError } from 'rxjs';
 
 import { Articles } from '@o2s/framework/modules';
 
@@ -124,16 +124,10 @@ export class ZendeskArticleService extends Articles.Service {
                     catchError(() => of([])),
                 );
 
-                return from(
-                    Promise.all([
-                        firstValueFrom(categoryOrSection$),
-                        firstValueFrom(author$),
-                        firstValueFrom(attachments$),
-                    ]),
-                ).pipe(
-                    map(([category, author, attachments]) => {
-                        return mapArticle(article, options.locale, category, author, attachments);
-                    }),
+                return forkJoin([categoryOrSection$, author$, attachments$]).pipe(
+                    map(([category, author, attachments]) =>
+                        mapArticle(article, options.locale, category, author, attachments),
+                    ),
                 );
             }),
             catchError((error) => {
