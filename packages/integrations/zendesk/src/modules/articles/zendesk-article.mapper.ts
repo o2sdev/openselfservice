@@ -210,65 +210,6 @@ export function mapArticle(
     };
 }
 
-export function mapArticles(
-    articles: ZendeskArticle[],
-    total: number,
-    locale: string,
-    category?: ZendeskCategory,
-    attachmentsArray: ZendeskAttachment[][] = [],
-    authorsArray: (ZendeskUser | undefined)[] = [],
-): Articles.Model.Articles {
-    const categorySlug = category ? mapCategory(category, locale).slug : undefined;
-
-    return {
-        data: articles.map((article, index) => {
-            const articleSlug = extractSlugFromUrl(article.html_url, article.id);
-            // Build full slug: /help-and-support/{category-slug}/{article-slug} (categorySlug is already full path)
-            const fullSlug = categorySlug ? `${categorySlug}/${articleSlug}` : articleSlug;
-            const lead = extractLeadFromBody(article.body);
-
-            // Get attachments for this article
-            const attachments = attachmentsArray[index] || [];
-            const inlineImages = attachments.filter(
-                (att) => att.inline && att.content_type?.startsWith('image/') && att.content_url,
-            );
-            const nonInlineImages = attachments.filter(
-                (att) => !att.inline && att.content_type?.startsWith('image/') && att.content_url,
-            );
-
-            // Use first inline as thumbnail, fallback to first non-inline
-            const thumbnail = inlineImages[0]
-                ? { url: inlineImages[0].content_url!, alt: inlineImages[0].file_name || '' }
-                : nonInlineImages[0]
-                  ? { url: nonInlineImages[0].content_url!, alt: nonInlineImages[0].file_name || '' }
-                  : undefined;
-
-            // Use first non-inline as image, fallback to first inline
-            const image = nonInlineImages[0]
-                ? { url: nonInlineImages[0].content_url!, alt: nonInlineImages[0].file_name || '' }
-                : inlineImages[0]
-                  ? { url: inlineImages[0].content_url!, alt: inlineImages[0].file_name || '' }
-                  : undefined;
-
-            const author = authorsArray[index];
-
-            return {
-                id: article.id?.toString() || '',
-                slug: fullSlug,
-                createdAt: article.created_at || '',
-                updatedAt: article.updated_at || '',
-                title: article.title || '',
-                lead,
-                tags: article.label_names || [],
-                thumbnail,
-                image,
-                author: author ? mapAuthor(author) : undefined,
-            };
-        }),
-        total,
-    };
-}
-
 export function mapCategory(category: ZendeskCategory, locale: string): Articles.Model.Category {
     const segment = extractCategorySlugFromUrl(category.html_url, category.id);
     const basePath = getHelpAndSupportBasePath(locale);
