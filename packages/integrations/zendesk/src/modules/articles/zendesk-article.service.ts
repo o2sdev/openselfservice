@@ -207,7 +207,7 @@ export class ZendeskArticleService extends Articles.Service {
                             map(([attachmentsArray, authorsArray, categoriesArray]) =>
                                 mapArticlesWithCategories(
                                     articles,
-                                    articles.length,
+                                    response.count,
                                     options.locale,
                                     attachmentsArray,
                                     authorsArray,
@@ -367,6 +367,8 @@ export class ZendeskArticleService extends Articles.Service {
                 ).pipe(
                     switchMap((response) => {
                         const articles = response.data?.results || [];
+                        // Zendesk API returns count field (not in OpenAPI spec but present in actual response)
+                        const total = (response.data as unknown as { count?: number })?.count ?? articles.length;
 
                         if (articles.length === 0) {
                             return of(mapSearchArticles(articles, 0, options.locale, []));
@@ -389,7 +391,7 @@ export class ZendeskArticleService extends Articles.Service {
 
                         return forkJoin(categories$).pipe(
                             map((categoriesArray) =>
-                                mapSearchArticles(articles, articles.length, options.locale, categoriesArray),
+                                mapSearchArticles(articles, total, options.locale, categoriesArray),
                             ),
                         );
                     }),
@@ -467,7 +469,9 @@ export class ZendeskArticleService extends Articles.Service {
         );
     }
 
-    private fetchArticles(options: Articles.Request.GetArticleListQuery): Observable<{ articles: ZendeskArticle[] }> {
+    private fetchArticles(
+        options: Articles.Request.GetArticleListQuery,
+    ): Observable<{ articles: ZendeskArticle[]; count: number }> {
         const queryParams: Record<string, unknown> = {};
 
         if (options.sortBy) {
@@ -515,8 +519,12 @@ export class ZendeskArticleService extends Articles.Service {
                     }
                 }
 
+                // Zendesk API returns count field (not in OpenAPI spec but present in actual response)
+                const count = (response.data as unknown as { count?: number })?.count ?? articles.length;
+
                 return {
                     articles,
+                    count,
                 };
             }),
             catchError((error) => {
