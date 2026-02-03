@@ -8,14 +8,14 @@
         "./api": "./api.js"
     },
     "scripts": {
-        "collect-json-reports": "tsx scripts/collect-json-outputs.mjs",
+        "collect-json-reports": "node scripts/collect-json-outputs.mjs",
         "merge-json-reports": "nyc merge coverage/raw coverage/merged/merged-coverage.json",
+        "merge-summary-reports": "node scripts/merge-summary-outputs.mjs",
         "report": "nyc report -t coverage/merged --report-dir coverage/report --reporter=html --exclude-after-remap false",
-        "report:summary": "nyc report -t coverage/merged --reporter=json-summary --report-dir coverage",
         "view-report": "open-cli coverage/report/index.html"
     },
     "devDependencies": {
-        "glob": "13.0.0",
+        "glob": "^13.0.0",
         "nyc": "^17.1.0",
         "open-cli": "^8.0.0",
         "unplugin-swc": "^1.5.9",
