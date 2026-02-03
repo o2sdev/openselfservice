@@ -445,6 +445,12 @@ export const getAlternativePages = (id: string, slug: string, locale: string): C
         PAGE_ACCESSORIES_EN,
         PAGE_ACCESSORIES_DE,
         PAGE_ACCESSORIES_PL,
+        PAGE_ZENDESK_WARRANTY_AND_REPAIR_EN,
+        PAGE_ZENDESK_MAINTENANCE_EN,
+        PAGE_ZENDESK_WARRANTY_AND_REPAIR_DE,
+        PAGE_ZENDESK_MAINTENANCE_DE,
+        PAGE_ZENDESK_WARRANTY_AND_REPAIR_PL,
+        PAGE_ZENDESK_MAINTENANCE_PL,
     ]
         .filter((page) => page.id === id)
         .map((page) => mapPage(page.slug, locale)!)

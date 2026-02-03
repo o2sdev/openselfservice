@@ -29,13 +29,14 @@ type ZendeskSection = SectionObject;
 type ZendeskAttachment = ArticleAttachmentObject;
 
 /**
- * Map application locale (en, de, pl) to Zendesk Help Center locale format (en-us, de-de, pl-pl)
- * Zendesk Help Center API requires locale in format: language-country (e.g., en-us, de-de, pl-pl)
+ * Map application locale (en, de, pl) to Zendesk Help Center locale format (en-us, de-de, pl)
+ * Zendesk Help Center API requires locale in format: language-country (e.g., en-us, de-de, pl)
  */
 function mapLocaleToZendesk(locale: string): string {
     const localeMap: Record<string, string> = {
         en: 'en-us',
         de: 'de-de',
+        pl: 'pl',
     };
 
     // If locale is already in Zendesk format (contains hyphen), return as is
