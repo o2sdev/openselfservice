@@ -22,7 +22,7 @@ import { showUser } from '@/generated/zendesk';
 import type { UserObject } from '@/generated/zendesk';
 import { client as ticketingClient } from '@/generated/zendesk/client.gen';
 
-import { mapArticle, mapArticles, mapCategories, mapCategory } from './zendesk-article.mapper';
+import { mapArticle, mapArticlesWithCategories, mapCategories, mapCategory } from './zendesk-article.mapper';
 
 type ZendeskArticle = ArticleObject;
 type ZendeskCategory = CategoryObject;
@@ -185,17 +185,43 @@ export class ZendeskArticleService extends Articles.Service {
                                 : Promise.resolve(undefined),
                         );
 
-                        return from(Promise.all([Promise.all(attachmentsPromises), Promise.all(authorsPromises)])).pipe(
-                            map(([attachmentsArray, authorsArray]) => {
+                        // If category filter is provided, use that category for all articles
+                        // Otherwise, fetch category for each article via section_id -> category_id
+                        const categoriesPromises = category
+                            ? articles.map(() => Promise.resolve(category))
+                            : articles.map((article) =>
+                                  article.section_id
+                                      ? firstValueFrom(
+                                            this.fetchSection(article.section_id, zendeskLocale).pipe(
+                                                switchMap((section) => {
+                                                    if (!section?.category_id) {
+                                                        return of(undefined);
+                                                    }
+                                                    return this.fetchCategory(section.category_id, zendeskLocale);
+                                                }),
+                                                catchError(() => of(undefined)),
+                                            ),
+                                        )
+                                      : Promise.resolve(undefined),
+                              );
+
+                        return from(
+                            Promise.all([
+                                Promise.all(attachmentsPromises),
+                                Promise.all(authorsPromises),
+                                Promise.all(categoriesPromises),
+                            ]),
+                        ).pipe(
+                            map(([attachmentsArray, authorsArray, categoriesArray]) => {
                                 // Zendesk doesn't provide total count in the response, so we use articles.length
                                 // In a real scenario, you might need to make additional requests to get the total
-                                return mapArticles(
+                                return mapArticlesWithCategories(
                                     articles,
                                     articles.length,
                                     options.locale,
-                                    category,
                                     attachmentsArray,
                                     authorsArray,
+                                    categoriesArray,
                                 );
                             }),
                         );
@@ -322,7 +348,7 @@ export class ZendeskArticleService extends Articles.Service {
             : of({ categoryId: undefined, category: undefined });
 
         return categoryFilter$.pipe(
-            switchMap(({ category }) => {
+            switchMap(() => {
                 // Add sorting if provided
                 if (options.sortBy) {
                     queryParams.sort_by = options.sortBy;
@@ -352,7 +378,7 @@ export class ZendeskArticleService extends Articles.Service {
                     switchMap((response) => {
                         const articles = response.data?.results || [];
 
-                        // Fetch attachments and authors for all articles in parallel
+                        // Fetch attachments, authors, and categories for all articles in parallel
                         const attachmentsPromises = articles.map((article) =>
                             firstValueFrom(
                                 this.fetchArticleAttachments(article.id!, zendeskLocale).pipe(catchError(() => of([]))),
@@ -367,15 +393,39 @@ export class ZendeskArticleService extends Articles.Service {
                                 : Promise.resolve(undefined),
                         );
 
-                        return from(Promise.all([Promise.all(attachmentsPromises), Promise.all(authorsPromises)])).pipe(
-                            map(([attachmentsArray, authorsArray]) => {
-                                return mapArticles(
+                        // Fetch category for each article via section_id -> category_id
+                        // This ensures full slugs even when no category filter is provided
+                        const categoriesPromises = articles.map((article) =>
+                            article.section_id
+                                ? firstValueFrom(
+                                      this.fetchSection(article.section_id, zendeskLocale).pipe(
+                                          switchMap((section) => {
+                                              if (!section?.category_id) {
+                                                  return of(undefined);
+                                              }
+                                              return this.fetchCategory(section.category_id, zendeskLocale);
+                                          }),
+                                          catchError(() => of(undefined)),
+                                      ),
+                                  )
+                                : Promise.resolve(undefined),
+                        );
+
+                        return from(
+                            Promise.all([
+                                Promise.all(attachmentsPromises),
+                                Promise.all(authorsPromises),
+                                Promise.all(categoriesPromises),
+                            ]),
+                        ).pipe(
+                            map(([attachmentsArray, authorsArray, categoriesArray]) => {
+                                return mapArticlesWithCategories(
                                     articles,
                                     articles.length,
                                     options.locale,
-                                    category,
                                     attachmentsArray,
                                     authorsArray,
+                                    categoriesArray,
                                 );
                             }),
                         );

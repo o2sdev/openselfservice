@@ -354,3 +354,94 @@ export function mapCategories(categories: ZendeskCategory[], total: number, loca
         total,
     };
 }
+
+/**
+ * Map articles with individual categories per article
+ * Used for search results where each article may belong to a different category
+ */
+export function mapArticlesWithCategories(
+    articles: ZendeskArticle[],
+    total: number,
+    locale: string,
+    attachmentsArray: ZendeskAttachment[][] = [],
+    authorsArray: (ZendeskUser | undefined)[] = [],
+    categoriesArray: (ZendeskCategory | undefined)[] = [],
+): Articles.Model.Articles {
+    return {
+        data: articles.map((article, index) => {
+            const articleSlug = extractSlugFromUrl(article.html_url, article.id);
+            const category = categoriesArray[index];
+            // Build full slug: /help-and-support/{category-slug}/{article-slug}
+            const categorySlug = category ? mapCategory(category, locale).slug : undefined;
+            const fullSlug = categorySlug ? `${categorySlug}/${articleSlug}` : articleSlug;
+            const lead = extractLeadFromBody(article.body);
+
+            // Get attachments for this article
+            const attachments = attachmentsArray[index] || [];
+            const inlineImages = attachments.filter(
+                (att) => att.inline && att.content_type?.startsWith('image/') && att.content_url,
+            );
+            const nonInlineImages = attachments.filter(
+                (att) => !att.inline && att.content_type?.startsWith('image/') && att.content_url,
+            );
+
+            // Use first inline as thumbnail, fallback to first non-inline
+            const thumbnail = inlineImages[0]
+                ? {
+                      url: inlineImages[0].content_url!,
+                      alt: inlineImages[0].file_name || article.title || 'Article thumbnail',
+                  }
+                : nonInlineImages[0]
+                  ? {
+                        url: nonInlineImages[0].content_url!,
+                        alt: nonInlineImages[0].file_name || article.title || 'Article thumbnail',
+                    }
+                  : undefined;
+
+            // Use first non-inline as image, fallback to first inline
+            const image = nonInlineImages[0]
+                ? {
+                      url: nonInlineImages[0].content_url!,
+                      alt: nonInlineImages[0].file_name || article.title || 'Article image',
+                  }
+                : inlineImages[0]
+                  ? {
+                        url: inlineImages[0].content_url!,
+                        alt: inlineImages[0].file_name || article.title || 'Article image',
+                    }
+                  : undefined;
+
+            // Get author for this article
+            const author = authorsArray[index];
+
+            return {
+                id: article.id?.toString() || '',
+                slug: fullSlug,
+                createdAt: article.created_at || '',
+                updatedAt: article.updated_at || '',
+                title: article.title || '',
+                lead,
+                tags: article.label_names || [],
+                thumbnail,
+                image,
+                author: author
+                    ? {
+                          name: author.name || '',
+                          email: author.email,
+                          position: author.role,
+                          avatar: (() => {
+                              const photoUrl = getAvatarUrl(author);
+                              return photoUrl
+                                  ? {
+                                        url: photoUrl,
+                                        alt: author.name || '',
+                                    }
+                                  : undefined;
+                          })(),
+                      }
+                    : undefined,
+            };
+        }),
+        total,
+    };
+}
