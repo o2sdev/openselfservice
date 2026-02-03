@@ -54,6 +54,7 @@ export class ArticlesService implements Articles.Service {
 
     searchArticles(options: Articles.Request.SearchArticlesBody): Observable<Articles.Model.Articles> {
         const searchPayload: Search.Model.SearchPayload = {
+            locale: options.locale,
             query: options.query,
             exact: options.category
                 ? {
@@ -76,7 +77,7 @@ export class ArticlesService implements Articles.Service {
             },
         };
 
-        return this.searchService.searchArticles(options.locale, searchPayload).pipe(
+        return this.searchService.searchArticles('articles', searchPayload).pipe(
             map((result) => {
                 return result;
             }),
