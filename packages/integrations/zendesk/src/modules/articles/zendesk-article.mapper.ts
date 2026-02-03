@@ -356,8 +356,40 @@ export function mapCategories(categories: ZendeskCategory[], total: number, loca
 }
 
 /**
- * Map articles with individual categories per article
- * Used for search results where each article may belong to a different category
+ * Map articles for search results (minimal data - no attachments/authors needed)
+ * Used when only basic article info with category slugs is required
+ */
+export function mapSearchArticles(
+    articles: ZendeskArticle[],
+    total: number,
+    locale: string,
+    categoriesArray: (ZendeskCategory | undefined)[] = [],
+): Articles.Model.Articles {
+    return {
+        data: articles.map((article, index) => {
+            const articleSlug = extractSlugFromUrl(article.html_url, article.id);
+            const category = categoriesArray[index];
+            const categorySlug = category ? mapCategory(category, locale).slug : undefined;
+            const fullSlug = categorySlug ? `${categorySlug}/${articleSlug}` : articleSlug;
+            const lead = extractLeadFromBody(article.body);
+
+            return {
+                id: article.id?.toString() || '',
+                slug: fullSlug,
+                createdAt: article.created_at || '',
+                updatedAt: article.updated_at || '',
+                title: article.title || '',
+                lead,
+                tags: article.label_names || [],
+            };
+        }),
+        total,
+    };
+}
+
+/**
+ * Map articles with full data (attachments, authors, categories)
+ * Used for article lists where thumbnails and author info are displayed
  */
 export function mapArticlesWithCategories(
     articles: ZendeskArticle[],
@@ -371,12 +403,10 @@ export function mapArticlesWithCategories(
         data: articles.map((article, index) => {
             const articleSlug = extractSlugFromUrl(article.html_url, article.id);
             const category = categoriesArray[index];
-            // Build full slug: /help-and-support/{category-slug}/{article-slug}
             const categorySlug = category ? mapCategory(category, locale).slug : undefined;
             const fullSlug = categorySlug ? `${categorySlug}/${articleSlug}` : articleSlug;
             const lead = extractLeadFromBody(article.body);
 
-            // Get attachments for this article
             const attachments = attachmentsArray[index] || [];
             const inlineImages = attachments.filter(
                 (att) => att.inline && att.content_type?.startsWith('image/') && att.content_url,
@@ -385,7 +415,6 @@ export function mapArticlesWithCategories(
                 (att) => !att.inline && att.content_type?.startsWith('image/') && att.content_url,
             );
 
-            // Use first inline as thumbnail, fallback to first non-inline
             const thumbnail = inlineImages[0]
                 ? {
                       url: inlineImages[0].content_url!,
@@ -398,7 +427,6 @@ export function mapArticlesWithCategories(
                     }
                   : undefined;
 
-            // Use first non-inline as image, fallback to first inline
             const image = nonInlineImages[0]
                 ? {
                       url: nonInlineImages[0].content_url!,
@@ -411,7 +439,6 @@ export function mapArticlesWithCategories(
                     }
                   : undefined;
 
-            // Get author for this article
             const author = authorsArray[index];
 
             return {
