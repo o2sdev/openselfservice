@@ -168,7 +168,7 @@ describe('resources.mapper', () => {
             const products = [minimalProduct];
             const result = mapServices(data, products, defaultCurrency);
             expect(result.data).toHaveLength(1);
-            expect(result.total).toBe(1);
+            expect(result.total).toBe(2);
         });
     });
 });

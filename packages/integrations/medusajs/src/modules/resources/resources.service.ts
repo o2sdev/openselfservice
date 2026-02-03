@@ -46,7 +46,7 @@ export class ResourcesService extends Resources.Service {
     }
 
     purchaseOrActivateService(_params: Resources.Request.GetServiceParams): Observable<void> {
-        throw new Error('Method not implemented.');
+        throw new Error('Method not implemented');
     }
 
     getServiceList(

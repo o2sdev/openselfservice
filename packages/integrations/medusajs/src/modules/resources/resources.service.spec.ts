@@ -86,7 +86,7 @@ describe('ResourcesService', () => {
 
     describe('purchaseOrActivateService', () => {
         it('should throw Method not implemented', () => {
-            expect(() => service.purchaseOrActivateService({ id: 'x' })).toThrow('Method not implemented.');
+            expect(() => service.purchaseOrActivateService({ id: 'x' })).toThrow('Method not implemented');
         });
     });
 
