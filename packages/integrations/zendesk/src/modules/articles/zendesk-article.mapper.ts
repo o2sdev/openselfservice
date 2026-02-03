@@ -1,3 +1,5 @@
+import { convert } from 'html-to-text';
+
 import { Articles } from '@o2s/framework/modules';
 
 import {
@@ -87,49 +89,18 @@ function extractCategorySlugFromUrl(htmlUrl?: string, id?: number): string {
     return id?.toString() || '';
 }
 
-/**
- * Extract first paragraph from HTML body for use as lead text
- * Removes HTML tags and extracts the first meaningful text content
- */
 function extractLeadFromBody(body: string | undefined, maxLength = 300): string {
     if (!body) {
         return '';
     }
 
-    // Try to find first <p> tag
-    const pMatch = body.match(/<p[^>]*>(.*?)<\/p>/is);
-    if (pMatch && pMatch[1]) {
-        const text = pMatch[1]
-            .replace(/<[^>]+>/g, '') // Remove all HTML tags
-            .replace(/&nbsp;/g, ' ') // Replace &nbsp; with space
-            .replace(/&[a-z]+;/gi, ' ') // Replace other HTML entities with space
-            .replace(/\s+/g, ' ') // Normalize whitespace
-            .trim();
+    const text = convert(body, {
+        wordwrap: false,
+        preserveNewlines: false,
+        limits: { maxChildNodes: 10 }, // Optimize: don't process entire document for short lead
+    }).trim();
 
-        if (text.length > 0) {
-            return text.length > maxLength ? `${text.substring(0, maxLength)}...` : text;
-        }
-    }
-
-    // Fallback: extract first text content after removing HTML tags
-    const text = body
-        .replace(/<[^>]+>/g, ' ') // Remove all HTML tags
-        .replace(/&nbsp;/g, ' ') // Replace &nbsp; with space
-        .replace(/&[a-z]+;/gi, ' ') // Replace other HTML entities with space
-        .replace(/\s+/g, ' ') // Normalize whitespace
-        .trim();
-
-    if (text.length === 0) {
-        return '';
-    }
-
-    // Take first sentence or first maxLength characters
-    const firstSentence = text.match(/^[^.!?]+[.!?]/);
-    if (firstSentence && firstSentence[0].length <= maxLength) {
-        return firstSentence[0].trim();
-    }
-
-    return text.length > maxLength ? `${text.substring(0, maxLength)}...` : text;
+    return text.length <= maxLength ? text : `${text.substring(0, maxLength)}...`;
 }
 
 /**
