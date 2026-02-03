@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Observable, defer, map, of } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 
 import { Articles, Search } from '@o2s/framework/modules';
 
@@ -10,7 +10,7 @@ export class ArticlesService implements Articles.Service {
     constructor(private readonly searchService: Search.Service) {}
 
     getCategory(options: Articles.Request.GetCategoryParams): Observable<Articles.Model.Category> {
-        return defer(() => of(mapCategory(options.locale, options.id)));
+        return of(mapCategory(options.locale, options.id));
     }
 
     getCategoryList(options: Articles.Request.GetCategoryListQuery): Observable<Articles.Model.Categories> {
