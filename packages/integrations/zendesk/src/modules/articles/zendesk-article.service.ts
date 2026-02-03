@@ -8,6 +8,7 @@ import {
     type ArticleObject,
     type CategoryObject,
     type SectionObject,
+    articleSearch,
     listArticleAttachmentsWithLocale,
     listArticles,
     listArticlesByCategoryWithLocale,
@@ -294,9 +295,97 @@ export class ZendeskArticleService extends Articles.Service {
     }
 
     searchArticles(options: Articles.Request.SearchArticlesBody): Observable<Articles.Model.Articles> {
-        // TODO: Implement article search
-        // For now, fall back to getArticleList
-        return this.getArticleList(options);
+        const zendeskLocale = mapLocaleToZendesk(options.locale);
+
+        const queryParams: Record<string, unknown> = {
+            locale: zendeskLocale,
+        };
+
+        if (options.query) {
+            queryParams.query = options.query;
+        }
+
+        // Add category filter if provided (resolve to numeric ID)
+        const categoryFilter$ = options.category
+            ? this.resolveCategoryId(options.category, zendeskLocale, options.locale).pipe(
+                  switchMap((categoryId) => {
+                      if (!categoryId) {
+                          return of({ categoryId: undefined, category: undefined });
+                      }
+                      queryParams.category = categoryId;
+                      return this.fetchCategory(categoryId, zendeskLocale).pipe(
+                          map((category) => ({ categoryId, category })),
+                          catchError(() => of({ categoryId, category: undefined })),
+                      );
+                  }),
+              )
+            : of({ categoryId: undefined, category: undefined });
+
+        return categoryFilter$.pipe(
+            switchMap(({ category }) => {
+                // Add sorting if provided
+                if (options.sortBy) {
+                    queryParams.sort_by = options.sortBy;
+                }
+                if (options.sortOrder) {
+                    queryParams.sort_order = options.sortOrder;
+                }
+
+                if (options.dateFrom) {
+                    const dateStr =
+                        options.dateFrom instanceof Date
+                            ? options.dateFrom.toISOString().split('T')[0]
+                            : options.dateFrom;
+                    queryParams.created_after = dateStr;
+                }
+                if (options.dateTo) {
+                    const dateStr =
+                        options.dateTo instanceof Date ? options.dateTo.toISOString().split('T')[0] : options.dateTo;
+                    queryParams.created_before = dateStr;
+                }
+
+                return from(
+                    articleSearch({
+                        query: queryParams,
+                    }),
+                ).pipe(
+                    switchMap((response) => {
+                        const articles = response.data?.results || [];
+
+                        // Fetch attachments and authors for all articles in parallel
+                        const attachmentsPromises = articles.map((article) =>
+                            firstValueFrom(
+                                this.fetchArticleAttachments(article.id!, zendeskLocale).pipe(catchError(() => of([]))),
+                            ),
+                        );
+
+                        const authorsPromises = articles.map((article) =>
+                            article.author_id
+                                ? firstValueFrom(
+                                      this.fetchUser(article.author_id).pipe(catchError(() => of(undefined))),
+                                  )
+                                : Promise.resolve(undefined),
+                        );
+
+                        return from(Promise.all([Promise.all(attachmentsPromises), Promise.all(authorsPromises)])).pipe(
+                            map(([attachmentsArray, authorsArray]) => {
+                                return mapArticles(
+                                    articles,
+                                    articles.length,
+                                    options.locale,
+                                    category,
+                                    attachmentsArray,
+                                    authorsArray,
+                                );
+                            }),
+                        );
+                    }),
+                    catchError((error) => {
+                        return throwError(() => new Error(`Failed to search articles: ${error.message || error}`));
+                    }),
+                );
+            }),
+        );
     }
 
     /**
@@ -368,7 +457,6 @@ export class ZendeskArticleService extends Articles.Service {
     private fetchArticles(options: Articles.Request.GetArticleListQuery): Observable<{ articles: ZendeskArticle[] }> {
         const queryParams: Record<string, unknown> = {};
 
-        // Map framework sort options to Zendesk API
         if (options.sortBy) {
             queryParams.sort_by = options.sortBy;
         }
@@ -376,7 +464,6 @@ export class ZendeskArticleService extends Articles.Service {
             queryParams.sort_order = options.sortOrder;
         }
 
-        // Pagination
         if (options.limit) {
             queryParams.per_page = options.limit;
         }
@@ -500,7 +587,6 @@ export class ZendeskArticleService extends Articles.Service {
                 return response.data.user;
             }),
             catchError(() => {
-                // If user fetch fails, return undefined (non-critical)
                 return of(undefined);
             }),
         );
@@ -519,7 +605,6 @@ export class ZendeskArticleService extends Articles.Service {
                 return response.data?.article_attachments || [];
             }),
             catchError(() => {
-                // If attachments fetch fails, return empty array (non-critical)
                 return of([]);
             }),
         );
