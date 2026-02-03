@@ -62,12 +62,7 @@ runs:
         - name: Merge coverage and generate report
           if: steps.check-coverage.outputs.has_coverage == 'true'
           shell: bash
-          run: npx turbo run merge-json-reports report --filter=@o2s/vitest-config
-
-        - name: Report summary
-          if: steps.check-coverage.outputs.has_coverage == 'true'
-          shell: bash
-          run: npm run report:summary --workspace=@o2s/vitest-config
+          run: npx turbo run merge-json-reports merge-summary-reports report --filter=@o2s/vitest-config
 
         - name: Upload coverage report
           if: steps.check-coverage.outputs.has_coverage == 'true'
