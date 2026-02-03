@@ -238,6 +238,14 @@ export const RichText: FC<Readonly<RichTextProps>> = ({
         td: {
             component: TdComp,
         },
+        figure: {
+            component: TypographyComp,
+            props: {
+                variant: 'figure',
+                tag: 'figure',
+                className: cn('mt-6 first:mt-0', className),
+            },
+        },
     };
 
     const markdown = (
