@@ -52,6 +52,19 @@ function getAvatarUrl(author: ZendeskUser): string | undefined {
 }
 
 /**
+ * Map Zendesk user to article author
+ */
+function mapAuthor(author: ZendeskUser): Articles.Model.Article['author'] {
+    const avatarUrl = getAvatarUrl(author);
+    return {
+        name: author.name || '',
+        email: author.email,
+        position: author.role,
+        avatar: avatarUrl ? { url: avatarUrl, alt: '' } : undefined,
+    };
+}
+
+/**
  * Extract slug from Zendesk article HTML URL
  * Example: https://company.zendesk.com/hc/en-us/articles/12345-Article-Title
  * Returns: "12345-article-title" or just the ID as fallback
@@ -104,50 +117,28 @@ function extractLeadFromBody(body: string | undefined, maxLength = 300): string 
 }
 
 /**
- * Parse HTML body into article sections with attachments
- * Creates text section for HTML body and image sections for inline attachments
+ * Parse HTML body into article sections
+ * Creates text section for HTML body only (inline images are already embedded in HTML)
  */
 function parseBodyIntoSections(
     body: string | undefined,
     articleId: number,
     createdAt: string,
     updatedAt: string,
-    attachments: ZendeskAttachment[] = [],
 ): Articles.Model.ArticleSection[] {
-    const sections: Articles.Model.ArticleSection[] = [];
+    if (!body) {
+        return [];
+    }
 
-    // Add main text section with HTML body
-    if (body) {
-        sections.push({
+    return [
+        {
             id: `section-text-${articleId}`,
             __typename: 'ArticleSectionText',
             createdAt,
             updatedAt,
             content: body,
-        });
-    }
-
-    // Add image sections for inline attachments
-    // Filter only image attachments that are inline
-    const imageAttachments = attachments.filter(
-        (att) => att.inline && att.content_type?.startsWith('image/') && att.content_url,
-    );
-
-    imageAttachments.forEach((attachment, index) => {
-        sections.push({
-            id: `section-image-${articleId}-${index}`,
-            __typename: 'ArticleSectionImage',
-            createdAt: attachment.created_at || createdAt,
-            updatedAt: attachment.updated_at || updatedAt,
-            image: {
-                url: attachment.content_url!,
-                alt: attachment.file_name || `Image ${index + 1}`,
-            },
-            caption: attachment.file_name,
-        });
-    });
-
-    return sections;
+        },
+    ];
 }
 
 export function mapArticle(
@@ -173,7 +164,6 @@ export function mapArticle(
         article.id!,
         article.created_at || '',
         article.updated_at || '',
-        attachments,
     );
     const lead = extractLeadFromBody(article.body);
 
@@ -187,28 +177,16 @@ export function mapArticle(
 
     // Featured image: first non-inline, fallback to first inline
     const featuredImage = nonInlineImages[0]
-        ? {
-              url: nonInlineImages[0].content_url!,
-              alt: nonInlineImages[0].file_name || article.title || 'Article image',
-          }
+        ? { url: nonInlineImages[0].content_url!, alt: nonInlineImages[0].file_name || '' }
         : inlineImages[0]
-          ? {
-                url: inlineImages[0].content_url!,
-                alt: inlineImages[0].file_name || article.title || 'Article image',
-            }
+          ? { url: inlineImages[0].content_url!, alt: inlineImages[0].file_name || '' }
           : undefined;
 
     // Thumbnail: first inline (most common case), fallback to first non-inline
     const thumbnail = inlineImages[0]
-        ? {
-              url: inlineImages[0].content_url!,
-              alt: inlineImages[0].file_name || article.title || 'Article thumbnail',
-          }
+        ? { url: inlineImages[0].content_url!, alt: inlineImages[0].file_name || '' }
         : nonInlineImages[0]
-          ? {
-                url: nonInlineImages[0].content_url!,
-                alt: nonInlineImages[0].file_name || article.title || 'Article thumbnail',
-            }
+          ? { url: nonInlineImages[0].content_url!, alt: nonInlineImages[0].file_name || '' }
           : undefined;
 
     return {
@@ -227,22 +205,7 @@ export function mapArticle(
                   title: category.name || '',
               }
             : undefined,
-        author: author
-            ? {
-                  name: author.name || '',
-                  email: author.email,
-                  position: author.role,
-                  avatar: (() => {
-                      const photoUrl = getAvatarUrl(author);
-                      return photoUrl
-                          ? {
-                                url: photoUrl,
-                                alt: author.name || '',
-                            }
-                          : undefined;
-                  })(),
-              }
-            : undefined,
+        author: author ? mapAuthor(author) : undefined,
         sections,
     };
 }
@@ -275,31 +238,18 @@ export function mapArticles(
 
             // Use first inline as thumbnail, fallback to first non-inline
             const thumbnail = inlineImages[0]
-                ? {
-                      url: inlineImages[0].content_url!,
-                      alt: inlineImages[0].file_name || article.title || 'Article thumbnail',
-                  }
+                ? { url: inlineImages[0].content_url!, alt: inlineImages[0].file_name || '' }
                 : nonInlineImages[0]
-                  ? {
-                        url: nonInlineImages[0].content_url!,
-                        alt: nonInlineImages[0].file_name || article.title || 'Article thumbnail',
-                    }
+                  ? { url: nonInlineImages[0].content_url!, alt: nonInlineImages[0].file_name || '' }
                   : undefined;
 
             // Use first non-inline as image, fallback to first inline
             const image = nonInlineImages[0]
-                ? {
-                      url: nonInlineImages[0].content_url!,
-                      alt: nonInlineImages[0].file_name || article.title || 'Article image',
-                  }
+                ? { url: nonInlineImages[0].content_url!, alt: nonInlineImages[0].file_name || '' }
                 : inlineImages[0]
-                  ? {
-                        url: inlineImages[0].content_url!,
-                        alt: inlineImages[0].file_name || article.title || 'Article image',
-                    }
+                  ? { url: inlineImages[0].content_url!, alt: inlineImages[0].file_name || '' }
                   : undefined;
 
-            // Get author for this article
             const author = authorsArray[index];
 
             return {
@@ -312,22 +262,7 @@ export function mapArticles(
                 tags: article.label_names || [],
                 thumbnail,
                 image,
-                author: author
-                    ? {
-                          name: author.name || '',
-                          email: author.email,
-                          position: author.role,
-                          avatar: (() => {
-                              const photoUrl = getAvatarUrl(author);
-                              return photoUrl
-                                  ? {
-                                        url: photoUrl,
-                                        alt: author.name || '',
-                                    }
-                                  : undefined;
-                          })(),
-                      }
-                    : undefined,
+                author: author ? mapAuthor(author) : undefined,
             };
         }),
         total,
@@ -416,27 +351,15 @@ export function mapArticlesWithCategories(
             );
 
             const thumbnail = inlineImages[0]
-                ? {
-                      url: inlineImages[0].content_url!,
-                      alt: inlineImages[0].file_name || article.title || 'Article thumbnail',
-                  }
+                ? { url: inlineImages[0].content_url!, alt: inlineImages[0].file_name || '' }
                 : nonInlineImages[0]
-                  ? {
-                        url: nonInlineImages[0].content_url!,
-                        alt: nonInlineImages[0].file_name || article.title || 'Article thumbnail',
-                    }
+                  ? { url: nonInlineImages[0].content_url!, alt: nonInlineImages[0].file_name || '' }
                   : undefined;
 
             const image = nonInlineImages[0]
-                ? {
-                      url: nonInlineImages[0].content_url!,
-                      alt: nonInlineImages[0].file_name || article.title || 'Article image',
-                  }
+                ? { url: nonInlineImages[0].content_url!, alt: nonInlineImages[0].file_name || '' }
                 : inlineImages[0]
-                  ? {
-                        url: inlineImages[0].content_url!,
-                        alt: inlineImages[0].file_name || article.title || 'Article image',
-                    }
+                  ? { url: inlineImages[0].content_url!, alt: inlineImages[0].file_name || '' }
                   : undefined;
 
             const author = authorsArray[index];
@@ -451,22 +374,7 @@ export function mapArticlesWithCategories(
                 tags: article.label_names || [],
                 thumbnail,
                 image,
-                author: author
-                    ? {
-                          name: author.name || '',
-                          email: author.email,
-                          position: author.role,
-                          avatar: (() => {
-                              const photoUrl = getAvatarUrl(author);
-                              return photoUrl
-                                  ? {
-                                        url: photoUrl,
-                                        alt: author.name || '',
-                                    }
-                                  : undefined;
-                          })(),
-                      }
-                    : undefined,
+                author: author ? mapAuthor(author) : undefined,
             };
         }),
         total,
