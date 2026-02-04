@@ -323,7 +323,7 @@ export default async function ProtectedPage() {
     if (!session) {
         // Option 1: Trigger sign-in flow
         return await signIn();
-        
+
         // Option 2: Redirect to login page
         // redirect('/login');
     }
