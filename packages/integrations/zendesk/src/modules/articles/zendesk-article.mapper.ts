@@ -102,6 +102,18 @@ function extractCategorySlugFromUrl(htmlUrl?: string, id?: number): string {
     return id?.toString() || '';
 }
 
+/**
+ * Transform Zendesk article links in HTML content to internal O2S links.
+ * Matches: *.zendesk.com/hc/{locale}/articles/{id}-{slug}
+ * Returns: /{locale-basePath}/{id}-{slug}
+ */
+function transformArticleLinks(html: string, locale: string): string {
+    const basePath = getHelpAndSupportBasePath(locale);
+
+    // Match any URL containing zendesk.com/hc/.../articles/{id-slug}
+    return html.replace(/[^"'\s<>]*zendesk\.com\/hc\/[^/]+\/articles\/(\d+[^"'\s<>]*)/gi, `${basePath}/$1`);
+}
+
 function extractLeadFromBody(body: string | undefined, maxLength = 300): string {
     if (!body) {
         return '';
@@ -119,16 +131,20 @@ function extractLeadFromBody(body: string | undefined, maxLength = 300): string 
 /**
  * Parse HTML body into article sections
  * Creates text section for HTML body only (inline images are already embedded in HTML)
+ * Transforms Zendesk article links to internal O2S links
  */
 function parseBodyIntoSections(
     body: string | undefined,
     articleId: number,
     createdAt: string,
     updatedAt: string,
+    locale: string,
 ): Articles.Model.ArticleSection[] {
     if (!body) {
         return [];
     }
+
+    const transformedBody = transformArticleLinks(body, locale);
 
     return [
         {
@@ -136,7 +152,7 @@ function parseBodyIntoSections(
             __typename: 'ArticleSectionText',
             createdAt,
             updatedAt,
-            content: body,
+            content: transformedBody,
         },
     ];
 }
@@ -164,6 +180,7 @@ export function mapArticle(
         article.id!,
         article.created_at || '',
         article.updated_at || '',
+        locale,
     );
     const lead = extractLeadFromBody(article.body);
 
