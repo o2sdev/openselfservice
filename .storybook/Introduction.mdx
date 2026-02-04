@@ -1,0 +1,48 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Introduction" />
+
+# Welcome to O2S UI Library
+
+This Storybook is the living documentation for **Open Self Service (O2S)** — an open-source, composable frontend framework for building customer portals and self-service applications. Here you can browse and test UI components, blocks, and elements in isolation.
+
+## What's in this Storybook
+
+The sidebar is organized into three main sections:
+
+- **Blocks** — Reusable block components from `packages/blocks`. Each block is self-contained (backend + frontend + SDK) and can be used in the customer portal.
+- **Components** — Higher-level UI components from the shared `@o2s/ui` package (e.g. cards, filters, data grids).
+- **Elements** — Base UI elements (buttons, inputs, dialogs, etc.) from `@o2s/ui`, built on shadcn/ui and Tailwind CSS.
+
+Use the sidebar to expand any section and open a component’s docs and stories.
+
+## Running Storybook locally
+
+From the project root:
+
+```bash
+npm run storybook
+```
+
+The dev server runs at [http://localhost:6006](http://localhost:6006) by default.
+
+Make sure dependencies are installed (`npm install`) and, if needed, build packages first (`npm run build` or `npm run watch:deps`).
+
+## Public instance
+
+A public Storybook is available and kept in sync with the latest version:
+
+**[https://storybook-o2s.openselfservice.com/](https://storybook-o2s.openselfservice.com/)**
+
+You can explore components there without running the repo locally.
+
+## Features
+
+- **Docs** — Auto-generated documentation from component code and JSDoc.
+- **Accessibility** — Use the a11y addon to check components for accessibility issues.
+- **Themes** — Switch between light and dark themes to see how components look in both modes.
+
+## Learn more
+
+- [O2S documentation](https://openselfservice.com) — Project overview, getting started, and guides.
+- [Storybook docs](https://storybook.js.org/docs) — How to write stories and configure Storybook.
