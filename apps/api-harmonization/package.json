@@ -98,7 +98,7 @@
         "@swc/cli": "^0.7.10",
         "@swc/core": "^1.15.11",
         "@trivago/prettier-plugin-sort-imports": "^6.0.2",
-        "@turbo/gen": "^2.8.1",
+        "@turbo/gen": "^2.8.3",
         "@types/compression": "^1.8.1",
         "@types/cookie-parser": "^1.4.10",
         "@types/express": "^5.0.6",
