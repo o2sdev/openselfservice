@@ -33,6 +33,10 @@ yarn-error.log*
 .idea
 .vscode
 .cursor
+agent-os
+AGENTS.md
+CLAUDE.md
+.claude
 
 # Local history
 .lh

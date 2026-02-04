@@ -12,6 +12,7 @@
         "format": "turbo format",
         "lint": "turbo lint -- --max-warnings=0",
         "test": "turbo test && vitest run --project=storybook",
+        "view-report": "turbo run view-report",
         "generate": "turbo gen",
         "eject-block": "ts-node ./scripts/cli.ts eject-block",
         "docs": "turbo start --filter=@o2s/docs",

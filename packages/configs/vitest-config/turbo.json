@@ -1,0 +1,27 @@
+{
+    "extends": ["//"],
+    "tasks": {
+        "collect-json-reports": {
+            "cache": false
+        },
+        "merge-json-reports": {
+            "dependsOn": ["collect-json-reports"],
+            "inputs": ["coverage/raw/**"],
+            "outputs": ["coverage/merged/**"]
+        },
+        "merge-summary-reports": {
+            "dependsOn": ["collect-json-reports"],
+            "inputs": ["coverage/raw-summary/**"],
+            "outputs": ["coverage/coverage-summary.json"]
+        },
+        "report": {
+            "dependsOn": ["merge-json-reports"],
+            "inputs": ["coverage/merged/**"],
+            "outputs": ["coverage/report/**"]
+        },
+        "view-report": {
+            "dependsOn": ["report"],
+            "cache": false
+        }
+    }
+}
