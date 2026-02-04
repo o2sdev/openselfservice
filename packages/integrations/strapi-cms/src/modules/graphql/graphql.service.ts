@@ -18,7 +18,7 @@ import {
     GetSurveyQueryVariables,
     Sdk,
     getSdk,
-} from '../../../generated/strapi';
+} from '@/generated/strapi';
 
 @Global()
 @Injectable()
