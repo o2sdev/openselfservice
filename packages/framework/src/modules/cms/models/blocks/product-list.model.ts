@@ -22,4 +22,5 @@ export class ProductListBlock extends Block.Block {
         noActiveFilters: string;
     };
     detailsLabel?: string;
+    detailsUrl!: string;
 }

@@ -1,4 +1,5 @@
 import { HttpTypes } from '@medusajs/types';
+import { NotFoundException } from '@nestjs/common';
 
 import { Models, Products } from '@o2s/framework/modules';
 
@@ -10,6 +11,10 @@ export const mapProduct = (
     productVariant: HttpTypes.AdminProductVariant,
     defaultCurrency: string,
 ): Products.Model.Product => {
+    if (!productVariant) {
+        throw new NotFoundException('Product variant is undefined');
+    }
+
     //TODO: Find customer currency
     const price = productVariant.prices?.find((price) => price.currency_code.toUpperCase() === defaultCurrency);
     return {
@@ -49,6 +54,7 @@ export const mapProducts = (
                 sku: '',
                 name: product.title,
                 description: product?.description || '',
+                variantId: product.variants?.[0]?.id || '',
                 image: product?.thumbnail
                     ? {
                           url: product.thumbnail,
