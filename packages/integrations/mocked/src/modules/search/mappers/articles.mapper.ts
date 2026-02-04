@@ -32,6 +32,6 @@ export const mapArticles = (payload: Search.Model.SearchPayload): Articles.Model
 
     return {
         data: articlesToReturn,
-        total: articlesToReturn.length,
+        total: articles.length,
     };
 };
