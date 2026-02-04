@@ -18,14 +18,14 @@ Retrieve a list of articles with optional filtering and pagination.
 
 **Query Parameters:**
 
-| Parameter | Type   | Description                                         | Required |
-| --------- | ------ | --------------------------------------------------- | -------- |
-| locale    | string | Language code (en, de, pl)                          | Yes      |
-| category  | string | Filter by category ID or slug                       | No       |
-| offset    | number | Pagination offset                                   | No       |
-| limit     | number | Number of articles per page (default: 10)           | No       |
-| sortBy    | string | Sort field                                          | No       |
-| sortOrder | string | Sort direction (asc, desc)                          | No       |
+| Parameter | Type   | Description                               | Required |
+| --------- | ------ | ----------------------------------------- | -------- |
+| locale    | string | Language code (en, de, pl)                | Yes      |
+| category  | string | Filter by category ID or slug             | No       |
+| offset    | number | Pagination offset                         | No       |
+| limit     | number | Number of articles per page (default: 10) | No       |
+| sortBy    | string | Sort field                                | No       |
+| sortOrder | string | Sort direction (asc, desc)                | No       |
 
 **Example Request:**
 
@@ -41,7 +41,7 @@ GET /articles?locale=en&limit=10&offset=0
     "data": [
         {
             "id": "12345",
-            "slug": "/help-and-support/67890-Maintenance/12345-Tool-Care-Guide",
+            "slug": "67890-Maintenance/12345-Tool-Care-Guide",
             "createdAt": "2024-01-15T10:30:00Z",
             "updatedAt": "2024-01-16T14:20:00Z",
             "title": "Tool Care Guide",
@@ -72,8 +72,8 @@ Retrieve a specific article by slug with full content.
 
 **Path Parameters:**
 
-| Parameter | Type   | Description                                    | Required |
-| --------- | ------ | ---------------------------------------------- | -------- |
+| Parameter | Type   | Description                                      | Required |
+| --------- | ------ | ------------------------------------------------ | -------- |
 | slug      | string | Article slug or ID (e.g., "12345-article-title") | Yes      |
 
 **Query Parameters:**
@@ -93,7 +93,7 @@ GET /articles/12345-tool-care-guide?locale=en
 ```json
 {
     "id": "12345",
-    "slug": "/help-and-support/67890-Maintenance/12345-Tool-Care-Guide",
+    "slug": "67890-Maintenance/12345-Tool-Care-Guide",
     "createdAt": "2024-01-15T10:30:00Z",
     "updatedAt": "2024-01-16T14:20:00Z",
     "title": "Tool Care Guide",
@@ -160,7 +160,7 @@ GET /articles/categories?locale=en
     "data": [
         {
             "id": "67890",
-            "slug": "/help-and-support/67890-Maintenance",
+            "slug": "67890-Maintenance",
             "createdAt": "2024-01-01T00:00:00Z",
             "updatedAt": "2024-01-10T00:00:00Z",
             "title": "Maintenance",
@@ -178,9 +178,9 @@ Retrieve a specific category by ID or slug.
 
 **Path Parameters:**
 
-| Parameter | Type   | Description           | Required |
-| --------- | ------ | --------------------- | -------- |
-| id        | string | Category ID or slug   | Yes      |
+| Parameter | Type   | Description         | Required |
+| --------- | ------ | ------------------- | -------- |
+| id        | string | Category ID or slug | Yes      |
 
 **Query Parameters:**
 
@@ -199,7 +199,7 @@ GET /articles/categories/67890?locale=en
 ```json
 {
     "id": "67890",
-    "slug": "/help-and-support/67890-Maintenance",
+    "slug": "67890-Maintenance",
     "createdAt": "2024-01-01T00:00:00Z",
     "updatedAt": "2024-01-10T00:00:00Z",
     "title": "Maintenance",
@@ -215,15 +215,15 @@ Search articles with full-text query.
 
 **Body Parameters:**
 
-| Parameter | Type   | Description                            | Required |
-| --------- | ------ | -------------------------------------- | -------- |
-| locale    | string | Language code (en, de, pl)             | Yes      |
-| query     | string | Search query                           | No       |
-| category  | string | Filter by category ID                  | No       |
-| dateFrom  | string | Filter articles created after (ISO)    | No       |
-| dateTo    | string | Filter articles created before (ISO)   | No       |
-| sortBy    | string | Sort field                             | No       |
-| sortOrder | string | Sort direction (asc, desc)             | No       |
+| Parameter | Type   | Description                          | Required |
+| --------- | ------ | ------------------------------------ | -------- |
+| locale    | string | Language code (en, de, pl)           | Yes      |
+| query     | string | Search query                         | No       |
+| category  | string | Filter by category ID                | No       |
+| dateFrom  | string | Filter articles created after (ISO)  | No       |
+| dateTo    | string | Filter articles created before (ISO) | No       |
+| sortBy    | string | Sort field                           | No       |
+| sortOrder | string | Sort direction (asc, desc)           | No       |
 
 **Example Request:**
 
@@ -246,7 +246,7 @@ Content-Type: application/json
     "data": [
         {
             "id": "12345",
-            "slug": "/help-and-support/67890-Maintenance/12345-Tool-Care-Guide",
+            "slug": "67890-Maintenance/12345-Tool-Care-Guide",
             "createdAt": "2024-01-15T10:30:00Z",
             "updatedAt": "2024-01-16T14:20:00Z",
             "title": "Tool Care Guide",
@@ -271,19 +271,20 @@ You should always use the short locale format (en, de, pl) in your API requests.
 
 ## Slug Format
 
-Article slugs follow a hierarchical pattern that includes the category:
+Article slugs returned by the Zendesk integration contain the category and article segments:
 
 ```
-/{locale-base}/{category-id}-{category-name}/{article-id}-{article-title}
+{category-id}-{category-name}/{article-id}-{article-title}
 ```
 
-**Examples:**
+**Example slugs returned by the integration:**
 
-| Locale | Slug Example                                                |
-| ------ | ----------------------------------------------------------- |
-| en     | `/help-and-support/67890-Maintenance/12345-Tool-Care-Guide` |
-| de     | `/hilfe-und-support/67890-Wartung/12345-Werkzeugpflege`     |
-| pl     | `/pomoc-i-wsparcie/67890-Konserwacja/12345-Pielegnacja`     |
+| Type     | Slug Example                              |
+| -------- | ----------------------------------------- |
+| Article  | `67890-Maintenance/12345-Tool-Care-Guide` |
+| Category | `67890-Maintenance`                       |
+
+The base path (e.g., `/help-and-support`, `/hilfe-und-support`) is configured separately in CMS block configuration via `parent.slug` property, not hardcoded in the integration. This allows the same integration to work with different URL structures.
 
 ## Filtering Examples
 

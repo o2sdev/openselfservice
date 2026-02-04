@@ -28,13 +28,13 @@ The Zendesk Help Center integration provides:
 
 The following table shows which methods from the base ArticleService are currently supported by the Zendesk integration:
 
-| Method          | Description                                   | Supported |
-| --------------- | --------------------------------------------- | --------- |
-| getArticle      | Retrieve a single article by slug/ID          | ✓         |
-| getArticleList  | Retrieve a list of articles with filtering    | ✓         |
-| getCategory     | Retrieve a single category by ID or slug      | ✓         |
-| getCategoryList | Retrieve a list of categories                 | ✓         |
-| searchArticles  | Search articles with query and filters        | ✓         |
+| Method          | Description                                | Supported |
+| --------------- | ------------------------------------------ | --------- |
+| getArticle      | Retrieve a single article by slug/ID       | ✓         |
+| getArticleList  | Retrieve a list of articles with filtering | ✓         |
+| getCategory     | Retrieve a single category by ID or slug   | ✓         |
+| getCategoryList | Retrieve a list of categories              | ✓         |
+| searchArticles  | Search articles with query and filters     | ✓         |
 
 ## Module Structure
 
@@ -118,47 +118,57 @@ The integration maps Zendesk article data to the standard article model with the
 
 ### Field Mapping
 
-| Zendesk Field     | Normalized Field | Notes                                      |
-| ----------------- | ---------------- | ------------------------------------------ |
-| id                | id               | Converted to string                        |
-| created_at        | createdAt        | ISO date string                            |
-| updated_at        | updatedAt        | ISO date string                            |
-| title             | title            | Article title                              |
-| body              | sections         | Parsed into ArticleSectionText             |
-| body (excerpt)    | lead             | First 300 characters of plain text         |
-| label_names       | tags             | Article labels/tags                        |
-| html_url          | slug             | Extracted and combined with category slug  |
-| author_id         | author           | Fetched separately with avatar             |
-| section_id        | category         | Resolved via section → category lookup     |
+| Zendesk Field  | Normalized Field | Notes                                  |
+| -------------- | ---------------- | -------------------------------------- |
+| id             | id               | Converted to string                    |
+| created_at     | createdAt        | ISO date string                        |
+| updated_at     | updatedAt        | ISO date string                        |
+| title          | title            | Article title                          |
+| body           | sections         | Parsed into ArticleSectionText         |
+| body (excerpt) | lead             | First 300 characters of plain text     |
+| label_names    | tags             | Article labels/tags                    |
+| html_url       | slug             | Article segment extracted from URL     |
+| author_id      | author           | Fetched separately with avatar         |
+| section_id     | category         | Resolved via section → category lookup |
 
 ### Category Field Mapping
 
-| Zendesk Field | Normalized Field | Notes                             |
-| ------------- | ---------------- | --------------------------------- |
-| id            | id               | Converted to string               |
-| created_at    | createdAt        | ISO date string                   |
-| updated_at    | updatedAt        | ISO date string                   |
-| name          | title            | Category name                     |
-| description   | description      | Category description              |
-| html_url      | slug             | Full path with locale base        |
+| Zendesk Field | Normalized Field | Notes                                |
+| ------------- | ---------------- | ------------------------------------ |
+| id            | id               | Converted to string                  |
+| created_at    | createdAt        | ISO date string                      |
+| updated_at    | updatedAt        | ISO date string                      |
+| name          | title            | Category name                        |
+| description   | description      | Category description                 |
+| html_url      | slug             | Category segment only (no base path) |
 
 ### Slug Generation
 
-Article slugs are generated following this pattern:
+The Zendesk integration returns article and category slugs as segments extracted from Zendesk URLs:
+
+**Article slug format:**
 
 ```
-/{locale-base}/{category-id}-{category-name}/{article-id}-{article-title}
+{category-id}-{category-name}/{article-id}-{article-title}
 ```
 
-**Locale bases:**
-- English: `/help-and-support`
-- German: `/hilfe-und-support`
-- Polish: `/pomoc-i-wsparcie`
+**Category slug format:**
 
-**Example:**
 ```
-/help-and-support/12345-Maintenance/67890-Tool-Care-Guide
+{category-id}-{category-name}
 ```
+
+The base path (e.g., `/help-and-support`) is **not** included in the slug returned by the integration. Instead, it's configured in the CMS block configuration via `parent.slug` property. This allows for flexible URL structures without hardcoding locale-specific paths in the integration code.
+
+**Example slugs returned by the integration:**
+
+- Article: `12345-Maintenance/67890-Tool-Care-Guide`
+- Category: `12345-Maintenance`
+
+**Full URL construction happens in:**
+
+- CMS blocks (ArticleList, CategoryList) using `cms.parent.slug`
+- Page mapper for article detail pages using extracted base path from URL
 
 ### Article Sections
 
@@ -196,6 +206,7 @@ Help Center
 ```
 
 The integration:
+
 1. Fetches articles with their section IDs
 2. Resolves section → category relationship
 3. Builds proper slugs with category information
