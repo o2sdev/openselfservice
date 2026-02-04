@@ -1,0 +1,633 @@
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { Observable, catchError, forkJoin, from, map, of, switchMap, throwError } from 'rxjs';
+
+import { Articles } from '@o2s/framework/modules';
+
+import {
+    type ArticleAttachmentObject,
+    type ArticleObject,
+    type CategoryObject,
+    type SectionObject,
+    articleSearch,
+    listArticleAttachmentsWithLocale,
+    listArticles,
+    listArticlesByCategoryWithLocale,
+    listCategories,
+    showArticle,
+    showCategory,
+    showSection,
+} from '@/generated/help-center';
+import { client as helpCenterClient } from '@/generated/help-center/client.gen';
+import { showUser } from '@/generated/zendesk';
+import type { UserObject } from '@/generated/zendesk';
+import { client as ticketingClient } from '@/generated/zendesk/client.gen';
+
+import {
+    mapArticle,
+    mapArticlesWithCategories,
+    mapCategories,
+    mapCategory,
+    mapSearchArticles,
+} from './zendesk-article.mapper';
+
+type ZendeskArticle = ArticleObject;
+type ZendeskCategory = CategoryObject;
+type ZendeskSection = SectionObject;
+type ZendeskAttachment = ArticleAttachmentObject;
+
+/**
+ * Map application locale (en, de, pl) to Zendesk Help Center locale format (en-us, de-de, pl)
+ * Zendesk Help Center API requires locale in format: language-country (e.g., en-us, de-de, pl)
+ */
+function mapLocaleToZendesk(locale: string): string {
+    const localeMap: Record<string, string> = {
+        en: 'en-us',
+        de: 'de-de',
+        pl: 'pl',
+    };
+
+    // If locale is already in Zendesk format (contains hyphen), return as is
+    if (locale.includes('-')) {
+        return locale;
+    }
+
+    // Map application locale to Zendesk format
+    // If locale is not in map, return as is (assumes it's already in correct format)
+    return localeMap[locale.toLowerCase()] || locale;
+}
+
+@Injectable()
+export class ZendeskArticleService extends Articles.Service {
+    constructor() {
+        super();
+
+        const baseUrl = process.env.ZENDESK_API_URL;
+        const token = process.env.ZENDESK_API_TOKEN;
+
+        if (!baseUrl || !token) {
+            throw new Error('Missing required environment variables: ZENDESK_API_URL and ZENDESK_API_TOKEN');
+        }
+
+        // Configure Help Center API client
+        helpCenterClient.setConfig({
+            baseUrl,
+            headers: { Authorization: `Basic ${token}` },
+        });
+
+        // Configure Ticketing API client (for user fetching)
+        ticketingClient.setConfig({
+            baseUrl,
+            headers: { Authorization: `Basic ${token}` },
+        });
+    }
+
+    getArticle(options: Articles.Request.GetArticleParams): Observable<Articles.Model.Article | undefined> {
+        // Zendesk API uses article_id (number), but framework uses slug (string)
+        // We need to find the article by slug first, or extract ID from slug if it's in format "id-slug"
+        const articleId = this.extractArticleIdFromSlug(options.slug);
+
+        if (!articleId) {
+            return of(undefined);
+        }
+
+        const zendeskLocale = mapLocaleToZendesk(options.locale);
+
+        return this.fetchArticle(articleId, zendeskLocale).pipe(
+            switchMap((article) => {
+                if (!article) {
+                    return of(undefined);
+                }
+
+                // Fetch category/section if available
+                const categoryOrSection$ = article.section_id
+                    ? this.fetchSection(article.section_id, zendeskLocale).pipe(
+                          switchMap((section) => {
+                              if (!section || !section.category_id) {
+                                  return of(undefined);
+                              }
+                              // Fetch category from section
+                              return this.fetchCategory(section.category_id, zendeskLocale).pipe(
+                                  catchError(() => of(undefined)),
+                              );
+                          }),
+                          catchError(() => of(undefined)),
+                      )
+                    : of(undefined);
+
+                // Fetch author if available
+                const author$ = article.author_id
+                    ? this.fetchUser(article.author_id).pipe(catchError(() => of(undefined)))
+                    : of(undefined);
+
+                // Fetch attachments (images)
+                const attachments$ = this.fetchArticleAttachments(articleId, zendeskLocale).pipe(
+                    catchError(() => of([])),
+                );
+
+                return forkJoin([categoryOrSection$, author$, attachments$]).pipe(
+                    map(([category, author, attachments]) =>
+                        mapArticle(article, options.locale, category, author, attachments),
+                    ),
+                );
+            }),
+            catchError((error) => {
+                if (error?.status === 404 || error?.message?.includes('404')) {
+                    return of(undefined);
+                }
+                return throwError(() => error);
+            }),
+        );
+    }
+
+    getArticleList(options: Articles.Request.GetArticleListQuery): Observable<Articles.Model.Articles> {
+        // Map locale to Zendesk format (locale is required)
+        const zendeskLocale = mapLocaleToZendesk(options.locale);
+
+        // If category filter is provided, resolve it to numeric ID (if it's a slug) and fetch category
+        const categoryFilter$ = options.category
+            ? this.resolveCategoryId(options.category, zendeskLocale, options.locale).pipe(
+                  switchMap((categoryId) => {
+                      if (!categoryId) {
+                          return of({ categoryId: undefined, category: undefined });
+                      }
+                      return this.fetchCategory(categoryId, zendeskLocale).pipe(
+                          map((category) => ({ categoryId, category })),
+                          catchError(() => of({ categoryId, category: undefined })),
+                      );
+                  }),
+              )
+            : of({ categoryId: undefined, category: undefined });
+
+        return categoryFilter$.pipe(
+            switchMap(({ categoryId, category }) => {
+                const queryOptions = {
+                    ...options,
+                    locale: zendeskLocale,
+                    category: categoryId ? categoryId.toString() : undefined,
+                };
+
+                return this.fetchArticles(queryOptions).pipe(
+                    switchMap((response) => {
+                        const articles = response.articles || [];
+
+                        if (articles.length === 0) {
+                            return of(mapArticlesWithCategories(articles, 0, options.locale, [], [], []));
+                        }
+
+                        // Fetch attachments, authors, and categories in parallel using forkJoin
+                        const attachments$ = articles.map((article) =>
+                            this.fetchArticleAttachments(article.id!, zendeskLocale).pipe(catchError(() => of([]))),
+                        );
+
+                        const authors$ = articles.map((article) =>
+                            article.author_id
+                                ? this.fetchUser(article.author_id).pipe(catchError(() => of(undefined)))
+                                : of(undefined),
+                        );
+
+                        // If category filter is provided, use that category for all articles
+                        // Otherwise, fetch category for each article via section_id -> category_id
+                        const categories$ = category
+                            ? articles.map(() => of(category))
+                            : articles.map((article) =>
+                                  article.section_id
+                                      ? this.fetchSection(article.section_id, zendeskLocale).pipe(
+                                            switchMap((section) => {
+                                                if (!section?.category_id) {
+                                                    return of(undefined);
+                                                }
+                                                return this.fetchCategory(section.category_id, zendeskLocale);
+                                            }),
+                                            catchError(() => of(undefined)),
+                                        )
+                                      : of(undefined),
+                              );
+
+                        return forkJoin([forkJoin(attachments$), forkJoin(authors$), forkJoin(categories$)]).pipe(
+                            map(([attachmentsArray, authorsArray, categoriesArray]) =>
+                                mapArticlesWithCategories(
+                                    articles,
+                                    response.count,
+                                    options.locale,
+                                    attachmentsArray,
+                                    authorsArray,
+                                    categoriesArray,
+                                ),
+                            ),
+                        );
+                    }),
+                );
+            }),
+            catchError((error) => {
+                return throwError(() => new Error(`Failed to fetch articles: ${error.message || error}`));
+            }),
+        );
+    }
+
+    getCategory(options: Articles.Request.GetCategoryParams): Observable<Articles.Model.Category> {
+        const zendeskLocale = mapLocaleToZendesk(options.locale);
+        const categoryId = Number(options.id);
+
+        // If options.id is a numeric ID, fetch directly
+        if (!isNaN(categoryId)) {
+            return this.fetchCategory(categoryId, zendeskLocale).pipe(
+                map((category) => {
+                    if (!category) {
+                        throw new NotFoundException(`Category not found: ${options.id}`);
+                    }
+                    return mapCategory(category, options.locale);
+                }),
+                catchError((error) => {
+                    if (error?.status === 404 || error?.message?.includes('404')) {
+                        return throwError(() => new NotFoundException(`Category not found: ${options.id}`));
+                    }
+                    return throwError(() => error);
+                }),
+            );
+        }
+
+        // If options.id is a slug, fetch all categories and find by slug
+        return this.fetchCategories(zendeskLocale).pipe(
+            map((categories) => {
+                const category = categories.find((cat) => {
+                    const mapped = mapCategory(cat, options.locale);
+                    return mapped.slug === options.id || mapped.id === options.id;
+                });
+
+                if (!category) {
+                    throw new NotFoundException(`Category not found: ${options.id}`);
+                }
+
+                return mapCategory(category, options.locale);
+            }),
+            catchError((error) => {
+                if (error instanceof NotFoundException) {
+                    return throwError(() => error);
+                }
+                return throwError(() => new NotFoundException(`Category not found: ${options.id}`));
+            }),
+        );
+    }
+
+    getCategoryList(options: Articles.Request.GetCategoryListQuery): Observable<Articles.Model.Categories> {
+        const zendeskLocale = mapLocaleToZendesk(options.locale);
+
+        const queryParams: Record<string, unknown> = {};
+
+        // Map framework sort options to Zendesk API
+        if (options.sort?.field) {
+            queryParams.sort_by = options.sort.field;
+        }
+        if (options.sort?.order) {
+            queryParams.sort_order = options.sort.order;
+        }
+
+        // Pagination
+        if (options.limit) {
+            queryParams.per_page = options.limit;
+        }
+        if (options.offset) {
+            queryParams.page = Math.floor(options.offset / (options.limit || 10)) + 1;
+        }
+
+        return from(
+            listCategories({
+                path: {
+                    locale: zendeskLocale,
+                },
+                query: queryParams,
+            }),
+        ).pipe(
+            map((response) => {
+                const categories = response.data?.categories || [];
+                // Zendesk doesn't provide total count in the response, so we use categories.length
+                // In a real scenario, you might need to make additional requests to get the total
+                return mapCategories(categories, categories.length, options.locale);
+            }),
+            catchError((error) => {
+                return throwError(() => new Error(`Failed to fetch categories: ${error.message || error}`));
+            }),
+        );
+    }
+
+    searchArticles(options: Articles.Request.SearchArticlesBody): Observable<Articles.Model.Articles> {
+        const zendeskLocale = mapLocaleToZendesk(options.locale);
+
+        const queryParams: Record<string, unknown> = {
+            locale: zendeskLocale,
+        };
+
+        if (options.query) {
+            queryParams.query = options.query;
+        }
+
+        // Add category filter if provided (resolve to numeric ID)
+        const categoryFilter$ = options.category
+            ? this.resolveCategoryId(options.category, zendeskLocale, options.locale).pipe(
+                  switchMap((categoryId) => {
+                      if (!categoryId) {
+                          return of({ categoryId: undefined, category: undefined });
+                      }
+                      queryParams.category = categoryId;
+                      return this.fetchCategory(categoryId, zendeskLocale).pipe(
+                          map((category) => ({ categoryId, category })),
+                          catchError(() => of({ categoryId, category: undefined })),
+                      );
+                  }),
+              )
+            : of({ categoryId: undefined, category: undefined });
+
+        return categoryFilter$.pipe(
+            switchMap(() => {
+                // Add sorting if provided
+                if (options.sortBy) {
+                    queryParams.sort_by = options.sortBy;
+                }
+                if (options.sortOrder) {
+                    queryParams.sort_order = options.sortOrder;
+                }
+
+                if (options.dateFrom) {
+                    const dateStr =
+                        options.dateFrom instanceof Date
+                            ? options.dateFrom.toISOString().split('T')[0]
+                            : options.dateFrom;
+                    queryParams.created_after = dateStr;
+                }
+                if (options.dateTo) {
+                    const dateStr =
+                        options.dateTo instanceof Date ? options.dateTo.toISOString().split('T')[0] : options.dateTo;
+                    queryParams.created_before = dateStr;
+                }
+
+                return from(
+                    articleSearch({
+                        query: queryParams,
+                    }),
+                ).pipe(
+                    switchMap((response) => {
+                        const articles = response.data?.results || [];
+                        // Zendesk API returns count field (not in OpenAPI spec but present in actual response)
+                        const total = (response.data as unknown as { count?: number })?.count ?? articles.length;
+
+                        if (articles.length === 0) {
+                            return of(mapSearchArticles(articles, 0, options.locale, []));
+                        }
+
+                        // Fetch only categories for search results (no attachments/authors needed)
+                        const categories$ = articles.map((article) =>
+                            article.section_id
+                                ? this.fetchSection(article.section_id, zendeskLocale).pipe(
+                                      switchMap((section) => {
+                                          if (!section?.category_id) {
+                                              return of(undefined);
+                                          }
+                                          return this.fetchCategory(section.category_id, zendeskLocale);
+                                      }),
+                                      catchError(() => of(undefined)),
+                                  )
+                                : of(undefined),
+                        );
+
+                        return forkJoin(categories$).pipe(
+                            map((categoriesArray) =>
+                                mapSearchArticles(articles, total, options.locale, categoriesArray),
+                            ),
+                        );
+                    }),
+                    catchError((error) => {
+                        return throwError(() => new Error(`Failed to search articles: ${error.message || error}`));
+                    }),
+                );
+            }),
+        );
+    }
+
+    /**
+     * Extract article ID from slug
+     * Slug format can be:
+     * - "12345" or "12345-article-title"
+     * - "/help-and-support/category-slug/12345-article-title" (full path)
+     * Article ID is always in the last path segment (category ID may appear in earlier segments).
+     */
+    private extractArticleIdFromSlug(slug: string | undefined): number | null {
+        if (!slug) {
+            return null;
+        }
+        const segments = slug.split('/').filter(Boolean);
+        const last = segments[segments.length - 1];
+        if (!last) {
+            return null;
+        }
+        const match = last.match(/^(\d+)/);
+        return match ? Number(match[1]) : null;
+    }
+
+    private fetchArticle(articleId: number, locale: string): Observable<ZendeskArticle | undefined> {
+        return from(
+            showArticle({
+                path: {
+                    article_id: articleId,
+                    locale,
+                },
+            }),
+        ).pipe(
+            map((response) => {
+                if (!response.data?.article) {
+                    return undefined;
+                }
+                return response.data.article;
+            }),
+            catchError((error) => {
+                return throwError(() => new Error(`Failed to fetch article: ${error.message || error}`));
+            }),
+        );
+    }
+
+    private resolveCategoryId(
+        categoryIdOrSlug: string,
+        zendeskLocale: string,
+        applicationLocale: string,
+    ): Observable<number | undefined> {
+        // If it's already a numeric ID, return it
+        const numericId = Number(categoryIdOrSlug);
+        if (!isNaN(numericId)) {
+            return of(numericId);
+        }
+
+        // Otherwise, it's a slug - fetch all categories and find by slug (using application locale for slug comparison)
+        return this.fetchCategories(zendeskLocale).pipe(
+            map((categories) => {
+                for (const category of categories) {
+                    const mapped = mapCategory(category, applicationLocale);
+                    if (mapped.slug === categoryIdOrSlug || mapped.id === categoryIdOrSlug) {
+                        return category.id;
+                    }
+                }
+                return undefined;
+            }),
+        );
+    }
+
+    private fetchArticles(
+        options: Articles.Request.GetArticleListQuery,
+    ): Observable<{ articles: ZendeskArticle[]; count: number }> {
+        const queryParams: Record<string, unknown> = {};
+
+        if (options.sortBy) {
+            queryParams.sort_by = options.sortBy;
+        }
+        if (options.sortOrder) {
+            queryParams.sort_order = options.sortOrder;
+        }
+
+        if (options.limit) {
+            queryParams.per_page = options.limit;
+        }
+        if (options.offset) {
+            queryParams.page = Math.floor(options.offset / (options.limit || 10)) + 1;
+        }
+
+        // If category filter is provided and it's a numeric ID, use category-specific endpoint
+        const categoryId = options.category ? Number(options.category) : null;
+        const useCategoryEndpoint = categoryId && !isNaN(categoryId);
+
+        const apiCall = useCategoryEndpoint
+            ? listArticlesByCategoryWithLocale({
+                  path: {
+                      locale: options.locale,
+                      category_id: categoryId,
+                  },
+                  query: queryParams,
+              })
+            : listArticles({
+                  path: {
+                      locale: options.locale,
+                  },
+                  query: queryParams,
+              });
+
+        return from(apiCall).pipe(
+            map((response) => {
+                let articles: ZendeskArticle[] = [];
+
+                if (response.data) {
+                    if ('articles' in response.data && Array.isArray(response.data.articles)) {
+                        articles = response.data.articles;
+                    } else if (Array.isArray(response.data)) {
+                        articles = response.data;
+                    }
+                }
+
+                // Zendesk API returns count field (not in OpenAPI spec but present in actual response)
+                const count = (response.data as unknown as { count?: number })?.count ?? articles.length;
+
+                return {
+                    articles,
+                    count,
+                };
+            }),
+            catchError((error) => {
+                return throwError(() => new Error(`Failed to fetch articles: ${error.message || error}`));
+            }),
+        );
+    }
+
+    private fetchCategory(categoryId: number, locale: string): Observable<ZendeskCategory | undefined> {
+        return from(
+            showCategory({
+                path: {
+                    category_id: categoryId,
+                    locale,
+                },
+            }),
+        ).pipe(
+            map((response) => {
+                if (!response.data?.category) {
+                    return undefined;
+                }
+                return response.data.category;
+            }),
+            catchError((error) => {
+                return throwError(() => new Error(`Failed to fetch category: ${error.message || error}`));
+            }),
+        );
+    }
+
+    private fetchCategories(locale: string): Observable<ZendeskCategory[]> {
+        return from(
+            listCategories({
+                path: {
+                    locale,
+                },
+            }),
+        ).pipe(
+            map((response) => {
+                return response.data?.categories || [];
+            }),
+            catchError((error) => {
+                return throwError(() => new Error(`Failed to fetch categories: ${error.message || error}`));
+            }),
+        );
+    }
+
+    private fetchSection(sectionId: number, locale: string): Observable<ZendeskSection | undefined> {
+        return from(
+            showSection({
+                path: {
+                    section_id: sectionId,
+                    locale,
+                },
+            }),
+        ).pipe(
+            map((response) => {
+                if (!response.data?.section) {
+                    return undefined;
+                }
+                return response.data.section;
+            }),
+            catchError((error) => {
+                return throwError(() => new Error(`Failed to fetch section: ${error.message || error}`));
+            }),
+        );
+    }
+
+    private fetchUser(userId: number): Observable<UserObject | undefined> {
+        // Use Ticketing API to fetch user details
+        return from(
+            showUser({
+                path: {
+                    user_id: userId,
+                },
+            }),
+        ).pipe(
+            map((response) => {
+                if (!response.data?.user) {
+                    return undefined;
+                }
+                return response.data.user;
+            }),
+            catchError(() => {
+                return of(undefined);
+            }),
+        );
+    }
+
+    private fetchArticleAttachments(articleId: number, locale: string): Observable<ZendeskAttachment[]> {
+        return from(
+            listArticleAttachmentsWithLocale({
+                path: {
+                    article_id: articleId,
+                    locale,
+                },
+            }),
+        ).pipe(
+            map((response) => {
+                return response.data?.article_attachments || [];
+            }),
+            catchError(() => {
+                return of([]);
+            }),
+        );
+    }
+}

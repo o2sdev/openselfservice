@@ -24,6 +24,7 @@
     "@o2s/framework": "*",
     "@o2s/utils.logger": "*",
     "axios": "^1.13.4",
+    "html-to-text": "^9.0.5",
     "rxjs": "^7.8.2"
   },
   "devDependencies": {
@@ -32,6 +33,7 @@
     "@o2s/vitest-config": "*",
     "@o2s/prettier-config": "*",
     "@o2s/typescript-config": "*",
+    "@types/html-to-text": "^9.0.4",
     "concurrently": "^9.2.1",
     "eslint": "^9.39.2",
     "prettier": "^3.8.1",

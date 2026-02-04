@@ -16,6 +16,12 @@ import {
     PAGE_WARRANTY_AND_REPAIR_DE,
     PAGE_WARRANTY_AND_REPAIR_EN,
     PAGE_WARRANTY_AND_REPAIR_PL,
+    PAGE_ZENDESK_MAINTENANCE_DE,
+    PAGE_ZENDESK_MAINTENANCE_EN,
+    PAGE_ZENDESK_MAINTENANCE_PL,
+    PAGE_ZENDESK_WARRANTY_AND_REPAIR_DE,
+    PAGE_ZENDESK_WARRANTY_AND_REPAIR_EN,
+    PAGE_ZENDESK_WARRANTY_AND_REPAIR_PL,
 } from './mocks/pages/category.page';
 import { PAGE_DASHBOARD_DE, PAGE_DASHBOARD_EN, PAGE_DASHBOARD_PL } from './mocks/pages/dashboard.page';
 import { PAGE_INVOICE_LIST_DE, PAGE_INVOICE_LIST_EN, PAGE_INVOICE_LIST_PL } from './mocks/pages/invoice-list.page';
@@ -281,6 +287,18 @@ export const mapPage = (slug: string, locale: string): CMS.Model.Page.Page | und
         case '/pomoc-i-wsparcie/rozwiązywanie-problemów':
             return PAGE_TROUBLESHOOTING_PL;
 
+        case '/help-and-support/33553543097245-Warranty-and-Repair':
+            return PAGE_ZENDESK_WARRANTY_AND_REPAIR_EN;
+        case '/help-and-support/31170054759453-Maintenance':
+            return PAGE_ZENDESK_MAINTENANCE_EN;
+        case '/hilfe-und-support/33553543097245-Garantie-und-Reparatur':
+            return PAGE_ZENDESK_WARRANTY_AND_REPAIR_DE;
+        case '/hilfe-und-support/31170054759453-Wartung':
+            return PAGE_ZENDESK_MAINTENANCE_DE;
+        case '/pomoc-i-wsparcie/33553543097245-Gwarancja-i-Naprawa':
+            return PAGE_ZENDESK_WARRANTY_AND_REPAIR_PL;
+        case '/pomoc-i-wsparcie/31170054759453-Konserwacja':
+            return PAGE_ZENDESK_MAINTENANCE_PL;
         default:
             return undefined;
     }
@@ -310,6 +328,8 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_MAINTENANCE_PL,
                 PAGE_SAFETY_PL,
                 PAGE_ACCESSORIES_PL,
+                PAGE_ZENDESK_WARRANTY_AND_REPAIR_PL,
+                PAGE_ZENDESK_MAINTENANCE_PL,
             ];
         case 'de':
             return [
@@ -333,6 +353,8 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_MAINTENANCE_DE,
                 PAGE_SAFETY_DE,
                 PAGE_ACCESSORIES_DE,
+                PAGE_ZENDESK_WARRANTY_AND_REPAIR_DE,
+                PAGE_ZENDESK_MAINTENANCE_DE,
             ];
         case 'en':
             return [
@@ -356,6 +378,8 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_MAINTENANCE_EN,
                 PAGE_SAFETY_EN,
                 PAGE_ACCESSORIES_EN,
+                PAGE_ZENDESK_WARRANTY_AND_REPAIR_EN,
+                PAGE_ZENDESK_MAINTENANCE_EN,
             ];
         default:
             return [];
@@ -421,6 +445,12 @@ export const getAlternativePages = (id: string, slug: string, locale: string): C
         PAGE_ACCESSORIES_EN,
         PAGE_ACCESSORIES_DE,
         PAGE_ACCESSORIES_PL,
+        PAGE_ZENDESK_WARRANTY_AND_REPAIR_EN,
+        PAGE_ZENDESK_MAINTENANCE_EN,
+        PAGE_ZENDESK_WARRANTY_AND_REPAIR_DE,
+        PAGE_ZENDESK_MAINTENANCE_DE,
+        PAGE_ZENDESK_WARRANTY_AND_REPAIR_PL,
+        PAGE_ZENDESK_MAINTENANCE_PL,
     ]
         .filter((page) => page.id === id)
         .map((page) => mapPage(page.slug, locale)!)

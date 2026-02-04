@@ -20,11 +20,13 @@ const LinkComp: FC<Readonly<LinkProps & { children: ReactNode; className?: strin
 
 const TypographyComp: FC<Readonly<TypographyProps & { children: ReactNode; tag: string }>> = ({
     children,
+    tag = 'p',
+    variant,
     ...props
 }) => {
-    const Tag = props.tag || 'p';
+    const Tag = tag || 'p';
     return (
-        <Typography variant={props.variant} asChild>
+        <Typography variant={variant} asChild>
             <Tag {...props}>{children}</Tag>
         </Typography>
     );
@@ -32,12 +34,13 @@ const TypographyComp: FC<Readonly<TypographyProps & { children: ReactNode; tag: 
 
 const TdComp: FC<Readonly<TypographyProps & { children: ReactNode }>> = ({
     children,
+    'data-highlighted': isHighlighted,
     ...props
 }: {
     children: ReactNode;
     'data-highlighted'?: boolean;
 }) => {
-    const variant = props['data-highlighted'] ? 'tableCellHighlighted' : 'tableCell';
+    const variant = isHighlighted ? 'tableCellHighlighted' : 'tableCell';
     return (
         <TypographyComp variant={variant} tag="td" {...props}>
             {children}
@@ -234,6 +237,14 @@ export const RichText: FC<Readonly<RichTextProps>> = ({
         },
         td: {
             component: TdComp,
+        },
+        figure: {
+            component: TypographyComp,
+            props: {
+                variant: 'figure',
+                tag: 'figure',
+                className: cn('mt-6 first:mt-0', className),
+            },
         },
     };
 
