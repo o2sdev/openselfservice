@@ -1,4 +1,5 @@
 import { CMS, Products } from '@o2s/configs.integrations';
+import format from 'string-template';
 
 import { ProductItem, ProductListBlock } from './product-list.model';
 
@@ -36,7 +37,10 @@ const mapProduct = (product: Products.Model.Product, cms: CMS.Model.ProductListB
         name: product.name,
         description: product.description,
         shortDescription: product.shortDescription,
-        detailsUrl: product.link,
+        detailsUrl: format(cms.detailsUrl, {
+            id: product.id,
+            variantId: product.variantId,
+        }),
         type: {
             value: product.type,
             label: type?.[product.type] || product.type,
