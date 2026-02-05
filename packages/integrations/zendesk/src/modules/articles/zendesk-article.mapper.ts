@@ -17,21 +17,6 @@ type ZendeskUser = UserObject;
 type ZendeskAttachment = ArticleAttachmentObject;
 
 /**
- * Base path for help center (full slug prefix for category and article URLs) per locale.
- * Must match CMS/navigation URLs so breadcrumbs and links stay locale-consistent.
- */
-const HELP_AND_SUPPORT_BASE_PATH_BY_LOCALE: Record<string, string> = {
-    en: '/help-and-support',
-    de: '/hilfe-und-support',
-    pl: '/pomoc-i-wsparcie',
-};
-
-function getHelpAndSupportBasePath(locale: string): string {
-    const normalized = locale.toLowerCase().split('-')[0] ?? 'en';
-    return HELP_AND_SUPPORT_BASE_PATH_BY_LOCALE[normalized] ?? '/help-and-support';
-}
-
-/**
  * Extract avatar URL from Zendesk user object
  * Handles both photo.content_url and remote_photo_url
  */
@@ -102,18 +87,6 @@ function extractCategorySlugFromUrl(htmlUrl?: string, id?: number): string {
     return id?.toString() || '';
 }
 
-/**
- * Transform Zendesk article links in HTML content to internal O2S links.
- * Matches: *.zendesk.com/hc/{locale}/articles/{id}-{slug}
- * Returns: /{locale-basePath}/{id}-{slug}
- */
-function transformArticleLinks(html: string, locale: string): string {
-    const basePath = getHelpAndSupportBasePath(locale);
-
-    // Match any URL containing zendesk.com/hc/.../articles/{id-slug}
-    return html.replace(/[^"'\s<>]*zendesk\.com\/hc\/[^/]+\/articles\/(\d+[^"'\s<>]*)/gi, `${basePath}/$1`);
-}
-
 function extractLeadFromBody(body: string | undefined, maxLength = 300): string {
     if (!body) {
         return '';
@@ -131,20 +104,16 @@ function extractLeadFromBody(body: string | undefined, maxLength = 300): string 
 /**
  * Parse HTML body into article sections
  * Creates text section for HTML body only (inline images are already embedded in HTML)
- * Transforms Zendesk article links to internal O2S links
  */
 function parseBodyIntoSections(
     body: string | undefined,
     articleId: number,
     createdAt: string,
     updatedAt: string,
-    locale: string,
 ): Articles.Model.ArticleSection[] {
     if (!body) {
         return [];
     }
-
-    const transformedBody = transformArticleLinks(body, locale);
 
     return [
         {
@@ -152,35 +121,26 @@ function parseBodyIntoSections(
             __typename: 'ArticleSectionText',
             createdAt,
             updatedAt,
-            content: transformedBody,
+            content: body,
         },
     ];
 }
 
 export function mapArticle(
     article: ZendeskArticle,
-    locale: string,
     category?: ZendeskCategory | ZendeskSection,
     author?: ZendeskUser,
     attachments: ZendeskAttachment[] = [],
 ): Articles.Model.Article {
+    // Article slug is just the article segment (without category)
+    // Full URL will be built by the page mapper using category.slug + article.slug
     const articleSlug = extractSlugFromUrl(article.html_url, article.id);
-
-    // Build full slug with category if available (category.slug is already full path)
-    // Check if category is ZendeskCategory (has no category_id property) vs ZendeskSection (has category_id)
-    let fullSlug = articleSlug;
-    if (category && !('category_id' in category)) {
-        // category is ZendeskCategory (not ZendeskSection)
-        const categorySlug = mapCategory(category as ZendeskCategory, locale).slug;
-        fullSlug = `${categorySlug}/${articleSlug}`;
-    }
 
     const sections = parseBodyIntoSections(
         article.body,
         article.id!,
         article.created_at || '',
         article.updated_at || '',
-        locale,
     );
     const lead = extractLeadFromBody(article.body);
 
@@ -208,7 +168,7 @@ export function mapArticle(
 
     return {
         id: article.id?.toString() || '',
-        slug: fullSlug,
+        slug: articleSlug,
         createdAt: article.created_at || '',
         updatedAt: article.updated_at || '',
         title: article.title || '',
@@ -227,10 +187,8 @@ export function mapArticle(
     };
 }
 
-export function mapCategory(category: ZendeskCategory, locale: string): Articles.Model.Category {
-    const segment = extractCategorySlugFromUrl(category.html_url, category.id);
-    const basePath = getHelpAndSupportBasePath(locale);
-    const slug = `${basePath}/${segment}`;
+export function mapCategory(category: ZendeskCategory): Articles.Model.Category {
+    const slug = extractCategorySlugFromUrl(category.html_url, category.id);
     return {
         id: category.id?.toString() || '',
         slug,
@@ -241,9 +199,9 @@ export function mapCategory(category: ZendeskCategory, locale: string): Articles
     };
 }
 
-export function mapCategories(categories: ZendeskCategory[], total: number, locale: string): Articles.Model.Categories {
+export function mapCategories(categories: ZendeskCategory[], total: number): Articles.Model.Categories {
     return {
-        data: categories.map((category) => mapCategory(category, locale)),
+        data: categories.map((category) => mapCategory(category)),
         total,
     };
 }
@@ -255,14 +213,13 @@ export function mapCategories(categories: ZendeskCategory[], total: number, loca
 export function mapSearchArticles(
     articles: ZendeskArticle[],
     total: number,
-    locale: string,
     categoriesArray: (ZendeskCategory | undefined)[] = [],
 ): Articles.Model.Articles {
     return {
         data: articles.map((article, index) => {
             const articleSlug = extractSlugFromUrl(article.html_url, article.id);
             const category = categoriesArray[index];
-            const categorySlug = category ? mapCategory(category, locale).slug : undefined;
+            const categorySlug = category ? mapCategory(category).slug : undefined;
             const fullSlug = categorySlug ? `${categorySlug}/${articleSlug}` : articleSlug;
             const lead = extractLeadFromBody(article.body);
 
@@ -287,7 +244,6 @@ export function mapSearchArticles(
 export function mapArticlesWithCategories(
     articles: ZendeskArticle[],
     total: number,
-    locale: string,
     attachmentsArray: ZendeskAttachment[][] = [],
     authorsArray: (ZendeskUser | undefined)[] = [],
     categoriesArray: (ZendeskCategory | undefined)[] = [],
@@ -296,7 +252,7 @@ export function mapArticlesWithCategories(
         data: articles.map((article, index) => {
             const articleSlug = extractSlugFromUrl(article.html_url, article.id);
             const category = categoriesArray[index];
-            const categorySlug = category ? mapCategory(category, locale).slug : undefined;
+            const categorySlug = category ? mapCategory(category).slug : undefined;
             const fullSlug = categorySlug ? `${categorySlug}/${articleSlug}` : articleSlug;
             const lead = extractLeadFromBody(article.body);
 
