@@ -86,7 +86,7 @@
         "@types/react": "19.2.11",
         "@types/react-autosuggest": "^10.1.11",
         "@types/react-dom": "19.2.3",
-        "dotenv": "^17.2.3",
+        "dotenv": "^17.2.4",
         "eslint": "^9.39.2",
         "eslint-config-next": "16.1.6",
         "postcss": "^8.5.6",
