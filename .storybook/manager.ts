@@ -5,7 +5,7 @@ const o2sTheme = create({
     base: 'light',
     brandTitle: 'O2S',
     brandUrl: 'https://storybook-o2s.openselfservice.com/',
-    brandImage: '/images/logo.svg',
+    brandImage: '/logo.svg',
     brandTarget: '_blank',
 });
 

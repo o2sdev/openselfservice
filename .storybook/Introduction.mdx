@@ -2,6 +2,13 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 <Meta title="Introduction" />
 
+<a href="https://www.openselfservice.com">
+  <img
+    src="/o2s-gh-cover.png"
+    alt="Open Self Service - open-source development kit for composable Customer Portals"
+  />
+</a>
+
 # Welcome to O2S UI Library
 
 This Storybook is the living documentation for **Open Self Service (O2S)** — an open-source, composable frontend framework for building customer portals and self-service applications. Here you can browse and test UI components, blocks, and elements in isolation.
@@ -10,23 +17,11 @@ This Storybook is the living documentation for **Open Self Service (O2S)** — a
 
 The sidebar is organized into three main sections:
 
-- **Blocks** — Reusable block components from `packages/blocks`. Each block is self-contained (backend + frontend + SDK) and can be used in the customer portal.
-- **Components** — Higher-level UI components from the shared `@o2s/ui` package (e.g. cards, filters, data grids).
-- **Elements** — Base UI elements (buttons, inputs, dialogs, etc.) from `@o2s/ui`, built on shadcn/ui and Tailwind CSS.
+- **Blocks** — Reusable block components from `packages/blocks`. Each block is self-contained (backend + frontend + SDK) and can be used in the customer portal. Think of them as ready‑made business features (for example ticket lists, product views, knowledge-base articles) that already handle data fetching and integration details for you.
+- **Components** — Higher-level UI components from the shared `@o2s/ui` package (e.g. cards, filters, data grids). They are used to build layouts, pages, and sections – more generic than blocks, but still opinionated to match the O2S design system and behavior.
+- **Elements** — Base UI elements (buttons, inputs, dialogs, etc.) from `@o2s/ui`, built on shadcn/ui and Tailwind CSS. These are the building blocks of the library – low-level controls you can compose into your own components and blocks when you need more custom behavior.
 
 Use the sidebar to expand any section and open a component’s docs and stories.
-
-## Running Storybook locally
-
-From the project root:
-
-```bash
-npm run storybook
-```
-
-The dev server runs at [http://localhost:6006](http://localhost:6006) by default.
-
-Make sure dependencies are installed (`npm install`) and, if needed, build packages first (`npm run build` or `npm run watch:deps`).
 
 ## Public instance
 
@@ -36,11 +31,9 @@ A public Storybook is available and kept in sync with the latest version:
 
 You can explore components there without running the repo locally.
 
-## Features
+## Testing
 
-- **Docs** — Auto-generated documentation from component code and JSDoc.
-- **Accessibility** — Use the a11y addon to check components for accessibility issues.
-- **Themes** — Switch between light and dark themes to see how components look in both modes.
+Stories are also used as the primary surface for automated tests via Vitest and the `@storybook/addon-vitest` integration. This allows us to run browser-based checks (including accessibility via the a11y addon) against the same stories you see here.
 
 ## Learn more
 
