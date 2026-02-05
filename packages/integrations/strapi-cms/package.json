@@ -43,7 +43,7 @@
         "prettier": "^3.8.1",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3",
-        "vitest": "^4.0.17"
+        "vitest": "^4.0.18"
     },
     "peerDependencies": {
         "@nestjs/axios": "^4.0.1",
