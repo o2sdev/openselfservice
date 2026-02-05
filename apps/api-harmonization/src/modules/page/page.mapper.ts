@@ -114,9 +114,9 @@ const mapArticleBreadcrumbs = (
     category: Articles.Model.Category,
     basePath = '/',
 ): Breadcrumb[] => {
-    // Build full URL paths for breadcrumbs
-    const categoryUrl = `${basePath}/${category.slug}`;
-    const articleUrl = `${categoryUrl}/${article.slug}`;
+    // Build full URL paths for breadcrumbs (normalize to avoid double slashes)
+    const categoryUrl = `${basePath}/${category.slug}`.replace(/\/+/g, '/');
+    const articleUrl = `${categoryUrl}/${article.slug}`.replace(/\/+/g, '/');
 
     return [
         {

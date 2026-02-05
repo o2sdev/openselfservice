@@ -19,7 +19,7 @@ export const mapArticleList = (
         description: cms.description,
         categoryLink: category
             ? {
-                  url: `${basePath}/${category.slug}`,
+                  url: `${basePath}/${category.slug}`.replace(/\/+/g, '/'),
                   label: cms.labels.seeAllArticles,
               }
             : undefined,
@@ -39,7 +39,7 @@ const mapArticle = (
 ) => {
     return {
         ...article,
-        slug: `${basePath}/${article.slug}`,
+        slug: `${basePath}/${article.slug}`.replace(/\/+/g, '/'),
         createdAt: Utils.Date.formatDateRelative(article.createdAt, locale, cms.labels.today, cms.labels.yesterday),
         updatedAt: Utils.Date.formatDateRelative(article.updatedAt, locale, cms.labels.today, cms.labels.yesterday),
     };

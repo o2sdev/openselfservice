@@ -16,7 +16,7 @@ export const mapCategoryList = (
         description: cms.description,
         items: categories.map((category) => ({
             ...category,
-            slug: `${basePath}/${category.slug}`,
+            slug: `${basePath}/${category.slug}`.replace(/\/+/g, '/'),
         })),
         meta: cms.meta,
     };

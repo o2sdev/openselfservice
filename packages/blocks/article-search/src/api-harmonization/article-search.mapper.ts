@@ -21,7 +21,7 @@ export const mapArticles = (articles: Articles.Model.Articles, basePath?: string
     return {
         articles: articles.data.map((article) => ({
             label: article.title,
-            url: basePath ? `${basePath}/${article.slug}` : article.slug,
+            url: basePath ? `${basePath}/${article.slug}`.replace(/\/+/g, '/') : article.slug,
         })),
     };
 };

@@ -55,7 +55,7 @@ const mapArticle = (
 ) => {
     return {
         ...article,
-        slug: `${basePath}/${article.slug}`,
+        slug: `${basePath}/${article.slug}`.replace(/\/+/g, '/'),
         createdAt: Utils.Date.formatDateRelative(article.createdAt, _locale, cms.labels.today, cms.labels.yesterday),
         updatedAt: Utils.Date.formatDateRelative(article.updatedAt, _locale, cms.labels.today, cms.labels.yesterday),
     };
