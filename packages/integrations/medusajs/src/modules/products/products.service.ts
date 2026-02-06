@@ -17,6 +17,7 @@ import { RelatedProductsResponse } from './response.types';
 
 @Injectable()
 export class ProductsService extends Products.Service {
+    private readonly sdk: Medusa;
     private readonly defaultCurrency: string;
 
     constructor(
@@ -26,6 +27,7 @@ export class ProductsService extends Products.Service {
         private readonly medusaJsService: MedusaJsService,
     ) {
         super();
+        this.sdk = this.medusaJsService.getSdk();
         this.defaultCurrency = this.config.get('DEFAULT_CURRENCY') || '';
 
         if (!this.defaultCurrency) {
@@ -40,6 +42,7 @@ export class ProductsService extends Products.Service {
                 params: {
                     limit: query.limit,
                     offset: query.offset,
+                    status: ['published'],
                     fields: '*variants,*variants.prices,*categories,*tags,*images',
                 },
             })
