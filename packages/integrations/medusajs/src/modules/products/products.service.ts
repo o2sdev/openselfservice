@@ -1,8 +1,9 @@
+import Medusa from '@medusajs/js-sdk';
 import { HttpTypes } from '@medusajs/types';
 import { HttpService } from '@nestjs/axios';
 import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Observable, catchError, map, switchMap } from 'rxjs';
+import { Observable, catchError, from, map, switchMap } from 'rxjs';
 
 import { LoggerService } from '@o2s/utils.logger';
 
@@ -20,6 +21,10 @@ export class ProductsService extends Products.Service {
     private readonly sdk: Medusa;
     private readonly defaultCurrency: string;
 
+    private readonly productListFields = '*variants,*variants.prices,*categories,*tags,*images';
+    private readonly productDetailFields =
+        '+weight,+height,+width,+length,+material,+origin_country,+hs_code,+mid_code,+metadata,+product.metadata,product.*,*product.images,*product.tags';
+
     constructor(
         private readonly config: ConfigService,
         protected httpClient: HttpService,
@@ -36,83 +41,71 @@ export class ProductsService extends Products.Service {
     }
 
     getProductList(query: Products.Request.GetProductListQuery): Observable<Products.Model.Products> {
-        return this.httpClient
-            .get<HttpTypes.AdminProductListResponse>(`${this.medusaJsService.getBaseUrl()}/admin/products`, {
-                headers: this.medusaJsService.getMedusaAdminApiHeaders(),
-                params: {
-                    limit: query.limit,
-                    offset: query.offset,
-                    status: ['published'],
-                    fields: '*variants,*variants.prices,*categories,*tags,*images',
-                },
-            })
-            .pipe(
-                map((response) => {
-                    return mapProducts(response.data, this.defaultCurrency, query.category);
+        const params: HttpTypes.AdminProductListParams = {
+            limit: query.limit,
+            offset: query.offset,
+            status: ['published'],
+            fields: this.productListFields,
+        };
+
+        return from(
+            this.sdk.admin.product
+                .list(params)
+                .then((response) => {
+                    return mapProducts(response, this.defaultCurrency, query.category);
+                })
+                .catch((error) => {
+                    throw error;
                 }),
-                catchError((error) => {
-                    return handleHttpError(error);
-                }),
-            );
+        ).pipe(
+            catchError((error) => {
+                return handleHttpError(error);
+            }),
+        );
     }
 
     getProduct(params: Products.Request.GetProductParams): Observable<Products.Model.Product> {
         // If variantId is not provided, fetch the product and use the first variant
         if (!params.variantId) {
-            return this.httpClient
-                .get<HttpTypes.AdminProductResponse>(
-                    `${this.medusaJsService.getBaseUrl()}/admin/products/${params.id}`,
-                    {
-                        headers: this.medusaJsService.getMedusaAdminApiHeaders(),
-                        params: {
-                            fields: 'variants.*',
-                        },
-                    },
-                )
-                .pipe(
-                    switchMap((response) => {
-                        const product = response.data.product;
-                        if (!product?.variants?.length) {
-                            throw new Error(`No variants found for product ${params.id}`);
-                        }
-                        // Use the first variant
-                        const variantId = product.variants[0]!.id;
-                        return this.httpClient.get<HttpTypes.AdminProductVariantResponse>(
-                            `${this.medusaJsService.getBaseUrl()}/admin/products/${params.id}/variants/${variantId}`,
-                            {
-                                headers: this.medusaJsService.getMedusaAdminApiHeaders(),
-                                params: {
-                                    fields: '+weight,+height,+width,+length,+material,+origin_country,+hs_code,+mid_code,+metadata,+product.metadata,product.*,*product.images,*product.tags',
-                                },
-                            },
-                        );
-                    }),
-                    map((response) => {
-                        if (!response.data.variant) {
-                            throw new Error(`Variant not found for product ${params.id}`);
-                        }
-                        return mapProduct(response.data.variant, this.defaultCurrency);
-                    }),
-                    catchError((error) => {
-                        return handleHttpError(error);
-                    }),
-                );
+            return from(
+                this.sdk.admin.product.retrieve(params.id, { fields: 'variants.*' }).catch((error) => {
+                    throw error;
+                }),
+            ).pipe(
+                switchMap((response) => {
+                    const product = response.product;
+                    if (!product?.variants?.length) {
+                        throw new Error(`No variants found for product ${params.id}`);
+                    }
+                    // Use the first variant
+                    const variantId = product.variants[0]!.id;
+                    return this.getVariant(params.id, variantId);
+                }),
+                catchError((error) => {
+                    return handleHttpError(error);
+                }),
+            );
         }
 
+        return this.getVariant(params.id, params.variantId);
+    }
+
+    private getVariant(productId: string, variantId: string): Observable<Products.Model.Product> {
+        // SDK doesn't support productVariant.retrieve, use HTTP client
         return this.httpClient
             .get<HttpTypes.AdminProductVariantResponse>(
-                `${this.medusaJsService.getBaseUrl()}/admin/products/${params.id}/variants/${params.variantId}`,
+                `${this.medusaJsService.getBaseUrl()}/admin/products/${productId}/variants/${variantId}`,
                 {
                     headers: this.medusaJsService.getMedusaAdminApiHeaders(),
                     params: {
-                        fields: '+weight,+height,+width,+length,+material,+origin_country,+hs_code,+mid_code,+metadata,+product.metadata,product.*,*product.images,*product.tags',
+                        fields: this.productDetailFields,
                     },
                 },
             )
             .pipe(
                 map((response) => {
                     if (!response.data.variant) {
-                        throw new Error(`Variant ${params.variantId} not found for product ${params.id}`);
+                        throw new Error(`Variant ${variantId} not found for product ${productId}`);
                     }
                     return mapProduct(response.data.variant, this.defaultCurrency);
                 }),
