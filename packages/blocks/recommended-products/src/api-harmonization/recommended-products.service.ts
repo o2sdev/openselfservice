@@ -27,6 +27,7 @@ export class RecommendedProductsService {
         });
         const products = this.productsService.getProductList({
             offset: 0,
+            limit: 7, // Fetch 7 to have 6 after excluding current product
             locale,
         });
 
