@@ -43,6 +43,7 @@ export class ProductsService extends Products.Service {
                 params: {
                     limit: query.limit,
                     offset: query.offset,
+                    status: ['published'],
                 },
             })
             .pipe(
@@ -81,7 +82,7 @@ export class ProductsService extends Products.Service {
                             {
                                 headers: this.medusaJsService.getMedusaAdminApiHeaders(),
                                 params: {
-                                    fields: 'product.*',
+                                    fields: 'product.*,product.images.*',
                                 },
                             },
                         );
@@ -104,7 +105,7 @@ export class ProductsService extends Products.Service {
                 {
                     headers: this.medusaJsService.getMedusaAdminApiHeaders(),
                     params: {
-                        fields: 'product.*',
+                        fields: 'product.*,product.images.*',
                     },
                 },
             )
