@@ -1,4 +1,3 @@
-import Medusa from '@medusajs/js-sdk';
 import { HttpTypes } from '@medusajs/types';
 import { HttpService } from '@nestjs/axios';
 import { Inject, Injectable } from '@nestjs/common';
@@ -18,7 +17,6 @@ import { RelatedProductsResponse } from './response.types';
 
 @Injectable()
 export class ProductsService extends Products.Service {
-    private readonly sdk: Medusa;
     private readonly defaultCurrency: string;
 
     constructor(
@@ -28,7 +26,6 @@ export class ProductsService extends Products.Service {
         private readonly medusaJsService: MedusaJsService,
     ) {
         super();
-        this.sdk = this.medusaJsService.getSdk();
         this.defaultCurrency = this.config.get('DEFAULT_CURRENCY') || '';
 
         if (!this.defaultCurrency) {
@@ -43,11 +40,12 @@ export class ProductsService extends Products.Service {
                 params: {
                     limit: query.limit,
                     offset: query.offset,
+                    fields: '*variants,*variants.prices,*categories,*tags,*images',
                 },
             })
             .pipe(
                 map((response) => {
-                    return mapProducts(response.data, this.defaultCurrency);
+                    return mapProducts(response.data, this.defaultCurrency, query.category);
                 }),
                 catchError((error) => {
                     return handleHttpError(error);
@@ -81,7 +79,7 @@ export class ProductsService extends Products.Service {
                             {
                                 headers: this.medusaJsService.getMedusaAdminApiHeaders(),
                                 params: {
-                                    fields: 'product.*',
+                                    fields: '+weight,+height,+width,+length,+material,+origin_country,+hs_code,+mid_code,+metadata,+product.metadata,product.*,*product.images,*product.tags',
                                 },
                             },
                         );
@@ -104,7 +102,7 @@ export class ProductsService extends Products.Service {
                 {
                     headers: this.medusaJsService.getMedusaAdminApiHeaders(),
                     params: {
-                        fields: 'product.*',
+                        fields: '+weight,+height,+width,+length,+material,+origin_country,+hs_code,+mid_code,+metadata,+product.metadata,product.*,*product.images,*product.tags',
                     },
                 },
             )
