@@ -50,7 +50,7 @@ export const mapServices = (
 
     return {
         data: services,
-        total: services.length,
+        total: data?.count ?? services.length,
     };
 };
 

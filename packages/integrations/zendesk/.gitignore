@@ -6,7 +6,7 @@
 
 # Generated OpenAPI files
 /scripts/oas/oas.yaml
-/generated/zendesk/
+/generated/
 
 # Logs
 logs

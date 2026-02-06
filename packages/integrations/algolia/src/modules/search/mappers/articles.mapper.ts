@@ -2,7 +2,6 @@ import { Articles, Search } from '@o2s/framework/modules';
 
 import { Model } from '../models';
 
-//TODO: add tests
 export const mapArticlesFromSearch = (
     searchResult: Search.Model.SearchResult<Model.SearchEngineArticleModel>,
 ): Articles.Model.Articles => {

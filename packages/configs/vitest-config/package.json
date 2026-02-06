@@ -7,8 +7,18 @@
         "./block": "./block.js",
         "./api": "./api.js"
     },
+    "scripts": {
+        "collect-json-reports": "node scripts/collect-json-outputs.mjs",
+        "merge-json-reports": "nyc merge coverage/raw coverage/merged/merged-coverage.json",
+        "merge-summary-reports": "node scripts/merge-summary-outputs.mjs",
+        "report": "nyc report -t coverage/merged --report-dir coverage/report --reporter=html --exclude-after-remap false",
+        "view-report": "open-cli coverage/report/index.html"
+    },
     "devDependencies": {
-        "vitest": "^4.0.18",
-        "unplugin-swc": "^1.5.9"
+        "glob": "^13.0.1",
+        "nyc": "^17.1.0",
+        "open-cli": "^8.0.0",
+        "unplugin-swc": "^1.5.9",
+        "vitest": "^4.0.18"
     }
 }

@@ -23,20 +23,19 @@ There are two main ways of working with O2S - either running every package with 
 To quickly get started, it is recommended to run two separate commands (ideally in separate terminal windows):
 
 1. **Watch dependencies** – Automatically rebuilds internal packages when they change:
-   ```sh
-   npm run watch:deps
-   ```
+    ```sh
+    npm run watch:deps
+    ```
 2. **Watch applications** – Starts the main applications with hot-reloading:
-   ```sh
-   npm run watch:apps
-   ```
+    ```sh
+    npm run watch:apps
+    ```
 
 :::important
 The `npm run dev` script is now **deprecated** and will be removed in future versions. Please use the granular `watch:deps` and `watch:apps` scripts instead.
 :::
 
 This will leverage [Turborepo task runners](https://turbo.build/repo/docs/crafting-your-repository/running-tasks) and ensure that both your applications and their internal dependencies are correctly watched and rebuilt during development.
-
 
 ---
 
