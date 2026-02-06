@@ -1,5 +1,12 @@
 # @o2s/docs
 
+## 1.8.0
+
+### Minor Changes
+
+- 5aba06c: add Zendesk Help Center articles integration
+- 8702f91: feat(zendesk): remove hardcoded locale base paths from article slugs
+
 ## 1.7.0
 
 ### Minor Changes

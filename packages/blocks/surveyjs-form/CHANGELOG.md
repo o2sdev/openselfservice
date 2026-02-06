@@ -1,5 +1,20 @@
 # @o2s/blocks.surveyjs-form
 
+## 1.3.1
+
+### Patch Changes
+
+- 3e14803: chore(deps): update dependencies
+- Updated dependencies [dadd9ba]
+- Updated dependencies [5aba06c]
+- Updated dependencies [8702f91]
+- Updated dependencies [002ff11]
+- Updated dependencies [3e14803]
+  - @o2s/framework@1.17.0
+  - @o2s/configs.integrations@0.5.0
+  - @o2s/ui@1.10.0
+  - @o2s/modules.surveyjs@0.4.1
+
 ## 1.3.0
 
 ### Minor Changes

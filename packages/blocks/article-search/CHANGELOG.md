@@ -1,5 +1,21 @@
 # @o2s/blocks.article-search
 
+## 1.5.0
+
+### Minor Changes
+
+- 8702f91: feat(zendesk): remove hardcoded locale base paths from article slugs
+
+### Patch Changes
+
+- Updated dependencies [dadd9ba]
+- Updated dependencies [5aba06c]
+- Updated dependencies [8702f91]
+- Updated dependencies [002ff11]
+  - @o2s/framework@1.17.0
+  - @o2s/configs.integrations@0.5.0
+  - @o2s/ui@1.10.0
+
 ## 1.4.0
 
 ### Minor Changes
