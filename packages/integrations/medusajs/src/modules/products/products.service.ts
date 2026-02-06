@@ -123,6 +123,7 @@ export class ProductsService extends Products.Service {
                     headers: this.medusaJsService.getMedusaAdminApiHeaders(),
                     params: {
                         referenceType: params.type,
+                        limit: params.limit,
                     },
                 },
             )
