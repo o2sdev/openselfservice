@@ -1,107 +1,6 @@
-import { Models, Orders, Products } from '@o2s/framework/modules';
+import { Models, Orders } from '@o2s/framework/modules';
 
-// Product data for generating random orders
-const PRODUCT_DATA = [
-    {
-        id: 'PRD-004',
-        name: 'Rotary Hammer',
-        price: 100,
-        currency: 'USD',
-        type: 'PHYSICAL',
-        category: 'TOOLS',
-        sku: 'ABC-12345-S-BL',
-    },
-    {
-        id: 'PRD-005',
-        name: 'Angle Grinder',
-        price: 79.99,
-        currency: 'USD',
-        type: 'PHYSICAL',
-        category: 'TOOLS',
-        sku: 'ABC-12345-S-BL',
-    },
-    {
-        id: 'PRD-006',
-        name: 'Cordless Drill',
-        price: 129.99,
-        currency: 'USD',
-        type: 'PHYSICAL',
-        category: 'TOOLS',
-        sku: 'ABC-12345-S-BL',
-    },
-    {
-        id: 'PRD-007',
-        name: 'Laser Measure',
-        price: 149.99,
-        currency: 'USD',
-        type: 'PHYSICAL',
-        category: 'TOOLS',
-        sku: 'ABC-12345-S-BL',
-    },
-    {
-        id: 'PRD-008',
-        name: 'Safety Glasses',
-        price: 19.99,
-        currency: 'USD',
-        type: 'PHYSICAL',
-        category: 'SAFETY',
-        sku: 'ABC-12345-S-BL',
-    },
-    {
-        id: 'PRD-009',
-        name: 'Work Gloves',
-        price: 24.99,
-        currency: 'USD',
-        type: 'PHYSICAL',
-        category: 'SAFETY',
-        sku: 'ABC-12345-S-BL',
-    },
-    {
-        id: 'PRD-010',
-        name: 'Hard Hat',
-        price: 29.99,
-        currency: 'USD',
-        type: 'PHYSICAL',
-        category: 'SAFETY',
-        sku: 'ABC-12345-S-BL',
-    },
-    {
-        id: 'PRD-011',
-        name: 'Tool Belt',
-        price: 39.99,
-        currency: 'USD',
-        type: 'PHYSICAL',
-        category: 'ACCESSORIES',
-        sku: 'ABC-12345-S-BL',
-    },
-    {
-        id: 'PRD-012',
-        name: 'Tool Box',
-        price: 59.99,
-        currency: 'USD',
-        type: 'PHYSICAL',
-        category: 'ACCESSORIES',
-        sku: 'ABC-12345-S-BL',
-    },
-    {
-        id: 'PRD-013',
-        name: 'MaxFlow Air Systems',
-        price: 19.99,
-        currency: 'USD',
-        type: 'VIRTUAL',
-        category: 'MAINTENANCE',
-        sku: 'ABC-12345-S-BL',
-    },
-    {
-        id: 'PRD-014',
-        name: 'RapidFix Repair',
-        price: 19.99,
-        currency: 'EUR',
-        type: 'VIRTUAL',
-        category: 'MAINTENANCE',
-        sku: 'ABC-12345-S-BL',
-    },
-];
+import { MOCK_PRODUCTS } from '../resources/mock/products.mock';
 
 const DOCUMENT_DATA: Orders.Model.Document[] = [
     {
@@ -244,55 +143,68 @@ const formatDate = (date: Date): string => {
 
 // Function to generate a random order item
 const generateOrderItem = (itemIndex: number): Orders.Model.OrderItem => {
-    const productIndex = getRandomInt(0, PRODUCT_DATA.length - 1);
-    const product = PRODUCT_DATA[productIndex]!;
+    const productIndex = getRandomInt(0, MOCK_PRODUCTS.length - 1);
+    const product = MOCK_PRODUCTS[productIndex]!;
     const quantity = getRandomInt(1, 5);
-    const price = product.price * 0.9; // 10% discount from product price
-    const total = price * quantity;
+
+    const VAT_RATE = 0.23;
+
+    // Catalog price is GROSS (with VAT)
+    const catalogPriceGross = product.price.value;
+
+    // Random discount: 0%, 5%, 10%, 15%, or 20% (whole numbers only)
+    const discountOptions = [0, 5, 10, 15, 20];
+    const discountPercent = discountOptions[getRandomInt(0, discountOptions.length - 1)]!;
+    const discountPerUnit = catalogPriceGross * (discountPercent / 100);
+    const discountTotalAmount = Math.round(discountPerUnit * quantity * 100) / 100;
+
+    // Price after discount (still gross)
+    const priceGrossAfterDiscount = catalogPriceGross - discountPerUnit;
+
+    // Price NET (without VAT) - this is the "Net price" shown in UI
+    const priceNet = Math.round((priceGrossAfterDiscount / (1 + VAT_RATE)) * 100) / 100;
+
+    // Total values
+    const totalGross = Math.round(priceGrossAfterDiscount * quantity * 100) / 100;
+    const totalNet = Math.round(priceNet * quantity * 100) / 100;
 
     return {
         id: `ITEM-${itemIndex.toString().padStart(3, '0')}`,
         productId: product.id,
         quantity,
         price: {
-            value: price,
-            currency: product.currency as Orders.Model.Order['currency'],
+            value: priceNet,
+            currency: product.price.currency as Orders.Model.Order['currency'],
         },
         total: {
-            value: total,
-            currency: product.currency as Orders.Model.Order['currency'],
+            value: totalGross,
+            currency: product.price.currency as Orders.Model.Order['currency'],
         },
         subtotal: {
-            value: total - total * 0.23,
-            currency: product.currency as Orders.Model.Order['currency'],
+            value: totalNet,
+            currency: product.price.currency as Orders.Model.Order['currency'],
         },
+        discountTotal:
+            discountPercent > 0
+                ? {
+                      value: discountTotalAmount,
+                      currency: product.price.currency as Orders.Model.Order['currency'],
+                  }
+                : undefined,
         unit: 'PCS' as Orders.Model.OrderItem['unit'],
-        currency: product.currency as Orders.Model.Order['currency'],
+        currency: product.price.currency as Orders.Model.Order['currency'],
         product: {
             id: product.id,
             sku: product.sku,
             name: product.name,
-            description: `Description for ${product.name}`,
-            shortDescription: `Short description for ${product.name}`,
-            image: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
-                width: 640,
-                height: 656,
-                alt: product.name,
-            },
-            price: {
-                value: product.price,
-                currency: product.currency as Orders.Model.Order['currency'],
-            },
-            link: `https://example.com/products/${product.id.toLowerCase()}`,
-            type: product.type as Products.Model.Product['type'],
-            category: product.category as Products.Model.Product['category'],
-            tags: [
-                {
-                    label: 'New',
-                    variant: 'secondary',
-                },
-            ],
+            description: product.description,
+            shortDescription: product.shortDescription,
+            image: product.image,
+            price: product.price,
+            link: product.link,
+            type: product.type,
+            category: product.category,
+            tags: product.tags,
         },
     };
 };
@@ -309,19 +221,29 @@ const generateOrder = (orderIndex: number, count: number, getRandomDate: () => D
     const numItems = getRandomInt(1, 8);
     const items: Orders.Model.OrderItem[] = [];
 
-    let subtotal = 0;
+    // Calculate order subtotal (NET) - sum of all item NET values
+    let orderSubtotalNet = 0;
+    // Calculate order total items (GROSS) - sum of all item GROSS values
+    let orderItemsTotalGross = 0;
+
     for (let i = 0; i < numItems; i++) {
         const item = generateOrderItem(orderIndex * 10 + i);
         items.push(item);
-        subtotal += item.total?.value || 0;
+        orderSubtotalNet += item.subtotal?.value || 0;
+        orderItemsTotalGross += item.total?.value || 0;
     }
 
     const shippingMethodIndex = getRandomInt(0, SHIPPING_METHODS.length - 1);
     const shippingMethod = SHIPPING_METHODS[shippingMethodIndex]!;
     const shippingCost = shippingMethod.price;
 
-    const discountValue = Math.round(subtotal * 0.1 * 100) / 100; // 10% discount
-    const total = subtotal + shippingCost - discountValue;
+    // Order-level discount: 0%, 5%, 10%, or 15% (whole numbers only)
+    const orderDiscountOptions = [0, 5, 10, 15];
+    const orderDiscountPercent = orderDiscountOptions[getRandomInt(0, orderDiscountOptions.length - 1)]!;
+    const orderDiscount = Math.round(orderItemsTotalGross * (orderDiscountPercent / 100) * 100) / 100;
+
+    // Final order total (GROSS) = items gross + shipping - order discount
+    const orderTotal = Math.round((orderItemsTotalGross + shippingCost - orderDiscount) * 100) / 100;
 
     const currency = items[0]?.currency || 'USD';
     const status = ORDER_STATUSES[getRandomInt(0, ORDER_STATUSES.length - 1)]!;
@@ -334,11 +256,11 @@ const generateOrder = (orderIndex: number, count: number, getRandomDate: () => D
         updatedAt: formatDate(updateDate),
         paymentDueDate: formatDate(paymentDueDate),
         total: {
-            value: total,
+            value: orderTotal,
             currency,
         },
         subtotal: {
-            value: subtotal,
+            value: Math.round(orderSubtotalNet * 100) / 100,
             currency,
         },
         shippingTotal: {
@@ -349,10 +271,13 @@ const generateOrder = (orderIndex: number, count: number, getRandomDate: () => D
             value: shippingCost,
             currency,
         },
-        discountTotal: {
-            value: discountValue,
-            currency,
-        },
+        discountTotal:
+            orderDiscount > 0
+                ? {
+                      value: orderDiscount,
+                      currency,
+                  }
+                : undefined,
         currency,
         paymentStatus,
         status,
