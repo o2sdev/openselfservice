@@ -31,6 +31,7 @@ import * as TicketList from '@o2s/blocks.ticket-list/frontend';
 import * as TickeRecent from '@o2s/blocks.ticket-recent/frontend';
 import * as TicketSummary from '@o2s/blocks.ticket-summary/frontend';
 import * as UserAccount from '@o2s/blocks.user-account/frontend';
+import * as CheckoutBillingPayment from '@o2s/blocks.checkout-billing-payment/frontend';
 // BLOCK IMPORT
 import { getLocale } from 'next-intl/server';
 import { draftMode } from 'next/headers';
@@ -154,6 +155,8 @@ const renderBlock = (typename: string, blockProps: BlockProps) => {
             return <OrderConfirmation.Renderer {...blockProps} />;
         case 'KpisBlock':
             return <Kpis.Renderer {...blockProps} />;
+        case 'CheckoutBillingPaymentBlock':
+            return <CheckoutBillingPayment.Renderer {...blockProps} />;
         // BLOCK REGISTER
         default:
             return null;

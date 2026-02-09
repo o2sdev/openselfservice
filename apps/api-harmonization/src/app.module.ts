@@ -55,6 +55,7 @@ import * as TicketRecent from '@o2s/blocks.ticket-recent/api-harmonization';
 import * as TicketSummary from '@o2s/blocks.ticket-summary/api-harmonization';
 import * as UserAccount from '@o2s/blocks.user-account/api-harmonization';
 
+import * as CheckoutBillingPayment from '@o2s/blocks.checkout-billing-payment/api-harmonization';
 // BLOCK IMPORT
 
 import { AppConfig } from './app.config';
@@ -147,6 +148,7 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
         RecommendedProducts.Module.register(AppConfig),
         OrderConfirmation.Module.register(AppConfig),
         Kpis.Module.register(AppConfig),
+        CheckoutBillingPayment.Module.register(AppConfig),
         // BLOCK REGISTER
     ],
     providers: [

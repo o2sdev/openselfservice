@@ -31,6 +31,7 @@ import * as TicketRecent from '@o2s/blocks.ticket-recent/api-harmonization';
 import * as TicketSummary from '@o2s/blocks.ticket-summary/api-harmonization';
 import * as UserAccount from '@o2s/blocks.user-account/api-harmonization';
 
+import * as CheckoutBillingPayment from '@o2s/blocks.checkout-billing-payment/api-harmonization';
 // BLOCK IMPORT
 
 export class Init {
@@ -82,6 +83,7 @@ export class PageData {
 
 export type Blocks =
     // BLOCK REGISTER
+    | CheckoutBillingPayment.Model.CheckoutBillingPaymentBlock['__typename']
     | Kpis.Model.KpisBlock['__typename']
     | OrderConfirmation.Model.OrderConfirmationBlock['__typename']
     | RecommendedProducts.Model.RecommendedProductsBlock['__typename']

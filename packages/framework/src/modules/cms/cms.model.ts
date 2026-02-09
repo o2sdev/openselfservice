@@ -48,4 +48,5 @@ export * as ProductDetailsBlock from './models/blocks/product-details.model';
 export * as RecommendedProductsBlock from './models/blocks/recommended-products.model';
 export * as OrderConfirmationBlock from './models/blocks/order-confirmation.model';
 export * as KpisBlock from './models/blocks/kpis.model';
+export * as CheckoutBillingPaymentBlock from './models/blocks/checkout-billing-payment.model';
 // BLOCK IMPORT
