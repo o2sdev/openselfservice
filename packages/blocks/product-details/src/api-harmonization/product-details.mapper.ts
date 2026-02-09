@@ -26,6 +26,7 @@ export const mapProductDetails = (
         downloadLabel: cms.labels.downloadLabel,
         priceLabel: cms.labels.priceLabel,
         offerLabel: cms.labels.offerLabel,
+        variantLabel: cms.labels.variantLabel,
     };
 
     return {

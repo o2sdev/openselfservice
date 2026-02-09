@@ -61,6 +61,11 @@ const MOCK_PRODUCT_1_EN: Products.Model.Product = {
         { label: 'Noise Level', value: '95 dB(A)' },
         { label: 'Certification', value: 'CE, ETL, ISO 9001' },
     ],
+    variants: [
+        { id: 'PRD-004-S', title: 'Standard (1200W)', slug: 'standard' },
+        { id: 'PRD-004-P', title: 'Pro (1500W)', slug: 'pro' },
+        { id: 'PRD-004-M', title: 'Max (1800W)', slug: 'max' },
+    ],
 };
 
 const MOCK_PRODUCT_1_PL: Products.Model.Product = {
@@ -124,6 +129,11 @@ const MOCK_PRODUCT_1_PL: Products.Model.Product = {
         { label: 'Poziom Hałasu', value: '95 dB(A)' },
         { label: 'Certyfikacja', value: 'CE, ETL, ISO 9001' },
     ],
+    variants: [
+        { id: 'PRD-004-S', title: 'Standard (1200W)', slug: 'standard' },
+        { id: 'PRD-004-P', title: 'Pro (1500W)', slug: 'pro' },
+        { id: 'PRD-004-M', title: 'Max (1800W)', slug: 'max' },
+    ],
 };
 
 const MOCK_PRODUCT_1_DE: Products.Model.Product = {
@@ -186,6 +196,11 @@ const MOCK_PRODUCT_1_DE: Products.Model.Product = {
         { label: 'Vibrationspegel', value: '12 m/s²' },
         { label: 'Geräuschpegel', value: '95 dB(A)' },
         { label: 'Zertifizierung', value: 'CE, ETL, ISO 9001' },
+    ],
+    variants: [
+        { id: 'PRD-004-S', title: 'Standard (1200W)', slug: 'standard' },
+        { id: 'PRD-004-P', title: 'Pro (1500W)', slug: 'pro' },
+        { id: 'PRD-004-M', title: 'Max (1800W)', slug: 'max' },
     ],
 };
 
