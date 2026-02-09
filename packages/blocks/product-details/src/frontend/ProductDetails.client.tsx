@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { createNavigation } from 'next-intl/navigation';
 import React from 'react';
 
 import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
@@ -11,6 +12,7 @@ import { TooltipHover } from '@o2s/ui/components/TooltipHover';
 
 import { Badge } from '@o2s/ui/elements/badge';
 import { Button } from '@o2s/ui/elements/button';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@o2s/ui/elements/select';
 import { Separator } from '@o2s/ui/elements/separator';
 import { Typography } from '@o2s/ui/elements/typography';
 
@@ -20,12 +22,27 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
     locale,
     routing,
     hasPriority,
+    productId,
     ...component
 }) => {
     const { product, labels, actionButton } = component;
     const t = useTranslations();
+    const { useRouter } = createNavigation(routing);
+    const router = useRouter();
 
     const keySpecs = product && product.keySpecs ? product.keySpecs : [];
+
+    const currentVariantSlug = product.variants?.find((v) => v.id === product.variantId)?.slug;
+
+    const handleVariantChange = (slug: string) => {
+        // Use product.link which has the correct localized path (e.g., /produkty/PRD-004 or /products/sweatpants/s)
+        // Strip any existing variant slug if present, then append the new one
+        let baseLink = product.link;
+        if (currentVariantSlug && baseLink.endsWith(`/${currentVariantSlug}`)) {
+            baseLink = baseLink.slice(0, -(currentVariantSlug.length + 1));
+        }
+        router.push(`${baseLink}/${slug}`);
+    };
 
     return (
         <div className="w-full flex flex-col gap-8 md:gap-12">
@@ -53,6 +70,26 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                                     </li>
                                 ))}
                             </ul>
+                        )}
+
+                        {product.variants && product.variants.length > 1 && (
+                            <div className="flex flex-col gap-2">
+                                <Typography className="text-sm text-muted-foreground">
+                                    {labels.variantLabel || 'Variant'}
+                                </Typography>
+                                <Select value={currentVariantSlug} onValueChange={handleVariantChange}>
+                                    <SelectTrigger>
+                                        <SelectValue />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        {product.variants.map((variant) => (
+                                            <SelectItem key={variant.id} value={variant.slug}>
+                                                {variant.title}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                            </div>
                         )}
                     </div>
 
@@ -151,6 +188,26 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                                     </li>
                                 ))}
                             </ul>
+                        )}
+
+                        {product.variants && product.variants.length > 1 && (
+                            <div className="flex flex-col gap-2">
+                                <Typography className="text-sm text-muted-foreground">
+                                    {labels.variantLabel || 'Variant'}
+                                </Typography>
+                                <Select value={currentVariantSlug} onValueChange={handleVariantChange}>
+                                    <SelectTrigger>
+                                        <SelectValue />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        {product.variants.map((variant) => (
+                                            <SelectItem key={variant.id} value={variant.slug}>
+                                                {variant.title}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                            </div>
                         )}
 
                         <div className="flex flex-col gap-1 items-end">

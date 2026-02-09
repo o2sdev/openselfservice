@@ -17,6 +17,7 @@ export class ProductDetailsService {
 
     getProductDetails(
         id: string,
+        variantSlug: string | undefined,
         query: Request.GetProductDetailsBlockQuery,
         headers: Models.Headers.AppHeaders,
     ): Observable<Model.ProductDetailsBlock> {
@@ -28,6 +29,7 @@ export class ProductDetailsService {
         });
         const product = this.productsService.getProduct({
             id,
+            variantId: variantSlug,
             locale,
         });
 

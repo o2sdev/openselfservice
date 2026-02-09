@@ -28,6 +28,7 @@ export type Labels = {
     descriptionTitle: string;
     priceLabel: string;
     offerLabel: string;
+    variantLabel?: string;
 };
 
 export type ProductDetailsBlock = ApiModels.Block.Block & {

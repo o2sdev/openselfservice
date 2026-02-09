@@ -9,6 +9,7 @@ const MOCK_PRODUCT_DETAILS_BLOCK_EN: CMS.Model.ProductDetailsBlock.ProductDetail
         downloadLabel: 'Download Brochure',
         priceLabel: 'Price',
         offerLabel: 'Offer',
+        variantLabel: 'Variant',
     },
 };
 
@@ -21,6 +22,7 @@ const MOCK_PRODUCT_DETAILS_BLOCK_DE: CMS.Model.ProductDetailsBlock.ProductDetail
         downloadLabel: 'Broschüre herunterladen',
         priceLabel: 'Preis',
         offerLabel: 'Angebot',
+        variantLabel: 'Variante',
     },
 };
 
@@ -33,6 +35,7 @@ const MOCK_PRODUCT_DETAILS_BLOCK_PL: CMS.Model.ProductDetailsBlock.ProductDetail
         downloadLabel: 'Pobierz broszurę',
         priceLabel: 'Cena',
         offerLabel: 'Oferta',
+        variantLabel: 'Wariant',
     },
 };
 

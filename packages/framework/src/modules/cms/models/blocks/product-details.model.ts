@@ -7,6 +7,7 @@ export type Labels = {
     descriptionTitle: string;
     priceLabel: string;
     offerLabel: string;
+    variantLabel?: string;
 };
 
 export class ProductDetailsBlock extends Block.Block {

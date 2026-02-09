@@ -15,6 +15,12 @@ export type DetailedSpec = {
     category?: string;
 };
 
+export type ProductVariantOption = {
+    id: string;
+    title: string;
+    slug: string;
+};
+
 export class Product {
     id!: string;
     sku!: string;
@@ -36,6 +42,7 @@ export class Product {
     keySpecs?: KeySpecItem[];
     detailedSpecs?: DetailedSpec[];
     location?: string;
+    variants?: ProductVariantOption[];
 }
 
 export type Products = Pagination.Paginated<Product>;
