@@ -395,7 +395,7 @@ export const mapAssets = (
     let assets: Resources.Model.Asset[] = [];
 
     switch (customerId) {
-        case 'cust-001':
+        case 'cus_01KGSR4NSX1S7Y48E6MVWPPVDP':
             assets = MOCK_ASSETS_FOR_CUSTOMER_1;
             break;
         case 'cust-002':
@@ -474,7 +474,7 @@ export const mapServices = (
     let services = MOCK_SERVICES_DEFAULT;
 
     switch (customerId) {
-        case 'cust-001':
+        case 'cus_01KGSR4NSX1S7Y48E6MVWPPVDP':
             services = MOCK_SERVICES_FOR_CUSTOMER_1;
             break;
         case 'cust-002':

@@ -4,6 +4,7 @@ import { Service as ArticlesService } from './modules/articles';
 import { Service as AuthService } from './modules/auth';
 import { Service as BillingAccountsService } from './modules/billing-accounts';
 import { Service as CacheService } from './modules/cache';
+import { Service as CartsService } from './modules/carts';
 import { Service as CmsService } from './modules/cms';
 import { Service as InvoicesService } from './modules/invoices';
 import { Service as NotificationsService } from './modules/notifications';
@@ -72,6 +73,11 @@ export const Config: Partial<ApiConfig['integrations']> = {
     products: {
         name: 'mocked',
         service: ProductsService,
+    },
+    carts: {
+        name: 'mocked',
+        service: CartsService,
+        imports: [Auth.Module],
     },
     auth: {
         name: 'mocked',

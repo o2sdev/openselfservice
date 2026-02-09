@@ -4,6 +4,7 @@ import {
     BillingAccounts,
     CMS,
     Cache,
+    Carts,
     Invoices,
     Notifications,
     Orders,
@@ -32,6 +33,7 @@ export const AppConfig: ApiConfig = {
         search: Search.SearchIntegrationConfig,
         products: Products.ProductsIntegrationConfig,
         orders: Orders.OrdersIntegrationConfig,
+        carts: Carts.CartsIntegrationConfig,
         auth: Auth.AuthIntegrationConfig,
     },
 };

@@ -140,7 +140,7 @@ const DOCUMENT_DATA: Orders.Model.Document[] = [
 ];
 
 // Customer IDs
-const CUSTOMER_IDS = ['cust-001'];
+const CUSTOMER_IDS = ['cus_01KGSR4NSX1S7Y48E6MVWPPVDP'];
 
 // Shipping methods
 const SHIPPING_METHODS = [
