@@ -32,6 +32,11 @@ import * as TicketSummary from '@o2s/blocks.ticket-summary/api-harmonization';
 import * as UserAccount from '@o2s/blocks.user-account/api-harmonization';
 
 import * as CheckoutBillingPayment from '@o2s/blocks.checkout-billing-payment/api-harmonization';
+import * as CartSummary from '@o2s/blocks.cart-summary/api-harmonization';
+import * as CheckoutCompanyData from '@o2s/blocks.checkout-company-data/api-harmonization';
+import * as CheckoutNotes from '@o2s/blocks.checkout-notes/api-harmonization';
+import * as CheckoutShippingAddress from '@o2s/blocks.checkout-shipping-address/api-harmonization';
+import * as CheckoutSummary from '@o2s/blocks.checkout-summary/api-harmonization';
 // BLOCK IMPORT
 
 export class Init {
@@ -83,6 +88,11 @@ export class PageData {
 
 export type Blocks =
     // BLOCK REGISTER
+    | CheckoutSummary.Model.CheckoutSummaryBlock['__typename']
+    | CheckoutShippingAddress.Model.CheckoutShippingAddressBlock['__typename']
+    | CheckoutNotes.Model.CheckoutNotesBlock['__typename']
+    | CheckoutCompanyData.Model.CheckoutCompanyDataBlock['__typename']
+    | CartSummary.Model.CartSummaryBlock['__typename']
     | CheckoutBillingPayment.Model.CheckoutBillingPaymentBlock['__typename']
     | Kpis.Model.KpisBlock['__typename']
     | OrderConfirmation.Model.OrderConfirmationBlock['__typename']
