@@ -9,9 +9,11 @@ import * as Category from '@o2s/blocks.category/frontend';
 import * as Faq from '@o2s/blocks.faq/frontend';
 import * as FeaturedServiceList from '@o2s/blocks.featured-service-list/frontend';
 import * as InvoiceList from '@o2s/blocks.invoice-list/frontend';
+import * as Kpis from '@o2s/blocks.kpis/frontend';
 import * as NotificationDetails from '@o2s/blocks.notification-details/frontend';
 import * as NotificationList from '@o2s/blocks.notification-list/frontend';
 import * as NotificationSummary from '@o2s/blocks.notification-summary/frontend';
+import * as OrderConfirmation from '@o2s/blocks.order-confirmation/frontend';
 import * as OrderDetails from '@o2s/blocks.order-details/frontend';
 import * as OrderList from '@o2s/blocks.order-list/frontend';
 import * as OrdersSummary from '@o2s/blocks.orders-summary/frontend';
@@ -29,7 +31,6 @@ import * as TicketList from '@o2s/blocks.ticket-list/frontend';
 import * as TickeRecent from '@o2s/blocks.ticket-recent/frontend';
 import * as TicketSummary from '@o2s/blocks.ticket-summary/frontend';
 import * as UserAccount from '@o2s/blocks.user-account/frontend';
-import * as OrderConfirmation from '@o2s/blocks.order-confirmation/frontend';
 // BLOCK IMPORT
 import { getLocale } from 'next-intl/server';
 import { draftMode } from 'next/headers';
@@ -151,6 +152,8 @@ const renderBlock = (typename: string, blockProps: BlockProps) => {
             return <RecommendedProducts.Renderer {...blockProps} />;
         case 'OrderConfirmationBlock':
             return <OrderConfirmation.Renderer {...blockProps} />;
+        case 'KpisBlock':
+            return <Kpis.Renderer {...blockProps} />;
         // BLOCK REGISTER
         default:
             return null;

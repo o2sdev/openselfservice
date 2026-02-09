@@ -8,9 +8,11 @@ import * as Category from '@o2s/blocks.category/api-harmonization';
 import * as Faq from '@o2s/blocks.faq/api-harmonization';
 import * as FeaturedServiceList from '@o2s/blocks.featured-service-list/api-harmonization';
 import * as BlockInvoiceList from '@o2s/blocks.invoice-list/api-harmonization';
+import * as Kpis from '@o2s/blocks.kpis/api-harmonization';
 import * as NotificationDetails from '@o2s/blocks.notification-details/api-harmonization';
 import * as NotificationList from '@o2s/blocks.notification-list/api-harmonization';
 import * as NotificationSummary from '@o2s/blocks.notification-summary/api-harmonization';
+import * as OrderConfirmation from '@o2s/blocks.order-confirmation/api-harmonization';
 import * as OrderDetails from '@o2s/blocks.order-details/api-harmonization';
 import * as OrderList from '@o2s/blocks.order-list/api-harmonization';
 import * as OrdersSummary from '@o2s/blocks.orders-summary/api-harmonization';
@@ -29,7 +31,6 @@ import * as TicketRecent from '@o2s/blocks.ticket-recent/api-harmonization';
 import * as TicketSummary from '@o2s/blocks.ticket-summary/api-harmonization';
 import * as UserAccount from '@o2s/blocks.user-account/api-harmonization';
 
-import * as OrderConfirmation from '@o2s/blocks.order-confirmation/api-harmonization';
 // BLOCK IMPORT
 
 export class Init {
@@ -81,6 +82,7 @@ export class PageData {
 
 export type Blocks =
     // BLOCK REGISTER
+    | Kpis.Model.KpisBlock['__typename']
     | OrderConfirmation.Model.OrderConfirmationBlock['__typename']
     | RecommendedProducts.Model.RecommendedProductsBlock['__typename']
     | ProductDetails.Model.ProductDetailsBlock['__typename']
