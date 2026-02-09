@@ -35,4 +35,3 @@ describe('CheckoutSummaryService', () => {
         expect(cmsService).toBeDefined();
     });
 });
-

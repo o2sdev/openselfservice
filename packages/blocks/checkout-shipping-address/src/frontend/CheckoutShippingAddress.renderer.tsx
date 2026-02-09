@@ -7,7 +7,11 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { CheckoutShippingAddress } from './CheckoutShippingAddress.server';
 import { CheckoutShippingAddressRendererProps } from './CheckoutShippingAddress.types';
 
-export const CheckoutShippingAddressRenderer: React.FC<CheckoutShippingAddressRendererProps> = ({ id, accessToken, routing }) => {
+export const CheckoutShippingAddressRenderer: React.FC<CheckoutShippingAddressRendererProps> = ({
+    id,
+    accessToken,
+    routing,
+}) => {
     const locale = useLocale();
 
     return (

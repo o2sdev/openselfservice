@@ -35,4 +35,3 @@ describe('CheckoutCompanyDataService', () => {
         expect(cmsService).toBeDefined();
     });
 });
-

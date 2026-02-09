@@ -5,7 +5,12 @@ import React from 'react';
 
 import { CheckoutSummaryPureProps } from './CheckoutSummary.types';
 
-export const CheckoutSummaryPure: React.FC<CheckoutSummaryPureProps> = ({ locale, accessToken, routing, ...component }) => {
+export const CheckoutSummaryPure: React.FC<CheckoutSummaryPureProps> = ({
+    locale,
+    accessToken,
+    routing,
+    ...component
+}) => {
     const { Link: LinkComponent } = createNavigation(routing);
 
     return (

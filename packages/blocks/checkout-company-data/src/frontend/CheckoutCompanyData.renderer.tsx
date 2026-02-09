@@ -7,7 +7,11 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { CheckoutCompanyData } from './CheckoutCompanyData.server';
 import { CheckoutCompanyDataRendererProps } from './CheckoutCompanyData.types';
 
-export const CheckoutCompanyDataRenderer: React.FC<CheckoutCompanyDataRendererProps> = ({ id, accessToken, routing }) => {
+export const CheckoutCompanyDataRenderer: React.FC<CheckoutCompanyDataRendererProps> = ({
+    id,
+    accessToken,
+    routing,
+}) => {
     const locale = useLocale();
 
     return (

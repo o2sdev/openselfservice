@@ -1,4 +1,5 @@
 import { CMS } from '@o2s/configs.integrations';
+
 import { Models } from '@o2s/utils.api-harmonization';
 
 export class CheckoutShippingAddressBlock extends Models.Block.Block {

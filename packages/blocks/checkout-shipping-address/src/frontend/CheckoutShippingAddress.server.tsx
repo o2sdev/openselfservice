@@ -10,7 +10,12 @@ export const CheckoutShippingAddressDynamic = dynamic(() =>
     import('./CheckoutShippingAddress.client').then((module) => module.CheckoutShippingAddressPure),
 );
 
-export const CheckoutShippingAddress: React.FC<CheckoutShippingAddressProps> = async ({ id, accessToken, locale, routing }) => {
+export const CheckoutShippingAddress: React.FC<CheckoutShippingAddressProps> = async ({
+    id,
+    accessToken,
+    locale,
+    routing,
+}) => {
     let data: Model.CheckoutShippingAddressBlock;
     try {
         data = await sdk.blocks.getCheckoutShippingAddress(
@@ -25,5 +30,7 @@ export const CheckoutShippingAddress: React.FC<CheckoutShippingAddressProps> = a
         return null;
     }
 
-    return <CheckoutShippingAddressDynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />;
+    return (
+        <CheckoutShippingAddressDynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />
+    );
 };

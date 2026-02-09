@@ -5,7 +5,12 @@ import React from 'react';
 
 import { CheckoutShippingAddressPureProps } from './CheckoutShippingAddress.types';
 
-export const CheckoutShippingAddressPure: React.FC<CheckoutShippingAddressPureProps> = ({ locale, accessToken, routing, ...component }) => {
+export const CheckoutShippingAddressPure: React.FC<CheckoutShippingAddressPureProps> = ({
+    locale,
+    accessToken,
+    routing,
+    ...component
+}) => {
     const { Link: LinkComponent } = createNavigation(routing);
 
     return (
