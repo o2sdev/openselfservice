@@ -53,6 +53,7 @@ import * as TicketRecent from '@o2s/blocks.ticket-recent/api-harmonization';
 import * as TicketSummary from '@o2s/blocks.ticket-summary/api-harmonization';
 import * as UserAccount from '@o2s/blocks.user-account/api-harmonization';
 
+import * as OrderConfirmation from '@o2s/blocks.order-confirmation/api-harmonization';
 // BLOCK IMPORT
 
 import { AppConfig } from './app.config';
@@ -143,6 +144,7 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
         TicketSummary.Module.register(AppConfig),
         ProductDetails.Module.register(AppConfig),
         RecommendedProducts.Module.register(AppConfig),
+        OrderConfirmation.Module.register(AppConfig),
         // BLOCK REGISTER
     ],
     providers: [

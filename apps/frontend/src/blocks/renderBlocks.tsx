@@ -29,6 +29,7 @@ import * as TicketList from '@o2s/blocks.ticket-list/frontend';
 import * as TickeRecent from '@o2s/blocks.ticket-recent/frontend';
 import * as TicketSummary from '@o2s/blocks.ticket-summary/frontend';
 import * as UserAccount from '@o2s/blocks.user-account/frontend';
+import * as OrderConfirmation from '@o2s/blocks.order-confirmation/frontend';
 // BLOCK IMPORT
 import { getLocale } from 'next-intl/server';
 import { draftMode } from 'next/headers';
@@ -148,6 +149,8 @@ const renderBlock = (typename: string, blockProps: BlockProps) => {
             return <ProductDetails.Renderer {...blockProps} />;
         case 'RecommendedProductsBlock':
             return <RecommendedProducts.Renderer {...blockProps} />;
+        case 'OrderConfirmationBlock':
+            return <OrderConfirmation.Renderer {...blockProps} />;
         // BLOCK REGISTER
         default:
             return null;
