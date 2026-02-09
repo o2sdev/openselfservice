@@ -13,6 +13,7 @@ import {
     BillingAccounts,
     CMS,
     Cache,
+    Carts,
     Invoices,
     Notifications,
     Orders,
@@ -79,6 +80,7 @@ export const ArticlesBaseModule = Articles.Module.register(AppConfig);
 export const SearchBaseModule = Search.Module.register(AppConfig);
 export const ProductsBaseModule = Products.Module.register(AppConfig);
 export const OrdersBaseModule = Orders.Module.register(AppConfig);
+export const CartsBaseModule = Carts.Module.register(AppConfig);
 export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
 
 @Module({
@@ -106,6 +108,7 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
         SearchBaseModule,
         ProductsBaseModule,
         OrdersBaseModule,
+        CartsBaseModule,
         AuthModuleBaseModule,
 
         PageModule.register(AppConfig),

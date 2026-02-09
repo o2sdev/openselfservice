@@ -6,6 +6,7 @@ import {
     BillingAccounts,
     CMS,
     Cache,
+    Carts,
     Invoices,
     Notifications,
     Orders,
@@ -96,6 +97,12 @@ export interface ApiConfig {
             name: string;
             service: typeof Orders.Service;
             controller?: typeof Orders.Controller;
+            imports?: Type[];
+        };
+        carts: {
+            name: string;
+            service: typeof Carts.Service;
+            controller?: typeof Carts.Controller;
             imports?: Type[];
         };
         auth: {

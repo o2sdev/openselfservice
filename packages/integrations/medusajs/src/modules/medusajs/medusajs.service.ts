@@ -37,7 +37,8 @@ export class MedusaJsService {
 
         this._sdk = new Medusa({
             baseUrl: this._medusaBaseUrl,
-            debug: this.logLevel === 'debug',
+            // debug: this.logLevel === 'debug',
+            debug: true,
             publishableKey: this._medusaPublishableApiKey,
             apiKey: this._medusaAdminApiKey,
         });

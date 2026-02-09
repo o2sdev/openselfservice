@@ -2,6 +2,7 @@ export * as Articles from './articles';
 export * as Auth from './auth';
 export * as BillingAccounts from './billing-accounts';
 export * as Cache from './cache';
+export * as Carts from './carts';
 export * as CMS from './cms';
 export * as Invoices from './invoices';
 export * as Notifications from './notifications';

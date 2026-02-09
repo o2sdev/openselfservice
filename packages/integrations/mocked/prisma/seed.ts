@@ -15,7 +15,7 @@ async function main() {
             name: 'Jane Doe',
             email: 'jane@example.com',
             password: await hash('admin', 10),
-            defaultCustomerId: 'cust-001', // Acme Corp - full admin permissions
+            defaultCustomerId: 'cus_01KGSR4NSX1S7Y48E6MVWPPVDP', // Acme Corp - full admin permissions
         },
         {
             id: 'user-100',
