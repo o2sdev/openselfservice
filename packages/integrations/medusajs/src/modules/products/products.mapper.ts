@@ -17,37 +17,23 @@ const slugify = (text: string): string => {
         .replace(/^-+|-+$/g, ''); // Trim dashes from start/end
 };
 
-// Get variant slug from options (e.g., "S", "M") or fall back to title
-const getVariantSlug = (
-    variantOptions?: Array<{ value?: string }> | null,
-    variantTitle?: string | null,
-): string | null => {
-    // Prefer first option value (like size "S", "M", "L")
-    if (variantOptions && Array.isArray(variantOptions) && variantOptions.length > 0) {
-        const firstOptionValue = variantOptions[0]?.value;
-        if (firstOptionValue) {
-            return slugify(firstOptionValue);
-        }
-    }
-    // Fall back to title
-    if (variantTitle) {
-        return slugify(variantTitle);
+// Generate variant slug from SKU
+const getVariantSlug = (variantSku?: string | null): string | null => {
+    if (variantSku) {
+        return slugify(variantSku);
     }
     return null;
 };
 
 // Generate SEO-friendly product link
-// Uses handle if available, otherwise generates slug from product title
+// Uses handle if available, otherwise falls back to product ID
 const generateProductLink = (
     productHandle: string | null | undefined,
-    productTitle: string | null | undefined,
     productId: string,
-    variantOptions?: Array<{ value?: string }> | null,
-    variantTitle?: string | null,
+    variantSku?: string | null,
 ): string => {
-    // Use handle, or generate slug from title, or fall back to ID
-    const slug = productHandle || (productTitle ? slugify(productTitle) : null) || productId;
-    const variantSlug = getVariantSlug(variantOptions, variantTitle);
+    const slug = productHandle || productId;
+    const variantSlug = getVariantSlug(variantSku);
     if (variantSlug) {
         return `/products/${slug}/${variantSlug}`;
     }
@@ -142,7 +128,7 @@ const mapVariantOptions = (variants: HttpTypes.AdminProductVariant[]): Products.
         return {
             id: v.id,
             title,
-            slug: getVariantSlug(v.options as Array<{ value?: string }> | undefined, v.title) || v.id,
+            slug: getVariantSlug(v.sku) || v.id,
         };
     });
 };
@@ -196,13 +182,7 @@ export const mapProduct = (
                 (price?.currency_code?.toUpperCase() as Models.Price.Currency) ||
                 (defaultCurrency as Models.Price.Currency),
         },
-        link: generateProductLink(
-            product?.handle,
-            product?.title,
-            product?.id || '',
-            productVariant.options as Array<{ value?: string }> | undefined,
-            productVariant.title,
-        ),
+        link: generateProductLink(product?.handle, product?.id || '', productVariant.sku),
         type: mapProductType(product?.type || undefined),
         category: product?.categories?.[0]?.name || '',
         tags:
@@ -255,13 +235,7 @@ export const mapProducts = (
                         (price?.currency_code?.toUpperCase() as Models.Price.Currency) ||
                         (defaultCurrency as Models.Price.Currency),
                 },
-                link: generateProductLink(
-                    product.handle,
-                    product.title,
-                    product.id,
-                    firstVariant?.options as Array<{ value?: string }> | undefined,
-                    firstVariant?.title,
-                ),
+                link: generateProductLink(product.handle, product.id, firstVariant?.sku),
                 type: mapProductType(product?.type || undefined),
                 category: product.categories?.[0]?.name || '',
                 tags:
@@ -304,13 +278,7 @@ export const mapRelatedProducts = (data: RelatedProductsResponse, defaultCurrenc
                         (price?.currency_code?.toUpperCase() as Models.Price.Currency) ||
                         (defaultCurrency as Models.Price.Currency),
                 },
-                link: generateProductLink(
-                    product?.handle,
-                    product?.title,
-                    product?.id || '',
-                    undefined, // Related products API doesn't include variant options
-                    targetProduct.title,
-                ),
+                link: generateProductLink(product?.handle, product?.id || '', targetProduct.sku),
                 type: mapProductType(product?.type || undefined),
                 category: product?.categories?.[0]?.name || '',
                 tags:

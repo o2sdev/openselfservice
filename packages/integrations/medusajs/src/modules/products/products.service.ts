@@ -112,31 +112,18 @@ export class ProductsService extends Products.Service {
                     throw new Error(`No variants found for product with handle "${handle}"`);
                 }
 
-                // Find variant by slug - check title and option values
+                // Find variant by SKU slug
                 let variant = product.variants[0]!;
                 if (variantSlug) {
-                    const matchingVariant = product.variants.find((v: HttpTypes.AdminProductVariant) => {
-                        // Check if title matches
-                        if (v.title && this.slugify(v.title) === variantSlug) {
-                            return true;
-                        }
-                        // Check if any option value matches (e.g., size "S", "M", "L")
-                        if (v.options && Array.isArray(v.options)) {
-                            return v.options.some(
-                                (opt: { value?: string }) => opt.value && this.slugify(opt.value) === variantSlug,
-                            );
-                        }
-                        return false;
-                    });
+                    const matchingVariant = product.variants.find(
+                        (v: HttpTypes.AdminProductVariant) => v.sku && this.slugify(v.sku) === variantSlug,
+                    );
                     if (matchingVariant) {
                         variant = matchingVariant;
                     } else {
-                        const availableSlugs = product.variants.map((v: HttpTypes.AdminProductVariant) => {
-                            const optSlug = v.options
-                                ?.map((o: { value?: string }) => o.value && this.slugify(o.value))
-                                .filter(Boolean);
-                            return optSlug?.length ? optSlug.join(',') : v.title ? this.slugify(v.title) : v.id;
-                        });
+                        const availableSlugs = product.variants.map((v: HttpTypes.AdminProductVariant) =>
+                            v.sku ? this.slugify(v.sku) : v.id,
+                        );
                         this.logger.warn(
                             `Variant slug "${variantSlug}" not found for product "${handle}" (${product.id}). Available: [${availableSlugs.join(', ')}]. Falling back to first variant.`,
                         );
