@@ -1,7 +1,8 @@
-import { CMS } from '@o2s/configs.integrations';
-import { Models } from '@o2s/utils.api-harmonization';
 import { Injectable } from '@nestjs/common';
+import { CMS } from '@o2s/configs.integrations';
 import { Observable, forkJoin, map } from 'rxjs';
+
+import { Models } from '@o2s/utils.api-harmonization';
 
 import { Auth } from '@o2s/framework/modules';
 
@@ -17,10 +18,7 @@ export class CartService {
         // private readonly authService: Auth.Service,
     ) {}
 
-    getCartBlock(
-        query: GetCartBlockQuery,
-        headers: Models.Headers.AppHeaders,
-    ): Observable<CartBlock> {
+    getCartBlock(query: GetCartBlockQuery, headers: Models.Headers.AppHeaders): Observable<CartBlock> {
         const cms = this.cmsService.getCartBlock({ ...query, locale: headers['x-locale'] });
 
         return forkJoin([cms]).pipe(

@@ -6,11 +6,9 @@ import { sdk } from '../sdk';
 
 import { CartProps } from './Cart.types';
 
-export const CartDynamic = dynamic(() =>
-    import('./Cart.client').then((module) => module.CartPure),
-);
+export const CartDynamic = dynamic(() => import('./Cart.client').then((module) => module.CartPure));
 
-export const Cart: React.FC<CartProps> = async ({ id, accessToken, locale, routing }) => {
+export const Cart: React.FC<CartProps> = async ({ id, accessToken, locale, routing, hasPriority }) => {
     let data: Model.CartBlock;
     try {
         data = await sdk.blocks.getCart(
@@ -25,5 +23,14 @@ export const Cart: React.FC<CartProps> = async ({ id, accessToken, locale, routi
         return null;
     }
 
-    return <CartDynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />;
+    return (
+        <CartDynamic
+            {...data}
+            id={id}
+            accessToken={accessToken}
+            locale={locale}
+            routing={routing}
+            hasPriority={hasPriority}
+        />
+    );
 };

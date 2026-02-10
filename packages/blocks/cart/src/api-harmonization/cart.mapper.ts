@@ -1,13 +1,7 @@
-import { CMS } from '@o2s/configs.integrations';
+import { getCartBlockMock } from './cart.mock';
+import type { CartBlock } from './cart.model';
 
-import { CartBlock } from './cart.model';
-
-export const mapCart = (
-    cms: CMS.Model.CartBlock.CartBlock,
-    _locale: string,
-): CartBlock => {
-    return {
-        __typename: 'CartBlock',
-        id: cms.id,
-    };
+/** Input from CMS – minimal block id. Uses mock until API integration provides full flat CartBlock. */
+export const mapCart = (cms: { id: string }, locale: string): CartBlock => {
+    return getCartBlockMock(cms.id, locale);
 };

@@ -7,10 +7,11 @@ export interface CartProps {
     accessToken?: string;
     locale: string;
     routing: ReturnType<typeof defineRouting>;
+    hasPriority?: boolean;
 }
 
 export type CartPureProps = CartProps & Model.CartBlock;
 
-export type CartRendererProps = Omit<CartProps, ''> & {
+export type CartRendererProps = Omit<CartProps, 'locale'> & {
     slug: string[];
 };
