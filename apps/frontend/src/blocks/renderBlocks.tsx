@@ -37,6 +37,7 @@ import * as TicketList from '@o2s/blocks.ticket-list/frontend';
 import * as TickeRecent from '@o2s/blocks.ticket-recent/frontend';
 import * as TicketSummary from '@o2s/blocks.ticket-summary/frontend';
 import * as UserAccount from '@o2s/blocks.user-account/frontend';
+import * as Cart from '@o2s/blocks.cart/frontend';
 // BLOCK IMPORT
 import { getLocale } from 'next-intl/server';
 import { draftMode } from 'next/headers';
@@ -172,6 +173,8 @@ const renderBlock = (typename: string, blockProps: BlockProps) => {
             return <CheckoutShippingAddress.Renderer {...blockProps} />;
         case 'CheckoutSummaryBlock':
             return <CheckoutSummary.Renderer {...blockProps} />;
+        case 'CartBlock':
+            return <Cart.Renderer {...blockProps} />;
         // BLOCK REGISTER
         default:
             return null;

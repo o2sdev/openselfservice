@@ -1,6 +1,5 @@
-import { HttpModule } from '@nestjs/axios';
+import { CMS } from '@o2s/configs.integrations';
 import { DynamicModule, Module } from '@nestjs/common';
-import { Auth, CMS, Products } from '@o2s/configs.integrations';
 
 import * as Framework from '@o2s/framework/modules';
 
@@ -18,18 +17,10 @@ export class CartBlockModule {
                     provide: CMS.Service,
                     useExisting: Framework.CMS.Service,
                 },
-                {
-                    provide: Products.Service,
-                    useExisting: Framework.Products.Service,
-                },
-                {
-                    provide: Auth.Service,
-                    useExisting: Framework.Auth.Service,
-                },
             ],
             controllers: [CartController],
-            imports: [HttpModule],
             exports: [CartService],
         };
     }
 }
+

@@ -1,29 +1,13 @@
+import { CMS } from '@o2s/configs.integrations';
+
 import { CartBlock } from './cart.model';
 
-/**
- * mapCart
- *
- * Placeholder mapper for the cart block.
- * TODO: Implement real mapping from backend cart response to CartBlock once
- *       cart APIs and contracts are available.
- */
-export const mapCart = (): CartBlock => {
-    const block = new CartBlock();
-    block.title = 'Cart';
-    block.subtitle = undefined;
-    block.labels = {
-        itemTotal: 'Item total',
+export const mapCart = (
+    cms: CMS.Model.CartBlock.CartBlock,
+    _locale: string,
+): CartBlock => {
+    return {
+        __typename: 'CartBlock',
+        id: cms.id,
     };
-    block.summary = {
-        title: 'Summary',
-        subtotalLabel: 'Subtotal',
-        taxLabel: 'Tax',
-        totalLabel: 'Total',
-    };
-    block.empty = {
-        title: 'Your cart is empty',
-        description: 'Add some products to your cart to see them here.',
-    };
-
-    return block;
 };

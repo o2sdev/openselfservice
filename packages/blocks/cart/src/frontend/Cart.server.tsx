@@ -1,16 +1,29 @@
+import dynamic from 'next/dynamic';
 import React from 'react';
 
-import { CartClient } from './Cart.client';
+import type { Model } from '../api-harmonization/cart.client';
+import { sdk } from '../sdk';
+
 import { CartProps } from './Cart.types';
 
-/**
- * CartServer
- *
- * Server-side entry for the cart block.
- * Currently it only forwards props to the client component.
- * TODO: When a real cart API is available, fetch the initial cart state here and
- *       pass it down as part of the block props.
- */
-export const CartServer: React.FC<CartProps> = async (props) => {
-    return <CartClient {...props} />;
+export const CartDynamic = dynamic(() =>
+    import('./Cart.client').then((module) => module.CartPure),
+);
+
+export const Cart: React.FC<CartProps> = async ({ id, accessToken, locale, routing }) => {
+    let data: Model.CartBlock;
+    try {
+        data = await sdk.blocks.getCart(
+            {
+                id,
+            },
+            { 'x-locale': locale },
+            accessToken,
+        );
+    } catch (error) {
+        console.error('Error fetching Cart block', error);
+        return null;
+    }
+
+    return <CartDynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />;
 };

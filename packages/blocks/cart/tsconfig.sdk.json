@@ -12,7 +12,6 @@
     },
     "include": [
         "src/sdk",
-        "src/api-harmonization/cart.url.ts",
         "src/api-harmonization/cart.client.ts",
         "src/api-harmonization/cart.model.ts",
         "src/api-harmonization/cart.request.ts"

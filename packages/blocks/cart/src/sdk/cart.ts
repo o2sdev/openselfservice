@@ -3,8 +3,7 @@ import { Utils } from '@o2s/utils.frontend';
 
 import { Sdk } from '@o2s/framework/sdk';
 
-import { Model, Request } from '../api-harmonization/cart.client';
-import { URL } from '../api-harmonization/cart.url';
+import { Model, Request, URL } from '../api-harmonization/cart.client';
 
 const API_URL = URL;
 

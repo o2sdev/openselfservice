@@ -8,7 +8,7 @@
         "composite": true,
         "declaration": true,
         "declarationMap": true,
-        "baseUrl": "./src"
+        "baseUrl": "./src",
     },
     "references": [
         { "path": "./tsconfig.frontend.json" },

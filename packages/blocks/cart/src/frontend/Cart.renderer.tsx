@@ -1,16 +1,28 @@
-import React from 'react';
+import { useLocale } from 'next-intl';
+import React, { Suspense } from 'react';
 
-import { CartClient } from './Cart.client';
+import { Container } from '@o2s/ui/components/Container';
+import { Loading } from '@o2s/ui/components/Loading';
+
+import { Cart } from './Cart.server';
 import { CartRendererProps } from './Cart.types';
 
-/**
- * CartRenderer
- *
- * Renderer used by the page/block rendering pipeline.
- * For now it simply forwards props (without `slug`) to the `CartClient`.
- * TODO: Integrate with the standard renderBlocks pipeline when cart becomes
- *       a first-class block type in the CMS.
- */
-export const CartRenderer: React.FC<CartRendererProps> = ({ slug, ...props }) => {
-    return <CartClient {...props} />;
+export const CartRenderer: React.FC<CartRendererProps> = ({ id, accessToken, routing }) => {
+    const locale = useLocale();
+
+    return (
+        <Suspense
+            key={id}
+            fallback={
+                <>
+                    <Loading bars={1} />
+                    <Container variant="narrow">
+                        <Loading bars={8} />
+                    </Container>
+                </>
+            }
+        >
+            <Cart id={id} accessToken={accessToken} locale={locale} routing={routing} />
+        </Suspense>
+    );
 };

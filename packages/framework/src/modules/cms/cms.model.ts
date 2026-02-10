@@ -54,4 +54,5 @@ export * as CheckoutCompanyDataBlock from './models/blocks/checkout-company-data
 export * as CheckoutNotesBlock from './models/blocks/checkout-notes.model';
 export * as CheckoutShippingAddressBlock from './models/blocks/checkout-shipping-address.model';
 export * as CheckoutSummaryBlock from './models/blocks/checkout-summary.model';
+export * as CartBlock from './models/blocks/cart.model';
 // BLOCK IMPORT

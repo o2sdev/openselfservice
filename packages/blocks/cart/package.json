@@ -1,9 +1,9 @@
 {
     "name": "@o2s/blocks.cart",
-    "version": "0.1.0",
+    "version": "0.0.1",
     "private": false,
     "license": "MIT",
-    "description": "Block for displaying and managing the shopping cart summary.",
+    "description": "A simple block displaying static content in the form of an Cart.",
     "exports": {
         "./api-harmonization": "./dist/api-harmonization/api-harmonization/index.js",
         "./frontend": "./dist/frontend/frontend/index.js",
@@ -16,7 +16,8 @@
     "scripts": {
         "build": "tsc --build tsconfig.json --preserveWatchOutput && tsc-alias",
         "test": "vitest run",
-        "lint": "tsc --noEmit && eslint \"src/**/*.{ts,tsx}\" --fix --max-warnings=0",
+        "test:watch": "vitest",
+        "lint": "tsc --noEmit && eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
@@ -35,8 +36,8 @@
         "@o2s/typescript-config": "*",
         "@o2s/vitest-config": "*",
         "concurrently": "^9.2.1",
-        "eslint": "^9.39.2",
-        "prettier": "^3.8.1",
+        "eslint": "^9.39.1",
+        "prettier": "^3.6.2",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"
     },
@@ -46,8 +47,8 @@
         "react": "^19",
         "react-dom": "^19",
         "tailwindcss": "^4",
-        "@nestjs/axios": "^4",
-        "@nestjs/common": "^11",
+        "@nestjs/axios": "^4.0.1",
+        "@nestjs/common": "^11.0.16",
         "@nestjs/config": "^4.0.2",
         "@nestjs/core": "^11",
         "rxjs": "^7",

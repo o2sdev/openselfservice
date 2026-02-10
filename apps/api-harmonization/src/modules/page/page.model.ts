@@ -37,6 +37,7 @@ import * as TicketRecent from '@o2s/blocks.ticket-recent/api-harmonization';
 import * as TicketSummary from '@o2s/blocks.ticket-summary/api-harmonization';
 import * as UserAccount from '@o2s/blocks.user-account/api-harmonization';
 
+import * as Cart from '@o2s/blocks.cart/api-harmonization';
 // BLOCK IMPORT
 
 export class Init {
@@ -88,6 +89,7 @@ export class PageData {
 
 export type Blocks =
     // BLOCK REGISTER
+    | Cart.Model.CartBlock['__typename']
     | CheckoutSummary.Model.CheckoutSummaryBlock['__typename']
     | CheckoutShippingAddress.Model.CheckoutShippingAddressBlock['__typename']
     | CheckoutNotes.Model.CheckoutNotesBlock['__typename']

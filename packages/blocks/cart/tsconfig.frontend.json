@@ -17,7 +17,6 @@
         "src/api-harmonization/cart.client.ts",
         "src/api-harmonization/cart.model.ts",
         "src/api-harmonization/cart.request.ts",
-        "src/api-harmonization/cart.url.ts",
         "src/sdk"
     ]
 }
