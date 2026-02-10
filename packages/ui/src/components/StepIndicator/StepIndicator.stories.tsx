@@ -16,6 +16,7 @@ type Story = StoryObj<typeof StepIndicator>;
 
 export const Default: Story = {
     args: {
-        className: 'StepIndicator',
+        steps: ['Dane firmy', 'Dostawa', 'Płatność', 'Podsumowanie'],
+        currentStep: 2,
     },
 };

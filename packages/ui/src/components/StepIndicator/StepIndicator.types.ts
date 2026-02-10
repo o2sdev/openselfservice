@@ -1,3 +1,4 @@
 export interface StepIndicatorProps {
-    className?: string;
+    steps: string[];
+    currentStep: number;
 }
