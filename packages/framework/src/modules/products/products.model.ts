@@ -15,10 +15,17 @@ export type DetailedSpec = {
     category?: string;
 };
 
+export type ProductOptionGroup = {
+    id: string;
+    title: string;
+    values: string[];
+};
+
 export type ProductVariantOption = {
     id: string;
     title: string;
     slug: string;
+    options?: Record<string, string>;
 };
 
 export class Product {
@@ -42,6 +49,7 @@ export class Product {
     keySpecs?: KeySpecItem[];
     detailedSpecs?: DetailedSpec[];
     location?: string;
+    optionGroups?: ProductOptionGroup[];
     variants?: ProductVariantOption[];
 }
 

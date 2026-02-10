@@ -121,16 +121,57 @@ const mapVariantToDetailedSpecs = (variant: HttpTypes.AdminProductVariant): Prod
     return specs;
 };
 
+// Map Medusa variant options to Record<optionId, value>
+type MedusaOptionValue = { option_id?: string; value?: string };
+const getVariantOptionsMap = (variant: HttpTypes.AdminProductVariant): Record<string, string> => {
+    const options = variant.options as MedusaOptionValue[] | undefined;
+    if (!options || !Array.isArray(options)) {
+        return {};
+    }
+    return Object.fromEntries(
+        options.filter((o) => o.option_id && o.value != null).map((o) => [o.option_id!, o.value!]),
+    );
+};
+
 // Map a list of Medusa variants to ProductVariantOption[]
 const mapVariantOptions = (variants: HttpTypes.AdminProductVariant[]): Products.Model.ProductVariantOption[] => {
     return variants.map((v) => {
         const title = getVariantTitle(v);
+        const optionsMap = getVariantOptionsMap(v);
         return {
             id: v.id,
             title,
             slug: getVariantSlug(v.sku) || v.id,
+            options: Object.keys(optionsMap).length > 0 ? optionsMap : undefined,
         };
     });
+};
+
+// Extract option groups from variants (Size, Color, etc.) with unique values per group
+const mapOptionGroups = (variants: HttpTypes.AdminProductVariant[]): Products.Model.ProductOptionGroup[] => {
+    const groupsById = new Map<string, { title: string; values: Set<string> }>();
+
+    for (const variant of variants) {
+        const options = variant.options as
+            | { option_id?: string; value?: string; option?: { title?: string } }[]
+            | undefined;
+        if (!options || !Array.isArray(options)) continue;
+
+        for (const opt of options) {
+            if (!opt.option_id || opt.value == null) continue;
+            const title = opt.option?.title ?? opt.option_id;
+            if (!groupsById.has(opt.option_id)) {
+                groupsById.set(opt.option_id, { title, values: new Set() });
+            }
+            groupsById.get(opt.option_id)!.values.add(opt.value);
+        }
+    }
+
+    return Array.from(groupsById.entries()).map(([id, { title, values }]) => ({
+        id,
+        title,
+        values: Array.from(values),
+    }));
 };
 
 // Get a display title for a variant from its options or title
@@ -192,6 +233,7 @@ export const mapProduct = (
             })) || [],
         detailedSpecs: detailedSpecs.length > 0 ? detailedSpecs : undefined,
         keySpecs: mapKeySpecsFromMetadata(productVariant),
+        optionGroups: allVariants ? mapOptionGroups(allVariants) : undefined,
         variants: allVariants && allVariants.length > 1 ? mapVariantOptions(allVariants) : undefined,
     };
 };

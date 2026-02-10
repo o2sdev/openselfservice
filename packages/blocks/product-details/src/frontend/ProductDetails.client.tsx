@@ -2,7 +2,9 @@
 
 import { useTranslations } from 'next-intl';
 import { createNavigation } from 'next-intl/navigation';
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
+
+import type { Products } from '@o2s/framework/modules';
 
 import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
 import { Price } from '@o2s/ui/components/Price';
@@ -18,6 +20,41 @@ import { Typography } from '@o2s/ui/elements/typography';
 
 import { ProductDetailsPureProps } from './ProductDetails.types';
 
+function resolveVariantSlug(
+    variants: Products.Model.ProductVariantOption[],
+    selectedOptions: Record<string, string>,
+    changedOptionId: string,
+): string | null {
+    const exact = variants.find(
+        (v) => v.options && Object.entries(selectedOptions).every(([optId, val]) => v.options![optId] === val),
+    );
+    if (exact) return exact.slug;
+
+    const withChanged = variants.find(
+        (v) => v.options && v.options[changedOptionId] === selectedOptions[changedOptionId],
+    );
+    return withChanged?.slug ?? null;
+}
+
+/** Returns values available for a group given current selection (excluding this group). */
+function getAvailableValuesForGroup(
+    groupId: string,
+    selectedOptions: Record<string, string>,
+    variants: Products.Model.ProductVariantOption[],
+): Set<string> {
+    const available = new Set<string>();
+    for (const v of variants) {
+        if (!v.options) continue;
+        const matchesOtherOptions = Object.entries(selectedOptions).every(
+            ([optId, val]) => optId === groupId || v.options![optId] === val,
+        );
+        if (matchesOtherOptions && v.options[groupId]) {
+            available.add(v.options[groupId]);
+        }
+    }
+    return available;
+}
+
 export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
     locale,
     routing,
@@ -32,17 +69,59 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
 
     const keySpecs = product && product.keySpecs ? product.keySpecs : [];
 
-    const currentVariantSlug = product.variants?.find((v) => v.id === product.variantId)?.slug;
+    const currentVariant = product.variants?.find((v) => v.id === product.variantId);
+    const currentVariantSlug = currentVariant?.slug;
 
-    const handleVariantChange = (slug: string) => {
-        const segments = product.link.split('/');
-        if (currentVariantSlug && segments[segments.length - 1] === currentVariantSlug) {
-            segments[segments.length - 1] = slug;
-        } else {
-            segments.push(slug);
+    const selectedOptions = useMemo(() => {
+        const opts = currentVariant?.options ?? {};
+        if (product.optionGroups?.length) {
+            const merged = { ...opts };
+            for (const group of product.optionGroups) {
+                if (merged[group.id] == null) {
+                    merged[group.id] = group.values[0] ?? '';
+                }
+            }
+            return merged;
         }
-        router.push(segments.join('/'));
-    };
+        return opts;
+    }, [currentVariant?.options, product.optionGroups]);
+
+    const handleVariantChange = useCallback(
+        (slug: string) => {
+            const segments = product.link.split('/');
+            if (currentVariantSlug && segments[segments.length - 1] === currentVariantSlug) {
+                segments[segments.length - 1] = slug;
+            } else {
+                segments.push(slug);
+            }
+            router.push(segments.join('/'));
+        },
+        [product.link, currentVariantSlug, router],
+    );
+
+    const handleOptionChange = useCallback(
+        (optionId: string, value: string) => {
+            const variants = product.variants ?? [];
+            const newOptions = { ...selectedOptions, [optionId]: value };
+            const variantSlug = resolveVariantSlug(variants, newOptions, optionId);
+            if (variantSlug) {
+                handleVariantChange(variantSlug);
+            }
+        },
+        [product.variants, selectedOptions, handleVariantChange],
+    );
+
+    const useOptionGroups =
+        product.optionGroups && product.optionGroups.length > 0 && product.variants && product.variants.length > 1;
+
+    const availableValuesPerGroup = useMemo(() => {
+        const variants = product.variants ?? [];
+        const map = new Map<string, Set<string>>();
+        for (const group of product.optionGroups ?? []) {
+            map.set(group.id, getAvailableValuesForGroup(group.id, selectedOptions, variants));
+        }
+        return map;
+    }, [product.optionGroups, product.variants, selectedOptions]);
 
     return (
         <div className="w-full flex flex-col gap-8 md:gap-12">
@@ -73,22 +152,61 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                         )}
 
                         {product.variants && product.variants.length > 1 && (
-                            <div className="flex flex-col gap-2">
-                                <Typography className="text-sm text-muted-foreground">
-                                    {labels.variantLabel || 'Variant'}
-                                </Typography>
-                                <Select value={currentVariantSlug} onValueChange={handleVariantChange}>
-                                    <SelectTrigger>
-                                        <SelectValue />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        {product.variants.map((variant) => (
-                                            <SelectItem key={variant.id} value={variant.slug}>
-                                                {variant.title}
-                                            </SelectItem>
-                                        ))}
-                                    </SelectContent>
-                                </Select>
+                            <div className="flex flex-col gap-4">
+                                {useOptionGroups ? (
+                                    product.optionGroups!.map((group) => (
+                                        <div key={group.id} className="flex flex-col gap-2">
+                                            <Typography className="text-sm text-muted-foreground">
+                                                {group.title}
+                                            </Typography>
+                                            <Select
+                                                value={selectedOptions[group.id] ?? ''}
+                                                onValueChange={(value) => handleOptionChange(group.id, value)}
+                                            >
+                                                <SelectTrigger>
+                                                    <SelectValue />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    {group.values.map((value) => {
+                                                        const isAvailable =
+                                                            availableValuesPerGroup.get(group.id)?.has(value) ?? true;
+                                                        return (
+                                                            <SelectItem
+                                                                key={value}
+                                                                value={value}
+                                                                className={
+                                                                    !isAvailable
+                                                                        ? 'opacity-50 text-muted-foreground'
+                                                                        : undefined
+                                                                }
+                                                            >
+                                                                {value}
+                                                            </SelectItem>
+                                                        );
+                                                    })}
+                                                </SelectContent>
+                                            </Select>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div className="flex flex-col gap-2">
+                                        <Typography className="text-sm text-muted-foreground">
+                                            {labels.variantLabel || 'Variant'}
+                                        </Typography>
+                                        <Select value={currentVariantSlug} onValueChange={handleVariantChange}>
+                                            <SelectTrigger>
+                                                <SelectValue />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                {product.variants.map((variant) => (
+                                                    <SelectItem key={variant.id} value={variant.slug}>
+                                                        {variant.title}
+                                                    </SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
+                                    </div>
+                                )}
                             </div>
                         )}
                     </div>
@@ -191,22 +309,61 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                         )}
 
                         {product.variants && product.variants.length > 1 && (
-                            <div className="flex flex-col gap-2">
-                                <Typography className="text-sm text-muted-foreground">
-                                    {labels.variantLabel || 'Variant'}
-                                </Typography>
-                                <Select value={currentVariantSlug} onValueChange={handleVariantChange}>
-                                    <SelectTrigger>
-                                        <SelectValue />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        {product.variants.map((variant) => (
-                                            <SelectItem key={variant.id} value={variant.slug}>
-                                                {variant.title}
-                                            </SelectItem>
-                                        ))}
-                                    </SelectContent>
-                                </Select>
+                            <div className="flex flex-col gap-4">
+                                {useOptionGroups ? (
+                                    product.optionGroups!.map((group) => (
+                                        <div key={group.id} className="flex flex-col gap-2">
+                                            <Typography className="text-sm text-muted-foreground">
+                                                {group.title}
+                                            </Typography>
+                                            <Select
+                                                value={selectedOptions[group.id] ?? ''}
+                                                onValueChange={(value) => handleOptionChange(group.id, value)}
+                                            >
+                                                <SelectTrigger>
+                                                    <SelectValue />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    {group.values.map((value) => {
+                                                        const isAvailable =
+                                                            availableValuesPerGroup.get(group.id)?.has(value) ?? true;
+                                                        return (
+                                                            <SelectItem
+                                                                key={value}
+                                                                value={value}
+                                                                className={
+                                                                    !isAvailable
+                                                                        ? 'opacity-50 text-muted-foreground'
+                                                                        : undefined
+                                                                }
+                                                            >
+                                                                {value}
+                                                            </SelectItem>
+                                                        );
+                                                    })}
+                                                </SelectContent>
+                                            </Select>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div className="flex flex-col gap-2">
+                                        <Typography className="text-sm text-muted-foreground">
+                                            {labels.variantLabel || 'Variant'}
+                                        </Typography>
+                                        <Select value={currentVariantSlug} onValueChange={handleVariantChange}>
+                                            <SelectTrigger>
+                                                <SelectValue />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                {product.variants.map((variant) => (
+                                                    <SelectItem key={variant.id} value={variant.slug}>
+                                                        {variant.title}
+                                                    </SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
+                                    </div>
+                                )}
                             </div>
                         )}
 

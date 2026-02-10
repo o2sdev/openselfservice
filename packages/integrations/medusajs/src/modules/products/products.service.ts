@@ -24,7 +24,7 @@ export class ProductsService extends Products.Service {
     // Note: handle is included by default in Medusa product response
     private readonly productListFields = '*variants,*variants.prices,*variants.options,*categories,*tags,*images';
     private readonly productDetailFields =
-        '+weight,+height,+width,+length,+material,+origin_country,+hs_code,+mid_code,+metadata,+product.metadata,+product.handle,product.*,*product.images,*product.tags,*options';
+        '+weight,+height,+width,+length,+material,+origin_country,+hs_code,+mid_code,+metadata,+product.metadata,+product.handle,product.*,*product.images,*product.tags,*options,*options.option';
 
     constructor(
         private readonly config: ConfigService,
@@ -79,9 +79,11 @@ export class ProductsService extends Products.Service {
 
     private getProductById(productId: string, variantId?: string): Observable<Products.Model.Product> {
         return from(
-            this.sdk.admin.product.retrieve(productId, { fields: '*variants,*variants.options' }).catch((error) => {
-                throw error;
-            }),
+            this.sdk.admin.product
+                .retrieve(productId, { fields: '*variants,*variants.options,*variants.options.option' })
+                .catch((error) => {
+                    throw error;
+                }),
         ).pipe(
             switchMap((response) => {
                 const product = response.product;
@@ -99,9 +101,11 @@ export class ProductsService extends Products.Service {
 
     private getProductByHandle(handle: string, variantSlug?: string): Observable<Products.Model.Product> {
         return from(
-            this.sdk.admin.product.list({ handle, limit: 1, fields: '*variants,*variants.options' }).catch((error) => {
-                throw error;
-            }),
+            this.sdk.admin.product
+                .list({ handle, limit: 1, fields: '*variants,*variants.options,*variants.options.option' })
+                .catch((error) => {
+                    throw error;
+                }),
         ).pipe(
             switchMap((response) => {
                 const product = response.products[0];
