@@ -130,6 +130,16 @@ export class ProductsService extends Products.Service {
                     });
                     if (matchingVariant) {
                         variant = matchingVariant;
+                    } else {
+                        const availableSlugs = product.variants.map((v: HttpTypes.AdminProductVariant) => {
+                            const optSlug = v.options
+                                ?.map((o: { value?: string }) => o.value && this.slugify(o.value))
+                                .filter(Boolean);
+                            return optSlug?.length ? optSlug.join(',') : v.title ? this.slugify(v.title) : v.id;
+                        });
+                        this.logger.warn(
+                            `Variant slug "${variantSlug}" not found for product "${handle}" (${product.id}). Available: [${availableSlugs.join(', ')}]. Falling back to first variant.`,
+                        );
                     }
                 }
 

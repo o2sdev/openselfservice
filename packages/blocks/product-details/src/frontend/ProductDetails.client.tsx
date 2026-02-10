@@ -35,13 +35,13 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
     const currentVariantSlug = product.variants?.find((v) => v.id === product.variantId)?.slug;
 
     const handleVariantChange = (slug: string) => {
-        // Use product.link which has the correct localized path (e.g., /produkty/PRD-004 or /products/sweatpants/s)
-        // Strip any existing variant slug if present, then append the new one
-        let baseLink = product.link;
-        if (currentVariantSlug && baseLink.endsWith(`/${currentVariantSlug}`)) {
-            baseLink = baseLink.slice(0, -(currentVariantSlug.length + 1));
+        const segments = product.link.split('/');
+        if (currentVariantSlug && segments[segments.length - 1] === currentVariantSlug) {
+            segments[segments.length - 1] = slug;
+        } else {
+            segments.push(slug);
         }
-        router.push(`${baseLink}/${slug}`);
+        router.push(segments.join('/'));
     };
 
     return (

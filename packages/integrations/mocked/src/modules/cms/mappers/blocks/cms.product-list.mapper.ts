@@ -114,7 +114,7 @@ const MOCK_PRODUCT_LIST_BLOCK_DE: CMS.Model.ProductListBlock.ProductListBlock = 
     title: 'Produkte im Katalog',
     subtitle: 'Durchsuchen Sie unseren Produktkatalog',
     detailsLabel: 'Details anzeigen',
-    detailsUrl: '/produkte/{id}',
+    detailsUrl: '/produkte/{id}?variantId={variantId}',
     fieldMapping: {
         category: {
             SOFTWARE: 'Software',
@@ -223,7 +223,7 @@ const MOCK_PRODUCT_LIST_BLOCK_PL: CMS.Model.ProductListBlock.ProductListBlock = 
     title: 'Katalog produktów',
     subtitle: 'Przeglądaj nasz katalog produktów',
     detailsLabel: 'Zobacz szczegóły',
-    detailsUrl: '/produkty/{id}',
+    detailsUrl: '/produkty/{id}?variantId={variantId}',
     fieldMapping: {
         category: {
             SOFTWARE: 'Oprogramowanie',

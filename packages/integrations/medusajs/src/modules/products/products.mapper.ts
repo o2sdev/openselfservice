@@ -285,7 +285,7 @@ export const mapRelatedProducts = (data: RelatedProductsResponse, defaultCurrenc
             const price = targetProduct.prices?.find((p) => p.currency_code?.toUpperCase() === defaultCurrency);
 
             return {
-                id: targetProduct.id,
+                id: targetProduct.product?.id || targetProduct.id,
                 sku: targetProduct.sku || '',
                 name: targetProduct.title,
                 description: product?.description || '',

@@ -115,7 +115,7 @@ const VARIANT_OVERRIDES_DE: Record<string, Partial<Products.Model.Product>> = {
     standard: {},
     pro: {
         shortDescription: 'Professioneller 1500W Bohrhammer mit 4,0J Schlagenergie für Beton und Mauerwerk',
-        price: { value: 449.99, currency: 'USD' },
+        price: { value: 449.99, currency: 'EUR' },
         keySpecs: [
             { value: '1500W', icon: 'Zap' },
             { value: '4.0J Schlag', icon: 'Hammer' },
@@ -139,7 +139,7 @@ const VARIANT_OVERRIDES_DE: Record<string, Partial<Products.Model.Product>> = {
     },
     max: {
         shortDescription: 'Professioneller 1800W Bohrhammer mit 5,0J Schlagenergie für Beton und Mauerwerk',
-        price: { value: 549.99, currency: 'USD' },
+        price: { value: 549.99, currency: 'EUR' },
         keySpecs: [
             { value: '1800W', icon: 'Zap' },
             { value: '5.0J Schlag', icon: 'Hammer' },
