@@ -22,6 +22,15 @@ const mockProductListResponse = {
     count: 1,
 };
 
+const mockRetrieveResponse = {
+    product: {
+        id: 'prod_1',
+        title: 'Product 1',
+        description: 'Desc',
+        variants: [{ id: 'var_1', title: 'Default' }],
+    },
+};
+
 const mockVariantResponse = {
     variant: {
         id: 'var_1',
@@ -50,12 +59,26 @@ describe('ProductsService', () => {
     };
     let mockConfig: { get: ReturnType<typeof vi.fn> };
     let mockLogger: { debug: ReturnType<typeof vi.fn> };
+    let mockSdkProductList: ReturnType<typeof vi.fn>;
+    let mockSdkProductRetrieve: ReturnType<typeof vi.fn>;
+    let mockSdkProductRetrieveVariant: ReturnType<typeof vi.fn>;
 
     beforeEach(() => {
         vi.restoreAllMocks();
         mockHttpClient = { get: vi.fn() };
+        mockSdkProductList = vi.fn();
+        mockSdkProductRetrieve = vi.fn();
+        mockSdkProductRetrieveVariant = vi.fn();
         mockMedusaJsService = {
-            getSdk: vi.fn(() => ({})),
+            getSdk: vi.fn(() => ({
+                admin: {
+                    product: {
+                        list: mockSdkProductList,
+                        retrieve: mockSdkProductRetrieve,
+                        retrieveVariant: mockSdkProductRetrieveVariant,
+                    },
+                },
+            })),
             getBaseUrl: vi.fn(() => BASE_URL),
             getMedusaAdminApiHeaders: vi.fn(() => ({
                 'x-publishable-api-key': 'pk',
@@ -92,16 +115,15 @@ describe('ProductsService', () => {
     });
 
     describe('getProductList', () => {
-        it('should call httpClient.get with baseUrl and params and return mapped products', async () => {
-            mockHttpClient.get.mockReturnValue(of({ data: mockProductListResponse }));
+        it('should call sdk.admin.product.list and return mapped products', async () => {
+            mockSdkProductList.mockResolvedValue(mockProductListResponse);
 
             const result = await firstValueFrom(service.getProductList({ limit: 10, offset: 0 }));
 
-            expect(mockHttpClient.get).toHaveBeenCalledWith(
-                `${BASE_URL}/admin/products`,
+            expect(mockSdkProductList).toHaveBeenCalledWith(
                 expect.objectContaining({
-                    headers: expect.any(Object),
-                    params: { limit: 10, offset: 0 },
+                    limit: 10,
+                    offset: 0,
                 }),
             );
             expect(result.data).toHaveLength(1);
@@ -110,9 +132,8 @@ describe('ProductsService', () => {
             expect(result.data[0]?.name).toBe('Product 1');
         });
 
-        it('should throw NotFoundException when HTTP returns 404', async () => {
-            const { throwError } = await import('rxjs');
-            mockHttpClient.get.mockReturnValue(throwError(() => ({ status: 404 })));
+        it('should throw NotFoundException when SDK returns 404', async () => {
+            mockSdkProductList.mockRejectedValue({ status: 404 });
 
             await expect(firstValueFrom(service.getProductList({ limit: 10, offset: 0 }))).rejects.toThrow(
                 NotFoundException,
@@ -121,17 +142,14 @@ describe('ProductsService', () => {
     });
 
     describe('getProduct', () => {
-        it('should call httpClient.get for variant URL and return mapped product', async () => {
-            mockHttpClient.get.mockReturnValue(of({ data: mockVariantResponse }));
+        it('should call sdk to retrieve product and variant and return mapped product', async () => {
+            mockSdkProductRetrieve.mockResolvedValue(mockRetrieveResponse);
+            mockSdkProductRetrieveVariant.mockResolvedValue(mockVariantResponse);
 
             const result = await firstValueFrom(service.getProduct({ id: 'prod_1', variantId: 'var_1' }));
 
-            expect(mockHttpClient.get).toHaveBeenCalledWith(
-                `${BASE_URL}/admin/products/prod_1/variants/var_1`,
-                expect.objectContaining({
-                    params: { fields: 'product.*' },
-                }),
-            );
+            expect(mockSdkProductRetrieve).toHaveBeenCalledWith('prod_1', expect.any(Object));
+            expect(mockSdkProductRetrieveVariant).toHaveBeenCalledWith('prod_1', 'var_1', expect.any(Object));
             expect(result.id).toBe('prod_1');
             expect(result.variantId).toBe('var_1');
             expect(result.price.value).toBe(1999);
