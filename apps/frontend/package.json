@@ -82,7 +82,7 @@
         "@svgr/webpack": "^8.1.0",
         "@trivago/prettier-plugin-sort-imports": "^6.0.2",
         "@turbo/gen": "^2.8.4",
-        "@types/node": "^24.10.12",
+        "@types/node": "^24.10.13",
         "@types/react": "19.2.11",
         "@types/react-autosuggest": "^10.1.11",
         "@types/react-dom": "19.2.3",
