@@ -1,13 +1,11 @@
 import { CMS } from '@o2s/configs.integrations';
 
-import { CheckoutShippingAddressBlock } from './checkout-shipping-address.model';
+import { getCheckoutShippingAddressBlockMock } from './checkout-shipping-address.mock';
+import type { CheckoutShippingAddressBlock } from './checkout-shipping-address.model';
 
 export const mapCheckoutShippingAddress = (
     cms: CMS.Model.CheckoutShippingAddressBlock.CheckoutShippingAddressBlock,
-    _locale: string,
+    locale: string,
 ): CheckoutShippingAddressBlock => {
-    return {
-        __typename: 'CheckoutShippingAddressBlock',
-        id: cms.id,
-    };
+    return getCheckoutShippingAddressBlockMock(cms.id, locale);
 };
