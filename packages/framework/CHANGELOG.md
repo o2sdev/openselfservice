@@ -1,5 +1,22 @@
 # @o2s/framework
 
+## 1.17.0
+
+### Minor Changes
+
+- 5aba06c: add Zendesk Help Center articles integration
+- 8702f91: feat(zendesk): remove hardcoded locale base paths from article slugs
+
+### Patch Changes
+
+- dadd9ba: chore(deps): update dependencies
+- 7305d03: chore(deps): update dependencies
+- 002ff11: chore(deps): update dependencies
+- Updated dependencies [3934c6e]
+- Updated dependencies [78ea1f7]
+- Updated dependencies [241ab52]
+    - @o2s/utils.logger@1.2.1
+
 ## 1.16.0
 
 ### Minor Changes

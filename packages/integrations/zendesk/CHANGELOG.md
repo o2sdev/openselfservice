@@ -1,5 +1,40 @@
 # @o2s/integrations.zendesk
 
+## 3.0.0
+
+### Major Changes
+
+- 8702f91: feat(zendesk): remove hardcoded locale base paths from article slugs
+
+### Minor Changes
+
+- 20a5bdd: Across the integrations (Contentful, Strapi, Algolia, Medusa, Redis, Zendesk) tests cover primarily the service and mapper layers (including error handling), verifying configuration, request shaping and delegation to SDK/clients.
+- 5aba06c: add Zendesk Help Center articles integration
+
+### Patch Changes
+
+- 272314a: chore(deps): update dependencies
+- 7c24901: chore(deps): update dependencies
+- a5f8a7a: chore(deps): update dependencies
+- 3934c6e: chore(deps): update dependencies
+- 15782d8: chore(deps): update dependencies
+- 68b51fe: chore(deps): update dependencies
+- f45c3b5: chore(deps): update dependencies
+- 3e14803: chore(deps): update dependencies
+- 78ea1f7: chore(deps): update dependencies
+- 94a24b9: chore(deps): update dependencies
+- 241ab52: chore(deps): update dependencies
+- Updated dependencies [3934c6e]
+- Updated dependencies [dadd9ba]
+- Updated dependencies [7305d03]
+- Updated dependencies [5aba06c]
+- Updated dependencies [8702f91]
+- Updated dependencies [002ff11]
+- Updated dependencies [78ea1f7]
+- Updated dependencies [241ab52]
+    - @o2s/utils.logger@1.2.1
+    - @o2s/framework@1.17.0
+
 ## 2.1.0
 
 ### Minor Changes
