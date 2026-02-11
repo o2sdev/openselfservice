@@ -10,7 +10,13 @@ export const CheckoutSummaryDynamic = dynamic(() =>
     import('./CheckoutSummary.client').then((module) => module.CheckoutSummaryPure),
 );
 
-export const CheckoutSummary: React.FC<CheckoutSummaryProps> = async ({ id, accessToken, locale, routing }) => {
+export const CheckoutSummary: React.FC<CheckoutSummaryProps> = async ({
+    id,
+    accessToken,
+    locale,
+    routing,
+    onConfirm,
+}) => {
     let data: Model.CheckoutSummaryBlock;
     try {
         data = await sdk.blocks.getCheckoutSummary(
@@ -25,5 +31,14 @@ export const CheckoutSummary: React.FC<CheckoutSummaryProps> = async ({ id, acce
         return null;
     }
 
-    return <CheckoutSummaryDynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />;
+    return (
+        <CheckoutSummaryDynamic
+            {...data}
+            id={id}
+            accessToken={accessToken}
+            locale={locale}
+            routing={routing}
+            onConfirm={onConfirm}
+        />
+    );
 };

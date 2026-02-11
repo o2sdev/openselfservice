@@ -1,6 +1,7 @@
 export const URL = '/blocks/checkout-summary';
 
 export { CheckoutSummaryBlockModule as Module } from './checkout-summary.module';
+export { getCheckoutSummaryBlockMock } from './checkout-summary.mock'; // TODO: remove this mock
 export { CheckoutSummaryService as Service } from './checkout-summary.service';
 export { CheckoutSummaryController as Controller } from './checkout-summary.controller';
 
