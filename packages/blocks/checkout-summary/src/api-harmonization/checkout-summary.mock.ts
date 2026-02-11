@@ -78,26 +78,6 @@ export function getCheckoutSummaryBlockMock(_id: string, locale: string): Checko
                 ? 'Adres rozliczeniowy jest taki sam jak adres dostawy'
                 : 'Billing address is same as shipping address',
         },
-        confirmation: {
-            title: isPl ? 'Zamówienie zostało złożone!' : 'Order placed successfully!',
-            subtitle: isPl ? 'Dziękujemy za zakupy' : 'Thank you for your order',
-            orderNumberLabel: isPl ? 'Numer zamówienia:' : 'Order number:',
-            summaryTitle: isPl ? 'Podsumowanie zamówienia' : 'Order summary',
-            productsTitle: isPl ? 'Produkty' : 'Products',
-            productsCountLabel: isPl ? 'szt.' : 'pcs',
-            subtotalLabel: isPl ? 'Wartość netto:' : 'Subtotal:',
-            taxLabel: isPl ? 'VAT:' : 'VAT:',
-            totalLabel: isPl ? 'Wartość brutto:' : 'Total:',
-            message: isPl
-                ? 'Potwierdzenie zamówienia zostało wysłane na Twój adres email.'
-                : 'Order confirmation has been sent to your email address.',
-            buttons: {
-                viewOrders: isPl ? 'Lista zamówień' : 'View orders',
-                continueShopping: isPl ? 'Kontynuuj zakupy' : 'Continue shopping',
-            },
-            viewOrdersPath: '/orders',
-            continueShoppingPath: '/shop',
-        },
         items: [
             {
                 id: 'cart-item-001',

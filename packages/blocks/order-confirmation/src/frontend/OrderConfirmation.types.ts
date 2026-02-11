@@ -4,6 +4,7 @@ import type { Model } from '../api-harmonization/order-confirmation.client';
 
 export interface OrderConfirmationProps {
     id: string;
+    orderId: string;
     accessToken?: string;
     locale: string;
     routing: ReturnType<typeof defineRouting>;
@@ -11,6 +12,6 @@ export interface OrderConfirmationProps {
 
 export type OrderConfirmationPureProps = OrderConfirmationProps & Model.OrderConfirmationBlock;
 
-export type OrderConfirmationRendererProps = Omit<OrderConfirmationProps, ''> & {
+export type OrderConfirmationRendererProps = Omit<OrderConfirmationProps, 'orderId'> & {
     slug: string[];
 };

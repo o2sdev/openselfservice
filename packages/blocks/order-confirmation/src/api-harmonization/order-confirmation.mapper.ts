@@ -1,13 +1,12 @@
 import { CMS } from '@o2s/configs.integrations';
 
-import { OrderConfirmationBlock } from './order-confirmation.model';
+import { getOrderConfirmationBlockMock } from './order-confirmation.mock';
+import type { OrderConfirmationBlock } from './order-confirmation.model';
 
 export const mapOrderConfirmation = (
     cms: CMS.Model.OrderConfirmationBlock.OrderConfirmationBlock,
-    _locale: string,
+    locale: string,
+    orderId: string,
 ): OrderConfirmationBlock => {
-    return {
-        __typename: 'OrderConfirmationBlock',
-        id: cms.id,
-    };
+    return getOrderConfirmationBlockMock(cms.id, orderId, locale);
 };

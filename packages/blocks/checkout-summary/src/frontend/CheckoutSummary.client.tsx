@@ -1,7 +1,7 @@
 'use client';
 
 import { createNavigation } from 'next-intl/navigation';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useToast } from '@o2s/ui/hooks/use-toast';
 
@@ -10,14 +10,6 @@ import { Image } from '@o2s/ui/components/Image';
 import { Price } from '@o2s/ui/components/Price';
 
 import { Button } from '@o2s/ui/elements/button';
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-} from '@o2s/ui/elements/dialog';
 import { Label } from '@o2s/ui/elements/label';
 import { Separator } from '@o2s/ui/elements/separator';
 import { Textarea } from '@o2s/ui/elements/textarea';
@@ -36,7 +28,6 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
     buttons,
     loading: loadingLabels,
     placeholders,
-    confirmation: confirmationLabels,
     items,
     totals,
 }) => {
@@ -44,10 +35,6 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
     const { toast } = useToast();
 
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [orderId, setOrderId] = useState<string | null>(null);
-    const [orderData, setOrderData] = useState<{ id: string; [key: string]: unknown } | null>(null);
-    const [showConfirmation, setShowConfirmation] = useState(false);
-
     const [notes, setNotes] = useState({ comment: '', specialInstructions: '' });
 
     const [checkoutData, setCheckoutData] = useState<CheckoutDataFromStorage>({});
@@ -64,16 +51,6 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
         });
     }, []);
 
-    useEffect(() => {
-        if (orderId && orderData) {
-            setShowConfirmation(true);
-        }
-    }, [orderId, orderData]);
-
-    const handleDialogOpenChange = useCallback((open: boolean) => {
-        setShowConfirmation(open);
-    }, []);
-
     const handleConfirm = async () => {
         if (!onConfirm) return;
         setIsSubmitting(true);
@@ -84,13 +61,9 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                 notes,
             });
 
-            if (result.success && result.orderId && result.order) {
-                await new Promise((resolve) => setTimeout(resolve, 1000));
-                setOrderId(result.orderId);
-                setOrderData(result.order);
-                localStorage.removeItem('checkoutCompanyData');
-                localStorage.removeItem('checkoutShippingAddress');
-                localStorage.removeItem('checkoutBillingPayment');
+            if (result.success) {
+                // Future: API will return orderId/redirectUrl - then redirect to OrderConfirmation page
+                console.log('confirmation');
             } else {
                 toast({
                     variant: 'destructive',
@@ -120,8 +93,6 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
         sameAsCompanyAddress: 'Shipping address is same as company address',
         sameAsShippingAddress: 'Billing address is same as shipping address',
     };
-
-    const conf = confirmationLabels ?? {};
 
     return (
         <div className="w-full flex flex-col gap-8">
@@ -404,43 +375,6 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                     </div>
                 </div>
             </div>
-
-            {/* Order Confirmation Dialog */}
-            {orderId && orderData && (
-                <Dialog open={showConfirmation} onOpenChange={handleDialogOpenChange}>
-                    <DialogContent className="max-w-md">
-                        <DialogHeader>
-                            <DialogTitle>{conf.title ?? 'Order placed successfully!'}</DialogTitle>
-                            {conf.subtitle && <DialogDescription>{conf.subtitle}</DialogDescription>}
-                        </DialogHeader>
-                        <div className="flex flex-col gap-4 py-4">
-                            <div>
-                                <Typography variant="small" className="text-muted-foreground">
-                                    {conf.orderNumberLabel ?? 'Order number:'}
-                                </Typography>
-                                <Typography variant="h3">{orderId}</Typography>
-                            </div>
-                            {conf.message && (
-                                <Typography variant="body" className="text-muted-foreground">
-                                    {conf.message}
-                                </Typography>
-                            )}
-                        </div>
-                        <DialogFooter>
-                            <Button asChild variant="default">
-                                <LinkComponent href={conf.viewOrdersPath ?? '/orders'}>
-                                    {conf.buttons?.viewOrders ?? 'View orders'}
-                                </LinkComponent>
-                            </Button>
-                            <Button asChild variant="outline">
-                                <LinkComponent href={conf.continueShoppingPath ?? '/shop'}>
-                                    {conf.buttons?.continueShopping ?? 'Continue shopping'}
-                                </LinkComponent>
-                            </Button>
-                        </DialogFooter>
-                    </DialogContent>
-                </Dialog>
-            )}
         </div>
     );
 };

@@ -10,12 +10,19 @@ export const OrderConfirmationDynamic = dynamic(() =>
     import('./OrderConfirmation.client').then((module) => module.OrderConfirmationPure),
 );
 
-export const OrderConfirmation: React.FC<OrderConfirmationProps> = async ({ id, accessToken, locale, routing }) => {
+export const OrderConfirmation: React.FC<OrderConfirmationProps> = async ({
+    id,
+    orderId,
+    accessToken,
+    locale,
+    routing,
+}) => {
     let data: Model.OrderConfirmationBlock;
     try {
         data = await sdk.blocks.getOrderConfirmation(
             {
                 id,
+                orderId,
             },
             { 'x-locale': locale },
             accessToken,
@@ -25,5 +32,14 @@ export const OrderConfirmation: React.FC<OrderConfirmationProps> = async ({ id, 
         return null;
     }
 
-    return <OrderConfirmationDynamic {...data} id={id} accessToken={accessToken} locale={locale} routing={routing} />;
+    return (
+        <OrderConfirmationDynamic
+            {...data}
+            id={id}
+            orderId={orderId}
+            accessToken={accessToken}
+            locale={locale}
+            routing={routing}
+        />
+    );
 };

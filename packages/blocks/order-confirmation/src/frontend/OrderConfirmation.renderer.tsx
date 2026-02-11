@@ -7,8 +7,18 @@ import { Loading } from '@o2s/ui/components/Loading';
 import { OrderConfirmation } from './OrderConfirmation.server';
 import { OrderConfirmationRendererProps } from './OrderConfirmation.types';
 
-export const OrderConfirmationRenderer: React.FC<OrderConfirmationRendererProps> = ({ id, accessToken, routing }) => {
+export const OrderConfirmationRenderer: React.FC<OrderConfirmationRendererProps> = ({
+    slug,
+    id,
+    accessToken,
+    routing,
+}) => {
     const locale = useLocale();
+    const orderId = slug?.[1] ?? slug?.[0];
+
+    if (!orderId) {
+        return null;
+    }
 
     return (
         <Suspense
@@ -22,7 +32,7 @@ export const OrderConfirmationRenderer: React.FC<OrderConfirmationRendererProps>
                 </>
             }
         >
-            <OrderConfirmation id={id} accessToken={accessToken} locale={locale} routing={routing} />
+            <OrderConfirmation id={id} orderId={orderId} accessToken={accessToken} locale={locale} routing={routing} />
         </Suspense>
     );
 };

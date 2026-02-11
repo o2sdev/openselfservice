@@ -70,21 +70,6 @@ export class CheckoutSummaryBlock extends ApiModels.Block.Block {
         sameAsCompanyAddress: string;
         sameAsShippingAddress: string;
     };
-    confirmation?: {
-        title?: string;
-        subtitle?: string;
-        orderNumberLabel?: string;
-        summaryTitle?: string;
-        productsTitle?: string;
-        productsCountLabel?: string;
-        subtotalLabel?: string;
-        taxLabel?: string;
-        totalLabel?: string;
-        message?: string;
-        buttons?: { viewOrders: string; continueShopping: string };
-        viewOrdersPath?: string;
-        continueShoppingPath?: string;
-    };
     items!: CheckoutSummaryItem[];
     totals!: CheckoutSummaryTotals;
 }

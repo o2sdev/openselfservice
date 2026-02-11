@@ -26,7 +26,8 @@ export class OrderConfirmationService {
 
         return forkJoin([cms]).pipe(
             map(([cms]) => {
-                const result = mapOrderConfirmation(cms, headers['x-locale']);
+                const orderId = query.orderId ?? cms.id;
+        const result = mapOrderConfirmation(cms, headers['x-locale'], orderId);
 
                 // Optional: Add permission flags to the response
                 // if (headers.authorization) {

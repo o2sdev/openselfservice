@@ -68,13 +68,6 @@ const baseBlock = {
         sameAsCompanyAddress: 'Shipping address is same as company address',
         sameAsShippingAddress: 'Billing address is same as shipping address',
     },
-    confirmation: {
-        title: 'Order placed successfully!',
-        subtitle: 'Thank you for your order',
-        orderNumberLabel: 'Order number:',
-        message: 'Order confirmation has been sent to your email address.',
-        buttons: { viewOrders: 'View orders', continueShopping: 'Continue shopping' },
-    },
     items: [
         {
             id: 'cart-item-001',
@@ -107,11 +100,7 @@ const baseBlock = {
 
 const mockOnConfirm = async () => {
     await new Promise((r) => setTimeout(r, 1500));
-    return {
-        success: true,
-        orderId: 'ORD-12345',
-        order: { id: 'ORD-12345' },
-    };
+    return { success: true };
 };
 
 const meta = {
