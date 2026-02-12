@@ -37,7 +37,7 @@ export function mapPaymentSession(
         status: mapPaymentSessionStatus(medusaSession.status),
         redirectUrl: medusaSession.data?.redirect_url as string | undefined,
         clientSecret: medusaSession.data?.client_secret as string | undefined,
-        expiresAt: (medusaSession as unknown as Record<string, unknown>).expires_at as string | undefined,
+        expiresAt: undefined, // Medusa Store API does not expose expires_at on payment sessions
         metadata: medusaSession.data as Record<string, unknown> | undefined,
     };
 }

@@ -17,7 +17,7 @@ export class CheckoutSummary {
         total: Price.Price;
     };
     notes?: string;
-    guestEmail?: string; // Required for guest checkout
+    email?: string; // For guest checkout
 }
 
 export class ShippingOptions {

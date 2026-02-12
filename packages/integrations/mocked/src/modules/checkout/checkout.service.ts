@@ -18,9 +18,9 @@ export class CheckoutService implements Checkout.Service {
         private readonly paymentsService: Payments.Service,
     ) {}
 
-    setupAddresses(
-        params: Checkout.Request.SetupAddressesParams,
-        data: Checkout.Request.SetupAddressesBody,
+    setAddresses(
+        params: Checkout.Request.SetAddressesParams,
+        data: Checkout.Request.SetAddressesBody,
         authorization: string | undefined,
     ): Observable<Carts.Model.Cart> {
         return this.cartsService.getCart({ id: params.cartId }, authorization).pipe(
@@ -40,9 +40,9 @@ export class CheckoutService implements Checkout.Service {
         );
     }
 
-    setupShippingMethod(
-        params: Checkout.Request.SetupShippingMethodParams,
-        data: Checkout.Request.SetupShippingMethodBody,
+    setShippingMethod(
+        params: Checkout.Request.SetShippingMethodParams,
+        data: Checkout.Request.SetShippingMethodBody,
         authorization: string | undefined,
     ): Observable<Carts.Model.Cart> {
         return this.cartsService.getCart({ id: params.cartId }, authorization).pipe(
@@ -68,9 +68,9 @@ export class CheckoutService implements Checkout.Service {
         );
     }
 
-    setupPayment(
-        params: Checkout.Request.SetupPaymentParams,
-        data: Checkout.Request.SetupPaymentBody,
+    setPayment(
+        params: Checkout.Request.SetPaymentParams,
+        data: Checkout.Request.SetPaymentBody,
         authorization: string | undefined,
     ): Observable<Payments.Model.PaymentSession> {
         return this.cartsService.getCart({ id: params.cartId }, authorization).pipe(
@@ -167,11 +167,11 @@ export class CheckoutService implements Checkout.Service {
                     return throwError(() => new BadRequestException('Payment session is required'));
                 }
 
-                // Get guest email (from cart metadata or request body)
-                const guestEmail = data?.guestEmail || (cart.metadata?.guestEmail as string | undefined);
+                // Get email (from request body or cart)
+                const email = data?.email || cart.email;
 
                 // Create order from cart
-                const order = mapOrderFromCart(cart, guestEmail);
+                const order = mapOrderFromCart(cart, email);
                 MOCKED_ORDERS.push(order);
 
                 // Get payment session for redirect URL
@@ -195,8 +195,8 @@ export class CheckoutService implements Checkout.Service {
         data: Checkout.Request.CompleteCheckoutBody,
         authorization: string | undefined,
     ): Observable<Checkout.Model.PlaceOrderResponse> {
-        // Setup addresses first
-        return this.setupAddresses(
+        // Set addresses first
+        return this.setAddresses(
             { cartId: params.cartId },
             {
                 shippingAddressId: data.shippingAddressId,
@@ -204,14 +204,14 @@ export class CheckoutService implements Checkout.Service {
                 billingAddressId: data.billingAddressId,
                 billingAddress: data.billingAddress,
                 notes: data.notes,
-                guestEmail: data.guestEmail,
+                email: data.email,
             },
             authorization,
         ).pipe(
-            // Setup shipping method if provided
+            // Set shipping method if provided
             switchMap(() =>
                 data.shippingMethodId
-                    ? this.setupShippingMethod(
+                    ? this.setShippingMethod(
                           { cartId: params.cartId },
                           { shippingOptionId: data.shippingMethodId },
                           authorization,
@@ -219,8 +219,8 @@ export class CheckoutService implements Checkout.Service {
                     : of(null),
             ),
             switchMap(() =>
-                // Setup payment
-                this.setupPayment(
+                // Set payment
+                this.setPayment(
                     { cartId: params.cartId },
                     {
                         providerId: data.paymentProviderId,
@@ -234,7 +234,7 @@ export class CheckoutService implements Checkout.Service {
                 this.placeOrder(
                     { cartId: params.cartId },
                     {
-                        guestEmail: data.guestEmail,
+                        email: data.email,
                     },
                     authorization,
                 ),

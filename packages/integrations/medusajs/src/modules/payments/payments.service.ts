@@ -153,17 +153,13 @@ export class PaymentsService extends Payments.Service {
 
         return from(
             this.httpClient
-                .post<{
-                    payment_session: {
-                        id: string;
-                        status: string;
-                        provider_id: string;
-                        data: unknown;
-                        expires_at?: string;
-                    };
-                }>(`${this.medusaJsService.getBaseUrl()}/store/payment-sessions/${params.id}`, updatePayload, {
-                    headers: this.medusaJsService.getStoreApiHeaders(authorization),
-                })
+                .post<{ payment_session: HttpTypes.StorePaymentSession }>(
+                    `${this.medusaJsService.getBaseUrl()}/store/payment-sessions/${params.id}`,
+                    updatePayload,
+                    {
+                        headers: this.medusaJsService.getStoreApiHeaders(authorization),
+                    },
+                )
                 .toPromise(),
         ).pipe(
             map((response) => {
@@ -173,10 +169,7 @@ export class PaymentsService extends Payments.Service {
                 // We don't have cart ID here, so we'll use empty string
                 // In practice, this should be retrieved from the session or stored context
                 const cartId = '';
-                return mapPaymentSession(
-                    response.data.payment_session as unknown as HttpTypes.StorePaymentSession,
-                    cartId,
-                );
+                return mapPaymentSession(response.data.payment_session, cartId);
             }),
             catchError((error) => {
                 if (error.response?.status === 404) {

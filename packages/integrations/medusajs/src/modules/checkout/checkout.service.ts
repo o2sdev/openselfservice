@@ -6,10 +6,11 @@ import { Observable, catchError, forkJoin, from, map, of, switchMap, throwError 
 
 import { LoggerService } from '@o2s/utils.logger';
 
-import { Auth, Carts, Checkout, Customers, Orders, Payments } from '@o2s/framework/modules';
+import { Auth, Carts, Checkout, Customers, Payments } from '@o2s/framework/modules';
 
 import { Service as MedusaJsService } from '@/modules/medusajs';
 
+import { mapOrder } from '../orders/orders.mapper';
 import { handleHttpError } from '../utils/handle-http-error';
 
 import { mapCheckoutSummary, mapPlaceOrderResponse, mapShippingOptions } from './checkout.mapper';
@@ -27,16 +28,15 @@ export class CheckoutService extends Checkout.Service {
         private readonly cartsService: Carts.Service,
         private readonly customersService: Customers.Service,
         private readonly paymentsService: Payments.Service,
-        private readonly ordersService: Orders.Service,
     ) {
         super();
         this.sdk = this.medusaJsService.getSdk();
         this.defaultCurrency = this.config.get('DEFAULT_CURRENCY') || '';
     }
 
-    setupAddresses(
-        params: Checkout.Request.SetupAddressesParams,
-        data: Checkout.Request.SetupAddressesBody,
+    setAddresses(
+        params: Checkout.Request.SetAddressesParams,
+        data: Checkout.Request.SetAddressesBody,
         authorization: string | undefined,
     ): Observable<Carts.Model.Cart> {
         // Validate cart exists and has items
@@ -57,9 +57,9 @@ export class CheckoutService extends Checkout.Service {
         );
     }
 
-    setupShippingMethod(
-        params: Checkout.Request.SetupShippingMethodParams,
-        data: Checkout.Request.SetupShippingMethodBody,
+    setShippingMethod(
+        params: Checkout.Request.SetShippingMethodParams,
+        data: Checkout.Request.SetShippingMethodBody,
         authorization: string | undefined,
     ): Observable<Carts.Model.Cart> {
         // Validate cart exists and has items
@@ -86,9 +86,9 @@ export class CheckoutService extends Checkout.Service {
         );
     }
 
-    setupPayment(
-        params: Checkout.Request.SetupPaymentParams,
-        data: Checkout.Request.SetupPaymentBody,
+    setPayment(
+        params: Checkout.Request.SetPaymentParams,
+        data: Checkout.Request.SetPaymentBody,
         authorization: string | undefined,
     ): Observable<Payments.Model.PaymentSession> {
         return this.paymentsService
@@ -179,28 +179,22 @@ export class CheckoutService extends Checkout.Service {
                     return throwError(() => new BadRequestException('Shipping method is required'));
                 }
 
-                // Store guest email in cart metadata if provided
-                const guestEmail = data?.guestEmail || (cart.metadata?.guestEmail as string | undefined);
-                if (guestEmail) {
+                // Set email on cart if provided (for guest checkout)
+                const email = data?.email || cart.email;
+                if (email && email !== cart.email) {
                     return this.cartsService
-                        .updateCart(
-                            { id: params.cartId },
-                            { metadata: { ...cart.metadata, guestEmail } },
-                            authorization,
-                        )
-                        .pipe(
-                            switchMap(() => this.completeCartAndCreateOrder(params.cartId, guestEmail, authorization)),
-                        );
+                        .updateCart({ id: params.cartId }, { email }, authorization)
+                        .pipe(switchMap(() => this.completeCartAndCreateOrder(params.cartId, email, authorization)));
                 }
 
-                return this.completeCartAndCreateOrder(params.cartId, guestEmail, authorization);
+                return this.completeCartAndCreateOrder(params.cartId, email, authorization);
             }),
         );
     }
 
     private completeCartAndCreateOrder(
         cartId: string,
-        guestEmail: string | undefined,
+        email: string | undefined,
         authorization: string | undefined,
     ): Observable<Checkout.Model.PlaceOrderResponse> {
         // Complete the cart in Medusa (this creates the order)
@@ -208,30 +202,20 @@ export class CheckoutService extends Checkout.Service {
             this.sdk.store.cart.complete(cartId, {}, this.medusaJsService.getStoreApiHeaders(authorization)),
         ).pipe(
             switchMap((response: HttpTypes.StoreCompleteCartResponse) => {
-                const orderId = response.type === 'order' ? response.order?.id : undefined;
-                if (!orderId) {
+                if (response.type !== 'order' || !response.order) {
                     return throwError(() => new BadRequestException('Failed to create order from cart'));
                 }
 
-                // Get the created order
-                return this.ordersService.getOrder({ id: orderId }, authorization).pipe(
-                    switchMap((order) => {
-                        if (!order) {
-                            return throwError(() => new NotFoundException(`Order with ID ${orderId} not found`));
-                        }
+                // Use the order directly from the cart.complete response
+                // This avoids a separate getOrder call which requires authorization (fails for guests)
+                const order = mapOrder(response.order, this.defaultCurrency);
 
-                        // Update order with guest email if provided
-                        if (guestEmail && !order.email) {
-                            // Note: In a real implementation, you'd update the order with email
-                            // For now, we'll just use the order as-is
-                        }
+                // Attach email for order confirmation if provided (guest checkout)
+                if (email) {
+                    order.email = email;
+                }
 
-                        // Note: After successful cart completion (type === 'order'), the cart metadata
-                        // is no longer available in the response. Payment redirect URL should be
-                        // obtained from the payment session before cart completion.
-                        return of(mapPlaceOrderResponse(order));
-                    }),
-                );
+                return of(mapPlaceOrderResponse(order));
             }),
             catchError((error) => {
                 if (error.response?.status === 400) {
@@ -317,7 +301,7 @@ export class CheckoutService extends Checkout.Service {
         authorization: string | undefined,
     ): Observable<Checkout.Model.PlaceOrderResponse> {
         // Setup addresses first
-        return this.setupAddresses(
+        return this.setAddresses(
             { cartId: params.cartId },
             {
                 shippingAddressId: data.shippingAddressId,
@@ -325,14 +309,14 @@ export class CheckoutService extends Checkout.Service {
                 billingAddressId: data.billingAddressId,
                 billingAddress: data.billingAddress,
                 notes: data.notes,
-                guestEmail: data.guestEmail,
+                email: data.email,
             },
             authorization,
         ).pipe(
             // Setup shipping method if provided
             switchMap(() =>
                 data.shippingMethodId
-                    ? this.setupShippingMethod(
+                    ? this.setShippingMethod(
                           { cartId: params.cartId },
                           { shippingOptionId: data.shippingMethodId },
                           authorization,
@@ -341,7 +325,7 @@ export class CheckoutService extends Checkout.Service {
             ),
             switchMap(() =>
                 // Setup payment
-                this.setupPayment(
+                this.setPayment(
                     { cartId: params.cartId },
                     {
                         providerId: data.paymentProviderId,
@@ -355,7 +339,7 @@ export class CheckoutService extends Checkout.Service {
                 this.placeOrder(
                     { cartId: params.cartId },
                     {
-                        guestEmail: data.guestEmail,
+                        email: data.email,
                     },
                     authorization,
                 ),

@@ -101,13 +101,29 @@ export class CartsService extends Carts.Service {
         data: Carts.Request.UpdateCartBody,
         authorization?: string,
     ): Observable<Carts.Model.Cart> {
+        // Build metadata: merge existing with incoming, and store notes in metadata
+        const metadata: Record<string, unknown> = { ...(data.metadata || {}) };
+        if (data.notes !== undefined) {
+            metadata.notes = data.notes;
+        }
+
+        // Build Medusa cart update payload with all supported fields
+        const cartUpdate: Partial<HttpTypes.StoreUpdateCart> = {};
+
+        if (data.regionId) {
+            cartUpdate.region_id = data.regionId;
+        }
+        if (data.email) {
+            cartUpdate.email = data.email;
+        }
+        if (Object.keys(metadata).length > 0) {
+            cartUpdate.metadata = metadata;
+        }
+
         return from(
             this.sdk.store.cart.update(
                 params.id,
-                {
-                    region_id: data.regionId,
-                    metadata: data.metadata,
-                },
+                cartUpdate,
                 {},
                 this.medusaJsService.getStoreApiHeaders(authorization),
             ),
@@ -414,13 +430,18 @@ export class CartsService extends Carts.Service {
                             );
                         }
 
-                        // Build metadata
-                        const metadata = this.buildCartMetadata(data.notes, data.guestEmail, cart.metadata);
+                        // Build metadata (notes only; email goes directly on cart)
+                        const metadata = this.buildCartMetadata(data.notes, cart.metadata);
 
                         // Build cart update payload
                         const cartUpdate: Partial<HttpTypes.StoreUpdateCart> = {
                             metadata,
                         };
+
+                        // Set email directly on cart (for guest checkout)
+                        if (data.email) {
+                            cartUpdate.email = data.email;
+                        }
 
                         // Set addresses (use shipping as billing if billing not provided)
                         if (shippingAddress) {
@@ -520,20 +541,17 @@ export class CartsService extends Carts.Service {
     }
 
     /**
-     * Builds cart metadata immutably by merging optional notes and guestEmail
+     * Builds cart metadata immutably by merging optional notes
      * into existing metadata without mutating any arguments.
+     * Email is passed directly on the cart (not in metadata).
      */
     private buildCartMetadata(
         notes: string | undefined,
-        guestEmail: string | undefined,
         existingMetadata?: Record<string, unknown>,
     ): Record<string, unknown> {
         const metadata: Record<string, unknown> = { ...(existingMetadata || {}) };
         if (notes !== undefined) {
             metadata.notes = notes;
-        }
-        if (guestEmail) {
-            metadata.guestEmail = guestEmail;
         }
         return metadata;
     }

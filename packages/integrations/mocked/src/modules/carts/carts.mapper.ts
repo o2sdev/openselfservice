@@ -87,7 +87,7 @@ const PAYMENT_METHODS: Carts.Model.PaymentMethod[] = [
     },
 ];
 
-// Read payment method stored in metadata by setupPayment
+// Read payment method stored in metadata by setPayment
 const mapPaymentMethodFromMetadata = (metadata: Record<string, unknown>): Carts.Model.PaymentMethod | undefined => {
     const stored = metadata?.paymentMethod as Record<string, unknown> | undefined;
     if (!stored || typeof stored !== 'object') return undefined;
@@ -414,6 +414,7 @@ export const updateCart = (
         name: data.name ?? cart.name,
         type: data.type ?? cart.type,
         regionId: data.regionId ?? cart.regionId,
+        email: data.email ?? cart.email,
         notes: data.notes ?? cart.notes,
         metadata: mergedMetadata,
         shippingAddress: shippingAddressFromMetadata ?? cart.shippingAddress,

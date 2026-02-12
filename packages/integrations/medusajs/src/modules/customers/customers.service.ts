@@ -237,7 +237,7 @@ export class CustomersService extends Customers.Service {
         return from(
             this.sdk.store.customer.updateAddress(
                 params.id,
-                { is_default_shipping: true } as unknown as HttpTypes.StoreUpdateCustomerAddress,
+                { is_default_shipping: true } as Partial<HttpTypes.StoreUpdateCustomerAddress>,
                 {},
                 this.medusaJsService.getStoreApiHeaders(authorization),
             ),

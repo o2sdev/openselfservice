@@ -10,10 +10,7 @@ export function mapCustomerAddress(
         id: medusaAddress.id,
         customerId,
         label: medusaAddress.first_name ? `${medusaAddress.first_name} ${medusaAddress.last_name}` : undefined,
-        isDefault:
-            (medusaAddress as unknown as Record<string, unknown>).is_default === true ||
-            medusaAddress.is_default_shipping ||
-            medusaAddress.is_default_billing,
+        isDefault: medusaAddress.is_default_shipping || medusaAddress.is_default_billing,
         address: {
             firstName: medusaAddress.first_name,
             lastName: medusaAddress.last_name,
@@ -46,8 +43,8 @@ export function mapCustomerAddresses(
 
 export function mapAddressToMedusa(address: Models.Address.Address): HttpTypes.StoreCreateCustomerAddress {
     return {
-        first_name: (address.firstName || 'Customer').trim(),
-        last_name: (address.lastName || 'Name').trim(),
+        first_name: (address.firstName || '').trim(),
+        last_name: (address.lastName || '').trim(),
         address_1: (address.streetName || '').trim(),
         address_2: (address.streetNumber || address.apartment || '').trim() || undefined,
         city: (address.city || '').trim(),

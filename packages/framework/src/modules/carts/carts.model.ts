@@ -69,6 +69,7 @@ export class Cart {
     promotions?: Promotion[];
     metadata?: Record<string, unknown>;
     notes?: string;
+    email?: string; // For guest checkout
     paymentSessionId?: string; // Reference to active payment session
 }
 

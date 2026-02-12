@@ -36,7 +36,6 @@ describe('OrdersService', () => {
     let mockAuthService: { getCustomerId: ReturnType<typeof vi.fn> };
     let mockConfig: { get: ReturnType<typeof vi.fn> };
     let mockLogger: { debug: ReturnType<typeof vi.fn> };
-    let mockHttpClient: Record<string, ReturnType<typeof vi.fn>>;
 
     beforeEach(() => {
         vi.restoreAllMocks();
@@ -54,7 +53,6 @@ describe('OrdersService', () => {
             get: vi.fn((key: string) => (key === 'DEFAULT_CURRENCY' ? DEFAULT_CURRENCY : '')),
         };
         mockLogger = { debug: vi.fn() };
-        mockHttpClient = {};
 
         service = new OrdersService(
             mockConfig as unknown as ConfigService,

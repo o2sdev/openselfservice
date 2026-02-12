@@ -359,9 +359,9 @@ export class CartsService implements Carts.Service {
         // Build update data
         const updateData: Carts.Request.UpdateCartBody = {
             notes: data.notes,
+            email: data.email,
             metadata: {
                 ...existingCart.metadata,
-                ...(data.guestEmail ? { guestEmail: data.guestEmail } : {}),
             },
         };
 

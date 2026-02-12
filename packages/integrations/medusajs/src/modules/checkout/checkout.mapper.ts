@@ -57,7 +57,7 @@ export function mapCheckoutSummary(
             total: cart.total,
         },
         notes: cart.notes,
-        guestEmail: cart.metadata?.guestEmail as string | undefined,
+        email: cart.email,
     };
 }
 

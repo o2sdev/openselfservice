@@ -504,7 +504,7 @@ export const mapOrders = (options: Orders.Request.GetOrderListQuery, customerId:
     };
 };
 
-export function mapOrderFromCart(cart: Carts.Model.Cart, guestEmail?: string): Orders.Model.Order {
+export function mapOrderFromCart(cart: Carts.Model.Cart, email?: string): Orders.Model.Order {
     const now = new Date();
     const orderId = `ORD-${Date.now()}`;
 
@@ -553,6 +553,6 @@ export function mapOrderFromCart(cart: Carts.Model.Cart, guestEmail?: string): O
         billingAddress: cart.billingAddress,
         shippingMethods: [cart.shippingMethod],
         customerComment: cart.notes,
-        email: guestEmail,
+        email,
     };
 }

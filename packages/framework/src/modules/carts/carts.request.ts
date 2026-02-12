@@ -32,6 +32,7 @@ export class UpdateCartBody {
     name?: string;
     type?: CartType;
     regionId?: string;
+    email?: string; // For guest checkout (passed directly to cart, not metadata)
     shippingAddressId?: string;
     billingAddressId?: string;
     shippingMethodId?: string;
@@ -101,7 +102,7 @@ export class UpdateCartAddressesBody {
     billingAddressId?: string; // Use saved address (authenticated users only)
     billingAddress?: Address.Address; // Or provide new address
     notes?: string;
-    guestEmail?: string; // For guest checkout
+    email?: string; // For guest checkout
 }
 
 // Shipping method operations

@@ -18,8 +18,6 @@ export const mapCart = (cart: HttpTypes.StoreCart, _defaultCurrency: string): Ca
     }
     const currency = cart.currency_code as Models.Price.Currency;
 
-    console.log('cart.customer_id', cart.customer_id);
-
     return {
         id: cart.id,
         customerId: cart.customer_id ?? undefined,
@@ -46,6 +44,7 @@ export const mapCart = (cart: HttpTypes.StoreCart, _defaultCurrency: string): Ca
         promotions: mapPromotions(cart),
         metadata: (cart.metadata as Record<string, unknown>) ?? {},
         notes: undefined,
+        email: cart.email ?? undefined,
     };
 };
 

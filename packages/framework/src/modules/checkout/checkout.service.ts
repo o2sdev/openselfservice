@@ -8,24 +8,24 @@ import * as Checkout from './';
 export abstract class CheckoutService {
     protected constructor(..._services: unknown[]) {}
 
-    // Setup addresses (shipping and/or billing)
-    abstract setupAddresses(
-        params: Checkout.Request.SetupAddressesParams,
-        data: Checkout.Request.SetupAddressesBody,
+    // Set addresses (shipping and/or billing)
+    abstract setAddresses(
+        params: Checkout.Request.SetAddressesParams,
+        data: Checkout.Request.SetAddressesBody,
         authorization?: string,
     ): Observable<Carts.Model.Cart>;
 
-    // Setup shipping method
-    abstract setupShippingMethod(
-        params: Checkout.Request.SetupShippingMethodParams,
-        data: Checkout.Request.SetupShippingMethodBody,
+    // Set shipping method
+    abstract setShippingMethod(
+        params: Checkout.Request.SetShippingMethodParams,
+        data: Checkout.Request.SetShippingMethodBody,
         authorization?: string,
     ): Observable<Carts.Model.Cart>;
 
-    // Setup payment (independent action, can be called before or after shipping)
-    abstract setupPayment(
-        params: Checkout.Request.SetupPaymentParams,
-        data: Checkout.Request.SetupPaymentBody,
+    // Set payment (independent action, can be called before or after shipping)
+    abstract setPayment(
+        params: Checkout.Request.SetPaymentParams,
+        data: Checkout.Request.SetPaymentBody,
         authorization?: string,
     ): Observable<Payments.Model.PaymentSession>;
 

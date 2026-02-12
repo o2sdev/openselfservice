@@ -12,30 +12,30 @@ export class CheckoutController {
     constructor(protected readonly checkoutService: CheckoutService) {}
 
     @Post(':cartId/addresses')
-    setupAddresses(
-        @Param() params: Request.SetupAddressesParams,
-        @Body() body: Request.SetupAddressesBody,
+    setAddresses(
+        @Param() params: Request.SetAddressesParams,
+        @Body() body: Request.SetAddressesBody,
         @Headers() headers: AppHeaders,
     ) {
-        return this.checkoutService.setupAddresses(params, body, headers.authorization);
+        return this.checkoutService.setAddresses(params, body, headers.authorization);
     }
 
     @Post(':cartId/shipping-method')
-    setupShippingMethod(
-        @Param() params: Request.SetupShippingMethodParams,
-        @Body() body: Request.SetupShippingMethodBody,
+    setShippingMethod(
+        @Param() params: Request.SetShippingMethodParams,
+        @Body() body: Request.SetShippingMethodBody,
         @Headers() headers: AppHeaders,
     ) {
-        return this.checkoutService.setupShippingMethod(params, body, headers.authorization);
+        return this.checkoutService.setShippingMethod(params, body, headers.authorization);
     }
 
     @Post(':cartId/payment')
-    setupPayment(
-        @Param() params: Request.SetupPaymentParams,
-        @Body() body: Request.SetupPaymentBody,
+    setPayment(
+        @Param() params: Request.SetPaymentParams,
+        @Body() body: Request.SetPaymentBody,
         @Headers() headers: AppHeaders,
     ) {
-        return this.checkoutService.setupPayment(params, body, headers.authorization);
+        return this.checkoutService.setPayment(params, body, headers.authorization);
     }
 
     @Get(':cartId/shipping-options')

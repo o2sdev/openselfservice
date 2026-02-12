@@ -1,31 +1,31 @@
 import { Address } from '@/utils/models';
 
-export class SetupAddressesParams {
+export class SetAddressesParams {
     cartId!: string;
 }
 
-export class SetupAddressesBody {
+export class SetAddressesBody {
     shippingAddressId?: string; // Use saved address (authenticated users only)
     shippingAddress?: Address.Address; // Or provide new address
     billingAddressId?: string; // Use saved address (authenticated users only)
     billingAddress?: Address.Address; // Or provide new address
     notes?: string;
-    guestEmail?: string; // For guest checkout
+    email?: string; // For guest checkout
 }
 
-export class SetupShippingMethodParams {
+export class SetShippingMethodParams {
     cartId!: string;
 }
 
-export class SetupShippingMethodBody {
+export class SetShippingMethodBody {
     shippingOptionId!: string; // Shipping option ID from getShippingOptions()
 }
 
-export class SetupPaymentParams {
+export class SetPaymentParams {
     cartId!: string;
 }
 
-export class SetupPaymentBody {
+export class SetPaymentBody {
     providerId!: string;
     metadata?: Record<string, unknown>;
 }
@@ -45,7 +45,7 @@ export class PlaceOrderParams {
 export class PlaceOrderBody {
     // Optional - can be empty if all data already in cart
     // Allows frontend to confirm before placing
-    guestEmail?: string; // Required for guest checkout if not provided in shipping setup
+    email?: string; // Required for guest checkout if not provided in shipping setup
 }
 
 export class CompleteCheckoutParams {
@@ -60,6 +60,6 @@ export class CompleteCheckoutBody {
     shippingMethodId?: string;
     paymentProviderId!: string;
     notes?: string;
-    guestEmail?: string; // Required for guest checkout (for order confirmation)
+    email?: string; // Required for guest checkout (for order confirmation)
     metadata?: Record<string, unknown>;
 }
