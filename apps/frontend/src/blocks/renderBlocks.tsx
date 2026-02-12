@@ -4,12 +4,11 @@ import { Modules } from '@o2s/api-harmonization';
 import * as ArticleList from '@o2s/blocks.article-list/frontend';
 import * as ArticleSearch from '@o2s/blocks.article-search/frontend';
 import * as Article from '@o2s/blocks.article/frontend';
-import * as CartSummary from '@o2s/blocks.cart-summary/frontend';
+import * as Cart from '@o2s/blocks.cart/frontend';
 import * as CategoryList from '@o2s/blocks.category-list/frontend';
 import * as Category from '@o2s/blocks.category/frontend';
 import * as CheckoutBillingPayment from '@o2s/blocks.checkout-billing-payment/frontend';
 import * as CheckoutCompanyData from '@o2s/blocks.checkout-company-data/frontend';
-import * as CheckoutNotes from '@o2s/blocks.checkout-notes/frontend';
 import * as CheckoutShippingAddress from '@o2s/blocks.checkout-shipping-address/frontend';
 import * as CheckoutSummary from '@o2s/blocks.checkout-summary/frontend';
 import * as Faq from '@o2s/blocks.faq/frontend';
@@ -37,7 +36,6 @@ import * as TicketList from '@o2s/blocks.ticket-list/frontend';
 import * as TickeRecent from '@o2s/blocks.ticket-recent/frontend';
 import * as TicketSummary from '@o2s/blocks.ticket-summary/frontend';
 import * as UserAccount from '@o2s/blocks.user-account/frontend';
-import * as Cart from '@o2s/blocks.cart/frontend';
 // BLOCK IMPORT
 import { getLocale } from 'next-intl/server';
 import { draftMode } from 'next/headers';
@@ -163,12 +161,8 @@ const renderBlock = (typename: string, blockProps: BlockProps) => {
             return <Kpis.Renderer {...blockProps} />;
         case 'CheckoutBillingPaymentBlock':
             return <CheckoutBillingPayment.Renderer {...blockProps} />;
-        case 'CartSummaryBlock':
-            return <CartSummary.Renderer {...blockProps} />;
         case 'CheckoutCompanyDataBlock':
             return <CheckoutCompanyData.Renderer {...blockProps} />;
-        case 'CheckoutNotesBlock':
-            return <CheckoutNotes.Renderer {...blockProps} />;
         case 'CheckoutShippingAddressBlock':
             return <CheckoutShippingAddress.Renderer {...blockProps} />;
         case 'CheckoutSummaryBlock':

@@ -27,12 +27,11 @@ import {
 import * as ArticleList from '@o2s/blocks.article-list/api-harmonization';
 import * as ArticleSearch from '@o2s/blocks.article-search/api-harmonization';
 import * as Article from '@o2s/blocks.article/api-harmonization';
-import * as CartSummary from '@o2s/blocks.cart-summary/api-harmonization';
+import * as Cart from '@o2s/blocks.cart/api-harmonization';
 import * as CategoryList from '@o2s/blocks.category-list/api-harmonization';
 import * as Category from '@o2s/blocks.category/api-harmonization';
 import * as CheckoutBillingPayment from '@o2s/blocks.checkout-billing-payment/api-harmonization';
 import * as CheckoutCompanyData from '@o2s/blocks.checkout-company-data/api-harmonization';
-import * as CheckoutNotes from '@o2s/blocks.checkout-notes/api-harmonization';
 import * as CheckoutShippingAddress from '@o2s/blocks.checkout-shipping-address/api-harmonization';
 import * as CheckoutSummary from '@o2s/blocks.checkout-summary/api-harmonization';
 import * as Faq from '@o2s/blocks.faq/api-harmonization';
@@ -61,7 +60,6 @@ import * as TicketRecent from '@o2s/blocks.ticket-recent/api-harmonization';
 import * as TicketSummary from '@o2s/blocks.ticket-summary/api-harmonization';
 import * as UserAccount from '@o2s/blocks.user-account/api-harmonization';
 
-import * as Cart from '@o2s/blocks.cart/api-harmonization';
 // BLOCK IMPORT
 
 import { AppConfig } from './app.config';
@@ -155,9 +153,7 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
         OrderConfirmation.Module.register(AppConfig),
         Kpis.Module.register(AppConfig),
         CheckoutBillingPayment.Module.register(AppConfig),
-        CartSummary.Module.register(AppConfig),
         CheckoutCompanyData.Module.register(AppConfig),
-        CheckoutNotes.Module.register(AppConfig),
         CheckoutShippingAddress.Module.register(AppConfig),
         CheckoutSummary.Module.register(AppConfig),
         Cart.Module.register(AppConfig),

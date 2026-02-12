@@ -14,7 +14,7 @@ export const OrderConfirmationRenderer: React.FC<OrderConfirmationRendererProps>
     routing,
 }) => {
     const locale = useLocale();
-    const orderId = slug?.[1] ?? slug?.[0];
+    const orderId = slug?.[slug.length - 1] ?? slug?.[1];
 
     if (!orderId) {
         return null;

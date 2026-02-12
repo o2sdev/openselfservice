@@ -252,4 +252,32 @@ export class CmsService implements CMS.Service {
     getPricingSectionBlock(options: CMS.Request.GetCmsEntryParams) {
         return of(mapPricingSectionBlock(options)).pipe(responseDelay());
     }
+
+    getCartBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of({ id: options.id });
+    }
+
+    getCheckoutCompanyDataBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of({ id: options.id });
+    }
+
+    getCheckoutShippingAddressBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of({ id: options.id });
+    }
+
+    getCheckoutBillingPaymentBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of({ id: options.id });
+    }
+
+    getCheckoutSummaryBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of({ id: options.id });
+    }
+
+    getOrderConfirmationBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of({ id: options.id });
+    }
+
+    getKpisBlock(options: CMS.Request.GetCmsEntryParams) {
+        return of({ id: options.id });
+    }
 }

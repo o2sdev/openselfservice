@@ -1,5 +1,6 @@
 import { CMS } from '@o2s/framework/modules';
 
+import { PAGE_CART_DE, PAGE_CART_EN, PAGE_CART_PL } from './mocks/pages/cart.page';
 import {
     PAGE_ACCESSORIES_DE,
     PAGE_ACCESSORIES_EN,
@@ -23,6 +24,20 @@ import {
     PAGE_ZENDESK_WARRANTY_AND_REPAIR_EN,
     PAGE_ZENDESK_WARRANTY_AND_REPAIR_PL,
 } from './mocks/pages/category.page';
+import {
+    PAGE_CHECKOUT_BILLING_PAYMENT_DE,
+    PAGE_CHECKOUT_BILLING_PAYMENT_EN,
+    PAGE_CHECKOUT_BILLING_PAYMENT_PL,
+    PAGE_CHECKOUT_COMPANY_DATA_DE,
+    PAGE_CHECKOUT_COMPANY_DATA_EN,
+    PAGE_CHECKOUT_COMPANY_DATA_PL,
+    PAGE_CHECKOUT_SHIPPING_ADDRESS_DE,
+    PAGE_CHECKOUT_SHIPPING_ADDRESS_EN,
+    PAGE_CHECKOUT_SHIPPING_ADDRESS_PL,
+    PAGE_CHECKOUT_SUMMARY_DE,
+    PAGE_CHECKOUT_SUMMARY_EN,
+    PAGE_CHECKOUT_SUMMARY_PL,
+} from './mocks/pages/checkout.page';
 import { PAGE_DASHBOARD_DE, PAGE_DASHBOARD_EN, PAGE_DASHBOARD_PL } from './mocks/pages/dashboard.page';
 import { PAGE_INVOICE_LIST_DE, PAGE_INVOICE_LIST_EN, PAGE_INVOICE_LIST_PL } from './mocks/pages/invoice-list.page';
 import {
@@ -40,6 +55,11 @@ import {
     PAGE_NOTIFICATION_LIST_EN,
     PAGE_NOTIFICATION_LIST_PL,
 } from './mocks/pages/notification-list.page';
+import {
+    PAGE_ORDER_CONFIRMATION_DE,
+    PAGE_ORDER_CONFIRMATION_EN,
+    PAGE_ORDER_CONFIRMATION_PL,
+} from './mocks/pages/order-confirmation.page';
 import { PAGE_ORDER_DETAILS_DE, PAGE_ORDER_DETAILS_EN, PAGE_ORDER_DETAILS_PL } from './mocks/pages/order-details.page';
 import { PAGE_ORDER_LIST_DE, PAGE_ORDER_LIST_EN, PAGE_ORDER_LIST_PL } from './mocks/pages/order-list.page';
 import {
@@ -224,6 +244,60 @@ export const mapPage = (slug: string, locale: string): CMS.Model.Page.Page | und
                 updatedAt: '2025-01-01',
             };
 
+        case '/cart':
+            return PAGE_CART_EN;
+        case '/warenkorb':
+            return PAGE_CART_DE;
+        case '/koszyk':
+            return PAGE_CART_PL;
+
+        case '/checkout/company-data':
+            return PAGE_CHECKOUT_COMPANY_DATA_EN;
+        case '/kasse/firmendaten':
+            return PAGE_CHECKOUT_COMPANY_DATA_DE;
+        case '/zamowienie/dane-firmy':
+            return PAGE_CHECKOUT_COMPANY_DATA_PL;
+
+        case '/checkout/shipping-address':
+            return PAGE_CHECKOUT_SHIPPING_ADDRESS_EN;
+        case '/kasse/lieferadresse':
+            return PAGE_CHECKOUT_SHIPPING_ADDRESS_DE;
+        case '/zamowienie/adres-dostawy':
+            return PAGE_CHECKOUT_SHIPPING_ADDRESS_PL;
+
+        case '/checkout/billing-payment':
+            return PAGE_CHECKOUT_BILLING_PAYMENT_EN;
+        case '/kasse/rechnung-zahlung':
+            return PAGE_CHECKOUT_BILLING_PAYMENT_DE;
+        case '/zamowienie/platnosc-rozliczenie':
+            return PAGE_CHECKOUT_BILLING_PAYMENT_PL;
+
+        case '/checkout/summary':
+            return PAGE_CHECKOUT_SUMMARY_EN;
+        case '/kasse/zusammenfassung':
+            return PAGE_CHECKOUT_SUMMARY_DE;
+        case '/zamowienie/podsumowanie':
+            return PAGE_CHECKOUT_SUMMARY_PL;
+
+        case slug.match(/\/order-confirmation\/.+/)?.[0]:
+            return {
+                ...PAGE_ORDER_CONFIRMATION_EN,
+                slug: `/order-confirmation/${slug.match(/(.+)\/(.+)/)?.[2]}`,
+                updatedAt: '2025-01-01',
+            };
+        case slug.match(/\/bestellbestaetigung\/.+/)?.[0]:
+            return {
+                ...PAGE_ORDER_CONFIRMATION_DE,
+                slug: `/bestellbestaetigung/${slug.match(/(.+)\/(.+)/)?.[2]}`,
+                updatedAt: '2025-01-01',
+            };
+        case slug.match(/\/potwierdzenie-zamowienia\/.+/)?.[0]:
+            return {
+                ...PAGE_ORDER_CONFIRMATION_PL,
+                slug: `/potwierdzenie-zamowienia/${slug.match(/(.+)\/(.+)/)?.[2]}`,
+                updatedAt: '2025-01-01',
+            };
+
         case '/contact-us':
             return PAGE_CONTACT_US_EN;
         case '/kontaktiere-uns':
@@ -324,6 +398,12 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_REQUEST_DEVICE_MAINTENANCE_PL,
                 PAGE_ORDER_LIST_PL,
                 PAGE_ORDER_DETAILS_PL,
+                PAGE_CART_PL,
+                PAGE_CHECKOUT_COMPANY_DATA_PL,
+                PAGE_CHECKOUT_SHIPPING_ADDRESS_PL,
+                PAGE_CHECKOUT_BILLING_PAYMENT_PL,
+                PAGE_CHECKOUT_SUMMARY_PL,
+                PAGE_ORDER_CONFIRMATION_PL,
                 PAGE_WARRANTY_AND_REPAIR_PL,
                 PAGE_MAINTENANCE_PL,
                 PAGE_SAFETY_PL,
@@ -349,6 +429,12 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_REQUEST_DEVICE_MAINTENANCE_DE,
                 PAGE_ORDER_LIST_DE,
                 PAGE_ORDER_DETAILS_DE,
+                PAGE_CART_DE,
+                PAGE_CHECKOUT_COMPANY_DATA_DE,
+                PAGE_CHECKOUT_SHIPPING_ADDRESS_DE,
+                PAGE_CHECKOUT_BILLING_PAYMENT_DE,
+                PAGE_CHECKOUT_SUMMARY_DE,
+                PAGE_ORDER_CONFIRMATION_DE,
                 PAGE_WARRANTY_AND_REPAIR_DE,
                 PAGE_MAINTENANCE_DE,
                 PAGE_SAFETY_DE,
@@ -374,6 +460,12 @@ export const getAllPages = (locale: string): CMS.Model.Page.Page[] => {
                 PAGE_REQUEST_DEVICE_MAINTENANCE_EN,
                 PAGE_ORDER_LIST_EN,
                 PAGE_ORDER_DETAILS_EN,
+                PAGE_CART_EN,
+                PAGE_CHECKOUT_COMPANY_DATA_EN,
+                PAGE_CHECKOUT_SHIPPING_ADDRESS_EN,
+                PAGE_CHECKOUT_BILLING_PAYMENT_EN,
+                PAGE_CHECKOUT_SUMMARY_EN,
+                PAGE_ORDER_CONFIRMATION_EN,
                 PAGE_WARRANTY_AND_REPAIR_EN,
                 PAGE_MAINTENANCE_EN,
                 PAGE_SAFETY_EN,
@@ -433,6 +525,24 @@ export const getAlternativePages = (id: string, slug: string, locale: string): C
         PAGE_ORDER_DETAILS_EN,
         PAGE_ORDER_DETAILS_DE,
         PAGE_ORDER_DETAILS_PL,
+        PAGE_CART_EN,
+        PAGE_CART_DE,
+        PAGE_CART_PL,
+        PAGE_CHECKOUT_COMPANY_DATA_EN,
+        PAGE_CHECKOUT_COMPANY_DATA_DE,
+        PAGE_CHECKOUT_COMPANY_DATA_PL,
+        PAGE_CHECKOUT_SHIPPING_ADDRESS_EN,
+        PAGE_CHECKOUT_SHIPPING_ADDRESS_DE,
+        PAGE_CHECKOUT_SHIPPING_ADDRESS_PL,
+        PAGE_CHECKOUT_BILLING_PAYMENT_EN,
+        PAGE_CHECKOUT_BILLING_PAYMENT_DE,
+        PAGE_CHECKOUT_BILLING_PAYMENT_PL,
+        PAGE_CHECKOUT_SUMMARY_EN,
+        PAGE_CHECKOUT_SUMMARY_DE,
+        PAGE_CHECKOUT_SUMMARY_PL,
+        PAGE_ORDER_CONFIRMATION_EN,
+        PAGE_ORDER_CONFIRMATION_DE,
+        PAGE_ORDER_CONFIRMATION_PL,
         PAGE_WARRANTY_AND_REPAIR_EN,
         PAGE_WARRANTY_AND_REPAIR_DE,
         PAGE_WARRANTY_AND_REPAIR_PL,
