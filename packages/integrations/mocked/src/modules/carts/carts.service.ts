@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { Observable, of } from 'rxjs';
 
 import { Auth, Carts } from '@o2s/framework/modules';
@@ -308,6 +308,122 @@ export class CartsService implements Carts.Service {
         }
 
         const cart = findActiveCartByCustomerId(customerId);
+        return of(cart).pipe(responseDelay());
+    }
+
+    prepareCheckout(
+        params: Carts.Request.PrepareCheckoutParams,
+        authorization: string | undefined,
+    ): Observable<Carts.Model.Cart> {
+        const cart = mapCart({ id: params.cartId });
+
+        if (!cart) {
+            throw new NotFoundException(`Cart with ID ${params.cartId} not found`);
+        }
+
+        // Verify authorization for customer carts
+        if (cart.customerId && authorization) {
+            const customerId = this.authService.getCustomerId(authorization);
+            if (cart.customerId !== customerId) {
+                throw new UnauthorizedException('Unauthorized to prepare checkout for this cart');
+            }
+        }
+
+        // Validate cart has items
+        if (!cart.items || cart.items.data.length === 0) {
+            throw new BadRequestException('Cart must have items before preparing checkout');
+        }
+
+        return of(cart).pipe(responseDelay());
+    }
+
+    updateCartAddresses(
+        params: Carts.Request.UpdateCartAddressesParams,
+        data: Carts.Request.UpdateCartAddressesBody,
+        authorization: string | undefined,
+    ): Observable<Carts.Model.Cart> {
+        const existingCart = mapCart({ id: params.cartId });
+
+        if (!existingCart) {
+            throw new NotFoundException('Cart not found');
+        }
+
+        // Verify authorization for customer carts
+        if (existingCart.customerId && authorization) {
+            const customerId = this.authService.getCustomerId(authorization);
+            if (existingCart.customerId !== customerId) {
+                throw new UnauthorizedException('Unauthorized to update this cart');
+            }
+        }
+
+        // Build update data
+        const updateData: Carts.Request.UpdateCartBody = {
+            notes: data.notes,
+            metadata: {
+                ...existingCart.metadata,
+                ...(data.guestEmail ? { guestEmail: data.guestEmail } : {}),
+            },
+        };
+
+        // Set addresses if provided
+        if (data.shippingAddressId) {
+            updateData.shippingAddressId = data.shippingAddressId;
+        }
+        if (data.shippingAddress) {
+            // Store in metadata for mocked implementation
+            updateData.metadata = {
+                ...updateData.metadata,
+                shippingAddress: data.shippingAddress,
+            };
+        }
+        if (data.billingAddressId) {
+            updateData.billingAddressId = data.billingAddressId;
+        }
+        if (data.billingAddress) {
+            // Store in metadata for mocked implementation
+            updateData.metadata = {
+                ...updateData.metadata,
+                billingAddress: data.billingAddress,
+            };
+        }
+
+        const cart = updateCart({ id: params.cartId }, updateData);
+        if (!cart) {
+            throw new NotFoundException('Cart not found');
+        }
+
+        return of(cart).pipe(responseDelay());
+    }
+
+    addShippingMethod(
+        params: Carts.Request.AddShippingMethodParams,
+        data: Carts.Request.AddShippingMethodBody,
+        authorization: string | undefined,
+    ): Observable<Carts.Model.Cart> {
+        const existingCart = mapCart({ id: params.cartId });
+
+        if (!existingCart) {
+            throw new NotFoundException('Cart not found');
+        }
+
+        // Verify authorization for customer carts
+        if (existingCart.customerId && authorization) {
+            const customerId = this.authService.getCustomerId(authorization);
+            if (existingCart.customerId !== customerId) {
+                throw new UnauthorizedException('Unauthorized to modify this cart');
+            }
+        }
+
+        // Validate cart has items
+        if (!existingCart.items || existingCart.items.data.length === 0) {
+            throw new BadRequestException('Cart must have items before adding shipping method');
+        }
+
+        const cart = updateCart({ id: params.cartId }, { shippingMethodId: data.shippingOptionId });
+        if (!cart) {
+            throw new NotFoundException('Cart not found');
+        }
+
         return of(cart).pipe(responseDelay());
     }
 }

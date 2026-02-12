@@ -58,7 +58,6 @@ describe('OrdersService', () => {
 
         service = new OrdersService(
             mockConfig as unknown as ConfigService,
-            mockHttpClient as unknown as import('@nestjs/axios').HttpService,
             mockLogger as unknown as import('@o2s/utils.logger').LoggerService,
             mockMedusaJsService as unknown as import('@/modules/medusajs').Service,
             mockAuthService as unknown as Auth.Service,
@@ -73,7 +72,6 @@ describe('OrdersService', () => {
                 () =>
                     new OrdersService(
                         mockConfig as unknown as ConfigService,
-                        mockHttpClient as unknown as import('@nestjs/axios').HttpService,
                         mockLogger as unknown as import('@o2s/utils.logger').LoggerService,
                         mockMedusaJsService as unknown as import('@/modules/medusajs').Service,
                         mockAuthService as unknown as Auth.Service,

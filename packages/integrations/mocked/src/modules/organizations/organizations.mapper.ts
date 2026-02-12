@@ -66,7 +66,7 @@ const MOCK_ORGANIZATION_1: Organizations.Model.Organization = {
     },
     isActive: true,
     children: [MOCK_ORGANIZATION_2, MOCK_ORGANIZATION_3],
-    customers: [mapCustomer('cus_01KGSR4NSX1S7Y48E6MVWPPVDP')!],
+    customers: [mapCustomer('cus_01KH3J08TY40PYGVEG3A04CP8R')!],
 };
 
 const MOCK_ORGANIZATIONS = [MOCK_ORGANIZATION_1, MOCK_ORGANIZATION_2, MOCK_ORGANIZATION_3];

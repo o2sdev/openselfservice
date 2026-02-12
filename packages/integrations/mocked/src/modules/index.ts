@@ -12,4 +12,7 @@ export * as BillingAccounts from './billing-accounts';
 export * as Search from './search';
 export * as Products from './products';
 export * as Carts from './carts';
+export * as Customers from './customers';
+export * as Payments from './payments';
+export * as Checkout from './checkout';
 export * as Auth from './auth';

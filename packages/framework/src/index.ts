@@ -17,3 +17,6 @@ export * as Search from './modules/search';
 export * as Products from './modules/products';
 export * as Orders from './modules/orders';
 export * as Carts from './modules/carts';
+export * as Customers from './modules/customers';
+export * as Payments from './modules/payments';
+export * as Checkout from './modules/checkout';
