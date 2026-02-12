@@ -4,16 +4,9 @@ import { defineRouting } from 'next-intl/routing';
 import { OrderConfirmationPure } from './OrderConfirmation.client';
 
 const routing = defineRouting({
-    locales: ['en', 'de', 'pl'],
+    locales: ['en'],
     defaultLocale: 'en',
-    localePrefix: 'always',
-    pathnames: {
-        '/login': {
-            en: '/sign-in',
-            de: '/einloggen',
-            pl: '/logowanie',
-        },
-    },
+    pathnames: {},
 });
 
 const baseBlock = {
@@ -33,8 +26,8 @@ const baseBlock = {
         viewOrders: 'View orders',
         continueShopping: 'Continue shopping',
     },
-    viewOrdersPath: '/orders',
-    continueShoppingPath: '/shop',
+    viewOrdersPath: '#',
+    continueShoppingPath: '#',
     order: {
         id: 'ORD-12345',
         items: {
@@ -67,9 +60,6 @@ const baseBlock = {
 const meta = {
     title: 'Blocks/OrderConfirmation',
     component: OrderConfirmationPure,
-    parameters: {
-        layout: 'fullscreen',
-    },
 } satisfies Meta<typeof OrderConfirmationPure>;
 
 export default meta;
