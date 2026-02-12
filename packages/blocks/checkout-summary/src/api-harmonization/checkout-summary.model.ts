@@ -72,4 +72,6 @@ export class CheckoutSummaryBlock extends ApiModels.Block.Block {
     };
     items!: CheckoutSummaryItem[];
     totals!: CheckoutSummaryTotals;
+    /** Checkout step indicator (steps labels + current step index 1-based) */
+    stepIndicator?: { steps: string[]; currentStep: number };
 }

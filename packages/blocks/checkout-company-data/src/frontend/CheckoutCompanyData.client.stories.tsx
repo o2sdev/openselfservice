@@ -4,21 +4,18 @@ import { defineRouting } from 'next-intl/routing';
 import { CheckoutCompanyDataPure } from './CheckoutCompanyData.client';
 
 const routing = defineRouting({
-    locales: ['en', 'de', 'pl'],
+    locales: ['en'],
     defaultLocale: 'en',
-    localePrefix: 'always',
-    pathnames: {
-        '/login': {
-            en: '/sign-in',
-            de: '/einloggen',
-            pl: '/logowanie',
-        },
-    },
+    pathnames: {},
 });
 
 const baseBlock = {
     __typename: 'CheckoutCompanyDataBlock' as const,
     id: 'checkout-company-data-1',
+    stepIndicator: {
+        steps: ['Company details', 'Delivery', 'Payment', 'Summary'],
+        currentStep: 1,
+    },
     title: 'Company details',
     subtitle: 'Fill in your company details',
     fields: {
@@ -58,12 +55,12 @@ const baseBlock = {
     },
     buttons: {
         back: {
-            label: 'Back to cart',
-            path: '/shop/cart',
+            label: 'Back',
+            path: '#',
         },
         next: {
             label: 'Next',
-            path: '/checkout/shipping-address',
+            path: '#',
         },
     },
     errors: {
@@ -82,23 +79,11 @@ const baseBlock = {
         tax: { value: 47.14, currency: 'PLN' as const },
         total: { value: 252.11, currency: 'PLN' as const },
     },
-    continueShopping: {
-        label: 'Back to cart',
-        path: '/shop/cart',
-    },
-    checkoutButton: {
-        label: 'Next',
-        path: '/checkout/shipping-address',
-        icon: 'ArrowRight',
-    },
 };
 
 const meta = {
     title: 'Blocks/CheckoutCompanyData',
     component: CheckoutCompanyDataPure,
-    parameters: {
-        layout: 'fullscreen',
-    },
 } satisfies Meta<typeof CheckoutCompanyDataPure>;
 
 export default meta;

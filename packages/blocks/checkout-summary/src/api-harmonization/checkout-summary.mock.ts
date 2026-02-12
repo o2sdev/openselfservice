@@ -109,5 +109,11 @@ export function getCheckoutSummaryBlockMock(_id: string, locale: string): Checko
             shipping: { value: 0, currency: 'PLN' },
             total: { value: 252.11, currency: 'PLN' },
         },
+        stepIndicator: {
+            steps: isPl
+                ? ['Dane firmy', 'Dostawa', 'Płatność', 'Podsumowanie']
+                : ['Company details', 'Delivery', 'Payment', 'Summary'],
+            currentStep: 4,
+        },
     };
 }

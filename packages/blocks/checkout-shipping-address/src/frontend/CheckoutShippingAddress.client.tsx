@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 import { CartSummary } from '@o2s/ui/components/Cart/CartSummary';
+import { StepIndicator } from '@o2s/ui/components/Checkout/StepIndicator';
 import { Price } from '@o2s/ui/components/Price';
 
 import { Button } from '@o2s/ui/elements/button';
@@ -23,6 +24,7 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
     routing,
     title,
     subtitle,
+    stepIndicator,
     fields,
     buttons,
     errors: errorMessages,
@@ -123,6 +125,7 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
 
     return (
         <div className="w-full flex flex-col gap-8">
+            {stepIndicator && <StepIndicator steps={stepIndicator.steps} currentStep={stepIndicator.currentStep} />}
             <div className="flex flex-col gap-2">
                 <Typography variant="h1">{title}</Typography>
                 {subtitle && (

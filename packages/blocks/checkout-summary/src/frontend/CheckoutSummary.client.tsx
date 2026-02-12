@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 
 import { useToast } from '@o2s/ui/hooks/use-toast';
 
+import { StepIndicator } from '@o2s/ui/components/Checkout/StepIndicator';
 import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
 import { Image } from '@o2s/ui/components/Image';
 import { Price } from '@o2s/ui/components/Price';
@@ -24,6 +25,7 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
     onConfirm,
     title,
     subtitle,
+    stepIndicator,
     sections,
     buttons,
     loading: loadingLabels,
@@ -96,6 +98,7 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
 
     return (
         <div className="w-full flex flex-col gap-8">
+            {stepIndicator && <StepIndicator steps={stepIndicator.steps} currentStep={stepIndicator.currentStep} />}
             <div className="flex flex-col gap-2">
                 <Typography variant="h1">{title}</Typography>
                 {subtitle && (

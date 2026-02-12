@@ -81,5 +81,11 @@ export function getCheckoutCompanyDataBlockMock(_id: string, locale: string): Ch
             path: '/checkout/shipping-address',
             icon: 'ArrowRight',
         },
+        stepIndicator: {
+            steps: isPl
+                ? ['Dane firmy', 'Dostawa', 'Płatność', 'Podsumowanie']
+                : ['Company details', 'Delivery', 'Payment', 'Summary'],
+            currentStep: 1,
+        },
     };
 }

@@ -4,21 +4,18 @@ import { defineRouting } from 'next-intl/routing';
 import { CheckoutSummaryPure } from './CheckoutSummary.client';
 
 const routing = defineRouting({
-    locales: ['en', 'de', 'pl'],
+    locales: ['en'],
     defaultLocale: 'en',
-    localePrefix: 'always',
-    pathnames: {
-        '/login': {
-            en: '/sign-in',
-            de: '/einloggen',
-            pl: '/logowanie',
-        },
-    },
+    pathnames: {},
 });
 
 const baseBlock = {
     __typename: 'CheckoutSummaryBlock' as const,
     id: 'checkout-summary-1',
+    stepIndicator: {
+        steps: ['Company details', 'Delivery', 'Payment', 'Summary'],
+        currentStep: 4,
+    },
     title: 'Order summary',
     subtitle: 'Review your order before submitting',
     sections: {
@@ -57,7 +54,7 @@ const baseBlock = {
         },
     },
     buttons: {
-        back: { label: 'Back', path: '/checkout/billing-payment' },
+        back: { label: 'Back', path: '#' },
         confirm: 'Place order',
     },
     loading: { confirming: 'Processing...' },
@@ -77,8 +74,8 @@ const baseBlock = {
             total: { value: 179.98, currency: 'PLN' as const },
             product: {
                 name: 'CLARIS S Filter Cartridge',
-                subtitle: 'Filtry • JURA',
-                image: { url: '/images/products/filter-claris.jpg', alt: 'CLARIS S' },
+                subtitle: 'Filters • JURA',
+                image: { url: 'https://picsum.photos/200/200', alt: 'CLARIS S filter cartridge' },
             },
         },
         {
@@ -87,7 +84,11 @@ const baseBlock = {
             quantity: 1,
             price: { value: 24.99, currency: 'PLN' as const },
             total: { value: 24.99, currency: 'PLN' as const },
-            product: { name: 'Cleaning solution', subtitle: 'Konserwacja' },
+            product: {
+                name: 'Cleaning solution',
+                subtitle: 'Maintenance',
+                image: { url: 'https://picsum.photos/200/201', alt: 'Cleaning solution' },
+            },
         },
     ],
     totals: {
@@ -106,9 +107,6 @@ const mockOnConfirm = async () => {
 const meta = {
     title: 'Blocks/CheckoutSummary',
     component: CheckoutSummaryPure,
-    parameters: {
-        layout: 'fullscreen',
-    },
 } satisfies Meta<typeof CheckoutSummaryPure>;
 
 export default meta;

@@ -52,4 +52,6 @@ export class CheckoutCompanyDataBlock extends ApiModels.Block.Block {
     continueShopping?: { label: string; path: string };
     /** Proceed to next step (shown in CartSummary, optional) */
     checkoutButton?: { label: string; path: string; icon?: string };
+    /** Checkout step indicator (steps labels + current step index 1-based) */
+    stepIndicator?: { steps: string[]; currentStep: number };
 }

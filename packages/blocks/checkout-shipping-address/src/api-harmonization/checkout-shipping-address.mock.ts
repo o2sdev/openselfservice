@@ -94,5 +94,11 @@ export function getCheckoutShippingAddressBlockMock(_id: string, locale: string)
             path: '/checkout/billing-payment',
             icon: 'ArrowRight',
         },
+        stepIndicator: {
+            steps: isPl
+                ? ['Dane firmy', 'Dostawa', 'Płatność', 'Podsumowanie']
+                : ['Company details', 'Delivery', 'Payment', 'Summary'],
+            currentStep: 2,
+        },
     };
 }

@@ -4,21 +4,18 @@ import { defineRouting } from 'next-intl/routing';
 import { CheckoutBillingPaymentPure } from './CheckoutBillingPayment.client';
 
 const routing = defineRouting({
-    locales: ['en', 'de', 'pl'],
+    locales: ['en'],
     defaultLocale: 'en',
-    localePrefix: 'always',
-    pathnames: {
-        '/login': {
-            en: '/sign-in',
-            de: '/einloggen',
-            pl: '/logowanie',
-        },
-    },
+    pathnames: {},
 });
 
 const baseBlock = {
     __typename: 'CheckoutBillingPaymentBlock' as const,
     id: 'checkout-billing-payment-1',
+    stepIndicator: {
+        steps: ['Company details', 'Delivery', 'Payment', 'Summary'],
+        currentStep: 3,
+    },
     title: 'Billing and payment',
     subtitle: 'Select payment method',
     fields: {
@@ -63,11 +60,11 @@ const baseBlock = {
     buttons: {
         back: {
             label: 'Back',
-            path: '/checkout/shipping-address',
+            path: '#',
         },
         next: {
             label: 'Next',
-            path: '/checkout/summary',
+            path: '#',
         },
     },
     errors: {
@@ -85,23 +82,11 @@ const baseBlock = {
         tax: { value: 47.14, currency: 'PLN' as const },
         total: { value: 252.11, currency: 'PLN' as const },
     },
-    continueShopping: {
-        label: 'Back to cart',
-        path: '/shop/cart',
-    },
-    checkoutButton: {
-        label: 'Next',
-        path: '/checkout/summary',
-        icon: 'ArrowRight',
-    },
 };
 
 const meta = {
     title: 'Blocks/CheckoutBillingPayment',
     component: CheckoutBillingPaymentPure,
-    parameters: {
-        layout: 'fullscreen',
-    },
 } satisfies Meta<typeof CheckoutBillingPaymentPure>;
 
 export default meta;

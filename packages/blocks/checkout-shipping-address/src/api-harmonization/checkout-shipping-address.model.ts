@@ -60,4 +60,6 @@ export class CheckoutShippingAddressBlock extends ApiModels.Block.Block {
     };
     continueShopping?: { label: string; path: string };
     checkoutButton?: { label: string; path: string; icon?: string };
+    /** Checkout step indicator (steps labels + current step index 1-based) */
+    stepIndicator?: { steps: string[]; currentStep: number };
 }
