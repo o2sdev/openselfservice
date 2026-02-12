@@ -62,19 +62,9 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
 }) => {
     const { Link: LinkComponent } = createNavigation(routing);
 
-    const [items, setItems] = useState<Model.CartBlockItem[]>(initialItems ?? []);
-    const [quantities, setQuantities] = useState<Record<string, number>>(() => {
-        const q: Record<string, number> = {};
-        (initialItems ?? []).forEach((item) => {
-            q[item.id] = item.quantity;
-        });
-        return q;
-    });
     const [isPdfModalOpen, setIsPdfModalOpen] = useState(false);
 
-    const visibleItems = useMemo(() => {
-        return items.filter((item) => quantities[item.id] !== undefined);
-    }, [items, quantities]);
+    const items = useMemo(() => initialItems ?? [], [initialItems]);
 
     const totals = useMemo((): Model.CartBlockTotals => {
         const currency = defaultCurrency ?? initialTotals?.subtotal?.currency;
@@ -90,34 +80,17 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
         }
         const itemData = items.map((item) => ({
             price: item.price,
-            quantity: quantities[item.id] ?? item.quantity,
+            quantity: item.quantity,
         }));
         return calculateCartTotals(itemData, taxRate, currency as Models.Price.Currency);
-    }, [items, quantities, taxRate, defaultCurrency, initialTotals]);
+    }, [items, taxRate, defaultCurrency, initialTotals]);
 
     const updateQuantity = (itemId: string, newQuantity: number) => {
-        if (newQuantity < 1 || taxRate == null || defaultCurrency == null) return;
-        setQuantities((prev) => ({ ...prev, [itemId]: newQuantity }));
-        const updatedItems = items.map((item) => {
-            const q = item.id === itemId ? newQuantity : (quantities[item.id] ?? item.quantity);
-            return {
-                ...item,
-                quantity: q,
-                total: { value: item.price.value * q, currency: item.price.currency },
-            };
-        });
-        setItems(updatedItems);
+        console.log('[Cart] updateQuantity', { itemId, newQuantity });
     };
 
     const removeItem = (itemId: string) => {
-        if (taxRate == null || defaultCurrency == null) return;
-        setQuantities((prev) => {
-            const next = { ...prev };
-            delete next[itemId];
-            return next;
-        });
-        const updatedItems = items.filter((item) => item.id !== itemId);
-        setItems(updatedItems);
+        console.log('[Cart] removeItem', { itemId });
     };
 
     if (!title || taxRate == null || !defaultCurrency || !labels || !actions || !summaryLabels || !empty) {
@@ -128,7 +101,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
         );
     }
 
-    if (visibleItems.length === 0) {
+    if (items.length === 0) {
         return (
             <div className="w-full flex flex-col gap-8 md:gap-12 items-center justify-center py-12">
                 <DynamicIcon name="ShoppingCart" size={64} className="text-muted-foreground" />
@@ -161,12 +134,9 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 {/* Cart Items */}
                 <div className="lg:col-span-2 flex flex-col gap-4">
-                    {visibleItems.map((item) => {
-                        const quantity = quantities[item.id] ?? item.quantity;
-                        const itemTotal = {
-                            value: item.price.value * quantity,
-                            currency: item.price.currency,
-                        };
+                    {items.map((item) => {
+                        const quantity = item.quantity;
+                        const itemTotal = item.total;
                         const product = item.product ?? {
                             name: labels.unknownProductName,
                             subtitle: undefined,

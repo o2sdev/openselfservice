@@ -3,11 +3,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { StepIndicator } from './StepIndicator';
 
 const meta: Meta<typeof StepIndicator> = {
-    title: 'Components/StepIndicator',
+    title: 'Components/Checkout/StepIndicator',
     component: StepIndicator,
-    parameters: {
-        layout: 'fullscreen',
-    },
     tags: ['autodocs'],
 };
 
@@ -16,7 +13,7 @@ type Story = StoryObj<typeof StepIndicator>;
 
 export const Default: Story = {
     args: {
-        steps: ['Dane firmy', 'Dostawa', 'Płatność', 'Podsumowanie'],
+        steps: ['Company details', 'Delivery', 'Payment', 'Summary'],
         currentStep: 2,
     },
 };

@@ -4,16 +4,9 @@ import { defineRouting } from 'next-intl/routing';
 import { CartPure } from './Cart.client';
 
 const routing = defineRouting({
-    locales: ['en', 'de', 'pl'],
+    locales: ['en'],
     defaultLocale: 'en',
-    localePrefix: 'always',
-    pathnames: {
-        '/login': {
-            en: '/sign-in',
-            de: '/einloggen',
-            pl: '/logowanie',
-        },
-    },
+    pathnames: {},
 });
 
 const baseBlock = {
@@ -41,12 +34,12 @@ const baseBlock = {
     },
     checkoutButton: {
         label: 'Proceed to checkout',
-        path: '/checkout',
+        path: '#',
         icon: 'ShoppingCart',
     },
     continueShopping: {
         label: 'Continue shopping',
-        path: '/products',
+        path: '#',
     },
     previewButtons: {
         viewPDF: {
@@ -67,7 +60,7 @@ const baseBlock = {
         description: 'Add products to place an order',
         continueShopping: {
             label: 'Go to shop',
-            path: '/products',
+            path: '#',
         },
     },
     items: [
@@ -79,10 +72,10 @@ const baseBlock = {
             total: { value: 179.98, currency: 'PLN' as const },
             product: {
                 name: 'CLARIS S Filter Cartridge',
-                subtitle: 'Filtry • JURA',
+                subtitle: 'Filters • JURA',
                 image: {
-                    url: '/images/products/filter-claris.jpg',
-                    alt: 'CLARIS S',
+                    url: 'https://picsum.photos/200/200',
+                    alt: 'CLARIS S filter cartridge',
                 },
             },
         },
@@ -94,7 +87,11 @@ const baseBlock = {
             total: { value: 24.99, currency: 'PLN' as const },
             product: {
                 name: 'Cleaning solution',
-                subtitle: 'Konserwacja',
+                subtitle: 'Maintenance',
+                image: {
+                    url: 'https://picsum.photos/200/201',
+                    alt: 'Cleaning solution',
+                },
             },
         },
     ],
@@ -108,9 +105,6 @@ const baseBlock = {
 const meta = {
     title: 'Blocks/Cart',
     component: CartPure,
-    parameters: {
-        layout: 'fullscreen',
-    },
 } satisfies Meta<typeof CartPure>;
 
 export default meta;
