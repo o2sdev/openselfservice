@@ -12,6 +12,7 @@ export const mapProductDetailsBlock = (_locale: string): CMS.Model.ProductDetail
             downloadLabel: 'Download Brochure',
             priceLabel: 'Price',
             offerLabel: 'Offer',
+            variantLabel: 'Variant',
         },
     };
 };

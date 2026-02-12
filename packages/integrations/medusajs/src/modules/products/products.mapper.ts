@@ -1,5 +1,6 @@
 import { HttpTypes } from '@medusajs/types';
 import { NotFoundException } from '@nestjs/common';
+import slugifyLib from 'slugify';
 
 import { Models, Products } from '@o2s/framework/modules';
 
@@ -7,20 +8,10 @@ import { CompatibleServicesResponse, FeaturedServicesResponse } from '../resourc
 
 import { RelatedProductsResponse } from './response.types';
 
-// Convert string to URL-friendly slug
-const slugify = (text: string): string => {
-    return text
-        .toLowerCase()
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '') // Remove diacritics
-        .replace(/[^a-z0-9]+/g, '-') // Replace non-alphanumeric with dashes
-        .replace(/^-+|-+$/g, ''); // Trim dashes from start/end
-};
-
 // Generate variant slug from SKU
 const getVariantSlug = (variantSku?: string | null): string | null => {
     if (variantSku) {
-        return slugify(variantSku);
+        return slugifyLib(variantSku, { lower: true, strict: true });
     }
     return null;
 };
@@ -28,6 +19,7 @@ const getVariantSlug = (variantSku?: string | null): string | null => {
 // Generate SEO-friendly product link
 // Uses handle if available, otherwise falls back to product ID
 const generateProductLink = (
+    basePath: string,
     productHandle: string | null | undefined,
     productId: string,
     variantSku?: string | null,
@@ -35,22 +27,12 @@ const generateProductLink = (
     const slug = productHandle || productId;
     const variantSlug = getVariantSlug(variantSku);
     if (variantSlug) {
-        return `/products/${slug}/${variantSlug}`;
+        return `${basePath}/${slug}/${variantSlug}`;
     }
-    return `/products/${slug}`;
+    return `${basePath}/${slug}`;
 };
 
-// Fields to extract as detailed specs from variant
-const VARIANT_SPEC_FIELDS = [
-    'weight',
-    'height',
-    'width',
-    'length',
-    'material',
-    'origin_country',
-    'hs_code',
-    'mid_code',
-] as const;
+// Note: VARIANT_SPEC_FIELDS moved to environment variable MEDUSA_VARIANT_SPEC_FIELDS
 
 // Convert snake_case to Title Case
 const formatLabel = (key: string): string => {
@@ -100,11 +82,14 @@ const mapKeySpecsFromMetadata = (variant: HttpTypes.AdminProductVariant): Produc
 
 // Map variant and product attributes to detailedSpecs dynamically
 // Variant attributes take precedence over product attributes
-const mapVariantToDetailedSpecs = (variant: HttpTypes.AdminProductVariant): Products.Model.DetailedSpec[] => {
+const mapVariantToDetailedSpecs = (
+    variant: HttpTypes.AdminProductVariant,
+    specFields: string[],
+): Products.Model.DetailedSpec[] => {
     const specs: Products.Model.DetailedSpec[] = [];
     const product = variant.product;
 
-    for (const field of VARIANT_SPEC_FIELDS) {
+    for (const field of specFields) {
         // Check variant first, then fall back to product
         const variantValue = variant[field as keyof HttpTypes.AdminProductVariant];
         const productValue = product?.[field as keyof HttpTypes.AdminProduct];
@@ -129,19 +114,28 @@ const getVariantOptionsMap = (variant: HttpTypes.AdminProductVariant): Record<st
         return {};
     }
     return Object.fromEntries(
-        options.filter((o) => o.option_id && o.value != null).map((o) => [o.option_id!, o.value!]),
+        options
+            .filter((option) => option.option_id && option.value != null)
+            .map((option) => [option.option_id!, option.value!]),
     );
 };
 
 // Map a list of Medusa variants to ProductVariantOption[]
-const mapVariantOptions = (variants: HttpTypes.AdminProductVariant[]): Products.Model.ProductVariantOption[] => {
-    return variants.map((v) => {
-        const title = getVariantTitle(v);
-        const optionsMap = getVariantOptionsMap(v);
+const mapVariantOptions = (
+    variants: HttpTypes.AdminProductVariant[],
+    basePath: string,
+    productHandle: string | null | undefined,
+    productId: string,
+): Products.Model.ProductVariantOption[] => {
+    return variants.map((variant) => {
+        const title = getVariantTitle(variant);
+        const optionsMap = getVariantOptionsMap(variant);
+        const slug = getVariantSlug(variant.sku) || variant.id;
         return {
-            id: v.id,
+            id: variant.id,
             title,
-            slug: getVariantSlug(v.sku) || v.id,
+            slug,
+            link: generateProductLink(basePath, productHandle, productId, variant.sku),
             options: Object.keys(optionsMap).length > 0 ? optionsMap : undefined,
         };
     });
@@ -157,13 +151,13 @@ const mapOptionGroups = (variants: HttpTypes.AdminProductVariant[]): Products.Mo
             | undefined;
         if (!options || !Array.isArray(options)) continue;
 
-        for (const opt of options) {
-            if (!opt.option_id || opt.value == null) continue;
-            const title = opt.option?.title ?? opt.option_id;
-            if (!groupsById.has(opt.option_id)) {
-                groupsById.set(opt.option_id, { title, values: new Set() });
+        for (const option of options) {
+            if (!option.option_id || option.value == null) continue;
+            const title = option.option?.title ?? option.option_id;
+            if (!groupsById.has(option.option_id)) {
+                groupsById.set(option.option_id, { title, values: new Set() });
             }
-            groupsById.get(opt.option_id)!.values.add(opt.value);
+            groupsById.get(option.option_id)!.values.add(option.value);
         }
     }
 
@@ -178,7 +172,7 @@ const mapOptionGroups = (variants: HttpTypes.AdminProductVariant[]): Products.Mo
 const getVariantTitle = (variant: HttpTypes.AdminProductVariant): string => {
     if (variant.options && Array.isArray(variant.options) && variant.options.length > 0) {
         return variant.options
-            .map((opt: { value?: string }) => opt.value)
+            .map((option: { value?: string }) => option.value)
             .filter(Boolean)
             .join(' / ');
     }
@@ -188,7 +182,9 @@ const getVariantTitle = (variant: HttpTypes.AdminProductVariant): string => {
 export const mapProduct = (
     productVariant: HttpTypes.AdminProductVariant,
     defaultCurrency: string,
-    allVariants?: HttpTypes.AdminProductVariant[],
+    allVariants: HttpTypes.AdminProductVariant[] | undefined,
+    basePath: string,
+    specFields: string[],
 ): Products.Model.Product => {
     if (!productVariant) {
         throw new NotFoundException('Product variant is undefined');
@@ -198,7 +194,7 @@ export const mapProduct = (
     const price = productVariant.prices?.find((p) => p.currency_code?.toUpperCase() === defaultCurrency);
 
     // Build detailedSpecs from variant attributes dynamically
-    const detailedSpecs = mapVariantToDetailedSpecs(productVariant);
+    const detailedSpecs = mapVariantToDetailedSpecs(productVariant, specFields);
 
     return {
         id: product?.id || '',
@@ -223,7 +219,7 @@ export const mapProduct = (
                 (price?.currency_code?.toUpperCase() as Models.Price.Currency) ||
                 (defaultCurrency as Models.Price.Currency),
         },
-        link: generateProductLink(product?.handle, product?.id || '', productVariant.sku),
+        link: generateProductLink(basePath, product?.handle, product?.id || '', productVariant.sku),
         type: mapProductType(product?.type || undefined),
         category: product?.categories?.[0]?.name || '',
         tags:
@@ -234,13 +230,17 @@ export const mapProduct = (
         detailedSpecs: detailedSpecs.length > 0 ? detailedSpecs : undefined,
         keySpecs: mapKeySpecsFromMetadata(productVariant),
         optionGroups: allVariants ? mapOptionGroups(allVariants) : undefined,
-        variants: allVariants && allVariants.length > 1 ? mapVariantOptions(allVariants) : undefined,
+        variants:
+            allVariants && allVariants.length > 1
+                ? mapVariantOptions(allVariants, basePath, product?.handle, product?.id || '')
+                : undefined,
     };
 };
 
 export const mapProducts = (
     data: HttpTypes.AdminProductListResponse,
     defaultCurrency: string,
+    basePath: string,
     categoryFilter?: string,
 ): Products.Model.Products => {
     let products = data.products;
@@ -277,7 +277,7 @@ export const mapProducts = (
                         (price?.currency_code?.toUpperCase() as Models.Price.Currency) ||
                         (defaultCurrency as Models.Price.Currency),
                 },
-                link: generateProductLink(product.handle, product.id, firstVariant?.sku),
+                link: generateProductLink(basePath, product.handle, product.id, firstVariant?.sku),
                 type: mapProductType(product?.type || undefined),
                 category: product.categories?.[0]?.name || '',
                 tags:
@@ -286,14 +286,20 @@ export const mapProducts = (
                         variant: 'default',
                     })) || [],
                 variants:
-                    product.variants && product.variants.length > 1 ? mapVariantOptions(product.variants) : undefined,
+                    product.variants && product.variants.length > 1
+                        ? mapVariantOptions(product.variants, basePath, product.handle, product.id)
+                        : undefined,
             };
         }),
         total: categoryFilter ? products.length : data.count,
     };
 };
 
-export const mapRelatedProducts = (data: RelatedProductsResponse, defaultCurrency: string): Products.Model.Products => {
+export const mapRelatedProducts = (
+    data: RelatedProductsResponse,
+    defaultCurrency: string,
+    basePath: string,
+): Products.Model.Products => {
     return {
         data: data.productReferences.map((ref) => {
             const targetProduct = ref.targetProduct;
@@ -320,7 +326,7 @@ export const mapRelatedProducts = (data: RelatedProductsResponse, defaultCurrenc
                         (price?.currency_code?.toUpperCase() as Models.Price.Currency) ||
                         (defaultCurrency as Models.Price.Currency),
                 },
-                link: generateProductLink(product?.handle, product?.id || '', targetProduct.sku),
+                link: generateProductLink(basePath, product?.handle, product?.id || '', targetProduct.sku),
                 type: mapProductType(product?.type || undefined),
                 category: product?.categories?.[0]?.name || '',
                 tags:
@@ -337,10 +343,12 @@ export const mapRelatedProducts = (data: RelatedProductsResponse, defaultCurrenc
 export const mapCompatibleServices = (
     data: CompatibleServicesResponse,
     defaultCurrency: string,
+    basePath: string,
+    specFields: string[],
 ): Products.Model.Products => {
     return {
         data: data.compatibleServices.map((product) => {
-            return mapProduct(product, defaultCurrency);
+            return mapProduct(product, defaultCurrency, undefined, basePath, specFields);
         }),
         total: data.count,
     };
@@ -349,10 +357,12 @@ export const mapCompatibleServices = (
 export const mapFeaturedServices = (
     data: FeaturedServicesResponse,
     defaultCurrency: string,
+    basePath: string,
+    specFields: string[],
 ): Products.Model.Products => {
     return {
         data: data.featuredServices.map((product) => {
-            return mapProduct(product, defaultCurrency);
+            return mapProduct(product, defaultCurrency, undefined, basePath, specFields);
         }),
         total: data.count,
     };

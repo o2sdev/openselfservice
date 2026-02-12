@@ -25,6 +25,7 @@ export type ProductVariantOption = {
     id: string;
     title: string;
     slug: string;
+    link?: string;
     options?: Record<string, string>;
 };
 

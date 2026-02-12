@@ -4,7 +4,6 @@ import { useTranslations } from 'next-intl';
 import { createNavigation } from 'next-intl/navigation';
 import React, { useCallback, useMemo } from 'react';
 
-import type { Products } from '@o2s/framework/modules';
 import type { Models } from '@o2s/framework/modules';
 
 import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';

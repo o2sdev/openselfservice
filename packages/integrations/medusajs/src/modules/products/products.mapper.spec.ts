@@ -14,6 +14,8 @@ import {
 import type { RelatedProductsResponse } from './response.types';
 
 const defaultCurrency = 'EUR';
+const basePath = '/products';
+const specFields = ['weight', 'height', 'width', 'length', 'material'];
 
 describe('products.mapper', () => {
     describe('mapProduct', () => {
@@ -33,7 +35,13 @@ describe('products.mapper', () => {
                 },
                 prices: [{ currency_code: 'eur', amount: 1999 }],
             };
-            const result = mapProduct(variant as unknown as HttpTypes.AdminProductVariant, defaultCurrency);
+            const result = mapProduct(
+                variant as unknown as HttpTypes.AdminProductVariant,
+                defaultCurrency,
+                undefined,
+                basePath,
+                specFields,
+            );
             expect(result.id).toBe('prod_1');
             expect(result.sku).toBe('SKU1');
             expect(result.variantId).toBe('var_1');
@@ -58,7 +66,13 @@ describe('products.mapper', () => {
                 },
                 prices: [{ currency_code: 'usd', amount: 100 }],
             };
-            const result = mapProduct(variant as unknown as HttpTypes.AdminProductVariant, defaultCurrency);
+            const result = mapProduct(
+                variant as unknown as HttpTypes.AdminProductVariant,
+                defaultCurrency,
+                undefined,
+                basePath,
+                specFields,
+            );
             expect(result.price.value).toBe(0);
             expect(result.price.currency).toBe(defaultCurrency);
         });
@@ -75,7 +89,7 @@ describe('products.mapper', () => {
                 limit: 10,
                 offset: 0,
             } as unknown as HttpTypes.AdminProductListResponse;
-            const result = mapProducts(data, defaultCurrency);
+            const result = mapProducts(data, defaultCurrency, basePath);
             expect(result.data).toHaveLength(2);
             expect(result.total).toBe(2);
             expect(result.data[0]?.id).toBe('p1');
@@ -101,7 +115,7 @@ describe('products.mapper', () => {
                 offset: 0,
                 limit: 10,
             } as unknown as RelatedProductsResponse;
-            const result = mapRelatedProducts(data, defaultCurrency);
+            const result = mapRelatedProducts(data, defaultCurrency, basePath);
             expect(result.data).toHaveLength(1);
             expect(result.data[0]?.id).toBe('p1');
             expect(result.data[0]?.name).toBe('Related');
@@ -131,7 +145,7 @@ describe('products.mapper', () => {
                 offset: 0,
                 limit: 10,
             } as unknown as CompatibleServicesResponse;
-            const result = mapCompatibleServices(data, defaultCurrency);
+            const result = mapCompatibleServices(data, defaultCurrency, basePath, specFields);
             expect(result.data).toHaveLength(1);
             expect(result.total).toBe(1);
         });
@@ -159,7 +173,7 @@ describe('products.mapper', () => {
                 offset: 0,
                 limit: 10,
             } as unknown as FeaturedServicesResponse;
-            const result = mapFeaturedServices(data, defaultCurrency);
+            const result = mapFeaturedServices(data, defaultCurrency, basePath, specFields);
             expect(result.data).toHaveLength(1);
             expect(result.total).toBe(1);
         });
