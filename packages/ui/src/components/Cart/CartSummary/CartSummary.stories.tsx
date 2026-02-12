@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { fn } from 'storybook/test';
 
 import { CartSummary } from './CartSummary';
 
@@ -6,7 +7,7 @@ const meta: Meta<typeof CartSummary> = {
     title: 'Components/Cart/CartSummary',
     component: CartSummary,
     parameters: {
-        layout: 'fullscreen',
+        layout: 'padded',
     },
     tags: ['autodocs'],
 };
@@ -19,10 +20,10 @@ const defaultArgs = {
     tax: { value: 47.14, currency: 'PLN' as const },
     total: { value: 252.11, currency: 'PLN' as const },
     labels: {
-        title: 'Podsumowanie',
-        subtotalLabel: 'Suma netto',
+        title: 'Summary',
+        subtotalLabel: 'Subtotal',
         taxLabel: 'VAT (23%)',
-        totalLabel: 'Suma brutto',
+        totalLabel: 'Total',
     },
 };
 
@@ -30,26 +31,14 @@ export const Default: Story = {
     args: {
         ...defaultArgs,
         checkoutButton: {
-            url: '/checkout',
-            label: 'Przejdź do kasy',
+            url: '#',
+            label: 'Proceed to checkout',
             icon: 'ShoppingCart',
         },
         continueShopping: {
-            url: '/shop',
-            label: 'Kontynuuj zakupy',
+            url: '#',
+            label: 'Continue shopping',
         },
-    },
-};
-
-export const WithLoadingState: Story = {
-    args: {
-        ...defaultArgs,
-        checkoutButton: {
-            url: '/checkout',
-            label: 'Przejdź do kasy',
-        },
-        isCheckoutLoading: true,
-        loadingLabel: 'Przetwarzanie...',
     },
 };
 
@@ -57,9 +46,9 @@ export const WithPreviewButton: Story = {
     args: {
         ...defaultArgs,
         previewButton: {
-            label: 'Zobacz PDF',
+            label: 'View PDF',
             icon: 'FileText',
-            onClick: () => {},
+            onClick: fn(),
         },
     },
 };

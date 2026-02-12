@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { fn } from 'storybook/test';
 
 import { CartItem } from './CartItem';
 
@@ -6,7 +7,7 @@ const meta: Meta<typeof CartItem> = {
     title: 'Components/Cart/CartItem',
     component: CartItem,
     parameters: {
-        layout: 'fullscreen',
+        layout: 'padded',
     },
     tags: ['autodocs'],
 };
@@ -17,34 +18,26 @@ type Story = StoryObj<typeof CartItem>;
 const defaultArgs = {
     id: 'cart-item-001',
     productId: 'PRIM-001',
-    name: 'Wkład CLARIS S',
-    subtitle: 'Filtry • JURA',
+    name: 'CLARIS S filter cartridge',
+    subtitle: 'Filters • JURA',
     image: {
-        url: '/demo/primulator/products/4339-10_filtr-wody-everpure-claris-s.jpg',
-        alt: 'Wkład filtrujący CLARIS S',
+        url: 'https://picsum.photos/200/200',
+        alt: 'CLARIS S filtering cartridge',
     },
     quantity: 2,
     price: { value: 89.99, currency: 'PLN' as const },
     total: { value: 179.98, currency: 'PLN' as const },
     labels: {
-        itemTotal: 'Suma',
-        remove: 'Usuń produkt',
-        increaseQuantity: 'Zwiększ ilość',
-        decreaseQuantity: 'Zmniejsz ilość',
-        quantity: 'Ilość',
+        itemTotal: 'Subtotal',
+        remove: 'Remove product',
+        increaseQuantity: 'Increase quantity',
+        decreaseQuantity: 'Decrease quantity',
+        quantity: 'Quantity',
     },
-    onRemove: () => {},
-    onQuantityChange: () => {},
+    onRemove: fn(),
+    onQuantityChange: fn(),
 };
 
 export const Default: Story = {
     args: defaultArgs,
-};
-
-export const SingleQuantity: Story = {
-    args: {
-        ...defaultArgs,
-        quantity: 1,
-        total: { value: 89.99, currency: 'PLN' as const },
-    },
 };
