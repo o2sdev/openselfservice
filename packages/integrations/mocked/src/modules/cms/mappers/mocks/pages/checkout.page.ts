@@ -28,7 +28,7 @@ const createCheckoutPage = (
         },
     },
     roles: [Roles.ORG_USER, Roles.ORG_ADMIN],
-    hasOwnTitle: false,
+    hasOwnTitle: true,
     template: {
         __typename: 'OneColumnTemplate',
         slots: {

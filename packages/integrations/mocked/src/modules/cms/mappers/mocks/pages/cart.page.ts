@@ -20,7 +20,7 @@ export const PAGE_CART_EN: CMS.Model.Page.Page = {
         },
     },
     roles: [Roles.ORG_USER, Roles.ORG_ADMIN],
-    hasOwnTitle: false,
+    hasOwnTitle: true,
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
@@ -54,7 +54,7 @@ export const PAGE_CART_DE: CMS.Model.Page.Page = {
         },
     },
     roles: [Roles.ORG_USER, Roles.ORG_ADMIN],
-    hasOwnTitle: false,
+    hasOwnTitle: true,
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
@@ -88,7 +88,7 @@ export const PAGE_CART_PL: CMS.Model.Page.Page = {
         },
     },
     roles: [Roles.ORG_USER, Roles.ORG_ADMIN],
-    hasOwnTitle: false,
+    hasOwnTitle: true,
     template: {
         __typename: 'OneColumnTemplate',
         slots: {

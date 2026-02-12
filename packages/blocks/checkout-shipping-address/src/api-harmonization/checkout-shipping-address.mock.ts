@@ -85,15 +85,6 @@ export function getCheckoutShippingAddressBlockMock(_id: string, locale: string)
             tax: { value: 47.14, currency: 'PLN' },
             total: { value: 252.11, currency: 'PLN' },
         },
-        continueShopping: {
-            label: isPl ? 'Wróć do koszyka' : 'Back to cart',
-            path: '/shop/cart',
-        },
-        checkoutButton: {
-            label: isPl ? 'Dalej' : 'Next',
-            path: '/checkout/billing-payment',
-            icon: 'ArrowRight',
-        },
         stepIndicator: {
             steps: isPl
                 ? ['Dane firmy', 'Dostawa', 'Płatność', 'Podsumowanie']

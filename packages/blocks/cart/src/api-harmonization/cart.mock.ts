@@ -93,7 +93,7 @@ export function getCartBlockMock(_id: string, locale: string): CartBlock {
                     name: isPl ? 'Wkład CLARIS S' : 'CLARIS S Filter Cartridge',
                     subtitle: 'Filtry • JURA',
                     image: {
-                        url: '/images/products/filter-claris.jpg',
+                        url: 'https://picsum.photos/200/200',
                         alt: 'CLARIS S',
                     },
                 },
@@ -107,6 +107,10 @@ export function getCartBlockMock(_id: string, locale: string): CartBlock {
                 product: {
                     name: isPl ? 'Środek do czyszczenia' : 'Cleaning solution',
                     subtitle: 'Konserwacja',
+                    image: {
+                        url: 'https://picsum.photos/200/201',
+                        alt: isPl ? 'Środek do czyszczenia' : 'Cleaning solution',
+                    },
                 },
             },
         ],
