@@ -1,4 +1,6 @@
 export class Address {
+    firstName?: string;
+    lastName?: string;
     country!: string;
     district?: string;
     region?: string;

@@ -3,14 +3,14 @@ import { NotFoundException } from '@nestjs/common';
 
 import { Models, Orders, Products } from '@o2s/framework/modules';
 
-export const mapOrders = (orders: HttpTypes.AdminOrderListResponse, defaultCurrency: string): Orders.Model.Orders => {
+export const mapOrders = (orders: HttpTypes.StoreOrderListResponse, defaultCurrency: string): Orders.Model.Orders => {
     return {
         data: orders.orders.map((order) => mapOrder(order, defaultCurrency)),
         total: orders.count,
     };
 };
 
-export const mapOrder = (order: HttpTypes.AdminOrder, defaultCurrency: string): Orders.Model.Order => {
+export const mapOrder = (order: HttpTypes.StoreOrder, defaultCurrency: string): Orders.Model.Order => {
     return {
         id: order.id,
         total: mapPrice(order.total, order?.currency_code ?? defaultCurrency) as Models.Price.Price,
@@ -38,7 +38,7 @@ export const mapOrder = (order: HttpTypes.AdminOrder, defaultCurrency: string): 
     };
 };
 
-const mapOrderItem = (item: HttpTypes.AdminOrderLineItem, currency: string): Orders.Model.OrderItem => {
+const mapOrderItem = (item: HttpTypes.StoreOrderLineItem, currency: string): Orders.Model.OrderItem => {
     return {
         id: item.id,
         productId: item.variant_id || '',
@@ -54,7 +54,7 @@ const mapOrderItem = (item: HttpTypes.AdminOrderLineItem, currency: string): Ord
 const mapProduct = (
     unitPrice: number,
     currency: string,
-    item?: HttpTypes.AdminOrderLineItem,
+    item?: HttpTypes.StoreOrderLineItem,
 ): Products.Model.Product => {
     if (!item) throw new NotFoundException('Product not found');
 
@@ -78,9 +78,11 @@ const mapProduct = (
     };
 };
 
-const mapAddress = (address?: HttpTypes.AdminOrderAddress | null): Models.Address.Address | undefined => {
+const mapAddress = (address?: HttpTypes.StoreOrderAddress | null): Models.Address.Address | undefined => {
     if (!address) return undefined;
     return {
+        firstName: address.first_name,
+        lastName: address.last_name,
         country: address.country_code || '',
         district: address.province || '',
         region: address.province || '',
@@ -94,7 +96,7 @@ const mapAddress = (address?: HttpTypes.AdminOrderAddress | null): Models.Addres
 };
 
 const mapShippingMethod = (
-    method: HttpTypes.AdminOrderShippingMethod,
+    method: HttpTypes.StoreOrderShippingMethod,
     currency: string,
 ): Orders.Model.ShippingMethod => {
     return {

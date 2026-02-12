@@ -47,4 +47,23 @@ export abstract class CartService {
     ): Observable<Carts.Model.Cart>;
 
     abstract getCurrentCart(authorization?: string): Observable<Carts.Model.Cart | undefined>;
+
+    abstract prepareCheckout(
+        params: Carts.Request.PrepareCheckoutParams,
+        authorization?: string,
+    ): Observable<Carts.Model.Cart>;
+
+    // Update cart addresses (shipping and/or billing)
+    abstract updateCartAddresses(
+        params: Carts.Request.UpdateCartAddressesParams,
+        data: Carts.Request.UpdateCartAddressesBody,
+        authorization?: string,
+    ): Observable<Carts.Model.Cart>;
+
+    // Add shipping method to cart
+    abstract addShippingMethod(
+        params: Carts.Request.AddShippingMethodParams,
+        data: Carts.Request.AddShippingMethodBody,
+        authorization?: string,
+    ): Observable<Carts.Model.Cart>;
 }

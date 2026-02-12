@@ -27,10 +27,57 @@ const formatLabel = (key: string): string => {
         .join(' ');
 };
 
+/**
+ * Product variant type that can be either Store or Admin API variant.
+ * Used by mappers that need to work with both APIs (e.g., resources module still uses Admin API).
+ */
+type AnyProductVariant = HttpTypes.StoreProductVariant | HttpTypes.AdminProductVariant;
+
+/**
+ * Product type that can be either Store or Admin API product.
+ */
+type AnyProduct = HttpTypes.StoreProduct | HttpTypes.AdminProduct;
+
+/**
+ * Extract the price from a product variant, supporting both Store and Admin API types.
+ *
+ * - Store API uses `calculated_price` (requires pricing context: region_id or country_code).
+ * - Admin API uses `prices` array with currency filtering.
+ *
+ * Falls back to 0 if no price is found.
+ */
+const getVariantPrice = (
+    variant: AnyProductVariant,
+    defaultCurrency: string,
+): { amount: number; currencyCode: string } => {
+    // Try Store API calculated_price first
+    const calculatedPrice = variant.calculated_price;
+    if (calculatedPrice && calculatedPrice.calculated_amount != null) {
+        return {
+            amount: calculatedPrice.calculated_amount,
+            currencyCode: calculatedPrice.currency_code?.toUpperCase() || defaultCurrency,
+        };
+    }
+
+    // Fall back to Admin API prices array
+    if ('prices' in variant && Array.isArray(variant.prices)) {
+        const adminPrices = variant.prices as Array<{ amount?: number; currency_code?: string }>;
+        const matchingPrice = adminPrices.find((p) => p.currency_code?.toUpperCase() === defaultCurrency);
+        if (matchingPrice) {
+            return {
+                amount: matchingPrice.amount || 0,
+                currencyCode: matchingPrice.currency_code?.toUpperCase() || defaultCurrency,
+            };
+        }
+    }
+
+    return { amount: 0, currencyCode: defaultCurrency };
+};
+
 // Extract keySpecs from product/variant metadata
 // Medusa stores metadata values as strings, so we need to parse JSON
 // Expected format: key="keySpecs", value='[{ "value": "1200W", "icon": "Zap" }, ...]'
-const mapKeySpecsFromMetadata = (variant: HttpTypes.AdminProductVariant): Products.Model.KeySpecItem[] | undefined => {
+const mapKeySpecsFromMetadata = (variant: AnyProductVariant): Products.Model.KeySpecItem[] | undefined => {
     const variantMetadata = variant.metadata as Record<string, unknown> | null;
     const productMetadata = variant.product?.metadata as Record<string, unknown> | null;
 
@@ -67,14 +114,14 @@ const mapKeySpecsFromMetadata = (variant: HttpTypes.AdminProductVariant): Produc
 
 // Map variant and product attributes to detailedSpecs dynamically
 // Variant attributes take precedence over product attributes
-const mapVariantToDetailedSpecs = (variant: HttpTypes.AdminProductVariant): Products.Model.DetailedSpec[] => {
+const mapVariantToDetailedSpecs = (variant: AnyProductVariant): Products.Model.DetailedSpec[] => {
     const specs: Products.Model.DetailedSpec[] = [];
     const product = variant.product;
 
     for (const field of VARIANT_SPEC_FIELDS) {
         // Check variant first, then fall back to product
-        const variantValue = variant[field as keyof HttpTypes.AdminProductVariant];
-        const productValue = product?.[field as keyof HttpTypes.AdminProduct];
+        const variantValue = variant[field as keyof AnyProductVariant];
+        const productValue = product?.[field as keyof AnyProduct];
         const value = variantValue ?? productValue;
 
         if (value != null && value !== '') {
@@ -88,16 +135,13 @@ const mapVariantToDetailedSpecs = (variant: HttpTypes.AdminProductVariant): Prod
     return specs;
 };
 
-export const mapProduct = (
-    productVariant: HttpTypes.AdminProductVariant,
-    defaultCurrency: string,
-): Products.Model.Product => {
+export const mapProduct = (productVariant: AnyProductVariant, defaultCurrency: string): Products.Model.Product => {
     if (!productVariant) {
         throw new NotFoundException('Product variant is undefined');
     }
 
     const product = productVariant?.product;
-    const price = productVariant.prices?.find((p) => p.currency_code?.toUpperCase() === defaultCurrency);
+    const price = getVariantPrice(productVariant, defaultCurrency);
 
     // Build detailedSpecs from variant attributes dynamically
     const detailedSpecs = mapVariantToDetailedSpecs(productVariant);
@@ -120,10 +164,8 @@ export const mapProduct = (
             alt: product?.title || '',
         })),
         price: {
-            value: price?.amount || 0,
-            currency:
-                (price?.currency_code?.toUpperCase() as Models.Price.Currency) ||
-                (defaultCurrency as Models.Price.Currency),
+            value: price.amount,
+            currency: price.currencyCode as Models.Price.Currency,
         },
         link: `/products/${product?.id || ''}`,
         type: mapProductType(product?.type || undefined),
@@ -139,7 +181,7 @@ export const mapProduct = (
 };
 
 export const mapProducts = (
-    data: HttpTypes.AdminProductListResponse,
+    data: HttpTypes.StoreProductListResponse,
     defaultCurrency: string,
     categoryFilter?: string,
 ): Products.Model.Products => {
@@ -153,7 +195,9 @@ export const mapProducts = (
     return {
         data: products.map((product) => {
             const firstVariant = product.variants?.[0];
-            const price = firstVariant?.prices?.find((p) => p.currency_code?.toUpperCase() === defaultCurrency);
+            const price = firstVariant
+                ? getVariantPrice(firstVariant, defaultCurrency)
+                : { amount: 0, currencyCode: defaultCurrency };
 
             return {
                 id: product.id,
@@ -172,10 +216,8 @@ export const mapProducts = (
                     alt: product.title,
                 })),
                 price: {
-                    value: price?.amount || 0,
-                    currency:
-                        (price?.currency_code?.toUpperCase() as Models.Price.Currency) ||
-                        (defaultCurrency as Models.Price.Currency),
+                    value: price.amount,
+                    currency: price.currencyCode as Models.Price.Currency,
                 },
                 link: `/products/${product.id}`,
                 type: mapProductType(product?.type || undefined),
@@ -256,7 +298,9 @@ export const mapFeaturedServices = (
     };
 };
 
-export const mapProductType = (type?: HttpTypes.AdminProductType): Products.Model.ProductType => {
+export const mapProductType = (
+    type?: HttpTypes.StoreProductType | HttpTypes.AdminProductType,
+): Products.Model.ProductType => {
     if (!type) {
         return 'PHYSICAL';
     }

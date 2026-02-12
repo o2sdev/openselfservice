@@ -88,6 +88,8 @@ export const mapService = (
 const mapAddress = (address: AddressDTO): Models.Address.Address | undefined => {
     if (!address) return undefined;
     return {
+        firstName: (address as unknown as { first_name?: string }).first_name,
+        lastName: (address as unknown as { last_name?: string }).last_name,
         country: address.country_code || '',
         district: address.province || '',
         region: address.province || '',

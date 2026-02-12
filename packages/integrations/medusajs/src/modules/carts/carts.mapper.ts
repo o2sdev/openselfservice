@@ -12,8 +12,13 @@ export const mapCarts = (
     };
 };
 
-export const mapCart = (cart: HttpTypes.StoreCart, defaultCurrency: string): Carts.Model.Cart => {
-    const currency = (cart.currency_code as Models.Price.Currency) ?? (defaultCurrency as Models.Price.Currency);
+export const mapCart = (cart: HttpTypes.StoreCart, _defaultCurrency: string): Carts.Model.Cart => {
+    if (!cart.currency_code) {
+        throw new Error(`Cart ${cart.id} has no currency code`);
+    }
+    const currency = cart.currency_code as Models.Price.Currency;
+
+    console.log('cart.customer_id', cart.customer_id);
 
     return {
         id: cart.id,
@@ -37,7 +42,7 @@ export const mapCart = (cart: HttpTypes.StoreCart, defaultCurrency: string): Car
         shippingAddress: mapAddress(cart.shipping_address),
         billingAddress: mapAddress(cart.billing_address),
         shippingMethod: cart.shipping_methods?.[0] ? mapShippingMethod(cart.shipping_methods[0], currency) : undefined,
-        paymentMethod: undefined, // Map from payment collection if available
+        paymentMethod: mapPaymentMethodFromMetadata((cart.metadata as Record<string, unknown>) ?? {}),
         promotions: mapPromotions(cart),
         metadata: (cart.metadata as Record<string, unknown>) ?? {},
         notes: undefined,
@@ -85,6 +90,8 @@ const mapProduct = (item: HttpTypes.StoreCartLineItem, currency: Models.Price.Cu
 const mapAddress = (address?: HttpTypes.StoreCartAddress | null): Models.Address.Address | undefined => {
     if (!address) return undefined;
     return {
+        firstName: address.first_name,
+        lastName: address.last_name,
         country: address.country_code ?? '',
         district: address.province ?? '',
         region: address.province ?? '',
@@ -94,6 +101,18 @@ const mapAddress = (address?: HttpTypes.StoreCartAddress | null): Models.Address
         city: address.city ?? '',
         postalCode: address.postal_code ?? '',
         phone: address.phone ?? '',
+    };
+};
+
+const mapPaymentMethodFromMetadata = (metadata: Record<string, unknown>): Carts.Model.PaymentMethod | undefined => {
+    const stored = metadata?.paymentMethod as Record<string, unknown> | undefined;
+    if (!stored || typeof stored !== 'object') return undefined;
+
+    return {
+        id: stored.id as string,
+        name: stored.name as string,
+        description: (stored.description as string) ?? undefined,
+        type: (stored.type as Carts.Model.PaymentMethodType) ?? 'OTHER',
     };
 };
 

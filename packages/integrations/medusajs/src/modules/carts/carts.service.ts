@@ -1,5 +1,5 @@
 import Medusa from '@medusajs/js-sdk';
-import { HttpService } from '@nestjs/axios';
+import { HttpTypes } from '@medusajs/types';
 import {
     BadRequestException,
     Inject,
@@ -9,14 +9,15 @@ import {
     UnauthorizedException,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Observable, catchError, from, map, of, switchMap, throwError } from 'rxjs';
+import { Observable, catchError, forkJoin, from, map, of, switchMap, throwError } from 'rxjs';
 
 import { LoggerService } from '@o2s/utils.logger';
 
-import { Auth, Carts } from '@o2s/framework/modules';
+import { Auth, Carts, Customers } from '@o2s/framework/modules';
 
 import { Service as MedusaJsService } from '@/modules/medusajs';
 
+import { mapAddressToMedusa } from '../customers/customers.mapper';
 import { handleHttpError } from '../utils/handle-http-error';
 
 import { mapCart } from './carts.mapper';
@@ -28,10 +29,10 @@ export class CartsService extends Carts.Service {
 
     constructor(
         private readonly config: ConfigService,
-        protected httpClient: HttpService,
         @Inject(LoggerService) protected readonly logger: LoggerService,
         private readonly medusaJsService: MedusaJsService,
         private readonly authService: Auth.Service,
+        private readonly customersService: Customers.Service,
     ) {
         super();
         this.sdk = this.medusaJsService.getSdk();
@@ -43,8 +44,10 @@ export class CartsService extends Carts.Service {
     }
 
     getCart(params: Carts.Request.GetCartParams, authorization?: string): Observable<Carts.Model.Cart | undefined> {
-        return from(this.sdk.store.cart.retrieve(params.id, {}, this.getHeaders())).pipe(
-            map((response) => {
+        return from(
+            this.sdk.store.cart.retrieve(params.id, {}, this.medusaJsService.getStoreApiHeaders(authorization)),
+        ).pipe(
+            map((response: HttpTypes.StoreCartResponse) => {
                 const cart = mapCart(response.cart, this.defaultCurrency);
 
                 // Verify ownership for customer carts
@@ -60,7 +63,7 @@ export class CartsService extends Carts.Service {
             }),
             catchError((error) => {
                 if (error.status === 404) {
-                    return of(undefined);
+                    throw new NotFoundException('Cart not found');
                 }
                 return handleHttpError(error);
             }),
@@ -76,7 +79,7 @@ export class CartsService extends Carts.Service {
         );
     }
 
-    createCart(data: Carts.Request.CreateCartBody, _authorization?: string): Observable<Carts.Model.Cart> {
+    createCart(data: Carts.Request.CreateCartBody, authorization?: string): Observable<Carts.Model.Cart> {
         return from(
             this.sdk.store.cart.create(
                 {
@@ -85,10 +88,10 @@ export class CartsService extends Carts.Service {
                     metadata: data.metadata,
                 },
                 {},
-                this.getHeaders(),
+                this.medusaJsService.getStoreApiHeaders(authorization),
             ),
         ).pipe(
-            map((response) => mapCart(response.cart, this.defaultCurrency)),
+            map((response: HttpTypes.StoreCartResponse) => mapCart(response.cart, this.defaultCurrency)),
             catchError((error) => handleHttpError(error)),
         );
     }
@@ -96,7 +99,7 @@ export class CartsService extends Carts.Service {
     updateCart(
         params: Carts.Request.UpdateCartParams,
         data: Carts.Request.UpdateCartBody,
-        _authorization?: string,
+        authorization?: string,
     ): Observable<Carts.Model.Cart> {
         return from(
             this.sdk.store.cart.update(
@@ -106,10 +109,10 @@ export class CartsService extends Carts.Service {
                     metadata: data.metadata,
                 },
                 {},
-                this.getHeaders(),
+                this.medusaJsService.getStoreApiHeaders(authorization),
             ),
         ).pipe(
-            map((response) => mapCart(response.cart, this.defaultCurrency)),
+            map((response: HttpTypes.StoreCartResponse) => mapCart(response.cart, this.defaultCurrency)),
             catchError((error) => handleHttpError(error)),
         );
     }
@@ -130,8 +133,10 @@ export class CartsService extends Carts.Service {
         // If cartId provided, use it (after verifying access)
         if (data.cartId) {
             const cartId = data.cartId; // Store for type narrowing
-            return from(this.sdk.store.cart.retrieve(cartId, {}, this.getHeaders())).pipe(
-                switchMap((response) => {
+            return from(
+                this.sdk.store.cart.retrieve(cartId, {}, this.medusaJsService.getStoreApiHeaders(authorization)),
+            ).pipe(
+                switchMap((response: HttpTypes.StoreCartResponse) => {
                     const cart = mapCart(response.cart, this.defaultCurrency);
 
                     // Verify ownership for customer carts
@@ -149,11 +154,11 @@ export class CartsService extends Carts.Service {
                                 metadata: data.metadata,
                             },
                             {},
-                            this.getHeaders(),
+                            this.medusaJsService.getStoreApiHeaders(authorization),
                         ),
                     );
                 }),
-                map((addResponse) => mapCart(addResponse.cart, this.defaultCurrency)),
+                map((addResponse: HttpTypes.StoreCartResponse) => mapCart(addResponse.cart, this.defaultCurrency)),
                 catchError((error) => handleHttpError(error)),
             );
         }
@@ -178,13 +183,20 @@ export class CartsService extends Carts.Service {
         }
 
         // For guests, create a new cart
-        return this.createCartAndAddItem(data.currency, data.variantId!, data.quantity, data.regionId, data.metadata);
+        return this.createCartAndAddItem(
+            data.currency,
+            data.variantId!,
+            data.quantity,
+            data.regionId,
+            data.metadata,
+            authorization,
+        );
     }
 
     updateCartItem(
         params: Carts.Request.UpdateCartItemParams,
         data: Carts.Request.UpdateCartItemBody,
-        _authorization: string | undefined,
+        authorization: string | undefined,
     ): Observable<Carts.Model.Cart> {
         return from(
             this.sdk.store.cart.updateLineItem(
@@ -195,17 +207,23 @@ export class CartsService extends Carts.Service {
                     metadata: data.metadata,
                 },
                 {},
-                this.getHeaders(),
+                this.medusaJsService.getStoreApiHeaders(authorization),
             ),
         ).pipe(
-            map((response) => mapCart(response.cart, this.defaultCurrency)),
+            map((response: HttpTypes.StoreCartResponse) => mapCart(response.cart, this.defaultCurrency)),
             catchError((error) => handleHttpError(error)),
         );
     }
 
-    removeCartItem(params: Carts.Request.RemoveCartItemParams, _authorization?: string): Observable<Carts.Model.Cart> {
-        return from(this.sdk.store.cart.deleteLineItem(params.cartId, params.itemId, this.getHeaders())).pipe(
-            map((response) => {
+    removeCartItem(params: Carts.Request.RemoveCartItemParams, authorization?: string): Observable<Carts.Model.Cart> {
+        return from(
+            this.sdk.store.cart.deleteLineItem(
+                params.cartId,
+                params.itemId,
+                this.medusaJsService.getStoreApiHeaders(authorization),
+            ),
+        ).pipe(
+            map((response: HttpTypes.StoreLineItemDeleteResponse) => {
                 if (!response.parent) {
                     throw new NotFoundException('Cart not found after item removal');
                 }
@@ -218,7 +236,7 @@ export class CartsService extends Carts.Service {
     applyPromotion(
         params: Carts.Request.ApplyPromotionParams,
         data: Carts.Request.ApplyPromotionBody,
-        _authorization: string | undefined,
+        authorization: string | undefined,
     ): Observable<Carts.Model.Cart> {
         return from(
             this.sdk.store.cart.update(
@@ -227,22 +245,21 @@ export class CartsService extends Carts.Service {
                     promo_codes: [data.code],
                 },
                 {},
-                this.getHeaders(),
+                this.medusaJsService.getStoreApiHeaders(authorization),
             ),
         ).pipe(
-            map((response) => mapCart(response.cart, this.defaultCurrency)),
+            map((response: HttpTypes.StoreCartResponse) => mapCart(response.cart, this.defaultCurrency)),
             catchError((error) => handleHttpError(error)),
         );
     }
 
-    removePromotion(
-        params: Carts.Request.RemovePromotionParams,
-        _authorization?: string,
-    ): Observable<Carts.Model.Cart> {
+    removePromotion(params: Carts.Request.RemovePromotionParams, authorization?: string): Observable<Carts.Model.Cart> {
         // In Medusa v2, removing promotions requires updating the cart
         // with the remaining promo codes (excluding the one to remove)
-        return from(this.sdk.store.cart.retrieve(params.cartId, {}, this.getHeaders())).pipe(
-            switchMap((response) => {
+        return from(
+            this.sdk.store.cart.retrieve(params.cartId, {}, this.medusaJsService.getStoreApiHeaders(authorization)),
+        ).pipe(
+            switchMap((response: HttpTypes.StoreCartResponse) => {
                 const cart = response.cart;
                 // Filter out the promotion to remove
                 const remainingCodes =
@@ -258,11 +275,11 @@ export class CartsService extends Carts.Service {
                             promo_codes: remainingCodes,
                         },
                         {},
-                        this.getHeaders(),
+                        this.medusaJsService.getStoreApiHeaders(authorization),
                     ),
                 );
             }),
-            map((response) => mapCart(response.cart, this.defaultCurrency)),
+            map((response: HttpTypes.StoreCartResponse) => mapCart(response.cart, this.defaultCurrency)),
             catchError((error) => handleHttpError(error)),
         );
     }
@@ -276,12 +293,40 @@ export class CartsService extends Carts.Service {
         );
     }
 
+    prepareCheckout(params: Carts.Request.PrepareCheckoutParams, authorization?: string): Observable<Carts.Model.Cart> {
+        return this.getCart({ id: params.cartId }, authorization).pipe(
+            switchMap((cart) => {
+                if (!cart) {
+                    return throwError(() => new NotFoundException(`Cart with ID ${params.cartId} not found`));
+                }
+
+                // Verify ownership for customer carts
+                if (cart.customerId && authorization) {
+                    const customerId = this.authService.getCustomerId(authorization);
+                    if (cart.customerId !== customerId) {
+                        return throwError(
+                            () => new UnauthorizedException('Unauthorized to prepare checkout for this cart'),
+                        );
+                    }
+                }
+
+                // Validate cart has items
+                if (!cart.items || cart.items.data.length === 0) {
+                    return throwError(() => new BadRequestException('Cart must have items before preparing checkout'));
+                }
+
+                return of(cart);
+            }),
+        );
+    }
+
     private createCartAndAddItem(
         currency: string,
         variantId: string,
         quantity: number,
         regionId?: string,
         metadata?: Record<string, unknown>,
+        authorization?: string,
     ): Observable<Carts.Model.Cart> {
         return from(
             this.sdk.store.cart.create(
@@ -291,10 +336,10 @@ export class CartsService extends Carts.Service {
                     metadata,
                 },
                 {},
-                this.getHeaders(),
+                this.medusaJsService.getStoreApiHeaders(authorization),
             ),
         ).pipe(
-            switchMap((createResponse) =>
+            switchMap((createResponse: HttpTypes.StoreCartResponse) =>
                 from(
                     this.sdk.store.cart.createLineItem(
                         createResponse.cart.id,
@@ -304,18 +349,192 @@ export class CartsService extends Carts.Service {
                             metadata,
                         },
                         {},
-                        this.getHeaders(),
+                        this.medusaJsService.getStoreApiHeaders(authorization),
                     ),
                 ),
             ),
-            map((addResponse) => mapCart(addResponse.cart, this.defaultCurrency)),
+            map((addResponse: HttpTypes.StoreCartResponse) => mapCart(addResponse.cart, this.defaultCurrency)),
             catchError((error) => handleHttpError(error)),
         );
     }
 
-    private getHeaders(): Record<string, string> {
-        return {
-            'x-publishable-api-key': this.medusaJsService.getPublishableKey(),
-        };
+    updateCartAddresses(
+        params: Carts.Request.UpdateCartAddressesParams,
+        data: Carts.Request.UpdateCartAddressesBody,
+        authorization?: string,
+    ): Observable<Carts.Model.Cart> {
+        const headers = authorization
+            ? this.medusaJsService.getStoreApiHeaders(authorization)
+            : this.medusaJsService.getStoreApiHeaders(authorization);
+
+        // Resolve shipping address
+        const shippingAddress$ =
+            data.shippingAddressId && authorization
+                ? this.customersService.getAddress({ id: data.shippingAddressId }, authorization).pipe(
+                      map((address) => {
+                          if (!address) {
+                              throw new NotFoundException(`Address with ID ${data.shippingAddressId} not found`);
+                          }
+                          return mapAddressToMedusa(address.address);
+                      }),
+                  )
+                : data.shippingAddress
+                  ? of(mapAddressToMedusa(data.shippingAddress))
+                  : of(null);
+
+        // Resolve billing address
+        const billingAddress$ =
+            data.billingAddressId && authorization
+                ? this.customersService.getAddress({ id: data.billingAddressId }, authorization).pipe(
+                      map((address) => {
+                          if (!address) {
+                              throw new NotFoundException(`Address with ID ${data.billingAddressId} not found`);
+                          }
+                          return mapAddressToMedusa(address.address);
+                      }),
+                  )
+                : data.billingAddress
+                  ? of(mapAddressToMedusa(data.billingAddress))
+                  : of(null);
+
+        // Get current cart to merge metadata
+        return this.getCart({ id: params.cartId }, authorization).pipe(
+            switchMap((cart) => {
+                if (!cart) {
+                    return throwError(() => new NotFoundException(`Cart with ID ${params.cartId} not found`));
+                }
+
+                // Resolve both addresses in parallel
+                return forkJoin([shippingAddress$, billingAddress$]).pipe(
+                    switchMap(([shippingAddress, billingAddress]) => {
+                        // At least one address must be provided
+                        if (!shippingAddress && !billingAddress) {
+                            return throwError(
+                                () => new BadRequestException('At least one address (shipping or billing) is required'),
+                            );
+                        }
+
+                        // Build metadata
+                        const metadata = this.buildCartMetadata(data.notes, data.guestEmail, cart.metadata);
+
+                        // Build cart update payload
+                        const cartUpdate: Partial<HttpTypes.StoreUpdateCart> = {
+                            metadata,
+                        };
+
+                        // Set addresses (use shipping as billing if billing not provided)
+                        if (shippingAddress) {
+                            cartUpdate.shipping_address = shippingAddress;
+                            cartUpdate.billing_address = billingAddress ?? shippingAddress;
+                        } else if (billingAddress) {
+                            // If only billing provided, use it for both
+                            cartUpdate.shipping_address = billingAddress;
+                            cartUpdate.billing_address = billingAddress;
+                        }
+
+                        // Update cart
+                        return from(this.sdk.store.cart.update(params.cartId, cartUpdate, {}, headers)).pipe(
+                            switchMap(() => this.getCart({ id: params.cartId }, authorization)),
+                            map((updatedCart) => {
+                                if (!updatedCart) {
+                                    throw new NotFoundException(`Cart with ID ${params.cartId} not found`);
+                                }
+                                return updatedCart;
+                            }),
+                        );
+                    }),
+                );
+            }),
+            catchError((error) => handleHttpError(error)),
+        );
+    }
+
+    addShippingMethod(
+        params: Carts.Request.AddShippingMethodParams,
+        data: Carts.Request.AddShippingMethodBody,
+        authorization?: string,
+    ): Observable<Carts.Model.Cart> {
+        const headers = authorization
+            ? this.medusaJsService.getStoreApiHeaders(authorization)
+            : this.medusaJsService.getStoreApiHeaders(authorization);
+
+        // Verify cart exists
+        return this.getCart({ id: params.cartId }, authorization).pipe(
+            switchMap((cart) => {
+                if (!cart) {
+                    return throwError(() => new NotFoundException(`Cart with ID ${params.cartId} not found`));
+                }
+
+                if (!cart.items || cart.items.data.length === 0) {
+                    return throwError(
+                        () => new BadRequestException('Cart must have items before adding shipping method'),
+                    );
+                }
+
+                // Add shipping method using SDK
+                return from(
+                    this.sdk.store.cart.addShippingMethod(
+                        params.cartId,
+                        { option_id: data.shippingOptionId },
+                        {},
+                        headers,
+                    ),
+                ).pipe(
+                    switchMap(() => this.getCart({ id: params.cartId }, authorization)),
+                    map((updatedCart) => {
+                        if (!updatedCart) {
+                            throw new NotFoundException(`Cart with ID ${params.cartId} not found`);
+                        }
+                        return updatedCart;
+                    }),
+                );
+            }),
+            catchError((error) => handleHttpError(error)),
+        );
+    }
+
+    /**
+     * Resolves the billing address from the request data.
+     * Returns `null` if no billing address is specified (caller should fall back to shipping address).
+     */
+    private resolveBillingAddress(
+        data: Carts.Request.UpdateCartAddressesBody,
+        authorization: string | undefined,
+    ): Observable<HttpTypes.StoreAddAddress | null> {
+        if (data.billingAddressId && authorization) {
+            return this.customersService.getAddress({ id: data.billingAddressId }, authorization).pipe(
+                map((billingAddress) => {
+                    if (!billingAddress) {
+                        throw new NotFoundException(`Address with ID ${data.billingAddressId} not found`);
+                    }
+                    return mapAddressToMedusa(billingAddress.address);
+                }),
+            );
+        }
+
+        if (data.billingAddress) {
+            return of(mapAddressToMedusa(data.billingAddress));
+        }
+
+        return of(null);
+    }
+
+    /**
+     * Builds cart metadata immutably by merging optional notes and guestEmail
+     * into existing metadata without mutating any arguments.
+     */
+    private buildCartMetadata(
+        notes: string | undefined,
+        guestEmail: string | undefined,
+        existingMetadata?: Record<string, unknown>,
+    ): Record<string, unknown> {
+        const metadata: Record<string, unknown> = { ...(existingMetadata || {}) };
+        if (notes !== undefined) {
+            metadata.notes = notes;
+        }
+        if (guestEmail) {
+            metadata.guestEmail = guestEmail;
+        }
+        return metadata;
     }
 }

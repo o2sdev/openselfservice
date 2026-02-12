@@ -69,6 +69,7 @@ export class Cart {
     promotions?: Promotion[];
     metadata?: Record<string, unknown>;
     notes?: string;
+    paymentSessionId?: string; // Reference to active payment session
 }
 
 export type Carts = Pagination.Paginated<Cart>;

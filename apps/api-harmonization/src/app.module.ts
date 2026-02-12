@@ -14,10 +14,13 @@ import {
     CMS,
     Cache,
     Carts,
+    Checkout,
+    Customers,
     Invoices,
     Notifications,
     Orders,
     Organizations,
+    Payments,
     Products,
     Resources,
     Search,
@@ -81,6 +84,9 @@ export const SearchBaseModule = Search.Module.register(AppConfig);
 export const ProductsBaseModule = Products.Module.register(AppConfig);
 export const OrdersBaseModule = Orders.Module.register(AppConfig);
 export const CartsBaseModule = Carts.Module.register(AppConfig);
+export const CustomersBaseModule = Customers.Module.register(AppConfig);
+export const PaymentsBaseModule = Payments.Module.register(AppConfig);
+export const CheckoutBaseModule = Checkout.Module.register(AppConfig);
 export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
 
 @Module({
@@ -109,6 +115,9 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
         ProductsBaseModule,
         OrdersBaseModule,
         CartsBaseModule,
+        CustomersBaseModule,
+        PaymentsBaseModule,
+        CheckoutBaseModule,
         AuthModuleBaseModule,
 
         PageModule.register(AppConfig),

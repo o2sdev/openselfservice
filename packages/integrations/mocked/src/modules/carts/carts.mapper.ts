@@ -1,4 +1,4 @@
-import { Carts, Products } from '@o2s/framework/modules';
+import { Carts, Models, Products } from '@o2s/framework/modules';
 
 // Product data for generating cart items
 const PRODUCT_DATA = [
@@ -86,6 +86,19 @@ const PAYMENT_METHODS: Carts.Model.PaymentMethod[] = [
         type: 'BANK_TRANSFER',
     },
 ];
+
+// Read payment method stored in metadata by setupPayment
+const mapPaymentMethodFromMetadata = (metadata: Record<string, unknown>): Carts.Model.PaymentMethod | undefined => {
+    const stored = metadata?.paymentMethod as Record<string, unknown> | undefined;
+    if (!stored || typeof stored !== 'object') return undefined;
+
+    return {
+        id: stored.id as string,
+        name: stored.name as string,
+        description: (stored.description as string) ?? undefined,
+        type: (stored.type as Carts.Model.PaymentMethodType) ?? 'OTHER',
+    };
+};
 
 // Promotions
 const PROMOTIONS: Carts.Model.Promotion[] = [
@@ -282,12 +295,12 @@ const generateCart = (
 // Generate mocked carts
 const MOCKED_CARTS: Carts.Model.Cart[] = [
     // Active cart for authenticated customer
-    generateCart('CART-001', 'cus_01KGSR4NSX1S7Y48E6MVWPPVDP', 'ACTIVE'),
+    generateCart('CART-001', 'cus_01KH3J08TY40PYGVEG3A04CP8R', 'ACTIVE'),
     // Saved carts for authenticated customer
-    generateCart('CART-002', 'cus_01KGSR4NSX1S7Y48E6MVWPPVDP', 'SAVED', 'Wishlist'),
-    generateCart('CART-003', 'cus_01KGSR4NSX1S7Y48E6MVWPPVDP', 'SAVED', 'Work Equipment'),
+    generateCart('CART-002', 'cus_01KH3J08TY40PYGVEG3A04CP8R', 'SAVED', 'Wishlist'),
+    generateCart('CART-003', 'cus_01KH3J08TY40PYGVEG3A04CP8R', 'SAVED', 'Work Equipment'),
     // Abandoned cart
-    generateCart('CART-004', 'cus_01KGSR4NSX1S7Y48E6MVWPPVDP', 'ABANDONED'),
+    generateCart('CART-004', 'cus_01KH3J08TY40PYGVEG3A04CP8R', 'ABANDONED'),
     // Guest cart (no customer ID)
     generateCart('CART-005', undefined, 'ACTIVE'),
 ];
@@ -380,13 +393,32 @@ export const updateCart = (
     if (cartIndex === -1) return undefined;
 
     const cart = cartsStore[cartIndex]!;
+
+    // Merge metadata
+    const mergedMetadata = {
+        ...(cart.metadata || {}),
+        ...(data.metadata || {}),
+    };
+
+    // Extract addresses from metadata if they exist
+    const shippingAddressFromMetadata = mergedMetadata.shippingAddress as Models.Address.Address | undefined;
+    const billingAddressFromMetadata = mergedMetadata.billingAddress as Models.Address.Address | undefined;
+
+    // Resolve payment method: from paymentMethodId, from metadata paymentProviderId, or keep existing
+    const paymentMethod = data.paymentMethodId
+        ? PAYMENT_METHODS.find((pm) => pm.id === data.paymentMethodId)
+        : (mapPaymentMethodFromMetadata(mergedMetadata) ?? cart.paymentMethod);
+
     const updatedCart: Carts.Model.Cart = {
         ...cart,
         name: data.name ?? cart.name,
         type: data.type ?? cart.type,
         regionId: data.regionId ?? cart.regionId,
         notes: data.notes ?? cart.notes,
-        metadata: data.metadata ?? cart.metadata,
+        metadata: mergedMetadata,
+        shippingAddress: shippingAddressFromMetadata ?? cart.shippingAddress,
+        billingAddress: billingAddressFromMetadata ?? cart.billingAddress,
+        paymentMethod: paymentMethod ?? cart.paymentMethod,
         updatedAt: formatDate(new Date()),
     };
 
