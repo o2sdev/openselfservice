@@ -1,5 +1,22 @@
 # @o2s/configs.integrations
 
+## 0.5.0
+
+### Minor Changes
+
+- 5aba06c: add Zendesk Help Center articles integration
+- 8702f91: feat(zendesk): remove hardcoded locale base paths from article slugs
+
+### Patch Changes
+
+- Updated dependencies [dadd9ba]
+- Updated dependencies [7305d03]
+- Updated dependencies [5aba06c]
+- Updated dependencies [8702f91]
+- Updated dependencies [002ff11]
+    - @o2s/framework@1.17.0
+    - @o2s/integrations.mocked@1.18.0
+
 ## 0.4.0
 
 ### Minor Changes
