@@ -16,6 +16,13 @@ import type { RelatedProductsResponse } from './response.types';
 const defaultCurrency = 'EUR';
 const basePath = '/products';
 const specFields = ['weight', 'height', 'width', 'length', 'material'];
+const specFieldsMapping = {
+    weight: 'Weight',
+    height: 'Height',
+    width: 'Width',
+    length: 'Length',
+    material: 'Material',
+};
 
 describe('products.mapper', () => {
     describe('mapProduct', () => {
@@ -41,6 +48,7 @@ describe('products.mapper', () => {
                 undefined,
                 basePath,
                 specFields,
+                specFieldsMapping,
             );
             expect(result.id).toBe('prod_1');
             expect(result.sku).toBe('SKU1');
@@ -72,6 +80,7 @@ describe('products.mapper', () => {
                 undefined,
                 basePath,
                 specFields,
+                specFieldsMapping,
             );
             expect(result.price.value).toBe(0);
             expect(result.price.currency).toBe(defaultCurrency);
@@ -145,7 +154,7 @@ describe('products.mapper', () => {
                 offset: 0,
                 limit: 10,
             } as unknown as CompatibleServicesResponse;
-            const result = mapCompatibleServices(data, defaultCurrency, basePath, specFields);
+            const result = mapCompatibleServices(data, defaultCurrency, basePath, specFields, specFieldsMapping);
             expect(result.data).toHaveLength(1);
             expect(result.total).toBe(1);
         });
@@ -173,7 +182,7 @@ describe('products.mapper', () => {
                 offset: 0,
                 limit: 10,
             } as unknown as FeaturedServicesResponse;
-            const result = mapFeaturedServices(data, defaultCurrency, basePath, specFields);
+            const result = mapFeaturedServices(data, defaultCurrency, basePath, specFields, specFieldsMapping);
             expect(result.data).toHaveLength(1);
             expect(result.total).toBe(1);
         });

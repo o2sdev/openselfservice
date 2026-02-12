@@ -13,4 +13,6 @@ export type Labels = {
 export class ProductDetailsBlock extends Block.Block {
     title?: string;
     labels!: Labels;
+    basePath?: string;
+    specFieldsMapping?: Record<string, string>;
 }

@@ -4,6 +4,7 @@ import { HttpService } from '@nestjs/axios';
 import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Observable, catchError, from, map, switchMap } from 'rxjs';
+import slugify from 'slugify';
 
 import { LoggerService } from '@o2s/utils.logger';
 
@@ -49,11 +50,15 @@ export class ProductsService extends Products.Service {
             fields: this.productListFields,
         };
 
+        if (!query.basePath) {
+            throw new Error('basePath is required - must be provided by CMS configuration');
+        }
+
         return from(
             this.sdk.admin.product
                 .list(params)
                 .then((response) => {
-                    return mapProducts(response, this.defaultCurrency, query.category);
+                    return mapProducts(response, this.defaultCurrency, query.basePath!, query.category);
                 })
                 .catch((error) => {
                     throw error;
@@ -70,14 +75,19 @@ export class ProductsService extends Products.Service {
         const isProductId = params.id.startsWith('prod_');
 
         if (isProductId) {
-            return this.getProductById(params.id, params.variantId);
+            return this.getProductById(params.id, params.variantId, params.basePath, params.specFieldsMapping);
         }
 
         // Treat as handle - search for product by handle
-        return this.getProductByHandle(params.id, params.variantId);
+        return this.getProductByHandle(params.id, params.variantId, params.basePath, params.specFieldsMapping);
     }
 
-    private getProductById(productId: string, variantId?: string): Observable<Products.Model.Product> {
+    private getProductById(
+        productId: string,
+        variantId?: string,
+        basePath?: string,
+        specFieldsMapping?: Record<string, string>,
+    ): Observable<Products.Model.Product> {
         return from(
             this.sdk.admin.product
                 .retrieve(productId, { fields: '*variants,*variants.options,*variants.options.option' })
@@ -91,7 +101,7 @@ export class ProductsService extends Products.Service {
                     throw new Error(`No variants found for product ${productId}`);
                 }
                 const targetVariantId = variantId || product.variants[0]!.id;
-                return this.getVariant(productId, targetVariantId, product.variants);
+                return this.getVariant(productId, targetVariantId, product.variants, basePath, specFieldsMapping);
             }),
             catchError((error) => {
                 return handleHttpError(error);
@@ -99,7 +109,12 @@ export class ProductsService extends Products.Service {
         );
     }
 
-    private getProductByHandle(handle: string, variantSlug?: string): Observable<Products.Model.Product> {
+    private getProductByHandle(
+        handle: string,
+        variantSlug?: string,
+        basePath?: string,
+        specFieldsMapping?: Record<string, string>,
+    ): Observable<Products.Model.Product> {
         return from(
             this.sdk.admin.product
                 .list({ handle, limit: 1, fields: '*variants,*variants.options,*variants.options.option' })
@@ -120,13 +135,14 @@ export class ProductsService extends Products.Service {
                 let variant = product.variants[0]!;
                 if (variantSlug) {
                     const matchingVariant = product.variants.find(
-                        (v: HttpTypes.AdminProductVariant) => v.sku && this.slugify(v.sku) === variantSlug,
+                        (v: HttpTypes.AdminProductVariant) =>
+                            v.sku && slugify(v.sku, { lower: true, strict: true }) === variantSlug,
                     );
                     if (matchingVariant) {
                         variant = matchingVariant;
                     } else {
                         const availableSlugs = product.variants.map((v: HttpTypes.AdminProductVariant) =>
-                            v.sku ? this.slugify(v.sku) : v.id,
+                            v.sku ? slugify(v.sku, { lower: true, strict: true }) : v.id,
                         );
                         this.logger.warn(
                             `Variant slug "${variantSlug}" not found for product "${handle}" (${product.id}). Available: [${availableSlugs.join(', ')}]. Falling back to first variant.`,
@@ -134,7 +150,7 @@ export class ProductsService extends Products.Service {
                     }
                 }
 
-                return this.getVariant(product.id, variant.id, product.variants);
+                return this.getVariant(product.id, variant.id, product.variants, basePath, specFieldsMapping);
             }),
             catchError((error) => {
                 return handleHttpError(error);
@@ -142,20 +158,22 @@ export class ProductsService extends Products.Service {
         );
     }
 
-    private slugify(text: string): string {
-        return text
-            .toLowerCase()
-            .normalize('NFD')
-            .replace(/[\u0300-\u036f]/g, '')
-            .replace(/[^a-z0-9]+/g, '-')
-            .replace(/^-+|-+$/g, '');
-    }
-
     private getVariant(
         productId: string,
         variantId: string,
         allVariants?: HttpTypes.AdminProductVariant[],
+        basePath?: string,
+        specFieldsMapping?: Record<string, string>,
     ): Observable<Products.Model.Product> {
+        if (!basePath) {
+            throw new Error('basePath is required - must be provided by CMS configuration');
+        }
+        if (!specFieldsMapping) {
+            throw new Error('specFieldsMapping is required - must be provided by CMS configuration');
+        }
+
+        const specFields = Object.keys(specFieldsMapping);
+
         return from(
             this.sdk.admin.product
                 .retrieveVariant(productId, variantId, { fields: this.productDetailFields })
@@ -167,7 +185,14 @@ export class ProductsService extends Products.Service {
                 if (!response.variant) {
                     throw new Error(`Variant ${variantId} not found for product ${productId}`);
                 }
-                return mapProduct(response.variant, this.defaultCurrency, allVariants);
+                return mapProduct(
+                    response.variant,
+                    this.defaultCurrency,
+                    allVariants,
+                    basePath,
+                    specFields,
+                    specFieldsMapping,
+                );
             }),
             catchError((error) => {
                 return handleHttpError(error);
@@ -176,6 +201,10 @@ export class ProductsService extends Products.Service {
     }
 
     getRelatedProductList(params: Products.Request.GetRelatedProductListParams): Observable<Products.Model.Products> {
+        if (!params.basePath) {
+            throw new Error('basePath is required - must be provided by CMS configuration');
+        }
+
         return this.httpClient
             .get<RelatedProductsResponse>(
                 `${this.medusaJsService.getBaseUrl()}/admin/products/${params.productId}/variants/${params.productVariantId}/references`,
@@ -189,7 +218,7 @@ export class ProductsService extends Products.Service {
             )
             .pipe(
                 map((response) => {
-                    return mapRelatedProducts(response.data, this.defaultCurrency);
+                    return mapRelatedProducts(response.data, this.defaultCurrency, params.basePath!);
                 }),
                 catchError((error) => {
                     return handleHttpError(error);

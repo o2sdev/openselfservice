@@ -7,6 +7,14 @@ import { ProductsService } from './products.service';
 
 const BASE_URL = 'https://api.medusa.test';
 const DEFAULT_CURRENCY = 'EUR';
+const TEST_BASE_PATH = '/products';
+const TEST_SPEC_FIELDS_MAPPING = {
+    weight: 'Weight',
+    height: 'Height',
+    width: 'Width',
+    length: 'Length',
+    material: 'Material',
+};
 
 const mockProductListResponse = {
     products: [
@@ -118,7 +126,9 @@ describe('ProductsService', () => {
         it('should call sdk.admin.product.list and return mapped products', async () => {
             mockSdkProductList.mockResolvedValue(mockProductListResponse);
 
-            const result = await firstValueFrom(service.getProductList({ limit: 10, offset: 0 }));
+            const result = await firstValueFrom(
+                service.getProductList({ limit: 10, offset: 0, basePath: TEST_BASE_PATH }),
+            );
 
             expect(mockSdkProductList).toHaveBeenCalledWith(
                 expect.objectContaining({
@@ -135,9 +145,9 @@ describe('ProductsService', () => {
         it('should throw NotFoundException when SDK returns 404', async () => {
             mockSdkProductList.mockRejectedValue({ status: 404 });
 
-            await expect(firstValueFrom(service.getProductList({ limit: 10, offset: 0 }))).rejects.toThrow(
-                NotFoundException,
-            );
+            await expect(
+                firstValueFrom(service.getProductList({ limit: 10, offset: 0, basePath: TEST_BASE_PATH })),
+            ).rejects.toThrow(NotFoundException);
         });
     });
 
@@ -146,7 +156,14 @@ describe('ProductsService', () => {
             mockSdkProductRetrieve.mockResolvedValue(mockRetrieveResponse);
             mockSdkProductRetrieveVariant.mockResolvedValue(mockVariantResponse);
 
-            const result = await firstValueFrom(service.getProduct({ id: 'prod_1', variantId: 'var_1' }));
+            const result = await firstValueFrom(
+                service.getProduct({
+                    id: 'prod_1',
+                    variantId: 'var_1',
+                    basePath: TEST_BASE_PATH,
+                    specFieldsMapping: TEST_SPEC_FIELDS_MAPPING,
+                }),
+            );
 
             expect(mockSdkProductRetrieve).toHaveBeenCalledWith('prod_1', expect.any(Object));
             expect(mockSdkProductRetrieveVariant).toHaveBeenCalledWith('prod_1', 'var_1', expect.any(Object));
@@ -172,6 +189,7 @@ describe('ProductsService', () => {
                     productId: 'p1',
                     productVariantId: 'v1',
                     type: 'COMPATIBLE_SERVICE',
+                    basePath: TEST_BASE_PATH,
                 }),
             );
 

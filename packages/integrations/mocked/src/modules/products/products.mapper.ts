@@ -190,12 +190,20 @@ export const mapProduct = (id: string, locale?: string, variantId?: string): Pro
             : product.variants[0]!;
 
         const overrides = getVariantOverrides(locale, selectedVariant.slug);
+
+        // Generate links for all variants
+        const variantsWithLinks = product.variants.map((variant) => ({
+            ...variant,
+            link: `${product.link}/${variant.slug}`,
+        }));
+
         return {
             ...product,
             ...overrides,
             variantId: selectedVariant.id,
             sku: `${product.sku}-${selectedVariant.slug.toUpperCase()}`,
             link: `${product.link}/${selectedVariant.slug}`,
+            variants: variantsWithLinks,
         };
     }
 

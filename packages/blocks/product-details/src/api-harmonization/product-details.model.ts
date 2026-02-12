@@ -12,6 +12,19 @@ export type Product = Products.Model.Product & {
     images:
         | NonNullable<Products.Model.Product['images']>
         | (Products.Model.Product['image'] extends undefined ? never : [Products.Model.Product['image']]);
+    // Explicitly include these fields to ensure TypeScript recognizes them
+    variants?: Array<{
+        id: string;
+        title: string;
+        slug: string;
+        link?: string;
+        options?: Record<string, string>;
+    }>;
+    optionGroups?: Array<{
+        id: string;
+        title: string;
+        values: string[];
+    }>;
 };
 
 export type ActionButton = {

@@ -23,4 +23,5 @@ export class ProductListBlock extends Block.Block {
     };
     detailsLabel?: string;
     detailsUrl!: string;
+    basePath?: string;
 }

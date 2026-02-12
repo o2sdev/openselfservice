@@ -6,12 +6,15 @@ export class GetProductListQuery extends PaginationQuery {
     category?: string;
     locale?: string;
     sort?: string;
+    basePath?: string;
 }
 
 export class GetProductParams {
     id!: string;
     variantId?: string;
     locale?: string;
+    basePath?: string;
+    specFieldsMapping?: Record<string, string>;
 }
 
 export class GetRelatedProductListParams {
@@ -22,4 +25,5 @@ export class GetRelatedProductListParams {
     limit?: number;
     offset?: number;
     sort?: string;
+    basePath?: string;
 }

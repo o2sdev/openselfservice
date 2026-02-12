@@ -32,14 +32,41 @@ const generateProductLink = (
     return `${basePath}/${slug}`;
 };
 
-// Note: VARIANT_SPEC_FIELDS moved to environment variable MEDUSA_VARIANT_SPEC_FIELDS
+// Map Medusa price to O2S Price model
+const mapPrice = (
+    prices: { currency_code?: string; amount?: number }[] | null | undefined,
+    defaultCurrency: string,
+): Models.Price.Price => {
+    const price = prices?.find((p) => p.currency_code?.toUpperCase() === defaultCurrency);
+    return {
+        value: price?.amount || 0,
+        currency:
+            (price?.currency_code?.toUpperCase() as Models.Price.Currency) ||
+            (defaultCurrency as Models.Price.Currency),
+    };
+};
 
-// Convert snake_case to Title Case
-const formatLabel = (key: string): string => {
-    return key
-        .split('_')
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' ');
+// Map Medusa thumbnail to O2S Image
+const mapThumbnail = (thumbnail: string | null | undefined, alt: string): { url: string; alt: string } | undefined => {
+    if (!thumbnail) return undefined;
+    return { url: thumbnail, alt };
+};
+
+// Map Medusa images array to O2S Image array
+const mapImages = (
+    images: { url: string }[] | null | undefined,
+    alt: string,
+): { url: string; alt: string }[] | undefined => {
+    if (!images || images.length === 0) return undefined;
+    return images.map((img) => ({ url: img.url, alt }));
+};
+
+// Map Medusa tags to O2S Badge array
+const mapTags = (
+    tags: { value?: string }[] | null | undefined,
+): { label: string; variant: 'default' | 'secondary' | 'destructive' | 'outline' }[] => {
+    if (!tags || tags.length === 0) return [];
+    return tags.map((tag) => ({ label: tag.value || '', variant: 'default' as const }));
 };
 
 // Extract keySpecs from product/variant metadata
@@ -85,6 +112,7 @@ const mapKeySpecsFromMetadata = (variant: HttpTypes.AdminProductVariant): Produc
 const mapVariantToDetailedSpecs = (
     variant: HttpTypes.AdminProductVariant,
     specFields: string[],
+    specFieldsMapping: Record<string, string>,
 ): Products.Model.DetailedSpec[] => {
     const specs: Products.Model.DetailedSpec[] = [];
     const product = variant.product;
@@ -97,7 +125,7 @@ const mapVariantToDetailedSpecs = (
 
         if (value != null && value !== '') {
             specs.push({
-                label: formatLabel(field),
+                label: specFieldsMapping[field]!,
                 value: String(value),
             });
         }
@@ -185,16 +213,16 @@ export const mapProduct = (
     allVariants: HttpTypes.AdminProductVariant[] | undefined,
     basePath: string,
     specFields: string[],
+    specFieldsMapping: Record<string, string>,
 ): Products.Model.Product => {
     if (!productVariant) {
         throw new NotFoundException('Product variant is undefined');
     }
 
     const product = productVariant?.product;
-    const price = productVariant.prices?.find((p) => p.currency_code?.toUpperCase() === defaultCurrency);
 
     // Build detailedSpecs from variant attributes dynamically
-    const detailedSpecs = mapVariantToDetailedSpecs(productVariant, specFields);
+    const detailedSpecs = mapVariantToDetailedSpecs(productVariant, specFields, specFieldsMapping);
 
     return {
         id: product?.id || '',
@@ -203,30 +231,13 @@ export const mapProduct = (
         description: product?.description || '',
         shortDescription: (product?.subtitle as string) || '',
         variantId: productVariant.id,
-        image: product?.thumbnail
-            ? {
-                  url: product.thumbnail,
-                  alt: product.title,
-              }
-            : undefined,
-        images: product?.images?.map((img) => ({
-            url: img.url,
-            alt: product?.title || '',
-        })),
-        price: {
-            value: price?.amount || 0,
-            currency:
-                (price?.currency_code?.toUpperCase() as Models.Price.Currency) ||
-                (defaultCurrency as Models.Price.Currency),
-        },
+        image: mapThumbnail(product?.thumbnail, product?.title || ''),
+        images: mapImages(product?.images, product?.title || ''),
+        price: mapPrice(productVariant.prices, defaultCurrency),
         link: generateProductLink(basePath, product?.handle, product?.id || '', productVariant.sku),
         type: mapProductType(product?.type || undefined),
         category: product?.categories?.[0]?.name || '',
-        tags:
-            product?.tags?.map((tag) => ({
-                label: tag.value || '',
-                variant: 'default',
-            })) || [],
+        tags: mapTags(product?.tags),
         detailedSpecs: detailedSpecs.length > 0 ? detailedSpecs : undefined,
         keySpecs: mapKeySpecsFromMetadata(productVariant),
         optionGroups: allVariants ? mapOptionGroups(allVariants) : undefined,
@@ -253,7 +264,6 @@ export const mapProducts = (
     return {
         data: products.map((product) => {
             const firstVariant = product.variants?.[0];
-            const price = firstVariant?.prices?.find((p) => p.currency_code?.toUpperCase() === defaultCurrency);
 
             return {
                 id: product.id,
@@ -261,30 +271,13 @@ export const mapProducts = (
                 name: product.title,
                 description: product?.description || '',
                 variantId: firstVariant?.id || '',
-                image: product?.thumbnail
-                    ? {
-                          url: product.thumbnail,
-                          alt: product.title,
-                      }
-                    : undefined,
-                images: product.images?.map((img) => ({
-                    url: img.url,
-                    alt: product.title,
-                })),
-                price: {
-                    value: price?.amount || 0,
-                    currency:
-                        (price?.currency_code?.toUpperCase() as Models.Price.Currency) ||
-                        (defaultCurrency as Models.Price.Currency),
-                },
+                image: mapThumbnail(product?.thumbnail, product.title),
+                images: mapImages(product.images, product.title),
+                price: mapPrice(firstVariant?.prices, defaultCurrency),
                 link: generateProductLink(basePath, product.handle, product.id, firstVariant?.sku),
                 type: mapProductType(product?.type || undefined),
                 category: product.categories?.[0]?.name || '',
-                tags:
-                    product.tags?.map((tag) => ({
-                        label: tag.value || '',
-                        variant: 'default',
-                    })) || [],
+                tags: mapTags(product.tags),
                 variants:
                     product.variants && product.variants.length > 1
                         ? mapVariantOptions(product.variants, basePath, product.handle, product.id)
@@ -304,7 +297,6 @@ export const mapRelatedProducts = (
         data: data.productReferences.map((ref) => {
             const targetProduct = ref.targetProduct;
             const product = targetProduct.product;
-            const price = targetProduct.prices?.find((p) => p.currency_code?.toUpperCase() === defaultCurrency);
 
             return {
                 id: targetProduct.product?.id || targetProduct.id,
@@ -312,28 +304,13 @@ export const mapRelatedProducts = (
                 name: targetProduct.title,
                 description: product?.description || '',
                 shortDescription: product?.subtitle || product?.description || undefined,
-                image: {
-                    url: product?.thumbnail || '',
-                    alt: targetProduct.title,
-                },
-                images: product?.images?.map((img) => ({
-                    url: img.url,
-                    alt: product?.title || '',
-                })),
-                price: {
-                    value: price?.amount || 0,
-                    currency:
-                        (price?.currency_code?.toUpperCase() as Models.Price.Currency) ||
-                        (defaultCurrency as Models.Price.Currency),
-                },
+                image: mapThumbnail(product?.thumbnail, targetProduct.title) || { url: '', alt: targetProduct.title },
+                images: mapImages(product?.images, product?.title || ''),
+                price: mapPrice(targetProduct.prices, defaultCurrency),
                 link: generateProductLink(basePath, product?.handle, product?.id || '', targetProduct.sku),
                 type: mapProductType(product?.type || undefined),
                 category: product?.categories?.[0]?.name || '',
-                tags:
-                    product?.tags?.map((tag) => ({
-                        label: tag.value || '',
-                        variant: 'default',
-                    })) || [],
+                tags: mapTags(product?.tags),
             };
         }),
         total: data.count,
@@ -345,10 +322,11 @@ export const mapCompatibleServices = (
     defaultCurrency: string,
     basePath: string,
     specFields: string[],
+    specFieldsMapping: Record<string, string>,
 ): Products.Model.Products => {
     return {
         data: data.compatibleServices.map((product) => {
-            return mapProduct(product, defaultCurrency, undefined, basePath, specFields);
+            return mapProduct(product, defaultCurrency, undefined, basePath, specFields, specFieldsMapping);
         }),
         total: data.count,
     };
@@ -359,10 +337,11 @@ export const mapFeaturedServices = (
     defaultCurrency: string,
     basePath: string,
     specFields: string[],
+    specFieldsMapping: Record<string, string>,
 ): Products.Model.Products => {
     return {
         data: data.featuredServices.map((product) => {
-            return mapProduct(product, defaultCurrency, undefined, basePath, specFields);
+            return mapProduct(product, defaultCurrency, undefined, basePath, specFields, specFieldsMapping);
         }),
         total: data.count,
     };
