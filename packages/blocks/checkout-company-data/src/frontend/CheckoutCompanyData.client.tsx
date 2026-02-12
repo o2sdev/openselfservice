@@ -1,8 +1,10 @@
 'use client';
 
+import { ErrorMessage, Field, FieldProps, Form, Formik } from 'formik';
 import { createNavigation } from 'next-intl/navigation';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import React from 'react';
+import { object as YupObject, string as YupString } from 'yup';
 
 import { CartSummary } from '@o2s/ui/components/Cart/CartSummary';
 import { StepIndicator } from '@o2s/ui/components/Checkout/StepIndicator';
@@ -33,83 +35,42 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
     const { Link: LinkComponent } = createNavigation(routing);
     const router = useRouter();
 
-    const [formData, setFormData] = useState({
-        companyName: '',
-        nip: '1234567890',
-        street: '',
-        city: '',
-        postalCode: '00-000',
-        country: '',
+    const defaultErrors = errorMessages ?? {
+        required: 'This field is required',
+        invalidNip: 'Invalid tax ID',
+        invalidPostalCode: 'Invalid postal code',
+    };
+
+    const validationSchema = YupObject().shape({
+        companyName: fields.companyName.required ? YupString().required(defaultErrors.required) : YupString(),
+        nip: fields.nip.required
+            ? YupString()
+                  .required(defaultErrors.required)
+                  .transform((v) => v?.replace(/[-\s]/g, '') ?? '')
+                  .matches(/^\d{10}$/, defaultErrors.invalidNip)
+            : YupString()
+                  .transform((v) => v?.replace(/[-\s]/g, '') ?? '')
+                  .matches(/^\d{10}$|^$/, defaultErrors.invalidNip),
+        street: fields.address.street.required ? YupString().required(defaultErrors.required) : YupString(),
+        city: fields.address.city.required ? YupString().required(defaultErrors.required) : YupString(),
+        postalCode: fields.address.postalCode.required
+            ? YupString()
+                  .required(defaultErrors.required)
+                  .transform((v) => v?.replace(/[-\s]/g, '') ?? '')
+                  .matches(/^\d{5}$/, defaultErrors.invalidPostalCode)
+            : YupString()
+                  .transform((v) => v?.replace(/[-\s]/g, '') ?? '')
+                  .matches(/^\d{5}$|^$/, defaultErrors.invalidPostalCode),
+        country: fields.address.country.required ? YupString().required(defaultErrors.required) : YupString(),
     });
 
-    const [errors, setErrors] = useState<Record<string, string>>({});
-
-    const handleChange = (field: string, value: string) => {
-        setFormData((prev) => ({ ...prev, [field]: value }));
-        if (errors[field]) {
-            setErrors((prev) => {
-                const next = { ...prev };
-                delete next[field];
-                return next;
-            });
-        }
-    };
-
-    const validateNip = (nip: string): boolean => {
-        const cleaned = nip.replace(/[-\s]/g, '');
-        return /^\d{10}$/.test(cleaned);
-    };
-
-    const validatePostalCode = (code: string): boolean => {
-        const cleaned = code.replace(/[-\s]/g, '');
-        return /^\d{5}$/.test(cleaned);
-    };
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-
-        const defaultErrors = errorMessages ?? {
-            required: 'This field is required',
-            invalidNip: 'Invalid tax ID',
-            invalidPostalCode: 'Invalid postal code',
-        };
-        const newErrors: Record<string, string> = {};
-
-        if (fields.companyName.required && !formData.companyName.trim()) {
-            newErrors.companyName = defaultErrors.required;
-        }
-
-        if (fields.nip.required && !formData.nip.trim()) {
-            newErrors.nip = defaultErrors.required;
-        } else if (formData.nip && !validateNip(formData.nip)) {
-            newErrors.nip = defaultErrors.invalidNip;
-        }
-
-        if (fields.address.street.required && !formData.street.trim()) {
-            newErrors.street = defaultErrors.required;
-        }
-
-        if (fields.address.city.required && !formData.city.trim()) {
-            newErrors.city = defaultErrors.required;
-        }
-
-        if (fields.address.postalCode.required && !formData.postalCode.trim()) {
-            newErrors.postalCode = defaultErrors.required;
-        } else if (formData.postalCode && !validatePostalCode(formData.postalCode)) {
-            newErrors.postalCode = defaultErrors.invalidPostalCode;
-        }
-
-        if (fields.address.country.required && !formData.country.trim()) {
-            newErrors.country = defaultErrors.required;
-        }
-
-        if (Object.keys(newErrors).length > 0) {
-            setErrors(newErrors);
-            return;
-        }
-
-        localStorage.setItem('checkoutCompanyData', JSON.stringify(formData));
-        router.push(buttons.next.path);
+    const initialValues = {
+        companyName: '',
+        nip: '',
+        street: '',
+        city: '',
+        postalCode: '',
+        country: '',
     };
 
     if (!title || !fields || !buttons || !summaryLabels || !totals) {
@@ -129,149 +90,217 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                {/* Form */}
                 <div className="lg:col-span-2">
-                    <form onSubmit={handleSubmit} className="w-full flex flex-col gap-6">
-                        <Separator />
+                    <Formik
+                        initialValues={initialValues}
+                        validationSchema={validationSchema}
+                        onSubmit={(values) => {
+                            localStorage.setItem('checkoutCompanyData', JSON.stringify(values));
+                            router.push(buttons.next.path);
+                        }}
+                        validateOnBlur={true}
+                        validateOnMount={false}
+                        validateOnChange={false}
+                    >
+                        <Form className="w-full flex flex-col gap-6">
+                            <Separator />
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="md:col-span-2 flex flex-col gap-2">
-                                <Label htmlFor="companyName">
-                                    {fields.companyName.label}
-                                    {fields.companyName.required && <span className="text-destructive"> *</span>}
-                                </Label>
-                                <Input
-                                    id="companyName"
-                                    value={formData.companyName}
-                                    onChange={(e) => handleChange('companyName', e.target.value)}
-                                    placeholder={fields.companyName.placeholder}
-                                    className={errors.companyName ? 'border-destructive' : ''}
-                                />
-                                {errors.companyName && (
-                                    <Typography variant="small" className="text-destructive">
-                                        {errors.companyName}
-                                    </Typography>
-                                )}
-                            </div>
-
-                            <div className="md:col-span-2 flex flex-col gap-2">
-                                <Label htmlFor="nip">
-                                    {fields.nip.label}
-                                    {fields.nip.required && <span className="text-destructive"> *</span>}
-                                </Label>
-                                <Input
-                                    id="nip"
-                                    value={formData.nip}
-                                    onChange={(e) => handleChange('nip', e.target.value)}
-                                    placeholder={fields.nip.placeholder}
-                                    className={errors.nip ? 'border-destructive' : ''}
-                                />
-                                {errors.nip && (
-                                    <Typography variant="small" className="text-destructive">
-                                        {errors.nip}
-                                    </Typography>
-                                )}
-                            </div>
-
-                            {fields.addressSectionTitle && (
-                                <div className="md:col-span-2">
-                                    <Typography variant="h3" className="mb-4">
-                                        {fields.addressSectionTitle}
-                                    </Typography>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div className="md:col-span-2 flex flex-col gap-2">
+                                    <Label htmlFor="companyName">
+                                        {fields.companyName.label}
+                                        {fields.companyName.required && <span className="text-destructive"> *</span>}
+                                    </Label>
+                                    <Field name="companyName">
+                                        {({ field, form: { touched, errors } }: FieldProps<string>) => (
+                                            <>
+                                                <Input
+                                                    id="companyName"
+                                                    {...field}
+                                                    placeholder={fields.companyName.placeholder}
+                                                    className={
+                                                        touched.companyName && errors.companyName
+                                                            ? 'border-destructive'
+                                                            : ''
+                                                    }
+                                                />
+                                                <ErrorMessage name="companyName">
+                                                    {(msg) => (
+                                                        <Typography variant="small" className="text-destructive">
+                                                            {msg}
+                                                        </Typography>
+                                                    )}
+                                                </ErrorMessage>
+                                            </>
+                                        )}
+                                    </Field>
                                 </div>
-                            )}
 
-                            <div className="md:col-span-2 flex flex-col gap-2">
-                                <Label htmlFor="street">
-                                    {fields.address.street.label}
-                                    {fields.address.street.required && <span className="text-destructive"> *</span>}
-                                </Label>
-                                <Input
-                                    id="street"
-                                    value={formData.street}
-                                    onChange={(e) => handleChange('street', e.target.value)}
-                                    placeholder={fields.address.street.placeholder}
-                                    className={errors.street ? 'border-destructive' : ''}
-                                />
-                                {errors.street && (
-                                    <Typography variant="small" className="text-destructive">
-                                        {errors.street}
-                                    </Typography>
+                                <div className="md:col-span-2 flex flex-col gap-2">
+                                    <Label htmlFor="nip">
+                                        {fields.nip.label}
+                                        {fields.nip.required && <span className="text-destructive"> *</span>}
+                                    </Label>
+                                    <Field name="nip">
+                                        {({ field, form: { touched, errors } }: FieldProps<string>) => (
+                                            <>
+                                                <Input
+                                                    id="nip"
+                                                    {...field}
+                                                    placeholder={fields.nip.placeholder}
+                                                    className={touched.nip && errors.nip ? 'border-destructive' : ''}
+                                                />
+                                                <ErrorMessage name="nip">
+                                                    {(msg) => (
+                                                        <Typography variant="small" className="text-destructive">
+                                                            {msg}
+                                                        </Typography>
+                                                    )}
+                                                </ErrorMessage>
+                                            </>
+                                        )}
+                                    </Field>
+                                </div>
+
+                                {fields.addressSectionTitle && (
+                                    <div className="md:col-span-2">
+                                        <Typography variant="h3" className="mb-4">
+                                            {fields.addressSectionTitle}
+                                        </Typography>
+                                    </div>
                                 )}
+
+                                <div className="md:col-span-2 flex flex-col gap-2">
+                                    <Label htmlFor="street">
+                                        {fields.address.street.label}
+                                        {fields.address.street.required && <span className="text-destructive"> *</span>}
+                                    </Label>
+                                    <Field name="street">
+                                        {({ field, form: { touched, errors } }: FieldProps<string>) => (
+                                            <>
+                                                <Input
+                                                    id="street"
+                                                    {...field}
+                                                    placeholder={fields.address.street.placeholder}
+                                                    className={
+                                                        touched.street && errors.street ? 'border-destructive' : ''
+                                                    }
+                                                />
+                                                <ErrorMessage name="street">
+                                                    {(msg) => (
+                                                        <Typography variant="small" className="text-destructive">
+                                                            {msg}
+                                                        </Typography>
+                                                    )}
+                                                </ErrorMessage>
+                                            </>
+                                        )}
+                                    </Field>
+                                </div>
+
+                                <div className="flex flex-col gap-2">
+                                    <Label htmlFor="city">
+                                        {fields.address.city.label}
+                                        {fields.address.city.required && <span className="text-destructive"> *</span>}
+                                    </Label>
+                                    <Field name="city">
+                                        {({ field, form: { touched, errors } }: FieldProps<string>) => (
+                                            <>
+                                                <Input
+                                                    id="city"
+                                                    {...field}
+                                                    placeholder={fields.address.city.placeholder}
+                                                    className={touched.city && errors.city ? 'border-destructive' : ''}
+                                                />
+                                                <ErrorMessage name="city">
+                                                    {(msg) => (
+                                                        <Typography variant="small" className="text-destructive">
+                                                            {msg}
+                                                        </Typography>
+                                                    )}
+                                                </ErrorMessage>
+                                            </>
+                                        )}
+                                    </Field>
+                                </div>
+
+                                <div className="flex flex-col gap-2">
+                                    <Label htmlFor="postalCode">
+                                        {fields.address.postalCode.label}
+                                        {fields.address.postalCode.required && (
+                                            <span className="text-destructive"> *</span>
+                                        )}
+                                    </Label>
+                                    <Field name="postalCode">
+                                        {({ field, form: { touched, errors } }: FieldProps<string>) => (
+                                            <>
+                                                <Input
+                                                    id="postalCode"
+                                                    {...field}
+                                                    placeholder={fields.address.postalCode.placeholder ?? 'XX-XXX'}
+                                                    className={
+                                                        touched.postalCode && errors.postalCode
+                                                            ? 'border-destructive'
+                                                            : ''
+                                                    }
+                                                />
+                                                <ErrorMessage name="postalCode">
+                                                    {(msg) => (
+                                                        <Typography variant="small" className="text-destructive">
+                                                            {msg}
+                                                        </Typography>
+                                                    )}
+                                                </ErrorMessage>
+                                            </>
+                                        )}
+                                    </Field>
+                                </div>
+
+                                <div className="md:col-span-2 flex flex-col gap-2">
+                                    <Label htmlFor="country">
+                                        {fields.address.country.label}
+                                        {fields.address.country.required && (
+                                            <span className="text-destructive"> *</span>
+                                        )}
+                                    </Label>
+                                    <Field name="country">
+                                        {({ field, form: { touched, errors } }: FieldProps<string>) => (
+                                            <>
+                                                <Input
+                                                    id="country"
+                                                    {...field}
+                                                    placeholder={fields.address.country.placeholder}
+                                                    className={
+                                                        touched.country && errors.country ? 'border-destructive' : ''
+                                                    }
+                                                />
+                                                <ErrorMessage name="country">
+                                                    {(msg) => (
+                                                        <Typography variant="small" className="text-destructive">
+                                                            {msg}
+                                                        </Typography>
+                                                    )}
+                                                </ErrorMessage>
+                                            </>
+                                        )}
+                                    </Field>
+                                </div>
                             </div>
 
-                            <div className="flex flex-col gap-2">
-                                <Label htmlFor="city">
-                                    {fields.address.city.label}
-                                    {fields.address.city.required && <span className="text-destructive"> *</span>}
-                                </Label>
-                                <Input
-                                    id="city"
-                                    value={formData.city}
-                                    onChange={(e) => handleChange('city', e.target.value)}
-                                    placeholder={fields.address.city.placeholder}
-                                    className={errors.city ? 'border-destructive' : ''}
-                                />
-                                {errors.city && (
-                                    <Typography variant="small" className="text-destructive">
-                                        {errors.city}
-                                    </Typography>
-                                )}
+                            <Separator />
+
+                            <div className="flex flex-col sm:flex-row gap-4 justify-between">
+                                <Button asChild variant="outline" type="button">
+                                    <LinkComponent href={buttons.back.path}>{buttons.back.label}</LinkComponent>
+                                </Button>
+                                <Button type="submit" variant="default">
+                                    {buttons.next.label}
+                                </Button>
                             </div>
-
-                            <div className="flex flex-col gap-2">
-                                <Label htmlFor="postalCode">
-                                    {fields.address.postalCode.label}
-                                    {fields.address.postalCode.required && <span className="text-destructive"> *</span>}
-                                </Label>
-                                <Input
-                                    id="postalCode"
-                                    value={formData.postalCode}
-                                    onChange={(e) => handleChange('postalCode', e.target.value)}
-                                    placeholder={fields.address.postalCode.placeholder ?? 'XX-XXX'}
-                                    className={errors.postalCode ? 'border-destructive' : ''}
-                                />
-                                {errors.postalCode && (
-                                    <Typography variant="small" className="text-destructive">
-                                        {errors.postalCode}
-                                    </Typography>
-                                )}
-                            </div>
-
-                            <div className="md:col-span-2 flex flex-col gap-2">
-                                <Label htmlFor="country">
-                                    {fields.address.country.label}
-                                    {fields.address.country.required && <span className="text-destructive"> *</span>}
-                                </Label>
-                                <Input
-                                    id="country"
-                                    value={formData.country}
-                                    onChange={(e) => handleChange('country', e.target.value)}
-                                    placeholder={fields.address.country.placeholder}
-                                    className={errors.country ? 'border-destructive' : ''}
-                                />
-                                {errors.country && (
-                                    <Typography variant="small" className="text-destructive">
-                                        {errors.country}
-                                    </Typography>
-                                )}
-                            </div>
-                        </div>
-
-                        <Separator />
-
-                        <div className="flex flex-col sm:flex-row gap-4 justify-between">
-                            <Button asChild variant="outline" type="button">
-                                <LinkComponent href={buttons.back.path}>{buttons.back.label}</LinkComponent>
-                            </Button>
-                            <Button type="submit" variant="default">
-                                {buttons.next.label}
-                            </Button>
-                        </div>
-                    </form>
+                        </Form>
+                    </Formik>
                 </div>
 
-                {/* Cart Summary */}
                 <div className="lg:col-span-1">
                     <CartSummary
                         subtotal={totals.subtotal}

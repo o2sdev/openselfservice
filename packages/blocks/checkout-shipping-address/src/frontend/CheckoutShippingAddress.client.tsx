@@ -1,8 +1,10 @@
 'use client';
 
+import { ErrorMessage, Field, FieldProps, Form, Formik } from 'formik';
 import { createNavigation } from 'next-intl/navigation';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import React from 'react';
+import { boolean as YupBoolean, object as YupObject, string as YupString } from 'yup';
 
 import { CartSummary } from '@o2s/ui/components/Cart/CartSummary';
 import { StepIndicator } from '@o2s/ui/components/Checkout/StepIndicator';
@@ -36,87 +38,47 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
     const { Link: LinkComponent } = createNavigation(routing);
     const router = useRouter();
 
-    const [formData, setFormData] = useState({
+    const defaultErrors = errorMessages ?? {
+        required: 'This field is required',
+        invalidPostalCode: 'Invalid postal code',
+    };
+
+    const validationSchema = YupObject().shape({
+        street: YupString().when('sameAsCompanyAddress', {
+            is: false,
+            then: (schema) => (fields.address.street.required ? schema.required(defaultErrors.required) : schema),
+        }),
+        city: YupString().when('sameAsCompanyAddress', {
+            is: false,
+            then: (schema) => (fields.address.city.required ? schema.required(defaultErrors.required) : schema),
+        }),
+        postalCode: YupString().when('sameAsCompanyAddress', {
+            is: false,
+            then: (schema) =>
+                fields.address.postalCode.required
+                    ? schema
+                          .required(defaultErrors.required)
+                          .transform((v) => v?.replace(/[-\s]/g, '') ?? '')
+                          .matches(/^\d{5}$/, defaultErrors.invalidPostalCode)
+                    : schema
+                          .transform((v) => v?.replace(/[-\s]/g, '') ?? '')
+                          .matches(/^\d{5}$|^$/, defaultErrors.invalidPostalCode),
+        }),
+        country: YupString().when('sameAsCompanyAddress', {
+            is: false,
+            then: (schema) => (fields.address.country.required ? schema.required(defaultErrors.required) : schema),
+        }),
+        sameAsCompanyAddress: YupBoolean(),
+        shippingMethod: fields.shippingMethod.required ? YupString().required(defaultErrors.required) : YupString(),
+    });
+
+    const initialValues = {
         street: '',
         city: '',
         postalCode: '',
         country: '',
         sameAsCompanyAddress: false,
         shippingMethod: '',
-    });
-
-    const [errors, setErrors] = useState<Record<string, string>>({});
-
-    const handleChange = (field: string, value: string | boolean) => {
-        setFormData((prev) => ({ ...prev, [field]: value }));
-        if (errors[field]) {
-            setErrors((prev) => {
-                const next = { ...prev };
-                delete next[field];
-                return next;
-            });
-        }
-    };
-
-    const validatePostalCode = (code: string): boolean => {
-        const cleaned = code.replace(/[-\s]/g, '');
-        return /^\d{5}$/.test(cleaned);
-    };
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-
-        if (formData.sameAsCompanyAddress) {
-            router.push(buttons.next.path);
-            return;
-        }
-
-        const defaultErrors = errorMessages ?? {
-            required: 'This field is required',
-            invalidPostalCode: 'Invalid postal code',
-        };
-        const newErrors: Record<string, string> = {};
-
-        if (fields.address.street.required && !formData.street.trim()) {
-            newErrors.street = defaultErrors.required;
-        }
-
-        if (fields.address.city.required && !formData.city.trim()) {
-            newErrors.city = defaultErrors.required;
-        }
-
-        if (fields.address.postalCode.required && !formData.postalCode.trim()) {
-            newErrors.postalCode = defaultErrors.required;
-        } else if (formData.postalCode && !validatePostalCode(formData.postalCode)) {
-            newErrors.postalCode = defaultErrors.invalidPostalCode;
-        }
-
-        if (fields.address.country.required && !formData.country.trim()) {
-            newErrors.country = defaultErrors.required;
-        }
-
-        if (fields.shippingMethod.required && !formData.shippingMethod.trim()) {
-            newErrors.shippingMethod = defaultErrors.required;
-        }
-
-        if (Object.keys(newErrors).length > 0) {
-            setErrors(newErrors);
-            return;
-        }
-
-        const shippingMethodOption = fields.shippingMethod.options.find((opt) => opt.value === formData.shippingMethod);
-        const shippingMethodLabel = shippingMethodOption?.label ?? formData.shippingMethod;
-
-        localStorage.setItem(
-            'checkoutShippingAddress',
-            JSON.stringify({
-                ...formData,
-                sameAsCompanyAddress: formData.sameAsCompanyAddress,
-                shippingMethodLabel,
-            }),
-        );
-
-        router.push(buttons.next.path);
     };
 
     if (!title || !fields || !buttons || !summaryLabels || !totals) {
@@ -136,166 +98,262 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                {/* Form */}
                 <div className="lg:col-span-2">
-                    <form onSubmit={handleSubmit} className="w-full flex flex-col gap-6">
-                        <Separator />
+                    <Formik
+                        initialValues={initialValues}
+                        validationSchema={validationSchema}
+                        onSubmit={(values) => {
+                            const shippingMethodOption = fields.shippingMethod.options.find(
+                                (opt) => opt.value === values.shippingMethod,
+                            );
+                            const shippingMethodLabel = shippingMethodOption?.label ?? values.shippingMethod;
+                            localStorage.setItem(
+                                'checkoutShippingAddress',
+                                JSON.stringify({
+                                    ...values,
+                                    shippingMethodLabel,
+                                }),
+                            );
+                            router.push(buttons.next.path);
+                        }}
+                        validateOnBlur={true}
+                        validateOnMount={false}
+                        validateOnChange={false}
+                    >
+                        {({ values, setFieldValue }) => (
+                            <Form className="w-full flex flex-col gap-6">
+                                <Separator />
 
-                        <div className="flex flex-col gap-4">
-                            <div className="flex items-center gap-2">
-                                <Checkbox
-                                    id="sameAsCompanyAddress"
-                                    checked={formData.sameAsCompanyAddress}
-                                    onCheckedChange={(checked) =>
-                                        handleChange('sameAsCompanyAddress', checked === true)
-                                    }
-                                />
-                                <Label htmlFor="sameAsCompanyAddress" className="cursor-pointer">
-                                    {fields.sameAsCompanyAddress.label}
-                                </Label>
-                            </div>
-
-                            {!formData.sameAsCompanyAddress && (
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div className="md:col-span-2 flex flex-col gap-2">
-                                        <Label htmlFor="street">
-                                            {fields.address.street.label}
-                                            {fields.address.street.required && (
-                                                <span className="text-destructive"> *</span>
-                                            )}
-                                        </Label>
-                                        <Input
-                                            id="street"
-                                            value={formData.street}
-                                            onChange={(e) => handleChange('street', e.target.value)}
-                                            placeholder={fields.address.street.placeholder}
-                                            className={errors.street ? 'border-destructive' : ''}
-                                        />
-                                        {errors.street && (
-                                            <Typography variant="small" className="text-destructive">
-                                                {errors.street}
-                                            </Typography>
+                                <div className="flex flex-col gap-4">
+                                    <Field name="sameAsCompanyAddress">
+                                        {({ field }: FieldProps<boolean>) => (
+                                            <div className="flex items-center gap-2">
+                                                <Checkbox
+                                                    id="sameAsCompanyAddress"
+                                                    checked={field.value}
+                                                    onCheckedChange={(checked) =>
+                                                        setFieldValue('sameAsCompanyAddress', checked === true)
+                                                    }
+                                                />
+                                                <Label htmlFor="sameAsCompanyAddress" className="cursor-pointer">
+                                                    {fields.sameAsCompanyAddress.label}
+                                                </Label>
+                                            </div>
                                         )}
-                                    </div>
+                                    </Field>
 
-                                    <div className="flex flex-col gap-2">
-                                        <Label htmlFor="city">
-                                            {fields.address.city.label}
-                                            {fields.address.city.required && (
-                                                <span className="text-destructive"> *</span>
-                                            )}
-                                        </Label>
-                                        <Input
-                                            id="city"
-                                            value={formData.city}
-                                            onChange={(e) => handleChange('city', e.target.value)}
-                                            placeholder={fields.address.city.placeholder}
-                                            className={errors.city ? 'border-destructive' : ''}
-                                        />
-                                        {errors.city && (
-                                            <Typography variant="small" className="text-destructive">
-                                                {errors.city}
-                                            </Typography>
-                                        )}
-                                    </div>
+                                    {!values.sameAsCompanyAddress && (
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                            <div className="md:col-span-2 flex flex-col gap-2">
+                                                <Label htmlFor="street">
+                                                    {fields.address.street.label}
+                                                    {fields.address.street.required && (
+                                                        <span className="text-destructive"> *</span>
+                                                    )}
+                                                </Label>
+                                                <Field name="street">
+                                                    {({ field, form: { touched, errors } }: FieldProps<string>) => (
+                                                        <>
+                                                            <Input
+                                                                id="street"
+                                                                {...field}
+                                                                placeholder={fields.address.street.placeholder}
+                                                                className={
+                                                                    touched.street && errors.street
+                                                                        ? 'border-destructive'
+                                                                        : ''
+                                                                }
+                                                            />
+                                                            <ErrorMessage name="street">
+                                                                {(msg) => (
+                                                                    <Typography
+                                                                        variant="small"
+                                                                        className="text-destructive"
+                                                                    >
+                                                                        {msg}
+                                                                    </Typography>
+                                                                )}
+                                                            </ErrorMessage>
+                                                        </>
+                                                    )}
+                                                </Field>
+                                            </div>
 
-                                    <div className="flex flex-col gap-2">
-                                        <Label htmlFor="postalCode">
-                                            {fields.address.postalCode.label}
-                                            {fields.address.postalCode.required && (
-                                                <span className="text-destructive"> *</span>
-                                            )}
-                                        </Label>
-                                        <Input
-                                            id="postalCode"
-                                            value={formData.postalCode}
-                                            onChange={(e) => handleChange('postalCode', e.target.value)}
-                                            placeholder={fields.address.postalCode.placeholder ?? 'XX-XXX'}
-                                            className={errors.postalCode ? 'border-destructive' : ''}
-                                        />
-                                        {errors.postalCode && (
-                                            <Typography variant="small" className="text-destructive">
-                                                {errors.postalCode}
-                                            </Typography>
-                                        )}
-                                    </div>
+                                            <div className="flex flex-col gap-2">
+                                                <Label htmlFor="city">
+                                                    {fields.address.city.label}
+                                                    {fields.address.city.required && (
+                                                        <span className="text-destructive"> *</span>
+                                                    )}
+                                                </Label>
+                                                <Field name="city">
+                                                    {({ field, form: { touched, errors } }: FieldProps<string>) => (
+                                                        <>
+                                                            <Input
+                                                                id="city"
+                                                                {...field}
+                                                                placeholder={fields.address.city.placeholder}
+                                                                className={
+                                                                    touched.city && errors.city
+                                                                        ? 'border-destructive'
+                                                                        : ''
+                                                                }
+                                                            />
+                                                            <ErrorMessage name="city">
+                                                                {(msg) => (
+                                                                    <Typography
+                                                                        variant="small"
+                                                                        className="text-destructive"
+                                                                    >
+                                                                        {msg}
+                                                                    </Typography>
+                                                                )}
+                                                            </ErrorMessage>
+                                                        </>
+                                                    )}
+                                                </Field>
+                                            </div>
 
-                                    <div className="md:col-span-2 flex flex-col gap-2">
-                                        <Label htmlFor="country">
-                                            {fields.address.country.label}
-                                            {fields.address.country.required && (
-                                                <span className="text-destructive"> *</span>
-                                            )}
-                                        </Label>
-                                        <Input
-                                            id="country"
-                                            value={formData.country}
-                                            onChange={(e) => handleChange('country', e.target.value)}
-                                            placeholder={fields.address.country.placeholder}
-                                            className={errors.country ? 'border-destructive' : ''}
-                                        />
-                                        {errors.country && (
-                                            <Typography variant="small" className="text-destructive">
-                                                {errors.country}
-                                            </Typography>
-                                        )}
-                                    </div>
+                                            <div className="flex flex-col gap-2">
+                                                <Label htmlFor="postalCode">
+                                                    {fields.address.postalCode.label}
+                                                    {fields.address.postalCode.required && (
+                                                        <span className="text-destructive"> *</span>
+                                                    )}
+                                                </Label>
+                                                <Field name="postalCode">
+                                                    {({ field, form: { touched, errors } }: FieldProps<string>) => (
+                                                        <>
+                                                            <Input
+                                                                id="postalCode"
+                                                                {...field}
+                                                                placeholder={
+                                                                    fields.address.postalCode.placeholder ?? 'XX-XXX'
+                                                                }
+                                                                className={
+                                                                    touched.postalCode && errors.postalCode
+                                                                        ? 'border-destructive'
+                                                                        : ''
+                                                                }
+                                                            />
+                                                            <ErrorMessage name="postalCode">
+                                                                {(msg) => (
+                                                                    <Typography
+                                                                        variant="small"
+                                                                        className="text-destructive"
+                                                                    >
+                                                                        {msg}
+                                                                    </Typography>
+                                                                )}
+                                                            </ErrorMessage>
+                                                        </>
+                                                    )}
+                                                </Field>
+                                            </div>
+
+                                            <div className="md:col-span-2 flex flex-col gap-2">
+                                                <Label htmlFor="country">
+                                                    {fields.address.country.label}
+                                                    {fields.address.country.required && (
+                                                        <span className="text-destructive"> *</span>
+                                                    )}
+                                                </Label>
+                                                <Field name="country">
+                                                    {({ field, form: { touched, errors } }: FieldProps<string>) => (
+                                                        <>
+                                                            <Input
+                                                                id="country"
+                                                                {...field}
+                                                                placeholder={fields.address.country.placeholder}
+                                                                className={
+                                                                    touched.country && errors.country
+                                                                        ? 'border-destructive'
+                                                                        : ''
+                                                                }
+                                                            />
+                                                            <ErrorMessage name="country">
+                                                                {(msg) => (
+                                                                    <Typography
+                                                                        variant="small"
+                                                                        className="text-destructive"
+                                                                    >
+                                                                        {msg}
+                                                                    </Typography>
+                                                                )}
+                                                            </ErrorMessage>
+                                                        </>
+                                                    )}
+                                                </Field>
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
-                            )}
-                        </div>
 
-                        <Separator />
+                                <Separator />
 
-                        <div className="flex flex-col gap-2">
-                            <Label htmlFor="shippingMethod">
-                                {fields.shippingMethod.label}
-                                {fields.shippingMethod.required && <span className="text-destructive"> *</span>}
-                            </Label>
-                            <Select
-                                value={formData.shippingMethod}
-                                onValueChange={(value) => handleChange('shippingMethod', value)}
-                            >
-                                <SelectTrigger
-                                    id="shippingMethod"
-                                    className={errors.shippingMethod ? 'border-destructive' : ''}
-                                >
-                                    <SelectValue placeholder={fields.shippingMethod.placeholder} />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    {fields.shippingMethod.options.map((option) => (
-                                        <SelectItem key={option.value} value={option.value}>
-                                            {option.label}
-                                            {option.price && (
-                                                <>
-                                                    {' - '}
-                                                    <Price price={option.price} />
-                                                </>
-                                            )}
-                                        </SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
-                            {errors.shippingMethod && (
-                                <Typography variant="small" className="text-destructive">
-                                    {errors.shippingMethod}
-                                </Typography>
-                            )}
-                        </div>
+                                <div className="flex flex-col gap-2">
+                                    <Label htmlFor="shippingMethod">
+                                        {fields.shippingMethod.label}
+                                        {fields.shippingMethod.required && <span className="text-destructive"> *</span>}
+                                    </Label>
+                                    <Field name="shippingMethod">
+                                        {({ field, form: { touched, errors, setFieldValue } }: FieldProps<string>) => (
+                                            <>
+                                                <Select
+                                                    value={field.value}
+                                                    onValueChange={(value) => setFieldValue('shippingMethod', value)}
+                                                >
+                                                    <SelectTrigger
+                                                        id="shippingMethod"
+                                                        className={
+                                                            touched.shippingMethod && errors.shippingMethod
+                                                                ? 'border-destructive'
+                                                                : ''
+                                                        }
+                                                    >
+                                                        <SelectValue placeholder={fields.shippingMethod.placeholder} />
+                                                    </SelectTrigger>
+                                                    <SelectContent>
+                                                        {fields.shippingMethod.options.map((option) => (
+                                                            <SelectItem key={option.value} value={option.value}>
+                                                                {option.label}
+                                                                {option.price && (
+                                                                    <>
+                                                                        {' - '}
+                                                                        <Price price={option.price} />
+                                                                    </>
+                                                                )}
+                                                            </SelectItem>
+                                                        ))}
+                                                    </SelectContent>
+                                                </Select>
+                                                <ErrorMessage name="shippingMethod">
+                                                    {(msg) => (
+                                                        <Typography variant="small" className="text-destructive">
+                                                            {msg}
+                                                        </Typography>
+                                                    )}
+                                                </ErrorMessage>
+                                            </>
+                                        )}
+                                    </Field>
+                                </div>
 
-                        <Separator />
+                                <Separator />
 
-                        <div className="flex flex-col sm:flex-row gap-4 justify-between">
-                            <Button asChild variant="outline" type="button">
-                                <LinkComponent href={buttons.back.path}>{buttons.back.label}</LinkComponent>
-                            </Button>
-                            <Button type="submit" variant="default">
-                                {buttons.next.label}
-                            </Button>
-                        </div>
-                    </form>
+                                <div className="flex flex-col sm:flex-row gap-4 justify-between">
+                                    <Button asChild variant="outline" type="button">
+                                        <LinkComponent href={buttons.back.path}>{buttons.back.label}</LinkComponent>
+                                    </Button>
+                                    <Button type="submit" variant="default">
+                                        {buttons.next.label}
+                                    </Button>
+                                </div>
+                            </Form>
+                        )}
+                    </Formik>
                 </div>
 
-                {/* Cart Summary */}
                 <div className="lg:col-span-1">
                     <CartSummary
                         subtotal={totals.subtotal}
