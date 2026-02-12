@@ -11,7 +11,7 @@ export const AddressFields: React.FC<Readonly<AddressFieldsProps>> = ({ fields, 
     const id = (name: string) => (idPrefix ? `${idPrefix}${name.charAt(0).toUpperCase() + name.slice(1)}` : name);
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="md:col-span-2 flex flex-col gap-2">
                 <Label htmlFor={id('street')}>
                     {fields.street.label}
