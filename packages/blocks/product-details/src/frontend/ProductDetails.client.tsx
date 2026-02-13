@@ -4,279 +4,21 @@ import { useTranslations } from 'next-intl';
 import { createNavigation } from 'next-intl/navigation';
 import React, { useCallback, useMemo } from 'react';
 
-import type { Models } from '@o2s/framework/modules';
-
 import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
 import { Price } from '@o2s/ui/components/Price';
 import { ProductGallery } from '@o2s/ui/components/ProductGallery';
-import { RichText } from '@o2s/ui/components/RichText';
 import { TooltipHover } from '@o2s/ui/components/TooltipHover';
 
-import { Badge } from '@o2s/ui/elements/badge';
 import { Button } from '@o2s/ui/elements/button';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@o2s/ui/elements/select';
 import { Separator } from '@o2s/ui/elements/separator';
 import { Typography } from '@o2s/ui/elements/typography';
 
+import { OptionGroupsSelector } from './components/OptionGroupsSelector';
+import { PriceSection } from './components/PriceSection';
+import { ProductInfo } from './components/ProductInfo';
+import { ProductSpecs } from './components/ProductSpecs';
+import { VariantSelector } from './components/VariantSelector';
 import { ProductDetailsPureProps } from './ProductDetails.types';
-
-// Sub-component: Product Info (name, subtitle, badges)
-interface ProductInfoProps {
-    name: string;
-    subtitle?: string;
-    badges?: { label: string; variant: 'default' | 'secondary' | 'destructive' | 'outline' }[];
-}
-
-const ProductInfo: React.FC<ProductInfoProps> = ({ name, subtitle, badges }) => {
-    return (
-        <>
-            <Typography variant="h1">{name}</Typography>
-            {subtitle && (
-                <Typography variant="large" className="text-muted-foreground">
-                    {subtitle}
-                </Typography>
-            )}
-            {badges && badges.length > 0 && (
-                <ul className="flex flex-wrap gap-2 list-none">
-                    {badges.map((badge, index) => (
-                        <li key={index}>
-                            <Badge variant={badge.variant}>{badge.label}</Badge>
-                        </li>
-                    ))}
-                </ul>
-            )}
-        </>
-    );
-};
-
-// Sub-component: Option Groups Selector
-interface OptionGroupsSelectorProps {
-    optionGroups: { id: string; title: string; values: string[] }[];
-    selectedOptions: Record<string, string>;
-    availableValuesPerGroup: Map<string, Set<string>>;
-    onOptionChange: (optionId: string, value: string) => void;
-}
-
-const OptionGroupsSelector: React.FC<OptionGroupsSelectorProps> = ({
-    optionGroups,
-    selectedOptions,
-    availableValuesPerGroup,
-    onOptionChange,
-}) => {
-    return (
-        <div className="flex flex-col gap-4">
-            {optionGroups.map((group) => (
-                <div key={group.id} className="flex flex-col gap-2">
-                    <Typography className="text-sm text-muted-foreground">{group.title}</Typography>
-                    <Select
-                        value={selectedOptions[group.id] ?? ''}
-                        onValueChange={(value: string) => onOptionChange(group.id, value)}
-                    >
-                        <SelectTrigger>
-                            <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                            {group.values.map((value) => {
-                                const isAvailable = availableValuesPerGroup.get(group.id)?.has(value) ?? true;
-                                return (
-                                    <SelectItem
-                                        key={value}
-                                        value={value}
-                                        className={!isAvailable ? 'opacity-50 text-muted-foreground' : undefined}
-                                    >
-                                        {value}
-                                    </SelectItem>
-                                );
-                            })}
-                        </SelectContent>
-                    </Select>
-                </div>
-            ))}
-        </div>
-    );
-};
-
-// Sub-component: Simple Variant Selector
-interface VariantSelectorProps {
-    variants: { id: string; title: string; slug: string; link?: string; options?: Record<string, string> }[];
-    currentSlug?: string;
-    label: string;
-    onVariantChange: (link: string) => void;
-}
-
-const VariantSelector: React.FC<VariantSelectorProps> = ({ variants, currentSlug, label, onVariantChange }) => {
-    return (
-        <div className="flex flex-col gap-2">
-            <Typography className="text-sm text-muted-foreground">{label}</Typography>
-            <Select
-                value={currentSlug}
-                onValueChange={(slug) => {
-                    const variant = variants.find((v) => v.slug === slug);
-                    if (variant?.link) {
-                        onVariantChange(variant.link);
-                    }
-                }}
-            >
-                <SelectTrigger>
-                    <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                    {variants.map((variant) => (
-                        <SelectItem key={variant.id} value={variant.slug}>
-                            {variant.title}
-                        </SelectItem>
-                    ))}
-                </SelectContent>
-            </Select>
-        </div>
-    );
-};
-
-// Sub-component: Price Section
-interface PriceSectionProps {
-    price: Models.Price.Price;
-    priceLabel: string;
-    actionButton?: {
-        label: string;
-        variant?: 'default' | 'secondary' | 'destructive' | 'outline';
-        icon?: string;
-    };
-    className?: string;
-}
-
-const PriceSection: React.FC<PriceSectionProps> = ({ price, priceLabel, actionButton, className }) => {
-    const t = useTranslations();
-
-    return (
-        <div className={className}>
-            <div className="flex flex-col gap-1 items-end">
-                <Typography className="text-muted-foreground">{priceLabel}</Typography>
-                <Typography variant="h2" className="text-primary whitespace-nowrap">
-                    <Price price={price} />
-                </Typography>
-            </div>
-            {actionButton && (
-                <>
-                    <Separator />
-                    <div className="flex flex-col gap-3">
-                        <TooltipHover
-                            trigger={(setIsOpen) => (
-                                <Button
-                                    variant={actionButton.variant || 'default'}
-                                    size="lg"
-                                    className="w-full"
-                                    onClick={() => setIsOpen(true)}
-                                >
-                                    {actionButton.icon && (
-                                        <DynamicIcon name={actionButton.icon} size={20} className="mr-2" />
-                                    )}
-                                    {actionButton.label}
-                                </Button>
-                            )}
-                            content={<p>{t('general.comingSoon')}</p>}
-                        />
-                    </div>
-                </>
-            )}
-        </div>
-    );
-};
-
-// Sub-component: Product Specs (keySpecs + detailedSpecs)
-interface ProductSpecsProps {
-    keySpecs?: { value?: string; icon?: string }[];
-    detailedSpecs?: { label: string; value: string; category?: string }[];
-    labels: {
-        specificationsTitle: string;
-        descriptionTitle: string;
-    };
-    description?: string;
-    sku?: string;
-    location?: string;
-    offerLabel: string;
-}
-
-const ProductSpecs: React.FC<ProductSpecsProps> = ({
-    keySpecs,
-    detailedSpecs,
-    labels,
-    description,
-    sku,
-    location,
-    offerLabel,
-}) => {
-    return (
-        <>
-            {keySpecs && keySpecs.length > 0 && (
-                <>
-                    <ul className="grid grid-cols-2 md:grid-cols-4 gap-4 list-none">
-                        {keySpecs.map((spec, index) => (
-                            <li key={index} className="flex flex-col items-center gap-2 p-4 bg-muted/50 rounded-lg">
-                                {spec.icon && <DynamicIcon name={spec.icon} size={32} className="text-primary" />}
-                                {spec.value && (
-                                    <Typography className="text-center font-medium">{spec.value}</Typography>
-                                )}
-                            </li>
-                        ))}
-                    </ul>
-                    <Separator />
-                </>
-            )}
-
-            {description && (
-                <div className="flex flex-col gap-4">
-                    <Typography variant="h2" asChild>
-                        <h2>{labels.descriptionTitle}</h2>
-                    </Typography>
-                    <RichText content={description} />
-                </div>
-            )}
-
-            <Separator />
-
-            {detailedSpecs && detailedSpecs.length > 0 && (
-                <div className="flex flex-col gap-4">
-                    <Typography variant="h2" asChild>
-                        <h2>{labels.specificationsTitle}</h2>
-                    </Typography>
-                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-none">
-                        {detailedSpecs.map((spec, index) => (
-                            <li
-                                key={index}
-                                className="flex justify-between items-center py-3 px-4 bg-muted/30 rounded-md"
-                            >
-                                <Typography className="text-muted-foreground">{spec.label}</Typography>
-                                <Typography className="font-medium">{spec.value}</Typography>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            )}
-
-            {(sku || location) && (
-                <>
-                    <Separator />
-                    <div className="flex items-center gap-6 flex-wrap">
-                        {sku && (
-                            <div className="flex items-center gap-2">
-                                <DynamicIcon name="FileText" size={20} className="text-muted-foreground" />
-                                <Typography>
-                                    {offerLabel}: {sku}
-                                </Typography>
-                            </div>
-                        )}
-                        {location && (
-                            <div className="flex items-center gap-2">
-                                <DynamicIcon name="MapPin" size={20} className="text-muted-foreground" />
-                                <Typography>{location}</Typography>
-                            </div>
-                        )}
-                    </div>
-                </>
-            )}
-        </>
-    );
-};
 
 function resolveVariant(
     variants: Array<{ id: string; title: string; slug: string; link?: string; options?: Record<string, string> }>,
@@ -401,7 +143,7 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                                     <VariantSelector
                                         variants={product.variants}
                                         currentSlug={currentVariantSlug}
-                                        label={labels.variantLabel || 'Variant'}
+                                        label={labels.variant || 'Variant'}
                                         onVariantChange={handleVariantChange}
                                     />
                                 )}
@@ -418,7 +160,7 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                         description={product.description}
                         sku={product.sku}
                         location={product.location}
-                        offerLabel={labels.offerLabel}
+                        offer={labels.offer}
                     />
                 </div>
 
@@ -441,7 +183,7 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                                     <VariantSelector
                                         variants={product.variants}
                                         currentSlug={currentVariantSlug}
-                                        label={labels.variantLabel || 'Variant'}
+                                        label={labels.variant || 'Variant'}
                                         onVariantChange={handleVariantChange}
                                     />
                                 )}
@@ -450,7 +192,7 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
 
                         <PriceSection
                             price={product.price}
-                            priceLabel={labels.priceLabel}
+                            priceLabel={labels.price}
                             actionButton={actionButton}
                         />
                     </div>
@@ -462,7 +204,7 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                     <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-background border-t border-border p-4 shadow-lg z-100">
                         <div className="flex flex-col gap-2 max-w-7xl ml-auto mr-4">
                             <div className="flex items-center justify-end gap-2 mb-2">
-                                <Typography className="text-muted-foreground">{labels.priceLabel}</Typography>
+                                <Typography className="text-muted-foreground">{labels.price}</Typography>
                                 <Typography variant="large" className="font-bold text-primary">
                                     <Price price={product.price} />
                                 </Typography>

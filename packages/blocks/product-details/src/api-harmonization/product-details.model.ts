@@ -12,19 +12,6 @@ export type Product = Products.Model.Product & {
     images:
         | NonNullable<Products.Model.Product['images']>
         | (Products.Model.Product['image'] extends undefined ? never : [Products.Model.Product['image']]);
-    // Explicitly include these fields to ensure TypeScript recognizes them
-    variants?: Array<{
-        id: string;
-        title: string;
-        slug: string;
-        link?: string;
-        options?: Record<string, string>;
-    }>;
-    optionGroups?: Array<{
-        id: string;
-        title: string;
-        values: string[];
-    }>;
     /**
      * View-level "key specs" (e.g. short bullet list) for this block only.
      */
@@ -50,13 +37,13 @@ export type ActionButton = {
 };
 
 export type Labels = {
-    actionButtonLabel?: string;
-    downloadLabel?: string;
-    specificationsTitle: string;
-    descriptionTitle: string;
-    priceLabel: string;
-    offerLabel: string;
-    variantLabel?: string;
+    actionButton?: string;
+    download?: string;
+    specifications: string;
+    description: string;
+    price: string;
+    offer: string;
+    variant?: string;
 };
 
 export type ProductDetailsBlock = ApiModels.Block.Block & {

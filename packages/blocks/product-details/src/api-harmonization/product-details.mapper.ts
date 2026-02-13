@@ -22,7 +22,7 @@ export const mapProductDetails = (
 
         detailedSpecs.push({
             label: config.label,
-            value,
+            value: String(value),
         });
 
         if (config.showInKeySpecs) {
@@ -47,13 +47,13 @@ export const mapProductDetails = (
     };
 
     const labels: Model.Labels = {
-        actionButtonLabel: cms.labels.actionButtonLabel,
-        specificationsTitle: cms.labels.specificationsTitle,
-        descriptionTitle: cms.labels.descriptionTitle,
-        downloadLabel: cms.labels.downloadLabel,
-        priceLabel: cms.labels.priceLabel,
-        offerLabel: cms.labels.offerLabel,
-        variantLabel: cms.labels.variantLabel,
+        actionButton: cms.labels.actionButtonLabel,
+        specifications: cms.labels.specificationsTitle,
+        description: cms.labels.descriptionTitle,
+        download: cms.labels.downloadLabel,
+        price: cms.labels.priceLabel,
+        offer: cms.labels.offerLabel,
+        variant: cms.labels.variantLabel,
     };
 
     return {
@@ -61,9 +61,9 @@ export const mapProductDetails = (
         id: product.id,
         product: mappedProduct,
         actionButton:
-            labels.actionButtonLabel && product.link
+            labels.actionButton && product.link
                 ? {
-                      label: labels.actionButtonLabel,
+                      label: labels.actionButton,
                       href: product.link,
                       variant: 'default',
                       icon: 'MessageCircle',
