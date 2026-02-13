@@ -9,6 +9,7 @@ This integration provides a full integration with [Medusa.js](https://medusajs.c
 ## In this section
 
 - [Features](./features.md) - Overview of features supported by the Medusa.js integration
+- [Cart & Checkout](./cart-checkout.md) - Cart lifecycle and checkout process
 
 ## Installation
 
@@ -54,6 +55,48 @@ export import Request = Integration.Products.Request;
 export import Model = Integration.Products.Model;
 ```
 
+**Update `packages/configs/integrations/src/models/carts.ts`:**
+
+```typescript
+import { Config, Integration } from '@o2s/integrations.medusajs/integration';
+
+import { ApiConfig } from '@o2s/framework/modules';
+
+export const CartsIntegrationConfig: ApiConfig['integrations']['carts'] = Config.carts!;
+
+export import Service = Integration.Carts.Service;
+export import Request = Integration.Carts.Request;
+export import Model = Integration.Carts.Model;
+```
+
+**Update `packages/configs/integrations/src/models/checkout.ts`:**
+
+```typescript
+import { Config, Integration } from '@o2s/integrations.medusajs/integration';
+
+import { ApiConfig } from '@o2s/framework/modules';
+
+export const CheckoutIntegrationConfig: ApiConfig['integrations']['checkout'] = Config.checkout!;
+
+export import Service = Integration.Checkout.Service;
+export import Request = Integration.Checkout.Request;
+export import Model = Integration.Checkout.Model;
+```
+
+**Update `packages/configs/integrations/src/models/customers.ts` (required for checkout address resolution):**
+
+```typescript
+import { Config, Integration } from '@o2s/integrations.medusajs/integration';
+
+import { ApiConfig } from '@o2s/framework/modules';
+
+export const CustomersIntegrationConfig: ApiConfig['integrations']['customers'] = Config.customers!;
+
+export import Service = Integration.Customers.Service;
+export import Request = Integration.Customers.Request;
+export import Model = Integration.Customers.Model;
+```
+
 **Update `packages/configs/integrations/src/models/resources.ts` (if using Resources module):**
 
 ```typescript
@@ -93,13 +136,17 @@ For more details about authentication setup, see the official [Medusa.js SDK doc
 
 ## Supported modules
 
-The integration implements three core modules from the O2S framework:
+The integration implements these modules from the O2S framework:
 
-| Module    | Description                             | Plugin Required |
-| --------- | --------------------------------------- | --------------- |
-| Orders    | Order management and history            | No              |
-| Products  | Product catalog and variants            | No              |
-| Resources | Assets and service instances management | Yes             |
+| Module    | Description                                    | Plugin Required |
+| --------- | ---------------------------------------------- | --------------- |
+| Carts     | Cart creation, line items, addresses, shipping | No              |
+| Checkout  | Multi-step checkout and order placement        | No              |
+| Customers | Address management for authenticated users     | No              |
+| Orders    | Order management and history                   | No              |
+| Payments  | Payment session creation and validation        | No              |
+| Products  | Product catalog and variants                   | No              |
+| Resources | Assets and service instances management        | Yes             |
 
 ## Dependencies
 
@@ -121,10 +168,10 @@ The integration uses the official Medusa.js SDK for most operations, combined wi
 └─────────────────┘     └──────────────────┘     └─────────────────┘
                              │                         │
                              │ Medusa.js SDK           │ Admin API
-                             │ HTTP Client             │ Store API
+                             │ Store API               │ Store API
                              ▼                         ▼
                       ┌──────────────────┐     ┌─────────────────┐
-                      │ Orders/Products  │     │ Assets/Services │
-                      │    (native)      │     │   (plugin)      │
+                      │ Carts/Checkout/   │     │ Assets/Services │
+                      │ Orders/Products  │     │   (plugin)      │
                       └──────────────────┘     └─────────────────┘
 ```

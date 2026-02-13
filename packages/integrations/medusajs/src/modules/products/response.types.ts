@@ -15,6 +15,7 @@ export type TargetProduct = {
     ean: string;
     product_id: string;
     product: HttpTypes.AdminProduct;
+    prices?: HttpTypes.AdminProductVariant['prices'];
 };
 
 export type RelatedProductsResponse = {

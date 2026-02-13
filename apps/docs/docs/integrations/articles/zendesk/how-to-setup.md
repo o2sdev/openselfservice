@@ -64,10 +64,10 @@ After configuring the integration, you need to set up environment variables that
 
 Configure the following environment variables in your API Harmonization server:
 
-| Name                | Type   | Description                                                              | Required | Default |
-| ------------------- | ------ | ------------------------------------------------------------------------ | -------- | ------- |
-| ZENDESK_API_URL     | string | Your Zendesk API URL (e.g., `https://your-subdomain.zendesk.com/api/v2`) | yes      | -       |
-| ZENDESK_API_TOKEN   | string | Base64-encoded authentication token                                      | yes      | -       |
+| Name              | Type   | Description                                                              | Required | Default |
+| ----------------- | ------ | ------------------------------------------------------------------------ | -------- | ------- |
+| ZENDESK_API_URL   | string | Your Zendesk API URL (e.g., `https://your-subdomain.zendesk.com/api/v2`) | yes      | -       |
+| ZENDESK_API_TOKEN | string | Base64-encoded authentication token                                      | yes      | -       |
 
 **Important notes:**
 

@@ -69,9 +69,9 @@ Configure the following environment variables in your API Harmonization server:
 | ZENDESK_API_URL                             | string | Your Zendesk API URL (e.g., `https://your-subdomain.zendesk.com/api/v2`) | yes      | -       |
 | ZENDESK_API_TOKEN                           | string | Base64-encoded authentication token                                      | yes      | -       |
 | ZENDESK_TOPIC_FIELD_ID                      | number | Custom field ID for ticket topic                                         | yes      | -       |
-| ZENDESK_CONTACT_FORM_ID                     | number | Ticket form ID for contact inquiries                                     | yes     | -       |
-| ZENDESK_COMPLAINT_FORM_ID                   | number | Ticket form ID for complaints                                            | yes     | -       |
-| ZENDESK_REQUEST_DEVICE_MAINTENANCE_FORM_ID  | number | Ticket form ID for device maintenance requests                           | yes     | -       |
+| ZENDESK_CONTACT_FORM_ID                     | number | Ticket form ID for contact inquiries                                     | yes      | -       |
+| ZENDESK_COMPLAINT_FORM_ID                   | number | Ticket form ID for complaints                                            | yes      | -       |
+| ZENDESK_REQUEST_DEVICE_MAINTENANCE_FORM_ID  | number | Ticket form ID for device maintenance requests                           | yes      | -       |
 | ZENDESK_DEVICE_NAME_FIELD_ID                | number | Custom field ID for device/machine name                                  | yes      | -       |
 | ZENDESK_SERIAL_NUMBER_FIELD_ID              | number | Custom field ID for serial number                                        | yes      | -       |
 | ZENDESK_MAINTENANCE_TYPE_FIELD_ID           | number | Custom field ID for maintenance type                                     | yes      | -       |

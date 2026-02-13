@@ -17,31 +17,42 @@ const mockProductListResponse = {
             thumbnail: null,
             categories: [],
             type: null,
+            variants: [
+                {
+                    id: 'var_1',
+                    sku: 'SKU1',
+                    product_id: 'prod_1',
+                    calculated_price: { calculated_amount: 1999, currency_code: 'eur' },
+                },
+            ],
         },
     ],
     count: 1,
 };
 
-const mockVariantResponse = {
-    variant: {
-        id: 'var_1',
-        sku: 'SKU1',
-        product_id: 'prod_1',
-        product: {
-            id: 'prod_1',
-            title: 'Product 1',
-            description: 'Desc',
-            subtitle: 'Sub',
-            thumbnail: null,
-            type: null,
-            categories: [],
-        },
-        prices: [{ currency_code: 'eur', amount: 1999 }],
+const mockProductResponse = {
+    product: {
+        id: 'prod_1',
+        title: 'Product 1',
+        description: 'Desc',
+        subtitle: 'Sub',
+        thumbnail: null,
+        type: null,
+        categories: [],
+        variants: [
+            {
+                id: 'var_1',
+                sku: 'SKU1',
+                product_id: 'prod_1',
+                calculated_price: { calculated_amount: 1999, currency_code: 'eur' },
+            },
+        ],
     },
 };
 
 describe('ProductsService', () => {
     let service: ProductsService;
+    let mockSdk: { store: { product: { list: ReturnType<typeof vi.fn>; retrieve: ReturnType<typeof vi.fn> } } };
     let mockHttpClient: { get: ReturnType<typeof vi.fn> };
     let mockMedusaJsService: {
         getSdk: ReturnType<typeof vi.fn>;
@@ -53,9 +64,17 @@ describe('ProductsService', () => {
 
     beforeEach(() => {
         vi.restoreAllMocks();
+        mockSdk = {
+            store: {
+                product: {
+                    list: vi.fn(),
+                    retrieve: vi.fn(),
+                },
+            },
+        };
         mockHttpClient = { get: vi.fn() };
         mockMedusaJsService = {
-            getSdk: vi.fn(() => ({})),
+            getSdk: vi.fn(() => mockSdk),
             getBaseUrl: vi.fn(() => BASE_URL),
             getMedusaAdminApiHeaders: vi.fn(() => ({
                 'x-publishable-api-key': 'pk',
@@ -92,16 +111,16 @@ describe('ProductsService', () => {
     });
 
     describe('getProductList', () => {
-        it('should call httpClient.get with baseUrl and params and return mapped products', async () => {
-            mockHttpClient.get.mockReturnValue(of({ data: mockProductListResponse }));
+        it('should call sdk.store.product.list with params and return mapped products', async () => {
+            mockSdk.store.product.list.mockResolvedValue(mockProductListResponse);
 
             const result = await firstValueFrom(service.getProductList({ limit: 10, offset: 0 }));
 
-            expect(mockHttpClient.get).toHaveBeenCalledWith(
-                `${BASE_URL}/admin/products`,
+            expect(mockSdk.store.product.list).toHaveBeenCalledWith(
                 expect.objectContaining({
-                    headers: expect.any(Object),
-                    params: { limit: 10, offset: 0 },
+                    limit: 10,
+                    offset: 0,
+                    fields: expect.any(String),
                 }),
             );
             expect(result.data).toHaveLength(1);
@@ -110,9 +129,8 @@ describe('ProductsService', () => {
             expect(result.data[0]?.name).toBe('Product 1');
         });
 
-        it('should throw NotFoundException when HTTP returns 404', async () => {
-            const { throwError } = await import('rxjs');
-            mockHttpClient.get.mockReturnValue(throwError(() => ({ status: 404 })));
+        it('should throw NotFoundException when SDK returns 404', async () => {
+            mockSdk.store.product.list.mockRejectedValue({ status: 404 });
 
             await expect(firstValueFrom(service.getProductList({ limit: 10, offset: 0 }))).rejects.toThrow(
                 NotFoundException,
@@ -121,20 +139,45 @@ describe('ProductsService', () => {
     });
 
     describe('getProduct', () => {
-        it('should call httpClient.get for variant URL and return mapped product', async () => {
-            mockHttpClient.get.mockReturnValue(of({ data: mockVariantResponse }));
+        it('should call sdk.store.product.retrieve and return mapped product', async () => {
+            mockSdk.store.product.retrieve.mockResolvedValue(mockProductResponse);
 
             const result = await firstValueFrom(service.getProduct({ id: 'prod_1', variantId: 'var_1' }));
 
-            expect(mockHttpClient.get).toHaveBeenCalledWith(
-                `${BASE_URL}/admin/products/prod_1/variants/var_1`,
-                expect.objectContaining({
-                    params: { fields: 'product.*' },
-                }),
+            expect(mockSdk.store.product.retrieve).toHaveBeenCalledWith(
+                'prod_1',
+                expect.objectContaining({ fields: expect.any(String) }),
             );
             expect(result.id).toBe('prod_1');
             expect(result.variantId).toBe('var_1');
-            expect(result.price.value).toBe(1999);
+            expect(result.price?.value).toBe(1999);
+        });
+
+        it('should throw when product has no variants', async () => {
+            mockSdk.store.product.retrieve.mockResolvedValue({
+                product: { ...mockProductResponse.product, variants: [] },
+            });
+
+            await expect(
+                firstValueFrom(
+                    service.getProduct({
+                        id: 'prod_1',
+                    } as import('@o2s/framework/modules').Products.Request.GetProductParams),
+                ),
+            ).rejects.toThrow('No variants found for product prod_1');
+        });
+
+        it('should throw when variantId does not match any variant', async () => {
+            mockSdk.store.product.retrieve.mockResolvedValue(mockProductResponse);
+
+            await expect(
+                firstValueFrom(
+                    service.getProduct({
+                        id: 'prod_1',
+                        variantId: 'var_nonexistent',
+                    } as import('@o2s/framework/modules').Products.Request.GetProductParams),
+                ),
+            ).rejects.toThrow('Variant var_nonexistent not found for product prod_1');
         });
     });
 
