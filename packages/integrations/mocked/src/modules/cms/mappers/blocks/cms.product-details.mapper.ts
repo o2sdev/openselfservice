@@ -21,10 +21,10 @@ const MOCK_PRODUCT_DETAILS_BLOCK_EN: CMS.Model.ProductDetailsBlock.ProductDetail
         hs_code: { label: 'HS Code', showInKeySpecs: false },
         mid_code: { label: 'MID Code', showInKeySpecs: false },
     },
-    optionGroupsMapping: {
-        Size: 'Size',
-        colors: 'Color',
-    },
+    variantOptionGroups: [
+        { medusaTitle: 'Size', label: 'Size' },
+        { medusaTitle: 'colors', label: 'Color' },
+    ],
 };
 
 const MOCK_PRODUCT_DETAILS_BLOCK_DE: CMS.Model.ProductDetailsBlock.ProductDetailsBlock = {
@@ -48,10 +48,10 @@ const MOCK_PRODUCT_DETAILS_BLOCK_DE: CMS.Model.ProductDetailsBlock.ProductDetail
         hs_code: { label: 'HS-Code', showInKeySpecs: false },
         mid_code: { label: 'MID-Code', showInKeySpecs: false },
     },
-    optionGroupsMapping: {
-        Size: 'Größe',
-        colors: 'Farbe',
-    },
+    variantOptionGroups: [
+        { medusaTitle: 'Size', label: 'Größe' },
+        { medusaTitle: 'colors', label: 'Farbe' },
+    ],
 };
 
 const MOCK_PRODUCT_DETAILS_BLOCK_PL: CMS.Model.ProductDetailsBlock.ProductDetailsBlock = {
@@ -74,10 +74,10 @@ const MOCK_PRODUCT_DETAILS_BLOCK_PL: CMS.Model.ProductDetailsBlock.ProductDetail
         origin_country: { label: 'Kraj pochodzenia', showInKeySpecs: false },
         hs_code: { label: 'Kod HS', showInKeySpecs: false },
     },
-    optionGroupsMapping: {
-        colors: 'Kolor',
-        Size: 'Rozmiar',
-    },
+    variantOptionGroups: [
+        { medusaTitle: 'colors', label: 'Kolor' },
+        { medusaTitle: 'Size', label: 'Rozmiar' },
+    ],
 };
 
 export const mapProductDetailsBlock = (locale: string): CMS.Model.ProductDetailsBlock.ProductDetailsBlock => {

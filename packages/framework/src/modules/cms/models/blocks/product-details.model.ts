@@ -16,10 +16,25 @@ export type SpecFieldConfig = {
     icon?: string;
 };
 
+export type VariantOptionGroupConfig = {
+    /**
+     * Title of the option group in Medusa (e.g. "Size", "colors").
+     * Used to match Medusa option groups and control ordering.
+     */
+    medusaTitle: string;
+    /**
+     * Translated label to display in the UI (e.g. "Rozmiar", "Kolor").
+     */
+    label: string;
+};
+
 export class ProductDetailsBlock extends Block.Block {
     title?: string;
     labels!: Labels;
     basePath?: string;
     specFieldsMapping?: Record<string, SpecFieldConfig>;
-    optionGroupsMapping?: Record<string, string>;
+    /**
+     * Configuration of variant option groups (e.g. Size, Color) in desired order.
+     */
+    variantOptionGroups?: VariantOptionGroupConfig[];
 }

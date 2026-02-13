@@ -264,11 +264,11 @@ describe('products.mapper', () => {
                 },
             ] as unknown as HttpTypes.AdminProductVariant[];
 
-            const optionGroupsMapping = {
-                Size: 'Size',
-                Color: 'Color',
-                Material: 'Material',
-            };
+            const variantOptionGroups = [
+                { medusaTitle: 'Size', label: 'Size' },
+                { medusaTitle: 'Color', label: 'Color' },
+                { medusaTitle: 'Material', label: 'Material' },
+            ];
 
             const result = mapProduct(
                 variant as unknown as HttpTypes.AdminProductVariant,
@@ -276,7 +276,7 @@ describe('products.mapper', () => {
                 allVariants,
                 basePath,
                 specFieldsMapping,
-                optionGroupsMapping,
+                variantOptionGroups,
             );
 
             expect(result.optionGroups).toBeDefined();

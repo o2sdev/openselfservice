@@ -161,11 +161,11 @@ const mapVariantOptions = (
 };
 
 // Extract option groups from variants (Size, Color, etc.) with unique values per group
-// Apply optionGroupsMapping for translated titles
-// Order is derived from Object.keys(optionGroupsMapping) if provided, otherwise keep natural order
+// Apply variantOptionGroups for translated titles
+// Order is derived from the order of variantOptionGroups if provided, otherwise keep natural order
 const mapOptionGroups = (
     variants: HttpTypes.AdminProductVariant[],
-    optionGroupsMapping?: Record<string, string>,
+    variantOptionGroups?: { medusaTitle: string; label: string }[],
 ): Products.Model.ProductOptionGroup[] => {
     const groupsById = new Map<string, { medusaTitle: string; title: string; values: Set<string> }>();
 
@@ -178,7 +178,8 @@ const mapOptionGroups = (
         for (const option of options) {
             if (!option.option_id || option.value == null) continue;
             const medusaTitle = option.option?.title ?? option.option_id;
-            const translatedTitle = optionGroupsMapping?.[medusaTitle] ?? medusaTitle;
+            const mappedGroup = variantOptionGroups?.find((groupConfig) => groupConfig.medusaTitle === medusaTitle);
+            const translatedTitle = mappedGroup?.label ?? medusaTitle;
             if (!groupsById.has(option.option_id)) {
                 groupsById.set(option.option_id, { medusaTitle, title: translatedTitle, values: new Set() });
             }
@@ -194,10 +195,10 @@ const mapOptionGroups = (
         values: Array.from(values),
     }));
 
-    // Sort by optionGroupsMapping keys order if provided (using medusaTitle as key)
+    // Sort by variantOptionGroups order if provided (using medusaTitle as key)
     let sortedGroups = groupsWithKeys;
-    if (optionGroupsMapping) {
-        const optionGroupsOrder = Object.keys(optionGroupsMapping);
+    if (variantOptionGroups) {
+        const optionGroupsOrder = variantOptionGroups.map((groupConfig) => groupConfig.medusaTitle);
         sortedGroups = groupsWithKeys.sort((a, b) => {
             const indexA = optionGroupsOrder.indexOf(a.medusaTitle);
             const indexB = optionGroupsOrder.indexOf(b.medusaTitle);
@@ -244,7 +245,7 @@ export const mapProduct = (
     allVariants: HttpTypes.AdminProductVariant[] | undefined,
     basePath: string,
     specFieldsMapping: Record<string, { label: string; showInKeySpecs?: boolean; icon?: string }>,
-    optionGroupsMapping?: Record<string, string>,
+    variantOptionGroups?: { medusaTitle: string; label: string }[],
 ): Products.Model.Product => {
     if (!productVariant) {
         throw new NotFoundException('Product variant is undefined');
@@ -280,7 +281,7 @@ export const mapProduct = (
         tags: mapTags(product?.tags),
         detailedSpecs: detailedSpecs.length > 0 ? detailedSpecs : undefined,
         keySpecs,
-        optionGroups: allVariants ? mapOptionGroups(allVariants, optionGroupsMapping) : undefined,
+        optionGroups: allVariants ? mapOptionGroups(allVariants, variantOptionGroups) : undefined,
         variants:
             allVariants && allVariants.length > 1
                 ? mapVariantOptions(allVariants, basePath, product?.handle, product?.id || '')
@@ -397,11 +398,11 @@ export const mapCompatibleServices = (
     defaultCurrency: string,
     basePath: string,
     specFieldsMapping: Record<string, { label: string; showInKeySpecs?: boolean; icon?: string }>,
-    optionGroupsMapping?: Record<string, string>,
+    variantOptionGroups?: { medusaTitle: string; label: string }[],
 ): Products.Model.Products => {
     return {
         data: data.compatibleServices.map((product) => {
-            return mapProduct(product, defaultCurrency, undefined, basePath, specFieldsMapping, optionGroupsMapping);
+            return mapProduct(product, defaultCurrency, undefined, basePath, specFieldsMapping, variantOptionGroups);
         }),
         total: data.count,
     };
@@ -412,11 +413,11 @@ export const mapFeaturedServices = (
     defaultCurrency: string,
     basePath: string,
     specFieldsMapping: Record<string, { label: string; showInKeySpecs?: boolean; icon?: string }>,
-    optionGroupsMapping?: Record<string, string>,
+    variantOptionGroups?: { medusaTitle: string; label: string }[],
 ): Products.Model.Products => {
     return {
         data: data.featuredServices.map((product) => {
-            return mapProduct(product, defaultCurrency, undefined, basePath, specFieldsMapping, optionGroupsMapping);
+            return mapProduct(product, defaultCurrency, undefined, basePath, specFieldsMapping, variantOptionGroups);
         }),
         total: data.count,
     };

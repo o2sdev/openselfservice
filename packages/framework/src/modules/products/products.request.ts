@@ -1,4 +1,4 @@
-import type { SpecFieldConfig } from '../cms/models/blocks/product-details.model';
+import type { SpecFieldConfig, VariantOptionGroupConfig } from '../cms/models/blocks/product-details.model';
 
 import { ProductReferenceType, ProductType } from './products.model';
 import { PaginationQuery } from '@/utils/models/pagination';
@@ -17,7 +17,10 @@ export class GetProductParams {
     locale?: string;
     basePath?: string;
     specFieldsMapping?: Record<string, SpecFieldConfig>;
-    optionGroupsMapping?: Record<string, string>;
+    /**
+     * Configuration of variant option groups used for building option dropdowns.
+     */
+    variantOptionGroups?: VariantOptionGroupConfig[];
 }
 
 export class GetRelatedProductListParams {

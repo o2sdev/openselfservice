@@ -40,19 +40,19 @@ export const mapProductDetailsBlock = (locale: string): CMS.Model.ProductDetails
         },
     };
 
-    const optionGroupsMappingMap: Record<string, Record<string, string>> = {
-        en: {
-            Size: 'Size',
-            colors: 'Color',
-        },
-        de: {
-            Size: 'Größe',
-            colors: 'Farbe',
-        },
-        pl: {
-            colors: 'Kolor',
-            Size: 'Rozmiar',
-        },
+    const variantOptionGroupsMap: Record<string, CMS.Model.ProductDetailsBlock.VariantOptionGroupConfig[]> = {
+        en: [
+            { medusaTitle: 'Size', label: 'Size' },
+            { medusaTitle: 'colors', label: 'Color' },
+        ],
+        de: [
+            { medusaTitle: 'Size', label: 'Größe' },
+            { medusaTitle: 'colors', label: 'Farbe' },
+        ],
+        pl: [
+            { medusaTitle: 'colors', label: 'Kolor' },
+            { medusaTitle: 'Size', label: 'Rozmiar' },
+        ],
     };
 
     return {
@@ -68,6 +68,6 @@ export const mapProductDetailsBlock = (locale: string): CMS.Model.ProductDetails
         },
         basePath: basePathMap[locale] || basePathMap['en'],
         specFieldsMapping: specFieldsMappingMap[locale] || specFieldsMappingMap['en'],
-        optionGroupsMapping: optionGroupsMappingMap[locale] || optionGroupsMappingMap['en'],
+        variantOptionGroups: variantOptionGroupsMap[locale] || variantOptionGroupsMap['en'],
     };
 };

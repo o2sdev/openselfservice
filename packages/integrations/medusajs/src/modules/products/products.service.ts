@@ -81,7 +81,7 @@ export class ProductsService extends Products.Service {
                 params.variantId,
                 params.basePath,
                 params.specFieldsMapping,
-                params.optionGroupsMapping,
+                params.variantOptionGroups,
             );
         }
 
@@ -91,7 +91,7 @@ export class ProductsService extends Products.Service {
             params.variantId,
             params.basePath,
             params.specFieldsMapping,
-            params.optionGroupsMapping,
+            params.variantOptionGroups,
         );
     }
 
@@ -100,7 +100,7 @@ export class ProductsService extends Products.Service {
         variantId?: string,
         basePath?: string,
         specFieldsMapping?: Record<string, { label: string; showInKeySpecs?: boolean; icon?: string }>,
-        optionGroupsMapping?: Record<string, string>,
+        variantOptionGroups?: { medusaTitle: string; label: string }[],
     ): Observable<Products.Model.Product> {
         return from(
             this.sdk.admin.product.retrieve(productId, { fields: this.productRetrieveFields }).catch((error) => {
@@ -119,7 +119,7 @@ export class ProductsService extends Products.Service {
                     product.variants,
                     basePath,
                     specFieldsMapping,
-                    optionGroupsMapping,
+                    variantOptionGroups,
                 );
             }),
             catchError((error) => {
@@ -133,7 +133,7 @@ export class ProductsService extends Products.Service {
         variantSlug?: string,
         basePath?: string,
         specFieldsMapping?: Record<string, { label: string; showInKeySpecs?: boolean; icon?: string }>,
-        optionGroupsMapping?: Record<string, string>,
+        variantOptionGroups?: { medusaTitle: string; label: string }[],
     ): Observable<Products.Model.Product> {
         return from(
             this.sdk.admin.product.list({ handle, limit: 1, fields: this.productRetrieveFields }).catch((error) => {
@@ -174,7 +174,7 @@ export class ProductsService extends Products.Service {
                     product.variants,
                     basePath,
                     specFieldsMapping,
-                    optionGroupsMapping,
+                    variantOptionGroups,
                 );
             }),
             catchError((error) => {
@@ -189,7 +189,7 @@ export class ProductsService extends Products.Service {
         allVariants?: HttpTypes.AdminProductVariant[],
         basePath?: string,
         specFieldsMapping?: Record<string, { label: string; showInKeySpecs?: boolean; icon?: string }>,
-        optionGroupsMapping?: Record<string, string>,
+        variantOptionGroups?: { medusaTitle: string; label: string }[],
     ): Observable<Products.Model.Product> {
         if (!basePath) {
             throw new Error('basePath is required - must be provided by CMS configuration');
@@ -215,7 +215,7 @@ export class ProductsService extends Products.Service {
                     allVariants,
                     basePath,
                     specFieldsMapping,
-                    optionGroupsMapping,
+                    variantOptionGroups,
                 );
             }),
             catchError((error) => {
