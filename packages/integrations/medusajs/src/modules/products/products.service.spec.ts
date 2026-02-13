@@ -8,13 +8,6 @@ import { ProductsService } from './products.service';
 const BASE_URL = 'https://api.medusa.test';
 const DEFAULT_CURRENCY = 'EUR';
 const TEST_BASE_PATH = '/products';
-const TEST_SPEC_FIELDS_MAPPING = {
-    weight: { label: 'Weight', showInKeySpecs: true, icon: 'Weight' },
-    height: { label: 'Height', showInKeySpecs: false },
-    width: { label: 'Width', showInKeySpecs: false },
-    length: { label: 'Length', showInKeySpecs: false },
-    material: { label: 'Material', showInKeySpecs: true, icon: 'Package' },
-};
 
 const mockProductListResponse = {
     products: [
@@ -162,7 +155,6 @@ describe('ProductsService', () => {
                     id: 'prod_1',
                     variantId: 'var_1',
                     basePath: TEST_BASE_PATH,
-                    specFieldsMapping: TEST_SPEC_FIELDS_MAPPING,
                 }),
             );
 

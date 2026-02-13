@@ -10,9 +10,23 @@ export type Labels = {
     variantLabel?: string;
 };
 
-export type SpecFieldConfig = {
+export type AttributeConfig = {
+    /**
+     * Key of the attribute in the product attributes object (e.g. "weight", "origin_country").
+     * This matches the field name from the integration (Medusa, etc.).
+     */
+    key: string;
+    /**
+     * Display label for the attribute (e.g. "Weight (kg)", "Country of Origin").
+     */
     label: string;
+    /**
+     * Whether to show this attribute in the key specs section (quick overview).
+     */
     showInKeySpecs?: boolean;
+    /**
+     * Icon to display next to the attribute in key specs (e.g. "Weight", "Ruler").
+     */
     icon?: string;
 };
 
@@ -32,7 +46,11 @@ export class ProductDetailsBlock extends Block.Block {
     title?: string;
     labels!: Labels;
     basePath?: string;
-    specFieldsMapping?: Record<string, SpecFieldConfig>;
+    /**
+     * Configuration of product attributes to display.
+     * The block will filter and format product.attributes based on this configuration.
+     */
+    attributes?: AttributeConfig[];
     /**
      * Configuration of variant option groups (e.g. Size, Color) in desired order.
      */

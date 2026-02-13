@@ -35,7 +35,6 @@ export class ProductDetailsService {
                     variantId: variantSlug,
                     locale,
                     basePath: cmsData.basePath,
-                    specFieldsMapping: cmsData.specFieldsMapping,
                     variantOptionGroups: cmsData.variantOptionGroups,
                 });
 

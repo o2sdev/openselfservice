@@ -15,15 +15,6 @@ import type { RelatedProductsResponse } from './response.types';
 
 const defaultCurrency = 'EUR';
 const basePath = '/products';
-const specFieldsMapping = {
-    weight: { label: 'Weight', showInKeySpecs: true, icon: 'Weight' },
-    height: { label: 'Height', showInKeySpecs: false },
-    width: { label: 'Width', showInKeySpecs: false },
-    length: { label: 'Length', showInKeySpecs: false },
-    origin_country: { label: 'Country of Origin', showInKeySpecs: false },
-    hs_code: { label: 'HS Code', showInKeySpecs: false },
-    mid_code: { label: 'MID Code', showInKeySpecs: false },
-};
 
 describe('products.mapper', () => {
     describe('mapProduct', () => {
@@ -48,7 +39,6 @@ describe('products.mapper', () => {
                 defaultCurrency,
                 undefined,
                 basePath,
-                specFieldsMapping,
                 undefined,
             );
             expect(result.id).toBe('prod_1');
@@ -80,7 +70,6 @@ describe('products.mapper', () => {
                 defaultCurrency,
                 undefined,
                 basePath,
-                specFieldsMapping,
                 undefined,
             );
             expect(result.price.value).toBe(0);
@@ -171,7 +160,7 @@ describe('products.mapper', () => {
                 offset: 0,
                 limit: 10,
             } as unknown as CompatibleServicesResponse;
-            const result = mapCompatibleServices(data, defaultCurrency, basePath, specFieldsMapping, undefined);
+            const result = mapCompatibleServices(data, defaultCurrency, basePath, undefined);
             expect(result.data).toHaveLength(1);
             expect(result.total).toBe(1);
         });
@@ -199,7 +188,7 @@ describe('products.mapper', () => {
                 offset: 0,
                 limit: 10,
             } as unknown as FeaturedServicesResponse;
-            const result = mapFeaturedServices(data, defaultCurrency, basePath, specFieldsMapping, undefined);
+            const result = mapFeaturedServices(data, defaultCurrency, basePath, undefined);
             expect(result.data).toHaveLength(1);
             expect(result.total).toBe(1);
         });
@@ -275,7 +264,6 @@ describe('products.mapper', () => {
                 defaultCurrency,
                 allVariants,
                 basePath,
-                specFieldsMapping,
                 variantOptionGroups,
             );
 
@@ -322,7 +310,6 @@ describe('products.mapper', () => {
                 defaultCurrency,
                 allVariants,
                 basePath,
-                specFieldsMapping,
                 undefined,
             );
 

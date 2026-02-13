@@ -232,27 +232,7 @@ export class ResourcesService extends Resources.Service {
             )
             .pipe(
                 map(({ data }) => {
-                    // Build basic specFieldsMapping from field names (no CMS config available)
-                    const specFieldsMapping = Object.fromEntries(
-                        this.variantSpecFields.map((field) => [
-                            field,
-                            {
-                                label: field
-                                    .split('_')
-                                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                                    .join(' '),
-                                showInKeySpecs: false,
-                            },
-                        ]),
-                    );
-
-                    return mapCompatibleServices(
-                        data,
-                        this.defaultCurrency,
-                        this.productsBasePath,
-                        specFieldsMapping,
-                        undefined,
-                    );
+                    return mapCompatibleServices(data, this.defaultCurrency, this.productsBasePath, undefined);
                 }),
                 catchError((error) => {
                     return handleHttpError(error);
@@ -267,27 +247,7 @@ export class ResourcesService extends Resources.Service {
             })
             .pipe(
                 map(({ data }) => {
-                    // Build basic specFieldsMapping from field names (no CMS config available)
-                    const specFieldsMapping = Object.fromEntries(
-                        this.variantSpecFields.map((field) => [
-                            field,
-                            {
-                                label: field
-                                    .split('_')
-                                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                                    .join(' '),
-                                showInKeySpecs: false,
-                            },
-                        ]),
-                    );
-
-                    return mapFeaturedServices(
-                        data,
-                        this.defaultCurrency,
-                        this.productsBasePath,
-                        specFieldsMapping,
-                        undefined,
-                    );
+                    return mapFeaturedServices(data, this.defaultCurrency, this.productsBasePath, undefined);
                 }),
                 catchError((error) => {
                     return handleHttpError(error);

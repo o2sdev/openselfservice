@@ -23,7 +23,7 @@ export type ProductVariantOption = {
  * Keys follow the integration's field names (e.g. Medusa: "weight", "origin_country").
  * Presentation concerns (labels, grouping, "key specs" vs. table, etc.) are handled at the block level.
  */
-export type ProductAttributes = Record<string, string>;
+export type ProductAttributes = Record<string, string | number>;
 
 export class Product {
     id!: string;

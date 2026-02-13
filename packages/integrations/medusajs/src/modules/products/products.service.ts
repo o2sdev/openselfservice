@@ -76,30 +76,17 @@ export class ProductsService extends Products.Service {
         const isProductId = params.id.startsWith('prod_');
 
         if (isProductId) {
-            return this.getProductById(
-                params.id,
-                params.variantId,
-                params.basePath,
-                params.specFieldsMapping,
-                params.variantOptionGroups,
-            );
+            return this.getProductById(params.id, params.variantId, params.basePath, params.variantOptionGroups);
         }
 
         // Treat as handle - search for product by handle
-        return this.getProductByHandle(
-            params.id,
-            params.variantId,
-            params.basePath,
-            params.specFieldsMapping,
-            params.variantOptionGroups,
-        );
+        return this.getProductByHandle(params.id, params.variantId, params.basePath, params.variantOptionGroups);
     }
 
     private getProductById(
         productId: string,
         variantId?: string,
         basePath?: string,
-        specFieldsMapping?: Record<string, { label: string; showInKeySpecs?: boolean; icon?: string }>,
         variantOptionGroups?: { medusaTitle: string; label: string }[],
     ): Observable<Products.Model.Product> {
         return from(
@@ -113,14 +100,7 @@ export class ProductsService extends Products.Service {
                     throw new Error(`No variants found for product ${productId}`);
                 }
                 const targetVariantId = variantId || product.variants[0]!.id;
-                return this.getVariant(
-                    productId,
-                    targetVariantId,
-                    product.variants,
-                    basePath,
-                    specFieldsMapping,
-                    variantOptionGroups,
-                );
+                return this.getVariant(productId, targetVariantId, product.variants, basePath, variantOptionGroups);
             }),
             catchError((error) => {
                 return handleHttpError(error);
@@ -132,7 +112,6 @@ export class ProductsService extends Products.Service {
         handle: string,
         variantSlug?: string,
         basePath?: string,
-        specFieldsMapping?: Record<string, { label: string; showInKeySpecs?: boolean; icon?: string }>,
         variantOptionGroups?: { medusaTitle: string; label: string }[],
     ): Observable<Products.Model.Product> {
         return from(
@@ -168,14 +147,7 @@ export class ProductsService extends Products.Service {
                     }
                 }
 
-                return this.getVariant(
-                    product.id,
-                    variant.id,
-                    product.variants,
-                    basePath,
-                    specFieldsMapping,
-                    variantOptionGroups,
-                );
+                return this.getVariant(product.id, variant.id, product.variants, basePath, variantOptionGroups);
             }),
             catchError((error) => {
                 return handleHttpError(error);
@@ -188,14 +160,10 @@ export class ProductsService extends Products.Service {
         variantId: string,
         allVariants?: HttpTypes.AdminProductVariant[],
         basePath?: string,
-        specFieldsMapping?: Record<string, { label: string; showInKeySpecs?: boolean; icon?: string }>,
         variantOptionGroups?: { medusaTitle: string; label: string }[],
     ): Observable<Products.Model.Product> {
         if (!basePath) {
             throw new Error('basePath is required - must be provided by CMS configuration');
-        }
-        if (!specFieldsMapping) {
-            throw new Error('specFieldsMapping is required - must be provided by CMS configuration');
         }
 
         return from(
@@ -209,14 +177,7 @@ export class ProductsService extends Products.Service {
                 if (!response.variant) {
                     throw new Error(`Variant ${variantId} not found for product ${productId}`);
                 }
-                return mapProduct(
-                    response.variant,
-                    this.defaultCurrency,
-                    allVariants,
-                    basePath,
-                    specFieldsMapping,
-                    variantOptionGroups,
-                );
+                return mapProduct(response.variant, this.defaultCurrency, allVariants, basePath, variantOptionGroups);
             }),
             catchError((error) => {
                 return handleHttpError(error);

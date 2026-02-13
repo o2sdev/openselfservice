@@ -69,18 +69,19 @@ const mapTags = (
     return tags.map((tag) => ({ label: tag.value || '', variant: 'default' as const }));
 };
 
-// Collect raw attributes from variant/product based on specFieldsMapping.
-// Only includes fields that are in specFieldsMapping.
-// Order is determined by the order of keys in specFieldsMapping.
+// Collect all available raw attributes from variant/product.
+// Returns all known spec fields (weight, height, width, length, material, origin_country, hs_code, mid_code).
 // Variant attributes take precedence over product attributes.
-const collectVariantAttributes = (
-    variant: HttpTypes.AdminProductVariant,
-    specFieldsMapping: Record<string, { label: string; showInKeySpecs?: boolean; icon?: string }>,
-): Products.Model.ProductAttributes => {
+// The block layer will filter and format these based on CMS configuration.
+const collectVariantAttributes = (variant: HttpTypes.AdminProductVariant): Products.Model.ProductAttributes => {
     const attributes: Products.Model.ProductAttributes = {};
     const product = variant.product;
 
-    for (const [field, config] of Object.entries(specFieldsMapping)) {
+    // List of known spec fields to collect from Medusa
+    // These should match the fields requested in productDetailFields
+    const knownFields = ['weight', 'height', 'width', 'length', 'material', 'origin_country', 'hs_code', 'mid_code'];
+
+    for (const field of knownFields) {
         // Check variant first, then fall back to product
         const variantValue = variant[field as keyof HttpTypes.AdminProductVariant];
         const productValue = product?.[field as keyof HttpTypes.AdminProduct];
@@ -213,7 +214,6 @@ export const mapProduct = (
     defaultCurrency: string,
     allVariants: HttpTypes.AdminProductVariant[] | undefined,
     basePath: string,
-    specFieldsMapping: Record<string, { label: string; showInKeySpecs?: boolean; icon?: string }>,
     variantOptionGroups?: { medusaTitle: string; label: string }[],
 ): Products.Model.Product => {
     if (!productVariant) {
@@ -230,8 +230,8 @@ export const mapProduct = (
         throw new Error(`Product variant SKU is required but missing for product ${product.id}`);
     }
 
-    // Collect raw attributes based on specFieldsMapping.
-    const attributes = collectVariantAttributes(productVariant, specFieldsMapping);
+    // Collect all available raw attributes from variant/product.
+    const attributes = collectVariantAttributes(productVariant);
 
     return {
         id: product.id,
@@ -364,12 +364,11 @@ export const mapCompatibleServices = (
     data: CompatibleServicesResponse,
     defaultCurrency: string,
     basePath: string,
-    specFieldsMapping: Record<string, { label: string; showInKeySpecs?: boolean; icon?: string }>,
     variantOptionGroups?: { medusaTitle: string; label: string }[],
 ): Products.Model.Products => {
     return {
         data: data.compatibleServices.map((product) => {
-            return mapProduct(product, defaultCurrency, undefined, basePath, specFieldsMapping, variantOptionGroups);
+            return mapProduct(product, defaultCurrency, undefined, basePath, variantOptionGroups);
         }),
         total: data.count,
     };
@@ -379,12 +378,11 @@ export const mapFeaturedServices = (
     data: FeaturedServicesResponse,
     defaultCurrency: string,
     basePath: string,
-    specFieldsMapping: Record<string, { label: string; showInKeySpecs?: boolean; icon?: string }>,
     variantOptionGroups?: { medusaTitle: string; label: string }[],
 ): Products.Model.Products => {
     return {
         data: data.featuredServices.map((product) => {
-            return mapProduct(product, defaultCurrency, undefined, basePath, specFieldsMapping, variantOptionGroups);
+            return mapProduct(product, defaultCurrency, undefined, basePath, variantOptionGroups);
         }),
         total: data.count,
     };

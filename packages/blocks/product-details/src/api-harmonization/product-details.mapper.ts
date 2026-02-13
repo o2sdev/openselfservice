@@ -8,13 +8,14 @@ export const mapProductDetails = (
 ): Model.ProductDetailsBlock => {
     // Derive view-level specs (keySpecs, detailedSpecs) from raw attributes + CMS config.
     const attributes = product.attributes ?? {};
-    const specFieldsMapping = cms.specFieldsMapping ?? {};
+    const attributesConfig = cms.attributes ?? [];
 
     const detailedSpecs: Model.Product['detailedSpecs'] = [];
     const keySpecs: Model.Product['keySpecs'] = [];
 
-    for (const [field, config] of Object.entries(specFieldsMapping)) {
-        const value = attributes[field];
+    // Iterate through CMS attribute configuration and pick values from product.attributes
+    for (const config of attributesConfig) {
+        const value = attributes[config.key];
         if (value == null || value === '') {
             continue;
         }

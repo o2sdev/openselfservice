@@ -10,34 +10,34 @@ export const mapProductDetailsBlock = (locale: string): CMS.Model.ProductDetails
         pl: '/produkty',
     };
 
-    const specFieldsMappingMap: Record<string, Record<string, CMS.Model.ProductDetailsBlock.SpecFieldConfig>> = {
-        en: {
-            weight: { label: 'Weight (kg)', showInKeySpecs: true, icon: 'Weight' },
-            height: { label: 'Height (cm)', showInKeySpecs: true, icon: 'Ruler' },
-            width: { label: 'Width (cm)', showInKeySpecs: true, icon: 'Ruler' },
-            length: { label: 'Length (cm)', showInKeySpecs: true, icon: 'Ruler' },
-            origin_country: { label: 'Country of Origin', showInKeySpecs: false },
-            hs_code: { label: 'HS Code', showInKeySpecs: false },
-            mid_code: { label: 'MID Code', showInKeySpecs: false },
-        },
-        de: {
-            weight: { label: 'Gewicht (kg)', showInKeySpecs: true, icon: 'Weight' },
-            height: { label: 'Höhe (cm)', showInKeySpecs: false },
-            width: { label: 'Breite (cm)', showInKeySpecs: false },
-            length: { label: 'Länge (cm)', showInKeySpecs: false },
-            origin_country: { label: 'Herkunftsland', showInKeySpecs: false },
-            hs_code: { label: 'HS-Code', showInKeySpecs: false },
-            mid_code: { label: 'MID-Code', showInKeySpecs: false },
-        },
-        pl: {
-            weight: { label: 'Waga (kg)', showInKeySpecs: true, icon: 'Weight' },
-            height: { label: 'Wysokość (cm)', showInKeySpecs: false },
-            width: { label: 'Szerokość (cm)', showInKeySpecs: false },
-            length: { label: 'Długość (cm)', showInKeySpecs: false },
-            origin_country: { label: 'Kraj pochodzenia', showInKeySpecs: false },
-            hs_code: { label: 'Kod HS', showInKeySpecs: false },
-            mid_code: { label: 'Kod MID', showInKeySpecs: false },
-        },
+    const attributesMap: Record<string, CMS.Model.ProductDetailsBlock.AttributeConfig[]> = {
+        en: [
+            { key: 'weight', label: 'Weight (kg)', showInKeySpecs: true, icon: 'Weight' },
+            { key: 'height', label: 'Height (cm)', showInKeySpecs: true, icon: 'Ruler' },
+            { key: 'width', label: 'Width (cm)', showInKeySpecs: true, icon: 'Ruler' },
+            { key: 'length', label: 'Length (cm)', showInKeySpecs: true, icon: 'Ruler' },
+            { key: 'origin_country', label: 'Country of Origin', showInKeySpecs: false },
+            { key: 'hs_code', label: 'HS Code', showInKeySpecs: false },
+            { key: 'mid_code', label: 'MID Code', showInKeySpecs: false },
+        ],
+        de: [
+            { key: 'weight', label: 'Gewicht (kg)', showInKeySpecs: true, icon: 'Weight' },
+            { key: 'height', label: 'Höhe (cm)', showInKeySpecs: false },
+            { key: 'width', label: 'Breite (cm)', showInKeySpecs: false },
+            { key: 'length', label: 'Länge (cm)', showInKeySpecs: false },
+            { key: 'origin_country', label: 'Herkunftsland', showInKeySpecs: false },
+            { key: 'hs_code', label: 'HS-Code', showInKeySpecs: false },
+            { key: 'mid_code', label: 'MID-Code', showInKeySpecs: false },
+        ],
+        pl: [
+            { key: 'weight', label: 'Waga (kg)', showInKeySpecs: true, icon: 'Weight' },
+            { key: 'height', label: 'Wysokość (cm)', showInKeySpecs: false },
+            { key: 'width', label: 'Szerokość (cm)', showInKeySpecs: false },
+            { key: 'length', label: 'Długość (cm)', showInKeySpecs: false },
+            { key: 'origin_country', label: 'Kraj pochodzenia', showInKeySpecs: false },
+            { key: 'hs_code', label: 'Kod HS', showInKeySpecs: false },
+            { key: 'mid_code', label: 'Kod MID', showInKeySpecs: false },
+        ],
     };
 
     const variantOptionGroupsMap: Record<string, CMS.Model.ProductDetailsBlock.VariantOptionGroupConfig[]> = {
@@ -67,7 +67,7 @@ export const mapProductDetailsBlock = (locale: string): CMS.Model.ProductDetails
             variantLabel: 'Variant',
         },
         basePath: basePathMap[locale] || basePathMap['en'],
-        specFieldsMapping: specFieldsMappingMap[locale] || specFieldsMappingMap['en'],
+        attributes: attributesMap[locale] || attributesMap['en'],
         variantOptionGroups: variantOptionGroupsMap[locale] || variantOptionGroupsMap['en'],
     };
 };
