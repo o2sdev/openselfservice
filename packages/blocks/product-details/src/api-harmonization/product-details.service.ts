@@ -36,6 +36,7 @@ export class ProductDetailsService {
                     locale,
                     basePath: cmsData.basePath,
                     specFieldsMapping: cmsData.specFieldsMapping,
+                    optionGroupsMapping: cmsData.optionGroupsMapping,
                 });
 
                 return forkJoin([of(cmsData), product]).pipe(

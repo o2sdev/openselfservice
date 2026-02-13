@@ -69,55 +69,46 @@ const mapTags = (
     return tags.map((tag) => ({ label: tag.value || '', variant: 'default' as const }));
 };
 
-// Extract keySpecs from product/variant metadata
-// Medusa stores metadata values as strings, so we need to parse JSON
-// Expected format: key="keySpecs", value='[{ "value": "1200W", "icon": "Zap" }, ...]'
-const mapKeySpecsFromMetadata = (variant: HttpTypes.AdminProductVariant): Products.Model.KeySpecItem[] | undefined => {
-    const variantMetadata = variant.metadata as Record<string, unknown> | null;
-    const productMetadata = variant.product?.metadata as Record<string, unknown> | null;
+// Build keySpecs from specFieldsMapping where showInKeySpecs is true
+// Order is determined by the order of keys in specFieldsMapping
+const buildKeySpecs = (
+    variant: HttpTypes.AdminProductVariant,
+    specFieldsMapping: Record<string, { label: string; showInKeySpecs?: boolean; icon?: string }>,
+): Products.Model.KeySpecItem[] | undefined => {
+    const keySpecs: Products.Model.KeySpecItem[] = [];
+    const product = variant.product;
 
-    // Check variant metadata first, then product metadata
-    const rawKeySpecs = variantMetadata?.keySpecs ?? productMetadata?.keySpecs;
+    for (const [field, config] of Object.entries(specFieldsMapping)) {
+        if (!config.showInKeySpecs) continue;
 
-    if (!rawKeySpecs) {
-        return undefined;
-    }
+        // Check variant first, then fall back to product
+        const variantValue = variant[field as keyof HttpTypes.AdminProductVariant];
+        const productValue = product?.[field as keyof HttpTypes.AdminProduct];
+        const value = variantValue ?? productValue;
 
-    // Parse if it's a string (Medusa stores metadata values as strings)
-    let keySpecs: { value?: string; icon?: string }[];
-    if (typeof rawKeySpecs === 'string') {
-        try {
-            keySpecs = JSON.parse(rawKeySpecs);
-        } catch {
-            return undefined;
+        if (value != null && value !== '') {
+            keySpecs.push({
+                value: `${config.label}: ${String(value)}`,
+                icon: config.icon,
+            });
         }
-    } else if (Array.isArray(rawKeySpecs)) {
-        keySpecs = rawKeySpecs;
-    } else {
-        return undefined;
     }
 
-    if (!Array.isArray(keySpecs) || keySpecs.length === 0) {
-        return undefined;
-    }
-
-    return keySpecs.map((spec) => ({
-        value: spec.value,
-        icon: spec.icon,
-    }));
+    return keySpecs.length > 0 ? keySpecs : undefined;
 };
 
 // Map variant and product attributes to detailedSpecs dynamically
+// Only includes fields that are in specFieldsMapping
+// Order is determined by the order of keys in specFieldsMapping
 // Variant attributes take precedence over product attributes
 const mapVariantToDetailedSpecs = (
     variant: HttpTypes.AdminProductVariant,
-    specFields: string[],
-    specFieldsMapping: Record<string, string>,
+    specFieldsMapping: Record<string, { label: string; showInKeySpecs?: boolean; icon?: string }>,
 ): Products.Model.DetailedSpec[] => {
     const specs: Products.Model.DetailedSpec[] = [];
     const product = variant.product;
 
-    for (const field of specFields) {
+    for (const [field, config] of Object.entries(specFieldsMapping)) {
         // Check variant first, then fall back to product
         const variantValue = variant[field as keyof HttpTypes.AdminProductVariant];
         const productValue = product?.[field as keyof HttpTypes.AdminProduct];
@@ -125,7 +116,7 @@ const mapVariantToDetailedSpecs = (
 
         if (value != null && value !== '') {
             specs.push({
-                label: specFieldsMapping[field]!,
+                label: config.label,
                 value: String(value),
             });
         }
@@ -170,8 +161,13 @@ const mapVariantOptions = (
 };
 
 // Extract option groups from variants (Size, Color, etc.) with unique values per group
-const mapOptionGroups = (variants: HttpTypes.AdminProductVariant[]): Products.Model.ProductOptionGroup[] => {
-    const groupsById = new Map<string, { title: string; values: Set<string> }>();
+// Apply optionGroupsMapping for translated titles
+// Order is derived from Object.keys(optionGroupsMapping) if provided, otherwise keep natural order
+const mapOptionGroups = (
+    variants: HttpTypes.AdminProductVariant[],
+    optionGroupsMapping?: Record<string, string>,
+): Products.Model.ProductOptionGroup[] => {
+    const groupsById = new Map<string, { medusaTitle: string; title: string; values: Set<string> }>();
 
     for (const variant of variants) {
         const options = variant.options as
@@ -181,18 +177,53 @@ const mapOptionGroups = (variants: HttpTypes.AdminProductVariant[]): Products.Mo
 
         for (const option of options) {
             if (!option.option_id || option.value == null) continue;
-            const title = option.option?.title ?? option.option_id;
+            const medusaTitle = option.option?.title ?? option.option_id;
+            const translatedTitle = optionGroupsMapping?.[medusaTitle] ?? medusaTitle;
             if (!groupsById.has(option.option_id)) {
-                groupsById.set(option.option_id, { title, values: new Set() });
+                groupsById.set(option.option_id, { medusaTitle, title: translatedTitle, values: new Set() });
             }
             groupsById.get(option.option_id)!.values.add(option.value);
         }
     }
 
-    return Array.from(groupsById.entries()).map(([id, { title, values }]) => ({
+    // Map to objects with both medusaTitle (for sorting) and translated title (for display)
+    const groupsWithKeys = Array.from(groupsById.entries()).map(([id, { medusaTitle, title, values }]) => ({
         id,
+        medusaTitle,
         title,
         values: Array.from(values),
+    }));
+
+    // Sort by optionGroupsMapping keys order if provided (using medusaTitle as key)
+    let sortedGroups = groupsWithKeys;
+    if (optionGroupsMapping) {
+        const optionGroupsOrder = Object.keys(optionGroupsMapping);
+        sortedGroups = groupsWithKeys.sort((a, b) => {
+            const indexA = optionGroupsOrder.indexOf(a.medusaTitle);
+            const indexB = optionGroupsOrder.indexOf(b.medusaTitle);
+
+            // If both in order array, sort by position
+            if (indexA !== -1 && indexB !== -1) {
+                return indexA - indexB;
+            }
+            // If only A is in order, A comes first
+            if (indexA !== -1) {
+                return -1;
+            }
+            // If only B is in order, B comes first
+            if (indexB !== -1) {
+                return 1;
+            }
+            // Neither in order - keep natural order (no change)
+            return 0;
+        });
+    }
+
+    // Return without medusaTitle (only id, title, values)
+    return sortedGroups.map(({ id, title, values }) => ({
+        id,
+        title,
+        values,
     }));
 };
 
@@ -212,8 +243,8 @@ export const mapProduct = (
     defaultCurrency: string,
     allVariants: HttpTypes.AdminProductVariant[] | undefined,
     basePath: string,
-    specFields: string[],
-    specFieldsMapping: Record<string, string>,
+    specFieldsMapping: Record<string, { label: string; showInKeySpecs?: boolean; icon?: string }>,
+    optionGroupsMapping?: Record<string, string>,
 ): Products.Model.Product => {
     if (!productVariant) {
         throw new NotFoundException('Product variant is undefined');
@@ -221,12 +252,21 @@ export const mapProduct = (
 
     const product = productVariant?.product;
 
-    // Build detailedSpecs from variant attributes dynamically
-    const detailedSpecs = mapVariantToDetailedSpecs(productVariant, specFields, specFieldsMapping);
+    // Validate required fields
+    if (!product?.id) {
+        throw new Error(`Product ID is required but missing for variant ${productVariant.id}`);
+    }
+    if (!productVariant.sku) {
+        throw new Error(`Product variant SKU is required but missing for product ${product.id}`);
+    }
+
+    // Build detailedSpecs and keySpecs from specFieldsMapping
+    const detailedSpecs = mapVariantToDetailedSpecs(productVariant, specFieldsMapping);
+    const keySpecs = buildKeySpecs(productVariant, specFieldsMapping);
 
     return {
-        id: product?.id || '',
-        sku: productVariant?.sku || '',
+        id: product.id,
+        sku: productVariant.sku,
         name: product?.title || '',
         description: product?.description || '',
         shortDescription: (product?.subtitle as string) || '',
@@ -239,8 +279,8 @@ export const mapProduct = (
         category: product?.categories?.[0]?.name || '',
         tags: mapTags(product?.tags),
         detailedSpecs: detailedSpecs.length > 0 ? detailedSpecs : undefined,
-        keySpecs: mapKeySpecsFromMetadata(productVariant),
-        optionGroups: allVariants ? mapOptionGroups(allVariants) : undefined,
+        keySpecs,
+        optionGroups: allVariants ? mapOptionGroups(allVariants, optionGroupsMapping) : undefined,
         variants:
             allVariants && allVariants.length > 1
                 ? mapVariantOptions(allVariants, basePath, product?.handle, product?.id || '')
@@ -262,28 +302,42 @@ export const mapProducts = (
     }
 
     return {
-        data: products.map((product) => {
-            const firstVariant = product.variants?.[0];
+        data: products
+            .filter((product) => {
+                // Filter out products with missing required fields
+                const firstVariant = product.variants?.[0];
+                if (!product.id) {
+                    console.warn('[mapProducts] Skipping product without ID:', product);
+                    return false;
+                }
+                if (!firstVariant?.sku) {
+                    console.warn(`[mapProducts] Skipping product ${product.id} without variant SKU`);
+                    return false;
+                }
+                return true;
+            })
+            .map((product) => {
+                const firstVariant = product.variants![0]!;
 
-            return {
-                id: product.id,
-                sku: firstVariant?.sku || '',
-                name: product.title,
-                description: product?.description || '',
-                variantId: firstVariant?.id || '',
-                image: mapThumbnail(product?.thumbnail, product.title),
-                images: mapImages(product.images, product.title),
-                price: mapPrice(firstVariant?.prices, defaultCurrency),
-                link: generateProductLink(basePath, product.handle, product.id, firstVariant?.sku),
-                type: mapProductType(product?.type || undefined),
-                category: product.categories?.[0]?.name || '',
-                tags: mapTags(product.tags),
-                variants:
-                    product.variants && product.variants.length > 1
-                        ? mapVariantOptions(product.variants, basePath, product.handle, product.id)
-                        : undefined,
-            };
-        }),
+                return {
+                    id: product.id,
+                    sku: firstVariant.sku!,
+                    name: product.title,
+                    description: product?.description || '',
+                    variantId: firstVariant?.id || '',
+                    image: mapThumbnail(product?.thumbnail, product.title),
+                    images: mapImages(product.images, product.title),
+                    price: mapPrice(firstVariant?.prices, defaultCurrency),
+                    link: generateProductLink(basePath, product.handle, product.id, firstVariant?.sku),
+                    type: mapProductType(product?.type || undefined),
+                    category: product.categories?.[0]?.name || '',
+                    tags: mapTags(product.tags),
+                    variants:
+                        product.variants && product.variants.length > 1
+                            ? mapVariantOptions(product.variants, basePath, product.handle, product.id)
+                            : undefined,
+                };
+            }),
         total: categoryFilter ? products.length : data.count,
     };
 };
@@ -294,25 +348,46 @@ export const mapRelatedProducts = (
     basePath: string,
 ): Products.Model.Products => {
     return {
-        data: data.productReferences.map((ref) => {
-            const targetProduct = ref.targetProduct;
-            const product = targetProduct.product;
+        data: data.productReferences
+            .filter((ref) => {
+                // Filter out products with missing required fields
+                const targetProduct = ref.targetProduct;
+                const product = targetProduct.product;
+                const productId = product?.id || targetProduct.id;
 
-            return {
-                id: targetProduct.product?.id || targetProduct.id,
-                sku: targetProduct.sku || '',
-                name: targetProduct.title,
-                description: product?.description || '',
-                shortDescription: product?.subtitle || product?.description || undefined,
-                image: mapThumbnail(product?.thumbnail, targetProduct.title) || { url: '', alt: targetProduct.title },
-                images: mapImages(product?.images, product?.title || ''),
-                price: mapPrice(targetProduct.prices, defaultCurrency),
-                link: generateProductLink(basePath, product?.handle, product?.id || '', targetProduct.sku),
-                type: mapProductType(product?.type || undefined),
-                category: product?.categories?.[0]?.name || '',
-                tags: mapTags(product?.tags),
-            };
-        }),
+                if (!productId) {
+                    console.warn('[mapRelatedProducts] Skipping product reference without ID:', ref);
+                    return false;
+                }
+                if (!targetProduct.sku) {
+                    console.warn(`[mapRelatedProducts] Skipping product ${productId} without SKU`);
+                    return false;
+                }
+                return true;
+            })
+            .map((ref) => {
+                const targetProduct = ref.targetProduct;
+                const product = targetProduct.product;
+                const productId = product?.id || targetProduct.id;
+
+                return {
+                    id: productId,
+                    sku: targetProduct.sku!,
+                    name: targetProduct.title,
+                    description: product?.description || '',
+                    shortDescription: product?.subtitle || product?.description || undefined,
+                    image: mapThumbnail(product?.thumbnail, targetProduct.title) || {
+                        url: '',
+                        alt: targetProduct.title,
+                    },
+                    images: mapImages(product?.images, product?.title || ''),
+                    price: mapPrice(targetProduct.prices, defaultCurrency),
+                    link: generateProductLink(basePath, product?.handle, product?.id || '', targetProduct.sku),
+                    type: mapProductType(product?.type || undefined),
+                    category: product?.categories?.[0]?.name || '',
+                    tags: mapTags(product?.tags),
+                };
+            }),
         total: data.count,
     };
 };
@@ -321,12 +396,12 @@ export const mapCompatibleServices = (
     data: CompatibleServicesResponse,
     defaultCurrency: string,
     basePath: string,
-    specFields: string[],
-    specFieldsMapping: Record<string, string>,
+    specFieldsMapping: Record<string, { label: string; showInKeySpecs?: boolean; icon?: string }>,
+    optionGroupsMapping?: Record<string, string>,
 ): Products.Model.Products => {
     return {
         data: data.compatibleServices.map((product) => {
-            return mapProduct(product, defaultCurrency, undefined, basePath, specFields, specFieldsMapping);
+            return mapProduct(product, defaultCurrency, undefined, basePath, specFieldsMapping, optionGroupsMapping);
         }),
         total: data.count,
     };
@@ -336,12 +411,12 @@ export const mapFeaturedServices = (
     data: FeaturedServicesResponse,
     defaultCurrency: string,
     basePath: string,
-    specFields: string[],
-    specFieldsMapping: Record<string, string>,
+    specFieldsMapping: Record<string, { label: string; showInKeySpecs?: boolean; icon?: string }>,
+    optionGroupsMapping?: Record<string, string>,
 ): Products.Model.Products => {
     return {
         data: data.featuredServices.map((product) => {
-            return mapProduct(product, defaultCurrency, undefined, basePath, specFields, specFieldsMapping);
+            return mapProduct(product, defaultCurrency, undefined, basePath, specFieldsMapping, optionGroupsMapping);
         }),
         total: data.count,
     };

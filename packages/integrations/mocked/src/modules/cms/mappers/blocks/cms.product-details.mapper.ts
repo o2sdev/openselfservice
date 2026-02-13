@@ -13,14 +13,17 @@ const MOCK_PRODUCT_DETAILS_BLOCK_EN: CMS.Model.ProductDetailsBlock.ProductDetail
     },
     basePath: '/products',
     specFieldsMapping: {
-        weight: 'Weight (kg)',
-        height: 'Height (cm)',
-        width: 'Width (cm)',
-        length: 'Length (cm)',
-        material: 'Material',
-        origin_country: 'Country of Origin',
-        hs_code: 'HS Code',
-        mid_code: 'MID Code',
+        weight: { label: 'Weight (kg)', showInKeySpecs: true, icon: 'Weight' },
+        height: { label: 'Height (cm)', showInKeySpecs: true, icon: 'Ruler' },
+        width: { label: 'Width (cm)', showInKeySpecs: true, icon: 'Ruler' },
+        length: { label: 'Length (cm)', showInKeySpecs: true, icon: 'Ruler' },
+        origin_country: { label: 'Country of Origin', showInKeySpecs: false },
+        hs_code: { label: 'HS Code', showInKeySpecs: false },
+        mid_code: { label: 'MID Code', showInKeySpecs: false },
+    },
+    optionGroupsMapping: {
+        Size: 'Size',
+        colors: 'Color',
     },
 };
 
@@ -37,14 +40,17 @@ const MOCK_PRODUCT_DETAILS_BLOCK_DE: CMS.Model.ProductDetailsBlock.ProductDetail
     },
     basePath: '/produkte',
     specFieldsMapping: {
-        weight: 'Gewicht (kg)',
-        height: 'Höhe (cm)',
-        width: 'Breite (cm)',
-        length: 'Länge (cm)',
-        material: 'Material',
-        origin_country: 'Herkunftsland',
-        hs_code: 'HS-Code',
-        mid_code: 'MID-Code',
+        weight: { label: 'Gewicht (kg)', showInKeySpecs: true, icon: 'Weight' },
+        height: { label: 'Höhe (cm)', showInKeySpecs: true, icon: 'Ruler' },
+        width: { label: 'Breite (cm)', showInKeySpecs: true, icon: 'Ruler' },
+        length: { label: 'Länge (cm)', showInKeySpecs: true, icon: 'Ruler' },
+        origin_country: { label: 'Herkunftsland', showInKeySpecs: false },
+        hs_code: { label: 'HS-Code', showInKeySpecs: false },
+        mid_code: { label: 'MID-Code', showInKeySpecs: false },
+    },
+    optionGroupsMapping: {
+        Size: 'Größe',
+        colors: 'Farbe',
     },
 };
 
@@ -61,14 +67,16 @@ const MOCK_PRODUCT_DETAILS_BLOCK_PL: CMS.Model.ProductDetailsBlock.ProductDetail
     },
     basePath: '/produkty',
     specFieldsMapping: {
-        weight: 'Waga (kg)',
-        height: 'Wysokość (cm)',
-        width: 'Szerokość (cm)',
-        length: 'Długość (cm)',
-        material: 'Materiał',
-        origin_country: 'Kraj pochodzenia',
-        hs_code: 'Kod HS',
-        mid_code: 'Kod MID',
+        weight: { label: 'Waga (kg)', showInKeySpecs: true, icon: 'Weight' },
+        height: { label: 'Wysokość (cm)', showInKeySpecs: true, icon: 'Ruler' },
+        width: { label: 'Szerokość (cm)', showInKeySpecs: true, icon: 'Ruler' },
+        length: { label: 'Długość (cm)', showInKeySpecs: true, icon: 'Ruler' },
+        origin_country: { label: 'Kraj pochodzenia', showInKeySpecs: false },
+        hs_code: { label: 'Kod HS', showInKeySpecs: false },
+    },
+    optionGroupsMapping: {
+        colors: 'Kolor',
+        Size: 'Rozmiar',
     },
 };
 

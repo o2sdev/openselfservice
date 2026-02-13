@@ -233,10 +233,13 @@ export class ResourcesService extends Resources.Service {
                     const specFieldsMapping = Object.fromEntries(
                         this.variantSpecFields.map((field) => [
                             field,
-                            field
-                                .split('_')
-                                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                                .join(' '),
+                            {
+                                label: field
+                                    .split('_')
+                                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                                    .join(' '),
+                                showInKeySpecs: false,
+                            },
                         ]),
                     );
 
@@ -244,8 +247,8 @@ export class ResourcesService extends Resources.Service {
                         data,
                         this.defaultCurrency,
                         this.productsBasePath,
-                        this.variantSpecFields,
                         specFieldsMapping,
+                        undefined,
                     );
                 }),
                 catchError((error) => {
@@ -265,10 +268,13 @@ export class ResourcesService extends Resources.Service {
                     const specFieldsMapping = Object.fromEntries(
                         this.variantSpecFields.map((field) => [
                             field,
-                            field
-                                .split('_')
-                                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                                .join(' '),
+                            {
+                                label: field
+                                    .split('_')
+                                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                                    .join(' '),
+                                showInKeySpecs: false,
+                            },
                         ]),
                     );
 
@@ -276,8 +282,8 @@ export class ResourcesService extends Resources.Service {
                         data,
                         this.defaultCurrency,
                         this.productsBasePath,
-                        this.variantSpecFields,
                         specFieldsMapping,
+                        undefined,
                     );
                 }),
                 catchError((error) => {

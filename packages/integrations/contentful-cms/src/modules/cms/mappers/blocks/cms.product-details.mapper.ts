@@ -10,36 +10,48 @@ export const mapProductDetailsBlock = (locale: string): CMS.Model.ProductDetails
         pl: '/produkty',
     };
 
-    const specFieldsMappingMap: Record<string, Record<string, string>> = {
+    const specFieldsMappingMap: Record<string, Record<string, CMS.Model.ProductDetailsBlock.SpecFieldConfig>> = {
         en: {
-            weight: 'Weight (kg)',
-            height: 'Height (cm)',
-            width: 'Width (cm)',
-            length: 'Length (cm)',
-            material: 'Material',
-            origin_country: 'Country of Origin',
-            hs_code: 'HS Code',
-            mid_code: 'MID Code',
+            weight: { label: 'Weight (kg)', showInKeySpecs: true, icon: 'Weight' },
+            height: { label: 'Height (cm)', showInKeySpecs: true, icon: 'Ruler' },
+            width: { label: 'Width (cm)', showInKeySpecs: true, icon: 'Ruler' },
+            length: { label: 'Length (cm)', showInKeySpecs: true, icon: 'Ruler' },
+            origin_country: { label: 'Country of Origin', showInKeySpecs: false },
+            hs_code: { label: 'HS Code', showInKeySpecs: false },
+            mid_code: { label: 'MID Code', showInKeySpecs: false },
         },
         de: {
-            weight: 'Gewicht (kg)',
-            height: 'Höhe (cm)',
-            width: 'Breite (cm)',
-            length: 'Länge (cm)',
-            material: 'Material',
-            origin_country: 'Herkunftsland',
-            hs_code: 'HS-Code',
-            mid_code: 'MID-Code',
+            weight: { label: 'Gewicht (kg)', showInKeySpecs: true, icon: 'Weight' },
+            height: { label: 'Höhe (cm)', showInKeySpecs: false },
+            width: { label: 'Breite (cm)', showInKeySpecs: false },
+            length: { label: 'Länge (cm)', showInKeySpecs: false },
+            origin_country: { label: 'Herkunftsland', showInKeySpecs: false },
+            hs_code: { label: 'HS-Code', showInKeySpecs: false },
+            mid_code: { label: 'MID-Code', showInKeySpecs: false },
         },
         pl: {
-            weight: 'Waga (kg)',
-            height: 'Wysokość (cm)',
-            width: 'Szerokość (cm)',
-            length: 'Długość (cm)',
-            material: 'Materiał',
-            origin_country: 'Kraj pochodzenia',
-            hs_code: 'Kod HS',
-            mid_code: 'Kod MID',
+            weight: { label: 'Waga (kg)', showInKeySpecs: true, icon: 'Weight' },
+            height: { label: 'Wysokość (cm)', showInKeySpecs: false },
+            width: { label: 'Szerokość (cm)', showInKeySpecs: false },
+            length: { label: 'Długość (cm)', showInKeySpecs: false },
+            origin_country: { label: 'Kraj pochodzenia', showInKeySpecs: false },
+            hs_code: { label: 'Kod HS', showInKeySpecs: false },
+            mid_code: { label: 'Kod MID', showInKeySpecs: false },
+        },
+    };
+
+    const optionGroupsMappingMap: Record<string, Record<string, string>> = {
+        en: {
+            Size: 'Size',
+            colors: 'Color',
+        },
+        de: {
+            Size: 'Größe',
+            colors: 'Farbe',
+        },
+        pl: {
+            colors: 'Kolor',
+            Size: 'Rozmiar',
         },
     };
 
@@ -56,5 +68,6 @@ export const mapProductDetailsBlock = (locale: string): CMS.Model.ProductDetails
         },
         basePath: basePathMap[locale] || basePathMap['en'],
         specFieldsMapping: specFieldsMappingMap[locale] || specFieldsMappingMap['en'],
+        optionGroupsMapping: optionGroupsMappingMap[locale] || optionGroupsMappingMap['en'],
     };
 };

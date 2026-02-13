@@ -10,9 +10,16 @@ export type Labels = {
     variantLabel?: string;
 };
 
+export type SpecFieldConfig = {
+    label: string;
+    showInKeySpecs?: boolean;
+    icon?: string;
+};
+
 export class ProductDetailsBlock extends Block.Block {
     title?: string;
     labels!: Labels;
     basePath?: string;
-    specFieldsMapping?: Record<string, string>;
+    specFieldsMapping?: Record<string, SpecFieldConfig>;
+    optionGroupsMapping?: Record<string, string>;
 }

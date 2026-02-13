@@ -9,11 +9,11 @@ const BASE_URL = 'https://api.medusa.test';
 const DEFAULT_CURRENCY = 'EUR';
 const TEST_BASE_PATH = '/products';
 const TEST_SPEC_FIELDS_MAPPING = {
-    weight: 'Weight',
-    height: 'Height',
-    width: 'Width',
-    length: 'Length',
-    material: 'Material',
+    weight: { label: 'Weight', showInKeySpecs: true, icon: 'Weight' },
+    height: { label: 'Height', showInKeySpecs: false },
+    width: { label: 'Width', showInKeySpecs: false },
+    length: { label: 'Length', showInKeySpecs: false },
+    material: { label: 'Material', showInKeySpecs: true, icon: 'Package' },
 };
 
 const mockProductListResponse = {
@@ -25,6 +25,7 @@ const mockProductListResponse = {
             thumbnail: null,
             categories: [],
             type: null,
+            variants: [{ id: 'var_1', sku: 'SKU1', prices: [] }],
         },
     ],
     count: 1,

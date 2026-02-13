@@ -24,6 +24,7 @@ export class ProductsService extends Products.Service {
 
     // Note: handle is included by default in Medusa product response
     private readonly productListFields = '*variants,*variants.prices,*variants.options,*categories,*tags,*images';
+    private readonly productRetrieveFields = '*variants,*variants.options,*variants.options.option';
     private readonly productDetailFields =
         '+weight,+height,+width,+length,+material,+origin_country,+hs_code,+mid_code,+metadata,+product.metadata,+product.handle,product.*,*product.images,*product.tags,*options,*options.option';
 
@@ -75,25 +76,36 @@ export class ProductsService extends Products.Service {
         const isProductId = params.id.startsWith('prod_');
 
         if (isProductId) {
-            return this.getProductById(params.id, params.variantId, params.basePath, params.specFieldsMapping);
+            return this.getProductById(
+                params.id,
+                params.variantId,
+                params.basePath,
+                params.specFieldsMapping,
+                params.optionGroupsMapping,
+            );
         }
 
         // Treat as handle - search for product by handle
-        return this.getProductByHandle(params.id, params.variantId, params.basePath, params.specFieldsMapping);
+        return this.getProductByHandle(
+            params.id,
+            params.variantId,
+            params.basePath,
+            params.specFieldsMapping,
+            params.optionGroupsMapping,
+        );
     }
 
     private getProductById(
         productId: string,
         variantId?: string,
         basePath?: string,
-        specFieldsMapping?: Record<string, string>,
+        specFieldsMapping?: Record<string, { label: string; showInKeySpecs?: boolean; icon?: string }>,
+        optionGroupsMapping?: Record<string, string>,
     ): Observable<Products.Model.Product> {
         return from(
-            this.sdk.admin.product
-                .retrieve(productId, { fields: '*variants,*variants.options,*variants.options.option' })
-                .catch((error) => {
-                    throw error;
-                }),
+            this.sdk.admin.product.retrieve(productId, { fields: this.productRetrieveFields }).catch((error) => {
+                throw error;
+            }),
         ).pipe(
             switchMap((response) => {
                 const product = response.product;
@@ -101,7 +113,14 @@ export class ProductsService extends Products.Service {
                     throw new Error(`No variants found for product ${productId}`);
                 }
                 const targetVariantId = variantId || product.variants[0]!.id;
-                return this.getVariant(productId, targetVariantId, product.variants, basePath, specFieldsMapping);
+                return this.getVariant(
+                    productId,
+                    targetVariantId,
+                    product.variants,
+                    basePath,
+                    specFieldsMapping,
+                    optionGroupsMapping,
+                );
             }),
             catchError((error) => {
                 return handleHttpError(error);
@@ -113,14 +132,13 @@ export class ProductsService extends Products.Service {
         handle: string,
         variantSlug?: string,
         basePath?: string,
-        specFieldsMapping?: Record<string, string>,
+        specFieldsMapping?: Record<string, { label: string; showInKeySpecs?: boolean; icon?: string }>,
+        optionGroupsMapping?: Record<string, string>,
     ): Observable<Products.Model.Product> {
         return from(
-            this.sdk.admin.product
-                .list({ handle, limit: 1, fields: '*variants,*variants.options,*variants.options.option' })
-                .catch((error) => {
-                    throw error;
-                }),
+            this.sdk.admin.product.list({ handle, limit: 1, fields: this.productRetrieveFields }).catch((error) => {
+                throw error;
+            }),
         ).pipe(
             switchMap((response) => {
                 const product = response.products[0];
@@ -150,7 +168,14 @@ export class ProductsService extends Products.Service {
                     }
                 }
 
-                return this.getVariant(product.id, variant.id, product.variants, basePath, specFieldsMapping);
+                return this.getVariant(
+                    product.id,
+                    variant.id,
+                    product.variants,
+                    basePath,
+                    specFieldsMapping,
+                    optionGroupsMapping,
+                );
             }),
             catchError((error) => {
                 return handleHttpError(error);
@@ -163,7 +188,8 @@ export class ProductsService extends Products.Service {
         variantId: string,
         allVariants?: HttpTypes.AdminProductVariant[],
         basePath?: string,
-        specFieldsMapping?: Record<string, string>,
+        specFieldsMapping?: Record<string, { label: string; showInKeySpecs?: boolean; icon?: string }>,
+        optionGroupsMapping?: Record<string, string>,
     ): Observable<Products.Model.Product> {
         if (!basePath) {
             throw new Error('basePath is required - must be provided by CMS configuration');
@@ -171,8 +197,6 @@ export class ProductsService extends Products.Service {
         if (!specFieldsMapping) {
             throw new Error('specFieldsMapping is required - must be provided by CMS configuration');
         }
-
-        const specFields = Object.keys(specFieldsMapping);
 
         return from(
             this.sdk.admin.product
@@ -190,8 +214,8 @@ export class ProductsService extends Products.Service {
                     this.defaultCurrency,
                     allVariants,
                     basePath,
-                    specFields,
                     specFieldsMapping,
+                    optionGroupsMapping,
                 );
             }),
             catchError((error) => {

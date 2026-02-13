@@ -1,3 +1,5 @@
+import type { SpecFieldConfig } from '../cms/models/blocks/product-details.model';
+
 import { ProductReferenceType, ProductType } from './products.model';
 import { PaginationQuery } from '@/utils/models/pagination';
 
@@ -14,7 +16,8 @@ export class GetProductParams {
     variantId?: string;
     locale?: string;
     basePath?: string;
-    specFieldsMapping?: Record<string, string>;
+    specFieldsMapping?: Record<string, SpecFieldConfig>;
+    optionGroupsMapping?: Record<string, string>;
 }
 
 export class GetRelatedProductListParams {
