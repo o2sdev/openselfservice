@@ -1,4 +1,5 @@
 import {
+    BadRequestException,
     ForbiddenException,
     InternalServerErrorException,
     NotFoundException,
@@ -32,5 +33,12 @@ describe('handleHttpError', () => {
         await expect(firstValueFrom(handleHttpError({ status: 500, message: 'Server error' }))).rejects.toThrow(
             'Server error',
         );
+    });
+
+    it('should pass through HttpException (e.g. BadRequestException) without wrapping', async () => {
+        const error = new BadRequestException('At least one address is required');
+        const obs = handleHttpError(error);
+
+        await expect(firstValueFrom(obs)).rejects.toThrow(BadRequestException);
     });
 });

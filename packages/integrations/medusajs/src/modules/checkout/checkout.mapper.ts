@@ -96,10 +96,9 @@ function mapShippingOption(
     if (!currencyCode) {
         throw new BadRequestException(`Shipping option ${option.id} has no currency information`);
     }
+    const currency = currencyCode as Models.Price.Currency;
 
     const amountWithoutTax = calculatedPrice?.calculated_amount_without_tax ?? amount;
-
-    const currency = currencyCode as Models.Price.Currency;
 
     return {
         id: option.id,

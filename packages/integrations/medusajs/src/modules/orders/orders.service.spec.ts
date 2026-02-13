@@ -31,8 +31,8 @@ const minimalOrder = {
 
 describe('OrdersService', () => {
     let service: OrdersService;
-    let mockSdk: { admin: { order: { retrieve: ReturnType<typeof vi.fn>; list: ReturnType<typeof vi.fn> } } };
-    let mockMedusaJsService: { getSdk: ReturnType<typeof vi.fn> };
+    let mockSdk: { store: { order: { retrieve: ReturnType<typeof vi.fn>; list: ReturnType<typeof vi.fn> } } };
+    let mockMedusaJsService: { getSdk: ReturnType<typeof vi.fn>; getStoreApiHeaders: ReturnType<typeof vi.fn> };
     let mockAuthService: { getCustomerId: ReturnType<typeof vi.fn> };
     let mockConfig: { get: ReturnType<typeof vi.fn> };
     let mockLogger: { debug: ReturnType<typeof vi.fn> };
@@ -40,14 +40,17 @@ describe('OrdersService', () => {
     beforeEach(() => {
         vi.restoreAllMocks();
         mockSdk = {
-            admin: {
+            store: {
                 order: {
                     retrieve: vi.fn(),
                     list: vi.fn(),
                 },
             },
         };
-        mockMedusaJsService = { getSdk: vi.fn(() => mockSdk) };
+        mockMedusaJsService = {
+            getSdk: vi.fn(() => mockSdk),
+            getStoreApiHeaders: vi.fn(() => ({})),
+        };
         mockAuthService = { getCustomerId: vi.fn() };
         mockConfig = {
             get: vi.fn((key: string) => (key === 'DEFAULT_CURRENCY' ? DEFAULT_CURRENCY : '')),
@@ -84,14 +87,15 @@ describe('OrdersService', () => {
             expect(mockLogger.debug).toHaveBeenCalledWith('Authorization token not found');
         });
 
-        it('should call sdk.admin.order.retrieve and return mapped order', async () => {
-            mockSdk.admin.order.retrieve.mockResolvedValue({ order: minimalOrder });
+        it('should call sdk.store.order.retrieve and return mapped order', async () => {
+            mockSdk.store.order.retrieve.mockResolvedValue({ order: minimalOrder });
 
             const result = await firstValueFrom(service.getOrder({ id: 'order_1' }, 'Bearer token'));
 
-            expect(mockSdk.admin.order.retrieve).toHaveBeenCalledWith(
+            expect(mockSdk.store.order.retrieve).toHaveBeenCalledWith(
                 'order_1',
-                expect.objectContaining({ fields: 'items.product.*' }),
+                expect.objectContaining({ fields: expect.any(String) }),
+                expect.any(Object),
             );
             expect(result).toBeDefined();
             expect(result?.id).toBe('order_1');
@@ -100,7 +104,7 @@ describe('OrdersService', () => {
         });
 
         it('should throw NotFoundException when SDK returns 404', async () => {
-            mockSdk.admin.order.retrieve.mockRejectedValue({ status: 404 });
+            mockSdk.store.order.retrieve.mockRejectedValue({ status: 404 });
 
             await expect(firstValueFrom(service.getOrder({ id: 'missing' }, 'Bearer token'))).rejects.toThrow(
                 NotFoundException,
@@ -114,32 +118,80 @@ describe('OrdersService', () => {
             expect(mockLogger.debug).toHaveBeenCalledWith('Authorization token not found');
         });
 
-        it('should throw UnauthorizedException when getCustomerId returns undefined', () => {
-            mockAuthService.getCustomerId.mockReturnValue(undefined);
-            expect(() => service.getOrderList({ limit: 10, offset: 0 }, 'Bearer token')).toThrow(UnauthorizedException);
-            expect(mockLogger.debug).toHaveBeenCalledWith('Customer ID not found in authorization token');
-        });
-
-        it('should call sdk.admin.order.list with customerId and return mapped orders', async () => {
-            mockAuthService.getCustomerId.mockReturnValue('cust_1');
-            mockSdk.admin.order.list.mockResolvedValue({
+        it('should call sdk.store.order.list with params and return mapped orders', async () => {
+            mockSdk.store.order.list.mockResolvedValue({
                 orders: [minimalOrder],
                 count: 1,
             });
 
             const result = await firstValueFrom(service.getOrderList({ limit: 10, offset: 0 }, 'Bearer token'));
 
-            expect(mockSdk.admin.order.list).toHaveBeenCalledWith(
+            expect(mockSdk.store.order.list).toHaveBeenCalledWith(
                 expect.objectContaining({
                     limit: 10,
                     offset: 0,
-                    customer_id: 'cust_1',
                     fields: expect.any(String),
                 }),
+                expect.any(Object),
             );
             expect(result.data).toHaveLength(1);
             expect(result.total).toBe(1);
             expect(result.data[0]?.id).toBe('order_1');
+        });
+
+        it('should pass status filter to getMedusaStatus when query.status is provided', async () => {
+            mockSdk.store.order.list.mockResolvedValue({ orders: [], count: 0 });
+
+            await firstValueFrom(
+                service.getOrderList(
+                    {
+                        limit: 10,
+                        offset: 0,
+                        status: 'PENDING',
+                    } as import('@o2s/framework/modules').Orders.Request.GetOrderListQuery,
+                    'Bearer token',
+                ),
+            );
+
+            expect(mockSdk.store.order.list).toHaveBeenCalledWith(
+                expect.objectContaining({ status: 'pending' }),
+                expect.any(Object),
+            );
+        });
+
+        it('should map COMPLETED and CANCELLED status correctly', async () => {
+            mockSdk.store.order.list.mockResolvedValue({ orders: [], count: 0 });
+
+            await firstValueFrom(
+                service.getOrderList(
+                    {
+                        limit: 10,
+                        offset: 0,
+                        status: 'COMPLETED',
+                    } as import('@o2s/framework/modules').Orders.Request.GetOrderListQuery,
+                    'Bearer token',
+                ),
+            );
+            expect(mockSdk.store.order.list).toHaveBeenCalledWith(
+                expect.objectContaining({ status: 'completed' }),
+                expect.any(Object),
+            );
+
+            mockSdk.store.order.list.mockClear();
+            await firstValueFrom(
+                service.getOrderList(
+                    {
+                        limit: 10,
+                        offset: 0,
+                        status: 'CANCELLED',
+                    } as import('@o2s/framework/modules').Orders.Request.GetOrderListQuery,
+                    'Bearer token',
+                ),
+            );
+            expect(mockSdk.store.order.list).toHaveBeenCalledWith(
+                expect.objectContaining({ status: 'canceled' }),
+                expect.any(Object),
+            );
         });
     });
 });
