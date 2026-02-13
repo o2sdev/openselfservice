@@ -13,7 +13,7 @@ export class PaymentsController {
 
     @Get('providers')
     getProviders(@Query() params: Request.GetProvidersParams, @Headers() headers: AppHeaders) {
-        return this.paymentService.getProviders(params, headers.authorization);
+        return this.paymentService.getProviders({ ...params, locale: headers['x-locale'] }, headers.authorization);
     }
 
     @Post('sessions')

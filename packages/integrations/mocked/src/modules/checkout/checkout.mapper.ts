@@ -2,9 +2,12 @@ import { BadRequestException } from '@nestjs/common';
 
 import { Carts, Checkout, Orders, Payments } from '@o2s/framework/modules';
 
+import { getPaymentMethodDisplay } from '../payments/mocks/providers.mock';
+
 export function mapCheckoutSummary(
     cart: Carts.Model.Cart,
     _paymentSession?: Payments.Model.PaymentSession,
+    locale?: string,
 ): Checkout.Model.CheckoutSummary {
     if (!cart.shippingAddress) {
         throw new BadRequestException('Shipping address is required for checkout summary');
@@ -42,12 +45,26 @@ export function mapCheckoutSummary(
         throw new BadRequestException('Cart total is required for checkout summary');
     }
 
+    const shippingMethod =
+        locale && cart.shippingMethod
+            ? (getShippingOptionById(cart.shippingMethod.id, locale) ?? cart.shippingMethod)
+            : cart.shippingMethod;
+
+    const paymentMethod =
+        locale && cart.paymentMethod
+            ? (getPaymentMethodDisplay(cart.paymentMethod.id, locale) ?? cart.paymentMethod)
+            : cart.paymentMethod;
+
     return {
-        cart,
+        cart: {
+            ...cart,
+            shippingMethod,
+            paymentMethod,
+        },
         shippingAddress: cart.shippingAddress,
         billingAddress: cart.billingAddress,
-        shippingMethod: cart.shippingMethod,
-        paymentMethod: cart.paymentMethod,
+        shippingMethod,
+        paymentMethod,
         totals: {
             subtotal: cart.subtotal,
             shipping: cart.shippingTotal,
@@ -70,33 +87,105 @@ export function mapPlaceOrderResponse(
     };
 }
 
-const MOCK_SHIPPING_OPTIONS: Orders.Model.ShippingMethod[] = [
-    {
-        id: 'SHIP-001',
-        name: 'Standard Shipping',
-        description: '3-5 business days',
-        total: { value: 1000, currency: 'USD' },
-        subtotal: { value: 1000, currency: 'USD' },
-    },
-    {
-        id: 'SHIP-002',
-        name: 'Express Shipping',
-        description: '1-2 business days',
-        total: { value: 2000, currency: 'USD' },
-        subtotal: { value: 2000, currency: 'USD' },
-    },
-    {
-        id: 'SHIP-003',
-        name: 'Next Day Delivery',
-        description: 'Next business day',
-        total: { value: 3500, currency: 'USD' },
-        subtotal: { value: 3500, currency: 'USD' },
-    },
-];
+type Locale = 'en' | 'de' | 'pl';
 
-export function mapShippingOptions(): Checkout.Model.ShippingOptions {
+const SHIPPING_OPTIONS_BY_LOCALE: Record<
+    Locale,
+    Array<{
+        id: string;
+        name: string;
+        description: string;
+        total: { value: number; currency: string };
+        subtotal: { value: number; currency: string };
+    }>
+> = {
+    en: [
+        {
+            id: 'SHIP-001',
+            name: 'Standard Shipping',
+            description: '3-5 business days',
+            total: { value: 1000, currency: 'USD' },
+            subtotal: { value: 1000, currency: 'USD' },
+        },
+        {
+            id: 'SHIP-002',
+            name: 'Express Shipping',
+            description: '1-2 business days',
+            total: { value: 2000, currency: 'USD' },
+            subtotal: { value: 2000, currency: 'USD' },
+        },
+        {
+            id: 'SHIP-003',
+            name: 'Next Day Delivery',
+            description: 'Next business day',
+            total: { value: 3500, currency: 'USD' },
+            subtotal: { value: 3500, currency: 'USD' },
+        },
+    ],
+    de: [
+        {
+            id: 'SHIP-001',
+            name: 'Standardversand',
+            description: '3-5 Werktage',
+            total: { value: 1000, currency: 'USD' },
+            subtotal: { value: 1000, currency: 'USD' },
+        },
+        {
+            id: 'SHIP-002',
+            name: 'Expressversand',
+            description: '1-2 Werktage',
+            total: { value: 2000, currency: 'USD' },
+            subtotal: { value: 2000, currency: 'USD' },
+        },
+        {
+            id: 'SHIP-003',
+            name: 'Lieferung am nächsten Tag',
+            description: 'Nächster Werktag',
+            total: { value: 3500, currency: 'USD' },
+            subtotal: { value: 3500, currency: 'USD' },
+        },
+    ],
+    pl: [
+        {
+            id: 'SHIP-001',
+            name: 'Wysyłka standardowa',
+            description: '3-5 dni roboczych',
+            total: { value: 1000, currency: 'USD' },
+            subtotal: { value: 1000, currency: 'USD' },
+        },
+        {
+            id: 'SHIP-002',
+            name: 'Wysyłka ekspresowa',
+            description: '1-2 dni robocze',
+            total: { value: 2000, currency: 'USD' },
+            subtotal: { value: 2000, currency: 'USD' },
+        },
+        {
+            id: 'SHIP-003',
+            name: 'Dostawa następnego dnia',
+            description: 'Następny dzień roboczy',
+            total: { value: 3500, currency: 'USD' },
+            subtotal: { value: 3500, currency: 'USD' },
+        },
+    ],
+};
+
+const normalizeLocale = (locale?: string): Locale => {
+    const lower = (locale ?? 'en').toLowerCase();
+    if (lower.startsWith('de')) return 'de';
+    if (lower.startsWith('pl')) return 'pl';
+    return 'en';
+};
+
+export function mapShippingOptions(locale?: string): Checkout.Model.ShippingOptions {
+    const options = SHIPPING_OPTIONS_BY_LOCALE[normalizeLocale(locale)] ?? SHIPPING_OPTIONS_BY_LOCALE.en;
     return {
-        data: MOCK_SHIPPING_OPTIONS,
-        total: MOCK_SHIPPING_OPTIONS.length,
+        data: options as Orders.Model.ShippingMethod[],
+        total: options.length,
     };
+}
+
+export function getShippingOptionById(id: string, locale?: string): Orders.Model.ShippingMethod | undefined {
+    const options = SHIPPING_OPTIONS_BY_LOCALE[normalizeLocale(locale)] ?? SHIPPING_OPTIONS_BY_LOCALE.en;
+    return options.find((opt) => opt.id === id) as Orders.Model.ShippingMethod | undefined;
 }

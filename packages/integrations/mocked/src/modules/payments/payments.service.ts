@@ -12,10 +12,10 @@ export class PaymentsService implements Payments.Service {
     private sessions: Payments.Model.PaymentSession[] = [];
 
     getProviders(
-        _params: Payments.Request.GetProvidersParams,
+        params: Payments.Request.GetProvidersParams,
         _authorization: string | undefined,
     ): Observable<Payments.Model.PaymentProviders> {
-        const providers = getMockProviders();
+        const providers = getMockProviders(params.locale);
         return of(mapPaymentProviders(providers)).pipe(responseDelay());
     }
 
@@ -23,7 +23,7 @@ export class PaymentsService implements Payments.Service {
         data: Payments.Request.CreateSessionBody,
         _authorization: string | undefined,
     ): Observable<Payments.Model.PaymentSession> {
-        const provider = getMockProviderById(data.providerId);
+        const provider = getMockProviderById(data.providerId, 'en');
 
         if (!provider) {
             return throwError(() => new NotFoundException(`Payment provider with ID ${data.providerId} not found`));

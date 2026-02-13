@@ -80,7 +80,7 @@ export const Config: Partial<ApiConfig['integrations']> = {
     carts: {
         name: 'mocked',
         service: CartsService,
-        imports: [Auth.Module],
+        imports: [Auth.Module, Customers.Module],
     },
     customers: {
         name: 'mocked',

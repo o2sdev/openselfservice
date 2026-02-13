@@ -42,7 +42,7 @@ export abstract class CheckoutService {
         authorization?: string,
     ): Observable<Checkout.Model.PlaceOrderResponse>;
 
-    // Get available shipping options for a cart
+    // Get available shipping options for a cart (params.locale for localized names/descriptions)
     abstract getShippingOptions(
         params: Checkout.Request.GetShippingOptionsParams,
         authorization?: string,

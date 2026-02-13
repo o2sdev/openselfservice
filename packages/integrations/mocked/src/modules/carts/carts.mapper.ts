@@ -1,91 +1,7 @@
 import { Carts, Models, Products } from '@o2s/framework/modules';
 
-// Product data for generating cart items
-const PRODUCT_DATA = [
-    {
-        id: 'PRD-004',
-        name: 'Rotary Hammer',
-        price: 100,
-        currency: 'USD',
-        type: 'PHYSICAL',
-        category: 'TOOLS',
-        sku: 'RH-12345-S-BL',
-    },
-    {
-        id: 'PRD-005',
-        name: 'Angle Grinder',
-        price: 79.99,
-        currency: 'USD',
-        type: 'PHYSICAL',
-        category: 'TOOLS',
-        sku: 'AG-12345-S-BL',
-    },
-    {
-        id: 'PRD-006',
-        name: 'Cordless Drill',
-        price: 129.99,
-        currency: 'USD',
-        type: 'PHYSICAL',
-        category: 'TOOLS',
-        sku: 'CD-12345-S-BL',
-    },
-    {
-        id: 'PRD-007',
-        name: 'Laser Measure',
-        price: 149.99,
-        currency: 'USD',
-        type: 'PHYSICAL',
-        category: 'TOOLS',
-        sku: 'LM-12345-S-BL',
-    },
-    {
-        id: 'PRD-008',
-        name: 'Safety Glasses',
-        price: 19.99,
-        currency: 'USD',
-        type: 'PHYSICAL',
-        category: 'SAFETY',
-        sku: 'SG-12345-S-BL',
-    },
-];
-
-// Shipping methods
-const SHIPPING_METHODS = [
-    {
-        id: 'SHIP-001',
-        name: 'Standard Shipping',
-        description: '3-5 business days',
-        price: 10,
-    },
-    {
-        id: 'SHIP-002',
-        name: 'Express Shipping',
-        description: '1-2 business days',
-        price: 20,
-    },
-];
-
-// Payment methods
-const PAYMENT_METHODS: Carts.Model.PaymentMethod[] = [
-    {
-        id: 'PAY-001',
-        name: 'Credit Card',
-        description: 'Visa, Mastercard, American Express',
-        type: 'CREDIT_CARD',
-    },
-    {
-        id: 'PAY-002',
-        name: 'PayPal',
-        description: 'Pay with your PayPal account',
-        type: 'PAYPAL',
-    },
-    {
-        id: 'PAY-003',
-        name: 'Bank Transfer',
-        description: 'Direct bank transfer',
-        type: 'BANK_TRANSFER',
-    },
-];
+import { getMockProviderById, getPaymentMethodDisplay } from '../payments/mocks/providers.mock';
+import { mapProduct } from '../products/products.mapper';
 
 // Read payment method stored in metadata by setPayment
 const mapPaymentMethodFromMetadata = (metadata: Record<string, unknown>): Carts.Model.PaymentMethod | undefined => {
@@ -122,195 +38,55 @@ const PROMOTIONS: Carts.Model.Promotion[] = [
     },
 ];
 
-// Helper functions
-const getRandomInt = (min: number, max: number): number => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-
 const formatDate = (date: Date): string => {
     return date.toISOString();
 };
 
-// Function to generate a cart item
-const generateCartItem = (itemIndex: number): Carts.Model.CartItem => {
-    const productIndex = getRandomInt(0, PRODUCT_DATA.length - 1);
-    const product = PRODUCT_DATA[productIndex]!;
-    const quantity = getRandomInt(1, 3);
-    const price = product.price;
+// Build cart item from product (shared by addCartItem and generateCartItem)
+const buildCartItemFromProduct = (
+    product: Products.Model.Product,
+    quantity: number,
+    itemIndex: number,
+    currency: Models.Price.Currency,
+    metadata: Record<string, unknown> = {},
+): Carts.Model.CartItem => {
+    const price = product.price?.value ?? 0;
     const subtotal = price * quantity;
-    const discountTotal = 0;
-    const total = subtotal - discountTotal;
 
     return {
         id: `ITEM-${itemIndex.toString().padStart(3, '0')}`,
         productId: product.id,
         variantId: undefined,
         quantity,
-        price: {
-            value: price,
-            currency: product.currency as Carts.Model.Cart['currency'],
-        },
-        subtotal: {
-            value: subtotal,
-            currency: product.currency as Carts.Model.Cart['currency'],
-        },
-        discountTotal: {
-            value: discountTotal,
-            currency: product.currency as Carts.Model.Cart['currency'],
-        },
-        total: {
-            value: total,
-            currency: product.currency as Carts.Model.Cart['currency'],
-        },
+        price: { value: price, currency },
+        subtotal: { value: subtotal, currency },
+        discountTotal: { value: 0, currency },
+        total: { value: subtotal, currency },
         unit: 'PCS',
-        currency: product.currency as Carts.Model.Cart['currency'],
+        currency,
         product: {
             id: product.id,
-            sku: product.sku,
+            sku: product.sku ?? '',
             name: product.name,
-            description: `Description for ${product.name}`,
-            shortDescription: `Short description for ${product.name}`,
-            image: {
-                url: 'https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg',
-                width: 640,
-                height: 656,
-                alt: product.name,
-            },
-            price: {
-                value: product.price,
-                currency: product.currency as Carts.Model.Cart['currency'],
-            },
-            link: `https://example.com/products/${product.id.toLowerCase()}`,
-            type: product.type as Products.Model.Product['type'],
-            category: product.category as Products.Model.Product['category'],
-            tags: [
-                {
-                    label: 'New',
-                    variant: 'secondary',
-                },
-            ],
+            description: product.description,
+            shortDescription: product.shortDescription,
+            image: product.image,
+            price: product.price ?? { value: price, currency },
+            link: product.link ?? '',
+            type: product.type,
+            category: product.category ?? '',
+            tags: product.tags ?? [],
         },
-        metadata: {},
+        metadata,
     };
 };
 
-// Function to generate a cart
-const generateCart = (
-    cartId: string,
-    customerId: string | undefined,
-    type: Carts.Model.CartType,
-    name?: string,
-): Carts.Model.Cart => {
-    const now = new Date();
-    const createdAt = new Date(now.getTime() - getRandomInt(1, 7) * 24 * 60 * 60 * 1000);
-    const expiresAt = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000); // 30 days from now
-
-    const numItems = getRandomInt(1, 4);
-    const items: Carts.Model.CartItem[] = [];
-
-    let subtotal = 0;
-    for (let i = 0; i < numItems; i++) {
-        const item = generateCartItem(i);
-        items.push(item);
-        subtotal += item.total?.value || 0;
-    }
-
-    const currency = items[0]?.currency || 'USD';
-    const shippingMethod = SHIPPING_METHODS[0]!;
-    const shippingTotal = shippingMethod.price;
-    const discountTotal = type === 'ACTIVE' ? Math.round(subtotal * 0.1 * 100) / 100 : 0;
-    const taxTotal = Math.round((subtotal - discountTotal) * 0.23 * 100) / 100; // 23% tax
-    const total = subtotal + shippingTotal - discountTotal + taxTotal;
-
-    return {
-        id: cartId,
-        customerId,
-        name: name || (type === 'SAVED' ? 'Saved Cart' : undefined),
-        type,
-        createdAt: formatDate(createdAt),
-        updatedAt: formatDate(now),
-        expiresAt: formatDate(expiresAt),
-        regionId: 'reg_01JS1JBXAPK2BTV504ASWVFC4S', // Mock region ID
-        currency,
-        items: {
-            data: items,
-            total: items.length,
-        },
-        subtotal: {
-            value: subtotal,
-            currency,
-        },
-        discountTotal: {
-            value: discountTotal,
-            currency,
-        },
-        taxTotal: {
-            value: taxTotal,
-            currency,
-        },
-        shippingTotal: {
-            value: shippingTotal,
-            currency,
-        },
-        total: {
-            value: total,
-            currency,
-        },
-        shippingAddress: {
-            country: 'US',
-            streetName: 'Main St',
-            streetNumber: '123',
-            city: 'Anytown',
-            region: 'CA',
-            postalCode: '12345',
-            phone: '555-123-4567',
-            email: 'john.doe@example.com',
-        },
-        billingAddress: {
-            country: 'US',
-            streetName: 'Main St',
-            streetNumber: '123',
-            city: 'Anytown',
-            region: 'CA',
-            postalCode: '12345',
-            phone: '555-123-4567',
-            email: 'john.doe@example.com',
-        },
-        shippingMethod: {
-            id: shippingMethod.id,
-            name: shippingMethod.name,
-            description: shippingMethod.description,
-            total: {
-                value: shippingMethod.price,
-                currency,
-            },
-        },
-        paymentMethod: PAYMENT_METHODS[0],
-        promotions: type === 'ACTIVE' ? [PROMOTIONS[0]!] : [],
-        metadata: {},
-        notes: undefined,
-    };
-};
-
-// Generate mocked carts
-const MOCKED_CARTS: Carts.Model.Cart[] = [
-    // Active cart for authenticated customer
-    generateCart('CART-001', 'cus_01KH3J08TY40PYGVEG3A04CP8R', 'ACTIVE'),
-    // Saved carts for authenticated customer
-    generateCart('CART-002', 'cus_01KH3J08TY40PYGVEG3A04CP8R', 'SAVED', 'Wishlist'),
-    generateCart('CART-003', 'cus_01KH3J08TY40PYGVEG3A04CP8R', 'SAVED', 'Work Equipment'),
-    // Abandoned cart
-    generateCart('CART-004', 'cus_01KH3J08TY40PYGVEG3A04CP8R', 'ABANDONED'),
-    // Guest cart (no customer ID)
-    generateCart('CART-005', undefined, 'ACTIVE'),
-];
-
-// In-memory store for carts (for mutations)
-let cartsStore = [...MOCKED_CARTS];
+// In-memory store for carts (for mutations) — starts empty, simulating real e-commerce
+let cartsStore: Carts.Model.Cart[] = [];
 
 // Reset store (useful for testing)
 export const resetCartsStore = (): void => {
-    cartsStore = [...MOCKED_CARTS];
+    cartsStore = [];
 };
 
 // Get cart by ID
@@ -353,7 +129,7 @@ export const mapCarts = (query: Carts.Request.GetCartListQuery, customerId?: str
 
 // Create a new cart
 export const createCart = (data: Carts.Request.CreateCartBody): Carts.Model.Cart => {
-    const newId = `CART-${(cartsStore.length + 1).toString().padStart(3, '0')}`;
+    const newId = `CART-${crypto.randomUUID()}`;
     const now = new Date();
     const expiresAt = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
 
@@ -384,10 +160,16 @@ export const createCart = (data: Carts.Request.CreateCartBody): Carts.Model.Cart
     return newCart;
 };
 
+// Extended update type for internal use (shippingMethod/shippingTotal from resolved option)
+type UpdateCartData = Carts.Request.UpdateCartBody & {
+    shippingMethod?: Carts.Model.Cart['shippingMethod'];
+    shippingTotal?: Models.Price.Price;
+};
+
 // Update a cart
 export const updateCart = (
     params: Carts.Request.UpdateCartParams,
-    data: Carts.Request.UpdateCartBody,
+    data: UpdateCartData,
 ): Carts.Model.Cart | undefined => {
     const cartIndex = cartsStore.findIndex((cart) => cart.id === params.id);
     if (cartIndex === -1) return undefined;
@@ -404,9 +186,17 @@ export const updateCart = (
     const shippingAddressFromMetadata = mergedMetadata.shippingAddress as Models.Address.Address | undefined;
     const billingAddressFromMetadata = mergedMetadata.billingAddress as Models.Address.Address | undefined;
 
-    // Resolve payment method: from paymentMethodId, from metadata paymentProviderId, or keep existing
+    // Validate metadata.paymentMethod against known providers
+    if (mergedMetadata.paymentMethod && typeof mergedMetadata.paymentMethod === 'object') {
+        const metaPm = mergedMetadata.paymentMethod as Record<string, unknown>;
+        if (metaPm.id && !getMockProviderById(metaPm.id as string)) {
+            delete mergedMetadata.paymentMethod;
+        }
+    }
+
+    // Resolve payment method: from paymentMethodId (validated against providers), from metadata, or keep existing
     const paymentMethod = data.paymentMethodId
-        ? PAYMENT_METHODS.find((pm) => pm.id === data.paymentMethodId)
+        ? (getPaymentMethodDisplay(data.paymentMethodId) as Carts.Model.PaymentMethod | undefined)
         : (mapPaymentMethodFromMetadata(mergedMetadata) ?? cart.paymentMethod);
 
     const updatedCart: Carts.Model.Cart = {
@@ -419,6 +209,8 @@ export const updateCart = (
         metadata: mergedMetadata,
         shippingAddress: shippingAddressFromMetadata ?? cart.shippingAddress,
         billingAddress: billingAddressFromMetadata ?? cart.billingAddress,
+        shippingMethod: data.shippingMethod ?? cart.shippingMethod,
+        shippingTotal: data.shippingTotal ?? cart.shippingTotal,
         paymentMethod: paymentMethod ?? cart.paymentMethod,
         updatedAt: formatDate(new Date()),
     };
@@ -443,41 +235,52 @@ export const findActiveCartByCustomerId = (customerId: string | undefined): Cart
     return cartsStore.find((cart) => cart.customerId === customerId && cart.type === 'ACTIVE');
 };
 
+const matchesProductAndVariant = (item: Carts.Model.CartItem, productId: string, variantId?: string): boolean => {
+    if (item.productId !== productId) return false;
+    const itemVariant = item.variantId ?? undefined;
+    const reqVariant = variantId ?? undefined;
+    return itemVariant === reqVariant;
+};
+
 export const addCartItem = (cartId: string, data: Carts.Request.AddCartItemBody): Carts.Model.Cart | undefined => {
     const cartIndex = cartsStore.findIndex((cart) => cart.id === cartId);
     if (cartIndex === -1) return undefined;
 
+    let product: Products.Model.Product;
+    try {
+        product = mapProduct(data.productId);
+    } catch {
+        return undefined; // Product not found
+    }
+
     const cart = cartsStore[cartIndex]!;
-    const product = PRODUCT_DATA.find((p) => p.id === data.productId);
 
-    if (!product) return undefined;
+    // Find existing item with same product and variant — merge quantity instead of adding duplicate
+    const existingIndex = cart.items.data.findIndex((item) =>
+        matchesProductAndVariant(item, data.productId, data.variantId),
+    );
 
-    const newItem: Carts.Model.CartItem = {
-        id: `ITEM-${cart.items.data.length.toString().padStart(3, '0')}`,
-        productId: data.productId,
-        variantId: data.variantId,
-        quantity: data.quantity,
-        price: { value: product.price, currency: cart.currency },
-        subtotal: { value: product.price * data.quantity, currency: cart.currency },
-        discountTotal: { value: 0, currency: cart.currency },
-        total: { value: product.price * data.quantity, currency: cart.currency },
-        unit: 'PCS',
-        currency: cart.currency,
-        product: {
-            id: product.id,
-            sku: product.sku,
-            name: product.name,
-            description: `Description for ${product.name}`,
-            price: { value: product.price, currency: cart.currency },
-            link: `https://example.com/products/${product.id.toLowerCase()}`,
-            type: product.type as Products.Model.Product['type'],
-            category: product.category,
-            tags: [],
-        },
-        metadata: data.metadata || {},
-    };
+    if (existingIndex !== -1) {
+        const item = cart.items.data[existingIndex]!;
+        const newQuantity = item.quantity + data.quantity;
+        item.quantity = newQuantity;
+        item.subtotal = { value: item.price.value * newQuantity, currency: cart.currency };
+        item.total = { value: item.price.value * newQuantity, currency: cart.currency };
+        if (data.metadata && Object.keys(data.metadata).length > 0) {
+            item.metadata = { ...(item.metadata || {}), ...data.metadata };
+        }
+    } else {
+        const newItem = buildCartItemFromProduct(
+            product,
+            data.quantity,
+            cart.items.data.length,
+            cart.currency,
+            data.metadata || {},
+        );
+        newItem.variantId = data.variantId;
+        cart.items.data.push(newItem);
+    }
 
-    cart.items.data.push(newItem);
     cart.items.total = cart.items.data.length;
     recalculateCartTotals(cart);
     cart.updatedAt = formatDate(new Date());
@@ -499,9 +302,14 @@ export const updateCartItem = (
 
     const item = cart.items.data[itemIndex]!;
     if (data.quantity !== undefined) {
-        item.quantity = data.quantity;
-        item.subtotal = { value: item.price.value * data.quantity, currency: cart.currency };
-        item.total = { value: item.price.value * data.quantity, currency: cart.currency };
+        if (data.quantity <= 0) {
+            cart.items.data.splice(itemIndex, 1);
+            cart.items.total = cart.items.data.length;
+        } else {
+            item.quantity = data.quantity;
+            item.subtotal = { value: item.price.value * data.quantity, currency: cart.currency };
+            item.total = { value: item.price.value * data.quantity, currency: cart.currency };
+        }
     }
     if (data.metadata !== undefined) {
         item.metadata = data.metadata;

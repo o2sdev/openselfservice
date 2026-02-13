@@ -25,7 +25,7 @@ export function createCustomerAddress(
     customerId: string,
 ): Customers.Model.CustomerAddress {
     const now = new Date().toISOString();
-    const id = `addr-${Date.now()}`;
+    const id = `addr-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
 
     return {
         id,

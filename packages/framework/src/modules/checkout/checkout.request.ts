@@ -32,10 +32,12 @@ export class SetPaymentBody {
 
 export class GetShippingOptionsParams {
     cartId!: string;
+    locale?: string; // From x-locale header
 }
 
 export class GetCheckoutSummaryParams {
     cartId!: string;
+    locale?: string; // From x-locale header
 }
 
 export class PlaceOrderParams {

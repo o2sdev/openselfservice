@@ -1,5 +1,6 @@
 export class GetProvidersParams {
     regionId!: string;
+    locale?: string; // From x-locale header
 }
 
 export class CreateSessionBody {

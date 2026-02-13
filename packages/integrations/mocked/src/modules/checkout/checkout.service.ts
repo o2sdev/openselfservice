@@ -133,10 +133,10 @@ export class CheckoutService implements Checkout.Service {
                 if (paymentSessionId) {
                     return this.paymentsService
                         .getSession({ id: paymentSessionId }, authorization)
-                        .pipe(map((session) => mapCheckoutSummary(cart, session)));
+                        .pipe(map((session) => mapCheckoutSummary(cart, session, params.locale)));
                 }
 
-                return of(mapCheckoutSummary(cart));
+                return of(mapCheckoutSummary(cart, undefined, params.locale));
             }),
             responseDelay(),
         );
@@ -184,10 +184,10 @@ export class CheckoutService implements Checkout.Service {
     }
 
     getShippingOptions(
-        _params: Checkout.Request.GetShippingOptionsParams,
+        params: Checkout.Request.GetShippingOptionsParams,
         _authorization?: string,
     ): Observable<Checkout.Model.ShippingOptions> {
-        return of(mapShippingOptions()).pipe(responseDelay());
+        return of(mapShippingOptions(params.locale)).pipe(responseDelay());
     }
 
     completeCheckout(

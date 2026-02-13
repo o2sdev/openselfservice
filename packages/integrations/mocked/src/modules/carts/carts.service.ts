@@ -1,7 +1,9 @@
 import { BadRequestException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
-import { Observable, of } from 'rxjs';
+import { Observable, forkJoin, of, switchMap, throwError } from 'rxjs';
 
-import { Auth, Carts } from '@o2s/framework/modules';
+import { Auth, Carts, Customers } from '@o2s/framework/modules';
+
+import { getShippingOptionById } from '../checkout/checkout.mapper';
 
 import {
     addCartItem,
@@ -20,7 +22,10 @@ import { responseDelay } from '@/utils/delay';
 
 @Injectable()
 export class CartsService implements Carts.Service {
-    constructor(private readonly authService: Auth.Service) {}
+    constructor(
+        private readonly authService: Auth.Service,
+        private readonly customersService: Customers.Service,
+    ) {}
 
     getCart(
         params: Carts.Request.GetCartParams,
@@ -28,15 +33,13 @@ export class CartsService implements Carts.Service {
     ): Observable<Carts.Model.Cart | undefined> {
         const cart = mapCart(params);
 
-        // For guest carts (no customerId), allow access without auth
-        if (cart && !cart.customerId) {
-            return of(cart).pipe(responseDelay());
-        }
-
-        // For customer carts, verify authorization
-        if (authorization) {
+        // Customer carts require authorization
+        if (cart?.customerId) {
+            if (!authorization) {
+                throw new UnauthorizedException('Authentication required to access this cart');
+            }
             const customerId = this.authService.getCustomerId(authorization);
-            if (cart && cart.customerId && cart.customerId !== customerId) {
+            if (cart.customerId !== customerId) {
                 throw new UnauthorizedException('Unauthorized to access this cart');
             }
         }
@@ -48,12 +51,12 @@ export class CartsService implements Carts.Service {
         query: Carts.Request.GetCartListQuery,
         authorization: string | undefined,
     ): Observable<Carts.Model.Carts> {
-        let customerId: string | undefined;
-
-        if (authorization) {
-            customerId = this.authService.getCustomerId(authorization);
+        // Guests cannot list carts — return empty to prevent enumerating other users' carts
+        if (!authorization) {
+            return of({ data: [], total: 0 }).pipe(responseDelay());
         }
 
+        const customerId = this.authService.getCustomerId(authorization);
         return of(mapCarts(query, customerId)).pipe(responseDelay());
     }
 
@@ -81,8 +84,11 @@ export class CartsService implements Carts.Service {
             throw new NotFoundException('Cart not found');
         }
 
-        // Verify authorization for customer carts
-        if (existingCart.customerId && authorization) {
+        // Customer carts require authorization
+        if (existingCart.customerId) {
+            if (!authorization) {
+                throw new UnauthorizedException('Authentication required to update this cart');
+            }
             const customerId = this.authService.getCustomerId(authorization);
             if (existingCart.customerId !== customerId) {
                 throw new UnauthorizedException('Unauthorized to update this cart');
@@ -104,8 +110,11 @@ export class CartsService implements Carts.Service {
             throw new NotFoundException('Cart not found');
         }
 
-        // Verify authorization for customer carts
-        if (existingCart.customerId && authorization) {
+        // Customer carts require authorization
+        if (existingCart.customerId) {
+            if (!authorization) {
+                throw new UnauthorizedException('Authentication required to delete this cart');
+            }
             const customerId = this.authService.getCustomerId(authorization);
             if (existingCart.customerId !== customerId) {
                 throw new UnauthorizedException('Unauthorized to delete this cart');
@@ -137,8 +146,11 @@ export class CartsService implements Carts.Service {
                 throw new NotFoundException('Cart not found');
             }
 
-            // Verify authorization for customer carts
-            if (existingCart.customerId && authorization) {
+            // Customer carts require authorization
+            if (existingCart.customerId) {
+                if (!authorization) {
+                    throw new UnauthorizedException('Authentication required to modify this cart');
+                }
                 if (existingCart.customerId !== customerId) {
                     throw new UnauthorizedException('Unauthorized to modify this cart');
                 }
@@ -200,8 +212,11 @@ export class CartsService implements Carts.Service {
             throw new NotFoundException('Cart not found');
         }
 
-        // Verify authorization for customer carts
-        if (existingCart.customerId && authorization) {
+        // Customer carts require authorization
+        if (existingCart.customerId) {
+            if (!authorization) {
+                throw new UnauthorizedException('Authentication required to modify this cart');
+            }
             const customerId = this.authService.getCustomerId(authorization);
             if (existingCart.customerId !== customerId) {
                 throw new UnauthorizedException('Unauthorized to modify this cart');
@@ -226,8 +241,11 @@ export class CartsService implements Carts.Service {
             throw new NotFoundException('Cart not found');
         }
 
-        // Verify authorization for customer carts
-        if (existingCart.customerId && authorization) {
+        // Customer carts require authorization
+        if (existingCart.customerId) {
+            if (!authorization) {
+                throw new UnauthorizedException('Authentication required to modify this cart');
+            }
             const customerId = this.authService.getCustomerId(authorization);
             if (existingCart.customerId !== customerId) {
                 throw new UnauthorizedException('Unauthorized to modify this cart');
@@ -253,8 +271,11 @@ export class CartsService implements Carts.Service {
             throw new NotFoundException('Cart not found');
         }
 
-        // Verify authorization for customer carts
-        if (existingCart.customerId && authorization) {
+        // Customer carts require authorization
+        if (existingCart.customerId) {
+            if (!authorization) {
+                throw new UnauthorizedException('Authentication required to modify this cart');
+            }
             const customerId = this.authService.getCustomerId(authorization);
             if (existingCart.customerId !== customerId) {
                 throw new UnauthorizedException('Unauthorized to modify this cart');
@@ -279,8 +300,11 @@ export class CartsService implements Carts.Service {
             throw new NotFoundException('Cart not found');
         }
 
-        // Verify authorization for customer carts
-        if (existingCart.customerId && authorization) {
+        // Customer carts require authorization
+        if (existingCart.customerId) {
+            if (!authorization) {
+                throw new UnauthorizedException('Authentication required to modify this cart');
+            }
             const customerId = this.authService.getCustomerId(authorization);
             if (existingCart.customerId !== customerId) {
                 throw new UnauthorizedException('Unauthorized to modify this cart');
@@ -321,8 +345,11 @@ export class CartsService implements Carts.Service {
             throw new NotFoundException(`Cart with ID ${params.cartId} not found`);
         }
 
-        // Verify authorization for customer carts
-        if (cart.customerId && authorization) {
+        // Customer carts require authorization
+        if (cart.customerId) {
+            if (!authorization) {
+                throw new UnauthorizedException('Authentication required to prepare checkout for this cart');
+            }
             const customerId = this.authService.getCustomerId(authorization);
             if (cart.customerId !== customerId) {
                 throw new UnauthorizedException('Unauthorized to prepare checkout for this cart');
@@ -345,54 +372,86 @@ export class CartsService implements Carts.Service {
         const existingCart = mapCart({ id: params.cartId });
 
         if (!existingCart) {
-            throw new NotFoundException('Cart not found');
+            return throwError(() => new NotFoundException('Cart not found'));
         }
 
-        // Verify authorization for customer carts
-        if (existingCart.customerId && authorization) {
+        // Customer carts require authorization
+        if (existingCart.customerId) {
+            if (!authorization) {
+                return throwError(() => new UnauthorizedException('Authentication required to update this cart'));
+            }
             const customerId = this.authService.getCustomerId(authorization);
             if (existingCart.customerId !== customerId) {
-                throw new UnauthorizedException('Unauthorized to update this cart');
+                return throwError(() => new UnauthorizedException('Unauthorized to update this cart'));
             }
         }
 
-        // Build update data
-        const updateData: Carts.Request.UpdateCartBody = {
-            notes: data.notes,
-            email: data.email,
-            metadata: {
-                ...existingCart.metadata,
-            },
+        // Guest: require inline addresses when only IDs provided
+        const isGuest = !authorization;
+        const hasAddressIdsOnly =
+            (data.shippingAddressId && !data.shippingAddress) || (data.billingAddressId && !data.billingAddress);
+        if (isGuest && hasAddressIdsOnly) {
+            return throwError(() => new BadRequestException('Inline addresses required for guest checkout'));
+        }
+
+        const resolveAddresses$ = (): Observable<{
+            shippingAddress?: Carts.Model.Cart['shippingAddress'];
+            billingAddress?: Carts.Model.Cart['billingAddress'];
+        }> => {
+            if (!authorization) {
+                return of({
+                    shippingAddress: data.shippingAddress,
+                    billingAddress: data.billingAddress,
+                });
+            }
+
+            const resolveAddress = (addr: Customers.Model.CustomerAddress | undefined, id: string) =>
+                addr ? of(addr.address) : throwError(() => new NotFoundException(`Address ${id} not found`));
+
+            const shipping$ =
+                data.shippingAddressId && !data.shippingAddress
+                    ? this.customersService
+                          .getAddress({ id: data.shippingAddressId }, authorization)
+                          .pipe(switchMap((addr) => resolveAddress(addr, data.shippingAddressId!)))
+                    : of(data.shippingAddress);
+
+            const billing$ =
+                data.billingAddressId && !data.billingAddress
+                    ? this.customersService
+                          .getAddress({ id: data.billingAddressId }, authorization)
+                          .pipe(switchMap((addr) => resolveAddress(addr, data.billingAddressId!)))
+                    : of(data.billingAddress);
+
+            return forkJoin([shipping$, billing$]).pipe(
+                switchMap(([shippingAddress, billingAddress]) =>
+                    of({
+                        shippingAddress: shippingAddress ?? existingCart.shippingAddress,
+                        billingAddress: billingAddress ?? existingCart.billingAddress,
+                    }),
+                ),
+            );
         };
 
-        // Set addresses if provided
-        if (data.shippingAddressId) {
-            updateData.shippingAddressId = data.shippingAddressId;
-        }
-        if (data.shippingAddress) {
-            // Store in metadata for mocked implementation
-            updateData.metadata = {
-                ...updateData.metadata,
-                shippingAddress: data.shippingAddress,
-            };
-        }
-        if (data.billingAddressId) {
-            updateData.billingAddressId = data.billingAddressId;
-        }
-        if (data.billingAddress) {
-            // Store in metadata for mocked implementation
-            updateData.metadata = {
-                ...updateData.metadata,
-                billingAddress: data.billingAddress,
-            };
-        }
+        return resolveAddresses$().pipe(
+            switchMap(({ shippingAddress, billingAddress }) => {
+                const updateData: Carts.Request.UpdateCartBody = {
+                    notes: data.notes,
+                    email: data.email,
+                    metadata: {
+                        ...existingCart.metadata,
+                        ...(shippingAddress && { shippingAddress }),
+                        ...(billingAddress && { billingAddress }),
+                    },
+                };
 
-        const cart = updateCart({ id: params.cartId }, updateData);
-        if (!cart) {
-            throw new NotFoundException('Cart not found');
-        }
-
-        return of(cart).pipe(responseDelay());
+                const cart = updateCart({ id: params.cartId }, updateData);
+                if (!cart) {
+                    return throwError(() => new NotFoundException('Cart not found'));
+                }
+                return of(cart);
+            }),
+            responseDelay(),
+        );
     }
 
     addShippingMethod(
@@ -406,8 +465,11 @@ export class CartsService implements Carts.Service {
             throw new NotFoundException('Cart not found');
         }
 
-        // Verify authorization for customer carts
-        if (existingCart.customerId && authorization) {
+        // Customer carts require authorization
+        if (existingCart.customerId) {
+            if (!authorization) {
+                throw new UnauthorizedException('Authentication required to modify this cart');
+            }
             const customerId = this.authService.getCustomerId(authorization);
             if (existingCart.customerId !== customerId) {
                 throw new UnauthorizedException('Unauthorized to modify this cart');
@@ -419,7 +481,23 @@ export class CartsService implements Carts.Service {
             throw new BadRequestException('Cart must have items before adding shipping method');
         }
 
-        const cart = updateCart({ id: params.cartId }, { shippingMethodId: data.shippingOptionId });
+        const option = getShippingOptionById(data.shippingOptionId);
+        if (!option) {
+            throw new BadRequestException(`Shipping option ${data.shippingOptionId} not found`);
+        }
+
+        const cart = updateCart(
+            { id: params.cartId },
+            {
+                shippingMethod: {
+                    id: option.id,
+                    name: option.name,
+                    description: option.description,
+                    total: option.total,
+                },
+                shippingTotal: option.total,
+            },
+        );
         if (!cart) {
             throw new NotFoundException('Cart not found');
         }

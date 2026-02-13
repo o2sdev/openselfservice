@@ -40,12 +40,18 @@ export class CheckoutController {
 
     @Get(':cartId/shipping-options')
     getShippingOptions(@Param() params: Request.GetShippingOptionsParams, @Headers() headers: AppHeaders) {
-        return this.checkoutService.getShippingOptions(params, headers.authorization);
+        return this.checkoutService.getShippingOptions(
+            { ...params, locale: headers['x-locale'] },
+            headers.authorization,
+        );
     }
 
     @Get(':cartId/summary')
     getCheckoutSummary(@Param() params: Request.GetCheckoutSummaryParams, @Headers() headers: AppHeaders) {
-        return this.checkoutService.getCheckoutSummary(params, headers.authorization);
+        return this.checkoutService.getCheckoutSummary(
+            { ...params, locale: headers['x-locale'] },
+            headers.authorization,
+        );
     }
 
     @Post(':cartId/place-order')
