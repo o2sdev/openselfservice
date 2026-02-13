@@ -8,6 +8,8 @@ export const mapProductListBlock = (_locale: string): CMS.Model.ProductListBlock
         title: 'Products',
         subtitle: 'Browse our product catalog',
         detailsLabel: 'View Details',
+        detailsUrl: '/products/{handle}/{variantSlug}',
+        basePath: '/products',
         fieldMapping: {
             category: {},
         },

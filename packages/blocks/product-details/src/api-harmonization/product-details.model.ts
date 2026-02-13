@@ -12,6 +12,21 @@ export type Product = Products.Model.Product & {
     images:
         | NonNullable<Products.Model.Product['images']>
         | (Products.Model.Product['image'] extends undefined ? never : [Products.Model.Product['image']]);
+    /**
+     * View-level "key specs" (e.g. short bullet list) for this block only.
+     */
+    keySpecs?: Array<{
+        value?: string;
+        icon?: string;
+    }>;
+    /**
+     * View-level detailed specs (e.g. table rows) for this block only.
+     */
+    detailedSpecs?: Array<{
+        label: string;
+        value: string;
+        category?: string;
+    }>;
 };
 
 export type ActionButton = {
@@ -22,12 +37,13 @@ export type ActionButton = {
 };
 
 export type Labels = {
-    actionButtonLabel?: string;
-    downloadLabel?: string;
-    specificationsTitle: string;
-    descriptionTitle: string;
-    priceLabel: string;
-    offerLabel: string;
+    actionButton?: string;
+    download?: string;
+    specifications: string;
+    description: string;
+    price: string;
+    offer: string;
+    variant?: string;
 };
 
 export type ProductDetailsBlock = ApiModels.Block.Block & {

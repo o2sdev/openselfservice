@@ -1,5 +1,6 @@
 export type GetProductDetailsBlockParams = {
     id: string;
+    variantSlug?: string;
 };
 
 export type GetProductDetailsBlockQuery = {

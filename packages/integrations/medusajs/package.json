@@ -19,7 +19,8 @@
         "@medusajs/js-sdk": "^2.13.1",
         "@medusajs/types": "^2.13.1",
         "@o2s/framework": "*",
-        "@o2s/utils.logger": "*"
+        "@o2s/utils.logger": "*",
+        "slugify": "^1.6.6"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",

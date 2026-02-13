@@ -13,13 +13,18 @@ export const ProductDetailsDynamic = dynamic(() =>
 export const ProductDetails: React.FC<ProductDetailsProps> = async ({
     id,
     productId,
+    variantSlug,
     locale,
     routing,
     hasPriority,
 }) => {
     let data: Model.ProductDetailsBlock;
     try {
-        data = await sdk.blocks.getProductDetails({ id: productId }, { id, locale }, { 'x-locale': locale });
+        data = await sdk.blocks.getProductDetails(
+            { id: productId, variantSlug },
+            { id, locale },
+            { 'x-locale': locale },
+        );
     } catch (error) {
         console.error('Error fetching ProductDetails block', error);
         return null;

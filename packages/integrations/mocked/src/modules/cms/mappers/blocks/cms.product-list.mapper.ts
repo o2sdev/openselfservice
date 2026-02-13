@@ -5,6 +5,8 @@ const MOCK_PRODUCT_LIST_BLOCK_EN: CMS.Model.ProductListBlock.ProductListBlock = 
     title: 'Products in Catalog',
     subtitle: 'Browse our product catalog',
     detailsLabel: 'View Details',
+    detailsUrl: '/products/{handle}/{variantSlug}',
+    basePath: '/products',
     fieldMapping: {
         category: {
             SOFTWARE: 'Software',
@@ -17,6 +19,9 @@ const MOCK_PRODUCT_LIST_BLOCK_EN: CMS.Model.ProductListBlock.ProductListBlock = 
             WARRANTY: 'Warranty',
             MAINTENANCE: 'Maintenance',
             TRAINING: 'Training',
+            Pants: 'Pants',
+            Shirts: 'Shirts',
+            Sweatshirts: 'Sweatshirts',
         },
     },
     table: {
@@ -78,6 +83,9 @@ const MOCK_PRODUCT_LIST_BLOCK_EN: CMS.Model.ProductListBlock.ProductListBlock = 
                     { label: 'Warranty', value: 'WARRANTY' },
                     { label: 'Maintenance', value: 'MAINTENANCE' },
                     { label: 'Training', value: 'TRAINING' },
+                    { label: 'Pants', value: 'Pants' },
+                    { label: 'Shirts', value: 'Shirts' },
+                    { label: 'Sweatshirts', value: 'Sweatshirts' },
                 ],
             },
             {
@@ -107,6 +115,8 @@ const MOCK_PRODUCT_LIST_BLOCK_DE: CMS.Model.ProductListBlock.ProductListBlock = 
     title: 'Produkte im Katalog',
     subtitle: 'Durchsuchen Sie unseren Produktkatalog',
     detailsLabel: 'Details anzeigen',
+    detailsUrl: '/produkte/{handle}/{variantSlug}',
+    basePath: '/produkte',
     fieldMapping: {
         category: {
             SOFTWARE: 'Software',
@@ -119,6 +129,9 @@ const MOCK_PRODUCT_LIST_BLOCK_DE: CMS.Model.ProductListBlock.ProductListBlock = 
             WARRANTY: 'Garantie',
             MAINTENANCE: 'Wartung',
             TRAINING: 'Schulung',
+            Pants: 'Hosen',
+            Shirts: 'Hemden',
+            Sweatshirts: 'Sweatshirts',
         },
     },
     table: {
@@ -180,6 +193,9 @@ const MOCK_PRODUCT_LIST_BLOCK_DE: CMS.Model.ProductListBlock.ProductListBlock = 
                     { label: 'Garantie', value: 'WARRANTY' },
                     { label: 'Wartung', value: 'MAINTENANCE' },
                     { label: 'Training', value: 'TRAINING' },
+                    { label: 'Hosen', value: 'Pants' },
+                    { label: 'Hemden', value: 'Shirts' },
+                    { label: 'Sweatshirts', value: 'Sweatshirts' },
                 ],
             },
             {
@@ -209,6 +225,8 @@ const MOCK_PRODUCT_LIST_BLOCK_PL: CMS.Model.ProductListBlock.ProductListBlock = 
     title: 'Katalog produktów',
     subtitle: 'Przeglądaj nasz katalog produktów',
     detailsLabel: 'Zobacz szczegóły',
+    detailsUrl: '/produkty/{handle}/{variantSlug}',
+    basePath: '/produkty',
     fieldMapping: {
         category: {
             SOFTWARE: 'Oprogramowanie',
@@ -221,6 +239,9 @@ const MOCK_PRODUCT_LIST_BLOCK_PL: CMS.Model.ProductListBlock.ProductListBlock = 
             WARRANTY: 'Gwarancja',
             MAINTENANCE: 'Konserwacja',
             TRAINING: 'Szkolenie',
+            Pants: 'Spodnie',
+            Shirts: 'Koszule',
+            Sweatshirts: 'Bluzy',
         },
     },
     table: {
@@ -282,6 +303,9 @@ const MOCK_PRODUCT_LIST_BLOCK_PL: CMS.Model.ProductListBlock.ProductListBlock = 
                     { label: 'Gwarancja', value: 'WARRANTY' },
                     { label: 'Konserwacja', value: 'MAINTENANCE' },
                     { label: 'Szkolenie', value: 'TRAINING' },
+                    { label: 'Spodnie', value: 'Pants' },
+                    { label: 'Koszule', value: 'Shirts' },
+                    { label: 'Bluzy', value: 'Sweatshirts' },
                 ],
             },
             {

@@ -191,11 +191,8 @@ export const Default: Story = {
                         value: '2025-08-31T19:14:14.519Z',
                     },
                     subtotal: {
-                        label: '1016.847',
-                        value: {
-                            value: 1016.847,
-                            currency: 'USD',
-                        },
+                        value: 1016.847,
+                        currency: 'USD',
                     },
                     currency: 'USD',
                     detailsUrl: '/orders/ORD-5001521',
@@ -218,11 +215,8 @@ export const Default: Story = {
                         value: '2025-09-01T13:02:22.338Z',
                     },
                     subtotal: {
-                        label: '71.991',
-                        value: {
-                            value: 71.991,
-                            currency: 'USD',
-                        },
+                        value: 71.991,
+                        currency: 'USD',
                     },
                     currency: 'USD',
                     detailsUrl: '/orders/ORD-5000025',
@@ -245,11 +239,8 @@ export const Default: Story = {
                         value: '2025-09-01T07:44:03.114Z',
                     },
                     subtotal: {
-                        label: '472.32',
-                        value: {
-                            value: 472.32,
-                            currency: 'USD',
-                        },
+                        value: 472.32,
+                        currency: 'USD',
                     },
                     currency: 'USD',
                     detailsUrl: '/orders/ORD-5000256',
@@ -272,11 +263,8 @@ export const Default: Story = {
                         value: '2025-08-28T06:04:52.193Z',
                     },
                     subtotal: {
-                        label: '773.9459999999999',
-                        value: {
-                            value: 773.9459999999999,
-                            currency: 'USD',
-                        },
+                        value: 773.9459999999999,
+                        currency: 'USD',
                     },
                     currency: 'USD',
                     detailsUrl: '/orders/ORD-5000400',
@@ -299,11 +287,8 @@ export const Default: Story = {
                         value: '2025-08-29T23:47:01.171Z',
                     },
                     subtotal: {
-                        label: '625.374',
-                        value: {
-                            value: 625.374,
-                            currency: 'USD',
-                        },
+                        value: 625.374,
+                        currency: 'USD',
                     },
                     currency: 'USD',
                     detailsUrl: '/orders/ORD-10000036',
@@ -326,11 +311,8 @@ export const Default: Story = {
                         value: '2025-08-29T05:52:19.362Z',
                     },
                     subtotal: {
-                        label: '107.964',
-                        value: {
-                            value: 107.964,
-                            currency: 'USD',
-                        },
+                        value: 107.964,
+                        currency: 'USD',
                     },
                     currency: 'USD',
                     detailsUrl: '/orders/ORD-5000961',
@@ -353,11 +335,8 @@ export const Default: Story = {
                         value: '2025-08-30T01:19:43.690Z',
                     },
                     subtotal: {
-                        label: '1115.775',
-                        value: {
-                            value: 1115.775,
-                            currency: 'EUR',
-                        },
+                        value: 1115.775,
+                        currency: 'EUR',
                     },
                     currency: 'EUR',
                     detailsUrl: '/orders/ORD-5000001',
@@ -380,11 +359,8 @@ export const Default: Story = {
                         value: '2025-08-28T22:38:29.922Z',
                     },
                     subtotal: {
-                        label: '620.865',
-                        value: {
-                            value: 620.865,
-                            currency: 'EUR',
-                        },
+                        value: 620.865,
+                        currency: 'EUR',
                     },
                     currency: 'EUR',
                     detailsUrl: '/orders/ORD-5000900',
@@ -407,11 +383,8 @@ export const Default: Story = {
                         value: '2025-08-29T18:17:25.118Z',
                     },
                     subtotal: {
-                        label: '512.928',
-                        value: {
-                            value: 512.928,
-                            currency: 'USD',
-                        },
+                        value: 512.928,
+                        currency: 'USD',
                     },
                     currency: 'USD',
                     detailsUrl: '/orders/ORD-5001089',
@@ -434,11 +407,8 @@ export const Default: Story = {
                         value: '2025-08-29T18:13:52.352Z',
                     },
                     subtotal: {
-                        label: '458.95500000000004',
-                        value: {
-                            value: 458.95500000000004,
-                            currency: 'USD',
-                        },
+                        value: 458.95500000000004,
+                        currency: 'USD',
                     },
                     currency: 'USD',
                     detailsUrl: '/orders/ORD-5001681',
