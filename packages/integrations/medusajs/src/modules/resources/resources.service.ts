@@ -41,12 +41,15 @@ export class ResourcesService extends Resources.Service {
         super();
         this.sdk = this.medusaJsService.getSdk();
         this.defaultCurrency = this.config.get('DEFAULT_CURRENCY') || 'EUR';
-        this.productsBasePath = this.config.get('PRODUCTS_BASE_PATH', '/products');
-        const fieldsConfig = this.config.get(
-            'MEDUSA_VARIANT_SPEC_FIELDS',
-            'weight,height,width,length,material,origin_country,hs_code,mid_code',
-        );
-        this.variantSpecFields = fieldsConfig.split(',').map((f: string) => f.trim());
+
+        // Optional configuration for product URLs – no hardcoded fallback
+        this.productsBasePath = this.config.get<string>('PRODUCTS_BASE_PATH') ?? '';
+
+        // Optional configuration for Medusa variant fields used as specs – no hardcoded fallback
+        const fieldsConfig = this.config.get<string>('MEDUSA_VARIANT_SPEC_FIELDS');
+        this.variantSpecFields = fieldsConfig
+            ? fieldsConfig.split(',').map((specField: string) => specField.trim())
+            : [];
     }
 
     purchaseOrActivateResource(_params: Resources.Request.GetResourceParams): Observable<void> {
