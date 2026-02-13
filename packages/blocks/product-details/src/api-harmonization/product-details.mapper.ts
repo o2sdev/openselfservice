@@ -6,6 +6,32 @@ export const mapProductDetails = (
     product: Products.Model.Product,
     cms: CMS.Model.ProductDetailsBlock.ProductDetailsBlock,
 ): Model.ProductDetailsBlock => {
+    // Derive view-level specs (keySpecs, detailedSpecs) from raw attributes + CMS config.
+    const attributes = product.attributes ?? {};
+    const specFieldsMapping = cms.specFieldsMapping ?? {};
+
+    const detailedSpecs: Model.Product['detailedSpecs'] = [];
+    const keySpecs: Model.Product['keySpecs'] = [];
+
+    for (const [field, config] of Object.entries(specFieldsMapping)) {
+        const value = attributes[field];
+        if (value == null || value === '') {
+            continue;
+        }
+
+        detailedSpecs.push({
+            label: config.label,
+            value,
+        });
+
+        if (config.showInKeySpecs) {
+            keySpecs.push({
+                value: `${config.label}: ${value}`,
+                icon: config.icon,
+            });
+        }
+    }
+
     // Map Products.Model.Product to Model.Product
     const mappedProduct: Model.Product = {
         ...product,
@@ -15,8 +41,8 @@ export const mapProductDetails = (
                 label: tag.label,
                 variant: tag.variant as Model.Badge['variant'],
             })) || [],
-        keySpecs: product.keySpecs || [],
-        detailedSpecs: product.detailedSpecs || [],
+        keySpecs: keySpecs.length > 0 ? keySpecs : undefined,
+        detailedSpecs: detailedSpecs.length > 0 ? detailedSpecs : undefined,
     };
 
     const labels: Model.Labels = {

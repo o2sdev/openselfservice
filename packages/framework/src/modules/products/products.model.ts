@@ -4,17 +4,6 @@ export type ProductType = 'PHYSICAL' | 'VIRTUAL';
 
 export type ProductReferenceType = 'SPARE_PART' | 'REPLACEMENT' | 'COMPATIBLE_SERVICE';
 
-export type KeySpecItem = {
-    value?: string;
-    icon?: string;
-};
-
-export type DetailedSpec = {
-    label: string;
-    value: string;
-    category?: string;
-};
-
 export type ProductOptionGroup = {
     id: string;
     title: string;
@@ -28,6 +17,13 @@ export type ProductVariantOption = {
     link?: string;
     options?: Record<string, string>;
 };
+
+/**
+ * Raw product attributes collected from the underlying commerce system.
+ * Keys follow the integration's field names (e.g. Medusa: "weight", "origin_country").
+ * Presentation concerns (labels, grouping, "key specs" vs. table, etc.) are handled at the block level.
+ */
+export type ProductAttributes = Record<string, string>;
 
 export class Product {
     id!: string;
@@ -47,8 +43,7 @@ export class Product {
         label: string;
         variant: string;
     }[];
-    keySpecs?: KeySpecItem[];
-    detailedSpecs?: DetailedSpec[];
+    attributes?: ProductAttributes;
     location?: string;
     optionGroups?: ProductOptionGroup[];
     variants?: ProductVariantOption[];

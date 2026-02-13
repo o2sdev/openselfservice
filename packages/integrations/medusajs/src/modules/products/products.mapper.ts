@@ -69,43 +69,15 @@ const mapTags = (
     return tags.map((tag) => ({ label: tag.value || '', variant: 'default' as const }));
 };
 
-// Build keySpecs from specFieldsMapping where showInKeySpecs is true
-// Order is determined by the order of keys in specFieldsMapping
-const buildKeySpecs = (
+// Collect raw attributes from variant/product based on specFieldsMapping.
+// Only includes fields that are in specFieldsMapping.
+// Order is determined by the order of keys in specFieldsMapping.
+// Variant attributes take precedence over product attributes.
+const collectVariantAttributes = (
     variant: HttpTypes.AdminProductVariant,
     specFieldsMapping: Record<string, { label: string; showInKeySpecs?: boolean; icon?: string }>,
-): Products.Model.KeySpecItem[] | undefined => {
-    const keySpecs: Products.Model.KeySpecItem[] = [];
-    const product = variant.product;
-
-    for (const [field, config] of Object.entries(specFieldsMapping)) {
-        if (!config.showInKeySpecs) continue;
-
-        // Check variant first, then fall back to product
-        const variantValue = variant[field as keyof HttpTypes.AdminProductVariant];
-        const productValue = product?.[field as keyof HttpTypes.AdminProduct];
-        const value = variantValue ?? productValue;
-
-        if (value != null && value !== '') {
-            keySpecs.push({
-                value: `${config.label}: ${String(value)}`,
-                icon: config.icon,
-            });
-        }
-    }
-
-    return keySpecs.length > 0 ? keySpecs : undefined;
-};
-
-// Map variant and product attributes to detailedSpecs dynamically
-// Only includes fields that are in specFieldsMapping
-// Order is determined by the order of keys in specFieldsMapping
-// Variant attributes take precedence over product attributes
-const mapVariantToDetailedSpecs = (
-    variant: HttpTypes.AdminProductVariant,
-    specFieldsMapping: Record<string, { label: string; showInKeySpecs?: boolean; icon?: string }>,
-): Products.Model.DetailedSpec[] => {
-    const specs: Products.Model.DetailedSpec[] = [];
+): Products.Model.ProductAttributes => {
+    const attributes: Products.Model.ProductAttributes = {};
     const product = variant.product;
 
     for (const [field, config] of Object.entries(specFieldsMapping)) {
@@ -115,14 +87,11 @@ const mapVariantToDetailedSpecs = (
         const value = variantValue ?? productValue;
 
         if (value != null && value !== '') {
-            specs.push({
-                label: config.label,
-                value: String(value),
-            });
+            attributes[field] = String(value);
         }
     }
 
-    return specs;
+    return attributes;
 };
 
 // Map Medusa variant options to Record<optionId, value>
@@ -261,9 +230,8 @@ export const mapProduct = (
         throw new Error(`Product variant SKU is required but missing for product ${product.id}`);
     }
 
-    // Build detailedSpecs and keySpecs from specFieldsMapping
-    const detailedSpecs = mapVariantToDetailedSpecs(productVariant, specFieldsMapping);
-    const keySpecs = buildKeySpecs(productVariant, specFieldsMapping);
+    // Collect raw attributes based on specFieldsMapping.
+    const attributes = collectVariantAttributes(productVariant, specFieldsMapping);
 
     return {
         id: product.id,
@@ -279,8 +247,7 @@ export const mapProduct = (
         type: mapProductType(product?.type || undefined),
         category: product?.categories?.[0]?.name || '',
         tags: mapTags(product?.tags),
-        detailedSpecs: detailedSpecs.length > 0 ? detailedSpecs : undefined,
-        keySpecs,
+        attributes: Object.keys(attributes).length > 0 ? attributes : undefined,
         optionGroups: allVariants ? mapOptionGroups(allVariants, variantOptionGroups) : undefined,
         variants:
             allVariants && allVariants.length > 1

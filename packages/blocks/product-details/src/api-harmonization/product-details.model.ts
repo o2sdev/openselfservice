@@ -25,6 +25,21 @@ export type Product = Products.Model.Product & {
         title: string;
         values: string[];
     }>;
+    /**
+     * View-level "key specs" (e.g. short bullet list) for this block only.
+     */
+    keySpecs?: Array<{
+        value?: string;
+        icon?: string;
+    }>;
+    /**
+     * View-level detailed specs (e.g. table rows) for this block only.
+     */
+    detailedSpecs?: Array<{
+        label: string;
+        value: string;
+        category?: string;
+    }>;
 };
 
 export type ActionButton = {
