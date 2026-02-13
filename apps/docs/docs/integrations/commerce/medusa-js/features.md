@@ -10,6 +10,8 @@ This document provides an overview of features supported by the Medusa.js integr
 
 | Feature                                             | Status | Notes                                                                            |
 | --------------------------------------------------- | ------ | -------------------------------------------------------------------------------- |
+| [Cart Management](#cart-management)                 | ✅     | Cart creation, line items, addresses, shipping (Store API)                       |
+| [Checkout Flow](#checkout-flow)                     | ✅     | Multi-step checkout, payment sessions, order placement                           |
 | [Order Management](#order-management)               | ✅     | Complete order history and details                                               |
 | [Product Catalog](#product-catalog)                 | ✅     | Product browsing with variants                                                   |
 | [Product Recommendations](#product-recommendations) | ✅     | Related products ([requires plugin](#plugin-architecture))                       |
@@ -24,6 +26,36 @@ This document provides an overview of features supported by the Medusa.js integr
 | [Purchase/Activation](#purchaseactivation)          | ❌     | Not implemented                                                                  |
 
 ## Feature Details
+
+### Cart Management {#cart-management}
+
+The integration provides full cart management via the Medusa Store API (`sdk.store.cart.*`):
+
+- Create cart with `currency_code`, `region_id`, and optional metadata
+- Add line items (requires `variantId` — Medusa uses variants, not productId alone)
+- Update and remove cart items
+- Update shipping and billing addresses (inline or by saved address ID for authenticated users)
+- Add shipping method by `option_id`
+- Guest and customer carts supported
+
+**Limitations (Medusa Store API):**
+
+- `getCartList` and `getCurrentCart` are not implemented — the Store API does not support listing carts
+- `deleteCart` is a no-op (logs only; Store API has no delete endpoint)
+
+### Checkout Flow {#checkout-flow}
+
+Complete checkout orchestration from cart to order:
+
+- **setAddresses** — Set shipping and billing addresses (delegates to Carts)
+- **setShippingMethod** — Select shipping option (delegates to Carts)
+- **setPayment** — Create payment session via Payments module
+- **getShippingOptions** — List available options from Medusa fulfillment API (`fulfillment.listCartOptions` + `fulfillment.calculate` for calculated prices)
+- **getCheckoutSummary** — Cart with addresses, shipping, payment, totals
+- **placeOrder** — Completes cart via `sdk.store.cart.complete`, returns order
+- **completeCheckout** — One-shot flow: addresses → shipping → payment → place order
+
+Guest checkout supported; email required for guest order placement. See [Cart & Checkout](./cart-checkout.md) for the full flow.
 
 ### Order Management {#order-management}
 
