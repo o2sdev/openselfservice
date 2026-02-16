@@ -1,11 +1,12 @@
 import { HttpTypes } from '@medusajs/types';
 import { NotFoundException } from '@nestjs/common';
 
-import { Models, Products } from '@o2s/framework/modules';
+import { Products } from '@o2s/framework/modules';
 
 import { CompatibleServicesResponse, FeaturedServicesResponse } from '../resources/response.types';
 
 import { RelatedProductsResponse } from './response.types';
+import { parseCurrency } from '@/utils/currency';
 
 // Fields to extract as detailed specs from variant
 const VARIANT_SPEC_FIELDS = [
@@ -165,7 +166,7 @@ export const mapProduct = (productVariant: AnyProductVariant, defaultCurrency: s
         })),
         price: {
             value: price.amount,
-            currency: price.currencyCode as Models.Price.Currency,
+            currency: parseCurrency(price.currencyCode),
         },
         link: `/products/${product?.id || ''}`,
         type: mapProductType(product?.type || undefined),
@@ -217,7 +218,7 @@ export const mapProducts = (
                 })),
                 price: {
                     value: price.amount,
-                    currency: price.currencyCode as Models.Price.Currency,
+                    currency: parseCurrency(price.currencyCode),
                 },
                 link: `/products/${product.id}`,
                 type: mapProductType(product?.type || undefined),
@@ -256,9 +257,7 @@ export const mapRelatedProducts = (data: RelatedProductsResponse, defaultCurrenc
                 })),
                 price: {
                     value: price?.amount || 0,
-                    currency:
-                        (price?.currency_code?.toUpperCase() as Models.Price.Currency) ||
-                        (defaultCurrency as Models.Price.Currency),
+                    currency: parseCurrency(price?.currency_code ?? defaultCurrency),
                 },
                 link: `/products/${product?.id || ''}`,
                 type: mapProductType(product?.type || undefined),

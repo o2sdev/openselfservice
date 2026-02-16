@@ -50,7 +50,7 @@ describe('orders.mapper', () => {
             const result = mapOrder(order, defaultCurrency);
             expect(result.id).toBe('order_1');
             expect(result.customerId).toBe('cust_1');
-            expect(result.currency).toBe('eur');
+            expect(result.currency).toBe('EUR');
             expect(result.status).toBe('COMPLETED');
             expect(result.paymentStatus).toBe('CAPTURED');
             expect(result.createdAt).toBe(order.created_at.toString());

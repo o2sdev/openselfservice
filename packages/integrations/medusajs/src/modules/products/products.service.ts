@@ -81,6 +81,9 @@ export class ProductsService extends Products.Service {
                 if (!product?.variants?.length) {
                     throw new NotFoundException(`No variants found for product ${params.id}`);
                 }
+                if (!Array.isArray(product.variants)) {
+                    throw new NotFoundException(`Product ${params.id} has invalid variants`);
+                }
 
                 // Find the requested variant, or use the first one
                 const variants = product.variants as HttpTypes.StoreProductVariant[];

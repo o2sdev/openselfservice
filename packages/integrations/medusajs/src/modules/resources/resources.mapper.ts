@@ -3,6 +3,7 @@ import { AddressDTO } from '@medusajs/types';
 import { Models, Products, Resources } from '@o2s/framework/modules';
 
 import { Asset, AssetsResponse, ServiceInstance, ServiceInstancesResponse } from './response.types';
+import { parseCurrency } from '@/utils/currency';
 
 export const mapAsset = (asset: Asset, product: Products.Model.Product): Resources.Model.Asset => {
     return {
@@ -67,13 +68,13 @@ export const mapService = (
         contract: {
             id: serviceInstance.id,
             type: '',
-            status: serviceInstance?.status as Resources.Model.ContractStatus,
+            status: mapContractStatus(serviceInstance?.status),
             startDate: serviceInstance.start_date,
             endDate: serviceInstance?.end_date,
-            paymentPeriod: serviceInstance.payment_type as Resources.Model.PaymentPeriod,
+            paymentPeriod: mapPaymentPeriod(serviceInstance.payment_type),
             price: {
                 value: serviceInstance?.totals?.total_price?.value ?? 0,
-                currency: mapCurrency(serviceInstance?.totals?.currency) || defaultCurrency,
+                currency: parseCurrency(serviceInstance?.totals?.currency ?? defaultCurrency),
             },
         },
         assets:
@@ -104,15 +105,22 @@ const mapAddress = (address: AddressDTOWithNames): Models.Address.Address | unde
     };
 };
 
-const mapCurrency = (currency: string): Models.Price.Currency => {
-    switch (currency) {
-        case 'pln':
-            return 'PLN';
-        case 'eur':
-            return 'EUR';
-        case 'usd':
-            return 'USD';
-        default:
-            return currency as Models.Price.Currency;
+const VALID_CONTRACT_STATUSES: Resources.Model.ContractStatus[] = ['ACTIVE', 'EXPIRED', 'INACTIVE'];
+
+function mapContractStatus(status: string | undefined): Resources.Model.ContractStatus {
+    const normalized = (status ?? '').toUpperCase();
+    if (VALID_CONTRACT_STATUSES.includes(normalized as Resources.Model.ContractStatus)) {
+        return normalized as Resources.Model.ContractStatus;
     }
-};
+    return 'ACTIVE';
+}
+
+const VALID_PAYMENT_PERIODS: Resources.Model.PaymentPeriod[] = ['ONE_TIME', 'MONTHLY', 'YEARLY', 'WEEKLY'];
+
+function mapPaymentPeriod(paymentType: string | undefined): Resources.Model.PaymentPeriod {
+    const normalized = (paymentType ?? '').toUpperCase().replace(/-/g, '_');
+    if (VALID_PAYMENT_PERIODS.includes(normalized as Resources.Model.PaymentPeriod)) {
+        return normalized as Resources.Model.PaymentPeriod;
+    }
+    return 'ONE_TIME';
+}

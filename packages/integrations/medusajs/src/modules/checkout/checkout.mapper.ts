@@ -1,7 +1,9 @@
 import { HttpTypes } from '@medusajs/types';
 import { BadRequestException } from '@nestjs/common';
 
-import { Carts, Checkout, Models, Orders, Payments } from '@o2s/framework/modules';
+import { Carts, Checkout, Orders, Payments } from '@o2s/framework/modules';
+
+import { parseCurrency } from '@/utils/currency';
 
 export function mapCheckoutSummary(
     cart: Carts.Model.Cart,
@@ -96,7 +98,7 @@ function mapShippingOption(
     if (!currencyCode) {
         throw new BadRequestException(`Shipping option ${option.id} has no currency information`);
     }
-    const currency = currencyCode as Models.Price.Currency;
+    const currency = parseCurrency(currencyCode);
 
     const amountWithoutTax = calculatedPrice?.calculated_amount_without_tax ?? amount;
 

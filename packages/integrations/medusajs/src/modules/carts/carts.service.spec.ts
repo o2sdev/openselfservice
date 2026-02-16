@@ -11,6 +11,23 @@ import { CartsService } from './carts.service';
 
 const DEFAULT_CURRENCY = 'EUR';
 
+const minimalCartItem = {
+    id: 'item_1',
+    product_id: 'prod_1',
+    variant_id: 'var_1',
+    variant_sku: 'SKU1',
+    quantity: 1,
+    unit_price: 1000,
+    subtotal: 1000,
+    total: 1000,
+    discount_total: 0,
+    product_title: 'Product',
+    title: 'Product',
+    product_description: '',
+    product_subtitle: '',
+    thumbnail: null,
+};
+
 const minimalCart = {
     id: 'cart_1',
     customer_id: null,
@@ -165,7 +182,7 @@ describe('CartsService', () => {
         it('should retrieve then createLineItem when cartId provided', async () => {
             mockSdk.store.cart.retrieve.mockResolvedValue({ cart: minimalCart });
             mockSdk.store.cart.createLineItem.mockResolvedValue({
-                cart: { ...minimalCart, items: [{ id: 'item_1' }] },
+                cart: { ...minimalCart, items: [minimalCartItem] },
             });
             mockAuthService.getCustomerId.mockReturnValue(undefined);
 
@@ -319,7 +336,7 @@ describe('CartsService', () => {
         it('should update cart with inline shipping and billing addresses', async () => {
             const cartWithItems = {
                 ...minimalCart,
-                items: [{ id: 'item_1', quantity: 1 }],
+                items: [minimalCartItem],
                 metadata: {},
             };
             mockSdk.store.cart.retrieve.mockResolvedValue({ cart: cartWithItems });
@@ -375,7 +392,7 @@ describe('CartsService', () => {
         it('should add shipping method when cart has items', async () => {
             const cartWithItems = {
                 ...minimalCart,
-                items: [{ id: 'item_1', quantity: 1 }],
+                items: [minimalCartItem],
             };
             mockSdk.store.cart.retrieve.mockResolvedValue({ cart: cartWithItems });
             mockSdk.store.cart.addShippingMethod.mockResolvedValue({ cart: cartWithItems });
@@ -462,7 +479,7 @@ describe('CartsService', () => {
         it('should return cart when valid', async () => {
             const cartWithItems = {
                 ...minimalCart,
-                items: [{ id: 'item_1', quantity: 1 }],
+                items: [minimalCartItem],
             };
             mockSdk.store.cart.retrieve.mockResolvedValue({ cart: cartWithItems });
 

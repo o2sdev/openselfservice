@@ -2,6 +2,10 @@ import { HttpTypes } from '@medusajs/types';
 
 import { Carts, Models, Orders, Products } from '@o2s/framework/modules';
 
+import { parseCurrency } from '@/utils/currency';
+import { asRecord } from '@/utils/metadata';
+import { mapPriceRequired } from '@/utils/price';
+
 export const mapCarts = (
     carts: { carts: HttpTypes.StoreCart[]; count?: number },
     defaultCurrency: string,
@@ -16,7 +20,7 @@ export const mapCart = (cart: HttpTypes.StoreCart, _defaultCurrency: string): Ca
     if (!cart.currency_code) {
         throw new Error(`Cart ${cart.id} has no currency code`);
     }
-    const currency = cart.currency_code.toUpperCase() as Models.Price.Currency;
+    const currency = parseCurrency(cart.currency_code);
 
     return {
         id: cart.id,
@@ -36,13 +40,13 @@ export const mapCart = (cart: HttpTypes.StoreCart, _defaultCurrency: string): Ca
         discountTotal: mapPrice(cart.discount_total, currency),
         taxTotal: mapPrice(cart.tax_total, currency),
         shippingTotal: mapPrice(cart.shipping_total, currency),
-        total: mapPrice(cart.total, currency) as Models.Price.Price,
+        total: mapPriceRequired(cart.total, currency, `Cart ${cart.id} total`),
         shippingAddress: mapAddress(cart.shipping_address),
         billingAddress: mapAddress(cart.billing_address),
         shippingMethod: cart.shipping_methods?.[0] ? mapShippingMethod(cart.shipping_methods[0], currency) : undefined,
-        paymentMethod: mapPaymentMethodFromMetadata((cart.metadata as Record<string, unknown>) ?? {}),
+        paymentMethod: mapPaymentMethodFromMetadata(asRecord(cart.metadata)),
         promotions: mapPromotions(cart),
-        metadata: (cart.metadata as Record<string, unknown>) ?? {},
+        metadata: asRecord(cart.metadata),
         notes: undefined,
         email: cart.email ?? undefined,
     };
@@ -53,14 +57,14 @@ const mapCartItem = (item: HttpTypes.StoreCartLineItem, currency: Models.Price.C
         id: item.id,
         sku: item.variant_sku ?? item.variant_id ?? '',
         quantity: item.quantity,
-        price: mapPrice(item.unit_price, currency) as Models.Price.Price,
+        price: mapPriceRequired(item.unit_price, currency, `Cart item ${item.id} unit_price`),
         subtotal: mapPrice(item.subtotal, currency),
         discountTotal: mapPrice(item.discount_total, currency),
-        total: mapPrice(item.total, currency) as Models.Price.Price,
+        total: mapPriceRequired(item.total, currency, `Cart item ${item.id} total`),
         unit: 'PCS',
         currency,
         product: mapProduct(item, currency),
-        metadata: (item.metadata as Record<string, unknown>) ?? {},
+        metadata: asRecord(item.metadata),
     };
 };
 
@@ -77,9 +81,9 @@ const mapProduct = (item: HttpTypes.StoreCartLineItem, currency: Models.Price.Cu
                   alt: item.product_title ?? item.title ?? '',
               }
             : undefined,
-        price: mapPrice(item.unit_price, currency) as Models.Price.Price,
+        price: mapPriceRequired(item.unit_price, currency, `Cart product ${item.product_id} unit_price`),
         link: '',
-        type: 'PHYSICAL' as Products.Model.ProductType,
+        type: 'PHYSICAL',
         category: '',
         tags: [],
     };
@@ -102,15 +106,30 @@ const mapAddress = (address?: HttpTypes.StoreCartAddress | null): Models.Address
     };
 };
 
+const VALID_PAYMENT_METHOD_TYPES: Carts.Model.PaymentMethodType[] = ['CREDIT_CARD', 'PAYPAL', 'BANK_TRANSFER', 'OTHER'];
+
 const mapPaymentMethodFromMetadata = (metadata: Record<string, unknown>): Carts.Model.PaymentMethod | undefined => {
-    const stored = metadata?.paymentMethod as Record<string, unknown> | undefined;
-    if (!stored || typeof stored !== 'object') return undefined;
+    const stored = metadata?.paymentMethod;
+    if (stored === null || stored === undefined || typeof stored !== 'object' || Array.isArray(stored))
+        return undefined;
+
+    const storedObj = stored as Record<string, unknown>;
+    const id = storedObj.id;
+    const name = storedObj.name;
+    if (typeof id !== 'string' || typeof name !== 'string') return undefined;
+
+    const description = storedObj.description;
+    const typeVal = storedObj.type;
+    const type: Carts.Model.PaymentMethodType =
+        typeof typeVal === 'string' && VALID_PAYMENT_METHOD_TYPES.includes(typeVal as Carts.Model.PaymentMethodType)
+            ? (typeVal as Carts.Model.PaymentMethodType)
+            : 'OTHER';
 
     return {
-        id: stored.id as string,
-        name: stored.name as string,
-        description: (stored.description as string) ?? undefined,
-        type: (stored.type as Carts.Model.PaymentMethodType) ?? 'OTHER',
+        id,
+        name,
+        description: typeof description === 'string' ? description : undefined,
+        type,
     };
 };
 

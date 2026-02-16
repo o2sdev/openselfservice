@@ -144,7 +144,8 @@ export class CheckoutService extends Checkout.Service {
                     return throwError(() => new NotFoundException(`Cart with ID ${params.cartId} not found`));
                 }
 
-                const paymentSessionId = cart.metadata?.paymentSessionId as string | undefined;
+                const id = cart.metadata?.paymentSessionId;
+                const paymentSessionId = typeof id === 'string' ? id : undefined;
 
                 if (paymentSessionId) {
                     return this.paymentsService
