@@ -39,7 +39,7 @@ export const OrderConfirmationPure: React.FC<Readonly<OrderConfirmationPureProps
     }
 
     return (
-        <div className="w-full flex flex-col gap-8">
+        <div className="w-full max-w-2xl mx-auto flex flex-col gap-8">
             <div className="flex flex-col gap-2">
                 <div className="flex items-center gap-3">
                     <div className="flex h-20 w-20 items-center justify-center rounded-full bg-green-500/10">
