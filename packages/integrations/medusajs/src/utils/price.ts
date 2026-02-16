@@ -5,7 +5,7 @@ export function mapPriceRequired(
     currency: Models.Price.Currency,
     context: string,
 ): Models.Price.Price {
-    if (value === undefined || value === null || typeof value !== 'number') {
+    if (!value) {
         throw new Error(`${context}: price value is missing or invalid`);
     }
     return { value, currency };

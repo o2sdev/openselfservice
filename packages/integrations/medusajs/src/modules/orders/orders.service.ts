@@ -10,7 +10,7 @@ import { Auth, Orders } from '@o2s/framework/modules';
 
 import { Service as MedusaJsService } from '@/modules/medusajs';
 
-import { handleHttpError } from '../utils/handle-http-error';
+import { handleHttpError } from '../../utils/handle-http-error';
 
 import { mapOrder, mapOrders } from './orders.mapper';
 

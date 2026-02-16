@@ -85,7 +85,7 @@ export function mapShippingOptions(
 
 function mapShippingOption(
     option: HttpTypes.StoreCartShippingOption,
-    _defaultCurrency: string,
+    defaultCurrency: string,
 ): Orders.Model.ShippingMethod {
     const calculatedPrice = option.calculated_price;
 
@@ -94,10 +94,8 @@ function mapShippingOption(
         throw new BadRequestException(`Shipping option ${option.id} has no price information`);
     }
 
-    const currencyCode = calculatedPrice?.currency_code?.toUpperCase();
-    if (!currencyCode) {
-        throw new BadRequestException(`Shipping option ${option.id} has no currency information`);
-    }
+    const currencyCode = (calculatedPrice?.currency_code || defaultCurrency)?.toUpperCase();
+
     const currency = parseCurrency(currencyCode);
 
     const amountWithoutTax = calculatedPrice?.calculated_amount_without_tax ?? amount;

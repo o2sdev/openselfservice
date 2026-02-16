@@ -17,8 +17,8 @@ import { Auth, Carts, Customers } from '@o2s/framework/modules';
 
 import { Service as MedusaJsService } from '@/modules/medusajs';
 
+import { handleHttpError } from '../../utils/handle-http-error';
 import { mapAddressToMedusa } from '../customers/customers.mapper';
-import { handleHttpError } from '../utils/handle-http-error';
 
 import { mapCart } from './carts.mapper';
 
@@ -156,7 +156,7 @@ export class CartsService extends Carts.Service {
                     const cart = mapCart(response.cart, this.defaultCurrency);
 
                     if (cart.customerId && authorization && cart.customerId !== customerId) {
-                        return throwError(() => new BadRequestException('Variant ID is required for Medusa carts'));
+                        return throwError(() => new UnauthorizedException('Unauthorized to access this cart'));
                     }
 
                     return from(

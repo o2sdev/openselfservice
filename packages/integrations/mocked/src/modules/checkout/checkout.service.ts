@@ -2,33 +2,12 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { Observable, of, throwError } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
-
-
 import { Carts, Checkout, Payments } from '@o2s/framework/modules';
-
-
 
 import { MOCKED_ORDERS, mapOrderFromCart } from '../orders/orders.mapper';
 
-
-
 import { mapCheckoutSummary, mapPlaceOrderResponse, mapShippingOptions } from './checkout.mapper';
 import { responseDelay } from '@/utils/delay';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @Injectable()
 export class CheckoutService implements Checkout.Service {

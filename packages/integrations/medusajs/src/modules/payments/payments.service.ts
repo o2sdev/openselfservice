@@ -10,7 +10,7 @@ import { Payments } from '@o2s/framework/modules';
 
 import { Service as MedusaJsService } from '@/modules/medusajs';
 
-import { handleHttpError } from '../utils/handle-http-error';
+import { handleHttpError } from '../../utils/handle-http-error';
 
 import { mapPaymentProviders, mapPaymentSession } from './payments.mapper';
 

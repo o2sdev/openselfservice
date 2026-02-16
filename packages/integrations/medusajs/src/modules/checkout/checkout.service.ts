@@ -10,8 +10,8 @@ import { Carts, Checkout, Payments } from '@o2s/framework/modules';
 
 import { Service as MedusaJsService } from '@/modules/medusajs';
 
+import { handleHttpError } from '../../utils/handle-http-error';
 import { mapOrder } from '../orders/orders.mapper';
-import { handleHttpError } from '../utils/handle-http-error';
 
 import { mapCheckoutSummary, mapPlaceOrderResponse, mapShippingOptions } from './checkout.mapper';
 
@@ -178,6 +178,10 @@ export class CheckoutService extends Checkout.Service {
                     return throwError(() => new BadRequestException('Shipping method is required'));
                 }
 
+                if (!cart.paymentMethod) {
+                    return throwError(() => new BadRequestException('Payment method is required'));
+                }
+
                 // Set email on cart if provided (for guest checkout)
                 const email = data?.email || cart.email;
                 if (email && email !== cart.email) {
@@ -318,20 +322,22 @@ export class CheckoutService extends Checkout.Service {
                           { shippingOptionId: data.shippingMethodId },
                           authorization,
                       )
-                    : of(null),
+                    : throwError(() => new BadRequestException('Shipping method is required for checkout')),
             ),
             switchMap(() =>
                 // Setup payment
-                this.setPayment(
-                    { cartId: params.cartId },
-                    {
-                        providerId: data.paymentProviderId,
-                        returnUrl: data.returnUrl,
-                        cancelUrl: data.cancelUrl,
-                        metadata: data.metadata,
-                    },
-                    authorization,
-                ),
+                data.paymentProviderId
+                    ? this.setPayment(
+                          { cartId: params.cartId },
+                          {
+                              providerId: data.paymentProviderId,
+                              returnUrl: data.returnUrl,
+                              cancelUrl: data.cancelUrl,
+                              metadata: data.metadata,
+                          },
+                          authorization,
+                      )
+                    : throwError(() => new BadRequestException('Payment provider is required for checkout')),
             ),
             switchMap(() =>
                 // Place order

@@ -9,7 +9,7 @@ import { Auth, Customers } from '@o2s/framework/modules';
 
 import { Service as MedusaJsService } from '@/modules/medusajs';
 
-import { handleHttpError } from '../utils/handle-http-error';
+import { handleHttpError } from '../../utils/handle-http-error';
 
 import { mapAddressToMedusa, mapCustomerAddress, mapCustomerAddresses } from './customers.mapper';
 

@@ -187,17 +187,20 @@ describe('checkout.mapper', () => {
             expect(() => mapShippingOptions(options, 'EUR')).toThrow('no price information');
         });
 
-        it('should throw when option has no currency', () => {
+        it('should use default currency when option has no currency', () => {
             const options = [
                 {
                     id: 'opt_1',
-                    name: 'Broken',
+                    name: 'Standard',
                     amount: 500,
                     calculated_price: { calculated_amount: 500, currency_code: undefined },
                 },
             ] as unknown as Parameters<typeof mapShippingOptions>[0];
-            expect(() => mapShippingOptions(options, 'EUR')).toThrow(BadRequestException);
-            expect(() => mapShippingOptions(options, 'EUR')).toThrow('no currency information');
+            const result = mapShippingOptions(options, 'EUR');
+            expect(result.data).toHaveLength(1);
+            expect(result.data[0]?.id).toBe('opt_1');
+            expect(result.data[0]?.total?.currency).toBe('EUR');
+            expect(result.data[0]?.subtotal?.currency).toBe('EUR');
         });
     });
 });

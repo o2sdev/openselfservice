@@ -168,7 +168,7 @@ export class CartsService implements Carts.Service {
                 if (!cart) {
                     // Create new active cart
                     if (!data.currency) {
-                        throw new NotFoundException('Currency is required when creating a new cart');
+                        throw new BadRequestException('Currency is required when creating a new cart');
                     }
                     cart = createCart({
                         customerId,
@@ -180,7 +180,7 @@ export class CartsService implements Carts.Service {
             } else {
                 // For guests: create new cart
                 if (!data.currency) {
-                    throw new NotFoundException('Currency is required when creating a new cart');
+                    throw new BadRequestException('Currency is required when creating a new cart');
                 }
                 cart = createCart({
                     currency: data.currency,

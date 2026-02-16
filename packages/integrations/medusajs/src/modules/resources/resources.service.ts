@@ -10,8 +10,8 @@ import { Auth, Products, Resources } from '@o2s/framework/modules';
 
 import { Service as MedusaJsService } from '@/modules/medusajs';
 
+import { handleHttpError } from '../../utils/handle-http-error';
 import { mapCompatibleServices, mapFeaturedServices } from '../products/products.mapper';
-import { handleHttpError } from '../utils/handle-http-error';
 
 import { mapAsset, mapAssets, mapService, mapServices } from './resources.mapper';
 import {

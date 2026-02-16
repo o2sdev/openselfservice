@@ -89,7 +89,7 @@ export const mapService = (
 /** AddressDTO with first_name/last_name as returned by the custom resources API */
 type AddressDTOWithNames = AddressDTO & { first_name?: string; last_name?: string };
 
-const mapAddress = (address: AddressDTOWithNames): Models.Address.Address | undefined => {
+const mapAddress = (address?: AddressDTOWithNames): Models.Address.Address | undefined => {
     if (!address) return undefined;
     return {
         firstName: address.first_name,
