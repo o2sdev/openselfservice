@@ -102,18 +102,7 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                     <Formik
                         initialValues={initialValues}
                         validationSchema={validationSchema}
-                        onSubmit={(values) => {
-                            const shippingMethodOption = fields.shippingMethod.options.find(
-                                (opt) => opt.value === values.shippingMethod,
-                            );
-                            const shippingMethodLabel = shippingMethodOption?.label ?? values.shippingMethod;
-                            localStorage.setItem(
-                                'checkoutShippingAddress',
-                                JSON.stringify({
-                                    ...values,
-                                    shippingMethodLabel,
-                                }),
-                            );
+                        onSubmit={() => {
                             router.push(buttons.next.path);
                         }}
                         validateOnBlur={true}

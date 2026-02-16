@@ -103,18 +103,7 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
                     <Formik
                         initialValues={initialValues}
                         validationSchema={validationSchema}
-                        onSubmit={(values) => {
-                            const paymentMethodOption = fields.paymentMethod.options.find(
-                                (opt) => opt.value === values.paymentMethod,
-                            );
-                            const paymentMethodLabel = paymentMethodOption?.label ?? values.paymentMethod;
-                            localStorage.setItem(
-                                'checkoutBillingPayment',
-                                JSON.stringify({
-                                    ...values,
-                                    paymentMethodLabel,
-                                }),
-                            );
+                        onSubmit={() => {
                             router.push(buttons.next.path);
                         }}
                         validateOnBlur={true}

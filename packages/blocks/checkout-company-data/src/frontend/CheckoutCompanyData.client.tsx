@@ -95,8 +95,7 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
                     <Formik
                         initialValues={initialValues}
                         validationSchema={validationSchema}
-                        onSubmit={(values) => {
-                            localStorage.setItem('checkoutCompanyData', JSON.stringify(values));
+                        onSubmit={() => {
                             router.push(buttons.next.path);
                         }}
                         validateOnBlur={true}
