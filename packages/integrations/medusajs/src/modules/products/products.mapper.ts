@@ -124,9 +124,9 @@ const isVariantInStock = (variant: HttpTypes.AdminProductVariant): boolean => {
 };
 
 // Map Medusa variant options to Record<optionId, value>
-type MedusaOptionValue = { option_id?: string; value?: string };
+
 const getVariantOptionsMap = (variant: HttpTypes.AdminProductVariant): Record<string, string> => {
-    const options = variant.options as MedusaOptionValue[] | undefined;
+    const options = variant.options;
     if (!options || !Array.isArray(options)) {
         return {};
     }
@@ -173,9 +173,7 @@ const mapOptionGroups = (
     const groupsById = new Map<string, { medusaTitle: string; title: string; values: Set<string> }>();
 
     for (const variant of variants) {
-        const options = variant.options as
-            | { option_id?: string; value?: string; option?: { title?: string } }[]
-            | undefined;
+        const options = variant.options;
         if (!options || !Array.isArray(options)) continue;
 
         for (const option of options) {
