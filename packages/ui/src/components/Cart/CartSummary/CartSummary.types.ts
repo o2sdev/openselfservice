@@ -15,8 +15,6 @@ export interface CartSummaryProps {
     LinkComponent?: FrontendModels.Link.LinkComponent;
     checkoutButton?: Models.Link.Link;
     continueShopping?: Models.Link.Link;
-    /** Action button - label, icon and onClick (no navigation) */
-    previewButton?: { label: string; icon?: string; onClick: () => void };
     /** When true, renders checkout as button with loading state instead of link */
     isCheckoutLoading?: boolean;
     onCheckoutClick?: () => void;

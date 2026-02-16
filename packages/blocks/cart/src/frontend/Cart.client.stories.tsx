@@ -41,20 +41,6 @@ const baseBlock = {
         label: 'Continue shopping',
         path: '#',
     },
-    previewButtons: {
-        viewPDF: {
-            label: 'View PDF',
-            icon: 'FileText',
-            dialog: {
-                title: 'Document preview',
-                description: 'Open document in new tab',
-                closeLabel: 'Close',
-                fallbackMessage: 'Preview cannot be displayed',
-                openInNewTabLabel: 'Open in new tab',
-                pdfUrl: '/mock/document.pdf',
-            },
-        },
-    },
     empty: {
         title: 'Your cart is empty',
         description: 'Add products to place an order',

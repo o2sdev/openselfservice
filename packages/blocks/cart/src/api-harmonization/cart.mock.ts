@@ -44,32 +44,6 @@ export function getCartBlockMock(_id: string, locale: string): CartBlock {
             label: isPl ? 'Kontynuuj zakupy' : isDe ? 'Weiter einkaufen' : 'Continue shopping',
             path: '/products',
         },
-        previewButtons: {
-            viewPDF: {
-                label: isPl ? 'Zobacz PDF' : isDe ? 'PDF anzeigen' : 'View PDF',
-                icon: 'FileText',
-                dialog: {
-                    title: isPl ? 'Podgląd dokumentu' : isDe ? 'Dokumentvorschau' : 'Document preview',
-                    description: isPl
-                        ? 'Otwórz dokument w nowej karcie'
-                        : isDe
-                          ? 'Dokument in neuem Tab öffnen'
-                          : 'Open document in new tab',
-                    closeLabel: isPl ? 'Zamknij' : isDe ? 'Schließen' : 'Close',
-                    fallbackMessage: isPl
-                        ? 'Nie można wyświetlić podglądu'
-                        : isDe
-                          ? 'Vorschau kann nicht angezeigt werden'
-                          : 'Preview cannot be displayed',
-                    openInNewTabLabel: isPl
-                        ? 'Otwórz w nowej karcie'
-                        : isDe
-                          ? 'In neuem Tab öffnen'
-                          : 'Open in new tab',
-                    pdfUrl: '/mock/document.pdf',
-                },
-            },
-        },
         empty: {
             title: isPl ? 'Twój koszyk jest pusty' : isDe ? 'Ihr Warenkorb ist leer' : 'Your cart is empty',
             description: isPl

@@ -63,20 +63,6 @@ export class CartBlock extends ApiModels.Block.Block {
     summaryLabels!: CartBlockSummaryLabels;
     checkoutButton?: { label: string; path: string; icon?: string };
     continueShopping?: { label: string; path: string };
-    previewButtons?: {
-        viewPDF: {
-            label: string;
-            icon?: string;
-            dialog?: {
-                title: string;
-                description: string;
-                closeLabel: string;
-                fallbackMessage: string;
-                openInNewTabLabel: string;
-                pdfUrl?: string;
-            };
-        };
-    };
     empty!: CartBlockEmpty;
     items!: CartBlockItem[];
     totals!: CartBlockTotals;

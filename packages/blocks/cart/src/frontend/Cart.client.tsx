@@ -1,7 +1,7 @@
 'use client';
 
 import { createNavigation } from 'next-intl/navigation';
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 
 import type { Models } from '@o2s/framework/modules';
 
@@ -10,14 +10,6 @@ import { CartSummary } from '@o2s/ui/components/Cart/CartSummary';
 import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
 
 import { Button } from '@o2s/ui/elements/button';
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-} from '@o2s/ui/elements/dialog';
 import { Typography } from '@o2s/ui/elements/typography';
 
 import type { Model } from '../api-harmonization/cart.client';
@@ -53,7 +45,6 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
     summaryLabels,
     checkoutButton,
     continueShopping,
-    previewButtons,
     empty,
     items: initialItems,
     totals: initialTotals,
@@ -61,8 +52,6 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
     __typename,
 }) => {
     const { Link: LinkComponent } = createNavigation(routing);
-
-    const [isPdfModalOpen, setIsPdfModalOpen] = useState(false);
 
     const items = useMemo(() => initialItems ?? [], [initialItems]);
 
@@ -190,72 +179,9 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
                                   }
                                 : undefined
                         }
-                        previewButton={
-                            previewButtons?.viewPDF
-                                ? {
-                                      label: previewButtons.viewPDF.label,
-                                      icon: previewButtons.viewPDF.icon,
-                                      onClick: () => setIsPdfModalOpen(true),
-                                  }
-                                : undefined
-                        }
                     />
                 </div>
             </div>
-
-            {/* PDF Preview Dialog */}
-            {previewButtons?.viewPDF?.dialog && (
-                <Dialog open={isPdfModalOpen} onOpenChange={setIsPdfModalOpen}>
-                    <DialogContent className="flex flex-col p-0 gap-0 w-full h-screen max-w-full rounded-none sm:max-w-full sm:rounded-none md:max-w-7xl md:w-[calc(100%-4rem)] md:h-[90vh] md:rounded-lg">
-                        <div className="p-6 flex-shrink-0 border-b">
-                            <DialogHeader>
-                                <DialogTitle>{previewButtons.viewPDF.dialog.title}</DialogTitle>
-                                <DialogDescription>{previewButtons.viewPDF.dialog.description}</DialogDescription>
-                            </DialogHeader>
-                        </div>
-                        <div className="flex-1 overflow-hidden flex flex-col min-h-0">
-                            <div className="w-full h-full bg-muted flex items-center justify-center border-x overflow-hidden">
-                                {previewButtons.viewPDF.dialog.pdfUrl ? (
-                                    <object
-                                        data={previewButtons.viewPDF.dialog.pdfUrl}
-                                        type="application/pdf"
-                                        className="w-full h-full"
-                                        aria-label={previewButtons.viewPDF.dialog.title}
-                                    >
-                                        <div className="flex flex-col items-center justify-center gap-4 p-6 text-center h-full">
-                                            <Typography variant="p" className="text-muted-foreground">
-                                                {previewButtons.viewPDF.dialog.fallbackMessage}
-                                            </Typography>
-                                            <Button
-                                                variant="outline"
-                                                onClick={() => {
-                                                    window.open(previewButtons!.viewPDF!.dialog!.pdfUrl!, '_blank');
-                                                }}
-                                            >
-                                                <DynamicIcon name="ExternalLink" className="mr-2" size={16} />
-                                                {previewButtons.viewPDF.dialog.openInNewTabLabel}
-                                            </Button>
-                                        </div>
-                                    </object>
-                                ) : (
-                                    <div className="flex flex-col items-center justify-center gap-4 p-6 text-center h-full">
-                                        <Typography variant="p" className="text-muted-foreground">
-                                            {previewButtons.viewPDF.dialog.fallbackMessage}
-                                        </Typography>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                        <div className="p-6 flex-shrink-0 border-t">
-                            <DialogFooter>
-                                <Button variant="outline" onClick={() => setIsPdfModalOpen(false)}>
-                                    {previewButtons.viewPDF.dialog.closeLabel}
-                                </Button>
-                            </DialogFooter>
-                        </div>
-                    </DialogContent>
-                </Dialog>
-            )}
         </div>
     );
 };

@@ -19,7 +19,6 @@ export const CartSummary: React.FC<Readonly<CartSummaryProps>> = ({
     LinkComponent,
     checkoutButton,
     continueShopping,
-    previewButton,
     isCheckoutLoading = false,
     onCheckoutClick,
     loadingLabel = 'Loading...',
@@ -120,17 +119,6 @@ export const CartSummary: React.FC<Readonly<CartSummaryProps>> = ({
                         ) : (
                             <a href={continueShopping.url}>{continueShopping.label}</a>
                         )}
-                    </Button>
-                </>
-            )}
-
-            {/* Preview Button */}
-            {previewButton && (
-                <>
-                    <Separator />
-                    <Button variant="outline" size="lg" className="w-full" onClick={previewButton.onClick}>
-                        {previewButton.icon && <DynamicIcon name={previewButton.icon} size={20} className="mr-2" />}
-                        {previewButton.label}
                     </Button>
                 </>
             )}

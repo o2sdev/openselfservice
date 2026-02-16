@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { fn } from 'storybook/test';
 
 import { CartSummary } from './CartSummary';
 
@@ -38,17 +37,6 @@ export const Default: Story = {
         continueShopping: {
             url: '#',
             label: 'Continue shopping',
-        },
-    },
-};
-
-export const WithPreviewButton: Story = {
-    args: {
-        ...defaultArgs,
-        previewButton: {
-            label: 'View PDF',
-            icon: 'FileText',
-            onClick: fn(),
         },
     },
 };
