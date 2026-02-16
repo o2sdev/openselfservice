@@ -2,7 +2,7 @@ import { defineRouting } from 'next-intl/routing';
 
 import type { Model } from '../api-harmonization/checkout-summary.client';
 
-export interface CheckoutDataFromStorage {
+export interface CheckoutData {
     companyData?: {
         companyName: string;
         nip: string;
@@ -28,7 +28,6 @@ export interface CheckoutDataFromStorage {
         sameAsShippingAddress: boolean;
         paymentMethod: string;
         paymentMethodLabel?: string;
-        purchaseOrderNumber?: string;
     };
 }
 
@@ -47,7 +46,7 @@ export interface CheckoutSummaryProps {
     /** Called when user confirms order. When not provided, confirm button is disabled. */
     onConfirm?: (params: {
         cartItems: Model.CheckoutSummaryItem[];
-        checkoutData: CheckoutDataFromStorage;
+        checkoutData: CheckoutData;
         notes: { comment: string; specialInstructions: string };
     }) => Promise<CreateOrderResult>;
 }

@@ -27,6 +27,45 @@ export interface CheckoutSummaryTotals {
     total: Models.Price.Price;
 }
 
+/** Company data from checkout step 1 */
+export interface CheckoutSummaryCompanyData {
+    companyName: string;
+    nip: string;
+    street: string;
+    city: string;
+    postalCode: string;
+    country: string;
+}
+
+/** Shipping address from checkout step 2 */
+export interface CheckoutSummaryShippingAddress {
+    street: string;
+    city: string;
+    postalCode: string;
+    country: string;
+    sameAsCompanyAddress: boolean;
+    shippingMethod: string;
+    shippingMethodLabel?: string;
+}
+
+/** Billing/payment from checkout step 3 */
+export interface CheckoutSummaryBillingPayment {
+    street: string;
+    city: string;
+    postalCode: string;
+    country: string;
+    sameAsShippingAddress: boolean;
+    paymentMethod: string;
+    paymentMethodLabel?: string;
+}
+
+/** Checkout data (company, shipping, billing) - from API or previous steps */
+export interface CheckoutSummaryCheckoutData {
+    companyData?: CheckoutSummaryCompanyData;
+    shippingAddress?: CheckoutSummaryShippingAddress;
+    billingPayment?: CheckoutSummaryBillingPayment;
+}
+
 export class CheckoutSummaryBlock extends ApiModels.Block.Block {
     __typename!: 'CheckoutSummaryBlock';
     title!: string;
@@ -42,8 +81,8 @@ export class CheckoutSummaryBlock extends ApiModels.Block.Block {
             companyNameLabel?: string;
             nipLabel?: string;
         };
-        shipping: { title: string; methodLabel?: string };
-        billing: { title: string; methodLabel?: string };
+        shipping: { title: string; addressLabel?: string; methodLabel?: string };
+        billing: { title: string; addressLabel?: string; methodLabel?: string };
         summary: {
             title: string;
             subtotalLabel: string;
@@ -72,6 +111,8 @@ export class CheckoutSummaryBlock extends ApiModels.Block.Block {
     };
     items!: CheckoutSummaryItem[];
     totals!: CheckoutSummaryTotals;
+    /** Checkout data (company, shipping, billing) - from API or previous checkout steps */
+    checkoutData?: CheckoutSummaryCheckoutData;
     /** Checkout step indicator (steps labels + current step index 1-based) */
     stepIndicator?: { steps: string[]; currentStep: number };
 }

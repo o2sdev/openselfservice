@@ -30,11 +30,13 @@ const baseBlock = {
             nipLabel: 'NIP',
         },
         shipping: {
-            title: 'Shipping address',
+            title: 'Delivery',
+            addressLabel: 'Shipping address:',
             methodLabel: 'Shipping method:',
         },
         billing: {
-            title: 'Billing address',
+            title: 'Payment',
+            addressLabel: 'Billing address:',
             methodLabel: 'Payment method:',
         },
         summary: {
@@ -96,6 +98,34 @@ const baseBlock = {
         tax: { value: 47.14, currency: 'PLN' as const },
         shipping: { value: 0, currency: 'PLN' as const },
         total: { value: 252.11, currency: 'PLN' as const },
+    },
+    checkoutData: {
+        companyData: {
+            companyName: 'Test Company Inc.',
+            nip: '5272960923',
+            street: '123 Sample Street',
+            city: 'Warsaw',
+            postalCode: '00-001',
+            country: 'Poland',
+        },
+        shippingAddress: {
+            street: '123 Sample Street',
+            city: 'Warsaw',
+            postalCode: '00-001',
+            country: 'Poland',
+            sameAsCompanyAddress: false,
+            shippingMethod: 'courier',
+            shippingMethodLabel: 'DPD Courier',
+        },
+        billingPayment: {
+            street: '123 Sample Street',
+            city: 'Warsaw',
+            postalCode: '00-001',
+            country: 'Poland',
+            sameAsShippingAddress: true,
+            paymentMethod: 'transfer',
+            paymentMethodLabel: 'Bank transfer',
+        },
     },
 };
 

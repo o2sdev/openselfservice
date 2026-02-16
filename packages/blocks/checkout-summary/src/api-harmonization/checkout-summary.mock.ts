@@ -32,11 +32,13 @@ export function getCheckoutSummaryBlockMock(_id: string, locale: string): Checko
                 nipLabel: 'NIP',
             },
             shipping: {
-                title: isPl ? 'Adres dostawy' : isDe ? 'Lieferadresse' : 'Shipping address',
+                title: isPl ? 'Dostawa' : isDe ? 'Lieferung' : 'Delivery',
+                addressLabel: isPl ? 'Adres dostawy:' : isDe ? 'Lieferadresse:' : 'Shipping address:',
                 methodLabel: isPl ? 'Metoda dostawy:' : isDe ? 'Versandart:' : 'Shipping method:',
             },
             billing: {
-                title: isPl ? 'Adres rozliczeniowy' : isDe ? 'Rechnungsadresse' : 'Billing address',
+                title: isPl ? 'Płatność' : isDe ? 'Zahlung' : 'Payment',
+                addressLabel: isPl ? 'Adres rozliczeniowy:' : isDe ? 'Rechnungsadresse:' : 'Billing address:',
                 methodLabel: isPl ? 'Metoda płatności:' : isDe ? 'Zahlungsmethode:' : 'Payment method:',
             },
             summary: {
@@ -69,11 +71,7 @@ export function getCheckoutSummaryBlockMock(_id: string, locale: string): Checko
         buttons: {
             back: {
                 label: isPl ? 'Wstecz' : isDe ? 'Zurück' : 'Back',
-                path: isPl
-                    ? '/zamowienie/platnosc-rozliczenie'
-                    : isDe
-                      ? '/kasse/rechnung-zahlung'
-                      : '/checkout/billing-payment',
+                path: isPl ? '/zamowienie/platnosc' : isDe ? '/kasse/rechnung-zahlung' : '/checkout/billing-payment',
             },
             confirm: isPl ? 'Złóż zamówienie' : isDe ? 'Bestellung aufgeben' : 'Place order',
         },
@@ -141,6 +139,34 @@ export function getCheckoutSummaryBlockMock(_id: string, locale: string): Checko
             tax: { value: 47.14, currency: 'PLN' },
             shipping: { value: 0, currency: 'PLN' },
             total: { value: 252.11, currency: 'PLN' },
+        },
+        checkoutData: {
+            companyData: {
+                companyName: isPl ? 'Przykładowa Firma Sp. z o.o.' : isDe ? 'Beispielfirma GmbH' : 'Test Company Inc.',
+                nip: '5272960923',
+                street: isPl ? 'ul. Przykładowa 1' : isDe ? 'Musterstraße 1' : '123 Sample Street',
+                city: isPl ? 'Warszawa' : isDe ? 'Berlin' : 'Warsaw',
+                postalCode: '00-001',
+                country: isPl ? 'Polska' : isDe ? 'Deutschland' : 'Poland',
+            },
+            shippingAddress: {
+                street: isPl ? 'ul. Przykładowa 1' : isDe ? 'Musterstraße 1' : '123 Sample Street',
+                city: isPl ? 'Warszawa' : isDe ? 'Berlin' : 'Warsaw',
+                postalCode: '00-001',
+                country: isPl ? 'Polska' : isDe ? 'Deutschland' : 'Poland',
+                sameAsCompanyAddress: false,
+                shippingMethod: 'courier',
+                shippingMethodLabel: isPl ? 'Kurier DPD' : isDe ? 'DPD-Kurier' : 'DPD Courier',
+            },
+            billingPayment: {
+                street: isPl ? 'ul. Przykładowa 1' : isDe ? 'Musterstraße 1' : '123 Sample Street',
+                city: isPl ? 'Warszawa' : isDe ? 'Berlin' : 'Warsaw',
+                postalCode: '00-001',
+                country: isPl ? 'Polska' : isDe ? 'Deutschland' : 'Poland',
+                sameAsShippingAddress: false,
+                paymentMethod: 'transfer',
+                paymentMethodLabel: isPl ? 'Przelew bankowy' : isDe ? 'Banküberweisung' : 'Bank transfer',
+            },
         },
         stepIndicator: {
             steps: isPl

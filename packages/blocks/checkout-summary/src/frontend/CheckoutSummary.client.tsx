@@ -1,7 +1,7 @@
 'use client';
 
 import { createNavigation } from 'next-intl/navigation';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { useToast } from '@o2s/ui/hooks/use-toast';
 
@@ -16,7 +16,7 @@ import { Separator } from '@o2s/ui/elements/separator';
 import { Textarea } from '@o2s/ui/elements/textarea';
 import { Typography } from '@o2s/ui/elements/typography';
 
-import { CheckoutDataFromStorage, CheckoutSummaryPureProps } from './CheckoutSummary.types';
+import { CheckoutData, CheckoutSummaryPureProps } from './CheckoutSummary.types';
 
 export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> = ({
     locale: _locale,
@@ -32,6 +32,7 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
     placeholders,
     items,
     totals,
+    checkoutData: checkoutDataFromBlock,
 }) => {
     const { Link: LinkComponent } = createNavigation(routing);
     const { toast } = useToast();
@@ -39,19 +40,7 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [notes, setNotes] = useState({ comment: '', specialInstructions: '' });
 
-    const [checkoutData, setCheckoutData] = useState<CheckoutDataFromStorage>({});
-
-    useEffect(() => {
-        const companyData = localStorage.getItem('checkoutCompanyData');
-        const shippingAddress = localStorage.getItem('checkoutShippingAddress');
-        const billingPayment = localStorage.getItem('checkoutBillingPayment');
-
-        setCheckoutData({
-            companyData: companyData ? JSON.parse(companyData) : undefined,
-            shippingAddress: shippingAddress ? JSON.parse(shippingAddress) : undefined,
-            billingPayment: billingPayment ? JSON.parse(billingPayment) : undefined,
-        });
-    }, []);
+    const checkoutData: CheckoutData = checkoutDataFromBlock ?? {};
 
     const handleConfirm = async () => {
         if (!onConfirm) return;
@@ -70,14 +59,14 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                 toast({
                     variant: 'destructive',
                     title: 'Error',
-                    description: result.error ?? 'Failed to place order',
+                    description: result.error,
                 });
             }
         } catch (error) {
             toast({
                 variant: 'destructive',
                 title: 'Error',
-                description: error instanceof Error ? error.message : 'Failed to place order',
+                description: error instanceof Error ? error.message : undefined,
             });
         } finally {
             setIsSubmitting(false);
@@ -88,13 +77,7 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
         return null;
     }
 
-    const ph = placeholders ?? {
-        companyData: 'Company data will be displayed here',
-        shippingAddress: 'Shipping address will be displayed here',
-        billingAddress: 'Billing address will be displayed here',
-        sameAsCompanyAddress: 'Shipping address is same as company address',
-        sameAsShippingAddress: 'Billing address is same as shipping address',
-    };
+    const ph = placeholders;
 
     return (
         <div className="w-full flex flex-col gap-8">
@@ -112,7 +95,7 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                 {/* Left column - Order details */}
                 <div className="lg:col-span-2 flex flex-col gap-6">
                     {/* Products */}
-                    <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-2">
                         <Typography variant="h2">{sections.products.title}</Typography>
                         <div className="flex flex-col gap-4">
                             {items.map((item) => {
@@ -136,7 +119,7 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                                             </div>
                                         )}
                                         <div className="flex-1 flex flex-col gap-2">
-                                            <Typography variant="h3">{product?.name ?? 'Product'}</Typography>
+                                            <Typography variant="h3">{product?.name}</Typography>
                                             <div className="flex items-end justify-between gap-4 h-full">
                                                 <div className="flex flex-col gap-1 text-sm text-muted-foreground">
                                                     <span>
@@ -162,19 +145,17 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                         </div>
                     </div>
 
-                    <Separator />
-
                     {/* Company data */}
                     <div className="flex flex-col gap-2">
                         <Typography variant="h2">{sections.company.title}</Typography>
                         {checkoutData.companyData ? (
                             <div className="flex flex-col gap-2 p-4 bg-card rounded-lg border border-border">
                                 <Typography variant="body">
-                                    <strong>{sections.company.companyNameLabel ?? 'Company'}: </strong>
+                                    <strong>{sections.company.companyNameLabel}: </strong>
                                     {checkoutData.companyData.companyName}
                                 </Typography>
                                 <Typography variant="body">
-                                    {sections.company.nipLabel ?? 'NIP'}: {checkoutData.companyData.nip}
+                                    {sections.company.nipLabel}: {checkoutData.companyData.nip}
                                 </Typography>
                                 <div className="mt-2 pt-2 border-t border-border">
                                     {sections.company.addressLabel && (
@@ -191,7 +172,7 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                             </div>
                         ) : (
                             <Typography variant="body" className="text-muted-foreground">
-                                {ph.companyData}
+                                {ph?.companyData}
                             </Typography>
                         )}
                     </div>
@@ -202,21 +183,28 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                         {checkoutData.shippingAddress ? (
                             checkoutData.shippingAddress.sameAsCompanyAddress ? (
                                 <Typography variant="body" className="text-muted-foreground">
-                                    {ph.sameAsCompanyAddress}
+                                    {ph?.sameAsCompanyAddress}
                                 </Typography>
                             ) : (
                                 <div className="flex flex-col gap-2 p-4 bg-card rounded-lg border border-border">
-                                    <Typography variant="body">{checkoutData.shippingAddress.street}</Typography>
-                                    <Typography variant="body">
-                                        {checkoutData.shippingAddress.postalCode} {checkoutData.shippingAddress.city}
-                                    </Typography>
-                                    <Typography variant="body">{checkoutData.shippingAddress.country}</Typography>
+                                    <div className="mt-2 pt-2 border-t border-border first:mt-0 first:pt-0 first:border-t-0">
+                                        {sections.shipping.addressLabel && (
+                                            <Typography variant="small" className="text-muted-foreground mb-1">
+                                                {sections.shipping.addressLabel}
+                                            </Typography>
+                                        )}
+                                        <Typography variant="body">{checkoutData.shippingAddress.street}</Typography>
+                                        <Typography variant="body">
+                                            {checkoutData.shippingAddress.postalCode}{' '}
+                                            {checkoutData.shippingAddress.city}
+                                        </Typography>
+                                        <Typography variant="body">{checkoutData.shippingAddress.country}</Typography>
+                                    </div>
                                     {checkoutData.shippingAddress.shippingMethod && (
                                         <div className="mt-2 pt-2 border-t border-border">
                                             <Typography variant="small" className="text-muted-foreground">
-                                                <strong>{sections.shipping.methodLabel ?? 'Shipping method:'}</strong>{' '}
-                                                {checkoutData.shippingAddress.shippingMethodLabel ??
-                                                    checkoutData.shippingAddress.shippingMethod}
+                                                <strong>{sections.shipping.methodLabel}</strong>{' '}
+                                                {checkoutData.shippingAddress.shippingMethodLabel}
                                             </Typography>
                                         </div>
                                     )}
@@ -224,7 +212,7 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                             )
                         ) : (
                             <Typography variant="body" className="text-muted-foreground">
-                                {ph.shippingAddress}
+                                {ph?.shippingAddress}
                             </Typography>
                         )}
                     </div>
@@ -235,29 +223,27 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                         {checkoutData.billingPayment ? (
                             checkoutData.billingPayment.sameAsShippingAddress ? (
                                 <Typography variant="body" className="text-muted-foreground">
-                                    {ph.sameAsShippingAddress}
+                                    {ph?.sameAsShippingAddress}
                                 </Typography>
                             ) : (
                                 <div className="flex flex-col gap-2 p-4 bg-card rounded-lg border border-border">
-                                    <Typography variant="body">{checkoutData.billingPayment.street}</Typography>
-                                    <Typography variant="body">
-                                        {checkoutData.billingPayment.postalCode} {checkoutData.billingPayment.city}
-                                    </Typography>
-                                    <Typography variant="body">{checkoutData.billingPayment.country}</Typography>
+                                    <div className="mt-2 pt-2 border-t border-border first:mt-0 first:pt-0 first:border-t-0">
+                                        {sections.billing.addressLabel && (
+                                            <Typography variant="small" className="text-muted-foreground mb-1">
+                                                {sections.billing.addressLabel}
+                                            </Typography>
+                                        )}
+                                        <Typography variant="body">{checkoutData.billingPayment.street}</Typography>
+                                        <Typography variant="body">
+                                            {checkoutData.billingPayment.postalCode} {checkoutData.billingPayment.city}
+                                        </Typography>
+                                        <Typography variant="body">{checkoutData.billingPayment.country}</Typography>
+                                    </div>
                                     {checkoutData.billingPayment.paymentMethod && (
                                         <div className="mt-2 pt-2 border-t border-border">
                                             <Typography variant="small" className="text-muted-foreground">
-                                                <strong>{sections.billing.methodLabel ?? 'Payment method:'}</strong>{' '}
-                                                {checkoutData.billingPayment.paymentMethodLabel ??
-                                                    checkoutData.billingPayment.paymentMethod}
-                                            </Typography>
-                                        </div>
-                                    )}
-                                    {checkoutData.billingPayment.purchaseOrderNumber && (
-                                        <div className="mt-1">
-                                            <Typography variant="small" className="text-muted-foreground">
-                                                <strong>Numer zamówienia:</strong>{' '}
-                                                {checkoutData.billingPayment.purchaseOrderNumber}
+                                                <strong>{sections.billing.methodLabel}</strong>{' '}
+                                                {checkoutData.billingPayment.paymentMethodLabel}
                                             </Typography>
                                         </div>
                                     )}
@@ -265,7 +251,7 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                             )
                         ) : (
                             <Typography variant="body" className="text-muted-foreground">
-                                {ph.billingAddress}
+                                {ph?.billingAddress}
                             </Typography>
                         )}
                     </div>
@@ -365,7 +351,7 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                                 {isSubmitting ? (
                                     <>
                                         <DynamicIcon name="Loader2" size={20} className="mr-2 animate-spin" />
-                                        {loadingLabels?.confirming ?? 'Processing...'}
+                                        {loadingLabels?.confirming}
                                     </>
                                 ) : (
                                     buttons.confirm
