@@ -1,69 +1,73 @@
 import { Observable } from 'rxjs';
 
-import * as Carts from './';
+import { Cart, Carts } from './carts.model';
+import {
+    AddCartItemBody,
+    AddShippingMethodBody,
+    AddShippingMethodParams,
+    ApplyPromotionBody,
+    ApplyPromotionParams,
+    CreateCartBody,
+    DeleteCartParams,
+    GetCartListQuery,
+    GetCartParams,
+    PrepareCheckoutParams,
+    RemoveCartItemParams,
+    RemovePromotionParams,
+    UpdateCartAddressesBody,
+    UpdateCartAddressesParams,
+    UpdateCartBody,
+    UpdateCartItemBody,
+    UpdateCartItemParams,
+    UpdateCartParams,
+} from './carts.request';
 
 export abstract class CartService {
     protected constructor(..._services: unknown[]) {}
 
-    abstract getCart(
-        params: Carts.Request.GetCartParams,
-        authorization?: string,
-    ): Observable<Carts.Model.Cart | undefined>;
+    abstract getCart(params: GetCartParams, authorization?: string): Observable<Cart | undefined>;
 
-    abstract getCartList(query: Carts.Request.GetCartListQuery, authorization?: string): Observable<Carts.Model.Carts>;
+    abstract getCartList(query: GetCartListQuery, authorization?: string): Observable<Carts>;
 
-    abstract createCart(data: Carts.Request.CreateCartBody, authorization?: string): Observable<Carts.Model.Cart>;
+    abstract createCart(data: CreateCartBody, authorization?: string): Observable<Cart>;
 
-    abstract updateCart(
-        params: Carts.Request.UpdateCartParams,
-        data: Carts.Request.UpdateCartBody,
-        authorization?: string,
-    ): Observable<Carts.Model.Cart>;
+    abstract updateCart(params: UpdateCartParams, data: UpdateCartBody, authorization?: string): Observable<Cart>;
 
-    abstract deleteCart(params: Carts.Request.DeleteCartParams, authorization?: string): Observable<void>;
+    abstract deleteCart(params: DeleteCartParams, authorization?: string): Observable<void>;
 
-    abstract addCartItem(data: Carts.Request.AddCartItemBody, authorization?: string): Observable<Carts.Model.Cart>;
+    abstract addCartItem(data: AddCartItemBody, authorization?: string): Observable<Cart>;
 
     abstract updateCartItem(
-        params: Carts.Request.UpdateCartItemParams,
-        data: Carts.Request.UpdateCartItemBody,
+        params: UpdateCartItemParams,
+        data: UpdateCartItemBody,
         authorization?: string,
-    ): Observable<Carts.Model.Cart>;
+    ): Observable<Cart>;
 
-    abstract removeCartItem(
-        params: Carts.Request.RemoveCartItemParams,
-        authorization?: string,
-    ): Observable<Carts.Model.Cart>;
+    abstract removeCartItem(params: RemoveCartItemParams, authorization?: string): Observable<Cart>;
 
     abstract applyPromotion(
-        params: Carts.Request.ApplyPromotionParams,
-        data: Carts.Request.ApplyPromotionBody,
+        params: ApplyPromotionParams,
+        data: ApplyPromotionBody,
         authorization?: string,
-    ): Observable<Carts.Model.Cart>;
+    ): Observable<Cart>;
 
-    abstract removePromotion(
-        params: Carts.Request.RemovePromotionParams,
-        authorization?: string,
-    ): Observable<Carts.Model.Cart>;
+    abstract removePromotion(params: RemovePromotionParams, authorization?: string): Observable<Cart>;
 
-    abstract getCurrentCart(authorization?: string): Observable<Carts.Model.Cart | undefined>;
+    abstract getCurrentCart(authorization?: string): Observable<Cart | undefined>;
 
-    abstract prepareCheckout(
-        params: Carts.Request.PrepareCheckoutParams,
-        authorization?: string,
-    ): Observable<Carts.Model.Cart>;
+    abstract prepareCheckout(params: PrepareCheckoutParams, authorization?: string): Observable<Cart>;
 
     // Update cart addresses (shipping and/or billing)
     abstract updateCartAddresses(
-        params: Carts.Request.UpdateCartAddressesParams,
-        data: Carts.Request.UpdateCartAddressesBody,
+        params: UpdateCartAddressesParams,
+        data: UpdateCartAddressesBody,
         authorization?: string,
-    ): Observable<Carts.Model.Cart>;
+    ): Observable<Cart>;
 
     // Add shipping method to cart
     abstract addShippingMethod(
-        params: Carts.Request.AddShippingMethodParams,
-        data: Carts.Request.AddShippingMethodBody,
+        params: AddShippingMethodParams,
+        data: AddShippingMethodBody,
         authorization?: string,
-    ): Observable<Carts.Model.Cart>;
+    ): Observable<Cart>;
 }

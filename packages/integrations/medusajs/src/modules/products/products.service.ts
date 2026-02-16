@@ -1,7 +1,7 @@
 import Medusa from '@medusajs/js-sdk';
 import { HttpTypes } from '@medusajs/types';
 import { HttpService } from '@nestjs/axios';
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Observable, catchError, from, map } from 'rxjs';
 
@@ -79,7 +79,7 @@ export class ProductsService extends Products.Service {
             map((response: HttpTypes.StoreProductResponse) => {
                 const product = response.product;
                 if (!product?.variants?.length) {
-                    throw new Error(`No variants found for product ${params.id}`);
+                    throw new NotFoundException(`No variants found for product ${params.id}`);
                 }
 
                 // Find the requested variant, or use the first one
@@ -87,7 +87,7 @@ export class ProductsService extends Products.Service {
                 const variant = params.variantId ? variants.find((v) => v.id === params.variantId) : variants[0];
 
                 if (!variant) {
-                    throw new Error(`Variant ${params.variantId} not found for product ${params.id}`);
+                    throw new NotFoundException(`Variant ${params.variantId} not found for product ${params.id}`);
                 }
 
                 // Ensure the variant has a reference to the product for mapping

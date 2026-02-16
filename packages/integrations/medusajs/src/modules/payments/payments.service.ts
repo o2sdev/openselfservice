@@ -151,33 +151,33 @@ export class PaymentsService extends Payments.Service {
             updatePayload['metadata'] = data.metadata;
         }
 
-        return from(
-            this.httpClient
-                .post<{ payment_session: HttpTypes.StorePaymentSession }>(
-                    `${this.medusaJsService.getBaseUrl()}/store/payment-sessions/${params.id}`,
-                    updatePayload,
-                    {
-                        headers: this.medusaJsService.getStoreApiHeaders(authorization),
-                    },
-                )
-                .toPromise(),
-        ).pipe(
-            map((response) => {
-                if (!response?.data) {
-                    throw new Error('Failed to update payment session');
-                }
-                // We don't have cart ID here, so we'll use empty string
-                // In practice, this should be retrieved from the session or stored context
-                const cartId = '';
-                return mapPaymentSession(response.data.payment_session, cartId);
-            }),
-            catchError((error) => {
-                if (error.response?.status === 404) {
-                    return throwError(() => new NotFoundException(`Payment session with ID ${params.id} not found`));
-                }
-                return handleHttpError(error);
-            }),
-        );
+        return this.httpClient
+            .post<{ payment_session: HttpTypes.StorePaymentSession }>(
+                `${this.medusaJsService.getBaseUrl()}/store/payment-sessions/${params.id}`,
+                updatePayload,
+                {
+                    headers: this.medusaJsService.getStoreApiHeaders(authorization),
+                },
+            )
+            .pipe(
+                map((response) => {
+                    if (!response?.data) {
+                        throw new Error('Failed to update payment session');
+                    }
+                    // We don't have cart ID here, so we'll use empty string
+                    // In practice, this should be retrieved from the session or stored context
+                    const cartId = '';
+                    return mapPaymentSession(response.data.payment_session, cartId);
+                }),
+                catchError((error) => {
+                    if (error.response?.status === 404) {
+                        return throwError(
+                            () => new NotFoundException(`Payment session with ID ${params.id} not found`),
+                        );
+                    }
+                    return handleHttpError(error);
+                }),
+            );
     }
 
     /**
@@ -190,20 +190,20 @@ export class PaymentsService extends Payments.Service {
      * @see {@link https://docs.medusajs.com/api/store#payment-sessions_deletepayment-sessionsid Medusa Store API - Delete Payment Session}
      */
     cancelSession(params: Payments.Request.CancelSessionParams, authorization: string | undefined): Observable<void> {
-        return from(
-            this.httpClient
-                .delete(`${this.medusaJsService.getBaseUrl()}/store/payment-sessions/${params.id}`, {
-                    headers: this.medusaJsService.getStoreApiHeaders(authorization),
-                })
-                .toPromise(),
-        ).pipe(
-            map(() => undefined),
-            catchError((error) => {
-                if (error.response?.status === 404) {
-                    return throwError(() => new NotFoundException(`Payment session with ID ${params.id} not found`));
-                }
-                return handleHttpError(error);
-            }),
-        );
+        return this.httpClient
+            .delete(`${this.medusaJsService.getBaseUrl()}/store/payment-sessions/${params.id}`, {
+                headers: this.medusaJsService.getStoreApiHeaders(authorization),
+            })
+            .pipe(
+                map(() => undefined),
+                catchError((error) => {
+                    if (error.response?.status === 404) {
+                        return throwError(
+                            () => new NotFoundException(`Payment session with ID ${params.id} not found`),
+                        );
+                    }
+                    return handleHttpError(error);
+                }),
+            );
     }
 }

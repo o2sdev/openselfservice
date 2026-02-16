@@ -43,6 +43,7 @@ describe('CartsService', () => {
                 addShippingMethod: ReturnType<typeof vi.fn>;
             };
         };
+        client: { fetch: ReturnType<typeof vi.fn> };
     };
     let mockMedusaJsService: { getSdk: ReturnType<typeof vi.fn>; getStoreApiHeaders: ReturnType<typeof vi.fn> };
     let mockAuthService: { getCustomerId: ReturnType<typeof vi.fn> };
@@ -64,6 +65,7 @@ describe('CartsService', () => {
                     addShippingMethod: vi.fn(),
                 },
             },
+            client: { fetch: vi.fn() },
         };
         mockMedusaJsService = {
             getSdk: vi.fn(() => mockSdk),
@@ -111,7 +113,7 @@ describe('CartsService', () => {
             expect(mockSdk.store.cart.retrieve).toHaveBeenCalledWith('cart_1', {}, expect.any(Object));
             expect(result).toBeDefined();
             expect(result?.id).toBe('cart_1');
-            expect(result?.currency).toBe('eur');
+            expect(result?.currency).toBe('EUR');
         });
 
         it('should throw UnauthorizedException when cart.customerId !== auth customerId', async () => {
@@ -414,8 +416,8 @@ describe('CartsService', () => {
     });
 
     describe('applyPromotion', () => {
-        it('should call cart.update with promo_codes', async () => {
-            mockSdk.store.cart.update.mockResolvedValue({ cart: minimalCart });
+        it('should call client.fetch with promo_codes', async () => {
+            mockSdk.client.fetch.mockResolvedValue({ cart: minimalCart });
 
             const result = await firstValueFrom(
                 service.applyPromotion(
@@ -425,42 +427,37 @@ describe('CartsService', () => {
                 ),
             );
 
-            expect(mockSdk.store.cart.update).toHaveBeenCalledWith(
-                'cart_1',
-                { promo_codes: ['SAVE10'] },
-                {},
-                expect.any(Object),
+            expect(mockSdk.client.fetch).toHaveBeenCalledWith(
+                '/store/carts/cart_1/promotions',
+                expect.objectContaining({
+                    method: 'POST',
+                    body: expect.objectContaining({ promo_codes: ['SAVE10'] }),
+                }),
             );
             expect(result?.id).toBe('cart_1');
         });
     });
 
     describe('removePromotion', () => {
-        it('should retrieve cart, filter promotion, update with remaining codes', async () => {
-            const cartWithPromos = {
-                ...minimalCart,
-                promotions: [
-                    { id: 'promo_1', code: 'SAVE10' },
-                    { id: 'promo_2', code: 'FREE_SHIP' },
-                ],
-            };
-            mockSdk.store.cart.retrieve.mockResolvedValue({ cart: cartWithPromos });
-            mockSdk.store.cart.update.mockResolvedValue({ cart: minimalCart });
+        it('should call client.fetch with promotion code in promo_codes', async () => {
+            mockSdk.client.fetch.mockResolvedValue({ cart: minimalCart });
 
             const result = await firstValueFrom(
                 service.removePromotion(
-                    { cartId: 'cart_1', promotionId: 'promo_1' } as Carts.Request.RemovePromotionParams,
+                    { cartId: 'cart_1', code: 'SAVE10' } as Carts.Request.RemovePromotionParams,
                     'Bearer token',
                 ),
             );
 
-            expect(mockSdk.store.cart.update).toHaveBeenCalledWith(
-                'cart_1',
-                { promo_codes: ['FREE_SHIP'] },
-                {},
-                expect.any(Object),
+            expect(mockSdk.client.fetch).toHaveBeenCalledWith(
+                '/store/carts/cart_1/promotions',
+                expect.objectContaining({
+                    method: 'POST',
+                    body: expect.objectContaining({ promo_codes: ['SAVE10'] }),
+                }),
             );
             expect(result).toBeDefined();
+            expect(result?.id).toBe('cart_1');
         });
     });
 

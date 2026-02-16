@@ -32,7 +32,7 @@ describe('carts.mapper', () => {
             const result = mapCart(cart, defaultCurrency);
             expect(result.id).toBe('cart_1');
             expect(result.customerId).toBeUndefined();
-            expect(result.currency).toBe('eur');
+            expect(result.currency).toBe('EUR');
             expect(result.items.data).toHaveLength(0);
             expect(result.items.total).toBe(0);
             expect(result.subtotal?.value).toBe(9000);

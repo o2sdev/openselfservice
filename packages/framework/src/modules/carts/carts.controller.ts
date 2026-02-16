@@ -75,7 +75,7 @@ export class CartsController {
         return this.cartService.applyPromotion(params, body, headers.authorization);
     }
 
-    @Delete(':cartId/promotions/:promotionId')
+    @Delete(':cartId/promotions/:code')
     removePromotion(@Param() params: Request.RemovePromotionParams, @Headers() headers: AppHeaders) {
         return this.cartService.removePromotion(params, headers.authorization);
     }

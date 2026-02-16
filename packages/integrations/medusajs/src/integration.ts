@@ -42,7 +42,7 @@ export const Config: Partial<ApiConfig['integrations']> = {
     payments: {
         name: 'medusajs',
         service: PaymentsService,
-        imports: [MedusaJsModule],
+        imports: [MedusaJsModule, Auth.Module],
     },
     checkout: {
         name: 'medusajs',

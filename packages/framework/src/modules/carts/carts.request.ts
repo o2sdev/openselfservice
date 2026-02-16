@@ -83,7 +83,7 @@ export class ApplyPromotionBody {
 
 export class RemovePromotionParams {
     cartId!: string;
-    promotionId!: string;
+    code!: string;
 }
 
 // Checkout operations

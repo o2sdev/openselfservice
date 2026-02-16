@@ -67,10 +67,9 @@ export class MedusaJsService {
 
         this._sdk = new Medusa({
             baseUrl: this._medusaBaseUrl,
-            // debug: this.logLevel === 'debug',
-            debug: true,
+            debug: this.logLevel === 'debug',
             publishableKey: this._medusaPublishableApiKey,
-            // apiKey: this._medusaAdminApiKey,
+            apiKey: this._medusaAdminApiKey,
             auth: {
                 type: 'jwt',
             },
@@ -124,7 +123,9 @@ export class MedusaJsService {
      * @param authorization - Authorization header value from the API Harmonization layer (SSO JWT)
      */
     getStoreApiHeaders(authorization?: string): Record<string, string> {
-        const headers: Record<string, string> = {};
+        const headers: Record<string, string> = {
+            'x-publishable-api-key': this.getPublishableKey(),
+        };
         if (authorization) {
             headers['Authorization'] = authorization;
         }

@@ -165,7 +165,7 @@ export class CartsService extends Carts.Service {
                         this.sdk.store.cart.createLineItem(
                             cartId,
                             {
-                                variant_id: data.variantId!,
+                                variant_id: data.variantId,
                                 quantity: data.quantity,
                                 metadata: data.metadata,
                             },
@@ -184,24 +184,9 @@ export class CartsService extends Carts.Service {
             throw new BadRequestException('Currency is required when creating a new cart');
         }
 
-        // For authenticated users, create a new cart (can't query existing carts)
-        // Medusa doesn't provide a way to query carts by customer
-        // Store API doesn't support listing carts
-        // Admin API doesn't have /admin/carts endpoint
-        if (customerId) {
-            return this.createCartAndAddItem(
-                data.currency!,
-                data.variantId!,
-                data.quantity,
-                data.regionId,
-                data.metadata,
-            );
-        }
-
-        // For guests, create a new cart
         return this.createCartAndAddItem(
             data.currency,
-            data.variantId!,
+            data.variantId,
             data.quantity,
             data.regionId,
             data.metadata,
@@ -212,7 +197,7 @@ export class CartsService extends Carts.Service {
     updateCartItem(
         params: Carts.Request.UpdateCartItemParams,
         data: Carts.Request.UpdateCartItemBody,
-        authorization: string | undefined,
+        authorization?: string,
     ): Observable<Carts.Model.Cart> {
         return from(
             this.sdk.store.cart.updateLineItem(
@@ -252,55 +237,44 @@ export class CartsService extends Carts.Service {
     applyPromotion(
         params: Carts.Request.ApplyPromotionParams,
         data: Carts.Request.ApplyPromotionBody,
-        authorization: string | undefined,
+        authorization?: string,
     ): Observable<Carts.Model.Cart> {
         return from(
-            this.sdk.store.cart.update(
-                params.cartId,
-                {
+            this.sdk.client.fetch<HttpTypes.StoreCartResponse>(`/store/carts/${params.cartId}/promotions`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...this.medusaJsService.getStoreApiHeaders(authorization),
+                },
+                body: {
                     promo_codes: [data.code],
                 },
-                {},
-                this.medusaJsService.getStoreApiHeaders(authorization),
-            ),
+            }),
         ).pipe(
-            map((response: HttpTypes.StoreCartResponse) => mapCart(response.cart, this.defaultCurrency)),
+            map((response) => mapCart(response.cart, this.defaultCurrency)),
             catchError((error) => handleHttpError(error)),
         );
     }
 
     removePromotion(params: Carts.Request.RemovePromotionParams, authorization?: string): Observable<Carts.Model.Cart> {
-        // In Medusa v2, removing promotions requires updating the cart
-        // with the remaining promo codes (excluding the one to remove)
         return from(
-            this.sdk.store.cart.retrieve(params.cartId, {}, this.medusaJsService.getStoreApiHeaders(authorization)),
-        ).pipe(
-            switchMap((response: HttpTypes.StoreCartResponse) => {
-                const cart = response.cart;
-                // Filter out the promotion to remove
-                const remainingCodes =
-                    cart.promotions
-                        ?.filter((promo: { id?: string }) => promo.id !== params.promotionId)
-                        .map((promo: { code?: string }) => promo.code)
-                        .filter((code: string | undefined): code is string => code !== undefined) ?? [];
-
-                return from(
-                    this.sdk.store.cart.update(
-                        params.cartId,
-                        {
-                            promo_codes: remainingCodes,
-                        },
-                        {},
-                        this.medusaJsService.getStoreApiHeaders(authorization),
-                    ),
-                );
+            this.sdk.client.fetch<HttpTypes.StoreCartResponse>(`/store/carts/${params.cartId}/promotions`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...this.medusaJsService.getStoreApiHeaders(authorization),
+                },
+                body: {
+                    promo_codes: [params.code],
+                },
             }),
-            map((response: HttpTypes.StoreCartResponse) => mapCart(response.cart, this.defaultCurrency)),
+        ).pipe(
+            map((response) => mapCart(response.cart, this.defaultCurrency)),
             catchError((error) => handleHttpError(error)),
         );
     }
 
-    getCurrentCart(_authorization: string | undefined): Observable<Carts.Model.Cart | undefined> {
+    getCurrentCart(_authorization?: string): Observable<Carts.Model.Cart | undefined> {
         return throwError(
             () =>
                 new NotImplementedException(
@@ -520,7 +494,7 @@ export class CartsService extends Carts.Service {
      */
     private resolveBillingAddress(
         data: Carts.Request.UpdateCartAddressesBody,
-        authorization: string | undefined,
+        authorization?: string,
     ): Observable<HttpTypes.StoreAddAddress | null> {
         if (data.billingAddressId && authorization) {
             return this.customersService.getAddress({ id: data.billingAddressId }, authorization).pipe(
@@ -545,10 +519,7 @@ export class CartsService extends Carts.Service {
      * into existing metadata without mutating any arguments.
      * Email is passed directly on the cart (not in metadata).
      */
-    private buildCartMetadata(
-        notes: string | undefined,
-        existingMetadata?: Record<string, unknown>,
-    ): Record<string, unknown> {
+    private buildCartMetadata(notes?: string, existingMetadata?: Record<string, unknown>): Record<string, unknown> {
         const metadata: Record<string, unknown> = { ...(existingMetadata || {}) };
         if (notes !== undefined) {
             metadata.notes = notes;

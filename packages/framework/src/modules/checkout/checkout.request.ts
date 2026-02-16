@@ -27,6 +27,8 @@ export class SetPaymentParams {
 
 export class SetPaymentBody {
     providerId!: string;
+    returnUrl!: string;
+    cancelUrl?: string;
     metadata?: Record<string, unknown>;
 }
 
@@ -61,6 +63,8 @@ export class CompleteCheckoutBody {
     billingAddress?: Address.Address; // Or provide new address (can differ from shipping, required for guests)
     shippingMethodId?: string;
     paymentProviderId!: string;
+    returnUrl!: string;
+    cancelUrl?: string;
     notes?: string;
     email?: string; // Required for guest checkout (for order confirmation)
     metadata?: Record<string, unknown>;

@@ -2,7 +2,7 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { Observable, of, throwError } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
-import { Auth, Carts, Checkout, Customers, Payments } from '@o2s/framework/modules';
+import { Carts, Checkout, Payments } from '@o2s/framework/modules';
 
 import { MOCKED_ORDERS, mapOrderFromCart } from '../orders/orders.mapper';
 
@@ -12,9 +12,7 @@ import { responseDelay } from '@/utils/delay';
 @Injectable()
 export class CheckoutService implements Checkout.Service {
     constructor(
-        private readonly authService: Auth.Service,
         private readonly cartsService: Carts.Service,
-        private readonly customersService: Customers.Service,
         private readonly paymentsService: Payments.Service,
     ) {}
 
@@ -224,6 +222,8 @@ export class CheckoutService implements Checkout.Service {
                     { cartId: params.cartId },
                     {
                         providerId: data.paymentProviderId,
+                        returnUrl: data.returnUrl,
+                        cancelUrl: data.cancelUrl,
                         metadata: data.metadata,
                     },
                     authorization,

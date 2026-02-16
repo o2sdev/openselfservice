@@ -6,7 +6,7 @@ import { Observable, catchError, forkJoin, from, map, of, switchMap, throwError 
 
 import { LoggerService } from '@o2s/utils.logger';
 
-import { Auth, Carts, Checkout, Customers, Payments } from '@o2s/framework/modules';
+import { Carts, Checkout, Payments } from '@o2s/framework/modules';
 
 import { Service as MedusaJsService } from '@/modules/medusajs';
 
@@ -24,9 +24,7 @@ export class CheckoutService extends Checkout.Service {
         @Inject(LoggerService) protected readonly logger: LoggerService,
         private readonly config: ConfigService,
         private readonly medusaJsService: MedusaJsService,
-        private readonly authService: Auth.Service,
         private readonly cartsService: Carts.Service,
-        private readonly customersService: Customers.Service,
         private readonly paymentsService: Payments.Service,
     ) {
         super();
@@ -96,8 +94,8 @@ export class CheckoutService extends Checkout.Service {
                 {
                     cartId: params.cartId,
                     providerId: data.providerId,
-                    returnUrl: 'https://example.com/checkout/return',
-                    cancelUrl: 'https://example.com/checkout/cancel',
+                    returnUrl: data.returnUrl,
+                    cancelUrl: data.cancelUrl,
                     metadata: data.metadata,
                 },
                 authorization,
@@ -241,9 +239,7 @@ export class CheckoutService extends Checkout.Service {
         params: Checkout.Request.GetShippingOptionsParams,
         authorization?: string,
     ): Observable<Checkout.Model.ShippingOptions> {
-        const headers = authorization
-            ? this.medusaJsService.getStoreApiHeaders(authorization)
-            : this.medusaJsService.getStoreApiHeaders(authorization);
+        const headers = this.medusaJsService.getStoreApiHeaders(authorization);
 
         // Step 1: Retrieve shipping options
         return from(this.sdk.store.fulfillment.listCartOptions({ cart_id: params.cartId }, headers)).pipe(
@@ -329,6 +325,8 @@ export class CheckoutService extends Checkout.Service {
                     { cartId: params.cartId },
                     {
                         providerId: data.paymentProviderId,
+                        returnUrl: data.returnUrl,
+                        cancelUrl: data.cancelUrl,
                         metadata: data.metadata,
                     },
                     authorization,

@@ -16,7 +16,7 @@ export const mapCart = (cart: HttpTypes.StoreCart, _defaultCurrency: string): Ca
     if (!cart.currency_code) {
         throw new Error(`Cart ${cart.id} has no currency code`);
     }
-    const currency = cart.currency_code as Models.Price.Currency;
+    const currency = cart.currency_code.toUpperCase() as Models.Price.Currency;
 
     return {
         id: cart.id,

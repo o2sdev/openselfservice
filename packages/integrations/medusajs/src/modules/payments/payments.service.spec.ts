@@ -1,6 +1,6 @@
 import { HttpTypes } from '@medusajs/types';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, of, throwError } from 'rxjs';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { Payments } from '@o2s/framework/modules';
@@ -210,12 +210,9 @@ describe('PaymentsService', () => {
 
     describe('updateSession', () => {
         it('should post to payment-sessions and return mapped session', async () => {
-            mockHttpService.post.mockReturnValue({
-                toPromise: () =>
-                    Promise.resolve({
-                        data: { payment_session: { ...minimalPaymentSession, id: 'ps_updated' } },
-                    }),
-            });
+            mockHttpService.post.mockReturnValue(
+                of({ data: { payment_session: { ...minimalPaymentSession, id: 'ps_updated' } } }),
+            );
 
             const result = await firstValueFrom(
                 service.updateSession(
@@ -234,9 +231,7 @@ describe('PaymentsService', () => {
         });
 
         it('should throw NotFoundException on 404', async () => {
-            mockHttpService.post.mockReturnValue({
-                toPromise: () => Promise.reject({ response: { status: 404 } }),
-            });
+            mockHttpService.post.mockReturnValue(throwError(() => ({ response: { status: 404 } })));
 
             await expect(
                 firstValueFrom(
@@ -252,9 +247,7 @@ describe('PaymentsService', () => {
 
     describe('cancelSession', () => {
         it('should delete payment-sessions and return void', async () => {
-            mockHttpService.delete.mockReturnValue({
-                toPromise: () => Promise.resolve({}),
-            });
+            mockHttpService.delete.mockReturnValue(of({}));
 
             await firstValueFrom(
                 service.cancelSession({ id: 'ps_1' } as Payments.Request.CancelSessionParams, 'Bearer token'),
@@ -267,9 +260,7 @@ describe('PaymentsService', () => {
         });
 
         it('should throw NotFoundException on 404', async () => {
-            mockHttpService.delete.mockReturnValue({
-                toPromise: () => Promise.reject({ response: { status: 404 } }),
-            });
+            mockHttpService.delete.mockReturnValue(throwError(() => ({ response: { status: 404 } })));
 
             await expect(
                 firstValueFrom(

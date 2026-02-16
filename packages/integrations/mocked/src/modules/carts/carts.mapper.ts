@@ -374,7 +374,7 @@ export const removePromotion = (params: Carts.Request.RemovePromotionParams): Ca
     const cart = cartsStore[cartIndex]!;
     if (!cart.promotions) return cart;
 
-    const promoIndex = cart.promotions.findIndex((p) => p.id === params.promotionId);
+    const promoIndex = cart.promotions.findIndex((p) => p.code === params.code);
     if (promoIndex === -1) return cart;
 
     cart.promotions.splice(promoIndex, 1);

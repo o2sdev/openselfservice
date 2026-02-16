@@ -1,10 +1,9 @@
-import { BadRequestException } from '@nestjs/common';
-import { NotFoundException } from '@nestjs/common';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { firstValueFrom, of } from 'rxjs';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { Auth, Carts, Checkout, Customers, Payments } from '@o2s/framework/modules';
+import { Carts, Checkout, Payments } from '@o2s/framework/modules';
 
 import { CheckoutService } from './checkout.service';
 
@@ -88,9 +87,7 @@ describe('CheckoutService', () => {
             mockLogger as unknown as import('@o2s/utils.logger').LoggerService,
             mockConfig as unknown as ConfigService,
             mockMedusaJsService as unknown as import('@/modules/medusajs').Service,
-            {} as unknown as Auth.Service,
             mockCartsService as unknown as Carts.Service,
-            {} as unknown as Customers.Service,
             mockPaymentsService as unknown as Payments.Service,
         );
     });
