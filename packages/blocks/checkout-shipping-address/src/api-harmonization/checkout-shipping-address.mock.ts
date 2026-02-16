@@ -72,11 +72,7 @@ export function getCheckoutShippingAddressBlockMock(_id: string, locale: string)
             },
             next: {
                 label: isPl ? 'Dalej' : isDe ? 'Weiter' : 'Next',
-                path: isPl
-                    ? '/zamowienie/platnosc-rozliczenie'
-                    : isDe
-                      ? '/kasse/rechnung-zahlung'
-                      : '/checkout/billing-payment',
+                path: isPl ? '/zamowienie/platnosc' : isDe ? '/kasse/rechnung-zahlung' : '/checkout/billing-payment',
             },
         },
         errors: {
