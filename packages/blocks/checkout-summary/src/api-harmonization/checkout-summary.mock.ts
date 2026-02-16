@@ -5,78 +5,107 @@ import type { CheckoutSummaryBlock } from './checkout-summary.model';
  */
 export function getCheckoutSummaryBlockMock(_id: string, locale: string): CheckoutSummaryBlock {
     const isPl = locale.startsWith('pl');
+    const isDe = locale.startsWith('de');
 
     return {
         __typename: 'CheckoutSummaryBlock',
         id: 'checkout-summary-mock',
-        title: isPl ? 'Podsumowanie zamówienia' : 'Order summary',
-        subtitle: isPl ? 'Sprawdź dane przed złożeniem zamówienia' : 'Review your order before submitting',
+        title: isPl ? 'Podsumowanie zamówienia' : isDe ? 'Bestellübersicht' : 'Order summary',
+        subtitle: isPl
+            ? 'Sprawdź dane przed złożeniem zamówienia'
+            : isDe
+              ? 'Überprüfen Sie Ihre Bestellung vor dem Absenden'
+              : 'Review your order before submitting',
         sections: {
             products: {
-                title: isPl ? 'Produkty' : 'Products',
+                title: isPl ? 'Produkty' : isDe ? 'Produkte' : 'Products',
                 labels: {
-                    quantity: isPl ? 'Ilość' : 'Quantity',
-                    price: isPl ? 'Cena' : 'Price',
-                    total: isPl ? 'Suma' : 'Total',
+                    quantity: isPl ? 'Ilość' : isDe ? 'Menge' : 'Quantity',
+                    price: isPl ? 'Cena' : isDe ? 'Preis' : 'Price',
+                    total: isPl ? 'Suma' : isDe ? 'Summe' : 'Total',
                 },
             },
             company: {
-                title: isPl ? 'Dane firmy' : 'Company details',
-                addressLabel: isPl ? 'Adres siedziby:' : 'Registered address:',
-                companyNameLabel: isPl ? 'Nazwa firmy' : 'Company name',
+                title: isPl ? 'Dane firmy' : isDe ? 'Firmendaten' : 'Company details',
+                addressLabel: isPl ? 'Adres siedziby:' : isDe ? 'Firmensitz:' : 'Registered address:',
+                companyNameLabel: isPl ? 'Nazwa firmy' : isDe ? 'Firmenname' : 'Company name',
                 nipLabel: 'NIP',
             },
             shipping: {
-                title: isPl ? 'Adres dostawy' : 'Shipping address',
-                methodLabel: isPl ? 'Metoda dostawy:' : 'Shipping method:',
+                title: isPl ? 'Adres dostawy' : isDe ? 'Lieferadresse' : 'Shipping address',
+                methodLabel: isPl ? 'Metoda dostawy:' : isDe ? 'Versandart:' : 'Shipping method:',
             },
             billing: {
-                title: isPl ? 'Adres rozliczeniowy' : 'Billing address',
-                methodLabel: isPl ? 'Metoda płatności:' : 'Payment method:',
+                title: isPl ? 'Adres rozliczeniowy' : isDe ? 'Rechnungsadresse' : 'Billing address',
+                methodLabel: isPl ? 'Metoda płatności:' : isDe ? 'Zahlungsmethode:' : 'Payment method:',
             },
             summary: {
-                title: isPl ? 'Podsumowanie' : 'Summary',
-                subtotalLabel: isPl ? 'Wartość netto' : 'Subtotal',
-                taxLabel: isPl ? 'VAT (23%)' : 'VAT (23%)',
-                shippingLabel: isPl ? 'Dostawa' : 'Shipping',
-                totalLabel: isPl ? 'Razem' : 'Total',
+                title: isPl ? 'Podsumowanie' : isDe ? 'Zusammenfassung' : 'Summary',
+                subtotalLabel: isPl ? 'Wartość netto' : isDe ? 'Nettosumme' : 'Subtotal',
+                taxLabel: isPl ? 'VAT (23%)' : isDe ? 'MwSt. (23%)' : 'VAT (23%)',
+                shippingLabel: isPl ? 'Dostawa' : isDe ? 'Versand' : 'Shipping',
+                totalLabel: isPl ? 'Razem' : isDe ? 'Gesamt' : 'Total',
             },
             notes: {
-                title: isPl ? 'Uwagi' : 'Notes',
+                title: isPl ? 'Uwagi' : isDe ? 'Anmerkungen' : 'Notes',
                 comment: {
-                    label: isPl ? 'Komentarz' : 'Comment',
-                    placeholder: isPl ? 'Opcjonalny komentarz...' : 'Optional comment...',
+                    label: isPl ? 'Komentarz' : isDe ? 'Kommentar' : 'Comment',
+                    placeholder: isPl
+                        ? 'Opcjonalny komentarz...'
+                        : isDe
+                          ? 'Optionaler Kommentar...'
+                          : 'Optional comment...',
                 },
                 specialInstructions: {
-                    label: isPl ? 'Instrukcje specjalne' : 'Special instructions',
-                    placeholder: isPl ? 'Instrukcje dostawy...' : 'Delivery instructions...',
+                    label: isPl ? 'Instrukcje specjalne' : isDe ? 'Sonderanweisungen' : 'Special instructions',
+                    placeholder: isPl
+                        ? 'Instrukcje dostawy...'
+                        : isDe
+                          ? 'Lieferanweisungen...'
+                          : 'Delivery instructions...',
                 },
             },
         },
         buttons: {
             back: {
-                label: isPl ? 'Wstecz' : 'Back',
-                path: '/checkout/billing-payment',
+                label: isPl ? 'Wstecz' : isDe ? 'Zurück' : 'Back',
+                path: isPl
+                    ? '/zamowienie/platnosc-rozliczenie'
+                    : isDe
+                      ? '/kasse/rechnung-zahlung'
+                      : '/checkout/billing-payment',
             },
-            confirm: isPl ? 'Złóż zamówienie' : 'Place order',
+            confirm: isPl ? 'Złóż zamówienie' : isDe ? 'Bestellung aufgeben' : 'Place order',
         },
         loading: {
-            confirming: isPl ? 'Przetwarzanie...' : 'Processing...',
+            confirming: isPl ? 'Przetwarzanie...' : isDe ? 'Verarbeitung...' : 'Processing...',
         },
         placeholders: {
-            companyData: isPl ? 'Dane firmy zostaną wyświetlone tutaj' : 'Company data will be displayed here',
+            companyData: isPl
+                ? 'Dane firmy zostaną wyświetlone tutaj'
+                : isDe
+                  ? 'Firmendaten werden hier angezeigt'
+                  : 'Company data will be displayed here',
             shippingAddress: isPl
                 ? 'Adres dostawy zostanie wyświetlony tutaj'
-                : 'Shipping address will be displayed here',
+                : isDe
+                  ? 'Lieferadresse wird hier angezeigt'
+                  : 'Shipping address will be displayed here',
             billingAddress: isPl
                 ? 'Adres rozliczeniowy zostanie wyświetlony tutaj'
-                : 'Billing address will be displayed here',
+                : isDe
+                  ? 'Rechnungsadresse wird hier angezeigt'
+                  : 'Billing address will be displayed here',
             sameAsCompanyAddress: isPl
                 ? 'Adres dostawy jest taki sam jak adres siedziby firmy'
-                : 'Shipping address is same as company address',
+                : isDe
+                  ? 'Lieferadresse entspricht Firmensitz'
+                  : 'Shipping address is same as company address',
             sameAsShippingAddress: isPl
                 ? 'Adres rozliczeniowy jest taki sam jak adres dostawy'
-                : 'Billing address is same as shipping address',
+                : isDe
+                  ? 'Rechnungsadresse entspricht Lieferadresse'
+                  : 'Billing address is same as shipping address',
         },
         items: [
             {
@@ -86,9 +115,9 @@ export function getCheckoutSummaryBlockMock(_id: string, locale: string): Checko
                 price: { value: 89.99, currency: 'PLN' },
                 total: { value: 179.98, currency: 'PLN' },
                 product: {
-                    name: isPl ? 'Wkład CLARIS S' : 'CLARIS S Filter Cartridge',
-                    subtitle: 'Filtry • JURA',
-                    image: { url: '/images/products/filter-claris.jpg', alt: 'CLARIS S' },
+                    name: isPl ? 'Wkład CLARIS S' : isDe ? 'CLARIS S Filterpatrone' : 'CLARIS S Filter Cartridge',
+                    subtitle: isPl ? 'Filtry • JURA' : isDe ? 'Filter • JURA' : 'Filters • JURA',
+                    image: { url: 'https://picsum.photos/200/200', alt: 'CLARIS S' },
                 },
             },
             {
@@ -98,8 +127,12 @@ export function getCheckoutSummaryBlockMock(_id: string, locale: string): Checko
                 price: { value: 24.99, currency: 'PLN' },
                 total: { value: 24.99, currency: 'PLN' },
                 product: {
-                    name: isPl ? 'Środek do czyszczenia' : 'Cleaning solution',
-                    subtitle: 'Konserwacja',
+                    name: isPl ? 'Środek do czyszczenia' : isDe ? 'Reinigungsmittel' : 'Cleaning solution',
+                    subtitle: isPl ? 'Konserwacja' : isDe ? 'Wartung' : 'Maintenance',
+                    image: {
+                        url: 'https://picsum.photos/200/201',
+                        alt: isPl ? 'Środek do czyszczenia' : isDe ? 'Reinigungsmittel' : 'Cleaning solution',
+                    },
                 },
             },
         ],
@@ -112,7 +145,9 @@ export function getCheckoutSummaryBlockMock(_id: string, locale: string): Checko
         stepIndicator: {
             steps: isPl
                 ? ['Dane firmy', 'Dostawa', 'Płatność', 'Podsumowanie']
-                : ['Company details', 'Delivery', 'Payment', 'Summary'],
+                : isDe
+                  ? ['Firmendaten', 'Lieferung', 'Zahlung', 'Zusammenfassung']
+                  : ['Company details', 'Delivery', 'Payment', 'Summary'],
             currentStep: 4,
         },
     };
