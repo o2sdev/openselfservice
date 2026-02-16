@@ -88,7 +88,7 @@ const collectVariantAttributes = (variant: HttpTypes.AdminProductVariant): Produ
         const productValue = product?.[field as keyof HttpTypes.AdminProduct];
         const value = variantValue ?? productValue;
 
-        if (value != null && value !== '') {
+        if (value) {
             attributes[field] = String(value);
         }
     }
