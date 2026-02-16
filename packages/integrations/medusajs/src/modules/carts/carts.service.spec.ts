@@ -1,6 +1,5 @@
 import { HttpTypes } from '@medusajs/types';
-import { BadRequestException } from '@nestjs/common';
-import { NotFoundException, NotImplementedException, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, NotFoundException, NotImplementedException, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { firstValueFrom } from 'rxjs';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
@@ -173,10 +172,12 @@ describe('CartsService', () => {
             );
         });
 
-        it('should throw BadRequestException when cartId absent and currency missing', () => {
-            expect(() =>
-                service.addCartItem({ sku: 'SKU1', quantity: 1 } as Carts.Request.AddCartItemBody, 'Bearer token'),
-            ).toThrow(BadRequestException);
+        it('should throw BadRequestException when cartId absent and currency missing', async () => {
+            await expect(
+                firstValueFrom(
+                    service.addCartItem({ sku: 'SKU1', quantity: 1 } as Carts.Request.AddCartItemBody, 'Bearer token'),
+                ),
+            ).rejects.toThrow(BadRequestException);
         });
 
         it('should retrieve then createLineItem when cartId provided', async () => {
@@ -466,7 +467,7 @@ describe('CartsService', () => {
             expect(mockSdk.client.fetch).toHaveBeenCalledWith(
                 '/store/carts/cart_1/promotions',
                 expect.objectContaining({
-                    method: 'POST',
+                    method: 'DELETE',
                     body: expect.objectContaining({ promo_codes: ['SAVE10'] }),
                 }),
             );

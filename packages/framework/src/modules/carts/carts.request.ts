@@ -22,6 +22,7 @@ export class CreateCartBody {
     regionId?: string;
     currency!: Price.Currency;
     metadata?: Record<string, unknown>;
+    locale?: string;
 }
 
 export class UpdateCartParams {
@@ -40,6 +41,7 @@ export class UpdateCartBody {
     paymentMethodType?: PaymentMethodType;
     notes?: string;
     metadata?: Record<string, unknown>;
+    locale?: string;
 }
 
 export class DeleteCartParams {
@@ -54,6 +56,7 @@ export class AddCartItemBody {
     currency?: Price.Currency; // Required if creating new cart
     regionId?: string; // Required if creating new cart (for Medusa.js)
     metadata?: Record<string, unknown>;
+    locale?: string;
 }
 
 export class UpdateCartItemParams {
@@ -64,6 +67,7 @@ export class UpdateCartItemParams {
 export class UpdateCartItemBody {
     quantity?: number;
     metadata?: Record<string, unknown>;
+    locale?: string;
 }
 
 export class RemoveCartItemParams {
@@ -78,6 +82,7 @@ export class ApplyPromotionParams {
 
 export class ApplyPromotionBody {
     code!: string;
+    locale?: string;
 }
 
 export class RemovePromotionParams {
@@ -102,6 +107,7 @@ export class UpdateCartAddressesBody {
     billingAddress?: Address.Address; // Or provide new address
     notes?: string;
     email?: string; // For guest checkout
+    locale?: string;
 }
 
 // Shipping method operations
@@ -111,4 +117,5 @@ export class AddShippingMethodParams {
 
 export class AddShippingMethodBody {
     shippingOptionId!: string; // Shipping option ID from getShippingOptions()
+    locale?: string;
 }

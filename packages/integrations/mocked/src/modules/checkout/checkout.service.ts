@@ -83,8 +83,8 @@ export class CheckoutService implements Checkout.Service {
                         {
                             cartId: params.cartId,
                             providerId: data.providerId,
-                            returnUrl: 'https://example.com/checkout/return',
-                            cancelUrl: 'https://example.com/checkout/cancel',
+                            returnUrl: data.returnUrl,
+                            cancelUrl: data.cancelUrl,
                             metadata: data.metadata,
                         },
                         authorization,

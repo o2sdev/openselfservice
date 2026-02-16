@@ -156,7 +156,7 @@ export class CartsService extends Carts.Service {
                     const cart = mapCart(response.cart, this.defaultCurrency);
 
                     if (cart.customerId && authorization && cart.customerId !== customerId) {
-                        throw new UnauthorizedException('Unauthorized to modify this cart');
+                        return throwError(() => new BadRequestException('Variant ID is required for Medusa carts'));
                     }
 
                     return from(
@@ -178,7 +178,7 @@ export class CartsService extends Carts.Service {
         }
 
         if (!data.currency) {
-            throw new BadRequestException('Currency is required when creating a new cart');
+            return throwError(() => new BadRequestException('Currency is required when creating a new cart'));
         }
 
         return this.createCartAndAddItem(
@@ -256,7 +256,7 @@ export class CartsService extends Carts.Service {
     removePromotion(params: Carts.Request.RemovePromotionParams, authorization?: string): Observable<Carts.Model.Cart> {
         return from(
             this.sdk.client.fetch<HttpTypes.StoreCartResponse>(`/store/carts/${params.cartId}/promotions`, {
-                method: 'POST',
+                method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
                     ...this.medusaJsService.getStoreApiHeaders(authorization),
@@ -350,9 +350,7 @@ export class CartsService extends Carts.Service {
         data: Carts.Request.UpdateCartAddressesBody,
         authorization?: string,
     ): Observable<Carts.Model.Cart> {
-        const headers = authorization
-            ? this.medusaJsService.getStoreApiHeaders(authorization)
-            : this.medusaJsService.getStoreApiHeaders(authorization);
+        const headers = this.medusaJsService.getStoreApiHeaders(authorization);
 
         // Resolve shipping address
         const shippingAddress$ =

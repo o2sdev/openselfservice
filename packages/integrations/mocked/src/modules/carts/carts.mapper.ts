@@ -46,7 +46,6 @@ const formatDate = (date: Date): string => {
 const buildCartItemFromProduct = (
     product: Products.Model.Product,
     quantity: number,
-    itemIndex: number,
     currency: Models.Price.Currency,
     metadata: Record<string, unknown> = {},
 ): Carts.Model.CartItem => {
@@ -54,7 +53,7 @@ const buildCartItemFromProduct = (
     const subtotal = price * quantity;
 
     return {
-        id: `ITEM-${itemIndex.toString().padStart(3, '0')}`,
+        id: `ITEM-${crypto.randomUUID()}`,
         sku: product.sku ?? '',
         quantity,
         price: { value: price, currency },
@@ -236,13 +235,17 @@ export const findActiveCartByCustomerId = (customerId: string | undefined): Cart
 
 const matchesSku = (item: Carts.Model.CartItem, sku: string): boolean => item.sku === sku;
 
-export const addCartItem = (cartId: string, data: Carts.Request.AddCartItemBody): Carts.Model.Cart | undefined => {
+export const addCartItem = (
+    cartId: string,
+    data: Carts.Request.AddCartItemBody,
+    locale?: string,
+): Carts.Model.Cart | undefined => {
     const cartIndex = cartsStore.findIndex((cart) => cart.id === cartId);
     if (cartIndex === -1) return undefined;
 
     let product: Products.Model.Product;
     try {
-        product = mapProductBySku(data.sku);
+        product = mapProductBySku(data.sku, locale);
     } catch {
         return undefined;
     }
@@ -261,13 +264,7 @@ export const addCartItem = (cartId: string, data: Carts.Request.AddCartItemBody)
             item.metadata = { ...(item.metadata || {}), ...data.metadata };
         }
     } else {
-        const newItem = buildCartItemFromProduct(
-            product,
-            data.quantity,
-            cart.items.data.length,
-            cart.currency,
-            data.metadata || {},
-        );
+        const newItem = buildCartItemFromProduct(product, data.quantity, cart.currency, data.metadata || {});
         cart.items.data.push(newItem);
     }
 
@@ -295,6 +292,10 @@ export const updateCartItem = (
         if (data.quantity <= 0) {
             cart.items.data.splice(itemIndex, 1);
             cart.items.total = cart.items.data.length;
+
+            recalculateCartTotals(cart);
+            cart.updatedAt = formatDate(new Date());
+            return cart;
         } else {
             item.quantity = data.quantity;
             item.subtotal = { value: item.price.value * data.quantity, currency: cart.currency };
@@ -391,6 +392,8 @@ const recalculateCartTotals = (cart: Carts.Model.Cart): void => {
             }
         }
     }
+
+    discountTotal = Math.min(discountTotal, subtotal);
 
     const shippingTotal = cart.shippingMethod?.total?.value || 0;
     const hasFreeShipping = cart.promotions?.some((p) => p.type === 'FREE_SHIPPING');

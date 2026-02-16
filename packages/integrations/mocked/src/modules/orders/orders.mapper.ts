@@ -553,6 +553,6 @@ export function mapOrderFromCart(cart: Carts.Model.Cart, email?: string): Orders
         billingAddress: cart.billingAddress,
         shippingMethods: [cart.shippingMethod],
         customerComment: cart.notes,
-        email,
+        email: email ?? cart.email,
     };
 }

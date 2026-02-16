@@ -193,7 +193,7 @@ export class CartsService implements Carts.Service {
         }
 
         // Add item to cart
-        const updatedCart = addCartItem(cartId, data);
+        const updatedCart = addCartItem(cartId, data, data.locale);
         if (!updatedCart) {
             throw new NotFoundException('Cart or product not found');
         }

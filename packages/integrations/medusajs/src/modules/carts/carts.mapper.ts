@@ -98,7 +98,6 @@ const mapAddress = (address?: HttpTypes.StoreCartAddress | null): Models.Address
         district: address.province ?? '',
         region: address.province ?? '',
         streetName: address.address_1 ?? '',
-        streetNumber: address.address_2 ?? '',
         apartment: address.address_2 ?? '',
         city: address.city ?? '',
         postalCode: address.postal_code ?? '',
