@@ -280,23 +280,23 @@ export const mapPage = (slug: string, locale: string): CMS.Model.Page.Page | und
             return PAGE_CHECKOUT_SUMMARY_PL;
 
         case slug.match(/\/order-confirmation\/.+/)?.[0]:
-            return {
-                ...PAGE_ORDER_CONFIRMATION_EN,
-                slug: `/order-confirmation/${slug.match(/(.+)\/(.+)/)?.[2]}`,
-                updatedAt: '2025-01-01',
-            };
-        case slug.match(/\/bestellbestaetigung\/.+/)?.[0]:
-            return {
-                ...PAGE_ORDER_CONFIRMATION_DE,
-                slug: `/bestellbestaetigung/${slug.match(/(.+)\/(.+)/)?.[2]}`,
-                updatedAt: '2025-01-01',
-            };
         case slug.match(/\/potwierdzenie-zamowienia\/.+/)?.[0]:
-            return {
-                ...PAGE_ORDER_CONFIRMATION_PL,
-                slug: `/potwierdzenie-zamowienia/${slug.match(/(.+)\/(.+)/)?.[2]}`,
-                updatedAt: '2025-01-01',
-            };
+        case slug.match(/\/bestellbestaetigung\/.+/)?.[0]: {
+            const orderId = slug.match(/(.+)\/(.+)/)?.[2] ?? '';
+            const page =
+                locale === 'pl'
+                    ? PAGE_ORDER_CONFIRMATION_PL
+                    : locale === 'de'
+                      ? PAGE_ORDER_CONFIRMATION_DE
+                      : PAGE_ORDER_CONFIRMATION_EN;
+            const pathPrefix =
+                locale === 'pl'
+                    ? '/potwierdzenie-zamowienia'
+                    : locale === 'de'
+                      ? '/bestellbestaetigung'
+                      : '/order-confirmation';
+            return { ...page, slug: `${pathPrefix}/${orderId}`, updatedAt: '2025-01-01' };
+        }
 
         case '/contact-us':
             return PAGE_CONTACT_US_EN;
