@@ -51,8 +51,7 @@ export const mapCart = (cart: HttpTypes.StoreCart, _defaultCurrency: string): Ca
 const mapCartItem = (item: HttpTypes.StoreCartLineItem, currency: Models.Price.Currency): Carts.Model.CartItem => {
     return {
         id: item.id,
-        productId: item.product_id ?? '',
-        variantId: item.variant_id ?? undefined,
+        sku: item.variant_sku ?? item.variant_id ?? '',
         quantity: item.quantity,
         price: mapPrice(item.unit_price, currency) as Models.Price.Price,
         subtotal: mapPrice(item.subtotal, currency),

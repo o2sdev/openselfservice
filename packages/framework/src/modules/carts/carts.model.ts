@@ -30,8 +30,7 @@ export class Promotion {
 
 export class CartItem {
     id!: string;
-    productId!: string;
-    variantId?: string;
+    sku!: string;
     quantity!: number;
     price!: Price.Price;
     subtotal?: Price.Price;

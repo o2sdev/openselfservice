@@ -511,7 +511,7 @@ export function mapOrderFromCart(cart: Carts.Model.Cart, email?: string): Orders
     // Convert cart items to order items
     const orderItems: Orders.Model.OrderItem[] = cart.items.data.map((item, index) => ({
         id: `ITEM-${index.toString().padStart(3, '0')}`,
-        productId: item.productId,
+        productId: item.product.id,
         quantity: item.quantity,
         price: item.price,
         total: item.total,

@@ -1,7 +1,7 @@
 import { Carts, Models, Products } from '@o2s/framework/modules';
 
 import { getMockProviderById, getPaymentMethodDisplay } from '../payments/mocks/providers.mock';
-import { mapProduct } from '../products/products.mapper';
+import { mapProductBySku } from '../products/products.mapper';
 
 // Read payment method stored in metadata by setPayment
 const mapPaymentMethodFromMetadata = (metadata: Record<string, unknown>): Carts.Model.PaymentMethod | undefined => {
@@ -55,8 +55,7 @@ const buildCartItemFromProduct = (
 
     return {
         id: `ITEM-${itemIndex.toString().padStart(3, '0')}`,
-        productId: product.id,
-        variantId: undefined,
+        sku: product.sku ?? '',
         quantity,
         price: { value: price, currency },
         subtotal: { value: subtotal, currency },
@@ -235,12 +234,7 @@ export const findActiveCartByCustomerId = (customerId: string | undefined): Cart
     return cartsStore.find((cart) => cart.customerId === customerId && cart.type === 'ACTIVE');
 };
 
-const matchesProductAndVariant = (item: Carts.Model.CartItem, productId: string, variantId?: string): boolean => {
-    if (item.productId !== productId) return false;
-    const itemVariant = item.variantId ?? undefined;
-    const reqVariant = variantId ?? undefined;
-    return itemVariant === reqVariant;
-};
+const matchesSku = (item: Carts.Model.CartItem, sku: string): boolean => item.sku === sku;
 
 export const addCartItem = (cartId: string, data: Carts.Request.AddCartItemBody): Carts.Model.Cart | undefined => {
     const cartIndex = cartsStore.findIndex((cart) => cart.id === cartId);
@@ -248,17 +242,14 @@ export const addCartItem = (cartId: string, data: Carts.Request.AddCartItemBody)
 
     let product: Products.Model.Product;
     try {
-        product = mapProduct(data.productId);
+        product = mapProductBySku(data.sku);
     } catch {
-        return undefined; // Product not found
+        return undefined;
     }
 
     const cart = cartsStore[cartIndex]!;
 
-    // Find existing item with same product and variant — merge quantity instead of adding duplicate
-    const existingIndex = cart.items.data.findIndex((item) =>
-        matchesProductAndVariant(item, data.productId, data.variantId),
-    );
+    const existingIndex = cart.items.data.findIndex((item) => matchesSku(item, data.sku));
 
     if (existingIndex !== -1) {
         const item = cart.items.data[existingIndex]!;
@@ -277,7 +268,6 @@ export const addCartItem = (cartId: string, data: Carts.Request.AddCartItemBody)
             cart.currency,
             data.metadata || {},
         );
-        newItem.variantId = data.variantId;
         cart.items.data.push(newItem);
     }
 

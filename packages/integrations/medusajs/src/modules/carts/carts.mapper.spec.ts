@@ -88,7 +88,7 @@ describe('carts.mapper', () => {
             expect(result.billingAddress?.streetName).toBe('Billing St');
         });
 
-        it('should map line items with product_id, variant_id, quantity, unit_price', () => {
+        it('should map line items with sku from variant_sku, quantity, unit_price', () => {
             const cart = minimalCart({
                 items: [
                     {
@@ -111,8 +111,7 @@ describe('carts.mapper', () => {
             });
             const result = mapCart(cart, defaultCurrency);
             expect(result.items.data).toHaveLength(1);
-            expect(result.items.data[0]?.productId).toBe('prod_1');
-            expect(result.items.data[0]?.variantId).toBe('var_1');
+            expect(result.items.data[0]?.sku).toBe('SKU1');
             expect(result.items.data[0]?.quantity).toBe(2);
             expect(result.items.data[0]?.price?.value).toBe(500);
         });

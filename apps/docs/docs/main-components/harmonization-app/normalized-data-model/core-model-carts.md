@@ -87,14 +87,13 @@ addCartItem(
 
 #### Body Parameters
 
-| Parameter | Type     | Description                                        |
-| --------- | -------- | -------------------------------------------------- |
-| cartId    | string   | Existing cart ID (optional)                        |
-| productId | string   | Product ID (required)                              |
-| variantId | string   | Variant ID (required by some backends e.g. Medusa) |
-| quantity  | number   | Quantity (required)                                |
-| currency  | Currency | Required when creating new cart                    |
-| regionId  | string   | Required when creating new cart (e.g. Medusa)      |
+| Parameter | Type     | Description                     |
+| --------- | -------- | ------------------------------- |
+| cartId    | string   | Existing cart ID (optional)     |
+| sku       | string   | Product variant SKU (required)  |
+| quantity  | number   | Quantity (required)             |
+| currency  | Currency | Required when creating new cart |
+| regionId  | string   | Required when creating new cart |
 
 ### updateCartItem
 
@@ -254,8 +253,7 @@ The carts model supports:
 | Field         | Type    | Description                      |
 | ------------- | ------- | -------------------------------- |
 | id            | string  | Unique identifier                |
-| productId     | string  | Product ID                       |
-| variantId     | string  | Variant ID (optional)            |
+| sku           | string  | Product variant SKU              |
 | quantity      | number  | Quantity                         |
 | price         | Price   | Unit price                       |
 | subtotal      | Price   | Pre-discount subtotal (optional) |

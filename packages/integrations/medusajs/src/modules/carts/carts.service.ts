@@ -140,32 +140,30 @@ export class CartsService extends Carts.Service {
     }
 
     addCartItem(data: Carts.Request.AddCartItemBody, authorization?: string): Observable<Carts.Model.Cart> {
-        if (!data.variantId) {
-            throw new BadRequestException('Variant ID is required for Medusa carts');
+        if (!data.sku) {
+            throw new BadRequestException('SKU is required for Medusa carts');
         }
 
         const customerId = authorization ? this.authService.getCustomerId(authorization) : undefined;
 
         // If cartId provided, use it (after verifying access)
         if (data.cartId) {
-            const cartId = data.cartId; // Store for type narrowing
+            const cartId = data.cartId;
             return from(
                 this.sdk.store.cart.retrieve(cartId, {}, this.medusaJsService.getStoreApiHeaders(authorization)),
             ).pipe(
                 switchMap((response: HttpTypes.StoreCartResponse) => {
                     const cart = mapCart(response.cart, this.defaultCurrency);
 
-                    // Verify ownership for customer carts
                     if (cart.customerId && authorization && cart.customerId !== customerId) {
                         throw new UnauthorizedException('Unauthorized to modify this cart');
                     }
 
-                    // Add item to existing cart
                     return from(
                         this.sdk.store.cart.createLineItem(
                             cartId,
                             {
-                                variant_id: data.variantId,
+                                variant_id: data.sku,
                                 quantity: data.quantity,
                                 metadata: data.metadata,
                             },
@@ -179,14 +177,13 @@ export class CartsService extends Carts.Service {
             );
         }
 
-        // No cartId provided - create a new cart
         if (!data.currency) {
             throw new BadRequestException('Currency is required when creating a new cart');
         }
 
         return this.createCartAndAddItem(
             data.currency,
-            data.variantId,
+            data.sku,
             data.quantity,
             data.regionId,
             data.metadata,
@@ -312,7 +309,7 @@ export class CartsService extends Carts.Service {
 
     private createCartAndAddItem(
         currency: string,
-        variantId: string,
+        sku: string,
         quantity: number,
         regionId?: string,
         metadata?: Record<string, unknown>,
@@ -334,7 +331,7 @@ export class CartsService extends Carts.Service {
                     this.sdk.store.cart.createLineItem(
                         createResponse.cart.id,
                         {
-                            variant_id: variantId,
+                            variant_id: sku,
                             quantity,
                             metadata,
                         },

@@ -19,6 +19,21 @@ export const mapProduct = (id: string, locale?: string): Products.Model.Product 
     return product;
 };
 
+export const mapProductBySku = (sku: string, locale?: string): Products.Model.Product => {
+    let productsSource = MOCK_PRODUCTS_EN;
+    if (locale === 'pl') {
+        productsSource = MOCK_PRODUCTS_PL;
+    } else if (locale === 'de') {
+        productsSource = MOCK_PRODUCTS_DE;
+    }
+
+    const product = productsSource.find((product) => product.sku === sku);
+    if (!product) {
+        throw new Error(`Product with SKU ${sku} not found`);
+    }
+    return product;
+};
+
 export const mapProducts = (options: Products.Request.GetProductListQuery): Products.Model.Products => {
     const { sort, locale, offset = 0, limit = 12 } = options;
 
