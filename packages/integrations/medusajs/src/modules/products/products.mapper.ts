@@ -95,6 +95,33 @@ const collectVariantAttributes = (variant: HttpTypes.AdminProductVariant): Produ
     return attributes;
 };
 
+// Calculate if a variant is in stock based on Medusa inventory data
+// inventory_quantity comes from Store API field expansion (+variants.inventory_quantity)
+type VariantWithInventory = HttpTypes.AdminProductVariant & { inventory_quantity?: number | null };
+
+const isVariantInStock = (variant: HttpTypes.AdminProductVariant): boolean => {
+    // If inventory is not managed, always in stock
+    if (!variant.manage_inventory) {
+        return true;
+    }
+
+    // If backorders are allowed, always in stock
+    if (variant.allow_backorder) {
+        return true;
+    }
+
+    // Check inventory_quantity (from Store API field expansion)
+    const inventoryQuantity = (variant as VariantWithInventory).inventory_quantity;
+
+    // If inventory_quantity is not available or null, default to in stock (fail gracefully)
+    if (inventoryQuantity === undefined || inventoryQuantity === null) {
+        return true;
+    }
+
+    // Out of stock if quantity is 0 or less
+    return inventoryQuantity > 0;
+};
+
 // Map Medusa variant options to Record<optionId, value>
 type MedusaOptionValue = { option_id?: string; value?: string };
 const getVariantOptionsMap = (variant: HttpTypes.AdminProductVariant): Record<string, string> => {
@@ -126,6 +153,7 @@ const mapVariantOptions = (
             slug,
             link: generateProductLink(basePath, productHandle, productId, variant.sku),
             options: Object.keys(optionsMap).length > 0 ? optionsMap : undefined,
+            inStock: isVariantInStock(variant),
         };
     });
 };

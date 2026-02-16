@@ -16,6 +16,7 @@ export type ProductVariantOption = {
     slug: string;
     link?: string;
     options?: Record<string, string>;
+    inStock?: boolean;
 };
 
 /**

@@ -1,24 +1,25 @@
 'use client';
 
+import { CircleAlert } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { createNavigation } from 'next-intl/navigation';
 import React, { useCallback, useMemo } from 'react';
 
-import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
 import { Price } from '@o2s/ui/components/Price';
 import { ProductGallery } from '@o2s/ui/components/ProductGallery';
 import { TooltipHover } from '@o2s/ui/components/TooltipHover';
 
+import { Alert, AlertDescription } from '@o2s/ui/elements/alert';
 import { Button } from '@o2s/ui/elements/button';
 import { Separator } from '@o2s/ui/elements/separator';
 import { Typography } from '@o2s/ui/elements/typography';
 
+import { ProductDetailsPureProps } from './ProductDetails.types';
 import { OptionGroupsSelector } from './components/OptionGroupsSelector';
 import { PriceSection } from './components/PriceSection';
 import { ProductInfo } from './components/ProductInfo';
 import { ProductSpecs } from './components/ProductSpecs';
 import { VariantSelector } from './components/VariantSelector';
-import { ProductDetailsPureProps } from './ProductDetails.types';
 
 function resolveVariant(
     variants: Array<{ id: string; title: string; slug: string; link?: string; options?: Record<string, string> }>,
@@ -118,6 +119,13 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
         return map;
     }, [product.optionGroups, product.variants, selectedOptions]);
 
+    const currentVariantInStock = useMemo(() => {
+        const current = product.variants?.find((v) => v.id === product.variantId);
+        return current?.inStock ?? true;
+    }, [product.variants, product.variantId]);
+
+    const isOutOfStock = !currentVariantInStock;
+
     return (
         <div className="w-full flex flex-col gap-8 md:gap-12">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -148,6 +156,13 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                                     />
                                 )}
                             </>
+                        )}
+
+                        {isOutOfStock && labels.outOfStock && (
+                            <Alert variant="destructive">
+                                <CircleAlert className="h-4 w-4" />
+                                <AlertDescription className="font-medium">{labels.outOfStock}</AlertDescription>
+                            </Alert>
                         )}
                     </div>
 
@@ -190,10 +205,18 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                             </>
                         )}
 
+                        {isOutOfStock && labels.outOfStock && (
+                            <Alert variant="destructive">
+                                <CircleAlert className="h-4 w-4" />
+                                <AlertDescription>{labels.outOfStock}</AlertDescription>
+                            </Alert>
+                        )}
+
                         <PriceSection
                             price={product.price}
                             priceLabel={labels.price}
                             actionButton={actionButton}
+                            isOutOfStock={isOutOfStock}
                         />
                     </div>
                 </div>
@@ -216,6 +239,7 @@ export const ProductDetailsPure: React.FC<ProductDetailsPureProps> = ({
                                         size="default"
                                         className="w-full"
                                         onClick={() => setIsOpen(true)}
+                                        disabled={isOutOfStock}
                                     >
                                         {actionButton.label}
                                     </Button>

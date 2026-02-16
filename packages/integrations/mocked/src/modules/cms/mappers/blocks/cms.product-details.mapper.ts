@@ -4,12 +4,13 @@ const MOCK_PRODUCT_DETAILS_BLOCK_EN: CMS.Model.ProductDetailsBlock.ProductDetail
     id: 'product-details-1',
     labels: {
         actionButtonLabel: 'Request Quote',
-        specificationsTitle: 'Specifications',
+        specificationsTitle: 'Details',
         descriptionTitle: 'Description',
         downloadLabel: 'Download Brochure',
         priceLabel: 'Price',
         offerLabel: 'Offer',
         variantLabel: 'Variant',
+        outOfStockLabel: 'Out of Stock',
     },
     basePath: '/products',
     attributes: [
@@ -31,12 +32,13 @@ const MOCK_PRODUCT_DETAILS_BLOCK_DE: CMS.Model.ProductDetailsBlock.ProductDetail
     id: 'product-details-1',
     labels: {
         actionButtonLabel: 'Angebot anfordern',
-        specificationsTitle: 'Spezifikationen',
+        specificationsTitle: 'Produktdetails',
         descriptionTitle: 'Beschreibung',
         downloadLabel: 'Broschüre herunterladen',
         priceLabel: 'Preis',
         offerLabel: 'Angebot',
         variantLabel: 'Variante',
+        outOfStockLabel: 'Nicht auf Lager',
     },
     basePath: '/produkte',
     attributes: [
@@ -58,12 +60,13 @@ const MOCK_PRODUCT_DETAILS_BLOCK_PL: CMS.Model.ProductDetailsBlock.ProductDetail
     id: 'product-details-1',
     labels: {
         actionButtonLabel: 'Zapytaj o ofertę',
-        specificationsTitle: 'Specyfikacja',
+        specificationsTitle: 'Szczegóły',
         descriptionTitle: 'Opis',
         downloadLabel: 'Pobierz broszurę',
         priceLabel: 'Cena',
         offerLabel: 'Oferta',
         variantLabel: 'Wariant',
+        outOfStockLabel: 'Brak na magazynie',
     },
     basePath: '/produkty',
     attributes: [

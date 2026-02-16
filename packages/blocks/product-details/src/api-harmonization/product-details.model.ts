@@ -44,6 +44,7 @@ export type Labels = {
     price: string;
     offer: string;
     variant?: string;
+    outOfStock?: string;
 };
 
 export type ProductDetailsBlock = ApiModels.Block.Block & {

@@ -19,15 +19,22 @@ interface PriceSectionProps {
         variant?: 'default' | 'secondary' | 'destructive' | 'outline';
         icon?: string;
     };
+    isOutOfStock?: boolean;
     className?: string;
 }
 
-export const PriceSection: React.FC<PriceSectionProps> = ({ price, priceLabel, actionButton, className }) => {
+export const PriceSection: React.FC<PriceSectionProps> = ({
+    price,
+    priceLabel,
+    actionButton,
+    isOutOfStock = false,
+    className,
+}) => {
     const t = useTranslations();
 
     return (
         <div className={className}>
-            <div className="flex flex-col gap-1 items-end">
+            <div className="flex flex-col gap-1 mb-4 items-end">
                 <Typography className="text-muted-foreground">{priceLabel}</Typography>
                 <Typography variant="h2" className="text-primary whitespace-nowrap">
                     <Price price={price} />
@@ -36,7 +43,7 @@ export const PriceSection: React.FC<PriceSectionProps> = ({ price, priceLabel, a
             {actionButton && (
                 <>
                     <Separator />
-                    <div className="flex flex-col gap-3">
+                    <div className="flex flex-col gap-3 mt-6">
                         <TooltipHover
                             trigger={(setIsOpen) => (
                                 <Button
@@ -44,6 +51,7 @@ export const PriceSection: React.FC<PriceSectionProps> = ({ price, priceLabel, a
                                     size="lg"
                                     className="w-full"
                                     onClick={() => setIsOpen(true)}
+                                    disabled={isOutOfStock}
                                 >
                                     {actionButton.icon && (
                                         <DynamicIcon name={actionButton.icon} size={20} className="mr-2" />

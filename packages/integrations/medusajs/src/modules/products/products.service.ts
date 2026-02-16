@@ -23,8 +23,12 @@ export class ProductsService extends Products.Service {
     private readonly defaultCurrency: string;
 
     // Note: handle is included by default in Medusa product response
-    private readonly productListFields = '*variants,*variants.prices,*variants.options,*categories,*tags,*images';
-    private readonly productRetrieveFields = '*variants,*variants.options,*variants.options.option';
+    private readonly productListFields =
+        '*variants,*variants.prices,*variants.options,*categories,*tags,*images,+variants.inventory_quantity,+variants.manage_inventory,+variants.allow_backorder';
+    // Store API fields for retrieving product with variants (includes inventory_quantity)
+    private readonly storeRetrieveFields =
+        '*variants,*variants.options,*variants.options.option,+variants.inventory_quantity,+variants.manage_inventory,+variants.allow_backorder';
+    // Admin API fields for retrieving single variant details (weight, height, etc.)
     private readonly productDetailFields =
         '+weight,+height,+width,+length,+material,+origin_country,+hs_code,+mid_code,+metadata,+product.metadata,+product.handle,product.*,*product.images,*product.tags,*options,*options.option';
 
@@ -90,7 +94,7 @@ export class ProductsService extends Products.Service {
         variantOptionGroups?: { medusaTitle: string; label: string }[],
     ): Observable<Products.Model.Product> {
         return from(
-            this.sdk.admin.product.retrieve(productId, { fields: this.productRetrieveFields }).catch((error) => {
+            this.sdk.store.product.retrieve(productId, { fields: this.storeRetrieveFields }).catch((error) => {
                 throw error;
             }),
         ).pipe(
@@ -100,7 +104,13 @@ export class ProductsService extends Products.Service {
                     throw new Error(`No variants found for product ${productId}`);
                 }
                 const targetVariantId = variantId || product.variants[0]!.id;
-                return this.getVariant(productId, targetVariantId, product.variants, basePath, variantOptionGroups);
+                return this.getVariant(
+                    productId,
+                    targetVariantId,
+                    product.variants as HttpTypes.AdminProductVariant[],
+                    basePath,
+                    variantOptionGroups,
+                );
             }),
             catchError((error) => {
                 return handleHttpError(error);
@@ -115,7 +125,7 @@ export class ProductsService extends Products.Service {
         variantOptionGroups?: { medusaTitle: string; label: string }[],
     ): Observable<Products.Model.Product> {
         return from(
-            this.sdk.admin.product.list({ handle, limit: 1, fields: this.productRetrieveFields }).catch((error) => {
+            this.sdk.store.product.list({ handle, limit: 1, fields: this.storeRetrieveFields }).catch((error) => {
                 throw error;
             }),
         ).pipe(
@@ -128,17 +138,19 @@ export class ProductsService extends Products.Service {
                     throw new Error(`No variants found for product with handle "${handle}"`);
                 }
 
+                const allVariants = product.variants as HttpTypes.AdminProductVariant[];
+
                 // Find variant by SKU slug
-                let variant = product.variants[0]!;
+                let variant = allVariants[0]!;
                 if (variantSlug) {
-                    const matchingVariant = product.variants.find(
+                    const matchingVariant = allVariants.find(
                         (v: HttpTypes.AdminProductVariant) =>
                             v.sku && slugify(v.sku, { lower: true, strict: true }) === variantSlug,
                     );
                     if (matchingVariant) {
                         variant = matchingVariant;
                     } else {
-                        const availableSlugs = product.variants.map((v: HttpTypes.AdminProductVariant) =>
+                        const availableSlugs = allVariants.map((v: HttpTypes.AdminProductVariant) =>
                             v.sku ? slugify(v.sku, { lower: true, strict: true }) : v.id,
                         );
                         this.logger.warn(
@@ -147,7 +159,7 @@ export class ProductsService extends Products.Service {
                     }
                 }
 
-                return this.getVariant(product.id, variant.id, product.variants, basePath, variantOptionGroups);
+                return this.getVariant(product.id, variant.id, allVariants, basePath, variantOptionGroups);
             }),
             catchError((error) => {
                 return handleHttpError(error);

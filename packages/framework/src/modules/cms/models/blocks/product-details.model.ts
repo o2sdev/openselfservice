@@ -8,6 +8,7 @@ export type Labels = {
     priceLabel: string;
     offerLabel: string;
     variantLabel?: string;
+    outOfStockLabel?: string;
 };
 
 export type AttributeConfig = {

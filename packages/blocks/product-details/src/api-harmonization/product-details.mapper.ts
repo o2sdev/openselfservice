@@ -54,6 +54,7 @@ export const mapProductDetails = (
         price: cms.labels.priceLabel,
         offer: cms.labels.offerLabel,
         variant: cms.labels.variantLabel,
+        outOfStock: cms.labels.outOfStockLabel,
     };
 
     return {
