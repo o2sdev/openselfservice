@@ -37,12 +37,12 @@ export function getCartBlockMock(_id: string, locale: string): CartBlock {
         },
         checkoutButton: {
             label: isPl ? 'Przejdź do kasy' : isDe ? 'Zur Kasse' : 'Proceed to checkout',
-            path: '/checkout',
+            path: isPl ? '/zamowienie/dane-firmy' : isDe ? '/kasse/firmendaten' : '/checkout/company-data',
             icon: 'ShoppingCart',
         },
         continueShopping: {
             label: isPl ? 'Kontynuuj zakupy' : isDe ? 'Weiter einkaufen' : 'Continue shopping',
-            path: '/products',
+            path: isPl ? '/produkty' : isDe ? '/produkte' : '/products',
         },
         empty: {
             title: isPl ? 'Twój koszyk jest pusty' : isDe ? 'Ihr Warenkorb ist leer' : 'Your cart is empty',
@@ -53,7 +53,7 @@ export function getCartBlockMock(_id: string, locale: string): CartBlock {
                   : 'Add products to place an order',
             continueShopping: {
                 label: isPl ? 'Przejdź do sklepu' : isDe ? 'Zum Shop' : 'Go to shop',
-                path: '/products',
+                path: isPl ? '/produkty' : isDe ? '/produkte' : '/products',
             },
         },
         items: [
