@@ -16,6 +16,10 @@
     --accent-foreground: hsl(240 6% 10%);
     --destructive: hsl(346 100% 41%);
     --destructive-foreground: hsl(0 0% 100%);
+    --success: hsl(142 76% 36%);
+    --success-foreground: hsl(0 0% 100%);
+    --success-hover: hsl(142 76% 30%);
+    --success-foreground-hover: hsl(0 0% 100%);
     --border: hsl(232 12% 87%);
     --input: hsl(230 6% 81%);
     --ring: hsl(240 6% 10%);
@@ -77,6 +81,10 @@
     --accent-foreground: hsl(0 0% 100%);
     --destructive: hsl(0 63% 31%);
     --destructive-foreground: hsl(0 86% 97%);
+    --success: hsl(142 76% 42%);
+    --success-foreground: hsl(0 0% 100%);
+    --success-hover: hsl(142 76% 48%);
+    --success-foreground-hover: hsl(0 0% 100%);
     --border: hsl(226 71% 40%);
     --input: hsl(226 71% 40%);
     --ring: hsl(240 5% 84%);
