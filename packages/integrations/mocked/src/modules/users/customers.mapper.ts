@@ -32,7 +32,7 @@ const PROSPECT_PERMISSIONS: Auth.Model.Permissions = {
 };
 
 const MOCK_CUSTOMER_1: Models.Customer.Customer = {
-    id: 'cus_01KH3J08TY40PYGVEG3A04CP8R',
+    id: 'cust-001',
     name: 'Acme Corporation',
     clientType: 'B2B',
     address: {

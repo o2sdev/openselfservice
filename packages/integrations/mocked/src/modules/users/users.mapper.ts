@@ -23,7 +23,7 @@ const MOCK_USER_2: Users.Model.User = {
     firstName: 'Jane',
     lastName: 'Doe',
     customers: [
-        mapCustomer('cus_01KH3J08TY40PYGVEG3A04CP8R')!, // Acme Corp - admin permissions (full access)
+        mapCustomer('cust-001')!, // Acme Corp - admin permissions (full access)
         mapCustomer('cust-002')!, // Tech Solutions - user permissions (view + pay)
     ],
 };
