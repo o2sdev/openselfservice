@@ -1,7 +1,7 @@
 import Medusa from '@medusajs/js-sdk';
 import { HttpTypes } from '@medusajs/types';
 import { HttpService } from '@nestjs/axios';
-import { Inject, Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Observable, catchError, from, map, switchMap } from 'rxjs';
 import slugify from 'slugify';
@@ -43,7 +43,7 @@ export class ProductsService extends Products.Service {
         this.defaultCurrency = this.config.get('DEFAULT_CURRENCY') || '';
 
         if (!this.defaultCurrency) {
-            throw new Error('DEFAULT_CURRENCY is not defined');
+            throw new BadRequestException('DEFAULT_CURRENCY is not defined');
         }
     }
 
@@ -55,15 +55,11 @@ export class ProductsService extends Products.Service {
             fields: this.productListFields,
         };
 
-        if (!query.basePath) {
-            throw new Error('basePath is required - must be provided by CMS configuration');
-        }
-
         return from(
             this.sdk.admin.product
                 .list(params)
                 .then((response) => {
-                    return mapProducts(response, this.defaultCurrency, query.basePath!, query.category);
+                    return mapProducts(response, this.defaultCurrency, query.basePath || '', query.category);
                 })
                 .catch((error) => {
                     throw error;
@@ -101,7 +97,7 @@ export class ProductsService extends Products.Service {
             switchMap((response) => {
                 const product = response.product;
                 if (!product?.variants?.length) {
-                    throw new Error(`No variants found for product ${productId}`);
+                    throw new NotFoundException(`No variants found for product ${productId}`);
                 }
                 const targetVariantId = variantId || product.variants[0]!.id;
                 return this.getVariant(
@@ -132,10 +128,10 @@ export class ProductsService extends Products.Service {
             switchMap((response) => {
                 const product = response.products[0];
                 if (!product) {
-                    throw new Error(`Product with handle "${handle}" not found`);
+                    throw new NotFoundException(`Product with handle "${handle}" not found`);
                 }
                 if (!product.variants?.length) {
-                    throw new Error(`No variants found for product with handle "${handle}"`);
+                    throw new NotFoundException(`No variants found for product with handle "${handle}"`);
                 }
 
                 const allVariants = product.variants as HttpTypes.AdminProductVariant[];
@@ -174,10 +170,6 @@ export class ProductsService extends Products.Service {
         basePath?: string,
         variantOptionGroups?: { medusaTitle: string; label: string }[],
     ): Observable<Products.Model.Product> {
-        if (!basePath) {
-            throw new Error('basePath is required - must be provided by CMS configuration');
-        }
-
         return from(
             this.sdk.admin.product
                 .retrieveVariant(productId, variantId, { fields: this.productDetailFields })
@@ -187,9 +179,15 @@ export class ProductsService extends Products.Service {
         ).pipe(
             map((response) => {
                 if (!response.variant) {
-                    throw new Error(`Variant ${variantId} not found for product ${productId}`);
+                    throw new NotFoundException(`Variant ${variantId} not found for product ${productId}`);
                 }
-                return mapProduct(response.variant, this.defaultCurrency, allVariants, basePath, variantOptionGroups);
+                return mapProduct(
+                    response.variant,
+                    this.defaultCurrency,
+                    allVariants,
+                    basePath || '',
+                    variantOptionGroups,
+                );
             }),
             catchError((error) => {
                 return handleHttpError(error);
@@ -198,10 +196,6 @@ export class ProductsService extends Products.Service {
     }
 
     getRelatedProductList(params: Products.Request.GetRelatedProductListParams): Observable<Products.Model.Products> {
-        if (!params.basePath) {
-            throw new Error('basePath is required - must be provided by CMS configuration');
-        }
-
         return this.httpClient
             .get<RelatedProductsResponse>(
                 `${this.medusaJsService.getBaseUrl()}/admin/products/${params.productId}/variants/${params.productVariantId}/references`,
@@ -215,7 +209,7 @@ export class ProductsService extends Products.Service {
             )
             .pipe(
                 map((response) => {
-                    return mapRelatedProducts(response.data, this.defaultCurrency, params.basePath!);
+                    return mapRelatedProducts(response.data, this.defaultCurrency, params.basePath || '');
                 }),
                 catchError((error) => {
                     return handleHttpError(error);

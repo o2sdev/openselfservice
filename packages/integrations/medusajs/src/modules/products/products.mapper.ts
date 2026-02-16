@@ -26,10 +26,11 @@ const generateProductLink = (
 ): string => {
     const slug = productHandle || productId;
     const variantSlug = getVariantSlug(variantSku);
+    const path = basePath ? `${basePath}/${slug}` : `/${slug}`;
     if (variantSlug) {
-        return `${basePath}/${slug}/${variantSlug}`;
+        return `${path}/${variantSlug}`;
     }
-    return `${basePath}/${slug}`;
+    return path;
 };
 
 // Map Medusa price to O2S Price model
@@ -129,10 +130,14 @@ const getVariantOptionsMap = (variant: HttpTypes.AdminProductVariant): Record<st
     if (!options || !Array.isArray(options)) {
         return {};
     }
-    return Object.fromEntries(
-        options
-            .filter((option) => option.option_id && option.value != null)
-            .map((option) => [option.option_id!, option.value!]),
+    return options.reduce(
+        (acc, option) => {
+            if (option.option_id && option.value != null) {
+                acc[option.option_id] = option.value;
+            }
+            return acc;
+        },
+        {} as Record<string, string>,
     );
 };
 
@@ -193,28 +198,14 @@ const mapOptionGroups = (
         values: Array.from(values),
     }));
 
-    // Sort by variantOptionGroups order if provided (using medusaTitle as key)
+    // Apply CMS order if provided, otherwise keep natural API order
     let sortedGroups = groupsWithKeys;
-    if (variantOptionGroups) {
-        const optionGroupsOrder = variantOptionGroups.map((groupConfig) => groupConfig.medusaTitle);
+    if (variantOptionGroups && variantOptionGroups.length > 0) {
+        const orderMap = new Map(variantOptionGroups.map((g, i) => [g.medusaTitle, i]));
         sortedGroups = groupsWithKeys.sort((a, b) => {
-            const indexA = optionGroupsOrder.indexOf(a.medusaTitle);
-            const indexB = optionGroupsOrder.indexOf(b.medusaTitle);
-
-            // If both in order array, sort by position
-            if (indexA !== -1 && indexB !== -1) {
-                return indexA - indexB;
-            }
-            // If only A is in order, A comes first
-            if (indexA !== -1) {
-                return -1;
-            }
-            // If only B is in order, B comes first
-            if (indexB !== -1) {
-                return 1;
-            }
-            // Neither in order - keep natural order (no change)
-            return 0;
+            const orderA = orderMap.get(a.medusaTitle) ?? Number.MAX_SAFE_INTEGER;
+            const orderB = orderMap.get(b.medusaTitle) ?? Number.MAX_SAFE_INTEGER;
+            return orderA - orderB;
         });
     }
 
@@ -252,10 +243,10 @@ export const mapProduct = (
 
     // Validate required fields
     if (!product?.id) {
-        throw new Error(`Product ID is required but missing for variant ${productVariant.id}`);
+        throw new NotFoundException(`Product ID is required but missing for variant ${productVariant.id}`);
     }
     if (!productVariant.sku) {
-        throw new Error(`Product variant SKU is required but missing for product ${product.id}`);
+        throw new NotFoundException(`Product variant SKU is required but missing for product ${product.id}`);
     }
 
     // Collect all available raw attributes from variant/product.
