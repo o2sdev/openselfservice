@@ -123,7 +123,7 @@ export const PAGE_CHECKOUT_BILLING_PAYMENT_DE = createCheckoutPage(
 );
 export const PAGE_CHECKOUT_BILLING_PAYMENT_PL = createCheckoutPage(
     'checkout-billing-payment-1',
-    '/zamowienie/platnosc-rozliczenie',
+    '/zamowienie/platnosc',
     'pl',
     'Płatność i rozliczenie',
     'Wprowadź dane rozliczeniowe i płatności',

@@ -269,7 +269,7 @@ export const mapPage = (slug: string, locale: string): CMS.Model.Page.Page | und
             return PAGE_CHECKOUT_BILLING_PAYMENT_EN;
         case '/kasse/rechnung-zahlung':
             return PAGE_CHECKOUT_BILLING_PAYMENT_DE;
-        case '/zamowienie/platnosc-rozliczenie':
+        case '/zamowienie/platnosc':
             return PAGE_CHECKOUT_BILLING_PAYMENT_PL;
 
         case '/checkout/summary':
