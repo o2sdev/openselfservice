@@ -15,7 +15,7 @@
         "view-report": "open-cli coverage/report/index.html"
     },
     "devDependencies": {
-        "glob": "^13.0.1",
+        "glob": "^13.0.4",
         "nyc": "^17.1.0",
         "open-cli": "^8.0.0",
         "unplugin-swc": "^1.5.9",

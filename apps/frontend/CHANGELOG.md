@@ -1,5 +1,25 @@
 # @o2s/frontend
 
+## 1.15.1
+
+### Patch Changes
+
+- 8421a6a: fix(frontend): improve URL match for active navigation group detection
+- Updated dependencies [dadd9ba]
+- Updated dependencies [7305d03]
+- Updated dependencies [5aba06c]
+- Updated dependencies [8702f91]
+- Updated dependencies [002ff11]
+- Updated dependencies [3e14803]
+    - @o2s/framework@1.17.0
+    - @o2s/blocks.category-list@1.5.0
+    - @o2s/blocks.article-list@1.5.0
+    - @o2s/integrations.mocked@1.18.0
+    - @o2s/ui@1.10.0
+    - @o2s/blocks.article-search@1.5.0
+    - @o2s/blocks.category@1.5.0
+    - @o2s/blocks.surveyjs-form@1.3.1
+
 ## 1.15.0
 
 ### Minor Changes

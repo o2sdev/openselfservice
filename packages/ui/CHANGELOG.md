@@ -1,5 +1,20 @@
 # @o2s/ui
 
+## 1.10.0
+
+### Minor Changes
+
+- 5aba06c: add Zendesk Help Center articles integration
+
+### Patch Changes
+
+- Updated dependencies [dadd9ba]
+- Updated dependencies [7305d03]
+- Updated dependencies [5aba06c]
+- Updated dependencies [8702f91]
+- Updated dependencies [002ff11]
+    - @o2s/framework@1.17.0
+
 ## 1.9.0
 
 ### Minor Changes
