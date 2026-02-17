@@ -27,13 +27,9 @@ export class RecommendedProductsService {
 
         return cmsBlock$.pipe(
             switchMap((cmsBlock) => {
-                if (!cmsBlock.basePath) {
-                    throw new Error('basePath is required for RecommendedProductsBlock - must be provided by CMS');
-                }
-
                 return this.productsService
                     .getProductList({
-                        basePath: cmsBlock.basePath,
+                        basePath: cmsBlock.basePath || '',
                         offset: 0,
                         limit: 7, // Fetch 7 to have 6 after excluding current product
                         locale,
