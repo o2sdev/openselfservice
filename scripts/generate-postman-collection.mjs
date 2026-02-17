@@ -71,11 +71,14 @@ function createRequest(name, method, path, query = [], body = null, description 
         }
     });
 
+    // Filter out locale query parameter since we always use x-locale header
+    const filteredQuery = query.filter((q) => q.key !== 'locale');
+
     const url = {
         raw: `{{baseUrl}}/${urlPath.join('/')}`.replace(/\/+/g, '/'),
         host: ['{{baseUrl}}'],
         path: urlPath,
-        query: query.map((q) => ({ key: q.key, value: q.value || `{{${q.key}}}` })),
+        query: filteredQuery.map((q) => ({ key: q.key, value: q.value || `{{${q.key}}}` })),
     };
 
     const request = {
