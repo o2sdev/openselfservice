@@ -1,6 +1,11 @@
 import { HttpTypes } from '@medusajs/types';
-import { BadRequestException, NotFoundException } from '@nestjs/common';
-import { firstValueFrom, of, throwError } from 'rxjs';
+import {
+    BadRequestException,
+    InternalServerErrorException,
+    NotFoundException,
+    NotImplementedException,
+} from '@nestjs/common';
+import { firstValueFrom } from 'rxjs';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { Payments } from '@o2s/framework/modules';
@@ -73,13 +78,13 @@ describe('PaymentsService', () => {
     });
 
     describe('getProviders', () => {
-        it('should throw BadRequestException when regionId is missing', () => {
-            expect(() => service.getProviders({} as Payments.Request.GetProvidersParams, 'Bearer token')).toThrow(
-                BadRequestException,
-            );
-            expect(() => service.getProviders({} as Payments.Request.GetProvidersParams, 'Bearer token')).toThrow(
-                'regionId is required',
-            );
+        it('should throw BadRequestException when regionId is missing', async () => {
+            await expect(
+                firstValueFrom(service.getProviders({} as Payments.Request.GetProvidersParams, 'Bearer token')),
+            ).rejects.toThrow(BadRequestException);
+            await expect(
+                firstValueFrom(service.getProviders({} as Payments.Request.GetProvidersParams, 'Bearer token')),
+            ).rejects.toThrow('regionId is required');
         });
 
         it('should call listPaymentProviders and return mapped providers', async () => {
@@ -169,12 +174,20 @@ describe('PaymentsService', () => {
             expect(result.providerId).toBe('pp_manual');
         });
 
-        it('should throw when sessions array is empty', async () => {
+        it('should throw InternalServerErrorException when sessions array is empty', async () => {
             mockSdk.store.cart.retrieve.mockResolvedValue({ cart: minimalCart });
             mockSdk.store.payment.initiatePaymentSession.mockResolvedValue({
                 payment_collection: { payment_sessions: [] },
             } as unknown as HttpTypes.StorePaymentCollectionResponse);
 
+            await expect(
+                firstValueFrom(
+                    service.createSession(
+                        { cartId: 'cart_1', providerId: 'pp_stripe' } as Payments.Request.CreateSessionBody,
+                        'Bearer token',
+                    ),
+                ),
+            ).rejects.toThrow(InternalServerErrorException);
             await expect(
                 firstValueFrom(
                     service.createSession(
@@ -200,73 +213,32 @@ describe('PaymentsService', () => {
     });
 
     describe('getSession', () => {
-        it('should return of(undefined)', async () => {
-            const result = await firstValueFrom(
-                service.getSession({ id: 'ps_1' } as Payments.Request.GetSessionParams, 'Bearer token'),
-            );
-            expect(result).toBeUndefined();
+        it('should throw NotImplementedException', async () => {
+            await expect(
+                firstValueFrom(service.getSession({ id: 'ps_1' } as Payments.Request.GetSessionParams, 'Bearer token')),
+            ).rejects.toThrow(NotImplementedException);
         });
     });
 
     describe('updateSession', () => {
-        it('should post to payment-sessions and return mapped session', async () => {
-            mockHttpService.post.mockReturnValue(
-                of({ data: { payment_session: { ...minimalPaymentSession, id: 'ps_updated' } } }),
-            );
-
-            const result = await firstValueFrom(
-                service.updateSession(
-                    { id: 'ps_1' } as Payments.Request.UpdateSessionParams,
-                    { returnUrl: 'https://example.com/return' } as Payments.Request.UpdateSessionBody,
-                    'Bearer token',
-                ),
-            );
-
-            expect(mockHttpService.post).toHaveBeenCalledWith(
-                `${BASE_URL}/store/payment-sessions/ps_1`,
-                { return_url: 'https://example.com/return' },
-                expect.objectContaining({ headers: expect.any(Object) }),
-            );
-            expect(result.id).toBe('ps_updated');
-        });
-
-        it('should throw NotFoundException on 404', async () => {
-            mockHttpService.post.mockReturnValue(throwError(() => ({ response: { status: 404 } })));
-
+        it('should throw NotImplementedException', async () => {
             await expect(
                 firstValueFrom(
                     service.updateSession(
-                        { id: 'missing' } as Payments.Request.UpdateSessionParams,
-                        {} as Payments.Request.UpdateSessionBody,
+                        { id: 'ps_1' } as Payments.Request.UpdateSessionParams,
+                        { returnUrl: 'https://example.com/return' } as Payments.Request.UpdateSessionBody,
                         'Bearer token',
                     ),
                 ),
-            ).rejects.toThrow(NotFoundException);
+            ).rejects.toThrow(NotImplementedException);
         });
     });
 
     describe('cancelSession', () => {
-        it('should delete payment-sessions and return void', async () => {
-            mockHttpService.delete.mockReturnValue(of({}));
-
-            await firstValueFrom(
-                service.cancelSession({ id: 'ps_1' } as Payments.Request.CancelSessionParams, 'Bearer token'),
-            );
-
-            expect(mockHttpService.delete).toHaveBeenCalledWith(
-                `${BASE_URL}/store/payment-sessions/ps_1`,
-                expect.objectContaining({ headers: expect.any(Object) }),
-            );
-        });
-
-        it('should throw NotFoundException on 404', async () => {
-            mockHttpService.delete.mockReturnValue(throwError(() => ({ response: { status: 404 } })));
-
-            await expect(
-                firstValueFrom(
-                    service.cancelSession({ id: 'missing' } as Payments.Request.CancelSessionParams, 'Bearer token'),
-                ),
-            ).rejects.toThrow(NotFoundException);
+        it('should throw NotImplementedException', () => {
+            expect(() => {
+                service.cancelSession({ id: 'ps_1' } as Payments.Request.CancelSessionParams, 'Bearer token');
+            }).toThrow(NotImplementedException);
         });
     });
 });

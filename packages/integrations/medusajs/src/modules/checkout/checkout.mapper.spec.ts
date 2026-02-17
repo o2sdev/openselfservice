@@ -30,7 +30,6 @@ function minimalCartWithAllFields(): Carts.Model.Cart {
     const paymentMethod: Carts.Model.PaymentMethod = {
         id: 'pm_1',
         name: 'Card',
-        type: 'OTHER',
     };
     return {
         id: 'cart_1',

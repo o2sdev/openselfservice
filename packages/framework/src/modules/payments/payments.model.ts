@@ -1,11 +1,9 @@
 import { Pagination } from '@/utils/models';
 
-export type PaymentProviderType = 'STRIPE' | 'PAYPAL' | 'ADYEN' | 'SYSTEM' | 'OTHER';
-
 export class PaymentProvider {
     id!: string;
     name!: string;
-    type!: PaymentProviderType;
+    type!: string;
     isEnabled!: boolean;
     requiresRedirect!: boolean; // true for redirect-based providers (Stripe Checkout)
     config?: Record<string, unknown>; // Provider-specific config

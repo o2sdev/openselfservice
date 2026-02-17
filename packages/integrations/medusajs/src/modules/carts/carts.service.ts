@@ -135,9 +135,7 @@ export class CartsService extends Carts.Service {
     }
 
     deleteCart(_params: Carts.Request.DeleteCartParams, _authorization?: string): Observable<void> {
-        this.logger.debug('Delete cart operation - not directly supported in Medusa Store API');
-
-        return of(undefined as void);
+        return throwError(() => new NotImplementedException('Delete cart is not supported in Medusa.js Store API.'));
     }
 
     addCartItem(data: Carts.Request.AddCartItemBody, authorization?: string): Observable<Carts.Model.Cart> {
@@ -482,32 +480,6 @@ export class CartsService extends Carts.Service {
             }),
             catchError((error) => handleHttpError(error)),
         );
-    }
-
-    /**
-     * Resolves the billing address from the request data.
-     * Returns `null` if no billing address is specified (caller should fall back to shipping address).
-     */
-    private resolveBillingAddress(
-        data: Carts.Request.UpdateCartAddressesBody,
-        authorization?: string,
-    ): Observable<HttpTypes.StoreAddAddress | null> {
-        if (data.billingAddressId && authorization) {
-            return this.customersService.getAddress({ id: data.billingAddressId }, authorization).pipe(
-                map((billingAddress) => {
-                    if (!billingAddress) {
-                        throw new NotFoundException(`Address with ID ${data.billingAddressId} not found`);
-                    }
-                    return mapAddressToMedusa(billingAddress.address);
-                }),
-            );
-        }
-
-        if (data.billingAddress) {
-            return of(mapAddressToMedusa(data.billingAddress));
-        }
-
-        return of(null);
     }
 
     /**

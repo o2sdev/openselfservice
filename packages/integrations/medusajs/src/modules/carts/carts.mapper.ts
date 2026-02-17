@@ -27,7 +27,6 @@ export const mapCart = (cart: HttpTypes.StoreCart, _defaultCurrency: string): Ca
         id: cart.id,
         customerId: cart.customer_id ?? undefined,
         name: undefined, // Medusa doesn't have cart names by default
-        type: 'ACTIVE', // Medusa carts are active by default
         createdAt: cart.created_at?.toString() ?? new Date().toISOString(),
         updatedAt: cart.updated_at?.toString() ?? new Date().toISOString(),
         expiresAt: undefined, // Medusa handles expiration differently
@@ -106,8 +105,6 @@ const mapAddress = (address?: HttpTypes.StoreCartAddress | null): Models.Address
     };
 };
 
-const VALID_PAYMENT_METHOD_TYPES: Carts.Model.PaymentMethodType[] = ['CREDIT_CARD', 'PAYPAL', 'BANK_TRANSFER', 'OTHER'];
-
 const mapPaymentMethodFromMetadata = (metadata: Record<string, unknown>): Carts.Model.PaymentMethod | undefined => {
     const stored = metadata?.paymentMethod;
     if (stored === null || stored === undefined || typeof stored !== 'object' || Array.isArray(stored))
@@ -119,17 +116,11 @@ const mapPaymentMethodFromMetadata = (metadata: Record<string, unknown>): Carts.
     if (typeof id !== 'string' || typeof name !== 'string') return undefined;
 
     const description = storedObj.description;
-    const typeVal = storedObj.type;
-    const type: Carts.Model.PaymentMethodType =
-        typeof typeVal === 'string' && VALID_PAYMENT_METHOD_TYPES.includes(typeVal as Carts.Model.PaymentMethodType)
-            ? (typeVal as Carts.Model.PaymentMethodType)
-            : 'OTHER';
 
     return {
         id,
         name,
         description: typeof description === 'string' ? description : undefined,
-        type,
     };
 };
 
@@ -147,23 +138,31 @@ const mapShippingMethod = (
 };
 
 const mapPromotions = (cart: HttpTypes.StoreCart): Carts.Model.Promotion[] | undefined => {
-    // Medusa v2 uses promotions differently - map from adjustments if available
-    const promotions: Carts.Model.Promotion[] = [];
-
-    // Extract promotion codes from cart if available
-    if (cart.promotions && Array.isArray(cart.promotions)) {
-        for (const promo of cart.promotions) {
-            promotions.push({
-                id: promo.id ?? '',
-                code: promo.code ?? '',
-                name: promo.code ?? '',
-                description: undefined,
-                type: 'PERCENTAGE', // Default type
-                value: 0,
-                appliedTo: 'CART',
-            });
-        }
+    if (!cart.promotions || !Array.isArray(cart.promotions)) {
+        return undefined;
     }
+
+    const promotions: Carts.Model.Promotion[] = cart.promotions.map((promo) => {
+        const applicationMethod = promo.application_method;
+        let promotionType: Carts.Model.PromotionType | undefined;
+        if (applicationMethod?.type) {
+            if (applicationMethod.type === 'fixed') {
+                promotionType = 'FIXED_AMOUNT';
+            } else if (applicationMethod.type === 'percentage') {
+                promotionType = 'PERCENTAGE';
+            } else if (applicationMethod.type === 'free_shipping') {
+                promotionType = 'FREE_SHIPPING';
+            }
+        }
+
+        return {
+            id: promo.id || promo.code || '',
+            code: promo.code ?? '',
+            name: promo.code ?? undefined,
+            type: promotionType,
+            value: applicationMethod?.value != null ? String(applicationMethod.value) : undefined,
+        };
+    });
 
     return promotions.length > 0 ? promotions : undefined;
 };

@@ -3,29 +3,21 @@ import { Product } from '../products/products.model';
 
 import { Address, Pagination, Price, Unit } from '@/utils/models';
 
-export type CartType = 'ACTIVE' | 'SAVED' | 'ABANDONED';
-
-export type PaymentMethodType = 'CREDIT_CARD' | 'PAYPAL' | 'BANK_TRANSFER' | 'OTHER';
-
 export type PromotionType = 'PERCENTAGE' | 'FIXED_AMOUNT' | 'FREE_SHIPPING';
-
-export type PromotionScope = 'CART' | 'ITEM' | 'SHIPPING';
 
 export class PaymentMethod {
     id!: string;
     name!: string;
     description?: string;
-    type!: PaymentMethodType;
 }
 
 export class Promotion {
     id!: string;
     code!: string;
-    name!: string;
+    name?: string;
     description?: string;
-    type!: PromotionType;
-    value!: number;
-    appliedTo!: PromotionScope;
+    type?: PromotionType;
+    value?: string;
 }
 
 export class CartItem {
@@ -46,7 +38,6 @@ export class Cart {
     id!: string;
     customerId?: string;
     name?: string;
-    type!: CartType;
     createdAt!: string;
     updatedAt!: string;
     expiresAt?: string;

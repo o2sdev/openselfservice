@@ -1,5 +1,5 @@
 import { HttpTypes } from '@medusajs/types';
-import { UnauthorizedException } from '@nestjs/common';
+import { InternalServerErrorException, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { firstValueFrom } from 'rxjs';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -69,15 +69,17 @@ describe('CustomersService', () => {
     });
 
     describe('getAddresses', () => {
-        it('should throw UnauthorizedException when auth is missing', () => {
-            expect(() => service.getAddresses(undefined)).toThrow(UnauthorizedException);
-            expect(() => service.getAddresses(undefined)).toThrow('Authentication required');
+        it('should throw UnauthorizedException when auth is missing', async () => {
+            await expect(firstValueFrom(service.getAddresses(undefined))).rejects.toThrow(UnauthorizedException);
+            await expect(firstValueFrom(service.getAddresses(undefined))).rejects.toThrow('Authentication required');
         });
 
-        it('should throw UnauthorizedException when getCustomerId returns undefined', () => {
+        it('should throw UnauthorizedException when getCustomerId returns undefined', async () => {
             mockAuthService.getCustomerId.mockReturnValue(undefined);
-            expect(() => service.getAddresses('Bearer token')).toThrow(UnauthorizedException);
-            expect(() => service.getAddresses('Bearer token')).toThrow('Invalid authentication');
+            await expect(firstValueFrom(service.getAddresses('Bearer token'))).rejects.toThrow(UnauthorizedException);
+            await expect(firstValueFrom(service.getAddresses('Bearer token'))).rejects.toThrow(
+                'Invalid authentication',
+            );
         });
 
         it('should call listAddress and return mapCustomerAddresses', async () => {
@@ -238,6 +240,44 @@ describe('CustomersService', () => {
             );
             expect(result).toBeDefined();
         });
+
+        it('should throw InternalServerErrorException when created address is not found in response', async () => {
+            mockAuthService.getCustomerId.mockReturnValue('cust_1');
+            mockSdk.store.customer.createAddress.mockResolvedValue({
+                customer: { addresses: [] },
+            } as unknown as HttpTypes.StoreCustomerResponse);
+
+            await expect(
+                firstValueFrom(
+                    service.createAddress(
+                        {
+                            address: {
+                                firstName: 'John',
+                                lastName: 'Doe',
+                                country: 'PL',
+                                city: 'Warsaw',
+                            },
+                        } as Customers.Request.CreateAddressBody,
+                        'Bearer token',
+                    ),
+                ),
+            ).rejects.toThrow(InternalServerErrorException);
+            await expect(
+                firstValueFrom(
+                    service.createAddress(
+                        {
+                            address: {
+                                firstName: 'John',
+                                lastName: 'Doe',
+                                country: 'PL',
+                                city: 'Warsaw',
+                            },
+                        } as Customers.Request.CreateAddressBody,
+                        'Bearer token',
+                    ),
+                ),
+            ).rejects.toThrow('Failed to create address or find created address in response');
+        });
     });
 
     describe('updateAddress', () => {
@@ -269,6 +309,47 @@ describe('CustomersService', () => {
             );
             expect(result).toBeDefined();
         });
+
+        it('should throw NotFoundException when updated address is not found in response', async () => {
+            mockAuthService.getCustomerId.mockReturnValue('cust_1');
+            mockSdk.store.customer.updateAddress.mockResolvedValue({
+                customer: { addresses: [] },
+            } as unknown as HttpTypes.StoreCustomerResponse);
+
+            await expect(
+                firstValueFrom(
+                    service.updateAddress(
+                        { id: 'addr_missing' },
+                        { address: { firstName: 'Jane' } } as Customers.Request.UpdateAddressBody,
+                        'Bearer token',
+                    ),
+                ),
+            ).rejects.toThrow(NotFoundException);
+            await expect(
+                firstValueFrom(
+                    service.updateAddress(
+                        { id: 'addr_missing' },
+                        { address: { firstName: 'Jane' } } as Customers.Request.UpdateAddressBody,
+                        'Bearer token',
+                    ),
+                ),
+            ).rejects.toThrow('Address with ID addr_missing not found');
+        });
+
+        it('should throw NotFoundException on 404', async () => {
+            mockAuthService.getCustomerId.mockReturnValue('cust_1');
+            mockSdk.store.customer.updateAddress.mockRejectedValue({ response: { status: 404 } });
+
+            await expect(
+                firstValueFrom(
+                    service.updateAddress(
+                        { id: 'addr_missing' },
+                        {} as Customers.Request.UpdateAddressBody,
+                        'Bearer token',
+                    ),
+                ),
+            ).rejects.toThrow(NotFoundException);
+        });
     });
 
     describe('deleteAddress', () => {
@@ -288,9 +369,37 @@ describe('CustomersService', () => {
 
             expect(mockSdk.store.customer.deleteAddress).toHaveBeenCalledWith('addr_1', expect.any(Object));
         });
+
+        it('should throw NotFoundException on 404', async () => {
+            mockAuthService.getCustomerId.mockReturnValue('cust_1');
+            mockSdk.store.customer.deleteAddress.mockRejectedValue({ response: { status: 404 } });
+
+            await expect(
+                firstValueFrom(
+                    service.deleteAddress(
+                        { id: 'addr_missing' } as Customers.Request.DeleteAddressParams,
+                        'Bearer token',
+                    ),
+                ),
+            ).rejects.toThrow(NotFoundException);
+            await expect(
+                firstValueFrom(
+                    service.deleteAddress(
+                        { id: 'addr_missing' } as Customers.Request.DeleteAddressParams,
+                        'Bearer token',
+                    ),
+                ),
+            ).rejects.toThrow('Address with ID addr_missing not found');
+        });
     });
 
     describe('setDefaultAddress', () => {
+        it('should throw UnauthorizedException when auth is missing', () => {
+            expect(() =>
+                service.setDefaultAddress({ id: 'addr_1' } as Customers.Request.SetDefaultAddressParams, undefined),
+            ).toThrow(UnauthorizedException);
+        });
+
         it('should call updateAddress with is_default_shipping and return mapped address', async () => {
             mockAuthService.getCustomerId.mockReturnValue('cust_1');
             mockSdk.store.customer.updateAddress.mockResolvedValue({
@@ -312,6 +421,44 @@ describe('CustomersService', () => {
             );
             expect(result).toBeDefined();
             expect(result?.id).toBe('addr_1');
+        });
+
+        it('should throw NotFoundException when address is not found in response', async () => {
+            mockAuthService.getCustomerId.mockReturnValue('cust_1');
+            mockSdk.store.customer.updateAddress.mockResolvedValue({
+                customer: { addresses: [] },
+            } as unknown as HttpTypes.StoreCustomerResponse);
+
+            await expect(
+                firstValueFrom(
+                    service.setDefaultAddress(
+                        { id: 'addr_missing' } as Customers.Request.SetDefaultAddressParams,
+                        'Bearer token',
+                    ),
+                ),
+            ).rejects.toThrow(NotFoundException);
+            await expect(
+                firstValueFrom(
+                    service.setDefaultAddress(
+                        { id: 'addr_missing' } as Customers.Request.SetDefaultAddressParams,
+                        'Bearer token',
+                    ),
+                ),
+            ).rejects.toThrow('Address with ID addr_missing not found');
+        });
+
+        it('should throw NotFoundException on 404', async () => {
+            mockAuthService.getCustomerId.mockReturnValue('cust_1');
+            mockSdk.store.customer.updateAddress.mockRejectedValue({ response: { status: 404 } });
+
+            await expect(
+                firstValueFrom(
+                    service.setDefaultAddress(
+                        { id: 'addr_missing' } as Customers.Request.SetDefaultAddressParams,
+                        'Bearer token',
+                    ),
+                ),
+            ).rejects.toThrow(NotFoundException);
         });
     });
 });

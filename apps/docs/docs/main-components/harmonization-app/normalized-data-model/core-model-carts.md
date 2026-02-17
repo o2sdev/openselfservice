@@ -263,23 +263,21 @@ The carts model supports:
 
 ### PaymentMethod
 
-| Field       | Type              | Description            |
-| ----------- | ----------------- | ---------------------- |
-| id          | string            | Unique identifier      |
-| name        | string            | Display name           |
-| type        | PaymentMethodType | Payment method type    |
-| description | string            | Description (optional) |
+| Field       | Type   | Description            |
+| ----------- | ------ | ---------------------- |
+| id          | string | Unique identifier      |
+| name        | string | Display name           |
+| description | string | Description (optional) |
 
 ### Promotion
 
-| Field     | Type           | Description                         |
-| --------- | -------------- | ----------------------------------- |
-| id        | string         | Unique identifier                   |
-| code      | string         | Promotion code                      |
-| name      | string         | Display name                        |
-| type      | PromotionType  | Percentage, fixed, or free shipping |
-| value     | number         | Discount value                      |
-| appliedTo | PromotionScope | CART, ITEM, or SHIPPING             |
+| Field | Type          | Description                                    |
+| ----- | ------------- | ---------------------------------------------- |
+| id    | string        | Unique identifier                              |
+| code  | string        | Promotion code                                 |
+| name  | string        | Display name (optional)                        |
+| type  | PromotionType | Percentage, fixed, or free shipping (optional) |
+| value | string        | Discount value (optional)                      |
 
 ### CartType
 
@@ -289,28 +287,13 @@ The carts model supports:
 | SAVED     | Saved for later      |
 | ABANDONED | Abandoned cart       |
 
-### PaymentMethodType
+### PromotionType
 
-| Value         | Description   |
-| ------------- | ------------- |
-| CREDIT_CARD   | Credit card   |
-| PAYPAL        | PayPal        |
-| BANK_TRANSFER | Bank transfer |
-| OTHER         | Other methods |
-
-### PromotionType / PromotionScope
-
-| PromotionType | Description           |
+| Value         | Description           |
 | ------------- | --------------------- |
 | PERCENTAGE    | Percentage discount   |
 | FIXED_AMOUNT  | Fixed amount discount |
 | FREE_SHIPPING | Free shipping         |
-
-| PromotionScope | Description            |
-| -------------- | ---------------------- |
-| CART           | Applied to entire cart |
-| ITEM           | Applied to item        |
-| SHIPPING       | Applied to shipping    |
 
 ### Carts
 

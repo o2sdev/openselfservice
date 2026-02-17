@@ -69,7 +69,9 @@ export class PaymentsService extends Payments.Service {
                 return mapPaymentProviders(providers);
             }),
             catchError((error) => {
-                // If endpoint doesn't exist or fails, return empty list
+                if (error.response?.status === 401 || error.response?.status === 403) {
+                    return handleHttpError(error);
+                }
                 this.logger.warn('Failed to fetch payment providers from Medusa', error);
                 return of(mapPaymentProviders([]));
             }),
@@ -130,7 +132,7 @@ export class PaymentsService extends Payments.Service {
         _params: Payments.Request.GetSessionParams,
         _authorization: string | undefined,
     ): Observable<Payments.Model.PaymentSession | undefined> {
-        throw new NotImplementedException();
+        return throwError(() => new NotImplementedException());
     }
 
     /**
@@ -143,7 +145,7 @@ export class PaymentsService extends Payments.Service {
         _data: Payments.Request.UpdateSessionBody,
         _authorization: string | undefined,
     ): Observable<Payments.Model.PaymentSession> {
-        throw new NotImplementedException();
+        return throwError(() => new NotImplementedException());
     }
 
     /**

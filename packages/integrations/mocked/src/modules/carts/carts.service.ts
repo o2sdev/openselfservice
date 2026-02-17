@@ -172,7 +172,6 @@ export class CartsService implements Carts.Service {
                     }
                     cart = createCart({
                         customerId,
-                        type: 'ACTIVE',
                         currency: data.currency,
                         regionId: data.regionId,
                     });
@@ -185,7 +184,6 @@ export class CartsService implements Carts.Service {
                 cart = createCart({
                     currency: data.currency,
                     regionId: data.regionId,
-                    type: 'ACTIVE',
                 });
             }
 

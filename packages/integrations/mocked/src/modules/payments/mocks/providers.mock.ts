@@ -2,17 +2,7 @@ import { Payments } from '@o2s/framework/modules';
 
 type Locale = 'en' | 'de' | 'pl';
 
-const PROVIDERS_BY_LOCALE: Record<
-    Locale,
-    Array<{
-        id: string;
-        name: string;
-        type: Payments.Model.PaymentProviderType;
-        isEnabled: boolean;
-        requiresRedirect: boolean;
-        config?: Record<string, unknown>;
-    }>
-> = {
+const PROVIDERS_BY_LOCALE: Record<Locale, Array<Payments.Model.PaymentProvider>> = {
     en: [
         {
             id: 'stripe',
@@ -74,9 +64,7 @@ export function getMockProviderById(id: string, locale?: string): Payments.Model
 }
 
 /** Map provider type to cart PaymentMethodType. */
-const providerTypeToPaymentMethodType = (
-    t: Payments.Model.PaymentProviderType,
-): 'CREDIT_CARD' | 'PAYPAL' | 'BANK_TRANSFER' | 'OTHER' => {
+const providerTypeToPaymentMethodType = (t: string): 'CREDIT_CARD' | 'PAYPAL' | 'BANK_TRANSFER' | 'OTHER' => {
     if (t === 'PAYPAL') return 'PAYPAL';
     if (t === 'STRIPE') return 'CREDIT_CARD';
     return 'OTHER';

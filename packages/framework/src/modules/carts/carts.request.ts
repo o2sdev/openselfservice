@@ -1,4 +1,3 @@
-import { CartType, PaymentMethodType } from './carts.model';
 import { Address, Price } from '@/utils/models';
 import { PaginationQuery } from '@/utils/models/pagination';
 
@@ -9,7 +8,6 @@ export class GetCartParams {
 
 export class GetCartListQuery extends PaginationQuery {
     customerId?: string;
-    type?: CartType;
     sort?: string;
     locale?: string;
 }
@@ -18,7 +16,6 @@ export class GetCartListQuery extends PaginationQuery {
 export class CreateCartBody {
     customerId?: string;
     name?: string;
-    type?: CartType;
     regionId?: string;
     currency!: Price.Currency;
     metadata?: Record<string, unknown>;
@@ -31,14 +28,12 @@ export class UpdateCartParams {
 
 export class UpdateCartBody {
     name?: string;
-    type?: CartType;
     regionId?: string;
     email?: string; // For guest checkout (passed directly to cart, not metadata)
     shippingAddressId?: string;
     billingAddressId?: string;
     shippingMethodId?: string;
     paymentMethodId?: string;
-    paymentMethodType?: PaymentMethodType;
     notes?: string;
     metadata?: Record<string, unknown>;
     locale?: string;

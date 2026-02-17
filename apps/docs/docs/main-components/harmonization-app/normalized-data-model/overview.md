@@ -15,6 +15,7 @@ We will cover every module that is currently supported within the O2S:
 
 - [Carts](./core-model-carts.md) - cart management, line items, addresses, shipping
 - [Checkout](./core-model-checkout.md) - multi-step checkout and order placement
+- [Payments](./core-model-payments.md) - payment providers and payment sessions
 - [Customers](./core-model-customers.md) - customer address management
 - [Orders](./core-model-orders.md) - order history and details
 - [Products](./core-model-products.md) - product catalog data, variants, and related products

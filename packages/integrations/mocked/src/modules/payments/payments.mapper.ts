@@ -1,15 +1,10 @@
 import { Payments } from '@o2s/framework/modules';
 
-export function mapPaymentProviders(
-    providers: Payments.Model.PaymentProvider[],
-    limit = 10,
-    offset = 0,
-): Payments.Model.PaymentProviders {
+export function mapPaymentProviders(providers: Payments.Model.PaymentProvider[]): Payments.Model.PaymentProviders {
     const total = providers.length;
-    const paginatedProviders = providers.slice(offset, offset + limit);
 
     return {
-        data: paginatedProviders,
+        data: providers,
         total,
     };
 }

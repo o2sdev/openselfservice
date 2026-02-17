@@ -12,7 +12,6 @@ const mapPaymentMethodFromMetadata = (metadata: Record<string, unknown>): Carts.
         id: stored.id as string,
         name: stored.name as string,
         description: (stored.description as string) ?? undefined,
-        type: (stored.type as Carts.Model.PaymentMethodType) ?? 'OTHER',
     };
 };
 
@@ -24,8 +23,7 @@ const PROMOTIONS: Carts.Model.Promotion[] = [
         name: '10% Off',
         description: 'Get 10% off your order',
         type: 'PERCENTAGE',
-        value: 10,
-        appliedTo: 'CART',
+        value: '10',
     },
     {
         id: 'PROMO-002',
@@ -33,8 +31,7 @@ const PROMOTIONS: Carts.Model.Promotion[] = [
         name: 'Free Shipping',
         description: 'Free standard shipping',
         type: 'FREE_SHIPPING',
-        value: 0,
-        appliedTo: 'SHIPPING',
+        value: '0',
     },
 ];
 
@@ -94,11 +91,10 @@ export const mapCart = (params: Carts.Request.GetCartParams): Carts.Model.Cart |
 
 // Get cart list with filters
 export const mapCarts = (query: Carts.Request.GetCartListQuery, customerId?: string): Carts.Model.Carts => {
-    const { offset = 0, limit = 10, type, sort } = query;
+    const { offset = 0, limit = 10, sort } = query;
 
     let filteredCarts = cartsStore.filter((cart) => {
         if (customerId && cart.customerId !== customerId) return false;
-        if (type && cart.type !== type) return false;
         return true;
     });
 
@@ -135,7 +131,6 @@ export const createCart = (data: Carts.Request.CreateCartBody): Carts.Model.Cart
         id: newId,
         customerId: data.customerId,
         name: data.name,
-        type: data.type || 'ACTIVE',
         createdAt: formatDate(now),
         updatedAt: formatDate(now),
         expiresAt: formatDate(expiresAt),
@@ -200,7 +195,6 @@ export const updateCart = (
     const updatedCart: Carts.Model.Cart = {
         ...cart,
         name: data.name ?? cart.name,
-        type: data.type ?? cart.type,
         regionId: data.regionId ?? cart.regionId,
         email: data.email ?? cart.email,
         notes: data.notes ?? cart.notes,
@@ -230,7 +224,7 @@ export const deleteCart = (params: Carts.Request.DeleteCartParams): boolean => {
 // Helper function to find active cart by customerId
 export const findActiveCartByCustomerId = (customerId: string | undefined): Carts.Model.Cart | undefined => {
     if (!customerId) return undefined;
-    return cartsStore.find((cart) => cart.customerId === customerId && cart.type === 'ACTIVE');
+    return cartsStore.find((cart) => cart.customerId === customerId);
 };
 
 const matchesSku = (item: Carts.Model.CartItem, sku: string): boolean => item.sku === sku;
@@ -385,10 +379,10 @@ const recalculateCartTotals = (cart: Carts.Model.Cart): void => {
     let discountTotal = 0;
     if (cart.promotions) {
         for (const promo of cart.promotions) {
-            if (promo.type === 'PERCENTAGE' && promo.appliedTo === 'CART') {
-                discountTotal += (subtotal * promo.value) / 100;
-            } else if (promo.type === 'FIXED_AMOUNT' && promo.appliedTo === 'CART') {
-                discountTotal += promo.value;
+            if (promo.type === 'PERCENTAGE') {
+                discountTotal += (subtotal * Number(promo.value)) / 100;
+            } else if (promo.type === 'FIXED_AMOUNT') {
+                discountTotal += Number(promo.value);
             }
         }
     }

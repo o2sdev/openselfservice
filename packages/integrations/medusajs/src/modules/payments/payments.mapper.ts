@@ -2,13 +2,25 @@ import { HttpTypes } from '@medusajs/types';
 
 import { Payments } from '@o2s/framework/modules';
 
-export function mapPaymentProvider(medusaProvider: HttpTypes.StorePaymentProvider): Payments.Model.PaymentProvider {
+export function mapPaymentProvider(provider: HttpTypes.StorePaymentProvider): Payments.Model.PaymentProvider {
+    const idLower = provider.id.toLowerCase();
+    let type = 'OTHER';
+    if (idLower.includes('stripe')) {
+        type = 'STRIPE';
+    } else if (idLower.includes('paypal')) {
+        type = 'PAYPAL';
+    } else if (idLower.includes('adyen')) {
+        type = 'ADYEN';
+    } else if (idLower.includes('system') || idLower.includes('manual')) {
+        type = 'SYSTEM';
+    }
+
     return {
-        id: medusaProvider.id,
-        name: medusaProvider.id, // Medusa doesn't provide a name, use ID
-        type: mapProviderType(medusaProvider.id),
+        id: provider.id,
+        name: provider.id, // Medusa doesn't provide a name, use ID
+        type,
         isEnabled: true, // Assume enabled if returned by API
-        requiresRedirect: medusaProvider.id.includes('stripe') || medusaProvider.id.includes('paypal'),
+        requiresRedirect: provider.id.includes('stripe') || provider.id.includes('paypal'),
         config: {},
     };
 }
@@ -25,28 +37,19 @@ export function mapPaymentProviders(
 }
 
 export function mapPaymentSession(
-    medusaSession: HttpTypes.StorePaymentSession,
+    session: HttpTypes.StorePaymentSession,
     cartId: string,
 ): Payments.Model.PaymentSession {
     return {
-        id: medusaSession.id,
+        id: session.id,
         cartId,
-        providerId: medusaSession.provider_id,
-        status: mapPaymentSessionStatus(medusaSession.status),
-        redirectUrl: medusaSession.data?.redirect_url as string | undefined,
-        clientSecret: medusaSession.data?.client_secret as string | undefined,
+        providerId: session.provider_id,
+        status: mapPaymentSessionStatus(session.status),
+        redirectUrl: session.data?.redirect_url as string | undefined,
+        clientSecret: session.data?.client_secret as string | undefined,
         expiresAt: undefined, // Medusa Store API does not expose expires_at on payment sessions
-        metadata: medusaSession.data as Record<string, unknown> | undefined,
+        metadata: session.data as Record<string, unknown> | undefined,
     };
-}
-
-function mapProviderType(providerId: string): Payments.Model.PaymentProviderType {
-    const id = providerId.toLowerCase();
-    if (id.includes('stripe')) return 'STRIPE';
-    if (id.includes('paypal')) return 'PAYPAL';
-    if (id.includes('adyen')) return 'ADYEN';
-    if (id.includes('system') || id.includes('manual')) return 'SYSTEM';
-    return 'OTHER';
 }
 
 function mapPaymentSessionStatus(status: string): Payments.Model.PaymentSessionStatus {

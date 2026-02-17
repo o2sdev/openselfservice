@@ -141,7 +141,6 @@ describe('carts.mapper', () => {
                         id: 'pm_1',
                         name: 'Credit Card',
                         description: 'Pay with card',
-                        type: 'CREDIT_CARD',
                     },
                 },
             });
@@ -149,7 +148,7 @@ describe('carts.mapper', () => {
             expect(result.paymentMethod).toBeDefined();
             expect(result.paymentMethod?.id).toBe('pm_1');
             expect(result.paymentMethod?.name).toBe('Credit Card');
-            expect(result.paymentMethod?.type).toBe('CREDIT_CARD');
+            expect(result.paymentMethod?.description).toBe('Pay with card');
         });
 
         it('should map promotions when present', () => {
