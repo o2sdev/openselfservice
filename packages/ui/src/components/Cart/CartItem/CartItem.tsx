@@ -31,22 +31,22 @@ export const CartItem: React.FC<Readonly<CartItemProps>> = ({
     };
 
     return (
-        <div className="flex flex-col sm:flex-row gap-4 p-4 bg-card rounded-lg border border-border">
+        <div className="flex flex-row gap-4 p-4 bg-card rounded-lg border border-border">
             {/* Product Image */}
             {image && (
-                <div className="relative w-full sm:w-24 h-24 shrink-0 rounded-md overflow-hidden">
+                <div className="relative w-32 h-32 shrink-0 rounded-md overflow-hidden bg-muted">
                     <Image
                         src={image.url}
                         alt={image.alt || name}
                         fill
-                        sizes="96px"
+                        sizes="128px"
                         className="object-cover object-center"
                     />
                 </div>
             )}
 
             {/* Product Info */}
-            <div className="flex-1 flex flex-col gap-2">
+            <div className="min-w-0 flex-1 flex flex-col gap-2 justify-between">
                 <div className="flex items-start justify-between gap-4">
                     <div className="flex-1">
                         <Typography variant="h3" className="mb-1">
@@ -63,9 +63,9 @@ export const CartItem: React.FC<Readonly<CartItemProps>> = ({
                     </Button>
                 </div>
 
-                <div className="flex items-center justify-between gap-4 mt-auto">
+                <div className="flex justify-between gap-4">
                     {/* Quantity Controls */}
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-end gap-2">
                         <Button
                             variant="outline"
                             size="icon"
@@ -80,7 +80,7 @@ export const CartItem: React.FC<Readonly<CartItemProps>> = ({
                             min={1}
                             value={quantity}
                             onChange={handleQuantityInputChange}
-                            className="w-16 text-center"
+                            className="w-16 text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                             aria-label={labels.quantity}
                         />
                         <Button
@@ -94,11 +94,11 @@ export const CartItem: React.FC<Readonly<CartItemProps>> = ({
                     </div>
 
                     {/* Item Total */}
-                    <div className="flex flex-col items-end">
+                    <div className="flex min-w-0 flex-col items-end overflow-hidden">
                         <Typography variant="small" className="text-muted-foreground">
                             {labels.itemTotal}
                         </Typography>
-                        <Typography variant="h3" className="text-primary">
+                        <Typography variant="h3" className="max-w-full break-all text-right text-primary">
                             <Price price={total} />
                         </Typography>
                     </div>

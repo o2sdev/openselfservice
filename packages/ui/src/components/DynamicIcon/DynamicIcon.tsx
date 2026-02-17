@@ -28,6 +28,8 @@ export const DynamicIcon: React.FC<DynamicIconProps> = ({
                 width: size,
                 height: size,
                 display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
             }}
         >
             <LucideDynamicIcon
