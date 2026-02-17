@@ -7,11 +7,30 @@ export type Badge = {
     variant: 'default' | 'secondary' | 'destructive' | 'outline';
 };
 
+export type KeySpec = {
+    value?: string;
+    icon?: string;
+};
+
+export type DetailedSpec = {
+    label: string;
+    value: string;
+    category?: string;
+};
+
 export type Product = Products.Model.Product & {
     badges?: Badge[];
     images:
         | NonNullable<Products.Model.Product['images']>
         | (Products.Model.Product['image'] extends undefined ? never : [Products.Model.Product['image']]);
+    /**
+     * View-level "key specs" (e.g. short bullet list) for this block only.
+     */
+    keySpecs?: KeySpec[];
+    /**
+     * View-level detailed specs (e.g. table rows) for this block only.
+     */
+    detailedSpecs?: DetailedSpec[];
 };
 
 export type ActionButton = {
@@ -22,12 +41,14 @@ export type ActionButton = {
 };
 
 export type Labels = {
-    actionButtonLabel?: string;
-    downloadLabel?: string;
-    specificationsTitle: string;
-    descriptionTitle: string;
-    priceLabel: string;
-    offerLabel: string;
+    actionButton?: string;
+    download?: string;
+    specifications: string;
+    description: string;
+    price: string;
+    offer: string;
+    variant?: string;
+    outOfStock?: string;
 };
 
 export type ProductDetailsBlock = ApiModels.Block.Block & {

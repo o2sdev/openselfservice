@@ -31,15 +31,14 @@ describe('MedusaJsService', () => {
         };
     });
 
-    describe('constructor', () => {
+    describe('lazy initialization', () => {
         it('should throw when MEDUSAJS_BASE_URL is not defined', () => {
             vi.mocked(mockConfig.get).mockImplementation((key: string) =>
                 key === 'MEDUSAJS_BASE_URL' ? '' : defaultConfig(key),
             );
 
-            expect(() => new MedusaJsService(mockConfig as unknown as ConfigService)).toThrow(
-                'MEDUSAJS_BASE_URL is not defined',
-            );
+            const service = new MedusaJsService(mockConfig as unknown as ConfigService);
+            expect(() => service.getSdk()).toThrow('MEDUSAJS_BASE_URL is not defined');
         });
 
         it('should throw when MEDUSAJS_PUBLISHABLE_API_KEY is not defined', () => {
@@ -47,9 +46,8 @@ describe('MedusaJsService', () => {
                 key === 'MEDUSAJS_PUBLISHABLE_API_KEY' ? '' : defaultConfig(key),
             );
 
-            expect(() => new MedusaJsService(mockConfig as unknown as ConfigService)).toThrow(
-                'MEDUSAJS_PUBLISHABLE_API_KEY is not defined',
-            );
+            const service = new MedusaJsService(mockConfig as unknown as ConfigService);
+            expect(() => service.getSdk()).toThrow('MEDUSAJS_PUBLISHABLE_API_KEY is not defined');
         });
 
         it('should throw when MEDUSAJS_ADMIN_API_KEY is not defined', () => {
@@ -57,13 +55,13 @@ describe('MedusaJsService', () => {
                 key === 'MEDUSAJS_ADMIN_API_KEY' ? '' : defaultConfig(key),
             );
 
-            expect(() => new MedusaJsService(mockConfig as unknown as ConfigService)).toThrow(
-                'MEDUSAJS_ADMIN_API_KEY is not defined',
-            );
+            const service = new MedusaJsService(mockConfig as unknown as ConfigService);
+            expect(() => service.getSdk()).toThrow('MEDUSAJS_ADMIN_API_KEY is not defined');
         });
 
         it('should create Medusa SDK with config and debug false when LOG_LEVEL is not debug', () => {
-            new MedusaJsService(mockConfig as unknown as ConfigService);
+            const service = new MedusaJsService(mockConfig as unknown as ConfigService);
+            service.getSdk();
 
             expect(Medusa).toHaveBeenCalledWith({
                 baseUrl: 'https://api.medusa.test',
@@ -78,7 +76,8 @@ describe('MedusaJsService', () => {
                 key === 'LOG_LEVEL' ? 'debug' : defaultConfig(key),
             );
 
-            new MedusaJsService(mockConfig as unknown as ConfigService);
+            const service = new MedusaJsService(mockConfig as unknown as ConfigService);
+            service.getSdk();
 
             expect(Medusa).toHaveBeenCalledWith(
                 expect.objectContaining({

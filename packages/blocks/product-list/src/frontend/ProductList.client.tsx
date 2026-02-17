@@ -166,7 +166,7 @@ export const ProductListPure: React.FC<ProductListPureProps> = ({ locale, access
                                                     price={product.price}
                                                     link={{
                                                         label: data.detailsLabel || 'View Details',
-                                                        url: product.link,
+                                                        url: product.detailsUrl,
                                                     }}
                                                     LinkComponent={LinkComponent}
                                                 />
