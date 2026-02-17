@@ -1,5 +1,5 @@
 import Medusa from '@medusajs/js-sdk';
-import { Global, Injectable } from '@nestjs/common';
+import { Global, Injectable, InternalServerErrorException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
 /**
@@ -56,13 +56,13 @@ export class MedusaJsService {
         this._medusaAdminApiKey = this.config.get('MEDUSAJS_ADMIN_API_KEY') || '';
 
         if (!this._medusaBaseUrl) {
-            throw new Error('MEDUSAJS_BASE_URL is not defined');
+            throw new InternalServerErrorException('MEDUSAJS_BASE_URL is not defined');
         }
         if (!this._medusaPublishableApiKey) {
-            throw new Error('MEDUSAJS_PUBLISHABLE_API_KEY is not defined');
+            throw new InternalServerErrorException('MEDUSAJS_PUBLISHABLE_API_KEY is not defined');
         }
         if (!this._medusaAdminApiKey) {
-            throw new Error('MEDUSAJS_ADMIN_API_KEY is not defined');
+            throw new InternalServerErrorException('MEDUSAJS_ADMIN_API_KEY is not defined');
         }
 
         this._sdk = new Medusa({

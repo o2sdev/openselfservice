@@ -15,13 +15,11 @@ export function mapPaymentProvider(medusaProvider: HttpTypes.StorePaymentProvide
 
 export function mapPaymentProviders(
     medusaProviders: HttpTypes.StorePaymentProvider[],
-    limit = 10,
-    offset = 0,
 ): Payments.Model.PaymentProviders {
     const providers = medusaProviders.map(mapPaymentProvider);
 
     return {
-        data: providers.slice(offset, offset + limit),
+        data: providers,
         total: providers.length,
     };
 }

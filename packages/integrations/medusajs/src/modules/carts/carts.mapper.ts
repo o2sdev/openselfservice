@@ -1,4 +1,5 @@
 import { HttpTypes } from '@medusajs/types';
+import { BadRequestException } from '@nestjs/common';
 
 import { Carts, Models, Orders, Products } from '@o2s/framework/modules';
 
@@ -18,7 +19,7 @@ export const mapCarts = (
 
 export const mapCart = (cart: HttpTypes.StoreCart, _defaultCurrency: string): Carts.Model.Cart => {
     if (!cart.currency_code) {
-        throw new Error(`Cart ${cart.id} has no currency code`);
+        throw new BadRequestException(`Cart ${cart.id} has no currency code`);
     }
     const currency = parseCurrency(cart.currency_code);
 

@@ -1,6 +1,12 @@
 import Medusa from '@medusajs/js-sdk';
 import { HttpTypes } from '@medusajs/types';
-import { Inject, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import {
+    Inject,
+    Injectable,
+    InternalServerErrorException,
+    NotFoundException,
+    UnauthorizedException,
+} from '@nestjs/common';
 import { Observable, catchError, from, map, of, switchMap, throwError } from 'rxjs';
 
 import { LoggerService } from '@o2s/utils.logger';
@@ -34,12 +40,12 @@ export class CustomersService extends Customers.Service {
 
     getAddresses(authorization: string | undefined): Observable<Customers.Model.CustomerAddresses> {
         if (!authorization) {
-            throw new UnauthorizedException('Authentication required');
+            return throwError(() => new UnauthorizedException('Authentication required'));
         }
 
         const customerId = this.authService.getCustomerId(authorization);
         if (!customerId) {
-            throw new UnauthorizedException('Invalid authentication');
+            return throwError(() => new UnauthorizedException('Invalid authentication'));
         }
 
         return from(
@@ -118,10 +124,29 @@ export class CustomersService extends Customers.Service {
             switchMap((response: HttpTypes.StoreCustomerResponse) => {
                 const customer = response.customer;
                 const addresses = customer.addresses || [];
-                // The newly created address is typically the last one in the list
-                const createdAddress = addresses[addresses.length - 1];
+
+                // Find the created address by comparing fields with what we sent
+                const createdAddress = addresses.find((addr) => {
+                    return (
+                        addr.first_name === medusaAddress.first_name &&
+                        addr.last_name === medusaAddress.last_name &&
+                        addr.address_1 === medusaAddress.address_1 &&
+                        addr.city === medusaAddress.city &&
+                        addr.postal_code === medusaAddress.postal_code &&
+                        addr.country_code === medusaAddress.country_code &&
+                        (addr.address_2 || '') === (medusaAddress.address_2 || '') &&
+                        (addr.province || '') === (medusaAddress.province || '') &&
+                        (addr.phone || '') === (medusaAddress.phone || '')
+                    );
+                });
+
                 if (!createdAddress) {
-                    return throwError(() => new Error('Failed to create address'));
+                    return throwError(
+                        () =>
+                            new InternalServerErrorException(
+                                'Failed to create address or find created address in response',
+                            ),
+                    );
                 }
 
                 const address = mapCustomerAddress(createdAddress, customerId);
@@ -237,7 +262,10 @@ export class CustomersService extends Customers.Service {
         return from(
             this.sdk.store.customer.updateAddress(
                 params.id,
-                { is_default_shipping: true } as Partial<HttpTypes.StoreUpdateCustomerAddress>,
+                {
+                    is_default_shipping: true,
+                    is_default_billing: true,
+                } as Partial<HttpTypes.StoreUpdateCustomerAddress>,
                 {},
                 this.medusaJsService.getStoreApiHeaders(authorization),
             ),

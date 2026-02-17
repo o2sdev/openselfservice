@@ -1,7 +1,14 @@
 import Medusa from '@medusajs/js-sdk';
 import { HttpTypes } from '@medusajs/types';
 import { HttpService } from '@nestjs/axios';
-import { BadRequestException, Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+    BadRequestException,
+    Inject,
+    Injectable,
+    InternalServerErrorException,
+    NotFoundException,
+    NotImplementedException,
+} from '@nestjs/common';
 import { Observable, catchError, from, map, of, switchMap, throwError } from 'rxjs';
 
 import { LoggerService } from '@o2s/utils.logger';
@@ -24,11 +31,12 @@ import { mapPaymentProviders, mapPaymentSession } from './payments.mapper';
  *
  * - ✅ `getProviders` - Uses SDK: `sdk.store.payment.listPaymentProviders()`
  * - ✅ `createSession` - Uses SDK: `sdk.store.payment.initiatePaymentSession()`
- * - ⚠️ `updateSession` - Uses raw HTTP (SDK method not available)
- * - ⚠️ `cancelSession` - Uses raw HTTP (SDK method not available)
+ * - ❌ `getSession` - Not implemented (SDK method not available)
+ * - ❌ `updateSession` - Not implemented (SDK method not available)
+ * - ❌ `cancelSession` - Not implemented (SDK method not available)
  *
- * The `updateSession` and `cancelSession` methods use direct HTTP requests because
- * the Medusa.js SDK does not currently expose methods for these operations.
+ * The `getSession`, `updateSession`, and `cancelSession` methods throw `NotImplementedException`
+ * because the Medusa.js SDK does not currently expose methods for these operations.
  */
 @Injectable()
 export class PaymentsService extends Payments.Service {
@@ -48,7 +56,7 @@ export class PaymentsService extends Payments.Service {
         authorization: string | undefined,
     ): Observable<Payments.Model.PaymentProviders> {
         if (!params.regionId) {
-            throw new BadRequestException('regionId is required to list payment providers');
+            return throwError(() => new BadRequestException('regionId is required to list payment providers'));
         }
         return from(
             this.sdk.store.payment.listPaymentProviders(
@@ -58,12 +66,12 @@ export class PaymentsService extends Payments.Service {
         ).pipe(
             map((response: HttpTypes.StorePaymentProviderListResponse) => {
                 const providers = response.payment_providers || [];
-                return mapPaymentProviders(providers, 10, 0);
+                return mapPaymentProviders(providers);
             }),
             catchError((error) => {
                 // If endpoint doesn't exist or fails, return empty list
                 this.logger.warn('Failed to fetch payment providers from Medusa', error);
-                return of(mapPaymentProviders([], 10, 0));
+                return of(mapPaymentProviders([]));
             }),
         );
     }
@@ -98,7 +106,7 @@ export class PaymentsService extends Payments.Service {
                         const session =
                             sessions.find((s) => s.provider_id === data.providerId) || sessions[sessions.length - 1];
                         if (!session) {
-                            throw new Error('Failed to create payment session');
+                            throw new InternalServerErrorException('Failed to create payment session');
                         }
                         return mapPaymentSession(session, data.cartId);
                     }),
@@ -113,97 +121,37 @@ export class PaymentsService extends Payments.Service {
         );
     }
 
+    /**
+     * Retrieves a payment session.
+     *
+     * @note Not implemented - The Medusa.js SDK does not provide methods for fetching payment sessions.
+     */
     getSession(
         _params: Payments.Request.GetSessionParams,
         _authorization: string | undefined,
     ): Observable<Payments.Model.PaymentSession | undefined> {
-        // Medusa Store API doesn't have a direct endpoint to get payment session by ID
-        // Payment sessions are accessed through payment collections
-        // Since we don't have the collection ID or cart ID, we return undefined
-        // In practice, payment sessions should be retrieved via the cart's payment collection
-        // This method is primarily used when we have the session ID from cart metadata
-        // For a complete implementation, we would need to:
-        // 1. Store payment_collection_id in cart metadata when creating session
-        // 2. Retrieve collection by ID and find session within it
-        // For now, return undefined as Medusa doesn't provide a direct lookup
-        return of(undefined);
+        throw new NotImplementedException();
     }
 
     /**
-     * Updates a payment session using raw HTTP request.
+     * Updates a payment session.
      *
-     * @note The Medusa.js SDK does not provide methods for updating payment sessions.
-     * This method uses a direct HTTP POST request to `/store/payment-sessions/{id}`.
-     * Once the SDK adds support for this operation, this should be migrated to use the SDK method.
-     *
-     * @see {@link https://docs.medusajs.com/api/store#payment-sessions_postpayment-sessionsid Medusa Store API - Update Payment Session}
+     * @note Not implemented - The Medusa.js SDK does not provide methods for updating payment sessions.
      */
     updateSession(
-        params: Payments.Request.UpdateSessionParams,
-        data: Payments.Request.UpdateSessionBody,
-        authorization: string | undefined,
+        _params: Payments.Request.UpdateSessionParams,
+        _data: Payments.Request.UpdateSessionBody,
+        _authorization: string | undefined,
     ): Observable<Payments.Model.PaymentSession> {
-        const updatePayload: Record<string, unknown> = {};
-        if (data.returnUrl) {
-            updatePayload['return_url'] = data.returnUrl;
-        }
-        if (data.metadata) {
-            updatePayload['metadata'] = data.metadata;
-        }
-
-        return this.httpClient
-            .post<{ payment_session: HttpTypes.StorePaymentSession }>(
-                `${this.medusaJsService.getBaseUrl()}/store/payment-sessions/${params.id}`,
-                updatePayload,
-                {
-                    headers: this.medusaJsService.getStoreApiHeaders(authorization),
-                },
-            )
-            .pipe(
-                map((response) => {
-                    if (!response?.data) {
-                        throw new Error('Failed to update payment session');
-                    }
-                    // We don't have cart ID here, so we'll use empty string
-                    // In practice, this should be retrieved from the session or stored context
-                    const cartId = '';
-                    return mapPaymentSession(response.data.payment_session, cartId);
-                }),
-                catchError((error) => {
-                    if (error.response?.status === 404) {
-                        return throwError(
-                            () => new NotFoundException(`Payment session with ID ${params.id} not found`),
-                        );
-                    }
-                    return handleHttpError(error);
-                }),
-            );
+        throw new NotImplementedException();
     }
 
     /**
-     * Cancels (deletes) a payment session using raw HTTP request.
+     * Cancels (deletes) a payment session.
      *
-     * @note The Medusa.js SDK does not provide methods for deleting payment sessions.
-     * This method uses a direct HTTP DELETE request to `/store/payment-sessions/{id}`.
-     * Once the SDK adds support for this operation, this should be migrated to use the SDK method.
-     *
-     * @see {@link https://docs.medusajs.com/api/store#payment-sessions_deletepayment-sessionsid Medusa Store API - Delete Payment Session}
+     * @note Not implemented - The Medusa.js SDK does not provide methods for deleting payment sessions.
      */
-    cancelSession(params: Payments.Request.CancelSessionParams, authorization: string | undefined): Observable<void> {
-        return this.httpClient
-            .delete(`${this.medusaJsService.getBaseUrl()}/store/payment-sessions/${params.id}`, {
-                headers: this.medusaJsService.getStoreApiHeaders(authorization),
-            })
-            .pipe(
-                map(() => undefined),
-                catchError((error) => {
-                    if (error.response?.status === 404) {
-                        return throwError(
-                            () => new NotFoundException(`Payment session with ID ${params.id} not found`),
-                        );
-                    }
-                    return handleHttpError(error);
-                }),
-            );
+    cancelSession(_params: Payments.Request.CancelSessionParams, _authorization: string | undefined): Observable<void> {
+        throw new NotImplementedException();
     }
 }

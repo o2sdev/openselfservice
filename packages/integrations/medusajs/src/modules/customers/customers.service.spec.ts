@@ -155,8 +155,24 @@ describe('CustomersService', () => {
 
         it('should call createAddress SDK and return mapped address', async () => {
             mockAuthService.getCustomerId.mockReturnValue('cust_1');
+            const createdAddress = {
+                id: 'addr_new',
+                first_name: 'John',
+                last_name: 'Doe',
+                country_code: 'pl',
+                city: 'Warsaw',
+                address_1: '',
+                address_2: undefined,
+                postal_code: '',
+                province: undefined,
+                phone: undefined,
+                is_default_shipping: false,
+                is_default_billing: false,
+                created_at: new Date('2024-01-01'),
+                updated_at: new Date('2024-01-02'),
+            };
             mockSdk.store.customer.createAddress.mockResolvedValue({
-                customer: { addresses: [minimalAddress] },
+                customer: { addresses: [createdAddress] },
             } as unknown as HttpTypes.StoreCustomerResponse);
 
             const result = await firstValueFrom(
@@ -179,11 +195,29 @@ describe('CustomersService', () => {
 
         it('should call setDefaultAddress when data.isDefault is true', async () => {
             mockAuthService.getCustomerId.mockReturnValue('cust_1');
+            const createdAddress = {
+                id: 'addr_new',
+                first_name: 'John',
+                last_name: 'Doe',
+                country_code: 'pl',
+                city: 'Warsaw',
+                address_1: '',
+                address_2: undefined,
+                postal_code: '',
+                province: undefined,
+                phone: undefined,
+                is_default_shipping: false,
+                is_default_billing: false,
+                created_at: new Date('2024-01-01'),
+                updated_at: new Date('2024-01-02'),
+            };
             mockSdk.store.customer.createAddress.mockResolvedValue({
-                customer: { addresses: [{ ...minimalAddress, id: 'addr_new' }] },
+                customer: { addresses: [createdAddress] },
             } as unknown as HttpTypes.StoreCustomerResponse);
             mockSdk.store.customer.updateAddress.mockResolvedValue({
-                customer: { addresses: [{ ...minimalAddress, id: 'addr_new', is_default_shipping: true }] },
+                customer: {
+                    addresses: [{ ...createdAddress, is_default_shipping: true, is_default_billing: true }],
+                },
             } as unknown as HttpTypes.StoreCustomerResponse);
 
             const result = await firstValueFrom(
@@ -198,7 +232,7 @@ describe('CustomersService', () => {
 
             expect(mockSdk.store.customer.updateAddress).toHaveBeenCalledWith(
                 'addr_new',
-                expect.objectContaining({ is_default_shipping: true }),
+                expect.objectContaining({ is_default_shipping: true, is_default_billing: true }),
                 {},
                 expect.any(Object),
             );
@@ -272,7 +306,7 @@ describe('CustomersService', () => {
 
             expect(mockSdk.store.customer.updateAddress).toHaveBeenCalledWith(
                 'addr_1',
-                { is_default_shipping: true },
+                { is_default_shipping: true, is_default_billing: true },
                 {},
                 expect.any(Object),
             );

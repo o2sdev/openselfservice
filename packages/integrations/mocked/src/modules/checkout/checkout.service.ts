@@ -148,7 +148,11 @@ export class CheckoutService implements Checkout.Service {
         return this.cartsService.getCart({ id: params.cartId }, authorization).pipe(
             switchMap((cart) => {
                 if (!cart) {
-                    return throwError(() => new NotFoundException(`Cart with ID ${params.cartId} not found`));
+                    return throwError(() => new NotFoundException('Cart not found'));
+                }
+
+                if (!cart.items?.data?.length) {
+                    return throwError(() => new BadRequestException('Cart must have items before placing order'));
                 }
 
                 // Validate required data

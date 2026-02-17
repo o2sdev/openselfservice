@@ -4,6 +4,7 @@ import {
     BadRequestException,
     Inject,
     Injectable,
+    InternalServerErrorException,
     NotFoundException,
     NotImplementedException,
     UnauthorizedException,
@@ -39,7 +40,7 @@ export class CartsService extends Carts.Service {
         this.defaultCurrency = this.config.get('DEFAULT_CURRENCY') || '';
 
         if (!this.defaultCurrency) {
-            throw new Error('DEFAULT_CURRENCY is not defined');
+            throw new InternalServerErrorException('DEFAULT_CURRENCY is not defined');
         }
     }
 

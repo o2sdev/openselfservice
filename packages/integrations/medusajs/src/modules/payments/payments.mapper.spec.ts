@@ -54,17 +54,18 @@ describe('payments.mapper', () => {
     });
 
     describe('mapPaymentProviders', () => {
-        it('should paginate with offset and limit', () => {
+        it('should return mapper providers', () => {
             const providers = [
                 { id: 'pp_1' } as HttpTypes.StorePaymentProvider,
                 { id: 'pp_2' } as HttpTypes.StorePaymentProvider,
                 { id: 'pp_3' } as HttpTypes.StorePaymentProvider,
             ];
-            const result = mapPaymentProviders(providers, 2, 1);
-            expect(result.data).toHaveLength(2);
+            const result = mapPaymentProviders(providers);
+            expect(result.data).toHaveLength(3);
             expect(result.total).toBe(3);
-            expect(result.data[0]?.id).toBe('pp_2');
-            expect(result.data[1]?.id).toBe('pp_3');
+            expect(result.data[0]?.id).toBe('pp_1');
+            expect(result.data[1]?.id).toBe('pp_2');
+            expect(result.data[2]?.id).toBe('pp_3');
         });
     });
 

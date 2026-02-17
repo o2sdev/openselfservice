@@ -1,7 +1,7 @@
 import Medusa from '@medusajs/js-sdk';
 import { HttpTypes } from '@medusajs/types';
 import { HttpService } from '@nestjs/axios';
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Observable, catchError, from, map } from 'rxjs';
 
@@ -45,7 +45,7 @@ export class ProductsService extends Products.Service {
         this.defaultCurrency = this.config.get('DEFAULT_CURRENCY') || '';
 
         if (!this.defaultCurrency) {
-            throw new Error('DEFAULT_CURRENCY is not defined');
+            throw new InternalServerErrorException('DEFAULT_CURRENCY is not defined');
         }
     }
 

@@ -1,6 +1,6 @@
 import Medusa from '@medusajs/js-sdk';
 import { HttpService } from '@nestjs/axios';
-import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException, NotImplementedException, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Observable, catchError, forkJoin, map, switchMap } from 'rxjs';
 
@@ -42,11 +42,11 @@ export class ResourcesService extends Resources.Service {
     }
 
     purchaseOrActivateResource(_params: Resources.Request.GetResourceParams): Observable<void> {
-        throw new Error('Method not implemented');
+        throw new NotImplementedException('Method not implemented');
     }
 
     purchaseOrActivateService(_params: Resources.Request.GetServiceParams): Observable<void> {
-        throw new Error('Method not implemented');
+        throw new NotImplementedException('Method not implemented');
     }
 
     getServiceList(
@@ -73,7 +73,7 @@ export class ResourcesService extends Resources.Service {
                 switchMap(({ data }) => {
                     const productRequests = data.serviceInstances.map((service) => {
                         if (!service.product_variant.product_id) {
-                            throw new Error('Product ID not found');
+                            throw new NotFoundException('Product ID not found');
                         }
 
                         return this.productService.getProduct({
@@ -115,7 +115,7 @@ export class ResourcesService extends Resources.Service {
             .pipe(
                 switchMap(({ data }) => {
                     if (!data.serviceInstance.product_variant.product_id) {
-                        throw new Error('Product ID not found');
+                        throw new NotFoundException('Product ID not found');
                     }
 
                     return this.productService
@@ -160,7 +160,7 @@ export class ResourcesService extends Resources.Service {
                 switchMap(({ data }) => {
                     const productRequests = data.assets.map((asset) => {
                         if (!asset.product_variant.product_id) {
-                            throw new Error('Product ID not found');
+                            throw new NotFoundException('Product ID not found');
                         }
 
                         return this.productService.getProduct({
@@ -190,7 +190,7 @@ export class ResourcesService extends Resources.Service {
             .pipe(
                 switchMap(({ data }) => {
                     if (!data.asset.product_variant.product_id) {
-                        throw new Error('Product ID not found');
+                        throw new NotFoundException('Product ID not found');
                     }
 
                     return this.productService
