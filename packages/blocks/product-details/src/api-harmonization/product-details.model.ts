@@ -7,6 +7,17 @@ export type Badge = {
     variant: 'default' | 'secondary' | 'destructive' | 'outline';
 };
 
+export type KeySpec = {
+    value?: string;
+    icon?: string;
+};
+
+export type DetailedSpec = {
+    label: string;
+    value: string;
+    category?: string;
+};
+
 export type Product = Products.Model.Product & {
     badges?: Badge[];
     images:
@@ -15,18 +26,11 @@ export type Product = Products.Model.Product & {
     /**
      * View-level "key specs" (e.g. short bullet list) for this block only.
      */
-    keySpecs?: Array<{
-        value?: string;
-        icon?: string;
-    }>;
+    keySpecs?: KeySpec[];
     /**
      * View-level detailed specs (e.g. table rows) for this block only.
      */
-    detailedSpecs?: Array<{
-        label: string;
-        value: string;
-        category?: string;
-    }>;
+    detailedSpecs?: DetailedSpec[];
 };
 
 export type ActionButton = {

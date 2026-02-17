@@ -6,9 +6,11 @@ import { RichText } from '@o2s/ui/components/RichText';
 import { Separator } from '@o2s/ui/elements/separator';
 import { Typography } from '@o2s/ui/elements/typography';
 
+import { DetailedSpec, KeySpec } from '../../api-harmonization/product-details.model';
+
 interface ProductSpecsProps {
-    keySpecs?: { value?: string; icon?: string }[];
-    detailedSpecs?: { label: string; value: string; category?: string }[];
+    keySpecs?: KeySpec[];
+    detailedSpecs?: DetailedSpec[];
     labels: {
         specifications: string;
         description: string;
