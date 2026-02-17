@@ -37,7 +37,6 @@ import * as CheckoutSummary from '@o2s/blocks.checkout-summary/api-harmonization
 import * as Faq from '@o2s/blocks.faq/api-harmonization';
 import * as FeaturedServiceList from '@o2s/blocks.featured-service-list/api-harmonization';
 import * as InvoiceList from '@o2s/blocks.invoice-list/api-harmonization';
-import * as Kpis from '@o2s/blocks.kpis/api-harmonization';
 import * as NotificationDetails from '@o2s/blocks.notification-details/api-harmonization';
 import * as NotificationList from '@o2s/blocks.notification-list/api-harmonization';
 import * as NotificationSummary from '@o2s/blocks.notification-summary/api-harmonization';
@@ -151,7 +150,6 @@ export const AuthModuleBaseModule = AuthModule.Module.register(AppConfig);
         ProductDetails.Module.register(AppConfig),
         RecommendedProducts.Module.register(AppConfig),
         OrderConfirmation.Module.register(AppConfig),
-        Kpis.Module.register(AppConfig),
         CheckoutBillingPayment.Module.register(AppConfig),
         CheckoutCompanyData.Module.register(AppConfig),
         CheckoutShippingAddress.Module.register(AppConfig),

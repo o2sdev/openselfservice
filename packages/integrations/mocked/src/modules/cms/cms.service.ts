@@ -276,8 +276,4 @@ export class CmsService implements CMS.Service {
     getOrderConfirmationBlock(options: CMS.Request.GetCmsEntryParams) {
         return of({ id: options.id });
     }
-
-    getKpisBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of({ id: options.id });
-    }
 }

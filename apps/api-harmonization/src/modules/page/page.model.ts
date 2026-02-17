@@ -13,7 +13,6 @@ import * as CheckoutSummary from '@o2s/blocks.checkout-summary/api-harmonization
 import * as Faq from '@o2s/blocks.faq/api-harmonization';
 import * as FeaturedServiceList from '@o2s/blocks.featured-service-list/api-harmonization';
 import * as BlockInvoiceList from '@o2s/blocks.invoice-list/api-harmonization';
-import * as Kpis from '@o2s/blocks.kpis/api-harmonization';
 import * as NotificationDetails from '@o2s/blocks.notification-details/api-harmonization';
 import * as NotificationList from '@o2s/blocks.notification-list/api-harmonization';
 import * as NotificationSummary from '@o2s/blocks.notification-summary/api-harmonization';
@@ -92,7 +91,6 @@ export type Blocks =
     | CheckoutShippingAddress.Model.CheckoutShippingAddressBlock['__typename']
     | CheckoutCompanyData.Model.CheckoutCompanyDataBlock['__typename']
     | CheckoutBillingPayment.Model.CheckoutBillingPaymentBlock['__typename']
-    | Kpis.Model.KpisBlock['__typename']
     | OrderConfirmation.Model.OrderConfirmationBlock['__typename']
     | RecommendedProducts.Model.RecommendedProductsBlock['__typename']
     | ProductDetails.Model.ProductDetailsBlock['__typename']

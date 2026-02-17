@@ -14,7 +14,6 @@ import * as CheckoutSummary from '@o2s/blocks.checkout-summary/frontend';
 import * as Faq from '@o2s/blocks.faq/frontend';
 import * as FeaturedServiceList from '@o2s/blocks.featured-service-list/frontend';
 import * as InvoiceList from '@o2s/blocks.invoice-list/frontend';
-import * as Kpis from '@o2s/blocks.kpis/frontend';
 import * as NotificationDetails from '@o2s/blocks.notification-details/frontend';
 import * as NotificationList from '@o2s/blocks.notification-list/frontend';
 import * as NotificationSummary from '@o2s/blocks.notification-summary/frontend';
@@ -157,8 +156,6 @@ const renderBlock = (typename: string, blockProps: BlockProps) => {
             return <RecommendedProducts.Renderer {...blockProps} />;
         case 'OrderConfirmationBlock':
             return <OrderConfirmation.Renderer {...blockProps} />;
-        case 'KpisBlock':
-            return <Kpis.Renderer {...blockProps} />;
         case 'CheckoutBillingPaymentBlock':
             return <CheckoutBillingPayment.Renderer {...blockProps} />;
         case 'CheckoutCompanyDataBlock':
