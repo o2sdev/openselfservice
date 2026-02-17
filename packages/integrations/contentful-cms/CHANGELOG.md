@@ -1,5 +1,29 @@
 # @o2s/integrations.contentful-cms
 
+## 0.6.0
+
+### Minor Changes
+
+- 20a5bdd: Across the integrations (Contentful, Strapi, Algolia, Medusa, Redis, Zendesk) tests cover primarily the service and mapper layers (including error handling), verifying configuration, request shaping and delegation to SDK/clients.
+
+### Patch Changes
+
+- 29607fa: chore(deps): update dependencies
+- 584b2fc: chore(deps): update dependencies
+- ed99709: chore(deps): update dependencies
+- 3e14803: chore(deps): update dependencies
+- 94a24b9: chore(deps): update dependencies
+- Updated dependencies [3934c6e]
+- Updated dependencies [dadd9ba]
+- Updated dependencies [7305d03]
+- Updated dependencies [5aba06c]
+- Updated dependencies [8702f91]
+- Updated dependencies [002ff11]
+- Updated dependencies [78ea1f7]
+- Updated dependencies [241ab52]
+    - @o2s/utils.logger@1.2.1
+    - @o2s/framework@1.17.0
+
 ## 0.5.0
 
 ### Minor Changes

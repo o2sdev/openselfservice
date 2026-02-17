@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.article-list",
-    "version": "1.4.0",
+    "version": "1.5.0",
     "private": false,
     "license": "MIT",
     "description": "Block for displaying a list of articles.",

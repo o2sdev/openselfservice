@@ -1,6 +1,6 @@
 {
   "name": "@o2s/integrations.zendesk",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "private": false,
   "license": "MIT",
   "exports": {
@@ -23,12 +23,12 @@
     "@nestjs/common": "^11.1.13",
     "@o2s/framework": "*",
     "@o2s/utils.logger": "*",
-    "axios": "^1.13.4",
+    "axios": "^1.13.5",
     "html-to-text": "^9.0.5",
     "rxjs": "^7.8.2"
   },
   "devDependencies": {
-    "@hey-api/openapi-ts": "^0.92.3",
+    "@hey-api/openapi-ts": "^0.92.4",
     "@o2s/eslint-config": "*",
     "@o2s/vitest-config": "*",
     "@o2s/prettier-config": "*",

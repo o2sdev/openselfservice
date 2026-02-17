@@ -1,5 +1,11 @@
 # create-o2s-app
 
+## 1.2.1
+
+### Patch Changes
+
+- 4a9b047: chore(deps): update dependencies
+
 ## 1.2.0
 
 ### Minor Changes

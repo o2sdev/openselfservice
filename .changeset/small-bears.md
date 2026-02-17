@@ -1,5 +1,5 @@
 ---
-'@o2s/integrations.contentful-cms': patch
+'@o2s/integrations.algolia': patch
 ---
 
 chore(deps): update dependencies

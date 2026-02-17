@@ -1,5 +1,27 @@
 # @o2s/blocks.category-list
 
+## 1.5.0
+
+### Minor Changes
+
+- 5aba06c: add Zendesk Help Center articles integration
+- 8702f91: feat(zendesk): remove hardcoded locale base paths from article slugs
+
+### Patch Changes
+
+- Updated dependencies [3934c6e]
+- Updated dependencies [dadd9ba]
+- Updated dependencies [7305d03]
+- Updated dependencies [5aba06c]
+- Updated dependencies [8702f91]
+- Updated dependencies [002ff11]
+- Updated dependencies [78ea1f7]
+- Updated dependencies [241ab52]
+  - @o2s/utils.logger@1.2.1
+  - @o2s/framework@1.17.0
+  - @o2s/configs.integrations@0.5.0
+  - @o2s/ui@1.10.0
+
 ## 1.4.0
 
 ### Minor Changes

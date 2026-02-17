@@ -1,6 +1,6 @@
 {
     "name": "@o2s/integrations.algolia",
-    "version": "1.4.0",
+    "version": "1.5.0",
     "private": false,
     "license": "MIT",
     "exports": {
@@ -18,7 +18,7 @@
     "dependencies": {
         "@o2s/framework": "*",
         "@o2s/utils.logger": "*",
-        "algoliasearch": "^5.47.0"
+        "algoliasearch": "^5.48.0"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",
