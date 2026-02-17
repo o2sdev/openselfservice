@@ -149,31 +149,30 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                     <div className="flex flex-col gap-2">
                         <Typography variant="h2">{sections.company.title}</Typography>
                         {checkoutData.companyData ? (
-                            <div className="flex flex-col gap-2 p-4 bg-card rounded-lg border border-border">
-                                <Typography variant="body">
+                            <div className="flex flex-col p-4 bg-card rounded-lg border border-border">
+                                <Typography variant="small">
                                     <strong>{sections.company.companyNameLabel}: </strong>
                                     {checkoutData.companyData.companyName}
                                 </Typography>
-                                <Typography variant="body">
-                                    {sections.company.nipLabel}: {checkoutData.companyData.nip}
+                                <Typography variant="small">
+                                    <strong>{sections.company.nipLabel}: </strong>
+                                    {checkoutData.companyData.nip}
                                 </Typography>
                                 <div className="mt-2 pt-2 border-t border-border">
                                     {sections.company.addressLabel && (
-                                        <Typography variant="small" className="text-muted-foreground mb-1">
+                                        <Typography variant="small" className="mb-1 font-bold">
                                             {sections.company.addressLabel}
                                         </Typography>
                                     )}
-                                    <Typography variant="body">{checkoutData.companyData.street}</Typography>
-                                    <Typography variant="body">
+                                    <Typography variant="small">{checkoutData.companyData.street}</Typography>
+                                    <Typography variant="small">
                                         {checkoutData.companyData.postalCode} {checkoutData.companyData.city}
                                     </Typography>
-                                    <Typography variant="body">{checkoutData.companyData.country}</Typography>
+                                    <Typography variant="small">{checkoutData.companyData.country}</Typography>
                                 </div>
                             </div>
                         ) : (
-                            <Typography variant="body" className="text-muted-foreground">
-                                {ph?.companyData}
-                            </Typography>
+                            <Typography variant="body">{ph?.companyData}</Typography>
                         )}
                     </div>
 
@@ -182,27 +181,25 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                         <Typography variant="h2">{sections.shipping.title}</Typography>
                         {checkoutData.shippingAddress ? (
                             checkoutData.shippingAddress.sameAsCompanyAddress ? (
-                                <Typography variant="body" className="text-muted-foreground">
-                                    {ph?.sameAsCompanyAddress}
-                                </Typography>
+                                <Typography variant="body">{ph?.sameAsCompanyAddress}</Typography>
                             ) : (
                                 <div className="flex flex-col gap-2 p-4 bg-card rounded-lg border border-border">
                                     <div className="mt-2 pt-2 border-t border-border first:mt-0 first:pt-0 first:border-t-0">
                                         {sections.shipping.addressLabel && (
-                                            <Typography variant="small" className="text-muted-foreground mb-1">
+                                            <Typography variant="small" className="mb-1 font-bold">
                                                 {sections.shipping.addressLabel}
                                             </Typography>
                                         )}
-                                        <Typography variant="body">{checkoutData.shippingAddress.street}</Typography>
-                                        <Typography variant="body">
+                                        <Typography variant="small">{checkoutData.shippingAddress.street}</Typography>
+                                        <Typography variant="small">
                                             {checkoutData.shippingAddress.postalCode}{' '}
                                             {checkoutData.shippingAddress.city}
                                         </Typography>
-                                        <Typography variant="body">{checkoutData.shippingAddress.country}</Typography>
+                                        <Typography variant="small">{checkoutData.shippingAddress.country}</Typography>
                                     </div>
                                     {checkoutData.shippingAddress.shippingMethod && (
                                         <div className="mt-2 pt-2 border-t border-border">
-                                            <Typography variant="small" className="text-muted-foreground">
+                                            <Typography variant="small">
                                                 <strong>{sections.shipping.methodLabel}</strong>{' '}
                                                 {checkoutData.shippingAddress.shippingMethodLabel}
                                             </Typography>
@@ -211,9 +208,7 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                                 </div>
                             )
                         ) : (
-                            <Typography variant="body" className="text-muted-foreground">
-                                {ph?.shippingAddress}
-                            </Typography>
+                            <Typography variant="body">{ph?.shippingAddress}</Typography>
                         )}
                     </div>
 
@@ -222,26 +217,24 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                         <Typography variant="h2">{sections.billing.title}</Typography>
                         {checkoutData.billingPayment ? (
                             checkoutData.billingPayment.sameAsShippingAddress ? (
-                                <Typography variant="body" className="text-muted-foreground">
-                                    {ph?.sameAsShippingAddress}
-                                </Typography>
+                                <Typography variant="body">{ph?.sameAsShippingAddress}</Typography>
                             ) : (
                                 <div className="flex flex-col gap-2 p-4 bg-card rounded-lg border border-border">
                                     <div className="mt-2 pt-2 border-t border-border first:mt-0 first:pt-0 first:border-t-0">
                                         {sections.billing.addressLabel && (
-                                            <Typography variant="small" className="text-muted-foreground mb-1">
+                                            <Typography variant="small" className="mb-1 font-bold">
                                                 {sections.billing.addressLabel}
                                             </Typography>
                                         )}
-                                        <Typography variant="body">{checkoutData.billingPayment.street}</Typography>
-                                        <Typography variant="body">
+                                        <Typography variant="small">{checkoutData.billingPayment.street}</Typography>
+                                        <Typography variant="small">
                                             {checkoutData.billingPayment.postalCode} {checkoutData.billingPayment.city}
                                         </Typography>
-                                        <Typography variant="body">{checkoutData.billingPayment.country}</Typography>
+                                        <Typography variant="small">{checkoutData.billingPayment.country}</Typography>
                                     </div>
                                     {checkoutData.billingPayment.paymentMethod && (
                                         <div className="mt-2 pt-2 border-t border-border">
-                                            <Typography variant="small" className="text-muted-foreground">
+                                            <Typography variant="small">
                                                 <strong>{sections.billing.methodLabel}</strong>{' '}
                                                 {checkoutData.billingPayment.paymentMethodLabel}
                                             </Typography>
@@ -250,9 +243,7 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                                 </div>
                             )
                         ) : (
-                            <Typography variant="body" className="text-muted-foreground">
-                                {ph?.billingAddress}
-                            </Typography>
+                            <Typography variant="body">{ph?.billingAddress}</Typography>
                         )}
                     </div>
                 </div>
@@ -263,27 +254,23 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                         <Typography variant="h2">{sections.summary.title}</Typography>
 
                         <div className="flex flex-col gap-4">
-                            <div className="flex items-center justify-between">
-                                <Typography variant="small" className="text-muted-foreground">
-                                    {sections.summary.subtotalLabel}
-                                </Typography>
-                                <Typography variant="body">
-                                    <Price price={totals.subtotal} />
-                                </Typography>
-                            </div>
-                            <div className="flex items-center justify-between">
-                                <Typography variant="small" className="text-muted-foreground">
-                                    {sections.summary.taxLabel}
-                                </Typography>
-                                <Typography variant="body">
-                                    <Price price={totals.tax} />
-                                </Typography>
+                            <div className="flex flex-col gap-1">
+                                <div className="flex items-center justify-between">
+                                    <Typography variant="small">{sections.summary.subtotalLabel}</Typography>
+                                    <Typography variant="body">
+                                        <Price price={totals.subtotal} />
+                                    </Typography>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                    <Typography variant="small">{sections.summary.taxLabel}</Typography>
+                                    <Typography variant="body">
+                                        <Price price={totals.tax} />
+                                    </Typography>
+                                </div>
                             </div>
                             {totals.shipping.value > 0 && (
                                 <div className="flex items-center justify-between">
-                                    <Typography variant="small" className="text-muted-foreground">
-                                        {sections.summary.shippingLabel}
-                                    </Typography>
+                                    <Typography variant="small">{sections.summary.shippingLabel}</Typography>
                                     <Typography variant="body">
                                         <Price price={totals.shipping} />
                                     </Typography>

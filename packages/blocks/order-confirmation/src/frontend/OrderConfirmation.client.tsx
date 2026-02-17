@@ -59,48 +59,50 @@ export const OrderConfirmationPure: React.FC<Readonly<OrderConfirmationPureProps
                 </div>
             </div>
 
-            <div className="rounded-lg border border-border bg-card p-6">
+            <div className="flex flex-col gap-6 rounded-lg border border-border bg-card p-6">
                 {/* Products Section */}
-                <Typography variant="h2" className="mb-4">
-                    {productsTitle}
-                    {productsCountLabel && ` (${order.items.total})`}
-                </Typography>
-                <div className="flex flex-col gap-2 mb-6">
-                    {order.items.data.map((item) => (
-                        <div key={item.id} className="flex items-center justify-between text-sm">
-                            <span>
-                                {item.productName ?? item.productId} × {item.quantity}
-                            </span>
-                            <Price price={item.total} />
-                        </div>
-                    ))}
+                <div className="flex flex-col gap-4">
+                    <Typography variant="h2">
+                        {productsTitle}
+                        {productsCountLabel && ` (${order.items.total})`}
+                    </Typography>
+                    <div className="flex flex-col gap-2">
+                        {order.items.data.map((item) => (
+                            <div key={item.id} className="flex items-center justify-between text-sm">
+                                <span>
+                                    {item.productName ?? item.productId} × {item.quantity}
+                                </span>
+                                <Price price={item.total} />
+                            </div>
+                        ))}
+                    </div>
                 </div>
 
-                <Separator className="my-4" />
+                <Separator />
 
                 {/* Summary Section */}
-                <Typography variant="h2" className="mb-4">
-                    {summaryTitle}
-                </Typography>
-                <div className="flex flex-col gap-3">
-                    <div className="flex items-center justify-between">
-                        <Typography variant="small" className="text-muted-foreground">
-                            {subtotalLabel}
-                        </Typography>
-                        <Typography variant="body">
-                            <Price price={order.subtotal} />
-                        </Typography>
-                    </div>
-                    {order.tax && (
+                <div className="flex flex-col gap-4">
+                    <Typography variant="h2">{summaryTitle}</Typography>
+                    <div className="flex flex-col gap-1">
                         <div className="flex items-center justify-between">
                             <Typography variant="small" className="text-muted-foreground">
-                                {taxLabel}
+                                {subtotalLabel}
                             </Typography>
                             <Typography variant="body">
-                                <Price price={order.tax} />
+                                <Price price={order.subtotal} />
                             </Typography>
                         </div>
-                    )}
+                        {order.tax && (
+                            <div className="flex items-center justify-between">
+                                <Typography variant="small" className="text-muted-foreground">
+                                    {taxLabel}
+                                </Typography>
+                                <Typography variant="body">
+                                    <Price price={order.tax} />
+                                </Typography>
+                            </div>
+                        )}
+                    </div>
                     <Separator />
                     <div className="flex items-center justify-between">
                         <Typography variant="h3">{totalLabel}</Typography>

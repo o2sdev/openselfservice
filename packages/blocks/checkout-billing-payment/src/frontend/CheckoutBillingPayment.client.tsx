@@ -31,8 +31,6 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
     errors: errorMessages,
     summaryLabels,
     totals,
-    continueShopping,
-    checkoutButton,
 }) => {
     const { Link: LinkComponent } = createNavigation(routing);
     const router = useRouter();
@@ -115,15 +113,13 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
                                 <Separator />
 
                                 <div className="flex flex-col gap-6">
-                                    <div>
+                                    <div className="flex flex-col gap-4">
                                         {fields.billingAddressSectionTitle && (
-                                            <Typography variant="h3" className="mb-4">
-                                                {fields.billingAddressSectionTitle}
-                                            </Typography>
+                                            <Typography variant="h3">{fields.billingAddressSectionTitle}</Typography>
                                         )}
                                         <Field name="sameAsShippingAddress">
                                             {({ field }: FieldProps<boolean>) => (
-                                                <div className="flex items-center gap-2 mb-4">
+                                                <div className="flex items-center gap-2">
                                                     <Checkbox
                                                         id="sameAsShippingAddress"
                                                         checked={field.value}
@@ -217,23 +213,6 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
                         total={totals.total}
                         labels={summaryLabels}
                         LinkComponent={LinkComponent}
-                        checkoutButton={
-                            checkoutButton
-                                ? {
-                                      url: checkoutButton.path,
-                                      label: checkoutButton.label,
-                                      icon: checkoutButton.icon,
-                                  }
-                                : undefined
-                        }
-                        continueShopping={
-                            continueShopping
-                                ? {
-                                      url: continueShopping.path,
-                                      label: continueShopping.label,
-                                  }
-                                : undefined
-                        }
                     />
                 </div>
             </div>

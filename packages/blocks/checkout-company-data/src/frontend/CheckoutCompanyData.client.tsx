@@ -30,8 +30,6 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
     errors: errorMessages,
     summaryLabels,
     totals,
-    continueShopping,
-    checkoutButton,
 }) => {
     const { Link: LinkComponent } = createNavigation(routing);
     const router = useRouter();
@@ -162,15 +160,9 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
                                     </Field>
                                 </div>
 
-                                {fields.addressSectionTitle && (
-                                    <div className="md:col-span-2">
-                                        <Typography variant="h3" className="mb-4">
-                                            {fields.addressSectionTitle}
-                                        </Typography>
-                                    </div>
-                                )}
-
-                                <AddressFields fields={fields.address} />
+                                <div className="md:col-span-2 w-full">
+                                    <AddressFields fields={fields.address} />
+                                </div>
                             </div>
 
                             <Separator />
@@ -194,23 +186,6 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
                         total={totals.total}
                         labels={summaryLabels}
                         LinkComponent={LinkComponent}
-                        checkoutButton={
-                            checkoutButton
-                                ? {
-                                      url: checkoutButton.path,
-                                      label: checkoutButton.label,
-                                      icon: checkoutButton.icon,
-                                  }
-                                : undefined
-                        }
-                        continueShopping={
-                            continueShopping
-                                ? {
-                                      url: continueShopping.path,
-                                      label: continueShopping.label,
-                                  }
-                                : undefined
-                        }
                     />
                 </div>
             </div>

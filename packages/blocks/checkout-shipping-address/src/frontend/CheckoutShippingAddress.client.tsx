@@ -32,8 +32,6 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
     errors: errorMessages,
     summaryLabels,
     totals,
-    continueShopping,
-    checkoutButton,
 }) => {
     const { Link: LinkComponent } = createNavigation(routing);
     const router = useRouter();
@@ -206,23 +204,6 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                         total={totals.total}
                         labels={summaryLabels}
                         LinkComponent={LinkComponent}
-                        checkoutButton={
-                            checkoutButton
-                                ? {
-                                      url: checkoutButton.path,
-                                      label: checkoutButton.label,
-                                      icon: checkoutButton.icon,
-                                  }
-                                : undefined
-                        }
-                        continueShopping={
-                            continueShopping
-                                ? {
-                                      url: continueShopping.path,
-                                      label: continueShopping.label,
-                                  }
-                                : undefined
-                        }
                     />
                 </div>
             </div>

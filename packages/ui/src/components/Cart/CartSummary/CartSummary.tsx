@@ -24,28 +24,30 @@ export const CartSummary: React.FC<Readonly<CartSummaryProps>> = ({
     loadingLabel = 'Loading...',
 }) => {
     return (
-        <div className="sticky top-6 flex flex-col gap-6 p-6 bg-card rounded-lg border border-border">
+        <div className="sticky top-6 flex flex-col gap-4 p-6 bg-card rounded-lg border border-border">
             <Typography variant="h2">{labels.title}</Typography>
 
             <div className="flex flex-col gap-4">
                 {/* Subtotal */}
-                <div className="flex items-center justify-between">
-                    <Typography variant="small" className="text-muted-foreground">
-                        {labels.subtotalLabel}
-                    </Typography>
-                    <Typography variant="body">
-                        <Price price={subtotal} />
-                    </Typography>
-                </div>
+                <div className="flex flex-col gap-1">
+                    <div className="flex items-center justify-between">
+                        <Typography variant="small" className="text-muted-foreground">
+                            {labels.subtotalLabel}
+                        </Typography>
+                        <Typography variant="body">
+                            <Price price={subtotal} />
+                        </Typography>
+                    </div>
 
-                {/* Tax */}
-                <div className="flex items-center justify-between">
-                    <Typography variant="small" className="text-muted-foreground">
-                        {labels.taxLabel}
-                    </Typography>
-                    <Typography variant="body">
-                        <Price price={tax} />
-                    </Typography>
+                    {/* Tax */}
+                    <div className="flex items-center justify-between">
+                        <Typography variant="small" className="text-muted-foreground">
+                            {labels.taxLabel}
+                        </Typography>
+                        <Typography variant="body">
+                            <Price price={tax} />
+                        </Typography>
+                    </div>
                 </div>
 
                 <Separator />

@@ -27,7 +27,6 @@ export function getCheckoutCompanyDataBlockMock(_id: string, locale: string): Ch
                 placeholder: 'XXXXXXXXXX',
                 required: true,
             },
-            addressSectionTitle: isPl ? 'Adres siedziby' : isDe ? 'Firmensitz' : 'Registered office address',
             address: {
                 street: {
                     label: isPl ? 'Ulica i numer' : isDe ? 'Straße und Hausnummer' : 'Street and number',

@@ -24,7 +24,6 @@ export class CheckoutCompanyDataBlock extends ApiModels.Block.Block {
     fields!: {
         companyName: CheckoutCompanyDataField;
         nip: CheckoutCompanyDataField;
-        addressSectionTitle?: string;
         address: {
             street: CheckoutCompanyDataField;
             city: CheckoutCompanyDataField;

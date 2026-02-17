@@ -29,7 +29,6 @@ const baseBlock = {
             placeholder: 'XXXXXXXXXX',
             required: true,
         },
-        addressSectionTitle: 'Registered office address',
         address: {
             street: {
                 label: 'Street and number',
