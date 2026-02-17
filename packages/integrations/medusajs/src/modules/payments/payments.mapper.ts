@@ -3,22 +3,10 @@ import { HttpTypes } from '@medusajs/types';
 import { Payments } from '@o2s/framework/modules';
 
 export function mapPaymentProvider(provider: HttpTypes.StorePaymentProvider): Payments.Model.PaymentProvider {
-    const idLower = provider.id.toLowerCase();
-    let type = 'OTHER';
-    if (idLower.includes('stripe')) {
-        type = 'STRIPE';
-    } else if (idLower.includes('paypal')) {
-        type = 'PAYPAL';
-    } else if (idLower.includes('adyen')) {
-        type = 'ADYEN';
-    } else if (idLower.includes('system') || idLower.includes('manual')) {
-        type = 'SYSTEM';
-    }
-
     return {
         id: provider.id,
-        name: provider.id, // Medusa doesn't provide a name, use ID
-        type,
+        name: provider.id, // Medusa doesn't provide a name or type, use ID
+        type: provider.id,
         isEnabled: true, // Assume enabled if returned by API
         requiresRedirect: provider.id.includes('stripe') || provider.id.includes('paypal'),
         config: {},

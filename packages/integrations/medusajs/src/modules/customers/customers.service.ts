@@ -69,12 +69,12 @@ export class CustomersService extends Customers.Service {
         authorization: string | undefined,
     ): Observable<Customers.Model.CustomerAddress | undefined> {
         if (!authorization) {
-            throw new UnauthorizedException('Authentication required');
+            return throwError(() => new UnauthorizedException('Authentication required'));
         }
 
         const customerId = this.authService.getCustomerId(authorization);
         if (!customerId) {
-            throw new UnauthorizedException('Invalid authentication');
+            return throwError(() => new UnauthorizedException('Invalid authentication'));
         }
 
         return from(
@@ -104,12 +104,12 @@ export class CustomersService extends Customers.Service {
         authorization: string | undefined,
     ): Observable<Customers.Model.CustomerAddress> {
         if (!authorization) {
-            throw new UnauthorizedException('Authentication required');
+            return throwError(() => new UnauthorizedException('Authentication required'));
         }
 
         const customerId = this.authService.getCustomerId(authorization);
         if (!customerId) {
-            throw new UnauthorizedException('Invalid authentication');
+            return throwError(() => new UnauthorizedException('Invalid authentication'));
         }
 
         const medusaAddress = mapAddressToMedusa(data.address);
@@ -173,12 +173,12 @@ export class CustomersService extends Customers.Service {
         authorization: string | undefined,
     ): Observable<Customers.Model.CustomerAddress> {
         if (!authorization) {
-            throw new UnauthorizedException('Authentication required');
+            return throwError(() => new UnauthorizedException('Authentication required'));
         }
 
         const customerId = this.authService.getCustomerId(authorization);
         if (!customerId) {
-            throw new UnauthorizedException('Invalid authentication');
+            return throwError(() => new UnauthorizedException('Invalid authentication'));
         }
 
         const updateData = data.address ? mapAddressToMedusa(data.address) : {};
@@ -222,12 +222,12 @@ export class CustomersService extends Customers.Service {
 
     deleteAddress(params: Customers.Request.DeleteAddressParams, authorization: string | undefined): Observable<void> {
         if (!authorization) {
-            throw new UnauthorizedException('Authentication required');
+            return throwError(() => new UnauthorizedException('Authentication required'));
         }
 
         const customerId = this.authService.getCustomerId(authorization);
         if (!customerId) {
-            throw new UnauthorizedException('Invalid authentication');
+            return throwError(() => new UnauthorizedException('Invalid authentication'));
         }
 
         return from(
@@ -251,12 +251,12 @@ export class CustomersService extends Customers.Service {
         authorization: string | undefined,
     ): Observable<Customers.Model.CustomerAddress> {
         if (!authorization) {
-            throw new UnauthorizedException('Authentication required');
+            return throwError(() => new UnauthorizedException('Authentication required'));
         }
 
         const customerId = this.authService.getCustomerId(authorization);
         if (!customerId) {
-            throw new UnauthorizedException('Invalid authentication');
+            return throwError(() => new UnauthorizedException('Invalid authentication'));
         }
 
         return from(
@@ -270,14 +270,14 @@ export class CustomersService extends Customers.Service {
                 this.medusaJsService.getStoreApiHeaders(authorization),
             ),
         ).pipe(
-            map((response: HttpTypes.StoreCustomerResponse) => {
+            switchMap((response: HttpTypes.StoreCustomerResponse) => {
                 const customer = response.customer;
                 const addresses = customer.addresses || [];
                 const updatedAddress = addresses.find((a) => a.id === params.id);
                 if (!updatedAddress) {
-                    throw new NotFoundException(`Address with ID ${params.id} not found`);
+                    return throwError(() => new NotFoundException(`Address with ID ${params.id} not found`));
                 }
-                return mapCustomerAddress(updatedAddress, customerId);
+                return of(mapCustomerAddress(updatedAddress, customerId));
             }),
             catchError((error) => {
                 if (error.response?.status === 404) {

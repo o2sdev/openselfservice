@@ -108,17 +108,27 @@ describe('CustomersService', () => {
     });
 
     describe('getAddress', () => {
-        it('should throw UnauthorizedException when auth is missing', () => {
-            expect(() => service.getAddress({ id: 'addr_1' } as Customers.Request.GetAddressParams, undefined)).toThrow(
-                UnauthorizedException,
-            );
+        it('should throw UnauthorizedException when auth is missing', async () => {
+            await expect(
+                firstValueFrom(service.getAddress({ id: 'addr_1' } as Customers.Request.GetAddressParams, undefined)),
+            ).rejects.toThrow(UnauthorizedException);
+            await expect(
+                firstValueFrom(service.getAddress({ id: 'addr_1' } as Customers.Request.GetAddressParams, undefined)),
+            ).rejects.toThrow('Authentication required');
         });
 
-        it('should throw UnauthorizedException when getCustomerId returns undefined', () => {
+        it('should throw UnauthorizedException when getCustomerId returns undefined', async () => {
             mockAuthService.getCustomerId.mockReturnValue(undefined);
-            expect(() =>
-                service.getAddress({ id: 'addr_1' } as Customers.Request.GetAddressParams, 'Bearer token'),
-            ).toThrow(UnauthorizedException);
+            await expect(
+                firstValueFrom(
+                    service.getAddress({ id: 'addr_1' } as Customers.Request.GetAddressParams, 'Bearer token'),
+                ),
+            ).rejects.toThrow(UnauthorizedException);
+            await expect(
+                firstValueFrom(
+                    service.getAddress({ id: 'addr_1' } as Customers.Request.GetAddressParams, 'Bearer token'),
+                ),
+            ).rejects.toThrow('Invalid authentication');
         });
 
         it('should call retrieveAddress and return mapped address', async () => {
@@ -149,10 +159,31 @@ describe('CustomersService', () => {
     });
 
     describe('createAddress', () => {
-        it('should throw UnauthorizedException when auth is missing', () => {
-            expect(() =>
-                service.createAddress({ address: {} } as Customers.Request.CreateAddressBody, undefined),
-            ).toThrow(UnauthorizedException);
+        it('should throw UnauthorizedException when auth is missing', async () => {
+            await expect(
+                firstValueFrom(
+                    service.createAddress({ address: {} } as Customers.Request.CreateAddressBody, undefined),
+                ),
+            ).rejects.toThrow(UnauthorizedException);
+            await expect(
+                firstValueFrom(
+                    service.createAddress({ address: {} } as Customers.Request.CreateAddressBody, undefined),
+                ),
+            ).rejects.toThrow('Authentication required');
+        });
+
+        it('should throw UnauthorizedException when getCustomerId returns undefined', async () => {
+            mockAuthService.getCustomerId.mockReturnValue(undefined);
+            await expect(
+                firstValueFrom(
+                    service.createAddress({ address: {} } as Customers.Request.CreateAddressBody, 'Bearer token'),
+                ),
+            ).rejects.toThrow(UnauthorizedException);
+            await expect(
+                firstValueFrom(
+                    service.createAddress({ address: {} } as Customers.Request.CreateAddressBody, 'Bearer token'),
+                ),
+            ).rejects.toThrow('Invalid authentication');
         });
 
         it('should call createAddress SDK and return mapped address', async () => {
@@ -281,10 +312,31 @@ describe('CustomersService', () => {
     });
 
     describe('updateAddress', () => {
-        it('should throw UnauthorizedException when auth is missing', () => {
-            expect(() =>
-                service.updateAddress({ id: 'addr_1' }, {} as Customers.Request.UpdateAddressBody, undefined),
-            ).toThrow(UnauthorizedException);
+        it('should throw UnauthorizedException when auth is missing', async () => {
+            await expect(
+                firstValueFrom(
+                    service.updateAddress({ id: 'addr_1' }, {} as Customers.Request.UpdateAddressBody, undefined),
+                ),
+            ).rejects.toThrow(UnauthorizedException);
+            await expect(
+                firstValueFrom(
+                    service.updateAddress({ id: 'addr_1' }, {} as Customers.Request.UpdateAddressBody, undefined),
+                ),
+            ).rejects.toThrow('Authentication required');
+        });
+
+        it('should throw UnauthorizedException when getCustomerId returns undefined', async () => {
+            mockAuthService.getCustomerId.mockReturnValue(undefined);
+            await expect(
+                firstValueFrom(
+                    service.updateAddress({ id: 'addr_1' }, {} as Customers.Request.UpdateAddressBody, 'Bearer token'),
+                ),
+            ).rejects.toThrow(UnauthorizedException);
+            await expect(
+                firstValueFrom(
+                    service.updateAddress({ id: 'addr_1' }, {} as Customers.Request.UpdateAddressBody, 'Bearer token'),
+                ),
+            ).rejects.toThrow('Invalid authentication');
         });
 
         it('should call updateAddress SDK and return mapped address', async () => {
@@ -353,10 +405,31 @@ describe('CustomersService', () => {
     });
 
     describe('deleteAddress', () => {
-        it('should throw UnauthorizedException when auth is missing', () => {
-            expect(() =>
-                service.deleteAddress({ id: 'addr_1' } as Customers.Request.DeleteAddressParams, undefined),
-            ).toThrow(UnauthorizedException);
+        it('should throw UnauthorizedException when auth is missing', async () => {
+            await expect(
+                firstValueFrom(
+                    service.deleteAddress({ id: 'addr_1' } as Customers.Request.DeleteAddressParams, undefined),
+                ),
+            ).rejects.toThrow(UnauthorizedException);
+            await expect(
+                firstValueFrom(
+                    service.deleteAddress({ id: 'addr_1' } as Customers.Request.DeleteAddressParams, undefined),
+                ),
+            ).rejects.toThrow('Authentication required');
+        });
+
+        it('should throw UnauthorizedException when getCustomerId returns undefined', async () => {
+            mockAuthService.getCustomerId.mockReturnValue(undefined);
+            await expect(
+                firstValueFrom(
+                    service.deleteAddress({ id: 'addr_1' } as Customers.Request.DeleteAddressParams, 'Bearer token'),
+                ),
+            ).rejects.toThrow(UnauthorizedException);
+            await expect(
+                firstValueFrom(
+                    service.deleteAddress({ id: 'addr_1' } as Customers.Request.DeleteAddressParams, 'Bearer token'),
+                ),
+            ).rejects.toThrow('Invalid authentication');
         });
 
         it('should call deleteAddress SDK', async () => {
@@ -394,10 +467,37 @@ describe('CustomersService', () => {
     });
 
     describe('setDefaultAddress', () => {
-        it('should throw UnauthorizedException when auth is missing', () => {
-            expect(() =>
-                service.setDefaultAddress({ id: 'addr_1' } as Customers.Request.SetDefaultAddressParams, undefined),
-            ).toThrow(UnauthorizedException);
+        it('should throw UnauthorizedException when auth is missing', async () => {
+            await expect(
+                firstValueFrom(
+                    service.setDefaultAddress({ id: 'addr_1' } as Customers.Request.SetDefaultAddressParams, undefined),
+                ),
+            ).rejects.toThrow(UnauthorizedException);
+            await expect(
+                firstValueFrom(
+                    service.setDefaultAddress({ id: 'addr_1' } as Customers.Request.SetDefaultAddressParams, undefined),
+                ),
+            ).rejects.toThrow('Authentication required');
+        });
+
+        it('should throw UnauthorizedException when getCustomerId returns undefined', async () => {
+            mockAuthService.getCustomerId.mockReturnValue(undefined);
+            await expect(
+                firstValueFrom(
+                    service.setDefaultAddress(
+                        { id: 'addr_1' } as Customers.Request.SetDefaultAddressParams,
+                        'Bearer token',
+                    ),
+                ),
+            ).rejects.toThrow(UnauthorizedException);
+            await expect(
+                firstValueFrom(
+                    service.setDefaultAddress(
+                        { id: 'addr_1' } as Customers.Request.SetDefaultAddressParams,
+                        'Bearer token',
+                    ),
+                ),
+            ).rejects.toThrow('Invalid authentication');
         });
 
         it('should call updateAddress with is_default_shipping and return mapped address', async () => {

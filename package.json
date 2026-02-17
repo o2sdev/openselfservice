@@ -14,6 +14,7 @@
         "test": "turbo test && vitest run --project=storybook",
         "view-report": "turbo run view-report",
         "generate": "turbo gen",
+        "generate:postman-collection": "node scripts/generate-postman-collection.mjs",
         "eject-block": "ts-node ./scripts/cli.ts eject-block",
         "docs": "turbo start --filter=@o2s/docs",
         "changeset": "changeset",

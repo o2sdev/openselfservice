@@ -9,33 +9,8 @@ describe('payments.mapper', () => {
             const provider = { id: 'pp_stripe_123' } as HttpTypes.StorePaymentProvider;
             const result = mapPaymentProvider(provider);
             expect(result.id).toBe('pp_stripe_123');
-            expect(result.type).toBe('STRIPE');
+            expect(result.type).toBe('pp_stripe_123');
             expect(result.name).toBe('pp_stripe_123');
-        });
-
-        it('should map type STRIPE when id includes stripe', () => {
-            const result = mapPaymentProvider({ id: 'pp_stripe_default' } as HttpTypes.StorePaymentProvider);
-            expect(result.type).toBe('STRIPE');
-        });
-
-        it('should map type PAYPAL when id includes paypal', () => {
-            const result = mapPaymentProvider({ id: 'pp_paypal_express' } as HttpTypes.StorePaymentProvider);
-            expect(result.type).toBe('PAYPAL');
-        });
-
-        it('should map type ADYEN when id includes adyen', () => {
-            const result = mapPaymentProvider({ id: 'pp_adyen_checkout' } as HttpTypes.StorePaymentProvider);
-            expect(result.type).toBe('ADYEN');
-        });
-
-        it('should map type SYSTEM when id includes system or manual', () => {
-            expect(mapPaymentProvider({ id: 'pp_system' } as HttpTypes.StorePaymentProvider).type).toBe('SYSTEM');
-            expect(mapPaymentProvider({ id: 'pp_manual' } as HttpTypes.StorePaymentProvider).type).toBe('SYSTEM');
-        });
-
-        it('should map type OTHER for unknown provider', () => {
-            const result = mapPaymentProvider({ id: 'pp_custom_gateway' } as HttpTypes.StorePaymentProvider);
-            expect(result.type).toBe('OTHER');
         });
 
         it('should set requiresRedirect for stripe and paypal', () => {
