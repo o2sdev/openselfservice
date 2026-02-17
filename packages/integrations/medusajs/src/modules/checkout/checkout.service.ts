@@ -150,6 +150,11 @@ export class CheckoutService extends Checkout.Service {
                 if (paymentSessionId) {
                     return this.paymentsService
                         .getSession({ id: paymentSessionId }, authorization)
+                        .pipe(
+                            catchError(() => {
+                                return of(undefined);
+                            }),
+                        )
                         .pipe(map((session) => mapCheckoutSummary(cart, session)));
                 }
 

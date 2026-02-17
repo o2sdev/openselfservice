@@ -1,8 +1,7 @@
-import { AddressDTO } from '@medusajs/types';
-
-import { Models, Products, Resources } from '@o2s/framework/modules';
+import { Products, Resources } from '@o2s/framework/modules';
 
 import { Asset, AssetsResponse, ServiceInstance, ServiceInstancesResponse } from './response.types';
+import { mapAddress } from '@/utils/address';
 import { parseCurrency } from '@/utils/currency';
 
 export const mapAsset = (asset: Asset, product: Products.Model.Product): Resources.Model.Asset => {
@@ -83,25 +82,6 @@ export const mapService = (
                       return mapAsset(asset, {} as Products.Model.Product);
                   })
                 : [],
-    };
-};
-
-/** AddressDTO with first_name/last_name as returned by the custom resources API */
-type AddressDTOWithNames = AddressDTO & { first_name?: string; last_name?: string };
-
-const mapAddress = (address?: AddressDTOWithNames): Models.Address.Address | undefined => {
-    if (!address) return undefined;
-    return {
-        firstName: address.first_name,
-        lastName: address.last_name,
-        country: address.country_code || '',
-        district: address.province || '',
-        region: address.province || '',
-        streetName: address.address_1 || '',
-        streetNumber: address.address_2 || '',
-        city: address.city || '',
-        postalCode: address.postal_code || '',
-        phone: address.phone || '',
     };
 };
 

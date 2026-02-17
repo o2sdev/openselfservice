@@ -3,9 +3,10 @@ import { BadRequestException } from '@nestjs/common';
 
 import { Carts, Models, Orders, Products } from '@o2s/framework/modules';
 
+import { mapAddress } from '@/utils/address';
 import { parseCurrency } from '@/utils/currency';
 import { asRecord } from '@/utils/metadata';
-import { mapPriceRequired } from '@/utils/price';
+import { mapPrice } from '@/utils/price';
 
 export const mapCarts = (
     carts: { carts: HttpTypes.StoreCart[]; count?: number },
@@ -36,11 +37,11 @@ export const mapCart = (cart: HttpTypes.StoreCart, _defaultCurrency: string): Ca
             data: cart.items?.map((item) => mapCartItem(item, currency)) ?? [],
             total: cart.items?.length ?? 0,
         },
-        subtotal: mapPrice(cart.subtotal, currency),
-        discountTotal: mapPrice(cart.discount_total, currency),
-        taxTotal: mapPrice(cart.tax_total, currency),
-        shippingTotal: mapPrice(cart.shipping_total, currency),
-        total: mapPriceRequired(cart.total, currency, `Cart ${cart.id} total`),
+        subtotal: mapPrice(cart.subtotal, currency, `Cart ${cart.id} subtotal`),
+        discountTotal: mapPrice(cart.discount_total, currency, `Cart ${cart.id} discountTotal`),
+        taxTotal: mapPrice(cart.tax_total, currency, `Cart ${cart.id} taxTotal`),
+        shippingTotal: mapPrice(cart.shipping_total, currency, `Cart ${cart.id} shippingTotal`),
+        total: mapPrice(cart.total, currency, `Cart ${cart.id} total`),
         shippingAddress: mapAddress(cart.shipping_address),
         billingAddress: mapAddress(cart.billing_address),
         shippingMethod: cart.shipping_methods?.[0] ? mapShippingMethod(cart.shipping_methods[0], currency) : undefined,
@@ -57,10 +58,10 @@ const mapCartItem = (item: HttpTypes.StoreCartLineItem, currency: Models.Price.C
         id: item.id,
         sku: item.variant_sku ?? item.variant_id ?? '',
         quantity: item.quantity,
-        price: mapPriceRequired(item.unit_price, currency, `Cart item ${item.id} unit_price`),
-        subtotal: mapPrice(item.subtotal, currency),
-        discountTotal: mapPrice(item.discount_total, currency),
-        total: mapPriceRequired(item.total, currency, `Cart item ${item.id} total`),
+        price: mapPrice(item.unit_price, currency, `Cart item ${item.id} unit_price`),
+        subtotal: mapPrice(item.subtotal, currency, `Cart item ${item.id} subtotal`),
+        discountTotal: mapPrice(item.discount_total, currency, `Cart item ${item.id} discountTotal`),
+        total: mapPrice(item.total, currency, `Cart item ${item.id} total`),
         unit: 'PCS',
         currency,
         product: mapProduct(item, currency),
@@ -81,27 +82,11 @@ const mapProduct = (item: HttpTypes.StoreCartLineItem, currency: Models.Price.Cu
                   alt: item.product_title ?? item.title ?? '',
               }
             : undefined,
-        price: mapPriceRequired(item.unit_price, currency, `Cart product ${item.product_id} unit_price`),
+        price: mapPrice(item.unit_price, currency, `Cart product ${item.product_id} unit_price`),
         link: '',
         type: 'PHYSICAL',
         category: '',
         tags: [],
-    };
-};
-
-const mapAddress = (address?: HttpTypes.StoreCartAddress | null): Models.Address.Address | undefined => {
-    if (!address) return undefined;
-    return {
-        firstName: address.first_name,
-        lastName: address.last_name,
-        country: address.country_code ?? '',
-        district: address.province ?? '',
-        region: address.province ?? '',
-        streetName: address.address_1 ?? '',
-        apartment: address.address_2 ?? '',
-        city: address.city ?? '',
-        postalCode: address.postal_code ?? '',
-        phone: address.phone ?? '',
     };
 };
 
@@ -132,8 +117,8 @@ const mapShippingMethod = (
         id: method.id,
         name: method.name ?? '',
         description: method.description ?? '',
-        total: mapPrice(method.total, currency),
-        subtotal: mapPrice(method.subtotal, currency),
+        total: mapPrice(method.total, currency, `Cart shipping method ${method.id} total`),
+        subtotal: mapPrice(method.subtotal, currency, `Cart shipping method ${method.id} subtotal`),
     };
 };
 
@@ -165,15 +150,4 @@ const mapPromotions = (cart: HttpTypes.StoreCart): Carts.Model.Promotion[] | und
     });
 
     return promotions.length > 0 ? promotions : undefined;
-};
-
-const mapPrice = (
-    value: number | undefined | null,
-    currency: Models.Price.Currency,
-): Models.Price.Price | undefined => {
-    if (typeof value === 'undefined' || value === null) return undefined;
-    return {
-        value,
-        currency,
-    };
 };

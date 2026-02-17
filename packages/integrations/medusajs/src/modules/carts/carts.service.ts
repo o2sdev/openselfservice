@@ -28,6 +28,8 @@ export class CartsService extends Carts.Service {
     private readonly sdk: Medusa;
     private readonly defaultCurrency: string;
 
+    private readonly cartItemsFields = '*items';
+
     constructor(
         private readonly config: ConfigService,
         @Inject(LoggerService) protected readonly logger: LoggerService,
@@ -46,7 +48,11 @@ export class CartsService extends Carts.Service {
 
     getCart(params: Carts.Request.GetCartParams, authorization?: string): Observable<Carts.Model.Cart | undefined> {
         return from(
-            this.sdk.store.cart.retrieve(params.id, {}, this.medusaJsService.getStoreApiHeaders(authorization)),
+            this.sdk.store.cart.retrieve(
+                params.id,
+                { fields: this.cartItemsFields },
+                this.medusaJsService.getStoreApiHeaders(authorization),
+            ),
         ).pipe(
             map((response: HttpTypes.StoreCartResponse) => {
                 const cart = mapCart(response.cart, this.defaultCurrency);
@@ -88,7 +94,7 @@ export class CartsService extends Carts.Service {
                     region_id: data.regionId,
                     metadata: data.metadata,
                 },
-                {},
+                { fields: this.cartItemsFields },
                 this.medusaJsService.getStoreApiHeaders(authorization),
             ),
         ).pipe(
@@ -125,7 +131,7 @@ export class CartsService extends Carts.Service {
             this.sdk.store.cart.update(
                 params.id,
                 cartUpdate,
-                {},
+                { fields: this.cartItemsFields },
                 this.medusaJsService.getStoreApiHeaders(authorization),
             ),
         ).pipe(
@@ -149,7 +155,11 @@ export class CartsService extends Carts.Service {
         if (data.cartId) {
             const cartId = data.cartId;
             return from(
-                this.sdk.store.cart.retrieve(cartId, {}, this.medusaJsService.getStoreApiHeaders(authorization)),
+                this.sdk.store.cart.retrieve(
+                    cartId,
+                    { fields: this.cartItemsFields },
+                    this.medusaJsService.getStoreApiHeaders(authorization),
+                ),
             ).pipe(
                 switchMap((response: HttpTypes.StoreCartResponse) => {
                     const cart = mapCart(response.cart, this.defaultCurrency);
@@ -166,7 +176,7 @@ export class CartsService extends Carts.Service {
                                 quantity: data.quantity,
                                 metadata: data.metadata,
                             },
-                            {},
+                            { fields: this.cartItemsFields },
                             this.medusaJsService.getStoreApiHeaders(authorization),
                         ),
                     );
@@ -203,7 +213,7 @@ export class CartsService extends Carts.Service {
                     quantity: data.quantity,
                     metadata: data.metadata,
                 },
-                {},
+                { fields: this.cartItemsFields },
                 this.medusaJsService.getStoreApiHeaders(authorization),
             ),
         ).pipe(
@@ -217,6 +227,7 @@ export class CartsService extends Carts.Service {
             this.sdk.store.cart.deleteLineItem(
                 params.cartId,
                 params.itemId,
+                { fields: this.cartItemsFields },
                 this.medusaJsService.getStoreApiHeaders(authorization),
             ),
         ).pipe(
@@ -245,6 +256,7 @@ export class CartsService extends Carts.Service {
                 body: {
                     promo_codes: [data.code],
                 },
+                query: { fields: this.cartItemsFields },
             }),
         ).pipe(
             map((response) => mapCart(response.cart, this.defaultCurrency)),
@@ -263,6 +275,7 @@ export class CartsService extends Carts.Service {
                 body: {
                     promo_codes: [params.code],
                 },
+                query: { fields: this.cartItemsFields },
             }),
         ).pipe(
             map((response) => mapCart(response.cart, this.defaultCurrency)),
@@ -321,7 +334,7 @@ export class CartsService extends Carts.Service {
                     region_id: regionId,
                     metadata,
                 },
-                {},
+                { fields: this.cartItemsFields },
                 this.medusaJsService.getStoreApiHeaders(authorization),
             ),
         ).pipe(
@@ -334,7 +347,7 @@ export class CartsService extends Carts.Service {
                             quantity,
                             metadata,
                         },
-                        {},
+                        { fields: this.cartItemsFields },
                         this.medusaJsService.getStoreApiHeaders(authorization),
                     ),
                 ),
@@ -422,7 +435,14 @@ export class CartsService extends Carts.Service {
                         }
 
                         // Update cart
-                        return from(this.sdk.store.cart.update(params.cartId, cartUpdate, {}, headers)).pipe(
+                        return from(
+                            this.sdk.store.cart.update(
+                                params.cartId,
+                                cartUpdate,
+                                { fields: this.cartItemsFields },
+                                headers,
+                            ),
+                        ).pipe(
                             switchMap(() => this.getCart({ id: params.cartId }, authorization)),
                             map((updatedCart) => {
                                 if (!updatedCart) {
@@ -465,7 +485,7 @@ export class CartsService extends Carts.Service {
                     this.sdk.store.cart.addShippingMethod(
                         params.cartId,
                         { option_id: data.shippingOptionId },
-                        {},
+                        { fields: this.cartItemsFields },
                         headers,
                     ),
                 ).pipe(

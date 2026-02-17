@@ -3,8 +3,9 @@ import { NotFoundException } from '@nestjs/common';
 
 import { Models, Orders, Products } from '@o2s/framework/modules';
 
+import { mapAddress } from '@/utils/address';
 import { parseCurrency } from '@/utils/currency';
-import { mapPriceRequired } from '@/utils/price';
+import { mapPrice } from '@/utils/price';
 
 export const mapOrders = (orders: HttpTypes.StoreOrderListResponse, defaultCurrency: string): Orders.Model.Orders => {
     return {
@@ -18,11 +19,11 @@ export const mapOrder = (order: HttpTypes.StoreOrder, defaultCurrency: string): 
 
     return {
         id: order.id,
-        total: mapPriceRequired(order.total, currency, `Order ${order.id} total`),
-        subtotal: mapPrice(order.subtotal, currency),
-        shippingTotal: mapPrice(order.shipping_total, currency),
-        discountTotal: mapPrice(order.discount_total, currency),
-        tax: mapPrice(order.tax_total, currency),
+        total: mapPrice(order.total, currency, `Order ${order.id} total`),
+        subtotal: mapPrice(order.subtotal, currency, `Order ${order.id} subtotal`),
+        shippingTotal: mapPrice(order.shipping_total, currency, `Order ${order.id} shippingTotal`),
+        discountTotal: mapPrice(order.discount_total, currency, `Order ${order.id} discountTotal`),
+        tax: mapPrice(order.tax_total, currency, `Order ${order.id} tax`),
         currency,
         paymentStatus: mapPaymentStatus(order.payment_status),
         status: mapStatus(order.status),
@@ -46,9 +47,9 @@ const mapOrderItem = (item: HttpTypes.StoreOrderLineItem, currency: Models.Price
         id: item.id,
         productId: item.variant_id || '',
         quantity: item.quantity,
-        price: mapPriceRequired(item.unit_price, currency, `Order item ${item.id} unit_price`),
-        total: mapPrice(item.total, currency),
-        subtotal: mapPrice(item.subtotal, currency),
+        price: mapPrice(item.unit_price, currency, `Order item ${item.id} unit_price`),
+        total: mapPrice(item.total, currency, `Order item ${item.id} total`),
+        subtotal: mapPrice(item.subtotal, currency, `Order item ${item.id} subtotal`),
         currency,
         product: mapProduct(item.unit_price, currency, item),
     };
@@ -73,28 +74,11 @@ const mapProduct = (
                   alt: item.product_title || item.title,
               }
             : undefined,
-        price: mapPriceRequired(unitPrice, currency, `Order product ${item.product_id} unit_price`),
+        price: mapPrice(unitPrice, currency, `Order product ${item.product_id} unit_price`),
         link: '',
         type: 'PHYSICAL',
         category: item.product?.categories?.[0]?.name || '',
         tags: [],
-    };
-};
-
-const mapAddress = (address?: HttpTypes.StoreOrderAddress | null): Models.Address.Address | undefined => {
-    if (!address) return undefined;
-    return {
-        firstName: address.first_name,
-        lastName: address.last_name,
-        country: address.country_code || '',
-        district: address.province || '',
-        region: address.province || '',
-        streetName: address.address_1 || '',
-        streetNumber: address.address_2 || '',
-        apartment: address.address_2 || '',
-        city: address.city || '',
-        postalCode: address.postal_code || '',
-        phone: address.phone || '',
     };
 };
 
@@ -106,16 +90,8 @@ const mapShippingMethod = (
         id: method.id,
         name: method.name || '',
         description: method.description || '',
-        total: mapPrice(method.total, currency),
-        subtotal: mapPrice(method.subtotal, currency),
-    };
-};
-
-const mapPrice = (value: number, currency: Models.Price.Currency): Models.Price.Price | undefined => {
-    if (typeof value === 'undefined') return undefined;
-    return {
-        value,
-        currency,
+        total: mapPrice(method.total, currency, `Order shipping method ${method.id} total`),
+        subtotal: mapPrice(method.subtotal, currency, `Order shipping method ${method.id} subtotal`),
     };
 };
 
