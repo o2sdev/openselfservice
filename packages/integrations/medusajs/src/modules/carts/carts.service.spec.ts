@@ -126,7 +126,11 @@ describe('CartsService', () => {
 
             const result = await firstValueFrom(service.getCart({ id: 'cart_1' }, 'Bearer token'));
 
-            expect(mockSdk.store.cart.retrieve).toHaveBeenCalledWith('cart_1', {}, expect.any(Object));
+            expect(mockSdk.store.cart.retrieve).toHaveBeenCalledWith(
+                'cart_1',
+                { fields: '*items,*shipping_methods' },
+                expect.any(Object),
+            );
             expect(result).toBeDefined();
             expect(result?.id).toBe('cart_1');
             expect(result?.currency).toBe('EUR');
@@ -159,7 +163,7 @@ describe('CartsService', () => {
 
             expect(mockSdk.store.cart.create).toHaveBeenCalledWith(
                 { currency_code: 'eur', region_id: 'reg_1', metadata: undefined },
-                {},
+                { fields: '*items,*shipping_methods' },
                 expect.any(Object),
             );
         });
@@ -194,11 +198,15 @@ describe('CartsService', () => {
                 ),
             );
 
-            expect(mockSdk.store.cart.retrieve).toHaveBeenCalledWith('cart_1', {}, expect.any(Object));
+            expect(mockSdk.store.cart.retrieve).toHaveBeenCalledWith(
+                'cart_1',
+                { fields: '*items,*shipping_methods' },
+                expect.any(Object),
+            );
             expect(mockSdk.store.cart.createLineItem).toHaveBeenCalledWith(
                 'cart_1',
                 { variant_id: 'SKU1', quantity: 2, metadata: undefined },
-                {},
+                { fields: '*items,*shipping_methods' },
                 expect.any(Object),
             );
             expect(result).toBeDefined();
@@ -234,7 +242,7 @@ describe('CartsService', () => {
 
             expect(mockSdk.store.cart.create).toHaveBeenCalledWith(
                 { currency_code: 'eur', region_id: undefined, metadata: undefined },
-                {},
+                { fields: '*items,*shipping_methods' },
                 expect.any(Object),
             );
             expect(mockSdk.store.cart.createLineItem).toHaveBeenCalled();
@@ -270,7 +278,7 @@ describe('CartsService', () => {
                 'cart_1',
                 'item_1',
                 { quantity: 3, metadata: undefined },
-                {},
+                { fields: '*items,*shipping_methods' },
                 expect.any(Object),
             );
             expect(result?.id).toBe('cart_1');
@@ -287,7 +295,12 @@ describe('CartsService', () => {
                 service.removeCartItem({ cartId: 'cart_1', itemId: 'item_1' }, 'Bearer token'),
             );
 
-            expect(mockSdk.store.cart.deleteLineItem).toHaveBeenCalledWith('cart_1', 'item_1', expect.any(Object));
+            expect(mockSdk.store.cart.deleteLineItem).toHaveBeenCalledWith(
+                'cart_1',
+                'item_1',
+                { fields: '*items,*shipping_methods' },
+                expect.any(Object),
+            );
             expect(result?.id).toBe('cart_1');
         });
 
@@ -326,7 +339,7 @@ describe('CartsService', () => {
                     email: 'user@test.com',
                     metadata: expect.objectContaining({ notes: 'Gift wrap', custom: 'value' }),
                 }),
-                {},
+                { fields: '*items,*shipping_methods' },
                 expect.any(Object),
             );
             expect(result?.id).toBe('cart_1');
@@ -368,7 +381,7 @@ describe('CartsService', () => {
                     shipping_address: expect.objectContaining({ first_name: 'John', country_code: 'pl' }),
                     billing_address: expect.objectContaining({ address_1: 'Billing St' }),
                 }),
-                {},
+                { fields: '*items,*shipping_methods' },
                 expect.any(Object),
             );
             expect(result).toBeDefined();
@@ -409,7 +422,7 @@ describe('CartsService', () => {
             expect(mockSdk.store.cart.addShippingMethod).toHaveBeenCalledWith(
                 'cart_1',
                 { option_id: 'opt_1' },
-                {},
+                { fields: '*items,*shipping_methods' },
                 expect.any(Object),
             );
             expect(result).toBeDefined();
