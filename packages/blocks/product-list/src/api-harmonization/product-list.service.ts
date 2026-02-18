@@ -36,26 +36,7 @@ export class ProductListService {
                         locale: headers['x-locale'],
                         basePath: cms.basePath,
                     })
-                    .pipe(
-                        map((products) => {
-                            const result = mapProductList(products, cms, headers['x-locale']);
-
-                            // Extract permissions using ACL service
-                            if (headers.authorization) {
-                                const permissions = this.authService.canPerformActions(
-                                    headers.authorization,
-                                    'products',
-                                    ['view'],
-                                );
-
-                                result.permissions = {
-                                    view: permissions.view ?? false,
-                                };
-                            }
-
-                            return result;
-                        }),
-                    );
+                    .pipe(map((products) => mapProductList(products, cms, headers['x-locale'])));
             }),
         );
     }
