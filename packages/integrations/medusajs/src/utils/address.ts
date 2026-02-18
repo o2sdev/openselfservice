@@ -31,7 +31,7 @@ export function mapAddress(address?: MedusaAddressFields | null): Models.Address
         district: address.province ?? '',
         region: address.province ?? '',
         streetName: address.address_1 ?? '',
-        streetNumber: address.address_2 ?? undefined,
+        streetNumber: undefined, // Medusa does not store street number separately
         apartment: address.address_2 ?? undefined,
         city: address.city ?? '',
         postalCode: address.postal_code ?? '',

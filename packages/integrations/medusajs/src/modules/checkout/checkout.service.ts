@@ -274,7 +274,7 @@ export class CheckoutService extends Checkout.Service {
                         })),
                         catchError((error) => {
                             this.logger.warn(`Failed to calculate price for shipping option ${option.id}`, error);
-                            return of({ optionId: option.id, calculatedOption: option });
+                            return of({ optionId: option.id, calculatedOption: undefined });
                         }),
                     ),
                 );
@@ -284,7 +284,9 @@ export class CheckoutService extends Checkout.Service {
                     map((calculatedResults) => {
                         const calculatedMap = new Map<string, HttpTypes.StoreCartShippingOption>();
                         calculatedResults.forEach((result) => {
-                            calculatedMap.set(result.optionId, result.calculatedOption);
+                            if (result.calculatedOption) {
+                                calculatedMap.set(result.optionId, result.calculatedOption);
+                            }
                         });
 
                         const enrichedOptions = shippingOptions.map((option) =>
