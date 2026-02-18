@@ -48,6 +48,17 @@ const TdComp: FC<Readonly<TypographyProps & { children: ReactNode }>> = ({
     );
 };
 
+const ImgComp: FC<Readonly<React.ImgHTMLAttributes<HTMLImageElement> & { children?: ReactNode }>> = ({
+    children: _children,
+    ...props
+}) => {
+    return (
+        <Typography variant="image" asChild>
+            <img {...props} alt={props.alt} />
+        </Typography>
+    );
+};
+
 export const RichText: FC<Readonly<RichTextProps>> = ({
     content,
     baseFontSize = 'body',
@@ -189,10 +200,8 @@ export const RichText: FC<Readonly<RichTextProps>> = ({
             },
         },
         img: {
-            component: TypographyComp,
+            component: ImgComp,
             props: {
-                variant: 'image',
-                tag: 'img',
                 className: cn('mt-6 first:mt-0', className),
             },
         },
