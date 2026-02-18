@@ -3,7 +3,7 @@ import { Articles } from '@o2s/framework/modules';
 export const MOCK_CATEGORIES_EN: Articles.Model.Category[] = [
     {
         id: 'warranty-and-repair',
-        slug: '/help-and-support/warranty-and-repair',
+        slug: 'warranty-and-repair',
         createdAt: '2023-05-12T08:30:00Z',
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Warranty & Repair',
@@ -13,7 +13,7 @@ export const MOCK_CATEGORIES_EN: Articles.Model.Category[] = [
     },
     {
         id: 'maintenance',
-        slug: '/help-and-support/maintenance',
+        slug: 'maintenance',
         createdAt: '2023-06-10T10:15:00Z',
         updatedAt: '2023-07-20T16:30:00Z',
         title: 'Maintenance',
@@ -23,7 +23,7 @@ export const MOCK_CATEGORIES_EN: Articles.Model.Category[] = [
     },
     {
         id: 'safety',
-        slug: '/help-and-support/safety',
+        slug: 'safety',
         createdAt: '2023-07-15T09:45:00Z',
         updatedAt: '2023-08-25T13:20:00Z',
         title: 'Safety',
@@ -33,7 +33,7 @@ export const MOCK_CATEGORIES_EN: Articles.Model.Category[] = [
     },
     {
         id: 'accessories',
-        slug: '/help-and-support/accessories',
+        slug: 'accessories',
         createdAt: '2023-08-20T11:30:00Z',
         updatedAt: '2023-09-30T15:45:00Z',
         title: 'Accessories',
@@ -43,7 +43,7 @@ export const MOCK_CATEGORIES_EN: Articles.Model.Category[] = [
     },
     {
         id: 'troubleshooting',
-        slug: '/help-and-support/troubleshooting',
+        slug: 'troubleshooting',
         createdAt: '2023-08-20T11:30:00Z',
         updatedAt: '2023-09-30T15:45:00Z',
         title: 'Troubleshooting',
@@ -56,7 +56,7 @@ export const MOCK_CATEGORIES_EN: Articles.Model.Category[] = [
 export const MOCK_CATEGORIES_DE: Articles.Model.Category[] = [
     {
         id: 'warranty-and-repair',
-        slug: '/hilfe-und-support/garantie-und-reparatur',
+        slug: 'garantie-und-reparatur',
         createdAt: '2023-05-12T08:30:00Z',
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Garantie & Reparatur',
@@ -66,7 +66,7 @@ export const MOCK_CATEGORIES_DE: Articles.Model.Category[] = [
     },
     {
         id: 'maintenance',
-        slug: '/hilfe-und-support/wartung',
+        slug: 'wartung',
         createdAt: '2023-06-10T10:15:00Z',
         updatedAt: '2023-07-20T16:30:00Z',
         title: 'Wartung',
@@ -76,7 +76,7 @@ export const MOCK_CATEGORIES_DE: Articles.Model.Category[] = [
     },
     {
         id: 'safety',
-        slug: '/hilfe-und-support/sicherheit',
+        slug: 'sicherheit',
         createdAt: '2023-07-15T09:45:00Z',
         updatedAt: '2023-08-25T13:20:00Z',
         title: 'Sicherheit',
@@ -86,7 +86,7 @@ export const MOCK_CATEGORIES_DE: Articles.Model.Category[] = [
     },
     {
         id: 'accessories',
-        slug: '/hilfe-und-support/zubehoer',
+        slug: 'zubehoer',
         createdAt: '2023-08-20T11:30:00Z',
         updatedAt: '2023-09-30T15:45:00Z',
         title: 'Zubehör',
@@ -96,7 +96,7 @@ export const MOCK_CATEGORIES_DE: Articles.Model.Category[] = [
     },
     {
         id: 'troubleshooting',
-        slug: '/hilfe-und-support/fehlerbehebung',
+        slug: 'fehlerbehebung',
         createdAt: '2023-08-20T11:30:00Z',
         updatedAt: '2023-09-30T15:45:00Z',
         title: 'Fehlerbehebung',
@@ -109,7 +109,7 @@ export const MOCK_CATEGORIES_DE: Articles.Model.Category[] = [
 export const MOCK_CATEGORIES_PL: Articles.Model.Category[] = [
     {
         id: 'warranty-and-repair',
-        slug: '/pomoc-i-wsparcie/gwarancja-i-naprawa',
+        slug: 'gwarancja-i-naprawa',
         createdAt: '2023-05-12T08:30:00Z',
         updatedAt: '2023-06-15T14:25:00Z',
         title: 'Gwarancja i Naprawa',
@@ -119,7 +119,7 @@ export const MOCK_CATEGORIES_PL: Articles.Model.Category[] = [
     },
     {
         id: 'maintenance',
-        slug: '/pomoc-i-wsparcie/konserwacja',
+        slug: 'konserwacja',
         createdAt: '2023-06-10T10:15:00Z',
         updatedAt: '2023-07-20T16:30:00Z',
         title: 'Konserwacja',
@@ -129,7 +129,7 @@ export const MOCK_CATEGORIES_PL: Articles.Model.Category[] = [
     },
     {
         id: 'safety',
-        slug: '/pomoc-i-wsparcie/bezpieczenstwo',
+        slug: 'bezpieczenstwo',
         createdAt: '2023-07-15T09:45:00Z',
         updatedAt: '2023-08-25T13:20:00Z',
         title: 'Bezpieczeństwo',
@@ -139,7 +139,7 @@ export const MOCK_CATEGORIES_PL: Articles.Model.Category[] = [
     },
     {
         id: 'accessories',
-        slug: '/pomoc-i-wsparcie/akcesoria',
+        slug: 'akcesoria',
         createdAt: '2023-08-20T11:30:00Z',
         updatedAt: '2023-09-30T15:45:00Z',
         title: 'Akcesoria',
@@ -149,7 +149,7 @@ export const MOCK_CATEGORIES_PL: Articles.Model.Category[] = [
     },
     {
         id: 'troubleshooting',
-        slug: '/pomoc-i-wsparcie/rozwiązywanie-problemów',
+        slug: 'rozwiązywanie-problemów',
         createdAt: '2023-08-20T11:30:00Z',
         updatedAt: '2023-09-30T15:45:00Z',
         title: 'Rozwiązywanie problemów',
