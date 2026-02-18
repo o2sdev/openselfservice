@@ -12,10 +12,12 @@ export const productDetails = (sdk: Sdk) => ({
             query?: Request.GetProductDetailsBlockQuery,
             headers?: Models.Headers.AppHeaders,
             authorization?: string,
-        ): Promise<Model.ProductDetailsBlock> =>
-            sdk.makeRequest({
+        ): Promise<Model.ProductDetailsBlock> => {
+            const urlPath = params.variantSlug ? `${URL}/${params.id}/${params.variantSlug}` : `${URL}/${params.id}`;
+
+            return sdk.makeRequest({
                 method: 'get',
-                url: `${URL}/${params.id}`,
+                url: urlPath,
                 headers: {
                     ...Utils.Headers.getApiHeaders(),
                     ...headers,
@@ -26,6 +28,7 @@ export const productDetails = (sdk: Sdk) => ({
                         : {}),
                 },
                 params: query,
-            }),
+            });
+        },
     },
 });

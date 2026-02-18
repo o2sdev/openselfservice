@@ -5,6 +5,7 @@ import * as Client from '../api-harmonization/product-details.client';
 export interface ProductDetailsProps {
     id: string;
     productId: string;
+    variantSlug?: string;
     locale: string;
     routing: ReturnType<typeof defineRouting>;
     hasPriority?: boolean;

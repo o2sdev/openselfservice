@@ -14,7 +14,7 @@
         "generate:component": "turbo gen web-component"
     },
     "dependencies": {
-        "@contentful/live-preview": "^4.9.3",
+        "@contentful/live-preview": "^4.9.4",
         "@o2s/blocks.article": "*",
         "@o2s/blocks.article-list": "*",
         "@o2s/blocks.article-search": "*",
@@ -64,7 +64,7 @@
         "next": "16.1.6",
         "next-auth": "^5.0.0-beta.30",
         "next-compose-plugins": "^2.2.1",
-        "next-intl": "^4.8.2",
+        "next-intl": "^4.8.3",
         "react": "19.2.4",
         "react-autosuggest": "^10.1.0",
         "react-dom": "19.2.4",

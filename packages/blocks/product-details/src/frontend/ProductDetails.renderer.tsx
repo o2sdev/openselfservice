@@ -38,7 +38,14 @@ export const ProductDetailsRenderer: React.FC<ProductDetailsRendererProps> = ({
                 </div>
             }
         >
-            <ProductDetails id={id} productId={slug[1]} locale={locale} routing={routing} hasPriority={hasPriority} />
+            <ProductDetails
+                id={id}
+                productId={slug[1]}
+                variantSlug={slug[2]}
+                locale={locale}
+                routing={routing}
+                hasPriority={hasPriority}
+            />
         </Suspense>
     );
 };

@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CMS, Products } from '@o2s/configs.integrations';
-import { Observable, forkJoin, map } from 'rxjs';
+import { Observable, forkJoin, map, of, switchMap } from 'rxjs';
 
 import { Models } from '@o2s/utils.api-harmonization';
 
@@ -17,6 +17,7 @@ export class ProductDetailsService {
 
     getProductDetails(
         id: string,
+        variantSlug: string | undefined,
         query: Request.GetProductDetailsBlockQuery,
         headers: Models.Headers.AppHeaders,
     ): Observable<Model.ProductDetailsBlock> {
@@ -26,18 +27,26 @@ export class ProductDetailsService {
             id: query.id,
             locale,
         });
-        const product = this.productsService.getProduct({
-            id,
-            locale,
-        });
 
-        return forkJoin([cms, product]).pipe(
-            map(([cms, product]) => {
-                if (!product) {
-                    throw new NotFoundException();
-                }
+        return cms.pipe(
+            switchMap((cmsData) => {
+                const product = this.productsService.getProduct({
+                    id,
+                    variantId: variantSlug,
+                    locale,
+                    basePath: cmsData.basePath,
+                    variantOptionGroups: cmsData.variantOptionGroups,
+                });
 
-                return mapProductDetails(product, cms);
+                return forkJoin([of(cmsData), product]).pipe(
+                    map(([cms, product]) => {
+                        if (!product) {
+                            throw new NotFoundException();
+                        }
+
+                        return mapProductDetails(product, cms);
+                    }),
+                );
             }),
         );
     }
