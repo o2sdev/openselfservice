@@ -8,15 +8,21 @@ import { responseDelay } from '@/utils/delay';
 
 @Injectable()
 export class ProductsService implements Products.Service {
-    getProductList(query: Products.Request.GetProductListQuery): Observable<Products.Model.Products> {
+    getProductList(
+        query: Products.Request.GetProductListQuery,
+        _authorization?: string,
+    ): Observable<Products.Model.Products> {
         return of(mapProducts(query)).pipe(responseDelay());
     }
 
-    getProduct(params: Products.Request.GetProductParams): Observable<Products.Model.Product> {
+    getProduct(params: Products.Request.GetProductParams, _authorization?: string): Observable<Products.Model.Product> {
         return of(mapProduct(params.id, params.locale, params.variantId)).pipe(responseDelay());
     }
 
-    getRelatedProductList(params: Products.Request.GetRelatedProductListParams): Observable<Products.Model.Products> {
+    getRelatedProductList(
+        params: Products.Request.GetRelatedProductListParams,
+        _authorization?: string,
+    ): Observable<Products.Model.Products> {
         return of(mapRelatedProducts(params)).pipe(responseDelay());
     }
 }
