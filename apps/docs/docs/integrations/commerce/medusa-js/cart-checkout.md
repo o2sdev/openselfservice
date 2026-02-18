@@ -1,79 +1,97 @@
 ---
-sidebar_position: 300
+sidebar_position: 400
 ---
 
 # Cart & Checkout
 
-This document describes the cart lifecycle and checkout process when using the Medusa.js integration.
+This document describes the cart lifecycle and checkout process when using the Medusa.js integration. It is intended for developers familiar with O2S who need to understand how the Medusa.js flow maps to the O2S cart and checkout model.
 
-## Cart Lifecycle
+## Understanding MedusaJS Concepts
 
-The typical flow is:
+If you are familiar with O2S but not Medusa, these concepts are essential:
 
-1. **Create cart** — `POST /carts` with `currency` (and `region_id` for Medusa)
-2. **Add items** — `POST /carts/items` with `variantId`, `quantity`, optional `cartId`
-3. **Update addresses** — via checkout: `POST /checkout/:cartId/addresses`
-4. **Add shipping method** — `POST /checkout/:cartId/shipping-method`
-5. **Set payment** — `POST /checkout/:cartId/payment`
-6. **Place order** — `POST /checkout/:cartId/place-order`
+### Regions
 
-The frontend orchestrates these steps. The API does not track checkout state; each action is independent.
+Medusa requires a **`region_id`** for every cart. Regions determine:
 
-## Checkout API Endpoints
+- **Pricing** — Currency and tax rules
+- **Shipping** — Available shipping options
+- **Taxes** — Tax calculation for the region
 
-| Method | Route                                | Purpose                                                         |
-| ------ | ------------------------------------ | --------------------------------------------------------------- |
-| POST   | `/checkout/:cartId/addresses`        | Set shipping and billing addresses                              |
-| POST   | `/checkout/:cartId/shipping-method`  | Select shipping option                                          |
-| POST   | `/checkout/:cartId/payment`          | Create payment session                                          |
-| GET    | `/checkout/:cartId/shipping-options` | List available shipping options                                 |
-| GET    | `/checkout/:cartId/summary`          | Get checkout summary (cart + totals + addresses)                |
-| POST   | `/checkout/:cartId/place-order`      | Create order from cart                                          |
-| POST   | `/checkout/:cartId/complete`         | One-shot complete flow (addresses → shipping → payment → order) |
+O2S maps `regionId` (in request bodies) to Medusa's `region_id`. You must create regions in Medusa Admin and pass a valid `regionId` when creating carts.
 
-## Medusa-Specific Behavior
+### Variants vs Products
 
-### Cart Creation
+Medusa uses **product variants** for cart line items, not products directly. Each variant has its own ID, SKU, price, and options (size, color, etc.).
 
-- **`region_id`** — Required. Medusa associates carts with regions (pricing, shipping, taxes).
-- **`currency_code`** — Required. Use `DEFAULT_CURRENCY` when not provided.
+- **O2S** uses the `sku` field when adding items to cart.
+- **Medusa** expects `variant_id` — the integration maps O2S `sku` to Medusa `variant_id`.
+- You must use the **variant ID** from the product catalog (e.g., from `GET /products/:id` response), not the product ID.
 
-### Adding Items
+### Currency
 
-- **`variantId` required** — Medusa uses product variants, not productId alone. Use the variant ID from the product catalog.
-- When `cartId` is omitted and no active cart exists, a new cart is created via `sdk.store.cart.create` (or `createCartAndAddItem`).
+Medusa expects lowercase currency codes (e.g., `eur`), while O2S typically uses uppercase (e.g., `EUR`). The integration converts automatically. The `DEFAULT_CURRENCY` environment variable is used when currency is not provided.
 
-### Shipping Options
+### Cart Ownership
 
-- Fetched from `sdk.store.fulfillment.listCartOptions({ cart_id })`.
-- For options with `price_type: calculated`, prices are computed via `sdk.store.fulfillment.calculate`.
+- **Customer carts** — When a cart is associated with a logged-in customer, the `customerId` is extracted from the SSO token. The integration verifies ownership on cart access; unauthorized access throws `UnauthorizedException`.
+- **Guest carts** — Carts created without authentication have no `customerId`. Anyone with the cart ID can access them.
 
-### Order Placement
+## O2S to MedusaJS Mapping
 
-- Uses `sdk.store.cart.complete(cartId)` to convert the cart into an order in Medusa.
-- Returns the created order; no separate order creation endpoint is used.
+### Cart Model
 
-### Guest Checkout
+The O2S `Cart` model maps to Medusa's `StoreCart`:
 
-- Supported. No authentication required.
-- **Email** — Required for guest order placement (passed in `placeOrder` or `completeCheckout` body).
-- Addresses must be provided inline; saved-address IDs are for authenticated users only.
+| O2S Field        | Medusa Field      | Notes                                              |
+| ---------------- | ----------------- | -------------------------------------------------- |
+| `id`             | `id`              | Cart identifier                                    |
+| `customerId`     | `customer_id`     | Present when cart is linked to a customer          |
+| `regionId`       | `region_id`       | Required for Medusa                                |
+| `currency`       | `currency_code`   | Normalized to uppercase in O2S                     |
+| `items`          | `items`           | Line items with variant references                 |
+| `subtotal`, `total`, etc. | Calculated by Medusa | Mapped to O2S `Price` objects              |
+| `shippingAddress`| `shipping_address`| Set via checkout addresses                         |
+| `billingAddress`| `billing_address` | Set via checkout addresses                         |
+| `shippingMethod` | `shipping_methods[0]` | Single shipping method supported               |
+| `paymentMethod`  | `metadata.paymentMethod` | Stored in cart metadata after setPayment   |
+| `metadata`       | `metadata`        | Notes stored in `metadata.notes`; payment session ID in `metadata.paymentSessionId` |
 
-### Limitations
+### Checkout Flow Mapping
 
-| Capability       | MedusaJS | Notes                                    |
-| ---------------- | -------- | ---------------------------------------- |
-| `getCartList`    | No       | Store API does not support listing carts |
-| `getCurrentCart` | No       | No way to query carts by customer        |
-| `deleteCart`     | No-op    | Store API has no cart delete endpoint    |
+Each O2S checkout step maps to a Medusa operation:
 
-## Dependencies
+| O2S Step          | Medusa Operation                                      |
+| ----------------- | ----------------------------------------------------- |
+| `setAddresses`    | `sdk.store.cart.update()` with `shipping_address`, `billing_address` |
+| `setShippingMethod` | `sdk.store.cart.addShippingMethod()` with `option_id` |
+| `setPayment`      | `sdk.store.payment.initiatePaymentSession()` then store session ID and payment method in cart metadata |
+| `placeOrder`      | `sdk.store.cart.complete()` — single call creates the order; no separate order creation endpoint |
 
-Checkout delegates to:
+### Payment Session Storage
 
-- **Carts** — `updateCartAddresses`, `addShippingMethod`
-- **Customers** — Resolve `shippingAddressId` / `billingAddressId` for authenticated users
-- **Payments** — `createSession` for payment setup
-- **Medusa SDK** — Fulfillment options, `cart.complete`
+After `setPayment`, the integration stores:
 
-Ensure Carts, Checkout, Customers, and Payments are configured with Medusa.js (see [Configuration](./overview.md#step-1-update-the-integration-configs)).
+- **`cart.metadata.paymentSessionId`** — ID of the created payment session
+- **`cart.metadata.paymentMethod`** — Object with `{ id, name, type }` for display
+
+These are used by `getCheckoutSummary` and validated before `placeOrder`.
+
+### Address Handling
+
+- **Saved addresses** — When `shippingAddressId` or `billingAddressId` is provided (authenticated users), the integration fetches the address from the Customers service and maps it to Medusa format via `mapAddressToMedusa()`.
+- **Inline addresses** — When `shippingAddress` or `billingAddress` is provided (guests or one-off addresses), the integration maps directly to Medusa format.
+- **Single address** — If only one address is provided, it is used for both shipping and billing.
+
+## Important Caveats
+
+| Caveat | Details |
+| ------ | ------- |
+| **Region required** | `regionId` is required for cart creation. It affects pricing, shipping options, and tax calculation. |
+| **Variant ID required** | Use variant ID (from product catalog), not product ID. O2S `sku` expects the variant ID. |
+| **Payment session storage** | Payment session ID and payment method are stored in `cart.metadata`. Do not clear metadata when updating cart. |
+| **Guest checkout** | Email is required for guest order placement. Provide it in `setAddresses`, `placeOrder`, or `completeCheckout`. |
+| **Shipping price calculation** | Options with `price_type=calculated` require a separate API call to `sdk.store.fulfillment.calculate()`. Flat-price options are returned as-is. |
+| **Order creation** | Single operation (`cart.complete()`) — no separate order creation endpoint. The order is returned directly from the response. |
+| **Cart ownership** | Customer carts verify ownership via SSO token. Unauthorized access throws `UnauthorizedException`. |
+| **Unimplemented methods** | `getCartList`, `getCurrentCart`, `deleteCart` are not available due to Store API limitations. |

@@ -6,6 +6,8 @@ sidebar_position: 200
 
 This document provides an overview of features supported by the Medusa.js integration.
 
+**Related documentation:** [How to set up](./how-to-setup.md) | [Usage](./usage.md) | [Cart & Checkout](./cart-checkout.md)
+
 ## Overview
 
 | Feature                                             | Status | Notes                                                                            |
@@ -13,7 +15,7 @@ This document provides an overview of features supported by the Medusa.js integr
 | [Cart Management](#cart-management)                 | ✅     | Cart creation, line items, addresses, shipping (Store API)                       |
 | [Checkout Flow](#checkout-flow)                     | ✅     | Multi-step checkout, payment sessions, order placement                           |
 | [Order Management](#order-management)               | ✅     | Complete order history and details                                               |
-| [Product Catalog](#product-catalog)                 | ✅     | Product browsing with variants                                                   |
+| [Product Catalog](#product-catalog)                 | ✅     | Product browsing with variants (Store API)                                        |
 | [Product Recommendations](#product-recommendations) | ✅     | Related products ([requires plugin](#plugin-architecture))                       |
 | [Asset Management](#asset-management)               | ✅     | Customer assets with warranty tracking ([requires plugin](#plugin-architecture)) |
 | [Service Subscriptions](#service-subscriptions)     | ✅     | Service contracts and billing ([requires plugin](#plugin-architecture))          |
@@ -73,7 +75,7 @@ Orders are displayed on the **Orders** screen in the frontend app, allowing cust
 
 ### Product Catalog {#product-catalog}
 
-Browse and display products from your Medusa commerce platform:
+Browse and display products from your Medusa commerce platform using the Store API:
 
 - List products with pagination support
 - Display product details including title, description, and images
@@ -82,7 +84,7 @@ Browse and display products from your Medusa commerce platform:
 - Product type classification (physical vs. virtual products)
 - Thumbnail and image display
 
-The product catalog powers the **Products** module in the frontend, enabling product listing pages and detailed product views.
+The product catalog powers the **Products** module in the frontend, enabling product listing pages and detailed product views. All product operations use Medusa's Store API, which requires SSO token authentication. See [How to set up](./how-to-setup.md#sso-authentication-plugin-setup) for SSO plugin configuration.
 
 ### Product Recommendations {#product-recommendations}
 
@@ -155,14 +157,15 @@ Consistent pagination support across all list operations:
 
 ### Admin API Integration {#admin-api-integration}
 
-The integration leverages Medusa's Admin API for extended capabilities:
+The integration primarily uses Medusa's Store API for customer-facing operations (Products, Orders, Carts, Checkout, Customers, Payments). Store API operations require SSO tokens passed from the frontend and a custom Medusa auth plugin to validate these tokens and map them to customer identities.
 
-- Access to comprehensive order data including financial details
-- Extended product information with variants and pricing
-- Admin-level operations for resource management
-- Secure authentication via API keys
+A basic example plugin demonstrating SSO token handling is available at [openselfservice-resources](https://github.com/o2sdev/openselfservice-resources/tree/main/packages/third-party/medusajs/plugins/mocked-auth). The example plugin handles tokens from the mocked integration to find matching customers in Medusa (or create new customers if not found).
 
-This approach provides richer data access compared to the storefront API, enabling full-featured self-service portals.
+**Admin API is only used for:**
+- Related products endpoint (`/admin/products/{id}/variants/{variantId}/references`) - custom endpoint not available in Store API
+- Resources plugin endpoints (Assets, Services) - custom endpoints provided by the Assets & Services plugin
+
+Admin API operations use `MEDUSAJS_ADMIN_API_KEY` for authentication via API keys.
 
 ### Plugin Architecture {#plugin-architecture}
 
