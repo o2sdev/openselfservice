@@ -471,11 +471,26 @@ export const OrderDetailsPure: React.FC<Readonly<OrderDetailsPureProps>> = ({
                                                                         key={column.id}
                                                                         className="whitespace-nowrap"
                                                                     >
-                                                                        {orderItem.subtotal?.value
-                                                                            ? (orderItem.discountTotal?.value || 0) /
-                                                                              orderItem.subtotal?.value
-                                                                            : 0}
-                                                                        %
+                                                                        {orderItem.discountTotal?.value
+                                                                            ? (() => {
+                                                                                  const discountAmount =
+                                                                                      orderItem.discountTotal?.value ||
+                                                                                      0;
+                                                                                  const netValue =
+                                                                                      orderItem.subtotal?.value || 0;
+                                                                                  // Calculate percentage: discount / (net + discount) * 100
+                                                                                  const percentage =
+                                                                                      netValue > 0
+                                                                                          ? Math.round(
+                                                                                                (discountAmount /
+                                                                                                    (netValue +
+                                                                                                        discountAmount)) *
+                                                                                                    100,
+                                                                                            )
+                                                                                          : 0;
+                                                                                  return `${percentage}%`;
+                                                                              })()
+                                                                            : '-'}
                                                                     </TableCell>
                                                                 );
                                                             case 'price':
