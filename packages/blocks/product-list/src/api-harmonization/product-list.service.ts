@@ -34,6 +34,7 @@ export class ProductListService {
                         type: 'PHYSICAL' as Products.Model.ProductType,
                         category: query.category,
                         locale: headers['x-locale'],
+                        basePath: cms.basePath,
                     })
                     .pipe(
                         map((products) => {

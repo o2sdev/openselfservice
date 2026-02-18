@@ -1,4 +1,4 @@
-import { NotFoundException } from '@nestjs/common';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { firstValueFrom, of } from 'rxjs';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
@@ -7,6 +7,7 @@ import { ProductsService } from './products.service';
 
 const BASE_URL = 'https://api.medusa.test';
 const DEFAULT_CURRENCY = 'EUR';
+const TEST_BASE_PATH = '/products';
 
 const mockProductListResponse = {
     products: [
@@ -17,42 +18,41 @@ const mockProductListResponse = {
             thumbnail: null,
             categories: [],
             type: null,
-            variants: [
-                {
-                    id: 'var_1',
-                    sku: 'SKU1',
-                    product_id: 'prod_1',
-                    calculated_price: { calculated_amount: 1999, currency_code: 'eur' },
-                },
-            ],
+            variants: [{ id: 'var_1', sku: 'SKU1', prices: [] }],
         },
     ],
     count: 1,
 };
 
-const mockProductResponse = {
+const mockRetrieveResponse = {
     product: {
         id: 'prod_1',
         title: 'Product 1',
         description: 'Desc',
-        subtitle: 'Sub',
-        thumbnail: null,
-        type: null,
-        categories: [],
-        variants: [
-            {
-                id: 'var_1',
-                sku: 'SKU1',
-                product_id: 'prod_1',
-                calculated_price: { calculated_amount: 1999, currency_code: 'eur' },
-            },
-        ],
+        variants: [{ id: 'var_1', title: 'Default' }],
+    },
+};
+
+const mockVariantResponse = {
+    variant: {
+        id: 'var_1',
+        sku: 'SKU1',
+        product_id: 'prod_1',
+        product: {
+            id: 'prod_1',
+            title: 'Product 1',
+            description: 'Desc',
+            subtitle: 'Sub',
+            thumbnail: null,
+            type: null,
+            categories: [],
+        },
+        prices: [{ currency_code: 'eur', amount: 1999 }],
     },
 };
 
 describe('ProductsService', () => {
     let service: ProductsService;
-    let mockSdk: { store: { product: { list: ReturnType<typeof vi.fn>; retrieve: ReturnType<typeof vi.fn> } } };
     let mockHttpClient: { get: ReturnType<typeof vi.fn> };
     let mockMedusaJsService: {
         getSdk: ReturnType<typeof vi.fn>;
@@ -61,20 +61,32 @@ describe('ProductsService', () => {
     };
     let mockConfig: { get: ReturnType<typeof vi.fn> };
     let mockLogger: { debug: ReturnType<typeof vi.fn> };
+    let mockSdkProductList: ReturnType<typeof vi.fn>;
+    let mockSdkProductRetrieve: ReturnType<typeof vi.fn>;
+    let mockSdkProductRetrieveVariant: ReturnType<typeof vi.fn>;
 
     beforeEach(() => {
         vi.restoreAllMocks();
-        mockSdk = {
-            store: {
-                product: {
-                    list: vi.fn(),
-                    retrieve: vi.fn(),
-                },
-            },
-        };
         mockHttpClient = { get: vi.fn() };
+        mockSdkProductList = vi.fn();
+        mockSdkProductRetrieve = vi.fn();
+        mockSdkProductRetrieveVariant = vi.fn();
         mockMedusaJsService = {
-            getSdk: vi.fn(() => mockSdk),
+            getSdk: vi.fn(() => ({
+                admin: {
+                    product: {
+                        list: mockSdkProductList,
+                        retrieve: mockSdkProductRetrieve,
+                        retrieveVariant: mockSdkProductRetrieveVariant,
+                    },
+                },
+                store: {
+                    product: {
+                        list: vi.fn(),
+                        retrieve: mockSdkProductRetrieve,
+                    },
+                },
+            })),
             getBaseUrl: vi.fn(() => BASE_URL),
             getMedusaAdminApiHeaders: vi.fn(() => ({
                 'x-publishable-api-key': 'pk',
@@ -95,7 +107,7 @@ describe('ProductsService', () => {
     });
 
     describe('constructor', () => {
-        it('should throw when DEFAULT_CURRENCY is not defined', () => {
+        it('should throw BadRequestException when DEFAULT_CURRENCY is not defined', () => {
             vi.mocked(mockConfig.get).mockReturnValue('');
 
             expect(
@@ -106,21 +118,22 @@ describe('ProductsService', () => {
                         mockLogger as unknown as import('@o2s/utils.logger').LoggerService,
                         mockMedusaJsService as unknown as import('@/modules/medusajs').Service,
                     ),
-            ).toThrow('DEFAULT_CURRENCY is not defined');
+            ).toThrow(BadRequestException);
         });
     });
 
     describe('getProductList', () => {
-        it('should call sdk.store.product.list with params and return mapped products', async () => {
-            mockSdk.store.product.list.mockResolvedValue(mockProductListResponse);
+        it('should call sdk.admin.product.list and return mapped products', async () => {
+            mockSdkProductList.mockResolvedValue(mockProductListResponse);
 
-            const result = await firstValueFrom(service.getProductList({ limit: 10, offset: 0 }));
+            const result = await firstValueFrom(
+                service.getProductList({ limit: 10, offset: 0, basePath: TEST_BASE_PATH }),
+            );
 
-            expect(mockSdk.store.product.list).toHaveBeenCalledWith(
+            expect(mockSdkProductList).toHaveBeenCalledWith(
                 expect.objectContaining({
                     limit: 10,
                     offset: 0,
-                    fields: expect.any(String),
                 }),
             );
             expect(result.data).toHaveLength(1);
@@ -130,54 +143,69 @@ describe('ProductsService', () => {
         });
 
         it('should throw NotFoundException when SDK returns 404', async () => {
-            mockSdk.store.product.list.mockRejectedValue({ status: 404 });
+            mockSdkProductList.mockRejectedValue({ status: 404 });
 
-            await expect(firstValueFrom(service.getProductList({ limit: 10, offset: 0 }))).rejects.toThrow(
-                NotFoundException,
-            );
+            await expect(
+                firstValueFrom(service.getProductList({ limit: 10, offset: 0, basePath: TEST_BASE_PATH })),
+            ).rejects.toThrow(NotFoundException);
+        });
+
+        it('should use empty string as default basePath when not provided', async () => {
+            mockSdkProductList.mockResolvedValue(mockProductListResponse);
+
+            const result = await firstValueFrom(service.getProductList({ limit: 10, offset: 0 }));
+
+            // Link includes variant SKU slug: /prod_1/sku1
+            expect(result.data[0]?.link).toBe('/prod_1/sku1');
         });
     });
 
     describe('getProduct', () => {
-        it('should call sdk.store.product.retrieve and return mapped product', async () => {
-            mockSdk.store.product.retrieve.mockResolvedValue(mockProductResponse);
+        it('should call sdk to retrieve product and variant and return mapped product', async () => {
+            mockSdkProductRetrieve.mockResolvedValue(mockRetrieveResponse);
+            mockSdkProductRetrieveVariant.mockResolvedValue(mockVariantResponse);
 
-            const result = await firstValueFrom(service.getProduct({ id: 'prod_1', variantId: 'var_1' }));
-
-            expect(mockSdk.store.product.retrieve).toHaveBeenCalledWith(
-                'prod_1',
-                expect.objectContaining({ fields: expect.any(String) }),
+            const result = await firstValueFrom(
+                service.getProduct({
+                    id: 'prod_1',
+                    variantId: 'var_1',
+                    basePath: TEST_BASE_PATH,
+                }),
             );
+
+            expect(mockSdkProductRetrieve).toHaveBeenCalledWith('prod_1', expect.any(Object));
+            expect(mockSdkProductRetrieveVariant).toHaveBeenCalledWith('prod_1', 'var_1', expect.any(Object));
             expect(result.id).toBe('prod_1');
             expect(result.variantId).toBe('var_1');
-            expect(result.price?.value).toBe(1999);
+            expect(result.price.value).toBe(1999);
         });
 
-        it('should throw when product has no variants', async () => {
-            mockSdk.store.product.retrieve.mockResolvedValue({
-                product: { ...mockProductResponse.product, variants: [] },
-            });
+        it('should throw NotFoundException when product has no variants', async () => {
+            mockSdkProductRetrieve.mockResolvedValue({ product: { id: 'prod_1', variants: [] } });
 
             await expect(
                 firstValueFrom(
                     service.getProduct({
                         id: 'prod_1',
-                    } as import('@o2s/framework/modules').Products.Request.GetProductParams),
+                        basePath: TEST_BASE_PATH,
+                    }),
                 ),
-            ).rejects.toThrow('No variants found for product prod_1');
+            ).rejects.toThrow(NotFoundException);
         });
 
-        it('should throw when variantId does not match any variant', async () => {
-            mockSdk.store.product.retrieve.mockResolvedValue(mockProductResponse);
+        it('should throw NotFoundException when variant not found', async () => {
+            mockSdkProductRetrieve.mockResolvedValue(mockRetrieveResponse);
+            mockSdkProductRetrieveVariant.mockResolvedValue({ variant: null });
 
             await expect(
                 firstValueFrom(
                     service.getProduct({
                         id: 'prod_1',
-                        variantId: 'var_nonexistent',
-                    } as import('@o2s/framework/modules').Products.Request.GetProductParams),
+                        variantId: 'var_1',
+                        basePath: TEST_BASE_PATH,
+                    }),
                 ),
-            ).rejects.toThrow('Variant var_nonexistent not found for product prod_1');
+            ).rejects.toThrow(NotFoundException);
         });
     });
 
@@ -197,6 +225,7 @@ describe('ProductsService', () => {
                     productId: 'p1',
                     productVariantId: 'v1',
                     type: 'COMPATIBLE_SERVICE',
+                    basePath: TEST_BASE_PATH,
                 }),
             );
 

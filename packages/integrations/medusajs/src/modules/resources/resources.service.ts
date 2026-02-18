@@ -27,6 +27,8 @@ import {
 export class ResourcesService extends Resources.Service {
     private readonly sdk: Medusa;
     private readonly defaultCurrency: string;
+    private readonly productsBasePath: string;
+    private readonly variantSpecFields: string[];
 
     constructor(
         protected httpClient: HttpService,
@@ -39,6 +41,15 @@ export class ResourcesService extends Resources.Service {
         super();
         this.sdk = this.medusaJsService.getSdk();
         this.defaultCurrency = this.config.get('DEFAULT_CURRENCY') || 'EUR';
+
+        // Optional configuration for product URLs – no hardcoded fallback
+        this.productsBasePath = this.config.get<string>('PRODUCTS_BASE_PATH') ?? '';
+
+        // Optional configuration for Medusa variant fields used as specs – no hardcoded fallback
+        const fieldsConfig = this.config.get<string>('MEDUSA_VARIANT_SPEC_FIELDS');
+        this.variantSpecFields = fieldsConfig
+            ? fieldsConfig.split(',').map((specField: string) => specField.trim())
+            : [];
     }
 
     purchaseOrActivateResource(_params: Resources.Request.GetResourceParams): Observable<void> {
@@ -221,7 +232,7 @@ export class ResourcesService extends Resources.Service {
             )
             .pipe(
                 map(({ data }) => {
-                    return mapCompatibleServices(data, this.defaultCurrency);
+                    return mapCompatibleServices(data, this.defaultCurrency, this.productsBasePath, undefined);
                 }),
                 catchError((error) => {
                     return handleHttpError(error);
@@ -236,7 +247,7 @@ export class ResourcesService extends Resources.Service {
             })
             .pipe(
                 map(({ data }) => {
-                    return mapFeaturedServices(data, this.defaultCurrency);
+                    return mapFeaturedServices(data, this.defaultCurrency, this.productsBasePath, undefined);
                 }),
                 catchError((error) => {
                     return handleHttpError(error);

@@ -1,3 +1,5 @@
+import type { VariantOptionGroupConfig } from '../cms/models/blocks/product-details.model';
+
 import { ProductReferenceType, ProductType } from './products.model';
 import { PaginationQuery } from '@/utils/models/pagination';
 
@@ -6,12 +8,18 @@ export class GetProductListQuery extends PaginationQuery {
     category?: string;
     locale?: string;
     sort?: string;
+    basePath?: string;
 }
 
 export class GetProductParams {
     id!: string;
     variantId?: string;
     locale?: string;
+    basePath?: string;
+    /**
+     * Configuration of variant option groups used for building option dropdowns.
+     */
+    variantOptionGroups?: VariantOptionGroupConfig[];
 }
 
 export class GetRelatedProductListParams {
@@ -22,4 +30,5 @@ export class GetRelatedProductListParams {
     limit?: number;
     offset?: number;
     sort?: string;
+    basePath?: string;
 }
