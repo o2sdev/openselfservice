@@ -45,8 +45,8 @@
         "packages/modules/*"
     ],
     "devDependencies": {
-        "@commitlint/cli": "^20.4.1",
-        "@commitlint/config-conventional": "^20.4.1",
+        "@commitlint/cli": "^20.4.2",
+        "@commitlint/config-conventional": "^20.4.2",
         "@playwright/test": "^1.58.2",
         "@storybook/addon-a11y": "^10.2.10",
         "@storybook/addon-docs": "^10.2.10",
