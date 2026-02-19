@@ -2,21 +2,6 @@
 
 A block displaying details for a specific order, including items, status, and history.
 
-**Part of [Open Self Service (O2S)](https://www.openselfservice.com/)** - an open-source framework for building composable customer self-service portals. O2S simplifies integration of multiple headless APIs into a scalable frontend, providing an API-agnostic architecture with a normalization layer.
-
-- **Website**: [https://www.openselfservice.com/](https://www.openselfservice.com/)
-- **GitHub**: [https://github.com/o2sdev/openselfservice](https://github.com/o2sdev/openselfservice)
-- **Documentation**: [https://www.openselfservice.com/docs](https://www.openselfservice.com/docs)
-
-## About Blocks in O2S
-
-Blocks are self-contained, reusable UI components that combine harmonizing and frontend components into a single package. Each block is independently packaged as an NPM module and includes three primary parts: API Harmonization Module, Frontend Components, and SDK Methods. Blocks allow you to quickly add or remove functionality without impacting other components of the application.
-
-- **See all blocks**: [Blocks Documentation](https://www.openselfservice.com/docs/main-components/blocks/)
-- **View this block in Storybook**: [order-details](https://storybook-o2s.openselfservice.com/?path=/story/blocks-orderdetails--default)
-
-## About This Block
-
 The order-details block shows a single order with line items, status, and optional actions: reorder, track shipment, pay online. Permissions (view, edit, cancel, track) are enforced via ACL. Ideal for order confirmation pages and "order detail" views in customer portals.
 
 - **Full order view** – Items, totals, status, shipping info
@@ -145,3 +130,19 @@ GET /api/blocks/order-details/:id
 
 - `@o2s/blocks.order-list` - Display list of orders
 - `@o2s/blocks.orders-summary` - Display order summary
+
+
+## About Blocks in O2S
+
+Blocks are self-contained, reusable UI components that combine harmonizing and frontend components into a single package. Each block is independently packaged as an NPM module and includes three primary parts: API Harmonization Module, Frontend Components, and SDK Methods. Blocks allow you to quickly add or remove functionality without impacting other components of the application.
+
+- **See all blocks**: [Blocks Documentation](https://www.openselfservice.com/docs/main-components/blocks/)
+- **View this block in Storybook**: [order-details](https://storybook-o2s.openselfservice.com/?path=/story/blocks-orderdetails--default)
+
+## About O2S
+
+**Part of [Open Self Service (O2S)](https://www.openselfservice.com/)** - an open-source framework for building composable customer self-service portals. O2S simplifies integration of multiple headless APIs into a scalable frontend, providing an API-agnostic architecture with a normalization layer.
+
+- **Website**: [https://www.openselfservice.com/](https://www.openselfservice.com/)
+- **GitHub**: [https://github.com/o2sdev/openselfservice](https://github.com/o2sdev/openselfservice)
+- **Documentation**: [https://www.openselfservice.com/docs](https://www.openselfservice.com/docs)

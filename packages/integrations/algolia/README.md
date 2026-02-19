@@ -2,20 +2,6 @@
 
 Algolia integration for O2S, providing search functionality.
 
-**Part of [Open Self Service (O2S)](https://www.openselfservice.com/)** - an open-source framework for building composable customer self-service portals. O2S simplifies integration of multiple headless APIs into a scalable frontend, providing an API-agnostic architecture with a normalization layer.
-
-- **Website**: [https://www.openselfservice.com/](https://www.openselfservice.com/)
-- **GitHub**: [https://github.com/o2sdev/openselfservice](https://github.com/o2sdev/openselfservice)
-- **Documentation**: [https://www.openselfservice.com/docs](https://www.openselfservice.com/docs)
-
-## About Integrations in O2S
-
-Integrations are adapters that connect O2S to external backend services. They handle API communication and normalize data from various backend services into an API-agnostic format. The frontend app communicates only with the API Harmonization server, never directly with backend services, enabling you to swap integrations without breaking the frontend.
-
-**Documentation**: [Algolia search](https://www.openselfservice.com/docs/integrations/search/algolia/overview)
-
-## About This Integration
-
 The Algolia integration implements the O2S Search module. It provides generic `search` and article-specific `searchArticles` methods with query, facet filters, numeric filters, pagination, and sort (via index suffix). Used by Articles integrations (e.g. Strapi CMS) for full-text article search in knowledge bases and help centers.
 
 - **Generic search** – search(indexName, payload) for any index
@@ -88,3 +74,18 @@ ALGOLIA_INDEX_NAME=your-index-name
 
 - `@o2s/blocks.article-search` - Search articles
 - `@o2s/configs.integrations` - Integration configuration
+
+
+## About Integrations in O2S
+
+Integrations are adapters that connect O2S to external backend services. They handle API communication and normalize data from various backend services into an API-agnostic format. The frontend app communicates only with the API Harmonization server, never directly with backend services, enabling you to swap integrations without breaking the frontend.
+
+**Documentation**: [Algolia search](https://www.openselfservice.com/docs/integrations/search/algolia/overview)
+
+## About O2S
+
+**Part of [Open Self Service (O2S)](https://www.openselfservice.com/)** - an open-source framework for building composable customer self-service portals. O2S simplifies integration of multiple headless APIs into a scalable frontend, providing an API-agnostic architecture with a normalization layer.
+
+- **Website**: [https://www.openselfservice.com/](https://www.openselfservice.com/)
+- **GitHub**: [https://github.com/o2sdev/openselfservice](https://github.com/o2sdev/openselfservice)
+- **Documentation**: [https://www.openselfservice.com/docs](https://www.openselfservice.com/docs)

@@ -2,21 +2,6 @@
 
 Block for searching articles.
 
-**Part of [Open Self Service (O2S)](https://www.openselfservice.com/)** - an open-source framework for building composable customer self-service portals. O2S simplifies integration of multiple headless APIs into a scalable frontend, providing an API-agnostic architecture with a normalization layer.
-
-- **Website**: [https://www.openselfservice.com/](https://www.openselfservice.com/)
-- **GitHub**: [https://github.com/o2sdev/openselfservice](https://github.com/o2sdev/openselfservice)
-- **Documentation**: [https://www.openselfservice.com/docs](https://www.openselfservice.com/docs)
-
-## About Blocks in O2S
-
-Blocks are self-contained, reusable UI components that combine harmonizing and frontend components into a single package. Each block is independently packaged as an NPM module and includes three primary parts: API Harmonization Module, Frontend Components, and SDK Methods. Blocks allow you to quickly add or remove functionality without impacting other components of the application.
-
-- **See all blocks**: [Blocks Documentation](https://www.openselfservice.com/docs/main-components/blocks/)
-- **View this block in Storybook**: [article-search](https://storybook-o2s.openselfservice.com/?path=/story/blocks-articlesearch--default)
-
-## About This Block
-
 The article-search block provides a searchable knowledge base or help center. Users enter a query and see paginated results powered by the Search integration (e.g. Algolia). It is typically used on help center or knowledge base pages alongside category navigation.
 
 - **Full-text search** – Query articles by keyword; integrates with Algolia or similar
@@ -144,3 +129,18 @@ GET /api/blocks/article-search/:id?query=search-term
 
 - `@o2s/blocks.article-list` - Display list of articles
 - `@o2s/blocks.article` - Display single article
+
+## About Blocks in O2S
+
+Blocks are self-contained, reusable UI components that combine harmonizing and frontend components into a single package. Each block is independently packaged as an NPM module and includes three primary parts: API Harmonization Module, Frontend Components, and SDK Methods. Blocks allow you to quickly add or remove functionality without impacting other components of the application.
+
+- **See all blocks**: [Blocks Documentation](https://www.openselfservice.com/docs/main-components/blocks/)
+- **View this block in Storybook**: [article-search](https://storybook-o2s.openselfservice.com/?path=/story/blocks-articlesearch--default)
+
+## About O2S
+
+**Part of [Open Self Service (O2S)](https://www.openselfservice.com/)** - an open-source framework for building composable customer self-service portals. O2S simplifies integration of multiple headless APIs into a scalable frontend, providing an API-agnostic architecture with a normalization layer.
+
+- **Website**: [https://www.openselfservice.com/](https://www.openselfservice.com/)
+- **GitHub**: [https://github.com/o2sdev/openselfservice](https://github.com/o2sdev/openselfservice)
+- **Documentation**: [https://www.openselfservice.com/docs](https://www.openselfservice.com/docs)

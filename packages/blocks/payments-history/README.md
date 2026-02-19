@@ -2,21 +2,6 @@
 
 A block displaying payment history.
 
-**Part of [Open Self Service (O2S)](https://www.openselfservice.com/)** - an open-source framework for building composable customer self-service portals. O2S simplifies integration of multiple headless APIs into a scalable frontend, providing an API-agnostic architecture with a normalization layer.
-
-- **Website**: [https://www.openselfservice.com/](https://www.openselfservice.com/)
-- **GitHub**: [https://github.com/o2sdev/openselfservice](https://github.com/o2sdev/openselfservice)
-- **Documentation**: [https://www.openselfservice.com/docs](https://www.openselfservice.com/docs)
-
-## About Blocks in O2S
-
-Blocks are self-contained, reusable UI components that combine harmonizing and frontend components into a single package. Each block is independently packaged as an NPM module and includes three primary parts: API Harmonization Module, Frontend Components, and SDK Methods. Blocks allow you to quickly add or remove functionality without impacting other components of the application.
-
-- **See all blocks**: [Blocks Documentation](https://www.openselfservice.com/docs/main-components/blocks/)
-- **View this block in Storybook**: [payments-history](https://storybook-o2s.openselfservice.com/?path=/story/blocks-paymentshistory--default)
-
-## About This Block
-
 The payments-history block shows a list of past payments for the authenticated user. Users can view payment details and navigate to pay outstanding invoices when permitted. Permissions (view, pay) are enforced via ACL. Typically used on billing or account history pages.
 
 - **Payment history list** – Past payments with amounts and dates
@@ -142,3 +127,19 @@ GET /api/blocks/payments-history/:id
 
 - `@o2s/blocks.payments-summary` - Display payments summary
 - `@o2s/blocks.invoice-list` - Display invoice list
+
+
+## About Blocks in O2S
+
+Blocks are self-contained, reusable UI components that combine harmonizing and frontend components into a single package. Each block is independently packaged as an NPM module and includes three primary parts: API Harmonization Module, Frontend Components, and SDK Methods. Blocks allow you to quickly add or remove functionality without impacting other components of the application.
+
+- **See all blocks**: [Blocks Documentation](https://www.openselfservice.com/docs/main-components/blocks/)
+- **View this block in Storybook**: [payments-history](https://storybook-o2s.openselfservice.com/?path=/story/blocks-paymentshistory--default)
+
+## About O2S
+
+**Part of [Open Self Service (O2S)](https://www.openselfservice.com/)** - an open-source framework for building composable customer self-service portals. O2S simplifies integration of multiple headless APIs into a scalable frontend, providing an API-agnostic architecture with a normalization layer.
+
+- **Website**: [https://www.openselfservice.com/](https://www.openselfservice.com/)
+- **GitHub**: [https://github.com/o2sdev/openselfservice](https://github.com/o2sdev/openselfservice)
+- **Documentation**: [https://www.openselfservice.com/docs](https://www.openselfservice.com/docs)

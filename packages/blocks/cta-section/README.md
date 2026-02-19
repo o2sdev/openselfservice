@@ -2,21 +2,6 @@
 
 A simple block displaying static content in the form of an CtaSection.
 
-**Part of [Open Self Service (O2S)](https://www.openselfservice.com/)** - an open-source framework for building composable customer self-service portals. O2S simplifies integration of multiple headless APIs into a scalable frontend, providing an API-agnostic architecture with a normalization layer.
-
-- **Website**: [https://www.openselfservice.com/](https://www.openselfservice.com/)
-- **GitHub**: [https://github.com/o2sdev/openselfservice](https://github.com/o2sdev/openselfservice)
-- **Documentation**: [https://www.openselfservice.com/docs](https://www.openselfservice.com/docs)
-
-## About Blocks in O2S
-
-Blocks are self-contained, reusable UI components that combine harmonizing and frontend components into a single package. Each block is independently packaged as an NPM module and includes three primary parts: API Harmonization Module, Frontend Components, and SDK Methods. Blocks allow you to quickly add or remove functionality without impacting other components of the application.
-
-- **See all blocks**: [Blocks Documentation](https://www.openselfservice.com/docs/main-components/blocks/)
-- **View this block in Storybook**: [cta-section](https://storybook-o2s.openselfservice.com/?path=/story/blocks-ctasection--default)
-
-## About This Block
-
 The cta-section block displays a call-to-action with title, description, and one or more buttons/links. Content editors configure the copy and destinations in the CMS. Commonly used for conversion sections, sign-up prompts, and marketing CTAs on landing pages or within articles.
 
 - **CTA content** – Title, description, and buttons/links from CMS
@@ -145,3 +130,19 @@ GET /api/blocks/cta-section/:id
 
 - `@o2s/blocks.hero-section` - Hero section
 - `@o2s/blocks.pricing-section` - Pricing section
+
+
+## About Blocks in O2S
+
+Blocks are self-contained, reusable UI components that combine harmonizing and frontend components into a single package. Each block is independently packaged as an NPM module and includes three primary parts: API Harmonization Module, Frontend Components, and SDK Methods. Blocks allow you to quickly add or remove functionality without impacting other components of the application.
+
+- **See all blocks**: [Blocks Documentation](https://www.openselfservice.com/docs/main-components/blocks/)
+- **View this block in Storybook**: [cta-section](https://storybook-o2s.openselfservice.com/?path=/story/blocks-ctasection--default)
+
+## About O2S
+
+**Part of [Open Self Service (O2S)](https://www.openselfservice.com/)** - an open-source framework for building composable customer self-service portals. O2S simplifies integration of multiple headless APIs into a scalable frontend, providing an API-agnostic architecture with a normalization layer.
+
+- **Website**: [https://www.openselfservice.com/](https://www.openselfservice.com/)
+- **GitHub**: [https://github.com/o2sdev/openselfservice](https://github.com/o2sdev/openselfservice)
+- **Documentation**: [https://www.openselfservice.com/docs](https://www.openselfservice.com/docs)

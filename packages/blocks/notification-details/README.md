@@ -2,21 +2,6 @@
 
 A block displaying and managing notification details.
 
-**Part of [Open Self Service (O2S)](https://www.openselfservice.com/)** - an open-source framework for building composable customer self-service portals. O2S simplifies integration of multiple headless APIs into a scalable frontend, providing an API-agnostic architecture with a normalization layer.
-
-- **Website**: [https://www.openselfservice.com/](https://www.openselfservice.com/)
-- **GitHub**: [https://github.com/o2sdev/openselfservice](https://github.com/o2sdev/openselfservice)
-- **Documentation**: [https://www.openselfservice.com/docs](https://www.openselfservice.com/docs)
-
-## About Blocks in O2S
-
-Blocks are self-contained, reusable UI components that combine harmonizing and frontend components into a single package. Each block is independently packaged as an NPM module and includes three primary parts: API Harmonization Module, Frontend Components, and SDK Methods. Blocks allow you to quickly add or remove functionality without impacting other components of the application.
-
-- **See all blocks**: [Blocks Documentation](https://www.openselfservice.com/docs/main-components/blocks/)
-- **View this block in Storybook**: [notification-details](https://storybook-o2s.openselfservice.com/?path=/story/blocks-notificationdetails--default)
-
-## About This Block
-
 The notification-details block displays a single notification with full content. When the user has permission, it can auto-mark the notification as read on view. Users can also delete the notification when permitted. Permissions (view, mark_read, delete) are enforced via ACL.
 
 - **Full notification view** – Title, body, metadata, date
@@ -144,3 +129,19 @@ GET /api/blocks/notification-details/:id
 
 - `@o2s/blocks.notification-list` - Display list of notifications
 - `@o2s/blocks.notification-summary` - Display notification summary
+
+
+## About Blocks in O2S
+
+Blocks are self-contained, reusable UI components that combine harmonizing and frontend components into a single package. Each block is independently packaged as an NPM module and includes three primary parts: API Harmonization Module, Frontend Components, and SDK Methods. Blocks allow you to quickly add or remove functionality without impacting other components of the application.
+
+- **See all blocks**: [Blocks Documentation](https://www.openselfservice.com/docs/main-components/blocks/)
+- **View this block in Storybook**: [notification-details](https://storybook-o2s.openselfservice.com/?path=/story/blocks-notificationdetails--default)
+
+## About O2S
+
+**Part of [Open Self Service (O2S)](https://www.openselfservice.com/)** - an open-source framework for building composable customer self-service portals. O2S simplifies integration of multiple headless APIs into a scalable frontend, providing an API-agnostic architecture with a normalization layer.
+
+- **Website**: [https://www.openselfservice.com/](https://www.openselfservice.com/)
+- **GitHub**: [https://github.com/o2sdev/openselfservice](https://github.com/o2sdev/openselfservice)
+- **Documentation**: [https://www.openselfservice.com/docs](https://www.openselfservice.com/docs)

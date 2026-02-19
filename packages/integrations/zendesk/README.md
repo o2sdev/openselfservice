@@ -2,22 +2,6 @@
 
 Zendesk integration for O2S, providing ticket management and support functionality.
 
-**Part of [Open Self Service (O2S)](https://www.openselfservice.com/)** - an open-source framework for building composable customer self-service portals. O2S simplifies integration of multiple headless APIs into a scalable frontend, providing an API-agnostic architecture with a normalization layer.
-
-- **Website**: [https://www.openselfservice.com/](https://www.openselfservice.com/)
-- **GitHub**: [https://github.com/o2sdev/openselfservice](https://github.com/o2sdev/openselfservice)
-- **Documentation**: [https://www.openselfservice.com/docs](https://www.openselfservice.com/docs)
-
-## About Integrations in O2S
-
-Integrations are adapters that connect O2S to external backend services. They handle API communication and normalize data from various backend services into an API-agnostic format. The frontend app communicates only with the API Harmonization server, never directly with backend services, enabling you to swap integrations without breaking the frontend.
-
-**Documentation** - For Zendesk integration, see both areas:
-- [Zendesk Tickets](https://www.openselfservice.com/docs/integrations/tickets/zendesk/overview)
-- [Zendesk Articles](https://www.openselfservice.com/docs/integrations/articles/zendesk/overview)
-
-## About This Integration
-
 The Zendesk integration connects O2S to both Zendesk Support (ticketing) and Zendesk Help Center (articles). For tickets: search by requester email, get single ticket, create tickets with attachments, and map custom fields. For articles: get article, list articles, categories, and full-text search via Help Center API. Ticket and article data are scoped to the logged-in user.
 
 - **Tickets** – Search, create, view, attachments; custom field mapping
@@ -118,3 +102,19 @@ ZENDESK_TOPIC_FIELD_ID=67890
 - `@o2s/blocks.ticket-list` - Display list of tickets
 - `@o2s/blocks.ticket-details` - Display ticket details
 - `@o2s/configs.integrations` - Integration configuration
+
+## About Integrations in O2S
+
+Integrations are adapters that connect O2S to external backend services. They handle API communication and normalize data from various backend services into an API-agnostic format. The frontend app communicates only with the API Harmonization server, never directly with backend services, enabling you to swap integrations without breaking the frontend.
+
+**Documentation** - For Zendesk integration, see both areas:
+- [Zendesk Tickets](https://www.openselfservice.com/docs/integrations/tickets/zendesk/overview)
+- [Zendesk Articles](https://www.openselfservice.com/docs/integrations/articles/zendesk/overview)
+
+## About O2S
+
+**Part of [Open Self Service (O2S)](https://www.openselfservice.com/)** - an open-source framework for building composable customer self-service portals. O2S simplifies integration of multiple headless APIs into a scalable frontend, providing an API-agnostic architecture with a normalization layer.
+
+- **Website**: [https://www.openselfservice.com/](https://www.openselfservice.com/)
+- **GitHub**: [https://github.com/o2sdev/openselfservice](https://github.com/o2sdev/openselfservice)
+- **Documentation**: [https://www.openselfservice.com/docs](https://www.openselfservice.com/docs)

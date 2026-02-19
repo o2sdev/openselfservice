@@ -2,20 +2,6 @@
 
 MedusaJS integration for O2S, providing ecommerce functionality including products, orders, and carts.
 
-**Part of [Open Self Service (O2S)](https://www.openselfservice.com/)** - an open-source framework for building composable customer self-service portals. O2S simplifies integration of multiple headless APIs into a scalable frontend, providing an API-agnostic architecture with a normalization layer.
-
-- **Website**: [https://www.openselfservice.com/](https://www.openselfservice.com/)
-- **GitHub**: [https://github.com/o2sdev/openselfservice](https://github.com/o2sdev/openselfservice)
-- **Documentation**: [https://www.openselfservice.com/docs](https://www.openselfservice.com/docs)
-
-## About Integrations in O2S
-
-Integrations are adapters that connect O2S to external backend services. They handle API communication and normalize data from various backend services into an API-agnostic format. The frontend app communicates only with the API Harmonization server, never directly with backend services, enabling you to swap integrations without breaking the frontend.
-
-**Documentation**: [Medusa.js](https://www.openselfservice.com/docs/integrations/commerce/medusa-js/overview)
-
-## About This Integration
-
 The Medusa.js integration connects O2S to Medusa's e-commerce platform via Store API (products, carts, checkout, fulfillment) and Admin API (e.g. related products). It implements Orders, Resources (assets, service instances), Products, Carts, Customers, Payments, and Checkout. Supports SSO JWT for authenticated store requests. Optional Medusa plugin adds assets and service instances for B2B and post-purchase scenarios.
 
 - **Store API** – Products, carts, checkout, fulfillment; SSO JWT
@@ -96,3 +82,18 @@ MEDUSA_API_KEY=your-api-key-here
 - `@o2s/blocks.product-list` - Display products
 - `@o2s/blocks.order-list` - Display orders
 - `@o2s/configs.integrations` - Integration configuration
+
+
+## About Integrations in O2S
+
+Integrations are adapters that connect O2S to external backend services. They handle API communication and normalize data from various backend services into an API-agnostic format. The frontend app communicates only with the API Harmonization server, never directly with backend services, enabling you to swap integrations without breaking the frontend.
+
+**Documentation**: [Medusa.js](https://www.openselfservice.com/docs/integrations/commerce/medusa-js/overview)
+
+## About O2S
+
+**Part of [Open Self Service (O2S)](https://www.openselfservice.com/)** - an open-source framework for building composable customer self-service portals. O2S simplifies integration of multiple headless APIs into a scalable frontend, providing an API-agnostic architecture with a normalization layer.
+
+- **Website**: [https://www.openselfservice.com/](https://www.openselfservice.com/)
+- **GitHub**: [https://github.com/o2sdev/openselfservice](https://github.com/o2sdev/openselfservice)
+- **Documentation**: [https://www.openselfservice.com/docs](https://www.openselfservice.com/docs)

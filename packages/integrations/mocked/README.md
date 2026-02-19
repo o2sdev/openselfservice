@@ -2,20 +2,6 @@
 
 Mocked integration for O2S development and testing, providing in-memory data with Prisma.
 
-**Part of [Open Self Service (O2S)](https://www.openselfservice.com/)** - an open-source framework for building composable customer self-service portals. O2S simplifies integration of multiple headless APIs into a scalable frontend, providing an API-agnostic architecture with a normalization layer.
-
-- **Website**: [https://www.openselfservice.com/](https://www.openselfservice.com/)
-- **GitHub**: [https://github.com/o2sdev/openselfservice](https://github.com/o2sdev/openselfservice)
-- **Documentation**: [https://www.openselfservice.com/docs](https://www.openselfservice.com/docs)
-
-## About Integrations in O2S
-
-Integrations are adapters that connect O2S to external backend services. They handle API communication and normalize data from various backend services into an API-agnostic format. The frontend app communicates only with the API Harmonization server, never directly with backend services, enabling you to swap integrations without breaking the frontend.
-
-**Documentation**: [Mocked integration](https://www.openselfservice.com/docs/integrations/mocked/mocked)
-
-## About This Integration
-
 The mocked integration provides a fully functional backend for local development and testing without any external APIs. It implements all O2S modules (CMS, Tickets, Notifications, Articles, Resources, Users, Organizations, Invoices, Orders, Products, Carts, Customers, Payments, Checkout, Cache, Search, Auth) using Prisma with SQLite or in-memory storage and seeded data.
 
 - **All modules** – CMS, tickets, orders, invoices, products, users, auth, and more
@@ -102,3 +88,18 @@ DIRECT_URL=postgresql://user:password@localhost:5432/o2s_mocked
 
 - `@o2s/configs.integrations` - Integration configuration
 - `@prisma/client` - Prisma ORM client
+
+
+## About Integrations in O2S
+
+Integrations are adapters that connect O2S to external backend services. They handle API communication and normalize data from various backend services into an API-agnostic format. The frontend app communicates only with the API Harmonization server, never directly with backend services, enabling you to swap integrations without breaking the frontend.
+
+**Documentation**: [Mocked integration](https://www.openselfservice.com/docs/integrations/mocked/mocked)
+
+## About O2S
+
+**Part of [Open Self Service (O2S)](https://www.openselfservice.com/)** - an open-source framework for building composable customer self-service portals. O2S simplifies integration of multiple headless APIs into a scalable frontend, providing an API-agnostic architecture with a normalization layer.
+
+- **Website**: [https://www.openselfservice.com/](https://www.openselfservice.com/)
+- **GitHub**: [https://github.com/o2sdev/openselfservice](https://github.com/o2sdev/openselfservice)
+- **Documentation**: [https://www.openselfservice.com/docs](https://www.openselfservice.com/docs)

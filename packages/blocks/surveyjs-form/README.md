@@ -2,21 +2,6 @@
 
 A block displaying a SurveyJS-based form that can be submitted.
 
-**Part of [Open Self Service (O2S)](https://www.openselfservice.com/)** - an open-source framework for building composable customer self-service portals. O2S simplifies integration of multiple headless APIs into a scalable frontend, providing an API-agnostic architecture with a normalization layer.
-
-- **Website**: [https://www.openselfservice.com/](https://www.openselfservice.com/)
-- **GitHub**: [https://github.com/o2sdev/openselfservice](https://github.com/o2sdev/openselfservice)
-- **Documentation**: [https://www.openselfservice.com/docs](https://www.openselfservice.com/docs)
-
-## About Blocks in O2S
-
-Blocks are self-contained, reusable UI components that combine harmonizing and frontend components into a single package. Each block is independently packaged as an NPM module and includes three primary parts: API Harmonization Module, Frontend Components, and SDK Methods. Blocks allow you to quickly add or remove functionality without impacting other components of the application.
-
-- **See all blocks**: [Blocks Documentation](https://www.openselfservice.com/docs/main-components/blocks/)
-- **View this block in Storybook**: [surveyjs-form](https://storybook-o2s.openselfservice.com/?path=/story/blocks-surveyjsform--default)
-
-## About This Block
-
 The surveyjs-form block renders a configurable form using SurveyJS. Content editors reference a form by code (stored in CMS or config); the form definition can come from SurveyJS Designer or API. Ideal for surveys, feedback forms, ticket submission forms, and custom data collection. Submissions are handled by the SurveyJS/Forms integration.
 
 - **SurveyJS forms** – Dynamic forms with validation and complex layouts
@@ -151,3 +136,18 @@ POST /api/blocks/surveyjs-form/:id
 - `@o2s/modules.surveyjs` - SurveyJS module
 - `survey-core` - SurveyJS core library
 - `survey-react-ui` - SurveyJS React UI components
+
+## About Blocks in O2S
+
+Blocks are self-contained, reusable UI components that combine harmonizing and frontend components into a single package. Each block is independently packaged as an NPM module and includes three primary parts: API Harmonization Module, Frontend Components, and SDK Methods. Blocks allow you to quickly add or remove functionality without impacting other components of the application.
+
+- **See all blocks**: [Blocks Documentation](https://www.openselfservice.com/docs/main-components/blocks/)
+- **View this block in Storybook**: [surveyjs-form](https://storybook-o2s.openselfservice.com/?path=/story/blocks-surveyjsform--default)
+
+## About O2S
+
+**Part of [Open Self Service (O2S)](https://www.openselfservice.com/)** - an open-source framework for building composable customer self-service portals. O2S simplifies integration of multiple headless APIs into a scalable frontend, providing an API-agnostic architecture with a normalization layer.
+
+- **Website**: [https://www.openselfservice.com/](https://www.openselfservice.com/)
+- **GitHub**: [https://github.com/o2sdev/openselfservice](https://github.com/o2sdev/openselfservice)
+- **Documentation**: [https://www.openselfservice.com/docs](https://www.openselfservice.com/docs)
