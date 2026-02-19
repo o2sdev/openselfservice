@@ -37,7 +37,7 @@ export class AuthService extends Auth.Service {
         // Decode directly - already verified by guard
         const decodedToken = typeof token === 'string' ? (jwt.decode(token.replace('Bearer ', '')) as Jwt) : token;
 
-        return decodedToken.customer?.id;
+        return decodedToken?.customer?.id;
     }
 
     getRoles(token?: string | Jwt): Auth.Model.Role[] {

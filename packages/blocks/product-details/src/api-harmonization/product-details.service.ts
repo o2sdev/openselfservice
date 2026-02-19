@@ -30,13 +30,16 @@ export class ProductDetailsService {
 
         return cms.pipe(
             switchMap((cmsData) => {
-                const product = this.productsService.getProduct({
-                    id,
-                    variantId: variantSlug,
-                    locale,
-                    basePath: cmsData.basePath,
-                    variantOptionGroups: cmsData.variantOptionGroups,
-                });
+                const product = this.productsService.getProduct(
+                    {
+                        id,
+                        variantId: variantSlug,
+                        locale,
+                        basePath: cmsData.basePath,
+                        variantOptionGroups: cmsData.variantOptionGroups,
+                    },
+                    headers['authorization'],
+                );
 
                 return forkJoin([of(cmsData), product]).pipe(
                     map(([cms, product]) => {

@@ -4,7 +4,7 @@ sidebar_position: 100
 
 # Algolia
 
-This integration provides a full integration with [Algolia](https://www.algolia.com/), the AI-powered search and discovery platform. It enables powerful search capabilities for your application, particularly for knowledge base articles.
+this package provides a full integration with [Algolia](https://www.algolia.com/), the AI-powered search and discovery platform. It enables powerful search capabilities for your application, particularly for knowledge base articles.
 
 ## In this section
 

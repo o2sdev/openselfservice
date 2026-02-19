@@ -1,9 +1,8 @@
 import Medusa from '@medusajs/js-sdk';
 import { HttpTypes, OrderStatus } from '@medusajs/types';
-import { HttpService } from '@nestjs/axios';
-import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
+import { Inject, Injectable, InternalServerErrorException, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Observable, catchError, from } from 'rxjs';
+import { Observable, catchError, from, map } from 'rxjs';
 
 import { LoggerService } from '@o2s/utils.logger';
 
@@ -11,10 +10,17 @@ import { Auth, Orders } from '@o2s/framework/modules';
 
 import { Service as MedusaJsService } from '@/modules/medusajs';
 
-import { handleHttpError } from '../utils/handle-http-error';
+import { handleHttpError } from '../../utils/handle-http-error';
 
 import { mapOrder, mapOrders } from './orders.mapper';
 
+/**
+ * Medusa.js implementation of the Orders service.
+ *
+ * Uses Medusa Store API for order retrieval and listing.
+ * Store API automatically scopes orders to the authenticated customer.
+ * Requires a custom Medusa auth plugin to validate SSO tokens passed via the authorization header.
+ */
 @Injectable()
 export class OrdersService extends Orders.Service {
     private readonly sdk: Medusa;
@@ -26,7 +32,6 @@ export class OrdersService extends Orders.Service {
 
     constructor(
         private readonly config: ConfigService,
-        protected httpClient: HttpService,
         @Inject(LoggerService) protected readonly logger: LoggerService,
         private readonly medusaJsService: MedusaJsService,
         private readonly authService: Auth.Service,
@@ -36,10 +41,16 @@ export class OrdersService extends Orders.Service {
         this.defaultCurrency = this.config.get('DEFAULT_CURRENCY') || '';
 
         if (!this.defaultCurrency) {
-            throw new Error('DEFAULT_CURRENCY is not defined');
+            throw new InternalServerErrorException('DEFAULT_CURRENCY is not defined');
         }
     }
 
+    /**
+     * Retrieves an order by ID using Medusa Store API.
+     * Store API automatically verifies the order belongs to the authenticated customer.
+     *
+     * @requires Medusa auth plugin must be configured to accept SSO tokens.
+     */
     getOrder(
         params: Orders.Request.GetOrderParams,
         authorization: string | undefined,
@@ -54,21 +65,21 @@ export class OrdersService extends Orders.Service {
         };
 
         return from(
-            this.sdk.admin.order
-                .retrieve(params.id, query)
-                .then((order) => {
-                    return mapOrder(order.order, this.defaultCurrency);
-                })
-                .catch((error) => {
-                    throw error;
-                }),
+            this.sdk.store.order.retrieve(params.id, query, this.medusaJsService.getStoreApiHeaders(authorization)),
         ).pipe(
+            map((response: { order: HttpTypes.StoreOrder }) => mapOrder(response.order, this.defaultCurrency)),
             catchError((error) => {
                 return handleHttpError(error);
             }),
         );
     }
 
+    /**
+     * Retrieves a paginated list of orders using Medusa Store API.
+     * Store API automatically filters orders by the authenticated customer (no customer_id filter needed).
+     *
+     * @requires Medusa auth plugin must be configured to accept SSO tokens.
+     */
     getOrderList(
         query: Orders.Request.GetOrderListQuery,
         authorization: string | undefined,
@@ -78,50 +89,23 @@ export class OrdersService extends Orders.Service {
             throw new UnauthorizedException('Unauthorized');
         }
 
-        const customerId = this.authService.getCustomerId(authorization);
-
-        if (!customerId) {
-            this.logger.debug('Customer ID not found in authorization token');
-            throw new UnauthorizedException('Unauthorized');
-        }
-
-        const params: HttpTypes.AdminOrderFilters = {
+        // Store API filters use StoreOrderFilters which supports status, id, limit, offset, and order filters.
+        // Customer scoping is handled automatically by Store API based on the authorization token.
+        // Note: created_at date filtering is not available in Store API (unlike Admin API).
+        const params: HttpTypes.StoreOrderFilters = {
             limit: query.limit,
             offset: query.offset,
             status: query.status ? this.getMedusaStatus(query.status) : undefined,
-            created_at: this.createMedusaDateFilter(query.dateFrom, query.dateTo),
-            customer_id: customerId,
             order: query.sort ? query.sort : undefined,
             fields: this.additionalOrderListFields,
         };
 
-        return from(
-            this.sdk.admin.order
-                .list(params)
-                .then((orders) => {
-                    return mapOrders(orders, this.defaultCurrency);
-                })
-                .catch((error) => {
-                    throw error;
-                }),
-        ).pipe(
+        return from(this.sdk.store.order.list(params, this.medusaJsService.getStoreApiHeaders(authorization))).pipe(
+            map((orders: HttpTypes.StoreOrderListResponse) => mapOrders(orders, this.defaultCurrency)),
             catchError((error) => {
                 return handleHttpError(error);
             }),
         );
-    }
-
-    private createMedusaDateFilter(
-        dateFrom: Date | undefined,
-        dateTo: Date | undefined,
-    ): HttpTypes.AdminOrderFilters['created_at'] {
-        if (!dateFrom || !dateTo) {
-            return {
-                $gte: dateFrom ? new Date(dateFrom).toISOString() : undefined,
-                $lte: dateTo ? new Date(dateTo).toISOString() : undefined,
-            };
-        }
-        return undefined;
     }
 
     private getMedusaStatus(status: string): OrderStatus | undefined {

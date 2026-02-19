@@ -4,116 +4,73 @@ sidebar_position: 100
 
 # Medusa.js
 
-This integration provides a full integration with [Medusa.js](https://medusajs.com/) - the open-source commerce platform for digital commerce. The integration enables order management, product catalog browsing, and resource management (assets and services) for customer self-service scenarios.
+this package provides a full integration with [Medusa.js](https://medusajs.com/) - the open-source commerce platform for digital commerce. The integration enables order management, product catalog browsing, cart and checkout, and resource management (assets and services) for customer self-service scenarios.
 
 ## In this section
 
-- [Features](./features.md) - Overview of features supported by the Medusa.js integration
+- [How to set up](./how-to-setup.md) - Step-by-step guide for setting up the Medusa.js integration
+- [Features](./features.md) - Overview of features and capabilities provided by the integration
+- [Usage](./usage.md) - Examples and API reference for all modules
+- [Cart & Checkout](./cart-checkout.md) - Cart lifecycle and checkout process
 
-## Installation
+## What is Medusa.js?
 
-First, install the Medusa.js integration package:
+Medusa.js is an open-source headless commerce platform that provides:
 
-```shell
-npm install @o2s/integrations.medusajs --workspace=@o2s/configs.integrations
-```
+- Product catalog with variants and pricing
+- Cart and checkout flow
+- Order management
+- Customer and address management
+- Payment provider integrations
+- Regional configuration (currencies, shipping, taxes)
+- Extensible plugin architecture
 
-## Configuration
-
-After installing the package, you need to configure the integration in the `@o2s/configs.integrations` package. This tells the framework to use Medusa.js instead of the default mocked integration.
-
-### Step 1: Update the integration configs
-
-The Medusa.js integration supports multiple modules. You need to update the corresponding config files:
-
-**Update `packages/configs/integrations/src/models/orders.ts`:**
-
-```typescript
-import { Config, Integration } from '@o2s/integrations.medusajs/integration';
-
-import { ApiConfig } from '@o2s/framework/modules';
-
-export const OrdersIntegrationConfig: ApiConfig['integrations']['orders'] = Config.orders!;
-
-export import Service = Integration.Orders.Service;
-export import Request = Integration.Orders.Request;
-export import Model = Integration.Orders.Model;
-```
-
-**Update `packages/configs/integrations/src/models/products.ts`:**
-
-```typescript
-import { Config, Integration } from '@o2s/integrations.medusajs/integration';
-
-import { ApiConfig } from '@o2s/framework/modules';
-
-export const ProductsIntegrationConfig: ApiConfig['integrations']['products'] = Config.products!;
-
-export import Service = Integration.Products.Service;
-export import Request = Integration.Products.Request;
-export import Model = Integration.Products.Model;
-```
-
-**Update `packages/configs/integrations/src/models/resources.ts` (if using Resources module):**
-
-```typescript
-import { Config, Integration } from '@o2s/integrations.medusajs/integration';
-
-import { ApiConfig } from '@o2s/framework/modules';
-
-export const ResourcesIntegrationConfig: ApiConfig['integrations']['resources'] = Config.resources!;
-
-export import Service = Integration.Resources.Service;
-export import Request = Integration.Resources.Request;
-export import Model = Integration.Resources.Model;
-```
-
-### Step 2: Verify AppConfig
-
-The `AppConfig` in `apps/api-harmonization/src/app.config.ts` should already reference the integration configs. You don't need to modify this file - it automatically uses the configuration from `@o2s/configs.integrations`.
-
-## Environment variables
-
-Configure the following environment variables in your API Harmonization server:
-
-| Name                         | Type   | Description                                                      | Required |
-| ---------------------------- | ------ | ---------------------------------------------------------------- | -------- |
-| MEDUSAJS_BASE_URL            | string | The base URL pointing to the domain hosting your Medusa instance | yes      |
-| MEDUSAJS_PUBLISHABLE_API_KEY | string | The publishable API key for storefront operations                | yes      |
-| MEDUSAJS_ADMIN_API_KEY       | string | The admin user's API key for administrative operations           | yes      |
-| DEFAULT_CURRENCY             | string | The default currency code (e.g., `EUR`, `USD`, `PLN`)            | yes      |
-
-You can obtain these values from your Medusa Admin Panel:
-
-1. **Base URL**: The URL where your Medusa server is running (e.g., `http://localhost:9000` for local development)
-2. **Publishable API Key**: Create in Medusa Admin under "Settings" → "Publishable API Keys"
-3. **Admin API Key**: Create in Medusa Admin under "Settings" → "API Keys"
-
-For more details about authentication setup, see the official [Medusa.js SDK documentation](https://docs.medusajs.com/resources/js-sdk).
+This integration connects your Open Self Service application with Medusa, enabling customers to browse products, manage carts, complete checkout, and view orders directly within your application.
 
 ## Supported modules
 
-The integration implements three core modules from the O2S framework:
+The integration implements these modules from the O2S framework:
 
-| Module    | Description                             | Plugin Required |
-| --------- | --------------------------------------- | --------------- |
-| Orders    | Order management and history            | No              |
-| Products  | Product catalog and variants            | No              |
-| Resources | Assets and service instances management | Yes             |
+| Module   | Description                                     | Plugin Required |
+| -------- | ----------------------------------------------- | --------------- |
+| Carts    | Cart creation, line items, addresses, shipping  | No              |
+| Checkout | Multi-step checkout and order placement         | No              |
+| Customers| Address management for authenticated users       | No              |
+| Orders   | Order management and history                     | No              |
+| Payments | Payment session creation and validation         | No              |
+| Products | Product catalog and variants                    | No              |
+| Resources| Assets and service instances management         | Yes             |
 
-## Dependencies
+## Quick start
 
-This integration relies on:
+1. Install the package (see [How to set up](./how-to-setup.md))
+2. Configure the integration in `@o2s/configs.integrations` (Carts, Checkout, Customers, Orders, Payments, Products)
+3. Set up a Medusa.js server instance
+4. Deploy the SSO authentication plugin (required for Store API operations)
+5. Configure environment variables
 
-- **[@medusajs/js-sdk](https://www.npmjs.com/package/@medusajs/js-sdk)** - Official Medusa.js SDK for API communication
-- **[medusa-plugin-assets-services](https://github.com/o2sdev/medusa-plugin-assets-services)** - Custom O2S plugin for Assets and Services management (required for Resources module)
+For detailed instructions, see the [How to set up](./how-to-setup.md) guide.
 
-:::info Custom Plugin Required
-To use the **Resources** module (Assets & Services), you must install our custom Medusa plugin in your Medusa instance. The plugin adds endpoints for managing customer assets, service instances, and product relations.
+## Requirements
 
-See the plugin repository for installation instructions: [medusa-plugin-assets-services](https://github.com/o2sdev/medusa-plugin-assets-services)
+- A Medusa.js server instance (running Store API and Admin API)
+- SSO authentication plugin (custom) - Medusa's default Store API does not validate SSO tokens; you must deploy a custom plugin to validate JWT tokens and map them to customer identities
+- Publishable API key from Medusa Admin (for Store API operations)
+- Admin API key from Medusa Admin (for related products and Resources plugin)
+- `DEFAULT_CURRENCY` environment variable
+
+:::info SSO Authentication Plugin Required
+
+Store API operations (Products, Orders, Carts, Checkout, Customers, Payments) require SSO token authentication. A basic example plugin is available at [openselfservice-resources](https://github.com/o2sdev/openselfservice-resources/tree/main/packages/third-party/medusajs/plugins/mocked-auth) that demonstrates how to validate SSO tokens and map them to Medusa customer identities.
+
 :::
-The integration uses the official Medusa.js SDK for most operations, combined with direct HTTP calls for custom endpoints provided by the Assets & Services plugin. All API calls are authenticated using a combination of publishable API key and admin API key.
+
+## Architecture
+
+The integration uses the official Medusa.js SDK for most operations:
+
+- **Store API** (Products, Orders, Carts, Checkout, Customers, Payments): Uses publishable API key + SSO JWT tokens. Requires a custom Medusa auth plugin.
+- **Admin API** (Related Products, Resources plugin): Uses admin API key for authentication.
 
 ```text
 ┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐
@@ -121,10 +78,14 @@ The integration uses the official Medusa.js SDK for most operations, combined wi
 └─────────────────┘     └──────────────────┘     └─────────────────┘
                              │                         │
                              │ Medusa.js SDK           │ Admin API
-                             │ HTTP Client             │ Store API
+                             │ Store API               │ (Related Products,
+                             │ (Products, Orders,      │  Resources plugin)
+                             │  Carts, Checkout,       │
+                             │  Customers, Payments)   │
+                             │ Requires SSO auth plugin│
                              ▼                         ▼
                       ┌──────────────────┐     ┌─────────────────┐
-                      │ Orders/Products  │     │ Assets/Services │
-                      │    (native)      │     │   (plugin)      │
+                      │ Carts/Checkout/   │     │ Assets/Services │
+                      │ Orders/Products   │     │   (plugin)      │
                       └──────────────────┘     └─────────────────┘
 ```

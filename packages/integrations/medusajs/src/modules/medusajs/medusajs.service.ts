@@ -1,7 +1,37 @@
 import Medusa from '@medusajs/js-sdk';
-import { Global, Injectable } from '@nestjs/common';
+import { Global, Injectable, InternalServerErrorException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
+/**
+ * Central service providing Medusa.js SDK access and common utilities.
+ *
+ * ## Authentication Architecture
+ *
+ * This integration uses two authentication strategies:
+ *
+ * 1. **Store API with SSO tokens** - For customer-facing operations (orders, carts, checkout,
+ *    customers, payments, products). The authorization token (SSO JWT from Auth0/Keycloak/NextAuth)
+ *    is passed directly to the Medusa Store API. A custom **Medusa auth plugin** must be deployed
+ *    to validate these SSO tokens and map them to Medusa customer identities.
+ *
+ * 2. **Admin API with API key** - For operations without Store API equivalents (related products,
+ *    custom resource endpoints). Uses `MEDUSAJS_ADMIN_API_KEY` for authentication.
+ *
+ * ## Required Environment Variables
+ *
+ * - `MEDUSAJS_BASE_URL` - Base URL of the Medusa server
+ * - `MEDUSAJS_PUBLISHABLE_API_KEY` - Publishable API key for Store API
+ * - `MEDUSAJS_ADMIN_API_KEY` - Admin API key (used only for Admin API operations)
+ *
+ * ## Integration Testing
+ *
+ * Integration tests should verify:
+ * - SSO token acceptance once the Medusa auth plugin is deployed
+ * - Store API operations return customer-scoped data
+ * - Admin API operations work for custom endpoints (related products, resources)
+ *
+ * @see {@link https://docs.medusajs.com/resources/js-sdk Medusa JS SDK}
+ */
 @Global()
 @Injectable()
 export class MedusaJsService {
@@ -26,13 +56,13 @@ export class MedusaJsService {
         this._medusaAdminApiKey = this.config.get('MEDUSAJS_ADMIN_API_KEY') || '';
 
         if (!this._medusaBaseUrl) {
-            throw new Error('MEDUSAJS_BASE_URL is not defined');
+            throw new InternalServerErrorException('MEDUSAJS_BASE_URL is not defined');
         }
         if (!this._medusaPublishableApiKey) {
-            throw new Error('MEDUSAJS_PUBLISHABLE_API_KEY is not defined');
+            throw new InternalServerErrorException('MEDUSAJS_PUBLISHABLE_API_KEY is not defined');
         }
         if (!this._medusaAdminApiKey) {
-            throw new Error('MEDUSAJS_ADMIN_API_KEY is not defined');
+            throw new InternalServerErrorException('MEDUSAJS_ADMIN_API_KEY is not defined');
         }
 
         this._sdk = new Medusa({
@@ -40,6 +70,9 @@ export class MedusaJsService {
             debug: this.logLevel === 'debug',
             publishableKey: this._medusaPublishableApiKey,
             apiKey: this._medusaAdminApiKey,
+            auth: {
+                type: 'jwt',
+            },
         });
         this._medusaAdminApiKeyEncoded = Buffer.from(this._medusaAdminApiKey).toString('base64');
     }
@@ -69,10 +102,33 @@ export class MedusaJsService {
         return this._medusaAdminApiKeyEncoded!;
     }
 
-    getMedusaAdminApiHeaders() {
+    /**
+     * Returns headers for Admin API calls.
+     * Used only for operations without Store API equivalents (e.g., custom endpoints, related products).
+     */
+    getMedusaAdminApiHeaders(): Record<string, string> {
         return {
             'x-publishable-api-key': this.getPublishableKey(),
             Authorization: `Basic ${this.getAdminKeyEncoded()}`,
         };
+    }
+
+    /**
+     * Returns headers for authenticated Store API calls.
+     *
+     * The authorization token (SSO JWT) is passed as-is to the Medusa Store API.
+     * A custom Medusa auth plugin must be configured to validate external SSO tokens
+     * and map them to Medusa customer identities.
+     *
+     * @param authorization - Authorization header value from the API Harmonization layer (SSO JWT)
+     */
+    getStoreApiHeaders(authorization?: string): Record<string, string> {
+        const headers: Record<string, string> = {
+            'x-publishable-api-key': this.getPublishableKey(),
+        };
+        if (authorization) {
+            headers['Authorization'] = authorization;
+        }
+        return headers;
     }
 }

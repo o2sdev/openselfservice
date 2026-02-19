@@ -12,25 +12,35 @@ import { Products } from '@o2s/framework/modules';
 
 import { Service as MedusaJsService } from '@/modules/medusajs';
 
-import { handleHttpError } from '../utils/handle-http-error';
+import { handleHttpError } from '../../utils/handle-http-error';
 
 import { mapProduct, mapProducts, mapRelatedProducts } from './products.mapper';
 import { RelatedProductsResponse } from './response.types';
 
+/**
+ * Medusa.js implementation of the Products service.
+ *
+ * Uses Medusa Store API for product operations (list, retrieve, variant details).
+ * Store API automatically filters to published products and supports customer-facing features.
+ * Requires a custom Medusa auth plugin to validate SSO tokens passed via the authorization header.
+ *
+ * Note: getRelatedProductList() uses Admin API as it requires a custom endpoint not available in Store API.
+ */
 @Injectable()
 export class ProductsService extends Products.Service {
     private readonly sdk: Medusa;
     private readonly defaultCurrency: string;
 
+    // Store API fields for listing products with variants (includes inventory_quantity)
     // Note: handle is included by default in Medusa product response
     private readonly productListFields =
         '*variants,*variants.prices,*variants.options,*categories,*tags,*images,+variants.inventory_quantity,+variants.manage_inventory,+variants.allow_backorder';
     // Store API fields for retrieving product with variants (includes inventory_quantity)
     private readonly storeRetrieveFields =
         '*variants,*variants.options,*variants.options.option,+variants.inventory_quantity,+variants.manage_inventory,+variants.allow_backorder';
-    // Admin API fields for retrieving single variant details (weight, height, etc.)
+    // Store API fields for retrieving product with variant details (weight, height, etc.)
     private readonly productDetailFields =
-        '+weight,+height,+width,+length,+material,+origin_country,+hs_code,+mid_code,+metadata,+product.metadata,+product.handle,product.*,*product.images,*product.tags,*options,*options.option';
+        '*variants,+variants.weight,+variants.height,+variants.width,+variants.length,+variants.material,+variants.origin_country,+variants.hs_code,+variants.mid_code,+variants.metadata,+variants.prices,*variants.options,*variants.options.option,+metadata,+handle,+,+images,+tags';
 
     constructor(
         private readonly config: ConfigService,
@@ -47,18 +57,22 @@ export class ProductsService extends Products.Service {
         }
     }
 
-    getProductList(query: Products.Request.GetProductListQuery): Observable<Products.Model.Products> {
-        const params: HttpTypes.AdminProductListParams = {
+    getProductList(
+        query: Products.Request.GetProductListQuery,
+        authorization?: string,
+    ): Observable<Products.Model.Products> {
+        const params: HttpTypes.StoreProductListParams = {
             limit: query.limit,
             offset: query.offset,
-            status: ['published'],
             fields: this.productListFields,
         };
 
+        const headers = this.medusaJsService.getStoreApiHeaders(authorization);
+
         return from(
-            this.sdk.admin.product
-                .list(params)
-                .then((response) => {
+            this.sdk.store.product
+                .list(params, headers)
+                .then((response: HttpTypes.StoreProductListResponse) => {
                     return mapProducts(response, this.defaultCurrency, query.basePath || '', query.category);
                 })
                 .catch((error) => {
@@ -71,16 +85,28 @@ export class ProductsService extends Products.Service {
         );
     }
 
-    getProduct(params: Products.Request.GetProductParams): Observable<Products.Model.Product> {
+    getProduct(params: Products.Request.GetProductParams, authorization?: string): Observable<Products.Model.Product> {
         // Check if id is a product ID (starts with prod_) or a handle
         const isProductId = params.id.startsWith('prod_');
 
         if (isProductId) {
-            return this.getProductById(params.id, params.variantId, params.basePath, params.variantOptionGroups);
+            return this.getProductById(
+                params.id,
+                params.variantId,
+                params.basePath,
+                params.variantOptionGroups,
+                authorization,
+            );
         }
 
         // Treat as handle - search for product by handle
-        return this.getProductByHandle(params.id, params.variantId, params.basePath, params.variantOptionGroups);
+        return this.getProductByHandle(
+            params.id,
+            params.variantId,
+            params.basePath,
+            params.variantOptionGroups,
+            authorization,
+        );
     }
 
     private getProductById(
@@ -88,13 +114,15 @@ export class ProductsService extends Products.Service {
         variantId?: string,
         basePath?: string,
         variantOptionGroups?: { medusaTitle: string; label: string }[],
+        authorization?: string,
     ): Observable<Products.Model.Product> {
+        const headers = this.medusaJsService.getStoreApiHeaders(authorization);
         return from(
-            this.sdk.store.product.retrieve(productId, { fields: this.storeRetrieveFields }).catch((error) => {
+            this.sdk.store.product.retrieve(productId, { fields: this.storeRetrieveFields }, headers).catch((error) => {
                 throw error;
             }),
         ).pipe(
-            switchMap((response) => {
+            switchMap((response: HttpTypes.StoreProductResponse) => {
                 const product = response.product;
                 if (!product?.variants?.length) {
                     throw new NotFoundException(`No variants found for product ${productId}`);
@@ -103,9 +131,10 @@ export class ProductsService extends Products.Service {
                 return this.getVariant(
                     productId,
                     targetVariantId,
-                    product.variants as HttpTypes.AdminProductVariant[],
+                    product.variants,
                     basePath,
                     variantOptionGroups,
+                    authorization,
                 );
             }),
             catchError((error) => {
@@ -119,13 +148,17 @@ export class ProductsService extends Products.Service {
         variantSlug?: string,
         basePath?: string,
         variantOptionGroups?: { medusaTitle: string; label: string }[],
+        authorization?: string,
     ): Observable<Products.Model.Product> {
+        const headers = this.medusaJsService.getStoreApiHeaders(authorization);
         return from(
-            this.sdk.store.product.list({ handle, limit: 1, fields: this.storeRetrieveFields }).catch((error) => {
-                throw error;
-            }),
+            this.sdk.store.product
+                .list({ handle, limit: 1, fields: this.storeRetrieveFields }, headers)
+                .catch((error) => {
+                    throw error;
+                }),
         ).pipe(
-            switchMap((response) => {
+            switchMap((response: HttpTypes.StoreProductListResponse) => {
                 const product = response.products[0];
                 if (!product) {
                     throw new NotFoundException(`Product with handle "${handle}" not found`);
@@ -134,19 +167,18 @@ export class ProductsService extends Products.Service {
                     throw new NotFoundException(`No variants found for product with handle "${handle}"`);
                 }
 
-                const allVariants = product.variants as HttpTypes.AdminProductVariant[];
+                const allVariants = product.variants;
 
                 // Find variant by SKU slug
                 let variant = allVariants[0]!;
                 if (variantSlug) {
                     const matchingVariant = allVariants.find(
-                        (v: HttpTypes.AdminProductVariant) =>
-                            v.sku && slugify(v.sku, { lower: true, strict: true }) === variantSlug,
+                        (v) => v.sku && slugify(v.sku, { lower: true, strict: true }) === variantSlug,
                     );
                     if (matchingVariant) {
                         variant = matchingVariant;
                     } else {
-                        const availableSlugs = allVariants.map((v: HttpTypes.AdminProductVariant) =>
+                        const availableSlugs = allVariants.map((v) =>
                             v.sku ? slugify(v.sku, { lower: true, strict: true }) : v.id,
                         );
                         this.logger.warn(
@@ -155,7 +187,14 @@ export class ProductsService extends Products.Service {
                     }
                 }
 
-                return this.getVariant(product.id, variant.id, allVariants, basePath, variantOptionGroups);
+                return this.getVariant(
+                    product.id,
+                    variant.id,
+                    allVariants,
+                    basePath,
+                    variantOptionGroups,
+                    authorization,
+                );
             }),
             catchError((error) => {
                 return handleHttpError(error);
@@ -166,25 +205,38 @@ export class ProductsService extends Products.Service {
     private getVariant(
         productId: string,
         variantId: string,
-        allVariants?: HttpTypes.AdminProductVariant[],
+        allVariants?: HttpTypes.StoreProductVariant[],
         basePath?: string,
         variantOptionGroups?: { medusaTitle: string; label: string }[],
+        authorization?: string,
     ): Observable<Products.Model.Product> {
+        const headers = this.medusaJsService.getStoreApiHeaders(authorization);
         return from(
-            this.sdk.admin.product
-                .retrieveVariant(productId, variantId, { fields: this.productDetailFields })
-                .catch((error) => {
-                    throw error;
-                }),
+            this.sdk.store.product.retrieve(productId, { fields: this.productDetailFields }, headers).catch((error) => {
+                throw error;
+            }),
         ).pipe(
-            map((response) => {
-                if (!response.variant) {
+            map((response: HttpTypes.StoreProductResponse) => {
+                const product = response.product;
+                if (!product?.variants?.length) {
+                    throw new NotFoundException(`No variants found for product ${productId}`);
+                }
+                // Find the specific variant from the product's variants array
+                const variant = product.variants.find((v) => v.id === variantId);
+                if (!variant) {
                     throw new NotFoundException(`Variant ${variantId} not found for product ${productId}`);
                 }
+                // Merge variant with product data to match expected structure
+                const variantWithProduct = {
+                    ...variant,
+                    product: product,
+                } as HttpTypes.StoreProductVariant & { product: HttpTypes.StoreProduct };
+                // Use allVariants if provided, otherwise use product.variants
+                const variantsToUse = allVariants || product.variants;
                 return mapProduct(
-                    response.variant,
+                    variantWithProduct,
                     this.defaultCurrency,
-                    allVariants,
+                    variantsToUse,
                     basePath || '',
                     variantOptionGroups,
                 );
@@ -195,6 +247,10 @@ export class ProductsService extends Products.Service {
         );
     }
 
+    /**
+     * Retrieves related products for a given product variant.
+     * Uses Admin API as this endpoint is not available in Store API.
+     */
     getRelatedProductList(params: Products.Request.GetRelatedProductListParams): Observable<Products.Model.Products> {
         return this.httpClient
             .get<RelatedProductsResponse>(
