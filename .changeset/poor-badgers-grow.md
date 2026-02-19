@@ -1,7 +1,7 @@
 ---
 '@o2s/integrations.zendesk': minor
-'@o2s/integrations.mocked': minor
-'@o2s/frontend': minor
+'@o2s/integrations.mocked': patch
+'@o2s/frontend': patch
 '@o2s/ui': minor
 ---
 
