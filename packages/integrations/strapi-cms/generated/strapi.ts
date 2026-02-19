@@ -5481,8 +5481,8 @@ export type AppConfigResolvers<
 
 export type AppConfigRelationResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['AppConfigRelationResponseCollection'] = ResolversParentTypes['AppConfigRelationResponseCollection'],
+    ParentType extends ResolversParentTypes['AppConfigRelationResponseCollection'] =
+        ResolversParentTypes['AppConfigRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['AppConfig']>, ParentType, ContextType>;
 };
@@ -5518,8 +5518,8 @@ export type ArticleResolvers<
 
 export type ArticleEntityResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ArticleEntityResponseCollection'] = ResolversParentTypes['ArticleEntityResponseCollection'],
+    ParentType extends ResolversParentTypes['ArticleEntityResponseCollection'] =
+        ResolversParentTypes['ArticleEntityResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['Article']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
@@ -5527,8 +5527,8 @@ export type ArticleEntityResponseCollectionResolvers<
 
 export type ArticleRelationResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ArticleRelationResponseCollection'] = ResolversParentTypes['ArticleRelationResponseCollection'],
+    ParentType extends ResolversParentTypes['ArticleRelationResponseCollection'] =
+        ResolversParentTypes['ArticleRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['Article']>, ParentType, ContextType>;
 };
@@ -5573,8 +5573,8 @@ export type AuthorResolvers<
 
 export type AuthorEntityResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['AuthorEntityResponseCollection'] = ResolversParentTypes['AuthorEntityResponseCollection'],
+    ParentType extends ResolversParentTypes['AuthorEntityResponseCollection'] =
+        ResolversParentTypes['AuthorEntityResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['Author']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
@@ -5582,8 +5582,8 @@ export type AuthorEntityResponseCollectionResolvers<
 
 export type AuthorRelationResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['AuthorRelationResponseCollection'] = ResolversParentTypes['AuthorRelationResponseCollection'],
+    ParentType extends ResolversParentTypes['AuthorRelationResponseCollection'] =
+        ResolversParentTypes['AuthorRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['Author']>, ParentType, ContextType>;
 };
@@ -5631,8 +5631,8 @@ export type CategoryResolvers<
 
 export type CategoryEntityResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['CategoryEntityResponseCollection'] = ResolversParentTypes['CategoryEntityResponseCollection'],
+    ParentType extends ResolversParentTypes['CategoryEntityResponseCollection'] =
+        ResolversParentTypes['CategoryEntityResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['Category']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
@@ -5640,8 +5640,8 @@ export type CategoryEntityResponseCollectionResolvers<
 
 export type CategoryRelationResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['CategoryRelationResponseCollection'] = ResolversParentTypes['CategoryRelationResponseCollection'],
+    ParentType extends ResolversParentTypes['CategoryRelationResponseCollection'] =
+        ResolversParentTypes['CategoryRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['Category']>, ParentType, ContextType>;
 };
@@ -5674,8 +5674,8 @@ export type ComponentResolvers<
 
 export type ComponentComponentsArticleResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentComponentsArticle'] = ResolversParentTypes['ComponentComponentsArticle'],
+    ParentType extends ResolversParentTypes['ComponentComponentsArticle'] =
+        ResolversParentTypes['ComponentComponentsArticle'],
 > = {
     author?: Resolver<Maybe<ResolversTypes['Author']>, ParentType, ContextType>;
     category?: Resolver<Maybe<ResolversTypes['Category']>, ParentType, ContextType>;
@@ -5692,8 +5692,8 @@ export type ComponentComponentsArticleResolvers<
 
 export type ComponentComponentsArticleListResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentComponentsArticleList'] = ResolversParentTypes['ComponentComponentsArticleList'],
+    ParentType extends ResolversParentTypes['ComponentComponentsArticleList'] =
+        ResolversParentTypes['ComponentComponentsArticleList'],
 > = {
     articles_to_show?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
     category?: Resolver<Maybe<ResolversTypes['Category']>, ParentType, ContextType>;
@@ -5718,8 +5718,8 @@ export type ComponentComponentsArticleListResolvers<
 
 export type ComponentComponentsArticleSearchResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentComponentsArticleSearch'] = ResolversParentTypes['ComponentComponentsArticleSearch'],
+    ParentType extends ResolversParentTypes['ComponentComponentsArticleSearch'] =
+        ResolversParentTypes['ComponentComponentsArticleSearch'],
 > = {
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     inputLabel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -5730,8 +5730,8 @@ export type ComponentComponentsArticleSearchResolvers<
 
 export type ComponentComponentsCategoryResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentComponentsCategory'] = ResolversParentTypes['ComponentComponentsCategory'],
+    ParentType extends ResolversParentTypes['ComponentComponentsCategory'] =
+        ResolversParentTypes['ComponentComponentsCategory'],
 > = {
     category?: Resolver<Maybe<ResolversTypes['Category']>, ParentType, ContextType>;
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -5741,8 +5741,8 @@ export type ComponentComponentsCategoryResolvers<
 
 export type ComponentComponentsCategoryListResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentComponentsCategoryList'] = ResolversParentTypes['ComponentComponentsCategoryList'],
+    ParentType extends ResolversParentTypes['ComponentComponentsCategoryList'] =
+        ResolversParentTypes['ComponentComponentsCategoryList'],
 > = {
     categories?: Resolver<
         Array<Maybe<ResolversTypes['Category']>>,
@@ -5782,8 +5782,8 @@ export type ComponentComponentsFaqResolvers<
 
 export type ComponentComponentsFeaturedServiceListResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentComponentsFeaturedServiceList'] = ResolversParentTypes['ComponentComponentsFeaturedServiceList'],
+    ParentType extends ResolversParentTypes['ComponentComponentsFeaturedServiceList'] =
+        ResolversParentTypes['ComponentComponentsFeaturedServiceList'],
 > = {
     detailsLabel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     detailsURL?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -5796,8 +5796,8 @@ export type ComponentComponentsFeaturedServiceListResolvers<
 
 export type ComponentComponentsInvoiceListResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentComponentsInvoiceList'] = ResolversParentTypes['ComponentComponentsInvoiceList'],
+    ParentType extends ResolversParentTypes['ComponentComponentsInvoiceList'] =
+        ResolversParentTypes['ComponentComponentsInvoiceList'],
 > = {
     downloadButtonAriaDescription?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     downloadFileName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -5819,8 +5819,8 @@ export type ComponentComponentsInvoiceListResolvers<
 
 export type ComponentComponentsNotificationDetailsResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentComponentsNotificationDetails'] = ResolversParentTypes['ComponentComponentsNotificationDetails'],
+    ParentType extends ResolversParentTypes['ComponentComponentsNotificationDetails'] =
+        ResolversParentTypes['ComponentComponentsNotificationDetails'],
 > = {
     fields?: Resolver<
         Maybe<Array<Maybe<ResolversTypes['ComponentContentFieldMapping']>>>,
@@ -5840,8 +5840,8 @@ export type ComponentComponentsNotificationDetailsResolvers<
 
 export type ComponentComponentsNotificationListResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentComponentsNotificationList'] = ResolversParentTypes['ComponentComponentsNotificationList'],
+    ParentType extends ResolversParentTypes['ComponentComponentsNotificationList'] =
+        ResolversParentTypes['ComponentComponentsNotificationList'],
 > = {
     detailsURL?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     fields?: Resolver<
@@ -5862,8 +5862,8 @@ export type ComponentComponentsNotificationListResolvers<
 
 export type ComponentComponentsOrderDetailsResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentComponentsOrderDetails'] = ResolversParentTypes['ComponentComponentsOrderDetails'],
+    ParentType extends ResolversParentTypes['ComponentComponentsOrderDetails'] =
+        ResolversParentTypes['ComponentComponentsOrderDetails'],
 > = {
     createdOrderAt?: Resolver<ResolversTypes['ComponentContentInformationCard'], ParentType, ContextType>;
     customerComment?: Resolver<ResolversTypes['ComponentContentInformationCard'], ParentType, ContextType>;
@@ -5898,8 +5898,8 @@ export type ComponentComponentsOrderDetailsResolvers<
 
 export type ComponentComponentsOrderListResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentComponentsOrderList'] = ResolversParentTypes['ComponentComponentsOrderList'],
+    ParentType extends ResolversParentTypes['ComponentComponentsOrderList'] =
+        ResolversParentTypes['ComponentComponentsOrderList'],
 > = {
     detailsURL?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     fields?: Resolver<
@@ -5921,8 +5921,8 @@ export type ComponentComponentsOrderListResolvers<
 
 export type ComponentComponentsOrdersSummaryResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentComponentsOrdersSummary'] = ResolversParentTypes['ComponentComponentsOrdersSummary'],
+    ParentType extends ResolversParentTypes['ComponentComponentsOrdersSummary'] =
+        ResolversParentTypes['ComponentComponentsOrdersSummary'],
 > = {
     averageNumber?: Resolver<ResolversTypes['ComponentContentInformationCard'], ParentType, ContextType>;
     averageNumberTitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -5948,8 +5948,8 @@ export type ComponentComponentsOrdersSummaryResolvers<
 
 export type ComponentComponentsPaymentsHistoryResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentComponentsPaymentsHistory'] = ResolversParentTypes['ComponentComponentsPaymentsHistory'],
+    ParentType extends ResolversParentTypes['ComponentComponentsPaymentsHistory'] =
+        ResolversParentTypes['ComponentComponentsPaymentsHistory'],
 > = {
     bottomSegment?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -5963,8 +5963,8 @@ export type ComponentComponentsPaymentsHistoryResolvers<
 
 export type ComponentComponentsPaymentsSummaryResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentComponentsPaymentsSummary'] = ResolversParentTypes['ComponentComponentsPaymentsSummary'],
+    ParentType extends ResolversParentTypes['ComponentComponentsPaymentsSummary'] =
+        ResolversParentTypes['ComponentComponentsPaymentsSummary'],
 > = {
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     overdue?: Resolver<ResolversTypes['ComponentContentInformationCard'], ParentType, ContextType>;
@@ -5974,8 +5974,8 @@ export type ComponentComponentsPaymentsSummaryResolvers<
 
 export type ComponentComponentsQuickLinksResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentComponentsQuickLinks'] = ResolversParentTypes['ComponentComponentsQuickLinks'],
+    ParentType extends ResolversParentTypes['ComponentComponentsQuickLinks'] =
+        ResolversParentTypes['ComponentComponentsQuickLinks'],
 > = {
     description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -5991,8 +5991,8 @@ export type ComponentComponentsQuickLinksResolvers<
 
 export type ComponentComponentsServiceDetailsResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentComponentsServiceDetails'] = ResolversParentTypes['ComponentComponentsServiceDetails'],
+    ParentType extends ResolversParentTypes['ComponentComponentsServiceDetails'] =
+        ResolversParentTypes['ComponentComponentsServiceDetails'],
 > = {
     fields?: Resolver<
         Array<Maybe<ResolversTypes['ComponentContentFieldMapping']>>,
@@ -6013,8 +6013,8 @@ export type ComponentComponentsServiceDetailsResolvers<
 
 export type ComponentComponentsServiceListResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentComponentsServiceList'] = ResolversParentTypes['ComponentComponentsServiceList'],
+    ParentType extends ResolversParentTypes['ComponentComponentsServiceList'] =
+        ResolversParentTypes['ComponentComponentsServiceList'],
 > = {
     detailsLabel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     detailsURL?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -6035,8 +6035,8 @@ export type ComponentComponentsServiceListResolvers<
 
 export type ComponentComponentsSurveyJsComponentResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentComponentsSurveyJsComponent'] = ResolversParentTypes['ComponentComponentsSurveyJsComponent'],
+    ParentType extends ResolversParentTypes['ComponentComponentsSurveyJsComponent'] =
+        ResolversParentTypes['ComponentComponentsSurveyJsComponent'],
 > = {
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     survey_js_form?: Resolver<Maybe<ResolversTypes['SurveyJsForm']>, ParentType, ContextType>;
@@ -6046,8 +6046,8 @@ export type ComponentComponentsSurveyJsComponentResolvers<
 
 export type ComponentComponentsTicketDetailsResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentComponentsTicketDetails'] = ResolversParentTypes['ComponentComponentsTicketDetails'],
+    ParentType extends ResolversParentTypes['ComponentComponentsTicketDetails'] =
+        ResolversParentTypes['ComponentComponentsTicketDetails'],
 > = {
     attachmentsTitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     commentsTitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -6070,8 +6070,8 @@ export type ComponentComponentsTicketDetailsResolvers<
 
 export type ComponentComponentsTicketListResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentComponentsTicketList'] = ResolversParentTypes['ComponentComponentsTicketList'],
+    ParentType extends ResolversParentTypes['ComponentComponentsTicketList'] =
+        ResolversParentTypes['ComponentComponentsTicketList'],
 > = {
     detailsURL?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     fields?: Resolver<
@@ -6098,8 +6098,8 @@ export type ComponentComponentsTicketListResolvers<
 
 export type ComponentComponentsTicketRecentResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentComponentsTicketRecent'] = ResolversParentTypes['ComponentComponentsTicketRecent'],
+    ParentType extends ResolversParentTypes['ComponentComponentsTicketRecent'] =
+        ResolversParentTypes['ComponentComponentsTicketRecent'],
 > = {
     commentsTitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     detailsUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -6111,8 +6111,8 @@ export type ComponentComponentsTicketRecentResolvers<
 
 export type ComponentComponentsUserAccountResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentComponentsUserAccount'] = ResolversParentTypes['ComponentComponentsUserAccount'],
+    ParentType extends ResolversParentTypes['ComponentComponentsUserAccount'] =
+        ResolversParentTypes['ComponentComponentsUserAccount'],
 > = {
     basicInformationDescription?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     basicInformationTitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -6129,8 +6129,8 @@ export type ComponentComponentsUserAccountResolvers<
 
 export type ComponentContentAlertBoxResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentContentAlertBox'] = ResolversParentTypes['ComponentContentAlertBox'],
+    ParentType extends ResolversParentTypes['ComponentContentAlertBox'] =
+        ResolversParentTypes['ComponentContentAlertBox'],
 > = {
     description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -6140,8 +6140,8 @@ export type ComponentContentAlertBoxResolvers<
 
 export type ComponentContentArticleSectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentContentArticleSection'] = ResolversParentTypes['ComponentContentArticleSection'],
+    ParentType extends ResolversParentTypes['ComponentContentArticleSection'] =
+        ResolversParentTypes['ComponentContentArticleSection'],
 > = {
     content?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -6163,8 +6163,8 @@ export type ComponentContentBannerResolvers<
 
 export type ComponentContentChartDateRangeResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentContentChartDateRange'] = ResolversParentTypes['ComponentContentChartDateRange'],
+    ParentType extends ResolversParentTypes['ComponentContentChartDateRange'] =
+        ResolversParentTypes['ComponentContentChartDateRange'],
 > = {
     default?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -6176,8 +6176,8 @@ export type ComponentContentChartDateRangeResolvers<
 
 export type ComponentContentDynamicZoneResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentContentDynamicZone'] = ResolversParentTypes['ComponentContentDynamicZone'],
+    ParentType extends ResolversParentTypes['ComponentContentDynamicZone'] =
+        ResolversParentTypes['ComponentContentDynamicZone'],
 > = {
     __resolveType: TypeResolveFn<
         | 'ComponentComponentsArticle'
@@ -6209,15 +6209,17 @@ export type ComponentContentDynamicZoneResolvers<
     >;
 };
 
-export interface ComponentContentDynamicZoneInputScalarConfig
-    extends GraphQLScalarTypeConfig<ResolversTypes['ComponentContentDynamicZoneInput'], any> {
+export interface ComponentContentDynamicZoneInputScalarConfig extends GraphQLScalarTypeConfig<
+    ResolversTypes['ComponentContentDynamicZoneInput'],
+    any
+> {
     name: 'ComponentContentDynamicZoneInput';
 }
 
 export type ComponentContentErrorMessageResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentContentErrorMessage'] = ResolversParentTypes['ComponentContentErrorMessage'],
+    ParentType extends ResolversParentTypes['ComponentContentErrorMessage'] =
+        ResolversParentTypes['ComponentContentErrorMessage'],
 > = {
     description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -6228,8 +6230,8 @@ export type ComponentContentErrorMessageResolvers<
 
 export type ComponentContentFieldMappingResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentContentFieldMapping'] = ResolversParentTypes['ComponentContentFieldMapping'],
+    ParentType extends ResolversParentTypes['ComponentContentFieldMapping'] =
+        ResolversParentTypes['ComponentContentFieldMapping'],
 > = {
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -6244,8 +6246,8 @@ export type ComponentContentFieldMappingResolvers<
 
 export type ComponentContentFilterDateRangeResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentContentFilterDateRange'] = ResolversParentTypes['ComponentContentFilterDateRange'],
+    ParentType extends ResolversParentTypes['ComponentContentFilterDateRange'] =
+        ResolversParentTypes['ComponentContentFilterDateRange'],
 > = {
     field?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     from?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -6257,8 +6259,8 @@ export type ComponentContentFilterDateRangeResolvers<
 
 export type ComponentContentFilterSelectResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentContentFilterSelect'] = ResolversParentTypes['ComponentContentFilterSelect'],
+    ParentType extends ResolversParentTypes['ComponentContentFilterSelect'] =
+        ResolversParentTypes['ComponentContentFilterSelect'],
 > = {
     field?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -6275,8 +6277,8 @@ export type ComponentContentFilterSelectResolvers<
 
 export type ComponentContentFiltersResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentContentFilters'] = ResolversParentTypes['ComponentContentFilters'],
+    ParentType extends ResolversParentTypes['ComponentContentFilters'] =
+        ResolversParentTypes['ComponentContentFilters'],
 > = {
     buttonLabel?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     clearLabel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -6302,8 +6304,8 @@ export type ComponentContentFiltersResolvers<
 
 export type ComponentContentFormFieldResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentContentFormField'] = ResolversParentTypes['ComponentContentFormField'],
+    ParentType extends ResolversParentTypes['ComponentContentFormField'] =
+        ResolversParentTypes['ComponentContentFormField'],
 > = {
     description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     errorMessages?: Resolver<
@@ -6321,8 +6323,8 @@ export type ComponentContentFormFieldResolvers<
 
 export type ComponentContentFormFieldWithRegexResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentContentFormFieldWithRegex'] = ResolversParentTypes['ComponentContentFormFieldWithRegex'],
+    ParentType extends ResolversParentTypes['ComponentContentFormFieldWithRegex'] =
+        ResolversParentTypes['ComponentContentFormFieldWithRegex'],
 > = {
     description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     errorMessages?: Resolver<
@@ -6346,8 +6348,8 @@ export type ComponentContentFormFieldWithRegexResolvers<
 
 export type ComponentContentFormSelectFieldResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentContentFormSelectField'] = ResolversParentTypes['ComponentContentFormSelectField'],
+    ParentType extends ResolversParentTypes['ComponentContentFormSelectField'] =
+        ResolversParentTypes['ComponentContentFormSelectField'],
 > = {
     description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     errorMessages?: Resolver<
@@ -6371,8 +6373,8 @@ export type ComponentContentFormSelectFieldResolvers<
 
 export type ComponentContentIconWithTextResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentContentIconWithText'] = ResolversParentTypes['ComponentContentIconWithText'],
+    ParentType extends ResolversParentTypes['ComponentContentIconWithText'] =
+        ResolversParentTypes['ComponentContentIconWithText'],
 > = {
     description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -6383,8 +6385,8 @@ export type ComponentContentIconWithTextResolvers<
 
 export type ComponentContentInformationCardResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentContentInformationCard'] = ResolversParentTypes['ComponentContentInformationCard'],
+    ParentType extends ResolversParentTypes['ComponentContentInformationCard'] =
+        ResolversParentTypes['ComponentContentInformationCard'],
 > = {
     altMessage?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     icon?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -6397,8 +6399,8 @@ export type ComponentContentInformationCardResolvers<
 
 export type ComponentContentKeyValueResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentContentKeyValue'] = ResolversParentTypes['ComponentContentKeyValue'],
+    ParentType extends ResolversParentTypes['ComponentContentKeyValue'] =
+        ResolversParentTypes['ComponentContentKeyValue'],
 > = {
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     key?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -6408,8 +6410,8 @@ export type ComponentContentKeyValueResolvers<
 
 export type ComponentContentKeywordResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentContentKeyword'] = ResolversParentTypes['ComponentContentKeyword'],
+    ParentType extends ResolversParentTypes['ComponentContentKeyword'] =
+        ResolversParentTypes['ComponentContentKeyword'],
 > = {
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     keyword?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -6430,8 +6432,8 @@ export type ComponentContentLinkResolvers<
 
 export type ComponentContentListWithIconsResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentContentListWithIcons'] = ResolversParentTypes['ComponentContentListWithIcons'],
+    ParentType extends ResolversParentTypes['ComponentContentListWithIcons'] =
+        ResolversParentTypes['ComponentContentListWithIcons'],
 > = {
     icons?: Resolver<
         Array<Maybe<ResolversTypes['ComponentContentIconWithText']>>,
@@ -6446,8 +6448,8 @@ export type ComponentContentListWithIconsResolvers<
 
 export type ComponentContentMessageResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentContentMessage'] = ResolversParentTypes['ComponentContentMessage'],
+    ParentType extends ResolversParentTypes['ComponentContentMessage'] =
+        ResolversParentTypes['ComponentContentMessage'],
 > = {
     description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -6457,8 +6459,8 @@ export type ComponentContentMessageResolvers<
 
 export type ComponentContentMessageSimpleResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentContentMessageSimple'] = ResolversParentTypes['ComponentContentMessageSimple'],
+    ParentType extends ResolversParentTypes['ComponentContentMessageSimple'] =
+        ResolversParentTypes['ComponentContentMessageSimple'],
 > = {
     content?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -6468,8 +6470,8 @@ export type ComponentContentMessageSimpleResolvers<
 
 export type ComponentContentNavigationColumnResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentContentNavigationColumn'] = ResolversParentTypes['ComponentContentNavigationColumn'],
+    ParentType extends ResolversParentTypes['ComponentContentNavigationColumn'] =
+        ResolversParentTypes['ComponentContentNavigationColumn'],
 > = {
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     items?: Resolver<
@@ -6484,8 +6486,8 @@ export type ComponentContentNavigationColumnResolvers<
 
 export type ComponentContentNavigationGroupResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentContentNavigationGroup'] = ResolversParentTypes['ComponentContentNavigationGroup'],
+    ParentType extends ResolversParentTypes['ComponentContentNavigationGroup'] =
+        ResolversParentTypes['ComponentContentNavigationGroup'],
 > = {
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     items?: Resolver<
@@ -6500,8 +6502,8 @@ export type ComponentContentNavigationGroupResolvers<
 
 export type ComponentContentNavigationItemResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentContentNavigationItem'] = ResolversParentTypes['ComponentContentNavigationItem'],
+    ParentType extends ResolversParentTypes['ComponentContentNavigationItem'] =
+        ResolversParentTypes['ComponentContentNavigationItem'],
 > = {
     description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -6513,8 +6515,8 @@ export type ComponentContentNavigationItemResolvers<
 
 export type ComponentContentPaginationResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentContentPagination'] = ResolversParentTypes['ComponentContentPagination'],
+    ParentType extends ResolversParentTypes['ComponentContentPagination'] =
+        ResolversParentTypes['ComponentContentPagination'],
 > = {
     description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -6527,8 +6529,8 @@ export type ComponentContentPaginationResolvers<
 
 export type ComponentContentRegexValidationResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentContentRegexValidation'] = ResolversParentTypes['ComponentContentRegexValidation'],
+    ParentType extends ResolversParentTypes['ComponentContentRegexValidation'] =
+        ResolversParentTypes['ComponentContentRegexValidation'],
 > = {
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     label?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -6539,8 +6541,8 @@ export type ComponentContentRegexValidationResolvers<
 
 export type ComponentContentRichTextWithTitleResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentContentRichTextWithTitle'] = ResolversParentTypes['ComponentContentRichTextWithTitle'],
+    ParentType extends ResolversParentTypes['ComponentContentRichTextWithTitle'] =
+        ResolversParentTypes['ComponentContentRichTextWithTitle'],
 > = {
     content?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -6566,8 +6568,8 @@ export type ComponentContentTableResolvers<
 
 export type ComponentContentTableColumnResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentContentTableColumn'] = ResolversParentTypes['ComponentContentTableColumn'],
+    ParentType extends ResolversParentTypes['ComponentContentTableColumn'] =
+        ResolversParentTypes['ComponentContentTableColumn'],
 > = {
     field?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -6577,8 +6579,8 @@ export type ComponentContentTableColumnResolvers<
 
 export type ComponentEntityResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentEntityResponseCollection'] = ResolversParentTypes['ComponentEntityResponseCollection'],
+    ParentType extends ResolversParentTypes['ComponentEntityResponseCollection'] =
+        ResolversParentTypes['ComponentEntityResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['Component']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
@@ -6636,8 +6638,8 @@ export type ComponentLabelsErrorsResolvers<
 
 export type ComponentLabelsValidationResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentLabelsValidation'] = ResolversParentTypes['ComponentLabelsValidation'],
+    ParentType extends ResolversParentTypes['ComponentLabelsValidation'] =
+        ResolversParentTypes['ComponentLabelsValidation'],
 > = {
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     isOptional?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -6647,8 +6649,8 @@ export type ComponentLabelsValidationResolvers<
 
 export type ComponentRelationResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentRelationResponseCollection'] = ResolversParentTypes['ComponentRelationResponseCollection'],
+    ParentType extends ResolversParentTypes['ComponentRelationResponseCollection'] =
+        ResolversParentTypes['ComponentRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['Component']>, ParentType, ContextType>;
 };
@@ -6694,8 +6696,8 @@ export type ComponentSeoUserRolesResolvers<
 
 export type ComponentTemplatesOneColumnResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentTemplatesOneColumn'] = ResolversParentTypes['ComponentTemplatesOneColumn'],
+    ParentType extends ResolversParentTypes['ComponentTemplatesOneColumn'] =
+        ResolversParentTypes['ComponentTemplatesOneColumn'],
 > = {
     id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
     mainSlot?: Resolver<
@@ -6715,8 +6717,8 @@ export type ComponentTemplatesOneColumnResolvers<
 
 export type ComponentTemplatesTwoColumnResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ComponentTemplatesTwoColumn'] = ResolversParentTypes['ComponentTemplatesTwoColumn'],
+    ParentType extends ResolversParentTypes['ComponentTemplatesTwoColumn'] =
+        ResolversParentTypes['ComponentTemplatesTwoColumn'],
 > = {
     bottomSlot?: Resolver<
         Array<Maybe<ResolversTypes['Component']>>,
@@ -6794,8 +6796,8 @@ export type ConfigurableTextsResolvers<
 
 export type ConfigurableTextsRelationResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ConfigurableTextsRelationResponseCollection'] = ResolversParentTypes['ConfigurableTextsRelationResponseCollection'],
+    ParentType extends ResolversParentTypes['ConfigurableTextsRelationResponseCollection'] =
+        ResolversParentTypes['ConfigurableTextsRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['ConfigurableTexts']>, ParentType, ContextType>;
 };
@@ -6846,8 +6848,8 @@ export type CreateAccountPageResolvers<
 
 export type CreateAccountPageRelationResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['CreateAccountPageRelationResponseCollection'] = ResolversParentTypes['CreateAccountPageRelationResponseCollection'],
+    ParentType extends ResolversParentTypes['CreateAccountPageRelationResponseCollection'] =
+        ResolversParentTypes['CreateAccountPageRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['CreateAccountPage']>, ParentType, ContextType>;
 };
@@ -6880,8 +6882,8 @@ export type CreateNewPasswordPageResolvers<
 
 export type CreateNewPasswordPageRelationResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['CreateNewPasswordPageRelationResponseCollection'] = ResolversParentTypes['CreateNewPasswordPageRelationResponseCollection'],
+    ParentType extends ResolversParentTypes['CreateNewPasswordPageRelationResponseCollection'] =
+        ResolversParentTypes['CreateNewPasswordPageRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['CreateNewPasswordPage']>, ParentType, ContextType>;
 };
@@ -6934,8 +6936,8 @@ export type FilterItemResolvers<
 
 export type FilterItemEntityResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['FilterItemEntityResponseCollection'] = ResolversParentTypes['FilterItemEntityResponseCollection'],
+    ParentType extends ResolversParentTypes['FilterItemEntityResponseCollection'] =
+        ResolversParentTypes['FilterItemEntityResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['FilterItem']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
@@ -6943,8 +6945,8 @@ export type FilterItemEntityResponseCollectionResolvers<
 
 export type FilterItemFieldDynamicZoneResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['FilterItemFieldDynamicZone'] = ResolversParentTypes['FilterItemFieldDynamicZone'],
+    ParentType extends ResolversParentTypes['FilterItemFieldDynamicZone'] =
+        ResolversParentTypes['FilterItemFieldDynamicZone'],
 > = {
     __resolveType: TypeResolveFn<
         'ComponentContentFilterDateRange' | 'ComponentContentFilterSelect' | 'Error',
@@ -6953,15 +6955,17 @@ export type FilterItemFieldDynamicZoneResolvers<
     >;
 };
 
-export interface FilterItemFieldDynamicZoneInputScalarConfig
-    extends GraphQLScalarTypeConfig<ResolversTypes['FilterItemFieldDynamicZoneInput'], any> {
+export interface FilterItemFieldDynamicZoneInputScalarConfig extends GraphQLScalarTypeConfig<
+    ResolversTypes['FilterItemFieldDynamicZoneInput'],
+    any
+> {
     name: 'FilterItemFieldDynamicZoneInput';
 }
 
 export type FilterItemRelationResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['FilterItemRelationResponseCollection'] = ResolversParentTypes['FilterItemRelationResponseCollection'],
+    ParentType extends ResolversParentTypes['FilterItemRelationResponseCollection'] =
+        ResolversParentTypes['FilterItemRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['FilterItem']>, ParentType, ContextType>;
 };
@@ -6996,8 +7000,8 @@ export type FooterResolvers<
 
 export type FooterEntityResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['FooterEntityResponseCollection'] = ResolversParentTypes['FooterEntityResponseCollection'],
+    ParentType extends ResolversParentTypes['FooterEntityResponseCollection'] =
+        ResolversParentTypes['FooterEntityResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['Footer']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
@@ -7014,15 +7018,17 @@ export type FooterItemsDynamicZoneResolvers<
     >;
 };
 
-export interface FooterItemsDynamicZoneInputScalarConfig
-    extends GraphQLScalarTypeConfig<ResolversTypes['FooterItemsDynamicZoneInput'], any> {
+export interface FooterItemsDynamicZoneInputScalarConfig extends GraphQLScalarTypeConfig<
+    ResolversTypes['FooterItemsDynamicZoneInput'],
+    any
+> {
     name: 'FooterItemsDynamicZoneInput';
 }
 
 export type FooterRelationResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['FooterRelationResponseCollection'] = ResolversParentTypes['FooterRelationResponseCollection'],
+    ParentType extends ResolversParentTypes['FooterRelationResponseCollection'] =
+        ResolversParentTypes['FooterRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['Footer']>, ParentType, ContextType>;
 };
@@ -7160,8 +7166,8 @@ export type HeaderResolvers<
 
 export type HeaderEntityResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['HeaderEntityResponseCollection'] = ResolversParentTypes['HeaderEntityResponseCollection'],
+    ParentType extends ResolversParentTypes['HeaderEntityResponseCollection'] =
+        ResolversParentTypes['HeaderEntityResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['Header']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
@@ -7178,15 +7184,17 @@ export type HeaderItemsDynamicZoneResolvers<
     >;
 };
 
-export interface HeaderItemsDynamicZoneInputScalarConfig
-    extends GraphQLScalarTypeConfig<ResolversTypes['HeaderItemsDynamicZoneInput'], any> {
+export interface HeaderItemsDynamicZoneInputScalarConfig extends GraphQLScalarTypeConfig<
+    ResolversTypes['HeaderItemsDynamicZoneInput'],
+    any
+> {
     name: 'HeaderItemsDynamicZoneInput';
 }
 
 export type HeaderRelationResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['HeaderRelationResponseCollection'] = ResolversParentTypes['HeaderRelationResponseCollection'],
+    ParentType extends ResolversParentTypes['HeaderRelationResponseCollection'] =
+        ResolversParentTypes['HeaderRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['Header']>, ParentType, ContextType>;
 };
@@ -7210,8 +7218,8 @@ export interface I18NLocaleCodeScalarConfig extends GraphQLScalarTypeConfig<Reso
 
 export type I18NLocaleEntityResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['I18NLocaleEntityResponseCollection'] = ResolversParentTypes['I18NLocaleEntityResponseCollection'],
+    ParentType extends ResolversParentTypes['I18NLocaleEntityResponseCollection'] =
+        ResolversParentTypes['I18NLocaleEntityResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['I18NLocale']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
@@ -7255,8 +7263,8 @@ export type LoginPageResolvers<
 
 export type LoginPageRelationResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['LoginPageRelationResponseCollection'] = ResolversParentTypes['LoginPageRelationResponseCollection'],
+    ParentType extends ResolversParentTypes['LoginPageRelationResponseCollection'] =
+        ResolversParentTypes['LoginPageRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['LoginPage']>, ParentType, ContextType>;
 };
@@ -7276,8 +7284,8 @@ export type MappingResolvers<
 
 export type MappingEntityResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['MappingEntityResponseCollection'] = ResolversParentTypes['MappingEntityResponseCollection'],
+    ParentType extends ResolversParentTypes['MappingEntityResponseCollection'] =
+        ResolversParentTypes['MappingEntityResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['Mapping']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
@@ -7764,8 +7772,8 @@ export type NotFoundPageResolvers<
 
 export type NotFoundPageRelationResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['NotFoundPageRelationResponseCollection'] = ResolversParentTypes['NotFoundPageRelationResponseCollection'],
+    ParentType extends ResolversParentTypes['NotFoundPageRelationResponseCollection'] =
+        ResolversParentTypes['NotFoundPageRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['NotFoundPage']>, ParentType, ContextType>;
 };
@@ -7792,8 +7800,8 @@ export type OrganizationListResolvers<
 
 export type OrganizationListRelationResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['OrganizationListRelationResponseCollection'] = ResolversParentTypes['OrganizationListRelationResponseCollection'],
+    ParentType extends ResolversParentTypes['OrganizationListRelationResponseCollection'] =
+        ResolversParentTypes['OrganizationListRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['OrganizationList']>, ParentType, ContextType>;
 };
@@ -7832,8 +7840,8 @@ export type PageResolvers<
 
 export type PageEntityResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['PageEntityResponseCollection'] = ResolversParentTypes['PageEntityResponseCollection'],
+    ParentType extends ResolversParentTypes['PageEntityResponseCollection'] =
+        ResolversParentTypes['PageEntityResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['Page']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
@@ -7841,16 +7849,16 @@ export type PageEntityResponseCollectionResolvers<
 
 export type PageRelationResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['PageRelationResponseCollection'] = ResolversParentTypes['PageRelationResponseCollection'],
+    ParentType extends ResolversParentTypes['PageRelationResponseCollection'] =
+        ResolversParentTypes['PageRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['Page']>, ParentType, ContextType>;
 };
 
 export type PageTemplateDynamicZoneResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['PageTemplateDynamicZone'] = ResolversParentTypes['PageTemplateDynamicZone'],
+    ParentType extends ResolversParentTypes['PageTemplateDynamicZone'] =
+        ResolversParentTypes['PageTemplateDynamicZone'],
 > = {
     __resolveType: TypeResolveFn<
         'ComponentTemplatesOneColumn' | 'ComponentTemplatesTwoColumn' | 'Error',
@@ -7859,8 +7867,10 @@ export type PageTemplateDynamicZoneResolvers<
     >;
 };
 
-export interface PageTemplateDynamicZoneInputScalarConfig
-    extends GraphQLScalarTypeConfig<ResolversTypes['PageTemplateDynamicZoneInput'], any> {
+export interface PageTemplateDynamicZoneInputScalarConfig extends GraphQLScalarTypeConfig<
+    ResolversTypes['PageTemplateDynamicZoneInput'],
+    any
+> {
     name: 'PageTemplateDynamicZoneInput';
 }
 
@@ -8298,16 +8308,16 @@ export type ResetPasswordPageResolvers<
 
 export type ResetPasswordPageRelationResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ResetPasswordPageRelationResponseCollection'] = ResolversParentTypes['ResetPasswordPageRelationResponseCollection'],
+    ParentType extends ResolversParentTypes['ResetPasswordPageRelationResponseCollection'] =
+        ResolversParentTypes['ResetPasswordPageRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['ResetPasswordPage']>, ParentType, ContextType>;
 };
 
 export type ReviewWorkflowsWorkflowResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ReviewWorkflowsWorkflow'] = ResolversParentTypes['ReviewWorkflowsWorkflow'],
+    ParentType extends ResolversParentTypes['ReviewWorkflowsWorkflow'] =
+        ResolversParentTypes['ReviewWorkflowsWorkflow'],
 > = {
     contentTypes?: Resolver<ResolversTypes['JSON'], ParentType, ContextType>;
     createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
@@ -8333,8 +8343,8 @@ export type ReviewWorkflowsWorkflowResolvers<
 
 export type ReviewWorkflowsWorkflowEntityResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ReviewWorkflowsWorkflowEntityResponseCollection'] = ResolversParentTypes['ReviewWorkflowsWorkflowEntityResponseCollection'],
+    ParentType extends ResolversParentTypes['ReviewWorkflowsWorkflowEntityResponseCollection'] =
+        ResolversParentTypes['ReviewWorkflowsWorkflowEntityResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['ReviewWorkflowsWorkflow']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
@@ -8342,8 +8352,8 @@ export type ReviewWorkflowsWorkflowEntityResponseCollectionResolvers<
 
 export type ReviewWorkflowsWorkflowStageResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ReviewWorkflowsWorkflowStage'] = ResolversParentTypes['ReviewWorkflowsWorkflowStage'],
+    ParentType extends ResolversParentTypes['ReviewWorkflowsWorkflowStage'] =
+        ResolversParentTypes['ReviewWorkflowsWorkflowStage'],
 > = {
     color?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
@@ -8357,8 +8367,8 @@ export type ReviewWorkflowsWorkflowStageResolvers<
 
 export type ReviewWorkflowsWorkflowStageEntityResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ReviewWorkflowsWorkflowStageEntityResponseCollection'] = ResolversParentTypes['ReviewWorkflowsWorkflowStageEntityResponseCollection'],
+    ParentType extends ResolversParentTypes['ReviewWorkflowsWorkflowStageEntityResponseCollection'] =
+        ResolversParentTypes['ReviewWorkflowsWorkflowStageEntityResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['ReviewWorkflowsWorkflowStage']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
@@ -8366,8 +8376,8 @@ export type ReviewWorkflowsWorkflowStageEntityResponseCollectionResolvers<
 
 export type ReviewWorkflowsWorkflowStageRelationResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ReviewWorkflowsWorkflowStageRelationResponseCollection'] = ResolversParentTypes['ReviewWorkflowsWorkflowStageRelationResponseCollection'],
+    ParentType extends ResolversParentTypes['ReviewWorkflowsWorkflowStageRelationResponseCollection'] =
+        ResolversParentTypes['ReviewWorkflowsWorkflowStageRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['ReviewWorkflowsWorkflowStage']>, ParentType, ContextType>;
 };
@@ -8391,8 +8401,8 @@ export type SurveyJsFormResolvers<
 
 export type SurveyJsFormEntityResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['SurveyJsFormEntityResponseCollection'] = ResolversParentTypes['SurveyJsFormEntityResponseCollection'],
+    ParentType extends ResolversParentTypes['SurveyJsFormEntityResponseCollection'] =
+        ResolversParentTypes['SurveyJsFormEntityResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['SurveyJsForm']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
@@ -8413,8 +8423,8 @@ export type ThemeResolvers<
 
 export type ThemeEntityResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ThemeEntityResponseCollection'] = ResolversParentTypes['ThemeEntityResponseCollection'],
+    ParentType extends ResolversParentTypes['ThemeEntityResponseCollection'] =
+        ResolversParentTypes['ThemeEntityResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['Theme']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
@@ -8422,16 +8432,16 @@ export type ThemeEntityResponseCollectionResolvers<
 
 export type ThemeRelationResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['ThemeRelationResponseCollection'] = ResolversParentTypes['ThemeRelationResponseCollection'],
+    ParentType extends ResolversParentTypes['ThemeRelationResponseCollection'] =
+        ResolversParentTypes['ThemeRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['Theme']>, ParentType, ContextType>;
 };
 
 export type TranslateBatchTranslateJobResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['TranslateBatchTranslateJob'] = ResolversParentTypes['TranslateBatchTranslateJob'],
+    ParentType extends ResolversParentTypes['TranslateBatchTranslateJob'] =
+        ResolversParentTypes['TranslateBatchTranslateJob'],
 > = {
     autoPublish?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
     contentType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -8450,8 +8460,8 @@ export type TranslateBatchTranslateJobResolvers<
 
 export type TranslateBatchTranslateJobEntityResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['TranslateBatchTranslateJobEntityResponseCollection'] = ResolversParentTypes['TranslateBatchTranslateJobEntityResponseCollection'],
+    ParentType extends ResolversParentTypes['TranslateBatchTranslateJobEntityResponseCollection'] =
+        ResolversParentTypes['TranslateBatchTranslateJobEntityResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['TranslateBatchTranslateJob']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
@@ -8473,8 +8483,8 @@ export type TranslateUpdatedEntryResolvers<
 
 export type TranslateUpdatedEntryEntityResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['TranslateUpdatedEntryEntityResponseCollection'] = ResolversParentTypes['TranslateUpdatedEntryEntityResponseCollection'],
+    ParentType extends ResolversParentTypes['TranslateUpdatedEntryEntityResponseCollection'] =
+        ResolversParentTypes['TranslateUpdatedEntryEntityResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['TranslateUpdatedEntry']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
@@ -8508,8 +8518,8 @@ export type UploadFileResolvers<
 
 export type UploadFileEntityResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['UploadFileEntityResponseCollection'] = ResolversParentTypes['UploadFileEntityResponseCollection'],
+    ParentType extends ResolversParentTypes['UploadFileEntityResponseCollection'] =
+        ResolversParentTypes['UploadFileEntityResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['UploadFile']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
@@ -8517,32 +8527,32 @@ export type UploadFileEntityResponseCollectionResolvers<
 
 export type UploadFileRelationResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['UploadFileRelationResponseCollection'] = ResolversParentTypes['UploadFileRelationResponseCollection'],
+    ParentType extends ResolversParentTypes['UploadFileRelationResponseCollection'] =
+        ResolversParentTypes['UploadFileRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['UploadFile']>, ParentType, ContextType>;
 };
 
 export type UsersPermissionsCreateRolePayloadResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['UsersPermissionsCreateRolePayload'] = ResolversParentTypes['UsersPermissionsCreateRolePayload'],
+    ParentType extends ResolversParentTypes['UsersPermissionsCreateRolePayload'] =
+        ResolversParentTypes['UsersPermissionsCreateRolePayload'],
 > = {
     ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
 };
 
 export type UsersPermissionsDeleteRolePayloadResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['UsersPermissionsDeleteRolePayload'] = ResolversParentTypes['UsersPermissionsDeleteRolePayload'],
+    ParentType extends ResolversParentTypes['UsersPermissionsDeleteRolePayload'] =
+        ResolversParentTypes['UsersPermissionsDeleteRolePayload'],
 > = {
     ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
 };
 
 export type UsersPermissionsLoginPayloadResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['UsersPermissionsLoginPayload'] = ResolversParentTypes['UsersPermissionsLoginPayload'],
+    ParentType extends ResolversParentTypes['UsersPermissionsLoginPayload'] =
+        ResolversParentTypes['UsersPermissionsLoginPayload'],
 > = {
     jwt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     user?: Resolver<ResolversTypes['UsersPermissionsMe'], ParentType, ContextType>;
@@ -8573,16 +8583,16 @@ export type UsersPermissionsMeRoleResolvers<
 
 export type UsersPermissionsPasswordPayloadResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['UsersPermissionsPasswordPayload'] = ResolversParentTypes['UsersPermissionsPasswordPayload'],
+    ParentType extends ResolversParentTypes['UsersPermissionsPasswordPayload'] =
+        ResolversParentTypes['UsersPermissionsPasswordPayload'],
 > = {
     ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
 };
 
 export type UsersPermissionsPermissionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['UsersPermissionsPermission'] = ResolversParentTypes['UsersPermissionsPermission'],
+    ParentType extends ResolversParentTypes['UsersPermissionsPermission'] =
+        ResolversParentTypes['UsersPermissionsPermission'],
 > = {
     action?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
     createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
@@ -8595,8 +8605,8 @@ export type UsersPermissionsPermissionResolvers<
 
 export type UsersPermissionsPermissionRelationResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['UsersPermissionsPermissionRelationResponseCollection'] = ResolversParentTypes['UsersPermissionsPermissionRelationResponseCollection'],
+    ParentType extends ResolversParentTypes['UsersPermissionsPermissionRelationResponseCollection'] =
+        ResolversParentTypes['UsersPermissionsPermissionRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['UsersPermissionsPermission']>, ParentType, ContextType>;
 };
@@ -8641,8 +8651,8 @@ export type UsersPermissionsRoleResolvers<
 
 export type UsersPermissionsRoleEntityResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['UsersPermissionsRoleEntityResponseCollection'] = ResolversParentTypes['UsersPermissionsRoleEntityResponseCollection'],
+    ParentType extends ResolversParentTypes['UsersPermissionsRoleEntityResponseCollection'] =
+        ResolversParentTypes['UsersPermissionsRoleEntityResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['UsersPermissionsRole']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
@@ -8650,8 +8660,8 @@ export type UsersPermissionsRoleEntityResponseCollectionResolvers<
 
 export type UsersPermissionsUpdateRolePayloadResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['UsersPermissionsUpdateRolePayload'] = ResolversParentTypes['UsersPermissionsUpdateRolePayload'],
+    ParentType extends ResolversParentTypes['UsersPermissionsUpdateRolePayload'] =
+        ResolversParentTypes['UsersPermissionsUpdateRolePayload'],
 > = {
     ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
 };
@@ -8675,16 +8685,16 @@ export type UsersPermissionsUserResolvers<
 
 export type UsersPermissionsUserEntityResponseResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['UsersPermissionsUserEntityResponse'] = ResolversParentTypes['UsersPermissionsUserEntityResponse'],
+    ParentType extends ResolversParentTypes['UsersPermissionsUserEntityResponse'] =
+        ResolversParentTypes['UsersPermissionsUserEntityResponse'],
 > = {
     data?: Resolver<Maybe<ResolversTypes['UsersPermissionsUser']>, ParentType, ContextType>;
 };
 
 export type UsersPermissionsUserEntityResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['UsersPermissionsUserEntityResponseCollection'] = ResolversParentTypes['UsersPermissionsUserEntityResponseCollection'],
+    ParentType extends ResolversParentTypes['UsersPermissionsUserEntityResponseCollection'] =
+        ResolversParentTypes['UsersPermissionsUserEntityResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['UsersPermissionsUser']>, ParentType, ContextType>;
     pageInfo?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
@@ -8692,8 +8702,8 @@ export type UsersPermissionsUserEntityResponseCollectionResolvers<
 
 export type UsersPermissionsUserRelationResponseCollectionResolvers<
     ContextType = any,
-    ParentType extends
-        ResolversParentTypes['UsersPermissionsUserRelationResponseCollection'] = ResolversParentTypes['UsersPermissionsUserRelationResponseCollection'],
+    ParentType extends ResolversParentTypes['UsersPermissionsUserRelationResponseCollection'] =
+        ResolversParentTypes['UsersPermissionsUserRelationResponseCollection'],
 > = {
     nodes?: Resolver<Array<ResolversTypes['UsersPermissionsUser']>, ParentType, ContextType>;
 };
@@ -12692,7 +12702,7 @@ export const UserAccountComponentFragmentDoc = gql`
 `;
 export const GetArticleDocument = gql`
     query getArticle($slug: String!, $locale: I18NLocaleCode!) {
-        articles(locale: $locale, filters: { slug: { eq: $slug } }) {
+        articles(locale: $locale, filters: { slug: { endsWith: $slug } }) {
             ...Article
         }
     }

@@ -7,7 +7,7 @@ import { mapMedia } from '@/modules/cms/mappers/cms.media.mapper';
 export const mapCategory = (data: CategoryFragment): Articles.Model.Category => {
     return {
         id: data.documentId,
-        slug: `${data.parent?.slug ? `${data.parent?.slug}/` : ''}${data.slug}`,
+        slug: data.slug,
         createdAt: data.createdAt,
         updatedAt: data.updatedAt,
         title: data.name,

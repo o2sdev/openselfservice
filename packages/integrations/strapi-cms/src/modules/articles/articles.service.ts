@@ -61,13 +61,16 @@ export class ArticlesService implements Articles.Service {
     }
 
     getArticle(params: Articles.Request.GetArticleParams): Observable<Articles.Model.Article> {
-        return forkJoin([this.graphqlService.getArticle(params)]).pipe(
+        const slug = params.slug.replace(/^\//, '');
+        const slugSuffix = slug.split('/').pop() || slug;
+
+        return forkJoin([this.graphqlService.getArticle({ ...params, slug: slugSuffix })]).pipe(
             map(([pages]) => {
                 if (!pages?.data?.articles?.length) {
                     throw new NotFoundException();
                 }
 
-                const article = pages.data.articles[0]!;
+                const article = pages.data.articles.find((a) => slug.endsWith(a.slug)) || pages.data.articles[0]!;
 
                 return mapArticle(article, this.baseUrl);
             }),
