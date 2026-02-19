@@ -116,15 +116,16 @@ createTicket(
 
 #### Body Parameters
 
-| Parameter   | Type                    | Required | Description                                                  |
-| ----------- | ----------------------- | -------- | ------------------------------------------------------------ |
-| title       | string                  | No       | Title or subject of the ticket                               |
-| description | string                  | No       | Detailed description of the issue                            |
-| type        | number                  | No       | Ticket type identifier (e.g., form ID in ticket systems)     |
-| attachments | TicketAttachmentInput[] | No       | Array of file attachments                                    |
-| fields      | object                  | No       | Additional custom fields specific to the integration         |
+| Parameter   | Type                    | Required | Description                                              |
+| ----------- | ----------------------- | -------- | -------------------------------------------------------- |
+| title       | string                  | No       | Title or subject of the ticket                           |
+| description | string                  | No       | Detailed description of the issue                        |
+| type        | number                  | No       | Ticket type identifier (e.g., form ID in ticket systems) |
+| attachments | TicketAttachmentInput[] | No       | Array of file attachments                                |
+| fields      | object                  | No       | Additional custom fields specific to the integration     |
 
 > **Note**: While `description` and `type` are marked as optional in the core model, certain integrations require these fields:
+>
 > - **Zendesk**: Requires both `description` (string) and `type` (number, ticket form ID)
 > - **SurveyJS**: Requires `description` (string) and `ticketFormId` (number, mapped to `type`)
 >

@@ -4,7 +4,7 @@ sidebar_position: 100
 
 # Zendesk
 
-This integration provides the integration with [Zendesk Help Center API](https://developer.zendesk.com/api-reference/help_center/help-center-api/introduction/), allowing users to browse knowledge base articles, categories, and search for content within your application.
+this package provides the integration with [Zendesk Help Center API](https://developer.zendesk.com/api-reference/help_center/help-center-api/introduction/), allowing users to browse knowledge base articles, categories, and search for content within your application.
 
 ## In this section
 

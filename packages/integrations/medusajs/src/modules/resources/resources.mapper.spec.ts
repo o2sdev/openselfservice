@@ -127,8 +127,8 @@ describe('resources.mapper', () => {
             const result = mapService(service, minimalProduct, defaultCurrency);
             expect(result.id).toBe('svc_1');
             expect(result.product).toBe(minimalProduct);
-            expect(result.contract.status).toBe('active');
-            expect(result.contract.paymentPeriod).toBe('monthly');
+            expect(result.contract.status).toBe('ACTIVE');
+            expect(result.contract.paymentPeriod).toBe('MONTHLY');
             expect(result.contract.price.value).toBe(999);
         });
 

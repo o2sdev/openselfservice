@@ -5,7 +5,7 @@ import { mapOrder, mapOrders } from './orders.mapper';
 
 const defaultCurrency = 'EUR';
 
-function minimalOrder(overrides: Record<string, unknown> = {}): HttpTypes.AdminOrder {
+function minimalOrder(overrides: Record<string, unknown> = {}): HttpTypes.StoreOrder {
     return {
         id: 'order_1',
         customer_id: 'cust_1',
@@ -24,7 +24,7 @@ function minimalOrder(overrides: Record<string, unknown> = {}): HttpTypes.AdminO
         billing_address: null,
         shipping_methods: [],
         ...overrides,
-    } as unknown as HttpTypes.AdminOrder;
+    } as unknown as HttpTypes.StoreOrder;
 }
 
 describe('orders.mapper', () => {
@@ -35,7 +35,7 @@ describe('orders.mapper', () => {
                 count: 2,
                 limit: 10,
                 offset: 0,
-            } as HttpTypes.AdminOrderListResponse;
+            } as HttpTypes.StoreOrderListResponse;
             const result = mapOrders(response, defaultCurrency);
             expect(result.data).toHaveLength(2);
             expect(result.total).toBe(2);
@@ -50,7 +50,7 @@ describe('orders.mapper', () => {
             const result = mapOrder(order, defaultCurrency);
             expect(result.id).toBe('order_1');
             expect(result.customerId).toBe('cust_1');
-            expect(result.currency).toBe('eur');
+            expect(result.currency).toBe('EUR');
             expect(result.status).toBe('COMPLETED');
             expect(result.paymentStatus).toBe('CAPTURED');
             expect(result.createdAt).toBe(order.created_at.toString());

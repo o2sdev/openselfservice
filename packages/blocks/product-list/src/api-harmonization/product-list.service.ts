@@ -27,35 +27,19 @@ export class ProductListService {
         return forkJoin([cms]).pipe(
             concatMap(([cms]) => {
                 return this.productsService
-                    .getProductList({
-                        ...query,
-                        limit: query.limit || cms.pagination?.limit || 12,
-                        offset: query.offset || 0,
-                        type: 'PHYSICAL' as Products.Model.ProductType,
-                        category: query.category,
-                        locale: headers['x-locale'],
-                        basePath: cms.basePath,
-                    })
-                    .pipe(
-                        map((products) => {
-                            const result = mapProductList(products, cms, headers['x-locale']);
-
-                            // Extract permissions using ACL service
-                            if (headers.authorization) {
-                                const permissions = this.authService.canPerformActions(
-                                    headers.authorization,
-                                    'products',
-                                    ['view'],
-                                );
-
-                                result.permissions = {
-                                    view: permissions.view ?? false,
-                                };
-                            }
-
-                            return result;
-                        }),
-                    );
+                    .getProductList(
+                        {
+                            ...query,
+                            limit: query.limit || cms.pagination?.limit || 12,
+                            offset: query.offset || 0,
+                            type: 'PHYSICAL' as Products.Model.ProductType,
+                            category: query.category,
+                            locale: headers['x-locale'],
+                            basePath: cms.basePath,
+                        },
+                        headers['authorization'],
+                    )
+                    .pipe(map((products) => mapProductList(products, cms, headers['x-locale'])));
             }),
         );
     }

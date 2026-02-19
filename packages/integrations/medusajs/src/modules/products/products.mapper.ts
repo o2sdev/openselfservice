@@ -47,6 +47,22 @@ const mapPrice = (
     };
 };
 
+// Helper to extract prices from variant (handles Store API variants and Admin API variants for compatibility)
+// Store API variants have prices via field expansion (*variants.prices)
+const getVariantPrices = (
+    variant: HttpTypes.AdminProductVariant | HttpTypes.StoreProductVariant,
+): { currency_code?: string; amount?: number }[] | null | undefined => {
+    // Check if variant has prices property (Store API via field expansion, or Admin API)
+    if ('prices' in variant && variant.prices) {
+        return variant.prices as { currency_code?: string; amount?: number }[];
+    }
+    // Type assertion for Store API variants where TypeScript types may not include prices
+    const storeVariant = variant as HttpTypes.StoreProductVariant & {
+        prices?: Array<{ currency_code?: string; amount?: number }>;
+    };
+    return storeVariant.prices || null;
+};
+
 // Map Medusa thumbnail to O2S Image
 const mapThumbnail = (thumbnail: string | null | undefined, alt: string): { url: string; alt: string } | undefined => {
     if (!thumbnail) return undefined;
@@ -74,9 +90,11 @@ const mapTags = (
 // Returns all known spec fields (weight, height, width, length, material, origin_country, hs_code, mid_code).
 // Variant attributes take precedence over product attributes.
 // The block layer will filter and format these based on CMS configuration.
-const collectVariantAttributes = (variant: HttpTypes.AdminProductVariant): Products.Model.ProductAttributes => {
+// Accepts both AdminProductVariant and StoreProductVariant types
+const collectVariantAttributes = (variant: HttpTypes.StoreProductVariant): Products.Model.ProductAttributes => {
     const attributes: Products.Model.ProductAttributes = {};
-    const product = variant.product;
+    // Store API variants have product nested, Admin API variants have it as a property
+    const product = 'product' in variant ? variant.product : undefined;
 
     // List of known spec fields to collect from Medusa
     // These should match the fields requested in productDetailFields
@@ -84,8 +102,8 @@ const collectVariantAttributes = (variant: HttpTypes.AdminProductVariant): Produ
 
     for (const field of knownFields) {
         // Check variant first, then fall back to product
-        const variantValue = variant[field as keyof HttpTypes.AdminProductVariant];
-        const productValue = product?.[field as keyof HttpTypes.AdminProduct];
+        const variantValue = variant[field as keyof typeof variant];
+        const productValue = product?.[field as keyof typeof product];
         const value = variantValue ?? productValue;
 
         if (value) {
@@ -98,9 +116,10 @@ const collectVariantAttributes = (variant: HttpTypes.AdminProductVariant): Produ
 
 // Calculate if a variant is in stock based on Medusa inventory data
 // inventory_quantity comes from Store API field expansion (+variants.inventory_quantity)
-type VariantWithInventory = HttpTypes.AdminProductVariant & { inventory_quantity?: number | null };
+type VariantWithInventory = HttpTypes.StoreProductVariant & { inventory_quantity?: number | null };
 
-const isVariantInStock = (variant: HttpTypes.AdminProductVariant): boolean => {
+// Accepts both AdminProductVariant and StoreProductVariant types
+const isVariantInStock = (variant: HttpTypes.StoreProductVariant): boolean => {
     // If inventory is not managed, always in stock
     if (!variant.manage_inventory) {
         return true;
@@ -124,8 +143,10 @@ const isVariantInStock = (variant: HttpTypes.AdminProductVariant): boolean => {
 };
 
 // Map Medusa variant options to Record<optionId, value>
-
-const getVariantOptionsMap = (variant: HttpTypes.AdminProductVariant): Record<string, string> => {
+// Accepts StoreProductVariant (primary) and AdminProductVariant (for compatibility)
+const getVariantOptionsMap = (
+    variant: HttpTypes.AdminProductVariant | HttpTypes.StoreProductVariant,
+): Record<string, string> => {
     const options = variant.options;
     if (!options || !Array.isArray(options)) {
         return {};
@@ -142,8 +163,9 @@ const getVariantOptionsMap = (variant: HttpTypes.AdminProductVariant): Record<st
 };
 
 // Map a list of Medusa variants to ProductVariantOption[]
+// Accepts StoreProductVariant[] (primary) and AdminProductVariant[] (for compatibility)
 const mapVariantOptions = (
-    variants: HttpTypes.AdminProductVariant[],
+    variants: HttpTypes.AdminProductVariant[] | HttpTypes.StoreProductVariant[],
     basePath: string,
     productHandle: string | null | undefined,
     productId: string,
@@ -166,8 +188,9 @@ const mapVariantOptions = (
 // Extract option groups from variants (Size, Color, etc.) with unique values per group
 // Apply variantOptionGroups for translated titles
 // Order is derived from the order of variantOptionGroups if provided, otherwise keep natural order
+// Accepts StoreProductVariant[] (primary) and AdminProductVariant[] (for compatibility)
 const mapOptionGroups = (
-    variants: HttpTypes.AdminProductVariant[],
+    variants: HttpTypes.AdminProductVariant[] | HttpTypes.StoreProductVariant[],
     variantOptionGroups?: { medusaTitle: string; label: string }[],
 ): Products.Model.ProductOptionGroup[] => {
     const groupsById = new Map<string, { medusaTitle: string; title: string; values: Set<string> }>();
@@ -216,7 +239,8 @@ const mapOptionGroups = (
 };
 
 // Get a display title for a variant from its options or title
-const getVariantTitle = (variant: HttpTypes.AdminProductVariant): string => {
+// Accepts StoreProductVariant (primary) and AdminProductVariant (for compatibility)
+const getVariantTitle = (variant: HttpTypes.AdminProductVariant | HttpTypes.StoreProductVariant): string => {
     if (variant.options && Array.isArray(variant.options) && variant.options.length > 0) {
         return variant.options
             .map((option: { value?: string }) => option.value)
@@ -227,9 +251,9 @@ const getVariantTitle = (variant: HttpTypes.AdminProductVariant): string => {
 };
 
 export const mapProduct = (
-    productVariant: HttpTypes.AdminProductVariant,
+    productVariant: HttpTypes.StoreProductVariant,
     defaultCurrency: string,
-    allVariants: HttpTypes.AdminProductVariant[] | undefined,
+    allVariants: HttpTypes.StoreProductVariant[] | undefined,
     basePath: string,
     variantOptionGroups?: { medusaTitle: string; label: string }[],
 ): Products.Model.Product => {
@@ -237,7 +261,8 @@ export const mapProduct = (
         throw new NotFoundException('Product variant is undefined');
     }
 
-    const product = productVariant?.product;
+    // Store API variants have product nested, Admin API variants have it as a property
+    const product = 'product' in productVariant ? productVariant.product : undefined;
 
     // Validate required fields
     if (!product?.id) {
@@ -259,7 +284,7 @@ export const mapProduct = (
         variantId: productVariant.id,
         image: mapThumbnail(product?.thumbnail, product?.title || ''),
         images: mapImages(product?.images, product?.title || ''),
-        price: mapPrice(productVariant.prices, defaultCurrency),
+        price: mapPrice(getVariantPrices(productVariant), defaultCurrency),
         link: generateProductLink(basePath, product?.handle, product?.id || '', productVariant.sku),
         type: mapProductType(product?.type || undefined),
         category: product?.categories?.[0]?.name || '',
@@ -273,8 +298,12 @@ export const mapProduct = (
     };
 };
 
+/**
+ * Maps a list of Medusa products to O2S Products model.
+ * Accepts StoreProductListResponse (primary, from Store API) and AdminProductListResponse (for compatibility).
+ */
 export const mapProducts = (
-    data: HttpTypes.AdminProductListResponse,
+    data: HttpTypes.StoreProductListResponse | HttpTypes.AdminProductListResponse,
     defaultCurrency: string,
     basePath: string,
     categoryFilter?: string,
@@ -312,7 +341,7 @@ export const mapProducts = (
                     variantId: firstVariant?.id || '',
                     image: mapThumbnail(product?.thumbnail, product.title),
                     images: mapImages(product.images, product.title),
-                    price: mapPrice(firstVariant?.prices, defaultCurrency),
+                    price: mapPrice(getVariantPrices(firstVariant), defaultCurrency),
                     link: generateProductLink(basePath, product.handle, product.id, firstVariant?.sku),
                     type: mapProductType(product?.type || undefined),
                     category: product.categories?.[0]?.name || '',
