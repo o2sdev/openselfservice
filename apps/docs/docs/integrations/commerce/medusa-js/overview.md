@@ -4,7 +4,7 @@ sidebar_position: 100
 
 # Medusa.js
 
-This integration provides a full integration with [Medusa.js](https://medusajs.com/) - the open-source commerce platform for digital commerce. The integration enables order management, product catalog browsing, cart and checkout, and resource management (assets and services) for customer self-service scenarios.
+this package provides a full integration with [Medusa.js](https://medusajs.com/) - the open-source commerce platform for digital commerce. The integration enables order management, product catalog browsing, cart and checkout, and resource management (assets and services) for customer self-service scenarios.
 
 ## In this section
 
