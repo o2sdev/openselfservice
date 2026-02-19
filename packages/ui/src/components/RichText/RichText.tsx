@@ -4,6 +4,8 @@ import React, { FC, ReactNode } from 'react';
 
 import { cn } from '@o2s/ui/lib/utils';
 
+import { Image } from '@o2s/ui/components/Image';
+
 import { Link } from '@o2s/ui/elements/link';
 import { Typography, TypographyProps } from '@o2s/ui/elements/typography';
 
@@ -50,12 +52,20 @@ const TdComp: FC<Readonly<TypographyProps & { children: ReactNode }>> = ({
 
 const ImgComp: FC<Readonly<React.ImgHTMLAttributes<HTMLImageElement> & { children?: ReactNode }>> = ({
     children: _children,
-    ...props
+    className,
+    src,
+    alt,
 }) => {
     return (
-        <Typography variant="image" asChild>
-            <img {...props} alt={props.alt} />
-        </Typography>
+        <div className={cn('relative', className)}>
+            <Image
+                src={(src as string) || ''}
+                alt={alt || ''}
+                fill
+                sizes="(max-width: 48rem) 100vw, 48rem"
+                className="relative! h-auto! object-contain"
+            />
+        </div>
     );
 };
 
