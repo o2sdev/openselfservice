@@ -28,7 +28,7 @@
         "@nestjs/config": "^4.0.3",
         "@nestjs/core": "^11.1.14",
         "@nestjs/platform-express": "^11.1.14",
-        "@nestjs/terminus": "^11.1.0",
+        "@nestjs/terminus": "^11.1.1",
         "@o2s/blocks.article": "*",
         "@o2s/blocks.article-list": "*",
         "@o2s/blocks.article-search": "*",
