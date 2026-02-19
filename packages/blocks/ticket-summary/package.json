@@ -4,6 +4,22 @@
     "private": false,
     "license": "MIT",
     "description": "Displays a dynamic TicketSummary showing ticket counts grouped by status.",
+    "keywords": [
+        "o2s",
+        "block",
+        "tickets",
+        "summary",
+        "dashboard"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/o2sdev/openselfservice.git",
+        "directory": "packages/blocks/ticket-summary"
+    },
+    "homepage": "https://github.com/o2sdev/openselfservice/tree/main/packages/blocks/ticket-summary#readme",
+    "bugs": {
+        "url": "https://github.com/o2sdev/openselfservice/issues"
+    },
     "exports": {
         "./api-harmonization": "./dist/api-harmonization/api-harmonization/index.js",
         "./frontend": "./dist/frontend/frontend/index.js",

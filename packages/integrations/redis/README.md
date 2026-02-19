@@ -1,0 +1,90 @@
+# @o2s/integrations.redis
+
+Redis integration for O2S, providing caching functionality.
+
+**Part of [Open Self Service (O2S)](https://www.openselfservice.com/)** - an open-source framework for building composable customer self-service portals. O2S simplifies integration of multiple headless APIs into a scalable frontend, providing an API-agnostic architecture with a normalization layer.
+
+- **Website**: [https://www.openselfservice.com/](https://www.openselfservice.com/)
+- **GitHub**: [https://github.com/o2sdev/openselfservice](https://github.com/o2sdev/openselfservice)
+- **Documentation**: [https://www.openselfservice.com/docs](https://www.openselfservice.com/docs)
+
+## About Integrations in O2S
+
+Integrations are adapters that connect O2S to external backend services. They handle API communication and normalize data from various backend services into an API-agnostic format. The frontend app communicates only with the API Harmonization server, never directly with backend services, enabling you to swap integrations without breaking the frontend.
+
+**Documentation**: [Redis cache](https://www.openselfservice.com/docs/integrations/cache/redis/overview)
+
+## About This Integration
+
+The Redis integration implements the O2S Cache module using Redis. It provides `get`, `set`, and `del` operations with TTL (time-to-live) for string keys. When caching is disabled (`CACHE_ENABLED=false`), get operations return undefined. Used by CMS integrations (Strapi, Contentful) and others to cache block and page data for better performance.
+
+- **Cache operations** – get, set, del with TTL
+- **Optional** – Enable/disable via `CACHE_ENABLED`
+- **Configurable** – Host, port, password via env vars
+- **Performance** – Reduces repeated API calls to CMS and other backends
+
+Developers configure `CACHE_REDIS_HOST`, `CACHE_REDIS_PORT`, and optionally `CACHE_REDIS_PASS`. No content editor involvement.
+
+## Installation
+
+```bash
+npm install @o2s/integrations.redis
+```
+
+## Configuration
+
+Configure the integration via `@o2s/configs.integrations` in your `AppConfig`:
+
+```typescript
+import { Cache } from '@o2s/configs.integrations';
+import { RedisConfig } from '@o2s/integrations.redis/integration';
+
+export const AppConfig: ApiConfig = {
+    integrations: {
+        cache: RedisConfig.cache,
+    },
+};
+```
+
+Or use the pre-configured integration from `@o2s/configs.integrations`:
+
+```typescript
+import { Cache } from '@o2s/configs.integrations';
+
+export const AppConfig: ApiConfig = {
+    integrations: {
+        cache: Cache.CacheIntegrationConfig,
+    },
+};
+```
+
+## Environment Variables
+
+### Required
+
+- `REDIS_URL` - Redis connection URL (e.g., `redis://localhost:6379`)
+
+### Optional
+
+- `REDIS_PASSWORD` - Redis password (if required)
+- `REDIS_DB` - Redis database number (default: 0)
+
+## Example .env
+
+```bash
+REDIS_URL=redis://localhost:6379
+REDIS_PASSWORD=your-password
+REDIS_DB=0
+```
+
+## Features
+
+- Key-value caching
+- TTL support
+- Connection pooling
+- Error handling
+
+## Related Packages
+
+- `@o2s/configs.integrations` - Integration configuration
+- `redis` - Redis client library

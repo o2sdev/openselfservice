@@ -1,10 +1,24 @@
 {
     "name": "@o2s/utils.api-harmonization",
     "version": "0.3.0",
-    "description": "",
-    "author": "",
+    "description": "Utility functions for O2S API Harmonization layer, including JWT and date helpers.",
     "private": false,
     "license": "MIT",
+    "keywords": [
+        "o2s",
+        "utils",
+        "api-harmonization",
+        "helpers"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/o2sdev/openselfservice.git",
+        "directory": "packages/utils/api-harmonization"
+    },
+    "homepage": "https://github.com/o2sdev/openselfservice/tree/main/packages/utils/api-harmonization#readme",
+    "bugs": {
+        "url": "https://github.com/o2sdev/openselfservice/issues"
+    },
     "exports": {
         ".": "./dist/index.js"
     },

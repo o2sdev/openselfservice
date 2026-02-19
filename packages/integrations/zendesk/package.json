@@ -3,6 +3,23 @@
   "version": "3.0.0",
   "private": false,
   "license": "MIT",
+  "description": "Zendesk integration for O2S, providing ticket management and support functionality.",
+  "keywords": [
+    "o2s",
+    "integration",
+    "zendesk",
+    "support",
+    "tickets"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/o2sdev/openselfservice.git",
+    "directory": "packages/integrations/zendesk"
+  },
+  "homepage": "https://github.com/o2sdev/openselfservice/tree/main/packages/integrations/zendesk#readme",
+  "bugs": {
+    "url": "https://github.com/o2sdev/openselfservice/issues"
+  },
   "exports": {
     "./integration": "./dist/src/integration.js"
   },

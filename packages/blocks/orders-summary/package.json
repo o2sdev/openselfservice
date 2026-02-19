@@ -4,6 +4,22 @@
     "private": false,
     "license": "MIT",
     "description": "A block displaying a summary of orders, including statistics and recent activity.",
+    "keywords": [
+        "o2s",
+        "block",
+        "orders",
+        "summary",
+        "ecommerce"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/o2sdev/openselfservice.git",
+        "directory": "packages/blocks/orders-summary"
+    },
+    "homepage": "https://github.com/o2sdev/openselfservice/tree/main/packages/blocks/orders-summary#readme",
+    "bugs": {
+        "url": "https://github.com/o2sdev/openselfservice/issues"
+    },
     "exports": {
         "./api-harmonization": "./dist/api-harmonization/api-harmonization/index.js",
         "./frontend": "./dist/frontend/frontend/index.js",

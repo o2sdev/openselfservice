@@ -2,6 +2,14 @@
     "name": "@o2s/eslint-config",
     "version": "1.1.0",
     "private": true,
+    "license": "MIT",
+    "description": "Shared ESLint configuration for O2S packages, supporting base, frontend, API, and UI configurations.",
+    "keywords": [
+        "o2s",
+        "config",
+        "eslint",
+        "linting"
+    ],
     "type": "module",
     "exports": {
         "./base": "./base.js",
