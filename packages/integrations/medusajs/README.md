@@ -58,14 +58,19 @@ export const AppConfig: ApiConfig = {
 
 ### Required
 
-- `MEDUSA_API_URL` - Your Medusa backend URL (e.g., `https://api.your-medusa.com`)
-- `MEDUSA_API_KEY` - Medusa API key for authentication
+- `MEDUSAJS_BASE_URL` - Your Medusa backend URL (e.g., `https://api.your-medusa.com`)
+- `MEDUSAJS_PUBLISHABLE_API_KEY` - Medusa publishable API key for Store API
+
+### Optional
+
+- `MEDUSAJS_ADMIN_API_KEY` - Medusa admin API key for Admin API endpoints
 
 ## Example .env
 
 ```bash
-MEDUSA_API_URL=https://api.your-medusa.com
-MEDUSA_API_KEY=your-api-key-here
+MEDUSAJS_BASE_URL=https://api.your-medusa.com
+MEDUSAJS_PUBLISHABLE_API_KEY=your-publishable-key
+MEDUSAJS_ADMIN_API_KEY=your-admin-key
 ```
 
 ## Features

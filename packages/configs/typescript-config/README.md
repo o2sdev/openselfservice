@@ -1,6 +1,6 @@
 # @o2s/typescript-config
 
-Shared TypeScript configuration for O2S packages, including base, React, and API configurations.
+Shared TypeScript configuration for O2S packages, including base, frontend, and API configurations.
 
 ## Installation
 
@@ -14,16 +14,16 @@ npm install -D @o2s/typescript-config
 
 For general TypeScript packages:
 
-```json
+```jsonc
 // tsconfig.json
 {
     "extends": "@o2s/typescript-config/base.json",
     "compilerOptions": {
         "outDir": "./dist",
-        "rootDir": "./src"
+        "rootDir": "./src",
     },
     "include": ["src"],
-    "exclude": ["node_modules", "dist"]
+    "exclude": ["node_modules", "dist"],
 }
 ```
 
@@ -31,16 +31,16 @@ For general TypeScript packages:
 
 For React/Next.js packages:
 
-```json
+```jsonc
 // tsconfig.json
 {
     "extends": "@o2s/typescript-config/react.json",
     "compilerOptions": {
         "outDir": "./dist",
-        "rootDir": "./src"
+        "rootDir": "./src",
     },
     "include": ["src"],
-    "exclude": ["node_modules", "dist"]
+    "exclude": ["node_modules", "dist"],
 }
 ```
 
@@ -48,16 +48,16 @@ For React/Next.js packages:
 
 For NestJS API packages:
 
-```json
+```jsonc
 // tsconfig.json
 {
     "extends": "@o2s/typescript-config/api.json",
     "compilerOptions": {
         "outDir": "./dist",
-        "rootDir": "./src"
+        "rootDir": "./src",
     },
     "include": ["src"],
-    "exclude": ["node_modules", "dist"]
+    "exclude": ["node_modules", "dist"],
 }
 ```
 

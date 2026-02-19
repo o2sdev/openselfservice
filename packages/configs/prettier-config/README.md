@@ -19,13 +19,17 @@ npm install -D @o2s/prettier-config
 }
 ```
 
-Or in `.prettierrc.json`:
+Or in `.prettierrc.mjs`:
 
-```json
-{
-    "extends": "@o2s/prettier-config"
-}
+```javascript
+import config from '@o2s/prettier-config/base.mjs';
+
+export default {
+    ...config,
+};
 ```
+
+Available configurations: `base.mjs`, `frontend.mjs`, `api.mjs`, `ui.mjs`, `docs.mjs`.
 
 ### Format Script
 
