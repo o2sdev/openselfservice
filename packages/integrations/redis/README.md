@@ -48,19 +48,23 @@ export const AppConfig: ApiConfig = {
 
 ### Required
 
-- `REDIS_URL` - Redis connection URL (e.g., `redis://localhost:6379`)
+- `CACHE_REDIS_HOST` - Redis host (e.g., `localhost`)
+- `CACHE_REDIS_PORT` - Redis port (e.g., `6379`)
 
 ### Optional
 
-- `REDIS_PASSWORD` - Redis password (if required)
-- `REDIS_DB` - Redis database number (default: 0)
+- `CACHE_ENABLED` - Enable or disable caching (default: `false`)
+- `CACHE_REDIS_PASS` - Redis password (if required)
+- `CACHE_TTL` - Cache TTL in seconds (default: `300`)
 
 ## Example .env
 
 ```bash
-REDIS_URL=redis://localhost:6379
-REDIS_PASSWORD=your-password
-REDIS_DB=0
+CACHE_ENABLED=true
+CACHE_REDIS_HOST=localhost
+CACHE_REDIS_PORT=6379
+CACHE_REDIS_PASS=your-password
+CACHE_TTL=300
 ```
 
 ## Features
