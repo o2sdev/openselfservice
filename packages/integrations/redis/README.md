@@ -22,17 +22,16 @@ npm install @o2s/integrations.redis
 Configure the integration via `@o2s/configs.integrations` in your `AppConfig`:
 
 ```typescript
-import { Cache } from '@o2s/configs.integrations';
-import { RedisConfig } from '@o2s/integrations.redis/integration';
+import { Config } from '@o2s/integrations.redis/integration';
 
 export const AppConfig: ApiConfig = {
     integrations: {
-        cache: RedisConfig.cache,
+        cache: Config.cache,
     },
 };
 ```
 
-Or use the pre-configured integration from `@o2s/configs.integrations`:
+Alternatively, use the pre-configured integration from `@o2s/configs.integrations`:
 
 ```typescript
 import { Cache } from '@o2s/configs.integrations';
@@ -46,14 +45,11 @@ export const AppConfig: ApiConfig = {
 
 ## Environment Variables
 
-### Required
-
-- `CACHE_REDIS_HOST` - Redis host (e.g., `localhost`)
-- `CACHE_REDIS_PORT` - Redis port (e.g., `6379`)
-
 ### Optional
 
 - `CACHE_ENABLED` - Enable or disable caching (default: `false`)
+- `CACHE_REDIS_HOST` - Redis host (required if `CACHE_ENABLED=true`, e.g., `localhost`)
+- `CACHE_REDIS_PORT` - Redis port (required if `CACHE_ENABLED=true`, e.g., `6379`)
 - `CACHE_REDIS_PASS` - Redis password (if required)
 - `CACHE_TTL` - Cache TTL in seconds (default: `300`)
 
@@ -71,7 +67,6 @@ CACHE_TTL=300
 
 - Key-value caching
 - TTL support
-- Connection pooling
 - Error handling
 
 ## Related Packages
