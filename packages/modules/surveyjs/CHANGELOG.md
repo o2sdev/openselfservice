@@ -1,5 +1,24 @@
 # @o2s/modules.surveyjs
 
+## 0.4.2
+
+### Patch Changes
+
+- 8529002: chore(deps): update dependencies
+- 8c01be4: added README
+- Updated dependencies [09d7b17]
+- Updated dependencies [c6ae8e6]
+- Updated dependencies [1f2965c]
+- Updated dependencies [88d180a]
+- Updated dependencies [1804016]
+- Updated dependencies [8c01be4]
+  - @o2s/framework@1.18.0
+  - @o2s/configs.integrations@0.6.0
+  - @o2s/ui@1.11.0
+  - @o2s/utils.api-harmonization@0.3.1
+  - @o2s/utils.frontend@0.4.1
+  - @o2s/utils.logger@1.2.2
+
 ## 0.4.1
 
 ### Patch Changes

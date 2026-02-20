@@ -1,5 +1,20 @@
 # @o2s/ui
 
+## 1.11.0
+
+### Minor Changes
+
+- 1804016: update article slugs to be relative and adjust mapping logic
+
+### Patch Changes
+
+- 8c01be4: added README
+- Updated dependencies [09d7b17]
+- Updated dependencies [c6ae8e6]
+- Updated dependencies [88d180a]
+- Updated dependencies [8c01be4]
+    - @o2s/framework@1.18.0
+
 ## 1.10.0
 
 ### Minor Changes

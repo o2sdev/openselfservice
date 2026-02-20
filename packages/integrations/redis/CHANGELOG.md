@@ -1,5 +1,17 @@
 # @o2s/integrations.redis
 
+## 1.3.1
+
+### Patch Changes
+
+- 8c01be4: added README
+- Updated dependencies [09d7b17]
+- Updated dependencies [c6ae8e6]
+- Updated dependencies [88d180a]
+- Updated dependencies [8c01be4]
+    - @o2s/framework@1.18.0
+    - @o2s/utils.logger@1.2.2
+
 ## 1.3.0
 
 ### Minor Changes

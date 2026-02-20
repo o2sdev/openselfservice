@@ -1,6 +1,6 @@
 {
     "name": "@o2s/utils.logger",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "private": false,
     "license": "MIT",
     "description": "Winston-based logging utility for O2S applications with NestJS integration.",

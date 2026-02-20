@@ -1,5 +1,22 @@
 # @o2s/framework
 
+## 1.18.0
+
+### Minor Changes
+
+- c6ae8e6: Added the normalized data model for a cart/checkout system with full CRUD operations for items and promotions:
+    - Checkout flow supporting address, shipping, and payment setup
+    - Customer address management for authenticated users
+    - Payment provider integration and session handling
+
+### Patch Changes
+
+- 09d7b17: chore(deps): update dependencies
+- 88d180a: chore(deps): update dependencies
+- 8c01be4: added README
+- Updated dependencies [8c01be4]
+    - @o2s/utils.logger@1.2.2
+
 ## 1.17.0
 
 ### Minor Changes
