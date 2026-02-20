@@ -65,7 +65,7 @@
         "@o2s/telemetry": "*",
         "@types/jsonwebtoken": "^9.0.10",
         "concurrently": "^9.2.1",
-        "eslint": "^9.39.2",
+        "eslint": "^9.39.3",
         "express": "5.2.1",
         "prettier": "^3.8.1",
         "shx": "^0.4.0",
