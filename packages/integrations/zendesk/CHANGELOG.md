@@ -1,5 +1,23 @@
 # @o2s/integrations.zendesk
 
+## 3.1.0
+
+### Minor Changes
+
+- 1804016: update article slugs to be relative and adjust mapping logic
+
+### Patch Changes
+
+- 163aa7a: chore(deps): update dependencies
+- 8c01be4: added README
+- e174181: chore(deps): update dependencies
+- Updated dependencies [09d7b17]
+- Updated dependencies [c6ae8e6]
+- Updated dependencies [88d180a]
+- Updated dependencies [8c01be4]
+    - @o2s/framework@1.18.0
+    - @o2s/utils.logger@1.2.2
+
 ## 3.0.0
 
 ### Major Changes

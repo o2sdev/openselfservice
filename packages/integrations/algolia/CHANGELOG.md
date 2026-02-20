@@ -1,5 +1,21 @@
 # @o2s/integrations.algolia
 
+## 1.5.1
+
+### Patch Changes
+
+- e19e2fd: chore(deps): update dependencies
+- 8a59a9f: chore(deps): update dependencies
+- 8c01be4: added README
+- 9c78485: chore(deps): update dependencies
+- 01725fc: chore(deps): update dependencies
+- Updated dependencies [09d7b17]
+- Updated dependencies [c6ae8e6]
+- Updated dependencies [88d180a]
+- Updated dependencies [8c01be4]
+    - @o2s/framework@1.18.0
+    - @o2s/utils.logger@1.2.2
+
 ## 1.5.0
 
 ### Minor Changes

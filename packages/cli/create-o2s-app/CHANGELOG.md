@@ -1,5 +1,13 @@
 # create-o2s-app
 
+## 1.2.2
+
+### Patch Changes
+
+- 8c01be4: added README
+- Updated dependencies [8c01be4]
+    - @o2s/telemetry@1.2.1
+
 ## 1.2.1
 
 ### Patch Changes

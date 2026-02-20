@@ -1,6 +1,6 @@
 {
     "name": "@o2s/utils.api-harmonization",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "description": "Utility functions for O2S API Harmonization layer, including JWT and date helpers.",
     "private": false,
     "license": "MIT",
