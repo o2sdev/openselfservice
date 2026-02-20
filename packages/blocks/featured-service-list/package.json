@@ -4,6 +4,22 @@
     "private": false,
     "license": "MIT",
     "description": "A block displaying a list of featured services.",
+    "keywords": [
+        "o2s",
+        "block",
+        "services",
+        "featured",
+        "cms"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/o2sdev/openselfservice.git",
+        "directory": "packages/blocks/featured-service-list"
+    },
+    "homepage": "https://github.com/o2sdev/openselfservice/tree/main/packages/blocks/featured-service-list#readme",
+    "bugs": {
+        "url": "https://github.com/o2sdev/openselfservice/issues"
+    },
     "exports": {
         "./api-harmonization": "./dist/api-harmonization/api-harmonization/index.js",
         "./frontend": "./dist/frontend/frontend/index.js",

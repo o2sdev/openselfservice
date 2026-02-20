@@ -4,6 +4,22 @@
     "private": false,
     "license": "MIT",
     "description": "A block for displaying and filtering a list of products with grid and table views.",
+    "keywords": [
+        "o2s",
+        "block",
+        "products",
+        "ecommerce",
+        "catalog"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/o2sdev/openselfservice.git",
+        "directory": "packages/blocks/product-list"
+    },
+    "homepage": "https://github.com/o2sdev/openselfservice/tree/main/packages/blocks/product-list#readme",
+    "bugs": {
+        "url": "https://github.com/o2sdev/openselfservice/issues"
+    },
     "exports": {
         "./api-harmonization": "./dist/api-harmonization/api-harmonization/index.js",
         "./frontend": "./dist/frontend/frontend/index.js",

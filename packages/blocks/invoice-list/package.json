@@ -4,6 +4,22 @@
     "private": false,
     "license": "MIT",
     "description": "A block for displaying and managing invoice list.",
+    "keywords": [
+        "o2s",
+        "block",
+        "invoice",
+        "billing",
+        "payments"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/o2sdev/openselfservice.git",
+        "directory": "packages/blocks/invoice-list"
+    },
+    "homepage": "https://github.com/o2sdev/openselfservice/tree/main/packages/blocks/invoice-list#readme",
+    "bugs": {
+        "url": "https://github.com/o2sdev/openselfservice/issues"
+    },
     "exports": {
         "./api-harmonization": "./dist/api-harmonization/api-harmonization/index.js",
         "./frontend": "./dist/frontend/frontend/index.js",

@@ -3,6 +3,13 @@
     "version": "0.5.0",
     "private": true,
     "license": "MIT",
+    "description": "Integration configuration package for O2S, providing centralized integration configs and type re-exports.",
+    "keywords": [
+        "o2s",
+        "config",
+        "integrations",
+        "configuration"
+    ],
     "exports": {
         ".": "./dist/src/models/index.js",
         "./live-preview": "./dist/src/models/live-preview.js"

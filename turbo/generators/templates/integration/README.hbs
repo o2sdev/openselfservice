@@ -1,0 +1,97 @@
+# @o2s/integrations.{{kebabCase name}}
+
+{{pascalCase name}} integration for O2S.
+
+Add a description of what this specific integration does, its key features, and value for developers and content editors.
+
+- **Feature 1** – Description
+- **Feature 2** – Description
+- **Feature 3** – Description
+
+Content editors can... Developers configure...
+
+## Installation
+
+```bash
+npm install @o2s/integrations.{{kebabCase name}}
+```
+
+## Configuration
+
+Configure the integration via `@o2s/configs.integrations` in your `AppConfig`:
+
+```typescript
+import { {{pascalCase name}}Config } from '@o2s/integrations.{{kebabCase name}}/integration';
+
+export const AppConfig: ApiConfig = {
+    integrations: {
+        // Add integration configs here based on selected modules
+        // Example: tickets: {{pascalCase name}}Config.tickets,
+    },
+};
+```
+
+Or use the pre-configured integration from `@o2s/configs.integrations`:
+
+```typescript
+import { /* Add module imports */ } from '@o2s/configs.integrations';
+
+export const AppConfig: ApiConfig = {
+    integrations: {
+        // Add integration configs here
+        // Example: tickets: Tickets.TicketsIntegrationConfig,
+    },
+};
+```
+
+## Environment Variables
+
+### Required
+
+Add required environment variables here:
+
+```bash
+# Example:
+# {{upperCase name}}_API_URL=https://api.example.com
+# {{upperCase name}}_API_KEY=your-api-key
+```
+
+## Example .env
+
+```bash
+# Add example environment variables here
+```
+
+## Features
+
+- List key features of this integration
+
+## Related Packages
+
+- `@o2s/configs.integrations` - Integration configuration
+
+## About Integrations in O2S
+
+Integrations are adapters that connect O2S to external backend services. They handle API communication and normalize data from various backend services into an API-agnostic format. The frontend app communicates only with the API Harmonization server, never directly with backend services, enabling you to swap integrations without breaking the frontend.
+
+**Documentation**: See [Integration Documentation](https://www.openselfservice.com/docs/integrations/{category}/{{kebabCase name}}/overview) (update the `{category}` path as needed).
+
+Common categories: `cms`, `tickets`, `commerce`, `articles`, `search`, `cache`, `forms`
+
+Examples:
+- Strapi: `https://www.openselfservice.com/docs/integrations/cms/strapi/overview`
+- Medusa: `https://www.openselfservice.com/docs/integrations/commerce/medusajs/overview`
+
+{{#if (eq name 'zendesk')}}
+**For Zendesk integration**, see both documentation areas:
+- [Zendesk Tickets Documentation](https://www.openselfservice.com/docs/integrations/tickets/zendesk/overview)
+- [Zendesk Articles Documentation](https://www.openselfservice.com/docs/integrations/articles/zendesk/overview)
+{{/if}}
+
+## About O2S
+
+**Part of [Open Self Service (O2S)](https://www.openselfservice.com/)** - an open-source framework for building composable customer self-service portals. O2S simplifies integration of multiple headless APIs into a scalable frontend, providing an API-agnostic architecture with a normalization layer.
+
+- **Website**: [https://www.openselfservice.com/](https://www.openselfservice.com/)
+- **GitHub**: [https://github.com/o2sdev/openselfservice](https://github.com/o2sdev/openselfservice)
+- **Documentation**: [https://www.openselfservice.com/docs](https://www.openselfservice.com/docs)

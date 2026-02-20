@@ -3,6 +3,14 @@
     "version": "1.10.0",
     "private": true,
     "license": "MIT",
+    "description": "Shared UI component library for O2S blocks, built on Radix UI and Tailwind CSS.",
+    "keywords": [
+        "o2s",
+        "ui",
+        "components",
+        "radix-ui",
+        "tailwindcss"
+    ],
     "exports": {
         "./globals": "./src/globals.css",
         "./theme": "./src/theme.css",

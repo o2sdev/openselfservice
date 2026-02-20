@@ -4,6 +4,22 @@
     "private": false,
     "license": "MIT",
     "description": "A block displaying details for a specific order, including items, status, and history.",
+    "keywords": [
+        "o2s",
+        "block",
+        "orders",
+        "ecommerce",
+        "order-details"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/o2sdev/openselfservice.git",
+        "directory": "packages/blocks/order-details"
+    },
+    "homepage": "https://github.com/o2sdev/openselfservice/tree/main/packages/blocks/order-details#readme",
+    "bugs": {
+        "url": "https://github.com/o2sdev/openselfservice/issues"
+    },
     "exports": {
         "./api-harmonization": "./dist/api-harmonization/api-harmonization/index.js",
         "./frontend": "./dist/frontend/frontend/index.js",

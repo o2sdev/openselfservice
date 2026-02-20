@@ -4,6 +4,22 @@
     "private": false,
     "license": "MIT",
     "description": "A block displaying a list of orders.",
+    "keywords": [
+        "o2s",
+        "block",
+        "orders",
+        "ecommerce",
+        "medusa"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/o2sdev/openselfservice.git",
+        "directory": "packages/blocks/order-list"
+    },
+    "homepage": "https://github.com/o2sdev/openselfservice/tree/main/packages/blocks/order-list#readme",
+    "bugs": {
+        "url": "https://github.com/o2sdev/openselfservice/issues"
+    },
     "exports": {
         "./api-harmonization": "./dist/api-harmonization/api-harmonization/index.js",
         "./frontend": "./dist/frontend/frontend/index.js",

@@ -4,6 +4,22 @@
     "private": false,
     "license": "MIT",
     "description": "A simple block displaying static content in the form of an FAQ.",
+    "keywords": [
+        "o2s",
+        "block",
+        "faq",
+        "cms",
+        "content"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/o2sdev/openselfservice.git",
+        "directory": "packages/blocks/faq"
+    },
+    "homepage": "https://github.com/o2sdev/openselfservice/tree/main/packages/blocks/faq#readme",
+    "bugs": {
+        "url": "https://github.com/o2sdev/openselfservice/issues"
+    },
     "exports": {
         "./api-harmonization": "./dist/api-harmonization/api-harmonization/index.js",
         "./frontend": "./dist/frontend/frontend/index.js",

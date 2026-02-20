@@ -3,6 +3,22 @@
     "version": "1.5.0",
     "private": false,
     "license": "MIT",
+    "description": "Algolia integration for O2S, providing search functionality.",
+    "keywords": [
+        "o2s",
+        "integration",
+        "algolia",
+        "search"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/o2sdev/openselfservice.git",
+        "directory": "packages/integrations/algolia"
+    },
+    "homepage": "https://github.com/o2sdev/openselfservice/tree/main/packages/integrations/algolia#readme",
+    "bugs": {
+        "url": "https://github.com/o2sdev/openselfservice/issues"
+    },
     "exports": {
         "./integration": "./dist/integration.js"
     },

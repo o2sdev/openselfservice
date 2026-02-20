@@ -4,6 +4,22 @@
     "private": false,
     "license": "MIT",
     "description": "A module that handles fetching, rendering ans submitting SurveyJS-based forms.",
+    "keywords": [
+        "o2s",
+        "module",
+        "surveyjs",
+        "forms",
+        "surveys"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/o2sdev/openselfservice.git",
+        "directory": "packages/modules/surveyjs"
+    },
+    "homepage": "https://github.com/o2sdev/openselfservice/tree/main/packages/modules/surveyjs#readme",
+    "bugs": {
+        "url": "https://github.com/o2sdev/openselfservice/issues"
+    },
     "exports": {
         "./api-harmonization": "./dist/api-harmonization/api-harmonization/index.js",
         "./frontend": "./dist/frontend/frontend/index.js",

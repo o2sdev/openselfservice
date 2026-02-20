@@ -3,6 +3,23 @@
     "version": "1.8.0",
     "private": false,
     "license": "MIT",
+    "description": "MedusaJS integration for O2S, providing ecommerce functionality including products, orders, and carts.",
+    "keywords": [
+        "o2s",
+        "integration",
+        "medusa",
+        "ecommerce",
+        "orders"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/o2sdev/openselfservice.git",
+        "directory": "packages/integrations/medusajs"
+    },
+    "homepage": "https://github.com/o2sdev/openselfservice/tree/main/packages/integrations/medusajs#readme",
+    "bugs": {
+        "url": "https://github.com/o2sdev/openselfservice/issues"
+    },
     "exports": {
         "./integration": "./dist/integration.js"
     },

@@ -1,10 +1,24 @@
 {
     "name": "@o2s/utils.frontend",
     "version": "0.4.0",
-    "description": "",
-    "author": "",
+    "description": "Utility functions for O2S frontend applications.",
     "private": false,
     "license": "MIT",
+    "keywords": [
+        "o2s",
+        "utils",
+        "frontend",
+        "helpers"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/o2sdev/openselfservice.git",
+        "directory": "packages/utils/frontend"
+    },
+    "homepage": "https://github.com/o2sdev/openselfservice/tree/main/packages/utils/frontend#readme",
+    "bugs": {
+        "url": "https://github.com/o2sdev/openselfservice/issues"
+    },
     "exports": {
         ".": "./dist/index.js"
     },

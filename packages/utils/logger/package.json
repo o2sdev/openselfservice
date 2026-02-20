@@ -3,6 +3,23 @@
     "version": "1.2.1",
     "private": false,
     "license": "MIT",
+    "description": "Winston-based logging utility for O2S applications with NestJS integration.",
+    "keywords": [
+        "o2s",
+        "utils",
+        "logger",
+        "logging",
+        "winston"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/o2sdev/openselfservice.git",
+        "directory": "packages/utils/logger"
+    },
+    "homepage": "https://github.com/o2sdev/openselfservice/tree/main/packages/utils/logger#readme",
+    "bugs": {
+        "url": "https://github.com/o2sdev/openselfservice/issues"
+    },
     "exports": {
         "default": "./dist/index.js",
         "types": "./dist/index.d.ts"

@@ -3,6 +3,23 @@
     "version": "1.18.0",
     "private": false,
     "license": "MIT",
+    "description": "Mocked integration for O2S development and testing, providing in-memory data with Prisma.",
+    "keywords": [
+        "o2s",
+        "integration",
+        "mocked",
+        "mock",
+        "development"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/o2sdev/openselfservice.git",
+        "directory": "packages/integrations/mocked"
+    },
+    "homepage": "https://github.com/o2sdev/openselfservice/tree/main/packages/integrations/mocked#readme",
+    "bugs": {
+        "url": "https://github.com/o2sdev/openselfservice/issues"
+    },
     "exports": {
         "./integration": "./dist/integration.js",
         "./sdk": "./dist/sdk/index.js",
