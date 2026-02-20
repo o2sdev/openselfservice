@@ -3,7 +3,7 @@ import { Articles } from '@o2s/framework/modules';
 export const MOCK_ARTICLE11_EN: Articles.Model.Article[] = [
     {
         id: 'art-011',
-        slug: '/help-and-support/warranty-and-repair/powerpro-tool-certification-program',
+        slug: 'warranty-and-repair/powerpro-tool-certification-program',
         roles: [],
         createdAt: '2023-09-12T14:50:00Z',
         updatedAt: '2023-09-12T14:50:00Z',
@@ -67,7 +67,7 @@ export const MOCK_ARTICLE11_EN: Articles.Model.Article[] = [
     },
     {
         id: 'art-015',
-        slug: '/help-and-support/warranty/expedited-repair-service-options',
+        slug: 'warranty/expedited-repair-service-options',
         roles: [],
         createdAt: '2023-07-30T12:10:00Z',
         updatedAt: '2023-07-30T12:10:00Z',
@@ -110,7 +110,7 @@ export const MOCK_ARTICLE11_EN: Articles.Model.Article[] = [
     },
     {
         id: 'art-017',
-        slug: '/help-and-support/warranty/repair-tracking-system-benefits',
+        slug: 'warranty/repair-tracking-system-benefits',
         roles: [],
         createdAt: '2023-01-15T13:30:00Z',
         updatedAt: '2023-04-22T15:45:00Z',
@@ -168,7 +168,7 @@ export const MOCK_ARTICLE11_EN: Articles.Model.Article[] = [
 export const MOCK_ARTICLE11_DE: Articles.Model.Article[] = [
     {
         id: 'art-011',
-        slug: '/hilfe-und-support/garantie/powerpro-werkzeug-zertifizierungsprogramm',
+        slug: 'garantie/powerpro-werkzeug-zertifizierungsprogramm',
         roles: [],
         createdAt: '2023-09-12T14:50:00Z',
         updatedAt: '2023-09-12T14:50:00Z',
@@ -235,7 +235,7 @@ export const MOCK_ARTICLE11_DE: Articles.Model.Article[] = [
 export const MOCK_ARTICLE11_PL: Articles.Model.Article[] = [
     {
         id: 'art-011',
-        slug: '/pomoc-i-wsparcie/gwarancja/program-certyfikacji-narzedzi-powerpro',
+        slug: 'gwarancja/program-certyfikacji-narzedzi-powerpro',
         roles: [],
         createdAt: '2023-09-12T14:50:00Z',
         updatedAt: '2023-09-12T14:50:00Z',

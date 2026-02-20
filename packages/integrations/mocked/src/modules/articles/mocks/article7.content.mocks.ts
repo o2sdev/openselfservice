@@ -393,7 +393,7 @@ Aby uzyskać pomoc w rejestracji, skontaktuj się z naszym zespołem obsługi kl
 export const MOCK_ARTICLE7_EN: Articles.Model.Article[] = [
     {
         id: 'art-007',
-        slug: '/help-and-support/registration/step-by-step-guide-to-tool-registration',
+        slug: 'registration/step-by-step-guide-to-tool-registration',
         roles: [],
         createdAt: '2023-01-30T11:20:00Z',
         updatedAt: '2023-05-22T09:10:00Z',
@@ -458,7 +458,7 @@ export const MOCK_ARTICLE7_EN: Articles.Model.Article[] = [
 export const MOCK_ARTICLE7_DE: Articles.Model.Article[] = [
     {
         id: 'art-007',
-        slug: '/hilfe-und-support/registrierung/schritt-fur-schritt-anleitung-zur-werkzeugregistrierung',
+        slug: 'registrierung/schritt-fur-schritt-anleitung-zur-werkzeugregistrierung',
         roles: [],
         createdAt: '2023-01-30T11:20:00Z',
         updatedAt: '2023-05-22T09:10:00Z',
@@ -524,7 +524,7 @@ export const MOCK_ARTICLE7_DE: Articles.Model.Article[] = [
 export const MOCK_ARTICLE7_PL: Articles.Model.Article[] = [
     {
         id: 'art-007',
-        slug: '/pomoc-i-wsparcie/rejestracja/przewodnik-krok-po-kroku-rejestracja-narzedzi',
+        slug: 'rejestracja/przewodnik-krok-po-kroku-rejestracja-narzedzi',
         roles: [],
         createdAt: '2023-01-30T11:20:00Z',
         updatedAt: '2023-05-22T09:10:00Z',

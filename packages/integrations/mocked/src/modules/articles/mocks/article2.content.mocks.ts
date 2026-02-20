@@ -3,7 +3,7 @@ import { Articles } from '@o2s/framework/modules';
 export const MOCK_ARTICLE2_EN: Articles.Model.Article[] = [
     {
         id: 'art-003',
-        slug: '/help-and-support/safety/powerpro-tool-safety-guidelines',
+        slug: 'safety/powerpro-tool-safety-guidelines',
         roles: [],
         createdAt: '2023-07-15T09:45:00Z',
         updatedAt: '2023-08-25T13:20:00Z',
@@ -241,7 +241,7 @@ For additional safety information or to report a safety concern with a PowerPro 
 export const MOCK_ARTICLE2_DE: Articles.Model.Article[] = [
     {
         id: 'art-003',
-        slug: '/hilfe-und-support/sicherheit/powerpro-werkzeug-sicherheitsrichtlinien',
+        slug: 'sicherheit/powerpro-werkzeug-sicherheitsrichtlinien',
         roles: [],
         createdAt: '2023-07-15T09:45:00Z',
         updatedAt: '2023-08-25T13:20:00Z',
@@ -479,7 +479,7 @@ Für zusätzliche Sicherheitsinformationen oder um ein Sicherheitsanliegen mit e
 export const MOCK_ARTICLE2_PL: Articles.Model.Article[] = [
     {
         id: 'art-003',
-        slug: '/pomoc-i-wsparcie/bezpieczenstwo/wytyczne-bezpieczenstwa-narzedzi-powerpro',
+        slug: 'bezpieczenstwo/wytyczne-bezpieczenstwa-narzedzi-powerpro',
         roles: [],
         createdAt: '2023-07-15T09:45:00Z',
         updatedAt: '2023-08-25T13:20:00Z',

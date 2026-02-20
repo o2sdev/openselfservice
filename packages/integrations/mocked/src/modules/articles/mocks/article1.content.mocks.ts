@@ -3,7 +3,7 @@ import { Articles } from '@o2s/framework/modules';
 export const MOCK_ARTICLE1_EN: Articles.Model.Article[] = [
     {
         id: 'art-002',
-        slug: '/help-and-support/maintenance/powerpro-tool-maintenance-guide',
+        slug: 'maintenance/powerpro-tool-maintenance-guide',
         roles: [],
         createdAt: '2023-06-10T10:15:00Z',
         updatedAt: '2023-07-20T16:30:00Z',
@@ -231,7 +231,7 @@ For additional assistance with tool maintenance, contact our customer support te
 export const MOCK_ARTICLE1_DE: Articles.Model.Article[] = [
     {
         id: 'art-002',
-        slug: '/hilfe-und-support/wartung/powerpro-werkzeug-wartungsanleitung',
+        slug: 'wartung/powerpro-werkzeug-wartungsanleitung',
         roles: [],
         createdAt: '2023-06-10T10:15:00Z',
         updatedAt: '2023-07-20T16:30:00Z',
@@ -459,7 +459,7 @@ Für zusätzliche Unterstützung bei der Werkzeugwartung kontaktieren Sie unser 
 export const MOCK_ARTICLE1_PL: Articles.Model.Article[] = [
     {
         id: 'art-002',
-        slug: '/pomoc-i-wsparcie/konserwacja/przewodnik-konserwacji-narzedzi-powerpro',
+        slug: 'konserwacja/przewodnik-konserwacji-narzedzi-powerpro',
         roles: [],
         createdAt: '2023-06-10T10:15:00Z',
         updatedAt: '2023-07-20T16:30:00Z',
