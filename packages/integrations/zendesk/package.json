@@ -52,7 +52,7 @@
     "@o2s/typescript-config": "*",
     "@types/html-to-text": "^9.0.4",
     "concurrently": "^9.2.1",
-    "eslint": "^9.39.2",
+    "eslint": "^9.39.3",
     "prettier": "^3.8.1",
     "tsc-alias": "^1.8.16",
     "tsx": "^4.21.0",
