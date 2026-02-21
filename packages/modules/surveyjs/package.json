@@ -41,8 +41,8 @@
         "@o2s/utils.api-harmonization": "*",
         "@o2s/utils.frontend": "*",
         "@o2s/configs.integrations": "*",
-        "survey-core": "^2.5.10",
-        "survey-react-ui": "^2.5.10"
+        "survey-core": "^2.5.11",
+        "survey-react-ui": "^2.5.11"
     },
     "devDependencies": {
         "dotenv-cli": "^11.0.0",
