@@ -35,7 +35,7 @@
         "generate": "graphql-codegen && prettier --write \"generated/**/*.{ts,tsx}\""
     },
     "dependencies": {
-        "@contentful/live-preview": "^4.9.5",
+        "@contentful/live-preview": "^4.9.6",
         "@o2s/framework": "*",
         "@o2s/utils.logger": "*",
         "contentful": "^11.10.4",
