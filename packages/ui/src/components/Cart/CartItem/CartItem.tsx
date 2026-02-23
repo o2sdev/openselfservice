@@ -15,6 +15,7 @@ import { CartItemProps } from './CartItem.types';
 export const CartItem: React.FC<Readonly<CartItemProps>> = ({
     id,
     productId: _productId,
+    productUrl,
     name,
     subtitle,
     image,
@@ -24,34 +25,46 @@ export const CartItem: React.FC<Readonly<CartItemProps>> = ({
     labels,
     onRemove,
     onQuantityChange,
+    LinkComponent,
 }) => {
     const handleQuantityInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newQuantity = parseInt(e.target.value, 10) || 1;
         onQuantityChange(id, newQuantity);
     };
 
+    const imageContent = image && (
+        <div className="relative w-32 h-32 shrink-0 rounded-md overflow-hidden bg-muted">
+            <Image src={image.url} alt={image.alt || name} fill sizes="128px" className="object-cover object-center" />
+        </div>
+    );
+
     return (
         <div className="flex flex-row gap-4 p-4 bg-card rounded-lg border border-border">
             {/* Product Image */}
-            {image && (
-                <div className="relative w-32 h-32 shrink-0 rounded-md overflow-hidden bg-muted">
-                    <Image
-                        src={image.url}
-                        alt={image.alt || name}
-                        fill
-                        sizes="128px"
-                        className="object-cover object-center"
-                    />
-                </div>
-            )}
+            {image &&
+                (productUrl && LinkComponent ? (
+                    <LinkComponent href={productUrl} className="shrink-0">
+                        {imageContent}
+                    </LinkComponent>
+                ) : (
+                    imageContent
+                ))}
 
             {/* Product Info */}
             <div className="min-w-0 flex-1 flex flex-col gap-2 justify-between">
                 <div className="flex items-start justify-between gap-4">
                     <div className="flex-1">
-                        <Typography variant="h3" className="mb-1">
-                            {name}
-                        </Typography>
+                        {productUrl && LinkComponent ? (
+                            <LinkComponent href={productUrl}>
+                                <Typography variant="h3" className="mb-1 hover:underline">
+                                    {name}
+                                </Typography>
+                            </LinkComponent>
+                        ) : (
+                            <Typography variant="h3" className="mb-1">
+                                {name}
+                            </Typography>
+                        )}
                         {subtitle && (
                             <Typography variant="small" className="text-muted-foreground">
                                 {subtitle}
@@ -63,7 +76,7 @@ export const CartItem: React.FC<Readonly<CartItemProps>> = ({
                     </Button>
                 </div>
 
-                <div className="flex justify-between gap-4">
+                <div className="flex flex-wrap gap-x-4 gap-y-2">
                     {/* Quantity Controls */}
                     <div className="flex items-end gap-2">
                         <Button
@@ -94,11 +107,11 @@ export const CartItem: React.FC<Readonly<CartItemProps>> = ({
                     </div>
 
                     {/* Item Total */}
-                    <div className="flex min-w-0 flex-col items-end overflow-hidden">
+                    <div className="ml-auto flex min-w-0 flex-col items-end">
                         <Typography variant="small" className="text-muted-foreground">
                             {labels.itemTotal}
                         </Typography>
-                        <Typography variant="h3" className="max-w-full break-all text-right text-primary">
+                        <Typography variant="h3" className="text-right text-primary">
                             <Price price={total} />
                         </Typography>
                     </div>

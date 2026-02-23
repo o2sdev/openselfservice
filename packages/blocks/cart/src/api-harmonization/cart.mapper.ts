@@ -17,6 +17,7 @@ const mapCartItems = (cart: Carts.Model.Cart): CartBlockItem[] =>
             image: item.product.image
                 ? { url: item.product.image.url, alt: item.product.image.alt ?? item.product.name }
                 : undefined,
+            link: item.product.link,
         },
     }));
 

@@ -10,6 +10,7 @@ import { CartSummary } from '@o2s/ui/components/Cart/CartSummary';
 import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
 
 import { Button } from '@o2s/ui/elements/button';
+import { Skeleton } from '@o2s/ui/elements/skeleton';
 import { Typography } from '@o2s/ui/elements/typography';
 
 import type { Model } from '../api-harmonization/cart.client';
@@ -49,6 +50,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
     const [cartDiscountTotal, setCartDiscountTotal] = useState<Model.CartBlock['discountTotal']>(initialDiscountTotal);
     const [cartShippingMethod, setCartShippingMethod] =
         useState<Model.CartBlock['shippingMethod']>(initialShippingMethod);
+    const [isLoading, setIsLoading] = useState(false);
     const [isPending, startTransition] = useTransition();
 
     const refreshCart = async (cartId: string): Promise<void> => {
@@ -64,7 +66,8 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
         const cartId = localStorage.getItem(CART_ID_KEY);
         if (!cartId) return;
 
-        startTransition(async () => {
+        setIsLoading(true);
+        (async () => {
             try {
                 await refreshCart(cartId);
             } catch (error) {
@@ -72,8 +75,10 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
                 if (status === 404 || status === 401) {
                     localStorage.removeItem(CART_ID_KEY);
                 }
+            } finally {
+                setIsLoading(false);
             }
-        });
+        })();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id, locale, accessToken]);
 
@@ -115,6 +120,31 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
         return (
             <div className="w-full flex flex-col gap-4">
                 {__typename}: {id}
+            </div>
+        );
+    }
+
+    if (isLoading) {
+        return (
+            <div className="w-full flex flex-col gap-8 md:gap-12">
+                <div className="flex flex-col gap-2">
+                    <Typography variant="h1">{title}</Typography>
+                    {subtitle && (
+                        <Typography variant="large" className="text-muted-foreground">
+                            {subtitle}
+                        </Typography>
+                    )}
+                </div>
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div className="lg:col-span-2 flex flex-col gap-4">
+                        <Skeleton variant="rounded" className="h-32" />
+                        <Skeleton variant="rounded" className="h-32" />
+                        <Skeleton variant="rounded" className="h-32" />
+                    </div>
+                    <div className="lg:col-span-1">
+                        <Skeleton variant="rounded" className="h-64" />
+                    </div>
+                </div>
             </div>
         );
     }
@@ -169,6 +199,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
                                 key={item.id}
                                 id={item.id}
                                 productId={item.productId}
+                                productUrl={product.link}
                                 name={product.name}
                                 subtitle={product.subtitle}
                                 image={product.image}
@@ -181,6 +212,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
                                 }}
                                 onRemove={removeItem}
                                 onQuantityChange={updateQuantity}
+                                LinkComponent={LinkComponent}
                             />
                         );
                     })}

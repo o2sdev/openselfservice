@@ -7,6 +7,7 @@ export interface CartBlockItemProduct {
     name: string;
     subtitle?: string;
     image?: { url: string; alt?: string };
+    link?: string;
 }
 
 /** Cart item with optional product info */
