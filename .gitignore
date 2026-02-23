@@ -49,6 +49,7 @@ storybook-static
 dist
 
 # AI rules
+.ai
 .claude
 AGENTS.md
 CLAUDE.md
