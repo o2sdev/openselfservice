@@ -1,5 +1,5 @@
 import { BlockInfo, IntegrationInfo, TemplateType, WizardAnswers } from '../types';
-import { TEMPLATES, filterBlocksByTemplate } from './templates';
+import { TEMPLATES, filterBlocksByTemplate, filterIntegrationsByTemplate } from './templates';
 import prompts from 'prompts';
 
 export const promptProjectName = async (defaultName: string): Promise<string> => {
@@ -73,28 +73,23 @@ export const promptBlockSelection = async (availableBlocks: BlockInfo[], presele
 
 export const promptIntegrationSelection = async (
     availableIntegrations: IntegrationInfo[],
-    template: TemplateType,
+    preselected: string[],
 ): Promise<string[]> => {
-    if (template !== 'custom') {
-        return ['mocked'];
-    }
-
     const { selectedIntegrations } = await prompts({
         type: 'multiselect',
         name: 'selectedIntegrations',
         message: 'Select integrations to include:',
-        choices: availableIntegrations
-            .filter((integration) => integration.name !== 'mocked')
-            .map((integration) => ({
-                title: integration.name,
-                description: integration.description,
-                value: integration.name,
-            })),
+        choices: availableIntegrations.map((integration) => ({
+            title: integration.name,
+            description: integration.description,
+            value: integration.name,
+            selected: preselected.includes(integration.name),
+        })),
         instructions: false,
-        hint: '- Space to select. Return to submit (none is OK)',
+        hint: '- Space to select. Return to submit',
     });
 
-    return selectedIntegrations || [];
+    return selectedIntegrations ?? [];
 };
 
 export const runWizardPrompts = async (
@@ -107,14 +102,15 @@ export const runWizardPrompts = async (
     const template = cliTemplate || (await promptTemplate());
 
     let selectedBlocks: string[];
+    let selectedIntegrations: string[];
 
     if (template === 'custom') {
         selectedBlocks = await promptBlockSelection(availableBlocks, []);
+        selectedIntegrations = await promptIntegrationSelection(availableIntegrations, []);
     } else {
         selectedBlocks = filterBlocksByTemplate(template, availableBlocks);
+        selectedIntegrations = filterIntegrationsByTemplate(template, availableIntegrations);
     }
-
-    const selectedIntegrations = await promptIntegrationSelection(availableIntegrations, template);
 
     return {
         projectName,

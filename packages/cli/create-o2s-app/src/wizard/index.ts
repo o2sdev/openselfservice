@@ -10,18 +10,17 @@ export const runWizard = async (
     cliBlocks?: string[],
     cliIntegrations?: string[],
 ): Promise<WizardAnswers> => {
-    const allBlocks = await discoverBlocks(repoDir);
-    const allIntegrations = await discoverIntegrations(repoDir);
+    const [allBlocks, allIntegrations] = await Promise.all([discoverBlocks(repoDir), discoverIntegrations(repoDir)]);
 
     console.log(`Found ${allBlocks.length} blocks and ${allIntegrations.length} integrations.`);
     console.log();
 
-    if (cliName && cliTemplate && cliBlocks) {
+    if (cliName && cliTemplate && cliBlocks && cliIntegrations) {
         return {
             projectName: cliName,
             template: cliTemplate,
             selectedBlocks: cliBlocks,
-            selectedIntegrations: cliIntegrations || [],
+            selectedIntegrations: cliIntegrations,
         };
     }
 

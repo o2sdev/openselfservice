@@ -12,10 +12,10 @@ export const printSummary = (
     console.log();
     console.log('Project created successfully!');
     console.log();
-    console.log(`  Location:     ${targetDir}`);
-    console.log(`  Template:     ${templateName}`);
-    console.log(`  Blocks:       ${blockCount} blocks installed`);
-    console.log(`  Integrations: ${integrationCount > 0 ? `${integrationCount} integration(s)` : 'none'}`);
+    console.log(`  Location:      ${targetDir}`);
+    console.log(`  Template:      ${templateName}`);
+    console.log(`  Blocks:        ${blockCount} blocks`);
+    console.log(`  Integrations:  ${integrationCount} integrations`);
     console.log();
     console.log('Next steps:');
     console.log();
