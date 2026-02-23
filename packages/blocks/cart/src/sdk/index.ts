@@ -25,4 +25,8 @@ export const sdk = extendSdk(internalSdk, {
     blocks: {
         getCart: cart(internalSdk).blocks.getCart,
     },
+    cart: {
+        updateCartItem: cart(internalSdk).cart.updateCartItem,
+        removeCartItem: cart(internalSdk).cart.removeCartItem,
+    },
 });

@@ -1,5 +1,5 @@
 import { DynamicModule, Module } from '@nestjs/common';
-import { CMS } from '@o2s/configs.integrations';
+import { CMS, Carts } from '@o2s/configs.integrations';
 
 import * as Framework from '@o2s/framework/modules';
 
@@ -16,6 +16,10 @@ export class CartBlockModule {
                 {
                     provide: CMS.Service,
                     useExisting: Framework.CMS.Service,
+                },
+                {
+                    provide: Carts.Service,
+                    useExisting: Framework.Carts.Service,
                 },
             ],
             controllers: [CartController],

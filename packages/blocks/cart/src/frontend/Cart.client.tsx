@@ -1,9 +1,9 @@
 'use client';
 
 import { createNavigation } from 'next-intl/navigation';
-import React, { useMemo } from 'react';
+import React, { useEffect, useState, useTransition } from 'react';
 
-import type { Models } from '@o2s/framework/modules';
+import { toast } from '@o2s/ui/hooks/use-toast';
 
 import { CartItem } from '@o2s/ui/components/Cart/CartItem';
 import { CartSummary } from '@o2s/ui/components/Cart/CartSummary';
@@ -13,28 +13,15 @@ import { Button } from '@o2s/ui/elements/button';
 import { Typography } from '@o2s/ui/elements/typography';
 
 import type { Model } from '../api-harmonization/cart.client';
+import { sdk } from '../sdk';
 
 import { CartPureProps } from './Cart.types';
 
-function calculateCartTotals(
-    items: Array<{ price: Model.CartBlockItem['price']; quantity: number }>,
-    taxRate: number,
-    defaultCurrency: Models.Price.Currency,
-): Model.CartBlockTotals {
-    const subtotal = items.reduce((sum, item) => sum + item.price.value * item.quantity, 0);
-    const tax = subtotal * taxRate;
-    const currency = items[0]?.price.currency ?? defaultCurrency;
-
-    return {
-        subtotal: { value: subtotal, currency },
-        tax: { value: tax, currency },
-        total: { value: subtotal + tax, currency },
-    };
-}
+const CART_ID_KEY = 'cartId';
 
 export const CartPure: React.FC<Readonly<CartPureProps>> = ({
-    locale: _locale,
-    accessToken: _accessToken,
+    locale,
+    accessToken,
     routing,
     title,
     subtitle,
@@ -48,38 +35,80 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
     empty,
     items: initialItems,
     totals: initialTotals,
+    promotions: initialPromotions,
+    discountTotal: initialDiscountTotal,
+    shippingMethod: initialShippingMethod,
     id,
     __typename,
 }) => {
     const { Link: LinkComponent } = createNavigation(routing);
 
-    const items = useMemo(() => initialItems ?? [], [initialItems]);
+    const [cartItems, setCartItems] = useState<Model.CartBlockItem[]>(initialItems ?? []);
+    const [cartTotals, setCartTotals] = useState<Model.CartBlockTotals>(initialTotals);
+    const [cartPromotions, setCartPromotions] = useState<Model.CartBlock['promotions']>(initialPromotions);
+    const [cartDiscountTotal, setCartDiscountTotal] = useState<Model.CartBlock['discountTotal']>(initialDiscountTotal);
+    const [cartShippingMethod, setCartShippingMethod] =
+        useState<Model.CartBlock['shippingMethod']>(initialShippingMethod);
+    const [isPending, startTransition] = useTransition();
 
-    const totals = useMemo((): Model.CartBlockTotals => {
-        const currency = defaultCurrency ?? initialTotals?.subtotal?.currency;
-        if (items.length === 0) {
-            if (currency == null) {
-                return {} as Model.CartBlockTotals;
+    const refreshCart = async (cartId: string): Promise<void> => {
+        const data = await sdk.blocks.getCart({ id, cartId }, { 'x-locale': locale }, accessToken);
+        setCartItems(data.items ?? []);
+        setCartTotals(data.totals);
+        setCartPromotions(data.promotions);
+        setCartDiscountTotal(data.discountTotal);
+        setCartShippingMethod(data.shippingMethod);
+    };
+
+    useEffect(() => {
+        const cartId = localStorage.getItem(CART_ID_KEY);
+        if (!cartId) return;
+
+        startTransition(async () => {
+            try {
+                await refreshCart(cartId);
+            } catch (error) {
+                const status = (error as { status?: number }).status;
+                if (status === 404 || status === 401) {
+                    localStorage.removeItem(CART_ID_KEY);
+                }
             }
-            const zero: Models.Price.Price = { value: 0, currency: currency as Models.Price.Currency };
-            return { subtotal: zero, tax: zero, total: zero };
-        }
-        if (taxRate == null || currency == null) {
-            return initialTotals ?? ({} as Model.CartBlockTotals);
-        }
-        const itemData = items.map((item) => ({
-            price: item.price,
-            quantity: item.quantity,
-        }));
-        return calculateCartTotals(itemData, taxRate, currency as Models.Price.Currency);
-    }, [items, taxRate, defaultCurrency, initialTotals]);
+        });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [id, locale, accessToken]);
 
     const updateQuantity = (itemId: string, newQuantity: number) => {
-        console.log('[Cart] updateQuantity', { itemId, newQuantity });
+        const cartId = localStorage.getItem(CART_ID_KEY);
+        if (!cartId) return;
+
+        startTransition(async () => {
+            try {
+                await sdk.cart.updateCartItem(
+                    cartId,
+                    itemId,
+                    { quantity: newQuantity },
+                    { 'x-locale': locale },
+                    accessToken,
+                );
+                await refreshCart(cartId);
+            } catch {
+                toast({ variant: 'destructive', title: labels.unknownProductName });
+            }
+        });
     };
 
     const removeItem = (itemId: string) => {
-        console.log('[Cart] removeItem', { itemId });
+        const cartId = localStorage.getItem(CART_ID_KEY);
+        if (!cartId) return;
+
+        startTransition(async () => {
+            try {
+                await sdk.cart.removeCartItem(cartId, itemId, { 'x-locale': locale }, accessToken);
+                await refreshCart(cartId);
+            } catch {
+                toast({ variant: 'destructive', title: labels.unknownProductName });
+            }
+        });
     };
 
     if (!title || taxRate == null || !defaultCurrency || !labels || !actions || !summaryLabels || !empty) {
@@ -90,7 +119,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
         );
     }
 
-    if (items.length === 0) {
+    if (cartItems.length === 0 && !isPending) {
         return (
             <div className="w-full flex flex-col gap-8 md:gap-12 items-center justify-center py-12">
                 <DynamicIcon name="ShoppingCart" size={64} className="text-muted-foreground" />
@@ -122,10 +151,13 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 {/* Cart Items */}
-                <div className="lg:col-span-2 flex flex-col gap-4">
-                    {items.map((item) => {
-                        const quantity = item.quantity;
-                        const itemTotal = item.total;
+                <div className="lg:col-span-2 flex flex-col gap-4 relative">
+                    {isPending && (
+                        <div className="absolute inset-0 bg-background/50 flex items-center justify-center z-10 rounded-lg">
+                            <DynamicIcon name="Loader2" size={32} className="animate-spin text-primary" />
+                        </div>
+                    )}
+                    {cartItems.map((item) => {
                         const product = item.product ?? {
                             name: labels.unknownProductName,
                             subtitle: undefined,
@@ -140,9 +172,9 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
                                 name={product.name}
                                 subtitle={product.subtitle}
                                 image={product.image}
-                                quantity={quantity}
+                                quantity={item.quantity}
                                 price={item.price}
-                                total={itemTotal}
+                                total={item.total}
                                 labels={{
                                     itemTotal: labels.itemTotal,
                                     ...actions,
@@ -157,9 +189,12 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
                 {/* Cart Summary */}
                 <div className="lg:col-span-1">
                     <CartSummary
-                        subtotal={totals.subtotal}
-                        tax={totals.tax}
-                        total={totals.total}
+                        subtotal={cartTotals.subtotal}
+                        tax={cartTotals.tax}
+                        total={cartTotals.total}
+                        discountTotal={cartDiscountTotal}
+                        shippingMethod={cartShippingMethod}
+                        promotions={cartPromotions}
                         labels={summaryLabels}
                         LinkComponent={LinkComponent}
                         checkoutButton={

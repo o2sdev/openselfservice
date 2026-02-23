@@ -1,6 +1,6 @@
 import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 
-import { Models } from '@o2s/framework/modules';
+import { Carts, Models } from '@o2s/framework/modules';
 
 /** Product info embedded in cart item for display */
 export interface CartBlockItemProduct {
@@ -32,6 +32,9 @@ export interface CartBlockSummaryLabels {
     subtotalLabel: string;
     taxLabel: string;
     totalLabel: string;
+    discountLabel?: string;
+    shippingLabel?: string;
+    freeLabel?: string;
 }
 
 /** Empty cart state labels */
@@ -66,4 +69,10 @@ export class CartBlock extends ApiModels.Block.Block {
     empty!: CartBlockEmpty;
     items!: CartBlockItem[];
     totals!: CartBlockTotals;
+    /** Applied promotions from the real cart */
+    promotions?: Carts.Model.Promotion[];
+    /** Total discount amount from promotions */
+    discountTotal?: Models.Price.Price;
+    /** Selected shipping method */
+    shippingMethod?: { name: string; total: Models.Price.Price };
 }

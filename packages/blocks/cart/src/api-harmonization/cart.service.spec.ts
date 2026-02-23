@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { CMS } from '@o2s/configs.integrations';
+import { CMS, Carts } from '@o2s/configs.integrations';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { CartService } from './cart.service';
@@ -16,8 +16,14 @@ describe('CartService', () => {
                     provide: CMS.Service,
                     useValue: {
                         getCartBlock: vi.fn().mockReturnValue({
-                            title: 'Test Block',
+                            id: 'cart-1',
                         }),
+                    },
+                },
+                {
+                    provide: Carts.Service,
+                    useValue: {
+                        getCart: vi.fn().mockReturnValue(undefined),
                     },
                 },
             ],
@@ -35,4 +41,3 @@ describe('CartService', () => {
         expect(cmsService).toBeDefined();
     });
 });
-

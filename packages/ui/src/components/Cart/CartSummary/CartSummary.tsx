@@ -15,6 +15,9 @@ export const CartSummary: React.FC<Readonly<CartSummaryProps>> = ({
     subtotal,
     tax,
     total,
+    discountTotal,
+    shippingMethod,
+    promotions,
     labels,
     LinkComponent,
     checkoutButton,
@@ -23,12 +26,17 @@ export const CartSummary: React.FC<Readonly<CartSummaryProps>> = ({
     onCheckoutClick,
     loadingLabel = 'Loading...',
 }) => {
+    const hasDiscount = discountTotal && discountTotal.value > 0;
+    const hasShipping = !!shippingMethod;
+    const hasPromotions = promotions && promotions.length > 0;
+    const isFreeShipping = promotions?.some((p) => p.type === 'FREE_SHIPPING');
+
     return (
         <div className="sticky top-6 flex flex-col gap-4 p-6 bg-card rounded-lg border border-border">
             <Typography variant="h2">{labels.title}</Typography>
 
             <div className="flex flex-col gap-4">
-                {/* Subtotal */}
+                {/* Subtotal + Tax + optional Discount + optional Shipping */}
                 <div className="flex flex-col gap-1">
                     <div className="flex items-center justify-between">
                         <Typography variant="small" className="text-muted-foreground">
@@ -48,7 +56,51 @@ export const CartSummary: React.FC<Readonly<CartSummaryProps>> = ({
                             <Price price={tax} />
                         </Typography>
                     </div>
+
+                    {/* Discount */}
+                    {hasDiscount && (
+                        <div className="flex items-center justify-between">
+                            <Typography variant="small" className="text-muted-foreground">
+                                {labels.discountLabel ?? 'Discount'}
+                            </Typography>
+                            <Typography variant="body" className="text-green-600">
+                                -<Price price={discountTotal} />
+                            </Typography>
+                        </div>
+                    )}
+
+                    {/* Shipping */}
+                    {hasShipping && (
+                        <div className="flex items-center justify-between">
+                            <Typography variant="small" className="text-muted-foreground">
+                                {labels.shippingLabel ?? 'Shipping'}
+                                {shippingMethod.name && <span className="ml-1">({shippingMethod.name})</span>}
+                            </Typography>
+                            <Typography variant="body">
+                                {isFreeShipping ? (
+                                    <span className="text-green-600">{labels.freeLabel ?? 'Free'}</span>
+                                ) : (
+                                    <Price price={shippingMethod.total} />
+                                )}
+                            </Typography>
+                        </div>
+                    )}
                 </div>
+
+                {/* Applied Promotions */}
+                {hasPromotions && (
+                    <div className="flex flex-col gap-1 pt-1">
+                        {promotions.map((promo) => (
+                            <div key={promo.code} className="flex items-center gap-2">
+                                <DynamicIcon name="Tag" size={14} className="text-green-600 shrink-0" />
+                                <Typography variant="small" className="text-green-600">
+                                    {promo.code}
+                                    {promo.name && ` — ${promo.name}`}
+                                </Typography>
+                            </div>
+                        ))}
+                    </div>
+                )}
 
                 <Separator />
 

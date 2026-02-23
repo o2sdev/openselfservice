@@ -6,6 +6,7 @@ import { CMS } from '@o2s/framework/modules';
 import { mapArticleListBlock } from './mappers/blocks/cms.article-list.mapper';
 import { mapArticleSearchBlock } from './mappers/blocks/cms.article-search.mapper';
 import { mapBentoGridBlock } from './mappers/blocks/cms.bento-grid.mapper';
+import { mapCartBlock } from './mappers/blocks/cms.cart.mapper';
 import { mapCategoryListBlock } from './mappers/blocks/cms.category-list.mapper';
 import { mapCtaSectionBlock } from './mappers/blocks/cms.cta-section.mapper';
 import { mapDocumentListBlock } from './mappers/blocks/cms.document-list.mapper';
@@ -254,7 +255,7 @@ export class CmsService implements CMS.Service {
     }
 
     getCartBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of({ id: options.id });
+        return of(mapCartBlock(options)).pipe(responseDelay());
     }
 
     getCheckoutCompanyDataBlock(options: CMS.Request.GetCmsEntryParams) {
