@@ -9,6 +9,7 @@ const MOCK_CART_BLOCK_EN: CMS.Model.CartBlock.CartBlock = {
     labels: {
         itemTotal: 'Total',
         unknownProductName: 'Product',
+        errorMessage: 'An error occurred. Please try again.',
     },
     actions: {
         increaseQuantity: 'Increase quantity',
@@ -60,6 +61,7 @@ const MOCK_CART_BLOCK_DE: CMS.Model.CartBlock.CartBlock = {
     labels: {
         itemTotal: 'Summe',
         unknownProductName: 'Produkt',
+        errorMessage: 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.',
     },
     actions: {
         increaseQuantity: 'Menge erhöhen',
@@ -111,6 +113,7 @@ const MOCK_CART_BLOCK_PL: CMS.Model.CartBlock.CartBlock = {
     labels: {
         itemTotal: 'Suma',
         unknownProductName: 'Produkt',
+        errorMessage: 'Wystąpił błąd. Spróbuj ponownie.',
     },
     actions: {
         increaseQuantity: 'Zwiększ ilość',

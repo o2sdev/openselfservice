@@ -28,9 +28,4 @@ export interface CartSummaryProps {
     LinkComponent?: FrontendModels.Link.LinkComponent;
     checkoutButton?: Models.Link.Link;
     continueShopping?: Models.Link.Link;
-    /** When true, renders checkout as button with loading state instead of link */
-    isCheckoutLoading?: boolean;
-    onCheckoutClick?: () => void;
-    /** Label shown when checkout button is in loading state */
-    loadingLabel?: string;
 }

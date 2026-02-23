@@ -27,7 +27,7 @@ const mapTotals = (cart: Carts.Model.Cart, defaultCurrency: Models.Price.Currenc
     return {
         subtotal: cart.subtotal ?? zero,
         tax: cart.taxTotal ?? zero,
-        total: cart.total,
+        total: cart.total ?? zero,
     };
 };
 
@@ -46,7 +46,7 @@ export const mapCart = (cms: CMS.Model.CartBlock.CartBlock, cart: Carts.Model.Ca
         subtitle: cms.subtitle,
         taxRate: cms.taxRate ?? 0,
         defaultCurrency,
-        labels: cms.labels ?? { itemTotal: '', unknownProductName: '' },
+        labels: cms.labels ?? { itemTotal: '', unknownProductName: '', errorMessage: '' },
         actions: cms.actions ?? { increaseQuantity: '', decreaseQuantity: '', quantity: '', remove: '' },
         summaryLabels: cms.summaryLabels ?? { title: '', subtotalLabel: '', taxLabel: '', totalLabel: '' },
         checkoutButton: cms.checkoutButton,

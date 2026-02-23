@@ -100,7 +100,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
                 );
                 await refreshCart(cartId);
             } catch {
-                toast({ variant: 'destructive', title: labels.unknownProductName });
+                toast({ variant: 'destructive', title: labels.errorMessage });
             }
         });
     };
@@ -140,7 +140,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
                 await sdk.cart.removeCartItem(cartId, itemId, { 'x-locale': locale }, accessToken);
                 await refreshCart(cartId);
             } catch {
-                toast({ variant: 'destructive', title: labels.unknownProductName });
+                toast({ variant: 'destructive', title: labels.errorMessage });
             }
         });
     };

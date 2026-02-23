@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CMS, Carts } from '@o2s/configs.integrations';
-import { Observable, concatMap, forkJoin, map, of } from 'rxjs';
+import { Observable, catchError, concatMap, map, of } from 'rxjs';
 
 import { Models } from '@o2s/utils.api-harmonization';
 
@@ -18,15 +18,16 @@ export class CartService {
     getCartBlock(query: GetCartBlockQuery, headers: Models.Headers.AppHeaders): Observable<CartBlock> {
         const cms$ = this.cmsService.getCartBlock({ ...query, locale: headers['x-locale'] });
 
-        return forkJoin([cms$]).pipe(
-            concatMap(([cms]) => {
+        return cms$.pipe(
+            concatMap((cms) => {
                 if (!query.cartId) {
                     return of(mapCart(cms, undefined));
                 }
 
-                return this.cartService
-                    .getCart({ id: query.cartId }, headers.authorization)
-                    .pipe(map((cart) => mapCart(cms, cart)));
+                return this.cartService.getCart({ id: query.cartId }, headers.authorization).pipe(
+                    map((cart) => mapCart(cms, cart)),
+                    catchError(() => of(mapCart(cms, undefined))),
+                );
             }),
         );
     }

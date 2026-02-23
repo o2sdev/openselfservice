@@ -22,9 +22,6 @@ export const CartSummary: React.FC<Readonly<CartSummaryProps>> = ({
     LinkComponent,
     checkoutButton,
     continueShopping,
-    isCheckoutLoading = false,
-    onCheckoutClick,
-    loadingLabel = 'Loading...',
 }) => {
     const hasDiscount = discountTotal && discountTotal.value > 0;
     const hasShipping = !!shippingMethod;
@@ -60,7 +57,7 @@ export const CartSummary: React.FC<Readonly<CartSummaryProps>> = ({
                     {hasDiscount && (
                         <div className="flex items-center justify-between">
                             <Typography variant="small" className="text-muted-foreground">
-                                {labels.discountLabel ?? 'Discount'}
+                                {labels.discountLabel}
                             </Typography>
                             <Typography variant="body" className="text-green-600">
                                 -<Price price={discountTotal} />
@@ -72,12 +69,12 @@ export const CartSummary: React.FC<Readonly<CartSummaryProps>> = ({
                     {hasShipping && (
                         <div className="flex items-center justify-between">
                             <Typography variant="small" className="text-muted-foreground">
-                                {labels.shippingLabel ?? 'Shipping'}
+                                {labels.shippingLabel}
                                 {shippingMethod.name && <span className="ml-1">({shippingMethod.name})</span>}
                             </Typography>
                             <Typography variant="body">
                                 {isFreeShipping ? (
-                                    <span className="text-green-600">{labels.freeLabel ?? 'Free'}</span>
+                                    <span className="text-green-600">{labels.freeLabel}</span>
                                 ) : (
                                     <Price price={shippingMethod.total} />
                                 )}
@@ -98,50 +95,26 @@ export const CartSummary: React.FC<Readonly<CartSummaryProps>> = ({
             </div>
 
             {/* Checkout Button */}
-            {checkoutButton && (
+            {checkoutButton && checkoutButton.url && (
                 <>
                     <Separator />
-                    {onCheckoutClick ? (
-                        <Button
-                            variant="default"
-                            size="lg"
-                            className="w-full"
-                            disabled={isCheckoutLoading}
-                            onClick={onCheckoutClick}
-                        >
-                            {isCheckoutLoading ? (
-                                <>
-                                    <DynamicIcon name="Loader2" size={20} className="mr-2 animate-spin" />
-                                    {loadingLabel}
-                                </>
-                            ) : (
-                                <>
-                                    {checkoutButton.icon && (
-                                        <DynamicIcon name={checkoutButton.icon} size={20} className="mr-2" />
-                                    )}
-                                    {checkoutButton.label}
-                                </>
-                            )}
-                        </Button>
-                    ) : checkoutButton.url ? (
-                        <Button variant="default" size="lg" className="w-full" asChild>
-                            {LinkComponent ? (
-                                <LinkComponent href={checkoutButton.url} className="w-full">
-                                    {checkoutButton.icon && (
-                                        <DynamicIcon name={checkoutButton.icon} size={20} className="mr-2" />
-                                    )}
-                                    {checkoutButton.label}
-                                </LinkComponent>
-                            ) : (
-                                <a href={checkoutButton.url}>
-                                    {checkoutButton.icon && (
-                                        <DynamicIcon name={checkoutButton.icon} size={20} className="mr-2" />
-                                    )}
-                                    {checkoutButton.label}
-                                </a>
-                            )}
-                        </Button>
-                    ) : null}
+                    <Button variant="default" size="lg" className="w-full" asChild>
+                        {LinkComponent ? (
+                            <LinkComponent href={checkoutButton.url} className="w-full">
+                                {checkoutButton.icon && (
+                                    <DynamicIcon name={checkoutButton.icon} size={20} className="mr-2" />
+                                )}
+                                {checkoutButton.label}
+                            </LinkComponent>
+                        ) : (
+                            <a href={checkoutButton.url}>
+                                {checkoutButton.icon && (
+                                    <DynamicIcon name={checkoutButton.icon} size={20} className="mr-2" />
+                                )}
+                                {checkoutButton.label}
+                            </a>
+                        )}
+                    </Button>
                 </>
             )}
 

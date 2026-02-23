@@ -57,6 +57,8 @@ export class CartBlock extends ApiModels.Block.Block {
         itemTotal: string;
         /** Label shown when product data is missing from cart item */
         unknownProductName: string;
+        /** Generic error message shown in toast when a cart operation fails */
+        errorMessage: string;
     };
     actions!: {
         increaseQuantity: string;
