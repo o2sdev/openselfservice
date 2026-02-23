@@ -22,23 +22,11 @@ export const promptTemplate = async (): Promise<TemplateType> => {
         type: 'select',
         name: 'template',
         message: 'What template do you want to start with?',
-        choices: [
-            {
-                title: TEMPLATES.ssp.name,
-                description: TEMPLATES.ssp.description,
-                value: 'ssp',
-            },
-            {
-                title: TEMPLATES.dxp.name,
-                description: TEMPLATES.dxp.description,
-                value: 'dxp',
-            },
-            {
-                title: TEMPLATES.custom.name,
-                description: TEMPLATES.custom.description,
-                value: 'custom',
-            },
-        ],
+        choices: Object.entries(TEMPLATES).map(([key, template]) => ({
+            title: template.name,
+            description: template.description,
+            value: key as TemplateType,
+        })),
     });
 
     if (!template) {
