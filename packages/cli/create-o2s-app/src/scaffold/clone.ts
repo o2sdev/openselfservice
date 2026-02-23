@@ -31,7 +31,8 @@ export const cloneRepository = async (): Promise<string> => {
         return tempDir;
     } catch (error) {
         bar.stop();
-        throw error;
+        console.error('Error cloning repository:', error);
+        throw new Error('Failed to clone repository.');
     }
 };
 
@@ -41,6 +42,6 @@ export const cleanupTempDir = async (tempDir: string): Promise<void> => {
             await fs.remove(tempDir);
         }
     } catch (_error) {
-        console.error(`Warning: Could not clean up temporary directory: ${tempDir}`);
+        console.error('Error cleaning up temporary directory:', _error);
     }
 };

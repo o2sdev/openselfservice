@@ -28,8 +28,12 @@ export const TEMPLATES: Record<TemplateType, TemplateDefinition> = {
     },
 };
 
+// Returns all known template category identifiers (excludes null for custom)
+export const getAllTemplateCategories = (): string[] =>
+    Object.values(TEMPLATES).flatMap((t) => (t.category !== null ? [t.category] : []));
+
 // Filter discovered blocks by template category
-export const getTemplateBlocks = (template: TemplateType, allBlocks: BlockInfo[]): string[] => {
+export const filterBlocksByTemplate = (template: TemplateType, allBlocks: BlockInfo[]): string[] => {
     const templateDef = TEMPLATES[template];
 
     const { category } = templateDef;

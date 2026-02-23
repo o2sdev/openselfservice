@@ -1,5 +1,5 @@
 import { BlockInfo, IntegrationInfo, TemplateType, WizardAnswers } from '../types';
-import { TEMPLATES, getTemplateBlocks } from './templates';
+import { TEMPLATES, filterBlocksByTemplate } from './templates';
 import prompts from 'prompts';
 
 export const promptProjectName = async (defaultName: string): Promise<string> => {
@@ -111,7 +111,7 @@ export const runWizardPrompts = async (
     if (template === 'custom') {
         selectedBlocks = await promptBlockSelection(availableBlocks, []);
     } else {
-        selectedBlocks = getTemplateBlocks(template, availableBlocks);
+        selectedBlocks = filterBlocksByTemplate(template, availableBlocks);
     }
 
     const selectedIntegrations = await promptIntegrationSelection(availableIntegrations, template);
