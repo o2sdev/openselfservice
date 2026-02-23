@@ -85,5 +85,6 @@
         "react-dom": "^19",
         "rxjs": "^7",
         "zod": "^3.25.4 || ^4.0.0"
-    }
+    },
+    "o2sTemplate": ["ssp", "dxp"]
 }

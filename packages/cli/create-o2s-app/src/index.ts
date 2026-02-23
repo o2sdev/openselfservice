@@ -1,133 +1,82 @@
 #!/usr/bin/env node
+import { cleanupTempDir, cloneRepository } from './scaffold/clone';
+import { scaffold } from './scaffold/index';
+import { TemplateType } from './types';
+import { printError, printSummary } from './utils/logger';
+import { runWizard } from './wizard/index';
 import * as telemetry from '@o2s/telemetry';
-import { execSync } from 'child_process';
-import cliProgress from 'cli-progress';
 import { Command } from 'commander';
-import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'fs';
-import prompts from 'prompts';
-import simpleGit from 'simple-git';
 
 const program = new Command();
 
 program
-    .name('create-project')
-    .description('Create a new O2S project')
+    .name('create-o2s-app')
+    .description('Create a new O2S project with interactive setup wizard')
     .argument('[name]', 'Name of the new project')
-    .option('--directory [directory]', 'Specify the destination directory', 'my-o2s-project')
+    .option('--directory [directory]', 'Specify the destination directory')
+    .option('--template [template]', 'Template: ssp | dxp | custom')
+    .option('--blocks [blocks]', 'Comma-separated list of block names (for non-interactive mode)')
+    .option('--integrations [integrations]', 'Comma-separated list of integration names (for non-interactive mode)')
     .action(async (name, options) => {
         telemetry.sendEvent('o2s', 'create-o2s-app', 'create-project');
         await telemetry.flushEvents();
 
-        const projectName = name
-            ? name
-            : (
-                  await prompts({
-                      type: 'text',
-                      name: 'name',
-                      message: 'Enter the name of your project',
-                      initial: 'my-o2s-project',
-                  })
-              ).name;
-
-        const targetDirectory = projectName || options.directory;
-
-        const githubRepo = 'https://github.com/o2sdev/openselfservice';
-        const githubBranch = 'create-o2s-app/base';
-
-        if (existsSync(targetDirectory)) {
-            console.error(
-                `Directory ${targetDirectory} already exists. Please choose a different name or remove the existing directory.`,
-            );
-            return;
-        }
-
-        const bar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
+        let tempDir: string | undefined;
 
         try {
-            mkdirSync(targetDirectory, { recursive: true });
+            const cliTemplate = parseTemplate(options.template);
+            const cliBlocks = parseCommaSeparated(options.blocks);
+            const cliIntegrations = parseCommaSeparated(options.integrations);
 
-            console.log();
-            console.log(`Cloning repository "${githubRepo}" (branch: "${githubBranch}") into "${targetDirectory}"...`);
-            console.log();
+            // Step 1: Clone repository to temp directory
+            tempDir = await cloneRepository();
 
-            bar.start(100, 0);
+            // Step 2: Run wizard (interactive or non-interactive)
+            const answers = await runWizard(tempDir, name, cliTemplate, cliBlocks, cliIntegrations);
 
-            const git = simpleGit({
-                progress({ progress }) {
-                    bar.update(Math.round(progress));
-                },
-            });
-            await git.clone(githubRepo, targetDirectory, ['--branch', githubBranch]);
+            // Step 3: Scaffold project
+            const targetDir = await scaffold(tempDir, answers);
 
-            bar.stop();
-
-            console.log();
-            console.log();
-            console.log('Organizing the project structure...');
-
-            rmSync(`${targetDirectory}/.git`, { recursive: true });
-            rmSync(`${targetDirectory}/.github`, { recursive: true });
-            rmSync(`${targetDirectory}/.changeset`, { recursive: true });
-
-            rmSync(`${targetDirectory}/vercel.json`, { recursive: true });
-
-            rmSync(`${targetDirectory}/apps/docs`, { recursive: true });
-            rmSync(`${targetDirectory}/packages/framework`, { recursive: true });
-            rmSync(`${targetDirectory}/packages/integrations`, { recursive: true });
-            rmSync(`${targetDirectory}/packages/blocks`, { recursive: true });
-            rmSync(`${targetDirectory}/packages/modules`, { recursive: true });
-            rmSync(`${targetDirectory}/packages/utils`, { recursive: true });
-            rmSync(`${targetDirectory}/packages/cli`, { recursive: true });
-            rmSync(`${targetDirectory}/packages/telemetry`, { recursive: true });
-
-            let file = readFileSync(targetDirectory + '/package-lock.json', 'utf8');
-            file = removeSymLinks(file);
-            writeFileSync(targetDirectory + '/package-lock.json', file);
-
-            console.log();
-            console.log(`Installing dependencies in "${targetDirectory}"...`);
-
-            try {
-                execSync('npm install', {
-                    cwd: targetDirectory,
-                    stdio: 'inherit',
-                });
-                console.log(`Dependencies installed successfully.`);
-            } catch (error) {
-                console.error('Error while installing dependencies:', error);
-                return;
-            }
-
-            console.log();
-            console.log('Project successfully created! 🎉');
-            console.log(`Location: ${targetDirectory}`);
+            // Step 4: Print summary
+            printSummary(
+                targetDir,
+                answers.template,
+                answers.selectedBlocks.length,
+                answers.selectedIntegrations.length,
+            );
         } catch (error) {
-            bar.stop();
-
-            console.log();
-
-            if (error instanceof Error) {
-                console.error('Error while creating the project', error.message);
-            } else {
-                console.error('Error while creating the project');
+            if (tempDir) {
+                await cleanupTempDir(tempDir);
             }
+
+            if (error instanceof Error && error.message.includes('is required')) {
+                // User cancelled a prompt
+                console.log();
+                console.log('Setup cancelled.');
+            } else {
+                printError('Failed to create project', error);
+            }
+
+            process.exit(1);
         }
     });
 
 program.parse(process.argv);
 
-const removeSymLinks = (file: string) => {
-    const json = JSON.parse(file);
-
-    // Traverse packages and remove any key with "link": true
-    if (json && json.packages) {
-        for (const [key, value] of Object.entries(json.packages)) {
-            if (value && typeof value === 'object' && (value as { link: boolean }).link) {
-                delete json.packages[key];
-            }
-        }
+const parseTemplate = (value: unknown): TemplateType | undefined => {
+    if (!value || typeof value !== 'string') return undefined;
+    const valid: TemplateType[] = ['ssp', 'dxp', 'custom'];
+    if (valid.includes(value as TemplateType)) {
+        return value as TemplateType;
     }
+    console.warn(`Warning: Unknown template "${value}". Valid options: ssp, dxp, custom`);
+    return undefined;
+};
 
-    // Stringify cleaned JSON
-    return JSON.stringify(json, null, 4);
+const parseCommaSeparated = (value: unknown): string[] | undefined => {
+    if (!value || typeof value !== 'string') return undefined;
+    return value
+        .split(',')
+        .map((s) => s.trim())
+        .filter((s) => s.length > 0);
 };
