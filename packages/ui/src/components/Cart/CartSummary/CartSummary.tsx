@@ -28,11 +28,10 @@ export const CartSummary: React.FC<Readonly<CartSummaryProps>> = ({
 }) => {
     const hasDiscount = discountTotal && discountTotal.value > 0;
     const hasShipping = !!shippingMethod;
-    const hasPromotions = promotions && promotions.length > 0;
     const isFreeShipping = promotions?.some((p) => p.type === 'FREE_SHIPPING');
 
     return (
-        <div className="sticky top-6 flex flex-col gap-4 p-6 bg-card rounded-lg border border-border">
+        <div className="flex flex-col gap-4 p-6 bg-card rounded-lg border border-border">
             <Typography variant="h2">{labels.title}</Typography>
 
             <div className="flex flex-col gap-4">
@@ -86,21 +85,6 @@ export const CartSummary: React.FC<Readonly<CartSummaryProps>> = ({
                         </div>
                     )}
                 </div>
-
-                {/* Applied Promotions */}
-                {hasPromotions && (
-                    <div className="flex flex-col gap-1 pt-1">
-                        {promotions.map((promo) => (
-                            <div key={promo.code} className="flex items-center gap-2">
-                                <DynamicIcon name="Tag" size={14} className="text-green-600 shrink-0" />
-                                <Typography variant="small" className="text-green-600">
-                                    {promo.code}
-                                    {promo.name && ` — ${promo.name}`}
-                                </Typography>
-                            </div>
-                        ))}
-                    </div>
-                )}
 
                 <Separator />
 

@@ -6,6 +6,7 @@ import React, { useEffect, useState, useTransition } from 'react';
 import { toast } from '@o2s/ui/hooks/use-toast';
 
 import { CartItem } from '@o2s/ui/components/Cart/CartItem';
+import { CartPromoCode } from '@o2s/ui/components/Cart/CartPromoCode';
 import { CartSummary } from '@o2s/ui/components/Cart/CartSummary';
 import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
 
@@ -39,6 +40,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
     promotions: initialPromotions,
     discountTotal: initialDiscountTotal,
     shippingMethod: initialShippingMethod,
+    promoCodeLabels,
     id,
     __typename,
 }) => {
@@ -51,6 +53,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
     const [cartShippingMethod, setCartShippingMethod] =
         useState<Model.CartBlock['shippingMethod']>(initialShippingMethod);
     const [isLoading, setIsLoading] = useState(false);
+    const [isPromoLoading, setIsPromoLoading] = useState(false);
     const [isPending, startTransition] = useTransition();
 
     const refreshCart = async (cartId: string): Promise<void> => {
@@ -100,6 +103,32 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
                 toast({ variant: 'destructive', title: labels.unknownProductName });
             }
         });
+    };
+
+    const applyPromotion = async (code: string): Promise<void> => {
+        const cartId = localStorage.getItem(CART_ID_KEY);
+        if (!cartId) throw new Error('No cart');
+
+        setIsPromoLoading(true);
+        try {
+            await sdk.cart.applyPromotion(cartId, { code }, { 'x-locale': locale }, accessToken);
+            await refreshCart(cartId);
+        } finally {
+            setIsPromoLoading(false);
+        }
+    };
+
+    const removePromotion = async (code: string): Promise<void> => {
+        const cartId = localStorage.getItem(CART_ID_KEY);
+        if (!cartId) return;
+
+        setIsPromoLoading(true);
+        try {
+            await sdk.cart.removePromotion(cartId, code, { 'x-locale': locale }, accessToken);
+            await refreshCart(cartId);
+        } finally {
+            setIsPromoLoading(false);
+        }
     };
 
     const removeItem = (itemId: string) => {
@@ -218,8 +247,8 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
                     })}
                 </div>
 
-                {/* Cart Summary */}
-                <div className="lg:col-span-1">
+                {/* Cart Summary + Promo Code */}
+                <div className="lg:col-span-1 flex flex-col gap-4">
                     <CartSummary
                         subtotal={cartTotals.subtotal}
                         tax={cartTotals.tax}
@@ -247,6 +276,15 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
                                 : undefined
                         }
                     />
+                    {promoCodeLabels && (
+                        <CartPromoCode
+                            promotions={cartPromotions}
+                            labels={promoCodeLabels}
+                            isLoading={isPromoLoading}
+                            onApply={applyPromotion}
+                            onRemove={removePromotion}
+                        />
+                    )}
                 </div>
             </div>
         </div>

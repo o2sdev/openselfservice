@@ -28,5 +28,7 @@ export const sdk = extendSdk(internalSdk, {
     cart: {
         updateCartItem: cart(internalSdk).cart.updateCartItem,
         removeCartItem: cart(internalSdk).cart.removeCartItem,
+        applyPromotion: cart(internalSdk).cart.applyPromotion,
+        removePromotion: cart(internalSdk).cart.removePromotion,
     },
 });

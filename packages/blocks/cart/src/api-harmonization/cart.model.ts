@@ -76,4 +76,11 @@ export class CartBlock extends ApiModels.Block.Block {
     discountTotal?: Models.Price.Price;
     /** Selected shipping method */
     shippingMethod?: { name: string; total: Models.Price.Price };
+    promoCodeLabels?: {
+        title: string;
+        inputPlaceholder: string;
+        applyButton: string;
+        removeLabel: string;
+        invalidCodeError: string;
+    };
 }

@@ -42,6 +42,13 @@ const MOCK_CART_BLOCK_EN: CMS.Model.CartBlock.CartBlock = {
             path: '/products',
         },
     },
+    promoCodeLabels: {
+        title: 'Promo Code',
+        inputPlaceholder: 'Enter promo code',
+        applyButton: 'Apply',
+        removeLabel: 'Remove promo code',
+        invalidCodeError: 'Invalid or expired promo code',
+    },
 };
 
 const MOCK_CART_BLOCK_DE: CMS.Model.CartBlock.CartBlock = {
@@ -86,6 +93,13 @@ const MOCK_CART_BLOCK_DE: CMS.Model.CartBlock.CartBlock = {
             path: '/produkte',
         },
     },
+    promoCodeLabels: {
+        title: 'Rabattcode',
+        inputPlaceholder: 'Rabattcode eingeben',
+        applyButton: 'Einlösen',
+        removeLabel: 'Rabattcode entfernen',
+        invalidCodeError: 'Ungültiger oder abgelaufener Rabattcode',
+    },
 };
 
 const MOCK_CART_BLOCK_PL: CMS.Model.CartBlock.CartBlock = {
@@ -129,6 +143,13 @@ const MOCK_CART_BLOCK_PL: CMS.Model.CartBlock.CartBlock = {
             label: 'Przejdź do sklepu',
             path: '/produkty',
         },
+    },
+    promoCodeLabels: {
+        title: 'Kod rabatowy',
+        inputPlaceholder: 'Wpisz kod rabatowy',
+        applyButton: 'Zastosuj',
+        removeLabel: 'Usuń kod rabatowy',
+        invalidCodeError: 'Nieprawidłowy lub wygasły kod rabatowy',
     },
 };
 

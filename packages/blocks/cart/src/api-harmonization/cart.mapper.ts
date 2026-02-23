@@ -60,5 +60,6 @@ export const mapCart = (cms: CMS.Model.CartBlock.CartBlock, cart: Carts.Model.Ca
             cart?.shippingMethod && cart.shippingTotal
                 ? { name: cart.shippingMethod.name, total: cart.shippingTotal }
                 : undefined,
+        promoCodeLabels: cms.promoCodeLabels,
     };
 };

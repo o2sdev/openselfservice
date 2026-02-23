@@ -41,4 +41,11 @@ export class CartBlock extends Block.Block {
             path: string;
         };
     };
+    promoCodeLabels?: {
+        title: string;
+        inputPlaceholder: string;
+        applyButton: string;
+        removeLabel: string;
+        invalidCodeError: string;
+    };
 }
