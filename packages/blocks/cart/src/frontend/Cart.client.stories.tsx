@@ -19,6 +19,7 @@ const baseBlock = {
     labels: {
         itemTotal: 'Total',
         unknownProductName: 'Product',
+        errorMessage: 'Something went wrong. Please try again.',
     },
     actions: {
         increaseQuantity: 'Increase quantity',
