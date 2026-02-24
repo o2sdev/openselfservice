@@ -105,5 +105,7 @@ export const runWizardPrompts = async (
         template,
         selectedBlocks,
         selectedIntegrations,
+        conflictResolutions: [],
+        envVars: {},
     };
 };

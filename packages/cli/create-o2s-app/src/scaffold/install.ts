@@ -25,18 +25,7 @@ export const installDependencies = async (projectDir: string): Promise<void> => 
 const fixPackageLock = async (projectDir: string): Promise<void> => {
     const lockFilePath = path.join(projectDir, 'package-lock.json');
 
-    if (!(await fs.pathExists(lockFilePath))) return;
-
-    const content = await fs.readFile(lockFilePath, 'utf-8');
-    const json = JSON.parse(content);
-
-    if (json && json.packages) {
-        for (const [key, value] of Object.entries(json.packages)) {
-            if (value && typeof value === 'object' && (value as { link: boolean }).link) {
-                delete json.packages[key];
-            }
-        }
+    if (await fs.pathExists(lockFilePath)) {
+        await fs.remove(lockFilePath);
     }
-
-    await fs.writeFile(lockFilePath, JSON.stringify(json, null, 4), 'utf-8');
 };

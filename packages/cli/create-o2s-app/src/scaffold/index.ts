@@ -1,8 +1,11 @@
 import { WizardAnswers } from '../types';
 import { cleanupProject } from './cleanup';
+import { generateEnvFiles } from './generate-env';
 import { installDependencies } from './install';
+import { warnUnconfiguredModules } from './transform-app-config';
 import { transformAppModule } from './transform-app-module';
 import { transformAppsPackageJson } from './transform-apps-package-json';
+import { transformIntegrationConfigs } from './transform-integration-configs';
 import { transformRootPackageJson } from './transform-package-json';
 import { transformPageModel } from './transform-page-model';
 import { transformRenderBlocks } from './transform-render-blocks';
@@ -18,7 +21,7 @@ export const scaffold = async (tempDir: string, answers: WizardAnswers): Promise
         );
     }
 
-    const { selectedBlocks, selectedIntegrations } = answers;
+    const { selectedBlocks, selectedIntegrations, conflictResolutions, envVars } = answers;
 
     // Step 1: Move cloned repo to target directory
     console.log();
@@ -40,7 +43,13 @@ export const scaffold = async (tempDir: string, answers: WizardAnswers): Promise
     // Step 4: Clean up root package.json (remove workspace entries for deleted dirs)
     await transformRootPackageJson(targetDir);
 
-    // Step 5: Fix package-lock.json and install dependencies
+    // Step 5: Configure integration source files and generate environment
+    console.log('Configuring integrations...');
+    const uncoveredModules = await transformIntegrationConfigs(targetDir, selectedIntegrations, conflictResolutions);
+    await generateEnvFiles(targetDir, envVars, selectedIntegrations);
+    warnUnconfiguredModules(uncoveredModules);
+
+    // Step 6: Fix package-lock.json and install dependencies
     await installDependencies(targetDir);
 
     return targetDir;

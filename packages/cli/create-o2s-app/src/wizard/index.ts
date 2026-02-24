@@ -1,6 +1,7 @@
 import { TemplateType, WizardAnswers } from '../types';
 import { discoverBlocks } from '../utils/block-discovery';
 import { discoverIntegrations } from '../utils/integration-discovery';
+import { detectConflicts, promptConflictResolutions, promptEnvVars } from './env-prompts';
 import { runWizardPrompts } from './prompts';
 
 export const runWizard = async (
@@ -21,8 +22,24 @@ export const runWizard = async (
             template: cliTemplate,
             selectedBlocks: cliBlocks,
             selectedIntegrations: cliIntegrations,
+            conflictResolutions: [],
+            envVars: {},
         };
     }
 
-    return runWizardPrompts(allBlocks, allIntegrations, cliName, cliTemplate);
+    const partialAnswers = await runWizardPrompts(allBlocks, allIntegrations, cliName, cliTemplate);
+
+    if (partialAnswers.template !== 'custom') {
+        return partialAnswers;
+    }
+
+    const conflicts = detectConflicts(partialAnswers.selectedIntegrations);
+    const conflictResolutions = await promptConflictResolutions(conflicts);
+    const envVars = await promptEnvVars(partialAnswers.selectedIntegrations);
+
+    return {
+        ...partialAnswers,
+        conflictResolutions,
+        envVars,
+    };
 };
