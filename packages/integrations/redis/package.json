@@ -36,7 +36,7 @@
     "dependencies": {
         "@o2s/framework": "*",
         "@o2s/utils.logger": "*",
-        "redis": "^5.10.0"
+        "redis": "^5.11.0"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",
