@@ -13,20 +13,20 @@ export const AddressFields: React.FC<Readonly<AddressFieldsProps>> = ({ fields, 
     return (
         <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="md:col-span-2 flex flex-col gap-2">
-                <Label htmlFor={id('street')}>
-                    {fields.street.label}
-                    {fields.street.required && <span className="text-destructive"> *</span>}
+                <Label htmlFor={id('streetName')}>
+                    {fields.streetName.label}
+                    {fields.streetName.required && <span className="text-destructive"> *</span>}
                 </Label>
-                <Field name="street">
+                <Field name="streetName">
                     {({ field, form: { touched, errors } }: FieldProps<string>) => (
                         <>
                             <Input
-                                id={id('street')}
+                                id={id('streetName')}
                                 {...field}
-                                placeholder={fields.street.placeholder}
-                                className={touched.street && errors.street ? 'border-destructive' : ''}
+                                placeholder={fields.streetName.placeholder}
+                                className={touched.streetName && errors.streetName ? 'border-destructive' : ''}
                             />
-                            <ErrorMessage name="street">
+                            <ErrorMessage name="streetName">
                                 {(msg) => (
                                     <Typography variant="small" className="text-destructive">
                                         {msg}
@@ -37,6 +37,70 @@ export const AddressFields: React.FC<Readonly<AddressFieldsProps>> = ({ fields, 
                     )}
                 </Field>
             </div>
+
+            {(fields.streetNumber || fields.apartment) && (
+                <>
+                    {fields.streetNumber && (
+                        <div className="flex flex-col gap-2">
+                            <Label htmlFor={id('streetNumber')}>
+                                {fields.streetNumber.label}
+                                {fields.streetNumber.required && <span className="text-destructive"> *</span>}
+                            </Label>
+                            <Field name="streetNumber">
+                                {({ field, form: { touched, errors } }: FieldProps<string>) => (
+                                    <>
+                                        <Input
+                                            id={id('streetNumber')}
+                                            {...field}
+                                            placeholder={fields.streetNumber!.placeholder}
+                                            className={
+                                                touched.streetNumber && errors.streetNumber ? 'border-destructive' : ''
+                                            }
+                                        />
+                                        <ErrorMessage name="streetNumber">
+                                            {(msg) => (
+                                                <Typography variant="small" className="text-destructive">
+                                                    {msg}
+                                                </Typography>
+                                            )}
+                                        </ErrorMessage>
+                                    </>
+                                )}
+                            </Field>
+                        </div>
+                    )}
+
+                    {fields.apartment && (
+                        <div className="flex flex-col gap-2">
+                            <Label htmlFor={id('apartment')}>
+                                {fields.apartment.label}
+                                {fields.apartment.required && <span className="text-destructive"> *</span>}
+                            </Label>
+                            <Field name="apartment">
+                                {({ field, form: { touched, errors } }: FieldProps<string>) => (
+                                    <>
+                                        <Input
+                                            id={id('apartment')}
+                                            {...field}
+                                            placeholder={fields.apartment!.placeholder}
+                                            className={
+                                                touched.apartment && errors.apartment ? 'border-destructive' : ''
+                                            }
+                                        />
+                                        <ErrorMessage name="apartment">
+                                            {(msg) => (
+                                                <Typography variant="small" className="text-destructive">
+                                                    {msg}
+                                                </Typography>
+                                            )}
+                                        </ErrorMessage>
+                                    </>
+                                )}
+                            </Field>
+                        </div>
+                    )}
+                </>
+            )}
 
             <div className="flex flex-col gap-2">
                 <Label htmlFor={id('city')}>

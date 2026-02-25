@@ -6,11 +6,13 @@ export interface AddressFieldConfig {
 
 export interface AddressFieldsProps {
     fields: {
-        street: AddressFieldConfig;
+        streetName: AddressFieldConfig;
+        streetNumber?: AddressFieldConfig;
+        apartment?: AddressFieldConfig;
         city: AddressFieldConfig;
         postalCode: AddressFieldConfig;
         country: AddressFieldConfig;
     };
-    /** Prefix for element ids (e.g. 'billing' -> billingStreet, billingCity...) */
+    /** Prefix for element ids (e.g. 'billing' -> billingStreetName, billingCity...) */
     idPrefix?: string;
 }

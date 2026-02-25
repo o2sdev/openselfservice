@@ -6,10 +6,20 @@ import { AddressFields } from './AddressFields';
 import type { AddressFieldsProps } from './AddressFields.types';
 
 const mockFields: AddressFieldsProps['fields'] = {
-    street: {
-        label: 'Street and number',
-        placeholder: 'e.g. 123 Main St',
+    streetName: {
+        label: 'Street name',
+        placeholder: 'e.g. Main Street',
         required: true,
+    },
+    streetNumber: {
+        label: 'Number',
+        placeholder: 'e.g. 123',
+        required: true,
+    },
+    apartment: {
+        label: 'Apartment / suite',
+        placeholder: 'e.g. 4B',
+        required: false,
     },
     city: {
         label: 'City',
@@ -34,7 +44,17 @@ const meta: Meta<typeof AddressFields> = {
     tags: ['autodocs'],
     decorators: [
         (Story) => (
-            <Formik initialValues={{ street: '', city: '', postalCode: '', country: '' }} onSubmit={() => {}}>
+            <Formik
+                initialValues={{
+                    streetName: '',
+                    streetNumber: '',
+                    apartment: '',
+                    city: '',
+                    postalCode: '',
+                    country: '',
+                }}
+                onSubmit={() => {}}
+            >
                 <Form>
                     <Story />
                 </Form>
@@ -49,12 +69,5 @@ type Story = StoryObj<typeof AddressFields>;
 export const Default: Story = {
     args: {
         fields: mockFields,
-    },
-};
-
-export const WithIdPrefix: Story = {
-    args: {
-        fields: mockFields,
-        idPrefix: 'billing',
     },
 };
