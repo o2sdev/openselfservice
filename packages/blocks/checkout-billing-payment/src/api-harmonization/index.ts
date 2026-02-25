@@ -1,7 +1,6 @@
 export const URL = '/blocks/checkout-billing-payment';
 
 export { CheckoutBillingPaymentBlockModule as Module } from './checkout-billing-payment.module';
-export { getCheckoutBillingPaymentBlockMock } from './checkout-billing-payment.mock'; // TODO: remove this mock
 export { CheckoutBillingPaymentService as Service } from './checkout-billing-payment.service';
 export { CheckoutBillingPaymentController as Controller } from './checkout-billing-payment.controller';
 

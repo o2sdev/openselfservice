@@ -19,42 +19,10 @@ const baseBlock = {
     title: 'Billing and payment',
     subtitle: 'Select payment method',
     fields: {
-        billingAddressSectionTitle: 'Billing address',
-        sameAsShippingAddress: {
-            label: 'Same as shipping address',
-        },
-        billingAddress: {
-            street: {
-                label: 'Street and number',
-                placeholder: 'e.g. 123 Main St',
-                required: true,
-            },
-            city: {
-                label: 'City',
-                placeholder: 'City',
-                required: true,
-            },
-            postalCode: {
-                label: 'Postal code',
-                placeholder: 'XX-XXX',
-                required: true,
-            },
-            country: {
-                label: 'Country',
-                placeholder: 'Country',
-                required: true,
-            },
-        },
         paymentMethod: {
             label: 'Payment method',
             placeholder: 'Select method',
             required: true,
-            options: [
-                { value: 'transfer', label: 'Bank transfer' },
-                { value: 'card', label: 'Credit card' },
-                { value: 'blik', label: 'BLIK' },
-                { value: 'invoice', label: 'Invoice (pay later)' },
-            ],
         },
     },
     buttons: {
@@ -69,7 +37,6 @@ const baseBlock = {
     },
     errors: {
         required: 'This field is required',
-        invalidPostalCode: 'Invalid postal code',
     },
     summaryLabels: {
         title: 'Summary',
