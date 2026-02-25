@@ -9,12 +9,14 @@ export interface TemplateDefinition {
 export const TEMPLATES: Record<TemplateType, TemplateDefinition> = {
     ssp: {
         name: 'Self Service Portal',
-        description: 'Customer support focused — tickets, orders, invoices, notifications',
+        description:
+            'Demo — best way to see the full Self Service Portal flow. Customer support: tickets, orders, invoices, notifications',
         category: 'ssp',
     },
     dxp: {
         name: 'Digital Experience Platform (DXP)',
-        description: 'Marketing and content focused — hero sections, features, pricing',
+        description:
+            'Demo — best way to see the full Digital Experience Platform flow. Marketing and content: hero sections, features, pricing',
         category: 'dxp',
     },
     custom: {
