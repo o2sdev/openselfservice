@@ -69,5 +69,5 @@
         "next": "^16.0.5",
         "next-intl": "^4.1.0"
     },
-    "o2sTemplate": ["ssp", "dxp"]
+    "o2sTemplate": ["ssp"]
 }

@@ -1,0 +1,623 @@
+[
+    {
+        "id": "art-001",
+        "createdAt": "2023-05-12T08:30:00Z",
+        "updatedAt": "2023-06-15T14:25:00Z",
+        "createdAt_timestamp": 1683879000,
+        "updatedAt_timestamp": 1686838500,
+        "title": "Zarządzanie narzędziami PowerPro online",
+        "lead": "Dowiedz się, jak efektywnie zarządzać narzędziami PowerPro za pomocą naszego portalu samoobsługowego dostępnego 24/7.",
+        "image": "https://raw.githubusercontent.com/o2sdev/openselfservice/refs/heads/main/packages/integrations/mocked/public/images/empty.jpg",
+        "thumbnail": "https://example.com/images/tool-management-thumb.jpg",
+        "category": "SELF_SERVICE",
+        "sections": [
+            {
+                "id": "sect-001-1",
+                "createdAt": "2023-05-12T08:30:00Z",
+                "updatedAt": "2023-06-15T14:25:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Pierwsze kroki",
+                "content": "Aby rozpocząć zarządzanie narzędziami PowerPro online, zaloguj się na swoje konto na stronie powerprotools.com i przejdź do sekcji 'Moje narzędzia'."
+            },
+            {
+                "id": "sect-001-2",
+                "createdAt": "2023-05-12T09:15:00Z",
+                "updatedAt": "2023-06-15T14:25:00Z",
+                "__typename": "ArticleSectionImage",
+                "url": "https://example.com/images/dashboard-view.jpg",
+                "alt": "Widok panelu PowerPro",
+                "caption": "Panel zarządzania narzędziami PowerPro zapewnia kompleksowy przegląd zarejestrowanych narzędzi."
+            }
+        ]
+    },
+    {
+        "id": "art-002",
+        "createdAt": "2023-04-18T09:45:00Z",
+        "updatedAt": "2023-07-02T11:15:00Z",
+        "createdAt_timestamp": 1681810500,
+        "updatedAt_timestamp": 1688298900,
+        "title": "Jak zaplanować naprawę narzędzi online",
+        "lead": "Zaplanuj naprawy swoich narzędzi PowerPro szybko i efektywnie przez nasz portal internetowy.",
+        "image": "https://example.com/images/tool-repair.jpg",
+        "category": "WARRANTY_REPAIR",
+        "sections": [
+            {
+                "id": "sect-002-1",
+                "createdAt": "2023-04-18T09:45:00Z",
+                "updatedAt": "2023-07-02T11:15:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Planowanie naprawy",
+                "content": "Odwiedź sekcję 'Serwis i naprawa' na swoim koncie, aby rozpocząć proces planowania naprawy. Wybierz narzędzie wymagające serwisu z zarejestrowanego inwentarza."
+            }
+        ]
+    },
+    {
+        "id": "art-003",
+        "createdAt": "2023-03-10T14:22:00Z",
+        "updatedAt": "2023-03-10T14:22:00Z",
+        "createdAt_timestamp": 1678458120,
+        "updatedAt_timestamp": 1678458120,
+        "title": "Zarządzanie parkiem narzędzi: Pierwsze kroki",
+        "lead": "Poznaj podstawy systemu zarządzania parkiem narzędzi PowerPro, aby zoptymalizować wykorzystanie sprzętu.",
+        "thumbnail": "https://example.com/images/tpm-getting-started-thumb.jpg",
+        "category": "TOOL_MANAGEMENT",
+        "sections": [
+            {
+                "id": "sect-003-1",
+                "createdAt": "2023-03-10T14:22:00Z",
+                "updatedAt": "2023-03-10T14:22:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Czym jest zarządzanie parkiem narzędzi?",
+                "content": "Zarządzanie parkiem narzędzi to kompleksowy system PowerPro do śledzenia, konserwacji i optymalizacji całego inwentarza narzędzi w różnych lokalizacjach i projektach."
+            },
+            {
+                "id": "sect-003-2",
+                "createdAt": "2023-03-10T14:22:00Z",
+                "updatedAt": "2023-03-10T14:22:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Konfiguracja parku narzędzi",
+                "content": "Zacznij od zinwentaryzowania wszystkich narzędzi PowerPro i wprowadzenia ich do systemu. Możesz importować istniejące listy inwentarzowe lub dodawać narzędzia pojedynczo."
+            },
+            {
+                "id": "sect-003-3",
+                "createdAt": "2023-03-10T15:30:00Z",
+                "updatedAt": "2023-03-10T15:30:00Z",
+                "__typename": "ArticleSectionImage",
+                "url": "https://example.com/images/tool-park-dashboard.jpg",
+                "alt": "Panel zarządzania parkiem narzędzi",
+                "caption": "Intuicyjny panel daje ci widok z lotu ptaka na cały inwentarz narzędzi."
+            }
+        ]
+    },
+    {
+        "id": "art-004",
+        "createdAt": "2023-06-24T10:15:00Z",
+        "updatedAt": "2023-08-15T16:40:00Z",
+        "createdAt_timestamp": 1687602900,
+        "updatedAt_timestamp": 1692117600,
+        "title": "Zrozumienie gwarancji PowerPro",
+        "lead": "Wszystko, co musisz wiedzieć o ochronie gwarancyjnej PowerPro dla twoich profesjonalnych narzędzi.",
+        "image": "https://example.com/images/warranty-coverage.jpg",
+        "thumbnail": "https://example.com/images/warranty-coverage-thumb.jpg",
+        "category": "WARRANTY_REPAIR",
+        "sections": [
+            {
+                "id": "sect-004-1",
+                "createdAt": "2023-06-24T10:15:00Z",
+                "updatedAt": "2023-08-15T16:40:00Z",
+                "__typename": "ArticleSectionImage",
+                "url": "https://example.com/images/warranty-card.jpg",
+                "alt": "Karta gwarancyjna PowerPro",
+                "caption": "Twoja karta gwarancyjna zawiera ważne informacje o warunkach ochrony."
+            },
+            {
+                "id": "sect-004-2",
+                "createdAt": "2023-06-24T10:15:00Z",
+                "updatedAt": "2023-08-15T16:40:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Standardowa ochrona gwarancyjna",
+                "content": "Wszystkie profesjonalne narzędzia PowerPro są objęte 3-letnią standardową gwarancją, która obejmuje wady produkcyjne i awarie podczas normalnego użytkowania."
+            },
+            {
+                "id": "sect-004-3",
+                "createdAt": "2023-06-24T10:15:00Z",
+                "updatedAt": "2023-08-15T16:40:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Opcje rozszerzonej gwarancji",
+                "content": "Dla dodatkowej ochrony, rozważ nasz program rozszerzonej gwarancji PowerPro+, który dodaje do 2 dodatkowych lat ochrony i obejmuje ochronę przed przypadkowym uszkodzeniem."
+            }
+        ]
+    },
+    {
+        "id": "art-005",
+        "createdAt": "2023-01-30T11:20:00Z",
+        "updatedAt": "2023-05-22T09:10:00Z",
+        "createdAt_timestamp": 1675077600,
+        "updatedAt_timestamp": 1684746600,
+        "title": "Przewodnik krok po kroku do rejestracji narzędzi",
+        "lead": "Zarejestruj swoje narzędzia PowerPro, aby aktywować gwarancję i uzyskać dostęp do usług premium.",
+        "category": "HOW_TO_GUIDES",
+        "sections": [
+            {
+                "id": "sect-005-1",
+                "createdAt": "2023-01-30T11:20:00Z",
+                "updatedAt": "2023-05-22T09:10:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Proces rejestracji",
+                "content": "Utwórz konto PowerPro, jeśli jeszcze go nie masz. Następnie przejdź do 'Zarejestruj narzędzie' i wprowadź numer seryjny znajdujący się na tabliczce informacyjnej narzędzia."
+            }
+        ]
+    },
+    {
+        "id": "art-006",
+        "createdAt": "2023-02-14T13:45:00Z",
+        "updatedAt": "2023-07-28T15:30:00Z",
+        "createdAt_timestamp": 1676382300,
+        "updatedAt_timestamp": 1690559400,
+        "title": "Śledzenie historii napraw i konserwacji narzędzi",
+        "lead": "Jak przeglądać i monitorować pełną historię napraw i konserwacji twoich narzędzi PowerPro.",
+        "image": "https://example.com/images/repair-history.jpg",
+        "thumbnail": "https://example.com/images/repair-history-thumb.jpg",
+        "category": "TOOL_MANAGEMENT",
+        "sections": [
+            {
+                "id": "sect-006-1",
+                "createdAt": "2023-02-14T13:45:00Z",
+                "updatedAt": "2023-07-28T15:30:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Dostęp do historii napraw",
+                "content": "Aby zobaczyć pełną historię napraw i konserwacji dla dowolnego zarejestrowanego narzędzia, przejdź do sekcji 'Historia narzędzia' na swoim koncie i wybierz konkretne narzędzie."
+            },
+            {
+                "id": "sect-006-2",
+                "createdAt": "2023-02-14T13:45:00Z",
+                "updatedAt": "2023-07-28T15:30:00Z",
+                "__typename": "ArticleSectionImage",
+                "url": "https://example.com/images/history-report.jpg",
+                "alt": "Raport historii narzędzia",
+                "caption": "Szczegółowy raport historii pokazuje wszystkie zdarzenia serwisowe, wymienione części i zapisy konserwacji."
+            }
+        ]
+    },
+    {
+        "id": "art-007",
+        "createdAt": "2023-07-05T08:30:00Z",
+        "updatedAt": "2023-07-05T08:30:00Z",
+        "createdAt_timestamp": 1688546400,
+        "updatedAt_timestamp": 1688546400,
+        "title": "Maksymalizacja żywotności narzędzi dzięki właściwej konserwacji",
+        "lead": "Praktyczne wskazówki konserwacyjne, aby przedłużyć żywotność elektronarzędzi PowerPro.",
+        "image": "https://example.com/images/tool-maintenance.jpg",
+        "category": "MAINTENANCE_TIPS",
+        "sections": [
+            {
+                "id": "sect-007-1",
+                "createdAt": "2023-07-05T08:30:00Z",
+                "updatedAt": "2023-07-05T08:30:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Regularne czyszczenie",
+                "content": "Po każdym użyciu czyść swoje narzędzia, aby usunąć kurz, zanieczyszczenia i wilgoć. Zwróć szczególną uwagę na otwory wentylacyjne i ruchome części."
+            },
+            {
+                "id": "sect-007-2",
+                "createdAt": "2023-07-05T08:30:00Z",
+                "updatedAt": "2023-07-05T08:30:00Z",
+                "__typename": "ArticleSectionImage",
+                "url": "https://example.com/images/cleaning-tools.jpg",
+                "alt": "Prawidłowa technika czyszczenia narzędzi",
+                "caption": "Używanie sprężonego powietrza może pomóc usunąć zanieczyszczenia z trudno dostępnych miejsc."
+            }
+        ]
+    },
+    {
+        "id": "art-008",
+        "createdAt": "2023-08-17T16:20:00Z",
+        "updatedAt": "2023-09-01T10:15:00Z",
+        "createdAt_timestamp": 1692287400,
+        "updatedAt_timestamp": 1693565700,
+        "title": "Rozwiązania do zarządzania flotą dla firm budowlanych",
+        "lead": "Jak system zarządzania flotą PowerPro może pomóc firmom budowlanym zoptymalizować wykorzystanie narzędzi.",
+        "thumbnail": "https://example.com/images/fleet-management-thumb.jpg",
+        "category": "TOOL_MANAGEMENT",
+        "sections": [
+            {
+                "id": "sect-008-1",
+                "createdAt": "2023-08-17T16:20:00Z",
+                "updatedAt": "2023-09-01T10:15:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Korzyści z zarządzania flotą",
+                "content": "Wdrożenie rozwiązania do zarządzania flotą PowerPro może zmniejszyć utratę narzędzi, skrócić przestoje i dostarczyć cennych informacji o wzorcach użytkowania narzędzi w różnych projektach."
+            }
+        ]
+    },
+    {
+        "id": "art-009",
+        "createdAt": "2023-05-19T09:10:00Z",
+        "updatedAt": "2023-06-30T14:25:00Z",
+        "createdAt_timestamp": 1684486200,
+        "updatedAt_timestamp": 1688134500,
+        "title": "Naprawić czy wymienić? Podejmowanie właściwej decyzji",
+        "lead": "Wskazówki, które pomogą ci zdecydować, czy naprawić narzędzie PowerPro, czy zainwestować w wymianę.",
+        "image": "https://example.com/images/repair-or-replace.jpg",
+        "thumbnail": "https://example.com/images/repair-or-replace-thumb.jpg",
+        "category": "WARRANTY_REPAIR",
+        "sections": [
+            {
+                "id": "sect-009-1",
+                "createdAt": "2023-05-19T09:10:00Z",
+                "updatedAt": "2023-06-30T14:25:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Ocena wieku i stanu",
+                "content": "Weź pod uwagę wiek narzędzia i jego ogólny stan. Narzędzia zbliżające się do końca oczekiwanego okresu użytkowania mogą być lepszymi kandydatami do wymiany."
+            },
+            {
+                "id": "sect-009-2",
+                "createdAt": "2023-05-19T09:10:00Z",
+                "updatedAt": "2023-06-30T14:25:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Analiza kosztów",
+                "content": "Porównaj koszt naprawy z ceną nowego narzędzia. Jako ogólna zasada, jeśli naprawy przekraczają 50% kosztu wymiany, modernizacja może być bardziej ekonomiczna."
+            },
+            {
+                "id": "sect-009-3",
+                "createdAt": "2023-05-19T09:10:00Z",
+                "updatedAt": "2023-06-30T14:25:00Z",
+                "__typename": "ArticleSectionImage",
+                "url": "https://example.com/images/decision-flowchart.jpg",
+                "alt": "Schemat blokowy decyzji naprawy lub wymiany",
+                "caption": "Ten schemat blokowy może pomóc w procesie podejmowania decyzji podczas oceny uszkodzonego narzędzia."
+            }
+        ]
+    },
+    {
+        "id": "art-010",
+        "createdAt": "2023-04-02T11:30:00Z",
+        "updatedAt": "2023-08-10T13:45:00Z",
+        "createdAt_timestamp": 1680434400,
+        "updatedAt_timestamp": 1691673900,
+        "title": "Jak aktualizować oprogramowanie narzędzi online",
+        "lead": "Utrzymuj swoje inteligentne narzędzia PowerPro z najnowszym oprogramowaniem dla optymalnej wydajności.",
+        "category": "HOW_TO_GUIDES",
+        "sections": [
+            {
+                "id": "sect-010-1",
+                "createdAt": "2023-04-02T11:30:00Z",
+                "updatedAt": "2023-08-10T13:45:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Dlaczego aktualizować oprogramowanie?",
+                "content": "Regularne aktualizacje oprogramowania poprawiają wydajność narzędzi, dodają nowe funkcje i naprawiają potencjalne problemy. Utrzymywanie narzędzi w aktualności zapewnia, że uzyskasz maksimum ze swojej inwestycji w PowerPro."
+            },
+            {
+                "id": "sect-010-2",
+                "createdAt": "2023-04-02T11:30:00Z",
+                "updatedAt": "2023-08-10T13:45:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Proces aktualizacji",
+                "content": "Połącz swoje narzędzie z aplikacją mobilną PowerPro przez Bluetooth. Przejdź do Ustawienia > Zarządzanie narzędziami > Aktualizacja oprogramowania. Aplikacja automatycznie sprawdzi dostępne aktualizacje."
+            }
+        ]
+    },
+    {
+        "id": "art-011",
+        "createdAt": "2023-09-12T14:50:00Z",
+        "updatedAt": "2023-09-12T14:50:00Z",
+        "createdAt_timestamp": 1694527800,
+        "updatedAt_timestamp": 1694527800,
+        "title": "Program certyfikacji narzędzi PowerPro",
+        "lead": "Dowiedz się o naszym programie certyfikacji zapewniającym, że twoje narzędzia spełniają branżowe standardy bezpieczeństwa.",
+        "image": "https://example.com/images/certification-program.jpg",
+        "thumbnail": "https://example.com/images/certification-program-thumb.jpg",
+        "category": "GENERAL",
+        "sections": [
+            {
+                "id": "sect-011-1",
+                "createdAt": "2023-09-12T14:50:00Z",
+                "updatedAt": "2023-09-12T14:50:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Korzyści z certyfikacji",
+                "content": "Certyfikowane narzędzia przechodzą rygorystyczne testy, aby zapewnić, że spełniają standardy bezpieczeństwa i wydajności. Certyfikacja może być wymagana na niektórych placach budowy i pomaga utrzymać wartość narzędzi."
+            },
+            {
+                "id": "sect-011-2",
+                "createdAt": "2023-09-12T14:50:00Z",
+                "updatedAt": "2023-09-12T14:50:00Z",
+                "__typename": "ArticleSectionImage",
+                "url": "https://example.com/images/certification-badge.jpg",
+                "alt": "Odznaka certyfikacji PowerPro",
+                "caption": "Szukaj tej odznaki certyfikacyjnej na swoim narzędziu i dokumentacji, aby zweryfikować jego certyfikowany status."
+            },
+            {
+                "id": "sect-011-3",
+                "createdAt": "2023-09-12T14:50:00Z",
+                "updatedAt": "2023-09-12T14:50:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Proces certyfikacji",
+                "content": "Zaplanuj spotkanie certyfikacyjne przez swoje konto PowerPro. Przynieś swoje narzędzia do autoryzowanego centrum serwisowego, gdzie zostaną przetestowane zgodnie ze standardami branżowymi."
+            }
+        ]
+    },
+    {
+        "id": "art-012",
+        "createdAt": "2023-03-27T10:20:00Z",
+        "updatedAt": "2023-07-18T09:35:00Z",
+        "createdAt_timestamp": 1679911200,
+        "updatedAt_timestamp": 1689673500,
+        "title": "Najlepsze praktyki zarządzania inwentarzem narzędzi",
+        "lead": "Strategie i wskazówki dotyczące efektywnego zarządzania inwentarzem narzędzi PowerPro w wielu lokalizacjach.",
+        "image": "https://example.com/images/inventory-management.jpg",
+        "category": "TOOL_MANAGEMENT",
+        "sections": [
+            {
+                "id": "sect-012-1",
+                "createdAt": "2023-03-27T10:20:00Z",
+                "updatedAt": "2023-07-18T09:35:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Regularne audyty",
+                "content": "Przeprowadzaj regularne audyty inwentarza, aby rozliczyć wszystkie narzędzia. Pomaga to wcześnie identyfikować brakujące przedmioty i utrzymywać dokładne rejestry do planowania projektów."
+            },
+            {
+                "id": "sect-012-2",
+                "createdAt": "2023-03-27T10:20:00Z",
+                "updatedAt": "2023-07-18T09:35:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "System wypożyczania narzędzi",
+                "content": "Wdrażaj formalny system wypożyczania, w którym pracownicy muszą podpisywać się za wypożyczone narzędzia. Tworzy to odpowiedzialność i pomaga śledzić lokalizację narzędzi."
+            }
+        ]
+    },
+    {
+        "id": "art-013",
+        "createdAt": "2023-06-08T15:40:00Z",
+        "updatedAt": "2023-08-22T11:25:00Z",
+        "createdAt_timestamp": 1686238800,
+        "updatedAt_timestamp": 1692704700,
+        "title": "Rozwiązywanie typowych problemów z elektronarzędziami",
+        "lead": "Szybkie naprawy i wskazówki dotyczące rozwiązywania typowych problemów z elektronarzędziami PowerPro.",
+        "thumbnail": "https://example.com/images/troubleshooting-thumb.jpg",
+        "category": "HOW_TO_GUIDES",
+        "sections": [
+            {
+                "id": "sect-013-1",
+                "createdAt": "2023-06-08T15:40:00Z",
+                "updatedAt": "2023-08-22T11:25:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Narzędzie nie uruchamia się",
+                "content": "Najpierw sprawdź źródło zasilania - upewnij się, że baterie są naładowane lub przewody zasilające są prawidłowo podłączone. Następnie sprawdź włącznik pod kątem uszkodzeń lub zanieczyszczeń. Jeśli narzędzie nadal nie uruchamia się, sprawdź instrukcję obsługi w poszukiwaniu rozwiązywania problemów specyficznych dla modelu."
+            },
+            {
+                "id": "sect-013-2",
+                "createdAt": "2023-06-08T15:40:00Z",
+                "updatedAt": "2023-08-22T11:25:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Nietypowe dźwięki",
+                "content": "Dźwięki tarcia, piszczenia lub grzechotania często wskazują na problemy mechaniczne. Natychmiast przestań używać narzędzia, ponieważ dalsza praca może spowodować dodatkowe uszkodzenia. Sprawdź, czy nie ma luźnych części lub ciał obcych wewnątrz obudowy."
+            },
+            {
+                "id": "sect-013-3",
+                "createdAt": "2023-06-08T15:40:00Z",
+                "updatedAt": "2023-08-22T11:25:00Z",
+                "__typename": "ArticleSectionImage",
+                "url": "https://example.com/images/battery-check.jpg",
+                "alt": "Sprawdzanie połączeń baterii",
+                "caption": "Upewnij się, że styki baterii są czyste i wolne od korozji, aby zapewnić prawidłowe połączenie elektryczne."
+            }
+        ]
+    },
+    {
+        "id": "art-014",
+        "createdAt": "2023-02-05T09:15:00Z",
+        "updatedAt": "2023-05-12T16:30:00Z",
+        "createdAt_timestamp": 1675589700,
+        "updatedAt_timestamp": 1683908400,
+        "title": "Zrozumienie analityki użytkowania narzędzi",
+        "lead": "Jak interpretować i działać na podstawie danych o użytkowaniu zebranych z inteligentnych narzędzi PowerPro.",
+        "image": "https://example.com/images/usage-analytics.jpg",
+        "thumbnail": "https://example.com/images/usage-analytics-thumb.jpg",
+        "category": "SELF_SERVICE",
+        "sections": [
+            {
+                "id": "sect-014-1",
+                "createdAt": "2023-02-05T09:15:00Z",
+                "updatedAt": "2023-05-12T16:30:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Dostęp do analityki",
+                "content": "Zaloguj się na swoje konto PowerPro i przejdź do panelu 'Analityka', aby zobaczyć kompleksowe dane o użytkowaniu wszystkich podłączonych narzędzi."
+            },
+            {
+                "id": "sect-014-2",
+                "createdAt": "2023-02-05T09:15:00Z",
+                "updatedAt": "2023-05-12T16:30:00Z",
+                "__typename": "ArticleSectionImage",
+                "url": "https://example.com/images/analytics-dashboard.jpg",
+                "alt": "Panel analityczny użytkowania narzędzi",
+                "caption": "Panel analityczny zapewnia wizualizacje wzorców użytkowania, pomagając zidentyfikować możliwości optymalizacji."
+            }
+        ]
+    },
+    {
+        "id": "art-015",
+        "createdAt": "2023-07-30T12:10:00Z",
+        "updatedAt": "2023-07-30T12:10:00Z",
+        "createdAt_timestamp": 1690720200,
+        "updatedAt_timestamp": 1690720200,
+        "title": "Opcje przyspieszonej usługi naprawy",
+        "lead": "Poznaj przyspieszone usługi naprawy PowerPro, aby zminimalizować przestoje w kluczowych projektach.",
+        "category": "WARRANTY_REPAIR",
+        "sections": [
+            {
+                "id": "sect-015-1",
+                "createdAt": "2023-07-30T12:10:00Z",
+                "updatedAt": "2023-07-30T12:10:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Plany usług priorytetowych",
+                "content": "PowerPro oferuje kilka poziomów planów usług priorytetowych, które gwarantują szybszy czas realizacji napraw narzędzi, od usługi tego samego dnia do gwarantowanego ukończenia w ciągu 48 godzin."
+            }
+        ]
+    },
+    {
+        "id": "art-016",
+        "createdAt": "2023-08-09T08:45:00Z",
+        "updatedAt": "2023-09-14T10:20:00Z",
+        "createdAt_timestamp": 1691571900,
+        "updatedAt_timestamp": 1694686800,
+        "title": "Lista kontrolna inspekcji bezpieczeństwa narzędzi",
+        "lead": "Niezbędne kontrole bezpieczeństwa do wykonania przed użyciem elektronarzędzi PowerPro na placu budowy.",
+        "image": "https://example.com/images/safety-inspection.jpg",
+        "thumbnail": "https://example.com/images/safety-inspection-thumb.jpg",
+        "category": "GENERAL",
+        "sections": [
+            {
+                "id": "sect-016-1",
+                "createdAt": "2023-08-09T08:45:00Z",
+                "updatedAt": "2023-09-14T10:20:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Inspekcja fizyczna",
+                "content": "Sprawdź, czy na korpusie narzędzia, przewodzie i wtyczce nie ma pęknięć, uszkodzeń lub nietypowego zużycia. Upewnij się, że wszystkie osłony i funkcje bezpieczeństwa są na miejscu i działają prawidłowo."
+            },
+            {
+                "id": "sect-016-2",
+                "createdAt": "2023-08-09T08:45:00Z",
+                "updatedAt": "2023-09-14T10:20:00Z",
+                "__typename": "ArticleSectionImage",
+                "url": "https://example.com/images/cord-inspection.jpg",
+                "alt": "Prawidłowa technika inspekcji przewodu",
+                "caption": "Zawsze sprawdzaj całą długość przewodu zasilającego pod kątem przecięć, pęknięć lub odsłoniętych przewodów."
+            },
+            {
+                "id": "sect-016-3",
+                "createdAt": "2023-08-09T08:45:00Z",
+                "updatedAt": "2023-09-14T10:20:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Test operacyjny",
+                "content": "Przed rozpoczęciem pracy wykonaj krótki test operacyjny w bezpiecznym środowisku, aby upewnić się, że narzędzie działa płynnie bez nietypowych dźwięków, wibracji lub przegrzewania."
+            }
+        ]
+    },
+    {
+        "id": "art-017",
+        "createdAt": "2023-01-15T13:30:00Z",
+        "updatedAt": "2023-04-22T15:45:00Z",
+        "createdAt_timestamp": 1673790600,
+        "updatedAt_timestamp": 1682177100,
+        "title": "Korzyści z systemu śledzenia napraw PowerPro",
+        "lead": "Jak nasz zaawansowany system śledzenia napraw informuje Cię na bieżąco podczas całego procesu naprawy.",
+        "image": "https://example.com/images/repair-tracking.jpg",
+        "category": "WARRANTY_REPAIR",
+        "sections": [
+            {
+                "id": "sect-017-1",
+                "createdAt": "2023-01-15T13:30:00Z",
+                "updatedAt": "2023-04-22T15:45:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Aktualizacje statusu w czasie rzeczywistym",
+                "content": "Otrzymuj automatyczne powiadomienia na każdym etapie procesu naprawy, od wstępnego przyjęcia po końcowe testy jakości i wysyłkę."
+            },
+            {
+                "id": "sect-017-2",
+                "createdAt": "2023-01-15T13:30:00Z",
+                "updatedAt": "2023-04-22T15:45:00Z",
+                "__typename": "ArticleSectionImage",
+                "url": "https://example.com/images/tracking-mobile.jpg",
+                "alt": "Śledzenie naprawy w aplikacji mobilnej",
+                "caption": "Aplikacja mobilna PowerPro zapewnia wygodny dostęp do informacji o statusie naprawy w dowolnym miejscu i czasie."
+            }
+        ]
+    },
+    {
+        "id": "art-018",
+        "createdAt": "2023-05-03T11:55:00Z",
+        "updatedAt": "2023-06-18T09:40:00Z",
+        "createdAt_timestamp": 1683115200,
+        "updatedAt_timestamp": 1687082400,
+        "title": "Sezonowy przewodnik konserwacji narzędzi",
+        "lead": "Przygotuj swoje narzędzia PowerPro do optymalnej wydajności w różnych warunkach sezonowych.",
+        "thumbnail": "https://example.com/images/seasonal-maintenance-thumb.jpg",
+        "category": "MAINTENANCE_TIPS",
+        "sections": [
+            {
+                "id": "sect-018-1",
+                "createdAt": "2023-05-03T11:55:00Z",
+                "updatedAt": "2023-06-18T09:40:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Przygotowanie do zimy",
+                "content": "Przed nadejściem chłodów nałóż odpowiednie smary, aby zapobiec zamarzaniu ruchomych części, i przechowuj baterie w pomieszczeniach o kontrolowanej temperaturze, aby utrzymać ich pojemność."
+            },
+            {
+                "id": "sect-018-2",
+                "createdAt": "2023-05-03T11:55:00Z",
+                "updatedAt": "2023-06-18T09:40:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Pielęgnacja latem",
+                "content": "Podczas upałów zapobiegaj przegrzewaniu się, zapewniając odpowiednią wentylację, robiąc częstsze przerwy i trzymając narzędzia z dala od bezpośredniego światła słonecznego, gdy nie są używane."
+            }
+        ]
+    },
+    {
+        "id": "art-019",
+        "createdAt": "2023-09-05T10:30:00Z",
+        "updatedAt": "2023-09-05T10:30:00Z",
+        "createdAt_timestamp": 1693909800,
+        "updatedAt_timestamp": 1693909800,
+        "title": "Cyfrowe zarządzanie narzędziami dla klientów korporacyjnych",
+        "lead": "Zaawansowane rozwiązania do zarządzania narzędziami zaprojektowane specjalnie dla klientów korporacyjnych PowerPro.",
+        "image": "https://example.com/images/enterprise-management.jpg",
+        "thumbnail": "https://example.com/images/enterprise-management-thumb.jpg",
+        "category": "TOOL_MANAGEMENT",
+        "sections": [
+            {
+                "id": "sect-019-1",
+                "createdAt": "2023-09-05T10:30:00Z",
+                "updatedAt": "2023-09-05T10:30:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Kontrola dostępu dla wielu użytkowników",
+                "content": "Przydzielaj różne poziomy uprawnień członkom zespołu w zależności od ich ról, umożliwiając odpowiedni dostęp do zarządzania inwentarzem, planowania serwisu i funkcji raportowania."
+            },
+            {
+                "id": "sect-019-2",
+                "createdAt": "2023-09-05T10:30:00Z",
+                "updatedAt": "2023-09-05T10:30:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Niestandardowe raportowanie",
+                "content": "Generuj szczegółowe raporty dotyczące wykorzystania narzędzi, kosztów konserwacji i wskaźników przestojów, aby informować o decyzjach zakupowych i identyfikować możliwości optymalizacji."
+            },
+            {
+                "id": "sect-019-3",
+                "createdAt": "2023-09-05T10:30:00Z",
+                "updatedAt": "2023-09-05T10:30:00Z",
+                "__typename": "ArticleSectionImage",
+                "url": "https://example.com/images/enterprise-dashboard.jpg",
+                "alt": "Panel zarządzania dla przedsiębiorstw",
+                "caption": "Panel dla przedsiębiorstw zapewnia kompleksowy nadzór nad wszystkimi zasobami narzędziowymi w wielu lokalizacjach."
+            }
+        ]
+    },
+    {
+        "id": "art-020",
+        "createdAt": "2023-04-11T14:15:00Z",
+        "updatedAt": "2023-08-30T16:50:00Z",
+        "createdAt_timestamp": 1681221300,
+        "updatedAt_timestamp": 1693415400,
+        "title": "Jak zarejestrować się do powiadomień serwisowych PowerPro",
+        "lead": "Bądź na bieżąco z informacjami o konserwacji i statusie naprawy swoich narzędzi dzięki naszemu systemowi powiadomień.",
+        "category": "SELF_SERVICE",
+        "sections": [
+            {
+                "id": "sect-020-1",
+                "createdAt": "2023-04-11T14:15:00Z",
+                "updatedAt": "2023-08-30T16:50:00Z",
+                "__typename": "ArticleSectionText",
+                "title": "Konfiguracja powiadomień",
+                "content": "Zaloguj się na swoje konto PowerPro i przejdź do 'Ustawienia konta' > 'Powiadomienia'. Wybierz preferowane metody powiadomień (e-mail, SMS, powiadomienia push) oraz rodzaje aktualizacji, które chcesz otrzymywać."
+            },
+            {
+                "id": "sect-020-2",
+                "createdAt": "2023-04-11T14:15:00Z",
+                "updatedAt": "2023-08-30T16:50:00Z",
+                "__typename": "ArticleSectionImage",
+                "url": "https://example.com/images/notification-settings.jpg",
+                "alt": "Ekran ustawień powiadomień",
+                "caption": "Ekran ustawień powiadomień pozwala dostosować dokładnie, które aktualizacje otrzymujesz i w jaki sposób."
+            }
+        ]
+    }
+]

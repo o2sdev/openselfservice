@@ -1,7 +1,7 @@
 import type { EnvVar } from './types';
 
 export const GITHUB_REPO_URL = 'https://github.com/o2sdev/openselfservice';
-export const GITHUB_BRANCH = 'create-o2s-app/base';
+export const GITHUB_BRANCH = 'feature/Interactive-CLI-wizard-for-project-bootstrapping';
 export const PROJECT_PREFIX = 'o2s';
 export const STORYBOOK_URL = 'https://storybook-o2s.openselfservice.com/';
 export const DOCS_URL = 'https://docs.openselfservice.com/getting-started';
@@ -26,6 +26,9 @@ export const ALWAYS_REMOVE_DIRS: string[] = [
 
 export const ALWAYS_REMOVE_FILES: string[] = ['vercel.json'];
 
+// All mocked integration variants (excluded from env prompts and env generation)
+export const MOCKED_INTEGRATIONS = ['mocked', 'mocked-dxp'];
+
 // Static mapping: which framework modules each integration covers
 // Phase 3 will migrate this to dynamic discovery from integration package.json
 export const INTEGRATION_MODULES: Record<string, string[]> = {
@@ -35,6 +38,7 @@ export const INTEGRATION_MODULES: Record<string, string[]> = {
     'contentful-cms': ['cms'],
     algolia: ['search'],
     redis: ['cache'],
+    'mocked-dxp': ['cms', 'articles', 'search', 'cache'],
 };
 
 export const INTEGRATION_ENV_VARS: Record<string, EnvVar[]> = {

@@ -75,5 +75,5 @@
         "react-dom": "^19",
         "rxjs": "^7"
     },
-    "o2sTemplate": ["ssp", "dxp"]
+    "o2sTemplate": ["ssp"]
 }

@@ -1,4 +1,4 @@
-import { INTEGRATION_ENV_VARS, INTEGRATION_MODULES } from '../constants';
+import { INTEGRATION_ENV_VARS, INTEGRATION_MODULES, MOCKED_INTEGRATIONS } from '../constants';
 import { ConflictResolution } from '../types';
 import kleur from 'kleur';
 import prompts from 'prompts';
@@ -50,7 +50,7 @@ export const promptConflictResolutions = async (conflicts: ModuleConflict[]): Pr
 export const promptEnvVars = async (selectedIntegrations: string[]): Promise<Record<string, string>> => {
     const envVars: Record<string, string> = {};
     const realIntegrations = selectedIntegrations.filter(
-        (integration) => integration !== 'mocked' && INTEGRATION_ENV_VARS[integration],
+        (integration) => !MOCKED_INTEGRATIONS.includes(integration) && INTEGRATION_ENV_VARS[integration],
     );
 
     if (realIntegrations.length === 0) {
