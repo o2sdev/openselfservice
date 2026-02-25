@@ -1,5 +1,7 @@
+import { STORYBOOK_URL } from '../constants';
 import { BlockInfo, IntegrationInfo, TemplateType, WizardAnswers } from '../types';
 import { TEMPLATES, filterBlocksByTemplate, filterIntegrationsByTemplate } from './templates';
+import kleur from 'kleur';
 import prompts from 'prompts';
 
 export const promptProjectName = async (defaultName: string): Promise<string> => {
@@ -93,6 +95,12 @@ export const runWizardPrompts = async (
     let selectedIntegrations: string[];
 
     if (template === 'custom') {
+        console.log();
+        console.log(kleur.cyan().bold('  Tip:') + ' Not sure which blocks to pick?');
+        console.log(`  Browse our Storybook to preview all available components:`);
+        console.log(kleur.cyan(`  ${STORYBOOK_URL}`));
+        console.log();
+
         selectedBlocks = await promptBlockSelection(availableBlocks, []);
         selectedIntegrations = await promptIntegrationSelection(availableIntegrations, []);
     } else {

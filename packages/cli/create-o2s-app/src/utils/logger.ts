@@ -1,3 +1,4 @@
+import { DOCS_URL } from '../constants';
 import { TemplateType } from '../types';
 import { TEMPLATES } from '../wizard/templates';
 import kleur from 'kleur';
@@ -46,7 +47,7 @@ export const printSummary = (
 
     console.log();
     console.log(kleur.bold('Documentation:'));
-    console.log(kleur.cyan('  https://docs.openselfservice.com/getting-started'));
+    console.log(kleur.cyan(`  ${DOCS_URL}`));
     console.log();
 };
 
