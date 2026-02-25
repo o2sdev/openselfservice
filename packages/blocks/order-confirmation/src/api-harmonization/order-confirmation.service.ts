@@ -4,7 +4,7 @@ import { Observable, forkJoin, map } from 'rxjs';
 
 import { Models } from '@o2s/utils.api-harmonization';
 
-import { Auth } from '@o2s/framework/modules';
+// import { Auth } from '@o2s/framework/modules';
 
 import { mapOrderConfirmation } from './order-confirmation.mapper';
 import { OrderConfirmationBlock } from './order-confirmation.model';
@@ -27,7 +27,7 @@ export class OrderConfirmationService {
         return forkJoin([cms]).pipe(
             map(([cms]) => {
                 const orderId = query.orderId ?? cms.id;
-        const result = mapOrderConfirmation(cms, headers['x-locale'], orderId);
+                const result = mapOrderConfirmation(cms, headers['x-locale'], orderId);
 
                 // Optional: Add permission flags to the response
                 // if (headers.authorization) {
