@@ -34,7 +34,7 @@
     "dependencies": {
         "@o2s/framework": "*",
         "@o2s/utils.logger": "*",
-        "algoliasearch": "^5.49.0"
+        "algoliasearch": "^5.49.1"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",
