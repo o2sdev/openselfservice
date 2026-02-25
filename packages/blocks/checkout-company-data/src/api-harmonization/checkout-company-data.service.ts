@@ -4,8 +4,6 @@ import { Observable, forkJoin, map } from 'rxjs';
 
 import { Models } from '@o2s/utils.api-harmonization';
 
-import { Auth } from '@o2s/framework/modules';
-
 import { mapCheckoutCompanyData } from './checkout-company-data.mapper';
 import { CheckoutCompanyDataBlock } from './checkout-company-data.model';
 import { GetCheckoutCompanyDataBlockQuery } from './checkout-company-data.request';
@@ -26,7 +24,7 @@ export class CheckoutCompanyDataService {
 
         return forkJoin([cms]).pipe(
             map(([cms]) => {
-                const result = mapCheckoutCompanyData(cms, headers['x-locale']);
+                const result = mapCheckoutCompanyData(cms);
 
                 // Optional: Add permission flags to the response
                 // if (headers.authorization) {

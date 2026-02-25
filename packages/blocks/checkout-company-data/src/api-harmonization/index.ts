@@ -1,7 +1,6 @@
 export const URL = '/blocks/checkout-company-data';
 
 export { CheckoutCompanyDataBlockModule as Module } from './checkout-company-data.module';
-export { getCheckoutCompanyDataBlockMock } from './checkout-company-data.mock'; // TODO: remove this mock
 export { CheckoutCompanyDataService as Service } from './checkout-company-data.service';
 export { CheckoutCompanyDataController as Controller } from './checkout-company-data.controller';
 

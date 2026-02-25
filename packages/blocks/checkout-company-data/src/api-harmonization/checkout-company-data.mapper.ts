@@ -1,11 +1,20 @@
 import { CMS } from '@o2s/configs.integrations';
 
-import { getCheckoutCompanyDataBlockMock } from './checkout-company-data.mock';
 import type { CheckoutCompanyDataBlock } from './checkout-company-data.model';
 
 export const mapCheckoutCompanyData = (
     cms: CMS.Model.CheckoutCompanyDataBlock.CheckoutCompanyDataBlock,
-    locale: string,
 ): CheckoutCompanyDataBlock => {
-    return getCheckoutCompanyDataBlockMock(cms.id, locale);
+    return {
+        __typename: 'CheckoutCompanyDataBlock',
+        id: cms.id,
+        title: cms.title,
+        subtitle: cms.subtitle,
+        fields: cms.fields,
+        buttons: cms.buttons,
+        errors: cms.errors,
+        summaryLabels: cms.summaryLabels,
+        stepIndicator: cms.stepIndicator,
+        billingInfoNote: cms.billingInfoNote,
+    };
 };

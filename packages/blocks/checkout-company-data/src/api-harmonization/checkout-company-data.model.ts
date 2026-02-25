@@ -2,14 +2,12 @@ import { Models as ApiModels } from '@o2s/utils.api-harmonization';
 
 import { Models } from '@o2s/framework/modules';
 
-/** Field config with label, placeholder, required */
 interface CheckoutCompanyDataField {
     label: string;
     placeholder?: string;
     required: boolean;
 }
 
-/** Labels for cart summary sidebar */
 export interface CheckoutCompanyDataSummaryLabels {
     title: string;
     subtotalLabel: string;
@@ -23,9 +21,11 @@ export class CheckoutCompanyDataBlock extends ApiModels.Block.Block {
     subtitle?: string;
     fields!: {
         companyName: CheckoutCompanyDataField;
-        nip: CheckoutCompanyDataField;
+        taxId: CheckoutCompanyDataField;
         address: {
-            street: CheckoutCompanyDataField;
+            streetName: CheckoutCompanyDataField;
+            streetNumber?: CheckoutCompanyDataField;
+            apartment?: CheckoutCompanyDataField;
             city: CheckoutCompanyDataField;
             postalCode: CheckoutCompanyDataField;
             country: CheckoutCompanyDataField;
@@ -35,22 +35,17 @@ export class CheckoutCompanyDataBlock extends ApiModels.Block.Block {
         back: { label: string; path: string };
         next: { label: string; path: string };
     };
-    errors?: {
+    errors!: {
         required: string;
-        invalidNip: string;
+        invalidTaxId: string;
         invalidPostalCode: string;
     };
-    /** Cart summary for sidebar */
     summaryLabels!: CheckoutCompanyDataSummaryLabels;
-    totals!: {
+    totals?: {
         subtotal: Models.Price.Price;
         tax: Models.Price.Price;
         total: Models.Price.Price;
     };
-    /** Back to cart link (shown in CartSummary) */
-    continueShopping?: { label: string; path: string };
-    /** Proceed to next step (shown in CartSummary, optional) */
-    checkoutButton?: { label: string; path: string; icon?: string };
-    /** Checkout step indicator (steps labels + current step index 1-based) */
     stepIndicator?: { steps: string[]; currentStep: number };
+    billingInfoNote?: { icon?: string; text: string };
 }

@@ -24,16 +24,26 @@ const baseBlock = {
             placeholder: 'e.g. ACME Inc.',
             required: true,
         },
-        nip: {
+        taxId: {
             label: 'Tax ID (NIP)',
             placeholder: 'XXXXXXXXXX',
             required: true,
         },
         address: {
-            street: {
-                label: 'Street and number',
-                placeholder: 'e.g. 123 Main St',
+            streetName: {
+                label: 'Street name',
+                placeholder: 'e.g. Main Street',
                 required: true,
+            },
+            streetNumber: {
+                label: 'Number',
+                placeholder: 'e.g. 123',
+                required: true,
+            },
+            apartment: {
+                label: 'Apartment / suite',
+                placeholder: 'e.g. 4B',
+                required: false,
             },
             city: {
                 label: 'City',
@@ -64,7 +74,7 @@ const baseBlock = {
     },
     errors: {
         required: 'This field is required',
-        invalidNip: 'Invalid tax ID',
+        invalidTaxId: 'Invalid tax ID',
         invalidPostalCode: 'Invalid postal code',
     },
     summaryLabels: {
@@ -73,10 +83,9 @@ const baseBlock = {
         taxLabel: 'VAT (23%)',
         totalLabel: 'Total',
     },
-    totals: {
-        subtotal: { value: 204.97, currency: 'PLN' as const },
-        tax: { value: 47.14, currency: 'PLN' as const },
-        total: { value: 252.11, currency: 'PLN' as const },
+    billingInfoNote: {
+        icon: 'Info',
+        text: 'This address will appear on your invoice.',
     },
 };
 
