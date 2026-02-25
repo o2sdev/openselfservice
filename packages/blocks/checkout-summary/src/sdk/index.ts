@@ -1,7 +1,9 @@
-// this unused import is necessary for TypeScript to properly resolve API methods
+// these unused imports are necessary for TypeScript to properly resolve API methods
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Models } from '@o2s/utils.api-harmonization';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { Checkout } from '@o2s/framework/modules';
 import { extendSdk, getSdk } from '@o2s/framework/sdk';
 
 import { checkoutSummary } from './checkout-summary';
@@ -24,5 +26,9 @@ const internalSdk = getSdk({
 export const sdk = extendSdk(internalSdk, {
     blocks: {
         getCheckoutSummary: checkoutSummary(internalSdk).blocks.getCheckoutSummary,
+    },
+    checkout: {
+        getCheckoutSummary: checkoutSummary(internalSdk).checkout.getCheckoutSummary,
+        placeOrder: checkoutSummary(internalSdk).checkout.placeOrder,
     },
 });

@@ -1,11 +1,17 @@
 import { CMS } from '@o2s/configs.integrations';
 
-import { getCheckoutSummaryBlockMock } from './checkout-summary.mock';
 import type { CheckoutSummaryBlock } from './checkout-summary.model';
 
-export const mapCheckoutSummary = (
-    cms: CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBlock,
-    locale: string,
-): CheckoutSummaryBlock => {
-    return getCheckoutSummaryBlockMock(cms.id, locale);
+export const mapCheckoutSummary = (cms: CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBlock): CheckoutSummaryBlock => {
+    return {
+        __typename: 'CheckoutSummaryBlock',
+        id: cms.id,
+        title: cms.title,
+        subtitle: cms.subtitle,
+        sections: cms.sections,
+        buttons: cms.buttons,
+        loading: cms.loading,
+        placeholders: cms.placeholders,
+        stepIndicator: cms.stepIndicator,
+    };
 };
