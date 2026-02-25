@@ -8,6 +8,10 @@ import { mapArticleSearchBlock } from './mappers/blocks/cms.article-search.mappe
 import { mapBentoGridBlock } from './mappers/blocks/cms.bento-grid.mapper';
 import { mapCartBlock } from './mappers/blocks/cms.cart.mapper';
 import { mapCategoryListBlock } from './mappers/blocks/cms.category-list.mapper';
+import { mapCheckoutBillingPaymentBlock } from './mappers/blocks/cms.checkout-billing-payment.mapper';
+import { mapCheckoutCompanyDataBlock } from './mappers/blocks/cms.checkout-company-data.mapper';
+import { mapCheckoutShippingAddressBlock } from './mappers/blocks/cms.checkout-shipping-address.mapper';
+import { mapCheckoutSummaryBlock } from './mappers/blocks/cms.checkout-summary.mapper';
 import { mapCtaSectionBlock } from './mappers/blocks/cms.cta-section.mapper';
 import { mapDocumentListBlock } from './mappers/blocks/cms.document-list.mapper';
 import { mapFaqBlock } from './mappers/blocks/cms.faq.mapper';
@@ -259,19 +263,19 @@ export class CmsService implements CMS.Service {
     }
 
     getCheckoutCompanyDataBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of({ id: options.id });
+        return of(mapCheckoutCompanyDataBlock(options)).pipe(responseDelay());
     }
 
     getCheckoutShippingAddressBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of({ id: options.id });
+        return of(mapCheckoutShippingAddressBlock(options)).pipe(responseDelay());
     }
 
     getCheckoutBillingPaymentBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of({ id: options.id });
+        return of(mapCheckoutBillingPaymentBlock(options)).pipe(responseDelay());
     }
 
     getCheckoutSummaryBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of({ id: options.id });
+        return of(mapCheckoutSummaryBlock(options)).pipe(responseDelay());
     }
 
     getOrderConfirmationBlock(options: CMS.Request.GetCmsEntryParams) {
