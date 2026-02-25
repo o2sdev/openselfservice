@@ -1,5 +1,6 @@
 import { INTEGRATION_ENV_VARS, INTEGRATION_MODULES } from '../constants';
 import { ConflictResolution } from '../types';
+import kleur from 'kleur';
 import prompts from 'prompts';
 
 interface ModuleConflict {
@@ -59,7 +60,9 @@ export const promptEnvVars = async (selectedIntegrations: string[]): Promise<Rec
     for (const integration of realIntegrations) {
         const vars = INTEGRATION_ENV_VARS[integration] ?? [];
 
-        console.log(`\nConfiguring ${integration} environment variables (press Enter to skip):`);
+        console.log(
+            `\n${kleur.cyan().bold(`Configuring ${integration}`)} environment variables ${kleur.dim('(press Enter to skip)')}:`,
+        );
 
         for (const envVar of vars) {
             const requiredLabel = envVar.required ? ' [required]' : ' [optional]';

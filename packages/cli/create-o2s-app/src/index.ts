@@ -35,7 +35,7 @@ program
             const answers = await runWizard(tempDir, name, cliTemplate, cliBlocks, cliIntegrations);
 
             // Step 3: Scaffold project
-            const targetDir = await scaffold(tempDir, answers);
+            const { targetDir, uncoveredModules } = await scaffold(tempDir, answers);
 
             // Step 4: Print summary
             printSummary(
@@ -43,6 +43,7 @@ program
                 answers.template,
                 answers.selectedBlocks.length,
                 answers.selectedIntegrations.length,
+                uncoveredModules,
             );
         } catch (error) {
             if (tempDir) {

@@ -12,7 +12,10 @@ import { transformRenderBlocks } from './transform-render-blocks';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 
-export const scaffold = async (tempDir: string, answers: WizardAnswers): Promise<string> => {
+export const scaffold = async (
+    tempDir: string,
+    answers: WizardAnswers,
+): Promise<{ targetDir: string; uncoveredModules: string[] }> => {
     const targetDir = path.resolve(answers.projectName);
 
     if (await fs.pathExists(targetDir)) {
@@ -52,5 +55,5 @@ export const scaffold = async (tempDir: string, answers: WizardAnswers): Promise
     // Step 6: Fix package-lock.json and install dependencies
     await installDependencies(targetDir);
 
-    return targetDir;
+    return { targetDir, uncoveredModules };
 };
