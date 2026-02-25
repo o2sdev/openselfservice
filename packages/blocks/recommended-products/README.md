@@ -67,10 +67,9 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[]) => {
 Use the SDK to fetch recommended products:
 
 ```typescript
-import { getSdk } from '@o2s/blocks.recommended-products/sdk';
+import { sdk } from '@o2s/blocks.recommended-products/sdk';
 
-const sdk = getSdk('https://your-api-url.com');
-
+// SDK uses NEXT_PUBLIC_API_URL for the API base URL
 const recommendedProducts = await sdk.blocks.getRecommendedProducts(
     { id: 'block-id' },
     { 'x-locale': 'en' },

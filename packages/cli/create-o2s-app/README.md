@@ -19,27 +19,23 @@ npx create-o2s-app
 ### Basic Usage
 
 ```bash
-npx create-o2s-app my-app
+npx create-o2s-app [name]
 ```
+
+Provide an optional project name, or omit it to be prompted.
 
 ### Options
 
-- `--template <template>` - Specify template (default: `default`)
-- `--package-manager <pm>` - Specify package manager (`npm`, `yarn`, `pnpm`)
-- `--skip-install` - Skip installing dependencies
-- `--skip-git` - Skip initializing git repository
+- `--directory [directory]` - Specify the destination directory (default: `my-o2s-project`)
 
 ### Examples
 
 ```bash
-# Create app with specific template
-npx create-o2s-app my-app --template default
+# Create app with default directory name
+npx create-o2s-app my-app
 
-# Use yarn as package manager
-npx create-o2s-app my-app --package-manager yarn
-
-# Skip installation
-npx create-o2s-app my-app --skip-install
+# Create app in a custom directory
+npx create-o2s-app --directory my-custom-folder
 ```
 
 ## What It Creates
@@ -52,7 +48,6 @@ The CLI scaffolds a complete O2S application with:
 - ESLint and Prettier setup
 - Basic project structure
 - Example configuration files
-- Git repository initialization
 
 ## Project Structure
 

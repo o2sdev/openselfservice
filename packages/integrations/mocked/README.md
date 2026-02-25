@@ -56,17 +56,12 @@ export const AppConfig: ApiConfig = {
 
 ### Database (Required)
 
-- `DATABASE_URL` - PostgreSQL database connection string
+- `AUTH_DATABASE_URL` - SQLite database connection string (e.g. `file:./dev.db`)
 
-### Optional
-
-- `DIRECT_URL` - Direct database connection URL (for migrations)
-
-## Example .env
+## Example .env.local
 
 ```bash
-DATABASE_URL=postgresql://user:password@localhost:5432/o2s_mocked
-DIRECT_URL=postgresql://user:password@localhost:5432/o2s_mocked
+AUTH_DATABASE_URL=file:./dev.db
 ```
 
 ## Setup

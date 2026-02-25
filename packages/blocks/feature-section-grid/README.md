@@ -67,10 +67,9 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[]) => {
 Use the SDK to fetch feature section grid data:
 
 ```typescript
-import { getSdk } from '@o2s/blocks.feature-section-grid/sdk';
+import { sdk } from '@o2s/blocks.feature-section-grid/sdk';
 
-const sdk = getSdk('https://your-api-url.com');
-
+// SDK uses NEXT_PUBLIC_API_URL for the API base URL
 const featureSectionGrid = await sdk.blocks.getFeatureSectionGrid(
     { id: 'block-id' },
     { 'x-locale': 'en' },

@@ -31,15 +31,15 @@ This integration connects your Open Self Service application with Medusa, enabli
 
 The integration implements these modules from the O2S framework:
 
-| Module   | Description                                     | Plugin Required |
-| -------- | ----------------------------------------------- | --------------- |
-| Carts    | Cart creation, line items, addresses, shipping  | No              |
-| Checkout | Multi-step checkout and order placement         | No              |
-| Customers| Address management for authenticated users       | No              |
-| Orders   | Order management and history                     | No              |
-| Payments | Payment session creation and validation         | No              |
-| Products | Product catalog and variants                    | No              |
-| Resources| Assets and service instances management         | Yes             |
+| Module    | Description                                    | Plugin Required |
+| --------- | ---------------------------------------------- | --------------- |
+| Carts     | Cart creation, line items, addresses, shipping | No              |
+| Checkout  | Multi-step checkout and order placement        | No              |
+| Customers | Address management for authenticated users     | No              |
+| Orders    | Order management and history                   | No              |
+| Payments  | Payment session creation and validation        | No              |
+| Products  | Product catalog and variants                   | No              |
+| Resources | Assets and service instances management        | Yes             |
 
 ## Quick start
 

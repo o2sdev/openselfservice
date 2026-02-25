@@ -67,10 +67,9 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[]) => {
 Use the SDK to fetch invoice list data:
 
 ```typescript
-import { getSdk } from '@o2s/blocks.invoice-list/sdk';
+import { sdk } from '@o2s/blocks.invoice-list/sdk';
 
-const sdk = getSdk('https://your-api-url.com');
-
+// SDK uses NEXT_PUBLIC_API_URL for the API base URL
 const invoiceList = await sdk.blocks.getInvoiceList(
     { id: 'block-id' },
     { 'x-locale': 'en' },

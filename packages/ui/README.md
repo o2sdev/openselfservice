@@ -10,12 +10,14 @@ npm install @o2s/ui
 
 ## Usage
 
-### Components
+### Components and Elements
 
-Import components from the UI library:
+Import components and elements from their respective paths:
 
 ```typescript
-import { Button, Card, Input } from '@o2s/ui/components';
+import { Button } from '@o2s/ui/elements/button';
+import { Card } from '@o2s/ui/elements/card';
+import { Input } from '@o2s/ui/elements/input';
 import { Container } from '@o2s/ui/components/Container';
 
 export const MyComponent = () => {
@@ -42,26 +44,27 @@ import '@o2s/ui/theme';
 
 ### Hooks
 
-Use UI hooks:
+Use the toast hook for notifications:
 
 ```typescript
-import { useMediaQuery } from '@o2s/ui/hooks';
+import { useToast } from '@o2s/ui/hooks/use-toast';
 
-const isMobile = useMediaQuery('(max-width: 768px)');
+const { toast } = useToast();
+toast({ title: 'Success', description: 'Your action completed.' });
 ```
 
 ### Providers
 
-Use UI providers:
+Use GlobalProvider for app context (config, labels, locale, themes):
 
 ```typescript
-import { ThemeProvider } from '@o2s/ui/providers/ThemeProvider';
+import { GlobalProvider } from '@o2s/ui/providers/GlobalProvider';
 
-export const App = () => {
+export const App = ({ config, labels, locale, themes, currentTheme, children }) => {
     return (
-        <ThemeProvider>
-            {/* Your app */}
-        </ThemeProvider>
+        <GlobalProvider config={config} labels={labels} locale={locale} themes={themes} currentTheme={currentTheme}>
+            {children}
+        </GlobalProvider>
     );
 };
 ```

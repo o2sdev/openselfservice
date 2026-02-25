@@ -40,18 +40,20 @@ export const SurveyPage = async ({ surveyId }) => {
 
 ### SDK
 
-Use the SDK to fetch and submit surveys:
+The SDK exports a pre-configured instance (uses `NEXT_PUBLIC_API_URL` for the API base URL):
 
 ```typescript
-import { getSdk } from '@o2s/modules.surveyjs/sdk';
+import { sdk } from '@o2s/modules.surveyjs/sdk';
 
-const sdk = getSdk('https://your-api-url.com');
-
-// Fetch survey
-const survey = await sdk.surveyjs.getSurvey({ id: surveyId }, { 'x-locale': 'en' });
+// Fetch survey (code is the survey identifier from CMS)
+const survey = await sdk.modules.getSurvey({ code: surveyCode }, { 'x-locale': 'en' }, accessToken);
 
 // Submit survey
-await sdk.surveyjs.submitSurvey({ id: surveyId, answers: {...} }, { 'x-locale': 'en' });
+await sdk.modules.submitSurvey(
+    { code: surveyCode, surveyPayload: answers },
+    { 'x-locale': 'en' },
+    accessToken,
+);
 ```
 
 ## Configuration

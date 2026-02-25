@@ -67,10 +67,9 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[]) => {
 Use the SDK to fetch payments summary:
 
 ```typescript
-import { getSdk } from '@o2s/blocks.payments-summary/sdk';
+import { sdk } from '@o2s/blocks.payments-summary/sdk';
 
-const sdk = getSdk('https://your-api-url.com');
-
+// SDK uses NEXT_PUBLIC_API_URL for the API base URL
 const paymentsSummary = await sdk.blocks.getPaymentsSummary(
     { id: 'block-id' },
     { 'x-locale': 'en' },

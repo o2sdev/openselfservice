@@ -67,10 +67,9 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[]) => {
 Use the SDK to fetch payment history:
 
 ```typescript
-import { getSdk } from '@o2s/blocks.payments-history/sdk';
+import { sdk } from '@o2s/blocks.payments-history/sdk';
 
-const sdk = getSdk('https://your-api-url.com');
-
+// SDK uses NEXT_PUBLIC_API_URL for the API base URL
 const paymentsHistory = await sdk.blocks.getPaymentsHistory(
     { id: 'block-id' },
     { 'x-locale': 'en' },

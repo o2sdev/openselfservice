@@ -67,10 +67,9 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[]) => {
 Use the SDK to fetch media section data:
 
 ```typescript
-import { getSdk } from '@o2s/blocks.media-section/sdk';
+import { sdk } from '@o2s/blocks.media-section/sdk';
 
-const sdk = getSdk('https://your-api-url.com');
-
+// SDK uses NEXT_PUBLIC_API_URL for the API base URL
 const mediaSection = await sdk.blocks.getMediaSection(
     { id: 'block-id' },
     { 'x-locale': 'en' },

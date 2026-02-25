@@ -91,8 +91,8 @@ paths:
               description: The URL of the new created article attachment
               schema:
                 type: string
-                format: url
-              example: https://{subdomain}.zendesk.com/api/v2/community/posts.json
+                format: uri
+              example: https://example.zendesk.com/api/v2/community/posts.json
           content:
             application/json:
               schema:
@@ -263,8 +263,8 @@ paths:
               description: The URL of the new created vote
               schema:
                 type: string
-                format: url
-              example: https://{subdomain}.zendesk.com/api/v2/help_center/votes/{vote_id}.json
+                format: uri
+              example: https://example.zendesk.com/api/v2/help_center/votes/35467.json
           content:
             application/json:
               schema:
@@ -296,8 +296,8 @@ paths:
               description: The URL of the new created vote
               schema:
                 type: string
-                format: url
-              example: https://{subdomain}.zendesk.com/api/v2/help_center/votes/{vote_id}.json
+                format: uri
+              example: https://example.zendesk.com/api/v2/help_center/votes/35467.json
           content:
             application/json:
               schema:
@@ -431,8 +431,8 @@ paths:
               description: The URL of the new created vote
               schema:
                 type: string
-                format: url
-              example: https://{subdomain}.zendesk.com/api/v2/help_center/votes/{vote_id}.json
+                format: uri
+              example: https://example.zendesk.com/api/v2/help_center/votes/35467.json
           content:
             application/json:
               schema:
@@ -505,8 +505,8 @@ paths:
               description: The URL of the new created subscription
               schema:
                 type: string
-                format: url
-              example: https://{subdomain}.zendesk.com/api/v2/help_center/subscriptions/{subscription_id}.json
+                format: uri
+              example: https://example.zendesk.com/api/v2/help_center/subscriptions/1234567.json
           content:
             application/json:
               schema:
@@ -584,8 +584,8 @@ paths:
               description: The URL of the new created vote
               schema:
                 type: string
-                format: url
-              example: https://{subdomain}.zendesk.com/api/v2/help_center/votes/{vote_id}.json
+                format: uri
+              example: https://example.zendesk.com/api/v2/help_center/votes/35467.json
           content:
             application/json:
               schema:
@@ -672,8 +672,8 @@ paths:
               description: The URL of the new created topic
               schema:
                 type: string
-                format: url
-              example: https://{subdomain}.zendesk.com/api/v2/community/topics.json
+                format: uri
+              example: https://example.zendesk.com/api/v2/community/topics.json
           content:
             application/json:
               schema:
@@ -843,8 +843,8 @@ paths:
               description: The URL of the new created subscription
               schema:
                 type: string
-                format: url
-              example: https://{subdomain}.zendesk.com/api/v2/help_center/subscriptions/{subscription_id}.json
+                format: uri
+              example: https://example.zendesk.com/api/v2/help_center/subscriptions/1234567.json
           content:
             application/json:
               schema:
@@ -1487,8 +1487,8 @@ paths:
               description: The URL of the new created comment
               schema:
                 type: string
-                format: url
-              example: https://{subdomain}.zendesk.com/api/v2/help_center/comments/{comment_id}.json
+                format: uri
+              example: https://example.zendesk.com/api/v2/help_center/comments/35436.json
           content:
             application/json:
               schema:
@@ -1764,8 +1764,8 @@ paths:
               description: The URL of the new created subscription
               schema:
                 type: string
-                format: url
-              example: https://{subdomain}.zendesk.com/api/v2/help_center/subscriptions/{subscription_id}.json
+                format: uri
+              example: https://example.zendesk.com/api/v2/help_center/subscriptions/1234567.json
           content:
             application/json:
               schema:
@@ -1848,8 +1848,8 @@ paths:
               description: The URL of the new created vote
               schema:
                 type: string
-                format: url
-              example: https://{subdomain}.zendesk.com/api/v2/help_center/votes/{vote_id}.json
+                format: uri
+              example: https://example.zendesk.com/api/v2/help_center/votes/35467.json
           content:
             application/json:
               schema:
@@ -1998,8 +1998,8 @@ paths:
               description: The URL of the new created category
               schema:
                 type: string
-                format: url
-              example: https://{subdomain}.zendesk.com/api/v2/help_center/categories/{category_id}.json
+                format: uri
+              example: https://example.zendesk.com/api/v2/help_center/categories/360002425633.json
           content:
             application/json:
               schema:
@@ -2243,8 +2243,8 @@ paths:
               description: The URL of the new created section
               schema:
                 type: string
-                format: url
-              example: https://{subdomain}.zendesk.com/api/v2/help_center/sections/{section_id}.json
+                format: uri
+              example: https://example.zendesk.com/api/v2/help_center/sections/360004088012.json
           content:
             application/json:
               schema:
@@ -2548,8 +2548,8 @@ paths:
               description: The URL of the new created article
               schema:
                 type: string
-                format: url
-              example: https://{subdomain}.zendesk.com/api/v2/help_center/articles/{article_id}.json
+                format: uri
+              example: https://example.zendesk.com/api/v2/help_center/articles/360020225340.json
           content:
             application/json:
               schema:
@@ -2891,8 +2891,8 @@ paths:
               description: The URL of the new created article attachment
               schema:
                 type: string
-                format: url
-              example: https://{subdomain}.zendesk.com/api/v2/help_center/articles/{article_id}/attachments.json
+                format: uri
+              example: https://example.zendesk.com/api/v2/help_center/articles/360020225340/attachments.json
           content:
             application/json:
               schema:
@@ -3071,8 +3071,8 @@ paths:
               description: The URL of the new created comment
               schema:
                 type: string
-                format: url
-              example: https://{subdomain}.zendesk.com/api/v2/help_center/comments/{comment_id}.json
+                format: uri
+              example: https://example.zendesk.com/api/v2/help_center/comments/35436.json
           content:
             application/json:
               schema:
@@ -3162,8 +3162,8 @@ paths:
               description: The URL of the new created vote
               schema:
                 type: string
-                format: url
-              example: https://{subdomain}.zendesk.com/api/v2/help_center/votes/{vote_id}.json
+                format: uri
+              example: https://example.zendesk.com/api/v2/help_center/votes/35467.json
           content:
             application/json:
               schema:
@@ -3195,8 +3195,8 @@ paths:
               description: The URL of the new created vote
               schema:
                 type: string
-                format: url
-              example: https://{subdomain}.zendesk.com/api/v2/help_center/votes/{vote_id}.json
+                format: uri
+              example: https://example.zendesk.com/api/v2/help_center/votes/35467.json
           content:
             application/json:
               schema:
@@ -3259,8 +3259,8 @@ paths:
               description: The URL of the new created vote
               schema:
                 type: string
-                format: url
-              example: https://{subdomain}.zendesk.com/api/v2/help_center/votes/{vote_id}.json
+                format: uri
+              example: https://example.zendesk.com/api/v2/help_center/votes/35467.json
           content:
             application/json:
               schema:
@@ -3434,8 +3434,8 @@ paths:
               description: The URL of the new created subscription
               schema:
                 type: string
-                format: url
-              example: https://{subdomain}.zendesk.com/api/v2/help_center/subscriptions/{subscription_id}.json
+                format: uri
+              example: https://example.zendesk.com/api/v2/help_center/subscriptions/1234567.json
           content:
             application/json:
               schema:
@@ -3566,8 +3566,8 @@ paths:
               description: The URL of the new created article attachment
               schema:
                 type: string
-                format: url
-              example: https://{subdomain}.zendesk.com/api/v2/help_center/translations/{translation_id}.json
+                format: uri
+              example: https://example.zendesk.com/api/v2/help_center/translations/5678901.json
           content:
             application/json:
               schema:
@@ -3679,8 +3679,8 @@ paths:
               description: The URL of the new created vote
               schema:
                 type: string
-                format: url
-              example: https://{subdomain}.zendesk.com/api/v2/help_center/votes/{vote_id}.json
+                format: uri
+              example: https://example.zendesk.com/api/v2/help_center/votes/35467.json
           content:
             application/json:
               schema:
@@ -3746,8 +3746,8 @@ paths:
               description: The URL of the new created article attachment
               schema:
                 type: string
-                format: url
-              example: https://{subdomain}.zendesk.com/api/v2/help_center/articles/attachments.json
+                format: uri
+              example: https://example.zendesk.com/api/v2/help_center/articles/attachments.json
           content:
             application/json:
               schema:
@@ -4103,8 +4103,8 @@ paths:
               description: The URL of the new created category
               schema:
                 type: string
-                format: url
-              example: https://{subdomain}.zendesk.com/api/v2/help_center/categories/{category_id}.json
+                format: uri
+              example: https://example.zendesk.com/api/v2/help_center/categories/360002425633.json
           content:
             application/json:
               schema:
@@ -4341,8 +4341,8 @@ paths:
               description: The URL of the new created section
               schema:
                 type: string
-                format: url
-              example: https://{subdomain}.zendesk.com/api/v2/help_center/sections/{section_id}.json
+                format: uri
+              example: https://example.zendesk.com/api/v2/help_center/sections/360004088012.json
           content:
             application/json:
               schema:
@@ -4458,8 +4458,8 @@ paths:
               description: The URL of the new created article attachment
               schema:
                 type: string
-                format: url
-              example: https://{subdomain}.zendesk.com/api/v2/help_center/translations/{translation_id}.json
+                format: uri
+              example: https://example.zendesk.com/api/v2/help_center/translations/5678901.json
           content:
             application/json:
               schema:
@@ -5221,8 +5221,8 @@ paths:
               description: The URL of the new created article
               schema:
                 type: string
-                format: url
-              example: https://{subdomain}.zendesk.com/api/v2/help_center/articles/{article_id}.json
+                format: uri
+              example: https://example.zendesk.com/api/v2/help_center/articles/360020225340.json
           content:
             application/json:
               schema:
@@ -5455,8 +5455,8 @@ paths:
               description: The URL of the new created article attachment
               schema:
                 type: string
-                format: url
-              example: https://{subdomain}.zendesk.com/api/v2/help_center/translations/{translation_id}.json
+                format: uri
+              example: https://example.zendesk.com/api/v2/help_center/translations/5678901.json
           content:
             application/json:
               schema:

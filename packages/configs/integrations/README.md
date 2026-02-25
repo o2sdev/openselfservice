@@ -63,16 +63,15 @@ export const AppConfig: ApiConfig = {
 
 ### Swap Integrations
 
-To swap integrations, simply change the config import:
+To swap integrations, simply change the config import, for example:
 
 ```typescript
-// Use Zendesk for tickets
-import { Tickets } from '@o2s/configs.integrations';
-// Tickets.TicketsIntegrationConfig uses Zendesk
+// Tickets.TicketsIntegrationConfig uses Mocked by default
+import { Tickets } from '@o2s/integrations.mocked/integration';
 
-// Or use mocked for development
-import { MockedConfig } from '@o2s/integrations.mocked/integration';
-// MockedConfig.tickets uses mocked data
+// To use Zendesk instead, import from the Zendesk integration
+import { Tickets } from '@o2s/integrations.zendesk/integration';
+// tickets: ZendeskConfig.tickets
 ```
 
 ### Type Re-exports

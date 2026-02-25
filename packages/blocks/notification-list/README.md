@@ -67,10 +67,9 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[]) => {
 Use the SDK to fetch notification list:
 
 ```typescript
-import { getSdk } from '@o2s/blocks.notification-list/sdk';
+import { sdk } from '@o2s/blocks.notification-list/sdk';
 
-const sdk = getSdk('https://your-api-url.com');
-
+// SDK uses NEXT_PUBLIC_API_URL for the API base URL
 const notificationList = await sdk.blocks.getNotificationList(
     { id: 'block-id' },
     { 'x-locale': 'en' },

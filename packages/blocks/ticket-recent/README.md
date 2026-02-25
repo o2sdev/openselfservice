@@ -67,10 +67,9 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[]) => {
 Use the SDK to fetch recent tickets:
 
 ```typescript
-import { getSdk } from '@o2s/blocks.ticket-recent/sdk';
+import { sdk } from '@o2s/blocks.ticket-recent/sdk';
 
-const sdk = getSdk('https://your-api-url.com');
-
+// SDK uses NEXT_PUBLIC_API_URL for the API base URL
 const recentTickets = await sdk.blocks.getTicketRecent(
     { id: 'block-id' },
     { 'x-locale': 'en' },

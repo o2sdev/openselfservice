@@ -40,23 +40,10 @@ export class MyService {
 }
 ```
 
-### Logger Interceptor
-
-Use the logger interceptor to automatically log HTTP requests:
-
-```typescript
-import { LoggerInterceptor } from '@o2s/utils.logger';
-
-@UseInterceptors(LoggerInterceptor)
-@Controller('api')
-export class ApiController {}
-```
-
 ## Features
 
 - Winston-based logging
 - NestJS integration
-- HTTP request logging interceptor
 - Structured logging
 - Log levels (error, warn, info, debug)
 

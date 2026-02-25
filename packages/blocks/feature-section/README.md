@@ -67,10 +67,9 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[]) => {
 Use the SDK to fetch feature section data:
 
 ```typescript
-import { getSdk } from '@o2s/blocks.feature-section/sdk';
+import { sdk } from '@o2s/blocks.feature-section/sdk';
 
-const sdk = getSdk('https://your-api-url.com');
-
+// SDK uses NEXT_PUBLIC_API_URL for the API base URL
 const featureSection = await sdk.blocks.getFeatureSection(
     { id: 'block-id' },
     { 'x-locale': 'en' },

@@ -67,10 +67,9 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[]) => {
 Use the SDK to fetch and submit surveys:
 
 ```typescript
-import { getSdk } from '@o2s/blocks.surveyjs-form/sdk';
+import { sdk } from '@o2s/blocks.surveyjs-form/sdk';
 
-const sdk = getSdk('https://your-api-url.com');
-
+// SDK uses NEXT_PUBLIC_API_URL for the API base URL
 // Fetch survey
 const survey = await sdk.blocks.getSurveyJsForm(
     { id: 'block-id' },

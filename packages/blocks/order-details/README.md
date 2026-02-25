@@ -67,10 +67,9 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[]) => {
 Use the SDK to fetch order details:
 
 ```typescript
-import { getSdk } from '@o2s/blocks.order-details/sdk';
+import { sdk } from '@o2s/blocks.order-details/sdk';
 
-const sdk = getSdk('https://your-api-url.com');
-
+// SDK uses NEXT_PUBLIC_API_URL for the API base URL
 const orderDetails = await sdk.blocks.getOrderDetails(
     { id: 'order-id' },
     { 'x-locale': 'en' },

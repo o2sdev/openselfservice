@@ -67,10 +67,9 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[]) => {
 Use the SDK to fetch hero section data:
 
 ```typescript
-import { getSdk } from '@o2s/blocks.hero-section/sdk';
+import { sdk } from '@o2s/blocks.hero-section/sdk';
 
-const sdk = getSdk('https://your-api-url.com');
-
+// SDK uses NEXT_PUBLIC_API_URL for the API base URL
 const heroSection = await sdk.blocks.getHeroSection(
     { id: 'block-id' },
     { 'x-locale': 'en' },

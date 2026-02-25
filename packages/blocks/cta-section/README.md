@@ -67,10 +67,9 @@ export const renderBlocks = async (blocks: CMS.Model.Page.SlotBlock[]) => {
 Use the SDK to fetch CTA section data:
 
 ```typescript
-import { getSdk } from '@o2s/blocks.cta-section/sdk';
+import { sdk } from '@o2s/blocks.cta-section/sdk';
 
-const sdk = getSdk('https://your-api-url.com');
-
+// SDK uses NEXT_PUBLIC_API_URL for the API base URL
 const ctaSection = await sdk.blocks.getCtaSection(
     { id: 'block-id' },
     { 'x-locale': 'en' },
