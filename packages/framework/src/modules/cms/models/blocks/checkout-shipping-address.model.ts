@@ -7,9 +7,9 @@ interface CheckoutFieldConfig {
 }
 
 export class CheckoutShippingAddressBlock extends Block.Block {
-    title?: string;
+    title!: string;
     subtitle?: string;
-    fields?: {
+    fields!: {
         sameAsBillingAddress: { label: string };
         address: {
             streetName: CheckoutFieldConfig;
@@ -25,15 +25,15 @@ export class CheckoutShippingAddressBlock extends Block.Block {
             required: boolean;
         };
     };
-    buttons?: {
+    buttons!: {
         back: { label: string; path: string };
         next: { label: string; path: string };
     };
-    errors?: {
+    errors!: {
         required: string;
         invalidPostalCode: string;
     };
-    summaryLabels?: {
+    summaryLabels!: {
         title: string;
         subtotalLabel: string;
         taxLabel: string;

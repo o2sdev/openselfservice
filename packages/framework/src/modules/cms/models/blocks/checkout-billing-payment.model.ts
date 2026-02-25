@@ -1,23 +1,23 @@
 import { Block } from '@/utils/models';
 
 export class CheckoutBillingPaymentBlock extends Block.Block {
-    title?: string;
+    title!: string;
     subtitle?: string;
-    fields?: {
+    fields!: {
         paymentMethod: {
             label: string;
             placeholder?: string;
             required: boolean;
         };
     };
-    buttons?: {
+    buttons!: {
         back: { label: string; path: string };
         next: { label: string; path: string };
     };
-    errors?: {
+    errors!: {
         required: string;
     };
-    summaryLabels?: {
+    summaryLabels!: {
         title: string;
         subtotalLabel: string;
         taxLabel: string;

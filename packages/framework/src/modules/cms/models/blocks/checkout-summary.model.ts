@@ -1,9 +1,9 @@
 import { Block } from '@/utils/models';
 
 export class CheckoutSummaryBlock extends Block.Block {
-    title?: string;
+    title!: string;
     subtitle?: string;
-    sections?: {
+    sections!: {
         products: {
             title: string;
             labels: { quantity: string; price: string; total: string };
@@ -37,14 +37,14 @@ export class CheckoutSummaryBlock extends Block.Block {
             specialInstructions: { label: string; placeholder?: string };
         };
     };
-    buttons?: {
+    buttons!: {
         confirm: { label: string; path: string };
         back: { label: string; path: string };
     };
-    loading?: {
+    loading!: {
         confirming: string;
     };
-    placeholders?: {
+    placeholders!: {
         companyData: string;
         shippingAddress: string;
         sameAsBillingAddress: string;

@@ -7,9 +7,9 @@ interface CheckoutFieldConfig {
 }
 
 export class CheckoutCompanyDataBlock extends Block.Block {
-    title?: string;
+    title!: string;
     subtitle?: string;
-    fields?: {
+    fields!: {
         companyName: CheckoutFieldConfig;
         taxId: CheckoutFieldConfig;
         address: {
@@ -21,22 +21,21 @@ export class CheckoutCompanyDataBlock extends Block.Block {
             country: CheckoutFieldConfig;
         };
     };
-    buttons?: {
+    buttons!: {
         back: { label: string; path: string };
         next: { label: string; path: string };
     };
-    errors?: {
+    errors!: {
         required: string;
         invalidTaxId: string;
         invalidPostalCode: string;
     };
-    summaryLabels?: {
+    summaryLabels!: {
         title: string;
         subtotalLabel: string;
         taxLabel: string;
         totalLabel: string;
     };
-    continueShopping?: { label: string; path: string };
     stepIndicator?: { steps: string[]; currentStep: number };
     billingInfoNote?: { icon?: string; text: string };
 }
