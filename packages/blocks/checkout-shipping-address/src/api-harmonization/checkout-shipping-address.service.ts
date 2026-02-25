@@ -4,7 +4,7 @@ import { Observable, forkJoin, map } from 'rxjs';
 
 import { Models } from '@o2s/utils.api-harmonization';
 
-import { Auth } from '@o2s/framework/modules';
+// import { Auth } from '@o2s/framework/modules';
 
 import { mapCheckoutShippingAddress } from './checkout-shipping-address.mapper';
 import { CheckoutShippingAddressBlock } from './checkout-shipping-address.model';
@@ -26,7 +26,7 @@ export class CheckoutShippingAddressService {
 
         return forkJoin([cms]).pipe(
             map(([cms]) => {
-                const result = mapCheckoutShippingAddress(cms, headers['x-locale']);
+                const result = mapCheckoutShippingAddress(cms);
 
                 // Optional: Add permission flags to the response
                 // if (headers.authorization) {

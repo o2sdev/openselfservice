@@ -9,11 +9,12 @@ interface CheckoutShippingAddressField {
     required: boolean;
 }
 
-/** Shipping method option */
+/** Shipping method option (from API) */
 export interface CheckoutShippingAddressShippingOption {
-    value: string;
-    label: string;
-    price?: Models.Price.Price;
+    id: string;
+    name: string;
+    description?: string;
+    total?: Models.Price.Price;
 }
 
 /** Labels for cart summary sidebar */
@@ -29,37 +30,34 @@ export class CheckoutShippingAddressBlock extends ApiModels.Block.Block {
     title!: string;
     subtitle?: string;
     fields!: {
-        sameAsCompanyAddress: { label: string };
+        sameAsBillingAddress: { label: string };
         address: {
-            street: CheckoutShippingAddressField;
+            streetName: CheckoutShippingAddressField;
+            streetNumber?: CheckoutShippingAddressField;
+            apartment?: CheckoutShippingAddressField;
             city: CheckoutShippingAddressField;
             postalCode: CheckoutShippingAddressField;
             country: CheckoutShippingAddressField;
         };
         shippingMethod: {
             label: string;
-            placeholder: string;
+            placeholder?: string;
             required: boolean;
-            options: CheckoutShippingAddressShippingOption[];
         };
     };
     buttons!: {
         back: { label: string; path: string };
         next: { label: string; path: string };
     };
-    errors?: {
+    errors!: {
         required: string;
         invalidPostalCode: string;
     };
-    /** Cart summary for sidebar */
     summaryLabels!: CheckoutShippingAddressSummaryLabels;
-    totals!: {
+    totals?: {
         subtotal: Models.Price.Price;
         tax: Models.Price.Price;
         total: Models.Price.Price;
     };
-    continueShopping?: { label: string; path: string };
-    checkoutButton?: { label: string; path: string; icon?: string };
-    /** Checkout step indicator (steps labels + current step index 1-based) */
     stepIndicator?: { steps: string[]; currentStep: number };
 }

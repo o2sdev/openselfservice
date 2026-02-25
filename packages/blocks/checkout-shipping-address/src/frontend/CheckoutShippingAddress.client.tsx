@@ -3,8 +3,10 @@
 import { ErrorMessage, Field, FieldProps, Form, Formik } from 'formik';
 import { createNavigation } from 'next-intl/navigation';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { boolean as YupBoolean, object as YupObject, string as YupString } from 'yup';
+
+import { Models, Orders } from '@o2s/framework/modules';
 
 import { CartSummary } from '@o2s/ui/components/Cart/CartSummary';
 import { AddressFields } from '@o2s/ui/components/Checkout/AddressFields';
@@ -16,72 +18,126 @@ import { Checkbox } from '@o2s/ui/elements/checkbox';
 import { Label } from '@o2s/ui/elements/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@o2s/ui/elements/select';
 import { Separator } from '@o2s/ui/elements/separator';
+import { Skeleton } from '@o2s/ui/elements/skeleton';
 import { Typography } from '@o2s/ui/elements/typography';
+
+import { sdk } from '../sdk';
 
 import { CheckoutShippingAddressPureProps } from './CheckoutShippingAddress.types';
 
+const CART_ID_KEY = 'cartId';
+
 export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddressPureProps>> = ({
-    locale: _locale,
-    accessToken: _accessToken,
+    locale,
+    accessToken,
     routing,
     title,
     subtitle,
     stepIndicator,
     fields,
     buttons,
-    errors: errorMessages,
+    errors,
     summaryLabels,
-    totals,
 }) => {
     const { Link: LinkComponent } = createNavigation(routing);
     const router = useRouter();
 
-    const defaultErrors = errorMessages ?? {
-        required: 'This field is required',
-        invalidPostalCode: 'Invalid postal code',
-    };
+    const [totals, setTotals] = useState<{
+        subtotal: Models.Price.Price;
+        tax: Models.Price.Price;
+        total: Models.Price.Price;
+    } | null>(null);
+    const [shippingOptions, setShippingOptions] = useState<Orders.Model.ShippingMethod[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [initialFormValues, setInitialFormValues] = useState({
+        streetName: '',
+        streetNumber: '',
+        apartment: '',
+        city: '',
+        postalCode: '',
+        country: '',
+        sameAsBillingAddress: false,
+        shippingMethod: '',
+    });
+
+    useEffect(() => {
+        const cartId = localStorage.getItem(CART_ID_KEY);
+        if (!cartId) return;
+
+        setIsLoading(true);
+        (async () => {
+            try {
+                const [cart, options] = await Promise.all([
+                    sdk.carts.getCart(cartId, { 'x-locale': locale }, accessToken),
+                    sdk.checkout.getShippingOptions(cartId, { 'x-locale': locale }, accessToken),
+                ]);
+                if (cart.subtotal && cart.taxTotal && cart.total) {
+                    setTotals({
+                        subtotal: cart.subtotal,
+                        tax: cart.taxTotal,
+                        total: cart.total,
+                    });
+                }
+                setShippingOptions(options.data ?? []);
+                setInitialFormValues((prev) => ({
+                    ...prev,
+                    ...(cart.shippingAddress
+                        ? {
+                              streetName: cart.shippingAddress.streetName ?? '',
+                              streetNumber: cart.shippingAddress.streetNumber ?? '',
+                              apartment: cart.shippingAddress.apartment ?? '',
+                              city: cart.shippingAddress.city ?? '',
+                              postalCode: cart.shippingAddress.postalCode ?? '',
+                              country: cart.shippingAddress.country ?? '',
+                          }
+                        : {}),
+                    ...(cart.shippingMethod ? { shippingMethod: cart.shippingMethod.id } : {}),
+                }));
+            } catch {
+                // proceed with empty state
+            } finally {
+                setIsLoading(false);
+            }
+        })();
+    }, [locale, accessToken]);
+
+    if (!title || !fields || !buttons || !summaryLabels || !errors) {
+        return null;
+    }
 
     const validationSchema = YupObject().shape({
-        street: YupString().when('sameAsCompanyAddress', {
+        streetName: YupString().when('sameAsBillingAddress', {
             is: false,
-            then: (schema) => (fields.address.street.required ? schema.required(defaultErrors.required) : schema),
+            then: (schema) => (fields.address.streetName.required ? schema.required(errors.required) : schema),
         }),
-        city: YupString().when('sameAsCompanyAddress', {
+        streetNumber: YupString().when('sameAsBillingAddress', {
             is: false,
-            then: (schema) => (fields.address.city.required ? schema.required(defaultErrors.required) : schema),
+            then: (schema) => (fields.address.streetNumber?.required ? schema.required(errors.required) : schema),
         }),
-        postalCode: YupString().when('sameAsCompanyAddress', {
+        apartment: YupString(),
+        city: YupString().when('sameAsBillingAddress', {
+            is: false,
+            then: (schema) => (fields.address.city.required ? schema.required(errors.required) : schema),
+        }),
+        postalCode: YupString().when('sameAsBillingAddress', {
             is: false,
             then: (schema) =>
                 fields.address.postalCode.required
                     ? schema
-                          .required(defaultErrors.required)
+                          .required(errors.required)
                           .transform((v) => v?.replace(/[-\s]/g, '') ?? '')
-                          .matches(/^\d{5}$/, defaultErrors.invalidPostalCode)
+                          .matches(/^\d{5}$/, errors.invalidPostalCode)
                     : schema
                           .transform((v) => v?.replace(/[-\s]/g, '') ?? '')
-                          .matches(/^\d{5}$|^$/, defaultErrors.invalidPostalCode),
+                          .matches(/^\d{5}$|^$/, errors.invalidPostalCode),
         }),
-        country: YupString().when('sameAsCompanyAddress', {
+        country: YupString().when('sameAsBillingAddress', {
             is: false,
-            then: (schema) => (fields.address.country.required ? schema.required(defaultErrors.required) : schema),
+            then: (schema) => (fields.address.country.required ? schema.required(errors.required) : schema),
         }),
-        sameAsCompanyAddress: YupBoolean(),
-        shippingMethod: fields.shippingMethod.required ? YupString().required(defaultErrors.required) : YupString(),
+        sameAsBillingAddress: YupBoolean(),
+        shippingMethod: fields.shippingMethod.required ? YupString().required(errors.required) : YupString(),
     });
-
-    const initialValues = {
-        street: '',
-        city: '',
-        postalCode: '',
-        country: '',
-        sameAsCompanyAddress: false,
-        shippingMethod: '',
-    };
-
-    if (!title || !fields || !buttons || !summaryLabels || !totals) {
-        return null;
-    }
 
     return (
         <div className="w-full flex flex-col gap-8">
@@ -98,38 +154,71 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div className="lg:col-span-2">
                     <Formik
-                        initialValues={initialValues}
+                        initialValues={initialFormValues}
+                        enableReinitialize
                         validationSchema={validationSchema}
-                        onSubmit={() => {
+                        onSubmit={async (values, { setSubmitting }) => {
+                            const cartId = localStorage.getItem(CART_ID_KEY);
+                            if (cartId) {
+                                try {
+                                    if (!values.sameAsBillingAddress) {
+                                        await sdk.checkout.setAddresses(
+                                            cartId,
+                                            {
+                                                shippingAddress: {
+                                                    streetName: values.streetName,
+                                                    streetNumber: values.streetNumber || undefined,
+                                                    apartment: values.apartment || undefined,
+                                                    city: values.city,
+                                                    postalCode: values.postalCode,
+                                                    country: values.country,
+                                                },
+                                            },
+                                            { 'x-locale': locale },
+                                            accessToken,
+                                        );
+                                    }
+                                    await sdk.checkout.setShippingMethod(
+                                        cartId,
+                                        { shippingOptionId: values.shippingMethod },
+                                        { 'x-locale': locale },
+                                        accessToken,
+                                    );
+                                } catch {
+                                    // proceed to next step
+                                } finally {
+                                    setSubmitting(false);
+                                }
+                            }
                             router.push(buttons.next.path);
                         }}
                         validateOnBlur={true}
                         validateOnMount={false}
                         validateOnChange={false}
                     >
-                        {({ values, setFieldValue }) => (
+                        {({ values, setFieldValue, isSubmitting }) => (
                             <Form className="w-full flex flex-col gap-6">
                                 <Separator />
 
                                 <div className="flex flex-col gap-4">
-                                    <Field name="sameAsCompanyAddress">
+                                    <Field name="sameAsBillingAddress">
                                         {({ field }: FieldProps<boolean>) => (
                                             <div className="flex items-center gap-2">
                                                 <Checkbox
-                                                    id="sameAsCompanyAddress"
+                                                    id="sameAsBillingAddress"
                                                     checked={field.value}
                                                     onCheckedChange={(checked) =>
-                                                        setFieldValue('sameAsCompanyAddress', checked === true)
+                                                        setFieldValue('sameAsBillingAddress', checked === true)
                                                     }
                                                 />
-                                                <Label htmlFor="sameAsCompanyAddress" className="cursor-pointer">
-                                                    {fields.sameAsCompanyAddress.label}
+                                                <Label htmlFor="sameAsBillingAddress" className="cursor-pointer">
+                                                    {fields.sameAsBillingAddress.label}
                                                 </Label>
                                             </div>
                                         )}
                                     </Field>
 
-                                    {!values.sameAsCompanyAddress && <AddressFields fields={fields.address} />}
+                                    {!values.sameAsBillingAddress && <AddressFields fields={fields.address} />}
                                 </div>
 
                                 <Separator />
@@ -140,11 +229,14 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                                         {fields.shippingMethod.required && <span className="text-destructive"> *</span>}
                                     </Label>
                                     <Field name="shippingMethod">
-                                        {({ field, form: { touched, errors, setFieldValue } }: FieldProps<string>) => (
+                                        {({
+                                            field,
+                                            form: { touched, errors, setFieldValue: setFV },
+                                        }: FieldProps<string>) => (
                                             <>
                                                 <Select
                                                     value={field.value}
-                                                    onValueChange={(value) => setFieldValue('shippingMethod', value)}
+                                                    onValueChange={(value) => setFV('shippingMethod', value)}
                                                 >
                                                     <SelectTrigger
                                                         id="shippingMethod"
@@ -154,16 +246,20 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                                                                 : ''
                                                         }
                                                     >
-                                                        <SelectValue placeholder={fields.shippingMethod.placeholder} />
+                                                        <SelectValue
+                                                            placeholder={
+                                                                isLoading ? '...' : fields.shippingMethod.placeholder
+                                                            }
+                                                        />
                                                     </SelectTrigger>
                                                     <SelectContent>
-                                                        {fields.shippingMethod.options.map((option) => (
-                                                            <SelectItem key={option.value} value={option.value}>
-                                                                {option.label}
-                                                                {option.price && (
+                                                        {shippingOptions.map((option) => (
+                                                            <SelectItem key={option.id} value={option.id}>
+                                                                {option.name}
+                                                                {option.total && (
                                                                     <>
-                                                                        {' - '}
-                                                                        <Price price={option.price} />
+                                                                        {' — '}
+                                                                        <Price price={option.total} />
                                                                     </>
                                                                 )}
                                                             </SelectItem>
@@ -188,7 +284,7 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                                     <Button asChild variant="outline" type="button">
                                         <LinkComponent href={buttons.back.path}>{buttons.back.label}</LinkComponent>
                                     </Button>
-                                    <Button type="submit" variant="default">
+                                    <Button type="submit" variant="default" disabled={isSubmitting}>
                                         {buttons.next.label}
                                     </Button>
                                 </div>
@@ -198,13 +294,22 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                 </div>
 
                 <div className="lg:col-span-1">
-                    <CartSummary
-                        subtotal={totals.subtotal}
-                        tax={totals.tax}
-                        total={totals.total}
-                        labels={summaryLabels}
-                        LinkComponent={LinkComponent}
-                    />
+                    {isLoading ? (
+                        <div className="flex flex-col gap-4 p-6 bg-card rounded-lg border border-border">
+                            <Skeleton className="h-6 w-32" />
+                            <Skeleton className="h-4 w-full" />
+                            <Skeleton className="h-4 w-full" />
+                            <Skeleton className="h-6 w-full" />
+                        </div>
+                    ) : totals ? (
+                        <CartSummary
+                            subtotal={totals.subtotal}
+                            tax={totals.tax}
+                            total={totals.total}
+                            labels={summaryLabels}
+                            LinkComponent={LinkComponent}
+                        />
+                    ) : null}
                 </div>
             </div>
         </div>

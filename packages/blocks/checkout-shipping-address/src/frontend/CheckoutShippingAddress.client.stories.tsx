@@ -19,14 +19,24 @@ const baseBlock = {
     title: 'Shipping address',
     subtitle: 'Select shipping method',
     fields: {
-        sameAsCompanyAddress: {
-            label: 'Same as company registered address',
+        sameAsBillingAddress: {
+            label: 'Same as billing address',
         },
         address: {
-            street: {
-                label: 'Street and number',
-                placeholder: 'e.g. 123 Main St',
+            streetName: {
+                label: 'Street name',
+                placeholder: 'e.g. Main Street',
                 required: true,
+            },
+            streetNumber: {
+                label: 'Number',
+                placeholder: 'e.g. 123',
+                required: true,
+            },
+            apartment: {
+                label: 'Apartment / suite',
+                placeholder: 'e.g. 4B',
+                required: false,
             },
             city: {
                 label: 'City',
@@ -48,23 +58,6 @@ const baseBlock = {
             label: 'Shipping method',
             placeholder: 'Select method',
             required: true,
-            options: [
-                {
-                    value: 'courier',
-                    label: 'Courier (24-48h)',
-                    price: { value: 0, currency: 'PLN' as const },
-                },
-                {
-                    value: 'express',
-                    label: 'Express (24h)',
-                    price: { value: 19.99, currency: 'PLN' as const },
-                },
-                {
-                    value: 'pickup',
-                    label: 'Pickup point',
-                    price: { value: 0, currency: 'PLN' as const },
-                },
-            ],
         },
     },
     buttons: {
@@ -86,11 +79,6 @@ const baseBlock = {
         subtotalLabel: 'Subtotal',
         taxLabel: 'VAT (23%)',
         totalLabel: 'Total',
-    },
-    totals: {
-        subtotal: { value: 204.97, currency: 'PLN' as const },
-        tax: { value: 47.14, currency: 'PLN' as const },
-        total: { value: 252.11, currency: 'PLN' as const },
     },
 };
 
