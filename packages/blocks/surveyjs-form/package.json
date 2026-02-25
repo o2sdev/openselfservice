@@ -54,8 +54,8 @@
         "concurrently": "^9.2.1",
         "eslint": "^9.39.3",
         "prettier": "^3.8.1",
-        "survey-core": "^2.5.11",
-        "survey-react-ui": "^2.5.11",
+        "survey-core": "^2.5.12",
+        "survey-react-ui": "^2.5.12",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.9.3"
     },
