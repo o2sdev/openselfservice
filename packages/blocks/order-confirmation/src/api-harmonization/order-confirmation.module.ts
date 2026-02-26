@@ -1,5 +1,5 @@
 import { DynamicModule, Module } from '@nestjs/common';
-import { CMS } from '@o2s/configs.integrations';
+import { CMS, Orders } from '@o2s/configs.integrations';
 
 import * as Framework from '@o2s/framework/modules';
 
@@ -16,6 +16,10 @@ export class OrderConfirmationBlockModule {
                 {
                     provide: CMS.Service,
                     useExisting: Framework.CMS.Service,
+                },
+                {
+                    provide: Orders.Service,
+                    useExisting: Framework.Orders.Service,
                 },
             ],
             controllers: [OrderConfirmationController],

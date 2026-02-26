@@ -25,6 +25,7 @@ import { mapMediaSectionBlock } from './mappers/blocks/cms.media-section.mapper'
 import { mapNotificationDetailsBlock } from './mappers/blocks/cms.notification-details.mapper';
 import { mapNotificationListBlock } from './mappers/blocks/cms.notification-list.mapper';
 import { mapNotificationSummaryBlock } from './mappers/blocks/cms.notification-summary.mapper';
+import { mapOrderConfirmationBlock } from './mappers/blocks/cms.order-confirmation.mapper';
 import { mapOrderDetailsBlock } from './mappers/blocks/cms.order-details.mapper';
 import { mapOrderListBlock } from './mappers/blocks/cms.order-list.mapper';
 import { mapOrdersSummaryBlock } from './mappers/blocks/cms.orders-summary.mapper';
@@ -279,6 +280,6 @@ export class CmsService implements CMS.Service {
     }
 
     getOrderConfirmationBlock(options: CMS.Request.GetCmsEntryParams) {
-        return of({ id: options.id });
+        return of(mapOrderConfirmationBlock(options)).pipe(responseDelay());
     }
 }
