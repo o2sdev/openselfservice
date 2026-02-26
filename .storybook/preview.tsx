@@ -3,6 +3,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import type { Preview } from '@storybook/nextjs-vite';
 import { createRouter } from '@storybook/nextjs-vite/router.mock';
 import { createNavigation } from '@storybook/nextjs-vite/navigation.mock';
+import { Markdown, Title, useOf } from '@storybook/addon-docs/blocks';
 import { withThemeByClassName } from '@storybook/addon-themes';
 
 import { GlobalProvider } from '@o2s/ui/providers/GlobalProvider';
@@ -18,8 +19,24 @@ import messages from '../apps/frontend/src/i18n/messages/en.json'
 createRouter({});
 createNavigation({});
 
+const ReadmeDocsPage = () => {
+    const { story } = useOf('story', ['story']);
+    const { preparedMeta } = useOf('meta', ['meta']);
+    const readme = story.parameters?.readme ?? preparedMeta.parameters?.readme;
+
+    return (
+        <>
+            <Title />
+            {typeof readme === 'string' ? <Markdown>{readme}</Markdown> : null}
+        </>
+    );
+};
+
 const preview: Preview = {
   parameters: {
+      docs: {
+          page: ReadmeDocsPage,
+      },
       nextjs: {
           appDirectory: true,
       },

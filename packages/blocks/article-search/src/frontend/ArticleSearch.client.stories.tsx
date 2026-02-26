@@ -1,6 +1,4 @@
-import { Markdown, Title } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import React from 'react';
 import { expect } from 'storybook/test';
 
 import readme from '../../README.md?raw';
@@ -11,19 +9,7 @@ const meta = {
     title: 'Blocks/ArticleSearch',
     component: ArticleSearchPure,
     tags: ['autodocs'],
-    parameters: {
-        docs: {
-            page: () => (
-                <>
-                    <Title />
-                    <Markdown>{readme}</Markdown>
-                </>
-            ),
-            description: {
-                component: readme,
-            },
-        },
-    },
+    parameters: { readme },
 } satisfies Meta<typeof ArticleSearchPure>;
 
 export default meta;

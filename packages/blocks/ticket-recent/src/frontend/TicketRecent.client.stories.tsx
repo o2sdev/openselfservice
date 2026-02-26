@@ -1,6 +1,4 @@
-import { Markdown, Title } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import React from 'react';
 
 import readme from '../../README.md?raw';
 
@@ -10,19 +8,7 @@ const meta = {
     title: 'Blocks/TicketRecent',
     component: TicketRecentPure,
     tags: ['autodocs'],
-    parameters: {
-        docs: {
-            page: () => (
-                <>
-                    <Title />
-                    <Markdown>{readme}</Markdown>
-                </>
-            ),
-            description: {
-                component: readme,
-            },
-        },
-    },
+    parameters: { readme },
 } satisfies Meta<typeof TicketRecentPure>;
 
 export default meta;
