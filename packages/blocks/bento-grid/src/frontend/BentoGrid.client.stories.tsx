@@ -1,10 +1,28 @@
+import { Markdown, Title } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import React from 'react';
+
+import readme from '../../README.md?raw';
 
 import { BentoGridPure } from './BentoGrid.client';
 
 const meta = {
     title: 'Blocks/BentoGrid',
     component: BentoGridPure,
+    tags: ['autodocs'],
+    parameters: {
+        docs: {
+            page: () => (
+                <>
+                    <Title />
+                    <Markdown>{readme}</Markdown>
+                </>
+            ),
+            description: {
+                component: readme,
+            },
+        },
+    },
 } satisfies Meta<typeof BentoGridPure>;
 
 export default meta;

@@ -1,10 +1,28 @@
+import { Markdown, Title } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import React from 'react';
+
+import readme from '../../README.md?raw';
 
 import { ServiceDetailsPure } from './ServiceDetails.client';
 
 const meta = {
     title: 'Blocks/ServiceDetails',
     component: ServiceDetailsPure,
+    tags: ['autodocs'],
+    parameters: {
+        docs: {
+            page: () => (
+                <>
+                    <Title />
+                    <Markdown>{readme}</Markdown>
+                </>
+            ),
+            description: {
+                component: readme,
+            },
+        },
+    },
 } satisfies Meta<typeof ServiceDetailsPure>;
 
 export default meta;

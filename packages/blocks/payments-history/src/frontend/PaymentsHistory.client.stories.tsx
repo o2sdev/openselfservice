@@ -1,10 +1,28 @@
+import { Markdown, Title } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import React from 'react';
+
+import readme from '../../README.md?raw';
 
 import { PaymentsHistoryPure } from './PaymentsHistory.client';
 
 const meta = {
     title: 'Blocks/PaymentsHistory',
     component: PaymentsHistoryPure,
+    tags: ['autodocs'],
+    parameters: {
+        docs: {
+            page: () => (
+                <>
+                    <Title />
+                    <Markdown>{readme}</Markdown>
+                </>
+            ),
+            description: {
+                component: readme,
+            },
+        },
+    },
 } satisfies Meta<typeof PaymentsHistoryPure>;
 
 export default meta;

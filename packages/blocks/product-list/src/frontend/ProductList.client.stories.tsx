@@ -1,10 +1,28 @@
+import { Markdown, Title } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import React from 'react';
+
+import readme from '../../README.md?raw';
 
 import { ProductListPure } from './ProductList.client';
 
 const meta = {
     title: 'Blocks/ProductList',
     component: ProductListPure,
+    tags: ['autodocs'],
+    parameters: {
+        docs: {
+            page: () => (
+                <>
+                    <Title />
+                    <Markdown>{readme}</Markdown>
+                </>
+            ),
+            description: {
+                component: readme,
+            },
+        },
+    },
 } satisfies Meta<typeof ProductListPure>;
 
 export default meta;
