@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { of } from 'rxjs';
+// import { CMS } from '@o2s/framework/modules';
 
-import { CMS } from '@o2s/framework/modules';
+import { CMS } from '@o2s/integrations.mocked/modules';
+import { Observable, of } from 'rxjs';
 
 import { mapArticleListBlock } from './mappers/blocks/cms.article-list.mapper';
 import { mapArticleSearchBlock } from './mappers/blocks/cms.article-search.mapper';
@@ -26,206 +27,128 @@ import { getAllPages, getAlternativePages, mapPage } from './mappers/cms.page.ma
 import { responseDelay } from '@/utils/delay';
 
 @Injectable()
-export class CmsService implements CMS.Service {
-    getEntry<T>(_options: CMS.Request.GetCmsEntryParams) {
+export class CmsService extends CMS.Service {
+    override getEntry<T>(_options: CMS.Request.GetCmsEntryParams): Observable<T> {
         return of<T>({} as T);
     }
 
-    getEntries<T>(_options: CMS.Request.GetCmsEntriesParams) {
+    override getEntries<T>(_options: CMS.Request.GetCmsEntriesParams): Observable<T> {
         return of<T>({} as T);
     }
 
-    getAppConfig(options: CMS.Request.GetCmsAppConfigParams) {
+    override getAppConfig(options: CMS.Request.GetCmsAppConfigParams): Observable<CMS.Model.AppConfig.AppConfig> {
         return of(mapAppConfig(options.locale, options.referrer));
     }
 
-    getPage(options: CMS.Request.GetCmsPageParams) {
+    override getPage(options: CMS.Request.GetCmsPageParams): Observable<CMS.Model.Page.Page | undefined> {
         return of(mapPage(options.slug, options.locale));
     }
 
-    getPages(options: CMS.Request.GetCmsPagesParams) {
+    override getPages(options: CMS.Request.GetCmsPagesParams): Observable<CMS.Model.Page.Page[]> {
         return of(getAllPages(options.locale));
     }
 
-    getAlternativePages(options: CMS.Request.GetCmsAlternativePagesParams) {
+    override getAlternativePages(options: CMS.Request.GetCmsAlternativePagesParams): Observable<CMS.Model.Page.Page[]> {
         return of(getAlternativePages(options.id, options.slug, options.locale));
     }
 
-    getLoginPage(options: CMS.Request.GetCmsLoginPageParams) {
+    override getLoginPage(options: CMS.Request.GetCmsLoginPageParams): Observable<CMS.Model.LoginPage.LoginPage> {
         return of(mapLoginPage(options.locale));
     }
 
-    getNotFoundPage(options: CMS.Request.GetCmsNotFoundPageParams) {
+    override getNotFoundPage(
+        options: CMS.Request.GetCmsNotFoundPageParams,
+    ): Observable<CMS.Model.NotFoundPage.NotFoundPage> {
         return of(mapNotFoundPage(options.locale));
     }
 
-    getHeader(options: CMS.Request.GetCmsHeaderParams) {
+    override getHeader(options: CMS.Request.GetCmsHeaderParams): Observable<CMS.Model.Header.Header> {
         return of(mapHeader(options.id, options.locale));
     }
 
-    getFooter(options: CMS.Request.GetCmsFooterParams) {
+    override getFooter(options: CMS.Request.GetCmsFooterParams): Observable<CMS.Model.Footer.Footer> {
         return of(mapFooter(options.locale));
     }
 
-    getFaqBlock(options: CMS.Request.GetCmsEntryParams) {
+    override getFaqBlock(options: CMS.Request.GetCmsEntryParams): Observable<CMS.Model.FaqBlock.FaqBlock> {
         return of(mapFaqBlock(options.locale)).pipe(responseDelay());
     }
 
-    getHeroSectionBlock(options: CMS.Request.GetCmsEntryParams) {
+    override getHeroSectionBlock(
+        options: CMS.Request.GetCmsEntryParams,
+    ): Observable<CMS.Model.HeroSectionBlock.HeroSectionBlock> {
         return of(mapHeroSectionBlock(options)).pipe(responseDelay());
     }
 
-    getFeatureSectionBlock(options: CMS.Request.GetCmsEntryParams) {
+    override getFeatureSectionBlock(
+        options: CMS.Request.GetCmsEntryParams,
+    ): Observable<CMS.Model.FeatureSectionBlock.FeatureSectionBlock> {
         return of(mapFeatureSectionBlock(options)).pipe(responseDelay());
     }
 
-    getCtaSectionBlock(options: CMS.Request.GetCmsEntryParams) {
+    override getCtaSectionBlock(
+        options: CMS.Request.GetCmsEntryParams,
+    ): Observable<CMS.Model.CtaSectionBlock.CtaSectionBlock> {
         return of(mapCtaSectionBlock(options)).pipe(responseDelay());
     }
 
-    getBentoGridBlock(options: CMS.Request.GetCmsEntryParams) {
+    override getBentoGridBlock(
+        options: CMS.Request.GetCmsEntryParams,
+    ): Observable<CMS.Model.BentoGridBlock.BentoGridBlock> {
         return of(mapBentoGridBlock(options)).pipe(responseDelay());
     }
 
-    getMediaSectionBlock(options: CMS.Request.GetCmsEntryParams) {
+    override getMediaSectionBlock(
+        options: CMS.Request.GetCmsEntryParams,
+    ): Observable<CMS.Model.MediaSectionBlock.MediaSectionBlock> {
         return of(mapMediaSectionBlock(options)).pipe(responseDelay());
     }
 
-    getQuickLinksBlock(options: CMS.Request.GetCmsEntryParams) {
+    override getQuickLinksBlock(
+        options: CMS.Request.GetCmsEntryParams,
+    ): Observable<CMS.Model.QuickLinksBlock.QuickLinksBlock> {
         return of(mapQuickLinksBlock(options)).pipe(responseDelay());
     }
 
-    getFeatureSectionGridBlock(options: CMS.Request.GetCmsEntryParams) {
+    override getFeatureSectionGridBlock(
+        options: CMS.Request.GetCmsEntryParams,
+    ): Observable<CMS.Model.FeatureSectionGridBlock.FeatureSectionGridBlock> {
         return of(mapFeatureSectionGridBlock(options)).pipe(responseDelay());
     }
 
-    getPricingSectionBlock(options: CMS.Request.GetCmsEntryParams) {
+    override getPricingSectionBlock(
+        options: CMS.Request.GetCmsEntryParams,
+    ): Observable<CMS.Model.PricingSectionBlock.PricingSectionBlock> {
         return of(mapPricingSectionBlock(options)).pipe(responseDelay());
     }
 
-    getDocumentListBlock(_options: CMS.Request.GetCmsEntryParams) {
+    override getDocumentListBlock(
+        _options: CMS.Request.GetCmsEntryParams,
+    ): Observable<CMS.Model.DocumentListBlock.DocumentListBlock> {
         return of(mapDocumentListBlock(_options.locale)).pipe(responseDelay());
     }
 
-    getArticleListBlock(options: CMS.Request.GetCmsEntryParams) {
+    override getArticleListBlock(
+        options: CMS.Request.GetCmsEntryParams,
+    ): Observable<CMS.Model.ArticleListBlock.ArticleListBlock> {
         return of(mapArticleListBlock(options.id, options.locale)).pipe(responseDelay());
     }
 
-    getCategoryBlock(options: CMS.Request.GetCmsEntryParams) {
+    override getCategoryBlock(
+        options: CMS.Request.GetCmsEntryParams,
+    ): Observable<CMS.Model.CategoryBlock.CategoryBlock> {
         return of(mapCategoryBlock(options.id, options.locale)).pipe(responseDelay());
     }
 
-    getCategoryListBlock(options: CMS.Request.GetCmsEntryParams) {
+    override getCategoryListBlock(
+        options: CMS.Request.GetCmsEntryParams,
+    ): Observable<CMS.Model.CategoryListBlock.CategoryListBlock> {
         return of(mapCategoryListBlock(options.locale)).pipe(responseDelay());
     }
 
-    getArticleSearchBlock(options: CMS.Request.GetCmsEntryParams) {
+    override getArticleSearchBlock(
+        options: CMS.Request.GetCmsEntryParams,
+    ): Observable<CMS.Model.ArticleSearchBlock.ArticleSearchBlock> {
         return of(mapArticleSearchBlock(options.id, options.locale)).pipe(responseDelay());
-    }
-
-    // SSP-specific block stubs (not used in DXP template)
-
-    getTicketListBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of({} as CMS.Model.TicketListBlock.TicketListBlock);
-    }
-
-    getTicketDetailsBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of({} as CMS.Model.TicketDetailsBlock.TicketDetailsBlock);
-    }
-
-    getNotificationListBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of({} as CMS.Model.NotificationListBlock.NotificationListBlock);
-    }
-
-    getNotificationDetailsBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of({} as CMS.Model.NotificationDetailsBlock.NotificationDetailsBlock);
-    }
-
-    getNotificationSummaryBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of({} as CMS.Model.NotificationSummaryBlock.NotificationSummaryBlock);
-    }
-
-    getInvoiceListBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of({} as CMS.Model.InvoiceListBlock.InvoiceListBlock);
-    }
-
-    getInvoiceDetailsBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of({} as CMS.Model.InvoiceDetailsBlock.InvoiceDetailsBlock);
-    }
-
-    getServiceListBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of({} as CMS.Model.ServiceListBlock.ServiceListBlock);
-    }
-
-    getFeaturedServiceListBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of({} as CMS.Model.FeaturedServiceListBlock.FeaturedServiceListBlock);
-    }
-
-    getServiceDetailsBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of({} as CMS.Model.ServiceDetailsBlock.ServiceDetailsBlock);
-    }
-
-    getResourceListBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of({} as CMS.Model.ResourceListBlock.ResourceListBlock);
-    }
-
-    getResourceDetailsBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of({} as CMS.Model.ResourceDetailsBlock.ResourceDetailsBlock);
-    }
-
-    getPaymentsSummaryBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of({} as CMS.Model.PaymentsSummaryBlock.PaymentsSummaryBlock);
-    }
-
-    getPaymentsHistoryBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of({} as CMS.Model.PaymentsHistoryBlock.PaymentsHistoryBlock);
-    }
-
-    getUserAccountBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of({} as CMS.Model.UserAccountBlock.UserAccountBlock);
-    }
-
-    getTicketRecentBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of({} as CMS.Model.TicketRecentBlock.TicketRecentBlock);
-    }
-
-    getTicketSummaryBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of({} as CMS.Model.TicketSummaryBlock.TicketSummaryBlock);
-    }
-
-    getOrganizationList(_options: CMS.Request.GetCmsOrganizationListParams) {
-        return of({} as CMS.Model.OrganizationList.OrganizationList);
-    }
-
-    getSurvey(_options: CMS.Request.GetCmsSurveyParams) {
-        return of({} as CMS.Model.Survey.Survey);
-    }
-
-    getSurveyJsBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of({} as CMS.Model.SurveyJsBlock.SurveyJsBlock);
-    }
-
-    getOrderListBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of({} as CMS.Model.OrderListBlock.OrderListBlock);
-    }
-
-    getOrdersSummaryBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of({} as CMS.Model.OrdersSummaryBlock.OrdersSummaryBlock);
-    }
-
-    getOrderDetailsBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of({} as CMS.Model.OrderDetailsBlock.OrderDetailsBlock);
-    }
-
-    getProductListBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of({} as CMS.Model.ProductListBlock.ProductListBlock);
-    }
-
-    getProductDetailsBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of({} as CMS.Model.ProductDetailsBlock.ProductDetailsBlock);
-    }
-
-    getRecommendedProductsBlock(_options: CMS.Request.GetCmsEntryParams) {
-        return of({} as CMS.Model.RecommendedProductsBlock.RecommendedProductsBlock);
     }
 }

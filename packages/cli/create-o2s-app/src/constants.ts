@@ -38,7 +38,7 @@ export const INTEGRATION_MODULES: Record<string, string[]> = {
     'contentful-cms': ['cms'],
     algolia: ['search'],
     redis: ['cache'],
-    'mocked-dxp': ['cms', 'articles', 'search', 'cache'],
+    'mocked-dxp': ['cms', 'articles', 'search'],
 };
 
 export const INTEGRATION_ENV_VARS: Record<string, EnvVar[]> = {

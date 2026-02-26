@@ -1,4 +1,4 @@
-import { INTEGRATION_MODULES } from '../constants';
+import { INTEGRATION_MODULES, MOCKED_INTEGRATIONS } from '../constants';
 import { ConflictResolution } from '../types';
 import * as fs from 'fs-extra';
 import * as path from 'path';
@@ -39,10 +39,13 @@ const updateConfigsPackageJson = async (projectDir: string, selectedIntegrations
     const pkg = await fs.readJson(pkgPath);
 
     // Remove integration deps that were not selected
+    // Exception: keep mocked when mocked-dxp is selected — SSP model files still reference it
+    const keepMocked = selectedIntegrations.includes('mocked-dxp') && !selectedIntegrations.includes('mocked');
     for (const key of Object.keys(pkg.dependencies as Record<string, string>)) {
         if (key.startsWith('@o2s/integrations.')) {
             const name = key.replace('@o2s/integrations.', '');
             if (!selectedIntegrations.includes(name)) {
+                if (name === 'mocked' && keepMocked) continue;
                 delete pkg.dependencies[key];
             }
         }
@@ -88,9 +91,10 @@ export const transformIntegrationConfigs = async (
 
     await updateConfigsPackageJson(projectDir, selectedIntegrations);
 
-    // Detect model files that still import mocked but mocked is not in the workspace
+    // Detect model files that still import mocked but mocked is not in the workspace.
+    // Skip when any mocked variant is selected (mocked covers all, mocked-dxp keeps mocked as dep).
     const uncoveredModules: string[] = [];
-    if (!selectedIntegrations.includes('mocked')) {
+    if (!selectedIntegrations.some((i) => MOCKED_INTEGRATIONS.includes(i))) {
         const files = await fs.readdir(modelsDir);
         for (const file of files) {
             if (file === 'index.ts' || !file.endsWith('.ts')) continue;
