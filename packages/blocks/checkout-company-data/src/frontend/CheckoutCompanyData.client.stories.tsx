@@ -64,7 +64,7 @@ const baseBlock = {
     },
     buttons: {
         back: {
-            label: 'Back',
+            label: 'Back to cart',
             path: '#',
         },
         next: {
@@ -82,6 +82,9 @@ const baseBlock = {
         subtotalLabel: 'Subtotal',
         taxLabel: 'VAT (23%)',
         totalLabel: 'Total',
+        discountLabel: 'Discount',
+        shippingLabel: 'Shipping',
+        freeLabel: 'Free',
     },
     billingInfoNote: {
         icon: 'Info',

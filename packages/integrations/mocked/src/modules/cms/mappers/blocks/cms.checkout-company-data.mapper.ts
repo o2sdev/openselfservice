@@ -15,6 +15,11 @@ const MOCK_CHECKOUT_COMPANY_DATA_EN: CMS.Model.CheckoutCompanyDataBlock.Checkout
             placeholder: 'XXXXXXXXXX',
             required: true,
         },
+        notes: {
+            label: 'Order notes',
+            placeholder: 'Any additional information about your order...',
+            required: false,
+        },
         address: {
             streetName: {
                 label: 'Street name',
@@ -62,6 +67,9 @@ const MOCK_CHECKOUT_COMPANY_DATA_EN: CMS.Model.CheckoutCompanyDataBlock.Checkout
         subtotalLabel: 'Subtotal',
         taxLabel: 'VAT (23%)',
         totalLabel: 'Total',
+        discountLabel: 'Discount',
+        shippingLabel: 'Shipping',
+        freeLabel: 'Free',
     },
     stepIndicator: {
         steps: ['Company details', 'Delivery', 'Payment', 'Summary'],
@@ -87,6 +95,11 @@ const MOCK_CHECKOUT_COMPANY_DATA_DE: CMS.Model.CheckoutCompanyDataBlock.Checkout
             label: 'USt-IdNr. / Steuer-ID',
             placeholder: 'XXXXXXXXXX',
             required: true,
+        },
+        notes: {
+            label: 'Bestellhinweise',
+            placeholder: 'Zusätzliche Informationen zu Ihrer Bestellung...',
+            required: false,
         },
         address: {
             streetName: {
@@ -135,6 +148,9 @@ const MOCK_CHECKOUT_COMPANY_DATA_DE: CMS.Model.CheckoutCompanyDataBlock.Checkout
         subtotalLabel: 'Nettosumme',
         taxLabel: 'MwSt. (23%)',
         totalLabel: 'Gesamt',
+        discountLabel: 'Rabatt',
+        shippingLabel: 'Versand',
+        freeLabel: 'Kostenlos',
     },
     stepIndicator: {
         steps: ['Firmendaten', 'Lieferung', 'Zahlung', 'Zusammenfassung'],
@@ -160,6 +176,11 @@ const MOCK_CHECKOUT_COMPANY_DATA_PL: CMS.Model.CheckoutCompanyDataBlock.Checkout
             label: 'NIP',
             placeholder: 'XXXXXXXXXX',
             required: true,
+        },
+        notes: {
+            label: 'Uwagi do zamówienia',
+            placeholder: 'Dodatkowe informacje do zamówienia...',
+            required: false,
         },
         address: {
             streetName: {
@@ -208,6 +229,9 @@ const MOCK_CHECKOUT_COMPANY_DATA_PL: CMS.Model.CheckoutCompanyDataBlock.Checkout
         subtotalLabel: 'Wartość netto',
         taxLabel: 'VAT (23%)',
         totalLabel: 'Razem',
+        discountLabel: 'Rabat',
+        shippingLabel: 'Dostawa',
+        freeLabel: 'Gratis',
     },
     stepIndicator: {
         steps: ['Dane firmy', 'Dostawa', 'Płatność', 'Podsumowanie'],

@@ -13,6 +13,9 @@ export interface CheckoutCompanyDataSummaryLabels {
     subtotalLabel: string;
     taxLabel: string;
     totalLabel: string;
+    discountLabel?: string;
+    shippingLabel?: string;
+    freeLabel?: string;
 }
 
 export class CheckoutCompanyDataBlock extends ApiModels.Block.Block {
@@ -22,6 +25,7 @@ export class CheckoutCompanyDataBlock extends ApiModels.Block.Block {
     fields!: {
         companyName: CheckoutCompanyDataField;
         taxId: CheckoutCompanyDataField;
+        notes?: CheckoutCompanyDataField;
         address: {
             streetName: CheckoutCompanyDataField;
             streetNumber?: CheckoutCompanyDataField;

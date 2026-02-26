@@ -6,18 +6,18 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { object as YupObject, string as YupString } from 'yup';
 
-import { Models } from '@o2s/framework/modules';
+import { Carts, Models } from '@o2s/framework/modules';
 
 import { CartSummary } from '@o2s/ui/components/Cart/CartSummary';
 import { AddressFields } from '@o2s/ui/components/Checkout/AddressFields';
 import { StepIndicator } from '@o2s/ui/components/Checkout/StepIndicator';
 import { DynamicIcon } from '@o2s/ui/components/DynamicIcon';
 
-import { Button } from '@o2s/ui/elements/button';
 import { Input } from '@o2s/ui/elements/input';
 import { Label } from '@o2s/ui/elements/label';
 import { Separator } from '@o2s/ui/elements/separator';
 import { Skeleton } from '@o2s/ui/elements/skeleton';
+import { Textarea } from '@o2s/ui/elements/textarea';
 import { Typography } from '@o2s/ui/elements/typography';
 
 import { sdk } from '../sdk';
@@ -25,6 +25,7 @@ import { sdk } from '../sdk';
 import { CheckoutCompanyDataPureProps } from './CheckoutCompanyData.types';
 
 const CART_ID_KEY = 'cartId';
+const FORM_ID = 'checkout-company-form';
 
 export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureProps>> = ({
     locale,
@@ -46,8 +47,11 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
         subtotal: Models.Price.Price;
         tax: Models.Price.Price;
         total: Models.Price.Price;
+        discountTotal?: Models.Price.Price;
     } | null>(null);
+    const [cartPromotions, setCartPromotions] = useState<Carts.Model.Promotion[] | undefined>(undefined);
     const [isTotalsLoading, setIsTotalsLoading] = useState(false);
+    const [isFormSubmitting, setIsFormSubmitting] = useState(false);
     const [initialFormValues, setInitialFormValues] = useState({
         companyName: '',
         taxId: '',
@@ -57,6 +61,7 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
         city: '',
         postalCode: '',
         country: '',
+        notes: '',
     });
 
     useEffect(() => {
@@ -72,8 +77,10 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
                         subtotal: cart.subtotal,
                         tax: cart.taxTotal,
                         total: cart.total,
+                        discountTotal: cart.discountTotal,
                     });
                 }
+                setCartPromotions(cart.promotions);
                 if (cart.billingAddress) {
                     const addr = cart.billingAddress;
                     setInitialFormValues({
@@ -85,6 +92,7 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
                         city: addr.city ?? '',
                         postalCode: addr.postalCode ?? '',
                         country: addr.country ?? '',
+                        notes: cart.notes ?? '',
                     });
                 }
             } catch {
@@ -143,6 +151,7 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
                         enableReinitialize
                         validationSchema={validationSchema}
                         onSubmit={async (values, { setSubmitting }) => {
+                            setIsFormSubmitting(true);
                             const cartId = localStorage.getItem(CART_ID_KEY);
                             if (cartId) {
                                 try {
@@ -159,6 +168,7 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
                                                 postalCode: values.postalCode,
                                                 country: values.country,
                                             },
+                                            notes: values.notes || undefined,
                                         },
                                         { 'x-locale': locale },
                                         accessToken,
@@ -167,6 +177,7 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
                                     // proceed to next step even if call fails
                                 } finally {
                                     setSubmitting(false);
+                                    setIsFormSubmitting(false);
                                 }
                             }
                             router.push(buttons.next.path);
@@ -175,10 +186,8 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
                         validateOnMount={false}
                         validateOnChange={false}
                     >
-                        {({ isSubmitting }) => (
-                            <Form className="w-full flex flex-col gap-6">
-                                <Separator />
-
+                        {() => (
+                            <Form id={FORM_ID} className="w-full flex flex-col gap-6">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="md:col-span-2 flex flex-col gap-2">
                                         <Label htmlFor="companyName">
@@ -260,16 +269,27 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
                                     </div>
                                 )}
 
-                                <Separator />
-
-                                <div className="flex flex-col sm:flex-row gap-4 justify-between">
-                                    <Button asChild variant="outline" type="button">
-                                        <LinkComponent href={buttons.back.path}>{buttons.back.label}</LinkComponent>
-                                    </Button>
-                                    <Button type="submit" variant="default" disabled={isSubmitting}>
-                                        {buttons.next.label}
-                                    </Button>
-                                </div>
+                                {fields.notes && (
+                                    <>
+                                        <Separator />
+                                        <div className="flex flex-col gap-2">
+                                            <Label htmlFor="notes">
+                                                {fields.notes.label}
+                                                {fields.notes.required && <span className="text-destructive"> *</span>}
+                                            </Label>
+                                            <Field name="notes">
+                                                {({ field }: FieldProps<string>) => (
+                                                    <Textarea
+                                                        id="notes"
+                                                        {...field}
+                                                        placeholder={fields.notes!.placeholder}
+                                                        rows={4}
+                                                    />
+                                                )}
+                                            </Field>
+                                        </div>
+                                    </>
+                                )}
                             </Form>
                         )}
                     </Formik>
@@ -288,8 +308,19 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
                             subtotal={totals.subtotal}
                             tax={totals.tax}
                             total={totals.total}
+                            discountTotal={totals.discountTotal}
+                            promotions={cartPromotions}
                             labels={summaryLabels}
                             LinkComponent={LinkComponent}
+                            primaryButton={{
+                                label: buttons.next.label,
+                                disabled: isFormSubmitting,
+                                action: { type: 'submit', form: FORM_ID },
+                            }}
+                            secondaryButton={{
+                                label: buttons.back.label,
+                                action: { type: 'link', url: buttons.back.path },
+                            }}
                         />
                     ) : null}
                 </div>
