@@ -9,7 +9,45 @@ import { Button } from '@o2s/ui/elements/button';
 import { Separator } from '@o2s/ui/elements/separator';
 import { Typography } from '@o2s/ui/elements/typography';
 
-import { CartSummaryProps } from './CartSummary.types';
+import { CartSummaryButton, CartSummaryProps } from './CartSummary.types';
+
+const renderButton = (
+    btn: CartSummaryButton,
+    variant: 'default' | 'outline',
+    LinkComponent: CartSummaryProps['LinkComponent'],
+): React.ReactNode => {
+    if (btn.action.type === 'submit') {
+        return (
+            <Button
+                type="submit"
+                form={btn.action.form}
+                variant={variant}
+                size="lg"
+                className="w-full"
+                disabled={btn.disabled}
+            >
+                {btn.icon && <DynamicIcon name={btn.icon} size={20} className="mr-2" />}
+                {btn.label}
+            </Button>
+        );
+    }
+
+    return (
+        <Button variant={variant} size="lg" className="w-full" asChild disabled={btn.disabled}>
+            {LinkComponent ? (
+                <LinkComponent href={btn.action.url} className="w-full">
+                    {btn.icon && <DynamicIcon name={btn.icon} size={20} className="mr-2" />}
+                    {btn.label}
+                </LinkComponent>
+            ) : (
+                <a href={btn.action.url}>
+                    {btn.icon && <DynamicIcon name={btn.icon} size={20} className="mr-2" />}
+                    {btn.label}
+                </a>
+            )}
+        </Button>
+    );
+};
 
 export const CartSummary: React.FC<Readonly<CartSummaryProps>> = ({
     subtotal,
@@ -20,8 +58,8 @@ export const CartSummary: React.FC<Readonly<CartSummaryProps>> = ({
     promotions,
     labels,
     LinkComponent,
-    checkoutButton,
-    continueShopping,
+    primaryButton,
+    secondaryButton,
 }) => {
     const hasDiscount = discountTotal && discountTotal.value > 0;
     const hasShipping = !!shippingMethod;
@@ -32,7 +70,6 @@ export const CartSummary: React.FC<Readonly<CartSummaryProps>> = ({
             <Typography variant="h2">{labels.title}</Typography>
 
             <div className="flex flex-col gap-4">
-                {/* Subtotal + Tax + optional Discount + optional Shipping */}
                 <div className="flex flex-col gap-1">
                     <div className="flex items-center justify-between">
                         <Typography variant="small" className="text-muted-foreground">
@@ -43,7 +80,6 @@ export const CartSummary: React.FC<Readonly<CartSummaryProps>> = ({
                         </Typography>
                     </div>
 
-                    {/* Tax */}
                     <div className="flex items-center justify-between">
                         <Typography variant="small" className="text-muted-foreground">
                             {labels.taxLabel}
@@ -53,7 +89,6 @@ export const CartSummary: React.FC<Readonly<CartSummaryProps>> = ({
                         </Typography>
                     </div>
 
-                    {/* Discount */}
                     {hasDiscount && (
                         <div className="flex items-center justify-between">
                             <Typography variant="small" className="text-muted-foreground">
@@ -65,7 +100,6 @@ export const CartSummary: React.FC<Readonly<CartSummaryProps>> = ({
                         </div>
                     )}
 
-                    {/* Shipping */}
                     {hasShipping && (
                         <div className="flex items-center justify-between">
                             <Typography variant="small" className="text-muted-foreground">
@@ -85,7 +119,6 @@ export const CartSummary: React.FC<Readonly<CartSummaryProps>> = ({
 
                 <Separator />
 
-                {/* Total */}
                 <div className="flex items-center justify-between">
                     <Typography variant="h3">{labels.totalLabel}</Typography>
                     <Typography variant="h2" className="text-primary">
@@ -94,43 +127,13 @@ export const CartSummary: React.FC<Readonly<CartSummaryProps>> = ({
                 </div>
             </div>
 
-            {/* Checkout Button */}
-            {checkoutButton && checkoutButton.url && (
+            {(primaryButton || secondaryButton) && (
                 <>
                     <Separator />
-                    <Button variant="default" size="lg" className="w-full" asChild>
-                        {LinkComponent ? (
-                            <LinkComponent href={checkoutButton.url} className="w-full">
-                                {checkoutButton.icon && (
-                                    <DynamicIcon name={checkoutButton.icon} size={20} className="mr-2" />
-                                )}
-                                {checkoutButton.label}
-                            </LinkComponent>
-                        ) : (
-                            <a href={checkoutButton.url}>
-                                {checkoutButton.icon && (
-                                    <DynamicIcon name={checkoutButton.icon} size={20} className="mr-2" />
-                                )}
-                                {checkoutButton.label}
-                            </a>
-                        )}
-                    </Button>
-                </>
-            )}
-
-            {/* Continue Shopping */}
-            {continueShopping && continueShopping.url && (
-                <>
-                    {!checkoutButton && <Separator />}
-                    <Button variant="outline" size="lg" className="w-full" asChild>
-                        {LinkComponent ? (
-                            <LinkComponent href={continueShopping.url} className="w-full">
-                                {continueShopping.label}
-                            </LinkComponent>
-                        ) : (
-                            <a href={continueShopping.url}>{continueShopping.label}</a>
-                        )}
-                    </Button>
+                    <div className="flex flex-col gap-3">
+                        {primaryButton && renderButton(primaryButton, 'default', LinkComponent)}
+                        {secondaryButton && renderButton(secondaryButton, 'outline', LinkComponent)}
+                    </div>
                 </>
             )}
         </div>

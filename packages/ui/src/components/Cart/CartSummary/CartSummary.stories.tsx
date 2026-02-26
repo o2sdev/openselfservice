@@ -14,33 +14,32 @@ const meta: Meta<typeof CartSummary> = {
 export default meta;
 type Story = StoryObj<typeof CartSummary>;
 
-const defaultArgs = {
-    subtotal: { value: 204.97, currency: 'PLN' as const },
-    tax: { value: 47.14, currency: 'PLN' as const },
-    total: { value: 252.11, currency: 'PLN' as const },
-    labels: {
-        title: 'Summary',
-        subtotalLabel: 'Subtotal',
-        taxLabel: 'VAT (23%)',
-        totalLabel: 'Total',
-    },
-};
-
 export const Default: Story = {
     args: {
-        ...defaultArgs,
-        checkoutButton: {
-            url: '#',
-            label: 'Proceed to checkout',
-            icon: 'ShoppingCart',
+        subtotal: { value: 204.97, currency: 'PLN' as const },
+        tax: { value: 47.14, currency: 'PLN' as const },
+        total: { value: 231.61, currency: 'PLN' as const },
+        discountTotal: { value: 20.5, currency: 'PLN' as const },
+        shippingMethod: {
+            name: 'Standard Delivery',
+            total: { value: 15.0, currency: 'PLN' as const },
         },
-        continueShopping: {
-            url: '#',
-            label: 'Continue shopping',
+        labels: {
+            title: 'Summary',
+            subtotalLabel: 'Subtotal',
+            taxLabel: 'VAT (23%)',
+            totalLabel: 'Total',
+            discountLabel: 'Discount',
+            shippingLabel: 'Shipping',
+            freeLabel: 'Free',
+        },
+        primaryButton: {
+            label: 'Next step',
+            action: { type: 'submit', form: 'checkout-form' },
+        },
+        secondaryButton: {
+            label: 'Back',
+            action: { type: 'link', url: '#' },
         },
     },
-};
-
-export const TotalsOnly: Story = {
-    args: defaultArgs,
 };

@@ -9,6 +9,15 @@ export interface CartSummaryPromotion {
     value?: string;
 }
 
+export type CartSummaryButtonAction = { type: 'link'; url: string } | { type: 'submit'; form?: string };
+
+export interface CartSummaryButton {
+    label: string;
+    icon?: string;
+    disabled?: boolean;
+    action: CartSummaryButtonAction;
+}
+
 export interface CartSummaryProps {
     subtotal: Models.Price.Price;
     tax: Models.Price.Price;
@@ -26,6 +35,6 @@ export interface CartSummaryProps {
         freeLabel?: string;
     };
     LinkComponent?: FrontendModels.Link.LinkComponent;
-    checkoutButton?: Models.Link.Link;
-    continueShopping?: Models.Link.Link;
+    primaryButton?: CartSummaryButton;
+    secondaryButton?: CartSummaryButton;
 }
