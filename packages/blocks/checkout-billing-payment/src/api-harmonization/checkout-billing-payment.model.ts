@@ -6,6 +6,9 @@ export interface CheckoutBillingPaymentSummaryLabels {
     subtotalLabel: string;
     taxLabel: string;
     totalLabel: string;
+    discountLabel?: string;
+    shippingLabel?: string;
+    freeLabel?: string;
 }
 
 export class CheckoutBillingPaymentBlock extends ApiModels.Block.Block {

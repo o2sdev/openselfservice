@@ -43,6 +43,9 @@ const baseBlock = {
         subtotalLabel: 'Subtotal',
         taxLabel: 'VAT (23%)',
         totalLabel: 'Total',
+        discountLabel: 'Discount',
+        shippingLabel: 'Shipping',
+        freeLabel: 'Free',
     },
     totals: {
         subtotal: { value: 204.97, currency: 'PLN' as const },

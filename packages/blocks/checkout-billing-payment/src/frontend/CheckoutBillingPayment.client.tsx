@@ -6,15 +6,13 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { object as YupObject, string as YupString } from 'yup';
 
-import { Models, Payments } from '@o2s/framework/modules';
+import { Carts, Models, Payments } from '@o2s/framework/modules';
 
 import { CartSummary } from '@o2s/ui/components/Cart/CartSummary';
 import { StepIndicator } from '@o2s/ui/components/Checkout/StepIndicator';
 
-import { Button } from '@o2s/ui/elements/button';
 import { Label } from '@o2s/ui/elements/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@o2s/ui/elements/select';
-import { Separator } from '@o2s/ui/elements/separator';
 import { Skeleton } from '@o2s/ui/elements/skeleton';
 import { Typography } from '@o2s/ui/elements/typography';
 
@@ -23,6 +21,7 @@ import { sdk } from '../sdk';
 import { CheckoutBillingPaymentPureProps } from './CheckoutBillingPayment.types';
 
 const CART_ID_KEY = 'cartId';
+const FORM_ID = 'checkout-billing-form';
 
 export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymentPureProps>> = ({
     locale,
@@ -43,9 +42,18 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
         subtotal: Models.Price.Price;
         tax: Models.Price.Price;
         total: Models.Price.Price;
+        discountTotal?: Models.Price.Price;
     } | null>(null);
+    const [cartShippingMethod, setCartShippingMethod] = useState<
+        { name: string; total: Models.Price.Price } | undefined
+    >(undefined);
+    const [cartPromotions, setCartPromotions] = useState<Carts.Model.Promotion[] | undefined>(undefined);
     const [paymentProviders, setPaymentProviders] = useState<Payments.Model.PaymentProvider[]>([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [isFormSubmitting, setIsFormSubmitting] = useState(false);
+    const [initialFormValues, setInitialFormValues] = useState({
+        paymentMethod: '',
+    });
 
     useEffect(() => {
         const cartId = localStorage.getItem(CART_ID_KEY);
@@ -60,8 +68,16 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
                         subtotal: cart.subtotal,
                         tax: cart.taxTotal,
                         total: cart.total,
+                        discountTotal: cart.discountTotal,
                     });
                 }
+                if (cart.shippingMethod?.total) {
+                    setCartShippingMethod({
+                        name: cart.shippingMethod.name,
+                        total: cart.shippingMethod.total,
+                    });
+                }
+                setCartPromotions(cart.promotions);
                 if (cart.regionId) {
                     const providers = await sdk.payments.getProviders(
                         { regionId: cart.regionId },
@@ -69,6 +85,9 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
                         accessToken,
                     );
                     setPaymentProviders(providers.data ?? []);
+                }
+                if (cart.paymentMethod) {
+                    setInitialFormValues({ paymentMethod: cart.paymentMethod.id });
                 }
             } catch {
                 // proceed with empty state
@@ -86,10 +105,6 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
         paymentMethod: fields.paymentMethod.required ? YupString().required(errors.required) : YupString(),
     });
 
-    const initialValues = {
-        paymentMethod: '',
-    };
-
     return (
         <div className="w-full flex flex-col gap-8">
             {stepIndicator && <StepIndicator steps={stepIndicator.steps} currentStep={stepIndicator.currentStep} />}
@@ -105,9 +120,11 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div className="lg:col-span-2">
                     <Formik
-                        initialValues={initialValues}
+                        initialValues={initialFormValues}
+                        enableReinitialize
                         validationSchema={validationSchema}
                         onSubmit={async (values, { setSubmitting }) => {
+                            setIsFormSubmitting(true);
                             const cartId = localStorage.getItem(CART_ID_KEY);
                             if (cartId) {
                                 try {
@@ -127,6 +144,7 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
                                     // proceed to next step
                                 } finally {
                                     setSubmitting(false);
+                                    setIsFormSubmitting(false);
                                 }
                             }
                             router.push(buttons.next.path);
@@ -135,10 +153,8 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
                         validateOnMount={false}
                         validateOnChange={false}
                     >
-                        {({ isSubmitting }) => (
-                            <Form className="w-full flex flex-col gap-6">
-                                <Separator />
-
+                        {() => (
+                            <Form id={FORM_ID} className="w-full flex flex-col gap-6">
                                 <div className="flex flex-col gap-2">
                                     <Label htmlFor="paymentMethod">
                                         {fields.paymentMethod.label}
@@ -184,17 +200,6 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
                                         )}
                                     </Field>
                                 </div>
-
-                                <Separator />
-
-                                <div className="flex flex-col sm:flex-row gap-4 justify-between">
-                                    <Button asChild variant="outline" type="button">
-                                        <LinkComponent href={buttons.back.path}>{buttons.back.label}</LinkComponent>
-                                    </Button>
-                                    <Button type="submit" variant="default" disabled={isSubmitting}>
-                                        {buttons.next.label}
-                                    </Button>
-                                </div>
                             </Form>
                         )}
                     </Formik>
@@ -213,8 +218,20 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
                             subtotal={totals.subtotal}
                             tax={totals.tax}
                             total={totals.total}
+                            discountTotal={totals.discountTotal}
+                            shippingMethod={cartShippingMethod}
+                            promotions={cartPromotions}
                             labels={summaryLabels}
                             LinkComponent={LinkComponent}
+                            primaryButton={{
+                                label: buttons.next.label,
+                                disabled: isFormSubmitting,
+                                action: { type: 'submit', form: FORM_ID },
+                            }}
+                            secondaryButton={{
+                                label: buttons.back.label,
+                                action: { type: 'link', url: buttons.back.path },
+                            }}
                         />
                     ) : null}
                 </div>

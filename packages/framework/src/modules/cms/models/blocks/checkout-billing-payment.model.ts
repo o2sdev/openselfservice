@@ -22,6 +22,9 @@ export class CheckoutBillingPaymentBlock extends Block.Block {
         subtotalLabel: string;
         taxLabel: string;
         totalLabel: string;
+        discountLabel?: string;
+        shippingLabel?: string;
+        freeLabel?: string;
     };
     stepIndicator?: { steps: string[]; currentStep: number };
 }
