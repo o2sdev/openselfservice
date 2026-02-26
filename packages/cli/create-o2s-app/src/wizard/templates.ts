@@ -59,6 +59,8 @@ export const filterIntegrationsByTemplate = (template: TemplateType, allIntegrat
     }
 
     return allIntegrations
-        .filter((integration) => integration.category.includes(category) && MOCKED_INTEGRATIONS.includes(integration.name))
+        .filter(
+            (integration) => integration.category.includes(category) && MOCKED_INTEGRATIONS.includes(integration.name),
+        )
         .map((integration) => integration.name);
 };
