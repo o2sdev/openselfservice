@@ -21,13 +21,11 @@ export class CheckoutSummaryBlock extends ApiModels.Block.Block {
             title: string;
             subtotalLabel: string;
             taxLabel: string;
+            discountLabel?: string;
             shippingLabel: string;
+            freeLabel?: string;
             totalLabel: string;
-        };
-        notes?: {
-            title: string;
-            comment: { label: string; placeholder?: string };
-            specialInstructions: { label: string; placeholder?: string };
+            notesTitle?: string;
         };
     };
     buttons!: {

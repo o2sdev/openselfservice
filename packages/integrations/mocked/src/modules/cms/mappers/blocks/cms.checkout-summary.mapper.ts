@@ -28,16 +28,11 @@ const MOCK_CHECKOUT_SUMMARY_EN: CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBl
             title: 'Summary',
             subtotalLabel: 'Subtotal',
             taxLabel: 'VAT (23%)',
+            discountLabel: 'Discount',
             shippingLabel: 'Shipping',
+            freeLabel: 'Free',
             totalLabel: 'Total',
-        },
-        notes: {
-            title: 'Notes',
-            comment: { label: 'Comment', placeholder: 'Add a comment to your order...' },
-            specialInstructions: {
-                label: 'Special instructions',
-                placeholder: 'Any special delivery instructions?',
-            },
+            notesTitle: 'Notes',
         },
     },
     buttons: {
@@ -87,16 +82,11 @@ const MOCK_CHECKOUT_SUMMARY_DE: CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBl
             title: 'Zusammenfassung',
             subtotalLabel: 'Nettosumme',
             taxLabel: 'MwSt. (23%)',
+            discountLabel: 'Rabatt',
             shippingLabel: 'Versand',
+            freeLabel: 'Kostenlos',
             totalLabel: 'Gesamt',
-        },
-        notes: {
-            title: 'Anmerkungen',
-            comment: { label: 'Kommentar', placeholder: 'Kommentar zur Bestellung...' },
-            specialInstructions: {
-                label: 'Sonderanweisungen',
-                placeholder: 'Besondere Lieferhinweise?',
-            },
+            notesTitle: 'Anmerkungen',
         },
     },
     buttons: {
@@ -146,16 +136,11 @@ const MOCK_CHECKOUT_SUMMARY_PL: CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBl
             title: 'Podsumowanie',
             subtotalLabel: 'Wartość netto',
             taxLabel: 'VAT (23%)',
+            discountLabel: 'Rabat',
             shippingLabel: 'Dostawa',
+            freeLabel: 'Gratis',
             totalLabel: 'Razem',
-        },
-        notes: {
-            title: 'Uwagi',
-            comment: { label: 'Komentarz', placeholder: 'Dodaj komentarz do zamówienia...' },
-            specialInstructions: {
-                label: 'Specjalne instrukcje',
-                placeholder: 'Szczególne instrukcje dostawy?',
-            },
+            notesTitle: 'Uwagi',
         },
     },
     buttons: {

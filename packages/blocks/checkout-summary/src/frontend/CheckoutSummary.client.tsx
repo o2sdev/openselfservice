@@ -13,10 +13,8 @@ import { Image } from '@o2s/ui/components/Image';
 import { Price } from '@o2s/ui/components/Price';
 
 import { Button } from '@o2s/ui/elements/button';
-import { Label } from '@o2s/ui/elements/label';
 import { Separator } from '@o2s/ui/elements/separator';
 import { Skeleton } from '@o2s/ui/elements/skeleton';
-import { Textarea } from '@o2s/ui/elements/textarea';
 import { Typography } from '@o2s/ui/elements/typography';
 
 import { sdk } from '../sdk';
@@ -43,7 +41,6 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
     const [summaryData, setSummaryData] = useState<Checkout.Model.CheckoutSummary | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [notes, setNotes] = useState({ comment: '', specialInstructions: '' });
 
     useEffect(() => {
         const cartId = localStorage.getItem(CART_ID_KEY);
@@ -100,6 +97,7 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
     const paymentMethod = summaryData?.paymentMethod;
     const items = summaryData?.cart.items?.data ?? [];
     const totals = summaryData?.totals;
+    const isFreeShipping = summaryData?.cart.promotions?.some((p) => p.type === 'FREE_SHIPPING');
 
     const formatStreetAddress = (addr: { streetName: string; streetNumber?: string; apartment?: string }) => {
         let street = addr.streetName;
@@ -294,15 +292,27 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                                             <Price price={totals.tax} />
                                         </Typography>
                                     </div>
+                                    {totals.discount.value > 0 && sections.summary.discountLabel && (
+                                        <div className="flex items-center justify-between">
+                                            <Typography variant="small">{sections.summary.discountLabel}</Typography>
+                                            <Typography variant="body" className="text-green-600">
+                                                -<Price price={totals.discount} />
+                                            </Typography>
+                                        </div>
+                                    )}
+                                    {shippingMethod && (
+                                        <div className="flex items-center justify-between">
+                                            <Typography variant="small">{sections.summary.shippingLabel}</Typography>
+                                            <Typography variant="body">
+                                                {isFreeShipping ? (
+                                                    <span className="text-green-600">{sections.summary.freeLabel}</span>
+                                                ) : (
+                                                    <Price price={totals.shipping} />
+                                                )}
+                                            </Typography>
+                                        </div>
+                                    )}
                                 </div>
-                                {totals.shipping.value > 0 && (
-                                    <div className="flex items-center justify-between">
-                                        <Typography variant="small">{sections.summary.shippingLabel}</Typography>
-                                        <Typography variant="body">
-                                            <Price price={totals.shipping} />
-                                        </Typography>
-                                    </div>
-                                )}
                                 <Separator />
                                 <div className="flex items-center justify-between">
                                     <Typography variant="h3">{sections.summary.totalLabel}</Typography>
@@ -313,42 +323,14 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                             </div>
                         ) : null}
 
-                        {sections.notes && (
+                        {sections.summary.notesTitle && summaryData?.notes && (
                             <>
                                 <Separator />
-                                <div className="flex flex-col gap-4">
-                                    <Typography variant="h3">{sections.notes.title}</Typography>
-                                    <div className="flex flex-col gap-4">
-                                        <div className="flex flex-col gap-2">
-                                            <Label htmlFor="comment">{sections.notes.comment.label}</Label>
-                                            <Textarea
-                                                id="comment"
-                                                value={notes.comment}
-                                                onChange={(e) =>
-                                                    setNotes((prev) => ({ ...prev, comment: e.target.value }))
-                                                }
-                                                placeholder={sections.notes.comment.placeholder}
-                                                rows={4}
-                                            />
-                                        </div>
-                                        <div className="flex flex-col gap-2">
-                                            <Label htmlFor="specialInstructions">
-                                                {sections.notes.specialInstructions.label}
-                                            </Label>
-                                            <Textarea
-                                                id="specialInstructions"
-                                                value={notes.specialInstructions}
-                                                onChange={(e) =>
-                                                    setNotes((prev) => ({
-                                                        ...prev,
-                                                        specialInstructions: e.target.value,
-                                                    }))
-                                                }
-                                                placeholder={sections.notes.specialInstructions.placeholder}
-                                                rows={4}
-                                            />
-                                        </div>
-                                    </div>
+                                <div className="flex flex-col gap-2">
+                                    <Typography variant="h3">{sections.summary.notesTitle}</Typography>
+                                    <Typography variant="small" className="text-muted-foreground">
+                                        {summaryData.notes}
+                                    </Typography>
                                 </div>
                             </>
                         )}
