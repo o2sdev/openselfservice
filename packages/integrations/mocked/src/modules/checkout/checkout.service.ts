@@ -179,7 +179,7 @@ export class CheckoutService implements Checkout.Service {
                 // Get payment session for redirect URL
                 return this.paymentsService
                     .getSession({ id: paymentSessionId }, authorization)
-                    .pipe(map((session) => mapPlaceOrderResponse(order, session)));
+                    .pipe(map((session) => mapPlaceOrderResponse(order, session, params.locale)));
             }),
             responseDelay(),
         );

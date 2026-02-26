@@ -41,7 +41,7 @@ const MOCK_CHECKOUT_SUMMARY_EN: CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBl
         },
     },
     buttons: {
-        confirm: { label: 'Place order', path: '/checkout/order-confirmation' },
+        confirm: { label: 'Place order', path: '/order-confirmation' },
         back: { label: 'Back', path: '/checkout/billing-payment' },
     },
     loading: {
@@ -100,7 +100,7 @@ const MOCK_CHECKOUT_SUMMARY_DE: CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBl
         },
     },
     buttons: {
-        confirm: { label: 'Bestellung aufgeben', path: '/kasse/bestellbestaetigung' },
+        confirm: { label: 'Bestellung aufgeben', path: '/bestellbestaetigung' },
         back: { label: 'Zurück', path: '/kasse/rechnung-zahlung' },
     },
     loading: {
@@ -159,7 +159,7 @@ const MOCK_CHECKOUT_SUMMARY_PL: CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBl
         },
     },
     buttons: {
-        confirm: { label: 'Złóż zamówienie', path: '/zamowienie/potwierdzenie' },
+        confirm: { label: 'Złóż zamówienie', path: '/potwierdzenie-zamowienia' },
         back: { label: 'Wstecz', path: '/zamowienie/platnosc' },
     },
     loading: {

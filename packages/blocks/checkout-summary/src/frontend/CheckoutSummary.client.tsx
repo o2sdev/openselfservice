@@ -1,7 +1,6 @@
 'use client';
 
 import { createNavigation } from 'next-intl/navigation';
-import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 import { Checkout } from '@o2s/framework/modules';
@@ -40,7 +39,6 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
 }) => {
     const { Link: LinkComponent } = createNavigation(routing);
     const { toast } = useToast();
-    const router = useRouter();
 
     const [summaryData, setSummaryData] = useState<Checkout.Model.CheckoutSummary | null>(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -75,11 +73,12 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
         setIsSubmitting(true);
         try {
             const result = await sdk.checkout.placeOrder(cartId, {}, { 'x-locale': locale }, accessToken);
-            if (result.paymentRedirectUrl) {
-                window.location.href = result.paymentRedirectUrl;
+
+            if (result.order?.id) {
+                const redirectUrl = result.paymentRedirectUrl || `${buttons.confirm.path}/${result.order.id}`;
+                window.location.href = redirectUrl;
                 return;
             }
-            router.push(buttons.confirm.path);
         } catch (error) {
             toast({
                 variant: 'destructive',

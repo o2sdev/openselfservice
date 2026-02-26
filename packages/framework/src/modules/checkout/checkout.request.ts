@@ -44,6 +44,7 @@ export class GetCheckoutSummaryParams {
 
 export class PlaceOrderParams {
     cartId!: string;
+    locale?: string; // From x-locale header
 }
 
 export class PlaceOrderBody {

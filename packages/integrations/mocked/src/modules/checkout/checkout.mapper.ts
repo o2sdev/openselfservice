@@ -79,11 +79,24 @@ export function mapCheckoutSummary(
 
 export function mapPlaceOrderResponse(
     order: Orders.Model.Order,
-    paymentSession?: Payments.Model.PaymentSession,
+    _paymentSession?: Payments.Model.PaymentSession,
+    locale?: string,
 ): Checkout.Model.PlaceOrderResponse {
+    // Localized order confirmation paths matching page definitions
+    const orderConfirmationPaths: Record<string, string> = {
+        en: '/order-confirmation',
+        de: '/bestellbestaetigung',
+        pl: '/potwierdzenie-zamowienia',
+    };
+
+    // Normalize locale (e.g., 'en-US' -> 'en', 'pl-PL' -> 'pl')
+    const normalizedLocale: string = (locale || 'en').toLowerCase().split('-')[0] || 'en';
+    const basePath = orderConfirmationPaths[normalizedLocale] || orderConfirmationPaths.en;
+
     return {
         order,
-        paymentRedirectUrl: paymentSession?.redirectUrl,
+        // For mocked integration, always redirect to localized order-confirmation page
+        paymentRedirectUrl: `${basePath}/${order.id}`,
     };
 }
 
