@@ -23,6 +23,9 @@ export interface CheckoutShippingAddressSummaryLabels {
     subtotalLabel: string;
     taxLabel: string;
     totalLabel: string;
+    discountLabel?: string;
+    shippingLabel?: string;
+    freeLabel?: string;
 }
 
 export class CheckoutShippingAddressBlock extends ApiModels.Block.Block {

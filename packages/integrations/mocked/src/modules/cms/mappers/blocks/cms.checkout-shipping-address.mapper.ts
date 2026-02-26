@@ -2,7 +2,7 @@ import { CMS } from '@o2s/framework/modules';
 
 const MOCK_CHECKOUT_SHIPPING_ADDRESS_EN: CMS.Model.CheckoutShippingAddressBlock.CheckoutShippingAddressBlock = {
     id: 'checkout-shipping-address-1',
-    title: 'Shipping address',
+    title: 'Shipping',
     subtitle: 'Select shipping method and delivery address',
     fields: {
         sameAsBillingAddress: {
@@ -59,6 +59,9 @@ const MOCK_CHECKOUT_SHIPPING_ADDRESS_EN: CMS.Model.CheckoutShippingAddressBlock.
         subtotalLabel: 'Subtotal',
         taxLabel: 'VAT (23%)',
         totalLabel: 'Total',
+        discountLabel: 'Discount',
+        shippingLabel: 'Shipping',
+        freeLabel: 'Free',
     },
     stepIndicator: {
         steps: ['Company details', 'Delivery', 'Payment', 'Summary'],
@@ -68,7 +71,7 @@ const MOCK_CHECKOUT_SHIPPING_ADDRESS_EN: CMS.Model.CheckoutShippingAddressBlock.
 
 const MOCK_CHECKOUT_SHIPPING_ADDRESS_DE: CMS.Model.CheckoutShippingAddressBlock.CheckoutShippingAddressBlock = {
     id: 'checkout-shipping-address-1',
-    title: 'Lieferadresse',
+    title: 'Lieferung',
     subtitle: 'Wählen Sie Versandart und Lieferadresse',
     fields: {
         sameAsBillingAddress: {
@@ -125,6 +128,9 @@ const MOCK_CHECKOUT_SHIPPING_ADDRESS_DE: CMS.Model.CheckoutShippingAddressBlock.
         subtotalLabel: 'Nettosumme',
         taxLabel: 'MwSt. (23%)',
         totalLabel: 'Gesamt',
+        discountLabel: 'Rabatt',
+        shippingLabel: 'Versand',
+        freeLabel: 'Kostenlos',
     },
     stepIndicator: {
         steps: ['Firmendaten', 'Lieferung', 'Zahlung', 'Zusammenfassung'],
@@ -134,7 +140,7 @@ const MOCK_CHECKOUT_SHIPPING_ADDRESS_DE: CMS.Model.CheckoutShippingAddressBlock.
 
 const MOCK_CHECKOUT_SHIPPING_ADDRESS_PL: CMS.Model.CheckoutShippingAddressBlock.CheckoutShippingAddressBlock = {
     id: 'checkout-shipping-address-1',
-    title: 'Adres dostawy',
+    title: 'Dostawa',
     subtitle: 'Wybierz metodę dostawy i adres',
     fields: {
         sameAsBillingAddress: {
@@ -191,6 +197,9 @@ const MOCK_CHECKOUT_SHIPPING_ADDRESS_PL: CMS.Model.CheckoutShippingAddressBlock.
         subtotalLabel: 'Wartość netto',
         taxLabel: 'VAT (23%)',
         totalLabel: 'Razem',
+        discountLabel: 'Rabat',
+        shippingLabel: 'Dostawa',
+        freeLabel: 'Gratis',
     },
     stepIndicator: {
         steps: ['Dane firmy', 'Dostawa', 'Płatność', 'Podsumowanie'],

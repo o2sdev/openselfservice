@@ -6,14 +6,13 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { boolean as YupBoolean, object as YupObject, string as YupString } from 'yup';
 
-import { Models, Orders } from '@o2s/framework/modules';
+import { Carts, Models, Orders } from '@o2s/framework/modules';
 
 import { CartSummary } from '@o2s/ui/components/Cart/CartSummary';
 import { AddressFields } from '@o2s/ui/components/Checkout/AddressFields';
 import { StepIndicator } from '@o2s/ui/components/Checkout/StepIndicator';
 import { Price } from '@o2s/ui/components/Price';
 
-import { Button } from '@o2s/ui/elements/button';
 import { Checkbox } from '@o2s/ui/elements/checkbox';
 import { Label } from '@o2s/ui/elements/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@o2s/ui/elements/select';
@@ -26,6 +25,7 @@ import { sdk } from '../sdk';
 import { CheckoutShippingAddressPureProps } from './CheckoutShippingAddress.types';
 
 const CART_ID_KEY = 'cartId';
+const FORM_ID = 'checkout-shipping-form';
 
 export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddressPureProps>> = ({
     locale,
@@ -46,9 +46,15 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
         subtotal: Models.Price.Price;
         tax: Models.Price.Price;
         total: Models.Price.Price;
+        discountTotal?: Models.Price.Price;
     } | null>(null);
     const [shippingOptions, setShippingOptions] = useState<Orders.Model.ShippingMethod[]>([]);
+    const [cartShippingMethod, setCartShippingMethod] = useState<
+        { name: string; total: Models.Price.Price } | undefined
+    >(undefined);
+    const [cartPromotions, setCartPromotions] = useState<Carts.Model.Promotion[] | undefined>(undefined);
     const [isLoading, setIsLoading] = useState(false);
+    const [isFormSubmitting, setIsFormSubmitting] = useState(false);
     const [initialFormValues, setInitialFormValues] = useState({
         streetName: '',
         streetNumber: '',
@@ -76,9 +82,17 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                         subtotal: cart.subtotal,
                         tax: cart.taxTotal,
                         total: cart.total,
+                        discountTotal: cart.discountTotal,
                     });
                 }
                 setShippingOptions(options.data ?? []);
+                setCartPromotions(cart.promotions);
+                if (cart.shippingMethod) {
+                    setCartShippingMethod({
+                        name: cart.shippingMethod.name,
+                        total: cart.shippingMethod.total ?? { value: 0, currency: cart.currency },
+                    });
+                }
                 setInitialFormValues((prev) => ({
                     ...prev,
                     ...(cart.shippingAddress
@@ -158,6 +172,7 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                         enableReinitialize
                         validationSchema={validationSchema}
                         onSubmit={async (values, { setSubmitting }) => {
+                            setIsFormSubmitting(true);
                             const cartId = localStorage.getItem(CART_ID_KEY);
                             if (cartId) {
                                 try {
@@ -178,16 +193,27 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                                             accessToken,
                                         );
                                     }
+                                    const selectedOption = shippingOptions.find((o) => o.id === values.shippingMethod);
                                     await sdk.checkout.setShippingMethod(
                                         cartId,
                                         { shippingOptionId: values.shippingMethod },
                                         { 'x-locale': locale },
                                         accessToken,
                                     );
+                                    if (selectedOption) {
+                                        setCartShippingMethod({
+                                            name: selectedOption.name,
+                                            total: selectedOption.total ?? {
+                                                value: 0,
+                                                currency: 'EUR' as Models.Price.Currency,
+                                            },
+                                        });
+                                    }
                                 } catch {
                                     // proceed to next step
                                 } finally {
                                     setSubmitting(false);
+                                    setIsFormSubmitting(false);
                                 }
                             }
                             router.push(buttons.next.path);
@@ -196,8 +222,8 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                         validateOnMount={false}
                         validateOnChange={false}
                     >
-                        {({ values, setFieldValue, isSubmitting }) => (
-                            <Form className="w-full flex flex-col gap-6">
+                        {({ values, setFieldValue }) => (
+                            <Form id={FORM_ID} className="w-full flex flex-col gap-6">
                                 <Separator />
 
                                 <div className="flex flex-col gap-4">
@@ -277,17 +303,6 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                                         )}
                                     </Field>
                                 </div>
-
-                                <Separator />
-
-                                <div className="flex flex-col sm:flex-row gap-4 justify-between">
-                                    <Button asChild variant="outline" type="button">
-                                        <LinkComponent href={buttons.back.path}>{buttons.back.label}</LinkComponent>
-                                    </Button>
-                                    <Button type="submit" variant="default" disabled={isSubmitting}>
-                                        {buttons.next.label}
-                                    </Button>
-                                </div>
                             </Form>
                         )}
                     </Formik>
@@ -306,8 +321,20 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                             subtotal={totals.subtotal}
                             tax={totals.tax}
                             total={totals.total}
+                            discountTotal={totals.discountTotal}
+                            shippingMethod={cartShippingMethod}
+                            promotions={cartPromotions}
                             labels={summaryLabels}
                             LinkComponent={LinkComponent}
+                            primaryButton={{
+                                label: buttons.next.label,
+                                disabled: isFormSubmitting,
+                                action: { type: 'submit', form: FORM_ID },
+                            }}
+                            secondaryButton={{
+                                label: buttons.back.label,
+                                action: { type: 'link', url: buttons.back.path },
+                            }}
                         />
                     ) : null}
                 </div>
