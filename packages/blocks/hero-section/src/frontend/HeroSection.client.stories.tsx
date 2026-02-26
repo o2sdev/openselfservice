@@ -1,10 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
+import readme from '../../README.md?raw';
+
 import { HeroSectionPure } from './HeroSection.client';
 
 const meta = {
     title: 'Blocks/HeroSection',
     component: HeroSectionPure,
+    tags: ['autodocs'],
+    parameters: { readme },
 } satisfies Meta<typeof HeroSectionPure>;
 
 export default meta;

@@ -1,10 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
+import readme from '../../README.md?raw';
+
 import { MediaSectionPure } from './MediaSection.client';
 
 const meta = {
     title: 'Blocks/MediaSection',
     component: MediaSectionPure,
+    tags: ['autodocs'],
+    parameters: { readme },
 } satisfies Meta<typeof MediaSectionPure>;
 
 export default meta;

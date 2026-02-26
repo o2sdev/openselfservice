@@ -1,10 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
+import readme from '../../README.md?raw';
+
 import { RecommendedProductsPure } from './RecommendedProducts.client';
 
 const meta = {
     title: 'Blocks/RecommendedProducts',
     component: RecommendedProductsPure,
+    tags: ['autodocs'],
+    parameters: { readme },
 } satisfies Meta<typeof RecommendedProductsPure>;
 
 export default meta;

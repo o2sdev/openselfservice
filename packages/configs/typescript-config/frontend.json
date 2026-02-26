@@ -7,6 +7,9 @@
                 "name": "next"
             }
         ],
+        "types": [
+            "vite/client"
+        ],
         "module": "ESNext",
         "moduleResolution": "Bundler",
         "allowJs": true,

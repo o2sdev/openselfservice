@@ -1,10 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
+import readme from '../../README.md?raw';
+
 import { FeatureSectionGridPure } from './FeatureSectionGrid.client';
 
 const meta = {
     title: 'Blocks/FeatureSectionGrid',
     component: FeatureSectionGridPure,
+    tags: ['autodocs'],
+    parameters: { readme },
 } satisfies Meta<typeof FeatureSectionGridPure>;
 
 export default meta;

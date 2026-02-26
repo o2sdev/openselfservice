@@ -1,10 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
+import readme from '../../README.md?raw';
+
 import { NotificationDetailsPure } from './NotificationDetails.client';
 
 const meta = {
     title: 'Blocks/NotificationDetails',
     component: NotificationDetailsPure,
+    tags: ['autodocs'],
+    parameters: { readme },
 } satisfies Meta<typeof NotificationDetailsPure>;
 
 export default meta;

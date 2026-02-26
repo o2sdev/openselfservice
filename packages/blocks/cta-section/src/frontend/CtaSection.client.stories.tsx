@@ -1,10 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
+import readme from '../../README.md?raw';
+
 import { CtaSectionPure } from './CtaSection.client';
 
 const meta = {
     title: 'Blocks/CtaSection',
     component: CtaSectionPure,
+    tags: ['autodocs'],
+    parameters: { readme },
 } satisfies Meta<typeof CtaSectionPure>;
 
 export default meta;

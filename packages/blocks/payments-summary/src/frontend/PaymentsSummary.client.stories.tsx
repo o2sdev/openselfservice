@@ -1,10 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
+import readme from '../../README.md?raw';
+
 import { PaymentsSummaryPure } from './PaymentsSummary.client';
 
 const meta = {
     title: 'Blocks/PaymentsSummary',
     component: PaymentsSummaryPure,
+    tags: ['autodocs'],
+    parameters: { readme },
 } satisfies Meta<typeof PaymentsSummaryPure>;
 
 export default meta;

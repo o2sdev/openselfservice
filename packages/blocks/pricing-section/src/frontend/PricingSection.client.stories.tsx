@@ -1,10 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
+import readme from '../../README.md?raw';
+
 import { PricingSectionPure } from './PricingSection.client';
 
 const meta = {
     title: 'Blocks/PricingSection',
     component: PricingSectionPure,
+    tags: ['autodocs'],
+    parameters: { readme },
 } satisfies Meta<typeof PricingSectionPure>;
 
 export default meta;
