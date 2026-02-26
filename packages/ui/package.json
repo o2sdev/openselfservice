@@ -34,7 +34,7 @@
         "@o2s/typescript-config": "*",
         "@tailwindcss/postcss": "^4.2.1",
         "@trivago/prettier-plugin-sort-imports": "^6.0.2",
-        "@turbo/gen": "^2.8.10",
+        "@turbo/gen": "^2.8.11",
         "@types/eslint": "^9.6.1",
         "@types/node": "^24.10.14",
         "@types/throttle-debounce": "^5.0.2",
