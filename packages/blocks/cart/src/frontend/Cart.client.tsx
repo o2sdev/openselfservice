@@ -248,7 +248,7 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
                 </div>
 
                 {/* Cart Summary + Promo Code */}
-                <div className="lg:col-span-1 flex flex-col gap-4">
+                <div className="lg:col-span-1 flex flex-col-reverse lg:flex-col gap-4">
                     <CartSummary
                         subtotal={cartTotals.subtotal}
                         tax={cartTotals.tax}
@@ -258,20 +258,20 @@ export const CartPure: React.FC<Readonly<CartPureProps>> = ({
                         promotions={cartPromotions}
                         labels={summaryLabels}
                         LinkComponent={LinkComponent}
-                        checkoutButton={
+                        primaryButton={
                             checkoutButton
                                 ? {
-                                      url: checkoutButton.path,
                                       label: checkoutButton.label,
                                       icon: checkoutButton.icon,
+                                      action: { type: 'link', url: checkoutButton.path },
                                   }
                                 : undefined
                         }
-                        continueShopping={
+                        secondaryButton={
                             continueShopping
                                 ? {
-                                      url: continueShopping.path,
                                       label: continueShopping.label,
+                                      action: { type: 'link', url: continueShopping.path },
                                   }
                                 : undefined
                         }
