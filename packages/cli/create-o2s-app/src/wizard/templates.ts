@@ -1,4 +1,3 @@
-import { MOCKED_INTEGRATIONS } from '../constants';
 import { BlockInfo, IntegrationInfo, TemplateType } from '../types';
 
 export interface TemplateDefinition {
@@ -47,8 +46,6 @@ export const filterBlocksByTemplate = (template: TemplateType, allBlocks: BlockI
 
 // Filter discovered integrations by template category
 // For SSP/DXP demo templates, only mocked integrations are pre-selected.
-// Real integrations (zendesk, contentful, etc.) require env configuration
-// and are only available via Custom template.
 export const filterIntegrationsByTemplate = (template: TemplateType, allIntegrations: IntegrationInfo[]): string[] => {
     const templateDef = TEMPLATES[template];
 
@@ -59,8 +56,6 @@ export const filterIntegrationsByTemplate = (template: TemplateType, allIntegrat
     }
 
     return allIntegrations
-        .filter(
-            (integration) => integration.category.includes(category) && MOCKED_INTEGRATIONS.includes(integration.name),
-        )
+        .filter((integration) => integration.category.includes(category))
         .map((integration) => integration.name);
 };

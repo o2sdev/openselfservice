@@ -26,9 +26,6 @@ export const ALWAYS_REMOVE_DIRS: string[] = [
 
 export const ALWAYS_REMOVE_FILES: string[] = ['vercel.json'];
 
-// All mocked integration variants (excluded from env prompts and env generation)
-export const MOCKED_INTEGRATIONS = ['mocked', 'mocked-dxp'];
-
 // Static mapping: which framework modules each integration covers
 // Phase 3 will migrate this to dynamic discovery from integration package.json
 export const INTEGRATION_MODULES: Record<string, string[]> = {

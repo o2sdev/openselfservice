@@ -1,4 +1,4 @@
-import { INTEGRATION_ENV_VARS, MOCKED_INTEGRATIONS } from '../constants';
+import { INTEGRATION_ENV_VARS } from '../constants';
 import fs from 'fs-extra';
 import path from 'path';
 
@@ -30,9 +30,7 @@ export const generateEnvFiles = async (
     envVars: Record<string, string>,
     selectedIntegrations: string[],
 ): Promise<void> => {
-    const realIntegrations = selectedIntegrations.filter(
-        (integration) => !MOCKED_INTEGRATIONS.includes(integration) && INTEGRATION_ENV_VARS[integration],
-    );
+    const realIntegrations = selectedIntegrations.filter((integration) => !!INTEGRATION_ENV_VARS[integration]);
 
     if (realIntegrations.length === 0) {
         return;

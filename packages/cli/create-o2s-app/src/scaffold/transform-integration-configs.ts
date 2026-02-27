@@ -1,4 +1,4 @@
-import { INTEGRATION_MODULES, MOCKED_INTEGRATIONS } from '../constants';
+import { INTEGRATION_MODULES } from '../constants';
 import { ConflictResolution } from '../types';
 import * as fs from 'fs-extra';
 import * as path from 'path';
@@ -91,10 +91,11 @@ export const transformIntegrationConfigs = async (
 
     await updateConfigsPackageJson(projectDir, selectedIntegrations);
 
-    // Detect model files that still import mocked but mocked is not in the workspace.
-    // Skip when any mocked variant is selected (mocked covers all, mocked-dxp keeps mocked as dep).
+    // Detect model files that still import mocked but mocked is not selected.
+    // Skip only when 'mocked' (full) is selected — it covers all modules.
+    // 'mocked-dxp' covers only cms/articles/search, so uncovered detection runs normally.
     const uncoveredModules: string[] = [];
-    if (!selectedIntegrations.some((i) => MOCKED_INTEGRATIONS.includes(i))) {
+    if (!selectedIntegrations.includes('mocked')) {
         const files = await fs.readdir(modelsDir);
         for (const file of files) {
             if (file === 'index.ts' || !file.endsWith('.ts')) continue;
