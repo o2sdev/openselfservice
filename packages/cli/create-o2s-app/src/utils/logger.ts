@@ -9,6 +9,7 @@ export const printSummary = (
     blockCount: number,
     integrationCount: number,
     uncoveredModules: string[] = [],
+    skipInstall = false,
 ): void => {
     const templateName = TEMPLATES[template].name;
 
@@ -42,6 +43,10 @@ export const printSummary = (
         console.log(kleur.bold('Next steps:'));
         console.log();
         console.log(`  cd ${targetDir}`);
+        if (skipInstall) {
+            console.log(kleur.dim('  # Install dependencies (npm install was skipped)'));
+            console.log('  npm install');
+        }
         console.log('  npm run dev');
     }
 

@@ -14,9 +14,10 @@ program
     .description('Create a new O2S project with interactive setup wizard')
     .argument('[name]', 'Name of the new project')
     .option('--directory [directory]', 'Specify the destination directory')
-    .option('--template [template]', 'Template: ssp | dxp | custom')
+    .option('--template [template]', 'Template: o2s | dxp | custom')
     .option('--blocks [blocks]', 'Comma-separated list of block names (for non-interactive mode)')
     .option('--integrations [integrations]', 'Comma-separated list of integration names (for non-interactive mode)')
+    .option('--skip-install', 'Skip npm install step')
     .action(async (name, options) => {
         telemetry.sendEvent('o2s', 'create-o2s-app', 'create-project');
         await telemetry.flushEvents();
@@ -35,7 +36,7 @@ program
             const answers = await runWizard(tempDir, name, cliTemplate, cliBlocks, cliIntegrations);
 
             // Step 3: Scaffold project
-            const { targetDir, uncoveredModules } = await scaffold(tempDir, answers);
+            const { targetDir, uncoveredModules } = await scaffold(tempDir, answers, options.skipInstall);
 
             // Step 4: Print summary
             printSummary(
@@ -44,6 +45,7 @@ program
                 answers.selectedBlocks.length,
                 answers.selectedIntegrations.length,
                 uncoveredModules,
+                options.skipInstall,
             );
         } catch (error) {
             if (tempDir) {
@@ -66,11 +68,11 @@ program.parse(process.argv);
 
 const parseTemplate = (value: unknown): TemplateType | undefined => {
     if (!value || typeof value !== 'string') return undefined;
-    const valid: TemplateType[] = ['ssp', 'dxp', 'custom'];
+    const valid: TemplateType[] = ['o2s', 'dxp', 'custom'];
     if (valid.includes(value as TemplateType)) {
         return value as TemplateType;
     }
-    console.warn(`Warning: Unknown template "${value}". Valid options: ssp, dxp, custom`);
+    console.warn(`Warning: Unknown template "${value}". Valid options: o2s, dxp, custom`);
     return undefined;
 };
 

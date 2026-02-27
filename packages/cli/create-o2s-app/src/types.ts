@@ -1,4 +1,4 @@
-export type TemplateType = 'ssp' | 'dxp' | 'custom';
+export type TemplateType = 'o2s' | 'dxp' | 'custom';
 
 export interface BlockInfo {
     name: string;

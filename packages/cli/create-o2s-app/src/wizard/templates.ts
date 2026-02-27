@@ -3,15 +3,15 @@ import { BlockInfo, IntegrationInfo, TemplateType } from '../types';
 export interface TemplateDefinition {
     name: string;
     description: string;
-    category: 'ssp' | 'dxp' | null;
+    category: 'o2s' | 'dxp' | null;
 }
 
 export const TEMPLATES: Record<TemplateType, TemplateDefinition> = {
-    ssp: {
+    o2s: {
         name: 'Self Service Portal',
         description:
             'Demo — best way to see the full Self Service Portal flow. Customer support: tickets, orders, invoices, notifications',
-        category: 'ssp',
+        category: 'o2s',
     },
     dxp: {
         name: 'Digital Experience Platform (DXP)',
@@ -45,7 +45,7 @@ export const filterBlocksByTemplate = (template: TemplateType, allBlocks: BlockI
 };
 
 // Filter discovered integrations by template category
-// For SSP/DXP demo templates, only mocked integrations are pre-selected.
+// For O2S/DXP demo templates, only mocked integrations are pre-selected.
 export const filterIntegrationsByTemplate = (template: TemplateType, allIntegrations: IntegrationInfo[]): string[] => {
     const templateDef = TEMPLATES[template];
 

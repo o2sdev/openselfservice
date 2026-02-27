@@ -1,7 +1,7 @@
 import { WizardAnswers } from '../types';
 import { cleanupProject } from './cleanup';
 import { generateEnvFiles } from './generate-env';
-import { installDependencies } from './install';
+import { installDependencies, removePackageLock } from './install';
 import { warnUnconfiguredModules } from './transform-app-config';
 import { transformAppModule } from './transform-app-module';
 import { transformAppsPackageJson } from './transform-apps-package-json';
@@ -15,6 +15,7 @@ import * as path from 'path';
 export const scaffold = async (
     tempDir: string,
     answers: WizardAnswers,
+    skipInstall = false,
 ): Promise<{ targetDir: string; uncoveredModules: string[] }> => {
     const targetDir = path.resolve(answers.projectName);
 
@@ -52,8 +53,11 @@ export const scaffold = async (
     await generateEnvFiles(targetDir, envVars, selectedIntegrations);
     warnUnconfiguredModules(uncoveredModules);
 
-    // Step 6: Fix package-lock.json and install dependencies
-    await installDependencies(targetDir);
+    // Step 6: Remove stale package-lock.json (always) and install dependencies
+    await removePackageLock(targetDir);
+    if (!skipInstall) {
+        await installDependencies(targetDir);
+    }
 
     return { targetDir, uncoveredModules };
 };
