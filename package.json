@@ -65,7 +65,7 @@
         "fs-extra": "^11.3.3",
         "husky": "^9.1.7",
         "lint-staged": "^16.2.7",
-        "npm-check-updates": "^19.5.0",
+        "npm-check-updates": "^19.6.2",
         "playwright": "^1.58.2",
         "prettier": "^3.8.1",
         "rimraf": "^6.1.3",
