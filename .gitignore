@@ -50,6 +50,7 @@ dist
 
 # AI rules
 .claude
+.ai
 AGENTS.md
 CLAUDE.md
 agent-os
