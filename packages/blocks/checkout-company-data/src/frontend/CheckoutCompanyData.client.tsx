@@ -2,11 +2,12 @@
 
 import { ErrorMessage, Field, FieldProps, Form, Formik } from 'formik';
 import { createNavigation } from 'next-intl/navigation';
-import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { object as YupObject, string as YupString } from 'yup';
 
 import { Carts, Models } from '@o2s/framework/modules';
+
+import { useToast } from '@o2s/ui/hooks/use-toast';
 
 import { CartSummary } from '@o2s/ui/components/Cart/CartSummary';
 import { AddressFields } from '@o2s/ui/components/Checkout/AddressFields';
@@ -39,9 +40,11 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
     errors,
     summaryLabels,
     billingInfoNote,
+    cartPath,
 }) => {
-    const { Link: LinkComponent } = createNavigation(routing);
+    const { Link: LinkComponent, useRouter } = createNavigation(routing);
     const router = useRouter();
+    const { toast } = useToast();
 
     const [totals, setTotals] = useState<{
         subtotal: Models.Price.Price;
@@ -66,7 +69,11 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
 
     useEffect(() => {
         const cartId = localStorage.getItem(CART_ID_KEY);
-        if (!cartId) return;
+        if (!cartId) {
+            toast({ description: errors?.cartNotFound, variant: 'destructive' });
+            router.replace(cartPath ?? '/');
+            return;
+        }
 
         setIsTotalsLoading(true);
         (async () => {
@@ -95,12 +102,18 @@ export const CheckoutCompanyDataPure: React.FC<Readonly<CheckoutCompanyDataPureP
                         notes: cart.notes ?? '',
                     });
                 }
-            } catch {
-                // totals remain null — sidebar will not show amounts
+            } catch (error) {
+                const status = (error as { status?: number }).status;
+                if (status === 401 || status === 404) {
+                    localStorage.removeItem(CART_ID_KEY);
+                    toast({ description: errors?.cartNotFound, variant: 'destructive' });
+                    router.replace(cartPath ?? '/');
+                }
             } finally {
                 setIsTotalsLoading(false);
             }
         })();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [locale, accessToken]);
 
     if (!title || !fields || !buttons || !summaryLabels || !errors) {

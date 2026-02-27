@@ -32,10 +32,13 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
     stepIndicator,
     sections,
     buttons,
+    errors,
+    cartPath,
     loading: loadingLabels,
     placeholders,
 }) => {
-    const { Link: LinkComponent } = createNavigation(routing);
+    const { Link: LinkComponent, useRouter } = createNavigation(routing);
+    const router = useRouter();
     const { toast } = useToast();
 
     const [summaryData, setSummaryData] = useState<Checkout.Model.CheckoutSummary | null>(null);
@@ -44,19 +47,29 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
 
     useEffect(() => {
         const cartId = localStorage.getItem(CART_ID_KEY);
-        if (!cartId) return;
+        if (!cartId) {
+            toast({ description: errors?.cartNotFound, variant: 'destructive' });
+            router.replace(cartPath ?? '/');
+            return;
+        }
 
         setIsLoading(true);
         (async () => {
             try {
                 const data = await sdk.checkout.getCheckoutSummary(cartId, { 'x-locale': locale }, accessToken);
                 setSummaryData(data);
-            } catch {
-                // show empty state
+            } catch (error) {
+                const status = (error as { status?: number }).status;
+                if (status === 401 || status === 404) {
+                    localStorage.removeItem(CART_ID_KEY);
+                    toast({ description: errors?.cartNotFound, variant: 'destructive' });
+                    router.replace(cartPath ?? '/');
+                }
             } finally {
                 setIsLoading(false);
             }
         })();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [locale, accessToken]);
 
     if (!title || !sections || !buttons) {
@@ -65,7 +78,11 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
 
     const handleConfirm = async () => {
         const cartId = localStorage.getItem(CART_ID_KEY);
-        if (!cartId) return;
+        if (!cartId) {
+            toast({ description: errors?.cartNotFound, variant: 'destructive' });
+            router.replace(cartPath ?? '/');
+            return;
+        }
 
         setIsSubmitting(true);
         try {

@@ -96,6 +96,7 @@ export class UpdateCartAddressesParams {
 }
 
 export class UpdateCartAddressesBody {
+    sameAsBillingAddress?: boolean; // Copy billing address as shipping address
     shippingAddressId?: string; // Use saved address (authenticated users only)
     shippingAddress?: Address.Address; // Or provide new address
     billingAddressId?: string; // Use saved address (authenticated users only)

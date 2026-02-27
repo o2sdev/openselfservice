@@ -2,11 +2,12 @@
 
 import { ErrorMessage, Field, FieldProps, Form, Formik } from 'formik';
 import { createNavigation } from 'next-intl/navigation';
-import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { boolean as YupBoolean, object as YupObject, string as YupString } from 'yup';
 
 import { Carts, Models, Orders } from '@o2s/framework/modules';
+
+import { useToast } from '@o2s/ui/hooks/use-toast';
 
 import { CartSummary } from '@o2s/ui/components/Cart/CartSummary';
 import { AddressFields } from '@o2s/ui/components/Checkout/AddressFields';
@@ -38,9 +39,11 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
     buttons,
     errors,
     summaryLabels,
+    cartPath,
 }) => {
-    const { Link: LinkComponent } = createNavigation(routing);
+    const { Link: LinkComponent, useRouter } = createNavigation(routing);
     const router = useRouter();
+    const { toast } = useToast();
 
     const [totals, setTotals] = useState<{
         subtotal: Models.Price.Price;
@@ -68,7 +71,11 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
 
     useEffect(() => {
         const cartId = localStorage.getItem(CART_ID_KEY);
-        if (!cartId) return;
+        if (!cartId) {
+            toast({ description: errors?.cartNotFound, variant: 'destructive' });
+            router.replace(cartPath ?? '/');
+            return;
+        }
 
         setIsLoading(true);
         (async () => {
@@ -95,6 +102,7 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                 }
                 setInitialFormValues((prev) => ({
                     ...prev,
+                    sameAsBillingAddress: cart.metadata?.sameAsBillingAddress === true,
                     ...(cart.shippingAddress
                         ? {
                               streetName: cart.shippingAddress.streetName ?? '',
@@ -107,12 +115,18 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                         : {}),
                     ...(cart.shippingMethod ? { shippingMethod: cart.shippingMethod.id } : {}),
                 }));
-            } catch {
-                // proceed with empty state
+            } catch (error) {
+                const status = (error as { status?: number }).status;
+                if (status === 401 || status === 404) {
+                    localStorage.removeItem(CART_ID_KEY);
+                    toast({ description: errors?.cartNotFound, variant: 'destructive' });
+                    router.replace(cartPath ?? '/');
+                }
             } finally {
                 setIsLoading(false);
             }
         })();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [locale, accessToken]);
 
     if (!title || !fields || !buttons || !summaryLabels || !errors) {
@@ -176,10 +190,11 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                             const cartId = localStorage.getItem(CART_ID_KEY);
                             if (cartId) {
                                 try {
-                                    if (!values.sameAsBillingAddress) {
-                                        await sdk.checkout.setAddresses(
-                                            cartId,
-                                            {
+                                    await sdk.checkout.setAddresses(
+                                        cartId,
+                                        {
+                                            sameAsBillingAddress: values.sameAsBillingAddress,
+                                            ...(!values.sameAsBillingAddress && {
                                                 shippingAddress: {
                                                     streetName: values.streetName,
                                                     streetNumber: values.streetNumber || undefined,
@@ -188,11 +203,11 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                                                     postalCode: values.postalCode,
                                                     country: values.country,
                                                 },
-                                            },
-                                            { 'x-locale': locale },
-                                            accessToken,
-                                        );
-                                    }
+                                            }),
+                                        },
+                                        { 'x-locale': locale },
+                                        accessToken,
+                                    );
                                     const selectedOption = shippingOptions.find((o) => o.id === values.shippingMethod);
                                     await sdk.checkout.setShippingMethod(
                                         cartId,
@@ -233,9 +248,18 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                                                 <Checkbox
                                                     id="sameAsBillingAddress"
                                                     checked={field.value}
-                                                    onCheckedChange={(checked) =>
-                                                        setFieldValue('sameAsBillingAddress', checked === true)
-                                                    }
+                                                    onCheckedChange={(checked) => {
+                                                        const isChecked = checked === true;
+                                                        setFieldValue('sameAsBillingAddress', isChecked);
+                                                        if (!isChecked) {
+                                                            setFieldValue('streetName', '');
+                                                            setFieldValue('streetNumber', '');
+                                                            setFieldValue('apartment', '');
+                                                            setFieldValue('city', '');
+                                                            setFieldValue('postalCode', '');
+                                                            setFieldValue('country', '');
+                                                        }
+                                                    }}
                                                 />
                                                 <Label htmlFor="sameAsBillingAddress" className="cursor-pointer">
                                                     {fields.sameAsBillingAddress.label}

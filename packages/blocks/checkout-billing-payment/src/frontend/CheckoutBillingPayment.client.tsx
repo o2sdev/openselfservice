@@ -2,11 +2,12 @@
 
 import { ErrorMessage, Field, FieldProps, Form, Formik } from 'formik';
 import { createNavigation } from 'next-intl/navigation';
-import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { object as YupObject, string as YupString } from 'yup';
 
 import { Carts, Models, Payments } from '@o2s/framework/modules';
+
+import { useToast } from '@o2s/ui/hooks/use-toast';
 
 import { CartSummary } from '@o2s/ui/components/Cart/CartSummary';
 import { StepIndicator } from '@o2s/ui/components/Checkout/StepIndicator';
@@ -34,9 +35,11 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
     buttons,
     errors,
     summaryLabels,
+    cartPath,
 }) => {
-    const { Link: LinkComponent } = createNavigation(routing);
+    const { Link: LinkComponent, useRouter } = createNavigation(routing);
     const router = useRouter();
+    const { toast } = useToast();
 
     const [totals, setTotals] = useState<{
         subtotal: Models.Price.Price;
@@ -57,7 +60,11 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
 
     useEffect(() => {
         const cartId = localStorage.getItem(CART_ID_KEY);
-        if (!cartId) return;
+        if (!cartId) {
+            toast({ description: errors?.cartNotFound, variant: 'destructive' });
+            router.replace(cartPath ?? '/');
+            return;
+        }
 
         setIsLoading(true);
         (async () => {
@@ -89,12 +96,18 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
                 if (cart.paymentMethod) {
                     setInitialFormValues({ paymentMethod: cart.paymentMethod.id });
                 }
-            } catch {
-                // proceed with empty state
+            } catch (error) {
+                const status = (error as { status?: number }).status;
+                if (status === 401 || status === 404) {
+                    localStorage.removeItem(CART_ID_KEY);
+                    toast({ description: errors?.cartNotFound, variant: 'destructive' });
+                    router.replace(cartPath ?? '/');
+                }
             } finally {
                 setIsLoading(false);
             }
         })();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [locale, accessToken]);
 
     if (!title || !fields || !buttons || !summaryLabels || !errors) {

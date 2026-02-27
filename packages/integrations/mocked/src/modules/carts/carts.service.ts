@@ -432,12 +432,16 @@ export class CartsService implements Carts.Service {
 
         return resolveAddresses$().pipe(
             switchMap(({ shippingAddress, billingAddress }) => {
+                const resolvedShippingAddress =
+                    data.sameAsBillingAddress === true ? existingCart.billingAddress : shippingAddress;
+
                 const updateData: Carts.Request.UpdateCartBody = {
                     notes: data.notes,
                     email: data.email,
                     metadata: {
                         ...existingCart.metadata,
-                        ...(shippingAddress && { shippingAddress }),
+                        sameAsBillingAddress: data.sameAsBillingAddress ?? false,
+                        ...(resolvedShippingAddress && { shippingAddress: resolvedShippingAddress }),
                         ...(billingAddress && { billingAddress }),
                     },
                 };
