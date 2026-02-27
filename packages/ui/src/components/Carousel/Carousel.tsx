@@ -1,7 +1,7 @@
 'use client';
 
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
-import React, { useRef, useState } from 'react';
+import React, { useId, useRef, useState } from 'react';
 import { Swiper as SwiperType } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -14,6 +14,7 @@ import { cn } from '@o2s/ui/lib/utils';
 import { Button } from '@o2s/ui/elements/button';
 
 import { CarouselProps } from './Carousel.types';
+import { useManagedCarouselKeyboard } from './useManagedCarouselKeyboard';
 
 export const Carousel: React.FC<Readonly<CarouselProps>> = ({
     slides,
@@ -23,13 +24,19 @@ export const Carousel: React.FC<Readonly<CarouselProps>> = ({
     modules = [],
     startingSlideIndex = 0,
     noSwipingSelector,
+    keyboardControlMode = 'swiper-native',
+    defaultKeyboardActive = false,
+    keyboardCarouselId,
     labels = {
         previous: 'Previous slide',
         next: 'Next slide',
     },
     ...swiperProps
 }) => {
+    const generatedCarouselId = useId();
+    const carouselId = keyboardCarouselId ?? generatedCarouselId;
     const swiperRef = useRef<SwiperType | null>(null);
+    const [managedSwiper, setManagedSwiper] = useState<SwiperType | null>(null);
 
     const [index, setIndex] = useState(startingSlideIndex);
     const [isEnd, setIsEnd] = useState(false);
@@ -43,14 +50,26 @@ export const Carousel: React.FC<Readonly<CarouselProps>> = ({
         ...modules,
     ];
 
+    const { activateManagedKeyboard: handleActivateManagedKeyboard, keyboardConfig } = useManagedCarouselKeyboard({
+        keyboardControlMode,
+        carouselId,
+        swiper: managedSwiper,
+        defaultKeyboardActive,
+    });
+
     return (
-        <div className="relative">
+        <div
+            className="relative"
+            onFocusCapture={handleActivateManagedKeyboard}
+            onPointerDownCapture={handleActivateManagedKeyboard}
+        >
             <Swiper
                 className={cn('w-full', className)}
                 modules={allModules}
                 {...swiperProps}
                 onBeforeInit={(swiper) => {
                     swiperRef.current = swiper;
+                    setManagedSwiper(swiper);
                 }}
                 onInit={(swiper) => {
                     const loopMode = swiperProps.loop ?? swiper.params.loop ?? false;
@@ -67,7 +86,7 @@ export const Carousel: React.FC<Readonly<CarouselProps>> = ({
                         setIsEnd(swiper.isEnd);
                     }
                 }}
-                keyboard={{ enabled: true, onlyInViewport: true }}
+                keyboard={keyboardConfig}
                 navigation={false}
                 pagination={showPagination ? { clickable: true } : false}
                 initialSlide={startingSlideIndex}

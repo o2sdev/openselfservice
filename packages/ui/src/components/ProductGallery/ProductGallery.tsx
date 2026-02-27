@@ -1,7 +1,7 @@
 'use client';
 
 import { X } from 'lucide-react';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useId, useMemo, useState } from 'react';
 import type { Swiper as SwiperType } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -14,6 +14,9 @@ import { cn } from '@o2s/ui/lib/utils';
 
 import { Image } from '@o2s/ui/components/Image';
 
+import { setActiveCarouselId } from '../Carousel/carouselKeyboardManager';
+import { useManagedCarouselKeyboard } from '../Carousel/useManagedCarouselKeyboard';
+
 import { ProductGalleryProps } from './ProductGallery.types';
 
 export const ProductGallery: React.FC<Readonly<ProductGalleryProps>> = ({
@@ -24,8 +27,14 @@ export const ProductGallery: React.FC<Readonly<ProductGalleryProps>> = ({
     showPagination = false,
     speed = 300,
     shouldPreloadGallery = false,
+    keyboardControlMode = 'managed',
+    defaultKeyboardActive = false,
+    keyboardCarouselId,
     ...swiperProps
 }) => {
+    const generatedCarouselId = useId();
+    const mainCarouselId = keyboardCarouselId ?? `${generatedCarouselId}-main`;
+    const lightboxCarouselId = `${mainCarouselId}-lightbox`;
     const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
     const [mainSwiper, setMainSwiper] = useState<SwiperType | null>(null);
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
@@ -57,7 +66,35 @@ export const ProductGallery: React.FC<Readonly<ProductGalleryProps>> = ({
 
     const handleCloseLightbox = useCallback(() => {
         setIsLightboxOpen(false);
-    }, []);
+        if (keyboardControlMode === 'managed') {
+            setActiveCarouselId(mainCarouselId);
+        }
+    }, [keyboardControlMode, mainCarouselId]);
+
+    const { activateManagedKeyboard: activateMainKeyboard, keyboardConfig } = useManagedCarouselKeyboard({
+        keyboardControlMode,
+        carouselId: mainCarouselId,
+        swiper: mainSwiper,
+        defaultKeyboardActive,
+        shouldEnable: (activeCarouselId) => activeCarouselId === mainCarouselId && !isLightboxOpen,
+    });
+
+    const { activateManagedKeyboard: activateLightboxKeyboard } = useManagedCarouselKeyboard({
+        keyboardControlMode,
+        carouselId: lightboxCarouselId,
+        swiper: lightboxMainSwiper,
+        shouldEnable: (activeCarouselId) => activeCarouselId === lightboxCarouselId && isLightboxOpen,
+    });
+
+    useEffect(() => {
+        if (keyboardControlMode !== 'managed' || !isLightboxOpen) return;
+
+        setActiveCarouselId(lightboxCarouselId);
+    }, [keyboardControlMode, isLightboxOpen, lightboxCarouselId]);
+
+    const handleActivateMainCarousel = activateMainKeyboard;
+
+    const handleActivateLightboxCarousel = activateLightboxKeyboard;
 
     // Handle ESC key to close lightbox
     useEffect(() => {
@@ -87,7 +124,11 @@ export const ProductGallery: React.FC<Readonly<ProductGalleryProps>> = ({
     return (
         <div className={cn('w-full flex flex-col gap-2', className)}>
             {/* Main Gallery */}
-            <div className="group relative">
+            <div
+                className="group relative"
+                onFocusCapture={handleActivateMainCarousel}
+                onPointerDownCapture={handleActivateMainCarousel}
+            >
                 <Swiper
                     className={cn(
                         'w-full rounded-lg overflow-hidden',
@@ -96,7 +137,7 @@ export const ProductGallery: React.FC<Readonly<ProductGalleryProps>> = ({
                             '[&_.swiper-button-next]:opacity-0 [&_.swiper-button-prev]:opacity-0 [&_.swiper-button-next]:transition-opacity [&_.swiper-button-prev]:transition-opacity group-hover:[&_.swiper-button-next]:opacity-100 group-hover:[&_.swiper-button-prev]:opacity-100',
                     )}
                     modules={mainModules}
-                    keyboard={{ enabled: true, onlyInViewport: true }}
+                    keyboard={keyboardConfig}
                     navigation={showNavigation}
                     pagination={showPagination ? { clickable: true } : false}
                     speed={speed}
@@ -167,6 +208,8 @@ export const ProductGallery: React.FC<Readonly<ProductGalleryProps>> = ({
                 <div
                     className="fixed inset-0 z-50 bg-background flex flex-col items-center justify-center"
                     onClick={handleCloseLightbox}
+                    onFocusCapture={handleActivateLightboxCarousel}
+                    onPointerDownCapture={handleActivateLightboxCarousel}
                 >
                     {/* Close Button */}
                     <button
@@ -183,7 +226,7 @@ export const ProductGallery: React.FC<Readonly<ProductGalleryProps>> = ({
                         <Swiper
                             className="w-full"
                             modules={mainModules}
-                            keyboard={{ enabled: true, onlyInViewport: true }}
+                            keyboard={keyboardConfig}
                             navigation={showNavigation}
                             speed={speed}
                             loop={true}

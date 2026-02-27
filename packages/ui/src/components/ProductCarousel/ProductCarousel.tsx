@@ -21,6 +21,9 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({
     carouselConfig,
     linkDetailsLabel,
     carouselClassName,
+    keyboardControlMode,
+    defaultKeyboardActive,
+    keyboardCarouselId,
 }) => {
     if (!products || products.length === 0) {
         return null;
@@ -85,6 +88,9 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({
                         spaceBetween: 24,
                     },
                 }}
+                keyboardControlMode={keyboardControlMode}
+                defaultKeyboardActive={defaultKeyboardActive}
+                keyboardCarouselId={keyboardCarouselId}
                 {...carouselConfig}
             />
         </div>
