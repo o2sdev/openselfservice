@@ -30,6 +30,7 @@ export class CheckoutCompanyDataBlock extends Block.Block {
         required: string;
         invalidTaxId: string;
         invalidPostalCode: string;
+        cartNotFound: string;
     };
     summaryLabels!: {
         title: string;
@@ -42,4 +43,5 @@ export class CheckoutCompanyDataBlock extends Block.Block {
     };
     stepIndicator?: { steps: string[]; currentStep: number };
     billingInfoNote?: { icon?: string; text: string };
+    cartPath?: string;
 }

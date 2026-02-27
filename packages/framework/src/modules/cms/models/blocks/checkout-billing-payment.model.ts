@@ -16,6 +16,7 @@ export class CheckoutBillingPaymentBlock extends Block.Block {
     };
     errors!: {
         required: string;
+        cartNotFound: string;
     };
     summaryLabels!: {
         title: string;
@@ -27,4 +28,5 @@ export class CheckoutBillingPaymentBlock extends Block.Block {
         freeLabel?: string;
     };
     stepIndicator?: { steps: string[]; currentStep: number };
+    cartPath?: string;
 }

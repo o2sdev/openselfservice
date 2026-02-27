@@ -39,6 +39,9 @@ export class CheckoutSummaryBlock extends Block.Block {
         confirm: { label: string; path: string };
         back: { label: string; path: string };
     };
+    errors!: {
+        cartNotFound: string;
+    };
     loading!: {
         confirming: string;
     };
@@ -49,4 +52,5 @@ export class CheckoutSummaryBlock extends Block.Block {
         billingAddress: string;
     };
     stepIndicator?: { steps: string[]; currentStep: number };
+    cartPath?: string;
 }

@@ -35,6 +35,9 @@ const MOCK_CHECKOUT_SUMMARY_EN: CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBl
             notesTitle: 'Notes',
         },
     },
+    errors: {
+        cartNotFound: 'Your cart is no longer available.',
+    },
     buttons: {
         confirm: { label: 'Place order', path: '/order-confirmation' },
         back: { label: 'Back', path: '/checkout/billing-payment' },
@@ -52,6 +55,7 @@ const MOCK_CHECKOUT_SUMMARY_EN: CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBl
         steps: ['Company details', 'Delivery', 'Payment', 'Summary'],
         currentStep: 4,
     },
+    cartPath: '/cart',
 };
 
 const MOCK_CHECKOUT_SUMMARY_DE: CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBlock = {
@@ -89,6 +93,9 @@ const MOCK_CHECKOUT_SUMMARY_DE: CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBl
             notesTitle: 'Anmerkungen',
         },
     },
+    errors: {
+        cartNotFound: 'Ihr Warenkorb ist nicht mehr verfügbar.',
+    },
     buttons: {
         confirm: { label: 'Bestellung aufgeben', path: '/bestellbestaetigung' },
         back: { label: 'Zurück', path: '/kasse/rechnung-zahlung' },
@@ -106,6 +113,7 @@ const MOCK_CHECKOUT_SUMMARY_DE: CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBl
         steps: ['Firmendaten', 'Lieferung', 'Zahlung', 'Zusammenfassung'],
         currentStep: 4,
     },
+    cartPath: '/warenkorb',
 };
 
 const MOCK_CHECKOUT_SUMMARY_PL: CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBlock = {
@@ -143,6 +151,9 @@ const MOCK_CHECKOUT_SUMMARY_PL: CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBl
             notesTitle: 'Uwagi',
         },
     },
+    errors: {
+        cartNotFound: 'Twój koszyk jest niedostępny.',
+    },
     buttons: {
         confirm: { label: 'Złóż zamówienie', path: '/potwierdzenie-zamowienia' },
         back: { label: 'Wstecz', path: '/zamowienie/platnosc' },
@@ -160,6 +171,7 @@ const MOCK_CHECKOUT_SUMMARY_PL: CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBl
         steps: ['Dane firmy', 'Dostawa', 'Płatność', 'Podsumowanie'],
         currentStep: 4,
     },
+    cartPath: '/koszyk',
 };
 
 export const mapCheckoutSummaryBlock = (

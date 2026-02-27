@@ -32,6 +32,7 @@ export class CheckoutSummaryBlock extends ApiModels.Block.Block {
         back: { label: string; path: string };
         confirm: { label: string; path: string };
     };
+    errors!: { cartNotFound: string };
     loading!: { confirming: string };
     placeholders!: {
         companyData: string;
@@ -40,4 +41,5 @@ export class CheckoutSummaryBlock extends ApiModels.Block.Block {
         billingAddress: string;
     };
     stepIndicator?: { steps: string[]; currentStep: number };
+    cartPath?: string;
 }

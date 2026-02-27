@@ -15,5 +15,6 @@ export const mapCheckoutShippingAddress = (
         errors: cms.errors,
         summaryLabels: cms.summaryLabels,
         stepIndicator: cms.stepIndicator,
+        cartPath: cms.cartPath,
     };
 };

@@ -10,8 +10,10 @@ export const mapCheckoutSummary = (cms: CMS.Model.CheckoutSummaryBlock.CheckoutS
         subtitle: cms.subtitle,
         sections: cms.sections,
         buttons: cms.buttons,
+        errors: cms.errors,
         loading: cms.loading,
         placeholders: cms.placeholders,
         stepIndicator: cms.stepIndicator,
+        cartPath: cms.cartPath,
     };
 };

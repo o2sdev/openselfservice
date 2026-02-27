@@ -55,6 +55,7 @@ export class CheckoutShippingAddressBlock extends ApiModels.Block.Block {
     errors!: {
         required: string;
         invalidPostalCode: string;
+        cartNotFound: string;
     };
     summaryLabels!: CheckoutShippingAddressSummaryLabels;
     totals?: {
@@ -63,4 +64,5 @@ export class CheckoutShippingAddressBlock extends ApiModels.Block.Block {
         total: Models.Price.Price;
     };
     stepIndicator?: { steps: string[]; currentStep: number };
+    cartPath?: string;
 }

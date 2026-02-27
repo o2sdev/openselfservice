@@ -17,6 +17,7 @@ const MOCK_CHECKOUT_BILLING_PAYMENT_EN: CMS.Model.CheckoutBillingPaymentBlock.Ch
     },
     errors: {
         required: 'This field is required',
+        cartNotFound: 'Your cart is no longer available.',
     },
     summaryLabels: {
         title: 'Summary',
@@ -31,6 +32,7 @@ const MOCK_CHECKOUT_BILLING_PAYMENT_EN: CMS.Model.CheckoutBillingPaymentBlock.Ch
         steps: ['Company details', 'Delivery', 'Payment', 'Summary'],
         currentStep: 3,
     },
+    cartPath: '/cart',
 };
 
 const MOCK_CHECKOUT_BILLING_PAYMENT_DE: CMS.Model.CheckoutBillingPaymentBlock.CheckoutBillingPaymentBlock = {
@@ -50,6 +52,7 @@ const MOCK_CHECKOUT_BILLING_PAYMENT_DE: CMS.Model.CheckoutBillingPaymentBlock.Ch
     },
     errors: {
         required: 'Dieses Feld ist erforderlich',
+        cartNotFound: 'Ihr Warenkorb ist nicht mehr verfügbar.',
     },
     summaryLabels: {
         title: 'Zusammenfassung',
@@ -64,6 +67,7 @@ const MOCK_CHECKOUT_BILLING_PAYMENT_DE: CMS.Model.CheckoutBillingPaymentBlock.Ch
         steps: ['Firmendaten', 'Lieferung', 'Zahlung', 'Zusammenfassung'],
         currentStep: 3,
     },
+    cartPath: '/warenkorb',
 };
 
 const MOCK_CHECKOUT_BILLING_PAYMENT_PL: CMS.Model.CheckoutBillingPaymentBlock.CheckoutBillingPaymentBlock = {
@@ -83,6 +87,7 @@ const MOCK_CHECKOUT_BILLING_PAYMENT_PL: CMS.Model.CheckoutBillingPaymentBlock.Ch
     },
     errors: {
         required: 'To pole jest wymagane',
+        cartNotFound: 'Twój koszyk jest niedostępny.',
     },
     summaryLabels: {
         title: 'Podsumowanie',
@@ -97,6 +102,7 @@ const MOCK_CHECKOUT_BILLING_PAYMENT_PL: CMS.Model.CheckoutBillingPaymentBlock.Ch
         steps: ['Dane firmy', 'Dostawa', 'Płatność', 'Podsumowanie'],
         currentStep: 3,
     },
+    cartPath: '/koszyk',
 };
 
 export const mapCheckoutBillingPaymentBlock = (

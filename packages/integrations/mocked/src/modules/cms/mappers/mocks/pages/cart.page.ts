@@ -1,7 +1,5 @@
 import { CMS } from '@o2s/framework/modules';
 
-import { Roles } from '@/utils/roles';
-
 export const PAGE_CART_EN: CMS.Model.Page.Page = {
     id: 'cart-1',
     slug: '/cart',
@@ -19,7 +17,6 @@ export const PAGE_CART_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    roles: [Roles.ORG_USER, Roles.ORG_ADMIN],
     hasOwnTitle: true,
     template: {
         __typename: 'OneColumnTemplate',
@@ -53,7 +50,6 @@ export const PAGE_CART_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    roles: [Roles.ORG_USER, Roles.ORG_ADMIN],
     hasOwnTitle: true,
     template: {
         __typename: 'OneColumnTemplate',
@@ -87,7 +83,6 @@ export const PAGE_CART_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    roles: [Roles.ORG_USER, Roles.ORG_ADMIN],
     hasOwnTitle: true,
     template: {
         __typename: 'OneColumnTemplate',

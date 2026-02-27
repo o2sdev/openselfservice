@@ -16,5 +16,6 @@ export const mapCheckoutCompanyData = (
         summaryLabels: cms.summaryLabels,
         stepIndicator: cms.stepIndicator,
         billingInfoNote: cms.billingInfoNote,
+        cartPath: cms.cartPath,
     };
 };

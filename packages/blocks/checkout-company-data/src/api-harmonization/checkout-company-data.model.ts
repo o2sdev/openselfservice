@@ -43,6 +43,7 @@ export class CheckoutCompanyDataBlock extends ApiModels.Block.Block {
         required: string;
         invalidTaxId: string;
         invalidPostalCode: string;
+        cartNotFound: string;
     };
     summaryLabels!: CheckoutCompanyDataSummaryLabels;
     totals?: {
@@ -52,4 +53,5 @@ export class CheckoutCompanyDataBlock extends ApiModels.Block.Block {
     };
     stepIndicator?: { steps: string[]; currentStep: number };
     billingInfoNote?: { icon?: string; text: string };
+    cartPath?: string;
 }

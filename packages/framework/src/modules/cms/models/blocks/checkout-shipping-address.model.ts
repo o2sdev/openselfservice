@@ -32,6 +32,7 @@ export class CheckoutShippingAddressBlock extends Block.Block {
     errors!: {
         required: string;
         invalidPostalCode: string;
+        cartNotFound: string;
     };
     summaryLabels!: {
         title: string;
@@ -43,4 +44,5 @@ export class CheckoutShippingAddressBlock extends Block.Block {
         freeLabel?: string;
     };
     stepIndicator?: { steps: string[]; currentStep: number };
+    cartPath?: string;
 }

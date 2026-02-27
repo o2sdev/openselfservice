@@ -1,7 +1,5 @@
 import { CMS } from '@o2s/framework/modules';
 
-import { Roles } from '@/utils/roles';
-
 const createCheckoutPage = (
     id: string,
     slug: string,
@@ -27,7 +25,6 @@ const createCheckoutPage = (
             alt: 'Placeholder',
         },
     },
-    roles: [Roles.ORG_USER, Roles.ORG_ADMIN],
     hasOwnTitle: true,
     template: {
         __typename: 'OneColumnTemplate',

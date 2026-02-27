@@ -1,7 +1,5 @@
 import { CMS } from '@o2s/framework/modules';
 
-import { Roles } from '@/utils/roles';
-
 export const PAGE_ORDER_CONFIRMATION_EN: CMS.Model.Page.Page = {
     id: 'order-confirmation-1',
     slug: '/order-confirmation/(.+)',
@@ -19,14 +17,7 @@ export const PAGE_ORDER_CONFIRMATION_EN: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    roles: [Roles.ORG_USER, Roles.ORG_ADMIN],
     hasOwnTitle: true,
-    parent: {
-        slug: '/checkout/summary',
-        seo: {
-            title: 'Order summary',
-        },
-    },
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
@@ -59,14 +50,7 @@ export const PAGE_ORDER_CONFIRMATION_DE: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    roles: [Roles.ORG_USER, Roles.ORG_ADMIN],
     hasOwnTitle: true,
-    parent: {
-        slug: '/kasse/zusammenfassung',
-        seo: {
-            title: 'Bestellübersicht',
-        },
-    },
     template: {
         __typename: 'OneColumnTemplate',
         slots: {
@@ -99,14 +83,7 @@ export const PAGE_ORDER_CONFIRMATION_PL: CMS.Model.Page.Page = {
             alt: 'Placeholder',
         },
     },
-    roles: [Roles.ORG_USER, Roles.ORG_ADMIN],
     hasOwnTitle: true,
-    parent: {
-        slug: '/zamowienie/podsumowanie',
-        seo: {
-            title: 'Podsumowanie zamówienia',
-        },
-    },
     template: {
         __typename: 'OneColumnTemplate',
         slots: {

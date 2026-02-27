@@ -61,6 +61,7 @@ const MOCK_CHECKOUT_COMPANY_DATA_EN: CMS.Model.CheckoutCompanyDataBlock.Checkout
         required: 'This field is required',
         invalidTaxId: 'Invalid tax ID',
         invalidPostalCode: 'Invalid postal code',
+        cartNotFound: 'Your cart is no longer available.',
     },
     summaryLabels: {
         title: 'Summary',
@@ -79,6 +80,7 @@ const MOCK_CHECKOUT_COMPANY_DATA_EN: CMS.Model.CheckoutCompanyDataBlock.Checkout
         icon: 'Info',
         text: 'This address will appear on your invoice.',
     },
+    cartPath: '/cart',
 };
 
 const MOCK_CHECKOUT_COMPANY_DATA_DE: CMS.Model.CheckoutCompanyDataBlock.CheckoutCompanyDataBlock = {
@@ -142,6 +144,7 @@ const MOCK_CHECKOUT_COMPANY_DATA_DE: CMS.Model.CheckoutCompanyDataBlock.Checkout
         required: 'Dieses Feld ist erforderlich',
         invalidTaxId: 'Ungültige Steuer-ID',
         invalidPostalCode: 'Ungültige Postleitzahl',
+        cartNotFound: 'Ihr Warenkorb ist nicht mehr verfügbar.',
     },
     summaryLabels: {
         title: 'Zusammenfassung',
@@ -160,6 +163,7 @@ const MOCK_CHECKOUT_COMPANY_DATA_DE: CMS.Model.CheckoutCompanyDataBlock.Checkout
         icon: 'Info',
         text: 'Diese Adresse erscheint auf Ihrer Rechnung.',
     },
+    cartPath: '/warenkorb',
 };
 
 const MOCK_CHECKOUT_COMPANY_DATA_PL: CMS.Model.CheckoutCompanyDataBlock.CheckoutCompanyDataBlock = {
@@ -223,6 +227,7 @@ const MOCK_CHECKOUT_COMPANY_DATA_PL: CMS.Model.CheckoutCompanyDataBlock.Checkout
         required: 'To pole jest wymagane',
         invalidTaxId: 'Nieprawidłowy NIP',
         invalidPostalCode: 'Nieprawidłowy kod pocztowy',
+        cartNotFound: 'Twój koszyk jest niedostępny.',
     },
     summaryLabels: {
         title: 'Podsumowanie',
@@ -241,6 +246,7 @@ const MOCK_CHECKOUT_COMPANY_DATA_PL: CMS.Model.CheckoutCompanyDataBlock.Checkout
         icon: 'Info',
         text: 'Ten adres będzie widoczny na fakturze.',
     },
+    cartPath: '/koszyk',
 };
 
 export const mapCheckoutCompanyDataBlock = (
