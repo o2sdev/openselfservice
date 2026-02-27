@@ -16,7 +16,7 @@ const MOCK_CHECKOUT_SUMMARY_EN: CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBl
             addressLabel: 'Billing address',
         },
         shipping: {
-            title: 'Shipping address',
+            title: 'Shipping',
             addressLabel: 'Address',
             methodLabel: 'Shipping method:',
         },
@@ -74,7 +74,7 @@ const MOCK_CHECKOUT_SUMMARY_DE: CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBl
             addressLabel: 'Rechnungsadresse',
         },
         shipping: {
-            title: 'Lieferadresse',
+            title: 'Lieferung',
             addressLabel: 'Adresse',
             methodLabel: 'Versandart:',
         },
@@ -132,7 +132,7 @@ const MOCK_CHECKOUT_SUMMARY_PL: CMS.Model.CheckoutSummaryBlock.CheckoutSummaryBl
             addressLabel: 'Adres rozliczeniowy',
         },
         shipping: {
-            title: 'Adres dostawy',
+            title: 'Dostawa',
             addressLabel: 'Adres',
             methodLabel: 'Metoda dostawy:',
         },

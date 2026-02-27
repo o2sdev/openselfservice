@@ -216,18 +216,6 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                                         {billingAddress.taxId}
                                     </Typography>
                                 )}
-                                <div className="mt-2 pt-2 border-t border-border">
-                                    {sections.company.addressLabel && (
-                                        <Typography variant="small" className="mb-1 font-bold">
-                                            {sections.company.addressLabel}
-                                        </Typography>
-                                    )}
-                                    <Typography variant="small">{formatStreetAddress(billingAddress)}</Typography>
-                                    <Typography variant="small">
-                                        {billingAddress.postalCode} {billingAddress.city}
-                                    </Typography>
-                                    <Typography variant="small">{billingAddress.country}</Typography>
-                                </div>
                             </div>
                         ) : (
                             <Typography variant="body">{placeholders?.companyData}</Typography>
@@ -270,12 +258,30 @@ export const CheckoutSummaryPure: React.FC<Readonly<CheckoutSummaryPureProps>> =
                     <div className="flex flex-col gap-2">
                         <Typography variant="h2">{sections.billing.title}</Typography>
                         {isLoading ? (
-                            <Skeleton className="h-12 w-full" />
-                        ) : paymentMethod ? (
-                            <div className="flex flex-col p-4 bg-card rounded-lg border border-border">
-                                <Typography variant="small">
-                                    <strong>{sections.billing.methodLabel}</strong> {paymentMethod.name}
-                                </Typography>
+                            <Skeleton className="h-24 w-full" />
+                        ) : billingAddress || paymentMethod ? (
+                            <div className="flex flex-col gap-2 p-4 bg-card rounded-lg border border-border">
+                                {billingAddress && (
+                                    <div>
+                                        {sections.company.addressLabel && (
+                                            <Typography variant="small" className="mb-1 font-bold">
+                                                {sections.company.addressLabel}
+                                            </Typography>
+                                        )}
+                                        <Typography variant="small">{formatStreetAddress(billingAddress)}</Typography>
+                                        <Typography variant="small">
+                                            {billingAddress.postalCode} {billingAddress.city}
+                                        </Typography>
+                                        <Typography variant="small">{billingAddress.country}</Typography>
+                                    </div>
+                                )}
+                                {paymentMethod && (
+                                    <div className={billingAddress ? 'mt-2 pt-2 border-t border-border' : ''}>
+                                        <Typography variant="small">
+                                            <strong>{sections.billing.methodLabel}</strong> {paymentMethod.name}
+                                        </Typography>
+                                    </div>
+                                )}
                             </div>
                         ) : (
                             <Typography variant="body">{placeholders?.billingAddress}</Typography>
