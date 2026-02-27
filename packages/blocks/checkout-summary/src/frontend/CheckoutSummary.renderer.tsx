@@ -1,7 +1,6 @@
 import { useLocale } from 'next-intl';
 import React, { Suspense } from 'react';
 
-import { Container } from '@o2s/ui/components/Container';
 import { Loading } from '@o2s/ui/components/Loading';
 
 import { CheckoutSummary } from './CheckoutSummary.server';
@@ -14,12 +13,10 @@ export const CheckoutSummaryRenderer: React.FC<CheckoutSummaryRendererProps> = (
         <Suspense
             key={id}
             fallback={
-                <>
-                    <Loading bars={1} />
-                    <Container variant="narrow">
-                        <Loading bars={8} />
-                    </Container>
-                </>
+                <div className="w-full flex flex-col gap-8">
+                    <Loading bars={0} />
+                    <Loading bars={8} />
+                </div>
             }
         >
             <CheckoutSummary id={id} accessToken={accessToken} locale={locale} routing={routing} />

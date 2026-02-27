@@ -24,12 +24,14 @@ export const OrderConfirmationRenderer: React.FC<OrderConfirmationRendererProps>
         <Suspense
             key={id}
             fallback={
-                <>
-                    <Loading bars={1} />
+                <div className="w-full flex flex-col gap-8">
+                    <Container variant="narrow">
+                        <Loading bars={1} />
+                    </Container>
                     <Container variant="narrow">
                         <Loading bars={8} />
                     </Container>
-                </>
+                </div>
             }
         >
             <OrderConfirmation id={id} orderId={orderId} accessToken={accessToken} locale={locale} routing={routing} />
