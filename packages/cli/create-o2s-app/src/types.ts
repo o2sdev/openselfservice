@@ -12,6 +12,7 @@ export interface IntegrationInfo {
     packageName: string;
     description: string;
     category: string[];
+    modules: string[];
 }
 
 export interface EnvVar {
@@ -30,6 +31,7 @@ export interface WizardAnswers {
     template: TemplateType;
     selectedBlocks: string[];
     selectedIntegrations: string[];
+    integrationModules: Record<string, string[]>;
     conflictResolutions: ConflictResolution[];
     envVars: Record<string, string>;
 }

@@ -1,4 +1,3 @@
-import { INTEGRATION_MODULES } from '../constants';
 import { ConflictResolution } from '../types';
 import * as fs from 'fs-extra';
 import * as path from 'path';
@@ -8,15 +7,16 @@ const CONFIGS_PACKAGE_JSON_PATH = 'packages/configs/integrations/package.json';
 const MOCKED_IMPORT = `@o2s/integrations.mocked/integration`;
 
 // Build a map from framework module name → winning integration.
-// Integrations without entries in INTEGRATION_MODULES (e.g. mocked) contribute no modules.
+// Integrations without o2sModules entries (e.g. mocked) contribute no modules.
 const buildModuleIntegrationMap = (
     selectedIntegrations: string[],
     conflictResolutions: ConflictResolution[],
+    integrationModules: Record<string, string[]>,
 ): Map<string, string> => {
     const moduleMap = new Map<string, string>();
 
     for (const integration of selectedIntegrations) {
-        const modules = INTEGRATION_MODULES[integration] ?? [];
+        const modules = integrationModules[integration] ?? [];
         for (const module of modules) {
             if (!moduleMap.has(module)) {
                 moduleMap.set(module, integration);
@@ -31,7 +31,11 @@ const buildModuleIntegrationMap = (
     return moduleMap;
 };
 
-const updateConfigsPackageJson = async (projectDir: string, selectedIntegrations: string[]): Promise<void> => {
+const updateConfigsPackageJson = async (
+    projectDir: string,
+    selectedIntegrations: string[],
+    integrationModules: Record<string, string[]>,
+): Promise<void> => {
     const pkgPath = path.join(projectDir, CONFIGS_PACKAGE_JSON_PATH);
 
     if (!(await fs.pathExists(pkgPath))) return;
@@ -50,7 +54,7 @@ const updateConfigsPackageJson = async (projectDir: string, selectedIntegrations
 
     // Add deps for selected integrations that have module mappings
     for (const integration of selectedIntegrations) {
-        if (INTEGRATION_MODULES[integration]) {
+        if (integrationModules[integration]?.length) {
             pkg.dependencies[`@o2s/integrations.${integration}`] = '*';
         }
     }
@@ -62,8 +66,9 @@ export const transformIntegrationConfigs = async (
     projectDir: string,
     selectedIntegrations: string[],
     conflictResolutions: ConflictResolution[],
+    integrationModules: Record<string, string[]>,
 ): Promise<string[]> => {
-    const moduleMap = buildModuleIntegrationMap(selectedIntegrations, conflictResolutions);
+    const moduleMap = buildModuleIntegrationMap(selectedIntegrations, conflictResolutions, integrationModules);
 
     if (moduleMap.size === 0) {
         return [];
@@ -86,7 +91,7 @@ export const transformIntegrationConfigs = async (
         await fs.writeFile(filePath, updatedContent, 'utf-8');
     }
 
-    await updateConfigsPackageJson(projectDir, selectedIntegrations);
+    await updateConfigsPackageJson(projectDir, selectedIntegrations, integrationModules);
 
     // Detect model files that still import mocked but mocked is not selected.
     // Skip only when 'mocked' (full) is selected — it covers all modules.

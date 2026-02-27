@@ -4,6 +4,11 @@
     "private": false,
     "license": "MIT",
     "description": "Mocked DXP integration for O2S, providing in-memory data for DXP demo flows.",
+    "o2sModules": [
+        "cms",
+        "articles",
+        "search"
+    ],
     "keywords": [
         "o2s",
         "integration",
@@ -59,5 +64,7 @@
         "rxjs": "^7",
         "zod": "^3.25.4 || ^4.0.0"
     },
-    "o2sTemplate": ["dxp"]
+    "o2sTemplate": [
+        "dxp"
+    ]
 }

@@ -16,12 +16,15 @@ export const runWizard = async (
     console.log(`Found ${allBlocks.length} blocks and ${allIntegrations.length} integrations.`);
     console.log();
 
+    const integrationModules = Object.fromEntries(allIntegrations.map((i) => [i.name, i.modules]));
+
     if (cliName && cliTemplate && cliBlocks && cliIntegrations) {
         return {
             projectName: cliName,
             template: cliTemplate,
             selectedBlocks: cliBlocks,
             selectedIntegrations: cliIntegrations,
+            integrationModules,
             conflictResolutions: [],
             envVars: {},
         };
@@ -30,15 +33,16 @@ export const runWizard = async (
     const partialAnswers = await runWizardPrompts(allBlocks, allIntegrations, cliName, cliTemplate);
 
     if (partialAnswers.template !== 'custom') {
-        return partialAnswers;
+        return { ...partialAnswers, integrationModules };
     }
 
-    const conflicts = detectConflicts(partialAnswers.selectedIntegrations);
+    const conflicts = detectConflicts(partialAnswers.selectedIntegrations, integrationModules);
     const conflictResolutions = await promptConflictResolutions(conflicts);
     const envVars = await promptEnvVars(partialAnswers.selectedIntegrations);
 
     return {
         ...partialAnswers,
+        integrationModules,
         conflictResolutions,
         envVars,
     };

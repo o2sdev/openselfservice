@@ -4,6 +4,10 @@
     "private": false,
     "license": "MIT",
     "description": "Strapi CMS integration for O2S, providing content management functionality via GraphQL.",
+    "o2sModules": [
+        "cms",
+        "articles"
+    ],
     "keywords": [
         "o2s",
         "integration",

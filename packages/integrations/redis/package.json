@@ -4,6 +4,9 @@
     "private": false,
     "license": "MIT",
     "description": "Redis integration for O2S, providing caching functionality.",
+    "o2sModules": [
+        "cache"
+    ],
     "keywords": [
         "o2s",
         "integration",

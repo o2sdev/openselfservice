@@ -6,6 +6,7 @@ import * as path from 'path';
 interface IntegrationPackageJson {
     description?: string;
     o2sTemplate?: string[];
+    o2sModules?: string[];
 }
 
 export const discoverIntegrations = async (repoDir: string): Promise<IntegrationInfo[]> => {
@@ -27,6 +28,7 @@ export const discoverIntegrations = async (repoDir: string): Promise<Integration
                 description: packageJson.description || `Integration: ${integrationName}`,
                 // No o2sTemplate = integration only available in Custom template
                 category: packageJson.o2sTemplate ?? [],
+                modules: packageJson.o2sModules ?? [],
             });
         }
 

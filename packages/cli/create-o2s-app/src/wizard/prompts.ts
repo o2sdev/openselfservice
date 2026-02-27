@@ -87,7 +87,7 @@ export const runWizardPrompts = async (
     availableIntegrations: IntegrationInfo[],
     cliName?: string,
     cliTemplate?: TemplateType,
-): Promise<WizardAnswers> => {
+): Promise<Omit<WizardAnswers, 'integrationModules'>> => {
     const projectName = cliName || (await promptProjectName('my-o2s-project'));
     const template = cliTemplate || (await promptTemplate());
 

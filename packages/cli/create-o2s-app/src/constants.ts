@@ -26,18 +26,6 @@ export const ALWAYS_REMOVE_DIRS: string[] = [
 
 export const ALWAYS_REMOVE_FILES: string[] = ['vercel.json'];
 
-// Static mapping: which framework modules each integration covers
-// Phase 3 will migrate this to dynamic discovery from integration package.json
-export const INTEGRATION_MODULES: Record<string, string[]> = {
-    zendesk: ['tickets', 'articles'],
-    medusajs: ['orders', 'resources', 'products', 'carts', 'customers', 'payments', 'checkout'],
-    'strapi-cms': ['cms', 'articles'],
-    'contentful-cms': ['cms'],
-    algolia: ['search'],
-    redis: ['cache'],
-    'mocked-dxp': ['cms', 'articles', 'search'],
-};
-
 export const INTEGRATION_ENV_VARS: Record<string, EnvVar[]> = {
     zendesk: [
         {

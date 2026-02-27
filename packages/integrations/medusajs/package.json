@@ -4,6 +4,15 @@
     "private": false,
     "license": "MIT",
     "description": "MedusaJS integration for O2S, providing ecommerce functionality including products, orders, and carts.",
+    "o2sModules": [
+        "orders",
+        "resources",
+        "products",
+        "carts",
+        "customers",
+        "payments",
+        "checkout"
+    ],
     "keywords": [
         "o2s",
         "integration",

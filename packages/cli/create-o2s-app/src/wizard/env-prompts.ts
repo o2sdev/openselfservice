@@ -1,4 +1,4 @@
-import { INTEGRATION_ENV_VARS, INTEGRATION_MODULES } from '../constants';
+import { INTEGRATION_ENV_VARS } from '../constants';
 import { ConflictResolution } from '../types';
 import kleur from 'kleur';
 import prompts from 'prompts';
@@ -8,11 +8,14 @@ interface ModuleConflict {
     integrations: string[];
 }
 
-export const detectConflicts = (selectedIntegrations: string[]): ModuleConflict[] => {
+export const detectConflicts = (
+    selectedIntegrations: string[],
+    integrationModules: Record<string, string[]>,
+): ModuleConflict[] => {
     const moduleToIntegrations: Record<string, string[]> = {};
 
     for (const integration of selectedIntegrations) {
-        const modules = INTEGRATION_MODULES[integration] ?? [];
+        const modules = integrationModules[integration] ?? [];
         for (const module of modules) {
             moduleToIntegrations[module] = [...(moduleToIntegrations[module] ?? []), integration];
         }

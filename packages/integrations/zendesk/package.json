@@ -4,6 +4,10 @@
     "private": false,
     "license": "MIT",
     "description": "Zendesk integration for O2S, providing ticket management and support functionality.",
+    "o2sModules": [
+        "tickets",
+        "articles"
+    ],
     "keywords": [
         "o2s",
         "integration",

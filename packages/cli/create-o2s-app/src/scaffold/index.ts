@@ -25,7 +25,7 @@ export const scaffold = async (
         );
     }
 
-    const { selectedBlocks, selectedIntegrations, conflictResolutions, envVars } = answers;
+    const { selectedBlocks, selectedIntegrations, integrationModules, conflictResolutions, envVars } = answers;
 
     // Step 1: Move cloned repo to target directory
     console.log();
@@ -49,7 +49,12 @@ export const scaffold = async (
 
     // Step 5: Configure integration source files and generate environment
     console.log('Configuring integrations...');
-    const uncoveredModules = await transformIntegrationConfigs(targetDir, selectedIntegrations, conflictResolutions);
+    const uncoveredModules = await transformIntegrationConfigs(
+        targetDir,
+        selectedIntegrations,
+        conflictResolutions,
+        integrationModules,
+    );
     await generateEnvFiles(targetDir, envVars, selectedIntegrations);
     warnUnconfiguredModules(uncoveredModules);
 
