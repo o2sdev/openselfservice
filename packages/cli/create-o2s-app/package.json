@@ -1,6 +1,6 @@
 {
     "name": "create-o2s-app",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "private": false,
     "license": "MIT",
     "description": "CLI tool to scaffold new O2S applications with Next.js and NestJS setup.",
@@ -32,7 +32,7 @@
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json}\""
     },
     "dependencies": {
-        "@o2s/telemetry": "^1.2.0",
+        "@o2s/telemetry": "^1.2.1",
         "@types/prompts": "^2.4.9",
         "cli-progress": "^3.12.0",
         "commander": "^14.0.3",

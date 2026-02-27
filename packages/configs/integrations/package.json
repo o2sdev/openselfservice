@@ -1,6 +1,6 @@
 {
     "name": "@o2s/configs.integrations",
-    "version": "0.5.0",
+    "version": "0.6.0",
     "private": true,
     "license": "MIT",
     "description": "Integration configuration package for O2S, providing centralized integration configs and type re-exports.",

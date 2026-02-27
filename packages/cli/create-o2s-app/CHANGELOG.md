@@ -1,5 +1,22 @@
 # create-o2s-app
 
+## 1.2.2
+
+### Patch Changes
+
+- a288b11: chore(deps): update dependencies
+- 3b8ab83: chore(deps): update dependencies
+- 8c01be4: added README
+- b234a1f: chore(deps): update dependencies
+- fefc45d: chore(deps): update dependencies
+- ea200fc: chore(deps): update dependencies
+- ed74c8f: chore(deps): update dependencies
+- Updated dependencies [a288b11]
+- Updated dependencies [3b8ab83]
+- Updated dependencies [8c01be4]
+- Updated dependencies [ea200fc]
+    - @o2s/telemetry@1.2.1
+
 ## 1.2.1
 
 ### Patch Changes

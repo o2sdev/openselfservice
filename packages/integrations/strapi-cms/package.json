@@ -1,6 +1,6 @@
 {
     "name": "@o2s/integrations.strapi-cms",
-    "version": "2.11.0",
+    "version": "2.11.1",
     "private": false,
     "license": "MIT",
     "description": "Strapi CMS integration for O2S, providing content management functionality via GraphQL.",

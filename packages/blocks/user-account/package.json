@@ -1,6 +1,6 @@
 {
     "name": "@o2s/blocks.user-account",
-    "version": "1.3.0",
+    "version": "1.4.0",
     "private": false,
     "license": "MIT",
     "description": "A block displaying and managing user account information.",

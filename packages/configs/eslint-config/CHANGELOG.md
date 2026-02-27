@@ -1,5 +1,11 @@
 # @o2s/eslint-config
 
+## 1.1.1
+
+### Patch Changes
+
+- 8c01be4: added README
+
 ## 1.1.0
 
 ### Minor Changes
