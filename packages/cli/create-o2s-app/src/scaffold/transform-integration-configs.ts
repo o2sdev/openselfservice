@@ -39,13 +39,10 @@ const updateConfigsPackageJson = async (projectDir: string, selectedIntegrations
     const pkg = await fs.readJson(pkgPath);
 
     // Remove integration deps that were not selected
-    // Exception: keep mocked when mocked-dxp is selected — SSP model files still reference it
-    const keepMocked = selectedIntegrations.includes('mocked-dxp') && !selectedIntegrations.includes('mocked');
     for (const key of Object.keys(pkg.dependencies as Record<string, string>)) {
         if (key.startsWith('@o2s/integrations.')) {
             const name = key.replace('@o2s/integrations.', '');
             if (!selectedIntegrations.includes(name)) {
-                if (name === 'mocked' && keepMocked) continue;
                 delete pkg.dependencies[key];
             }
         }
