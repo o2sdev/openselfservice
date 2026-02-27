@@ -1,6 +1,5 @@
 import { INTEGRATIONS_PATH } from '../constants';
 import { IntegrationInfo } from '../types';
-import { getAllTemplateCategories } from '../wizard/templates';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 
@@ -26,8 +25,8 @@ export const discoverIntegrations = async (repoDir: string): Promise<Integration
                 name: integrationName,
                 packageName: `@o2s/integrations.${integrationName}`,
                 description: packageJson.description || `Integration: ${integrationName}`,
-                // Fallback to all templates when o2sTemplate is not declared
-                category: packageJson.o2sTemplate ?? getAllTemplateCategories(),
+                // No o2sTemplate = integration only available in Custom template
+                category: packageJson.o2sTemplate ?? [],
             });
         }
 
