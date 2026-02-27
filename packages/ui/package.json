@@ -75,7 +75,7 @@
         "libphonenumber-js": "^1.12.38",
         "lucide-react": "^0.575.0",
         "markdown-to-jsx": "9.7.0",
-        "react-day-picker": "^9.13.2",
+        "react-day-picker": "^9.14.0",
         "react-indiana-drag-scroll": "^2.2.1",
         "recharts": "^3.7.0",
         "swiper": "^12.1.2",
