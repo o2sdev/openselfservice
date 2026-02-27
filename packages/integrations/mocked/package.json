@@ -50,11 +50,11 @@
         "@auth/prisma-adapter": "^2.11.1",
         "@o2s/framework": "*",
         "@o2s/utils.logger": "*",
-        "@prisma/client": "^6.19.2",
+        "@prisma/client": "^7.4.1",
         "bcryptjs": "^3.0.3",
         "dotenv-cli": "^11.0.0",
         "jsonwebtoken": "^9.0.3",
-        "prisma": "^6.19.2"
+        "prisma": "^7.4.1"
     },
     "devDependencies": {
         "@o2s/eslint-config": "*",
