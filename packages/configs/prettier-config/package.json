@@ -1,6 +1,6 @@
 {
     "name": "@o2s/prettier-config",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "private": true,
     "license": "MIT",
     "description": "Shared Prettier configuration for O2S packages to ensure consistent code formatting.",

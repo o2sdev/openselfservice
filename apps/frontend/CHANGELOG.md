@@ -1,5 +1,70 @@
 # @o2s/frontend
 
+## 1.15.2
+
+### Patch Changes
+
+- 1804016: update article slugs to be relative and adjust mapping logic
+- Updated dependencies [9678d12]
+- Updated dependencies [46d4077]
+- Updated dependencies [a288b11]
+- Updated dependencies [09d7b17]
+- Updated dependencies [bbb3b89]
+- Updated dependencies [c6ae8e6]
+- Updated dependencies [c6ae8e6]
+- Updated dependencies [8529002]
+- Updated dependencies [3b8ab83]
+- Updated dependencies [1f2965c]
+- Updated dependencies [88d180a]
+- Updated dependencies [1804016]
+- Updated dependencies [fcf14d2]
+- Updated dependencies [c6ae8e6]
+- Updated dependencies [c6ae8e6]
+- Updated dependencies [c413a8b]
+- Updated dependencies [8c01be4]
+- Updated dependencies [ea200fc]
+    - @o2s/blocks.surveyjs-form@1.4.0
+    - @o2s/framework@1.18.0
+    - @o2s/blocks.article-list@1.6.0
+    - @o2s/blocks.article-search@1.6.0
+    - @o2s/blocks.article@1.5.0
+    - @o2s/blocks.bento-grid@0.6.0
+    - @o2s/blocks.category-list@1.6.0
+    - @o2s/blocks.category@1.6.0
+    - @o2s/blocks.cta-section@0.6.0
+    - @o2s/blocks.document-list@0.6.0
+    - @o2s/blocks.faq@1.5.0
+    - @o2s/blocks.feature-section-grid@0.5.0
+    - @o2s/blocks.feature-section@0.6.0
+    - @o2s/blocks.featured-service-list@1.4.0
+    - @o2s/blocks.hero-section@0.6.0
+    - @o2s/blocks.invoice-list@1.6.0
+    - @o2s/blocks.media-section@0.6.0
+    - @o2s/blocks.notification-details@1.5.0
+    - @o2s/blocks.notification-list@1.6.0
+    - @o2s/blocks.notification-summary@1.3.0
+    - @o2s/blocks.order-details@1.5.0
+    - @o2s/blocks.order-list@1.6.0
+    - @o2s/blocks.orders-summary@1.5.0
+    - @o2s/blocks.payments-history@1.4.0
+    - @o2s/blocks.payments-summary@1.4.0
+    - @o2s/blocks.pricing-section@0.6.0
+    - @o2s/blocks.product-details@0.2.0
+    - @o2s/blocks.product-list@0.4.0
+    - @o2s/blocks.quick-links@1.5.0
+    - @o2s/blocks.recommended-products@0.2.0
+    - @o2s/blocks.service-details@1.4.0
+    - @o2s/blocks.service-list@1.5.0
+    - @o2s/blocks.ticket-details@1.5.0
+    - @o2s/blocks.ticket-list@1.7.0
+    - @o2s/blocks.ticket-recent@1.4.0
+    - @o2s/blocks.ticket-summary@1.3.0
+    - @o2s/blocks.user-account@1.4.0
+    - @o2s/integrations.mocked@1.19.0
+    - @o2s/utils.api-harmonization@0.3.1
+    - @o2s/utils.frontend@0.4.1
+    - @o2s/ui@1.11.0
+
 ## 1.15.1
 
 ### Patch Changes
