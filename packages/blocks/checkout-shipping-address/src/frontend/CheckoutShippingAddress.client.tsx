@@ -13,10 +13,10 @@ import { CartSummary } from '@o2s/ui/components/Cart/CartSummary';
 import { AddressFields } from '@o2s/ui/components/Checkout/AddressFields';
 import { StepIndicator } from '@o2s/ui/components/Checkout/StepIndicator';
 import { Price } from '@o2s/ui/components/Price';
+import { RadioTileGroup } from '@o2s/ui/components/RadioTile';
 
 import { Checkbox } from '@o2s/ui/elements/checkbox';
 import { Label } from '@o2s/ui/elements/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@o2s/ui/elements/select';
 import { Separator } from '@o2s/ui/elements/separator';
 import { Skeleton } from '@o2s/ui/elements/skeleton';
 import { Typography } from '@o2s/ui/elements/typography';
@@ -274,7 +274,7 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                                 <Separator />
 
                                 <div className="flex flex-col gap-2">
-                                    <Label htmlFor="shippingMethod">
+                                    <Label>
                                         {fields.shippingMethod.label}
                                         {fields.shippingMethod.required && <span className="text-destructive"> *</span>}
                                     </Label>
@@ -284,38 +284,24 @@ export const CheckoutShippingAddressPure: React.FC<Readonly<CheckoutShippingAddr
                                             form: { touched, errors, setFieldValue: setFV },
                                         }: FieldProps<string>) => (
                                             <>
-                                                <Select
+                                                <RadioTileGroup
                                                     value={field.value}
                                                     onValueChange={(value) => setFV('shippingMethod', value)}
-                                                >
-                                                    <SelectTrigger
-                                                        id="shippingMethod"
-                                                        className={
-                                                            touched.shippingMethod && errors.shippingMethod
-                                                                ? 'border-destructive'
-                                                                : ''
-                                                        }
-                                                    >
-                                                        <SelectValue
-                                                            placeholder={
-                                                                isLoading ? '...' : fields.shippingMethod.placeholder
-                                                            }
-                                                        />
-                                                    </SelectTrigger>
-                                                    <SelectContent>
-                                                        {shippingOptions.map((option) => (
-                                                            <SelectItem key={option.id} value={option.id}>
-                                                                {option.name}
-                                                                {option.total && (
-                                                                    <>
-                                                                        {' — '}
-                                                                        <Price price={option.total} />
-                                                                    </>
-                                                                )}
-                                                            </SelectItem>
-                                                        ))}
-                                                    </SelectContent>
-                                                </Select>
+                                                    hasError={!!(touched.shippingMethod && errors.shippingMethod)}
+                                                    options={shippingOptions.map((option) => ({
+                                                        id: option.id,
+                                                        label: option.name,
+                                                        description: option.description,
+                                                        extra: option.total ? (
+                                                            <Typography
+                                                                variant="small"
+                                                                className="text-muted-foreground"
+                                                            >
+                                                                <Price price={option.total} />
+                                                            </Typography>
+                                                        ) : undefined,
+                                                    }))}
+                                                />
                                                 <ErrorMessage name="shippingMethod">
                                                     {(msg) => (
                                                         <Typography variant="small" className="text-destructive">

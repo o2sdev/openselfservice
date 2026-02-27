@@ -11,9 +11,9 @@ import { useToast } from '@o2s/ui/hooks/use-toast';
 
 import { CartSummary } from '@o2s/ui/components/Cart/CartSummary';
 import { StepIndicator } from '@o2s/ui/components/Checkout/StepIndicator';
+import { RadioTileGroup } from '@o2s/ui/components/RadioTile';
 
 import { Label } from '@o2s/ui/elements/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@o2s/ui/elements/select';
 import { Skeleton } from '@o2s/ui/elements/skeleton';
 import { Typography } from '@o2s/ui/elements/typography';
 
@@ -169,39 +169,22 @@ export const CheckoutBillingPaymentPure: React.FC<Readonly<CheckoutBillingPaymen
                         {() => (
                             <Form id={FORM_ID} className="w-full flex flex-col gap-6">
                                 <div className="flex flex-col gap-2">
-                                    <Label htmlFor="paymentMethod">
+                                    <Label>
                                         {fields.paymentMethod.label}
                                         {fields.paymentMethod.required && <span className="text-destructive"> *</span>}
                                     </Label>
                                     <Field name="paymentMethod">
                                         {({ field, form: { touched, errors, setFieldValue } }: FieldProps<string>) => (
                                             <>
-                                                <Select
+                                                <RadioTileGroup
                                                     value={field.value}
                                                     onValueChange={(value) => setFieldValue('paymentMethod', value)}
-                                                >
-                                                    <SelectTrigger
-                                                        id="paymentMethod"
-                                                        className={
-                                                            touched.paymentMethod && errors.paymentMethod
-                                                                ? 'border-destructive'
-                                                                : ''
-                                                        }
-                                                    >
-                                                        <SelectValue
-                                                            placeholder={
-                                                                isLoading ? '...' : fields.paymentMethod.placeholder
-                                                            }
-                                                        />
-                                                    </SelectTrigger>
-                                                    <SelectContent>
-                                                        {paymentProviders.map((provider) => (
-                                                            <SelectItem key={provider.id} value={provider.id}>
-                                                                {provider.name}
-                                                            </SelectItem>
-                                                        ))}
-                                                    </SelectContent>
-                                                </Select>
+                                                    hasError={!!(touched.paymentMethod && errors.paymentMethod)}
+                                                    options={paymentProviders.map((provider) => ({
+                                                        id: provider.id,
+                                                        label: provider.name,
+                                                    }))}
+                                                />
                                                 <ErrorMessage name="paymentMethod">
                                                     {(msg) => (
                                                         <Typography variant="small" className="text-destructive">
