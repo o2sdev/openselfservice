@@ -10,7 +10,7 @@ import simpleGit from 'simple-git';
 const PROJECT_PREFIX = 'o2s';
 const PROJECT_NAME = `openselfservice`;
 const GITHUB_REPO_URL = `https://github.com/o2sdev/${PROJECT_NAME}.git`;
-const BRANCH = 'main';
+const BRANCH = 'create-o2s-app/base';
 const BLOCKS_PATH = 'packages/blocks'; // Path to blocks directory in the repo relative to the branch
 const PROJECT_ROOT = path.resolve(__dirname, '../..'); // Adjust to project root
 const OUTPUT_DIR = path.join(PROJECT_ROOT, 'packages/blocks'); // Local target folder
