@@ -13,10 +13,10 @@ The first step is to install the Strapi integration package in your workspace. T
 Install the package using npm with the following command:
 
 ```shell
-npm install @o2s/integrations.strapi-cms --workspace=@o2s/api
+npm install @o2s/integrations.strapi-cms --workspace=@o2s/configs.integrations
 ```
 
-This command installs the integration package in the API workspace, ensuring that all necessary dependencies are available where they're needed.
+This command installs the integration package in the integrations config workspace, where integration packages are configured and resolved.
 
 ## Configuration
 

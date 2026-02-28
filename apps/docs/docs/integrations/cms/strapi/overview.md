@@ -19,7 +19,7 @@ this package provides a full integration with [Strapi CMS](https://strapi.io/), 
 First, install the Strapi integration package:
 
 ```shell
-npm install @o2s/integrations.strapi-cms --workspace=@o2s/api
+npm install @o2s/integrations.strapi-cms --workspace=@o2s/configs.integrations
 ```
 
 ## Environment variables

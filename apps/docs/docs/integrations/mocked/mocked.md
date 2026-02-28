@@ -8,10 +8,10 @@ In order to enable a very quick set-up of O2S, we have prepared an integration t
 
 ## Requirements
 
-This integration is automatically installed when you bootstrap a new portal with `npx create-o2s-app@latest my-portal`. If you need to install it manually in an existing workspace (e.g. inside the API Harmonization server), run:
+This integration is automatically installed when you bootstrap a new portal with `npx create-o2s-app@latest my-portal`. If you need to install it manually in an existing workspace, run:
 
 ```shell
-npm install @o2s/integrations.mocked --workspace=@o2s/api
+npm install @o2s/integrations.mocked --workspace=@o2s/configs.integrations
 ```
 
 ## Supported modules

@@ -15,7 +15,7 @@ this package provides caching capabilities using [Redis](https://redis.io/). It 
 ## Installation
 
 ```shell
-npm install @o2s/integrations.redis --workspace=@o2s/api
+npm install @o2s/integrations.redis --workspace=@o2s/configs.integrations
 ```
 
 ## Environment variables
