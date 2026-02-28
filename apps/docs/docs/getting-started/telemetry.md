@@ -8,7 +8,7 @@ O2S collects completely anonymous telemetry data about general usage. Participat
 
 ## What data is collected
 
-The following data is being collected on your Medusa application:
+The following data is being collected in your O2S application:
 
 - unique machine ID,
 - information about the operating system and CI system that the application is running on,
