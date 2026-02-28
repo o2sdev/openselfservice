@@ -1,0 +1,3 @@
+import { CMS } from '@o2s/framework/modules'; type CmsModel = typeof CMS.Model; type CmsModelExtensions = { [key:
+string]: unknown }; export type ExtendedCmsModel = CmsModel & CmsModelExtensions; export const extendCmsModel =
+(extensions: CmsModelExtensions): ExtendedCmsModel => { return { ...CMS.Model, ...extensions, }; };

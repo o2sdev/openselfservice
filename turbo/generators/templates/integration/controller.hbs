@@ -1,7 +1,20 @@
-import { Get, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 
-import { {{pascalCase module}} } from '@o2s/framework/modules';
+{{#if (eq module 'cms')}}
+    import { CMS } from '@o2s/framework/modules';
+{{else}}
+    import {
+    {{pascalCase module}}
+    } from '@o2s/framework/modules';
+{{/if}}
 
 @Injectable()
-export class {{pascalCase module}}Controller extends {{pascalCase module}}.Controller {
+{{#if (eq module 'cms')}}
+    export class
+    {{pascalCase module}}Controller extends CMS.Controller {
+{{else}}
+    export class
+    {{pascalCase module}}Controller extends
+    {{pascalCase module}}.Controller {
+{{/if}}
 }

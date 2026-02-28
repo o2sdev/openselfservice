@@ -48,31 +48,39 @@ export class TicketsSummaryBlock extends Models.Block.Block {
 }
 ```
 
-We also need to re-export the original models from the base module from the framework. Let's open the `./src/modules/cms/cms.model.ts` and, in addition to the models related to the new block, we need to also add all the others:
+We also need to keep all original models from the base CMS module from the framework and add only the new one. Instead of manually re-exporting every model, we can create a tiny helper and merge the model object in one place.
+
+Let's create `./src/modules/cms/extend-cms-model.ts`:
 
 ```typescript
 import { CMS } from '@o2s/framework/modules';
 
-export * as TicketsSummaryBlock from './models/block/tickets-summary.model';
+type CmsModel = typeof CMS.Model;
 
-export import Page = CMS.Model.Page;
-export import LoginPage = CMS.Model.LoginPage;
-export import Footer = CMS.Model.Footer;
-export import Header = CMS.Model.Header;
-export import FaqBlock = CMS.Model.FaqBlock;
-export import TicketListBlock = CMS.Model.TicketListBlock;
-export import TicketDetailsBlock = CMS.Model.TicketDetailsBlock;
-export import NotificationListBlock = CMS.Model.NotificationListBlock;
-export import NotificationDetailsBlock = CMS.Model.NotificationDetailsBlock;
-export import InvoiceListBlock = CMS.Model.InvoiceListBlock;
-export import PaymentsSummaryBlock = CMS.Model.PaymentsSummaryBlock;
-export import PaymentsHistoryBlock = CMS.Model.PaymentsHistoryBlock;
-export import ArticleListBlock = CMS.Model.ArticleListBlock;
-export import ArticleDetailsBlock = CMS.Model.ArticleDetailsBlock;
+export const extendCmsModel = <T extends Record<string, unknown>>(extensions: T): CmsModel & T => {
+    return {
+        ...CMS.Model,
+        ...extensions,
+    };
+};
+```
+
+Now let's open the `./src/modules/cms/cms.model.ts`:
+
+```typescript
+import { CMS } from '@o2s/framework/modules';
+
+import { extendCmsModel } from './extend-cms-model';
+
+export * as TicketsSummaryBlock from './models/blocks/tickets-summary.model';
+
+export const Model = extendCmsModel({
+    TicketsSummaryBlock,
+});
 ```
 
 :::info
-We realize that having to explicitly re-export every model might be very cumbersome, especially for more complex modules like the CMS. We plan to improve this behaviour to make it more developer-friendly.
+This removes boilerplate and makes adding another custom model a one-line change in `extendCmsModel(...)`.
 :::
 
 The last step is to edit the main entrypoint of this package `./src/modules/cms/index.ts` and export the necessary service, model and request:
@@ -84,7 +92,7 @@ export { CmsService as Service } from './cms.service';
 
 export import Request = CMS.Request;
 
-export * as Model from './cms.model';
+export { Model } from './cms.model';
 ```
 
 ## Add method to service

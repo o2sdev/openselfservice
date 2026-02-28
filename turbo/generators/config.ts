@@ -82,16 +82,16 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                     path: 'packages/integrations/{{kebabCase name}}/src/modules/index.ts',
                     template: '// MODULE_EXPORTS',
                 },
-            {
-                type: 'add',
-                path: 'packages/integrations/{{kebabCase name}}/vitest.config.mjs',
-                templateFile: 'templates/integration/vitestConfig.hbs',
-            },
-            {
-                type: 'add',
-                path: 'packages/integrations/{{kebabCase name}}/README.md',
-                templateFile: 'templates/integration/README.hbs',
-            },
+                {
+                    type: 'add',
+                    path: 'packages/integrations/{{kebabCase name}}/vitest.config.mjs',
+                    templateFile: 'templates/integration/vitestConfig.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/integrations/{{kebabCase name}}/README.md',
+                    templateFile: 'templates/integration/README.hbs',
+                },
             ];
 
             const modules = data?.modules as string[];
@@ -149,6 +149,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                             pattern: /(\/\/ MODULE_EXPORTS)/g,
                             template:
                                 '    {{ camelCase module }}: {\n' +
+                                "        name: '{{kebabCase name}}',\n" +
                                 '        service: {{ pascalCase module }}Service,\n' +
                                 '    },\n// MODULE_EXPORTS',
                             data: { module },
@@ -156,7 +157,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                     );
                 } else {
                     // Standard module structure
-                    actions.push(
+                    const moduleActions: PlopTypes.ActionType[] = [
                         {
                             type: 'add',
                             path: `packages/integrations/{{kebabCase name}}/src/modules/{{kebabCase module}}/index.ts`,
@@ -202,11 +203,31 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                             pattern: /(\/\/ MODULE_EXPORTS)/g,
                             template:
                                 '    {{ camelCase module }}: {\n' +
+                                "        name: '{{kebabCase name}}',\n" +
                                 '        service: {{ pascalCase module }}Service,\n' +
                                 '    },\n// MODULE_EXPORTS',
                             data: { module },
                         },
-                    );
+                    ];
+
+                    if (module === 'cms') {
+                        moduleActions.push(
+                            {
+                                type: 'add',
+                                path: 'packages/integrations/{{kebabCase name}}/src/modules/cms/cms.model.ts',
+                                templateFile: 'templates/integration/cms-model.hbs',
+                                data: { module },
+                            },
+                            {
+                                type: 'add',
+                                path: 'packages/integrations/{{kebabCase name}}/src/modules/cms/extend-cms-model.ts',
+                                templateFile: 'templates/integration/extend-cms-model.hbs',
+                                data: { module },
+                            },
+                        );
+                    }
+
+                    actions.push(...moduleActions);
                 }
             });
 

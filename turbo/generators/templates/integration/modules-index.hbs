@@ -1,2 +1,8 @@
-export * as {{pascalCase module}} from './{{kebabCase module}}';
+{{#if (eq module 'cms')}}
+    export * as CMS from './{{kebabCase module}}';
+{{else}}
+    export * as
+    {{pascalCase module}}
+    from './{{kebabCase module}}';
+{{/if}}
 // MODULE_EXPORTS
