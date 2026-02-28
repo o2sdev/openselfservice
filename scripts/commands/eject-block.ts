@@ -14,7 +14,7 @@ const BRANCH = 'main';
 const BLOCKS_PATH = 'packages/blocks'; // Path to blocks directory in the repo relative to the branch
 const PROJECT_ROOT = path.resolve(__dirname, '../..'); // Adjust to project root
 const OUTPUT_DIR = path.join(PROJECT_ROOT, 'packages/blocks'); // Local target folder
-const FRONTEND_DIR = path.join(PROJECT_ROOT, 'apps/frontend'); // Frontend app directory
+const _FRONTEND_DIR = path.join(PROJECT_ROOT, 'apps/frontend'); // Frontend app directory
 const TEMP_DIR = path.join(os.tmpdir(), `${PROJECT_NAME}-${Date.now()}`); // Temporary directory for cloning
 
 // Types
@@ -205,7 +205,7 @@ const installBlockInFrontend = async (blockName: string): Promise<void> => {
     return new Promise<void>((resolve, reject) => {
         console.log(`Installing block "${blockName}"...`);
 
-        // Construct the package name (assuming it follows the @dxp/blocks.{blockName} pattern)
+        // Construct the package name (assuming it follows the @o2s/blocks.{blockName} pattern)
         const packageName = `@${PROJECT_PREFIX}/blocks.${blockName}`;
 
         try {

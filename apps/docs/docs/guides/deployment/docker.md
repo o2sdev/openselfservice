@@ -80,7 +80,7 @@ docker run --rm -p 3001:3001 --network app_network \
   o2s-api
 ```
 
-**Note:** The Dockerfiles use Turborepo's `turbo prune` with `@dxp/frontend` and `@dxp/api-harmonization` package names internally. This is handled automatically by the build process.
+**Note:** The Dockerfiles use Turborepo's `turbo prune` with `@o2s/frontend` and `@o2s/api-harmonization` package names internally. This is handled automatically by the build process.
 
 ## Example Dockerfiles
 

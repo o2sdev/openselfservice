@@ -11,7 +11,7 @@ Because a block is treated as a NPM package, it can be simply installed and impo
 A block needs to be installed into both the API Harmonization server and the Frontend app. You can either do that twice in their appropriate folders, or once on the root level of the project:
 
 ```shell
-npm install @dxp/blocks.block-name --workspace=@o2s/api-harmonization --workspace=@o2s/frontend
+npm install @o2s/blocks.block-name --workspace=@o2s/api-harmonization --workspace=@o2s/frontend
 ```
 
 ## Using a block in apps
