@@ -244,203 +244,227 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
                 message: 'What is the name of the block?',
             },
         ],
-        actions: [
-            // API-HARMONIZATION
-            {
-                type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/api-harmonization/index.ts',
-                templateFile: 'templates/block/api-harmonization/index.hbs',
-            },
-            {
-                type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.client.ts',
-                templateFile: 'templates/block/api-harmonization/client.hbs',
-            },
-            {
-                type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.controller.ts',
-                templateFile: 'templates/block/api-harmonization/controller.hbs',
-            },
-            {
-                type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.service.ts',
-                templateFile: 'templates/block/api-harmonization/service.hbs',
-            },
-            {
-                type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.service.spec.ts',
-                templateFile: 'templates/block/api-harmonization/service.spec.hbs',
-            },
-            {
-                type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.module.ts',
-                templateFile: 'templates/block/api-harmonization/module.hbs',
-            },
-            {
-                type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.mapper.ts',
-                templateFile: 'templates/block/api-harmonization/mapper.hbs',
-            },
-            {
-                type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.model.ts',
-                templateFile: 'templates/block/api-harmonization/model.hbs',
-            },
-            {
-                type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.request.ts',
-                templateFile: 'templates/block/api-harmonization/request.hbs',
-            },
-            {
-                type: 'modify',
-                path: 'apps/api-harmonization/src/app.module.ts',
-                pattern: /(\/\/ BLOCK IMPORT)/g,
-                template: `import * as {{pascalCase name}} from '@o2s/blocks.{{kebabCase name}}/api-harmonization';\n// BLOCK IMPORT`,
-            },
-            {
-                type: 'modify',
-                path: 'apps/api-harmonization/src/app.module.ts',
-                pattern: /(\/\/ BLOCK REGISTER)/g,
-                template: `{{pascalCase name}}.Module.register(AppConfig),\n        // BLOCK REGISTER`,
-            },
-            {
-                type: 'modify',
-                path: 'apps/api-harmonization/src/modules/page/page.model.ts',
-                pattern: /(\/\/ BLOCK IMPORT)/g,
-                template: `import * as {{pascalCase name}} from '@o2s/blocks.{{kebabCase name}}/api-harmonization';\n// BLOCK IMPORT`,
-            },
-            {
-                type: 'modify',
-                path: 'apps/api-harmonization/src/modules/page/page.model.ts',
-                pattern: /(\/\/ BLOCK REGISTER)/g,
-                template: `// BLOCK REGISTER\n    | {{pascalCase name}}.Model.{{pascalCase name}}Block['__typename']`,
-            },
+        actions: (data) => {
+            const actions: PlopTypes.ActionType[] = [
+                // API-HARMONIZATION
+                {
+                    type: 'add',
+                    path: 'packages/blocks/{{kebabCase name}}/src/api-harmonization/index.ts',
+                    templateFile: 'templates/block/api-harmonization/index.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/blocks/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.client.ts',
+                    templateFile: 'templates/block/api-harmonization/client.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/blocks/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.controller.ts',
+                    templateFile: 'templates/block/api-harmonization/controller.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/blocks/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.service.ts',
+                    templateFile: 'templates/block/api-harmonization/service.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/blocks/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.service.spec.ts',
+                    templateFile: 'templates/block/api-harmonization/service.spec.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/blocks/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.module.ts',
+                    templateFile: 'templates/block/api-harmonization/module.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/blocks/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.mapper.ts',
+                    templateFile: 'templates/block/api-harmonization/mapper.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/blocks/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.model.ts',
+                    templateFile: 'templates/block/api-harmonization/model.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/blocks/{{kebabCase name}}/src/api-harmonization/{{kebabCase name}}.request.ts',
+                    templateFile: 'templates/block/api-harmonization/request.hbs',
+                },
+                {
+                    type: 'modify',
+                    path: 'apps/api-harmonization/src/app.module.ts',
+                    pattern: /(\/\/ BLOCK IMPORT)/g,
+                    template: `import * as {{pascalCase name}} from '@o2s/blocks.{{kebabCase name}}/api-harmonization';\n// BLOCK IMPORT`,
+                },
+                {
+                    type: 'modify',
+                    path: 'apps/api-harmonization/src/app.module.ts',
+                    pattern: /(\/\/ BLOCK REGISTER)/g,
+                    template: `{{pascalCase name}}.Module.register(AppConfig),\n        // BLOCK REGISTER`,
+                },
+                {
+                    type: 'modify',
+                    path: 'apps/api-harmonization/src/modules/page/page.model.ts',
+                    pattern: /(\/\/ BLOCK IMPORT)/g,
+                    template: `import * as {{pascalCase name}} from '@o2s/blocks.{{kebabCase name}}/api-harmonization';\n// BLOCK IMPORT`,
+                },
+                {
+                    type: 'modify',
+                    path: 'apps/api-harmonization/src/modules/page/page.model.ts',
+                    pattern: /(\/\/ BLOCK REGISTER)/g,
+                    template: `// BLOCK REGISTER\n    | {{pascalCase name}}.Model.{{pascalCase name}}Block['__typename']`,
+                },
 
-            // FRONTEND
-            {
-                type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/frontend/index.ts',
-                templateFile: 'templates/block/frontend/index.hbs',
-            },
-            {
-                type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/frontend/{{pascalCase name}}.renderer.tsx',
-                templateFile: 'templates/block/frontend/renderer.hbs',
-            },
-            {
-                type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/frontend/{{pascalCase name}}.server.tsx',
-                templateFile: 'templates/block/frontend/server.hbs',
-            },
-            {
-                type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/frontend/{{pascalCase name}}.client.tsx',
-                templateFile: 'templates/block/frontend/client.hbs',
-            },
-            {
-                type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/frontend/{{pascalCase name}}.client.stories.tsx',
-                templateFile: 'templates/block/frontend/stories.hbs',
-            },
-            {
-                type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/frontend/{{pascalCase name}}.types.ts',
-                templateFile: 'templates/block/frontend/types.hbs',
-            },
-            {
-                type: 'modify',
-                path: 'apps/frontend/src/blocks/renderBlocks.tsx',
-                pattern: /(\/\/ BLOCK IMPORT)/g,
-                template: `import * as {{pascalCase name}} from '@o2s/blocks.{{kebabCase name}}/frontend';\n// BLOCK IMPORT`,
-            },
-            {
-                type: 'modify',
-                path: 'apps/frontend/src/blocks/renderBlocks.tsx',
-                pattern: /(\/\/ BLOCK REGISTER)/g,
-                template: `case '{{pascalCase name}}Block':\n            return <{{pascalCase name}}.Renderer {...blockProps} />;\n        // BLOCK REGISTER`,
-            },
+                // FRONTEND
+                {
+                    type: 'add',
+                    path: 'packages/blocks/{{kebabCase name}}/src/frontend/index.ts',
+                    templateFile: 'templates/block/frontend/index.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/blocks/{{kebabCase name}}/src/frontend/{{pascalCase name}}.renderer.tsx',
+                    templateFile: 'templates/block/frontend/renderer.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/blocks/{{kebabCase name}}/src/frontend/{{pascalCase name}}.server.tsx',
+                    templateFile: 'templates/block/frontend/server.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/blocks/{{kebabCase name}}/src/frontend/{{pascalCase name}}.client.tsx',
+                    templateFile: 'templates/block/frontend/client.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/blocks/{{kebabCase name}}/src/frontend/{{pascalCase name}}.client.stories.tsx',
+                    templateFile: 'templates/block/frontend/stories.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/blocks/{{kebabCase name}}/src/frontend/{{pascalCase name}}.types.ts',
+                    templateFile: 'templates/block/frontend/types.hbs',
+                },
+                {
+                    type: 'modify',
+                    path: 'apps/frontend/src/blocks/renderBlocks.tsx',
+                    pattern: /(\/\/ BLOCK IMPORT)/g,
+                    template: `import * as {{pascalCase name}} from '@o2s/blocks.{{kebabCase name}}/frontend';\n// BLOCK IMPORT`,
+                },
+                {
+                    type: 'modify',
+                    path: 'apps/frontend/src/blocks/renderBlocks.tsx',
+                    pattern: /(\/\/ BLOCK REGISTER)/g,
+                    template: `case '{{pascalCase name}}Block':\n            return <{{pascalCase name}}.Renderer {...blockProps} />;\n        // BLOCK REGISTER`,
+                },
 
-            // SDK
-            {
-                type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/sdk/index.ts',
-                templateFile: 'templates/block/sdk/index.hbs',
-            },
-            {
-                type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/src/sdk/{{kebabCase name}}.ts',
-                templateFile: 'templates/block/sdk/block.hbs',
-            },
+                // SDK
+                {
+                    type: 'add',
+                    path: 'packages/blocks/{{kebabCase name}}/src/sdk/index.ts',
+                    templateFile: 'templates/block/sdk/index.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/blocks/{{kebabCase name}}/src/sdk/{{kebabCase name}}.ts',
+                    templateFile: 'templates/block/sdk/block.hbs',
+                },
 
-            // CONFIG
-            {
-                type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/.gitignore',
-                templateFile: 'templates/block/gitIgnore.hbs',
-            },
-            {
-                type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/.prettierrc.mjs',
-                templateFile: 'templates/block/prettierRc.hbs',
-            },
-            {
-                type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/eslint.config.mjs',
-                templateFile: 'templates/block/eslintConfig.hbs',
-            },
-            {
-                type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/lint-staged.config.mjs',
-                templateFile: 'templates/block/lintStagedConfig.hbs',
-            },
-            {
-                type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/package.json',
-                templateFile: 'templates/block/package.hbs',
-            },
-            {
-                type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/vitest.config.mjs',
-                templateFile: 'templates/block/vitestConfig.hbs',
-            },
-            {
-                type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/tsconfig.api.json',
-                templateFile: 'templates/block/tsconfigApi.hbs',
-            },
-            {
-                type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/tsconfig.frontend.json',
-                templateFile: 'templates/block/tsconfigFrontend.hbs',
-            },
-            {
-                type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/tsconfig.json',
-                templateFile: 'templates/block/tsconfig.hbs',
-            },
-            {
-                type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/tsconfig.sdk.json',
-                templateFile: 'templates/block/tsconfigSdk.hbs',
-            },
-            {
-                type: 'add',
-                path: 'packages/blocks/{{kebabCase name}}/README.md',
-                templateFile: 'templates/block/README.hbs',
-            },
+                // CONFIG
+                {
+                    type: 'add',
+                    path: 'packages/blocks/{{kebabCase name}}/.gitignore',
+                    templateFile: 'templates/block/gitIgnore.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/blocks/{{kebabCase name}}/.prettierrc.mjs',
+                    templateFile: 'templates/block/prettierRc.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/blocks/{{kebabCase name}}/eslint.config.mjs',
+                    templateFile: 'templates/block/eslintConfig.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/blocks/{{kebabCase name}}/lint-staged.config.mjs',
+                    templateFile: 'templates/block/lintStagedConfig.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/blocks/{{kebabCase name}}/package.json',
+                    templateFile: 'templates/block/package.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/blocks/{{kebabCase name}}/vitest.config.mjs',
+                    templateFile: 'templates/block/vitestConfig.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/blocks/{{kebabCase name}}/tsconfig.api.json',
+                    templateFile: 'templates/block/tsconfigApi.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/blocks/{{kebabCase name}}/tsconfig.frontend.json',
+                    templateFile: 'templates/block/tsconfigFrontend.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/blocks/{{kebabCase name}}/tsconfig.json',
+                    templateFile: 'templates/block/tsconfig.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/blocks/{{kebabCase name}}/tsconfig.sdk.json',
+                    templateFile: 'templates/block/tsconfigSdk.hbs',
+                },
+                {
+                    type: 'add',
+                    path: 'packages/blocks/{{kebabCase name}}/README.md',
+                    templateFile: 'templates/block/README.hbs',
+                },
 
-            // FRAMEWORK
-            {
-                type: 'add',
-                path: 'packages/framework/src/modules/cms/models/blocks/{{kebabCase name}}.model.ts',
-                templateFile: 'templates/block/framework/model.hbs',
-            },
-            {
-                type: 'modify',
-                path: 'packages/framework/src/modules/cms/cms.model.ts',
-                pattern: /(\/\/ BLOCK IMPORT)/g,
-                template: `export * as {{pascalCase name}}Block from './models/blocks/{{kebabCase name}}.model';\n// BLOCK IMPORT`,
-            },
-        ],
+                // FRAMEWORK
+                {
+                    type: 'add',
+                    path: 'packages/framework/src/modules/cms/models/blocks/{{kebabCase name}}.model.ts',
+                    templateFile: 'templates/block/framework/model.hbs',
+                },
+                {
+                    type: 'modify',
+                    path: 'packages/framework/src/modules/cms/cms.model.ts',
+                    pattern: /(\/\/ BLOCK IMPORT)/g,
+                    template: `export * as {{pascalCase name}}Block from './models/blocks/{{kebabCase name}}.model';\n// BLOCK IMPORT`,
+                },
+            ];
+
+            actions.push(() => {
+                const blockName = String(data?.name ?? '').trim();
+                const kebabBlockName = plop.getHelper('kebabCase')(blockName) as string;
+                const packageName = `@o2s/blocks.${kebabBlockName}`;
+                const blockRootPath = `packages/blocks/${kebabBlockName}`;
+
+                return [
+                    `Created ${packageName}`,
+                    `  ${blockRootPath}/src/api-harmonization/`,
+                    `  ${blockRootPath}/src/frontend/`,
+                    `  ${blockRootPath}/src/sdk/`,
+                    '',
+                    'Next steps:',
+                    `  1. Add "${packageName}": "*" to apps/api-harmonization/package.json`,
+                    `  2. Add "${packageName}": "*" to apps/frontend/package.json`,
+                    '  3. Run: npm install',
+                    '  4. Run: npm run lint (optional sanity check)',
+                ].join('\n');
+            });
+
+            return actions;
+        },
     });
 }
