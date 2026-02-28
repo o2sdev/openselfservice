@@ -150,6 +150,7 @@ const renderBlock = (typename: string, blockProps: BlockProps) => {
             return <RecommendedProducts.Renderer {...blockProps} />;
         // BLOCK REGISTER
         default:
+            console.warn(`[O2S] Unknown block type: "${typename}". Register it in renderBlocks.tsx`);
             return null;
     }
 };
